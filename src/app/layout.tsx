@@ -23,16 +23,16 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://useorigin.app"),
-  title: "Origin | Memory for AI Work",
+  title: "Origin | Where AI Memory Compounds",
   description:
-    "Origin runs quietly behind your AI tools, carrying decisions, lessons, gotchas, and project context across chats, projects, and time.",
+    "Local-first memory that carries decisions, lessons, gotchas, and project context across chats, projects, and time.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Origin | Memory for AI Work",
+    title: "Origin | Where AI Memory Compounds",
     description:
-      "Origin runs quietly behind your AI tools, carrying decisions, lessons, gotchas, and project context across chats, projects, and time.",
+      "Local-first memory that carries decisions, lessons, gotchas, and project context across chats, projects, and time.",
     type: "website",
     url: "https://useorigin.app",
     siteName: "Origin",
@@ -42,15 +42,15 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1280,
         height: 720,
-        alt: "Origin. Local-first memory for AI work where context compounds across chats, projects, and time.",
+        alt: "Origin. Where AI memory compounds.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Origin | Memory for AI Work",
+    title: "Origin | Where AI Memory Compounds",
     description:
-      "Origin runs quietly behind your AI tools, carrying decisions, lessons, gotchas, and project context across chats, projects, and time.",
+      "Local-first memory that carries decisions, lessons, gotchas, and project context across chats, projects, and time.",
     images: ["/og.png"],
   },
   icons: {
@@ -97,7 +97,7 @@ export default function RootLayout({
               "@type": "SoftwareApplication",
               name: "Origin",
               description:
-                "Local-first memory for AI work. Origin runs quietly behind your AI tools, carrying decisions, lessons, gotchas, and project context across chats, projects, and time.",
+                "Local-first memory that carries decisions, lessons, gotchas, and project context across chats, projects, and time.",
               url: "https://useorigin.app",
               applicationCategory: "ProductivityApplication",
               operatingSystem: "macOS",
@@ -106,7 +106,7 @@ export default function RootLayout({
               downloadUrl: "https://github.com/7xuanlu/origin/releases",
               screenshot: "https://useorigin.app/og.png",
               featureList: [
-                "Self-evolving memory: deduplicates, links ideas, compiles concepts, and preserves provenance",
+                "Background refinery: deduplicates captures, links ideas, compiles concepts, and preserves provenance",
                 "Hybrid memory engine: vector search, full-text search, and knowledge graph signals",
                 "Associative recall: related context beyond keyword matching",
                 "On-device intelligence: optional local model on Apple Silicon",

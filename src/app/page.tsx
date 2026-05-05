@@ -87,7 +87,7 @@ function OriginRingBackground() {
 }
 
 const features = [
-  { title: "Self-Evolving", description: "The background refinery deduplicates captures, links related ideas, compiles concepts, and keeps provenance attached.", tag: "Evolves", accent: "warm" as const },
+  { title: "Background Refinery", description: "Deduplicates captures, links related ideas, compiles concepts, and keeps provenance attached while you keep working.", tag: "Refines", accent: "warm" as const },
   { title: "Hybrid Memory Engine", description: "Vector search, full-text search, and knowledge graph signals live in one local database with Reciprocal Rank Fusion.", tag: "libSQL", accent: "indigo" as const },
   { title: "Associative Recall", description: "Ask about one thing, get related context you did not search for. Entities and relations make recall more than keyword matching.", tag: "Graph", accent: "sage" as const },
   { title: "On-Device Intelligence", description: "Basic memory works immediately. Add a local model or Anthropic key when you want richer extraction and concept synthesis.", tag: "Local AI", accent: "warm" as const },
@@ -152,13 +152,12 @@ export default function LandingPage() {
         <OriginRingBackground />
 
         <div className="relative z-10 max-w-3xl text-center">
-          <h1 className="animate-fade-up delay-100 warm-glow font-serif text-5xl leading-[1.1] font-medium tracking-tight sm:text-7xl">
-            Memory for AI work.
-            <br />
-            Built to compound.
+          <h1 className="animate-fade-up delay-100 warm-glow font-serif text-[2rem] leading-[1.08] font-medium tracking-tight sm:text-7xl sm:leading-[1.1]">
+            <span className="hidden sm:inline">Where AI memory<br />compounds.</span>
+            <span className="sm:hidden">Where AI<br />memory compounds.</span>
           </h1>
-          <p className="animate-fade-up delay-100 mx-auto mt-8 max-w-xl text-lg leading-relaxed text-[var(--o-text-secondary)] sm:text-xl">
-            Local-first memory for AI work. Origin runs quietly behind the tools you already use, carrying decisions, lessons, gotchas, and project context across chats, projects, and time.
+          <p className="animate-fade-up delay-100 mx-auto mt-7 max-w-[22rem] text-base leading-relaxed text-[var(--o-text-secondary)] sm:mt-8 sm:max-w-xl sm:text-xl">
+            Local-first memory that carries decisions, lessons, gotchas, and project context across chats, projects, and time.
           </p>
           <div className="animate-fade-up delay-200 mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link href="https://github.com/7xuanlu/origin/releases" className="flex items-center gap-2 rounded-xl bg-[var(--o-text)] px-6 py-3 text-sm font-semibold text-[var(--o-bg)] transition-all duration-150 hover:shadow-[0_0_28px_var(--o-glow-warm)]">
