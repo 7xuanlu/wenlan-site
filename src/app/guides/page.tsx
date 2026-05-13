@@ -4,16 +4,16 @@ import { guideUrl, guides, SITE_URL } from "./guides";
 import { GuideHalo, MemoryIndex } from "./guide-visuals";
 
 export const metadata: Metadata = {
-  title: "AI Memory Guides | Origin",
+  title: "AI Work Memory Guides | Origin",
   description:
-    "Evergreen guides to AI memory apps, MCP memory servers, local-first AI memory, and Claude Code persistent memory.",
+    "Guides to how AI work compounds: AI memory apps, MCP memory servers, local-first AI memory, and Claude Code persistent context.",
   alternates: {
     canonical: "/guides",
   },
   openGraph: {
-    title: "AI Memory Guides | Origin",
+    title: "AI Work Memory Guides | Origin",
     description:
-      "Learn how AI memory apps, MCP memory servers, and local-first memory help AI tools carry context across sessions.",
+      "Learn how AI memory apps, MCP memory servers, and local-first context help AI tools carry work across sessions.",
     type: "website",
     url: `${SITE_URL}/guides`,
     siteName: "Origin",
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Memory Guides | Origin",
+    title: "AI Work Memory Guides | Origin",
     description:
-      "Learn how AI memory apps, MCP memory servers, and local-first memory help AI tools carry context across sessions.",
+      "Learn how AI memory apps, MCP memory servers, and local-first context help AI tools carry work across sessions.",
     images: ["/og.png"],
   },
 };
@@ -51,9 +51,9 @@ export default function GuidesPage() {
   const collectionSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "AI Memory Guides",
+    name: "AI Work Memory Guides",
     description:
-      "Guides to AI memory apps, MCP memory servers, local-first AI memory, and Claude Code memory.",
+      "Guides to how AI work compounds through AI memory apps, MCP memory servers, local-first AI memory, and Claude Code persistent context.",
     url: `${SITE_URL}/guides`,
     mainEntity: guides.map((guide) => ({
       "@type": "Article",
@@ -91,9 +91,9 @@ export default function GuidesPage() {
                 Questions worth answering before you add AI memory.
               </h1>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">
-                Origin is local-first memory for AI work in Claude Code,
-                Cursor, Codex, and other MCP-compatible tools. These guides explain
-                the category in plain language, then show where Origin fits.
+                Origin makes AI work compound across Claude Code, Cursor,
+                Codex, and other MCP-compatible tools. Memory is one mechanism;
+                durable work context is the goal.
               </p>
             </div>
             <MemoryIndex

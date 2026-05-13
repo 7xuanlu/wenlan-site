@@ -21,18 +21,19 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const siteDescription =
+  "Origin makes AI work compound by carrying sessions, decisions, lessons, project context, and wiki pages across chats, tools, projects, and time.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://useorigin.app"),
-  title: "Origin | Where AI Memory Compounds",
-  description:
-    "Local-first memory that carries decisions, lessons, gotchas, and project context across chats, projects, and time.",
+  title: "Origin | Where AI Work Compounds",
+  description: siteDescription,
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Origin | Where AI Memory Compounds",
-    description:
-      "Local-first memory that carries decisions, lessons, gotchas, and project context across chats, projects, and time.",
+    title: "Origin | Where AI Work Compounds",
+    description: siteDescription,
     type: "website",
     url: "https://useorigin.app",
     siteName: "Origin",
@@ -42,15 +43,14 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1280,
         height: 720,
-        alt: "Origin. Where AI memory compounds.",
+        alt: "Origin. Where AI work compounds.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Origin | Where AI Memory Compounds",
-    description:
-      "Local-first memory that carries decisions, lessons, gotchas, and project context across chats, projects, and time.",
+    title: "Origin | Where AI Work Compounds",
+    description: siteDescription,
     images: ["/og.png"],
   },
   icons: {
@@ -96,21 +96,22 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
               name: "Origin",
-              description:
-                "Local-first memory that carries decisions, lessons, gotchas, and project context across chats, projects, and time.",
+              description: siteDescription,
               url: "https://useorigin.app",
               applicationCategory: "ProductivityApplication",
               operatingSystem: "macOS",
               softwareVersion: "0.2.0",
               softwareRequirements: "macOS 14+ on Apple Silicon (M1 or later)",
+              installUrl: "https://github.com/7xuanlu/origin/tree/main/plugin/.claude-plugin#30-second-setup",
               downloadUrl: "https://github.com/7xuanlu/origin/releases",
               screenshot: "https://useorigin.app/og.png",
               featureList: [
-                "Background refinery: deduplicates captures, links ideas, compiles concepts, and preserves provenance",
+                "Claude Code plugin: marketplace install with setup, MCP wiring, Basic Memory, and first round-trip check",
+                "Background refinery: stores what matters, deduplicates repeat facts, links ideas, distills wiki pages, and preserves provenance",
                 "Hybrid memory engine: vector search, full-text search, and knowledge graph signals",
                 "Associative recall: related context beyond keyword matching",
-                "On-device intelligence: optional local model on Apple Silicon",
-                "MCP-native: works with Claude Code, Cursor, Codex, Claude Desktop, Windsurf, and Gemini CLI",
+                "Optional intelligence: Basic Memory works without an LLM or API key",
+                "MCP-native: works with Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP clients",
                 "Memory lineage: every memory traces back to where it came from",
               ],
               license:

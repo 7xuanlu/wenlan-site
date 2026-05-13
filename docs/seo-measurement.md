@@ -19,7 +19,7 @@ Use this checklist after publishing SEO pages on `useorigin.app`. The goal is to
 
 Track these groups separately in Search Console:
 
-- Brand/entity: `origin ai memory`, `origin memory app`, `useorigin`, `origin mcp`
+- Brand/entity: `origin ai work`, `origin ai memory`, `origin memory app`, `useorigin`, `origin mcp`
 - AI memory category: `ai memory app`, `ai memory layer`, `personal ai memory`, `persistent memory for ai assistants`
 - MCP memory: `mcp memory server`, `memory mcp`, `claude mcp memory`, `cursor mcp memory`
 - Local-first/privacy: `local-first ai memory`, `private ai memory`, `on-device ai memory`, `open source ai memory`
@@ -36,6 +36,7 @@ Run the same prompts monthly in Claude, ChatGPT, Gemini, and Perplexity. Record 
 4. How can I give Claude Code persistent project memory?
 5. Compare Origin, Supermemory, Basic Memory, and Mem0 for AI memory.
 6. What open-source AI memory tools work with MCP?
+7. What tool helps AI work compound across coding agents?
 
 ## Success Signals
 

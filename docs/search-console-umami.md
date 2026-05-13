@@ -31,7 +31,7 @@ There is no native product-level linking between Search Console and Umami. The p
 
 - **Umami tells you what happens after the click**
   - Landing page engagement and drop-off
-  - CTA events (Download, GitHub, Waitlist submit) — once event tracking is added
+  - CTA events (Get started, View on GitHub, Waitlist submit) — once event tracking is added
 
 ## 4) Suggested weekly routine (15 minutes)
 

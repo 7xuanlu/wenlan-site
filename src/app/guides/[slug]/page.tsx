@@ -245,18 +245,18 @@ export default async function GuidePage({ params }: GuidePageProps) {
                   {guide.cta.body}
                 </p>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  <Link
-                    href="https://github.com/7xuanlu/origin/releases"
+                  <a
+                    href="https://github.com/7xuanlu/origin/tree/main/plugin/.claude-plugin#30-second-setup"
                     className="rounded-xl bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] transition-all hover:shadow-[0_0_28px_var(--o-glow-warm)]"
                   >
-                    Download Origin
-                  </Link>
-                  <Link
+                    Get started
+                  </a>
+                  <a
                     href="https://github.com/7xuanlu/origin"
                     className="rounded-xl border border-[var(--o-border)] px-5 py-3 text-center text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
                   >
                     View on GitHub
-                  </Link>
+                  </a>
                 </div>
               </section>
             </div>

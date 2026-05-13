@@ -32,7 +32,7 @@ export type Guide = {
   };
 };
 
-const updatedAt = "2026-04-25";
+const updatedAt = "2026-05-12";
 
 export const guides: Guide[] = [
   {
@@ -97,8 +97,8 @@ export const guides: Guide[] = [
       {
         heading: "How Origin approaches AI memory",
         body: [
-          "Origin is local-first memory for AI work in Claude Code, Cursor, Codex, Claude Desktop, Windsurf, Gemini CLI, and other MCP-compatible tools. Claude.ai and ChatGPT web use Remote Access from the desktop app.",
-          "It stores memory locally, makes every memory visible and editable, and uses a hybrid memory engine that combines vector search, full-text search, and a knowledge graph. The product is built for compounding understanding rather than passive transcript storage.",
+          "Origin is a local-first layer for AI work in Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP-compatible tools.",
+          "Memory is the substrate: Origin stores useful context locally, makes every memory visible and editable, distills wiki pages, and uses a hybrid engine that combines vector search, full-text search, and a knowledge graph. The product is built for compounding work rather than passive transcript storage.",
         ],
       },
     ],
@@ -117,7 +117,7 @@ export const guides: Guide[] = [
     relatedSlugs: ["mcp-memory-server", "local-first-ai-memory", "claude-code-memory"],
     cta: {
       heading: "Make your AI work compound",
-      body: "Origin captures what you figure out with AI and turns it into memory your agents can actually use later.",
+      body: "Origin turns decisions, lessons, handoffs, and project context into memory and wiki pages your agents can use later.",
     },
   },
   {
@@ -142,7 +142,7 @@ export const guides: Guide[] = [
     heroBullets: [
       "MCP lets AI tools call external memory tools instead of relying only on chat history.",
       "A memory server can store, search, and package context across sessions.",
-      "Origin adds local storage, curation, provenance, and a product UI around the memory layer.",
+      "Origin adds local storage, curation, provenance, wiki pages, and setup workflows around the memory layer.",
     ],
     sections: [
       {
@@ -155,7 +155,7 @@ export const guides: Guide[] = [
       {
         heading: "Why MCP is useful for memory",
         body: [
-          "Memory is more useful when it is not trapped inside one interface. Claude Code, Claude Desktop, Cursor, Codex, Windsurf, and Gemini CLI can all participate in the same workflow if they speak MCP.",
+          "Memory is more useful when it is not trapped inside one interface. Claude Code, Claude Desktop, Cursor, Codex, Gemini CLI, and other MCP clients can all participate in the same workflow.",
           "That makes MCP a natural boundary for persistent AI memory. The AI tool handles the conversation. The memory server handles durable context.",
         ],
         bullets: [
@@ -169,20 +169,20 @@ export const guides: Guide[] = [
         heading: "Local vs hosted memory servers",
         body: [
           "Hosted memory servers are easy to start, but they require sending memory to someone else's infrastructure. Local memory servers take more care, but they keep private project context, preferences, and decisions under your control.",
-          "Origin is built around the local-first path. The daemon runs on your machine, owns the database, and serves memory to MCP clients through origin-mcp.",
+          "Origin is built around the local-first path. The daemon runs on your machine, owns the database, and serves memory to MCP clients through Origin's MCP server.",
         ],
       },
       {
         heading: "How Origin fits",
         body: [
-          "Origin is more than a bare MCP store. It is a desktop product and daemon that distills AI conversations into memories, links related knowledge, detects contradictions, and gives you a UI for inspection and correction.",
-          "The MCP server is the bridge: AI tools read and write memory, while Origin keeps the memory visible, searchable, and locally owned.",
+          "Origin is more than a bare MCP store. It is a local runtime and Claude Code plugin that carries work context forward, links related knowledge, detects contradictions, and keeps wiki pages and provenance attached.",
+          "The MCP server is the bridge: AI tools read and write memory, while Origin keeps the broader work context visible, searchable, and locally owned.",
         ],
       },
       {
         heading: "Basic setup shape",
         body: [
-          "The common setup is to install origin-mcp in your MCP client, then let it connect to the local Origin daemon. The daemon stores memory on your machine and serves it to whichever compatible AI tool you use.",
+          "The common setup is to add Origin's MCP server in your MCP client, then let it connect to the local Origin daemon. The daemon stores memory on your machine and serves it to whichever compatible AI tool you use.",
           "For detailed commands and the latest package behavior, use the GitHub README as the source of truth.",
         ],
       },
@@ -191,7 +191,7 @@ export const guides: Guide[] = [
       {
         question: "Is Origin just an MCP memory server?",
         answer:
-          "No. Origin includes an MCP server path, but the product also includes local storage, refinement, contradiction detection, provenance, search, and a desktop UI.",
+          "No. Origin includes an MCP server path, but the product also includes local storage, refinement, contradiction detection, provenance, search, and wiki pages.",
       },
       {
         question: "Can one MCP memory server work with multiple AI tools?",
@@ -202,7 +202,7 @@ export const guides: Guide[] = [
     relatedSlugs: ["claude-code-memory", "ai-memory-app", "local-first-ai-memory"],
     cta: {
       heading: "Give every agent the same memory",
-      body: "Origin connects MCP-compatible tools to one local memory layer instead of scattering context across chat silos.",
+      body: "Origin connects MCP-compatible tools to one local context layer instead of scattering decisions and lessons across chat silos.",
     },
   },
   {
@@ -260,7 +260,7 @@ export const guides: Guide[] = [
       {
         heading: "How Origin keeps memory useful",
         body: [
-          "Local-first does not mean inert. Origin combines vector search, full-text search, and a knowledge graph so assistants can retrieve the right memories without replaying everything.",
+          "Local-first does not mean inert. Origin combines vector search, full-text search, and a knowledge graph so assistants can retrieve the right work context without replaying everything.",
           "It also makes memory inspectable. You can see what was learned, trace it back to source conversations, and correct it when your understanding changes.",
         ],
       },
@@ -338,14 +338,14 @@ export const guides: Guide[] = [
       {
         heading: "How Origin works with Claude Code",
         body: [
-          "Origin exposes memory through MCP via origin-mcp. Claude Code can write what it learns and recall relevant project context later. The same memory can also be available to Cursor, Codex, Claude Desktop, Windsurf, and Gemini CLI when configured.",
-          "That makes Origin shared local memory for AI-assisted development rather than a single-client note file.",
+          "Origin exposes memory through its MCP server. Claude Code can write what it learns and recall relevant project context later. The same work context can also be available to Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP clients when configured.",
+          "That makes Origin a shared local layer for AI-assisted development rather than a single-client note file.",
         ],
       },
       {
         heading: "A practical workflow",
         body: [
-          "Start with your project instructions in CLAUDE.md. Add Origin as an MCP server. Let Claude Code store durable findings as work happens: preferences, architecture decisions, debugging lessons, and follow-up tasks.",
+          "Start with your project instructions in CLAUDE.md. Install the Origin Claude Code plugin, run /init, and let Claude Code store durable findings as work happens: preferences, architecture decisions, debugging lessons, and follow-up tasks.",
           "When a later session starts, the assistant can retrieve the relevant memory instead of starting from zero.",
         ],
       },

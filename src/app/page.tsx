@@ -1,24 +1,15 @@
 import Link from "next/link";
+import { DemoVideo } from "./demo-video";
 import { WaitlistForm } from "./waitlist-form";
 import { ThemeToggle } from "./theme-toggle";
 import { FAQSection } from "@/components/sections";
-import { ProblemSection, SolutionSection } from "@/components/problem-solution";
+import { FeatureSection, HumanControlSection, MemoryDistillerySection, ProblemSection, SolutionSection } from "@/components/problem-solution";
 
 
 function GitHubIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className="size-5">
       <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-    </svg>
-  );
-}
-
-function DownloadIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-4">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <polyline points="7 10 12 15 17 10" />
-      <line x1="12" y1="15" x2="12" y2="3" />
     </svg>
   );
 }
@@ -86,33 +77,59 @@ function OriginRingBackground() {
   );
 }
 
-const features = [
-  { title: "Background Refinery", description: "Deduplicates captures, links related ideas, compiles concepts, and keeps provenance attached while you keep working.", tag: "Refines", accent: "warm" as const },
-  { title: "Hybrid Memory Engine", description: "Vector search, full-text search, and knowledge graph signals live in one local database with Reciprocal Rank Fusion.", tag: "libSQL", accent: "indigo" as const },
-  { title: "Associative Recall", description: "Ask about one thing, get related context you did not search for. Entities and relations make recall more than keyword matching.", tag: "Graph", accent: "sage" as const },
-  { title: "On-Device Intelligence", description: "Basic memory works immediately. Add a local model or Anthropic key when you want richer extraction and concept synthesis.", tag: "Local AI", accent: "warm" as const },
-  { title: "MCP-Native", description: "Claude Code, Cursor, Codex, Claude Desktop, Windsurf, Gemini CLI, and other MCP clients can read and write the same Origin.", tag: "Protocol", accent: "amber" as const },
-  { title: "Memory Lineage", description: "Every memory traces back to where it came from. Inspect, edit, delete, and verify what Origin learned.", tag: "Traceable", accent: "sage" as const },
-];
+const demoVideoId = "k37gjWVPHwI";
+const demoVideoTitle = "Origin Demo v0.5";
+const demoVideoEmbedUrl = `https://www.youtube.com/embed/${demoVideoId}?autoplay=1&rel=0`;
+const demoVideoPosterUrl = `https://i.ytimg.com/vi/${demoVideoId}/maxresdefault.jpg`;
 
-const accentColors = {
-  warm: {
-    tag: "border-[var(--o-warm)]/20 text-[var(--o-warm)] bg-[var(--o-warm)]/5",
-    hover: "group-hover:border-[var(--o-warm)]/30 group-hover:text-[var(--o-warm)]",
-  },
-  indigo: {
-    tag: "border-[var(--o-indigo)]/20 text-[var(--o-indigo)] bg-[var(--o-indigo)]/5",
-    hover: "group-hover:border-[var(--o-indigo)]/30 group-hover:text-[var(--o-indigo)]",
-  },
-  sage: {
-    tag: "border-[var(--o-sage)]/20 text-[var(--o-sage)] bg-[var(--o-sage)]/5",
-    hover: "group-hover:border-[var(--o-sage)]/30 group-hover:text-[var(--o-sage)]",
-  },
-  amber: {
-    tag: "border-[var(--o-amber)]/20 text-[var(--o-amber)] bg-[var(--o-amber)]/5",
-    hover: "group-hover:border-[var(--o-amber)]/30 group-hover:text-[var(--o-amber)]",
-  },
-};
+function TokenEfficiencySection() {
+  return (
+    <section className="border-t border-[var(--o-border-subtle)] px-6 py-24">
+      <div className="mx-auto max-w-3xl">
+        <div className="text-center">
+          <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">Hybrid retrieval, measured</p>
+          <h2 className="font-serif text-4xl font-medium tracking-tight sm:text-5xl">
+            96% fewer tokens. Better answers.
+          </h2>
+          <p className="mx-auto mt-4 max-w-lg text-sm text-[var(--o-text-muted)]">
+            Hybrid retrieval finds the right local context without replaying chat history.
+          </p>
+        </div>
+        <div className="mt-12 overflow-hidden rounded-lg border border-[var(--o-border)]">
+          <table className="w-full text-left font-mono text-sm">
+            <thead>
+              <tr className="border-b border-[var(--o-border)] bg-[var(--o-surface)]">
+                <th className="px-6 py-4 font-medium text-[var(--o-text-secondary)]">Strategy</th>
+                <th className="px-6 py-4 font-medium text-[var(--o-text-secondary)]">Tokens / query</th>
+                <th className="px-6 py-4 font-medium text-[var(--o-text-secondary)]">Finds right context</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-[var(--o-border-subtle)]">
+                <td className="px-6 py-4 text-[var(--o-text-muted)]">Full replay (no retrieval)</td>
+                <td className="px-6 py-4 text-[var(--o-text-muted)]">4,505</td>
+                <td className="px-6 py-4 text-[var(--o-text-muted)]">Buried in noise</td>
+              </tr>
+              <tr className="border-b border-[var(--o-border-subtle)]">
+                <td className="px-6 py-4 text-[var(--o-text-muted)]">Basic vector search</td>
+                <td className="px-6 py-4 text-[var(--o-text-secondary)]">168</td>
+                <td className="px-6 py-4 text-[var(--o-text-secondary)]">77%</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-4 text-[var(--o-text)] font-medium">Origin (hybrid retrieval)</td>
+                <td className="px-6 py-4 text-[var(--o-warm)] font-medium">168</td>
+                <td className="px-6 py-4 text-[var(--o-warm)] font-medium">91%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="mx-auto mt-6 max-w-xl text-center font-mono text-[10px] leading-relaxed text-[var(--o-text-muted)] sm:text-[11px]">
+          LoCoMo benchmark, top-10 retrieval.
+        </p>
+      </div>
+    </section>
+  );
+}
 
 export default function LandingPage() {
   return (
@@ -136,12 +153,12 @@ export default function LandingPage() {
             >
               Learn
             </Link>
-            <Link
+            <a
               href="https://github.com/7xuanlu/origin"
               className="flex items-center gap-2 text-sm text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-text)]"
             >
               <GitHubIcon />
-            </Link>
+            </a>
             <ThemeToggle />
           </div>
         </div>
@@ -153,24 +170,24 @@ export default function LandingPage() {
 
         <div className="relative z-10 max-w-3xl text-center">
           <h1 className="animate-fade-up delay-100 warm-glow font-serif text-[2rem] leading-[1.08] font-medium tracking-tight sm:text-7xl sm:leading-[1.1]">
-            <span className="hidden sm:inline">Where AI memory<br />compounds.</span>
-            <span className="sm:hidden">Where AI<br />memory compounds.</span>
+            <span className="hidden sm:inline">Where AI work<br />compounds.</span>
+            <span className="sm:hidden">Where AI<br />work compounds.</span>
           </h1>
           <p className="animate-fade-up delay-100 mx-auto mt-7 max-w-[22rem] text-base leading-relaxed text-[var(--o-text-secondary)] sm:mt-8 sm:max-w-xl sm:text-xl">
-            Local-first memory that carries decisions, lessons, gotchas, and project context across chats, projects, and time.
+            Origin carries sessions, decisions, lessons, project context, and wiki pages across chats, tools, projects, and time.
           </p>
           <div className="animate-fade-up delay-200 mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Link href="https://github.com/7xuanlu/origin/releases" className="flex items-center gap-2 rounded-xl bg-[var(--o-text)] px-6 py-3 text-sm font-semibold text-[var(--o-bg)] transition-all duration-150 hover:shadow-[0_0_28px_var(--o-glow-warm)]">
-              <DownloadIcon />
-              Download
-            </Link>
-            <Link href="https://github.com/7xuanlu/origin" className="flex items-center gap-2 rounded-xl border border-[var(--o-border)] px-6 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-all duration-150 hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)]">
+            <a href="https://github.com/7xuanlu/origin/tree/main/plugin/.claude-plugin#30-second-setup" className="flex items-center gap-2 rounded-xl bg-[var(--o-text)] px-6 py-3 text-sm font-semibold text-[var(--o-bg)] transition-all duration-150 hover:shadow-[0_0_28px_var(--o-glow-warm)]">
+              Get started
+              <ArrowIcon />
+            </a>
+            <a href="https://github.com/7xuanlu/origin" className="flex items-center gap-2 rounded-xl border border-[var(--o-border)] px-6 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-all duration-150 hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)]">
               View on GitHub
               <ArrowIcon />
-            </Link>
+            </a>
           </div>
           <p className="animate-fade-up delay-300 mt-6 font-mono text-[11px] text-[var(--o-text-muted)]">
-            macOS (Apple Silicon) &middot; Free &middot; Open Source
+            Claude Code plugin &middot; MCP server &middot; Local daemon
           </p>
         </div>
 
@@ -180,14 +197,11 @@ export default function LandingPage() {
       <section className="relative -mt-20 px-6 pb-24">
         <div className="mx-auto max-w-5xl">
           <div className="animate-fade-up delay-600 overflow-hidden rounded-xl border border-[var(--o-border)] shadow-[0_8px_60px_rgba(0,0,0,0.4)]">
-            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-              <iframe
-                className="absolute inset-0 h-full w-full"
-                src="https://www.youtube.com/embed/bV5h089DYDc?autoplay=1&mute=1&loop=1&playlist=bV5h089DYDc"
-                title="Origin demo"
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
+            <div className="relative aspect-video bg-[var(--o-bg-deep)]">
+              <DemoVideo
+                embedUrl={demoVideoEmbedUrl}
+                posterUrl={demoVideoPosterUrl}
+                title={demoVideoTitle}
               />
             </div>
           </div>
@@ -196,81 +210,10 @@ export default function LandingPage() {
 
       <ProblemSection />
       <SolutionSection />
-
-      {/* Token Efficiency */}
-      <section className="border-t border-[var(--o-border-subtle)] px-6 py-24">
-        <div className="mx-auto max-w-3xl">
-          <div className="text-center">
-            <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">Measured, not claimed</p>
-            <h2 className="font-serif text-4xl font-medium tracking-tight sm:text-5xl">
-              96% fewer tokens. Better answers.
-            </h2>
-            <p className="mx-auto mt-4 max-w-lg text-sm text-[var(--o-text-muted)]">
-              Origin retrieves what matters instead of replaying everything.
-            </p>
-          </div>
-          <div className="mt-12 overflow-hidden rounded-lg border border-[var(--o-border)]">
-            <table className="w-full text-left font-mono text-sm">
-              <thead>
-                <tr className="border-b border-[var(--o-border)] bg-[var(--o-surface)]">
-                  <th className="px-6 py-4 font-medium text-[var(--o-text-secondary)]">Strategy</th>
-                  <th className="px-6 py-4 font-medium text-[var(--o-text-secondary)]">Tokens / query</th>
-                  <th className="px-6 py-4 font-medium text-[var(--o-text-secondary)]">Finds right context</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-[var(--o-border-subtle)]">
-                  <td className="px-6 py-4 text-[var(--o-text-muted)]">Full replay (no retrieval)</td>
-                  <td className="px-6 py-4 text-[var(--o-text-muted)]">4,505</td>
-                  <td className="px-6 py-4 text-[var(--o-text-muted)]">Buried in noise</td>
-                </tr>
-                <tr className="border-b border-[var(--o-border-subtle)]">
-                  <td className="px-6 py-4 text-[var(--o-text-muted)]">Basic vector search</td>
-                  <td className="px-6 py-4 text-[var(--o-text-secondary)]">168</td>
-                  <td className="px-6 py-4 text-[var(--o-text-secondary)]">77%</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 text-[var(--o-text)] font-medium">Origin (hybrid search)</td>
-                  <td className="px-6 py-4 text-[var(--o-warm)] font-medium">168</td>
-                  <td className="px-6 py-4 text-[var(--o-warm)] font-medium">91%</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="mt-6 text-center">
-            <p className="text-sm text-[var(--o-text-secondary)]">
-              Same token cost as basic search. <span className="text-[var(--o-warm)]">19% more relevant context.</span>
-            </p>
-          </div>
-          <p className="mx-auto mt-7 max-w-xl text-center font-mono text-[10px] leading-relaxed text-[var(--o-text-muted)] sm:text-[11px]">
-            Measured on LoCoMo. <span className="hidden sm:inline">10 conversations, 2,531 memories, 1,540 queries. Top-10 retrieval. Open source and reproducible.</span>
-          </p>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="border-t border-[var(--o-border-subtle)] px-6 py-24">
-        <div className="mx-auto max-w-5xl">
-          <div className="text-center">
-            <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">Features</p>
-            <h2 className="font-serif text-4xl font-medium tracking-tight sm:text-5xl">Built for memory that improves itself.</h2>
-          </div>
-          <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature) => {
-              const colors = accentColors[feature.accent];
-              return (
-                <div key={feature.title} className="card-origin group rounded-lg p-7">
-                  <span className={`inline-block rounded-full border px-2.5 py-0.5 font-mono text-[10px] font-medium transition-colors duration-150 ${colors.tag} ${colors.hover}`}>
-                    {feature.tag}
-                  </span>
-                  <h3 className="mt-4 font-serif text-base font-medium">{feature.title}</h3>
-                  <p className="mt-2 text-[13px] leading-relaxed text-[var(--o-text-muted)]">{feature.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <MemoryDistillerySection />
+      <FeatureSection />
+      <HumanControlSection />
+      <TokenEfficiencySection />
 
       <FAQSection />
 
@@ -278,19 +221,19 @@ export default function LandingPage() {
       <section className="border-t border-[var(--o-border-subtle)] px-6 py-20 sm:py-24">
         <div className="mx-auto max-w-3xl text-center">
           <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/70 uppercase">Open source</p>
-          <h2 className="font-serif text-4xl font-medium tracking-tight sm:text-5xl">Read every line.</h2>
+          <h2 className="font-serif text-4xl font-medium tracking-tight sm:text-5xl">Open where it matters.</h2>
           <p className="mx-auto mt-6 max-w-md text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
-            Local-first. Open source. Nothing held back.
+            The local runtime, CLI, MCP server, and Claude Code plugin are Apache-2.0.
           </p>
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Link href="https://github.com/7xuanlu/origin" className="flex items-center gap-2 rounded-xl bg-[var(--o-text)] px-6 py-3 text-sm font-semibold text-[var(--o-bg)] transition-all duration-150 hover:opacity-90">
+            <a href="https://github.com/7xuanlu/origin/tree/main/plugin/.claude-plugin#30-second-setup" className="flex items-center gap-2 rounded-xl bg-[var(--o-text)] px-6 py-3 text-sm font-semibold text-[var(--o-bg)] transition-all duration-150 hover:opacity-90">
+              Get started
+              <ArrowIcon />
+            </a>
+            <a href="https://github.com/7xuanlu/origin" className="flex items-center gap-2 rounded-xl border border-[var(--o-border)] px-6 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-all duration-150 hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)]">
               <GitHubIcon />
-              View source
-            </Link>
-            <Link href="https://github.com/7xuanlu/origin/releases" className="flex items-center gap-2 rounded-xl border border-[var(--o-border)] px-6 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-all duration-150 hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)]">
-              <DownloadIcon />
-              Download
-            </Link>
+              View on GitHub
+            </a>
           </div>
           <div className="mx-auto mt-9 max-w-md">
             <p className="mb-3 text-sm text-[var(--o-text-muted)]">Get release updates.</p>
@@ -305,12 +248,10 @@ export default function LandingPage() {
           <div className="flex items-center gap-4">
             <span className="font-serif text-sm font-medium text-[var(--o-text-secondary)]">Origin</span>
             <span className="text-xs text-[var(--o-text-dim)]">&middot;</span>
-            <span className="text-xs text-[var(--o-text-muted)]">Where understanding compounds</span>
+            <span className="text-xs text-[var(--o-text-muted)]">Where AI work compounds</span>
           </div>
           <div className="flex items-center gap-6">
-            <Link href="/guides" className="text-xs text-[var(--o-text-muted)] transition-colors duration-150 hover:text-[var(--o-text-secondary)]">Learn</Link>
-            <Link href="https://github.com/7xuanlu/origin" className="text-xs text-[var(--o-text-muted)] transition-colors duration-150 hover:text-[var(--o-text-secondary)]">GitHub</Link>
-            <Link href="https://github.com/7xuanlu/origin/blob/main/LICENSE" className="text-xs text-[var(--o-text-muted)] transition-colors duration-150 hover:text-[var(--o-text-secondary)]">AGPL-3.0</Link>
+            <a href="https://github.com/7xuanlu/origin/blob/main/LICENSE" className="text-xs text-[var(--o-text-muted)] transition-colors duration-150 hover:text-[var(--o-text-secondary)]">Apache-2.0</a>
           </div>
         </div>
       </footer>

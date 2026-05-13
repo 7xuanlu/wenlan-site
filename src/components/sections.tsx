@@ -3,7 +3,7 @@
 const faqs = [
   {
     q: "What is Origin?",
-    a: "Origin is local-first memory for AI work. It runs quietly behind the tools you already use, carrying decisions, lessons, gotchas, and project context across chats, projects, and time.",
+    a: "Origin is a local-first layer for AI work. It carries sessions, decisions, lessons, project context, and wiki pages across chats, tools, projects, and time.",
   },
   {
     q: "How is Origin different from built-in AI memory?",
@@ -11,15 +11,15 @@ const faqs = [
   },
   {
     q: "Is my data private?",
-    a: "Yes. Origin runs on your machine and stores memory locally. Basic memory works without a model or API key. Richer extraction and background refinement can use an on-device model, or an Anthropic key if you choose that path.",
+    a: "Yes. Origin runs on your machine and stores its database locally. Basic Memory works without a model or API key. Richer extraction and background refinement can use an on-device model, or an Anthropic key if you choose that path.",
   },
   {
     q: "Is Origin just another memory MCP?",
-    a: "No. origin-mcp is the connector. Origin also includes the local daemon, background refinery, local database, optional desktop inspection app, provenance, and export paths.",
+    a: "No. The MCP server is the connector. Origin also includes the local daemon, background refinery, local database, searchable wiki pages, provenance, and export paths.",
   },
   {
     q: "What AI tools work with Origin?",
-    a: "MCP-compatible tools such as Claude Code, Cursor, Codex, Claude Desktop, Windsurf, and Gemini CLI can connect through origin-mcp. Claude.ai and ChatGPT web use Remote Access from the desktop app.",
+    a: "Claude Code has a marketplace plugin. MCP-compatible tools such as Cursor, Codex, Claude Desktop, Gemini CLI, and other clients can connect through Origin's MCP server.",
   },
   {
     q: "Is Origin a replacement for Notion or Obsidian?",
@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     q: "How do I set it up?",
-    a: "For most people, download the desktop app from GitHub Releases and connect your AI tools through origin-mcp. Headless users can install the daemon from the command line. The GitHub README has the current setup paths.",
+    a: "In Claude Code, run /plugin marketplace add 7xuanlu/origin, then /plugin install origin@7xuanlu, then /init. Other MCP clients can add npx -y origin-mcp to their mcpServers config.",
   },
   {
     q: "Does Origin work on Windows or Linux?",
@@ -35,7 +35,7 @@ const faqs = [
   },
   {
     q: "Is Origin free?",
-    a: "Yes. Origin is open-source. The core crates are Apache-2.0, the desktop app is AGPL-3.0. Nothing is held back.",
+    a: "Yes. Origin is open-source. The local runtime, CLI, MCP server, and Claude Code plugin files in the Origin repo are Apache-2.0.",
   },
 ];
 
