@@ -441,7 +441,7 @@ export const docPages: DocPage[] = [
         heading: "MCP client is not connected",
         body: [
           "Check that the client config uses command npx and args -y plus origin-mcp. Some clients require a full restart after changing MCP settings.",
-          "If the client shows the server but tools fail, run doctor. It reports whether the daemon is reachable and which memory mode is active.",
+          "If the client shows the server but tools fail, run doctor. It reports whether the daemon is reachable and how setup is configured.",
         ],
         code: {
           label: "MCP config",

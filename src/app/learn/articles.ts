@@ -45,7 +45,7 @@ export type LearnArticle = {
   };
 };
 
-const updatedAt = "2026-05-14";
+const updatedAt = "2026-05-15";
 
 export const articles: LearnArticle[] = [
   {
@@ -134,7 +134,7 @@ export const articles: LearnArticle[] = [
     category: "Concepts",
     title: "MCP Memory Server: Persistent Memory for AI Tools",
     description:
-      "An MCP memory server gives Claude Code, Cursor, ChatGPT, and other agents a shared place to store and recall durable context.",
+      "An MCP memory server gives Claude Code, Cursor, Codex, and other MCP-compatible agents a shared place to store and recall durable context.",
     metaTitle: "MCP Memory Server for Claude Code and Cursor | Origin",
     metaDescription:
       "Learn what an MCP memory server is, how it gives AI tools persistent context, and how Origin adds local-first memory with visibility and provenance.",

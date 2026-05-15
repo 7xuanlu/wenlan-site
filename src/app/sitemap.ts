@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { docPages, docUrl } from "./docs/docs";
 import { articles, articleUrl, SITE_URL } from "./learn/articles";
 
-const siteUpdatedAt = new Date("2026-05-14");
+const siteUpdatedAt = new Date("2026-05-15");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/about`,
-      lastModified: new Date("2026-05-14"),
+      lastModified: new Date("2026-05-15"),
       changeFrequency: "weekly",
       priority: 0.85,
     },
@@ -38,7 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     {
       url: `${SITE_URL}/learn`,
-      lastModified: new Date("2026-05-14"),
+      lastModified: new Date("2026-05-15"),
       changeFrequency: "weekly",
       priority: 0.75,
     },

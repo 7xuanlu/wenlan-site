@@ -199,8 +199,7 @@ export default function AboutPage() {
                   <p className="mt-5 text-base leading-relaxed text-[var(--o-text-secondary)]">
                     Origin is an early preview for macOS Apple Silicon. The core
                     local runtime, CLI, MCP server, and Claude Code plugin are
-                    open source. Windows and Linux support are not committed to
-                    a timeline yet.
+                    open source.
                   </p>
                   <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                     <Link

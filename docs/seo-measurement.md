@@ -10,6 +10,12 @@ Use this checklist after publishing SEO pages on `useorigin.app`. The goal is to
    - `https://useorigin.app/`
    - `https://useorigin.app/docs`
    - `https://useorigin.app/docs/get-started`
+   - `https://useorigin.app/docs/daily-workflow`
+   - `https://useorigin.app/docs/core-concepts`
+   - `https://useorigin.app/docs/commands`
+   - `https://useorigin.app/docs/data-and-privacy`
+   - `https://useorigin.app/docs/mcp-clients`
+   - `https://useorigin.app/docs/troubleshooting`
    - `https://useorigin.app/learn`
    - `https://useorigin.app/learn/ai-memory-app`
    - `https://useorigin.app/learn/mcp-memory-server`
@@ -61,5 +67,5 @@ Run the same prompts monthly in Claude, ChatGPT, Gemini, and Perplexity. Record 
 
 - Week 1-2: pages indexed, sitemap accepted, no canonical conflicts.
 - Month 1: impressions for long-tail queries, especially `Origin AI memory` and `MCP memory server`.
-- Month 2-3: clicks for exact-match guide queries and more AI-assistant mentions.
+- Month 2-3: clicks for exact-match Learn and Docs queries, plus more AI-assistant mentions.
 - Month 3+: comparison and integration pages become the next growth lever.

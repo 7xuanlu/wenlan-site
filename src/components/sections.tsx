@@ -11,7 +11,7 @@ const faqs = [
   },
   {
     q: "Is my data private?",
-    a: "Yes. Origin runs on your machine and stores its database locally. Basic Memory works without a model or API key. Richer extraction and background refinement can use an on-device model, or an Anthropic key if you choose that path.",
+    a: "Yes. Origin runs on your machine and stores its database locally. The default local setup works without a model or API key. Richer extraction and background refinement can use an on-device model, or an Anthropic key if you choose that path.",
   },
   {
     q: "Is Origin just another memory MCP?",
@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     q: "Does Origin work on Windows or Linux?",
-    a: "Not yet. The current preview is macOS Apple Silicon (M1+) only. Linux and Windows support are on the roadmap but not committed to a timeline.",
+    a: "Not yet. The current preview is macOS Apple Silicon (M1+) only.",
   },
   {
     q: "Is Origin free?",
