@@ -129,13 +129,18 @@ export default function GetStartedPage() {
                 <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
                   Get started
                 </p>
-                <h1 className="warm-glow font-serif text-5xl leading-[1.05] font-medium tracking-tight sm:text-7xl">
+                <h1 className="warm-glow font-serif text-[2rem] leading-[1.08] font-medium tracking-tight sm:text-7xl sm:leading-[1.05]">
                   Connect Origin to your AI tools.
                 </h1>
-                <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">
+                <p className="mt-8 max-w-[20rem] text-lg leading-relaxed text-[var(--o-text-secondary)] sm:max-w-2xl">
                   Start with the Claude Code plugin, or add Origin to another
                   MCP-compatible client through the local MCP server.
                 </p>
+                <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[11px] text-[var(--o-text-muted)]">
+                  <span>Origin team</span>
+                  <span>Updated May 15, 2026</span>
+                  <span>4 min setup</span>
+                </div>
               </div>
               <MemoryIndex
                 label="Setup path"
@@ -198,17 +203,17 @@ export default function GetStartedPage() {
                   </p>
                   <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                     <Link
-                      href="/learn"
+                      href="/docs/daily-workflow"
                       className="rounded-xl bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] transition-all hover:shadow-[0_0_28px_var(--o-glow-warm)]"
+                    >
+                      Start daily workflow
+                    </Link>
+                    <Link
+                      href="/learn"
+                      className="rounded-xl border border-[var(--o-border)] px-5 py-3 text-center text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
                     >
                       Read articles
                     </Link>
-                    <a
-                      href="https://github.com/7xuanlu/origin"
-                      className="rounded-xl border border-[var(--o-border)] px-5 py-3 text-center text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
-                    >
-                      View on GitHub
-                    </a>
                   </div>
                 </div>
               </section>

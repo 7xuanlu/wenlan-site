@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { docPages, docUrl } from "./docs/docs";
 import { articles, articleUrl, SITE_URL } from "./learn/articles";
 
 const siteUpdatedAt = new Date("2026-05-14");
@@ -13,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/docs`,
-      lastModified: new Date("2026-05-14"),
+      lastModified: new Date("2026-05-15"),
       changeFrequency: "weekly",
       priority: 0.9,
     },
@@ -25,10 +26,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/docs/get-started`,
-      lastModified: new Date("2026-05-14"),
+      lastModified: new Date("2026-05-15"),
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    ...docPages.map((page) => ({
+      url: docUrl(page.slug),
+      lastModified: new Date(page.updatedAt),
+      changeFrequency: "weekly" as const,
+      priority: 0.78,
+    })),
     {
       url: `${SITE_URL}/learn`,
       lastModified: new Date("2026-05-14"),

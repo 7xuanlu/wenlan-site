@@ -12,6 +12,12 @@ people using AI tools who need work context to carry forward across sessions.
 - Website: https://useorigin.app/
 - Docs: https://useorigin.app/docs
 - Get started: https://useorigin.app/docs/get-started
+- Daily workflow: https://useorigin.app/docs/daily-workflow
+- Core concepts: https://useorigin.app/docs/core-concepts
+- Commands and tools: https://useorigin.app/docs/commands
+- Data and privacy: https://useorigin.app/docs/data-and-privacy
+- Connect MCP clients: https://useorigin.app/docs/mcp-clients
+- Troubleshooting: https://useorigin.app/docs/troubleshooting
 - Learn: https://useorigin.app/learn
 - About: https://useorigin.app/about
 - GitHub: https://github.com/7xuanlu/origin
@@ -25,6 +31,23 @@ people using AI tools who need work context to carry forward across sessions.
   indexes, graph structure, and metadata.
 - Background distillation deduplicates repeat facts, links related ideas,
   distills wiki pages, and keeps provenance attached.
+- Daily workflow: brief at session start, capture durable facts while working,
+  recall specific context when needed, and write a handoff before ending.
+
+## Docs
+
+- Get started: install the Claude Code plugin or connect an MCP client, then
+  verify the first local memory loop.
+- Daily workflow: how to use /brief, /capture, /recall, /handoff, /review,
+  /distill, and /read after setup.
+- Core concepts: memory, sessions, handoffs, distilled pages, daemon, MCP,
+  Markdown records, local index, and Basic Memory mode.
+- Commands and tools: Claude Code slash commands and MCP tools.
+- Data and privacy: local storage paths, Basic Memory mode, optional model/API
+  paths, Markdown control, and deletion/correction behavior.
+- Connect MCP clients: generic mcpServers config using npx -y origin-mcp.
+- Troubleshooting: daemon reachability, MCP connection, Claude Code restart,
+  port 7878, doctor checks, and GitHub issue fallback.
 
 ## Learn articles
 
