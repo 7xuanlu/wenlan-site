@@ -22,17 +22,19 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const siteDescription =
-  "Origin makes AI work compound by carrying sessions, decisions, lessons, project context, and wiki pages across chats, tools, projects, and time.";
+  "Origin is local-first memory for AI work, carrying sessions, decisions, project context, and wiki pages across Claude Code, Cursor, Codex, and MCP tools.";
+
+const siteTitle = "Origin | Local-First Memory for AI Work";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://useorigin.app"),
-  title: "Origin | Where AI Work Compounds",
+  title: siteTitle,
   description: siteDescription,
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Origin | Where AI Work Compounds",
+    title: siteTitle,
     description: siteDescription,
     type: "website",
     url: "https://useorigin.app",
@@ -49,7 +51,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Origin | Where AI Work Compounds",
+    title: siteTitle,
     description: siteDescription,
     images: ["/og.png"],
   },
@@ -96,6 +98,11 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
               name: "Origin",
+              alternateName: [
+                "Origin AI Memory",
+                "Origin Memory",
+                "Origin MCP",
+              ],
               description: siteDescription,
               url: "https://useorigin.app",
               applicationCategory: "ProductivityApplication",
@@ -134,6 +141,11 @@ export default function RootLayout({
               "@type": "Organization",
               "@id": "https://useorigin.app/#organization",
               name: "Origin",
+              alternateName: [
+                "Origin AI",
+                "Origin AI Memory",
+                "Origin Memory",
+              ],
               url: "https://useorigin.app",
               logo: "https://useorigin.app/logo.svg",
               sameAs: ["https://github.com/7xuanlu/origin"],

@@ -1,4 +1,4 @@
-export function GuideHalo() {
+export function ArticleHalo() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       <svg
@@ -12,7 +12,7 @@ export function GuideHalo() {
       >
         <defs>
           <linearGradient
-            id="guide-ring"
+            id="article-ring"
             x1="96"
             y1="360"
             x2="624"
@@ -24,7 +24,7 @@ export function GuideHalo() {
             <stop offset="70%" style={{ stopColor: "var(--o-ring-grad-mid2)" }} />
             <stop offset="100%" style={{ stopColor: "var(--o-ring-grad-end)" }} />
           </linearGradient>
-          <radialGradient id="guide-orb" cx="50%" cy="50%" r="50%">
+          <radialGradient id="article-orb" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
             <stop
               offset="45%"
@@ -42,11 +42,11 @@ export function GuideHalo() {
           cx="360"
           cy="360"
           r="218"
-          stroke="url(#guide-ring)"
+          stroke="url(#article-ring)"
           strokeWidth="62"
           strokeLinecap="round"
         />
-        <circle cx="488" cy="178" r="38" fill="url(#guide-orb)" />
+        <circle cx="488" cy="178" r="38" fill="url(#article-orb)" />
         <circle cx="488" cy="178" r="15" fill="white" opacity="0.9" />
       </svg>
     </div>

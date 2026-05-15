@@ -1,4 +1,4 @@
-/* ─── FAQ with Schema Markup ─── */
+/* ─── FAQ ─── */
 
 const faqs = [
   {
@@ -40,25 +40,8 @@ const faqs = [
 ];
 
 export function FAQSection() {
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: f.a,
-      },
-    })),
-  };
-
   return (
     <section className="border-t border-[var(--o-border-subtle)] px-6 py-24">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
       <div className="mx-auto max-w-3xl">
         <div className="text-center">
           <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">

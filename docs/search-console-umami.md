@@ -43,4 +43,4 @@ There is no native product-level linking between Search Console and Umami. The p
 4. Update the page:
    - tighten title/H1 for query intent
    - add 1–2 missing sections
-   - add 2–4 internal links to/from related guides
+   - add 2–4 internal links to/from related Learn articles

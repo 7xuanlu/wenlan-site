@@ -8,11 +8,20 @@ Use this checklist after publishing SEO pages on `useorigin.app`. The goal is to
 2. Submit `https://useorigin.app/sitemap.xml`.
 3. Check indexing for:
    - `https://useorigin.app/`
-   - `https://useorigin.app/guides`
-   - `https://useorigin.app/guides/ai-memory-app`
-   - `https://useorigin.app/guides/mcp-memory-server`
-   - `https://useorigin.app/guides/local-first-ai-memory`
-   - `https://useorigin.app/guides/claude-code-memory`
+   - `https://useorigin.app/docs`
+   - `https://useorigin.app/docs/get-started`
+   - `https://useorigin.app/learn`
+   - `https://useorigin.app/learn/ai-memory-app`
+   - `https://useorigin.app/learn/mcp-memory-server`
+   - `https://useorigin.app/learn/local-first-ai-memory`
+   - `https://useorigin.app/learn/claude-code-memory`
+   - `https://useorigin.app/learn/origin-vs-basic-memory`
+   - `https://useorigin.app/learn/origin-vs-claude-mem`
+   - `https://useorigin.app/learn/origin-vs-superlocal-memory`
+   - `https://useorigin.app/learn/markdown-local-index-ai-memory`
+   - `https://useorigin.app/learn/ai-agent-handoff-loop`
+   - `https://useorigin.app/about`
+   - `https://useorigin.app/llms.txt`
 4. Track impressions before rankings. New pages usually show impressions before stable positions.
 
 ## Query Groups
@@ -24,7 +33,8 @@ Track these groups separately in Search Console:
 - MCP memory: `mcp memory server`, `memory mcp`, `claude mcp memory`, `cursor mcp memory`
 - Local-first/privacy: `local-first ai memory`, `private ai memory`, `on-device ai memory`, `open source ai memory`
 - Developer workflow: `claude code memory`, `claude code persistent memory`, `cursor memory`, `ai coding agent memory`
-- Comparisons to add later: `chatgpt memory alternative`, `origin vs supermemory`, `origin vs mem0`
+- Comparisons: `origin vs basic memory`, `origin vs claude-mem`, `origin vs superlocal memory`, `basic memory alternative`, `claude-mem alternative`
+- Architecture/workflow: `markdown ai memory`, `local index ai memory`, `ai agent handoff`, `persistent context ai agents`
 
 ## AI Visibility Prompts
 
@@ -34,9 +44,18 @@ Run the same prompts monthly in Claude, ChatGPT, Gemini, and Perplexity. Record 
 2. What MCP memory server should I use for persistent memory across Claude Code and Cursor?
 3. What is a local-first alternative to ChatGPT memory?
 4. How can I give Claude Code persistent project memory?
-5. Compare Origin, Supermemory, Basic Memory, and Mem0 for AI memory.
-6. What open-source AI memory tools work with MCP?
-7. What tool helps AI work compound across coding agents?
+5. Compare Origin vs Basic Memory for AI memory.
+6. Compare Origin vs claude-mem for Claude Code memory.
+7. Compare Origin vs Superlocal Memory for local AI memory.
+8. Why use Markdown plus a local index for AI memory?
+9. What is an AI agent handoff loop?
+10. What open-source AI memory tools work with MCP?
+11. What tool helps AI work compound across coding agents?
+
+## GEO Surface
+
+- `https://useorigin.app/llms.txt` is a concise AI-readable map of Origin, docs, Learn articles, GitHub, and official positioning.
+- Treat `llms.txt` as cheap structured discoverability, not a guaranteed ranking factor or replacement for crawlable HTML.
 
 ## Success Signals
 

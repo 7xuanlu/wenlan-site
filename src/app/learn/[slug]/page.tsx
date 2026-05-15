@@ -1,87 +1,95 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getGuide, guides, guideUrl, SITE_URL } from "../guides";
-import { GuideHalo, MemoryIndex } from "../guide-visuals";
+import {
+  articleUrl,
+  articles,
+  formatArticleDate,
+  getArticle,
+  SITE_URL,
+} from "../articles";
+import { ArticleHalo, MemoryIndex } from "../article-visuals";
 
-type GuidePageProps = {
+type LearnArticlePageProps = {
   params: Promise<{
     slug: string;
   }>;
 };
 
 export function generateStaticParams() {
-  return guides.map((guide) => ({
-    slug: guide.slug,
+  return articles.map((article) => ({
+    slug: article.slug,
   }));
 }
 
 export async function generateMetadata({
   params,
-}: GuidePageProps): Promise<Metadata> {
+}: LearnArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const guide = getGuide(slug);
+  const article = getArticle(slug);
 
-  if (!guide) {
+  if (!article) {
     return {};
   }
 
   return {
-    title: guide.metaTitle,
-    description: guide.metaDescription,
-    keywords: guide.keywords,
+    title: article.metaTitle,
+    description: article.metaDescription,
+    keywords: article.keywords,
     alternates: {
-      canonical: `/guides/${guide.slug}`,
+      canonical: `/learn/${article.slug}`,
     },
     openGraph: {
-      title: guide.metaTitle,
-      description: guide.metaDescription,
+      title: article.metaTitle,
+      description: article.metaDescription,
       type: "article",
-      url: guideUrl(guide.slug),
+      url: articleUrl(article.slug),
       siteName: "Origin",
       images: ["/og.png"],
-      publishedTime: guide.updatedAt,
-      modifiedTime: guide.updatedAt,
+      publishedTime: article.updatedAt,
+      modifiedTime: article.updatedAt,
     },
     twitter: {
       card: "summary_large_image",
-      title: guide.metaTitle,
-      description: guide.metaDescription,
+      title: article.metaTitle,
+      description: article.metaDescription,
       images: ["/og.png"],
     },
   };
 }
 
-export default async function GuidePage({ params }: GuidePageProps) {
+export default async function LearnArticlePage({ params }: LearnArticlePageProps) {
   const { slug } = await params;
-  const guide = getGuide(slug);
+  const article = getArticle(slug);
 
-  if (!guide) {
+  if (!article) {
     notFound();
   }
 
-  const relatedGuides = guide.relatedSlugs
-    .map((relatedSlug) => getGuide(relatedSlug))
-    .filter((relatedGuide): relatedGuide is NonNullable<typeof relatedGuide> =>
-      Boolean(relatedGuide),
+  const relatedArticles = article.relatedSlugs
+    .map((relatedSlug) => getArticle(relatedSlug))
+    .filter(
+      (relatedArticle): relatedArticle is NonNullable<typeof relatedArticle> =>
+        Boolean(relatedArticle),
     );
 
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: guide.title,
-    description: guide.description,
+    headline: article.title,
+    description: article.description,
     author: {
       "@id": "https://useorigin.app/#organization",
+      name: article.author,
     },
     publisher: {
       "@id": "https://useorigin.app/#organization",
     },
-    datePublished: guide.updatedAt,
-    dateModified: guide.updatedAt,
+    datePublished: article.updatedAt,
+    dateModified: article.updatedAt,
     image: `${SITE_URL}/og.png`,
-    mainEntityOfPage: guideUrl(guide.slug),
-    keywords: guide.keywords.join(", "),
+    mainEntityOfPage: articleUrl(article.slug),
+    keywords: article.keywords.join(", "),
   };
 
   const breadcrumbSchema = {
@@ -97,29 +105,16 @@ export default async function GuidePage({ params }: GuidePageProps) {
       {
         "@type": "ListItem",
         position: 2,
-        name: "Guides",
-        item: `${SITE_URL}/guides`,
+        name: "Learn",
+        item: `${SITE_URL}/learn`,
       },
       {
         "@type": "ListItem",
         position: 3,
-        name: guide.title,
-        item: guideUrl(guide.slug),
+        name: article.title,
+        item: articleUrl(article.slug),
       },
     ],
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: guide.faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
   };
 
   return (
@@ -132,14 +127,10 @@ export default async function GuidePage({ params }: GuidePageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
 
       <article>
         <header className="relative border-b border-[var(--o-border-subtle)] px-6 py-24 sm:py-32">
-          <GuideHalo />
+          <ArticleHalo />
           <div className="relative z-10 mx-auto max-w-5xl">
             <nav className="flex items-center gap-3 font-mono text-xs text-[var(--o-text-muted)]">
               <Link
@@ -150,30 +141,35 @@ export default async function GuidePage({ params }: GuidePageProps) {
               </Link>
               <span>/</span>
               <Link
-                href="/guides"
+                href="/learn"
                 className="transition-colors hover:text-[var(--o-text-secondary)]"
               >
-                Guides
+                Learn
               </Link>
             </nav>
             <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
               <div>
                 <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
-                  {guide.eyebrow}
+                  {article.eyebrow}
                 </p>
                 <h1 className="warm-glow font-serif text-5xl leading-[1.05] font-medium tracking-tight sm:text-7xl">
-                  {guide.title}
+                  {article.title}
                 </h1>
                 <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">
-                  {guide.description}
+                  {article.description}
                 </p>
+                <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[11px] text-[var(--o-text-muted)]">
+                  <span>{article.author}</span>
+                  <span>Updated {formatArticleDate(article.updatedAt)}</span>
+                  <span>{article.readingTime}</span>
+                </div>
               </div>
               <MemoryIndex
-                label="Memory packet"
+                label="Article packet"
                 items={[
-                  guide.audience,
-                  guide.readingTime,
-                  `Updated ${guide.updatedAt}`,
+                  article.category,
+                  article.audience,
+                  article.readingTime,
                 ]}
               />
             </div>
@@ -183,11 +179,8 @@ export default async function GuidePage({ params }: GuidePageProps) {
         <section className="px-6 py-16">
           <div className="mx-auto max-w-5xl">
             <div className="grid gap-4 md:grid-cols-3">
-              {guide.heroBullets.map((bullet, index) => (
-                <div
-                  key={bullet}
-                  className="card-origin rounded-xl p-5"
-                >
+              {article.heroBullets.map((bullet, index) => (
+                <div key={bullet} className="card-origin rounded-xl p-5">
                   <p className="mb-5 font-mono text-[11px] text-[var(--o-warm)]">
                     {(index + 1).toString().padStart(2, "0")}
                   </p>
@@ -203,7 +196,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
         <section className="px-6 pb-20">
           <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-[minmax(0,680px)_1fr]">
             <div className="space-y-14">
-              {guide.sections.map((section, index) => (
+              {article.sections.map((section, index) => (
                 <section
                   key={section.heading}
                   className="grid gap-5 border-t border-[var(--o-border-subtle)] pt-10 sm:grid-cols-[72px_1fr]"
@@ -239,18 +232,18 @@ export default async function GuidePage({ params }: GuidePageProps) {
               <section className="relative overflow-hidden rounded-2xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-8 shadow-[0_18px_70px_rgba(0,0,0,0.18)]">
                 <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full border border-[var(--o-border-subtle)] opacity-50" />
                 <h2 className="font-serif text-3xl font-medium tracking-tight">
-                  {guide.cta.heading}
+                  {article.cta.heading}
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-[var(--o-text-secondary)]">
-                  {guide.cta.body}
+                  {article.cta.body}
                 </p>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href="https://github.com/7xuanlu/origin/tree/main/plugin/.claude-plugin#30-second-setup"
+                  <Link
+                    href="/docs/get-started"
                     className="rounded-xl bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] transition-all hover:shadow-[0_0_28px_var(--o-glow-warm)]"
                   >
                     Get started
-                  </a>
+                  </Link>
                   <a
                     href="https://github.com/7xuanlu/origin"
                     className="rounded-xl border border-[var(--o-border)] px-5 py-3 text-center text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
@@ -264,10 +257,10 @@ export default async function GuidePage({ params }: GuidePageProps) {
             <aside className="space-y-6 lg:sticky lg:top-20 lg:self-start">
               <div className="rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5">
                 <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
-                  In this guide
+                  In this article
                 </p>
                 <div className="mt-4 space-y-3">
-                  {guide.sections.map((section, index) => (
+                  {article.sections.map((section, index) => (
                     <p
                       key={section.heading}
                       className="grid grid-cols-[28px_1fr] gap-2 text-sm text-[var(--o-text-secondary)]"
@@ -281,19 +274,38 @@ export default async function GuidePage({ params }: GuidePageProps) {
                 </div>
               </div>
 
+              {article.officialReferences && (
+                <div className="rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5">
+                  <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
+                    Official references
+                  </p>
+                  <div className="mt-4 space-y-4">
+                    {article.officialReferences.map((reference) => (
+                      <a
+                        key={reference.href}
+                        href={reference.href}
+                        className="block text-sm leading-relaxed text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
+                      >
+                        {reference.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               <div className="rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5">
                 <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
-                  Related guides
+                  Related articles
                 </p>
                 <div className="mt-4 space-y-4">
-                  {relatedGuides.map((relatedGuide) => (
+                  {relatedArticles.map((relatedArticle) => (
                     <Link
-                      key={relatedGuide.slug}
-                      href={`/guides/${relatedGuide.slug}`}
+                      key={relatedArticle.slug}
+                      href={`/learn/${relatedArticle.slug}`}
                       scroll
                       className="block text-sm leading-relaxed text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
                     >
-                      {relatedGuide.title}
+                      {relatedArticle.title}
                     </Link>
                   ))}
                 </div>
@@ -308,7 +320,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
               FAQ
             </p>
             <div className="divide-y divide-[var(--o-border-subtle)] rounded-xl border border-[var(--o-border)]">
-              {guide.faqs.map((faq) => (
+              {article.faqs.map((faq) => (
                 <details key={faq.question} className="group">
                   <summary className="flex cursor-pointer items-center justify-between px-6 py-5 font-serif text-sm font-medium text-[var(--o-text)] transition-colors duration-150 hover:text-[var(--o-text-secondary)] [&::-webkit-details-marker]:hidden">
                     {faq.question}

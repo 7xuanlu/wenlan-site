@@ -146,12 +146,24 @@ export default function LandingPage() {
               PREVIEW
             </span>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <Link
-              href="/guides"
+              href="/docs"
+              className="hidden text-sm text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-text)] sm:inline"
+            >
+              Docs
+            </Link>
+            <Link
+              href="/learn"
               className="hidden text-sm text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-text)] sm:inline"
             >
               Learn
+            </Link>
+            <Link
+              href="/about"
+              className="hidden text-sm text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-text)] sm:inline"
+            >
+              About
             </Link>
             <a
               href="https://github.com/7xuanlu/origin"
@@ -177,10 +189,10 @@ export default function LandingPage() {
             Origin carries sessions, decisions, lessons, project context, and wiki pages across chats, tools, projects, and time.
           </p>
           <div className="animate-fade-up delay-200 mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <a href="https://github.com/7xuanlu/origin/tree/main/plugin/.claude-plugin#30-second-setup" className="flex items-center gap-2 rounded-xl bg-[var(--o-text)] px-6 py-3 text-sm font-semibold text-[var(--o-bg)] transition-all duration-150 hover:shadow-[0_0_28px_var(--o-glow-warm)]">
+            <Link href="/docs/get-started" className="flex items-center gap-2 rounded-xl bg-[var(--o-text)] px-6 py-3 text-sm font-semibold text-[var(--o-bg)] transition-all duration-150 hover:shadow-[0_0_28px_var(--o-glow-warm)]">
               Get started
               <ArrowIcon />
-            </a>
+            </Link>
             <a href="https://github.com/7xuanlu/origin" className="flex items-center gap-2 rounded-xl border border-[var(--o-border)] px-6 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-all duration-150 hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)]">
               View on GitHub
               <ArrowIcon />
@@ -226,10 +238,10 @@ export default function LandingPage() {
             The local runtime, CLI, MCP server, and Claude Code plugin are Apache-2.0.
           </p>
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <a href="https://github.com/7xuanlu/origin/tree/main/plugin/.claude-plugin#30-second-setup" className="flex items-center gap-2 rounded-xl bg-[var(--o-text)] px-6 py-3 text-sm font-semibold text-[var(--o-bg)] transition-all duration-150 hover:opacity-90">
+            <Link href="/docs/get-started" className="flex items-center gap-2 rounded-xl bg-[var(--o-text)] px-6 py-3 text-sm font-semibold text-[var(--o-bg)] transition-all duration-150 hover:opacity-90">
               Get started
               <ArrowIcon />
-            </a>
+            </Link>
             <a href="https://github.com/7xuanlu/origin" className="flex items-center gap-2 rounded-xl border border-[var(--o-border)] px-6 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-all duration-150 hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)]">
               <GitHubIcon />
               View on GitHub

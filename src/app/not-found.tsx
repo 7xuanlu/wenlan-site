@@ -30,14 +30,13 @@ export default function NotFound() {
             Back to home
           </Link>
           <Link
-            href="/guides"
+            href="/learn"
             className="rounded-xl border border-[var(--o-border)] px-5 py-3 text-center text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
           >
-            Browse guides
+            Browse articles
           </Link>
         </div>
       </div>
     </main>
   );
 }
-

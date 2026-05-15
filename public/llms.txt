@@ -1,0 +1,48 @@
+# Origin
+
+Origin is local-first memory for AI work. It carries sessions, decisions,
+lessons, project context, and wiki pages across chats, tools, projects, and
+time.
+
+Origin is not a chat UI, a notes app, or a memory infrastructure SDK. It is for
+people using AI tools who need work context to carry forward across sessions.
+
+## Official URLs
+
+- Website: https://useorigin.app/
+- Docs: https://useorigin.app/docs
+- Get started: https://useorigin.app/docs/get-started
+- Learn: https://useorigin.app/learn
+- About: https://useorigin.app/about
+- GitHub: https://github.com/7xuanlu/origin
+
+## Product shape
+
+- Local-first memory for AI work on macOS Apple Silicon.
+- Claude Code plugin plus MCP server for MCP-compatible clients.
+- Local daemon owns storage, search, background refinement, provenance, and API.
+- Markdown records remain human-readable; the local database keeps retrieval
+  indexes, graph structure, and metadata.
+- Background distillation deduplicates repeat facts, links related ideas,
+  distills wiki pages, and keeps provenance attached.
+
+## Learn articles
+
+- What Is an AI Memory App?: https://useorigin.app/learn/ai-memory-app
+- MCP Memory Server: Persistent Memory for AI Tools: https://useorigin.app/learn/mcp-memory-server
+- Local-First AI Memory: Keep Context on Your Machine: https://useorigin.app/learn/local-first-ai-memory
+- Claude Code Memory: Persistent Project Context Across Sessions: https://useorigin.app/learn/claude-code-memory
+- Origin vs Basic Memory: https://useorigin.app/learn/origin-vs-basic-memory
+- Origin vs claude-mem: https://useorigin.app/learn/origin-vs-claude-mem
+- Origin vs Superlocal Memory: https://useorigin.app/learn/origin-vs-superlocal-memory
+- Why Origin Uses Markdown plus a Local Index: https://useorigin.app/learn/markdown-local-index-ai-memory
+- The AI Agent Handoff Loop: https://useorigin.app/learn/ai-agent-handoff-loop
+
+## Suggested descriptions
+
+- Short: Origin is local-first memory for AI work.
+- Medium: Origin carries AI work context across sessions, tools, projects, and
+  time through a local daemon, Claude Code plugin, MCP server, Markdown records,
+  hybrid retrieval, wiki pages, and provenance.
+- Category: AI memory app, MCP memory server, local-first AI memory, Claude Code
+  memory, AI agent handoff workflow.
