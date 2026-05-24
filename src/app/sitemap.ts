@@ -2,31 +2,47 @@ import type { MetadataRoute } from "next";
 import { docPages, docUrl } from "./docs/docs";
 import { articles, articleUrl, SITE_URL } from "./learn/articles";
 
-const siteUpdatedAt = new Date("2026-05-15");
+const ABOUT_UPDATED_AT = "2026-05-15";
+const GET_STARTED_UPDATED_AT = "2026-05-15";
+
+function maxDate(values: Array<string | Date>): Date {
+  return new Date(
+    Math.max(...values.map((value) => new Date(value).getTime())),
+  );
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const latestArticle = maxDate(articles.map((article) => article.updatedAt));
+  const latestDoc = maxDate(docPages.map((page) => page.updatedAt));
+  const latestSiteUpdate = maxDate([
+    latestArticle,
+    latestDoc,
+    ABOUT_UPDATED_AT,
+    GET_STARTED_UPDATED_AT,
+  ]);
+
   return [
     {
       url: SITE_URL,
-      lastModified: siteUpdatedAt,
+      lastModified: latestSiteUpdate,
       changeFrequency: "weekly",
       priority: 1,
     },
     {
       url: `${SITE_URL}/docs`,
-      lastModified: new Date("2026-05-15"),
+      lastModified: latestDoc,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${SITE_URL}/about`,
-      lastModified: new Date("2026-05-15"),
-      changeFrequency: "weekly",
+      lastModified: new Date(ABOUT_UPDATED_AT),
+      changeFrequency: "monthly",
       priority: 0.85,
     },
     {
       url: `${SITE_URL}/docs/get-started`,
-      lastModified: new Date("2026-05-15"),
+      lastModified: new Date(GET_STARTED_UPDATED_AT),
       changeFrequency: "weekly",
       priority: 0.8,
     },
@@ -38,7 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     {
       url: `${SITE_URL}/learn`,
-      lastModified: new Date("2026-05-15"),
+      lastModified: latestArticle,
       changeFrequency: "weekly",
       priority: 0.75,
     },

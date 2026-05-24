@@ -2,8 +2,21 @@ import Link from "next/link";
 import { DemoVideo } from "./demo-video";
 import { WaitlistForm } from "./waitlist-form";
 import { ThemeToggle } from "./theme-toggle";
-import { FAQSection } from "@/components/sections";
+import { FAQSection, homepageFaqs } from "@/components/sections";
 import { FeatureSection, HumanControlSection, MemoryDistillerySection, ProblemSection, SolutionSection } from "@/components/problem-solution";
+
+const homepageFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: homepageFaqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.a,
+    },
+  })),
+};
 
 
 function GitHubIcon() {
@@ -118,13 +131,19 @@ function TokenEfficiencySection() {
               <tr>
                 <td className="px-6 py-4 text-[var(--o-text)] font-medium">Origin (hybrid retrieval)</td>
                 <td className="px-6 py-4 text-[var(--o-warm)] font-medium">168</td>
-                <td className="px-6 py-4 text-[var(--o-warm)] font-medium">91%</td>
+                <td className="px-6 py-4 text-[var(--o-warm)] font-medium">88%</td>
               </tr>
             </tbody>
           </table>
         </div>
         <p className="mx-auto mt-6 max-w-xl text-center font-mono text-[10px] leading-relaxed text-[var(--o-text-muted)] sm:text-[11px]">
-          LoCoMo benchmark, top-10 retrieval.
+          Recall@5 on LongMemEval (oracle, 500 Q). LoCoMo Recall@5 is 67%, ~168 tokens per recall query.{" "}
+          <a
+            href="https://github.com/7xuanlu/origin/tree/main/crates/origin-core/src/eval"
+            className="underline transition-colors hover:text-[var(--o-warm)]"
+          >
+            Run the harness yourself.
+          </a>
         </p>
       </div>
     </section>
@@ -134,6 +153,10 @@ function TokenEfficiencySection() {
 export default function LandingPage() {
   return (
     <div className="grain relative min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageFaqSchema) }}
+      />
       {/* Nav */}
       <nav className="fixed top-0 z-40 w-full border-b border-[var(--o-border-subtle)] bg-[var(--o-nav-bg)] backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
