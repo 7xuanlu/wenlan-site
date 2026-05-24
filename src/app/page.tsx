@@ -8,6 +8,10 @@ import { FeatureSection, HumanControlSection, MemoryDistillerySection, ProblemSe
 const homepageFaqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", "h2", "summary"],
+  },
   mainEntity: homepageFaqs.map((faq) => ({
     "@type": "Question",
     name: faq.q,

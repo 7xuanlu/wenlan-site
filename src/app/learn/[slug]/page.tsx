@@ -149,6 +149,10 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
       ? {
           "@context": "https://schema.org",
           "@type": "FAQPage",
+          speakable: {
+            "@type": "SpeakableSpecification",
+            cssSelector: ["h1", "h2", "summary"],
+          },
           mainEntity: article.faqs.map((faq) => ({
             "@type": "Question",
             name: faq.question,
