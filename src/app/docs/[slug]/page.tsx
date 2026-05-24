@@ -97,6 +97,16 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
     wordCount,
     articleBody: articleBodySnippet,
     proficiencyLevel: "Beginner",
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "h2"],
+    },
+    hasPart: page.sections.map((section, index) => ({
+      "@type": "WebPageElement",
+      name: section.heading,
+      position: index + 1,
+      url: `${docUrl(page.slug)}#${sectionId(section.heading)}`,
+    })),
   };
 
   const howToSchema = page.howTo
