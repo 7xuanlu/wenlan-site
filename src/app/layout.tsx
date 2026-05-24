@@ -32,6 +32,11 @@ export const metadata: Metadata = {
   description: siteDescription,
   alternates: {
     canonical: "/",
+    types: {
+      "application/rss+xml": [
+        { url: "/feed.xml", title: "Origin Learn RSS feed" },
+      ],
+    },
   },
   openGraph: {
     title: siteTitle,
@@ -53,7 +58,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteTitle,
     description: siteDescription,
-    images: ["/og.png"],
+    images: [
+      {
+        url: "/og.png",
+        alt: "Origin. Where AI work compounds.",
+      },
+    ],
   },
   icons: {
     icon: "/favicon.svg",
