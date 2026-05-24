@@ -54,15 +54,24 @@ export async function generateMetadata({
       type: "article",
       url: articleUrl(article.slug),
       siteName: "Origin",
-      images: ["/og.png"],
+      images: [
+        {
+          url: "/og.png",
+          width: 1280,
+          height: 720,
+          alt: article.title,
+        },
+      ],
       publishedTime: article.updatedAt,
       modifiedTime: article.updatedAt,
+      authors: [DEFAULT_AUTHOR_URL],
+      tags: article.keywords,
     },
     twitter: {
       card: "summary_large_image",
       title: article.metaTitle,
       description: article.metaDescription,
-      images: ["/og.png"],
+      images: [{ url: "/og.png", alt: article.title }],
     },
   };
 }

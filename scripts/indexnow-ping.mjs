@@ -26,6 +26,7 @@ const STATIC_PATHS = [
   "/docs/get-started",
   "/llms.txt",
   "/llms-full.txt",
+  "/feed.xml",
 ];
 
 async function extractSlugs(filePath) {
