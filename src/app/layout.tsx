@@ -22,7 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const siteDescription =
-  "Origin is local-first memory for AI work, carrying sessions, decisions, project context, and wiki pages across Claude Code, Cursor, Codex, and MCP tools.";
+  "Origin is local-first memory for AI work. Hybrid retrieval (88% Recall@5 on LongMemEval), real git versioning of every memory write, mandatory provenance on distilled pages, and one daemon across Claude Code, Cursor, Codex, Claude Desktop, and other MCP clients.";
 
 const siteTitle = "Origin | Local-First Memory for AI Work";
 
@@ -107,22 +107,25 @@ export default function RootLayout({
               ],
               description: siteDescription,
               url: "https://useorigin.app",
-              applicationCategory: "ProductivityApplication",
-              operatingSystem: "macOS",
-              softwareVersion: "0.6.0",
-              softwareRequirements: "macOS 14+ on Apple Silicon (M1 or later)",
+              applicationCategory: "DeveloperApplication",
+              operatingSystem: ["macOS", "Linux", "Windows"],
+              softwareVersion: "0.6.1",
+              softwareRequirements:
+                "macOS arm64 or x64, Linux x86_64 or aarch64 (glibc), Windows x86_64",
               installUrl: "https://github.com/7xuanlu/origin#quickstart",
               downloadUrl: "https://github.com/7xuanlu/origin/releases",
               screenshot: "https://useorigin.app/og.png",
               featureList: [
-                "Claude Code plugin: marketplace install with setup, MCP wiring, and first round-trip check",
-                "Other MCP clients: npx -y @7xuanlu/origin setup installs the local runtime before origin-mcp connects",
-                "Daemon memory chores: stores what matters, deduplicates repeat facts, links ideas, distills wiki pages, and preserves provenance",
-                "Hybrid memory engine: vector search, full-text search, and knowledge graph signals",
-                "Associative recall: related context beyond keyword matching",
-                "No model required: storage, embeddings, hybrid search, and MCP recall work without an LLM or API key",
-                "MCP-native: works with Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP clients",
-                "Memory lineage: every memory traces back to where it came from",
+                "Hybrid retrieval on libSQL: vector + FTS5 + reciprocal-rank fusion + knowledge-graph context. 88% Recall@5 on LongMemEval (oracle, 500 Q), 67% on LoCoMo.",
+                "Real git versioning: every memory write is a git commit in ~/.origin/.git/. Inspect with git log, revert with git checkout, branch and blame as needed.",
+                "Mandatory refreshable provenance: distilled wiki pages cite source memory IDs. The daemon rejects pages with empty source_memory_ids (HTTP 422). Pages refresh as new memories arrive without losing the citation chain.",
+                "Auditable memory: low-confidence captures, contradictions, supersession chains, and protected-memory conflicts surface for review instead of silently entering context.",
+                "Composition over storage: memories distill into pages. Sessions track workflow. An entity graph links people, projects, tools, and relations. ~30 MCP tools across one daemon, not 100+ skills bolted on.",
+                "Explicit spaces: tag memories, pages, and recalls with space=work | personal | client-X. Auto-detected from current repo or workspace.",
+                "Cross-platform daemon: macOS arm64/x64, Linux x86_64/aarch64, Windows x86_64. Native installer per OS.",
+                "MCP-native: works with Claude Code, Cursor, Codex, Claude Desktop, VS Code, Gemini CLI, and other MCP clients.",
+                "No cloud sync or telemetry by default. Local models and Anthropic keys are opt-in for automatic distill cycles.",
+                "Markdown artifacts you can read: pages in ~/.origin/pages/, session logs and project status under ~/.origin/sessions/. Symlink into Obsidian.",
               ],
               license:
                 "https://github.com/7xuanlu/origin/blob/main/LICENSE",
@@ -151,7 +154,21 @@ export default function RootLayout({
               ],
               url: "https://useorigin.app",
               logo: "https://useorigin.app/logo.svg",
-              sameAs: ["https://github.com/7xuanlu/origin"],
+              founder: {
+                "@type": "Person",
+                "@id": "https://useorigin.app/#qixuan-lu",
+                name: "Qi-Xuan Lu",
+                url: "https://github.com/7xuanlu",
+                sameAs: ["https://github.com/7xuanlu"],
+              },
+              sameAs: [
+                "https://github.com/7xuanlu/origin",
+                "https://github.com/7xuanlu",
+                "https://www.npmjs.com/package/@7xuanlu/origin",
+                "https://www.npmjs.com/package/origin-mcp",
+                "https://crates.io/crates/origin-mcp",
+                "https://crates.io/crates/origin-types",
+              ],
             }),
           }}
         />

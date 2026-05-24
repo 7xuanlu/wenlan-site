@@ -1,5 +1,7 @@
 export const SITE_URL = "https://useorigin.app";
-export const DEFAULT_AUTHOR = "Origin team";
+export const DEFAULT_AUTHOR = "Qi-Xuan Lu";
+export const DEFAULT_AUTHOR_URL = "https://github.com/7xuanlu";
+export const DEFAULT_AUTHOR_SAME_AS = ["https://github.com/7xuanlu"];
 
 export const articleCategories = ["Concepts", "Comparisons", "Workflows"] as const;
 
@@ -21,6 +23,17 @@ export type OfficialReference = {
   href: string;
 };
 
+export type ComparisonRow = {
+  dimension: string;
+  origin: string;
+  competitor: string;
+};
+
+export type ComparisonTable = {
+  competitorName: string;
+  rows: ComparisonRow[];
+};
+
 export type LearnArticle = {
   slug: string;
   eyebrow: string;
@@ -36,6 +49,7 @@ export type LearnArticle = {
   audience: string;
   heroBullets: string[];
   sections: LearnArticleSection[];
+  comparisonTable?: ComparisonTable;
   faqs: LearnArticleFaq[];
   relatedSlugs: string[];
   officialReferences?: OfficialReference[];
@@ -412,6 +426,50 @@ export const articles: LearnArticle[] = [
         ],
       },
     ],
+    comparisonTable: {
+      competitorName: "Basic Memory",
+      rows: [
+        {
+          dimension: "Center of gravity",
+          origin:
+            "AI work session loop: capture, handoff, distill, recall across MCP clients.",
+          competitor:
+            "Markdown knowledge base humans and AI both read and edit.",
+        },
+        {
+          dimension: "Storage",
+          origin:
+            "Local libSQL + Markdown projection in ~/.origin/, every write is a git commit in ~/.origin/.git/.",
+          competitor: "Markdown files in a local Obsidian-style vault.",
+        },
+        {
+          dimension: "Retrieval",
+          origin:
+            "Hybrid: vector (BGE-Base-EN-v1.5-Q 768-dim) + FTS5 + reciprocal-rank fusion + knowledge-graph neighbors. 88% Recall@5 on LongMemEval (oracle, 500 Q), 67% on LoCoMo.",
+          competitor:
+            "Semantic + FTS over Markdown notes; emphasis on note linking, not benchmark retrieval.",
+        },
+        {
+          dimension: "Provenance",
+          origin:
+            "Mandatory source_memory_ids on every distilled page. Daemon rejects pages with no source (HTTP 422). Pages refresh as new memories arrive without losing the citation chain.",
+          competitor:
+            "Wikilinks between notes; provenance is whatever the author writes by hand.",
+        },
+        {
+          dimension: "Versioning",
+          origin:
+            "Real git in ~/.origin/.git/. git log, git checkout, branch, blame.",
+          competitor:
+            "File mtime; bring-your-own git if you want history.",
+        },
+        {
+          dimension: "License",
+          origin: "Apache-2.0 daemon, CLI, MCP server.",
+          competitor: "AGPL-3.0 (Basic Memory open-source repo).",
+        },
+      ],
+    },
     faqs: [
       {
         question: "Is Basic Memory a competitor to Origin?",
@@ -492,6 +550,51 @@ export const articles: LearnArticle[] = [
         ],
       },
     ],
+    comparisonTable: {
+      competitorName: "claude-mem",
+      rows: [
+        {
+          dimension: "Center of gravity",
+          origin:
+            "Local memory layer for AI work across MCP clients: Claude Code, Cursor, Codex, Claude Desktop, VS Code, Gemini CLI.",
+          competitor:
+            "Observer-style memory assistant centered on Claude Code sessions.",
+        },
+        {
+          dimension: "Capture mode",
+          origin:
+            "Explicit /capture in flow, /handoff at session end, plus background distill cycles. Low-confidence and contradicting captures surface for review.",
+          competitor:
+            "Automatic observer of Claude Code sessions; less explicit human control over what enters memory.",
+        },
+        {
+          dimension: "Retrieval",
+          origin:
+            "Hybrid retrieval (vector + FTS5 + RRF + graph). 88% Recall@5 on LongMemEval, 67% on LoCoMo. ~168 tokens per recall query.",
+          competitor:
+            "Semantic recall via MCP scoped to past Claude Code sessions; no published benchmark.",
+        },
+        {
+          dimension: "Cross-tool reach",
+          origin:
+            "One daemon serves any MCP client. Same memory across coding agents, chat tools, and CLI runtimes.",
+          competitor:
+            "Claude Code first. MCP exposure exists, but the workflow is tuned for the Claude Code surface.",
+        },
+        {
+          dimension: "Provenance + versioning",
+          origin:
+            "Mandatory source IDs on distilled pages; every memory write is a git commit in ~/.origin/.git/.",
+          competitor:
+            "Session-attributed captures; no per-write git history by default.",
+        },
+        {
+          dimension: "License",
+          origin: "Apache-2.0 daemon, CLI, MCP server.",
+          competitor: "MIT (per claude-mem npm package).",
+        },
+      ],
+    },
     faqs: [
       {
         question: "Is Origin only for Claude Code?",
@@ -572,6 +675,53 @@ export const articles: LearnArticle[] = [
         ],
       },
     ],
+    comparisonTable: {
+      competitorName: "Superlocal Memory",
+      rows: [
+        {
+          dimension: "Center of gravity",
+          origin:
+            "Local AI work loop: sessions, handoffs, distilled wiki pages, provenance, Markdown records.",
+          competitor:
+            "Memory for AI reliability engineering. Modes, IDE integrations, benchmark-led positioning.",
+        },
+        {
+          dimension: "Retrieval",
+          origin:
+            "Hybrid: vector (BGE-Base-EN-v1.5-Q) + FTS5 + reciprocal-rank fusion + knowledge-graph context. 88% Recall@5 on LongMemEval (oracle, 500 Q), 67% on LoCoMo.",
+          competitor:
+            "Pure-math retrieval emphasized in public materials. Reports ~74.8% on LoCoMo in their zero-LLM configuration — currently ahead of Origin on that specific benchmark.",
+        },
+        {
+          dimension: "Human-readable records",
+          origin:
+            "Markdown projection under ~/.origin/, symlinkable into Obsidian; pages and session logs are plain text.",
+          competitor:
+            "Less emphasis on plain Markdown artifacts as the primary surface.",
+        },
+        {
+          dimension: "Provenance + audit",
+          origin:
+            "Mandatory source_memory_ids; daemon returns HTTP 422 on empty source. Low-confidence captures and contradictions surface for review.",
+          competitor:
+            "Reliability-mode framing; specific provenance enforcement not publicly documented.",
+        },
+        {
+          dimension: "Versioning",
+          origin:
+            "Every memory write is a git commit in ~/.origin/.git/. git log, git checkout, branch, blame.",
+          competitor:
+            "No public commitment to per-write git history.",
+        },
+        {
+          dimension: "License + openness",
+          origin:
+            "Apache-2.0 daemon, CLI, MCP server. Repo: github.com/7xuanlu/origin.",
+          competitor:
+            "Closed-source positioning at time of writing; check the official site for current terms.",
+        },
+      ],
+    },
     faqs: [
       {
         question: "Do Origin and Superlocal Memory solve the same problem?",

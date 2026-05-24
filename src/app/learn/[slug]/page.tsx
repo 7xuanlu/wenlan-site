@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import {
   articleUrl,
   articles,
+  DEFAULT_AUTHOR_SAME_AS,
+  DEFAULT_AUTHOR_URL,
   formatArticleDate,
   getArticle,
   SITE_URL,
@@ -79,8 +81,18 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
     headline: article.title,
     description: article.description,
     author: {
-      "@id": "https://useorigin.app/#organization",
+      "@type": "Person",
+      "@id": "https://useorigin.app/#qixuan-lu",
       name: article.author,
+      url: DEFAULT_AUTHOR_URL,
+      sameAs: DEFAULT_AUTHOR_SAME_AS,
+      knowsAbout: [
+        "AI work memory",
+        "local-first software",
+        "Model Context Protocol",
+        "knowledge graphs",
+        "hybrid retrieval",
+      ],
     },
     publisher: {
       "@id": "https://useorigin.app/#organization",
@@ -117,6 +129,22 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
     ],
   };
 
+  const faqSchema =
+    article.faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: article.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
+
   return (
     <main className="grain min-h-screen">
       <script
@@ -127,6 +155,12 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       <article>
         <header className="relative border-b border-[var(--o-border-subtle)] px-6 py-24 sm:py-32">
@@ -228,6 +262,51 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                   </div>
                 </section>
               ))}
+
+              {article.comparisonTable && (
+                <section className="border-t border-[var(--o-border-subtle)] pt-10">
+                  <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
+                    Side-by-side
+                  </h2>
+                  <p className="mt-3 text-sm leading-relaxed text-[var(--o-text-muted)]">
+                    Quantified dimensions. Where {article.comparisonTable.competitorName} leads, we say so.
+                  </p>
+                  <div className="mt-6 overflow-x-auto rounded-xl border border-[var(--o-border)]">
+                    <table className="w-full border-collapse text-sm">
+                      <thead>
+                        <tr className="border-b border-[var(--o-border)] bg-[var(--o-card-bg)] text-left font-mono text-[11px] tracking-[0.2em] text-[var(--o-text-muted)] uppercase">
+                          <th className="px-5 py-4 align-top">Dimension</th>
+                          <th className="px-5 py-4 align-top text-[var(--o-warm)]">Origin</th>
+                          <th className="px-5 py-4 align-top">
+                            {article.comparisonTable.competitorName}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {article.comparisonTable.rows.map((row) => (
+                          <tr
+                            key={row.dimension}
+                            className="border-b border-[var(--o-border-subtle)] last:border-b-0 align-top"
+                          >
+                            <th
+                              scope="row"
+                              className="px-5 py-4 text-left align-top font-medium text-[var(--o-text)]"
+                            >
+                              {row.dimension}
+                            </th>
+                            <td className="px-5 py-4 align-top text-[var(--o-text-secondary)]">
+                              {row.origin}
+                            </td>
+                            <td className="px-5 py-4 align-top text-[var(--o-text-muted)]">
+                              {row.competitor}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              )}
 
               <section className="relative overflow-hidden rounded-2xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-8 shadow-[0_18px_70px_rgba(0,0,0,0.18)]">
                 <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full border border-[var(--o-border-subtle)] opacity-50" />
