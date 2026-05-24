@@ -1,9 +1,23 @@
 import type { NextConfig } from "next";
 
+const NOINDEX_FOLLOW = [
+  { key: "X-Robots-Tag", value: "noindex, follow" },
+];
+
 const nextConfig: NextConfig = {
   outputFileTracingRoot: process.cwd(),
   turbopack: {
     root: process.cwd(),
+  },
+  async headers() {
+    return [
+      { source: "/llms.txt", headers: NOINDEX_FOLLOW },
+      { source: "/llms-full.txt", headers: NOINDEX_FOLLOW },
+      { source: "/feed.xml", headers: NOINDEX_FOLLOW },
+      { source: "/humans.txt", headers: NOINDEX_FOLLOW },
+      { source: "/manifest.webmanifest", headers: NOINDEX_FOLLOW },
+      { source: "/.well-known/security.txt", headers: NOINDEX_FOLLOW },
+    ];
   },
   async redirects() {
     return [
