@@ -124,6 +124,12 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
       "@type": "Thing",
       name: keyword,
     })),
+    hasPart: article.sections.map((section, index) => ({
+      "@type": "WebPageElement",
+      name: section.heading,
+      position: index + 1,
+      url: `${articleUrl(article.slug)}#${sectionId(section.heading)}`,
+    })),
   };
 
   const breadcrumbSchema = {
