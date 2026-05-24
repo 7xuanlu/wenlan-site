@@ -54,14 +54,6 @@ export async function generateMetadata({
       type: "article",
       url: articleUrl(article.slug),
       siteName: "Origin",
-      images: [
-        {
-          url: "/og.png",
-          width: 1280,
-          height: 720,
-          alt: article.title,
-        },
-      ],
       publishedTime: article.updatedAt,
       modifiedTime: article.updatedAt,
       authors: [DEFAULT_AUTHOR_URL],
@@ -71,7 +63,6 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: article.metaTitle,
       description: article.metaDescription,
-      images: [{ url: "/og.png", alt: article.title }],
     },
   };
 }
