@@ -69,6 +69,26 @@ Run the same prompts monthly in Claude, ChatGPT, Gemini, and Perplexity. Record 
 - `https://useorigin.app/llms.txt` is a concise AI-readable map of Origin, docs, Learn articles, GitHub, and official positioning.
 - Treat `llms.txt` as cheap structured discoverability, not a guaranteed ranking factor or replacement for crawlable HTML.
 
+## Baseline Snapshots
+
+### 2026-05-28 post-README-alignment deploy
+
+Production deploy evidence:
+
+- `https://useorigin.app/` serves the README-aligned homepage copy with `93.6%` LongMemEval Recall@5, `70.0%` LoCoMo Recall@5, `softwareVersion` `0.7.0`, and the current `origin mcp add` setup wording.
+- `https://useorigin.app/llms.txt` serves the README-aligned AI-readable map with the same `93.6%` / `70.0%` metrics, new Learn URLs, and the `4.8` point Superlocal comparison wording.
+- `https://useorigin.app/sitemap.xml` includes the new Learn URLs:
+  - `/learn/origin-for-claude-code`
+  - `/learn/distilled-wiki-pages-ai-memory`
+  - `/learn/ai-work-memory-vs-knowledge-base`
+- Old guide URLs still return permanent redirects, for example `/guides/mcp-memory-server` -> `/learn/mcp-memory-server`.
+
+Public search snapshot immediately after deploy:
+
+- Search results for Origin queries still show stale snippets from the pre-deploy site, including `/guides/*` URLs, old homepage copy, old setup language, and older crawl dates.
+- Exact-match new Learn URLs were not yet visible in general search snapshots immediately after deploy.
+- Treat this as the baseline before Google recrawls the sitemap and canonical URLs. Do not judge the content update by snippets until Search Console shows recrawl/indexing activity after 2026-05-28.
+
 ## Success Signals
 
 - Week 1-2: pages indexed, sitemap accepted, no canonical conflicts.
