@@ -1,6 +1,6 @@
 import { DEFAULT_AUTHOR, SITE_URL } from "../learn/articles";
 
-export const DOCS_UPDATED_AT = "2026-05-15";
+export const DOCS_UPDATED_AT = "2026-05-27";
 
 export type DocGroup = "After setup" | "Reference";
 

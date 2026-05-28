@@ -11,7 +11,7 @@ export const homepageFaqs = [
   },
   {
     q: "What retrieval quality does Origin reach?",
-    a: "Hybrid retrieval combines vector search (BGE-Base-EN-v1.5-Q, 768-dim), FTS5, reciprocal-rank fusion, and knowledge-graph context. Recall@5 is 88% on LongMemEval (oracle, 500 questions) and 67% on LoCoMo, at roughly 168 tokens per recall query. The eval harness ships in the repo at crates/origin-core/src/eval/.",
+    a: "Hybrid retrieval combines vector search (BGE-Base-EN-v1.5-Q, 768-dim), FTS5, reciprocal-rank fusion, and knowledge-graph context. Recall@5 is 93.6% on LongMemEval (oracle, 500 questions) and 70.0% on LoCoMo, at roughly 168 tokens per recall query. The eval harness ships in the repo at crates/origin-core/src/eval/.",
   },
   {
     q: "Is my data private?",
