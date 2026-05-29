@@ -12,14 +12,14 @@ import { ArticleHalo, MemoryIndex } from "./article-visuals";
 export const metadata: Metadata = {
   title: "Learn | Origin",
   description:
-    "Articles on AI work memory, MCP memory servers, local-first AI memory, distilled wiki pages, Claude Code workflows, and Origin comparisons.",
+    "Articles on AI work memory, MCP memory servers, local-first AI work context, distilled wiki pages, Claude Code workflows, and Origin comparisons.",
   alternates: {
     canonical: "/learn",
   },
   openGraph: {
     title: "Learn | Origin",
     description:
-      "Articles on AI work memory, MCP memory servers, local-first AI memory, distilled wiki pages, Claude Code workflows, and Origin comparisons.",
+      "Articles on AI work memory, MCP memory servers, local-first AI work context, distilled wiki pages, Claude Code workflows, and Origin comparisons.",
     type: "website",
     url: `${SITE_URL}/learn`,
     siteName: "Origin",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Learn | Origin",
     description:
-      "Articles on AI work memory, MCP memory servers, local-first AI memory, distilled wiki pages, Claude Code workflows, and Origin comparisons.",
+      "Articles on AI work memory, MCP memory servers, local-first AI work context, distilled wiki pages, Claude Code workflows, and Origin comparisons.",
   },
 };
 
@@ -58,7 +58,7 @@ export default function LearnPage() {
     "@id": "https://useorigin.app/learn#collection",
     name: "Origin Learn",
     description:
-      "Articles about AI work memory, MCP memory servers, local-first AI memory, distilled wiki pages, Claude Code workflows, and Origin comparisons.",
+      "Articles about AI work memory, MCP memory servers, local-first AI work context, distilled wiki pages, Claude Code workflows, and Origin comparisons.",
     url: `${SITE_URL}/learn`,
     isPartOf: { "@id": "https://useorigin.app/#website" },
     publisher: { "@id": "https://useorigin.app/#organization" },
@@ -105,7 +105,7 @@ export default function LearnPage() {
                 Learn
               </p>
               <h1 className="warm-glow font-serif text-5xl leading-[1.05] font-medium tracking-tight sm:text-7xl">
-                Before you add AI memory.
+                Before you add memory to AI work.
               </h1>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">
                 Origin makes AI work compound across Claude Code, Cursor,

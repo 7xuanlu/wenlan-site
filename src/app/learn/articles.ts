@@ -220,18 +220,18 @@ export const articles: LearnArticle[] = [
     slug: "local-first-ai-memory",
     eyebrow: "Privacy",
     category: "Concepts",
-    title: "Local-First AI Memory: Keep Context on Your Machine",
+    title: "Local-First AI Work Memory: Keep Context on Your Machine",
     description:
-      "Local-first AI memory keeps sensitive project knowledge, decisions, and preferences under your control while still making them useful to assistants.",
-    metaTitle: "Local-First AI Memory | Origin",
+      "Local-first AI work memory keeps sensitive project knowledge, decisions, and preferences under your control while still making them useful to assistants.",
+    metaTitle: "Local-First AI Work Memory | Origin",
     metaDescription:
-      "Learn why local-first AI memory matters for privacy, ownership, and long-running work. Origin keeps AI memory visible, editable, and on your machine.",
+      "Learn why local-first AI work memory matters for privacy, ownership, and long-running work. Origin keeps work context visible, editable, and on your machine.",
     keywords: [
-      "local-first AI memory",
-      "private AI memory",
-      "on-device AI memory",
-      "open source AI memory",
-      "self-hosted AI memory",
+      "local-first AI work memory",
+      "private AI work memory",
+      "on-device AI work memory",
+      "open source AI work memory",
+      "self-hosted AI work memory",
     ],
     updatedAt,
     author: DEFAULT_AUTHOR,
@@ -244,9 +244,9 @@ export const articles: LearnArticle[] = [
     ],
     sections: [
       {
-        heading: "What local-first means for AI memory",
+        heading: "What local-first means for AI work memory",
         body: [
-          "Local-first AI memory means the durable context your assistants rely on is owned and stored primarily on your device. Cloud services may still be useful in some workflows, but they are not the default source of truth.",
+          "Local-first AI work memory means the durable context your assistants rely on is owned and stored primarily on your device. Cloud services may still be useful in some workflows, but they are not the default source of truth.",
           "For memory, that distinction matters. The data can include client names, strategy decisions, personal preferences, private codebase details, and the accumulated reasoning behind your work.",
         ],
       },
@@ -965,18 +965,18 @@ export const articles: LearnArticle[] = [
     slug: "origin-vs-superlocal-memory",
     eyebrow: "Comparison",
     category: "Comparisons",
-    title: "Origin vs Superlocal Memory: Local-First AI Memory for Work That Spans Tools",
+    title: "Origin vs Superlocal Memory: Local-First AI Work Memory for Work That Spans Tools",
     description:
       "Compare Origin and Superlocal Memory across local-first memory, retrieval quality, workflow design, integrations, and trust.",
-    metaTitle: "Origin vs Superlocal Memory | Local AI Memory",
+    metaTitle: "Origin vs Superlocal Memory | Local AI Work Memory",
     metaDescription:
-      "Compare Origin and Superlocal Memory for local-first AI memory, retrieval quality, AI coding workflows, MCP clients, and durable context.",
+      "Compare Origin and Superlocal Memory for local-first AI work memory, retrieval quality, AI coding workflows, MCP clients, and durable context.",
     keywords: [
       "Origin vs Superlocal Memory",
       "Superlocal Memory alternative",
-      "local-first AI memory",
-      "AI memory reliability",
-      "AI coding memory",
+      "local-first AI work memory",
+      "AI work memory reliability",
+      "AI coding work memory",
     ],
     updatedAt,
     author: DEFAULT_AUTHOR,
@@ -1116,7 +1116,7 @@ export const articles: LearnArticle[] = [
       {
         question: "Do Origin and Superlocal Memory solve the same problem?",
         answer:
-          "They overlap around local-first AI memory and retrieval for coding workflows. The difference is framing: Superlocal Memory emphasizes reliability engineering, Origin emphasizes the AI work loop and transparent local records.",
+          "They overlap around local-first AI work memory and retrieval for coding workflows. The difference is framing: Superlocal Memory emphasizes reliability engineering, Origin emphasizes the AI work loop and transparent local records.",
       },
       {
         question: "Why does Origin talk about Markdown and indexes?",

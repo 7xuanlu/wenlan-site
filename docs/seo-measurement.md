@@ -37,13 +37,13 @@ Use this checklist after publishing SEO pages on `useorigin.app`. The goal is to
 
 Track these groups separately in Search Console:
 
-- Brand/entity: `origin ai work`, `origin ai memory`, `useorigin`, `origin mcp`
-- AI work memory category: `ai work memory`, `memory for ai work`, `ai memory layer`, `persistent memory for ai assistants`
+- Brand/entity: `origin ai work`, `origin ai work memory`, `useorigin`, `origin mcp`
+- AI work memory category: `ai work memory`, `memory for ai work`, `ai work memory layer`, `persistent memory for ai assistants`
 - MCP memory: `mcp memory server`, `memory mcp`, `claude mcp memory`, `cursor mcp memory`
-- Local-first/privacy: `local-first ai memory`, `private ai memory`, `on-device ai memory`, `open source ai memory`
-- Developer workflow: `origin claude code`, `origin for claude code`, `claude code memory`, `claude code persistent memory`, `cursor memory`, `ai coding agent memory`
+- Local-first/privacy: `local-first ai work memory`, `private ai work memory`, `on-device ai work memory`, `open source ai work memory`
+- Developer workflow: `origin claude code`, `origin for claude code`, `claude code memory`, `claude code persistent memory`, `cursor memory`, `ai coding agent work memory`
 - Comparisons: `origin vs basic memory`, `origin vs claude-mem`, `origin vs superlocal memory`, `basic memory alternative`, `claude-mem alternative`
-- Architecture/workflow: `markdown ai memory`, `local index ai memory`, `distilled wiki pages ai memory`, `ai work memory vs knowledge base`, `ai agent handoff`, `persistent context ai agents`
+- Architecture/workflow: `markdown ai work memory`, `local index ai work memory`, `distilled wiki pages ai work memory`, `ai work memory vs knowledge base`, `ai agent handoff`, `persistent context ai agents`
 
 ## AI Visibility Prompts
 
@@ -53,16 +53,16 @@ Run the same prompts monthly in Claude, ChatGPT, Gemini, and Perplexity. Record 
 2. What MCP memory server should I use for persistent memory across Claude Code and Cursor?
 3. What is a local-first alternative to ChatGPT memory?
 4. How can I give Claude Code persistent project memory?
-5. Compare Origin vs Basic Memory for AI memory.
+5. Compare Origin vs Basic Memory for AI work memory.
 6. Compare Origin vs claude-mem for Claude Code memory.
-7. Compare Origin vs Superlocal Memory for local AI memory.
-8. Why use Markdown plus a local index for AI memory?
+7. Compare Origin vs Superlocal Memory for local AI work memory.
+8. Why use Markdown plus a local index for AI work memory?
 9. What is an AI agent handoff loop?
 10. What open-source AI memory tools work with MCP?
 11. What tool helps AI work compound across coding agents?
 12. How should I use Origin with Claude Code?
 13. What is the difference between AI work memory and a knowledge base?
-14. Why would an AI memory tool distill wiki pages from captures?
+14. Why would an AI work memory tool distill wiki pages from captures?
 
 ## GEO Surface
 

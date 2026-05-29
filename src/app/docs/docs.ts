@@ -309,7 +309,7 @@ export const docPages: DocPage[] = [
       "Understand Origin local storage, local memory setup, optional model/API paths, Markdown records, the local index, and deletion controls.",
     keywords: [
       "Origin data privacy",
-      "local AI memory storage",
+      "local AI work memory storage",
       "Markdown records",
       "local-first privacy",
       "deletion controls",

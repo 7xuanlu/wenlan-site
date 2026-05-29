@@ -14,7 +14,7 @@
 
 - [AI work memory](https://useorigin.app/learn/ai-work-memory): What changes when AI sessions can carry context across tools and weeks.
 - [MCP memory server](https://useorigin.app/learn/mcp-memory-server): How Origin exposes memory through the Model Context Protocol so any compatible AI client can read and write the same store.
-- [Local-first AI memory](https://useorigin.app/learn/local-first-ai-memory): Data ownership, privacy, control. Why the daemon writes to ~/.origin/ instead of the cloud.
+- [Local-first AI work memory](https://useorigin.app/learn/local-first-ai-memory): Data ownership, privacy, control. Why the daemon writes to ~/.origin/ instead of the cloud.
 - [Markdown plus local index](https://useorigin.app/learn/markdown-local-index-ai-memory): The storage model. Markdown projection for humans, libSQL index for retrieval, both kept in sync.
 - [Distilled wiki pages](https://useorigin.app/learn/distilled-wiki-pages-ai-memory): Why Origin composes atomic captures into source-backed pages with provenance and refreshable revision state.
 - [Claude Code memory](https://useorigin.app/learn/claude-code-memory): How Origin works inside Claude Code sessions and how /capture and /handoff fit the work loop.
