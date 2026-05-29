@@ -4,25 +4,25 @@ import { ArticleHalo, MemoryIndex } from "../learn/article-visuals";
 import { SITE_URL } from "../learn/articles";
 
 export const metadata: Metadata = {
-  title: "About Origin | Local-First Memory for AI Work",
+  title: "About Origin | Where AI Work Compounds",
   description:
-    "Origin is an open-source, local-first memory layer for AI work across Claude Code, Cursor, Codex, and MCP-compatible tools.",
+    "Origin is an open-source, local-first home for AI work context across Claude Code, Cursor, Codex, and MCP-compatible tools.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
-    title: "About Origin | Local-First Memory for AI Work",
+    title: "About Origin | Where AI Work Compounds",
     description:
-      "Origin is an open-source, local-first memory layer for AI work across Claude Code, Cursor, Codex, and MCP-compatible tools.",
+      "Origin is an open-source, local-first home for AI work context across Claude Code, Cursor, Codex, and MCP-compatible tools.",
     type: "website",
     url: `${SITE_URL}/about`,
     siteName: "Origin",
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Origin | Local-First Memory for AI Work",
+    title: "About Origin | Where AI Work Compounds",
     description:
-      "Origin is an open-source, local-first memory layer for AI work across Claude Code, Cursor, Codex, and MCP-compatible tools.",
+      "Origin is an open-source, local-first home for AI work context across Claude Code, Cursor, Codex, and MCP-compatible tools.",
   },
 };
 
@@ -89,7 +89,7 @@ export default function AboutPage() {
     "@type": "AboutPage",
     name: "About Origin",
     description:
-      "Origin is an open-source, local-first memory layer for AI work, built by Qi-Xuan Lu.",
+      "Origin is an open-source, local-first home for AI work context, built by Qi-Xuan Lu.",
     url: `${SITE_URL}/about`,
     mainEntity: {
       "@id": "https://useorigin.app/#organization",

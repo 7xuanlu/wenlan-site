@@ -98,7 +98,7 @@ export default function DocsPage() {
     "@id": "https://useorigin.app/docs#collection",
     name: "Origin Docs",
     description:
-      "Product documentation for Origin, a local-first memory layer for AI work.",
+      "Product documentation for Origin's local-first AI work memory.",
     url: `${SITE_URL}/docs`,
     isPartOf: { "@id": "https://useorigin.app/#website" },
     publisher: { "@id": "https://useorigin.app/#organization" },

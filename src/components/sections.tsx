@@ -3,7 +3,7 @@
 export const homepageFaqs = [
   {
     q: "What is Origin?",
-    a: "Origin is a local-first memory layer for AI work. It carries sessions, decisions, lessons, project context, and distilled wiki pages across chats, tools, projects, and time. One daemon, ~30 MCP tools, Markdown projection on disk you can read and edit.",
+    a: "Origin gives AI work one local home. It carries sessions, decisions, lessons, project context, and distilled wiki pages across chats, tools, projects, and time. One daemon, ~30 MCP tools, Markdown projection on disk you can read and edit.",
   },
   {
     q: "How is Origin different from built-in AI memory?",
