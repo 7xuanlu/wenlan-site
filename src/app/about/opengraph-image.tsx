@@ -10,8 +10,8 @@ export default async function Image() {
     (
       <OgTemplate
         eyebrow="About"
-        title="Local-first memory for AI work."
-        description="An open-source memory layer for AI work across Claude Code, Cursor, Codex, and MCP-compatible tools. Built by Qi-Xuan Lu."
+        title="Where AI work compounds."
+        description="An open-source local home for AI work context across Claude Code, Cursor, Codex, and MCP-compatible tools. Built by Qi-Xuan Lu."
         footerLeft={["useorigin.app/about", "v0.7.0 · Apache-2.0"]}
         footerRight="by Qi-Xuan Lu"
         titleSize={76}

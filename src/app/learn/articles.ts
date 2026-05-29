@@ -799,7 +799,7 @@ export const articles: LearnArticle[] = [
     audience: "Claude Code users choosing a memory workflow",
     heroBullets: [
       "claude-mem focuses on automatically observing Claude Code sessions and extracting useful context.",
-      "Origin focuses on a shared local memory layer for AI work across Claude Code and other MCP clients.",
+      "Origin focuses on shared local AI work memory across Claude Code and other MCP clients.",
       "Both aim to reduce repeated context, but they choose different centers of gravity.",
       "Both products are early. This page covers the claude-mem npm package and Origin v0.7.0 as of 2026-05-27.",
     ],
@@ -814,7 +814,7 @@ export const articles: LearnArticle[] = [
         heading: "Short answer",
         body: [
           "Choose claude-mem if your primary need is an observer-style memory workflow tightly centered on Claude Code sessions.",
-          "Choose Origin if you want a local-first memory layer that can serve Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP-compatible tools.",
+          "Choose Origin if you want local-first AI work memory that can serve Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP-compatible tools.",
         ],
       },
       {
@@ -827,7 +827,7 @@ export const articles: LearnArticle[] = [
       {
         heading: "What Origin emphasizes",
         body: [
-          "Origin treats memory as a local layer for AI work, not a single-client feature. Claude Code is important, but Origin also works through MCP so other clients can share the same context.",
+          "Origin treats memory as part of a local AI work loop, not a single-client feature. Claude Code is important, but Origin also works through MCP so other clients can share the same context.",
           "Origin's workflow includes handoffs, background distillation, wiki pages, Markdown records, local indexes, and provenance attached to durable memories.",
         ],
       },
@@ -835,7 +835,7 @@ export const articles: LearnArticle[] = [
         heading: "How to decide",
         body: [
           "If you live entirely in Claude Code and want an observer-style assistant for that environment, claude-mem is directly aimed at that habit.",
-          "If your work moves across coding agents, chat tools, projects, and sessions, Origin is designed to make the memory layer portable across those surfaces.",
+          "If your work moves across coding agents, chat tools, projects, and sessions, Origin is designed to make the same context portable across those surfaces.",
         ],
       },
       {
@@ -871,7 +871,7 @@ export const articles: LearnArticle[] = [
         heading: "When claude-mem is the better call",
         body: [
           "If your AI work is entirely inside Claude Code, you want zero capture friction, and you are comfortable letting an observer pick what is memorable, claude-mem is shaped exactly for that. Single-tool by design, not by oversight.",
-          "If you want explicit human control over what enters memory, multiple AI clients sharing one memory layer, or git-versioned audit on every write, those are not claude-mem's headline features. Use Origin.",
+          "If you want explicit human control over what enters memory, multiple AI clients sharing one local context store, or git-versioned audit on every write, those are not claude-mem's headline features. Use Origin.",
           "Cost: claude-mem ships as an npm package under MIT. Origin's daemon, CLI, and MCP server are Apache-2.0. Both are free to self-host. The optional Origin desktop app lives in a separate repo under AGPL-3.0 if you want a GUI on top.",
         ],
       },
@@ -882,7 +882,7 @@ export const articles: LearnArticle[] = [
         {
           dimension: "Center of gravity",
           origin:
-            "Local memory layer for AI work across MCP clients: Claude Code, Cursor, Codex, Claude Desktop, VS Code, Gemini CLI.",
+            "Local AI work memory across MCP clients: Claude Code, Cursor, Codex, Claude Desktop, VS Code, Gemini CLI.",
           competitor:
             "Observer-style memory assistant centered on Claude Code sessions.",
         },

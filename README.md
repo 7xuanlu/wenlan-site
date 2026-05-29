@@ -1,6 +1,6 @@
 # origin-website
 
-Marketing + docs site for [Origin](https://github.com/7xuanlu/origin), a local-first memory layer for AI work.
+Marketing + docs site for [Origin](https://github.com/7xuanlu/origin), where AI work compounds.
 
 Production: [useorigin.app](https://useorigin.app).
 
