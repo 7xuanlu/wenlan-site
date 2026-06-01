@@ -210,6 +210,24 @@ origin space add ideas --default
 origin space show ideas
 origin space move scratch career`;
 
+const spaceResolverChain = `1. explicit --arg override
+2. ORIGIN_SPACE environment variable
+3. ~/.origin/spaces.toml cwd-prefix mapping
+3.5 spaces.toml top-level default
+4. current git repo basename
+5. conversation topic fallback
+6. personal hard default`;
+
+const spacesTomlExample = `[[mapping]]
+prefix = "~/Repos/origin"
+space  = "origin"
+
+[[mapping]]
+prefix = "~/notes/career"
+space  = "career"
+
+default = "personal"`;
+
 const importPortabilityCommands = `origin import vault /path/to/markdown-vault
 
 # readable Origin artifacts
@@ -1889,7 +1907,7 @@ export const docPages: DocPage[] = [
     eyebrow: "Spaces",
     title: "Spaces",
     description:
-      "Separate work, personal, client, and project memory so agents do not blend unrelated context.",
+      "Separate work, personal, client, and project memory, and understand how Origin resolves the active space.",
     metaTitle: "Origin Spaces | Docs",
     metaDescription:
       "Learn how Origin spaces isolate AI work memory by project, client, or context using ORIGIN_SPACE, spaces.toml, origin space commands, and doctor resolver state.",
@@ -1902,7 +1920,7 @@ export const docPages: DocPage[] = [
     ],
     updatedAt: DOCS_UPDATED_AT,
     author: DEFAULT_AUTHOR,
-    readingTime: "5 min read",
+    readingTime: "6 min read",
     summary: [
       "Spaces are memory buckets for different work contexts, such as origin, career, ideas, or a client project.",
       "They reduce context bleed while keeping one local daemon and one Origin installation.",
@@ -1929,9 +1947,24 @@ export const docPages: DocPage[] = [
       {
         heading: "Configure defaults",
         body: [
-          "Origin can read space configuration from ~/.origin/spaces.toml. The plugin repository includes an example spaces.toml you can adapt.",
-          "Use origin doctor when you are unsure which space is active. Doctor reports the resolver state so you can see whether environment, config, or project context selected the space.",
+          "Origin can read space configuration from ~/.origin/spaces.toml. Map directory prefixes to spaces when you want a repo or notes folder to select the same context every time.",
+          "Longest matching prefix wins. A top-level default applies when no mapping matches.",
         ],
+        code: {
+          label: "spaces.toml",
+          code: spacesTomlExample,
+        },
+      },
+      {
+        heading: "Resolver order",
+        body: [
+          "Origin resolves the active space through a priority chain. Explicit overrides win, then the shell environment, then spaces.toml, then the current git repo name, then topic fallback, then personal.",
+          "Use origin doctor when you are unsure which layer selected the current space. Doctor prints the resolver state so you can diagnose accidental context bleed.",
+        ],
+        code: {
+          label: "Priority chain",
+          code: spaceResolverChain,
+        },
       },
       {
         heading: "How recall behaves",
