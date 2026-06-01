@@ -67,6 +67,17 @@ origin doctor
 origin install
 origin uninstall`;
 
+const updateCommands = `# refresh the local runtime installed under ~/.origin/bin
+npx -y @7xuanlu/origin setup
+
+# verify after any update
+~/.origin/bin/origin status
+~/.origin/bin/origin doctor`;
+
+const uninstallCommands = `~/.origin/bin/origin uninstall
+
+# then remove Origin from each MCP client's settings if you added it manually`;
+
 const cliDailyCommands = `origin recall "origin website positioning"
 origin search "MCP setup"
 origin store "We chose spaces for client separation" --type decision
@@ -631,6 +642,96 @@ export const docPages: DocPage[] = [
         body: [
           "Use Claude Code slash commands for the richest daily workflow. Use MCP tools from clients that support them. Use the CLI for setup, diagnostics, scripts, service management, and cases where a client UI hides too much detail.",
           "All three paths reach the same daemon, so they should agree on memory state when setup is healthy.",
+        ],
+      },
+    ],
+    nextSlug: "updates-and-uninstall",
+  },
+  {
+    slug: "updates-and-uninstall",
+    group: "Reference",
+    eyebrow: "Lifecycle",
+    title: "Updates and Uninstall",
+    description:
+      "Refresh Origin's local runtime, verify version health, restart MCP clients, and remove the service without losing data by accident.",
+    metaTitle: "Update or Uninstall Origin | Docs",
+    metaDescription:
+      "Learn how to update Origin's local runtime, verify status with origin doctor, handle MCP client restarts, and uninstall the daemon safely.",
+    keywords: [
+      "update Origin",
+      "uninstall Origin",
+      "Origin version",
+      "Origin doctor",
+      "Origin MCP update",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "4 min read",
+    summary: [
+      "Use setup and doctor to refresh and verify the local runtime under ~/.origin/bin.",
+      "Uninstalling the service is separate from deleting memory data; keep those decisions explicit.",
+    ],
+    sections: [
+      {
+        heading: "When to update",
+        body: [
+          "Update when release notes mention a setup fix, new MCP client support, service-management change, or runtime bug that affects your machine.",
+          "If everything is working, you do not need to chase every main-branch PR. Use the changelog to distinguish stable releases from unreleased work.",
+        ],
+        link: {
+          label: "Read the changelog",
+          href: "/docs/changelog",
+        },
+      },
+      {
+        heading: "Refresh the local runtime",
+        body: [
+          "For MCP clients outside Claude Code, rerun the setup command to refresh the local CLI, daemon, and MCP connector installed under ~/.origin/bin.",
+          "After updating, run status and doctor before judging the client integration. That separates a runtime problem from a client restart or settings problem.",
+        ],
+        code: {
+          label: "Terminal",
+          code: updateCommands,
+        },
+      },
+      {
+        heading: "Claude Code plugin users",
+        body: [
+          "Claude Code plugin updates happen through Claude Code's plugin marketplace flow. After the plugin changes, restart Claude Code if prompted and run /init again.",
+          "/init verifies the plugin, daemon, MCP route, and a memory round trip, so it is the right post-update check.",
+        ],
+        code: {
+          label: "Claude Code",
+          code: "/init",
+        },
+      },
+      {
+        heading: "MCP client settings",
+        body: [
+          "If origin-mcp moved, or a client still launches an old path, rerun origin mcp add for that client. Use --dry-run when you want to inspect the generated config first.",
+          "Most MCP clients need a restart after settings change. Verify by running the client's Origin doctor or a small capture/recall round trip.",
+        ],
+        code: {
+          label: "MCP refresh",
+          code: "~/.origin/bin/origin mcp add codex --dry-run\n~/.origin/bin/origin mcp add cursor",
+        },
+      },
+      {
+        heading: "Uninstall the service",
+        body: [
+          "origin uninstall removes the per-user service registration: launchd on macOS, systemd user units on Linux, or the Windows Task Scheduler logon task.",
+          "That is intentionally different from deleting memory data. Do not delete ~/.origin or the daemon data directory unless you have decided you no longer need those records.",
+        ],
+        code: {
+          label: "Terminal",
+          code: uninstallCommands,
+        },
+      },
+      {
+        heading: "Before deleting data",
+        body: [
+          "Memory data may include project history, private preferences, client context, pages, sessions, and local git history. Treat it like private application data.",
+          "If you are removing Origin because setup failed, open an issue with redacted doctor output before deleting data. The diagnostic state is often the fastest way to fix the install path.",
         ],
       },
     ],
@@ -1727,7 +1828,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Near-term documentation gaps",
         body: [
-          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, HTTP API, spaces, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, configuration, evaluation, and troubleshooting are the current core path.",
+          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, updates, HTTP API, spaces, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, configuration, evaluation, and troubleshooting are the current core path.",
           "The remaining gaps are deeper per-endpoint API examples, release-specific upgrade notes, and mature retrieval docs once opt-in experiments become stable defaults.",
         ],
       },

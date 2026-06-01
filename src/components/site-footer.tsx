@@ -68,6 +68,14 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
+                  href="/docs/updates-and-uninstall"
+                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
+                >
+                  Updates
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/docs"
                   className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
                 >
