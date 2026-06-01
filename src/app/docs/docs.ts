@@ -153,6 +153,22 @@ const diagnosticCommands = `# Claude Code
 ~/.origin/bin/origin mcp add codex --dry-run
 lsof -nP -iTCP:7878 -sTCP:LISTEN`;
 
+const memoryTypeValues = `identity     durable facts about the user
+preference   habits, style choices, or user preferences
+decision     a choice made with rationale
+lesson       root cause, workaround, or technical insight
+gotcha       sharp edge, warning, or negative learning
+fact         durable knowledge about people, projects, or tools`;
+
+const memoryTypeTiers = `Protected: identity, preference
+Standard:  decision, lesson, gotcha, fact
+Ephemeral: missing or invalid memory_type`;
+
+const memoryTypeAliases = `profile    classify into identity or preference
+knowledge  classify into fact, lesson, or gotcha
+goal       deprecated; folds into identity
+correction/custom/recap  legacy compatibility; folds into fact`;
+
 const platformMatrix = `macOS    arm64, x64              launchd user agent
 Linux    x86_64, aarch64 glibc  systemd user unit
 Windows  x86_64                 Task Scheduler ONLOGON task`;
@@ -695,6 +711,100 @@ export const docPages: DocPage[] = [
           "Origin gives you storage, embeddings, dedupe, hybrid search, and MCP recall without requiring a local model or API key.",
           "Claude Code skills can still classify captures, write handoffs, and distill pages because the agent already has language intelligence in the session.",
         ],
+      },
+    ],
+    nextSlug: "memory-types",
+  },
+  {
+    slug: "memory-types",
+    group: "Reference",
+    eyebrow: "Memory",
+    title: "Memory Types",
+    description:
+      "Understand Origin's six canonical memory types, how agents choose them, and which legacy aliases still appear at API boundaries.",
+    metaTitle: "Origin Memory Types | Docs",
+    metaDescription:
+      "Reference Origin's canonical memory_type values: identity, preference, decision, lesson, gotcha, and fact, plus stability tiers and legacy aliases.",
+    keywords: [
+      "Origin memory types",
+      "Origin memory_type",
+      "AI work memory taxonomy",
+      "Origin capture types",
+      "Origin memory schema",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "Origin's current public taxonomy has six canonical memory types: identity, preference, decision, lesson, gotcha, and fact.",
+      "Corrections are still valid capture content, but correction is not a canonical memory_type value in the current wire taxonomy.",
+    ],
+    sections: [
+      {
+        heading: "Canonical values",
+        body: [
+          "The daemon stores canonical memory_type values as lowercase strings. Claude Code skills pick one of these values in local memory mode; model-equipped daemon paths can classify on the daemon side.",
+          "Use the type that best explains why the memory should matter later, not merely the first label that seems plausible.",
+        ],
+        code: {
+          label: "memory_type",
+          code: memoryTypeValues,
+        },
+      },
+      {
+        heading: "How to choose",
+        body: [
+          "Use decision for a concrete choice with rationale. Use preference for a recurring user habit or style. Use lesson when the work produced a reusable insight.",
+          "Use gotcha for traps and warnings. Use fact for durable knowledge about people, projects, tools, or the work itself. Use identity only for durable facts about the user.",
+        ],
+        link: {
+          label: "Read capture quality",
+          href: "/docs/capture-quality",
+        },
+      },
+      {
+        heading: "Corrections and supersession",
+        body: [
+          "A correction is a kind of capture intent, not a canonical memory_type. When a fact changes, capture the corrected statement and include what it supersedes.",
+          "Origin can then surface revision or supersession behavior while keeping future recall pointed at the current fact.",
+        ],
+        link: {
+          label: "Read review and trust",
+          href: "/docs/review-and-trust",
+        },
+      },
+      {
+        heading: "Stability tiers",
+        body: [
+          "Origin treats identity and preference as protected because they describe the user. Standard work memories can still be important, but they are easier to supersede when new work changes the current record.",
+          "Missing or invalid types are treated as ephemeral at the stability boundary. Good captures should avoid leaving the type ambiguous when the agent can classify confidently.",
+        ],
+        code: {
+          label: "Stability",
+          code: memoryTypeTiers,
+        },
+      },
+      {
+        heading: "Aliases and compatibility",
+        body: [
+          "Some high-level or legacy labels can still appear at API boundaries. They exist for compatibility or classification flows, not as the six user-facing values agents should prefer.",
+          "For new captures, choose one of the canonical values unless the daemon or skill explicitly handles the alias.",
+        ],
+        code: {
+          label: "Aliases",
+          code: memoryTypeAliases,
+        },
+      },
+      {
+        heading: "API usage",
+        body: [
+          "memory/store accepts memory_type as an optional field. If you provide it, use the canonical lowercase value.",
+          "If you are building a Rust local tool, prefer origin-types so invalid values fail visibly instead of drifting through untyped JSON.",
+        ],
+        link: {
+          label: "Read typed clients",
+          href: "/docs/typed-clients",
+        },
       },
     ],
     nextSlug: "glossary",
@@ -3448,7 +3558,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Near-term documentation gaps",
         body: [
-          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, updates, upgrade notes, packages, platform support, HTTP API, API examples, spaces, graph context, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, backup and migration, configuration, environment variables, diagnostics, FAQ, evaluation, desktop status, releases, testing, and troubleshooting are the current core path.",
+          "The product docs should stay practical. Setup, daily workflow, capture quality, memory types, architecture, commands, CLI/service management, updates, upgrade notes, packages, platform support, HTTP API, API examples, spaces, graph context, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, backup and migration, configuration, environment variables, diagnostics, FAQ, evaluation, desktop status, releases, testing, and troubleshooting are the current core path.",
           "The remaining gap is mature retrieval documentation once opt-in experiments become stable defaults.",
         ],
       },
