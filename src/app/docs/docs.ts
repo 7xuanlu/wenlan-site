@@ -110,6 +110,17 @@ const packageVerificationCommands = `~/.origin/bin/origin status
 ~/.origin/bin/origin mcp add codex --dry-run
 ~/.origin/bin/origin mcp add cursor --dry-run`;
 
+const releaseFlow = `merge to main
+  -> release-please updates the release PR
+  -> merge the release PR when ready to ship
+  -> tag workflow builds binaries and publishes packages
+  -> users refresh with npx -y @7xuanlu/origin setup`;
+
+const releaseBumpRules = `fix:              patch release before 1.0
+feat:             minor release before 1.0
+BREAKING CHANGE:  minor release before 1.0
+docs/test/chore:  no release entry by default`;
+
 const pluginInstallCommands = `/plugin marketplace add 7xuanlu/origin
 /plugin install origin@7xuanlu
 # restart Claude Code if prompted
@@ -3167,6 +3178,89 @@ export const docPages: DocPage[] = [
         },
       },
     ],
+    nextSlug: "releases-and-versioning",
+  },
+  {
+    slug: "releases-and-versioning",
+    group: "Project",
+    eyebrow: "Releases",
+    title: "Releases and Versioning",
+    description:
+      "Understand how Origin turns merged work into tagged releases, package versions, binaries, npm packages, and crates.",
+    metaTitle: "Origin Releases and Versioning | Docs",
+    metaDescription:
+      "Learn Origin's release-please flow, pre-1.0 version bump rules, package publishing surfaces, and how users should distinguish released behavior from main-branch work.",
+    keywords: [
+      "Origin releases",
+      "Origin versioning",
+      "release-please Origin",
+      "origin-mcp npm release",
+      "Origin crates.io release",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "CHANGELOG.md and GitHub Releases are the user-facing record for shipped behavior.",
+      "release-please prepares the release PR; tag workflows publish the local runtime packages and binaries.",
+    ],
+    sections: [
+      {
+        heading: "Release source of truth",
+        body: [
+          "For users, the shipped record is the GitHub release, CHANGELOG.md, and the packages installed by the Claude Code plugin or npx setup.",
+          "Merged PRs can describe useful work, but they are not the same as a release until a tag and changelog entry publish that behavior.",
+        ],
+        link: {
+          label: "Read the changelog",
+          href: "/docs/changelog",
+        },
+      },
+      {
+        heading: "How a release moves",
+        body: [
+          "Origin uses release-please to maintain a release PR from merged commits. When that release PR is merged, tag-based workflows build and publish the local runtime.",
+          "The release workflow ships the daemon CLI, origin-server, origin-mcp, standalone binaries, npm packages, crates, and Homebrew tap updates. The optional desktop app releases from its own repository.",
+        ],
+        code: {
+          label: "Release flow",
+          code: releaseFlow,
+        },
+      },
+      {
+        heading: "Version bump rules",
+        body: [
+          "Origin is pre-1.0, so release bump semantics are intentionally conservative. In this repo, feat commits bump the minor version before 1.0; fix commits bump patch.",
+          "Squash merge titles matter because the squash commit message is what release-please reads. A PR titled feat: should only land that way when a minor release is intended.",
+        ],
+        code: {
+          label: "Commit prefixes",
+          code: releaseBumpRules,
+        },
+      },
+      {
+        heading: "What gets published",
+        body: [
+          "The release pipeline publishes the pieces users install: @7xuanlu/origin for the Claude Code plugin and setup path, origin-mcp for MCP clients, origin-types for Rust consumers, release archives, and Homebrew artifacts.",
+          "Version files in the repo stay aligned so the CLI, daemon, MCP connector, npm packages, and crates all describe the same runtime generation.",
+        ],
+        link: {
+          label: "Read package names",
+          href: "/docs/packages-and-registries",
+        },
+      },
+      {
+        heading: "How users should upgrade",
+        body: [
+          "Users should read the changelog, rerun npx setup or /init, verify origin doctor, and restart MCP clients after package or connector changes.",
+          "If a page says a feature is on main, opt-in, or experimental, do not assume it is available in your installed runtime until a release page says so.",
+        ],
+        link: {
+          label: "Read upgrade notes",
+          href: "/docs/upgrade-notes",
+        },
+      },
+    ],
     nextSlug: "roadmap",
   },
   {
@@ -3223,7 +3317,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Near-term documentation gaps",
         body: [
-          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, updates, upgrade notes, packages, platform support, HTTP API, API examples, spaces, graph context, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, backup and migration, configuration, diagnostics, FAQ, evaluation, desktop status, and troubleshooting are the current core path.",
+          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, updates, upgrade notes, packages, platform support, HTTP API, API examples, spaces, graph context, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, backup and migration, configuration, diagnostics, FAQ, evaluation, desktop status, releases, and troubleshooting are the current core path.",
           "The remaining gap is mature retrieval documentation once opt-in experiments become stable defaults.",
         ],
       },

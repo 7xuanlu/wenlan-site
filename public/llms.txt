@@ -63,6 +63,7 @@
 - [Evaluation](https://useorigin.app/docs/evaluation): Retrieval benchmark scope, current LongMemEval and LoCoMo snapshot, and rerun methodology.
 - [Desktop app status](https://useorigin.app/docs/desktop-app): Whether the optional GUI is required, how the separate desktop repo fits, and what the daemon still owns.
 - [Changelog](https://useorigin.app/docs/changelog): Stable release notes and how to read unreleased main-branch work.
+- [Releases and versioning](https://useorigin.app/docs/releases-and-versioning): How release-please, tags, package publishing, npm packages, crates, binaries, and pre-1.0 version bumps work.
 - [Roadmap and status](https://useorigin.app/docs/roadmap): Released, on-main, and planned work without confusing roadmap themes for shipped guarantees.
 - [Project scope](https://useorigin.app/docs/project-scope): What Origin is for and what it deliberately avoids.
 - [Build from source](https://useorigin.app/docs/build-from-source): Source build, workspace crates, platform notes, and contributor checks.

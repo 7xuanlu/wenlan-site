@@ -73,7 +73,7 @@ const docsSections = [
   {
     title: "Project",
     description:
-      "Security reporting, evaluation, desktop status, releases, roadmap, project scope, source builds, and contribution paths for people deciding whether Origin is credible enough to adopt or contribute to.",
+      "Security reporting, evaluation, desktop status, changelog, release/versioning, roadmap, project scope, source builds, and contribution paths for people deciding whether Origin is credible enough to adopt or contribute to.",
     items: docPages
       .filter((page) => page.group === "Project")
       .map((page) => ({
