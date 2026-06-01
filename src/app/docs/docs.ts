@@ -227,6 +227,22 @@ const configurationFiles = `~/.origin/
 ~/.local/share/origin/
 %LOCALAPPDATA%\\origin\\`;
 
+const runtimeEnvVars = `ORIGIN_SPACE=client-a
+ORIGIN_BIND_ADDR=127.0.0.1:7878
+ORIGIN_BIND_ADDR=0.0.0.0:7878  # Docker or VM only
+ANTHROPIC_API_KEY=sk-ant-...`;
+
+const devIsolationEnvVars = `ORIGIN_PORT=7879
+ORIGIN_DATA_DIR=/tmp/origin-test
+cargo run -p origin-server`;
+
+const windowsEnvVars = `ORT_DYLIB_PATH=C:\\path\\to\\origin\\onnxruntime.dll`;
+
+const evalEnvVars = `EVAL_BASELINES_DIR=$HOME/.cache/origin-eval
+EVAL_LOCOMO_LIMIT=25
+EVAL_LME_LIMIT=25
+ANTHROPIC_API_KEY=sk-ant-...`;
+
 const captureExamples = `/capture We chose source-backed pages because summaries need provenance.
 /capture Supersedes earlier setup docs: Windows now uses a Task Scheduler ONLOGON task.
 /capture Gotcha: Do not paste private memory contents into public issues.`;
@@ -2476,6 +2492,100 @@ export const docPages: DocPage[] = [
         },
       },
     ],
+    nextSlug: "environment-variables",
+  },
+  {
+    slug: "environment-variables",
+    group: "Reference",
+    eyebrow: "Config",
+    title: "Environment Variables",
+    description:
+      "Know which Origin environment variables are normal configuration, which are development-only, and which belong to eval or Windows repair paths.",
+    metaTitle: "Origin Environment Variables | Docs",
+    metaDescription:
+      "Reference Origin environment variables including ORIGIN_SPACE, ORIGIN_BIND_ADDR, ORIGIN_PORT, ORIGIN_DATA_DIR, ORT_DYLIB_PATH, ANTHROPIC_API_KEY, and eval cache variables.",
+    keywords: [
+      "Origin environment variables",
+      "ORIGIN_SPACE",
+      "ORIGIN_BIND_ADDR",
+      "ORIGIN_DATA_DIR",
+      "ORT_DYLIB_PATH",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "Most users should configure Origin with /init, origin setup, origin mcp add, origin model, origin key, and origin space.",
+      "Environment variables are for scoped overrides: spaces, daemon networking, dev isolation, Windows runtime repair, and eval runs.",
+    ],
+    sections: [
+      {
+        heading: "Use commands first",
+        body: [
+          "Origin's normal configuration path is command-driven. Use /init or npx setup for installation, origin mcp add for clients, origin space for spaces, and origin key or origin model for optional language features.",
+          "Reach for environment variables when you need a temporary override, a scripted run, or a development/eval setup that should not become the default for every session.",
+        ],
+      },
+      {
+        heading: "Normal runtime overrides",
+        body: [
+          "ORIGIN_SPACE selects the active memory bucket for the current shell or process. ORIGIN_BIND_ADDR changes the daemon bind address and should stay loopback unless you intentionally expose the daemon in Docker or a VM.",
+          "ANTHROPIC_API_KEY is only needed when you opt into daemon-side Anthropic work. The core local memory loop does not require it.",
+        ],
+        code: {
+          label: "Runtime variables",
+          code: runtimeEnvVars,
+        },
+      },
+      {
+        heading: "Development isolation",
+        body: [
+          "Developers sometimes need a separate port and data directory so a test daemon does not share the same database as the installed product runtime.",
+          "Use those overrides deliberately and together. A different port without a different data directory can still point development work at production-like local memory data.",
+        ],
+        code: {
+          label: "Isolated daemon",
+          code: devIsolationEnvVars,
+        },
+      },
+      {
+        heading: "Windows runtime repair",
+        body: [
+          "If Windows cannot load the bundled ONNX Runtime library, point ORT_DYLIB_PATH at the onnxruntime.dll inside the Origin install directory before starting the daemon.",
+          "This is a repair path, not a normal setup step. Start with origin doctor when the daemon fails to start.",
+        ],
+        code: {
+          label: "Windows",
+          code: windowsEnvVars,
+        },
+      },
+      {
+        heading: "Eval variables",
+        body: [
+          "Eval variables belong to benchmark and maintainer workflows. They control cache location, fixture truncation, and API-backed judge access.",
+          "Do not use eval variables to make product claims casually. Public numbers should follow the eval methodology and state run count, fixture, model, and limits.",
+        ],
+        code: {
+          label: "Eval examples",
+          code: evalEnvVars,
+        },
+        link: {
+          label: "Read evaluation",
+          href: "/docs/evaluation",
+        },
+      },
+      {
+        heading: "Security boundary",
+        body: [
+          "Environment variables can change where Origin listens, where it stores data, and which provider keys it can use. Treat those values like operational configuration, not copy-paste snippets.",
+          "Never publish a shell transcript that includes API keys, private data paths, or a non-loopback daemon address you did not mean to expose.",
+        ],
+        link: {
+          label: "Read data and privacy",
+          href: "/docs/data-and-privacy",
+        },
+      },
+    ],
     nextSlug: "mcp-clients",
   },
   {
@@ -3338,7 +3448,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Near-term documentation gaps",
         body: [
-          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, updates, upgrade notes, packages, platform support, HTTP API, API examples, spaces, graph context, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, backup and migration, configuration, diagnostics, FAQ, evaluation, desktop status, releases, testing, and troubleshooting are the current core path.",
+          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, updates, upgrade notes, packages, platform support, HTTP API, API examples, spaces, graph context, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, backup and migration, configuration, environment variables, diagnostics, FAQ, evaluation, desktop status, releases, testing, and troubleshooting are the current core path.",
           "The remaining gap is mature retrieval documentation once opt-in experiments become stable defaults.",
         ],
       },
