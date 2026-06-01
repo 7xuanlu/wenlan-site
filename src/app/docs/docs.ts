@@ -62,6 +62,36 @@ const evalSnapshot = `Benchmark                         Recall@5   MRR     NDCG@
 LongMemEval oracle, 500 Q          93.6%     0.857   0.883
 LoCoMo locomo10                    70.0%     0.647   0.684`;
 
+const serviceCommands = `origin status
+origin doctor
+origin install
+origin uninstall`;
+
+const cliDailyCommands = `origin recall "origin website positioning"
+origin search "MCP setup"
+origin store "We chose spaces for client separation" --type decision
+origin list --limit 10`;
+
+const spaceCommands = `ORIGIN_SPACE=career claude
+
+origin space list
+origin space add ideas --default
+origin space show ideas
+origin space move scratch career`;
+
+const gitHistoryCommands = `cd ~/.origin
+git log --oneline --decorate --all -20
+git show --stat HEAD
+git diff HEAD~1 -- pages/`;
+
+const modelSetupCommands = `origin setup --basic
+origin model install qwen3-4b
+origin key set anthropic
+
+origin model status
+origin key status
+origin doctor`;
+
 export const docPages: DocPage[] = [
   {
     slug: "daily-workflow",
@@ -392,6 +422,357 @@ export const docPages: DocPage[] = [
         body: [
           "Start with /brief in Claude Code or context in another MCP client. Save durable knowledge with capture. Search history with recall. Close a serious session with /handoff.",
           "Use /review, /distill, and /read when memory needs maintenance or a topic deserves a page.",
+        ],
+      },
+    ],
+    nextSlug: "cli-and-service",
+  },
+  {
+    slug: "cli-and-service",
+    group: "Reference",
+    eyebrow: "CLI",
+    title: "CLI and Service Management",
+    description:
+      "Use the Origin CLI to install the runtime, manage the daemon, inspect status, search memory, and wire MCP clients.",
+    metaTitle: "Origin CLI and Service Management | Docs",
+    metaDescription:
+      "Learn the Origin CLI commands for setup, daemon service management, doctor diagnostics, recall, search, store, spaces, and MCP client configuration.",
+    keywords: [
+      "Origin CLI",
+      "origin doctor",
+      "origin install",
+      "origin service management",
+      "origin mcp add",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "The origin CLI is the terminal control surface for setup, diagnostics, service management, recall, search, store, spaces, models, keys, and MCP config.",
+      "The daemon still owns memory. The CLI talks to that daemon instead of writing the database directly.",
+    ],
+    sections: [
+      {
+        heading: "Install the runtime",
+        body: [
+          "For non-Claude Code clients, start by installing the local Origin runtime. This puts the CLI, daemon, and MCP connector under ~/.origin/bin.",
+          "Claude Code plugin users can usually run /init instead; it verifies the same local runtime and MCP route from inside Claude Code.",
+        ],
+        code: {
+          label: "Terminal",
+          code: originSetupCommand,
+        },
+      },
+      {
+        heading: "Check the daemon",
+        body: [
+          "The daemon listens on 127.0.0.1:7878 and owns storage, search, pages, graph context, and distill cycles. Use status for a quick health check and doctor for a fuller setup report.",
+          "Service installation is per-user. Origin uses launchd on macOS, systemd user units on Linux, and a Task Scheduler logon task on Windows.",
+        ],
+        code: {
+          label: "Service commands",
+          code: serviceCommands,
+        },
+      },
+      {
+        heading: "Use memory from the terminal",
+        body: [
+          "The CLI can recall, search, store, and list memory from scripts or from a plain terminal session. It is useful when you need a repeatable diagnostic or when your current tool does not expose Origin commands directly.",
+          "Use specific queries. Project names, feature names, people, and decisions usually retrieve better context than generic phrases.",
+        ],
+        code: {
+          label: "Daily CLI",
+          code: cliDailyCommands,
+        },
+      },
+      {
+        heading: "Wire MCP clients",
+        body: [
+          "After setup, use origin mcp add to configure a supported MCP client. The command writes or previews the client-specific config that launches the local origin-mcp connector.",
+          "Use --dry-run when you want to inspect the generated config before changing a client settings file.",
+        ],
+        code: {
+          label: "MCP setup",
+          code: "~/.origin/bin/origin mcp add codex\n~/.origin/bin/origin mcp add cursor --dry-run",
+        },
+      },
+      {
+        heading: "When to use the CLI",
+        body: [
+          "Use Claude Code slash commands for the richest daily workflow. Use MCP tools from clients that support them. Use the CLI for setup, diagnostics, scripts, service management, and cases where a client UI hides too much detail.",
+          "All three paths reach the same daemon, so they should agree on memory state when setup is healthy.",
+        ],
+      },
+    ],
+    nextSlug: "spaces",
+  },
+  {
+    slug: "spaces",
+    group: "Reference",
+    eyebrow: "Spaces",
+    title: "Spaces",
+    description:
+      "Separate work, personal, client, and project memory so agents do not blend unrelated context.",
+    metaTitle: "Origin Spaces | Docs",
+    metaDescription:
+      "Learn how Origin spaces isolate AI work memory by project, client, or context using ORIGIN_SPACE, spaces.toml, origin space commands, and doctor resolver state.",
+    keywords: [
+      "Origin spaces",
+      "AI memory spaces",
+      "ORIGIN_SPACE",
+      "origin space commands",
+      "separate AI work memory",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "Spaces are memory buckets for different work contexts, such as origin, career, ideas, or a client project.",
+      "They reduce context bleed while keeping one local daemon and one Origin installation.",
+    ],
+    sections: [
+      {
+        heading: "What a space is",
+        body: [
+          "A space is a named partition for memories, pages, and recall context. It is for separating work streams that should not automatically inform each other.",
+          "Use spaces when you switch between clients, personal projects, experiments, or repos with very different context.",
+        ],
+      },
+      {
+        heading: "Set the active space",
+        body: [
+          "The most explicit override is ORIGIN_SPACE. It is useful when launching an agent for a specific context and you want every capture and recall to stay in that bucket.",
+          "The CLI also includes origin space commands for listing, adding, inspecting, and moving spaces.",
+        ],
+        code: {
+          label: "Space commands",
+          code: spaceCommands,
+        },
+      },
+      {
+        heading: "Configure defaults",
+        body: [
+          "Origin can read space configuration from ~/.origin/spaces.toml. The plugin repository includes an example spaces.toml you can adapt.",
+          "Use origin doctor when you are unsure which space is active. Doctor reports the resolver state so you can see whether environment, config, or project context selected the space.",
+        ],
+      },
+      {
+        heading: "How recall behaves",
+        body: [
+          "Recall should start inside the active space so a client project does not accidentally pull personal notes or an unrelated repo history.",
+          "If you intentionally need cross-space context, move or recapture the durable fact into the right space rather than relying on accidental bleed.",
+        ],
+      },
+      {
+        heading: "What spaces are not",
+        body: [
+          "Spaces are not separate user accounts, encryption boundaries, or permission systems. They are product-level context separation inside your local Origin store.",
+          "For sensitive work, still treat the whole local machine and connected AI client as part of the privacy boundary.",
+        ],
+      },
+    ],
+    nextSlug: "source-backed-pages",
+  },
+  {
+    slug: "source-backed-pages",
+    group: "Reference",
+    eyebrow: "Pages",
+    title: "Source-Backed Pages",
+    description:
+      "Understand how Origin turns atomic captures into readable pages with source memory IDs, revision state, and refresh paths.",
+    metaTitle: "Origin Source-Backed Pages | Docs",
+    metaDescription:
+      "Learn how Origin distilled pages work: source-backed Markdown pages, provenance, stale reasons, revision state, /distill, and /read.",
+    keywords: [
+      "Origin pages",
+      "source-backed pages",
+      "distilled pages",
+      "AI memory provenance",
+      "Origin distill",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "Atomic memories are good for recall, but repeated work eventually needs a readable synthesis.",
+      "Origin pages are Markdown artifacts backed by source memories so the synthesized view is inspectable instead of anonymous.",
+    ],
+    sections: [
+      {
+        heading: "Why pages exist",
+        body: [
+          "Raw captures are intentionally small. That makes them easy to search, deduplicate, correct, and cite, but a mature project needs more than a long list of fragments.",
+          "Distilled pages compose related captures into a wiki-style record. They are for concepts, projects, decisions, workflows, and recurring lessons that deserve a stable surface.",
+        ],
+      },
+      {
+        heading: "Provenance is mandatory",
+        body: [
+          "Origin tracks which memories contributed to a page. That source backing is part of the trust model: a page should not read like it appeared from nowhere.",
+          "When a page feels wrong, inspect the source memories and either correct the memory, refresh the page, or capture the missing context.",
+        ],
+      },
+      {
+        heading: "Distill and read",
+        body: [
+          "/distill asks Origin to synthesize or refresh pages from related memories. /read previews a page inside the agent session without forcing you to leave the tool.",
+          "Use distillation before a new project phase, after a long sprint, or when recall keeps surfacing the same cluster of memories.",
+        ],
+        code: {
+          label: "Claude Code",
+          code: "/distill\n/read <page>",
+        },
+      },
+      {
+        heading: "Staleness and revision state",
+        body: [
+          "Pages can become stale when new memories contradict them, extend them, or show that an old summary is no longer enough.",
+          "Origin tracks revision state so refreshes can be deliberate. The point is not to overwrite human-readable records casually; it is to keep them improving as the project changes.",
+        ],
+      },
+      {
+        heading: "Edit carefully",
+        body: [
+          "The Markdown files are readable and can be inspected with normal tools. If you hand-edit a page, treat it like a human-owned artifact.",
+          "When you need the system to learn something new, prefer capturing the atomic fact or correction too. That keeps search, provenance, and future pages aligned.",
+        ],
+      },
+    ],
+    nextSlug: "local-git-history",
+  },
+  {
+    slug: "local-git-history",
+    group: "Reference",
+    eyebrow: "Versioning",
+    title: "Local Git History",
+    description:
+      "Inspect the real git history Origin keeps for local memory, page, session, and status artifacts.",
+    metaTitle: "Origin Local Git History | Docs",
+    metaDescription:
+      "Learn how Origin uses a real local git repository under ~/.origin/.git to version memory artifacts, pages, sessions, handoffs, and status files.",
+    keywords: [
+      "Origin git history",
+      "AI memory versioning",
+      "local git memory",
+      "Origin handoff history",
+      "inspect Origin pages",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "Origin versions local artifacts with a real git repository under ~/.origin/.git.",
+      "Git history is for inspection, accountability, recovery, and understanding what changed across sessions.",
+    ],
+    sections: [
+      {
+        heading: "What is versioned",
+        body: [
+          "Origin writes human-facing artifacts under ~/.origin, including pages, session handoffs, and current status records. Those artifacts are committed into a local git repository.",
+          "The git log gives you a practical audit trail for memory work: what changed, when it changed, and which artifacts were touched.",
+        ],
+      },
+      {
+        heading: "Inspect history",
+        body: [
+          "Use normal git commands from ~/.origin to inspect recent memory writes and page changes. This is often faster than opening the database when you want to understand a human-readable change.",
+          "The repository is local. It is not pushed anywhere unless you explicitly sync or publish it yourself.",
+        ],
+        code: {
+          label: "Terminal",
+          code: gitHistoryCommands,
+        },
+      },
+      {
+        heading: "Recover with care",
+        body: [
+          "Git can help recover a previous Markdown page or session note, but do not treat manual git restore as a full database rollback.",
+          "If the durable knowledge is wrong, the safer product path is to capture a correction or forget the memory by ID. That keeps the index and readable artifacts aligned.",
+        ],
+      },
+      {
+        heading: "Use with your notes",
+        body: [
+          "Because pages and sessions are normal files, you can inspect them from editors, terminals, or personal note tools. Some users symlink pages into a vault for reading.",
+          "Keep writes disciplined. Origin should remain the writer for generated artifacts unless you intentionally edit a human-owned page.",
+        ],
+        code: {
+          label: "Example",
+          code: "ln -s ~/.origin/pages ~/Documents/Origin-pages",
+        },
+      },
+      {
+        heading: "Privacy boundary",
+        body: [
+          "Local git history makes Origin more inspectable, but it also means old versions may contain old private context.",
+          "Do not publish, sync, or attach ~/.origin blindly. Redact or create minimal reproductions when reporting bugs.",
+        ],
+      },
+    ],
+    nextSlug: "models-and-keys",
+  },
+  {
+    slug: "models-and-keys",
+    group: "Reference",
+    eyebrow: "Models",
+    title: "Models and Keys",
+    description:
+      "Choose between local memory mode, optional on-device models, and optional Anthropic API keys for richer distill cycles.",
+    metaTitle: "Origin Models and Keys | Docs",
+    metaDescription:
+      "Understand Origin setup modes: no-model local memory, optional on-device models, optional Anthropic API keys, model status, key status, and privacy implications.",
+    keywords: [
+      "Origin models",
+      "Origin API keys",
+      "local memory mode",
+      "Qwen3-4B",
+      "Anthropic API key",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "Origin works without downloading a local model or adding an API key.",
+      "Optional models and keys add heavier language work such as extraction, page synthesis, recaps, and richer distill cycles.",
+    ],
+    sections: [
+      {
+        heading: "Three setup levels",
+        body: [
+          "Start with local memory mode unless you know you need automated language-heavy maintenance. It gives you storage, embeddings, dedupe, hybrid search, MCP recall, and local artifacts.",
+          "Add an on-device model or Anthropic key when you want richer daemon-side extraction, page synthesis, recaps, and knowledge graph work.",
+        ],
+        code: {
+          label: "Setup options",
+          code: modelSetupCommands,
+        },
+      },
+      {
+        heading: "Local memory mode",
+        body: [
+          "Local memory mode is the no-model default. It is enough for the core work loop: brief, capture, recall, handoff, distill from the agent side, and inspect local artifacts.",
+          "This mode is also the right starting point when you want the smallest install path or when a machine cannot run local model inference comfortably.",
+        ],
+      },
+      {
+        heading: "On-device model",
+        body: [
+          "An on-device model lets the daemon perform more language work locally. It can help with classification, extraction, title generation, recaps, and other maintenance tasks without sending those daemon-side prompts to an external API.",
+          "Local model capability is still bounded by hardware and context limits. For large distillation jobs, an API provider can be stronger when you choose to configure one.",
+        ],
+      },
+      {
+        heading: "Anthropic key",
+        body: [
+          "A configured Anthropic key is bring-your-own-key for daemon-side language tasks. It is optional and should be treated as an explicit tradeoff: stronger language work in exchange for sending the relevant task prompt to the API provider.",
+          "Your connected AI client may already call its own provider during normal chat. This page only describes Origin's daemon-side model and key paths.",
+        ],
+      },
+      {
+        heading: "Agent-side fallback",
+        body: [
+          "Claude Code skills can classify captures, write handoffs, and synthesize pages from inside the active agent session. That is why Origin remains useful before you configure a daemon model.",
+          "The daemon stays the store and retrieval layer. The agent can supply language judgment when it is already in the work context.",
         ],
       },
     ],
@@ -837,8 +1218,8 @@ export const docPages: DocPage[] = [
       {
         heading: "Near-term documentation gaps",
         body: [
-          "The product docs should stay practical. The most important next docs after this pass are deeper pages for spaces, source-backed pages, local git history, and advanced retrieval modes once they stabilize.",
-          "Until then, the best public entry points are setup, daily workflow, architecture, data and privacy, evaluation, and troubleshooting.",
+          "The product docs should stay practical. Setup, daily workflow, architecture, commands, CLI/service management, spaces, source-backed pages, local git history, models and keys, data and privacy, evaluation, and troubleshooting are the current core path.",
+          "The largest remaining gap is advanced retrieval documentation. That should wait until the opt-in retrieval work stabilizes enough to describe without confusing experiments for shipped defaults.",
         ],
       },
       {

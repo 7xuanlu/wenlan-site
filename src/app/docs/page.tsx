@@ -59,7 +59,7 @@ const docsSections = [
   {
     title: "Reference",
     description:
-      "Commands, architecture, local data, MCP clients, and repair paths for daily use.",
+      "Commands, CLI/service management, spaces, pages, git history, local data, MCP clients, and repair paths for daily use.",
     items: docPages
       .filter((page) => page.group === "Reference")
       .map((page) => ({
@@ -181,7 +181,8 @@ export default function DocsPage() {
             <p className="mt-3 max-w-[20rem] text-sm leading-relaxed text-[var(--o-text-secondary)] sm:max-w-2xl">
               New users should install first, run setup for their client, then
               read the daily workflow and core concepts. The project docs cover
-              architecture, evals, releases, roadmap, and contribution paths.
+              architecture, reference paths, evals, releases, roadmap, and
+              contribution paths.
             </p>
           </div>
 

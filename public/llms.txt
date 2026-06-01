@@ -32,6 +32,11 @@
 ## Reference
 
 - [Commands](https://useorigin.app/docs/commands): Origin CLI subcommands and the MCP tools the daemon exposes.
+- [CLI and service management](https://useorigin.app/docs/cli-and-service): Setup, daemon status, doctor, service install/uninstall, terminal recall/search/store, and MCP client wiring.
+- [Spaces](https://useorigin.app/docs/spaces): Separate work, personal, client, and project memory buckets without running multiple Origin installs.
+- [Source-backed pages](https://useorigin.app/docs/source-backed-pages): How atomic captures become readable Markdown pages with source memory IDs, revision state, and refresh paths.
+- [Local git history](https://useorigin.app/docs/local-git-history): Inspect the real git history Origin keeps under ~/.origin/.git for pages, sessions, handoffs, and status artifacts.
+- [Models and keys](https://useorigin.app/docs/models-and-keys): No-model local memory mode, optional on-device models, optional Anthropic keys, and the privacy/capability tradeoffs.
 - [Data and privacy](https://useorigin.app/docs/data-and-privacy): What lives where on disk, what leaves the machine, what does not.
 - [MCP clients](https://useorigin.app/docs/mcp-clients): Setup notes for Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and VS Code.
 - [Troubleshooting](https://useorigin.app/docs/troubleshooting): Common failure modes and the daemon repair paths.
