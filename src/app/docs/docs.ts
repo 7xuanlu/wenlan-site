@@ -78,6 +78,15 @@ const uninstallCommands = `~/.origin/bin/origin uninstall
 
 # then remove Origin from each MCP client's settings if you added it manually`;
 
+const diagnosticCommands = `# Claude Code
+/init
+
+# Terminal
+~/.origin/bin/origin status
+~/.origin/bin/origin doctor
+~/.origin/bin/origin mcp add codex --dry-run
+lsof -nP -iTCP:7878 -sTCP:LISTEN`;
+
 const platformMatrix = `macOS    arm64, x64              launchd user agent
 Linux    x86_64, aarch64 glibc  systemd user unit
 Windows  x86_64                 Task Scheduler ONLOGON task`;
@@ -1735,6 +1744,87 @@ export const docPages: DocPage[] = [
         },
       },
     ],
+    nextSlug: "diagnostics-and-issue-reports",
+  },
+  {
+    slug: "diagnostics-and-issue-reports",
+    group: "Reference",
+    eyebrow: "Diagnostics",
+    title: "Diagnostics and Issue Reports",
+    description:
+      "Run the right checks before asking for help, separate daemon problems from client problems, and share only redacted output.",
+    metaTitle: "Origin Diagnostics and Issue Reports | Docs",
+    metaDescription:
+      "Use /init, origin status, origin doctor, MCP dry-run output, and port checks to diagnose Origin setup issues before opening a redacted GitHub issue.",
+    keywords: [
+      "Origin diagnostics",
+      "origin doctor",
+      "Origin issue report",
+      "Origin logs",
+      "MCP diagnostics",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "Start diagnostics with /init, origin status, origin doctor, and an MCP dry-run for the client that fails.",
+      "Good issue reports include environment and redacted diagnostics, not private memory contents or full ~/.origin archives.",
+    ],
+    sections: [
+      {
+        heading: "Run the short checklist",
+        body: [
+          "Use the smallest command set that separates daemon health, client wiring, and port conflicts.",
+          "If you are in Claude Code, start with /init. If you are in another client, use the terminal commands and the client's MCP status UI.",
+        ],
+        code: {
+          label: "Diagnostics",
+          code: diagnosticCommands,
+        },
+      },
+      {
+        heading: "Read the failure layer",
+        body: [
+          "If status or doctor cannot reach the daemon, focus on runtime setup, service registration, platform paths, and port 7878.",
+          "If the daemon is healthy but the client has no tools, focus on MCP configuration, client restarts, and whether the client is launching the expected origin-mcp path.",
+        ],
+      },
+      {
+        heading: "Port 7878 conflicts",
+        body: [
+          "Only one Origin daemon should own the local database. A stale daemon from another checkout can make setup look broken even when the current install is fine.",
+          "If port 7878 is occupied, identify what process is listening before restarting clients or changing configuration.",
+        ],
+      },
+      {
+        heading: "What to include in an issue",
+        body: [
+          "Include the client name, operating system, install path you used, exact command, expected behavior, actual behavior, and redacted diagnostic output.",
+          "Mention whether /init or origin doctor passed, and whether a small capture/recall round trip works from any client.",
+        ],
+        bullets: [
+          "Client: Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, VS Code, or other.",
+          "Platform: macOS, Linux, Windows, Docker, VM, or WSL if relevant.",
+          "Runtime: plugin setup, npx setup, source build, or migrated install.",
+          "Diagnostics: /init output, origin status, origin doctor, and MCP dry-run output after redaction.",
+        ],
+        link: {
+          label: "Open a GitHub issue",
+          href: "https://github.com/7xuanlu/origin/issues",
+        },
+      },
+      {
+        heading: "What to redact",
+        body: [
+          "Do not paste private captures, client names, repo names, API keys, tokens, full session logs, or full ~/.origin archives into public issues.",
+          "Replace sensitive project text with placeholders while keeping the structure of the failure visible. If the report is security-sensitive, use the private advisory path instead.",
+        ],
+        link: {
+          label: "Security reporting",
+          href: "/docs/security",
+        },
+      },
+    ],
     nextSlug: "security",
   },
   {
@@ -2015,7 +2105,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Near-term documentation gaps",
         body: [
-          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, updates, platform support, HTTP API, spaces, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, backup and migration, configuration, evaluation, and troubleshooting are the current core path.",
+          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, updates, platform support, HTTP API, spaces, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, backup and migration, configuration, diagnostics, evaluation, and troubleshooting are the current core path.",
           "The remaining gaps are deeper per-endpoint API examples, release-specific upgrade notes, and mature retrieval docs once opt-in experiments become stable defaults.",
         ],
       },
