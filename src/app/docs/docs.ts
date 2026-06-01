@@ -1447,6 +1447,82 @@ export const docPages: DocPage[] = [
         },
       },
     ],
+    nextSlug: "security",
+  },
+  {
+    slug: "security",
+    group: "Project",
+    eyebrow: "Security",
+    title: "Security and Reporting",
+    description:
+      "Report vulnerabilities privately, keep diagnostic reports redacted, and understand Origin's local security boundary.",
+    metaTitle: "Origin Security and Vulnerability Reporting | Docs",
+    metaDescription:
+      "Learn how to report Origin security issues, use the public security policy, avoid leaking private memory contents, and understand Origin's local-first security boundary.",
+    keywords: [
+      "Origin security",
+      "Origin vulnerability reporting",
+      "Origin security policy",
+      "AI memory security",
+      "local memory privacy",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "4 min read",
+    summary: [
+      "Use GitHub Issues for normal bugs and feature requests; use the private security channel for vulnerabilities.",
+      "Do not paste private memory contents, API keys, client names, or ~/.origin archives into public reports.",
+    ],
+    sections: [
+      {
+        heading: "Where to report",
+        body: [
+          "Normal setup bugs, docs issues, and feature requests belong in GitHub Issues with redacted diagnostic output.",
+          "Vulnerabilities should be reported privately through GitHub Security Advisories or security@useorigin.app. The public security.txt file points to the same reporting paths.",
+        ],
+        bullets: [
+          "Public bugs: include client, OS, command, expected behavior, actual behavior, and redacted /init, doctor, or origin status output.",
+          "Security reports: include impact, reproduction steps, affected version or commit, and only the minimum redacted data needed to reproduce.",
+          "Never attach ~/.origin, the daemon database, private captures, API keys, or unredacted project logs to a public issue.",
+        ],
+        link: {
+          label: "Open a private advisory",
+          href: "https://github.com/7xuanlu/origin/security/advisories/new",
+        },
+      },
+      {
+        heading: "Local-first boundary",
+        body: [
+          "Origin keeps the memory layer local by default: daemon, database, Markdown artifacts, sessions, and git history live on your machine.",
+          "That does not make every connected workflow offline. Your AI client may send prompts to its own provider, and Origin can optionally use configured model or API paths for daemon-side language work.",
+        ],
+      },
+      {
+        heading: "Secrets and memory contents",
+        body: [
+          "Treat memory as sensitive application data. It can contain project decisions, personal preferences, private codebase details, client names, and old versions preserved by local git history.",
+          "If a bug involves a sensitive memory, create a minimal reproduction with fake content instead of sharing the real record.",
+        ],
+      },
+      {
+        heading: "Network exposure",
+        body: [
+          "The daemon binds to 127.0.0.1:7878 by default. That keeps the HTTP API local to the machine for normal use.",
+          "Changing ORIGIN_BIND_ADDR to a non-loopback address is an explicit security decision. Do it only for deliberate Docker, VM, or development scenarios where you understand who can reach the daemon.",
+        ],
+      },
+      {
+        heading: "Security policy",
+        body: [
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy.",
+          "If in doubt, choose the private advisory path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
+        ],
+        link: {
+          label: "Read security.txt",
+          href: "/.well-known/security.txt",
+        },
+      },
+    ],
     nextSlug: "evaluation",
   },
   {

@@ -169,6 +169,14 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link
+                  href="/docs/security"
+                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
+                >
+                  Security
+                </Link>
+              </li>
+              <li>
                 <a
                   href="https://github.com/7xuanlu/origin"
                   target="_blank"
