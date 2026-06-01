@@ -45,7 +45,7 @@ const docsSections = [
   {
     title: "After setup",
     description:
-      "Turn the install into a working habit: start warm, capture decisions, and hand off before context goes cold.",
+      "Turn the install into a working habit: start warm, capture useful context, and hand off before context goes cold.",
     items: docPages
       .filter((page) => page.group === "After setup")
       .map((page) => ({
@@ -59,7 +59,7 @@ const docsSections = [
   {
     title: "Reference",
     description:
-      "Commands, CLI/service management, spaces, pages, git history, local data, MCP clients, and repair paths for daily use.",
+      "Commands, CLI/service management, HTTP API, spaces, pages, git history, retrieval status, local data, MCP clients, and repair paths.",
     items: docPages
       .filter((page) => page.group === "Reference")
       .map((page) => ({
@@ -73,7 +73,7 @@ const docsSections = [
   {
     title: "Project",
     description:
-      "Evaluation, releases, roadmap, and contribution paths for people deciding whether Origin is credible enough to adopt or contribute to.",
+      "Evaluation, releases, roadmap, project scope, source builds, and contribution paths for people deciding whether Origin is credible enough to adopt or contribute to.",
     items: docPages
       .filter((page) => page.group === "Project")
       .map((page) => ({
@@ -181,8 +181,8 @@ export default function DocsPage() {
             <p className="mt-3 max-w-[20rem] text-sm leading-relaxed text-[var(--o-text-secondary)] sm:max-w-2xl">
               New users should install first, run setup for their client, then
               read the daily workflow and core concepts. The project docs cover
-              architecture, reference paths, evals, releases, roadmap, and
-              contribution paths.
+              architecture, reference paths, evals, releases, scope, source
+              builds, roadmap, and contribution paths.
             </p>
           </div>
 

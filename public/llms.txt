@@ -8,6 +8,7 @@
 - [About](https://useorigin.app/about): Project background and the person behind Origin.
 - [Get started](https://useorigin.app/docs/get-started): Install the Claude Code plugin or run Origin setup for another MCP client, then verify the first memory round trip locally.
 - [Daily workflow](https://useorigin.app/docs/daily-workflow): Capture, handoff, distill. The session loop that makes AI work compound across days.
+- [Capture quality](https://useorigin.app/docs/capture-quality): What to capture, what to skip, and how corrections, review, distill, and forget fit the memory loop.
 - [Core concepts](https://useorigin.app/docs/core-concepts): Memories, pages, entities, sessions, sources. The vocabulary the daemon enforces.
 - [Architecture](https://useorigin.app/docs/architecture): Daemon-first system map: origin-server, origin-core, origin-cli, origin-mcp, origin-types, and the Claude Code plugin.
 
@@ -33,16 +34,20 @@
 
 - [Commands](https://useorigin.app/docs/commands): Origin CLI subcommands and the MCP tools the daemon exposes.
 - [CLI and service management](https://useorigin.app/docs/cli-and-service): Setup, daemon status, doctor, service install/uninstall, terminal recall/search/store, and MCP client wiring.
+- [HTTP API](https://useorigin.app/docs/http-api): Local daemon surfaces that the plugin, CLI, MCP connector, and local tools call under the hood.
 - [Spaces](https://useorigin.app/docs/spaces): Separate work, personal, client, and project memory buckets without running multiple Origin installs.
 - [Source-backed pages](https://useorigin.app/docs/source-backed-pages): How atomic captures become readable Markdown pages with source memory IDs, revision state, and refresh paths.
 - [Local git history](https://useorigin.app/docs/local-git-history): Inspect the real git history Origin keeps under ~/.origin/.git for pages, sessions, handoffs, and status artifacts.
 - [Models and keys](https://useorigin.app/docs/models-and-keys): No-model local memory mode, optional on-device models, optional Anthropic keys, and the privacy/capability tradeoffs.
+- [Advanced retrieval status](https://useorigin.app/docs/advanced-retrieval): Stable hybrid retrieval plus opt-in main-branch retrieval experiments and their release-status caveats.
 - [Data and privacy](https://useorigin.app/docs/data-and-privacy): What lives where on disk, what leaves the machine, what does not.
 - [MCP clients](https://useorigin.app/docs/mcp-clients): Setup notes for Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and VS Code.
 - [Troubleshooting](https://useorigin.app/docs/troubleshooting): Common failure modes and the daemon repair paths.
 - [Evaluation](https://useorigin.app/docs/evaluation): Retrieval benchmark scope, current LongMemEval and LoCoMo snapshot, and rerun methodology.
 - [Changelog](https://useorigin.app/docs/changelog): Stable release notes and how to read unreleased main-branch work.
 - [Roadmap and status](https://useorigin.app/docs/roadmap): Released, on-main, and planned work without confusing roadmap themes for shipped guarantees.
+- [Project scope](https://useorigin.app/docs/project-scope): What Origin is for and what it deliberately avoids.
+- [Build from source](https://useorigin.app/docs/build-from-source): Source build, workspace crates, platform notes, and contributor checks.
 - [Contributing](https://useorigin.app/docs/contributing): Development setup, useful issues, PR process, architecture rules, and license notes.
 
 ## Optional

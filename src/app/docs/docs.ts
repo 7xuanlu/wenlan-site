@@ -92,6 +92,44 @@ origin model status
 origin key status
 origin doctor`;
 
+const captureExamples = `/capture We chose source-backed pages because summaries need provenance.
+/capture Supersedes earlier setup docs: Windows now uses a Task Scheduler ONLOGON task.
+/capture Gotcha: Do not paste private memory contents into public issues.`;
+
+const httpSurfaces = `/api/health
+/api/status
+/api/setup/status
+/api/memory/store
+/api/memory/search
+/api/chat-context
+/api/memory/list
+/api/memory/confirm/{id}
+/api/distill
+/api/on-device-model
+/api/setup/anthropic-key`;
+
+const buildFromSourceCommands = `git clone https://github.com/7xuanlu/origin.git
+cd origin
+cargo build --workspace
+cargo run -p origin-server
+
+# before a PR
+cargo fmt --check --all
+cargo clippy --workspace --all-targets -- -D warnings
+cargo test --workspace`;
+
+const retrievalFlags = `ORIGIN_ENABLE_GRAPH_GATE
+ORIGIN_ENABLE_TEMPORAL_FILTER
+ORIGIN_ENABLE_FTS_HARDENING
+ORIGIN_ENABLE_SESSION_DIVERSITY
+ORIGIN_ENABLE_SALIENCE_PRIOR
+ORIGIN_ENABLE_FACT_CHANNEL
+ORIGIN_ENABLE_GRAPH_KHOP
+ORIGIN_ENABLE_GLOBAL_PRELUDE
+ORIGIN_ENABLE_COT_RETRIEVAL
+ORIGIN_LLM_ROUTE
+ORIGIN_ENABLE_CONTEXT_COMPRESS`;
+
 export const docPages: DocPage[] = [
   {
     slug: "daily-workflow",
@@ -179,6 +217,78 @@ export const docPages: DocPage[] = [
           "/review revisions: accept or dismiss pending memory revisions.",
           "/distill: synthesize related memories into readable pages.",
           "/read: preview a distilled page without leaving the agent session.",
+        ],
+      },
+    ],
+    nextSlug: "capture-quality",
+  },
+  {
+    slug: "capture-quality",
+    group: "After setup",
+    eyebrow: "Capture",
+    title: "Capture Quality",
+    description:
+      "Decide what belongs in Origin: durable facts, decisions, lessons, gotchas, corrections, and project context.",
+    metaTitle: "Origin Capture Quality | Docs",
+    metaDescription:
+      "Learn what to capture in Origin, what to skip, how to write useful atomic memories, and how corrections, review, distill, and forget fit the memory loop.",
+    keywords: [
+      "Origin capture",
+      "AI memory capture",
+      "what to capture",
+      "memory correction",
+      "Claude Code capture",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "Good captures are durable, atomic, specific, and include why the fact matters.",
+      "Skip tool output, command logs, filler, temporary todos, and facts the repo can derive directly.",
+    ],
+    sections: [
+      {
+        heading: "The capture test",
+        body: [
+          "Capture something when a future AI session would waste time rediscovering it or would make a worse decision without it.",
+          "The best captures name the project, tool, person, decision, or constraint and include why it matters. That gives retrieval enough surface area to find it later.",
+        ],
+      },
+      {
+        heading: "Good capture shapes",
+        body: [
+          "Origin works best when each memory carries one idea. One idea per capture makes deduplication, supersession, review, and page distillation easier.",
+          "Use capture for decisions, lessons, gotchas, preferences, project constraints, corrections, and durable facts about how work should continue.",
+        ],
+        code: {
+          label: "Claude Code",
+          code: captureExamples,
+        },
+      },
+      {
+        heading: "What to skip",
+        body: [
+          "Do not capture raw command output, long logs, temporary todos, or facts that are already obvious from source files. Origin is the memory layer for durable work context, not a transcript archive.",
+          "If the source artifact is the authority, keep the capture short and point to the decision or lesson that a future agent should remember.",
+        ],
+        bullets: [
+          "Skip: full test output, stack traces, generated diffs, and tool logs.",
+          "Skip: conversational filler, acknowledgements, and one-off status messages.",
+          "Skip: repo facts an agent can read directly, unless the important part is why that fact matters.",
+        ],
+      },
+      {
+        heading: "Corrections and supersession",
+        body: [
+          "When a fact changes, capture the correction instead of silently editing history in your head. Name what it supersedes and why the new fact should replace the old one.",
+          "For sensitive or wrong records that should not remain at all, use /forget with the memory ID. Forget is destructive, so prefer correction when the history is still useful.",
+        ],
+      },
+      {
+        heading: "Review and distill",
+        body: [
+          "/review is for inspecting pending captures or revisions. /distill is for turning repeated clusters into readable pages.",
+          "Use review when trust is the question. Use distill when synthesis is the question.",
         ],
       },
     ],
@@ -504,6 +614,73 @@ export const docPages: DocPage[] = [
         ],
       },
     ],
+    nextSlug: "http-api",
+  },
+  {
+    slug: "http-api",
+    group: "Reference",
+    eyebrow: "API",
+    title: "HTTP API",
+    description:
+      "Know the local daemon surfaces that the CLI, MCP connector, plugin, and local tools call under the hood.",
+    metaTitle: "Origin HTTP API | Docs",
+    metaDescription:
+      "Reference Origin's local daemon HTTP API surfaces for health, setup, memory store/search, context, review, distill, model setup, and Anthropic key setup.",
+    keywords: [
+      "Origin HTTP API",
+      "Origin daemon API",
+      "127.0.0.1 7878",
+      "AI memory API",
+      "origin-server API",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "The daemon listens locally on 127.0.0.1:7878 and owns the HTTP API.",
+      "Most users should use the plugin, MCP tools, or CLI; the HTTP API explains what those clients call underneath.",
+    ],
+    sections: [
+      {
+        heading: "Local daemon boundary",
+        body: [
+          "origin-server is the local API boundary. Clients do not write the database directly; they ask the daemon to store, search, recall, distill, confirm, or diagnose memory.",
+          "The default bind address is 127.0.0.1:7878. That local-only default is part of the product boundary: one machine owns the memory layer unless you deliberately change daemon networking.",
+        ],
+      },
+      {
+        heading: "Main surfaces",
+        body: [
+          "The server README groups the public surfaces into health/status, setup, memory ingest/search, review, pages, and model/key setup.",
+          "These are implementation-level routes, not a stability promise for third-party SDKs. For normal use, prefer the CLI or MCP tools.",
+        ],
+        code: {
+          label: "Daemon routes",
+          code: httpSurfaces,
+        },
+      },
+      {
+        heading: "Client mapping",
+        body: [
+          "Claude Code slash commands and MCP tools are product workflows over these routes. /brief and context ask for a context bundle. /capture and capture store one durable memory. /distill triggers page synthesis. doctor checks daemon and setup state.",
+          "The CLI uses the same daemon for status, doctor, search, recall, store, list, model, key, MCP config, and spaces.",
+        ],
+      },
+      {
+        heading: "What not to build against yet",
+        body: [
+          "Origin is not positioning the HTTP API as a hosted memory SDK. It is primarily the local daemon contract for first-party clients and local tools.",
+          "If you need automation, start with the CLI or MCP connector. They carry the current product semantics better than hand-written HTTP calls.",
+        ],
+      },
+      {
+        heading: "Diagnostics",
+        body: [
+          "If a client cannot reach memory, check daemon health first with origin doctor or the MCP doctor tool. Then inspect whether the client is launching origin-mcp and whether port 7878 is occupied by an old daemon.",
+          "For bug reports, include the client, operating system, command you ran, expected result, actual result, and redacted doctor output.",
+        ],
+      },
+    ],
     nextSlug: "spaces",
   },
   {
@@ -773,6 +950,74 @@ export const docPages: DocPage[] = [
         body: [
           "Claude Code skills can classify captures, write handoffs, and synthesize pages from inside the active agent session. That is why Origin remains useful before you configure a daemon model.",
           "The daemon stays the store and retrieval layer. The agent can supply language judgment when it is already in the work context.",
+        ],
+      },
+    ],
+    nextSlug: "advanced-retrieval",
+  },
+  {
+    slug: "advanced-retrieval",
+    group: "Reference",
+    eyebrow: "Retrieval",
+    title: "Advanced Retrieval Status",
+    description:
+      "Understand Origin's shipped retrieval path and the opt-in main-branch experiments behind newer retrieval work.",
+    metaTitle: "Origin Advanced Retrieval Status | Docs",
+    metaDescription:
+      "Read Origin's retrieval status: shipped hybrid retrieval, page channel, graph context, evaluation limits, and opt-in experimental flags on main.",
+    keywords: [
+      "Origin retrieval",
+      "hybrid retrieval",
+      "AI memory retrieval",
+      "LongMemEval",
+      "LoCoMo",
+      "retrieval flags",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "6 min read",
+    summary: [
+      "The stable public path is hybrid retrieval over embeddings, FTS5, pages, and graph context.",
+      "Recent main-branch PRs add many opt-in retrieval experiments; treat them as evaluation work until a release promotes them.",
+    ],
+    sections: [
+      {
+        heading: "Stable retrieval path",
+        body: [
+          "Origin's released retrieval combines vector embeddings, FTS5 full-text search, graph context, pages, and Reciprocal Rank Fusion. The goal is not a single magic ranking signal; it is a compact context bundle that helps the next AI session continue work.",
+          "The public README snapshot reports retrieval metrics, not end-to-end answer quality. Read the evaluation page before using the numbers in comparisons.",
+        ],
+      },
+      {
+        heading: "Pages are part of retrieval",
+        body: [
+          "Origin treats distilled pages as retrieval surfaces, not only as human-readable notes. That matters because repeated project context often becomes clearer as a page than as isolated captures.",
+          "A useful recall can include atomic memories, source-backed pages, graph neighbors, and decisions. The best result set is the one that gives the agent enough context without replaying a full chat history.",
+        ],
+      },
+      {
+        heading: "Opt-in main-branch work",
+        body: [
+          "After v0.7.0, main received a large opt-in retrieval batch. Examples include graph gates, temporal filters, query decomposition, FTS hardening, session diversity, salience priors, fact channels, k-hop graph traversal, global preludes, CoT retrieval, LLM routing, and context compression.",
+          "These flags are useful for development and evaluation, but they should not be described as default product behavior until the release notes say so.",
+        ],
+        code: {
+          label: "Example opt-in flags",
+          code: retrievalFlags,
+        },
+      },
+      {
+        heading: "How to read experiments",
+        body: [
+          "A retrieval experiment can improve one benchmark slice and hurt another. Origin's eval discipline is deliberately conservative: compare under the same schema, fixture revision, embedder, and run protocol.",
+          "When a feature is opt-in, the docs should say which problem it targets and which release status it has instead of implying it is the normal user path.",
+        ],
+      },
+      {
+        heading: "When to care",
+        body: [
+          "Most users should care about whether /brief, context, and recall bring the right project facts forward. Maintainers should care about benchmark slices, regression guards, and whether new retrieval work reduces real cold starts.",
+          "If recall feels weak, first improve the query and capture quality. Then distill repeated topics into pages before reaching for experimental retrieval flags.",
         ],
       },
     ],
@@ -1218,8 +1463,8 @@ export const docPages: DocPage[] = [
       {
         heading: "Near-term documentation gaps",
         body: [
-          "The product docs should stay practical. Setup, daily workflow, architecture, commands, CLI/service management, spaces, source-backed pages, local git history, models and keys, data and privacy, evaluation, and troubleshooting are the current core path.",
-          "The largest remaining gap is advanced retrieval documentation. That should wait until the opt-in retrieval work stabilizes enough to describe without confusing experiments for shipped defaults.",
+          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, HTTP API, spaces, source-backed pages, local git history, models and keys, retrieval status, data and privacy, evaluation, and troubleshooting are the current core path.",
+          "The remaining gaps are deeper per-endpoint API examples, release-specific migration notes, and mature retrieval docs once opt-in experiments become stable defaults.",
         ],
       },
       {
@@ -1231,6 +1476,140 @@ export const docPages: DocPage[] = [
         link: {
           label: "Open current GitHub issues",
           href: "https://github.com/7xuanlu/origin/issues",
+        },
+      },
+    ],
+    nextSlug: "project-scope",
+  },
+  {
+    slug: "project-scope",
+    group: "Project",
+    eyebrow: "Scope",
+    title: "Project Scope",
+    description:
+      "What Origin is for, what it deliberately avoids, and how to decide whether it fits your AI work.",
+    metaTitle: "Origin Project Scope | Docs",
+    metaDescription:
+      "Understand what Origin is and is not: local-first AI work memory, not a life OS, not a workflow suite, not a memory SDK, and not for one-off chats.",
+    keywords: [
+      "Origin project scope",
+      "what Origin is not",
+      "AI work memory scope",
+      "local memory tool",
+      "MCP memory scope",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "Origin focuses on AI work context that spans sessions, projects, tools, and weeks.",
+      "It deliberately avoids becoming a life OS, broad workflow suite, hosted memory SDK, or transcript archive.",
+    ],
+    sections: [
+      {
+        heading: "What Origin is for",
+        body: [
+          "Origin is for serious AI work where decisions, lessons, gotchas, project constraints, and handoffs need to survive beyond one chat.",
+          "The product shape is narrow on purpose: one local daemon, shared memory across MCP clients, source-backed pages, review before trust, and readable local artifacts.",
+        ],
+      },
+      {
+        heading: "Not a life OS",
+        body: [
+          "Origin does not try to own habits, calendars, journaling, personal planning, or a full life-management system.",
+          "Those domains can produce useful memories, but Origin's scope is the AI work artifact: what an agent needs to continue work correctly.",
+        ],
+      },
+      {
+        heading: "Not a workflow suite",
+        body: [
+          "Origin is not trying to bundle dozens of agents, research loops, and productivity workflows. It is the memory layer those workflows can use.",
+          "That tradeoff keeps the product easier to understand: capture, recall, handoff, distill, inspect, and continue.",
+        ],
+      },
+      {
+        heading: "Not a memory SDK",
+        body: [
+          "Origin exposes a local daemon and MCP connector, but it is not positioned as backend infrastructure for other apps to add cloud memory features.",
+          "The intended user is someone using AI tools daily who wants local, inspectable, shared work context.",
+        ],
+      },
+      {
+        heading: "Not for one-off chats",
+        body: [
+          "If a conversation is disposable, Origin may add more ceremony than value. The product starts paying off when work crosses sessions, tools, people, or weeks.",
+          "A simple test: if the next agent should know it without you explaining it again, it probably belongs in Origin.",
+        ],
+      },
+    ],
+    nextSlug: "build-from-source",
+  },
+  {
+    slug: "build-from-source",
+    group: "Project",
+    eyebrow: "Development",
+    title: "Build from Source",
+    description:
+      "Build the Origin daemon, CLI, MCP server, shared types, core crate, and plugin from the public repository.",
+    metaTitle: "Build Origin from Source | Docs",
+    metaDescription:
+      "Learn how to build Origin from source, run the daemon locally, understand workspace crates, and run contributor verification commands.",
+    keywords: [
+      "build Origin from source",
+      "Origin development setup",
+      "origin-server cargo build",
+      "Origin Rust workspace",
+      "contribute to Origin",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "The main repo is a Rust workspace with origin-core, origin-server, origin-cli, origin-mcp, and origin-types.",
+      "Use the source build path for development; most users should install through the plugin or npx setup.",
+    ],
+    sections: [
+      {
+        heading: "When to build",
+        body: [
+          "Build from source when you are developing Origin, testing a branch, debugging the daemon, or preparing a contribution.",
+          "If you only want to use Origin, install through the Claude Code plugin or npx setup instead. The release path installs prebuilt binaries into ~/.origin/bin.",
+        ],
+      },
+      {
+        heading: "Workspace build",
+        body: [
+          "The repository is a Cargo workspace. First builds can take several minutes, especially on macOS where llama.cpp compiles with Metal support.",
+          "Run the daemon directly during development. For product-path testing, build release binaries and use origin setup, install, status, and doctor.",
+        ],
+        code: {
+          label: "Source build",
+          code: buildFromSourceCommands,
+        },
+      },
+      {
+        heading: "Crate boundaries",
+        body: [
+          "origin-core owns business logic and must stay free of Axum and Tauri dependencies. origin-server frames HTTP requests. origin-types stays lightweight because downstream clients consume it.",
+          "origin-mcp bridges MCP clients to the daemon. origin-cli manages setup, service state, recall, search, store, spaces, models, keys, and doctor checks.",
+        ],
+      },
+      {
+        heading: "Platform notes",
+        body: [
+          "Origin supports macOS arm64/x64, Linux x86_64/aarch64 with glibc, and Windows x86_64. The service manager differs by platform: launchd, systemd user units, or a Task Scheduler logon task.",
+          "Linux and Windows builds are CPU-only by default. macOS keeps Metal acceleration for local model paths.",
+        ],
+      },
+      {
+        heading: "Before opening a PR",
+        body: [
+          "Keep changes focused and evidence-backed. Add or update tests for behavior changes, run the relevant checks, and avoid unrelated refactors.",
+          "Docs changes should remove ambiguity or stale public language. Eval changes should follow the repository's citation discipline instead of publishing unsupported headline claims.",
+        ],
+        link: {
+          label: "Read CONTRIBUTING.md",
+          href: "https://github.com/7xuanlu/origin/blob/main/CONTRIBUTING.md",
         },
       },
     ],
