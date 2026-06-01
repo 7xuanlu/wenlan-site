@@ -34,6 +34,7 @@
 ## Reference
 
 - [Commands](https://useorigin.app/docs/commands): Origin CLI subcommands and the MCP tools the daemon exposes.
+- [Claude Code plugin](https://useorigin.app/docs/claude-code-plugin): The richest Origin workflow inside Claude Code: /init, /brief, /capture, /recall, /handoff, /distill, /review, the SessionStart hook, and local memory mode.
 - [CLI and service management](https://useorigin.app/docs/cli-and-service): Setup, daemon status, doctor, service install/uninstall, terminal recall/search/store, and MCP client wiring.
 - [Updates and uninstall](https://useorigin.app/docs/updates-and-uninstall): Refresh the local runtime, verify with doctor, restart MCP clients, and remove the per-user service safely.
 - [Upgrade notes](https://useorigin.app/docs/upgrade-notes): What to rerun, verify, and restart when Origin releases change the plugin, npm setup, MCP connector, daemon service, spaces, or platform support.

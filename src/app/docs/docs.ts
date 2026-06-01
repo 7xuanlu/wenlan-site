@@ -110,6 +110,29 @@ const packageVerificationCommands = `~/.origin/bin/origin status
 ~/.origin/bin/origin mcp add codex --dry-run
 ~/.origin/bin/origin mcp add cursor --dry-run`;
 
+const pluginInstallCommands = `/plugin marketplace add 7xuanlu/origin
+/plugin install origin@7xuanlu
+# restart Claude Code if prompted
+/init`;
+
+const pluginDailyCommands = `/init       setup + diagnosis
+/help       one-screen reference
+/brief      load session context
+/capture    save one durable memory
+/recall     search local memory
+/distill    synthesize or refresh pages
+/read       preview a page inline
+/review     audit pending captures or revisions
+/forget     delete a memory by ID
+/handoff    end-of-session debrief
+/debrief    alias for /handoff`;
+
+const pluginDataPaths = `~/.origin/pages/               distilled wiki pages
+~/.origin/sessions/            session logs
+~/.origin/sessions/_status/    current project status
+~/.origin/db/                  link to daemon store
+~/.origin/bin/                 installed binaries`;
+
 const diagnosticCommands = `# Claude Code
 /init
 
@@ -776,6 +799,99 @@ export const docPages: DocPage[] = [
           "Start with /brief in Claude Code or context in another MCP client. Save durable knowledge with capture. Search history with recall. Close a serious session with /handoff.",
           "Use /review, /distill, and /read when memory needs maintenance or a topic deserves a page.",
         ],
+      },
+    ],
+    nextSlug: "claude-code-plugin",
+  },
+  {
+    slug: "claude-code-plugin",
+    group: "Reference",
+    eyebrow: "Plugin",
+    title: "Claude Code Plugin",
+    description:
+      "Use Origin's richest workflow inside Claude Code: setup, session brief, capture, recall, review, distill, read, and handoff.",
+    metaTitle: "Origin Claude Code Plugin | Docs",
+    metaDescription:
+      "Install and use the Origin Claude Code plugin with /init, /brief, /capture, /recall, /handoff, /distill, /review, /forget, the SessionStart hook, and local memory mode.",
+    keywords: [
+      "Origin Claude Code plugin",
+      "Claude Code memory plugin",
+      "Origin slash commands",
+      "Origin /init",
+      "Claude Code MCP memory",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "6 min read",
+    summary: [
+      "The Claude Code plugin is the fastest and richest Origin path because it adds slash commands around the local daemon and MCP connector.",
+      "/init is the setup and repair command: it verifies daemon reachability, MCP wiring, local memory setup, and a first round trip.",
+    ],
+    sections: [
+      {
+        heading: "Install path",
+        body: [
+          "Install through Claude Code's plugin marketplace, restart if Claude Code asks, then run /init.",
+          "/init is designed to be the single setup check. It installs or verifies the local runtime, configures local memory, checks daemon and MCP reachability, and confirms a memory round trip.",
+        ],
+        code: {
+          label: "Claude Code",
+          code: pluginInstallCommands,
+        },
+      },
+      {
+        heading: "What the plugin adds",
+        body: [
+          "The plugin adds Claude Code skills and slash commands on top of the same local Origin daemon that other MCP clients use.",
+          "That means Claude Code gets a more ergonomic workflow, while the memory itself remains shared with Codex, Cursor, Claude Desktop, VS Code, Gemini CLI, and other MCP-compatible clients when configured.",
+        ],
+      },
+      {
+        heading: "Daily command surface",
+        body: [
+          "Most sessions need only /brief at the start, /capture when something durable happens, /recall for a specific lookup, and /handoff before the session ends.",
+          "The other commands are maintenance and inspection paths for when memory needs review, distillation, deletion, or inline reading.",
+        ],
+        code: {
+          label: "Plugin commands",
+          code: pluginDailyCommands,
+        },
+      },
+      {
+        heading: "SessionStart hook",
+        body: [
+          "The plugin includes a SessionStart hook that probes the local daemon on 127.0.0.1:7878.",
+          "The hook is intentionally light: it prints a nudge to run /init when the daemon is down. It does not own installation logic and should not block a session.",
+        ],
+      },
+      {
+        heading: "Local memory mode",
+        body: [
+          "By default, /init configures local memory. That means no model download, no API key, and no cloud sync requirement for the basic memory loop.",
+          "The daemon stores, embeds, deduplicates, and serves hybrid search. Claude Code skills can still classify captures, write handoffs, and synthesize pages because the agent already has language judgment in the active session.",
+        ],
+      },
+      {
+        heading: "Where data appears",
+        body: [
+          "The plugin does not store data by itself. It guides Claude Code to use local MCP tools, and those tools talk to the Origin daemon.",
+          "Readable artifacts live under ~/.origin, so you can inspect pages, session logs, project status, and installed binaries without opening a separate app.",
+        ],
+        code: {
+          label: "Local artifacts",
+          code: pluginDataPaths,
+        },
+      },
+      {
+        heading: "Plugin versus MCP-only",
+        body: [
+          "MCP-only setup gives clients tools for context, capture, recall, doctor, and page distillation. It does not install Claude Code slash skills like /brief, /handoff, /distill, or /init.",
+          "Use the plugin when Claude Code is your main surface. Use MCP-only setup when you want Origin in other clients or when you intentionally want raw MCP tools without the Claude Code workflow layer.",
+        ],
+        link: {
+          label: "Connect MCP clients",
+          href: "/docs/mcp-clients",
+        },
       },
     ],
     nextSlug: "cli-and-service",
