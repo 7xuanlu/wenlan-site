@@ -76,6 +76,14 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
+                  href="/docs/platforms"
+                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
+                >
+                  Platforms
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/docs"
                   className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
                 >

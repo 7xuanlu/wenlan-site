@@ -78,6 +78,16 @@ const uninstallCommands = `~/.origin/bin/origin uninstall
 
 # then remove Origin from each MCP client's settings if you added it manually`;
 
+const platformMatrix = `macOS    arm64, x64              launchd user agent
+Linux    x86_64, aarch64 glibc  systemd user unit
+Windows  x86_64                 Task Scheduler ONLOGON task`;
+
+const platformDataDirs = `macOS:   ~/Library/Application Support/origin/
+Linux:   ~/.local/share/origin/ or $XDG_DATA_HOME/origin/
+Windows: %LOCALAPPDATA%\\origin\\
+
+Readable artifacts: ~/.origin/`;
+
 const cliDailyCommands = `origin recall "origin website positioning"
 origin search "MCP setup"
 origin store "We chose spaces for client separation" --type decision
@@ -735,6 +745,88 @@ export const docPages: DocPage[] = [
         ],
       },
     ],
+    nextSlug: "platforms",
+  },
+  {
+    slug: "platforms",
+    group: "Reference",
+    eyebrow: "Platforms",
+    title: "Platform Support",
+    description:
+      "Understand how Origin runs on macOS, Linux, and Windows: service managers, local data paths, model backends, and Docker/VM caveats.",
+    metaTitle: "Origin Platform Support | Docs",
+    metaDescription:
+      "Review Origin platform support for macOS, Linux, and Windows, including service registration, data directories, model backend differences, and bind-address caveats.",
+    keywords: [
+      "Origin platform support",
+      "Origin Windows",
+      "Origin Linux",
+      "Origin macOS",
+      "Origin service manager",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "Origin's released runtime supports macOS arm64/x64, Linux x86_64/aarch64 with glibc, and Windows x86_64.",
+      "The daemon contract is the same across platforms, but service registration, data paths, and model acceleration differ.",
+    ],
+    sections: [
+      {
+        heading: "Supported platforms",
+        body: [
+          "Origin v0.7.0 broadened the local runtime from macOS-first to cross-platform support across macOS, Linux, and Windows.",
+          "The same daemon, CLI, and MCP connector shape applies on each platform. The operating-system integration is what changes.",
+        ],
+        code: {
+          label: "Runtime matrix",
+          code: platformMatrix,
+        },
+      },
+      {
+        heading: "Service registration",
+        body: [
+          "Origin installs as a per-user service so the local daemon can be available to MCP clients without a manual terminal session.",
+          "macOS uses launchd. Linux uses a systemd user unit. Windows uses a per-user Task Scheduler ONLOGON task.",
+        ],
+      },
+      {
+        heading: "Data paths",
+        body: [
+          "The daemon keeps its database and application data in the OS application data location. Origin also exposes human-readable artifacts under ~/.origin so pages, sessions, status records, and local git history are easy to inspect.",
+          "Treat both locations as private application data. They can contain project decisions, preferences, client context, and old versions.",
+        ],
+        code: {
+          label: "Data locations",
+          code: platformDataDirs,
+        },
+      },
+      {
+        heading: "Model backends",
+        body: [
+          "The core memory loop does not require a local model or API key. Store, embed, search, recall, MCP context, and the agent-side workflow still work without configuring daemon-side language models.",
+          "For optional local model paths, macOS keeps Metal acceleration. Linux and Windows release builds are CPU-only by default in the current public shape.",
+        ],
+      },
+      {
+        heading: "Docker and VMs",
+        body: [
+          "Normal laptop use should keep the daemon bound to 127.0.0.1:7878. That keeps the HTTP API local to the machine.",
+          "Use ORIGIN_BIND_ADDR only when you intentionally need non-loopback access, such as a Docker or VM setup. Exposing the daemon changes the security boundary, so pair it with the security reporting and configuration guidance.",
+        ],
+        code: {
+          label: "Bind address",
+          code: "ORIGIN_BIND_ADDR=127.0.0.1:7878\nORIGIN_BIND_ADDR=0.0.0.0:7878  # Docker or VM only",
+        },
+      },
+      {
+        heading: "After setup",
+        body: [
+          "Whatever platform you use, verify setup the same way: run origin status and origin doctor, then do one capture/recall round trip from the client you care about.",
+          "If the daemon works but an MCP client does not, restart the client and rerun origin mcp add for that client before assuming the runtime is broken.",
+        ],
+      },
+    ],
     nextSlug: "http-api",
   },
   {
@@ -1253,7 +1345,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Where data lives",
         body: [
-          "Origin exposes human-facing artifacts under ~/.origin. The daemon database lives under the macOS application support directory and is linked from ~/.origin/db for convenience.",
+          "Origin exposes human-facing artifacts under ~/.origin. The daemon database lives under the operating system's application data directory and is linked from ~/.origin/db for convenience.",
           "The important files are readable without a special app: pages are Markdown, session logs are Markdown, and project status is stored beside the session records.",
         ],
         bullets: [
@@ -1262,7 +1354,9 @@ export const docPages: DocPage[] = [
           "~/.origin/sessions/_status/: current project status records.",
           "~/.origin/bin/: installed Origin CLI, daemon, and MCP connector binaries.",
           "~/.origin/db/: link to the daemon's local database store.",
-          "~/Library/Application Support/origin/: daemon-owned application data.",
+          "macOS: ~/Library/Application Support/origin/.",
+          "Linux: ~/.local/share/origin/ or $XDG_DATA_HOME/origin/.",
+          "Windows: %LOCALAPPDATA%\\origin\\.",
         ],
       },
       {
@@ -1828,7 +1922,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Near-term documentation gaps",
         body: [
-          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, updates, HTTP API, spaces, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, configuration, evaluation, and troubleshooting are the current core path.",
+          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, updates, platform support, HTTP API, spaces, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, configuration, evaluation, and troubleshooting are the current core path.",
           "The remaining gaps are deeper per-endpoint API examples, release-specific upgrade notes, and mature retrieval docs once opt-in experiments become stable defaults.",
         ],
       },

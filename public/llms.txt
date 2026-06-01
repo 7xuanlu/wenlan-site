@@ -35,6 +35,7 @@
 - [Commands](https://useorigin.app/docs/commands): Origin CLI subcommands and the MCP tools the daemon exposes.
 - [CLI and service management](https://useorigin.app/docs/cli-and-service): Setup, daemon status, doctor, service install/uninstall, terminal recall/search/store, and MCP client wiring.
 - [Updates and uninstall](https://useorigin.app/docs/updates-and-uninstall): Refresh the local runtime, verify with doctor, restart MCP clients, and remove the per-user service safely.
+- [Platform support](https://useorigin.app/docs/platforms): macOS, Linux, and Windows support, service managers, data paths, model backend notes, and Docker/VM caveats.
 - [HTTP API](https://useorigin.app/docs/http-api): Local daemon surfaces that the plugin, CLI, MCP connector, and local tools call under the hood.
 - [Spaces](https://useorigin.app/docs/spaces): Separate work, personal, client, and project memory buckets without running multiple Origin installs.
 - [Source-backed pages](https://useorigin.app/docs/source-backed-pages): How atomic captures become readable Markdown pages with source memory IDs, revision state, and refresh paths.
