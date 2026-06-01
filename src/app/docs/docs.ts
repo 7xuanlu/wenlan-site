@@ -205,6 +205,50 @@ const httpSurfaces = `/api/health
 /api/on-device-model
 /api/setup/anthropic-key`;
 
+const apiHealthExamples = `curl -s http://127.0.0.1:7878/api/health
+curl -s http://127.0.0.1:7878/api/status
+curl -s http://127.0.0.1:7878/api/setup/status`;
+
+const apiMemoryExamples = `curl -s -X POST http://127.0.0.1:7878/api/memory/store \\
+  -H 'content-type: application/json' \\
+  -d '{
+    "content": "We chose spaces for client separation because context bleed is risky.",
+    "memory_type": "decision",
+    "source_agent": "local-script",
+    "space": "work"
+  }'
+
+curl -s -X POST http://127.0.0.1:7878/api/memory/search \\
+  -H 'content-type: application/json' \\
+  -d '{
+    "query": "client separation decision",
+    "limit": 5,
+    "space": "work",
+    "rerank": false
+  }'`;
+
+const apiContextExamples = `curl -s -X POST http://127.0.0.1:7878/api/chat-context \\
+  -H 'content-type: application/json' \\
+  -d '{
+    "query": "origin website docs",
+    "max_chunks": 8,
+    "space": "work"
+  }'`;
+
+const apiReviewExamples = `curl -s -X POST http://127.0.0.1:7878/api/memory/list \\
+  -H 'content-type: application/json' \\
+  -d '{ "confirmed": false, "limit": 10 }'
+
+curl -s -X POST http://127.0.0.1:7878/api/memory/confirm/mem_abc123 \\
+  -H 'content-type: application/json' \\
+  -d '{ "confirmed": true }'`;
+
+const apiPageExamples = `curl -s -X POST http://127.0.0.1:7878/api/pages/search \\
+  -H 'content-type: application/json' \\
+  -d '{ "query": "distillation architecture", "limit": 5 }'
+
+curl -s http://127.0.0.1:7878/api/pages/page_abc123/sources`;
+
 const buildFromSourceCommands = `git clone https://github.com/7xuanlu/origin.git
 cd origin
 cargo build --workspace
@@ -1132,6 +1176,111 @@ export const docPages: DocPage[] = [
           "If a client cannot reach memory, check daemon health first with origin doctor or the MCP doctor tool. Then inspect whether the client is launching origin-mcp and whether port 7878 is occupied by an old daemon.",
           "For bug reports, include the client, operating system, command you ran, expected result, actual result, and redacted doctor output.",
         ],
+      },
+    ],
+    nextSlug: "api-examples",
+  },
+  {
+    slug: "api-examples",
+    group: "Reference",
+    eyebrow: "API",
+    title: "API Examples",
+    description:
+      "Use the local daemon HTTP API from scripts when the CLI or MCP tools are not the right fit.",
+    metaTitle: "Origin API Examples | Docs",
+    metaDescription:
+      "Copy local curl examples for Origin daemon health, setup status, memory store/search, chat context, review, confirm, and page search endpoints.",
+    keywords: [
+      "Origin API examples",
+      "Origin curl",
+      "Origin HTTP API",
+      "Origin memory store API",
+      "Origin chat context API",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "6 min read",
+    summary: [
+      "The HTTP API is local to the daemon on 127.0.0.1:7878. It is useful for scripts, diagnostics, and first-party clients.",
+      "For normal workflows, prefer Claude Code slash commands, MCP tools, or the CLI. They carry Origin's current product semantics better than hand-written HTTP calls.",
+    ],
+    sections: [
+      {
+        heading: "Before using curl",
+        body: [
+          "Start with the CLI or MCP connector unless you specifically need local script automation. The daemon API is the local contract underneath those tools, not a hosted SDK surface.",
+          "Keep calls on 127.0.0.1 unless you intentionally changed ORIGIN_BIND_ADDR. Exposing the daemon beyond loopback changes the security boundary.",
+        ],
+        link: {
+          label: "Read HTTP API overview",
+          href: "/docs/http-api",
+        },
+      },
+      {
+        heading: "Health and setup",
+        body: [
+          "Use health and status endpoints before testing memory calls. They separate daemon reachability from search, capture, or MCP-client problems.",
+          "setup/status is useful when a client reports that Origin is installed but tools still fail.",
+        ],
+        code: {
+          label: "Health checks",
+          code: apiHealthExamples,
+        },
+      },
+      {
+        heading: "Store and search memory",
+        body: [
+          "memory/store accepts a complete memory statement plus optional memory_type, source_agent, space, supersedes, entity, structured_fields, and retrieval_cue fields.",
+          "memory/search accepts query, limit, optional memory_type, optional space, optional source_agent, and rerank. rerank only changes ordering when the daemon has a reranker configured.",
+        ],
+        code: {
+          label: "Memory calls",
+          code: apiMemoryExamples,
+        },
+      },
+      {
+        heading: "Load context for a session",
+        body: [
+          "chat-context is the daemon route behind broad session orientation. It returns a context string plus structured knowledge fields for clients that need them.",
+          "Use this when a local tool needs a compact context bundle. For specific facts, search memory instead.",
+        ],
+        code: {
+          label: "Context call",
+          code: apiContextExamples,
+        },
+      },
+      {
+        heading: "Review and confirm",
+        body: [
+          "memory/list can filter unconfirmed memories with confirmed=false. memory/confirm/{source_id} confirms or unconfirms one item.",
+          "This is useful for a local review UI or a diagnostic script. In normal agent work, prefer /review or the MCP review tools when available.",
+        ],
+        code: {
+          label: "Review calls",
+          code: apiReviewExamples,
+        },
+      },
+      {
+        heading: "Search pages",
+        body: [
+          "pages/search looks over source-backed pages. A page result is different from an atomic memory result: it is synthesized from source memories and should preserve provenance.",
+          "Use pages/{id}/sources when you need to inspect which memories produced a page before trusting or editing it.",
+        ],
+        code: {
+          label: "Page calls",
+          code: apiPageExamples,
+        },
+      },
+      {
+        heading: "Build typed clients carefully",
+        body: [
+          "Rust integrations should prefer origin-types for request and response shapes. That keeps shape drift visible at compile time instead of passing untyped JSON through local tools.",
+          "For non-Rust scripts, keep bodies small, handle non-200 responses, and avoid destructive delete/update routes unless you have a backup and a clear source_id.",
+        ],
+        link: {
+          label: "Read package names",
+          href: "/docs/packages-and-registries",
+        },
       },
     ],
     nextSlug: "spaces",
@@ -2493,8 +2642,8 @@ export const docPages: DocPage[] = [
       {
         heading: "Near-term documentation gaps",
         body: [
-          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, updates, platform support, HTTP API, spaces, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, backup and migration, configuration, diagnostics, evaluation, desktop status, and troubleshooting are the current core path.",
-          "The remaining gaps are deeper per-endpoint API examples, release-specific upgrade notes, and mature retrieval docs once opt-in experiments become stable defaults.",
+          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, updates, upgrade notes, packages, platform support, HTTP API, API examples, spaces, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, backup and migration, configuration, diagnostics, FAQ, evaluation, desktop status, and troubleshooting are the current core path.",
+          "The remaining gap is mature retrieval documentation once opt-in experiments become stable defaults.",
         ],
       },
       {
