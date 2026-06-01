@@ -247,6 +247,11 @@ origin model status
 origin key status
 origin doctor`;
 
+const agentSideModelPhases = `Pick memory_type        daemon classifier       /capture chooses type
+Extract entities        daemon extraction       /capture posts entities
+Synthesize pages        daemon distill cycle    /distill writes page
+Expand/rerank recall    daemon rerank/expand    /recall rewrites query`;
+
 const configurationKnobs = `ORIGIN_SPACE=client-a
 ORIGIN_BIND_ADDR=127.0.0.1:7878
 ORIGIN_BIND_ADDR=0.0.0.0:7878  # Docker or VM only`;
@@ -2349,6 +2354,10 @@ export const docPages: DocPage[] = [
           "Claude Code skills can classify captures, write handoffs, and synthesize pages from inside the active agent session. That is why Origin remains useful before you configure a daemon model.",
           "The daemon stays the store and retrieval layer. The agent can supply language judgment when it is already in the work context.",
         ],
+        code: {
+          label: "Local mode fallback",
+          code: agentSideModelPhases,
+        },
       },
     ],
     nextSlug: "advanced-retrieval",

@@ -50,7 +50,7 @@
 - [Source-backed pages](https://useorigin.app/docs/source-backed-pages): How atomic captures become readable Markdown pages with source memory IDs, revision state, and refresh paths.
 - [Import and portability](https://useorigin.app/docs/import-and-portability): Import Markdown-style vault context and keep Origin's projected Markdown artifacts readable outside the daemon.
 - [Local git history](https://useorigin.app/docs/local-git-history): Inspect the real git history Origin keeps under ~/.origin/.git for pages, sessions, handoffs, and status artifacts.
-- [Models and keys](https://useorigin.app/docs/models-and-keys): No-model local memory mode, optional on-device models, optional Anthropic keys, and the privacy/capability tradeoffs.
+- [Models and keys](https://useorigin.app/docs/models-and-keys): No-model local memory mode, agent-side fallback phases, optional on-device models, optional Anthropic keys, and the privacy/capability tradeoffs.
 - [Advanced retrieval status](https://useorigin.app/docs/advanced-retrieval): Stable hybrid retrieval plus opt-in main-branch retrieval experiments and their release-status caveats.
 - [Experimental flags](https://useorigin.app/docs/experimental-flags): How to read opt-in main-branch flags for retrieval, context compression, memory maintenance, entity resolution, page guards, and reflection without treating them as released defaults.
 - [Data and privacy](https://useorigin.app/docs/data-and-privacy): What lives where on disk, what leaves the machine, what does not.
