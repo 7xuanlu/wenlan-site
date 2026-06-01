@@ -78,6 +78,28 @@ const uninstallCommands = `~/.origin/bin/origin uninstall
 
 # then remove Origin from each MCP client's settings if you added it manually`;
 
+const packageSurfaceMap = `@7xuanlu/origin      Claude Code plugin package and setup entrypoint
+origin-mcp          MCP connector package and Rust crate
+origin-types        Shared HTTP/MCP wire types
+GitHub Releases     Stable binaries, tags, and release notes`;
+
+const packageInstallPaths = `# Claude Code
+/plugin marketplace add 7xuanlu/origin
+/plugin install origin@7xuanlu
+/init
+
+# Other MCP clients
+npx -y @7xuanlu/origin setup
+~/.origin/bin/origin mcp add codex
+
+# Manual MCP fallback
+npx -y origin-mcp`;
+
+const packageVerificationCommands = `~/.origin/bin/origin status
+~/.origin/bin/origin doctor
+~/.origin/bin/origin mcp add codex --dry-run
+~/.origin/bin/origin mcp add cursor --dry-run`;
+
 const diagnosticCommands = `# Claude Code
 /init
 
@@ -767,6 +789,96 @@ export const docPages: DocPage[] = [
           "Memory data may include project history, private preferences, client context, pages, sessions, and local git history. Treat it like private application data.",
           "If you are removing Origin because setup failed, open an issue with redacted doctor output before deleting data. The diagnostic state is often the fastest way to fix the install path.",
         ],
+      },
+    ],
+    nextSlug: "packages-and-registries",
+  },
+  {
+    slug: "packages-and-registries",
+    group: "Reference",
+    eyebrow: "Packages",
+    title: "Packages and Registries",
+    description:
+      "Know which Origin package name maps to the plugin, runtime setup, MCP connector, Rust crates, and release binaries.",
+    metaTitle: "Origin Packages and Registries | Docs",
+    metaDescription:
+      "Understand Origin package names across the Claude Code plugin, npm setup, origin-mcp, origin-types, crates.io, and GitHub Releases.",
+    keywords: [
+      "Origin packages",
+      "@7xuanlu origin",
+      "origin-mcp npm",
+      "origin-types crate",
+      "Origin GitHub releases",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "4 min read",
+    summary: [
+      "Origin has several public package names because one local product crosses Claude Code plugins, npm setup, MCP clients, Rust crates, and release binaries.",
+      "Most users should not choose a registry by hand. Install through Claude Code or npx setup, then let origin mcp add wire each client to the local connector.",
+    ],
+    sections: [
+      {
+        heading: "Why the names differ",
+        body: [
+          "Origin is one local memory layer with several runtime surfaces. The daemon owns memory, the CLI manages setup and diagnostics, origin-mcp bridges MCP clients, and the Claude Code plugin adds the slash-command workflow.",
+          "The registry names map to ecosystems, not separate products. When docs mention several names, they are usually describing different entry points into the same local daemon.",
+        ],
+        code: {
+          label: "Public surfaces",
+          code: packageSurfaceMap,
+        },
+      },
+      {
+        heading: "Normal install paths",
+        body: [
+          "Claude Code users should use the plugin marketplace path, then run /init. That verifies the plugin, local daemon, MCP route, and a memory round trip from inside Claude Code.",
+          "Other MCP clients should run the setup package once, then use origin mcp add for each client. That keeps client config pointed at the local connector installed under ~/.origin/bin.",
+        ],
+        code: {
+          label: "Install paths",
+          code: packageInstallPaths,
+        },
+      },
+      {
+        heading: "MCP connector packages",
+        body: [
+          "origin-mcp is the connector MCP clients launch when they need Origin tools. Normal setup installs a local origin-mcp binary beside the CLI so configs can use a stable machine-local path.",
+          "The standalone npm package is useful when a client or automation flow needs to spawn the connector through npm. Prefer the installed local binary when setup has already prepared ~/.origin/bin.",
+        ],
+        link: {
+          label: "Read MCP client setup",
+          href: "/docs/mcp-clients",
+        },
+      },
+      {
+        heading: "Rust crates",
+        body: [
+          "origin-mcp is also published as a Rust crate because the connector ships from the Rust workspace. Most users never install this crate directly.",
+          "origin-types contains shared HTTP and MCP wire types for downstream Rust clients. It exists so integrations can fail loudly on shape drift instead of passing around untyped JSON.",
+        ],
+      },
+      {
+        heading: "GitHub releases",
+        body: [
+          "GitHub Releases are the stable release record for tags, binaries, and changelog-backed behavior. If a page describes unreleased main-branch work, it should say so explicitly.",
+          "When you need to know whether a behavior is shipped, read the changelog before assuming a merged PR is in the package you installed.",
+        ],
+        link: {
+          label: "Read the changelog",
+          href: "/docs/changelog",
+        },
+      },
+      {
+        heading: "Verify your install",
+        body: [
+          "After changing packages, verify the runtime first. status and doctor tell you whether the local daemon is healthy before you debug an MCP client.",
+          "Then run origin mcp add with --dry-run for the client you care about. The output shows which connector path the client should launch.",
+        ],
+        code: {
+          label: "Verification",
+          code: packageVerificationCommands,
+        },
       },
     ],
     nextSlug: "platforms",
