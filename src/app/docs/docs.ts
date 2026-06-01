@@ -391,16 +391,28 @@ Squash merges:  verify by commit message/body, not git cherry alone
 Worktrees:      gitignored caches are per-checkout`;
 
 const retrievalFlags = `ORIGIN_ENABLE_GRAPH_GATE
+ORIGIN_ENABLE_GRAPH_SEED
 ORIGIN_ENABLE_TEMPORAL_FILTER
+ORIGIN_ENABLE_QUERY_INTENT
+ORIGIN_MAGNITUDE_FUSION
 ORIGIN_ENABLE_FTS_HARDENING
 ORIGIN_ENABLE_SESSION_DIVERSITY
 ORIGIN_ENABLE_SALIENCE_PRIOR
+ORIGIN_ENABLE_EPISODE_CHANNEL
 ORIGIN_ENABLE_FACT_CHANNEL
+ORIGIN_PRF_ROUNDS
 ORIGIN_ENABLE_GRAPH_KHOP
 ORIGIN_ENABLE_GLOBAL_PRELUDE
 ORIGIN_ENABLE_COT_RETRIEVAL
 ORIGIN_LLM_ROUTE
 ORIGIN_ENABLE_CONTEXT_COMPRESS`;
+
+const experimentalMaintenanceFlags = `ORIGIN_ENABLE_TEMPORAL_GROUNDING
+ORIGIN_ENABLE_ENTITY_MINHASH
+ORIGIN_MERGE_SHRINK_GUARD
+ORIGIN_ENABLE_DUAL_POOL_RESOLVE
+ORIGIN_ENABLE_EVICTION
+ORIGIN_ENABLE_REFLECTION_DEBOUNCE`;
 
 export const docPages: DocPage[] = [
   {
@@ -2351,7 +2363,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Opt-in main-branch work",
         body: [
-          "After v0.7.0, main received a large opt-in retrieval batch. Examples include graph gates, temporal filters, query decomposition, FTS hardening, session diversity, salience priors, fact channels, k-hop graph traversal, global preludes, CoT retrieval, LLM routing, and context compression.",
+          "After v0.7.0, main received a large opt-in retrieval batch. Examples include graph gates, temporal filters, query-adaptive routing, FTS hardening, session diversity, salience priors, episode and fact channels, PRF rounds, k-hop graph traversal, global preludes, CoT retrieval, LLM routing, and context compression.",
           "These flags are useful for development and evaluation, but they should not be described as default product behavior until the release notes say so.",
         ],
         code: {
@@ -2372,6 +2384,93 @@ export const docPages: DocPage[] = [
           "Most users should care about whether /brief, context, and recall bring the right project facts forward. Maintainers should care about benchmark slices, regression guards, and whether new retrieval work reduces real cold starts.",
           "If recall feels weak, first improve the query and capture quality. Then distill repeated topics into pages before reaching for experimental retrieval flags.",
         ],
+      },
+    ],
+    nextSlug: "experimental-flags",
+  },
+  {
+    slug: "experimental-flags",
+    group: "Reference",
+    eyebrow: "Experiments",
+    title: "Experimental Flags",
+    description:
+      "How to read Origin's opt-in main-branch flags without mistaking them for released defaults.",
+    metaTitle: "Origin Experimental Flags | Docs",
+    metaDescription:
+      "Understand Origin's opt-in experimental flags for retrieval, context compression, memory maintenance, entity resolution, page guards, and reflection.",
+    keywords: [
+      "Origin experimental flags",
+      "Origin retrieval flags",
+      "ORIGIN_ENABLE_CONTEXT_COMPRESS",
+      "ORIGIN_ENABLE_GRAPH_GATE",
+      "Origin main branch experiments",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "6 min read",
+    summary: [
+      "Experimental flags are for source checkouts, evaluation runs, and maintainer testing. They are not stable product defaults.",
+      "Use release notes and the changelog to decide what installed users can rely on.",
+    ],
+    sections: [
+      {
+        heading: "Status first",
+        body: [
+          "Origin's main branch often carries opt-in work before a release promotes it. A flag on main means the code path exists for testing; it does not mean normal users receive that behavior after npx setup.",
+          "When writing docs, bug reports, or benchmark notes, describe the flag, the branch or release, and whether it is enabled by default.",
+        ],
+      },
+      {
+        heading: "Retrieval and context flags",
+        body: [
+          "Recent main-branch work explores how to retrieve and assemble smaller, more useful context bundles: graph activation, temporal filtering, FTS hardening, session diversity, salience priors, episode and fact channels, PRF, k-hop graph traversal, global preludes, iterative retrieval, LLM routing, and read-time context compression.",
+          "These flags can change ranking, context composition, token cost, or evaluation labels. Do not compare results across flag sets without naming the active flags.",
+        ],
+        code: {
+          label: "Retrieval flags",
+          code: retrievalFlags,
+        },
+        link: {
+          label: "Read advanced retrieval",
+          href: "/docs/advanced-retrieval",
+        },
+      },
+      {
+        heading: "Memory maintenance flags",
+        body: [
+          "Other experiments target write-time and background maintenance: temporal grounding, entity near-dedup, page rewrite shrink guards, dual-pool dedup/contradiction resolution, soft eviction, and debounced reflection.",
+          "These are especially sensitive because they affect what becomes durable context. Use them on isolated development data unless a release note says the behavior is ready for normal installs.",
+        ],
+        code: {
+          label: "Maintenance flags",
+          code: experimentalMaintenanceFlags,
+        },
+      },
+      {
+        heading: "Eval discipline",
+        body: [
+          "Every flag that changes retrieval, compression, graph expansion, or maintenance can also change benchmark meaning. A result is only useful if it records the fixture, schema, model, run count, and active flags.",
+          "If a flag is eval-only or not wired into the normal daemon path yet, say so plainly. Context compression is an example of a main-branch experiment that should not be described as default chat-context behavior until release notes promote it.",
+        ],
+        link: {
+          label: "Read evaluation",
+          href: "/docs/evaluation",
+        },
+      },
+      {
+        heading: "Safe local testing",
+        body: [
+          "Do not test experimental maintenance flags against your normal product data unless you mean to. Run a source checkout on a separate port and data directory so experiments cannot rewrite the memory store you rely on daily.",
+          "After a flag test, capture the exact command, environment, and git commit. That makes the result reproducible and keeps later docs from turning a local experiment into a product claim.",
+        ],
+        code: {
+          label: "Isolated daemon",
+          code: devIsolationEnvVars,
+        },
+        link: {
+          label: "Read environment variables",
+          href: "/docs/environment-variables",
+        },
       },
     ],
     nextSlug: "data-and-privacy",
@@ -2699,6 +2798,17 @@ export const docPages: DocPage[] = [
         link: {
           label: "Read evaluation",
           href: "/docs/evaluation",
+        },
+      },
+      {
+        heading: "Experimental flags",
+        body: [
+          "Main-branch experimental flags are separate from normal runtime configuration. They are for source checkouts, evaluation, and maintainer testing, not routine installed use.",
+          "If you set one, record the flag name, git commit, data directory, and whether the feature is released or still on main.",
+        ],
+        link: {
+          label: "Read experimental flags",
+          href: "/docs/experimental-flags",
         },
       },
       {
@@ -3575,7 +3685,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Near-term documentation gaps",
         body: [
-          "The product docs should stay practical. Setup, daily workflow, capture quality, memory types, architecture, commands, CLI/service management, updates, upgrade notes, packages, platform support, HTTP API, API examples, spaces, graph context, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, backup and migration, configuration, environment variables, diagnostics, FAQ, evaluation, desktop status, releases, testing, development conventions, and troubleshooting are the current core path.",
+          "The product docs should stay practical. Setup, daily workflow, capture quality, memory types, architecture, commands, CLI/service management, updates, upgrade notes, packages, platform support, HTTP API, API examples, spaces, graph context, source-backed pages, import and portability, local git history, models and keys, retrieval status, experimental flags, data and privacy, backup and migration, configuration, environment variables, diagnostics, FAQ, evaluation, desktop status, releases, testing, development conventions, and troubleshooting are the current core path.",
           "The remaining gap is mature retrieval documentation once opt-in experiments become stable defaults.",
         ],
       },
