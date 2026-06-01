@@ -320,6 +320,27 @@ cargo fmt --check --all
 cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace`;
 
+const testLayerMap = `Local iteration      targeted cargo test / cargo check
+Pre-commit          cargo fmt --all + clippy on changed crates
+Pre-push            workspace clippy + workspace library tests
+PR CI               fmt, lint, tests for daemon crates
+Coverage            informational on PR, not a local gate
+Manual eval         GPU/API-backed benchmarks, run on demand`;
+
+const contributorVerificationCommands = `cargo fmt --check --all
+cargo clippy --workspace --all-targets -- -D warnings
+cargo test --workspace
+
+# faster iteration examples
+cargo test -p origin-core --lib
+cargo test -p origin-server`;
+
+const hookSetupCommands = `bash scripts/setup-hooks.sh
+
+# hooks then run focused checks before commit/push
+git commit
+git push`;
+
 const retrievalFlags = `ORIGIN_ENABLE_GRAPH_GATE
 ORIGIN_ENABLE_TEMPORAL_FILTER
 ORIGIN_ENABLE_FTS_HARDENING
@@ -3317,7 +3338,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Near-term documentation gaps",
         body: [
-          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, updates, upgrade notes, packages, platform support, HTTP API, API examples, spaces, graph context, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, backup and migration, configuration, diagnostics, FAQ, evaluation, desktop status, releases, and troubleshooting are the current core path.",
+          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, updates, upgrade notes, packages, platform support, HTTP API, API examples, spaces, graph context, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, backup and migration, configuration, diagnostics, FAQ, evaluation, desktop status, releases, testing, and troubleshooting are the current core path.",
           "The remaining gap is mature retrieval documentation once opt-in experiments become stable defaults.",
         ],
       },
@@ -3464,6 +3485,96 @@ export const docPages: DocPage[] = [
         link: {
           label: "Read CONTRIBUTING.md",
           href: "https://github.com/7xuanlu/origin/blob/main/CONTRIBUTING.md",
+        },
+      },
+    ],
+    nextSlug: "testing-and-ci",
+  },
+  {
+    slug: "testing-and-ci",
+    group: "Project",
+    eyebrow: "Quality",
+    title: "Testing and CI",
+    description:
+      "Understand which Origin checks run locally, which run in GitHub Actions, and which evals stay manual.",
+    metaTitle: "Origin Testing and CI | Docs",
+    metaDescription:
+      "Learn Origin's local test workflow, pre-commit and pre-push hooks, PR CI, coverage policy, manual eval boundaries, and verification expectations for contributors.",
+    keywords: [
+      "Origin tests",
+      "Origin CI",
+      "Origin contributor checks",
+      "Origin coverage",
+      "Origin eval tests",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "Origin splits checks by cost and signal: fast local checks gate development; heavy evals stay manual.",
+      "PR CI must prove daemon correctness, but retrieval-quality claims need separate eval discipline.",
+    ],
+    sections: [
+      {
+        heading: "Why checks are layered",
+        body: [
+          "Origin is a local daemon, CLI, MCP server, core library, and shared type crate. A single slow mega-check would make normal contribution work worse.",
+          "The repo separates correctness checks from quality measurement. Tests and clippy gate normal changes; coverage and evals inform decisions without pretending to be cheap smoke tests.",
+        ],
+        code: {
+          label: "Check layers",
+          code: testLayerMap,
+        },
+      },
+      {
+        heading: "Local verification",
+        body: [
+          "Use targeted crate tests while iterating, then run full formatting, clippy, and tests before opening or merging a PR.",
+          "The public contributor path expects evidence. If a change affects behavior, include the smallest relevant test rather than relying on manual inspection.",
+        ],
+        code: {
+          label: "Contributor checks",
+          code: contributorVerificationCommands,
+        },
+      },
+      {
+        heading: "Git hooks",
+        body: [
+          "The repo includes hooks for routine local guardrails. Pre-commit handles formatting and changed-crate clippy. Pre-push runs workspace clippy plus library tests.",
+          "Hooks reduce CI churn, but they do not replace the final PR checks. Treat them as early feedback.",
+        ],
+        code: {
+          label: "Hook setup",
+          code: hookSetupCommands,
+        },
+      },
+      {
+        heading: "CI and coverage",
+        body: [
+          "GitHub Actions runs the required PR gate: formatting, linting, and tests across the daemon workspace. Coverage runs separately as informational signal.",
+          "Coverage is not a pre-push percentage gate. The project intentionally avoids local coverage gates that are slow, brittle, and not mirrored by the required CI lane.",
+        ],
+      },
+      {
+        heading: "Manual evals",
+        body: [
+          "LoCoMo, LongMemEval, KG faithfulness, page faithfulness, and API-backed judge runs have different cost and hardware requirements. Some run only as ignored tests or manual eval workflows.",
+          "Do not cite new retrieval or quality numbers from a casual run. Public benchmark claims should follow the eval docs and state the fixture, model, run count, and limits.",
+        ],
+        link: {
+          label: "Read evaluation",
+          href: "/docs/evaluation",
+        },
+      },
+      {
+        heading: "Before asking for review",
+        body: [
+          "A good PR says what changed, why it matters, and how it was tested. Include the commands that prove the change instead of saying it should work.",
+          "Docs-only changes still need a build. Code changes should include relevant tests or a clear explanation of why the behavior is covered elsewhere.",
+        ],
+        link: {
+          label: "Read contributing",
+          href: "/docs/contributing",
         },
       },
     ],
