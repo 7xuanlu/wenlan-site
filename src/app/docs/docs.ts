@@ -289,6 +289,16 @@ const apiPageExamples = `curl -s -X POST http://127.0.0.1:7878/api/pages/search 
 
 curl -s http://127.0.0.1:7878/api/pages/page_abc123/sources`;
 
+const typedClientSurfaces = `origin-server  HTTP backend daemon
+origin-mcp     MCP server wrapper for AI tools
+origin CLI     setup, doctor, recall, search, store
+local clients  Rust tools that call the daemon directly`;
+
+const typedClientInstall = `cargo add origin-types
+
+# then use the shared request/response structs
+# instead of passing untyped JSON through your tool`;
+
 const buildFromSourceCommands = `git clone https://github.com/7xuanlu/origin.git
 cd origin
 cargo build --workspace
@@ -1598,6 +1608,85 @@ export const docPages: DocPage[] = [
         body: [
           "Rust integrations should prefer origin-types for request and response shapes. That keeps shape drift visible at compile time instead of passing untyped JSON through local tools.",
           "For non-Rust scripts, keep bodies small, handle non-200 responses, and avoid destructive delete/update routes unless you have a backup and a clear source_id.",
+        ],
+        link: {
+          label: "Read package names",
+          href: "/docs/packages-and-registries",
+        },
+      },
+    ],
+    nextSlug: "typed-clients",
+  },
+  {
+    slug: "typed-clients",
+    group: "Reference",
+    eyebrow: "Types",
+    title: "Typed Clients",
+    description:
+      "Use origin-types when a Rust tool needs to call the local daemon without relying on untyped JSON shapes.",
+    metaTitle: "Origin Typed Clients | Docs",
+    metaDescription:
+      "Learn when to use the origin-types crate for Origin daemon request and response types, what stability to expect before 1.0, and why the local daemon remains the boundary.",
+    keywords: [
+      "origin-types",
+      "Origin typed clients",
+      "Origin wire types",
+      "Origin API types",
+      "Rust MCP memory client",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "4 min read",
+    summary: [
+      "origin-types is the shared Rust wire-format crate for the daemon, MCP server, CLI, and downstream local clients.",
+      "Use it for local Rust integrations that need shape checking; use MCP or the CLI for normal agent workflows.",
+    ],
+    sections: [
+      {
+        heading: "What origin-types is",
+        body: [
+          "origin-types defines shared request and response shapes plus core enums used across the local Origin runtime.",
+          "The point is to make shape drift visible. A typed integration should fail loudly when a payload changes instead of silently passing mismatched JSON.",
+        ],
+        code: {
+          label: "Shared surfaces",
+          code: typedClientSurfaces,
+        },
+      },
+      {
+        heading: "When to use it",
+        body: [
+          "Use origin-types when you are writing a Rust local tool that calls origin-server directly or when you are contributing to the daemon, MCP connector, or CLI.",
+          "Do not reach for it for ordinary daily work. Claude Code slash commands, MCP tools, and the CLI are the supported product surfaces for most users.",
+        ],
+        code: {
+          label: "Rust dependency",
+          code: typedClientInstall,
+        },
+      },
+      {
+        heading: "Stability expectations",
+        body: [
+          "Origin is pre-1.0. Minor version bumps can include breaking wire-type changes under Rust 0.x conventions.",
+          "Types marked doc(hidden) are not part of the public stability contract. Treat them as implementation details even if they appear in generated docs.",
+        ],
+      },
+      {
+        heading: "Boundary still matters",
+        body: [
+          "origin-types does not mean clients should write the database directly. The daemon remains the owner of storage, search, pages, graph context, review state, and distill cycles.",
+          "If your tool only needs to capture, recall, or load context, prefer MCP or CLI automation before building direct HTTP plumbing.",
+        ],
+        link: {
+          label: "Read HTTP API overview",
+          href: "/docs/http-api",
+        },
+      },
+      {
+        heading: "Where to find it",
+        body: [
+          "The crate is published as origin-types and lives in the public Origin repository with the rest of the daemon workspace.",
+          "Package names matter here: origin-types is the shared type crate, origin-mcp is the MCP connector, and @7xuanlu/origin is the setup and Claude Code plugin package.",
         ],
         link: {
           label: "Read package names",
