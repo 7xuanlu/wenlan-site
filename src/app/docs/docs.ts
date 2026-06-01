@@ -312,6 +312,9 @@ const httpSurfaces = `/api/health
 /api/memory/list
 /api/memory/confirm/{id}
 /api/distill
+/api/pages
+/api/pages/search
+/api/pages/{id}/sources
 /api/on-device-model
 /api/setup/anthropic-key`;
 
@@ -561,8 +564,8 @@ export const docPages: DocPage[] = [
       {
         heading: "The capture test",
         body: [
-          "Capture something when a future AI session would waste time rediscovering it or would make a worse decision without it.",
-          "The best captures name the project, tool, person, decision, or constraint and include why it matters. That gives retrieval enough surface area to find it later.",
+          "Capture one durable memory when a future AI session would waste time rediscovering it or would make a worse decision without it.",
+          "The best captures name the project, tool, person, decision, or constraint and include the reason it matters. That gives retrieval enough surface area to find it later.",
         ],
       },
       {
@@ -579,7 +582,7 @@ export const docPages: DocPage[] = [
       {
         heading: "What to skip",
         body: [
-          "Do not capture raw command output, long logs, temporary todos, or facts that are already obvious from source files. Origin is the memory layer for durable work context, not a transcript archive.",
+          "Do not store raw command output, long logs, temporary todos, or facts that are already obvious from source files. Origin is the memory layer for durable work context, not a transcript archive.",
           "If the source artifact is the authority, keep the capture short and point to the decision or lesson that a future agent should remember.",
         ],
         bullets: [
@@ -627,13 +630,13 @@ export const docPages: DocPage[] = [
     readingTime: "5 min read",
     summary: [
       "Review is the trust layer between raw captures and context your future agent should rely on.",
-      "Use review for uncertain or changing facts; use distill when related trusted memories deserve a readable page.",
+      "Use review for uncertain captures, pending revisions, or changing facts; use distill when related trusted memories deserve a readable page.",
     ],
     sections: [
       {
-        heading: "Why review exists",
+        heading: "Review before trust",
         body: [
-          "A useful memory layer should not silently trust every captured sentence. Some facts are low confidence, duplicated, contradicted, superseded, or too vague to promote into future context.",
+          "A useful memory layer should not silently trust every captured sentence. Some facts are low-confidence, duplicated, contradicted, superseded, or too vague to promote into future context.",
           "Origin keeps those states visible so the human can confirm, correct, dismiss, forget, or let the daemon keep the item out of trusted context.",
         ],
       },
@@ -1196,7 +1199,7 @@ export const docPages: DocPage[] = [
         heading: "Local memory mode",
         body: [
           "By default, /init configures local memory. That means no model download, no API key, and no cloud sync requirement for the basic memory loop.",
-          "The daemon stores, embeds, deduplicates, and serves hybrid search. Claude Code skills can still classify captures, write handoffs, and synthesize pages because the agent already has language judgment in the active session.",
+          "The daemon stores, embeds, deduplicates, and serves hybrid search. Claude Code skills can still classify captures, write handoffs, and synthesize pages through the agent-side model fallback because the agent already has language judgment in the active session.",
         ],
       },
       {
@@ -1376,7 +1379,7 @@ export const docPages: DocPage[] = [
         heading: "Uninstall the service",
         body: [
           "origin uninstall removes the per-user service registration: launchd on macOS, systemd user units on Linux, or the Windows Task Scheduler logon task.",
-          "That is intentionally different from deleting memory data. Do not delete ~/.origin or the daemon data directory unless you have decided you no longer need those records.",
+          "That does not delete memory data. Do not delete ~/.origin or the daemon data directory unless you have decided you no longer need those records.",
         ],
         code: {
           label: "Terminal",
@@ -1465,7 +1468,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Client restarts",
         body: [
-          "Most MCP clients read server configuration at startup. If tools disappear after an upgrade, restart the client before rewriting configuration.",
+          "Most MCP clients read server configuration at startup. If tools disappear after an upgrade, restart MCP clients before rewriting configuration.",
           "If restart does not fix it, rerun origin mcp add for that client. Use --dry-run first when you want to inspect the generated command and path.",
         ],
         link: {
@@ -2136,8 +2139,8 @@ export const docPages: DocPage[] = [
       {
         heading: "Staleness and revision state",
         body: [
-          "Pages can become stale when new memories contradict them, extend them, or show that an old summary is no longer enough.",
-          "Origin tracks revision state so refreshes can be deliberate. The point is not to overwrite human-readable records casually; it is to keep them improving as the project changes.",
+          "Pages can become stale when new memories contradict them, extend them, or show that an old summary is no longer enough. Origin tracks stale_reasons so refresh work has a concrete cause.",
+          "Origin also tracks revision_state so refreshes can be deliberate. The point is not to overwrite human-readable records casually; it is to keep them improving as the project changes.",
         ],
       },
       {
@@ -2270,7 +2273,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Recover with care",
         body: [
-          "Git can help recover a previous Markdown page or session note, but do not treat manual git restore as a full database rollback.",
+          "Git can help inspect, diff, revert, or recover a previous Markdown page or session note, but do not treat manual git restore as a full database rollback.",
           "If the durable knowledge is wrong, the safer product path is to capture a correction or forget the memory by ID. That keeps the index and readable artifacts aligned.",
         ],
       },
@@ -2349,7 +2352,7 @@ export const docPages: DocPage[] = [
         heading: "Anthropic key",
         body: [
           "A configured Anthropic key is bring-your-own-key for daemon-side language tasks. It is optional and should be treated as an explicit tradeoff: stronger language work in exchange for sending the relevant task prompt to the API provider.",
-          "Your connected AI client may already call its own provider during normal chat. This page only describes Origin's daemon-side model and key paths.",
+          "The CLI can read ANTHROPIC_API_KEY through the key setup path. Your connected AI client may already call its own provider during normal chat; this page only describes Origin's daemon-side model and key paths.",
         ],
       },
       {
@@ -2550,7 +2553,7 @@ export const docPages: DocPage[] = [
         heading: "Local-first by default",
         body: [
           "Origin is designed so the durable context your agents use lives locally first. That context can include project decisions, private constraints, preferences, and work history.",
-          "Connected AI tools may still send prompts to their own model providers. Origin's job is to keep the memory layer itself local, inspectable, and shared across tools.",
+          "There is no cloud sync or telemetry by default. Connected AI tools may still send prompts to their own model providers; Origin's job is to keep the memory layer itself local, inspectable, and shared across tools.",
         ],
       },
       {
@@ -2581,14 +2584,14 @@ export const docPages: DocPage[] = [
         heading: "Local memory setup",
         body: [
           "Origin stores, embeds, deduplicates, and serves hybrid search without requiring a local model download or Anthropic API key.",
-          "Optional model and API paths can add heavier language features, but they are not required for the basic memory loop.",
+          "ANTHROPIC_API_KEY is only used when you explicitly opt into daemon-side Anthropic work with the key setup path. Optional model and API paths can add heavier language features, but they are not required for the basic memory loop.",
         ],
       },
       {
         heading: "Correction and deletion",
         body: [
           "If a memory is wrong, capture the correction with why it supersedes the old fact. If a memory should be removed entirely, use /forget with the memory ID.",
-          "For distilled pages, inspect the Markdown directly. User-edited pages are treated carefully so automated distillation does not overwrite human work casually.",
+          "Delete and forget operations are separate from service uninstall. For distilled pages, inspect the Markdown directly. User-edited pages are treated carefully so automated distillation does not overwrite human work casually.",
         ],
       },
     ],
@@ -3345,7 +3348,7 @@ export const docPages: DocPage[] = [
         heading: "Where to report",
         body: [
           "Normal setup bugs, docs issues, and feature requests belong in GitHub Issues with redacted diagnostic output.",
-          "Vulnerabilities should be reported privately through GitHub Security Advisories or security@useorigin.app. The public security.txt file points to the same reporting paths.",
+          "If you discover a vulnerability, do not open a public issue. The source repository's SECURITY.md asks you to email h164654156465@gmail.com with the description, reproduction steps, and potential impact; GitHub Security Advisories are also available for private reports.",
         ],
         bullets: [
           "Public bugs: include client, OS, command, expected behavior, actual behavior, and redacted /init, doctor, or origin status output.",
@@ -3381,8 +3384,8 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy.",
-          "If in doubt, choose the private advisory path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including acknowledgement within 48 hours, a 7-day fix-timeline response target, and the current supported 0.7.x line.",
+          "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
           label: "Read security.txt",
@@ -3529,7 +3532,7 @@ export const docPages: DocPage[] = [
         heading: "License boundary",
         body: [
           "The main daemon, CLI, MCP server, core, shared types, and plugin files are Apache-2.0.",
-          "The optional desktop app has its own repository and license boundary. Check the desktop repo before reusing app code or contributing across that boundary.",
+          "The optional desktop app has its own repository and AGPL-3.0-only license boundary. Check the desktop repo before reusing app code or contributing across that boundary.",
         ],
       },
     ],
@@ -4161,11 +4164,22 @@ export const docPages: DocPage[] = [
         heading: "License",
         body: [
           "The main repo is Apache-2.0. By contributing, you agree that your changes are licensed under the license that applies to the files you modify.",
-          "The desktop app has its own repository and license. Check the target repo before contributing across that boundary.",
+          "The desktop app has its own repository and AGPL-3.0-only license. Check the target repo before contributing across that boundary.",
         ],
         link: {
           label: "Read CONTRIBUTING.md",
           href: "https://github.com/7xuanlu/origin/blob/main/CONTRIBUTING.md",
+        },
+      },
+      {
+        heading: "Community behavior",
+        body: [
+          "The repository includes a Code of Conduct. Contributions, issues, reviews, and community discussion should follow that policy as well as the technical contribution rules.",
+          "Keep public threads focused, specific, and redacted. Sensitive security details belong in the private reporting path.",
+        ],
+        link: {
+          label: "Read the Code of Conduct",
+          href: "https://github.com/7xuanlu/origin/blob/main/CODE_OF_CONDUCT.md",
         },
       },
     ],
