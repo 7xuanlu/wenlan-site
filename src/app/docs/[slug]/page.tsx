@@ -236,7 +236,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
 
         <section className="px-6 pb-20">
           <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-[minmax(0,700px)_220px]">
-            <div className="space-y-14">
+            <div className="min-w-0 space-y-14">
               {page.sections.map((section, index) => (
                 <section
                   id={sectionId(section.heading)}
@@ -246,7 +246,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
                   <p className="font-mono text-[11px] text-[var(--o-warm)]">
                     {(index + 1).toString().padStart(2, "0")}
                   </p>
-                  <div>
+                  <div className="min-w-0">
                     <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
                       {section.heading}
                     </h2>
@@ -272,7 +272,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
                         <p className="mb-2 font-mono text-[10px] tracking-[0.2em] text-[var(--o-text-dim)] uppercase">
                           {section.code.label}
                         </p>
-                        <pre className="overflow-x-auto rounded-xl border border-[var(--o-border)] bg-[var(--o-bg-deep)] p-5 font-mono text-sm leading-relaxed text-[var(--o-text-secondary)]">
+                        <pre className="max-w-full overflow-x-auto rounded-xl border border-[var(--o-border)] bg-[var(--o-bg-deep)] p-5 font-mono text-sm leading-relaxed text-[var(--o-text-secondary)]">
                           <code>{section.code.code}</code>
                         </pre>
                       </div>

@@ -97,6 +97,30 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link
+                  href="/docs/architecture"
+                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
+                >
+                  Architecture
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/docs/changelog"
+                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
+                >
+                  Changelog
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/docs/roadmap"
+                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
+                >
+                  Roadmap
+                </Link>
+              </li>
+              <li>
                 <a
                   href="https://github.com/7xuanlu/origin"
                   target="_blank"

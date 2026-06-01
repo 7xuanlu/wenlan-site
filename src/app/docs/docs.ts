@@ -1,8 +1,8 @@
 import { DEFAULT_AUTHOR, SITE_URL } from "../learn/articles";
 
-export const DOCS_UPDATED_AT = "2026-05-27";
+export const DOCS_UPDATED_AT = "2026-06-01";
 
-export type DocGroup = "After setup" | "Reference";
+export type DocGroup = "After setup" | "Reference" | "Project";
 
 export type DocCodeBlock = {
   label: string;
@@ -50,6 +50,17 @@ const mcpConfig = `{
 }`;
 
 const originSetupCommand = "npx -y @7xuanlu/origin setup";
+
+const architectureMap = `origin-server  -> local daemon on 127.0.0.1:7878
+origin-core    -> storage, search, graph, pages, eval
+origin-cli     -> setup, service management, recall, doctor
+origin-mcp     -> MCP connector for AI clients
+origin-types   -> shared HTTP/MCP wire types
+plugin/        -> Claude Code slash commands and hooks`;
+
+const evalSnapshot = `Benchmark                         Recall@5   MRR     NDCG@10
+LongMemEval oracle, 500 Q          93.6%     0.857   0.883
+LoCoMo locomo10                    70.0%     0.647   0.684`;
 
 export const docPages: DocPage[] = [
   {
@@ -216,6 +227,95 @@ export const docPages: DocPage[] = [
           "Origin gives you storage, embeddings, dedupe, hybrid search, and MCP recall without requiring a local model or API key.",
           "Claude Code skills can still classify captures, write handoffs, and distill pages because the agent already has language intelligence in the session.",
         ],
+      },
+    ],
+    nextSlug: "architecture",
+  },
+  {
+    slug: "architecture",
+    group: "Reference",
+    eyebrow: "Architecture",
+    title: "Architecture",
+    description:
+      "How Origin is put together: one local daemon, thin clients, shared wire types, local artifacts, and retrieval owned by origin-core.",
+    metaTitle: "Origin Architecture | Docs",
+    metaDescription:
+      "Understand Origin's daemon-first architecture, Cargo workspace crates, MCP connector, Claude Code plugin, local data layout, and retrieval pipeline.",
+    keywords: [
+      "Origin architecture",
+      "Origin daemon",
+      "origin-core",
+      "origin-mcp architecture",
+      "local AI work memory architecture",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "7 min read",
+    summary: [
+      "Origin is daemon-first: origin-server owns storage, search, pages, graph context, distill cycles, and the HTTP API.",
+      "Claude Code, MCP clients, the CLI, and local tools are thin clients over the same local source of truth.",
+    ],
+    sections: [
+      {
+        heading: "The boundary",
+        body: [
+          "Origin keeps product behavior in one local daemon instead of scattering memory logic across every client. The daemon listens on 127.0.0.1:7878 and owns the database, embeddings, search, pages, graph context, and distill cycles.",
+          "That boundary is what lets Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, VS Code, and terminal commands share the same memory layer without each tool inventing its own store.",
+        ],
+      },
+      {
+        heading: "Workspace map",
+        body: [
+          "The public repository is a Cargo workspace. The desktop app lives in a separate repo, while the local runtime, CLI, MCP server, shared wire types, core logic, and Claude Code plugin live together.",
+        ],
+        code: {
+          label: "Repository map",
+          code: architectureMap,
+        },
+      },
+      {
+        heading: "Runtime flow",
+        body: [
+          "A client stores or recalls memory through HTTP, MCP, or the CLI. origin-server frames the request and calls origin-core. origin-core handles storage, hybrid retrieval, knowledge graph context, pages, quality gates, enrichment, and eval-facing logic.",
+          "The client receives a compact response: memories, pages, decisions, graph context, or diagnostic state. The source of truth stays local.",
+        ],
+        bullets: [
+          "Claude Code plugin: slash commands such as /brief, /capture, /recall, /distill, and /handoff.",
+          "origin-mcp: MCP tools such as context, capture, recall, distill, list_pending, confirm_memory, forget, and doctor.",
+          "origin CLI: setup, service management, status, recall, search, store, spaces, model, key, and doctor.",
+        ],
+      },
+      {
+        heading: "Storage and retrieval",
+        body: [
+          "The local database uses libSQL for document chunks, vector search, FTS5 search, graph tables, pages, and metadata. Recall combines vector search, full-text search, graph context, and relevant pages with Reciprocal Rank Fusion.",
+          "Human-facing artifacts stay under ~/.origin. Pages and session logs are Markdown. The database is the index and retrieval substrate; the readable artifacts are the record people can inspect.",
+        ],
+      },
+      {
+        heading: "Model paths",
+        body: [
+          "Local memory mode works without a model download or API key. Store, embed, search, recall, and MCP memory are available immediately.",
+          "On-device models and Anthropic keys are optional. They unlock heavier extraction, page synthesis, recaps, and richer distill cycles, but the basic memory loop does not depend on them.",
+        ],
+      },
+      {
+        heading: "Platform services",
+        body: [
+          "Origin installs a local runtime into ~/.origin/bin. The service manager differs by operating system: launchd on macOS, systemd user units on Linux, and a per-user Task Scheduler logon task on Windows.",
+          "The same daemon contract is used across platforms. Cross-platform support in the public release covers macOS arm64/x64, Linux x86_64/aarch64 with glibc, and Windows x86_64.",
+        ],
+      },
+      {
+        heading: "Why this shape",
+        body: [
+          "The daemon-first shape keeps memory behavior consistent. It also makes Origin easier to test: origin-core has no Axum or Tauri dependency, origin-types stays lightweight, and clients do not own business logic.",
+          "For users, the practical result is simpler: one local home for AI work context, with multiple tools reading and writing through the same boundary.",
+        ],
+        link: {
+          label: "View the source repository",
+          href: "https://github.com/7xuanlu/origin",
+        },
       },
     ],
     nextSlug: "commands",
@@ -530,6 +630,313 @@ export const docPages: DocPage[] = [
         link: {
           label: "Open a GitHub issue",
           href: "https://github.com/7xuanlu/origin/issues",
+        },
+      },
+    ],
+    nextSlug: "evaluation",
+  },
+  {
+    slug: "evaluation",
+    group: "Project",
+    eyebrow: "Evaluation",
+    title: "Evaluation",
+    description:
+      "What Origin's published retrieval numbers mean, how they are generated, and what they do not claim.",
+    metaTitle: "Origin Evaluation and Benchmarks | Docs",
+    metaDescription:
+      "Read Origin's benchmark methodology, current retrieval snapshot, eval scope, and how to rerun LoCoMo and LongMemEval locally.",
+    keywords: [
+      "Origin evaluation",
+      "Origin benchmarks",
+      "LongMemEval",
+      "LoCoMo",
+      "AI memory retrieval benchmark",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "6 min read",
+    summary: [
+      "The public numbers are retrieval metrics, not end-to-end answer quality claims.",
+      "The current README snapshot reports 93.6% Recall@5 on LongMemEval oracle and 70.0% Recall@5 on LoCoMo locomo10.",
+    ],
+    sections: [
+      {
+        heading: "Current snapshot",
+        body: [
+          "Origin's README publishes a compact retrieval snapshot for the shipped hybrid retrieval path. The snapshot uses BGE-Base-EN-v1.5-Q embeddings, FTS5, Reciprocal Rank Fusion, and the latest shipped local rerank path when enabled.",
+          "The numbers below are the public README snapshot from the daemon repository. They should be read as retrieval-only metrics over the stated fixtures.",
+        ],
+        code: {
+          label: "README snapshot",
+          code: evalSnapshot,
+        },
+      },
+      {
+        heading: "What is measured",
+        body: [
+          "The headline metrics are Recall@5, MRR, and NDCG@10. They measure whether the retrieval layer surfaces relevant context near the top of the result set.",
+          "This is useful because Origin's job is to bring the right memories, pages, decisions, and graph context into the next agent session. It does not prove that a downstream model will always answer correctly.",
+        ],
+      },
+      {
+        heading: "What is not measured",
+        body: [
+          "The published table is not a full product-quality score, a guarantee of answer quality, or a latency benchmark. It is also not a cross-product claim unless the comparison page explicitly states the protocol.",
+          "Single-run snapshots are useful for development direction. Public claims that compare improvements should be regenerated under the current schema and, for headline claims, backed by repeated runs or documented methodology.",
+        ],
+      },
+      {
+        heading: "Where the harness lives",
+        body: [
+          "The eval harness lives in crates/origin-core/src/eval. The workflow docs live in docs/eval in the Origin repository.",
+          "Slow GPU or API-backed evals are manual. Normal CI avoids running heavy model benchmarks because hosted runners do not provide the right hardware, secrets, or cost profile.",
+        ],
+        bullets: [
+          "LoCoMo and LongMemEval use Recall@5, MRR, and NDCG@10 headline fields.",
+          "The README updater reads a local metrics JSON and writes the tracked README snapshot.",
+          "Raw local baseline artifacts stay outside git; the repository keeps the methodology and curated snapshot.",
+        ],
+      },
+      {
+        heading: "How to rerun",
+        body: [
+          "Clone the repository, follow the eval docs, and run the appropriate ignored eval harness command for the benchmark you want to reproduce. Expect slow runs when local models or judges are involved.",
+          "When comparing two retrieval modes, regenerate both sides under the same schema and fixture revision. Cross-schema comparisons are treated as invalid by the repository's eval discipline.",
+        ],
+        link: {
+          label: "Open eval docs on GitHub",
+          href: "https://github.com/7xuanlu/origin/tree/main/docs/eval",
+        },
+      },
+    ],
+    nextSlug: "changelog",
+  },
+  {
+    slug: "changelog",
+    group: "Project",
+    eyebrow: "Releases",
+    title: "Changelog",
+    description:
+      "The public release history for Origin, plus how to read unreleased work on main.",
+    metaTitle: "Origin Changelog | Docs",
+    metaDescription:
+      "Review Origin's public release history, current stable release, recent milestones, and links to the full GitHub changelog.",
+    keywords: [
+      "Origin changelog",
+      "Origin releases",
+      "Origin version 0.7.0",
+      "origin-mcp release notes",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "The current stable release in the repository changelog is v0.7.0, dated 2026-05-24.",
+      "Recent main-branch work after v0.7.0 is visible through merged PRs, but it should be treated as unreleased until the next release lands.",
+    ],
+    sections: [
+      {
+        heading: "Current stable release",
+        body: [
+          "Origin v0.7.0 is the current stable release recorded in CHANGELOG.md and the release-please manifest. It shipped cross-platform Linux and Windows support, spaces, eval reproducibility work, page and KG faithfulness benchmarks, and release pipeline hardening.",
+          "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
+        ],
+      },
+      {
+        heading: "v0.7.0 highlights",
+        body: [
+          "The v0.7.0 release broadened Origin from a macOS-first local runtime into a cross-platform local memory layer with explicit spaces and stronger evaluation discipline.",
+        ],
+        bullets: [
+          "Cross-platform runtime support for macOS, Linux, and Windows.",
+          "origin space subcommands and doctor resolver state.",
+          "Plugin and server space resolver plumbing.",
+          "KG-faithfulness and page-distillation faithfulness benchmarks.",
+          "Structured binary judge and reproducibility foundations for evals.",
+          "Release pipeline fixes for crates, npm, Homebrew, and version sync.",
+        ],
+      },
+      {
+        heading: "Earlier milestones",
+        body: [
+          "The v0.6.x line introduced the domain-to-space transition, curation workflows, pending revisions, and stronger daemon/client boundaries.",
+          "The v0.5.x line merged the MCP server and Claude Code plugin into the monorepo, established the locked skill set, and made the public packages line up with the repo runtime.",
+        ],
+      },
+      {
+        heading: "Unreleased main work",
+        body: [
+          "After v0.7.0, main has received a wave of opt-in retrieval, refinery, and read-time experiments. Examples include query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
+        ],
+      },
+      {
+        heading: "Where to follow releases",
+        body: [
+          "GitHub releases are the canonical place to inspect release artifacts. CHANGELOG.md is generated by release-please and records the release history in the source repo.",
+        ],
+        link: {
+          label: "View full changelog",
+          href: "https://github.com/7xuanlu/origin/blob/main/CHANGELOG.md",
+        },
+      },
+    ],
+    nextSlug: "roadmap",
+  },
+  {
+    slug: "roadmap",
+    group: "Project",
+    eyebrow: "Roadmap",
+    title: "Roadmap and Status",
+    description:
+      "How to read Origin's current direction without confusing released features, main-branch work, and future bets.",
+    metaTitle: "Origin Roadmap and Status | Docs",
+    metaDescription:
+      "Understand Origin's roadmap themes: reliable retrieval, provenance, local control, cross-client setup, eval discipline, and release status.",
+    keywords: [
+      "Origin roadmap",
+      "Origin project status",
+      "AI work memory roadmap",
+      "Origin future releases",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "6 min read",
+    summary: [
+      "Origin's roadmap is centered on making AI work compound: better retrieval, better provenance, better handoffs, and safer local control.",
+      "Roadmap items are directional, not promises. Stable release notes remain the source of truth for what shipped.",
+    ],
+    sections: [
+      {
+        heading: "Status model",
+        body: [
+          "Origin uses three practical status buckets: released, on main, and planned. Released means it appears in CHANGELOG.md or the current README install path. On main means merged but not necessarily released. Planned means a product direction, not a promise.",
+          "This distinction matters because the repository moves quickly. The website should help users understand what they can rely on today without hiding where the project is going.",
+        ],
+      },
+      {
+        heading: "Released now",
+        body: [
+          "The released public shape is local-first AI work memory: Claude Code plugin, MCP server, CLI setup, daemon, local memory, hybrid retrieval, spaces, Markdown artifacts, source-backed pages, git versioning, and cross-platform runtime support.",
+          "That is enough for the core loop: brief, capture, recall, handoff, distill, and inspect local artifacts.",
+        ],
+      },
+      {
+        heading: "Current development themes",
+        body: [
+          "Recent merged PRs show a strong focus on retrieval quality and memory maintenance. Most of that work is opt-in while it is evaluated.",
+          "The useful way to read the direction is not as a pile of toggles, but as one goal: make the next AI session receive the smallest, most relevant, most trustworthy context bundle.",
+        ],
+        bullets: [
+          "Retrieval quality: query decomposition, temporal filters, graph gates, FTS hardening, salience, session diversity, and read-time routing.",
+          "Context composition: page channels, global preludes, context compression, fact channels, and iterative retrieval.",
+          "Memory maintenance: deduplication, contradiction resolution, stale page refresh, soft eviction, and background reflection.",
+          "Trust and provenance: source-backed pages, review queues, revision state, and visible local git history.",
+        ],
+      },
+      {
+        heading: "Near-term documentation gaps",
+        body: [
+          "The product docs should stay practical. The most important next docs after this pass are deeper pages for spaces, source-backed pages, local git history, and advanced retrieval modes once they stabilize.",
+          "Until then, the best public entry points are setup, daily workflow, architecture, data and privacy, evaluation, and troubleshooting.",
+        ],
+      },
+      {
+        heading: "How to judge progress",
+        body: [
+          "For users, progress should show up as fewer cold starts, fewer repeated explanations, better recall, and more inspectable context. For maintainers, progress should show up in eval snapshots, smaller PRs, and clearer release notes.",
+          "The project avoids a broad workflow-suite shape. The goal is a focused local memory layer for serious AI work, not a general productivity operating system.",
+        ],
+        link: {
+          label: "Open current GitHub issues",
+          href: "https://github.com/7xuanlu/origin/issues",
+        },
+      },
+    ],
+    nextSlug: "contributing",
+  },
+  {
+    slug: "contributing",
+    group: "Project",
+    eyebrow: "Open source",
+    title: "Contributing",
+    description:
+      "How to contribute useful bug reports, docs, eval cases, and code changes to Origin.",
+    metaTitle: "Contributing to Origin | Docs",
+    metaDescription:
+      "Learn how to contribute to Origin: development setup, architecture boundaries, tests, linting, PR process, licensing, and useful issue reports.",
+    keywords: [
+      "contribute to Origin",
+      "Origin open source",
+      "Origin development setup",
+      "Origin GitHub issues",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "Bug reports, docs, eval cases, and focused code changes are welcome in the Apache-2.0 Origin repo.",
+      "The daemon, CLI, MCP server, core, shared types, and Claude Code plugin live in the main repo; the desktop app lives separately.",
+    ],
+    sections: [
+      {
+        heading: "What belongs in the main repo",
+        body: [
+          "The main Origin repo contains origin-server, origin-core, origin-cli, origin-mcp, origin-types, and the Claude Code plugin. Runtime, memory behavior, MCP tooling, docs, evals, and release infrastructure belong there.",
+          "The desktop app is a separate repository. If an issue is about the local runtime, CLI, MCP server, plugin, or memory behavior, the main repo is the right place.",
+        ],
+      },
+      {
+        heading: "Useful contributions",
+        body: [
+          "The most useful contributions are focused and evidence-backed. A good issue includes the client, operating system, exact command, expected behavior, actual behavior, and redacted diagnostic output from /init, doctor, or origin status.",
+          "For code, keep PRs narrow. One logical change is easier to review, test, and release than a large bundle.",
+        ],
+        bullets: [
+          "Bug fixes with a repro and the smallest relevant test.",
+          "Docs that remove setup ambiguity or stale product language.",
+          "Eval fixtures, methodology improvements, or clearer benchmark reporting.",
+          "MCP/client setup fixes for supported clients.",
+          "Platform-specific install and service-management fixes.",
+        ],
+      },
+      {
+        heading: "Development setup",
+        body: [
+          "Origin is a Rust workspace. You need Rust stable and the platform build tools for your OS. macOS builds may take several minutes on the first run while llama.cpp compiles for Metal.",
+          "For local development, build the workspace and run origin-server directly. To test the product path, build the release binaries and use origin setup, install, status, and doctor.",
+        ],
+        code: {
+          label: "Local development",
+          code: "git clone https://github.com/7xuanlu/origin.git\ncd origin\ncargo build --workspace\ncargo run -p origin-server",
+        },
+      },
+      {
+        heading: "Verification",
+        body: [
+          "Before opening a PR, run the relevant tests and lint checks. The full workspace can be expensive, so use targeted crate tests while iterating and full checks before asking for merge.",
+        ],
+        code: {
+          label: "Core checks",
+          code: "cargo fmt --check --all\ncargo clippy --workspace --all-targets -- -D warnings\ncargo test --workspace",
+        },
+      },
+      {
+        heading: "Architecture rules",
+        body: [
+          "origin-core owns business logic and must stay free of Axum and Tauri dependencies. origin-server frames HTTP requests. origin-types stays lightweight because it is shared by the server, MCP connector, CLI, and downstream clients.",
+          "MCP wrappers should deserialize typed wire responses instead of passing untyped JSON through silently. Route handlers should snapshot state before awaits instead of holding long-lived locks.",
+        ],
+      },
+      {
+        heading: "License",
+        body: [
+          "The main repo is Apache-2.0. By contributing, you agree that your changes are licensed under the license that applies to the files you modify.",
+          "The desktop app has its own repository and license. Check the target repo before contributing across that boundary.",
+        ],
+        link: {
+          label: "Read CONTRIBUTING.md",
+          href: "https://github.com/7xuanlu/origin/blob/main/CONTRIBUTING.md",
         },
       },
     ],

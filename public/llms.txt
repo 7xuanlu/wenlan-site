@@ -9,6 +9,7 @@
 - [Get started](https://useorigin.app/docs/get-started): Install the Claude Code plugin or run Origin setup for another MCP client, then verify the first memory round trip locally.
 - [Daily workflow](https://useorigin.app/docs/daily-workflow): Capture, handoff, distill. The session loop that makes AI work compound across days.
 - [Core concepts](https://useorigin.app/docs/core-concepts): Memories, pages, entities, sessions, sources. The vocabulary the daemon enforces.
+- [Architecture](https://useorigin.app/docs/architecture): Daemon-first system map: origin-server, origin-core, origin-cli, origin-mcp, origin-types, and the Claude Code plugin.
 
 ## Concepts
 
@@ -34,6 +35,10 @@
 - [Data and privacy](https://useorigin.app/docs/data-and-privacy): What lives where on disk, what leaves the machine, what does not.
 - [MCP clients](https://useorigin.app/docs/mcp-clients): Setup notes for Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and VS Code.
 - [Troubleshooting](https://useorigin.app/docs/troubleshooting): Common failure modes and the daemon repair paths.
+- [Evaluation](https://useorigin.app/docs/evaluation): Retrieval benchmark scope, current LongMemEval and LoCoMo snapshot, and rerun methodology.
+- [Changelog](https://useorigin.app/docs/changelog): Stable release notes and how to read unreleased main-branch work.
+- [Roadmap and status](https://useorigin.app/docs/roadmap): Released, on-main, and planned work without confusing roadmap themes for shipped guarantees.
+- [Contributing](https://useorigin.app/docs/contributing): Development setup, useful issues, PR process, architecture rules, and license notes.
 
 ## Optional
 
