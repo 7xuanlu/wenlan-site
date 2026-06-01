@@ -36,27 +36,51 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
+                  href="/docs/capture-quality"
+                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
+                >
+                  Capture quality
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/docs/core-concepts"
+                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
+                >
+                  Core concepts
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/docs/data-and-privacy"
+                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
+                >
+                  Data and privacy
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/docs"
                   className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
                 >
                   Docs
                 </Link>
               </li>
+            </ul>
+          </div>
+          <div>
+            <p className="mb-3 font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
+              Learn
+            </p>
+            <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   href="/learn"
                   className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
                 >
-                  Learn
+                  Learn hub
                 </Link>
               </li>
-            </ul>
-          </div>
-          <div>
-            <p className="mb-3 font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
-              Compare
-            </p>
-            <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   href="/learn/origin-vs-basic-memory"
@@ -106,6 +130,14 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
+                  href="/docs/evaluation"
+                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
+                >
+                  Evaluation
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/docs/changelog"
                   className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
                 >
@@ -118,6 +150,14 @@ export function SiteFooter() {
                   className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
                 >
                   Roadmap
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/docs/project-scope"
+                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
+                >
+                  Project scope
                 </Link>
               </li>
               <li>
