@@ -74,6 +74,16 @@ npx -y @7xuanlu/origin setup
 ~/.origin/bin/origin status
 ~/.origin/bin/origin doctor`;
 
+const upgradeCommands = `# refresh the local runtime and connector
+npx -y @7xuanlu/origin setup
+
+# verify daemon and setup health
+~/.origin/bin/origin status
+~/.origin/bin/origin doctor
+
+# inspect MCP config before changing a client
+~/.origin/bin/origin mcp add codex --dry-run`;
+
 const uninstallCommands = `~/.origin/bin/origin uninstall
 
 # then remove Origin from each MCP client's settings if you added it manually`;
@@ -789,6 +799,100 @@ export const docPages: DocPage[] = [
           "Memory data may include project history, private preferences, client context, pages, sessions, and local git history. Treat it like private application data.",
           "If you are removing Origin because setup failed, open an issue with redacted doctor output before deleting data. The diagnostic state is often the fastest way to fix the install path.",
         ],
+      },
+    ],
+    nextSlug: "upgrade-notes",
+  },
+  {
+    slug: "upgrade-notes",
+    group: "Reference",
+    eyebrow: "Upgrade",
+    title: "Upgrade Notes",
+    description:
+      "Read the practical upgrade path for Origin releases: what to rerun, what to verify, and what changed in the current public runtime shape.",
+    metaTitle: "Origin Upgrade Notes | Docs",
+    metaDescription:
+      "Upgrade Origin safely across plugin, npm setup, MCP connector, daemon service, spaces, platform support, and local data paths.",
+    keywords: [
+      "Origin upgrade notes",
+      "update Origin",
+      "Origin v0.7 upgrade",
+      "Origin MCP update",
+      "Origin setup update",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "5 min read",
+    summary: [
+      "Treat a release upgrade as three checks: refresh the local runtime, verify daemon health, then verify each MCP client launches the expected connector.",
+      "Do not delete local memory data as part of a normal upgrade. Back up readable artifacts and daemon data before machine moves or risky migrations.",
+    ],
+    sections: [
+      {
+        heading: "Read release state first",
+        body: [
+          "Origin moves quickly, so distinguish released packages from main-branch work. The changelog and GitHub Releases describe what is shipped; merged PRs can describe work that is not in your installed package yet.",
+          "If a doc says an experiment is on main or opt-in, do not treat it as part of the stable runtime until a release page or changelog entry says so.",
+        ],
+        link: {
+          label: "Read the changelog",
+          href: "/docs/changelog",
+        },
+      },
+      {
+        heading: "Normal upgrade checklist",
+        body: [
+          "For MCP clients outside Claude Code, rerun the setup package. That refreshes the local runtime installed under ~/.origin/bin, including the CLI, daemon, and MCP connector.",
+          "After setup, run status and doctor before judging a client. A healthy daemon with a broken client usually means MCP settings or restart state, not a failed upgrade.",
+        ],
+        code: {
+          label: "Terminal",
+          code: upgradeCommands,
+        },
+      },
+      {
+        heading: "Claude Code plugin upgrades",
+        body: [
+          "Claude Code users should update through the plugin marketplace flow, restart Claude Code if prompted, then run /init.",
+          "/init is the post-upgrade smoke test because it checks plugin installation, daemon reachability, MCP wiring, and the memory round trip from the tool where you work.",
+        ],
+        code: {
+          label: "Claude Code",
+          code: "/plugin marketplace add 7xuanlu/origin\n/plugin install origin@7xuanlu\n/init",
+        },
+      },
+      {
+        heading: "v0.7.x runtime shape",
+        body: [
+          "The current public docs describe the v0.7-era runtime shape: Claude Code plugin, npm setup, origin-mcp connector, daemon-first architecture, explicit spaces, local git history, source-backed pages, and cross-platform service registration.",
+          "The biggest practical upgrade checks are platform support, package path alignment, and spaces. Confirm your machine's service manager, confirm MCP clients launch the connector under ~/.origin/bin, and confirm the active space is the one you expect.",
+        ],
+        link: {
+          label: "Read platform support",
+          href: "/docs/platforms",
+        },
+      },
+      {
+        heading: "Client restarts",
+        body: [
+          "Most MCP clients read server configuration at startup. If tools disappear after an upgrade, restart the client before rewriting configuration.",
+          "If restart does not fix it, rerun origin mcp add for that client. Use --dry-run first when you want to inspect the generated command and path.",
+        ],
+        link: {
+          label: "Connect MCP clients",
+          href: "/docs/mcp-clients",
+        },
+      },
+      {
+        heading: "Data safety",
+        body: [
+          "Normal upgrades should not delete memory data. origin uninstall removes service registration, not ~/.origin or the daemon database.",
+          "For machine migration, manual cleanup, or risky experiments, back up both readable ~/.origin artifacts and the platform daemon data directory. Then verify with doctor and a capture/recall round trip before trusting the restored install.",
+        ],
+        link: {
+          label: "Read backup and migration",
+          href: "/docs/backup-and-migration",
+        },
       },
     ],
     nextSlug: "packages-and-registries",

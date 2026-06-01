@@ -35,6 +35,7 @@
 - [Commands](https://useorigin.app/docs/commands): Origin CLI subcommands and the MCP tools the daemon exposes.
 - [CLI and service management](https://useorigin.app/docs/cli-and-service): Setup, daemon status, doctor, service install/uninstall, terminal recall/search/store, and MCP client wiring.
 - [Updates and uninstall](https://useorigin.app/docs/updates-and-uninstall): Refresh the local runtime, verify with doctor, restart MCP clients, and remove the per-user service safely.
+- [Upgrade notes](https://useorigin.app/docs/upgrade-notes): What to rerun, verify, and restart when Origin releases change the plugin, npm setup, MCP connector, daemon service, spaces, or platform support.
 - [Packages and registries](https://useorigin.app/docs/packages-and-registries): Which package names mean what across the Claude Code plugin, npm setup, origin-mcp, origin-types, crates.io, and GitHub Releases.
 - [Platform support](https://useorigin.app/docs/platforms): macOS, Linux, and Windows support, service managers, data paths, model backend notes, and Docker/VM caveats.
 - [HTTP API](https://useorigin.app/docs/http-api): Local daemon surfaces that the plugin, CLI, MCP connector, and local tools call under the hood.
