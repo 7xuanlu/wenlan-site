@@ -1977,6 +1977,73 @@ export const docPages: DocPage[] = [
         },
       },
     ],
+    nextSlug: "desktop-app",
+  },
+  {
+    slug: "desktop-app",
+    group: "Project",
+    eyebrow: "Desktop",
+    title: "Desktop App Status",
+    description:
+      "Understand how the optional Origin desktop app relates to the daemon, CLI, MCP server, and Claude Code plugin.",
+    metaTitle: "Origin Desktop App Status | Docs",
+    metaDescription:
+      "Learn whether the Origin desktop app is required, what the main Origin repo owns, how the separate desktop repo fits, and which license boundary applies.",
+    keywords: [
+      "Origin desktop app",
+      "Origin GUI",
+      "Origin app",
+      "Origin Tauri",
+      "Origin desktop status",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "4 min read",
+    summary: [
+      "The core Origin product path is the local daemon, CLI, MCP server, and Claude Code plugin.",
+      "The desktop app is optional and lives in a separate repository, while the daemon remains the source of truth.",
+    ],
+    sections: [
+      {
+        heading: "Is the desktop app required?",
+        body: [
+          "No. Origin's main workflow works through Claude Code commands, MCP tools, and the origin CLI. The local daemon owns memory either way.",
+          "Use the desktop app only if you want a graphical layer on top of the same local memory system. Do not wait for the GUI to use the daily handoff loop.",
+        ],
+      },
+      {
+        heading: "What the main repo owns",
+        body: [
+          "The main Origin repo owns the daemon, business logic, CLI, MCP server, shared wire types, and Claude Code plugin files.",
+          "That is the runtime path documented on this website: setup, capture, recall, handoff, distill, pages, data paths, diagnostics, and releases.",
+        ],
+      },
+      {
+        heading: "What the desktop repo owns",
+        body: [
+          "The desktop app lives separately so the GUI can evolve without making the local runtime depend on a specific frontend shell.",
+          "When an issue is about memory behavior, retrieval, MCP tools, setup, service management, or the CLI, use the main Origin repo. When an issue is about the desktop UI itself, use the desktop app repo.",
+        ],
+        link: {
+          label: "Open origin-app",
+          href: "https://github.com/7xuanlu/origin-app",
+        },
+      },
+      {
+        heading: "Data model",
+        body: [
+          "The desktop app should be treated as a client over the daemon, not a second source of truth. The daemon owns the database, pages, sessions, and retrieval behavior.",
+          "That boundary is what lets Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, terminal commands, and the optional GUI share the same memory layer.",
+        ],
+      },
+      {
+        heading: "License boundary",
+        body: [
+          "The main daemon, CLI, MCP server, core, shared types, and plugin files are Apache-2.0.",
+          "The optional desktop app has its own repository and license boundary. Check the desktop repo before reusing app code or contributing across that boundary.",
+        ],
+      },
+    ],
     nextSlug: "changelog",
   },
   {
@@ -2105,7 +2172,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Near-term documentation gaps",
         body: [
-          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, updates, platform support, HTTP API, spaces, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, backup and migration, configuration, diagnostics, evaluation, and troubleshooting are the current core path.",
+          "The product docs should stay practical. Setup, daily workflow, capture quality, architecture, commands, CLI/service management, updates, platform support, HTTP API, spaces, source-backed pages, import and portability, local git history, models and keys, retrieval status, data and privacy, backup and migration, configuration, diagnostics, evaluation, desktop status, and troubleshooting are the current core path.",
           "The remaining gaps are deeper per-endpoint API examples, release-specific upgrade notes, and mature retrieval docs once opt-in experiments become stable defaults.",
         ],
       },

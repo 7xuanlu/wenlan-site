@@ -51,6 +51,7 @@
 - [Diagnostics and issue reports](https://useorigin.app/docs/diagnostics-and-issue-reports): Commands to run before asking for help, how to separate daemon and MCP failures, and what to redact.
 - [Security and reporting](https://useorigin.app/docs/security): Private vulnerability reporting, redacted bug reports, local security boundaries, and security.txt.
 - [Evaluation](https://useorigin.app/docs/evaluation): Retrieval benchmark scope, current LongMemEval and LoCoMo snapshot, and rerun methodology.
+- [Desktop app status](https://useorigin.app/docs/desktop-app): Whether the optional GUI is required, how the separate desktop repo fits, and what the daemon still owns.
 - [Changelog](https://useorigin.app/docs/changelog): Stable release notes and how to read unreleased main-branch work.
 - [Roadmap and status](https://useorigin.app/docs/roadmap): Released, on-main, and planned work without confusing roadmap themes for shipped guarantees.
 - [Project scope](https://useorigin.app/docs/project-scope): What Origin is for and what it deliberately avoids.
