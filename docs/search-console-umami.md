@@ -57,6 +57,7 @@ Use these query groups:
 - Setup/troubleshooting: `add memory to claude code`, `codex persistent memory`, `origin 7878`
 - Workflows: `claude code memory`, `cursor memory`, `codex memory`, `ai coding agent work memory`
 - Comparisons: `origin vs basic memory`, `origin vs claude-mem`, `origin vs mem0`, `basic memory alternative`
+- Obsidian AI memory: `origin vs obsidian`, `obsidian ai memory`, `obsidian-mind alternative`, `claude-obsidian alternative`, `claude obsidian memory`, `obsidian mcp`, `obsidian mcp tools`
 - Trust/architecture: `local-first ai memory`, `ai memory provenance`, `git history ai memory`, `markdown local index`
 
 ## 5) Decision rules

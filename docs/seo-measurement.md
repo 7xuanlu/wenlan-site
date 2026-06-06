@@ -97,6 +97,7 @@ Track these groups separately in Search Console:
 - Developer workflow: `origin claude code`, `origin for claude code`, `claude code memory`, `claude code persistent memory`, `cursor memory`, `ai coding agent work memory`
 - Setup and troubleshooting: `where does claude code store memory`, `add memory to claude code`, `codex persistent memory`, `cursor mcp memory`, `claude desktop mcp memory`, `origin 7878`
 - Comparisons: `origin vs basic memory`, `origin vs claude-mem`, `origin vs superlocal memory`, `origin vs mcp-memory-service`, `origin vs chatgpt memory`, `origin vs obsidian`, `origin vs notion ai`, `origin vs mem0`, `basic memory alternative`, `claude-mem alternative`
+- Obsidian AI memory: `obsidian ai memory`, `obsidian-mind alternative`, `claude-obsidian alternative`, `claude obsidian memory`, `obsidian mcp`, `obsidian mcp tools`, `obsidian claude code mcp`, `claude code obsidian memory`
 - Architecture/workflow: `markdown ai work memory`, `local index ai work memory`, `distilled wiki pages ai work memory`, `ai work memory vs knowledge base`, `ai agent handoff`, `persistent context ai agents`, `ai memory provenance`, `review ai memory`, `git history ai memory`
 
 ## AI Visibility Prompts
@@ -123,7 +124,7 @@ Run the same prompts monthly in Claude, ChatGPT, Gemini, and Perplexity. Record 
 18. Where does Origin store Claude Code memory?
 19. Compare Origin vs ChatGPT memory.
 20. Compare Origin vs Mem0 for AI memory.
-21. Compare Origin vs Obsidian for AI memory.
+21. Compare Origin vs Obsidian, obsidian-mind, and claude-obsidian for AI memory.
 22. What is AI memory provenance and why does it matter?
 23. How can Cursor and Claude Code share AI memory?
 24. What should I capture in AI work memory?

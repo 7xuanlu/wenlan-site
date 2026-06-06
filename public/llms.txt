@@ -44,7 +44,7 @@
 - [Origin vs Superlocal Memory](https://useorigin.app/learn/origin-vs-superlocal-memory): Honest LoCoMo comparison (Superlocal currently 4.8 points ahead in zero-LLM config), a 10-second inspectability test, and a two-week parallel-trial protocol for evaluating both.
 - [Origin vs mcp-memory-service](https://useorigin.app/learn/origin-vs-mcp-memory-service): Local AI work memory vs self-hosted agent-pipeline memory backend.
 - [Origin vs ChatGPT memory](https://useorigin.app/learn/origin-vs-chatgpt-memory): Built-in assistant personalization vs local cross-tool work memory.
-- [Origin vs Obsidian for AI memory](https://useorigin.app/learn/origin-vs-obsidian-ai-memory): Human note system vs agent-facing work memory.
+- [Origin vs Obsidian for AI memory](https://useorigin.app/learn/origin-vs-obsidian-ai-memory): Obsidian vault workflows, obsidian-mind, claude-obsidian, Obsidian MCP bridges, and Origin's agent-facing work-memory loop.
 - [Origin vs Notion AI](https://useorigin.app/learn/origin-vs-notion-ai): Team workspace AI vs local AI work memory.
 - [Origin vs Mem0](https://useorigin.app/learn/origin-vs-mem0): App memory infrastructure vs personal local AI work memory.
 
