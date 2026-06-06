@@ -180,26 +180,6 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
     ],
   };
 
-  const faqSchema =
-    article.faqs.length > 0
-      ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          speakable: {
-            "@type": "SpeakableSpecification",
-            cssSelector: ["h1", "h2", "summary"],
-          },
-          mainEntity: article.faqs.map((faq) => ({
-            "@type": "Question",
-            name: faq.question,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: faq.answer,
-            },
-          })),
-        }
-      : null;
-
   return (
     <main className="grain min-h-screen">
       <script
@@ -210,12 +190,6 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
 
       <article>
         <header className="relative border-b border-[var(--o-border-subtle)] px-6 py-24 sm:py-32">
@@ -319,6 +293,16 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                           </li>
                         ))}
                       </ul>
+                    )}
+                    {section.code && (
+                      <div className="mt-6 overflow-hidden rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)]">
+                        <p className="border-b border-[var(--o-border-subtle)] px-4 py-3 font-mono text-[10px] tracking-[0.18em] text-[var(--o-text-muted)] uppercase">
+                          {section.code.label}
+                        </p>
+                        <pre className="overflow-x-auto p-4 text-sm leading-relaxed text-[var(--o-text-secondary)]">
+                          <code>{section.code.code}</code>
+                        </pre>
+                      </div>
                     )}
                   </div>
                 </section>

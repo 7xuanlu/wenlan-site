@@ -5,23 +5,6 @@ import { ThemeToggle } from "./theme-toggle";
 import { FAQSection, homepageFaqs } from "@/components/sections";
 import { FeatureSection, HumanControlSection, MemoryDistillerySection, ProblemSection, SolutionSection } from "@/components/problem-solution";
 
-const homepageFaqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  speakable: {
-    "@type": "SpeakableSpecification",
-    cssSelector: ["h1", "h2", "summary"],
-  },
-  mainEntity: homepageFaqs.map((faq) => ({
-    "@type": "Question",
-    name: faq.q,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.a,
-    },
-  })),
-};
-
 const siteNavigationSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
@@ -191,10 +174,6 @@ function TokenEfficiencySection() {
 export default function LandingPage() {
   return (
     <div className="grain relative min-h-screen">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageFaqSchema) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavigationSchema) }}

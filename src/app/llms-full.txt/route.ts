@@ -31,6 +31,12 @@ function formatArticle(article: (typeof articles)[number]): string {
       }
       lines.push(``);
     }
+    if (section.code) {
+      lines.push("```bash");
+      lines.push(section.code.code);
+      lines.push("```");
+      lines.push(``);
+    }
   }
   if (article.comparisonTable) {
     lines.push(`### Side-by-side: Origin vs ${article.comparisonTable.competitorName}`);

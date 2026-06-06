@@ -2,6 +2,8 @@
 
 Use this checklist after publishing SEO pages on `useorigin.app`. The goal is to separate brand demand, category discovery, and AI-answer visibility instead of treating all traffic as one number.
 
+Reusable runbook: `docs/seo-growth-loop.md`.
+
 ## Google Search Console Setup
 
 1. Verify the `https://useorigin.app` property.
@@ -29,9 +31,60 @@ Use this checklist after publishing SEO pages on `useorigin.app`. The goal is to
    - `https://useorigin.app/learn/origin-vs-superlocal-memory`
    - `https://useorigin.app/learn/markdown-local-index-ai-memory`
    - `https://useorigin.app/learn/ai-agent-handoff-loop`
+   - `https://useorigin.app/learn/where-origin-stores-claude-code-memory`
+   - `https://useorigin.app/learn/how-to-add-memory-to-claude-code`
+   - `https://useorigin.app/learn/how-to-give-codex-persistent-memory`
+   - `https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor`
+   - `https://useorigin.app/learn/claude-desktop-mcp-memory-setup`
+   - `https://useorigin.app/learn/ai-agent-memory-local-vs-cloud`
+   - `https://useorigin.app/learn/ai-coding-agent-loses-context`
+   - `https://useorigin.app/learn/persistent-project-context-for-ai-agents`
+   - `https://useorigin.app/learn/mcp-memory-server-localhost-7878`
+   - `https://useorigin.app/learn/what-to-capture-in-ai-work-memory`
+   - `https://useorigin.app/learn/origin-codex-workflow`
+   - `https://useorigin.app/learn/origin-cursor-workflow`
+   - `https://useorigin.app/learn/origin-claude-desktop-workflow`
+   - `https://useorigin.app/learn/origin-gemini-cli-workflow`
+   - `https://useorigin.app/learn/origin-vscode-mcp-workflow`
+   - `https://useorigin.app/learn/claude-code-session-handoff`
+   - `https://useorigin.app/learn/cursor-claude-code-shared-memory`
+   - `https://useorigin.app/learn/codex-claude-code-shared-memory`
+   - `https://useorigin.app/learn/multi-agent-memory-workflow`
+   - `https://useorigin.app/learn/ai-agent-project-status-handoff`
+   - `https://useorigin.app/learn/origin-vs-mcp-memory-service`
+   - `https://useorigin.app/learn/origin-vs-chatgpt-memory`
+   - `https://useorigin.app/learn/origin-vs-obsidian-ai-memory`
+   - `https://useorigin.app/learn/origin-vs-notion-ai`
+   - `https://useorigin.app/learn/origin-vs-mem0`
+   - `https://useorigin.app/learn/source-backed-wiki-pages-ai-work`
+   - `https://useorigin.app/learn/ai-memory-provenance`
+   - `https://useorigin.app/learn/local-git-history-ai-memory`
+   - `https://useorigin.app/learn/review-before-trust-ai-memory`
+   - `https://useorigin.app/learn/project-scope-ai-memory`
    - `https://useorigin.app/about`
    - `https://useorigin.app/llms.txt`
 4. Track impressions before rankings. New pages usually show impressions before stable positions.
+5. Do not start another content batch until the newest Learn pages are discovered/indexed or GSC shows which query clusters are earning impressions.
+
+## Weekly Searchfit/GSC Loop
+
+Use `docs/search-console-umami.md` as the operating checklist. The loop is:
+
+1. Export Search Console Queries and Pages for the last 28 days.
+2. Classify queries by the groups below.
+3. Identify positions 8-30, low CTR pages, pages with impressions but no clicks, and indexed pages with no impressions.
+4. Check Search Console indexing reasons before changing content.
+5. Decide one action per row: wait, technical fix, title/meta refresh, internal-link refresh, page expansion, distribution, or new article.
+6. Record the before/after snapshot whenever content changes.
+
+Decision gates:
+
+- **Technical before content:** sitemap, canonical, redirect, `noindex`, and status issues are fixed before writing.
+- **Refresh before net-new:** pages with impressions get better quick answers, command blocks, screenshots, and internal links before creating adjacent articles.
+- **New article only on evidence:** write a new Learn article only when GSC/Searchfit shows a query cluster that current pages do not answer.
+- **Reddit only when useful:** use `docs/reddit-distribution.md` only for value-first posts that teach a workflow, checklist, or lesson without requiring Origin.
+
+Indexing note: `Alternate page with proper canonical tag` is usually informational when it points from an old, duplicate, or redirected URL to the canonical page. Treat it as a problem only when the canonical URL we want indexed is missing, non-200, absent from sitemap, or replaced by the wrong canonical.
 
 ## Query Groups
 
@@ -42,8 +95,9 @@ Track these groups separately in Search Console:
 - MCP memory: `mcp memory server`, `memory mcp`, `claude mcp memory`, `cursor mcp memory`
 - Local-first/privacy: `local-first ai work memory`, `private ai work memory`, `on-device ai work memory`, `open source ai work memory`
 - Developer workflow: `origin claude code`, `origin for claude code`, `claude code memory`, `claude code persistent memory`, `cursor memory`, `ai coding agent work memory`
-- Comparisons: `origin vs basic memory`, `origin vs claude-mem`, `origin vs superlocal memory`, `basic memory alternative`, `claude-mem alternative`
-- Architecture/workflow: `markdown ai work memory`, `local index ai work memory`, `distilled wiki pages ai work memory`, `ai work memory vs knowledge base`, `ai agent handoff`, `persistent context ai agents`
+- Setup and troubleshooting: `where does claude code store memory`, `add memory to claude code`, `codex persistent memory`, `cursor mcp memory`, `claude desktop mcp memory`, `origin 7878`
+- Comparisons: `origin vs basic memory`, `origin vs claude-mem`, `origin vs superlocal memory`, `origin vs mcp-memory-service`, `origin vs chatgpt memory`, `origin vs obsidian`, `origin vs notion ai`, `origin vs mem0`, `basic memory alternative`, `claude-mem alternative`
+- Architecture/workflow: `markdown ai work memory`, `local index ai work memory`, `distilled wiki pages ai work memory`, `ai work memory vs knowledge base`, `ai agent handoff`, `persistent context ai agents`, `ai memory provenance`, `review ai memory`, `git history ai memory`
 
 ## AI Visibility Prompts
 
@@ -63,11 +117,27 @@ Run the same prompts monthly in Claude, ChatGPT, Gemini, and Perplexity. Record 
 12. How should I use Origin with Claude Code?
 13. What is the difference between AI work memory and a knowledge base?
 14. Why would an AI work memory tool distill wiki pages from captures?
+15. How do I add memory to Claude Code?
+16. How do I give Codex persistent project memory?
+17. How do I add MCP memory to Cursor?
+18. Where does Origin store Claude Code memory?
+19. Compare Origin vs ChatGPT memory.
+20. Compare Origin vs Mem0 for AI memory.
+21. Compare Origin vs Obsidian for AI memory.
+22. What is AI memory provenance and why does it matter?
+23. How can Cursor and Claude Code share AI memory?
+24. What should I capture in AI work memory?
 
 ## GEO Surface
 
 - `https://useorigin.app/llms.txt` is a concise AI-readable map of Origin, docs, Learn articles, GitHub, and official positioning.
 - Treat `llms.txt` as cheap structured discoverability, not a guaranteed ranking factor or replacement for crawlable HTML.
+
+## Distribution Surface
+
+- Reddit drafts live in `docs/reddit-distribution.md`.
+- Treat Reddit as a feedback and referral channel, not a backlink shortcut.
+- Measure each post by Reddit referrals, branded-query lift, comments that reveal search intent, and whether it creates a useful page-refresh idea.
 
 ## Baseline Snapshots
 
