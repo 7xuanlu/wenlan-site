@@ -25,6 +25,16 @@
 - [Claude Code memory](https://useorigin.app/learn/claude-code-memory): How Origin works inside Claude Code sessions and how /capture and /handoff fit the work loop.
 - [AI agent handoff loop](https://useorigin.app/learn/ai-agent-handoff-loop): Session-end discipline that prevents context loss between AI sessions.
 - [Origin for Claude Code](https://useorigin.app/learn/origin-for-claude-code): The practical /init, /brief, /capture, /handoff, and /distill loop for Claude Code users.
+- [Where Origin stores Claude Code memory](https://useorigin.app/learn/where-origin-stores-claude-code-memory): Local ~/.origin artifacts, pages, sessions, and git history.
+- [How to add memory to Claude Code](https://useorigin.app/learn/how-to-add-memory-to-claude-code): Plugin install, /init, and first capture/recall verification.
+- [How to give Codex persistent memory](https://useorigin.app/learn/how-to-give-codex-persistent-memory): MCP-only setup for Codex with Origin.
+- [How to add MCP memory to Cursor](https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor): Cursor MCP setup and verification loop.
+- [Claude Desktop MCP memory setup](https://useorigin.app/learn/claude-desktop-mcp-memory-setup): Connect Claude Desktop to Origin through MCP.
+- [AI agent memory: local vs cloud](https://useorigin.app/learn/ai-agent-memory-local-vs-cloud): Choose the right trust boundary for AI memory.
+- [Why AI coding agents lose context](https://useorigin.app/learn/ai-coding-agent-loses-context): The session-boundary problem Origin solves.
+- [Persistent project context for AI agents](https://useorigin.app/learn/persistent-project-context-for-ai-agents): Decisions, lessons, constraints, and handoffs across tools.
+- [MCP memory server on localhost 7878](https://useorigin.app/learn/mcp-memory-server-localhost-7878): Origin daemon boundary and setup debugging.
+- [What to capture in AI work memory](https://useorigin.app/learn/what-to-capture-in-ai-work-memory): Capture quality rules for durable AI work context.
 
 ## Comparisons
 
@@ -32,6 +42,29 @@
 - [Origin vs Basic Memory](https://useorigin.app/learn/origin-vs-basic-memory): Markdown knowledge base vs AI work-session memory layer. Side-by-side dimensions plus a migration note.
 - [Origin vs claude-mem](https://useorigin.app/learn/origin-vs-claude-mem): Observer-style Claude Code memory vs MCP-first cross-tool memory.
 - [Origin vs Superlocal Memory](https://useorigin.app/learn/origin-vs-superlocal-memory): Honest LoCoMo comparison (Superlocal currently 4.8 points ahead in zero-LLM config), a 10-second inspectability test, and a two-week parallel-trial protocol for evaluating both.
+- [Origin vs mcp-memory-service](https://useorigin.app/learn/origin-vs-mcp-memory-service): Local AI work memory vs self-hosted agent-pipeline memory backend.
+- [Origin vs ChatGPT memory](https://useorigin.app/learn/origin-vs-chatgpt-memory): Built-in assistant personalization vs local cross-tool work memory.
+- [Origin vs Obsidian for AI memory](https://useorigin.app/learn/origin-vs-obsidian-ai-memory): Human note system vs agent-facing work memory.
+- [Origin vs Notion AI](https://useorigin.app/learn/origin-vs-notion-ai): Team workspace AI vs local AI work memory.
+- [Origin vs Mem0](https://useorigin.app/learn/origin-vs-mem0): App memory infrastructure vs personal local AI work memory.
+
+## Workflows and Trust
+
+- [Origin workflow for Codex](https://useorigin.app/learn/origin-codex-workflow): Context, capture, recall, and handoff from Codex.
+- [Origin workflow for Cursor](https://useorigin.app/learn/origin-cursor-workflow): Cursor MCP memory workflow for repeated coding sessions.
+- [Origin workflow for Claude Desktop](https://useorigin.app/learn/origin-claude-desktop-workflow): Planning and research memories that later coding agents can reuse.
+- [Origin workflow for Gemini CLI](https://useorigin.app/learn/origin-gemini-cli-workflow): CLI memory workflow through MCP.
+- [Origin workflow for VS Code MCP clients](https://useorigin.app/learn/origin-vscode-mcp-workflow): VS Code surfaces using Origin's local daemon.
+- [Claude Code session handoff](https://useorigin.app/learn/claude-code-session-handoff): Use /handoff to preserve state for future sessions.
+- [Shared memory between Cursor and Claude Code](https://useorigin.app/learn/cursor-claude-code-shared-memory): One local daemon across two coding tools.
+- [Shared memory between Codex and Claude Code](https://useorigin.app/learn/codex-claude-code-shared-memory): Carry implementation context across Codex and Claude Code.
+- [Multi-agent memory workflow](https://useorigin.app/learn/multi-agent-memory-workflow): Shared local memory for multiple AI clients.
+- [AI agent project status handoff](https://useorigin.app/learn/ai-agent-project-status-handoff): Durable status without bloating memory.
+- [Source-backed wiki pages for AI work](https://useorigin.app/learn/source-backed-wiki-pages-ai-work): Readable pages with source memory IDs.
+- [AI memory provenance](https://useorigin.app/learn/ai-memory-provenance): Why source IDs, revisions, and review matter.
+- [Local git history for AI memory](https://useorigin.app/learn/local-git-history-ai-memory): Inspectable memory and page write history.
+- [Review before trust in AI memory](https://useorigin.app/learn/review-before-trust-ai-memory): Keep uncertain, stale, or contradictory context visible.
+- [What Origin is not](https://useorigin.app/learn/project-scope-ai-memory): Product boundaries for local AI work memory.
 
 ## Reference
 

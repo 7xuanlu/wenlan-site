@@ -139,8 +139,8 @@ export default function RootLayout({
               screenshot: "https://useorigin.app/og.png",
               featureList: [
                 "Hybrid retrieval on libSQL: vector + FTS5 + reciprocal-rank fusion + knowledge-graph context. 93.6% Recall@5 on LongMemEval (oracle, 500 Q), 70.0% on LoCoMo.",
-                "Real git versioning: every memory write is a git commit in ~/.origin/.git/. Inspect with git log, revert with git checkout, branch and blame as needed.",
-                "Mandatory refreshable provenance: distilled wiki pages cite source memory IDs. The daemon rejects pages with empty source_memory_ids (HTTP 422). Pages refresh as new memories arrive without losing the citation chain.",
+                "Readable artifact history: pages, session logs, and project status Markdown are committed to local git under ~/.origin/.git/. Raw memory captures remain daemon-owned database records.",
+                "Source-backed provenance: distilled wiki page records keep source memory IDs. The daemon rejects pages with empty source_memory_ids (HTTP 422), and pages can grow or refresh without losing their source chain.",
                 "Auditable memory: low-confidence captures, contradictions, supersession chains, and protected-memory conflicts surface for review instead of silently entering context.",
                 "Composition over storage: memories distill into pages. Sessions track workflow. An entity graph links people, projects, tools, and relations. ~30 MCP tools across one daemon, not 100+ skills bolted on.",
                 "Explicit spaces: tag memories, pages, and recalls with space=work | personal | client-X. Auto-detected from current repo or workspace.",

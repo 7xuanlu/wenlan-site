@@ -6,7 +6,7 @@ Production: [useorigin.app](https://useorigin.app).
 
 ## Stack
 
-Next.js 16 (App Router) on Vercel. Tailwind 4. TypeScript. JSON-LD schema everywhere. IndexNow auto-ping on every production deploy.
+Next.js 16 (App Router) on Vercel. Tailwind 4. TypeScript. JSON-LD on appropriate page types. IndexNow auto-ping on every production deploy.
 
 ## Develop
 
@@ -37,7 +37,7 @@ The site ships the following AI-discovery + SEO surfaces:
 - `/.well-known/security.txt` per RFC 9116
 - `/manifest.webmanifest` PWA manifest
 - `/humans.txt`
-- Per-page JSON-LD: Article + TechArticle + SoftwareApplication + Organization + Person + WebSite + CollectionPage + FAQPage + HowTo + VideoObject + BreadcrumbList + SiteNavigationElement
+- Per-page JSON-LD: Article + TechArticle + SoftwareApplication + Organization + Person + WebSite + CollectionPage + HowTo + VideoObject + BreadcrumbList + SiteNavigationElement. Visible FAQ content stays in HTML, but `FAQPage` JSON-LD is intentionally omitted because Google no longer shows FAQ rich results for ordinary software sites.
 - Dynamic per-page OG images via `next/og` (Learn articles, Doc pages, About, Get started, section indices)
 - IndexNow auto-ping on every production deploy reaching Bing, Yandex, Seznam, Naver, Yep, Internet Archive, Amazon Bot
 

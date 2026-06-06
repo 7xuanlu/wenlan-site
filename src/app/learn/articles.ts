@@ -1,3 +1,5 @@
+import { seoArticles } from "./seo-articles";
+
 export const SITE_URL = "https://useorigin.app";
 export const DEFAULT_AUTHOR = "Qi-Xuan Lu";
 export const DEFAULT_AUTHOR_URL = "https://github.com/7xuanlu";
@@ -11,6 +13,10 @@ export type LearnArticleSection = {
   heading: string;
   body: string[];
   bullets?: string[];
+  code?: {
+    label: string;
+    code: string;
+  };
 };
 
 export type LearnArticleFaq = {
@@ -61,7 +67,7 @@ export type LearnArticle = {
 
 const updatedAt = "2026-05-27";
 
-export const articles: LearnArticle[] = [
+const baseArticles: LearnArticle[] = [
   {
     slug: "ai-work-memory",
     eyebrow: "Concept",
@@ -409,14 +415,14 @@ export const articles: LearnArticle[] = [
         heading: "Capture decisions while they are fresh",
         body: [
           "`/capture` is for durable work knowledge: decisions, lessons, gotchas, project constraints, corrections, and preferences.",
-          "A good capture includes why the fact matters. One atomic memory is easier to search, supersede, cite, and distill than a paragraph that mixes five ideas.",
+          "A good capture includes why the fact matters. One atomic memory is easier to search, supersede, inspect, and distill than a paragraph that mixes five ideas.",
         ],
       },
       {
         heading: "Close with /handoff, then distill when needed",
         body: [
           "`/handoff` writes what changed, what remains open, and what the next agent should know. It also gives Origin better source material than a raw transcript.",
-          "When a theme repeats across sessions, `/distill` turns related captures into source-backed wiki pages. Those pages cite source memory IDs and refresh as the work changes.",
+          "When a theme repeats across sessions, `/distill` turns related captures into source-backed wiki pages. The page record keeps source memory IDs, and pages can be refreshed as the work changes.",
         ],
         bullets: [
           "/brief: orient the agent before work.",
@@ -705,7 +711,7 @@ export const articles: LearnArticle[] = [
         {
           dimension: "Storage",
           origin:
-            "Local libSQL + Markdown projection in ~/.origin/, every write is a git commit in ~/.origin/.git/.",
+            "Local libSQL for retrieval plus Markdown projections in ~/.origin/; readable artifacts are tracked in ~/.origin/.git/.",
           competitor: "Markdown files in a local Obsidian-style vault.",
         },
         {
@@ -718,14 +724,14 @@ export const articles: LearnArticle[] = [
         {
           dimension: "Provenance",
           origin:
-            "Mandatory source_memory_ids on every distilled page. Daemon rejects pages with no source (HTTP 422). Pages refresh as new memories arrive without losing the citation chain.",
+            "Mandatory source_memory_ids on every distilled page record. Daemon rejects pages with no source (HTTP 422). Pages can grow or refresh without losing the source chain.",
           competitor:
             "Wikilinks between notes; provenance is whatever the author writes by hand.",
         },
         {
           dimension: "Versioning",
           origin:
-            "Real git in ~/.origin/.git/. git log, git checkout, branch, blame.",
+            "Real git history for readable artifacts in ~/.origin/.git/. Raw memory captures remain daemon-owned database records.",
           competitor:
             "File mtime; bring-your-own git if you want history.",
         },
@@ -1099,7 +1105,7 @@ export const articles: LearnArticle[] = [
         {
           dimension: "Versioning",
           origin:
-            "Every memory write is a git commit in ~/.origin/.git/. git log, git checkout, branch, blame.",
+            "Readable pages, session logs, and project status Markdown get local git history in ~/.origin/.git/.",
           competitor:
             "No public commitment to per-write git history.",
         },
@@ -1307,6 +1313,8 @@ export const articles: LearnArticle[] = [
     },
   },
 ];
+
+export const articles: LearnArticle[] = [...baseArticles, ...seoArticles];
 
 export function getArticle(slug: string): LearnArticle | undefined {
   return articles.find((article) => article.slug === slug);
