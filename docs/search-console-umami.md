@@ -2,6 +2,8 @@
 
 This is Origin's weekly measurement loop. Use it to decide whether the next SEO sprint should be technical cleanup, page refreshes, distribution, or new content. Do not start a new content batch until Search Console shows which canonical pages are indexed and which query clusters are already earning impressions.
 
+This loop is also scheduled in Codex as the active heartbeat automation `weekly-origin-seo-cleanup`. The automation should wake this thread weekly, use live GSC data when the authenticated browser/session is available, and fall back to deployed-site technical checks when account-gated data is unavailable.
+
 ## 1) Verify the site in Google Search Console
 
 Use a **Domain property** (preferred over URL prefix). It covers apex (`useorigin.app`), `www`, and any future subdomain in one verification.
@@ -43,7 +45,7 @@ Keep raw exports outside git. Commit only the interpreted weekly notes when they
 
 ## 4) Weekly worksheet
 
-Copy this table into the weekly note.
+Copy `docs/seo-audits/weekly-template.md` into a dated weekly note, then fill it from GSC and Umami. Use the compact table below when you only need a quick note.
 
 | Date | Query | Query group | Page | Impressions | Clicks | CTR | Avg position | Indexed? | Action | Owner | Date changed |
 |---|---|---|---|---:|---:|---:|---:|---|---|---|---|
@@ -55,8 +57,9 @@ Use these query groups:
 - Category: `ai work memory`, `memory for ai work`, `persistent memory for ai assistants`
 - MCP memory: `mcp memory server`, `memory mcp`, `claude mcp memory`, `cursor mcp memory`
 - Setup/troubleshooting: `add memory to claude code`, `codex persistent memory`, `origin 7878`
-- Workflows: `claude code memory`, `cursor memory`, `codex memory`, `ai coding agent work memory`
+- Workflows: `claude code memory`, `claude code /memory`, `claude code memory command`, `cursor memory`, `codex memory`, `ai coding agent work memory`
 - Comparisons: `origin vs basic memory`, `origin vs claude-mem`, `origin vs mem0`, `basic memory alternative`
+- Obsidian AI memory: `origin vs obsidian`, `obsidian ai memory`, `obsidian-mind alternative`, `claude-obsidian alternative`, `claude obsidian memory`, `obsidian mcp`, `obsidian mcp tools`
 - Trust/architecture: `local-first ai memory`, `ai memory provenance`, `git history ai memory`, `markdown local index`
 
 ## 5) Decision rules

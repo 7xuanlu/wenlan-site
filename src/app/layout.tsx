@@ -23,9 +23,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const siteDescription =
-  "Origin is local-first memory for AI work. Hybrid retrieval (93.6% Recall@5 on LongMemEval), real git versioning of every memory write, mandatory provenance on distilled pages, and one daemon across Claude Code, Cursor, Codex, Claude Desktop, and other MCP clients.";
+  "Origin gives Claude Code, Cursor, Codex, and other MCP clients shared local AI work memory with capture, recall, handoff, provenance, and readable Markdown artifacts.";
 
-const siteTitle = "Origin | Local-First Memory for AI Work";
+const siteTitle = "Origin | Shared Local Memory for Claude Code, Cursor, Codex";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://useorigin.app"),

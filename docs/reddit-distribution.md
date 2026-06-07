@@ -50,6 +50,23 @@ Use Reddit for learning and distribution only after the relevant Learn/Docs page
 3. Common failure modes: wrong MCP config file, stale client process, HTTP vs stdio mismatch, multiple local daemons.
 4. Soft link to `/learn/mcp-memory-server-localhost-7878` or `/docs/troubleshooting`.
 
+## Draft 2A: Claude Code /memory Boundary
+
+**Target communities:** r/ClaudeAI, r/ClaudeCode.
+
+**Title options:**
+
+- When I use Claude Code /memory vs a shared MCP memory server
+- The boundary that helped me keep Claude Code memory from becoming messy
+
+**Body outline:**
+
+1. Problem: Claude Code has native memory, but teams still confuse CLAUDE.md, `/memory`, auto memory, and external MCP memory.
+2. Useful boundary: CLAUDE.md for stable instructions; `/memory` for inspecting/editing loaded native memory; shared MCP memory for decisions, gotchas, handoffs, and context that should reach Cursor/Codex too.
+3. Concrete examples: one project rule, one decision capture, one stale gotcha, one handoff.
+4. Mistake learned: copying every native memory into a second memory system creates duplicate stale context.
+5. Soft link only if useful: `/learn/claude-code-memory-command-vs-origin`.
+
 ## Draft 3: Local-First AI Memory Boundary
 
 **Target communities:** r/selfhosted, r/privacy, r/LocalLLaMA, r/opensource.
@@ -97,4 +114,3 @@ Use Reddit for learning and distribution only after the relevant Learn/Docs page
 2. Distinction: knowledge base, raw memory, source-backed page, handoff, local index.
 3. Practical examples: a decision, a gotcha, a stale fact, a project status handoff.
 4. Soft link to `/learn/ai-work-memory-vs-knowledge-base` or `/learn/source-backed-wiki-pages-ai-work`.
-

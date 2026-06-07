@@ -99,14 +99,15 @@ const setupArticles: BaseSpec[] = [
     title: "Where Origin Stores Claude Code Memory",
     description:
       "Find the local files Origin writes when Claude Code captures memories, handoffs, and distilled pages.",
-    metaTitle: "Where Does Origin Store Claude Code Memory? | Origin",
+    metaTitle: "Where Origin Stores Claude Code Memory | ~/.origin",
     metaDescription:
-      "Origin stores Claude Code work memory locally under ~/.origin, with pages, sessions, status files, and git history you can inspect.",
+      "Find Origin's local Claude Code memory artifacts under ~/.origin: pages, sessions, status files, database symlinks, and git history.",
     keywords: [
       "where does Claude Code store memory",
       "Claude Code memory location",
       "Origin memory location",
       "~/.origin",
+      "Origin ~/.origin pages",
       "Claude Code local memory",
     ],
     audience: "Claude Code users checking where memory lives on disk",
@@ -131,6 +132,10 @@ const setupArticles: BaseSpec[] = [
       "Run ~/.origin/bin/origin status to verify the daemon.",
       "Inspect ~/.origin/.git when you need history for readable artifact writes.",
     ],
+    code: {
+      label: "Local artifact checks",
+      code: "ls ~/.origin\nls ~/.origin/pages\nls ~/.origin/sessions\n~/.origin/bin/origin status\ngit -C ~/.origin log --oneline -5",
+    },
     caution:
       "Do not edit the database directly. MCP memories live in the daemon DB; distilled pages and session handoffs are the readable projection. Use Origin commands and tools for memory writes, review, distill, and delete.",
     faq: [
@@ -202,7 +207,7 @@ const setupArticles: BaseSpec[] = [
       "Is MCP-only setup enough for Claude Code?",
       "It can be enough for raw tools, but the plugin is the richer path because it adds slash commands like /brief, /handoff, /distill, and /init.",
     ],
-    relatedSlugs: ["origin-for-claude-code", "claude-code-memory", "ai-agent-handoff-loop"],
+    relatedSlugs: ["claude-code-memory-command-vs-origin", "origin-for-claude-code", "claude-code-memory"],
     officialReferences: [
       {
         label: "Origin Claude Code plugin",
@@ -211,6 +216,74 @@ const setupArticles: BaseSpec[] = [
       {
         label: "Origin get started docs",
         href: "https://useorigin.app/docs/get-started",
+      },
+    ],
+  },
+  {
+    slug: "claude-code-memory-command-vs-origin",
+    eyebrow: "Claude Code",
+    category: "Workflows",
+    title: "Claude Code /memory vs Origin: Native Memory or Shared Local Context?",
+    description:
+      "Use Claude Code /memory for native project memory inspection, and use Origin when context needs provenance, handoff, and cross-tool MCP access.",
+    metaTitle: "Claude Code /memory vs Origin | Local MCP Memory",
+    metaDescription:
+      "Understand Claude Code /memory, CLAUDE.md, auto memory, and when Origin adds local MCP memory shared with Cursor, Codex, and other tools.",
+    keywords: [
+      "Claude Code /memory",
+      "Claude Code memory command",
+      "Claude Code memory vs Origin",
+      "Claude Code MCP memory",
+      "Claude Code shared memory",
+    ],
+    audience: "Claude Code users deciding whether native memory is enough",
+    heroBullets: [
+      "Claude Code /memory helps inspect and edit what Claude Code has loaded.",
+      "CLAUDE.md and auto memory are the right place for stable project instructions and repeated corrections.",
+      "Origin is for source-backed, local, cross-tool work memory that should also reach Cursor, Codex, and other MCP clients.",
+    ],
+    quickAnswer:
+      "Start with Claude Code's native memory. Use /memory to inspect loaded memories, CLAUDE.md for stable project instructions, and auto memory for repeated preferences and corrections. Add Origin when the memory should become a local, reviewable work layer shared through MCP.",
+    problem:
+      "This question appears when Claude Code remembers some things but still loses session state, decisions, gotchas, or handoffs that matter outside the current chat. The risk is adding another memory layer before understanding what native Claude Code memory already solves.",
+    originFit:
+      "Origin should not duplicate CLAUDE.md. Origin fits the evolving layer: decisions, lessons, gotchas, project status, source-backed pages, and handoffs that need provenance and cross-client recall.",
+    actionHeading: "Choose the right memory surface",
+    actionIntro:
+      "Use the smallest memory surface that solves the job, then add Origin when the work needs to outgrow Claude Code's native memory boundary.",
+    actionBullets: [
+      "Use CLAUDE.md for durable project rules, commands, and conventions.",
+      "Use /memory when you need to inspect or edit what Claude Code has loaded.",
+      "Use Claude Code auto memory for repeated corrections and preferences Claude discovers.",
+      "Use Origin /capture for one source-backed decision, gotcha, or project fact that should be searchable later.",
+      "Use Origin /handoff when the next session or another agent needs current project state.",
+      "Use Origin MCP setup when Cursor, Codex, Claude Desktop, or another client should share the same local memory.",
+    ],
+    code: {
+      label: "Native first, Origin when shared",
+      code: "/memory\n# Check CLAUDE.md for stable instructions.\n\n/capture We chose <decision> because <reason>; verify with <command>.\n/handoff",
+    },
+    caution:
+      "Do not copy everything from /memory into Origin. Keep Claude Code instructions in Claude Code, and store only durable work context that benefits from provenance, search, handoff, or cross-tool access.",
+    faq: [
+      "Does Origin replace Claude Code /memory?",
+      "No. /memory is Claude Code's native inspection and editing surface. Origin adds a local work-memory layer for source-backed context and MCP sharing.",
+      "When should I use both?",
+      "Use both when Claude Code needs its own instructions and your broader AI workflow also needs local, reviewable context across tools.",
+    ],
+    relatedSlugs: ["claude-code-memory", "how-to-add-memory-to-claude-code", "origin-for-claude-code"],
+    officialReferences: [
+      {
+        label: "Claude Code memory docs",
+        href: "https://code.claude.com/docs/en/memory",
+      },
+      {
+        label: "Claude Code MCP docs",
+        href: "https://code.claude.com/docs/en/mcp",
+      },
+      {
+        label: "Origin Claude Code workflow",
+        href: "https://useorigin.app/learn/origin-for-claude-code",
       },
     ],
   },
@@ -247,7 +320,7 @@ const setupArticles: BaseSpec[] = [
     actionIntro:
       "Use the MCP-only setup path because Codex does not install the Origin Claude Code plugin.",
     actionBullets: [
-      "Install the local runtime. The current npm setup helper targets macOS Apple Silicon; use the current release or source path for other platforms.",
+      "Install the local runtime with the current setup path for your operating system.",
       "Run ~/.origin/bin/origin mcp add codex.",
       "Restart Codex if the client does not pick up MCP changes live.",
       "Call the doctor tool or run a small capture/recall test.",
@@ -281,16 +354,17 @@ const setupArticles: BaseSpec[] = [
     slug: "how-to-add-mcp-memory-to-cursor",
     eyebrow: "Setup",
     category: "Workflows",
-    title: "How to Add MCP Memory to Cursor",
+    title: "Cursor Memory MCP: How to Add Local AI Work Memory",
     description:
-      "Wire Cursor to Origin's local MCP server so coding sessions can capture and recall project context.",
-    metaTitle: "How to Add MCP Memory to Cursor | Origin",
+      "Wire Cursor to Origin's local MCP memory server so coding sessions can capture and recall project context.",
+    metaTitle: "Cursor Memory MCP Setup | Origin",
     metaDescription:
-      "Add local-first MCP memory to Cursor with Origin setup, origin mcp add cursor, and a capture/recall verification loop.",
+      "Add local-first MCP memory to Cursor with Origin setup, origin mcp add cursor, client restart checks, and a capture/recall verification loop.",
     keywords: [
       "Cursor MCP memory",
       "Cursor persistent memory",
       "Cursor AI memory",
+      "Cursor memory MCP",
       "Origin Cursor setup",
       "MCP memory Cursor",
     ],
@@ -310,16 +384,16 @@ const setupArticles: BaseSpec[] = [
     actionIntro:
       "Treat Cursor as an MCP client connected to one local Origin daemon.",
     actionBullets: [
-      "Install the Origin runtime once. The current npm setup helper targets macOS Apple Silicon; use the current release or source path for other platforms.",
+      "Install the Origin runtime once with the current setup path for your operating system.",
       "Run ~/.origin/bin/origin mcp add cursor.",
       "The generated Cursor config writes a global ~/.cursor/mcp.json entry.",
       "Restart Cursor if the MCP tools do not appear.",
-      "Run doctor or a capture/recall round trip.",
+      "Run the Origin doctor tool or a capture/recall round trip.",
       "Capture decisions and handoff context, not raw chat history.",
     ],
     code: {
       label: "Cursor MCP setup",
-      code: "npx -y @7xuanlu/origin setup\n~/.origin/bin/origin mcp add cursor",
+      code: "npx -y @7xuanlu/origin setup\n~/.origin/bin/origin mcp add cursor\n~/.origin/bin/origin doctor",
     },
     caution:
       "If Cursor and another client both write memory, use spaces when contexts should stay separate. Richer distillation and page synthesis may need a configured local model or API-key path.",
@@ -329,7 +403,7 @@ const setupArticles: BaseSpec[] = [
       "Does Origin require Cursor to upload memory to a cloud service?",
       "No. Origin's default model is local-first. Optional model or API-key paths are separate choices for richer distillation.",
     ],
-    relatedSlugs: ["origin-cursor-workflow", "cursor-claude-code-shared-memory", "mcp-memory-server-localhost-7878"],
+    relatedSlugs: ["mcp-memory-server", "origin-cursor-workflow", "cursor-claude-code-shared-memory"],
     officialReferences: [
       {
         label: "Cursor MCP docs",
@@ -374,7 +448,7 @@ const setupArticles: BaseSpec[] = [
     actionIntro:
       "Use the CLI-generated configuration first; use manual config only when a client needs raw JSON.",
     actionBullets: [
-      "Install the local runtime. The current npm setup helper targets macOS Apple Silicon; use the current release or source path for other platforms.",
+      "Install the local runtime with the current setup path for your operating system.",
       "Run ~/.origin/bin/origin mcp add claude-desktop.",
       "Use ~/.origin/bin/origin mcp add claude-desktop --dry-run if you want to inspect the JSON before writing it.",
       "Restart Claude Desktop after MCP config changes.",
@@ -597,16 +671,18 @@ const setupArticles: BaseSpec[] = [
     slug: "mcp-memory-server-localhost-7878",
     eyebrow: "Setup",
     category: "Concepts",
-    title: "Why Origin Uses a Local MCP Memory Server on 127.0.0.1:7878",
+    title: "MCP Memory Server on localhost:7878: What to Check",
     description:
       "Understand the local daemon boundary behind Origin's MCP memory tools and how to troubleshoot port 7878.",
-    metaTitle: "MCP Memory Server on 127.0.0.1:7878 | Origin",
+    metaTitle: "MCP Memory Server on localhost:7878 | Origin",
     metaDescription:
-      "Origin's daemon listens on 127.0.0.1:7878 by default. Learn why, how MCP clients reach it, and what to check when setup fails.",
+      "Debug Origin's local MCP memory server on 127.0.0.1:7878: daemon status, origin-mcp config, client restart, and doctor checks.",
     keywords: [
       "127.0.0.1 7878 Origin",
       "Origin daemon port",
       "MCP memory server localhost",
+      "MCP server localhost 7878",
+      "origin-mcp 7878",
       "origin-server 7878",
       "Origin doctor",
     ],
@@ -617,7 +693,7 @@ const setupArticles: BaseSpec[] = [
       "doctor and status are the first checks when port 7878 fails.",
     ],
     quickAnswer:
-      "Origin's daemon listens on 127.0.0.1:7878 by default so local clients can reach one memory service without exposing it to the network.",
+      "Origin's daemon listens on 127.0.0.1:7878 by default. MCP clients do not talk to the database directly; they launch origin-mcp, and origin-mcp talks to the local daemon.",
     problem:
       "When MCP memory setup fails, users often see only a missing tool or a connection error. The real issue is usually daemon reachability, MCP configuration, or a client restart requirement.",
     originFit:
@@ -628,7 +704,7 @@ const setupArticles: BaseSpec[] = [
     actionBullets: [
       "Run ~/.origin/bin/origin status.",
       "Run ~/.origin/bin/origin doctor for a fuller setup report.",
-      "Run ~/.origin/bin/origin mcp add <client> --dry-run to inspect the client config without writing it.",
+      "Run ~/.origin/bin/origin mcp add <client> --dry-run to inspect the origin-mcp command the client should launch.",
       "Run lsof -nP -iTCP:7878 -sTCP:LISTEN and identify which process owns the port before changing client settings.",
       "Restart the MCP client after config changes.",
       "Make sure another development daemon is not owning the wrong data directory.",
@@ -1574,48 +1650,55 @@ const comparisonArticles: BaseSpec[] = [
     slug: "origin-vs-obsidian-ai-memory",
     eyebrow: "Comparison",
     category: "Comparisons",
-    title: "Origin vs Obsidian: AI Work Memory or Human Note System?",
+    title: "Origin vs Obsidian AI Memory: Vaults, MCP Bridges, and Agent Work Context",
     description:
-      "Compare Origin's agent-facing work memory with Obsidian's human-first Markdown knowledge base.",
-    metaTitle: "Origin vs Obsidian for AI Memory | Origin",
+      "Compare Origin with Obsidian, obsidian-mind, claude-obsidian, Claudian, and Obsidian MCP projects for AI agent memory.",
+    metaTitle: "Origin vs Obsidian AI Memory | Origin",
     metaDescription:
-      "Obsidian is excellent for human notes and Markdown knowledge bases. Origin adds agent-facing capture, recall, handoff, distill, and MCP memory.",
+      "Compare Origin with Obsidian vault workflows, obsidian-mind, claude-obsidian, Claudian, and Obsidian MCP bridges for AI work memory.",
     keywords: [
       "Origin vs Obsidian",
       "Obsidian AI memory",
+      "Obsidian mind",
+      "obsidian-mind",
+      "claude-obsidian",
+      "Claude Obsidian memory",
+      "Obsidian MCP",
+      "Obsidian MCP tools",
       "AI memory Obsidian",
       "Markdown AI memory",
       "Obsidian alternative AI agents",
     ],
-    audience: "Obsidian users considering AI work memory",
+    audience: "Obsidian users evaluating AI-agent memory workflows",
     heroBullets: [
-      "Obsidian is a human-first note and knowledge-base tool.",
-      "Origin is an agent-facing memory loop for AI work.",
-      "Origin pages can be read as Markdown and linked into Obsidian when useful.",
+      "Obsidian is still strongest as a human-readable Markdown vault and thinking surface.",
+      "Credible Obsidian AI projects now add Claude Code, Codex, MCP, and agent workflows around that vault.",
+      "Origin is different: a daemon-owned AI work loop that projects readable Markdown while keeping retrieval, review, and handoff semantics outside the vault UI.",
     ],
     quickAnswer:
-      "Use Obsidian to think, write, and manage a human knowledge base. Use Origin when AI agents need to capture, recall, distill, and hand off work context across sessions.",
+      "Use Obsidian-centered projects when your vault is already the operating system for notes, writing, and PKM. Use Origin when AI agents need a shared local work-memory loop with capture, recall, review, distillation, provenance, and handoff across Claude Code, Codex, Cursor, Gemini CLI, and other MCP-compatible tools.",
     problem:
-      "Markdown notes are readable and durable, but agents still need a write path, retrieval index, review states, provenance, and MCP tools to use memory during work.",
+      "Obsidian AI projects solve real problems: letting agents read a vault, write notes, run inside Obsidian, or expose vault operations over MCP. The remaining question is whether the vault should be the memory system itself, or whether the vault should stay a readable projection while a local daemon owns indexing, review states, provenance, and work-session handoffs.",
     originFit:
-      "Origin complements rather than replaces a Markdown vault. It projects readable pages and sessions under ~/.origin while the daemon keeps indexes and tool-facing memory behavior.",
+      "Origin complements rather than replaces a Markdown vault. It projects readable pages and sessions under ~/.origin, so Obsidian can inspect them, while the daemon keeps the index, MCP tools, distill cycles, and trust workflow that agents use during work.",
     actionHeading: "Use both intentionally",
     actionIntro:
-      "Separate human writing from agent memory mechanics.",
+      "Separate the human knowledge surface from the agent memory runtime.",
     actionBullets: [
       "Use Obsidian for deliberate notes, writing, and personal wiki workflows.",
-      "Use Origin for capture, recall, handoff, distill, spaces, and source-backed AI memory.",
+      "Use Obsidian-centered AI projects when the job is vault automation, note creation, or in-Obsidian agent collaboration.",
+      "Use Origin for capture, recall, handoff, distill, spaces, source-backed wiki pages, and shared local memory across multiple AI clients.",
       "Symlink or read Origin Markdown pages from Obsidian if useful.",
-      "Do not expect Obsidian core alone to provide Origin-style MCP memory semantics.",
-      "Obsidian plugins or external MCP servers can expose a vault, but that is a separate integration layer from core Obsidian.",
+      "Do not expect Obsidian core alone to provide review queues, provenance, handoff rituals, or cross-client memory semantics.",
+      "Evaluate Obsidian integrations by what they own: vault access, agent UI, MCP transport, semantic search, or durable memory policy.",
     ],
     caution:
-      "If a human-authored note is the source of truth, keep it in the vault. Capture the AI-work consequence in Origin when it should guide future sessions.",
+      "If a human-authored note is the source of truth, keep it in the vault. Capture the AI-work consequence in Origin when it should guide future sessions, show up in handoff, or be available outside Obsidian.",
     faq: [
-      "Is Origin an Obsidian replacement?",
-      "No. Origin is not a notes app. It is a local memory layer for AI work.",
-      "Can Origin write Markdown I can read?",
-      "Yes. Distilled pages and session artifacts are projected as readable Markdown under ~/.origin.",
+      "Is Origin an Obsidian replacement or an obsidian-mind alternative?",
+      "No. Origin is not trying to replace Obsidian as a note app. It is an AI work-memory runtime that can coexist with Obsidian and with vault-centered projects such as obsidian-mind or claude-obsidian.",
+      "Can Origin pages be used from Obsidian?",
+      "Yes. Distilled pages and session artifacts are projected as readable Markdown under ~/.origin, so you can inspect them directly or link them into an Obsidian workflow.",
     ],
     relatedSlugs: ["markdown-local-index-ai-memory", "source-backed-wiki-pages-ai-work", "ai-work-memory-vs-knowledge-base"],
     officialReferences: [
@@ -1632,6 +1715,30 @@ const comparisonArticles: BaseSpec[] = [
         href: "https://obsidian.md/help/plugins",
       },
       {
+        label: "obsidian-mind GitHub",
+        href: "https://github.com/breferrari/obsidian-mind",
+      },
+      {
+        label: "claude-obsidian GitHub",
+        href: "https://github.com/AgriciDaniel/claude-obsidian",
+      },
+      {
+        label: "Claudian GitHub",
+        href: "https://github.com/YishenTu/claudian",
+      },
+      {
+        label: "Obsidian Agent Client GitHub",
+        href: "https://github.com/RAIT-09/obsidian-agent-client",
+      },
+      {
+        label: "obsidian-mcp-tools GitHub",
+        href: "https://github.com/jacksteamdev/obsidian-mcp-tools",
+      },
+      {
+        label: "obsidian-claude-code-mcp GitHub",
+        href: "https://github.com/iansinnott/obsidian-claude-code-mcp",
+      },
+      {
         label: "Origin core concepts docs",
         href: "https://useorigin.app/docs/core-concepts",
       },
@@ -1641,27 +1748,32 @@ const comparisonArticles: BaseSpec[] = [
       },
     ],
     comparisonTable: {
-      competitorName: "Obsidian",
+      competitorName: "Obsidian + AI projects",
       rows: [
         {
-          dimension: "Primary interface",
-          origin: "AI agents and MCP clients writing/reading local work context.",
-          competitor: "Humans writing and linking Markdown notes.",
+          dimension: "Center of gravity",
+          origin: "Local daemon and MCP tools own agent memory behavior; Markdown is a readable projection.",
+          competitor: "Obsidian vault often remains the source of truth, UI, and collaboration surface.",
         },
         {
-          dimension: "Memory mechanics",
+          dimension: "Credible project types",
+          origin: "One local memory loop for capture, recall, review, distill, handoff, and provenance across clients.",
+          competitor: "Vault templates such as obsidian-mind and claude-obsidian; plugins such as Claudian and Obsidian Agent Client; MCP bridges such as obsidian-mcp-tools and obsidian-claude-code-mcp.",
+        },
+        {
+          dimension: "Agent memory mechanics",
           origin: "Capture, recall, review, distill, handoff, spaces, provenance.",
-          competitor: "Core: vault files, links, tags, graph, and search. Optional: community plugins, Sync, and Publish.",
+          competitor: "Depends on the project: vault access, note creation, in-vault agent UI, MCP transport, semantic search, or command packs.",
         },
         {
           dimension: "Best fit",
-          origin: "Session-level AI work continuity.",
-          competitor: "Human knowledge management and writing.",
+          origin: "AI work that should compound across Claude Code, Codex, Cursor, Gemini CLI, and future MCP clients.",
+          competitor: "Teams or individuals whose Obsidian vault is already the operating system for notes, research, and writing.",
         },
         {
-          dimension: "Overlap",
-          origin: "Readable Markdown projection that can be inspected externally.",
-          competitor: "Local Markdown notes that humans directly own and edit.",
+          dimension: "Main tradeoff",
+          origin: "Less dependent on Obsidian as the primary UI; more opinionated about memory lifecycle and trust.",
+          competitor: "More native to an existing vault; memory semantics vary by plugin, template, or MCP server.",
         },
       ],
     },
