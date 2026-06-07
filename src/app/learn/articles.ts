@@ -152,54 +152,78 @@ const baseArticles: LearnArticle[] = [
     slug: "mcp-memory-server",
     eyebrow: "Protocol",
     category: "Concepts",
-    title: "MCP Memory Server: Persistent Memory for AI Tools",
+    title: "MCP Memory Server for Claude Code, Cursor, and Codex",
     description:
-      "An MCP memory server gives Claude Code, Cursor, Codex, and other MCP-compatible agents a shared place to store and recall durable context.",
-    metaTitle: "MCP Memory Server for Claude Code and Cursor | Origin",
+      "Learn what an MCP memory server does, how it connects AI tools to durable context, and how Origin keeps that memory local and inspectable.",
+    metaTitle: "MCP Memory Server for Claude Code, Cursor, Codex | Origin",
     metaDescription:
-      "Learn what an MCP memory server is, how it gives AI tools persistent context, and how Origin adds local-first memory with visibility and provenance.",
+      "Set up local MCP memory for Claude Code, Cursor, Codex, and other clients. Origin adds capture, recall, provenance, and local control.",
     keywords: [
       "MCP memory server",
       "memory MCP",
       "Claude MCP memory",
       "Cursor MCP memory",
+      "MCP memory server GitHub",
       "persistent memory for AI agents",
     ],
-    updatedAt,
+    updatedAt: "2026-06-07",
     author: DEFAULT_AUTHOR,
-    readingTime: "6 min read",
+    readingTime: "7 min read",
     audience: "Developers and AI power users connecting multiple MCP clients",
     heroBullets: [
-      "MCP lets AI tools call external memory tools instead of relying only on chat history.",
-      "A memory server can store, search, and package context across sessions.",
-      "Origin adds local storage, curation, provenance, wiki pages, and setup workflows around the memory layer.",
+      "MCP servers expose tools, resources, and prompts to AI applications through a standard protocol.",
+      "A memory server gives clients a way to store, search, recall, and manage durable work context.",
+      "Origin keeps the MCP memory path local, source-backed, and shared across Claude Code, Cursor, Codex, and other clients.",
     ],
     sections: [
       {
-        heading: "What an MCP memory server does",
+        heading: "Quick answer",
         body: [
-          "The Model Context Protocol gives AI clients a standard way to call external tools. An MCP memory server exposes memory operations through that protocol: store, search, recall, and delete.",
-          "Instead of pasting the same background into every prompt, the assistant can ask the memory server for relevant context when it needs it.",
+          "If you searched for an MCP memory server, you probably want an AI tool to remember project facts, decisions, preferences, and handoffs across sessions without pasting the same context every time.",
+          "Origin is the local-first version of that workflow: the daemon owns the memory store, origin-mcp is the connector clients launch, and MCP-compatible tools call Origin when they need context.",
+        ],
+        bullets: [
+          "Use MCP when the memory should be available outside one chat product.",
+          "Use a local daemon when the memory includes private project context.",
+          "Use Origin when you also want capture, recall, handoff, provenance, wiki pages, and human-readable artifacts.",
         ],
       },
       {
-        heading: "Why MCP is useful for memory",
+        heading: "What MCP adds to memory",
         body: [
-          "Memory is more useful when it is not trapped inside one interface. Claude Code, Claude Desktop, Cursor, Codex, Gemini CLI, and other MCP clients can participate in the same workflow.",
-          "That makes MCP a natural boundary for persistent AI memory. The AI tool handles the conversation. The memory server handles durable context.",
+          "The Model Context Protocol gives AI clients a standard way to call external capabilities. MCP servers expose those capabilities; MCP clients are created by host applications such as IDEs or AI tools to talk to particular servers.",
+          "For memory, that protocol boundary matters. The AI tool can stay focused on the conversation while the memory server handles durable context, search, and storage.",
         ],
       },
       {
-        heading: "Local vs hosted memory servers",
+        heading: "What a memory server should expose",
+        body: [
+          "A useful MCP memory server should do more than append notes. It needs a way to capture one durable fact, recall relevant context, list or inspect stored memory, forget stale entries, and diagnose whether the local route is connected.",
+          "Origin exposes that path through MCP tools around context, capture, recall, distillation, review, forget, and doctor checks. The goal is not a raw database endpoint; the goal is a memory loop agents can use safely during work.",
+        ],
+      },
+      {
+        heading: "Local vs hosted memory",
         body: [
           "Hosted memory servers are easy to start, but they require sending memory to someone else's infrastructure. Local memory servers take more care, but they keep private project context, preferences, and decisions under your control.",
-          "Origin is built around the local-first path. The daemon runs on your machine, owns the database, and serves memory to MCP clients through Origin's MCP server.",
+          "Origin is built around the local-first path. The daemon runs on your machine, owns the database, and serves memory to MCP clients through the local origin-mcp connector.",
         ],
+      },
+      {
+        heading: "Install path",
+        body: [
+          "Claude Code users should start with the Origin plugin because it adds slash commands and setup checks around the same local memory layer. Other MCP clients should run Origin setup, then let the CLI add the client-specific MCP configuration.",
+          "The commands below are the normal non-Claude Code path for tools such as Cursor, Codex, Claude Desktop, VS Code, and Gemini CLI.",
+        ],
+        code: {
+          label: "MCP client setup",
+          code: "npx -y @7xuanlu/origin setup\n~/.origin/bin/origin mcp add cursor\n~/.origin/bin/origin mcp add codex\n# or: claude-desktop, vscode, gemini",
+        },
       },
       {
         heading: "How Origin fits",
         body: [
-          "Origin is more than a bare MCP store. It is a local runtime and Claude Code plugin that carries work context forward, links related knowledge, detects contradictions, and keeps wiki pages and provenance attached.",
+          "Origin is more than a bare MCP store. It is a local runtime, CLI, MCP connector, and Claude Code plugin that carries work context forward, links related knowledge, detects contradictions, and keeps wiki pages and provenance attached.",
           "The MCP server is the bridge: AI tools read and write memory, while Origin keeps the broader work context visible, searchable, and locally owned.",
         ],
       },
@@ -216,10 +240,28 @@ const baseArticles: LearnArticle[] = [
           "Yes, if those tools support MCP and are configured to use the same server. Origin is designed for that shared-memory workflow.",
       },
     ],
-    relatedSlugs: ["claude-code-memory", "ai-work-memory", "origin-vs-claude-mem"],
+    relatedSlugs: ["claude-code-memory", "mcp-memory-server-localhost-7878", "how-to-add-mcp-memory-to-cursor"],
+    officialReferences: [
+      {
+        label: "MCP server concepts",
+        href: "https://modelcontextprotocol.io/docs/learn/server-concepts",
+      },
+      {
+        label: "MCP client concepts",
+        href: "https://modelcontextprotocol.io/docs/learn/client-concepts",
+      },
+      {
+        label: "Claude Code MCP setup",
+        href: "https://code.claude.com/docs/en/mcp",
+      },
+      {
+        label: "Origin on GitHub",
+        href: "https://github.com/7xuanlu/origin",
+      },
+    ],
     cta: {
-      heading: "Give every agent the same memory",
-      body: "Origin connects MCP-compatible tools to one local context layer instead of scattering decisions and lessons across chat silos.",
+      heading: "Connect an MCP memory server locally",
+      body: "Install Origin, add the MCP connector to your client, and verify capture and recall before trusting memory in real work.",
     },
   },
   {
@@ -300,52 +342,85 @@ const baseArticles: LearnArticle[] = [
     slug: "claude-code-memory",
     eyebrow: "Developer workflow",
     category: "Workflows",
-    title: "Claude Code Memory: Persistent Project Context Across Sessions",
+    title: "Claude Code Memory: CLAUDE.md, /memory, and MCP Context",
     description:
-      "Understand Claude Code memory, CLAUDE.md, auto memory, and when to add Origin's local MCP memory for persistent project context.",
-    metaTitle: "Claude Code Memory: CLAUDE.md, Auto Memory, and MCP",
+      "Understand CLAUDE.md, Claude Code auto memory, /memory, and when to add Origin's local MCP memory for shared project context.",
+    metaTitle: "Claude Code Memory: CLAUDE.md, /memory, MCP | Origin",
     metaDescription:
-      "Learn how Claude Code memory works, where CLAUDE.md and auto memory help, and when Origin adds shared local MCP memory across coding tools.",
+      "Use CLAUDE.md, auto memory, and /memory well. Add Origin when Claude Code needs local, source-backed memory shared with Cursor and Codex.",
     keywords: [
       "Claude Code memory",
       "Claude Code persistent memory",
+      "Claude Code /memory",
+      "Claude Code memory plugin",
+      "Claude Code memory repo",
       "Claude Code MCP memory",
       "Claude Code project context",
       "AI coding agent memory",
     ],
-    updatedAt,
+    updatedAt: "2026-06-07",
     author: DEFAULT_AUTHOR,
-    readingTime: "6 min read",
+    readingTime: "7 min read",
     audience: "Developers using Claude Code, Cursor, and other AI coding agents",
     heroBullets: [
-      "Use CLAUDE.md for stable project instructions and Claude Code auto memory for assistant-learned notes.",
-      "Use Origin when those memories should be local, reviewable, source-backed, and shared across MCP clients.",
-      "Share memory across Claude Code, Cursor, Claude Desktop, and other MCP-compatible tools.",
+      "Use CLAUDE.md for stable project instructions and auto memory for assistant-learned corrections and preferences.",
+      "Use /memory to inspect and edit what Claude Code has loaded before you blame recall.",
+      "Use Origin when memory should be local, source-backed, reviewable, and shared with Cursor, Codex, and other MCP clients.",
     ],
     sections: [
       {
+        heading: "Quick answer",
+        body: [
+          "Claude Code already has memory. The official memory path combines CLAUDE.md files you write, auto memory Claude writes from corrections and preferences, and the /memory command for viewing and editing what is loaded.",
+          "Origin is for the next problem: keeping evolving work context local, source-backed, and available outside one Claude Code session or one Claude-only surface.",
+        ],
+        bullets: [
+          "Put stable rules, commands, and project architecture in CLAUDE.md.",
+          "Use Claude Code auto memory for repeated corrections and preferences Claude discovers.",
+          "Use Origin for decisions, gotchas, handoffs, source-backed wiki pages, and shared MCP memory.",
+        ],
+      },
+      {
         heading: "How Claude Code memory works",
         body: [
-          "Claude Code memory usually starts with CLAUDE.md files: stable instructions that tell Claude how the project works, which commands matter, and what conventions it should follow. Newer Claude Code workflows also include auto memory, where Claude writes and recalls notes from prior sessions.",
-          "Those built-in memory paths are useful. The question is when project context should stay as Claude Code instructions, and when it should become a local work-memory layer that other agents can also use.",
+          "Each Claude Code session starts with a fresh context window. Claude Code carries knowledge forward through CLAUDE.md files and auto memory, and both are loaded into new conversations as context.",
+          "That makes Claude Code memory useful for persistent instructions. It also means memory competes with the rest of the context window, so it should stay concise and scoped.",
         ],
       },
       {
-        heading: "CLAUDE.md is necessary but not sufficient",
+        heading: "Use CLAUDE.md for stable instructions",
         body: [
-          "CLAUDE.md is excellent for stable, project-level instructions: build commands, architecture notes, style rules, and long-lived conventions. It should not become a dumping ground for every transient observation from every coding session.",
-          "Origin is designed for the evolving layer: facts, decisions, gotchas, follow-ups, and relationships learned while working. The two are complementary.",
+          "CLAUDE.md is excellent for project-level instructions: build commands, test commands, architecture notes, coding standards, and long-lived conventions the whole team should share.",
+          "It should not become a dumping ground for every transient observation from every coding session. When the file gets too large or contradictory, Claude has more context to scan and less room for the current task.",
         ],
       },
       {
-        heading: "What Claude Code memory should contain",
+        heading: "Use /memory before adding another layer",
         body: [
-          "Useful coding memory is specific and grounded. It should capture why a decision was made, what tradeoffs were considered, what commands verify a change, and which files or modules own a behavior.",
-          "It should not merely store chat transcripts. The point is to make future sessions faster and less error-prone.",
+          "If Claude Code seems to forget something, first inspect the built-in memory surface. /memory is the place to view and edit what Claude Code has loaded.",
+          "That step matters because some problems are not Origin problems. The memory may be missing, stale, too broad, duplicated, or loaded at the wrong scope.",
         ],
       },
       {
-        heading: "How Origin works with Claude Code",
+        heading: "When Origin adds value",
+        body: [
+          "Use Origin when project context needs provenance, review, deletion, handoff, distillation, and access from more than one MCP-compatible tool.",
+          "Useful Origin captures are specific and grounded: why a decision was made, what tradeoffs were considered, what command verifies a change, which module owns a behavior, or what gotcha should not be rediscovered next week.",
+        ],
+      },
+      {
+        heading: "Install path for Claude Code",
+        body: [
+          "The Claude Code plugin is the most complete Origin path because it adds /init, /brief, /capture, /recall, /handoff, /distill, and review workflows around the local daemon and MCP connector.",
+          "After installing, restart Claude Code if prompted, run /init once, then verify a harmless capture and recall before relying on Origin for real project memory.",
+        ],
+        code: {
+          label: "Claude Code plugin",
+          code: "/plugin marketplace add 7xuanlu/origin\n/plugin install origin@7xuanlu\n/init\n/capture This project uses Origin for local AI work memory.\n/recall local AI work memory",
+        },
+      },
+      {
+        heading: "Share memory with Cursor and Codex",
         body: [
           "Origin exposes memory through its MCP server. Claude Code can write what it learns and recall relevant project context later. The same work context can also be available to Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP clients when configured.",
           "That makes Origin a shared local layer for AI-assisted development rather than a single-client note file.",
@@ -364,10 +439,24 @@ const baseArticles: LearnArticle[] = [
           "Yes. Origin is MCP-native, so multiple MCP-compatible tools can connect to the same local memory layer when configured.",
       },
     ],
-    relatedSlugs: ["mcp-memory-server", "ai-agent-handoff-loop", "origin-vs-claude-mem"],
+    relatedSlugs: ["origin-for-claude-code", "mcp-memory-server", "mcp-memory-server-localhost-7878"],
+    officialReferences: [
+      {
+        label: "Claude Code memory docs",
+        href: "https://code.claude.com/docs/en/memory",
+      },
+      {
+        label: "Claude Code MCP docs",
+        href: "https://code.claude.com/docs/en/mcp",
+      },
+      {
+        label: "Origin on GitHub",
+        href: "https://github.com/7xuanlu/origin",
+      },
+    ],
     cta: {
-      heading: "Stop re-explaining the same codebase",
-      body: "Origin helps Claude Code and other coding agents carry project knowledge across sessions.",
+      heading: "Verify Claude Code memory locally",
+      body: "Install the Origin plugin, run /init, then test one capture and recall before adding real project context.",
     },
   },
   {

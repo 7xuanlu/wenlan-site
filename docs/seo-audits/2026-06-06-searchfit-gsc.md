@@ -185,6 +185,16 @@ Applied title adjustment:
 
 - Homepage title now uses `Shared Local Memory for Claude Code, Cursor, Codex`. This is a positioning hypothesis that combines the strongest tool nouns from GSC/autocomplete (`Claude Code`, `memory`, `MCP`, `Cursor`) with Origin's cross-tool value. Keep validating it against GSC before expanding more pages.
 
+## Crowded Brand Strategy
+
+`Origin` is a crowded root term. The site should not spend the next sprint trying to rank for bare `origin`, because most people typing that query are not looking for local AI work memory. The practical path is a three-step association ladder:
+
+1. **Win problem/category queries first.** Prioritize pages that answer `Claude Code memory`, `MCP memory server`, `Cursor memory MCP`, `local AI memory`, and `AI agent memory`. These are the phrases visible in GSC, autocomplete, and GitHub developer vocabulary.
+2. **Make branded modifiers obvious.** Every high-signal page should make it natural for a reader or model to connect `Origin` with `memory`, `AI work`, `Claude Code`, `MCP`, `Cursor`, and `Codex`. The goal is queries like `origin memory`, `origin ai work`, `origin claude code memory`, and `origin mcp memory`.
+3. **Build entity reinforcement outside the site.** GitHub README links, MCP directory listings, credible comparison mentions, Reddit/HN posts, and docs references should use the same category language. This is how Google and AI assistants learn that `Origin` is not the game store, airline, or generic word.
+
+Do not over-optimize the homepage for the noisy `"origin app"` rows yet. The page-level GSC report shows `/learn`, `/`, old `/guides/*`, and `/learn/claude-code-memory` getting impressions. The immediate refresh target is therefore Learn intent, especially `/learn/claude-code-memory` and `/learn/mcp-memory-server`.
+
 ## Next Actions
 
 1. After the Obsidian comparison update is merged/deployed, resubmit `sitemap.xml` in GSC or use URL inspection for priority Learn URLs.
