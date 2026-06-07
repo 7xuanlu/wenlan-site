@@ -141,6 +141,13 @@ Applied CTR-snippet fixes in the current branch:
 
 The public positioning can keep "AI work memory" as Origin's category, but SEO needs to bridge into the phrases users actually search.
 
+Do not use competitor landing pages as the deciding source. They are weak vocabulary signals only. The stronger evidence stack is:
+
+1. **Search Console impressions for useorigin.app.** The visible 28-day query table already includes `claude code memory`, `claude memory mcp`, `claude code /memory`, `codememory mcp`, `claude code persistent memory`, and `claude code memory repo`. This is the strongest signal because Google actually showed Origin for these searches.
+2. **Google autocomplete.** Fresh checks returned suggestions for `claude code memory`, `claude code memory.md`, `claude code memory plugin`, `mcp memory server`, `mcp memory github`, `mcp memory claude`, `cursor memory mcp`, `ai agent memory system`, `ai agent memory mcp`, `ai agent memory layer`, `local ai persistent memory`, and `local ai agent memory`.
+3. **Official docs terminology.** Anthropic's Claude Code docs use `CLAUDE.md`, auto memory, and `/memory`; MCP's official docs use MCP servers and describe broad client/server support across AI assistants and development tools.
+4. **GitHub developer vocabulary.** GitHub repo search shows developers naming projects around `claude-code-memory`, `MCP memory server`, `cursor-memory-mcp`, and `AI Agent Memory`.
+
 Do not optimize only for:
 
 - `AI work memory`
@@ -148,7 +155,7 @@ Do not optimize only for:
 - `single local home`
 - `local home for AI`
 
-Those are useful product-language phrases, but current SERPs show users and competitors use plainer workflow language:
+Those are useful product-language phrases, but they are not yet the strongest empirical query language. The route should prioritize the phrases with direct GSC/autocomplete/GitHub evidence:
 
 - `persistent memory for AI agents`
 - `MCP memory server`
@@ -165,17 +172,18 @@ Those are useful product-language phrases, but current SERPs show users and comp
 
 Cluster map:
 
-| Cluster | Primary phrase | Supporting phrases | Target page |
-| --- | --- | --- | --- |
-| Cross-tool shared memory | shared local memory for Claude Code, Cursor, Codex | one memory across AI tools; one memory every AI; AI tools shared memory | `/` and `/learn` |
-| MCP memory server | MCP memory server | Claude memory MCP; Cursor memory MCP; memory MCP server | `/learn/mcp-memory-server` |
-| Claude Code native memory | Claude Code memory | CLAUDE.md; Claude Code auto memory; Claude Code persistent memory | `/learn/claude-code-memory` |
-| Context-loss pain | AI coding agent memory | context loss between sessions; agents forget project context | `/learn/ai-coding-agent-loses-context` |
-| Local trust | local AI memory | local-first MCP memory server; private AI memory; readable Markdown memory | `/learn/local-first-ai-memory` and `/learn/markdown-local-index-ai-memory` |
+| Cluster | Confidence | Primary phrase | Supporting phrases | Target page |
+| --- | --- | --- | --- | --- |
+| Claude Code memory | High | Claude Code memory | CLAUDE.md; Claude Code auto memory; Claude Code persistent memory; Claude Code memory plugin | `/learn/claude-code-memory` |
+| MCP memory server | High | MCP memory server | Claude memory MCP; Cursor memory MCP; MCP memory github; memory MCP server | `/learn/mcp-memory-server` |
+| Cross-tool shared memory | Medium | shared local memory for Claude Code, Cursor, Codex | shared memory AI agents; AI tools shared memory; one memory across AI tools | `/` and `/learn` |
+| AI agent memory | Medium | AI agent memory | AI agent memory system; AI agent memory MCP; AI agent memory layer | `/learn/ai-work-memory` |
+| Local trust | Medium | local AI memory | local AI persistent memory; local AI agent memory; local-first MCP memory server | `/learn/local-first-ai-memory` and `/learn/markdown-local-index-ai-memory` |
+| Context-loss pain | Low until visible in GSC | AI coding agent memory | context loss between sessions; agents forget project context | `/learn/ai-coding-agent-loses-context` |
 
 Applied title adjustment:
 
-- Homepage title now uses `Shared Local Memory for Claude Code, Cursor, Codex` because it matches the cross-tool memory query cluster better than the internal phrase `single local home`.
+- Homepage title now uses `Shared Local Memory for Claude Code, Cursor, Codex`. This is a positioning hypothesis that combines the strongest tool nouns from GSC/autocomplete (`Claude Code`, `memory`, `MCP`, `Cursor`) with Origin's cross-tool value. Keep validating it against GSC before expanding more pages.
 
 ## Next Actions
 
