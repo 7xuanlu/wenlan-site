@@ -10,25 +10,25 @@ import {
 import { ArticleHalo, MemoryIndex } from "./article-visuals";
 
 export const metadata: Metadata = {
-  title: "Learn | Origin",
+  title: "AI Work Memory Guides for Claude Code, Cursor, and MCP | Origin",
   description:
-    "Articles on AI work memory, MCP memory servers, local-first AI work context, setup guides, client workflows, trust, and Origin comparisons.",
+    "Guides for Claude Code memory, MCP memory servers, Cursor memory, local AI work context, setup troubleshooting, trust, and Origin comparisons.",
   alternates: {
     canonical: "/learn",
   },
   openGraph: {
-    title: "Learn | Origin",
+    title: "AI Work Memory Guides for Claude Code, Cursor, and MCP | Origin",
     description:
-      "Articles on AI work memory, MCP memory servers, local-first AI work context, setup guides, client workflows, trust, and Origin comparisons.",
+      "Guides for Claude Code memory, MCP memory servers, Cursor memory, local AI work context, setup troubleshooting, trust, and Origin comparisons.",
     type: "website",
     url: `${SITE_URL}/learn`,
     siteName: "Origin",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Learn | Origin",
+    title: "AI Work Memory Guides for Claude Code, Cursor, and MCP | Origin",
     description:
-      "Articles on AI work memory, MCP memory servers, local-first AI work context, setup guides, client workflows, trust, and Origin comparisons.",
+      "Guides for Claude Code memory, MCP memory servers, Cursor memory, local AI work context, setup troubleshooting, trust, and Origin comparisons.",
   },
 };
 

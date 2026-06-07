@@ -302,10 +302,10 @@ const baseArticles: LearnArticle[] = [
     category: "Workflows",
     title: "Claude Code Memory: Persistent Project Context Across Sessions",
     description:
-      "Claude Code memory helps coding agents remember project decisions, gotchas, conventions, and prior work instead of rediscovering them every session.",
-    metaTitle: "Claude Code Memory and Persistent Context | Origin",
+      "Understand Claude Code memory, CLAUDE.md, auto memory, and when to add Origin's local MCP memory for persistent project context.",
+    metaTitle: "Claude Code Memory: CLAUDE.md, Auto Memory, and MCP",
     metaDescription:
-      "Learn how Claude Code memory works, where CLAUDE.md helps, and how Origin adds shared MCP memory across coding sessions and AI tools.",
+      "Learn how Claude Code memory works, where CLAUDE.md and auto memory help, and when Origin adds shared local MCP memory across coding tools.",
     keywords: [
       "Claude Code memory",
       "Claude Code persistent memory",
@@ -318,16 +318,16 @@ const baseArticles: LearnArticle[] = [
     readingTime: "6 min read",
     audience: "Developers using Claude Code, Cursor, and other AI coding agents",
     heroBullets: [
-      "Keep project decisions and conventions available after the chat ends.",
-      "Use CLAUDE.md for stable project instructions and Origin for evolving learned context.",
+      "Use CLAUDE.md for stable project instructions and Claude Code auto memory for assistant-learned notes.",
+      "Use Origin when those memories should be local, reviewable, source-backed, and shared across MCP clients.",
       "Share memory across Claude Code, Cursor, Claude Desktop, and other MCP-compatible tools.",
     ],
     sections: [
       {
-        heading: "Why Claude Code needs durable memory",
+        heading: "How Claude Code memory works",
         body: [
-          "Claude Code is strongest when it understands the project: architecture, conventions, pitfalls, release process, and the reasoning behind prior decisions. But sessions end, context windows fill, and important discoveries get lost.",
-          "Persistent memory closes that gap. It lets the coding agent recover what has already been learned instead of asking you to repeat background every time.",
+          "Claude Code memory usually starts with CLAUDE.md files: stable instructions that tell Claude how the project works, which commands matter, and what conventions it should follow. Newer Claude Code workflows also include auto memory, where Claude writes and recalls notes from prior sessions.",
+          "Those built-in memory paths are useful. The question is when project context should stay as Claude Code instructions, and when it should become a local work-memory layer that other agents can also use.",
         ],
       },
       {

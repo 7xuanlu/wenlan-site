@@ -120,6 +120,23 @@ Current strongest page cluster:
 
 Old `/guides/*` URLs still receive impressions. Since they redirect correctly and are excluded from the sitemap, this is a transition artifact. Do not re-add guide URLs.
 
+## Why Impressions Have No Clicks
+
+This does not look like one single failure. It is a mix of normal early-stage SEO behavior and fixable snippet/recrawl issues.
+
+1. **Average position is not high enough yet.** GSC shows average position `12.4` over the last 28 days. That is usually page-two or bottom-page-one territory, where zero clicks on only `153` impressions is plausible.
+2. **The top branded rows are probably diagnostic searches.** The two largest query rows are long filtered queries around `"origin app"` / `"origin" "app"` with many negative terms. Those look like manual ranking checks, not normal user searches. They should not drive product/content decisions.
+3. **Old guide URLs are still in Google's performance data.** `/guides`, `/guides/claude-code-memory`, `/guides/local-first-ai-memory`, `/guides/mcp-memory-server`, and `/guides/ai-memory-app` together account for visible impressions. They redirect correctly, but Google is still showing or attributing old URLs while the new `/learn/*` URLs are still being discovered.
+4. **Search intent is broader than Origin.** For `claude code memory`, searchers often want Anthropic's official explanation of CLAUDE.md, project memory, and auto memory. Origin's page must answer that native Claude Code memory intent first, then explain where Origin adds MCP/local/shared memory.
+5. **The Learn hub title was too generic.** `/learn` earned `40` impressions in 28 days, but its title was `Learn | Origin`. That is not click-worthy for queries like `claude code memory`, `claude memory mcp`, or `cursor memory mcp`.
+6. **The homepage snippet over-led with benchmark proof.** The homepage description was accurate but long and benchmark-heavy. For searchers seeing an unknown brand, the snippet needed to state the concrete workflow: Claude Code, Cursor, Codex, MCP, capture, recall, handoff.
+
+Applied CTR-snippet fixes in the current branch:
+
+- Homepage title/description now name Claude Code, Cursor, Codex, MCP, local AI work memory, capture, recall, handoff, provenance, and Markdown artifacts.
+- `/learn` metadata now targets AI work memory guides for Claude Code, Cursor, and MCP instead of the generic `Learn | Origin`.
+- `/learn/claude-code-memory` metadata and first section now cover CLAUDE.md, auto memory, and MCP memory directly.
+
 ## Next Actions
 
 1. After the Obsidian comparison update is merged/deployed, resubmit `sitemap.xml` in GSC or use URL inspection for priority Learn URLs.
@@ -136,4 +153,3 @@ Old `/guides/*` URLs still receive impressions. Since they redirect correctly an
    - `claude code memory server`
 5. Keep the old guide redirects. The `Page with redirect` GSC issue is expected until Google drops those old URLs.
 6. Treat the GSC FAQ enhancement as stale historical data. Current sampled deployed pages do not emit `FAQPage` JSON-LD.
-
