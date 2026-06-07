@@ -7,6 +7,8 @@
     "build": "next build",
     "postbuild": "node scripts/indexnow-ping.mjs",
     "seo:weekly": "node scripts/seo-weekly.mjs",
+    "seo:weekly:run": "node scripts/seo-weekly-pipeline.mjs",
+    "seo:weekly:sample": "node scripts/seo-weekly-pipeline.mjs --input-dir scripts/fixtures/seo-weekly --date 2026-06-07 --output /tmp/origin-weekly-seo-sample.md",
     "test:seo": "node --test scripts/seo-weekly.test.mjs",
     "start": "next start",
     "lint": "next lint"

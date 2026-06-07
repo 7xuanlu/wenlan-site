@@ -22,7 +22,10 @@ Use this when deciding what to do next for Origin search visibility. The rule is
 Generate the weekly action report from CSV exports:
 
 ```bash
-pnpm seo:weekly -- --queries /tmp/gsc-queries.csv --pages /tmp/gsc-pages.csv --date YYYY-MM-DD
+mkdir -p /tmp/origin-seo
+# Save the GSC Queries export as /tmp/origin-seo/gsc-queries.csv
+# Save the GSC Pages export as /tmp/origin-seo/gsc-pages.csv
+pnpm seo:weekly:run -- --date YYYY-MM-DD
 ```
 
 Raw GSC exports stay outside git. Commit the generated `docs/seo-audits/YYYY-MM-DD-weekly-seo.md` only when it records a strategy decision or shipped SEO work.

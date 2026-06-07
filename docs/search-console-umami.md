@@ -41,19 +41,28 @@ Run this once per week, using the same date range for every export.
 5. Search Console → **Sitemaps**. Record last read time, discovered URLs, and errors.
 6. Umami → same date range. Record landing pages, referrers, AI referrals, `llms.txt` hits, and Reddit referrals.
 
-Generate the ranked weekly action report:
+Generate the ranked weekly action report with the deterministic pipeline trigger:
 
 ```bash
-pnpm seo:weekly -- --queries /tmp/gsc-queries.csv --pages /tmp/gsc-pages.csv --date YYYY-MM-DD
+mkdir -p /tmp/origin-seo
+# Save the GSC Queries export as /tmp/origin-seo/gsc-queries.csv
+# Save the GSC Pages export as /tmp/origin-seo/gsc-pages.csv
+pnpm seo:weekly:run -- --date YYYY-MM-DD
 ```
 
 The report is written to `docs/seo-audits/YYYY-MM-DD-weekly-seo.md`. GSC CSVs drive the ranked query/page recommendations; indexing details and Umami referral notes remain manual fields in v1.
+
+To verify the pipeline without real GSC data:
+
+```bash
+pnpm seo:weekly:sample
+```
 
 Commit only the interpreted weekly notes when they change strategy or document shipped SEO work.
 
 ## 4) Weekly worksheet
 
-`pnpm seo:weekly` generates the same worksheet shape shown in `docs/seo-audits/weekly-template.md`. Use the compact table below only when you need a quick manual note.
+`pnpm seo:weekly:run` generates the same worksheet shape shown in `docs/seo-audits/weekly-template.md`. Use the compact table below only when you need a quick manual note.
 
 | Date | Query | Query group | Page | Impressions | Clicks | CTR | Avg position | Indexed? | Action | Owner | Date changed |
 |---|---|---|---|---:|---:|---:|---:|---|---|---|---|

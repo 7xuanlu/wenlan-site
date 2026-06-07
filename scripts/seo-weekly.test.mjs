@@ -76,3 +76,34 @@ test("seo weekly generator turns GSC exports into a ranked Markdown action repor
     await rm(outputRoot, { recursive: true, force: true });
   }
 });
+
+test("seo weekly pipeline trigger runs from a standard input directory", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-pipeline-"));
+  try {
+    const outputPath = join(outputRoot, "2026-06-07-weekly-seo.md");
+
+    await execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs"),
+        "--",
+        "--input-dir",
+        fixtureRoot,
+        "--date",
+        "2026-06-07",
+        "--output",
+        outputPath,
+      ],
+      { cwd: repoRoot },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+
+    assert.match(report, /^# Weekly SEO\/GEO Audit — 2026-06-07/m);
+    assert.match(report, /\| Total impressions \| 69 \|/);
+    assert.match(report, /origin vs basic memory/);
+    assert.match(report, /Do not create a new Learn page unless/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
