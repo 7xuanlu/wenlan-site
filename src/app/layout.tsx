@@ -25,7 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
 const siteDescription =
   "Origin gives Claude Code, Cursor, Codex, and other MCP clients shared local AI work memory with capture, recall, handoff, provenance, and readable Markdown artifacts.";
 
-const siteTitle = "Origin | Local AI Work Memory for Claude Code and MCP";
+const siteTitle = "Origin | Shared Local Memory for Claude Code, Cursor, Codex";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://useorigin.app"),

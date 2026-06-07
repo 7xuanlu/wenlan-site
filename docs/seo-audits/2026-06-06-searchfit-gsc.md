@@ -137,6 +137,46 @@ Applied CTR-snippet fixes in the current branch:
 - `/learn` metadata now targets AI work memory guides for Claude Code, Cursor, and MCP instead of the generic `Learn | Origin`.
 - `/learn/claude-code-memory` metadata and first section now cover CLAUDE.md, auto memory, and MCP memory directly.
 
+## Query-Language Fix
+
+The public positioning can keep "AI work memory" as Origin's category, but SEO needs to bridge into the phrases users actually search.
+
+Do not optimize only for:
+
+- `AI work memory`
+- `Origin memory`
+- `single local home`
+- `local home for AI`
+
+Those are useful product-language phrases, but current SERPs show users and competitors use plainer workflow language:
+
+- `persistent memory for AI agents`
+- `MCP memory server`
+- `shared memory for Claude Code Cursor Codex`
+- `local memory for Claude Code Cursor Codex`
+- `one memory every AI`
+- `one memory across AI tools`
+- `AI coding agent memory`
+- `Claude Code persistent memory`
+- `Claude Code memory server`
+- `Cursor memory MCP`
+- `memory fragmentation AI tools`
+- `context loss between Claude Code Cursor sessions`
+
+Cluster map:
+
+| Cluster | Primary phrase | Supporting phrases | Target page |
+| --- | --- | --- | --- |
+| Cross-tool shared memory | shared local memory for Claude Code, Cursor, Codex | one memory across AI tools; one memory every AI; AI tools shared memory | `/` and `/learn` |
+| MCP memory server | MCP memory server | Claude memory MCP; Cursor memory MCP; memory MCP server | `/learn/mcp-memory-server` |
+| Claude Code native memory | Claude Code memory | CLAUDE.md; Claude Code auto memory; Claude Code persistent memory | `/learn/claude-code-memory` |
+| Context-loss pain | AI coding agent memory | context loss between sessions; agents forget project context | `/learn/ai-coding-agent-loses-context` |
+| Local trust | local AI memory | local-first MCP memory server; private AI memory; readable Markdown memory | `/learn/local-first-ai-memory` and `/learn/markdown-local-index-ai-memory` |
+
+Applied title adjustment:
+
+- Homepage title now uses `Shared Local Memory for Claude Code, Cursor, Codex` because it matches the cross-tool memory query cluster better than the internal phrase `single local home`.
+
 ## Next Actions
 
 1. After the Obsidian comparison update is merged/deployed, resubmit `sitemap.xml` in GSC or use URL inspection for priority Learn URLs.
