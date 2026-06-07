@@ -6,6 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "postbuild": "node scripts/indexnow-ping.mjs",
+    "seo:weekly": "node scripts/seo-weekly.mjs",
+    "test:seo": "node --test scripts/seo-weekly.test.mjs",
     "start": "next start",
     "lint": "next lint"
   },
