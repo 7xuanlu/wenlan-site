@@ -439,7 +439,7 @@ const baseArticles: LearnArticle[] = [
           "Yes. Origin is MCP-native, so multiple MCP-compatible tools can connect to the same local memory layer when configured.",
       },
     ],
-    relatedSlugs: ["origin-for-claude-code", "mcp-memory-server", "mcp-memory-server-localhost-7878"],
+    relatedSlugs: ["claude-code-memory-command-vs-origin", "origin-for-claude-code", "mcp-memory-server"],
     officialReferences: [
       {
         label: "Claude Code memory docs",
@@ -542,7 +542,7 @@ const baseArticles: LearnArticle[] = [
           "Yes. Claude Code gets the richest slash-command workflow, but Origin also exposes the same local memory through MCP for Cursor, Codex, Claude Desktop, VS Code, Gemini CLI, and other clients.",
       },
     ],
-    relatedSlugs: ["claude-code-memory", "how-to-add-memory-to-claude-code", "ai-agent-handoff-loop"],
+    relatedSlugs: ["claude-code-memory", "claude-code-memory-command-vs-origin", "how-to-add-memory-to-claude-code"],
     officialReferences: [
       {
         label: "Claude Code memory docs",

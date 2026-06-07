@@ -207,7 +207,7 @@ const setupArticles: BaseSpec[] = [
       "Is MCP-only setup enough for Claude Code?",
       "It can be enough for raw tools, but the plugin is the richer path because it adds slash commands like /brief, /handoff, /distill, and /init.",
     ],
-    relatedSlugs: ["origin-for-claude-code", "claude-code-memory", "ai-agent-handoff-loop"],
+    relatedSlugs: ["claude-code-memory-command-vs-origin", "origin-for-claude-code", "claude-code-memory"],
     officialReferences: [
       {
         label: "Origin Claude Code plugin",
@@ -216,6 +216,74 @@ const setupArticles: BaseSpec[] = [
       {
         label: "Origin get started docs",
         href: "https://useorigin.app/docs/get-started",
+      },
+    ],
+  },
+  {
+    slug: "claude-code-memory-command-vs-origin",
+    eyebrow: "Claude Code",
+    category: "Workflows",
+    title: "Claude Code /memory vs Origin: Native Memory or Shared Local Context?",
+    description:
+      "Use Claude Code /memory for native project memory inspection, and use Origin when context needs provenance, handoff, and cross-tool MCP access.",
+    metaTitle: "Claude Code /memory vs Origin | Local MCP Memory",
+    metaDescription:
+      "Understand Claude Code /memory, CLAUDE.md, auto memory, and when Origin adds local MCP memory shared with Cursor, Codex, and other tools.",
+    keywords: [
+      "Claude Code /memory",
+      "Claude Code memory command",
+      "Claude Code memory vs Origin",
+      "Claude Code MCP memory",
+      "Claude Code shared memory",
+    ],
+    audience: "Claude Code users deciding whether native memory is enough",
+    heroBullets: [
+      "Claude Code /memory helps inspect and edit what Claude Code has loaded.",
+      "CLAUDE.md and auto memory are the right place for stable project instructions and repeated corrections.",
+      "Origin is for source-backed, local, cross-tool work memory that should also reach Cursor, Codex, and other MCP clients.",
+    ],
+    quickAnswer:
+      "Start with Claude Code's native memory. Use /memory to inspect loaded memories, CLAUDE.md for stable project instructions, and auto memory for repeated preferences and corrections. Add Origin when the memory should become a local, reviewable work layer shared through MCP.",
+    problem:
+      "This question appears when Claude Code remembers some things but still loses session state, decisions, gotchas, or handoffs that matter outside the current chat. The risk is adding another memory layer before understanding what native Claude Code memory already solves.",
+    originFit:
+      "Origin should not duplicate CLAUDE.md. Origin fits the evolving layer: decisions, lessons, gotchas, project status, source-backed pages, and handoffs that need provenance and cross-client recall.",
+    actionHeading: "Choose the right memory surface",
+    actionIntro:
+      "Use the smallest memory surface that solves the job, then add Origin when the work needs to outgrow Claude Code's native memory boundary.",
+    actionBullets: [
+      "Use CLAUDE.md for durable project rules, commands, and conventions.",
+      "Use /memory when you need to inspect or edit what Claude Code has loaded.",
+      "Use Claude Code auto memory for repeated corrections and preferences Claude discovers.",
+      "Use Origin /capture for one source-backed decision, gotcha, or project fact that should be searchable later.",
+      "Use Origin /handoff when the next session or another agent needs current project state.",
+      "Use Origin MCP setup when Cursor, Codex, Claude Desktop, or another client should share the same local memory.",
+    ],
+    code: {
+      label: "Native first, Origin when shared",
+      code: "/memory\n# Check CLAUDE.md for stable instructions.\n\n/capture We chose <decision> because <reason>; verify with <command>.\n/handoff",
+    },
+    caution:
+      "Do not copy everything from /memory into Origin. Keep Claude Code instructions in Claude Code, and store only durable work context that benefits from provenance, search, handoff, or cross-tool access.",
+    faq: [
+      "Does Origin replace Claude Code /memory?",
+      "No. /memory is Claude Code's native inspection and editing surface. Origin adds a local work-memory layer for source-backed context and MCP sharing.",
+      "When should I use both?",
+      "Use both when Claude Code needs its own instructions and your broader AI workflow also needs local, reviewable context across tools.",
+    ],
+    relatedSlugs: ["claude-code-memory", "how-to-add-memory-to-claude-code", "origin-for-claude-code"],
+    officialReferences: [
+      {
+        label: "Claude Code memory docs",
+        href: "https://code.claude.com/docs/en/memory",
+      },
+      {
+        label: "Claude Code MCP docs",
+        href: "https://code.claude.com/docs/en/mcp",
+      },
+      {
+        label: "Origin Claude Code workflow",
+        href: "https://useorigin.app/learn/origin-for-claude-code",
       },
     ],
   },

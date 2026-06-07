@@ -25,6 +25,7 @@ Copy this file for each weekly cleanup as `YYYY-MM-DD-weekly-seo.md`. Keep raw S
 | Query | Query group | Page | Impressions | Clicks | CTR | Avg position | Indexed? | Action | Owner | Date changed | Evidence |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- |
 | `claude code memory` | Claude Code memory | `/learn/claude-code-memory` | - | - | - | - | yes/no | wait / refresh / link / distribute | Origin team | - | GSC live/export |
+| `claude code /memory` | Claude Code native command | `/learn/claude-code-memory-command-vs-origin` | - | - | - | - | yes/no | wait / refresh / link / distribute | Origin team | - | GSC live/export |
 | `mcp memory server` | MCP memory server | `/learn/mcp-memory-server` | - | - | - | - | yes/no | wait / refresh / link / distribute | Origin team | - | GSC live/export |
 | `cursor memory mcp` | Cursor MCP memory | `/learn/how-to-add-mcp-memory-to-cursor` | - | - | - | - | yes/no | wait / refresh / link / distribute | Origin team | - | GSC live/export |
 | `origin memory` | Brand + category | `/` or `/learn` | - | - | - | - | yes/no | wait / refresh / entity links | Origin team | - | GSC live/export |

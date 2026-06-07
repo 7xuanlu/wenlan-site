@@ -23,6 +23,7 @@
 - [Markdown plus local index](https://useorigin.app/learn/markdown-local-index-ai-memory): The storage model. Markdown projection for humans, libSQL index for retrieval, both kept in sync.
 - [Distilled wiki pages](https://useorigin.app/learn/distilled-wiki-pages-ai-memory): Why Origin composes atomic captures into source-backed pages with provenance and refreshable revision state.
 - [Claude Code memory](https://useorigin.app/learn/claude-code-memory): How Origin works inside Claude Code sessions and how /capture and /handoff fit the work loop.
+- [Claude Code /memory vs Origin](https://useorigin.app/learn/claude-code-memory-command-vs-origin): When native Claude Code memory is enough and when Origin adds source-backed local MCP memory.
 - [AI agent handoff loop](https://useorigin.app/learn/ai-agent-handoff-loop): Session-end discipline that prevents context loss between AI sessions.
 - [Origin for Claude Code](https://useorigin.app/learn/origin-for-claude-code): The practical /init, /brief, /capture, /handoff, and /distill loop for Claude Code users.
 - [Where Origin stores Claude Code memory](https://useorigin.app/learn/where-origin-stores-claude-code-memory): Local ~/.origin artifacts, pages, sessions, and git history.

@@ -175,6 +175,7 @@ Cluster map:
 | Cluster | Confidence | Primary phrase | Supporting phrases | Target page |
 | --- | --- | --- | --- | --- |
 | Claude Code memory | High | Claude Code memory | CLAUDE.md; Claude Code auto memory; Claude Code persistent memory; Claude Code memory plugin | `/learn/claude-code-memory` |
+| Claude Code native command | High | Claude Code /memory | Claude Code memory command; Claude Code memory vs Origin; Claude Code shared memory | `/learn/claude-code-memory-command-vs-origin` |
 | MCP memory server | High | MCP memory server | Claude memory MCP; Cursor memory MCP; MCP memory github; memory MCP server | `/learn/mcp-memory-server` |
 | Cross-tool shared memory | Medium | shared local memory for Claude Code, Cursor, Codex | shared memory AI agents; AI tools shared memory; one memory across AI tools | `/` and `/learn` |
 | AI agent memory | Medium | AI agent memory | AI agent memory system; AI agent memory MCP; AI agent memory layer | `/learn/ai-work-memory` |
@@ -210,4 +211,5 @@ Do not over-optimize the homepage for the noisy `"origin app"` rows yet. The pag
    - `claude memory mcp`
    - `claude code memory server`
 5. Keep the old guide redirects. The `Page with redirect` GSC issue is expected until Google drops those old URLs.
-6. Treat the GSC FAQ enhancement as stale historical data. Current sampled deployed pages do not emit `FAQPage` JSON-LD.
+6. Add one focused page for the visible `claude code /memory` query: `/learn/claude-code-memory-command-vs-origin`. This is not a broad batch; it closes a high-confidence Claude Code native-memory intent gap.
+7. Treat the GSC FAQ enhancement as stale historical data. Current sampled deployed pages do not emit `FAQPage` JSON-LD.

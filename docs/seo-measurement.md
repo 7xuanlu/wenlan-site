@@ -23,6 +23,7 @@ Reusable runbook: `docs/seo-growth-loop.md`.
    - `https://useorigin.app/learn/mcp-memory-server`
    - `https://useorigin.app/learn/local-first-ai-memory`
    - `https://useorigin.app/learn/claude-code-memory`
+   - `https://useorigin.app/learn/claude-code-memory-command-vs-origin`
    - `https://useorigin.app/learn/origin-for-claude-code`
    - `https://useorigin.app/learn/distilled-wiki-pages-ai-memory`
    - `https://useorigin.app/learn/ai-work-memory-vs-knowledge-base`

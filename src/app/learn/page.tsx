@@ -39,6 +39,11 @@ const searchRoutes = [
     href: "/learn/claude-code-memory",
   },
   {
+    query: "Claude Code /memory",
+    intent: "Decide when native Claude Code memory is enough and when shared local MCP memory helps.",
+    href: "/learn/claude-code-memory-command-vs-origin",
+  },
+  {
     query: "MCP memory server",
     intent: "Connect Claude Code, Cursor, Codex, and other MCP clients to durable memory.",
     href: "/learn/mcp-memory-server",
