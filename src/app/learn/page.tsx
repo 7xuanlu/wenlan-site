@@ -32,6 +32,39 @@ export const metadata: Metadata = {
   },
 };
 
+const searchRoutes = [
+  {
+    query: "Claude Code memory",
+    intent: "Understand CLAUDE.md, /memory, and when Origin adds shared local context.",
+    href: "/learn/claude-code-memory",
+  },
+  {
+    query: "MCP memory server",
+    intent: "Connect Claude Code, Cursor, Codex, and other MCP clients to durable memory.",
+    href: "/learn/mcp-memory-server",
+  },
+  {
+    query: "Cursor memory MCP",
+    intent: "Wire Cursor to Origin's local MCP memory server and verify recall.",
+    href: "/learn/how-to-add-mcp-memory-to-cursor",
+  },
+  {
+    query: "Local AI memory",
+    intent: "Keep project context local, inspectable, and under your control.",
+    href: "/learn/local-first-ai-memory",
+  },
+  {
+    query: "Origin memory",
+    intent: "Map the brand to the category: local AI work memory across tools.",
+    href: "/learn/ai-work-memory",
+  },
+  {
+    query: "Origin vs alternatives",
+    intent: "Compare Origin with Basic Memory, claude-mem, Superlocal, Obsidian, and others.",
+    href: "/learn/origin-vs-basic-memory",
+  },
+];
+
 export default function LearnPage() {
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -135,13 +168,41 @@ export default function LearnPage() {
               Start here
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--o-text-secondary)]">
-              New to AI work memory? Read the concept pieces first, then use
-              setup, workflow, trust, and comparison articles to decide whether
-              Origin fits.
+              Search intent first. Start with the problem or phrase you would
+              type into Google, then move into setup, workflow, trust, and
+              comparison articles once the route is clear.
             </p>
           </div>
 
-          <div className="mt-14 space-y-16">
+          <section className="mt-10">
+            <div className="mb-5 flex items-end justify-between gap-4">
+              <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
+                Popular search paths
+              </h2>
+              <p className="font-mono text-[11px] text-[var(--o-text-dim)]">
+                Search demand
+              </p>
+            </div>
+            <div className="grid gap-3 md:grid-cols-2">
+              {searchRoutes.map((route) => (
+                <Link
+                  key={route.query}
+                  href={route.href}
+                  scroll
+                  className="group rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5 transition-colors hover:border-[var(--o-warm)]/50"
+                >
+                  <p className="font-mono text-[10px] tracking-[0.18em] text-[var(--o-warm)]/80 uppercase">
+                    {route.query}
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-[var(--o-text-secondary)]">
+                    {route.intent}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          <div className="mt-16 space-y-16">
             {articleCategories.map((category) => {
               const categoryArticles = articles.filter(
                 (article) => article.category === category,

@@ -463,12 +463,12 @@ const baseArticles: LearnArticle[] = [
     slug: "origin-for-claude-code",
     eyebrow: "Workflow",
     category: "Workflows",
-    title: "Origin for Claude Code: The Daily Memory Loop",
+    title: "Origin for Claude Code Memory: The Daily /brief and /handoff Loop",
     description:
-      "Use Origin inside Claude Code with /init, /brief, /capture, /handoff, and /distill so coding context carries across sessions.",
-    metaTitle: "Origin for Claude Code | Daily Memory Loop",
+      "Use Origin inside Claude Code with /init, /brief, /capture, /recall, /handoff, and /distill so coding context carries across sessions.",
+    metaTitle: "Origin for Claude Code Memory | Daily Workflow",
     metaDescription:
-      "Learn the practical Origin workflow for Claude Code: install the plugin, start with /brief, capture durable decisions, hand off sessions, and distill wiki pages.",
+      "Install the Origin Claude Code plugin, run /init, start with /brief, capture durable decisions, and hand off sessions with local AI work memory.",
     keywords: [
       "Origin Claude Code",
       "Claude Code Origin plugin",
@@ -476,9 +476,9 @@ const baseArticles: LearnArticle[] = [
       "Claude Code handoff",
       "Claude Code persistent context",
     ],
-    updatedAt,
+    updatedAt: "2026-06-07",
     author: DEFAULT_AUTHOR,
-    readingTime: "5 min read",
+    readingTime: "6 min read",
     audience: "Claude Code users who want project context to survive long work sessions",
     heroBullets: [
       "Install from the Claude Code plugin marketplace, then run /init once.",
@@ -492,6 +492,10 @@ const baseArticles: LearnArticle[] = [
           "Origin's Claude Code path starts with the plugin marketplace: `/plugin marketplace add 7xuanlu/origin`, `/plugin install origin@7xuanlu`, then `/init` after the restart Claude Code requests.",
           "`/init` handles daemon setup, MCP wiring, local memory setup, and a first round-trip check. The goal is not to add another manual note-taking habit. The goal is to make the memory route available at the moment work happens.",
         ],
+        code: {
+          label: "Claude Code setup",
+          code: "/plugin marketplace add 7xuanlu/origin\n/plugin install origin@7xuanlu\n/init",
+        },
       },
       {
         heading: "Start with /brief",
@@ -520,6 +524,10 @@ const baseArticles: LearnArticle[] = [
           "/handoff: preserve the session boundary.",
           "/distill: compose accumulated memories into wiki pages.",
         ],
+        code: {
+          label: "Daily loop",
+          code: "/brief\n/capture <one durable project fact and why it matters>\n/recall <specific prior decision or gotcha>\n/handoff",
+        },
       },
     ],
     faqs: [
@@ -534,7 +542,21 @@ const baseArticles: LearnArticle[] = [
           "Yes. Claude Code gets the richest slash-command workflow, but Origin also exposes the same local memory through MCP for Cursor, Codex, Claude Desktop, VS Code, Gemini CLI, and other clients.",
       },
     ],
-    relatedSlugs: ["claude-code-memory", "ai-agent-handoff-loop", "mcp-memory-server"],
+    relatedSlugs: ["claude-code-memory", "how-to-add-memory-to-claude-code", "ai-agent-handoff-loop"],
+    officialReferences: [
+      {
+        label: "Claude Code memory docs",
+        href: "https://code.claude.com/docs/en/memory",
+      },
+      {
+        label: "Claude Code plugin marketplace",
+        href: "https://code.claude.com/docs/en/discover-plugins",
+      },
+      {
+        label: "Origin plugin source",
+        href: "https://github.com/7xuanlu/origin/tree/main/plugin",
+      },
+    ],
     cta: {
       heading: "Make Claude Code sessions compound",
       body: "Install Origin, run /init, then use /brief and /handoff around real work.",

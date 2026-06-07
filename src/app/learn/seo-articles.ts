@@ -99,14 +99,15 @@ const setupArticles: BaseSpec[] = [
     title: "Where Origin Stores Claude Code Memory",
     description:
       "Find the local files Origin writes when Claude Code captures memories, handoffs, and distilled pages.",
-    metaTitle: "Where Does Origin Store Claude Code Memory? | Origin",
+    metaTitle: "Where Origin Stores Claude Code Memory | ~/.origin",
     metaDescription:
-      "Origin stores Claude Code work memory locally under ~/.origin, with pages, sessions, status files, and git history you can inspect.",
+      "Find Origin's local Claude Code memory artifacts under ~/.origin: pages, sessions, status files, database symlinks, and git history.",
     keywords: [
       "where does Claude Code store memory",
       "Claude Code memory location",
       "Origin memory location",
       "~/.origin",
+      "Origin ~/.origin pages",
       "Claude Code local memory",
     ],
     audience: "Claude Code users checking where memory lives on disk",
@@ -131,6 +132,10 @@ const setupArticles: BaseSpec[] = [
       "Run ~/.origin/bin/origin status to verify the daemon.",
       "Inspect ~/.origin/.git when you need history for readable artifact writes.",
     ],
+    code: {
+      label: "Local artifact checks",
+      code: "ls ~/.origin\nls ~/.origin/pages\nls ~/.origin/sessions\n~/.origin/bin/origin status\ngit -C ~/.origin log --oneline -5",
+    },
     caution:
       "Do not edit the database directly. MCP memories live in the daemon DB; distilled pages and session handoffs are the readable projection. Use Origin commands and tools for memory writes, review, distill, and delete.",
     faq: [
@@ -247,7 +252,7 @@ const setupArticles: BaseSpec[] = [
     actionIntro:
       "Use the MCP-only setup path because Codex does not install the Origin Claude Code plugin.",
     actionBullets: [
-      "Install the local runtime. The current npm setup helper targets macOS Apple Silicon; use the current release or source path for other platforms.",
+      "Install the local runtime with the current setup path for your operating system.",
       "Run ~/.origin/bin/origin mcp add codex.",
       "Restart Codex if the client does not pick up MCP changes live.",
       "Call the doctor tool or run a small capture/recall test.",
@@ -281,16 +286,17 @@ const setupArticles: BaseSpec[] = [
     slug: "how-to-add-mcp-memory-to-cursor",
     eyebrow: "Setup",
     category: "Workflows",
-    title: "How to Add MCP Memory to Cursor",
+    title: "Cursor Memory MCP: How to Add Local AI Work Memory",
     description:
-      "Wire Cursor to Origin's local MCP server so coding sessions can capture and recall project context.",
-    metaTitle: "How to Add MCP Memory to Cursor | Origin",
+      "Wire Cursor to Origin's local MCP memory server so coding sessions can capture and recall project context.",
+    metaTitle: "Cursor Memory MCP Setup | Origin",
     metaDescription:
-      "Add local-first MCP memory to Cursor with Origin setup, origin mcp add cursor, and a capture/recall verification loop.",
+      "Add local-first MCP memory to Cursor with Origin setup, origin mcp add cursor, client restart checks, and a capture/recall verification loop.",
     keywords: [
       "Cursor MCP memory",
       "Cursor persistent memory",
       "Cursor AI memory",
+      "Cursor memory MCP",
       "Origin Cursor setup",
       "MCP memory Cursor",
     ],
@@ -310,16 +316,16 @@ const setupArticles: BaseSpec[] = [
     actionIntro:
       "Treat Cursor as an MCP client connected to one local Origin daemon.",
     actionBullets: [
-      "Install the Origin runtime once. The current npm setup helper targets macOS Apple Silicon; use the current release or source path for other platforms.",
+      "Install the Origin runtime once with the current setup path for your operating system.",
       "Run ~/.origin/bin/origin mcp add cursor.",
       "The generated Cursor config writes a global ~/.cursor/mcp.json entry.",
       "Restart Cursor if the MCP tools do not appear.",
-      "Run doctor or a capture/recall round trip.",
+      "Run the Origin doctor tool or a capture/recall round trip.",
       "Capture decisions and handoff context, not raw chat history.",
     ],
     code: {
       label: "Cursor MCP setup",
-      code: "npx -y @7xuanlu/origin setup\n~/.origin/bin/origin mcp add cursor",
+      code: "npx -y @7xuanlu/origin setup\n~/.origin/bin/origin mcp add cursor\n~/.origin/bin/origin doctor",
     },
     caution:
       "If Cursor and another client both write memory, use spaces when contexts should stay separate. Richer distillation and page synthesis may need a configured local model or API-key path.",
@@ -329,7 +335,7 @@ const setupArticles: BaseSpec[] = [
       "Does Origin require Cursor to upload memory to a cloud service?",
       "No. Origin's default model is local-first. Optional model or API-key paths are separate choices for richer distillation.",
     ],
-    relatedSlugs: ["origin-cursor-workflow", "cursor-claude-code-shared-memory", "mcp-memory-server-localhost-7878"],
+    relatedSlugs: ["mcp-memory-server", "origin-cursor-workflow", "cursor-claude-code-shared-memory"],
     officialReferences: [
       {
         label: "Cursor MCP docs",
@@ -374,7 +380,7 @@ const setupArticles: BaseSpec[] = [
     actionIntro:
       "Use the CLI-generated configuration first; use manual config only when a client needs raw JSON.",
     actionBullets: [
-      "Install the local runtime. The current npm setup helper targets macOS Apple Silicon; use the current release or source path for other platforms.",
+      "Install the local runtime with the current setup path for your operating system.",
       "Run ~/.origin/bin/origin mcp add claude-desktop.",
       "Use ~/.origin/bin/origin mcp add claude-desktop --dry-run if you want to inspect the JSON before writing it.",
       "Restart Claude Desktop after MCP config changes.",
@@ -597,16 +603,18 @@ const setupArticles: BaseSpec[] = [
     slug: "mcp-memory-server-localhost-7878",
     eyebrow: "Setup",
     category: "Concepts",
-    title: "Why Origin Uses a Local MCP Memory Server on 127.0.0.1:7878",
+    title: "MCP Memory Server on localhost:7878: What to Check",
     description:
       "Understand the local daemon boundary behind Origin's MCP memory tools and how to troubleshoot port 7878.",
-    metaTitle: "MCP Memory Server on 127.0.0.1:7878 | Origin",
+    metaTitle: "MCP Memory Server on localhost:7878 | Origin",
     metaDescription:
-      "Origin's daemon listens on 127.0.0.1:7878 by default. Learn why, how MCP clients reach it, and what to check when setup fails.",
+      "Debug Origin's local MCP memory server on 127.0.0.1:7878: daemon status, origin-mcp config, client restart, and doctor checks.",
     keywords: [
       "127.0.0.1 7878 Origin",
       "Origin daemon port",
       "MCP memory server localhost",
+      "MCP server localhost 7878",
+      "origin-mcp 7878",
       "origin-server 7878",
       "Origin doctor",
     ],
@@ -617,7 +625,7 @@ const setupArticles: BaseSpec[] = [
       "doctor and status are the first checks when port 7878 fails.",
     ],
     quickAnswer:
-      "Origin's daemon listens on 127.0.0.1:7878 by default so local clients can reach one memory service without exposing it to the network.",
+      "Origin's daemon listens on 127.0.0.1:7878 by default. MCP clients do not talk to the database directly; they launch origin-mcp, and origin-mcp talks to the local daemon.",
     problem:
       "When MCP memory setup fails, users often see only a missing tool or a connection error. The real issue is usually daemon reachability, MCP configuration, or a client restart requirement.",
     originFit:
@@ -628,7 +636,7 @@ const setupArticles: BaseSpec[] = [
     actionBullets: [
       "Run ~/.origin/bin/origin status.",
       "Run ~/.origin/bin/origin doctor for a fuller setup report.",
-      "Run ~/.origin/bin/origin mcp add <client> --dry-run to inspect the client config without writing it.",
+      "Run ~/.origin/bin/origin mcp add <client> --dry-run to inspect the origin-mcp command the client should launch.",
       "Run lsof -nP -iTCP:7878 -sTCP:LISTEN and identify which process owns the port before changing client settings.",
       "Restart the MCP client after config changes.",
       "Make sure another development daemon is not owning the wrong data directory.",
