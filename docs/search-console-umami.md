@@ -47,10 +47,30 @@ Generate the ranked weekly action report with the deterministic pipeline trigger
 mkdir -p /tmp/origin-seo
 # Save the GSC Queries export as /tmp/origin-seo/gsc-queries.csv
 # Save the GSC Pages export as /tmp/origin-seo/gsc-pages.csv
+# Optional when Umami export access is available:
+#   /tmp/origin-seo/umami-pages.csv
+#   /tmp/origin-seo/umami-referrers.csv
+#   /tmp/origin-seo/umami-events.csv
 pnpm seo:weekly:run -- --date YYYY-MM-DD
 ```
 
-The report is written to `docs/seo-audits/YYYY-MM-DD-weekly-seo.md`. GSC CSVs drive the ranked query/page recommendations; indexing details and Umami referral notes remain manual fields in v1.
+The report is written to `docs/seo-audits/YYYY-MM-DD-weekly-seo.md`. GSC CSVs drive the ranked query/page recommendations. Optional Umami CSVs summarize landing pages, referrers, AI referrals, Reddit referrals, and `llms.txt` hits as export-row totals. If Umami CSVs are absent, those fields remain manual/account-gated and should not be inferred.
+
+Run the technical checks against the deployed site and the fresh local build before marking the loop complete:
+
+```bash
+pnpm seo:technical:deployed
+pnpm build
+pnpm seo:technical:built
+```
+
+`pnpm seo:technical:deployed` verifies production robots, sitemap entries, old guide redirects, key page canonicals/robots/schema, utility `X-Robots-Tag` headers, and absence of `FAQPage` JSON-LD on checked pages. `pnpm seo:technical:built` verifies the same local SEO-sensitive config after the build, plus compiled redirect/header rules and all built HTML for `FAQPage`.
+
+After deploying a redirect change, rerun the deployed checker with the strict post-deploy flag so changed legacy redirects are direct, not just eventually canonical:
+
+```bash
+pnpm seo:technical:deployed -- --require-direct-changed-redirects true
+```
 
 To verify the pipeline without real GSC data:
 
@@ -104,7 +124,15 @@ Prioritize improving pages that already have evidence.
 
 ## 7) Monthly AI visibility check
 
-Run the prompt list in `docs/seo-measurement.md` monthly in ChatGPT, Claude, Gemini, and Perplexity. Record:
+Generate the worksheet, then run the prompt list in `docs/seo-measurement.md` monthly in ChatGPT, Claude, Gemini, and Perplexity:
+
+```bash
+pnpm seo:ai-visibility -- --date YYYY-MM-DD
+```
+
+This only creates a local worksheet with manual placeholders. It does not call external assistants, and it refuses to overwrite an existing worksheet unless you pass `--force true`.
+
+Record:
 
 - whether Origin appears
 - position/order if a list is given

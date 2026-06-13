@@ -9,16 +9,20 @@ Generated from Google Search Console query/page CSV exports. Raw exports stay ou
 | Week of | YYYY-MM-DD |
 | Date range | Last 28 days |
 | GSC data source | CSV export |
-| Total clicks | - |
-| Total impressions | - |
-| Average CTR | - |
-| Average position | - |
+| Query table clicks | - |
+| Query table impressions | - |
+| Query table CTR | - |
+| Query table average position | - |
 | Indexed pages | manual |
 | Not indexed pages | manual |
 | Sitemap last read | manual |
-| Umami sessions | manual |
+| Umami data source | manual / account-gated |
+| Umami landing page views | manual |
 | AI referrals | manual |
 | Reddit referrals | manual |
+| llms.txt hits | manual |
+
+Use property-level GSC aggregate cards only when they are separately captured. Do not label partial visible query/page table sums as property totals.
 
 ## Top Actions
 
@@ -42,10 +46,13 @@ Do not create a new Learn page unless GSC/Searchfit shows a recurring query clus
 
 ## Follow-Up
 
-- [ ] Record before/after GSC snapshot for changed pages.
-- [ ] Verify `/sitemap.xml` includes changed canonical URLs.
-- [ ] Verify old `/guides/*` and `/docs/guides/*` URLs redirect to `/learn/*`.
-- [ ] Verify no old guide URLs appear in the sitemap.
+- [ ] Record pre-change GSC snapshot for changed pages in this worksheet.
+- [ ] Record post-change GSC snapshot after deployment and the next GSC read.
+- [ ] Run `pnpm seo:technical:deployed` to verify deployed robots, sitemap, canonicals, redirects, noindex headers, and checked-page schema.
+- [ ] Run `pnpm build` and `pnpm seo:technical:built` to verify local built robots, sitemap, redirects, noindex headers, canonicals, and schema.
+- [ ] Verify old `/guides/*` and `/docs/guides/*` URLs redirect to canonical `/learn/*` URLs.
+- [ ] Recheck changed redirects after deployment with `pnpm seo:technical:deployed -- --require-direct-changed-redirects true`.
+- [ ] Export or manually record Umami landing pages, referrers, AI referrals, Reddit referrals, and `llms.txt` hits.
 - [ ] Add changed pages to the next weekly comparison.
-- [ ] Check whether AI assistants mention Origin accurately for the tracked prompts in `docs/seo-measurement.md`.
+- [ ] Generate `pnpm seo:ai-visibility -- --date YYYY-MM-DD` and manually check whether AI assistants mention Origin accurately for the tracked prompts in `docs/seo-measurement.md`. The command only creates a local worksheet, does not call external assistants, and refuses to overwrite an existing worksheet unless you pass `--force true`.
 - [ ] Next measurement date: YYYY-MM-DD.

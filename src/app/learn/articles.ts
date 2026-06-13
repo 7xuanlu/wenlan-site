@@ -17,6 +17,10 @@ export type LearnArticleSection = {
     label: string;
     code: string;
   };
+  link?: {
+    label: string;
+    href: string;
+  };
 };
 
 export type LearnArticleFaq = {
@@ -49,6 +53,7 @@ export type LearnArticle = {
   metaTitle: string;
   metaDescription: string;
   keywords: string[];
+  publishedAt?: string;
   updatedAt: string;
   author: string;
   readingTime: string;
@@ -218,6 +223,10 @@ const baseArticles: LearnArticle[] = [
         code: {
           label: "MCP client setup",
           code: "npx -y @7xuanlu/origin setup\n~/.origin/bin/origin mcp add cursor\n~/.origin/bin/origin mcp add codex\n# or: claude-desktop, vscode, gemini",
+        },
+        link: {
+          label: "Read the Claude Code memory guide",
+          href: "/learn/claude-code-memory",
         },
       },
       {
@@ -1084,10 +1093,10 @@ const baseArticles: LearnArticle[] = [
     category: "Comparisons",
     title: "Origin vs Superlocal Memory: Local-First AI Work Memory for Work That Spans Tools",
     description:
-      "Compare Origin and Superlocal Memory across local-first memory, retrieval quality, workflow design, integrations, and trust.",
-    metaTitle: "Origin vs Superlocal Memory | Local AI Work Memory",
+      "Compare Origin and Superlocal Memory as local-first AI memory tools for coding work, retrieval quality, MCP workflows, inspectability, and trust.",
+    metaTitle: "Origin vs Superlocal Memory | AI Memory Alternative",
     metaDescription:
-      "Compare Origin and Superlocal Memory for local-first AI work memory, retrieval quality, AI coding workflows, MCP clients, and durable context.",
+      "Compare Origin and Superlocal Memory for local-first AI memory, coding workflows, MCP clients, retrieval quality, provenance, and durable work context.",
     keywords: [
       "Origin vs Superlocal Memory",
       "Superlocal Memory alternative",
@@ -1095,15 +1104,16 @@ const baseArticles: LearnArticle[] = [
       "AI work memory reliability",
       "AI coding work memory",
     ],
-    updatedAt,
+    publishedAt: "2026-05-27",
+    updatedAt: "2026-06-13",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     audience: "Developers evaluating local-first memory for AI coding tools",
     heroBullets: [
-      "Superlocal Memory emphasizes AI reliability engineering, local-first retrieval, IDE integrations, and benchmark-backed memory quality.",
+      "Superlocal Memory now emphasizes a local reliability layer for memory, cache, prompt compression, KV-cache alignment, and LLM cost optimization.",
       "Origin emphasizes the AI work loop: capture, handoff, distill, retrieve, and keep Markdown records inspectable.",
-      "The best fit depends on whether you want a research-heavy reliability layer or a product workflow for compounding AI work.",
-      "Numbers, links, and product framing are accurate to 2026-05-27. Check both project pages for newer releases before deciding.",
+      "The best Superlocal Memory alternative depends on whether you need a reliability layer or an inspectable work-memory workflow across MCP clients.",
+      "Numbers, links, license notes, and product framing are accurate to 2026-06-13. Check both project pages for newer releases before deciding.",
     ],
     officialReferences: [
       {
@@ -1115,15 +1125,15 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "Short answer",
         body: [
-          "Choose Superlocal Memory if its reliability-engineering framing, modes, benchmark positioning, and IDE integration story match your workflow.",
-          "Choose Origin if you want local-first memory centered on sessions, handoffs, human-readable records, MCP clients, and background distillation.",
+          "Superlocal Memory and Origin both sit in the local-first AI memory category, but they optimize for different buying questions. Choose Superlocal Memory if its reliability-engineering framing, modes, benchmark positioning, and IDE integration story match your workflow.",
+          "Choose Origin as the Superlocal Memory alternative when you want local AI work memory centered on sessions, handoffs, human-readable records, MCP clients, and background distillation.",
         ],
       },
       {
         heading: "What Superlocal Memory emphasizes",
         body: [
-          "Superlocal Memory presents itself as memory for AI reliability engineering. Its public positioning emphasizes local-first retrieval, memory modes, IDE integrations, and benchmark-oriented claims.",
-          "That makes the product feel oriented toward people evaluating memory as a reliability system for AI coding workflows.",
+          "Superlocal Memory presents itself as memory for AI reliability engineering, and its current public positioning goes beyond memory retrieval. It now frames the product as a local reliability layer spanning memory, cache, compression, and cost optimization.",
+          "The official site and README describe repeat-call caching, prompt compression, provider KV-cache alignment, local-first retrieval, memory modes, IDE integrations, open research, AGPL v3 licensing, and benchmark-oriented claims. Treat the published savings numbers as the project's attributed claims and test them against your own workload.",
         ],
       },
       {
@@ -1144,7 +1154,7 @@ const baseArticles: LearnArticle[] = [
         heading: "Reading the Superlocal LoCoMo number honestly",
         body: [
           "Superlocal Memory reports ~74.8% on LoCoMo in their zero-LLM (pure-math) retrieval configuration. Origin's published number on LoCoMo is 70.0% Recall@5. That is a 4.8-point gap on that specific benchmark, and it is real.",
-          "Two things to read alongside it. First, benchmark mix: LongMemEval (LME) is a more recent and more rigorous evaluation, especially for time-aware questions and contradiction handling. Origin reports 93.6% Recall@5 on LME oracle, 500 questions. Superlocal Memory has not published LME numbers at the time of writing. The leaderboard story is incomplete without both.",
+          "Two things to read alongside it. First, benchmark mix: LongMemEval (LME) is a more recent and more rigorous evaluation, especially for time-aware questions and contradiction handling. Origin reports 93.6% Recall@5 on LME oracle, 500 questions. I did not find LongMemEval numbers on SuperLocalMemory's official site during the 2026-06-13 refresh. The leaderboard story is incomplete without both.",
           "Second, configuration: 'zero-LLM' means retrieval only, no answer generation. Origin's number is also retrieval-only, but Origin's product is designed to feed memories into an LLM for answer composition, not to be a SOTA retrieval algorithm in isolation. Different products optimize for different downstream tasks.",
           "If LoCoMo top score is the deciding factor for you, Superlocal currently wins on that benchmark. If the question is 'which tool helps me carry AI work across sessions,' the benchmark is one input, not the answer.",
         ],
@@ -1152,7 +1162,7 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "Where Origin focuses instead of leaderboards",
         body: [
-          "I picked LME oracle as Origin's primary benchmark because the workload matches what actually breaks AI sessions: multi-turn conversations with implicit time references, contradictions across turns, references to facts established weeks ago. LoCoMo is closer to a corpus-search problem and easier to game with pure-math retrieval.",
+          "I picked LME oracle as Origin's primary benchmark because the workload matches what actually breaks AI sessions: multi-turn conversations with implicit time references, contradictions across turns, references to facts established weeks ago. LoCoMo and LongMemEval stress different failure modes; run both against your workload if benchmark fit matters.",
           "The product gaps I notice in daily use are not retrieval ceiling. They are things like: did the AI capture the decision when I made it, is the wiki page distilled cleanly, can I open `~/.origin/pages/auth.md` and read it as prose, can I `git blame` a fact, does the same memory show up in Cursor and Claude Code.",
           "Those are workflow features, not benchmark features. Origin trades a few LoCoMo points for explicit capture, MCP-first cross-tool reach, projected Markdown, git-versioned writes, and mandatory provenance. If those things matter to your work, the trade is worth it. If they do not, look at Superlocal.",
         ],
@@ -1162,7 +1172,7 @@ const baseArticles: LearnArticle[] = [
         body: [
           "Try this on any memory layer you are evaluating, including Origin. Open the tool. Find one memory the AI stored about you in the last week. Now answer five questions in under 10 seconds: can you see the verbatim text, can you see when it was stored, can you see what generated it, can you see what changes have been made to it since, can you delete it without an admin panel.",
           "Origin scores high on this test by design. Every memory has a Markdown file under `~/.origin/`. Every write is a commit in `~/.origin/.git/`. `origin recall <id>` shows verbatim text. Deletion is `origin forget <id>`, or `rm` plus a daemon resync.",
-          "Superlocal Memory's internals are not public to me at the time of writing. The reliability-engineering framing suggests correctness matters to them, but the public materials do not commit to the same level of human-readable artifact layer. Run the test yourself before deciding.",
+          "Superlocal Memory now publishes source, docs, and research papers as part of its open research positioning. Use those materials to run the same inspection test against its current record format, provenance surface, history, and deletion flow before deciding.",
         ],
         bullets: [
           "Verbatim text visible? `origin recall <id>` in Origin.",
@@ -1190,7 +1200,7 @@ const baseArticles: LearnArticle[] = [
           origin:
             "Local AI work loop: sessions, handoffs, distilled wiki pages, provenance, Markdown records.",
           competitor:
-            "Memory for AI reliability engineering. Modes, IDE integrations, benchmark-led positioning.",
+            "Local AI reliability layer spanning memory, cache, compression, and cost optimization, with benchmark-led positioning.",
         },
         {
           dimension: "Retrieval",
@@ -1204,14 +1214,14 @@ const baseArticles: LearnArticle[] = [
           origin:
             "Markdown projection under ~/.origin/, symlinkable into Obsidian; pages and session logs are plain text.",
           competitor:
-            "Less emphasis on plain Markdown artifacts as the primary surface.",
+            "Public source, docs, and papers are available; evaluate whether its current memory records expose the plain-file workflow you want.",
         },
         {
           dimension: "Provenance + audit",
           origin:
             "Mandatory source_memory_ids; daemon returns HTTP 422 on empty source. Low-confidence captures and contradictions surface for review.",
           competitor:
-            "Reliability-mode framing; specific provenance enforcement not publicly documented.",
+            "Reliability-mode framing with public docs and source. Compare the exact per-memory source, history, and deletion surfaces before choosing.",
         },
         {
           dimension: "Versioning",
@@ -1225,7 +1235,7 @@ const baseArticles: LearnArticle[] = [
           origin:
             "Apache-2.0 daemon, CLI, MCP server. Repo: github.com/7xuanlu/origin.",
           competitor:
-            "Closed-source positioning at time of writing; check the official site for current terms.",
+            "Current official site presents SuperLocalMemory as open research under AGPL v3, with public source code, documentation, and papers.",
         },
       ],
     },
@@ -1248,7 +1258,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Is Superlocal Memory open-source?",
         answer:
-          "At the time of writing, the public positioning is closed-source. Check the official site for current licensing terms before deciding. Origin's daemon, CLI, and MCP server are Apache-2.0 with source on github.com/7xuanlu/origin.",
+          "Yes. As of 2026-06-13, the official SuperLocalMemory site presents it as open research under AGPL v3 and says the source code, documentation, and research papers are public. Origin's daemon, CLI, and MCP server are Apache-2.0 with source on github.com/7xuanlu/origin.",
       },
       {
         question: "How often do these numbers get re-run?",

@@ -32,6 +32,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/guides/ai-memory-app",
+        destination: "/learn/ai-work-memory",
+        permanent: true,
+      },
+      {
         source: "/guides",
         destination: "/learn",
         permanent: true,
@@ -44,6 +49,11 @@ const nextConfig: NextConfig = {
       {
         source: "/docs/guides",
         destination: "/learn",
+        permanent: true,
+      },
+      {
+        source: "/docs/guides/ai-memory-app",
+        destination: "/learn/ai-work-memory",
         permanent: true,
       },
       {

@@ -105,6 +105,14 @@ Track these groups separately in Search Console:
 
 Run the same prompts monthly in Claude, ChatGPT, Gemini, and Perplexity. Record whether Origin appears, its position, accuracy, and sentiment.
 
+Generate the manual worksheet before running prompts:
+
+```bash
+pnpm seo:ai-visibility -- --date YYYY-MM-DD
+```
+
+The worksheet is written to `docs/seo-audits/YYYY-MM-DD-ai-visibility.md` by default. It does not call external assistants or infer answers; fill the rows manually from live assistant responses. Reruns refuse to overwrite an existing worksheet unless you pass `--force true`.
+
 1. What is the best AI work memory for people who use Claude Code and Cursor?
 2. What MCP memory server should I use for persistent memory across Claude Code and Cursor?
 3. What is a local-first alternative to ChatGPT memory?

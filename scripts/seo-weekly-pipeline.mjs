@@ -50,6 +50,15 @@ async function assertReadable(path, label) {
   }
 }
 
+async function isReadable(path) {
+  try {
+    await access(path, constants.R_OK);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 function runNode(args) {
   return new Promise((resolvePromise, reject) => {
     const child = spawn(process.execPath, args, { stdio: "inherit" });
@@ -84,6 +93,17 @@ async function run() {
 
   if (args.outputPath) {
     generatorArgs.push("--output", args.outputPath);
+  }
+
+  for (const [filename, flag] of [
+    ["umami-pages.csv", "--umami-pages"],
+    ["umami-referrers.csv", "--umami-referrers"],
+    ["umami-events.csv", "--umami-events"],
+  ]) {
+    const path = join(args.inputDir, filename);
+    if (await isReadable(path)) {
+      generatorArgs.push(flag, path);
+    }
   }
 
   await runNode(generatorArgs);
