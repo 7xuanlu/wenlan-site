@@ -1,6 +1,6 @@
-# Weekly SEO/GEO Worksheet
+# Weekly SEO/GEO Audit — YYYY-MM-DD
 
-Copy this file for each weekly cleanup as `YYYY-MM-DD-weekly-seo.md`. Keep raw Search Console and Umami exports outside git; commit the interpreted worksheet only when it changes strategy or documents shipped work.
+Generated from Google Search Console query/page CSV exports. Raw exports stay outside git.
 
 ## Snapshot
 
@@ -8,56 +8,51 @@ Copy this file for each weekly cleanup as `YYYY-MM-DD-weekly-seo.md`. Keep raw S
 | --- | --- |
 | Week of | YYYY-MM-DD |
 | Date range | Last 28 days |
-| GSC data source | live / export / unavailable |
-| Total clicks | - |
-| Total impressions | - |
-| Average CTR | - |
-| Average position | - |
-| Indexed pages | - |
-| Not indexed pages | - |
-| Sitemap last read | - |
-| Umami sessions | - |
-| AI referrals | - |
-| Reddit referrals | - |
+| GSC data source | CSV export |
+| Query table clicks | - |
+| Query table impressions | - |
+| Query table CTR | - |
+| Query table average position | - |
+| Indexed pages | manual |
+| Not indexed pages | manual |
+| Sitemap last read | manual |
+| Umami data source | manual / account-gated |
+| Umami landing page views | manual |
+| AI referrals | manual |
+| Reddit referrals | manual |
+| llms.txt hits | manual |
 
-## Query Worksheet
+Use property-level GSC aggregate cards only when they are separately captured. Do not label partial visible query/page table sums as property totals.
 
-| Query | Query group | Page | Impressions | Clicks | CTR | Avg position | Indexed? | Action | Owner | Date changed | Evidence |
-| --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- |
-| `claude code memory` | Claude Code memory | `/learn/claude-code-memory` | - | - | - | - | yes/no | wait / refresh / link / distribute | Origin team | - | GSC live/export |
-| `claude code /memory` | Claude Code native command | `/learn/claude-code-memory-command-vs-origin` | - | - | - | - | yes/no | wait / refresh / link / distribute | Origin team | - | GSC live/export |
-| `mcp memory server` | MCP memory server | `/learn/mcp-memory-server` | - | - | - | - | yes/no | wait / refresh / link / distribute | Origin team | - | GSC live/export |
-| `cursor memory mcp` | Cursor MCP memory | `/learn/how-to-add-mcp-memory-to-cursor` | - | - | - | - | yes/no | wait / refresh / link / distribute | Origin team | - | GSC live/export |
-| `origin memory` | Brand + category | `/` or `/learn` | - | - | - | - | yes/no | wait / refresh / entity links | Origin team | - | GSC live/export |
+## Top Actions
 
-## Indexing Worksheet
+1. **recommended-action** — `query-or-page`: diagnosis.
 
-| Issue | Count | Example URL | Intended canonical | Action | Evidence |
-| --- | ---: | --- | --- | --- | --- |
-| Page with redirect | - | `/guides/...` | `/learn/...` | Usually wait if canonical Learn URL is indexed | GSC Pages |
-| Alternate page with proper canonical tag | - | - | - | Act only if wanted canonical is missing | GSC Pages |
-| Crawled - currently not indexed | - | - | - | Improve internal links/content if stable for several weeks | GSC Pages |
-| Discovered - currently not indexed | - | - | - | Check sitemap/internal links; wait for new pages | GSC Pages |
+## Query Action Queue
 
-## Weekly Decision
+| Query | Query group | Current page | Impressions | Clicks | CTR | Avg position | Recommended action | Diagnosis |
+| --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- |
+| `example query` | Query group | `/learn/example` | - | - | - | - | title-meta-refresh / quick-answer-refresh / internal-link-refresh / technical-check / distribution / new-article-candidate / wait | - |
 
-Top action this week:
+## Page Action Queue
 
-1. -
-2. -
-3. -
+| Page | Impressions | Clicks | CTR | Avg position | Recommended action | Likely issue |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| `/learn/example` | - | - | - | - | title-meta-refresh / internal-link-refresh / technical-check / distribution / wait | - |
 
-Do not create a new Learn page unless GSC/Searchfit shows a query cluster no current page answers cleanly. Prefer refreshing pages already getting impressions.
+## Do Not Write Yet Gate
 
-## Changes Made
-
-| File/Page | Change | Verification |
-| --- | --- | --- |
-| - | - | - |
+Do not create a new Learn page unless GSC/Searchfit shows a recurring query cluster no current page answers cleanly. Prefer refreshing pages already getting impressions, fixing title/meta gaps, strengthening first-screen answers, and adding internal links before adding net-new content.
 
 ## Follow-Up
 
-- [ ] Record before/after GSC snapshot for changed pages.
-- [ ] Verify `/sitemap.xml` includes changed canonical URLs.
-- [ ] Verify old `/guides/*` URLs redirect to `/learn/*`.
-- [ ] Check whether AI assistants mention Origin accurately for the tracked prompts in `docs/seo-measurement.md`.
+- [ ] Record pre-change GSC snapshot for changed pages in this worksheet.
+- [ ] Record post-change GSC snapshot after deployment and the next GSC read.
+- [ ] Run `pnpm seo:technical:deployed` to verify deployed robots, sitemap, canonicals, redirects, noindex headers, and checked-page schema.
+- [ ] Run `pnpm build` and `pnpm seo:technical:built` to verify local built robots, sitemap, redirects, noindex headers, canonicals, and schema.
+- [ ] Verify old `/guides/*` and `/docs/guides/*` URLs redirect to canonical `/learn/*` URLs.
+- [ ] Recheck changed redirects after deployment with `pnpm seo:technical:deployed -- --require-direct-changed-redirects true`.
+- [ ] Export or manually record Umami landing pages, referrers, AI referrals, Reddit referrals, and `llms.txt` hits.
+- [ ] Add changed pages to the next weekly comparison.
+- [ ] Generate `pnpm seo:ai-visibility -- --date YYYY-MM-DD` and manually check whether AI assistants mention Origin accurately for the tracked prompts in `docs/seo-measurement.md`. The command only creates a local worksheet, does not call external assistants, and refuses to overwrite an existing worksheet unless you pass `--force true`.
+- [ ] Next measurement date: YYYY-MM-DD.

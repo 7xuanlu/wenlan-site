@@ -10,25 +10,25 @@ import {
 import { ArticleHalo, MemoryIndex } from "./article-visuals";
 
 export const metadata: Metadata = {
-  title: "AI Work Memory Guides for Claude Code, Cursor, and MCP | Origin",
+  title: "Origin Learn: AI Work Memory Guides for Claude Code, Cursor, MCP",
   description:
-    "Guides for Claude Code memory, MCP memory servers, Cursor memory, local AI work context, setup troubleshooting, trust, and Origin comparisons.",
+    "Find Origin guides for Claude Code memory, MCP memory servers, Cursor/Codex workflows, local AI work context, setup, trust, and comparisons.",
   alternates: {
     canonical: "/learn",
   },
   openGraph: {
-    title: "AI Work Memory Guides for Claude Code, Cursor, and MCP | Origin",
+    title: "Origin Learn: AI Work Memory Guides for Claude Code, Cursor, MCP",
     description:
-      "Guides for Claude Code memory, MCP memory servers, Cursor memory, local AI work context, setup troubleshooting, trust, and Origin comparisons.",
+      "Find Origin guides for Claude Code memory, MCP memory servers, Cursor/Codex workflows, local AI work context, setup, trust, and comparisons.",
     type: "website",
     url: `${SITE_URL}/learn`,
     siteName: "Origin",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Work Memory Guides for Claude Code, Cursor, and MCP | Origin",
+    title: "Origin Learn: AI Work Memory Guides for Claude Code, Cursor, MCP",
     description:
-      "Guides for Claude Code memory, MCP memory servers, Cursor memory, local AI work context, setup troubleshooting, trust, and Origin comparisons.",
+      "Find Origin guides for Claude Code memory, MCP memory servers, Cursor/Codex workflows, local AI work context, setup, trust, and comparisons.",
   },
 };
 
@@ -143,7 +143,7 @@ export default function LearnPage() {
                 Learn
               </p>
               <h1 className="warm-glow font-serif text-5xl leading-[1.05] font-medium tracking-tight sm:text-7xl">
-                Before you add memory to AI work.
+                Origin AI work memory guides.
               </h1>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">
                 Origin makes AI work compound across Claude Code, Cursor,

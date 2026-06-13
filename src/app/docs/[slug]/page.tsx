@@ -47,7 +47,7 @@ export async function generateMetadata({
       type: "article",
       url: docUrl(page.slug),
       siteName: "Origin",
-      publishedTime: page.updatedAt,
+      publishedTime: page.publishedAt ?? page.updatedAt,
       modifiedTime: page.updatedAt,
     },
     twitter: {
@@ -87,7 +87,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
     publisher: {
       "@id": "https://useorigin.app/#organization",
     },
-    datePublished: page.updatedAt,
+    datePublished: page.publishedAt ?? page.updatedAt,
     dateModified: page.updatedAt,
     image: `${SITE_URL}/og.png`,
     mainEntityOfPage: docUrl(page.slug),

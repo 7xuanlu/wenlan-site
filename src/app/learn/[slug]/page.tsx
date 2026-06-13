@@ -54,7 +54,7 @@ export async function generateMetadata({
       type: "article",
       url: articleUrl(article.slug),
       siteName: "Origin",
-      publishedTime: article.updatedAt,
+      publishedTime: article.publishedAt ?? article.updatedAt,
       modifiedTime: article.updatedAt,
       authors: [DEFAULT_AUTHOR_URL],
       tags: article.keywords,
@@ -111,7 +111,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
     publisher: {
       "@id": "https://useorigin.app/#organization",
     },
-    datePublished: article.updatedAt,
+    datePublished: article.publishedAt ?? article.updatedAt,
     dateModified: article.updatedAt,
     image: `${SITE_URL}/og.png`,
     mainEntityOfPage: articleUrl(article.slug),
@@ -263,7 +263,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
 
         <section className="px-6 pb-20">
           <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-[minmax(0,680px)_1fr]">
-            <div className="space-y-14">
+            <div className="min-w-0 space-y-14">
               {article.sections.map((section, index) => (
                 <section
                   id={sectionId(section.heading)}
@@ -303,6 +303,14 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                           <code>{section.code.code}</code>
                         </pre>
                       </div>
+                    )}
+                    {section.link && (
+                      <Link
+                        href={section.link.href}
+                        className="mt-6 inline-flex rounded-xl border border-[var(--o-border)] px-5 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
+                      >
+                        {section.link.label}
+                      </Link>
                     )}
                   </div>
                 </section>
@@ -380,7 +388,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
               </section>
             </div>
 
-            <aside className="space-y-6 lg:sticky lg:top-20 lg:self-start">
+            <aside className="min-w-0 space-y-6 lg:sticky lg:top-20 lg:self-start">
               <nav aria-label="On this page" className="rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5">
                 <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
                   In this article

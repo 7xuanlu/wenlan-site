@@ -32,7 +32,7 @@ export function GET() {
       <description>${escapeXml(article.description)}</description>
       <author>noreply@useorigin.app (${escapeXml(article.author)})</author>
       <category>${escapeXml(article.category)}</category>
-      <pubDate>${rfc822Date(article.updatedAt)}</pubDate>
+      <pubDate>${rfc822Date(article.publishedAt ?? article.updatedAt)}</pubDate>
     </item>`;
     })
     .join("\n");

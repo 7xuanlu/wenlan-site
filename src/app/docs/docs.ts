@@ -29,6 +29,7 @@ export type DocPage = {
   metaTitle: string;
   metaDescription: string;
   keywords?: string[];
+  publishedAt?: string;
   updatedAt: string;
   author: string;
   readingTime: string;
@@ -2679,12 +2680,12 @@ export const docPages: DocPage[] = [
     slug: "configuration",
     group: "Reference",
     eyebrow: "Configuration",
-    title: "Configuration",
+    title: "Origin Configuration",
     description:
-      "Know the Origin settings that matter: spaces, MCP client wiring, daemon bind address, local paths, models, and keys.",
-    metaTitle: "Origin Configuration | Docs",
+      "Configure Origin spaces, MCP clients, daemon bind address, local paths, models, and keys without editing the database by hand.",
+    metaTitle: "Origin Configuration: Spaces, MCP, Daemon, Keys | Docs",
     metaDescription:
-      "Configure Origin spaces, MCP clients, daemon bind address, local paths, models, API keys, and repair checks without editing the database by hand.",
+      "Configure Origin with /init, origin setup, origin mcp add, ORIGIN_SPACE, ORIGIN_BIND_ADDR, local paths, models, API keys, and doctor checks.",
     keywords: [
       "Origin configuration",
       "Origin settings",
@@ -2692,23 +2693,29 @@ export const docPages: DocPage[] = [
       "ORIGIN_BIND_ADDR",
       "origin spaces.toml",
     ],
-    updatedAt: DOCS_UPDATED_AT,
+    publishedAt: "2026-06-01",
+    updatedAt: "2026-06-13",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Most configuration should go through /init, origin setup, origin mcp add, origin model, origin key, or origin space.",
-      "The only environment knobs most users need are ORIGIN_SPACE and, rarely, ORIGIN_BIND_ADDR.",
+      "Configure Origin through /init, npx setup, origin mcp add, origin space, origin model, and origin key before editing files by hand.",
+      "Most users only need ORIGIN_SPACE for context separation and, rarely, ORIGIN_BIND_ADDR for Docker or VM access.",
+      "Run origin doctor after configuration changes to verify daemon health, MCP wiring, local paths, model state, and key state.",
     ],
     sections: [
       {
-        heading: "Use commands first",
+        heading: "Configuration quick path",
         body: [
-          "Origin is configured through the plugin, CLI, and MCP connector. Start with /init in Claude Code or npx -y @7xuanlu/origin setup for other MCP clients.",
-          "Use origin doctor after changing setup. It checks the daemon, local runtime, MCP connector, model state, key state, and common path issues.",
+          "The safest way to configure Origin is command-driven: run /init in Claude Code, npx -y @7xuanlu/origin setup for other MCP clients, then let origin mcp add write the client-specific MCP configuration.",
+          "After changing spaces, MCP clients, daemon binding, models, or keys, run origin doctor. It checks the daemon, local runtime, MCP connector, model state, key state, and common path issues before you debug by hand.",
         ],
         code: {
           label: "Setup checks",
-          code: "/init\norigin doctor",
+          code: "/init\nnpx -y @7xuanlu/origin setup\n~/.origin/bin/origin mcp add cursor\n~/.origin/bin/origin doctor",
+        },
+        link: {
+          label: "Read the Claude Code memory guide",
+          href: "/learn/claude-code-memory",
         },
       },
       {

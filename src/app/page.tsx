@@ -245,9 +245,25 @@ export default function LandingPage() {
               <ArrowIcon />
             </a>
           </div>
-          <p className="animate-fade-up delay-300 mt-6 font-mono text-[11px] text-[var(--o-text-muted)]">
-            Claude Code plugin &middot; MCP server &middot; Local daemon
-          </p>
+          <div className="animate-fade-up delay-300 mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 font-mono text-[11px] text-[var(--o-text-muted)]">
+            <span>Claude Code plugin</span>
+            <span aria-hidden="true">&middot;</span>
+            <Link
+              href="/learn/claude-code-memory"
+              className="underline decoration-[var(--o-border)] underline-offset-4 transition-colors hover:text-[var(--o-warm)]"
+            >
+              Claude Code memory
+            </Link>
+            <span aria-hidden="true">&middot;</span>
+            <Link
+              href="/learn/mcp-memory-server"
+              className="underline decoration-[var(--o-border)] underline-offset-4 transition-colors hover:text-[var(--o-warm)]"
+            >
+              MCP server
+            </Link>
+            <span aria-hidden="true">&middot;</span>
+            <span>Local daemon</span>
+          </div>
         </div>
 
       </section>

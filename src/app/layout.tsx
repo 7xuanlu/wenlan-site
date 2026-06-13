@@ -94,6 +94,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${fraunces.variable} ${instrumentSans.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >

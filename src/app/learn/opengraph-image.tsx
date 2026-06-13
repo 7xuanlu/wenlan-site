@@ -10,8 +10,8 @@ export default async function Image() {
     (
       <OgTemplate
         eyebrow="Learn"
-        title="Before you add memory to AI work."
-        description="Articles on AI work memory, MCP memory servers, local-first control, distilled wiki pages, Claude Code workflows, and Origin comparisons."
+        title="Origin AI work memory guides."
+        description="Guides for Claude Code memory, MCP memory servers, Cursor/Codex workflows, local AI work context, setup, trust, and comparisons."
         footerLeft={[
           "useorigin.app/learn",
           "Local-first memory for AI work",

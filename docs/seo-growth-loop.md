@@ -19,6 +19,17 @@ Use this when deciding what to do next for Origin search visibility. The rule is
 - Umami: landing pages, referrers, AI assistant referrals, `llms.txt` hits, Reddit referrals.
 - Site audit: sitemap, robots, canonicals, redirects, `noindex`, structured data, broken links.
 
+Generate the weekly action report from CSV exports:
+
+```bash
+mkdir -p /tmp/origin-seo
+# Save the GSC Queries export as /tmp/origin-seo/gsc-queries.csv
+# Save the GSC Pages export as /tmp/origin-seo/gsc-pages.csv
+pnpm seo:weekly:run -- --date YYYY-MM-DD
+```
+
+Raw GSC exports stay outside git. Commit the generated `docs/seo-audits/YYYY-MM-DD-weekly-seo.md` only when it records a strategy decision or shipped SEO work.
+
 ## Decision Gates
 
 | Signal | Action |
@@ -79,4 +90,3 @@ Track monthly:
 - Google Search Console is the source of truth for indexing and query/page performance.
 - Google currently limits FAQ rich results to government and health sites, so Origin keeps visible FAQ content without `FAQPage` JSON-LD.
 - The Reddit SEO case study pattern to borrow is not blind volume; it is query-cluster pages, weekly technical cleanup, human-edited content, and careful distribution.
-
