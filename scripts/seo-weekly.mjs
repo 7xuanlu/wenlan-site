@@ -519,6 +519,57 @@ function summarizeUmami({ pageRecords, referrerRecords, eventRecords }) {
   };
 }
 
+function validateUmamiMetadata({ pageRecords, referrerRecords, eventRecords }, gscDateRange) {
+  const expectedRange = parseSpecificDateRange(gscDateRange);
+  if (!expectedRange) return;
+
+  for (const [label, records] of [
+    ["pages", pageRecords],
+    ["referrers", referrerRecords],
+    ["events", eventRecords],
+  ]) {
+    const range = extractUmamiDateRange(records, label);
+    if (range && range !== expectedRange) {
+      throw new Error(`Mismatched Umami date range: ${label}=${range}; GSC=${expectedRange}`);
+    }
+  }
+}
+
+function parseSpecificDateRange(dateRange) {
+  const match = String(dateRange ?? "").match(
+    /^(\d{4}-\d{2}-\d{2}) to (\d{4}-\d{2}-\d{2})$/,
+  );
+  return match ? `${match[1]} to ${match[2]}` : null;
+}
+
+function extractUmamiDateRange(records, label) {
+  if (records.length === 0) return null;
+
+  let datedRows = 0;
+  const ranges = uniqueValues(
+    records.map((row) => {
+      const start = String(row.start_date ?? "").trim();
+      const end = String(row.end_date ?? "").trim();
+      if (!start && !end) return "";
+      if (!start || !end) {
+        throw new Error(`Incomplete Umami date metadata in ${label} export`);
+      }
+      datedRows += 1;
+      return `${start} to ${end}`;
+    }),
+  ).sort();
+
+  if (datedRows > 0 && datedRows < records.length) {
+    throw new Error(`Partial Umami date metadata in ${label} export`);
+  }
+
+  if (ranges.length > 1) {
+    throw new Error(`Mixed Umami date ranges in ${label} export: ${ranges.join("; ")}`);
+  }
+
+  return ranges[0] ?? null;
+}
+
 function isLlmsTarget(value) {
   return /\/llms(?:-full)?\.txt\b/i.test(String(value));
 }
@@ -774,7 +825,7 @@ ${evidenceMetadata.intro}
 | Top query groups | ${groups.slice(0, 4).map((group) => `${group.name} (${group.impressions})`).join(", ") || "-"} |
 | Top page | ${topPage?.page ?? "-"} |
 | Umami data source | ${umamiSummary.hasData ? "local CSV exports" : "manual / account-gated"} |
-| Umami landing page views | ${formatUmamiLandingViews(umamiSummary)} |
+| Umami landing page visits | ${formatUmamiLandingViews(umamiSummary)} |
 | AI referrals | ${formatReferrerSummary(umamiSummary.aiReferrerVisits, umamiSummary.aiReferrerCount, umamiSummary.hasReferrerData)} |
 | Reddit referrals | ${formatReferrerSummary(umamiSummary.redditVisits, umamiSummary.redditReferrerCount, umamiSummary.hasReferrerData)} |
 | llms.txt hits | ${umamiSummary.hasLlmsData ? umamiSummary.llmsHits : "manual"} |
@@ -807,7 +858,7 @@ Do not create a new Learn page unless GSC/Searchfit shows a recurring query clus
 - [ ] Run \`pnpm build\` and \`pnpm seo:technical:built\` to verify local built robots, sitemap, redirects, noindex headers, canonicals, and schema.
 - [ ] Verify old \`/guides/*\` and \`/docs/guides/*\` URLs redirect to canonical \`/learn/*\` URLs.
 - [ ] Recheck changed redirects after deployment with \`pnpm seo:technical:deployed -- --require-direct-changed-redirects true\`.
-- [ ] Export or manually record Umami landing pages, referrers, AI referrals, Reddit referrals, and \`llms.txt\` hits.
+- [ ] Fetch or manually record Umami landing pages, referrers, AI referrals, Reddit referrals, and \`llms.txt\` hits.
 - [ ] Add changed pages to the next weekly comparison.
 - [ ] Generate \`pnpm seo:ai-visibility -- --date YYYY-MM-DD\` and manually check whether AI assistants mention Origin accurately for the tracked prompts in \`docs/seo-measurement.md\`.
 - [ ] Next measurement date: ${nextDate}.
@@ -826,7 +877,7 @@ function formatReferrerSummary(visits, count, hasData) {
 
 function makeUmamiMarkdown(umami) {
   const landingPageSection = umami.hasPageData
-    ? `| Page | Views |
+    ? `| Page | Visits |
 | --- | ---: |
 ${umami.landingPages.slice(0, 8).map(umamiPageRow).join("\n") || "| - | 0 |"}`
     : "Manual / not exported or missing a recognized metric column.";
@@ -998,6 +1049,14 @@ async function run() {
   const queryRecords = parseCsv(queryText);
   const pageRecords = parseCsv(pageText);
   const evidence = extractEvidenceMetadata(queryRecords, pageRecords);
+  validateUmamiMetadata(
+    {
+      pageRecords: umamiPageRecords,
+      referrerRecords: umamiReferrerRecords,
+      eventRecords: umamiEventRecords,
+    },
+    evidence.dateRange,
+  );
   const queries = enrichQueries(queryRecords.map(normalizeQuery));
   const pages = enrichPages(pageRecords.map(normalizePage));
   const umami = summarizeUmami({

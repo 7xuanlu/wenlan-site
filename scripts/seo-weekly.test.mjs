@@ -14,6 +14,8 @@ const fixtureRoot = resolve(__dirname, "fixtures/seo-weekly");
 const builtCheckerScript = resolve(repoRoot, "scripts/seo-built-technical-check.mjs");
 const deployedCheckerScript = resolve(repoRoot, "scripts/seo-deployed-technical-check.mjs");
 const aiVisibilityScript = resolve(repoRoot, "scripts/seo-ai-visibility-worksheet.mjs");
+const pipelineScript = resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs");
+const umamiFetcherScript = resolve(repoRoot, "scripts/seo-umami-fetch.mjs");
 const requiredBuiltRedirects = [
   { source: "/learn/ai-memory-app", destination: "/learn/ai-work-memory", statusCode: 308 },
   { source: "/guides/ai-memory-app", destination: "/learn/ai-work-memory", statusCode: 308 },
@@ -274,6 +276,15 @@ async function withDeployedFixture(overrides, callback) {
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }
+}
+
+async function writeUmamiMetricFixture(outputRoot, metricsByType) {
+  const fixtureDir = join(outputRoot, "umami-api-fixture");
+  await mkdir(fixtureDir, { recursive: true });
+  for (const [type, rows] of Object.entries(metricsByType)) {
+    await writeFile(join(fixtureDir, `${type}.json`), JSON.stringify(rows), "utf8");
+  }
+  return fixtureDir;
 }
 
 async function writeBuiltSeoFixture(outputRoot, overrides = {}) {
@@ -1383,7 +1394,7 @@ test("seo weekly generator turns GSC exports into a ranked Markdown action repor
     );
     assert.match(
       report,
-      /Export or manually record Umami landing pages, referrers, AI referrals, Reddit referrals, and `llms\.txt` hits\./,
+      /Fetch or manually record Umami landing pages, referrers, AI referrals, Reddit referrals, and `llms\.txt` hits\./,
     );
     assert.match(
       report,
@@ -1491,7 +1502,7 @@ test("seo weekly generator summarizes optional Umami CSV exports", async () => {
     const report = await readFile(outputPath, "utf8");
 
     assert.match(report, /\| Umami data source \| local CSV exports \|/);
-    assert.match(report, /\| Umami landing page views \| 77 across 3 rows \|/);
+    assert.match(report, /\| Umami landing page visits \| 77 across 3 rows \|/);
     assert.match(report, /\| AI referrals \| 15 visits from 2 referrers \|/);
     assert.match(report, /\| Reddit referrals \| 9 visits from 1 referrer \|/);
     assert.match(report, /\| llms\.txt hits \| 7 \|/);
@@ -1586,7 +1597,7 @@ test("seo weekly generator keeps referrer metrics manual when only Umami page ex
     const report = await readFile(outputPath, "utf8");
 
     assert.match(report, /\| Umami data source \| local CSV exports \|/);
-    assert.match(report, /\| Umami landing page views \| 12 across 2 rows \|/);
+    assert.match(report, /\| Umami landing page visits \| 12 across 2 rows \|/);
     assert.match(report, /\| AI referrals \| manual \|/);
     assert.match(report, /\| Reddit referrals \| manual \|/);
     assert.match(report, /\| llms\.txt hits \| 2 \|/);
@@ -1629,7 +1640,7 @@ test("seo weekly generator keeps referrer metrics manual for unparseable Umami r
     const report = await readFile(outputPath, "utf8");
 
     assert.match(report, /\| Umami data source \| local CSV exports \|/);
-    assert.match(report, /\| Umami landing page views \| manual \|/);
+    assert.match(report, /\| Umami landing page visits \| manual \|/);
     assert.match(report, /\| AI referrals \| manual \|/);
     assert.match(report, /\| Reddit referrals \| manual \|/);
     assert.match(report, /### Referrers\n\nManual \/ not exported or missing a recognized metric column\./);
@@ -1763,7 +1774,7 @@ test("seo weekly generator keeps llms hits manual when any contributing Umami ex
       const report = await readFile(outputPath, "utf8");
 
       assert.match(report, /\| Umami data source \| local CSV exports \|/);
-      assert.match(report, /\| Umami landing page views \| 4 across 1 row \|/);
+      assert.match(report, /\| Umami landing page visits \| 4 across 1 row \|/);
       assert.match(report, /\| llms\.txt hits \| manual \|/);
       assert.doesNotMatch(report, /\| llms\.txt hits \| 4 \|/);
     }
@@ -1817,10 +1828,336 @@ test("seo weekly pipeline trigger auto-detects optional Umami CSV exports", asyn
     const report = await readFile(outputPath, "utf8");
 
     assert.match(report, /## Umami Evidence/);
-    assert.match(report, /\| Umami landing page views \| 12 across 2 rows \|/);
+    assert.match(report, /\| Umami landing page visits \| 12 across 2 rows \|/);
     assert.match(report, /\| AI referrals \| 5 visits from 1 referrer \|/);
     assert.match(report, /\| Reddit referrals \| 4 visits from 1 referrer \|/);
     assert.match(report, /\| llms\.txt hits \| 2 \|/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo Umami fetcher exports API metrics to weekly CSV schema", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-umami-fetch-"));
+  try {
+    const fixtureDir = await writeUmamiMetricFixture(outputRoot, {
+      entry: [
+        { name: "/learn", y: 999, pageviews: 80, visits: 42 },
+        { name: "/learn/claude-code-memory", y: 999, pageviews: 70, visits: 31 },
+        { name: "/llms.txt", y: 999, pageviews: 2, visits: 2 },
+      ],
+      referrer: [
+        { name: "chatgpt.com", y: 999, pageviews: 20, visits: 8 },
+        { name: "old.reddit.com", y: 999, pageviews: 10, visits: 4 },
+      ],
+      path: [
+        { name: "/llms.txt", y: 999, pageviews: 2, visits: 1 },
+        { name: "/llms-full.txt", y: 999, pageviews: 3, visits: 1 },
+        { name: "/learn", y: 999, pageviews: 40, visits: 12 },
+      ],
+    });
+
+    const { stdout } = await execFileAsync(
+      process.execPath,
+      [
+        umamiFetcherScript,
+        "--",
+        "--start-date",
+        "2026-05-15",
+        "--end-date",
+        "2026-06-11",
+        "--output-dir",
+        outputRoot,
+        "--fixture-dir",
+        fixtureDir,
+        "--website-id",
+        "test-website",
+      ],
+      {
+        cwd: repoRoot,
+        env: {
+          ...process.env,
+          UMAMI_API_KEY: "test-key",
+          UMAMI_AUTH_TOKEN: "",
+        },
+      },
+    );
+
+    assert.match(stdout, /\[seo-umami-fetch\] wrote 2 landing pages/);
+    assert.equal(
+      await readFile(join(outputRoot, "umami-pages.csv"), "utf8"),
+      [
+        "Page,Visits,Start date,End date,Source",
+        "/learn,42,2026-05-15,2026-06-11,Umami metrics/expanded API",
+        "/learn/claude-code-memory,31,2026-05-15,2026-06-11,Umami metrics/expanded API",
+        "",
+      ].join("\n"),
+    );
+    assert.equal(
+      await readFile(join(outputRoot, "umami-referrers.csv"), "utf8"),
+      [
+        "Referrer,Visits,Start date,End date,Source",
+        "chatgpt.com,8,2026-05-15,2026-06-11,Umami metrics/expanded API",
+        "old.reddit.com,4,2026-05-15,2026-06-11,Umami metrics/expanded API",
+        "",
+      ].join("\n"),
+    );
+    assert.equal(
+      await readFile(join(outputRoot, "umami-events.csv"), "utf8"),
+      [
+        "Event,URL,Count,Start date,End date,Source",
+        "pageview,/llms.txt,2,2026-05-15,2026-06-11,Umami metrics/expanded API",
+        "pageview,/llms-full.txt,3,2026-05-15,2026-06-11,Umami metrics/expanded API",
+        "",
+      ].join("\n"),
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo Umami fetcher can skip cleanly when credentials are absent", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-umami-skip-"));
+  try {
+    const { stdout } = await execFileAsync(
+      process.execPath,
+      [
+        umamiFetcherScript,
+        "--",
+        "--start-date",
+        "2026-05-15",
+        "--end-date",
+        "2026-06-11",
+        "--output-dir",
+        outputRoot,
+        "--website-id",
+        "test-website",
+        "--skip-if-missing",
+        "true",
+      ],
+      {
+        cwd: repoRoot,
+        env: {
+          ...process.env,
+          UMAMI_API_KEY: "",
+          UMAMI_AUTH_TOKEN: "",
+        },
+      },
+    );
+
+    assert.match(stdout, /skipped: missing Umami API credentials/);
+    await assert.rejects(readFile(join(outputRoot, "umami-pages.csv"), "utf8"), {
+      code: "ENOENT",
+    });
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly pipeline fetches Umami data when credentials and GSC date metadata exist", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-pipeline-umami-fetch-"));
+  try {
+    const fixtureDir = await writeUmamiMetricFixture(outputRoot, {
+      entry: [
+        { name: "/learn", y: 999, visits: 42 },
+        { name: "/learn/claude-code-memory", y: 999, visits: 31 },
+        { name: "/llms.txt", y: 999, visits: 2 },
+      ],
+      referrer: [
+        { name: "claude.ai", y: 999, visits: 5 },
+        { name: "old.reddit.com", y: 999, visits: 4 },
+      ],
+      path: [
+        { name: "/llms.txt", y: 999, pageviews: 2, visits: 1 },
+        { name: "/llms-full.txt", y: 999, pageviews: 3, visits: 1 },
+      ],
+    });
+    const inputDir = join(outputRoot, "input");
+    const outputPath = join(outputRoot, "2026-06-13-weekly-seo.md");
+    const source = "authenticated GSC UI normalized";
+    await mkdir(inputDir, { recursive: true });
+    await writeFile(
+      join(inputDir, "gsc-queries.csv"),
+      [
+        "Query,Clicks,Impressions,CTR,Position,Start date,End date,Source",
+        `claude code memory,0,12,0%,12.4,2026-05-15,2026-06-11,${source}`,
+        `mcp memory server,1,20,5%,9.8,2026-05-15,2026-06-11,${source}`,
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+    await writeFile(
+      join(inputDir, "gsc-pages.csv"),
+      [
+        "Page,Clicks,Impressions,CTR,Position,Start date,End date,Source",
+        `https://useorigin.app/learn,0,40,0%,11.2,2026-05-15,2026-06-11,${source}`,
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+
+    await execFileAsync(
+      process.execPath,
+      [
+        pipelineScript,
+        "--",
+        "--input-dir",
+        inputDir,
+        "--date",
+        "2026-06-13",
+        "--output",
+        outputPath,
+      ],
+      {
+        cwd: repoRoot,
+        env: {
+          ...process.env,
+          UMAMI_API_KEY: "test-key",
+          UMAMI_AUTH_TOKEN: "",
+          UMAMI_WEBSITE_ID: "test-website",
+          NEXT_PUBLIC_UMAMI_WEBSITE_ID: "",
+          UMAMI_FIXTURE_DIR: fixtureDir,
+        },
+      },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+
+    assert.match(report, /\| Date range \| 2026-05-15 to 2026-06-11 \|/);
+    assert.match(report, /\| Umami data source \| local CSV exports \|/);
+    assert.match(report, /\| Umami landing page visits \| 73 across 2 rows \|/);
+    assert.match(report, /\| AI referrals \| 5 visits from 1 referrer \|/);
+    assert.match(report, /\| Reddit referrals \| 4 visits from 1 referrer \|/);
+    assert.match(report, /\| llms\.txt hits \| 5 \|/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly pipeline ignores undated Umami CSVs when GSC date metadata exists", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-pipeline-umami-stale-"));
+  try {
+    const inputDir = join(outputRoot, "input");
+    const outputPath = join(outputRoot, "2026-06-13-weekly-seo.md");
+    const source = "authenticated GSC UI normalized";
+    await mkdir(inputDir, { recursive: true });
+    await writeFile(
+      join(inputDir, "gsc-queries.csv"),
+      [
+        "Query,Clicks,Impressions,CTR,Position,Start date,End date,Source",
+        `claude code memory,0,12,0%,12.4,2026-05-15,2026-06-11,${source}`,
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+    await writeFile(
+      join(inputDir, "gsc-pages.csv"),
+      [
+        "Page,Clicks,Impressions,CTR,Position,Start date,End date,Source",
+        `https://useorigin.app/learn,0,40,0%,11.2,2026-05-15,2026-06-11,${source}`,
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+    await writeFile(
+      join(inputDir, "umami-pages.csv"),
+      ["Page,Visits", "/stale-from-last-week,999", ""].join("\n"),
+      "utf8",
+    );
+
+    await execFileAsync(
+      process.execPath,
+      [
+        pipelineScript,
+        "--",
+        "--input-dir",
+        inputDir,
+        "--date",
+        "2026-06-13",
+        "--output",
+        outputPath,
+      ],
+      {
+        cwd: repoRoot,
+        env: {
+          ...process.env,
+          UMAMI_API_KEY: "",
+          UMAMI_AUTH_TOKEN: "",
+          UMAMI_WEBSITE_ID: "",
+          NEXT_PUBLIC_UMAMI_WEBSITE_ID: "",
+          UMAMI_FIXTURE_DIR: "",
+        },
+      },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+
+    assert.match(report, /\| Umami data source \| manual \/ account-gated \|/);
+    assert.match(report, /\| Umami landing page visits \| manual \|/);
+    assert.doesNotMatch(report, /stale-from-last-week/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly generator rejects Umami CSV metadata outside the GSC date range", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-umami-metadata-mismatch-"));
+  try {
+    const queriesPath = join(outputRoot, "gsc-queries.csv");
+    const pagesPath = join(outputRoot, "gsc-pages.csv");
+    const umamiPagesPath = join(outputRoot, "umami-pages.csv");
+    const outputPath = join(outputRoot, "2026-06-13-weekly-seo.md");
+    const source = "authenticated GSC UI normalized";
+
+    await writeFile(
+      queriesPath,
+      [
+        "Query,Clicks,Impressions,CTR,Position,Start date,End date,Source",
+        `claude code memory,0,12,0%,12.4,2026-05-15,2026-06-11,${source}`,
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+    await writeFile(
+      pagesPath,
+      [
+        "Page,Clicks,Impressions,CTR,Position,Start date,End date,Source",
+        `https://useorigin.app/learn,0,40,0%,11.2,2026-05-15,2026-06-11,${source}`,
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+    await writeFile(
+      umamiPagesPath,
+      [
+        "Page,Visits,Start date,End date,Source",
+        "/learn,42,2026-04-15,2026-05-12,Umami metrics/expanded API",
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [
+          resolve(repoRoot, "scripts/seo-weekly.mjs"),
+          "--",
+          "--queries",
+          queriesPath,
+          "--pages",
+          pagesPath,
+          "--umami-pages",
+          umamiPagesPath,
+          "--date",
+          "2026-06-13",
+          "--output",
+          outputPath,
+        ],
+        { cwd: repoRoot },
+      ),
+      /Mismatched Umami date range/,
+    );
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }

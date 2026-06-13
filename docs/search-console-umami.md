@@ -39,7 +39,7 @@ Run this once per week, using the same date range for every export.
    - `Crawled - currently not indexed`
    - `Discovered - currently not indexed`
 5. Search Console → **Sitemaps**. Record last read time, discovered URLs, and errors.
-6. Umami → same date range. Record landing pages, referrers, AI referrals, `llms.txt` hits, and Reddit referrals.
+6. Umami → same date range. Prefer the API fetch below when `UMAMI_API_KEY` is available; otherwise record landing pages, referrers, AI referrals, `llms.txt` hits, and Reddit referrals manually.
 
 Generate the ranked weekly action report with the deterministic pipeline trigger:
 
@@ -47,14 +47,40 @@ Generate the ranked weekly action report with the deterministic pipeline trigger
 mkdir -p /tmp/origin-seo
 # Save the GSC Queries export as /tmp/origin-seo/gsc-queries.csv
 # Save the GSC Pages export as /tmp/origin-seo/gsc-pages.csv
-# Optional when Umami export access is available:
+# Optional when manual Umami export access is available for the same date range:
 #   /tmp/origin-seo/umami-pages.csv
 #   /tmp/origin-seo/umami-referrers.csv
 #   /tmp/origin-seo/umami-events.csv
 pnpm seo:weekly:run -- --date YYYY-MM-DD
 ```
 
-The report is written to `docs/seo-audits/YYYY-MM-DD-weekly-seo.md`. GSC CSVs drive the ranked query/page recommendations. Optional Umami CSVs summarize landing pages, referrers, AI referrals, Reddit referrals, and `llms.txt` hits as export-row totals. If Umami CSVs are absent, those fields remain manual/account-gated and should not be inferred.
+When the GSC CSVs include `Start date` and `End date` metadata, `pnpm seo:weekly:run` first attempts to fetch Umami `metrics/expanded` API data for that exact range and writes metadata-stamped CSVs:
+
+- `/tmp/origin-seo/umami-pages.csv` from Umami `entry` visits
+- `/tmp/origin-seo/umami-referrers.csv` from Umami `referrer` visits
+- `/tmp/origin-seo/umami-events.csv` from Umami `path` pageviews filtered to `/llms.txt` and `/llms-full.txt`
+
+Required environment:
+
+```bash
+UMAMI_API_KEY=...
+UMAMI_WEBSITE_ID=... # falls back to NEXT_PUBLIC_UMAMI_WEBSITE_ID
+UMAMI_API_BASE_URL=https://api.umami.is/v1
+```
+
+For self-hosted Umami, set `UMAMI_API_BASE_URL` to your `/api` base URL and use `UMAMI_AUTH_TOKEN` instead of `UMAMI_API_KEY`. If the GSC CSVs do not include date metadata, either add normalized `Start date` / `End date` columns or pass explicit Umami dates:
+
+```bash
+pnpm seo:weekly:run -- --date YYYY-MM-DD --umami-start-date YYYY-MM-DD --umami-end-date YYYY-MM-DD
+```
+
+The report is written to `docs/seo-audits/YYYY-MM-DD-weekly-seo.md`. GSC CSVs drive the ranked query/page recommendations. Optional Umami CSVs summarize landing page visits, referrers, AI referrals, Reddit referrals, and `llms.txt` hits as export-row totals. Metadata-stamped Umami CSVs are rejected when their date range does not match GSC. Undated Umami CSVs are not auto-detected by the pipeline when GSC has a concrete date range, to avoid stale `/tmp` data. If Umami credentials and safe CSVs are absent, those fields remain manual/account-gated and should not be inferred.
+
+You can also fetch Umami CSVs directly:
+
+```bash
+pnpm seo:umami:fetch -- --start-date YYYY-MM-DD --end-date YYYY-MM-DD --output-dir /tmp/origin-seo
+```
 
 Run the technical checks against the deployed site and the fresh local build before marking the loop complete:
 
