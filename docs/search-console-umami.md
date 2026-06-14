@@ -39,7 +39,7 @@ Run this once per week, using the same date range for every export.
    - `Crawled - currently not indexed`
    - `Discovered - currently not indexed`
 5. Search Console → **Sitemaps**. Record last read time, discovered URLs, and errors.
-6. Umami → same date range. Prefer the API fetch below when `UMAMI_API_KEY` is available; otherwise record landing pages, referrers, AI referrals, `llms.txt` hits, and Reddit referrals manually.
+6. Umami → same date range. Prefer the API fetch below when an API credential is available; otherwise record landing pages, referrers, AI referrals, `llms.txt` hits, and Reddit referrals manually.
 
 Generate the ranked weekly action report with the deterministic pipeline trigger:
 
@@ -64,11 +64,11 @@ Required environment:
 
 ```bash
 UMAMI_API_KEY=...
-UMAMI_WEBSITE_ID=... # falls back to NEXT_PUBLIC_UMAMI_WEBSITE_ID
-UMAMI_API_BASE_URL=https://api.umami.is/v1
+NEXT_PUBLIC_UMAMI_WEBSITE_ID=... # existing tracking id is enough for site selection
+UMAMI_API_BASE_URL=https://api.umami.is/v1 # optional default
 ```
 
-For self-hosted Umami, set `UMAMI_API_BASE_URL` to your `/api` base URL and use `UMAMI_AUTH_TOKEN` instead of `UMAMI_API_KEY`. If the GSC CSVs do not include date metadata, either add normalized `Start date` / `End date` columns or pass explicit Umami dates:
+`UMAMI_WEBSITE_ID` is only needed when you want the fetcher to use a different website than the public tracking id. Umami Cloud still requires `UMAMI_API_KEY` to read analytics data from `https://api.umami.is/v1`; the public website id alone is only enough for the browser tracking script. For self-hosted Umami, set `UMAMI_API_BASE_URL` to your `/api` base URL and use `UMAMI_AUTH_TOKEN` instead of `UMAMI_API_KEY`. If the GSC CSVs do not include date metadata, either add normalized `Start date` / `End date` columns or pass explicit Umami dates:
 
 ```bash
 pnpm seo:weekly:run -- --date YYYY-MM-DD --umami-start-date YYYY-MM-DD --umami-end-date YYYY-MM-DD
