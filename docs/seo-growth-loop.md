@@ -16,7 +16,7 @@ Use this when deciding what to do next for Origin search visibility. The rule is
 
 - GSC Performance, last 28 days: queries, pages, clicks, impressions, CTR, average position.
 - GSC Indexing: sitemap status, indexed count, excluded reasons, canonical details for important URLs.
-- Umami: landing pages, referrers, AI assistant referrals, `llms.txt` hits, Reddit referrals.
+- Umami: API-fetched or manually recorded landing pages, referrers, AI assistant referrals, `llms.txt` hits, Reddit referrals.
 - Site audit: sitemap, robots, canonicals, redirects, `noindex`, structured data, broken links.
 
 Generate the weekly action report from CSV exports:
@@ -28,7 +28,7 @@ mkdir -p /tmp/origin-seo
 pnpm seo:weekly:run -- --date YYYY-MM-DD
 ```
 
-Raw GSC exports stay outside git. Commit the generated `docs/seo-audits/YYYY-MM-DD-weekly-seo.md` only when it records a strategy decision or shipped SEO work.
+When `UMAMI_API_KEY` and `UMAMI_WEBSITE_ID` are set and the GSC CSVs include a concrete `Start date` / `End date` range, `pnpm seo:weekly:run` fetches Umami metrics into `/tmp/origin-seo` before generating the report. Raw GSC and Umami exports stay outside git. Commit the generated `docs/seo-audits/YYYY-MM-DD-weekly-seo.md` only when it records a strategy decision or shipped SEO work.
 
 ## Decision Gates
 
