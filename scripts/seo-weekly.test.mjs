@@ -14,6 +14,7 @@ const fixtureRoot = resolve(__dirname, "fixtures/seo-weekly");
 const builtCheckerScript = resolve(repoRoot, "scripts/seo-built-technical-check.mjs");
 const deployedCheckerScript = resolve(repoRoot, "scripts/seo-deployed-technical-check.mjs");
 const aiVisibilityScript = resolve(repoRoot, "scripts/seo-ai-visibility-worksheet.mjs");
+const gscFetchScript = resolve(repoRoot, "scripts/seo-gsc-fetch.mjs");
 const requiredBuiltRedirects = [
   { source: "/learn/ai-memory-app", destination: "/learn/ai-work-memory", statusCode: 308 },
   { source: "/guides/ai-memory-app", destination: "/learn/ai-work-memory", statusCode: 308 },
@@ -333,6 +334,220 @@ test("package scripts include AI visibility worksheet generator", async () => {
     packageJson.scripts["seo:ai-visibility"],
     "node scripts/seo-ai-visibility-worksheet.mjs",
   );
+});
+
+test("package scripts include GSC API fetcher", async () => {
+  const packageJson = JSON.parse(await readFile(resolve(repoRoot, "package.json"), "utf8"));
+
+  assert.equal(packageJson.scripts["seo:gsc:fetch"], "node scripts/seo-gsc-fetch.mjs");
+});
+
+test("GSC API fetcher normalizes search analytics fixture rows into weekly CSVs", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-gsc-fetch-"));
+  try {
+    const fixtureDir = join(outputRoot, "fixtures");
+    const outputDir = join(outputRoot, "exports");
+    await mkdir(fixtureDir, { recursive: true });
+    await writeFile(
+      join(fixtureDir, "searchanalytics-query.json"),
+      JSON.stringify({
+        rows: [
+          {
+            keys: ["claude code memory"],
+            clicks: 1,
+            impressions: 12,
+            ctr: 1 / 12,
+            position: 12.34,
+          },
+        ],
+      }),
+      "utf8",
+    );
+    await writeFile(
+      join(fixtureDir, "searchanalytics-page.json"),
+      JSON.stringify({
+        rows: [
+          {
+            keys: ["https://useorigin.app/learn/claude-code-memory"],
+            clicks: 0,
+            impressions: 37,
+            ctr: 0,
+            position: 33.12,
+          },
+        ],
+      }),
+      "utf8",
+    );
+    await writeFile(
+      join(fixtureDir, "sitemaps.json"),
+      JSON.stringify({ sitemap: [{ path: "https://useorigin.app/sitemap.xml" }] }),
+      "utf8",
+    );
+
+    const { stdout } = await execFileAsync(
+      process.execPath,
+      [
+        gscFetchScript,
+        "--",
+        "--start-date",
+        "2026-05-25",
+        "--end-date",
+        "2026-06-21",
+        "--fixture-dir",
+        fixtureDir,
+        "--output-dir",
+        outputDir,
+      ],
+      { cwd: repoRoot },
+    );
+
+    assert.match(stdout, /"queryRows": 1/);
+    assert.match(stdout, /"pageRows": 1/);
+    assert.match(stdout, /"sitemapCount": 1/);
+
+    const queriesCsv = await readFile(join(outputDir, "gsc-queries.csv"), "utf8");
+    const pagesCsv = await readFile(join(outputDir, "gsc-pages.csv"), "utf8");
+    const metadata = JSON.parse(await readFile(join(outputDir, "gsc-metadata.json"), "utf8"));
+
+    assert.match(
+      queriesCsv,
+      /^Query,Clicks,Impressions,CTR,Position,Start date,End date,Source/m,
+    );
+    assert.match(
+      queriesCsv,
+      /claude code memory,1,12,8\.33%,12\.3,2026-05-25,2026-06-21,Search Console API fixture/,
+    );
+    assert.match(
+      pagesCsv,
+      /https:\/\/useorigin\.app\/learn\/claude-code-memory,0,37,0\.00%,33\.1,2026-05-25,2026-06-21,Search Console API fixture/,
+    );
+    assert.equal(metadata.siteUrl, "sc-domain:useorigin.app");
+    assert.equal(metadata.source, "Search Console API fixture");
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("GSC API fetcher derives the last 28 complete days from report date", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-gsc-fetch-date-"));
+  try {
+    const fixtureDir = join(outputRoot, "fixtures");
+    const outputDir = join(outputRoot, "exports");
+    await mkdir(fixtureDir, { recursive: true });
+    await writeFile(
+      join(fixtureDir, "searchanalytics-query.json"),
+      JSON.stringify({
+        rows: [
+          {
+            keys: ["claude code memory"],
+            clicks: 1,
+            impressions: 12,
+            ctr: 1 / 12,
+            position: 12.34,
+          },
+        ],
+      }),
+      "utf8",
+    );
+    await writeFile(
+      join(fixtureDir, "searchanalytics-page.json"),
+      JSON.stringify({
+        rows: [
+          {
+            keys: ["https://useorigin.app/learn/claude-code-memory"],
+            clicks: 0,
+            impressions: 37,
+            ctr: 0,
+            position: 33.12,
+          },
+        ],
+      }),
+      "utf8",
+    );
+    await writeFile(join(fixtureDir, "sitemaps.json"), JSON.stringify({}), "utf8");
+
+    await execFileAsync(
+      process.execPath,
+      [
+        gscFetchScript,
+        "--",
+        "--date",
+        "2026-06-22",
+        "--fixture-dir",
+        fixtureDir,
+        "--output-dir",
+        outputDir,
+      ],
+      { cwd: repoRoot },
+    );
+
+    const metadata = JSON.parse(await readFile(join(outputDir, "gsc-metadata.json"), "utf8"));
+    const queriesCsv = await readFile(join(outputDir, "gsc-queries.csv"), "utf8");
+
+    assert.equal(metadata.startDate, "2026-05-25");
+    assert.equal(metadata.endDate, "2026-06-21");
+    assert.match(queriesCsv, /2026-05-25,2026-06-21,Search Console API fixture/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("GSC API fetcher rejects mixed report date and explicit date range", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-gsc-fetch-mixed-date-"));
+  try {
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [
+          gscFetchScript,
+          "--",
+          "--date",
+          "2026-06-22",
+          "--start-date",
+          "2026-05-25",
+          "--end-date",
+          "2026-06-21",
+          "--output-dir",
+          outputRoot,
+        ],
+        {
+          cwd: repoRoot,
+          env: { ...process.env, GSC_ACCESS_TOKEN: "" },
+        },
+      ),
+      /Use either --date or --start-date\/--end-date, not both/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("GSC API fetcher requires an access token outside fixture mode", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-gsc-fetch-token-"));
+  try {
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [
+          gscFetchScript,
+          "--",
+          "--start-date",
+          "2026-05-25",
+          "--end-date",
+          "2026-06-21",
+          "--output-dir",
+          outputRoot,
+        ],
+        {
+          cwd: repoRoot,
+          env: { ...process.env, GSC_ACCESS_TOKEN: "" },
+        },
+      ),
+      /Missing GSC_ACCESS_TOKEN/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
 });
 
 test("AI visibility worksheet generator turns measurement prompts into manual rows", async () => {

@@ -54,6 +54,18 @@ mkdir -p /tmp/origin-seo
 pnpm seo:weekly:run -- --date YYYY-MM-DD
 ```
 
+If the local Google account can mint a Search Console-scoped OAuth token, use the API fetcher instead of browser CSV downloads:
+
+```bash
+GSC_ACCESS_TOKEN="$(gcloud auth print-access-token)" pnpm seo:gsc:fetch -- \
+  --date YYYY-MM-DD
+pnpm seo:weekly:run -- --date YYYY-MM-DD
+```
+
+`--date` derives the last 28 complete days ending yesterday relative to the report date. Use `--start-date YYYY-MM-DD --end-date YYYY-MM-DD` only when matching a manually selected Search Console range.
+
+The token must include `https://www.googleapis.com/auth/webmasters.readonly`. A default Cloud Platform token without that scope reaches the Search Console API but fails with `ACCESS_TOKEN_SCOPE_INSUFFICIENT`.
+
 The report is written to `docs/seo-audits/YYYY-MM-DD-weekly-seo.md`. GSC CSVs drive the ranked query/page recommendations. Optional Umami CSVs summarize landing pages, referrers, AI referrals, Reddit referrals, and `llms.txt` hits as export-row totals. If Umami CSVs are absent, those fields remain manual/account-gated and should not be inferred.
 
 Run the technical checks against the deployed site and the fresh local build before marking the loop complete:
