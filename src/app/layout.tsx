@@ -23,9 +23,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const siteDescription =
-  "Origin gives Claude Code, Cursor, Codex, and other MCP clients shared local AI work memory with capture, recall, handoff, provenance, and readable Markdown artifacts.";
+  "Wenlan is a living personal knowledge library for AI work: agents capture what they learn, you add sources you trust, and the daemon keeps source-cited pages current.";
 
-const siteTitle = "Origin | Shared Local Memory for Claude Code, Cursor, Codex";
+const siteTitle = "Wenlan | Living Personal Knowledge Library for AI Work";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://useorigin.app"),
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     canonical: "/",
     types: {
       "application/rss+xml": [
-        { url: "/feed.xml", title: "Origin Learn RSS feed" },
+        { url: "/feed.xml", title: "Wenlan Learn RSS feed" },
       ],
     },
   },
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     description: siteDescription,
     type: "website",
     url: "https://useorigin.app",
-    siteName: "Origin",
+    siteName: "Wenlan",
     locale: "en_US",
   },
   twitter: {
@@ -113,7 +113,7 @@ export default function RootLayout({
         )}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("origin-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);else if(window.matchMedia("(prefers-color-scheme:light)").matches)document.documentElement.setAttribute("data-theme","light")}catch(e){}})()`,
+            __html: `(function(){try{var t=localStorage.getItem("wenlan-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);else if(window.matchMedia("(prefers-color-scheme:light)").matches)document.documentElement.setAttribute("data-theme","light")}catch(e){}})()`,
           }}
         />
         <script
@@ -122,43 +122,43 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
-              name: "Origin",
+              name: "Wenlan",
               alternateName: [
-                "Origin AI Work Memory",
-                "Origin Local AI Work Memory",
-                "Origin MCP",
+                "Wenlan AI Work Memory",
+                "Wenlan Local AI Work Memory",
+                "Wenlan MCP",
               ],
               description: siteDescription,
               url: "https://useorigin.app",
               applicationCategory: "DeveloperApplication",
               operatingSystem: ["macOS", "Linux", "Windows"],
-              softwareVersion: "0.7.0",
+              softwareVersion: "0.9.1",
               softwareRequirements:
                 "macOS arm64 or x64, Linux x86_64 or aarch64 (glibc), Windows x86_64",
-              installUrl: "https://github.com/7xuanlu/origin#quickstart",
-              downloadUrl: "https://github.com/7xuanlu/origin/releases",
+              installUrl: "https://github.com/7xuanlu/wenlan#quickstart",
+              downloadUrl: "https://github.com/7xuanlu/wenlan/releases",
               screenshot: "https://useorigin.app/og.png",
               featureList: [
                 "Hybrid retrieval on libSQL: vector + FTS5 + reciprocal-rank fusion + knowledge-graph context. 93.6% Recall@5 on LongMemEval (oracle, 500 Q), 70.0% on LoCoMo.",
-                "Readable artifact history: pages, session logs, and project status Markdown are committed to local git under ~/.origin/.git/. Raw memory captures remain daemon-owned database records.",
+                "Real git versioning: readable pages, sessions, handoffs, and status artifacts commit into ~/.wenlan/.git/ so Markdown artifacts can be inspected, diffed, reverted, or branched.",
                 "Source-backed provenance: distilled wiki page records keep source memory IDs. The daemon rejects pages with empty source_memory_ids (HTTP 422), and pages can grow or refresh without losing their source chain.",
                 "Auditable memory: low-confidence captures, contradictions, supersession chains, and protected-memory conflicts surface for review instead of silently entering context.",
                 "Composition over storage: memories distill into pages. Sessions track workflow. An entity graph links people, projects, tools, and relations. ~30 MCP tools across one daemon, not 100+ skills bolted on.",
                 "Explicit spaces: tag memories, pages, and recalls with space=work | personal | client-X. Auto-detected from current repo or workspace.",
                 "Cross-platform daemon: macOS arm64/x64, Linux x86_64/aarch64, Windows x86_64. Native installer per OS.",
                 "MCP-native: works with Claude Code, Cursor, Codex, Claude Desktop, VS Code, Gemini CLI, and other MCP clients.",
-                "No cloud sync or telemetry by default. Local models and Anthropic keys are opt-in for automatic distill cycles.",
-                "Markdown artifacts you can read: pages in ~/.origin/pages/, session logs and project status under ~/.origin/sessions/. Symlink into Obsidian.",
+                "No cloud sync or telemetry by default. Local models and Anthropic keys are opt-in for automatic page distillation, recaps, and richer graph work.",
+                "Markdown artifacts you can read: pages in ~/.wenlan/pages/, session logs and project status under ~/.wenlan/sessions/. Symlink into Obsidian.",
               ],
               license:
-                "https://github.com/7xuanlu/origin/blob/main/LICENSE",
+                "https://github.com/7xuanlu/wenlan/blob/main/LICENSE",
               offers: {
                 "@type": "Offer",
                 price: "0",
                 priceCurrency: "USD",
               },
               author: { "@id": "https://useorigin.app/#organization" },
-              codeRepository: "https://github.com/7xuanlu/origin",
+              codeRepository: "https://github.com/7xuanlu/wenlan",
             }),
           }}
         />
@@ -169,7 +169,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               "@id": "https://useorigin.app/#website",
-              name: "Origin",
+              name: "Wenlan",
               alternateName: "useorigin.app",
               url: "https://useorigin.app",
               description: siteDescription,
@@ -177,7 +177,7 @@ export default function RootLayout({
               publisher: { "@id": "https://useorigin.app/#organization" },
               copyrightHolder: { "@id": "https://useorigin.app/#qixuan-lu" },
               copyrightYear: 2026,
-              license: "https://github.com/7xuanlu/origin/blob/main/LICENSE",
+              license: "https://github.com/7xuanlu/wenlan/blob/main/LICENSE",
             }),
           }}
         />
@@ -188,11 +188,11 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               "@id": "https://useorigin.app/#organization",
-              name: "Origin",
+              name: "Wenlan",
               alternateName: [
-                "Origin AI",
-                "Origin AI Work Memory",
-                "Origin Local AI Work Memory",
+                "Wenlan AI",
+                "Wenlan AI Work Memory",
+                "Wenlan Local AI Work Memory",
               ],
               url: "https://useorigin.app",
               logo: "https://useorigin.app/logo.svg",
@@ -204,12 +204,12 @@ export default function RootLayout({
                 sameAs: ["https://github.com/7xuanlu"],
               },
               sameAs: [
-                "https://github.com/7xuanlu/origin",
+                "https://github.com/7xuanlu/wenlan",
                 "https://github.com/7xuanlu",
-                "https://www.npmjs.com/package/@7xuanlu/origin",
-                "https://www.npmjs.com/package/origin-mcp",
-                "https://crates.io/crates/origin-mcp",
-                "https://crates.io/crates/origin-types",
+                "https://www.npmjs.com/package/wenlan",
+                "https://www.npmjs.com/package/wenlan-mcp",
+                "https://crates.io/crates/wenlan-mcp",
+                "https://crates.io/crates/wenlan-types",
               ],
             }),
           }}

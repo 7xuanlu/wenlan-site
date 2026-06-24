@@ -11,7 +11,7 @@ Source of truth: Google Search Console property `sc-domain:useorigin.app`, live 
   - `/docs/guides/mcp-memory-server` -> `/learn/mcp-memory-server`
 - Live sitemap contains `92` URLs.
 - Live sitemap excludes old `/guides/*` and `/docs/guides/*` URLs.
-- Live sitemap includes `/learn/origin-vs-obsidian-ai-memory`.
+- Live sitemap includes `/learn/wenlan-vs-obsidian-ai-memory`.
 - `robots.txt` references the sitemap and does not block all crawling.
 - `/llms.txt` and `/llms-full.txt` return `X-Robots-Tag: noindex, follow`, which is intentional for AI-readable helper files.
 - Sampled deployed pages have canonical URLs and JSON-LD.
@@ -127,23 +127,23 @@ This does not look like one single failure. It is a mix of normal early-stage SE
 1. **Average position is not high enough yet.** GSC shows average position `12.4` over the last 28 days. That is usually page-two or bottom-page-one territory, where zero clicks on only `153` impressions is plausible.
 2. **The top branded rows are probably diagnostic searches.** The two largest query rows are long filtered queries around `"origin app"` / `"origin" "app"` with many negative terms. Those look like manual ranking checks, not normal user searches. They should not drive product/content decisions.
 3. **Old guide URLs are still in Google's performance data.** `/guides`, `/guides/claude-code-memory`, `/guides/local-first-ai-memory`, `/guides/mcp-memory-server`, and `/guides/ai-memory-app` together account for visible impressions. They redirect correctly, but Google is still showing or attributing old URLs while the new `/learn/*` URLs are still being discovered.
-4. **Search intent is broader than Origin.** For `claude code memory`, searchers often want Anthropic's official explanation of CLAUDE.md, project memory, and auto memory. Origin's page must answer that native Claude Code memory intent first, then explain where Origin adds MCP/local/shared memory.
-5. **The Learn hub title was too generic.** `/learn` earned `40` impressions in 28 days, but its title was `Learn | Origin`. That is not click-worthy for queries like `claude code memory`, `claude memory mcp`, or `cursor memory mcp`.
+4. **Search intent is broader than Wenlan.** For `claude code memory`, searchers often want Anthropic's official explanation of CLAUDE.md, project memory, and auto memory. Wenlan's page must answer that native Claude Code memory intent first, then explain where Wenlan adds MCP/local/shared memory.
+5. **The Learn hub title was too generic.** `/learn` earned `40` impressions in 28 days, but its title was `Learn | Wenlan`. That is not click-worthy for queries like `claude code memory`, `claude memory mcp`, or `cursor memory mcp`.
 6. **The homepage snippet over-led with benchmark proof.** The homepage description was accurate but long and benchmark-heavy. For searchers seeing an unknown brand, the snippet needed to state the concrete workflow: Claude Code, Cursor, Codex, MCP, capture, recall, handoff.
 
 Applied CTR-snippet fixes in the current branch:
 
 - Homepage title/description now name Claude Code, Cursor, Codex, MCP, local AI work memory, capture, recall, handoff, provenance, and Markdown artifacts.
-- `/learn` metadata now targets AI work memory guides for Claude Code, Cursor, and MCP instead of the generic `Learn | Origin`.
+- `/learn` metadata now targets AI work memory guides for Claude Code, Cursor, and MCP instead of the generic `Learn | Wenlan`.
 - `/learn/claude-code-memory` metadata and first section now cover CLAUDE.md, auto memory, and MCP memory directly.
 
 ## Query-Language Fix
 
-The public positioning can keep "AI work memory" as Origin's category, but SEO needs to bridge into the phrases users actually search.
+The public positioning can keep "AI work memory" as Wenlan's category, but SEO needs to bridge into the phrases users actually search.
 
 Do not use competitor landing pages as the deciding source. They are weak vocabulary signals only. The stronger evidence stack is:
 
-1. **Search Console impressions for useorigin.app.** The visible 28-day query table already includes `claude code memory`, `claude memory mcp`, `claude code /memory`, `codememory mcp`, `claude code persistent memory`, and `claude code memory repo`. This is the strongest signal because Google actually showed Origin for these searches.
+1. **Search Console impressions for useorigin.app.** The visible 28-day query table already includes `claude code memory`, `claude memory mcp`, `claude code /memory`, `codememory mcp`, `claude code persistent memory`, and `claude code memory repo`. This is the strongest signal because Google actually showed Wenlan for these searches.
 2. **Google autocomplete.** Fresh checks returned suggestions for `claude code memory`, `claude code memory.md`, `claude code memory plugin`, `mcp memory server`, `mcp memory github`, `mcp memory claude`, `cursor memory mcp`, `ai agent memory system`, `ai agent memory mcp`, `ai agent memory layer`, `local ai persistent memory`, and `local ai agent memory`.
 3. **Official docs terminology.** Anthropic's Claude Code docs use `CLAUDE.md`, auto memory, and `/memory`; MCP's official docs use MCP servers and describe broad client/server support across AI assistants and development tools.
 4. **GitHub developer vocabulary.** GitHub repo search shows developers naming projects around `claude-code-memory`, `MCP memory server`, `cursor-memory-mcp`, and `AI Agent Memory`.
@@ -151,7 +151,7 @@ Do not use competitor landing pages as the deciding source. They are weak vocabu
 Do not optimize only for:
 
 - `AI work memory`
-- `Origin memory`
+- `Wenlan memory`
 - `single local home`
 - `local home for AI`
 
@@ -175,7 +175,7 @@ Cluster map:
 | Cluster | Confidence | Primary phrase | Supporting phrases | Target page |
 | --- | --- | --- | --- | --- |
 | Claude Code memory | High | Claude Code memory | CLAUDE.md; Claude Code auto memory; Claude Code persistent memory; Claude Code memory plugin | `/learn/claude-code-memory` |
-| Claude Code native command | High | Claude Code /memory | Claude Code memory command; Claude Code memory vs Origin; Claude Code shared memory | `/learn/claude-code-memory-command-vs-origin` |
+| Claude Code native command | High | Claude Code /memory | Claude Code memory command; Claude Code memory vs Wenlan; Claude Code shared memory | `/learn/claude-code-memory-command-vs-wenlan` |
 | MCP memory server | High | MCP memory server | Claude memory MCP; Cursor memory MCP; MCP memory github; memory MCP server | `/learn/mcp-memory-server` |
 | Cross-tool shared memory | Medium | shared local memory for Claude Code, Cursor, Codex | shared memory AI agents; AI tools shared memory; one memory across AI tools | `/` and `/learn` |
 | AI agent memory | Medium | AI agent memory | AI agent memory system; AI agent memory MCP; AI agent memory layer | `/learn/ai-work-memory` |
@@ -184,15 +184,15 @@ Cluster map:
 
 Applied title adjustment:
 
-- Homepage title now uses `Shared Local Memory for Claude Code, Cursor, Codex`. This is a positioning hypothesis that combines the strongest tool nouns from GSC/autocomplete (`Claude Code`, `memory`, `MCP`, `Cursor`) with Origin's cross-tool value. Keep validating it against GSC before expanding more pages.
+- Homepage title now uses `Shared Local Memory for Claude Code, Cursor, Codex`. This is a positioning hypothesis that combines the strongest tool nouns from GSC/autocomplete (`Claude Code`, `memory`, `MCP`, `Cursor`) with Wenlan's cross-tool value. Keep validating it against GSC before expanding more pages.
 
 ## Crowded Brand Strategy
 
-`Origin` is a crowded root term. The site should not spend the next sprint trying to rank for bare `origin`, because most people typing that query are not looking for local AI work memory. The practical path is a three-step association ladder:
+`Wenlan` is a crowded root term. The site should not spend the next sprint trying to rank for bare `origin`, because most people typing that query are not looking for local AI work memory. The practical path is a three-step association ladder:
 
 1. **Win problem/category queries first.** Prioritize pages that answer `Claude Code memory`, `MCP memory server`, `Cursor memory MCP`, `local AI memory`, and `AI agent memory`. These are the phrases visible in GSC, autocomplete, and GitHub developer vocabulary.
-2. **Make branded modifiers obvious.** Every high-signal page should make it natural for a reader or model to connect `Origin` with `memory`, `AI work`, `Claude Code`, `MCP`, `Cursor`, and `Codex`. The goal is queries like `origin memory`, `origin ai work`, `origin claude code memory`, and `origin mcp memory`.
-3. **Build entity reinforcement outside the site.** GitHub README links, MCP directory listings, credible comparison mentions, Reddit/HN posts, and docs references should use the same category language. This is how Google and AI assistants learn that `Origin` is not the game store, airline, or generic word.
+2. **Make branded modifiers obvious.** Every high-signal page should make it natural for a reader or model to connect `Wenlan` with `memory`, `AI work`, `Claude Code`, `MCP`, `Cursor`, and `Codex`. The goal is queries like `origin memory`, `origin ai work`, `origin claude code memory`, and `wenlan mcp memory`.
+3. **Build entity reinforcement outside the site.** GitHub README links, MCP directory listings, credible comparison mentions, Reddit/HN posts, and docs references should use the same category language. This is how Google and AI assistants learn that `Wenlan` is not the game store, airline, or generic word.
 
 Do not over-optimize the homepage for the noisy `"origin app"` rows yet. The page-level GSC report shows `/learn`, `/`, old `/guides/*`, and `/learn/claude-code-memory` getting impressions. The immediate refresh target is therefore Learn intent, especially `/learn/claude-code-memory` and `/learn/mcp-memory-server`.
 
@@ -211,5 +211,5 @@ Do not over-optimize the homepage for the noisy `"origin app"` rows yet. The pag
    - `claude memory mcp`
    - `claude code memory server`
 5. Keep the old guide redirects. The `Page with redirect` GSC issue is expected until Google drops those old URLs.
-6. Add one focused page for the visible `claude code /memory` query: `/learn/claude-code-memory-command-vs-origin`. This is not a broad batch; it closes a high-confidence Claude Code native-memory intent gap.
+6. Add one focused page for the visible `claude code /memory` query: `/learn/claude-code-memory-command-vs-wenlan`. This is not a broad batch; it closes a high-confidence Claude Code native-memory intent gap.
 7. Treat the GSC FAQ enhancement as stale historical data. Current sampled deployed pages do not emit `FAQPage` JSON-LD.

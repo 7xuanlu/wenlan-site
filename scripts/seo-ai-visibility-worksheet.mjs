@@ -110,9 +110,9 @@ function makeWorksheet({ date, prompts, promptsDoc }) {
 
 Generated from \`${promptsDoc}\`.
 
-Do not infer results. Run each prompt manually in the listed assistant, then record whether Origin appears, its position/order, accuracy, sentiment, cited URLs, and notes.
+Do not infer results. Run each prompt manually in the listed assistant, then record whether Wenlan appears, its position/order, accuracy, sentiment, cited URLs, and notes.
 
-| Prompt # | Prompt | Assistant | Origin appears? | Position/order | Accuracy | Sentiment | Cited URLs | Notes |
+| Prompt # | Prompt | Assistant | Wenlan appears? | Position/order | Accuracy | Sentiment | Cited URLs | Notes |
 | ---: | --- | --- | --- | --- | --- | --- | --- | --- |
 ${rows.join("\n")}
 `;

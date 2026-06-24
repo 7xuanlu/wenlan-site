@@ -4,38 +4,38 @@ import { ArticleHalo, MemoryIndex } from "../../learn/article-visuals";
 import { SITE_URL } from "../../learn/articles";
 
 export const metadata: Metadata = {
-  title: "Get Started with Origin | Local AI Work Memory",
+  title: "Get Started with Wenlan | Local AI Work Memory",
   description:
-    "Install Origin through the Claude Code plugin or run Origin setup before connecting another MCP client.",
+    "Install Wenlan through the Claude Code plugin or run Wenlan setup before connecting another MCP client.",
   alternates: {
     canonical: "/docs/get-started",
   },
   openGraph: {
-    title: "Get Started with Origin | Local AI Work Memory",
+    title: "Get Started with Wenlan | Local AI Work Memory",
     description:
-      "Install Origin through the Claude Code plugin or run Origin setup before connecting another MCP client.",
+      "Install Wenlan through the Claude Code plugin or run Wenlan setup before connecting another MCP client.",
     type: "article",
     url: `${SITE_URL}/docs/get-started`,
-    siteName: "Origin",
+    siteName: "Wenlan",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Get Started with Origin | Local AI Work Memory",
+    title: "Get Started with Wenlan | Local AI Work Memory",
     description:
-      "Install Origin through the Claude Code plugin or run Origin setup before connecting another MCP client.",
+      "Install Wenlan through the Claude Code plugin or run Wenlan setup before connecting another MCP client.",
   },
 };
 
 const claudeCommands = [
-  "/plugin marketplace add 7xuanlu/origin",
-  "/plugin install origin@7xuanlu",
+  "/plugin marketplace add 7xuanlu/claude-plugins",
+  "/plugin install wenlan@7xuanlu",
   "/init",
 ];
 
-const originSetupCommand = "npx -y @7xuanlu/origin setup";
+const wenlanSetupCommand = "npx -y wenlan setup";
 
 const mcpAddCommand =
-  "~/.origin/bin/origin mcp add codex\n# or: cursor, claude-desktop, vscode, gemini";
+  "~/.wenlan/bin/wenlan mcp add codex\n# or: cursor, claude-desktop, vscode, gemini";
 
 export default function GetStartedPage() {
   const breadcrumbSchema = {
@@ -66,9 +66,9 @@ export default function GetStartedPage() {
   const howToSchema = {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    name: "Get started with Origin",
+    name: "Get started with Wenlan",
     description:
-      "Install Origin in Claude Code or run Origin setup before connecting another MCP client.",
+      "Install Wenlan in Claude Code or run Wenlan setup before connecting another MCP client.",
     step: [
       {
         "@type": "HowToStep",
@@ -78,7 +78,7 @@ export default function GetStartedPage() {
       {
         "@type": "HowToStep",
         name: "Set up the local runtime for another MCP client",
-        text: "Run npx -y @7xuanlu/origin setup, then run ~/.origin/bin/origin mcp add for the client you use.",
+        text: "Run npx -y wenlan setup, then run ~/.wenlan/bin/wenlan mcp add for the client you use.",
       },
       {
         "@type": "HowToStep",
@@ -108,7 +108,7 @@ export default function GetStartedPage() {
                 href="/"
                 className="transition-colors hover:text-[var(--o-text-secondary)]"
               >
-                Origin
+                Wenlan
               </Link>
               <span>/</span>
               <Link
@@ -124,14 +124,14 @@ export default function GetStartedPage() {
                   Get started
                 </p>
                 <h1 className="warm-glow font-serif text-[2rem] leading-[1.08] font-medium tracking-tight sm:text-7xl sm:leading-[1.05]">
-                  Connect Origin to your AI tools.
+                  Connect Wenlan to your AI tools.
                 </h1>
                 <p className="mt-8 max-w-[20rem] text-lg leading-relaxed text-[var(--o-text-secondary)] sm:max-w-2xl">
-                  Start with the Claude Code plugin, or add Origin to another
+                  Start with the Claude Code plugin, or add Wenlan to another
                   MCP-compatible client through the local MCP server.
                 </p>
                 <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[11px] text-[var(--o-text-muted)]">
-                  <span>Origin team</span>
+                  <span>Wenlan team</span>
                   <span>Updated May 15, 2026</span>
                   <span>4 min setup</span>
                 </div>
@@ -175,16 +175,16 @@ export default function GetStartedPage() {
                   </h2>
                   <p className="mt-5 text-base leading-relaxed text-[var(--o-text-secondary)]">
                     For Cursor, Codex, Claude Desktop, Gemini CLI, and other
-                    MCP-compatible clients, set up the local Origin runtime first.
-                    Then let the Origin CLI add the MCP connector to the client.
+                    MCP-compatible clients, set up the local Wenlan runtime first.
+                    Then let the Wenlan CLI add the MCP connector to the client.
                   </p>
                   <p className="mt-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
-                    Origin setup installs the CLI, daemon, and MCP connector,
+                    Wenlan setup installs the CLI, daemon, and MCP connector,
                     configures local memory, registers the daemon with your
                     operating system's user service manager, and verifies status.
                   </p>
                   <pre className="mt-6 overflow-x-auto rounded-xl border border-[var(--o-border)] bg-[var(--o-bg-deep)] p-5 font-mono text-sm leading-relaxed text-[var(--o-text-secondary)]">
-                    <code>{originSetupCommand}</code>
+                    <code>{wenlanSetupCommand}</code>
                   </pre>
                   <pre className="mt-6 overflow-x-auto rounded-xl border border-[var(--o-border)] bg-[var(--o-bg-deep)] p-5 font-mono text-sm leading-relaxed text-[var(--o-text-secondary)]">
                     <code>{mcpAddCommand}</code>
@@ -200,7 +200,7 @@ export default function GetStartedPage() {
                   </h2>
                   <p className="mt-5 text-base leading-relaxed text-[var(--o-text-secondary)]">
                     Store one durable project fact, then ask your agent to recall
-                    it in a new session. Origin should make that context visible,
+                    it in a new session. Wenlan should make that context visible,
                     searchable, and available through the same local memory layer.
                   </p>
                   <div className="mt-7 flex flex-col gap-3 sm:flex-row">

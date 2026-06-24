@@ -18,7 +18,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("origin-theme") as Theme | null;
+    const stored = localStorage.getItem("wenlan-theme") as Theme | null;
     if (stored === "light" || stored === "dark") {
       setTheme(stored);
     } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
@@ -30,7 +30,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!mounted) return;
     document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("origin-theme", theme);
+    localStorage.setItem("wenlan-theme", theme);
   }, [theme, mounted]);
 
   const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));

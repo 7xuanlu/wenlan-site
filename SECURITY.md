@@ -1,12 +1,12 @@
 # Security Policy
 
-This is the security policy for the **origin-website** repo, which hosts the marketing + docs source for [useorigin.app](https://useorigin.app). The Origin product (daemon, CLI, MCP server) has its own policy in [7xuanlu/origin/SECURITY.md](https://github.com/7xuanlu/origin/blob/main/SECURITY.md).
+This is the security policy for the **wenlan-site** repo, which hosts the marketing + docs source for [useorigin.app](https://useorigin.app). The Wenlan product (daemon, CLI, MCP server) has its own policy in [7xuanlu/wenlan/SECURITY.md](https://github.com/7xuanlu/wenlan/blob/main/SECURITY.md).
 
 ## Reporting a vulnerability
 
 Use any of these channels. Do not file public issues for vulnerabilities.
 
-- GitHub Security Advisories: [open a private advisory on this repo](https://github.com/7xuanlu/origin-website/security/advisories/new)
+- GitHub Security Advisories: [open a private advisory on this repo](https://github.com/7xuanlu/wenlan-site/security/advisories/new)
 - Email: security@useorigin.app
 - Machine-discoverable: see [`/.well-known/security.txt`](https://useorigin.app/.well-known/security.txt) (per RFC 9116)
 
@@ -18,7 +18,7 @@ Use any of these channels. Do not file public issues for vulnerabilities.
 
 ## What's out of scope
 
-- The Origin product binaries, daemon, CLI, MCP server (file those at [7xuanlu/origin](https://github.com/7xuanlu/origin/security)).
+- The Wenlan product binaries, daemon, CLI, MCP server (file those at [7xuanlu/wenlan](https://github.com/7xuanlu/wenlan/security)).
 - Third-party services we link to (GitHub, npm, crates.io, Vercel, YouTube).
 - Reports that require physical access, social engineering, or compromise of unrelated accounts.
 

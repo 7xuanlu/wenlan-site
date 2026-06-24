@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { OgTemplate, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/og-template";
 
-export const alt = "Get started with Origin";
+export const alt = "Get started with Wenlan";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 
@@ -10,8 +10,8 @@ export default async function Image() {
     (
       <OgTemplate
         eyebrow="Get started"
-        title="Install Origin in five minutes."
-        description="Add the Claude Code plugin or run Origin setup, then verify the local memory loop with a capture and recall."
+        title="Install Wenlan in five minutes."
+        description="Add the Claude Code plugin or run Wenlan setup, then verify the local memory loop with a capture and recall."
         footerLeft={[
           "useorigin.app/docs/get-started",
           "macOS, Linux, Windows",

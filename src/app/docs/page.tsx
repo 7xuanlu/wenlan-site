@@ -5,40 +5,40 @@ import { SITE_URL } from "../learn/articles";
 import { docPages, docUrl, formatDocDate } from "./docs";
 
 export const metadata: Metadata = {
-  title: "Origin Docs | Product Manual",
+  title: "Wenlan Docs | Product Manual",
   description:
-    "Install Origin, learn the daily AI work memory loop, understand the architecture, and follow the project roadmap, changelog, and evals.",
+    "Install Wenlan, learn the daily AI work memory loop, understand the architecture, and follow the project roadmap, changelog, and evals.",
   alternates: {
     canonical: "/docs",
   },
   openGraph: {
-    title: "Origin Docs | Product Manual",
+    title: "Wenlan Docs | Product Manual",
     description:
-      "Install Origin, learn the daily AI work memory loop, understand the architecture, and follow the project roadmap, changelog, and evals.",
+      "Install Wenlan, learn the daily AI work memory loop, understand the architecture, and follow the project roadmap, changelog, and evals.",
     type: "website",
     url: `${SITE_URL}/docs`,
-    siteName: "Origin",
+    siteName: "Wenlan",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Origin Docs | Product Manual",
+    title: "Wenlan Docs | Product Manual",
     description:
-      "Install Origin, learn the daily AI work memory loop, understand the architecture, and follow the project roadmap, changelog, and evals.",
+      "Install Wenlan, learn the daily AI work memory loop, understand the architecture, and follow the project roadmap, changelog, and evals.",
   },
 };
 
 const docsSections = [
   {
     title: "Start here",
-    description: "Install Origin and verify the first memory round trip.",
+    description: "Install Wenlan and verify the first memory round trip.",
     items: [
       {
         href: "/docs/get-started",
         label: "Setup",
-        title: "Get started with Origin",
+        title: "Get started with Wenlan",
         description:
-          "Install the Claude Code plugin or run Origin setup for another MCP client, then confirm the local memory loop works.",
-        meta: "Origin team · Updated May 15, 2026 · 4 min setup",
+          "Install the Claude Code plugin or run Wenlan setup for another MCP client, then confirm the local memory loop works.",
+        meta: "Wenlan team · Updated May 15, 2026 · 4 min setup",
       },
     ],
   },
@@ -73,7 +73,7 @@ const docsSections = [
   {
     title: "Project",
     description:
-      "Security reporting, evaluation, desktop status, changelog, release/versioning, roadmap, project scope, source builds, testing, CI, development conventions, and contribution paths for people deciding whether Origin is credible enough to adopt or contribute to.",
+      "Security reporting, evaluation, desktop status, changelog, release/versioning, roadmap, project scope, source builds, testing, CI, development conventions, and contribution paths for people deciding whether Wenlan is credible enough to adopt or contribute to.",
     items: docPages
       .filter((page) => page.group === "Project")
       .map((page) => ({
@@ -110,9 +110,9 @@ export default function DocsPage() {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "@id": "https://useorigin.app/docs#collection",
-    name: "Origin Docs",
+    name: "Wenlan Docs",
     description:
-      "Product documentation for Origin's local-first AI work memory.",
+      "Product documentation for Wenlan's local-first AI work memory.",
     url: `${SITE_URL}/docs`,
     isPartOf: { "@id": "https://useorigin.app/#website" },
     publisher: { "@id": "https://useorigin.app/#organization" },
@@ -120,7 +120,7 @@ export default function DocsPage() {
     hasPart: [
       {
         "@type": "WebPage",
-        name: "Get started with Origin",
+        name: "Get started with Wenlan",
         url: `${SITE_URL}/docs/get-started`,
       },
       ...docPages.map((page) => ({
@@ -150,7 +150,7 @@ export default function DocsPage() {
               href="/"
               className="transition-colors hover:text-[var(--o-text-secondary)]"
             >
-              Origin
+              Wenlan
             </Link>
             <span aria-hidden="true">/</span>
             <span className="text-[var(--o-text-secondary)]" aria-current="page">
@@ -162,7 +162,7 @@ export default function DocsPage() {
               Docs
             </p>
             <h1 className="warm-glow max-w-[11ch] font-serif text-[2rem] leading-[1.08] font-medium tracking-tight sm:max-w-none sm:text-7xl sm:leading-[1.05]">
-              Start using Origin.
+              Start using Wenlan.
             </h1>
             <p className="mt-8 max-w-[20rem] text-lg leading-relaxed text-[var(--o-text-secondary)] sm:max-w-2xl">
               Install the local memory layer, learn the daily handoff loop, and
@@ -202,7 +202,7 @@ export default function DocsPage() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      className="card-origin group relative overflow-hidden rounded-xl p-7 transition-transform duration-150 hover:-translate-y-1"
+                      className="card-wenlan group relative overflow-hidden rounded-xl p-7 transition-transform duration-150 hover:-translate-y-1"
                     >
                       <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full border border-[var(--o-border-subtle)] opacity-50 transition-transform duration-300 group-hover:scale-110" />
                       <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-warm)]/80 uppercase">
@@ -245,7 +245,7 @@ export default function DocsPage() {
                 Daily workflow
               </Link>
               <a
-                href="https://github.com/7xuanlu/origin"
+                href="https://github.com/7xuanlu/wenlan"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-xl border border-[var(--o-border)] px-6 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-all duration-150 hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)]"

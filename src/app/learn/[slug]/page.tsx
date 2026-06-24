@@ -53,7 +53,7 @@ export async function generateMetadata({
       description: article.metaDescription,
       type: "article",
       url: articleUrl(article.slug),
-      siteName: "Origin",
+      siteName: "Wenlan",
       publishedTime: article.publishedAt ?? article.updatedAt,
       modifiedTime: article.updatedAt,
       authors: [DEFAULT_AUTHOR_URL],
@@ -146,7 +146,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
             {
               "@type": "SoftwareApplication",
               "@id": "https://useorigin.app/#software",
-              name: "Origin",
+              name: "Wenlan",
               applicationCategory: "DeveloperApplication",
               url: "https://useorigin.app",
             },
@@ -200,7 +200,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                 href="/"
                 className="transition-colors hover:text-[var(--o-text-secondary)]"
               >
-                Origin
+                Wenlan
               </Link>
               <span>/</span>
               <Link
@@ -210,15 +210,15 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                 Learn
               </Link>
             </nav>
-            <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
-              <div>
+            <div className="mt-12 grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
+              <div className="min-w-0">
                 <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
                   {article.eyebrow}
                 </p>
-                <h1 className="warm-glow font-serif text-5xl leading-[1.05] font-medium tracking-tight sm:text-7xl">
+                <h1 className="warm-glow max-w-full break-words font-serif text-[2rem] leading-[1.08] font-medium tracking-tight [overflow-wrap:anywhere] sm:text-7xl sm:leading-[1.05]">
                   {article.title}
                 </h1>
-                <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">
+                <p className="mt-8 max-w-2xl break-words text-lg leading-relaxed text-[var(--o-text-secondary)]">
                   {article.description}
                 </p>
                 <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[11px] text-[var(--o-text-muted)]">
@@ -248,7 +248,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
           <div className="mx-auto max-w-5xl">
             <div className="grid gap-4 md:grid-cols-3">
               {article.heroBullets.map((bullet, index) => (
-                <div key={bullet} className="card-origin rounded-xl p-5">
+                <div key={bullet} className="card-wenlan rounded-xl p-5">
                   <p className="mb-5 font-mono text-[11px] text-[var(--o-warm)]">
                     {(index + 1).toString().padStart(2, "0")}
                   </p>
@@ -329,7 +329,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                       <thead>
                         <tr className="border-b border-[var(--o-border)] bg-[var(--o-card-bg)] text-left font-mono text-[11px] tracking-[0.2em] text-[var(--o-text-muted)] uppercase">
                           <th className="px-5 py-4 align-top">Dimension</th>
-                          <th className="px-5 py-4 align-top text-[var(--o-warm)]">Origin</th>
+                          <th className="px-5 py-4 align-top text-[var(--o-warm)]">Wenlan</th>
                           <th className="px-5 py-4 align-top">
                             {article.comparisonTable.competitorName}
                           </th>
@@ -348,7 +348,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                               {row.dimension}
                             </th>
                             <td className="px-5 py-4 align-top text-[var(--o-text-secondary)]">
-                              {row.origin}
+                              {row.wenlan}
                             </td>
                             <td className="px-5 py-4 align-top text-[var(--o-text-muted)]">
                               {row.competitor}
@@ -377,7 +377,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                     Get started
                   </Link>
                   <a
-                    href="https://github.com/7xuanlu/origin"
+                    href="https://github.com/7xuanlu/wenlan"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="rounded-xl border border-[var(--o-border)] px-5 py-3 text-center text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"

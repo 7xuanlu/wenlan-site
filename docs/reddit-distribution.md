@@ -1,11 +1,11 @@
 # Reddit Distribution Playbook
 
-Use Reddit for learning and distribution only after the relevant Learn/Docs page is indexed and the post has standalone value. Do not post generic launch announcements or thin links to Origin. The target is branded-search lift, developer trust, and referral learning, not immediate ranking manipulation.
+Use Reddit for learning and distribution only after the relevant Learn/Docs page is indexed and the post has standalone value. Do not post generic launch announcements or thin links to Wenlan. The target is branded-search lift, developer trust, and referral learning, not immediate ranking manipulation.
 
 ## Rules
 
 - Lead with the problem and what was learned.
-- Do not mention Origin in the title.
+- Do not mention Wenlan in the title.
 - Include a link only when it helps the reader verify details or continue.
 - Prefer one useful diagram, command checklist, or failure checklist over broad opinion.
 - Track every post in Umami and Search Console for branded-search lift.
@@ -13,7 +13,7 @@ Use Reddit for learning and distribution only after the relevant Learn/Docs page
 
 ## Tracking template
 
-| Date | Subreddit | Post angle | URL | Origin link used? | 24h comments | 7d referrals | 7d branded-query lift | Follow-up |
+| Date | Subreddit | Post angle | URL | Wenlan link used? | 24h comments | 7d referrals | 7d branded-query lift | Follow-up |
 |---|---|---|---|---|---:|---:|---:|---|
 | YYYY-MM-DD | r/ClaudeAI | Claude Code memory workflow | - | yes/no | 0 | 0 | 0 | - |
 
@@ -65,7 +65,7 @@ Use Reddit for learning and distribution only after the relevant Learn/Docs page
 2. Useful boundary: CLAUDE.md for stable instructions; `/memory` for inspecting/editing loaded native memory; shared MCP memory for decisions, gotchas, handoffs, and context that should reach Cursor/Codex too.
 3. Concrete examples: one project rule, one decision capture, one stale gotcha, one handoff.
 4. Mistake learned: copying every native memory into a second memory system creates duplicate stale context.
-5. Soft link only if useful: `/learn/claude-code-memory-command-vs-origin`.
+5. Soft link only if useful: `/learn/claude-code-memory-command-vs-wenlan`.
 
 ## Draft 3: Local-First AI Memory Boundary
 

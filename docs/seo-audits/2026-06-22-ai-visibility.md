@@ -1,4 +1,4 @@
-# AI Visibility Worksheet — 2026-06-13
+# AI Visibility Worksheet — 2026-06-22
 
 Generated from `docs/seo-measurement.md`.
 

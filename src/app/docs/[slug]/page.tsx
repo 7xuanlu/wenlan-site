@@ -46,7 +46,7 @@ export async function generateMetadata({
       description: page.metaDescription,
       type: "article",
       url: docUrl(page.slug),
-      siteName: "Origin",
+      siteName: "Wenlan",
       publishedTime: page.publishedAt ?? page.updatedAt,
       modifiedTime: page.updatedAt,
     },
@@ -178,7 +178,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
                 href="/"
                 className="transition-colors hover:text-[var(--o-text-secondary)]"
               >
-                Origin
+                Wenlan
               </Link>
               <span>/</span>
               <Link

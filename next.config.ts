@@ -27,6 +27,86 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/learn/origin-for-claude-code",
+        destination: "/learn/wenlan-for-claude-code",
+        permanent: true,
+      },
+      {
+        source: "/learn/claude-code-memory-command-vs-origin",
+        destination: "/learn/claude-code-memory-command-vs-wenlan",
+        permanent: true,
+      },
+      {
+        source: "/learn/where-origin-stores-claude-code-memory",
+        destination: "/learn/where-wenlan-stores-claude-code-memory",
+        permanent: true,
+      },
+      {
+        source: "/learn/origin-vs-basic-memory",
+        destination: "/learn/wenlan-vs-basic-memory",
+        permanent: true,
+      },
+      {
+        source: "/learn/origin-vs-claude-mem",
+        destination: "/learn/wenlan-vs-claude-mem",
+        permanent: true,
+      },
+      {
+        source: "/learn/origin-vs-superlocal-memory",
+        destination: "/learn/wenlan-vs-superlocal-memory",
+        permanent: true,
+      },
+      {
+        source: "/learn/origin-codex-workflow",
+        destination: "/learn/wenlan-codex-workflow",
+        permanent: true,
+      },
+      {
+        source: "/learn/origin-cursor-workflow",
+        destination: "/learn/wenlan-cursor-workflow",
+        permanent: true,
+      },
+      {
+        source: "/learn/origin-claude-desktop-workflow",
+        destination: "/learn/wenlan-claude-desktop-workflow",
+        permanent: true,
+      },
+      {
+        source: "/learn/origin-gemini-cli-workflow",
+        destination: "/learn/wenlan-gemini-cli-workflow",
+        permanent: true,
+      },
+      {
+        source: "/learn/origin-vscode-mcp-workflow",
+        destination: "/learn/wenlan-vscode-mcp-workflow",
+        permanent: true,
+      },
+      {
+        source: "/learn/origin-vs-mcp-memory-service",
+        destination: "/learn/wenlan-vs-mcp-memory-service",
+        permanent: true,
+      },
+      {
+        source: "/learn/origin-vs-chatgpt-memory",
+        destination: "/learn/wenlan-vs-chatgpt-memory",
+        permanent: true,
+      },
+      {
+        source: "/learn/origin-vs-obsidian-ai-memory",
+        destination: "/learn/wenlan-vs-obsidian-ai-memory",
+        permanent: true,
+      },
+      {
+        source: "/learn/origin-vs-notion-ai",
+        destination: "/learn/wenlan-vs-notion-ai",
+        permanent: true,
+      },
+      {
+        source: "/learn/origin-vs-mem0",
+        destination: "/learn/wenlan-vs-mem0",
+        permanent: true,
+      },
+      {
         source: "/learn/ai-memory-app",
         destination: "/learn/ai-work-memory",
         permanent: true,

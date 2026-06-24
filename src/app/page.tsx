@@ -8,7 +8,7 @@ import { FeatureSection, HumanControlSection, MemoryDistillerySection, ProblemSe
 const siteNavigationSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "Origin site navigation",
+  name: "Wenlan site navigation",
   itemListElement: [
     {
       "@type": "SiteNavigationElement",
@@ -32,7 +32,7 @@ const siteNavigationSchema = {
       "@type": "SiteNavigationElement",
       position: 4,
       name: "GitHub",
-      url: "https://github.com/7xuanlu/origin",
+      url: "https://github.com/7xuanlu/wenlan",
     },
   ],
 };
@@ -55,7 +55,7 @@ function ArrowIcon() {
   );
 }
 
-function OriginMark() {
+function WenlanMark() {
   return (
     <svg viewBox="0 0 32 32" fill="none" className="size-7">
       <defs>
@@ -71,7 +71,7 @@ function OriginMark() {
   );
 }
 
-function OriginRingBackground() {
+function WenlanRingBackground() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       <svg
@@ -110,7 +110,7 @@ function OriginRingBackground() {
 }
 
 const demoVideoId = "k37gjWVPHwI";
-const demoVideoTitle = "Origin Demo v0.5";
+const demoVideoTitle = "Wenlan Demo v0.9";
 const demoVideoEmbedUrl = `https://www.youtube.com/embed/${demoVideoId}?autoplay=1&rel=0`;
 const demoVideoPosterUrl = `https://i.ytimg.com/vi/${demoVideoId}/maxresdefault.jpg`;
 
@@ -148,7 +148,7 @@ function TokenEfficiencySection() {
                 <td className="px-6 py-4 text-[var(--o-text-secondary)]">77%</td>
               </tr>
               <tr>
-                <td className="px-6 py-4 text-[var(--o-text)] font-medium">Origin (hybrid retrieval)</td>
+                <td className="px-6 py-4 text-[var(--o-text)] font-medium">Wenlan (hybrid retrieval)</td>
                 <td className="px-6 py-4 text-[var(--o-warm)] font-medium">168</td>
                 <td className="px-6 py-4 text-[var(--o-warm)] font-medium">93.6%</td>
               </tr>
@@ -158,7 +158,7 @@ function TokenEfficiencySection() {
         <p className="mx-auto mt-6 max-w-xl text-center font-mono text-[10px] leading-relaxed text-[var(--o-text-muted)] sm:text-[11px]">
           Recall@5 on LongMemEval (oracle, 500 Q). LoCoMo Recall@5 is 70.0%, ~168 tokens per recall query.{" "}
           <a
-            href="https://github.com/7xuanlu/origin/tree/main/crates/origin-core/src/eval"
+            href="https://github.com/7xuanlu/wenlan/tree/main/crates/wenlan-core/src/eval"
             target="_blank"
             rel="noopener noreferrer"
             className="underline transition-colors hover:text-[var(--o-warm)]"
@@ -182,9 +182,9 @@ export default function LandingPage() {
       <nav className="fixed top-0 z-40 w-full border-b border-[var(--o-border-subtle)] bg-[var(--o-nav-bg)] backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <div className="flex items-center gap-3">
-            <OriginMark />
+            <WenlanMark />
             <span className="font-serif text-lg font-medium tracking-tight">
-              Origin
+              Wenlan
             </span>
             <span className="rounded-full border border-[var(--o-warm)]/20 bg-[var(--o-warm)]/5 px-2 py-0.5 font-mono text-[10px] font-medium text-[var(--o-warm)]">
               PREVIEW
@@ -210,10 +210,10 @@ export default function LandingPage() {
               About
             </Link>
             <a
-              href="https://github.com/7xuanlu/origin"
+              href="https://github.com/7xuanlu/wenlan"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Origin on GitHub"
+              aria-label="Wenlan on GitHub"
               className="flex items-center gap-2 text-sm text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-text)]"
             >
               <GitHubIcon />
@@ -225,22 +225,21 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-16">
-        <OriginRingBackground />
+        <WenlanRingBackground />
 
         <div className="relative z-10 max-w-3xl text-center">
           <h1 className="animate-fade-up delay-100 warm-glow font-serif text-[2rem] leading-[1.08] font-medium tracking-tight sm:text-7xl sm:leading-[1.1]">
-            <span className="hidden sm:inline">Where AI work<br />compounds.</span>
-            <span className="sm:hidden">Where AI<br />work compounds.</span>
+            Wenlan
           </h1>
           <p className="animate-fade-up delay-100 mx-auto mt-7 max-w-[22rem] text-base leading-relaxed text-[var(--o-text-secondary)] sm:mt-8 sm:max-w-xl sm:text-xl">
-            Origin carries sessions, decisions, lessons, project context, and wiki pages across chats, tools, projects, and time.
+            A living personal knowledge library for the AI-native age. Agents capture what they learn, you add sources you trust, and Wenlan keeps source-cited pages current.
           </p>
           <div className="animate-fade-up delay-200 mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link href="/docs/get-started" className="flex items-center gap-2 rounded-xl bg-[var(--o-text)] px-6 py-3 text-sm font-semibold text-[var(--o-bg)] transition-all duration-150 hover:shadow-[0_0_28px_var(--o-glow-warm)]">
               Get started
               <ArrowIcon />
             </Link>
-            <a href="https://github.com/7xuanlu/origin" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-xl border border-[var(--o-border)] px-6 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-all duration-150 hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)]">
+            <a href="https://github.com/7xuanlu/wenlan" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-xl border border-[var(--o-border)] px-6 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-all duration-150 hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)]">
               View on GitHub
               <ArrowIcon />
             </a>
@@ -305,7 +304,7 @@ export default function LandingPage() {
               Get started
               <ArrowIcon />
             </Link>
-            <a href="https://github.com/7xuanlu/origin" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-xl border border-[var(--o-border)] px-6 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-all duration-150 hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)]">
+            <a href="https://github.com/7xuanlu/wenlan" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-xl border border-[var(--o-border)] px-6 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-all duration-150 hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)]">
               <GitHubIcon />
               View on GitHub
             </a>

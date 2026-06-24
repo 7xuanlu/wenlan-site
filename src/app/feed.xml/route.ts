@@ -42,15 +42,15 @@ export function GET() {
   xmlns:atom="http://www.w3.org/2005/Atom"
   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <title>Origin Learn</title>
+    <title>Wenlan Learn</title>
     <link>${SITE_URL}/learn</link>
     <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml" />
-    <description>Articles on AI work memory, MCP memory servers, local-first AI work context, distilled wiki pages, Claude Code workflows, and Origin comparisons. Authored by Qi-Xuan Lu.</description>
+    <description>Articles on AI work memory, MCP memory servers, local-first AI work context, distilled wiki pages, Claude Code workflows, and Wenlan comparisons. Authored by Qi-Xuan Lu.</description>
     <language>en-US</language>
     <lastBuildDate>${rfc822Date(latest)}</lastBuildDate>
     <managingEditor>noreply@useorigin.app (Qi-Xuan Lu)</managingEditor>
     <webMaster>noreply@useorigin.app (Qi-Xuan Lu)</webMaster>
-    <generator>Origin website (Next.js)</generator>
+    <generator>Wenlan website (Next.js)</generator>
     <docs>https://www.rssboard.org/rss-specification</docs>
 ${items}
   </channel>

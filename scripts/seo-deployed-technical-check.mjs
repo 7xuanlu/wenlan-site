@@ -13,14 +13,54 @@ const REQUIRED_SITEMAP_LOCS = [
   "https://useorigin.app/learn/mcp-memory-server",
   "https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor",
   "https://useorigin.app/learn/ai-work-memory",
-  "https://useorigin.app/learn/origin-vs-superlocal-memory",
+  "https://useorigin.app/learn/wenlan-vs-superlocal-memory",
   "https://useorigin.app/docs/configuration",
+];
+
+const REBRAND_REDIRECTS = [
+  { source: "/learn/origin-for-claude-code", destination: "/learn/wenlan-for-claude-code" },
+  {
+    source: "/learn/claude-code-memory-command-vs-origin",
+    destination: "/learn/claude-code-memory-command-vs-wenlan",
+  },
+  {
+    source: "/learn/where-origin-stores-claude-code-memory",
+    destination: "/learn/where-wenlan-stores-claude-code-memory",
+  },
+  { source: "/learn/origin-vs-basic-memory", destination: "/learn/wenlan-vs-basic-memory" },
+  { source: "/learn/origin-vs-claude-mem", destination: "/learn/wenlan-vs-claude-mem" },
+  {
+    source: "/learn/origin-vs-superlocal-memory",
+    destination: "/learn/wenlan-vs-superlocal-memory",
+  },
+  { source: "/learn/origin-codex-workflow", destination: "/learn/wenlan-codex-workflow" },
+  { source: "/learn/origin-cursor-workflow", destination: "/learn/wenlan-cursor-workflow" },
+  {
+    source: "/learn/origin-claude-desktop-workflow",
+    destination: "/learn/wenlan-claude-desktop-workflow",
+  },
+  { source: "/learn/origin-gemini-cli-workflow", destination: "/learn/wenlan-gemini-cli-workflow" },
+  { source: "/learn/origin-vscode-mcp-workflow", destination: "/learn/wenlan-vscode-mcp-workflow" },
+  {
+    source: "/learn/origin-vs-mcp-memory-service",
+    destination: "/learn/wenlan-vs-mcp-memory-service",
+  },
+  { source: "/learn/origin-vs-chatgpt-memory", destination: "/learn/wenlan-vs-chatgpt-memory" },
+  {
+    source: "/learn/origin-vs-obsidian-ai-memory",
+    destination: "/learn/wenlan-vs-obsidian-ai-memory",
+  },
+  { source: "/learn/origin-vs-notion-ai", destination: "/learn/wenlan-vs-notion-ai" },
+  { source: "/learn/origin-vs-mem0", destination: "/learn/wenlan-vs-mem0" },
 ];
 
 const OLD_SITEMAP_URL_PATTERNS = [
   /^https:\/\/useorigin\.app\/guides(?:\/|$)/,
   /^https:\/\/useorigin\.app\/docs\/guides(?:\/|$)/,
   /^https:\/\/useorigin\.app\/learn\/ai-memory-app$/,
+  ...REBRAND_REDIRECTS.map(
+    ({ source }) => new RegExp(`^https://useorigin\\.app${source.replaceAll("/", "\\/")}$`),
+  ),
 ];
 
 const REQUIRED_HTML_PAGES = [
@@ -47,8 +87,8 @@ const REQUIRED_HTML_PAGES = [
     type: "Article",
   },
   {
-    path: "/learn/origin-vs-superlocal-memory",
-    canonical: "https://useorigin.app/learn/origin-vs-superlocal-memory",
+    path: "/learn/wenlan-vs-superlocal-memory",
+    canonical: "https://useorigin.app/learn/wenlan-vs-superlocal-memory",
     type: "Article",
   },
   {
@@ -66,6 +106,7 @@ const UTILITY_NOINDEX_PATHS = [
 ];
 
 const REQUIRED_REDIRECTS = [
+  ...REBRAND_REDIRECTS,
   { source: "/learn/ai-memory-app", destination: "/learn/ai-work-memory" },
   { source: "/guides", destination: "/learn" },
   { source: "/guides/claude-code-memory", destination: "/learn/claude-code-memory" },
@@ -78,6 +119,7 @@ const REQUIRED_REDIRECTS = [
 ];
 
 const CHANGED_DIRECT_REDIRECT_SOURCES = new Set([
+  ...REBRAND_REDIRECTS.map(({ source }) => source),
   "/guides/ai-memory-app",
   "/docs/guides/ai-memory-app",
 ]);

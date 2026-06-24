@@ -1,6 +1,6 @@
 # Search Console + Umami + Searchfit SEO Loop
 
-This is Origin's weekly measurement loop. Use it to decide whether the next SEO sprint should be technical cleanup, page refreshes, distribution, or new content. Do not start a new content batch until Search Console shows which canonical pages are indexed and which query clusters are already earning impressions.
+This is Wenlan's weekly measurement loop. Use it to decide whether the next SEO sprint should be technical cleanup, page refreshes, distribution, or new content. Do not start a new content batch until Search Console shows which canonical pages are indexed and which query clusters are already earning impressions.
 
 This loop is also scheduled in Codex as the active heartbeat automation `weekly-origin-seo-cleanup`. The automation should wake this thread weekly, use live GSC data when the authenticated browser/session is available, and fall back to deployed-site technical checks when account-gated data is unavailable.
 
@@ -54,6 +54,18 @@ mkdir -p /tmp/origin-seo
 pnpm seo:weekly:run -- --date YYYY-MM-DD
 ```
 
+If the local Google account can mint a Search Console-scoped OAuth token, use the API fetcher instead of browser CSV downloads:
+
+```bash
+GSC_ACCESS_TOKEN="$(gcloud auth print-access-token)" pnpm seo:gsc:fetch -- \
+  --date YYYY-MM-DD
+pnpm seo:weekly:run -- --date YYYY-MM-DD
+```
+
+`--date` derives the last 28 complete days ending yesterday relative to the report date. Use `--start-date YYYY-MM-DD --end-date YYYY-MM-DD` only when matching a manually selected Search Console range.
+
+The token must include `https://www.googleapis.com/auth/webmasters.readonly`. A default Cloud Platform token without that scope reaches the Search Console API but fails with `ACCESS_TOKEN_SCOPE_INSUFFICIENT`.
+
 The report is written to `docs/seo-audits/YYYY-MM-DD-weekly-seo.md`. GSC CSVs drive the ranked query/page recommendations. Optional Umami CSVs summarize landing pages, referrers, AI referrals, Reddit referrals, and `llms.txt` hits as export-row totals. If Umami CSVs are absent, those fields remain manual/account-gated and should not be inferred.
 
 Run the technical checks against the deployed site and the fresh local build before marking the loop complete:
@@ -86,11 +98,11 @@ Commit only the interpreted weekly notes when they change strategy or document s
 
 | Date | Query | Query group | Page | Impressions | Clicks | CTR | Avg position | Indexed? | Action | Owner | Date changed |
 |---|---|---|---|---:|---:|---:|---:|---|---|---|---|
-| YYYY-MM-DD | `mcp memory server` | MCP memory | `/learn/mcp-memory-server` | 0 | 0 | 0% | - | yes/no | wait / refresh / link / new page / distribute | Origin team | - |
+| YYYY-MM-DD | `mcp memory server` | MCP memory | `/learn/mcp-memory-server` | 0 | 0 | 0% | - | yes/no | wait / refresh / link / new page / distribute | Wenlan team | - |
 
 Use these query groups:
 
-- Brand/entity: `origin ai work`, `origin ai work memory`, `useorigin`, `origin mcp`
+- Brand/entity: `origin ai work`, `origin ai work memory`, `useorigin`, `wenlan mcp`
 - Category: `ai work memory`, `memory for ai work`, `persistent memory for ai assistants`
 - MCP memory: `mcp memory server`, `memory mcp`, `claude mcp memory`, `cursor mcp memory`
 - Setup/troubleshooting: `add memory to claude code`, `codex persistent memory`, `origin 7878`
@@ -109,7 +121,7 @@ Use Searchfit SEO as the rubric: intent fit first, then technical health, then c
 - **Low CTR:** pages with impressions but weak CTR get title/meta and intro rewrites. Do not change the URL unless the slug itself is wrong.
 - **No impressions:** wait if the page is newly indexed. If it has been indexed for several weeks with no impressions, either merge its intent into a stronger page or add internal links from higher-traffic pages.
 - **New article gate:** create a new Learn page only when GSC or Searchfit shows a query cluster that no current page answers cleanly.
-- **Distribution gate:** post on Reddit only when the post teaches something useful without requiring Origin. Link softly only when it is contextually useful.
+- **Distribution gate:** post on Reddit only when the post teaches something useful without requiring Wenlan. Link softly only when it is contextually useful.
 
 ## 6) Page update playbook
 
@@ -134,9 +146,9 @@ This only creates a local worksheet with manual placeholders. It does not call e
 
 Record:
 
-- whether Origin appears
+- whether Wenlan appears
 - position/order if a list is given
-- whether the answer describes Origin accurately
+- whether the answer describes Wenlan accurately
 - sentiment
 - cited URLs
 - missing competitor/context

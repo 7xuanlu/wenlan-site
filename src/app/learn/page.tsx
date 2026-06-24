@@ -10,38 +10,38 @@ import {
 import { ArticleHalo, MemoryIndex } from "./article-visuals";
 
 export const metadata: Metadata = {
-  title: "Origin Learn: AI Work Memory Guides for Claude Code, Cursor, MCP",
+  title: "Wenlan Learn: AI Work Memory Guides for Claude Code, Cursor, MCP",
   description:
-    "Find Origin guides for Claude Code memory, MCP memory servers, Cursor/Codex workflows, local AI work context, setup, trust, and comparisons.",
+    "Find Wenlan guides for Claude Code memory, MCP memory servers, Cursor/Codex workflows, local AI work context, setup, trust, and comparisons.",
   alternates: {
     canonical: "/learn",
   },
   openGraph: {
-    title: "Origin Learn: AI Work Memory Guides for Claude Code, Cursor, MCP",
+    title: "Wenlan Learn: AI Work Memory Guides for Claude Code, Cursor, MCP",
     description:
-      "Find Origin guides for Claude Code memory, MCP memory servers, Cursor/Codex workflows, local AI work context, setup, trust, and comparisons.",
+      "Find Wenlan guides for Claude Code memory, MCP memory servers, Cursor/Codex workflows, local AI work context, setup, trust, and comparisons.",
     type: "website",
     url: `${SITE_URL}/learn`,
-    siteName: "Origin",
+    siteName: "Wenlan",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Origin Learn: AI Work Memory Guides for Claude Code, Cursor, MCP",
+    title: "Wenlan Learn: AI Work Memory Guides for Claude Code, Cursor, MCP",
     description:
-      "Find Origin guides for Claude Code memory, MCP memory servers, Cursor/Codex workflows, local AI work context, setup, trust, and comparisons.",
+      "Find Wenlan guides for Claude Code memory, MCP memory servers, Cursor/Codex workflows, local AI work context, setup, trust, and comparisons.",
   },
 };
 
 const searchRoutes = [
   {
     query: "Claude Code memory",
-    intent: "Understand CLAUDE.md, /memory, and when Origin adds shared local context.",
+    intent: "Understand CLAUDE.md, /memory, and when Wenlan adds shared local context.",
     href: "/learn/claude-code-memory",
   },
   {
     query: "Claude Code /memory",
     intent: "Decide when native Claude Code memory is enough and when shared local MCP memory helps.",
-    href: "/learn/claude-code-memory-command-vs-origin",
+    href: "/learn/claude-code-memory-command-vs-wenlan",
   },
   {
     query: "MCP memory server",
@@ -50,7 +50,7 @@ const searchRoutes = [
   },
   {
     query: "Cursor memory MCP",
-    intent: "Wire Cursor to Origin's local MCP memory server and verify recall.",
+    intent: "Wire Cursor to Wenlan's local MCP memory server and verify recall.",
     href: "/learn/how-to-add-mcp-memory-to-cursor",
   },
   {
@@ -59,14 +59,14 @@ const searchRoutes = [
     href: "/learn/local-first-ai-memory",
   },
   {
-    query: "Origin memory",
+    query: "Wenlan memory",
     intent: "Map the brand to the category: local AI work memory across tools.",
     href: "/learn/ai-work-memory",
   },
   {
-    query: "Origin vs alternatives",
-    intent: "Compare Origin with Basic Memory, claude-mem, Superlocal, Obsidian, and others.",
-    href: "/learn/origin-vs-basic-memory",
+    query: "Wenlan vs alternatives",
+    intent: "Compare Wenlan with Basic Memory, claude-mem, Superlocal, Obsidian, and others.",
+    href: "/learn/wenlan-vs-basic-memory",
   },
 ];
 
@@ -94,9 +94,9 @@ export default function LearnPage() {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "@id": "https://useorigin.app/learn#collection",
-    name: "Origin Learn",
+    name: "Wenlan Learn",
     description:
-      "Articles about AI work memory, MCP memory servers, local-first AI work context, setup guides, client workflows, trust, and Origin comparisons.",
+      "Articles about AI work memory, MCP memory servers, local-first AI work context, setup guides, client workflows, trust, and Wenlan comparisons.",
     url: `${SITE_URL}/learn`,
     isPartOf: { "@id": "https://useorigin.app/#website" },
     publisher: { "@id": "https://useorigin.app/#organization" },
@@ -130,7 +130,7 @@ export default function LearnPage() {
               href="/"
               className="transition-colors hover:text-[var(--o-text-secondary)]"
             >
-              Origin
+              Wenlan
             </Link>
             <span aria-hidden="true">/</span>
             <span className="text-[var(--o-text-secondary)]" aria-current="page">
@@ -143,10 +143,10 @@ export default function LearnPage() {
                 Learn
               </p>
               <h1 className="warm-glow font-serif text-5xl leading-[1.05] font-medium tracking-tight sm:text-7xl">
-                Origin AI work memory guides.
+                Wenlan AI work memory guides.
               </h1>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">
-                Origin makes AI work compound across Claude Code, Cursor,
+                Wenlan makes AI work compound across Claude Code, Cursor,
                 Codex, and other MCP-compatible tools. Memory is one mechanism;
                 durable work context is the goal.
               </p>
@@ -229,7 +229,7 @@ export default function LearnPage() {
                         key={article.slug}
                         href={`/learn/${article.slug}`}
                         scroll
-                        className="card-origin group relative overflow-hidden rounded-xl p-7 transition-transform duration-150 hover:-translate-y-1"
+                        className="card-wenlan group relative overflow-hidden rounded-xl p-7 transition-transform duration-150 hover:-translate-y-1"
                       >
                         <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full border border-[var(--o-border-subtle)] opacity-50 transition-transform duration-300 group-hover:scale-110" />
                         <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-warm)]/80 uppercase">
@@ -269,7 +269,7 @@ export default function LearnPage() {
             Make AI work carry forward.
           </h2>
           <p className="mx-auto mt-6 max-w-md text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
-            Install Origin, connect your AI tools, and verify the first memory
+            Install Wenlan, connect your AI tools, and verify the first memory
             loop locally.
           </p>
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
@@ -280,7 +280,7 @@ export default function LearnPage() {
               Get started
             </Link>
             <a
-              href="https://github.com/7xuanlu/origin"
+              href="https://github.com/7xuanlu/wenlan"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-xl border border-[var(--o-border)] px-6 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-all duration-150 hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)]"

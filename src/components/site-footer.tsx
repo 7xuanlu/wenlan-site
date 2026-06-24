@@ -7,10 +7,10 @@ export function SiteFooter() {
         <nav aria-label="Site footer" className="grid gap-8 sm:grid-cols-4">
           <div>
             <p className="mb-3 font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
-              Origin
+              Wenlan
             </p>
             <p className="text-sm leading-relaxed text-[var(--o-text-muted)]">
-              Local-first memory for AI work.
+              Living personal knowledge library for AI work.
             </p>
           </div>
           <div>
@@ -107,7 +107,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/learn/origin-vs-basic-memory"
+                  href="/learn/wenlan-vs-basic-memory"
                   className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
                 >
                   vs Basic Memory
@@ -115,7 +115,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/learn/origin-vs-claude-mem"
+                  href="/learn/wenlan-vs-claude-mem"
                   className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
                 >
                   vs claude-mem
@@ -123,7 +123,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/learn/origin-vs-superlocal-memory"
+                  href="/learn/wenlan-vs-superlocal-memory"
                   className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
                 >
                   vs Superlocal Memory
@@ -194,7 +194,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <a
-                  href="https://github.com/7xuanlu/origin"
+                  href="https://github.com/7xuanlu/wenlan"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
@@ -212,7 +212,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <a
-                  href="https://github.com/7xuanlu/origin/blob/main/LICENSE"
+                  href="https://github.com/7xuanlu/wenlan/blob/main/LICENSE"
                   target="_blank"
                   rel="noopener noreferrer license"
                   className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
@@ -226,11 +226,11 @@ export function SiteFooter() {
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-[var(--o-border-subtle)] pt-6 sm:flex-row">
           <div className="flex items-center gap-4">
             <span className="font-serif text-sm font-medium text-[var(--o-text-secondary)]">
-              Origin
+              Wenlan
             </span>
             <span className="text-xs text-[var(--o-text-dim)]">&middot;</span>
             <span className="text-xs text-[var(--o-text-muted)]">
-              Where AI work compounds
+              Living personal knowledge library
             </span>
           </div>
           <p className="font-mono text-[10px] text-[var(--o-text-muted)]">

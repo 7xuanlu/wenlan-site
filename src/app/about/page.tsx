@@ -4,25 +4,25 @@ import { ArticleHalo, MemoryIndex } from "../learn/article-visuals";
 import { SITE_URL } from "../learn/articles";
 
 export const metadata: Metadata = {
-  title: "About Origin | Where AI Work Compounds",
+  title: "About Wenlan | Living Personal Knowledge Library",
   description:
-    "Origin is an open-source, local-first home for AI work context across Claude Code, Cursor, Codex, and MCP-compatible tools.",
+    "Wenlan is an open-source, local-first personal knowledge library for AI work, built by agents and grounded in its sources.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
-    title: "About Origin | Where AI Work Compounds",
+    title: "About Wenlan | Living Personal Knowledge Library",
     description:
-      "Origin is an open-source, local-first home for AI work context across Claude Code, Cursor, Codex, and MCP-compatible tools.",
+      "Wenlan is an open-source, local-first personal knowledge library for AI work, built by agents and grounded in its sources.",
     type: "website",
     url: `${SITE_URL}/about`,
-    siteName: "Origin",
+    siteName: "Wenlan",
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Origin | Where AI Work Compounds",
+    title: "About Wenlan | Living Personal Knowledge Library",
     description:
-      "Origin is an open-source, local-first home for AI work context across Claude Code, Cursor, Codex, and MCP-compatible tools.",
+      "Wenlan is an open-source, local-first personal knowledge library for AI work, built by agents and grounded in its sources.",
   },
 };
 
@@ -33,33 +33,33 @@ const principles = [
   },
   {
     title: "Human-readable",
-    body: "Markdown is the durable artifact people can inspect, correct, and export. The local database keeps indexes for retrieval, not an opaque black box.",
+    body: "Memory, page, and session writes leave Markdown artifacts in local git. The daemon database powers retrieval, while the source-cited artifacts stay inspectable.",
   },
   {
     title: "Session rhythm",
-    body: "Origin follows how AI work actually happens: load context, capture durable facts, write handoffs, and bring the right context into the next run.",
+    body: "Wenlan follows how AI work actually happens: load context, capture durable facts, write handoffs, and bring the right context into the next run.",
   },
   {
-    title: "Background distillation",
-    body: "Between sessions, Origin deduplicates repeat facts, links related ideas, distills wiki pages, and keeps provenance attached.",
+    title: "Deliberate distillation",
+    body: "Between sessions, Wenlan deduplicates repeat facts and links related ideas. Run /distill when a topic deserves a source-backed page; local models or API keys can add automatic page distillation and richer graph work.",
   },
 ];
 
 const projectLinks = [
   {
-    href: "https://github.com/7xuanlu/origin",
+    href: "https://github.com/7xuanlu/wenlan",
     label: "GitHub repository",
   },
   {
-    href: "https://github.com/7xuanlu/origin/blob/main/LICENSE",
+    href: "https://github.com/7xuanlu/wenlan/blob/main/LICENSE",
     label: "Apache-2.0 license",
   },
   {
-    href: "https://github.com/7xuanlu/origin/blob/main/CONTRIBUTING.md",
+    href: "https://github.com/7xuanlu/wenlan/blob/main/CONTRIBUTING.md",
     label: "Contributing guide",
   },
   {
-    href: "https://github.com/7xuanlu/origin/blob/main/SECURITY.md",
+    href: "https://github.com/7xuanlu/wenlan/blob/main/SECURITY.md",
     label: "Security policy",
   },
 ];
@@ -87,9 +87,9 @@ export default function AboutPage() {
   const aboutSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    name: "About Origin",
+    name: "About Wenlan",
     description:
-      "Origin is an open-source, local-first home for AI work context, built by Qi-Xuan Lu.",
+      "Wenlan is an open-source, local-first personal knowledge library for AI work, built by Qi-Xuan Lu.",
     url: `${SITE_URL}/about`,
     mainEntity: {
       "@id": "https://useorigin.app/#organization",
@@ -108,11 +108,11 @@ export default function AboutPage() {
     url: "https://github.com/7xuanlu",
     sameAs: [
       "https://github.com/7xuanlu",
-      "https://github.com/7xuanlu/origin",
-      "https://www.npmjs.com/package/@7xuanlu/origin",
-      "https://www.npmjs.com/package/origin-mcp",
-      "https://crates.io/crates/origin-mcp",
-      "https://crates.io/crates/origin-types",
+      "https://github.com/7xuanlu/wenlan",
+      "https://www.npmjs.com/package/wenlan",
+      "https://www.npmjs.com/package/wenlan-mcp",
+      "https://crates.io/crates/wenlan-mcp",
+      "https://crates.io/crates/wenlan-types",
     ],
     knowsAbout: [
       "AI work memory",
@@ -151,7 +151,7 @@ export default function AboutPage() {
                 href="/"
                 className="transition-colors hover:text-[var(--o-text-secondary)]"
               >
-                Origin
+                Wenlan
               </Link>
               <span aria-hidden="true">/</span>
               <span className="text-[var(--o-text-secondary)]" aria-current="page">
@@ -164,18 +164,18 @@ export default function AboutPage() {
                   About
                 </p>
                 <h1 className="warm-glow font-serif text-5xl leading-[1.05] font-medium tracking-tight sm:text-7xl">
-                  Local-first memory for AI work.
+                  A living personal knowledge library.
                 </h1>
                 <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">
-                  Origin helps AI tools carry sessions, decisions, lessons,
-                  project context, and wiki pages across chats, tools, projects,
-                  and time.
+                  Agents capture what they learn, you add sources you trust,
+                  and Wenlan keeps source-cited wiki pages current across AI
+                  work.
                 </p>
               </div>
               <MemoryIndex
                 label="Project status"
                 items={[
-                  "v0.7.0",
+                  "v0.9.1",
                   "macOS, Linux, Windows",
                   "Apache-2.0",
                   "Built by Qi-Xuan Lu",
@@ -192,7 +192,7 @@ export default function AboutPage() {
                 <p className="font-mono text-[11px] text-[var(--o-warm)]">01</p>
                 <div>
                   <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
-                    Why Origin exists
+                    Why Wenlan exists
                   </h2>
                   <div className="mt-5 space-y-4 text-base leading-relaxed text-[var(--o-text-secondary)]">
                     <p>
@@ -202,7 +202,7 @@ export default function AboutPage() {
                       old chats.
                     </p>
                     <p>
-                      Origin is built so the work can compound. Agents can save
+                      Wenlan is built so the work can compound. Agents can save
                       what matters, recall it later, and keep refined context
                       available across MCP-compatible tools.
                     </p>
@@ -242,7 +242,7 @@ export default function AboutPage() {
                   </h2>
                   <div className="mt-5 space-y-4 text-base leading-relaxed text-[var(--o-text-secondary)]">
                     <p>
-                      Origin is built and maintained by Qi-Xuan Lu (GitHub{" "}
+                      Wenlan is built and maintained by Qi-Xuan Lu (GitHub{" "}
                       <a
                         href="https://github.com/7xuanlu"
                         target="_blank"
@@ -256,13 +256,14 @@ export default function AboutPage() {
                     </p>
                     <p>
                       The work focuses on memory as a first-class layer for AI
-                      tools: hybrid retrieval on libSQL, real git versioning of
-                      every write, mandatory provenance on distilled pages, and
-                      one daemon serving every MCP-compatible client.
+                      tools: hybrid retrieval on libSQL, real git versioning
+                      for readable pages, session handoffs, and status artifacts,
+                      mandatory provenance on distilled pages, and one daemon
+                      serving every MCP-compatible client.
                     </p>
                     <p>
                       Project channels: GitHub Issues for bugs and feature
-                      requests, SECURITY.md for vulnerabilities, and the Origin
+                      requests, SECURITY.md for vulnerabilities, and the Wenlan
                       release notes for changes.
                     </p>
                   </div>
@@ -276,7 +277,7 @@ export default function AboutPage() {
                     Current status
                   </h2>
                   <p className="mt-5 text-base leading-relaxed text-[var(--o-text-secondary)]">
-                    Origin v0.7.0 ships for macOS (arm64, x64), Linux (x86_64,
+                    Wenlan v0.9.1 ships for macOS (arm64, x64), Linux (x86_64,
                     aarch64; glibc), and Windows (x86_64). The daemon, CLI, MCP
                     server, and Claude Code plugin are open source under
                     Apache-2.0.
@@ -289,7 +290,7 @@ export default function AboutPage() {
                       Get started
                     </Link>
                     <a
-                      href="https://github.com/7xuanlu/origin"
+                      href="https://github.com/7xuanlu/wenlan"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="rounded-xl border border-[var(--o-border)] px-5 py-3 text-center text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
