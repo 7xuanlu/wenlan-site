@@ -2,48 +2,48 @@
 
 export const homepageFaqs = [
   {
-    q: "What is Origin?",
-    a: "Origin gives AI work one local home. It carries sessions, decisions, lessons, project context, and distilled wiki pages across chats, tools, projects, and time. One daemon, ~30 MCP tools, Markdown projection on disk you can read and edit.",
+    q: "What is Wenlan?",
+    a: "Wenlan is a living personal knowledge library for AI work. Agents capture what they learn, you add sources you trust, and the local daemon keeps source-cited pages current across chats, tools, projects, and time.",
   },
   {
-    q: "How is Origin different from built-in AI memory?",
-    a: "Built-in memory stores what the AI decided was important. You usually cannot trace it, correct it, or use it from another tool. Origin keeps memory local, visible, editable, and traceable. Every write is a git commit in ~/.origin/.git/, and every distilled page cites the source memory IDs that produced it.",
+    q: "How is Wenlan different from built-in AI memory?",
+    a: "Built-in memory stores what the AI decided was important. You usually cannot trace it, correct it, or use it from another tool. Wenlan keeps memory local, visible, correctable, and traceable. Readable pages, session logs, and project status are versioned in ~/.wenlan/.git/, and every distilled page cites the source memory IDs that produced it.",
   },
   {
-    q: "What retrieval quality does Origin reach?",
-    a: "Hybrid retrieval combines vector search (BGE-Base-EN-v1.5-Q, 768-dim), FTS5, reciprocal-rank fusion, and knowledge-graph context. Recall@5 is 93.6% on LongMemEval (oracle, 500 questions) and 70.0% on LoCoMo, at roughly 168 tokens per recall query. The eval harness ships in the repo at crates/origin-core/src/eval/.",
+    q: "What retrieval quality does Wenlan reach?",
+    a: "Hybrid retrieval combines vector search (BGE-Base-EN-v1.5-Q, 768-dim), FTS5, reciprocal-rank fusion, and knowledge-graph context. Recall@5 is 93.6% on LongMemEval (oracle, 500 questions) and 70.0% on LoCoMo, at roughly 168 tokens per recall query. The eval harness ships in the repo at crates/wenlan-core/src/eval/.",
   },
   {
     q: "Is my data private?",
-    a: "Yes. Origin runs on your machine and stores its database locally. No cloud sync or telemetry by default. Local memory setup works without a model or API key. Distill cycles can use an on-device model or an Anthropic key if you opt in.",
+    a: "Yes. Wenlan runs on your machine and stores its database locally. No cloud sync or telemetry by default. Local memory setup works without a model or API key. On-device models or an Anthropic key are opt-in for automatic page distillation, recaps, and richer graph work.",
   },
   {
-    q: "Is Origin just another memory MCP?",
-    a: "No. The MCP server is the connector. Origin also includes the local daemon, background distill cycles, libSQL store with DiskANN vectors, FTS5 + knowledge graph, mandatory provenance, real git versioning, and Markdown export paths.",
+    q: "Is Wenlan just another memory MCP?",
+    a: "No. The MCP server is the connector. Wenlan also includes the local daemon, manual /distill, optional model-backed background extraction and page work, a libSQL store with DiskANN vectors, FTS5 + knowledge graph, mandatory provenance, real git versioning for memory, page, and session artifacts, and readable Markdown export paths.",
   },
   {
-    q: "What AI tools work with Origin?",
-    a: "Claude Code has a marketplace plugin. MCP-compatible clients such as Cursor, Codex, Claude Desktop, VS Code, Gemini CLI, and others connect through Origin's MCP server.",
+    q: "What AI tools work with Wenlan?",
+    a: "Claude Code has a marketplace plugin. MCP-compatible clients such as Cursor, Codex, Claude Desktop, VS Code, Gemini CLI, and others connect through Wenlan's MCP server.",
   },
   {
-    q: "Is Origin a replacement for Notion or Obsidian?",
-    a: "No. Origin is not a notes app or a writing tool. It captures and refines what you learn from AI conversations. The Markdown projection under ~/.origin/ can be symlinked into Obsidian if you want to read it there.",
+    q: "Is Wenlan a replacement for Notion or Obsidian?",
+    a: "No. Wenlan is not a notes app or a writing tool. It captures and refines what you learn from AI conversations. The Markdown projection under ~/.wenlan/ can be symlinked into Obsidian if you want to read it there.",
   },
   {
     q: "How do I set it up?",
-    a: "In Claude Code, run /plugin marketplace add 7xuanlu/origin, then /plugin install origin@7xuanlu, then /init. For other MCP clients, run npx -y @7xuanlu/origin setup first, then ~/.origin/bin/origin mcp add codex, cursor, claude-desktop, vscode, or gemini.",
+    a: "In Claude Code, run /plugin marketplace add 7xuanlu/claude-plugins, then /plugin install wenlan@7xuanlu, then /init. For other MCP clients, run npx -y wenlan setup first, then ~/.wenlan/bin/wenlan mcp add codex, cursor, claude-desktop, vscode, or gemini.",
   },
   {
-    q: "Does Origin work on Windows or Linux?",
+    q: "Does Wenlan work on Windows or Linux?",
     a: "Yes. The daemon builds and runs on macOS (arm64, x64), Linux (x86_64, aarch64; glibc), and Windows (x86_64). Service registration uses launchd on macOS, systemd-user on Linux, and Task Scheduler (schtasks) on Windows.",
   },
   {
     q: "Can I keep work and personal memory separate?",
-    a: "Yes. Memories, pages, and recalls belong to a space (for example, work, personal, or client-X). Set the active space per shell with ORIGIN_SPACE, or declare them in ~/.origin/spaces.toml. The auto-detector also picks a space from the current repo or workspace.",
+    a: "Yes. Memories, pages, and recalls belong to a space (for example, work, personal, or client-X). Set the active space per shell with WENLAN_SPACE, or declare them in ~/.wenlan/spaces.toml. The auto-detector also picks a space from the current repo or workspace.",
   },
   {
-    q: "Is Origin free?",
-    a: "Yes. Origin is open-source. The local runtime, CLI, MCP server, and Claude Code plugin files in the Origin repo are Apache-2.0.",
+    q: "Is Wenlan free?",
+    a: "Yes. Wenlan is open-source. The local runtime, CLI, MCP server, and Claude Code plugin files in the Wenlan repo are Apache-2.0.",
   },
 ];
 

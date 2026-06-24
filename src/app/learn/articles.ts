@@ -35,7 +35,7 @@ export type OfficialReference = {
 
 export type ComparisonRow = {
   dimension: string;
-  origin: string;
+  wenlan: string;
   competitor: string;
 };
 
@@ -70,7 +70,7 @@ export type LearnArticle = {
   };
 };
 
-const updatedAt = "2026-05-27";
+const updatedAt = "2026-06-24";
 
 const baseArticles: LearnArticle[] = [
   {
@@ -80,15 +80,15 @@ const baseArticles: LearnArticle[] = [
     title: "What Is AI Work Memory?",
     description:
       "AI work memory carries sessions, decisions, lessons, project context, and wiki pages across tools and time.",
-    metaTitle: "What Is AI Work Memory? | Origin",
+    metaTitle: "What Is AI Work Memory? | Wenlan",
     metaDescription:
-      "Learn what AI work memory is, when built-in memory is not enough, and how Origin keeps work context local, visible, editable, and MCP-native.",
+      "Learn what AI work memory is, when built-in memory is not enough, and how Wenlan keeps work context local, visible, correctable, and MCP-native.",
     keywords: [
       "AI work memory",
       "memory for AI work",
-      "local-first memory for AI work",
+      "living personal knowledge library for AI work",
       "durable AI work context",
-      "Origin AI work",
+      "Wenlan AI work",
     ],
     updatedAt,
     author: DEFAULT_AUTHOR,
@@ -96,7 +96,7 @@ const baseArticles: LearnArticle[] = [
     audience: "AI power users, knowledge workers, and developers",
     heroBullets: [
       "Captures decisions, preferences, gotchas, and project knowledge from AI work.",
-      "Makes memory visible and editable instead of hiding it inside a model profile.",
+      "Makes memory visible and correctable instead of hiding it inside a model profile.",
       "Lets multiple AI tools recall the same durable context through MCP.",
     ],
     sections: [
@@ -128,10 +128,10 @@ const baseArticles: LearnArticle[] = [
         ],
       },
       {
-        heading: "How Origin approaches AI work memory",
+        heading: "How Wenlan approaches AI work memory",
         body: [
-          "Origin is local-first memory for AI work in Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP-compatible tools.",
-          "Origin stores useful context locally, makes memory visible and editable, writes handoffs, distills wiki pages, and uses hybrid retrieval that combines vector search, full-text search, and graph context.",
+          "Wenlan is a local-first personal knowledge library for AI work in Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP-compatible tools.",
+          "Wenlan stores useful context locally, makes memory visible and correctable, writes handoffs, distills source-backed wiki pages, and uses hybrid retrieval that combines vector search, full-text search, and graph context.",
         ],
       },
     ],
@@ -144,13 +144,13 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Does AI work memory replace ChatGPT or Claude memory?",
         answer:
-          "It can complement or replace parts of built-in memory. The main difference is control: Origin makes memories visible, editable, traceable, and available across MCP-compatible tools.",
+          "It can complement or replace parts of built-in memory. The main difference is control: Wenlan makes memories visible, correctable, traceable, and available across MCP-compatible tools.",
       },
     ],
-    relatedSlugs: ["mcp-memory-server", "local-first-ai-memory", "origin-vs-basic-memory"],
+    relatedSlugs: ["mcp-memory-server", "local-first-ai-memory", "wenlan-vs-basic-memory"],
     cta: {
       heading: "Make your AI work compound",
-      body: "Origin turns decisions, lessons, handoffs, and project context into memory and wiki pages your agents can use later.",
+      body: "Wenlan turns decisions, lessons, handoffs, and project context into memory and wiki pages your agents can use later.",
     },
   },
   {
@@ -159,10 +159,10 @@ const baseArticles: LearnArticle[] = [
     category: "Concepts",
     title: "MCP Memory Server for Claude Code, Cursor, and Codex",
     description:
-      "Learn what an MCP memory server does, how it connects AI tools to durable context, and how Origin keeps that memory local and inspectable.",
-    metaTitle: "MCP Memory Server for Claude Code, Cursor, Codex | Origin",
+      "Learn what an MCP memory server does, how it connects AI tools to durable context, and how Wenlan keeps that memory local and inspectable.",
+    metaTitle: "MCP Memory Server for Claude Code, Cursor, Codex | Wenlan",
     metaDescription:
-      "Set up local MCP memory for Claude Code, Cursor, Codex, and other clients. Origin adds capture, recall, provenance, and local control.",
+      "Set up local MCP memory for Claude Code, Cursor, Codex, and other clients. Wenlan adds capture, recall, provenance, and local control.",
     keywords: [
       "MCP memory server",
       "memory MCP",
@@ -178,19 +178,19 @@ const baseArticles: LearnArticle[] = [
     heroBullets: [
       "MCP servers expose tools, resources, and prompts to AI applications through a standard protocol.",
       "A memory server gives clients a way to store, search, recall, and manage durable work context.",
-      "Origin keeps the MCP memory path local, source-backed, and shared across Claude Code, Cursor, Codex, and other clients.",
+      "Wenlan keeps the MCP memory path local, source-backed, and shared across Claude Code, Cursor, Codex, and other clients.",
     ],
     sections: [
       {
         heading: "Quick answer",
         body: [
           "If you searched for an MCP memory server, you probably want an AI tool to remember project facts, decisions, preferences, and handoffs across sessions without pasting the same context every time.",
-          "Origin is the local-first version of that workflow: the daemon owns the memory store, origin-mcp is the connector clients launch, and MCP-compatible tools call Origin when they need context.",
+          "Wenlan is the local-first version of that workflow: the daemon owns the memory store, wenlan-mcp is the connector clients launch, and MCP-compatible tools call Wenlan when they need context.",
         ],
         bullets: [
           "Use MCP when the memory should be available outside one chat product.",
           "Use a local daemon when the memory includes private project context.",
-          "Use Origin when you also want capture, recall, handoff, provenance, wiki pages, and human-readable artifacts.",
+          "Use Wenlan when you also want capture, recall, handoff, provenance, wiki pages, and human-readable artifacts.",
         ],
       },
       {
@@ -204,25 +204,25 @@ const baseArticles: LearnArticle[] = [
         heading: "What a memory server should expose",
         body: [
           "A useful MCP memory server should do more than append notes. It needs a way to capture one durable fact, recall relevant context, list or inspect stored memory, forget stale entries, and diagnose whether the local route is connected.",
-          "Origin exposes that path through MCP tools around context, capture, recall, distillation, review, forget, and doctor checks. The goal is not a raw database endpoint; the goal is a memory loop agents can use safely during work.",
+          "Wenlan exposes that path through MCP tools around context, capture, recall, distillation, review, forget, and doctor checks. The goal is not a raw database endpoint; the goal is a memory loop agents can use safely during work.",
         ],
       },
       {
         heading: "Local vs hosted memory",
         body: [
           "Hosted memory servers are easy to start, but they require sending memory to someone else's infrastructure. Local memory servers take more care, but they keep private project context, preferences, and decisions under your control.",
-          "Origin is built around the local-first path. The daemon runs on your machine, owns the database, and serves memory to MCP clients through the local origin-mcp connector.",
+          "Wenlan is built around the local-first path. The daemon runs on your machine, owns the database, and serves memory to MCP clients through the local wenlan-mcp connector.",
         ],
       },
       {
         heading: "Install path",
         body: [
-          "Claude Code users should start with the Origin plugin because it adds slash commands and setup checks around the same local memory layer. Other MCP clients should run Origin setup, then let the CLI add the client-specific MCP configuration.",
+          "Claude Code users should start with the Wenlan plugin because it adds slash commands and setup checks around the same local memory layer. Other MCP clients should run Wenlan setup, then let the CLI add the client-specific MCP configuration.",
           "The commands below are the normal non-Claude Code path for tools such as Cursor, Codex, Claude Desktop, VS Code, and Gemini CLI.",
         ],
         code: {
           label: "MCP client setup",
-          code: "npx -y @7xuanlu/origin setup\n~/.origin/bin/origin mcp add cursor\n~/.origin/bin/origin mcp add codex\n# or: claude-desktop, vscode, gemini",
+          code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan mcp add cursor\n~/.wenlan/bin/wenlan mcp add codex\n# or: claude-desktop, vscode, gemini",
         },
         link: {
           label: "Read the Claude Code memory guide",
@@ -230,23 +230,23 @@ const baseArticles: LearnArticle[] = [
         },
       },
       {
-        heading: "How Origin fits",
+        heading: "How Wenlan fits",
         body: [
-          "Origin is more than a bare MCP store. It is a local runtime, CLI, MCP connector, and Claude Code plugin that carries work context forward, links related knowledge, detects contradictions, and keeps wiki pages and provenance attached.",
-          "The MCP server is the bridge: AI tools read and write memory, while Origin keeps the broader work context visible, searchable, and locally owned.",
+          "Wenlan is more than a bare MCP store. It is a local runtime, CLI, MCP connector, and Claude Code plugin that carries work context forward, links related knowledge, detects contradictions, and keeps wiki pages and provenance attached.",
+          "The MCP server is the bridge: AI tools read and write memory, while Wenlan keeps the broader work context visible, searchable, and locally owned.",
         ],
       },
     ],
     faqs: [
       {
-        question: "Is Origin just an MCP memory server?",
+        question: "Is Wenlan just an MCP memory server?",
         answer:
-          "No. Origin includes an MCP server path, but the product also includes local storage, distill cycles, contradiction detection, provenance, search, and wiki pages.",
+          "No. Wenlan includes an MCP server path, but the product also includes local storage, manual distillation, optional model-backed page work, contradiction detection, provenance, search, and wiki pages.",
       },
       {
         question: "Can one MCP memory server work with multiple AI tools?",
         answer:
-          "Yes, if those tools support MCP and are configured to use the same server. Origin is designed for that shared-memory workflow.",
+          "Yes, if those tools support MCP and are configured to use the same server. Wenlan is designed for that shared-memory workflow.",
       },
     ],
     relatedSlugs: ["claude-code-memory", "mcp-memory-server-localhost-7878", "how-to-add-mcp-memory-to-cursor"],
@@ -264,13 +264,13 @@ const baseArticles: LearnArticle[] = [
         href: "https://code.claude.com/docs/en/mcp",
       },
       {
-        label: "Origin on GitHub",
-        href: "https://github.com/7xuanlu/origin",
+        label: "Wenlan on GitHub",
+        href: "https://github.com/7xuanlu/wenlan",
       },
     ],
     cta: {
       heading: "Connect an MCP memory server locally",
-      body: "Install Origin, add the MCP connector to your client, and verify capture and recall before trusting memory in real work.",
+      body: "Install Wenlan, add the MCP connector to your client, and verify capture and recall before trusting memory in real work.",
     },
   },
   {
@@ -280,9 +280,9 @@ const baseArticles: LearnArticle[] = [
     title: "Local-First AI Work Memory: Keep Context on Your Machine",
     description:
       "Local-first AI work memory keeps sensitive project knowledge, decisions, and preferences under your control while still making them useful to assistants.",
-    metaTitle: "Local-First AI Work Memory | Origin",
+    metaTitle: "Local-First AI Work Memory | Wenlan",
     metaDescription:
-      "Learn why local-first AI work memory matters for privacy, ownership, and long-running work. Origin keeps work context visible, editable, and on your machine.",
+      "Learn why local-first AI work memory matters for privacy, ownership, and long-running work. Wenlan keeps work context visible, correctable, and on your machine.",
     keywords: [
       "local-first AI work memory",
       "private AI work memory",
@@ -297,7 +297,7 @@ const baseArticles: LearnArticle[] = [
     heroBullets: [
       "Your memory database stays on your machine by default.",
       "On-device intelligence processes memory without making cloud storage the default.",
-      "Every memory remains visible, editable, and traceable.",
+      "Every memory remains visible, correctable, and traceable.",
     ],
     sections: [
       {
@@ -318,13 +318,13 @@ const baseArticles: LearnArticle[] = [
         heading: "The tradeoff",
         body: [
           "Cloud memory can be easier to access across devices. Local-first memory gives stronger ownership, simpler privacy boundaries, and better fit for work that cannot casually leave your machine.",
-          "Origin chooses local-first because the memory layer should be something you trust, not another opaque profile maintained by a platform.",
+          "Wenlan chooses local-first because the memory layer should be something you trust, not another opaque profile maintained by a platform.",
         ],
       },
       {
-        heading: "How Origin keeps memory useful",
+        heading: "How Wenlan keeps memory useful",
         body: [
-          "Local-first does not mean inert. Origin combines vector search, full-text search, and a knowledge graph so assistants can retrieve the right work context without replaying everything.",
+          "Local-first does not mean inert. Wenlan combines vector search, full-text search, and a knowledge graph so assistants can retrieve the right work context without replaying everything.",
           "It also makes memory inspectable. You can see what was learned, trace it back to source conversations, and correct it when your understanding changes.",
         ],
       },
@@ -333,18 +333,18 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Does local-first mean no AI model can use the memory?",
         answer:
-          "No. Local-first means the memory layer is owned locally. MCP-compatible AI tools can still access relevant context through the local Origin daemon.",
+          "No. Local-first means the memory layer is owned locally. MCP-compatible AI tools can still access relevant context through the local Wenlan daemon.",
       },
       {
-        question: "Is Origin fully self-hosted?",
+        question: "Is Wenlan fully self-hosted?",
         answer:
-          "Origin is local-first on macOS, Linux, and Windows. The daemon and database run locally, and optional integrations may depend on the AI tools you connect.",
+          "Wenlan is local-first on macOS, Linux, and Windows. The daemon and database run locally, and optional integrations may depend on the AI tools you connect.",
       },
     ],
     relatedSlugs: ["ai-work-memory", "mcp-memory-server", "markdown-local-index-ai-memory"],
     cta: {
       heading: "Keep your context where your work lives",
-      body: "Origin gives AI tools useful memory without making your accumulated work context cloud-first by default.",
+      body: "Wenlan gives AI tools useful memory without making your accumulated work context cloud-first by default.",
     },
   },
   {
@@ -353,10 +353,10 @@ const baseArticles: LearnArticle[] = [
     category: "Workflows",
     title: "Claude Code Memory: CLAUDE.md, /memory, and MCP Context",
     description:
-      "Understand CLAUDE.md, Claude Code auto memory, /memory, and when to add Origin's local MCP memory for shared project context.",
-    metaTitle: "Claude Code Memory: CLAUDE.md, /memory, MCP | Origin",
+      "Understand CLAUDE.md, Claude Code auto memory, /memory, and when to add Wenlan's local MCP memory for shared project context.",
+    metaTitle: "Claude Code Memory: CLAUDE.md, /memory, MCP | Wenlan",
     metaDescription:
-      "Use CLAUDE.md, auto memory, and /memory well. Add Origin when Claude Code needs local, source-backed memory shared with Cursor and Codex.",
+      "Use CLAUDE.md, auto memory, and /memory well. Add Wenlan when Claude Code needs local, source-backed memory shared with Cursor and Codex.",
     keywords: [
       "Claude Code memory",
       "Claude Code persistent memory",
@@ -374,19 +374,19 @@ const baseArticles: LearnArticle[] = [
     heroBullets: [
       "Use CLAUDE.md for stable project instructions and auto memory for assistant-learned corrections and preferences.",
       "Use /memory to inspect and edit what Claude Code has loaded before you blame recall.",
-      "Use Origin when memory should be local, source-backed, reviewable, and shared with Cursor, Codex, and other MCP clients.",
+      "Use Wenlan when memory should be local, source-backed, reviewable, and shared with Cursor, Codex, and other MCP clients.",
     ],
     sections: [
       {
         heading: "Quick answer",
         body: [
           "Claude Code already has memory. The official memory path combines CLAUDE.md files you write, auto memory Claude writes from corrections and preferences, and the /memory command for viewing and editing what is loaded.",
-          "Origin is for the next problem: keeping evolving work context local, source-backed, and available outside one Claude Code session or one Claude-only surface.",
+          "Wenlan is for the next problem: keeping evolving work context local, source-backed, and available outside one Claude Code session or one Claude-only surface.",
         ],
         bullets: [
           "Put stable rules, commands, and project architecture in CLAUDE.md.",
           "Use Claude Code auto memory for repeated corrections and preferences Claude discovers.",
-          "Use Origin for decisions, gotchas, handoffs, source-backed wiki pages, and shared MCP memory.",
+          "Use Wenlan for decisions, gotchas, handoffs, source-backed wiki pages, and shared MCP memory.",
         ],
       },
       {
@@ -407,32 +407,32 @@ const baseArticles: LearnArticle[] = [
         heading: "Use /memory before adding another layer",
         body: [
           "If Claude Code seems to forget something, first inspect the built-in memory surface. /memory is the place to view and edit what Claude Code has loaded.",
-          "That step matters because some problems are not Origin problems. The memory may be missing, stale, too broad, duplicated, or loaded at the wrong scope.",
+          "That step matters because some problems are not Wenlan problems. The memory may be missing, stale, too broad, duplicated, or loaded at the wrong scope.",
         ],
       },
       {
-        heading: "When Origin adds value",
+        heading: "When Wenlan adds value",
         body: [
-          "Use Origin when project context needs provenance, review, deletion, handoff, distillation, and access from more than one MCP-compatible tool.",
-          "Useful Origin captures are specific and grounded: why a decision was made, what tradeoffs were considered, what command verifies a change, which module owns a behavior, or what gotcha should not be rediscovered next week.",
+          "Use Wenlan when project context needs provenance, review, deletion, handoff, distillation, and access from more than one MCP-compatible tool.",
+          "Useful Wenlan captures are specific and grounded: why a decision was made, what tradeoffs were considered, what command verifies a change, which module owns a behavior, or what gotcha should not be rediscovered next week.",
         ],
       },
       {
         heading: "Install path for Claude Code",
         body: [
-          "The Claude Code plugin is the most complete Origin path because it adds /init, /brief, /capture, /recall, /handoff, /distill, and review workflows around the local daemon and MCP connector.",
-          "After installing, restart Claude Code if prompted, run /init once, then verify a harmless capture and recall before relying on Origin for real project memory.",
+          "The Claude Code plugin is the most complete Wenlan path because it adds /init, /brief, /capture, /recall, /handoff, /distill, and review workflows around the local daemon and MCP connector.",
+          "After installing, restart Claude Code if prompted, run /init once, then verify a harmless capture and recall before relying on Wenlan for real project memory.",
         ],
         code: {
           label: "Claude Code plugin",
-          code: "/plugin marketplace add 7xuanlu/origin\n/plugin install origin@7xuanlu\n/init\n/capture This project uses Origin for local AI work memory.\n/recall local AI work memory",
+          code: "/plugin marketplace add 7xuanlu/claude-plugins\n/plugin install wenlan@7xuanlu\n/init\n/capture This project uses Wenlan for local AI work memory.\n/recall local AI work memory",
         },
       },
       {
         heading: "Share memory with Cursor and Codex",
         body: [
-          "Origin exposes memory through its MCP server. Claude Code can write what it learns and recall relevant project context later. The same work context can also be available to Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP clients when configured.",
-          "That makes Origin a shared local layer for AI-assisted development rather than a single-client note file.",
+          "Wenlan exposes memory through its MCP server. Claude Code can write what it learns and recall relevant project context later. The same work context can also be available to Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP clients when configured.",
+          "That makes Wenlan a shared local layer for AI-assisted development rather than a single-client note file.",
         ],
       },
     ],
@@ -440,15 +440,15 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Should Claude Code memory replace CLAUDE.md?",
         answer:
-          "No. CLAUDE.md is best for stable project instructions. Origin is best for evolving memory across sessions, tools, and projects.",
+          "No. CLAUDE.md is best for stable project instructions. Wenlan is best for evolving memory across sessions, tools, and projects.",
       },
       {
         question: "Can Cursor use the same memory?",
         answer:
-          "Yes. Origin is MCP-native, so multiple MCP-compatible tools can connect to the same local memory layer when configured.",
+          "Yes. Wenlan is MCP-native, so multiple MCP-compatible tools can connect to the same local memory layer when configured.",
       },
     ],
-    relatedSlugs: ["claude-code-memory-command-vs-origin", "origin-for-claude-code", "mcp-memory-server"],
+    relatedSlugs: ["claude-code-memory-command-vs-wenlan", "wenlan-for-claude-code", "mcp-memory-server"],
     officialReferences: [
       {
         label: "Claude Code memory docs",
@@ -459,28 +459,28 @@ const baseArticles: LearnArticle[] = [
         href: "https://code.claude.com/docs/en/mcp",
       },
       {
-        label: "Origin on GitHub",
-        href: "https://github.com/7xuanlu/origin",
+        label: "Wenlan on GitHub",
+        href: "https://github.com/7xuanlu/wenlan",
       },
     ],
     cta: {
       heading: "Verify Claude Code memory locally",
-      body: "Install the Origin plugin, run /init, then test one capture and recall before adding real project context.",
+      body: "Install the Wenlan plugin, run /init, then test one capture and recall before adding real project context.",
     },
   },
   {
-    slug: "origin-for-claude-code",
+    slug: "wenlan-for-claude-code",
     eyebrow: "Workflow",
     category: "Workflows",
-    title: "Origin for Claude Code Memory: The Daily /brief and /handoff Loop",
+    title: "Wenlan for Claude Code Memory: The Daily /brief and /handoff Loop",
     description:
-      "Use Origin inside Claude Code with /init, /brief, /capture, /recall, /handoff, and /distill so coding context carries across sessions.",
-    metaTitle: "Origin for Claude Code Memory | Daily Workflow",
+      "Use Wenlan inside Claude Code with /init, /brief, /capture, /recall, /handoff, and /distill so coding context carries across sessions.",
+    metaTitle: "Wenlan for Claude Code Memory | Daily Workflow",
     metaDescription:
-      "Install the Origin Claude Code plugin, run /init, start with /brief, capture durable decisions, and hand off sessions with local AI work memory.",
+      "Install the Wenlan Claude Code plugin, run /init, start with /brief, capture durable decisions, and hand off sessions with local AI work memory.",
     keywords: [
-      "Origin Claude Code",
-      "Claude Code Origin plugin",
+      "Wenlan Claude Code",
+      "Claude Code Wenlan plugin",
       "Claude Code memory workflow",
       "Claude Code handoff",
       "Claude Code persistent context",
@@ -498,19 +498,19 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "Install once, then verify the loop",
         body: [
-          "Origin's Claude Code path starts with the plugin marketplace: `/plugin marketplace add 7xuanlu/origin`, `/plugin install origin@7xuanlu`, then `/init` after the restart Claude Code requests.",
+          "Wenlan's Claude Code path starts with the plugin marketplace: `/plugin marketplace add 7xuanlu/claude-plugins`, `/plugin install wenlan@7xuanlu`, then `/init` after the restart Claude Code requests.",
           "`/init` handles daemon setup, MCP wiring, local memory setup, and a first round-trip check. The goal is not to add another manual note-taking habit. The goal is to make the memory route available at the moment work happens.",
         ],
         code: {
           label: "Claude Code setup",
-          code: "/plugin marketplace add 7xuanlu/origin\n/plugin install origin@7xuanlu\n/init",
+          code: "/plugin marketplace add 7xuanlu/claude-plugins\n/plugin install wenlan@7xuanlu\n/init",
         },
       },
       {
         heading: "Start with /brief",
         body: [
           "`/brief [topic]` loads project status, recent handoffs, preferences, and topic-relevant memories before edits begin.",
-          "That makes Claude Code less dependent on the current chat window. The agent walks into the session with the context Origin has already earned.",
+          "That makes Claude Code less dependent on the current chat window. The agent walks into the session with the context Wenlan has already earned.",
         ],
       },
       {
@@ -523,7 +523,7 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "Close with /handoff, then distill when needed",
         body: [
-          "`/handoff` writes what changed, what remains open, and what the next agent should know. It also gives Origin better source material than a raw transcript.",
+          "`/handoff` writes what changed, what remains open, and what the next agent should know. It also gives Wenlan better source material than a raw transcript.",
           "When a theme repeats across sessions, `/distill` turns related captures into source-backed wiki pages. The page record keeps source memory IDs, and pages can be refreshed as the work changes.",
         ],
         bullets: [
@@ -546,12 +546,12 @@ const baseArticles: LearnArticle[] = [
           "No. Most serious sessions need /brief and /handoff. Use /capture when something durable happens, /recall when history matters, and /distill when repeated captures deserve a page.",
       },
       {
-        question: "Can the same Origin memory work outside Claude Code?",
+        question: "Can the same Wenlan memory work outside Claude Code?",
         answer:
-          "Yes. Claude Code gets the richest slash-command workflow, but Origin also exposes the same local memory through MCP for Cursor, Codex, Claude Desktop, VS Code, Gemini CLI, and other clients.",
+          "Yes. Claude Code gets the richest slash-command workflow, but Wenlan also exposes the same local memory through MCP for Cursor, Codex, Claude Desktop, VS Code, Gemini CLI, and other clients.",
       },
     ],
-    relatedSlugs: ["claude-code-memory", "claude-code-memory-command-vs-origin", "how-to-add-memory-to-claude-code"],
+    relatedSlugs: ["claude-code-memory", "claude-code-memory-command-vs-wenlan", "how-to-add-memory-to-claude-code"],
     officialReferences: [
       {
         label: "Claude Code memory docs",
@@ -562,25 +562,25 @@ const baseArticles: LearnArticle[] = [
         href: "https://code.claude.com/docs/en/discover-plugins",
       },
       {
-        label: "Origin plugin source",
-        href: "https://github.com/7xuanlu/origin/tree/main/plugin",
+        label: "Wenlan plugin source",
+        href: "https://github.com/7xuanlu/wenlan/tree/main/plugin",
       },
     ],
     cta: {
       heading: "Make Claude Code sessions compound",
-      body: "Install Origin, run /init, then use /brief and /handoff around real work.",
+      body: "Install Wenlan, run /init, then use /brief and /handoff around real work.",
     },
   },
   {
     slug: "distilled-wiki-pages-ai-memory",
     eyebrow: "Concept",
     category: "Concepts",
-    title: "Distilled Wiki Pages: Why Origin Composes Memory",
+    title: "Distilled Wiki Pages: Why Wenlan Composes Memory",
     description:
-      "Origin does not stop at storing memory snippets. It composes related captures into source-backed wiki pages that agents and humans can reuse.",
-    metaTitle: "Distilled Wiki Pages for AI Memory | Origin",
+      "Wenlan does not stop at storing memory snippets. It composes related captures into source-backed wiki pages that agents and humans can reuse.",
+    metaTitle: "Distilled Wiki Pages for AI Memory | Wenlan",
     metaDescription:
-      "Learn why Origin distills atomic memories into source-backed wiki pages with provenance, stale reasons, and refreshable revision state.",
+      "Learn why Wenlan distills atomic memories into source-backed wiki pages with provenance, stale reasons, and refreshable revision state.",
     keywords: [
       "distilled wiki pages",
       "AI memory distillation",
@@ -602,28 +602,28 @@ const baseArticles: LearnArticle[] = [
         heading: "Storage is not enough",
         body: [
           "A long list of memories eventually becomes another inbox. The agent can search it, but the human has to trust that search will reconcile duplicates, stale facts, and contradictions correctly.",
-          "Origin treats storage as the first step. The stronger layer is composition: related captures become wiki pages that explain the current state of a project, decision, workflow, or concept.",
+          "Wenlan treats storage as the first step. The stronger layer is composition: related captures become wiki pages that explain the current state of a project, decision, workflow, or concept.",
         ],
       },
       {
         heading: "Pages stay source-backed",
         body: [
-          "Every distilled page keeps the source memory IDs that produced it. Origin's daemon rejects unsourced pages instead of letting attractive summaries enter the store without provenance.",
+          "Every distilled page keeps the source memory IDs that produced it. Wenlan's daemon rejects unsourced pages instead of letting attractive summaries enter the store without provenance.",
           "That source chain matters when memory is wrong. You can inspect the original capture, see when it was written, and supersede it instead of guessing why a page says what it says.",
         ],
       },
       {
         heading: "Pages can age and refresh",
         body: [
-          "A useful memory layer needs to admit that knowledge changes. Origin pages carry revision state and stale reasons so repeated captures can refresh old conclusions instead of silently piling up beside them.",
-          "Manual `/distill` is the deliberate path today. Optional local models or API keys can support richer background distill cycles when you want the daemon to do more between sessions.",
+          "A useful memory layer needs to admit that knowledge changes. Wenlan pages carry revision state and stale reasons so repeated captures can refresh old conclusions instead of silently piling up beside them.",
+          "Manual `/distill` is the deliberate path today. Optional local models or API keys can support richer background extraction and page refresh work when you want the daemon to do more between sessions.",
         ],
       },
       {
         heading: "Why this helps agents",
         body: [
           "Agents need compact context, not raw chat archaeology. A distilled page can say the current decision, cite where it came from, and link related entities.",
-          "That makes retrieval more useful: Origin can serve atomic memories, pages, graph context, full-text hits, and vector matches together instead of pretending one memory snippet is the whole answer.",
+          "That makes retrieval more useful: Wenlan can serve atomic memories, pages, graph context, full-text hits, and vector matches together instead of pretending one memory snippet is the whole answer.",
         ],
       },
     ],
@@ -636,13 +636,13 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Can I read the pages myself?",
         answer:
-          "Yes. Pages are projected as Markdown under ~/.origin/pages/ and can be opened in any editor or symlinked into Obsidian.",
+          "Yes. Pages are projected as Markdown under ~/.wenlan/pages/ and can be opened in any editor or symlinked into Obsidian.",
       },
     ],
     relatedSlugs: ["markdown-local-index-ai-memory", "ai-work-memory", "ai-agent-handoff-loop"],
     cta: {
       heading: "Turn memory into working knowledge",
-      body: "Origin distills repeated captures into source-backed pages your next AI session can actually use.",
+      body: "Wenlan distills repeated captures into source-backed pages your next AI session can actually use.",
     },
   },
   {
@@ -652,9 +652,9 @@ const baseArticles: LearnArticle[] = [
     title: "AI Work Memory vs Knowledge Base: Which One Do You Need?",
     description:
       "A knowledge base stores what you know. AI work memory carries decisions, handoffs, lessons, and evolving context back into agent sessions.",
-    metaTitle: "AI Work Memory vs Knowledge Base | Origin",
+    metaTitle: "AI Work Memory vs Knowledge Base | Wenlan",
     metaDescription:
-      "Compare AI work memory and knowledge bases, and learn why Origin is shaped around sessions, handoffs, provenance, and cross-tool MCP context.",
+      "Compare AI work memory and knowledge bases, and learn why Wenlan is shaped around sessions, handoffs, provenance, and cross-tool MCP context.",
     keywords: [
       "AI work memory vs knowledge base",
       "AI knowledge base",
@@ -669,7 +669,7 @@ const baseArticles: LearnArticle[] = [
     heroBullets: [
       "Knowledge bases are organized around documents and human browsing.",
       "AI work memory is organized around sessions, handoffs, retrieval, and reuse by agents.",
-      "Origin keeps Markdown records, but the workflow is built around compounding AI work.",
+      "Wenlan keeps readable artifacts, but the workflow is built around compounding AI work.",
     ],
     sections: [
       {
@@ -694,43 +694,43 @@ const baseArticles: LearnArticle[] = [
         ],
       },
       {
-        heading: "Why Origin includes both shapes",
+        heading: "Why Wenlan includes both shapes",
         body: [
-          "Origin keeps Markdown pages so humans can inspect the record. It also keeps a local libSQL index for vectors, FTS5, graph context, provenance, and retrieval metadata.",
+          "Wenlan keeps Markdown pages so humans can inspect the record. It also keeps a local libSQL index for vectors, FTS5, graph context, provenance, and retrieval metadata.",
           "That hybrid model is deliberate. The Markdown record keeps memory accountable. The local index makes it useful to agents at the moment they need context.",
         ],
       },
     ],
     faqs: [
       {
-        question: "Is Origin a knowledge base?",
+        question: "Is Wenlan a knowledge base?",
         answer:
-          "Not primarily. Origin can project readable Markdown pages, but its core workflow is AI work memory: capture, handoff, distill, and recall across sessions and MCP clients.",
+          "Not primarily. Wenlan can project readable Markdown pages, but its core workflow is AI work memory: capture, handoff, distill, and recall across sessions and MCP clients.",
       },
       {
-        question: "Can I use Origin with an existing knowledge base?",
+        question: "Can I use Wenlan with an existing knowledge base?",
         answer:
-          "Yes. Origin can import Markdown-style vault content, and its projected Markdown can be read by tools such as Obsidian. The better long-term question is which system owns which kind of context.",
+          "Yes. Wenlan's projected Markdown can be read by tools such as Obsidian, and selected durable notes can be migrated through explicit store or capture flows. The better long-term question is which system owns which kind of context.",
       },
     ],
-    relatedSlugs: ["origin-vs-basic-memory", "markdown-local-index-ai-memory", "ai-work-memory"],
+    relatedSlugs: ["wenlan-vs-basic-memory", "markdown-local-index-ai-memory", "ai-work-memory"],
     cta: {
       heading: "Choose the workflow, not the label",
-      body: "If your AI sessions keep losing decisions and project context, Origin is built for that loop.",
+      body: "If your AI sessions keep losing decisions and project context, Wenlan is built for that loop.",
     },
   },
   {
-    slug: "origin-vs-basic-memory",
+    slug: "wenlan-vs-basic-memory",
     eyebrow: "Comparison",
     category: "Comparisons",
-    title: "Origin vs Basic Memory: Local AI Work Memory vs Markdown Knowledge Base",
+    title: "Wenlan vs Basic Memory: Local AI Work Memory vs Markdown Knowledge Base",
     description:
-      "Compare Origin and Basic Memory across Markdown, MCP, local-first control, workflow fit, and how each product helps AI tools use durable context.",
-    metaTitle: "Origin vs Basic Memory | AI Memory Comparison",
+      "Compare Wenlan and Basic Memory across Markdown, MCP, local-first control, workflow fit, and how each product helps AI tools use durable context.",
+    metaTitle: "Wenlan vs Basic Memory | AI Memory Comparison",
     metaDescription:
-      "Compare Origin and Basic Memory for local AI work memory, Markdown knowledge bases, MCP workflows, human control, and long-running AI sessions.",
+      "Compare Wenlan and Basic Memory for local AI work memory, Markdown knowledge bases, MCP workflows, human control, and long-running AI sessions.",
     keywords: [
-      "Origin vs Basic Memory",
+      "Wenlan vs Basic Memory",
       "Basic Memory alternative",
       "AI memory markdown",
       "MCP memory knowledge base",
@@ -742,9 +742,9 @@ const baseArticles: LearnArticle[] = [
     audience: "People choosing a memory layer for AI-assisted work",
     heroBullets: [
       "Basic Memory is strongest as a Markdown-centered knowledge base with AI access.",
-      "Origin is designed around the AI work loop: sessions, handoffs, distillation, provenance, and shared MCP memory.",
+      "Wenlan is designed around the AI work loop: sessions, handoffs, distillation, provenance, and shared MCP memory.",
       "Both value human-readable memory; the right fit depends on whether you want a knowledge base or a work-session memory layer.",
-      "This page reflects Basic Memory's public docs and Origin v0.7.0 as of 2026-05-27. If something has shifted on either side, please open an issue.",
+      "This page reflects Basic Memory's public docs and Wenlan v0.9.1 as of 2026-06-24. If something has shifted on either side, please open an issue.",
     ],
     officialReferences: [
       {
@@ -757,7 +757,7 @@ const baseArticles: LearnArticle[] = [
         heading: "Short answer",
         body: [
           "Choose Basic Memory if you want a Markdown-first knowledge base that humans and AI can both read and update.",
-          "Choose Origin if your main problem is making AI work carry across sessions, tools, projects, and weeks without turning memory into a black box.",
+          "Choose Wenlan if your main problem is making AI work carry across sessions, tools, projects, and weeks without turning memory into a black box.",
         ],
       },
       {
@@ -768,16 +768,16 @@ const baseArticles: LearnArticle[] = [
         ],
       },
       {
-        heading: "What Origin emphasizes",
+        heading: "What Wenlan emphasizes",
         body: [
-          "Origin starts from the AI work session. It captures decisions, lessons, gotchas, handoffs, and project context, then refines them between sessions through deduplication, linking, wiki page distillation, and provenance.",
-          "Markdown remains the human-readable record. The local database is the index and retrieval layer, not the only place where meaning lives.",
+          "Wenlan starts from the AI work session. It captures decisions, lessons, gotchas, handoffs, and project context, then refines them through manual distillation, optional model-backed page work, linking, and provenance.",
+          "Raw captures and recall live in the daemon-owned store. Readable pages, sessions, and status files are projected under `~/.wenlan/` so people can inspect what agents rely on.",
         ],
       },
       {
         heading: "How to decide",
         body: [
-          "If you mainly want a persistent Markdown knowledge base with AI access, Basic Memory may fit naturally. If you want a local memory loop for coding agents and MCP clients, Origin is more directly shaped around that workflow.",
+          "If you mainly want a persistent Markdown knowledge base with AI access, Basic Memory may fit naturally. If you want a local memory loop for coding agents and MCP clients, Wenlan is more directly shaped around that workflow.",
           "The practical question is not which product has the word memory. It is whether your bottleneck is maintaining a knowledge base or carrying work context from one AI session into the next.",
         ],
       },
@@ -785,20 +785,20 @@ const baseArticles: LearnArticle[] = [
         heading: "How the storage models differ in practice",
         body: [
           "Basic Memory keeps your notes as Markdown files in a vault. When the AI reads context, it reads the file content; when a human edits a note, the file changes; the vault is the source.",
-          "Origin keeps notes as Markdown under `~/.origin/` for human reading, and the daemon also indexes them in a libSQL store for retrieval. Every write becomes a git commit in `~/.origin/.git/`, so `git log path/to/memory.md` shows the full history of a single fact.",
-          "The split matters at two scales. Search: a five-thousand-memory store needs vector plus FTS retrieval to answer 'what did I decide about token budgets last sprint' in under a second; Markdown-only search degrades fast past a few thousand notes. Audit: when an AI references a memory, you usually want the commit that created the claim, not just the current file content.",
+          "Wenlan keeps raw captures in the daemon-owned libSQL store for retrieval and projects readable pages, session logs, and status Markdown under `~/.wenlan/`. Those readable artifacts are versioned in `~/.wenlan/.git/`, so `git log pages/<topic>.md` shows page history while recall and search still come from the daemon.",
+          "The split matters at two scales. Search: a five-thousand-memory store needs vector plus FTS retrieval to answer 'what did I decide about token budgets last sprint' in under a second; Markdown-only search degrades fast past a few thousand notes. Audit: when an AI references a distilled page claim, you usually want source memory IDs, provenance state, and git history for the generated artifacts, not just the current page content.",
         ],
         bullets: [
           "Basic Memory: vault is the source. AI reads and writes Markdown directly.",
-          "Origin: libSQL is the retrieval source, Markdown is the human projection. Daemon writes both atomically.",
-          "Origin git history is per-write, not per-edit-session. Capture and distill cycles each leave a traceable commit.",
+          "Wenlan: libSQL is the retrieval source, Markdown is the human projection. Daemon writes both atomically.",
+          "Wenlan artifact history is per write for pages, sessions, and status Markdown. Raw capture retrieval remains daemon-owned.",
         ],
       },
       {
         heading: "A concrete walkthrough: distilling a week of sessions",
         body: [
-          "Here is what a week with Origin looks like in my own work. Monday I capture three decisions inside Claude Code via the MCP `/capture` tool. Tuesday two more land from a Cursor session. Wednesday I run `/handoff` at the end of the day, and the daemon pulls the week's captures into a distill cycle. The result is a wiki page that quotes the original captures with mandatory source IDs.",
-          "Friday I open the projected Markdown at `~/.origin/pages/auth.md`. The page reads like a coherent doc, not a chat log. Each claim has a source comment that links back to the originating capture commit. The next AI session that asks 'what did we decide about retry strategy' gets the distilled answer, not five overlapping captures the model has to reconcile on the fly.",
+          "Here is what a week with Wenlan looks like in my own work. Monday I capture three decisions inside Claude Code via the MCP `/capture` tool. Tuesday two more land from a Cursor session. Wednesday I run `/handoff` at the end of the day, then run `/distill` for the repeated auth theme. The result is a wiki page that quotes the original captures with mandatory source IDs.",
+          "Friday I open the projected Markdown at `~/.wenlan/pages/auth.md`. The page reads like a coherent doc, not a chat log. Each claim has a source comment that links back to the originating memory IDs. The next AI session that asks 'what did we decide about retry strategy' gets the distilled answer, not five overlapping captures the model has to reconcile on the fly.",
           "Basic Memory's analog would be writing the wiki page myself, or asking the AI to draft it inside the vault. That works fine for a knowledge base. It is not a work-loop optimization, and the difference compounds across months.",
         ],
       },
@@ -806,15 +806,15 @@ const baseArticles: LearnArticle[] = [
         heading: "When Basic Memory is the better call",
         body: [
           "I want to be specific about this. If your problem is 'I have hundreds of Markdown notes and I want AI to read and write to them naturally,' Basic Memory is closer to the shape of your problem. The vault is the product. AI is a citizen of the vault.",
-          "If your problem is 'AI conversations keep losing context across sessions and tools,' Origin is closer. The work session is the product. Markdown is a projection for human readability.",
+          "If your problem is 'AI conversations keep losing context across sessions and tools,' Wenlan is closer. The work session is the product. Markdown is a projection for human readability.",
           "Both can run in parallel. The MCP layer does not care if two memory servers are registered. I have tested this; the practical limit is the human overhead of remembering which content belongs in which store. Most people end up picking one as primary within a couple of weeks.",
         ],
       },
       {
         heading: "Migration shape, if you decide to switch",
         body: [
-          "Importing a Basic Memory vault into Origin: the daemon has an Obsidian-style importer at `origin import vault <path>` that reads Markdown files, chunks them, embeds them, and writes them as memories with `kind: imported`. Wikilinks are preserved as graph edges between entities. The import is non-destructive; nothing in the original vault is moved or deleted.",
-          "Going the other way is simpler. Origin's projected Markdown under `~/.origin/` is already a vault structure. Point Obsidian or Basic Memory at it and they read it as a knowledge base. You lose the live distill cycle, but the static record is portable, and that is a feature: your memory does not get locked inside a product if the product disappears.",
+          "Switching from a Basic Memory vault to Wenlan is selective today: pick durable notes that should become AI work memory and move them through `wenlan store`, `/capture`, or a small script over `/api/memory/store`. There is no general Markdown-vault importer in the current CLI.",
+          "Going the other way is simpler. Wenlan's projected Markdown under `~/.wenlan/` is readable as plain text. Point Obsidian or another Markdown reader at the pages and sessions when you need a static record. You lose live recall, review, and distillation behavior, but the human-facing record remains portable.",
         ],
       },
     ],
@@ -823,50 +823,45 @@ const baseArticles: LearnArticle[] = [
       rows: [
         {
           dimension: "Center of gravity",
-          origin:
-            "AI work session loop: capture, handoff, distill, recall across MCP clients.",
+          wenlan: "AI work session loop: capture, handoff, distill, recall across MCP clients.",
           competitor:
             "Markdown knowledge base humans and AI both read and edit.",
         },
         {
           dimension: "Storage",
-          origin:
-            "Local libSQL for retrieval plus Markdown projections in ~/.origin/; readable artifacts are tracked in ~/.origin/.git/.",
+          wenlan: "Local libSQL for retrieval plus Markdown projections in ~/.wenlan/; readable artifacts are tracked in ~/.wenlan/.git/.",
           competitor: "Markdown files in a local Obsidian-style vault.",
         },
         {
           dimension: "Retrieval",
-          origin:
-            "Hybrid: vector (BGE-Base-EN-v1.5-Q 768-dim) + FTS5 + reciprocal-rank fusion + knowledge-graph neighbors. 93.6% Recall@5 on LongMemEval (oracle, 500 Q), 70.0% on LoCoMo.",
+          wenlan: "Hybrid: vector (BGE-Base-EN-v1.5-Q 768-dim) + FTS5 + reciprocal-rank fusion + knowledge-graph neighbors. 93.6% Recall@5 on LongMemEval (oracle, 500 Q), 70.0% on LoCoMo.",
           competitor:
             "Semantic + FTS over Markdown notes; emphasis on note linking, not benchmark retrieval.",
         },
         {
           dimension: "Provenance",
-          origin:
-            "Mandatory source_memory_ids on every distilled page record. Daemon rejects pages with no source (HTTP 422). Pages can grow or refresh without losing the source chain.",
+          wenlan: "Mandatory source_memory_ids on every distilled page record. Daemon rejects pages with no source (HTTP 422). Pages can grow or refresh without losing the source chain.",
           competitor:
             "Wikilinks between notes; provenance is whatever the author writes by hand.",
         },
         {
           dimension: "Versioning",
-          origin:
-            "Real git history for readable artifacts in ~/.origin/.git/. Raw memory captures remain daemon-owned database records.",
+          wenlan: "Real git history for readable artifacts in ~/.wenlan/.git/. Raw memory captures remain daemon-owned database records.",
           competitor:
             "File mtime; bring-your-own git if you want history.",
         },
         {
           dimension: "License",
-          origin: "Apache-2.0 daemon, CLI, MCP server.",
+          wenlan: "Apache-2.0 daemon, CLI, MCP server.",
           competitor: "AGPL-3.0 (Basic Memory open-source repo).",
         },
       ],
     },
     faqs: [
       {
-        question: "Is Basic Memory a competitor to Origin?",
+        question: "Is Basic Memory a competitor to Wenlan?",
         answer:
-          "They overlap around AI-readable memory and Markdown, but the product shapes differ. Basic Memory is closer to a Markdown knowledge base; Origin is closer to a local AI work memory loop.",
+          "They overlap around AI-readable memory and Markdown, but the product shapes differ. Basic Memory is closer to a Markdown knowledge base; Wenlan is closer to a local AI work memory loop.",
       },
       {
         question: "Can someone use both?",
@@ -874,24 +869,24 @@ const baseArticles: LearnArticle[] = [
           "Yes, through MCP. Each registers as a distinct memory server with the AI client. The friction is human: you decide which one owns which kind of content. Most people pick one as primary within a few weeks.",
       },
       {
-        question: "Does Origin work without the daemon running?",
+        question: "Does Wenlan work without the daemon running?",
         answer:
-          "Reads of the projected Markdown under `~/.origin/` work without the daemon since the files are plain text. Anything that needs retrieval, capture, or distillation needs the daemon process. I run it as a launchd user service on macOS so I never think about it; the equivalents on Linux (systemd user unit) and Windows (Task Scheduler ONLOGON) ship in v0.7.0.",
+          "Reads of the projected Markdown under `~/.wenlan/` work without the daemon since the files are plain text. Anything that needs retrieval, capture, or distillation needs the daemon process. I run it as a launchd user service on macOS so I never think about it; the equivalents on Linux (systemd user unit) and Windows (Task Scheduler ONLOGON) ship in current Wenlan releases.",
       },
       {
-        question: "How does Origin handle wikilinks compared to Basic Memory?",
+        question: "How does Wenlan handle wikilinks compared to Basic Memory?",
         answer:
-          "Origin extracts wikilinks during capture and creates explicit graph edges in the knowledge-graph layer, alongside the Markdown link. That lets hybrid retrieval traverse neighbors at query time. Basic Memory treats wikilinks primarily as Markdown links between notes.",
+          "Wenlan extracts wikilinks during capture and creates explicit graph edges in the knowledge-graph layer, alongside the Markdown link. That lets hybrid retrieval traverse neighbors at query time. Basic Memory treats wikilinks primarily as Markdown links between notes.",
       },
       {
         question: "How fresh is this comparison?",
         answer:
-          "Reflects Basic Memory's public docs and Origin v0.7.0 as of 2026-05-27. If something material changes on either side, please open an issue on github.com/7xuanlu/origin and I will update.",
+          "Reflects Basic Memory's public docs and Wenlan v0.9.1 as of 2026-06-24. If something material changes on either side, please open an issue on github.com/7xuanlu/wenlan and I will update.",
       },
     ],
     relatedSlugs: [
-      "origin-vs-claude-mem",
-      "origin-vs-superlocal-memory",
+      "wenlan-vs-claude-mem",
+      "wenlan-vs-superlocal-memory",
       "markdown-local-index-ai-memory",
       "ai-work-memory",
       "mcp-memory-server",
@@ -899,21 +894,21 @@ const baseArticles: LearnArticle[] = [
     ],
     cta: {
       heading: "Try the AI work memory loop",
-      body: "Origin is built for sessions, handoffs, provenance, and local retrieval across MCP-compatible AI tools.",
+      body: "Wenlan is built for sessions, handoffs, provenance, and local retrieval across MCP-compatible AI tools.",
     },
   },
   {
-    slug: "origin-vs-claude-mem",
+    slug: "wenlan-vs-claude-mem",
     eyebrow: "Comparison",
     category: "Comparisons",
-    title: "Origin vs claude-mem: Which Claude Memory Workflow Fits Your Work?",
+    title: "Wenlan vs claude-mem: Which Claude Memory Workflow Fits Your Work?",
     description:
-      "Compare Origin and claude-mem for Claude Code memory, observer-style capture, MCP access, local control, and work that spans tools.",
-    metaTitle: "Origin vs claude-mem | Claude Memory Comparison",
+      "Compare Wenlan and claude-mem for Claude Code memory, observer-style capture, MCP access, local control, and work that spans tools.",
+    metaTitle: "Wenlan vs claude-mem | Claude Memory Comparison",
     metaDescription:
-      "Compare Origin and claude-mem for Claude Code memory workflows, observer capture, MCP memory, local control, and cross-tool AI work context.",
+      "Compare Wenlan and claude-mem for Claude Code memory workflows, observer capture, MCP memory, local control, and cross-tool AI work context.",
     keywords: [
-      "Origin vs claude-mem",
+      "Wenlan vs claude-mem",
       "claude-mem alternative",
       "Claude Code memory",
       "Claude memory workflow",
@@ -925,9 +920,9 @@ const baseArticles: LearnArticle[] = [
     audience: "Claude Code users choosing a memory workflow",
     heroBullets: [
       "claude-mem focuses on automatically observing Claude Code sessions and extracting useful context.",
-      "Origin focuses on shared local AI work memory across Claude Code and other MCP clients.",
+      "Wenlan focuses on shared local AI work memory across Claude Code and other MCP clients.",
       "Both aim to reduce repeated context, but they choose different centers of gravity.",
-      "Both products are early. This page covers the claude-mem npm package and Origin v0.7.0 as of 2026-05-27.",
+      "Both products are early. This page covers the claude-mem npm package and Wenlan v0.9.1 as of 2026-06-24.",
     ],
     officialReferences: [
       {
@@ -940,7 +935,7 @@ const baseArticles: LearnArticle[] = [
         heading: "Short answer",
         body: [
           "Choose claude-mem if your primary need is an observer-style memory workflow tightly centered on Claude Code sessions.",
-          "Choose Origin if you want local-first AI work memory that can serve Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP-compatible tools.",
+          "Choose Wenlan if you want local-first AI work memory that can serve Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP-compatible tools.",
         ],
       },
       {
@@ -951,17 +946,17 @@ const baseArticles: LearnArticle[] = [
         ],
       },
       {
-        heading: "What Origin emphasizes",
+        heading: "What Wenlan emphasizes",
         body: [
-          "Origin treats memory as part of a local AI work loop, not a single-client feature. Claude Code is important, but Origin also works through MCP so other clients can share the same context.",
-          "Origin's workflow includes handoffs, background distillation, wiki pages, Markdown records, local indexes, and provenance attached to durable memories.",
+          "Wenlan treats memory as part of a local AI work loop, not a single-client feature. Claude Code is important, but Wenlan also works through MCP so other clients can share the same context.",
+          "Wenlan's workflow includes handoffs, manual distillation, optional model-backed page work, wiki pages, readable artifacts, local indexes, and provenance attached to durable memories.",
         ],
       },
       {
         heading: "How to decide",
         body: [
           "If you live entirely in Claude Code and want an observer-style assistant for that environment, claude-mem is directly aimed at that habit.",
-          "If your work moves across coding agents, chat tools, projects, and sessions, Origin is designed to make the same context portable across those surfaces.",
+          "If your work moves across coding agents, chat tools, projects, and sessions, Wenlan is designed to make the same context portable across those surfaces.",
         ],
       },
       {
@@ -969,27 +964,27 @@ const baseArticles: LearnArticle[] = [
         body: [
           "claude-mem watches your Claude Code session and extracts memorable context without you naming it. The promise is low friction: keep working, memory accumulates on its own.",
           "Two trade-offs show up over weeks of use. First, false positives: an observer cannot reliably tell which 'decision' is durable versus which is the start of an idea you will revise an hour later. Second, attribution: when the AI later cites memory, you usually want to know whether it came from your considered handoff or from a sentence you typed while still figuring out the problem.",
-          "Origin defaults to explicit capture for that reason. `/capture` is one keystroke during flow. `/handoff` at session end pulls every flagged item into a distill cycle. Background distillation still happens, and a periodic refinery phase rethinks older memories. The high-confidence layer is the one you marked. The model-guessed layer is clearly separated.",
+          "Wenlan defaults to explicit capture for that reason. `/capture` is one keystroke during flow. `/handoff` preserves session state, and `/distill` deliberately turns repeated context into source-backed pages. Optional local models or API keys can add background extraction and page refresh work. The high-confidence layer is the one you marked.",
         ],
       },
       {
         heading: "What happens at session end",
         body: [
           "claude-mem's session-end pattern, as documented, summarizes the Claude Code session into memory entries automatically. That summary lives in claude-mem's store and gets retrieved on the next session via MCP.",
-          "Origin's session-end pattern is the `/handoff` flow. You write one to three sentences about what happened, what is blocked, and what is next. The daemon attaches that to your session captures, runs deduplication against existing memories, links related entities, and commits the new state to `~/.origin/.git/`. The next session starts with a handoff brief plus relevant prior context, not a chat-log summary.",
-          "Both reduce repeated context across sessions. The difference is who decides what is worth carrying forward: the model (claude-mem) or you with model help (Origin).",
+          "Wenlan's session-end pattern is the `/handoff` flow. You write one to three sentences about what happened, what is blocked, and what is next. The daemon attaches that to your session captures, links related entities, and updates readable session/status artifacts under `~/.wenlan/` that are versioned in `~/.wenlan/.git/`. The next session starts with a handoff brief plus relevant prior context, not a chat-log summary.",
+          "Both reduce repeated context across sessions. The difference is who decides what is worth carrying forward: the model (claude-mem) or you with model help (Wenlan).",
         ],
         bullets: [
           "claude-mem: automatic session summary, model picks what is durable.",
-          "Origin: explicit `/capture` plus `/handoff`, human picks; background distill cycles supplement.",
-          "Both expose recall via MCP. Origin also exposes `origin recall <id>` and the projected Markdown for direct human reading.",
+          "Wenlan: explicit `/capture` plus `/handoff`, human picks; manual `/distill` and optional background page work supplement.",
+          "Both expose recall via MCP. Wenlan also exposes `wenlan recall <id>` and the projected Markdown for direct human reading.",
         ],
       },
       {
         heading: "Cross-tool: Cursor, Codex, Claude Desktop, Gemini CLI",
         body: [
           "claude-mem's positioning is Claude Code first. MCP exposure exists so other clients can read the store, but the workflow shape (observer of Claude Code sessions) is the product.",
-          "Origin's positioning is MCP first, Claude Code as one of many clients. One daemon at `127.0.0.1:7878` serves any MCP-compatible runtime. In my own work I switch between Cursor for refactors, Claude Code for greenfield, and Codex for shell-heavy tasks; the memory is the same memory.",
+          "Wenlan's positioning is MCP first, Claude Code as one of many clients. One daemon at `127.0.0.1:7878` serves any MCP-compatible runtime. In my own work I switch between Cursor for refactors, Claude Code for greenfield, and Codex for shell-heavy tasks; the memory is the same memory.",
           "If you live 100% inside Claude Code, this difference is theoretical. If you context-switch between tools across a typical week, it is the difference between one memory layer and three disjoint ones.",
         ],
       },
@@ -997,8 +992,8 @@ const baseArticles: LearnArticle[] = [
         heading: "When claude-mem is the better call",
         body: [
           "If your AI work is entirely inside Claude Code, you want zero capture friction, and you are comfortable letting an observer pick what is memorable, claude-mem is shaped exactly for that. Single-tool by design, not by oversight.",
-          "If you want explicit human control over what enters memory, multiple AI clients sharing one local context store, or git-versioned audit on every write, those are not claude-mem's headline features. Use Origin.",
-          "Cost: claude-mem ships as an npm package under MIT. Origin's daemon, CLI, and MCP server are Apache-2.0. Both are free to self-host. The optional Origin desktop app lives in a separate repo under AGPL-3.0 if you want a GUI on top.",
+          "If you want explicit human control over what enters memory, multiple AI clients sharing one local context store, or git-versioned audit trails for readable artifacts, those are not claude-mem's headline features. Use Wenlan.",
+          "Cost: claude-mem ships as an npm package under MIT. Wenlan's daemon, CLI, and MCP server are Apache-2.0. Both are free to self-host. The optional Wenlan desktop app lives in a separate repo under AGPL-3.0 if you want a GUI on top.",
         ],
       },
     ],
@@ -1007,69 +1002,64 @@ const baseArticles: LearnArticle[] = [
       rows: [
         {
           dimension: "Center of gravity",
-          origin:
-            "Local AI work memory across MCP clients: Claude Code, Cursor, Codex, Claude Desktop, VS Code, Gemini CLI.",
+          wenlan: "Local AI work memory across MCP clients: Claude Code, Cursor, Codex, Claude Desktop, VS Code, Gemini CLI.",
           competitor:
             "Observer-style memory assistant centered on Claude Code sessions.",
         },
         {
           dimension: "Capture mode",
-          origin:
-            "Explicit /capture in flow, /handoff at session end, plus background distill cycles. Low-confidence and contradicting captures surface for review.",
+          wenlan: "Explicit /capture in flow, /handoff at session end, plus manual /distill and optional background page work. Low-confidence and contradicting captures surface for review.",
           competitor:
             "Automatic observer of Claude Code sessions; less explicit human control over what enters memory.",
         },
         {
           dimension: "Retrieval",
-          origin:
-            "Hybrid retrieval (vector + FTS5 + RRF + graph). 93.6% Recall@5 on LongMemEval, 70.0% on LoCoMo. ~168 tokens per recall query.",
+          wenlan: "Hybrid retrieval (vector + FTS5 + RRF + graph). 93.6% Recall@5 on LongMemEval, 70.0% on LoCoMo. ~168 tokens per recall query.",
           competitor:
             "Semantic recall via MCP scoped to past Claude Code sessions; no published benchmark.",
         },
         {
           dimension: "Cross-tool reach",
-          origin:
-            "One daemon serves any MCP client. Same memory across coding agents, chat tools, and CLI runtimes.",
+          wenlan: "One daemon serves any MCP client. Same memory across coding agents, chat tools, and CLI runtimes.",
           competitor:
             "Claude Code first. MCP exposure exists, but the workflow is tuned for the Claude Code surface.",
         },
         {
           dimension: "Provenance + versioning",
-          origin:
-            "Mandatory source IDs on distilled pages; every memory write is a git commit in ~/.origin/.git/.",
+          wenlan: "Mandatory source IDs on distilled pages; readable pages, sessions, and status artifacts are versioned in ~/.wenlan/.git/.",
           competitor:
             "Session-attributed captures; no per-write git history by default.",
         },
         {
           dimension: "License",
-          origin: "Apache-2.0 daemon, CLI, MCP server.",
+          wenlan: "Apache-2.0 daemon, CLI, MCP server.",
           competitor: "MIT (per claude-mem npm package).",
         },
       ],
     },
     faqs: [
       {
-        question: "Is Origin only for Claude Code?",
+        question: "Is Wenlan only for Claude Code?",
         answer:
-          "No. Origin ships a Claude Code plugin, but it also exposes memory through MCP so other compatible tools can use the same local memory layer. Cursor, Codex, Claude Desktop, and Gemini CLI all work out of the box.",
+          "No. Wenlan ships a Claude Code plugin, but it also exposes memory through MCP so other compatible tools can use the same local memory layer. Cursor, Codex, Claude Desktop, and Gemini CLI all work out of the box.",
       },
       {
-        question: "Is claude-mem more automatic than Origin?",
+        question: "Is claude-mem more automatic than Wenlan?",
         answer:
-          "claude-mem is framed around observer-style capture for Claude Code. Origin has capture and distill cycles, but it emphasizes inspectable memory, handoffs, provenance, and cross-tool use. Less automatic at capture time, more controllable at recall time.",
+          "claude-mem is framed around observer-style capture for Claude Code. Wenlan has capture, handoffs, manual distillation, and optional model-backed page work, but it emphasizes inspectable memory, provenance, and cross-tool use. Less automatic at capture time, more controllable at recall time.",
       },
       {
-        question: "Can I migrate from claude-mem to Origin?",
+        question: "Can I migrate from claude-mem to Wenlan?",
         answer:
-          "There is no automated importer at the moment. claude-mem's memories are accessible through MCP, so a one-off script that reads them and POSTs to Origin's `/api/ingest/memory` endpoint would do the job. If demand picks up I would ship an importer. So far, manual capture during normal work has been faster than building one.",
+          "There is no automated importer at the moment. claude-mem's memories are accessible through MCP, so a one-off script that reads selected durable items and POSTs to Wenlan's `/api/memory/store` endpoint would do the job. So far, manual capture during normal work has been faster than building one.",
       },
       {
         question: "Is automatic capture really lower-friction in the long run?",
         answer:
-          "Friction at capture time is one form. Friction at recall time is another: a store filled with low-signal observations is one the AI has to wade through. Explicit capture front-loads the work; observer mode back-loads it. Origin uses explicit capture plus background distillation as the balance.",
+          "Friction at capture time is one form. Friction at recall time is another: a store filled with low-signal observations is one the AI has to wade through. Explicit capture front-loads the work; observer mode back-loads it. Wenlan uses explicit capture, handoffs, manual distillation, and optional background page work as the balance.",
       },
       {
-        question: "Does Origin watch my Claude Code session in the background?",
+        question: "Does Wenlan watch my Claude Code session in the background?",
         answer:
           "Not by default. There is no observer process. The daemon sees only what you capture or what you import. Session-level observation could be a build target later, but it is not a current feature, and the lack of it is intentional.",
       },
@@ -1078,42 +1068,42 @@ const baseArticles: LearnArticle[] = [
       "claude-code-memory",
       "mcp-memory-server",
       "ai-agent-handoff-loop",
-      "origin-vs-basic-memory",
-      "origin-vs-superlocal-memory",
+      "wenlan-vs-basic-memory",
+      "wenlan-vs-superlocal-memory",
       "ai-work-memory",
     ],
     cta: {
       heading: "Carry Claude Code context beyond one session",
-      body: "Origin helps Claude Code and other MCP clients use the same local work memory.",
+      body: "Wenlan helps Claude Code and other MCP clients use the same local work memory.",
     },
   },
   {
-    slug: "origin-vs-superlocal-memory",
+    slug: "wenlan-vs-superlocal-memory",
     eyebrow: "Comparison",
     category: "Comparisons",
-    title: "Origin vs Superlocal Memory: Local-First AI Work Memory for Work That Spans Tools",
+    title: "Wenlan vs Superlocal Memory: Local-First AI Work Memory for Work That Spans Tools",
     description:
-      "Compare Origin and Superlocal Memory as local-first AI memory tools for coding work, retrieval quality, MCP workflows, inspectability, and trust.",
-    metaTitle: "Origin vs Superlocal Memory | AI Memory Alternative",
+      "Compare Wenlan and Superlocal Memory as local-first AI memory tools for coding work, retrieval quality, MCP workflows, inspectability, and trust.",
+    metaTitle: "Wenlan vs Superlocal Memory | AI Memory Alternative",
     metaDescription:
-      "Compare Origin and Superlocal Memory for local-first AI memory, coding workflows, MCP clients, retrieval quality, provenance, and durable work context.",
+      "Compare Wenlan and Superlocal Memory for local-first AI memory, coding workflows, MCP clients, retrieval quality, provenance, and durable work context.",
     keywords: [
-      "Origin vs Superlocal Memory",
+      "Wenlan vs Superlocal Memory",
       "Superlocal Memory alternative",
       "local-first AI work memory",
       "AI work memory reliability",
       "AI coding work memory",
     ],
     publishedAt: "2026-05-27",
-    updatedAt: "2026-06-13",
+    updatedAt: "2026-06-24",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     audience: "Developers evaluating local-first memory for AI coding tools",
     heroBullets: [
       "Superlocal Memory now emphasizes a local reliability layer for memory, cache, prompt compression, KV-cache alignment, and LLM cost optimization.",
-      "Origin emphasizes the AI work loop: capture, handoff, distill, retrieve, and keep Markdown records inspectable.",
+      "Wenlan emphasizes the AI work loop: capture, handoff, distill, retrieve, and keep readable artifacts inspectable.",
       "The best Superlocal Memory alternative depends on whether you need a reliability layer or an inspectable work-memory workflow across MCP clients.",
-      "Numbers, links, license notes, and product framing are accurate to 2026-06-13. Check both project pages for newer releases before deciding.",
+      "Wenlan version and framing reflect v0.9.1 on 2026-06-24. Check both project pages for newer releases before deciding.",
     ],
     officialReferences: [
       {
@@ -1125,8 +1115,8 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "Short answer",
         body: [
-          "Superlocal Memory and Origin both sit in the local-first AI memory category, but they optimize for different buying questions. Choose Superlocal Memory if its reliability-engineering framing, modes, benchmark positioning, and IDE integration story match your workflow.",
-          "Choose Origin as the Superlocal Memory alternative when you want local AI work memory centered on sessions, handoffs, human-readable records, MCP clients, and background distillation.",
+          "Superlocal Memory and Wenlan both sit in the local-first AI memory category, but they optimize for different buying questions. Choose Superlocal Memory if its reliability-engineering framing, modes, benchmark positioning, and IDE integration story match your workflow.",
+          "Choose Wenlan as the Superlocal Memory alternative when you want local AI work memory centered on sessions, handoffs, source-cited pages, MCP clients, and deliberate page distillation.",
         ],
       },
       {
@@ -1137,49 +1127,49 @@ const baseArticles: LearnArticle[] = [
         ],
       },
       {
-        heading: "What Origin emphasizes",
+        heading: "What Wenlan emphasizes",
         body: [
-          "Origin focuses on the loop around real AI work: sessions start, work happens, handoffs are written, memory is distilled, and the next session receives relevant context.",
-          "The design keeps Markdown as the human-readable record while the local database provides search indexes, graph context, and hybrid retrieval.",
+          "Wenlan focuses on the loop around real AI work: sessions start, work happens, handoffs are written, memory is distilled, and the next session receives relevant context.",
+          "The daemon-owned store powers retrieval, graph context, and hybrid search while Markdown artifacts stay readable and source-cited for inspection.",
         ],
       },
       {
         heading: "How to decide",
         body: [
           "If you want a reliability-oriented product with its own memory modes and integration claims, Superlocal Memory may be the natural thing to inspect.",
-          "If you want the memory layer to feel like a transparent local record of your work across MCP-compatible tools, Origin is the closer fit.",
+          "If you want the memory layer to feel like a transparent local record of your work across MCP-compatible tools, Wenlan is the closer fit.",
         ],
       },
       {
         heading: "Reading the Superlocal LoCoMo number honestly",
         body: [
-          "Superlocal Memory reports ~74.8% on LoCoMo in their zero-LLM (pure-math) retrieval configuration. Origin's published number on LoCoMo is 70.0% Recall@5. That is a 4.8-point gap on that specific benchmark, and it is real.",
-          "Two things to read alongside it. First, benchmark mix: LongMemEval (LME) is a more recent and more rigorous evaluation, especially for time-aware questions and contradiction handling. Origin reports 93.6% Recall@5 on LME oracle, 500 questions. I did not find LongMemEval numbers on SuperLocalMemory's official site during the 2026-06-13 refresh. The leaderboard story is incomplete without both.",
-          "Second, configuration: 'zero-LLM' means retrieval only, no answer generation. Origin's number is also retrieval-only, but Origin's product is designed to feed memories into an LLM for answer composition, not to be a SOTA retrieval algorithm in isolation. Different products optimize for different downstream tasks.",
+          "Superlocal Memory reports ~74.8% on LoCoMo in their zero-LLM (pure-math) retrieval configuration. Wenlan's published number on LoCoMo is 70.0% Recall@5. That is a 4.8-point gap on that specific benchmark, and it is real.",
+          "Two things to read alongside it. First, benchmark mix: LongMemEval (LME) is a more recent and more rigorous evaluation, especially for time-aware questions and contradiction handling. Wenlan reports 93.6% Recall@5 on LME oracle, 500 questions. I did not find LongMemEval numbers on SuperLocalMemory's official site during the 2026-06-24 source check. The leaderboard story is incomplete without both.",
+          "Second, configuration: 'zero-LLM' means retrieval only, no answer generation. Wenlan's number is also retrieval-only, but Wenlan's product is designed to feed memories into an LLM for answer composition, not to be a SOTA retrieval algorithm in isolation. Different products optimize for different downstream tasks.",
           "If LoCoMo top score is the deciding factor for you, Superlocal currently wins on that benchmark. If the question is 'which tool helps me carry AI work across sessions,' the benchmark is one input, not the answer.",
         ],
       },
       {
-        heading: "Where Origin focuses instead of leaderboards",
+        heading: "Where Wenlan focuses instead of leaderboards",
         body: [
-          "I picked LME oracle as Origin's primary benchmark because the workload matches what actually breaks AI sessions: multi-turn conversations with implicit time references, contradictions across turns, references to facts established weeks ago. LoCoMo and LongMemEval stress different failure modes; run both against your workload if benchmark fit matters.",
-          "The product gaps I notice in daily use are not retrieval ceiling. They are things like: did the AI capture the decision when I made it, is the wiki page distilled cleanly, can I open `~/.origin/pages/auth.md` and read it as prose, can I `git blame` a fact, does the same memory show up in Cursor and Claude Code.",
-          "Those are workflow features, not benchmark features. Origin trades a few LoCoMo points for explicit capture, MCP-first cross-tool reach, projected Markdown, git-versioned writes, and mandatory provenance. If those things matter to your work, the trade is worth it. If they do not, look at Superlocal.",
+          "I picked LME oracle as Wenlan's primary benchmark because the workload matches what actually breaks AI sessions: multi-turn conversations with implicit time references, contradictions across turns, references to facts established weeks ago. LoCoMo and LongMemEval stress different failure modes; run both against your workload if benchmark fit matters.",
+          "The product gaps I notice in daily use are not retrieval ceiling. They are things like: did the AI capture the decision when I made it, is the wiki page distilled cleanly, can I open `~/.wenlan/pages/auth.md` and read it as prose, can I inspect the source memory IDs and artifact git history, does the same memory show up in Cursor and Claude Code.",
+          "Those are workflow features, not benchmark features. Wenlan trades a few LoCoMo points for explicit capture, MCP-first cross-tool reach, projected Markdown, versioned readable artifacts, and mandatory provenance. If those things matter to your work, the trade is worth it. If they do not, look at Superlocal.",
         ],
       },
       {
         heading: "The 10-second inspectability test",
         body: [
-          "Try this on any memory layer you are evaluating, including Origin. Open the tool. Find one memory the AI stored about you in the last week. Now answer five questions in under 10 seconds: can you see the verbatim text, can you see when it was stored, can you see what generated it, can you see what changes have been made to it since, can you delete it without an admin panel.",
-          "Origin scores high on this test by design. Every memory has a Markdown file under `~/.origin/`. Every write is a commit in `~/.origin/.git/`. `origin recall <id>` shows verbatim text. Deletion is `origin forget <id>`, or `rm` plus a daemon resync.",
+          "Try this on any memory layer you are evaluating, including Wenlan. Open the tool. Find one memory the AI stored about you in the last week. Now answer five questions in under 10 seconds: can you see the verbatim text, can you see when it was stored, can you see what generated it, can you see what changes have been made to it since, can you delete it without an admin panel.",
+          "Wenlan scores high on this test by design. Raw captures live in the daemon store for retrieval, while readable pages, session logs, and project status live under `~/.wenlan/` and are versioned in `~/.wenlan/.git/`. `wenlan recall <query>` shows matching memory text. Deletion goes through `/forget` or the MCP forget tool by source ID.",
           "Superlocal Memory now publishes source, docs, and research papers as part of its open research positioning. Use those materials to run the same inspection test against its current record format, provenance surface, history, and deletion flow before deciding.",
         ],
         bullets: [
-          "Verbatim text visible? `origin recall <id>` in Origin.",
-          "When was it stored? Git commit timestamp in Origin.",
+          "Verbatim text visible? `wenlan recall <id>` in Wenlan.",
+          "When was it stored? Daemon metadata for captures and git history for projected readable artifacts in Wenlan.",
           "What generated it? Source IDs on distilled pages, mandatory.",
-          "Change history? `git log path/to/memory.md` in Origin.",
-          "Delete without an admin panel? `origin forget <id>` or `rm` in Origin.",
+          "Change history? `git log pages/<topic>.md` for projected pages and session artifacts in Wenlan.",
+          "Delete without an admin panel? `/forget <id>` or MCP forget by source ID in Wenlan.",
         ],
       },
       {
@@ -1188,7 +1178,7 @@ const baseArticles: LearnArticle[] = [
           "If I were picking a memory layer from scratch today, I would run a two-week parallel trial. Week one: install both, point an MCP-capable AI client at each, and use them for real work. No synthesized traffic. Real captures only.",
           "End of week one, run three queries against each: 'what did I decide about X last Monday,' 'who did I have a conversation with about Y,' 'what is the current status of Z.' Compare not just accuracy, but readability of the response and traceability of where it came from.",
           "Week two, deliberately try to break each one. Introduce a contradiction by capturing two conflicting facts on consecutive days. Use a different MCP client. Kill the daemon mid-session and restart it. The product that recovers cleanly and surfaces the contradiction is the one I would keep.",
-          "I am biased; I built Origin. This trial shape will surface real differences faster than reading either product page, including this one.",
+          "I am biased; I built Wenlan. This trial shape will surface real differences faster than reading either product page, including this one.",
         ],
       },
     ],
@@ -1197,43 +1187,37 @@ const baseArticles: LearnArticle[] = [
       rows: [
         {
           dimension: "Center of gravity",
-          origin:
-            "Local AI work loop: sessions, handoffs, distilled wiki pages, provenance, Markdown records.",
+          wenlan: "Local AI work loop: sessions, handoffs, distilled wiki pages, provenance, readable artifacts.",
           competitor:
             "Local AI reliability layer spanning memory, cache, compression, and cost optimization, with benchmark-led positioning.",
         },
         {
           dimension: "Retrieval",
-          origin:
-            "Hybrid: vector (BGE-Base-EN-v1.5-Q) + FTS5 + reciprocal-rank fusion + knowledge-graph context. 93.6% Recall@5 on LongMemEval (oracle, 500 Q), 70.0% on LoCoMo.",
+          wenlan: "Hybrid: vector (BGE-Base-EN-v1.5-Q) + FTS5 + reciprocal-rank fusion + knowledge-graph context. 93.6% Recall@5 on LongMemEval (oracle, 500 Q), 70.0% on LoCoMo.",
           competitor:
-            "Pure-math retrieval emphasized in public materials. Reports ~74.8% on LoCoMo in their zero-LLM configuration, currently ahead of Origin on that specific benchmark.",
+            "Pure-math retrieval emphasized in public materials. Reports ~74.8% on LoCoMo in their zero-LLM configuration, currently ahead of Wenlan on that specific benchmark.",
         },
         {
           dimension: "Human-readable records",
-          origin:
-            "Markdown projection under ~/.origin/, symlinkable into Obsidian; pages and session logs are plain text.",
+          wenlan: "Markdown projection under ~/.wenlan/, symlinkable into Obsidian; pages and session logs are plain text.",
           competitor:
             "Public source, docs, and papers are available; evaluate whether its current memory records expose the plain-file workflow you want.",
         },
         {
           dimension: "Provenance + audit",
-          origin:
-            "Mandatory source_memory_ids; daemon returns HTTP 422 on empty source. Low-confidence captures and contradictions surface for review.",
+          wenlan: "Mandatory source_memory_ids; daemon returns HTTP 422 on empty source. Low-confidence captures and contradictions surface for review.",
           competitor:
             "Reliability-mode framing with public docs and source. Compare the exact per-memory source, history, and deletion surfaces before choosing.",
         },
         {
           dimension: "Versioning",
-          origin:
-            "Readable pages, session logs, and project status Markdown get local git history in ~/.origin/.git/.",
+          wenlan: "Readable pages, session logs, and project status Markdown get local git history in ~/.wenlan/.git/.",
           competitor:
             "No public commitment to per-write git history.",
         },
         {
           dimension: "License + openness",
-          origin:
-            "Apache-2.0 daemon, CLI, MCP server. Repo: github.com/7xuanlu/origin.",
+          wenlan: "Apache-2.0 daemon, CLI, MCP server. Repo: github.com/7xuanlu/wenlan.",
           competitor:
             "Current official site presents SuperLocalMemory as open research under AGPL v3, with public source code, documentation, and papers.",
         },
@@ -1241,57 +1225,57 @@ const baseArticles: LearnArticle[] = [
     },
     faqs: [
       {
-        question: "Do Origin and Superlocal Memory solve the same problem?",
+        question: "Do Wenlan and Superlocal Memory solve the same problem?",
         answer:
-          "They overlap around local-first AI work memory and retrieval for coding workflows. The difference is framing: Superlocal Memory emphasizes reliability engineering, Origin emphasizes the AI work loop and transparent local records.",
+          "They overlap around local-first AI work memory and retrieval for coding workflows. The difference is framing: Superlocal Memory emphasizes reliability engineering, Wenlan emphasizes the AI work loop and transparent local records.",
       },
       {
-        question: "Why does Origin talk about Markdown and indexes?",
+        question: "Why does Wenlan talk about Markdown and indexes?",
         answer:
-          "Origin keeps human-readable artifacts in Markdown and uses the local libSQL store for retrieval indexes. That makes memory easier to inspect (you can open the file in any editor) while still giving agents fast hybrid search.",
+          "Wenlan keeps human-readable artifacts in Markdown and uses the local libSQL store for retrieval indexes. That makes memory easier to inspect (you can open the file in any editor) while still giving agents fast hybrid search.",
       },
       {
-        question: "Why does Origin not lead with the LoCoMo number?",
+        question: "Why does Wenlan not lead with the LoCoMo number?",
         answer:
-          "Because Origin is behind on it: 70.0% vs Superlocal's reported ~74.8% in their zero-LLM config. Leading with a benchmark Origin does not win is misleading. The 93.6% LME oracle number is the one I am willing to defend as primary. The LoCoMo number is published for honesty, not as a headline.",
+          "Because Wenlan is behind on it: 70.0% vs Superlocal's reported ~74.8% in their zero-LLM config. Leading with a benchmark Wenlan does not win is misleading. The 93.6% LME oracle number is the one I am willing to defend as primary. The LoCoMo number is published for honesty, not as a headline.",
       },
       {
         question: "Is Superlocal Memory open-source?",
         answer:
-          "Yes. As of 2026-06-13, the official SuperLocalMemory site presents it as open research under AGPL v3 and says the source code, documentation, and research papers are public. Origin's daemon, CLI, and MCP server are Apache-2.0 with source on github.com/7xuanlu/origin.",
+          "Yes. As of the 2026-06-24 source check, the official SuperLocalMemory site presents it as open source under AGPL v3. Wenlan's daemon, CLI, and MCP server are Apache-2.0 with source on github.com/7xuanlu/wenlan.",
       },
       {
         question: "How often do these numbers get re-run?",
         answer:
-          "Origin's eval harness lives under `crates/origin-core/src/eval/` and runs locally on demand against the same fixtures the published numbers use. Anyone can re-run them. I refresh the published number when a release changes it materially. Last refresh: v0.7.0 on 2026-05-27.",
+          "Wenlan's eval harness lives under `crates/wenlan-core/src/eval/` and runs locally on demand against the same fixtures the published numbers use. Anyone can re-run them. I refresh the published number when a release changes it materially. Last refresh: v0.9.1 on 2026-06-24.",
       },
     ],
     relatedSlugs: [
       "local-first-ai-memory",
       "markdown-local-index-ai-memory",
       "ai-agent-handoff-loop",
-      "origin-vs-basic-memory",
-      "origin-vs-claude-mem",
+      "wenlan-vs-basic-memory",
+      "wenlan-vs-claude-mem",
       "ai-work-memory",
     ],
     cta: {
       heading: "Build memory around the work loop",
-      body: "Origin keeps AI work context local, inspectable, and available to MCP-compatible tools.",
+      body: "Wenlan keeps AI work context local, inspectable, and available to MCP-compatible tools.",
     },
   },
   {
     slug: "markdown-local-index-ai-memory",
     eyebrow: "Architecture",
     category: "Concepts",
-    title: "Why Origin Uses Markdown plus a Local Index",
+    title: "Why Wenlan Uses Readable Artifacts plus a Local Store",
     description:
-      "Origin stores human-readable Markdown records and uses a local database as the retrieval index, so AI memory stays inspectable and useful.",
-    metaTitle: "Markdown plus Local Index for AI Memory | Origin",
+      "Wenlan keeps raw captures in a daemon-owned local store and projects readable artifacts, so AI memory stays inspectable and useful.",
+    metaTitle: "Readable Artifacts plus Local Store for AI Memory | Wenlan",
     metaDescription:
-      "Learn why Origin combines human-readable Markdown with a local retrieval index instead of hiding AI memory inside an opaque database.",
+      "Learn why Wenlan combines a daemon-owned local retrieval store with human-readable artifacts instead of hiding AI memory inside an opaque database.",
     keywords: [
-      "Markdown AI memory",
-      "local index AI memory",
+      "readable AI memory",
+      "local store AI memory",
       "AI memory database",
       "human-readable AI memory",
       "transparent AI memory",
@@ -1301,8 +1285,8 @@ const baseArticles: LearnArticle[] = [
     readingTime: "5 min read",
     audience: "People who want AI memory they can inspect and trust",
     heroBullets: [
-      "Markdown is the durable record people can read, edit, export, and review.",
-      "The database stores retrieval indexes, graph structure, and search metadata.",
+      "Raw captures live in the daemon-owned local store that powers recall.",
+      "Readable pages, sessions, and status files are projected under ~/.wenlan for inspection.",
       "This split keeps memory useful to agents without making it opaque to humans.",
     ],
     sections: [
@@ -1314,24 +1298,24 @@ const baseArticles: LearnArticle[] = [
         ],
       },
       {
-        heading: "Markdown is the record",
+        heading: "Readable artifacts are the projection",
         body: [
-          "Origin keeps memory artifacts in Markdown so people can open them, read them, correct them, export them, and reason about them without a special UI.",
-          "That does not mean Markdown has to be the only system. It means the human-readable artifact remains the source people can trust.",
+          "Wenlan projects pages, session logs, and project status as readable Markdown so people can open them, read them, export them, and reason about them without a special UI.",
+          "That does not mean every raw capture is a Markdown file. It means the human-facing artifacts remain inspectable while the daemon keeps the retrieval store authoritative.",
         ],
       },
       {
-        heading: "The local database is the index",
+        heading: "The daemon store powers recall",
         body: [
-          "Agents still need fast retrieval. Origin uses a local database for vector search, full-text search, graph context, provenance, and other metadata that make memories useful during an AI session.",
-          "The database helps find the right context. It should not be the only place where meaning is locked away.",
+          "Agents still need fast retrieval. Wenlan uses a local daemon store for captures, vector search, full-text search, graph context, provenance, and other metadata that make memories useful during an AI session.",
+          "The store is not a cloud black box. It is local application data, and the pages, sessions, and status artifacts give people a readable view into the work loop.",
         ],
       },
       {
         heading: "Why the split matters",
         body: [
-          "The Markdown-plus-index design gives both sides what they need: humans get control and readability, while agents get retrieval speed and context packaging.",
-          "That is the basis for Origin's trust story. Memory can be powerful without becoming invisible.",
+          "The readable-artifact-plus-local-store design gives both sides what they need: humans get inspection and portability, while agents get retrieval speed and context packaging.",
+          "That is the basis for Wenlan's trust story. Memory can be powerful without becoming invisible.",
         ],
       },
     ],
@@ -1339,18 +1323,18 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Why not store everything only in Markdown?",
         answer:
-          "Markdown is excellent for human-readable records, but agents need indexes for fast semantic and full-text retrieval. Origin uses both.",
+          "Markdown is excellent for human-readable artifacts, but agents need daemon-owned indexes for fast semantic and full-text retrieval. Wenlan uses both.",
       },
       {
         question: "Why not store everything only in a database?",
         answer:
-          "A database-only memory layer can become opaque. Origin keeps readable artifacts available so people can inspect and correct what AI tools rely on.",
+          "A database-only memory layer can become opaque. Wenlan keeps readable artifacts available so people can inspect and correct what AI tools rely on.",
       },
     ],
-    relatedSlugs: ["local-first-ai-memory", "origin-vs-basic-memory", "ai-work-memory"],
+    relatedSlugs: ["local-first-ai-memory", "wenlan-vs-basic-memory", "ai-work-memory"],
     cta: {
       heading: "Keep memory readable and searchable",
-      body: "Origin pairs Markdown records with a local retrieval index so memory stays useful to agents and visible to people.",
+      body: "Wenlan pairs readable artifacts with a local retrieval store so memory stays useful to agents and visible to people.",
     },
   },
   {
@@ -1360,7 +1344,7 @@ const baseArticles: LearnArticle[] = [
     title: "The AI Agent Handoff Loop: How Work Carries Across Sessions",
     description:
       "A practical model for carrying decisions, lessons, gotchas, and next steps from one AI work session into the next.",
-    metaTitle: "AI Agent Handoff Loop | Origin",
+    metaTitle: "AI Agent Handoff Loop | Wenlan",
     metaDescription:
       "Learn how the AI agent handoff loop helps coding agents and AI tools carry decisions, lessons, project context, and next steps across sessions.",
     keywords: [
@@ -1390,7 +1374,7 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "The loop",
         body: [
-          "Origin follows a simple rhythm: load context when a session starts, capture durable knowledge during work, write a handoff when the session ends, refine memory between sessions, and retrieve the right context next time.",
+          "Wenlan follows a simple rhythm: load context when a session starts, capture durable knowledge during work, write a handoff when the session ends, refine memory between sessions, and retrieve the right context next time.",
           "The loop is deliberately practical. It focuses on what future agents need to act well: decisions, lessons, constraints, unresolved threads, and source provenance.",
         ],
       },
@@ -1408,10 +1392,10 @@ const baseArticles: LearnArticle[] = [
         ],
       },
       {
-        heading: "How Origin supports it",
+        heading: "How Wenlan supports it",
         body: [
-          "Origin gives agents a place to save the durable parts of the session and a way to recall them through MCP later.",
-          "Between sessions, Origin deduplicates repeat facts, links related ideas, distills wiki pages, and keeps provenance attached so the memory gets better instead of merely larger.",
+          "Wenlan gives agents a place to save the durable parts of the session and a way to recall them through MCP later.",
+          "Between sessions, Wenlan keeps captures, handoffs, related entities, and source-backed pages connected. Manual `/distill` turns repeated context into readable pages, while optional local models or API keys can add background page work.",
         ],
       },
     ],
@@ -1430,7 +1414,7 @@ const baseArticles: LearnArticle[] = [
     relatedSlugs: ["claude-code-memory", "mcp-memory-server", "markdown-local-index-ai-memory"],
     cta: {
       heading: "Stop restarting from zero",
-      body: "Origin makes handoffs, decisions, and project context available when the next AI session begins.",
+      body: "Wenlan makes handoffs, decisions, and project context available when the next AI session begins.",
     },
   },
 ];

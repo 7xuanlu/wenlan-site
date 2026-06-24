@@ -1,7 +1,7 @@
 {
-  "name": "Origin",
-  "short_name": "Origin",
-  "description": "Local-first memory for AI work. Hybrid retrieval, real git versioning, mandatory provenance, one daemon across MCP-compatible AI tools.",
+  "name": "Wenlan",
+  "short_name": "Wenlan",
+  "description": "A living personal knowledge library for AI work, built by agents and grounded in source-cited pages.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

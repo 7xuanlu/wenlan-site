@@ -14,7 +14,7 @@ No test framework is configured.
 
 ## Architecture
 
-Single-page marketing site for [Origin](https://useorigin.app) built with **Next.js 16** (App Router) + **React 19** + **Tailwind CSS 4**. Deployed on Vercel.
+Single-page marketing site for [Wenlan](https://useorigin.app) built with **Next.js 16** (App Router) + **React 19** + **Tailwind CSS 4**. Deployed on Vercel.
 
 ### Layout
 
@@ -24,13 +24,13 @@ Single-page marketing site for [Origin](https://useorigin.app) built with **Next
 
 ### Theming
 
-Dark/light toggle via `data-theme` attribute on `<html>`, not Tailwind's `dark:` class. All theme colors are CSS custom variables prefixed `--o-` defined in `globals.css` with `:root` (dark default) and `[data-theme="light"]` overrides. The `ThemeProvider` context (`theme-provider.tsx`) persists choice to `localStorage("origin-theme")`.
+Dark/light toggle via `data-theme` attribute on `<html>`, not Tailwind's `dark:` class. All theme colors are CSS custom variables prefixed `--o-` defined in `globals.css` with `:root` (dark default) and `[data-theme="light"]` overrides. The `ThemeProvider` context (`theme-provider.tsx`) persists choice to `localStorage("wenlan-theme")`.
 
 A blocking `<script>` in `layout.tsx` `<head>` reads `localStorage` before paint to prevent flash.
 
 ### Design tokens
 
-Accent palette: `--color-origin-warm` (#d4884a), `--color-origin-indigo` (#7b7be8), `--color-origin-sage` (#8ab892), `--color-origin-amber` (#e0a850). These are static across themes; semantic tokens (`--o-bg`, `--o-text`, `--o-card-bg`, etc.) change per theme.
+Accent palette: `--color-wenlan-warm` (#d4884a), `--color-wenlan-indigo` (#7b7be8), `--color-wenlan-sage` (#8ab892), `--color-wenlan-amber` (#e0a850). These are static across themes; semantic tokens (`--o-bg`, `--o-text`, `--o-card-bg`, etc.) change per theme.
 
 ### Animations
 

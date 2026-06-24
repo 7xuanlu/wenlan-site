@@ -36,17 +36,17 @@ Generated from authenticated GSC UI normalized; CSV download unavailable in Code
 
 | Query | Query group | Current page | Impressions | Clicks | CTR | Avg position | Recommended action | Diagnosis |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- |
-| `superlocal memory` | Comparisons | `/learn/origin-vs-superlocal-memory` | 3 | 0 | 0.00% | 9.0 | title-meta-refresh | Impressions with zero clicks in striking distance. Refresh title, meta, H1, and first answer. |
+| `superlocal memory` | Comparisons | `/learn/wenlan-vs-superlocal-memory` | 3 | 0 | 0.00% | 9.0 | title-meta-refresh | Impressions with zero clicks in striking distance. Refresh title, meta, H1, and first answer. |
 | `"origin app" -"blue origin" -"a trusted origin" -"country of origin" -"nation of origin" -"origin of electro" -"owe its origin" -"owes its origin" -"unknown origin" -site:reddit.com -site:twitter.com -site:x.com -site:wykop.pl -site:tripadvisor.com -site:youtube.com -site:yelp.com -site:booking.com -site:facebook.com -site:instagram.com -site:tiktok.com` | Brand/entity | `/` | 19 | 0 | 0.00% | 1.7 | wait | Ranking is already strong but clicks are absent. Review SERP intent and title before changing page copy. |
 | `"origin" "app" -"blue origin" -"a trusted origin" -"country of origin" -"nation of origin" -"origin of electro" -"owe its origin" -"owes its origin" -"unknown origin" -site:reddit.com -site:twitter.com -site:x.com -site:wykop.pl -site:tripadvisor.com -site:youtube.com -site:yelp.com -site:booking.com -site:facebook.com -site:instagram.com -site:tiktok.com` | Brand/entity | `/` | 7 | 0 | 0.00% | 1.9 | wait | Ranking is already strong but clicks are absent. Review SERP intent and title before changing page copy. |
 | `claude code memory` | Claude Code | `/learn/claude-code-memory` | 6 | 0 | 0.00% | 41.2 | wait | Mapped page ranks weakly, but evidence is too thin for a new action. Keep measuring and review page quality or internal links. |
 | `origin memory` | Brand/entity | `/` | 3 | 1 | 33.33% | 5.7 | wait | No immediate content action. Keep measuring before changing the page. |
-| `origin mcp` | MCP memory | `/learn/mcp-memory-server` | 3 | 0 | 0.00% | 3.3 | wait | Ranking is already strong but clicks are absent. Review SERP intent and title before changing page copy. |
+| `wenlan mcp` | MCP memory | `/learn/mcp-memory-server` | 3 | 0 | 0.00% | 3.3 | wait | Ranking is already strong but clicks are absent. Review SERP intent and title before changing page copy. |
 | `claude memory mcp` | MCP memory | `/learn/mcp-memory-server` | 2 | 0 | 0.00% | 45.0 | wait | No immediate content action. Keep measuring before changing the page. |
-| `claude code /memory` | Claude Code | `/learn/claude-code-memory-command-vs-origin` | 2 | 0 | 0.00% | 47.0 | wait | No immediate content action. Keep measuring before changing the page. |
+| `claude code /memory` | Claude Code | `/learn/claude-code-memory-command-vs-wenlan` | 2 | 0 | 0.00% | 47.0 | wait | No immediate content action. Keep measuring before changing the page. |
 | `useorigin` | Brand/entity | `/` | 1 | 0 | 0.00% | 9.0 | wait | No immediate content action. Keep measuring before changing the page. |
 | `codememory mcp` | MCP memory | `/learn/mcp-memory-server` | 1 | 0 | 0.00% | 37.0 | wait | No immediate content action. Keep measuring before changing the page. |
-| `super local memory` | Comparisons | `/learn/origin-vs-superlocal-memory` | 1 | 0 | 0.00% | 37.0 | wait | No immediate content action. Keep measuring before changing the page. |
+| `super local memory` | Comparisons | `/learn/wenlan-vs-superlocal-memory` | 1 | 0 | 0.00% | 37.0 | wait | No immediate content action. Keep measuring before changing the page. |
 | `claude code persistent memory` | Claude Code | `/learn/claude-code-memory` | 1 | 0 | 0.00% | 44.0 | wait | No immediate content action. Keep measuring before changing the page. |
 | `claude code memory repo` | Claude Code | `/learn/claude-code-memory` | 1 | 0 | 0.00% | 45.0 | wait | No immediate content action. Keep measuring before changing the page. |
 | `claude code memory server` | MCP memory | `/learn/mcp-memory-server` | 1 | 0 | 0.00% | 45.0 | wait | No immediate content action. Keep measuring before changing the page. |
@@ -90,7 +90,7 @@ Generated from authenticated GSC UI normalized; CSV download unavailable in Code
 
 - `https://useorigin.app/robots.txt` is crawlable and declares the sitemap.
 - `https://useorigin.app/sitemap.xml` returns 200, contains 93 `<loc>` entries, and no `/guides/*` URLs.
-- Key 200 URLs checked: `/`, `/learn`, `/learn/claude-code-memory`, `/learn/mcp-memory-server`, `/learn/how-to-add-mcp-memory-to-cursor`, `/learn/ai-work-memory`, `/learn/origin-vs-superlocal-memory`, `/docs/configuration`.
+- Key 200 URLs checked: `/`, `/learn`, `/learn/claude-code-memory`, `/learn/mcp-memory-server`, `/learn/how-to-add-mcp-memory-to-cursor`, `/learn/ai-work-memory`, `/learn/wenlan-vs-superlocal-memory`, `/docs/configuration`.
 - Checked key pages have self-canonical tags, index/follow robots metadata, no blocking `X-Robots-Tag`, and structured data where expected.
 - No `FAQPage` JSON-LD was found or added.
 - Utility URLs `/llms.txt`, `/llms-full.txt`, `/feed.xml`, and `/.well-known/security.txt` return 200 with `X-Robots-Tag: noindex, follow`; `/sitemap.xml` returns 200 without `X-Robots-Tag`.
@@ -111,7 +111,7 @@ Generated from authenticated GSC UI normalized; CSV download unavailable in Code
 - Added a visible `/docs/configuration` link to `/learn/claude-code-memory` from the configuration quick path, giving the weak-ranking Claude Code memory guide another relevant internal link from an impression-bearing page.
 - Added a contextual `/learn/mcp-memory-server` install-section link to `/learn/claude-code-memory`, so MCP memory readers can move into the weak-ranking Claude Code memory guide without relying only on the related-articles sidebar.
 - Refreshed `/docs/configuration` title, meta description, summary, and first section around configuration for AI work memory.
-- Refreshed `/learn/origin-vs-superlocal-memory` to match current public SuperLocalMemory positioning: memory, cache, prompt compression, KV-cache alignment, and AGPL v3/open research framing. Savings claims are attributed to SuperLocalMemory, not stated as Origin-verified results.
+- Refreshed `/learn/wenlan-vs-superlocal-memory` to match current public SuperLocalMemory positioning: memory, cache, prompt compression, KV-cache alignment, and AGPL v3/open research framing. Savings claims are attributed to SuperLocalMemory, not stated as Wenlan-verified results.
 - Split `publishedAt` from `updatedAt` for Learn and Docs article schema/OpenGraph/RSS so refreshes can update `dateModified` without rewriting original publication dates.
 - Updated the weekly SEO generator to derive the report evidence source and date range from normalized GSC CSV metadata when available.
 - Updated the weekly SEO generator to label snapshot sums as query-table metrics, not property totals.
@@ -148,5 +148,5 @@ Do not create a new Learn page unless GSC/Searchfit shows a recurring query clus
 - [ ] Add changed pages to the next weekly comparison.
 - [x] Generate `pnpm seo:ai-visibility -- --date 2026-06-13` worksheet from `docs/seo-measurement.md`.
 - [x] Generate `pnpm seo:ai-visibility -- --date 2026-06-22` worksheet from `docs/seo-measurement.md`.
-- [ ] Manually check whether AI assistants mention Origin accurately for the tracked prompts in `docs/seo-measurement.md`.
+- [ ] Manually check whether AI assistants mention Wenlan accurately for the tracked prompts in `docs/seo-measurement.md`.
 - [ ] Next measurement date: 2026-06-29.

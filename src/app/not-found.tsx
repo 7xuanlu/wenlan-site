@@ -12,7 +12,7 @@ const popularDestinations = [
   {
     href: "/docs/get-started",
     label: "Get started",
-    description: "Install Origin and verify the first local memory loop.",
+    description: "Install Wenlan and verify the first local memory loop.",
   },
   {
     href: "/docs/daily-workflow",
@@ -27,17 +27,17 @@ const popularDestinations = [
   {
     href: "/learn/mcp-memory-server",
     label: "MCP memory server",
-    description: "How Origin exposes memory through MCP.",
+    description: "How Wenlan exposes memory through MCP.",
   },
   {
-    href: "/learn/origin-vs-basic-memory",
-    label: "Origin vs Basic Memory",
+    href: "/learn/wenlan-vs-basic-memory",
+    label: "Wenlan vs Basic Memory",
     description: "Markdown knowledge base vs AI work-session memory layer.",
   },
   {
     href: "/about",
     label: "About",
-    description: "Project background, principles, and the person behind Origin.",
+    description: "Project background, principles, and the person behind Wenlan.",
   },
 ];
 
@@ -79,7 +79,7 @@ export default function NotFound() {
               <Link
                 key={d.href}
                 href={d.href}
-                className="card-origin group block rounded-xl p-5 transition-transform duration-150 hover:-translate-y-1"
+                className="card-wenlan group block rounded-xl p-5 transition-transform duration-150 hover:-translate-y-1"
               >
                 <p className="font-serif text-lg font-medium tracking-tight text-[var(--o-text)]">
                   {d.label}

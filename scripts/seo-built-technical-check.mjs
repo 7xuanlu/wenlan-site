@@ -3,7 +3,63 @@
 import { readFile, readdir, stat } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
 
+const REBRAND_REDIRECTS = [
+  { source: "/learn/origin-for-claude-code", destination: "/learn/wenlan-for-claude-code", statusCode: 308 },
+  {
+    source: "/learn/claude-code-memory-command-vs-origin",
+    destination: "/learn/claude-code-memory-command-vs-wenlan",
+    statusCode: 308,
+  },
+  {
+    source: "/learn/where-origin-stores-claude-code-memory",
+    destination: "/learn/where-wenlan-stores-claude-code-memory",
+    statusCode: 308,
+  },
+  { source: "/learn/origin-vs-basic-memory", destination: "/learn/wenlan-vs-basic-memory", statusCode: 308 },
+  { source: "/learn/origin-vs-claude-mem", destination: "/learn/wenlan-vs-claude-mem", statusCode: 308 },
+  {
+    source: "/learn/origin-vs-superlocal-memory",
+    destination: "/learn/wenlan-vs-superlocal-memory",
+    statusCode: 308,
+  },
+  { source: "/learn/origin-codex-workflow", destination: "/learn/wenlan-codex-workflow", statusCode: 308 },
+  { source: "/learn/origin-cursor-workflow", destination: "/learn/wenlan-cursor-workflow", statusCode: 308 },
+  {
+    source: "/learn/origin-claude-desktop-workflow",
+    destination: "/learn/wenlan-claude-desktop-workflow",
+    statusCode: 308,
+  },
+  {
+    source: "/learn/origin-gemini-cli-workflow",
+    destination: "/learn/wenlan-gemini-cli-workflow",
+    statusCode: 308,
+  },
+  {
+    source: "/learn/origin-vscode-mcp-workflow",
+    destination: "/learn/wenlan-vscode-mcp-workflow",
+    statusCode: 308,
+  },
+  {
+    source: "/learn/origin-vs-mcp-memory-service",
+    destination: "/learn/wenlan-vs-mcp-memory-service",
+    statusCode: 308,
+  },
+  {
+    source: "/learn/origin-vs-chatgpt-memory",
+    destination: "/learn/wenlan-vs-chatgpt-memory",
+    statusCode: 308,
+  },
+  {
+    source: "/learn/origin-vs-obsidian-ai-memory",
+    destination: "/learn/wenlan-vs-obsidian-ai-memory",
+    statusCode: 308,
+  },
+  { source: "/learn/origin-vs-notion-ai", destination: "/learn/wenlan-vs-notion-ai", statusCode: 308 },
+  { source: "/learn/origin-vs-mem0", destination: "/learn/wenlan-vs-mem0", statusCode: 308 },
+];
+
 const REQUIRED_REDIRECTS = [
+  ...REBRAND_REDIRECTS,
   { source: "/learn/ai-memory-app", destination: "/learn/ai-work-memory", statusCode: 308 },
   { source: "/guides", destination: "/learn", statusCode: 308 },
   { source: "/guides/:slug", destination: "/learn/:slug", statusCode: 308 },
@@ -29,6 +85,9 @@ const OLD_SITEMAP_URL_PATTERNS = [
   /^https:\/\/useorigin\.app\/guides(?:\/|$)/,
   /^https:\/\/useorigin\.app\/docs\/guides(?:\/|$)/,
   /^https:\/\/useorigin\.app\/learn\/ai-memory-app$/,
+  ...REBRAND_REDIRECTS.map(
+    ({ source }) => new RegExp(`^https://useorigin\\.app${source.replaceAll("/", "\\/")}$`),
+  ),
 ];
 
 const REQUIRED_SITEMAP_LOCS = [
@@ -38,7 +97,7 @@ const REQUIRED_SITEMAP_LOCS = [
   "https://useorigin.app/learn/mcp-memory-server",
   "https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor",
   "https://useorigin.app/learn/ai-work-memory",
-  "https://useorigin.app/learn/origin-vs-superlocal-memory",
+  "https://useorigin.app/learn/wenlan-vs-superlocal-memory",
   "https://useorigin.app/docs/configuration",
 ];
 const REQUIRED_ROBOTS_SITEMAP = "https://useorigin.app/sitemap.xml";
@@ -73,8 +132,8 @@ const REQUIRED_HTML_PAGES = [
     type: "Article",
   },
   {
-    path: "learn/origin-vs-superlocal-memory.html",
-    canonical: "https://useorigin.app/learn/origin-vs-superlocal-memory",
+    path: "learn/wenlan-vs-superlocal-memory.html",
+    canonical: "https://useorigin.app/learn/wenlan-vs-superlocal-memory",
     type: "Article",
   },
   {

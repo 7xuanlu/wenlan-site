@@ -1,5 +1,5 @@
 {
-  "name": "origin-website",
+  "name": "wenlan-site",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -8,26 +8,26 @@
     "postbuild": "node scripts/indexnow-ping.mjs",
     "seo:weekly": "node scripts/seo-weekly.mjs",
     "seo:weekly:run": "node scripts/seo-weekly-pipeline.mjs",
-    "seo:weekly:sample": "node scripts/seo-weekly-pipeline.mjs --input-dir scripts/fixtures/seo-weekly --date 2026-06-07 --output /tmp/origin-weekly-seo-sample.md",
+    "seo:weekly:sample": "node scripts/seo-weekly-pipeline.mjs --input-dir scripts/fixtures/seo-weekly --date 2026-06-07 --output /tmp/wenlan-weekly-seo-sample.md",
     "seo:gsc:fetch": "node scripts/seo-gsc-fetch.mjs",
     "seo:ai-visibility": "node scripts/seo-ai-visibility-worksheet.mjs",
     "seo:technical:built": "node scripts/seo-built-technical-check.mjs",
     "seo:technical:deployed": "node scripts/seo-deployed-technical-check.mjs",
-    "test:seo": "node --test scripts/seo-weekly.test.mjs",
+    "test:seo": "node --test scripts/*.test.mjs",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "pnpm exec tsc --noEmit --incremental false"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/7xuanlu/origin-website.git"
+    "url": "git+https://github.com/7xuanlu/wenlan-site.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/7xuanlu/origin-website/issues"
+    "url": "https://github.com/7xuanlu/wenlan-site/issues"
   },
-  "homepage": "https://github.com/7xuanlu/origin-website#readme",
+  "homepage": "https://github.com/7xuanlu/wenlan-site#readme",
   "dependencies": {
     "geist": "^1.7.0",
     "next": "^16.2.1",

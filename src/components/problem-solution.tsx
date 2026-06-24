@@ -40,7 +40,7 @@ function VisualFrame({
   return (
     <div
       aria-hidden="true"
-      className={`origin-visual-frame relative min-h-[22rem] overflow-hidden rounded-2xl border border-[var(--o-visual-border)] bg-[linear-gradient(145deg,var(--o-visual-card-bg),transparent_62%)] shadow-[0_14px_44px_rgba(0,0,0,0.13)] ${className}`}
+      className={`wenlan-visual-frame relative min-h-[22rem] overflow-hidden rounded-2xl border border-[var(--o-visual-border)] bg-[linear-gradient(145deg,var(--o-visual-card-bg),transparent_62%)] shadow-[0_14px_44px_rgba(0,0,0,0.13)] ${className}`}
     >
       <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.035),transparent)]" />
       <div className="relative h-full min-h-[22rem]" style={{ filter: visualFilter }}>
@@ -613,13 +613,13 @@ export function SolutionSection() {
           style={{ opacity, transform: `translateY(${slide}px)` }}
         >
           <p className="mb-5 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
-            What Origin brings
+            What Wenlan brings
           </p>
           <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
             A handoff loop for AI work.
           </h2>
           <p className="mt-6 text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
-            Origin captures decisions, lessons, and next steps as work happens, then loads the handoff when the next agent starts.
+            Wenlan captures decisions, lessons, and next steps as work happens, then loads the handoff when the next agent starts.
           </p>
           <p className="mt-8 max-w-sm border-l border-[var(--o-indigo)]/40 pl-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
             The next conversation starts from the handoff instead of reconstructing the past.
@@ -645,16 +645,16 @@ export function MemoryDistillerySection() {
           style={{ opacity, transform: `translateY(${slide}px)` }}
         >
           <p className="mb-5 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
-            Background distillery
+            Deliberate distillation
           </p>
           <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
-            Origin does the memory chores between sessions.
+            Wenlan turns repeated context into source-backed pages.
           </h2>
           <p className="mt-6 text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
-            Between runs, the daemon deduplicates repeat facts, links related ideas, resolves loose notes, and preserves where each claim came from.
+            Run /distill when repeated captures should become a readable page. Optional model or API-key paths can add background extraction and page refresh work.
           </p>
           <p className="mt-8 max-w-sm border-l border-[var(--o-warm)]/45 pl-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
-            The next run starts with consolidated context, not transcript residue.
+            The next run starts from cited context, not transcript residue.
           </p>
         </div>
 
@@ -686,13 +686,13 @@ export function HumanControlSection() {
             Hybrid storage
           </p>
           <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
-            The database is the index. Markdown is the record.
+            The daemon owns recall. Readable artifacts stay inspectable.
           </h2>
           <p className="mt-6 text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
-            Origin keeps durable artifacts as Markdown pages, handoffs, and source trails you can open, edit, diff, and move. The local database indexes them for agents.
+            Wenlan keeps raw captures in the local daemon store for retrieval, then projects pages, handoffs, and status files you can open, diff, and move.
           </p>
           <p className="mt-8 max-w-sm border-l border-[var(--o-sage)]/50 pl-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
-            Agents search the index. You control the files.
+            Agents recall from the daemon. You inspect the readable files.
           </p>
         </div>
       </div>

@@ -9,6 +9,11 @@ const REPO_ROOT = resolve(__dirname, "..");
 
 const GROUPS = [
   {
+    name: "Brand/entity",
+    patterns: [/\bwenlan\b/i, /useorigin/i],
+    page: "/",
+  },
+  {
     name: "MCP memory",
     patterns: [/\bmcp\b/i, /memory server/i],
     page: "/learn/mcp-memory-server",
@@ -31,12 +36,12 @@ const GROUPS = [
   {
     name: "Comparisons",
     patterns: [/ vs /i, /alternative/i, /compare/i, /basic memory/i, /claude-mem/i, /mem0/i, /chatgpt/i, /superlocal/i],
-    page: "/learn/origin-vs-basic-memory",
+    page: "/learn/wenlan-vs-basic-memory",
   },
   {
     name: "Obsidian/knowledge-base adjacent",
     patterns: [/obsidian/i, /knowledge base/i, /markdown/i, /notion/i],
-    page: "/learn/origin-vs-obsidian-ai-memory",
+    page: "/learn/wenlan-vs-obsidian-ai-memory",
   },
   {
     name: "Architecture/trust",
@@ -47,11 +52,6 @@ const GROUPS = [
     name: "AI work memory",
     patterns: [/ai work memory/i, /agent memory/i, /persistent memory/i, /context/i, /handoff/i],
     page: "/learn/ai-work-memory",
-  },
-  {
-    name: "Brand/entity",
-    patterns: [/useorigin/i, /\borigin\b/i],
-    page: "/",
   },
 ];
 
@@ -550,7 +550,7 @@ function classifyQuery(query) {
   if (/\bsuperlocal\b|\bsuper\s+local\s+memory\b/i.test(query)) {
     return {
       group: "Comparisons",
-      page: "/learn/origin-vs-superlocal-memory",
+      page: "/learn/wenlan-vs-superlocal-memory",
     };
   }
 
@@ -562,7 +562,7 @@ function classifyQuery(query) {
   if (/claude code.*\/memory|\/memory/i.test(query)) {
     return {
       group: "Claude Code",
-      page: "/learn/claude-code-memory-command-vs-origin",
+      page: "/learn/claude-code-memory-command-vs-wenlan",
     };
   }
 
@@ -809,7 +809,7 @@ Do not create a new Learn page unless GSC/Searchfit shows a recurring query clus
 - [ ] Recheck changed redirects after deployment with \`pnpm seo:technical:deployed -- --require-direct-changed-redirects true\`.
 - [ ] Export or manually record Umami landing pages, referrers, AI referrals, Reddit referrals, and \`llms.txt\` hits.
 - [ ] Add changed pages to the next weekly comparison.
-- [ ] Generate \`pnpm seo:ai-visibility -- --date YYYY-MM-DD\` and manually check whether AI assistants mention Origin accurately for the tracked prompts in \`docs/seo-measurement.md\`.
+- [ ] Generate \`pnpm seo:ai-visibility -- --date YYYY-MM-DD\` and manually check whether AI assistants mention Wenlan accurately for the tracked prompts in \`docs/seo-measurement.md\`.
 - [ ] Next measurement date: ${nextDate}.
 `;
 }

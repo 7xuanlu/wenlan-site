@@ -54,5 +54,5 @@ Do not create a new Learn page unless GSC/Searchfit shows a recurring query clus
 - [ ] Recheck changed redirects after deployment with `pnpm seo:technical:deployed -- --require-direct-changed-redirects true`.
 - [ ] Export or manually record Umami landing pages, referrers, AI referrals, Reddit referrals, and `llms.txt` hits.
 - [ ] Add changed pages to the next weekly comparison.
-- [ ] Generate `pnpm seo:ai-visibility -- --date YYYY-MM-DD` and manually check whether AI assistants mention Origin accurately for the tracked prompts in `docs/seo-measurement.md`. The command only creates a local worksheet, does not call external assistants, and refuses to overwrite an existing worksheet unless you pass `--force true`.
+- [ ] Generate `pnpm seo:ai-visibility -- --date YYYY-MM-DD` and manually check whether AI assistants mention Wenlan accurately for the tracked prompts in `docs/seo-measurement.md`. The command only creates a local worksheet, does not call external assistants, and refuses to overwrite an existing worksheet unless you pass `--force true`.
 - [ ] Next measurement date: YYYY-MM-DD.

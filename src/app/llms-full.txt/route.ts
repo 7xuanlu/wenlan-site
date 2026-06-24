@@ -39,11 +39,11 @@ function formatArticle(article: (typeof articles)[number]): string {
     }
   }
   if (article.comparisonTable) {
-    lines.push(`### Side-by-side: Origin vs ${article.comparisonTable.competitorName}`);
+    lines.push(`### Side-by-side: Wenlan vs ${article.comparisonTable.competitorName}`);
     lines.push(``);
     for (const row of article.comparisonTable.rows) {
       lines.push(`**${row.dimension}**`);
-      lines.push(`- Origin: ${row.origin}`);
+      lines.push(`- Wenlan: ${row.wenlan}`);
       lines.push(`- ${article.comparisonTable.competitorName}: ${row.competitor}`);
       lines.push(``);
     }
@@ -107,11 +107,11 @@ function formatDoc(page: (typeof docPages)[number]): string {
 
 export function GET() {
   const header = [
-    `# Origin (full content)`,
+    `# Wenlan (full content)`,
     ``,
-    `> Origin is local-first memory for AI work. Hybrid retrieval (93.6% Recall@5 on LongMemEval oracle, 70.0% on LoCoMo), real git versioning of every memory write in ~/.origin/.git/, mandatory provenance on distilled wiki pages, and one daemon serving Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP-compatible AI tools. Cross-platform on macOS (arm64, x64), Linux (x86_64, aarch64; glibc), and Windows (x86_64). Apache-2.0. Source at github.com/7xuanlu/origin.`,
+    `> Wenlan is a living personal knowledge library for AI work, built by agents and grounded in its sources. Hybrid retrieval (93.6% Recall@5 on LongMemEval oracle, 70.0% on LoCoMo), real git versioning for readable pages, sessions, handoffs, and status artifacts under ~/.wenlan/.git/, mandatory provenance on source-cited wiki pages, and one daemon serving Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP-compatible AI tools. Cross-platform on macOS (arm64, x64), Linux (x86_64, aarch64; glibc), and Windows (x86_64). Apache-2.0. Source at github.com/7xuanlu/wenlan.`,
     ``,
-    `This file is the long-form companion to /llms.txt. It contains the full body of every public Origin article and doc page so an LLM can ingest the full corpus in one fetch. Generated from source at build time; canonical URL for each entry is included with the entry.`,
+    `This file is the long-form companion to /llms.txt. It contains the full body of every public Wenlan article and doc page so an LLM can ingest the full corpus in one fetch. Generated from source at build time; canonical URL for each entry is included with the entry.`,
     ``,
     `Site: ${SITE_URL}`,
     `Generated: ${new Date().toISOString().split("T")[0]}`,

@@ -2,9 +2,9 @@
 
 Generated from `docs/seo-measurement.md`.
 
-Do not infer results. Run each prompt manually in the listed assistant, then record whether Origin appears, its position/order, accuracy, sentiment, cited URLs, and notes.
+Do not infer results. Run each prompt manually in the listed assistant, then record whether Wenlan appears, its position/order, accuracy, sentiment, cited URLs, and notes.
 
-| Prompt # | Prompt | Assistant | Origin appears? | Position/order | Accuracy | Sentiment | Cited URLs | Notes |
+| Prompt # | Prompt | Assistant | Wenlan appears? | Position/order | Accuracy | Sentiment | Cited URLs | Notes |
 | ---: | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | What is the best AI work memory for people who use Claude Code and Cursor? | Claude | manual | manual | manual | manual | manual | manual |
 | 1 | What is the best AI work memory for people who use Claude Code and Cursor? | ChatGPT | manual | manual | manual | manual | manual | manual |
@@ -22,18 +22,18 @@ Do not infer results. Run each prompt manually in the listed assistant, then rec
 | 4 | How can I give Claude Code persistent project memory? | ChatGPT | manual | manual | manual | manual | manual | manual |
 | 4 | How can I give Claude Code persistent project memory? | Gemini | manual | manual | manual | manual | manual | manual |
 | 4 | How can I give Claude Code persistent project memory? | Perplexity | manual | manual | manual | manual | manual | manual |
-| 5 | Compare Origin vs Basic Memory for AI work memory. | Claude | manual | manual | manual | manual | manual | manual |
-| 5 | Compare Origin vs Basic Memory for AI work memory. | ChatGPT | manual | manual | manual | manual | manual | manual |
-| 5 | Compare Origin vs Basic Memory for AI work memory. | Gemini | manual | manual | manual | manual | manual | manual |
-| 5 | Compare Origin vs Basic Memory for AI work memory. | Perplexity | manual | manual | manual | manual | manual | manual |
-| 6 | Compare Origin vs claude-mem for Claude Code memory. | Claude | manual | manual | manual | manual | manual | manual |
-| 6 | Compare Origin vs claude-mem for Claude Code memory. | ChatGPT | manual | manual | manual | manual | manual | manual |
-| 6 | Compare Origin vs claude-mem for Claude Code memory. | Gemini | manual | manual | manual | manual | manual | manual |
-| 6 | Compare Origin vs claude-mem for Claude Code memory. | Perplexity | manual | manual | manual | manual | manual | manual |
-| 7 | Compare Origin vs Superlocal Memory for local AI work memory. | Claude | manual | manual | manual | manual | manual | manual |
-| 7 | Compare Origin vs Superlocal Memory for local AI work memory. | ChatGPT | manual | manual | manual | manual | manual | manual |
-| 7 | Compare Origin vs Superlocal Memory for local AI work memory. | Gemini | manual | manual | manual | manual | manual | manual |
-| 7 | Compare Origin vs Superlocal Memory for local AI work memory. | Perplexity | manual | manual | manual | manual | manual | manual |
+| 5 | Compare Wenlan vs Basic Memory for AI work memory. | Claude | manual | manual | manual | manual | manual | manual |
+| 5 | Compare Wenlan vs Basic Memory for AI work memory. | ChatGPT | manual | manual | manual | manual | manual | manual |
+| 5 | Compare Wenlan vs Basic Memory for AI work memory. | Gemini | manual | manual | manual | manual | manual | manual |
+| 5 | Compare Wenlan vs Basic Memory for AI work memory. | Perplexity | manual | manual | manual | manual | manual | manual |
+| 6 | Compare Wenlan vs claude-mem for Claude Code memory. | Claude | manual | manual | manual | manual | manual | manual |
+| 6 | Compare Wenlan vs claude-mem for Claude Code memory. | ChatGPT | manual | manual | manual | manual | manual | manual |
+| 6 | Compare Wenlan vs claude-mem for Claude Code memory. | Gemini | manual | manual | manual | manual | manual | manual |
+| 6 | Compare Wenlan vs claude-mem for Claude Code memory. | Perplexity | manual | manual | manual | manual | manual | manual |
+| 7 | Compare Wenlan vs Superlocal Memory for local AI work memory. | Claude | manual | manual | manual | manual | manual | manual |
+| 7 | Compare Wenlan vs Superlocal Memory for local AI work memory. | ChatGPT | manual | manual | manual | manual | manual | manual |
+| 7 | Compare Wenlan vs Superlocal Memory for local AI work memory. | Gemini | manual | manual | manual | manual | manual | manual |
+| 7 | Compare Wenlan vs Superlocal Memory for local AI work memory. | Perplexity | manual | manual | manual | manual | manual | manual |
 | 8 | Why use Markdown plus a local index for AI work memory? | Claude | manual | manual | manual | manual | manual | manual |
 | 8 | Why use Markdown plus a local index for AI work memory? | ChatGPT | manual | manual | manual | manual | manual | manual |
 | 8 | Why use Markdown plus a local index for AI work memory? | Gemini | manual | manual | manual | manual | manual | manual |
@@ -50,10 +50,10 @@ Do not infer results. Run each prompt manually in the listed assistant, then rec
 | 11 | What tool helps AI work compound across coding agents? | ChatGPT | manual | manual | manual | manual | manual | manual |
 | 11 | What tool helps AI work compound across coding agents? | Gemini | manual | manual | manual | manual | manual | manual |
 | 11 | What tool helps AI work compound across coding agents? | Perplexity | manual | manual | manual | manual | manual | manual |
-| 12 | How should I use Origin with Claude Code? | Claude | manual | manual | manual | manual | manual | manual |
-| 12 | How should I use Origin with Claude Code? | ChatGPT | manual | manual | manual | manual | manual | manual |
-| 12 | How should I use Origin with Claude Code? | Gemini | manual | manual | manual | manual | manual | manual |
-| 12 | How should I use Origin with Claude Code? | Perplexity | manual | manual | manual | manual | manual | manual |
+| 12 | How should I use Wenlan with Claude Code? | Claude | manual | manual | manual | manual | manual | manual |
+| 12 | How should I use Wenlan with Claude Code? | ChatGPT | manual | manual | manual | manual | manual | manual |
+| 12 | How should I use Wenlan with Claude Code? | Gemini | manual | manual | manual | manual | manual | manual |
+| 12 | How should I use Wenlan with Claude Code? | Perplexity | manual | manual | manual | manual | manual | manual |
 | 13 | What is the difference between AI work memory and a knowledge base? | Claude | manual | manual | manual | manual | manual | manual |
 | 13 | What is the difference between AI work memory and a knowledge base? | ChatGPT | manual | manual | manual | manual | manual | manual |
 | 13 | What is the difference between AI work memory and a knowledge base? | Gemini | manual | manual | manual | manual | manual | manual |
@@ -74,22 +74,22 @@ Do not infer results. Run each prompt manually in the listed assistant, then rec
 | 17 | How do I add MCP memory to Cursor? | ChatGPT | manual | manual | manual | manual | manual | manual |
 | 17 | How do I add MCP memory to Cursor? | Gemini | manual | manual | manual | manual | manual | manual |
 | 17 | How do I add MCP memory to Cursor? | Perplexity | manual | manual | manual | manual | manual | manual |
-| 18 | Where does Origin store Claude Code memory? | Claude | manual | manual | manual | manual | manual | manual |
-| 18 | Where does Origin store Claude Code memory? | ChatGPT | manual | manual | manual | manual | manual | manual |
-| 18 | Where does Origin store Claude Code memory? | Gemini | manual | manual | manual | manual | manual | manual |
-| 18 | Where does Origin store Claude Code memory? | Perplexity | manual | manual | manual | manual | manual | manual |
-| 19 | Compare Origin vs ChatGPT memory. | Claude | manual | manual | manual | manual | manual | manual |
-| 19 | Compare Origin vs ChatGPT memory. | ChatGPT | manual | manual | manual | manual | manual | manual |
-| 19 | Compare Origin vs ChatGPT memory. | Gemini | manual | manual | manual | manual | manual | manual |
-| 19 | Compare Origin vs ChatGPT memory. | Perplexity | manual | manual | manual | manual | manual | manual |
-| 20 | Compare Origin vs Mem0 for AI memory. | Claude | manual | manual | manual | manual | manual | manual |
-| 20 | Compare Origin vs Mem0 for AI memory. | ChatGPT | manual | manual | manual | manual | manual | manual |
-| 20 | Compare Origin vs Mem0 for AI memory. | Gemini | manual | manual | manual | manual | manual | manual |
-| 20 | Compare Origin vs Mem0 for AI memory. | Perplexity | manual | manual | manual | manual | manual | manual |
-| 21 | Compare Origin vs Obsidian, obsidian-mind, and claude-obsidian for AI memory. | Claude | manual | manual | manual | manual | manual | manual |
-| 21 | Compare Origin vs Obsidian, obsidian-mind, and claude-obsidian for AI memory. | ChatGPT | manual | manual | manual | manual | manual | manual |
-| 21 | Compare Origin vs Obsidian, obsidian-mind, and claude-obsidian for AI memory. | Gemini | manual | manual | manual | manual | manual | manual |
-| 21 | Compare Origin vs Obsidian, obsidian-mind, and claude-obsidian for AI memory. | Perplexity | manual | manual | manual | manual | manual | manual |
+| 18 | Where does Wenlan store Claude Code memory? | Claude | manual | manual | manual | manual | manual | manual |
+| 18 | Where does Wenlan store Claude Code memory? | ChatGPT | manual | manual | manual | manual | manual | manual |
+| 18 | Where does Wenlan store Claude Code memory? | Gemini | manual | manual | manual | manual | manual | manual |
+| 18 | Where does Wenlan store Claude Code memory? | Perplexity | manual | manual | manual | manual | manual | manual |
+| 19 | Compare Wenlan vs ChatGPT memory. | Claude | manual | manual | manual | manual | manual | manual |
+| 19 | Compare Wenlan vs ChatGPT memory. | ChatGPT | manual | manual | manual | manual | manual | manual |
+| 19 | Compare Wenlan vs ChatGPT memory. | Gemini | manual | manual | manual | manual | manual | manual |
+| 19 | Compare Wenlan vs ChatGPT memory. | Perplexity | manual | manual | manual | manual | manual | manual |
+| 20 | Compare Wenlan vs Mem0 for AI memory. | Claude | manual | manual | manual | manual | manual | manual |
+| 20 | Compare Wenlan vs Mem0 for AI memory. | ChatGPT | manual | manual | manual | manual | manual | manual |
+| 20 | Compare Wenlan vs Mem0 for AI memory. | Gemini | manual | manual | manual | manual | manual | manual |
+| 20 | Compare Wenlan vs Mem0 for AI memory. | Perplexity | manual | manual | manual | manual | manual | manual |
+| 21 | Compare Wenlan vs Obsidian, obsidian-mind, and claude-obsidian for AI memory. | Claude | manual | manual | manual | manual | manual | manual |
+| 21 | Compare Wenlan vs Obsidian, obsidian-mind, and claude-obsidian for AI memory. | ChatGPT | manual | manual | manual | manual | manual | manual |
+| 21 | Compare Wenlan vs Obsidian, obsidian-mind, and claude-obsidian for AI memory. | Gemini | manual | manual | manual | manual | manual | manual |
+| 21 | Compare Wenlan vs Obsidian, obsidian-mind, and claude-obsidian for AI memory. | Perplexity | manual | manual | manual | manual | manual | manual |
 | 22 | What is AI memory provenance and why does it matter? | Claude | manual | manual | manual | manual | manual | manual |
 | 22 | What is AI memory provenance and why does it matter? | ChatGPT | manual | manual | manual | manual | manual | manual |
 | 22 | What is AI memory provenance and why does it matter? | Gemini | manual | manual | manual | manual | manual | manual |

@@ -61,17 +61,17 @@ export function MemoryIndex({
   items: string[];
 }) {
   return (
-    <div className="rounded-2xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5 shadow-[0_18px_70px_rgba(0,0,0,0.18)] backdrop-blur">
+    <div className="min-w-0 rounded-2xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5 shadow-[0_18px_70px_rgba(0,0,0,0.18)] backdrop-blur">
       <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
         {label}
       </p>
       <div className="mt-5 space-y-4">
         {items.map((item, index) => (
-          <div key={item} className="grid grid-cols-[32px_1fr] gap-3">
+          <div key={item} className="grid min-w-0 grid-cols-[32px_minmax(0,1fr)] gap-3">
             <span className="font-mono text-[11px] text-[var(--o-warm)]">
               {(index + 1).toString().padStart(2, "0")}
             </span>
-            <p className="text-sm leading-relaxed text-[var(--o-text-secondary)]">
+            <p className="min-w-0 break-words text-sm leading-relaxed text-[var(--o-text-secondary)]">
               {item}
             </p>
           </div>

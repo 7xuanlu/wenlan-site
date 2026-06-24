@@ -1,4 +1,4 @@
-# Origin SEO Measurement
+# Wenlan SEO Measurement
 
 Use this checklist after publishing SEO pages on `useorigin.app`. The goal is to separate brand demand, category discovery, and AI-answer visibility instead of treating all traffic as one number.
 
@@ -23,16 +23,16 @@ Reusable runbook: `docs/seo-growth-loop.md`.
    - `https://useorigin.app/learn/mcp-memory-server`
    - `https://useorigin.app/learn/local-first-ai-memory`
    - `https://useorigin.app/learn/claude-code-memory`
-   - `https://useorigin.app/learn/claude-code-memory-command-vs-origin`
-   - `https://useorigin.app/learn/origin-for-claude-code`
+   - `https://useorigin.app/learn/claude-code-memory-command-vs-wenlan`
+   - `https://useorigin.app/learn/wenlan-for-claude-code`
    - `https://useorigin.app/learn/distilled-wiki-pages-ai-memory`
    - `https://useorigin.app/learn/ai-work-memory-vs-knowledge-base`
-   - `https://useorigin.app/learn/origin-vs-basic-memory`
-   - `https://useorigin.app/learn/origin-vs-claude-mem`
-   - `https://useorigin.app/learn/origin-vs-superlocal-memory`
+   - `https://useorigin.app/learn/wenlan-vs-basic-memory`
+   - `https://useorigin.app/learn/wenlan-vs-claude-mem`
+   - `https://useorigin.app/learn/wenlan-vs-superlocal-memory`
    - `https://useorigin.app/learn/markdown-local-index-ai-memory`
    - `https://useorigin.app/learn/ai-agent-handoff-loop`
-   - `https://useorigin.app/learn/where-origin-stores-claude-code-memory`
+   - `https://useorigin.app/learn/where-wenlan-stores-claude-code-memory`
    - `https://useorigin.app/learn/how-to-add-memory-to-claude-code`
    - `https://useorigin.app/learn/how-to-give-codex-persistent-memory`
    - `https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor`
@@ -42,21 +42,21 @@ Reusable runbook: `docs/seo-growth-loop.md`.
    - `https://useorigin.app/learn/persistent-project-context-for-ai-agents`
    - `https://useorigin.app/learn/mcp-memory-server-localhost-7878`
    - `https://useorigin.app/learn/what-to-capture-in-ai-work-memory`
-   - `https://useorigin.app/learn/origin-codex-workflow`
-   - `https://useorigin.app/learn/origin-cursor-workflow`
-   - `https://useorigin.app/learn/origin-claude-desktop-workflow`
-   - `https://useorigin.app/learn/origin-gemini-cli-workflow`
-   - `https://useorigin.app/learn/origin-vscode-mcp-workflow`
+   - `https://useorigin.app/learn/wenlan-codex-workflow`
+   - `https://useorigin.app/learn/wenlan-cursor-workflow`
+   - `https://useorigin.app/learn/wenlan-claude-desktop-workflow`
+   - `https://useorigin.app/learn/wenlan-gemini-cli-workflow`
+   - `https://useorigin.app/learn/wenlan-vscode-mcp-workflow`
    - `https://useorigin.app/learn/claude-code-session-handoff`
    - `https://useorigin.app/learn/cursor-claude-code-shared-memory`
    - `https://useorigin.app/learn/codex-claude-code-shared-memory`
    - `https://useorigin.app/learn/multi-agent-memory-workflow`
    - `https://useorigin.app/learn/ai-agent-project-status-handoff`
-   - `https://useorigin.app/learn/origin-vs-mcp-memory-service`
-   - `https://useorigin.app/learn/origin-vs-chatgpt-memory`
-   - `https://useorigin.app/learn/origin-vs-obsidian-ai-memory`
-   - `https://useorigin.app/learn/origin-vs-notion-ai`
-   - `https://useorigin.app/learn/origin-vs-mem0`
+   - `https://useorigin.app/learn/wenlan-vs-mcp-memory-service`
+   - `https://useorigin.app/learn/wenlan-vs-chatgpt-memory`
+   - `https://useorigin.app/learn/wenlan-vs-obsidian-ai-memory`
+   - `https://useorigin.app/learn/wenlan-vs-notion-ai`
+   - `https://useorigin.app/learn/wenlan-vs-mem0`
    - `https://useorigin.app/learn/source-backed-wiki-pages-ai-work`
    - `https://useorigin.app/learn/ai-memory-provenance`
    - `https://useorigin.app/learn/local-git-history-ai-memory`
@@ -83,7 +83,7 @@ Decision gates:
 - **Technical before content:** sitemap, canonical, redirect, `noindex`, and status issues are fixed before writing.
 - **Refresh before net-new:** pages with impressions get better quick answers, command blocks, screenshots, and internal links before creating adjacent articles.
 - **New article only on evidence:** write a new Learn article only when GSC/Searchfit shows a query cluster that current pages do not answer.
-- **Reddit only when useful:** use `docs/reddit-distribution.md` only for value-first posts that teach a workflow, checklist, or lesson without requiring Origin.
+- **Reddit only when useful:** use `docs/reddit-distribution.md` only for value-first posts that teach a workflow, checklist, or lesson without requiring Wenlan.
 
 Indexing note: `Alternate page with proper canonical tag` is usually informational when it points from an old, duplicate, or redirected URL to the canonical page. Treat it as a problem only when the canonical URL we want indexed is missing, non-200, absent from sitemap, or replaced by the wrong canonical.
 
@@ -91,7 +91,7 @@ Indexing note: `Alternate page with proper canonical tag` is usually information
 
 Track these groups separately in Search Console:
 
-- Brand/entity: `origin ai work`, `origin ai work memory`, `useorigin`, `origin mcp`
+- Brand/entity: `origin ai work`, `origin ai work memory`, `useorigin`, `wenlan mcp`
 - AI work memory category: `ai work memory`, `memory for ai work`, `ai work memory layer`, `persistent memory for ai assistants`
 - MCP memory: `mcp memory server`, `memory mcp`, `claude mcp memory`, `cursor mcp memory`
 - Local-first/privacy: `local-first ai work memory`, `private ai work memory`, `on-device ai work memory`, `open source ai work memory`
@@ -103,7 +103,7 @@ Track these groups separately in Search Console:
 
 ## AI Visibility Prompts
 
-Run the same prompts monthly in Claude, ChatGPT, Gemini, and Perplexity. Record whether Origin appears, its position, accuracy, and sentiment.
+Run the same prompts monthly in Claude, ChatGPT, Gemini, and Perplexity. Record whether Wenlan appears, its position, accuracy, and sentiment.
 
 Generate the manual worksheet before running prompts:
 
@@ -117,30 +117,30 @@ The worksheet is written to `docs/seo-audits/YYYY-MM-DD-ai-visibility.md` by def
 2. What MCP memory server should I use for persistent memory across Claude Code and Cursor?
 3. What is a local-first alternative to ChatGPT memory?
 4. How can I give Claude Code persistent project memory?
-5. Compare Origin vs Basic Memory for AI work memory.
-6. Compare Origin vs claude-mem for Claude Code memory.
-7. Compare Origin vs Superlocal Memory for local AI work memory.
+5. Compare Wenlan vs Basic Memory for AI work memory.
+6. Compare Wenlan vs claude-mem for Claude Code memory.
+7. Compare Wenlan vs Superlocal Memory for local AI work memory.
 8. Why use Markdown plus a local index for AI work memory?
 9. What is an AI agent handoff loop?
 10. What open-source AI memory tools work with MCP?
 11. What tool helps AI work compound across coding agents?
-12. How should I use Origin with Claude Code?
+12. How should I use Wenlan with Claude Code?
 13. What is the difference between AI work memory and a knowledge base?
 14. Why would an AI work memory tool distill wiki pages from captures?
 15. How do I add memory to Claude Code?
 16. How do I give Codex persistent project memory?
 17. How do I add MCP memory to Cursor?
-18. Where does Origin store Claude Code memory?
-19. Compare Origin vs ChatGPT memory.
-20. Compare Origin vs Mem0 for AI memory.
-21. Compare Origin vs Obsidian, obsidian-mind, and claude-obsidian for AI memory.
+18. Where does Wenlan store Claude Code memory?
+19. Compare Wenlan vs ChatGPT memory.
+20. Compare Wenlan vs Mem0 for AI memory.
+21. Compare Wenlan vs Obsidian, obsidian-mind, and claude-obsidian for AI memory.
 22. What is AI memory provenance and why does it matter?
 23. How can Cursor and Claude Code share AI memory?
 24. What should I capture in AI work memory?
 
 ## GEO Surface
 
-- `https://useorigin.app/llms.txt` is a concise AI-readable map of Origin, docs, Learn articles, GitHub, and official positioning.
+- `https://useorigin.app/llms.txt` is a concise AI-readable map of Wenlan, docs, Learn articles, GitHub, and official positioning.
 - Treat `llms.txt` as cheap structured discoverability, not a guaranteed ranking factor or replacement for crawlable HTML.
 
 ## Distribution Surface
@@ -155,23 +155,23 @@ The worksheet is written to `docs/seo-audits/YYYY-MM-DD-ai-visibility.md` by def
 
 Production deploy evidence:
 
-- `https://useorigin.app/` serves the README-aligned homepage copy with `93.6%` LongMemEval Recall@5, `70.0%` LoCoMo Recall@5, `softwareVersion` `0.7.0`, and the current `origin mcp add` setup wording.
+- `https://useorigin.app/` serves the README-aligned homepage copy with `93.6%` LongMemEval Recall@5, `70.0%` LoCoMo Recall@5, `softwareVersion` `0.9.1`, and the current `wenlan mcp add` setup wording.
 - `https://useorigin.app/llms.txt` serves the README-aligned AI-readable map with the same `93.6%` / `70.0%` metrics, new Learn URLs, and the `4.8` point Superlocal comparison wording.
 - `https://useorigin.app/sitemap.xml` includes the new Learn URLs:
-  - `/learn/origin-for-claude-code`
+  - `/learn/wenlan-for-claude-code`
   - `/learn/distilled-wiki-pages-ai-memory`
   - `/learn/ai-work-memory-vs-knowledge-base`
 - Old guide URLs still return permanent redirects, for example `/guides/mcp-memory-server` -> `/learn/mcp-memory-server`.
 
 Public search snapshot immediately after deploy:
 
-- Search results for Origin queries still show stale snippets from the pre-deploy site, including `/guides/*` URLs, old homepage copy, old setup language, and older crawl dates.
+- Search results for Wenlan queries still show stale snippets from the pre-deploy site, including `/guides/*` URLs, old homepage copy, old setup language, and older crawl dates.
 - Exact-match new Learn URLs were not yet visible in general search snapshots immediately after deploy.
 - Treat this as the baseline before Google recrawls the sitemap and canonical URLs. Do not judge the content update by snippets until Search Console shows recrawl/indexing activity after 2026-05-28.
 
 ## Success Signals
 
 - Week 1-2: pages indexed, sitemap accepted, no canonical conflicts.
-- Month 1: impressions for long-tail queries, especially `Origin AI memory` and `MCP memory server`.
+- Month 1: impressions for long-tail queries, especially `Wenlan AI memory` and `MCP memory server`.
 - Month 2-3: clicks for exact-match Learn and Docs queries, plus more AI-assistant mentions.
 - Month 3+: comparison and integration pages become the next growth lever.

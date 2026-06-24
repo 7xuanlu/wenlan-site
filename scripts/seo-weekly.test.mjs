@@ -15,7 +15,39 @@ const builtCheckerScript = resolve(repoRoot, "scripts/seo-built-technical-check.
 const deployedCheckerScript = resolve(repoRoot, "scripts/seo-deployed-technical-check.mjs");
 const aiVisibilityScript = resolve(repoRoot, "scripts/seo-ai-visibility-worksheet.mjs");
 const gscFetchScript = resolve(repoRoot, "scripts/seo-gsc-fetch.mjs");
+const rebrandRedirectPairs = [
+  ["/learn/origin-for-claude-code", "/learn/wenlan-for-claude-code"],
+  [
+    "/learn/claude-code-memory-command-vs-origin",
+    "/learn/claude-code-memory-command-vs-wenlan",
+  ],
+  [
+    "/learn/where-origin-stores-claude-code-memory",
+    "/learn/where-wenlan-stores-claude-code-memory",
+  ],
+  ["/learn/origin-vs-basic-memory", "/learn/wenlan-vs-basic-memory"],
+  ["/learn/origin-vs-claude-mem", "/learn/wenlan-vs-claude-mem"],
+  ["/learn/origin-vs-superlocal-memory", "/learn/wenlan-vs-superlocal-memory"],
+  ["/learn/origin-codex-workflow", "/learn/wenlan-codex-workflow"],
+  ["/learn/origin-cursor-workflow", "/learn/wenlan-cursor-workflow"],
+  [
+    "/learn/origin-claude-desktop-workflow",
+    "/learn/wenlan-claude-desktop-workflow",
+  ],
+  ["/learn/origin-gemini-cli-workflow", "/learn/wenlan-gemini-cli-workflow"],
+  ["/learn/origin-vscode-mcp-workflow", "/learn/wenlan-vscode-mcp-workflow"],
+  ["/learn/origin-vs-mcp-memory-service", "/learn/wenlan-vs-mcp-memory-service"],
+  ["/learn/origin-vs-chatgpt-memory", "/learn/wenlan-vs-chatgpt-memory"],
+  ["/learn/origin-vs-obsidian-ai-memory", "/learn/wenlan-vs-obsidian-ai-memory"],
+  ["/learn/origin-vs-notion-ai", "/learn/wenlan-vs-notion-ai"],
+  ["/learn/origin-vs-mem0", "/learn/wenlan-vs-mem0"],
+];
 const requiredBuiltRedirects = [
+  ...rebrandRedirectPairs.map(([source, destination]) => ({
+    source,
+    destination,
+    statusCode: 308,
+  })),
   { source: "/learn/ai-memory-app", destination: "/learn/ai-work-memory", statusCode: 308 },
   { source: "/guides/ai-memory-app", destination: "/learn/ai-work-memory", statusCode: 308 },
   { source: "/guides", destination: "/learn", statusCode: 308 },
@@ -57,7 +89,7 @@ const requiredBuiltSitemapLocs = [
   "https://useorigin.app/learn/mcp-memory-server",
   "https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor",
   "https://useorigin.app/learn/ai-work-memory",
-  "https://useorigin.app/learn/origin-vs-superlocal-memory",
+  "https://useorigin.app/learn/wenlan-vs-superlocal-memory",
   "https://useorigin.app/docs/configuration",
 ];
 const requiredBuiltHtmlPages = [
@@ -90,8 +122,8 @@ const requiredBuiltHtmlPages = [
     type: "Article",
   },
   {
-    path: "learn/origin-vs-superlocal-memory.html",
-    canonical: "https://useorigin.app/learn/origin-vs-superlocal-memory",
+    path: "learn/wenlan-vs-superlocal-memory.html",
+    canonical: "https://useorigin.app/learn/wenlan-vs-superlocal-memory",
     type: "Article",
   },
   {
@@ -114,7 +146,7 @@ const requiredDeployedUrls = [
   "/learn/mcp-memory-server",
   "/learn/how-to-add-mcp-memory-to-cursor",
   "/learn/ai-work-memory",
-  "/learn/origin-vs-superlocal-memory",
+  "/learn/wenlan-vs-superlocal-memory",
   "/docs/configuration",
 ];
 const requiredDeployedUtilityUrls = [
@@ -124,6 +156,7 @@ const requiredDeployedUtilityUrls = [
   "/.well-known/security.txt",
 ];
 const deployedRedirects = [
+  ...rebrandRedirectPairs,
   ["/learn/ai-memory-app", "/learn/ai-work-memory"],
   ["/guides", "/learn"],
   ["/guides/claude-code-memory", "/learn/claude-code-memory"],
@@ -811,7 +844,7 @@ test("deployed technical SEO checker verifies robots, sitemap, key pages, utilit
     assert.match(stdout, /sitemap locs ok: 8/);
     assert.match(stdout, /key pages ok: 8/);
     assert.match(stdout, /utility noindex headers ok: 4/);
-    assert.match(stdout, /redirects ok: 9/);
+    assert.match(stdout, /redirects ok: 25/);
     assert.match(stdout, /old URLs absent from sitemap/);
   });
 });
@@ -886,7 +919,7 @@ test("deployed technical SEO checker rejects old guide URLs in the sitemap", asy
         "https://useorigin.app/learn/mcp-memory-server",
         "https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor",
         "https://useorigin.app/learn/ai-work-memory",
-        "https://useorigin.app/learn/origin-vs-superlocal-memory",
+        "https://useorigin.app/learn/wenlan-vs-superlocal-memory",
         "https://useorigin.app/docs/configuration",
         "https://useorigin.app/guides/claude-code-memory",
       ],
@@ -920,7 +953,7 @@ test("deployed technical SEO checker rejects docs guide URLs and legacy learn UR
           "https://useorigin.app/learn/mcp-memory-server",
           "https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor",
           "https://useorigin.app/learn/ai-work-memory",
-          "https://useorigin.app/learn/origin-vs-superlocal-memory",
+          "https://useorigin.app/learn/wenlan-vs-superlocal-memory",
           "https://useorigin.app/docs/configuration",
           oldUrl,
         ],
@@ -1062,7 +1095,7 @@ test("deployed technical SEO checker allows legacy ai-memory redirect hops by de
         { cwd: repoRoot },
       );
 
-      assert.match(stdout, /redirects ok: 9/);
+      assert.match(stdout, /redirects ok: 25/);
     },
   );
 });
@@ -1111,7 +1144,7 @@ test("deployed technical SEO checker strict mode passes when changed ai-memory r
       { cwd: repoRoot },
     );
 
-    assert.match(stdout, /direct changed redirects ok: 2/);
+    assert.match(stdout, /direct changed redirects ok: 18/);
   });
 });
 
@@ -1131,7 +1164,7 @@ test("built technical SEO checker verifies compiled redirects, headers, and site
       { cwd: repoRoot },
     );
 
-    assert.match(stdout, /redirects ok: 7/);
+    assert.match(stdout, /redirects ok: 23/);
     assert.match(stdout, /noindex headers ok: 5/);
     assert.match(stdout, /sitemap required locs ok: 8/);
     assert.match(stdout, /html page checks ok: 8/);
@@ -1218,6 +1251,11 @@ test("built technical SEO checker rejects generic guide redirects before specifi
   const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-built-order-"));
   try {
     const redirects = [
+      ...rebrandRedirectPairs.map(([source, destination]) => ({
+        source,
+        destination,
+        statusCode: 308,
+      })),
       { source: "/learn/ai-memory-app", destination: "/learn/ai-work-memory", statusCode: 308 },
       { source: "/guides", destination: "/learn", statusCode: 308 },
       { source: "/guides/:slug", destination: "/learn/:slug", statusCode: 308 },
@@ -1566,7 +1604,7 @@ test("seo weekly generator turns GSC exports into a ranked Markdown action repor
     );
     assert.match(
       report,
-      /\| `origin vs basic memory` \| Comparisons \| `\/learn\/origin-vs-basic-memory` \| 5 \| 0 \| 0\.00% \| 14\.0 \| title-meta-refresh \|/,
+      /\| `origin vs basic memory` \| Comparisons \| `\/learn\/wenlan-vs-basic-memory` \| 5 \| 0 \| 0\.00% \| 14\.0 \| title-meta-refresh \|/,
     );
     assert.match(
       report,
@@ -1602,7 +1640,7 @@ test("seo weekly generator turns GSC exports into a ranked Markdown action repor
     );
     assert.match(
       report,
-      /Generate `pnpm seo:ai-visibility -- --date YYYY-MM-DD` and manually check whether AI assistants mention Origin accurately for the tracked prompts in `docs\/seo-measurement\.md`\./,
+      /Generate `pnpm seo:ai-visibility -- --date YYYY-MM-DD` and manually check whether AI assistants mention Wenlan accurately for the tracked prompts in `docs\/seo-measurement\.md`\./,
     );
     assert.doesNotMatch(report, /Record before\/after GSC snapshot for changed pages\./);
     assert.doesNotMatch(report, /Verify `\/sitemap\.xml` includes changed canonical URLs\./);
@@ -2801,7 +2839,7 @@ test("seo weekly generator maps Superlocal queries to the Superlocal comparison 
       pagesPath,
       [
         "Page,Clicks,Impressions,CTR,Position",
-        "https://useorigin.app/learn/origin-vs-superlocal-memory,0,3,0%,9.0",
+        "https://useorigin.app/learn/wenlan-vs-superlocal-memory,0,3,0%,9.0",
         "",
       ].join("\n"),
       "utf8",
@@ -2828,17 +2866,17 @@ test("seo weekly generator maps Superlocal queries to the Superlocal comparison 
 
     assert.match(
       report,
-      /\| `superlocal memory` \| Comparisons \| `\/learn\/origin-vs-superlocal-memory` \| 3 \| 0 \| 0\.00% \| 9\.0 \| title-meta-refresh \|/,
+      /\| `superlocal memory` \| Comparisons \| `\/learn\/wenlan-vs-superlocal-memory` \| 3 \| 0 \| 0\.00% \| 9\.0 \| title-meta-refresh \|/,
     );
     assert.match(
       report,
-      /\| `super local memory` \| Comparisons \| `\/learn\/origin-vs-superlocal-memory` \| 1 \| 0 \| 0\.00% \| 37\.0 \| wait \|/,
+      /\| `super local memory` \| Comparisons \| `\/learn\/wenlan-vs-superlocal-memory` \| 1 \| 0 \| 0\.00% \| 37\.0 \| wait \|/,
     );
     assert.match(
       report,
       /\| `super local app` \| Other \| - \| 1 \| 0 \| 0\.00% \| 31\.0 \| wait \|/,
     );
-    assert.doesNotMatch(report, /superlocal memory` \| Comparisons \| `\/learn\/origin-vs-basic-memory`/);
+    assert.doesNotMatch(report, /superlocal memory` \| Comparisons \| `\/learn\/wenlan-vs-basic-memory`/);
     assert.doesNotMatch(report, /super local memory` \| Other \| -/);
     assert.doesNotMatch(report, /super local app` \| Comparisons/);
   } finally {
@@ -3026,6 +3064,7 @@ test("seo weekly generator maps existing AI memory app and filtered brand querie
         "Query,Clicks,Impressions,CTR,Position",
         "ai memory app,0,1,0%,98.0",
         "claude code memory,0,6,0%,41.2",
+        "wenlan mcp,1,3,33.3%,4.0",
         `"${filteredBrandQuery.replace(/"/g, '""')}",0,19,0%,1.7`,
         "",
       ].join("\n"),
@@ -3037,6 +3076,7 @@ test("seo weekly generator maps existing AI memory app and filtered brand querie
         "Page,Clicks,Impressions,CTR,Position",
         "https://useorigin.app/learn/ai-work-memory,0,1,0%,98.0",
         "https://useorigin.app/,0,19,0%,1.7",
+        "https://useorigin.app/,1,3,33.3%,4.0",
         "",
       ].join("\n"),
       "utf8",
@@ -3073,7 +3113,12 @@ test("seo weekly generator maps existing AI memory app and filtered brand querie
       report,
       /\| `"origin app" -"blue origin" -"a trusted origin" -site:reddit\.com` \| Brand\/entity \| `\/` \| 19 \| 0 \| 0\.00% \| 1\.7 \| wait \|/,
     );
+    assert.match(
+      report,
+      /\| `wenlan mcp` \| Brand\/entity \| `\/` \| 3 \| 1 \| 33\.33% \| 4\.0 \| wait \|/,
+    );
     assert.doesNotMatch(report, /`ai memory app` \| Other \| -/);
+    assert.doesNotMatch(report, /`wenlan mcp` \| Other \| -/);
     assert.doesNotMatch(report, /`"origin app" .* \| Architecture\/trust \| `\/learn\/local-first-ai-memory`/);
     assert.doesNotMatch(report, /visibility is weak/i);
     assert.doesNotMatch(report, /distribution/i);
@@ -3117,11 +3162,11 @@ test("refreshed SEO pages preserve original publication dates", async () => {
 
   assert.match(
     learnArticles,
-    /slug: "origin-vs-superlocal-memory"[\s\S]*publishedAt: "2026-05-27",[\s\S]*updatedAt: "2026-06-13"/,
+    /slug: "wenlan-vs-superlocal-memory"[\s\S]*publishedAt: "2026-05-27",[\s\S]*updatedAt: "2026-06-24"/,
   );
   assert.match(
     docs,
-    /slug: "configuration"[\s\S]*publishedAt: "2026-06-01",[\s\S]*updatedAt: "2026-06-13"/,
+    /slug: "configuration"[\s\S]*publishedAt: "2026-06-01",[\s\S]*updatedAt: DOCS_UPDATED_AT/,
   );
   assert.match(learnTemplate, /publishedTime: article\.publishedAt \?\? article\.updatedAt/);
   assert.match(learnTemplate, /datePublished: article\.publishedAt \?\? article\.updatedAt/);
@@ -3149,7 +3194,7 @@ test("Superlocal comparison scopes missing benchmark evidence to checked sources
   assert.doesNotMatch(learnArticles, /Superlocal Memory has not published LME numbers/);
   assert.match(
     learnArticles,
-    /I did not find LongMemEval numbers on SuperLocalMemory's official site during the 2026-06-13 refresh/,
+    /I did not find LongMemEval numbers on SuperLocalMemory's official site during the 2026-06-24 source check/,
   );
   assert.match(
     learnArticles,
@@ -3161,7 +3206,7 @@ test("Superlocal comparison scopes missing benchmark evidence to checked sources
   );
 });
 
-test("Learn index SERP copy leads with Origin and AI work memory guides", async () => {
+test("Learn index SERP copy leads with Wenlan and AI work memory guides", async () => {
   const learnPage = await readFile(resolve(repoRoot, "src/app/learn/page.tsx"), "utf8");
   const learnOgImage = await readFile(
     resolve(repoRoot, "src/app/learn/opengraph-image.tsx"),
@@ -3170,15 +3215,15 @@ test("Learn index SERP copy leads with Origin and AI work memory guides", async 
 
   assert.match(
     learnPage,
-    /title: "Origin Learn: AI Work Memory Guides for Claude Code, Cursor, MCP"/,
+    /title: "Wenlan Learn: AI Work Memory Guides for Claude Code, Cursor, MCP"/,
   );
   assert.match(
     learnPage,
-    /Find Origin guides for Claude Code memory, MCP memory servers, Cursor\/Codex workflows, local AI work context, setup, trust, and comparisons\./,
+    /Find Wenlan guides for Claude Code memory, MCP memory servers, Cursor\/Codex workflows, local AI work context, setup, trust, and comparisons\./,
   );
-  assert.match(learnPage, />\s*Origin AI work memory guides\.\s*</);
+  assert.match(learnPage, />\s*Wenlan AI work memory guides\.\s*</);
   assert.doesNotMatch(learnPage, /Before you add memory to AI work\./);
-  assert.match(learnOgImage, /title="Origin AI work memory guides\."/);
+  assert.match(learnOgImage, /title="Wenlan AI work memory guides\."/);
   assert.doesNotMatch(learnOgImage, /Before you add memory to AI work\./);
 });
 

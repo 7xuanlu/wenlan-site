@@ -1,6 +1,6 @@
-# origin-website
+# wenlan-site
 
-Marketing + docs site for [Origin](https://github.com/7xuanlu/origin), where AI work compounds.
+Marketing + docs site for [Wenlan](https://github.com/7xuanlu/wenlan), a living personal knowledge library for AI work.
 
 Production: [useorigin.app](https://useorigin.app).
 
@@ -76,7 +76,7 @@ Doc pages live in `src/app/docs/docs.ts` under the `docPages` array. Same `updat
 
 ## License
 
-This website source is MIT. The Origin product (daemon, CLI, MCP server) is Apache-2.0 in [7xuanlu/origin](https://github.com/7xuanlu/origin).
+This website source is MIT. The Wenlan product (daemon, CLI, MCP server) is Apache-2.0 in [7xuanlu/wenlan](https://github.com/7xuanlu/wenlan).
 
 ## Author
 

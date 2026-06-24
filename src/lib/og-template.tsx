@@ -60,7 +60,7 @@ export function OgTemplate({
             letterSpacing: "-0.01em",
           }}
         >
-          Origin
+          Wenlan
         </div>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>

@@ -1,6 +1,6 @@
-# Origin SEO/GEO Growth Loop
+# Wenlan SEO/GEO Growth Loop
 
-Use this when deciding what to do next for Origin search visibility. The rule is measurement first: GSC and Umami decide whether the next sprint is technical cleanup, page refreshes, new Learn articles, or external distribution.
+Use this when deciding what to do next for Wenlan search visibility. The rule is measurement first: GSC and Umami decide whether the next sprint is technical cleanup, page refreshes, new Learn articles, or external distribution.
 
 ## Operating Pattern
 
@@ -39,7 +39,7 @@ Raw GSC exports stay outside git. Commit the generated `docs/seo-audits/YYYY-MM-
 | Page has impressions but low CTR | Rewrite title/meta and sharpen the first answer. |
 | Query group has impressions but no strong matching page | Create one focused Learn article. |
 | New Learn batch is not indexed yet | Wait and measure before another batch. |
-| Reddit post cannot stand alone without Origin | Do not post it yet. |
+| Reddit post cannot stand alone without Wenlan | Do not post it yet. |
 
 ## Content Rules
 
@@ -60,7 +60,7 @@ Raw GSC exports stay outside git. Commit the generated `docs/seo-audits/YYYY-MM-
 ## Reddit / Distribution Rules
 
 - Lead with a concrete problem or lesson, not a product launch.
-- Avoid putting Origin in the title.
+- Avoid putting Wenlan in the title.
 - Link only when the page materially helps the reader.
 - Track each post in Umami and GSC for referrals, branded-search lift, and assisted discovery.
 - Stop reusing an angle if moderators remove it or the community rejects it.
@@ -82,11 +82,11 @@ Track monthly:
 
 - AI visibility prompts across ChatGPT, Claude, Gemini, and Perplexity.
 - Competitor comparison visibility.
-- Branded query visibility for Origin.
+- Branded query visibility for Wenlan.
 - Learn article cohort indexing and traffic.
 
 ## Source Notes
 
 - Google Search Console is the source of truth for indexing and query/page performance.
-- Google currently limits FAQ rich results to government and health sites, so Origin keeps visible FAQ content without `FAQPage` JSON-LD.
+- Google currently limits FAQ rich results to government and health sites, so Wenlan keeps visible FAQ content without `FAQPage` JSON-LD.
 - The Reddit SEO case study pattern to borrow is not blind volume; it is query-cluster pages, weekly technical cleanup, human-edited content, and careful distribution.

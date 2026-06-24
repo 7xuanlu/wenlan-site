@@ -7,11 +7,11 @@
   --font-mono: var(--font-mono), "JetBrains Mono", monospace;
 
   /* Static accent colors (same in both themes) */
-  --color-origin-warm: #d4884a;
-  --color-origin-amber: #e0a850;
-  --color-origin-gold: #e8c97a;
-  --color-origin-indigo: #7b7be8;
-  --color-origin-sage: #8ab892;
+  --color-wenlan-warm: #d4884a;
+  --color-wenlan-amber: #e0a850;
+  --color-wenlan-gold: #e8c97a;
+  --color-wenlan-indigo: #7b7be8;
+  --color-wenlan-sage: #8ab892;
 }
 
 /* ── Dark theme (default) ── */
@@ -256,20 +256,20 @@ body {
   text-shadow: 0 0 48px var(--o-glow-warm);
 }
 
-/* Subtle border glow on cards — Origin style */
-.card-origin {
+/* Subtle border glow on cards — Wenlan style */
+.card-wenlan {
   background: var(--o-card-bg);
   border: 1px solid var(--o-border);
   transition: all 150ms ease;
 }
 
-.card-origin:hover {
+.card-wenlan:hover {
   background: var(--o-card-hover);
   border-color: var(--o-glow-indigo);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
-/* Scrollbar styling — Origin style */
+/* Scrollbar styling — Wenlan style */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {

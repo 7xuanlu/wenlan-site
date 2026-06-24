@@ -41,7 +41,7 @@ Generated from Search Console UI CSV export. Raw exports stay outside git.
 
 - Exported the authenticated Search Console Performance CSV zip from Browser and normalized real Query/Page CSVs into `/tmp/origin-seo`.
 - Generated this weekly report from the real Search Console UI CSV export.
-- No new page copy rewrite was made from this export. The non-technical actions target `/learn`, `/docs/configuration`, `/learn/origin-vs-superlocal-memory`, and `/learn/claude-code-memory`, which were already refreshed in the prior weekly loop; today's GSC evidence still includes old guide URLs and a 2026-06-19 sitemap read, so the safer action is to verify redirects, record indexing state, and remeasure.
+- No new page copy rewrite was made from this export. The non-technical actions target `/learn`, `/docs/configuration`, `/learn/wenlan-vs-superlocal-memory`, and `/learn/claude-code-memory`, which were already refreshed in the prior weekly loop; today's GSC evidence still includes old guide URLs and a 2026-06-19 sitemap read, so the safer action is to verify redirects, record indexing state, and remeasure.
 
 ## Top Actions
 
@@ -58,14 +58,14 @@ Generated from Search Console UI CSV export. Raw exports stay outside git.
 
 | Query | Query group | Current page | Impressions | Clicks | CTR | Avg position | Recommended action | Diagnosis |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- |
-| `superlocal memory` | Comparisons | `/learn/origin-vs-superlocal-memory` | 3 | 0 | 0.00% | 9.0 | title-meta-refresh | Impressions with zero clicks in striking distance. Refresh title, meta, H1, and first answer. |
+| `superlocal memory` | Comparisons | `/learn/wenlan-vs-superlocal-memory` | 3 | 0 | 0.00% | 9.0 | title-meta-refresh | Impressions with zero clicks in striking distance. Refresh title, meta, H1, and first answer. |
 | `origin by cursor` | Cursor/Codex workflows | `/learn/how-to-add-mcp-memory-to-cursor` | 23 | 0 | 0.00% | 5.1 | wait | Ranking is already strong but clicks are absent. Review SERP intent and title before changing page copy. |
 | `"origin app" -"blue origin" -"a trusted origin" -"country of origin"
 -"nation of origin" -"origin of electro" -"owe its origin" -"owes its
 origin" -"unknown origin" -site:reddit.com -site:twitter.com -site:x.com
 -site:wykop.pl -site:tripadvisor.com -site:youtube.com -site:yelp.com
 -site:booking.com -site:facebook.com -site:instagram.com -site:tiktok.com` | Brand/entity | `/` | 17 | 0 | 0.00% | 1.1 | wait | Ranking is already strong but clicks are absent. Review SERP intent and title before changing page copy. |
-| `origin mcp` | MCP memory | `/learn/mcp-memory-server` | 14 | 1 | 7.14% | 3.6 | wait | No immediate content action. Keep measuring before changing the page. |
+| `wenlan mcp` | MCP memory | `/learn/mcp-memory-server` | 14 | 1 | 7.14% | 3.6 | wait | No immediate content action. Keep measuring before changing the page. |
 | `cursor origin` | Cursor/Codex workflows | `/learn/how-to-add-mcp-memory-to-cursor` | 13 | 0 | 0.00% | 4.9 | wait | Ranking is already strong but clicks are absent. Review SERP intent and title before changing page copy. |
 | `origin cursor ai` | Cursor/Codex workflows | `/learn/how-to-add-mcp-memory-to-cursor` | 11 | 0 | 0.00% | 3.9 | wait | Ranking is already strong but clicks are absent. Review SERP intent and title before changing page copy. |
 | `origin claude` | Brand/entity | `/` | 8 | 1 | 12.50% | 4.4 | wait | No immediate content action. Keep measuring before changing the page. |
@@ -83,13 +83,13 @@ origin" -"unknown origin" -site:reddit.com -site:twitter.com -site:x.com
 | `cursor orign` | Cursor/Codex workflows | `/learn/how-to-add-mcp-memory-to-cursor` | 1 | 0 | 0.00% | 10.0 | wait | No immediate content action. Keep measuring before changing the page. |
 | `claude code origin` | Claude Code | `/learn/claude-code-memory` | 1 | 0 | 0.00% | 11.0 | wait | No immediate content action. Keep measuring before changing the page. |
 | `codememory mcp` | MCP memory | `/learn/mcp-memory-server` | 1 | 0 | 0.00% | 37.0 | wait | No immediate content action. Keep measuring before changing the page. |
-| `super local memory` | Comparisons | `/learn/origin-vs-superlocal-memory` | 1 | 0 | 0.00% | 37.0 | wait | No immediate content action. Keep measuring before changing the page. |
+| `super local memory` | Comparisons | `/learn/wenlan-vs-superlocal-memory` | 1 | 0 | 0.00% | 37.0 | wait | No immediate content action. Keep measuring before changing the page. |
 | `claude code persistent memory` | Claude Code | `/learn/claude-code-memory` | 1 | 0 | 0.00% | 44.0 | wait | No immediate content action. Keep measuring before changing the page. |
 | `claude code memory repo` | Claude Code | `/learn/claude-code-memory` | 1 | 0 | 0.00% | 45.0 | wait | No immediate content action. Keep measuring before changing the page. |
 | `claude code memory server` | MCP memory | `/learn/mcp-memory-server` | 1 | 0 | 0.00% | 45.0 | wait | No immediate content action. Keep measuring before changing the page. |
 | `claude code permanent memory` | Claude Code | `/learn/claude-code-memory` | 1 | 0 | 0.00% | 48.0 | wait | No immediate content action. Keep measuring before changing the page. |
 | `memory claude code` | Claude Code | `/learn/claude-code-memory` | 1 | 0 | 0.00% | 49.0 | wait | No immediate content action. Keep measuring before changing the page. |
-| `claude code /memory` | Claude Code | `/learn/claude-code-memory-command-vs-origin` | 1 | 0 | 0.00% | 50.0 | wait | No immediate content action. Keep measuring before changing the page. |
+| `claude code /memory` | Claude Code | `/learn/claude-code-memory-command-vs-wenlan` | 1 | 0 | 0.00% | 50.0 | wait | No immediate content action. Keep measuring before changing the page. |
 | `cursor memory mcp` | Cursor/Codex workflows | `/learn/how-to-add-mcp-memory-to-cursor` | 1 | 0 | 0.00% | 50.0 | wait | No immediate content action. Keep measuring before changing the page. |
 | `code memory` | Other | - | 1 | 0 | 0.00% | 57.0 | wait | Too little query evidence for a new page. Keep tracking before changing content. |
 
@@ -125,5 +125,5 @@ Do not create a new Learn page unless GSC/Searchfit shows a recurring query clus
 - [ ] Export or manually record Umami landing pages, referrers, AI referrals, Reddit referrals, and `llms.txt` hits.
 - [ ] Add changed pages to the next weekly comparison.
 - [x] Generate `pnpm seo:ai-visibility -- --date 2026-06-22`.
-- [ ] Manually check whether AI assistants mention Origin accurately for the tracked prompts in `docs/seo-measurement.md`.
+- [ ] Manually check whether AI assistants mention Wenlan accurately for the tracked prompts in `docs/seo-measurement.md`.
 - [ ] Next measurement date: 2026-06-29.
