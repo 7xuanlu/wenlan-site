@@ -9,6 +9,7 @@ export { zhCNContent } from "./zh-CN";
 export { zhTWContent } from "./zh-TW";
 export type {
   AboutContent,
+  ChromeContent,
   ContentLeaf,
   ContentUnit,
   CoreContent,

@@ -28,6 +28,11 @@ export type LinkContent = {
   label: string;
 };
 
+export type ChromeContent = {
+  skipLinkLabel: string;
+  breadcrumbAriaLabel: string;
+};
+
 export type WaitlistErrorCode =
   | "required"
   | "invalid"
@@ -296,6 +301,7 @@ export type FooterContent = {
 };
 
 export type CoreContent = {
+  chrome: ContentUnit<ChromeContent>;
   home: ContentUnit<HomeContent>;
   about: ContentUnit<AboutContent>;
   docs: ContentUnit<DocsContent>;

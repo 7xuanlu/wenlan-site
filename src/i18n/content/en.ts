@@ -7,6 +7,14 @@ const claudeCommands = [
 ] as const;
 
 export const enContent = {
+  chrome: {
+    status: "translated",
+    sourceHash: null,
+    content: {
+      skipLinkLabel: "Skip to content",
+      breadcrumbAriaLabel: "Breadcrumb",
+    },
+  },
   home: {
     status: "translated",
     sourceHash: null,

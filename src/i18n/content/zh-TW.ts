@@ -7,6 +7,14 @@ const claudeCommands = [
 ] as const;
 
 export const zhTWContent = {
+  chrome: {
+    status: "translated",
+    sourceHash: "bda0fd8a846d006539eab9c685b3be1e51df3f019c837c06e79900eb774faa57",
+    content: {
+      skipLinkLabel: "跳到主要內容",
+      breadcrumbAriaLabel: "麵包屑",
+    },
+  },
   home: {
     status: "translated",
     sourceHash: "cbb903525db65e6783fb185115c56c4a53092671e9c318ce1502ce61912fb297",

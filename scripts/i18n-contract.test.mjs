@@ -378,7 +378,7 @@ test("alternate URLs are reciprocal and include x-default for core translated pa
 
 test("content dictionaries keep exact core keys, content shapes, and leaf counts", async () => {
   const { content, hash } = await loadI18nModules();
-  const expectedKeys = ["about", "docs", "footer", "getStarted", "home", "notFound"];
+  const expectedKeys = ["about", "chrome", "docs", "footer", "getStarted", "home", "notFound"];
 
   assert.deepEqual(Object.keys(content.enContent).sort(), expectedKeys);
   assert.deepEqual(Object.keys(content.zhTWContent).sort(), expectedKeys);
@@ -507,6 +507,37 @@ test("footer aria label is localized content", async () => {
   );
   assert.match(source, /aria-label=\{content\.ariaLabel\}/);
   assert.doesNotMatch(source, /aria-label="Site footer"/);
+});
+
+test("shared accessibility navigation copy is localized content", async () => {
+  const { content } = await loadI18nModules();
+
+  assert.equal(content.enContent.chrome?.content?.skipLinkLabel, "Skip to content");
+  assert.equal(content.enContent.chrome?.content?.breadcrumbAriaLabel, "Breadcrumb");
+  assert.equal(content.zhTWContent.chrome?.content?.skipLinkLabel, "跳到主要內容");
+  assert.equal(content.zhTWContent.chrome?.content?.breadcrumbAriaLabel, "麵包屑");
+  assert.equal(content.zhCNContent.chrome?.content?.skipLinkLabel, "跳到主要内容");
+  assert.equal(content.zhCNContent.chrome?.content?.breadcrumbAriaLabel, "面包屑");
+});
+
+test("localized shared modules do not hardcode English accessibility navigation copy", async () => {
+  const rootDocumentSource = await readFile(
+    resolve(repoRoot, "src/app/root-document.tsx"),
+    "utf8",
+  );
+  assert.match(rootDocumentSource, /getCoreContent\(locale\)\.chrome\.content/);
+  assert.match(rootDocumentSource, /skipLinkLabel/);
+  assert.doesNotMatch(rootDocumentSource, />\s*Skip to content\s*</);
+
+  for (const path of [
+    "src/app/_pages/about.tsx",
+    "src/app/_pages/docs-index.tsx",
+    "src/app/_pages/get-started.tsx",
+  ]) {
+    const source = await readFile(resolve(repoRoot, path), "utf8");
+    assert.match(source, /chrome\.breadcrumbAriaLabel/, path);
+    assert.doesNotMatch(source, /aria-label="Breadcrumb"/, path);
+  }
 });
 
 test("docs index visible cards come from localized docs content", async () => {

@@ -5,7 +5,9 @@ import { LocalizedLink } from "@/i18n/navigation";
 import { SITE_URL } from "@/i18n/routing";
 
 export function GetStartedPage({ locale }: { locale: Locale }) {
-  const content = getCoreContent(locale).getStarted.content;
+  const dictionary = getCoreContent(locale);
+  const content = dictionary.getStarted.content;
+  const chrome = dictionary.chrome.content;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -59,7 +61,7 @@ export function GetStartedPage({ locale }: { locale: Locale }) {
         <header className="relative border-b border-[var(--o-border-subtle)] px-6 py-24 sm:py-32">
           <ArticleHalo />
           <div className="relative z-10 mx-auto max-w-5xl">
-            <nav className="flex items-center gap-3 font-mono text-xs text-[var(--o-text-muted)]">
+            <nav aria-label={chrome.breadcrumbAriaLabel} className="flex items-center gap-3 font-mono text-xs text-[var(--o-text-muted)]">
               <LocalizedLink
                 href="/"
                 locale={locale}

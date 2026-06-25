@@ -1,4 +1,5 @@
 import { SiteFooter } from "@/components/site-footer";
+import { getCoreContent } from "@/i18n/content";
 import { LOCALE_CONFIG, type Locale } from "@/i18n/locales";
 import { rootHomeSeo } from "@/i18n/metadata";
 import { Fraunces, Instrument_Sans, JetBrains_Mono } from "next/font/google";
@@ -30,6 +31,7 @@ export default function RootDocument({
   locale: Locale;
 }) {
   const siteDescription = rootHomeSeo(locale).description;
+  const chrome = getCoreContent(locale).chrome.content;
 
   return (
     <html
@@ -160,7 +162,7 @@ export default function RootDocument({
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:bg-[var(--o-text)] focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:text-[var(--o-bg)] focus:outline focus:outline-2 focus:outline-[var(--o-warm)]"
         >
-          Skip to content
+          {chrome.skipLinkLabel}
         </a>
         <ThemeProvider>
           <div id="main-content">{children}</div>
