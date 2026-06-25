@@ -186,9 +186,8 @@ test("public eval surfaces publish the latest LME oracle and LME-S framing", asy
     "public/llms.txt",
     "src/app/llms-full.txt/route.ts",
     "src/app/layout.tsx",
-    "src/app/page.tsx",
+    "src/i18n/content/en.ts",
     "src/app/docs/docs.ts",
-    "src/components/sections.tsx",
     "src/app/learn/articles.ts",
     "docs/seo-measurement.md",
   ];
@@ -207,10 +206,10 @@ test("public eval surfaces publish the latest LME oracle and LME-S framing", asy
     assert.doesNotMatch(source, /Retrieval aggregate pending/, path);
   }
 
-  const homepage = await readRepo("src/app/page.tsx");
-  assert.match(homepage, /Full replay/, "src/app/page.tsx");
-  assert.match(homepage, /No retrieval/, "src/app/page.tsx");
-  assert.match(homepage, /168 tokens \/ query/, "src/app/page.tsx");
+  const homepageContent = await readRepo("src/i18n/content/en.ts");
+  assert.match(homepageContent, /Full replay/, "src/i18n/content/en.ts");
+  assert.match(homepageContent, /No retrieval/, "src/i18n/content/en.ts");
+  assert.match(homepageContent, /168 tokens \/ query/, "src/i18n/content/en.ts");
 
   const headlineMetricSurfaces = [
     "src/app/opengraph-image.tsx",
@@ -317,7 +316,7 @@ test("security docs align with the current Wenlan site policy", async () => {
 test("public current-release surfaces track the authoritative Wenlan release", async () => {
   const { version, date } = await currentWenlanRelease();
   const layout = await readRepo("src/app/layout.tsx");
-  const aboutPage = await readRepo("src/app/about/page.tsx");
+  const aboutPage = await readRepo("src/i18n/content/en.ts");
   const aboutOg = await readRepo("src/app/about/opengraph-image.tsx");
   const docs = await readRepo("src/app/docs/docs.ts");
   const seoMeasurement = await readRepo("docs/seo-measurement.md");

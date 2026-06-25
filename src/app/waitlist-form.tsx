@@ -3,7 +3,13 @@
 import { useActionState } from "react";
 import { joinWaitlist } from "./actions";
 
-export function WaitlistForm() {
+type WaitlistFormCopy = {
+  successMessage: string;
+  pendingLabel: string;
+  submitLabel: string;
+};
+
+export function WaitlistForm({ copy }: { copy: WaitlistFormCopy }) {
   const [state, action, isPending] = useActionState(joinWaitlist, null);
 
   if (state?.success) {
@@ -13,7 +19,7 @@ export function WaitlistForm() {
           <path d="M20 6 9 17l-5-5" />
         </svg>
         <span className="text-sm text-[var(--o-sage)]">
-          You&apos;re in. We&apos;ll keep you posted.
+          {copy.successMessage}
         </span>
       </div>
     );
@@ -41,10 +47,10 @@ export function WaitlistForm() {
                 <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" />
                 <path d="M4 12a8 8 0 018-8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="opacity-75" />
               </svg>
-              Joining...
+              {copy.pendingLabel}
             </span>
           ) : (
-            "Get Updates"
+            copy.submitLabel
           )}
         </button>
       </div>

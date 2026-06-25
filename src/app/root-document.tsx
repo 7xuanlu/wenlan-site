@@ -164,7 +164,7 @@ export default function RootDocument({
         </a>
         <ThemeProvider>
           <div id="main-content">{children}</div>
-          <SiteFooter />
+          <SiteFooter locale={locale} />
         </ThemeProvider>
       </body>
     </html>

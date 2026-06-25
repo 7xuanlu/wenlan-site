@@ -2,13 +2,19 @@
 
 import { useTheme } from "./theme-provider";
 
-export function ThemeToggle() {
+export function ThemeToggle({
+  darkLabel = "Switch to dark theme",
+  lightLabel = "Switch to light theme",
+}: {
+  darkLabel?: string;
+  lightLabel?: string;
+}) {
   const { theme, toggle } = useTheme();
 
   return (
     <button
       onClick={toggle}
-      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+      aria-label={theme === "dark" ? lightLabel : darkLabel}
       className="flex size-8 items-center justify-center rounded-lg transition-colors duration-150 hover:bg-[var(--o-card-bg)]"
     >
       {theme === "dark" ? (

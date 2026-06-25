@@ -3276,11 +3276,11 @@ test("Learn index SERP copy leads with Wenlan and AI work memory guides", async 
 });
 
 test("homepage links directly to the Claude Code memory guide", async () => {
-  const homepage = await readRepo("src/app/page.tsx");
+  const homepage = await readRepo("src/i18n/content/en.ts");
 
-  assert.match(homepage, /href="\/learn\/claude-code-memory"/);
+  assert.match(homepage, /href:\s*"\/learn\/claude-code-memory"/);
   assert.match(homepage, /Claude Code memory/);
-  assert.match(homepage, /href="\/learn\/mcp-memory-server"/);
+  assert.match(homepage, /href:\s*"\/learn\/mcp-memory-server"/);
   assert.match(homepage, /MCP server/);
 });
 

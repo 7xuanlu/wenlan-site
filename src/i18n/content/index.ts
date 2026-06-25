@@ -8,11 +8,17 @@ export { enContent } from "./en";
 export { zhCNContent } from "./zh-CN";
 export { zhTWContent } from "./zh-TW";
 export type {
+  AboutContent,
   ContentLeaf,
   ContentUnit,
   CoreContent,
+  CoreTextSection,
   ContentStatus,
+  DocsContent,
   FooterContent,
+  GetStartedContent,
+  HomeContent,
+  LinkContent,
   NotFoundContent,
   SeoContent,
 } from "./schema";
@@ -24,3 +30,7 @@ export const coreContentByLocale = {
 } as const satisfies Record<Locale, CoreContent>;
 
 export const localizedContentByLocale = coreContentByLocale;
+
+export function getCoreContent(locale: Locale): CoreContent {
+  return coreContentByLocale[locale];
+}

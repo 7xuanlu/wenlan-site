@@ -114,18 +114,43 @@ function requiresTranslatedDifference(unitKey, path, value, protectedTokens) {
 }
 
 function isAllowedUnchangedLeaf(unitKey, path, value) {
+  if (isIdLeafPath(path)) return true;
   if (isHrefLeafPath(path)) return true;
+  if (isOrdinalLeafPath(path)) return true;
   if (isUrlOnlyValue(value)) return true;
   if (allowedUnchangedLeafValues.has(value)) return true;
   return allowedUnchangedLeafPaths.has(unitKey ? `${unitKey}.${path}` : path);
+}
+
+function isIdLeafPath(path) {
+  return path === "id" || path.endsWith(".id");
 }
 
 function isHrefLeafPath(path) {
   return path === "href" || path.endsWith(".href");
 }
 
+function isOrdinalLeafPath(path) {
+  return path === "number" || path.endsWith(".number");
+}
+
 function isUrlOnlyValue(value) {
   return /^https?:\/\/[^\s]+$/.test(value);
+}
+
+function assertArrayItemsHaveStableIds(items, label) {
+  assert.ok(Array.isArray(items), `${label} should be an array`);
+  assert.ok(items.length > 0, `${label} should not be empty`);
+  assert.deepEqual(
+    items.map((item) => typeof item.id),
+    Array.from({ length: items.length }, () => "string"),
+    `${label} item ids`,
+  );
+  assert.equal(
+    new Set(items.map((item) => item.id)).size,
+    items.length,
+    `${label} item ids should be unique`,
+  );
 }
 
 async function fileExists(path) {
@@ -206,6 +231,23 @@ test("English app routes live under the unprefixed route group", async () => {
     "src/app/(en)/feed.xml/route.ts",
     "src/app/(en)/llms-full.txt/route.ts",
     "src/app/(en)/not-found.tsx",
+  ]) {
+    await assertFileExists(path);
+  }
+});
+
+test("localized core page wrappers and shared page modules exist", async () => {
+  for (const path of [
+    "src/app/_pages/home.tsx",
+    "src/app/_pages/about.tsx",
+    "src/app/_pages/docs-index.tsx",
+    "src/app/_pages/get-started.tsx",
+    "src/app/_pages/not-found.tsx",
+    "src/app/[locale]/page.tsx",
+    "src/app/[locale]/about/page.tsx",
+    "src/app/[locale]/docs/page.tsx",
+    "src/app/[locale]/docs/get-started/page.tsx",
+    "src/app/[locale]/not-found.tsx",
   ]) {
     await assertFileExists(path);
   }
@@ -357,6 +399,44 @@ test("content dictionaries keep exact core keys, content shapes, and leaf counts
   );
 });
 
+test("core content dictionaries cover first-release localized page surfaces", async () => {
+  const { content } = await loadI18nModules();
+
+  for (const [locale, dictionary] of Object.entries(content.coreContentByLocale)) {
+    const home = dictionary.home.content;
+    assert.ok(home.nav?.links?.length >= 4, `${locale}.home.content.nav.links`);
+    assert.ok(home.hero?.primaryCta?.label, `${locale}.home.content.hero.primaryCta`);
+    assert.ok(home.metrics?.rows?.length >= 3, `${locale}.home.content.metrics.rows`);
+    assert.ok(home.faqs?.items?.length >= 10, `${locale}.home.content.faqs.items`);
+
+    for (const key of [
+      "problem",
+      "solution",
+      "memoryDistillery",
+      "humanControl",
+      "features",
+      "openSourceCta",
+    ]) {
+      assert.ok(home.sections?.[key]?.title, `${locale}.home.content.sections.${key}.title`);
+      assert.ok(home.sections?.[key]?.body, `${locale}.home.content.sections.${key}.body`);
+    }
+
+    assert.ok(dictionary.about.content.principles?.items?.length >= 4, `${locale}.about.content.principles.items`);
+    assert.ok(dictionary.docs.content.sections?.items?.length >= 4, `${locale}.docs.content.sections.items`);
+    assert.ok(dictionary.getStarted.content.steps?.length >= 3, `${locale}.getStarted.content.steps`);
+    assert.ok(dictionary.notFound.content.title, `${locale}.notFound.content.title`);
+    assert.ok(dictionary.footer.content.groups?.length >= 3, `${locale}.footer.content.groups`);
+  }
+
+  assertArrayItemsHaveStableIds(content.enContent.home.content.nav.links, "home.nav.links");
+  assertArrayItemsHaveStableIds(content.enContent.home.content.metrics.rows, "home.metrics.rows");
+  assertArrayItemsHaveStableIds(content.enContent.home.content.faqs.items, "home.faqs.items");
+  assertArrayItemsHaveStableIds(content.enContent.about.content.principles.items, "about.principles.items");
+  assertArrayItemsHaveStableIds(content.enContent.docs.content.sections.items, "docs.sections.items");
+  assertArrayItemsHaveStableIds(content.enContent.getStarted.content.steps, "getStarted.steps");
+  assertArrayItemsHaveStableIds(content.enContent.footer.content.groups, "footer.groups");
+});
+
 test("Chinese core content cannot hide English fallback copies", async () => {
   const { content, hash, protectedTokens } = await loadI18nModules();
   assert.ok(content.coreContentByLocale, "coreContentByLocale export");
@@ -434,6 +514,52 @@ test("English core content records the current SEO title and description subset"
     content.enContent.getStarted.content.seo.title,
     "Get Started with Wenlan | Local AI Work Memory",
   );
+});
+
+test("footer and root document pass locale through localized links", async () => {
+  const siteFooterSource = await readFile(
+    resolve(repoRoot, "src/components/site-footer.tsx"),
+    "utf8",
+  );
+  assert.match(siteFooterSource, /type\s+SiteFooterProps\s*=\s*{\s*locale:\s*Locale\s*;/s);
+  assert.match(siteFooterSource, /function\s+SiteFooter\s*\(\s*{\s*locale\s*}/);
+  assert.match(siteFooterSource, /getCoreContent\(locale\)\.footer\.content/);
+  assert.match(siteFooterSource, /LocalizedLink/);
+
+  const rootDocumentSource = await readFile(
+    resolve(repoRoot, "src/app/root-document.tsx"),
+    "utf8",
+  );
+  assert.match(rootDocumentSource, /<SiteFooter\s+locale=\{locale\}\s*\/>/);
+});
+
+test("localized core wrappers reject unsupported and English locale params through the shared resolver", async () => {
+  await assertFileExists("src/i18n/resolve-locale.ts");
+  const resolverSource = await readFile(
+    resolve(repoRoot, "src/i18n/resolve-locale.ts"),
+    "utf8",
+  );
+  assert.match(resolverSource, /resolveLocalizedRouteLocale/);
+  assert.match(resolverSource, /TRANSLATED_LOCALES/);
+  assert.match(resolverSource, /notFound\(\)/);
+
+  for (const path of [
+    "src/app/[locale]/page.tsx",
+    "src/app/[locale]/about/page.tsx",
+    "src/app/[locale]/docs/page.tsx",
+    "src/app/[locale]/docs/get-started/page.tsx",
+  ]) {
+    const source = await readFile(resolve(repoRoot, path), "utf8");
+    assert.match(source, /resolveLocalizedRouteLocale/, path);
+    assert.match(source, /await\s+params/, path);
+  }
+
+  const localizedNotFoundSource = await readFile(
+    resolve(repoRoot, "src/app/[locale]/not-found.tsx"),
+    "utf8",
+  );
+  assert.match(localizedNotFoundSource, /useParams/, "src/app/[locale]/not-found.tsx");
+  assert.match(localizedNotFoundSource, /TRANSLATED_LOCALES/, "src/app/[locale]/not-found.tsx");
 });
 
 test("hashing normalizes whitespace, sorts leaves, and detects English content drift", async () => {
@@ -522,21 +648,25 @@ test("protected token extraction preserves commands, URLs, packages, env vars, m
     "`/plugin marketplace add 7xuanlu/claude-plugins`",
     "`/plugin install wenlan@7xuanlu`",
     "`/init`",
+    "`/distill`",
     "`npx -y wenlan setup`",
     "`~/.wenlan/bin/wenlan mcp add codex`",
+    "`~/.wenlan/.git/` and `crates/wenlan-core/src/eval/`",
     "Wenlan and GitHub stay branded.",
     "See https://github.com/7xuanlu/wenlan and @7xuanlu/wenlan.",
-    "Set WENLAN_RERANKER_ENABLED before reading LME_Oracle at 93.6% / 0.857.",
+    "Set WENLAN_RERANKER_ENABLED before reading LME_Oracle at 168 tokens / query, 93.6% / 0.857.",
     "Apache-2.0, Qi-Xuan Lu, and 7xuanlu stay exact.",
   ].join("\n");
   const translated = [
     "執行 `/plugin marketplace add 7xuanlu/claude-plugins`。",
     "再執行 `/plugin install wenlan@7xuanlu` 與 `/init`。",
+    "需要時執行 `/distill`。",
     "也可以執行 `npx -y wenlan setup`。",
     "MCP 指令是 `~/.wenlan/bin/wenlan mcp add codex`。",
+    "本地路徑包含 `~/.wenlan/.git/` 和 `crates/wenlan-core/src/eval/`。",
     "Wenlan 和 GitHub 保持品牌寫法。",
     "參考 https://github.com/7xuanlu/wenlan 和 @7xuanlu/wenlan。",
-    "先設定 WENLAN_RERANKER_ENABLED，再閱讀 LME_Oracle 的 93.6% / 0.857。",
+    "先設定 WENLAN_RERANKER_ENABLED，再閱讀 LME_Oracle 的 168 tokens / query、93.6% / 0.857。",
     "Apache-2.0、Qi-Xuan Lu、7xuanlu 必須保留。",
   ].join("\n");
 
@@ -545,14 +675,18 @@ test("protected token extraction preserves commands, URLs, packages, env vars, m
     "/plugin marketplace add 7xuanlu/claude-plugins",
     "/plugin install wenlan@7xuanlu",
     "/init",
+    "/distill",
     "npx -y wenlan setup",
     "~/.wenlan/bin/wenlan mcp add codex",
+    "~/.wenlan/.git/",
+    "crates/wenlan-core/src/eval/",
     "Wenlan",
     "GitHub",
     "https://github.com/7xuanlu/wenlan",
     "@7xuanlu/wenlan",
     "WENLAN_RERANKER_ENABLED",
     "LME_Oracle",
+    "168 tokens / query",
     "93.6%",
     "0.857",
     "Apache-2.0",

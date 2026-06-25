@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { useScrollProgress } from "@/app/use-scroll-reveal";
+import type { CoreTextSection } from "@/i18n/content";
 
 function clamp(v: number, min: number, max: number) {
   return Math.max(min, Math.min(max, v));
@@ -560,7 +561,11 @@ function CompoundVisual({ progress }: { progress: number }) {
   );
 }
 
-export function ProblemSection() {
+type TextSectionProps = {
+  copy: CoreTextSection;
+};
+
+export function ProblemSection({ copy }: TextSectionProps) {
   const { ref, progress } = useScrollProgress<HTMLElement>();
   const isMobile = useIsMobile();
 
@@ -575,16 +580,16 @@ export function ProblemSection() {
           style={{ opacity, transform: `translateY(${slide}px)` }}
         >
           <p className="mb-5 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
-            The problem
+            {copy.eyebrow}
           </p>
           <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
-            Every new AI session starts cold.
+            {copy.title}
           </h2>
           <p className="mt-6 text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
-            The work happened, but the context did not survive. Decisions, fixes, and project instincts stay trapped in old chats instead of helping the next agent.
+            {copy.body}
           </p>
           <p className="mt-8 max-w-sm border-l border-[var(--o-warm)]/40 pl-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
-            One missing handoff is enough to make the next conversation repeat the last one.
+            {copy.note}
           </p>
         </div>
 
@@ -594,7 +599,7 @@ export function ProblemSection() {
   );
 }
 
-export function SolutionSection() {
+export function SolutionSection({ copy }: TextSectionProps) {
   const { ref, progress } = useScrollProgress<HTMLElement>();
   const isMobile = useIsMobile();
 
@@ -613,16 +618,16 @@ export function SolutionSection() {
           style={{ opacity, transform: `translateY(${slide}px)` }}
         >
           <p className="mb-5 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
-            What Wenlan brings
+            {copy.eyebrow}
           </p>
           <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
-            A handoff loop for AI work.
+            {copy.title}
           </h2>
           <p className="mt-6 text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
-            Wenlan captures decisions, lessons, and next steps as work happens, then loads the handoff when the next agent starts.
+            {copy.body}
           </p>
           <p className="mt-8 max-w-sm border-l border-[var(--o-indigo)]/40 pl-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
-            The next conversation starts from the handoff instead of reconstructing the past.
+            {copy.note}
           </p>
         </div>
       </div>
@@ -630,7 +635,7 @@ export function SolutionSection() {
   );
 }
 
-export function MemoryDistillerySection() {
+export function MemoryDistillerySection({ copy }: TextSectionProps) {
   const { ref, progress } = useScrollProgress<HTMLElement>();
   const isMobile = useIsMobile();
 
@@ -645,16 +650,16 @@ export function MemoryDistillerySection() {
           style={{ opacity, transform: `translateY(${slide}px)` }}
         >
           <p className="mb-5 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
-            Deliberate distillation
+            {copy.eyebrow}
           </p>
           <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
-            Wenlan turns repeated context into source-backed pages.
+            {copy.title}
           </h2>
           <p className="mt-6 text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
-            Run /distill when repeated captures should become a readable page. Optional model or API-key paths can add background extraction and page refresh work.
+            {copy.body}
           </p>
           <p className="mt-8 max-w-sm border-l border-[var(--o-warm)]/45 pl-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
-            The next run starts from cited context, not transcript residue.
+            {copy.note}
           </p>
         </div>
 
@@ -664,7 +669,7 @@ export function MemoryDistillerySection() {
   );
 }
 
-export function HumanControlSection() {
+export function HumanControlSection({ copy }: TextSectionProps) {
   const { ref, progress } = useScrollProgress<HTMLElement>();
   const isMobile = useIsMobile();
 
@@ -683,16 +688,16 @@ export function HumanControlSection() {
           style={{ opacity, transform: `translateY(${slide}px)` }}
         >
           <p className="mb-5 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
-            Hybrid storage
+            {copy.eyebrow}
           </p>
           <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
-            The daemon owns recall. Readable artifacts stay inspectable.
+            {copy.title}
           </h2>
           <p className="mt-6 text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
-            Wenlan keeps raw captures in the local daemon store for retrieval, then projects pages, handoffs, and status files you can open, diff, and move.
+            {copy.body}
           </p>
           <p className="mt-8 max-w-sm border-l border-[var(--o-sage)]/50 pl-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
-            Agents recall from the daemon. You inspect the readable files.
+            {copy.note}
           </p>
         </div>
       </div>
@@ -700,7 +705,7 @@ export function HumanControlSection() {
   );
 }
 
-export function FeatureSection() {
+export function FeatureSection({ copy }: TextSectionProps) {
   const { ref, progress } = useScrollProgress<HTMLElement>();
   const isMobile = useIsMobile();
 
@@ -715,16 +720,16 @@ export function FeatureSection() {
           style={{ opacity, transform: `translateY(${slide}px)` }}
         >
           <p className="mb-5 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
-            Knowledge pages
+            {copy.eyebrow}
           </p>
           <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
-            The work becomes reusable pages.
+            {copy.title}
           </h2>
           <p className="mt-6 text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
-            Cleaned decisions and lessons become durable pages instead of buried chat logs. They are organized enough for agents to use and concrete enough for humans to read.
+            {copy.body}
           </p>
           <p className="mt-8 max-w-sm border-l border-[var(--o-sage)]/50 pl-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
-            Your work stops being transcript history and starts becoming project knowledge.
+            {copy.note}
           </p>
         </div>
 

@@ -1,0 +1,183 @@
+import { ArticleHalo, MemoryIndex } from "../(en)/learn/article-visuals";
+import { getCoreContent } from "@/i18n/content";
+import type { Locale } from "@/i18n/locales";
+import { LocalizedLink } from "@/i18n/navigation";
+import { SITE_URL } from "@/i18n/routing";
+
+export function GetStartedPage({ locale }: { locale: Locale }) {
+  const content = getCoreContent(locale).getStarted.content;
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: content.breadcrumbs.home,
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: content.breadcrumbs.docs,
+        item: `${SITE_URL}/docs`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: content.hero.eyebrow,
+        item: `${SITE_URL}/docs/get-started`,
+      },
+    ],
+  };
+
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: content.schema.name,
+    description: content.schema.description,
+    step: content.steps.map((step) => ({
+      "@type": "HowToStep",
+      name: step.title,
+      text: [...step.paragraphs, ...step.commands].join("\n"),
+    })),
+  };
+
+  return (
+    <main className="grain min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+
+      <article>
+        <header className="relative border-b border-[var(--o-border-subtle)] px-6 py-24 sm:py-32">
+          <ArticleHalo />
+          <div className="relative z-10 mx-auto max-w-5xl">
+            <nav className="flex items-center gap-3 font-mono text-xs text-[var(--o-text-muted)]">
+              <LocalizedLink
+                href="/"
+                locale={locale}
+                className="transition-colors hover:text-[var(--o-text-secondary)]"
+              >
+                {content.breadcrumbs.home}
+              </LocalizedLink>
+              <span>/</span>
+              <LocalizedLink
+                href="/docs"
+                locale={locale}
+                className="transition-colors hover:text-[var(--o-text-secondary)]"
+              >
+                {content.breadcrumbs.docs}
+              </LocalizedLink>
+            </nav>
+            <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
+              <div>
+                <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
+                  {content.hero.eyebrow}
+                </p>
+                <h1 className="warm-glow font-serif text-[2rem] leading-[1.08] font-medium tracking-tight sm:text-7xl sm:leading-[1.05]">
+                  {content.hero.title}
+                </h1>
+                <p className="mt-8 max-w-[20rem] text-lg leading-relaxed text-[var(--o-text-secondary)] sm:max-w-2xl">
+                  {content.hero.description}
+                </p>
+                <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[11px] text-[var(--o-text-muted)]">
+                  {content.hero.meta.map((item) => (
+                    <span key={item}>{item}</span>
+                  ))}
+                </div>
+              </div>
+              <MemoryIndex
+                label={content.hero.setupPathLabel}
+                items={[...content.hero.setupPathItems]}
+              />
+            </div>
+          </div>
+        </header>
+
+        <section className="px-6 py-16">
+          <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-[minmax(0,680px)_1fr]">
+            <div className="space-y-14">
+              {content.steps.map((step) => (
+                <section
+                  key={step.id}
+                  className="grid gap-5 border-t border-[var(--o-border-subtle)] pt-10 sm:grid-cols-[72px_1fr]"
+                >
+                  <p className="font-mono text-[11px] text-[var(--o-warm)]">
+                    {step.number}
+                  </p>
+                  <div>
+                    <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
+                      {step.title}
+                    </h2>
+                    {step.paragraphs.map((paragraph, index) => (
+                      <p
+                        key={paragraph}
+                        className={`${index === 0 ? "mt-5 text-base text-[var(--o-text-secondary)]" : "mt-4 text-sm text-[var(--o-text-muted)]"} leading-relaxed`}
+                      >
+                        {paragraph}
+                      </p>
+                    ))}
+                    {step.commands.map((command) => (
+                      <pre
+                        key={command}
+                        className="mt-6 overflow-x-auto rounded-xl border border-[var(--o-border)] bg-[var(--o-bg-deep)] p-5 font-mono text-sm leading-relaxed text-[var(--o-text-secondary)]"
+                      >
+                        <code>{command}</code>
+                      </pre>
+                    ))}
+                    {step.ctas.length > 0 && (
+                      <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                        {step.ctas.map((cta, index) => (
+                          <LocalizedLink
+                            key={cta.id}
+                            href={cta.href}
+                            locale={locale}
+                            className={
+                              index === 0
+                                ? "rounded-xl bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] transition-all hover:shadow-[0_0_28px_var(--o-glow-warm)]"
+                                : "rounded-xl border border-[var(--o-border)] px-5 py-3 text-center text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
+                            }
+                          >
+                            {cta.label}
+                          </LocalizedLink>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </section>
+              ))}
+            </div>
+
+            <aside className="space-y-6 lg:sticky lg:top-20 lg:self-start">
+              <div className="rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5">
+                <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
+                  {content.sidebar.eyebrow}
+                </p>
+                <div className="mt-4 space-y-3">
+                  {content.sidebar.items.map((item, index) => (
+                    <p
+                      key={item.id}
+                      className="grid grid-cols-[28px_1fr] gap-2 text-sm text-[var(--o-text-secondary)]"
+                    >
+                      <span className="font-mono text-[10px] text-[var(--o-text-dim)]">
+                        {(index + 1).toString().padStart(2, "0")}
+                      </span>
+                      <span>{item.label}</span>
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </aside>
+          </div>
+        </section>
+      </article>
+    </main>
+  );
+}
