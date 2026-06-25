@@ -7,7 +7,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DEFAULT_INPUT_DIR = "/tmp/origin-seo";
+const DEFAULT_INPUT_DIR = "/tmp/wenlan-seo";
 
 function parseArgs(argv) {
   const args = {};
@@ -34,7 +34,7 @@ function parseArgs(argv) {
     date: args.date,
     inputDir: resolve(
       process.cwd(),
-      args["input-dir"] ?? process.env.SEO_WEEKLY_INPUT_DIR ?? DEFAULT_INPUT_DIR,
+      args["input-dir"] || process.env.SEO_WEEKLY_INPUT_DIR || DEFAULT_INPUT_DIR,
     ),
     outputPath: args.output ? resolve(process.cwd(), args.output) : null,
   };
