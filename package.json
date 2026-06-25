@@ -15,7 +15,7 @@
     "seo:technical:deployed": "node scripts/seo-deployed-technical-check.mjs",
     "test:i18n": "node --import tsx --test scripts/i18n-contract.test.mjs",
     "i18n:technical:built": "node scripts/i18n-built-check.mjs",
-    "test:seo": "node --test scripts/*.test.mjs",
+    "test:seo": "node --test scripts/brand-contract.test.mjs scripts/seo-weekly.test.mjs",
     "start": "next start",
     "lint": "pnpm exec tsc --noEmit --incremental false"
   },

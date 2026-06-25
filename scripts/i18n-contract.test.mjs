@@ -68,6 +68,14 @@ function leafCountsByKey(dictionary, flattenLeafStrings) {
   );
 }
 
+function hasNonProtectedText(value, protectedTokens) {
+  const unprotected = protectedTokens
+    .extractProtectedTokens(value)
+    .reduce((remaining, token) => remaining.replaceAll(token, ""), value);
+
+  return /[A-Za-z0-9]/.test(unprotected);
+}
+
 test("locale model exposes only the supported app locales and metadata", async () => {
   const { locales } = await loadI18nModules();
 
@@ -212,6 +220,44 @@ test("content dictionaries keep exact core keys, content shapes, and leaf counts
     leafCountsByKey(content.zhCNContent, hash.flattenLeafStrings),
     leafCountsByKey(content.enContent, hash.flattenLeafStrings),
   );
+});
+
+test("Chinese core content cannot hide English fallback copies", async () => {
+  const { content, hash, protectedTokens } = await loadI18nModules();
+  assert.ok(content.coreContentByLocale, "coreContentByLocale export");
+
+  const englishDictionary = content.coreContentByLocale.en;
+
+  for (const locale of ["zh-TW", "zh-CN"]) {
+    const dictionary = content.coreContentByLocale[locale];
+
+    for (const key of Object.keys(englishDictionary)) {
+      const englishUnit = englishDictionary[key];
+      const translatedUnit = dictionary[key];
+      const englishLeaves = hash.flattenLeafStrings(englishUnit.content);
+      const translatedLeaves = hash.flattenLeafStrings(translatedUnit.content);
+      const translatedLeavesByPath = new Map(
+        translatedLeaves.map(({ path, value }) => [path, value]),
+      );
+      const hasChangedNonProtectedLeaf = englishLeaves.some(
+        ({ path, value }) =>
+          hasNonProtectedText(value, protectedTokens) &&
+          translatedLeavesByPath.get(path) !== value,
+      );
+
+      assert.equal(translatedUnit.status, "translated", `${locale}.${key}.status`);
+      assert.notDeepEqual(
+        translatedLeaves,
+        englishLeaves,
+        `${locale}.${key}.content`,
+      );
+      assert.equal(
+        hasChangedNonProtectedLeaf,
+        true,
+        `${locale}.${key}.content`,
+      );
+    }
+  }
 });
 
 test("English core content records the current SEO title and description subset", async () => {

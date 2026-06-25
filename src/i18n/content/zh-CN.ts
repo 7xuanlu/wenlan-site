@@ -2,7 +2,7 @@ import type { CoreContent } from "./schema";
 
 export const zhCNContent = {
   home: {
-    coverage: "translated",
+    status: "translated",
     sourceHash: "9f2f9352787cfa8d898143bf31dc7ef2c0839f3e853624c175a697cd4b58da9c",
     content: {
       seo: {
@@ -13,7 +13,7 @@ export const zhCNContent = {
     },
   },
   about: {
-    coverage: "translated",
+    status: "translated",
     sourceHash: "70474706aa31a8413421882f5b8b38dbd9027fd39456f7a99bb4df33c24b73f6",
     content: {
       seo: {
@@ -24,7 +24,7 @@ export const zhCNContent = {
     },
   },
   docs: {
-    coverage: "translated",
+    status: "translated",
     sourceHash: "a48be530f274fa7c9f761dadd4c5d33f483fbdfe2cdc397362d472cd1e144e41",
     content: {
       seo: {
@@ -35,7 +35,7 @@ export const zhCNContent = {
     },
   },
   getStarted: {
-    coverage: "translated",
+    status: "translated",
     sourceHash: "f5f5910e8be01945ed81cad34101b84ee2de23b5dbce90f142ea196eefd3ed1b",
     content: {
       seo: {
@@ -46,7 +46,7 @@ export const zhCNContent = {
     },
   },
   notFound: {
-    coverage: "translated",
+    status: "translated",
     sourceHash: "0940a066500ab8b73d9de14425404e4097edfcdd28e07b04dab78cc94bb4f916",
     content: {
       eyebrow: "404",
@@ -90,7 +90,7 @@ export const zhCNContent = {
     },
   },
   footer: {
-    coverage: "translated",
+    status: "translated",
     sourceHash: "9072d2a97d7b463a4218e80c5ed1c8e12c0e443bf785dc8570bbbab5aee90c53",
     content: {
       brand: "Wenlan",

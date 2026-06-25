@@ -11,14 +11,16 @@ export type {
   ContentLeaf,
   ContentUnit,
   CoreContent,
-  CoverageStatus,
+  ContentStatus,
   FooterContent,
   NotFoundContent,
   SeoContent,
 } from "./schema";
 
-export const localizedContentByLocale = {
+export const coreContentByLocale = {
   en: enContent,
   "zh-TW": zhTWContent,
   "zh-CN": zhCNContent,
 } as const satisfies Record<Locale, CoreContent>;
+
+export const localizedContentByLocale = coreContentByLocale;

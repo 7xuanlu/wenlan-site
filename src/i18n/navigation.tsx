@@ -1,4 +1,4 @@
-import type { AnchorHTMLAttributes, ReactNode } from "react";
+import type { ComponentProps } from "react";
 import NextLink from "next/link";
 import { createNavigation } from "next-intl/navigation";
 import { type Locale } from "./locales";
@@ -21,12 +21,11 @@ export function localizedHrefForLocale(locale: Locale, href: string): string {
 }
 
 export type LocalizedLinkProps = Omit<
-  AnchorHTMLAttributes<HTMLAnchorElement>,
-  "href"
+  ComponentProps<typeof NextLink>,
+  "href" | "locale"
 > & {
   href: string;
   locale: Locale;
-  children?: ReactNode;
 };
 
 export function LocalizedLink({ href, locale, ...props }: LocalizedLinkProps) {

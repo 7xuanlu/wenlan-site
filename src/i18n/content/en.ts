@@ -2,7 +2,7 @@ import type { CoreContent } from "./schema";
 
 export const enContent = {
   home: {
-    coverage: "translated",
+    status: "translated",
     sourceHash: null,
     content: {
       seo: {
@@ -13,7 +13,7 @@ export const enContent = {
     },
   },
   about: {
-    coverage: "translated",
+    status: "translated",
     sourceHash: null,
     content: {
       seo: {
@@ -24,7 +24,7 @@ export const enContent = {
     },
   },
   docs: {
-    coverage: "translated",
+    status: "translated",
     sourceHash: null,
     content: {
       seo: {
@@ -35,7 +35,7 @@ export const enContent = {
     },
   },
   getStarted: {
-    coverage: "translated",
+    status: "translated",
     sourceHash: null,
     content: {
       seo: {
@@ -46,7 +46,7 @@ export const enContent = {
     },
   },
   notFound: {
-    coverage: "translated",
+    status: "translated",
     sourceHash: null,
     content: {
       eyebrow: "404",
@@ -90,7 +90,7 @@ export const enContent = {
     },
   },
   footer: {
-    coverage: "translated",
+    status: "translated",
     sourceHash: null,
     content: {
       brand: "Wenlan",

@@ -1,4 +1,4 @@
-export type CoverageStatus =
+export type ContentStatus =
   | "translated"
   | "fallback_en"
   | "needs_update"
@@ -10,7 +10,7 @@ export type ContentLeaf =
   | { readonly [key: string]: ContentLeaf };
 
 export type ContentUnit<Content extends ContentLeaf> = {
-  coverage: CoverageStatus;
+  status: ContentStatus;
   sourceHash: string | null;
   content: Content;
 };
