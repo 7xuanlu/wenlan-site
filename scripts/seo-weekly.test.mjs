@@ -371,6 +371,11 @@ async function writeBuiltSeoFixture(outputRoot, overrides = {}) {
     await mkdir(dirname(htmlPath), { recursive: true });
     await writeFile(htmlPath, builtHtmlPage(page, pageOverrides), "utf8");
   }
+  await writeFile(
+    join(buildDir, "server/app/_not-found.html"),
+    overrides.notFoundHtml ?? "<!DOCTYPE html><html><body>This page does not exist.</body></html>",
+    "utf8",
+  );
   return buildDir;
 }
 
@@ -1193,10 +1198,11 @@ test("built technical SEO checker verifies compiled redirects, headers, and site
     );
 
     assert.match(stdout, /redirects ok: 23/);
+    assert.match(stdout, /global 404 ok/);
     assert.match(stdout, /noindex headers ok: 5/);
     assert.match(stdout, /sitemap required locs ok: 8/);
     assert.match(stdout, /html page checks ok: 8/);
-    assert.match(stdout, /all html FAQPage absent ok: 8/);
+    assert.match(stdout, /all html FAQPage absent ok: 9/);
     assert.match(stdout, /old URLs absent from sitemap/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
@@ -1237,6 +1243,26 @@ test("built technical SEO checker rejects robots.txt output without the producti
         { cwd: repoRoot },
       ),
       /robots\.txt missing production sitemap URL/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("built technical SEO checker rejects the generic global 404 artifact", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-built-global-404-"));
+  try {
+    const buildDir = await writeBuiltSeoFixture(outputRoot, {
+      notFoundHtml: "<!DOCTYPE html><html><body>404: This page could not be found.</body></html>",
+    });
+
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [builtCheckerScript, "--", "--build-dir", buildDir],
+        { cwd: repoRoot },
+      ),
+      /global unmatched-route 404 invalid/,
     );
   } finally {
     await rm(outputRoot, { recursive: true, force: true });

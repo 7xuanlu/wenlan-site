@@ -186,6 +186,8 @@ test("global unmatched-route 404 is explicitly enabled and branded", async () =>
     resolve(repoRoot, "src/app/global-not-found.tsx"),
     "utf8",
   );
+  assert.match(globalNotFoundSource, /^import\s+["']\.\/globals\.css["'];/m);
+  assert.match(globalNotFoundSource, /\sfrom\s+["']next\/font\/google["'];/);
   assert.match(globalNotFoundSource, /<html\b/);
   assert.match(globalNotFoundSource, /<body\b/);
   assert.match(globalNotFoundSource, /lang=(?:"en"|'en'|\{"en"\})/);
