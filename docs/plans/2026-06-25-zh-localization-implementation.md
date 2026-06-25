@@ -851,13 +851,13 @@ Pass `locale` to `SiteFooter`:
 <SiteFooter locale={locale} />
 ```
 
-Keep:
+Prefer keeping:
 
 ```tsx
 import "./globals.css";
 ```
 
-inside `root-document.tsx`, because every root layout imports this component.
+inside `root-document.tsx`, because every root layout imports this component. If Next.js rejects global CSS from a non-layout module, remove that import from `root-document.tsx` and import the same `globals.css` file directly from each root layout instead. The build result is the authority for this detail.
 
 - [ ] **Step 3: Create English and localized root layouts**
 
