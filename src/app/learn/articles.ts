@@ -834,7 +834,7 @@ const baseArticles: LearnArticle[] = [
         },
         {
           dimension: "Retrieval",
-          wenlan: "Hybrid: vector (BGE-Base-EN-v1.5-Q 768-dim) + FTS5 + reciprocal-rank fusion + knowledge-graph neighbors. 93.6% Recall@5 on LongMemEval (oracle, 500 Q), 70.0% on LoCoMo.",
+          wenlan: "Hybrid: vector (BGE-Base-EN-v1.5-Q 768-dim) + FTS5 + reciprocal-rank fusion + knowledge-graph neighbors + CE reranker. LME_Oracle: 93.6% Recall@5, 0.857 MRR, 0.883 NDCG@10 (500 Q). LME_S: 87.7% Recall@5, 0.815 MRR, 0.822 NDCG@10 (deep, N=90).",
           competitor:
             "Semantic + FTS over Markdown notes; emphasis on note linking, not benchmark retrieval.",
         },
@@ -1014,7 +1014,7 @@ const baseArticles: LearnArticle[] = [
         },
         {
           dimension: "Retrieval",
-          wenlan: "Hybrid retrieval (vector + FTS5 + RRF + graph). 93.6% Recall@5 on LongMemEval, 70.0% on LoCoMo. ~168 tokens per recall query.",
+          wenlan: "Hybrid retrieval (vector + FTS5 + RRF + graph + CE reranker). LME_Oracle: 93.6% Recall@5, 0.857 MRR, 0.883 NDCG@10. LME_S: 87.7% Recall@5, 0.815 MRR, 0.822 NDCG@10. ~168 tokens per recall query.",
           competitor:
             "Semantic recall via MCP scoped to past Claude Code sessions; no published benchmark.",
         },
@@ -1141,20 +1141,20 @@ const baseArticles: LearnArticle[] = [
         ],
       },
       {
-        heading: "Reading the Superlocal LoCoMo number honestly",
+        heading: "Reading benchmark numbers honestly",
         body: [
-          "Superlocal Memory reports ~74.8% on LoCoMo in their zero-LLM (pure-math) retrieval configuration. Wenlan's published number on LoCoMo is 70.0% Recall@5. That is a 4.8-point gap on that specific benchmark, and it is real.",
-          "Two things to read alongside it. First, benchmark mix: LongMemEval (LME) is a more recent and more rigorous evaluation, especially for time-aware questions and contradiction handling. Wenlan reports 93.6% Recall@5 on LME oracle, 500 questions. I did not find LongMemEval numbers on SuperLocalMemory's official site during the 2026-06-24 source check. The leaderboard story is incomplete without both.",
-          "Second, configuration: 'zero-LLM' means retrieval only, no answer generation. Wenlan's number is also retrieval-only, but Wenlan's product is designed to feed memories into an LLM for answer composition, not to be a SOTA retrieval algorithm in isolation. Different products optimize for different downstream tasks.",
-          "If LoCoMo top score is the deciding factor for you, Superlocal currently wins on that benchmark. If the question is 'which tool helps me carry AI work across sessions,' the benchmark is one input, not the answer.",
+          "Superlocal Memory reports ~74.8% on LoCoMo in their zero-LLM (pure-math) retrieval configuration. Wenlan's current public retrieval snapshot now leads with LongMemEval rows instead of preserving the older LoCoMo headline.",
+          "Two things to read alongside it. First, benchmark mix: LongMemEval (LME) is a more recent and more rigorous evaluation, especially for time-aware questions and contradiction handling. Wenlan reports LME_Oracle at 93.6% Recall@5 / 0.857 MRR / 0.883 NDCG@10 on the 500-question snapshot, and LME_S at 87.7% Recall@5 / 0.815 MRR / 0.822 NDCG@10 on the stratified N=90 deep-S retrieval snapshot. I did not find LongMemEval numbers on SuperLocalMemory's official site during the 2026-06-24 source check. The leaderboard story is incomplete without both.",
+          "Second, configuration: 'zero-LLM' means retrieval only, no answer generation. Wenlan's published retrieval rows are also retrieval-only, but Wenlan's product is designed to feed memories into an LLM for answer composition, not to be a SOTA retrieval algorithm in isolation. Different products optimize for different downstream tasks.",
+          "If LoCoMo top score is the deciding factor for you, rerun the current Wenlan harness against the exact protocol you care about. If the question is 'which tool helps me carry AI work across sessions,' the benchmark is one input, not the answer.",
         ],
       },
       {
         heading: "Where Wenlan focuses instead of leaderboards",
         body: [
-          "I picked LME oracle as Wenlan's primary benchmark because the workload matches what actually breaks AI sessions: multi-turn conversations with implicit time references, contradictions across turns, references to facts established weeks ago. LoCoMo and LongMemEval stress different failure modes; run both against your workload if benchmark fit matters.",
+          "I picked LME_Oracle and LME_S as Wenlan's primary retrieval surfaces because the workload matches what actually breaks AI sessions: multi-turn conversations with implicit time references, contradictions across turns, references to facts established weeks ago. LoCoMo and LongMemEval stress different failure modes; run both against your workload if benchmark fit matters.",
           "The product gaps I notice in daily use are not retrieval ceiling. They are things like: did the AI capture the decision when I made it, is the wiki page distilled cleanly, can I open `~/.wenlan/pages/auth.md` and read it as prose, can I inspect the source memory IDs and artifact git history, does the same memory show up in Cursor and Claude Code.",
-          "Those are workflow features, not benchmark features. Wenlan trades a few LoCoMo points for explicit capture, MCP-first cross-tool reach, projected Markdown, versioned readable artifacts, and mandatory provenance. If those things matter to your work, the trade is worth it. If they do not, look at Superlocal.",
+          "Those are workflow features, not benchmark features. Wenlan trades leaderboard simplicity for explicit capture, MCP-first cross-tool reach, projected Markdown, versioned readable artifacts, and mandatory provenance. If those things matter to your work, the trade is worth it. If they do not, look at Superlocal.",
         ],
       },
       {
@@ -1193,9 +1193,9 @@ const baseArticles: LearnArticle[] = [
         },
         {
           dimension: "Retrieval",
-          wenlan: "Hybrid: vector (BGE-Base-EN-v1.5-Q) + FTS5 + reciprocal-rank fusion + knowledge-graph context. 93.6% Recall@5 on LongMemEval (oracle, 500 Q), 70.0% on LoCoMo.",
+          wenlan: "Hybrid: vector (BGE-Base-EN-v1.5-Q) + FTS5 + reciprocal-rank fusion + knowledge-graph context + CE reranker. LME_Oracle: 93.6% Recall@5, 0.857 MRR, 0.883 NDCG@10. LME_S: 87.7% Recall@5, 0.815 MRR, 0.822 NDCG@10.",
           competitor:
-            "Pure-math retrieval emphasized in public materials. Reports ~74.8% on LoCoMo in their zero-LLM configuration, currently ahead of Wenlan on that specific benchmark.",
+          "Pure-math retrieval emphasized in public materials. Reports ~74.8% on LoCoMo in their zero-LLM configuration; compare against current Wenlan runs only when the fixture and protocol match.",
         },
         {
           dimension: "Human-readable records",
@@ -1235,9 +1235,9 @@ const baseArticles: LearnArticle[] = [
           "Wenlan keeps human-readable artifacts in Markdown and uses the local libSQL store for retrieval indexes. That makes memory easier to inspect (you can open the file in any editor) while still giving agents fast hybrid search.",
       },
       {
-        question: "Why does Wenlan not lead with the LoCoMo number?",
+        question: "Why does Wenlan lead with LME_Oracle and LME_S?",
         answer:
-          "Because Wenlan is behind on it: 70.0% vs Superlocal's reported ~74.8% in their zero-LLM config. Leading with a benchmark Wenlan does not win is misleading. The 93.6% LME oracle number is the one I am willing to defend as primary. The LoCoMo number is published for honesty, not as a headline.",
+          "Because the current eval work distinguishes the 500-question LongMemEval snapshot from deep LME_S, and that distinction matches the product risk better than a single old LoCoMo headline. LME_Oracle publishes 93.6% Recall@5, 0.857 MRR, and 0.883 NDCG@10; LME_S publishes 87.7% Recall@5, 0.815 MRR, and 0.822 NDCG@10 on the stratified N=90 deep-S retrieval snapshot.",
       },
       {
         question: "Is Superlocal Memory open-source?",

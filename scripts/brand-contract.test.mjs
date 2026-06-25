@@ -143,6 +143,70 @@ test("public machine-readable surfaces use Wenlan names and packages", async () 
   assert.doesNotMatch(llmsFull, /Wenlan is local-first memory for AI work/);
 });
 
+test("public eval surfaces publish the latest LME oracle and LME-S framing", async () => {
+  const fullMetricSurfaces = [
+    "public/llms.txt",
+    "src/app/llms-full.txt/route.ts",
+    "src/app/layout.tsx",
+    "src/app/page.tsx",
+    "src/app/docs/docs.ts",
+    "src/components/sections.tsx",
+    "src/app/learn/articles.ts",
+    "docs/seo-measurement.md",
+  ];
+
+  for (const path of fullMetricSurfaces) {
+    const source = await readRepo(path);
+    assert.match(source, /LME_Oracle/, path);
+    assert.match(source, /93\.6%/, path);
+    assert.match(source, /0\.857/, path);
+    assert.match(source, /0\.883/, path);
+    assert.match(source, /LME_S/, path);
+    assert.match(source, /N=90/, path);
+    assert.match(source, /87\.7%/, path);
+    assert.match(source, /0\.815/, path);
+    assert.match(source, /0\.822/, path);
+    assert.doesNotMatch(source, /Retrieval aggregate pending/, path);
+  }
+
+  const homepage = await readRepo("src/app/page.tsx");
+  assert.match(homepage, /Full replay/, "src/app/page.tsx");
+  assert.match(homepage, /No retrieval/, "src/app/page.tsx");
+  assert.match(homepage, /168 tokens \/ query/, "src/app/page.tsx");
+
+  const headlineMetricSurfaces = [
+    "src/app/opengraph-image.tsx",
+  ];
+
+  for (const path of headlineMetricSurfaces) {
+    const source = await readRepo(path);
+    assert.match(source, /LME_Oracle/, path);
+    assert.match(source, /93\.6/, path);
+    assert.match(source, /0\.857/, path);
+    assert.match(source, /0\.883/, path);
+    assert.match(source, /LME_S/, path);
+    assert.match(source, /N=90/, path);
+    assert.match(source, /87\.7/, path);
+    assert.match(source, /0\.815/, path);
+    assert.match(source, /0\.822/, path);
+  }
+
+  const publicSources = (await Promise.all([
+    ...fullMetricSurfaces,
+    ...headlineMetricSurfaces,
+  ].map((path) => readRepo(path)))).join("\n");
+
+  assert.doesNotMatch(publicSources, /59\.5%/);
+  assert.doesNotMatch(publicSources, /0\.589/);
+  assert.doesNotMatch(publicSources, /0\.626/);
+  assert.doesNotMatch(publicSources, /0\.747/);
+  assert.doesNotMatch(publicSources, /0\.614/);
+  assert.doesNotMatch(publicSources, /N=31/);
+  assert.doesNotMatch(publicSources, /LME_oracle/);
+  assert.doesNotMatch(publicSources, /70\.0%/);
+  assert.doesNotMatch(publicSources, /4\.8[- ]points?/i);
+});
+
 test("public source contains no stale Origin package, repo, install, or local-path surfaces", async () => {
   const forbidden = [
     /@7xuanlu\/origin/g,

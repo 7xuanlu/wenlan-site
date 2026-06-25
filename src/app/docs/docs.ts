@@ -61,9 +61,9 @@ wenlan-mcp     -> MCP connector for AI clients
 wenlan-types   -> shared HTTP/MCP wire types
 plugin/        -> Claude Code slash commands and hooks`;
 
-const evalSnapshot = `Benchmark                         Recall@5   MRR     NDCG@10
-LongMemEval oracle, 500 Q          93.6%     0.857   0.883
-LoCoMo locomo10                    70.0%     0.647   0.684`;
+const evalSnapshot = `Benchmark                         Scope                         Recall@5   MRR     NDCG@10
+LME_Oracle                        CE-reranked, 500 Q            93.6%     0.857   0.883
+LME_S                             CE-reranked, deep N=90        87.7%     0.815   0.822`;
 
 const serviceCommands = `wenlan status
 wenlan doctor
@@ -3412,12 +3412,12 @@ export const docPages: DocPage[] = [
       "What Wenlan's published retrieval numbers mean, how they are generated, and what they do not claim.",
     metaTitle: "Wenlan Evaluation and Benchmarks | Docs",
     metaDescription:
-      "Read Wenlan's benchmark methodology, current retrieval snapshot, eval scope, and how to rerun LoCoMo and LongMemEval locally.",
+      "Read Wenlan's benchmark methodology, current LME_Oracle and LME_S retrieval snapshot, eval scope, and how to rerun LongMemEval locally.",
     keywords: [
       "Wenlan evaluation",
       "Wenlan benchmarks",
       "LongMemEval",
-      "LoCoMo",
+      "LME_S",
       "AI memory retrieval benchmark",
     ],
     updatedAt: DOCS_UPDATED_AT,
@@ -3425,14 +3425,14 @@ export const docPages: DocPage[] = [
     readingTime: "6 min read",
     summary: [
       "The public numbers are retrieval metrics, not end-to-end answer quality claims.",
-      "The current README snapshot reports 93.6% Recall@5 on LongMemEval oracle and 70.0% Recall@5 on LoCoMo locomo10.",
+      "The current CE-reranker retrieval snapshot reports LME_Oracle at 93.6% Recall@5 / 0.857 MRR / 0.883 NDCG@10 and LME_S at 87.7% Recall@5 / 0.815 MRR / 0.822 NDCG@10.",
     ],
     sections: [
       {
         heading: "Current snapshot",
         body: [
-          "Wenlan's README publishes a compact retrieval snapshot for the shipped hybrid retrieval path. The snapshot uses BGE-Base-EN-v1.5-Q embeddings, FTS5, Reciprocal Rank Fusion, and the latest shipped local rerank path when enabled.",
-          "The numbers below are the public README snapshot from the daemon repository. They should be read as retrieval-only metrics over the stated fixtures.",
+          "Wenlan publishes a compact retrieval snapshot for the shipped hybrid retrieval path. The snapshot uses BGE-Base-EN-v1.5-Q embeddings, FTS5, Reciprocal Rank Fusion, and the local BGE reranker when enabled.",
+          "The numbers below should be read as retrieval-only metrics over the stated fixtures. LME_S is the deep LongMemEval substrate; the current representative snapshot uses the stratified N=90 fixture, with 84 gradeable retrieval rows.",
         ],
         code: {
           label: "README snapshot",
@@ -3460,7 +3460,7 @@ export const docPages: DocPage[] = [
           "Slow GPU or API-backed evals are manual. Normal CI avoids running heavy model benchmarks because hosted runners do not provide the right hardware, secrets, or cost profile.",
         ],
         bullets: [
-          "LoCoMo and LongMemEval use Recall@5, MRR, and NDCG@10 headline fields.",
+          "LongMemEval retrieval runs use Recall@5, MRR, and NDCG@10 headline fields. The LME_S row comes from docs/eval/results/lme_s_90_bge_base_pool20.summary.json in the Wenlan repo.",
           "The README updater reads a local metrics JSON and writes the tracked README snapshot.",
           "Raw local baseline artifacts stay outside git; the repository keeps the methodology and curated snapshot.",
         ],

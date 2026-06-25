@@ -121,42 +121,42 @@ function TokenEfficiencySection() {
         <div className="text-center">
           <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">Hybrid retrieval, measured</p>
           <h2 className="font-serif text-4xl font-medium tracking-tight sm:text-5xl">
-            96% fewer tokens. Better answers.
+            96% fewer tokens. Honest retrieval metrics.
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-sm text-[var(--o-text-muted)]">
             Hybrid retrieval finds the right local context without replaying chat history.
           </p>
         </div>
-        <div className="mt-12 overflow-hidden rounded-lg border border-[var(--o-border)]">
-          <table className="w-full text-left font-mono text-sm">
+        <div className="mt-12 overflow-x-auto rounded-lg border border-[var(--o-border)]">
+          <table className="w-full min-w-[720px] text-left font-mono text-sm">
             <thead>
               <tr className="border-b border-[var(--o-border)] bg-[var(--o-surface)]">
-                <th className="px-6 py-4 font-medium text-[var(--o-text-secondary)]">Strategy</th>
-                <th className="px-6 py-4 font-medium text-[var(--o-text-secondary)]">Tokens / query</th>
-                <th className="px-6 py-4 font-medium text-[var(--o-text-secondary)]">Finds right context</th>
+                <th className="px-6 py-4 font-medium text-[var(--o-text-secondary)]">Surface</th>
+                <th className="px-6 py-4 font-medium text-[var(--o-text-secondary)]">Scope</th>
+                <th className="px-6 py-4 font-medium text-[var(--o-text-secondary)]">Result</th>
               </tr>
             </thead>
             <tbody>
               <tr className="border-b border-[var(--o-border-subtle)]">
-                <td className="px-6 py-4 text-[var(--o-text-muted)]">Full replay (no retrieval)</td>
-                <td className="px-6 py-4 text-[var(--o-text-muted)]">4,505</td>
-                <td className="px-6 py-4 text-[var(--o-text-muted)]">Buried in noise</td>
+                <td className="px-6 py-4 text-[var(--o-text-muted)]">Full replay</td>
+                <td className="px-6 py-4 text-[var(--o-text-muted)]">No retrieval</td>
+                <td className="px-6 py-4 text-[var(--o-text-muted)]">4,505 tokens / query</td>
               </tr>
               <tr className="border-b border-[var(--o-border-subtle)]">
-                <td className="px-6 py-4 text-[var(--o-text-muted)]">Basic vector search</td>
-                <td className="px-6 py-4 text-[var(--o-text-secondary)]">168</td>
-                <td className="px-6 py-4 text-[var(--o-text-secondary)]">77%</td>
+                <td className="px-6 py-4 text-[var(--o-text)] font-medium">LME_Oracle</td>
+                <td className="px-6 py-4 text-[var(--o-text-secondary)]">CE-reranked, 500 Q</td>
+                <td className="px-6 py-4 text-[var(--o-warm)] font-medium">168 tokens / query · 93.6% R@5 · 0.883 NDCG@10</td>
               </tr>
               <tr>
-                <td className="px-6 py-4 text-[var(--o-text)] font-medium">Wenlan (hybrid retrieval)</td>
-                <td className="px-6 py-4 text-[var(--o-warm)] font-medium">168</td>
-                <td className="px-6 py-4 text-[var(--o-warm)] font-medium">93.6%</td>
+                <td className="px-6 py-4 text-[var(--o-text)] font-medium">LME_S</td>
+                <td className="px-6 py-4 text-[var(--o-text-secondary)]">CE-reranked, N=90 deep-S</td>
+                <td className="px-6 py-4 text-[var(--o-warm)] font-medium">168 tokens / query · 87.7% R@5 · 0.822 NDCG@10</td>
               </tr>
             </tbody>
           </table>
         </div>
         <p className="mx-auto mt-6 max-w-xl text-center font-mono text-[10px] leading-relaxed text-[var(--o-text-muted)] sm:text-[11px]">
-          Recall@5 on LongMemEval (oracle, 500 Q). LoCoMo Recall@5 is 70.0%, ~168 tokens per recall query.{" "}
+          Retrieval-only snapshots. LME_Oracle also records 0.857 MRR; LME_S records 0.815 MRR on 84 gradeable rows from the 90-question deep-S fixture. Token comparison is full replay vs retrieved context.{" "}
           <a
             href="https://github.com/7xuanlu/wenlan/tree/main/crates/wenlan-core/src/eval"
             target="_blank"

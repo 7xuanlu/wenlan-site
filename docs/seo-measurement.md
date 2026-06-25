@@ -151,23 +151,23 @@ The worksheet is written to `docs/seo-audits/YYYY-MM-DD-ai-visibility.md` by def
 
 ## Baseline Snapshots
 
-### 2026-05-28 post-README-alignment deploy
+### 2026-06-24 LME metric update
 
-Production deploy evidence:
+Local build evidence; recheck production after the Vercel deploy:
 
-- `https://useorigin.app/` serves the README-aligned homepage copy with `93.6%` LongMemEval Recall@5, `70.0%` LoCoMo Recall@5, `softwareVersion` `0.9.1`, and the current `wenlan mcp add` setup wording.
-- `https://useorigin.app/llms.txt` serves the README-aligned AI-readable map with the same `93.6%` / `70.0%` metrics, new Learn URLs, and the `4.8` point Superlocal comparison wording.
-- `https://useorigin.app/sitemap.xml` includes the new Learn URLs:
+- The homepage build serves the README-aligned copy with `LME_Oracle` `93.6%` Recall@5 / `0.857` MRR / `0.883` NDCG@10, `LME_S` `87.7%` Recall@5 / `0.815` MRR / `0.822` NDCG@10 on the stratified `N=90` deep-S substrate, `softwareVersion` `0.9.1`, and the current `wenlan mcp add` setup wording.
+- The `llms.txt` build serves the README-aligned AI-readable map with the same `LME_Oracle` / `LME_S` framing, retrieval token comparison, new Learn URLs, and updated Superlocal comparison wording.
+- The local sitemap includes the new Learn URLs:
   - `/learn/wenlan-for-claude-code`
   - `/learn/distilled-wiki-pages-ai-memory`
   - `/learn/ai-work-memory-vs-knowledge-base`
 - Old guide URLs still return permanent redirects, for example `/guides/mcp-memory-server` -> `/learn/mcp-memory-server`.
 
-Public search snapshot immediately after deploy:
+Public search snapshot caveat:
 
-- Search results for Wenlan queries still show stale snippets from the pre-deploy site, including `/guides/*` URLs, old homepage copy, old setup language, and older crawl dates.
-- Exact-match new Learn URLs were not yet visible in general search snapshots immediately after deploy.
-- Treat this as the baseline before Google recrawls the sitemap and canonical URLs. Do not judge the content update by snippets until Search Console shows recrawl/indexing activity after 2026-05-28.
+- Search results for Wenlan queries may show stale snippets from the pre-deploy site, including `/guides/*` URLs, old homepage copy, old setup language, and older crawl dates.
+- Exact-match new Learn URLs may lag general search snapshots immediately after deploy.
+- Treat this as the baseline before Google recrawls the sitemap and canonical URLs. Do not judge the content update by snippets until Search Console shows recrawl/indexing activity after 2026-06-24.
 
 ## Success Signals
 

@@ -109,7 +109,7 @@ export function GET() {
   const header = [
     `# Wenlan (full content)`,
     ``,
-    `> Wenlan is a living personal knowledge library for AI work, built by agents and grounded in its sources. Hybrid retrieval (93.6% Recall@5 on LongMemEval oracle, 70.0% on LoCoMo), real git versioning for readable pages, sessions, handoffs, and status artifacts under ~/.wenlan/.git/, mandatory provenance on source-cited wiki pages, and one daemon serving Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP-compatible AI tools. Cross-platform on macOS (arm64, x64), Linux (x86_64, aarch64; glibc), and Windows (x86_64). Apache-2.0. Source at github.com/7xuanlu/wenlan.`,
+    `> Wenlan is a living personal knowledge library for AI work, built by agents and grounded in its sources. Hybrid retrieval publishes CE-reranker snapshots for LME_Oracle at 93.6% Recall@5 / 0.857 MRR / 0.883 NDCG@10 (500 Q) and LME_S at 87.7% Recall@5 / 0.815 MRR / 0.822 NDCG@10 (deep, N=90). Retrieval uses ~168 tokens per recall query versus full replay at 4,505 tokens per query. Real git versioning for readable pages, sessions, handoffs, and status artifacts under ~/.wenlan/.git/, mandatory provenance on source-cited wiki pages, and one daemon serving Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP-compatible AI tools. Cross-platform on macOS (arm64, x64), Linux (x86_64, aarch64; glibc), and Windows (x86_64). Apache-2.0. Source at github.com/7xuanlu/wenlan.`,
     ``,
     `This file is the long-form companion to /llms.txt. It contains the full body of every public Wenlan article and doc page so an LLM can ingest the full corpus in one fetch. Generated from source at build time; canonical URL for each entry is included with the entry.`,
     ``,

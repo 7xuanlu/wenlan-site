@@ -13,7 +13,8 @@ export default async function Image() {
         title="Living personal knowledge library for AI work."
         description="Agents capture what they learn, you add sources you trust, and Wenlan keeps source-cited pages current across MCP-compatible AI tools."
         footerLeft={[
-          "93.6% Recall@5 on LongMemEval",
+          "LME_Oracle 93.6 / 0.857 / 0.883",
+          "LME_S 87.7 / 0.815 / 0.822 (N=90)",
           "macOS · Linux · Windows",
           "Apache-2.0",
         ]}

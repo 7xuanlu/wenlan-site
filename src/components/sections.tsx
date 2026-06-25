@@ -11,7 +11,7 @@ export const homepageFaqs = [
   },
   {
     q: "What retrieval quality does Wenlan reach?",
-    a: "Hybrid retrieval combines vector search (BGE-Base-EN-v1.5-Q, 768-dim), FTS5, reciprocal-rank fusion, and knowledge-graph context. Recall@5 is 93.6% on LongMemEval (oracle, 500 questions) and 70.0% on LoCoMo, at roughly 168 tokens per recall query. The eval harness ships in the repo at crates/wenlan-core/src/eval/.",
+    a: "Hybrid retrieval combines vector search (BGE-Base-EN-v1.5-Q, 768-dim), FTS5, reciprocal-rank fusion, knowledge-graph context, and the local BGE reranker. LME_Oracle is 93.6% Recall@5, 0.857 MRR, and 0.883 NDCG@10 on the 500-question snapshot. LME_S is 87.7% Recall@5, 0.815 MRR, and 0.822 NDCG@10 on the stratified N=90 deep-S snapshot. The eval harness ships in the repo at crates/wenlan-core/src/eval/.",
   },
   {
     q: "Is my data private?",
