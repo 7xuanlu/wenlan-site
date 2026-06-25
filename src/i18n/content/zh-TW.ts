@@ -9,7 +9,7 @@ const claudeCommands = [
 export const zhTWContent = {
   home: {
     status: "translated",
-    sourceHash: "d56cb27d582ab7832f5a92cb330bbabe4cd066e0d679fa0a627640f2e060d76f",
+    sourceHash: "cbb903525db65e6783fb185115c56c4a53092671e9c318ce1502ce61912fb297",
     content: {
       seo: {
         title: "Wenlan | AI 工作的活個人知識庫",
@@ -75,12 +75,23 @@ export const zhTWContent = {
           title: "給 AI 工作用的 handoff 循環。",
           body: "Wenlan 會在工作發生時捕捉決策、教訓和下一步，並在下一個 agent 開始時載入 handoff。",
           note: "下一段對話從 handoff 開始，而不是重新拼回過去。",
+          visualLabels: {
+            start: "開始",
+            capture: "捕捉",
+            handoff: "交接",
+            resume: "接續",
+          },
         },
         memoryDistillery: {
           eyebrow: "刻意蒸餾",
           title: "Wenlan 把重複出現的 context 變成有來源支持的頁面。",
           body: "當重複捕捉的內容值得變成可讀頁面時，執行 /distill。可選的本地模型或 API key 路徑可以加入背景擷取與頁面更新。",
           note: "下一次執行從有引用的 context 開始，而不是從 transcript 殘留開始。",
+          visualLabels: {
+            merged: "合併",
+            linked: "連結",
+            refined: "精煉",
+          },
         },
         features: {
           eyebrow: "知識頁面",
@@ -110,6 +121,14 @@ export const zhTWContent = {
             successMessage: "你已加入。我們會持續通知你。",
             pendingLabel: "加入中...",
             submitLabel: "取得更新",
+            emailPlaceholder: "you@email.com",
+            fallbackError: "發生錯誤，請再試一次。",
+            errors: {
+              required: "請輸入 email。",
+              invalid: "請輸入有效的 email。",
+              notConfigured: "候補名單尚未設定。",
+              unknown: "發生錯誤，請再試一次。",
+            },
           },
         },
       },
@@ -338,7 +357,7 @@ export const zhTWContent = {
   },
   docs: {
     status: "translated",
-    sourceHash: "f9d9acd4a50745375c9a298270eec771b44f71d5679db6b8403893d661635775",
+    sourceHash: "3b69ea57f9aa702add03b87f2d09388dba86ee174c0b9c52dfbbc4ffc269b2bc",
     content: {
       seo: {
         title: "Wenlan 文件 | 產品手冊",
@@ -365,34 +384,448 @@ export const zhTWContent = {
             id: "start-here",
             title: "從這裡開始",
             description: "安裝 Wenlan，並驗證第一次 memory round trip。",
+            items: [
+              {
+                id: "get-started",
+                href: "/docs/get-started",
+                label: "設定",
+                title: "開始使用 Wenlan",
+                description:
+                  "安裝 Claude Code plugin，或為另一個 MCP client 執行 Wenlan setup，然後確認本地 memory loop 可以運作。",
+                meta: "Wenlan 團隊 · 更新於 2026 年 5 月 15 日 · 4 分鐘設定",
+              },
+            ],
           },
           {
             id: "after-setup",
             title: "安裝之後",
             description:
               "把安裝變成工作習慣：帶著 context 開始、捕捉有用內容、檢查哪些內容應該被信任，並在 context 變冷前 hand off。",
+            items: [
+              {
+                id: "daily-workflow",
+                href: "/docs/daily-workflow",
+                label: "工作流程",
+                title: "每日 Workflow",
+                description:
+                  "帶著 context 開始，捕捉重要內容，需要時 recall，並在 context 變冷前 hand off。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "capture-quality",
+                href: "/docs/capture-quality",
+                label: "捕捉",
+                title: "捕捉品質",
+                description:
+                  "判斷什麼該進 Wenlan：durable facts、decisions、lessons、gotchas、corrections 和 project context。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "review-and-trust",
+                href: "/docs/review-and-trust",
+                label: "信任",
+                title: "檢視與信任",
+                description:
+                  "了解 Wenlan 如何讓不確定的 memory 可見：pending captures、revisions、contradictions、rejections、confirm 和 forget。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "core-concepts",
+                href: "/docs/core-concepts",
+                label: "概念",
+                title: "核心概念",
+                description:
+                  "了解 Wenlan 背後的元件：memories、sessions、handoffs、pages、daemon、MCP、Markdown 和 local index。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
+              },
+            ],
           },
           {
             id: "reference",
             title: "參考資料",
             description:
               "Memory types、glossary、architecture、commands、Claude Code plugin、CLI/service management、updates、upgrade notes、package names、platform support、HTTP API、API examples、typed clients、spaces、graph context、pages、import paths、git history、retrieval status、experimental flags、local data、backup paths、configuration、environment variables、MCP clients、agent profiles、diagnostics、FAQ 和 repair paths。",
+            items: [
+              {
+                id: "memory-types",
+                href: "/docs/memory-types",
+                label: "記憶",
+                title: "Memory 類型",
+                description:
+                  "了解 Wenlan 的六種 canonical memory types、agent 如何選擇，以及哪些 legacy aliases 仍會出現在 API 邊界。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "glossary",
+                href: "/docs/glossary",
+                label: "詞彙表",
+                title: "詞彙表",
+                description:
+                  "快速對照 Wenlan 術語：memory、handoff、page、space、daemon、MCP、local index、provenance 和 eval language。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "architecture",
+                href: "/docs/architecture",
+                label: "架構",
+                title: "架構",
+                description:
+                  "Wenlan 的組成方式：一個本地 daemon、薄 client、shared wire types、本地 artifacts，以及由 wenlan-core 負責的 retrieval。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 7 分鐘閱讀",
+              },
+              {
+                id: "commands",
+                href: "/docs/commands",
+                label: "指令參考",
+                title: "Commands 與 Tools",
+                description:
+                  "日常使用 Wenlan 時最重要的 Claude Code commands 和 MCP tools。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "claude-code-plugin",
+                href: "/docs/claude-code-plugin",
+                label: "外掛",
+                title: "Claude Code 外掛",
+                description:
+                  "在 Claude Code 中使用 Wenlan 最完整的 workflow：setup、session brief、capture、recall、review、distill、read 和 handoff。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
+              },
+              {
+                id: "cli-and-service",
+                href: "/docs/cli-and-service",
+                label: "CLI 管理",
+                title: "CLI 與 Service 管理",
+                description:
+                  "使用 Wenlan CLI 安裝 runtime、管理 daemon、檢查 status、搜尋 memory，並連接 MCP clients。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "updates-and-uninstall",
+                href: "/docs/updates-and-uninstall",
+                label: "生命週期",
+                title: "更新與解除安裝",
+                description:
+                  "刷新 Wenlan 本地 runtime、驗證版本健康、重啟 MCP clients，並在不意外遺失資料的前提下移除 service。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
+              },
+              {
+                id: "upgrade-notes",
+                href: "/docs/upgrade-notes",
+                label: "升級",
+                title: "升級筆記",
+                description:
+                  "閱讀 Wenlan releases 的實用升級路徑：要重跑什麼、驗證什麼，以及目前 public runtime shape 改了什麼。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "packages-and-registries",
+                href: "/docs/packages-and-registries",
+                label: "Packages 套件",
+                title: "Packages 與 Registries",
+                description:
+                  "了解 Wenlan package name 如何對應到 plugin、runtime setup、MCP connector、Rust crates 和 release binaries。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
+              },
+              {
+                id: "platforms",
+                href: "/docs/platforms",
+                label: "平台",
+                title: "平台支援",
+                description:
+                  "了解 Wenlan 如何在 macOS、Linux 和 Windows 上執行：service managers、local data paths、model backends，以及 Docker/VM caveats。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "http-api",
+                href: "/docs/http-api",
+                label: "API 參考",
+                title: "HTTP API 參考",
+                description:
+                  "了解 CLI、MCP connector、plugin 和 local tools 背後呼叫的本地 daemon surfaces。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "api-examples",
+                href: "/docs/api-examples",
+                label: "API 範例",
+                title: "API 範例",
+                description:
+                  "當 CLI 或 MCP tools 不是合適選擇時，從 scripts 使用本地 daemon HTTP API。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
+              },
+              {
+                id: "typed-clients",
+                href: "/docs/typed-clients",
+                label: "Types 參考",
+                title: "Typed Clients 型別客戶端",
+                description:
+                  "當 Rust tool 需要呼叫本地 daemon、又不想依賴 untyped JSON shapes 時，使用 wenlan-types。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
+              },
+              {
+                id: "spaces",
+                href: "/docs/spaces",
+                label: "Spaces 管理",
+                title: "Spaces 空間",
+                description:
+                  "分開 work、personal、client 和 project memory，並了解 Wenlan 如何解析 active space。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
+              },
+              {
+                id: "knowledge-graph",
+                href: "/docs/knowledge-graph",
+                label: "Graph 圖譜",
+                title: "Knowledge Graph 知識圖譜",
+                description:
+                  "了解 Wenlan 如何連結 people、projects、tools、observations 和 relations，讓 recall 不只靠文字相似度也能找回 context。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "source-backed-pages",
+                href: "/docs/source-backed-pages",
+                label: "Pages 頁面",
+                title: "有來源支撐的 Pages",
+                description:
+                  "了解 Wenlan 如何把 atomic captures 變成含 source memory IDs、revision state 和 refresh paths 的可讀 pages。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "import-and-portability",
+                href: "/docs/import-and-portability",
+                label: "可攜性",
+                title: "Import 與 Portability",
+                description:
+                  "把選定的 durable context 移入 Wenlan，並讓 Wenlan 的可讀 artifacts 在 daemon 之外也保持 portable。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "local-git-history",
+                href: "/docs/local-git-history",
+                label: "版本",
+                title: "本地 Git History",
+                description:
+                  "檢查 Wenlan 為可讀 page、session、handoff 和 status artifacts 保留的真實 git history。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "models-and-keys",
+                href: "/docs/models-and-keys",
+                label: "模型",
+                title: "Models 與 Keys",
+                description:
+                  "在 local memory mode、可選 on-device models 和可選 Anthropic API keys 之間選擇，用於更豐富的 extraction、page synthesis、recaps 和 graph work。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "advanced-retrieval",
+                href: "/docs/advanced-retrieval",
+                label: "Retrieval 檢索",
+                title: "進階 Retrieval 狀態",
+                description:
+                  "了解 Wenlan 已發布的 retrieval path，以及新版 retrieval work 背後那些 opt-in main-branch experiments。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
+              },
+              {
+                id: "experimental-flags",
+                href: "/docs/experimental-flags",
+                label: "Experiments 實驗",
+                title: "Experimental Flags 實驗旗標",
+                description:
+                  "了解如何閱讀 Wenlan 的 opt-in main-branch flags，而不把它們誤認為 released defaults。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
+              },
+              {
+                id: "data-and-privacy",
+                href: "/docs/data-and-privacy",
+                label: "本地控制",
+                title: "資料與隱私",
+                description:
+                  "Wenlan 把資料放在哪裡、哪些內容保持本地，以及可讀 artifacts 如何搭配 daemon-owned retrieval store。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "backup-and-migration",
+                href: "/docs/backup-and-migration",
+                label: "備份",
+                title: "備份與遷移",
+                description:
+                  "一起備份 Wenlan 的可讀 artifacts 和 daemon data，並在信任 recall 前驗證還原後的 runtime。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "configuration",
+                href: "/docs/configuration",
+                label: "設定",
+                title: "Wenlan 設定",
+                description:
+                  "設定 Wenlan spaces、MCP clients、daemon bind address、local paths、models 和 keys，不需要手動編輯 database。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "environment-variables",
+                href: "/docs/environment-variables",
+                label: "Config 變數",
+                title: "Environment Variables 環境變數",
+                description:
+                  "了解哪些 Wenlan environment variables 是一般 configuration、哪些只用於 development，以及哪些屬於 eval 或 Windows repair paths。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "mcp-clients",
+                href: "/docs/mcp-clients",
+                label: "MCP 連接",
+                title: "連接 MCP Clients",
+                description:
+                  "從 Claude Code、Codex、Cursor、Claude Desktop、Gemini CLI 和其他 MCP clients 使用同一個本地 Wenlan memory layer。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
+              },
+              {
+                id: "agent-profiles",
+                href: "/docs/agent-profiles",
+                label: "Agents 管理",
+                title: "Agent Profiles 設定檔",
+                description:
+                  "檢查寫入 Wenlan 的 AI clients 和 local tools，並從 CLI 管理 source attribution、enabled state 和 trust。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
+              },
+              {
+                id: "troubleshooting",
+                href: "/docs/troubleshooting",
+                label: "修復",
+                title: "疑難排解",
+                description:
+                  "修正常見 setup issues：daemon 未執行、MCP 未連上、Claude commands 缺失、stale context，以及 support escalation。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "diagnostics-and-issue-reports",
+                href: "/docs/diagnostics-and-issue-reports",
+                label: "診斷",
+                title: "診斷與 Issue 回報",
+                description:
+                  "求助前先跑正確 checks，分開 daemon problems 與 client problems，並只分享 redacted output。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "faq",
+                href: "/docs/faq",
+                label: "常見問題",
+                title: "FAQ 常見問題",
+                description:
+                  "安裝 Wenlan 前後常見 adoption questions 的短答案。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
+              },
+            ],
           },
           {
             id: "project",
             title: "專案",
             description:
               "Security reporting、evaluation、desktop status、changelog、release/versioning、roadmap、project scope、source builds、testing、CI、development conventions，以及協助判斷 Wenlan 是否可信到值得採用或貢獻的 contribution paths。",
+            items: [
+              {
+                id: "security",
+                href: "/docs/security",
+                label: "安全",
+                title: "安全與回報",
+                description:
+                  "私下回報 vulnerabilities、讓 diagnostic reports 保持 redacted，並了解 Wenlan 的本地安全邊界。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
+              },
+              {
+                id: "evaluation",
+                href: "/docs/evaluation",
+                label: "評估",
+                title: "Evaluation 評估",
+                description:
+                  "了解 Wenlan 公開 retrieval numbers 代表什麼、如何產生，以及沒有聲稱什麼。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
+              },
+              {
+                id: "desktop-app",
+                href: "/docs/desktop-app",
+                label: "桌面版",
+                title: "Desktop App 狀態",
+                description:
+                  "了解可選的 Wenlan desktop app 與 daemon、CLI、MCP server 和 Claude Code plugin 的關係。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
+              },
+              {
+                id: "changelog",
+                href: "/docs/changelog",
+                label: "版本",
+                title: "Changelog 變更記錄",
+                description:
+                  "Wenlan 的 public release history，以及如何閱讀 main 上尚未發布的工作。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "releases-and-versioning",
+                href: "/docs/releases-and-versioning",
+                label: "發布",
+                title: "Releases 與 Versioning",
+                description:
+                  "了解 Wenlan 如何把 merged work 變成 tagged releases、package versions、binaries、npm packages 和 crates。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "roadmap",
+                href: "/docs/roadmap",
+                label: "路線圖",
+                title: "Roadmap 與 Status",
+                description:
+                  "了解 Wenlan 目前方向，同時不混淆 released features、main-branch work 和 future bets。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
+              },
+              {
+                id: "project-scope",
+                href: "/docs/project-scope",
+                label: "範疇",
+                title: "Project Scope 專案範疇",
+                description:
+                  "Wenlan 適合什麼、刻意避開什麼，以及如何判斷它是否適合你的 AI work。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "build-from-source",
+                href: "/docs/build-from-source",
+                label: "開發",
+                title: "從 Source Build",
+                description:
+                  "從 public repository build Wenlan daemon、CLI、MCP server、shared types、core crate 和 plugin。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "testing-and-ci",
+                href: "/docs/testing-and-ci",
+                label: "品質",
+                title: "Testing 與 CI",
+                description:
+                  "了解哪些 Wenlan checks 在本地執行、哪些在 GitHub Actions 執行，以及哪些 evals 保持 manual。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "development-conventions",
+                href: "/docs/development-conventions",
+                label: "開發慣例",
+                title: "Development Conventions 開發慣例",
+                description:
+                  "讓 Wenlan daemon、CLI、MCP connector、shared types 和 core logic 維持可維護的 codebase rules。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+              {
+                id: "contributing",
+                href: "/docs/contributing",
+                label: "開源貢獻",
+                title: "Contributing 貢獻",
+                description:
+                  "如何為 Wenlan 貢獻有用的 bug reports、docs、eval cases 和 code changes。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+              },
+            ],
           },
         ],
-      },
-      startItem: {
-        href: "/docs/get-started",
-        label: "設定",
-        title: "開始使用 Wenlan",
-        description:
-          "安裝 Claude Code plugin，或為另一個 MCP client 執行 Wenlan setup，然後確認本地 memory loop 可以運作。",
-        meta: "Wenlan 團隊 · 更新於 2026 年 5 月 15 日 · 4 分鐘設定",
       },
       cta: {
         eyebrow: "已經安裝了？",
@@ -542,8 +975,9 @@ export const zhTWContent = {
   },
   footer: {
     status: "translated",
-    sourceHash: "ae36345cdc60d621c15b556e8e233adf90fe2d12aefe0953a73e34eabb522094",
+    sourceHash: "a3b1e8876670ba5362e3499b8ea48b9738f917ecdd6e5ff28d3944350b09b18f",
     content: {
+      ariaLabel: "網站頁尾",
       brand: "Wenlan",
       tagline: "為 AI 工作而生的活個人知識庫。",
       groups: [

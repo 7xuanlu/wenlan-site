@@ -1,16 +1,15 @@
 "use client";
 
 import { useActionState } from "react";
+import type { WaitlistContent } from "@/i18n/content";
 import { joinWaitlist } from "./actions";
 
-type WaitlistFormCopy = {
-  successMessage: string;
-  pendingLabel: string;
-  submitLabel: string;
-};
-
-export function WaitlistForm({ copy }: { copy: WaitlistFormCopy }) {
+export function WaitlistForm({ copy }: { copy: WaitlistContent }) {
   const [state, action, isPending] = useActionState(joinWaitlist, null);
+  const errorMessage =
+    state && !state.success
+      ? (copy.errors[state.errorCode] ?? copy.fallbackError)
+      : null;
 
   if (state?.success) {
     return (
@@ -32,7 +31,7 @@ export function WaitlistForm({ copy }: { copy: WaitlistFormCopy }) {
           type="email"
           name="email"
           required
-          placeholder="you@email.com"
+          placeholder={copy.emailPlaceholder}
           disabled={isPending}
           className="flex-1 rounded-lg border border-[var(--o-border)] bg-[var(--o-input-bg)] px-4 py-3 text-sm text-[var(--o-text)] placeholder-[var(--o-text-muted)] outline-none transition-colors duration-150 focus:border-[var(--o-warm)]/40 focus:bg-[var(--o-input-focus-bg)] disabled:opacity-50"
         />
@@ -54,8 +53,8 @@ export function WaitlistForm({ copy }: { copy: WaitlistFormCopy }) {
           )}
         </button>
       </div>
-      {state && !state.success && (
-        <p className="mt-2 text-xs text-red-400">{state.error}</p>
+      {errorMessage && (
+        <p className="mt-2 text-xs text-red-400">{errorMessage}</p>
       )}
     </form>
   );

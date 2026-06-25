@@ -3,7 +3,11 @@
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { useScrollProgress } from "@/app/use-scroll-reveal";
-import type { CoreTextSection } from "@/i18n/content";
+import type {
+  CoreTextSection,
+  DistilleryVisualLabels,
+  HandoffVisualLabels,
+} from "@/i18n/content";
 
 function clamp(v: number, min: number, max: number) {
   return Math.max(min, Math.min(max, v));
@@ -134,7 +138,13 @@ function ProblemVisual({ progress }: { progress: number }) {
   );
 }
 
-function CarryForwardVisual({ progress }: { progress: number }) {
+function CarryForwardVisual({
+  progress,
+  visualLabels,
+}: {
+  progress: number;
+  visualLabels: HandoffVisualLabels;
+}) {
   const cycle = remap(progress, 0.08, 0.7, 0, 1);
 
   return (
@@ -203,14 +213,14 @@ function CarryForwardVisual({ progress }: { progress: number }) {
           <path d="M96 214 H108" stroke="var(--o-text-secondary)" strokeOpacity={0.16 + cycle * 0.12} strokeWidth="2.5" strokeLinecap="round" />
         </g>
 
-        {[
-          { x: 320, y: 36, label: "START" },
-          { x: 540, y: 263, label: "CAPTURE" },
-          { x: 320, y: 394, label: "HANDOFF" },
-          { x: 100, y: 263, label: "RESUME" },
-        ].map((item) => (
+        {([
+          { key: "start", x: 320, y: 36 },
+          { key: "capture", x: 540, y: 263 },
+          { key: "handoff", x: 320, y: 394 },
+          { key: "resume", x: 100, y: 263 },
+        ] as const).map((item) => (
           <text
-            key={item.label}
+            key={item.key}
             x={item.x}
             y={item.y}
             textAnchor="middle"
@@ -220,7 +230,7 @@ function CarryForwardVisual({ progress }: { progress: number }) {
             fill="var(--o-text-secondary)"
             opacity={0.6 + cycle * 0.16}
           >
-            {item.label}
+            {visualLabels[item.key]}
           </text>
         ))}
       </svg>
@@ -251,7 +261,13 @@ function CarryForwardVisual({ progress }: { progress: number }) {
   );
 }
 
-function DistilleryVisual({ progress }: { progress: number }) {
+function DistilleryVisual({
+  progress,
+  visualLabels,
+}: {
+  progress: number;
+  visualLabels: DistilleryVisualLabels;
+}) {
   const refine = remap(progress, 0.08, 0.68, 0, 1);
   const drift = remap(progress, 0.12, 0.72, 18, 0);
   const flow = remap(progress, 0.18, 0.72, 0, 1);
@@ -355,15 +371,15 @@ function DistilleryVisual({ progress }: { progress: number }) {
         >
           <rect x="506" y="118" width="100" height="42" rx="12" fill="var(--o-bg)" fillOpacity="0.62" stroke="var(--o-sage)" strokeOpacity="0.22" />
           <path d="M520 139 H536" stroke="var(--o-sage)" strokeOpacity="0.58" strokeWidth="3" strokeLinecap="round" />
-          <text x="569" y="143" fill="var(--o-text-secondary)" opacity="0.66" textAnchor="middle">MERGED</text>
+          <text x="569" y="143" fill="var(--o-text-secondary)" opacity="0.66" textAnchor="middle">{visualLabels.merged}</text>
 
           <rect x="500" y="190" width="108" height="44" rx="13" fill="var(--o-bg)" fillOpacity="0.64" stroke="var(--o-sage)" strokeOpacity="0.24" />
           <path d="M516 212 H532 M532 212 H548" stroke="var(--o-sage)" strokeOpacity="0.5" strokeWidth="3" strokeLinecap="round" />
-          <text x="578" y="216" fill="var(--o-text-secondary)" opacity="0.68" textAnchor="middle">LINKED</text>
+          <text x="578" y="216" fill="var(--o-text-secondary)" opacity="0.68" textAnchor="middle">{visualLabels.linked}</text>
 
           <rect x="506" y="272" width="102" height="42" rx="12" fill="var(--o-bg)" fillOpacity="0.62" stroke="var(--o-sage)" strokeOpacity="0.22" />
           <path d="M520 289 H536 M520 298 H531" stroke="var(--o-sage)" strokeOpacity="0.52" strokeWidth="3" strokeLinecap="round" />
-          <text x="573" y="298" fill="var(--o-text-secondary)" opacity="0.66" textAnchor="middle">REFINED</text>
+          <text x="573" y="298" fill="var(--o-text-secondary)" opacity="0.66" textAnchor="middle">{visualLabels.refined}</text>
         </g>
       </svg>
     </VisualFrame>
@@ -565,6 +581,18 @@ type TextSectionProps = {
   copy: CoreTextSection;
 };
 
+type SolutionSectionProps = {
+  copy: CoreTextSection & {
+    visualLabels: HandoffVisualLabels;
+  };
+};
+
+type MemoryDistillerySectionProps = {
+  copy: CoreTextSection & {
+    visualLabels: DistilleryVisualLabels;
+  };
+};
+
 export function ProblemSection({ copy }: TextSectionProps) {
   const { ref, progress } = useScrollProgress<HTMLElement>();
   const isMobile = useIsMobile();
@@ -599,7 +627,7 @@ export function ProblemSection({ copy }: TextSectionProps) {
   );
 }
 
-export function SolutionSection({ copy }: TextSectionProps) {
+export function SolutionSection({ copy }: SolutionSectionProps) {
   const { ref, progress } = useScrollProgress<HTMLElement>();
   const isMobile = useIsMobile();
 
@@ -610,7 +638,7 @@ export function SolutionSection({ copy }: TextSectionProps) {
     <section ref={ref} className="border-t border-[var(--o-border-subtle)] px-6 py-20 sm:py-24">
       <div className="mx-auto grid min-h-[84svh] max-w-6xl items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
         <div className="order-2 lg:order-1">
-          <CarryForwardVisual progress={progress} />
+          <CarryForwardVisual progress={progress} visualLabels={copy.visualLabels} />
         </div>
 
         <div
@@ -635,7 +663,7 @@ export function SolutionSection({ copy }: TextSectionProps) {
   );
 }
 
-export function MemoryDistillerySection({ copy }: TextSectionProps) {
+export function MemoryDistillerySection({ copy }: MemoryDistillerySectionProps) {
   const { ref, progress } = useScrollProgress<HTMLElement>();
   const isMobile = useIsMobile();
 
@@ -663,7 +691,7 @@ export function MemoryDistillerySection({ copy }: TextSectionProps) {
           </p>
         </div>
 
-        <DistilleryVisual progress={progress} />
+        <DistilleryVisual progress={progress} visualLabels={copy.visualLabels} />
       </div>
     </section>
   );

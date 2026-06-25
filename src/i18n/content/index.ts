@@ -14,13 +14,18 @@ export type {
   CoreContent,
   CoreTextSection,
   ContentStatus,
+  DistilleryVisualLabels,
+  DocsItemContent,
   DocsContent,
   FooterContent,
   GetStartedContent,
+  HandoffVisualLabels,
   HomeContent,
   LinkContent,
   NotFoundContent,
   SeoContent,
+  WaitlistContent,
+  WaitlistErrorCode,
 } from "./schema";
 
 export const coreContentByLocale = {

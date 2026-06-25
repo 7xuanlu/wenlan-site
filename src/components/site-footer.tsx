@@ -12,7 +12,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
   return (
     <footer className="border-t border-[var(--o-border-subtle)] px-6 py-12">
       <div className="mx-auto max-w-5xl">
-        <nav aria-label="Site footer" className="grid gap-8 sm:grid-cols-4">
+        <nav aria-label={content.ariaLabel} className="grid gap-8 sm:grid-cols-4">
           <div>
             <p className="mb-3 font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
               {content.brand}

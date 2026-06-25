@@ -420,11 +420,37 @@ test("core content dictionaries cover first-release localized page surfaces", as
       assert.ok(home.sections?.[key]?.title, `${locale}.home.content.sections.${key}.title`);
       assert.ok(home.sections?.[key]?.body, `${locale}.home.content.sections.${key}.body`);
     }
+    assert.ok(home.sections.solution.visualLabels?.start, `${locale}.home.content.sections.solution.visualLabels.start`);
+    assert.ok(home.sections.solution.visualLabels?.capture, `${locale}.home.content.sections.solution.visualLabels.capture`);
+    assert.ok(home.sections.solution.visualLabels?.handoff, `${locale}.home.content.sections.solution.visualLabels.handoff`);
+    assert.ok(home.sections.solution.visualLabels?.resume, `${locale}.home.content.sections.solution.visualLabels.resume`);
+    assert.ok(home.sections.memoryDistillery.visualLabels?.merged, `${locale}.home.content.sections.memoryDistillery.visualLabels.merged`);
+    assert.ok(home.sections.memoryDistillery.visualLabels?.linked, `${locale}.home.content.sections.memoryDistillery.visualLabels.linked`);
+    assert.ok(home.sections.memoryDistillery.visualLabels?.refined, `${locale}.home.content.sections.memoryDistillery.visualLabels.refined`);
+
+    const waitlistCopy = home.sections.openSourceCta.waitlist;
+    for (const key of ["emailPlaceholder", "fallbackError"]) {
+      assert.ok(waitlistCopy?.[key], `${locale}.home.content.sections.openSourceCta.waitlist.${key}`);
+    }
+    for (const key of ["required", "invalid", "notConfigured", "unknown"]) {
+      assert.ok(waitlistCopy?.errors?.[key], `${locale}.home.content.sections.openSourceCta.waitlist.errors.${key}`);
+    }
 
     assert.ok(dictionary.about.content.principles?.items?.length >= 4, `${locale}.about.content.principles.items`);
     assert.ok(dictionary.docs.content.sections?.items?.length >= 4, `${locale}.docs.content.sections.items`);
+    for (const section of dictionary.docs.content.sections.items) {
+      assert.ok(section.items?.length > 0, `${locale}.docs.content.sections.${section.id}.items`);
+      for (const item of section.items) {
+        assert.ok(item.href, `${locale}.docs.content.sections.${section.id}.items.${item.id}.href`);
+        assert.ok(item.label, `${locale}.docs.content.sections.${section.id}.items.${item.id}.label`);
+        assert.ok(item.title, `${locale}.docs.content.sections.${section.id}.items.${item.id}.title`);
+        assert.ok(item.description, `${locale}.docs.content.sections.${section.id}.items.${item.id}.description`);
+        assert.ok(item.meta, `${locale}.docs.content.sections.${section.id}.items.${item.id}.meta`);
+      }
+    }
     assert.ok(dictionary.getStarted.content.steps?.length >= 3, `${locale}.getStarted.content.steps`);
     assert.ok(dictionary.notFound.content.title, `${locale}.notFound.content.title`);
+    assert.ok(dictionary.footer.content.ariaLabel, `${locale}.footer.content.ariaLabel`);
     assert.ok(dictionary.footer.content.groups?.length >= 3, `${locale}.footer.content.groups`);
   }
 
@@ -433,8 +459,87 @@ test("core content dictionaries cover first-release localized page surfaces", as
   assertArrayItemsHaveStableIds(content.enContent.home.content.faqs.items, "home.faqs.items");
   assertArrayItemsHaveStableIds(content.enContent.about.content.principles.items, "about.principles.items");
   assertArrayItemsHaveStableIds(content.enContent.docs.content.sections.items, "docs.sections.items");
+  for (const section of content.enContent.docs.content.sections.items) {
+    assertArrayItemsHaveStableIds(section.items, `docs.sections.${section.id}.items`);
+  }
   assertArrayItemsHaveStableIds(content.enContent.getStarted.content.steps, "getStarted.steps");
   assertArrayItemsHaveStableIds(content.enContent.footer.content.groups, "footer.groups");
+});
+
+test("waitlist client-visible copy is dictionary driven", async () => {
+  const formSource = await readFile(
+    resolve(repoRoot, "src/app/waitlist-form.tsx"),
+    "utf8",
+  );
+  assert.match(formSource, /emailPlaceholder/);
+  assert.match(formSource, /copy\.errors\[/);
+  assert.match(formSource, /copy\.fallbackError/);
+  assert.doesNotMatch(formSource, /placeholder="you@email\.com"/);
+  assert.doesNotMatch(formSource, /\{state\.error\}/);
+
+  const actionSource = await readFile(resolve(repoRoot, "src/app/actions.ts"), "utf8");
+  assert.match(actionSource, /errorCode/);
+  for (const literal of [
+    "Email is required.",
+    "Please enter a valid email.",
+    "Waitlist is not configured yet.",
+    "Something went wrong. Please try again.",
+  ]) {
+    assert.doesNotMatch(actionSource, new RegExp(literal.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+});
+
+test("problem-solution visible SVG labels are supplied by localized content", async () => {
+  const source = await readFile(
+    resolve(repoRoot, "src/components/problem-solution.tsx"),
+    "utf8",
+  );
+  assert.match(source, /visualLabels/);
+  for (const label of ["START", "CAPTURE", "HANDOFF", "RESUME", "MERGED", "LINKED", "REFINED"]) {
+    assert.doesNotMatch(source, new RegExp(`>${label}<|label:\\s*["']${label}["']`), label);
+  }
+});
+
+test("footer aria label is localized content", async () => {
+  const source = await readFile(
+    resolve(repoRoot, "src/components/site-footer.tsx"),
+    "utf8",
+  );
+  assert.match(source, /aria-label=\{content\.ariaLabel\}/);
+  assert.doesNotMatch(source, /aria-label="Site footer"/);
+});
+
+test("docs index visible cards come from localized docs content", async () => {
+  const { content } = await loadI18nModules();
+
+  for (const locale of ["zh-TW", "zh-CN"]) {
+    const sections = content.localizedContentByLocale[locale].docs.content.sections.items;
+    const afterSetup = sections.find((section) => section.id === "after-setup");
+    const reference = sections.find((section) => section.id === "reference");
+    const project = sections.find((section) => section.id === "project");
+
+    assert.ok(Array.isArray(afterSetup?.items), `${locale}.docs.after-setup.items`);
+    assert.ok(Array.isArray(reference?.items), `${locale}.docs.reference.items`);
+    assert.ok(Array.isArray(project?.items), `${locale}.docs.project.items`);
+    assert.ok(afterSetup?.items.some((item) => item.id === "daily-workflow"), `${locale}.docs.after-setup.daily-workflow`);
+    assert.ok(reference?.items.some((item) => item.id === "architecture"), `${locale}.docs.reference.architecture`);
+    assert.ok(project?.items.some((item) => item.id === "changelog"), `${locale}.docs.project.changelog`);
+    for (const section of sections) {
+      for (const item of section.items) {
+        assert.match(item.href, /^\/docs\//, `${locale}.${section.id}.${item.id}.href`);
+        assert.doesNotMatch(item.meta, /\bUpdated\b/, `${locale}.${section.id}.${item.id}.meta`);
+      }
+    }
+  }
+
+  const source = await readFile(
+    resolve(repoRoot, "src/app/_pages/docs-index.tsx"),
+    "utf8",
+  );
+  assert.doesNotMatch(source, /formatDocDate/);
+  assert.doesNotMatch(source, /\bUpdated\b/);
+  assert.doesNotMatch(source, /title:\s*page\.title/);
+  assert.doesNotMatch(source, /description:\s*page\.description/);
 });
 
 test("Chinese core content cannot hide English fallback copies", async () => {

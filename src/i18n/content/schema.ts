@@ -28,6 +28,34 @@ export type LinkContent = {
   label: string;
 };
 
+export type WaitlistErrorCode =
+  | "required"
+  | "invalid"
+  | "notConfigured"
+  | "unknown";
+
+export type WaitlistContent = {
+  successMessage: string;
+  pendingLabel: string;
+  submitLabel: string;
+  emailPlaceholder: string;
+  fallbackError: string;
+  errors: Record<WaitlistErrorCode, string>;
+};
+
+export type HandoffVisualLabels = {
+  start: string;
+  capture: string;
+  handoff: string;
+  resume: string;
+};
+
+export type DistilleryVisualLabels = {
+  merged: string;
+  linked: string;
+  refined: string;
+};
+
 export type HomeContent = SeoContent & {
   nav: {
     schemaName: string;
@@ -75,19 +103,19 @@ export type HomeContent = SeoContent & {
   };
   sections: {
     problem: CoreTextSection;
-    solution: CoreTextSection;
-    memoryDistillery: CoreTextSection;
+    solution: CoreTextSection & {
+      visualLabels: HandoffVisualLabels;
+    };
+    memoryDistillery: CoreTextSection & {
+      visualLabels: DistilleryVisualLabels;
+    };
     humanControl: CoreTextSection;
     features: CoreTextSection;
     openSourceCta: CoreTextSection & {
       primaryCta: LinkContent;
       secondaryCta: LinkContent;
       waitlistHeading: string;
-      waitlist: {
-        successMessage: string;
-        pendingLabel: string;
-        submitLabel: string;
-      };
+      waitlist: WaitlistContent;
     };
   };
   faqs: {
@@ -171,14 +199,8 @@ export type DocsContent = SeoContent & {
       id: string;
       title: string;
       description: string;
+      items: readonly DocsItemContent[];
     }[];
-  };
-  startItem: {
-    href: string;
-    label: string;
-    title: string;
-    description: string;
-    meta: string;
   };
   cta: {
     eyebrow: string;
@@ -191,6 +213,15 @@ export type DocsContent = SeoContent & {
     name: string;
     description: string;
   };
+};
+
+export type DocsItemContent = {
+  id: string;
+  href: string;
+  label: string;
+  title: string;
+  description: string;
+  meta: string;
 };
 
 export type GetStartedContent = SeoContent & {
@@ -243,6 +274,7 @@ export type NotFoundContent = {
 };
 
 export type FooterContent = {
+  ariaLabel: string;
   brand: string;
   tagline: string;
   groups: readonly {

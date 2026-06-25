@@ -1,21 +1,13 @@
 import { ArticleHalo } from "../(en)/learn/article-visuals";
-import { docPages, docUrl, formatDocDate } from "../(en)/docs/docs";
-import { getCoreContent, type DocsContent } from "@/i18n/content";
+import { getCoreContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
 import { SITE_URL } from "@/i18n/routing";
 
-type DocsItem = {
-  description: string;
-  href: string;
-  label: string;
-  meta: string;
-  title: string;
-};
-
 export function DocsIndexPage({ locale }: { locale: Locale }) {
   const content = getCoreContent(locale).docs.content;
-  const docsSections = buildDocsSections(content);
+  const docsSections = content.sections.items;
+  const docsItems = docsSections.flatMap((section) => section.items);
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -46,18 +38,11 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
     isPartOf: { "@id": "https://useorigin.app/#website" },
     publisher: { "@id": "https://useorigin.app/#organization" },
     inLanguage: locale === "en" ? "en-US" : locale,
-    hasPart: [
-      {
-        "@type": "WebPage",
-        name: content.startItem.title,
-        url: `${SITE_URL}/docs/get-started`,
-      },
-      ...docPages.map((page) => ({
-        "@type": "TechArticle",
-        name: page.title,
-        url: docUrl(page.slug),
-      })),
-    ],
+    hasPart: docsItems.map((item) => ({
+      "@type": item.href === "/docs/get-started" ? "WebPage" : "TechArticle",
+      name: item.title,
+      url: `${SITE_URL}${item.href}`,
+    })),
   };
 
   return (
@@ -185,39 +170,4 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
       </section>
     </main>
   );
-}
-
-function buildDocsSections(content: DocsContent) {
-  const [startHere, afterSetup, reference, project] = content.sections.items;
-
-  return [
-    {
-      ...startHere,
-      items: [content.startItem],
-    },
-    {
-      ...afterSetup,
-      items: docItemsForGroup("After setup"),
-    },
-    {
-      ...reference,
-      items: docItemsForGroup("Reference"),
-    },
-    {
-      ...project,
-      items: docItemsForGroup("Project"),
-    },
-  ];
-}
-
-function docItemsForGroup(group: string): DocsItem[] {
-  return docPages
-    .filter((page) => page.group === group)
-    .map((page) => ({
-      href: `/docs/${page.slug}`,
-      label: page.eyebrow,
-      title: page.title,
-      description: page.description,
-      meta: `${page.author} · Updated ${formatDocDate(page.updatedAt)} · ${page.readingTime}`,
-    }));
 }

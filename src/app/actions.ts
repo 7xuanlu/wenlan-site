@@ -10,7 +10,7 @@ function getResend() {
 
 type WaitlistResult =
   | { success: true }
-  | { success: false; error: string };
+  | { success: false; errorCode: "required" | "invalid" | "notConfigured" | "unknown" };
 
 export async function joinWaitlist(
   _prev: WaitlistResult | null,
@@ -19,18 +19,18 @@ export async function joinWaitlist(
   const email = formData.get("email");
 
   if (!email || typeof email !== "string") {
-    return { success: false, error: "Email is required." };
+    return { success: false, errorCode: "required" };
   }
 
   const trimmed = email.trim().toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
-    return { success: false, error: "Please enter a valid email." };
+    return { success: false, errorCode: "invalid" };
   }
 
   const audienceId = process.env.RESEND_AUDIENCE_ID;
   if (!audienceId) {
     console.error("RESEND_AUDIENCE_ID is not configured");
-    return { success: false, error: "Waitlist is not configured yet." };
+    return { success: false, errorCode: "notConfigured" };
   }
 
   try {
@@ -42,6 +42,6 @@ export async function joinWaitlist(
     return { success: true };
   } catch (err) {
     console.error("Failed to add to waitlist:", err);
-    return { success: false, error: "Something went wrong. Please try again." };
+    return { success: false, errorCode: "unknown" };
   }
 }
