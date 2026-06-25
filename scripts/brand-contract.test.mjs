@@ -43,6 +43,7 @@ async function* walkTextFiles(dir) {
     if (
       entry.name === ".git" ||
       entry.name === ".next" ||
+      entry.name === ".worktrees" ||
       entry.name === "node_modules" ||
       entry.name === "pnpm-lock.yaml"
     ) {

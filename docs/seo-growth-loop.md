@@ -1,6 +1,6 @@
 # Wenlan SEO/GEO Growth Loop
 
-Use this when deciding what to do next for Wenlan search visibility. The rule is measurement first: GSC and Umami decide whether the next sprint is technical cleanup, page refreshes, new Learn articles, or external distribution.
+Use this when deciding what to do next for Wenlan search visibility. The rule is measurement first: GSC and Umami decide whether the next sprint is technical cleanup, page refreshes, new Learn articles, or external distribution. The current deployed property remains `useorigin.app`; keep deployed-site technical checks pointed there until the public Wenlan site/domain changes.
 
 ## Operating Pattern
 
@@ -22,9 +22,9 @@ Use this when deciding what to do next for Wenlan search visibility. The rule is
 Generate the weekly action report from CSV exports:
 
 ```bash
-mkdir -p /tmp/origin-seo
-# Save the GSC Queries export as /tmp/origin-seo/gsc-queries.csv
-# Save the GSC Pages export as /tmp/origin-seo/gsc-pages.csv
+mkdir -p /tmp/wenlan-seo
+# Save the GSC Queries export as /tmp/wenlan-seo/gsc-queries.csv
+# Save the GSC Pages export as /tmp/wenlan-seo/gsc-pages.csv
 pnpm seo:weekly:run -- --date YYYY-MM-DD
 ```
 

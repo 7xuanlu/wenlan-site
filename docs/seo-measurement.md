@@ -1,6 +1,6 @@
 # Wenlan SEO Measurement
 
-Use this checklist after publishing SEO pages on `useorigin.app`. The goal is to separate brand demand, category discovery, and AI-answer visibility instead of treating all traffic as one number.
+Use this checklist for Wenlan SEO measurement. The current deployed property remains `useorigin.app`; keep these URLs until the public Wenlan site/domain changes. The goal is to separate brand demand, category discovery, and AI-answer visibility instead of treating all traffic as one number.
 
 Reusable runbook: `docs/seo-growth-loop.md`.
 
@@ -91,13 +91,13 @@ Indexing note: `Alternate page with proper canonical tag` is usually information
 
 Track these groups separately in Search Console:
 
-- Brand/entity: `origin ai work`, `origin ai work memory`, `useorigin`, `wenlan mcp`
+- Brand/entity: `wenlan ai work`, `wenlan ai work memory`, `wenlan mcp`, `useorigin`
 - AI work memory category: `ai work memory`, `memory for ai work`, `ai work memory layer`, `persistent memory for ai assistants`
 - MCP memory: `mcp memory server`, `memory mcp`, `claude mcp memory`, `cursor mcp memory`
 - Local-first/privacy: `local-first ai work memory`, `private ai work memory`, `on-device ai work memory`, `open source ai work memory`
-- Developer workflow: `origin claude code`, `origin for claude code`, `claude code memory`, `claude code persistent memory`, `cursor memory`, `ai coding agent work memory`
-- Setup and troubleshooting: `where does claude code store memory`, `add memory to claude code`, `codex persistent memory`, `cursor mcp memory`, `claude desktop mcp memory`, `origin 7878`
-- Comparisons: `origin vs basic memory`, `origin vs claude-mem`, `origin vs superlocal memory`, `origin vs mcp-memory-service`, `origin vs chatgpt memory`, `origin vs obsidian`, `origin vs notion ai`, `origin vs mem0`, `basic memory alternative`, `claude-mem alternative`
+- Developer workflow: `wenlan claude code`, `wenlan for claude code`, `claude code memory`, `claude code persistent memory`, `cursor memory`, `ai coding agent work memory`
+- Setup and troubleshooting: `where does claude code store memory`, `add memory to claude code`, `codex persistent memory`, `cursor mcp memory`, `claude desktop mcp memory`, `wenlan 7878`
+- Comparisons: `wenlan vs basic memory`, `wenlan vs claude-mem`, `wenlan vs superlocal memory`, `wenlan vs mcp-memory-service`, `wenlan vs chatgpt memory`, `wenlan vs obsidian`, `wenlan vs notion ai`, `wenlan vs mem0`, `basic memory alternative`, `claude-mem alternative`
 - Obsidian AI memory: `obsidian ai memory`, `obsidian-mind alternative`, `claude-obsidian alternative`, `claude obsidian memory`, `obsidian mcp`, `obsidian mcp tools`, `obsidian claude code mcp`, `claude code obsidian memory`
 - Architecture/workflow: `markdown ai work memory`, `local index ai work memory`, `distilled wiki pages ai work memory`, `ai work memory vs knowledge base`, `ai agent handoff`, `persistent context ai agents`, `ai memory provenance`, `review ai memory`, `git history ai memory`
 
@@ -140,7 +140,7 @@ The worksheet is written to `docs/seo-audits/YYYY-MM-DD-ai-visibility.md` by def
 
 ## GEO Surface
 
-- `https://useorigin.app/llms.txt` is a concise AI-readable map of Wenlan, docs, Learn articles, GitHub, and official positioning.
+- `https://useorigin.app/llms.txt` is the current deployed AI-readable map of Wenlan, docs, Learn articles, GitHub, and official positioning. Update this surface when the public Wenlan site/domain changes.
 - Treat `llms.txt` as cheap structured discoverability, not a guaranteed ranking factor or replacement for crawlable HTML.
 
 ## Distribution Surface

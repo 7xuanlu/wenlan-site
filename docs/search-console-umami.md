@@ -1,8 +1,10 @@
-# Search Console + Umami + Searchfit SEO Loop
+# Wenlan Search Console + Umami + Searchfit SEO Loop
 
 This is Wenlan's weekly measurement loop. Use it to decide whether the next SEO sprint should be technical cleanup, page refreshes, distribution, or new content. Do not start a new content batch until Search Console shows which canonical pages are indexed and which query clusters are already earning impressions.
 
-This loop is also scheduled in Codex as the active heartbeat automation `weekly-origin-seo-cleanup`. The automation should wake this thread weekly, use live GSC data when the authenticated browser/session is available, and fall back to deployed-site technical checks when account-gated data is unavailable.
+This loop is also scheduled in Codex as the active heartbeat automation `weekly-wenlan-seo-cleanup`. The automation should wake this thread weekly, use live GSC data when the authenticated browser/session is available, and fall back to deployed-site technical checks when account-gated data is unavailable.
+
+The current deployed property is still `useorigin.app`. Keep public-site technical checks pointed at the deployed URLs until the public Wenlan site/domain changes.
 
 ## 1) Verify the site in Google Search Console
 
@@ -44,13 +46,13 @@ Run this once per week, using the same date range for every export.
 Generate the ranked weekly action report with the deterministic pipeline trigger:
 
 ```bash
-mkdir -p /tmp/origin-seo
-# Save the GSC Queries export as /tmp/origin-seo/gsc-queries.csv
-# Save the GSC Pages export as /tmp/origin-seo/gsc-pages.csv
+mkdir -p /tmp/wenlan-seo
+# Save the GSC Queries export as /tmp/wenlan-seo/gsc-queries.csv
+# Save the GSC Pages export as /tmp/wenlan-seo/gsc-pages.csv
 # Optional when Umami export access is available:
-#   /tmp/origin-seo/umami-pages.csv
-#   /tmp/origin-seo/umami-referrers.csv
-#   /tmp/origin-seo/umami-events.csv
+#   /tmp/wenlan-seo/umami-pages.csv
+#   /tmp/wenlan-seo/umami-referrers.csv
+#   /tmp/wenlan-seo/umami-events.csv
 pnpm seo:weekly:run -- --date YYYY-MM-DD
 ```
 
@@ -102,13 +104,13 @@ Commit only the interpreted weekly notes when they change strategy or document s
 
 Use these query groups:
 
-- Brand/entity: `origin ai work`, `origin ai work memory`, `useorigin`, `wenlan mcp`
+- Brand/entity: `wenlan ai work`, `wenlan ai work memory`, `wenlan mcp`, `useorigin`
 - Category: `ai work memory`, `memory for ai work`, `persistent memory for ai assistants`
 - MCP memory: `mcp memory server`, `memory mcp`, `claude mcp memory`, `cursor mcp memory`
-- Setup/troubleshooting: `add memory to claude code`, `codex persistent memory`, `origin 7878`
+- Setup/troubleshooting: `add memory to claude code`, `codex persistent memory`, `wenlan 7878`
 - Workflows: `claude code memory`, `claude code /memory`, `claude code memory command`, `cursor memory`, `codex memory`, `ai coding agent work memory`
-- Comparisons: `origin vs basic memory`, `origin vs claude-mem`, `origin vs mem0`, `basic memory alternative`
-- Obsidian AI memory: `origin vs obsidian`, `obsidian ai memory`, `obsidian-mind alternative`, `claude-obsidian alternative`, `claude obsidian memory`, `obsidian mcp`, `obsidian mcp tools`
+- Comparisons: `wenlan vs basic memory`, `wenlan vs claude-mem`, `wenlan vs mem0`, `basic memory alternative`
+- Obsidian AI memory: `wenlan vs obsidian`, `obsidian ai memory`, `obsidian-mind alternative`, `claude-obsidian alternative`, `claude obsidian memory`, `obsidian mcp`, `obsidian mcp tools`
 - Trust/architecture: `local-first ai memory`, `ai memory provenance`, `git history ai memory`, `markdown local index`
 
 ## 5) Decision rules

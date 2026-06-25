@@ -4,7 +4,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 
 const DEFAULT_SITE_URL = "sc-domain:useorigin.app";
-const DEFAULT_OUTPUT_DIR = "/tmp/origin-seo";
+const DEFAULT_OUTPUT_DIR = "/tmp/wenlan-seo";
 const DEFAULT_SOURCE = "Search Console API";
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -71,7 +71,7 @@ function parseArgs(argv) {
     siteUrl: args.site ?? DEFAULT_SITE_URL,
     outputDir: resolve(
       process.cwd(),
-      args["output-dir"] ?? process.env.SEO_WEEKLY_INPUT_DIR ?? DEFAULT_OUTPUT_DIR,
+      args["output-dir"] || process.env.SEO_WEEKLY_INPUT_DIR || DEFAULT_OUTPUT_DIR,
     ),
     fixtureDir,
     source: fixtureDir ? `${DEFAULT_SOURCE} fixture` : DEFAULT_SOURCE,

@@ -375,6 +375,20 @@ test("package scripts include GSC API fetcher", async () => {
   assert.equal(packageJson.scripts["seo:gsc:fetch"], "node scripts/seo-gsc-fetch.mjs");
 });
 
+test("GSC API fetcher defaults to the Wenlan temporary input directory", async () => {
+  const script = await readFile(gscFetchScript, "utf8");
+
+  assert.match(script, /const DEFAULT_OUTPUT_DIR = "\/tmp\/wenlan-seo";/);
+  assert.doesNotMatch(script, /const DEFAULT_OUTPUT_DIR = "\/tmp\/origin-seo";/);
+});
+
+test("package SEO sample writes to Wenlan temporary output", async () => {
+  const packageJson = JSON.parse(await readFile(resolve(repoRoot, "package.json"), "utf8"));
+
+  assert.match(packageJson.scripts["seo:weekly:sample"], /\/tmp\/wenlan-weekly-seo-sample\.md/);
+  assert.doesNotMatch(packageJson.scripts["seo:weekly:sample"], /\/tmp\/origin-weekly-seo-sample\.md/);
+});
+
 test("GSC API fetcher normalizes search analytics fixture rows into weekly CSVs", async () => {
   const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-gsc-fetch-"));
   try {
@@ -626,6 +640,8 @@ test("AI visibility worksheet generator turns measurement prompts into manual ro
 
     assert.match(worksheet, /^# AI Visibility Worksheet — 2026-06-13/m);
     assert.match(worksheet, /Do not infer results/);
+    assert.match(worksheet, /Wenlan appears\?/);
+    assert.doesNotMatch(worksheet, new RegExp("Or" + "igin appears\\?"));
     assert.match(
       worksheet,
       /\| 1 \| What is the best AI work memory for people who use Claude Code and Cursor\? \| Claude \| manual \| manual \| manual \| manual \| manual \| manual \|/,
@@ -1676,6 +1692,32 @@ test("seo weekly pipeline trigger runs from a standard input directory", async (
     assert.match(report, /\| Query table impressions \| 69 \|/);
     assert.match(report, /origin vs basic memory/);
     assert.match(report, /Do not create a new Learn page unless/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly pipeline defaults to the Wenlan temporary input directory", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-pipeline-default-"));
+  try {
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [
+          resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs"),
+          "--",
+          "--date",
+          "2026-06-07",
+          "--output",
+          join(outputRoot, "unused.md"),
+        ],
+        {
+          cwd: repoRoot,
+          env: { ...process.env, SEO_WEEKLY_INPUT_DIR: "" },
+        },
+      ),
+      /\/tmp\/wenlan-seo\/gsc-queries\.csv/,
+    );
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }
