@@ -108,16 +108,16 @@ export function GetStartedPage({ locale }: { locale: Locale }) {
 
         <section className="px-6 py-16">
           <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-[minmax(0,680px)_1fr]">
-            <div className="space-y-14">
+            <div className="min-w-0 space-y-14">
               {content.steps.map((step) => (
                 <section
                   key={step.id}
-                  className="grid gap-5 border-t border-[var(--o-border-subtle)] pt-10 sm:grid-cols-[72px_1fr]"
+                  className="grid min-w-0 gap-5 border-t border-[var(--o-border-subtle)] pt-10 sm:grid-cols-[72px_minmax(0,1fr)]"
                 >
                   <p className="font-mono text-[11px] text-[var(--o-warm)]">
                     {step.number}
                   </p>
-                  <div>
+                  <div className="min-w-0">
                     <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
                       {step.title}
                     </h2>
@@ -138,7 +138,7 @@ export function GetStartedPage({ locale }: { locale: Locale }) {
                       </pre>
                     ))}
                     {step.ctas.length > 0 && (
-                      <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                      <div className="mt-7 flex min-w-0 flex-col gap-3 sm:flex-row">
                         {step.ctas.map((cta, index) => (
                           <LocalizedLink
                             key={cta.id}
@@ -146,8 +146,8 @@ export function GetStartedPage({ locale }: { locale: Locale }) {
                             locale={locale}
                             className={
                               index === 0
-                                ? "rounded-xl bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] transition-all hover:shadow-[0_0_28px_var(--o-glow-warm)]"
-                                : "rounded-xl border border-[var(--o-border)] px-5 py-3 text-center text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
+                                ? "min-w-0 break-words rounded-xl bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] transition-all hover:shadow-[0_0_28px_var(--o-glow-warm)]"
+                                : "min-w-0 break-words rounded-xl border border-[var(--o-border)] px-5 py-3 text-center text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
                             }
                           >
                             {cta.label}

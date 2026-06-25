@@ -336,6 +336,14 @@ test("localized core page wrappers and shared page modules exist", async () => {
   }
 });
 
+test("localized get-started layout allows mobile content columns to shrink", async () => {
+  const source = await readFile(resolve(repoRoot, "src/app/_pages/get-started.tsx"), "utf8");
+
+  assert.match(source, /className="min-w-0 space-y-14"/);
+  assert.match(source, /className="grid min-w-0 gap-5/);
+  assert.match(source, /<div className="min-w-0">/);
+});
+
 test("localized untranslated docs slug and Learn routes hard 404", async () => {
   await assertNotFoundRouteSource("src/app/[locale]/docs/[slug]/page.tsx", {
     simpleRuntimeNotFound: true,
