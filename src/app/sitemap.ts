@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { docPages, docUrl } from "./docs/docs";
-import { articles, articleUrl, SITE_URL } from "./learn/articles";
+import { docPages, docUrl } from "./(en)/docs/docs";
+import { articles, articleUrl, SITE_URL } from "./(en)/learn/articles";
 
 const ABOUT_UPDATED_AT = "2026-06-24";
 const GET_STARTED_UPDATED_AT = "2026-06-24";

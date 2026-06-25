@@ -42,10 +42,10 @@ async function extractSlugs(filePath) {
 
 async function buildUrlList() {
   const learnSlugs = await extractSlugs(
-    resolve(REPO_ROOT, "src/app/learn/articles.ts"),
+    resolve(REPO_ROOT, "src/app/(en)/learn/articles.ts"),
   );
   const docsSlugs = await extractSlugs(
-    resolve(REPO_ROOT, "src/app/docs/docs.ts"),
+    resolve(REPO_ROOT, "src/app/(en)/docs/docs.ts"),
   );
 
   const urls = new Set();

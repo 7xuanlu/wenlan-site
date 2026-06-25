@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
 
@@ -127,6 +127,70 @@ function isHrefLeafPath(path) {
 function isUrlOnlyValue(value) {
   return /^https?:\/\/[^\s]+$/.test(value);
 }
+
+async function fileExists(path) {
+  try {
+    await access(resolve(repoRoot, path));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function assertFileExists(path) {
+  assert.equal(await fileExists(path), true, `${path} should exist`);
+}
+
+async function assertFileMissing(path) {
+  assert.equal(await fileExists(path), false, `${path} should not exist`);
+}
+
+test("app root layouts are split between English and translated locale roots", async () => {
+  await assertFileMissing("src/app/layout.tsx");
+  await assertFileExists("src/app/root-document.tsx");
+  await assertFileExists("src/app/(en)/layout.tsx");
+  await assertFileExists("src/app/[locale]/layout.tsx");
+
+  const rootDocumentSource = await readFile(
+    resolve(repoRoot, "src/app/root-document.tsx"),
+    "utf8",
+  );
+  assert.match(rootDocumentSource, /<html\b/);
+  assert.match(rootDocumentSource, /lang=\{LOCALE_CONFIG\[locale\]\.htmlLang\}/);
+
+  const englishLayoutSource = await readFile(
+    resolve(repoRoot, "src/app/(en)/layout.tsx"),
+    "utf8",
+  );
+  assert.match(englishLayoutSource, /<RootDocument\s+locale="en"/);
+  assert.match(englishLayoutSource, /buildRootMetadata\("en"\)/);
+  assert.match(englishLayoutSource, /export\s+\{\s*viewport\s*\}/);
+
+  const localizedLayoutSource = await readFile(
+    resolve(repoRoot, "src/app/[locale]/layout.tsx"),
+    "utf8",
+  );
+  assert.match(localizedLayoutSource, /generateStaticParams/);
+  assert.match(localizedLayoutSource, /TRANSLATED_LOCALES/);
+  assert.match(localizedLayoutSource, /notFound/);
+});
+
+test("English app routes live under the unprefixed route group", async () => {
+  for (const path of [
+    "src/app/(en)/page.tsx",
+    "src/app/(en)/about/page.tsx",
+    "src/app/(en)/docs/page.tsx",
+    "src/app/(en)/docs/get-started/page.tsx",
+    "src/app/(en)/docs/[slug]/page.tsx",
+    "src/app/(en)/learn/page.tsx",
+    "src/app/(en)/learn/[slug]/page.tsx",
+    "src/app/(en)/feed.xml/route.ts",
+    "src/app/(en)/llms-full.txt/route.ts",
+    "src/app/(en)/not-found.tsx",
+  ]) {
+    await assertFileExists(path);
+  }
+});
 
 test("locale model exposes only the supported app locales and metadata", async () => {
   const { locales } = await loadI18nModules();

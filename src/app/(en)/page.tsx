@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { DemoVideo } from "./demo-video";
-import { WaitlistForm } from "./waitlist-form";
-import { ThemeToggle } from "./theme-toggle";
+import { DemoVideo } from "../demo-video";
+import { WaitlistForm } from "../waitlist-form";
+import { ThemeToggle } from "../theme-toggle";
 import { FAQSection, homepageFaqs } from "@/components/sections";
 import { FeatureSection, HumanControlSection, MemoryDistillerySection, ProblemSection, SolutionSection } from "@/components/problem-solution";
 

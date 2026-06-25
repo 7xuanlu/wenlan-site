@@ -25,6 +25,31 @@ export const openGraphLocaleByLocale = {
   "zh-CN": "zh_CN",
 } as const satisfies Record<Locale, string>;
 
+export const LOCALE_CONFIG = {
+  en: {
+    htmlLang: htmlLangByLocale.en,
+    hreflang: hreflangByLocale.en,
+    openGraphLocale: openGraphLocaleByLocale.en,
+  },
+  "zh-TW": {
+    htmlLang: htmlLangByLocale["zh-TW"],
+    hreflang: hreflangByLocale["zh-TW"],
+    openGraphLocale: openGraphLocaleByLocale["zh-TW"],
+  },
+  "zh-CN": {
+    htmlLang: htmlLangByLocale["zh-CN"],
+    hreflang: hreflangByLocale["zh-CN"],
+    openGraphLocale: openGraphLocaleByLocale["zh-CN"],
+  },
+} as const satisfies Record<
+  Locale,
+  {
+    htmlLang: string;
+    hreflang: string;
+    openGraphLocale: string;
+  }
+>;
+
 export function isSupportedLocale(value: string): value is Locale {
   return SUPPORTED_LOCALES.includes(value as Locale);
 }

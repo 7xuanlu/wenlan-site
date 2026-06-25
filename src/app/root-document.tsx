@@ -1,8 +1,8 @@
-import type { Metadata, Viewport } from "next";
+import { SiteFooter } from "@/components/site-footer";
+import { LOCALE_CONFIG, type Locale } from "@/i18n/locales";
+import { rootHomeSeo } from "@/i18n/metadata";
 import { Fraunces, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "./theme-provider";
-import { SiteFooter } from "@/components/site-footer";
-import "./globals.css";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -22,78 +22,18 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const siteDescription =
-  "Wenlan is a living personal knowledge library for AI work: agents capture what they learn, you add sources you trust, and the daemon keeps source-cited pages current.";
-
-const siteTitle = "Wenlan | Living Personal Knowledge Library for AI Work";
-
-export const metadata: Metadata = {
-  metadataBase: new URL("https://useorigin.app"),
-  title: siteTitle,
-  description: siteDescription,
-  alternates: {
-    canonical: "/",
-    types: {
-      "application/rss+xml": [
-        { url: "/feed.xml", title: "Wenlan Learn RSS feed" },
-      ],
-    },
-  },
-  openGraph: {
-    title: siteTitle,
-    description: siteDescription,
-    type: "website",
-    url: "https://useorigin.app",
-    siteName: "Wenlan",
-    locale: "en_US",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteTitle,
-    description: siteDescription,
-  },
-  icons: {
-    icon: "/favicon.svg",
-  },
-  manifest: "/manifest.webmanifest",
-  authors: [
-    {
-      name: "Qi-Xuan Lu",
-      url: "https://github.com/7xuanlu",
-    },
-  ],
-  creator: "Qi-Xuan Lu",
-  publisher: "Qi-Xuan Lu",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
-  },
-};
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#1a1a2e" },
-    { media: "(prefers-color-scheme: light)", color: "#fefcf9" },
-  ],
-};
-
-export default function RootLayout({
+export default function RootDocument({
   children,
+  locale,
 }: {
   children: React.ReactNode;
+  locale: Locale;
 }) {
+  const siteDescription = rootHomeSeo(locale).description;
+
   return (
     <html
-      lang="en"
+      lang={LOCALE_CONFIG[locale].htmlLang}
       data-scroll-behavior="smooth"
       className={`${fraunces.variable} ${instrumentSans.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
@@ -173,7 +113,7 @@ export default function RootLayout({
               alternateName: "useorigin.app",
               url: "https://useorigin.app",
               description: siteDescription,
-              inLanguage: "en-US",
+              inLanguage: LOCALE_CONFIG[locale].hreflang,
               publisher: { "@id": "https://useorigin.app/#organization" },
               copyrightHolder: { "@id": "https://useorigin.app/#qixuan-lu" },
               copyrightYear: 2026,

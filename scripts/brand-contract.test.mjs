@@ -6,8 +6,34 @@ import ts from "typescript";
 
 const repoRoot = resolve(import.meta.dirname, "..");
 
+const englishRouteGroupAliases = new Map([
+  ["src/app/layout.tsx", "src/app/root-document.tsx"],
+  ["src/app/page.tsx", "src/app/(en)/page.tsx"],
+  ["src/app/not-found.tsx", "src/app/(en)/not-found.tsx"],
+  ["src/app/opengraph-image.tsx", "src/app/(en)/opengraph-image.tsx"],
+  ["src/app/feed.xml/route.ts", "src/app/(en)/feed.xml/route.ts"],
+  ["src/app/llms-full.txt/route.ts", "src/app/(en)/llms-full.txt/route.ts"],
+]);
+
+function sourcePath(path) {
+  if (englishRouteGroupAliases.has(path)) {
+    return englishRouteGroupAliases.get(path);
+  }
+  if (path.startsWith("src/app/about/")) {
+    return path.replace("src/app/about/", "src/app/(en)/about/");
+  }
+  if (path.startsWith("src/app/docs/")) {
+    return path.replace("src/app/docs/", "src/app/(en)/docs/");
+  }
+  if (path.startsWith("src/app/learn/")) {
+    return path.replace("src/app/learn/", "src/app/(en)/learn/");
+  }
+
+  return path;
+}
+
 async function readRepo(path) {
-  return readFile(resolve(repoRoot, path), "utf8");
+  return readFile(resolve(repoRoot, sourcePath(path)), "utf8");
 }
 
 async function currentWenlanRelease() {
@@ -118,13 +144,17 @@ test("package metadata uses the wenlan-site identity", async () => {
 });
 
 test("root metadata describes Wenlan on the current release surface", async () => {
-  const layout = await readRepo("src/app/layout.tsx");
+  const metadata = await readRepo("src/i18n/metadata.ts");
+  const englishContent = await readRepo("src/i18n/content/en.ts");
+  const rootDocument = await readRepo("src/app/root-document.tsx");
 
-  assert.match(layout, /const siteTitle = "Wenlan \|/);
-  assert.match(layout, /name: "Wenlan"/);
-  assert.match(layout, /softwareVersion: "0\.9\.1"/);
-  assert.match(layout, /installUrl: "https:\/\/github\.com\/7xuanlu\/wenlan#quickstart"/);
-  assert.match(layout, /codeRepository: "https:\/\/github\.com\/7xuanlu\/wenlan"/);
+  assert.match(englishContent, /title:\s*"Wenlan \|/);
+  assert.match(metadata, /export function buildRootMetadata/);
+  assert.match(metadata, /locale: LOCALE_CONFIG\[locale\]\.openGraphLocale/);
+  assert.match(rootDocument, /name: "Wenlan"/);
+  assert.match(rootDocument, /softwareVersion: "0\.9\.1"/);
+  assert.match(rootDocument, /installUrl: "https:\/\/github\.com\/7xuanlu\/wenlan#quickstart"/);
+  assert.match(rootDocument, /codeRepository: "https:\/\/github\.com\/7xuanlu\/wenlan"/);
 });
 
 test("public machine-readable surfaces use Wenlan names and packages", async () => {
@@ -141,6 +171,15 @@ test("public machine-readable surfaces use Wenlan names and packages", async () 
   assert.match(llms, /wenlan-types/);
   assert.match(llmsFull, /living personal knowledge library for AI work/);
   assert.doesNotMatch(llmsFull, /Wenlan is local-first memory for AI work/);
+});
+
+test("postbuild URL discovery reads moved English route-group source files", async () => {
+  const indexNow = await readRepo("scripts/indexnow-ping.mjs");
+
+  assert.match(indexNow, /src\/app\/\(en\)\/learn\/articles\.ts/);
+  assert.match(indexNow, /src\/app\/\(en\)\/docs\/docs\.ts/);
+  assert.doesNotMatch(indexNow, /src\/app\/learn\/articles\.ts/);
+  assert.doesNotMatch(indexNow, /src\/app\/docs\/docs\.ts/);
 });
 
 test("public eval surfaces publish the latest LME oracle and LME-S framing", async () => {
