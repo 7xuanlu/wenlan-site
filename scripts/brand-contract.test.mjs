@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile, readdir } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
 import test from "node:test";
 import ts from "typescript";
@@ -9,7 +9,6 @@ const repoRoot = resolve(import.meta.dirname, "..");
 const englishRouteGroupAliases = new Map([
   ["src/app/layout.tsx", "src/app/root-document.tsx"],
   ["src/app/page.tsx", "src/app/(en)/page.tsx"],
-  ["src/app/not-found.tsx", "src/app/(en)/not-found.tsx"],
   ["src/app/opengraph-image.tsx", "src/app/(en)/opengraph-image.tsx"],
   ["src/app/feed.xml/route.ts", "src/app/(en)/feed.xml/route.ts"],
   ["src/app/llms-full.txt/route.ts", "src/app/(en)/llms-full.txt/route.ts"],
@@ -34,6 +33,15 @@ function sourcePath(path) {
 
 async function readRepo(path) {
   return readFile(resolve(repoRoot, sourcePath(path)), "utf8");
+}
+
+async function builtArtifactExists(path) {
+  try {
+    await access(path);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 async function currentWenlanRelease() {
@@ -511,13 +519,27 @@ test("Wenlan route slugs replace old Origin slugs with direct redirects", async 
 test("public internal links point to Wenlan route slugs", async () => {
   const linkSources = [
     await readRepo("src/components/site-footer.tsx"),
-    await readRepo("src/app/not-found.tsx"),
+    await readRepo("src/app/(en)/not-found.tsx"),
     await readRepo("src/app/learn/page.tsx"),
   ].join("\n");
 
   assert.doesNotMatch(linkSources, /href=["{]?"\/learn\/origin-/);
   assert.doesNotMatch(linkSources, /href=["{]?"\/learn\/claude-code-memory-command-vs-origin/);
   assert.doesNotMatch(linkSources, /href=["{]?"\/learn\/where-origin-stores/);
+});
+
+test("built global unmatched-route 404 uses the branded Wenlan fallback", async (t) => {
+  const notFoundHtmlPath = resolve(repoRoot, ".next/server/app/_not-found.html");
+  if (!(await builtArtifactExists(notFoundHtmlPath))) {
+    t.skip(
+      "Run pnpm build before this built-artifact assertion; .next/server/app/_not-found.html is missing.",
+    );
+    return;
+  }
+
+  const notFoundHtml = await readFile(notFoundHtmlPath, "utf8");
+  assert.match(notFoundHtml, /This page does not exist\./);
+  assert.doesNotMatch(notFoundHtml, /404: This page could not be found\./);
 });
 
 test("public docs and assets do not expose stale lower-case Origin surfaces", async () => {

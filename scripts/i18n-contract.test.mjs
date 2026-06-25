@@ -175,6 +175,23 @@ test("app root layouts are split between English and translated locale roots", a
   assert.match(localizedLayoutSource, /notFound/);
 });
 
+test("global unmatched-route 404 is explicitly enabled and branded", async () => {
+  await assertFileExists("src/app/global-not-found.tsx");
+
+  const nextConfigSource = await readFile(resolve(repoRoot, "next.config.ts"), "utf8");
+  assert.match(nextConfigSource, /experimental\s*:\s*{/);
+  assert.match(nextConfigSource, /globalNotFound\s*:\s*true/);
+
+  const globalNotFoundSource = await readFile(
+    resolve(repoRoot, "src/app/global-not-found.tsx"),
+    "utf8",
+  );
+  assert.match(globalNotFoundSource, /<html\b/);
+  assert.match(globalNotFoundSource, /<body\b/);
+  assert.match(globalNotFoundSource, /lang=(?:"en"|'en'|\{"en"\})/);
+  assert.match(globalNotFoundSource, /This page does not exist\./);
+});
+
 test("English app routes live under the unprefixed route group", async () => {
   for (const path of [
     "src/app/(en)/page.tsx",

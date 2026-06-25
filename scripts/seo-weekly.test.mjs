@@ -18,7 +18,6 @@ const gscFetchScript = resolve(repoRoot, "scripts/seo-gsc-fetch.mjs");
 const englishRouteGroupAliases = new Map([
   ["src/app/layout.tsx", "src/app/root-document.tsx"],
   ["src/app/page.tsx", "src/app/(en)/page.tsx"],
-  ["src/app/not-found.tsx", "src/app/(en)/not-found.tsx"],
   ["src/app/opengraph-image.tsx", "src/app/(en)/opengraph-image.tsx"],
   ["src/app/feed.xml/route.ts", "src/app/(en)/feed.xml/route.ts"],
   ["src/app/llms-full.txt/route.ts", "src/app/(en)/llms-full.txt/route.ts"],

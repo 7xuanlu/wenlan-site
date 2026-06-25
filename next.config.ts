@@ -13,6 +13,9 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
   },
+  experimental: {
+    globalNotFound: true,
+  },
   async headers() {
     return [
       { source: "/llms.txt", headers: NOINDEX_FOLLOW },
