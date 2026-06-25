@@ -2,12 +2,15 @@ import { ArticleHalo, MemoryIndex } from "../(en)/learn/article-visuals";
 import { getCoreContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
-import { SITE_URL } from "@/i18n/routing";
+import { canonicalUrl } from "@/i18n/routing";
 
 export function GetStartedPage({ locale }: { locale: Locale }) {
   const dictionary = getCoreContent(locale);
   const content = dictionary.getStarted.content;
   const chrome = dictionary.chrome.content;
+  const homeUrl = canonicalUrl(locale, "/");
+  const docsUrl = canonicalUrl(locale, "/docs");
+  const getStartedUrl = canonicalUrl(locale, "/docs/get-started");
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -17,19 +20,19 @@ export function GetStartedPage({ locale }: { locale: Locale }) {
         "@type": "ListItem",
         position: 1,
         name: content.breadcrumbs.home,
-        item: SITE_URL,
+        item: homeUrl,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: content.breadcrumbs.docs,
-        item: `${SITE_URL}/docs`,
+        item: docsUrl,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: content.hero.eyebrow,
-        item: `${SITE_URL}/docs/get-started`,
+        item: getStartedUrl,
       },
     ],
   };

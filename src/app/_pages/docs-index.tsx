@@ -2,7 +2,7 @@ import { ArticleHalo } from "../(en)/learn/article-visuals";
 import { getCoreContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
-import { SITE_URL } from "@/i18n/routing";
+import { canonicalUrl } from "@/i18n/routing";
 
 export function DocsIndexPage({ locale }: { locale: Locale }) {
   const dictionary = getCoreContent(locale);
@@ -10,6 +10,8 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
   const chrome = dictionary.chrome.content;
   const docsSections = content.sections.items;
   const docsItems = docsSections.flatMap((section) => section.items);
+  const homeUrl = canonicalUrl(locale, "/");
+  const docsUrl = canonicalUrl(locale, "/docs");
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -19,13 +21,13 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
         "@type": "ListItem",
         position: 1,
         name: content.breadcrumbs.home,
-        item: SITE_URL,
+        item: homeUrl,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: content.breadcrumbs.current,
-        item: `${SITE_URL}/docs`,
+        item: docsUrl,
       },
     ],
   };
@@ -33,17 +35,17 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
   const collectionSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "@id": "https://useorigin.app/docs#collection",
+    "@id": `${docsUrl}#collection`,
     name: content.schema.name,
     description: content.schema.description,
-    url: `${SITE_URL}/docs`,
+    url: docsUrl,
     isPartOf: { "@id": "https://useorigin.app/#website" },
     publisher: { "@id": "https://useorigin.app/#organization" },
     inLanguage: locale === "en" ? "en-US" : locale,
     hasPart: docsItems.map((item) => ({
       "@type": item.href === "/docs/get-started" ? "WebPage" : "TechArticle",
       name: item.title,
-      url: `${SITE_URL}${item.href}`,
+      url: canonicalUrl(locale, item.href),
     })),
   };
 

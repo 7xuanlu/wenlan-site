@@ -2,13 +2,15 @@ import { ArticleHalo, MemoryIndex } from "../(en)/learn/article-visuals";
 import { getCoreContent, type LinkContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
-import { SITE_URL } from "@/i18n/routing";
+import { canonicalUrl } from "@/i18n/routing";
 
 export function AboutPage({ locale }: { locale: Locale }) {
   const dictionary = getCoreContent(locale);
   const content = dictionary.about.content;
   const chrome = dictionary.chrome.content;
   const [whySection, builderSection, statusSection] = content.sections;
+  const homeUrl = canonicalUrl(locale, "/");
+  const aboutUrl = canonicalUrl(locale, "/about");
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -18,13 +20,13 @@ export function AboutPage({ locale }: { locale: Locale }) {
         "@type": "ListItem",
         position: 1,
         name: content.breadcrumbs.home,
-        item: SITE_URL,
+        item: homeUrl,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: content.breadcrumbs.current,
-        item: `${SITE_URL}/about`,
+        item: aboutUrl,
       },
     ],
   };
@@ -34,7 +36,7 @@ export function AboutPage({ locale }: { locale: Locale }) {
     "@type": "AboutPage",
     name: content.schema.name,
     description: content.schema.description,
-    url: `${SITE_URL}/about`,
+    url: aboutUrl,
     mainEntity: {
       "@id": "https://useorigin.app/#organization",
     },
@@ -68,7 +70,7 @@ export function AboutPage({ locale }: { locale: Locale }) {
       "libSQL",
     ],
     worksFor: { "@id": "https://useorigin.app/#organization" },
-    mainEntityOfPage: `${SITE_URL}/about`,
+    mainEntityOfPage: aboutUrl,
   };
 
   return (

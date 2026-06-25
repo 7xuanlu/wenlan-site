@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
+import React from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 
 const repoRoot = resolve(import.meta.dirname, "..");
 
@@ -170,6 +172,35 @@ async function assertFileMissing(path) {
   assert.equal(await fileExists(path), false, `${path} should not exist`);
 }
 
+async function loadStructuredDataModule() {
+  try {
+    return await import("../src/app/structured-data.ts");
+  } catch (error) {
+    assert.fail(`structured data helper missing or invalid: ${error.message}`);
+  }
+}
+
+function renderJsonLd(Component, locale) {
+  const html = renderToStaticMarkup(React.createElement(Component, { locale }));
+  return [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].map(
+    (match) => JSON.parse(match[1]),
+  );
+}
+
+function schemaByType(schemas, type) {
+  const schema = schemas.find((item) => item["@type"] === type);
+  assert.ok(schema, `${type} schema should exist`);
+  return schema;
+}
+
+function assertBreadcrumbItems(schema, expectedItems, label) {
+  assert.deepEqual(
+    schema.itemListElement.map((item) => item.item),
+    expectedItems,
+    label,
+  );
+}
+
 test("app root layouts are split between English and translated locale roots", async () => {
   await assertFileMissing("src/app/layout.tsx");
   await assertFileExists("src/app/root-document.tsx");
@@ -198,6 +229,42 @@ test("app root layouts are split between English and translated locale roots", a
   assert.match(localizedLayoutSource, /generateStaticParams/);
   assert.match(localizedLayoutSource, /TRANSLATED_LOCALES/);
   assert.match(localizedLayoutSource, /notFound/);
+});
+
+test("root SoftwareApplication JSON-LD keeps English featureList off translated locales", async () => {
+  const { routing } = await loadI18nModules();
+  const { softwareApplicationSchema } = await loadStructuredDataModule();
+
+  const englishSchema = softwareApplicationSchema("en");
+  assert.equal(englishSchema.url, routing.canonicalUrl("en", "/"));
+  assert.ok(Array.isArray(englishSchema.featureList), "English featureList");
+  assert.match(
+    englishSchema.featureList.join("\n"),
+    /Hybrid retrieval on libSQL/,
+    "English featureList keeps current product proof copy",
+  );
+
+  for (const locale of ["zh-TW", "zh-CN"]) {
+    const schema = softwareApplicationSchema(locale);
+
+    assert.equal(schema.url, routing.canonicalUrl(locale, "/"), `${locale}.url`);
+    assert.equal(
+      Object.hasOwn(schema, "featureList"),
+      false,
+      `${locale}.featureList`,
+    );
+  }
+});
+
+test("root document delegates SoftwareApplication schema to the locale-aware helper", async () => {
+  const source = await readFile(
+    resolve(repoRoot, "src/app/root-document.tsx"),
+    "utf8",
+  );
+
+  assert.match(source, /softwareApplicationSchema\(locale\)/);
+  assert.doesNotMatch(source, /featureList\s*:\s*\[/);
+  assert.doesNotMatch(source, /Hybrid retrieval on libSQL/);
 });
 
 test("global unmatched-route 404 is explicitly enabled and branded", async () => {
@@ -372,6 +439,69 @@ test("alternate URLs are reciprocal and include x-default for core translated pa
         alternates,
         `${locale} ${pathname}`,
       );
+    }
+  }
+});
+
+test("localized core page JSON-LD uses localized absolute URLs for translated routes", async () => {
+  const { routing } = await loadI18nModules();
+  const [{ AboutPage }, { DocsIndexPage }, { GetStartedPage }] = await Promise.all([
+    import("../src/app/_pages/about.tsx"),
+    import("../src/app/_pages/docs-index.tsx"),
+    import("../src/app/_pages/get-started.tsx"),
+  ]);
+
+  for (const locale of ["zh-TW", "zh-CN"]) {
+    const homeUrl = routing.canonicalUrl(locale, "/");
+    const aboutUrl = routing.canonicalUrl(locale, "/about");
+    const docsUrl = routing.canonicalUrl(locale, "/docs");
+    const getStartedUrl = routing.canonicalUrl(locale, "/docs/get-started");
+
+    const aboutSchemas = renderJsonLd(AboutPage, locale);
+    assertBreadcrumbItems(
+      schemaByType(aboutSchemas, "BreadcrumbList"),
+      [homeUrl, aboutUrl],
+      `${locale}.about.breadcrumbs`,
+    );
+    assert.equal(schemaByType(aboutSchemas, "AboutPage").url, aboutUrl);
+    assert.equal(schemaByType(aboutSchemas, "Person").mainEntityOfPage, aboutUrl);
+
+    const docsSchemas = renderJsonLd(DocsIndexPage, locale);
+    assertBreadcrumbItems(
+      schemaByType(docsSchemas, "BreadcrumbList"),
+      [homeUrl, docsUrl],
+      `${locale}.docs.breadcrumbs`,
+    );
+    const collectionSchema = schemaByType(docsSchemas, "CollectionPage");
+    assert.equal(collectionSchema["@id"], `${docsUrl}#collection`);
+    assert.equal(collectionSchema.url, docsUrl);
+    assert.ok(
+      collectionSchema.hasPart.some((part) => part.url === getStartedUrl),
+      `${locale}.docs.hasPart.getStarted`,
+    );
+    assert.ok(
+      collectionSchema.hasPart.some(
+        (part) => part.url === routing.canonicalUrl("en", "/docs/daily-workflow"),
+      ),
+      `${locale}.docs.hasPart.untranslatedDailyWorkflow`,
+    );
+    assert.equal(
+      collectionSchema.hasPart.some(
+        (part) => part.url === `${homeUrl}/docs/daily-workflow`,
+      ),
+      false,
+      `${locale}.docs.hasPart.untranslatedDailyWorkflowLocalized`,
+    );
+
+    const getStartedSchemas = renderJsonLd(GetStartedPage, locale);
+    assertBreadcrumbItems(
+      schemaByType(getStartedSchemas, "BreadcrumbList"),
+      [homeUrl, docsUrl, getStartedUrl],
+      `${locale}.getStarted.breadcrumbs`,
+    );
+    const howToSchema = schemaByType(getStartedSchemas, "HowTo");
+    if (Object.hasOwn(howToSchema, "url")) {
+      assert.equal(howToSchema.url, getStartedUrl);
     }
   }
 });

@@ -146,14 +146,16 @@ test("root metadata describes Wenlan on the current release surface", async () =
   const metadata = await readRepo("src/i18n/metadata.ts");
   const englishContent = await readRepo("src/i18n/content/en.ts");
   const rootDocument = await readRepo("src/app/root-document.tsx");
+  const structuredData = await readRepo("src/app/structured-data.ts");
 
   assert.match(englishContent, /title:\s*"Wenlan \|/);
   assert.match(metadata, /export function buildRootMetadata/);
   assert.match(metadata, /locale: LOCALE_CONFIG\[locale\]\.openGraphLocale/);
-  assert.match(rootDocument, /name: "Wenlan"/);
-  assert.match(rootDocument, /softwareVersion: "0\.9\.1"/);
-  assert.match(rootDocument, /installUrl: "https:\/\/github\.com\/7xuanlu\/wenlan#quickstart"/);
-  assert.match(rootDocument, /codeRepository: "https:\/\/github\.com\/7xuanlu\/wenlan"/);
+  assert.match(rootDocument, /softwareApplicationSchema\(locale\)/);
+  assert.match(structuredData, /name: "Wenlan"/);
+  assert.match(structuredData, /softwareVersion: "0\.9\.1"/);
+  assert.match(structuredData, /installUrl: "https:\/\/github\.com\/7xuanlu\/wenlan#quickstart"/);
+  assert.match(structuredData, /codeRepository: "https:\/\/github\.com\/7xuanlu\/wenlan"/);
 });
 
 test("public machine-readable surfaces use Wenlan names and packages", async () => {
@@ -185,7 +187,7 @@ test("public eval surfaces publish the latest LME oracle and LME-S framing", asy
   const fullMetricSurfaces = [
     "public/llms.txt",
     "src/app/llms-full.txt/route.ts",
-    "src/app/layout.tsx",
+    "src/app/structured-data.ts",
     "src/i18n/content/en.ts",
     "src/app/docs/docs.ts",
     "src/app/learn/articles.ts",
@@ -315,7 +317,7 @@ test("security docs align with the current Wenlan site policy", async () => {
 
 test("public current-release surfaces track the authoritative Wenlan release", async () => {
   const { version, date } = await currentWenlanRelease();
-  const layout = await readRepo("src/app/layout.tsx");
+  const structuredData = await readRepo("src/app/structured-data.ts");
   const aboutPage = await readRepo("src/i18n/content/en.ts");
   const aboutOg = await readRepo("src/app/about/opengraph-image.tsx");
   const docs = await readRepo("src/app/docs/docs.ts");
@@ -324,7 +326,7 @@ test("public current-release surfaces track the authoritative Wenlan release", a
 
   const escapedVersion = escapeRegExp(version);
 
-  assert.match(layout, new RegExp(`softwareVersion: "${escapedVersion}"`));
+  assert.match(structuredData, new RegExp(`softwareVersion: "${escapedVersion}"`));
   assert.match(aboutPage, new RegExp(`"v${escapedVersion}"`));
   assert.match(aboutPage, new RegExp(`Wenlan v${escapedVersion} ships`));
   assert.match(aboutOg, new RegExp(`v${escapedVersion} · Apache-2\\.0`));
