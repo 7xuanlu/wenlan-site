@@ -5,6 +5,14 @@
     "Segoe UI", Roboto, sans-serif;
   --font-serif: var(--font-fraunces), Georgia, serif;
   --font-mono: var(--font-mono), "JetBrains Mono", monospace;
+  --font-cjk-sans-tc: "Noto Sans TC", "Noto Sans CJK TC", "PingFang TC",
+    "Hiragino Sans", "Microsoft JhengHei", sans-serif;
+  --font-cjk-serif-tc: "Noto Serif TC", "Noto Serif CJK TC", "Songti TC",
+    "Hiragino Mincho ProN", "PMingLiU", serif;
+  --font-cjk-sans-sc: "Noto Sans SC", "Noto Sans CJK SC", "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  --font-cjk-serif-sc: "Noto Serif SC", "Noto Serif CJK SC", "Songti SC",
+    "SimSun", serif;
 
   /* Static accent colors (same in both themes) */
   --color-wenlan-warm: #d4884a;
@@ -115,6 +123,25 @@
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
+}
+
+html:lang(zh-Hant) {
+  --font-sans: var(--font-instrument), var(--font-cjk-sans-tc);
+  --font-serif: var(--font-fraunces), var(--font-cjk-serif-tc);
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+
+html:lang(zh-Hans) {
+  --font-sans: var(--font-instrument), var(--font-cjk-sans-sc);
+  --font-serif: var(--font-fraunces), var(--font-cjk-serif-sc);
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+
+html:lang(zh-Hant) .font-serif,
+html:lang(zh-Hans) .font-serif {
+  letter-spacing: 0;
 }
 
 [data-theme="light"] {

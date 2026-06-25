@@ -206,18 +206,18 @@ export function HomePage({ locale }: { locale: Locale }) {
       <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-16">
         <WenlanRingBackground />
 
-        <div className="relative z-10 max-w-3xl text-center">
+        <div className="relative z-10 w-full min-w-0 max-w-3xl text-center">
           <h1 className="animate-fade-up delay-100 warm-glow font-serif text-[2rem] leading-[1.08] font-medium tracking-tight sm:text-7xl sm:leading-[1.1]">
             {content.hero.title}
           </h1>
-          <p className="animate-fade-up delay-100 mx-auto mt-7 max-w-[22rem] text-base leading-relaxed text-[var(--o-text-secondary)] sm:mt-8 sm:max-w-xl sm:text-xl">
+          <p className="animate-fade-up delay-100 mx-auto mt-7 max-w-[22rem] break-words text-base leading-relaxed text-[var(--o-text-secondary)] sm:mt-8 sm:max-w-xl sm:text-xl">
             {content.hero.description}
           </p>
           <div className="animate-fade-up delay-200 mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <HomeCta link={content.hero.primaryCta} locale={locale} variant="primary" />
             <HomeCta link={content.hero.secondaryCta} locale={locale} variant="secondary" />
           </div>
-          <div className="animate-fade-up delay-300 mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 font-mono text-[11px] text-[var(--o-text-muted)]">
+          <div className="animate-fade-up delay-300 mx-auto mt-6 flex max-w-full flex-wrap items-center justify-center gap-x-3 gap-y-2 font-mono text-[11px] text-[var(--o-text-muted)]">
             <span>{content.hero.metaText[0].label}</span>
             <span aria-hidden="true">&middot;</span>
             <LocalizedLink

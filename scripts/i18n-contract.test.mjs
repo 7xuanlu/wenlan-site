@@ -247,6 +247,17 @@ test("app root layouts are split between English and translated locale roots", a
   assert.match(localizedLayoutSource, /notFound/);
 });
 
+test("Chinese locales use dedicated CJK typography stacks", async () => {
+  const source = await readFile(resolve(repoRoot, "src/app/globals.css"), "utf8");
+
+  assert.match(source, /html:lang\(zh-Hant\)/);
+  assert.match(source, /html:lang\(zh-Hans\)/);
+  assert.match(source, /Noto Serif TC/);
+  assert.match(source, /Noto Serif SC/);
+  assert.match(source, /PingFang TC/);
+  assert.match(source, /PingFang SC/);
+});
+
 test("root SoftwareApplication JSON-LD keeps English featureList off translated locales", async () => {
   const { locales, routing } = await loadI18nModules();
   const { softwareApplicationSchema } = await loadStructuredDataModule();
@@ -340,6 +351,13 @@ test("localized core page wrappers and shared page modules exist", async () => {
   ]) {
     await assertFileExists(path);
   }
+});
+
+test("localized home hero allows translated text to shrink on mobile", async () => {
+  const source = await readFile(resolve(repoRoot, "src/app/_pages/home.tsx"), "utf8");
+
+  assert.match(source, /className="relative z-10 w-full min-w-0 max-w-3xl text-center"/);
+  assert.match(source, /className="[^"]*\bbreak-words\b[^"]*"/);
 });
 
 test("localized get-started layout allows mobile content columns to shrink", async () => {
