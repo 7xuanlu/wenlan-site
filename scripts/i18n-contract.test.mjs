@@ -76,6 +76,58 @@ function hasNonProtectedText(value, protectedTokens) {
   return /[A-Za-z0-9]/.test(unprotected);
 }
 
+const allowedUnchangedLeafValues = new Set([
+  "Apache-2.0",
+  "GitHub",
+  "Qi-Xuan Lu",
+  "Wenlan",
+  "7xuanlu",
+]);
+
+const allowedUnchangedLeafPaths = new Set(["notFound.eyebrow"]);
+
+function findHiddenFallbackLeaves(
+  unitKey,
+  englishContent,
+  translatedContent,
+  flattenLeafStrings,
+  protectedTokens,
+) {
+  const translatedLeavesByPath = new Map(
+    flattenLeafStrings(translatedContent).map(({ path, value }) => [path, value]),
+  );
+
+  return flattenLeafStrings(englishContent)
+    .filter(({ path, value }) => {
+      if (translatedLeavesByPath.get(path) !== value) return false;
+      return requiresTranslatedDifference(unitKey, path, value, protectedTokens);
+    })
+    .map(({ path, value }) => ({
+      path: unitKey ? `${unitKey}.${path}` : path,
+      value,
+    }));
+}
+
+function requiresTranslatedDifference(unitKey, path, value, protectedTokens) {
+  if (!hasNonProtectedText(value, protectedTokens)) return false;
+  return !isAllowedUnchangedLeaf(unitKey, path, value);
+}
+
+function isAllowedUnchangedLeaf(unitKey, path, value) {
+  if (isHrefLeafPath(path)) return true;
+  if (isUrlOnlyValue(value)) return true;
+  if (allowedUnchangedLeafValues.has(value)) return true;
+  return allowedUnchangedLeafPaths.has(unitKey ? `${unitKey}.${path}` : path);
+}
+
+function isHrefLeafPath(path) {
+  return path === "href" || path.endsWith(".href");
+}
+
+function isUrlOnlyValue(value) {
+  return /^https?:\/\/[^\s]+$/.test(value);
+}
+
 test("locale model exposes only the supported app locales and metadata", async () => {
   const { locales } = await loadI18nModules();
 
@@ -236,13 +288,12 @@ test("Chinese core content cannot hide English fallback copies", async () => {
       const translatedUnit = dictionary[key];
       const englishLeaves = hash.flattenLeafStrings(englishUnit.content);
       const translatedLeaves = hash.flattenLeafStrings(translatedUnit.content);
-      const translatedLeavesByPath = new Map(
-        translatedLeaves.map(({ path, value }) => [path, value]),
-      );
-      const hasChangedNonProtectedLeaf = englishLeaves.some(
-        ({ path, value }) =>
-          hasNonProtectedText(value, protectedTokens) &&
-          translatedLeavesByPath.get(path) !== value,
+      const hiddenFallbackLeaves = findHiddenFallbackLeaves(
+        key,
+        englishUnit.content,
+        translatedUnit.content,
+        hash.flattenLeafStrings,
+        protectedTokens,
       );
 
       assert.equal(translatedUnit.status, "translated", `${locale}.${key}.status`);
@@ -251,13 +302,30 @@ test("Chinese core content cannot hide English fallback copies", async () => {
         englishLeaves,
         `${locale}.${key}.content`,
       );
-      assert.equal(
-        hasChangedNonProtectedLeaf,
-        true,
+      assert.deepEqual(
+        hiddenFallbackLeaves,
+        [],
         `${locale}.${key}.content`,
       );
     }
   }
+});
+
+test("hidden fallback helper catches a copied normal English UI label", async () => {
+  const { content, hash, protectedTokens } = await loadI18nModules();
+  const copiedFooter = structuredClone(content.zhTWContent.footer.content);
+  copiedFooter.groups[0].links[2].label = "Capture quality";
+
+  assert.deepEqual(
+    findHiddenFallbackLeaves(
+      "footer",
+      content.enContent.footer.content,
+      copiedFooter,
+      hash.flattenLeafStrings,
+      protectedTokens,
+    ),
+    [{ path: "footer.groups[0].links[2].label", value: "Capture quality" }],
+  );
 });
 
 test("English core content records the current SEO title and description subset", async () => {
@@ -373,6 +441,7 @@ test("protected token extraction preserves commands, URLs, packages, env vars, m
     "`/init`",
     "`npx -y wenlan setup`",
     "`~/.wenlan/bin/wenlan mcp add codex`",
+    "Wenlan and GitHub stay branded.",
     "See https://github.com/7xuanlu/wenlan and @7xuanlu/wenlan.",
     "Set WENLAN_RERANKER_ENABLED before reading LME_Oracle at 93.6% / 0.857.",
     "Apache-2.0, Qi-Xuan Lu, and 7xuanlu stay exact.",
@@ -382,6 +451,7 @@ test("protected token extraction preserves commands, URLs, packages, env vars, m
     "再執行 `/plugin install wenlan@7xuanlu` 與 `/init`。",
     "也可以執行 `npx -y wenlan setup`。",
     "MCP 指令是 `~/.wenlan/bin/wenlan mcp add codex`。",
+    "Wenlan 和 GitHub 保持品牌寫法。",
     "參考 https://github.com/7xuanlu/wenlan 和 @7xuanlu/wenlan。",
     "先設定 WENLAN_RERANKER_ENABLED，再閱讀 LME_Oracle 的 93.6% / 0.857。",
     "Apache-2.0、Qi-Xuan Lu、7xuanlu 必須保留。",
@@ -394,6 +464,8 @@ test("protected token extraction preserves commands, URLs, packages, env vars, m
     "/init",
     "npx -y wenlan setup",
     "~/.wenlan/bin/wenlan mcp add codex",
+    "Wenlan",
+    "GitHub",
     "https://github.com/7xuanlu/wenlan",
     "@7xuanlu/wenlan",
     "WENLAN_RERANKER_ENABLED",
@@ -417,5 +489,37 @@ test("protected token extraction preserves commands, URLs, packages, env vars, m
         "protected sample",
       ),
     /protected sample.*0\.857/s,
+  );
+});
+
+test("protected token guard rejects changed translated href leaves", async () => {
+  const { content, protectedTokens } = await loadI18nModules();
+  const translated = structuredClone(content.zhTWContent.notFound.content);
+  translated.popularDestinations[0].href = "/zh-TW/docs/get-started";
+
+  assert.throws(
+    () =>
+      protectedTokens.assertProtectedTokensPreserved(
+        content.enContent.notFound.content,
+        translated,
+        "zh-TW.notFound",
+      ),
+    /zh-TW\.notFound.*popularDestinations\[0\]\.href.*\/docs\/get-started/s,
+  );
+});
+
+test("protected token guard rejects translated product names", async () => {
+  const { content, protectedTokens } = await loadI18nModules();
+  const translated = structuredClone(content.zhTWContent.home.content);
+  translated.seo.title = translated.seo.title.replace("Wenlan", "文瀾");
+
+  assert.throws(
+    () =>
+      protectedTokens.assertProtectedTokensPreserved(
+        content.enContent.home.content,
+        translated,
+        "zh-TW.home",
+      ),
+    /zh-TW\.home.*seo\.title.*Wenlan/s,
   );
 });

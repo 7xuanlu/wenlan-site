@@ -1,6 +1,8 @@
 import { flattenLeafStrings } from "./hash";
 
 const tokenPatterns = [
+  /\bWenlan\b/g,
+  /\bGitHub\b/g,
   /\/plugin\s+(?:marketplace\s+add|install)\s+[A-Za-z0-9@/_-]+/g,
   /\/init\b/g,
   /\bnpx\s+-y\s+[A-Za-z0-9@/_-]+(?:\s+[A-Za-z0-9@/_-]+){0,4}/g,
@@ -42,6 +44,13 @@ export function assertProtectedTokensPreserved(
   for (const sourceLeaf of flattenLeafStrings(source)) {
     const translatedValue = translatedLeaves.get(sourceLeaf.path) ?? "";
 
+    if (isExactProtectedLeafPath(sourceLeaf.path)) {
+      if (translatedValue !== sourceLeaf.value) {
+        missing.push(formatMissingToken(sourceLeaf.path, sourceLeaf.value));
+      }
+      continue;
+    }
+
     for (const token of extractProtectedTokens(sourceLeaf.value)) {
       if (!translatedValue.includes(token)) {
         missing.push(formatMissingToken(sourceLeaf.path, token));
@@ -52,6 +61,10 @@ export function assertProtectedTokensPreserved(
   if (missing.length > 0) {
     throw new Error(`Protected tokens missing in ${label}: ${missing.join(", ")}`);
   }
+}
+
+function isExactProtectedLeafPath(path: string): boolean {
+  return path === "href" || path.endsWith(".href");
 }
 
 function collectProtectedTokens(
