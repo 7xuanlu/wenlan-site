@@ -18,6 +18,7 @@ async function loadI18nModules() {
     import("../src/i18n/hash.ts"),
     import("../src/i18n/protected-tokens.ts"),
     import("../src/i18n/content/index.ts"),
+    import("../src/i18n/metadata.ts"),
   ]).then(
     ([
       locales,
@@ -27,6 +28,7 @@ async function loadI18nModules() {
       hash,
       protectedTokens,
       content,
+      metadata,
     ]) => ({
       locales,
       routingConfig,
@@ -35,6 +37,7 @@ async function loadI18nModules() {
       hash,
       protectedTokens,
       content,
+      metadata,
     }),
   );
 
@@ -437,6 +440,156 @@ test("alternate URLs are reciprocal and include x-default for core translated pa
       assert.deepEqual(
         routing.alternateUrls(routing.localizePath(locale, pathname)),
         alternates,
+        `${locale} ${pathname}`,
+      );
+    }
+  }
+});
+
+test("page metadata helper emits localized canonical, alternates, and Open Graph locale", async () => {
+  const { content, metadata, routing } = await loadI18nModules();
+  assert.equal(typeof metadata.buildPageMetadata, "function");
+
+  const pageMetadata = metadata.buildPageMetadata(
+    "zh-TW",
+    "/about",
+    content.localizedContentByLocale["zh-TW"].about.content.seo,
+  );
+  const canonical = "https://useorigin.app/zh-TW/about";
+
+  assert.equal(pageMetadata.metadataBase.href, "https://useorigin.app/");
+  assert.equal(pageMetadata.alternates.canonical, canonical);
+  assert.deepEqual(pageMetadata.alternates.languages, {
+    "en-US": "https://useorigin.app/about",
+    "zh-TW": canonical,
+    "zh-CN": "https://useorigin.app/zh-CN/about",
+    "x-default": "https://useorigin.app/about",
+  });
+  assert.deepEqual(
+    pageMetadata.alternates.languages,
+    routing.alternateUrls("/about"),
+  );
+  assert.equal(pageMetadata.openGraph.url, canonical);
+  assert.equal(pageMetadata.openGraph.locale, "zh_TW");
+});
+
+test("root metadata includes reciprocal alternates for translated home locales", async () => {
+  const { metadata, routing } = await loadI18nModules();
+
+  for (const locale of ["zh-TW", "zh-CN"]) {
+    const rootMetadata = metadata.buildRootMetadata(locale);
+
+    assert.equal(rootMetadata.alternates.canonical, routing.canonicalUrl(locale, "/"));
+    assert.deepEqual(rootMetadata.alternates.languages, routing.alternateUrls("/"));
+    assert.deepEqual(Object.keys(rootMetadata.alternates.languages).sort(), [
+      "en-US",
+      "x-default",
+      "zh-CN",
+      "zh-TW",
+    ]);
+  }
+});
+
+test("core route wrappers export localized metadata for translated pages", async () => {
+  const { routing } = await loadI18nModules();
+  const routeModules = [
+    {
+      pathname: "/",
+      english: await import("../src/app/(en)/page.tsx"),
+      localized: await import("../src/app/[locale]/page.tsx"),
+    },
+    {
+      pathname: "/about",
+      english: await import("../src/app/(en)/about/page.tsx"),
+      localized: await import("../src/app/[locale]/about/page.tsx"),
+    },
+    {
+      pathname: "/docs",
+      english: await import("../src/app/(en)/docs/page.tsx"),
+      localized: await import("../src/app/[locale]/docs/page.tsx"),
+    },
+    {
+      pathname: "/docs/get-started",
+      english: await import("../src/app/(en)/docs/get-started/page.tsx"),
+      localized: await import("../src/app/[locale]/docs/get-started/page.tsx"),
+    },
+  ];
+
+  for (const { pathname, english, localized } of routeModules) {
+    assert.deepEqual(
+      english.metadata.alternates.languages,
+      routing.alternateUrls(pathname),
+      `en ${pathname}`,
+    );
+    assert.equal(
+      english.metadata.openGraph.locale,
+      "en_US",
+      `en ${pathname} Open Graph locale`,
+    );
+
+    assert.equal(typeof localized.generateMetadata, "function", pathname);
+    const zhMetadata = await localized.generateMetadata({
+      params: Promise.resolve({ locale: "zh-TW" }),
+    });
+
+    assert.equal(
+      zhMetadata.alternates.canonical,
+      routing.canonicalUrl("zh-TW", pathname),
+      `zh-TW ${pathname} canonical`,
+    );
+    assert.deepEqual(
+      zhMetadata.alternates.languages,
+      routing.alternateUrls(pathname),
+      `zh-TW ${pathname} alternates`,
+    );
+    assert.equal(
+      zhMetadata.openGraph.url,
+      routing.canonicalUrl("zh-TW", pathname),
+      `zh-TW ${pathname} Open Graph URL`,
+    );
+    assert.equal(
+      zhMetadata.openGraph.locale,
+      "zh_TW",
+      `zh-TW ${pathname} Open Graph locale`,
+    );
+  }
+});
+
+test("sitemap includes localized core routes and excludes untranslated localized sections", async () => {
+  const { locales, routing } = await loadI18nModules();
+  const { default: sitemap } = await import("../src/app/sitemap.ts");
+  const entries = sitemap();
+  const urls = new Set(entries.map((entry) => entry.url));
+
+  for (const pathname of routing.CORE_TRANSLATED_PATHS) {
+    for (const locale of locales.SUPPORTED_LOCALES) {
+      assert.ok(
+        urls.has(routing.canonicalUrl(locale, pathname)),
+        `${locale} ${pathname}`,
+      );
+    }
+  }
+
+  assert.equal(urls.has("https://useorigin.app/zh-TW/learn"), false);
+  assert.equal(urls.has("https://useorigin.app/zh-CN/docs/daily-workflow"), false);
+});
+
+test("sitemap core route alternates are reciprocal for every localized entry", async () => {
+  const { locales, routing } = await loadI18nModules();
+  const { default: sitemap } = await import("../src/app/sitemap.ts");
+  const entriesByUrl = new Map(sitemap().map((entry) => [entry.url, entry]));
+
+  for (const pathname of routing.CORE_TRANSLATED_PATHS) {
+    const expectedAlternates = routing.alternateUrls(pathname);
+
+    for (const locale of locales.SUPPORTED_LOCALES) {
+      const url = routing.canonicalUrl(locale, pathname);
+      const entry = entriesByUrl.get(url);
+
+      assert.ok(entry, url);
+      assert.deepEqual(
+        entry.alternates?.languages,
+        expectedAlternates,
         `${locale} ${pathname}`,
       );
     }

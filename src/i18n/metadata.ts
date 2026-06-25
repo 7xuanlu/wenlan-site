@@ -1,33 +1,59 @@
 import type { Metadata, Viewport } from "next";
 
 import { localizedContentByLocale } from "./content";
-import { DEFAULT_LOCALE, LOCALE_CONFIG, type Locale } from "./locales";
-import { canonicalUrl, SITE_URL } from "./routing";
+import { LOCALE_CONFIG, type Locale } from "./locales";
+import { alternateUrls, canonicalUrl, isCoreTranslatedPath, SITE_URL } from "./routing";
+
+type PageSeo = {
+  title: string;
+  description: string;
+};
+
+type BuildPageMetadataOptions = {
+  openGraphType?: "website" | "article";
+};
+
+function rssTypeAlternate() {
+  return {
+    "application/rss+xml": [
+      { url: "/feed.xml", title: "Wenlan Learn RSS feed" },
+    ],
+  };
+}
 
 export function rootHomeSeo(locale: Locale) {
   return localizedContentByLocale[locale].home.content.seo;
 }
 
-export function buildRootMetadata(locale: Locale): Metadata {
-  const seo = rootHomeSeo(locale);
+export function buildPageMetadata(
+  locale: Locale,
+  pathname: string,
+  seo: PageSeo,
+  options: BuildPageMetadataOptions = {},
+): Metadata {
+  const canonical = canonicalUrl(locale, pathname);
+  const alternates: NonNullable<Metadata["alternates"]> = {
+    canonical,
+  };
+
+  if (isCoreTranslatedPath(pathname)) {
+    alternates.languages = alternateUrls(pathname);
+  }
+
+  if (pathname === "/") {
+    alternates.types = rssTypeAlternate();
+  }
 
   return {
     metadataBase: new URL(SITE_URL),
     title: seo.title,
     description: seo.description,
-    alternates: {
-      canonical: locale === DEFAULT_LOCALE ? "/" : canonicalUrl(locale, "/"),
-      types: {
-        "application/rss+xml": [
-          { url: "/feed.xml", title: "Wenlan Learn RSS feed" },
-        ],
-      },
-    },
+    alternates,
     openGraph: {
       title: seo.title,
       description: seo.description,
-      type: "website",
-      url: canonicalUrl(locale, "/"),
+      type: options.openGraphType ?? "website",
+      url: canonical,
       siteName: "Wenlan",
       locale: LOCALE_CONFIG[locale].openGraphLocale,
     },
@@ -36,6 +62,15 @@ export function buildRootMetadata(locale: Locale): Metadata {
       title: seo.title,
       description: seo.description,
     },
+  };
+}
+
+export function buildRootMetadata(locale: Locale): Metadata {
+  const seo = rootHomeSeo(locale);
+  const pageMetadata = buildPageMetadata(locale, "/", seo);
+
+  return {
+    ...pageMetadata,
     icons: {
       icon: "/favicon.svg",
     },
