@@ -299,6 +299,26 @@ test("Chinese dictionaries store fixed source hashes equal to current English co
   }
 });
 
+test("translated content dictionaries preserve protected tokens from English content", async () => {
+  const { content, protectedTokens } = await loadI18nModules();
+
+  for (const locale of ["zh-TW", "zh-CN"]) {
+    const dictionary = content.localizedContentByLocale[locale];
+
+    for (const key of Object.keys(content.enContent)) {
+      assert.doesNotThrow(
+        () =>
+          protectedTokens.assertProtectedTokensPreserved(
+            content.enContent[key].content,
+            dictionary[key].content,
+            `${locale}.${key}`,
+          ),
+        `${locale}.${key}`,
+      );
+    }
+  }
+});
+
 test("protected token extraction preserves commands, URLs, packages, env vars, metrics, license, and names", async () => {
   const { protectedTokens } = await loadI18nModules();
   const source = [

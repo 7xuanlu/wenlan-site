@@ -1,3 +1,5 @@
+import { flattenLeafStrings } from "./hash";
+
 const tokenPatterns = [
   /\/plugin\s+(?:marketplace\s+add|install)\s+[A-Za-z0-9@/_-]+/g,
   /\/init\b/g,
@@ -16,10 +18,47 @@ const tokenPatterns = [
   /\b7xuanlu\b/g,
 ] as const;
 
-export function extractProtectedTokens(source: string): string[] {
+export function extractProtectedTokens(source: unknown): string[] {
   const tokens: string[] = [];
   const seen = new Set<string>();
 
+  for (const { value } of flattenLeafStrings(source)) {
+    collectProtectedTokens(value, tokens, seen);
+  }
+
+  return tokens;
+}
+
+export function assertProtectedTokensPreserved(
+  source: unknown,
+  translated: unknown,
+  label: string,
+): void {
+  const translatedLeaves = new Map(
+    flattenLeafStrings(translated).map(({ path, value }) => [path, value]),
+  );
+  const missing: string[] = [];
+
+  for (const sourceLeaf of flattenLeafStrings(source)) {
+    const translatedValue = translatedLeaves.get(sourceLeaf.path) ?? "";
+
+    for (const token of extractProtectedTokens(sourceLeaf.value)) {
+      if (!translatedValue.includes(token)) {
+        missing.push(formatMissingToken(sourceLeaf.path, token));
+      }
+    }
+  }
+
+  if (missing.length > 0) {
+    throw new Error(`Protected tokens missing in ${label}: ${missing.join(", ")}`);
+  }
+}
+
+function collectProtectedTokens(
+  source: string,
+  tokens: string[],
+  seen: Set<string>,
+): void {
   for (const pattern of tokenPatterns) {
     for (const match of source.matchAll(pattern)) {
       const token = cleanToken(match[0]);
@@ -29,22 +68,10 @@ export function extractProtectedTokens(source: string): string[] {
       }
     }
   }
-
-  return tokens;
 }
 
-export function assertProtectedTokensPreserved(
-  source: string,
-  translated: string,
-  label: string,
-): void {
-  const missing = extractProtectedTokens(source).filter(
-    (token) => !translated.includes(token),
-  );
-
-  if (missing.length > 0) {
-    throw new Error(`Protected tokens missing in ${label}: ${missing.join(", ")}`);
-  }
+function formatMissingToken(path: string, token: string): string {
+  return path ? `${path}: ${token}` : token;
 }
 
 function cleanToken(token: string): string {
