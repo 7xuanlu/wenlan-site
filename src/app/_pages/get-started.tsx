@@ -1,6 +1,6 @@
 import { ArticleHalo, MemoryIndex } from "../(en)/learn/article-visuals";
 import { getCoreContent } from "@/i18n/content";
-import type { Locale } from "@/i18n/locales";
+import { LOCALE_CONFIG, type Locale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
 import { canonicalUrl } from "@/i18n/routing";
 
@@ -42,6 +42,8 @@ export function GetStartedPage({ locale }: { locale: Locale }) {
     "@type": "HowTo",
     name: content.schema.name,
     description: content.schema.description,
+    url: getStartedUrl,
+    inLanguage: LOCALE_CONFIG[locale].hreflang,
     step: content.steps.map((step) => ({
       "@type": "HowToStep",
       name: step.title,

@@ -248,11 +248,12 @@ test("app root layouts are split between English and translated locale roots", a
 });
 
 test("root SoftwareApplication JSON-LD keeps English featureList off translated locales", async () => {
-  const { routing } = await loadI18nModules();
+  const { locales, routing } = await loadI18nModules();
   const { softwareApplicationSchema } = await loadStructuredDataModule();
 
   const englishSchema = softwareApplicationSchema("en");
   assert.equal(englishSchema.url, routing.canonicalUrl("en", "/"));
+  assert.equal(englishSchema.inLanguage, locales.LOCALE_CONFIG.en.hreflang);
   assert.ok(Array.isArray(englishSchema.featureList), "English featureList");
   assert.match(
     englishSchema.featureList.join("\n"),
@@ -264,6 +265,11 @@ test("root SoftwareApplication JSON-LD keeps English featureList off translated 
     const schema = softwareApplicationSchema(locale);
 
     assert.equal(schema.url, routing.canonicalUrl(locale, "/"), `${locale}.url`);
+    assert.equal(
+      schema.inLanguage,
+      locales.LOCALE_CONFIG[locale].hreflang,
+      `${locale}.inLanguage`,
+    );
     assert.equal(
       Object.hasOwn(schema, "featureList"),
       false,
@@ -638,8 +644,8 @@ test("sitemap core route alternates are reciprocal for every localized entry", a
   }
 });
 
-test("localized core page JSON-LD uses localized absolute URLs for translated routes", async () => {
-  const { routing } = await loadI18nModules();
+test("localized core page JSON-LD uses localized absolute URLs and languages for translated routes", async () => {
+  const { locales, routing } = await loadI18nModules();
   const [{ AboutPage }, { DocsIndexPage }, { GetStartedPage }] = await Promise.all([
     import("../src/app/_pages/about.tsx"),
     import("../src/app/_pages/docs-index.tsx"),
@@ -647,6 +653,7 @@ test("localized core page JSON-LD uses localized absolute URLs for translated ro
   ]);
 
   for (const locale of ["zh-TW", "zh-CN"]) {
+    const expectedLanguage = locales.LOCALE_CONFIG[locale].hreflang;
     const homeUrl = routing.canonicalUrl(locale, "/");
     const aboutUrl = routing.canonicalUrl(locale, "/about");
     const docsUrl = routing.canonicalUrl(locale, "/docs");
@@ -658,7 +665,9 @@ test("localized core page JSON-LD uses localized absolute URLs for translated ro
       [homeUrl, aboutUrl],
       `${locale}.about.breadcrumbs`,
     );
-    assert.equal(schemaByType(aboutSchemas, "AboutPage").url, aboutUrl);
+    const aboutSchema = schemaByType(aboutSchemas, "AboutPage");
+    assert.equal(aboutSchema.url, aboutUrl);
+    assert.equal(aboutSchema.inLanguage, expectedLanguage);
     assert.equal(schemaByType(aboutSchemas, "Person").mainEntityOfPage, aboutUrl);
 
     const docsSchemas = renderJsonLd(DocsIndexPage, locale);
@@ -670,6 +679,7 @@ test("localized core page JSON-LD uses localized absolute URLs for translated ro
     const collectionSchema = schemaByType(docsSchemas, "CollectionPage");
     assert.equal(collectionSchema["@id"], `${docsUrl}#collection`);
     assert.equal(collectionSchema.url, docsUrl);
+    assert.equal(collectionSchema.inLanguage, expectedLanguage);
     assert.ok(
       collectionSchema.hasPart.some((part) => part.url === getStartedUrl),
       `${locale}.docs.hasPart.getStarted`,
@@ -695,9 +705,8 @@ test("localized core page JSON-LD uses localized absolute URLs for translated ro
       `${locale}.getStarted.breadcrumbs`,
     );
     const howToSchema = schemaByType(getStartedSchemas, "HowTo");
-    if (Object.hasOwn(howToSchema, "url")) {
-      assert.equal(howToSchema.url, getStartedUrl);
-    }
+    assert.equal(howToSchema.url, getStartedUrl);
+    assert.equal(howToSchema.inLanguage, expectedLanguage);
   }
 });
 
@@ -1115,6 +1124,7 @@ test("protected token extraction preserves commands, URLs, packages, env vars, m
     "`~/.wenlan/.git/` and `crates/wenlan-core/src/eval/`",
     "Wenlan and GitHub stay branded.",
     "See https://github.com/7xuanlu/wenlan and @7xuanlu/wenlan.",
+    "Keep release v0.9.1 and daemon version 0.9.1 exact.",
     "Set WENLAN_RERANKER_ENABLED before reading LME_Oracle at 168 tokens / query, 93.6% / 0.857.",
     "Apache-2.0, Qi-Xuan Lu, and 7xuanlu stay exact.",
   ].join("\n");
@@ -1127,6 +1137,7 @@ test("protected token extraction preserves commands, URLs, packages, env vars, m
     "本地路徑包含 `~/.wenlan/.git/` 和 `crates/wenlan-core/src/eval/`。",
     "Wenlan 和 GitHub 保持品牌寫法。",
     "參考 https://github.com/7xuanlu/wenlan 和 @7xuanlu/wenlan。",
+    "release v0.9.1 和 daemon version 0.9.1 必須保留。",
     "先設定 WENLAN_RERANKER_ENABLED，再閱讀 LME_Oracle 的 168 tokens / query、93.6% / 0.857。",
     "Apache-2.0、Qi-Xuan Lu、7xuanlu 必須保留。",
   ].join("\n");
@@ -1145,6 +1156,8 @@ test("protected token extraction preserves commands, URLs, packages, env vars, m
     "GitHub",
     "https://github.com/7xuanlu/wenlan",
     "@7xuanlu/wenlan",
+    "v0.9.1",
+    "0.9.1",
     "WENLAN_RERANKER_ENABLED",
     "LME_Oracle",
     "168 tokens / query",
@@ -1167,6 +1180,15 @@ test("protected token extraction preserves commands, URLs, packages, env vars, m
         "protected sample",
       ),
     /protected sample.*0\.857/s,
+  );
+  assert.throws(
+    () =>
+      protectedTokens.assertProtectedTokensPreserved(
+        source,
+        translated.replace("v0.9.1", "v0.9.2"),
+        "protected sample",
+      ),
+    /protected sample.*v0\.9\.1/s,
   );
 });
 

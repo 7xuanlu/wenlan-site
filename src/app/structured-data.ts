@@ -1,4 +1,4 @@
-import { DEFAULT_LOCALE, type Locale } from "@/i18n/locales";
+import { DEFAULT_LOCALE, LOCALE_CONFIG, type Locale } from "@/i18n/locales";
 import { rootHomeSeo } from "@/i18n/metadata";
 import { canonicalUrl } from "@/i18n/routing";
 
@@ -27,6 +27,7 @@ export function softwareApplicationSchema(locale: Locale) {
     ],
     description: rootHomeSeo(locale).description,
     url: canonicalUrl(locale, "/"),
+    inLanguage: LOCALE_CONFIG[locale].hreflang,
     applicationCategory: "DeveloperApplication",
     operatingSystem: ["macOS", "Linux", "Windows"],
     softwareVersion: "0.9.1",

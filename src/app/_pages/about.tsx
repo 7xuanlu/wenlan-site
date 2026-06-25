@@ -1,6 +1,6 @@
 import { ArticleHalo, MemoryIndex } from "../(en)/learn/article-visuals";
 import { getCoreContent, type LinkContent } from "@/i18n/content";
-import type { Locale } from "@/i18n/locales";
+import { LOCALE_CONFIG, type Locale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
 import { canonicalUrl } from "@/i18n/routing";
 
@@ -37,6 +37,7 @@ export function AboutPage({ locale }: { locale: Locale }) {
     name: content.schema.name,
     description: content.schema.description,
     url: aboutUrl,
+    inLanguage: LOCALE_CONFIG[locale].hreflang,
     mainEntity: {
       "@id": "https://useorigin.app/#organization",
     },
