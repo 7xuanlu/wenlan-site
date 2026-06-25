@@ -560,6 +560,7 @@ test("sitemap includes localized core routes and excludes untranslated localized
   const { default: sitemap } = await import("../src/app/sitemap.ts");
   const entries = sitemap();
   const urls = new Set(entries.map((entry) => entry.url));
+  assert.equal(entries.length, urls.size, "sitemap URLs must be unique");
 
   for (const pathname of routing.CORE_TRANSLATED_PATHS) {
     for (const locale of locales.SUPPORTED_LOCALES) {
