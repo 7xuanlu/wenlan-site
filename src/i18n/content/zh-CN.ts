@@ -20,13 +20,13 @@ export const zhCNContent = {
     sourceHash: "cbb903525db65e6783fb185115c56c4a53092671e9c318ce1502ce61912fb297",
     content: {
       seo: {
-        title: "Wenlan | AI 工作的活个人知识库",
+        title: "Wenlan 文澜 | AI 工作的活个人知识库",
         description:
-          "Wenlan 是为 AI 工作而生的活个人知识库：agent 捕捉学到的内容，你加入信任的来源，daemon 让有来源引用的页面保持最新。",
+          "Wenlan 文澜是为 AI 工作而生的活个人知识库：agent 捕捉学到的内容，你加入信任的来源，daemon 让有来源引用的页面保持最新。",
       },
       nav: {
-        schemaName: "Wenlan 网站导航",
-        brand: "Wenlan",
+        schemaName: "Wenlan 文澜网站导航",
+        brand: "Wenlan 文澜",
         previewBadge: "预览版",
         githubAriaLabel: "在 GitHub 查看 Wenlan",
         themeToggle: {
@@ -41,7 +41,7 @@ export const zhCNContent = {
         ],
       },
       hero: {
-        title: "Wenlan",
+        title: "Wenlan 文澜",
         description:
           "面向 AI-native 时代的活个人知识库。Agents 捕捉学到的内容，你加入信任的来源，Wenlan 让有来源引用的页面保持最新。",
         primaryCta: { id: "get-started", href: "/docs/get-started", label: "开始使用" },

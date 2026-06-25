@@ -800,6 +800,28 @@ test("core content dictionaries cover first-release localized page surfaces", as
   assertArrayItemsHaveStableIds(content.enContent.footer.content.groups, "footer.groups");
 });
 
+test("Chinese home surfaces include script-specific Wenlan Chinese names", async () => {
+  const { content } = await loadI18nModules();
+  const expectedNames = {
+    "zh-TW": "文瀾",
+    "zh-CN": "文澜",
+  };
+
+  for (const [locale, chineseName] of Object.entries(expectedNames)) {
+    const home = content.localizedContentByLocale[locale].home.content;
+
+    for (const [label, value] of Object.entries({
+      seoTitle: home.seo.title,
+      seoDescription: home.seo.description,
+      navBrand: home.nav.brand,
+      heroTitle: home.hero.title,
+    })) {
+      assert.match(value, /Wenlan/, `${locale}.${label}.Wenlan`);
+      assert.match(value, new RegExp(chineseName), `${locale}.${label}.${chineseName}`);
+    }
+  }
+});
+
 test("waitlist client-visible copy is dictionary driven", async () => {
   const formSource = await readFile(
     resolve(repoRoot, "src/app/waitlist-form.tsx"),
