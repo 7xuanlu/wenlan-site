@@ -175,6 +175,19 @@ async function assertFileMissing(path) {
   assert.equal(await fileExists(path), false, `${path} should not exist`);
 }
 
+async function assertNotFoundRouteSource(path, options = {}) {
+  await assertFileExists(path);
+
+  const source = await readFile(resolve(repoRoot, path), "utf8");
+  assert.match(source, /from\s+["']next\/navigation["']/, path);
+  assert.match(source, /\bnotFound\(\)/, path);
+
+  if (options.simpleRuntimeNotFound) {
+    assert.doesNotMatch(source, /\bdynamicParams\b/, path);
+    assert.doesNotMatch(source, /\bgenerateStaticParams\b/, path);
+  }
+}
+
 async function loadStructuredDataModule() {
   try {
     return await import("../src/app/structured-data.ts");
@@ -321,6 +334,16 @@ test("localized core page wrappers and shared page modules exist", async () => {
   ]) {
     await assertFileExists(path);
   }
+});
+
+test("localized untranslated docs slug and Learn routes hard 404", async () => {
+  await assertNotFoundRouteSource("src/app/[locale]/docs/[slug]/page.tsx", {
+    simpleRuntimeNotFound: true,
+  });
+  await assertNotFoundRouteSource("src/app/[locale]/learn/page.tsx");
+  await assertNotFoundRouteSource("src/app/[locale]/learn/[slug]/page.tsx", {
+    simpleRuntimeNotFound: true,
+  });
 });
 
 test("locale model exposes only the supported app locales and metadata", async () => {
@@ -572,6 +595,16 @@ test("sitemap includes localized core routes and excludes untranslated localized
   }
 
   assert.equal(urls.has("https://useorigin.app/zh-TW/learn"), false);
+  assert.equal(urls.has("https://useorigin.app/zh-CN/learn"), false);
+  assert.equal(
+    urls.has("https://useorigin.app/zh-TW/learn/wenlan-vs-basic-memory"),
+    false,
+  );
+  assert.equal(
+    urls.has("https://useorigin.app/zh-CN/learn/wenlan-vs-basic-memory"),
+    false,
+  );
+  assert.equal(urls.has("https://useorigin.app/zh-TW/docs/daily-workflow"), false);
   assert.equal(urls.has("https://useorigin.app/zh-CN/docs/daily-workflow"), false);
 });
 
