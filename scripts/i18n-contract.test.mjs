@@ -258,6 +258,34 @@ test("Chinese locales use dedicated CJK typography stacks", async () => {
   assert.match(source, /PingFang SC/);
 });
 
+test("bilingual Wenlan wordmark keeps Latin Fraunces and Chinese sans paired", async () => {
+  const wordmarkSource = await readFile(
+    resolve(repoRoot, "src/components/brand-wordmark.tsx"),
+    "utf8",
+  );
+  assert.match(wordmarkSource, /function\s+splitBrandLabel/);
+  assert.match(wordmarkSource, /brand-wordmark__latin/);
+  assert.match(wordmarkSource, /brand-wordmark__divider/);
+  assert.match(wordmarkSource, /brand-wordmark__cjk/);
+  assert.doesNotMatch(wordmarkSource, /brand-wordmark__latin[^>]*aria-hidden/);
+  assert.doesNotMatch(wordmarkSource, /brand-wordmark__cjk[^>]*aria-hidden/);
+
+  const homeSource = await readFile(resolve(repoRoot, "src/app/_pages/home.tsx"), "utf8");
+  assert.match(homeSource, /<BrandWordmark\s+label=\{content\.nav\.brand\}\s+variant="nav"\s+\/>/);
+  assert.match(homeSource, /<BrandWordmark\s+label=\{content\.hero\.title\}\s+variant="hero"\s+\/>/);
+
+  const footerSource = await readFile(resolve(repoRoot, "src/components/site-footer.tsx"), "utf8");
+  assert.match(footerSource, /<BrandWordmark\s+label=\{content\.signature\.brand\}\s+variant="footer"\s+\/>/);
+
+  const cssSource = await readFile(resolve(repoRoot, "src/app/globals.css"), "utf8");
+  assert.match(cssSource, /--font-brand-latin:\s*var\(--font-fraunces\)/);
+  assert.match(cssSource, /\.brand-wordmark__latin\s*{/);
+  assert.match(cssSource, /font-variation-settings:\s*"SOFT" 18,\s*"WONK" 0/);
+  assert.match(cssSource, /\.brand-wordmark__cjk\s*{/);
+  assert.doesNotMatch(cssSource, /\.brand-wordmark__cjk[\s\S]*Noto Serif/);
+  assert.doesNotMatch(cssSource, /\.brand-wordmark__cjk[\s\S]*Songti/);
+});
+
 test("root SoftwareApplication JSON-LD keeps English featureList off translated locales", async () => {
   const { locales, routing } = await loadI18nModules();
   const { softwareApplicationSchema } = await loadStructuredDataModule();

@@ -1,6 +1,7 @@
 import { DemoVideo } from "../demo-video";
 import { WaitlistForm } from "../waitlist-form";
 import { ThemeToggle } from "../theme-toggle";
+import { BrandWordmark } from "@/components/brand-wordmark";
 import { FAQSection } from "@/components/sections";
 import {
   FeatureSection,
@@ -166,9 +167,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <div className="flex items-center gap-3">
             <WenlanMark />
-            <span className="font-serif text-lg font-medium tracking-tight">
-              {content.nav.brand}
-            </span>
+            <BrandWordmark label={content.nav.brand} variant="nav" />
             <span className="rounded-full border border-[var(--o-warm)]/20 bg-[var(--o-warm)]/5 px-2 py-0.5 font-mono text-[10px] font-medium text-[var(--o-warm)]">
               {content.nav.previewBadge}
             </span>
@@ -207,8 +206,8 @@ export function HomePage({ locale }: { locale: Locale }) {
         <WenlanRingBackground />
 
         <div className="relative z-10 w-full min-w-0 max-w-3xl text-center">
-          <h1 className="animate-fade-up delay-100 warm-glow font-serif text-[2rem] leading-[1.08] font-medium tracking-tight sm:text-7xl sm:leading-[1.1]">
-            {content.hero.title}
+          <h1 className="animate-fade-up delay-100 warm-glow text-[2rem] leading-[1.08] sm:text-7xl sm:leading-[1.1]">
+            <BrandWordmark label={content.hero.title} variant="hero" />
           </h1>
           <p className="animate-fade-up delay-100 mx-auto mt-7 max-w-[22rem] break-words text-base leading-relaxed text-[var(--o-text-secondary)] sm:mt-8 sm:max-w-xl sm:text-xl">
             {content.hero.description}

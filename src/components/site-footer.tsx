@@ -1,3 +1,4 @@
+import { BrandWordmark } from "@/components/brand-wordmark";
 import { getCoreContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
@@ -55,8 +56,8 @@ export function SiteFooter({ locale }: SiteFooterProps) {
         </nav>
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-[var(--o-border-subtle)] pt-6 sm:flex-row">
           <div className="flex items-center gap-4">
-            <span className="font-serif text-sm font-medium text-[var(--o-text-secondary)]">
-              {content.signature.brand}
+            <span className="text-[var(--o-text-secondary)]">
+              <BrandWordmark label={content.signature.brand} variant="footer" />
             </span>
             <span className="text-xs text-[var(--o-text-dim)]">&middot;</span>
             <span className="text-xs text-[var(--o-text-muted)]">

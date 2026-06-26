@@ -5,6 +5,7 @@
     "Segoe UI", Roboto, sans-serif;
   --font-serif: var(--font-fraunces), Georgia, serif;
   --font-mono: var(--font-mono), "JetBrains Mono", monospace;
+  --font-brand-latin: var(--font-fraunces), Georgia, serif;
   --font-cjk-sans-tc: "Noto Sans TC", "Noto Sans CJK TC", "PingFang TC",
     "Hiragino Sans", "Microsoft JhengHei", sans-serif;
   --font-cjk-serif-tc: "Noto Serif TC", "Noto Serif CJK TC", "Songti TC",
@@ -153,6 +154,84 @@ body {
   background: var(--o-bg);
   color: var(--o-text);
   transition: background 300ms ease, color 300ms ease;
+}
+
+.brand-wordmark {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+
+.brand-wordmark__latin {
+  font-family: var(--font-brand-latin);
+  font-variation-settings: "SOFT" 18, "WONK" 0;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.brand-wordmark__divider {
+  flex: 0 0 auto;
+  width: 1px;
+  background: var(--o-text-muted);
+  opacity: 0.5;
+}
+
+.brand-wordmark__cjk {
+  font-family: var(--font-cjk-sans-tc);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  translate: 0.04em 0.02em;
+}
+
+html:lang(zh-Hans) .brand-wordmark__cjk {
+  font-family: var(--font-cjk-sans-sc);
+}
+
+.brand-wordmark--nav {
+  gap: 0.44em;
+  font-size: 1.125rem;
+}
+
+.brand-wordmark--nav .brand-wordmark__divider {
+  height: 1.05em;
+  background: var(--o-border-subtle);
+}
+
+.brand-wordmark--nav .brand-wordmark__cjk {
+  font-size: 0.9em;
+}
+
+.brand-wordmark--hero {
+  gap: clamp(0.42em, 1.8vw, 0.52em);
+  flex-wrap: wrap;
+}
+
+.brand-wordmark--hero .brand-wordmark__divider {
+  height: 0.72em;
+}
+
+.brand-wordmark--hero .brand-wordmark__cjk {
+  font-size: 0.64em;
+}
+
+.brand-wordmark--footer {
+  gap: 0.42em;
+  font-size: 0.875rem;
+}
+
+.brand-wordmark--footer .brand-wordmark__divider {
+  height: 1em;
+  background: var(--o-border-subtle);
+}
+
+.brand-wordmark--footer .brand-wordmark__cjk {
+  font-size: 0.9em;
 }
 
 /* Grain texture overlay */
