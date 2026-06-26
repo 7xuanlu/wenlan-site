@@ -11,7 +11,7 @@ import {
   SolutionSection,
 } from "@/components/problem-solution";
 import { getCoreContent, type HomeContent, type LinkContent } from "@/i18n/content";
-import type { Locale } from "@/i18n/locales";
+import { SUPPORTED_LOCALES, type Locale } from "@/i18n/locales";
 import { LocalizedLink, localizedHrefForLocale } from "@/i18n/navigation";
 import { SITE_URL } from "@/i18n/routing";
 
@@ -89,6 +89,12 @@ function WenlanRingBackground() {
 const demoVideoId = "k37gjWVPHwI";
 const demoVideoEmbedUrl = `https://www.youtube.com/embed/${demoVideoId}?autoplay=1&rel=0`;
 const demoVideoPosterUrl = `https://i.ytimg.com/vi/${demoVideoId}/maxresdefault.jpg`;
+
+const localeLabels = {
+  en: { label: "English", short: "EN" },
+  "zh-TW": { label: "繁體中文", short: "繁" },
+  "zh-CN": { label: "简体中文", short: "简" },
+} as const satisfies Record<Locale, { label: string; short: string }>;
 
 function TokenEfficiencySection({ copy }: { copy: HomeContent["metrics"] }) {
   return (
@@ -168,11 +174,11 @@ export function HomePage({ locale }: { locale: Locale }) {
           <div className="flex items-center gap-3">
             <WenlanMark />
             <BrandWordmark label={content.nav.brand} variant="nav" />
-            <span className="rounded-full border border-[var(--o-warm)]/20 bg-[var(--o-warm)]/5 px-2 py-0.5 font-mono text-[10px] font-medium text-[var(--o-warm)]">
+            <span className="hidden rounded-full border border-[var(--o-warm)]/20 bg-[var(--o-warm)]/5 px-2 py-0.5 font-mono text-[10px] font-medium text-[var(--o-warm)] sm:inline-flex">
               {content.nav.previewBadge}
             </span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             {content.nav.links
               .filter((link) => link.id !== "github")
               .map((link) => (
@@ -185,19 +191,22 @@ export function HomePage({ locale }: { locale: Locale }) {
                   {link.label}
                 </LocalizedLink>
               ))}
+            <LanguageSwitcher locale={locale} href="/" />
             <a
               href="https://github.com/7xuanlu/wenlan"
               target="_blank"
               rel="noopener noreferrer"
               aria-label={content.nav.githubAriaLabel}
-              className="flex items-center gap-2 text-sm text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-text)]"
+              className="hidden items-center gap-2 text-sm text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-text)] sm:flex"
             >
               <GitHubIcon />
             </a>
-            <ThemeToggle
-              darkLabel={content.nav.themeToggle.darkLabel}
-              lightLabel={content.nav.themeToggle.lightLabel}
-            />
+            <div className="hidden sm:block">
+              <ThemeToggle
+                darkLabel={content.nav.themeToggle.darkLabel}
+                lightLabel={content.nav.themeToggle.lightLabel}
+              />
+            </div>
           </div>
         </div>
       </nav>
@@ -287,6 +296,36 @@ export function HomePage({ locale }: { locale: Locale }) {
           </div>
         </div>
       </section>
+    </div>
+  );
+}
+
+function LanguageSwitcher({ href, locale }: { href: string; locale: Locale }) {
+  return (
+    <div
+      aria-label="Language"
+      className="flex items-center rounded-full border border-[var(--o-border-subtle)] bg-[var(--o-surface)]/50 p-0.5 font-mono text-[10px] text-[var(--o-text-muted)]"
+    >
+      {SUPPORTED_LOCALES.map((targetLocale) => {
+        const active = targetLocale === locale;
+        const labels = localeLabels[targetLocale];
+
+        return (
+          <a
+            key={targetLocale}
+            href={localizedHrefForLocale(targetLocale, href)}
+            aria-label={labels.label}
+            aria-current={targetLocale === locale ? "true" : undefined}
+            className={`rounded-full px-2 py-1 transition-colors ${
+              active
+                ? "bg-[var(--o-text)] text-[var(--o-bg)]"
+                : "hover:text-[var(--o-text-secondary)]"
+            }`}
+          >
+            {labels.short}
+          </a>
+        );
+      })}
     </div>
   );
 }

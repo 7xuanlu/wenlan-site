@@ -286,6 +286,16 @@ test("bilingual Wenlan wordmark keeps Latin Fraunces and Chinese sans paired", a
   assert.doesNotMatch(cssSource, /\.brand-wordmark__cjk[\s\S]*Songti/);
 });
 
+test("home nav exposes a route-preserving locale switcher", async () => {
+  const source = await readFile(resolve(repoRoot, "src/app/_pages/home.tsx"), "utf8");
+
+  assert.match(source, /SUPPORTED_LOCALES/);
+  assert.match(source, /function\s+LanguageSwitcher/);
+  assert.match(source, /<LanguageSwitcher\s+locale=\{locale\}\s+href="\/"\s+\/>/);
+  assert.match(source, /localizedHrefForLocale\(targetLocale,\s*href\)/);
+  assert.match(source, /aria-current=\{targetLocale === locale \? "true" : undefined\}/);
+});
+
 test("root SoftwareApplication JSON-LD keeps English featureList off translated locales", async () => {
   const { locales, routing } = await loadI18nModules();
   const { softwareApplicationSchema } = await loadStructuredDataModule();
