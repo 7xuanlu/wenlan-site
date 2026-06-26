@@ -282,7 +282,7 @@ test("bilingual Wenlan wordmark keeps Latin Fraunces and Chinese sans paired", a
   assert.match(cssSource, /\.brand-wordmark__latin\s*{/);
   assert.match(cssSource, /font-variation-settings:\s*"SOFT" 18,\s*"WONK" 0/);
   assert.match(cssSource, /\.brand-wordmark__cjk\s*{/);
-  assert.match(cssSource, /\.brand-wordmark--hero \.brand-wordmark__cjk\s*{\s*font-size:\s*1em;\s*}/);
+  assert.match(cssSource, /\.brand-wordmark--hero \.brand-wordmark__cjk\s*{\s*font-size:\s*0\.88em;\s*}/);
   assert.doesNotMatch(cssSource, /\.brand-wordmark__cjk[\s\S]*Noto Serif/);
   assert.doesNotMatch(cssSource, /\.brand-wordmark__cjk[\s\S]*Songti/);
 });
