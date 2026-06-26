@@ -5,10 +5,11 @@ import { useState } from "react";
 type DemoVideoProps = {
   embedUrl: string;
   posterUrl: string;
+  playLabel: string;
   title: string;
 };
 
-export function DemoVideo({ embedUrl, posterUrl, title }: DemoVideoProps) {
+export function DemoVideo({ embedUrl, posterUrl, playLabel, title }: DemoVideoProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   if (isPlaying) {
@@ -28,7 +29,7 @@ export function DemoVideo({ embedUrl, posterUrl, title }: DemoVideoProps) {
   return (
     <button
       type="button"
-      aria-label={`Play ${title}`}
+      aria-label={playLabel}
       onClick={() => setIsPlaying(true)}
       className="group absolute inset-0 block overflow-hidden bg-[var(--o-bg-deep)] text-left"
     >

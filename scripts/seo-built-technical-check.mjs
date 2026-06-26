@@ -443,9 +443,28 @@ function hasAnchor(html, { href, label }) {
   ).test(html);
 }
 
+function assertGlobalNotFoundHtml(html) {
+  const failures = [];
+
+  if (!html.includes("This page does not exist.")) {
+    failures.push("missing branded Wenlan fallback copy");
+  }
+  if (html.includes("404: This page could not be found.")) {
+    failures.push("contains generic Next.js fallback copy");
+  }
+
+  assertNone("global unmatched-route 404 invalid", failures);
+}
+
 async function run() {
   const args = parseArgs(process.argv.slice(2));
   await assertFreshBuild(args);
+  const globalNotFoundHtml = await readFile(
+    resolve(args.buildDir, "server/app/_not-found.html"),
+    "utf8",
+  );
+  assertGlobalNotFoundHtml(globalNotFoundHtml);
+
   const routesManifest = await readJson(resolve(args.buildDir, "routes-manifest.json"));
   const sitemap = await readFile(
     resolve(args.buildDir, "server/app/sitemap.xml.body"),
@@ -536,6 +555,7 @@ async function run() {
 
   assertNone("page SEO invalid", pageFailures);
 
+  console.log("[seo-built] global 404 ok");
   console.log(`[seo-built] redirects ok: ${REQUIRED_REDIRECTS.length}`);
   console.log(`[seo-built] noindex headers ok: ${REQUIRED_NOINDEX_HEADERS.length}`);
   console.log(`[seo-built] sitemap locs ok: ${locs.length}`);

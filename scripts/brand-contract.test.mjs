@@ -6,8 +6,33 @@ import ts from "typescript";
 
 const repoRoot = resolve(import.meta.dirname, "..");
 
+const englishRouteGroupAliases = new Map([
+  ["src/app/layout.tsx", "src/app/root-document.tsx"],
+  ["src/app/page.tsx", "src/app/(en)/page.tsx"],
+  ["src/app/opengraph-image.tsx", "src/app/(en)/opengraph-image.tsx"],
+  ["src/app/feed.xml/route.ts", "src/app/(en)/feed.xml/route.ts"],
+  ["src/app/llms-full.txt/route.ts", "src/app/(en)/llms-full.txt/route.ts"],
+]);
+
+function sourcePath(path) {
+  if (englishRouteGroupAliases.has(path)) {
+    return englishRouteGroupAliases.get(path);
+  }
+  if (path.startsWith("src/app/about/")) {
+    return path.replace("src/app/about/", "src/app/(en)/about/");
+  }
+  if (path.startsWith("src/app/docs/")) {
+    return path.replace("src/app/docs/", "src/app/(en)/docs/");
+  }
+  if (path.startsWith("src/app/learn/")) {
+    return path.replace("src/app/learn/", "src/app/(en)/learn/");
+  }
+
+  return path;
+}
+
 async function readRepo(path) {
-  return readFile(resolve(repoRoot, path), "utf8");
+  return readFile(resolve(repoRoot, sourcePath(path)), "utf8");
 }
 
 async function currentWenlanRelease() {
@@ -119,13 +144,19 @@ test("package metadata uses the wenlan-site identity", async () => {
 });
 
 test("root metadata describes Wenlan on the current release surface", async () => {
-  const layout = await readRepo("src/app/layout.tsx");
+  const metadata = await readRepo("src/i18n/metadata.ts");
+  const englishContent = await readRepo("src/i18n/content/en.ts");
+  const rootDocument = await readRepo("src/app/root-document.tsx");
+  const structuredData = await readRepo("src/app/structured-data.ts");
 
-  assert.match(layout, /const siteTitle = "Wenlan \|/);
-  assert.match(layout, /name: "Wenlan"/);
-  assert.match(layout, /softwareVersion: "0\.9\.1"/);
-  assert.match(layout, /installUrl: "https:\/\/github\.com\/7xuanlu\/wenlan#quickstart"/);
-  assert.match(layout, /codeRepository: "https:\/\/github\.com\/7xuanlu\/wenlan"/);
+  assert.match(englishContent, /title:\s*"Wenlan \|/);
+  assert.match(metadata, /export function buildRootMetadata/);
+  assert.match(metadata, /locale: LOCALE_CONFIG\[locale\]\.openGraphLocale/);
+  assert.match(rootDocument, /softwareApplicationSchema\(locale\)/);
+  assert.match(structuredData, /name: "Wenlan"/);
+  assert.match(structuredData, /softwareVersion: "0\.9\.1"/);
+  assert.match(structuredData, /installUrl: "https:\/\/github\.com\/7xuanlu\/wenlan#quickstart"/);
+  assert.match(structuredData, /codeRepository: "https:\/\/github\.com\/7xuanlu\/wenlan"/);
 });
 
 test("public machine-readable surfaces use Wenlan names and packages", async () => {
@@ -144,14 +175,22 @@ test("public machine-readable surfaces use Wenlan names and packages", async () 
   assert.doesNotMatch(llmsFull, /Wenlan is local-first memory for AI work/);
 });
 
+test("postbuild URL discovery reads moved English route-group source files", async () => {
+  const indexNow = await readRepo("scripts/indexnow-ping.mjs");
+
+  assert.match(indexNow, /src\/app\/\(en\)\/learn\/articles\.ts/);
+  assert.match(indexNow, /src\/app\/\(en\)\/docs\/docs\.ts/);
+  assert.doesNotMatch(indexNow, /src\/app\/learn\/articles\.ts/);
+  assert.doesNotMatch(indexNow, /src\/app\/docs\/docs\.ts/);
+});
+
 test("public eval surfaces publish the latest LME oracle and LME-S framing", async () => {
   const fullMetricSurfaces = [
     "public/llms.txt",
     "src/app/llms-full.txt/route.ts",
-    "src/app/layout.tsx",
-    "src/app/page.tsx",
+    "src/app/structured-data.ts",
+    "src/i18n/content/en.ts",
     "src/app/docs/docs.ts",
-    "src/components/sections.tsx",
     "src/app/learn/articles.ts",
     "docs/seo-measurement.md",
   ];
@@ -170,10 +209,10 @@ test("public eval surfaces publish the latest LME oracle and LME-S framing", asy
     assert.doesNotMatch(source, /Retrieval aggregate pending/, path);
   }
 
-  const homepage = await readRepo("src/app/page.tsx");
-  assert.match(homepage, /Full replay/, "src/app/page.tsx");
-  assert.match(homepage, /No retrieval/, "src/app/page.tsx");
-  assert.match(homepage, /168 tokens \/ query/, "src/app/page.tsx");
+  const homepageContent = await readRepo("src/i18n/content/en.ts");
+  assert.match(homepageContent, /Full replay/, "src/i18n/content/en.ts");
+  assert.match(homepageContent, /No retrieval/, "src/i18n/content/en.ts");
+  assert.match(homepageContent, /168 tokens \/ query/, "src/i18n/content/en.ts");
 
   const headlineMetricSurfaces = [
     "src/app/opengraph-image.tsx",
@@ -279,8 +318,8 @@ test("security docs align with the current Wenlan site policy", async () => {
 
 test("public current-release surfaces track the authoritative Wenlan release", async () => {
   const { version, date } = await currentWenlanRelease();
-  const layout = await readRepo("src/app/layout.tsx");
-  const aboutPage = await readRepo("src/app/about/page.tsx");
+  const structuredData = await readRepo("src/app/structured-data.ts");
+  const aboutPage = await readRepo("src/i18n/content/en.ts");
   const aboutOg = await readRepo("src/app/about/opengraph-image.tsx");
   const docs = await readRepo("src/app/docs/docs.ts");
   const seoMeasurement = await readRepo("docs/seo-measurement.md");
@@ -288,7 +327,7 @@ test("public current-release surfaces track the authoritative Wenlan release", a
 
   const escapedVersion = escapeRegExp(version);
 
-  assert.match(layout, new RegExp(`softwareVersion: "${escapedVersion}"`));
+  assert.match(structuredData, new RegExp(`softwareVersion: "${escapedVersion}"`));
   assert.match(aboutPage, new RegExp(`"v${escapedVersion}"`));
   assert.match(aboutPage, new RegExp(`Wenlan v${escapedVersion} ships`));
   assert.match(aboutOg, new RegExp(`v${escapedVersion} · Apache-2\\.0`));
@@ -473,7 +512,7 @@ test("Wenlan route slugs replace old Origin slugs with direct redirects", async 
 test("public internal links point to Wenlan route slugs", async () => {
   const linkSources = [
     await readRepo("src/components/site-footer.tsx"),
-    await readRepo("src/app/not-found.tsx"),
+    await readRepo("src/app/(en)/not-found.tsx"),
     await readRepo("src/app/learn/page.tsx"),
   ].join("\n");
 

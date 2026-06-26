@@ -1,251 +1,86 @@
-import Link from "next/link";
+import { BrandWordmark } from "@/components/brand-wordmark";
+import { getCoreContent } from "@/i18n/content";
+import type { Locale } from "@/i18n/locales";
+import { LocalizedLink } from "@/i18n/navigation";
 
-export function SiteFooter() {
+type SiteFooterProps = {
+  locale: Locale;
+};
+
+export function SiteFooter({ locale }: SiteFooterProps) {
+  const content = getCoreContent(locale).footer.content;
+
   return (
     <footer className="border-t border-[var(--o-border-subtle)] px-6 py-12">
       <div className="mx-auto max-w-5xl">
-        <nav aria-label="Site footer" className="grid gap-8 sm:grid-cols-4">
+        <nav aria-label={content.ariaLabel} className="grid gap-8 sm:grid-cols-4">
           <div>
             <p className="mb-3 font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
-              Wenlan
+              {content.brand}
             </p>
             <p className="text-sm leading-relaxed text-[var(--o-text-muted)]">
-              Living personal knowledge library for AI work.
+              {content.tagline}
             </p>
           </div>
-          <div>
-            <p className="mb-3 font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
-              Product
-            </p>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  href="/docs/get-started"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Get started
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs/daily-workflow"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Daily workflow
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs/capture-quality"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Capture quality
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs/core-concepts"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Core concepts
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs/data-and-privacy"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Data and privacy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs/configuration"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Configuration
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs/updates-and-uninstall"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Updates
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs/platforms"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Platforms
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Docs
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <p className="mb-3 font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
-              Learn
-            </p>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  href="/learn"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Learn hub
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/learn/wenlan-vs-basic-memory"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  vs Basic Memory
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/learn/wenlan-vs-claude-mem"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  vs claude-mem
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/learn/wenlan-vs-superlocal-memory"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  vs Superlocal Memory
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <p className="mb-3 font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
-              Project
-            </p>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  href="/about"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs/architecture"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Architecture
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs/evaluation"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Evaluation
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs/changelog"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Changelog
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs/roadmap"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Roadmap
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs/project-scope"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Project scope
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs/security"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Security
-                </Link>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/7xuanlu/wenlan"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  GitHub
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/feed.xml"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  RSS feed
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/7xuanlu/wenlan/blob/main/LICENSE"
-                  target="_blank"
-                  rel="noopener noreferrer license"
-                  className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                >
-                  Apache-2.0
-                </a>
-              </li>
-            </ul>
-          </div>
+          {content.groups.map((group) => (
+            <div key={group.id}>
+              <p className="mb-3 font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
+                {group.title}
+              </p>
+              <ul className="space-y-2 text-sm">
+                {group.links.map((link) => (
+                  <li key={link.id}>
+                    {isExternalHref(link.href) ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel={link.id === "license" ? "noopener noreferrer license" : "noopener noreferrer"}
+                        className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <LocalizedLink
+                        href={link.href}
+                        locale={locale}
+                        className="text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
+                      >
+                        {link.label}
+                      </LocalizedLink>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </nav>
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-[var(--o-border-subtle)] pt-6 sm:flex-row">
           <div className="flex items-center gap-4">
-            <span className="font-serif text-sm font-medium text-[var(--o-text-secondary)]">
-              Wenlan
+            <span className="text-[var(--o-text-secondary)]">
+              <BrandWordmark label={content.signature.brand} variant="footer" />
             </span>
             <span className="text-xs text-[var(--o-text-dim)]">&middot;</span>
             <span className="text-xs text-[var(--o-text-muted)]">
-              Living personal knowledge library
+              {content.signature.tagline}
             </span>
           </div>
           <p className="font-mono text-[10px] text-[var(--o-text-muted)]">
-            Built by{" "}
+            {content.signature.builtByPrefix}{" "}
             <a
-              href="https://github.com/7xuanlu"
+              href={content.signature.authorUrl}
               target="_blank"
               rel="noopener noreferrer author"
               className="underline decoration-[var(--o-warm)] decoration-2 underline-offset-4 transition-colors hover:text-[var(--o-warm)]"
             >
-              Qi-Xuan Lu
+              {content.signature.author}
             </a>
           </p>
         </div>
       </div>
     </footer>
   );
+}
+
+function isExternalHref(href: string): boolean {
+  return /^https?:\/\//.test(href);
 }

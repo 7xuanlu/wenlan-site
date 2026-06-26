@@ -13,7 +13,9 @@
     "seo:ai-visibility": "node scripts/seo-ai-visibility-worksheet.mjs",
     "seo:technical:built": "node scripts/seo-built-technical-check.mjs",
     "seo:technical:deployed": "node scripts/seo-deployed-technical-check.mjs",
-    "test:seo": "node --test scripts/*.test.mjs",
+    "test:i18n": "node --import tsx --test scripts/i18n-contract.test.mjs",
+    "i18n:technical:built": "node scripts/i18n-built-check.mjs",
+    "test:seo": "node --test scripts/brand-contract.test.mjs scripts/seo-weekly.test.mjs",
     "start": "next start",
     "lint": "pnpm exec tsc --noEmit --incremental false"
   },
@@ -31,6 +33,7 @@
   "dependencies": {
     "geist": "^1.7.0",
     "next": "^16.2.1",
+    "next-intl": "^4.13.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "resend": "^6.9.4"
@@ -42,6 +45,7 @@
     "@types/react-dom": "^19.2.3",
     "postcss": "^8.5.8",
     "tailwindcss": "^4.2.2",
+    "tsx": "^4.22.4",
     "typescript": "^5.9.3"
   }
 }

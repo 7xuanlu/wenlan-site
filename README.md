@@ -45,13 +45,16 @@ The site ships the following AI-discovery + SEO surfaces:
 
 ```
 src/app/
-  page.tsx                       Homepage
-  layout.tsx                     Root layout (head, JSON-LD, footer, fonts)
-  about/                         /about
-  docs/                          /docs index + slug pages + get-started
-  learn/                         /learn index + slug pages + articles.ts data
-  feed.xml/route.ts              RSS feed
-  llms-full.txt/route.ts         Long-form llms.txt
+  root-document.tsx              Shared document shell (head, JSON-LD, footer, fonts)
+  global-not-found.tsx           App-wide branded 404 for multiple root layouts
+  (en)/layout.tsx                Unprefixed English root layout
+  (en)/page.tsx                  Homepage
+  (en)/about/                    /about
+  (en)/docs/                     /docs index + slug pages + get-started
+  (en)/learn/                    /learn index + slug pages + articles.ts data
+  (en)/feed.xml/route.ts         RSS feed
+  (en)/llms-full.txt/route.ts    Long-form llms.txt
+  [locale]/layout.tsx            Prefixed localized root layout
   sitemap.ts                     Sitemap (Next MetadataRoute)
   robots.ts                      robots.txt (Next MetadataRoute)
 src/components/

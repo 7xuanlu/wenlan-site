@@ -1,0 +1,34 @@
+import { getCoreContent } from "@/i18n/content";
+import { buildPageMetadata } from "@/i18n/metadata";
+import { resolveLocalizedRouteLocale } from "@/i18n/resolve-locale";
+import type { Metadata } from "next";
+import { GetStartedPage } from "../../../_pages/get-started";
+
+type LocalePageParams = {
+  locale: string;
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<LocalePageParams>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const resolvedLocale = resolveLocalizedRouteLocale(locale);
+
+  return buildPageMetadata(
+    resolvedLocale,
+    "/docs/get-started",
+    getCoreContent(resolvedLocale).getStarted.content.seo,
+    { openGraphType: "article" },
+  );
+}
+
+export default async function LocalizedGetStartedPage({
+  params,
+}: {
+  params: Promise<LocalePageParams>;
+}) {
+  const { locale } = await params;
+  return <GetStartedPage locale={resolveLocalizedRouteLocale(locale)} />;
+}

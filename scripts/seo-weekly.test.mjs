@@ -15,6 +15,34 @@ const builtCheckerScript = resolve(repoRoot, "scripts/seo-built-technical-check.
 const deployedCheckerScript = resolve(repoRoot, "scripts/seo-deployed-technical-check.mjs");
 const aiVisibilityScript = resolve(repoRoot, "scripts/seo-ai-visibility-worksheet.mjs");
 const gscFetchScript = resolve(repoRoot, "scripts/seo-gsc-fetch.mjs");
+const englishRouteGroupAliases = new Map([
+  ["src/app/layout.tsx", "src/app/root-document.tsx"],
+  ["src/app/page.tsx", "src/app/(en)/page.tsx"],
+  ["src/app/opengraph-image.tsx", "src/app/(en)/opengraph-image.tsx"],
+  ["src/app/feed.xml/route.ts", "src/app/(en)/feed.xml/route.ts"],
+  ["src/app/llms-full.txt/route.ts", "src/app/(en)/llms-full.txt/route.ts"],
+]);
+
+function sourcePath(path) {
+  if (englishRouteGroupAliases.has(path)) {
+    return englishRouteGroupAliases.get(path);
+  }
+  if (path.startsWith("src/app/about/")) {
+    return path.replace("src/app/about/", "src/app/(en)/about/");
+  }
+  if (path.startsWith("src/app/docs/")) {
+    return path.replace("src/app/docs/", "src/app/(en)/docs/");
+  }
+  if (path.startsWith("src/app/learn/")) {
+    return path.replace("src/app/learn/", "src/app/(en)/learn/");
+  }
+
+  return path;
+}
+
+async function readRepo(path) {
+  return readFile(resolve(repoRoot, sourcePath(path)), "utf8");
+}
 const rebrandRedirectPairs = [
   ["/learn/origin-for-claude-code", "/learn/wenlan-for-claude-code"],
   [
@@ -343,6 +371,11 @@ async function writeBuiltSeoFixture(outputRoot, overrides = {}) {
     await mkdir(dirname(htmlPath), { recursive: true });
     await writeFile(htmlPath, builtHtmlPage(page, pageOverrides), "utf8");
   }
+  await writeFile(
+    join(buildDir, "server/app/_not-found.html"),
+    overrides.notFoundHtml ?? "<!DOCTYPE html><html><body>This page does not exist.</body></html>",
+    "utf8",
+  );
   return buildDir;
 }
 
@@ -1181,10 +1214,11 @@ test("built technical SEO checker verifies compiled redirects, headers, and site
     );
 
     assert.match(stdout, /redirects ok: 23/);
+    assert.match(stdout, /global 404 ok/);
     assert.match(stdout, /noindex headers ok: 5/);
     assert.match(stdout, /sitemap required locs ok: 8/);
     assert.match(stdout, /html page checks ok: 8/);
-    assert.match(stdout, /all html FAQPage absent ok: 8/);
+    assert.match(stdout, /all html FAQPage absent ok: 9/);
     assert.match(stdout, /old URLs absent from sitemap/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
@@ -1225,6 +1259,26 @@ test("built technical SEO checker rejects robots.txt output without the producti
         { cwd: repoRoot },
       ),
       /robots\.txt missing production sitemap URL/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("built technical SEO checker rejects the generic global 404 artifact", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-built-global-404-"));
+  try {
+    const buildDir = await writeBuiltSeoFixture(outputRoot, {
+      notFoundHtml: "<!DOCTYPE html><html><body>404: This page could not be found.</body></html>",
+    });
+
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [builtCheckerScript, "--", "--build-dir", buildDir],
+        { cwd: repoRoot },
+      ),
+      /global unmatched-route 404 invalid/,
     );
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
@@ -3194,13 +3248,10 @@ test("guide ai-memory-app redirects stay ahead of generic guide catchalls", asyn
 });
 
 test("refreshed SEO pages preserve original publication dates", async () => {
-  const learnArticles = await readFile(resolve(repoRoot, "src/app/learn/articles.ts"), "utf8");
-  const docs = await readFile(resolve(repoRoot, "src/app/docs/docs.ts"), "utf8");
-  const learnTemplate = await readFile(
-    resolve(repoRoot, "src/app/learn/[slug]/page.tsx"),
-    "utf8",
-  );
-  const docsTemplate = await readFile(resolve(repoRoot, "src/app/docs/[slug]/page.tsx"), "utf8");
+  const learnArticles = await readRepo("src/app/learn/articles.ts");
+  const docs = await readRepo("src/app/docs/docs.ts");
+  const learnTemplate = await readRepo("src/app/learn/[slug]/page.tsx");
+  const docsTemplate = await readRepo("src/app/docs/[slug]/page.tsx");
 
   assert.match(
     learnArticles,
@@ -3221,7 +3272,7 @@ test("refreshed SEO pages preserve original publication dates", async () => {
 });
 
 test("rss feed uses original publication dates for refreshed articles", async () => {
-  const feedRoute = await readFile(resolve(repoRoot, "src/app/feed.xml/route.ts"), "utf8");
+  const feedRoute = await readRepo("src/app/feed.xml/route.ts");
 
   assert.match(
     feedRoute,
@@ -3231,7 +3282,7 @@ test("rss feed uses original publication dates for refreshed articles", async ()
 });
 
 test("Superlocal comparison scopes missing benchmark evidence to checked sources", async () => {
-  const learnArticles = await readFile(resolve(repoRoot, "src/app/learn/articles.ts"), "utf8");
+  const learnArticles = await readRepo("src/app/learn/articles.ts");
 
   assert.doesNotMatch(learnArticles, /Superlocal Memory has not published LME numbers/);
   assert.match(
@@ -3249,11 +3300,8 @@ test("Superlocal comparison scopes missing benchmark evidence to checked sources
 });
 
 test("Learn index SERP copy leads with Wenlan and AI work memory guides", async () => {
-  const learnPage = await readFile(resolve(repoRoot, "src/app/learn/page.tsx"), "utf8");
-  const learnOgImage = await readFile(
-    resolve(repoRoot, "src/app/learn/opengraph-image.tsx"),
-    "utf8",
-  );
+  const learnPage = await readRepo("src/app/learn/page.tsx");
+  const learnOgImage = await readRepo("src/app/learn/opengraph-image.tsx");
 
   assert.match(
     learnPage,
@@ -3270,16 +3318,16 @@ test("Learn index SERP copy leads with Wenlan and AI work memory guides", async 
 });
 
 test("homepage links directly to the Claude Code memory guide", async () => {
-  const homepage = await readFile(resolve(repoRoot, "src/app/page.tsx"), "utf8");
+  const homepage = await readRepo("src/i18n/content/en.ts");
 
-  assert.match(homepage, /href="\/learn\/claude-code-memory"/);
+  assert.match(homepage, /href:\s*"\/learn\/claude-code-memory"/);
   assert.match(homepage, /Claude Code memory/);
-  assert.match(homepage, /href="\/learn\/mcp-memory-server"/);
+  assert.match(homepage, /href:\s*"\/learn\/mcp-memory-server"/);
   assert.match(homepage, /MCP server/);
 });
 
 test("configuration docs link to the Claude Code memory guide", async () => {
-  const docs = await readFile(resolve(repoRoot, "src/app/docs/docs.ts"), "utf8");
+  const docs = await readRepo("src/app/docs/docs.ts");
 
   assert.match(
     docs,
@@ -3288,11 +3336,8 @@ test("configuration docs link to the Claude Code memory guide", async () => {
 });
 
 test("MCP memory article links contextually to the Claude Code memory guide", async () => {
-  const articles = await readFile(resolve(repoRoot, "src/app/learn/articles.ts"), "utf8");
-  const articlePage = await readFile(
-    resolve(repoRoot, "src/app/learn/[slug]/page.tsx"),
-    "utf8",
-  );
+  const articles = await readRepo("src/app/learn/articles.ts");
+  const articlePage = await readRepo("src/app/learn/[slug]/page.tsx");
 
   assert.match(
     articles,
@@ -3304,7 +3349,7 @@ test("MCP memory article links contextually to the Claude Code memory guide", as
 });
 
 test("root layout declares intentional smooth scroll behavior", async () => {
-  const layout = await readFile(resolve(repoRoot, "src/app/layout.tsx"), "utf8");
+  const layout = await readRepo("src/app/layout.tsx");
   const globals = await readFile(resolve(repoRoot, "src/app/globals.css"), "utf8");
 
   assert.match(globals, /scroll-behavior:\s*smooth/);
@@ -3312,10 +3357,7 @@ test("root layout declares intentional smooth scroll behavior", async () => {
 });
 
 test("learn article layout allows comparison content to shrink on mobile", async () => {
-  const articlePage = await readFile(
-    resolve(repoRoot, "src/app/learn/[slug]/page.tsx"),
-    "utf8",
-  );
+  const articlePage = await readRepo("src/app/learn/[slug]/page.tsx");
 
   assert.match(articlePage, /className="min-w-0 space-y-14"/);
   assert.match(articlePage, /className="min-w-0 space-y-6 lg:sticky/);

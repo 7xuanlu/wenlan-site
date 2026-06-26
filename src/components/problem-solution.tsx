@@ -3,6 +3,11 @@
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { useScrollProgress } from "@/app/use-scroll-reveal";
+import type {
+  CoreTextSection,
+  DistilleryVisualLabels,
+  HandoffVisualLabels,
+} from "@/i18n/content";
 
 function clamp(v: number, min: number, max: number) {
   return Math.max(min, Math.min(max, v));
@@ -133,7 +138,13 @@ function ProblemVisual({ progress }: { progress: number }) {
   );
 }
 
-function CarryForwardVisual({ progress }: { progress: number }) {
+function CarryForwardVisual({
+  progress,
+  visualLabels,
+}: {
+  progress: number;
+  visualLabels: HandoffVisualLabels;
+}) {
   const cycle = remap(progress, 0.08, 0.7, 0, 1);
 
   return (
@@ -202,14 +213,14 @@ function CarryForwardVisual({ progress }: { progress: number }) {
           <path d="M96 214 H108" stroke="var(--o-text-secondary)" strokeOpacity={0.16 + cycle * 0.12} strokeWidth="2.5" strokeLinecap="round" />
         </g>
 
-        {[
-          { x: 320, y: 36, label: "START" },
-          { x: 540, y: 263, label: "CAPTURE" },
-          { x: 320, y: 394, label: "HANDOFF" },
-          { x: 100, y: 263, label: "RESUME" },
-        ].map((item) => (
+        {([
+          { key: "start", x: 320, y: 36 },
+          { key: "capture", x: 540, y: 263 },
+          { key: "handoff", x: 320, y: 394 },
+          { key: "resume", x: 100, y: 263 },
+        ] as const).map((item) => (
           <text
-            key={item.label}
+            key={item.key}
             x={item.x}
             y={item.y}
             textAnchor="middle"
@@ -219,7 +230,7 @@ function CarryForwardVisual({ progress }: { progress: number }) {
             fill="var(--o-text-secondary)"
             opacity={0.6 + cycle * 0.16}
           >
-            {item.label}
+            {visualLabels[item.key]}
           </text>
         ))}
       </svg>
@@ -250,7 +261,13 @@ function CarryForwardVisual({ progress }: { progress: number }) {
   );
 }
 
-function DistilleryVisual({ progress }: { progress: number }) {
+function DistilleryVisual({
+  progress,
+  visualLabels,
+}: {
+  progress: number;
+  visualLabels: DistilleryVisualLabels;
+}) {
   const refine = remap(progress, 0.08, 0.68, 0, 1);
   const drift = remap(progress, 0.12, 0.72, 18, 0);
   const flow = remap(progress, 0.18, 0.72, 0, 1);
@@ -354,15 +371,15 @@ function DistilleryVisual({ progress }: { progress: number }) {
         >
           <rect x="506" y="118" width="100" height="42" rx="12" fill="var(--o-bg)" fillOpacity="0.62" stroke="var(--o-sage)" strokeOpacity="0.22" />
           <path d="M520 139 H536" stroke="var(--o-sage)" strokeOpacity="0.58" strokeWidth="3" strokeLinecap="round" />
-          <text x="569" y="143" fill="var(--o-text-secondary)" opacity="0.66" textAnchor="middle">MERGED</text>
+          <text x="569" y="143" fill="var(--o-text-secondary)" opacity="0.66" textAnchor="middle">{visualLabels.merged}</text>
 
           <rect x="500" y="190" width="108" height="44" rx="13" fill="var(--o-bg)" fillOpacity="0.64" stroke="var(--o-sage)" strokeOpacity="0.24" />
           <path d="M516 212 H532 M532 212 H548" stroke="var(--o-sage)" strokeOpacity="0.5" strokeWidth="3" strokeLinecap="round" />
-          <text x="578" y="216" fill="var(--o-text-secondary)" opacity="0.68" textAnchor="middle">LINKED</text>
+          <text x="578" y="216" fill="var(--o-text-secondary)" opacity="0.68" textAnchor="middle">{visualLabels.linked}</text>
 
           <rect x="506" y="272" width="102" height="42" rx="12" fill="var(--o-bg)" fillOpacity="0.62" stroke="var(--o-sage)" strokeOpacity="0.22" />
           <path d="M520 289 H536 M520 298 H531" stroke="var(--o-sage)" strokeOpacity="0.52" strokeWidth="3" strokeLinecap="round" />
-          <text x="573" y="298" fill="var(--o-text-secondary)" opacity="0.66" textAnchor="middle">REFINED</text>
+          <text x="573" y="298" fill="var(--o-text-secondary)" opacity="0.66" textAnchor="middle">{visualLabels.refined}</text>
         </g>
       </svg>
     </VisualFrame>
@@ -560,7 +577,23 @@ function CompoundVisual({ progress }: { progress: number }) {
   );
 }
 
-export function ProblemSection() {
+type TextSectionProps = {
+  copy: CoreTextSection;
+};
+
+type SolutionSectionProps = {
+  copy: CoreTextSection & {
+    visualLabels: HandoffVisualLabels;
+  };
+};
+
+type MemoryDistillerySectionProps = {
+  copy: CoreTextSection & {
+    visualLabels: DistilleryVisualLabels;
+  };
+};
+
+export function ProblemSection({ copy }: TextSectionProps) {
   const { ref, progress } = useScrollProgress<HTMLElement>();
   const isMobile = useIsMobile();
 
@@ -575,16 +608,16 @@ export function ProblemSection() {
           style={{ opacity, transform: `translateY(${slide}px)` }}
         >
           <p className="mb-5 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
-            The problem
+            {copy.eyebrow}
           </p>
           <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
-            Every new AI session starts cold.
+            {copy.title}
           </h2>
           <p className="mt-6 text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
-            The work happened, but the context did not survive. Decisions, fixes, and project instincts stay trapped in old chats instead of helping the next agent.
+            {copy.body}
           </p>
           <p className="mt-8 max-w-sm border-l border-[var(--o-warm)]/40 pl-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
-            One missing handoff is enough to make the next conversation repeat the last one.
+            {copy.note}
           </p>
         </div>
 
@@ -594,7 +627,7 @@ export function ProblemSection() {
   );
 }
 
-export function SolutionSection() {
+export function SolutionSection({ copy }: SolutionSectionProps) {
   const { ref, progress } = useScrollProgress<HTMLElement>();
   const isMobile = useIsMobile();
 
@@ -605,7 +638,7 @@ export function SolutionSection() {
     <section ref={ref} className="border-t border-[var(--o-border-subtle)] px-6 py-20 sm:py-24">
       <div className="mx-auto grid min-h-[84svh] max-w-6xl items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
         <div className="order-2 lg:order-1">
-          <CarryForwardVisual progress={progress} />
+          <CarryForwardVisual progress={progress} visualLabels={copy.visualLabels} />
         </div>
 
         <div
@@ -613,16 +646,16 @@ export function SolutionSection() {
           style={{ opacity, transform: `translateY(${slide}px)` }}
         >
           <p className="mb-5 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
-            What Wenlan brings
+            {copy.eyebrow}
           </p>
           <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
-            A handoff loop for AI work.
+            {copy.title}
           </h2>
           <p className="mt-6 text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
-            Wenlan captures decisions, lessons, and next steps as work happens, then loads the handoff when the next agent starts.
+            {copy.body}
           </p>
           <p className="mt-8 max-w-sm border-l border-[var(--o-indigo)]/40 pl-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
-            The next conversation starts from the handoff instead of reconstructing the past.
+            {copy.note}
           </p>
         </div>
       </div>
@@ -630,7 +663,7 @@ export function SolutionSection() {
   );
 }
 
-export function MemoryDistillerySection() {
+export function MemoryDistillerySection({ copy }: MemoryDistillerySectionProps) {
   const { ref, progress } = useScrollProgress<HTMLElement>();
   const isMobile = useIsMobile();
 
@@ -645,26 +678,26 @@ export function MemoryDistillerySection() {
           style={{ opacity, transform: `translateY(${slide}px)` }}
         >
           <p className="mb-5 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
-            Deliberate distillation
+            {copy.eyebrow}
           </p>
           <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
-            Wenlan turns repeated context into source-backed pages.
+            {copy.title}
           </h2>
           <p className="mt-6 text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
-            Run /distill when repeated captures should become a readable page. Optional model or API-key paths can add background extraction and page refresh work.
+            {copy.body}
           </p>
           <p className="mt-8 max-w-sm border-l border-[var(--o-warm)]/45 pl-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
-            The next run starts from cited context, not transcript residue.
+            {copy.note}
           </p>
         </div>
 
-        <DistilleryVisual progress={progress} />
+        <DistilleryVisual progress={progress} visualLabels={copy.visualLabels} />
       </div>
     </section>
   );
 }
 
-export function HumanControlSection() {
+export function HumanControlSection({ copy }: TextSectionProps) {
   const { ref, progress } = useScrollProgress<HTMLElement>();
   const isMobile = useIsMobile();
 
@@ -683,16 +716,16 @@ export function HumanControlSection() {
           style={{ opacity, transform: `translateY(${slide}px)` }}
         >
           <p className="mb-5 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
-            Hybrid storage
+            {copy.eyebrow}
           </p>
           <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
-            The daemon owns recall. Readable artifacts stay inspectable.
+            {copy.title}
           </h2>
           <p className="mt-6 text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
-            Wenlan keeps raw captures in the local daemon store for retrieval, then projects pages, handoffs, and status files you can open, diff, and move.
+            {copy.body}
           </p>
           <p className="mt-8 max-w-sm border-l border-[var(--o-sage)]/50 pl-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
-            Agents recall from the daemon. You inspect the readable files.
+            {copy.note}
           </p>
         </div>
       </div>
@@ -700,7 +733,7 @@ export function HumanControlSection() {
   );
 }
 
-export function FeatureSection() {
+export function FeatureSection({ copy }: TextSectionProps) {
   const { ref, progress } = useScrollProgress<HTMLElement>();
   const isMobile = useIsMobile();
 
@@ -715,16 +748,16 @@ export function FeatureSection() {
           style={{ opacity, transform: `translateY(${slide}px)` }}
         >
           <p className="mb-5 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
-            Knowledge pages
+            {copy.eyebrow}
           </p>
           <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
-            The work becomes reusable pages.
+            {copy.title}
           </h2>
           <p className="mt-6 text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
-            Cleaned decisions and lessons become durable pages instead of buried chat logs. They are organized enough for agents to use and concrete enough for humans to read.
+            {copy.body}
           </p>
           <p className="mt-8 max-w-sm border-l border-[var(--o-sage)]/50 pl-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
-            Your work stops being transcript history and starts becoming project knowledge.
+            {copy.note}
           </p>
         </div>
 
