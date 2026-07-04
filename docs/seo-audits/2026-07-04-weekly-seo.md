@@ -40,9 +40,24 @@ Source: `/tmp/wenlan-seo/gsc-metadata.json` from `sc-domain:wenlan.app`.
 | Old guide URLs surfacing in Search Analytics | none in this 0-row export |
 | Pages with impressions and no clicks | none in this 0-row export |
 
+## Post-Deploy URL Inspection Details
+
+Source: Google Search Console URL Inspection API for `sc-domain:wenlan.app`, captured after PR #50 reached production on 2026-07-04.
+
+| URL | Verdict | Coverage state | Google canonical | Last crawl |
+| --- | --- | --- | --- | --- |
+| `https://wenlan.app/` | PASS | Submitted and indexed | `https://wenlan.app/` | 2026-07-04T05:19:21Z |
+| `https://wenlan.app/learn` | NEUTRAL | Discovered - currently not indexed | manual / unavailable | manual / unavailable |
+| `https://wenlan.app/learn/distilled-wiki-pages-ai-memory` | PASS | Submitted and indexed | `https://wenlan.app/learn/distilled-wiki-pages-ai-memory` | 2026-07-03T07:52:31Z |
+| `https://wenlan.app/learn/source-backed-wiki-pages-ai-work` | NEUTRAL | Discovered - currently not indexed | manual / unavailable | manual / unavailable |
+| `https://wenlan.app/zh-TW` | NEUTRAL | Discovered - currently not indexed | manual / unavailable | manual / unavailable |
+| `https://wenlan.app/zh-CN` | NEUTRAL | URL is unknown to Google | manual / unavailable | manual / unavailable |
+
 ## Top Actions
 
-No immediate action. Keep measuring.
+1. Request indexing in GSC UI for the key canonical URLs that are discovered but not indexed: `/learn`, `/learn/source-backed-wiki-pages-ai-work`, and `/zh-TW`.
+2. Request indexing in GSC UI for `/zh-CN` after confirming the live URL test passes.
+3. Keep monitoring Search Analytics; the 2026-06-06 to 2026-07-03 API export still has 0 query rows and 0 page rows, so do not create new content from inferred demand.
 
 ## Query Action Queue
 

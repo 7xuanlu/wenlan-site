@@ -176,9 +176,10 @@ test("package metadata uses the wenlan-site identity", async () => {
   const packageJson = JSON.parse(await readRepo("package.json"));
 
   assert.equal(packageJson.name, "wenlan-site");
+  assert.equal(packageJson.description, "Public website and SEO/GEO surface for Wenlan, an LLM wiki for AI work.");
   assert.equal(packageJson.repository.url, "git+https://github.com/7xuanlu/wenlan-site.git");
   assert.equal(packageJson.bugs.url, "https://github.com/7xuanlu/wenlan-site/issues");
-  assert.equal(packageJson.homepage, "https://github.com/7xuanlu/wenlan-site#readme");
+  assert.equal(packageJson.homepage, "https://wenlan.app");
   assert.match(packageJson.scripts["seo:weekly:sample"], /\/tmp\/wenlan-weekly-seo-sample\.md$/);
 });
 

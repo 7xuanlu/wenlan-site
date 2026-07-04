@@ -1,6 +1,7 @@
 {
   "name": "wenlan-site",
   "version": "1.0.0",
+  "description": "Public website and SEO/GEO surface for Wenlan, an LLM wiki for AI work.",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -29,7 +30,7 @@
   "bugs": {
     "url": "https://github.com/7xuanlu/wenlan-site/issues"
   },
-  "homepage": "https://github.com/7xuanlu/wenlan-site#readme",
+  "homepage": "https://wenlan.app",
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
     "geist": "^1.7.0",
