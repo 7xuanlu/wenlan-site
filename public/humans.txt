@@ -2,7 +2,7 @@
 Builder: Qi-Xuan Lu
 GitHub: @7xuanlu
 URL: https://github.com/7xuanlu
-From: Wenlan, useorigin.app
+From: Wenlan, wenlan.app
 
 /* THANKS */
 - The Model Context Protocol team for the MCP spec.

@@ -3,18 +3,30 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-const PRODUCTION_ORIGIN = "https://useorigin.app";
+const PRODUCTION_ORIGIN = "https://wenlan.app";
 const DEFAULT_TIMEOUT_MS = 15_000;
+const BRIDGE_HOST_REDIRECTS = [
+  "https://www.wenlan.app",
+  "https://useorigin.app",
+  "https://www.useorigin.app",
+].flatMap((origin) => [
+  { source: `${origin}/`, destinationPath: "/" },
+  { source: `${origin}/learn`, destinationPath: "/learn" },
+]);
 
 const REQUIRED_SITEMAP_LOCS = [
-  "https://useorigin.app",
-  "https://useorigin.app/learn",
-  "https://useorigin.app/learn/claude-code-memory",
-  "https://useorigin.app/learn/mcp-memory-server",
-  "https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor",
-  "https://useorigin.app/learn/ai-work-memory",
-  "https://useorigin.app/learn/wenlan-vs-superlocal-memory",
-  "https://useorigin.app/docs/configuration",
+  "https://wenlan.app",
+  "https://wenlan.app/learn",
+  "https://wenlan.app/learn/claude-code-memory",
+  "https://wenlan.app/learn/mcp-memory-server",
+  "https://wenlan.app/learn/how-to-add-mcp-memory-to-cursor",
+  "https://wenlan.app/learn/ai-work-memory",
+  "https://wenlan.app/zh-TW/learn/distilled-wiki-pages-ai-memory",
+  "https://wenlan.app/zh-CN/learn/distilled-wiki-pages-ai-memory",
+  "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",
+  "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work",
+  "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
+  "https://wenlan.app/docs/configuration",
 ];
 
 const REBRAND_REDIRECTS = [
@@ -55,45 +67,66 @@ const REBRAND_REDIRECTS = [
 ];
 
 const OLD_SITEMAP_URL_PATTERNS = [
-  /^https:\/\/useorigin\.app\/guides(?:\/|$)/,
-  /^https:\/\/useorigin\.app\/docs\/guides(?:\/|$)/,
-  /^https:\/\/useorigin\.app\/learn\/ai-memory-app$/,
+  /^https:\/\/useorigin\.app(?:\/|$)/,
+  /^https:\/\/wenlan\.app\/guides(?:\/|$)/,
+  /^https:\/\/wenlan\.app\/docs\/guides(?:\/|$)/,
+  /^https:\/\/wenlan\.app\/learn\/ai-memory-app$/,
   ...REBRAND_REDIRECTS.map(
-    ({ source }) => new RegExp(`^https://useorigin\\.app${source.replaceAll("/", "\\/")}$`),
+    ({ source }) => new RegExp(`^https://wenlan\\.app${source.replaceAll("/", "\\/")}$`),
   ),
 ];
 
 const REQUIRED_HTML_PAGES = [
-  { path: "/", canonical: "https://useorigin.app", type: "SoftwareApplication" },
-  { path: "/learn", canonical: "https://useorigin.app/learn", type: "CollectionPage" },
+  { path: "/", canonical: "https://wenlan.app", type: "SoftwareApplication" },
+  { path: "/learn", canonical: "https://wenlan.app/learn", type: "CollectionPage" },
   {
     path: "/learn/claude-code-memory",
-    canonical: "https://useorigin.app/learn/claude-code-memory",
+    canonical: "https://wenlan.app/learn/claude-code-memory",
     type: "Article",
   },
   {
     path: "/learn/mcp-memory-server",
-    canonical: "https://useorigin.app/learn/mcp-memory-server",
+    canonical: "https://wenlan.app/learn/mcp-memory-server",
     type: "Article",
   },
   {
     path: "/learn/how-to-add-mcp-memory-to-cursor",
-    canonical: "https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor",
+    canonical: "https://wenlan.app/learn/how-to-add-mcp-memory-to-cursor",
     type: "Article",
   },
   {
     path: "/learn/ai-work-memory",
-    canonical: "https://useorigin.app/learn/ai-work-memory",
+    canonical: "https://wenlan.app/learn/ai-work-memory",
+    type: "Article",
+  },
+  {
+    path: "/zh-TW/learn/distilled-wiki-pages-ai-memory",
+    canonical: "https://wenlan.app/zh-TW/learn/distilled-wiki-pages-ai-memory",
+    type: "Article",
+  },
+  {
+    path: "/zh-CN/learn/distilled-wiki-pages-ai-memory",
+    canonical: "https://wenlan.app/zh-CN/learn/distilled-wiki-pages-ai-memory",
+    type: "Article",
+  },
+  {
+    path: "/zh-TW/learn/source-backed-wiki-pages-ai-work",
+    canonical: "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",
+    type: "Article",
+  },
+  {
+    path: "/zh-CN/learn/source-backed-wiki-pages-ai-work",
+    canonical: "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work",
     type: "Article",
   },
   {
     path: "/learn/wenlan-vs-superlocal-memory",
-    canonical: "https://useorigin.app/learn/wenlan-vs-superlocal-memory",
+    canonical: "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
     type: "Article",
   },
   {
     path: "/docs/configuration",
-    canonical: "https://useorigin.app/docs/configuration",
+    canonical: "https://wenlan.app/docs/configuration",
     type: "TechArticle",
   },
 ];
@@ -192,11 +225,12 @@ async function createRequester({ baseUrl, fixtureDir, timeoutMs }) {
 
   const responses = JSON.parse(await readFile(resolve(fixtureDir, "responses.json"), "utf8"));
   return async function request(path) {
-    const pathname = new URL(path, baseUrl).pathname;
-    const fixture = responses[pathname] ?? {
+    const requestUrl = new URL(path, baseUrl);
+    const fixture = responses[`${requestUrl.host}${requestUrl.pathname}`] ??
+      responses[requestUrl.pathname] ?? {
       status: 404,
       headers: {},
-      body: `missing fixture response for ${pathname}`,
+      body: `missing fixture response for ${requestUrl.href}`,
     };
     const headers = normalizeFixtureHeaders(fixture.headers);
 
@@ -305,12 +339,17 @@ function assertNoMissing(label, values) {
   if (values.length) throw new Error(`${label} missing: ${values.join(", ")}`);
 }
 
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 async function assertRobots(request) {
   const response = await request("/robots.txt");
   assertOk(response, "/robots.txt");
   const body = await response.text();
 
-  if (!/Sitemap:\s*https:\/\/useorigin\.app\/sitemap\.xml/i.test(body)) {
+  const expectedSitemap = new URL("/sitemap.xml", PRODUCTION_ORIGIN).href;
+  if (!new RegExp(`Sitemap:\\s*${escapeRegExp(expectedSitemap)}`, "i").test(body)) {
     throw new Error("robots.txt missing production sitemap URL");
   }
   if (blocksAllCrawlers(body)) {
@@ -453,6 +492,64 @@ async function assertRedirects(request, baseUrl, { requireDirectChangedRedirects
   assertNone("redirects invalid", failures);
 }
 
+async function assertBridgeHostRedirects(request, baseUrl) {
+  const failures = [];
+  const allowedBridgeOrigins = new Set([
+    baseUrl,
+    ...BRIDGE_HOST_REDIRECTS.map(({ source }) => new URL(source).origin),
+  ]);
+
+  for (const redirect of BRIDGE_HOST_REDIRECTS) {
+    const expected = new URL(redirect.destinationPath, baseUrl).href;
+    let current = redirect.source;
+    let resolved = false;
+
+    for (let hop = 0; hop < 6; hop += 1) {
+      const currentUrl = new URL(current, baseUrl);
+      const response = await request(currentUrl.href, { redirect: "manual" });
+
+      if (response.status < 300 || response.status >= 400) {
+        resolved = true;
+        if (currentUrl.href !== expected) {
+          failures.push(`bridge host final destination invalid: ${redirect.source} -> ${currentUrl.href}`);
+        }
+        if (response.status !== 200) {
+          failures.push(`bridge host final status invalid: ${redirect.source} -> ${response.status}`);
+        }
+        break;
+      }
+
+      if (response.status !== 308 && response.status !== 301) {
+        failures.push(`bridge host status invalid: ${redirect.source} -> ${response.status}`);
+        resolved = true;
+        break;
+      }
+
+      const location = headerValue(response.headers, "location");
+      if (!location) {
+        failures.push(`bridge host location invalid: ${redirect.source} -> <missing>`);
+        resolved = true;
+        break;
+      }
+
+      const nextUrl = new URL(location, currentUrl);
+      if (!allowedBridgeOrigins.has(nextUrl.origin)) {
+        failures.push(`bridge host origin invalid: ${redirect.source} -> ${nextUrl.href}`);
+        resolved = true;
+        break;
+      }
+
+      current = nextUrl.href;
+    }
+
+    if (!resolved) {
+      failures.push(`bridge host redirect loop or too many hops: ${redirect.source}`);
+    }
+  }
+
+  assertNone("bridge host redirects invalid", failures);
+}
+
 async function run() {
   const args = parseArgs(process.argv.slice(2));
   const request = await createRequester(args);
@@ -462,12 +559,14 @@ async function run() {
   await assertHtmlPages(request);
   await assertUtilities(request);
   await assertRedirects(request, args.baseUrl, args);
+  await assertBridgeHostRedirects(request, args.baseUrl);
 
   console.log("[seo-deployed] robots ok");
   console.log(`[seo-deployed] sitemap locs ok: ${sitemapLocCount}`);
   console.log(`[seo-deployed] key pages ok: ${REQUIRED_HTML_PAGES.length}`);
   console.log(`[seo-deployed] utility noindex headers ok: ${UTILITY_NOINDEX_PATHS.length}`);
   console.log(`[seo-deployed] redirects ok: ${REQUIRED_REDIRECTS.length}`);
+  console.log(`[seo-deployed] bridge host redirects ok: ${BRIDGE_HOST_REDIRECTS.length}`);
   if (args.requireDirectChangedRedirects) {
     console.log(`[seo-deployed] direct changed redirects ok: ${CHANGED_DIRECT_REDIRECT_SOURCES.size}`);
   }

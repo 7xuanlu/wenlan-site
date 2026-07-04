@@ -1,6 +1,6 @@
 import { seoArticles } from "./seo-articles";
 
-export const SITE_URL = "https://useorigin.app";
+export const SITE_URL = "https://wenlan.app";
 export const DEFAULT_AUTHOR = "Qi-Xuan Lu";
 export const DEFAULT_AUTHOR_URL = "https://github.com/7xuanlu";
 export const DEFAULT_AUTHOR_SAME_AS = ["https://github.com/7xuanlu"];
@@ -86,7 +86,7 @@ const baseArticles: LearnArticle[] = [
     keywords: [
       "AI work memory",
       "memory for AI work",
-      "living personal knowledge library for AI work",
+      "LLM wiki for AI work",
       "durable AI work context",
       "Wenlan AI work",
     ],
@@ -575,47 +575,68 @@ const baseArticles: LearnArticle[] = [
     slug: "distilled-wiki-pages-ai-memory",
     eyebrow: "Concept",
     category: "Concepts",
-    title: "Distilled Wiki Pages: Why Wenlan Composes Memory",
+    title: "LLM Wiki for AI Work: Source-Backed Pages in Wenlan",
     description:
-      "Wenlan does not stop at storing memory snippets. It composes related captures into source-backed wiki pages that agents and humans can reuse.",
-    metaTitle: "Distilled Wiki Pages for AI Memory | Wenlan",
+      "Wenlan turns repeated AI work context into a source-backed AI work wiki that agents and humans can reuse across tools.",
+    metaTitle: "LLM Wiki for AI Work | Wenlan",
     metaDescription:
-      "Learn why Wenlan distills atomic memories into source-backed wiki pages with provenance, stale reasons, and refreshable revision state.",
+      "Learn how Wenlan acts as an LLM wiki for AI work by distilling captures into source-backed pages with provenance, stale reasons, and refreshable revision state.",
     keywords: [
+      "LLM wiki for AI work",
+      "source-backed AI work wiki",
       "distilled wiki pages",
       "AI memory distillation",
       "source-backed AI memory",
-      "composed AI memory",
+      "AI work wiki",
       "memory provenance",
     ],
     updatedAt,
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
-    audience: "People evaluating whether AI memory should be storage or composed knowledge",
+    audience: "People evaluating whether AI memory should stay as storage or become composed, source-backed wiki knowledge",
     heroBullets: [
-      "Atomic memories are the raw material, not the final product.",
-      "Distilled pages cluster related captures into readable Markdown wiki entries.",
-      "Mandatory source IDs keep the page traceable instead of becoming a hallucinated summary.",
+      "Wenlan treats captured memories as raw material for an LLM wiki, not as the final interface.",
+      "Distilled pages cluster related captures into readable Markdown wiki entries with provenance.",
+      "Source memory IDs, revision state, and git history keep each page inspectable as AI work changes.",
     ],
     sections: [
       {
-        heading: "Storage is not enough",
+        heading: "The short answer",
         body: [
-          "A long list of memories eventually becomes another inbox. The agent can search it, but the human has to trust that search will reconcile duplicates, stale facts, and contradictions correctly.",
-          "Wenlan treats storage as the first step. The stronger layer is composition: related captures become wiki pages that explain the current state of a project, decision, workflow, or concept.",
+          "An LLM wiki for AI work is a source-backed knowledge layer that agents can read, update, and cite while they work. It is not a static notes folder and it is not opaque model memory.",
+          "Wenlan is built around that shape: agents capture durable facts, decisions, lessons, and handoffs; /distill turns repeated context into wiki pages; and each page keeps source memory IDs so people can inspect why it says what it says.",
         ],
+        link: {
+          label: "Install Wenlan first",
+          href: "/docs/get-started",
+        },
       },
       {
-        heading: "Pages stay source-backed",
+        heading: "Why memory needs a wiki layer",
+        body: [
+          "A long list of memories eventually becomes another inbox. The agent can search it, but the human has to trust that search will reconcile duplicates, stale facts, and contradictions correctly.",
+          "The wiki layer gives repeated work a stable page: the current project constraint, the accepted tradeoff, the hard-earned setup fix, the handoff pattern, or the concept that keeps reappearing across sessions.",
+        ],
+        link: {
+          label: "Use the daily workflow",
+          href: "/docs/daily-workflow",
+        },
+      },
+      {
+        heading: "How Wenlan keeps pages source-backed",
         body: [
           "Every distilled page keeps the source memory IDs that produced it. Wenlan's daemon rejects unsourced pages instead of letting attractive summaries enter the store without provenance.",
           "That source chain matters when memory is wrong. You can inspect the original capture, see when it was written, and supersede it instead of guessing why a page says what it says.",
         ],
+        link: {
+          label: "Review the local data boundary",
+          href: "/docs/data-and-privacy",
+        },
       },
       {
         heading: "Pages can age and refresh",
         body: [
-          "A useful memory layer needs to admit that knowledge changes. Wenlan pages carry revision state and stale reasons so repeated captures can refresh old conclusions instead of silently piling up beside them.",
+          "A useful LLM wiki needs to admit that knowledge changes. Wenlan pages carry revision state and stale reasons so repeated captures can refresh old conclusions instead of silently piling up beside them.",
           "Manual `/distill` is the deliberate path today. Optional local models or API keys can support richer background extraction and page refresh work when you want the daemon to do more between sessions.",
         ],
       },
@@ -623,7 +644,7 @@ const baseArticles: LearnArticle[] = [
         heading: "Why this helps agents",
         body: [
           "Agents need compact context, not raw chat archaeology. A distilled page can say the current decision, cite where it came from, and link related entities.",
-          "That makes retrieval more useful: Wenlan can serve atomic memories, pages, graph context, full-text hits, and vector matches together instead of pretending one memory snippet is the whole answer.",
+          "That makes retrieval more useful: Wenlan can serve atomic memories, wiki pages, graph context, full-text hits, and vector matches together instead of pretending one memory snippet is the whole answer.",
         ],
       },
     ],
@@ -639,10 +660,10 @@ const baseArticles: LearnArticle[] = [
           "Yes. Pages are projected as Markdown under ~/.wenlan/pages/ and can be opened in any editor or symlinked into Obsidian.",
       },
     ],
-    relatedSlugs: ["markdown-local-index-ai-memory", "ai-work-memory", "ai-agent-handoff-loop"],
+    relatedSlugs: ["source-backed-wiki-pages-ai-work", "ai-memory-provenance", "local-git-history-ai-memory"],
     cta: {
-      heading: "Turn memory into working knowledge",
-      body: "Wenlan distills repeated captures into source-backed pages your next AI session can actually use.",
+      heading: "Turn memory into an LLM wiki",
+      body: "Wenlan distills repeated captures into source-backed wiki pages your next AI session can actually use.",
     },
   },
   {
@@ -736,7 +757,7 @@ const baseArticles: LearnArticle[] = [
       "MCP memory knowledge base",
       "local AI work memory",
     ],
-    updatedAt,
+    updatedAt: "2026-07-02",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     audience: "People choosing a memory layer for AI-assisted work",
@@ -744,7 +765,7 @@ const baseArticles: LearnArticle[] = [
       "Basic Memory is strongest as a Markdown-centered knowledge base with AI access.",
       "Wenlan is designed around the AI work loop: sessions, handoffs, distillation, provenance, and shared MCP memory.",
       "Both value human-readable memory; the right fit depends on whether you want a knowledge base or a work-session memory layer.",
-      "This page reflects Basic Memory's public docs and Wenlan v0.9.1 as of 2026-06-24. If something has shifted on either side, please open an issue.",
+      "This page reflects Basic Memory's public docs as of 2026-07-02 and Wenlan v0.11.0 as of 2026-07-03. If something has shifted on either side, please open an issue.",
     ],
     officialReferences: [
       {
@@ -881,7 +902,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "How fresh is this comparison?",
         answer:
-          "Reflects Basic Memory's public docs and Wenlan v0.9.1 as of 2026-06-24. If something material changes on either side, please open an issue on github.com/7xuanlu/wenlan and I will update.",
+          "Reflects Basic Memory's public docs as of 2026-07-02 and Wenlan v0.11.0 as of 2026-07-03. If something material changes on either side, please open an issue on github.com/7xuanlu/wenlan and I will update.",
       },
     ],
     relatedSlugs: [
@@ -914,7 +935,7 @@ const baseArticles: LearnArticle[] = [
       "Claude memory workflow",
       "AI work memory",
     ],
-    updatedAt,
+    updatedAt: "2026-07-02",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     audience: "Claude Code users choosing a memory workflow",
@@ -922,7 +943,7 @@ const baseArticles: LearnArticle[] = [
       "claude-mem focuses on automatically observing Claude Code sessions and extracting useful context.",
       "Wenlan focuses on shared local AI work memory across Claude Code and other MCP clients.",
       "Both aim to reduce repeated context, but they choose different centers of gravity.",
-      "Both products are early. This page covers the claude-mem npm package and Wenlan v0.9.1 as of 2026-06-24.",
+      "Both products are early. This page covers the claude-mem npm package as of 2026-07-02 and Wenlan v0.11.0 as of 2026-07-03.",
     ],
     officialReferences: [
       {
@@ -1095,7 +1116,7 @@ const baseArticles: LearnArticle[] = [
       "AI coding work memory",
     ],
     publishedAt: "2026-05-27",
-    updatedAt: "2026-06-24",
+    updatedAt: "2026-07-02",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     audience: "Developers evaluating local-first memory for AI coding tools",
@@ -1103,7 +1124,7 @@ const baseArticles: LearnArticle[] = [
       "Superlocal Memory now emphasizes a local reliability layer for memory, cache, prompt compression, KV-cache alignment, and LLM cost optimization.",
       "Wenlan emphasizes the AI work loop: capture, handoff, distill, retrieve, and keep readable artifacts inspectable.",
       "The best Superlocal Memory alternative depends on whether you need a reliability layer or an inspectable work-memory workflow across MCP clients.",
-      "Wenlan version and framing reflect v0.9.1 on 2026-06-24. Check both project pages for newer releases before deciding.",
+      "Wenlan version and framing reflect v0.11.0 on 2026-07-03. Check both project pages for newer releases before deciding.",
     ],
     officialReferences: [
       {
@@ -1116,7 +1137,7 @@ const baseArticles: LearnArticle[] = [
         heading: "Short answer",
         body: [
           "Superlocal Memory and Wenlan both sit in the local-first AI memory category, but they optimize for different buying questions. Choose Superlocal Memory if its reliability-engineering framing, modes, benchmark positioning, and IDE integration story match your workflow.",
-          "Choose Wenlan as the Superlocal Memory alternative when you want local AI work memory centered on sessions, handoffs, source-cited pages, MCP clients, and deliberate page distillation.",
+          "Choose Wenlan as the Superlocal Memory alternative when you want local AI work memory centered on sessions, handoffs, source-backed pages, MCP clients, and deliberate page distillation.",
         ],
       },
       {
@@ -1130,7 +1151,7 @@ const baseArticles: LearnArticle[] = [
         heading: "What Wenlan emphasizes",
         body: [
           "Wenlan focuses on the loop around real AI work: sessions start, work happens, handoffs are written, memory is distilled, and the next session receives relevant context.",
-          "The daemon-owned store powers retrieval, graph context, and hybrid search while Markdown artifacts stay readable and source-cited for inspection.",
+          "The daemon-owned store powers retrieval, graph context, and hybrid search while Markdown artifacts stay readable and source-backed for inspection.",
         ],
       },
       {
@@ -1247,7 +1268,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "How often do these numbers get re-run?",
         answer:
-          "Wenlan's eval harness lives under `crates/wenlan-core/src/eval/` and runs locally on demand against the same fixtures the published numbers use. Anyone can re-run them. I refresh the published number when a release changes it materially. Last refresh: v0.9.1 on 2026-06-24.",
+          "Wenlan's eval harness lives under `crates/wenlan-core/src/eval/` and runs locally on demand against the same fixtures the published numbers use. Anyone can re-run them. I refresh the published number when a release changes it materially. Last release alignment: v0.11.0 on 2026-07-03.",
       },
     ],
     relatedSlugs: [

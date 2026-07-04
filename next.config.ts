@@ -8,6 +8,13 @@ const NOINDEX_ASSET = [
   { key: "X-Robots-Tag", value: "noindex" },
 ];
 
+const CANONICAL_ORIGIN = "https://wenlan.app";
+const BRIDGE_HOSTS = [
+  "www.wenlan.app",
+  "useorigin.app",
+  "www.useorigin.app",
+] as const;
+
 const nextConfig: NextConfig = {
   outputFileTracingRoot: process.cwd(),
   turbopack: {
@@ -29,6 +36,12 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      ...BRIDGE_HOSTS.map((host) => ({
+        source: "/:path*",
+        has: [{ type: "host" as const, value: host }],
+        destination: `${CANONICAL_ORIGIN}/:path*`,
+        permanent: true,
+      })),
       {
         source: "/learn/origin-for-claude-code",
         destination: "/learn/wenlan-for-claude-code",

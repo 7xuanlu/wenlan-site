@@ -1,6 +1,6 @@
 # Contributing to wenlan-site
 
-This is the marketing + docs site for [Wenlan](https://github.com/7xuanlu/wenlan). Source lives at [github.com/7xuanlu/wenlan-site](https://github.com/7xuanlu/wenlan-site). Production at [useorigin.app](https://useorigin.app).
+This is the marketing + docs site for [Wenlan](https://github.com/7xuanlu/wenlan). Source lives at [github.com/7xuanlu/wenlan-site](https://github.com/7xuanlu/wenlan-site). Production at [wenlan.app](https://wenlan.app).
 
 ## Reporting issues
 

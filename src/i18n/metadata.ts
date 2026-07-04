@@ -2,7 +2,13 @@ import type { Metadata, Viewport } from "next";
 
 import { localizedContentByLocale } from "./content";
 import { LOCALE_CONFIG, type Locale } from "./locales";
-import { alternateUrls, canonicalUrl, isCoreTranslatedPath, SITE_URL } from "./routing";
+import {
+  alternateUrls,
+  canonicalUrl,
+  isCoreTranslatedPath,
+  isTranslatedLearnPath,
+  SITE_URL,
+} from "./routing";
 
 type PageSeo = {
   title: string;
@@ -36,7 +42,7 @@ export function buildPageMetadata(
     canonical,
   };
 
-  if (isCoreTranslatedPath(pathname)) {
+  if (isCoreTranslatedPath(pathname) || isTranslatedLearnPath(pathname)) {
     alternates.languages = alternateUrls(pathname);
   }
 

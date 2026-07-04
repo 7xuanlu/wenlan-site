@@ -30,7 +30,7 @@ export function GET() {
       <link>${url}</link>
       <guid isPermaLink="true">${url}</guid>
       <description>${escapeXml(article.description)}</description>
-      <author>noreply@useorigin.app (${escapeXml(article.author)})</author>
+      <author>noreply@wenlan.app (${escapeXml(article.author)})</author>
       <category>${escapeXml(article.category)}</category>
       <pubDate>${rfc822Date(article.publishedAt ?? article.updatedAt)}</pubDate>
     </item>`;
@@ -48,8 +48,8 @@ export function GET() {
     <description>Articles on AI work memory, MCP memory servers, local-first AI work context, distilled wiki pages, Claude Code workflows, and Wenlan comparisons. Authored by Qi-Xuan Lu.</description>
     <language>en-US</language>
     <lastBuildDate>${rfc822Date(latest)}</lastBuildDate>
-    <managingEditor>noreply@useorigin.app (Qi-Xuan Lu)</managingEditor>
-    <webMaster>noreply@useorigin.app (Qi-Xuan Lu)</webMaster>
+    <managingEditor>noreply@wenlan.app (Qi-Xuan Lu)</managingEditor>
+    <webMaster>noreply@wenlan.app (Qi-Xuan Lu)</webMaster>
     <generator>Wenlan website (Next.js)</generator>
     <docs>https://www.rssboard.org/rss-specification</docs>
 ${items}

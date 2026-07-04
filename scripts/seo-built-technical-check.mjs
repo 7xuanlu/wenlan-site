@@ -3,6 +3,18 @@
 import { readFile, readdir, stat } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
 
+const CANONICAL_ORIGIN = "https://wenlan.app";
+const BRIDGE_HOST_REDIRECTS = [
+  "www.wenlan.app",
+  "useorigin.app",
+  "www.useorigin.app",
+].map((host) => ({
+  source: "/:path*",
+  destination: `${CANONICAL_ORIGIN}/:path*`,
+  statusCode: 308,
+  has: [{ type: "host", value: host }],
+}));
+
 const REBRAND_REDIRECTS = [
   { source: "/learn/origin-for-claude-code", destination: "/learn/wenlan-for-claude-code", statusCode: 308 },
   {
@@ -59,6 +71,7 @@ const REBRAND_REDIRECTS = [
 ];
 
 const REQUIRED_REDIRECTS = [
+  ...BRIDGE_HOST_REDIRECTS,
   ...REBRAND_REDIRECTS,
   { source: "/learn/ai-memory-app", destination: "/learn/ai-work-memory", statusCode: 308 },
   { source: "/guides", destination: "/learn", statusCode: 308 },
@@ -82,37 +95,42 @@ const REQUIRED_NOINDEX_HEADERS = [
 ];
 
 const OLD_SITEMAP_URL_PATTERNS = [
-  /^https:\/\/useorigin\.app\/guides(?:\/|$)/,
-  /^https:\/\/useorigin\.app\/docs\/guides(?:\/|$)/,
-  /^https:\/\/useorigin\.app\/learn\/ai-memory-app$/,
+  /^https:\/\/useorigin\.app(?:\/|$)/,
+  /^https:\/\/wenlan\.app\/guides(?:\/|$)/,
+  /^https:\/\/wenlan\.app\/docs\/guides(?:\/|$)/,
+  /^https:\/\/wenlan\.app\/learn\/ai-memory-app$/,
   ...REBRAND_REDIRECTS.map(
-    ({ source }) => new RegExp(`^https://useorigin\\.app${source.replaceAll("/", "\\/")}$`),
+    ({ source }) => new RegExp(`^https://wenlan\\.app${source.replaceAll("/", "\\/")}$`),
   ),
 ];
 
 const REQUIRED_SITEMAP_LOCS = [
-  "https://useorigin.app",
-  "https://useorigin.app/learn",
-  "https://useorigin.app/learn/claude-code-memory",
-  "https://useorigin.app/learn/mcp-memory-server",
-  "https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor",
-  "https://useorigin.app/learn/ai-work-memory",
-  "https://useorigin.app/learn/wenlan-vs-superlocal-memory",
-  "https://useorigin.app/docs/configuration",
+  "https://wenlan.app",
+  "https://wenlan.app/learn",
+  "https://wenlan.app/learn/claude-code-memory",
+  "https://wenlan.app/learn/mcp-memory-server",
+  "https://wenlan.app/learn/how-to-add-mcp-memory-to-cursor",
+  "https://wenlan.app/learn/ai-work-memory",
+  "https://wenlan.app/zh-TW/learn/distilled-wiki-pages-ai-memory",
+  "https://wenlan.app/zh-CN/learn/distilled-wiki-pages-ai-memory",
+  "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",
+  "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work",
+  "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
+  "https://wenlan.app/docs/configuration",
 ];
-const REQUIRED_ROBOTS_SITEMAP = "https://useorigin.app/sitemap.xml";
+const REQUIRED_ROBOTS_SITEMAP = "https://wenlan.app/sitemap.xml";
 
 const REQUIRED_HTML_PAGES = [
-  { path: "index.html", canonical: "https://useorigin.app", type: "SoftwareApplication" },
-  { path: "learn.html", canonical: "https://useorigin.app/learn", type: "CollectionPage" },
+  { path: "index.html", canonical: "https://wenlan.app", type: "SoftwareApplication" },
+  { path: "learn.html", canonical: "https://wenlan.app/learn", type: "CollectionPage" },
   {
     path: "learn/claude-code-memory.html",
-    canonical: "https://useorigin.app/learn/claude-code-memory",
+    canonical: "https://wenlan.app/learn/claude-code-memory",
     type: "Article",
   },
   {
     path: "learn/mcp-memory-server.html",
-    canonical: "https://useorigin.app/learn/mcp-memory-server",
+    canonical: "https://wenlan.app/learn/mcp-memory-server",
     type: "Article",
     requiredLinks: [
       {
@@ -123,22 +141,42 @@ const REQUIRED_HTML_PAGES = [
   },
   {
     path: "learn/how-to-add-mcp-memory-to-cursor.html",
-    canonical: "https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor",
+    canonical: "https://wenlan.app/learn/how-to-add-mcp-memory-to-cursor",
     type: "Article",
   },
   {
     path: "learn/ai-work-memory.html",
-    canonical: "https://useorigin.app/learn/ai-work-memory",
+    canonical: "https://wenlan.app/learn/ai-work-memory",
+    type: "Article",
+  },
+  {
+    path: "zh-TW/learn/distilled-wiki-pages-ai-memory.html",
+    canonical: "https://wenlan.app/zh-TW/learn/distilled-wiki-pages-ai-memory",
+    type: "Article",
+  },
+  {
+    path: "zh-CN/learn/distilled-wiki-pages-ai-memory.html",
+    canonical: "https://wenlan.app/zh-CN/learn/distilled-wiki-pages-ai-memory",
+    type: "Article",
+  },
+  {
+    path: "zh-TW/learn/source-backed-wiki-pages-ai-work.html",
+    canonical: "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",
+    type: "Article",
+  },
+  {
+    path: "zh-CN/learn/source-backed-wiki-pages-ai-work.html",
+    canonical: "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work",
     type: "Article",
   },
   {
     path: "learn/wenlan-vs-superlocal-memory.html",
-    canonical: "https://useorigin.app/learn/wenlan-vs-superlocal-memory",
+    canonical: "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
     type: "Article",
   },
   {
     path: "docs/configuration.html",
-    canonical: "https://useorigin.app/docs/configuration",
+    canonical: "https://wenlan.app/docs/configuration",
     type: "TechArticle",
     requiredLinks: [
       {
@@ -210,7 +248,20 @@ function redirectIndex(redirects, expected) {
     (redirect) =>
       redirect.source === expected.source &&
       redirect.destination === expected.destination &&
-      redirect.statusCode === expected.statusCode,
+      redirect.statusCode === expected.statusCode &&
+      hasMatchingConditions(redirect, expected),
+  );
+}
+
+function hasMatchingConditions(redirect, expected) {
+  if (!expected.has) return true;
+
+  return expected.has.every((expectedCondition) =>
+    redirect.has?.some(
+      (condition) =>
+        condition.type === expectedCondition.type &&
+        condition.value === expectedCondition.value,
+    ),
   );
 }
 

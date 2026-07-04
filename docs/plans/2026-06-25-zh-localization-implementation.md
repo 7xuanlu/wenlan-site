@@ -418,7 +418,7 @@ Create `src/i18n/routing.ts` with this public API:
 ```ts
 import { DEFAULT_LOCALE, LOCALE_CONFIG, type Locale, TRANSLATED_LOCALES } from "./locales";
 
-export const SITE_URL = "https://useorigin.app";
+export const SITE_URL = "https://wenlan.app";
 export const CORE_TRANSLATED_PATHS = ["/", "/about", "/docs", "/docs/get-started"] as const;
 export type CoreTranslatedPath = (typeof CORE_TRANSLATED_PATHS)[number];
 
@@ -1230,22 +1230,22 @@ import { buildPageMetadata } from "../src/i18n/metadata.ts";
 
 test("page metadata uses localized canonical and reciprocal alternates", () => {
   const metadata = buildPageMetadata("zh-TW", "/about", coreContentByLocale["zh-TW"].about.content.meta);
-  assert.equal(metadata.alternates.canonical, "https://useorigin.app/zh-TW/about");
-  assert.equal(metadata.alternates.languages["en-US"], "https://useorigin.app/about");
-  assert.equal(metadata.alternates.languages["zh-TW"], "https://useorigin.app/zh-TW/about");
-  assert.equal(metadata.alternates.languages["zh-CN"], "https://useorigin.app/zh-CN/about");
-  assert.equal(metadata.alternates.languages["x-default"], "https://useorigin.app/about");
+  assert.equal(metadata.alternates.canonical, "https://wenlan.app/zh-TW/about");
+  assert.equal(metadata.alternates.languages["en-US"], "https://wenlan.app/about");
+  assert.equal(metadata.alternates.languages["zh-TW"], "https://wenlan.app/zh-TW/about");
+  assert.equal(metadata.alternates.languages["zh-CN"], "https://wenlan.app/zh-CN/about");
+  assert.equal(metadata.alternates.languages["x-default"], "https://wenlan.app/about");
   assert.equal(metadata.openGraph.locale, "zh_TW");
 });
 
 test("sitemap includes translated alternates only for translated pages", () => {
   const urls = sitemap().map((entry) => entry.url).sort();
-  assert.ok(urls.includes("https://useorigin.app/zh-TW"));
-  assert.ok(urls.includes("https://useorigin.app/zh-CN/docs/get-started"));
-  assert.equal(urls.includes("https://useorigin.app/zh-TW/learn"), false);
-  assert.equal(urls.includes("https://useorigin.app/zh-CN/docs/daily-workflow"), false);
-  const about = sitemap().find((entry) => entry.url === "https://useorigin.app/about");
-  assert.equal(about.alternates.languages["x-default"], "https://useorigin.app/about");
+  assert.ok(urls.includes("https://wenlan.app/zh-TW"));
+  assert.ok(urls.includes("https://wenlan.app/zh-CN/docs/get-started"));
+  assert.equal(urls.includes("https://wenlan.app/zh-TW/learn"), false);
+  assert.equal(urls.includes("https://wenlan.app/zh-CN/docs/daily-workflow"), false);
+  const about = sitemap().find((entry) => entry.url === "https://wenlan.app/about");
+  assert.equal(about.alternates.languages["x-default"], "https://wenlan.app/about");
 });
 ```
 
@@ -1282,7 +1282,7 @@ export function buildPageMetadata(
 ): Metadata {
   const url = canonicalUrl(locale, pathname);
   return {
-    metadataBase: new URL("https://useorigin.app"),
+    metadataBase: new URL("https://wenlan.app"),
     title: copy.title,
     description: copy.description,
     alternates: {
