@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/7xuanlu/wenlan-site#readme",
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "geist": "^1.7.0",
     "next": "^16.2.1",
     "next-intl": "^4.13.0",

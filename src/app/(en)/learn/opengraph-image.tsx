@@ -13,7 +13,7 @@ export default async function Image() {
         title="Wenlan AI work memory guides."
         description="Guides for Claude Code memory, MCP memory servers, Cursor/Codex workflows, local AI work context, setup, trust, and comparisons."
         footerLeft={[
-          "useorigin.app/learn",
+          "wenlan.app/learn",
           "Living personal knowledge library",
         ]}
         footerRight="by Qi-Xuan Lu"

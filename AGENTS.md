@@ -4,7 +4,7 @@ Guidance for coding agents working in this repository.
 
 ## Project
 
-Wenlan public website and SEO/GEO surface, built with Next.js 16 App Router, React 19, and Tailwind CSS 4. The product is Wenlan, but the current deployed public property is still https://useorigin.app until the public domain changes.
+Wenlan public website and SEO/GEO surface, built with Next.js 16 App Router, React 19, and Tailwind CSS 4. The product is Wenlan, and the canonical public site is https://wenlan.app.
 
 The site is deployed on Vercel. Do not push, deploy, submit Search Console validations, or post externally unless the user explicitly asks.
 
@@ -40,7 +40,7 @@ The SEO tests read the sibling Wenlan repo for current release data. If this che
 
 ## Product And SEO Rules
 
-- Use Wenlan as the product name. Keep `useorigin.app` for the deployed site URL until the public domain changes.
+- Use Wenlan as the product name. `useorigin.app` and `www.useorigin.app` are legacy redirect bridge hosts for migrating users and search queries into `wenlan.app`.
 - Search Console is the canonical source for query/page performance. Do not invent GSC, indexing, or Umami metrics.
 - Prefer refreshing indexed pages with impressions before creating net-new Learn content.
 - Keep visible FAQ text where useful, but do not add `FAQPage` JSON-LD unless Google eligibility changes for ordinary software sites.

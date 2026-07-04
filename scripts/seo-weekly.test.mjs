@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFile } from "node:child_process";
+import { createServer } from "node:http";
 import { promisify } from "node:util";
 import test from "node:test";
 
@@ -70,7 +71,20 @@ const rebrandRedirectPairs = [
   ["/learn/origin-vs-notion-ai", "/learn/wenlan-vs-notion-ai"],
   ["/learn/origin-vs-mem0", "/learn/wenlan-vs-mem0"],
 ];
+const canonicalOrigin = "https://wenlan.app";
+const bridgeHosts = [
+  "www.wenlan.app",
+  "useorigin.app",
+  "www.useorigin.app",
+];
+const requiredBuiltBridgeRedirects = bridgeHosts.map((host) => ({
+  source: "/:path*",
+  destination: `${canonicalOrigin}/:path*`,
+  statusCode: 308,
+  has: [{ type: "host", value: host }],
+}));
 const requiredBuiltRedirects = [
+  ...requiredBuiltBridgeRedirects,
   ...rebrandRedirectPairs.map(([source, destination]) => ({
     source,
     destination,
@@ -110,27 +124,42 @@ const requiredBuiltHeaders = [
     headers: [{ key: "X-Robots-Tag", value: "noindex" }],
   },
 ];
+const requiredLocalizedLearnPaths = [
+  "/zh-TW/learn/distilled-wiki-pages-ai-memory",
+  "/zh-CN/learn/distilled-wiki-pages-ai-memory",
+  "/zh-TW/learn/source-backed-wiki-pages-ai-work",
+  "/zh-CN/learn/source-backed-wiki-pages-ai-work",
+];
+const requiredLocalizedLearnLocs = requiredLocalizedLearnPaths.map(
+  (path) => `https://wenlan.app${path}`,
+);
+const requiredLocalizedBuiltHtmlPages = requiredLocalizedLearnPaths.map((path) => ({
+  path: `${path.slice(1)}.html`,
+  canonical: `https://wenlan.app${path}`,
+  type: "Article",
+}));
 const requiredBuiltSitemapLocs = [
-  "https://useorigin.app",
-  "https://useorigin.app/learn",
-  "https://useorigin.app/learn/claude-code-memory",
-  "https://useorigin.app/learn/mcp-memory-server",
-  "https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor",
-  "https://useorigin.app/learn/ai-work-memory",
-  "https://useorigin.app/learn/wenlan-vs-superlocal-memory",
-  "https://useorigin.app/docs/configuration",
+  "https://wenlan.app",
+  "https://wenlan.app/learn",
+  "https://wenlan.app/learn/claude-code-memory",
+  "https://wenlan.app/learn/mcp-memory-server",
+  "https://wenlan.app/learn/how-to-add-mcp-memory-to-cursor",
+  "https://wenlan.app/learn/ai-work-memory",
+  "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
+  ...requiredLocalizedLearnLocs,
+  "https://wenlan.app/docs/configuration",
 ];
 const requiredBuiltHtmlPages = [
-  { path: "index.html", canonical: "https://useorigin.app", type: "SoftwareApplication" },
-  { path: "learn.html", canonical: "https://useorigin.app/learn", type: "CollectionPage" },
+  { path: "index.html", canonical: "https://wenlan.app", type: "SoftwareApplication" },
+  { path: "learn.html", canonical: "https://wenlan.app/learn", type: "CollectionPage" },
   {
     path: "learn/claude-code-memory.html",
-    canonical: "https://useorigin.app/learn/claude-code-memory",
+    canonical: "https://wenlan.app/learn/claude-code-memory",
     type: "Article",
   },
   {
     path: "learn/mcp-memory-server.html",
-    canonical: "https://useorigin.app/learn/mcp-memory-server",
+    canonical: "https://wenlan.app/learn/mcp-memory-server",
     type: "Article",
     requiredLinks: [
       {
@@ -141,22 +170,23 @@ const requiredBuiltHtmlPages = [
   },
   {
     path: "learn/how-to-add-mcp-memory-to-cursor.html",
-    canonical: "https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor",
+    canonical: "https://wenlan.app/learn/how-to-add-mcp-memory-to-cursor",
     type: "Article",
   },
   {
     path: "learn/ai-work-memory.html",
-    canonical: "https://useorigin.app/learn/ai-work-memory",
+    canonical: "https://wenlan.app/learn/ai-work-memory",
     type: "Article",
   },
   {
     path: "learn/wenlan-vs-superlocal-memory.html",
-    canonical: "https://useorigin.app/learn/wenlan-vs-superlocal-memory",
+    canonical: "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
     type: "Article",
   },
+  ...requiredLocalizedBuiltHtmlPages,
   {
     path: "docs/configuration.html",
-    canonical: "https://useorigin.app/docs/configuration",
+    canonical: "https://wenlan.app/docs/configuration",
     type: "TechArticle",
     requiredLinks: [
       {
@@ -166,7 +196,7 @@ const requiredBuiltHtmlPages = [
     ],
   },
 ];
-const allowedRobotsTxt = "User-agent: *\nAllow: /\nSitemap: https://useorigin.app/sitemap.xml\n";
+const allowedRobotsTxt = "User-agent: *\nAllow: /\nSitemap: https://wenlan.app/sitemap.xml\n";
 const requiredDeployedUrls = [
   "/",
   "/learn",
@@ -175,6 +205,7 @@ const requiredDeployedUrls = [
   "/learn/how-to-add-mcp-memory-to-cursor",
   "/learn/ai-work-memory",
   "/learn/wenlan-vs-superlocal-memory",
+  ...requiredLocalizedLearnPaths,
   "/docs/configuration",
 ];
 const requiredDeployedUtilityUrls = [
@@ -225,7 +256,7 @@ function builtHtmlPage(page, overrides = {}) {
 function deployedHtmlPage(path, overrides = {}) {
   const canonical =
     overrides.canonical ??
-    `https://useorigin.app${path === "/" ? "" : path}`;
+    `https://wenlan.app${path === "/" ? "" : path}`;
   const robots = overrides.robots ?? "index, follow";
   const type =
     overrides.type ??
@@ -262,7 +293,7 @@ function deployedHtmlPage(path, overrides = {}) {
 function deployedSitemap(overrides = {}) {
   const locs =
     overrides.locs ??
-    requiredDeployedUrls.map((path) => `https://useorigin.app${path === "/" ? "" : path}`);
+    requiredDeployedUrls.map((path) => `https://wenlan.app${path === "/" ? "" : path}`);
 
   return ["<urlset>", ...locs.map((loc) => `<url><loc>${loc}</loc></url>`), "</urlset>"].join(
     "",
@@ -280,6 +311,20 @@ async function withDeployedFixture(overrides, callback) {
       body: "",
     };
   }
+
+  for (const host of bridgeHosts) {
+    responses[`${host}/`] = {
+      status: 308,
+      headers: { location: `${canonicalOrigin}/` },
+      body: "",
+    };
+    responses[`${host}/learn`] = {
+      status: 308,
+      headers: { location: `${canonicalOrigin}/learn` },
+      body: "",
+    };
+  }
+  Object.assign(responses, overrides.bridgeResponses ?? {});
 
   responses["/robots.txt"] = {
     status: 200,
@@ -448,7 +493,7 @@ test("GSC API fetcher normalizes search analytics fixture rows into weekly CSVs"
       JSON.stringify({
         rows: [
           {
-            keys: ["https://useorigin.app/learn/claude-code-memory"],
+            keys: ["https://wenlan.app/learn/claude-code-memory"],
             clicks: 0,
             impressions: 37,
             ctr: 0,
@@ -460,7 +505,7 @@ test("GSC API fetcher normalizes search analytics fixture rows into weekly CSVs"
     );
     await writeFile(
       join(fixtureDir, "sitemaps.json"),
-      JSON.stringify({ sitemap: [{ path: "https://useorigin.app/sitemap.xml" }] }),
+      JSON.stringify({ sitemap: [{ path: "https://wenlan.app/sitemap.xml" }] }),
       "utf8",
     );
 
@@ -499,9 +544,9 @@ test("GSC API fetcher normalizes search analytics fixture rows into weekly CSVs"
     );
     assert.match(
       pagesCsv,
-      /https:\/\/useorigin\.app\/learn\/claude-code-memory,0,37,0\.00%,33\.1,2026-05-25,2026-06-21,Search Console API fixture/,
+      /https:\/\/wenlan\.app\/learn\/claude-code-memory,0,37,0\.00%,33\.1,2026-05-25,2026-06-21,Search Console API fixture/,
     );
-    assert.equal(metadata.siteUrl, "sc-domain:useorigin.app");
+    assert.equal(metadata.siteUrl, "sc-domain:wenlan.app");
     assert.equal(metadata.source, "Search Console API fixture");
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
@@ -534,7 +579,7 @@ test("GSC API fetcher derives the last 28 complete days from report date", async
       JSON.stringify({
         rows: [
           {
-            keys: ["https://useorigin.app/learn/claude-code-memory"],
+            keys: ["https://wenlan.app/learn/claude-code-memory"],
             clicks: 0,
             impressions: 37,
             ctr: 0,
@@ -626,6 +671,68 @@ test("GSC API fetcher requires an access token outside fixture mode", async () =
       /Missing GSC_ACCESS_TOKEN/,
     );
   } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("GSC API fetcher sends configured quota project header", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-gsc-fetch-quota-"));
+  const requests = [];
+  const server = createServer((request, response) => {
+    let body = "";
+    request.setEncoding("utf8");
+    request.on("data", (chunk) => {
+      body += chunk;
+    });
+    request.on("end", () => {
+      requests.push({
+        method: request.method,
+        url: request.url,
+        authorization: request.headers.authorization,
+        quotaProject: request.headers["x-goog-user-project"],
+        body,
+      });
+      response.writeHead(200, { "content-type": "application/json" });
+      if (request.url?.endsWith("/sitemaps")) {
+        response.end(JSON.stringify({ sitemap: [{ path: "https://wenlan.app/sitemap.xml" }] }));
+        return;
+      }
+      response.end(JSON.stringify({ rows: [] }));
+    });
+  });
+
+  try {
+    await new Promise((resolveServer) => server.listen(0, "127.0.0.1", resolveServer));
+    const { port } = server.address();
+
+    await execFileAsync(
+      process.execPath,
+      [
+        gscFetchScript,
+        "--",
+        "--date",
+        "2026-07-03",
+        "--output-dir",
+        outputRoot,
+      ],
+      {
+        cwd: repoRoot,
+        env: {
+          ...process.env,
+          GSC_ACCESS_TOKEN: "test-token",
+          GSC_QUOTA_PROJECT: "wenlan-500502",
+          GSC_API_BASE_URL: `http://127.0.0.1:${port}/webmasters/v3`,
+        },
+      },
+    );
+
+    assert.equal(requests.length, 3);
+    for (const request of requests) {
+      assert.equal(request.authorization, "Bearer test-token");
+      assert.equal(request.quotaProject, "wenlan-500502");
+    }
+  } finally {
+    await new Promise((resolveServer) => server.close(resolveServer));
     await rm(outputRoot, { recursive: true, force: true });
   }
 });
@@ -835,7 +942,7 @@ test("AI visibility worksheet generator rejects non-contiguous prompt numbering"
   }
 });
 
-test("AI visibility worksheet generator reads the current 24-prompt measurement list", async () => {
+test("AI visibility worksheet generator reads the current 28-prompt measurement list", async () => {
   const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-ai-visibility-current-"));
   try {
     const outputPath = join(outputRoot, "ai-visibility.md");
@@ -858,10 +965,10 @@ test("AI visibility worksheet generator reads the current 24-prompt measurement 
       .split("\n")
       .filter((line) => /^\| \d+ \|/.test(line));
 
-    assert.equal(rows.length, 96);
+    assert.equal(rows.length, 112);
     assert.match(worksheet, /Generated from `docs\/seo-measurement\.md`\./);
     assert.doesNotMatch(worksheet, new RegExp(repoRoot.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-    assert.match(worksheet, /\| 24 \| What should I capture in AI work memory\? \| Perplexity \|/);
+    assert.match(worksheet, /\| 28 \| What should I capture in AI work memory\? \| Perplexity \|/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }
@@ -890,18 +997,47 @@ test("deployed technical SEO checker verifies robots, sitemap, key pages, utilit
     );
 
     assert.match(stdout, /robots ok/);
-    assert.match(stdout, /sitemap locs ok: 8/);
-    assert.match(stdout, /key pages ok: 8/);
+    assert.match(stdout, /sitemap locs ok: 12/);
+    assert.match(stdout, /key pages ok: 12/);
     assert.match(stdout, /utility noindex headers ok: 4/);
     assert.match(stdout, /redirects ok: 25/);
+    assert.match(stdout, /bridge host redirects ok: 6/);
     assert.match(stdout, /old URLs absent from sitemap/);
   });
+});
+
+test("deployed technical SEO checker accepts www.useorigin.app bridge through apex", async () => {
+  await withDeployedFixture(
+    {
+      bridgeResponses: {
+        "www.useorigin.app/": {
+          status: 301,
+          headers: { location: "https://useorigin.app/" },
+          body: "",
+        },
+        "www.useorigin.app/learn": {
+          status: 301,
+          headers: { location: "https://useorigin.app/learn" },
+          body: "",
+        },
+      },
+    },
+    async (fixtureDir) => {
+      const { stdout } = await execFileAsync(
+        process.execPath,
+        [deployedCheckerScript, "--", "--fixture-dir", fixtureDir],
+        { cwd: repoRoot },
+      );
+
+      assert.match(stdout, /bridge host redirects ok: 6/);
+    },
+  );
 });
 
 test("deployed technical SEO checker rejects robots.txt that disallows crawlers", async () => {
   await withDeployedFixture(
     {
-      robotsTxt: "User-agent: *\nDisallow: /\nSitemap: https://useorigin.app/sitemap.xml\n",
+      robotsTxt: "User-agent: *\nDisallow: /\nSitemap: https://wenlan.app/sitemap.xml\n",
     },
     async (fixtureDir) => {
       await assert.rejects(
@@ -953,7 +1089,7 @@ test("deployed technical SEO checker does not require unshipped local internal l
         { cwd: repoRoot },
       );
 
-      assert.match(stdout, /key pages ok: 8/);
+      assert.match(stdout, /key pages ok: 12/);
     },
   );
 });
@@ -962,15 +1098,8 @@ test("deployed technical SEO checker rejects old guide URLs in the sitemap", asy
   await withDeployedFixture(
     {
       locs: [
-        "https://useorigin.app",
-        "https://useorigin.app/learn",
-        "https://useorigin.app/learn/claude-code-memory",
-        "https://useorigin.app/learn/mcp-memory-server",
-        "https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor",
-        "https://useorigin.app/learn/ai-work-memory",
-        "https://useorigin.app/learn/wenlan-vs-superlocal-memory",
-        "https://useorigin.app/docs/configuration",
-        "https://useorigin.app/guides/claude-code-memory",
+        ...requiredBuiltSitemapLocs,
+        "https://wenlan.app/guides/claude-code-memory",
       ],
     },
     async (fixtureDir) => {
@@ -980,7 +1109,7 @@ test("deployed technical SEO checker rejects old guide URLs in the sitemap", asy
           [deployedCheckerScript, "--", "--fixture-dir", fixtureDir],
           { cwd: repoRoot },
         ),
-        /old sitemap URLs present: https:\/\/useorigin\.app\/guides\/claude-code-memory/,
+        /old sitemap URLs present: https:\/\/wenlan\.app\/guides\/claude-code-memory/,
       );
     },
   );
@@ -988,22 +1117,15 @@ test("deployed technical SEO checker rejects old guide URLs in the sitemap", asy
 
 test("deployed technical SEO checker rejects docs guide URLs and legacy learn URLs in the sitemap", async () => {
   const oldUrlCases = [
-    "https://useorigin.app/docs/guides/claude-code-memory",
-    "https://useorigin.app/learn/ai-memory-app",
+    "https://wenlan.app/docs/guides/claude-code-memory",
+    "https://wenlan.app/learn/ai-memory-app",
   ];
 
   for (const oldUrl of oldUrlCases) {
     await withDeployedFixture(
       {
         locs: [
-          "https://useorigin.app",
-          "https://useorigin.app/learn",
-          "https://useorigin.app/learn/claude-code-memory",
-          "https://useorigin.app/learn/mcp-memory-server",
-          "https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor",
-          "https://useorigin.app/learn/ai-work-memory",
-          "https://useorigin.app/learn/wenlan-vs-superlocal-memory",
-          "https://useorigin.app/docs/configuration",
+          ...requiredBuiltSitemapLocs,
           oldUrl,
         ],
       },
@@ -1213,12 +1335,12 @@ test("built technical SEO checker verifies compiled redirects, headers, and site
       { cwd: repoRoot },
     );
 
-    assert.match(stdout, /redirects ok: 23/);
+    assert.match(stdout, /redirects ok: 26/);
     assert.match(stdout, /global 404 ok/);
     assert.match(stdout, /noindex headers ok: 5/);
-    assert.match(stdout, /sitemap required locs ok: 8/);
-    assert.match(stdout, /html page checks ok: 8/);
-    assert.match(stdout, /all html FAQPage absent ok: 9/);
+    assert.match(stdout, /sitemap required locs ok: 12/);
+    assert.match(stdout, /html page checks ok: 12/);
+    assert.match(stdout, /all html FAQPage absent ok: 13/);
     assert.match(stdout, /old URLs absent from sitemap/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
@@ -1229,7 +1351,7 @@ test("built technical SEO checker rejects robots.txt output that disallows crawl
   const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-built-robots-"));
   try {
     const buildDir = await writeBuiltSeoFixture(outputRoot, {
-      robotsTxt: "User-agent: *\nDisallow: /\nSitemap: https://useorigin.app/sitemap.xml\n",
+      robotsTxt: "User-agent: *\nDisallow: /\nSitemap: https://wenlan.app/sitemap.xml\n",
     });
 
     await assert.rejects(
@@ -1321,6 +1443,7 @@ test("built technical SEO checker rejects generic guide redirects before specifi
   const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-built-order-"));
   try {
     const redirects = [
+      ...requiredBuiltBridgeRedirects,
       ...rebrandRedirectPairs.map(([source, destination]) => ({
         source,
         destination,
@@ -1378,7 +1501,7 @@ test("built technical SEO checker rejects empty or incomplete sitemaps", async (
   const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-built-sitemap-"));
   try {
     const buildDir = await writeBuiltSeoFixture(outputRoot, {
-      locs: ["https://useorigin.app"],
+      locs: ["https://wenlan.app"],
     });
 
     await assert.rejects(
@@ -1400,7 +1523,7 @@ test("built technical SEO checker rejects key pages with wrong canonical URLs", 
     const buildDir = await writeBuiltSeoFixture(outputRoot, {
       htmlPages: {
         "learn/claude-code-memory.html": {
-          canonical: "https://useorigin.app/learn/wrong",
+          canonical: "https://wenlan.app/learn/wrong",
         },
       },
     });
@@ -1453,7 +1576,7 @@ test("built technical SEO checker rejects FAQPage JSON-LD on any built HTML page
       uncheckedHtmlPath,
       [
         "<!DOCTYPE html><html><head>",
-        '<link rel="canonical" href="https://useorigin.app/docs/faq"/>',
+        '<link rel="canonical" href="https://wenlan.app/docs/faq"/>',
         '<meta name="robots" content="index, follow"/>',
         '<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage"}</script>',
         "</head><body>faq</body></html>",
@@ -1561,7 +1684,7 @@ test("built technical SEO checker rejects duplicate conflicting canonical and ro
       htmlPages: {
         "learn/mcp-memory-server.html": {
           extraHead:
-            '<link rel="canonical" href="https://useorigin.app/learn/wrong"/><meta name="robots" content="noindex, nofollow"/>',
+            '<link rel="canonical" href="https://wenlan.app/learn/wrong"/><meta name="robots" content="noindex, nofollow"/>',
         },
       },
     });
@@ -1751,9 +1874,10 @@ test("seo weekly pipeline trigger runs from a standard input directory", async (
   }
 });
 
-test("seo weekly pipeline defaults to the Wenlan temporary input directory", async () => {
+test("seo weekly pipeline uses the configured temporary input directory", async () => {
   const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-pipeline-default-"));
   try {
+    const missingInputDir = join(outputRoot, "missing-input");
     await assert.rejects(
       execFileAsync(
         process.execPath,
@@ -1767,10 +1891,10 @@ test("seo weekly pipeline defaults to the Wenlan temporary input directory", asy
         ],
         {
           cwd: repoRoot,
-          env: { ...process.env, SEO_WEEKLY_INPUT_DIR: "" },
+          env: { ...process.env, SEO_WEEKLY_INPUT_DIR: missingInputDir },
         },
       ),
-      /\/tmp\/wenlan-seo\/gsc-queries\.csv/,
+      new RegExp(`${missingInputDir.replaceAll("/", "\\/")}\\/gsc-queries\\.csv`),
     );
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
@@ -2175,6 +2299,76 @@ test("seo weekly pipeline trigger auto-detects optional Umami CSV exports", asyn
   }
 });
 
+test("seo weekly pipeline accepts empty GSC API exports with metadata", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-pipeline-empty-api-"));
+  try {
+    const inputDir = join(outputRoot, "input");
+    const outputPath = join(outputRoot, "2026-07-03-weekly-seo.md");
+    await mkdir(inputDir, { recursive: true });
+    await writeFile(
+      join(inputDir, "gsc-queries.csv"),
+      "Query,Clicks,Impressions,CTR,Position,Start date,End date,Source\n",
+      "utf8",
+    );
+    await writeFile(
+      join(inputDir, "gsc-pages.csv"),
+      "Page,Clicks,Impressions,CTR,Position,Start date,End date,Source\n",
+      "utf8",
+    );
+    await writeFile(
+      join(inputDir, "gsc-metadata.json"),
+      JSON.stringify(
+        {
+          siteUrl: "sc-domain:wenlan.app",
+          startDate: "2026-06-05",
+          endDate: "2026-07-02",
+          source: "Search Console API",
+          queryRows: 0,
+          pageRows: 0,
+          sitemaps: {
+            sitemap: [
+              {
+                path: "https://wenlan.app/sitemap.xml",
+                warnings: "0",
+                errors: "0",
+              },
+            ],
+          },
+        },
+        null,
+        2,
+      ),
+      "utf8",
+    );
+
+    await execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs"),
+        "--",
+        "--input-dir",
+        inputDir,
+        "--date",
+        "2026-07-03",
+        "--output",
+        outputPath,
+      ],
+      { cwd: repoRoot },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+
+    assert.match(report, /Generated from Search Console API/);
+    assert.match(report, /\| Date range \| 2026-06-05 to 2026-07-02 \|/);
+    assert.match(report, /\| GSC data source \| Search Console API \|/);
+    assert.match(report, /\| Query table clicks \| 0 \|/);
+    assert.match(report, /\| Query table impressions \| 0 \|/);
+    assert.match(report, /\| Top page \| - \|/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
 test("seo weekly generator reports CSV evidence source and date range when available", async () => {
   const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-metadata-"));
   try {
@@ -2196,7 +2390,7 @@ test("seo weekly generator reports CSV evidence source and date range when avail
       pagesPath,
       [
         "Page,Clicks,Impressions,CTR,Position,Start date,End date,Source",
-        `https://useorigin.app/learn,0,54,0%,4.2,2026-05-15,2026-06-11,${source}`,
+        `https://wenlan.app/learn,0,54,0%,4.2,2026-05-15,2026-06-11,${source}`,
       ].join("\n"),
       "utf8",
     );
@@ -2247,7 +2441,7 @@ test("seo weekly generator rejects mismatched GSC query and page date ranges", a
       pagesPath,
       [
         "Page,Clicks,Impressions,CTR,Position,Start date,End date,Source",
-        "https://useorigin.app/learn,0,54,0%,4.2,2026-05-01,2026-05-28,normalized GSC export",
+        "https://wenlan.app/learn,0,54,0%,4.2,2026-05-01,2026-05-28,normalized GSC export",
       ].join("\n"),
       "utf8",
     );
@@ -2295,7 +2489,7 @@ test("seo weekly generator rejects one-sided GSC date metadata", async () => {
       pagesPath,
       [
         "Page,Clicks,Impressions,CTR,Position,Source",
-        "https://useorigin.app/learn,0,54,0%,4.2,normalized GSC export",
+        "https://wenlan.app/learn,0,54,0%,4.2,normalized GSC export",
       ].join("\n"),
       "utf8",
     );
@@ -2343,7 +2537,7 @@ test("seo weekly generator rejects mismatched GSC source metadata", async () => 
       pagesPath,
       [
         "Page,Clicks,Impressions,CTR,Position,Start date,End date,Source",
-        "https://useorigin.app/learn,0,54,0%,4.2,2026-05-15,2026-06-11,visible UI copy",
+        "https://wenlan.app/learn,0,54,0%,4.2,2026-05-15,2026-06-11,visible UI copy",
       ].join("\n"),
       "utf8",
     );
@@ -2391,7 +2585,7 @@ test("seo weekly generator rejects one-sided GSC source metadata", async () => {
       pagesPath,
       [
         "Page,Clicks,Impressions,CTR,Position,Start date,End date",
-        "https://useorigin.app/learn,0,54,0%,4.2,2026-05-15,2026-06-11",
+        "https://wenlan.app/learn,0,54,0%,4.2,2026-05-15,2026-06-11",
       ].join("\n"),
       "utf8",
     );
@@ -2425,7 +2619,7 @@ test("seo weekly generator rejects partial and mixed GSC metadata within one exp
   try {
     const pagesCsv = [
       "Page,Clicks,Impressions,CTR,Position,Start date,End date,Source",
-      "https://useorigin.app/learn,0,54,0%,4.2,2026-05-15,2026-06-11,normalized GSC export",
+      "https://wenlan.app/learn,0,54,0%,4.2,2026-05-15,2026-06-11,normalized GSC export",
     ].join("\n");
 
     const cases = [
@@ -2511,7 +2705,7 @@ test("seo weekly generator rejects malformed GSC metric cells", async () => {
     ].join("\n");
     const validPages = [
       "Page,Clicks,Impressions,CTR,Position",
-      "https://useorigin.app/learn,0,54,0%,4.2",
+      "https://wenlan.app/learn,0,54,0%,4.2",
       "",
     ].join("\n");
     const cases = [
@@ -2536,13 +2730,13 @@ test("seo weekly generator rejects malformed GSC metric cells", async () => {
       {
         name: "page-clicks-negative",
         queries: validQueries,
-        pages: ["Page,Clicks,Impressions,CTR,Position", "https://useorigin.app/learn,-1,54,0%,4.2", ""].join("\n"),
+        pages: ["Page,Clicks,Impressions,CTR,Position", "https://wenlan.app/learn,-1,54,0%,4.2", ""].join("\n"),
         error: /Invalid GSC pages clicks metric "-1"/,
       },
       {
         name: "page-position-negative",
         queries: validQueries,
-        pages: ["Page,Clicks,Impressions,CTR,Position", "https://useorigin.app/learn,0,54,0%,-4.2", ""].join("\n"),
+        pages: ["Page,Clicks,Impressions,CTR,Position", "https://wenlan.app/learn,0,54,0%,-4.2", ""].join("\n"),
         error: /Invalid GSC pages position metric "-4.2"/,
       },
     ];
@@ -2592,7 +2786,7 @@ test("seo weekly generator rejects empty GSC exports", async () => {
     ].join("\n");
     const validPages = [
       "Page,Clicks,Impressions,CTR,Position",
-      "https://useorigin.app/learn,0,54,0%,4.2",
+      "https://wenlan.app/learn,0,54,0%,4.2",
       "",
     ].join("\n");
     const cases = [
@@ -2859,7 +3053,7 @@ test("seo weekly generator drops preserved manual sections when evidence metadat
       pagesPath,
       [
         "Page,Clicks,Impressions,CTR,Position,Start date,End date,Source",
-        "https://useorigin.app/learn,0,54,0%,4.2,2026-05-15,2026-06-11,fresh full GSC CSV export",
+        "https://wenlan.app/learn,0,54,0%,4.2,2026-05-15,2026-06-11,fresh full GSC CSV export",
       ].join("\n"),
       "utf8",
     );
@@ -2935,7 +3129,7 @@ test("seo weekly generator maps Superlocal queries to the Superlocal comparison 
       pagesPath,
       [
         "Page,Clicks,Impressions,CTR,Position",
-        "https://useorigin.app/learn/wenlan-vs-superlocal-memory,0,3,0%,9.0",
+        "https://wenlan.app/learn/wenlan-vs-superlocal-memory,0,3,0%,9.0",
         "",
       ].join("\n"),
       "utf8",
@@ -2996,8 +3190,8 @@ test("seo weekly generator treats guide root URLs as redirect technical checks",
       pagesPath,
       [
         "Page,Clicks,Impressions,CTR,Position",
-        "https://useorigin.app/guides,0,7,0%,12.0",
-        "https://useorigin.app/docs/guides,0,2,0%,14.0",
+        "https://wenlan.app/guides,0,7,0%,12.0",
+        "https://wenlan.app/docs/guides,0,2,0%,14.0",
         "",
       ].join("\n"),
       "utf8",
@@ -3052,7 +3246,7 @@ test("seo weekly generator flags strong-rank no-click Learn hub pages for SERP c
       pagesPath,
       [
         "Page,Clicks,Impressions,CTR,Position",
-        "https://useorigin.app/learn,0,54,0%,4.2",
+        "https://wenlan.app/learn,0,54,0%,4.2",
         "",
       ].join("\n"),
       "utf8",
@@ -3106,7 +3300,7 @@ test("seo weekly generator flags high-impression weak-rank Learn pages for inter
       pagesPath,
       [
         "Page,Clicks,Impressions,CTR,Position",
-        "https://useorigin.app/learn/claude-code-memory,0,37,0%,33.1",
+        "https://wenlan.app/learn/claude-code-memory,0,37,0%,33.1",
         "",
       ].join("\n"),
       "utf8",
@@ -3170,9 +3364,9 @@ test("seo weekly generator maps existing AI memory app and filtered brand querie
       pagesPath,
       [
         "Page,Clicks,Impressions,CTR,Position",
-        "https://useorigin.app/learn/ai-work-memory,0,1,0%,98.0",
-        "https://useorigin.app/,0,19,0%,1.7",
-        "https://useorigin.app/,1,3,33.3%,4.0",
+        "https://wenlan.app/learn/ai-work-memory,0,1,0%,98.0",
+        "https://wenlan.app/,0,19,0%,1.7",
+        "https://wenlan.app/,1,3,33.3%,4.0",
         "",
       ].join("\n"),
       "utf8",
@@ -3255,7 +3449,7 @@ test("refreshed SEO pages preserve original publication dates", async () => {
 
   assert.match(
     learnArticles,
-    /slug: "wenlan-vs-superlocal-memory"[\s\S]*publishedAt: "2026-05-27",[\s\S]*updatedAt: "2026-06-24"/,
+    /slug: "wenlan-vs-superlocal-memory"[\s\S]*publishedAt: "2026-05-27",[\s\S]*updatedAt: "2026-07-02"/,
   );
   assert.match(
     docs,

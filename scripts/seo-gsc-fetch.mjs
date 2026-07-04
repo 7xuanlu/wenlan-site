@@ -3,9 +3,10 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 
-const DEFAULT_SITE_URL = "sc-domain:useorigin.app";
+const DEFAULT_SITE_URL = "sc-domain:wenlan.app";
 const DEFAULT_OUTPUT_DIR = "/tmp/wenlan-seo";
 const DEFAULT_SOURCE = "Search Console API";
+const DEFAULT_API_BASE_URL = "https://searchconsole.googleapis.com/webmasters/v3";
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 function assertIsoDate(value, label) {
@@ -75,7 +76,30 @@ function parseArgs(argv) {
     ),
     fixtureDir,
     source: fixtureDir ? `${DEFAULT_SOURCE} fixture` : DEFAULT_SOURCE,
+    apiBaseUrl: (process.env.GSC_API_BASE_URL || DEFAULT_API_BASE_URL).replace(/\/+$/, ""),
   };
+}
+
+async function adcQuotaProject() {
+  const credentialsPath =
+    process.env.GOOGLE_APPLICATION_CREDENTIALS ||
+    (process.env.HOME
+      ? join(process.env.HOME, ".config", "gcloud", "application_default_credentials.json")
+      : null);
+  if (!credentialsPath) return null;
+
+  try {
+    const credentials = JSON.parse(await readFile(credentialsPath, "utf8"));
+    return credentials.quota_project_id || null;
+  } catch {
+    return null;
+  }
+}
+
+async function configuredQuotaProject() {
+  return process.env.GSC_QUOTA_PROJECT ||
+    process.env.GOOGLE_CLOUD_QUOTA_PROJECT ||
+    await adcQuotaProject();
 }
 
 function csvEscape(value) {
@@ -128,15 +152,17 @@ async function readFixture(fixtureDir, name) {
   return JSON.parse(await readFile(join(fixtureDir, `${name}.json`), "utf8"));
 }
 
-async function gscRequest({ token, path, options = {} }) {
+async function gscRequest({ token, path, apiBaseUrl, quotaProject, options = {} }) {
+  const quotaHeaders = quotaProject ? { "x-goog-user-project": quotaProject } : {};
   const response = await fetch(
-    `https://searchconsole.googleapis.com/webmasters/v3/${path}`,
+    `${apiBaseUrl}/${path}`,
     {
       ...options,
       headers: {
         authorization: `Bearer ${token}`,
         accept: "application/json",
         "content-type": "application/json",
+        ...quotaHeaders,
         ...(options.headers ?? {}),
       },
     },
@@ -146,15 +172,33 @@ async function gscRequest({ token, path, options = {} }) {
     const scopeHint = text.includes("ACCESS_TOKEN_SCOPE_INSUFFICIENT")
       ? " Active token lacks Search Console scope; reauthorize with https://www.googleapis.com/auth/webmasters.readonly."
       : "";
-    throw new Error(`GSC API ${response.status} ${response.statusText}: ${text}${scopeHint}`);
+    const quotaHint = text.includes("requires a quota project")
+      ? " Set GSC_QUOTA_PROJECT or use gcloud auth application-default login so ADC has quota_project_id."
+      : "";
+    const serviceHint = text.includes("SERVICE_DISABLED")
+      ? " Enable the Search Console API for the configured quota project, then retry after propagation."
+      : "";
+    throw new Error(
+      `GSC API ${response.status} ${response.statusText}: ${text}${scopeHint}${quotaHint}${serviceHint}`,
+    );
   }
   return text ? JSON.parse(text) : {};
 }
 
-async function searchAnalytics({ token, siteUrl, startDate, endDate, dimension }) {
+async function searchAnalytics({
+  token,
+  siteUrl,
+  startDate,
+  endDate,
+  dimension,
+  apiBaseUrl,
+  quotaProject,
+}) {
   return gscRequest({
     token,
     path: `sites/${encodeURIComponent(siteUrl)}/searchAnalytics/query`,
+    apiBaseUrl,
+    quotaProject,
     options: {
       method: "POST",
       body: JSON.stringify({
@@ -180,13 +224,16 @@ async function fetchGscData(args) {
 
   const token = process.env.GSC_ACCESS_TOKEN;
   if (!token) throw new Error("Missing GSC_ACCESS_TOKEN");
+  const quotaProject = await configuredQuotaProject();
 
   const [queries, pages, sitemaps] = await Promise.all([
-    searchAnalytics({ ...args, token, dimension: "query" }),
-    searchAnalytics({ ...args, token, dimension: "page" }),
+    searchAnalytics({ ...args, token, quotaProject, dimension: "query" }),
+    searchAnalytics({ ...args, token, quotaProject, dimension: "page" }),
     gscRequest({
       token,
       path: `sites/${encodeURIComponent(args.siteUrl)}/sitemaps`,
+      apiBaseUrl: args.apiBaseUrl,
+      quotaProject,
     }).catch((error) => ({ error: error.message })),
   ]);
   return { queries, pages, sitemaps };

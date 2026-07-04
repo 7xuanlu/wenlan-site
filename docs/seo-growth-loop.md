@@ -1,6 +1,6 @@
 # Wenlan SEO/GEO Growth Loop
 
-Use this when deciding what to do next for Wenlan search visibility. The rule is measurement first: GSC and Umami decide whether the next sprint is technical cleanup, page refreshes, new Learn articles, or external distribution. The current deployed property remains `useorigin.app`; keep deployed-site technical checks pointed there until the public Wenlan site/domain changes.
+Use this when deciding what to do next for Wenlan search visibility. The rule is measurement first: GSC and Umami decide whether the next sprint is technical cleanup, page refreshes, new Learn articles, or external distribution. The canonical deployed property is `wenlan.app`; keep deployed-site technical checks pointed there and treat `useorigin.app` as a legacy redirect bridge.
 
 ## Operating Pattern
 

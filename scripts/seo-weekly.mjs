@@ -144,6 +144,9 @@ function parseArgs(argv) {
     umamiEventsPath: args["umami-events"]
       ? resolve(process.cwd(), args["umami-events"])
       : null,
+    gscMetadataPath: args["gsc-metadata"]
+      ? resolve(process.cwd(), args["gsc-metadata"])
+      : null,
     date: args.date,
     outputPath: args.output
       ? resolve(process.cwd(), args.output)
@@ -228,14 +231,24 @@ function parseGscMetric(value, label, field, { integer = false } = {}) {
   return parsed;
 }
 
-function extractEvidenceMetadata(queryRecords = [], pageRecords = []) {
-  assertGscRows(queryRecords, "queries");
-  assertGscRows(pageRecords, "pages");
+function extractEvidenceMetadata(queryRecords = [], pageRecords = [], gscMetadata = null) {
+  if (queryRecords.length === 0 && !gscMetadata) assertGscRows(queryRecords, "queries");
+  if (pageRecords.length === 0 && !gscMetadata) assertGscRows(pageRecords, "pages");
 
-  const queryDateRange = extractGscDateRange(queryRecords, "queries");
-  const pageDateRange = extractGscDateRange(pageRecords, "pages");
-  const querySource = extractGscSource(queryRecords, "queries");
-  const pageSource = extractGscSource(pageRecords, "pages");
+  const metadataDateRange = extractGscMetadataDateRange(gscMetadata);
+  const metadataSource = extractGscMetadataSource(gscMetadata);
+  const queryDateRange = queryRecords.length > 0
+    ? extractGscDateRange(queryRecords, "queries")
+    : metadataDateRange;
+  const pageDateRange = pageRecords.length > 0
+    ? extractGscDateRange(pageRecords, "pages")
+    : metadataDateRange;
+  const querySource = queryRecords.length > 0
+    ? extractGscSource(queryRecords, "queries")
+    : metadataSource;
+  const pageSource = pageRecords.length > 0
+    ? extractGscSource(pageRecords, "pages")
+    : metadataSource;
 
   if (queryDateRange && pageDateRange && queryDateRange !== pageDateRange) {
     throw new Error(
@@ -276,6 +289,25 @@ function assertGscRows(records, label) {
   if (records.length === 0) {
     throw new Error(`GSC ${label} export has no data rows`);
   }
+}
+
+function extractGscMetadataDateRange(metadata) {
+  if (!metadata) return null;
+  const start = String(metadata.startDate ?? "").trim();
+  const end = String(metadata.endDate ?? "").trim();
+  if (!start || !end) {
+    throw new Error("Incomplete GSC metadata date range");
+  }
+  return `${start} to ${end}`;
+}
+
+function extractGscMetadataSource(metadata) {
+  if (!metadata) return null;
+  const source = String(metadata.source ?? "").trim();
+  if (!source) {
+    throw new Error("Missing GSC metadata source");
+  }
+  return source;
 }
 
 function extractGscDateRange(records, label) {
@@ -987,17 +1019,25 @@ function addDays(date, days) {
 
 async function run() {
   const args = parseArgs(process.argv.slice(2));
-  const [queryText, pageText, umamiPageRecords, umamiReferrerRecords, umamiEventRecords] = await Promise.all([
+  const [
+    queryText,
+    pageText,
+    umamiPageRecords,
+    umamiReferrerRecords,
+    umamiEventRecords,
+    gscMetadata,
+  ] = await Promise.all([
     readFile(args.queriesPath, "utf8"),
     readFile(args.pagesPath, "utf8"),
     readOptionalCsv(args.umamiPagesPath),
     readOptionalCsv(args.umamiReferrersPath),
     readOptionalCsv(args.umamiEventsPath),
+    readOptionalJson(args.gscMetadataPath),
   ]);
 
   const queryRecords = parseCsv(queryText);
   const pageRecords = parseCsv(pageText);
-  const evidence = extractEvidenceMetadata(queryRecords, pageRecords);
+  const evidence = extractEvidenceMetadata(queryRecords, pageRecords, gscMetadata);
   const queries = enrichQueries(queryRecords.map(normalizeQuery));
   const pages = enrichPages(pageRecords.map(normalizePage));
   const umami = summarizeUmami({
@@ -1022,6 +1062,11 @@ async function run() {
 async function readOptionalCsv(path) {
   if (!path) return [];
   return parseCsv(await readFile(path, "utf8"));
+}
+
+async function readOptionalJson(path) {
+  if (!path) return null;
+  return JSON.parse(await readFile(path, "utf8"));
 }
 
 run().catch((err) => {

@@ -26,7 +26,7 @@ export default async function Image({ params }: Params) {
         title={title}
         description={description}
         footerLeft={[
-          "useorigin.app/docs",
+          "wenlan.app/docs",
           "Living personal knowledge library",
         ]}
         footerRight="Apache-2.0"
