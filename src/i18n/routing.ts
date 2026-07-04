@@ -6,7 +6,7 @@ import {
   type TranslatedLocale,
 } from "./locales";
 
-export const SITE_URL = "https://useorigin.app";
+export const SITE_URL = "https://wenlan.app";
 
 export const CORE_TRANSLATED_PATHS = [
   "/",
@@ -17,7 +17,19 @@ export const CORE_TRANSLATED_PATHS = [
 
 type CoreTranslatedPath = (typeof CORE_TRANSLATED_PATHS)[number];
 
+export const TRANSLATED_LEARN_PATHS = [
+  "/learn/distilled-wiki-pages-ai-memory",
+  "/learn/source-backed-wiki-pages-ai-work",
+] as const;
+
+type TranslatedLearnPath = (typeof TRANSLATED_LEARN_PATHS)[number];
+
 const CORE_TRANSLATED_PATH_SET = new Set<string>(CORE_TRANSLATED_PATHS);
+const TRANSLATED_LEARN_PATH_SET = new Set<string>(TRANSLATED_LEARN_PATHS);
+const TRANSLATED_PATH_SET = new Set<string>([
+  ...CORE_TRANSLATED_PATHS,
+  ...TRANSLATED_LEARN_PATHS,
+]);
 
 const localePrefixes = {
   "zh-TW": "/zh-TW",
@@ -55,7 +67,7 @@ export function stripLocalePrefix(pathname: string): {
 }
 
 export function isTranslatedPath(locale: Locale, pathname: string): boolean {
-  return locale !== DEFAULT_LOCALE && CORE_TRANSLATED_PATH_SET.has(normalizePathname(pathname));
+  return locale !== DEFAULT_LOCALE && TRANSLATED_PATH_SET.has(normalizePathname(pathname));
 }
 
 export function localizePath(locale: Locale, pathname: string): string {
@@ -78,7 +90,7 @@ export function alternateUrls(pathname: string): Record<string, string> {
   const { pathname: unprefixedPathname } = stripLocalePrefix(pathname);
   const englishUrl = canonicalUrl(DEFAULT_LOCALE, unprefixedPathname);
 
-  if (!CORE_TRANSLATED_PATH_SET.has(unprefixedPathname)) {
+  if (!TRANSLATED_PATH_SET.has(unprefixedPathname)) {
     return {
       [hreflangByLocale.en]: englishUrl,
       "x-default": englishUrl,
@@ -95,4 +107,8 @@ export function alternateUrls(pathname: string): Record<string, string> {
 
 export function isCoreTranslatedPath(pathname: string): pathname is CoreTranslatedPath {
   return CORE_TRANSLATED_PATH_SET.has(normalizePathname(pathname));
+}
+
+export function isTranslatedLearnPath(pathname: string): pathname is TranslatedLearnPath {
+  return TRANSLATED_LEARN_PATH_SET.has(normalizePathname(pathname));
 }

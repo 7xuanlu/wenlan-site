@@ -1,6 +1,6 @@
 import { DEFAULT_AUTHOR, SITE_URL } from "../learn/articles";
 
-export const DOCS_UPDATED_AT = "2026-06-24";
+export const DOCS_UPDATED_AT = "2026-07-02";
 
 export type DocGroup = "After setup" | "Reference" | "Project";
 
@@ -1459,7 +1459,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Current runtime shape",
         body: [
-          "The current public docs describe the 0.9.1 runtime shape: Claude Code plugin, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages, real git versioning for readable pages, session handoffs, and status artifacts, wenlan restart, wenlan reranker, and cross-platform service registration.",
+          "The current public docs describe the 0.11.0 runtime shape: Claude Code plugin, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages, real git versioning for readable pages, session handoffs, and status artifacts, wenlan restart, wenlan reranker, and cross-platform service registration.",
           "The biggest practical upgrade checks are platform support, package path alignment, and spaces. Confirm your machine's service manager, confirm MCP clients launch the connector under ~/.wenlan/bin, and confirm the active space is the one you expect.",
         ],
         link: {
@@ -3392,7 +3392,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.9.1 line.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.11.0 line.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3559,33 +3559,54 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.9.1",
+      "Wenlan version 0.11.0",
       "wenlan-mcp release notes",
     ],
     updatedAt: DOCS_UPDATED_AT,
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "The current stable release in the repository changelog is v0.9.1, dated 2026-06-24.",
-      "Recent main-branch work after v0.9.1 is visible through merged PRs, but it should be treated as unreleased until the next release lands.",
+      "The current stable release in the repository changelog is v0.11.0, dated 2026-07-03.",
+      "Recent main-branch work after v0.11.0 is visible through merged PRs, but it should be treated as unreleased until the next release lands.",
     ],
     sections: [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.9.1 is the current stable release recorded in CHANGELOG.md and the release-please manifest. It completes the final public rename cleanup across docs, plugin surfaces, and scripts; cleans distribution publish surfaces; and renames the CLI MCP server handle to wenlan.",
+          "Wenlan v0.11.0 is the current stable release recorded in CHANGELOG.md and the release-please manifest. It adds doc-grounded revisions for conflicting captures.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
         ],
       },
       {
-        heading: "v0.9.1 highlights",
+        heading: "v0.11.0 highlights",
         body: [
-          "The v0.9.1 release is a cleanup release after the public Wenlan cutover. It removes remaining pre-rename distribution references from publish surfaces and makes the CLI MCP server handle consistently use wenlan.",
+          "The v0.11.0 release adds doc-grounded revisions so documents can propose rewrites to conflicting captures while preserving the v0.10.x ingest and command-surface work.",
         ],
         bullets: [
-          "Public rename cleanup completed across docs, plugin, and scripts.",
-          "Distribution publish surfaces cleaned for Wenlan package identity.",
-          "CLI MCP server handle renamed from origin to wenlan.",
+          "Doc-grounded revisions shipped for conflicting captures.",
+          "Stable release date: 2026-07-03.",
+        ],
+      },
+      {
+        heading: "v0.10.0 highlights",
+        body: [
+          "The v0.10.0 release adds an L1 ingest path for folders and multi-format documents, and brings the pages skill to the Codex plugin surface.",
+        ],
+        bullets: [
+          "Folder and multi-format document ingest added for local source material.",
+          "Pages skill ported to the Codex plugin workflow.",
+          "Stable release date: 2026-07-02.",
+        ],
+      },
+      {
+        heading: "v0.9.6 highlights",
+        body: [
+          "The v0.9.6 release finished the shared plugin contract work and added the Codex plugin install path.",
+        ],
+        bullets: [
+          "Codex plugin install path documented and wired.",
+          "Shared Wenlan plugin contract added.",
+          "Space auto-create and cascade space moves stopped.",
         ],
       },
       {
@@ -3623,7 +3644,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.9.1, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.11.0, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },

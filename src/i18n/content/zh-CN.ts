@@ -17,12 +17,12 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "cbb903525db65e6783fb185115c56c4a53092671e9c318ce1502ce61912fb297",
+    sourceHash: "617d7a1aef3124cb77beed6c209576bfc7745880c6eec7a2246d130948fcd981",
     content: {
       seo: {
-        title: "Wenlan 文澜 | AI 工作的活个人知识库",
+        title: "Wenlan 文澜 | AI 工作的 LLM wiki",
         description:
-          "Wenlan 文澜是为 AI 工作而生的活个人知识库：agent 捕捉学到的内容，你加入信任的来源，daemon 让有来源引用的页面保持最新。",
+          "Wenlan 文澜是 AI 工作的 LLM wiki：AI 代理捕捉学到的内容，你加入信任来源，本地 daemon 让有来源依据的 wiki 页面保持最新。",
       },
       nav: {
         schemaName: "Wenlan 文澜网站导航",
@@ -43,7 +43,7 @@ export const zhCNContent = {
       hero: {
         title: "Wenlan 文澜",
         description:
-          "面向 AI-native 时代的活个人知识库。Agents 捕捉学到的内容，你加入信任的来源，Wenlan 让有来源引用的页面保持最新。",
+          "AI 工作的 LLM wiki。AI 代理捕捉学到的内容，你加入信任来源，Wenlan 让有来源依据的 wiki 页面跨工具、跨时间保持最新。",
         primaryCta: { id: "get-started", href: "/docs/get-started", label: "开始使用" },
         secondaryCta: {
           id: "github",
@@ -55,6 +55,11 @@ export const zhCNContent = {
           { id: "local-daemon", label: "本地 daemon" },
         ],
         metaLinks: [
+          {
+            id: "llm-wiki",
+            href: "/learn/distilled-wiki-pages-ai-memory",
+            label: "LLM wiki 导览",
+          },
           {
             id: "claude-code-memory",
             href: "/learn/claude-code-memory",
@@ -92,8 +97,8 @@ export const zhCNContent = {
         },
         memoryDistillery: {
           eyebrow: "刻意蒸馏",
-          title: "Wenlan 把重复出现的 context 变成有来源支持的页面。",
-          body: "当重复捕捉的内容值得变成可读页面时，运行 /distill。可选的本地模型或 API key 路径可以加入背景提取与页面更新。",
+          title: "Wenlan 把重复出现的 context 变成 LLM wiki。",
+          body: "当重复捕捉的内容值得变成可读的 wiki 页面时，运行 /distill。可选的本地模型或 API key 路径可以加入背景提取与页面更新。",
           note: "下一次运行从有引用的 context 开始，而不是从 transcript 残留开始。",
           visualLabels: {
             merged: "合并",
@@ -184,7 +189,7 @@ export const zhCNContent = {
           {
             id: "what-is-wenlan",
             q: "Wenlan 是什么？",
-            a: "Wenlan 是为 AI 工作而生的活个人知识库。Agents 捕捉学到的内容，你加入信任的来源，本地 daemon 让有来源引用的页面跨 chats、tools、projects 和时间保持最新。",
+            a: "Wenlan 是 AI 工作的 LLM wiki。AI 代理捕捉学到的内容，你加入信任来源，本地 daemon 让有来源依据的 wiki 页面跨 chats、tools、projects 和时间保持最新。",
           },
           {
             id: "built-in-memory",
@@ -242,12 +247,12 @@ export const zhCNContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "a255919d26031825833fe5b1d5dabddec41b595ff265fea28053f1e7cfe47a8f",
+    sourceHash: "8a5458ad4436142c585b4e7e5f6ff90802fc09a2ecd9d30f66653deca64b6145",
     content: {
       seo: {
-        title: "关于 Wenlan | 活个人知识库",
+        title: "关于 Wenlan | AI 工作的 LLM wiki",
         description:
-          "Wenlan 是 open-source、local-first 的 AI 工作个人知识库，由 agents 建立，并以来源为根基。",
+          "Wenlan 是 open-source、local-first 的 AI 工作 LLM wiki，由 AI 代理建立，并以来源为根基。",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -255,11 +260,11 @@ export const zhCNContent = {
       },
       hero: {
         eyebrow: "关于",
-        title: "活个人知识库。",
+        title: "AI 工作的 LLM wiki。",
         description:
-          "Agents 捕捉学到的内容，你加入信任的来源，Wenlan 让有来源引用的 wiki pages 在 AI 工作中保持最新。",
+          "AI 代理捕捉学到的内容，你加入信任来源，Wenlan 让有来源依据的 wiki 页面在 AI 工作中保持最新。",
         statusLabel: "项目状态",
-        statusItems: ["版本 v0.9.1", "支持 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 构建"],
+        statusItems: ["版本 v0.11.0", "支持 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 构建"],
       },
       sections: [
         {
@@ -268,7 +273,7 @@ export const zhCNContent = {
           title: "为什么 Wenlan 存在",
           paragraphs: [
             "AI 工作已经变成严肃工作，但大多数 sessions 仍像一次性对话一样结束。决策、debugging lessons、项目限制和 handoffs 都被埋在旧 chats 里。",
-            "Wenlan 是为了让工作能 compound 而建。Agents 可以保存重要内容，之后 recall，并让 refined context 跨 MCP-compatible tools 持续可用。",
+            "Wenlan 是为了让工作积累成 LLM wiki 而建。AI 代理可以保存重要内容，之后 recall，并让有来源依据的 refined context 跨 MCP-compatible tools 持续可用。",
           ],
         },
         {
@@ -286,7 +291,7 @@ export const zhCNContent = {
           number: "04",
           title: "当前状态",
           paragraphs: [
-            "Wenlan v0.9.1 支持 macOS (arm64, x64)、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64)。daemon、CLI、MCP server 和 Claude Code plugin 都以 Apache-2.0 open source。",
+            "Wenlan v0.11.0 支持 macOS (arm64, x64)、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64)。daemon、CLI、MCP server 和 Claude Code plugin 都以 Apache-2.0 open source。",
           ],
         },
       ],
@@ -359,18 +364,18 @@ export const zhCNContent = {
       schema: {
         name: "关于 Wenlan",
         description:
-          "Wenlan 是 open-source、local-first 的 AI 工作个人知识库，由 Qi-Xuan Lu 构建。",
+          "Wenlan 是 open-source、local-first 的 AI 工作 LLM wiki，由 Qi-Xuan Lu 构建。",
       },
     },
   },
   docs: {
     status: "translated",
-    sourceHash: "3b69ea57f9aa702add03b87f2d09388dba86ee174c0b9c52dfbbc4ffc269b2bc",
+    sourceHash: "c446e6c651d59602b80d928c1b4aa31225481e4e03dfefbdedfe1becdbe403ab",
     content: {
       seo: {
-        title: "Wenlan 文档 | 产品手册",
+        title: "Wenlan 文档 | AI 工作的 LLM wiki",
         description:
-          "安装 Wenlan，学习每日 AI 工作记忆循环，理解架构，并追踪项目 roadmap、changelog 和 evals。",
+          "安装 Wenlan，学习 AI 工作记忆循环，理解有来源依据的 wiki 页面、provenance、retrieval 和 MCP clients 如何配合。",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -380,11 +385,11 @@ export const zhCNContent = {
         eyebrow: "文档",
         title: "开始使用 Wenlan。",
         description:
-          "安装本地 memory layer，学习每日 handoff loop，并让 AI 工作 context 可读、可搜索、可由你掌控。",
+          "安装本地 memory layer，学习每日 handoff loop，并让你的 AI 工作 LLM wiki 可读、可搜索、可由你掌控。",
       },
       intro: {
         eyebrow: "从这里开始",
-        body: "新用户应该先安装，为自己的 client 运行 setup，接着阅读 daily workflow 和 core concepts。Project docs 涵盖 architecture、reference paths、evals、releases、scope、source builds、roadmap、development conventions 和 contribution paths。",
+        body: "新用户应该先安装，为自己的 client 运行 setup，接着阅读 daily workflow 和 core concepts。Project docs 涵盖 source-backed pages、architecture、reference paths、evals、releases、scope、source builds、roadmap、development conventions 和 contribution paths。",
       },
       sections: {
         items: [
@@ -854,12 +859,12 @@ export const zhCNContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "87fbb446a6a248806986c9233ccfa1c886a08b5fb18c2fb3e0bb7863ba312525",
+    sourceHash: "133dae8830f792247db49a48b128d9a2ed43bb52bc4b58ca14ab6357acfe26dd",
     content: {
       seo: {
-        title: "开始使用 Wenlan | 本地 AI 工作记忆",
+        title: "开始使用 Wenlan | AI 工作的 LLM wiki",
         description:
-          "通过 Claude Code plugin 安装 Wenlan，或先运行 Wenlan setup，再连接其他 MCP client。",
+          "通过 Claude Code plugin 安装 Wenlan，或先运行 Wenlan setup，再把其他 MCP client 接到你的本地 AI 工作 LLM wiki。",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -869,7 +874,7 @@ export const zhCNContent = {
         eyebrow: "开始使用",
         title: "把 Wenlan 接到你的 AI tools。",
         description:
-          "先从 Claude Code plugin 开始，或通过本地 MCP server 把 Wenlan 加到另一个 MCP-compatible client。",
+          "先从 Claude Code plugin 开始，或通过本地 MCP server 把 Wenlan 加到另一个 MCP-compatible client，让 captures、handoffs 和 wiki pages 共用同一个有来源依据的循环。",
         meta: ["Wenlan 团队", "更新于 2026 年 5 月 15 日", "4 分钟设置"],
         setupPathLabel: "设置路径",
         setupPathItems: ["Claude Code 工具", "MCP clients 连接", "本地 daemon"],
@@ -987,7 +992,7 @@ export const zhCNContent = {
     content: {
       ariaLabel: "网站页脚",
       brand: "Wenlan",
-      tagline: "为 AI 工作而生的活个人知识库。",
+      tagline: "AI 工作的 LLM wiki。",
       groups: [
         {
           id: "product",
@@ -1041,7 +1046,7 @@ export const zhCNContent = {
       ],
       signature: {
         brand: "Wenlan",
-        tagline: "活个人知识库",
+        tagline: "LLM wiki",
         builtByPrefix: "作者",
         author: "Qi-Xuan Lu",
         authorUrl: "https://github.com/7xuanlu",

@@ -14,7 +14,7 @@ No test framework is configured.
 
 ## Architecture
 
-Single-page marketing site for [Wenlan](https://useorigin.app) built with **Next.js 16** (App Router) + **React 19** + **Tailwind CSS 4**. Deployed on Vercel.
+Single-page marketing site for [Wenlan](https://wenlan.app) built with **Next.js 16** (App Router) + **React 19** + **Tailwind CSS 4**. Deployed on Vercel.
 
 ### Layout
 

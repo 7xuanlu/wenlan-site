@@ -1,7 +1,7 @@
 {
   "name": "Wenlan",
   "short_name": "Wenlan",
-  "description": "A living personal knowledge library for AI work, built by agents and grounded in source-cited pages.",
+  "description": "An LLM wiki for AI work, built by agents and grounded in source-backed pages.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

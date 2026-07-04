@@ -4,22 +4,22 @@ This is Wenlan's weekly measurement loop. Use it to decide whether the next SEO 
 
 This loop is also scheduled in Codex as the active heartbeat automation `weekly-wenlan-seo-cleanup`. The automation should wake this thread weekly, use live GSC data when the authenticated browser/session is available, and fall back to deployed-site technical checks when account-gated data is unavailable.
 
-The current deployed property is still `useorigin.app`. Keep public-site technical checks pointed at the deployed URLs until the public Wenlan site/domain changes.
+The canonical deployed property is now `wenlan.app`. Keep public-site technical checks pointed at `https://wenlan.app`; `useorigin.app` is a legacy bridge host that should redirect to the canonical apex.
 
 ## 1) Verify the site in Google Search Console
 
-Use a **Domain property** (preferred over URL prefix). It covers apex (`useorigin.app`), `www`, and any future subdomain in one verification.
+Use a **Domain property** (preferred over URL prefix). It covers apex (`wenlan.app`), `www`, and any future subdomain in one verification.
 
 1. Open https://search.google.com/search-console
-2. **Add property** → **Domain** → enter `useorigin.app`
+2. **Add property** → **Domain** → enter `wenlan.app`
 3. Google shows a `google-site-verification=...` TXT record
 4. Add it as a TXT record on the apex in your DNS provider (we use **GoDaddy**):
-   - GoDaddy → Domains → `useorigin.app` → **DNS** → **Add New Record**
+   - GoDaddy → Domains → `wenlan.app` → **DNS** → **Add New Record**
    - Type: **TXT**, Name: **@**, Value: the full `google-site-verification=...` string, TTL: 1 hour
-5. Wait ~5 minutes, confirm propagation: `dig TXT useorigin.app +short`
+5. Wait ~5 minutes, confirm propagation: `dig TXT wenlan.app +short`
 6. Click **Verify** in Search Console
 
-Note: if `useorigin.app` was previously verified for Google Workspace (or any other Google product) under the same Google account, GSC will auto-verify against that record — no DNS change needed.
+Note: if `wenlan.app` was previously verified for Google Workspace (or any other Google product) under the same Google account, GSC will auto-verify against that record — no DNS change needed.
 
 ## 2) Submit the sitemap
 
@@ -56,17 +56,20 @@ mkdir -p /tmp/wenlan-seo
 pnpm seo:weekly:run -- --date YYYY-MM-DD
 ```
 
-If the local Google account can mint a Search Console-scoped OAuth token, use the API fetcher instead of browser CSV downloads:
+If the local Google account can mint a Search Console-scoped ADC token, use the API fetcher instead of browser CSV downloads. First make sure the Search Console API is enabled on the ADC quota project, then mint a scoped ADC token:
 
 ```bash
-GSC_ACCESS_TOKEN="$(gcloud auth print-access-token)" pnpm seo:gsc:fetch -- \
-  --date YYYY-MM-DD
+gcloud services enable searchconsole.googleapis.com --project=wenlan-500502
+gcloud auth application-default login \
+  --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/webmasters.readonly
+gcloud auth application-default set-quota-project wenlan-500502
+pnpm seo:gsc:fetch -- --date YYYY-MM-DD
 pnpm seo:weekly:run -- --date YYYY-MM-DD
 ```
 
 `--date` derives the last 28 complete days ending yesterday relative to the report date. Use `--start-date YYYY-MM-DD --end-date YYYY-MM-DD` only when matching a manually selected Search Console range.
 
-The token must include `https://www.googleapis.com/auth/webmasters.readonly`. A default Cloud Platform token without that scope reaches the Search Console API but fails with `ACCESS_TOKEN_SCOPE_INSUFFICIENT`.
+The ADC token must include `https://www.googleapis.com/auth/webmasters.readonly`. A default Cloud Platform token without that scope reaches the Search Console API but fails with `ACCESS_TOKEN_SCOPE_INSUFFICIENT`. `scripts/seo-gsc-fetch.mjs` uses `GSC_ACCESS_TOKEN` only when it is already set; otherwise it calls `gcloud auth application-default print-access-token` and sends `x-goog-user-project` from `GSC_QUOTA_PROJECT`, `GOOGLE_CLOUD_QUOTA_PROJECT`, ADC's `quota_project_id`, or `wenlan-500502`. If the API returns `SERVICE_DISABLED`, enable `searchconsole.googleapis.com` on that quota project and retry after propagation.
 
 The report is written to `docs/seo-audits/YYYY-MM-DD-weekly-seo.md`. GSC CSVs drive the ranked query/page recommendations. Optional Umami CSVs summarize landing pages, referrers, AI referrals, Reddit referrals, and `llms.txt` hits as export-row totals. If Umami CSVs are absent, those fields remain manual/account-gated and should not be inferred.
 

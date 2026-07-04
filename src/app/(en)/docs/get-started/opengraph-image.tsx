@@ -13,7 +13,7 @@ export default async function Image() {
         title="Install Wenlan in five minutes."
         description="Add the Claude Code plugin or run Wenlan setup, then verify the local memory loop with a capture and recall."
         footerLeft={[
-          "useorigin.app/docs/get-started",
+          "wenlan.app/docs/get-started",
           "macOS, Linux, Windows",
         ]}
         footerRight="Apache-2.0"

@@ -1,6 +1,6 @@
 Contact: https://github.com/7xuanlu/wenlan/security/advisories/new
-Contact: mailto:security@useorigin.app
+Contact: mailto:security@wenlan.app
 Expires: 2027-05-24T00:00:00.000Z
 Preferred-Languages: en
-Canonical: https://useorigin.app/.well-known/security.txt
+Canonical: https://wenlan.app/.well-known/security.txt
 Policy: https://github.com/7xuanlu/wenlan/blob/main/SECURITY.md

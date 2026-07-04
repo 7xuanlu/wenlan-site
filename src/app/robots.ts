@@ -33,7 +33,7 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: "*", allow: "/" },
       ...aiCrawlers.map((userAgent) => ({ userAgent, allow: "/" })),
     ],
-    sitemap: "https://useorigin.app/sitemap.xml",
-    host: "https://useorigin.app",
+    sitemap: "https://wenlan.app/sitemap.xml",
+    host: "https://wenlan.app",
   };
 }

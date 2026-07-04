@@ -93,13 +93,13 @@ export default function LearnPage() {
   const collectionSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "@id": "https://useorigin.app/learn#collection",
+    "@id": "https://wenlan.app/learn#collection",
     name: "Wenlan Learn",
     description:
       "Articles about AI work memory, MCP memory servers, local-first AI work context, setup guides, client workflows, trust, and Wenlan comparisons.",
     url: `${SITE_URL}/learn`,
-    isPartOf: { "@id": "https://useorigin.app/#website" },
-    publisher: { "@id": "https://useorigin.app/#organization" },
+    isPartOf: { "@id": "https://wenlan.app/#website" },
+    publisher: { "@id": "https://wenlan.app/#organization" },
     inLanguage: "en-US",
     mainEntity: articles.map((article) => ({
       "@type": "Article",
@@ -107,7 +107,7 @@ export default function LearnPage() {
       description: article.description,
       url: articleUrl(article.slug),
       author: {
-        "@id": "https://useorigin.app/#qixuan-lu",
+        "@id": "https://wenlan.app/#qixuan-lu",
       },
     })),
   };
@@ -147,17 +147,17 @@ export default function LearnPage() {
               </h1>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">
                 Wenlan makes AI work compound across Claude Code, Cursor,
-                Codex, and other MCP-compatible tools. Memory is one mechanism;
-                durable work context is the goal.
+                Codex, and other MCP-compatible tools. The LLM wiki for AI work
+                is the durable context layer that memory feeds.
               </p>
             </div>
             <MemoryIndex
               label="Learn topics"
               items={[
                 "AI work memory",
+                "LLM wiki for AI work",
                 "Setup guides",
                 "Client workflows",
-                "Distilled wiki pages",
                 "Named comparisons",
                 "Local-first trust",
               ]}

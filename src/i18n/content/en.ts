@@ -20,9 +20,9 @@ export const enContent = {
     sourceHash: null,
     content: {
       seo: {
-        title: "Wenlan | Living Personal Knowledge Library for AI Work",
+        title: "Wenlan | LLM Wiki for AI Work",
         description:
-          "Wenlan is a living personal knowledge library for AI work: agents capture what they learn, you add sources you trust, and the daemon keeps source-cited pages current.",
+          "Wenlan is an LLM wiki for AI work: agents capture what they learn, you add sources you trust, and the local daemon keeps source-backed wiki pages current.",
       },
       nav: {
         schemaName: "Wenlan site navigation",
@@ -43,7 +43,7 @@ export const enContent = {
       hero: {
         title: "Wenlan",
         description:
-          "A living personal knowledge library for the AI-native age. Agents capture what they learn, you add sources you trust, and Wenlan keeps source-cited pages current.",
+          "An LLM wiki for AI work. Agents capture what they learn, you add sources you trust, and Wenlan keeps source-backed wiki pages current across tools and time.",
         primaryCta: { id: "get-started", href: "/docs/get-started", label: "Get started" },
         secondaryCta: {
           id: "github",
@@ -55,6 +55,11 @@ export const enContent = {
           { id: "local-daemon", label: "Local daemon" },
         ],
         metaLinks: [
+          {
+            id: "llm-wiki",
+            href: "/learn/distilled-wiki-pages-ai-memory",
+            label: "LLM wiki guide",
+          },
           {
             id: "claude-code-memory",
             href: "/learn/claude-code-memory",
@@ -92,8 +97,8 @@ export const enContent = {
         },
         memoryDistillery: {
           eyebrow: "Deliberate distillation",
-          title: "Wenlan turns repeated context into source-backed pages.",
-          body: "Run /distill when repeated captures should become a readable page. Optional model or API-key paths can add background extraction and page refresh work.",
+          title: "Wenlan turns repeated context into an LLM wiki.",
+          body: "Run /distill when repeated captures should become a readable, source-backed wiki page. Optional model or API-key paths can add background extraction and page refresh work.",
           note: "The next run starts from cited context, not transcript residue.",
           visualLabels: {
             merged: "MERGED",
@@ -185,7 +190,7 @@ export const enContent = {
           {
             id: "what-is-wenlan",
             q: "What is Wenlan?",
-            a: "Wenlan is a living personal knowledge library for AI work. Agents capture what they learn, you add sources you trust, and the local daemon keeps source-cited pages current across chats, tools, projects, and time.",
+            a: "Wenlan is an LLM wiki for AI work. Agents capture what they learn, you add sources you trust, and the local daemon keeps source-backed wiki pages current across chats, tools, projects, and time.",
           },
           {
             id: "built-in-memory",
@@ -246,9 +251,9 @@ export const enContent = {
     sourceHash: null,
     content: {
       seo: {
-        title: "About Wenlan | Living Personal Knowledge Library",
+        title: "About Wenlan | LLM Wiki for AI Work",
         description:
-          "Wenlan is an open-source, local-first personal knowledge library for AI work, built by agents and grounded in its sources.",
+          "Wenlan is an open-source, local-first LLM wiki for AI work, built by agents and grounded in its sources.",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -256,11 +261,11 @@ export const enContent = {
       },
       hero: {
         eyebrow: "About",
-        title: "A living personal knowledge library.",
+        title: "An LLM wiki for AI work.",
         description:
-          "Agents capture what they learn, you add sources you trust, and Wenlan keeps source-cited wiki pages current across AI work.",
+          "Agents capture what they learn, you add sources you trust, and Wenlan keeps source-backed wiki pages current across AI work.",
         statusLabel: "Project status",
-        statusItems: ["v0.9.1", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
+        statusItems: ["v0.11.0", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
       },
       sections: [
         {
@@ -269,7 +274,7 @@ export const enContent = {
           title: "Why Wenlan exists",
           paragraphs: [
             "AI work has become serious work, but most sessions still end like disposable conversations. Decisions, debugging lessons, project constraints, and handoffs get buried in old chats.",
-            "Wenlan is built so the work can compound. Agents can save what matters, recall it later, and keep refined context available across MCP-compatible tools.",
+            "Wenlan is built so the work can compound into an LLM wiki. Agents can save what matters, recall it later, and keep refined, source-backed context available across MCP-compatible tools.",
           ],
         },
         {
@@ -287,7 +292,7 @@ export const enContent = {
           number: "04",
           title: "Current status",
           paragraphs: [
-            "Wenlan v0.9.1 ships for macOS (arm64, x64), Linux (x86_64, aarch64; glibc), and Windows (x86_64). The daemon, CLI, MCP server, and Claude Code plugin are open source under Apache-2.0.",
+            "Wenlan v0.11.0 ships for macOS (arm64, x64), Linux (x86_64, aarch64; glibc), and Windows (x86_64). The daemon, CLI, MCP server, and Claude Code plugin are open source under Apache-2.0.",
           ],
         },
       ],
@@ -302,7 +307,7 @@ export const enContent = {
           {
             id: "human-readable",
             title: "Human-readable",
-            body: "Memory, page, and session writes leave Markdown artifacts in local git. The daemon database powers retrieval, while the source-cited artifacts stay inspectable.",
+            body: "Memory, page, and session writes leave Markdown artifacts in local git. The daemon database powers retrieval, while the source-backed artifacts stay inspectable.",
           },
           {
             id: "session-rhythm",
@@ -360,7 +365,7 @@ export const enContent = {
       schema: {
         name: "About Wenlan",
         description:
-          "Wenlan is an open-source, local-first personal knowledge library for AI work, built by Qi-Xuan Lu.",
+          "Wenlan is an open-source, local-first LLM wiki for AI work, built by Qi-Xuan Lu.",
       },
     },
   },
@@ -369,9 +374,9 @@ export const enContent = {
     sourceHash: null,
     content: {
       seo: {
-        title: "Wenlan Docs | Product Manual",
+        title: "Wenlan Docs | LLM Wiki for AI Work",
         description:
-          "Install Wenlan, learn the daily AI work memory loop, understand the architecture, and follow the project roadmap, changelog, and evals.",
+          "Install Wenlan, learn the AI work memory loop, and understand how source-backed wiki pages, provenance, retrieval, and MCP clients fit together.",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -381,11 +386,11 @@ export const enContent = {
         eyebrow: "Docs",
         title: "Start using Wenlan.",
         description:
-          "Install the local memory layer, learn the daily handoff loop, and keep AI work context readable, searchable, and under your control.",
+          "Install the local memory layer, learn the daily handoff loop, and keep the source-backed LLM wiki for your AI work readable, searchable, and under your control.",
       },
       intro: {
         eyebrow: "Start here",
-        body: "New users should install first, run setup for their client, then read the daily workflow and core concepts. The project docs cover architecture, reference paths, evals, releases, scope, source builds, roadmap, development conventions, and contribution paths.",
+        body: "New users should install first, run setup for their client, then read the daily workflow and core concepts. The project docs cover source-backed pages, architecture, reference paths, evals, releases, scope, source builds, roadmap, development conventions, and contribution paths.",
       },
       sections: {
         items: [
@@ -858,9 +863,9 @@ export const enContent = {
     sourceHash: null,
     content: {
       seo: {
-        title: "Get Started with Wenlan | Local AI Work Memory",
+        title: "Get Started with Wenlan | LLM Wiki for AI Work",
         description:
-          "Install Wenlan through the Claude Code plugin or run Wenlan setup before connecting another MCP client.",
+          "Install Wenlan through the Claude Code plugin or run setup before connecting another MCP client to your local LLM wiki for AI work.",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -870,7 +875,7 @@ export const enContent = {
         eyebrow: "Get started",
         title: "Connect Wenlan to your AI tools.",
         description:
-          "Start with the Claude Code plugin, or add Wenlan to another MCP-compatible client through the local MCP server.",
+          "Start with the Claude Code plugin, or add Wenlan to another MCP-compatible client through the local MCP server so captures, handoffs, and wiki pages share one source-backed loop.",
         meta: ["Wenlan team", "Updated May 15, 2026", "4 min setup"],
         setupPathLabel: "Setup path",
         setupPathItems: ["Claude Code", "MCP clients", "Local daemon"],
