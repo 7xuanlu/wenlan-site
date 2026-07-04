@@ -1,6 +1,6 @@
 # Wenlan SEO/GEO Growth Loop
 
-Use this when deciding what to do next for Wenlan search visibility. The rule is measurement first: GSC and Umami decide whether the next sprint is technical cleanup, page refreshes, new Learn articles, or external distribution. The canonical deployed property is `wenlan.app`; keep deployed-site technical checks pointed there and treat `useorigin.app` as a legacy redirect bridge.
+Use this when deciding what to do next for Wenlan search visibility. The rule is measurement first: GSC decides indexing and query/page demand; Vercel Analytics or Umami can enrich landing-page and referrer evidence when exports are available. The canonical deployed property is `wenlan.app`; keep deployed-site technical checks pointed there and treat `useorigin.app` as a legacy redirect bridge.
 
 ## Operating Pattern
 
@@ -16,7 +16,7 @@ Use this when deciding what to do next for Wenlan search visibility. The rule is
 
 - GSC Performance, last 28 days: queries, pages, clicks, impressions, CTR, average position.
 - GSC Indexing: sitemap status, indexed count, excluded reasons, canonical details for important URLs.
-- Umami: landing pages, referrers, AI assistant referrals, `llms.txt` hits, Reddit referrals.
+- Vercel Analytics or Umami: landing pages, referrers, AI assistant referrals, `llms.txt` hits, and community referrals when exports are available.
 - Site audit: sitemap, robots, canonicals, redirects, `noindex`, structured data, broken links.
 
 Generate the weekly action report from CSV exports:
@@ -57,12 +57,12 @@ Raw GSC exports stay outside git. Commit the generated `docs/seo-audits/YYYY-MM-
 - Keep schema appropriate to page type: Organization, WebSite, Article, TechArticle, BreadcrumbList, HowTo, VideoObject, and SoftwareApplication where relevant.
 - Keep `/llms.txt` and `/llms-full.txt` concise, current, and discoverable.
 
-## Reddit / Distribution Rules
+## Distribution Rules
 
 - Lead with a concrete problem or lesson, not a product launch.
 - Avoid putting Wenlan in the title.
 - Link only when the page materially helps the reader.
-- Track each post in Umami and GSC for referrals, branded-search lift, and assisted discovery.
+- Track each post in Vercel Analytics or Umami plus GSC for referrals, branded-search lift, and assisted discovery.
 - Stop reusing an angle if moderators remove it or the community rejects it.
 
 ## Metrics

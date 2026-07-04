@@ -41,7 +41,7 @@ Run this once per week, using the same date range for every export.
    - `Crawled - currently not indexed`
    - `Discovered - currently not indexed`
 5. Search Console → **Sitemaps**. Record last read time, discovered URLs, and errors.
-6. Umami → same date range. Record landing pages, referrers, AI referrals, `llms.txt` hits, and Reddit referrals.
+6. Vercel Analytics or Umami → same date range. Record landing pages, referrers, AI referrals, `llms.txt` hits, and Reddit referrals when the account/export view exposes them.
 
 Generate the ranked weekly action report with the deterministic pipeline trigger:
 
@@ -71,7 +71,9 @@ pnpm seo:weekly:run -- --date YYYY-MM-DD
 
 The ADC token must include `https://www.googleapis.com/auth/webmasters.readonly`. A default Cloud Platform token without that scope reaches the Search Console API but fails with `ACCESS_TOKEN_SCOPE_INSUFFICIENT`. `scripts/seo-gsc-fetch.mjs` uses `GSC_ACCESS_TOKEN` only when it is already set; otherwise it calls `gcloud auth application-default print-access-token` and sends `x-goog-user-project` from `GSC_QUOTA_PROJECT`, `GOOGLE_CLOUD_QUOTA_PROJECT`, ADC's `quota_project_id`, or `wenlan-500502`. If the API returns `SERVICE_DISABLED`, enable `searchconsole.googleapis.com` on that quota project and retry after propagation.
 
-The report is written to `docs/seo-audits/YYYY-MM-DD-weekly-seo.md`. GSC CSVs drive the ranked query/page recommendations. Optional Umami CSVs summarize landing pages, referrers, AI referrals, Reddit referrals, and `llms.txt` hits as export-row totals. If Umami CSVs are absent, those fields remain manual/account-gated and should not be inferred.
+The readonly scope is enough to fetch Search Analytics, sitemap metadata, and URL Inspection status. It is not enough to resubmit sitemaps; that write call returns `ACCESS_TOKEN_SCOPE_INSUFFICIENT` unless the ADC token also has a write Search Console scope such as `https://www.googleapis.com/auth/webmasters`. Request indexing for ordinary web pages remains a Search Console UI action; the URL Inspection API reports indexed/indexable status but does not submit indexing requests.
+
+The report is written to `docs/seo-audits/YYYY-MM-DD-weekly-seo.md`. GSC CSVs drive the ranked query/page recommendations. Optional Umami CSVs summarize landing pages, referrers, AI referrals, Reddit referrals, and `llms.txt` hits as export-row totals. If Vercel Analytics is the available analytics source, manually copy the same landing-page/referrer evidence into the weekly worksheet until the local pipeline has a Vercel export parser. If no analytics export is available, those fields remain manual/account-gated and should not be inferred.
 
 Run the technical checks against the deployed site and the fresh local build before marking the loop complete:
 

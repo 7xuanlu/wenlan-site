@@ -53,11 +53,22 @@ Source: Google Search Console URL Inspection API for `sc-domain:wenlan.app`, cap
 | `https://wenlan.app/zh-TW` | NEUTRAL | Discovered - currently not indexed | manual / unavailable | manual / unavailable |
 | `https://wenlan.app/zh-CN` | NEUTRAL | URL is unknown to Google | manual / unavailable | manual / unavailable |
 
+## Search Console UI Actions
+
+Source: authenticated Search Console UI for `sc-domain:wenlan.app`, captured on 2026-07-04 after production deployment.
+
+| Action | Result |
+| --- | --- |
+| Opened Search Console property | Verified property access for `wenlan.app`; overview showed 0 total web search clicks. |
+| Confirmed sitemap discovery for `/learn` | URL Inspection UI showed sitemap `https://wenlan.app/sitemap.xml` and referring page `https://wenlan.app/`. |
+| Requested indexing for `/learn` | Attempted via the UI `REQUEST INDEXING` button. Search Console started "Testing if live URL can be indexed" and did not complete after multiple minutes; Computer Use could not interact with the stuck modal because the visible Chrome frame and accessibility tree diverged. Treat as manual/UI-blocked, not completed. |
+| Resubmitted sitemap through API | Not completed. The current ADC token has `webmasters.readonly`; the Search Console sitemap write call returned `ACCESS_TOKEN_SCOPE_INSUFFICIENT`. The sitemap is already submitted and last read on 2026-07-04. |
+
 ## Top Actions
 
-1. Request indexing in GSC UI for the key canonical URLs that are discovered but not indexed: `/learn`, `/learn/source-backed-wiki-pages-ai-work`, and `/zh-TW`.
-2. Request indexing in GSC UI for `/zh-CN` after confirming the live URL test passes.
-3. Keep monitoring Search Analytics; the 2026-06-06 to 2026-07-03 API export still has 0 query rows and 0 page rows, so do not create new content from inferred demand.
+1. Manually finish Search Console UI indexing requests for the key canonical URLs that are discovered but not indexed: `/learn`, `/learn/source-backed-wiki-pages-ai-work`, `/zh-TW`, and `/zh-CN`. This is UI-only for ordinary web pages; the API can inspect status but not submit indexing requests.
+2. Keep monitoring Search Analytics; the 2026-06-06 to 2026-07-03 API export still has 0 query rows and 0 page rows, so do not create new content from inferred demand.
+3. Use Vercel Analytics or Umami exports as enrichment once traffic appears; until then, leave landing-page/referrer/AI-referral fields manual instead of inferring demand.
 
 ## Query Action Queue
 
@@ -77,13 +88,15 @@ Do not create a new Learn page unless GSC/Searchfit shows a recurring query clus
 
 ## Follow-Up
 
-- [ ] Record pre-change GSC snapshot for changed pages in this worksheet.
-- [ ] Record post-change GSC snapshot after deployment and the next GSC read.
-- [ ] Run `pnpm seo:technical:deployed` to verify deployed robots, sitemap, canonicals, redirects, noindex headers, and checked-page schema.
-- [ ] Run `pnpm build` and `pnpm seo:technical:built` to verify local built robots, sitemap, redirects, noindex headers, canonicals, and schema.
-- [ ] Verify old `/guides/*` and `/docs/guides/*` URLs redirect to canonical `/learn/*` URLs.
-- [ ] Recheck changed redirects after deployment with `pnpm seo:technical:deployed -- --require-direct-changed-redirects true`.
+- [x] Record pre-change GSC snapshot for changed pages in this worksheet.
+- [x] Record post-change GSC snapshot after deployment and the next GSC read.
+- [x] Run `pnpm seo:technical:deployed` to verify deployed robots, sitemap, canonicals, redirects, noindex headers, and checked-page schema.
+- [x] Run `pnpm build` and `pnpm seo:technical:built` to verify local built robots, sitemap, redirects, noindex headers, canonicals, and schema.
+- [x] Verify old `/guides/*` and `/docs/guides/*` URLs redirect to canonical `/learn/*` URLs.
+- [x] Recheck changed redirects after deployment with `pnpm seo:technical:deployed -- --require-direct-changed-redirects true`.
+- [x] Generate `pnpm seo:ai-visibility -- --date 2026-07-04 --force true`; manual assistant checks remain unfilled by design.
+- [ ] Request indexing in Search Console UI for `/learn`, `/learn/source-backed-wiki-pages-ai-work`, `/zh-TW`, and `/zh-CN`; `/learn` was attempted on 2026-07-04 but the UI live test did not complete.
 - [ ] Export or manually record Umami landing pages, referrers, AI referrals, Reddit referrals, and `llms.txt` hits.
 - [ ] Add changed pages to the next weekly comparison.
-- [ ] Generate `pnpm seo:ai-visibility -- --date YYYY-MM-DD` and manually check whether AI assistants mention Wenlan accurately for the tracked prompts in `docs/seo-measurement.md`.
+- [ ] Manually check whether AI assistants mention Wenlan accurately for the tracked prompts in `docs/seo-measurement.md`.
 - [ ] Next measurement date: 2026-07-11.
