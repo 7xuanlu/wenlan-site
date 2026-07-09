@@ -106,12 +106,12 @@ export function AboutPage({ locale }: { locale: Locale }) {
                 {content.breadcrumbs.current}
               </span>
             </nav>
-            <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
-              <div>
+            <div className="mt-12 grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
+              <div className="min-w-0">
                 <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
                   {content.hero.eyebrow}
                 </p>
-                <h1 className="warm-glow font-serif text-5xl leading-[1.05] font-medium tracking-tight sm:text-7xl">
+                <h1 className="warm-glow max-w-full break-words font-serif text-5xl leading-[1.05] font-medium [overflow-wrap:anywhere] sm:text-7xl">
                   {content.hero.title}
                 </h1>
                 <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">

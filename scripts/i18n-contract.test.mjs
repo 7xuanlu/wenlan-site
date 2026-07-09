@@ -399,6 +399,14 @@ test("localized home hero allows translated text to shrink on mobile", async () 
   assert.match(source, /className="[^"]*\bbreak-words\b[^"]*"/);
 });
 
+test("localized about hero allows translated text to wrap on mobile", async () => {
+  const source = await readFile(resolve(repoRoot, "src/app/_pages/about.tsx"), "utf8");
+
+  assert.match(source, /className="mt-12 grid min-w-0 gap-10/);
+  assert.match(source, /<div className="min-w-0">/);
+  assert.match(source, /className="[^"]*\bbreak-words\b[^"]*\[overflow-wrap:anywhere\][^"]*"/);
+});
+
 test("localized get-started layout allows mobile content columns to shrink", async () => {
   const source = await readFile(resolve(repoRoot, "src/app/_pages/get-started.tsx"), "utf8");
 

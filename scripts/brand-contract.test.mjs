@@ -144,6 +144,8 @@ test("package metadata uses the wenlan-site identity", async () => {
 });
 
 test("root metadata describes Wenlan on the current release surface", async () => {
+  const { version } = await currentWenlanRelease();
+  const escapedVersion = escapeRegExp(version);
   const metadata = await readRepo("src/i18n/metadata.ts");
   const englishContent = await readRepo("src/i18n/content/en.ts");
   const rootDocument = await readRepo("src/app/root-document.tsx");
@@ -154,7 +156,7 @@ test("root metadata describes Wenlan on the current release surface", async () =
   assert.match(metadata, /locale: LOCALE_CONFIG\[locale\]\.openGraphLocale/);
   assert.match(rootDocument, /softwareApplicationSchema\(locale\)/);
   assert.match(structuredData, /name: "Wenlan"/);
-  assert.match(structuredData, /softwareVersion: "0\.9\.1"/);
+  assert.match(structuredData, new RegExp(`softwareVersion: "${escapedVersion}"`));
   assert.match(structuredData, /installUrl: "https:\/\/github\.com\/7xuanlu\/wenlan#quickstart"/);
   assert.match(structuredData, /codeRepository: "https:\/\/github\.com\/7xuanlu\/wenlan"/);
 });
@@ -306,34 +308,45 @@ test("public TypeScript string literals do not render stale Origin copy", async 
 });
 
 test("security docs align with the current Wenlan site policy", async () => {
+  const { version } = await currentWenlanRelease();
   const docs = await readRepo("src/app/docs/docs.ts");
+  const escapedVersion = escapeRegExp(version);
 
   assert.doesNotMatch(docs, /acknowledgement within 48 hours/);
   assert.doesNotMatch(docs, /7-day fix-timeline/);
   assert.doesNotMatch(docs, /supported 0\.7\.x/);
   assert.match(docs, /acknowledgment within 72 hours/);
-  assert.match(docs, /current stable 0\.9\.1/);
+  assert.match(docs, new RegExp(`current stable ${escapedVersion}`));
 });
 
 
 test("public current-release surfaces track the authoritative Wenlan release", async () => {
   const { version, date } = await currentWenlanRelease();
   const structuredData = await readRepo("src/app/structured-data.ts");
-  const aboutPage = await readRepo("src/i18n/content/en.ts");
+  const englishContent = await readRepo("src/i18n/content/en.ts");
+  const simplifiedContent = await readRepo("src/i18n/content/zh-CN.ts");
+  const traditionalContent = await readRepo("src/i18n/content/zh-TW.ts");
   const aboutOg = await readRepo("src/app/about/opengraph-image.tsx");
   const docs = await readRepo("src/app/docs/docs.ts");
+  const learnArticles = await readRepo("src/app/learn/articles.ts");
   const seoMeasurement = await readRepo("docs/seo-measurement.md");
   const sitemap = await readRepo("src/app/sitemap.ts");
 
   const escapedVersion = escapeRegExp(version);
 
   assert.match(structuredData, new RegExp(`softwareVersion: "${escapedVersion}"`));
-  assert.match(aboutPage, new RegExp(`"v${escapedVersion}"`));
-  assert.match(aboutPage, new RegExp(`Wenlan v${escapedVersion} ships`));
+  assert.match(englishContent, new RegExp(`"v${escapedVersion}"`));
+  assert.match(englishContent, new RegExp(`Wenlan v${escapedVersion} ships`));
+  assert.match(simplifiedContent, new RegExp(`"版本 v${escapedVersion}"`));
+  assert.match(simplifiedContent, new RegExp(`Wenlan v${escapedVersion} 支持`));
+  assert.match(traditionalContent, new RegExp(`"版本 v${escapedVersion}"`));
+  assert.match(traditionalContent, new RegExp(`Wenlan v${escapedVersion} 支援`));
   assert.match(aboutOg, new RegExp(`v${escapedVersion} · Apache-2\\.0`));
   assert.match(docs, new RegExp(`current stable ${escapedVersion}`));
   assert.match(docs, new RegExp(`Wenlan version ${escapedVersion}`));
   assert.match(docs, new RegExp(`v${escapedVersion}.*${escapeRegExp(date)}`));
+  assert.match(learnArticles, new RegExp(`Wenlan v${escapedVersion} as of ${escapeRegExp(date)}`));
+  assert.match(learnArticles, new RegExp(`Last refresh: v${escapedVersion} on ${escapeRegExp(date)}`));
   assert.match(seoMeasurement, new RegExp("softwareVersion` `" + escapedVersion + "`"));
   assert.match(sitemap, new RegExp(`ABOUT_UPDATED_AT = "${escapeRegExp(date)}"`));
   assert.match(sitemap, new RegExp(`GET_STARTED_UPDATED_AT = "${escapeRegExp(date)}"`));

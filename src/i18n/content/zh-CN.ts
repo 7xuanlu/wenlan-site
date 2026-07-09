@@ -242,7 +242,7 @@ export const zhCNContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "a255919d26031825833fe5b1d5dabddec41b595ff265fea28053f1e7cfe47a8f",
+    sourceHash: "060fadff938dcb2a9804408016bb169e951710ee38417b11ed039dd153e610d8",
     content: {
       seo: {
         title: "关于 Wenlan | 活个人知识库",
@@ -259,7 +259,7 @@ export const zhCNContent = {
         description:
           "Agents 捕捉学到的内容，你加入信任的来源，Wenlan 让有来源引用的 wiki pages 在 AI 工作中保持最新。",
         statusLabel: "项目状态",
-        statusItems: ["版本 v0.9.1", "支持 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 构建"],
+        statusItems: ["版本 v0.12.0", "支持 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 构建"],
       },
       sections: [
         {
@@ -286,7 +286,7 @@ export const zhCNContent = {
           number: "04",
           title: "当前状态",
           paragraphs: [
-            "Wenlan v0.9.1 支持 macOS (arm64, x64)、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64)。daemon、CLI、MCP server 和 Claude Code plugin 都以 Apache-2.0 open source。",
+            "Wenlan v0.12.0 支持 macOS (arm64, x64)、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64)。daemon、CLI、MCP server 和 Claude Code plugin 都以 Apache-2.0 open source。",
           ],
         },
       ],

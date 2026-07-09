@@ -9,8 +9,8 @@ import {
 import { docPages, docUrl } from "./(en)/docs/docs";
 import { articles, articleUrl } from "./(en)/learn/articles";
 
-const ABOUT_UPDATED_AT = "2026-06-24";
-const GET_STARTED_UPDATED_AT = "2026-06-24";
+const ABOUT_UPDATED_AT = "2026-07-08";
+const GET_STARTED_UPDATED_AT = "2026-07-08";
 
 type CoreTranslatedPath = (typeof CORE_TRANSLATED_PATHS)[number];
 type SitemapEntry = MetadataRoute.Sitemap[number];

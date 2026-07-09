@@ -228,9 +228,9 @@ function parseGscMetric(value, label, field, { integer = false } = {}) {
   return parsed;
 }
 
-function extractEvidenceMetadata(queryRecords = [], pageRecords = []) {
-  assertGscRows(queryRecords, "queries");
-  assertGscRows(pageRecords, "pages");
+function extractEvidenceMetadata(queryRecords = [], pageRecords = [], paths = {}) {
+  assertGscRows(queryRecords, "queries", paths.queriesPath);
+  assertGscRows(pageRecords, "pages", paths.pagesPath);
 
   const queryDateRange = extractGscDateRange(queryRecords, "queries");
   const pageDateRange = extractGscDateRange(pageRecords, "pages");
@@ -272,9 +272,11 @@ function extractEvidenceMetadata(queryRecords = [], pageRecords = []) {
   };
 }
 
-function assertGscRows(records, label) {
+function assertGscRows(records, label, path = null) {
   if (records.length === 0) {
-    throw new Error(`GSC ${label} export has no data rows`);
+    throw new Error(
+      `GSC ${label} export has no data rows${path ? `: ${path}` : ""}`,
+    );
   }
 }
 
@@ -997,7 +999,10 @@ async function run() {
 
   const queryRecords = parseCsv(queryText);
   const pageRecords = parseCsv(pageText);
-  const evidence = extractEvidenceMetadata(queryRecords, pageRecords);
+  const evidence = extractEvidenceMetadata(queryRecords, pageRecords, {
+    queriesPath: args.queriesPath,
+    pagesPath: args.pagesPath,
+  });
   const queries = enrichQueries(queryRecords.map(normalizeQuery));
   const pages = enrichPages(pageRecords.map(normalizePage));
   const umami = summarizeUmami({

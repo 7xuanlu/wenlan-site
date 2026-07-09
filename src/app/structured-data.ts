@@ -30,7 +30,7 @@ export function softwareApplicationSchema(locale: Locale) {
     inLanguage: LOCALE_CONFIG[locale].hreflang,
     applicationCategory: "DeveloperApplication",
     operatingSystem: ["macOS", "Linux", "Windows"],
-    softwareVersion: "0.9.1",
+    softwareVersion: "0.12.0",
     softwareRequirements:
       "macOS arm64 or x64, Linux x86_64 or aarch64 (glibc), Windows x86_64",
     installUrl: "https://github.com/7xuanlu/wenlan#quickstart",
