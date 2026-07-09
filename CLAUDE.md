@@ -7,10 +7,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 pnpm dev          # Dev server with Turbopack
 pnpm build        # Production build
-pnpm lint         # ESLint via next lint
+pnpm lint         # TypeScript check
+pnpm test:seo     # Brand, release, app, SEO, redirects, schema, pipeline contracts
+pnpm test:i18n    # Locale and localized route contracts
 ```
 
-No test framework is configured.
+`pnpm test:seo` reads release facts from sibling `../wenlan` and
+`../wenlan-app`. Set `WENLAN_REPO_ROOT` or `WENLAN_APP_REPO_ROOT` when the
+checkouts live elsewhere.
 
 ## Architecture
 
