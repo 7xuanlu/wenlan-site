@@ -9,7 +9,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 
-const HOST = "useorigin.app";
+const HOST = "wenlan.app";
 const ORIGIN = `https://${HOST}`;
 const KEY = "09521e19ffdcca3d68daffa830e64611";
 const KEY_LOCATION = `${ORIGIN}/${KEY}.txt`;

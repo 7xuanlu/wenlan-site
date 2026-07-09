@@ -39,17 +39,17 @@ export function AboutPage({ locale }: { locale: Locale }) {
     url: aboutUrl,
     inLanguage: LOCALE_CONFIG[locale].hreflang,
     mainEntity: {
-      "@id": "https://useorigin.app/#organization",
+      "@id": "https://wenlan.app/#organization",
     },
     author: {
-      "@id": "https://useorigin.app/#qixuan-lu",
+      "@id": "https://wenlan.app/#qixuan-lu",
     },
   };
 
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": "https://useorigin.app/#qixuan-lu",
+    "@id": "https://wenlan.app/#qixuan-lu",
     name: "Qi-Xuan Lu",
     alternateName: "7xuanlu",
     url: "https://github.com/7xuanlu",
@@ -70,7 +70,7 @@ export function AboutPage({ locale }: { locale: Locale }) {
       "Rust",
       "libSQL",
     ],
-    worksFor: { "@id": "https://useorigin.app/#organization" },
+    worksFor: { "@id": "https://wenlan.app/#organization" },
     mainEntityOfPage: aboutUrl,
   };
 

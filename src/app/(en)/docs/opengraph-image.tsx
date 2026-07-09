@@ -13,7 +13,7 @@ export default async function Image() {
         title="Start using Wenlan."
         description="Install the local memory layer, learn the daily handoff loop, and keep AI work context readable, searchable, and under your control."
         footerLeft={[
-          "useorigin.app/docs",
+          "wenlan.app/docs",
           "Living personal knowledge library",
         ]}
         footerRight="Apache-2.0"

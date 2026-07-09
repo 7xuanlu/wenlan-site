@@ -1,18 +1,18 @@
 # Security Policy
 
-This is the security policy for the **wenlan-site** repo, which hosts the marketing + docs source for [useorigin.app](https://useorigin.app). The Wenlan product (daemon, CLI, MCP server) has its own policy in [7xuanlu/wenlan/SECURITY.md](https://github.com/7xuanlu/wenlan/blob/main/SECURITY.md).
+This is the security policy for the **wenlan-site** repo, which hosts the marketing + docs source for [wenlan.app](https://wenlan.app). The Wenlan product (daemon, CLI, MCP server) has its own policy in [7xuanlu/wenlan/SECURITY.md](https://github.com/7xuanlu/wenlan/blob/main/SECURITY.md).
 
 ## Reporting a vulnerability
 
 Use any of these channels. Do not file public issues for vulnerabilities.
 
 - GitHub Security Advisories: [open a private advisory on this repo](https://github.com/7xuanlu/wenlan-site/security/advisories/new)
-- Email: security@useorigin.app
-- Machine-discoverable: see [`/.well-known/security.txt`](https://useorigin.app/.well-known/security.txt) (per RFC 9116)
+- Email: security@wenlan.app
+- Machine-discoverable: see [`/.well-known/security.txt`](https://wenlan.app/.well-known/security.txt) (per RFC 9116)
 
 ## What's in scope
 
-- The deployed marketing site at useorigin.app (XSS, leaked secrets in the bundle, misconfigured headers, broken auth on any future protected endpoints).
+- The deployed marketing site at wenlan.app (XSS, leaked secrets in the bundle, misconfigured headers, broken auth on any future protected endpoints).
 - The Vercel deployment pipeline configuration in this repo (`vercel.json`, `next.config.ts`).
 - Build-time scripts in `scripts/`.
 

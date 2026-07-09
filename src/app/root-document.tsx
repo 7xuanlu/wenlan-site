@@ -2,6 +2,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { getCoreContent } from "@/i18n/content";
 import { LOCALE_CONFIG, type Locale } from "@/i18n/locales";
 import { rootHomeSeo } from "@/i18n/metadata";
+import { Analytics } from "@vercel/analytics/next";
 import { Fraunces, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import { softwareApplicationSchema } from "./structured-data";
 import { ThemeProvider } from "./theme-provider";
@@ -72,14 +73,14 @@ export default function RootDocument({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              "@id": "https://useorigin.app/#website",
+              "@id": "https://wenlan.app/#website",
               name: "Wenlan",
-              alternateName: "useorigin.app",
-              url: "https://useorigin.app",
+              alternateName: "wenlan.app",
+              url: "https://wenlan.app",
               description: siteDescription,
               inLanguage: LOCALE_CONFIG[locale].hreflang,
-              publisher: { "@id": "https://useorigin.app/#organization" },
-              copyrightHolder: { "@id": "https://useorigin.app/#qixuan-lu" },
+              publisher: { "@id": "https://wenlan.app/#organization" },
+              copyrightHolder: { "@id": "https://wenlan.app/#qixuan-lu" },
               copyrightYear: 2026,
               license: "https://github.com/7xuanlu/wenlan/blob/main/LICENSE",
             }),
@@ -91,18 +92,18 @@ export default function RootDocument({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              "@id": "https://useorigin.app/#organization",
+              "@id": "https://wenlan.app/#organization",
               name: "Wenlan",
               alternateName: [
                 "Wenlan AI",
                 "Wenlan AI Work Memory",
                 "Wenlan Local AI Work Memory",
               ],
-              url: "https://useorigin.app",
-              logo: "https://useorigin.app/logo.svg",
+              url: "https://wenlan.app",
+              logo: "https://wenlan.app/logo.svg",
               founder: {
                 "@type": "Person",
-                "@id": "https://useorigin.app/#qixuan-lu",
+                "@id": "https://wenlan.app/#qixuan-lu",
                 name: "Qi-Xuan Lu",
                 url: "https://github.com/7xuanlu",
                 sameAs: ["https://github.com/7xuanlu"],
@@ -130,6 +131,7 @@ export default function RootDocument({
           <div id="main-content">{children}</div>
           <SiteFooter locale={locale} />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

@@ -215,7 +215,7 @@ const setupArticles: BaseSpec[] = [
       },
       {
         label: "Wenlan get started docs",
-        href: "https://useorigin.app/docs/get-started",
+        href: "https://wenlan.app/docs/get-started",
       },
     ],
   },
@@ -283,7 +283,7 @@ const setupArticles: BaseSpec[] = [
       },
       {
         label: "Wenlan Claude Code workflow",
-        href: "https://useorigin.app/learn/wenlan-for-claude-code",
+        href: "https://wenlan.app/learn/wenlan-for-claude-code",
       },
     ],
   },
@@ -530,7 +530,7 @@ const setupArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan data and privacy docs",
-        href: "https://useorigin.app/docs/data-and-privacy",
+        href: "https://wenlan.app/docs/data-and-privacy",
       },
     ],
   },
@@ -586,15 +586,15 @@ const setupArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan daily workflow docs",
-        href: "https://useorigin.app/docs/daily-workflow",
+        href: "https://wenlan.app/docs/daily-workflow",
       },
       {
         label: "Wenlan core concepts docs",
-        href: "https://useorigin.app/docs/core-concepts",
+        href: "https://wenlan.app/docs/core-concepts",
       },
       {
         label: "Wenlan MCP clients docs",
-        href: "https://useorigin.app/docs/mcp-clients",
+        href: "https://wenlan.app/docs/mcp-clients",
       },
     ],
   },
@@ -655,15 +655,15 @@ const setupArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan daily workflow docs",
-        href: "https://useorigin.app/docs/daily-workflow",
+        href: "https://wenlan.app/docs/daily-workflow",
       },
       {
         label: "Wenlan core concepts docs",
-        href: "https://useorigin.app/docs/core-concepts",
+        href: "https://wenlan.app/docs/core-concepts",
       },
       {
         label: "Wenlan MCP clients docs",
-        href: "https://useorigin.app/docs/mcp-clients",
+        href: "https://wenlan.app/docs/mcp-clients",
       },
     ],
   },
@@ -725,23 +725,23 @@ const setupArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan CLI and service docs",
-        href: "https://useorigin.app/docs/cli-and-service",
+        href: "https://wenlan.app/docs/cli-and-service",
       },
       {
         label: "Wenlan MCP clients docs",
-        href: "https://useorigin.app/docs/mcp-clients",
+        href: "https://wenlan.app/docs/mcp-clients",
       },
       {
         label: "Wenlan troubleshooting docs",
-        href: "https://useorigin.app/docs/troubleshooting",
+        href: "https://wenlan.app/docs/troubleshooting",
       },
       {
         label: "Wenlan configuration docs",
-        href: "https://useorigin.app/docs/configuration",
+        href: "https://wenlan.app/docs/configuration",
       },
       {
         label: "Wenlan security docs",
-        href: "https://useorigin.app/docs/security",
+        href: "https://wenlan.app/docs/security",
       },
     ],
   },
@@ -800,11 +800,11 @@ const setupArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan capture quality docs",
-        href: "https://useorigin.app/docs/capture-quality",
+        href: "https://wenlan.app/docs/capture-quality",
       },
       {
         label: "Wenlan daily workflow docs",
-        href: "https://useorigin.app/docs/daily-workflow",
+        href: "https://wenlan.app/docs/daily-workflow",
       },
     ],
   },
@@ -1053,7 +1053,7 @@ const workflowArticles: BaseSpec[] = [
       },
       {
         label: "Wenlan MCP clients docs",
-        href: "https://useorigin.app/docs/mcp-clients",
+        href: "https://wenlan.app/docs/mcp-clients",
       },
     ],
   },
@@ -1180,11 +1180,11 @@ const workflowArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan daily workflow docs",
-        href: "https://useorigin.app/docs/daily-workflow",
+        href: "https://wenlan.app/docs/daily-workflow",
       },
       {
         label: "Wenlan data and privacy docs",
-        href: "https://useorigin.app/docs/data-and-privacy",
+        href: "https://wenlan.app/docs/data-and-privacy",
       },
       {
         label: "Claude Code sessions docs",
@@ -1378,15 +1378,15 @@ const workflowArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan MCP clients docs",
-        href: "https://useorigin.app/docs/mcp-clients",
+        href: "https://wenlan.app/docs/mcp-clients",
       },
       {
         label: "Wenlan spaces docs",
-        href: "https://useorigin.app/docs/spaces",
+        href: "https://wenlan.app/docs/spaces",
       },
       {
         label: "Wenlan agent profiles docs",
-        href: "https://useorigin.app/docs/agent-profiles",
+        href: "https://wenlan.app/docs/agent-profiles",
       },
     ],
   },
@@ -1447,11 +1447,11 @@ const workflowArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan daily workflow docs",
-        href: "https://useorigin.app/docs/daily-workflow",
+        href: "https://wenlan.app/docs/daily-workflow",
       },
       {
         label: "Wenlan data and privacy docs",
-        href: "https://useorigin.app/docs/data-and-privacy",
+        href: "https://wenlan.app/docs/data-and-privacy",
       },
     ],
   },
@@ -1512,15 +1512,15 @@ const comparisonArticles: BaseSpec[] = [
       },
       {
         label: "Wenlan MCP clients docs",
-        href: "https://useorigin.app/docs/mcp-clients",
+        href: "https://wenlan.app/docs/mcp-clients",
       },
       {
         label: "Wenlan HTTP API docs",
-        href: "https://useorigin.app/docs/http-api",
+        href: "https://wenlan.app/docs/http-api",
       },
       {
         label: "Wenlan project scope docs",
-        href: "https://useorigin.app/docs/project-scope",
+        href: "https://wenlan.app/docs/project-scope",
       },
     ],
     comparisonTable: {
@@ -1609,15 +1609,15 @@ const comparisonArticles: BaseSpec[] = [
       },
       {
         label: "Wenlan data and privacy docs",
-        href: "https://useorigin.app/docs/data-and-privacy",
+        href: "https://wenlan.app/docs/data-and-privacy",
       },
       {
         label: "Wenlan core concepts docs",
-        href: "https://useorigin.app/docs/core-concepts",
+        href: "https://wenlan.app/docs/core-concepts",
       },
       {
         label: "Wenlan security docs",
-        href: "https://useorigin.app/docs/security",
+        href: "https://wenlan.app/docs/security",
       },
     ],
     comparisonTable: {
@@ -1740,11 +1740,11 @@ const comparisonArticles: BaseSpec[] = [
       },
       {
         label: "Wenlan core concepts docs",
-        href: "https://useorigin.app/docs/core-concepts",
+        href: "https://wenlan.app/docs/core-concepts",
       },
       {
         label: "Wenlan data and privacy docs",
-        href: "https://useorigin.app/docs/data-and-privacy",
+        href: "https://wenlan.app/docs/data-and-privacy",
       },
     ],
     comparisonTable: {
@@ -1836,7 +1836,7 @@ const comparisonArticles: BaseSpec[] = [
       },
       {
         label: "Wenlan data and privacy docs",
-        href: "https://useorigin.app/docs/data-and-privacy",
+        href: "https://wenlan.app/docs/data-and-privacy",
       },
     ],
     comparisonTable: {
@@ -1929,11 +1929,11 @@ const comparisonArticles: BaseSpec[] = [
       },
       {
         label: "Wenlan data and privacy docs",
-        href: "https://useorigin.app/docs/data-and-privacy",
+        href: "https://wenlan.app/docs/data-and-privacy",
       },
       {
         label: "Wenlan core concepts docs",
-        href: "https://useorigin.app/docs/core-concepts",
+        href: "https://wenlan.app/docs/core-concepts",
       },
     ],
     comparisonTable: {
@@ -1994,11 +1994,11 @@ const trustArticles: BaseSpec[] = [
       "Pages can grow or be refreshed as related memories accumulate.",
     ],
     quickAnswer:
-      "Source-backed pages are readable wiki-style artifacts generated from related memories while keeping source memory IDs attached and inspectable through Wenlan.",
+      "Source-backed pages are the trust layer behind Wenlan's LLM wiki for AI work: readable wiki-style artifacts generated from related memories while keeping source memory IDs attached and inspectable through Wenlan.",
     problem:
       "Atomic memories are easy to capture but hard to read at scale. Summaries are easier to read but dangerous when they lose provenance.",
     wenlanFit:
-      "Wenlan uses source-backed distillation: related captures become pages, and the page record keeps source IDs, version, changelog, stale reason, and source counts so humans and agents can inspect the chain.",
+      "Wenlan uses source-backed distillation for its LLM wiki: related captures become pages, and the page record keeps source IDs, version, changelog, stale reason, and source counts so humans and agents can inspect the chain.",
     actionHeading: "Use pages when memory clusters",
     actionIntro:
       "Do not force every capture into a page immediately.",
@@ -2017,7 +2017,7 @@ const trustArticles: BaseSpec[] = [
       "Why not store only pages?",
       "Atomic memories preserve fine-grained evidence. Pages compose them into readable context.",
     ],
-    relatedSlugs: ["review-before-trust-ai-memory", "markdown-local-index-ai-memory", "ai-memory-provenance"],
+    relatedSlugs: ["distilled-wiki-pages-ai-memory", "review-before-trust-ai-memory", "ai-memory-provenance"],
   },
   {
     slug: "ai-memory-provenance",
@@ -2219,11 +2219,11 @@ const trustArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan project scope docs",
-        href: "https://useorigin.app/docs/project-scope",
+        href: "https://wenlan.app/docs/project-scope",
       },
       {
         label: "Wenlan spaces docs",
-        href: "https://useorigin.app/docs/spaces",
+        href: "https://wenlan.app/docs/spaces",
       },
     ],
   },

@@ -415,14 +415,28 @@ test("localized get-started layout allows mobile content columns to shrink", asy
   assert.match(source, /<div className="min-w-0">/);
 });
 
-test("localized untranslated docs slug and Learn routes hard 404", async () => {
+test("localized untranslated docs slug and Learn index hard 404", async () => {
   await assertNotFoundRouteSource("src/app/[locale]/docs/[slug]/page.tsx", {
     simpleRuntimeNotFound: true,
   });
   await assertNotFoundRouteSource("src/app/[locale]/learn/page.tsx");
-  await assertNotFoundRouteSource("src/app/[locale]/learn/[slug]/page.tsx", {
-    simpleRuntimeNotFound: true,
-  });
+});
+
+test("localized Learn slug route is limited to Mandarin LLM wiki acquisition pages", async () => {
+  const { routing } = await loadI18nModules();
+  const source = await readFile(
+    resolve(repoRoot, "src/app/[locale]/learn/[slug]/page.tsx"),
+    "utf8",
+  );
+
+  assert.deepEqual(routing.TRANSLATED_LEARN_PATHS, [
+    "/learn/distilled-wiki-pages-ai-memory",
+    "/learn/source-backed-wiki-pages-ai-work",
+  ]);
+  assert.match(source, /getLocalizedLearnArticle/);
+  assert.match(source, /TRANSLATED_LEARN_SLUGS/);
+  assert.match(source, /\bnotFound\(\)/);
+  assert.doesNotMatch(source, /simpleRuntimeNotFound/);
 });
 
 test("locale model exposes only the supported app locales and metadata", async () => {
@@ -468,7 +482,7 @@ test("next-intl routing uses as-needed prefixes without locale detection", async
 test("localized route helpers keep English canonical and prefix translated core routes", async () => {
   const { routing } = await loadI18nModules();
 
-  assert.equal(routing.SITE_URL, "https://useorigin.app");
+  assert.equal(routing.SITE_URL, "https://wenlan.app");
   assert.deepEqual(routing.CORE_TRANSLATED_PATHS, [
     "/",
     "/about",
@@ -483,22 +497,45 @@ test("localized route helpers keep English canonical and prefix translated core 
   );
   assert.equal(routing.localizePath("zh-CN", "/about"), "/zh-CN/about");
   assert.equal(routing.localizePath("zh-TW", "/learn"), "/learn");
+  assert.equal(
+    routing.localizePath("zh-TW", "/learn/distilled-wiki-pages-ai-memory"),
+    "/zh-TW/learn/distilled-wiki-pages-ai-memory",
+  );
+  assert.equal(
+    routing.localizePath("zh-CN", "/learn/source-backed-wiki-pages-ai-work"),
+    "/zh-CN/learn/source-backed-wiki-pages-ai-work",
+  );
   assert.deepEqual(routing.stripLocalePrefix("/zh-TW/docs/get-started"), {
     locale: "zh-TW",
     pathname: "/docs/get-started",
   });
+  assert.deepEqual(
+    routing.stripLocalePrefix("/zh-CN/learn/distilled-wiki-pages-ai-memory"),
+    {
+      locale: "zh-CN",
+      pathname: "/learn/distilled-wiki-pages-ai-memory",
+    },
+  );
   assert.deepEqual(routing.stripLocalePrefix("/docs/get-started"), {
     locale: "en",
     pathname: "/docs/get-started",
   });
   assert.equal(
     routing.canonicalUrl("zh-TW", "/docs/get-started"),
-    "https://useorigin.app/zh-TW/docs/get-started",
+    "https://wenlan.app/zh-TW/docs/get-started",
   );
-  assert.equal(routing.canonicalUrl("en", "/"), "https://useorigin.app");
+  assert.equal(routing.canonicalUrl("en", "/"), "https://wenlan.app");
   assert.equal(routing.isTranslatedPath("zh-TW", "/docs/get-started"), true);
   assert.equal(routing.isTranslatedPath("zh-CN", "/about"), true);
   assert.equal(routing.isTranslatedPath("zh-TW", "/learn"), false);
+  assert.equal(
+    routing.isTranslatedPath("zh-TW", "/learn/distilled-wiki-pages-ai-memory"),
+    true,
+  );
+  assert.equal(
+    routing.isTranslatedPath("zh-CN", "/learn/source-backed-wiki-pages-ai-work"),
+    true,
+  );
   assert.equal(
     routing.isTranslatedPath("zh-TW", "/learn/wenlan-vs-basic-memory"),
     false,
@@ -514,10 +551,18 @@ test("localized navigation helper localizes translated internal hrefs only", asy
     navigation.localizedHrefForLocale("zh-CN", "/docs/get-started?from=nav#install"),
     "/zh-CN/docs/get-started?from=nav#install",
   );
+  assert.equal(
+    navigation.localizedHrefForLocale("zh-TW", "/learn/distilled-wiki-pages-ai-memory"),
+    "/zh-TW/learn/distilled-wiki-pages-ai-memory",
+  );
+  assert.equal(
+    navigation.localizedHrefForLocale("zh-CN", "/learn/source-backed-wiki-pages-ai-work"),
+    "/zh-CN/learn/source-backed-wiki-pages-ai-work",
+  );
   assert.equal(navigation.localizedHrefForLocale("zh-TW", "/learn"), "/learn");
   assert.equal(
-    navigation.localizedHrefForLocale("zh-TW", "https://useorigin.app/docs"),
-    "https://useorigin.app/docs",
+    navigation.localizedHrefForLocale("zh-TW", "https://wenlan.app/docs"),
+    "https://wenlan.app/docs",
   );
 });
 
@@ -546,6 +591,21 @@ test("alternate URLs are reciprocal and include x-default for core translated pa
       );
     }
   }
+
+  for (const pathname of routing.TRANSLATED_LEARN_PATHS) {
+    const alternates = routing.alternateUrls(pathname);
+
+    assert.deepEqual(Object.keys(alternates).sort(), [
+      "en-US",
+      "x-default",
+      "zh-CN",
+      "zh-TW",
+    ]);
+    assert.equal(alternates["x-default"], routing.canonicalUrl("en", pathname));
+    assert.equal(alternates["en-US"], routing.canonicalUrl("en", pathname));
+    assert.equal(alternates["zh-TW"], routing.canonicalUrl("zh-TW", pathname));
+    assert.equal(alternates["zh-CN"], routing.canonicalUrl("zh-CN", pathname));
+  }
 });
 
 test("page metadata helper emits localized canonical, alternates, and Open Graph locale", async () => {
@@ -557,15 +617,15 @@ test("page metadata helper emits localized canonical, alternates, and Open Graph
     "/about",
     content.localizedContentByLocale["zh-TW"].about.content.seo,
   );
-  const canonical = "https://useorigin.app/zh-TW/about";
+  const canonical = "https://wenlan.app/zh-TW/about";
 
-  assert.equal(pageMetadata.metadataBase.href, "https://useorigin.app/");
+  assert.equal(pageMetadata.metadataBase.href, "https://wenlan.app/");
   assert.equal(pageMetadata.alternates.canonical, canonical);
   assert.deepEqual(pageMetadata.alternates.languages, {
-    "en-US": "https://useorigin.app/about",
+    "en-US": "https://wenlan.app/about",
     "zh-TW": canonical,
-    "zh-CN": "https://useorigin.app/zh-CN/about",
-    "x-default": "https://useorigin.app/about",
+    "zh-CN": "https://wenlan.app/zh-CN/about",
+    "x-default": "https://wenlan.app/about",
   });
   assert.deepEqual(
     pageMetadata.alternates.languages,
@@ -590,6 +650,44 @@ test("root metadata includes reciprocal alternates for translated home locales",
       "zh-TW",
     ]);
   }
+});
+
+test("localized Learn metadata emits Mandarin canonical alternates for acquisition pages", async () => {
+  const { routing } = await loadI18nModules();
+  const localizedLearnSlug = await import("../src/app/[locale]/learn/[slug]/page.tsx");
+
+  assert.equal(typeof localizedLearnSlug.generateStaticParams, "function");
+  assert.deepEqual(localizedLearnSlug.generateStaticParams(), [
+    { locale: "zh-TW", slug: "distilled-wiki-pages-ai-memory" },
+    { locale: "zh-CN", slug: "distilled-wiki-pages-ai-memory" },
+    { locale: "zh-TW", slug: "source-backed-wiki-pages-ai-work" },
+    { locale: "zh-CN", slug: "source-backed-wiki-pages-ai-work" },
+  ]);
+
+  const metadata = await localizedLearnSlug.generateMetadata({
+    params: Promise.resolve({
+      locale: "zh-TW",
+      slug: "distilled-wiki-pages-ai-memory",
+    }),
+  });
+
+  assert.equal(
+    metadata.title,
+    "AI 工作的 LLM wiki | Wenlan 文瀾",
+  );
+  assert.equal(
+    metadata.alternates.canonical,
+    "https://wenlan.app/zh-TW/learn/distilled-wiki-pages-ai-memory",
+  );
+  assert.deepEqual(
+    metadata.alternates.languages,
+    routing.alternateUrls("/learn/distilled-wiki-pages-ai-memory"),
+  );
+  assert.equal(metadata.openGraph.locale, "zh_TW");
+  assert.equal(
+    metadata.openGraph.url,
+    "https://wenlan.app/zh-TW/learn/distilled-wiki-pages-ai-memory",
+  );
 });
 
 test("core route wrappers export localized metadata for translated pages", async () => {
@@ -657,7 +755,7 @@ test("core route wrappers export localized metadata for translated pages", async
   }
 });
 
-test("sitemap includes localized core routes and excludes untranslated localized sections", async () => {
+test("sitemap includes localized core and Mandarin acquisition routes", async () => {
   const { locales, routing } = await loadI18nModules();
   const { default: sitemap } = await import("../src/app/sitemap.ts");
   const entries = sitemap();
@@ -673,26 +771,34 @@ test("sitemap includes localized core routes and excludes untranslated localized
     }
   }
 
-  assert.equal(urls.has("https://useorigin.app/zh-TW/learn"), false);
-  assert.equal(urls.has("https://useorigin.app/zh-CN/learn"), false);
+  assert.equal(urls.has("https://wenlan.app/zh-TW/learn"), false);
+  assert.equal(urls.has("https://wenlan.app/zh-CN/learn"), false);
+  for (const pathname of routing.TRANSLATED_LEARN_PATHS) {
+    assert.ok(urls.has(routing.canonicalUrl("en", pathname)), pathname);
+    assert.ok(urls.has(routing.canonicalUrl("zh-TW", pathname)), pathname);
+    assert.ok(urls.has(routing.canonicalUrl("zh-CN", pathname)), pathname);
+  }
   assert.equal(
-    urls.has("https://useorigin.app/zh-TW/learn/wenlan-vs-basic-memory"),
+    urls.has("https://wenlan.app/zh-TW/learn/wenlan-vs-basic-memory"),
     false,
   );
   assert.equal(
-    urls.has("https://useorigin.app/zh-CN/learn/wenlan-vs-basic-memory"),
+    urls.has("https://wenlan.app/zh-CN/learn/wenlan-vs-basic-memory"),
     false,
   );
-  assert.equal(urls.has("https://useorigin.app/zh-TW/docs/daily-workflow"), false);
-  assert.equal(urls.has("https://useorigin.app/zh-CN/docs/daily-workflow"), false);
+  assert.equal(urls.has("https://wenlan.app/zh-TW/docs/daily-workflow"), false);
+  assert.equal(urls.has("https://wenlan.app/zh-CN/docs/daily-workflow"), false);
 });
 
-test("sitemap core route alternates are reciprocal for every localized entry", async () => {
+test("sitemap route alternates are reciprocal for every localized entry", async () => {
   const { locales, routing } = await loadI18nModules();
   const { default: sitemap } = await import("../src/app/sitemap.ts");
   const entriesByUrl = new Map(sitemap().map((entry) => [entry.url, entry]));
 
-  for (const pathname of routing.CORE_TRANSLATED_PATHS) {
+  for (const pathname of [
+    ...routing.CORE_TRANSLATED_PATHS,
+    ...routing.TRANSLATED_LEARN_PATHS,
+  ]) {
     const expectedAlternates = routing.alternateUrls(pathname);
 
     for (const locale of locales.SUPPORTED_LOCALES) {
@@ -887,6 +993,54 @@ test("Chinese home surfaces include script-specific Wenlan Chinese names", async
   }
 });
 
+test("home SEO copy presents LLM wiki positioning in English and Mandarin", async () => {
+  const { content } = await loadI18nModules();
+
+  assert.equal(
+    content.enContent.home.content.seo.title,
+    "Wenlan | LLM Wiki for AI Work",
+  );
+  assert.equal(
+    content.enContent.home.content.seo.description,
+    "Wenlan is an LLM wiki for AI work: agents capture what they learn, you add sources you trust, and the local daemon keeps source-backed wiki pages current.",
+  );
+  assert.match(
+    content.enContent.home.content.hero.description,
+    /LLM wiki for AI work/,
+  );
+
+  const expected = {
+    "zh-TW": {
+      name: "文瀾",
+      sourceBacked: "有來源依據",
+      staleHomePhrase: /活個人知識庫|AI-native/,
+    },
+    "zh-CN": {
+      name: "文澜",
+      sourceBacked: "有来源依据",
+      staleHomePhrase: /活个人知识库|AI-native/,
+    },
+  };
+
+  for (const [locale, localeExpected] of Object.entries(expected)) {
+    const home = content.localizedContentByLocale[locale].home.content;
+    const renderedHome = JSON.stringify(home);
+
+    assert.match(home.seo.title, /AI 工作的 LLM wiki/, `${locale}.home.seo.title`);
+    assert.match(home.seo.description, /AI 工作的 LLM wiki/, `${locale}.home.seo.description`);
+    assert.match(home.seo.description, new RegExp(localeExpected.name), `${locale}.home.seo.description.name`);
+    assert.match(
+      home.seo.description,
+      new RegExp(localeExpected.sourceBacked),
+      `${locale}.home.seo.description.sourceBacked`,
+    );
+    assert.match(home.hero.description, /AI 工作的 LLM wiki/, `${locale}.home.hero.description`);
+    assert.match(home.hero.description, /AI 代理/, `${locale}.home.hero.description.agent`);
+    assert.match(home.faqs.items[0].a, /LLM wiki/, `${locale}.home.faq.whatIsWenlan`);
+    assert.doesNotMatch(renderedHome, localeExpected.staleHomePhrase, `${locale}.home.stale`);
+  }
+});
+
 test("waitlist client-visible copy is dictionary driven", async () => {
   const formSource = await readFile(
     resolve(repoRoot, "src/app/waitlist-form.tsx"),
@@ -1053,23 +1207,23 @@ test("English core content records the current SEO title and description subset"
 
   assert.equal(
     content.enContent.home.content.seo.title,
-    "Wenlan | Living Personal Knowledge Library for AI Work",
+    "Wenlan | LLM Wiki for AI Work",
   );
   assert.equal(
     content.enContent.home.content.seo.description,
-    "Wenlan is a living personal knowledge library for AI work: agents capture what they learn, you add sources you trust, and the daemon keeps source-cited pages current.",
+    "Wenlan is an LLM wiki for AI work: agents capture what they learn, you add sources you trust, and the local daemon keeps source-backed wiki pages current.",
   );
   assert.equal(
     content.enContent.about.content.seo.title,
-    "About Wenlan | Living Personal Knowledge Library",
+    "About Wenlan | LLM Wiki for AI Work",
   );
   assert.equal(
     content.enContent.docs.content.seo.title,
-    "Wenlan Docs | Product Manual",
+    "Wenlan Docs | LLM Wiki for AI Work",
   );
   assert.equal(
     content.enContent.getStarted.content.seo.title,
-    "Get Started with Wenlan | Local AI Work Memory",
+    "Get Started with Wenlan | LLM Wiki for AI Work",
   );
 });
 

@@ -1,6 +1,6 @@
 import { DEFAULT_AUTHOR, SITE_URL } from "../learn/articles";
 
-export const DOCS_UPDATED_AT = "2026-07-08";
+export const DOCS_UPDATED_AT = "2026-07-02";
 
 export type DocGroup = "After setup" | "Reference" | "Project";
 
@@ -1459,7 +1459,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Current runtime shape",
         body: [
-          "The current public docs describe the 0.12.0 runtime shape: Claude Code plugin, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages, real git versioning for readable pages, session handoffs, and status artifacts, citation-gated page synthesis, wenlan restart, wenlan reranker, and cross-platform service registration.",
+          "The current public docs describe the 0.12.0 runtime shape: Claude Code plugin, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages, real git versioning for readable pages, session handoffs, and status artifacts, wenlan restart, wenlan reranker, and cross-platform service registration.",
           "The biggest practical upgrade checks are platform support, package path alignment, and spaces. Confirm your machine's service manager, confirm MCP clients launch the connector under ~/.wenlan/bin, and confirm the active space is the one you expect.",
         ],
         link: {
@@ -3573,20 +3573,40 @@ export const docPages: DocPage[] = [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.12.0 is the current stable release recorded in CHANGELOG.md and the release-please manifest. It ships the distill redesign, per-claim verified citations for wiki pages, loopback daemon origin protection, and startup ordering fixes for occupied ports.",
+          "Wenlan v0.12.0 is the current stable release recorded in CHANGELOG.md and the release-please manifest. It includes citation-gated page synthesis and release-path hardening after the v0.11.x document revision work.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
         ],
       },
       {
         heading: "v0.12.0 highlights",
         body: [
-          "The v0.12.0 release tightens source-backed wiki work: refreshes run through one canonical write path, generated page claims require verified citations, and loopback daemon access is guarded against cross-origin browser traffic.",
+          "The v0.12.0 release adds citation-gated page synthesis and release-path hardening while preserving the v0.11.x document revision work.",
         ],
         bullets: [
-          "Distill refreshes use one canonical PageWrite path.",
-          "Wiki page claims require verified citations before publication.",
-          "Loopback daemon browser access is guarded by origin checks.",
-          "The server binds its port before data-directory work so occupied ports fail early.",
+          "Citation-gated synthesis keeps generated pages tied to verified source memories.",
+          "Stable release date: 2026-07-08.",
+        ],
+      },
+      {
+        heading: "v0.10.0 highlights",
+        body: [
+          "The v0.10.0 release adds an L1 ingest path for folders and multi-format documents, and brings the pages skill to the Codex plugin surface.",
+        ],
+        bullets: [
+          "Folder and multi-format document ingest added for local source material.",
+          "Pages skill ported to the Codex plugin workflow.",
+          "Stable release date: 2026-07-02.",
+        ],
+      },
+      {
+        heading: "v0.9.6 highlights",
+        body: [
+          "The v0.9.6 release finished the shared plugin contract work and added the Codex plugin install path.",
+        ],
+        bullets: [
+          "Codex plugin install path documented and wired.",
+          "Shared Wenlan plugin contract added.",
+          "Space auto-create and cascade space moves stopped.",
         ],
       },
       {

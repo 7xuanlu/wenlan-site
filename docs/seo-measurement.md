@@ -1,69 +1,69 @@
 # Wenlan SEO Measurement
 
-Use this checklist for Wenlan SEO measurement. The current deployed property remains `useorigin.app`; keep these URLs until the public Wenlan site/domain changes. The goal is to separate brand demand, category discovery, and AI-answer visibility instead of treating all traffic as one number.
+Use this checklist for Wenlan SEO measurement. The canonical deployed property is `wenlan.app`; measure and submit canonical URLs there while treating `useorigin.app` as a legacy redirect bridge. The goal is to separate brand demand, category discovery, and AI-answer visibility instead of treating all traffic as one number.
 
 Reusable runbook: `docs/seo-growth-loop.md`.
 
 ## Google Search Console Setup
 
-1. Verify the `https://useorigin.app` property.
-2. Submit `https://useorigin.app/sitemap.xml`.
+1. Verify the `https://wenlan.app` property.
+2. Submit `https://wenlan.app/sitemap.xml`.
 3. Check indexing for:
-   - `https://useorigin.app/`
-   - `https://useorigin.app/docs`
-   - `https://useorigin.app/docs/get-started`
-   - `https://useorigin.app/docs/daily-workflow`
-   - `https://useorigin.app/docs/core-concepts`
-   - `https://useorigin.app/docs/commands`
-   - `https://useorigin.app/docs/data-and-privacy`
-   - `https://useorigin.app/docs/mcp-clients`
-   - `https://useorigin.app/docs/troubleshooting`
-   - `https://useorigin.app/learn`
-   - `https://useorigin.app/learn/ai-work-memory`
-   - `https://useorigin.app/learn/mcp-memory-server`
-   - `https://useorigin.app/learn/local-first-ai-memory`
-   - `https://useorigin.app/learn/claude-code-memory`
-   - `https://useorigin.app/learn/claude-code-memory-command-vs-wenlan`
-   - `https://useorigin.app/learn/wenlan-for-claude-code`
-   - `https://useorigin.app/learn/distilled-wiki-pages-ai-memory`
-   - `https://useorigin.app/learn/ai-work-memory-vs-knowledge-base`
-   - `https://useorigin.app/learn/wenlan-vs-basic-memory`
-   - `https://useorigin.app/learn/wenlan-vs-claude-mem`
-   - `https://useorigin.app/learn/wenlan-vs-superlocal-memory`
-   - `https://useorigin.app/learn/markdown-local-index-ai-memory`
-   - `https://useorigin.app/learn/ai-agent-handoff-loop`
-   - `https://useorigin.app/learn/where-wenlan-stores-claude-code-memory`
-   - `https://useorigin.app/learn/how-to-add-memory-to-claude-code`
-   - `https://useorigin.app/learn/how-to-give-codex-persistent-memory`
-   - `https://useorigin.app/learn/how-to-add-mcp-memory-to-cursor`
-   - `https://useorigin.app/learn/claude-desktop-mcp-memory-setup`
-   - `https://useorigin.app/learn/ai-agent-memory-local-vs-cloud`
-   - `https://useorigin.app/learn/ai-coding-agent-loses-context`
-   - `https://useorigin.app/learn/persistent-project-context-for-ai-agents`
-   - `https://useorigin.app/learn/mcp-memory-server-localhost-7878`
-   - `https://useorigin.app/learn/what-to-capture-in-ai-work-memory`
-   - `https://useorigin.app/learn/wenlan-codex-workflow`
-   - `https://useorigin.app/learn/wenlan-cursor-workflow`
-   - `https://useorigin.app/learn/wenlan-claude-desktop-workflow`
-   - `https://useorigin.app/learn/wenlan-gemini-cli-workflow`
-   - `https://useorigin.app/learn/wenlan-vscode-mcp-workflow`
-   - `https://useorigin.app/learn/claude-code-session-handoff`
-   - `https://useorigin.app/learn/cursor-claude-code-shared-memory`
-   - `https://useorigin.app/learn/codex-claude-code-shared-memory`
-   - `https://useorigin.app/learn/multi-agent-memory-workflow`
-   - `https://useorigin.app/learn/ai-agent-project-status-handoff`
-   - `https://useorigin.app/learn/wenlan-vs-mcp-memory-service`
-   - `https://useorigin.app/learn/wenlan-vs-chatgpt-memory`
-   - `https://useorigin.app/learn/wenlan-vs-obsidian-ai-memory`
-   - `https://useorigin.app/learn/wenlan-vs-notion-ai`
-   - `https://useorigin.app/learn/wenlan-vs-mem0`
-   - `https://useorigin.app/learn/source-backed-wiki-pages-ai-work`
-   - `https://useorigin.app/learn/ai-memory-provenance`
-   - `https://useorigin.app/learn/local-git-history-ai-memory`
-   - `https://useorigin.app/learn/review-before-trust-ai-memory`
-   - `https://useorigin.app/learn/project-scope-ai-memory`
-   - `https://useorigin.app/about`
-   - `https://useorigin.app/llms.txt`
+   - `https://wenlan.app/`
+   - `https://wenlan.app/docs`
+   - `https://wenlan.app/docs/get-started`
+   - `https://wenlan.app/docs/daily-workflow`
+   - `https://wenlan.app/docs/core-concepts`
+   - `https://wenlan.app/docs/commands`
+   - `https://wenlan.app/docs/data-and-privacy`
+   - `https://wenlan.app/docs/mcp-clients`
+   - `https://wenlan.app/docs/troubleshooting`
+   - `https://wenlan.app/learn`
+   - `https://wenlan.app/learn/ai-work-memory`
+   - `https://wenlan.app/learn/mcp-memory-server`
+   - `https://wenlan.app/learn/local-first-ai-memory`
+   - `https://wenlan.app/learn/claude-code-memory`
+   - `https://wenlan.app/learn/claude-code-memory-command-vs-wenlan`
+   - `https://wenlan.app/learn/wenlan-for-claude-code`
+   - `https://wenlan.app/learn/distilled-wiki-pages-ai-memory`
+   - `https://wenlan.app/learn/ai-work-memory-vs-knowledge-base`
+   - `https://wenlan.app/learn/wenlan-vs-basic-memory`
+   - `https://wenlan.app/learn/wenlan-vs-claude-mem`
+   - `https://wenlan.app/learn/wenlan-vs-superlocal-memory`
+   - `https://wenlan.app/learn/markdown-local-index-ai-memory`
+   - `https://wenlan.app/learn/ai-agent-handoff-loop`
+   - `https://wenlan.app/learn/where-wenlan-stores-claude-code-memory`
+   - `https://wenlan.app/learn/how-to-add-memory-to-claude-code`
+   - `https://wenlan.app/learn/how-to-give-codex-persistent-memory`
+   - `https://wenlan.app/learn/how-to-add-mcp-memory-to-cursor`
+   - `https://wenlan.app/learn/claude-desktop-mcp-memory-setup`
+   - `https://wenlan.app/learn/ai-agent-memory-local-vs-cloud`
+   - `https://wenlan.app/learn/ai-coding-agent-loses-context`
+   - `https://wenlan.app/learn/persistent-project-context-for-ai-agents`
+   - `https://wenlan.app/learn/mcp-memory-server-localhost-7878`
+   - `https://wenlan.app/learn/what-to-capture-in-ai-work-memory`
+   - `https://wenlan.app/learn/wenlan-codex-workflow`
+   - `https://wenlan.app/learn/wenlan-cursor-workflow`
+   - `https://wenlan.app/learn/wenlan-claude-desktop-workflow`
+   - `https://wenlan.app/learn/wenlan-gemini-cli-workflow`
+   - `https://wenlan.app/learn/wenlan-vscode-mcp-workflow`
+   - `https://wenlan.app/learn/claude-code-session-handoff`
+   - `https://wenlan.app/learn/cursor-claude-code-shared-memory`
+   - `https://wenlan.app/learn/codex-claude-code-shared-memory`
+   - `https://wenlan.app/learn/multi-agent-memory-workflow`
+   - `https://wenlan.app/learn/ai-agent-project-status-handoff`
+   - `https://wenlan.app/learn/wenlan-vs-mcp-memory-service`
+   - `https://wenlan.app/learn/wenlan-vs-chatgpt-memory`
+   - `https://wenlan.app/learn/wenlan-vs-obsidian-ai-memory`
+   - `https://wenlan.app/learn/wenlan-vs-notion-ai`
+   - `https://wenlan.app/learn/wenlan-vs-mem0`
+   - `https://wenlan.app/learn/source-backed-wiki-pages-ai-work`
+   - `https://wenlan.app/learn/ai-memory-provenance`
+   - `https://wenlan.app/learn/local-git-history-ai-memory`
+   - `https://wenlan.app/learn/review-before-trust-ai-memory`
+   - `https://wenlan.app/learn/project-scope-ai-memory`
+   - `https://wenlan.app/about`
+   - `https://wenlan.app/llms.txt`
 4. Track impressions before rankings. New pages usually show impressions before stable positions.
 5. Do not start another content batch until the newest Learn pages are discovered/indexed or GSC shows which query clusters are earning impressions.
 
@@ -99,7 +99,8 @@ Track these groups separately in Search Console:
 - Setup and troubleshooting: `where does claude code store memory`, `add memory to claude code`, `codex persistent memory`, `cursor mcp memory`, `claude desktop mcp memory`, `wenlan 7878`
 - Comparisons: `wenlan vs basic memory`, `wenlan vs claude-mem`, `wenlan vs superlocal memory`, `wenlan vs mcp-memory-service`, `wenlan vs chatgpt memory`, `wenlan vs obsidian`, `wenlan vs notion ai`, `wenlan vs mem0`, `basic memory alternative`, `claude-mem alternative`
 - Obsidian AI memory: `obsidian ai memory`, `obsidian-mind alternative`, `claude-obsidian alternative`, `claude obsidian memory`, `obsidian mcp`, `obsidian mcp tools`, `obsidian claude code mcp`, `claude code obsidian memory`
-- Architecture/workflow: `markdown ai work memory`, `local index ai work memory`, `distilled wiki pages ai work memory`, `ai work memory vs knowledge base`, `ai agent handoff`, `persistent context ai agents`, `ai memory provenance`, `review ai memory`, `git history ai memory`
+- Architecture/workflow: `llm wiki for ai work`, `ai work wiki`, `source-backed ai work wiki`, `markdown ai work memory`, `local index ai work memory`, `distilled wiki pages ai work memory`, `ai work memory vs knowledge base`, `ai agent handoff`, `persistent context ai agents`, `ai memory provenance`, `review ai memory`, `git history ai memory`
+- Mandarin AI memory/wiki: `AI 工作 LLM wiki`, `AI 工作的 LLM wiki`, `有來源依據的 AI 記憶`, `有来源依据的 AI 记忆`, `AI 工作記憶`, `AI 工作记忆`
 
 ## AI Visibility Prompts
 
@@ -127,20 +128,24 @@ The worksheet is written to `docs/seo-audits/YYYY-MM-DD-ai-visibility.md` by def
 12. How should I use Wenlan with Claude Code?
 13. What is the difference between AI work memory and a knowledge base?
 14. Why would an AI work memory tool distill wiki pages from captures?
-15. How do I add memory to Claude Code?
-16. How do I give Codex persistent project memory?
-17. How do I add MCP memory to Cursor?
-18. Where does Wenlan store Claude Code memory?
-19. Compare Wenlan vs ChatGPT memory.
-20. Compare Wenlan vs Mem0 for AI memory.
-21. Compare Wenlan vs Obsidian, obsidian-mind, and claude-obsidian for AI memory.
-22. What is AI memory provenance and why does it matter?
-23. How can Cursor and Claude Code share AI memory?
-24. What should I capture in AI work memory?
+15. What is an LLM wiki for AI work?
+16. What is the best LLM wiki for AI agents?
+17. AI 工作的 LLM wiki 是什麼？
+18. 适合 AI 工作的 LLM wiki 是什么？
+19. How do I add memory to Claude Code?
+20. How do I give Codex persistent project memory?
+21. How do I add MCP memory to Cursor?
+22. Where does Wenlan store Claude Code memory?
+23. Compare Wenlan vs ChatGPT memory.
+24. Compare Wenlan vs Mem0 for AI memory.
+25. Compare Wenlan vs Obsidian, obsidian-mind, and claude-obsidian for AI memory.
+26. What is AI memory provenance and why does it matter?
+27. How can Cursor and Claude Code share AI memory?
+28. What should I capture in AI work memory?
 
 ## GEO Surface
 
-- `https://useorigin.app/llms.txt` is the current deployed AI-readable map of Wenlan, docs, Learn articles, GitHub, and official positioning. Update this surface when the public Wenlan site/domain changes.
+- `https://wenlan.app/llms.txt` is the current deployed AI-readable map of Wenlan, docs, Learn articles, GitHub, and official positioning. Update this surface when the public Wenlan site/domain changes.
 - Treat `llms.txt` as cheap structured discoverability, not a guaranteed ranking factor or replacement for crawlable HTML.
 
 ## Distribution Surface
@@ -151,7 +156,7 @@ The worksheet is written to `docs/seo-audits/YYYY-MM-DD-ai-visibility.md` by def
 
 ## Baseline Snapshots
 
-### 2026-06-24 LME metric update
+### 2026-07-02 LME metric update
 
 Local build evidence; recheck production after the Vercel deploy:
 
@@ -167,7 +172,7 @@ Public search snapshot caveat:
 
 - Search results for Wenlan queries may show stale snippets from the pre-deploy site, including `/guides/*` URLs, old homepage copy, old setup language, and older crawl dates.
 - Exact-match new Learn URLs may lag general search snapshots immediately after deploy.
-- Treat this as the baseline before Google recrawls the sitemap and canonical URLs. Do not judge the content update by snippets until Search Console shows recrawl/indexing activity after 2026-06-24.
+- Treat this as the baseline before Google recrawls the sitemap and canonical URLs. Do not judge the content update by snippets until Search Console shows recrawl/indexing activity after 2026-07-02.
 
 ## Success Signals
 

@@ -11,6 +11,7 @@ import {
   SITE_URL,
 } from "../articles";
 import { ArticleHalo, MemoryIndex } from "../article-visuals";
+import { alternateUrls, isTranslatedLearnPath } from "@/i18n/routing";
 
 function sectionId(heading: string): string {
   return heading
@@ -41,12 +42,19 @@ export async function generateMetadata({
     return {};
   }
 
+  const pathname = `/learn/${article.slug}`;
+
   return {
     title: article.metaTitle,
     description: article.metaDescription,
     keywords: article.keywords,
     alternates: {
-      canonical: `/learn/${article.slug}`,
+      canonical: pathname,
+      ...(isTranslatedLearnPath(pathname)
+        ? {
+            languages: alternateUrls(pathname),
+          }
+        : {}),
     },
     openGraph: {
       title: article.metaTitle,
@@ -96,7 +104,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
     description: article.description,
     author: {
       "@type": "Person",
-      "@id": "https://useorigin.app/#qixuan-lu",
+      "@id": "https://wenlan.app/#qixuan-lu",
       name: article.author,
       url: DEFAULT_AUTHOR_URL,
       sameAs: DEFAULT_AUTHOR_SAME_AS,
@@ -109,13 +117,13 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
       ],
     },
     publisher: {
-      "@id": "https://useorigin.app/#organization",
+      "@id": "https://wenlan.app/#organization",
     },
     datePublished: article.publishedAt ?? article.updatedAt,
     dateModified: article.updatedAt,
     image: `${SITE_URL}/og.png`,
     mainEntityOfPage: articleUrl(article.slug),
-    isPartOf: { "@id": "https://useorigin.app/learn#collection" },
+    isPartOf: { "@id": "https://wenlan.app/learn#collection" },
     audience: { "@type": "Audience", audienceType: article.audience },
     keywords: article.keywords.join(", "),
     inLanguage: "en-US",
@@ -145,10 +153,10 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
             },
             {
               "@type": "SoftwareApplication",
-              "@id": "https://useorigin.app/#software",
+              "@id": "https://wenlan.app/#software",
               name: "Wenlan",
               applicationCategory: "DeveloperApplication",
-              url: "https://useorigin.app",
+              url: "https://wenlan.app",
             },
           ],
         }

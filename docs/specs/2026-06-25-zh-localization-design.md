@@ -233,7 +233,7 @@ Examples:
 - `93.6%`
 - `0.857`
 - `Apache-2.0`
-- `https://useorigin.app`
+- `https://wenlan.app`
 
 Preferred representation:
 

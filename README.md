@@ -2,7 +2,7 @@
 
 Marketing + docs site for [Wenlan](https://github.com/7xuanlu/wenlan), a living personal knowledge library for AI work.
 
-Production: [useorigin.app](https://useorigin.app).
+Production: [wenlan.app](https://wenlan.app).
 
 ## Stack
 

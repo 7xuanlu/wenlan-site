@@ -1,10 +1,13 @@
 import assert from "node:assert/strict";
+import { execFile } from "node:child_process";
 import { readFile, readdir } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
 import test from "node:test";
 import ts from "typescript";
+import { promisify } from "node:util";
 
 const repoRoot = resolve(import.meta.dirname, "..");
+const execFileAsync = promisify(execFile);
 
 const englishRouteGroupAliases = new Map([
   ["src/app/layout.tsx", "src/app/root-document.tsx"],
@@ -39,10 +42,46 @@ async function currentWenlanRelease() {
   const wenlanRoot = process.env.WENLAN_REPO_ROOT
     ? resolve(process.env.WENLAN_REPO_ROOT)
     : resolve(repoRoot, "../wenlan");
+  const taggedRelease = await currentWenlanTaggedRelease(wenlanRoot);
+  if (taggedRelease) return taggedRelease;
+
   const versionPath = resolve(wenlanRoot, "version.txt");
   const changelogPath = resolve(wenlanRoot, "CHANGELOG.md");
   const version = (await readFile(versionPath, "utf8")).trim();
   const changelog = await readFile(changelogPath, "utf8");
+
+  return parseRelease({ version, changelog, changelogPath });
+}
+
+async function currentWenlanTaggedRelease(wenlanRoot) {
+  try {
+    const { stdout: tagStdout } = await execFileAsync("git", [
+      "-C",
+      wenlanRoot,
+      "tag",
+      "--list",
+      "v[0-9]*",
+      "--sort=-v:refname",
+    ]);
+    const tag = tagStdout.split("\n").find(Boolean);
+    if (!tag) return null;
+
+    const [{ stdout: versionStdout }, { stdout: changelog }] = await Promise.all([
+      execFileAsync("git", ["-C", wenlanRoot, "show", `${tag}:version.txt`]),
+      execFileAsync("git", ["-C", wenlanRoot, "show", `${tag}:CHANGELOG.md`]),
+    ]);
+
+    return parseRelease({
+      version: versionStdout.trim(),
+      changelog,
+      changelogPath: `${wenlanRoot}:${tag}:CHANGELOG.md`,
+    });
+  } catch {
+    return null;
+  }
+}
+
+function parseRelease({ version, changelog, changelogPath }) {
   const releasePattern = new RegExp(
     `^## \\[${escapeRegExp(version)}\\].*\\((\\d{4}-\\d{2}-\\d{2})\\)`,
     "m",
@@ -137,15 +176,34 @@ test("package metadata uses the wenlan-site identity", async () => {
   const packageJson = JSON.parse(await readRepo("package.json"));
 
   assert.equal(packageJson.name, "wenlan-site");
+  assert.equal(packageJson.description, "Public website and SEO/GEO surface for Wenlan, an LLM wiki for AI work.");
   assert.equal(packageJson.repository.url, "git+https://github.com/7xuanlu/wenlan-site.git");
   assert.equal(packageJson.bugs.url, "https://github.com/7xuanlu/wenlan-site/issues");
-  assert.equal(packageJson.homepage, "https://github.com/7xuanlu/wenlan-site#readme");
+  assert.equal(packageJson.homepage, "https://wenlan.app");
   assert.match(packageJson.scripts["seo:weekly:sample"], /\/tmp\/wenlan-weekly-seo-sample\.md$/);
+});
+
+test("root document includes Vercel Web Analytics", async () => {
+  const packageJson = JSON.parse(await readRepo("package.json"));
+  const rootDocument = await readRepo("src/app/root-document.tsx");
+
+  assert.ok(packageJson.dependencies["@vercel/analytics"]);
+  assert.match(rootDocument, /import\s+\{\s*Analytics\s*\}\s+from\s+"@vercel\/analytics\/next"/);
+  assert.match(rootDocument, /<Analytics\s*\/>/);
+});
+
+test("agent guidance tracks the wenlan.app canonical launch property", async () => {
+  const agents = await readRepo("AGENTS.md");
+  const claude = await readRepo("CLAUDE.md");
+
+  assert.match(agents, /canonical public site is https:\/\/wenlan\.app/);
+  assert.match(agents, /useorigin\.app.*legacy redirect bridge/);
+  assert.doesNotMatch(agents, /current deployed public property is still https:\/\/useorigin\.app/);
+  assert.match(claude, /Single-page marketing site for \[Wenlan\]\(https:\/\/wenlan\.app\)/);
 });
 
 test("root metadata describes Wenlan on the current release surface", async () => {
   const { version } = await currentWenlanRelease();
-  const escapedVersion = escapeRegExp(version);
   const metadata = await readRepo("src/i18n/metadata.ts");
   const englishContent = await readRepo("src/i18n/content/en.ts");
   const rootDocument = await readRepo("src/app/root-document.tsx");
@@ -156,7 +214,7 @@ test("root metadata describes Wenlan on the current release surface", async () =
   assert.match(metadata, /locale: LOCALE_CONFIG\[locale\]\.openGraphLocale/);
   assert.match(rootDocument, /softwareApplicationSchema\(locale\)/);
   assert.match(structuredData, /name: "Wenlan"/);
-  assert.match(structuredData, new RegExp(`softwareVersion: "${escapedVersion}"`));
+  assert.match(structuredData, new RegExp(`softwareVersion: "${escapeRegExp(version)}"`));
   assert.match(structuredData, /installUrl: "https:\/\/github\.com\/7xuanlu\/wenlan#quickstart"/);
   assert.match(structuredData, /codeRepository: "https:\/\/github\.com\/7xuanlu\/wenlan"/);
 });
@@ -169,12 +227,54 @@ test("public machine-readable surfaces use Wenlan names and packages", async () 
   assert.equal(manifest.name, "Wenlan");
   assert.equal(manifest.short_name, "Wenlan");
   assert.match(llms, /^# Wenlan/m);
-  assert.match(llms, /living personal knowledge library for AI work/);
+  assert.match(llms, /LLM wiki for AI work/);
   assert.match(llms, /github\.com\/7xuanlu\/wenlan/);
   assert.match(llms, /wenlan-mcp/);
   assert.match(llms, /wenlan-types/);
-  assert.match(llmsFull, /living personal knowledge library for AI work/);
+  assert.match(llmsFull, /LLM wiki for AI work/);
   assert.doesNotMatch(llmsFull, /Wenlan is local-first memory for AI work/);
+});
+
+test("LLM wiki acquisition surfaces route demand into one canonical hub", async () => {
+  const hub = await readRepo("src/app/learn/articles.ts");
+  const support = await readRepo("src/app/learn/seo-articles.ts");
+  const home = await readRepo("src/i18n/content/en.ts");
+  const learnIndex = await readRepo("src/app/learn/page.tsx");
+  const structuredData = await readRepo("src/app/structured-data.ts");
+  const seoMeasurement = await readRepo("docs/seo-measurement.md");
+  const llms = await readRepo("public/llms.txt");
+  const llmsFull = await readRepo("src/app/llms-full.txt/route.ts");
+
+  assert.match(
+    hub,
+    /slug:\s*"distilled-wiki-pages-ai-memory"[\s\S]*?title:\s*"LLM Wiki for AI Work: Source-Backed Pages in Wenlan"/,
+  );
+  assert.match(
+    hub,
+    /slug:\s*"distilled-wiki-pages-ai-memory"[\s\S]*?metaTitle:\s*"LLM Wiki for AI Work \| Wenlan"/,
+  );
+  assert.match(hub, /source-backed AI work wiki/);
+  assert.match(hub, /href:\s*"\/docs\/get-started"/);
+  assert.match(hub, /href:\s*"\/docs\/daily-workflow"/);
+  assert.match(hub, /href:\s*"\/docs\/data-and-privacy"/);
+  assert.match(
+    hub,
+    /relatedSlugs:\s*\["source-backed-wiki-pages-ai-work",\s*"ai-memory-provenance",\s*"local-git-history-ai-memory"\]/,
+  );
+  assert.match(
+    support,
+    /slug:\s*"source-backed-wiki-pages-ai-work"[\s\S]*?relatedSlugs:\s*\["distilled-wiki-pages-ai-memory"/,
+  );
+  assert.match(home, /id:\s*"llm-wiki"/);
+  assert.match(home, /href:\s*"\/learn\/distilled-wiki-pages-ai-memory"/);
+  assert.match(learnIndex, /LLM wiki for AI work/);
+  assert.match(structuredData, /LLM wiki for AI work/);
+  assert.match(llms, /LLM wiki for AI work/);
+  assert.match(llmsFull, /LLM wiki for AI work/);
+  assert.match(seoMeasurement, /What is an LLM wiki for AI work\?/);
+  assert.match(seoMeasurement, /What is the best LLM wiki for AI agents\?/);
+  assert.match(seoMeasurement, /AI 工作的 LLM wiki 是什麼/);
+  assert.match(seoMeasurement, /适合 AI 工作的 LLM wiki 是什么/);
 });
 
 test("postbuild URL discovery reads moved English route-group source files", async () => {
@@ -310,13 +410,12 @@ test("public TypeScript string literals do not render stale Origin copy", async 
 test("security docs align with the current Wenlan site policy", async () => {
   const { version } = await currentWenlanRelease();
   const docs = await readRepo("src/app/docs/docs.ts");
-  const escapedVersion = escapeRegExp(version);
 
   assert.doesNotMatch(docs, /acknowledgement within 48 hours/);
   assert.doesNotMatch(docs, /7-day fix-timeline/);
   assert.doesNotMatch(docs, /supported 0\.7\.x/);
   assert.match(docs, /acknowledgment within 72 hours/);
-  assert.match(docs, new RegExp(`current stable ${escapedVersion}`));
+  assert.match(docs, new RegExp(`current stable ${escapeRegExp(version)}`));
 });
 
 
@@ -346,7 +445,7 @@ test("public current-release surfaces track the authoritative Wenlan release", a
   assert.match(docs, new RegExp(`Wenlan version ${escapedVersion}`));
   assert.match(docs, new RegExp(`v${escapedVersion}.*${escapeRegExp(date)}`));
   assert.match(learnArticles, new RegExp(`Wenlan v${escapedVersion} as of ${escapeRegExp(date)}`));
-  assert.match(learnArticles, new RegExp(`Last refresh: v${escapedVersion} on ${escapeRegExp(date)}`));
+  assert.match(learnArticles, new RegExp(`Last release alignment: v${escapedVersion} on ${escapeRegExp(date)}`));
   assert.match(seoMeasurement, new RegExp("softwareVersion` `" + escapedVersion + "`"));
   assert.match(sitemap, new RegExp(`ABOUT_UPDATED_AT = "${escapeRegExp(date)}"`));
   assert.match(sitemap, new RegExp(`GET_STARTED_UPDATED_AT = "${escapeRegExp(date)}"`));

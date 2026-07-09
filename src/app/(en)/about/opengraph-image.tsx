@@ -10,9 +10,9 @@ export default async function Image() {
     (
       <OgTemplate
         eyebrow="About"
-        title="Living personal knowledge library."
-        description="Open-source, local-first AI work memory built by agents and grounded in source-cited pages. Built by Qi-Xuan Lu."
-        footerLeft={["useorigin.app/about", "v0.12.0 · Apache-2.0"]}
+        title="LLM wiki for AI work."
+        description="Open-source, local-first AI work memory built by agents and grounded in source-backed pages. Built by Qi-Xuan Lu."
+        footerLeft={["wenlan.app/about", "v0.12.0 · Apache-2.0"]}
         footerRight="by Qi-Xuan Lu"
         titleSize={76}
       />

@@ -5,7 +5,7 @@ import { canonicalUrl } from "@/i18n/routing";
 const englishSoftwareApplicationFeatures = [
   "Hybrid retrieval on libSQL: vector + FTS5 + reciprocal-rank fusion + knowledge-graph context with a CE reranker. LME_Oracle: 93.6% Recall@5, 0.857 MRR, 0.883 NDCG@10 (500 Q). LME_S: 87.7% Recall@5, 0.815 MRR, 0.822 NDCG@10 (deep, N=90). Retrieval uses ~168 tokens per recall query versus full replay at 4,505 tokens per query.",
   "Real git versioning: readable pages, sessions, handoffs, and status artifacts commit into ~/.wenlan/.git/ so Markdown artifacts can be inspected, diffed, reverted, or branched.",
-  "Source-backed provenance: distilled wiki page records keep source memory IDs. The daemon rejects pages with empty source_memory_ids (HTTP 422), and pages can grow or refresh without losing their source chain.",
+  "LLM wiki for AI work: source-backed wiki page records keep source memory IDs. The daemon rejects pages with empty source_memory_ids (HTTP 422), and pages can grow or refresh without losing their source chain.",
   "Auditable memory: low-confidence captures, contradictions, supersession chains, and protected-memory conflicts surface for review instead of silently entering context.",
   "Composition over storage: memories distill into pages. Sessions track workflow. An entity graph links people, projects, tools, and relations. ~30 MCP tools across one daemon, not 100+ skills bolted on.",
   "Explicit spaces: tag memories, pages, and recalls with space=work | personal | client-X. Auto-detected from current repo or workspace.",
@@ -35,7 +35,7 @@ export function softwareApplicationSchema(locale: Locale) {
       "macOS arm64 or x64, Linux x86_64 or aarch64 (glibc), Windows x86_64",
     installUrl: "https://github.com/7xuanlu/wenlan#quickstart",
     downloadUrl: "https://github.com/7xuanlu/wenlan/releases",
-    screenshot: "https://useorigin.app/og.png",
+    screenshot: "https://wenlan.app/og.png",
     ...(locale === DEFAULT_LOCALE
       ? { featureList: [...englishSoftwareApplicationFeatures] }
       : {}),
@@ -45,7 +45,7 @@ export function softwareApplicationSchema(locale: Locale) {
       price: "0",
       priceCurrency: "USD",
     },
-    author: { "@id": "https://useorigin.app/#organization" },
+    author: { "@id": "https://wenlan.app/#organization" },
     codeRepository: "https://github.com/7xuanlu/wenlan",
   };
 }

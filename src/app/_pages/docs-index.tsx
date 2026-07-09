@@ -39,8 +39,8 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
     name: content.schema.name,
     description: content.schema.description,
     url: docsUrl,
-    isPartOf: { "@id": "https://useorigin.app/#website" },
-    publisher: { "@id": "https://useorigin.app/#organization" },
+    isPartOf: { "@id": "https://wenlan.app/#website" },
+    publisher: { "@id": "https://wenlan.app/#organization" },
     inLanguage: locale === "en" ? "en-US" : locale,
     hasPart: docsItems.map((item) => ({
       "@type": item.href === "/docs/get-started" ? "WebPage" : "TechArticle",

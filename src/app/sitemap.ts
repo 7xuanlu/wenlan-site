@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
-import { SUPPORTED_LOCALES } from "@/i18n/locales";
+import { SUPPORTED_LOCALES, TRANSLATED_LOCALES } from "@/i18n/locales";
 import {
   alternateUrls,
   canonicalUrl,
   type CORE_TRANSLATED_PATHS,
+  isTranslatedLearnPath,
   SITE_URL,
 } from "@/i18n/routing";
 import { docPages, docUrl } from "./(en)/docs/docs";
@@ -55,6 +56,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]);
 
   const sharedImages = [`${SITE_URL}/og.png`, `${SITE_URL}/logo.svg`];
+  const translatedLearnArticles = articles.filter((article) =>
+    isTranslatedLearnPath(`/learn/${article.slug}`),
+  );
   const coreEntries: CoreSitemapEntryConfig[] = [
     {
       pathname: "/",
@@ -98,12 +102,37 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.75,
       images: sharedImages,
     },
-    ...articles.map((article) => ({
-      url: articleUrl(article.slug),
-      lastModified: new Date(article.updatedAt),
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-      images: sharedImages,
-    })),
+    ...articles.map((article) => {
+      const pathname = `/learn/${article.slug}`;
+
+      return {
+        url: articleUrl(article.slug),
+        lastModified: new Date(article.updatedAt),
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+        images: sharedImages,
+        ...(isTranslatedLearnPath(pathname)
+          ? {
+              alternates: {
+                languages: alternateUrls(pathname),
+              },
+            }
+          : {}),
+      };
+    }),
+    ...translatedLearnArticles.flatMap((article) => {
+      const pathname = `/learn/${article.slug}`;
+
+      return TRANSLATED_LOCALES.map((locale) => ({
+        url: canonicalUrl(locale, pathname),
+        lastModified: new Date(article.updatedAt),
+        changeFrequency: "monthly" as const,
+        priority: 0.68,
+        images: sharedImages,
+        alternates: {
+          languages: alternateUrls(pathname),
+        },
+      }));
+    }),
   ];
 }
