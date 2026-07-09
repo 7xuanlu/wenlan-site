@@ -3523,10 +3523,11 @@ export const docPages: DocPage[] = [
         body: [
           "The desktop app lives separately so the GUI can evolve without making the local runtime depend on a specific frontend shell.",
           "When an issue is about memory behavior, retrieval, MCP tools, setup, service management, or the CLI, use the main Wenlan repo. When an issue is about the desktop UI itself, use the desktop app repo.",
+          "The app repo owns the Tauri 2 + React 19 desktop shell, sidecar packaging, app-to-daemon bridge, updater metadata, and .wenlan-backend-version pin. Current desktop app release 0.12.0 pins daemon v0.12.0 and talks to it over HTTP at localhost:7878.",
         ],
         link: {
           label: "Open desktop app repo",
-          href: "https://github.com/7xuanlu/origin-app",
+          href: "https://github.com/7xuanlu/wenlan-app",
         },
       },
       {
