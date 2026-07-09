@@ -265,7 +265,7 @@ export const enContent = {
         description:
           "Agents capture what they learn, you add sources you trust, and Wenlan keeps source-backed wiki pages current across AI work.",
         statusLabel: "Project status",
-        statusItems: ["v0.11.0", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
+        statusItems: ["v0.12.0", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
       },
       sections: [
         {
@@ -292,7 +292,7 @@ export const enContent = {
           number: "04",
           title: "Current status",
           paragraphs: [
-            "Wenlan v0.11.0 ships for macOS (arm64, x64), Linux (x86_64, aarch64; glibc), and Windows (x86_64). The daemon, CLI, MCP server, and Claude Code plugin are open source under Apache-2.0.",
+            "Wenlan v0.12.0 ships for macOS (arm64, x64), Linux (x86_64, aarch64; glibc), and Windows (x86_64). The daemon, CLI, MCP server, and Claude Code plugin are open source under Apache-2.0.",
           ],
         },
       ],

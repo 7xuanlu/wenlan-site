@@ -112,6 +112,7 @@
 
 - [llms-full.txt](https://wenlan.app/llms-full.txt): Long-form companion to this file. Contains the full body of every Learn article and Docs page so an LLM can ingest the full corpus in one fetch.
 - [GitHub repository](https://github.com/7xuanlu/wenlan): Source, releases, issues. Apache-2.0.
+- [Wenlan desktop app repository](https://github.com/7xuanlu/wenlan-app): Optional Tauri 2 + React 19 GUI. AGPL-3.0-only. Talks to the same local daemon over HTTP at localhost:7878.
 - [Wenlan Claude Code plugin (npm)](https://www.npmjs.com/package/wenlan): The Claude Code plugin published from this repo.
 - [wenlan-mcp server (npm)](https://www.npmjs.com/package/wenlan-mcp): The MCP server binary as a standalone npm package.
 - [wenlan-mcp on crates.io](https://crates.io/crates/wenlan-mcp): The Rust crate behind wenlan-mcp.

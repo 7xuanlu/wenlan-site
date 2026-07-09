@@ -26,6 +26,20 @@ pnpm start           # serve the production build locally
 
 Vercel deploys main automatically. Preview deploys fire on every PR.
 
+## Validate
+
+```bash
+pnpm lint
+pnpm test:seo
+pnpm test:i18n
+pnpm seo:technical:built
+```
+
+`pnpm test:seo` reads release facts from the sibling Wenlan repos. If this
+checkout is not next to `../wenlan` and `../wenlan-app`, pass
+`WENLAN_REPO_ROOT=/absolute/path/to/wenlan` and
+`WENLAN_APP_REPO_ROOT=/absolute/path/to/wenlan-app`.
+
 ## SEO surfaces
 
 The site ships the following AI-discovery + SEO surfaces:

@@ -1459,7 +1459,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Current runtime shape",
         body: [
-          "The current public docs describe the 0.11.0 runtime shape: Claude Code plugin, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages, real git versioning for readable pages, session handoffs, and status artifacts, wenlan restart, wenlan reranker, and cross-platform service registration.",
+          "The current public docs describe the 0.12.0 runtime shape: Claude Code plugin, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages, real git versioning for readable pages, session handoffs, and status artifacts, wenlan restart, wenlan reranker, and cross-platform service registration.",
           "The biggest practical upgrade checks are platform support, package path alignment, and spaces. Confirm your machine's service manager, confirm MCP clients launch the connector under ~/.wenlan/bin, and confirm the active space is the one you expect.",
         ],
         link: {
@@ -3392,7 +3392,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.11.0 line.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.12.0 line.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3523,10 +3523,11 @@ export const docPages: DocPage[] = [
         body: [
           "The desktop app lives separately so the GUI can evolve without making the local runtime depend on a specific frontend shell.",
           "When an issue is about memory behavior, retrieval, MCP tools, setup, service management, or the CLI, use the main Wenlan repo. When an issue is about the desktop UI itself, use the desktop app repo.",
+          "The app repo owns the Tauri 2 + React 19 desktop shell, sidecar packaging, app-to-daemon bridge, updater metadata, and .wenlan-backend-version pin. Current desktop app release 0.12.0 pins daemon v0.12.0 and talks to it over HTTP at localhost:7878.",
         ],
         link: {
           label: "Open desktop app repo",
-          href: "https://github.com/7xuanlu/origin-app",
+          href: "https://github.com/7xuanlu/wenlan-app",
         },
       },
       {
@@ -3559,32 +3560,32 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.11.0",
+      "Wenlan version 0.12.0",
       "wenlan-mcp release notes",
     ],
     updatedAt: DOCS_UPDATED_AT,
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "The current stable release in the repository changelog is v0.11.0, dated 2026-07-03.",
-      "Recent main-branch work after v0.11.0 is visible through merged PRs, but it should be treated as unreleased until the next release lands.",
+      "The current stable release in the repository changelog is v0.12.0, dated 2026-07-08.",
+      "Recent main-branch work after v0.12.0 is visible through merged PRs, but it should be treated as unreleased until the next release lands.",
     ],
     sections: [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.11.0 is the current stable release recorded in CHANGELOG.md and the release-please manifest. It adds doc-grounded revisions for conflicting captures.",
+          "Wenlan v0.12.0 is the current stable release recorded in CHANGELOG.md and the release-please manifest. It includes citation-gated page synthesis and release-path hardening after the v0.11.x document revision work.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
         ],
       },
       {
-        heading: "v0.11.0 highlights",
+        heading: "v0.12.0 highlights",
         body: [
-          "The v0.11.0 release adds doc-grounded revisions so documents can propose rewrites to conflicting captures while preserving the v0.10.x ingest and command-surface work.",
+          "The v0.12.0 release adds citation-gated page synthesis and release-path hardening while preserving the v0.11.x document revision work.",
         ],
         bullets: [
-          "Doc-grounded revisions shipped for conflicting captures.",
-          "Stable release date: 2026-07-03.",
+          "Citation-gated synthesis keeps generated pages tied to verified source memories.",
+          "Stable release date: 2026-07-08.",
         ],
       },
       {
@@ -3644,7 +3645,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.11.0, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.12.0, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },
