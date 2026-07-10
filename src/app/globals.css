@@ -25,24 +25,24 @@
 
 /* ── Dark theme (default) ── */
 :root {
-  --o-bg: #1a1a2e;
-  --o-bg-deep: #0d0d1a;
-  --o-bg-alt: #16213e;
-  --o-surface: #1e2140;
-  --o-border: #2a2a4a;
-  --o-border-subtle: rgba(42, 42, 74, 0.5);
-  --o-text: #e8e8f0;
-  --o-text-secondary: #a0a0be;
-  --o-text-muted: #6a6a8a;
-  --o-text-dim: #3a3a5c;
-  --o-card-bg: rgba(30, 33, 64, 0.6);
-  --o-card-hover: rgba(30, 33, 64, 0.85);
-  --o-visual-card-bg: rgba(30, 33, 64, 0.54);
-  --o-visual-border: rgba(72, 74, 122, 0.42);
+  --o-bg: #15171c;
+  --o-bg-deep: #0e0f13;
+  --o-bg-alt: #191d26;
+  --o-surface: #1d212b;
+  --o-border: #2b303c;
+  --o-border-subtle: rgba(43, 48, 60, 0.5);
+  --o-text: #e6e8ee;
+  --o-text-secondary: #9ea6b8;
+  --o-text-muted: #6d7689;
+  --o-text-dim: #3c4353;
+  --o-card-bg: rgba(29, 33, 43, 0.6);
+  --o-card-hover: rgba(29, 33, 43, 0.85);
+  --o-visual-card-bg: rgba(29, 33, 43, 0.54);
+  --o-visual-border: rgba(74, 82, 102, 0.42);
   --o-visual-filter: brightness(1.34) saturate(1.42) contrast(1.12);
   --o-visual-filter-early: brightness(1.48) saturate(1.56) contrast(1.16);
   --o-visual-filter-soft: brightness(1.28) saturate(1.34) contrast(1.09);
-  --o-nav-bg: rgba(26, 26, 46, 0.85);
+  --o-nav-bg: rgba(21, 23, 28, 0.85);
   --o-warm: #d4884a;
   --o-warm-hover: #e0a850;
   --o-indigo: #7b7be8;
@@ -52,7 +52,7 @@
   --o-glow-warm-bg: rgba(212, 136, 74, 0.10);
   --o-glow-indigo: rgba(123, 123, 232, 0.2);
   --o-selection: rgba(212, 136, 74, 0.25);
-  --o-scrollbar: rgba(42, 42, 74, 0.65);
+  --o-scrollbar: rgba(43, 48, 60, 0.65);
   --o-grain-opacity: 0.025;
   --o-ring-opacity: 0.06;
   --o-ring-filter: blur(2px);
@@ -67,41 +67,42 @@
   --o-logo-mid: #5ba3e6;
   --o-logo-end: #4ac8e8;
   --o-logo-orb: #ffffff;
-  --o-input-bg: rgba(22, 33, 62, 0.6);
-  --o-input-focus-bg: #16213e;
-  --o-btn-text: #1a1a2e;
+  --o-input-bg: rgba(25, 29, 38, 0.6);
+  --o-input-focus-bg: #191d26;
+  --o-btn-text: #15171c;
+  --o-shadow-media: 0 18px 60px rgba(10, 11, 14, 0.5);
 }
 
 /* ── Light theme ── */
 [data-theme="light"] {
-  --o-bg: #fefcf9;
-  --o-bg-deep: #f5f0e8;
+  --o-bg: #fbfbf8;
+  --o-bg-deep: #f0f2ef;
   --o-bg-alt: #ffffff;
-  --o-surface: #f8f5f0;
-  --o-border: #e0dbd2;
-  --o-border-subtle: rgba(180, 170, 155, 0.35);
+  --o-surface: #f7f7f3;
+  --o-border: #d8d9d2;
+  --o-border-subtle: rgba(128, 132, 122, 0.28);
   --o-text: #1a1a2e;
   --o-text-secondary: #5a5a6e;
   --o-text-muted: #8a8a9a;
-  --o-text-dim: #c0bdb5;
-  --o-card-bg: rgba(255, 255, 255, 0.7);
-  --o-card-hover: rgba(255, 255, 255, 0.9);
-  --o-visual-card-bg: rgba(255, 255, 255, 0.7);
-  --o-visual-border: #e0dbd2;
+  --o-text-dim: #c5c8c1;
+  --o-card-bg: rgba(255, 255, 255, 0.74);
+  --o-card-hover: rgba(255, 255, 255, 0.94);
+  --o-visual-card-bg: rgba(255, 255, 255, 0.74);
+  --o-visual-border: #d8d9d2;
   --o-visual-filter: none;
   --o-visual-filter-early: none;
   --o-visual-filter-soft: none;
-  --o-nav-bg: rgba(254, 252, 249, 0.85);
-  --o-warm: #c4733b;
-  --o-warm-hover: #b5642e;
+  --o-nav-bg: rgba(251, 251, 248, 0.88);
+  --o-warm: #b96842;
+  --o-warm-hover: #a85d39;
   --o-indigo: #5e58c8;
   --o-sage: #7a9b7e;
-  --o-amber: #c49030;
-  --o-glow-warm: rgba(196, 115, 59, 0.15);
-  --o-glow-warm-bg: rgba(196, 115, 59, 0.35);
+  --o-amber: #b88938;
+  --o-glow-warm: rgba(185, 104, 66, 0.13);
+  --o-glow-warm-bg: rgba(185, 104, 66, 0.24);
   --o-glow-indigo: rgba(94, 88, 200, 0.1);
-  --o-selection: rgba(196, 115, 59, 0.2);
-  --o-scrollbar: rgba(180, 170, 155, 0.5);
+  --o-selection: rgba(185, 104, 66, 0.18);
+  --o-scrollbar: rgba(128, 132, 122, 0.42);
   --o-grain-opacity: 0.015;
   --o-ring-opacity: 0.05;
   --o-ring-filter: blur(3px);
@@ -116,9 +117,10 @@
   --o-logo-mid: #4a8ad0;
   --o-logo-end: #3ab0d0;
   --o-logo-orb: #ffffff;
-  --o-input-bg: rgba(245, 240, 232, 0.6);
-  --o-input-focus-bg: #f5f0e8;
-  --o-btn-text: #fefcf9;
+  --o-input-bg: rgba(240, 242, 239, 0.68);
+  --o-input-focus-bg: #f3f4f1;
+  --o-btn-text: #fbfbf8;
+  --o-shadow-media: 0 18px 46px rgba(26, 26, 46, 0.14);
 }
 
 html {
@@ -348,6 +350,78 @@ html:lang(zh-Hans) .brand-wordmark__cjk {
   animation: float 6s ease-in-out infinite;
 }
 
+/* Long-tail marquee: track holds two identical copies, shifts one copy-width */
+@keyframes marquee-x {
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee-x 36s linear infinite;
+}
+
+/* un-layered rule: a hover: utility loses the cascade against this block.
+   Lives on the wrapper so hovering either row pauses both. */
+.marquee-hover-pause:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+.marquee-reverse {
+  animation-direction: reverse;
+}
+
+/* Pipeline flow arrows: gentle downstream nudge */
+@keyframes arrow-nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
+.animate-arrow-nudge {
+  animation: arrow-nudge 2.4s ease-in-out infinite;
+}
+
+/* /handoff return arc: dashes keep flowing back toward /capture after the draw-in */
+@keyframes arc-flow {
+  to { stroke-dashoffset: -10; }
+}
+
+.animate-arc-flow {
+  animation: arc-flow 1.2s linear infinite;
+}
+
+/* Storage retrieval loop: each route flashes in turn, then the fused row pulses.
+   --route-accent is set inline per chip. */
+@keyframes route-flash {
+  0%, 12%, 100% {
+    background-color: transparent;
+    box-shadow: 0 0 0 0 transparent;
+  }
+  5% {
+    background-color: color-mix(in srgb, var(--route-accent) 14%, transparent);
+    box-shadow: 0 0 14px color-mix(in srgb, var(--route-accent) 30%, transparent);
+  }
+}
+
+.animate-route-flash {
+  animation: route-flash 4.8s ease-in-out infinite;
+}
+
+@keyframes fuse-pulse {
+  0%, 50%, 78%, 100% { box-shadow: 0 0 0 0 transparent; }
+  62% { box-shadow: 0 0 18px var(--o-glow-warm); }
+}
+
+.animate-fuse-pulse {
+  animation: fuse-pulse 4.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+  .animate-arrow-nudge { animation: none; }
+  .animate-arc-flow { animation: none; }
+  .animate-route-flash { animation: none; }
+  .animate-fuse-pulse { animation: none; }
+}
+
 /* Stagger delays */
 .delay-100 { animation-delay: 100ms; }
 .delay-200 { animation-delay: 200ms; }
@@ -357,11 +431,6 @@ html:lang(zh-Hans) .brand-wordmark__cjk {
 .delay-600 { animation-delay: 600ms; }
 .delay-700 { animation-delay: 700ms; }
 .delay-800 { animation-delay: 800ms; }
-
-/* Warm glow for headings */
-.warm-glow {
-  text-shadow: 0 0 48px var(--o-glow-warm);
-}
 
 /* Subtle border glow on cards — Wenlan style */
 .card-wenlan {

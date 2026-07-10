@@ -392,11 +392,11 @@ test("localized core page wrappers and shared page modules exist", async () => {
   }
 });
 
-test("localized home hero keeps CJK words intact on mobile", async () => {
+test("localized home hero allows long words to wrap on mobile", async () => {
   const source = await readFile(resolve(repoRoot, "src/app/_pages/home.tsx"), "utf8");
 
-  assert.match(source, /className="relative z-10 w-full min-w-0 max-w-3xl text-center"/);
-  assert.match(source, /className="[^"]*\bbreak-keep\b[^"]*"/);
+  assert.match(source, /className="min-w-0 lg:col-span-6"/);
+  assert.match(source, /className="[^"]*\bbreak-words\b[^"]*"/);
 });
 
 test("localized about hero allows translated text to wrap on mobile", async () => {
@@ -912,6 +912,7 @@ test("core content dictionaries cover first-release localized page surfaces", as
     const home = dictionary.home.content;
     assert.ok(home.nav?.links?.length >= 4, `${locale}.home.content.nav.links`);
     assert.ok(home.hero?.primaryCta?.label, `${locale}.home.content.hero.primaryCta`);
+    assert.equal(home.useCases?.scenarios?.length, 4, `${locale}.home.content.useCases.scenarios`);
     assert.ok(home.metrics?.rows?.length >= 3, `${locale}.home.content.metrics.rows`);
     assert.ok(home.faqs?.items?.length >= 10, `${locale}.home.content.faqs.items`);
 
@@ -961,6 +962,10 @@ test("core content dictionaries cover first-release localized page surfaces", as
   }
 
   assertArrayItemsHaveStableIds(content.enContent.home.content.nav.links, "home.nav.links");
+  assertArrayItemsHaveStableIds(content.enContent.home.content.useCases.scenarios, "home.useCases.scenarios");
+  for (const scenario of content.enContent.home.content.useCases.scenarios) {
+    assertArrayItemsHaveStableIds(scenario.evidence, `home.useCases.scenarios.${scenario.id}.evidence`);
+  }
   assertArrayItemsHaveStableIds(content.enContent.home.content.metrics.rows, "home.metrics.rows");
   assertArrayItemsHaveStableIds(content.enContent.home.content.faqs.items, "home.faqs.items");
   assertArrayItemsHaveStableIds(content.enContent.about.content.principles.items, "about.principles.items");
@@ -970,6 +975,39 @@ test("core content dictionaries cover first-release localized page surfaces", as
   }
   assertArrayItemsHaveStableIds(content.enContent.getStarted.content.steps, "getStarted.steps");
   assertArrayItemsHaveStableIds(content.enContent.footer.content.groups, "footer.groups");
+});
+
+test("home use cases frame Wenlan as an LLM wiki for code, product, and research jobs", async () => {
+  const { content } = await loadI18nModules();
+  const useCases = content.enContent.home.content.useCases;
+
+  assert.equal(useCases.title, "LLM wiki for\ncode, clients,\nand research.");
+  assert.match(useCases.description, /source-cited pages agents can brief, recall, and hand off/i);
+  assert.equal(useCases.index.title, "Wenlan Wiki Index");
+  assert.equal(useCases.index.activeViewLabel, "Active view");
+  assert.deepEqual(
+    useCases.scenarios.map((scenario) => scenario.id),
+    ["dev-codebase", "product-customers", "research-writing", "learning-study"],
+  );
+
+  const [devScenario, productScenario, researchScenario] = useCases.scenarios;
+  assert.equal(devScenario.railLabel, "Code");
+  assert.match(devScenario.lead, /docs engineers actually update/i);
+  assert.match(devScenario.body, /source-backed engineering pages/i);
+  assert.match(devScenario.body, /architecture maps, runbooks, migration plans, integration notes/i);
+  assert.doesNotMatch(devScenario.body, /\bhandoff\b/i);
+  assert.match(
+    devScenario.evidence.map((item) => `${item.label} ${item.detail}`).join("\n"),
+    /Architecture map[\s\S]*Runbook[\s\S]*Migration plan[\s\S]*Integration note/i,
+  );
+  assert.match(productScenario.label, /Product & client work/);
+  assert.equal(productScenario.railLabel, "Client work");
+  assert.match(productScenario.lead, /client context/i);
+  assert.match(productScenario.body, /client constraint/i);
+  assert.match(researchScenario.label, /Research & writing/);
+  assert.equal(researchScenario.railLabel, "Research");
+  assert.match(researchScenario.lead, /cited wiki pages/i);
+  assert.match(researchScenario.body, /trusted quotes/i);
 });
 
 test("Chinese home surfaces include script-specific Wenlan Chinese names", async () => {

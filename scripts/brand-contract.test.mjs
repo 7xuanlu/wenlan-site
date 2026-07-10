@@ -9,6 +9,7 @@ import { promisify } from "node:util";
 const repoRoot = resolve(import.meta.dirname, "..");
 const execFileAsync = promisify(execFile);
 const publicScanIgnoredNames = new Set([
+  ".claude",
   ".git",
   ".next",
   ".omo",

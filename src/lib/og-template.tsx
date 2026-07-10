@@ -30,7 +30,7 @@ export function OgTemplate({
         justifyContent: "space-between",
         padding: "80px",
         background:
-          "linear-gradient(135deg, #0a0a0a 0%, #14141a 50%, #1a1a2e 100%)",
+          "linear-gradient(135deg, #0a0a0a 0%, #14141a 50%, #15171c 100%)",
         color: "#fefcf9",
         fontFamily: "sans-serif",
       }}

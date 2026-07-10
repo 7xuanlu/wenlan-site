@@ -77,6 +77,152 @@ export const enContent = {
         title: "Historical Wenlan demo v0.9",
         playLabel: "Play historical Wenlan demo v0.9",
       },
+      useCases: {
+        eyebrow: "Use cases",
+        title: "LLM wiki for\ncode, clients,\nand research.",
+        description:
+          "Wenlan turns repo facts, client constraints, source trails, and study notes into source-cited pages agents can brief, recall, and hand off.",
+        evidenceLabel: "Pages agents cite",
+        outcomeLabel: "Citable page",
+        actionsLabel: "Agent actions",
+        index: {
+          title: "Wenlan Wiki Index",
+          activeViewLabel: "Active view",
+          pagesTitle: "Pages agents cite",
+          pagesLabel: "pages",
+          sourcesLabel: "sources",
+          statusLabel: "status",
+          sourceBackedLabel: "Source-backed",
+          citationLabel: "Agent citation",
+          citingLabel: "Citing page",
+        },
+        scenarios: [
+          {
+            id: "dev-codebase",
+            label: "Dev & codebase",
+            railLabel: "Code",
+            summary: "living engineering docs",
+            lead: "Keep the codebase docs engineers actually update.",
+            body: "Wenlan keeps source-backed engineering pages current: architecture maps, runbooks, migration plans, integration notes, and debugging logs that change as the repo changes.",
+            evidence: [
+              {
+                id: "architecture",
+                label: "Architecture map",
+                detail: "Service boundaries, data flow, ownership, runtime constraints, and diagrams that drift as code changes.",
+              },
+              {
+                id: "failed-paths",
+                label: "Runbook",
+                detail: "How to reproduce, release, rollback, monitor, or operate a system without asking the last engineer.",
+              },
+              {
+                id: "dependency-research",
+                label: "Migration plan",
+                detail: "Schema moves, API migrations, rollout phases, blocked paths, and cleanup tasks that span sessions.",
+              },
+              {
+                id: "open-threads",
+                label: "Integration note",
+                detail: "Dependency quirks, version limits, adapter decisions, and upstream issues linked to source docs.",
+              },
+            ],
+            outcome: "The next agent opens the same living docs an engineer would update.",
+          },
+          {
+            id: "product-customers",
+            label: "Product & client work",
+            railLabel: "Client work",
+            summary: "calls, constraints, proposals",
+            lead: "Keep client context ready for the next proposal.",
+            body: "Before the next proposal, product teams, consultants, and freelancers can recall the objection, client constraint, and tradeoff that changed the plan.",
+            evidence: [
+              {
+                id: "customer-voice",
+                label: "Client objection",
+                detail: "Recurring needs and objections from interviews, support, and sales notes.",
+              },
+              {
+                id: "client-constraints",
+                label: "Client constraint",
+                detail: "Brand, budget, approval, legal, or delivery limits for each client space.",
+              },
+              {
+                id: "decision-rationale",
+                label: "Proposal tradeoff",
+                detail: "Why a roadmap, proposal, or pricing tradeoff won over alternatives.",
+              },
+              {
+                id: "follow-up-threads",
+                label: "Follow-up owner",
+                detail: "Loose questions, promised next steps, and owners before the next meeting.",
+              },
+            ],
+            outcome: "The next proposal starts with the client's objection, constraint, tradeoff, and owner already cited.",
+          },
+          {
+            id: "research-writing",
+            label: "Research & writing",
+            railLabel: "Research",
+            summary: "sources, cited pages, next outline",
+            lead: "Turn research trails into cited wiki pages.",
+            body: "After papers, docs, transcripts, and links pile up, the next draft starts from trusted quotes, stale claims, and a cited outline.",
+            evidence: [
+              {
+                id: "trusted-sources",
+                label: "Trusted quote",
+                detail: "Papers, docs, transcripts, and links you already decided to trust.",
+              },
+              {
+                id: "comparison-notes",
+                label: "Comparison note",
+                detail: "What changed between tools, claims, or standards, with the source trail intact.",
+              },
+              {
+                id: "outline-decisions",
+                label: "Next draft outline",
+                detail: "The argument, section order, and open questions for the next draft.",
+              },
+              {
+                id: "stale-claims",
+                label: "Stale claim",
+                detail: "Facts that need re-checking before they appear in public copy.",
+              },
+            ],
+            outcome: "Writing resumes from a cited working page, not a pile of tabs.",
+          },
+          {
+            id: "learning-study",
+            label: "Learning & study",
+            railLabel: "Learning",
+            summary: "concepts, prerequisites, reviews",
+            lead: "Turn study sessions into pages that teach the next one.",
+            body: "Explanations that finally clicked become concept pages with prerequisites linked, so the next session reviews understanding instead of scrolling back through chat.",
+            evidence: [
+              {
+                id: "concept-pages",
+                label: "Concept page",
+                detail: "The explanation that finally made sense, kept with the sources that earned it.",
+              },
+              {
+                id: "prerequisite-links",
+                label: "Prerequisite link",
+                detail: "What each concept builds on, linked so gaps surface before they cost you.",
+              },
+              {
+                id: "review-notes",
+                label: "Review note",
+                detail: "What you got wrong last time and the correction that fixed it.",
+              },
+              {
+                id: "study-plan",
+                label: "Study plan",
+                detail: "What to tackle next, ordered by the prerequisites you already hold.",
+              },
+            ],
+            outcome: "The next study session opens the concept page, not last week's chat scroll.",
+          },
+        ],
+      },
       sections: {
         problem: {
           eyebrow: "The problem",
@@ -244,6 +390,148 @@ export const enContent = {
             a: "Yes. Wenlan is open-source. The local runtime, CLI, MCP server, Claude Code plugin, and Codex plugin files in the Wenlan repo are Apache-2.0.",
           },
         ],
+      },
+      redesign: {
+        hero: {
+          headline: { pre: "A ", emphasis: "living", post: " wiki you can trust." },
+          description:
+            "The second brain your agents write as they work: repo facts, client calls, training plans. Every page stays cited, linked, and current, so you don't have to.",
+          assurances: [
+            { id: "cited", label: "every claim cited" },
+            { id: "superseded", label: "stale facts superseded" },
+            { id: "linked", label: "pages linked" },
+          ],
+          worksWithLabel: "Works with",
+          worksWithNote: "Local-first, MCP server",
+        },
+        pains: {
+          title: "Every wiki dies of neglect.",
+          intro:
+            "First the hand-tended vault. Then agents bolted onto wikis: faster writing, same rot. Wenlan is what comes after.",
+          generations: [
+            {
+              id: "wiki-graveyard",
+              name: "The wiki graveyard",
+              body: "Obsidian vaults, Notion pages, team wikis. Hand-tended, and alive exactly as long as your discipline.",
+            },
+            {
+              id: "llm-wiki-1",
+              name: "llm-wiki 1.0",
+              body: "Agents dump notes to Markdown files. No sources, no recall, no upkeep. It rots faster, with more confidence.",
+            },
+            {
+              id: "vault-agents",
+              name: "Obsidian + agents",
+              body: "Agents write into your vault, but the gardening is still yours. Easier capture, same rot.",
+            },
+          ],
+          current: {
+            name: "Wenlan",
+            body: "The llm-wiki that maintains itself: written during real work, cited to sources, found by hybrid recall, enriched while you sleep.",
+          },
+          closer: { pre: "And while you sleep, the wiki gets ", emphasis: "better", post: "." },
+        },
+        pipeline: {
+          intro:
+            "Wenlan captures decisions as work happens, refines the wiki between sessions, and briefs the next session when it starts.",
+          stages: [
+            { id: "capture", step: "/capture · during the session", title: "Work leaves a trail" },
+            { id: "distill", step: "/distill · between sessions", title: "Repeats become a page" },
+            { id: "brief", step: "/brief · next session", title: "The next agent starts warm" },
+          ],
+          distillNote: "Agents also create pages directly when a topic deserves one right away.",
+          arcLabel: "/handoff closes each pass",
+        },
+        bento: {
+          cells: [
+            {
+              id: "pages",
+              title: "Readable by humans, organized for agents",
+              body: "Cleaned decisions and lessons become durable pages instead of buried chat logs.",
+            },
+            {
+              id: "graph",
+              title: "Recall arrives connected",
+              body: "People, projects, and pages come back linked to the memory and to each other, so recall arrives with its whole neighborhood.",
+            },
+            {
+              id: "citations",
+              title: "Every claim keeps its source",
+              body: "Wenlan refuses unsourced pages. Every distilled claim cites the memory that produced it, so it can be traced back and re-checked.",
+            },
+            {
+              id: "review",
+              title: "Review before trust",
+              body: "Low-confidence captures and contradictions surface for review instead of silently entering context. You step in only when it matters.",
+            },
+            {
+              id: "nurture",
+              title: "Fresher every pass",
+              body: "Between sessions, background passes link entities, grow matching pages, and fade stale memories.",
+            },
+            {
+              id: "spaces",
+              title: "Spaces keep work apart",
+              body: "Tag captures and recalls with a space, so a client fact never bleeds into a side project brief.",
+            },
+            {
+              id: "git",
+              title: "Versioned like code",
+              body: "Memory, pages, and session artifacts live in real git history. Inspect, diff, revert.",
+            },
+            {
+              id: "mcp",
+              title: "One home, locked to none",
+              body: "Every MCP client reads the same shared memory through one local daemon. The files stay yours.",
+            },
+          ],
+        },
+        storage: {
+          title: "Agents get an index.\nYou get files.",
+          intro:
+            "Captures stage in a fast local index, then solidify into Markdown pages you can open, diff, and keep.",
+          indexLabel: "Index · working memory for agents",
+          filesLabel: "Markdown · lasting record for you",
+          fusionNote: "Three ways in, one query. Any single route misses two of these.",
+          distillCaption: "staging becomes pages",
+          ingestCaption: "pages indexed for recall",
+          tradeoffs: [
+            {
+              id: "files-alone",
+              title: "Files alone",
+              body: "Every recall re-reads whole folders. The context window pays for it.",
+            },
+            {
+              id: "db-alone",
+              title: "A database alone",
+              body: "Fast but opaque. Nothing you can open, diff, or move.",
+            },
+            {
+              id: "index-files",
+              title: "Index + files",
+              body: "One query for agents. Readable, versioned files for you.",
+            },
+          ],
+        },
+        metrics: {
+          title: "96% fewer tokens.",
+          bars: [
+            {
+              id: "full-replay",
+              label: "Full chat replay",
+              value: "4,505 tokens / query",
+              sub: "No retrieval, whole transcript in context",
+            },
+            {
+              id: "wenlan",
+              label: "Wenlan retrieval",
+              value: "168 tokens / query",
+              sub: "CE-reranked, 500-question snapshot",
+            },
+          ],
+          footnote:
+            "Retrieval-only snapshots. LME_S records 87.7% R@5 and 0.815 MRR on the stratified N=90 deep-S fixture. Token comparison is full replay vs retrieved context.",
+        },
       },
     },
   },

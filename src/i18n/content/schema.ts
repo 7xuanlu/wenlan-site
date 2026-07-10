@@ -88,6 +88,39 @@ export type HomeContent = SeoContent & {
     title: string;
     playLabel: string;
   };
+  useCases: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    evidenceLabel: string;
+    outcomeLabel: string;
+    actionsLabel: string;
+    index: {
+      title: string;
+      activeViewLabel: string;
+      pagesTitle: string;
+      pagesLabel: string;
+      sourcesLabel: string;
+      statusLabel: string;
+      sourceBackedLabel: string;
+      citationLabel: string;
+      citingLabel: string;
+    };
+    scenarios: readonly {
+      id: string;
+      label: string;
+      railLabel: string;
+      summary: string;
+      lead: string;
+      body: string;
+      evidence: readonly {
+        id: string;
+        label: string;
+        detail: string;
+      }[];
+      outcome: string;
+    }[];
+  };
   metrics: {
     eyebrow: string;
     title: string;
@@ -132,6 +165,52 @@ export type HomeContent = SeoContent & {
       a: string;
     }[];
   };
+  redesign: {
+    hero: {
+      headline: EmphasisText;
+      description: string;
+      assurances: readonly { id: string; label: string }[];
+      worksWithLabel: string;
+      worksWithNote: string;
+    };
+    pains: {
+      title: string;
+      intro: string;
+      generations: readonly { id: string; name: string; body: string }[];
+      current: { name: string; body: string };
+      closer: EmphasisText;
+    };
+    pipeline: {
+      intro: string;
+      stages: readonly { id: string; step: string; title: string }[];
+      distillNote: string;
+      arcLabel: string;
+    };
+    bento: {
+      cells: readonly { id: string; title: string; body: string }[];
+    };
+    storage: {
+      title: string;
+      intro: string;
+      indexLabel: string;
+      filesLabel: string;
+      fusionNote: string;
+      distillCaption: string;
+      ingestCaption: string;
+      tradeoffs: readonly { id: string; title: string; body: string }[];
+    };
+    metrics: {
+      title: string;
+      bars: readonly { id: string; label: string; value: string; sub: string }[];
+      footnote: string;
+    };
+  };
+};
+
+export type EmphasisText = {
+  pre: string;
+  emphasis: string;
+  post: string;
 };
 
 export type CoreTextSection = {
