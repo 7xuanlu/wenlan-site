@@ -2,14 +2,12 @@ import { DemoVideo } from "../demo-video";
 import { WaitlistForm } from "../waitlist-form";
 import { ThemeToggle } from "../theme-toggle";
 import { BrandWordmark } from "@/components/brand-wordmark";
-import { FAQSection } from "@/components/sections";
-import {
-  FeatureSection,
-  HumanControlSection,
-  MemoryDistillerySection,
-  ProblemSection,
-  SolutionSection,
-} from "@/components/problem-solution";
+import { BentoSection } from "@/components/home/bento";
+import { HeroLivingPage } from "@/components/home/hero-living-page";
+import { PainsSection } from "@/components/home/pains";
+import { PipelineSection } from "@/components/home/pipeline";
+import { StorageSection } from "@/components/home/storage";
+import { UseCasesSection } from "@/components/home/use-cases";
 import { getCoreContent, type HomeContent, type LinkContent } from "@/i18n/content";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/locales";
 import { LocalizedLink, localizedHrefForLocale } from "@/i18n/navigation";
@@ -48,44 +46,6 @@ function WenlanMark() {
   );
 }
 
-function WenlanRingBackground() {
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      <svg
-        viewBox="0 0 800 800"
-        fill="none"
-        className="animate-float absolute top-[55%] left-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 sm:h-[1000px] sm:w-[1000px]"
-        style={{
-          opacity: "var(--o-ring-opacity)",
-          filter: "var(--o-ring-filter)",
-        }}
-      >
-        <defs>
-          <linearGradient id="ring-grad" x1="100" y1="400" x2="700" y2="400" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" style={{ stopColor: "var(--o-ring-grad-start)" }} />
-            <stop offset="35%" style={{ stopColor: "var(--o-ring-grad-mid)" }} />
-            <stop offset="65%" style={{ stopColor: "var(--o-ring-grad-mid2)" }} />
-            <stop offset="100%" style={{ stopColor: "var(--o-ring-grad-end)" }} />
-          </linearGradient>
-          <radialGradient id="inner-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" style={{ stopColor: "var(--o-ring-glow)" }} stopOpacity="0.15" />
-            <stop offset="100%" stopColor="transparent" stopOpacity="0" />
-          </radialGradient>
-          <radialGradient id="orb-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
-            <stop offset="40%" style={{ stopColor: "var(--o-ring-orb-glow)" }} stopOpacity="0.8" />
-            <stop offset="100%" style={{ stopColor: "var(--o-ring-orb-edge)" }} stopOpacity="0" />
-          </radialGradient>
-        </defs>
-        <circle cx="400" cy="400" r="280" fill="url(#inner-glow)" />
-        <circle cx="400" cy="400" r="240" stroke="url(#ring-grad)" strokeWidth="72" strokeLinecap="round" fill="none" />
-        <circle cx="540" cy="195" r="32" fill="url(#orb-glow)" />
-        <circle cx="540" cy="195" r="14" fill="white" opacity="0.9" />
-      </svg>
-    </div>
-  );
-}
-
 const demoVideoId = "k37gjWVPHwI";
 const demoVideoEmbedUrl = `https://www.youtube.com/embed/${demoVideoId}?autoplay=1&rel=0`;
 const demoVideoPosterUrl = `https://i.ytimg.com/vi/${demoVideoId}/maxresdefault.jpg`;
@@ -96,72 +56,56 @@ const localeLabels = {
   "zh-CN": { label: "简体中文", short: "简" },
 } as const satisfies Record<Locale, { label: string; short: string }>;
 
-function TokenEfficiencySection({ copy }: { copy: HomeContent["metrics"] }) {
+/* The works-with strip and the hero assurance dot accents are design texture:
+   client names are product names and stay English in every locale. */
+const worksWithClients = ["Claude Code", "Cursor", "Codex", "Claude Desktop", "VS Code", "Obsidian"];
+const assuranceAccents = ["var(--o-warm)", "var(--o-sage)", "var(--o-indigo)"];
+
+function MetricBar({
+  label,
+  sub,
+  tone,
+  value,
+  widthPercent,
+}: {
+  label: string;
+  sub: string;
+  tone: "muted" | "warm";
+  value: string;
+  widthPercent: number;
+}) {
   return (
-    <section className="border-t border-[var(--o-border-subtle)] px-6 py-24">
-      <div className="mx-auto max-w-3xl">
-        <div className="text-center">
-          <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
-            {copy.eyebrow}
-          </p>
-          <h2 className="font-serif text-4xl font-medium tracking-tight sm:text-5xl">
-            {copy.title}
-          </h2>
-          <p className="mx-auto mt-4 max-w-lg text-sm text-[var(--o-text-muted)]">
-            {copy.description}
-          </p>
-        </div>
-        <div className="mt-12 overflow-x-auto rounded-lg border border-[var(--o-border)]">
-          <table className="w-full min-w-[720px] text-left font-mono text-sm">
-            <thead>
-              <tr className="border-b border-[var(--o-border)] bg-[var(--o-surface)]">
-                <th className="px-6 py-4 font-medium text-[var(--o-text-secondary)]">{copy.headers.surface}</th>
-                <th className="px-6 py-4 font-medium text-[var(--o-text-secondary)]">{copy.headers.scope}</th>
-                <th className="px-6 py-4 font-medium text-[var(--o-text-secondary)]">{copy.headers.result}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {copy.rows.map((row, index) => {
-                const emphasized = row.id !== "full-replay";
-                return (
-                  <tr
-                    key={row.id}
-                    className={index < copy.rows.length - 1 ? "border-b border-[var(--o-border-subtle)]" : undefined}
-                  >
-                    <td className={`px-6 py-4 ${emphasized ? "font-medium text-[var(--o-text)]" : "text-[var(--o-text-muted)]"}`}>
-                      {row.surface}
-                    </td>
-                    <td className={`px-6 py-4 ${emphasized ? "text-[var(--o-text-secondary)]" : "text-[var(--o-text-muted)]"}`}>
-                      {row.scope}
-                    </td>
-                    <td className={`px-6 py-4 ${emphasized ? "font-medium text-[var(--o-warm)]" : "text-[var(--o-text-muted)]"}`}>
-                      {row.result}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-        <p className="mx-auto mt-6 max-w-xl text-center font-mono text-[10px] leading-relaxed text-[var(--o-text-muted)] sm:text-[11px]">
-          {copy.note}{" "}
-          <a
-            href={copy.link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline transition-colors hover:text-[var(--o-warm)]"
-          >
-            {copy.link.label}
-          </a>
+    <div>
+      <div className="flex items-baseline justify-between gap-4">
+        <p className="text-base font-medium">{label}</p>
+        <p className="font-mono text-base tabular-nums" style={{ color: tone === "warm" ? "var(--o-warm)" : "var(--o-text-muted)" }}>
+          {value}
         </p>
       </div>
-    </section>
+      <div className="mt-2 h-3 rounded-sm bg-[var(--o-surface)]">
+        <div
+          className="h-full rounded-sm"
+          style={{
+            width: `${widthPercent}%`,
+            background: tone === "warm" ? "var(--o-warm)" : "var(--o-text-dim)",
+          }}
+        />
+      </div>
+      <p className="mt-1.5 font-mono text-[12px] text-[var(--o-text-muted)]">{sub}</p>
+    </div>
   );
 }
+
+const metricBarChrome: Record<string, { tone: "muted" | "warm"; widthPercent: number }> = {
+  "full-replay": { tone: "muted", widthPercent: 100 },
+  wenlan: { tone: "warm", widthPercent: 4 },
+};
 
 export function HomePage({ locale }: { locale: Locale }) {
   const content = getCoreContent(locale).home.content;
   const siteNavigationSchema = buildSiteNavigationSchema(locale, content.nav);
+  const redesign = content.redesign;
+  const cta = content.sections.openSourceCta;
 
   return (
     <div className="grain relative min-h-screen">
@@ -211,47 +155,55 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </nav>
 
-      <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-16">
-        <WenlanRingBackground />
-
-        <div className="relative z-10 w-full min-w-0 max-w-3xl text-center">
-          <h1 className="animate-fade-up delay-100 warm-glow text-[2rem] leading-[1.08] sm:text-7xl sm:leading-[1.1]">
-            <BrandWordmark label={content.hero.title} variant="hero" />
-          </h1>
-          <p className="animate-fade-up delay-100 mx-auto mt-7 max-w-[22rem] break-keep text-base leading-relaxed text-[var(--o-text-secondary)] sm:mt-8 sm:max-w-xl sm:text-xl">
-            {content.hero.description}
-          </p>
-          <div className="animate-fade-up delay-200 mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <HomeCta link={content.hero.primaryCta} locale={locale} variant="primary" />
-            <HomeCta link={content.hero.secondaryCta} locale={locale} variant="secondary" />
+      {/* Hero: the product is the hero. The living page loops the /capture →
+          /distill refresh; the wordmark sits as a brand eyebrow above the
+          message headline. */}
+      <section className="relative overflow-hidden border-b border-[var(--o-border-subtle)] px-6 pt-28 pb-16 sm:pt-32">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-12">
+          <div className="min-w-0 lg:col-span-6">
+            <p className="animate-fade-up motion-reduce:animate-none font-serif text-xl sm:text-2xl">
+              <BrandWordmark label={content.hero.title} variant="hero" />
+            </p>
+            <h1 className="animate-fade-up motion-reduce:animate-none delay-100 mt-4 font-serif text-4xl leading-[1.12] font-medium tracking-tight break-words text-balance sm:text-6xl">
+              {redesign.hero.headline.pre}
+              <em className="mr-1.5 text-[var(--o-warm)]">{redesign.hero.headline.emphasis}</em>
+              {redesign.hero.headline.post}
+            </h1>
+            <p className="animate-fade-up motion-reduce:animate-none delay-200 mt-6 max-w-lg text-lg leading-relaxed break-words text-[var(--o-text-secondary)] sm:text-xl">
+              {redesign.hero.description}
+            </p>
+            <div className="animate-fade-up motion-reduce:animate-none delay-300 mt-6 flex flex-wrap items-center gap-x-4 gap-y-1.5 font-mono text-[11px] tracking-[0.14em] text-[var(--o-text-muted)] uppercase">
+              {redesign.hero.assurances.map((assurance, index) => (
+                <span key={assurance.id} className="flex items-center gap-1.5">
+                  <span
+                    className="size-1 rounded-full"
+                    style={{ background: assuranceAccents[index % assuranceAccents.length] }}
+                  />
+                  {assurance.label}
+                </span>
+              ))}
+            </div>
+            <div className="animate-fade-up motion-reduce:animate-none delay-400 mt-8 flex flex-wrap items-center gap-4">
+              <HomeCta link={content.hero.primaryCta} locale={locale} variant="primary" />
+              <HomeCta link={content.hero.secondaryCta} locale={locale} variant="secondary" />
+            </div>
           </div>
-          <div className="animate-fade-up delay-300 mx-auto mt-6 flex max-w-full flex-wrap items-center justify-center gap-x-3 gap-y-2 font-mono text-[11px] text-[var(--o-text-muted)]">
-            <span>{content.hero.metaText[0].label}</span>
-            <span aria-hidden="true">&middot;</span>
-            <LocalizedLink
-              href={content.hero.metaLinks[0].href}
-              locale={locale}
-              className="underline decoration-[var(--o-border)] underline-offset-4 transition-colors hover:text-[var(--o-warm)]"
-            >
-              {content.hero.metaLinks[0].label}
-            </LocalizedLink>
-            <span aria-hidden="true">&middot;</span>
-            <LocalizedLink
-              href={content.hero.metaLinks[1].href}
-              locale={locale}
-              className="underline decoration-[var(--o-border)] underline-offset-4 transition-colors hover:text-[var(--o-warm)]"
-            >
-              {content.hero.metaLinks[1].label}
-            </LocalizedLink>
-            <span aria-hidden="true">&middot;</span>
-            <span>{content.hero.metaText[1].label}</span>
+          <div className="animate-fade-up motion-reduce:animate-none delay-300 pt-6 lg:col-span-6 lg:pt-0">
+            <HeroLivingPage />
           </div>
+        </div>
+        <div className="mx-auto mt-16 flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 border-t border-[var(--o-border-subtle)] pt-5 text-sm text-[var(--o-text-muted)]">
+          <span className="text-[var(--o-text-secondary)]">{redesign.hero.worksWithLabel}</span>
+          {worksWithClients.map((client) => (
+            <span key={client}>{client}</span>
+          ))}
+          <span className="ml-auto hidden sm:inline">{redesign.hero.worksWithNote}</span>
         </div>
       </section>
 
-      <section className="relative -mt-20 px-6 pb-24">
+      <section className="border-b border-[var(--o-border-subtle)] px-6 py-16 sm:py-20">
         <div className="mx-auto max-w-5xl">
-          <div className="animate-fade-up delay-600 overflow-hidden rounded-xl border border-[var(--o-border)] shadow-[0_8px_60px_rgba(0,0,0,0.4)]">
+          <div className="overflow-hidden rounded-xl border border-[var(--o-border)] shadow-[var(--o-shadow-media)]">
             <div className="relative aspect-video bg-[var(--o-bg-deep)]">
               <DemoVideo
                 embedUrl={demoVideoEmbedUrl}
@@ -264,35 +216,105 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <ProblemSection copy={content.sections.problem} />
-      <SolutionSection copy={content.sections.solution} />
-      <MemoryDistillerySection copy={content.sections.memoryDistillery} />
-      <FeatureSection copy={content.sections.features} />
-      <HumanControlSection copy={content.sections.humanControl} />
-      <TokenEfficiencySection copy={content.metrics} />
+      <PainsSection copy={redesign.pains} />
+      <UseCasesSection copy={content.useCases} locale={locale} />
+      <PipelineSection copy={redesign.pipeline} solution={content.sections.solution} />
+      <BentoSection title={content.sections.features.title} cells={redesign.bento.cells} />
+      <StorageSection copy={redesign.storage} />
 
-      <FAQSection copy={content.faqs} />
-
-      <section className="border-t border-[var(--o-border-subtle)] px-6 py-20 sm:py-24">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/70 uppercase">
-            {content.sections.openSourceCta.eyebrow}
-          </p>
-          <h2 className="font-serif text-4xl font-medium tracking-tight sm:text-5xl">
-            {content.sections.openSourceCta.title}
-          </h2>
-          <p className="mx-auto mt-6 max-w-md text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
-            {content.sections.openSourceCta.body}
-          </p>
-          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <HomeCta link={content.sections.openSourceCta.primaryCta} locale={locale} variant="primary" compact />
-            <HomeCta link={content.sections.openSourceCta.secondaryCta} locale={locale} variant="secondary" showGithubIcon />
-          </div>
-          <div className="mx-auto mt-9 max-w-md">
-            <p className="mb-3 text-sm text-[var(--o-text-muted)]">
-              {content.sections.openSourceCta.waitlistHeading}
+      <section className="border-b border-[var(--o-border-subtle)] px-6 py-20 sm:py-24">
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <p className="mb-4 font-mono text-[12px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
+              {content.metrics.eyebrow}
             </p>
-            <WaitlistForm copy={content.sections.openSourceCta.waitlist} />
+            <h2 className="font-serif text-3xl font-medium tracking-tight text-balance sm:text-5xl">
+              {redesign.metrics.title}
+            </h2>
+            <p className="mt-4 text-xl leading-relaxed text-[var(--o-text-secondary)]">
+              {content.metrics.description}
+            </p>
+            <a
+              href={content.metrics.link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center gap-2 text-[15px] font-medium text-[var(--o-text-secondary)] underline decoration-[var(--o-border)] underline-offset-4 transition-colors hover:text-[var(--o-warm)]"
+            >
+              {content.metrics.link.label}
+              <ArrowIcon />
+            </a>
+          </div>
+          <div className="lg:col-span-8">
+            <div className="rounded-lg border border-[var(--o-border)] bg-[var(--o-bg-alt)] p-6 sm:p-8">
+              <div className="space-y-6">
+                {redesign.metrics.bars.map((bar) => {
+                  const chrome = metricBarChrome[bar.id] ?? { tone: "muted" as const, widthPercent: 100 };
+                  return (
+                    <MetricBar
+                      key={bar.id}
+                      label={bar.label}
+                      value={bar.value}
+                      sub={bar.sub}
+                      widthPercent={chrome.widthPercent}
+                      tone={chrome.tone}
+                    />
+                  );
+                })}
+              </div>
+              <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-t border-[var(--o-border-subtle)] pt-5 font-mono text-[13px] tabular-nums text-[var(--o-text-secondary)]">
+                <span><span className="text-[var(--o-text)]">93.6%</span> Recall@5</span>
+                <span><span className="text-[var(--o-text)]">0.883</span> NDCG@10</span>
+                <span><span className="text-[var(--o-text)]">0.857</span> MRR</span>
+                <span className="text-[var(--o-text-muted)]">LME_Oracle snapshot</span>
+              </div>
+            </div>
+            <p className="mt-4 font-mono text-[11px] leading-relaxed text-[var(--o-text-muted)]">
+              {redesign.metrics.footnote}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-20 sm:py-24">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="font-serif text-3xl font-medium tracking-tight sm:text-5xl">{content.faqs.title}</h2>
+          <div className="mt-12 grid gap-x-16 gap-y-10 sm:grid-cols-2">
+            {content.faqs.items.map((faq) => (
+              <div key={faq.id} className="border-t border-[var(--o-border-subtle)] pt-5">
+                <h3 className="font-serif text-xl font-medium">{faq.q}</h3>
+                <p className="mt-2 text-base leading-relaxed text-[var(--o-text-secondary)]">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Closing CTA: stands out structurally — a hard rule in the page's own
+          ink and an asymmetric split — no glow, no wash. */}
+      <section className="border-t-2 border-[var(--o-text)] px-6 py-20 sm:py-24">
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <p className="mb-4 font-mono text-[12px] tracking-[0.3em] text-[var(--o-warm)] uppercase">
+              {cta.eyebrow}
+            </p>
+            <h2 className="font-serif text-4xl font-medium tracking-tight text-balance sm:text-6xl">
+              {cta.title}
+            </h2>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-[var(--o-text-secondary)] sm:text-xl">
+              {cta.body}
+            </p>
+          </div>
+          <div className="lg:col-span-5 lg:border-l lg:border-[var(--o-border-subtle)] lg:pl-10">
+            <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+              <HomeCta link={cta.primaryCta} locale={locale} variant="primary" />
+              <HomeCta link={cta.secondaryCta} locale={locale} variant="secondary" showGithubIcon />
+            </div>
+            <div className="mt-9 max-w-md">
+              <p className="mb-3 text-sm text-[var(--o-text-muted)]">
+                {cta.waitlistHeading}
+              </p>
+              <WaitlistForm copy={cta.waitlist} />
+            </div>
           </div>
         </div>
       </section>
@@ -331,13 +353,11 @@ function LanguageSwitcher({ href, locale }: { href: string; locale: Locale }) {
 }
 
 function HomeCta({
-  compact = false,
   link,
   locale,
   showGithubIcon = false,
   variant,
 }: {
-  compact?: boolean;
   link: LinkContent;
   locale: Locale;
   showGithubIcon?: boolean;
@@ -345,7 +365,7 @@ function HomeCta({
 }) {
   const className =
     variant === "primary"
-      ? `flex items-center gap-2 rounded-xl bg-[var(--o-text)] px-6 py-3 text-sm font-semibold text-[var(--o-bg)] transition-all duration-150 ${compact ? "hover:opacity-90" : "hover:shadow-[0_0_28px_var(--o-glow-warm)]"}`
+      ? "flex items-center gap-2 rounded-xl bg-[var(--o-text)] px-6 py-3 text-sm font-semibold text-[var(--o-bg)] transition-all duration-150 hover:-translate-y-0.5 active:scale-[0.98]"
       : "flex items-center gap-2 rounded-xl border border-[var(--o-border)] px-6 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-all duration-150 hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)]";
 
   const children = (

@@ -37,6 +37,17 @@ yarn-error.log*
 # worktrees
 /.worktrees/
 
+# local QA artifacts (screenshots, agent scratch — not part of the project)
+/.codex/qa/
+/.omo/teams/
+/.omo/evidence/aesthetic-current-qa/
+/.omo/evidence/context-index-object-qa/
+/.omo/evidence/context-index-object-qa-v2/
+/.omo/evidence/context-index-object-final-qa/
+/.omo/evidence/context-index-object-final-polished-qa/
+/.omo/evidence/document-excerpt-qa/
+/.omo/evidence/index-list-ledger-qa/
+
 # superpowers planning artifacts (specs, plans, scratch — not part of the project)
 /docs/superpowers/
 

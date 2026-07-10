@@ -38,7 +38,7 @@ export function WaitlistForm({ copy }: { copy: WaitlistContent }) {
         <button
           type="submit"
           disabled={isPending}
-          className="shrink-0 rounded-lg bg-gradient-to-r from-[var(--o-warm)] to-[var(--o-warm-hover)] px-5 py-3 text-sm font-semibold text-[var(--o-btn-text)] transition-all duration-150 hover:shadow-[0_0_20px_var(--o-glow-warm)] disabled:opacity-50"
+          className="shrink-0 rounded-lg bg-gradient-to-r from-[var(--o-warm)] to-[var(--o-warm-hover)] px-5 py-3 text-sm font-semibold text-[var(--o-btn-text)] transition-all duration-150 hover:-translate-y-0.5 disabled:opacity-50"
         >
           {isPending ? (
             <span className="inline-flex items-center gap-2">

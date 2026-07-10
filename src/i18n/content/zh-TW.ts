@@ -17,7 +17,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "9eafdad26e67eb4c7e502656d6b8b9ea00935148813a86f57ffa1fad5caae976",
+    sourceHash: "2eda8645f54472fe4d1808a15d6112a25a826748af65e07c734d564b5185356e",
     content: {
       seo: {
         title: "Wenlan 文瀾 | AI 工作的 LLM wiki",
@@ -76,6 +76,153 @@ export const zhTWContent = {
       demo: {
         title: "Wenlan v0.9 歷史示範",
         playLabel: "播放 Wenlan v0.9 歷史示範",
+      },
+      useCases: {
+        eyebrow: "使用場景",
+        title: "給 code、客戶工作、研究用的\nLLM wiki。",
+        description:
+          "Wenlan 把 repo 事實、客戶限制、source trails 和讀書筆記變成 agent 能簡報、召回、交接的 source-cited 頁面。",
+        evidenceLabel: "Agent 可引用的頁面",
+        outcomeLabel: "可引用頁面",
+        actionsLabel: "Agent 動作",
+        index: {
+          title: "Wenlan Wiki 索引",
+          activeViewLabel: "目前視圖",
+          pagesTitle: "Agent 可引用的頁面",
+          pagesLabel: "頁面",
+          sourcesLabel: "來源",
+          statusLabel: "狀態",
+          sourceBackedLabel: "有來源",
+          citationLabel: "Agent 引用",
+          citingLabel: "引用中的頁面",
+        },
+        scenarios: [
+          {
+            id: "dev-codebase",
+            label: "Dev / codebase 工作",
+            railLabel: "程式",
+            summary: "會持續更新的工程文件",
+            lead: "維護工程師真的會更新的 codebase 文件。",
+            body: "Wenlan 讓有來源的工程頁面持續更新：架構地圖、runbook、migration plan、integration note、debugging log 都會跟著 repo 變動。",
+            evidence: [
+              {
+                id: "architecture",
+                label: "架構地圖",
+                detail: "服務邊界、資料流、owner、runtime constraints，以及會隨程式碼改變的 diagrams。",
+              },
+              {
+                id: "failed-paths",
+                label: "操作手冊",
+                detail: "如何重現、release、rollback、監控或操作系統，不必再問上一位工程師。",
+              },
+              {
+                id: "dependency-research",
+                label: "Migration 計畫",
+                detail: "Schema 變更、API migration、rollout 階段、blocked paths，以及跨 session 的 cleanup tasks。",
+              },
+              {
+                id: "open-threads",
+                label: "整合筆記",
+                detail: "Dependency quirks、版本限制、adapter decisions，以及連到 source docs 的 upstream issues。",
+              },
+            ],
+            outcome: "下一個 agent 打開的是工程師也會更新的 living docs。",
+          },
+          {
+            id: "product-customers",
+            label: "Product / 客戶工作",
+            railLabel: "客戶工作",
+            summary: "通話、限制、proposal",
+            lead: "讓下一份 proposal 帶著客戶 context 開始。",
+            body:
+              "下一份 proposal 前，產品團隊、顧問與自由工作者可以召回客戶反對點、client constraint，以及真正改變方案的取捨。",
+            evidence: [
+              {
+                id: "customer-voice",
+                label: "客戶反對點",
+                detail: "訪談、support、sales notes 中反覆出現的需求和反對理由。",
+              },
+              {
+                id: "client-constraints",
+                label: "Client 限制",
+                detail: "每個 client space 的品牌、預算、審批、法務或交付限制。",
+              },
+              {
+                id: "decision-rationale",
+                label: "Proposal 取捨",
+                detail: "為什麼某個 roadmap、proposal 或 pricing 取捨勝過其他選項。",
+              },
+              {
+                id: "follow-up-threads",
+                label: "後續 owner",
+                detail: "下一次會議前要追的問題、承諾的下一步，以及負責人。",
+              },
+            ],
+            outcome: "下一份 proposal 從客戶反對點、限制、取捨和 owner 開始。",
+          },
+          {
+            id: "research-writing",
+            label: "Research / 寫作",
+            railLabel: "研究",
+            summary: "sources、有引用的頁面、下一版 outline",
+            lead: "把研究脈絡變成可引用的 wiki 頁面。",
+            body: "Papers、docs、transcripts 和 links 堆起來後，下一稿可以從可信 quote、待重查 claim，以及有引用的 outline 接續。",
+            evidence: [
+              {
+                id: "trusted-sources",
+                label: "可信 quote",
+                detail: "你已經決定信任的 papers、docs、transcripts 和 links。",
+              },
+              {
+                id: "comparison-notes",
+                label: "比較 note",
+                detail: "工具、主張或標準之間哪裡改變，並保留完整 source trail。",
+              },
+              {
+                id: "outline-decisions",
+                label: "下一稿 outline",
+                detail: "下一稿要延續的論點、段落順序和開放問題。",
+              },
+              {
+                id: "stale-claims",
+                label: "待重查 claim",
+                detail: "放進公開文案前，需要重新確認的事實。",
+              },
+            ],
+            outcome: "寫作從有引用的 working page 接續，而不是從一堆 tabs 重開。",
+          },
+          {
+            id: "learning-study",
+            label: "學習與讀書",
+            railLabel: "學習",
+            summary: "概念、前置知識、複習",
+            lead: "把讀書 session 變成能教下一次的頁面。",
+            body: "終於想通的解釋會變成概念頁面，前置知識也連結好，下一次 session 是在複習理解，而不是回頭滑聊天記錄。",
+            evidence: [
+              {
+                id: "concept-pages",
+                label: "概念頁面",
+                detail: "那個終於說通的解釋，連同讓它成立的來源一起留下。",
+              },
+              {
+                id: "prerequisite-links",
+                label: "前置連結",
+                detail: "每個概念建立在什麼之上，先連好，讓知識缺口在造成代價前現形。",
+              },
+              {
+                id: "review-notes",
+                label: "複習筆記",
+                detail: "上次哪裡想錯，以及修正它的那個更正。",
+              },
+              {
+                id: "study-plan",
+                label: "讀書計畫",
+                detail: "接下來該讀什麼，依你已掌握的前置知識排序。",
+              },
+            ],
+            outcome: "下一次讀書 session 打開的是概念頁面，不是上週的聊天捲動。",
+          },
+        ],
       },
       sections: {
         problem: {
@@ -243,6 +390,148 @@ export const zhTWContent = {
             a: "是。Wenlan 是 open-source。Wenlan repo 裡的本地 runtime、CLI、MCP server、Claude Code plugin 和 Codex plugin files 都是 Apache-2.0。",
           },
         ],
+      },
+      redesign: {
+        hero: {
+          headline: { pre: "值得信任的", emphasis: "活", post: " wiki。" },
+          description:
+            "你的 agents 邊工作邊寫的第二大腦：repo 事實、客戶通話、訓練計畫。每一頁都保持有引用、有連結、跟得上現況，你不用自己維護。",
+          assurances: [
+            { id: "cited", label: "每個 claim 都有引用" },
+            { id: "superseded", label: "過時事實自動被取代" },
+            { id: "linked", label: "頁面彼此連結" },
+          ],
+          worksWithLabel: "可搭配",
+          worksWithNote: "Local-first、MCP server",
+        },
+        pains: {
+          title: "每個 wiki 都死於乏人照料。",
+          intro:
+            "先是手工照料的 vault，接著是掛上 wiki 的 agents：寫得更快，一樣腐壞。Wenlan 是接下來的那一步。",
+          generations: [
+            {
+              id: "wiki-graveyard",
+              name: "Wiki 墓園",
+              body: "Obsidian vaults、Notion 頁面、團隊 wiki。全靠手工照料，你的紀律撐多久，它就活多久。",
+            },
+            {
+              id: "llm-wiki-1",
+              name: "初代 llm-wiki",
+              body: "Agents 把筆記倒進 Markdown 檔案。沒有來源、沒有 recall、沒有維護。它腐壞得更快，還更有自信。",
+            },
+            {
+              id: "vault-agents",
+              name: "Obsidian 加上 agents",
+              body: "Agents 寫進你的 vault，但園藝活還是你的。捕捉變容易了，腐壞照舊。",
+            },
+          ],
+          current: {
+            name: "Wenlan",
+            body: "會自我維護的 llm-wiki：在真實工作中寫成、引用到來源、由 hybrid recall 找回、在你睡覺時持續 enrich。",
+          },
+          closer: { pre: "而在你睡覺時，wiki 只會變得", emphasis: "更好", post: "。" },
+        },
+        pipeline: {
+          intro:
+            "Wenlan 在工作發生時捕捉決策，在 sessions 之間精煉 wiki，並在下一個 session 開始時送上簡報。",
+          stages: [
+            { id: "capture", step: "/capture · session 進行中", title: "工作留下軌跡" },
+            { id: "distill", step: "/distill · sessions 之間", title: "重複出現的內容變成頁面" },
+            { id: "brief", step: "/brief · 下一個 session", title: "下一個 agent 熱啟動" },
+          ],
+          distillNote: "當某個主題值得立刻成頁時，agents 也會直接建立頁面。",
+          arcLabel: "/handoff 收尾每一輪",
+        },
+        bento: {
+          cells: [
+            {
+              id: "pages",
+              title: "人類讀得懂，agents 用得上",
+              body: "整理過的決策和教訓變成耐用的頁面，而不是埋在聊天記錄裡。",
+            },
+            {
+              id: "graph",
+              title: "Recall 帶著脈絡一起回來",
+              body: "人、專案、頁面會連著 memory 也彼此相連地回來，recall 到手時就帶著整個鄰域。",
+            },
+            {
+              id: "citations",
+              title: "每個 claim 都留著來源",
+              body: "Wenlan 拒絕沒有來源的頁面。每個蒸餾出的 claim 都引用產生它的 memory，隨時可以回溯重查。",
+            },
+            {
+              id: "review",
+              title: "先審核，再信任",
+              body: "低信心的捕捉和矛盾會浮上來等你審核，而不是悄悄進入 context。你只在要緊時介入。",
+            },
+            {
+              id: "nurture",
+              title: "每一輪都更新鮮",
+              body: "在 sessions 之間，背景批次會連結 entities、擴充相符的頁面、淡化過時的 memories。",
+            },
+            {
+              id: "spaces",
+              title: "Spaces 讓工作各歸各位",
+              body: "捕捉和 recall 都帶上 space 標籤，客戶事實永遠不會滲進 side project 的簡報。",
+            },
+            {
+              id: "git",
+              title: "像程式碼一樣有版本",
+              body: "Memory、頁面和 session artifacts 都活在真正的 git 歷史裡。可檢視、可 diff、可還原。",
+            },
+            {
+              id: "mcp",
+              title: "一個家，不被任何工具綁死",
+              body: "每個 MCP client 都透過同一個本地 daemon 讀同一份共享記憶。檔案永遠是你的。",
+            },
+          ],
+        },
+        storage: {
+          title: "Agents 拿到索引。\n你拿到檔案。",
+          intro:
+            "捕捉先進到快速的本地索引，再凝固成你能打開、diff、保存的 Markdown 頁面。",
+          indexLabel: "索引 · agents 的工作記憶",
+          filesLabel: "Markdown · 屬於你的長期紀錄",
+          fusionNote: "三條路進來，一次查詢。任何單一路徑都會漏掉其中兩條。",
+          distillCaption: "staging 變成頁面",
+          ingestCaption: "頁面被索引供 recall",
+          tradeoffs: [
+            {
+              id: "files-alone",
+              title: "只有檔案",
+              body: "每次 recall 都要重讀整個資料夾，context window 買單。",
+            },
+            {
+              id: "db-alone",
+              title: "只有資料庫",
+              body: "快但不透明。沒有東西可以打開、diff 或搬走。",
+            },
+            {
+              id: "index-files",
+              title: "索引 + 檔案",
+              body: "給 agents 一次查詢。給你可讀、有版本的檔案。",
+            },
+          ],
+        },
+        metrics: {
+          title: "少 96% tokens。",
+          bars: [
+            {
+              id: "full-replay",
+              label: "完整聊天重播",
+              value: "每次查詢 4,505 tokens / query",
+              sub: "不使用 retrieval，整份 transcript 進 context",
+            },
+            {
+              id: "wenlan",
+              label: "Wenlan 檢索",
+              value: "每次查詢 168 tokens / query",
+              sub: "CE-reranked，500 題 snapshot",
+            },
+          ],
+          footnote:
+            "Retrieval-only snapshots。LME_S 在 stratified N=90 deep-S fixture 上記錄 87.7% R@5 和 0.815 MRR。Token 比較是完整重播對 retrieved context。",
+        },
       },
     },
   },

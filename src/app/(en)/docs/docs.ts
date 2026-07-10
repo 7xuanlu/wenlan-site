@@ -3783,40 +3783,43 @@ export const docPages: DocPage[] = [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.12.0 is the current stable release recorded in CHANGELOG.md and the release-please manifest. It includes citation-gated page synthesis and release-path hardening after the v0.11.x document revision work.",
+          "Wenlan v0.12.0 is the current stable release recorded in CHANGELOG.md and the release-please manifest. It redesigns distill around one refresh operation with citation-gated synthesis, and adds per-claim verified citations for wiki pages.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
         ],
       },
       {
         heading: "v0.12.0 highlights",
         body: [
-          "The v0.12.0 release adds citation-gated page synthesis and release-path hardening while preserving the v0.11.x document revision work.",
+          "The v0.12.0 release reworks how wiki pages are synthesized and cited. Distill becomes one refresh operation with canonical PageWrite births, and synthesis is gated on citations so page claims stay traceable to sources.",
         ],
         bullets: [
-          "Citation-gated synthesis keeps generated pages tied to verified source memories.",
+          "Distill redesign: one refresh op, canonical PageWrite births, citation-gated synthesis.",
+          "Per-claim verified citations for wiki pages.",
+          "Loopback daemon guarded against cross-origin browser access.",
+          "Server binds its port before any data-dir work.",
           "Stable release date: 2026-07-08.",
         ],
       },
       {
-        heading: "v0.10.0 highlights",
+        heading: "v0.10.0 to v0.11.0 highlights",
         body: [
-          "The v0.10.0 release adds an L1 ingest path for folders and multi-format documents, and brings the pages skill to the Codex plugin surface.",
+          "The v0.10.x and v0.11.0 releases focused on getting documents into the store and letting them talk back to it.",
         ],
         bullets: [
-          "Folder and multi-format document ingest added for local source material.",
-          "Pages skill ported to the Codex plugin workflow.",
-          "Stable release date: 2026-07-02.",
+          "Folder and multi-format document ingest.",
+          "Doc-grounded revisions: documents propose rewrites to conflicting captures.",
+          "Pages skill ported to the Codex plugin.",
         ],
       },
       {
-        heading: "v0.9.6 highlights",
+        heading: "v0.9.1 to v0.9.6 highlights",
         body: [
-          "The v0.9.6 release finished the shared plugin contract work and added the Codex plugin install path.",
+          "The rest of the v0.9.x line covered the public Wenlan cutover cleanup and made distilled wiki pages first-class across recall and search surfaces, with CLI-first browsing through wenlan pages and a reworked /curate revision queue.",
         ],
         bullets: [
-          "Codex plugin install path documented and wired.",
-          "Shared Wenlan plugin contract added.",
-          "Space auto-create and cascade space moves stopped.",
+          "Public rename cleanup completed across docs, plugin, and scripts.",
+          "Distilled wiki pages surfaced across recall and search, space and tier gated.",
+          "wenlan pages CLI and CLI-first /pages and /curate browsing.",
         ],
       },
       {
