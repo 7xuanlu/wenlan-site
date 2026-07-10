@@ -162,10 +162,10 @@ const setupArticles: BaseSpec[] = [
     category: "Workflows",
     title: "How to Add Memory to Claude Code",
     description:
-      "Install Wenlan's Claude Code plugin, run /init, and verify a local memory round trip.",
+      "Install Wenlan's Claude Code plugin, run /setup, and verify a local memory round trip.",
     metaTitle: "How to Add Memory to Claude Code | Wenlan",
     metaDescription:
-      "Add local-first AI work memory to Claude Code with the Wenlan plugin, /init, /brief, /capture, /recall, and /handoff.",
+      "Add local-first AI work memory to Claude Code with the Wenlan plugin, /setup, /brief, /capture, /recall, and /handoff.",
     keywords: [
       "add memory to Claude Code",
       "Claude Code memory plugin",
@@ -176,11 +176,11 @@ const setupArticles: BaseSpec[] = [
     audience: "Claude Code users who want persistent project context",
     heroBullets: [
       "Install the Wenlan Claude Code plugin from the marketplace.",
-      "Run /init once to verify the daemon, MCP wiring, and first memory round trip.",
+      "Run /setup once to verify the daemon, MCP wiring, and first memory round trip.",
       "Use /brief, /capture, /recall, and /handoff as the daily loop.",
     ],
     quickAnswer:
-      "Use the Claude Code plugin path: /plugin marketplace add 7xuanlu/claude-plugins, then /plugin install wenlan@7xuanlu, then /init. Restart Claude Code once if prompted before running /init.",
+      "Use the Claude Code plugin path: /plugin marketplace add 7xuanlu/claude-plugins, then /plugin install wenlan@7xuanlu, then /setup. Restart Claude Code once if prompted before running /setup.",
     problem:
       "Claude Code can do substantial work in one session, but the next session starts cold unless the decisions, gotchas, and project state are stored somewhere durable.",
     wenlanFit:
@@ -191,13 +191,13 @@ const setupArticles: BaseSpec[] = [
     actionBullets: [
       "Run /plugin marketplace add 7xuanlu/claude-plugins.",
       "Run /plugin install wenlan@7xuanlu.",
-      "Restart Claude Code if it asks, then run /init and wait for the daemon, MCP, and local memory checks to pass.",
+      "Restart Claude Code if it asks, then run /setup and wait for the daemon, MCP, and local memory checks to pass.",
       "Run /capture with one durable project fact, then /recall with a specific query.",
       "End a real work session with /handoff.",
     ],
     code: {
       label: "Claude Code commands",
-      code: "/plugin marketplace add 7xuanlu/claude-plugins\n/plugin install wenlan@7xuanlu\n/init\n/capture Wenlan test: this project uses Wenlan for local AI work memory.\n/recall Wenlan local AI work memory",
+      code: "/plugin marketplace add 7xuanlu/claude-plugins\n/plugin install wenlan@7xuanlu\n/setup\n/capture Wenlan test: this project uses Wenlan for local AI work memory.\n/recall Wenlan local AI work memory",
     },
     caution:
       "Do not start by capturing full logs or command output. Wenlan works best when each memory is one durable idea with why it matters.",
@@ -205,7 +205,7 @@ const setupArticles: BaseSpec[] = [
       "Do I need an API key to add memory to Claude Code?",
       "No for the core local memory loop. Optional model or API-key paths add richer extraction and page refresh work, but setup and daily capture/recall do not start there.",
       "Is MCP-only setup enough for Claude Code?",
-      "It can be enough for raw tools, but the plugin is the richer path because it adds slash commands like /brief, /handoff, /distill, and /init.",
+      "It can be enough for raw tools, but the plugin is the richer path because it adds slash commands like /brief, /handoff, /distill, and /setup.",
     ],
     relatedSlugs: ["claude-code-memory-command-vs-wenlan", "wenlan-for-claude-code", "claude-code-memory"],
     officialReferences: [
@@ -307,31 +307,31 @@ const setupArticles: BaseSpec[] = [
     audience: "Codex users working across repeated coding sessions",
     heroBullets: [
       "Install the Wenlan runtime before configuring Codex as an MCP client.",
-      "Run ~/.wenlan/bin/wenlan mcp add codex to write the client config when supported.",
+      "Run ~/.wenlan/bin/wenlan connect codex to write the client config when supported.",
       "Use MCP context, capture, recall, and doctor tools from Codex.",
     ],
     quickAnswer:
-      "Set up Wenlan, then run ~/.wenlan/bin/wenlan mcp add codex. Restart Codex if its MCP settings require a reload, then verify with doctor or a capture/recall round trip.",
+      "Set up Wenlan, then run ~/.wenlan/bin/wenlan connect codex. Restart Codex if its MCP settings require a reload, then verify with doctor or a capture/recall round trip.",
     problem:
       "Codex sessions are useful for implementation work, but project decisions, review lessons, and setup gotchas disappear if they only live in the chat transcript.",
     wenlanFit:
-      "Wenlan gives Codex a local memory layer that is separate from native Codex memories. Codex memories, AGENTS.md, skills, MCP, and Wenlan can complement each other: Wenlan is the shared local store that other MCP clients can also use.",
+      "Wenlan gives Codex a source-backed wiki and shared local context that complement native Codex memories, AGENTS.md, skills, and MCP. The same Wenlan daemon can also serve other clients.",
     actionHeading: "Connect Codex through MCP",
     actionIntro:
-      "Use the MCP-only setup path because Codex does not install the Wenlan Claude Code plugin.",
+      "Use the direct MCP path below when you want Codex working without a Wenlan source checkout. The Wenlan repository also ships a Codex plugin with the shared slash workflow.",
     actionBullets: [
       "Install the local runtime with the current setup path for your operating system.",
-      "Run ~/.wenlan/bin/wenlan mcp add codex.",
+      "Run ~/.wenlan/bin/wenlan connect codex.",
       "Restart Codex if the client does not pick up MCP changes live.",
       "Call the doctor tool or run a small capture/recall test.",
       "Use handoff-like captures at the end of serious Codex sessions.",
     ],
     code: {
       label: "Codex MCP setup",
-      code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan mcp add codex",
+      code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan connect codex",
     },
     caution:
-      "MCP-only clients get tools, not Claude Code slash commands. Use context and capture through the MCP tool list instead of expecting Wenlan plugin commands like /brief or /handoff.",
+      "The direct MCP path exposes tools such as context and capture. The Codex plugin adds Wenlan slash skills such as /brief and /handoff; do not confuse the two interfaces.",
     faq: [
       "Does Codex share memory with Claude Code in Wenlan?",
       "Yes, when both clients point at the same local Wenlan daemon. The clients differ, but the daemon is the source of truth.",
@@ -359,7 +359,7 @@ const setupArticles: BaseSpec[] = [
       "Wire Cursor to Wenlan's local MCP memory server so coding sessions can capture and recall project context.",
     metaTitle: "Cursor Memory MCP Setup | Wenlan",
     metaDescription:
-      "Add local-first MCP memory to Cursor with Wenlan setup, wenlan mcp add cursor, client restart checks, and a capture/recall verification loop.",
+      "Add local-first MCP memory to Cursor with Wenlan setup, wenlan connect cursor, client restart checks, and a capture/recall verification loop.",
     keywords: [
       "Cursor MCP memory",
       "Cursor persistent memory",
@@ -371,21 +371,21 @@ const setupArticles: BaseSpec[] = [
     audience: "Cursor users who want local project memory across coding sessions",
     heroBullets: [
       "Wenlan setup installs the local daemon and MCP connector.",
-      "wenlan mcp add cursor writes the Cursor-side MCP configuration when supported.",
+      "wenlan connect cursor writes the Cursor-side MCP configuration when supported.",
       "Cursor can then use Wenlan context, capture, recall, and doctor tools.",
     ],
     quickAnswer:
-      "Install Wenlan, then run ~/.wenlan/bin/wenlan mcp add cursor. Restart Cursor if needed, then verify that Wenlan tools appear and can recall a test capture.",
+      "Install Wenlan, then run ~/.wenlan/bin/wenlan connect cursor. Restart Cursor if needed, then verify that Wenlan tools appear and can recall a test capture.",
     problem:
       "Cursor has its own project-scoped Memories and Rules, but those are Cursor-native. The gap appears when you want the same work context available to Claude Code, Codex, Claude Desktop, or another MCP client.",
     wenlanFit:
-      "Wenlan keeps the memory layer outside Cursor while still making it available to Cursor. That keeps context portable to Claude Code, Codex, and other MCP clients later.",
+      "Wenlan keeps durable context in its own local daemon while making it available to Cursor. That keeps the same source-backed context portable to Claude Code, Codex, and other clients later.",
     actionHeading: "Add Cursor as a client",
     actionIntro:
       "Treat Cursor as an MCP client connected to one local Wenlan daemon.",
     actionBullets: [
       "Install the Wenlan runtime once with the current setup path for your operating system.",
-      "Run ~/.wenlan/bin/wenlan mcp add cursor.",
+      "Run ~/.wenlan/bin/wenlan connect cursor.",
       "The generated Cursor config writes a global ~/.cursor/mcp.json entry.",
       "Restart Cursor if the MCP tools do not appear.",
       "Run the Wenlan doctor tool or a capture/recall round trip.",
@@ -393,13 +393,13 @@ const setupArticles: BaseSpec[] = [
     ],
     code: {
       label: "Cursor MCP setup",
-      code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan mcp add cursor\n~/.wenlan/bin/wenlan doctor",
+      code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan connect cursor\n~/.wenlan/bin/wenlan doctor",
     },
     caution:
       "If Cursor and another client both write memory, use spaces when contexts should stay separate. Richer distillation and page synthesis may need a configured local model or API-key path.",
     faq: [
       "Can Cursor and Claude Code use the same Wenlan memory?",
-      "Yes. The shared daemon is the point: each client can read and write the same local memory layer when configured.",
+      "Yes. The shared daemon is the point: each configured client can read and write the same Wenlan context.",
       "Does Wenlan require Cursor to upload memory to a cloud service?",
       "No. Wenlan's default model is local-first. Optional model or API-key paths are separate choices for richer distillation.",
     ],
@@ -424,7 +424,7 @@ const setupArticles: BaseSpec[] = [
       "Connect Claude Desktop to Wenlan's local memory daemon through MCP and verify the first memory loop.",
     metaTitle: "Claude Desktop MCP Memory Setup | Wenlan",
     metaDescription:
-      "Set up Claude Desktop with Wenlan MCP memory using the local runtime, wenlan mcp add claude-desktop, and a doctor/capture/recall check.",
+      "Set up Claude Desktop with Wenlan MCP memory using the local runtime, wenlan connect claude-desktop, and a doctor/capture/recall check.",
     keywords: [
       "Claude Desktop MCP memory",
       "Claude Desktop memory server",
@@ -439,7 +439,7 @@ const setupArticles: BaseSpec[] = [
       "Verify with doctor, then capture and recall a harmless durable fact.",
     ],
     quickAnswer:
-      "On macOS, install Wenlan and run ~/.wenlan/bin/wenlan mcp add claude-desktop to write the Claude Desktop MCP config. Restart Claude Desktop, then use Wenlan's doctor and capture/recall tools to verify the local daemon connection.",
+      "On macOS, install Wenlan and run ~/.wenlan/bin/wenlan connect claude-desktop to write the Claude Desktop MCP config. Restart Claude Desktop, then use Wenlan's doctor and capture/recall tools to verify the local daemon connection.",
     problem:
       "Claude Desktop MCP users often add tools one by one, but memory only becomes useful when captures, retrieval, and maintenance all point at the same local store.",
     wenlanFit:
@@ -449,21 +449,21 @@ const setupArticles: BaseSpec[] = [
       "Use the CLI-generated configuration first; use manual config only when a client needs raw JSON.",
     actionBullets: [
       "Install the local runtime with the current setup path for your operating system.",
-      "Run ~/.wenlan/bin/wenlan mcp add claude-desktop.",
-      "Use ~/.wenlan/bin/wenlan mcp add claude-desktop --dry-run if you want to inspect the JSON before writing it.",
+      "Run ~/.wenlan/bin/wenlan connect claude-desktop.",
+      "Use ~/.wenlan/bin/wenlan connect claude-desktop --dry-run if you want to inspect the JSON before writing it.",
       "Restart Claude Desktop after MCP config changes.",
       "Use the Wenlan MCP doctor tool or the wenlan doctor CLI if tools fail to call the daemon.",
       "Recall a known capture before trusting the setup for real work.",
     ],
     code: {
       label: "Claude Desktop MCP setup",
-      code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan mcp add claude-desktop\n~/.wenlan/bin/wenlan mcp add claude-desktop --dry-run",
+      code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan connect claude-desktop\n~/.wenlan/bin/wenlan connect claude-desktop --dry-run",
     },
     caution:
       "Do not expose the local daemon beyond loopback unless you are intentionally doing development or self-hosted networking work. Normal desktop setup should stay local.",
     faq: [
       "Is Claude Desktop the same setup as the Claude Code plugin?",
-      "No. Claude Desktop uses MCP-only setup. The Claude Code plugin adds slash commands and /init on top of MCP.",
+      "No. Claude Desktop uses MCP-only setup. The Claude Code plugin adds slash commands and /setup on top of MCP.",
       "Can Claude Desktop create distilled pages?",
       "It can call Wenlan MCP tools for page distillation when configured. Richer background extraction and page synthesis require a local model or explicit API-key path; readable pages are still written by the local Wenlan daemon.",
     ],
@@ -704,14 +704,14 @@ const setupArticles: BaseSpec[] = [
     actionBullets: [
       "Run ~/.wenlan/bin/wenlan status.",
       "Run ~/.wenlan/bin/wenlan doctor for a fuller setup report.",
-      "Run ~/.wenlan/bin/wenlan mcp add <client> --dry-run to inspect the wenlan-mcp command the client should launch.",
+      "Run ~/.wenlan/bin/wenlan connect <client> --dry-run to inspect the wenlan-mcp command the client should launch.",
       "Run lsof -nP -iTCP:7878 -sTCP:LISTEN and identify which process owns the port before changing client settings.",
       "Restart the MCP client after config changes.",
       "Make sure another development daemon is not owning the wrong data directory.",
     ],
     code: {
       label: "Daemon and MCP checks",
-      code: "~/.wenlan/bin/wenlan status\n~/.wenlan/bin/wenlan doctor\n~/.wenlan/bin/wenlan mcp add codex --dry-run\nlsof -nP -iTCP:7878 -sTCP:LISTEN",
+      code: "~/.wenlan/bin/wenlan status\n~/.wenlan/bin/wenlan doctor\n~/.wenlan/bin/wenlan connect codex --dry-run\nlsof -nP -iTCP:7878 -sTCP:LISTEN",
     },
     caution:
       "Loopback avoids LAN exposure, but 127.0.0.1:7878 is still sensitive local access to a memory API. Do not bind the daemon to a non-loopback address unless you are intentionally doing development or self-hosted networking, and redact memory contents from diagnostics.",
@@ -835,7 +835,7 @@ const workflowArticles: BaseSpec[] = [
       "Recall and capture handoff-style context through Wenlan so future Codex or Claude Code sessions can continue.",
     ],
     quickAnswer:
-      "In Codex, use Wenlan as an MCP memory layer: start with context, capture decisions and gotchas, recall specific prior work, and leave a handoff-style memory before ending.",
+      "In Codex, use Wenlan to load context, capture decisions and gotchas, recall specific prior work, and leave a handoff before ending. The plugin and direct MCP paths reach the same daemon.",
     problem:
       "Codex can inspect a repo, but it cannot infer why prior sessions chose a tradeoff or which external constraint mattered unless that context is recorded.",
     wenlanFit:
@@ -897,7 +897,7 @@ const workflowArticles: BaseSpec[] = [
     problem:
       "Cursor has native Memories and Rules for Cursor-scoped context. Wenlan's role is different: keep inspectable local work memory available to Cursor, Claude Code, Codex, and other MCP clients through one daemon.",
     wenlanFit:
-      "Wenlan fills that gap with a local memory layer outside the editor. Cursor can use the same decisions, pages, and handoffs as other MCP clients.",
+      "Wenlan fills that gap with a source-backed system outside the editor. Cursor can use the same decisions, pages, and handoffs as other MCP clients.",
     actionHeading: "Use Cursor with a memory habit",
     actionIntro:
       "Add memory at the points where future confusion is likely.",
@@ -961,7 +961,7 @@ const workflowArticles: BaseSpec[] = [
     actionIntro:
       "Use Claude Desktop for high-level reasoning, then save the durable results.",
     actionBullets: [
-      "First connect Claude Desktop with npx -y wenlan setup, ~/.wenlan/bin/wenlan mcp add claude-desktop, a Claude Desktop restart, and doctor/capture/recall verification.",
+      "First connect Claude Desktop with npx -y wenlan setup, ~/.wenlan/bin/wenlan connect claude-desktop, a Claude Desktop restart, and doctor/capture/recall verification.",
       "Capture selected plans and rejected alternatives.",
       "Capture constraints that implementation agents must respect.",
       "Distill repeated research into a page when page synthesis is configured and the topic will guide future work.",
@@ -973,7 +973,7 @@ const workflowArticles: BaseSpec[] = [
       "Is Claude Desktop required for Wenlan?",
       "No. It is one MCP client path. Wenlan can also serve Claude Code, Cursor, Codex, Gemini CLI, VS Code, and others.",
       "Does Claude Desktop support Wenlan slash commands?",
-      "No. Claude Desktop uses MCP tools. Wenlan slash commands like /brief, /handoff, /distill, and /init are part of the Claude Code plugin workflow.",
+      "No. Claude Desktop uses MCP tools. Wenlan slash commands like /brief, /handoff, /distill, and /setup are part of the Claude Code plugin workflow.",
     ],
     relatedSlugs: ["claude-desktop-mcp-memory-setup", "persistent-project-context-for-ai-agents", "what-to-capture-in-ai-work-memory"],
     officialReferences: [
@@ -996,7 +996,7 @@ const workflowArticles: BaseSpec[] = [
       "Connect Gemini CLI as an MCP client and use Wenlan for local capture, recall, and handoff-style notes.",
     metaTitle: "Wenlan Workflow for Gemini CLI | MCP Memory",
     metaDescription:
-      "Use Wenlan's local MCP memory layer with Gemini CLI for context, capture, recall, and cross-session handoffs.",
+      "Use Wenlan's local MCP path with Gemini CLI for context, capture, recall, and cross-session handoffs.",
     keywords: [
       "Gemini CLI memory",
       "Gemini CLI MCP memory",
@@ -1018,11 +1018,11 @@ const workflowArticles: BaseSpec[] = [
       "Wenlan keeps those durable lessons in the same local store used by GUI and coding clients, so terminal work can feed later AI sessions.",
     actionHeading: "Use Gemini CLI with Wenlan",
     actionIntro:
-      "Treat the CLI as another surface over the same memory layer.",
+      "Treat the CLI as another surface over the same Wenlan daemon.",
     actionBullets: [
       "Run Wenlan setup before adding the client.",
       "Make sure Gemini CLI is installed and on PATH.",
-      "Add Gemini CLI with ~/.wenlan/bin/wenlan mcp add gemini.",
+      "Add Gemini CLI with ~/.wenlan/bin/wenlan connect gemini.",
       "Verify with gemini mcp list or /mcp list inside Gemini CLI.",
       "Ask Gemini to use Wenlan MCP tools such as mcp_wenlan_context or mcp_wenlan_capture.",
       "Capture verified setup and debugging lessons.",
@@ -1031,7 +1031,7 @@ const workflowArticles: BaseSpec[] = [
     ],
     code: {
       label: "Gemini CLI MCP setup",
-      code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan mcp add gemini\ngemini mcp list",
+      code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan connect gemini\ngemini mcp list",
     },
     caution:
       "Avoid capturing raw terminal output. Store the conclusion and the command that proved it when that matters. Wenlan uses Gemini's user-scope MCP setup; use project-scope or manual Gemini config only for isolated experiments.",
@@ -1066,7 +1066,7 @@ const workflowArticles: BaseSpec[] = [
       "Use Wenlan as a local memory server from VS Code surfaces that support MCP.",
     metaTitle: "Wenlan Workflow for VS Code MCP Clients | Wenlan",
     metaDescription:
-      "Connect VS Code MCP clients to Wenlan and use one local memory layer for context, capture, recall, and project handoff.",
+      "Connect VS Code MCP clients to Wenlan and use one source-backed context system for capture, recall, and project handoff.",
     keywords: [
       "VS Code MCP memory",
       "VS Code AI memory",
@@ -1085,21 +1085,21 @@ const workflowArticles: BaseSpec[] = [
     problem:
       "VS Code is often the center of coding work, but the AI context still fragments when terminal sessions, Claude Code runs, and editor chats each remember different things.",
     wenlanFit:
-      "Wenlan centralizes the memory layer outside any one interface. VS Code can participate without making VS Code the only place where context exists.",
+      "Wenlan keeps context in its local daemon instead of any one interface. VS Code can participate without becoming the only place where context exists.",
     actionHeading: "Connect the VS Code surface",
     actionIntro:
       "Use the supported MCP client path rather than hand-editing memory.",
     actionBullets: [
       "Run npx -y wenlan setup.",
-      "From the workspace root, run ~/.wenlan/bin/wenlan mcp add vscode; it writes .vscode/mcp.json with servers.wenlan.",
-      "Use ~/.wenlan/bin/wenlan mcp add vscode --dry-run to preview the workspace config before writing.",
+      "From the workspace root, run ~/.wenlan/bin/wenlan connect vscode; it writes .vscode/mcp.json with servers.wenlan.",
+      "Use ~/.wenlan/bin/wenlan connect vscode --dry-run to preview the workspace config before writing.",
       "In VS Code, confirm MCP server trust, use MCP: List Servers to start or restart the server, and enable/select Wenlan tools in Chat or Agent mode.",
       "Verify with doctor or capture/recall.",
       "Use spaces for separate project buckets.",
     ],
     code: {
       label: "VS Code workspace MCP setup",
-      code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan mcp add vscode\n~/.wenlan/bin/wenlan mcp add vscode --dry-run",
+      code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan connect vscode\n~/.wenlan/bin/wenlan connect vscode --dry-run",
     },
     caution:
       "Client MCP support changes over time. Prefer Wenlan's generated config or dry-run output over copying stale snippets from old docs. VS Code Remote and Dev Containers run MCP servers where configured; install or configure Wenlan in the remote environment or handle localhost forwarding intentionally.",
@@ -1201,7 +1201,7 @@ const workflowArticles: BaseSpec[] = [
       "Use Wenlan as the local bridge when planning, editing, and debugging happen in different AI coding tools.",
     metaTitle: "Shared Memory Between Cursor and Claude Code | Wenlan",
     metaDescription:
-      "Wenlan lets Cursor and Claude Code use one local AI work memory layer through the daemon and MCP connector.",
+      "Wenlan lets Cursor and Claude Code use the same local, source-backed context through the daemon and MCP connector.",
     keywords: [
       "Cursor Claude Code shared memory",
       "shared AI coding memory",
@@ -1225,15 +1225,15 @@ const workflowArticles: BaseSpec[] = [
     actionIntro:
       "Use the richest path for each client while keeping one daemon.",
     actionBullets: [
-      "Install the Claude Code plugin and run /init.",
-      "After /init succeeds, run ~/.wenlan/bin/wenlan mcp add cursor, or wenlan mcp add cursor if ~/.wenlan/bin is on PATH.",
+      "Install the Claude Code plugin and run /setup.",
+      "After /setup succeeds, run ~/.wenlan/bin/wenlan connect cursor, or wenlan connect cursor if ~/.wenlan/bin is on PATH.",
       "Verify capture in one client and recall in the other with the same daemon, data dir, and space.",
       "Use the same space for the same project; Cursor should pass the same space in Wenlan MCP calls or lock WENLAN_SPACE in ~/.cursor/mcp.json.",
       "Use /handoff in Claude Code when ending work that Cursor will continue.",
     ],
     code: {
       label: "Cursor and Claude Code smoke test",
-      code: "/init\n~/.wenlan/bin/wenlan mcp add cursor\n# Capture a harmless fact in Cursor with the same Wenlan space.\n# Recall that fact from Claude Code with /recall.\n# Then capture in Claude Code and recall from Cursor.",
+      code: "/setup\n~/.wenlan/bin/wenlan connect cursor\n# Capture a harmless fact in Cursor with the same Wenlan space.\n# Recall that fact from Claude Code with /recall.\n# Then capture in Claude Code and recall from Cursor.",
     },
     caution:
       "If the tools appear to disagree, check space selection, daemon URL, and data directory before assuming memory is missing. The prebuilt runtime supports macOS, Linux glibc, and Windows; Claude Code on Windows may involve WSL or Git Bash caveats.",
@@ -1268,7 +1268,7 @@ const workflowArticles: BaseSpec[] = [
       "Use Wenlan to carry implementation context between Codex sessions and Claude Code plugin workflows.",
     metaTitle: "Shared Memory Between Codex and Claude Code | Wenlan",
     metaDescription:
-      "Wenlan lets Codex and Claude Code share one local AI work memory layer for decisions, gotchas, handoffs, and project context.",
+      "Wenlan lets Codex and Claude Code share one local, source-backed system for decisions, gotchas, handoffs, and project context.",
     keywords: [
       "Codex Claude Code shared memory",
       "Codex Claude Code handoff",
@@ -1293,18 +1293,18 @@ const workflowArticles: BaseSpec[] = [
       "Do a small round trip before trusting the workflow.",
     actionBullets: [
       "Set up Wenlan once.",
-      "Add Codex with ~/.wenlan/bin/wenlan mcp add codex.",
-      "Install the Claude Code plugin with /plugin marketplace add 7xuanlu/claude-plugins, /plugin install wenlan@7xuanlu, then /init.",
+      "Add Codex with ~/.wenlan/bin/wenlan connect codex.",
+      "Install the Claude Code plugin with /plugin marketplace add 7xuanlu/claude-plugins, /plugin install wenlan@7xuanlu, then /setup.",
       "Capture a harmless project fact in Codex with space X.",
       "Recall that fact from Claude Code with the same space.",
       "Reverse the smoke test: capture in Claude Code, then recall from Codex.",
     ],
     code: {
       label: "Codex and Claude Code smoke test",
-      code: "~/.wenlan/bin/wenlan mcp add codex\n/plugin marketplace add 7xuanlu/claude-plugins\n/plugin install wenlan@7xuanlu\n/init\n# Use the same Wenlan space for both clients during capture and recall.",
+      code: "~/.wenlan/bin/wenlan connect codex\n/plugin marketplace add 7xuanlu/claude-plugins\n/plugin install wenlan@7xuanlu\n/setup\n# Use the same Wenlan space for both clients during capture and recall.",
     },
     caution:
-      "Do not use different daemons, data directories, or spaces unless you intentionally want isolated memory stores. MCP-only Claude Code is tools-only; the plugin path is what provides /init, /brief, and /handoff.",
+      "Do not use different daemons, data directories, or spaces unless you intentionally want isolated memory stores. MCP-only Claude Code is tools-only; the plugin path is what provides /setup, /brief, and /handoff.",
     faq: [
       "Which tool should write handoffs?",
       "Use the tool ending the work. In Claude Code, /handoff is the easiest path; in Codex, capture a handoff-style memory.",
@@ -1333,7 +1333,7 @@ const workflowArticles: BaseSpec[] = [
     category: "Workflows",
     title: "A Multi-Agent Memory Workflow That Stays Local",
     description:
-      "Coordinate multiple AI clients through one local memory layer without turning memory into a cloud black box.",
+      "Coordinate multiple AI clients through one local, source-backed Wenlan system without turning project context into a cloud black box.",
     metaTitle: "Multi-Agent Memory Workflow That Stays Local | Wenlan",
     metaDescription:
       "Use Wenlan's daemon, MCP tools, spaces, capture, recall, handoff, and distill to coordinate multi-agent AI work locally.",
@@ -1370,7 +1370,7 @@ const workflowArticles: BaseSpec[] = [
       "Shared memory is not automatic truth. Review contradictions and stale context before letting old records steer important work.",
     faq: [
       "Does Wenlan assign tasks to agents?",
-      "No. Wenlan is the local memory layer. Your agent workflow decides task assignment.",
+      "No. Wenlan captures, refines, and recalls source-backed context. Your agent workflow decides task assignment.",
       "How do I avoid cross-project leakage?",
       "Use spaces intentionally. Run wenlan doctor from the terminal to inspect resolver state, then verify with a same-space capture/recall round trip.",
     ],
@@ -1477,7 +1477,7 @@ const comparisonArticles: BaseSpec[] = [
     ],
     audience: "Developers comparing MCP-native memory tools",
     heroBullets: [
-      "Wenlan is a user-facing local work-memory layer.",
+      "Wenlan is a user-facing, source-backed LLM wiki for AI work.",
       "mcp-memory-service is a broad self-hosted service with REST, MCP, dashboard, OAuth, remote/browser scenarios, and agent-framework scope.",
       "Choose based on whether your primary job is daily AI work continuity or backend memory infrastructure.",
     ],
@@ -1806,7 +1806,7 @@ const comparisonArticles: BaseSpec[] = [
     problem:
       "Workspace AI and agent memory can sound similar because both answer questions from context. The difference is where the context lives and what the AI is trying to continue.",
     wenlanFit:
-      "Wenlan is not a company workspace. It is the local memory layer for AI work: captures, handoffs, source-backed pages, and retrieval context across Claude Code, Cursor, Codex, Claude Desktop, and other clients.",
+      "Wenlan is not a company workspace. It is a local, source-backed LLM wiki for AI work: captures, handoffs, cited pages, and retrieval context across Claude Code, Codex, Cursor, Claude Desktop, ChatGPT, and other clients.",
     actionHeading: "Choose by source of truth",
     actionIntro:
       "Ask whether the memory belongs to a workspace or to a local AI work loop.",
@@ -1893,7 +1893,7 @@ const comparisonArticles: BaseSpec[] = [
     problem:
       "The phrase AI memory layer can mean two different things: infrastructure an app developer embeds, or a local work-memory layer an AI power user lives with every day.",
     wenlanFit:
-      "Wenlan deliberately avoids being a generic memory infrastructure SDK. It is the local work-memory layer for people using Claude Code, Cursor, Codex, Claude Desktop, and other MCP clients against a local daemon.",
+      "Wenlan deliberately avoids being a generic memory infrastructure SDK. It is a source-backed LLM wiki for people using Claude Code, Codex, Cursor, Claude Desktop, ChatGPT, and other MCP clients against their own daemon.",
     actionHeading: "Choose by builder role",
     actionIntro:
       "Ask whether you are building memory into an app or using memory for your own work.",

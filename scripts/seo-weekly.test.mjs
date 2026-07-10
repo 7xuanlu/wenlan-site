@@ -148,6 +148,7 @@ const requiredBuiltSitemapLocs = [
   "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
   ...requiredLocalizedLearnLocs,
   "https://wenlan.app/docs/configuration",
+  "https://wenlan.app/docs/product-matrix",
 ];
 const requiredBuiltHtmlPages = [
   { path: "index.html", canonical: "https://wenlan.app", type: "SoftwareApplication" },
@@ -163,8 +164,8 @@ const requiredBuiltHtmlPages = [
     type: "Article",
     requiredLinks: [
       {
-        href: "/learn/claude-code-memory",
-        label: "Read the Claude Code memory guide",
+        href: "/docs/mcp-clients",
+        label: "Read all MCP client setup paths",
       },
     ],
   },
@@ -195,6 +196,11 @@ const requiredBuiltHtmlPages = [
       },
     ],
   },
+  {
+    path: "docs/product-matrix.html",
+    canonical: "https://wenlan.app/docs/product-matrix",
+    type: "TechArticle",
+  },
 ];
 const allowedRobotsTxt = "User-agent: *\nAllow: /\nSitemap: https://wenlan.app/sitemap.xml\n";
 const requiredDeployedUrls = [
@@ -207,6 +213,7 @@ const requiredDeployedUrls = [
   "/learn/wenlan-vs-superlocal-memory",
   ...requiredLocalizedLearnPaths,
   "/docs/configuration",
+  "/docs/product-matrix",
 ];
 const requiredDeployedUtilityUrls = [
   "/llms.txt",
@@ -264,7 +271,7 @@ function deployedHtmlPage(path, overrides = {}) {
       ? "SoftwareApplication"
       : path === "/learn"
         ? "CollectionPage"
-        : path === "/docs/configuration"
+        : path === "/docs/configuration" || path === "/docs/product-matrix"
           ? "TechArticle"
           : "Article");
   const requiredLinks = {
@@ -1124,8 +1131,8 @@ test("deployed technical SEO checker verifies robots, sitemap, key pages, utilit
     );
 
     assert.match(stdout, /robots ok/);
-    assert.match(stdout, /sitemap locs ok: 12/);
-    assert.match(stdout, /key pages ok: 12/);
+    assert.match(stdout, /sitemap locs ok: 13/);
+    assert.match(stdout, /key pages ok: 13/);
     assert.match(stdout, /utility noindex headers ok: 4/);
     assert.match(stdout, /redirects ok: 25/);
     assert.match(stdout, /bridge host redirects ok: 6/);
@@ -1216,7 +1223,7 @@ test("deployed technical SEO checker does not require unshipped local internal l
         { cwd: repoRoot },
       );
 
-      assert.match(stdout, /key pages ok: 12/);
+      assert.match(stdout, /key pages ok: 13/);
     },
   );
 });
@@ -1465,10 +1472,70 @@ test("built technical SEO checker verifies compiled redirects, headers, and site
     assert.match(stdout, /redirects ok: 26/);
     assert.match(stdout, /global 404 ok/);
     assert.match(stdout, /noindex headers ok: 5/);
-    assert.match(stdout, /sitemap required locs ok: 12/);
-    assert.match(stdout, /html page checks ok: 12/);
-    assert.match(stdout, /all html FAQPage absent ok: 13/);
+    assert.match(stdout, /sitemap required locs ok: 13/);
+    assert.match(stdout, /html page checks ok: 13/);
+    assert.match(stdout, /all html FAQPage absent ok: 14/);
     assert.match(stdout, /old URLs absent from sitemap/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("built technical SEO checker rejects compiled routes without inspectable html", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-built-route-group-root-"));
+  try {
+    const buildDir = await writeBuiltSeoFixture(outputRoot);
+    await rm(join(buildDir, "server/app/index.html"));
+    await rm(join(buildDir, "server/app/learn.html"));
+    await writeFile(
+      join(buildDir, "app-path-routes-manifest.json"),
+      JSON.stringify({ "/(en)/page": "/", "/(en)/learn/page": "/learn" }),
+      "utf8",
+    );
+
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [
+          builtCheckerScript,
+          "--",
+          "--build-dir",
+          buildDir,
+        ],
+        { cwd: repoRoot },
+      ),
+      /page output missing: index\.html/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("built technical SEO checker requires Product Matrix html", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-seo-built-product-matrix-"));
+  try {
+    const buildDir = await writeBuiltSeoFixture(outputRoot);
+    const productMatrixPath = join(buildDir, "server/app/docs/product-matrix.html");
+    await mkdir(dirname(productMatrixPath), { recursive: true });
+    await writeFile(
+      productMatrixPath,
+      builtHtmlPage({
+        path: "docs/product-matrix.html",
+        canonical: "https://wenlan.app/docs/product-matrix",
+        type: "TechArticle",
+      }),
+      "utf8",
+    );
+    await rm(productMatrixPath);
+
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [builtCheckerScript, "--", "--build-dir", buildDir],
+        { cwd: repoRoot },
+      ),
+      /page output missing: docs\/product-matrix\.html/,
+    );
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }
@@ -1853,13 +1920,13 @@ test("built technical SEO checker requires configuration docs to link to Claude 
   }
 });
 
-test("built technical SEO checker requires the MCP memory article to link to Claude Code memory", async () => {
+test("built technical SEO checker requires the MCP article to link to complete client setup", async () => {
   const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-built-mcp-link-"));
   try {
     const buildDir = await writeBuiltSeoFixture(outputRoot, {
       htmlPages: {
         "learn/mcp-memory-server.html": {
-          body: "MCP memory article without the Claude Code guide link",
+          body: "MCP article without the complete client setup link",
         },
       },
     });
@@ -1870,7 +1937,7 @@ test("built technical SEO checker requires the MCP memory article to link to Cla
         [builtCheckerScript, "--", "--build-dir", buildDir],
         { cwd: repoRoot },
       ),
-      /required internal link missing: learn\/mcp-memory-server\.html -> \/learn\/claude-code-memory/,
+      /required internal link missing: learn\/mcp-memory-server\.html -> \/docs\/mcp-clients/,
     );
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
@@ -3606,15 +3673,15 @@ test("Learn index SERP copy leads with Wenlan and AI work memory guides", async 
 
   assert.match(
     learnPage,
-    /title: "Wenlan Learn: AI Work Memory Guides for Claude Code, Cursor, MCP"/,
+    /title: "Wenlan Learn: LLM Wiki Guides for Claude Code, Codex, ChatGPT"/,
   );
   assert.match(
     learnPage,
-    /Find Wenlan guides for Claude Code memory, MCP memory servers, Cursor\/Codex workflows, local AI work context, setup, trust, and comparisons\./,
+    /Find Wenlan guides for source-backed AI work, Claude Code and Codex workflows, ChatGPT remote MCP, local clients, setup, trust, and comparisons\./,
   );
-  assert.match(learnPage, />\s*Wenlan AI work memory guides\.\s*</);
+  assert.match(learnPage, />\s*Wenlan LLM wiki guides\.\s*</);
   assert.doesNotMatch(learnPage, /Before you add memory to AI work\./);
-  assert.match(learnOgImage, /title="Wenlan AI work memory guides\."/);
+  assert.match(learnOgImage, /title="Wenlan LLM wiki guides\."/);
   assert.doesNotMatch(learnOgImage, /Before you add memory to AI work\./);
 });
 
@@ -3636,13 +3703,13 @@ test("configuration docs link to the Claude Code memory guide", async () => {
   );
 });
 
-test("MCP memory article links contextually to the Claude Code memory guide", async () => {
+test("MCP article links contextually to the complete client setup guide", async () => {
   const articles = await readRepo("src/app/learn/articles.ts");
   const articlePage = await readRepo("src/app/learn/[slug]/page.tsx");
 
   assert.match(
     articles,
-    /slug: "mcp-memory-server"[\s\S]*label: "Read the Claude Code memory guide"[\s\S]*href: "\/learn\/claude-code-memory"/,
+    /slug: "mcp-memory-server"[\s\S]*label: "Read all MCP client setup paths"[\s\S]*href: "\/docs\/mcp-clients"/,
   );
   assert.match(articles, /export type LearnArticleSection = \{[\s\S]*link\?: \{/);
   assert.match(articlePage, /\{section\.link && \(/);

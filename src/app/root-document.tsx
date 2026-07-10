@@ -7,6 +7,8 @@ import { Fraunces, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import { softwareApplicationSchema } from "./structured-data";
 import { ThemeProvider } from "./theme-provider";
 
+const vercelAnalyticsEnabled = process.env.VERCEL === "1";
+
 const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-fraunces",
@@ -131,7 +133,7 @@ export default function RootDocument({
           <div id="main-content">{children}</div>
           <SiteFooter locale={locale} />
         </ThemeProvider>
-        <Analytics />
+        {vercelAnalyticsEnabled ? <Analytics /> : null}
       </body>
     </html>
   );

@@ -3,7 +3,7 @@ import type { CoreContent } from "./schema";
 const claudeCommands = [
   "/plugin marketplace add 7xuanlu/claude-plugins",
   "/plugin install wenlan@7xuanlu",
-  "/init",
+  "/setup",
 ] as const;
 
 export const zhCNContent = {
@@ -17,7 +17,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "617d7a1aef3124cb77beed6c209576bfc7745880c6eec7a2246d130948fcd981",
+    sourceHash: "9eafdad26e67eb4c7e502656d6b8b9ea00935148813a86f57ffa1fad5caae976",
     content: {
       seo: {
         title: "Wenlan 文澜 | AI 工作的 LLM wiki",
@@ -43,7 +43,7 @@ export const zhCNContent = {
       hero: {
         title: "Wenlan 文澜",
         description:
-          "AI 工作的 LLM wiki。AI 代理捕捉学到的内容，你加入信任来源，Wenlan 让有来源依据的 wiki 页面跨工具、跨时间保持最新。",
+          "AI 工作的 LLM wiki。AI\u00a0代理捕捉学到的内容，你加入信任来源，Wenlan 让有来源依据的 wiki 页面跨工具、跨时间保持最新。",
         primaryCta: { id: "get-started", href: "/docs/get-started", label: "开始使用" },
         secondaryCta: {
           id: "github",
@@ -51,7 +51,8 @@ export const zhCNContent = {
           label: "在 GitHub 查看",
         },
         metaText: [
-          { id: "claude-code-plugin", label: "Claude Code 插件" },
+          { id: "agent-plugins", label: "Claude Code + Codex 插件" },
+          { id: "chatgpt-mcp", label: "ChatGPT 通过远程 MCP" },
           { id: "local-daemon", label: "本地 daemon" },
         ],
         metaLinks: [
@@ -73,8 +74,8 @@ export const zhCNContent = {
         ],
       },
       demo: {
-        title: "Wenlan 演示 v0.9",
-        playLabel: "播放 Wenlan 演示 v0.9",
+        title: "Wenlan v0.9 历史演示",
+        playLabel: "播放 Wenlan v0.9 历史演示",
       },
       sections: {
         problem: {
@@ -121,7 +122,7 @@ export const zhCNContent = {
         openSourceCta: {
           eyebrow: "开源",
           title: "在重要的地方保持开放。",
-          body: "本地 runtime、CLI、MCP server 和 Claude Code plugin 都是 Apache-2.0。",
+          body: "本地 runtime、CLI、MCP server、Claude Code plugin 和 Codex plugin 都是 Apache-2.0。",
           note: "",
           primaryCta: { id: "get-started", href: "/docs/get-started", label: "开始使用" },
           secondaryCta: {
@@ -214,7 +215,7 @@ export const zhCNContent = {
           {
             id: "tools",
             q: "哪些 AI tools 可以搭配 Wenlan？",
-            a: "Claude Code 有 marketplace plugin。Cursor、Codex、Claude Desktop、VS Code、Gemini CLI 等 MCP-compatible clients 可通过 Wenlan 的 MCP server 连接。",
+            a: "Claude Code 和 Codex 有 plugin 路径。Cursor、Claude Desktop、VS Code、Gemini CLI 等本地 clients 通过 Wenlan 的 MCP server 连接。ChatGPT 和 Claude.ai 使用 Streamable HTTP MCP，desktop app 的 Remote Access 提供引导式路径。Remote Access 没有身份验证；任何拿到 URL 的人都能访问 Wenlan，因此不用时请停止 Remote Access。",
           },
           {
             id: "not-notes",
@@ -224,12 +225,12 @@ export const zhCNContent = {
           {
             id: "setup",
             q: "我要怎么设置？",
-            a: "在 Claude Code 中运行 /plugin marketplace add 7xuanlu/claude-plugins，接着运行 /plugin install wenlan@7xuanlu，然后运行 /init。其他 MCP clients 先运行 npx -y wenlan setup，再运行 ~/.wenlan/bin/wenlan mcp add codex、cursor、claude-desktop、vscode 或 gemini。",
+            a: "Claude Code 使用 marketplace plugin 和 /setup。Codex 可以使用 Wenlan plugin，或运行 wenlan connect codex。其他本地 clients 使用 wenlan connect <client>。ChatGPT 和 Claude.ai 通过 desktop app 的 Remote Access URL 使用 Streamable HTTP MCP。该 URL 没有身份验证，请视为秘密，并在不用时停止 Remote Access。",
           },
           {
             id: "platforms",
             q: "Wenlan 支持 Windows 或 Linux 吗？",
-            a: "支持。daemon 可以在 macOS (arm64, x64)、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64) build 并运行。Service registration 在 macOS 使用 launchd、Linux 使用 systemd-user、Windows 使用 Task Scheduler (schtasks)。",
+            a: "支持。当前预编译 daemon release 覆盖 macOS Apple Silicon、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64)。macOS Intel 仍可走 source/dev 路径，但目前没有 macOS Intel 预编译运行时。Service registration 在 macOS 使用 launchd、Linux 使用 systemd-user、Windows 使用 Task Scheduler (schtasks)。",
           },
           {
             id: "spaces",
@@ -239,7 +240,7 @@ export const zhCNContent = {
           {
             id: "free",
             q: "Wenlan 免费吗？",
-            a: "是。Wenlan 是 open-source。Wenlan repo 里的本地 runtime、CLI、MCP server 和 Claude Code plugin files 都是 Apache-2.0。",
+            a: "是。Wenlan 是 open-source。Wenlan repo 里的本地 runtime、CLI、MCP server、Claude Code plugin 和 Codex plugin files 都是 Apache-2.0。",
           },
         ],
       },
@@ -247,7 +248,7 @@ export const zhCNContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "b502cc42be24708113712742098db728f60160e416aa7e2c99e264626a9d5ff7",
+    sourceHash: "cbceeec775dd09dfe648dd5ab097f81af302795ef8fbec3c72e7c76857da5ba4",
     content: {
       seo: {
         title: "关于 Wenlan | AI 工作的 LLM wiki",
@@ -282,7 +283,7 @@ export const zhCNContent = {
           title: "由 Qi-Xuan Lu 构建",
           paragraphs: [
             "Wenlan 由 Qi-Xuan Lu (GitHub @7xuanlu) 构建与维护。背景涵盖 AI infrastructure、knowledge graphs 和 local-first systems。",
-            "这项工作把 memory 视为 AI tools 的 first-class layer：libSQL 上的 hybrid retrieval、可读页面的真实 git versioning、session handoffs、status artifacts、distilled pages 的 mandatory provenance，以及一个 daemon 服务所有 MCP-compatible client。",
+            "这项工作聚焦在 agent 能构建、用户能检查的 LLM wiki：libSQL 上的 hybrid retrieval、可读页面的真实 git versioning、session handoffs、status artifacts、distilled pages 的 mandatory provenance，以及一个 daemon 服务多种 AI tools。",
             "项目渠道：bugs 和 feature requests 用 GitHub Issues，vulnerabilities 看 SECURITY.md，变更则看 Wenlan release notes。",
           ],
         },
@@ -291,7 +292,7 @@ export const zhCNContent = {
           number: "04",
           title: "当前状态",
           paragraphs: [
-            "Wenlan v0.12.0 支持 macOS (arm64, x64)、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64)。daemon、CLI、MCP server 和 Claude Code plugin 都以 Apache-2.0 open source。",
+            "Wenlan v0.12.0 支持的预编译运行时包括 macOS Apple Silicon、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64)。macOS Intel 仍是 source/dev-only，直到 public release workflow 发布该 artifact。daemon、CLI、MCP server、Claude Code plugin 和 Codex plugin 都以 Apache-2.0 open source。",
           ],
         },
       ],
@@ -370,7 +371,7 @@ export const zhCNContent = {
   },
   docs: {
     status: "translated",
-    sourceHash: "c446e6c651d59602b80d928c1b4aa31225481e4e03dfefbdedfe1becdbe403ab",
+    sourceHash: "7bc1f96816d6d23bd333ae918c78426688e6b07f45390c7e02531a2408a4528f",
     content: {
       seo: {
         title: "Wenlan 文档 | AI 工作的 LLM wiki",
@@ -385,7 +386,7 @@ export const zhCNContent = {
         eyebrow: "文档",
         title: "开始使用 Wenlan。",
         description:
-          "安装本地 memory layer，学习每日 handoff loop，并让你的 AI 工作 LLM wiki 可读、可搜索、可由你掌控。",
+          "安装 Wenlan、连接你使用的 AI tools，并构建可读、可搜索、由你掌控的 source-backed LLM wiki。",
       },
       intro: {
         eyebrow: "从这里开始",
@@ -404,8 +405,8 @@ export const zhCNContent = {
                 label: "设置",
                 title: "开始使用 Wenlan",
                 description:
-                  "安装 Claude Code plugin，或为另一个 MCP client 运行 Wenlan setup，然后确认本地 memory loop 可以工作。",
-                meta: "Wenlan 团队 · 更新于 2026 年 5 月 15 日 · 4 分钟设置",
+                  "选择 Claude Code、Codex、ChatGPT 或本地 MCP 路径，然后确认第一次 capture 与 recall round trip 可以工作。",
+                meta: "Wenlan 团队 · 更新于 2026 年 7 月 9 日 · 4 分钟设置",
               },
             ],
           },
@@ -457,7 +458,7 @@ export const zhCNContent = {
             id: "reference",
             title: "参考资料",
             description:
-              "Memory types、glossary、architecture、commands、Claude Code plugin、CLI/service management、updates、upgrade notes、package names、platform support、HTTP API、API examples、typed clients、spaces、graph context、pages、import paths、git history、retrieval status、experimental flags、local data、backup paths、configuration、environment variables、MCP clients、agent profiles、diagnostics、FAQ 和 repair paths。",
+              "Memory types、glossary、architecture、commands、Claude Code 和 Codex plugins、CLI/service management、updates、upgrade notes、package names、platform support、HTTP API、API examples、typed clients、spaces、graph context、pages、import paths、git history、retrieval status、experimental flags、local data、backup paths、configuration、environment variables、本地与 web MCP clients、agent profiles、diagnostics、FAQ 和 repair paths。",
             items: [
               {
                 id: "memory-types",
@@ -487,12 +488,21 @@ export const zhCNContent = {
                 meta: "Qi-Xuan Lu · 更新于 2026 年 6 月 24 日 · 7 分钟阅读",
               },
               {
+                id: "product-matrix",
+                href: "/docs/product-matrix",
+                label: "矩阵",
+                title: "产品矩阵",
+                description:
+                  "对照 Wenlan 的 daemon、CLI、MCP connector、plugins、desktop app、代码仓库、平台 artifacts 和 release 边界。",
+                meta: "Qi-Xuan Lu · 更新于 2026 年 7 月 9 日 · 6 分钟阅读",
+              },
+              {
                 id: "commands",
                 href: "/docs/commands",
                 label: "命令参考",
                 title: "Commands 与 Tools",
                 description:
-                  "日常使用 Wenlan 时最重要的 Claude Code commands 和 MCP tools。",
+                  "日常使用 Wenlan 时最重要的 Claude Code 与 Codex plugin commands、CLI commands 和 MCP tools。",
                 meta: "Qi-Xuan Lu · 更新于 2026 年 6 月 24 日 · 5 分钟阅读",
               },
               {
@@ -501,7 +511,7 @@ export const zhCNContent = {
                 label: "插件",
                 title: "Claude Code 插件",
                 description:
-                  "在 Claude Code 中使用 Wenlan 最完整的 workflow：setup、session brief、capture、recall、review、distill、read 和 handoff。",
+                  "在 Claude Code 中使用 Wenlan 最完整的 workflow：setup、session brief、capture、recall、curate、distill、pages 和 handoff。",
                 meta: "Qi-Xuan Lu · 更新于 2026 年 6 月 24 日 · 6 分钟阅读",
               },
               {
@@ -690,7 +700,7 @@ export const zhCNContent = {
                 label: "MCP 连接",
                 title: "连接 MCP Clients",
                 description:
-                  "从 Claude Code、Codex、Cursor、Claude Desktop、Gemini CLI 和其他 MCP clients 使用同一个本地 Wenlan memory layer。",
+                  "把 Claude Code、Codex、Cursor、Claude Desktop、Gemini CLI、ChatGPT、Claude.ai 和其他 MCP clients 连接到 Wenlan。",
                 meta: "Qi-Xuan Lu · 更新于 2026 年 6 月 24 日 · 4 分钟阅读",
               },
               {
@@ -761,7 +771,7 @@ export const zhCNContent = {
                 label: "桌面版",
                 title: "Desktop App 状态",
                 description:
-                  "了解可选的 Wenlan desktop app 与 daemon、CLI、MCP server 和 Claude Code plugin 的关系。",
+                  "了解可选的 Wenlan desktop app 与 daemon、plugins、source-backed wiki，以及 ChatGPT 和 Claude.ai Remote Access 的关系。",
                 meta: "Qi-Xuan Lu · 更新于 2026 年 6 月 24 日 · 4 分钟阅读",
               },
               {
@@ -853,18 +863,18 @@ export const zhCNContent = {
       },
       schema: {
         name: "Wenlan 文档",
-        description: "Wenlan local-first AI 工作 memory 的产品文档。",
+        description: "Wenlan 这套 source-backed AI 工作 LLM wiki 的产品文档。",
       },
     },
   },
   getStarted: {
     status: "translated",
-    sourceHash: "133dae8830f792247db49a48b128d9a2ed43bb52bc4b58ca14ab6357acfe26dd",
+    sourceHash: "ec2b349cd5ea407b5c9172d99bf518ec790085aa5fa4b8b7797f122e41226eff",
     content: {
       seo: {
         title: "开始使用 Wenlan | AI 工作的 LLM wiki",
         description:
-          "通过 Claude Code plugin 安装 Wenlan，或先运行 Wenlan setup，再把其他 MCP client 接到你的本地 AI 工作 LLM wiki。",
+          "通过 Claude Code、Codex、ChatGPT、Claude.ai 或其他 MCP client 连接 Wenlan，再验证第一次 capture 与 recall round trip。",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -872,12 +882,12 @@ export const zhCNContent = {
       },
       hero: {
         eyebrow: "开始使用",
-        title: "把 Wenlan 接到你的 AI tools。",
+        title: "把 Wenlan 接到你的\u00a0AI\u00a0工具。",
         description:
-          "先从 Claude Code plugin 开始，或通过本地 MCP server 把 Wenlan 加到另一个 MCP-compatible client，让 captures、handoffs 和 wiki pages 共用同一个有来源依据的循环。",
-        meta: ["Wenlan 团队", "更新于 2026 年 5 月 15 日", "4 分钟设置"],
+          "Coding agents 使用 Claude Code 或 Codex 路径，ChatGPT 或 Claude.ai 使用 Remote Access，其他 clients 使用本地 MCP。每条路径都会进入同一个 source-backed wiki 与 handoff loop。",
+        meta: ["Wenlan 团队", "更新于 2026 年 7 月 9 日", "4 分钟设置"],
         setupPathLabel: "设置路径",
-        setupPathItems: ["Claude Code 工具", "MCP clients 连接", "本地 daemon"],
+        setupPathItems: ["Claude Code 路径", "Codex 路径", "ChatGPT 路径", "本地 + 远程 MCP"],
       },
       steps: [
         {
@@ -886,31 +896,55 @@ export const zhCNContent = {
           title: "Claude Code 插件",
           paragraphs: [
             "这是最快的路径。plugin 会处理 daemon setup、MCP wiring、本地 memory setup，以及第一次 round-trip check。",
-            "如果 Claude Code 在安装后要求 restart，重启一次，然后运行 /init。",
+            "如果 Claude Code 在安装后要求 restart，重启一次，然后运行 /setup。",
           ],
           commands: claudeCommands,
           ctas: [],
         },
         {
-          id: "other-mcp-clients",
+          id: "codex",
           number: "02",
-          title: "其他 MCP clients",
+          title: "Codex 设置",
           paragraphs: [
-            "Cursor、Codex、Claude Desktop、Gemini CLI 和其他 MCP-compatible clients，要先设置本地 Wenlan runtime。接着让 Wenlan CLI 把 MCP connector 加到你使用的 client。",
-            "Wenlan setup 会安装 CLI、daemon 和 MCP connector，设置本地 memory，向操作系统的 user service manager 注册 daemon，并验证状态。",
+            "先运行 Wenlan setup，再把 Codex 连接到本地 MCP server。主要 Wenlan repo 也提供 Codex plugin 给从 checkout 安装的用户；wenlan connect codex 是不需要 checkout 的直接 client 路径。",
           ],
           commands: [
             "npx -y wenlan setup",
-            "~/.wenlan/bin/wenlan mcp add codex\n# 或：cursor, claude-desktop, vscode, gemini",
+            "~/.wenlan/bin/wenlan connect codex",
+          ],
+          ctas: [],
+        },
+        {
+          id: "chatgpt-web",
+          number: "03",
+          title: "ChatGPT 和 Claude.ai",
+          paragraphs: [
+            "在 Wenlan desktop app 打开 Remote Access，为 Streamable HTTP MCP 创建临时的 HTTPS URL。App 会在 loopback 以 --no-auth 启动 wenlan-mcp，再通过 tunnel 暴露；任何拿到 URL 的人都能访问。在 ChatGPT 启用 Developer mode、创建 app，并以 No Auth 粘贴 URL；Claude.ai 则通过 Add Custom Connector 使用同一个 URL。",
+            "这是连接到你自己 Wenlan runtime 的 custom MCP，不代表 Wenlan 已列入公开 ChatGPT Apps Directory。不使用时请停止 Remote Access。",
+          ],
+          commands: [],
+          ctas: [],
+        },
+        {
+          id: "other-mcp-clients",
+          number: "04",
+          title: "其他本地 MCP clients",
+          paragraphs: [
+            "Cursor、Claude Desktop、Gemini CLI、VS Code 和其他受支持的本地 MCP clients，要先设置 Wenlan runtime，再让 CLI 写入 client-specific MCP configuration。",
+            "Wenlan setup 会安装 CLI、daemon 和 MCP connector，向操作系统的 user service manager 注册 daemon，并验证状态。",
+          ],
+          commands: [
+            "npx -y wenlan setup",
+            "~/.wenlan/bin/wenlan connect cursor\n# 或：claude-desktop, vscode, gemini",
           ],
           ctas: [],
         },
         {
           id: "try-first",
-          number: "03",
+          number: "05",
           title: "先试什么",
           paragraphs: [
-            "保存一个 durable project fact，然后在新 session 请你的 agent recall。Wenlan 应该让这段 context 可见、可搜索，并通过同一个本地 memory layer 使用。",
+            "保存一个 durable project fact，再请另一个 session 或 client recall。Wenlan 应该能找回这个 fact，并把来源保留给 wiki 与 review flow。",
           ],
           commands: [],
           ctas: [
@@ -922,16 +956,16 @@ export const zhCNContent = {
       sidebar: {
         eyebrow: "你会得到",
         items: [
+          { id: "source-backed-wiki", label: "有来源依据的 LLM wiki" },
           { id: "local-daemon", label: "本地 daemon" },
-          { id: "claude-code-plugin", label: "Claude Code 插件" },
-          { id: "mcp-server", label: "MCP 服务器" },
-          { id: "shared-memory-layer", label: "共享 memory layer" },
+          { id: "agent-plugins", label: "Claude Code + Codex 插件" },
+          { id: "mcp-server", label: "本地 + 远程 MCP" },
         ],
       },
       schema: {
         name: "开始使用 Wenlan",
         description:
-          "在 Claude Code 安装 Wenlan，或先运行 Wenlan setup 再连接其他 MCP client。",
+          "通过 Claude Code、Codex、ChatGPT、Claude.ai 或其他 MCP client 连接 Wenlan。",
       },
     },
   },
@@ -988,7 +1022,7 @@ export const zhCNContent = {
   },
   footer: {
     status: "translated",
-    sourceHash: "a3b1e8876670ba5362e3499b8ea48b9738f917ecdd6e5ff28d3944350b09b18f",
+    sourceHash: "1714d73686bccf763c739c64094ff99091f9eaca217172514695c9dad5b54c69",
     content: {
       ariaLabel: "网站页脚",
       brand: "Wenlan",

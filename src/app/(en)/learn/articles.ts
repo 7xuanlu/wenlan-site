@@ -130,7 +130,7 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "How Wenlan approaches AI work memory",
         body: [
-          "Wenlan is a local-first personal knowledge library for AI work in Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP-compatible tools.",
+          "Wenlan is a local-first, source-backed LLM wiki for AI work in Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, ChatGPT, Claude.ai, and other MCP-compatible tools.",
           "Wenlan stores useful context locally, makes memory visible and correctable, writes handoffs, distills source-backed wiki pages, and uses hybrid retrieval that combines vector search, full-text search, and graph context.",
         ],
       },
@@ -157,12 +157,12 @@ const baseArticles: LearnArticle[] = [
     slug: "mcp-memory-server",
     eyebrow: "Protocol",
     category: "Concepts",
-    title: "MCP Memory Server for Claude Code, Cursor, and Codex",
+    title: "MCP Server for Wenlan in Claude Code, Codex, ChatGPT, and Cursor",
     description:
       "Learn what an MCP memory server does, how it connects AI tools to durable context, and how Wenlan keeps that memory local and inspectable.",
-    metaTitle: "MCP Memory Server for Claude Code, Cursor, Codex | Wenlan",
+    metaTitle: "Wenlan MCP for Claude Code, Codex, ChatGPT, Cursor",
     metaDescription:
-      "Set up local MCP memory for Claude Code, Cursor, Codex, and other clients. Wenlan adds capture, recall, provenance, and local control.",
+      "Connect Claude Code, Codex, Cursor, ChatGPT, Claude.ai, and other clients to Wenlan with local or Streamable HTTP MCP.",
     keywords: [
       "MCP memory server",
       "memory MCP",
@@ -178,7 +178,7 @@ const baseArticles: LearnArticle[] = [
     heroBullets: [
       "MCP servers expose tools, resources, and prompts to AI applications through a standard protocol.",
       "A memory server gives clients a way to store, search, recall, and manage durable work context.",
-      "Wenlan keeps the MCP memory path local, source-backed, and shared across Claude Code, Cursor, Codex, and other clients.",
+      "Wenlan uses local MCP for coding tools and Streamable HTTP MCP for ChatGPT and Claude.ai, with the same source-backed wiki behind both paths.",
     ],
     sections: [
       {
@@ -217,22 +217,22 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "Install path",
         body: [
-          "Claude Code users should start with the Wenlan plugin because it adds slash commands and setup checks around the same local memory layer. Other MCP clients should run Wenlan setup, then let the CLI add the client-specific MCP configuration.",
-          "The commands below are the normal non-Claude Code path for tools such as Cursor, Codex, Claude Desktop, VS Code, and Gemini CLI.",
+          "Claude Code and Codex have plugin paths. Local MCP clients should run Wenlan setup, then use wenlan connect <client> to write the client-specific configuration.",
+          "ChatGPT and Claude.ai use Streamable HTTP MCP. The guided path is the desktop app's Remote Access panel, which creates the URL and shows each web client's setup steps.",
         ],
         code: {
           label: "MCP client setup",
-          code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan mcp add cursor\n~/.wenlan/bin/wenlan mcp add codex\n# or: claude-desktop, vscode, gemini",
+          code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan connect cursor\n~/.wenlan/bin/wenlan connect codex\n# or: claude-desktop, vscode, gemini",
         },
         link: {
-          label: "Read the Claude Code memory guide",
-          href: "/learn/claude-code-memory",
+          label: "Read all MCP client setup paths",
+          href: "/docs/mcp-clients",
         },
       },
       {
         heading: "How Wenlan fits",
         body: [
-          "Wenlan is more than a bare MCP store. It is a local runtime, CLI, MCP connector, and Claude Code plugin that carries work context forward, links related knowledge, detects contradictions, and keeps wiki pages and provenance attached.",
+          "Wenlan is more than a bare MCP store. It is a source-backed LLM wiki with a local runtime, CLI, MCP connector, Claude Code plugin, Codex plugin, optional desktop app, and human review paths.",
           "The MCP server is the bridge: AI tools read and write memory, while Wenlan keeps the broader work context visible, searchable, and locally owned.",
         ],
       },
@@ -420,12 +420,12 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "Install path for Claude Code",
         body: [
-          "The Claude Code plugin is the most complete Wenlan path because it adds /init, /brief, /capture, /recall, /handoff, /distill, and review workflows around the local daemon and MCP connector.",
-          "After installing, restart Claude Code if prompted, run /init once, then verify a harmless capture and recall before relying on Wenlan for real project memory.",
+          "The Claude Code plugin is the most complete Wenlan path because it adds /setup, /brief, /capture, /recall, /handoff, /distill, and review workflows around the local daemon and MCP connector.",
+          "After installing, restart Claude Code if prompted, run /setup once, then verify a harmless capture and recall before relying on Wenlan for real project memory.",
         ],
         code: {
           label: "Claude Code plugin",
-          code: "/plugin marketplace add 7xuanlu/claude-plugins\n/plugin install wenlan@7xuanlu\n/init\n/capture This project uses Wenlan for local AI work memory.\n/recall local AI work memory",
+          code: "/plugin marketplace add 7xuanlu/claude-plugins\n/plugin install wenlan@7xuanlu\n/setup\n/capture This project uses Wenlan for local AI work memory.\n/recall local AI work memory",
         },
       },
       {
@@ -445,7 +445,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Can Cursor use the same memory?",
         answer:
-          "Yes. Wenlan is MCP-native, so multiple MCP-compatible tools can connect to the same local memory layer when configured.",
+          "Yes. Wenlan is MCP-native, so multiple compatible tools can connect to the same local daemon and source-backed wiki when configured.",
       },
     ],
     relatedSlugs: ["claude-code-memory-command-vs-wenlan", "wenlan-for-claude-code", "mcp-memory-server"],
@@ -465,7 +465,7 @@ const baseArticles: LearnArticle[] = [
     ],
     cta: {
       heading: "Verify Claude Code memory locally",
-      body: "Install the Wenlan plugin, run /init, then test one capture and recall before adding real project context.",
+      body: "Install the Wenlan plugin, run /setup, then test one capture and recall before adding real project context.",
     },
   },
   {
@@ -474,10 +474,10 @@ const baseArticles: LearnArticle[] = [
     category: "Workflows",
     title: "Wenlan for Claude Code Memory: The Daily /brief and /handoff Loop",
     description:
-      "Use Wenlan inside Claude Code with /init, /brief, /capture, /recall, /handoff, and /distill so coding context carries across sessions.",
+      "Use Wenlan inside Claude Code with /setup, /brief, /capture, /recall, /handoff, and /distill so coding context carries across sessions.",
     metaTitle: "Wenlan for Claude Code Memory | Daily Workflow",
     metaDescription:
-      "Install the Wenlan Claude Code plugin, run /init, start with /brief, capture durable decisions, and hand off sessions with local AI work memory.",
+      "Install the Wenlan Claude Code plugin, run /setup, start with /brief, capture durable decisions, and hand off sessions with local AI work memory.",
     keywords: [
       "Wenlan Claude Code",
       "Claude Code Wenlan plugin",
@@ -490,7 +490,7 @@ const baseArticles: LearnArticle[] = [
     readingTime: "6 min read",
     audience: "Claude Code users who want project context to survive long work sessions",
     heroBullets: [
-      "Install from the Claude Code plugin marketplace, then run /init once.",
+      "Install from the Claude Code plugin marketplace, then run /setup once.",
       "Start real sessions with /brief and capture durable context during work.",
       "End with /handoff so the next agent starts from current project state.",
     ],
@@ -498,12 +498,12 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "Install once, then verify the loop",
         body: [
-          "Wenlan's Claude Code path starts with the plugin marketplace: `/plugin marketplace add 7xuanlu/claude-plugins`, `/plugin install wenlan@7xuanlu`, then `/init` after the restart Claude Code requests.",
-          "`/init` handles daemon setup, MCP wiring, local memory setup, and a first round-trip check. The goal is not to add another manual note-taking habit. The goal is to make the memory route available at the moment work happens.",
+          "Wenlan's Claude Code path starts with the plugin marketplace: `/plugin marketplace add 7xuanlu/claude-plugins`, `/plugin install wenlan@7xuanlu`, then `/setup` after the restart Claude Code requests.",
+          "`/setup` handles daemon setup, MCP wiring, local memory setup, and a first round-trip check. The goal is not to add another manual note-taking habit. The goal is to make the memory route available at the moment work happens.",
         ],
         code: {
           label: "Claude Code setup",
-          code: "/plugin marketplace add 7xuanlu/claude-plugins\n/plugin install wenlan@7xuanlu\n/init",
+          code: "/plugin marketplace add 7xuanlu/claude-plugins\n/plugin install wenlan@7xuanlu\n/setup",
         },
       },
       {
@@ -568,7 +568,7 @@ const baseArticles: LearnArticle[] = [
     ],
     cta: {
       heading: "Make Claude Code sessions compound",
-      body: "Install Wenlan, run /init, then use /brief and /handoff around real work.",
+      body: "Install Wenlan, run /setup, then use /brief and /handoff around real work.",
     },
   },
   {
@@ -731,7 +731,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Can I use Wenlan with an existing knowledge base?",
         answer:
-          "Yes. Wenlan's projected Markdown can be read by tools such as Obsidian, and selected durable notes can be migrated through explicit store or capture flows. The better long-term question is which system owns which kind of context.",
+          "Yes. Wenlan's projected Markdown can be read by tools such as Obsidian, and selected durable notes can be migrated through explicit capture flows. The better long-term question is which system owns which kind of context.",
       },
     ],
     relatedSlugs: ["wenlan-vs-basic-memory", "markdown-local-index-ai-memory", "ai-work-memory"],
@@ -834,7 +834,7 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "Migration shape, if you decide to switch",
         body: [
-          "Switching from a Basic Memory vault to Wenlan is selective today: pick durable notes that should become AI work memory and move them through `wenlan store`, `/capture`, or a small script over `/api/memory/store`. There is no general Markdown-vault importer in the current CLI.",
+          "Switching from a Basic Memory vault to Wenlan is selective today: pick durable notes that should become AI work memory and move them through `wenlan capture`, `/capture`, or a small script over `/api/memory/store`. There is no general Markdown-vault importer in the current CLI.",
           "Going the other way is simpler. Wenlan's projected Markdown under `~/.wenlan/` is readable as plain text. Point Obsidian or another Markdown reader at the pages and sessions when you need a static record. You lose live recall, review, and distillation behavior, but the human-facing record remains portable.",
         ],
       },
@@ -1006,7 +1006,7 @@ const baseArticles: LearnArticle[] = [
         body: [
           "claude-mem's positioning is Claude Code first. MCP exposure exists so other clients can read the store, but the workflow shape (observer of Claude Code sessions) is the product.",
           "Wenlan's positioning is MCP first, Claude Code as one of many clients. One daemon at `127.0.0.1:7878` serves any MCP-compatible runtime. In my own work I switch between Cursor for refactors, Claude Code for greenfield, and Codex for shell-heavy tasks; the memory is the same memory.",
-          "If you live 100% inside Claude Code, this difference is theoretical. If you context-switch between tools across a typical week, it is the difference between one memory layer and three disjoint ones.",
+          "If you live 100% inside Claude Code, this difference is theoretical. If you context-switch between tools across a typical week, it is the difference between one shared Wenlan system and three disjoint stores.",
         ],
       },
       {
@@ -1062,7 +1062,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Is Wenlan only for Claude Code?",
         answer:
-          "No. Wenlan ships a Claude Code plugin, but it also exposes memory through MCP so other compatible tools can use the same local memory layer. Cursor, Codex, Claude Desktop, and Gemini CLI all work out of the box.",
+          "No. Wenlan ships Claude Code and Codex plugins, local MCP setup for Cursor, Claude Desktop, Gemini CLI, and VS Code, and Streamable HTTP MCP Remote Access for ChatGPT and Claude.ai.",
       },
       {
         question: "Is claude-mem more automatic than Wenlan?",

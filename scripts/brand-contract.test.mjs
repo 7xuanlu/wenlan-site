@@ -8,6 +8,15 @@ import { promisify } from "node:util";
 
 const repoRoot = resolve(import.meta.dirname, "..");
 const execFileAsync = promisify(execFile);
+const publicScanIgnoredNames = new Set([
+  ".git",
+  ".next",
+  ".omo",
+  ".codegraph",
+  ".worktrees",
+  "node_modules",
+  "pnpm-lock.yaml",
+]);
 
 const englishRouteGroupAliases = new Map([
   ["src/app/layout.tsx", "src/app/root-document.tsx"],
@@ -16,6 +25,17 @@ const englishRouteGroupAliases = new Map([
   ["src/app/feed.xml/route.ts", "src/app/(en)/feed.xml/route.ts"],
   ["src/app/llms-full.txt/route.ts", "src/app/(en)/llms-full.txt/route.ts"],
 ]);
+
+const publicCommandGuidancePaths = [
+  "public/llms.txt",
+  "src/i18n/content/en.ts",
+  "src/i18n/content/zh-CN.ts",
+  "src/i18n/content/zh-TW.ts",
+  "src/app/docs/docs.ts",
+  "src/app/learn/articles.ts",
+  "src/app/learn/seo-articles.ts",
+  "docs/seo-measurement.md",
+];
 
 function sourcePath(path) {
   if (englishRouteGroupAliases.has(path)) {
@@ -104,13 +124,7 @@ function parseRelease({ version, changelog, changelogPath }) {
 
 async function* walkTextFiles(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
-    if (
-      entry.name === ".git" ||
-      entry.name === ".next" ||
-      entry.name === ".worktrees" ||
-      entry.name === "node_modules" ||
-      entry.name === "pnpm-lock.yaml"
-    ) {
+    if (shouldSkipPublicScanEntry(entry.name)) {
       continue;
     }
 
@@ -124,6 +138,10 @@ async function* walkTextFiles(dir) {
       yield fullPath;
     }
   }
+}
+
+function shouldSkipPublicScanEntry(name) {
+  return publicScanIgnoredNames.has(name);
 }
 
 async function collectMatches(pattern) {
@@ -172,6 +190,18 @@ async function collectTypescriptStringValues(path) {
   return values;
 }
 
+async function readPublicCommandGuidance() {
+  return Promise.all(
+    publicCommandGuidancePaths.map(async (path) => [path, await readRepo(path)]),
+  );
+}
+
+async function renderedGuidanceFor(path, source) {
+  return path.endsWith(".ts")
+    ? (await collectTypescriptStringValues(path)).map(({ value }) => value).join("\n")
+    : source;
+}
+
 test("package metadata uses the wenlan-site identity", async () => {
   const packageJson = JSON.parse(await readRepo("package.json"));
 
@@ -183,13 +213,14 @@ test("package metadata uses the wenlan-site identity", async () => {
   assert.match(packageJson.scripts["seo:weekly:sample"], /\/tmp\/wenlan-weekly-seo-sample\.md$/);
 });
 
-test("root document includes Vercel Web Analytics", async () => {
+test("root document includes Vercel Web Analytics only on Vercel", async () => {
   const packageJson = JSON.parse(await readRepo("package.json"));
   const rootDocument = await readRepo("src/app/root-document.tsx");
 
   assert.ok(packageJson.dependencies["@vercel/analytics"]);
   assert.match(rootDocument, /import\s+\{\s*Analytics\s*\}\s+from\s+"@vercel\/analytics\/next"/);
-  assert.match(rootDocument, /<Analytics\s*\/>/);
+  assert.match(rootDocument, /const vercelAnalyticsEnabled = process\.env\.VERCEL === "1"/);
+  assert.match(rootDocument, /vercelAnalyticsEnabled\s*\?\s*<Analytics\s*\/>\s*:\s*null/);
 });
 
 test("agent guidance tracks the wenlan.app canonical launch property", async () => {
@@ -448,7 +479,304 @@ test("public current-release surfaces track the authoritative Wenlan release", a
   assert.match(learnArticles, new RegExp(`Last release alignment: v${escapedVersion} on ${escapeRegExp(date)}`));
   assert.match(seoMeasurement, new RegExp("softwareVersion` `" + escapedVersion + "`"));
   assert.match(sitemap, new RegExp(`ABOUT_UPDATED_AT = "${escapeRegExp(date)}"`));
-  assert.match(sitemap, new RegExp(`GET_STARTED_UPDATED_AT = "${escapeRegExp(date)}"`));
+  const getStartedDate = sitemap.match(/GET_STARTED_UPDATED_AT = "(\d{4}-\d{2}-\d{2})"/)?.[1];
+  assert.ok(getStartedDate, "sitemap must declare GET_STARTED_UPDATED_AT");
+  assert.ok(
+    new Date(getStartedDate) >= new Date(date),
+    "get-started sitemap date must not predate the current release",
+  );
+});
+
+test("public docs expose a product readiness matrix for users and platform boundaries", async () => {
+  const docs = await readRepo("src/app/docs/docs.ts");
+  const llms = await readRepo("public/llms.txt");
+  const localizedIndexes = [
+    [
+      "src/i18n/content/en.ts",
+      await readRepo("src/i18n/content/en.ts"),
+      /id:\s*"product-matrix"[\s\S]*?Updated Jul 9, 2026 · 6 min read/,
+    ],
+    [
+      "src/i18n/content/zh-CN.ts",
+      await readRepo("src/i18n/content/zh-CN.ts"),
+      /id:\s*"product-matrix"[\s\S]*?更新于 2026 年 7 月 9 日 · 6 分钟阅读/,
+    ],
+    [
+      "src/i18n/content/zh-TW.ts",
+      await readRepo("src/i18n/content/zh-TW.ts"),
+      /id:\s*"product-matrix"[\s\S]*?更新於 2026 年 7 月 9 日 · 6 分鐘閱讀/,
+    ],
+  ];
+
+  assert.match(docs, /slug:\s*"product-matrix"/);
+  assert.match(docs, /title:\s*"Product Matrix"/);
+  assert.match(llms, /\[Product Matrix\]\(https:\/\/wenlan\.app\/docs\/product-matrix\)/);
+  for (const [path, source, metadataPattern] of localizedIndexes) {
+    assert.match(source, /id:\s*"product-matrix"[\s\S]*?href:\s*"\/docs\/product-matrix"/, path);
+    assert.match(source, metadataPattern, path);
+  }
+
+  for (const route of [
+    "/docs/get-started",
+    "/docs/daily-workflow",
+    "/docs/core-concepts",
+    "/docs/architecture",
+    "/docs/packages-and-registries",
+    "/docs/platforms",
+    "/docs/mcp-clients",
+    "/docs/desktop-app",
+    "/docs/troubleshooting",
+    "/docs/releases-and-versioning",
+  ]) {
+    assert.match(docs, new RegExp(`href: "${escapeRegExp(route)}"`), route);
+  }
+
+  for (const publicSurface of [
+    "daemon/runtime",
+    "CLI",
+    "MCP connector",
+    "Claude Code plugin",
+    "Codex plugin",
+    "ChatGPT and Claude.ai remote MCP",
+    "other MCP clients",
+    "optional desktop app",
+    "source build",
+    "eval/docs provenance",
+  ]) {
+    assert.match(docs, new RegExp(escapeRegExp(publicSurface), "i"), publicSurface);
+  }
+
+  assert.match(docs, /macOS Apple Silicon/);
+  assert.match(docs, /macOS Intel.*no current prebuilt runtime/i);
+  assert.match(docs, /Linux x86_64/);
+  assert.match(docs, /Linux aarch64 glibc/);
+  assert.match(docs, /Windows x86_64/);
+  assert.match(docs, /desktop app.*aarch64-apple-darwin/is);
+  assert.match(docs, /daemon owns the database, pages, sessions, and retrieval behavior/i);
+});
+
+test("public onboarding is Wenlan-first and distinguishes plugin, local MCP, and web MCP paths", async () => {
+  const wenlanRoot = process.env.WENLAN_REPO_ROOT
+    ? resolve(process.env.WENLAN_REPO_ROOT)
+    : resolve(repoRoot, "../wenlan");
+  const mcpMain = await readFile(resolve(wenlanRoot, "crates/wenlan-mcp/src/main.rs"), "utf8");
+  const englishContent = await readRepo("src/i18n/content/en.ts");
+  const simplifiedContent = await readRepo("src/i18n/content/zh-CN.ts");
+  const traditionalContent = await readRepo("src/i18n/content/zh-TW.ts");
+  const docs = await readRepo("src/app/docs/docs.ts");
+  const structuredData = await readRepo("src/app/structured-data.ts");
+  const llms = await readRepo("public/llms.txt");
+  const llmsFull = await readRepo("src/app/llms-full.txt/route.ts");
+
+  assert.match(mcpMain, /Streamable HTTP MCP server for remote clients \(claude\.ai, ChatGPT\)/);
+  assert.doesNotMatch(englishContent, /Install the local memory layer/);
+  assert.doesNotMatch(simplifiedContent, /安装本地 memory layer/);
+  assert.doesNotMatch(traditionalContent, /安裝本地 memory layer/);
+
+  for (const [path, source] of [
+    ["src/i18n/content/en.ts", englishContent],
+    ["src/i18n/content/zh-CN.ts", simplifiedContent],
+    ["src/i18n/content/zh-TW.ts", traditionalContent],
+  ]) {
+    assert.match(source, /Claude Code/, path);
+    assert.match(source, /Codex/, path);
+    assert.match(source, /ChatGPT/, path);
+  }
+
+  assert.match(docs, /Claude Code plugin/);
+  assert.match(docs, /Codex plugin/);
+  assert.match(docs, /ChatGPT/);
+  assert.match(docs, /Streamable HTTP MCP/);
+  assert.match(docs, /Developer mode/);
+  assert.match(structuredData, /ChatGPT/);
+  assert.match(structuredData, /Streamable HTTP MCP/);
+  assert.match(llms, /ChatGPT/);
+  assert.match(llms, /Streamable HTTP MCP/);
+  assert.match(llms, /possession of the URL grants access/);
+  assert.match(llms, /Stop Remote Access when unused/);
+  assert.match(llmsFull, /ChatGPT/);
+});
+
+test("public framing stays LLM-wiki-first across footer, social images, and the legacy demo", async () => {
+  const surfaces = [
+    ["src/i18n/content/en.ts", await readRepo("src/i18n/content/en.ts")],
+    ["src/app/learn/opengraph-image.tsx", await readRepo("src/app/learn/opengraph-image.tsx")],
+    ["src/app/learn/[slug]/opengraph-image.tsx", await readRepo("src/app/learn/[slug]/opengraph-image.tsx")],
+    ["src/app/docs/[slug]/opengraph-image.tsx", await readRepo("src/app/docs/[slug]/opengraph-image.tsx")],
+  ];
+
+  for (const [path, source] of surfaces) {
+    assert.doesNotMatch(source, /Living personal knowledge library/, path);
+    assert.match(source, /LLM wiki/, path);
+  }
+
+  assert.match(surfaces[0][1], /Historical Wenlan demo v0\.9/);
+  assert.match(surfaces[1][1], /ChatGPT/);
+});
+
+test("public client setup tracks the released wenlan connect command", async () => {
+  const wenlanRoot = process.env.WENLAN_REPO_ROOT
+    ? resolve(process.env.WENLAN_REPO_ROOT)
+    : resolve(repoRoot, "../wenlan");
+  const cliMain = await readFile(resolve(wenlanRoot, "crates/wenlan-cli/src/main.rs"), "utf8");
+  const surfaces = await readPublicCommandGuidance();
+
+  assert.match(cliMain, /Connect\(commands::mcp::ConnectArgs\)/);
+  for (const [path, source] of surfaces) {
+    const renderedGuidance = await renderedGuidanceFor(path, source);
+    assert.doesNotMatch(renderedGuidance, /\bwenlan mcp add\b/, path);
+  }
+
+  const publicGuidance = surfaces.map(([, source]) => source).join("\n");
+  assert.match(publicGuidance, /wenlan connect codex/);
+  assert.match(publicGuidance, /wenlan connect cursor/);
+  assert.match(publicGuidance, /wenlan connect claude-desktop/);
+});
+
+test("public CLI guidance tracks the current top-level command surface", async () => {
+  const wenlanRoot = process.env.WENLAN_REPO_ROOT
+    ? resolve(process.env.WENLAN_REPO_ROOT)
+    : resolve(repoRoot, "../wenlan");
+  const cliSource = await readFile(
+    resolve(wenlanRoot, "crates/wenlan-cli/src/main.rs"),
+    "utf8",
+  );
+
+  for (const command of ["Background", "Capture", "Memories", "Spaces", "Models", "Keys"]) {
+    assert.match(cliSource, new RegExp(`\\b${command}\\b`), command);
+  }
+
+  const surfaces = await Promise.all(
+    publicCommandGuidancePaths.map(async (path) => [path, await readRepo(path)]),
+  );
+  const publicGuidance = surfaces.map(([path, source]) => `// ${path}\n${source}`).join("\n");
+
+  for (const staleCommand of [
+    /\bwenlan install\b/,
+    /\bwenlan uninstall\b/,
+    /\bwenlan store\b/,
+    /\bwenlan list\b/,
+    /\bwenlan space\b/,
+    /\bwenlan model\b/,
+    /\bwenlan key\b/,
+    /\bwenlan reranker\b/,
+  ]) {
+    assert.doesNotMatch(publicGuidance, staleCommand, staleCommand.source);
+  }
+
+  for (const staleCliDescription of [
+    /wenlan CLI[^"\n]*\bstore\b/,
+    /wenlan CLI[^"\n]*\bmodel\b/,
+    /wenlan CLI[^"\n]*\bkey\b/,
+    /The CLI uses[^"\n]*\b(store|list|model|key)\b/,
+    /The CLI can[^"\n]*\b(store|list)\b/,
+    /use wenlan setup, install/,
+  ]) {
+    assert.doesNotMatch(publicGuidance, staleCliDescription, staleCliDescription.source);
+  }
+
+  for (const currentCommand of [
+    /wenlan background on/,
+    /wenlan background off/,
+    /wenlan capture/,
+    /wenlan memories/,
+    /wenlan spaces/,
+    /wenlan models/,
+    /wenlan keys/,
+    /wenlan models reranker/,
+  ]) {
+    assert.match(publicGuidance, currentCommand, currentCommand.source);
+  }
+});
+
+test("public command guidance tracks the current plugin contract", async () => {
+  const wenlanRoot = process.env.WENLAN_REPO_ROOT
+    ? resolve(process.env.WENLAN_REPO_ROOT)
+    : resolve(repoRoot, "../wenlan");
+  const contract = JSON.parse(
+    await readFile(resolve(wenlanRoot, "plugin-contract.json"), "utf8"),
+  );
+  const sharedCommands = contract.skills
+    .filter((skill) => skill.status === "shared_now")
+    .map((skill) => skill.name)
+    .sort();
+  const surfaces = await readPublicCommandGuidance();
+  const publicGuidance = surfaces.map(([, source]) => source).join("\n");
+
+  assert.deepEqual(sharedCommands, [
+    "brief",
+    "capture",
+    "curate",
+    "distill",
+    "forget",
+    "handoff",
+    "help",
+    "pages",
+    "recall",
+    "setup",
+  ]);
+  for (const [path, source] of surfaces) {
+    const renderedGuidance = await renderedGuidanceFor(path, source);
+    assert.doesNotMatch(
+      renderedGuidance,
+      /(?<![A-Za-z0-9_-])\/(?:init|review|read|debrief)\b/,
+      path,
+    );
+  }
+  for (const command of sharedCommands) {
+    assert.match(publicGuidance, new RegExp(`/${escapeRegExp(command)}\\b`), command);
+  }
+  const docs = surfaces.find(([path]) => path === "src/app/docs/docs.ts")?.[1] ?? "";
+  assert.doesNotMatch(docs, /\/pages[^"\n]*(?:preview|inside the agent session|without leaving)/i);
+  assert.match(docs, /\/pages: list recent pages or open a matching page in your editor\./);
+  assert.doesNotMatch(docs, /review, distill, read, and handoff/);
+});
+
+test("public-copy scans exclude private work artifacts", async () => {
+  assert.equal(shouldSkipPublicScanEntry(".omo"), true);
+  assert.equal(shouldSkipPublicScanEntry(".codegraph"), true);
+  assert.equal(shouldSkipPublicScanEntry("src"), false);
+});
+
+test("public platform surfaces track current release artifact boundaries", async () => {
+  const surfaces = [
+    ["src/app/structured-data.ts", await readRepo("src/app/structured-data.ts")],
+    ["public/llms.txt", await readRepo("public/llms.txt")],
+    ["src/app/llms-full.txt/route.ts", await readRepo("src/app/llms-full.txt/route.ts")],
+    ["src/i18n/content/en.ts", await readRepo("src/i18n/content/en.ts")],
+    ["src/i18n/content/zh-CN.ts", await readRepo("src/i18n/content/zh-CN.ts")],
+    ["src/i18n/content/zh-TW.ts", await readRepo("src/i18n/content/zh-TW.ts")],
+    ["src/app/docs/docs.ts", await readRepo("src/app/docs/docs.ts")],
+  ];
+
+  for (const [path, source] of surfaces) {
+    assert.doesNotMatch(source, /macOS\s*\(arm64,\s*x64\)/i, path);
+    assert.doesNotMatch(source, /macOS\s+arm64\/x64/i, path);
+  }
+
+  const structuredData = surfaces[0][1];
+  const llms = surfaces[1][1];
+  const llmsFull = surfaces[2][1];
+  const englishContent = surfaces[3][1];
+  const simplifiedContent = surfaces[4][1];
+  const traditionalContent = surfaces[5][1];
+  const docs = surfaces[6][1];
+
+  assert.match(structuredData, /macOS Apple Silicon/);
+  assert.match(structuredData, /Linux x86_64 or aarch64 \(glibc\)/);
+  assert.match(structuredData, /Windows x86_64/);
+  assert.match(llms, /macOS Apple Silicon/);
+  assert.match(llms, /Linux \(x86_64, aarch64; glibc\)/);
+  assert.match(llmsFull, /macOS Apple Silicon/);
+  assert.match(llmsFull, /Linux \(x86_64, aarch64; glibc\)/);
+  assert.match(englishContent, /macOS Apple Silicon/);
+  assert.match(englishContent, /no current prebuilt macOS Intel runtime/i);
+  assert.match(simplifiedContent, /macOS Apple Silicon/);
+  assert.match(simplifiedContent, /目前没有 macOS Intel 预编译运行时/);
+  assert.match(traditionalContent, /macOS Apple Silicon/);
+  assert.match(traditionalContent, /目前沒有 macOS Intel 預編譯執行環境/);
+  assert.match(docs, /macOS Apple Silicon, Linux x86_64\/aarch64 with glibc, and Windows x86_64/);
+  assert.match(docs, /macOS Intel.*no current prebuilt runtime/i);
 });
 
 test("public source has no stale Wenlan product assertions", async () => {
@@ -500,6 +828,7 @@ test("public source has no stale Wenlan product assertions", async () => {
     /Markdown is the durable record people can read/g,
     /Wenlan stores human-readable Markdown records/g,
     /human-readable records, MCP clients/g,
+    /wenlan mcp add/g,
     /git blame`? a fact/g,
     /Markdown remains the human-readable record\. The local database is the index/g,
   ];

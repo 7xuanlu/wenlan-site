@@ -218,7 +218,7 @@ export function HomePage({ locale }: { locale: Locale }) {
           <h1 className="animate-fade-up delay-100 warm-glow text-[2rem] leading-[1.08] sm:text-7xl sm:leading-[1.1]">
             <BrandWordmark label={content.hero.title} variant="hero" />
           </h1>
-          <p className="animate-fade-up delay-100 mx-auto mt-7 max-w-[22rem] break-words text-base leading-relaxed text-[var(--o-text-secondary)] sm:mt-8 sm:max-w-xl sm:text-xl">
+          <p className="animate-fade-up delay-100 mx-auto mt-7 max-w-[22rem] break-keep text-base leading-relaxed text-[var(--o-text-secondary)] sm:mt-8 sm:max-w-xl sm:text-xl">
             {content.hero.description}
           </p>
           <div className="animate-fade-up delay-200 mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
 
@@ -32,13 +32,6 @@ function repositoryUrl(value) {
   return value.replace(/^git\+/, "").replace(/\.git$/, "");
 }
 
-async function currentWenlanVersion() {
-  const wenlanRoot = process.env.WENLAN_REPO_ROOT
-    ? resolve(process.env.WENLAN_REPO_ROOT)
-    : resolve(repoRoot, "../wenlan");
-  return (await readFile(resolve(wenlanRoot, "version.txt"), "utf8")).trim();
-}
-
 function cargoVersion(cargoToml) {
   const match = cargoToml.match(/^version = "([^"]+)"/m);
   assert.ok(match, "app/Cargo.toml is missing a package version");
@@ -63,8 +56,20 @@ async function currentWenlanAppRelease() {
   const appRoot = process.env.WENLAN_APP_REPO_ROOT
     ? resolve(process.env.WENLAN_APP_REPO_ROOT)
     : resolve(repoRoot, "../wenlan-app");
+  const packagePath = resolve(appRoot, "package.json");
+  try {
+    await access(packagePath);
+  } catch {
+    throw new Error(
+      [
+        `WENLAN_APP_REPO_ROOT does not contain a wenlan-app checkout: ${appRoot}`,
+        "Set WENLAN_APP_REPO_ROOT to an explicit wenlan-app checkout before validating public app facts.",
+      ].join(" "),
+    );
+  }
+
   const [packageJsonText, tauriText, cargoToml, backendPinText] = await Promise.all([
-    readFile(resolve(appRoot, "package.json"), "utf8"),
+    readFile(packagePath, "utf8"),
     readFile(resolve(appRoot, "app/tauri.conf.json"), "utf8"),
     readFile(resolve(appRoot, "app/Cargo.toml"), "utf8"),
     readFile(resolve(appRoot, ".wenlan-backend-version"), "utf8"),
@@ -94,6 +99,7 @@ async function currentWenlanAppRelease() {
   );
 
   return {
+    root: appRoot,
     version,
     tag: pin.tag,
     repository: repositoryUrl(packageJson.repository.url),
@@ -101,14 +107,11 @@ async function currentWenlanAppRelease() {
   };
 }
 
-test("wenlan-app release metadata pins the authoritative Wenlan daemon release", async () => {
-  const [wenlanVersion, app] = await Promise.all([
-    currentWenlanVersion(),
-    currentWenlanAppRelease(),
-  ]);
+test("wenlan-app release metadata exposes its bundled daemon pin", async () => {
+  const app = await currentWenlanAppRelease();
 
-  assert.equal(app.version, wenlanVersion);
-  assert.equal(app.tag, `v${wenlanVersion}`);
+  assert.match(app.version, /^\d+\.\d+\.\d+$/);
+  assert.match(app.tag, /^v\d+\.\d+\.\d+$/);
   assert.equal(app.repository, "https://github.com/7xuanlu/wenlan-app");
   assert.equal(
     app.updaterEndpoint,
@@ -118,7 +121,6 @@ test("wenlan-app release metadata pins the authoritative Wenlan daemon release",
 
 test("public desktop-app surfaces track wenlan-app source facts", async () => {
   const app = await currentWenlanAppRelease();
-  const escapedVersion = escapeRegExp(app.version);
   const docs = await readRepo("src/app/docs/docs.ts");
   const structuredData = await readRepo("src/app/structured-data.ts");
   const llms = await readRepo("public/llms.txt");
@@ -127,15 +129,46 @@ test("public desktop-app surfaces track wenlan-app source facts", async () => {
   assert.match(docs, /href: "https:\/\/github\.com\/7xuanlu\/wenlan-app"/);
   assert.match(docs, /Tauri 2 \+ React 19/);
   assert.match(docs, /localhost:7878/);
-  assert.match(docs, new RegExp(`desktop app release ${escapedVersion}`));
-  assert.match(docs, new RegExp(`daemon v${escapedVersion}`));
+  assert.match(docs, /\.wenlan-backend-version/);
+  assert.match(docs, /app releases can trail the daemon release/);
   assert.doesNotMatch(docs, /origin-app/);
 
   assert.match(structuredData, /github\.com\/7xuanlu\/wenlan-app/);
   assert.match(structuredData, /Tauri 2 \+ React 19/);
   assert.match(structuredData, /localhost:7878/);
+  assert.match(structuredData, /bundled daemon pin/);
 
   assert.match(llms, /Wenlan desktop app repository/);
   assert.match(llms, /github\.com\/7xuanlu\/wenlan-app/);
   assert.match(llmsFull, /github\.com\/7xuanlu\/wenlan-app/);
+});
+
+test("public web-client guidance tracks the released wenlan-app remote access boundary", async () => {
+  const app = await currentWenlanAppRelease();
+  const [remotePanel, remoteRuntime, docs, english, simplified, traditional] = await Promise.all([
+    readFile(resolve(app.root, "src/components/memory/RemoteAccessPanel.tsx"), "utf8"),
+    readFile(resolve(app.root, "app/src/remote_access.rs"), "utf8"),
+    readRepo("src/app/docs/docs.ts"),
+    readRepo("src/i18n/content/en.ts"),
+    readRepo("src/i18n/content/zh-CN.ts"),
+    readRepo("src/i18n/content/zh-TW.ts"),
+  ]);
+
+  assert.doesNotMatch(remotePanel, /secure tunnel/i);
+  assert.match(remotePanel, /no authentication/i);
+  assert.match(remotePanel, /Anyone with the URL can access Wenlan/i);
+  assert.match(remotePanel, /turn Remote Access off when unused/i);
+  assert.doesNotMatch(remotePanel, /rotateRemoteToken|function TokenRow/);
+  assert.match(remotePanel, /Enable Developer mode/);
+  assert.match(remoteRuntime, /https:\/\/claude\.ai,https:\/\/chatgpt\.com/);
+  assert.match(remoteRuntime, /"--no-auth"/);
+  assert.match(docs, /ChatGPT/);
+  assert.match(docs, /Remote Access/);
+  assert.match(docs, /Developer mode/);
+  assert.match(docs, /--no-auth/);
+  assert.match(docs, /possession of the URL grants access/i);
+  assert.doesNotMatch(docs, /secure (?:URL|tunnel)/i);
+  assert.doesNotMatch(english, /secure Streamable HTTP MCP URL/i);
+  assert.doesNotMatch(simplified, /安全的 Streamable HTTP MCP URL/);
+  assert.doesNotMatch(traditional, /安全的 Streamable HTTP MCP URL/);
 });

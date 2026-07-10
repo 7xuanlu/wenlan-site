@@ -24,7 +24,7 @@ pnpm seo:technical:built
 pnpm seo:technical:deployed
 ```
 
-The SEO tests read the sibling Wenlan repo for current release data. If this checkout is not next to `../wenlan`, run tests with `WENLAN_REPO_ROOT=/absolute/path/to/wenlan`.
+The SEO tests read sibling Wenlan and wenlan-app checkouts for current source facts. Set both `WENLAN_REPO_ROOT=/absolute/path/to/wenlan` and `WENLAN_APP_REPO_ROOT=/absolute/path/to/wenlan-app` when those repos are not adjacent to this checkout.
 
 ## Architecture
 

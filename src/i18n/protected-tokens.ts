@@ -4,7 +4,7 @@ const tokenPatterns = [
   /\bWenlan\b/g,
   /\bGitHub\b/g,
   /\/plugin\s+(?:marketplace\s+add|install)\s+[A-Za-z0-9@/_-]+/g,
-  /\/init\b/g,
+  /\/setup/g,
   /\/distill\b/g,
   /\bnpx\s+-y\s+wenlan\s+setup\b/g,
   /~\/\.[A-Za-z0-9_-]+\/bin\/[A-Za-z0-9_-]+(?:\s+[A-Za-z0-9_-]+){0,6}/g,

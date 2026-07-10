@@ -16,7 +16,7 @@ export default async function Image({ params }: Params) {
   const { slug } = await params;
   const article = getArticle(slug);
   const title = article?.title ?? "Wenlan Learn";
-  const description = article?.description ?? "Living personal knowledge library for AI work.";
+  const description = article?.description ?? "Source-backed LLM wiki for AI work.";
   const eyebrow = article?.eyebrow ?? "Learn";
 
   return new ImageResponse(
@@ -27,7 +27,7 @@ export default async function Image({ params }: Params) {
         description={description}
         footerLeft={[
           "wenlan.app",
-          "Living personal knowledge library",
+          "Source-backed LLM wiki",
         ]}
         footerRight="by Qi-Xuan Lu"
       />

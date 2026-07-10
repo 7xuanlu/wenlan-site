@@ -11,7 +11,7 @@ export default async function Image() {
       <OgTemplate
         eyebrow="Get started"
         title="Install Wenlan in five minutes."
-        description="Add the Claude Code plugin or run Wenlan setup, then verify the local memory loop with a capture and recall."
+        description="Connect Claude Code, Codex, ChatGPT, or another MCP client, then verify the first capture and recall round trip."
         footerLeft={[
           "wenlan.app/docs/get-started",
           "macOS, Linux, Windows",

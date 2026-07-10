@@ -10,11 +10,11 @@ export default async function Image() {
     (
       <OgTemplate
         eyebrow="Learn"
-        title="Wenlan AI work memory guides."
-        description="Guides for Claude Code memory, MCP memory servers, Cursor/Codex workflows, local AI work context, setup, trust, and comparisons."
+        title="Wenlan LLM wiki guides."
+        description="Source-backed LLM wiki guides for Claude Code, Codex, ChatGPT, MCP clients, setup, trust, and comparisons."
         footerLeft={[
           "wenlan.app/learn",
-          "Living personal knowledge library",
+          "Source-backed LLM wiki",
         ]}
         footerRight="by Qi-Xuan Lu"
         titleSize={80}

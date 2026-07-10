@@ -27,6 +27,7 @@ const REQUIRED_SITEMAP_LOCS = [
   "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work",
   "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
   "https://wenlan.app/docs/configuration",
+  "https://wenlan.app/docs/product-matrix",
 ];
 
 const REBRAND_REDIRECTS = [
@@ -127,6 +128,11 @@ const REQUIRED_HTML_PAGES = [
   {
     path: "/docs/configuration",
     canonical: "https://wenlan.app/docs/configuration",
+    type: "TechArticle",
+  },
+  {
+    path: "/docs/product-matrix",
+    canonical: "https://wenlan.app/docs/product-matrix",
     type: "TechArticle",
   },
 ];

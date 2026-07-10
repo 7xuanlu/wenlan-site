@@ -117,6 +117,7 @@ const REQUIRED_SITEMAP_LOCS = [
   "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work",
   "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
   "https://wenlan.app/docs/configuration",
+  "https://wenlan.app/docs/product-matrix",
 ];
 const REQUIRED_ROBOTS_SITEMAP = "https://wenlan.app/sitemap.xml";
 
@@ -134,8 +135,8 @@ const REQUIRED_HTML_PAGES = [
     type: "Article",
     requiredLinks: [
       {
-        href: "/learn/claude-code-memory",
-        label: "Read the Claude Code memory guide",
+        href: "/docs/mcp-clients",
+        label: "Read all MCP client setup paths",
       },
     ],
   },
@@ -184,6 +185,11 @@ const REQUIRED_HTML_PAGES = [
         label: "Read the Claude Code memory guide",
       },
     ],
+  },
+  {
+    path: "docs/product-matrix.html",
+    canonical: "https://wenlan.app/docs/product-matrix",
+    type: "TechArticle",
   },
 ];
 
@@ -494,6 +500,19 @@ function hasAnchor(html, { href, label }) {
   ).test(html);
 }
 
+async function readRequiredPageHtml({ buildDir }, page) {
+  const htmlPath = resolve(buildDir, "server/app", page.path);
+  try {
+    return await readFile(htmlPath, "utf8");
+  } catch (error) {
+    if (error?.code !== "ENOENT") {
+      throw error;
+    }
+  }
+
+  throw new Error(`page output missing: ${page.path}`);
+}
+
 function assertGlobalNotFoundHtml(html) {
   const failures = [];
 
@@ -561,7 +580,8 @@ async function run() {
 
   const pageFailures = [];
   for (const page of REQUIRED_HTML_PAGES) {
-    const html = await readFile(resolve(args.buildDir, "server/app", page.path), "utf8");
+    const html = await readRequiredPageHtml(args, page);
+
     const canonicals = extractCanonicalTags(html);
     const robotsTags = extractRobotsTags(html);
     const schemaTypes = extractJsonLdTypes(html, page.path);

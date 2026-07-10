@@ -16,7 +16,7 @@ export default async function Image({ params }: Params) {
   const { slug } = await params;
   const page = getDocPage(slug);
   const title = page?.title ?? "Wenlan Docs";
-  const description = page?.description ?? "Living personal knowledge library for AI work.";
+  const description = page?.description ?? "Source-backed LLM wiki for AI work.";
   const eyebrow = page?.eyebrow ?? "Docs";
 
   return new ImageResponse(
@@ -27,7 +27,7 @@ export default async function Image({ params }: Params) {
         description={description}
         footerLeft={[
           "wenlan.app/docs",
-          "Living personal knowledge library",
+          "Source-backed LLM wiki",
         ]}
         footerRight="Apache-2.0"
         titleSize={72}
