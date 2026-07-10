@@ -7,7 +7,7 @@ From: Wenlan, wenlan.app
 /* THANKS */
 - The Model Context Protocol team for the MCP spec.
 - The libSQL maintainers for vector + FTS in one engine.
-- The Claude Code team for the plugin surface that makes local memory tractable.
+- The Claude Code and Codex teams for plugin surfaces that make Wenlan usable in coding sessions.
 
 /* SITE */
 Last updated: 2026-06-24

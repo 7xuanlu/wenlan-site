@@ -10,25 +10,25 @@ import {
 import { ArticleHalo, MemoryIndex } from "./article-visuals";
 
 export const metadata: Metadata = {
-  title: "Wenlan Learn: AI Work Memory Guides for Claude Code, Cursor, MCP",
+  title: "Wenlan Learn: LLM Wiki Guides for Claude Code, Codex, ChatGPT",
   description:
-    "Find Wenlan guides for Claude Code memory, MCP memory servers, Cursor/Codex workflows, local AI work context, setup, trust, and comparisons.",
+    "Find Wenlan guides for source-backed AI work, Claude Code and Codex workflows, ChatGPT remote MCP, local clients, setup, trust, and comparisons.",
   alternates: {
     canonical: "/learn",
   },
   openGraph: {
-    title: "Wenlan Learn: AI Work Memory Guides for Claude Code, Cursor, MCP",
+    title: "Wenlan Learn: LLM Wiki Guides for Claude Code, Codex, ChatGPT",
     description:
-      "Find Wenlan guides for Claude Code memory, MCP memory servers, Cursor/Codex workflows, local AI work context, setup, trust, and comparisons.",
+      "Find Wenlan guides for source-backed AI work, Claude Code and Codex workflows, ChatGPT remote MCP, local clients, setup, trust, and comparisons.",
     type: "website",
     url: `${SITE_URL}/learn`,
     siteName: "Wenlan",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Wenlan Learn: AI Work Memory Guides for Claude Code, Cursor, MCP",
+    title: "Wenlan Learn: LLM Wiki Guides for Claude Code, Codex, ChatGPT",
     description:
-      "Find Wenlan guides for Claude Code memory, MCP memory servers, Cursor/Codex workflows, local AI work context, setup, trust, and comparisons.",
+      "Find Wenlan guides for source-backed AI work, Claude Code and Codex workflows, ChatGPT remote MCP, local clients, setup, trust, and comparisons.",
   },
 };
 
@@ -45,8 +45,13 @@ const searchRoutes = [
   },
   {
     query: "MCP memory server",
-    intent: "Connect Claude Code, Cursor, Codex, and other MCP clients to durable memory.",
+    intent: "Connect Claude Code, Codex, Cursor, ChatGPT, and other MCP clients to Wenlan.",
     href: "/learn/mcp-memory-server",
+  },
+  {
+    query: "ChatGPT MCP",
+    intent: "Connect ChatGPT to your Wenlan runtime through Streamable HTTP MCP Remote Access.",
+    href: "/docs/mcp-clients",
   },
   {
     query: "Cursor memory MCP",
@@ -143,12 +148,12 @@ export default function LearnPage() {
                 Learn
               </p>
               <h1 className="warm-glow font-serif text-5xl leading-[1.05] font-medium tracking-tight sm:text-7xl">
-                Wenlan AI work memory guides.
+                Wenlan LLM wiki guides.
               </h1>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">
-                Wenlan makes AI work compound across Claude Code, Cursor,
-                Codex, and other MCP-compatible tools. The LLM wiki for AI work
-                is the durable context layer that memory feeds.
+                Wenlan makes AI work compound across Claude Code, Codex,
+                ChatGPT, Cursor, and other MCP-compatible tools. Captures and
+                trusted sources feed an LLM wiki that agents and humans can inspect.
               </p>
             </div>
             <MemoryIndex

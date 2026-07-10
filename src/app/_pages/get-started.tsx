@@ -88,10 +88,10 @@ export function GetStartedPage({ locale }: { locale: Locale }) {
                 <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
                   {content.hero.eyebrow}
                 </p>
-                <h1 className="warm-glow font-serif text-[2rem] leading-[1.08] font-medium tracking-tight sm:text-7xl sm:leading-[1.05]">
+                <h1 className="warm-glow break-keep font-serif text-[2rem] leading-[1.08] font-medium tracking-tight sm:text-7xl sm:leading-[1.05]">
                   {content.hero.title}
                 </h1>
-                <p className="mt-8 max-w-[20rem] text-lg leading-relaxed text-[var(--o-text-secondary)] sm:max-w-2xl">
+                <p className="mt-8 max-w-[20rem] break-keep text-lg leading-relaxed text-[var(--o-text-secondary)] sm:max-w-2xl">
                   {content.hero.description}
                 </p>
                 <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[11px] text-[var(--o-text-muted)]">

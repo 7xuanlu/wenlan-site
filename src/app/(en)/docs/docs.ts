@@ -1,6 +1,6 @@
 import { DEFAULT_AUTHOR, SITE_URL } from "../learn/articles";
 
-export const DOCS_UPDATED_AT = "2026-07-02";
+export const DOCS_UPDATED_AT = "2026-07-09";
 
 export type DocGroup = "After setup" | "Reference" | "Project";
 
@@ -39,7 +39,7 @@ export type DocPage = {
   howTo?: boolean;
 };
 
-const mcpAddCommand = `~/.wenlan/bin/wenlan mcp add claude-code
+const mcpConnectCommand = `~/.wenlan/bin/wenlan connect claude-code
 # or: codex, cursor, claude-desktop, vscode, gemini`;
 
 const mcpConfig = `{
@@ -57,9 +57,10 @@ const wenlanSetupCommand = "npx -y wenlan setup";
 const architectureMap = `wenlan-server  -> local daemon on 127.0.0.1:7878
 wenlan-core    -> storage, search, graph, pages, eval
 wenlan CLI     -> setup, service management, recall, doctor
-wenlan-mcp     -> MCP connector for AI clients
+wenlan-mcp     -> stdio + Streamable HTTP MCP for AI clients
 wenlan-types   -> shared HTTP/MCP wire types
-plugin/        -> Claude Code slash commands and hooks`;
+plugin/        -> Claude Code slash commands and hooks
+plugin-codex/  -> Codex skills and MCP runner`;
 
 const evalSnapshot = `Benchmark                         Scope                         Recall@5   MRR     NDCG@10
 LME_Oracle                        CE-reranked, 500 Q            93.6%     0.857   0.883
@@ -67,8 +68,8 @@ LME_S                             CE-reranked, deep N=90        87.7%     0.815 
 
 const serviceCommands = `wenlan status
 wenlan doctor
-wenlan install
-wenlan uninstall`;
+wenlan background on
+wenlan background off`;
 
 const updateCommands = `# refresh the local runtime installed under ~/.wenlan/bin
 npx -y wenlan setup
@@ -85,13 +86,15 @@ npx -y wenlan setup
 ~/.wenlan/bin/wenlan doctor
 
 # inspect MCP config before changing a client
-~/.wenlan/bin/wenlan mcp add codex --dry-run`;
+~/.wenlan/bin/wenlan connect codex --dry-run`;
 
-const uninstallCommands = `~/.wenlan/bin/wenlan uninstall
+const uninstallCommands = `~/.wenlan/bin/wenlan background off
 
+# stops the background process and removes its per-user registration
 # then remove Wenlan from each MCP client's settings if you added it manually`;
 
-const packageSurfaceMap = `wenlan      Claude Code plugin package and setup entrypoint
+const packageSurfaceMap = `wenlan              Claude Code plugin package and setup entrypoint
+plugin-codex/       Codex plugin source and local marketplace
 wenlan-mcp          MCP connector package and Rust crate
 wenlan-types        Shared HTTP/MCP wire types
 GitHub Releases     Stable binaries, tags, and release notes`;
@@ -99,19 +102,19 @@ GitHub Releases     Stable binaries, tags, and release notes`;
 const packageInstallPaths = `# Claude Code
 /plugin marketplace add 7xuanlu/claude-plugins
 /plugin install wenlan@7xuanlu
-/init
+/setup
 
-# Other MCP clients
+# Codex and other local MCP clients
 npx -y wenlan setup
-~/.wenlan/bin/wenlan mcp add codex
+~/.wenlan/bin/wenlan connect codex
 
 # Manual MCP fallback
 npx -y wenlan-mcp`;
 
 const packageVerificationCommands = `~/.wenlan/bin/wenlan status
 ~/.wenlan/bin/wenlan doctor
-~/.wenlan/bin/wenlan mcp add codex --dry-run
-~/.wenlan/bin/wenlan mcp add cursor --dry-run`;
+~/.wenlan/bin/wenlan connect codex --dry-run
+~/.wenlan/bin/wenlan connect cursor --dry-run`;
 
 const releaseFlow = `merge to main
   -> release-please updates the release PR
@@ -127,19 +130,18 @@ docs/test/chore:  no release entry by default`;
 const pluginInstallCommands = `/plugin marketplace add 7xuanlu/claude-plugins
 /plugin install wenlan@7xuanlu
 # restart Claude Code if prompted
-/init`;
+/setup`;
 
-const pluginDailyCommands = `/init       setup + diagnosis
+const pluginDailyCommands = `/setup       setup + diagnosis
 /help       one-screen reference
 /brief      load session context
 /capture    save one durable memory
 /recall     search local memory
 /distill    synthesize or refresh pages
-/read       preview a page inline
-/review     audit pending captures or revisions
+/pages      list or open distilled pages
+/curate     audit pending captures or revisions
 /forget     delete a memory by ID
-/handoff    end-of-session debrief
-/debrief    alias for /handoff`;
+/handoff    end-of-session debrief`;
 
 const pluginDataPaths = `~/.wenlan/pages/               distilled wiki pages
 ~/.wenlan/sessions/            session logs
@@ -148,12 +150,12 @@ const pluginDataPaths = `~/.wenlan/pages/               distilled wiki pages
 ~/.wenlan/bin/                 installed binaries`;
 
 const diagnosticCommands = `# Claude Code
-/init
+/setup
 
 # Terminal
 ~/.wenlan/bin/wenlan status
 ~/.wenlan/bin/wenlan doctor
-~/.wenlan/bin/wenlan mcp add codex --dry-run
+~/.wenlan/bin/wenlan connect codex --dry-run
 lsof -nP -iTCP:7878 -sTCP:LISTEN`;
 
 const memoryTypeValues = `identity     durable facts about the user
@@ -172,9 +174,39 @@ knowledge  classify into fact, lesson, or gotcha
 goal       deprecated; folds into identity
 correction/custom/recap  legacy compatibility; folds into fact`;
 
-const platformMatrix = `macOS    arm64, x64              launchd user agent
-Linux    x86_64, aarch64 glibc  systemd user unit
-Windows  x86_64                 Task Scheduler ONLOGON task`;
+const productSurfaceBullets = [
+  "daemon/runtime - owner: wenlan; released source of truth; run npx -y wenlan setup; verify with ~/.wenlan/bin/wenlan status.",
+  "CLI - owner: wenlan; released with the runtime; run ~/.wenlan/bin/wenlan doctor before debugging clients.",
+  "MCP connector - owner: wenlan; released as wenlan-mcp; run wenlan connect <client>; verify with wenlan connect codex --dry-run.",
+  "Claude Code plugin - owner: wenlan; released plugin workflow; install wenlan@7xuanlu; verify with /setup.",
+  "Codex plugin - owner: wenlan; released Codex plugin surface; use the plugin-codex setup skill; verify with wenlan connect codex --dry-run.",
+  "ChatGPT and Claude.ai remote MCP - owner: wenlan plus wenlan-app; released Streamable HTTP MCP endpoint with a guided desktop Remote Access path; verify the generated URL before adding a custom app or connector.",
+  "other MCP clients - owner: wenlan; client-specific config; run wenlan connect cursor or the matching client; restart the client, then call context.",
+  "optional desktop app - owner: wenlan-app; optional daemon client; download the current app release; verify the app talks to localhost:7878.",
+  "source build - owner: wenlan; contributor/dev path; run cargo build --workspace; verify with cargo test --workspace.",
+  "eval/docs provenance - owner: wenlan; CI/release guarded docs; update the README eval block and check README translations.",
+];
+
+const productRouteBullets = [
+  "Install first runtime: /docs/get-started.",
+  "Run the daily memory loop: /docs/daily-workflow.",
+  "Learn concepts: /docs/core-concepts.",
+  "See daemon/client boundary: /docs/architecture.",
+  "Map packages and registries: /docs/packages-and-registries.",
+  "Check platform support: /docs/platforms.",
+  "Connect MCP clients: /docs/mcp-clients.",
+  "Understand optional GUI: /docs/desktop-app.",
+  "Fix setup: /docs/troubleshooting.",
+  "Know shipped versus unreleased work: /docs/releases-and-versioning.",
+];
+
+const platformSupportBullets = [
+  "macOS Apple Silicon - current prebuilt runtime, launchd user agent, and current desktop app target aarch64-apple-darwin.",
+  "macOS Intel - no current prebuilt runtime in the release workflow; launchd code path exists, but treat it as source/dev-only; no current desktop app target.",
+  "Linux x86_64 - current prebuilt runtime and systemd user unit; no current desktop app target.",
+  "Linux aarch64 glibc - current prebuilt runtime and systemd user unit; no current desktop app target.",
+  "Windows x86_64 - current prebuilt runtime and Task Scheduler ONLOGON task; no current desktop app target.",
+];
 
 const platformDataDirs = `macOS:   ~/Library/Application Support/wenlan/
 Linux:   ~/.local/share/wenlan/ or $XDG_DATA_HOME/wenlan/
@@ -199,8 +231,8 @@ const migrationChecks = `~/.wenlan/bin/wenlan status
 
 const cliDailyCommands = `wenlan recall "wenlan website positioning"
 wenlan search "MCP setup"
-wenlan store "We chose spaces for client separation" --type decision
-wenlan list --limit 10`;
+wenlan capture "We chose spaces for client separation" --type decision
+wenlan memories --limit 10`;
 
 const agentCommands = `wenlan agents list
 wenlan agents show claude-code
@@ -208,10 +240,10 @@ wenlan agents edit claude-code --trust trusted --enabled true`;
 
 const spaceCommands = `WENLAN_SPACE=career claude
 
-wenlan space list
-wenlan space add ideas --default
-wenlan space show ideas
-wenlan space move scratch career`;
+wenlan spaces list
+wenlan spaces add ideas --default
+wenlan spaces show ideas
+wenlan spaces move scratch career`;
 
 const spaceResolverChain = `1. explicit --arg override
 2. WENLAN_SPACE environment variable
@@ -236,7 +268,7 @@ ls ~/.wenlan/pages/
 ls ~/.wenlan/sessions/
 
 # migrate selected durable notes explicitly
-~/.wenlan/bin/wenlan store "Imported note: <durable context>" --type fact`;
+~/.wenlan/bin/wenlan capture "Imported note: <durable context>" --type fact`;
 
 const gitHistoryCommands = `cd ~/.wenlan
 git log --oneline --decorate --all -20
@@ -244,11 +276,12 @@ git show --stat HEAD
 git diff HEAD~1 -- pages/`;
 
 const modelSetupCommands = `wenlan setup --basic
-wenlan model install qwen3-4b
-wenlan key set anthropic
+wenlan models install qwen3-4b
+wenlan keys set anthropic
 
-wenlan model status
-wenlan key status
+wenlan models status
+wenlan keys status
+wenlan models reranker lite
 wenlan doctor`;
 
 const agentSideModelPhases = `Pick memory_type        daemon classifier       /capture chooses type
@@ -292,8 +325,8 @@ const captureExamples = `/capture We chose source-backed pages because summaries
 /capture Supersedes earlier setup docs: Windows now uses a Task Scheduler ONLOGON task.
 /capture Gotcha: Do not paste private memory contents into public issues.`;
 
-const reviewCommands = `/review captures
-/review revisions
+const reviewCommands = `/curate captures
+/curate revisions
 /recall "what changed about the setup path"
 /forget mem_abc123`;
 
@@ -366,7 +399,7 @@ curl -s http://127.0.0.1:7878/api/pages/page_abc123/sources`;
 
 const typedClientSurfaces = `wenlan-server  HTTP backend daemon
 wenlan-mcp     MCP server wrapper for AI tools
-wenlan CLI     setup, doctor, recall, search, store
+wenlan CLI     setup, doctor, recall, search, capture, memories
 local clients  Rust tools that call the daemon directly`;
 
 const typedClientInstall = `cargo add wenlan-types
@@ -477,7 +510,7 @@ export const docPages: DocPage[] = [
         heading: "Start with context",
         body: [
           "Start a real work session with /brief in Claude Code or context in another MCP client. Wenlan returns project facts, recent handoffs, decisions, and distilled pages.",
-          "If setup is not done yet, use /init in Claude Code. For other MCP clients, run npx -y wenlan setup, then ~/.wenlan/bin/wenlan mcp add for the client you use.",
+          "If setup is not done yet, use /setup in Claude Code. For other MCP clients, run npx -y wenlan setup, then ~/.wenlan/bin/wenlan connect for the client you use.",
         ],
         code: {
           label: "Session start",
@@ -525,14 +558,14 @@ export const docPages: DocPage[] = [
       {
         heading: "Maintain memory when it grows",
         body: [
-          "/review is for deep audits. /distill turns related memories into wiki pages.",
+          "/curate is for deep audits. /distill turns related memories into wiki pages.",
           "Use them after meaningful project work, before a new phase, or when recall starts surfacing repeated or stale context.",
         ],
         bullets: [
-          "/review captures: walk unconfirmed memories when you want the full queue.",
-          "/review revisions: accept or dismiss pending memory revisions.",
+          "/curate captures: walk unconfirmed memories when you want the full queue.",
+          "/curate revisions: accept or dismiss pending memory revisions.",
           "/distill: synthesize related memories into readable pages.",
-          "/read: preview a distilled page without leaving the agent session.",
+          "/pages: list recent pages or open a matching page in your editor.",
         ],
       },
     ],
@@ -584,7 +617,7 @@ export const docPages: DocPage[] = [
       {
         heading: "What to skip",
         body: [
-          "Do not store raw command output, long logs, temporary todos, or facts that are already obvious from source files. Wenlan is the memory layer for durable work context, not a transcript archive.",
+          "Do not store raw command output, long logs, temporary todos, or facts that are already obvious from source files. Wenlan keeps durable work context for future agents; it is not a transcript archive.",
           "If the source artifact is the authority, keep the capture short and point to the decision or lesson that a future agent should remember.",
         ],
         bullets: [
@@ -603,7 +636,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Review and distill",
         body: [
-          "/review is for inspecting pending captures or revisions. /distill is for turning repeated clusters into readable pages.",
+          "/curate is for inspecting pending captures or revisions. /distill is for turning repeated clusters into readable pages.",
           "Use review when trust is the question. Use distill when synthesis is the question.",
         ],
       },
@@ -638,14 +671,14 @@ export const docPages: DocPage[] = [
       {
         heading: "Review before trust",
         body: [
-          "A useful memory layer should not silently trust every captured sentence. Some facts are low-confidence, duplicated, contradicted, superseded, or too vague to promote into future context.",
+          "Wenlan should not silently trust every captured sentence. Some facts are low-confidence, duplicated, contradicted, superseded, or too vague to promote into future context.",
           "Wenlan keeps those states visible so the human can confirm, correct, dismiss, forget, or let the daemon keep the item out of trusted context.",
         ],
       },
       {
         heading: "Capture queue",
         body: [
-          "Use /review captures when you want to walk unconfirmed memories. Confirm the captures that are durable and reject or forget the ones that should not carry forward.",
+          "Use /curate captures when you want to walk unconfirmed memories. Confirm the captures that are durable and reject or forget the ones that should not carry forward.",
           "In MCP-only clients, list_pending and confirm_memory expose the same basic flow: inspect candidates, then confirm one source_id when it is worth keeping.",
         ],
         code: {
@@ -657,7 +690,7 @@ export const docPages: DocPage[] = [
         heading: "Revisions and supersession",
         body: [
           "When a fact changes, prefer a correction that supersedes the old memory over a silent rewrite. The old context still explains why future sessions might see a historical decision.",
-          "/review revisions is for staged memory updates. Accept a revision when the new statement is the right current record; dismiss it when the old memory should remain.",
+          "/curate revisions is for staged memory updates. Accept a revision when the new statement is the right current record; dismiss it when the old memory should remain.",
         ],
       },
       {
@@ -756,7 +789,7 @@ export const docPages: DocPage[] = [
         heading: "Daemon and MCP",
         body: [
           "The local daemon is the source of truth. It owns the database, search, distill cycles, provenance, and API.",
-          "The MCP server is the bridge. Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, and other MCP clients can connect to the same local memory layer.",
+          "The MCP server is the bridge. Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, and other MCP clients can connect to the same local daemon and source-backed wiki.",
         ],
       },
       {
@@ -924,7 +957,7 @@ export const docPages: DocPage[] = [
         heading: "Runtime terms",
         body: [
           "Daemon: wenlan-server, the local process on 127.0.0.1:7878 that owns storage, search, pages, graph context, distill cycles, and the HTTP API.",
-          "MCP connector: wenlan-mcp, the process MCP clients launch so agents can call Wenlan tools. CLI: the wenlan command-line tool for setup, status, doctor, recall, search, store, spaces, models, keys, and MCP config.",
+          "MCP connector: wenlan-mcp, the process MCP clients launch so agents can call Wenlan tools. CLI: the wenlan command-line tool for setup, status, doctor, recall, search, capture, memories, spaces, models, keys, and MCP config.",
         ],
         bullets: [
           "Claude Code plugin: the slash-command workflow layer around the same daemon and MCP connector.",
@@ -960,7 +993,7 @@ export const docPages: DocPage[] = [
         heading: "Evaluation terms",
         body: [
           "Recall@5 measures whether relevant context appears in the top five retrieved results. MRR rewards putting the first relevant result higher. NDCG@10 rewards strong ranking across the top ten.",
-          "Wenlan's public numbers are retrieval-only evals, not end-to-end answer-quality guarantees. They show whether the memory layer surfaces relevant context, not whether a downstream model always reasons correctly.",
+          "Wenlan's public numbers are retrieval-only evals, not end-to-end answer-quality guarantees. They show whether retrieval surfaces relevant context, not whether a downstream model always reasons correctly.",
         ],
         link: {
           label: "Read evaluation",
@@ -979,7 +1012,7 @@ export const docPages: DocPage[] = [
       "How Wenlan is put together: one local daemon, thin clients, shared wire types, local artifacts, and retrieval owned by wenlan-core.",
     metaTitle: "Wenlan Architecture | Docs",
     metaDescription:
-      "Understand Wenlan's daemon-first architecture, Cargo workspace crates, MCP connector, Claude Code plugin, local data layout, and retrieval pipeline.",
+      "Understand Wenlan's daemon-first architecture, Cargo workspace crates, local and remote MCP paths, Claude Code and Codex plugins, local data layout, and retrieval pipeline.",
     keywords: [
       "Wenlan architecture",
       "Wenlan daemon",
@@ -992,20 +1025,20 @@ export const docPages: DocPage[] = [
     readingTime: "7 min read",
     summary: [
       "Wenlan is daemon-first: wenlan-server owns storage, search, pages, graph context, distill cycles, and the HTTP API.",
-      "Claude Code, MCP clients, the CLI, and local tools are thin clients over the same local source of truth.",
+      "Claude Code, Codex, ChatGPT, other MCP clients, the CLI, and local tools are clients over the same source-backed Wenlan system.",
     ],
     sections: [
       {
         heading: "The boundary",
         body: [
           "Wenlan keeps product behavior in one local daemon instead of scattering memory logic across every client. The daemon listens on 127.0.0.1:7878 and owns the database, embeddings, search, pages, graph context, and distill cycles.",
-          "That boundary is what lets Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, VS Code, and terminal commands share the same memory layer without each tool inventing its own store.",
+          "That boundary is what lets Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, VS Code, ChatGPT, Claude.ai, and terminal commands build on the same source-backed wiki without each tool inventing its own store.",
         ],
       },
       {
         heading: "Workspace map",
         body: [
-          "The public repository is a Cargo workspace. The desktop app lives in a separate repo, while the local runtime, CLI, MCP server, shared wire types, core logic, and Claude Code plugin live together.",
+          "The public repository is a Cargo workspace. The desktop app lives in a separate repo, while the local runtime, CLI, MCP server, shared wire types, core logic, Claude Code plugin, and Codex plugin live together.",
         ],
         code: {
           label: "Repository map",
@@ -1019,9 +1052,9 @@ export const docPages: DocPage[] = [
           "The client receives a compact response: memories, pages, decisions, graph context, or diagnostic state. The source of truth stays local.",
         ],
         bullets: [
-          "Claude Code plugin: slash commands such as /brief, /capture, /recall, /distill, and /handoff.",
+          "Claude Code and Codex plugins: slash workflows such as /brief, /capture, /recall, /distill, and /handoff.",
           "wenlan-mcp: MCP tools such as context, capture, recall, distill, list_pending, confirm_memory, forget, and doctor.",
-          "wenlan CLI: setup, service management, status, recall, search, store, spaces, model, key, and doctor.",
+          "wenlan CLI: setup, background service management, status, recall, search, capture, memories, spaces, models, keys, and doctor.",
         ],
       },
       {
@@ -1042,7 +1075,7 @@ export const docPages: DocPage[] = [
         heading: "Platform services",
         body: [
           "Wenlan installs a local runtime into ~/.wenlan/bin. The service manager differs by operating system: launchd on macOS, systemd user units on Linux, and a per-user Task Scheduler logon task on Windows.",
-          "The same daemon contract is used across platforms. Cross-platform support in the public release covers macOS arm64/x64, Linux x86_64/aarch64 with glibc, and Windows x86_64.",
+          "The same daemon contract is used across platforms. Current prebuilt runtime artifacts cover macOS Apple Silicon, Linux x86_64, Linux aarch64 glibc, and Windows x86_64; macOS Intel should be treated as source/dev-only until a public release workflow publishes that artifact again.",
         ],
       },
       {
@@ -1057,6 +1090,151 @@ export const docPages: DocPage[] = [
         },
       },
     ],
+    nextSlug: "product-matrix",
+  },
+  {
+    slug: "product-matrix",
+    group: "Reference",
+    eyebrow: "Matrix",
+    title: "Product Matrix",
+    description:
+      "Map Wenlan's product surfaces, repositories, platforms, status, setup actions, and verification routes before choosing an install path.",
+    metaTitle: "Wenlan Product Matrix | Docs",
+    metaDescription:
+      "Use the Wenlan product matrix to understand the daemon, CLI, local and remote MCP paths, Claude Code and Codex plugins, ChatGPT, the desktop app, platform support, and docs provenance.",
+    keywords: [
+      "Wenlan product matrix",
+      "Wenlan platform matrix",
+      "Wenlan desktop app",
+      "Wenlan MCP clients",
+      "Wenlan Codex plugin",
+    ],
+    updatedAt: DOCS_UPDATED_AT,
+    author: DEFAULT_AUTHOR,
+    readingTime: "6 min read",
+    summary: [
+      "Wenlan turns captures and sources into a source-backed LLM wiki; the daemon owns the data and retrieval boundary behind every client.",
+      "Runtime platform support and desktop app release support are separate rows, not one blended promise.",
+    ],
+    sections: [
+      {
+        heading: "Product surfaces",
+        body: [
+          "Use this matrix before picking an install route. Wenlan is the source-backed LLM wiki; the daemon/runtime owns behavior, while the CLI, local and remote MCP, Claude Code plugin, Codex plugin, ChatGPT, other clients, and optional desktop app are ways to reach it.",
+          "The daemon owns the database, pages, sessions, and retrieval behavior. Client surfaces should be debugged by checking daemon health first, then the client-specific config.",
+        ],
+        bullets: productSurfaceBullets,
+      },
+      {
+        heading: "Platform boundaries",
+        body: [
+          "Do not collapse runtime support and desktop app support into one claim. The current product release workflow publishes the runtime for macOS Apple Silicon, Linux x86_64, Linux aarch64 glibc, and Windows x86_64. The optional desktop app release path is narrower and currently targets macOS Apple Silicon.",
+          "macOS Intel still has a launchd service model in the code path, but there is no current prebuilt runtime or desktop app target in the public release workflow. Treat that as source/dev-only until a release workflow adds an artifact.",
+        ],
+        bullets: platformSupportBullets,
+        link: {
+          label: "Read platform support",
+          href: "/docs/platforms",
+        },
+      },
+      {
+        heading: "Start path",
+        body: [
+          "If you are new to Wenlan, start with setup instead of choosing packages by hand. The setup path installs the local runtime under ~/.wenlan/bin, verifies the daemon, and gives MCP clients a stable connector path.",
+        ],
+        link: {
+          label: "Get started",
+          href: "/docs/get-started",
+        },
+      },
+      {
+        heading: "Daily use",
+        body: [
+          "Once setup is green, the daily loop is brief or context at session start, capture when a durable fact appears, recall when history matters, and handoff when a work session should survive the chat.",
+        ],
+        link: {
+          label: "Read daily workflow",
+          href: "/docs/daily-workflow",
+        },
+      },
+      {
+        heading: "Concept map",
+        body: [
+          "Use the concept docs when you need to explain memory types, review queues, spaces, source-backed pages, or why a client is not the source of truth.",
+        ],
+        link: {
+          label: "Read core concepts",
+          href: "/docs/core-concepts",
+        },
+      },
+      {
+        heading: "Architecture boundary",
+        body: [
+          "Use the architecture page when a bug report or integration question needs ownership. Daemon behavior belongs in the main Wenlan repo; desktop UI behavior belongs in the app repo; the website owns public education and SEO surfaces.",
+        ],
+        link: {
+          label: "Read architecture",
+          href: "/docs/architecture",
+        },
+      },
+      {
+        heading: "Package map",
+        body: [
+          "Use the packages page when names are confusing: wenlan is the setup/plugin package, wenlan-mcp is the connector, wenlan-types is the shared wire type crate, and GitHub Releases are the stable artifact record.",
+        ],
+        link: {
+          label: "Read packages",
+          href: "/docs/packages-and-registries",
+        },
+      },
+      {
+        heading: "MCP clients",
+        body: [
+          "Use the MCP client docs for Codex, Cursor, Claude Desktop, VS Code, Gemini CLI, ChatGPT, Claude.ai, and manual fallback config. Local clients use wenlan connect; web clients use Streamable HTTP MCP through a URL you control.",
+        ],
+        link: {
+          label: "Connect MCP clients",
+          href: "/docs/mcp-clients",
+        },
+      },
+      {
+        heading: "Optional desktop app",
+        body: [
+          "The desktop app is a GUI client over the same daemon, not a requirement. Current app releases live in the wenlan-app repo and should be verified against the app version, .wenlan-backend-version pin, and release target before public copy claims support.",
+        ],
+        link: {
+          label: "Read desktop app status",
+          href: "/docs/desktop-app",
+        },
+      },
+      {
+        heading: "Troubleshooting",
+        body: [
+          "When something fails, diagnose in order: daemon health, local CLI, MCP generated config, client restart state, then app-specific UI. That order keeps client bugs from being mistaken for product-data drift.",
+        ],
+        link: {
+          label: "Troubleshoot setup",
+          href: "/docs/troubleshooting",
+        },
+      },
+      {
+        heading: "Release status",
+        body: [
+          "Shipped facts come from version.txt, CHANGELOG.md, release workflows, and repo-owned app pins. Merged main-branch work is not a public release until a release entry and artifact exist.",
+        ],
+        link: {
+          label: "Read release status",
+          href: "/docs/releases-and-versioning",
+        },
+      },
+      {
+        heading: "Route checklist",
+        body: [
+          "This route checklist is intentionally public. It is the website-level contract for whether users can move from setup, to concepts, to platform support, to troubleshooting without relying on private repo knowledge.",
+        ],
+        bullets: productRouteBullets,
+      },
+    ],
     nextSlug: "commands",
   },
   {
@@ -1065,10 +1243,10 @@ export const docPages: DocPage[] = [
     eyebrow: "Reference",
     title: "Commands and Tools",
     description:
-      "The essential Claude Code commands and MCP tools for running Wenlan day to day.",
+      "The essential Claude Code and Codex plugin commands, CLI commands, and MCP tools for running Wenlan day to day.",
     metaTitle: "Wenlan Commands and MCP Tools | Docs",
     metaDescription:
-      "Reference the daily Wenlan Claude Code commands and MCP tools: /init, /brief, context, /capture, /recall, /handoff, scoped /review, /distill, and doctor.",
+      "Reference the daily Wenlan plugin, CLI, and MCP commands for Claude Code, Codex, and other clients: /setup, /brief, context, /capture, /recall, /handoff, /curate, /distill, and doctor.",
     keywords: [
       "Wenlan commands",
       "MCP tools",
@@ -1080,7 +1258,7 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Most Claude Code users need /init for setup, then four daily commands: /brief, /capture, /recall, and /handoff.",
+      "Most Claude Code users need /setup for setup, then four daily commands: /brief, /capture, /recall, and /handoff.",
       "MCP clients start with context, then use capture, recall, distill, list pending, confirm memory, forget, and doctor.",
     ],
     sections: [
@@ -1090,7 +1268,7 @@ export const docPages: DocPage[] = [
           "Use these commands for the normal memory loop in Claude Code.",
         ],
         bullets: [
-          "/init: install or verify the daemon, plugin, MCP route, and memory round trip.",
+          "/setup: install or verify the daemon, plugin, MCP route, and memory round trip.",
           "/brief: load relevant context at the start of a session.",
           "/capture: save one durable memory with the reason it matters.",
           "/recall: search local memory for a specific topic.",
@@ -1103,12 +1281,11 @@ export const docPages: DocPage[] = [
           "Use these when memory needs inspection, cleanup, or synthesis.",
         ],
         bullets: [
-          "/review captures: walk unconfirmed captures; bare /review only prints help.",
-          "/review revisions: walk pending revisions when /brief shows more than the top few.",
+          "/curate captures: walk unconfirmed captures; bare /curate only prints help.",
+          "/curate revisions: walk pending revisions when /brief shows more than the top few.",
           "/distill: synthesize related memories into wiki pages.",
-          "/read: preview a distilled page from inside Claude Code.",
+          "/pages: list recent pages or open a matching page in your editor.",
           "/forget: delete a memory by ID when it should not remain in Wenlan.",
-          "/debrief: alias for /handoff.",
         ],
       },
       {
@@ -1130,7 +1307,7 @@ export const docPages: DocPage[] = [
         heading: "How to choose",
         body: [
           "Start with /brief in Claude Code or context in another MCP client. Save durable knowledge with capture. Search history with recall. Close a serious session with /handoff.",
-          "Use /review, /distill, and /read when memory needs maintenance or a topic deserves a page.",
+          "Use /curate, /distill, and /pages when memory needs maintenance or a topic deserves a page.",
         ],
       },
     ],
@@ -1142,15 +1319,15 @@ export const docPages: DocPage[] = [
     eyebrow: "Plugin",
     title: "Claude Code Plugin",
     description:
-      "Use Wenlan's richest workflow inside Claude Code: setup, session brief, capture, recall, review, distill, read, and handoff.",
+      "Use Wenlan's richest workflow inside Claude Code: setup, session brief, capture, recall, curation, distillation, pages, and handoff.",
     metaTitle: "Wenlan Claude Code Plugin | Docs",
     metaDescription:
-      "Install and use the Wenlan Claude Code plugin with /init, /brief, /capture, /recall, /handoff, /distill, /review, /forget, the SessionStart hook, and local memory mode.",
+      "Install and use the Wenlan Claude Code plugin with /setup, /brief, /capture, /recall, /handoff, /distill, /curate, /forget, the SessionStart hook, and local memory mode.",
     keywords: [
       "Wenlan Claude Code plugin",
       "Claude Code memory plugin",
       "Wenlan slash commands",
-      "Wenlan /init",
+      "Wenlan /setup",
       "Claude Code MCP memory",
     ],
     updatedAt: DOCS_UPDATED_AT,
@@ -1158,14 +1335,14 @@ export const docPages: DocPage[] = [
     readingTime: "6 min read",
     summary: [
       "The Claude Code plugin is the fastest and richest Wenlan path because it adds slash commands around the local daemon and MCP connector.",
-      "/init is the setup and repair command: it verifies daemon reachability, MCP wiring, local memory setup, and a first round trip.",
+      "/setup is the setup and repair command: it verifies daemon reachability, MCP wiring, local memory setup, and a first round trip.",
     ],
     sections: [
       {
         heading: "Install path",
         body: [
-          "Install through Claude Code's plugin marketplace, restart if Claude Code asks, then run /init.",
-          "/init is designed to be the single setup check. It installs or verifies the local runtime, configures local memory, checks daemon and MCP reachability, and confirms a memory round trip.",
+          "Install through Claude Code's plugin marketplace, restart if Claude Code asks, then run /setup.",
+          "/setup is designed to be the single setup check. It installs or verifies the local runtime, configures local memory, checks daemon and MCP reachability, and confirms a memory round trip.",
         ],
         code: {
           label: "Claude Code",
@@ -1194,13 +1371,13 @@ export const docPages: DocPage[] = [
         heading: "SessionStart hook",
         body: [
           "The plugin includes a SessionStart hook that probes the local daemon on 127.0.0.1:7878.",
-          "The hook is intentionally light: it prints a nudge to run /init when the daemon is down. It does not own installation logic and should not block a session.",
+          "The hook is intentionally light: it prints a nudge to run /setup when the daemon is down. It does not own installation logic and should not block a session.",
         ],
       },
       {
         heading: "Local memory mode",
         body: [
-          "By default, /init configures local memory. That means no model download, no API key, and no cloud sync requirement for the basic memory loop.",
+          "By default, /setup configures local memory. That means no model download, no API key, and no cloud sync requirement for the basic memory loop.",
           "The daemon stores, embeds, deduplicates, and serves hybrid search. Claude Code skills can still classify captures, write handoffs, and synthesize pages through the agent-side model fallback because the agent already has language judgment in the active session.",
         ],
       },
@@ -1218,7 +1395,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Plugin versus MCP-only",
         body: [
-          "MCP-only setup gives clients tools for context, capture, recall, doctor, and page distillation. It does not install Claude Code slash skills like /brief, /handoff, /distill, or /init.",
+          "MCP-only setup gives clients tools for context, capture, recall, doctor, and page distillation. It does not install Claude Code slash skills like /brief, /handoff, /distill, or /setup.",
           "Use the plugin when Claude Code is your main surface. Use MCP-only setup when you want Wenlan in other clients or when you intentionally want raw MCP tools without the Claude Code workflow layer.",
         ],
         link: {
@@ -1238,19 +1415,19 @@ export const docPages: DocPage[] = [
       "Use the Wenlan CLI to install the runtime, manage the daemon, inspect status, search memory, and wire MCP clients.",
     metaTitle: "Wenlan CLI and Service Management | Docs",
     metaDescription:
-      "Learn the Wenlan CLI commands for setup, daemon service management, doctor diagnostics, recall, search, store, spaces, and MCP client configuration.",
+      "Learn the Wenlan CLI commands for setup, background service management, doctor diagnostics, recall, search, capture, memories, spaces, and MCP client configuration.",
     keywords: [
       "Wenlan CLI",
       "wenlan doctor",
-      "wenlan install",
+      "wenlan background on",
       "wenlan service management",
-      "wenlan mcp add",
+      "wenlan connect",
     ],
     updatedAt: DOCS_UPDATED_AT,
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "The wenlan CLI is the terminal control surface for setup, diagnostics, service management, recall, search, store, spaces, models, keys, and MCP config.",
+      "The wenlan CLI is the terminal control surface for setup, diagnostics, background service management, recall, search, capture, memories, spaces, models, keys, and MCP config.",
       "The daemon still owns memory. The CLI talks to that daemon instead of writing the database directly.",
     ],
     sections: [
@@ -1258,7 +1435,7 @@ export const docPages: DocPage[] = [
         heading: "Install the runtime",
         body: [
           "For non-Claude Code clients, start by installing the local Wenlan runtime. This puts the CLI, daemon, and MCP connector under ~/.wenlan/bin.",
-          "Claude Code plugin users can usually run /init instead; it verifies the same local runtime and MCP route from inside Claude Code.",
+          "Claude Code plugin users can usually run /setup instead; it verifies the same local runtime and MCP route from inside Claude Code.",
         ],
         code: {
           label: "Terminal",
@@ -1279,7 +1456,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Use memory from the terminal",
         body: [
-          "The CLI can recall, search, store, and list memory from scripts or from a plain terminal session. It is useful when you need a repeatable diagnostic or when your current tool does not expose Wenlan commands directly.",
+          "The CLI can recall, search, capture, and show recent memories from scripts or from a plain terminal session. It is useful when you need a repeatable diagnostic or when your current tool does not expose Wenlan commands directly.",
           "Use specific queries. Project names, feature names, people, and decisions usually retrieve better context than generic phrases.",
         ],
         code: {
@@ -1290,12 +1467,12 @@ export const docPages: DocPage[] = [
       {
         heading: "Wire MCP clients",
         body: [
-          "After setup, use wenlan mcp add to configure a supported MCP client. The command writes or previews the client-specific config that launches the local wenlan-mcp connector.",
+          "After setup, use wenlan connect to configure a supported MCP client. The command writes or previews the client-specific config that launches the local wenlan-mcp connector.",
           "Use --dry-run when you want to inspect the generated config before changing a client settings file.",
         ],
         code: {
           label: "MCP setup",
-          code: "~/.wenlan/bin/wenlan mcp add codex\n~/.wenlan/bin/wenlan mcp add cursor --dry-run",
+          code: "~/.wenlan/bin/wenlan connect codex\n~/.wenlan/bin/wenlan connect cursor --dry-run",
         },
       },
       {
@@ -1358,29 +1535,29 @@ export const docPages: DocPage[] = [
       {
         heading: "Claude Code plugin users",
         body: [
-          "Claude Code plugin updates happen through Claude Code's plugin marketplace flow. After the plugin changes, restart Claude Code if prompted and run /init again.",
-          "/init verifies the plugin, daemon, MCP route, and a memory round trip, so it is the right post-update check.",
+          "Claude Code plugin updates happen through Claude Code's plugin marketplace flow. After the plugin changes, restart Claude Code if prompted and run /setup again.",
+          "/setup verifies the plugin, daemon, MCP route, and a memory round trip, so it is the right post-update check.",
         ],
         code: {
           label: "Claude Code",
-          code: "/init",
+          code: "/setup",
         },
       },
       {
         heading: "MCP client settings",
         body: [
-          "If wenlan-mcp moved, or a client still launches an old path, rerun wenlan mcp add for that client. Use --dry-run when you want to inspect the generated config first.",
+          "If wenlan-mcp moved, or a client still launches an old path, rerun wenlan connect for that client. Use --dry-run when you want to inspect the generated config first.",
           "Most MCP clients need a restart after settings change. Verify by running the client's Wenlan doctor or a small capture/recall round trip.",
         ],
         code: {
           label: "MCP refresh",
-          code: "~/.wenlan/bin/wenlan mcp add codex --dry-run\n~/.wenlan/bin/wenlan mcp add cursor",
+          code: "~/.wenlan/bin/wenlan connect codex --dry-run\n~/.wenlan/bin/wenlan connect cursor",
         },
       },
       {
         heading: "Uninstall the service",
         body: [
-          "wenlan uninstall removes the per-user service registration: launchd on macOS, systemd user units on Linux, or the Windows Task Scheduler logon task.",
+          "wenlan background off stops Wenlan and removes the per-user service registration: launchd on macOS, systemd user units on Linux, or the Windows Task Scheduler logon task.",
           "That does not delete memory data. Do not delete ~/.wenlan or the daemon data directory unless you have decided you no longer need those records.",
         ],
         code: {
@@ -1448,18 +1625,18 @@ export const docPages: DocPage[] = [
       {
         heading: "Claude Code plugin upgrades",
         body: [
-          "Claude Code users should update through the plugin marketplace flow, restart Claude Code if prompted, then run /init.",
-          "/init is the post-upgrade smoke test because it checks plugin installation, daemon reachability, MCP wiring, and the memory round trip from the tool where you work.",
+          "Claude Code users should update through the plugin marketplace flow, restart Claude Code if prompted, then run /setup.",
+          "/setup is the post-upgrade smoke test because it checks plugin installation, daemon reachability, MCP wiring, and the memory round trip from the tool where you work.",
         ],
         code: {
           label: "Claude Code",
-          code: "/plugin marketplace add 7xuanlu/claude-plugins\n/plugin install wenlan@7xuanlu\n/init",
+          code: "/plugin marketplace add 7xuanlu/claude-plugins\n/plugin install wenlan@7xuanlu\n/setup",
         },
       },
       {
         heading: "Current runtime shape",
         body: [
-          "The current public docs describe the 0.12.0 runtime shape: Claude Code plugin, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages, real git versioning for readable pages, session handoffs, and status artifacts, wenlan restart, wenlan reranker, and cross-platform service registration.",
+          "The current public docs describe the 0.12.0 runtime shape: Claude Code plugin, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages, real git versioning for readable pages, session handoffs, and status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
           "The biggest practical upgrade checks are platform support, package path alignment, and spaces. Confirm your machine's service manager, confirm MCP clients launch the connector under ~/.wenlan/bin, and confirm the active space is the one you expect.",
         ],
         link: {
@@ -1471,7 +1648,7 @@ export const docPages: DocPage[] = [
         heading: "Client restarts",
         body: [
           "Most MCP clients read server configuration at startup. If tools disappear after an upgrade, restart MCP clients before rewriting configuration.",
-          "If restart does not fix it, rerun wenlan mcp add for that client. Use --dry-run first when you want to inspect the generated command and path.",
+          "If restart does not fix it, rerun wenlan connect for that client. Use --dry-run first when you want to inspect the generated command and path.",
         ],
         link: {
           label: "Connect MCP clients",
@@ -1481,7 +1658,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Data safety",
         body: [
-          "Normal upgrades should not delete memory data. wenlan uninstall removes service registration, not ~/.wenlan or the daemon database.",
+          "Normal upgrades should not delete memory data. wenlan background off removes service registration, not ~/.wenlan or the daemon database.",
           "For machine migration, manual cleanup, or risky experiments, back up both readable ~/.wenlan artifacts and the platform daemon data directory. Then verify with doctor and a capture/recall round trip before trusting the restored install.",
         ],
         link: {
@@ -1501,7 +1678,7 @@ export const docPages: DocPage[] = [
       "Know which Wenlan package name maps to the plugin, runtime setup, MCP connector, Rust crates, and release binaries.",
     metaTitle: "Wenlan Packages and Registries | Docs",
     metaDescription:
-      "Understand Wenlan package names across the Claude Code plugin, npm setup, wenlan-mcp, wenlan-types, crates.io, and GitHub Releases.",
+      "Understand Wenlan package names across the Claude Code and Codex plugins, npm setup, wenlan-mcp, wenlan-types, crates.io, and GitHub Releases.",
     keywords: [
       "Wenlan packages",
       "@7wenlanxuanlu",
@@ -1513,14 +1690,14 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "4 min read",
     summary: [
-      "Wenlan has several public package names because one local product crosses Claude Code plugins, npm setup, MCP clients, Rust crates, and release binaries.",
-      "Most users should not choose a registry by hand. Install through Claude Code or npx setup, then let wenlan mcp add wire each client to the local connector.",
+      "Wenlan has several public package names because one product crosses Claude Code and Codex plugins, npm setup, local and remote MCP clients, Rust crates, and release binaries.",
+      "Most users should not choose a registry by hand. Install through Claude Code or npx setup, then let wenlan connect wire each client to the local connector.",
     ],
     sections: [
       {
         heading: "Why the names differ",
         body: [
-          "Wenlan is one local memory layer with several runtime surfaces. The daemon owns memory, the CLI manages setup and diagnostics, wenlan-mcp bridges MCP clients, and the Claude Code plugin adds the slash-command workflow.",
+          "Wenlan is one source-backed LLM wiki with several runtime surfaces. The daemon owns data and retrieval, the CLI manages setup and diagnostics, wenlan-mcp bridges local and web clients, and the Claude Code and Codex plugins add slash workflows.",
           "The registry names map to ecosystems, not separate products. When docs mention several names, they are usually describing different entry points into the same local daemon.",
         ],
         code: {
@@ -1531,8 +1708,8 @@ export const docPages: DocPage[] = [
       {
         heading: "Normal install paths",
         body: [
-          "Claude Code users should use the plugin marketplace path, then run /init. That verifies the plugin, local daemon, MCP route, and a memory round trip from inside Claude Code.",
-          "Other MCP clients should run the setup package once, then use wenlan mcp add for each client. That keeps client config pointed at the local connector installed under ~/.wenlan/bin.",
+          "Claude Code users should use the plugin marketplace path, then run /setup. That verifies the plugin, local daemon, MCP route, and a memory round trip from inside Claude Code.",
+          "Other MCP clients should run the setup package once, then use wenlan connect for each client. That keeps client config pointed at the local connector installed under ~/.wenlan/bin.",
         ],
         code: {
           label: "Install paths",
@@ -1572,7 +1749,7 @@ export const docPages: DocPage[] = [
         heading: "Verify your install",
         body: [
           "After changing packages, verify the runtime first. status and doctor tell you whether the local daemon is healthy before you debug an MCP client.",
-          "Then run wenlan mcp add with --dry-run for the client you care about. The output shows which connector path the client should launch.",
+          "Then run wenlan connect with --dry-run for the client you care about. The output shows which connector path the client should launch.",
         ],
         code: {
           label: "Verification",
@@ -1603,20 +1780,17 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Wenlan's released runtime supports macOS arm64/x64, Linux x86_64/aarch64 with glibc, and Windows x86_64.",
-      "The daemon contract is the same across platforms, but service registration, data paths, and model acceleration differ.",
+      "Wenlan's current prebuilt runtime release covers macOS Apple Silicon, Linux x86_64, Linux aarch64 glibc, and Windows x86_64.",
+      "The daemon contract is the same across platforms, but release artifacts, service registration, data paths, app support, and model acceleration differ.",
     ],
     sections: [
       {
         heading: "Supported platforms",
         body: [
-          "Wenlan v0.7.0 broadened the local runtime from macOS-first to cross-platform support across macOS, Linux, and Windows.",
-          "The same daemon, CLI, and MCP connector shape applies on each platform. The operating-system integration is what changes.",
+          "Wenlan v0.7.0 broadened the local runtime from macOS-first to cross-platform support across macOS, Linux, and Windows. The current release workflow publishes prebuilt runtime artifacts for macOS Apple Silicon, Linux x86_64, Linux aarch64 glibc, and Windows x86_64.",
+          "The same daemon, CLI, and MCP connector shape applies on each platform. The operating-system integration and release artifact availability are what change.",
         ],
-        code: {
-          label: "Runtime matrix",
-          code: platformMatrix,
-        },
+        bullets: platformSupportBullets,
       },
       {
         heading: "Service registration",
@@ -1658,7 +1832,7 @@ export const docPages: DocPage[] = [
         heading: "After setup",
         body: [
           "Whatever platform you use, verify setup the same way: run wenlan status and wenlan doctor, then do one capture/recall round trip from the client you care about.",
-          "If the daemon works but an MCP client does not, restart the client and rerun wenlan mcp add for that client before assuming the runtime is broken.",
+          "If the daemon works but an MCP client does not, restart the client and rerun wenlan connect for that client before assuming the runtime is broken.",
         ],
       },
     ],
@@ -1693,7 +1867,7 @@ export const docPages: DocPage[] = [
         heading: "Local daemon boundary",
         body: [
           "wenlan-server is the local API boundary. Clients do not write the database directly; they ask the daemon to store, search, recall, distill, confirm, or diagnose memory.",
-          "The default bind address is 127.0.0.1:7878. That local-only default is part of the product boundary: one machine owns the memory layer unless you deliberately change daemon networking.",
+          "The default bind address is 127.0.0.1:7878. That local-only default is part of the product boundary: one machine owns the daemon and its data unless you deliberately change daemon networking.",
         ],
       },
       {
@@ -1711,7 +1885,7 @@ export const docPages: DocPage[] = [
         heading: "Client mapping",
         body: [
           "Claude Code slash commands and MCP tools are product workflows over these routes. /brief and context ask for a context bundle. /capture and capture store one durable memory. /distill triggers page synthesis. doctor checks daemon and setup state.",
-          "The CLI uses the same daemon for status, doctor, search, recall, store, list, model, key, MCP config, and spaces.",
+          "The CLI uses the same daemon for status, doctor, search, recall, capture, memories, models, keys, MCP config, and spaces.",
         ],
       },
       {
@@ -1804,7 +1978,7 @@ export const docPages: DocPage[] = [
         heading: "Review and confirm",
         body: [
           "memory/list can filter unconfirmed memories with confirmed=false. memory/confirm/{source_id} confirms or unconfirms one item.",
-          "This is useful for a local review UI or a diagnostic script. In normal agent work, prefer /review or the MCP review tools when available.",
+          "This is useful for a local review UI or a diagnostic script. In normal agent work, prefer /curate or the MCP review tools when available.",
         ],
         code: {
           label: "Review calls",
@@ -1924,12 +2098,12 @@ export const docPages: DocPage[] = [
       "Separate work, personal, client, and project memory, and understand how Wenlan resolves the active space.",
     metaTitle: "Wenlan Spaces | Docs",
     metaDescription:
-      "Learn how Wenlan spaces isolate AI work memory by project, client, or context using WENLAN_SPACE, spaces.toml, wenlan space commands, and doctor resolver state.",
+      "Learn how Wenlan spaces isolate AI work memory by project, client, or context using WENLAN_SPACE, spaces.toml, wenlan spaces commands, and doctor resolver state.",
     keywords: [
       "Wenlan spaces",
       "AI memory spaces",
       "WENLAN_SPACE",
-      "wenlan space commands",
+      "wenlan spaces commands",
       "separate AI work memory",
     ],
     updatedAt: DOCS_UPDATED_AT,
@@ -1951,7 +2125,7 @@ export const docPages: DocPage[] = [
         heading: "Set the active space",
         body: [
           "The most explicit override is WENLAN_SPACE. It is useful when launching an agent for a specific context and you want every capture and recall to stay in that bucket.",
-          "The CLI also includes wenlan space commands for listing, adding, inspecting, and moving spaces.",
+          "The CLI also includes wenlan spaces commands for listing, adding, inspecting, and moving spaces.",
         ],
         code: {
           label: "Space commands",
@@ -2026,7 +2200,7 @@ export const docPages: DocPage[] = [
         heading: "Why the graph exists",
         body: [
           "Text search can find matching words, and vector search can find similar meaning. The graph helps with relationships: who worked on what, which project uses which tool, and which observations belong together.",
-          "Wenlan uses graph context as part of the local memory layer so agents can recover surrounding facts without replaying a full chat history.",
+          "Wenlan uses graph context in retrieval so agents can recover surrounding facts without replaying a full chat history.",
         ],
       },
       {
@@ -2077,7 +2251,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Review and cleanup",
         body: [
-          "Graph data can be wrong when a name is ambiguous, a project changes direction, or an imported link was noisy. Use review, corrections, spaces, and forget when the memory layer needs cleanup.",
+          "Graph data can be wrong when a name is ambiguous, a project changes direction, or an imported link was noisy. Use review, corrections, spaces, and forget when stored context needs cleanup.",
           "If graph context feels like it is mixing unrelated worlds, check the active space before changing the data model. Many apparent graph problems are actually context-boundary problems.",
         ],
         link: {
@@ -2097,7 +2271,7 @@ export const docPages: DocPage[] = [
       "Understand how Wenlan turns atomic captures into readable pages with source memory IDs, revision state, and refresh paths.",
     metaTitle: "Wenlan Source-Backed Pages | Docs",
     metaDescription:
-      "Learn how Wenlan distilled pages work: source-backed Markdown pages, provenance, stale reasons, revision state, /distill, and /read.",
+      "Learn how Wenlan distilled pages work: source-backed Markdown pages, provenance, stale reasons, revision state, /distill, and /pages.",
     keywords: [
       "Wenlan pages",
       "source-backed pages",
@@ -2128,14 +2302,14 @@ export const docPages: DocPage[] = [
         ],
       },
       {
-        heading: "Distill and read",
+        heading: "Distill and open",
         body: [
-          "/distill asks Wenlan to synthesize or refresh pages from related memories. /read previews a page inside the agent session without forcing you to leave the tool.",
+          "/distill asks Wenlan to synthesize or refresh pages from related memories. /pages lists recent pages or opens a matching page in your editor.",
           "Use distillation before a new project phase, after a long sprint, or when recall keeps surfacing the same cluster of memories.",
         ],
         code: {
           label: "Claude Code",
-          code: "/distill\n/read <page>",
+          code: "/distill\n/pages <query>",
         },
       },
       {
@@ -2176,7 +2350,7 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "The current CLI does not expose a general Markdown-vault importer. Migrate selected durable notes explicitly through store, capture, or the memory store API.",
+      "The current CLI does not expose a general Markdown-vault importer. Migrate selected durable notes explicitly through capture or the memory store API.",
       "Wenlan's pages and session logs are readable Markdown, so the human record remains portable even though retrieval needs the daemon.",
     ],
     sections: [
@@ -2184,13 +2358,13 @@ export const docPages: DocPage[] = [
         heading: "What migration is for",
         body: [
           "Migration is useful when you already have durable project notes, meeting notes, or research notes that should become searchable AI work context.",
-          "Do not migrate everything just because it exists. Wenlan works best when selected material is useful to future agents, not when the memory layer becomes a bulk file mirror.",
+          "Do not migrate everything just because it exists. Wenlan works best when selected material is useful to future agents, not when its sources become a bulk file mirror.",
         ],
       },
       {
         heading: "Migrate selected Markdown context",
         body: [
-          "Use wenlan store or normal capture flows for selected durable notes. For larger moves, use a small script that reads source files you choose and posts distilled facts to /api/memory/store.",
+          "Use wenlan capture or normal client capture flows for selected durable notes. For larger moves, use a small script that reads source files you choose and posts distilled facts to /api/memory/store.",
           "Start with a representative sample, then recall against it before moving a larger archive. That gives you a chance to see whether the migrated context is useful or noisy.",
         ],
         code: {
@@ -2547,7 +2721,7 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Wenlan is local-first: the memory layer is owned by the daemon on your machine.",
+      "Wenlan is local-first: the daemon, data, and readable artifacts live on your machine.",
       "Markdown artifacts remain readable while the database stores retrieval indexes and metadata.",
     ],
     sections: [
@@ -2555,7 +2729,7 @@ export const docPages: DocPage[] = [
         heading: "Local-first by default",
         body: [
           "Wenlan is designed so the durable context your agents use lives locally first. That context can include project decisions, private constraints, preferences, and work history.",
-          "There is no cloud sync or telemetry by default. Connected AI tools may still send prompts to their own model providers; Wenlan's job is to keep the memory layer itself local, inspectable, and shared across tools.",
+          "There is no cloud sync or telemetry by default. Connected AI tools may still send prompts to their own model providers; Wenlan keeps its daemon data and readable artifacts local, inspectable, and available across tools.",
         ],
       },
       {
@@ -2646,7 +2820,7 @@ export const docPages: DocPage[] = [
         heading: "Before moving machines",
         body: [
           "Install the Wenlan runtime on the new machine first, then restore the backed-up data into the matching platform locations.",
-          "MCP client settings may contain absolute paths to wenlan-mcp. After migration, rerun wenlan mcp add for each client instead of assuming old settings still point to the right binary.",
+          "MCP client settings may contain absolute paths to wenlan-mcp. After migration, rerun wenlan connect for each client instead of assuming old settings still point to the right binary.",
         ],
       },
       {
@@ -2686,7 +2860,7 @@ export const docPages: DocPage[] = [
       "Configure Wenlan spaces, MCP clients, daemon bind address, local paths, models, and keys without editing the database by hand.",
     metaTitle: "Wenlan Configuration: Spaces, MCP, Daemon, Keys | Docs",
     metaDescription:
-      "Configure Wenlan with /init, wenlan setup, wenlan mcp add, WENLAN_SPACE, WENLAN_BIND_ADDR, local paths, models, API keys, and doctor checks.",
+      "Configure Wenlan with /setup, wenlan setup, wenlan connect, WENLAN_SPACE, WENLAN_BIND_ADDR, local paths, models, API keys, and doctor checks.",
     keywords: [
       "Wenlan configuration",
       "Wenlan settings",
@@ -2699,7 +2873,7 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Configure Wenlan through /init, npx setup, wenlan mcp add, wenlan space, wenlan model, and wenlan key before editing files by hand.",
+      "Configure Wenlan through /setup, npx setup, wenlan connect, wenlan spaces, wenlan models, and wenlan keys before editing files by hand.",
       "Most users only need WENLAN_SPACE for context separation and, rarely, WENLAN_BIND_ADDR for Docker or VM access.",
       "Run wenlan doctor after configuration changes to verify daemon health, MCP wiring, local paths, model state, and key state.",
     ],
@@ -2707,12 +2881,12 @@ export const docPages: DocPage[] = [
       {
         heading: "Configuration quick path",
         body: [
-          "The safest way to configure Wenlan is command-driven: run /init in Claude Code, npx -y wenlan setup for other MCP clients, then let wenlan mcp add write the client-specific MCP configuration.",
+          "The safest way to configure Wenlan is command-driven: run /setup in Claude Code, npx -y wenlan setup for other MCP clients, then let wenlan connect write the client-specific MCP configuration.",
           "After changing spaces, MCP clients, daemon binding, models, or keys, run wenlan doctor. It checks the daemon, local runtime, MCP connector, model state, key state, and common path issues before you debug by hand.",
         ],
         code: {
           label: "Setup checks",
-          code: "/init\nnpx -y wenlan setup\n~/.wenlan/bin/wenlan mcp add cursor\n~/.wenlan/bin/wenlan doctor",
+          code: "/setup\nnpx -y wenlan setup\n~/.wenlan/bin/wenlan connect cursor\n~/.wenlan/bin/wenlan doctor",
         },
         link: {
           label: "Read the Claude Code memory guide",
@@ -2723,22 +2897,22 @@ export const docPages: DocPage[] = [
         heading: "Spaces",
         body: [
           "Spaces separate work, personal, client, and project memory without requiring multiple Wenlan installs. Set a space for a shell session with WENLAN_SPACE, or define stable spaces in ~/.wenlan/spaces.toml.",
-          "Use wenlan space commands when you want the CLI to list, create, inspect, or move spaces instead of editing the file directly.",
+          "Use wenlan spaces commands when you want the CLI to list, create, inspect, or move spaces instead of editing the file directly.",
         ],
         code: {
           label: "Space config",
-          code: "WENLAN_SPACE=client-a claude\nwenlan space list\nwenlan space add client-a",
+          code: "WENLAN_SPACE=client-a claude\nwenlan spaces list\nwenlan spaces add client-a",
         },
       },
       {
         heading: "MCP client wiring",
         body: [
-          "MCP clients need to launch the same local wenlan-mcp connector. The normal path is wenlan mcp add because each client stores MCP config differently.",
-          "If a client requires manual JSON, use wenlan mcp add --dry-run to inspect the command path for your machine, then paste the generated shape into that client's settings.",
+          "MCP clients need to launch the same local wenlan-mcp connector. The normal path is wenlan connect because each client stores MCP config differently.",
+          "If a client requires manual JSON, use wenlan connect --dry-run to inspect the command path for your machine, then paste the generated shape into that client's settings.",
         ],
         code: {
           label: "Client config",
-          code: mcpAddCommand,
+          code: mcpConnectCommand,
         },
       },
       {
@@ -2798,14 +2972,14 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Most users should configure Wenlan with /init, wenlan setup, wenlan mcp add, wenlan model, wenlan key, and wenlan space.",
+      "Most users should configure Wenlan with /setup, wenlan setup, wenlan connect, wenlan models, wenlan keys, and wenlan spaces.",
       "Environment variables are for scoped overrides: spaces, daemon networking, dev isolation, Windows runtime repair, and eval runs.",
     ],
     sections: [
       {
         heading: "Use commands first",
         body: [
-          "Wenlan's normal configuration path is command-driven. Use /init or npx setup for installation, wenlan mcp add for clients, wenlan space for spaces, and wenlan key or wenlan model for optional language features.",
+          "Wenlan's normal configuration path is command-driven. Use /setup or npx setup for installation, wenlan connect for clients, wenlan spaces for spaces, and wenlan keys or wenlan models for optional language features.",
           "Reach for environment variables when you need a temporary override, a scripted run, or a development/eval setup that should not become the default for every session.",
         ],
       },
@@ -2889,31 +3063,33 @@ export const docPages: DocPage[] = [
     eyebrow: "MCP",
     title: "Connect MCP Clients",
     description:
-      "Use one local Wenlan memory layer from Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, and other MCP clients.",
+      "Connect Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, ChatGPT, Claude.ai, and other MCP clients to Wenlan.",
     metaTitle: "Connect MCP Clients to Wenlan | Docs",
     metaDescription:
-      "Run npx -y wenlan setup, add Wenlan with wenlan mcp add, and share one local AI work memory layer across MCP-compatible tools.",
+      "Connect local clients with wenlan connect, or connect ChatGPT and Claude.ai through Wenlan's Streamable HTTP MCP Remote Access path.",
     keywords: [
       "MCP client setup",
       "Claude Code MCP",
       "Cursor MCP",
       "Codex MCP",
       "Gemini CLI MCP",
+      "ChatGPT MCP",
+      "Streamable HTTP MCP",
       "wenlan-mcp",
     ],
     updatedAt: DOCS_UPDATED_AT,
     author: DEFAULT_AUTHOR,
     readingTime: "4 min read",
     summary: [
-      "Wenlan's daemon is the local source of truth; wenlan-mcp is the bridge MCP clients launch.",
-      "Claude Code users should start with the plugin. Other clients should run Wenlan setup first, then let the CLI add the MCP server config.",
+      "Wenlan's daemon owns the source-backed wiki and retrieval boundary; wenlan-mcp exposes it over stdio for local clients and Streamable HTTP for web clients.",
+      "Claude Code and Codex have plugin paths, local clients use wenlan connect, and ChatGPT or Claude.ai use a Remote Access URL.",
     ],
     sections: [
       {
         heading: "How the pieces connect",
         body: [
-          "The daemon runs locally and owns memory. wenlan-mcp is the connector MCP clients spawn when they need Wenlan tools.",
-          "Once connected, a client can load context, capture, recall, distill, confirm, forget, and diagnose memory.",
+          "The daemon runs locally and owns captures, source-backed pages, sessions, and retrieval. wenlan-mcp is the connector clients use when they need Wenlan tools.",
+          "Local clients launch wenlan-mcp over stdio. ChatGPT and Claude.ai use its Streamable HTTP endpoint through a temporary HTTPS tunnel URL. Remote Access launches the loopback server with --no-auth, so possession of the URL grants access. Both paths reach the same daemon.",
         ],
       },
       {
@@ -2929,17 +3105,17 @@ export const docPages: DocPage[] = [
       {
         heading: "Add a client",
         body: [
-          "After setup, ask the Wenlan CLI to write the client-specific MCP configuration. It uses the local wenlan-mcp binary installed beside the CLI, with npm as a fallback when needed.",
+          "After setup, ask the Wenlan CLI to write a local client's MCP configuration with wenlan connect <client>. It uses the local wenlan-mcp binary installed beside the CLI, with npm as a fallback when needed.",
         ],
         code: {
           label: "Terminal",
-          code: mcpAddCommand,
+          code: mcpConnectCommand,
         },
       },
       {
         heading: "Manual config fallback",
         body: [
-          "If a client only accepts a raw JSON configuration, point it at the local MCP connector that setup installed. Use wenlan mcp add --dry-run to see the exact path for your machine.",
+          "If a client only accepts a raw JSON configuration, point it at the local MCP connector that setup installed. Use wenlan connect --dry-run to see the exact path for your machine.",
           "If the daemon is running on a non-default local URL for development, wenlan-mcp also accepts --origin-url. Keep normal users on the default 127.0.0.1:7878 path.",
         ],
         code: {
@@ -2962,17 +3138,39 @@ export const docPages: DocPage[] = [
         heading: "Claude Code",
         body: [
           "The Claude Code plugin is the most complete path because it includes slash commands, setup checks, and the daily workflow around the MCP server.",
-          "After installing the plugin, restart Claude Code if prompted, then run /init.",
+          "After installing the plugin, restart Claude Code if prompted, then run /setup.",
         ],
         code: {
           label: "Claude Code",
-          code: "/plugin marketplace add 7xuanlu/claude-plugins\n/plugin install wenlan@7xuanlu\n/init",
+          code: "/plugin marketplace add 7xuanlu/claude-plugins\n/plugin install wenlan@7xuanlu\n/setup",
         },
       },
       {
-        heading: "Other clients",
+        heading: "Codex",
         body: [
-          "Codex, Cursor, Claude Desktop, Gemini CLI, and other MCP clients can use wenlan mcp add when the client is supported.",
+          "Codex can use the Codex plugin shipped in plugin-codex, or connect directly through the local MCP path. The direct path does not require a Wenlan source checkout.",
+        ],
+        code: {
+          label: "Terminal",
+          code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan connect codex",
+        },
+      },
+      {
+        heading: "ChatGPT and Claude.ai",
+        body: [
+          "The guided path is Wenlan desktop app > Remote Access. It starts the released Streamable HTTP MCP server with --no-auth on loopback, creates a temporary HTTPS tunnel URL, and shows the connection steps for both web clients. Possession of the URL grants access.",
+          "In ChatGPT, open Settings > Apps > Advanced settings, enable Developer mode, create an app, and paste the Remote Access URL with No Auth. In Claude.ai, use Settings > Connectors > Add Custom Connector.",
+          "This is a custom MCP connection to your own Wenlan runtime. It does not mean Wenlan is publicly listed in the ChatGPT Apps Directory. Stop Remote Access when you are not using it.",
+        ],
+        link: {
+          label: "Read desktop Remote Access status",
+          href: "/docs/desktop-app",
+        },
+      },
+      {
+        heading: "Other local clients",
+        body: [
+          "Cursor, Claude Desktop, Gemini CLI, VS Code, and other supported local MCP clients use wenlan connect <client>.",
           "The settings screen differs by client. The important part is that the client launches the Wenlan MCP connector installed by setup.",
         ],
       },
@@ -2980,7 +3178,7 @@ export const docPages: DocPage[] = [
         heading: "Verify the connection",
         body: [
           "After connecting a client, run its available Wenlan doctor or recall tool. Then capture one small durable fact and recall it from another session or client.",
-          "If that round trip works, the client is using the same local memory layer.",
+          "If that round trip works, the client is reaching the same Wenlan daemon and source-backed wiki.",
         ],
       },
     ],
@@ -3074,7 +3272,7 @@ export const docPages: DocPage[] = [
       "Fix the common setup issues: daemon not running, MCP not connected, missing Claude commands, stale context, and support escalation.",
     metaTitle: "Wenlan Troubleshooting | Docs",
     metaDescription:
-      "Troubleshoot Wenlan setup issues with the daemon, MCP connection, Claude Code plugin commands, wenlan mcp add, port 7878, and memory recall.",
+      "Troubleshoot Wenlan setup issues with the daemon, MCP connection, Claude Code plugin commands, wenlan connect, port 7878, and memory recall.",
     keywords: [
       "Wenlan troubleshooting",
       "daemon not running",
@@ -3086,7 +3284,7 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Start with /init in Claude Code, wenlan doctor in the terminal, or the doctor tool in an MCP client.",
+      "Start with /setup in Claude Code, wenlan doctor in the terminal, or the doctor tool in an MCP client.",
       "Most issues are one of three things: daemon not reachable, MCP server not configured, or the client needs a restart.",
     ],
     sections: [
@@ -3094,17 +3292,17 @@ export const docPages: DocPage[] = [
         heading: "Claude Code commands are missing",
         body: [
           "If /brief, /capture, or /handoff do not appear after installing the plugin, restart Claude Code once.",
-          "Then run /init. It should verify the plugin, daemon, MCP route, and memory round trip.",
+          "Then run /setup. It should verify the plugin, daemon, MCP route, and memory round trip.",
         ],
         code: {
           label: "Claude Code",
-          code: "/init",
+          code: "/setup",
         },
       },
       {
         heading: "Daemon is not reachable",
         body: [
-          "Wenlan's daemon listens locally on port 7878. If a client cannot reach it, use /init from Claude Code or the doctor tool from an MCP client to check the daemon state.",
+          "Wenlan's daemon listens locally on port 7878. If a client cannot reach it, use /setup from Claude Code or the doctor tool from an MCP client to check the daemon state.",
           "For non-Claude clients, rerun npx -y wenlan setup if the local runtime was never installed or status verification failed.",
           "Only one daemon should own the local database. If you have been developing Wenlan locally, make sure an old daemon from another checkout is not still running.",
         ],
@@ -3112,7 +3310,7 @@ export const docPages: DocPage[] = [
       {
         heading: "MCP client is not connected",
         body: [
-          "Check that you ran npx -y wenlan setup first, then ran ~/.wenlan/bin/wenlan mcp add for that client. Some clients require a full restart after changing MCP settings.",
+          "Check that you ran npx -y wenlan setup first, then ran ~/.wenlan/bin/wenlan connect for that client. Some clients require a full restart after changing MCP settings.",
           "If the client shows the server but tools fail, run doctor. It reports whether the daemon is reachable and how setup is configured.",
         ],
         code: {
@@ -3124,13 +3322,13 @@ export const docPages: DocPage[] = [
         heading: "Recall returns weak context",
         body: [
           "First make the recall query more specific. Include project names, feature names, decisions, people, or the exact failure mode.",
-          "If the memory exists but is stale or duplicated, use /review for pending queues and /distill when a topic deserves a clearer page.",
+          "If the memory exists but is stale or duplicated, use /curate for pending queues and /distill when a topic deserves a clearer page.",
         ],
       },
       {
         heading: "When to open an issue",
         body: [
-          "If /init or doctor reports a daemon, MCP, or install failure you cannot resolve, open a GitHub issue with the client name, command you ran, and the diagnostic output.",
+          "If /setup or doctor reports a daemon, MCP, or install failure you cannot resolve, open a GitHub issue with the client name, command you ran, and the diagnostic output.",
           "Avoid pasting private memory contents into public issues. Describe the setup failure and redact project-specific details.",
         ],
         link: {
@@ -3150,7 +3348,7 @@ export const docPages: DocPage[] = [
       "Run the right checks before asking for help, separate daemon problems from client problems, and share only redacted output.",
     metaTitle: "Wenlan Diagnostics and Issue Reports | Docs",
     metaDescription:
-      "Use /init, wenlan status, wenlan doctor, MCP dry-run output, and port checks to diagnose Wenlan setup issues before opening a redacted GitHub issue.",
+      "Use /setup, wenlan status, wenlan doctor, MCP dry-run output, and port checks to diagnose Wenlan setup issues before opening a redacted GitHub issue.",
     keywords: [
       "Wenlan diagnostics",
       "wenlan doctor",
@@ -3162,7 +3360,7 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Start diagnostics with /init, wenlan status, wenlan doctor, and an MCP dry-run for the client that fails.",
+      "Start diagnostics with /setup, wenlan status, wenlan doctor, and an MCP dry-run for the client that fails.",
       "Good issue reports include environment and redacted diagnostics, not private memory contents or full ~/.wenlan archives.",
     ],
     sections: [
@@ -3170,7 +3368,7 @@ export const docPages: DocPage[] = [
         heading: "Run the short checklist",
         body: [
           "Use the smallest command set that separates daemon health, client wiring, and port conflicts.",
-          "If you are in Claude Code, start with /init. If you are in another client, use the terminal commands and the client's MCP status UI.",
+          "If you are in Claude Code, start with /setup. If you are in another client, use the terminal commands and the client's MCP status UI.",
         ],
         code: {
           label: "Diagnostics",
@@ -3195,13 +3393,13 @@ export const docPages: DocPage[] = [
         heading: "What to include in an issue",
         body: [
           "Include the client name, operating system, install path you used, exact command, expected behavior, actual behavior, and redacted diagnostic output.",
-          "Mention whether /init or wenlan doctor passed, and whether a small capture/recall round trip works from any client.",
+          "Mention whether /setup or wenlan doctor passed, and whether a small capture/recall round trip works from any client.",
         ],
         bullets: [
           "Client: Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, VS Code, or other.",
           "Platform: macOS, Linux, Windows, Docker, VM, or WSL if relevant.",
           "Runtime: plugin setup, npx setup, source build, or migrated install.",
-          "Diagnostics: /init output, wenlan status, wenlan doctor, and MCP dry-run output after redaction.",
+          "Diagnostics: /setup output, wenlan status, wenlan doctor, and MCP dry-run output after redaction.",
         ],
         link: {
           label: "Open a GitHub issue",
@@ -3243,14 +3441,14 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "4 min read",
     summary: [
-      "Wenlan is a local-first personal knowledge library for AI work: a daemon, CLI, MCP connector, and Claude Code plugin that share one local context layer.",
+      "Wenlan is a local-first LLM wiki for AI work: agents capture what they learn, sources ground the result, and the daemon keeps pages usable across clients and sessions.",
       "Use this page when you need the short answer, then follow the linked docs for setup, data, packages, troubleshooting, or project scope.",
     ],
     sections: [
       {
         heading: "Is Wenlan just memory?",
         body: [
-          "Wenlan includes memory, but the product goal is broader than generic memory. It is a local memory layer for AI work so agents can carry decisions, context, handoffs, and source-backed pages across sessions and tools.",
+          "Wenlan includes a local memory substrate, but that is not the product headline. The product is a source-backed LLM wiki where decisions, context, handoffs, and pages remain useful across sessions and tools.",
           "That distinction matters because Wenlan is designed around the work loop: brief, capture, recall, handoff, distill, inspect, and keep going.",
         ],
         link: {
@@ -3261,7 +3459,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Which install path should I use?",
         body: [
-          "Use the Claude Code plugin if Claude Code is your main work surface. It gives you /init, /brief, /capture, /handoff, /distill, and the plugin-level workflow.",
+          "Use the Claude Code plugin if Claude Code is your main work surface. It gives you /setup, /brief, /capture, /handoff, /distill, and the plugin-level workflow.",
           "Use npx -y wenlan setup when you want Wenlan from Codex, Cursor, Claude Desktop, Gemini CLI, VS Code, or another MCP client.",
         ],
         link: {
@@ -3305,7 +3503,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Does uninstall delete memory?",
         body: [
-          "No. wenlan uninstall removes the per-user service registration. It does not delete ~/.wenlan or the daemon data directory.",
+          "No. wenlan background off stops Wenlan and removes the per-user service registration. It does not delete ~/.wenlan or the daemon data directory.",
           "That separation is intentional because local memory may be the only record of project decisions, handoffs, private preferences, and generated pages.",
         ],
         link: {
@@ -3316,8 +3514,8 @@ export const docPages: DocPage[] = [
       {
         heading: "How do I know it works?",
         body: [
-          "Run /init in Claude Code or wenlan doctor from the terminal. Then capture one small durable fact and recall it from the client you plan to use.",
-          "If daemon health passes and a capture/recall round trip works, Wenlan is connected to the local memory layer.",
+          "Run /setup in Claude Code or wenlan doctor from the terminal. Then capture one small durable fact and recall it from the client you plan to use.",
+          "If daemon health passes and a capture/recall round trip works, the client is connected to the same Wenlan daemon.",
         ],
         link: {
           label: "Read troubleshooting",
@@ -3359,7 +3557,7 @@ export const docPages: DocPage[] = [
           "If you discover a vulnerability, do not open a public issue. The source repository's SECURITY.md asks you to email h164654156465@gmail.com with the description, reproduction steps, and potential impact; GitHub Security Advisories are also available for private reports.",
         ],
         bullets: [
-          "Public bugs: include client, OS, command, expected behavior, actual behavior, and redacted /init, doctor, or wenlan status output.",
+          "Public bugs: include client, OS, command, expected behavior, actual behavior, and redacted /setup, doctor, or wenlan status output.",
           "Security reports: include impact, reproduction steps, affected version or commit, and only the minimum redacted data needed to reproduce.",
           "Never attach ~/.wenlan, the daemon database, private captures, API keys, or unredacted project logs to a public issue.",
         ],
@@ -3371,7 +3569,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Local-first boundary",
         body: [
-          "Wenlan keeps the memory layer local by default: daemon, database, Markdown artifacts, sessions, and git history live on your machine.",
+          "Wenlan keeps its working data local by default: daemon, database, Markdown artifacts, sessions, and git history live on your machine.",
           "That does not make every connected workflow offline. Your AI client may send prompts to its own provider, and Wenlan can optionally use configured model or API paths for daemon-side language work.",
         ],
       },
@@ -3485,7 +3683,7 @@ export const docPages: DocPage[] = [
     eyebrow: "Desktop",
     title: "Desktop App Status",
     description:
-      "Understand how the optional Wenlan desktop app relates to the daemon, CLI, MCP server, and Claude Code plugin.",
+      "Understand how the optional Wenlan desktop app relates to the daemon, plugins, source-backed wiki, and Remote Access for ChatGPT and Claude.ai.",
     metaTitle: "Wenlan Desktop App Status | Docs",
     metaDescription:
       "Learn whether the Wenlan desktop app is required, what the main Wenlan repo owns, how the separate desktop repo fits, and which license boundary applies.",
@@ -3500,21 +3698,21 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "4 min read",
     summary: [
-      "The core Wenlan product path is the local daemon, CLI, MCP server, and Claude Code plugin.",
-      "The desktop app is optional and lives in a separate repository, while the daemon remains the source of truth.",
+      "The core Wenlan product path is the local daemon, CLI, MCP server, Claude Code plugin, and Codex plugin.",
+      "The desktop app is optional, provides the richest human wiki view, and offers Remote Access for ChatGPT and Claude.ai.",
     ],
     sections: [
       {
         heading: "Is the desktop app required?",
         body: [
-          "No. Wenlan's main workflow works through Claude Code commands, MCP tools, and the wenlan CLI. The local daemon owns memory either way.",
-          "Use the desktop app only if you want a graphical layer on top of the same local memory system. Do not wait for the GUI to use the daily handoff loop.",
+          "No. Wenlan's main workflow works through Claude Code or Codex commands, MCP tools, and the wenlan CLI. The local daemon owns captures, pages, sessions, and retrieval either way.",
+          "Use the desktop app when you want the richest source-cited wiki view, graphical review and curation, or guided Remote Access for web AI clients.",
         ],
       },
       {
         heading: "What the main repo owns",
         body: [
-          "The main Wenlan repo owns the daemon, business logic, CLI, MCP server, shared wire types, and Claude Code plugin files.",
+          "The main Wenlan repo owns the daemon, business logic, CLI, MCP server, shared wire types, Claude Code plugin, and Codex plugin files.",
           "That is the runtime path documented on this website: setup, capture, recall, handoff, distill, pages, data paths, diagnostics, and releases.",
         ],
       },
@@ -3523,7 +3721,7 @@ export const docPages: DocPage[] = [
         body: [
           "The desktop app lives separately so the GUI can evolve without making the local runtime depend on a specific frontend shell.",
           "When an issue is about memory behavior, retrieval, MCP tools, setup, service management, or the CLI, use the main Wenlan repo. When an issue is about the desktop UI itself, use the desktop app repo.",
-          "The app repo owns the Tauri 2 + React 19 desktop shell, sidecar packaging, app-to-daemon bridge, updater metadata, and .wenlan-backend-version pin. Current desktop app release 0.12.0 pins daemon v0.12.0 and talks to it over HTTP at localhost:7878.",
+          "The app repo owns the Tauri 2 + React 19 desktop shell, sidecar packaging, app-to-daemon bridge, updater metadata, and .wenlan-backend-version pin. Check the wenlan-app release and pin before publishing an exact app-version claim; app releases can trail the daemon release and still talk to the same local daemon over HTTP at localhost:7878.",
         ],
         link: {
           label: "Open desktop app repo",
@@ -3531,10 +3729,21 @@ export const docPages: DocPage[] = [
         },
       },
       {
+        heading: "Remote Access for ChatGPT and Claude.ai",
+        body: [
+          "The released desktop app starts wenlan-mcp in Streamable HTTP mode with --no-auth on loopback and exposes it through a temporary HTTPS tunnel. Possession of the URL grants access. The Remote Access panel gives you the URL, connection health, reconnect controls, and the exact setup path for ChatGPT and Claude.ai; stop Remote Access when you are not using it.",
+          "ChatGPT currently uses a custom app created in Developer mode. Treat this as direct MCP support, not proof of a public ChatGPT Apps Directory listing.",
+        ],
+        link: {
+          label: "Connect web MCP clients",
+          href: "/docs/mcp-clients",
+        },
+      },
+      {
         heading: "Data model",
         body: [
           "The desktop app should be treated as a client over the daemon, not a second source of truth. The daemon owns the database, pages, sessions, and retrieval behavior.",
-          "That boundary is what lets Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, terminal commands, and the optional GUI share the same memory layer.",
+          "That boundary is what lets Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, ChatGPT, Claude.ai, terminal commands, and the optional GUI build on the same source-backed wiki.",
         ],
       },
       {
@@ -3618,17 +3827,17 @@ export const docPages: DocPage[] = [
         bullets: [
           "Public package, binary, crate, and repository names now use Wenlan identities.",
           "The Claude Code plugin and setup path install through wenlan package names.",
-          "WENLAN_RERANKER_MODE is configurable through wenlan reranker commands.",
+          "WENLAN_RERANKER_MODE became configurable in this release; the current CLI path is wenlan models reranker <off|lite|full>.",
         ],
       },
       {
         heading: "v0.7.0 highlights",
         body: [
-          "The v0.7.0 release broadened Wenlan from a macOS-first local runtime into a cross-platform local memory layer with explicit spaces and stronger evaluation discipline.",
+          "The v0.7.0 release broadened Wenlan from a macOS-first runtime into a cross-platform local daemon with explicit spaces and stronger evaluation discipline.",
         ],
         bullets: [
           "Cross-platform runtime support for macOS, Linux, and Windows.",
-          "wenlan space subcommands and doctor resolver state.",
+          "Space subcommands and doctor resolver state; the current CLI path is wenlan spaces.",
           "Plugin and server space resolver plumbing.",
           "KG-faithfulness and page-distillation faithfulness benchmarks.",
           "Structured binary judge and reproducibility foundations for evals.",
@@ -3734,7 +3943,7 @@ export const docPages: DocPage[] = [
       {
         heading: "How users should upgrade",
         body: [
-          "Users should read the changelog, rerun npx setup or /init, verify wenlan doctor, and restart MCP clients after package or connector changes.",
+          "Users should read the changelog, rerun npx setup or /setup, verify wenlan doctor, and restart MCP clients after package or connector changes.",
           "If a page says a feature is on main, opt-in, or experimental, do not assume it is available in your installed runtime until a release page says so.",
         ],
         link: {
@@ -3779,7 +3988,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Released now",
         body: [
-          "The released public shape is local-first AI work memory: Claude Code plugin, MCP server, CLI setup, daemon, local memory, hybrid retrieval, spaces, Markdown artifacts, source-backed pages, git versioning, and cross-platform runtime support.",
+          "The released public shape is a local-first, source-backed LLM wiki: Claude Code and Codex plugins, local and remote MCP, CLI setup, daemon, hybrid retrieval, spaces, Markdown artifacts, source-backed pages, git versioning, and cross-platform runtime support.",
           "That is enough for the core loop: brief, capture, recall, handoff, distill, and inspect local artifacts.",
         ],
       },
@@ -3807,7 +4016,7 @@ export const docPages: DocPage[] = [
         heading: "How to judge progress",
         body: [
           "For users, progress should show up as fewer cold starts, fewer repeated explanations, better recall, and more inspectable context. For maintainers, progress should show up in eval snapshots, smaller PRs, and clearer release notes.",
-          "The project avoids a broad workflow-suite shape. The goal is a focused local memory layer for serious AI work, not a general productivity operating system.",
+          "The project avoids a broad workflow-suite shape. The goal is a focused, source-backed LLM wiki for serious AI work, not a general productivity operating system.",
         ],
         link: {
           label: "Open current GitHub issues",
@@ -3859,7 +4068,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Not a workflow suite",
         body: [
-          "Wenlan is not trying to bundle dozens of agents, research loops, and productivity workflows. It is the memory layer those workflows can use.",
+          "Wenlan is not trying to bundle dozens of agents, research loops, and productivity workflows. It gives those workflows a source-backed place to capture, refine, inspect, and recall what matters.",
           "That tradeoff keeps the product easier to understand: capture, recall, handoff, distill, inspect, and continue.",
         ],
       },
@@ -3916,7 +4125,7 @@ export const docPages: DocPage[] = [
         heading: "Workspace build",
         body: [
           "The repository is a Cargo workspace. First builds can take several minutes, especially on macOS where llama.cpp compiles with Metal support.",
-          "Run the daemon directly during development. For product-path testing, build release binaries and use wenlan setup, install, status, and doctor.",
+          "Run the daemon directly during development. For product-path testing, build release binaries and use wenlan setup, background on, status, and doctor.",
         ],
         code: {
           label: "Source build",
@@ -3927,13 +4136,13 @@ export const docPages: DocPage[] = [
         heading: "Crate boundaries",
         body: [
           "wenlan-core owns business logic and must stay free of Axum and Tauri dependencies. wenlan-server frames HTTP requests. wenlan-types stays lightweight because downstream clients consume it.",
-          "wenlan-mcp bridges MCP clients to the daemon. wenlan CLI manages setup, service state, recall, search, store, spaces, models, keys, and doctor checks.",
+          "wenlan-mcp bridges MCP clients to the daemon. wenlan CLI manages setup, background service state, recall, search, capture, memories, spaces, models, keys, and doctor checks.",
         ],
       },
       {
         heading: "Platform notes",
         body: [
-          "Wenlan supports macOS arm64/x64, Linux x86_64/aarch64 with glibc, and Windows x86_64. The service manager differs by platform: launchd, systemd user units, or a Task Scheduler logon task.",
+          "Wenlan's current prebuilt runtime supports macOS Apple Silicon, Linux x86_64/aarch64 with glibc, and Windows x86_64. macOS Intel has source/dev paths but no current prebuilt runtime. The service manager differs by platform: launchd, systemd user units, or a Task Scheduler logon task.",
           "Linux and Windows builds are CPU-only by default. macOS keeps Metal acceleration for local model paths.",
         ],
       },
@@ -4169,7 +4378,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Useful contributions",
         body: [
-          "The most useful contributions are focused and evidence-backed. A good issue includes the client, operating system, exact command, expected behavior, actual behavior, and redacted diagnostic output from /init, doctor, or wenlan status.",
+          "The most useful contributions are focused and evidence-backed. A good issue includes the client, operating system, exact command, expected behavior, actual behavior, and redacted diagnostic output from /setup, doctor, or wenlan status.",
           "For code, keep PRs narrow. One logical change is easier to review, test, and release than a large bundle.",
         ],
         bullets: [
@@ -4184,7 +4393,7 @@ export const docPages: DocPage[] = [
         heading: "Development setup",
         body: [
           "Wenlan is a Rust workspace. You need Rust stable and the platform build tools for your OS. macOS builds may take several minutes on the first run while llama.cpp compiles for Metal.",
-          "For local development, build the workspace and run wenlan-server directly. To test the product path, build the release binaries and use wenlan setup, install, status, and doctor.",
+          "For local development, build the workspace and run wenlan-server directly. To test the product path, build the release binaries and use wenlan setup, background on, status, and doctor.",
         ],
         code: {
           label: "Local development",

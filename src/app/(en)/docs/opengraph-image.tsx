@@ -11,10 +11,10 @@ export default async function Image() {
       <OgTemplate
         eyebrow="Docs"
         title="Start using Wenlan."
-        description="Install the local memory layer, learn the daily handoff loop, and keep AI work context readable, searchable, and under your control."
+        description="Install Wenlan, connect your AI tools, and keep a source-backed LLM wiki readable, searchable, and under your control."
         footerLeft={[
           "wenlan.app/docs",
-          "Living personal knowledge library",
+          "Source-backed LLM wiki",
         ]}
         footerRight="Apache-2.0"
         titleSize={80}

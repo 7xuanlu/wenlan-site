@@ -9,9 +9,9 @@ const englishSoftwareApplicationFeatures = [
   "Auditable memory: low-confidence captures, contradictions, supersession chains, and protected-memory conflicts surface for review instead of silently entering context.",
   "Composition over storage: memories distill into pages. Sessions track workflow. An entity graph links people, projects, tools, and relations. ~30 MCP tools across one daemon, not 100+ skills bolted on.",
   "Explicit spaces: tag memories, pages, and recalls with space=work | personal | client-X. Auto-detected from current repo or workspace.",
-  "Cross-platform daemon: macOS arm64/x64, Linux x86_64/aarch64, Windows x86_64. Native installer per OS.",
-  "Optional desktop app: a Tauri 2 + React 19 GUI in github.com/7xuanlu/wenlan-app (AGPL-3.0-only). It talks to the same local daemon over HTTP at localhost:7878 and pins app releases to the daemon release.",
-  "MCP-native: works with Claude Code, Cursor, Codex, Claude Desktop, VS Code, Gemini CLI, and other MCP clients.",
+  "Cross-platform daemon: current prebuilt runtime artifacts cover macOS Apple Silicon, Linux x86_64/aarch64 glibc, and Windows x86_64. macOS Intel is source/dev-only until a public release workflow publishes that artifact again.",
+  "Optional desktop app: a Tauri 2 + React 19 source-cited wiki GUI in github.com/7xuanlu/wenlan-app (AGPL-3.0-only). It talks to the same local daemon over HTTP at localhost:7878, carries its bundled daemon pin in .wenlan-backend-version, and provides guided Remote Access for ChatGPT and Claude.ai. Remote Access uses --no-auth behind a temporary HTTPS tunnel, so possession of the URL grants access.",
+  "Client surfaces: Claude Code and Codex plugins, local MCP for Cursor, Claude Desktop, VS Code, Gemini CLI, and other clients, plus Streamable HTTP MCP for ChatGPT and Claude.ai.",
   "No cloud sync or telemetry by default. Local models and Anthropic keys are opt-in for automatic page distillation, recaps, and richer graph work.",
   "Markdown artifacts you can read: pages in ~/.wenlan/pages/, session logs and project status under ~/.wenlan/sessions/. Symlink into Obsidian.",
 ] as const;
@@ -33,7 +33,7 @@ export function softwareApplicationSchema(locale: Locale) {
     operatingSystem: ["macOS", "Linux", "Windows"],
     softwareVersion: "0.12.0",
     softwareRequirements:
-      "macOS arm64 or x64, Linux x86_64 or aarch64 (glibc), Windows x86_64",
+      "macOS Apple Silicon, Linux x86_64 or aarch64 (glibc), Windows x86_64; macOS Intel is source/dev-only without a current prebuilt runtime",
     installUrl: "https://github.com/7xuanlu/wenlan#quickstart",
     downloadUrl: "https://github.com/7xuanlu/wenlan/releases",
     screenshot: "https://wenlan.app/og.png",

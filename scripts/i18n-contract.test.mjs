@@ -392,11 +392,11 @@ test("localized core page wrappers and shared page modules exist", async () => {
   }
 });
 
-test("localized home hero allows translated text to shrink on mobile", async () => {
+test("localized home hero keeps CJK words intact on mobile", async () => {
   const source = await readFile(resolve(repoRoot, "src/app/_pages/home.tsx"), "utf8");
 
   assert.match(source, /className="relative z-10 w-full min-w-0 max-w-3xl text-center"/);
-  assert.match(source, /className="[^"]*\bbreak-words\b[^"]*"/);
+  assert.match(source, /className="[^"]*\bbreak-keep\b[^"]*"/);
 });
 
 test("localized about hero allows translated text to wrap on mobile", async () => {
@@ -413,6 +413,7 @@ test("localized get-started layout allows mobile content columns to shrink", asy
   assert.match(source, /className="min-w-0 space-y-14"/);
   assert.match(source, /className="grid min-w-0 gap-5/);
   assert.match(source, /<div className="min-w-0">/);
+  assert.match(source, /<h1 className="[^"]*\bbreak-keep\b[^"]*"/);
 });
 
 test("localized untranslated docs slug and Learn index hard 404", async () => {
@@ -1035,9 +1036,61 @@ test("home SEO copy presents LLM wiki positioning in English and Mandarin", asyn
       `${locale}.home.seo.description.sourceBacked`,
     );
     assert.match(home.hero.description, /AI 工作的 LLM wiki/, `${locale}.home.hero.description`);
-    assert.match(home.hero.description, /AI 代理/, `${locale}.home.hero.description.agent`);
+    assert.match(home.hero.description, /AI\u00a0代理/, `${locale}.home.hero.description.agent`);
     assert.match(home.faqs.items[0].a, /LLM wiki/, `${locale}.home.faq.whatIsWenlan`);
     assert.doesNotMatch(renderedHome, localeExpected.staleHomePhrase, `${locale}.home.stale`);
+  }
+});
+
+test("Chinese hero copy keeps short AI compounds together", async () => {
+  const { content } = await loadI18nModules();
+
+  for (const locale of ["zh-TW", "zh-CN"]) {
+    const dictionary = content.localizedContentByLocale[locale];
+
+    assert.match(
+      dictionary.home.content.hero.description,
+      /AI\u00a0代理/,
+      `${locale}.home.hero.description.agent`,
+    );
+    assert.match(
+      dictionary.getStarted.content.hero.title,
+      /你的\u00a0AI\u00a0工具/,
+      `${locale}.getStarted.hero.title`,
+    );
+    assert.doesNotMatch(
+      dictionary.getStarted.content.hero.title,
+      /AI tools/,
+      `${locale}.getStarted.hero.title.EnglishNoun`,
+    );
+  }
+});
+
+test("Remote Access discovery copy states the no-auth boundary", async () => {
+  const { content } = await loadI18nModules();
+  const expected = {
+    en: {
+      noAuth: /no authentication/i,
+      stop: /stop Remote Access when unused/i,
+    },
+    "zh-TW": {
+      noAuth: /沒有驗證/,
+      stop: /不用時.*停止 Remote Access/,
+    },
+    "zh-CN": {
+      noAuth: /没有身份验证/,
+      stop: /不用时.*停止 Remote Access/,
+    },
+  };
+
+  for (const [locale, localeExpected] of Object.entries(expected)) {
+    const faqs = content.localizedContentByLocale[locale].home.content.faqs.items;
+
+    for (const id of ["tools", "setup"]) {
+      const answer = faqs.find((item) => item.id === id)?.a ?? "";
+      assert.match(answer, localeExpected.noAuth, `${locale}.home.faq.${id}.noAuth`);
+      assert.match(answer, localeExpected.stop, `${locale}.home.faq.${id}.stop`);
+    }
   }
 });
 
@@ -1358,10 +1411,10 @@ test("protected token extraction preserves commands, URLs, packages, env vars, m
   const source = [
     "`/plugin marketplace add 7xuanlu/claude-plugins`",
     "`/plugin install wenlan@7xuanlu`",
-    "`/init`",
+    "`/setup`",
     "`/distill`",
     "`npx -y wenlan setup`",
-    "`~/.wenlan/bin/wenlan mcp add codex`",
+    "`~/.wenlan/bin/wenlan connect codex`",
     "`~/.wenlan/.git/` and `crates/wenlan-core/src/eval/`",
     "Wenlan and GitHub stay branded.",
     "See https://github.com/7xuanlu/wenlan and @7xuanlu/wenlan.",
@@ -1371,10 +1424,10 @@ test("protected token extraction preserves commands, URLs, packages, env vars, m
   ].join("\n");
   const translated = [
     "執行 `/plugin marketplace add 7xuanlu/claude-plugins`。",
-    "再執行 `/plugin install wenlan@7xuanlu` 與 `/init`。",
+    "再執行 `/plugin install wenlan@7xuanlu` 與 `/setup`。",
     "需要時執行 `/distill`。",
     "也可以執行 `npx -y wenlan setup`。",
-    "MCP 指令是 `~/.wenlan/bin/wenlan mcp add codex`。",
+    "MCP 指令是 `~/.wenlan/bin/wenlan connect codex`。",
     "本地路徑包含 `~/.wenlan/.git/` 和 `crates/wenlan-core/src/eval/`。",
     "Wenlan 和 GitHub 保持品牌寫法。",
     "參考 https://github.com/7xuanlu/wenlan 和 @7xuanlu/wenlan。",
@@ -1387,10 +1440,10 @@ test("protected token extraction preserves commands, URLs, packages, env vars, m
   for (const token of [
     "/plugin marketplace add 7xuanlu/claude-plugins",
     "/plugin install wenlan@7xuanlu",
-    "/init",
+    "/setup",
     "/distill",
     "npx -y wenlan setup",
-    "~/.wenlan/bin/wenlan mcp add codex",
+    "~/.wenlan/bin/wenlan connect codex",
     "~/.wenlan/.git/",
     "crates/wenlan-core/src/eval/",
     "Wenlan",
