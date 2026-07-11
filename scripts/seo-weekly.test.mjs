@@ -116,6 +116,14 @@ const requiredBuiltHeaders = [
     headers: [{ key: "X-Robots-Tag", value: "noindex, follow" }],
   },
   {
+    source: "/humans.txt",
+    headers: [{ key: "X-Robots-Tag", value: "noindex, follow" }],
+  },
+  {
+    source: "/manifest.webmanifest",
+    headers: [{ key: "X-Robots-Tag", value: "noindex, follow" }],
+  },
+  {
     source: "/.well-known/security.txt",
     headers: [{ key: "X-Robots-Tag", value: "noindex, follow" }],
   },
@@ -219,6 +227,8 @@ const requiredDeployedUtilityUrls = [
   "/llms.txt",
   "/llms-full.txt",
   "/feed.xml",
+  "/humans.txt",
+  "/manifest.webmanifest",
   "/.well-known/security.txt",
 ];
 const deployedRedirects = [
@@ -363,6 +373,7 @@ async function withDeployedFixture(overrides, callback) {
   const deployedPagePaths = [
     ...new Set([
       ...requiredDeployedUrls,
+      ...(overrides.locs ?? []).map((loc) => new URL(loc).pathname || "/"),
       ...(overrides.redirects ?? deployedRedirects).map(([, destination]) => destination),
     ]),
   ];
@@ -371,11 +382,13 @@ async function withDeployedFixture(overrides, callback) {
     if (responses[path]) continue;
     const pageOverrides = overrides.pages?.[path] ?? {};
     responses[path] = {
-      status: 200,
+      status: pageOverrides.status ?? 200,
       headers: pageOverrides.headers ?? {},
       body: deployedHtmlPage(path, pageOverrides),
+      delayMs: pageOverrides.delayMs ?? 0,
     };
   }
+  Object.assign(responses, overrides.additionalResponses ?? {});
 
   await writeFile(
     join(outputRoot, "responses.json"),
@@ -388,6 +401,44 @@ async function withDeployedFixture(overrides, callback) {
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }
+}
+
+async function writePipelineGscInput(inputDir, metadataOverrides = {}) {
+  await mkdir(inputDir, { recursive: true });
+  await Promise.all([
+    writeFile(
+      join(inputDir, "gsc-queries.csv"),
+      await readFile(resolve(fixtureRoot, "gsc-queries.csv"), "utf8"),
+      "utf8",
+    ),
+    writeFile(
+      join(inputDir, "gsc-pages.csv"),
+      await readFile(resolve(fixtureRoot, "gsc-pages.csv"), "utf8"),
+      "utf8",
+    ),
+  ]);
+  await writeFile(
+    join(inputDir, "gsc-metadata.json"),
+    JSON.stringify(
+      {
+        siteUrl: "sc-domain:wenlan.app",
+        startDate: "2026-05-10",
+        endDate: "2026-06-06",
+        source: "Search Console API",
+        propertyTotals: {
+          clicks: 3,
+          impressions: 70,
+          ctr: 3 / 70,
+          position: 10.2,
+          aggregationType: "byProperty",
+        },
+        ...metadataOverrides,
+      },
+      null,
+      2,
+    ),
+    "utf8",
+  );
 }
 
 async function writeBuiltSeoFixture(outputRoot, overrides = {}) {
@@ -431,16 +482,17 @@ async function writeBuiltSeoFixture(outputRoot, overrides = {}) {
   return buildDir;
 }
 
-test("weekly SEO template labels partial GSC rows as table metrics", async () => {
+test("weekly SEO template separates property totals from visible table metrics", async () => {
   const template = await readFile(
     resolve(repoRoot, "docs/seo-audits/weekly-template.md"),
     "utf8",
   );
 
-  assert.match(template, /\| Query table clicks \| - \|/);
-  assert.match(template, /\| Query table impressions \| - \|/);
-  assert.match(template, /\| Query table CTR \| - \|/);
-  assert.match(template, /\| Query table average position \| - \|/);
+  assert.match(template, /\| Property clicks \| - \|/);
+  assert.match(template, /\| Property impressions \| - \|/);
+  assert.match(template, /\| Visible query table clicks \| - \|/);
+  assert.match(template, /\| Visible query table impressions \| - \|/);
+  assert.match(template, /\| Query visibility gap \| - \|/);
   assert.doesNotMatch(template, /\| Total (clicks|impressions) \|/);
   assert.doesNotMatch(template, /\| Average (CTR|position) \|/);
 });
@@ -460,6 +512,12 @@ test("package scripts include GSC API fetcher", async () => {
   assert.equal(packageJson.scripts["seo:gsc:fetch"], "node scripts/seo-gsc-fetch.mjs");
 });
 
+test("package scripts include Vercel Web Analytics fetcher", async () => {
+  const packageJson = JSON.parse(await readFile(resolve(repoRoot, "package.json"), "utf8"));
+
+  assert.equal(packageJson.scripts["seo:vercel:fetch"], "node scripts/seo-vercel-fetch.mjs");
+});
+
 test("GSC API fetcher defaults to the Wenlan temporary input directory", async () => {
   const script = await readFile(gscFetchScript, "utf8");
 
@@ -471,7 +529,9 @@ test("package SEO sample writes to Wenlan temporary output", async () => {
   const packageJson = JSON.parse(await readFile(resolve(repoRoot, "package.json"), "utf8"));
 
   assert.match(packageJson.scripts["seo:weekly:sample"], /\/tmp\/wenlan-weekly-seo-sample\.md/);
+  assert.match(packageJson.scripts["seo:weekly:sample"], /--allow-fixture-input true/);
   assert.doesNotMatch(packageJson.scripts["seo:weekly:sample"], /\/tmp\/origin-weekly-seo-sample\.md/);
+  assert.equal(packageJson.scripts["seo:weekly"], "node scripts/seo-weekly-pipeline.mjs");
 });
 
 test("GSC API fetcher normalizes search analytics fixture rows into weekly CSVs", async () => {
@@ -507,6 +567,21 @@ test("GSC API fetcher normalizes search analytics fixture rows into weekly CSVs"
             position: 33.12,
           },
         ],
+      }),
+      "utf8",
+    );
+    await writeFile(
+      join(fixtureDir, "searchanalytics-property.json"),
+      JSON.stringify({
+        rows: [
+          {
+            clicks: 3,
+            impressions: 67,
+            ctr: 3 / 67,
+            position: 10.223880597,
+          },
+        ],
+        responseAggregationType: "byProperty",
       }),
       "utf8",
     );
@@ -555,6 +630,13 @@ test("GSC API fetcher normalizes search analytics fixture rows into weekly CSVs"
     );
     assert.equal(metadata.siteUrl, "sc-domain:wenlan.app");
     assert.equal(metadata.source, "Search Console API fixture");
+    assert.deepEqual(metadata.propertyTotals, {
+      clicks: 3,
+      impressions: 67,
+      ctr: 3 / 67,
+      position: 10.223880597,
+      aggregationType: "byProperty",
+    });
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }
@@ -594,6 +676,11 @@ test("GSC API fetcher derives the last 28 complete days from report date", async
           },
         ],
       }),
+      "utf8",
+    );
+    await writeFile(
+      join(fixtureDir, "searchanalytics-property.json"),
+      JSON.stringify({ rows: [], responseAggregationType: "byProperty" }),
       "utf8",
     );
     await writeFile(join(fixtureDir, "sitemaps.json"), JSON.stringify({}), "utf8");
@@ -684,9 +771,12 @@ test("GSC API fetcher falls back to ADC and sends the quota project header", asy
         "const logPath = process.env.GSC_FETCH_TEST_LOG;",
         "globalThis.fetch = async (url, options = {}) => {",
         "  appendFileSync(logPath, JSON.stringify({ url: String(url), headers: options.headers ?? {}, body: options.body ?? null }) + '\\n');",
+        "  const request = JSON.parse(options.body ?? '{}');",
         "  const body = String(url).endsWith('/sitemaps')",
         "    ? { sitemap: [{ path: 'https://wenlan.app/sitemap.xml' }] }",
-        "    : { rows: [{ keys: ['wenlan'], clicks: 1, impressions: 2, ctr: 0.5, position: 3.25 }] };",
+        "    : request.aggregationType === 'byProperty'",
+        "      ? { rows: [{ clicks: 3, impressions: 67, ctr: 3 / 67, position: 10.2 }], responseAggregationType: 'byProperty' }",
+        "      : { rows: [{ keys: ['wenlan'], clicks: 1, impressions: 2, ctr: 0.5, position: 3.25 }] };",
         "  return { ok: true, status: 200, statusText: 'OK', text: async () => JSON.stringify(body) };",
         "};",
         "",
@@ -731,7 +821,7 @@ test("GSC API fetcher falls back to ADC and sends the quota project header", asy
       .trim()
       .split("\n")
       .map((line) => JSON.parse(line));
-    assert.equal(calls.length, 3);
+    assert.equal(calls.length, 4);
     for (const call of calls) {
       assert.equal(call.headers.authorization, "Bearer adc-token-from-gcloud");
       assert.equal(call.headers["x-goog-user-project"], "wenlan-500502");
@@ -739,6 +829,26 @@ test("GSC API fetcher falls back to ADC and sends the quota project header", asy
 
     const metadata = JSON.parse(await readFile(join(exportDir, "gsc-metadata.json"), "utf8"));
     assert.equal(metadata.siteUrl, "sc-domain:wenlan.app");
+    assert.equal(metadata.propertyTotals.impressions, 67);
+    const analyticsBodies = calls
+      .filter((call) => !call.url.endsWith("/sitemaps"))
+      .map((call) => JSON.parse(call.body));
+    assert.equal(
+      analyticsBodies.filter((body) => body.aggregationType === "byProperty").length,
+      2,
+    );
+    assert.equal(
+      analyticsBodies.filter(
+        (body) => body.aggregationType === "byProperty" && !body.dimensions,
+      ).length,
+      1,
+    );
+    assert.equal(
+      analyticsBodies.filter(
+        (body) => body.aggregationType === "byProperty" && body.dimensions?.[0] === "query",
+      ).length,
+      1,
+    );
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }
@@ -764,7 +874,12 @@ test("GSC API fetcher uses GSC_ACCESS_TOKEN before ADC when present", async () =
         "const logPath = process.env.GSC_FETCH_TEST_LOG;",
         "globalThis.fetch = async (url, options = {}) => {",
         "  appendFileSync(logPath, JSON.stringify({ url: String(url), headers: options.headers ?? {} }) + '\\n');",
-        "  const body = String(url).endsWith('/sitemaps') ? { sitemap: [] } : { rows: [] };",
+        "  const request = JSON.parse(options.body ?? '{}');",
+        "  const body = String(url).endsWith('/sitemaps')",
+        "    ? { sitemap: [] }",
+        "    : request.aggregationType === 'byProperty'",
+        "      ? { rows: [], responseAggregationType: 'byProperty' }",
+        "      : { rows: [] };",
         "  return { ok: true, status: 200, statusText: 'OK', text: async () => JSON.stringify(body) };",
         "};",
         "",
@@ -799,7 +914,7 @@ test("GSC API fetcher uses GSC_ACCESS_TOKEN before ADC when present", async () =
       .trim()
       .split("\n")
       .map((line) => JSON.parse(line));
-    assert.equal(calls.length, 3);
+    assert.equal(calls.length, 4);
     for (const call of calls) {
       assert.equal(call.headers.authorization, "Bearer explicit-token");
       assert.equal(call.headers["x-goog-user-project"], "custom-quota-project");
@@ -831,7 +946,13 @@ test("GSC API fetcher sends configured quota project header", async () => {
         response.end(JSON.stringify({ sitemap: [{ path: "https://wenlan.app/sitemap.xml" }] }));
         return;
       }
-      response.end(JSON.stringify({ rows: [] }));
+      const searchRequest = JSON.parse(body || "{}");
+      response.end(JSON.stringify({
+        rows: [],
+        ...(searchRequest.aggregationType === "byProperty"
+          ? { responseAggregationType: "byProperty" }
+          : {}),
+      }));
     });
   });
 
@@ -860,7 +981,7 @@ test("GSC API fetcher sends configured quota project header", async () => {
       },
     );
 
-    assert.equal(requests.length, 3);
+    assert.equal(requests.length, 4);
     for (const request of requests) {
       assert.equal(request.authorization, "Bearer test-token");
       assert.equal(request.quotaProject, "wenlan-500502");
@@ -1133,7 +1254,7 @@ test("deployed technical SEO checker verifies robots, sitemap, key pages, utilit
     assert.match(stdout, /robots ok/);
     assert.match(stdout, /sitemap locs ok: 13/);
     assert.match(stdout, /key pages ok: 13/);
-    assert.match(stdout, /utility noindex headers ok: 4/);
+    assert.match(stdout, /utility noindex headers ok: 6/);
     assert.match(stdout, /redirects ok: 25/);
     assert.match(stdout, /bridge host redirects ok: 6/);
     assert.match(stdout, /old URLs absent from sitemap/);
@@ -1277,6 +1398,27 @@ test("deployed technical SEO checker rejects docs guide URLs and legacy learn UR
   }
 });
 
+test("deployed technical SEO checker rejects network-path sitemap URLs", async () => {
+  await withDeployedFixture(
+    {
+      locs: [
+        ...requiredBuiltSitemapLocs,
+        "https://wenlan.app//169.254.169.254/latest/meta-data",
+      ],
+    },
+    async (fixtureDir) => {
+      await assert.rejects(
+        execFileAsync(
+          process.execPath,
+          [deployedCheckerScript, "--", "--fixture-dir", fixtureDir],
+          { cwd: repoRoot },
+        ),
+        /sitemap URL path invalid: \/\/169\.254\.169\.254\/latest\/meta-data/,
+      );
+    },
+  );
+});
+
 test("deployed technical SEO checker rejects key pages with blocking robots signals or FAQPage schema", async () => {
   await withDeployedFixture(
     {
@@ -1324,6 +1466,197 @@ test("deployed technical SEO checker rejects FAQPage JSON-LD without a robots fa
   );
 });
 
+test("deployed technical SEO checker rejects FAQPage JSON-LD on an unlisted sitemap page", async () => {
+  const path = "/learn/unlisted-sitemap-page";
+  await withDeployedFixture(
+    {
+      locs: [
+        ...requiredBuiltSitemapLocs,
+        `https://wenlan.app${path}`,
+      ],
+      pages: {
+        [path]: {
+          extraSchema:
+            '<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage"}</script>',
+        },
+      },
+    },
+    async (fixtureDir) => {
+      await assert.rejects(
+        execFileAsync(
+          process.execPath,
+          [deployedCheckerScript, "--", "--fixture-dir", fixtureDir],
+          { cwd: repoRoot },
+        ),
+        /FAQPage JSON-LD present: \/learn\/unlisted-sitemap-page/,
+      );
+    },
+  );
+});
+
+test("deployed technical SEO checker requires key pages to return a direct 200", async () => {
+  await withDeployedFixture(
+    {
+      pages: {
+        "/learn": {
+          status: 308,
+          headers: { location: "/learn/claude-code-memory" },
+        },
+      },
+    },
+    async (fixtureDir) => {
+      await assert.rejects(
+        execFileAsync(
+          process.execPath,
+          [deployedCheckerScript, "--", "--fixture-dir", fixtureDir],
+          { cwd: repoRoot },
+        ),
+        /page returned 308: \/learn/,
+      );
+    },
+  );
+});
+
+test("deployed technical SEO checker scans query-bearing key sitemap URLs", async () => {
+  const url = "https://wenlan.app/learn?view=faq";
+  await withDeployedFixture(
+    {
+      locs: [...requiredBuiltSitemapLocs, url],
+      additionalResponses: {
+        "/learn?view=faq": {
+          status: 200,
+          headers: {},
+          body: deployedHtmlPage("/learn", {
+            extraSchema:
+              '<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage"}</script>',
+          }),
+        },
+      },
+    },
+    async (fixtureDir) => {
+      await assert.rejects(
+        execFileAsync(
+          process.execPath,
+          [deployedCheckerScript, "--", "--fixture-dir", fixtureDir],
+          { cwd: repoRoot },
+        ),
+        /FAQPage JSON-LD present: \/learn\?view=faq/,
+      );
+    },
+  );
+});
+
+test("deployed technical SEO checker bounds sitemap page concurrency", async () => {
+  const extraPaths = Array.from({ length: 17 }, (_, index) => `/learn/concurrency-${index}`);
+  await withDeployedFixture(
+    {
+      locs: [
+        ...requiredBuiltSitemapLocs,
+        ...extraPaths.map((path) => `https://wenlan.app${path}`),
+      ],
+      pages: Object.fromEntries(extraPaths.map((path) => [path, { delayMs: 100 }])),
+    },
+    async (fixtureDir) => {
+      const { stdout } = await execFileAsync(
+        process.execPath,
+        [deployedCheckerScript, "--", "--fixture-dir", fixtureDir],
+        { cwd: repoRoot },
+      );
+
+      assert.match(stdout, /sitemap FAQPage absent ok: 30; max concurrency: 8/);
+      const events = stdout
+        .split("\n")
+        .filter((line) => line.startsWith("[seo-deployed-fixture] "))
+        .map((line) => JSON.parse(line.slice("[seo-deployed-fixture] ".length)))
+        .filter(({ path }) => extraPaths.includes(path))
+        .sort((left, right) => {
+          const a = BigInt(left.at);
+          const b = BigInt(right.at);
+          return a < b ? -1 : a > b ? 1 : 0;
+        });
+      let active = 0;
+      let observedPeak = 0;
+      for (const event of events) {
+        active += event.event === "start" ? 1 : -1;
+        observedPeak = Math.max(observedPeak, active);
+      }
+      assert.equal(observedPeak, 8);
+    },
+  );
+});
+
+test("deployed technical SEO checker rejects oversized sitemap XML", async () => {
+  await withDeployedFixture(
+    { sitemap: `<urlset>${" ".repeat(1_000_001)}</urlset>` },
+    async (fixtureDir) => {
+      await assert.rejects(
+        execFileAsync(
+          process.execPath,
+          [deployedCheckerScript, "--", "--fixture-dir", fixtureDir],
+          { cwd: repoRoot, maxBuffer: 4 * 1024 * 1024 },
+        ),
+        /sitemap XML exceeds 1000000 bytes/,
+      );
+    },
+  );
+});
+
+test("deployed technical SEO checker rejects oversized sitemaps", async () => {
+  const extraLocs = Array.from(
+    { length: 501 },
+    (_, index) => `https://wenlan.app/learn/sitemap-limit-${index}`,
+  );
+  await withDeployedFixture(
+    { locs: [...requiredBuiltSitemapLocs, ...extraLocs] },
+    async (fixtureDir) => {
+      await assert.rejects(
+        execFileAsync(
+          process.execPath,
+          [deployedCheckerScript, "--", "--fixture-dir", fixtureDir],
+          { cwd: repoRoot },
+        ),
+        /sitemap has too many URLs:/,
+      );
+    },
+  );
+});
+
+test("deployed technical SEO checker rejects oversized sitemap HTML", async () => {
+  const path = "/learn/oversized-html";
+  await withDeployedFixture(
+    {
+      locs: [...requiredBuiltSitemapLocs, `https://wenlan.app${path}`],
+      pages: { [path]: { body: "x".repeat(1_000_001) } },
+    },
+    async (fixtureDir) => {
+      await assert.rejects(
+        execFileAsync(
+          process.execPath,
+          [deployedCheckerScript, "--", "--fixture-dir", fixtureDir],
+          { cwd: repoRoot, maxBuffer: 4 * 1024 * 1024 },
+        ),
+        /sitemap page HTML: \/learn\/oversized-html exceeds 1000000 bytes/,
+      );
+    },
+  );
+});
+
+test("deployed technical SEO checker rejects oversized key-page HTML", async () => {
+  await withDeployedFixture(
+    { pages: { "/learn": { body: "x".repeat(1_000_001) } } },
+    async (fixtureDir) => {
+      await assert.rejects(
+        execFileAsync(
+          process.execPath,
+          [deployedCheckerScript, "--", "--fixture-dir", fixtureDir],
+          { cwd: repoRoot, maxBuffer: 4 * 1024 * 1024 },
+        ),
+        /key page HTML: \/learn exceeds 1000000 bytes/,
+      );
+    },
+  );
+});
+
 test("deployed technical SEO checker rejects utility URLs without noindex headers", async () => {
   await withDeployedFixture(
     {
@@ -1339,6 +1672,26 @@ test("deployed technical SEO checker rejects utility URLs without noindex header
           { cwd: repoRoot },
         ),
         /utility X-Robots-Tag invalid: \/llms\.txt/,
+      );
+    },
+  );
+});
+
+test("deployed technical SEO checker rejects humans.txt without noindex headers", async () => {
+  await withDeployedFixture(
+    {
+      utilityHeaders: {
+        "/humans.txt": {},
+      },
+    },
+    async (fixtureDir) => {
+      await assert.rejects(
+        execFileAsync(
+          process.execPath,
+          [deployedCheckerScript, "--", "--fixture-dir", fixtureDir],
+          { cwd: repoRoot },
+        ),
+        /utility X-Robots-Tag invalid: \/humans\.txt/,
       );
     },
   );
@@ -1471,7 +1824,7 @@ test("built technical SEO checker verifies compiled redirects, headers, and site
 
     assert.match(stdout, /redirects ok: 26/);
     assert.match(stdout, /global 404 ok/);
-    assert.match(stdout, /noindex headers ok: 5/);
+    assert.match(stdout, /noindex headers ok: 7/);
     assert.match(stdout, /sitemap required locs ok: 13/);
     assert.match(stdout, /html page checks ok: 13/);
     assert.match(stdout, /all html FAQPage absent ok: 14/);
@@ -1969,10 +2322,11 @@ test("seo weekly generator turns GSC exports into a ranked Markdown action repor
     const report = await readFile(outputPath, "utf8");
 
     assert.match(report, /^# Weekly SEO\/GEO Audit — 2026-06-07/m);
-    assert.match(report, /\| Query table clicks \| 1 \|/);
-    assert.match(report, /\| Query table impressions \| 69 \|/);
-    assert.match(report, /\| Query table CTR \| 1\.45% \|/);
-    assert.match(report, /\| Query table average position \| 16\.0 \|/);
+    assert.match(report, /\| Property clicks \| manual \/ unavailable \|/);
+    assert.match(report, /\| Visible query table clicks \| 1 \|/);
+    assert.match(report, /\| Visible query table impressions \| 69 \|/);
+    assert.match(report, /\| Visible query table CTR \| 1\.45% \|/);
+    assert.match(report, /\| Visible query table average position \| 16\.0 \|/);
     assert.doesNotMatch(report, /\| Total impressions \|/);
 
     assert.match(report, /## Top Actions/);
@@ -2023,7 +2377,7 @@ test("seo weekly generator turns GSC exports into a ranked Markdown action repor
     );
     assert.match(
       report,
-      /Export or manually record Umami landing pages, referrers, AI referrals, Reddit referrals, and `llms\.txt` hits\./,
+      /Run `pnpm seo:vercel:fetch -- --date YYYY-MM-DD` before the weekly report; keep custom CTA events marked account-gated when the Vercel plan blocks them\./,
     );
     assert.match(
       report,
@@ -2032,6 +2386,43 @@ test("seo weekly generator turns GSC exports into a ranked Markdown action repor
     assert.doesNotMatch(report, /Record before\/after GSC snapshot for changed pages\./);
     assert.doesNotMatch(report, /Verify `\/sitemap\.xml` includes changed canonical URLs\./);
     assert.doesNotMatch(report, /gsc-queries\.csv/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly report separates property totals from visible query and page rows", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-property-totals-"));
+  try {
+    const inputDir = join(outputRoot, "input");
+    const outputPath = join(outputRoot, "2026-06-07-weekly-seo.md");
+    await writePipelineGscInput(inputDir);
+
+    await execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs"),
+        "--",
+        "--input-dir",
+        inputDir,
+        "--date",
+        "2026-06-07",
+        "--output",
+        outputPath,
+      ],
+      { cwd: repoRoot },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+    assert.match(report, /\| Property clicks \| 3 \|/);
+    assert.match(report, /\| Property impressions \| 70 \|/);
+    assert.match(report, /\| Property CTR \| 4\.29% \|/);
+    assert.match(report, /\| Property average position \| 10\.2 \|/);
+    assert.match(report, /\| Visible query table clicks \| 1 \|/);
+    assert.match(report, /\| Visible query table impressions \| 69 \|/);
+    assert.match(report, /\| Query visibility gap \| 2 clicks; 1 impressions \|/);
+    assert.match(report, /\| Visible page table clicks \| 1 \|/);
+    assert.match(report, /\| Visible page table impressions \| 99 \|/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }
@@ -2049,6 +2440,263 @@ test("seo weekly pipeline trigger runs from a standard input directory", async (
         "--",
         "--input-dir",
         fixtureRoot,
+        "--allow-fixture-input",
+        "true",
+        "--date",
+        "2026-06-07",
+        "--output",
+        outputPath,
+      ],
+      { cwd: repoRoot, env: { ...process.env, npm_lifecycle_event: "seo:weekly:sample" } },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+
+    assert.match(report, /^# Weekly SEO\/GEO Audit — 2026-06-07/m);
+    assert.match(report, /\| Visible query table impressions \| 69 \|/);
+    assert.match(report, /origin vs basic memory/);
+    assert.match(report, /Do not create a new Learn page unless/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly pipeline rejects fixture bypass outside the sample lifecycle", async () => {
+  await assert.rejects(
+    execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs"),
+        "--",
+        "--input-dir",
+        fixtureRoot,
+        "--allow-fixture-input",
+        "true",
+        "--date",
+        "2026-06-07",
+      ],
+      { cwd: repoRoot },
+    ),
+    /fixture input is reserved for pnpm seo:weekly:sample/,
+  );
+});
+
+test("seo weekly pipeline rejects metadata-free input outside fixture mode", async () => {
+  await assert.rejects(
+    execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs"),
+        "--",
+        "--input-dir",
+        fixtureRoot,
+        "--date",
+        "2026-06-07",
+      ],
+      { cwd: repoRoot },
+    ),
+    /Missing GSC metadata/,
+  );
+});
+
+test("seo weekly pipeline rejects GSC metadata for another property", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-wrong-property-"));
+  try {
+    const inputDir = join(outputRoot, "input");
+    await writePipelineGscInput(inputDir, { siteUrl: "sc-domain:example.com" });
+
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [
+          resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs"),
+          "--",
+          "--input-dir",
+          inputDir,
+          "--date",
+          "2026-06-07",
+        ],
+        { cwd: repoRoot },
+      ),
+      /GSC property must be sc-domain:wenlan\.app/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly pipeline rejects unsupported provenance labels", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-forged-source-"));
+  try {
+    const inputDir = join(outputRoot, "input");
+    await writePipelineGscInput(inputDir, { source: "synthetic fixture" });
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [
+          resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs"),
+          "--",
+          "--input-dir",
+          inputDir,
+          "--date",
+          "2026-06-07",
+        ],
+        { cwd: repoRoot },
+      ),
+      /GSC metadata source must be one of:/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly pipeline rejects sidecar row counts that disagree with CSVs", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-row-count-mismatch-"));
+  try {
+    const inputDir = join(outputRoot, "input");
+    await writePipelineGscInput(inputDir, { queryRows: 999, pageRows: 999 });
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [
+          resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs"),
+          "--",
+          "--input-dir",
+          inputDir,
+          "--date",
+          "2026-06-07",
+        ],
+        { cwd: repoRoot },
+      ),
+      /GSC query row count disagrees with metadata/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly pipeline rejects malformed sidecar row counts", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-invalid-row-count-"));
+  try {
+    const inputDir = join(outputRoot, "input");
+    await writePipelineGscInput(inputDir, { queryRows: "unknown" });
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [
+          resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs"),
+          "--",
+          "--input-dir",
+          inputDir,
+          "--date",
+          "2026-06-07",
+        ],
+        { cwd: repoRoot },
+      ),
+      /GSC metadata queryRows must be a non-negative integer/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly rejects contradictory property totals at both entry points", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-property-totals-invalid-"));
+  try {
+    const inputDir = join(outputRoot, "input");
+    const metadataPath = join(inputDir, "gsc-metadata.json");
+    await writePipelineGscInput(inputDir, {
+      propertyTotals: {
+        clicks: 3,
+        impressions: 70,
+        ctr: 0.5,
+        position: 10.2,
+        aggregationType: "byProperty",
+      },
+    });
+
+    for (const command of [
+      [
+        resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs"),
+        "--",
+        "--input-dir",
+        inputDir,
+        "--date",
+        "2026-06-07",
+      ],
+      [
+        resolve(repoRoot, "scripts/seo-weekly.mjs"),
+        "--",
+        "--queries",
+        join(inputDir, "gsc-queries.csv"),
+        "--pages",
+        join(inputDir, "gsc-pages.csv"),
+        "--gsc-metadata",
+        metadataPath,
+        "--date",
+        "2026-06-07",
+        "--output",
+        join(outputRoot, "weekly.md"),
+      ],
+    ]) {
+      await assert.rejects(
+        execFileAsync(process.execPath, command, { cwd: repoRoot }),
+        /propertyTotals CTR must equal clicks divided by impressions/,
+      );
+    }
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly pipeline rejects a stale evidence range", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-stale-range-"));
+  try {
+    const inputDir = join(outputRoot, "input");
+    await writePipelineGscInput(inputDir, {
+      startDate: "2026-04-01",
+      endDate: "2026-04-28",
+    });
+
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [
+          resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs"),
+          "--",
+          "--input-dir",
+          inputDir,
+          "--date",
+          "2026-06-07",
+        ],
+        { cwd: repoRoot },
+      ),
+      /GSC evidence range must be 2026-05-10 to 2026-06-06/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly pipeline allows an explicit manual evidence range", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-manual-range-"));
+  try {
+    const inputDir = join(outputRoot, "input");
+    const outputPath = join(outputRoot, "weekly-seo.md");
+    await writePipelineGscInput(inputDir, {
+      startDate: "2026-04-01",
+      endDate: "2026-04-28",
+    });
+
+    await execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs"),
+        "--",
+        "--input-dir",
+        inputDir,
+        "--allow-manual-date-range",
+        "true",
         "--date",
         "2026-06-07",
         "--output",
@@ -2058,11 +2706,82 @@ test("seo weekly pipeline trigger runs from a standard input directory", async (
     );
 
     const report = await readFile(outputPath, "utf8");
+    assert.match(report, /\| Date range \| 2026-04-01 to 2026-04-28 \|/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
 
-    assert.match(report, /^# Weekly SEO\/GEO Audit — 2026-06-07/m);
-    assert.match(report, /\| Query table impressions \| 69 \|/);
-    assert.match(report, /origin vs basic memory/);
-    assert.match(report, /Do not create a new Learn page unless/);
+test("seo weekly pipeline rejects sidecar metadata that disagrees with CSV rows", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-row-metadata-mismatch-"));
+  try {
+    const inputDir = join(outputRoot, "input");
+    await writePipelineGscInput(inputDir);
+    await writeFile(
+      join(inputDir, "gsc-queries.csv"),
+      [
+        "Query,Clicks,Impressions,CTR,Position,Start date,End date,Source",
+        "claude code memory,0,12,0%,12.4,2026-04-01,2026-04-28,stale export",
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+    await writeFile(
+      join(inputDir, "gsc-pages.csv"),
+      [
+        "Page,Clicks,Impressions,CTR,Position,Start date,End date,Source",
+        "https://wenlan.app/learn/claude-code-memory,0,12,0%,12.4,2026-04-01,2026-04-28,stale export",
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [
+          resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs"),
+          "--",
+          "--input-dir",
+          inputDir,
+          "--date",
+          "2026-06-07",
+        ],
+        { cwd: repoRoot },
+      ),
+      /GSC queries date range disagrees with metadata/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly pipeline rejects impossible manual dates", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-invalid-manual-range-"));
+  try {
+    const inputDir = join(outputRoot, "input");
+    await writePipelineGscInput(inputDir, {
+      startDate: "2026-02-30",
+      endDate: "2026-03-29",
+    });
+
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [
+          resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs"),
+          "--",
+          "--input-dir",
+          inputDir,
+          "--allow-manual-date-range",
+          "true",
+          "--date",
+          "2026-06-07",
+        ],
+        { cwd: repoRoot },
+      ),
+      /GSC metadata startDate must be a valid YYYY-MM-DD date/,
+    );
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }
@@ -2147,6 +2866,73 @@ test("seo weekly generator summarizes optional Umami CSV exports", async () => {
     assert.match(report, /\| chatgpt\.com \| 8 \| AI referral \|/);
     assert.match(report, /\| reddit\.com \| 9 \| Reddit \|/);
     assert.doesNotMatch(report, /\| Umami sessions \| manual \|/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly generator prefers Vercel Web Analytics evidence and records event gating", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-seo-vercel-"));
+  try {
+    const pagesPath = join(outputRoot, "vercel-pages.csv");
+    const referrersPath = join(outputRoot, "vercel-referrers.csv");
+    const metadataPath = join(outputRoot, "vercel-metadata.json");
+    const outputPath = join(outputRoot, "2026-06-07-weekly-seo.md");
+    await writeFile(
+      pagesPath,
+      ["Path,Visitors,Pageviews", "/,46,53", "/learn,3,5", ""].join("\n"),
+      "utf8",
+    );
+    await writeFile(
+      referrersPath,
+      ["Referrer,Visitors,Pageviews", "google.com,6,6", "chatgpt.com,1,1", ""].join("\n"),
+      "utf8",
+    );
+    await writeFile(
+      metadataPath,
+      JSON.stringify({
+        source: "Vercel Web Analytics API",
+        projectId: "prj_test",
+        projectName: "wenlan-site",
+        startDate: "2026-05-10",
+        endDate: "2026-06-06",
+        totals: { visitors: 153, pageviews: 192 },
+        customEvents: { status: "account-gated", reason: "Pro or Enterprise plan required" },
+      }),
+      "utf8",
+    );
+
+    await execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly.mjs"),
+        "--",
+        "--queries",
+        resolve(fixtureRoot, "gsc-queries.csv"),
+        "--pages",
+        resolve(fixtureRoot, "gsc-pages.csv"),
+        "--vercel-pages",
+        pagesPath,
+        "--vercel-referrers",
+        referrersPath,
+        "--vercel-metadata",
+        metadataPath,
+        "--date",
+        "2026-06-07",
+        "--output",
+        outputPath,
+      ],
+      { cwd: repoRoot },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+    assert.match(report, /\| Analytics data source \| Vercel Web Analytics API \|/);
+    assert.match(report, /\| Analytics visitors \| 153 \|/);
+    assert.match(report, /\| Analytics pageviews \| 192 \|/);
+    assert.match(report, /\| AI referrals \| 1 visit from 1 referrer \|/);
+    assert.match(report, /\| CTA custom events \| account-gated: Pro or Enterprise plan required \|/);
+    assert.match(report, /## Vercel Analytics Evidence/);
+    assert.match(report, /\| `\/learn` \| 3 \| 5 \|/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }
@@ -2424,17 +3210,7 @@ test("seo weekly pipeline trigger auto-detects optional Umami CSV exports", asyn
   try {
     const inputDir = join(outputRoot, "input");
     const outputPath = join(outputRoot, "2026-06-07-weekly-seo.md");
-    await mkdir(inputDir, { recursive: true });
-    await writeFile(
-      join(inputDir, "gsc-queries.csv"),
-      await readFile(resolve(fixtureRoot, "gsc-queries.csv"), "utf8"),
-      "utf8",
-    );
-    await writeFile(
-      join(inputDir, "gsc-pages.csv"),
-      await readFile(resolve(fixtureRoot, "gsc-pages.csv"), "utf8"),
-      "utf8",
-    );
+    await writePipelineGscInput(inputDir);
     await writeFile(
       join(inputDir, "umami-pages.csv"),
       ["Page,Views", "/learn,10", "/llms.txt,2", ""].join("\n"),
@@ -2499,6 +3275,13 @@ test("seo weekly pipeline accepts empty GSC API exports with metadata", async ()
           source: "Search Console API",
           queryRows: 0,
           pageRows: 0,
+          propertyTotals: {
+            clicks: 0,
+            impressions: 0,
+            ctr: null,
+            position: null,
+            aggregationType: "byProperty",
+          },
           sitemaps: {
             sitemap: [
               {
@@ -2535,8 +3318,12 @@ test("seo weekly pipeline accepts empty GSC API exports with metadata", async ()
     assert.match(report, /Generated from Search Console API/);
     assert.match(report, /\| Date range \| 2026-06-05 to 2026-07-02 \|/);
     assert.match(report, /\| GSC data source \| Search Console API \|/);
-    assert.match(report, /\| Query table clicks \| 0 \|/);
-    assert.match(report, /\| Query table impressions \| 0 \|/);
+    assert.match(report, /\| Property clicks \| 0 \|/);
+    assert.match(report, /\| Property impressions \| 0 \|/);
+    assert.match(report, /\| Property CTR \| manual \/ unavailable \|/);
+    assert.match(report, /\| Property average position \| manual \/ unavailable \|/);
+    assert.match(report, /\| Visible query table clicks \| 0 \|/);
+    assert.match(report, /\| Visible query table impressions \| 0 \|/);
     assert.match(report, /\| Top page \| - \|/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
@@ -3673,13 +4460,15 @@ test("Learn index SERP copy leads with Wenlan and AI work memory guides", async 
 
   assert.match(
     learnPage,
-    /title: "Wenlan Learn: LLM Wiki Guides for Claude Code, Codex, ChatGPT"/,
+    /title: "AI Memory Guides for Claude Code, Codex, ChatGPT \| Wenlan"/,
   );
   assert.match(
     learnPage,
-    /Find Wenlan guides for source-backed AI work, Claude Code and Codex workflows, ChatGPT remote MCP, local clients, setup, trust, and comparisons\./,
+    /Build persistent AI work memory across Claude Code, Codex, ChatGPT, and Cursor with setup guides, MCP workflows, source-backed wiki patterns, and comparisons\./,
   );
-  assert.match(learnPage, />\s*Wenlan LLM wiki guides\.\s*</);
+  assert.match(learnPage, />\s*AI memory guides for work that carries forward\.\s*</);
+  assert.match(learnPage, /Basic Memory comparison/);
+  assert.match(learnPage, /Claude Code session handoff/);
   assert.doesNotMatch(learnPage, /Before you add memory to AI work\./);
   assert.match(learnOgImage, /title="Wenlan LLM wiki guides\."/);
   assert.doesNotMatch(learnOgImage, /Before you add memory to AI work\./);

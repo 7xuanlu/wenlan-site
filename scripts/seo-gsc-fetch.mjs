@@ -227,30 +227,102 @@ async function searchAnalytics({
       body: JSON.stringify({
         startDate,
         endDate,
-        dimensions: [dimension],
-        rowLimit: 25000,
-        startRow: 0,
+        aggregationType: dimension === "page" ? "byPage" : "byProperty",
+        ...(dimension
+          ? {
+              dimensions: [dimension],
+              rowLimit: 25000,
+              startRow: 0,
+            }
+          : {}),
       }),
     },
   });
 }
 
+function propertyTotalsFromResponse(response) {
+  if (response.responseAggregationType !== "byProperty") {
+    throw new Error(
+      `GSC property totals must use byProperty aggregation; received ${response.responseAggregationType ?? "missing"}`,
+    );
+  }
+  if ((response.rows?.length ?? 0) > 1) {
+    throw new Error("GSC byProperty response must contain at most one row");
+  }
+
+  const row = response.rows?.[0];
+  if (!row) {
+    return {
+      clicks: 0,
+      impressions: 0,
+      ctr: null,
+      position: null,
+      aggregationType: "byProperty",
+    };
+  }
+  if (row.impressions === 0) {
+    if ((row.clicks ?? 0) !== 0) {
+      throw new Error("GSC property total clicks require impressions");
+    }
+    return {
+      clicks: 0,
+      impressions: 0,
+      ctr: null,
+      position: null,
+      aggregationType: "byProperty",
+    };
+  }
+  const propertyTotals = {
+    clicks: row.clicks,
+    impressions: row.impressions,
+    ctr: row.ctr,
+    position: row.position,
+    aggregationType: "byProperty",
+  };
+  for (const field of ["clicks", "impressions"]) {
+    if (!Number.isSafeInteger(propertyTotals[field]) || propertyTotals[field] < 0) {
+      throw new Error(`GSC property total ${field} must be a non-negative integer`);
+    }
+  }
+  for (const field of ["ctr", "position"]) {
+    if (!Number.isFinite(propertyTotals[field]) || propertyTotals[field] < 0) {
+      throw new Error(`GSC property total ${field} must be a non-negative number`);
+    }
+  }
+  if (propertyTotals.ctr > 1) {
+    throw new Error("GSC property total ctr must be between 0 and 1");
+  }
+  if (propertyTotals.clicks > propertyTotals.impressions) {
+    throw new Error("GSC property total clicks cannot exceed impressions");
+  }
+  const expectedCtr = propertyTotals.clicks / propertyTotals.impressions;
+  if (Math.abs(propertyTotals.ctr - expectedCtr) > 1e-12) {
+    throw new Error("GSC property total CTR must equal clicks divided by impressions");
+  }
+  if (propertyTotals.position === 0) {
+    throw new Error("GSC property total position must be positive when impressions exist");
+  }
+  return propertyTotals;
+}
+
 async function fetchGscData(args) {
   if (args.fixtureDir) {
-    const [queries, pages, sitemaps] = await Promise.all([
+    const [queries, pages, property, sitemaps] = await Promise.all([
       readFixture(args.fixtureDir, "searchanalytics-query"),
       readFixture(args.fixtureDir, "searchanalytics-page"),
+      readFixture(args.fixtureDir, "searchanalytics-property"),
       readFixture(args.fixtureDir, "sitemaps"),
     ]);
-    return { queries, pages, sitemaps };
+    return { queries, pages, property, sitemaps };
   }
 
   const token = await getAccessToken();
   const quotaProject = await getQuotaProject();
 
-  const [queries, pages, sitemaps] = await Promise.all([
+  const [queries, pages, property, sitemaps] = await Promise.all([
     searchAnalytics({ ...args, token, quotaProject, dimension: "query" }),
     searchAnalytics({ ...args, token, quotaProject, dimension: "page" }),
+    searchAnalytics({ ...args, token, quotaProject }),
     gscRequest({
       token,
       path: `sites/${encodeURIComponent(args.siteUrl)}/sitemaps`,
@@ -258,12 +330,13 @@ async function fetchGscData(args) {
       quotaProject,
     }).catch((error) => ({ error: error.message })),
   ]);
-  return { queries, pages, sitemaps };
+  return { queries, pages, property, sitemaps };
 }
 
 async function run() {
   const args = parseArgs(process.argv.slice(2));
-  const { queries, pages, sitemaps } = await fetchGscData(args);
+  const { queries, pages, property, sitemaps } = await fetchGscData(args);
+  const propertyTotals = propertyTotalsFromResponse(property);
 
   await mkdir(args.outputDir, { recursive: true });
   await writeFile(
@@ -298,6 +371,7 @@ async function run() {
         source: args.source,
         queryRows: queries.rows?.length ?? 0,
         pageRows: pages.rows?.length ?? 0,
+        propertyTotals,
         sitemaps,
       },
       null,
@@ -314,6 +388,7 @@ async function run() {
         endDate: args.endDate,
         queryRows: queries.rows?.length ?? 0,
         pageRows: pages.rows?.length ?? 0,
+        propertyTotals,
         sitemapCount: sitemaps.sitemap?.length ?? 0,
         sitemapError: sitemaps.error ?? null,
       },

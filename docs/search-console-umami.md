@@ -1,8 +1,8 @@
-# Wenlan Search Console + Umami + Searchfit SEO Loop
+# Wenlan Search Console + Vercel Analytics + Searchfit SEO Loop
 
 This is Wenlan's weekly measurement loop. Use it to decide whether the next SEO sprint should be technical cleanup, page refreshes, distribution, or new content. Do not start a new content batch until Search Console shows which canonical pages are indexed and which query clusters are already earning impressions.
 
-This loop is also scheduled in Codex as the active heartbeat automation `weekly-wenlan-seo-cleanup`. The automation should wake this thread weekly, use live GSC data when the authenticated browser/session is available, and fall back to deployed-site technical checks when account-gated data is unavailable.
+This loop is also scheduled in Codex as the active heartbeat automation `weekly-origin-seo-cleanup`. The automation should wake this thread weekly, use live GSC data when the authenticated browser/session is available, and fall back to deployed-site technical checks when account-gated data is unavailable.
 
 The canonical deployed property is now `wenlan.app`. Keep public-site technical checks pointed at `https://wenlan.app`; `useorigin.app` is a legacy bridge host that should redirect to the canonical apex.
 
@@ -41,7 +41,7 @@ Run this once per week, using the same date range for every export.
    - `Crawled - currently not indexed`
    - `Discovered - currently not indexed`
 5. Search Console → **Sitemaps**. Record last read time, discovered URLs, and errors.
-6. Vercel Analytics or Umami → same date range. Record landing pages, referrers, AI referrals, `llms.txt` hits, and Reddit referrals when the account/export view exposes them.
+6. Fetch Vercel Web Analytics for the same date range. Use Umami exports only as optional fallback enrichment.
 
 Generate the ranked weekly action report with the deterministic pipeline trigger:
 
@@ -49,12 +49,32 @@ Generate the ranked weekly action report with the deterministic pipeline trigger
 mkdir -p /tmp/wenlan-seo
 # Save the GSC Queries export as /tmp/wenlan-seo/gsc-queries.csv
 # Save the GSC Pages export as /tmp/wenlan-seo/gsc-pages.csv
+# Save matching provenance as /tmp/wenlan-seo/gsc-metadata.json
+# Fetch authenticated Vercel page/referrer evidence for the same 28 complete days:
+pnpm seo:vercel:fetch -- --date YYYY-MM-DD
 # Optional when Umami export access is available:
 #   /tmp/wenlan-seo/umami-pages.csv
 #   /tmp/wenlan-seo/umami-referrers.csv
 #   /tmp/wenlan-seo/umami-events.csv
 pnpm seo:weekly:run -- --date YYYY-MM-DD
 ```
+
+Normal weekly runs require `gsc-metadata.json` so stale, unsupported-source, or wrong-property CSVs are rejected before report generation. Metadata is a local provenance declaration, not a cryptographic proof; the weekly operator must still obtain the CSVs from authenticated GSC. For a report dated `2026-07-10`, the file is:
+
+```json
+{
+  "siteUrl": "sc-domain:wenlan.app",
+  "startDate": "2026-06-12",
+  "endDate": "2026-07-09",
+  "source": "authenticated GSC UI export"
+}
+```
+
+The accepted source labels are `Search Console API`, `authenticated GSC UI export`, and `authenticated GSC CSV export`. The default range is the 28 complete days ending before `--date`. When a deliberate manual GSC range differs, pass `--allow-manual-date-range true`. Fixture mode is bound to the `pnpm seo:weekly:sample` lifecycle and committed fixture directory; direct use is rejected.
+
+API fetches also save a separate `byProperty` aggregate in `propertyTotals`. The weekly report must keep that value separate from visible query and page row sums: anonymized queries are included in property totals but omitted from the query table, while page aggregation can count multiple Wenlan URLs shown in one search. `Query visibility gap` records the difference between the property aggregate and visible query rows.
+
+GSC cannot identify an individual click or exclude site-owner traffic. A click counts only when someone follows a Wenlan result out of Google Search; direct visits, local checks, `curl`, and deployed technical checks do not create GSC Search clicks. Use the report's date, page, country, and device dimensions plus optional Vercel or Umami evidence to investigate suspicious activity, but do not claim exact person-level attribution.
 
 If the local Google account can mint a Search Console-scoped ADC token, use the API fetcher instead of browser CSV downloads. First make sure the Search Console API is enabled on the ADC quota project, then mint a scoped ADC token:
 
@@ -73,7 +93,7 @@ The ADC token must include `https://www.googleapis.com/auth/webmasters.readonly`
 
 The readonly scope is enough to fetch Search Analytics, sitemap metadata, and URL Inspection status. It is not enough to resubmit sitemaps; that write call returns `ACCESS_TOKEN_SCOPE_INSUFFICIENT` unless the ADC token also has a write Search Console scope such as `https://www.googleapis.com/auth/webmasters`. Request indexing for ordinary web pages remains a Search Console UI action; the URL Inspection API reports indexed/indexable status but does not submit indexing requests.
 
-The report is written to `docs/seo-audits/YYYY-MM-DD-weekly-seo.md`. GSC CSVs drive the ranked query/page recommendations. Optional Umami CSVs summarize landing pages, referrers, AI referrals, Reddit referrals, and `llms.txt` hits as export-row totals. If Vercel Analytics is the available analytics source, manually copy the same landing-page/referrer evidence into the weekly worksheet until the local pipeline has a Vercel export parser. If no analytics export is available, those fields remain manual/account-gated and should not be inferred.
+The report is written to `docs/seo-audits/YYYY-MM-DD-weekly-seo.md`. GSC CSVs drive the ranked query/page recommendations. `seo:vercel:fetch` uses the authenticated Vercel CLI to write `vercel-pages.csv`, `vercel-referrers.csv`, and `vercel-metadata.json` under `/tmp/wenlan-seo`; the weekly pipeline auto-detects these files and prefers them over Umami. Optional Umami CSVs remain supported as a fallback. Vercel custom CTA event reporting requires a Pro or Enterprise plan; when the API returns `402`, keep the field account-gated instead of inferring event counts.
 
 Run the technical checks against the deployed site and the fresh local build before marking the loop complete:
 
@@ -83,7 +103,7 @@ pnpm build
 pnpm seo:technical:built
 ```
 
-`pnpm seo:technical:deployed` verifies production robots, sitemap entries, old guide redirects, key page canonicals/robots/schema, utility `X-Robots-Tag` headers, and absence of `FAQPage` JSON-LD on checked pages. `pnpm seo:technical:built` verifies the same local SEO-sensitive config after the build, plus compiled redirect/header rules and all built HTML for `FAQPage`.
+`pnpm seo:technical:deployed` verifies production robots, sitemap entries, old guide redirects, direct-200 key page canonicals/robots/schema, all configured utility `X-Robots-Tag` headers, and absence of `FAQPage` JSON-LD across sitemap HTML pages. `pnpm seo:technical:built` verifies the same local SEO-sensitive config after the build, plus compiled redirect/header rules and all built HTML for `FAQPage`.
 
 After deploying a redirect change, rerun the deployed checker with the strict post-deploy flag so changed legacy redirects are direct, not just eventually canonical:
 

@@ -8,6 +8,7 @@ import { PainsSection } from "@/components/home/pains";
 import { PipelineSection } from "@/components/home/pipeline";
 import { StorageSection } from "@/components/home/storage";
 import { UseCasesSection } from "@/components/home/use-cases";
+import { TrackedLink, TrackedLocalizedLink } from "@/components/tracked-link";
 import { getCoreContent, type HomeContent, type LinkContent } from "@/i18n/content";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/locales";
 import { LocalizedLink, localizedHrefForLocale } from "@/i18n/navigation";
@@ -184,8 +185,8 @@ export function HomePage({ locale }: { locale: Locale }) {
               ))}
             </div>
             <div className="animate-fade-up motion-reduce:animate-none delay-400 mt-8 flex flex-wrap items-center gap-4">
-              <HomeCta link={content.hero.primaryCta} locale={locale} variant="primary" />
-              <HomeCta link={content.hero.secondaryCta} locale={locale} variant="secondary" />
+              <HomeCta link={content.hero.primaryCta} locale={locale} placement="home-hero" variant="primary" />
+              <HomeCta link={content.hero.secondaryCta} locale={locale} placement="home-hero" variant="secondary" />
             </div>
           </div>
           <div className="animate-fade-up motion-reduce:animate-none delay-300 pt-6 lg:col-span-6 lg:pt-0">
@@ -306,8 +307,8 @@ export function HomePage({ locale }: { locale: Locale }) {
           </div>
           <div className="lg:col-span-5 lg:border-l lg:border-[var(--o-border-subtle)] lg:pl-10">
             <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <HomeCta link={cta.primaryCta} locale={locale} variant="primary" />
-              <HomeCta link={cta.secondaryCta} locale={locale} variant="secondary" showGithubIcon />
+              <HomeCta link={cta.primaryCta} locale={locale} placement="home-footer" variant="primary" />
+              <HomeCta link={cta.secondaryCta} locale={locale} placement="home-footer" variant="secondary" showGithubIcon />
             </div>
             <div className="mt-9 max-w-md">
               <p className="mb-3 text-sm text-[var(--o-text-muted)]">
@@ -355,11 +356,13 @@ function LanguageSwitcher({ href, locale }: { href: string; locale: Locale }) {
 function HomeCta({
   link,
   locale,
+  placement,
   showGithubIcon = false,
   variant,
 }: {
   link: LinkContent;
   locale: Locale;
+  placement: "home-hero" | "home-footer";
   showGithubIcon?: boolean;
   variant: "primary" | "secondary";
 }) {
@@ -378,16 +381,32 @@ function HomeCta({
 
   if (isExternalHref(link.href)) {
     return (
-      <a href={link.href} target="_blank" rel="noopener noreferrer" className={className}>
+      <TrackedLink
+        href={link.href}
+        eventName="GitHub Click"
+        placement={placement}
+        locale={locale}
+        context="home"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
         {children}
-      </a>
+      </TrackedLink>
     );
   }
 
   return (
-    <LocalizedLink href={link.href} locale={locale} className={className}>
+    <TrackedLocalizedLink
+      href={link.href}
+      eventName="Get Started Click"
+      placement={placement}
+      locale={locale}
+      context="home"
+      className={className}
+    >
       {children}
-    </LocalizedLink>
+    </TrackedLocalizedLink>
   );
 }
 

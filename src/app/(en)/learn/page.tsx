@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { TrackedLink, type AnalyticsContext } from "@/components/tracked-link";
 import {
   articleCategories,
   articles,
@@ -8,72 +9,93 @@ import {
   SITE_URL,
 } from "./articles";
 import { ArticleHalo, MemoryIndex } from "./article-visuals";
+import { alternateUrls } from "@/i18n/routing";
 
 export const metadata: Metadata = {
-  title: "Wenlan Learn: LLM Wiki Guides for Claude Code, Codex, ChatGPT",
+  title: "AI Memory Guides for Claude Code, Codex, ChatGPT | Wenlan",
   description:
-    "Find Wenlan guides for source-backed AI work, Claude Code and Codex workflows, ChatGPT remote MCP, local clients, setup, trust, and comparisons.",
+    "Build persistent AI work memory across Claude Code, Codex, ChatGPT, and Cursor with setup guides, MCP workflows, source-backed wiki patterns, and comparisons.",
   alternates: {
     canonical: "/learn",
+    languages: alternateUrls("/learn"),
   },
   openGraph: {
-    title: "Wenlan Learn: LLM Wiki Guides for Claude Code, Codex, ChatGPT",
+    title: "AI Memory Guides for Claude Code, Codex, ChatGPT | Wenlan",
     description:
-      "Find Wenlan guides for source-backed AI work, Claude Code and Codex workflows, ChatGPT remote MCP, local clients, setup, trust, and comparisons.",
+      "Build persistent AI work memory across Claude Code, Codex, ChatGPT, and Cursor with setup guides, MCP workflows, source-backed wiki patterns, and comparisons.",
     type: "website",
     url: `${SITE_URL}/learn`,
     siteName: "Wenlan",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Wenlan Learn: LLM Wiki Guides for Claude Code, Codex, ChatGPT",
+    title: "AI Memory Guides for Claude Code, Codex, ChatGPT | Wenlan",
     description:
-      "Find Wenlan guides for source-backed AI work, Claude Code and Codex workflows, ChatGPT remote MCP, local clients, setup, trust, and comparisons.",
+      "Build persistent AI work memory across Claude Code, Codex, ChatGPT, and Cursor with setup guides, MCP workflows, source-backed wiki patterns, and comparisons.",
   },
 };
 
 const searchRoutes = [
   {
-    query: "Claude Code memory",
-    intent: "Understand CLAUDE.md, /memory, and when Wenlan adds shared local context.",
-    href: "/learn/claude-code-memory",
+    query: "Basic Memory comparison",
+    intent: "Compare Wenlan and Basic Memory on provenance, local retrieval, shared clients, and wiki pages.",
+    href: "/learn/wenlan-vs-basic-memory",
+    context: "comparisons",
   },
   {
-    query: "Claude Code /memory",
-    intent: "Decide when native Claude Code memory is enough and when shared local MCP memory helps.",
-    href: "/learn/claude-code-memory-command-vs-wenlan",
+    query: "Claude Code session handoff",
+    intent: "Carry decisions, open work, and next steps from one coding session into the next.",
+    href: "/learn/claude-code-session-handoff",
+    context: "workflows",
   },
   {
     query: "MCP memory server",
     intent: "Connect Claude Code, Codex, Cursor, ChatGPT, and other MCP clients to Wenlan.",
     href: "/learn/mcp-memory-server",
+    context: "concepts",
+  },
+  {
+    query: "Claude Code memory",
+    intent: "Understand CLAUDE.md, /memory, and when Wenlan adds shared local context.",
+    href: "/learn/claude-code-memory",
+    context: "workflows",
   },
   {
     query: "ChatGPT MCP",
     intent: "Connect ChatGPT to your Wenlan runtime through Streamable HTTP MCP Remote Access.",
     href: "/docs/mcp-clients",
+    context: "setup",
   },
   {
     query: "Cursor memory MCP",
     intent: "Wire Cursor to Wenlan's local MCP memory server and verify recall.",
     href: "/learn/how-to-add-mcp-memory-to-cursor",
+    context: "workflows",
   },
   {
     query: "Local AI memory",
     intent: "Keep project context local, inspectable, and under your control.",
     href: "/learn/local-first-ai-memory",
+    context: "concepts",
   },
   {
     query: "Wenlan memory",
     intent: "Map the brand to the category: local AI work memory across tools.",
     href: "/learn/ai-work-memory",
+    context: "concepts",
   },
   {
-    query: "Wenlan vs alternatives",
-    intent: "Compare Wenlan with Basic Memory, claude-mem, Superlocal, Obsidian, and others.",
-    href: "/learn/wenlan-vs-basic-memory",
+    query: "How Wenlan works",
+    intent: "See how the daemon, MCP connector, local index, and source-backed pages fit together.",
+    href: "/docs/architecture",
+    context: "setup",
   },
-];
+] as const satisfies readonly {
+  readonly query: string;
+  readonly intent: string;
+  readonly href: string;
+  readonly context: AnalyticsContext;
+}[];
 
 export default function LearnPage() {
   const breadcrumbSchema = {
@@ -148,12 +170,12 @@ export default function LearnPage() {
                 Learn
               </p>
               <h1 className="warm-glow font-serif text-5xl leading-[1.05] font-medium tracking-tight sm:text-7xl">
-                Wenlan LLM wiki guides.
+                AI memory guides for work that carries forward.
               </h1>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">
-                Wenlan makes AI work compound across Claude Code, Codex,
-                ChatGPT, Cursor, and other MCP-compatible tools. Captures and
-                trusted sources feed an LLM wiki that agents and humans can inspect.
+                Start with setup, persistent memory, or a named comparison.
+                Wenlan keeps durable context local and turns trusted captures
+                into source-backed wiki pages your AI tools can reuse.
               </p>
             </div>
             <MemoryIndex
@@ -195,9 +217,13 @@ export default function LearnPage() {
             </div>
             <div className="grid gap-3 md:grid-cols-2">
               {searchRoutes.map((route) => (
-                <Link
+                <TrackedLink
                   key={route.query}
                   href={route.href}
+                  eventName="Learn Article Click"
+                  placement="learn-search-path"
+                  locale="en"
+                  context={route.context}
                   scroll
                   className="group rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5 transition-colors hover:border-[var(--o-warm)]/50"
                 >
@@ -207,7 +233,7 @@ export default function LearnPage() {
                   <p className="mt-3 text-sm leading-relaxed text-[var(--o-text-secondary)]">
                     {route.intent}
                   </p>
-                </Link>
+                </TrackedLink>
               ))}
             </div>
           </section>
@@ -230,9 +256,13 @@ export default function LearnPage() {
                   </div>
                   <div className="grid gap-4 md:grid-cols-2">
                     {categoryArticles.map((article) => (
-                      <Link
+                      <TrackedLink
                         key={article.slug}
                         href={`/learn/${article.slug}`}
+                        eventName="Learn Article Click"
+                        placement="learn-grid"
+                        locale="en"
+                        context={article.category === "Comparisons" ? "comparisons" : article.category === "Workflows" ? "workflows" : "concepts"}
                         scroll
                         className="card-wenlan group relative overflow-hidden rounded-xl p-7 transition-transform duration-150 hover:-translate-y-1"
                       >
@@ -255,7 +285,7 @@ export default function LearnPage() {
                             <span>{article.readingTime}</span>
                           </div>
                         </div>
-                      </Link>
+                      </TrackedLink>
                     ))}
                   </div>
                 </section>
@@ -278,20 +308,28 @@ export default function LearnPage() {
             loop locally.
           </p>
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Link
+            <TrackedLink
               href="/docs/get-started"
+              eventName="Get Started Click"
+              placement="learn-footer"
+              locale="en"
+              context="setup"
               className="rounded-xl bg-[var(--o-text)] px-6 py-3 text-sm font-semibold text-[var(--o-bg)] transition-all duration-150 hover:opacity-90"
             >
               Get started
-            </Link>
-            <a
+            </TrackedLink>
+            <TrackedLink
               href="https://github.com/7xuanlu/wenlan"
+              eventName="GitHub Click"
+              placement="learn-footer"
+              locale="en"
+              context="setup"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-xl border border-[var(--o-border)] px-6 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-all duration-150 hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)]"
             >
               View on GitHub
-            </a>
+            </TrackedLink>
           </div>
         </div>
       </section>

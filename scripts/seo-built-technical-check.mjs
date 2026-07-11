@@ -90,6 +90,8 @@ const REQUIRED_NOINDEX_HEADERS = [
   { source: "/llms.txt", value: "noindex, follow" },
   { source: "/llms-full.txt", value: "noindex, follow" },
   { source: "/feed.xml", value: "noindex, follow" },
+  { source: "/humans.txt", value: "noindex, follow" },
+  { source: "/manifest.webmanifest", value: "noindex, follow" },
   { source: "/.well-known/security.txt", value: "noindex, follow" },
   { source: "/_next/static/media/:path*", value: "noindex" },
 ];

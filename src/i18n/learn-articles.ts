@@ -354,6 +354,12 @@ export function getLocalizedLearnArticle(
   return localizedLearnArticlesByLocale[locale][slug] ?? null;
 }
 
+export function getLocalizedLearnArticles(locale: TranslatedLocale): readonly LearnArticle[] {
+  return TRANSLATED_LEARN_SLUGS.map(
+    (slug) => localizedLearnArticlesByLocale[locale][slug],
+  );
+}
+
 export function localizedLearnArticlePath(slug: TranslatedLearnSlug): `/learn/${TranslatedLearnSlug}` {
   return `/learn/${slug}`;
 }

@@ -9,20 +9,29 @@ Generated from Google Search Console query/page CSV exports. Raw exports stay ou
 | Week of | YYYY-MM-DD |
 | Date range | Last 28 days |
 | GSC data source | CSV export |
-| Query table clicks | - |
-| Query table impressions | - |
-| Query table CTR | - |
-| Query table average position | - |
+| Property clicks | - |
+| Property impressions | - |
+| Property CTR | - |
+| Property average position | - |
+| Visible query table clicks | - |
+| Visible query table impressions | - |
+| Visible query table CTR | - |
+| Visible query table average position | - |
+| Query visibility gap | - |
+| Visible page table clicks | - |
+| Visible page table impressions | - |
 | Indexed pages | manual |
 | Not indexed pages | manual |
 | Sitemap last read | manual |
-| Umami data source | manual / account-gated |
-| Umami landing page views | manual |
+| Analytics data source | Vercel / Umami / manual |
+| Analytics visitors | manual |
+| Analytics pageviews | manual |
 | AI referrals | manual |
 | Reddit referrals | manual |
 | llms.txt hits | manual |
+| CTA custom events | manual / account-gated |
 
-Use property-level GSC aggregate cards only when they are separately captured. Do not label partial visible query/page table sums as property totals.
+Property totals must come from a separate GSC `byProperty` request or a separately captured property-level card. The query visibility gap records clicks and impressions hidden by anonymization or API row limits. Visible page rows can exceed property totals because one search can show more than one URL from the same property.
 
 ## Top Actions
 
@@ -52,7 +61,7 @@ Do not create a new Learn page unless GSC/Searchfit shows a recurring query clus
 - [ ] Run `pnpm build` and `pnpm seo:technical:built` to verify local built robots, sitemap, redirects, noindex headers, canonicals, and schema.
 - [ ] Verify old `/guides/*` and `/docs/guides/*` URLs redirect to canonical `/learn/*` URLs.
 - [ ] Recheck changed redirects after deployment with `pnpm seo:technical:deployed -- --require-direct-changed-redirects true`.
-- [ ] Export or manually record Umami landing pages, referrers, AI referrals, Reddit referrals, and `llms.txt` hits.
+- [ ] Run `pnpm seo:vercel:fetch -- --date YYYY-MM-DD`; use Umami exports only as optional fallback enrichment.
 - [ ] Add changed pages to the next weekly comparison.
 - [ ] Generate `pnpm seo:ai-visibility -- --date YYYY-MM-DD` and manually check whether AI assistants mention Wenlan accurately for the tracked prompts in `docs/seo-measurement.md`. The command only creates a local worksheet, does not call external assistants, and refuses to overwrite an existing worksheet unless you pass `--force true`.
 - [ ] Next measurement date: YYYY-MM-DD.
