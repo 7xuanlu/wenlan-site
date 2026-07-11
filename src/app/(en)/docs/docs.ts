@@ -813,12 +813,12 @@ export const docPages: DocPage[] = [
     slug: "memory-types",
     group: "Reference",
     eyebrow: "Memory",
-    title: "Memory Types",
+    title: "Wenlan Memory Types and memory_type Values",
     description:
-      "Understand Wenlan's six canonical memory types, how agents choose them, and which legacy aliases still appear at API boundaries.",
-    metaTitle: "Wenlan Memory Types | Docs",
+      "Choose the right Wenlan memory_type for identity, preference, decision, lesson, gotcha, or fact captures.",
+    metaTitle: "Wenlan Memory Types and memory_type Values | Docs",
     metaDescription:
-      "Reference Wenlan's canonical memory_type values: identity, preference, decision, lesson, gotcha, and fact, plus stability tiers and legacy aliases.",
+      "Reference Wenlan memory_type values for identity, preference, decision, lesson, gotcha, and fact, with selection rules, stability tiers, and aliases.",
     keywords: [
       "Wenlan memory types",
       "Wenlan memory_type",
@@ -826,16 +826,16 @@ export const docPages: DocPage[] = [
       "Wenlan capture types",
       "Wenlan memory schema",
     ],
-    updatedAt: DOCS_UPDATED_AT,
+    updatedAt: "2026-07-10",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Wenlan's current public taxonomy has six canonical memory types: identity, preference, decision, lesson, gotcha, and fact.",
-      "Corrections are still valid capture content, but correction is not a canonical memory_type value in the current wire taxonomy.",
+      "Quick answer: Wenlan uses six canonical memory_type values: identity, preference, decision, lesson, gotcha, and fact.",
+      "Choose the type that explains why the capture matters later. Corrections are valid content, but correction is not a canonical memory_type value.",
     ],
     sections: [
       {
-        heading: "Canonical values",
+        heading: "Quick answer: which memory_type to use",
         body: [
           "The daemon stores canonical memory_type values as lowercase strings. Claude Code skills pick one of these values in local memory mode; model-equipped daemon paths can classify on the daemon side.",
           "Use the type that best explains why the memory should matter later, not merely the first label that seems plausible.",
@@ -1410,12 +1410,12 @@ export const docPages: DocPage[] = [
     slug: "cli-and-service",
     group: "Reference",
     eyebrow: "CLI",
-    title: "CLI and Service Management",
+    title: "Wenlan CLI Commands and Service Management",
     description:
-      "Use the Wenlan CLI to install the runtime, manage the daemon, inspect status, search memory, and wire MCP clients.",
-    metaTitle: "Wenlan CLI and Service Management | Docs",
+      "Use the Wenlan CLI to install the runtime, check the daemon, search memory, and connect MCP clients.",
+    metaTitle: "Wenlan CLI Commands and Service Management | Docs",
     metaDescription:
-      "Learn the Wenlan CLI commands for setup, background service management, doctor diagnostics, recall, search, capture, memories, spaces, and MCP client configuration.",
+      "Run the Wenlan CLI for setup, daemon status, doctor diagnostics, background service management, recall, search, capture, and MCP client configuration.",
     keywords: [
       "Wenlan CLI",
       "wenlan doctor",
@@ -1427,15 +1427,15 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "The wenlan CLI is the terminal control surface for setup, diagnostics, background service management, recall, search, capture, memories, spaces, models, keys, and MCP config.",
-      "The daemon still owns memory. The CLI talks to that daemon instead of writing the database directly.",
+      "Quick answer: use wenlan setup, status, doctor, background, recall, search, capture, and connect when you need terminal control over the local memory runtime.",
+      "The daemon owns memory, search, pages, and retrieval. The CLI talks to that daemon instead of editing the database directly.",
     ],
     sections: [
       {
-        heading: "Install the runtime",
+        heading: "Quick answer: what the CLI controls",
         body: [
-          "For non-Claude Code clients, start by installing the local Wenlan runtime. This puts the CLI, daemon, and MCP connector under ~/.wenlan/bin.",
-          "Claude Code plugin users can usually run /setup instead; it verifies the same local runtime and MCP route from inside Claude Code.",
+          "Use the CLI when you need repeatable terminal commands for setup, daemon health, service state, memory recall, search, capture, and MCP client wiring.",
+          "Claude Code slash commands and MCP tools reach the same local daemon. The CLI is the direct path when a client UI hides status or configuration details.",
         ],
         code: {
           label: "Terminal",
@@ -2704,12 +2704,12 @@ export const docPages: DocPage[] = [
     slug: "data-and-privacy",
     group: "Reference",
     eyebrow: "Local control",
-    title: "Data and Privacy",
+    title: "Wenlan Local Data and Privacy",
     description:
-      "Where Wenlan keeps data, what stays local, and how readable artifacts work with the daemon-owned retrieval store.",
-    metaTitle: "Wenlan Data and Privacy | Docs",
+      "Where Wenlan stores local AI work memory, what stays on your machine, and when connected model providers may see prompts.",
+    metaTitle: "Wenlan Local Data and Privacy | Docs",
     metaDescription:
-      "Understand Wenlan local storage, local memory setup, optional model/API paths, readable artifacts, the daemon store, and deletion controls.",
+      "See where Wenlan stores local AI work memory, what stays on your machine, when AI providers may receive prompts, and how readable artifacts and deletion controls work.",
     keywords: [
       "Wenlan data privacy",
       "local AI work memory storage",
@@ -2721,15 +2721,15 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Wenlan is local-first: the daemon, data, and readable artifacts live on your machine.",
-      "Markdown artifacts remain readable while the database stores retrieval indexes and metadata.",
+      "Quick answer: Wenlan's daemon, database, pages, sessions, and readable artifacts live locally by default.",
+      "Connected AI clients may still send prompts to their model providers; Wenlan keeps its own memory store local, inspectable, and removable.",
     ],
     sections: [
       {
-        heading: "Local-first by default",
+        heading: "Quick answer: what stays local",
         body: [
-          "Wenlan is designed so the durable context your agents use lives locally first. That context can include project decisions, private constraints, preferences, and work history.",
-          "There is no cloud sync or telemetry by default. Connected AI tools may still send prompts to their own model providers; Wenlan keeps its daemon data and readable artifacts local, inspectable, and available across tools.",
+          "Wenlan's durable memory store, daemon database, Markdown pages, session handoffs, and project status files live on your machine by default.",
+          "There is no Wenlan cloud sync or telemetry path by default. Connected AI clients may still send prompts to their own providers, so treat memory content as sensitive project data.",
         ],
       },
       {
@@ -3188,12 +3188,12 @@ export const docPages: DocPage[] = [
     slug: "agent-profiles",
     group: "Reference",
     eyebrow: "Agents",
-    title: "Agent Profiles",
+    title: "Wenlan Agent Profiles and Client Attribution",
     description:
-      "Inspect the AI clients and local tools that write to Wenlan, then manage source attribution, enabled state, and trust from the CLI.",
-    metaTitle: "Wenlan Agent Profiles | Docs",
+      "See which AI client wrote a Wenlan memory, inspect source_agent attribution, and manage trust or enabled state.",
+    metaTitle: "Wenlan Agent Profiles and source_agent | Docs",
     metaDescription:
-      "Learn how Wenlan agent profiles identify Claude Code, Codex, Cursor, local scripts, and other clients through source_agent attribution, trust, enabled state, and CLI management.",
+      "Inspect Claude Code, Codex, Cursor, and local tool attribution in Wenlan with source_agent, agent profiles, trust, enabled state, and CLI commands.",
     keywords: [
       "Wenlan agent profiles",
       "wenlan agents command",
@@ -3201,16 +3201,16 @@ export const docPages: DocPage[] = [
       "AI client trust",
       "MCP agent memory",
     ],
-    updatedAt: DOCS_UPDATED_AT,
+    updatedAt: "2026-07-10",
     author: DEFAULT_AUTHOR,
     readingTime: "4 min read",
     summary: [
-      "Agent profiles help you see which client or tool produced a memory instead of treating every capture as anonymous.",
-      "They are operational metadata for attribution and trust; spaces still separate work contexts.",
+      "Quick answer: agent profiles identify which AI client or local tool produced a memory through source_agent attribution.",
+      "Use them to inspect trust and enabled state; use spaces separately to decide which work context owns the capture.",
     ],
     sections: [
       {
-        heading: "What an agent profile is",
+        heading: "Quick answer: what an agent profile identifies",
         body: [
           "An agent profile represents a writer or client that uses the local daemon: Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, or a local script.",
           "Profiles make source attribution explicit. When memory has a source_agent value, later review and diagnostics can show where it came from.",
@@ -3531,10 +3531,10 @@ export const docPages: DocPage[] = [
     eyebrow: "Security",
     title: "Security and Reporting",
     description:
-      "Report vulnerabilities privately, keep diagnostic reports redacted, and understand Wenlan's local security boundary.",
+      "Report Wenlan vulnerabilities privately, redact diagnostic output, and understand the local daemon security boundary.",
     metaTitle: "Wenlan Security and Vulnerability Reporting | Docs",
     metaDescription:
-      "Learn how to report Wenlan security issues, use the public security policy, avoid leaking private memory contents, and understand Wenlan's local-first security boundary.",
+      "Learn how to report Wenlan security issues privately, use security.txt, avoid leaking private memory contents, and keep the local daemon on the intended boundary.",
     keywords: [
       "Wenlan security",
       "Wenlan vulnerability reporting",
@@ -3546,15 +3546,15 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "4 min read",
     summary: [
-      "Use GitHub Issues for normal bugs and feature requests; use the private security channel for vulnerabilities.",
-      "Do not paste private memory contents, API keys, client names, or ~/.wenlan archives into public reports.",
+      "Quick answer: use GitHub Issues for normal bugs, but report vulnerabilities through the private advisory or email path.",
+      "Redact private memory contents, API keys, client names, daemon databases, and ~/.wenlan archives before sharing diagnostics.",
     ],
     sections: [
       {
-        heading: "Where to report",
+        heading: "Quick answer: where to report",
         body: [
           "Normal setup bugs, docs issues, and feature requests belong in GitHub Issues with redacted diagnostic output.",
-          "If you discover a vulnerability, do not open a public issue. The source repository's SECURITY.md asks you to email h164654156465@gmail.com with the description, reproduction steps, and potential impact; GitHub Security Advisories are also available for private reports.",
+          "If you discover a vulnerability, do not open a public issue. Use the private GitHub Security Advisory path or the email address in SECURITY.md with the description, reproduction steps, affected version, and potential impact.",
         ],
         bullets: [
           "Public bugs: include client, OS, command, expected behavior, actual behavior, and redacted /setup, doctor, or wenlan status output.",

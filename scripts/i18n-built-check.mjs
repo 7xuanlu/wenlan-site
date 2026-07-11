@@ -11,17 +11,21 @@ const expectedOkRoutes = [
   "/zh-TW/about",
   "/zh-TW/docs",
   "/zh-TW/docs/get-started",
+  "/zh-TW/learn",
+  "/zh-TW/learn/distilled-wiki-pages-ai-memory",
+  "/zh-TW/learn/source-backed-wiki-pages-ai-work",
   "/zh-CN",
   "/zh-CN/about",
   "/zh-CN/docs",
   "/zh-CN/docs/get-started",
+  "/zh-CN/learn",
+  "/zh-CN/learn/distilled-wiki-pages-ai-memory",
+  "/zh-CN/learn/source-backed-wiki-pages-ai-work",
 ];
 
 const expectedNotFoundRoutes = [
-  "/zh-TW/learn",
   "/zh-TW/learn/wenlan-vs-basic-memory",
   "/zh-TW/docs/daily-workflow",
-  "/zh-CN/learn",
   "/zh-CN/learn/wenlan-vs-basic-memory",
   "/zh-CN/docs/daily-workflow",
 ];

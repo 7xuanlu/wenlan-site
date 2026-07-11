@@ -5,6 +5,10 @@ import { resolve } from "node:path";
 
 const PRODUCTION_ORIGIN = "https://wenlan.app";
 const DEFAULT_TIMEOUT_MS = 15_000;
+const SITEMAP_CHECK_CONCURRENCY = 8;
+const MAX_SITEMAP_LOCS = 500;
+const MAX_SITEMAP_XML_BYTES = 1_000_000;
+const MAX_SITEMAP_HTML_BYTES = 1_000_000;
 const BRIDGE_HOST_REDIRECTS = [
   "https://www.wenlan.app",
   "https://useorigin.app",
@@ -141,6 +145,8 @@ const UTILITY_NOINDEX_PATHS = [
   "/llms.txt",
   "/llms-full.txt",
   "/feed.xml",
+  "/humans.txt",
+  "/manifest.webmanifest",
   "/.well-known/security.txt",
 ];
 
@@ -213,6 +219,54 @@ function normalizeFixtureHeaders(headers = {}) {
   );
 }
 
+async function readBodyChunk(reader, deadline, label) {
+  const remainingMs = deadline - Date.now();
+  if (remainingMs <= 0) throw new Error(`${label} timed out while reading response body`);
+
+  let timeout;
+  try {
+    return await Promise.race([
+      reader.read(),
+      new Promise((_, reject) => {
+        timeout = setTimeout(
+          () => reject(new Error(`${label} timed out while reading response body`)),
+          remainingMs,
+        );
+      }),
+    ]);
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+async function readTextWithLimit(response, { label, maxBytes, timeoutMs }) {
+  const contentLength = Number(headerValue(response.headers, "content-length"));
+  if (Number.isFinite(contentLength) && contentLength > maxBytes) {
+    throw new Error(`${label} exceeds ${maxBytes} bytes`);
+  }
+  if (!response.body) return "";
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  const chunks = [];
+  const deadline = Date.now() + timeoutMs;
+  let bytesRead = 0;
+  try {
+    while (true) {
+      const { done, value } = await readBodyChunk(reader, deadline, label);
+      if (done) break;
+      bytesRead += value.byteLength;
+      if (bytesRead > maxBytes) throw new Error(`${label} exceeds ${maxBytes} bytes`);
+      chunks.push(decoder.decode(value, { stream: true }));
+    }
+  } catch (error) {
+    await reader.cancel(error).catch(() => {});
+    throw error;
+  }
+  chunks.push(decoder.decode());
+  return chunks.join("");
+}
+
 async function createRequester({ baseUrl, fixtureDir, timeoutMs }) {
   if (!fixtureDir) {
     return async function request(path, options = {}) {
@@ -232,26 +286,31 @@ async function createRequester({ baseUrl, fixtureDir, timeoutMs }) {
   const responses = JSON.parse(await readFile(resolve(fixtureDir, "responses.json"), "utf8"));
   return async function request(path) {
     const requestUrl = new URL(path, baseUrl);
-    const fixture = responses[`${requestUrl.host}${requestUrl.pathname}`] ??
+    const requestPath = `${requestUrl.pathname}${requestUrl.search}`;
+    const fixture = responses[`${requestUrl.host}${requestPath}`] ??
+      responses[requestPath] ??
+      responses[`${requestUrl.host}${requestUrl.pathname}`] ??
       responses[requestUrl.pathname] ?? {
       status: 404,
       headers: {},
       body: `missing fixture response for ${requestUrl.href}`,
     };
-    const headers = normalizeFixtureHeaders(fixture.headers);
-
-    return {
-      status: fixture.status,
-      ok: fixture.status >= 200 && fixture.status < 300,
-      headers: {
-        get(name) {
-          return headerValue(headers, name);
-        },
-      },
-      async text() {
-        return fixture.body ?? "";
-      },
-    };
+    console.log(
+      `[seo-deployed-fixture] ${JSON.stringify({ event: "start", path: requestPath, at: process.hrtime.bigint().toString() })}`,
+    );
+    try {
+      if (fixture.delayMs) {
+        await new Promise((resolveDelay) => setTimeout(resolveDelay, fixture.delayMs));
+      }
+      return new Response(fixture.body ?? "", {
+        status: fixture.status,
+        headers: normalizeFixtureHeaders(fixture.headers),
+      });
+    } finally {
+      console.log(
+        `[seo-deployed-fixture] ${JSON.stringify({ event: "end", path: requestPath, at: process.hrtime.bigint().toString() })}`,
+      );
+    }
   };
 }
 
@@ -363,7 +422,7 @@ async function assertRobots(request) {
   }
 }
 
-async function assertSitemap(request) {
+async function assertSitemap(request, timeoutMs) {
   const response = await request("/sitemap.xml");
   assertOk(response, "/sitemap.xml");
 
@@ -372,7 +431,15 @@ async function assertSitemap(request) {
     throw new Error("/sitemap.xml has blocking X-Robots-Tag");
   }
 
-  const locs = extractLocs(await response.text());
+  const sitemapXml = await readTextWithLimit(response, {
+    label: "sitemap XML",
+    maxBytes: MAX_SITEMAP_XML_BYTES,
+    timeoutMs,
+  });
+  const locs = extractLocs(sitemapXml);
+  if (locs.length > MAX_SITEMAP_LOCS) {
+    throw new Error(`sitemap has too many URLs: ${locs.length} > ${MAX_SITEMAP_LOCS}`);
+  }
   const missingLocs = REQUIRED_SITEMAP_LOCS.filter((loc) => !locs.includes(loc));
   assertNoMissing("required sitemap URLs", missingLocs);
 
@@ -381,15 +448,15 @@ async function assertSitemap(request) {
   );
   assertNone("old sitemap URLs present", oldUrls);
 
-  return locs.length;
+  return locs;
 }
 
-async function assertHtmlPages(request) {
+async function assertHtmlPages(request, timeoutMs) {
   const failures = [];
 
   for (const page of REQUIRED_HTML_PAGES) {
-    const response = await request(page.path);
-    if (!response.ok) {
+    const response = await request(page.path, { redirect: "manual" });
+    if (response.status !== 200) {
       failures.push(`page returned ${response.status}: ${page.path}`);
       continue;
     }
@@ -399,7 +466,17 @@ async function assertHtmlPages(request) {
       failures.push(`blocking X-Robots-Tag header on key page: ${page.path}`);
     }
 
-    const html = await response.text();
+    let html;
+    try {
+      html = await readTextWithLimit(response, {
+        label: `key page HTML: ${page.path}`,
+        maxBytes: MAX_SITEMAP_HTML_BYTES,
+        timeoutMs,
+      });
+    } catch (error) {
+      failures.push(error.message);
+      continue;
+    }
     const canonicals = extractCanonicalTags(html);
     const robotsTags = extractRobotsTags(html);
     const schemaTypes = extractJsonLdTypes(html, page.path);
@@ -419,6 +496,60 @@ async function assertHtmlPages(request) {
   }
 
   assertNone("page SEO invalid", failures);
+}
+
+async function assertSitemapFaqPageAbsent(request, locs, timeoutMs) {
+  const failures = [];
+  let activeRequests = 0;
+  let peakRequests = 0;
+  const keyUrls = new Set(
+    REQUIRED_HTML_PAGES.map(({ path }) => new URL(path, PRODUCTION_ORIGIN).href),
+  );
+  const pages = locs
+    .map((loc) => new URL(loc))
+    .filter((url) => {
+      if (url.origin !== PRODUCTION_ORIGIN) {
+        failures.push(`sitemap URL origin invalid: ${url.href}`);
+        return false;
+      }
+      if (url.pathname.startsWith("//")) {
+        failures.push(`sitemap URL path invalid: ${url.pathname}`);
+        return false;
+      }
+      return !keyUrls.has(url.href);
+    })
+    .map((url) => ({ href: url.href, path: `${url.pathname || "/"}${url.search}` }));
+
+  for (let index = 0; index < pages.length; index += SITEMAP_CHECK_CONCURRENCY) {
+    const chunk = pages.slice(index, index + SITEMAP_CHECK_CONCURRENCY);
+    await Promise.all(
+      chunk.map(async ({ href, path }) => {
+        activeRequests += 1;
+        peakRequests = Math.max(peakRequests, activeRequests);
+        try {
+          const response = await request(href, { redirect: "manual" });
+          if (response.status !== 200) {
+            failures.push(`sitemap page returned ${response.status}: ${path}`);
+            return;
+          }
+          const html = await readTextWithLimit(response, {
+            label: `sitemap page HTML: ${path}`,
+            maxBytes: MAX_SITEMAP_HTML_BYTES,
+            timeoutMs,
+          });
+          const schemaTypes = extractJsonLdTypes(html, path);
+          if (schemaTypes.includes("FAQPage")) {
+            failures.push(`FAQPage JSON-LD present: ${path}`);
+          }
+        } finally {
+          activeRequests -= 1;
+        }
+      }),
+    );
+  }
+
+  assertNone("sitemap page SEO invalid", failures);
+  return peakRequests;
 }
 
 async function assertUtilities(request) {
@@ -561,16 +692,24 @@ async function run() {
   const request = await createRequester(args);
 
   await assertRobots(request);
-  const sitemapLocCount = await assertSitemap(request);
-  await assertHtmlPages(request);
+  const sitemapLocs = await assertSitemap(request, args.timeoutMs);
+  await assertHtmlPages(request, args.timeoutMs);
+  const sitemapPeakConcurrency = await assertSitemapFaqPageAbsent(
+    request,
+    sitemapLocs,
+    args.timeoutMs,
+  );
   await assertUtilities(request);
   await assertRedirects(request, args.baseUrl, args);
   await assertBridgeHostRedirects(request, args.baseUrl);
 
   console.log("[seo-deployed] robots ok");
-  console.log(`[seo-deployed] sitemap locs ok: ${sitemapLocCount}`);
+  console.log(`[seo-deployed] sitemap locs ok: ${sitemapLocs.length}`);
   console.log(`[seo-deployed] key pages ok: ${REQUIRED_HTML_PAGES.length}`);
   console.log(`[seo-deployed] utility noindex headers ok: ${UTILITY_NOINDEX_PATHS.length}`);
+  console.log(
+    `[seo-deployed] sitemap FAQPage absent ok: ${sitemapLocs.length}; max concurrency: ${sitemapPeakConcurrency}`,
+  );
   console.log(`[seo-deployed] redirects ok: ${REQUIRED_REDIRECTS.length}`);
   console.log(`[seo-deployed] bridge host redirects ok: ${BRIDGE_HOST_REDIRECTS.length}`);
   if (args.requireDirectChangedRedirects) {

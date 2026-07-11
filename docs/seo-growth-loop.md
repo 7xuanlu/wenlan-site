@@ -4,7 +4,7 @@ Use this when deciding what to do next for Wenlan search visibility. The rule is
 
 ## Operating Pattern
 
-1. Export GSC query and page data weekly.
+1. Fetch GSC query/page data and matching Vercel Web Analytics weekly.
 2. Classify queries into setup, MCP client, comparison, concept, troubleshooting, branded, and generic groups.
 3. Prioritize pages already getting impressions before creating new pages.
 4. Fix technical blockers before writing content.
@@ -25,8 +25,14 @@ Generate the weekly action report from CSV exports:
 mkdir -p /tmp/wenlan-seo
 # Save the GSC Queries export as /tmp/wenlan-seo/gsc-queries.csv
 # Save the GSC Pages export as /tmp/wenlan-seo/gsc-pages.csv
+# Save provenance as /tmp/wenlan-seo/gsc-metadata.json with:
+# {"siteUrl":"sc-domain:wenlan.app","startDate":"YYYY-MM-DD","endDate":"YYYY-MM-DD","source":"..."}
 pnpm seo:weekly:run -- --date YYYY-MM-DD
 ```
+
+When Vercel CLI authentication is available, run `pnpm seo:vercel:fetch -- --date YYYY-MM-DD` before the weekly report. It writes normalized page, referrer, and metadata inputs to `/tmp/wenlan-seo`; the report prefers them over optional Umami exports. Custom CTA event totals remain account-gated on plans where the Vercel API returns `402`.
+
+Normal runs require metadata for `sc-domain:wenlan.app`, an accepted GSC source label, and the 28 complete days ending the day before `--date`. Metadata declares local provenance but does not authenticate manually copied files, so the operator remains responsible for obtaining them from authenticated GSC. API metadata also carries a separate `byProperty` aggregate; reports show its difference from visible query rows instead of treating anonymized or truncated query tables as complete property totals. Use `--allow-manual-date-range true` only for a deliberate historical or custom-range analysis; dates, row counts, and CSV row metadata must still agree with the sidecar. Fixture mode is bound to `pnpm seo:weekly:sample` and is a pipeline health check, not search evidence.
 
 Raw GSC exports stay outside git. Commit the generated `docs/seo-audits/YYYY-MM-DD-weekly-seo.md` only when it records a strategy decision or shipped SEO work.
 

@@ -416,11 +416,45 @@ test("localized get-started layout allows mobile content columns to shrink", asy
   assert.match(source, /<h1 className="[^"]*\bbreak-keep\b[^"]*"/);
 });
 
-test("localized untranslated docs slug and Learn index hard 404", async () => {
+test("localized untranslated docs slugs hard 404 while the Learn index is translated", async () => {
   await assertNotFoundRouteSource("src/app/[locale]/docs/[slug]/page.tsx", {
     simpleRuntimeNotFound: true,
   });
-  await assertNotFoundRouteSource("src/app/[locale]/learn/page.tsx");
+  const source = await readFile(
+    resolve(repoRoot, "src/app/[locale]/learn/page.tsx"),
+    "utf8",
+  );
+  const pageSource = await readFile(
+    resolve(repoRoot, "src/app/_pages/localized-learn-index.tsx"),
+    "utf8",
+  );
+  assert.match(source, /generateMetadata/);
+  assert.match(source, /LocalizedLearnIndexPage/);
+  assert.match(pageSource, /getLocalizedLearnArticles/);
+  assert.doesNotMatch(source, /notFound\(\)/);
+});
+
+test("built i18n checker treats Mandarin Learn hubs and translated articles as public routes", async () => {
+  const source = await readFile(
+    resolve(repoRoot, "scripts/i18n-built-check.mjs"),
+    "utf8",
+  );
+  const okRoutes = source.match(/const expectedOkRoutes = \[([\s\S]*?)\];/)?.[1] ?? "";
+  const notFoundRoutes =
+    source.match(/const expectedNotFoundRoutes = \[([\s\S]*?)\];/)?.[1] ?? "";
+
+  for (const route of [
+    "/zh-TW/learn",
+    "/zh-CN/learn",
+    "/zh-TW/learn/distilled-wiki-pages-ai-memory",
+    "/zh-CN/learn/source-backed-wiki-pages-ai-work",
+  ]) {
+    assert.match(okRoutes, new RegExp(`"${route}"`), route);
+  }
+  assert.doesNotMatch(
+    notFoundRoutes,
+    /"\/zh-(?:TW|CN)\/learn",/,
+  );
 });
 
 test("localized Learn slug route is limited to Mandarin LLM wiki acquisition pages", async () => {
@@ -489,6 +523,7 @@ test("localized route helpers keep English canonical and prefix translated core 
     "/about",
     "/docs",
     "/docs/get-started",
+    "/learn",
   ]);
   assert.equal(routing.localizePath("en", "/docs/get-started"), "/docs/get-started");
   assert.equal(routing.localizePath("zh-TW", "/"), "/zh-TW");
@@ -497,7 +532,7 @@ test("localized route helpers keep English canonical and prefix translated core 
     "/zh-TW/docs/get-started",
   );
   assert.equal(routing.localizePath("zh-CN", "/about"), "/zh-CN/about");
-  assert.equal(routing.localizePath("zh-TW", "/learn"), "/learn");
+  assert.equal(routing.localizePath("zh-TW", "/learn"), "/zh-TW/learn");
   assert.equal(
     routing.localizePath("zh-TW", "/learn/distilled-wiki-pages-ai-memory"),
     "/zh-TW/learn/distilled-wiki-pages-ai-memory",
@@ -528,7 +563,7 @@ test("localized route helpers keep English canonical and prefix translated core 
   assert.equal(routing.canonicalUrl("en", "/"), "https://wenlan.app");
   assert.equal(routing.isTranslatedPath("zh-TW", "/docs/get-started"), true);
   assert.equal(routing.isTranslatedPath("zh-CN", "/about"), true);
-  assert.equal(routing.isTranslatedPath("zh-TW", "/learn"), false);
+  assert.equal(routing.isTranslatedPath("zh-TW", "/learn"), true);
   assert.equal(
     routing.isTranslatedPath("zh-TW", "/learn/distilled-wiki-pages-ai-memory"),
     true,
@@ -560,7 +595,7 @@ test("localized navigation helper localizes translated internal hrefs only", asy
     navigation.localizedHrefForLocale("zh-CN", "/learn/source-backed-wiki-pages-ai-work"),
     "/zh-CN/learn/source-backed-wiki-pages-ai-work",
   );
-  assert.equal(navigation.localizedHrefForLocale("zh-TW", "/learn"), "/learn");
+  assert.equal(navigation.localizedHrefForLocale("zh-TW", "/learn"), "/zh-TW/learn");
   assert.equal(
     navigation.localizedHrefForLocale("zh-TW", "https://wenlan.app/docs"),
     "https://wenlan.app/docs",
@@ -772,8 +807,8 @@ test("sitemap includes localized core and Mandarin acquisition routes", async ()
     }
   }
 
-  assert.equal(urls.has("https://wenlan.app/zh-TW/learn"), false);
-  assert.equal(urls.has("https://wenlan.app/zh-CN/learn"), false);
+  assert.equal(urls.has("https://wenlan.app/zh-TW/learn"), true);
+  assert.equal(urls.has("https://wenlan.app/zh-CN/learn"), true);
   for (const pathname of routing.TRANSLATED_LEARN_PATHS) {
     assert.ok(urls.has(routing.canonicalUrl("en", pathname)), pathname);
     assert.ok(urls.has(routing.canonicalUrl("zh-TW", pathname)), pathname);
@@ -1314,7 +1349,7 @@ test("English core content records the current SEO title and description subset"
   );
   assert.equal(
     content.enContent.getStarted.content.seo.title,
-    "Get Started with Wenlan | LLM Wiki for AI Work",
+    "Install Wenlan for Claude Code, Codex, ChatGPT, and MCP",
   );
 });
 

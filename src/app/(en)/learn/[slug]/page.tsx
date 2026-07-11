@@ -12,6 +12,7 @@ import {
 } from "../articles";
 import { ArticleHalo, MemoryIndex } from "../article-visuals";
 import { alternateUrls, isTranslatedLearnPath } from "@/i18n/routing";
+import { TrackedLink } from "@/components/tracked-link";
 
 function sectionId(heading: string): string {
   return heading
@@ -378,20 +379,28 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                   {article.cta.body}
                 </p>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  <Link
+                  <TrackedLink
                     href="/docs/get-started"
+                    eventName="Get Started Click"
+                    placement="learn-article"
+                    locale="en"
+                    context={article.category === "Comparisons" ? "comparisons" : article.category === "Workflows" ? "workflows" : "concepts"}
                     className="rounded-xl bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] transition-all hover:shadow-[0_0_28px_var(--o-glow-warm)]"
                   >
                     Get started
-                  </Link>
-                  <a
+                  </TrackedLink>
+                  <TrackedLink
                     href="https://github.com/7xuanlu/wenlan"
+                    eventName="GitHub Click"
+                    placement="learn-article"
+                    locale="en"
+                    context={article.category === "Comparisons" ? "comparisons" : article.category === "Workflows" ? "workflows" : "concepts"}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="rounded-xl border border-[var(--o-border)] px-5 py-3 text-center text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
                   >
                     View on GitHub
-                  </a>
+                  </TrackedLink>
                 </div>
               </section>
             </div>

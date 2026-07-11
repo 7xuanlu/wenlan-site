@@ -3,6 +3,7 @@ import { getCoreContent } from "@/i18n/content";
 import { LOCALE_CONFIG, type Locale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
 import { canonicalUrl } from "@/i18n/routing";
+import { TrackedLocalizedLink } from "@/components/tracked-link";
 
 export function GetStartedPage({ locale }: { locale: Locale }) {
   const dictionary = getCoreContent(locale);
@@ -142,10 +143,13 @@ export function GetStartedPage({ locale }: { locale: Locale }) {
                     {step.ctas.length > 0 && (
                       <div className="mt-7 flex min-w-0 flex-col gap-3 sm:flex-row">
                         {step.ctas.map((cta, index) => (
-                          <LocalizedLink
+                          <TrackedLocalizedLink
                             key={cta.id}
                             href={cta.href}
                             locale={locale}
+                            eventName="Setup Path Click"
+                            placement="docs-get-started"
+                            context="setup"
                             className={
                               index === 0
                                 ? "min-w-0 break-words rounded-xl bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] transition-all hover:shadow-[0_0_28px_var(--o-glow-warm)]"
@@ -153,7 +157,7 @@ export function GetStartedPage({ locale }: { locale: Locale }) {
                             }
                           >
                             {cta.label}
-                          </LocalizedLink>
+                          </TrackedLocalizedLink>
                         ))}
                       </div>
                     )}

@@ -71,6 +71,8 @@ const PRESERVED_SECTION_HEADINGS = [
   "Account-Gated Evidence Notes",
   "Deployed Technical SEO Checks",
   "Local Changes Made",
+  "Verification",
+  "Findings and Next Step",
 ];
 const DO_NOT_WRITE_GATE_HEADING = "## Do Not Write Yet Gate";
 const AI_REFERRER_PATTERNS = [
@@ -143,6 +145,15 @@ function parseArgs(argv) {
       : null,
     umamiEventsPath: args["umami-events"]
       ? resolve(process.cwd(), args["umami-events"])
+      : null,
+    vercelPagesPath: args["vercel-pages"]
+      ? resolve(process.cwd(), args["vercel-pages"])
+      : null,
+    vercelReferrersPath: args["vercel-referrers"]
+      ? resolve(process.cwd(), args["vercel-referrers"])
+      : null,
+    vercelMetadataPath: args["vercel-metadata"]
+      ? resolve(process.cwd(), args["vercel-metadata"])
       : null,
     gscMetadataPath: args["gsc-metadata"]
       ? resolve(process.cwd(), args["gsc-metadata"])
@@ -231,24 +242,93 @@ function parseGscMetric(value, label, field, { integer = false } = {}) {
   return parsed;
 }
 
+function extractPropertyTotals(gscMetadata) {
+  const totals = gscMetadata?.propertyTotals;
+  if (!totals) return null;
+  if (totals.aggregationType !== "byProperty") {
+    throw new Error("GSC property totals aggregationType must be byProperty");
+  }
+  for (const field of ["clicks", "impressions"]) {
+    if (!Number.isSafeInteger(totals[field]) || totals[field] < 0) {
+      throw new Error(`GSC property totals ${field} must be a non-negative integer`);
+    }
+  }
+  if (totals.impressions === 0) {
+    if (totals.clicks !== 0) {
+      throw new Error("GSC property totals clicks require impressions");
+    }
+    if (totals.ctr !== null || totals.position !== null) {
+      throw new Error("GSC empty property totals must use null CTR and position");
+    }
+    return totals;
+  }
+  if (!Number.isFinite(totals.ctr) || totals.ctr < 0) {
+    throw new Error("GSC property totals ctr must be a non-negative number");
+  }
+  if (!Number.isFinite(totals.position) || totals.position <= 0) {
+    throw new Error("GSC property totals position must be a positive number");
+  }
+  if (totals.clicks > totals.impressions) {
+    throw new Error("GSC property totals clicks cannot exceed impressions");
+  }
+  const expectedCtr = totals.clicks / totals.impressions;
+  if (Math.abs(totals.ctr - expectedCtr) > 1e-12) {
+    throw new Error("GSC propertyTotals CTR must equal clicks divided by impressions");
+  }
+  return totals;
+}
+
 function extractEvidenceMetadata(queryRecords = [], pageRecords = [], gscMetadata = null) {
   if (queryRecords.length === 0 && !gscMetadata) assertGscRows(queryRecords, "queries");
   if (pageRecords.length === 0 && !gscMetadata) assertGscRows(pageRecords, "pages");
 
+  if (Number.isInteger(gscMetadata?.queryRows) && gscMetadata.queryRows !== queryRecords.length) {
+    throw new Error(
+      `GSC query row count disagrees with metadata: rows=${queryRecords.length}; metadata=${gscMetadata.queryRows}`,
+    );
+  }
+  if (Number.isInteger(gscMetadata?.pageRows) && gscMetadata.pageRows !== pageRecords.length) {
+    throw new Error(
+      `GSC page row count disagrees with metadata: rows=${pageRecords.length}; metadata=${gscMetadata.pageRows}`,
+    );
+  }
+
   const metadataDateRange = extractGscMetadataDateRange(gscMetadata);
   const metadataSource = extractGscMetadataSource(gscMetadata);
-  const queryDateRange = queryRecords.length > 0
-    ? extractGscDateRange(queryRecords, "queries")
-    : metadataDateRange;
-  const pageDateRange = pageRecords.length > 0
-    ? extractGscDateRange(pageRecords, "pages")
-    : metadataDateRange;
-  const querySource = queryRecords.length > 0
-    ? extractGscSource(queryRecords, "queries")
-    : metadataSource;
-  const pageSource = pageRecords.length > 0
-    ? extractGscSource(pageRecords, "pages")
-    : metadataSource;
+  const queryRowDateRange =
+    queryRecords.length > 0 ? extractGscDateRange(queryRecords, "queries") : null;
+  const pageRowDateRange =
+    pageRecords.length > 0 ? extractGscDateRange(pageRecords, "pages") : null;
+  const queryRowSource = queryRecords.length > 0 ? extractGscSource(queryRecords, "queries") : null;
+  const pageRowSource = pageRecords.length > 0 ? extractGscSource(pageRecords, "pages") : null;
+  if (metadataDateRange && queryRowDateRange && metadataDateRange !== queryRowDateRange) {
+    throw new Error(
+      `GSC queries date range disagrees with metadata: rows=${queryRowDateRange}; metadata=${metadataDateRange}`,
+    );
+  }
+  if (metadataDateRange && pageRowDateRange && metadataDateRange !== pageRowDateRange) {
+    throw new Error(
+      `GSC pages date range disagrees with metadata: rows=${pageRowDateRange}; metadata=${metadataDateRange}`,
+    );
+  }
+  if (metadataSource && queryRowSource && metadataSource !== queryRowSource) {
+    throw new Error(
+      `GSC queries source disagrees with metadata: rows=${queryRowSource}; metadata=${metadataSource}`,
+    );
+  }
+  if (metadataSource && pageRowSource && metadataSource !== pageRowSource) {
+    throw new Error(
+      `GSC pages source disagrees with metadata: rows=${pageRowSource}; metadata=${metadataSource}`,
+    );
+  }
+  const queryDateRange =
+    queryRowDateRange ?? metadataDateRange;
+  const pageDateRange =
+    pageRowDateRange ?? metadataDateRange;
+  const querySource =
+    queryRowSource ?? metadataSource;
+  const pageSource =
+    pageRowSource ?? metadataSource;
 
   if (queryDateRange && pageDateRange && queryDateRange !== pageDateRange) {
     throw new Error(
@@ -274,10 +354,12 @@ function extractEvidenceMetadata(queryRecords = [], pageRecords = [], gscMetadat
   }
 
   const source = querySource ?? pageSource ?? "CSV export";
+  const propertyTotals = extractPropertyTotals(gscMetadata);
 
   return {
     dateRange,
     source,
+    propertyTotals,
     intro:
       source === "CSV export"
         ? "Generated from Google Search Console CSV exports. Raw exports stay outside git."
@@ -551,6 +633,67 @@ function summarizeUmami({ pageRecords, referrerRecords, eventRecords }) {
   };
 }
 
+function summarizeVercel({ pageRecords, referrerRecords, metadata }) {
+  if (metadata?.source && metadata.source !== "Vercel Web Analytics API") {
+    throw new Error(`Unsupported Vercel Analytics source: ${metadata.source}`);
+  }
+  const pages = pageRecords
+    .map((row) => ({
+      page: toPath(row.path || row.page || row.request_path || row.requestpath || ""),
+      visitors: parseFirstMetric(row, ["visitors"]),
+      pageviews: parseFirstMetric(row, ["pageviews", "page_views", "views"]),
+    }))
+    .filter((row) => row.page !== "-" && (row.visitors > 0 || row.pageviews > 0))
+    .sort((a, b) => b.pageviews - a.pageviews);
+  const referrers = referrerRecords
+    .map((row) => {
+      const referrer = row.referrer || row.source || row.referrer_hostname || "";
+      return {
+        referrer,
+        visitors: parseFirstMetric(row, ["visitors", "visits"]),
+        pageviews: parseFirstMetric(row, ["pageviews", "page_views", "views"]),
+        channel: classifyReferrer(referrer),
+      };
+    })
+    .filter((row) => row.referrer && (row.visitors > 0 || row.pageviews > 0))
+    .sort((a, b) => b.visitors - a.visitors);
+  const totals = metadata?.totals ?? null;
+  if (totals) {
+    for (const field of ["visitors", "pageviews"]) {
+      if (!Number.isFinite(totals[field]) || totals[field] < 0) {
+        throw new Error(`Vercel metadata totals.${field} must be a non-negative number`);
+      }
+    }
+  }
+  const customEvents = metadata?.customEvents ?? {
+    status: "manual",
+    reason: "not fetched",
+  };
+  const aiReferrers = referrers.filter((row) => row.channel === "AI referral");
+  const redditReferrers = referrers.filter((row) => row.channel === "Reddit");
+
+  return {
+    hasData: pages.length > 0 || referrers.length > 0 || Boolean(metadata),
+    source: metadata?.source ?? "Vercel Web Analytics API",
+    dateRange:
+      metadata?.startDate && metadata?.endDate
+        ? `${metadata.startDate} to ${metadata.endDate}`
+        : "manual / unavailable",
+    totals,
+    customEvents,
+    pages,
+    referrers,
+    hasReferrerData: referrerRecords.length > 0,
+    aiReferrerVisits: aiReferrers.reduce((sum, row) => sum + row.visitors, 0),
+    aiReferrerCount: aiReferrers.length,
+    redditVisits: redditReferrers.reduce((sum, row) => sum + row.visitors, 0),
+    redditReferrerCount: redditReferrers.length,
+    llmsHits: pages
+      .filter((row) => isLlmsTarget(row.page))
+      .reduce((sum, row) => sum + row.pageviews, 0),
+  };
+}
+
 function isLlmsTarget(value) {
   return /\/llms(?:-full)?\.txt\b/i.test(String(value));
 }
@@ -765,7 +908,7 @@ function rankRows(rows) {
   });
 }
 
-function makeMarkdown({ date, queries, pages, evidence, umami }) {
+function makeMarkdown({ date, queries, pages, evidence, umami, vercel }) {
   const evidenceMetadata =
     evidence ??
     extractEvidenceMetadata();
@@ -774,11 +917,42 @@ function makeMarkdown({ date, queries, pages, evidence, umami }) {
     referrerRecords: [],
     eventRecords: [],
   });
+  const vercelSummary = vercel ?? summarizeVercel({
+    pageRecords: [],
+    referrerRecords: [],
+    metadata: null,
+  });
+  if (
+    vercelSummary.hasData &&
+    vercelSummary.dateRange !== "manual / unavailable" &&
+    evidenceMetadata.dateRange !== "Last 28 days" &&
+    vercelSummary.dateRange !== evidenceMetadata.dateRange
+  ) {
+    throw new Error(
+      `Vercel Analytics date range must match GSC: analytics=${vercelSummary.dateRange}; GSC=${evidenceMetadata.dateRange}`,
+    );
+  }
   const queryTableClicks = queries.reduce((sum, row) => sum + row.clicks, 0);
   const queryTableImpressions = queries.reduce(
     (sum, row) => sum + row.impressions,
     0,
   );
+  const pageTableClicks = pages.reduce((sum, row) => sum + row.clicks, 0);
+  const pageTableImpressions = pages.reduce((sum, row) => sum + row.impressions, 0);
+  const propertyTotals = evidenceMetadata.propertyTotals;
+  if (
+    propertyTotals &&
+    (queryTableClicks > propertyTotals.clicks ||
+      queryTableImpressions > propertyTotals.impressions)
+  ) {
+    throw new Error(
+      "Visible GSC query rows cannot exceed the byProperty clicks or impressions",
+    );
+  }
+  const unavailable = "manual / unavailable";
+  const queryVisibilityGap = propertyTotals
+    ? `${propertyTotals.clicks - queryTableClicks} clicks; ${propertyTotals.impressions - queryTableImpressions} impressions`
+    : unavailable;
   const groups = groupTotals(queries);
   const rankedQueries = rankRows(queries);
   const rankedPages = rankRows(pages);
@@ -787,6 +961,25 @@ function makeMarkdown({ date, queries, pages, evidence, umami }) {
     .slice(0, 8);
   const topPage = [...pages].sort((a, b) => b.impressions - a.impressions)[0];
   const nextDate = addDays(date, 7);
+  const analyticsSnapshot = vercelSummary.hasData
+    ? `| Analytics data source | ${escapePipe(vercelSummary.source)} |
+| Analytics date range | ${escapePipe(vercelSummary.dateRange)} |
+| Analytics visitors | ${vercelSummary.totals?.visitors ?? "manual"} |
+| Analytics pageviews | ${vercelSummary.totals?.pageviews ?? "manual"} |
+| AI referrals | ${formatReferrerSummary(vercelSummary.aiReferrerVisits, vercelSummary.aiReferrerCount, vercelSummary.hasReferrerData)} |
+| Reddit referrals | ${formatReferrerSummary(vercelSummary.redditVisits, vercelSummary.redditReferrerCount, vercelSummary.hasReferrerData)} |
+| llms.txt hits | ${vercelSummary.pages.length > 0 ? vercelSummary.llmsHits : "manual"} |
+| CTA custom events | ${formatCustomEventStatus(vercelSummary.customEvents)} |`
+    : `| Umami data source | ${umamiSummary.hasData ? "local CSV exports" : "manual / account-gated"} |
+| Umami landing page views | ${formatUmamiLandingViews(umamiSummary)} |
+| AI referrals | ${formatReferrerSummary(umamiSummary.aiReferrerVisits, umamiSummary.aiReferrerCount, umamiSummary.hasReferrerData)} |
+| Reddit referrals | ${formatReferrerSummary(umamiSummary.redditVisits, umamiSummary.redditReferrerCount, umamiSummary.hasReferrerData)} |
+| llms.txt hits | ${umamiSummary.hasLlmsData ? umamiSummary.llmsHits : "manual"} |`;
+  const analyticsEvidence = vercelSummary.hasData
+    ? `${makeVercelMarkdown(vercelSummary)}\n\n`
+    : umamiSummary.hasData
+      ? `${makeUmamiMarkdown(umamiSummary)}\n\n`
+      : "";
 
   return `# Weekly SEO/GEO Audit — ${date}
 
@@ -799,19 +992,22 @@ ${evidenceMetadata.intro}
 | Week of | ${date} |
 | Date range | ${escapePipe(evidenceMetadata.dateRange)} |
 | GSC data source | ${escapePipe(evidenceMetadata.source)} |
-| Query table clicks | ${queryTableClicks} |
-| Query table impressions | ${queryTableImpressions} |
-| Query table CTR | ${pct(queryTableClicks, queryTableImpressions)} |
-| Query table average position | ${oneDecimal(weightedAverage(queries))} |
+| Property clicks | ${propertyTotals?.clicks ?? unavailable} |
+| Property impressions | ${propertyTotals?.impressions ?? unavailable} |
+| Property CTR | ${propertyTotals?.ctr != null ? `${(propertyTotals.ctr * 100).toFixed(2)}%` : unavailable} |
+| Property average position | ${propertyTotals?.position != null ? oneDecimal(propertyTotals.position) : unavailable} |
+| Visible query table clicks | ${queryTableClicks} |
+| Visible query table impressions | ${queryTableImpressions} |
+| Visible query table CTR | ${pct(queryTableClicks, queryTableImpressions)} |
+| Visible query table average position | ${oneDecimal(weightedAverage(queries))} |
+| Query visibility gap | ${queryVisibilityGap} |
+| Visible page table clicks | ${pageTableClicks} |
+| Visible page table impressions | ${pageTableImpressions} |
 | Top query groups | ${groups.slice(0, 4).map((group) => `${group.name} (${group.impressions})`).join(", ") || "-"} |
 | Top page | ${topPage?.page ?? "-"} |
-| Umami data source | ${umamiSummary.hasData ? "local CSV exports" : "manual / account-gated"} |
-| Umami landing page views | ${formatUmamiLandingViews(umamiSummary)} |
-| AI referrals | ${formatReferrerSummary(umamiSummary.aiReferrerVisits, umamiSummary.aiReferrerCount, umamiSummary.hasReferrerData)} |
-| Reddit referrals | ${formatReferrerSummary(umamiSummary.redditVisits, umamiSummary.redditReferrerCount, umamiSummary.hasReferrerData)} |
-| llms.txt hits | ${umamiSummary.hasLlmsData ? umamiSummary.llmsHits : "manual"} |
+${analyticsSnapshot}
 
-${umamiSummary.hasData ? `${makeUmamiMarkdown(umamiSummary)}\n\n` : ""}## Top Actions
+${analyticsEvidence}## Top Actions
 
 ${topActions.length ? topActions.map((row, index) => `${index + 1}. **${row.action}** — ${row.query ? `\`${row.query}\`` : `\`${row.page}\``}: ${row.diagnosis}`).join("\n") : "No immediate action. Keep measuring."}
 
@@ -839,7 +1035,7 @@ Do not create a new Learn page unless GSC/Searchfit shows a recurring query clus
 - [ ] Run \`pnpm build\` and \`pnpm seo:technical:built\` to verify local built robots, sitemap, redirects, noindex headers, canonicals, and schema.
 - [ ] Verify old \`/guides/*\` and \`/docs/guides/*\` URLs redirect to canonical \`/learn/*\` URLs.
 - [ ] Recheck changed redirects after deployment with \`pnpm seo:technical:deployed -- --require-direct-changed-redirects true\`.
-- [ ] Export or manually record Umami landing pages, referrers, AI referrals, Reddit referrals, and \`llms.txt\` hits.
+- [ ] Run \`pnpm seo:vercel:fetch -- --date YYYY-MM-DD\` before the weekly report; keep custom CTA events marked account-gated when the Vercel plan blocks them.
 - [ ] Add changed pages to the next weekly comparison.
 - [ ] Generate \`pnpm seo:ai-visibility -- --date YYYY-MM-DD\` and manually check whether AI assistants mention Wenlan accurately for the tracked prompts in \`docs/seo-measurement.md\`.
 - [ ] Next measurement date: ${nextDate}.
@@ -853,7 +1049,41 @@ function formatUmamiLandingViews(umami) {
 
 function formatReferrerSummary(visits, count, hasData) {
   if (!hasData) return "manual";
-  return `${visits} visits from ${count} ${plural(count, "referrer")}`;
+  return `${visits} ${plural(visits, "visit")} from ${count} ${plural(count, "referrer")}`;
+}
+
+function formatCustomEventStatus(customEvents) {
+  if (customEvents.status === "available") {
+    return `${customEvents.count ?? 0} events`;
+  }
+  return `${customEvents.status}: ${customEvents.reason ?? "manual"}`;
+}
+
+function makeVercelMarkdown(vercel) {
+  const pageRows = vercel.pages
+    .slice(0, 12)
+    .map((row) => `| ${formatPage(row.page)} | ${row.visitors} | ${row.pageviews} |`)
+    .join("\n");
+  const referrerRows = vercel.referrers
+    .slice(0, 12)
+    .map((row) => `| ${escapePipe(row.referrer)} | ${row.visitors} | ${row.pageviews} | ${row.channel} |`)
+    .join("\n");
+
+  return `## Vercel Analytics Evidence
+
+Authenticated Web Analytics API data for the linked Wenlan Vercel project. Property totals come from the count endpoint; tables show the top aggregate rows returned by the API.
+
+### Pages
+
+| Page | Visitors | Pageviews |
+| --- | ---: | ---: |
+${pageRows || "| - | 0 | 0 |"}
+
+### Referrers
+
+| Referrer | Visitors | Pageviews | Channel |
+| --- | ---: | ---: | --- |
+${referrerRows || "| - | 0 | 0 | - |"}`;
 }
 
 function makeUmamiMarkdown(umami) {
@@ -1025,6 +1255,9 @@ async function run() {
     umamiPageRecords,
     umamiReferrerRecords,
     umamiEventRecords,
+    vercelPageRecords,
+    vercelReferrerRecords,
+    vercelMetadata,
     gscMetadata,
   ] = await Promise.all([
     readFile(args.queriesPath, "utf8"),
@@ -1032,6 +1265,9 @@ async function run() {
     readOptionalCsv(args.umamiPagesPath),
     readOptionalCsv(args.umamiReferrersPath),
     readOptionalCsv(args.umamiEventsPath),
+    readOptionalCsv(args.vercelPagesPath),
+    readOptionalCsv(args.vercelReferrersPath),
+    readOptionalJson(args.vercelMetadataPath),
     readOptionalJson(args.gscMetadataPath),
   ]);
 
@@ -1045,8 +1281,13 @@ async function run() {
     referrerRecords: umamiReferrerRecords,
     eventRecords: umamiEventRecords,
   });
+  const vercel = summarizeVercel({
+    pageRecords: vercelPageRecords,
+    referrerRecords: vercelReferrerRecords,
+    metadata: vercelMetadata,
+  });
   const visibleTableStats = makeVisibleTableStats(queries, pages);
-  let markdown = makeMarkdown({ date: args.date, queries, pages, evidence, umami });
+  let markdown = makeMarkdown({ date: args.date, queries, pages, evidence, umami, vercel });
 
   await mkdir(dirname(args.outputPath), { recursive: true });
   try {

@@ -11,7 +11,7 @@ import { docPages, docUrl } from "./(en)/docs/docs";
 import { articles, articleUrl } from "./(en)/learn/articles";
 
 const ABOUT_UPDATED_AT = "2026-07-08";
-const GET_STARTED_UPDATED_AT = "2026-07-09";
+const GET_STARTED_UPDATED_AT = "2026-07-10";
 
 type CoreTranslatedPath = (typeof CORE_TRANSLATED_PATHS)[number];
 type SitemapEntry = MetadataRoute.Sitemap[number];
@@ -84,6 +84,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    {
+      pathname: "/learn",
+      lastModified: latestArticle,
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
   ];
 
   return [
@@ -95,13 +101,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.78,
       images: sharedImages,
     })),
-    {
-      url: `${SITE_URL}/learn`,
-      lastModified: latestArticle,
-      changeFrequency: "weekly",
-      priority: 0.75,
-      images: sharedImages,
-    },
     ...articles.map((article) => {
       const pathname = `/learn/${article.slug}`;
 

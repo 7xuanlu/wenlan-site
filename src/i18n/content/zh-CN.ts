@@ -660,7 +660,7 @@ export const zhCNContent = {
   },
   docs: {
     status: "translated",
-    sourceHash: "7bc1f96816d6d23bd333ae918c78426688e6b07f45390c7e02531a2408a4528f",
+    sourceHash: "f472f8b67ac30dfaafdff59049db7c8dfd19a32d56f273b576bb1c0dd156bfa6",
     content: {
       seo: {
         title: "Wenlan 文档 | AI 工作的 LLM wiki",
@@ -753,10 +753,10 @@ export const zhCNContent = {
                 id: "memory-types",
                 href: "/docs/memory-types",
                 label: "记忆",
-                title: "Memory 类型",
+                title: "Wenlan Memory 类型与 memory_type 值",
                 description:
-                  "了解 Wenlan 的六种 canonical memory types、agent 如何选择，以及哪些 legacy aliases 仍会出现在 API 边界。",
-                meta: "Qi-Xuan Lu · 更新于 2026 年 6 月 24 日 · 5 分钟阅读",
+                  "根据 capture 日后为何重要，选择 identity、preference、decision、lesson、gotcha 或 fact。",
+                meta: "Qi-Xuan Lu · 更新于 2026 年 7 月 10 日 · 5 分钟阅读",
               },
               {
                 id: "glossary",
@@ -807,10 +807,10 @@ export const zhCNContent = {
                 id: "cli-and-service",
                 href: "/docs/cli-and-service",
                 label: "CLI 管理",
-                title: "CLI 与 Service 管理",
+                title: "Wenlan CLI 命令与 Service 管理",
                 description:
-                  "使用 Wenlan CLI 安装 runtime、管理 daemon、检查 status、搜索 memory，并连接 MCP clients。",
-                meta: "Qi-Xuan Lu · 更新于 2026 年 6 月 24 日 · 5 分钟阅读",
+                  "使用 Wenlan CLI 做 setup、daemon status、doctor diagnostics、background service management、memory search，并连接 MCP clients。",
+                meta: "Qi-Xuan Lu · 更新于 2026 年 7 月 10 日 · 5 分钟阅读",
               },
               {
                 id: "updates-and-uninstall",
@@ -951,10 +951,10 @@ export const zhCNContent = {
                 id: "data-and-privacy",
                 href: "/docs/data-and-privacy",
                 label: "本地控制",
-                title: "数据与隐私",
+                title: "Wenlan 本地数据与隐私",
                 description:
-                  "Wenlan 把数据放在哪里、哪些内容保持本地，以及可读 artifacts 如何搭配 daemon-owned retrieval store。",
-                meta: "Qi-Xuan Lu · 更新于 2026 年 6 月 24 日 · 5 分钟阅读",
+                  "了解 Wenlan 把 AI work memory 存在哪里、哪些数据留在你的机器上，以及 connected model providers 何时可能看到 prompts。",
+                meta: "Qi-Xuan Lu · 更新于 2026 年 7 月 10 日 · 5 分钟阅读",
               },
               {
                 id: "backup-and-migration",
@@ -996,10 +996,10 @@ export const zhCNContent = {
                 id: "agent-profiles",
                 href: "/docs/agent-profiles",
                 label: "Agents 管理",
-                title: "Agent Profiles 配置",
+                title: "Wenlan Agent Profiles 与 Client Attribution",
                 description:
-                  "检查写入 Wenlan 的 AI clients 和 local tools，并从 CLI 管理 source attribution、enabled state 和 trust。",
-                meta: "Qi-Xuan Lu · 更新于 2026 年 6 月 24 日 · 4 分钟阅读",
+                  "查看是哪个 AI client 写入 memory、检查 source_agent attribution，并管理 trust 或 enabled state。",
+                meta: "Qi-Xuan Lu · 更新于 2026 年 7 月 10 日 · 4 分钟阅读",
               },
               {
                 id: "troubleshooting",
@@ -1042,8 +1042,8 @@ export const zhCNContent = {
                 label: "安全",
                 title: "安全与报告",
                 description:
-                  "私下报告 vulnerabilities、让 diagnostic reports 保持 redacted，并了解 Wenlan 的本地安全边界。",
-                meta: "Qi-Xuan Lu · 更新于 2026 年 6 月 24 日 · 4 分钟阅读",
+                  "私下报告 Wenlan vulnerabilities、让 diagnostic output 保持 redacted，并了解 local daemon security boundary。",
+                meta: "Qi-Xuan Lu · 更新于 2026 年 7 月 10 日 · 4 分钟阅读",
               },
               {
                 id: "evaluation",
@@ -1158,12 +1158,12 @@ export const zhCNContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "ec2b349cd5ea407b5c9172d99bf518ec790085aa5fa4b8b7797f122e41226eff",
+    sourceHash: "2c9cfc1f7e561ce8a4c71e00c40d41ae2a64de516ae0039a20d02e4214e38380",
     content: {
       seo: {
-        title: "开始使用 Wenlan | AI 工作的 LLM wiki",
+        title: "安装 Wenlan：Claude Code、Codex、ChatGPT 与 MCP",
         description:
-          "通过 Claude Code、Codex、ChatGPT、Claude.ai 或其他 MCP client 连接 Wenlan，再验证第一次 capture 与 recall round trip。",
+          "安装 Wenlan，连接 Claude Code、Codex、ChatGPT、Claude.ai 或其他 MCP client，再验证第一次 capture 与 recall round trip。",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -1171,10 +1171,10 @@ export const zhCNContent = {
       },
       hero: {
         eyebrow: "开始使用",
-        title: "把 Wenlan 接到你的\u00a0AI\u00a0工具。",
+        title: "安装 Wenlan，连接你的\u00a0AI\u00a0工具。",
         description:
-          "Coding agents 使用 Claude Code 或 Codex 路径，ChatGPT 或 Claude.ai 使用 Remote Access，其他 clients 使用本地 MCP。每条路径都会进入同一个 source-backed wiki 与 handoff loop。",
-        meta: ["Wenlan 团队", "更新于 2026 年 7 月 9 日", "4 分钟设置"],
+          "选择一条 client 路径，连到同一个 local daemon，再验证一次 capture 与 recall round trip。",
+        meta: ["Wenlan 团队", "更新于 2026 年 7 月 10 日", "4 分钟设置"],
         setupPathLabel: "设置路径",
         setupPathItems: ["Claude Code 路径", "Codex 路径", "ChatGPT 路径", "本地 + 远程 MCP"],
       },

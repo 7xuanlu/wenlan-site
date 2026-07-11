@@ -224,6 +224,56 @@ test("root document includes Vercel Web Analytics only on Vercel", async () => {
   assert.match(rootDocument, /vercelAnalyticsEnabled\s*\?\s*<Analytics\s*\/>\s*:\s*null/);
 });
 
+test("primary acquisition links emit bounded Vercel CTA events", async () => {
+  const trackedLink = await readRepo("src/components/tracked-link.tsx");
+  const home = await readRepo("src/app/_pages/home.tsx");
+  const learnIndex = await readRepo("src/app/learn/page.tsx");
+  const learnArticle = await readRepo("src/app/learn/[slug]/page.tsx");
+  const getStarted = await readRepo("src/app/_pages/get-started.tsx");
+
+  assert.match(trackedLink, /import\s+\{\s*track\s*\}\s+from\s+"@vercel\/analytics"/);
+  assert.match(trackedLink, /"Get Started Click"/);
+  assert.match(trackedLink, /"GitHub Click"/);
+  assert.match(trackedLink, /"Learn Article Click"/);
+  assert.match(trackedLink, /"Setup Path Click"/);
+  assert.doesNotMatch(
+    trackedLink,
+    /track\([^)]*\{[^}]*(?:query|email|url|href)\s*:/s,
+  );
+  assert.match(home, /TrackedLink/);
+  assert.match(learnIndex, /TrackedLink/);
+  assert.match(learnArticle, /TrackedLink/);
+  assert.match(getStarted, /TrackedLocalizedLink/);
+});
+
+test("all evidence-backed no-click Docs targets have refreshed SERP copy and quick answers", async () => {
+  const docs = await readRepo("src/app/docs/docs.ts");
+  const englishContent = await readRepo("src/i18n/content/en.ts");
+
+  for (const slug of [
+    "data-and-privacy",
+    "cli-and-service",
+    "security",
+    "agent-profiles",
+    "memory-types",
+  ]) {
+    assert.match(
+      docs,
+      new RegExp(`slug: "${slug}"[\\s\\S]*summary: \\[[\\s\\S]*"Quick answer:`),
+      slug,
+    );
+  }
+
+  assert.match(
+    englishContent,
+    /title: "Install Wenlan for Claude Code, Codex, ChatGPT, and MCP"/,
+  );
+  assert.match(
+    englishContent,
+    /Choose one client path, connect it to the same local daemon, then verify a capture and recall round trip\./,
+  );
+});
+
 test("agent guidance tracks the wenlan.app canonical launch property", async () => {
   const agents = await readRepo("AGENTS.md");
   const claude = await readRepo("CLAUDE.md");

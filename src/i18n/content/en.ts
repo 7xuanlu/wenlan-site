@@ -753,10 +753,10 @@ export const enContent = {
                 id: "memory-types",
                 href: "/docs/memory-types",
                 label: "Memory",
-                title: "Memory Types",
+                title: "Wenlan Memory Types and memory_type Values",
                 description:
-                  "Understand Wenlan's six canonical memory types, how agents choose them, and which legacy aliases still appear at API boundaries.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                  "Choose identity, preference, decision, lesson, gotcha, or fact based on why a capture should matter later.",
+                meta: "Qi-Xuan Lu · Updated Jul 10, 2026 · 5 min read",
               },
               {
                 id: "glossary",
@@ -807,10 +807,10 @@ export const enContent = {
                 id: "cli-and-service",
                 href: "/docs/cli-and-service",
                 label: "CLI",
-                title: "CLI and Service Management",
+                title: "Wenlan CLI Commands and Service Management",
                 description:
-                  "Use the Wenlan CLI to install the runtime, manage the daemon, inspect status, search memory, and wire MCP clients.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                  "Use the Wenlan CLI for setup, daemon status, doctor diagnostics, background service management, memory search, and MCP client wiring.",
+                meta: "Qi-Xuan Lu · Updated Jul 10, 2026 · 5 min read",
               },
               {
                 id: "updates-and-uninstall",
@@ -951,10 +951,10 @@ export const enContent = {
                 id: "data-and-privacy",
                 href: "/docs/data-and-privacy",
                 label: "Local control",
-                title: "Data and Privacy",
+                title: "Wenlan Local Data and Privacy",
                 description:
-                  "Where Wenlan keeps data, what stays local, and how readable artifacts work with the daemon-owned retrieval store.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                  "See where Wenlan stores local AI work memory, what stays on your machine, and when connected model providers may see prompts.",
+                meta: "Qi-Xuan Lu · Updated Jul 10, 2026 · 5 min read",
               },
               {
                 id: "backup-and-migration",
@@ -996,10 +996,10 @@ export const enContent = {
                 id: "agent-profiles",
                 href: "/docs/agent-profiles",
                 label: "Agents",
-                title: "Agent Profiles",
+                title: "Wenlan Agent Profiles and Client Attribution",
                 description:
-                  "Inspect the AI clients and local tools that write to Wenlan, then manage source attribution, enabled state, and trust from the CLI.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 4 min read",
+                  "See which AI client wrote a memory, inspect source_agent attribution, and manage trust or enabled state.",
+                meta: "Qi-Xuan Lu · Updated Jul 10, 2026 · 4 min read",
               },
               {
                 id: "troubleshooting",
@@ -1042,8 +1042,8 @@ export const enContent = {
                 label: "Security",
                 title: "Security and Reporting",
                 description:
-                  "Report vulnerabilities privately, keep diagnostic reports redacted, and understand Wenlan's local security boundary.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 4 min read",
+                  "Report Wenlan vulnerabilities privately, redact diagnostic output, and understand the local daemon security boundary.",
+                meta: "Qi-Xuan Lu · Updated Jul 10, 2026 · 4 min read",
               },
               {
                 id: "evaluation",
@@ -1161,9 +1161,9 @@ export const enContent = {
     sourceHash: null,
     content: {
       seo: {
-        title: "Get Started with Wenlan | LLM Wiki for AI Work",
+        title: "Install Wenlan for Claude Code, Codex, ChatGPT, and MCP",
         description:
-          "Connect Wenlan through Claude Code, Codex, ChatGPT, Claude.ai, or another MCP client, then verify the first capture and recall round trip.",
+          "Install Wenlan, connect Claude Code, Codex, ChatGPT, Claude.ai, or another MCP client, then verify the first capture and recall round trip.",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -1171,10 +1171,10 @@ export const enContent = {
       },
       hero: {
         eyebrow: "Get started",
-        title: "Connect Wenlan to your AI tools.",
+        title: "Install Wenlan and connect your AI client.",
         description:
-          "Use the Claude Code or Codex path for coding agents, Remote Access for ChatGPT or Claude.ai, and local MCP for other clients. Every path feeds the same source-backed wiki and handoff loop.",
-        meta: ["Wenlan team", "Updated Jul 9, 2026", "4 min setup"],
+          "Choose one client path, connect it to the same local daemon, then verify a capture and recall round trip.",
+        meta: ["Wenlan team", "Updated Jul 10, 2026", "4 min setup"],
         setupPathLabel: "Setup path",
         setupPathItems: ["Claude Code", "Codex", "ChatGPT", "Local + remote MCP"],
       },
