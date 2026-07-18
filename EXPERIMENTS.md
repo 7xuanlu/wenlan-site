@@ -187,3 +187,15 @@ increase for that experiment.
 - Decision: wait
 - Next step: create the durable local Git checkpoint, then request explicit approval before push, merge, deploy, external distribution, indexing, or validation
 <!-- EXPERIMENT-RECORD:END -->
+
+### 2026-07-18T23:45:41Z — pre-publish wait observation
+
+- Record type: campaign-observation
+- Experiments started this window: 0
+- Active experiments: 1
+- Publish state: `EXP-2026-07-18-claude-code-memory-refresh` remains unpublished
+- GitHub evidence: 47 total stars from GitHub REST, captured `2026-07-18T23:45:41Z`
+- Production technical evidence: deployed robots, 108 sitemap URLs, 13 key pages, 6 utility noindex headers, FAQPage absence across 108 sitemap URLs, 25 redirects, 6 bridge-host redirects, and old-URL sitemap exclusions passed
+- External actions: none
+- Decision: wait; no new evidence-backed experiment and no continuous rewrite
+- Next step: one-time same-thread heartbeat `wenlan-growth-evidence-window-2` on `2026-07-25 10:00` America/Los_Angeles, after the Friday weekly SEO controller
