@@ -178,7 +178,8 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 
 ### Control-plane status
 
-- Goal status: active.
+- Goal status: blocked at the approval boundary after three consecutive Goal
+  turns without explicit push, merge, and deploy approval.
 - Goal deadline: 2026-08-18.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
@@ -198,9 +199,9 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Last pre-publish production observation: `2026-07-18T23:45:41Z`; deployed
   robots, sitemap, 13 key pages, noindex headers, structured-data policy,
   redirects, bridge-host redirects, and legacy-URL exclusions passed.
-- Next evidence-window wake: one-time thread heartbeat
-  `wenlan-growth-evidence-window-2`, Saturday `2026-07-25 10:00`
-  America/Los_Angeles, after the independent Friday weekly SEO run.
+- Next evidence-window wake: cancelled at `2026-07-18T23:48:28Z` because the
+  campaign stopped at its approval boundary; the independent Friday weekly SEO
+  automation remains unchanged.
 
 ### Fixed baseline and live provenance
 
@@ -304,9 +305,11 @@ Publish and index dates remain unset.
 
 The one-page English refresh for
 `EXP-2026-07-18-claude-code-memory-refresh` is prepared and locally verified.
-Keep the experiment unpublished and request explicit approval before deploy,
-push/merge, external distribution, indexing, or validation. After approval,
-publish no more than this one active experiment and wait for its predeclared
-24h and 7d readouts. If approval has not arrived, the one-time
-`wenlan-growth-evidence-window-2` heartbeat will read the Friday weekly result
-and reassess only from a new complete evidence window.
+The Goal is blocked because explicit approval for the necessary push, merge,
+and deploy actions did not arrive across three consecutive Goal turns. Keep
+the experiment unpublished and make no external action. To resume, the user
+must explicitly approve push, merge, and deploy for this current experiment;
+Reddit or other external publication, OSS submission, request indexing, and
+GSC validation remain separately approval-gated. After resumption, publish no
+more than this one active experiment and wait for its predeclared 24h and 7d
+readouts.

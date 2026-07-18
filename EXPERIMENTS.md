@@ -199,3 +199,27 @@ increase for that experiment.
 - External actions: none
 - Decision: wait; no new evidence-backed experiment and no continuous rewrite
 - Next step: one-time same-thread heartbeat `wenlan-growth-evidence-window-2` on `2026-07-25 10:00` America/Los_Angeles, after the Friday weekly SEO controller
+
+### 2026-07-18T23:48:28Z — approval-boundary stop
+
+- Record type: campaign-stop
+- Stop condition: approval boundaries block a necessary action after three
+  consecutive Goal turns
+- Experiments started: 1
+- Active experiments: 1
+- Publish state:
+  `EXP-2026-07-18-claude-code-memory-refresh` remains locally prepared and
+  unpublished
+- Evidence attempted: frozen control plane and verifier; authenticated GSC and
+  Vercel baselines; GitHub stars; target query-plus-page guardrail; official
+  source review; full local, built, i18n, rendered, and deployed technical SEO
+  verification
+- Result: the experiment is unexposed and remains pending; no publish or index
+  date exists, so it is neither a success nor a failure
+- External actions: none
+- Heartbeat: `wenlan-growth-evidence-window-2` deleted
+- Blocker: explicit push, merge, and deploy approval was not granted
+- Next decision: the user must explicitly approve push, merge, and deploy to
+  resume this current experiment; Reddit or other external publication, OSS
+  submission, request indexing, and GSC validation remain separately
+  approval-gated
