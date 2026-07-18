@@ -195,6 +195,12 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `docs/seo-audits/2026-07-17-weekly-seo.md`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
+- Last pre-publish production observation: `2026-07-18T23:45:41Z`; deployed
+  robots, sitemap, 13 key pages, noindex headers, structured-data policy,
+  redirects, bridge-host redirects, and legacy-URL exclusions passed.
+- Next evidence-window wake: one-time thread heartbeat
+  `wenlan-growth-evidence-window-2`, Saturday `2026-07-25 10:00`
+  America/Los_Angeles, after the independent Friday weekly SEO run.
 
 ### Fixed baseline and live provenance
 
@@ -301,4 +307,6 @@ The one-page English refresh for
 Keep the experiment unpublished and request explicit approval before deploy,
 push/merge, external distribution, indexing, or validation. After approval,
 publish no more than this one active experiment and wait for its predeclared
-24h and 7d readouts.
+24h and 7d readouts. If approval has not arrived, the one-time
+`wenlan-growth-evidence-window-2` heartbeat will read the Friday weekly result
+and reassess only from a new complete evidence window.
