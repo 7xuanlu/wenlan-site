@@ -757,7 +757,7 @@ const baseArticles: LearnArticle[] = [
       "MCP memory knowledge base",
       "local AI work memory",
     ],
-    updatedAt: "2026-07-02",
+    updatedAt: "2026-07-17",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     audience: "People choosing a memory layer for AI-assisted work",
@@ -765,7 +765,7 @@ const baseArticles: LearnArticle[] = [
       "Basic Memory is strongest as a Markdown-centered knowledge base with AI access.",
       "Wenlan is designed around the AI work loop: sessions, handoffs, distillation, provenance, and shared MCP memory.",
       "Both value human-readable memory; the right fit depends on whether you want a knowledge base or a work-session memory layer.",
-      "This page reflects Basic Memory's public docs as of 2026-07-02 and Wenlan v0.12.0 as of 2026-07-08. If something has shifted on either side, please open an issue.",
+      "This page reflects Basic Memory's public docs as of 2026-07-02 and Wenlan v0.13.2 as of 2026-07-14. If something has shifted on either side, please open an issue.",
     ],
     officialReferences: [
       {
@@ -902,7 +902,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "How fresh is this comparison?",
         answer:
-          "Reflects Basic Memory's public docs as of 2026-07-02 and Wenlan v0.12.0 as of 2026-07-08. If something material changes on either side, please open an issue on github.com/7xuanlu/wenlan and I will update.",
+          "Reflects Basic Memory's public docs as of 2026-07-02 and Wenlan v0.13.2 as of 2026-07-14. If something material changes on either side, please open an issue on github.com/7xuanlu/wenlan and I will update.",
       },
     ],
     relatedSlugs: [
@@ -935,7 +935,7 @@ const baseArticles: LearnArticle[] = [
       "Claude memory workflow",
       "AI work memory",
     ],
-    updatedAt: "2026-07-02",
+    updatedAt: "2026-07-17",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     audience: "Claude Code users choosing a memory workflow",
@@ -943,7 +943,7 @@ const baseArticles: LearnArticle[] = [
       "claude-mem focuses on automatically observing Claude Code sessions and extracting useful context.",
       "Wenlan focuses on shared local AI work memory across Claude Code and other MCP clients.",
       "Both aim to reduce repeated context, but they choose different centers of gravity.",
-      "Both products are early. This page covers the claude-mem npm package as of 2026-07-02 and Wenlan v0.12.0 as of 2026-07-08.",
+      "Both products are early. This page covers the claude-mem npm package as of 2026-07-02 and Wenlan v0.13.2 as of 2026-07-14.",
     ],
     officialReferences: [
       {
@@ -1116,7 +1116,7 @@ const baseArticles: LearnArticle[] = [
       "AI coding work memory",
     ],
     publishedAt: "2026-05-27",
-    updatedAt: "2026-07-02",
+    updatedAt: "2026-07-17",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     audience: "Developers evaluating local-first memory for AI coding tools",
@@ -1124,7 +1124,7 @@ const baseArticles: LearnArticle[] = [
       "Superlocal Memory now emphasizes a local reliability layer for memory, cache, prompt compression, KV-cache alignment, and LLM cost optimization.",
       "Wenlan emphasizes the AI work loop: capture, handoff, distill, retrieve, and keep readable artifacts inspectable.",
       "The best Superlocal Memory alternative depends on whether you need a reliability layer or an inspectable work-memory workflow across MCP clients.",
-      "Wenlan version and framing reflect v0.12.0 on 2026-07-08. Check both project pages for newer releases before deciding.",
+      "Wenlan version and framing reflect v0.13.2 on 2026-07-14. Check both project pages for newer releases before deciding.",
     ],
     officialReferences: [
       {
@@ -1268,7 +1268,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "How often do these numbers get re-run?",
         answer:
-          "Wenlan's eval harness lives under `crates/wenlan-core/src/eval/` and runs locally on demand against the same fixtures the published numbers use. Anyone can re-run them. I refresh the published number when a release changes it materially. Last release alignment: v0.12.0 on 2026-07-08.",
+          "Wenlan's eval harness lives under `crates/wenlan-core/src/eval/` and runs locally on demand against the same fixtures the published numbers use. Anyone can re-run them. I refresh the published number when a release changes it materially. Last release alignment: v0.13.2 on 2026-07-14.",
       },
     ],
     relatedSlugs: [

@@ -17,6 +17,7 @@ type BaseSpec = {
   metaTitle: string;
   metaDescription: string;
   keywords: string[];
+  updatedAt?: string;
   audience: string;
   heroBullets: [string, string, string];
   quickAnswer: string;
@@ -46,7 +47,7 @@ function makeArticle(spec: BaseSpec): LearnArticle {
     metaTitle: spec.metaTitle,
     metaDescription: spec.metaDescription,
     keywords: spec.keywords,
-    updatedAt: UPDATED_AT,
+    updatedAt: spec.updatedAt ?? UPDATED_AT,
     author: AUTHOR,
     readingTime: "5 min read",
     audience: spec.audience,
@@ -1194,14 +1195,15 @@ const workflowArticles: BaseSpec[] = [
   },
   {
     slug: "cursor-claude-code-shared-memory",
+    updatedAt: "2026-07-17",
     eyebrow: "Workflow",
     category: "Workflows",
-    title: "Shared Memory Between Cursor and Claude Code",
+    title: "How to Share Memory Between Cursor and Claude Code",
     description:
-      "Use Wenlan as the local bridge when planning, editing, and debugging happen in different AI coding tools.",
-    metaTitle: "Shared Memory Between Cursor and Claude Code | Wenlan",
+      "Connect Cursor and Claude Code to one local Wenlan daemon so both tools can recall the same source-backed decisions and handoffs.",
+    metaTitle: "Share Memory Between Cursor and Claude Code | Wenlan",
     metaDescription:
-      "Wenlan lets Cursor and Claude Code use the same local, source-backed context through the daemon and MCP connector.",
+      "Connect Cursor through MCP and Claude Code through the Wenlan plugin so both AI coding tools share one local, source-backed memory store.",
     keywords: [
       "Cursor Claude Code shared memory",
       "shared AI coding memory",
@@ -1216,7 +1218,7 @@ const workflowArticles: BaseSpec[] = [
       "Both can recall the same decisions and handoffs.",
     ],
     quickAnswer:
-      "Connect both Cursor and Claude Code to the same Wenlan daemon. Claude Code can use the plugin workflow, while Cursor uses MCP tools; both read and write the same local memory.",
+      "To share memory between Cursor and Claude Code, point both clients at the same Wenlan daemon, data directory, and space. Use the Claude Code plugin and Cursor's Wenlan MCP connection; a capture in either tool can then be recalled from the other.",
     problem:
       "Many developers plan in one tool and edit in another. If each tool has separate memory, the user becomes the synchronization layer.",
     wenlanFit:

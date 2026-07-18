@@ -160,7 +160,7 @@ The worksheet is written to `docs/seo-audits/YYYY-MM-DD-ai-visibility.md` by def
 
 Local build evidence; recheck production after the Vercel deploy:
 
-- The homepage build serves the README-aligned copy with `LME_Oracle` `93.6%` Recall@5 / `0.857` MRR / `0.883` NDCG@10, `LME_S` `87.7%` Recall@5 / `0.815` MRR / `0.822` NDCG@10 on the stratified `N=90` deep-S substrate, `softwareVersion` `0.12.0`, and the current `wenlan connect <client>` setup wording.
+- The homepage build serves the README-aligned copy with `LME_Oracle` `93.6%` Recall@5 / `0.857` MRR / `0.883` NDCG@10, `LME_S` `87.7%` Recall@5 / `0.815` MRR / `0.822` NDCG@10 on the stratified `N=90` deep-S substrate, `softwareVersion` `0.13.2`, and the current `wenlan connect <client>` setup wording.
 - The `llms.txt` build serves the README-aligned AI-readable map with the same `LME_Oracle` / `LME_S` framing, retrieval token comparison, new Learn URLs, and updated Superlocal comparison wording.
 - The local sitemap includes the new Learn URLs:
   - `/learn/wenlan-for-claude-code`

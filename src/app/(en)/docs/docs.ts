@@ -139,6 +139,7 @@ const pluginDailyCommands = `/setup       setup + diagnosis
 /recall     search local memory
 /distill    synthesize or refresh pages
 /pages      list or open distilled pages
+/lint       run read-only memory and page health diagnostics
 /curate     audit pending captures or revisions
 /forget     delete a memory by ID
 /handoff    end-of-session debrief`;
@@ -1285,6 +1286,7 @@ export const docPages: DocPage[] = [
           "/curate revisions: walk pending revisions when /brief shows more than the top few.",
           "/distill: synthesize related memories into wiki pages.",
           "/pages: list recent pages or open a matching page in your editor.",
+          "/lint: run the canonical read-only memory and page health report.",
           "/forget: delete a memory by ID when it should not remain in Wenlan.",
         ],
       },
@@ -1307,7 +1309,7 @@ export const docPages: DocPage[] = [
         heading: "How to choose",
         body: [
           "Start with /brief in Claude Code or context in another MCP client. Save durable knowledge with capture. Search history with recall. Close a serious session with /handoff.",
-          "Use /curate, /distill, and /pages when memory needs maintenance or a topic deserves a page.",
+          "Use /lint, /curate, /distill, and /pages when memory needs diagnosis, maintenance, or a topic deserves a page.",
         ],
       },
     ],
@@ -1319,10 +1321,10 @@ export const docPages: DocPage[] = [
     eyebrow: "Plugin",
     title: "Claude Code Plugin",
     description:
-      "Use Wenlan's richest workflow inside Claude Code: setup, session brief, capture, recall, curation, distillation, pages, and handoff.",
+      "Use Wenlan's richest workflow inside Claude Code: setup, brief, capture, recall, lint diagnostics, curation, distillation, pages, and handoff.",
     metaTitle: "Wenlan Claude Code Plugin | Docs",
     metaDescription:
-      "Install and use the Wenlan Claude Code plugin with /setup, /brief, /capture, /recall, /handoff, /distill, /curate, /forget, the SessionStart hook, and local memory mode.",
+      "Install and use the Wenlan Claude Code plugin with /setup, /brief, /capture, /recall, /lint, /handoff, /distill, /curate, /forget, and /pages.",
     keywords: [
       "Wenlan Claude Code plugin",
       "Claude Code memory plugin",
@@ -1330,7 +1332,7 @@ export const docPages: DocPage[] = [
       "Wenlan /setup",
       "Claude Code MCP memory",
     ],
-    updatedAt: DOCS_UPDATED_AT,
+    updatedAt: "2026-07-17",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     summary: [
@@ -1360,7 +1362,7 @@ export const docPages: DocPage[] = [
         heading: "Daily command surface",
         body: [
           "Most sessions need only /brief at the start, /capture when something durable happens, /recall for a specific lookup, and /handoff before the session ends.",
-          "The other commands are maintenance and inspection paths for when memory needs review, distillation, deletion, or inline reading.",
+          "The other commands are maintenance and inspection paths for read-only health diagnostics, review, distillation, deletion, or opening a page.",
         ],
         code: {
           label: "Plugin commands",
@@ -1636,7 +1638,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Current runtime shape",
         body: [
-          "The current public docs describe the 0.12.0 runtime shape: Claude Code plugin, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages, real git versioning for readable pages, session handoffs, and status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
+          "The current public docs describe the 0.13.2 runtime shape: Claude Code plugin, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages, real git versioning for readable pages, session handoffs, and status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
           "The biggest practical upgrade checks are platform support, package path alignment, and spaces. Confirm your machine's service manager, confirm MCP clients launch the connector under ~/.wenlan/bin, and confirm the active space is the one you expect.",
         ],
         link: {
@@ -3590,7 +3592,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.12.0 line.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.13.2 line.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3760,31 +3762,44 @@ export const docPages: DocPage[] = [
     slug: "changelog",
     group: "Project",
     eyebrow: "Releases",
-    title: "Changelog",
+    title: "Wenlan Changelog and Releases",
     description:
-      "The public release history for Wenlan, plus how to read unreleased work on main.",
-    metaTitle: "Wenlan Changelog | Docs",
+      "See the current Wenlan release, shipped changes, recent milestones, and how to distinguish tagged releases from unreleased main work.",
+    metaTitle: "Wenlan Changelog and Current Release | Docs",
     metaDescription:
-      "Review Wenlan's public release history, current stable release, recent milestones, and links to the full GitHub changelog.",
+      "Check Wenlan's current stable version, shipped changes, release dates, recent milestones, and the canonical GitHub changelog.",
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.12.0",
+      "Wenlan version 0.13.2",
       "wenlan-mcp release notes",
     ],
-    updatedAt: DOCS_UPDATED_AT,
+    updatedAt: "2026-07-17",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "The current stable release in the repository changelog is v0.12.0, dated 2026-07-08.",
-      "Recent main-branch work after v0.12.0 is visible through merged PRs, but it should be treated as unreleased until the next release lands.",
+      "Quick answer: the current stable release in the repository changelog is v0.13.2, dated 2026-07-14.",
+      "Recent main-branch work after v0.13.2 is visible through merged PRs, but it should be treated as unreleased until the next release lands.",
     ],
     sections: [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.12.0 is the current stable release recorded in CHANGELOG.md and the release-please manifest. It redesigns distill around one refresh operation with citation-gated synthesis, and adds per-claim verified citations for wiki pages.",
+          "Wenlan v0.13.2 is the current stable release recorded in CHANGELOG.md and the release-please manifest. The v0.13.x line adds external-LLM configuration and status, whole-system lint diagnostics, responsive directory sync, and hardened evidence-driven maintenance paths.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
+        ],
+      },
+      {
+        heading: "v0.13.x highlights",
+        body: [
+          "The v0.13.x releases expand diagnostics and external-LLM configuration while hardening release and maintenance behavior.",
+        ],
+        bullets: [
+          "External-LLM API key, config hot-swap, and external status.",
+          "Whole-system and deep semantic lint diagnostics.",
+          "Directory sync keeps the daemon responsive.",
+          "Evidence-driven lint maintenance paths are hardened.",
+          "Stable release date: 2026-07-14.",
         ],
       },
       {
@@ -3797,7 +3812,7 @@ export const docPages: DocPage[] = [
           "Per-claim verified citations for wiki pages.",
           "Loopback daemon guarded against cross-origin browser access.",
           "Server binds its port before any data-dir work.",
-          "Stable release date: 2026-07-08.",
+          "Release date: 2026-07-08.",
         ],
       },
       {
@@ -3857,7 +3872,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.12.0, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.13.2, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },
