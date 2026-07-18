@@ -800,6 +800,23 @@ test("public command guidance tracks the current plugin contract", async () => {
   assert.doesNotMatch(docs, /review, distill, read, and handoff/);
 });
 
+test("Claude Code memory acquisition page tracks native limits and the direct plugin path", async () => {
+  const articles = await readRepo("src/app/learn/articles.ts");
+  const start = articles.indexOf('slug: "claude-code-memory"');
+  const end = articles.indexOf('\n  {\n    slug:', start + 1);
+  assert.notEqual(start, -1, "Claude Code memory article is missing");
+  const article = articles.slice(start, end === -1 ? articles.length : end);
+
+  assert.match(article, /publishedAt: "2026-06-07"/);
+  assert.match(article, /updatedAt: "2026-07-18"/);
+  assert.match(article, /first 200 lines or 25 KB/);
+  assert.match(article, /per repository and shared across worktrees/);
+  assert.match(article, /Start with Claude Code's native memory/);
+  assert.match(article, /\/plugin marketplace add 7xuanlu\/wenlan/);
+  assert.match(article, /\/plugin install wenlan@7xuanlu-wenlan/);
+  assert.match(article, /\/memory/);
+});
+
 test("public-copy scans exclude private work artifacts", async () => {
   assert.equal(shouldSkipPublicScanEntry(".omo"), true);
   assert.equal(shouldSkipPublicScanEntry(".codegraph"), true);
