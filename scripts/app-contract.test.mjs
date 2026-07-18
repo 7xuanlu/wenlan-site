@@ -145,8 +145,17 @@ test("public desktop-app surfaces track wenlan-app source facts", async () => {
 
 test("public web-client guidance tracks the released wenlan-app remote access boundary", async () => {
   const app = await currentWenlanAppRelease();
-  const [remotePanel, remoteRuntime, docs, english, simplified, traditional] = await Promise.all([
+  const [
+    remotePanel,
+    remoteResources,
+    remoteRuntime,
+    docs,
+    english,
+    simplified,
+    traditional,
+  ] = await Promise.all([
     readFile(resolve(app.root, "src/components/memory/RemoteAccessPanel.tsx"), "utf8"),
+    readFile(resolve(app.root, "src/i18n/resources.ts"), "utf8"),
     readFile(resolve(app.root, "app/src/remote_access.rs"), "utf8"),
     readRepo("src/app/docs/docs.ts"),
     readRepo("src/i18n/content/en.ts"),
@@ -155,11 +164,12 @@ test("public web-client guidance tracks the released wenlan-app remote access bo
   ]);
 
   assert.doesNotMatch(remotePanel, /secure tunnel/i);
-  assert.match(remotePanel, /no authentication/i);
-  assert.match(remotePanel, /Anyone with the URL can access Wenlan/i);
-  assert.match(remotePanel, /turn Remote Access off when unused/i);
+  assert.match(remotePanel, /remoteAccess\.noAuthWarning/);
+  assert.match(remoteResources, /no authentication/i);
+  assert.match(remoteResources, /Anyone with the URL can access Wenlan/i);
+  assert.match(remoteResources, /turn Remote Access off when unused/i);
   assert.doesNotMatch(remotePanel, /rotateRemoteToken|function TokenRow/);
-  assert.match(remotePanel, /Enable Developer mode/);
+  assert.match(remoteResources, /Enable Developer mode/);
   assert.match(remoteRuntime, /https:\/\/claude\.ai,https:\/\/chatgpt\.com/);
   assert.match(remoteRuntime, /"--no-auth"/);
   assert.match(docs, /ChatGPT/);

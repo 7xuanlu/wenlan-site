@@ -537,7 +537,7 @@ export const zhTWContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "cbceeec775dd09dfe648dd5ab097f81af302795ef8fbec3c72e7c76857da5ba4",
+    sourceHash: "13b54d22f7edfd089ea10a4e885019ee2ef781cf7bab99f6fd5e80f88c5aa793",
     content: {
       seo: {
         title: "關於 Wenlan | AI 工作的 LLM wiki",
@@ -554,7 +554,7 @@ export const zhTWContent = {
         description:
           "AI 代理捕捉學到的內容，你加入信任來源，Wenlan 讓有來源依據的 wiki 頁面在 AI 工作中保持最新。",
         statusLabel: "專案狀態",
-        statusItems: ["版本 v0.12.0", "支援 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 建置"],
+        statusItems: ["版本 v0.13.2", "支援 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 建置"],
       },
       sections: [
         {
@@ -581,7 +581,7 @@ export const zhTWContent = {
           number: "04",
           title: "目前狀態",
           paragraphs: [
-            "Wenlan v0.12.0 支援的預編譯執行環境包括 macOS Apple Silicon、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64)。macOS Intel 仍是 source/dev-only，直到 public release workflow 發布該 artifact。daemon、CLI、MCP server、Claude Code plugin 和 Codex plugin 都以 Apache-2.0 open source。",
+            "Wenlan v0.13.2 支援的預編譯執行環境包括 macOS Apple Silicon、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64)。macOS Intel 仍是 source/dev-only，直到 public release workflow 發布該 artifact。daemon、CLI、MCP server、Claude Code plugin 和 Codex plugin 都以 Apache-2.0 open source。",
           ],
         },
       ],
@@ -660,7 +660,7 @@ export const zhTWContent = {
   },
   docs: {
     status: "translated",
-    sourceHash: "f472f8b67ac30dfaafdff59049db7c8dfd19a32d56f273b576bb1c0dd156bfa6",
+    sourceHash: "a7c04edd2da7835a4d77cf1cbe45e91477e60da5e8f7ebf5c692fbf9746fdec4",
     content: {
       seo: {
         title: "Wenlan 文件 | AI 工作的 LLM wiki",
@@ -800,8 +800,8 @@ export const zhTWContent = {
                 label: "外掛",
                 title: "Claude Code 外掛",
                 description:
-                  "在 Claude Code 中使用 Wenlan 最完整的 workflow：setup、session brief、capture、recall、curate、distill、pages 和 handoff。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
+                  "在 Claude Code 中使用 Wenlan 最完整的 workflow：setup、brief、capture、recall、lint diagnostics、curate、distill、pages 和 handoff。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 7 月 17 日 · 6 分鐘閱讀",
               },
               {
                 id: "cli-and-service",
@@ -1067,10 +1067,10 @@ export const zhTWContent = {
                 id: "changelog",
                 href: "/docs/changelog",
                 label: "版本",
-                title: "Changelog 變更記錄",
+                title: "Wenlan Changelog 與版本記錄",
                 description:
-                  "Wenlan 的 public release history，以及如何閱讀 main 上尚未發布的工作。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+                  "查看 Wenlan 目前版本、已發布變更，以及如何區分 tagged releases 與 main 上尚未發布的工作。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 7 月 17 日 · 5 分鐘閱讀",
               },
               {
                 id: "releases-and-versioning",

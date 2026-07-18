@@ -554,7 +554,7 @@ export const enContent = {
         description:
           "Agents capture what they learn, you add sources you trust, and Wenlan keeps source-backed wiki pages current across AI work.",
         statusLabel: "Project status",
-        statusItems: ["v0.12.0", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
+        statusItems: ["v0.13.2", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
       },
       sections: [
         {
@@ -581,7 +581,7 @@ export const enContent = {
           number: "04",
           title: "Current status",
           paragraphs: [
-            "Wenlan v0.12.0 ships prebuilt runtime artifacts for macOS Apple Silicon, Linux (x86_64, aarch64; glibc), and Windows (x86_64). macOS Intel remains source/dev-only until a public release workflow publishes that artifact again. The daemon, CLI, MCP server, Claude Code plugin, and Codex plugin are open source under Apache-2.0.",
+            "Wenlan v0.13.2 ships prebuilt runtime artifacts for macOS Apple Silicon, Linux (x86_64, aarch64; glibc), and Windows (x86_64). macOS Intel remains source/dev-only until a public release workflow publishes that artifact again. The daemon, CLI, MCP server, Claude Code plugin, and Codex plugin are open source under Apache-2.0.",
           ],
         },
       ],
@@ -800,8 +800,8 @@ export const enContent = {
                 label: "Plugin",
                 title: "Claude Code Plugin",
                 description:
-                  "Use Wenlan's richest workflow inside Claude Code: setup, session brief, capture, recall, curate, distill, pages, and handoff.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 6 min read",
+                  "Use Wenlan's richest Claude Code workflow: setup, brief, capture, recall, lint diagnostics, curate, distill, pages, and handoff.",
+                meta: "Qi-Xuan Lu · Updated Jul 17, 2026 · 6 min read",
               },
               {
                 id: "cli-and-service",
@@ -1067,10 +1067,10 @@ export const enContent = {
                 id: "changelog",
                 href: "/docs/changelog",
                 label: "Releases",
-                title: "Changelog",
+                title: "Wenlan Changelog and Releases",
                 description:
-                  "The public release history for Wenlan, plus how to read unreleased work on main.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                  "See the current Wenlan release, shipped changes, and how to distinguish tagged releases from unreleased main work.",
+                meta: "Qi-Xuan Lu · Updated Jul 17, 2026 · 5 min read",
               },
               {
                 id: "releases-and-versioning",

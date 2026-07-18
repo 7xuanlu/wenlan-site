@@ -4410,7 +4410,7 @@ test("refreshed SEO pages preserve original publication dates", async () => {
 
   assert.match(
     learnArticles,
-    /slug: "wenlan-vs-superlocal-memory"[\s\S]*publishedAt: "2026-05-27",[\s\S]*updatedAt: "2026-07-02"/,
+    /slug: "wenlan-vs-superlocal-memory"[\s\S]*publishedAt: "2026-05-27",[\s\S]*updatedAt: "2026-07-17"/,
   );
   assert.match(
     docs,

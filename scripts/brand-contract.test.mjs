@@ -489,6 +489,22 @@ test("public TypeScript string literals do not render stale Origin copy", async 
   assert.deepEqual(failures, []);
 });
 
+test("Cursor and Claude Code search page answers shared-memory setup explicitly", async () => {
+  const articles = await readRepo("src/app/learn/seo-articles.ts");
+
+  assert.match(articles, /title: "How to Share Memory Between Cursor and Claude Code"/);
+  assert.match(articles, /metaTitle: "Share Memory Between Cursor and Claude Code \| Wenlan"/);
+  assert.match(
+    articles,
+    /point both clients at the same Wenlan daemon, data directory, and space/,
+  );
+  assert.match(articles, /updatedAt: spec\.updatedAt \?\? UPDATED_AT/);
+  assert.match(
+    articles,
+    /slug: "cursor-claude-code-shared-memory"[\s\S]*?updatedAt: "2026-07-17"/,
+  );
+});
+
 test("security docs align with the current Wenlan site policy", async () => {
   const { version } = await currentWenlanRelease();
   const docs = await readRepo("src/app/docs/docs.ts");
@@ -762,6 +778,7 @@ test("public command guidance tracks the current plugin contract", async () => {
     "forget",
     "handoff",
     "help",
+    "lint",
     "pages",
     "recall",
     "setup",
