@@ -223,3 +223,24 @@ increase for that experiment.
   resume this current experiment; Reddit or other external publication, OSS
   submission, request indexing, and GSC validation remain separately
   approval-gated
+
+### 2026-07-19T00:22:07Z — campaign resumed
+
+- Record type: campaign-approval
+- Approval: the user explicitly approved push, merge, and deploy for
+  `EXP-2026-07-18-claude-code-memory-refresh`
+- Goal status: resumed from the approval-boundary stop
+- Experiments started: 1
+- Active experiments: 1
+- Google Trends retry: `Claude Code memory` and `MCP memory server`, US, past
+  12 months, captured `2026-07-19T00:21:54Z`; the official public endpoint
+  returned HTTP 429 again, so no 0–100 index was captured or used
+- Raw Trends retry evidence:
+  `/tmp/wenlan-seo-demand/2026-07-18/google-trends-explore.headers` and
+  `/tmp/wenlan-seo-demand/2026-07-18/google-trends-explore.raw`
+- Approved external actions: push, merge, and deploy only for the current
+  experiment
+- Still approval-gated: Reddit or other external publication, OSS submission,
+  request indexing, and GSC validation
+- Next step: publish the current experiment, verify production, then wait for
+  the predeclared 24h and 7d readouts

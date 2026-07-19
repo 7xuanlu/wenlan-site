@@ -178,8 +178,8 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 
 ### Control-plane status
 
-- Goal status: blocked at the approval boundary after three consecutive Goal
-  turns without explicit push, merge, and deploy approval.
+- Goal status: resumed and active after the user explicitly approved push,
+  merge, and deploy for the current experiment at `2026-07-19T00:22:07Z`.
 - Goal deadline: 2026-08-18.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
@@ -199,6 +199,9 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Last pre-publish production observation: `2026-07-18T23:45:41Z`; deployed
   robots, sitemap, 13 key pages, noindex headers, structured-data policy,
   redirects, bridge-host redirects, and legacy-URL exclusions passed.
+- Google Trends retry: `Claude Code memory` and `MCP memory server`, US, past
+  12 months, captured `2026-07-19T00:21:54Z`; the official public endpoint
+  again returned HTTP 429, so no 0–100 index enters the decision.
 - Next evidence-window wake: cancelled at `2026-07-18T23:48:28Z` because the
   campaign stopped at its approval boundary; the independent Friday weekly SEO
   automation remains unchanged.
@@ -305,11 +308,9 @@ Publish and index dates remain unset.
 
 The one-page English refresh for
 `EXP-2026-07-18-claude-code-memory-refresh` is prepared and locally verified.
-The Goal is blocked because explicit approval for the necessary push, merge,
-and deploy actions did not arrive across three consecutive Goal turns. Keep
-the experiment unpublished and make no external action. To resume, the user
-must explicitly approve push, merge, and deploy for this current experiment;
-Reddit or other external publication, OSS submission, request indexing, and
-GSC validation remain separately approval-gated. After resumption, publish no
-more than this one active experiment and wait for its predeclared 24h and 7d
-readouts.
+The user explicitly approved push, merge, and deploy for this current
+experiment at `2026-07-19T00:22:07Z`. Publish no more than this one active
+experiment, verify production, append its publish evidence, and wait for the
+predeclared 24h and 7d readouts. Reddit or other external publication, OSS
+submission, request indexing, and GSC validation remain separately
+approval-gated.
