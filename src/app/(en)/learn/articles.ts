@@ -367,33 +367,36 @@ const baseArticles: LearnArticle[] = [
       "Claude Code project context",
       "AI coding agent memory",
     ],
-    updatedAt: "2026-06-07",
+    publishedAt: "2026-06-07",
+    updatedAt: "2026-07-18",
     author: DEFAULT_AUTHOR,
     readingTime: "7 min read",
     audience: "Developers using Claude Code, Cursor, and other AI coding agents",
     heroBullets: [
       "Use CLAUDE.md for stable project instructions and auto memory for assistant-learned corrections and preferences.",
-      "Use /memory to inspect and edit what Claude Code has loaded before you blame recall.",
-      "Use Wenlan when memory should be local, source-backed, reviewable, and shared with Cursor, Codex, and other MCP clients.",
+      "Use /memory to inspect and edit native memory before adding another memory layer.",
+      "Add Wenlan when work context must be source-backed, reviewable, and shared with Cursor, Codex, and other MCP clients.",
     ],
     sections: [
       {
         heading: "Quick answer",
         body: [
-          "Claude Code already has memory. The official memory path combines CLAUDE.md files you write, auto memory Claude writes from corrections and preferences, and the /memory command for viewing and editing what is loaded.",
-          "Wenlan is for the next problem: keeping evolving work context local, source-backed, and available outside one Claude Code session or one Claude-only surface.",
+          "Start with Claude Code's native memory. Use CLAUDE.md for instructions you maintain, auto memory for learnings Claude saves, and /memory to inspect or edit both surfaces.",
+          "Auto memory is per repository and shared across worktrees. Claude Code loads the first 200 lines or 25 KB of its MEMORY.md entrypoint, whichever comes first, at the start of each conversation.",
+          "Add Wenlan only when the problem extends beyond native memory: evolving work context needs provenance, review, handoff, or access from Cursor, Codex, and other MCP-compatible tools.",
         ],
         bullets: [
           "Put stable rules, commands, and project architecture in CLAUDE.md.",
           "Use Claude Code auto memory for repeated corrections and preferences Claude discovers.",
-          "Use Wenlan for decisions, gotchas, handoffs, source-backed wiki pages, and shared MCP memory.",
+          "Use Wenlan for source-backed decisions, gotchas, handoffs, wiki pages, and shared MCP memory.",
         ],
       },
       {
         heading: "How Claude Code memory works",
         body: [
           "Each Claude Code session starts with a fresh context window. Claude Code carries knowledge forward through CLAUDE.md files and auto memory, and both are loaded into new conversations as context.",
-          "That makes Claude Code memory useful for persistent instructions. It also means memory competes with the rest of the context window, so it should stay concise and scoped.",
+          "Auto memory is machine-local. Worktrees and subdirectories in the same Git repository share one auto memory directory, while separate repositories do not.",
+          "Only the first 200 lines or 25 KB of auto memory's MEMORY.md loads at session start. Keep that index concise; detailed topic files can be read on demand.",
         ],
       },
       {
@@ -404,10 +407,10 @@ const baseArticles: LearnArticle[] = [
         ],
       },
       {
-        heading: "Use /memory before adding another layer",
+        heading: "Use native memory before another layer",
         body: [
-          "If Claude Code seems to forget something, first inspect the built-in memory surface. /memory is the place to view and edit what Claude Code has loaded.",
-          "That step matters because some problems are not Wenlan problems. The memory may be missing, stale, too broad, duplicated, or loaded at the wrong scope.",
+          "If Claude Code seems to forget something, run /memory first. It lists memory locations, opens files for review, and lets you inspect or toggle auto memory.",
+          "Use /context to verify which CLAUDE.md files loaded. The problem may be a missing file, the wrong scope, conflicting instructions, or an oversized memory index rather than a need for another tool.",
         ],
       },
       {
@@ -425,7 +428,7 @@ const baseArticles: LearnArticle[] = [
         ],
         code: {
           label: "Claude Code plugin",
-          code: "/plugin marketplace add 7xuanlu/claude-plugins\n/plugin install wenlan@7xuanlu\n/setup\n/capture This project uses Wenlan for local AI work memory.\n/recall local AI work memory",
+          code: "/plugin marketplace add 7xuanlu/wenlan\n/plugin install wenlan@7xuanlu-wenlan\n/setup\n/capture This project uses Wenlan for local AI work memory.\n/recall local AI work memory",
         },
       },
       {
