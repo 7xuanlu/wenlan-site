@@ -61,6 +61,15 @@ No Trends index enters the candidate decision. A later capture must preserve
 the raw 0–100 series, query, geography, period, and timestamp before it can be
 used.
 
+Retry: `Claude Code memory` and `MCP memory server` were requested again from
+the official Google Trends public endpoint for US, past 12 months, at
+`2026-07-19T00:21:54Z`. It again returned HTTP 429. The response headers and
+body are retained outside git at
+`/tmp/wenlan-seo-demand/2026-07-18/google-trends-explore.headers` and
+`/tmp/wenlan-seo-demand/2026-07-18/google-trends-explore.raw`. No raw 0–100
+series was available, so Trends remains absent from the candidate score and is
+not replaced with a third-party keyword-volume estimate.
+
 ### Reddit
 
 All observations are English; poster geography is unspecified.
