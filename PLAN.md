@@ -184,8 +184,8 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-18-claude-code-memory-refresh`, approved locally but not
-  published.
+  `EXP-2026-07-18-claude-code-memory-refresh`, published to production at
+  `2026-07-19T00:26:09Z` (`2026-07-18` America/Los_Angeles).
 - Active experiments: 1.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
@@ -196,15 +196,18 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `docs/seo-audits/2026-07-17-weekly-seo.md`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Last pre-publish production observation: `2026-07-18T23:45:41Z`; deployed
-  robots, sitemap, 13 key pages, noindex headers, structured-data policy,
-  redirects, bridge-host redirects, and legacy-URL exclusions passed.
+- Last production observation: `2026-07-19T00:28:15Z`; the refreshed route
+  returned HTTP 200 with its canonical, `index, follow`, visible source-backed
+  copy, and original/modified Article dates; deployed robots, 108 sitemap
+  URLs, 13 key pages, noindex headers, structured-data policy, redirects,
+  bridge-host redirects, and legacy-URL exclusions passed.
 - Google Trends retry: `Claude Code memory` and `MCP memory server`, US, past
   12 months, captured `2026-07-19T00:21:54Z`; the official public endpoint
   again returned HTTP 429, so no 0–100 index enters the decision.
-- Next evidence-window wake: cancelled at `2026-07-18T23:48:28Z` because the
-  campaign stopped at its approval boundary; the independent Friday weekly SEO
-  automation remains unchanged.
+- Next evidence-window wake: one-time same-task heartbeat
+  `wenlan-claude-memory-24h-readout`, Sunday `2026-07-19 18:00`
+  America/Los_Angeles. The independent Friday weekly SEO automation remains
+  unchanged.
 
 ### Fixed baseline and live provenance
 
@@ -279,14 +282,16 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-18-claude-code-memory-refresh` is approved and active locally for
-the `2026-07-18..2026-07-24` data window. It refreshes the existing English
+`EXP-2026-07-18-claude-code-memory-refresh` is approved, published, and active
+for the `2026-07-18..2026-07-24` data window. It refreshes the existing English
 `/learn/claude-code-memory` page with a native-memory-first layer map, current
 official limits, deterministic inspection guidance, and the preferred direct
 Wenlan plugin path. It creates no new URL and no speculative Mandarin
 translation. Its qualified-exposure readout is guarded by the authenticated
 five-query target-page baseline recorded in the pre-publish correction.
-Publish and index dates remain unset.
+The publish date is `2026-07-18` America/Los_Angeles
+(`2026-07-19T00:26:09Z`). Indexing has not been manually confirmed, and no
+indexing request was submitted.
 
 ### Execution phases
 
@@ -307,10 +312,9 @@ Publish and index dates remain unset.
 ### Next decision
 
 The one-page English refresh for
-`EXP-2026-07-18-claude-code-memory-refresh` is prepared and locally verified.
-The user explicitly approved push, merge, and deploy for this current
-experiment at `2026-07-19T00:22:07Z`. Publish no more than this one active
-experiment, verify production, append its publish evidence, and wait for the
-predeclared 24h and 7d readouts. Reddit or other external publication, OSS
-submission, request indexing, and GSC validation remain separately
-approval-gated.
+`EXP-2026-07-18-claude-code-memory-refresh` is live and production-verified.
+Do not start or rewrite another experiment. Wait for the one-time 24h heartbeat
+and then the predeclared 7d readout; report GSC, Vercel, Umami, GitHub, and
+technical evidence only when available in their native units. Reddit or other
+external publication, OSS submission, request indexing, and GSC validation
+remain separately approval-gated.
