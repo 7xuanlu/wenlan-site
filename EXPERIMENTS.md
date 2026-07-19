@@ -244,3 +244,33 @@ increase for that experiment.
   request indexing, and GSC validation
 - Next step: publish the current experiment, verify production, then wait for
   the predeclared 24h and 7d readouts
+
+### 2026-07-19T00:33:42Z — experiment published
+
+- Record type: campaign-observation
+- Experiment ID: `EXP-2026-07-18-claude-code-memory-refresh`
+- Active experiments: 1
+- Pull request: `https://github.com/7xuanlu/wenlan-site/pull/56`
+- Merge revision: `1546bde7aa94dad7c5530002325d0c60cb3e0b8e`
+- Publish date: `2026-07-18` America/Los_Angeles
+- Production completion: `2026-07-19T00:26:09Z`
+- Index date: not confirmed; no indexing request or GSC validation was
+  submitted
+- Live route: `https://wenlan.app/learn/claude-code-memory` returned HTTP 200
+  with the canonical URL, `index, follow`, the native 200-line/25-KB limit,
+  `/memory` guidance, the direct Wenlan plugin commands, and Article
+  `datePublished=2026-06-07` plus `dateModified=2026-07-18`
+- Production technical evidence: robots, 108 sitemap URLs, 13 direct-200 key
+  pages, six utility noindex headers, sitemap-wide FAQPage absence, 25
+  redirects, six bridge-host redirects, and legacy-URL sitemap exclusions
+  passed
+- Production rendered evidence: desktop top/install and mobile top/all seven
+  sections passed with no document-level horizontal overflow and no console
+  entries; report:
+  `/tmp/wenlan-seo/visual-qa/production-2026-07-19-claude-code-memory/report.md`
+- Result: pending; the experiment has only just received exposure and cannot
+  be judged at publish time
+- Decision: wait
+- Next step: one-time same-task heartbeat
+  `wenlan-claude-memory-24h-readout` at `2026-07-19 18:00`
+  America/Los_Angeles; do not start another experiment
