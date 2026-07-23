@@ -2,8 +2,7 @@
 
 ## Decision
 
-Prepare the already-complete Traditional Chinese article for the
-`2026-07-25..2026-07-31` experiment window:
+Publish the already-complete Traditional Chinese article immediately:
 
 - Candidate route:
   `/zh-TW/learn/wenlan-vs-obsidian-ai-memory`
@@ -11,17 +10,16 @@ Prepare the already-complete Traditional Chinese article for the
   `/learn/wenlan-vs-obsidian-ai-memory`
 - Status: locally ready, queued, unpublished, and not an active experiment
 - Locale scope: zh-TW only
-- Proposed experiment ID:
-  `EXP-2026-07-25-zhtw-obsidian-localization`
+- Experiment ID:
+  `EXP-2026-07-23-zhtw-obsidian-localization`
 - Proposed asset class: `net-new-search`
 
 The route is new, so it uses the `net-new-search` class even though its subject
 and maintained source base come from an existing English page. This is not a
 new English topic and it does not justify a zh-CN counterpart.
 
-Do not append an experiment-start record or consume the window until the
-2026-07-24 weekly evidence has been read and explicit push, merge, and deploy
-approval has been granted.
+The user approved website push, merge, and deploy, then explicitly rejected
+using the weekly reporting boundary as a reason to delay the verified page.
 
 ## Why this is ready
 
@@ -94,13 +92,12 @@ sessions.
 Stars remain a separate repository observation. A later star change must not
 be attributed to this article without reliable supporting evidence.
 
-## Draft immutable experiment fields
+## Immutable experiment fields
 
-These fields are proposed for review. They do not constitute an
-experiment-start record.
+These fields define the experiment-start record.
 
-- **Experiment ID:** `EXP-2026-07-25-zhtw-obsidian-localization`
-- **Data window:** `2026-07-25..2026-07-31`
+- **Experiment ID:** `EXP-2026-07-23-zhtw-obsidian-localization`
+- **Data window:** `2026-07-18..2026-07-24`
 - **Asset class:** `net-new-search`
 - **Hypothesis:** Publishing the modifier-qualified zh-TW counterpart will
   create measurable Traditional Chinese search exposure and a useful path to
@@ -165,16 +162,12 @@ These website surfaces can improve crawl discovery and reader navigation, but
 they cannot establish causality for GSC impressions, Vercel visitors, GitHub
 outbound, or stars.
 
-## 2026-07-25 launch gate
+## Immediate launch
 
-Read the independently generated 2026-07-24 weekly SEO report first.
-
-- If it finds a technical blocker, do not launch.
-- If it finds a materially stronger impression-bearing existing-page action,
-  select only one experiment for the window and record why this candidate was
-  deferred.
-- Otherwise, append the immutable experiment-start record and use the website
-  push, merge, and deploy approval granted on `2026-07-23`.
+- Append the immutable experiment-start record.
+- Mark draft PR #58 ready and merge it.
+- Verify production deployment, canonical, indexability, sitemap/hreflang,
+  unsupported zh-CN 404, and rendered desktop/mobile output.
 - Do not add a Threads or other owned-social action to this SEO-only campaign.
 
 ## Remaining manual or account-gated evidence
@@ -184,4 +177,4 @@ Read the independently generated 2026-07-24 weekly SEO report first.
 - Authenticated Umami outbound and UTM observations.
 - Vercel custom-event access and a reliable acquisition-session denominator.
 - Any source-to-page-to-GitHub join.
-- Complete 2026-07-24 weekly evidence and the 2026-07-25 launch-gate decision.
+- Production completion timestamp and confirmed index date.

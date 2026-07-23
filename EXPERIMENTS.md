@@ -738,3 +738,47 @@ increase for that experiment.
 - Scope: website SEO only; the branch and PR contain no Threads draft
 - Next step: read the 2026-07-24 weekly evidence and apply the predeclared
   2026-07-25 launch gate before merge or production deploy
+
+### 2026-07-23T15:14:19Z — immediate website launch correction
+
+- Record type: campaign-correction
+- User correction: there is no technical reason to delay the verified website
+  candidate; the weekly reporting boundary must not block direct merge
+- Supersedes: the proposed `2026-07-25` launch gate and the earlier instruction
+  to keep the Claude Code memory experiment as the only active experiment
+- Contract change: weekly windows remain reporting boundaries, but no longer
+  cap verified and explicitly approved website launches
+- Caps retained: at most two active experiments and at most one net-new search
+  asset in any 14-calendar-day period
+- Approval: website push, merge, and production deploy remain explicitly
+  approved; no external publication or indexing action was added
+- Next step: start the zh-TW experiment, merge PR #58, and verify production
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-23-zhtw-obsidian-localization
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-23-zhtw-obsidian-localization
+- Status: approved
+- Data window: 2026-07-18..2026-07-24
+- Asset class: net-new-search
+- Launched: 2026-07-23
+- Hypothesis: Publishing the modifier-qualified zh-TW counterpart will create measurable Traditional Chinese search exposure and a useful path to GitHub without fabricating zh-CN coverage.
+- Candidate evidence: Taiwan Google Trends observations, repeated Reddit and OSS workflows, Traditional Chinese corroboration, the English page's authenticated GSC impressions, and the clean localized coverage gap recorded in `docs/seo-audits/2026-07-19-localized-acquisition-gap.md`.
+- Baseline: GSC `sc-domain:wenlan.app` for `2026-06-24..2026-07-21` reported 6 property clicks and 264 impressions; visible query rows reported 0 clicks and 64 impressions; the English Obsidian page reported 0 clicks, 4 impressions, and average position 4.5; Vercel reported 1,142 property visitors, 6 `/zh-TW` visitors, 1 `/zh-TW/learn` visitor, and 3 English Obsidian-page visitors; GitHub reported 47 total stars; Umami outbound remained unavailable.
+- Change: Publish only the prepared zh-TW route, localized Learn-hub entry, contextual links from the two existing zh-TW wiki pages, per-locale static params, sitemap, locale switching, and hreflang support; keep the unsupported zh-CN route as a hard 404.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 5 GSC page impressions within the first 28 complete post-index days
+- Success criteria: After at least 5 GSC page impressions, the route earns at least 1 GSC click or average position is 20.0 or better; report Vercel page visitors and GitHub stars separately without a causal claim.
+- Failure criteria: After 28 complete post-index days and at least 5 GSC page impressions, the route has 0 clicks and average position is worse than 20.0; fewer than 5 impressions is inconclusive.
+- Stop criteria: Stop or hold if an official source becomes invalid; a canonical, indexing, robots, noindex, redirect, structured-data, sitemap, or locale regression appears; or the unsupported zh-CN route leaks into static params or hreflang.
+- 24h readout: pending — verify live 200, canonical, indexability, sitemap and hreflang, zh-CN 404, production render, and separate Vercel/GitHub observations without an SEO-success judgment
+- 7d readout: pending — report indexing latency, GSC page impressions/clicks/position when available, Vercel page visitors, and stars separately
+- W2 readout: pending — apply the minimum-exposure guard and inspect English, zh-TW, and zh-CN acquisition surfaces for regressions
+- W4 readout: pending — evaluate the predeclared success, failure, or inconclusive condition without changing thresholds
+- W8 readout: pending — record a post-campaign follow-up only if it remains useful
+- Result: pending
+- Decision: merge
+- Next step: Mark PR #58 ready, merge it, verify production, and append the production completion evidence.
+<!-- EXPERIMENT-RECORD:END -->

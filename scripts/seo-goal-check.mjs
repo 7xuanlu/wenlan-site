@@ -9,7 +9,7 @@ const repoRoot = resolve(import.meta.dirname, "..");
 const FROZEN_START = "<!-- FROZEN-GOAL-CONTRACT:START -->";
 const FROZEN_END = "<!-- FROZEN-GOAL-CONTRACT:END -->";
 const EXPECTED_FROZEN_SHA256 =
-  "8fc4a55b35699354370540accb5bd1a2450700e1999c62f226e2785ba468aa30";
+  "65ce42e862dd0f7b45dffef438909ac62ab755d8c911485e6bca3e9d4ffe0d67";
 const DAY_MS = 24 * 60 * 60 * 1000;
 const CAMPAIGN_WINDOW_ANCHOR = new Date("2026-07-18T00:00:00.000Z");
 const CAMPAIGN_DEADLINE = new Date("2026-08-18T00:00:00.000Z");
@@ -167,8 +167,8 @@ const requiredFrozenClauses = [
     "`technical blockers -> indexed page with impressions -> integration/workflow hub -> diagnostic/recipe -> net-new article`.",
   ],
   [
-    "one experiment per weekly data window",
-    "Start at most one experiment in each weekly data window.",
+    "weekly windows do not block approved launches",
+    "Weekly data windows are reporting boundaries, not launch blockers.",
   ],
   ["at most two active experiments", "Keep at most two active experiments."],
   [
@@ -515,7 +515,6 @@ function inspectExperimentLedger(experiments, errors) {
   const latestStatuses = new Map();
   const launchDatesById = new Map();
   const lastReadoutAtById = new Map();
-  const launchesByWindow = new Map();
   const netNewLaunches = [];
 
   blocks.forEach((block, index) => {
@@ -644,11 +643,6 @@ function inspectExperimentLedger(experiments, errors) {
       if (launched > CAMPAIGN_DEADLINE) {
         errors.push(`${recordLabel} cannot launch after 2026-08-18.`);
       }
-      if (window) {
-        const windowLaunches = launchesByWindow.get(window) ?? [];
-        windowLaunches.push(id ?? recordLabel);
-        launchesByWindow.set(window, windowLaunches);
-      }
       if (id && startedIds.has(id)) launchDatesById.set(id, launched);
       if (assetClass === "net-new-search") {
         netNewLaunches.push({ id: id ?? recordLabel, date: launched });
@@ -671,13 +665,6 @@ function inspectExperimentLedger(experiments, errors) {
     errors.push(
       `EXPERIMENTS.md allows at most two active experiments; found ${active.length}: ${active.join(", ")}.`,
     );
-  }
-  for (const [window, launches] of launchesByWindow) {
-    if (launches.length > 1) {
-      errors.push(
-        `EXPERIMENTS.md allows one experiment launch per weekly data window; ${window} has ${launches.join(", ")}.`,
-      );
-    }
   }
   netNewLaunches.sort((left, right) => left.date - right.date);
   for (let index = 1; index < netNewLaunches.length; index += 1) {

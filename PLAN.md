@@ -112,8 +112,9 @@ are true:
 
 - Priority order:
   `technical blockers -> indexed page with impressions -> integration/workflow hub -> diagnostic/recipe -> net-new article`.
-- Start at most one experiment in each weekly data window. Before its
-  predeclared readout, the default decision is wait.
+- Weekly data windows are reporting boundaries, not launch blockers. A
+  verified, evidence-backed website asset with explicit publish approval may
+  launch while another experiment is measuring.
 - Keep at most two active experiments.
 - Start at most one net-new search asset in any 14-calendar-day period.
 - Every experiment predeclares its hypothesis, baseline, positive minimum
@@ -178,13 +179,12 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 
 ### Control-plane status
 
-- Goal status: resumed at `2026-07-23T14:57:22Z` after the user explicitly
-  approved website push, merge, and production deploy for the prepared
-  candidate. Threads and other owned-social work are outside this SEO-only
-  campaign.
-- The prepared candidate remains queued behind the 2026-07-24 weekly evidence
-  read and the `2026-07-25..2026-07-31` experiment-window gate. The approval
-  removes the website-action blocker; it does not start the experiment early.
+- Goal status: active. At `2026-07-23T15:14:19Z`, the user rejected delaying an
+  already verified and approved website asset for a reporting-window boundary
+  and directed the controller to merge it immediately. Threads and other
+  owned-social work remain outside this SEO-only campaign.
+- The weekly window is now a reporting boundary, not a publish gate. The
+  maximum-two-active and 14-day net-new caps remain protected.
 - Draft PR: `https://github.com/7xuanlu/wenlan-site/pull/58` from
   `agent/zhtw-obsidian-seo`; GitHub reports the branch mergeable and clean.
   Vercel preview checks passed, but no production merge or deploy has occurred.
@@ -192,9 +192,9 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-18-claude-code-memory-refresh`, published to production at
-  `2026-07-19T00:26:09Z` (`2026-07-18` America/Los_Angeles).
-- Active experiments: 1.
+  `EXP-2026-07-23-zhtw-obsidian-localization`, approved for immediate merge
+  and production deploy.
+- Active experiments: 2.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -348,18 +348,17 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-18-claude-code-memory-refresh` is approved, published, and active
-for the `2026-07-18..2026-07-24` data window. It refreshes the existing English
-`/learn/claude-code-memory` page with a native-memory-first layer map, current
-official limits, deterministic inspection guidance, and the preferred direct
-Wenlan plugin path. It creates no new URL and no speculative Mandarin
-translation. Its qualified-exposure readout is guarded by the authenticated
-five-query target-page baseline recorded in the pre-publish correction.
-The publish date is `2026-07-18` America/Los_Angeles
-(`2026-07-19T00:26:09Z`). Indexing has not been manually confirmed, and no
-indexing request was submitted.
+`EXP-2026-07-23-zhtw-obsidian-localization` is approved for immediate
+production launch. It publishes the evidence-backed zh-TW counterpart of the
+existing English Obsidian comparison, adds contextual links from the two
+existing zh-TW wiki pages, and keeps the unsupported zh-CN route out of static
+params, sitemap, and hreflang.
 
-### Queued localized candidate
+The earlier English Claude Code memory refresh remains active and measuring.
+Its readouts continue independently; it no longer blocks another verified
+website asset from reaching production.
+
+### Immediate localized launch
 
 The next eligible localized candidate is a zh-TW counterpart of the existing
 English `/learn/wenlan-vs-obsidian-ai-memory` page, with modifier-qualified
@@ -368,38 +367,34 @@ gate from Taiwan Trends direction, repeated Reddit and OSS workflows,
 Traditional Chinese corroboration, the English page's current GSC impressions,
 and a clean zh-TW route gap.
 
-The candidate is queued, not active. Local preparation completed at
+The candidate is active and approved for immediate merge. Local preparation completed at
 `2026-07-23T06:39:32Z`: the localized Learn registry, static params, sitemap,
 locale switching, and hreflang now enumerate actual per-locale availability;
 the zh-TW article includes visible maintained sources; and the nonexistent
 zh-CN route remains a verified 404 without a sitemap or alternate entry.
 
-The proposed immutable experiment fields, source-native baseline, exposure
-lane, and `2026-07-25` launch gate are predeclared in
+The immutable experiment fields, source-native baseline, and exposure lane are
+recorded in
 `docs/seo-audits/2026-07-23-zhtw-obsidian-prelaunch.md`. The website exposure
 lane consists of the localized Learn hub, sitemap/hreflang, and contextual
 links from the two existing zh-TW wiki pages. Threads and other owned-social
 work are excluded from this campaign.
 
-This local preparation does not start the experiment, publish the URL, or
-consume the `2026-07-25..2026-07-31` experiment slot. The candidate can become
-that window's single experiment only after the Friday weekly evidence is read.
 Website push, merge, and production deploy were explicitly approved by the
-user on `2026-07-23`.
+user on `2026-07-23`. The user then explicitly rejected the reporting-window
+delay, so PR #58 should merge immediately; its production completion and
+technical evidence must be appended afterward.
 
 ### Working cadence
 
 - Evidence waiting is not production waiting. While one experiment measures,
   prepare the next candidate, its tests, and its verification evidence
   locally.
-- At the start of each weekly data window, read the latest Friday report and
-  either launch one already-prepared candidate or record why a stronger
-  existing-page action supersedes it.
-- Keep the frozen one-experiment-per-window and two-active-experiment caps.
-  This is a rolling content system, not an article quota.
-- The `2026-07-25..2026-07-31` prepared candidate is the zh-TW Obsidian plus
-  Claude Code / agent-memory localization. Do not create a zh-CN counterpart
-  from Taiwan-only evidence.
+- Read the Friday report for measurement and follow-up priorities; do not use
+  its calendar boundary to delay a verified, approved website asset.
+- Keep the frozen two-active-experiment and 14-day net-new caps. This is a
+  rolling content system, not an article quota.
+- Do not create a zh-CN counterpart from Taiwan-only evidence.
 
 ### Execution phases
 
@@ -421,15 +416,12 @@ user on `2026-07-23`.
 
 The one-page English refresh for
 `EXP-2026-07-18-claude-code-memory-refresh` is live and production-verified.
-The actual 24-hour readout is inconclusive, and the current target-page GSC row
-remains 23 impressions, 0 clicks, and 38.7 average position. The queued zh-TW
-localization and its locale-availability prerequisite are locally complete and
-verified in local commit `9ea931f` but unpublished. Website push, merge, and
-production deploy are approved; Threads and other owned-social work are
-excluded. The clean website candidate is available as draft PR #58. The next
-controller decision is to read the 2026-07-24 Friday evidence before consuming
-the `2026-07-25..2026-07-31` slot, and let a technical blocker or materially
-stronger impression-bearing existing-page action supersede the candidate.
+The actual 24-hour Claude Code memory readout is inconclusive, and its current
+target-page GSC row remains 23 impressions, 0 clicks, and 38.7 average
+position. That readout continues independently. The clean zh-TW website
+candidate is draft PR #58 and is approved for immediate merge and production
+deploy. The next action is merge, verify production, and append the production
+evidence; no Friday-calendar wait remains.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.
