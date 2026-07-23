@@ -57,11 +57,11 @@ Allowed start statuses are `approved`, `active`, `live`, `measuring`,
 Allowed asset classes are `refresh`, `integration-hub`,
 `diagnostic-recipe`, and `net-new-search`.
 
-Each data window contains seven complete dates, inclusive, on the campaign
-cadence anchored at `2026-07-18..2026-07-24` and advancing in seven-day
-increments. At most one experiment may launch in a data window, at most two
-experiments may be active, and net-new search assets must launch at least 14
-calendar days apart. No experiment may launch after the frozen
+Each data window contains seven complete reporting dates, inclusive, on the
+campaign cadence anchored at `2026-07-18..2026-07-24` and advancing in
+seven-day increments. A reporting window does not block an approved launch.
+At most two experiments may be active, and net-new search assets must launch
+at least 14 calendar days apart. No experiment may launch after the frozen
 `2026-08-18` campaign deadline.
 
 ## Readout and correction records
@@ -781,4 +781,18 @@ increase for that experiment.
 - Result: pending
 - Decision: merge
 - Next step: Mark PR #58 ready, merge it, verify production, and append the production completion evidence.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-23-zhtw-obsidian-localization at 2026-07-23T15:20:40Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-23-zhtw-obsidian-localization
+- Observed at: 2026-07-23T15:20:40Z
+- Readout: correction
+- Status: live
+- Evidence: PR #58 merged at `2026-07-23T15:18:29Z` as `7166bad1e3020bac60c9454780d2b732e17e4242`; Vercel production completed at `2026-07-23T15:19:18Z`. The deployed technical audit passed robots, 109 sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide FAQPage absence, 25 redirects, six bridge-host redirects, and legacy-URL exclusions. The live zh-TW route returned HTTP 200 with the exact canonical, expected title and H1, visible maintained-source links, no framework overlay or console warnings, and no horizontal overflow at 393px. The unsupported zh-CN route returned HTTP 404, and the live sitemap contained the zh-TW route without a zh-CN counterpart. No search-performance result is inferred at production completion.
+- Result: pending
+- Decision: wait
+- Next step: Run the 24-hour technical/evidence readout after `2026-07-24T15:19:18Z`; waiting for that measurement does not block other eligible website work.
 <!-- EXPERIMENT-RECORD:END -->
