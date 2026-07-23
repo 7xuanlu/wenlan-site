@@ -178,8 +178,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 
 ### Control-plane status
 
-- Goal status: resumed and active after the user explicitly approved push,
-  merge, and deploy for the current experiment at `2026-07-19T00:22:07Z`.
+- Goal status: resumed at `2026-07-23T14:57:22Z` after the user explicitly
+  approved website push, merge, and production deploy for the prepared
+  candidate. Threads and other owned-social work are outside this SEO-only
+  campaign.
+- The prepared candidate remains queued behind the 2026-07-24 weekly evidence
+  read and the `2026-07-25..2026-07-31` experiment-window gate. The approval
+  removes the website-action blocker; it does not start the experiment early.
 - Goal deadline: 2026-08-18.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
@@ -196,18 +201,42 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `docs/seo-audits/2026-07-17-weekly-seo.md`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Last production observation: `2026-07-19T00:28:15Z`; the refreshed route
+- Last production observation: `2026-07-20T00:35:13Z`; the refreshed route
   returned HTTP 200 with its canonical, `index, follow`, visible source-backed
   copy, and original/modified Article dates; deployed robots, 108 sitemap
   URLs, 13 key pages, noindex headers, structured-data policy, redirects,
-  bridge-host redirects, and legacy-URL exclusions passed.
-- Google Trends retry: `Claude Code memory` and `MCP memory server`, US, past
-  12 months, captured `2026-07-19T00:21:54Z`; the official public endpoint
-  again returned HTTP 429, so no 0–100 index enters the decision.
-- Next evidence-window wake: one-time same-task heartbeat
-  `wenlan-claude-memory-24h-readout`, Sunday `2026-07-19 18:00`
-  America/Los_Angeles. The independent Friday weekly SEO automation remains
-  unchanged.
+  bridge-host redirects, and legacy-URL exclusions passed. The rendered
+  English route retained its title, H1, eight H2 sections, install commands,
+  Article JSON-LD, and no document-level horizontal overflow or console
+  warnings. The deployed key-page check separately covered English, zh-TW,
+  and zh-CN acquisition surfaces.
+- Google Trends demand-discovery gate: resolved for the current decision at
+  `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
+  Seventeen timeline comparisons and nine related-query exports cover
+  Worldwide, US, and Taiwan; English, Traditional Chinese, and Simplified
+  Chinese terms; 12 months and one five-year range. Raw request-relative
+  `0–100` values and metadata remain under the
+  `/tmp/wenlan-seo-demand/2026-07-18/trends/` and
+  `/tmp/wenlan-seo-demand/2026-07-19/trends/` capture directories;
+  interpreted decisions are in
+  `docs/seo-audits/2026-07-18-trends-demand-discovery.md`. The official
+  unattended API remains limited-alpha/account-gated. The follow-up removed
+  the false-positive `AI memory` series and the large Taiwan `Obsidian`
+  anchor. It classifies `AI 筆記` as real but adjacent NotebookLM/Notion/note
+  tooling demand, and exact `AI 知識庫` as too weak for a primary cluster.
+- Early heartbeat correction: the first
+  `wenlan-claude-memory-24h-readout` wake arrived at
+  `2026-07-19T18:00:08Z`, only 17 hours 33 minutes 59 seconds after production
+  completion. It was not recorded as the 24-hour experiment readout.
+- Actual 24-hour readout: observed at `2026-07-20T00:35:13Z`. Technical and
+  production-render checks passed, but the Search Console API returned no
+  query or page rows for either `2026-07-18` or `2026-07-19`; those dates are
+  reporting-latency observations, not evidence of zero search demand. The
+  result remains inconclusive.
+- The `wenlan-claude-memory-24h-readout` heartbeat is ACTIVE for the 7-day
+  readout and next launch gate. Its prompt is website-SEO-only and carries the
+  2026-07-23 website approval. The independent Friday
+  `weekly-origin-seo-cleanup` automation remains ACTIVE and unchanged.
 
 ### Fixed baseline and live provenance
 
@@ -217,43 +246,58 @@ after the anchor is frozen.
 
 | Metric | Fixed baseline | Verified live observation | Provenance | Gap to target from live observation |
 | --- | ---: | ---: | --- | ---: |
-| GitHub total stars | 47 | 47 | GitHub REST `GET /repos/7xuanlu/wenlan`, captured `2026-07-18T21:14:50Z` | 53 |
-| GSC rolling-28-day property impressions | 197 | 197 | Search Console API, `sc-domain:wenlan.app`, `2026-06-20..2026-07-17`; same-range evidence restored `2026-07-18T23:30Z` in `/tmp/wenlan-seo/gsc-metadata.json` | 803 |
-| Vercel rolling-28-day visitors | 323 | 350 | Vercel Web Analytics API, project `wenlan-site`, `2026-06-20..2026-07-17`, fetched `2026-07-18T23:30:11.388Z`; `/tmp/wenlan-seo/vercel-metadata.json` | 1,650 |
+| GitHub total stars | 47 | 47 | GitHub REST `GET /repos/7xuanlu/wenlan`, captured during the `2026-07-22` America/Los_Angeles campaign check | 53 |
+| GSC rolling-28-day property impressions | 197 | 264 | Search Console API, `sc-domain:wenlan.app`, `2026-06-24..2026-07-21`; `/tmp/wenlan-seo-live-2026-07-22/gsc-metadata.json` | 736 |
+| Vercel rolling-28-day visitors | 323 | 1,142 | Vercel Web Analytics API, project `wenlan-site`, `2026-06-24..2026-07-21`; `/tmp/wenlan-seo-live-2026-07-22/vercel-metadata.json` | 858 |
 
 Supporting quality split for the same live range:
 
-- GSC property totals: 6 clicks, 197 impressions.
-- GSC visible-query totals: 0 clicks, 44 impressions.
-- GSC query visibility gap: 6 clicks, 153 impressions.
-- Visible-query non-brand impressions: 26 using the existing Searchfit group
+- GSC property totals: 6 clicks, 264 impressions.
+- GSC visible-query totals: 0 clicks, 64 impressions.
+- GSC query visibility gap: 6 clicks, 200 impressions.
+- Visible-query non-brand impressions: 32 using the existing Searchfit group
   classification; this is a visible-row subset, not a property total.
+- Vercel raw totals: 1,142 visitors and 1,313 pageviews.
+- Vercel direct traffic: 242 visitors and 305 pageviews.
+- Vercel qualified-source aggregate: 912 visitors summed across the existing
+  separate search, AI, and GitHub referrer allowlist; this is not a
+  deduplicated user count.
+- Vercel target-page aggregate: 7 visitors and 19 pageviews for
+  `/learn/claude-code-memory`.
+- Unique acquisition-surface visitors and source-to-page sessions remain
+  unavailable from the separate Vercel aggregates. Vercel custom events
+  remain Pro/Enterprise-gated, and no authenticated Umami report was
+  available, so GitHub outbound and CTA are not reported.
 - Visible non-brand candidate clusters currently include Basic Memory, Claude
   Code memory, MCP memory, LLM wiki, and setup/troubleshooting. Valid problem
   clusters at bootstrap: 0. Valid problem clusters now: 1, because Claude Code
   native-memory boundaries and cross-session context passed the complete
   candidate gate in
   `docs/seo-audits/2026-07-18-growth-candidate-queue.md`.
-- Page rows with impressions are preserved in
-  `/tmp/wenlan-seo/gsc-pages.csv`. The authenticated query-plus-page capture
-  in `/tmp/wenlan-seo/gsc-query-pages.json` exposes 11 of the target page's 23
-  impressions; 9 visible impressions belong to the five-query non-brand
-  Claude-memory cluster at 50.0 impression-weighted average position. Keep the
-  remaining 12-impression page-query visibility gap explicit.
-- Vercel raw visitors: 350.
-- Vercel direct visitors: 197.
-- Vercel qualified-source visitor aggregate: 154 across the explicit current
-  allowlist of search, AI, and GitHub referrers. This is a non-deduplicated
-  referrer aggregate, not a source-to-page session count or a value that can be
-  added to direct visitors.
-- Vercel acquisition-surface visitors: not safely deduplicated by the current
-  per-path aggregate API. Keep the per-path rows in
-  `/tmp/wenlan-seo/vercel-pages.csv` and do not invent a unique total.
-- Vercel custom CTA events: account-gated because the current plan requires Pro
-  or Enterprise.
-- Umami UTM, outbound, and CTA baseline: not available to this run.
+- Current page rows with impressions are preserved in
+  `/tmp/wenlan-seo-live-2026-07-22/gsc-pages.csv`. The pre-publish
+  authenticated query-plus-page capture in
+  `/tmp/wenlan-seo/gsc-query-pages.json` exposes 11 of the target page's 23
+  baseline impressions; 9 visible impressions belong to the five-query
+  non-brand Claude-memory cluster at 50.0 impression-weighted average
+  position. Keep the remaining 12-impression page-query visibility gap
+  explicit.
 - Setup starts: no reliable website-to-success measurement; lagging and
   non-gating.
+- Early partial Vercel observation: fetched at `2026-07-19T18:01:59Z` for
+  `2026-06-22..2026-07-19`, with the final date still incomplete. The raw
+  count was 818 visitors and 970 pageviews; direct was 230 visitors and 290
+  pageviews; the existing qualified-source allowlist summed to 590 visitors
+  across separate referrer rows and is not deduplicated; the target page row
+  was 5 visitors and 14 pageviews. Unique acquisition-surface visitors remain
+  unavailable from the separate per-path aggregate. This partial range is not
+  a comparable rolling-28-complete-day Goal observation and does not replace
+  the fixed or verified live baselines above.
+- Early GitHub observation: 47 total stars from the read-only REST check during
+  the `2026-07-19T18:00Z` heartbeat; no causal claim is attached.
+- GSC: no post-publish complete-day observation was available at the early
+  heartbeat. The latest committed weekly report ends before publication, so
+  no Search result was inferred.
 
 ### Current strategy
 
@@ -264,18 +308,37 @@ Supporting quality split for the same live range:
 4. Build the first candidate queue from inspectable Google Trends, Reddit,
    GitHub issue/discussion, OSS documentation/directory, and SERP observations,
    preserving native units and provenance.
+   The first multi-group Trends capture and interpretation is recorded in
+   `docs/seo-audits/2026-07-18-trends-demand-discovery.md`; it validates
+   `LLM wiki`, Claude/agent memory, modifier-qualified Obsidian, MCP memory,
+   and modifier-qualified AI knowledge-base clusters. The clarified focus is
+   agent-memory demand, a source-backed `LLM wiki for AI agents` product
+   category, and Claude Code/Obsidian/MCP entry points. The current Claude Code
+   memory experiment remains the only active edit; the next existing page is
+   selected from fresh GSC evidence rather than Trends alone. Generic
+   `knowledge base`, `AI memory`, `AI wiki`, and exact Taiwan `AI 知識庫` are
+   not primary targets; `AI 筆記` is discovery-only until GSC or another clean
+   high-intent observation connects it to Wenlan.
 5. Prefer one existing indexed acquisition page with impressions for the first
    bounded experiment. Consider a net-new search asset only if the complete
    candidate gate passes and the 14-day cap permits it.
 6. Prepare local changes and verifier evidence. Ask for approval only at the
    frozen external/shared-state boundaries.
 7. Wait for the predeclared readout instead of stacking edits.
+8. During the wait, continue a read-only net-new article coverage-gap audit
+   from the cleaned Trends, related-query, Reddit, OSS, SERP, and current-site
+   evidence. This may nominate one later experiment but does not start it.
+   The audit now treats a missing localized counterpart as a real coverage gap
+   when that locale has inspectable demand evidence. It queued the existing
+   Obsidian comparison for a zh-TW localization in
+   `docs/seo-audits/2026-07-19-localized-acquisition-gap.md`; generic
+   `AI 筆記` remains supporting vocabulary rather than the article's target.
 
 ### Current gap
 
 - Stars: 53 more than the verified live observation.
-- GSC property impressions: 803 more in the fixed final rolling window.
-- Vercel visitors: 1,650 more in the fixed final rolling window.
+- GSC property impressions: 736 more in the fixed final rolling window.
+- Vercel visitors: 858 more in the fixed final rolling window.
 - Measurement gaps: complete non-brand page impressions, unique
   acquisition-surface visitors, Umami CTA baseline, and verified setup success
   remain unavailable; none may be invented.
@@ -292,6 +355,48 @@ five-query target-page baseline recorded in the pre-publish correction.
 The publish date is `2026-07-18` America/Los_Angeles
 (`2026-07-19T00:26:09Z`). Indexing has not been manually confirmed, and no
 indexing request was submitted.
+
+### Queued localized candidate
+
+The next eligible localized candidate is a zh-TW counterpart of the existing
+English `/learn/wenlan-vs-obsidian-ai-memory` page, with modifier-qualified
+Obsidian, Claude Code, MCP, and agent-memory intent. It passed the candidate
+gate from Taiwan Trends direction, repeated Reddit and OSS workflows,
+Traditional Chinese corroboration, the English page's current GSC impressions,
+and a clean zh-TW route gap.
+
+The candidate is queued, not active. Local preparation completed at
+`2026-07-23T06:39:32Z`: the localized Learn registry, static params, sitemap,
+locale switching, and hreflang now enumerate actual per-locale availability;
+the zh-TW article includes visible maintained sources; and the nonexistent
+zh-CN route remains a verified 404 without a sitemap or alternate entry.
+
+The proposed immutable experiment fields, source-native baseline, exposure
+lane, and `2026-07-25` launch gate are predeclared in
+`docs/seo-audits/2026-07-23-zhtw-obsidian-prelaunch.md`. The website exposure
+lane consists of the localized Learn hub, sitemap/hreflang, and contextual
+links from the two existing zh-TW wiki pages. Threads and other owned-social
+work are excluded from this campaign.
+
+This local preparation does not start the experiment, publish the URL, or
+consume the `2026-07-25..2026-07-31` experiment slot. The candidate can become
+that window's single experiment only after the Friday weekly evidence is read.
+Website push, merge, and production deploy were explicitly approved by the
+user on `2026-07-23`.
+
+### Working cadence
+
+- Evidence waiting is not production waiting. While one experiment measures,
+  prepare the next candidate, its tests, and its verification evidence
+  locally.
+- At the start of each weekly data window, read the latest Friday report and
+  either launch one already-prepared candidate or record why a stronger
+  existing-page action supersedes it.
+- Keep the frozen one-experiment-per-window and two-active-experiment caps.
+  This is a rolling content system, not an article quota.
+- The `2026-07-25..2026-07-31` prepared candidate is the zh-TW Obsidian plus
+  Claude Code / agent-memory localization. Do not create a zh-CN counterpart
+  from Taiwan-only evidence.
 
 ### Execution phases
 
@@ -313,8 +418,15 @@ indexing request was submitted.
 
 The one-page English refresh for
 `EXP-2026-07-18-claude-code-memory-refresh` is live and production-verified.
-Do not start or rewrite another experiment. Wait for the one-time 24h heartbeat
-and then the predeclared 7d readout; report GSC, Vercel, Umami, GitHub, and
-technical evidence only when available in their native units. Reddit or other
-external publication, OSS submission, request indexing, and GSC validation
-remain separately approval-gated.
+The actual 24-hour readout is inconclusive, and the current target-page GSC row
+remains 23 impressions, 0 clicks, and 38.7 average position. The queued zh-TW
+localization and its locale-availability prerequisite are locally complete and
+verified in local commit `9ea931f` but unpublished. Website push, merge, and
+production deploy are approved; Threads and other owned-social work are
+excluded. The next controller decision is to read the 2026-07-24 Friday
+evidence before consuming the `2026-07-25..2026-07-31` slot, and let a
+technical blocker or materially stronger impression-bearing existing-page
+action supersede the candidate.
+Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
+in their native units. Reddit or other external publication, OSS submission,
+request indexing, and GSC validation remain separately approval-gated.

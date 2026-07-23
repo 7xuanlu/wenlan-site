@@ -29,6 +29,7 @@ const REQUIRED_SITEMAP_LOCS = [
   "https://wenlan.app/zh-CN/learn/distilled-wiki-pages-ai-memory",
   "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",
   "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work",
+  "https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
   "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
   "https://wenlan.app/docs/configuration",
   "https://wenlan.app/docs/product-matrix",
@@ -122,6 +123,11 @@ const REQUIRED_HTML_PAGES = [
   {
     path: "/zh-CN/learn/source-backed-wiki-pages-ai-work",
     canonical: "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work",
+    type: "Article",
+  },
+  {
+    path: "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
+    canonical: "https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
     type: "Article",
   },
   {

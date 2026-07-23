@@ -14,6 +14,7 @@ const expectedOkRoutes = [
   "/zh-TW/learn",
   "/zh-TW/learn/distilled-wiki-pages-ai-memory",
   "/zh-TW/learn/source-backed-wiki-pages-ai-work",
+  "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
   "/zh-CN",
   "/zh-CN/about",
   "/zh-CN/docs",
@@ -27,6 +28,7 @@ const expectedNotFoundRoutes = [
   "/zh-TW/learn/wenlan-vs-basic-memory",
   "/zh-TW/docs/daily-workflow",
   "/zh-CN/learn/wenlan-vs-basic-memory",
+  "/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
   "/zh-CN/docs/daily-workflow",
 ];
 

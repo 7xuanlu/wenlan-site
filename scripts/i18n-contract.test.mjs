@@ -448,16 +448,21 @@ test("built i18n checker treats Mandarin Learn hubs and translated articles as p
     "/zh-CN/learn",
     "/zh-TW/learn/distilled-wiki-pages-ai-memory",
     "/zh-CN/learn/source-backed-wiki-pages-ai-work",
+    "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
   ]) {
     assert.match(okRoutes, new RegExp(`"${route}"`), route);
   }
+  assert.match(
+    notFoundRoutes,
+    /"\/zh-CN\/learn\/wenlan-vs-obsidian-ai-memory"/,
+  );
   assert.doesNotMatch(
     notFoundRoutes,
     /"\/zh-(?:TW|CN)\/learn",/,
   );
 });
 
-test("localized Learn slug route is limited to Mandarin LLM wiki acquisition pages", async () => {
+test("localized Learn slug route supports per-locale acquisition page availability", async () => {
   const { routing } = await loadI18nModules();
   const source = await readFile(
     resolve(repoRoot, "src/app/[locale]/learn/[slug]/page.tsx"),
@@ -467,11 +472,24 @@ test("localized Learn slug route is limited to Mandarin LLM wiki acquisition pag
   assert.deepEqual(routing.TRANSLATED_LEARN_PATHS, [
     "/learn/distilled-wiki-pages-ai-memory",
     "/learn/source-backed-wiki-pages-ai-work",
+    "/learn/wenlan-vs-obsidian-ai-memory",
   ]);
   assert.match(source, /getLocalizedLearnArticle/);
   assert.match(source, /TRANSLATED_LEARN_SLUGS/);
   assert.match(source, /\bnotFound\(\)/);
   assert.doesNotMatch(source, /simpleRuntimeNotFound/);
+});
+
+test("localized Learn articles render inspectable official references when provided", async () => {
+  const source = await readFile(
+    resolve(repoRoot, "src/app/[locale]/learn/[slug]/page.tsx"),
+    "utf8",
+  );
+
+  assert.match(source, /officialReferences:\s*"官方資料"/);
+  assert.match(source, /article\.officialReferences\s*&&/);
+  assert.match(source, /article\.officialReferences\.map/);
+  assert.match(source, /rel="noopener noreferrer external"/);
 });
 
 test("locale model exposes only the supported app locales and metadata", async () => {
@@ -541,6 +559,14 @@ test("localized route helpers keep English canonical and prefix translated core 
     routing.localizePath("zh-CN", "/learn/source-backed-wiki-pages-ai-work"),
     "/zh-CN/learn/source-backed-wiki-pages-ai-work",
   );
+  assert.equal(
+    routing.localizePath("zh-TW", "/learn/wenlan-vs-obsidian-ai-memory"),
+    "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
+  );
+  assert.equal(
+    routing.localizePath("zh-CN", "/learn/wenlan-vs-obsidian-ai-memory"),
+    "/learn/wenlan-vs-obsidian-ai-memory",
+  );
   assert.deepEqual(routing.stripLocalePrefix("/zh-TW/docs/get-started"), {
     locale: "zh-TW",
     pathname: "/docs/get-started",
@@ -571,6 +597,14 @@ test("localized route helpers keep English canonical and prefix translated core 
   assert.equal(
     routing.isTranslatedPath("zh-CN", "/learn/source-backed-wiki-pages-ai-work"),
     true,
+  );
+  assert.equal(
+    routing.isTranslatedPath("zh-TW", "/learn/wenlan-vs-obsidian-ai-memory"),
+    true,
+  );
+  assert.equal(
+    routing.isTranslatedPath("zh-CN", "/learn/wenlan-vs-obsidian-ai-memory"),
+    false,
   );
   assert.equal(
     routing.isTranslatedPath("zh-TW", "/learn/wenlan-vs-basic-memory"),
@@ -630,18 +664,36 @@ test("alternate URLs are reciprocal and include x-default for core translated pa
 
   for (const pathname of routing.TRANSLATED_LEARN_PATHS) {
     const alternates = routing.alternateUrls(pathname);
+    const translatedLocales = routing.translatedLocalesForLearnPath(pathname);
 
-    assert.deepEqual(Object.keys(alternates).sort(), [
-      "en-US",
-      "x-default",
-      "zh-CN",
-      "zh-TW",
-    ]);
+    assert.deepEqual(
+      Object.keys(alternates).sort(),
+      [
+        "en-US",
+        "x-default",
+        ...translatedLocales.map((locale) => locales.hreflangByLocale[locale]),
+      ].sort(),
+    );
     assert.equal(alternates["x-default"], routing.canonicalUrl("en", pathname));
     assert.equal(alternates["en-US"], routing.canonicalUrl("en", pathname));
-    assert.equal(alternates["zh-TW"], routing.canonicalUrl("zh-TW", pathname));
-    assert.equal(alternates["zh-CN"], routing.canonicalUrl("zh-CN", pathname));
+    for (const locale of translatedLocales) {
+      assert.equal(
+        alternates[locales.hreflangByLocale[locale]],
+        routing.canonicalUrl(locale, pathname),
+      );
+    }
   }
+
+  assert.deepEqual(
+    routing.alternateUrls("/learn/wenlan-vs-obsidian-ai-memory"),
+    {
+      "en-US": "https://wenlan.app/learn/wenlan-vs-obsidian-ai-memory",
+      "zh-TW":
+        "https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
+      "x-default":
+        "https://wenlan.app/learn/wenlan-vs-obsidian-ai-memory",
+    },
+  );
 });
 
 test("page metadata helper emits localized canonical, alternates, and Open Graph locale", async () => {
@@ -698,6 +750,7 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
     { locale: "zh-CN", slug: "distilled-wiki-pages-ai-memory" },
     { locale: "zh-TW", slug: "source-backed-wiki-pages-ai-work" },
     { locale: "zh-CN", slug: "source-backed-wiki-pages-ai-work" },
+    { locale: "zh-TW", slug: "wenlan-vs-obsidian-ai-memory" },
   ]);
 
   const metadata = await localizedLearnSlug.generateMetadata({
@@ -724,6 +777,29 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
     metadata.openGraph.url,
     "https://wenlan.app/zh-TW/learn/distilled-wiki-pages-ai-memory",
   );
+
+  const obsidianMetadata = await localizedLearnSlug.generateMetadata({
+    params: Promise.resolve({
+      locale: "zh-TW",
+      slug: "wenlan-vs-obsidian-ai-memory",
+    }),
+  });
+  assert.equal(
+    obsidianMetadata.alternates.canonical,
+    "https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
+  );
+  assert.deepEqual(
+    obsidianMetadata.alternates.languages,
+    routing.alternateUrls("/learn/wenlan-vs-obsidian-ai-memory"),
+  );
+
+  const missingZhCNMetadata = await localizedLearnSlug.generateMetadata({
+    params: Promise.resolve({
+      locale: "zh-CN",
+      slug: "wenlan-vs-obsidian-ai-memory",
+    }),
+  });
+  assert.deepEqual(missingZhCNMetadata, {});
 });
 
 test("core route wrappers export localized metadata for translated pages", async () => {
@@ -811,9 +887,18 @@ test("sitemap includes localized core and Mandarin acquisition routes", async ()
   assert.equal(urls.has("https://wenlan.app/zh-CN/learn"), true);
   for (const pathname of routing.TRANSLATED_LEARN_PATHS) {
     assert.ok(urls.has(routing.canonicalUrl("en", pathname)), pathname);
-    assert.ok(urls.has(routing.canonicalUrl("zh-TW", pathname)), pathname);
-    assert.ok(urls.has(routing.canonicalUrl("zh-CN", pathname)), pathname);
+    for (const locale of routing.translatedLocalesForLearnPath(pathname)) {
+      assert.ok(urls.has(routing.canonicalUrl(locale, pathname)), `${locale} ${pathname}`);
+    }
   }
+  assert.equal(
+    urls.has("https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory"),
+    true,
+  );
+  assert.equal(
+    urls.has("https://wenlan.app/zh-CN/learn/wenlan-vs-obsidian-ai-memory"),
+    false,
+  );
   assert.equal(
     urls.has("https://wenlan.app/zh-TW/learn/wenlan-vs-basic-memory"),
     false,
@@ -833,11 +918,30 @@ test("sitemap route alternates are reciprocal for every localized entry", async 
 
   for (const pathname of [
     ...routing.CORE_TRANSLATED_PATHS,
-    ...routing.TRANSLATED_LEARN_PATHS,
   ]) {
     const expectedAlternates = routing.alternateUrls(pathname);
 
     for (const locale of locales.SUPPORTED_LOCALES) {
+      const url = routing.canonicalUrl(locale, pathname);
+      const entry = entriesByUrl.get(url);
+
+      assert.ok(entry, url);
+      assert.deepEqual(
+        entry.alternates?.languages,
+        expectedAlternates,
+        `${locale} ${pathname}`,
+      );
+    }
+  }
+
+  for (const pathname of routing.TRANSLATED_LEARN_PATHS) {
+    const expectedAlternates = routing.alternateUrls(pathname);
+    const localesForPath = [
+      "en",
+      ...routing.translatedLocalesForLearnPath(pathname),
+    ];
+
+    for (const locale of localesForPath) {
       const url = routing.canonicalUrl(locale, pathname);
       const entry = entriesByUrl.get(url);
 
