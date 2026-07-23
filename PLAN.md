@@ -178,12 +178,12 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 
 ### Control-plane status
 
-- Goal status: active. The user explicitly resumed the Goal at
-  `2026-07-19T17:33:31Z`; the Codex Goal API was rechecked at
-  `2026-07-23T14:33:41Z` and now reports `active`.
-- The prior Goal API `blocked` mismatch is resolved. The user rejected the
-  resulting idle posture on `2026-07-22` America/Los_Angeles, so evidence-wait
-  must include local preparation of the next candidate rather than inactivity.
+- Goal status: blocked at `2026-07-23T14:52:42Z` because the same explicit
+  push, merge, deploy, and external-publication approval boundary prevented
+  the next exposure action for three consecutive resumed Goal turns.
+- The prepared candidate is preserved in local commit `9ea931f`; the block is
+  an intentional contract stop, not the prior stale Goal API mismatch. Resume
+  only after the user grants one or both requested external-action approvals.
 - Goal deadline: 2026-08-18.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
@@ -232,15 +232,11 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   query or page rows for either `2026-07-18` or `2026-07-19`; those dates are
   reporting-latency observations, not evidence of zero search demand. The
   result remains inconclusive.
-- Next evidence-window wake: the same heartbeat moves to
-  `2026-07-26T00:30:00Z` (`2026-07-25 17:30`
-  America/Los_Angeles), after the seven-day boundary and the independent
-  Friday weekly SEO run. Its instructions were updated at
-  `2026-07-23T14:35:02Z` to append the due 7-day readout first, then evaluate
-  the predeclared zh-TW launch gate for the new window. An inconclusive first
-  experiment does not automatically block selecting the next experiment
-  because the frozen cap permits two active experiments. The weekly automation
-  remains unchanged.
+- The `wenlan-claude-memory-24h-readout` heartbeat is paused while this Goal is
+  approval-blocked. The independent Friday
+  `weekly-origin-seo-cleanup` automation remains ACTIVE and unchanged, so its
+  Searchfit/GSC/technical evidence lane continues without website actions from
+  this controller.
 
 ### Fixed baseline and live provenance
 
@@ -425,13 +421,12 @@ The one-page English refresh for
 The actual 24-hour readout is inconclusive, and the current target-page GSC row
 remains 23 impressions, 0 clicks, and 38.7 average position. The queued zh-TW
 localization and its locale-availability prerequisite are locally complete and
-verified but unpublished. At the `2026-07-25` window boundary, read the Friday
-weekly evidence and choose the single launch: the prepared localization unless
-a technical blocker or a stronger impression-bearing existing-page action
-supersedes it. If selected, use the predeclared experiment fields in
-`docs/seo-audits/2026-07-23-zhtw-obsidian-prelaunch.md`; request push, merge,
-and deploy approval, plus separate approval for the proposed one-post
-Traditional Chinese Threads distribution.
+verified in local commit `9ea931f` but unpublished. The next decision belongs
+to the user: approve push, merge, and deploy for the prepared localization;
+approve the exact Traditional Chinese Threads main-post-plus-link-reply unit;
+or approve both. On resume, read the latest Friday evidence before consuming
+the `2026-07-25..2026-07-31` slot, and let a technical blocker or materially
+stronger impression-bearing existing-page action supersede the candidate.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.

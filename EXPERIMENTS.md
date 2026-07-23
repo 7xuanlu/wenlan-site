@@ -659,3 +659,42 @@ increase for that experiment.
   validation, social post, Reddit action, OSS submission, or paid acquisition
 - Next step: create a local-only Git checkpoint, then wait for the 2026-07-24
   weekly report and the explicit 2026-07-25 launch/distribution approvals
+
+### 2026-07-23T14:52:42Z — approval-boundary campaign stop
+
+- Record type: campaign-stop
+- Stop condition: the same explicit external-action approval boundary blocked
+  the next necessary exposure action for three consecutive resumed Goal turns
+- Codex Goal API status: blocked
+- Experiments started: 1
+- Active experiments: 1
+- Current experiment:
+  `EXP-2026-07-18-claude-code-memory-refresh` remains measuring; its 24-hour
+  result is inconclusive and its 7-day readout is not yet due
+- Prepared next candidate:
+  `EXP-2026-07-25-zhtw-obsidian-localization` remains queued, unpublished, and
+  absent from the experiment-start ledger
+- Local checkpoint: `9ea931f`
+  (`seo: prepare zh-TW Obsidian acquisition experiment`), independently
+  reviewed `SHIP`, with a clean worktree before this administrative record
+- Attempted paths: authenticated GSC and Vercel evidence; GitHub stars; signed
+  Google Trends exports with false-positive removal; Reddit, OSS, and
+  Traditional Chinese candidate corroboration; zh-TW article and per-locale
+  routing; sitemap/hreflang/404 verification; desktop/mobile rendered QA;
+  predeclared experiment fields; exact Threads main post and link reply;
+  three-model copy review; local-only Git checkpoint
+- Evidence status: the candidate passed the five-part gate and all affected
+  technical checks. The whole SEO suite still exposes four unrelated current
+  source-fact drift failures plus one Node 24 test-runner crash, recorded in
+  the preceding checkpoint observation.
+- Heartbeat:
+  `wenlan-claude-memory-24h-readout` paused while the Goal is blocked
+- Existing weekly automation:
+  `weekly-origin-seo-cleanup` remains ACTIVE and unchanged
+- External actions: none; no publish, push, merge, deploy, indexing request,
+  validation, social post, Reddit action, OSS submission, or paid acquisition
+- Blocker: no explicit approval was granted for the prepared website
+  push/merge/deploy or the exact Threads main-post-plus-link-reply unit
+- Next user decision: approve the website action, approve the distribution
+  unit, or approve both; any approval resumes this Goal as a fresh blocked
+  audit and requires reading the latest Friday evidence before launch
