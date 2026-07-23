@@ -185,15 +185,14 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   owned-social work remain outside this SEO-only campaign.
 - The weekly window is now a reporting boundary, not a publish gate. The
   maximum-two-active and 14-day net-new caps remain protected.
-- Draft PR: `https://github.com/7xuanlu/wenlan-site/pull/58` from
-  `agent/zhtw-obsidian-seo`; GitHub reports the branch mergeable and clean.
-  Vercel preview checks passed, but no production merge or deploy has occurred.
+- PR #58 merged at `2026-07-23T15:18:29Z` as
+  `7166bad1e3020bac60c9454780d2b732e17e4242`. Vercel production completed at
+  `2026-07-23T15:19:18Z`.
 - Goal deadline: 2026-08-18.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-23-zhtw-obsidian-localization`, approved for immediate merge
-  and production deploy.
+  `EXP-2026-07-23-zhtw-obsidian-localization`, live in production.
 - Active experiments: 2.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
@@ -236,8 +235,10 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   query or page rows for either `2026-07-18` or `2026-07-19`; those dates are
   reporting-latency observations, not evidence of zero search demand. The
   result remains inconclusive.
-- The `wenlan-claude-memory-24h-readout` heartbeat is ACTIVE for the 7-day
-  readout and next launch gate. Its prompt is website-SEO-only and carries the
+- The `wenlan-claude-memory-24h-readout` heartbeat is ACTIVE for the zh-TW
+  article's 24-hour readout after `2026-07-24T15:19:18Z`; it no longer contains
+  a launch gate. After that it will be reused for the earlier Claude Code
+  experiment's 7-day readout. Its prompt is website-SEO-only and carries the
   2026-07-23 website approval. The independent Friday
   `weekly-origin-seo-cleanup` automation remains ACTIVE and unchanged.
 
@@ -348,8 +349,8 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-23-zhtw-obsidian-localization` is approved for immediate
-production launch. It publishes the evidence-backed zh-TW counterpart of the
+`EXP-2026-07-23-zhtw-obsidian-localization` is live in production. It publishes
+the evidence-backed zh-TW counterpart of the
 existing English Obsidian comparison, adds contextual links from the two
 existing zh-TW wiki pages, and keeps the unsupported zh-CN route out of static
 params, sitemap, and hreflang.
@@ -367,11 +368,11 @@ gate from Taiwan Trends direction, repeated Reddit and OSS workflows,
 Traditional Chinese corroboration, the English page's current GSC impressions,
 and a clean zh-TW route gap.
 
-The candidate is active and approved for immediate merge. Local preparation completed at
-`2026-07-23T06:39:32Z`: the localized Learn registry, static params, sitemap,
-locale switching, and hreflang now enumerate actual per-locale availability;
-the zh-TW article includes visible maintained sources; and the nonexistent
-zh-CN route remains a verified 404 without a sitemap or alternate entry.
+The candidate went live at `2026-07-23T15:19:18Z`. The localized Learn
+registry, static params, sitemap, locale switching, and hreflang enumerate
+actual per-locale availability; the zh-TW article includes visible maintained
+sources; and the nonexistent zh-CN route is a verified production 404 without
+a sitemap or alternate entry.
 
 The immutable experiment fields, source-native baseline, and exposure lane are
 recorded in
@@ -381,9 +382,7 @@ links from the two existing zh-TW wiki pages. Threads and other owned-social
 work are excluded from this campaign.
 
 Website push, merge, and production deploy were explicitly approved by the
-user on `2026-07-23`. The user then explicitly rejected the reporting-window
-delay, so PR #58 should merge immediately; its production completion and
-technical evidence must be appended afterward.
+user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Working cadence
 
@@ -403,8 +402,8 @@ technical evidence must be appended afterward.
 - [x] Phase 0: create the frozen contract, append-only ledger, and deterministic
   verifier with RED-to-GREEN tests.
 - [x] Phase 1: receive user approval for the protected Goal contract.
-- [x] Phase 2: refresh the candidate queue from the next evidence window and
-  select no more than one experiment for that weekly data window.
+- [x] Phase 2: refresh the candidate queue from evidence and keep experiment
+  launches inside the active and net-new caps.
 - [x] Phase 3: prepare the approved local experiment change, verify technical
   and locale quality, and stop at any external/shared-state approval boundary.
 - [ ] Phase 4: append 24h, 7d, W2, W4, and W8 readouts as they become due;
@@ -418,10 +417,10 @@ The one-page English refresh for
 `EXP-2026-07-18-claude-code-memory-refresh` is live and production-verified.
 The actual 24-hour Claude Code memory readout is inconclusive, and its current
 target-page GSC row remains 23 impressions, 0 clicks, and 38.7 average
-position. That readout continues independently. The clean zh-TW website
-candidate is draft PR #58 and is approved for immediate merge and production
-deploy. The next action is merge, verify production, and append the production
-evidence; no Friday-calendar wait remains.
+position. That readout continues independently. The zh-TW website candidate is
+live and production-verified. The next action is its 24-hour technical/evidence
+readout after `2026-07-24T15:19:18Z`; this does not block preparing or launching
+another eligible asset when the active/net-new caps allow it.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.
