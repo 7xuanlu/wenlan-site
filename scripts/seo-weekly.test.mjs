@@ -137,6 +137,7 @@ const requiredLocalizedLearnPaths = [
   "/zh-CN/learn/distilled-wiki-pages-ai-memory",
   "/zh-TW/learn/source-backed-wiki-pages-ai-work",
   "/zh-CN/learn/source-backed-wiki-pages-ai-work",
+  "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
 ];
 const requiredLocalizedLearnLocs = requiredLocalizedLearnPaths.map(
   (path) => `https://wenlan.app${path}`,
@@ -1252,8 +1253,8 @@ test("deployed technical SEO checker verifies robots, sitemap, key pages, utilit
     );
 
     assert.match(stdout, /robots ok/);
-    assert.match(stdout, /sitemap locs ok: 13/);
-    assert.match(stdout, /key pages ok: 13/);
+    assert.match(stdout, /sitemap locs ok: 14/);
+    assert.match(stdout, /key pages ok: 14/);
     assert.match(stdout, /utility noindex headers ok: 6/);
     assert.match(stdout, /redirects ok: 25/);
     assert.match(stdout, /bridge host redirects ok: 6/);
@@ -1344,7 +1345,7 @@ test("deployed technical SEO checker does not require unshipped local internal l
         { cwd: repoRoot },
       );
 
-      assert.match(stdout, /key pages ok: 13/);
+      assert.match(stdout, /key pages ok: 14/);
     },
   );
 });
@@ -1563,7 +1564,12 @@ test("deployed technical SEO checker bounds sitemap page concurrency", async () 
         { cwd: repoRoot },
       );
 
-      assert.match(stdout, /sitemap FAQPage absent ok: 30; max concurrency: 8/);
+      assert.match(
+        stdout,
+        new RegExp(
+          `sitemap FAQPage absent ok: ${requiredBuiltSitemapLocs.length + extraPaths.length}; max concurrency: 8`,
+        ),
+      );
       const events = stdout
         .split("\n")
         .filter((line) => line.startsWith("[seo-deployed-fixture] "))
@@ -1825,9 +1831,9 @@ test("built technical SEO checker verifies compiled redirects, headers, and site
     assert.match(stdout, /redirects ok: 26/);
     assert.match(stdout, /global 404 ok/);
     assert.match(stdout, /noindex headers ok: 7/);
-    assert.match(stdout, /sitemap required locs ok: 13/);
-    assert.match(stdout, /html page checks ok: 13/);
-    assert.match(stdout, /all html FAQPage absent ok: 14/);
+    assert.match(stdout, /sitemap required locs ok: 14/);
+    assert.match(stdout, /html page checks ok: 14/);
+    assert.match(stdout, /all html FAQPage absent ok: 15/);
     assert.match(stdout, /old URLs absent from sitemap/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
