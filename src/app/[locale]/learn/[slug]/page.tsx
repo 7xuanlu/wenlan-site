@@ -35,6 +35,7 @@ const chromeByLocale = {
     updated: "更新",
     articlePacket: "文章封包",
     inThisArticle: "本文段落",
+    officialReferences: "官方資料",
     relatedArticles: "相關文章",
     faq: "FAQ",
     getStarted: "開始使用",
@@ -46,6 +47,7 @@ const chromeByLocale = {
     updated: "更新",
     articlePacket: "文章封包",
     inThisArticle: "本文段落",
+    officialReferences: "官方资料",
     relatedArticles: "相关文章",
     faq: "FAQ",
     getStarted: "开始使用",
@@ -412,6 +414,27 @@ export default async function LocalizedLearnSlugPage({
                   ))}
                 </div>
               </nav>
+
+              {article.officialReferences && (
+                <div className="rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5">
+                  <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
+                    {chrome.officialReferences}
+                  </p>
+                  <div className="mt-4 space-y-4">
+                    {article.officialReferences.map((reference) => (
+                      <a
+                        key={reference.href}
+                        href={reference.href}
+                        target="_blank"
+                        rel="noopener noreferrer external"
+                        className="block text-sm leading-relaxed text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
+                      >
+                        {reference.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <div className="rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5">
                 <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">

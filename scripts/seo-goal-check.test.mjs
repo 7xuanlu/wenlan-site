@@ -17,7 +17,7 @@ const experimentFreeExperiments = canonicalExperiments.replace(
   /\n?<!-- EXPERIMENT-RECORD:START -->[\s\S]*?<!-- EXPERIMENT-RECORD:END -->\n?/g,
   "\n",
 );
-const currentExperimentId = "EXP-2026-07-18-claude-code-memory-refresh";
+const currentExperimentId = "EXP-2026-07-23-zhtw-obsidian-localization";
 
 function removeCurrentExperiment(experiments = canonicalExperiments) {
   return experiments.replace(
@@ -125,13 +125,13 @@ test("PLAN current experiment must exist as an active ledger start", () => {
 
 test("PLAN active experiment count must match the ledger", () => {
   const plan = canonicalPlan.replace(
+    "- Active experiments: 2.",
     "- Active experiments: 1.",
-    "- Active experiments: 0.",
   );
 
   assert.ok(
     validationErrors({ plan }).some((error) =>
-      error.includes("PLAN.md Active experiments is 0 but EXPERIMENTS.md has 1"),
+      error.includes("PLAN.md Active experiments is 1 but EXPERIMENTS.md has 2"),
     ),
   );
 });
@@ -378,33 +378,32 @@ test("readout timestamps are real UTC dates and strictly increase", () => {
   );
 });
 
-test("two launches in one weekly data window fail", () => {
+test("two launches in one reporting window pass when active and net-new caps hold", () => {
   const experiments = [
     experimentFreeExperiments,
     experimentStart({
       id: "EXP-004",
-      status: "decided",
+      status: "active",
       windowStart: "2026-07-18",
       windowEnd: "2026-07-24",
       launched: "2026-07-18",
     }),
     experimentStart({
       id: "EXP-005",
-      status: "decided",
+      status: "active",
       windowStart: "2026-07-18",
       windowEnd: "2026-07-24",
+      assetClass: "net-new-search",
       launched: "2026-07-19",
     }),
   ].join("\n");
 
-  assert.ok(
-    validationErrors({ experiments }).some((error) =>
-      error.includes("one experiment launch per weekly data window"),
-    ),
-  );
+  const plan = canonicalPlan.replaceAll(currentExperimentId, "EXP-005");
+
+  assert.deepEqual(validationErrors({ plan, experiments }), []);
 });
 
-test("shifted overlapping windows cannot bypass the weekly launch cap", () => {
+test("reporting windows remain anchored to the campaign cadence", () => {
   const experiments = [
     experimentFreeExperiments,
     experimentStart({

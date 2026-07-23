@@ -5,6 +5,10 @@ import {
   type Locale,
   type TranslatedLocale,
 } from "./locales";
+import {
+  TRANSLATED_LEARN_SLUGS,
+  translatedLocalesForLearnSlug,
+} from "./learn-availability";
 
 export const SITE_URL = "https://wenlan.app";
 
@@ -19,8 +23,7 @@ export const CORE_TRANSLATED_PATHS = [
 type CoreTranslatedPath = (typeof CORE_TRANSLATED_PATHS)[number];
 
 export const TRANSLATED_LEARN_PATHS = [
-  "/learn/distilled-wiki-pages-ai-memory",
-  "/learn/source-backed-wiki-pages-ai-work",
+  ...TRANSLATED_LEARN_SLUGS.map((slug) => `/learn/${slug}` as const),
 ] as const;
 
 type TranslatedLearnPath = (typeof TRANSLATED_LEARN_PATHS)[number];
@@ -68,7 +71,13 @@ export function stripLocalePrefix(pathname: string): {
 }
 
 export function isTranslatedPath(locale: Locale, pathname: string): boolean {
-  return locale !== DEFAULT_LOCALE && TRANSLATED_PATH_SET.has(normalizePathname(pathname));
+  if (locale === DEFAULT_LOCALE) return false;
+
+  const normalizedPathname = normalizePathname(pathname);
+  if (CORE_TRANSLATED_PATH_SET.has(normalizedPathname)) return true;
+  if (!TRANSLATED_LEARN_PATH_SET.has(normalizedPathname)) return false;
+
+  return translatedLocalesForLearnPath(normalizedPathname).includes(locale);
 }
 
 export function localizePath(locale: Locale, pathname: string): string {
@@ -98,6 +107,19 @@ export function alternateUrls(pathname: string): Record<string, string> {
     };
   }
 
+  if (TRANSLATED_LEARN_PATH_SET.has(unprefixedPathname)) {
+    return {
+      [hreflangByLocale.en]: englishUrl,
+      ...Object.fromEntries(
+        translatedLocalesForLearnPath(unprefixedPathname).map((locale) => [
+          hreflangByLocale[locale],
+          canonicalUrl(locale, unprefixedPathname),
+        ]),
+      ),
+      "x-default": englishUrl,
+    };
+  }
+
   return {
     [hreflangByLocale.en]: englishUrl,
     [hreflangByLocale["zh-TW"]]: canonicalUrl("zh-TW", unprefixedPathname),
@@ -112,4 +134,14 @@ export function isCoreTranslatedPath(pathname: string): pathname is CoreTranslat
 
 export function isTranslatedLearnPath(pathname: string): pathname is TranslatedLearnPath {
   return TRANSLATED_LEARN_PATH_SET.has(normalizePathname(pathname));
+}
+
+export function translatedLocalesForLearnPath(
+  pathname: string,
+): readonly TranslatedLocale[] {
+  const normalizedPathname = normalizePathname(pathname);
+  if (!TRANSLATED_LEARN_PATH_SET.has(normalizedPathname)) return [];
+
+  const slug = normalizedPathname.slice("/learn/".length);
+  return translatedLocalesForLearnSlug(slug);
 }

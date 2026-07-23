@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
-import { SUPPORTED_LOCALES, TRANSLATED_LOCALES } from "@/i18n/locales";
+import { SUPPORTED_LOCALES } from "@/i18n/locales";
 import {
   alternateUrls,
   canonicalUrl,
   type CORE_TRANSLATED_PATHS,
   isTranslatedLearnPath,
   SITE_URL,
+  translatedLocalesForLearnPath,
 } from "@/i18n/routing";
 import { docPages, docUrl } from "./(en)/docs/docs";
 import { articles, articleUrl } from "./(en)/learn/articles";
@@ -122,7 +123,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...translatedLearnArticles.flatMap((article) => {
       const pathname = `/learn/${article.slug}`;
 
-      return TRANSLATED_LOCALES.map((locale) => ({
+      return translatedLocalesForLearnPath(pathname).map((locale) => ({
         url: canonicalUrl(locale, pathname),
         lastModified: new Date(article.updatedAt),
         changeFrequency: "monthly" as const,
