@@ -185,6 +185,9 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - The prepared candidate remains queued behind the 2026-07-24 weekly evidence
   read and the `2026-07-25..2026-07-31` experiment-window gate. The approval
   removes the website-action blocker; it does not start the experiment early.
+- Draft PR: `https://github.com/7xuanlu/wenlan-site/pull/58` from
+  `agent/zhtw-obsidian-seo`; GitHub reports the branch mergeable and clean.
+  Vercel preview checks passed, but no production merge or deploy has occurred.
 - Goal deadline: 2026-08-18.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
@@ -423,10 +426,10 @@ remains 23 impressions, 0 clicks, and 38.7 average position. The queued zh-TW
 localization and its locale-availability prerequisite are locally complete and
 verified in local commit `9ea931f` but unpublished. Website push, merge, and
 production deploy are approved; Threads and other owned-social work are
-excluded. The next controller decision is to read the 2026-07-24 Friday
-evidence before consuming the `2026-07-25..2026-07-31` slot, and let a
-technical blocker or materially stronger impression-bearing existing-page
-action supersede the candidate.
+excluded. The clean website candidate is available as draft PR #58. The next
+controller decision is to read the 2026-07-24 Friday evidence before consuming
+the `2026-07-25..2026-07-31` slot, and let a technical blocker or materially
+stronger impression-bearing existing-page action supersede the candidate.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.

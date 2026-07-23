@@ -723,3 +723,18 @@ increase for that experiment.
   wait for the Friday evidence and 2026-07-25 launch gate before merge/deploy
 - Follow-up controller: `wenlan-claude-memory-24h-readout` reactivated with an
   SEO-only prompt for the 7-day readout and next launch gate
+
+### 2026-07-23T15:06:26Z — SEO-only website candidate published as draft PR
+
+- Record type: campaign-observation
+- Experiments started this window: 0
+- Active experiments: 1
+- Clean branch: `agent/zhtw-obsidian-seo`
+- Candidate commit: `0a0d183`
+- Draft PR: `https://github.com/7xuanlu/wenlan-site/pull/58`
+- GitHub merge state at observation: `MERGEABLE`, `CLEAN`
+- Vercel PR checks: preview deployment and preview comments both succeeded
+- Production state: not merged and not production-deployed
+- Scope: website SEO only; the branch and PR contain no Threads draft
+- Next step: read the 2026-07-24 weekly evidence and apply the predeclared
+  2026-07-25 launch gate before merge or production deploy
