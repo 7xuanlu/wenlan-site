@@ -98,7 +98,12 @@ const zhTWArticles = {
           "可以。頁面會投影成 ~/.wenlan/pages/ 裡的 Markdown，也可以用 editor 打開或 symlink 到 Obsidian。",
       },
     ],
-    relatedSlugs: ["source-backed-wiki-pages-ai-work", "ai-memory-provenance", "local-git-history-ai-memory"],
+    relatedSlugs: [
+      "wenlan-vs-obsidian-ai-memory",
+      "source-backed-wiki-pages-ai-work",
+      "ai-memory-provenance",
+      "local-git-history-ai-memory",
+    ],
     cta: {
       heading: "把 memory 變成 LLM wiki",
       body: "Wenlan 把重複 captures 蒸餾成 source-backed wiki pages，讓下一個 AI session 真正能用。",
@@ -177,7 +182,12 @@ const zhTWArticles = {
           "Atomic memories 才是細粒度 evidence。Pages 是用來把它們組成更可讀、更適合 orientation 的 context。",
       },
     ],
-    relatedSlugs: ["distilled-wiki-pages-ai-memory", "review-before-trust-ai-memory", "ai-memory-provenance"],
+    relatedSlugs: [
+      "wenlan-vs-obsidian-ai-memory",
+      "distilled-wiki-pages-ai-memory",
+      "review-before-trust-ai-memory",
+      "ai-memory-provenance",
+    ],
     cta: {
       heading: "讓 memory 可讀，也可驗證",
       body: "Wenlan 用 source-backed pages 讓 AI work memory 成為能被檢查、能被刷新、能被 agent 重用的 wiki。",

@@ -698,3 +698,28 @@ increase for that experiment.
 - Next user decision: approve the website action, approve the distribution
   unit, or approve both; any approval resumes this Goal as a fresh blocked
   audit and requires reading the latest Friday evidence before launch
+
+### 2026-07-23T14:57:22Z — scope correction and website-action approval
+
+- Record type: campaign-resume
+- Experiments started this window: 0
+- Active experiments: 1
+- User scope correction: Threads and all owned-social work are outside this
+  campaign; this controller is responsible only for website SEO
+- Historical ledger entries mentioning a Threads draft remain unchanged
+  because this file is append-only; this record supersedes those proposed
+  actions
+- Removed current Threads draft:
+  `docs/seo-audits/2026-07-23-zhtw-obsidian-threads-draft.md`
+- SEO-only exposure lane: localized Learn hub, canonical sitemap/hreflang, and
+  contextual links from the two existing zh-TW wiki pages
+- Approval granted: push, merge, and production deploy for the prepared
+  website candidate
+- Approval not granted: Threads, Reddit or other external publication, OSS
+  submission, paid acquisition, request indexing, or GSC validation
+- Launch state: queued, not active; do not consume the
+  `2026-07-25..2026-07-31` slot until the 2026-07-24 weekly evidence is read
+- Next step: verify and publish a GitHub PR for the website candidate, then
+  wait for the Friday evidence and 2026-07-25 launch gate before merge/deploy
+- Follow-up controller: `wenlan-claude-memory-24h-readout` reactivated with an
+  SEO-only prompt for the 7-day readout and next launch gate

@@ -112,8 +112,9 @@ experiment-start record.
   Umami and GitHub outbound remain unavailable.
 - **Change:** Publish only the prepared zh-TW route plus its required
   per-locale availability, static-param, sitemap, locale-switching, and
-  hreflang support. The Learn-hub entry, visible maintained references, and
-  GitHub CTA are part of the same bounded page change.
+  hreflang support. The Learn-hub entry, contextual links from the two existing
+  zh-TW wiki pages, visible maintained references, and GitHub CTA are part of
+  the same bounded website change.
 - **Publish date:** `not-published` until production completion is verified.
 - **Index date:** `not-indexed` until confirmed by authenticated evidence.
 - **Minimum exposure:** 5 GSC page impressions within the first 28 complete
@@ -145,25 +146,24 @@ experiment-start record.
 ## Exposure lane
 
 Production launch alone is a weak reach plan for a new zh-TW URL with a sparse
-localized Learn surface. The proposed distribution belongs to this same
-experiment, but each external action remains separately approval-gated:
+localized Learn surface. This campaign now uses only website SEO surfaces:
 
-1. Publish one Traditional Chinese Threads distribution unit after production
-   verification: a standalone main post followed by a first reply containing
-   the canonical article link. The exact local draft, proof gate, and
-   observation plan are in
-   `docs/seo-audits/2026-07-23-zhtw-obsidian-threads-draft.md`.
-2. Use the article's standalone decision value: when Obsidian Markdown is
+1. Link the new route from the localized Learn hub.
+2. Add contextual related-article links from the existing zh-TW
+   `distilled-wiki-pages-ai-memory` and
+   `source-backed-wiki-pages-ai-work` pages.
+3. Include only the canonical zh-TW URL in the sitemap and advertise only real
+   locale alternates; keep the unsupported zh-CN route as a hard 404.
+4. Preserve the article's standalone decision value: when Obsidian Markdown is
    enough, what Claude Code or MCP adds, and when reviewed cross-client memory
    becomes a separate need.
-3. Do not post to Reddit, submit an OSS directory, buy traffic, request
-   indexing, or submit GSC validation without another explicit approval.
-4. If a tagged link is used, preserve its raw URL and channel as provenance.
-   Do not treat it as authenticated GSC data, and do not claim source-to-page
-   sessions while the analytics join remains unavailable.
+5. Do not post to Threads or Reddit, submit an OSS directory, buy traffic,
+   request indexing, or submit GSC validation without another explicit
+   approval.
 
-This distribution can create exposure but cannot establish causality for GSC
-impressions, Vercel visitors, GitHub outbound, or stars.
+These website surfaces can improve crawl discovery and reader navigation, but
+they cannot establish causality for GSC impressions, Vercel visitors, GitHub
+outbound, or stars.
 
 ## 2026-07-25 launch gate
 
@@ -173,11 +173,9 @@ Read the independently generated 2026-07-24 weekly SEO report first.
 - If it finds a materially stronger impression-bearing existing-page action,
   select only one experiment for the window and record why this candidate was
   deferred.
-- Otherwise, append the immutable experiment-start record and use explicit
-  user approval for push, merge, and deploy.
-- Treat the Traditional Chinese Threads main-post-plus-link-reply unit as a
-  separate external-action approval even if it remains part of the same
-  experiment.
+- Otherwise, append the immutable experiment-start record and use the website
+  push, merge, and deploy approval granted on `2026-07-23`.
+- Do not add a Threads or other owned-social action to this SEO-only campaign.
 
 ## Remaining manual or account-gated evidence
 
@@ -186,4 +184,4 @@ Read the independently generated 2026-07-24 weekly SEO report first.
 - Authenticated Umami outbound and UTM observations.
 - Vercel custom-event access and a reliable acquisition-session denominator.
 - Any source-to-page-to-GitHub join.
-- Explicit push, merge, deploy, and owned-social publication approval.
+- Complete 2026-07-24 weekly evidence and the 2026-07-25 launch-gate decision.

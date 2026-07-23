@@ -178,12 +178,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 
 ### Control-plane status
 
-- Goal status: blocked at `2026-07-23T14:52:42Z` because the same explicit
-  push, merge, deploy, and external-publication approval boundary prevented
-  the next exposure action for three consecutive resumed Goal turns.
-- The prepared candidate is preserved in local commit `9ea931f`; the block is
-  an intentional contract stop, not the prior stale Goal API mismatch. Resume
-  only after the user grants one or both requested external-action approvals.
+- Goal status: resumed at `2026-07-23T14:57:22Z` after the user explicitly
+  approved website push, merge, and production deploy for the prepared
+  candidate. Threads and other owned-social work are outside this SEO-only
+  campaign.
+- The prepared candidate remains queued behind the 2026-07-24 weekly evidence
+  read and the `2026-07-25..2026-07-31` experiment-window gate. The approval
+  removes the website-action blocker; it does not start the experiment early.
 - Goal deadline: 2026-08-18.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
@@ -232,11 +233,10 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   query or page rows for either `2026-07-18` or `2026-07-19`; those dates are
   reporting-latency observations, not evidence of zero search demand. The
   result remains inconclusive.
-- The `wenlan-claude-memory-24h-readout` heartbeat is paused while this Goal is
-  approval-blocked. The independent Friday
-  `weekly-origin-seo-cleanup` automation remains ACTIVE and unchanged, so its
-  Searchfit/GSC/technical evidence lane continues without website actions from
-  this controller.
+- The `wenlan-claude-memory-24h-readout` heartbeat is ACTIVE for the 7-day
+  readout and next launch gate. Its prompt is website-SEO-only and carries the
+  2026-07-23 website approval. The independent Friday
+  `weekly-origin-seo-cleanup` automation remains ACTIVE and unchanged.
 
 ### Fixed baseline and live provenance
 
@@ -373,16 +373,16 @@ zh-CN route remains a verified 404 without a sitemap or alternate entry.
 
 The proposed immutable experiment fields, source-native baseline, exposure
 lane, and `2026-07-25` launch gate are predeclared in
-`docs/seo-audits/2026-07-23-zhtw-obsidian-prelaunch.md`. This preparation does
-not append an experiment-start record or grant an external-action approval.
-The exact Threads main post, first link reply, claim/proof gate, response
-boundaries, and native-unit observation plan are locally prepared in
-`docs/seo-audits/2026-07-23-zhtw-obsidian-threads-draft.md`.
+`docs/seo-audits/2026-07-23-zhtw-obsidian-prelaunch.md`. The website exposure
+lane consists of the localized Learn hub, sitemap/hreflang, and contextual
+links from the two existing zh-TW wiki pages. Threads and other owned-social
+work are excluded from this campaign.
 
 This local preparation does not start the experiment, publish the URL, or
 consume the `2026-07-25..2026-07-31` experiment slot. The candidate can become
-that window's single experiment only after the Friday weekly evidence is read
-and explicit publish/deploy approval is granted.
+that window's single experiment only after the Friday weekly evidence is read.
+Website push, merge, and production deploy were explicitly approved by the
+user on `2026-07-23`.
 
 ### Working cadence
 
@@ -421,12 +421,12 @@ The one-page English refresh for
 The actual 24-hour readout is inconclusive, and the current target-page GSC row
 remains 23 impressions, 0 clicks, and 38.7 average position. The queued zh-TW
 localization and its locale-availability prerequisite are locally complete and
-verified in local commit `9ea931f` but unpublished. The next decision belongs
-to the user: approve push, merge, and deploy for the prepared localization;
-approve the exact Traditional Chinese Threads main-post-plus-link-reply unit;
-or approve both. On resume, read the latest Friday evidence before consuming
-the `2026-07-25..2026-07-31` slot, and let a technical blocker or materially
-stronger impression-bearing existing-page action supersede the candidate.
+verified in local commit `9ea931f` but unpublished. Website push, merge, and
+production deploy are approved; Threads and other owned-social work are
+excluded. The next controller decision is to read the 2026-07-24 Friday
+evidence before consuming the `2026-07-25..2026-07-31` slot, and let a
+technical blocker or materially stronger impression-bearing existing-page
+action supersede the candidate.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.
