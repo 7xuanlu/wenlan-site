@@ -1072,3 +1072,17 @@ increase for that experiment.
   `pnpm seo:technical:built`, and `git diff --check` passed
 - Next step: commit the reviewed scope, push the current branch, merge its PR,
   wait for Vercel production, and verify the live LLM-wiki page
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-llm-wiki-category-refresh at 2026-07-24T20:23:04Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-llm-wiki-category-refresh
+- Observed at: 2026-07-24T20:23:04Z
+- Readout: correction
+- Status: live
+- Evidence: PR #63 merged at `2026-07-24T20:18:36Z` as `73c3f0d6a2d7937408df1d297ef0607bd2637fcd`; Vercel production completed at `2026-07-24T20:19:21Z`. The live route returned HTTP 200 with the refreshed title and H1, exact canonical, `index, follow`, reciprocal `en-US`, `zh-TW`, `zh-CN`, and `x-default` alternates, Article and BreadcrumbList JSON-LD, `datePublished: 2026-06-24`, `dateModified: 2026-07-24`, the visible `/capture` to `/distill` to `/pages` workflow, code/repository-search boundary, and maintained Wenlan and LLM-wiki references. No `FAQPage` is present. The deployed technical audit passed robots, 109 sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL exclusions. Desktop 1440×1000 and mobile 393×852 renders showed the expected content with no document, H1, or workflow overflow, framework overlay, console warning, or console error. Render evidence is under `/tmp/wenlan-seo/visual-qa/2026-07-24-llm-wiki-production/`. No search-performance result or causal effect is inferred at production completion.
+- Result: pending
+- Decision: wait
+- Next step: Run the 24-hour technical/evidence readout after `2026-07-25T20:19:21Z`; this production-verified measurement cohort does not block another eligible website change.
+<!-- EXPERIMENT-RECORD:END -->

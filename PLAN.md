@@ -202,13 +202,15 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - PR #62 merged at `2026-07-24T19:17:15Z` as
   `e8c089a0391795e778b2e02f1bd11355fda4e4e8`. Vercel production completed at
   `2026-07-24T19:18:03Z`.
+- PR #63 merged at `2026-07-24T20:18:36Z` as
+  `73c3f0d6a2d7937408df1d297ef0607bd2637fcd`. Vercel production completed at
+  `2026-07-24T20:19:21Z`.
 - Goal deadline: 2026-08-18.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-24-llm-wiki-category-refresh`, approved for local preparation;
-  the preceding Learn-hub change is live and production-verified, so this is
-  the only website change in `approved` or `active` preparation.
+  `EXP-2026-07-24-llm-wiki-category-refresh`, live and production-verified;
+  no website change is currently in `approved` or `active` preparation.
 - The user approved Git push, merge, and production deploy for this LLM-wiki
   refresh at `2026-07-24T20:16:19Z`. Reddit or other external publication, OSS
   submission, paid acquisition, request indexing, GSC validation, and metric
@@ -224,15 +226,16 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Last production observation: `2026-07-24T19:21:10Z`; deployed robots, 109
+- Last production observation: `2026-07-24T20:23:04Z`; deployed robots, 109
   sitemap URLs, 14 key pages, noindex headers, structured-data policy,
   redirects, bridge-host redirects, and legacy-URL exclusions passed. The
-  refreshed English Learn hub returned HTTP 200 with its new title,
-  description, H1, quick answer, exact canonical, `index, follow`, reciprocal
-  locale alternates, BreadcrumbList and CollectionPage JSON-LD, nine promoted
-  acquisition links, no `FAQPage`, no document overflow, and no browser
-  errors. The English, zh-TW, and zh-CN Learn hubs and every promoted
-  destination returned HTTP 200.
+  refreshed English LLM-wiki route returned HTTP 200 with its new title,
+  description and H1, exact canonical, `index, follow`, reciprocal English,
+  zh-TW and zh-CN alternates, Article and BreadcrumbList JSON-LD, original
+  `2026-06-24` publication date, `2026-07-24` modification date, visible
+  workflow and maintained references, and no `FAQPage`. Desktop and 393px
+  mobile renders had no document, H1, or workflow overflow, framework overlay,
+  console warning, or console error.
 - Google Trends demand-discovery gate: resolved for the current decision at
   `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
   Seventeen timeline comparisons and nine related-query exports cover
@@ -379,7 +382,7 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-24-llm-wiki-category-refresh` is approved for local preparation.
+`EXP-2026-07-24-llm-wiki-category-refresh` is live and production-verified.
 The existing English `/learn/distilled-wiki-pages-ai-memory` route has 2 GSC
 impressions, 0 clicks, and average position 3.5 in the authenticated
 `2026-06-26..2026-07-23` range. The separate visible query `llm wiki 2.0` has
@@ -387,7 +390,7 @@ impressions, 0 clicks, and average position 3.5 in the authenticated
 page row. Same-range Vercel reports 4 visitors and 4 pageviews for the target
 route, without a source-to-page join.
 
-The bounded refresh will make the validated `LLM wiki` category, the real
+The bounded refresh makes the validated `LLM wiki` category, the real
 `/capture` to `/distill` to `/pages` workflow, the source-backed maintenance
 model, and the boundary from code or repository search explicit. It creates
 no new URL, Mandarin translation, schema type, `FAQPage`, or external
@@ -451,11 +454,12 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-Publish the fully verified English LLM-wiki page refresh under the user's
-`2026-07-24T20:16:19Z` website approval, then verify Vercel production and
-append the production evidence. Run the Learn-hub 24-hour readout after
-`2026-07-25T19:18:03Z` and keep the earlier cohorts on schedule without
-blocking this launch. No indexing or non-website publication is authorized.
+Run the Learn-hub 24-hour readout after `2026-07-25T19:18:03Z` and the
+LLM-wiki refresh 24-hour readout after `2026-07-25T20:19:21Z`. Keep the
+earlier cohorts on schedule, and use the latest authenticated weekly queue to
+prepare the next non-overlapping existing-page refresh without treating these
+measurement cohorts as production blockers. No indexing or non-website
+publication is authorized.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.
