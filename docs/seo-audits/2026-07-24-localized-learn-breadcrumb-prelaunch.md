@@ -4,7 +4,7 @@
 
 **Prepared:** `2026-07-24T20:42:43Z`
 
-**Status:** locally verified; not published
+**Status:** production-verified
 
 ## Decision
 
@@ -92,9 +92,27 @@ or independently corroborated demand evidence is required first.
   correct Article `isPartOf` and `inLanguage`, and adequate positive plus
   negative regression assertions.
 
-## Publication boundary
+## Production result
 
-The correction is local and unpublished. Git push, merge, and production
-deployment require explicit user approval. No indexing request, GSC
-validation, external post, OSS submission, or metric-definition change is
-included.
+The user explicitly approved Git push, merge, and production deployment for
+this correction in the Codex task. PR #65 merged at
+`2026-07-24T20:47:55Z` as
+`7f54c64a46d48e1d5f0f4d619bdd5a61aaba75dd`; Vercel production completed at
+`2026-07-24T20:48:42Z`.
+
+Post-deploy verification passed:
+
+- `pnpm seo:technical:deployed`: robots, 109 sitemap URLs, 14 key pages, six
+  utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects, six
+  bridge-host redirects, and old-URL exclusions.
+- `I18N_CHECK_BASE_URL=https://wenlan.app pnpm i18n:technical:built`: 19
+  expected HTTP 200 routes and five expected HTTP 404 routes.
+- The live zh-TW article emits `https://wenlan.app/zh-TW/learn` as
+  BreadcrumbList item 2; the live zh-CN article emits
+  `https://wenlan.app/zh-CN/learn`.
+- Both 393×852 production renders retained the localized title, H1, canonical,
+  and language tag with no document overflow, framework overlay, console
+  warning, or console error.
+
+No indexing request, GSC validation, external post, OSS submission, paid
+acquisition, or metric-definition change was performed.

@@ -1136,3 +1136,30 @@ increase for that experiment.
 - External actions: none
 - Next step: request explicit approval for Git push, merge, and production
   deploy; indexing and non-website publication remain separately gated
+
+### 2026-07-24T20:51:29Z — localized Learn breadcrumb production verified
+
+- Record type: campaign-observation
+- Current change: `TECH-2026-07-24-localized-learn-breadcrumb`
+- Approval: the user explicitly approved Git push, merge, and production
+  deployment for this correction in the current Codex task
+- Publication: PR #65 merged at `2026-07-24T20:47:55Z` as
+  `7f54c64a46d48e1d5f0f4d619bdd5a61aaba75dd`; Vercel production completed at
+  `2026-07-24T20:48:42Z`
+- Deployed technical verification: robots, 109 sitemap URLs, 14 key pages, six
+  utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects, six
+  bridge-host redirects, and old-URL exclusions passed
+- Locale-route verification: 19 expected HTTP 200 routes and five expected
+  HTTP 404 routes passed against `https://wenlan.app`
+- Structured-data verification: live zh-TW and zh-CN LLM-wiki articles emit
+  `https://wenlan.app/zh-TW/learn` and
+  `https://wenlan.app/zh-CN/learn` respectively as BreadcrumbList item 2 while
+  retaining exact localized canonicals, H1s, and language tags
+- Render verification: both 393×852 production pages had no document
+  overflow, framework overlay, console warning, or console error
+- Status: production-verified; the production preparation slot is open
+- Unperformed gated actions: no indexing request, GSC validation, external
+  post, OSS submission, paid acquisition, or metric-definition change
+- Next step: run the due Learn-hub and LLM-wiki 24-hour readouts after their
+  predeclared timestamps and continue the read-only demand/coverage-gap audit
+  without rewriting low-evidence weekly candidates

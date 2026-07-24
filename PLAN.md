@@ -205,18 +205,26 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - PR #63 merged at `2026-07-24T20:18:36Z` as
   `73c3f0d6a2d7937408df1d297ef0607bd2637fcd`. Vercel production completed at
   `2026-07-24T20:19:21Z`.
+- PR #65 merged at `2026-07-24T20:47:55Z` as
+  `7f54c64a46d48e1d5f0f4d619bdd5a61aaba75dd`. Vercel production completed at
+  `2026-07-24T20:48:42Z`.
 - Goal deadline: 2026-08-18.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
   `EXP-2026-07-24-llm-wiki-category-refresh`, live and production-verified.
 - Website-affecting technical correction:
-  `TECH-2026-07-24-localized-learn-breadcrumb`, locally verified and
-  unpublished; this is the only website change in preparation.
+  `TECH-2026-07-24-localized-learn-breadcrumb`, production-verified. There is
+  no website change currently in preparation.
 - The user approved Git push, merge, and production deploy for this LLM-wiki
   refresh at `2026-07-24T20:16:19Z`. Reddit or other external publication, OSS
   submission, paid acquisition, request indexing, GSC validation, and metric
   changes remain outside that approval.
+- The user approved Git push, merge, and production deploy for the localized
+  Learn breadcrumb correction in this Codex task before PR #65 was created at
+  `2026-07-24T20:47:07Z`. That approval did not include indexing, GSC
+  validation, non-website publication, OSS submission, paid acquisition, or
+  metric changes.
 - Active experiments: 5.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
@@ -228,16 +236,15 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Last production observation: `2026-07-24T20:23:04Z`; deployed robots, 109
-  sitemap URLs, 14 key pages, noindex headers, structured-data policy,
-  redirects, bridge-host redirects, and legacy-URL exclusions passed. The
-  refreshed English LLM-wiki route returned HTTP 200 with its new title,
-  description and H1, exact canonical, `index, follow`, reciprocal English,
-  zh-TW and zh-CN alternates, Article and BreadcrumbList JSON-LD, original
-  `2026-06-24` publication date, `2026-07-24` modification date, visible
-  workflow and maintained references, and no `FAQPage`. Desktop and 393px
-  mobile renders had no document, H1, or workflow overflow, framework overlay,
-  console warning, or console error.
+- Last production observation: `2026-07-24T20:51:29Z`; deployed robots, 109
+  sitemap URLs, 14 key pages, noindex headers, structured-data policy, 25
+  redirects, six bridge-host redirects, and legacy-URL exclusions passed.
+  Nineteen expected locale routes returned HTTP 200 and five unsupported
+  locale routes returned HTTP 404. Live zh-TW and zh-CN LLM-wiki articles now
+  emit `https://wenlan.app/zh-TW/learn` and
+  `https://wenlan.app/zh-CN/learn` as BreadcrumbList item 2 while retaining
+  exact localized canonicals, H1s, and language tags. Their 393px renders had
+  no document overflow, framework overlay, console warning, or console error.
 - Google Trends demand-discovery gate: resolved for the current decision at
   `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
   Seventeen timeline comparisons and nine related-query exports cover
@@ -409,12 +416,18 @@ Production-before checks showed the zh-TW and zh-CN article home and article
 items localized correctly while item 2 still pointed to the English
 `https://wenlan.app/learn` hub.
 
-The local change uses `canonicalUrl(resolvedLocale, "/learn")` for item 2 and
-adds a focused regression test. Built production HTML now emits
+The production change uses `canonicalUrl(resolvedLocale, "/learn")` for item 2
+and adds a focused regression test. Live production HTML now emits
 `https://wenlan.app/zh-TW/learn` and `https://wenlan.app/zh-CN/learn`.
 It changes no visible copy, article canonical, hreflang, sitemap membership,
 locale availability, schema type, or `FAQPage` policy. Evidence is in
 `docs/seo-audits/2026-07-24-localized-learn-breadcrumb-prelaunch.md`.
+
+PR #65 merged at `2026-07-24T20:47:55Z` as
+`7f54c64a46d48e1d5f0f4d619bdd5a61aaba75dd`; Vercel production completed at
+`2026-07-24T20:48:42Z`. The deployed technical, locale-route, structured-data,
+and rendered checks passed. The correction is production-verified and no
+longer consumes the preparation slot.
 
 The weekly report's three ranked title/meta candidates were not started:
 changelog and data/privacy have page rows but no inspectable matching query or
@@ -477,13 +490,13 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-Surface the Git push, merge, and production-deploy approval boundary for
-`TECH-2026-07-24-localized-learn-breadcrumb`. After production verification,
-run the Learn-hub 24-hour readout after `2026-07-25T19:18:03Z` and the
+Run the Learn-hub 24-hour readout after `2026-07-25T19:18:03Z` and the
 LLM-wiki refresh 24-hour readout after `2026-07-25T20:19:21Z`. Keep the
-earlier cohorts on schedule. Do not rewrite the three recently refreshed
-weekly candidates without fresh query or independently corroborated demand
-evidence. No indexing or non-website publication is authorized.
+earlier cohorts on schedule. The production preparation slot is open; continue
+the read-only demand and coverage-gap audit, but do not rewrite the three
+recently refreshed weekly candidates without fresh query or independently
+corroborated demand evidence. No indexing or non-website publication is
+authorized.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.
