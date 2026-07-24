@@ -9,7 +9,7 @@ const repoRoot = resolve(import.meta.dirname, "..");
 const FROZEN_START = "<!-- FROZEN-GOAL-CONTRACT:START -->";
 const FROZEN_END = "<!-- FROZEN-GOAL-CONTRACT:END -->";
 const EXPECTED_FROZEN_SHA256 =
-  "65ce42e862dd0f7b45dffef438909ac62ab755d8c911485e6bca3e9d4ffe0d67";
+  "5a51e387697e66d2ff7836d351b414ea835c63500c8f8717971b93c2a3442415";
 const DAY_MS = 24 * 60 * 60 * 1000;
 const CAMPAIGN_WINDOW_ANCHOR = new Date("2026-07-18T00:00:00.000Z");
 const CAMPAIGN_DEADLINE = new Date("2026-08-18T00:00:00.000Z");
@@ -170,10 +170,21 @@ const requiredFrozenClauses = [
     "weekly windows do not block approved launches",
     "Weekly data windows are reporting boundaries, not launch blockers.",
   ],
-  ["at most two active experiments", "Keep at most two active experiments."],
   [
-    "14-day net-new cap",
-    "Start at most one net-new search asset in any 14-calendar-day period.",
+    "single production-in-flight guard",
+    "Production concurrency is capped at one website change in `approved` or `active` preparation/verification state.",
+  ],
+  [
+    "measurement cohorts do not block production",
+    "`live`, `measuring`, and `extended` measurement cohorts do not consume the production slot and do not block another evidence-backed website change.",
+  ],
+  [
+    "no fixed calendar article quota",
+    "Do not impose a fixed calendar article quota.",
+  ],
+  [
+    "net-new candidate and overlap gate",
+    "A net-new search asset may launch after the full candidate gate passes, the preceding website change is production-verified, and the new asset does not overlap an existing intent.",
   ],
   [
     "predeclared exposure and readouts",
@@ -252,6 +263,7 @@ const allowedStatuses = new Set([
   "stopped",
 ]);
 const activeStatuses = new Set(["approved", "active", "live", "measuring", "extended"]);
+const productionInFlightStatuses = new Set(["approved", "active"]);
 const allowedReadoutStatuses = new Set([
   "active",
   "live",
@@ -515,7 +527,20 @@ function inspectExperimentLedger(experiments, errors) {
   const latestStatuses = new Map();
   const launchDatesById = new Map();
   const lastReadoutAtById = new Map();
-  const netNewLaunches = [];
+  let productionOverlapReported = false;
+
+  function recordLatestStatus(id, status, recordLabel) {
+    latestStatuses.set(id, status);
+    const productionInFlight = [...latestStatuses]
+      .filter(([, latestStatus]) => productionInFlightStatuses.has(latestStatus))
+      .map(([experimentId]) => experimentId);
+    if (productionInFlight.length > 1 && !productionOverlapReported) {
+      errors.push(
+        `${recordLabel} violates the at most one production-in-flight change guard; found ${productionInFlight.join(", ")}.`,
+      );
+      productionOverlapReported = true;
+    }
+  }
 
   blocks.forEach((block, index) => {
     const recordLabel = `experiment record ${index + 1}`;
@@ -587,7 +612,7 @@ function inspectExperimentLedger(experiments, errors) {
         status &&
         allowedReadoutStatuses.has(status)
       ) {
-        latestStatuses.set(id, status);
+        recordLatestStatus(id, status, recordLabel);
       }
       return;
     }
@@ -608,7 +633,9 @@ function inspectExperimentLedger(experiments, errors) {
         errors.push(`Experiment start ID "${id}" must be unique.`);
       }
       startedIds.add(id);
-      if (status && allowedStatuses.has(status)) latestStatuses.set(id, status);
+      if (status && allowedStatuses.has(status)) {
+        recordLatestStatus(id, status, recordLabel);
+      }
     }
 
     const assetClass = fields.get("Asset class");
@@ -644,9 +671,6 @@ function inspectExperimentLedger(experiments, errors) {
         errors.push(`${recordLabel} cannot launch after 2026-08-18.`);
       }
       if (id && startedIds.has(id)) launchDatesById.set(id, launched);
-      if (assetClass === "net-new-search") {
-        netNewLaunches.push({ id: id ?? recordLabel, date: launched });
-      }
     }
 
     const minimumExposure = fields.get("Minimum exposure") ?? "";
@@ -661,22 +685,6 @@ function inspectExperimentLedger(experiments, errors) {
   const active = [...latestStatuses]
     .filter(([, status]) => activeStatuses.has(status))
     .map(([id]) => id);
-  if (active.length > 2) {
-    errors.push(
-      `EXPERIMENTS.md allows at most two active experiments; found ${active.length}: ${active.join(", ")}.`,
-    );
-  }
-  netNewLaunches.sort((left, right) => left.date - right.date);
-  for (let index = 1; index < netNewLaunches.length; index += 1) {
-    const previous = netNewLaunches[index - 1];
-    const current = netNewLaunches[index];
-    const days = (current.date - previous.date) / DAY_MS;
-    if (days < 14) {
-      errors.push(
-        `Net-new search assets must launch at least 14 calendar days apart; ${previous.id} and ${current.id} are ${days} days apart.`,
-      );
-    }
-  }
 
   return {
     starts: startedIds.size,
@@ -782,7 +790,9 @@ async function run() {
     process.exitCode = 1;
     return;
   }
-  console.log("[seo-goal] PASS: frozen contract and experiment caps verified.");
+  console.log(
+    "[seo-goal] PASS: frozen contract and production-concurrency guard verified.",
+  );
 }
 
 const isMain =

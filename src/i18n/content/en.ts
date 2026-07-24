@@ -554,7 +554,7 @@ export const enContent = {
         description:
           "Agents capture what they learn, you add sources you trust, and Wenlan keeps source-backed wiki pages current across AI work.",
         statusLabel: "Project status",
-        statusItems: ["v0.13.2", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
+        statusItems: ["v0.14.1", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
       },
       sections: [
         {
@@ -581,7 +581,7 @@ export const enContent = {
           number: "04",
           title: "Current status",
           paragraphs: [
-            "Wenlan v0.13.2 ships prebuilt runtime artifacts for macOS Apple Silicon, Linux (x86_64, aarch64; glibc), and Windows (x86_64). macOS Intel remains source/dev-only until a public release workflow publishes that artifact again. The daemon, CLI, MCP server, Claude Code plugin, and Codex plugin are open source under Apache-2.0.",
+            "Wenlan v0.14.1 ships prebuilt runtime artifacts for macOS Apple Silicon, Linux (x86_64, aarch64; glibc), and Windows (x86_64). macOS Intel remains source/dev-only until a public release workflow publishes that artifact again. The daemon, CLI, MCP server, Claude Code plugin, and Codex plugin are open source under Apache-2.0.",
           ],
         },
       ],
@@ -1174,7 +1174,7 @@ export const enContent = {
         title: "Install Wenlan and connect your AI client.",
         description:
           "Choose one client path, connect it to the same local daemon, then verify a capture and recall round trip.",
-        meta: ["Wenlan team", "Updated Jul 10, 2026", "4 min setup"],
+        meta: ["Wenlan team", "Updated Jul 24, 2026", "4 min setup"],
         setupPathLabel: "Setup path",
         setupPathItems: ["Claude Code", "Codex", "ChatGPT", "Local + remote MCP"],
       },
@@ -1208,7 +1208,7 @@ export const enContent = {
           number: "03",
           title: "ChatGPT and Claude.ai",
           paragraphs: [
-            "Open Remote Access in the Wenlan desktop app to create a temporary HTTPS URL for Streamable HTTP MCP. The app starts wenlan-mcp with --no-auth on loopback and exposes it through the tunnel, so possession of the URL grants access. In ChatGPT, enable Developer mode, create an app, and paste the URL with No Auth. Claude.ai uses the same URL through Add Custom Connector.",
+            "Open Remote Access in the Wenlan desktop app to create a temporary HTTPS URL for Streamable HTTP MCP. The app starts wenlan-mcp with --no-auth on loopback and exposes it through the tunnel, so possession of the URL grants access. In ChatGPT, open Settings > Plugins, create a New Plugin, choose Server URL under Connection, paste the URL, and set Authentication to None. In Claude.ai, install Wenlan from the 7xuanlu/wenlan marketplace through Directory > Plugins.",
             "This is a custom MCP connection to your own Wenlan runtime, not a claim that Wenlan is listed in the public ChatGPT Apps Directory. Stop Remote Access when you are not using it.",
           ],
           commands: [],

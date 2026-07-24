@@ -537,7 +537,7 @@ export const zhTWContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "13b54d22f7edfd089ea10a4e885019ee2ef781cf7bab99f6fd5e80f88c5aa793",
+    sourceHash: "e393e019618c47d086150f862aefa6d55fb48cfa02b123eb0043388324070af7",
     content: {
       seo: {
         title: "關於 Wenlan | AI 工作的 LLM wiki",
@@ -554,7 +554,7 @@ export const zhTWContent = {
         description:
           "AI 代理捕捉學到的內容，你加入信任來源，Wenlan 讓有來源依據的 wiki 頁面在 AI 工作中保持最新。",
         statusLabel: "專案狀態",
-        statusItems: ["版本 v0.13.2", "支援 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 建置"],
+        statusItems: ["版本 v0.14.1", "支援 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 建置"],
       },
       sections: [
         {
@@ -581,7 +581,7 @@ export const zhTWContent = {
           number: "04",
           title: "目前狀態",
           paragraphs: [
-            "Wenlan v0.13.2 支援的預編譯執行環境包括 macOS Apple Silicon、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64)。macOS Intel 仍是 source/dev-only，直到 public release workflow 發布該 artifact。daemon、CLI、MCP server、Claude Code plugin 和 Codex plugin 都以 Apache-2.0 open source。",
+            "Wenlan v0.14.1 支援的預編譯執行環境包括 macOS Apple Silicon、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64)。macOS Intel 仍是 source/dev-only，直到 public release workflow 發布該 artifact。daemon、CLI、MCP server、Claude Code plugin 和 Codex plugin 都以 Apache-2.0 open source。",
           ],
         },
       ],
@@ -1158,7 +1158,7 @@ export const zhTWContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "2c9cfc1f7e561ce8a4c71e00c40d41ae2a64de516ae0039a20d02e4214e38380",
+    sourceHash: "7caf3da2fb27707f0f2c64f06c664e986158ed934bdee472034176d962d76516",
     content: {
       seo: {
         title: "安裝 Wenlan：Claude Code、Codex、ChatGPT 與 MCP",
@@ -1174,7 +1174,7 @@ export const zhTWContent = {
         title: "安裝 Wenlan，連接你的\u00a0AI\u00a0工具。",
         description:
           "選擇一條 client 路徑，連到同一個 local daemon，再驗證一次 capture 與 recall round trip。",
-        meta: ["Wenlan 團隊", "更新於 2026 年 7 月 10 日", "4 分鐘設定"],
+        meta: ["Wenlan 團隊", "更新於 2026 年 7 月 24 日", "4 分鐘設定"],
         setupPathLabel: "設定路徑",
         setupPathItems: ["Claude Code 路徑", "Codex 路徑", "ChatGPT 路徑", "本地 + 遠端 MCP"],
       },
@@ -1208,7 +1208,7 @@ export const zhTWContent = {
           number: "03",
           title: "ChatGPT 和 Claude.ai",
           paragraphs: [
-            "在 Wenlan desktop app 開啟 Remote Access，為 Streamable HTTP MCP 建立暫時的 HTTPS URL。App 會在 loopback 以 --no-auth 啟動 wenlan-mcp，再透過 tunnel 暴露；任何拿到 URL 的人都能存取。在 ChatGPT 啟用 Developer mode、建立 app，並以 No Auth 貼上 URL；Claude.ai 則透過 Add Custom Connector 使用同一個 URL。",
+            "在 Wenlan desktop app 開啟 Remote Access，為 Streamable HTTP MCP 建立暫時的 HTTPS URL。App 會在 loopback 以 --no-auth 啟動 wenlan-mcp，再透過 tunnel 暴露；任何拿到 URL 的人都能存取。在 ChatGPT 開啟 Settings > Plugins，建立 New Plugin，在 Connection 下選擇 Server URL，貼上 URL，並把 Authentication 設為 None。Claude.ai 則透過 Directory > Plugins 從 7xuanlu/wenlan marketplace 安裝 Wenlan。",
             "這是連接到你自己 Wenlan runtime 的 custom MCP，不代表 Wenlan 已列入公開 ChatGPT Apps Directory。不使用時請停止 Remote Access。",
           ],
           commands: [],

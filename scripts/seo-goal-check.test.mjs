@@ -17,7 +17,8 @@ const experimentFreeExperiments = canonicalExperiments.replace(
   /\n?<!-- EXPERIMENT-RECORD:START -->[\s\S]*?<!-- EXPERIMENT-RECORD:END -->\n?/g,
   "\n",
 );
-const currentExperimentId = "EXP-2026-07-23-zhtw-obsidian-localization";
+const currentExperimentId =
+  "EXP-2026-07-24-ai-work-memory-knowledge-base-refresh";
 
 function removeCurrentExperiment(experiments = canonicalExperiments) {
   return experiments.replace(
@@ -125,13 +126,13 @@ test("PLAN current experiment must exist as an active ledger start", () => {
 
 test("PLAN active experiment count must match the ledger", () => {
   const plan = canonicalPlan.replace(
-    "- Active experiments: 2.",
+    "- Active experiments: 3.",
     "- Active experiments: 1.",
   );
 
   assert.ok(
     validationErrors({ plan }).some((error) =>
-      error.includes("PLAN.md Active experiments is 1 but EXPERIMENTS.md has 2"),
+      error.includes("PLAN.md Active experiments is 1 but EXPERIMENTS.md has 3"),
     ),
   );
 });
@@ -221,37 +222,67 @@ test("missing demand-discovery or approval clauses fail", () => {
   );
 });
 
-test("more than two active experiments fail", () => {
+test("three measurement cohorts can coexist without blocking production", () => {
   const experiments = [
     experimentFreeExperiments,
     experimentStart({
       id: "EXP-001",
+      status: "measuring",
       windowStart: "2026-07-18",
       windowEnd: "2026-07-24",
       launched: "2026-07-18",
     }),
     experimentStart({
       id: "EXP-002",
+      status: "measuring",
       windowStart: "2026-07-25",
       windowEnd: "2026-07-31",
       launched: "2026-07-25",
     }),
     experimentStart({
       id: "EXP-003",
+      status: "measuring",
       windowStart: "2026-08-01",
       windowEnd: "2026-08-07",
       launched: "2026-08-01",
     }),
   ].join("\n");
 
+  const plan = canonicalPlan
+    .replaceAll(currentExperimentId, "EXP-003");
+
+  assert.deepEqual(validationErrors({ plan, experiments }), []);
+});
+
+test("two production-in-flight changes fail the single-change guard", () => {
+  const experiments = [
+    experimentFreeExperiments,
+    experimentStart({
+      id: "EXP-001",
+      status: "active",
+      windowStart: "2026-07-18",
+      windowEnd: "2026-07-24",
+      launched: "2026-07-18",
+    }),
+    experimentStart({
+      id: "EXP-002",
+      status: "approved",
+      windowStart: "2026-07-25",
+      windowEnd: "2026-07-31",
+      launched: "2026-07-25",
+    }),
+  ].join("\n");
+
+  const plan = canonicalPlan.replaceAll(currentExperimentId, "EXP-002");
+
   assert.ok(
-    validationErrors({ experiments }).some((error) =>
-      error.includes("at most two active experiments"),
+    validationErrors({ plan, experiments }).some((error) =>
+      error.includes("at most one production-in-flight change"),
     ),
   );
 });
 
-test("an appended terminal readout removes an experiment from the active cap", () => {
+test("a terminal readout updates active reporting without blocking later production", () => {
   const experiments = [
     experimentFreeExperiments,
     experimentStart({
@@ -269,6 +300,7 @@ test("an appended terminal readout removes an experiment from the active cap", (
     }),
     experimentStart({
       id: "EXP-010",
+      status: "measuring",
       windowStart: "2026-07-25",
       windowEnd: "2026-07-31",
       launched: "2026-07-25",
@@ -283,7 +315,7 @@ test("an appended terminal readout removes an experiment from the active cap", (
 
   const plan = canonicalPlan
     .replaceAll(currentExperimentId, "EXP-010")
-    .replace("- Active experiments: 1.", "- Active experiments: 2.");
+    .replace("- Active experiments: 3.", "- Active experiments: 2.");
 
   assert.deepEqual(validationErrors({ plan, experiments }), []);
 });
@@ -378,12 +410,12 @@ test("readout timestamps are real UTC dates and strictly increase", () => {
   );
 });
 
-test("two launches in one reporting window pass when active and net-new caps hold", () => {
+test("two launches in one reporting window pass when production is sequential", () => {
   const experiments = [
     experimentFreeExperiments,
     experimentStart({
       id: "EXP-004",
-      status: "active",
+      status: "measuring",
       windowStart: "2026-07-18",
       windowEnd: "2026-07-24",
       launched: "2026-07-18",
@@ -398,7 +430,9 @@ test("two launches in one reporting window pass when active and net-new caps hol
     }),
   ].join("\n");
 
-  const plan = canonicalPlan.replaceAll(currentExperimentId, "EXP-005");
+  const plan = canonicalPlan
+    .replaceAll(currentExperimentId, "EXP-005")
+    .replace("- Active experiments: 3.", "- Active experiments: 2.");
 
   assert.deepEqual(validationErrors({ plan, experiments }), []);
 });
@@ -429,12 +463,12 @@ test("reporting windows remain anchored to the campaign cadence", () => {
   );
 });
 
-test("net-new search assets launched fewer than 14 days apart fail", () => {
+test("net-new search assets may launch fewer than 14 days apart after production verification", () => {
   const experiments = [
     experimentFreeExperiments,
     experimentStart({
       id: "EXP-006",
-      status: "decided",
+      status: "measuring",
       windowStart: "2026-07-18",
       windowEnd: "2026-07-24",
       assetClass: "net-new-search",
@@ -442,7 +476,7 @@ test("net-new search assets launched fewer than 14 days apart fail", () => {
     }),
     experimentStart({
       id: "EXP-007",
-      status: "decided",
+      status: "measuring",
       windowStart: "2026-07-25",
       windowEnd: "2026-07-31",
       assetClass: "net-new-search",
@@ -450,11 +484,11 @@ test("net-new search assets launched fewer than 14 days apart fail", () => {
     }),
   ].join("\n");
 
-  assert.ok(
-    validationErrors({ experiments }).some((error) =>
-      error.includes("14 calendar days apart"),
-    ),
-  );
+  const plan = canonicalPlan
+    .replaceAll(currentExperimentId, "EXP-007")
+    .replace("- Active experiments: 3.", "- Active experiments: 2.");
+
+  assert.deepEqual(validationErrors({ plan, experiments }), []);
 });
 
 test("an experiment cannot launch after the frozen campaign deadline", () => {

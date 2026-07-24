@@ -331,7 +331,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                     Side-by-side
                   </h2>
                   <p className="mt-3 text-sm leading-relaxed text-[var(--o-text-muted)]">
-                    Quantified dimensions. Where {article.comparisonTable.competitorName} leads, we say so.
+                    Practical dimensions. Where {article.comparisonTable.competitorName} leads, we say so.
                   </p>
                   <div className="mt-6 overflow-x-auto rounded-xl border border-[var(--o-border)]">
                     <table className="w-full border-collapse text-sm">
