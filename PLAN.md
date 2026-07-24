@@ -212,10 +212,12 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-24-llm-wiki-category-refresh`, live and production-verified.
+  `EXP-2026-07-24-mcp-shared-memory-exposure`, locally verified, independently
+  reviewed, and approved for publication; this is the only website change in
+  preparation.
 - Website-affecting technical correction:
-  `TECH-2026-07-24-localized-learn-breadcrumb`, production-verified. There is
-  no website change currently in preparation.
+  `TECH-2026-07-24-localized-learn-breadcrumb`, production-verified and no
+  longer consuming the preparation slot.
 - The user approved Git push, merge, and production deploy for this LLM-wiki
   refresh at `2026-07-24T20:16:19Z`. Reddit or other external publication, OSS
   submission, paid acquisition, request indexing, GSC validation, and metric
@@ -225,7 +227,7 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `2026-07-24T20:47:07Z`. That approval did not include indexing, GSC
   validation, non-website publication, OSS submission, paid acquisition, or
   metric changes.
-- Active experiments: 5.
+- Active experiments: 6.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -391,20 +393,26 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-24-llm-wiki-category-refresh` is live and production-verified.
-The existing English `/learn/distilled-wiki-pages-ai-memory` route has 2 GSC
-impressions, 0 clicks, and average position 3.5 in the authenticated
-`2026-06-26..2026-07-23` range. The separate visible query `llm wiki 2.0` has
-1 impression, 0 clicks, and average position 13.0; it is not joined to the
-page row. Same-range Vercel reports 4 visitors and 4 pageviews for the target
-route, without a source-to-page join.
+`EXP-2026-07-24-mcp-shared-memory-exposure` is locally verified, independently
+reviewed, and approved for publication. It adds one contextual related-article
+link from the existing English
+`/learn/mcp-memory-server` integration hub to the existing indexed
+`/learn/cursor-claude-code-shared-memory` workflow. It changes neither page's
+copy, metadata, URL, canonical, schema, sitemap entry, or locale availability.
 
-The bounded refresh makes the validated `LLM wiki` category, the real
-`/capture` to `/distill` to `/pages` workflow, the source-backed maintenance
-model, and the boundary from code or repository search explicit. It creates
-no new URL, Mandarin translation, schema type, `FAQPage`, or external
-distribution. The English Claude Code memory, zh-TW Obsidian, English AI work
-memory versus knowledge-base, and English Learn-hub changes remain
+The authenticated `2026-06-26..2026-07-23` GSC page table reports 0 clicks,
+8 impressions, and average position 20.8 for the target, and 0 clicks,
+2 impressions, and average position 5.5 for the source. Same-range Vercel
+reports 291 visitors and 293 pageviews for the source; the target is absent
+from the returned top-page export, so no target zero is inferred. Official
+Google Trends records `memory MCP` and `MCP memory server` as a validated
+high-intent integration lane in request-relative 0–100 indices, while Reddit
+and OSS evidence independently support cross-session and cross-client memory.
+These sources remain separate and do not establish source-to-target sessions
+or causality.
+
+The English Claude Code memory, zh-TW Obsidian, English AI work memory versus
+knowledge-base, English Learn-hub, and English LLM-wiki changes remain
 production-verified measurement cohorts; they do not consume the production
 slot.
 
@@ -490,13 +498,13 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-Run the Learn-hub 24-hour readout after `2026-07-25T19:18:03Z` and the
-LLM-wiki refresh 24-hour readout after `2026-07-25T20:19:21Z`. Keep the
-earlier cohorts on schedule. The production preparation slot is open; continue
-the read-only demand and coverage-gap audit, but do not rewrite the three
-recently refreshed weekly candidates without fresh query or independently
-corroborated demand evidence. No indexing or non-website publication is
-authorized.
+Publish and production-verify
+`EXP-2026-07-24-mcp-shared-memory-exposure` under the user's explicit website
+approval. Run the Learn-hub 24-hour readout after `2026-07-25T19:18:03Z` and
+the LLM-wiki refresh 24-hour readout after `2026-07-25T20:19:21Z`; keep the
+earlier cohorts on schedule. Do not rewrite the three recently refreshed
+weekly candidates without fresh query or independently corroborated demand
+evidence. No indexing or non-website publication is authorized.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.

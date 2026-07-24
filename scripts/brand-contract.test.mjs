@@ -561,6 +561,20 @@ test("Cursor and Claude Code search page answers shared-memory setup explicitly"
   );
 });
 
+test("MCP memory article exposes the Cursor and Claude Code shared-memory workflow", async () => {
+  const articles = await readRepo("src/app/learn/articles.ts");
+  const marker = 'slug: "mcp-memory-server"';
+  const start = articles.indexOf(marker);
+  const end = articles.indexOf('\n  {\n    slug: "', start + marker.length);
+
+  assert.notEqual(start, -1);
+  assert.notEqual(end, -1);
+  assert.match(
+    articles.slice(start, end),
+    /relatedSlugs:\s*\[[^\]]*"cursor-claude-code-shared-memory"[^\]]*\]/,
+  );
+});
+
 test("security docs align with the current Wenlan site policy", async () => {
   const { version } = await currentWenlanRelease();
   const docs = await readRepo("src/app/docs/docs.ts");
