@@ -4,7 +4,7 @@
 
 **Prepared:** `2026-07-24T21:31:52Z`
 
-**Status:** active local preparation; publication approved; not yet published
+**Status:** live; production-verified; measuring
 
 ## Decision
 
@@ -175,3 +175,24 @@ merge, and production deployment in the current Codex task on `2026-07-24`.
 Reddit or other external publication, OSS submission, paid acquisition,
 request indexing, GSC validation, and metric-definition changes remain
 outside that approval.
+
+## Production publication and verification
+
+- PR #69 merged at `2026-07-24T23:07:44Z` as
+  `ee9694d40771a6477bf9b7c294f1ec45f7dd7c69`.
+- Vercel production completed at `2026-07-24T23:08:30Z`.
+- The deployed technical audit passed robots, 109 sitemap URLs, 14 key pages,
+  six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects,
+  six bridge-host redirects, and legacy-URL exclusions.
+- The deployed i18n smoke passed 19 expected direct-200 routes and five
+  expected hard-404 routes.
+- The live English route retained its exact canonical, `index, follow`,
+  Article and BreadcrumbList JSON-LD, `dateModified` `2026-07-24`, and four
+  maintained source links, with no `FAQPage`.
+- Desktop 1280×720 and mobile 393×852 production renders had no framework
+  overlay, console warning, console error, or document, H1, or command-block
+  overflow. Mobile document and command widths were `387/387` and `337/337`.
+- Production render evidence:
+  `/tmp/wenlan-seo/visual-qa/2026-07-24-stale-ai-memory-production/`.
+- No SEO-success judgment is made at production completion. The 24-hour
+  technical/evidence readout is due after `2026-07-25T23:08:30Z`.
