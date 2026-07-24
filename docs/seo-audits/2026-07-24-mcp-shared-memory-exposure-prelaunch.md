@@ -4,8 +4,7 @@
 
 **Prepared:** `2026-07-24T20:57:32Z`
 
-**Status:** locally verified, independently reviewed, and approved for
-publication; not yet published
+**Status:** live and production-verified
 
 ## Decision
 
@@ -149,3 +148,21 @@ bounded website experiment in the current Codex task.
 
 Indexing requests, GSC validation, external posts, OSS submission, paid
 acquisition, and metric-definition changes remain outside that approval.
+
+## Production verification
+
+- PR #67 merged at `2026-07-24T21:12:18Z` as
+  `6de693d7069db65455712022efbad0520830746d`.
+- Vercel production completed at `2026-07-24T21:13:05Z`.
+- `pnpm seo:technical:deployed` passed robots, 109 sitemap URLs, 14 key pages,
+  six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects,
+  six bridge-host redirects, and old-URL exclusions.
+- Deployed i18n smoke passed 19 expected HTTP 200 routes and five expected
+  HTTP 404 routes.
+- The live source returned HTTP 200 with exactly one target link; clicking the
+  rendered link navigated to the live target.
+- Source and target retained exact self-canonicals, `index, follow`, no
+  `FAQPage`, no document overflow, and no console warning or error in the
+  1280×720 production render.
+- No SEO-success or causality conclusion is drawn from this technical
+  publication observation.

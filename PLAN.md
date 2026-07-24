@@ -208,13 +208,15 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - PR #65 merged at `2026-07-24T20:47:55Z` as
   `7f54c64a46d48e1d5f0f4d619bdd5a61aaba75dd`. Vercel production completed at
   `2026-07-24T20:48:42Z`.
+- PR #67 merged at `2026-07-24T21:12:18Z` as
+  `6de693d7069db65455712022efbad0520830746d`. Vercel production completed at
+  `2026-07-24T21:13:05Z`.
 - Goal deadline: 2026-08-18.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-24-mcp-shared-memory-exposure`, locally verified, independently
-  reviewed, and approved for publication; this is the only website change in
-  preparation.
+  `EXP-2026-07-24-mcp-shared-memory-exposure`, live and
+  production-verified; there is no website change currently in preparation.
 - Website-affecting technical correction:
   `TECH-2026-07-24-localized-learn-breadcrumb`, production-verified and no
   longer consuming the preparation slot.
@@ -238,15 +240,15 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Last production observation: `2026-07-24T20:51:29Z`; deployed robots, 109
-  sitemap URLs, 14 key pages, noindex headers, structured-data policy, 25
-  redirects, six bridge-host redirects, and legacy-URL exclusions passed.
-  Nineteen expected locale routes returned HTTP 200 and five unsupported
-  locale routes returned HTTP 404. Live zh-TW and zh-CN LLM-wiki articles now
-  emit `https://wenlan.app/zh-TW/learn` and
-  `https://wenlan.app/zh-CN/learn` as BreadcrumbList item 2 while retaining
-  exact localized canonicals, H1s, and language tags. Their 393px renders had
-  no document overflow, framework overlay, console warning, or console error.
+- Last production observation: `2026-07-24T21:13:05Z`; deployed robots, 109
+  sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide
+  `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL
+  exclusions passed. Nineteen expected locale routes returned HTTP 200 and
+  five unsupported locale routes returned HTTP 404. The live MCP source
+  contains exactly one link to the shared Cursor and Claude Code target; both
+  routes return HTTP 200 and retain exact self-canonicals and `index, follow`.
+  A 1280×720 rendered source exposed and navigated the link to the target;
+  both pages had no document overflow, console warning, or console error.
 - Google Trends demand-discovery gate: resolved for the current decision at
   `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
   Seventeen timeline comparisons and nine related-query exports cover
@@ -393,9 +395,8 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-24-mcp-shared-memory-exposure` is locally verified, independently
-reviewed, and approved for publication. It adds one contextual related-article
-link from the existing English
+`EXP-2026-07-24-mcp-shared-memory-exposure` is live and production-verified.
+It adds one contextual related-article link from the existing English
 `/learn/mcp-memory-server` integration hub to the existing indexed
 `/learn/cursor-claude-code-shared-memory` workflow. It changes neither page's
 copy, metadata, URL, canonical, schema, sitemap entry, or locale availability.
@@ -498,13 +499,13 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-Publish and production-verify
-`EXP-2026-07-24-mcp-shared-memory-exposure` under the user's explicit website
-approval. Run the Learn-hub 24-hour readout after `2026-07-25T19:18:03Z` and
-the LLM-wiki refresh 24-hour readout after `2026-07-25T20:19:21Z`; keep the
-earlier cohorts on schedule. Do not rewrite the three recently refreshed
-weekly candidates without fresh query or independently corroborated demand
-evidence. No indexing or non-website publication is authorized.
+Run the Learn-hub 24-hour readout after `2026-07-25T19:18:03Z`, the LLM-wiki
+refresh 24-hour readout after `2026-07-25T20:19:21Z`, and the MCP shared-memory
+exposure 24-hour technical readout after `2026-07-25T21:13:05Z`; keep the
+earlier cohorts on schedule. The production preparation slot is open for the
+next evidence-backed website asset. Do not rewrite the three recently
+refreshed weekly candidates without fresh query or independently corroborated
+demand evidence. No indexing or non-website publication is authorized.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.
