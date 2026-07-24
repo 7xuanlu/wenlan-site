@@ -1241,3 +1241,48 @@ increase for that experiment.
   submission, paid acquisition, or metric-definition change
 - Next step: publish the reviewed branch and verify the resulting Vercel
   production deployment before marking the change production-verified
+
+### 2026-07-24T21:13:05Z — MCP shared-memory exposure production verified
+
+- Record type: campaign-observation
+- Current change: `EXP-2026-07-24-mcp-shared-memory-exposure`
+- Status: live; measuring
+- Production-in-flight changes: 0
+- Publication: PR #67 merged at `2026-07-24T21:12:18Z` as
+  `6de693d7069db65455712022efbad0520830746d`; Vercel production completed at
+  `2026-07-24T21:13:05Z`
+- Deployed technical verification: robots, 109 sitemap URLs, 14 key pages, six
+  utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects, six
+  bridge-host redirects, and old-URL exclusions passed
+- Locale-route verification: 19 expected HTTP 200 routes and five expected
+  HTTP 404 routes passed against `https://wenlan.app`
+- Live source evidence: `/learn/mcp-memory-server` returned HTTP 200, retained
+  its exact self-canonical and `index, follow`, and contained exactly one
+  rendered link labeled `How to Share Memory Between Cursor and Claude Code`
+- Live target evidence:
+  `/learn/cursor-claude-code-shared-memory` returned HTTP 200 with the expected
+  title and H1, exact self-canonical, `index, follow`, and no `FAQPage`
+- Render verification: at 1280×720 the source link was visible and a real
+  click navigated to the target; both pages had document width equal to client
+  width and no console warning or console error
+- Metric interpretation: no 24-hour SEO-success judgment, source-to-target
+  session inference, causality claim, or new GSC/Vercel/Umami/GitHub metric
+- Unperformed gated actions: no indexing request, GSC validation, external
+  post, OSS submission, paid acquisition, or metric-definition change
+- Next step: run the predeclared 24-hour technical/evidence readout after
+  `2026-07-25T21:13:05Z`; waiting for that readout does not close the
+  production preparation slot
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-mcp-shared-memory-exposure at 2026-07-24T21:17:37Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-mcp-shared-memory-exposure
+- Observed at: 2026-07-24T21:17:37Z
+- Readout: correction
+- Status: live
+- Evidence: PR #67 merged at `2026-07-24T21:12:18Z` as `6de693d7069db65455712022efbad0520830746d`; Vercel production completed at `2026-07-24T21:13:05Z`. The deployed technical audit passed robots, 109 sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL exclusions. Nineteen expected locale routes returned HTTP 200 and five unsupported locale routes returned HTTP 404. The live source returned HTTP 200 with its exact self-canonical, `index, follow`, and exactly one visible shared-memory target link. A rendered click navigated to the HTTP 200 target with the expected title and H1, exact self-canonical, `index, follow`, no `FAQPage`, no document overflow, and no console warning or error. No search-performance result, source-to-target session, or causal effect is inferred at production completion.
+- Result: pending
+- Decision: wait
+- Next step: Run the 24-hour technical/evidence readout after `2026-07-25T21:13:05Z`; this production-verified measurement cohort does not block another eligible website change.
+<!-- EXPERIMENT-RECORD:END -->
