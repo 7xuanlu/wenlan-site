@@ -203,10 +203,9 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-24-ai-work-memory-knowledge-base-refresh`, live and
-  production-verified; no website change is currently in `approved` or
-  `active` preparation.
-- Active experiments: 3.
+  `EXP-2026-07-24-learn-hub-exposure-refresh`, locally implemented and
+  verified; approved state retained and not published.
+- Active experiments: 4.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -366,16 +365,19 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-24-ai-work-memory-knowledge-base-refresh` is live and
-production-verified. It refreshes the existing indexed English route with a
-pre-change baseline of 9 GSC impressions, 0 clicks, and average position 8.0.
-The bounded change sharpens the title, meta description, first answer, role
-table, source-backed workflow, and internal links without creating a new URL.
-The production slot is free.
+`EXP-2026-07-24-learn-hub-exposure-refresh` is locally implemented and
+verified, and is the only production-in-flight website change. The existing English
+`/learn` hub has 71 GSC impressions, 0 clicks, and average position 15.6 in the
+authenticated `2026-06-26..2026-07-23` range, plus 98 Vercel visitors and 100
+pageviews in the separate same-range page aggregate. The bounded change
+sharpens the title, first-screen answer, and existing search-path links around
+the validated Claude Code memory, Basic Memory, MCP memory, and LLM-wiki jobs.
+It creates no new URL and changes no Mandarin route.
 
-The earlier English Claude Code memory refresh and zh-TW Obsidian localization
-remain measurement cohorts. Their readouts continue independently and do not
-consume the production slot.
+The earlier English Claude Code memory refresh, zh-TW Obsidian localization,
+and English AI work memory versus knowledge-base refresh remain measurement
+cohorts. Their readouts continue independently and do not consume the
+production slot.
 
 ### Immediate localized launch
 
@@ -432,11 +434,13 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The English AI work memory versus knowledge base refresh is live and no longer
-consumes the production slot. Keep its 24-hour readout after
-`2026-07-25T18:54:22Z` and the earlier cohorts on schedule, while using the
-latest weekly evidence to nominate the next non-overlapping existing-page or
-coverage-gap action. No external publication or indexing action is authorized.
+The English `/learn` hub refresh is locally complete and verified against the
+predeclared baseline and exhaustive success/failure/inconclusive thresholds in
+`EXPERIMENTS.md` and
+`docs/seo-audits/2026-07-24-learn-hub-prelaunch.md`. The next decision is
+explicit approval for Git push, merge, and production deploy. Keep the existing
+cohort readouts on schedule; no external publication or indexing action is
+authorized.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.

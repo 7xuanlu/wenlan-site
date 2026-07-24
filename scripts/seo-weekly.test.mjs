@@ -4460,21 +4460,30 @@ test("Superlocal comparison scopes missing benchmark evidence to checked sources
   );
 });
 
-test("Learn index SERP copy leads with Wenlan and AI work memory guides", async () => {
+test("Learn index SERP copy leads with the source-backed LLM wiki and AI memory category", async () => {
   const learnPage = await readRepo("src/app/learn/page.tsx");
   const learnOgImage = await readRepo("src/app/learn/opengraph-image.tsx");
 
   assert.match(
     learnPage,
-    /title: "AI Memory Guides for Claude Code, Codex, ChatGPT \| Wenlan"/,
+    /title: "LLM Wiki & AI Memory Guides for Claude Code, MCP \| Wenlan"/,
   );
   assert.match(
     learnPage,
-    /Build persistent AI work memory across Claude Code, Codex, ChatGPT, and Cursor with setup guides, MCP workflows, source-backed wiki patterns, and comparisons\./,
+    /Find source-backed LLM wiki and AI memory guides for Claude Code, MCP servers, Cursor, local workflows, and honest comparisons such as Basic Memory\./,
   );
-  assert.match(learnPage, />\s*AI memory guides for work that carries forward\.\s*</);
+  assert.match(learnPage, />\s*LLM wiki and AI memory guides for work that carries forward\.\s*</);
+  assert.match(learnPage, />\s*Quick answer\s*</);
+  assert.match(
+    learnPage,
+    /Use native memory for tool-specific instructions\.\s*Add Wenlan\s*when decisions, sources, and handoffs need to stay local and\s*move across AI tools\./,
+  );
+  assert.match(learnPage, /Claude Code memory/);
   assert.match(learnPage, /Basic Memory comparison/);
-  assert.match(learnPage, /Claude Code session handoff/);
+  assert.match(learnPage, /MCP memory server/);
+  assert.match(learnPage, /LLM wiki for AI agents/);
+  assert.match(learnPage, /AI work memory vs knowledge base/);
+  assert.match(learnPage, /Obsidian AI memory/);
   assert.doesNotMatch(learnPage, /Before you add memory to AI work\./);
   assert.match(learnOgImage, /title="Wenlan LLM wiki guides\."/);
   assert.doesNotMatch(learnOgImage, /Before you add memory to AI work\./);

@@ -17,8 +17,18 @@ const experimentFreeExperiments = canonicalExperiments.replace(
   /\n?<!-- EXPERIMENT-RECORD:START -->[\s\S]*?<!-- EXPERIMENT-RECORD:END -->\n?/g,
   "\n",
 );
-const currentExperimentId =
-  "EXP-2026-07-24-ai-work-memory-knowledge-base-refresh";
+const currentExperimentId = canonicalPlan.match(
+  /\n### Current experiment\n\n`(EXP-[A-Za-z0-9][A-Za-z0-9-]*)`/,
+)?.[1];
+const canonicalActiveExperimentCount = Number(
+  canonicalPlan.match(/^- Active experiments: (\d+)\.$/m)?.[1],
+);
+
+assert.ok(currentExperimentId, "PLAN.md must expose the current experiment ID");
+assert.ok(
+  Number.isInteger(canonicalActiveExperimentCount),
+  "PLAN.md must expose the active experiment count",
+);
 
 function removeCurrentExperiment(experiments = canonicalExperiments) {
   return experiments.replace(
@@ -41,6 +51,15 @@ function validationErrors({
   experiments = canonicalExperiments,
 } = {}) {
   return validateGoalControlPlane({ plan, experiments });
+}
+
+function fixturePlan(currentId, activeCount) {
+  return canonicalPlan
+    .replaceAll(currentExperimentId, currentId)
+    .replace(
+      /^- Active experiments: \d+\.$/m,
+      `- Active experiments: ${activeCount}.`,
+    );
 }
 
 function experimentStart({
@@ -126,13 +145,15 @@ test("PLAN current experiment must exist as an active ledger start", () => {
 
 test("PLAN active experiment count must match the ledger", () => {
   const plan = canonicalPlan.replace(
-    "- Active experiments: 3.",
+    `- Active experiments: ${canonicalActiveExperimentCount}.`,
     "- Active experiments: 1.",
   );
 
   assert.ok(
     validationErrors({ plan }).some((error) =>
-      error.includes("PLAN.md Active experiments is 1 but EXPERIMENTS.md has 3"),
+      error.includes(
+        `PLAN.md Active experiments is 1 but EXPERIMENTS.md has ${canonicalActiveExperimentCount}`,
+      ),
     ),
   );
 });
@@ -248,8 +269,7 @@ test("three measurement cohorts can coexist without blocking production", () => 
     }),
   ].join("\n");
 
-  const plan = canonicalPlan
-    .replaceAll(currentExperimentId, "EXP-003");
+  const plan = fixturePlan("EXP-003", 3);
 
   assert.deepEqual(validationErrors({ plan, experiments }), []);
 });
@@ -273,7 +293,7 @@ test("two production-in-flight changes fail the single-change guard", () => {
     }),
   ].join("\n");
 
-  const plan = canonicalPlan.replaceAll(currentExperimentId, "EXP-002");
+  const plan = fixturePlan("EXP-002", 2);
 
   assert.ok(
     validationErrors({ plan, experiments }).some((error) =>
@@ -313,9 +333,7 @@ test("a terminal readout updates active reporting without blocking later product
     }),
   ].join("\n");
 
-  const plan = canonicalPlan
-    .replaceAll(currentExperimentId, "EXP-010")
-    .replace("- Active experiments: 3.", "- Active experiments: 2.");
+  const plan = fixturePlan("EXP-010", 2);
 
   assert.deepEqual(validationErrors({ plan, experiments }), []);
 });
@@ -430,9 +448,7 @@ test("two launches in one reporting window pass when production is sequential", 
     }),
   ].join("\n");
 
-  const plan = canonicalPlan
-    .replaceAll(currentExperimentId, "EXP-005")
-    .replace("- Active experiments: 3.", "- Active experiments: 2.");
+  const plan = fixturePlan("EXP-005", 2);
 
   assert.deepEqual(validationErrors({ plan, experiments }), []);
 });
@@ -484,9 +500,7 @@ test("net-new search assets may launch fewer than 14 days apart after production
     }),
   ].join("\n");
 
-  const plan = canonicalPlan
-    .replaceAll(currentExperimentId, "EXP-007")
-    .replace("- Active experiments: 3.", "- Active experiments: 2.");
+  const plan = fixturePlan("EXP-007", 2);
 
   assert.deepEqual(validationErrors({ plan, experiments }), []);
 });

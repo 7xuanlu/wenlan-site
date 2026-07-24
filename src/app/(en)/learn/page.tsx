@@ -12,41 +12,41 @@ import { ArticleHalo, MemoryIndex } from "./article-visuals";
 import { alternateUrls } from "@/i18n/routing";
 
 export const metadata: Metadata = {
-  title: "AI Memory Guides for Claude Code, Codex, ChatGPT | Wenlan",
+  title: "LLM Wiki & AI Memory Guides for Claude Code, MCP | Wenlan",
   description:
-    "Build persistent AI work memory across Claude Code, Codex, ChatGPT, and Cursor with setup guides, MCP workflows, source-backed wiki patterns, and comparisons.",
+    "Find source-backed LLM wiki and AI memory guides for Claude Code, MCP servers, Cursor, local workflows, and honest comparisons such as Basic Memory.",
   alternates: {
     canonical: "/learn",
     languages: alternateUrls("/learn"),
   },
   openGraph: {
-    title: "AI Memory Guides for Claude Code, Codex, ChatGPT | Wenlan",
+    title: "LLM Wiki & AI Memory Guides for Claude Code, MCP | Wenlan",
     description:
-      "Build persistent AI work memory across Claude Code, Codex, ChatGPT, and Cursor with setup guides, MCP workflows, source-backed wiki patterns, and comparisons.",
+      "Find source-backed LLM wiki and AI memory guides for Claude Code, MCP servers, Cursor, local workflows, and honest comparisons such as Basic Memory.",
     type: "website",
     url: `${SITE_URL}/learn`,
     siteName: "Wenlan",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Memory Guides for Claude Code, Codex, ChatGPT | Wenlan",
+    title: "LLM Wiki & AI Memory Guides for Claude Code, MCP | Wenlan",
     description:
-      "Build persistent AI work memory across Claude Code, Codex, ChatGPT, and Cursor with setup guides, MCP workflows, source-backed wiki patterns, and comparisons.",
+      "Find source-backed LLM wiki and AI memory guides for Claude Code, MCP servers, Cursor, local workflows, and honest comparisons such as Basic Memory.",
   },
 };
 
 const searchRoutes = [
   {
+    query: "Claude Code memory",
+    intent: "See what native CLAUDE.md and auto memory cover, then decide when shared local context helps.",
+    href: "/learn/claude-code-memory",
+    context: "workflows",
+  },
+  {
     query: "Basic Memory comparison",
     intent: "Compare Wenlan and Basic Memory on provenance, local retrieval, shared clients, and wiki pages.",
     href: "/learn/wenlan-vs-basic-memory",
     context: "comparisons",
-  },
-  {
-    query: "Claude Code session handoff",
-    intent: "Carry decisions, open work, and next steps from one coding session into the next.",
-    href: "/learn/claude-code-session-handoff",
-    context: "workflows",
   },
   {
     query: "MCP memory server",
@@ -55,16 +55,10 @@ const searchRoutes = [
     context: "concepts",
   },
   {
-    query: "Claude Code memory",
-    intent: "Understand CLAUDE.md, /memory, and when Wenlan adds shared local context.",
-    href: "/learn/claude-code-memory",
-    context: "workflows",
-  },
-  {
-    query: "ChatGPT MCP",
-    intent: "Connect ChatGPT to your Wenlan runtime through Streamable HTTP MCP Remote Access.",
-    href: "/docs/mcp-clients",
-    context: "setup",
+    query: "LLM wiki for AI agents",
+    intent: "Turn trusted sources and durable memories into maintained pages with inspectable support.",
+    href: "/learn/distilled-wiki-pages-ai-memory",
+    context: "concepts",
   },
   {
     query: "Cursor memory MCP",
@@ -73,15 +67,21 @@ const searchRoutes = [
     context: "workflows",
   },
   {
+    query: "AI work memory vs knowledge base",
+    intent: "Separate reusable decisions and handoffs from the source-backed pages they maintain.",
+    href: "/learn/ai-work-memory-vs-knowledge-base",
+    context: "comparisons",
+  },
+  {
+    query: "Obsidian AI memory",
+    intent: "Compare an Obsidian vault with a local memory layer shared by Claude Code and MCP clients.",
+    href: "/learn/wenlan-vs-obsidian-ai-memory",
+    context: "comparisons",
+  },
+  {
     query: "Local AI memory",
     intent: "Keep project context local, inspectable, and under your control.",
     href: "/learn/local-first-ai-memory",
-    context: "concepts",
-  },
-  {
-    query: "Wenlan memory",
-    intent: "Map the brand to the category: local AI work memory across tools.",
-    href: "/learn/ai-work-memory",
     context: "concepts",
   },
   {
@@ -123,7 +123,7 @@ export default function LearnPage() {
     "@id": "https://wenlan.app/learn#collection",
     name: "Wenlan Learn",
     description:
-      "Articles about AI work memory, MCP memory servers, local-first AI work context, setup guides, client workflows, trust, and Wenlan comparisons.",
+      "Source-backed LLM wiki and AI memory guides for Claude Code, MCP servers, Cursor, local workflows, and honest comparisons.",
     url: `${SITE_URL}/learn`,
     isPartOf: { "@id": "https://wenlan.app/#website" },
     publisher: { "@id": "https://wenlan.app/#organization" },
@@ -164,28 +164,39 @@ export default function LearnPage() {
               Learn
             </span>
           </nav>
-          <div className="mt-12 grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
-            <div>
+          <div className="mt-12 grid min-w-0 gap-12 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
+            <div className="min-w-0">
               <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
                 Learn
               </p>
-              <h1 className="warm-glow font-serif text-5xl leading-[1.05] font-medium tracking-tight sm:text-7xl">
-                AI memory guides for work that carries forward.
+              <h1 className="warm-glow break-words font-serif text-5xl leading-[1.05] font-medium tracking-tight sm:text-7xl">
+                LLM wiki and AI memory guides for work that carries forward.
               </h1>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">
-                Start with setup, persistent memory, or a named comparison.
-                Wenlan keeps durable context local and turns trusted captures
-                into source-backed wiki pages your AI tools can reuse.
+                Wenlan is a local, source-backed LLM wiki for AI work.
+                Use these guides to connect MCP clients, preserve durable
+                context, and turn trusted sources and captured lessons into
+                maintained pages.
               </p>
+              <div className="mt-8 max-w-2xl rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5">
+                <p className="font-mono text-[10px] tracking-[0.22em] text-[var(--o-warm)]/80 uppercase">
+                  Quick answer
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--o-text-secondary)]">
+                  Use native memory for tool-specific instructions. Add Wenlan
+                  when decisions, sources, and handoffs need to stay local and
+                  move across AI tools.
+                </p>
+              </div>
             </div>
             <MemoryIndex
               label="Learn topics"
               items={[
-                "AI work memory",
-                "LLM wiki for AI work",
-                "Setup guides",
-                "Client workflows",
-                "Named comparisons",
+                "Claude Code memory",
+                "LLM wiki for AI agents",
+                "MCP memory server",
+                "Basic Memory comparison",
+                "Cursor shared memory",
                 "Local-first trust",
               ]}
             />
@@ -200,9 +211,9 @@ export default function LearnPage() {
               Start here
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--o-text-secondary)]">
-              Search intent first. Start with the problem or phrase you would
-              type into Google, then move into setup, workflow, trust, and
-              comparison articles once the route is clear.
+              Choose the job first: understand a memory boundary, connect a
+              client, compare approaches, or inspect how source-backed pages
+              stay current.
             </p>
           </div>
 
