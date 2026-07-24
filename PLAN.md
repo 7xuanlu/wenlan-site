@@ -196,12 +196,16 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - PR #58 merged at `2026-07-23T15:18:29Z` as
   `7166bad1e3020bac60c9454780d2b732e17e4242`. Vercel production completed at
   `2026-07-23T15:19:18Z`.
+- PR #60 merged at `2026-07-24T18:53:32Z` as
+  `f8b8adc9dc0cbbcb40c74f8928676d142268f643`. Vercel production completed at
+  `2026-07-24T18:54:22Z`.
 - Goal deadline: 2026-08-18.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-24-ai-work-memory-knowledge-base-refresh`, approved for local
-  preparation and verification; locally verified and not published.
+  `EXP-2026-07-24-ai-work-memory-knowledge-base-refresh`, live and
+  production-verified; no website change is currently in `approved` or
+  `active` preparation.
 - Active experiments: 3.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
@@ -213,12 +217,12 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Last production observation: `2026-07-23T15:20:40Z`; deployed robots, 109
+- Last production observation: `2026-07-24T18:55:26Z`; deployed robots, 109
   sitemap URLs, 14 key pages, noindex headers, structured-data policy,
-  redirects, bridge-host redirects, and legacy-URL exclusions passed. The new
-  zh-TW Obsidian route returned HTTP 200 with its canonical, visible maintained
-  sources, and mobile-safe render; its unsupported zh-CN counterpart remained
-  a hard 404.
+  redirects, bridge-host redirects, and legacy-URL exclusions passed. The
+  refreshed English knowledge-base comparison returned HTTP 200 with its new
+  title and H1, exact canonical, `index, follow`, Article JSON-LD, maintained
+  source links, no `FAQPage`, and a mobile-safe render without console errors.
 - Google Trends demand-discovery gate: resolved for the current decision at
   `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
   Seventeen timeline comparisons and nine related-query exports cover
@@ -362,12 +366,12 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-24-ai-work-memory-knowledge-base-refresh` is the only
-production-in-flight change. It refreshes the existing indexed English route
-with 9 GSC impressions, 0 clicks, and average position 8.0. The bounded change
-sharpens the title, meta description, first answer, role table, source-backed
-workflow, and internal links without creating a new URL. Local tests, build,
-technical SEO, and desktop/mobile rendered QA pass.
+`EXP-2026-07-24-ai-work-memory-knowledge-base-refresh` is live and
+production-verified. It refreshes the existing indexed English route with a
+pre-change baseline of 9 GSC impressions, 0 clicks, and average position 8.0.
+The bounded change sharpens the title, meta description, first answer, role
+table, source-backed workflow, and internal links without creating a new URL.
+The production slot is free.
 
 The earlier English Claude Code memory refresh and zh-TW Obsidian localization
 remain measurement cohorts. Their readouts continue independently and do not
@@ -428,11 +432,11 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The English AI work memory versus knowledge base refresh is locally complete
-and verified. The next decision is explicit approval for Git push, merge, and
-production deploy. After production verification, append a `live` or
-`measuring` readout so this experiment no longer consumes the production slot.
-Existing cohort readouts continue on schedule and do not block later work.
+The English AI work memory versus knowledge base refresh is live and no longer
+consumes the production slot. Keep its 24-hour readout after
+`2026-07-25T18:54:22Z` and the earlier cohorts on schedule, while using the
+latest weekly evidence to nominate the next non-overlapping existing-page or
+coverage-gap action. No external publication or indexing action is authorized.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.
