@@ -876,3 +876,17 @@ increase for that experiment.
 - Next step: request explicit approval for Git push, merge, and production
   deploy; after production verification, mark the experiment `live` or
   `measuring` and free the production slot
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-ai-work-memory-knowledge-base-refresh at 2026-07-24T18:55:26Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-ai-work-memory-knowledge-base-refresh
+- Observed at: 2026-07-24T18:55:26Z
+- Readout: correction
+- Status: live
+- Evidence: PR #60 merged at `2026-07-24T18:53:32Z` as `f8b8adc9dc0cbbcb40c74f8928676d142268f643`; Vercel production completed at `2026-07-24T18:54:22Z`. The live route returned HTTP 200 with the refreshed title and H1, exact canonical, `index, follow`, Article JSON-LD, maintained source links, visible role-comparison copy, no `FAQPage`, no mobile document overflow, and no console warning or error. The deployed technical audit passed robots, 109 sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL exclusions. No search-performance result is inferred at production completion.
+- Result: pending
+- Decision: wait
+- Next step: Run the 24-hour technical/evidence readout after `2026-07-25T18:54:22Z`; this measurement cohort does not consume the production slot or block another eligible website change.
+<!-- EXPERIMENT-RECORD:END -->
