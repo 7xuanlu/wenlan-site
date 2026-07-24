@@ -970,3 +970,105 @@ increase for that experiment.
 - Decision: wait
 - Next step: Run the 24-hour technical/evidence readout after `2026-07-25T19:18:03Z`; this measurement cohort does not consume the production slot or block another eligible website change.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-24-llm-wiki-category-refresh
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-24-llm-wiki-category-refresh
+- Status: approved
+- Data window: 2026-07-18..2026-07-24
+- Asset class: refresh
+- Launched: 2026-07-24
+- Hypothesis: A clearer LLM-wiki-for-AI-agents title, concrete capture-to-page workflow, source-backed maintenance model, and explicit boundary from code or repository search on the existing indexed page will earn more qualified exposure or clicks for the validated LLM-wiki category without adding another URL.
+- Candidate evidence: The authenticated `2026-06-26..2026-07-23` GSC page table reports 2 impressions, 0 clicks, and average position 3.5 for `/learn/distilled-wiki-pages-ai-memory`; the separate visible query `llm wiki 2.0` reports 1 impression, 0 clicks, and average position 13.0 and is not joined to that page row. Signed official Google Trends Explore captures recorded `LLM wiki` moving `0.7 → 3.8` and `1.6 → 15.2` in separate request-relative Worldwide 0–100 series, with clean related queries around Karpathy, GitHub, Obsidian, Claude Code, Codex, `llm wiki skill`, and `llm wiki v2`; these indices are not search volume and are not compared across requests. The maintained Wenlan repository at `93451bf0ef58399e08400e3b4ac613942adcfec8` documents the Source/Memory/Page model and the real `/capture`, `/distill`, and page-opening workflow. The target page's last substantive category copy was published on 2026-07-04, leaving a clean existing-page refresh seam.
+- Baseline: GSC `sc-domain:wenlan.app` reported 7 property clicks and 310 property impressions; visible query rows reported 1 click and 75 impressions, leaving a 6-click and 235-impression visibility gap; the target page reported 0 clicks, 2 impressions, and average position 3.5; the separate visible query `llm wiki 2.0` reported 0 clicks, 1 impression, and average position 13.0. Vercel separately reported 1,402 visitors and 1,593 pageviews property-wide and 4 visitors and 4 pageviews for the target route; no source-to-page sessions are inferred. GitHub reported 47 total stars. Umami and Vercel custom CTA events remained unavailable or account-gated.
+- Change: Refresh only `/learn/distilled-wiki-pages-ai-memory` in English: title, metadata, first answer, concrete `/capture` → `/distill` → `/pages` workflow, source-backed maintenance explanation, boundary from code and repository search, maintained references, and visible FAQ copy. Create no new URL, Mandarin translation, schema type, `FAQPage` JSON-LD, CTA change, or external distribution.
+- Publish date: not-published
+- Index date: indexed-before-2026-07-24-date-unavailable
+- Minimum exposure: 10 GSC target-page impressions in the first 28 complete post-deploy days
+- Success criteria: After at least 10 GSC target-page impressions, the page earns at least 1 GSC click or keeps average position at 5.0 or better; report Vercel page visitors, GitHub outbound when available, and stars separately without a causal claim.
+- Failure criteria: After 28 complete post-deploy days and at least 10 GSC target-page impressions, the page has 0 clicks and average position is worse than 6.0. Fewer than 10 impressions is inconclusive; after minimum exposure, 0 clicks with average position from 5.1 through 6.0 is also inconclusive as no material outcome.
+- Stop criteria: Stop or hold if maintained Wenlan sources no longer support the workflow or boundary; a canonical, indexing, robots, noindex, structured-data, sitemap, locale, or rendered-layout regression appears; another controller edits the same route; or the refreshed page overlaps the source-backed-wiki trust-mechanics route instead of keeping a distinct category-and-workflow intent.
+- 24h readout: pending — verify live 200, title, description, canonical, indexability, Article and BreadcrumbList JSON-LD, maintained references, production render, and separate source-native observations without an SEO-success judgment
+- 7d readout: pending — report GSC latency, target-page clicks, impressions and position when available, Vercel page visitors, and stars separately
+- W2 readout: pending — apply the minimum-exposure guard and inspect the related source-backed wiki, knowledge-base, Obsidian, and MCP-memory routes for intent overlap
+- W4 readout: pending — evaluate the predeclared success, failure, or inconclusive condition without changing thresholds
+- W8 readout: pending — record a post-campaign follow-up only if it remains useful
+- Result: pending
+- Decision: wait
+- Next step: finish local content, focused RED-to-GREEN assertion, full SEO/i18n/lint/build/technical checks, independent review, and rendered verification; then request explicit push, merge, and production-deploy approval.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-07-24T19:58:47Z — LLM-wiki category refresh locally verified
+
+- Record type: campaign-observation
+- Current change: `EXP-2026-07-24-llm-wiki-category-refresh`
+- Production-in-flight changes: 1
+- Scope: English `/learn/distilled-wiki-pages-ai-memory` title, metadata,
+  first answer, `/capture` to `/distill` to `/pages` workflow, code/repository
+  search boundary, maintained references, and visible FAQ copy; original
+  `2026-06-24` publication date retained and `2026-07-24` modification date
+  recorded; no URL, Mandarin content, schema type, `FAQPage`, CTA, or external
+  distribution change
+- Focused verification: the category/workflow assertion failed before
+  implementation and passed after the bounded content change; a separate
+  mobile-readability assertion failed before the command hint was shortened
+  and passed after; the independent review's intent-collision assertions now
+  lock the LLM-wiki category page apart from the source-backed trust-mechanics
+  route
+- Full verification: `pnpm test:seo` 174/174; `pnpm test:i18n` 52/52;
+  `pnpm lint`; `pnpm seo:goal:check`; `pnpm build` with 209 static pages;
+  built technical SEO with 109 sitemap URLs, 14 checked HTML pages, and no
+  `FAQPage` in 113 built HTML files; built i18n smoke with 19 direct-200 and
+  5 hard-404 routes; current-production deployed technical SEO;
+  `git diff --check`
+- Final local HTML: title, description, exact canonical, reciprocal English,
+  zh-TW, and zh-CN hreflang, `index, follow`, Article and BreadcrumbList
+  JSON-LD, `datePublished: 2026-06-24`, `dateModified: 2026-07-24`, shortened
+  workflow command, and `FAQPage` absence passed; SHA-256
+  `c1daab8e4ebd4e2cde236e8936babc191a3e1a591f042d8cd3b8e20afea4edd7`
+- Render evidence: desktop 1440×1000 and mobile 393×852 confirmed the expected
+  H1, first-screen answer, workflow copy, no document or H1 overflow, no
+  workflow-code horizontal scroll after the correction, no framework overlay,
+  and no browser warning or error. Screenshots are under
+  `/tmp/wenlan-seo/visual-qa/2026-07-24-llm-wiki-category/`.
+- Independent review: initial `fix-first` findings for stale temporary HTML,
+  obsolete raw-Trends wording, and missing intent-separation assertions were
+  corrected; re-review verdict is `SHIP` with no remaining blocker.
+- Publish date: still `not-published`
+- External actions: none; no push, merge, deployment, indexing request,
+  validation, external post, OSS submission, or paid acquisition
+- Next step: request explicit approval for Git push, merge, and production
+  deploy
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-23-zhtw-obsidian-localization at 2026-07-24T20:10:06Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-23-zhtw-obsidian-localization
+- Observed at: 2026-07-24T20:10:06Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The latest authenticated weekly range is `2026-06-26..2026-07-23`: GSC property totals are 7 clicks and 310 impressions; visible-query totals are 1 click and 75 impressions; the query visibility gap is 6 clicks and 235 impressions. The zh-TW target is absent from the GSC page table, so no zero is inferred; the range ends on the launch date and provides neither a confirmed index date nor a complete post-launch search cohort. The stale indexing snapshot was last updated on `2026-07-09`: 77 indexed URLs, 40 not indexed, 9 pages with redirect, 1 excluded by `noindex`, 1 alternate page with proper canonical, 27 discovered but not indexed, and 2 crawled but not indexed. Search Console last read the sitemap on `2026-07-03` with 101 discovered URLs, while the live sitemap has 109 URLs, so the target's indexing status remains unconfirmed. Vercel separately reports 1,402 visitors and 1,593 pageviews property-wide, 255 direct visitors and 319 direct pageviews, and a 1,149-visitor qualified-source aggregate that is not deduplicated. The target has 1 visitor and 2 pageviews in the same range, but that range includes only part of its launch day and is not a complete post-deploy 24-hour cohort. No source-to-page join or causal inference is made. GitHub REST reports 47 total stars. Vercel custom events remain account-gated and no authenticated Umami observation is available, so GitHub outbound and CTA are not reported. The live target returned HTTP 200 with its exact canonical, `index, follow`, `en-US`, `zh-TW`, and `x-default` alternates, Article and BreadcrumbList JSON-LD, visible maintained source links, and no `FAQPage`; the sitemap includes the zh-TW URL and excludes the unsupported zh-CN counterpart, which returned HTTP 404. The deployed technical audit passed 109 sitemap URLs, 14 key pages, noindex policy, redirects, bridge hosts, and legacy exclusions. Desktop 1440×1000 and mobile 393×852 renders showed the expected title and H1, seven maintained-source links, no document or H1 overflow, no framework overlay, and no console warning or error. Render evidence is under `/tmp/wenlan-seo/visual-qa/2026-07-24-zhtw-obsidian-24h/`.
+- Result: pending
+- Decision: wait
+- Next step: Run the 7-day readout after `2026-07-30T15:19:18Z`; apply no success or failure judgment until the target has a confirmed indexing context and reaches the predeclared 5-impression minimum exposure.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-07-24T20:16:19Z — LLM-wiki website publication approved
+
+- Record type: campaign-approval
+- Approval: the user explicitly approved Git push, merge, and production
+  deploy for `EXP-2026-07-24-llm-wiki-category-refresh`
+- Approved external actions: push, merge, and deploy only for the current
+  website experiment and its production evidence record
+- Still approval-gated: Reddit or other external publication, OSS submission,
+  paid acquisition, request indexing, GSC validation, and metric-definition
+  changes
+- Verification at approval: `pnpm test:seo` passed 174/174 with explicit
+  Wenlan and wenlan-app checkout roots; `pnpm test:i18n` passed 52/52;
+  `pnpm lint`, `pnpm seo:goal:check`, `pnpm build`,
+  `pnpm seo:technical:built`, and `git diff --check` passed
+- Next step: commit the reviewed scope, push the current branch, merge its PR,
+  wait for Vercel production, and verify the live LLM-wiki page

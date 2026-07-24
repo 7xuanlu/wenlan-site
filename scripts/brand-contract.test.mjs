@@ -326,27 +326,58 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   const seoMeasurement = await readRepo("docs/seo-measurement.md");
   const llms = await readRepo("public/llms.txt");
   const llmsFull = await readRepo("src/app/llms-full.txt/route.ts");
+  const articleStart = hub.indexOf('slug: "distilled-wiki-pages-ai-memory"');
+  const articleEnd = hub.indexOf("\n  {\n    slug:", articleStart);
+  const article = hub.slice(articleStart, articleEnd);
+  const supportStart = support.indexOf('slug: "source-backed-wiki-pages-ai-work"');
+  const supportEnd = support.indexOf("\n  {\n    slug:", supportStart);
+  const supportArticle = support.slice(supportStart, supportEnd);
 
+  assert.notEqual(articleStart, -1);
+  assert.notEqual(supportStart, -1);
   assert.match(
-    hub,
-    /slug:\s*"distilled-wiki-pages-ai-memory"[\s\S]*?title:\s*"LLM Wiki for AI Work: Source-Backed Pages in Wenlan"/,
+    article,
+    /title:\s*"LLM Wiki for AI Agents: Source-Backed Pages in Wenlan"/,
   );
   assert.match(
-    hub,
-    /slug:\s*"distilled-wiki-pages-ai-memory"[\s\S]*?metaTitle:\s*"LLM Wiki for AI Work \| Wenlan"/,
+    article,
+    /metaTitle:\s*"LLM Wiki for AI Agents: Source-Backed Pages \| Wenlan"/,
   );
-  assert.match(hub, /source-backed AI work wiki/);
-  assert.match(hub, /href:\s*"\/docs\/get-started"/);
-  assert.match(hub, /href:\s*"\/docs\/daily-workflow"/);
-  assert.match(hub, /href:\s*"\/docs\/data-and-privacy"/);
+  assert.match(article, /publishedAt:\s*"2026-06-24"/);
+  assert.match(article, /updatedAt:\s*"2026-07-24"/);
+  assert.match(article, /\/capture <durable fact \+ why>/);
+  assert.match(article, /\/distill <topic>/);
+  assert.match(article, /\/pages <topic>/);
+  assert.match(article, /does not replace codebase search/);
+  assert.match(article, /current source code/);
+  assert.match(article, /This page explains the LLM-wiki category and workflow/);
+  assert.match(article, /href:\s*"\/docs\/get-started"/);
+  assert.match(article, /href:\s*"\/docs\/daily-workflow"/);
+  assert.match(article, /href:\s*"\/docs\/data-and-privacy"/);
+  assert.match(article, /https:\/\/github\.com\/7xuanlu\/wenlan#what-does-wenlan-build/);
+  assert.match(article, /https:\/\/github\.com\/7xuanlu\/wenlan#daily-workflow/);
+  assert.match(article, /https:\/\/gist\.github\.com\/karpathy\/442a6bf555914893e9891c11519de94f/);
   assert.match(
-    hub,
+    article,
     /relatedSlugs:\s*\["source-backed-wiki-pages-ai-work",\s*"ai-memory-provenance",\s*"local-git-history-ai-memory"\]/,
   );
   assert.match(
-    support,
-    /slug:\s*"source-backed-wiki-pages-ai-work"[\s\S]*?relatedSlugs:\s*\["distilled-wiki-pages-ai-memory"/,
+    supportArticle,
+    /title:\s*"Source-Backed Wiki Pages for AI Work"/,
   );
+  assert.match(
+    supportArticle,
+    /metaTitle:\s*"Source-Backed Wiki Pages for AI Work \| Wenlan"/,
+  );
+  assert.match(
+    supportArticle,
+    /quickAnswer:\s*\n\s*"Source-backed pages are the trust layer behind Wenlan's LLM wiki for AI work:/,
+  );
+  assert.match(
+    supportArticle,
+    /relatedSlugs:\s*\["distilled-wiki-pages-ai-memory"/,
+  );
+  assert.doesNotMatch(supportArticle, /LLM Wiki for AI Agents/);
   assert.match(home, /id:\s*"llm-wiki"/);
   assert.match(home, /href:\s*"\/learn\/distilled-wiki-pages-ai-memory"/);
   assert.match(learnIndex, /LLM wiki for AI work/);
