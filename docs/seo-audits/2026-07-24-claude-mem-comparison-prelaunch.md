@@ -165,3 +165,29 @@ metric-definition changes.
   `/tmp/wenlan-seo/visual-qa/2026-07-24-claude-mem-comparison-final/desktop-full-1280x720.png`
   and
   `/tmp/wenlan-seo/visual-qa/2026-07-24-claude-mem-comparison-final/mobile-full-393x852.png`.
+
+## Production verification
+
+- PR [#71](https://github.com/7xuanlu/wenlan-site/pull/71) merged at
+  `2026-07-24T23:33:32Z` as
+  `f6e5dd083ad5086fe4c4552cee1764c8dc848645`.
+- Vercel production completed at `2026-07-24T23:34:19Z`.
+- `pnpm seo:technical:deployed`: pass; robots, 109 sitemap locations, 14 key
+  pages, six utility noindex headers, sitemap-wide `FAQPage` absence,
+  25 redirects, six bridge-host redirects, and legacy sitemap exclusions.
+- The live route returned HTTP 200 with the expected title, exact
+  `https://wenlan.app/learn/wenlan-vs-claude-mem` canonical, `index, follow`,
+  v13.12.4 and pinned installation references, the corrected supported-IDE
+  list, Article and BreadcrumbList JSON-LD, and no `FAQPage`.
+- The production desktop render measured `1274/1274` document/client width.
+  The production mobile render measured `387/387`; its H1 was `339/339`
+  inside its parent, while the comparison table remained inside the existing
+  horizontal scroll container. Both renders exposed the corrected list,
+  omitted the unsupported Gemini/Hermes integration claim, and logged no
+  browser warning or error.
+- Desktop production screenshot:
+  `/tmp/wenlan-seo/visual-qa/2026-07-24-claude-mem-comparison-production/desktop-top-1280x720.jpg`.
+- Production completion is technical evidence only. The authenticated
+  pre-publish baseline remains 7 target-page GSC impressions, 0 clicks,
+  average position 14.4, and 1 Vercel visitor / 1 pageview. No post-deploy SEO
+  effect or causal claim is made.
