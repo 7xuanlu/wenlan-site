@@ -1391,3 +1391,44 @@ increase for that experiment.
 - Unperformed gated actions: no indexing request, GSC validation, Reddit or other external post, OSS submission, paid acquisition, or metric-definition change
 - Next step: run the 24-hour technical/evidence readout after `2026-07-25T23:08:30Z`; this production-verified measurement cohort does not consume the production slot
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-24-claude-mem-comparison-refresh
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-24-claude-mem-comparison-refresh
+- Status: active
+- Data window: 2026-07-18..2026-07-24
+- Asset class: refresh
+- Launched: 2026-07-24
+- Hypothesis: Correcting the existing claude-mem comparison around the current automatic-versus-explicit memory decision will improve qualified exposure for comparison intent without overlapping the active Claude Code memory page.
+- Candidate evidence: The target has 7 authenticated GSC impressions, 0 clicks, and average position 14.4. Same-range Vercel reports 1 visitor and 1 pageview for the target. Current claude-mem commit `132b46343e60ecf4057c427736c57b08f7615dfe` and release `v13.12.4` show that the page's Claude-Code-only, MIT-license, and weak cross-agent framing is stale. GitHub REST reports 88,477 stars, 7,680 forks, and 274 open issues in native OSS units; issues #1270 and #1328 independently repeat the cross-agent job. Full provenance is recorded in `docs/seo-audits/2026-07-24-claude-mem-comparison-prelaunch.md`. External observations validate the candidate but are not GSC or keyword volume.
+- Baseline: GSC property totals are 7 clicks and 310 impressions; visible-query totals are 1 click and 75 impressions, leaving a 6-click and 235-impression visibility gap. The target page has 7 impressions, 0 clicks, and average position 14.4; no visible query row is joined to it. Vercel separately reports 1,402 visitors and 1,593 pageviews property-wide and 1 visitor and 1 pageview for the target. GitHub reports 47 Wenlan total stars. Umami and Vercel custom CTA events remain unavailable or account-gated. No source-to-page join or causal inference is made.
+- Change: Refresh only the existing English `/learn/wenlan-vs-claude-mem` title, metadata, first answer, comparison copy and table, FAQ copy, and maintained references. Correct the competitor license and cross-agent support. Keep the URL, canonical, sitemap membership, locale availability, Article and BreadcrumbList schema types, and CTA unchanged. Add no Mandarin route, `FAQPage` JSON-LD, indexing request, or external distribution.
+- Publish date: not-published
+- Index date: unknown-existing-route
+- Minimum exposure: 5 GSC target-page impressions in the first 28 complete post-deploy days
+- Success criteria: After at least 5 GSC target-page impressions, the target earns at least 1 GSC click or average position is 12.0 or better; Vercel target-page visitors and GitHub stars are reported separately without a causal claim.
+- Failure criteria: After 28 complete post-deploy days and at least 5 GSC target-page impressions, the target has 0 clicks and average position is worse than 20.0. Fewer than 5 impressions is inconclusive; after minimum exposure, 0 clicks with average position from 12.1 through 20.0 is also inconclusive.
+- Stop criteria: Stop or hold if maintained sources no longer support the comparison, the page overlaps the active Claude Code memory intent, another controller edits the route, or the change creates a canonical, indexing, robots, noindex, structured-data, sitemap, locale, source-link, or rendered-layout regression.
+- 24h readout: pending — verify the live route, title, metadata, canonical, indexability, structured data, maintained references, English and Mandarin non-regression, production render, and separate source-native observations without an SEO-success judgment
+- 7d readout: pending — report GSC latency and target-page clicks, impressions, and position when available, Vercel target-page presence when available, and GitHub stars separately
+- W2 readout: pending — apply the minimum-exposure guard and inspect comparison-intent relevance plus overlap with the Claude Code memory cohort
+- W4 readout: pending — evaluate the predeclared success, failure, or inconclusive condition without changing thresholds
+- W8 readout: pending — record a post-campaign follow-up only if it remains useful
+- Result: pending
+- Decision: wait
+- Next step: complete RED-to-GREEN article verification, full SEO/i18n/lint/build/technical checks, rendered verification, and independent review; stop before push, PR, merge, or deploy without new explicit approval
+<!-- EXPERIMENT-RECORD:END -->
+
+### Campaign observation — 2026-07-24T23:27:13Z
+
+- Experiment: `EXP-2026-07-24-claude-mem-comparison-refresh`
+- Local preparation: complete
+- Reviewer: initial `FIX FIRST` because the article treated Gemini as a client integration and named unsupported Hermes support; corrected to the pinned installation guide's supported-IDE list and cited that guide; focused re-review returned `SHIP`
+- Verification: `seo:goal:check` passed; SEO tests 177/177; i18n tests 53/53; TypeScript lint passed; build generated 209 static pages; built technical SEO passed with 109 sitemap locations and no `FAQPage` in 113 built HTML files; `git diff --check` passed
+- Rendered QA: desktop `1274/1274` and mobile `387/387` document/client widths; corrected integration list present; unsupported Gemini/Hermes integration claim absent; browser warnings/errors empty; both inline visual passes passed
+- Locale decision: English refresh only. The latest authenticated/localized evidence still does not establish a Mandarin claude-mem comparison cluster, so no zh-TW or zh-CN page was added.
+- Approval: at `2026-07-24T23:27:13Z`, the user approved commit, push, PR, merge, deployment, and production verification for this website change
+- Still unapproved: request indexing, GSC validation, Reddit or other external publication, OSS submission, paid acquisition, and metric-definition changes
+- Next step: publish through the normal PR gate, verify the production route and technical SEO, append the production evidence, and release the one production slot
