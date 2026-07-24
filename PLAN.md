@@ -211,13 +211,16 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - PR #67 merged at `2026-07-24T21:12:18Z` as
   `6de693d7069db65455712022efbad0520830746d`. Vercel production completed at
   `2026-07-24T21:13:05Z`.
+- PR #69 merged at `2026-07-24T23:07:44Z` as
+  `ee9694d40771a6477bf9b7c294f1ec45f7dd7c69`. Vercel production completed at
+  `2026-07-24T23:08:30Z`.
 - Goal deadline: 2026-08-18.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-24-stale-ai-memory-diagnostic`, active in local
-  preparation and occupying the one production slot. The preceding
-  `EXP-2026-07-24-mcp-shared-memory-exposure` change is live,
+  `EXP-2026-07-24-stale-ai-memory-diagnostic`, live, production-verified,
+  and measuring. It no longer occupies the production slot. The preceding
+  `EXP-2026-07-24-mcp-shared-memory-exposure` change also remains live,
   production-verified, and measuring.
 - Website-affecting technical correction:
   `TECH-2026-07-24-localized-learn-breadcrumb`, production-verified and no
@@ -248,15 +251,16 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Last production observation: `2026-07-24T21:13:05Z`; deployed robots, 109
+- Last production observation: `2026-07-24T23:08:30Z`; deployed robots, 109
   sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide
   `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL
   exclusions passed. Nineteen expected locale routes returned HTTP 200 and
-  five unsupported locale routes returned HTTP 404. The live MCP source
-  contains exactly one link to the shared Cursor and Claude Code target; both
-  routes return HTTP 200 and retain exact self-canonicals and `index, follow`.
-  A 1280×720 rendered source exposed and navigated the link to the target;
-  both pages had no document overflow, console warning, or console error.
+  five unsupported locale routes returned HTTP 404. The live stale-memory
+  diagnostic retains its exact self-canonical, `index, follow`, Article and
+  BreadcrumbList JSON-LD, `dateModified` `2026-07-24`, four maintained source
+  links, and no `FAQPage`. Desktop and mobile production renders had no
+  document, H1, or command-block overflow, framework overlay, console warning,
+  or console error.
 - Google Trends demand-discovery gate: resolved for the current decision at
   `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
   Seventeen timeline comparisons and nine related-query exports cover
@@ -403,7 +407,8 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-24-stale-ai-memory-diagnostic` is active in local preparation.
+`EXP-2026-07-24-stale-ai-memory-diagnostic` is live, production-verified, and
+measuring.
 It refreshes the existing English
 `/learn/review-before-trust-ai-memory` route from abstract trust framing into
 a standalone diagnostic for stale, contradictory, duplicated, and wrongly
@@ -411,6 +416,13 @@ scoped AI-agent memory. The page keeps its URL, canonical, sitemap entry,
 locale availability, Article and BreadcrumbList schema types, and CTA. It
 adds no Mandarin route, `FAQPage` JSON-LD, indexing request, or external
 distribution.
+
+PR #69 merged at `2026-07-24T23:07:44Z` as
+`ee9694d40771a6477bf9b7c294f1ec45f7dd7c69`; Vercel production completed at
+`2026-07-24T23:08:30Z`. Deployed technical, i18n, metadata, structured-data,
+maintained-source, and rendered checks passed. No SEO-success judgment is made
+at production completion. The production slot is open, while this cohort keeps
+its predeclared readouts.
 
 The authenticated `2026-06-26..2026-07-23` GSC page export does not contain
 the target route, so no target zero, position, or indexing status is inferred.
@@ -512,15 +524,16 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-Finish the stale-memory diagnostic's focused and full verification,
-independent review, user-approved PR/merge/deploy, and production proof. Then
-mark it live so the preparation slot reopens. Run the Learn-hub 24-hour
+The production slot is open. Run the Learn-hub 24-hour
 readout after `2026-07-25T19:18:03Z`, the LLM-wiki refresh 24-hour readout
 after `2026-07-25T20:19:21Z`, and the MCP shared-memory exposure 24-hour
-technical readout after `2026-07-25T21:13:05Z`; keep the earlier cohorts on
-schedule. Do not rewrite the three recently refreshed weekly candidates
-without fresh query or independently corroborated demand evidence. No
-indexing or non-website publication is authorized.
+technical readout after `2026-07-25T21:13:05Z`. Run the stale-memory
+diagnostic's 24-hour technical/evidence readout after
+`2026-07-25T23:08:30Z`; keep the earlier cohorts on schedule. Waiting for
+those readouts does not prevent preparation of another candidate that passes
+the full gate. Do not rewrite the three recently refreshed weekly candidates
+without fresh query or independently corroborated demand evidence. No indexing
+or non-website publication is authorized.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.

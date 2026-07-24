@@ -1373,3 +1373,21 @@ increase for that experiment.
   overflow inspection all passed
 - Next step: commit, push, merge the user-approved PR, wait for Vercel
   production, and verify the deployed route before marking the experiment live
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-stale-ai-memory-diagnostic at 2026-07-24T23:08:30Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-stale-ai-memory-diagnostic
+- Observed at: 2026-07-24T23:08:30Z
+- Readout: correction
+- Status: live
+- Publish date: 2026-07-24
+- Production-in-flight changes: 0
+- Evidence: PR #69 merged at `2026-07-24T23:07:44Z` as `ee9694d40771a6477bf9b7c294f1ec45f7dd7c69`; Vercel production completed at `2026-07-24T23:08:30Z`. The deployed technical audit passed robots, 109 sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL exclusions. Nineteen expected locale routes returned HTTP 200 and five unsupported locale routes returned HTTP 404. The live English route returned HTTP 200 with the expected title and description, exact self-canonical, `index, follow`, Article and BreadcrumbList JSON-LD, `dateModified` `2026-07-24`, four maintained source links, and no `FAQPage`. Desktop 1280×720 and mobile 393×852 production renders showed the expected H1, no framework overlay, no console warning or error, and no document, H1, or command-block overflow; the mobile document and command widths were `387/387` and `337/337`. Render evidence is under `/tmp/wenlan-seo/visual-qa/2026-07-24-stale-ai-memory-production/`. This launch changes no Mandarin route; the separate zh-TW and zh-CN route smoke passed without regression.
+- Metric interpretation: The authenticated pre-publish GSC target-page absence remains absence, not zero. Same-range Vercel target baseline remains 1 visitor and 1 pageview, and GitHub remains 47 total stars. No post-deploy SEO result, source-to-page session, CTA, or causal effect is inferred at production completion.
+- Result: pending
+- Decision: wait
+- Unperformed gated actions: no indexing request, GSC validation, Reddit or other external post, OSS submission, paid acquisition, or metric-definition change
+- Next step: run the 24-hour technical/evidence readout after `2026-07-25T23:08:30Z`; this production-verified measurement cohort does not consume the production slot
+<!-- EXPERIMENT-RECORD:END -->
