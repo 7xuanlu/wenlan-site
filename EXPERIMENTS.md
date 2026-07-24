@@ -890,3 +890,69 @@ increase for that experiment.
 - Decision: wait
 - Next step: Run the 24-hour technical/evidence readout after `2026-07-25T18:54:22Z`; this measurement cohort does not consume the production slot or block another eligible website change.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-24-learn-hub-exposure-refresh
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-24-learn-hub-exposure-refresh
+- Status: approved
+- Data window: 2026-07-18..2026-07-24
+- Asset class: integration-hub
+- Launched: 2026-07-24
+- Hypothesis: A direct LLM-wiki and AI-memory category answer plus evidence-ranked search paths on the existing English Learn hub will earn more qualified Google exposure or clicks and send more visitors into Wenlan's strongest existing guides without adding another URL.
+- Candidate evidence: Authenticated GSC reports 71 impressions, 0 clicks, and average position 15.6 for `/learn`; same-range Vercel reports 98 visitors and 100 pageviews for the route; the reviewed exposure-first design names the Learn integration/workflow hub as the first backlog item; cleaned Trends, Reddit, OSS, and current GSC evidence validate Claude Code memory, LLM wiki, Basic Memory comparison, and MCP memory as distinct existing-page paths. The evidence sources retain their native units and are not joined or treated as keyword volume.
+- Baseline: GSC `sc-domain:wenlan.app` for `2026-06-26..2026-07-23` reported 7 property clicks and 310 property impressions; visible query rows reported 1 click and 75 impressions, leaving a 6-click and 235-impression visibility gap; `/learn` reported 0 clicks, 71 impressions, and average position 15.6. Vercel separately reported 1,402 visitors and 1,593 pageviews property-wide and 98 visitors and 100 pageviews for `/learn`; no source-to-page sessions are inferred. GitHub reported 47 total stars. Umami and Vercel custom CTA events remained unavailable or account-gated.
+- Change: Refresh only the English `/learn` metadata, first-screen answer, and existing popular-search-path cards. Lead with Claude Code memory, Basic Memory comparison, MCP memory server, and LLM wiki for AI agents; keep the complete article grid, existing canonical and locale alternates, and bottom GitHub/setup CTA. Create no new URL, Mandarin translation, schema type, FAQPage JSON-LD, or external distribution.
+- Publish date: not-published
+- Index date: indexed-before-2026-07-24-date-unavailable
+- Minimum exposure: 100 GSC `/learn` page impressions in the first 28 complete post-deploy days
+- Success criteria: After at least 100 GSC `/learn` page impressions, the page earns at least 1 GSC click or average position is 12.0 or better; report Vercel page visitors, GitHub outbound when available, and stars separately without a causal claim.
+- Failure criteria: After 28 complete post-deploy days and at least 100 GSC `/learn` page impressions, the page has 0 clicks and average position is worse than the 15.6 baseline. Fewer than 100 impressions is inconclusive; after minimum exposure, 0 clicks with average position from 12.1 through 15.6 is also inconclusive as no material change.
+- Stop criteria: Stop or hold if a canonical, indexing, robots, noindex, structured-data, sitemap, locale, or rendered-layout regression appears; another controller edits the same hub; the search paths overlap or contradict an active article; or maintained Wenlan proof no longer supports the category answer.
+- 24h readout: pending — verify live 200, title, description, canonical, locale alternates, CollectionPage and BreadcrumbList JSON-LD, search-path links, production render, and separate source-native observations without an SEO-success judgment
+- 7d readout: pending — report GSC latency, `/learn` clicks, impressions and position when available, Vercel page visitors, and stars separately
+- W2 readout: pending — apply the minimum-exposure guard and inspect English, zh-TW, and zh-CN Learn surfaces plus linked Claude Code, Basic Memory, MCP memory, and LLM-wiki pages for overlap or regression
+- W4 readout: pending — evaluate the predeclared success, failure, or inconclusive condition without changing thresholds
+- W8 readout: pending — record a post-campaign follow-up only if it remains useful
+- Result: pending
+- Decision: wait
+- Next step: Prepare the bounded English Learn-hub change, run focused and full SEO/i18n/build/technical/rendered checks, and then request explicit Git push, merge, and production-deploy approval.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-07-24T19:13:30Z — Learn hub refresh locally verified
+
+- Record type: campaign-observation
+- Current change: `EXP-2026-07-24-learn-hub-exposure-refresh`
+- Production-in-flight changes: 1
+- Scope: English `/learn` metadata, CollectionPage description, H1, direct
+  quick answer, and nine existing search-path cards; Goal fixtures and focused
+  SEO assertions updated; no URL, Mandarin content, sitemap, canonical,
+  locale-availability, schema-type, or CTA change
+- Focused verification: the Learn-index assertion failed before implementation
+  and passed after the bounded change
+- Full verification: `pnpm test:seo` 174/174; `pnpm test:i18n` 52/52;
+  `pnpm lint`; `pnpm seo:goal:check`; `pnpm build` with 209 static pages;
+  built technical SEO with 109 sitemap URLs, 26 redirects, seven noindex
+  headers, 14 checked HTML pages, and no `FAQPage` in 113 built HTML files;
+  production-build i18n smoke with 19 expected direct-200 routes and five
+  expected hard-404 routes; current-production deployed technical SEO;
+  `git diff --check`
+- Linked-path verification: `/learn`, its nine promoted destination routes,
+  `/zh-TW/learn`, and `/zh-CN/learn` all returned local production-build HTTP
+  200
+- Render evidence: desktop 1440×1000 and mobile 393×852 English Learn checks
+  confirmed the title, description, exact canonical, `index, follow`,
+  reciprocal locale alternates, BreadcrumbList and CollectionPage JSON-LD,
+  quick answer, ranked search paths, no `FAQPage`, no framework error overlay,
+  and no document or H1 overflow. Mobile zh-TW and zh-CN Learn checks retained
+  their localized titles, H1s, self-canonicals, and overflow-safe layouts.
+  Screenshots are under
+  `/tmp/wenlan-seo/visual-qa/2026-07-24-learn-hub-exposure/`.
+- Independent review: initial `fix-first` found a neutral outcome band; the
+  experiment now classifies 0 clicks with average position 12.1 through 15.6
+  after minimum exposure as inconclusive. No other blocker was found.
+- Publish date: still `not-published`
+- External actions: none; no push, merge, deployment, indexing request,
+  validation, external post, OSS submission, or paid acquisition
+- Next step: request explicit Git push, merge, and production-deploy approval
