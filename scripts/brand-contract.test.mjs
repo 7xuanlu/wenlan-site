@@ -359,6 +359,31 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.match(seoMeasurement, /适合 AI 工作的 LLM wiki 是什么/);
 });
 
+test("AI work memory comparison answers the knowledge-base role question directly", async () => {
+  const articles = await readRepo("src/app/learn/articles.ts");
+  const start = articles.indexOf('slug: "ai-work-memory-vs-knowledge-base"');
+  const end = articles.indexOf("\n  {\n    slug:", start);
+  const article = articles.slice(start, end);
+
+  assert.notEqual(start, -1);
+  assert.match(
+    article,
+    /title: "AI Work Memory vs Knowledge Base: What’s the Difference\?"/,
+  );
+  assert.match(
+    article,
+    /metaDescription:\s*"Compare AI work memory and AI knowledge bases: what each stores, when agents use it, and why durable AI work needs both atomic memory and maintained pages\."/,
+  );
+  assert.match(article, /heading: "Short answer"/);
+  assert.match(article, /competitorName: "Knowledge base"/);
+  assert.match(article, /dimension: "Unit of knowledge"/);
+  assert.match(article, /label: "Wenlan source, memory, and page model"/);
+
+  const page = await readRepo("src/app/learn/[slug]/page.tsx");
+  assert.match(page, /Practical dimensions\./);
+  assert.doesNotMatch(page, /Quantified dimensions\./);
+});
+
 test("postbuild URL discovery reads moved English route-group source files", async () => {
   const indexNow = await readRepo("scripts/indexnow-ping.mjs");
 
@@ -654,7 +679,10 @@ test("public onboarding is Wenlan-first and distinguishes plugin, local MCP, and
   assert.match(docs, /Codex plugin/);
   assert.match(docs, /ChatGPT/);
   assert.match(docs, /Streamable HTTP MCP/);
-  assert.match(docs, /Developer mode/);
+  assert.match(docs, /Settings > Plugins/);
+  assert.match(docs, /Server URL/);
+  assert.match(docs, /Authentication to None/);
+  assert.doesNotMatch(docs, /Developer mode/);
   assert.match(structuredData, /ChatGPT/);
   assert.match(structuredData, /Streamable HTTP MCP/);
   assert.match(llms, /ChatGPT/);

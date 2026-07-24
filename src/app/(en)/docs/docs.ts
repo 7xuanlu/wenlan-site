@@ -499,7 +499,7 @@ export const docPages: DocPage[] = [
       "Claude Code workflow",
       "MCP daily workflow",
     ],
-    updatedAt: DOCS_UPDATED_AT,
+    updatedAt: "2026-07-24",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
@@ -1638,7 +1638,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Current runtime shape",
         body: [
-          "The current public docs describe the 0.13.2 runtime shape: Claude Code plugin, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages, real git versioning for readable pages, session handoffs, and status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
+          "The current public docs describe the 0.14.1 runtime shape: Claude Code plugin, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages, real git versioning for readable pages, session handoffs, and status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
           "The biggest practical upgrade checks are platform support, package path alignment, and spaces. Confirm your machine's service manager, confirm MCP clients launch the connector under ~/.wenlan/bin, and confirm the active space is the one you expect.",
         ],
         link: {
@@ -1688,7 +1688,7 @@ export const docPages: DocPage[] = [
       "wenlan-types crate",
       "Wenlan GitHub releases",
     ],
-    updatedAt: DOCS_UPDATED_AT,
+    updatedAt: "2026-07-24",
     author: DEFAULT_AUTHOR,
     readingTime: "4 min read",
     summary: [
@@ -3161,7 +3161,7 @@ export const docPages: DocPage[] = [
         heading: "ChatGPT and Claude.ai",
         body: [
           "The guided path is Wenlan desktop app > Remote Access. It starts the released Streamable HTTP MCP server with --no-auth on loopback, creates a temporary HTTPS tunnel URL, and shows the connection steps for both web clients. Possession of the URL grants access.",
-          "In ChatGPT, open Settings > Apps > Advanced settings, enable Developer mode, create an app, and paste the Remote Access URL with No Auth. In Claude.ai, use Settings > Connectors > Add Custom Connector.",
+          "In ChatGPT, open Settings > Plugins, create a New Plugin, choose Server URL under Connection, paste the Remote Access URL, and set Authentication to None. In Claude.ai, install Wenlan from the 7xuanlu/wenlan marketplace through Directory > Plugins; the desktop app can also run that setup when the connector is not detected.",
           "This is a custom MCP connection to your own Wenlan runtime. It does not mean Wenlan is publicly listed in the ChatGPT Apps Directory. Stop Remote Access when you are not using it.",
         ],
         link: {
@@ -3282,7 +3282,7 @@ export const docPages: DocPage[] = [
       "port 7878",
       "doctor command",
     ],
-    updatedAt: DOCS_UPDATED_AT,
+    updatedAt: "2026-07-24",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
@@ -3592,7 +3592,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.13.2 line.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.14.1 line.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3620,7 +3620,7 @@ export const docPages: DocPage[] = [
       "LME_S",
       "AI memory retrieval benchmark",
     ],
-    updatedAt: DOCS_UPDATED_AT,
+    updatedAt: "2026-07-24",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     summary: [
@@ -3734,7 +3734,7 @@ export const docPages: DocPage[] = [
         heading: "Remote Access for ChatGPT and Claude.ai",
         body: [
           "The released desktop app starts wenlan-mcp in Streamable HTTP mode with --no-auth on loopback and exposes it through a temporary HTTPS tunnel. Possession of the URL grants access. The Remote Access panel gives you the URL, connection health, reconnect controls, and the exact setup path for ChatGPT and Claude.ai; stop Remote Access when you are not using it.",
-          "ChatGPT currently uses a custom app created in Developer mode. Treat this as direct MCP support, not proof of a public ChatGPT Apps Directory listing.",
+          "ChatGPT uses a New Plugin configured with the Remote Access Server URL and Authentication set to None. Claude.ai uses Wenlan from the 7xuanlu/wenlan marketplace. Treat both as direct access to your own runtime, not proof of a public ChatGPT Apps Directory listing.",
         ],
         link: {
           label: "Connect web MCP clients",
@@ -3771,35 +3771,48 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.13.2",
+      "Wenlan version 0.14.1",
       "wenlan-mcp release notes",
     ],
-    updatedAt: "2026-07-17",
+    updatedAt: "2026-07-24",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Quick answer: the current stable release in the repository changelog is v0.13.2, dated 2026-07-14.",
-      "Recent main-branch work after v0.13.2 is visible through merged PRs, but it should be treated as unreleased until the next release lands.",
+      "Quick answer: the current stable release in the repository changelog is v0.14.1, dated 2026-07-20.",
+      "Recent main-branch work after v0.14.1 is visible through merged PRs, but it should be treated as unreleased until the next release lands.",
     ],
     sections: [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.13.2 is the current stable release recorded in CHANGELOG.md and the release-please manifest. The v0.13.x line adds external-LLM configuration and status, whole-system lint diagnostics, responsive directory sync, and hardened evidence-driven maintenance paths.",
+          "Wenlan v0.14.1 is the current stable release recorded in CHANGELOG.md and the release-please manifest. The v0.14.x line routes Page writes through one gate, adds draft lifecycle and Page Map foundations, tightens read scopes and routing, and preserves exact canonical page sources.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
+        ],
+      },
+      {
+        heading: "v0.14.x highlights",
+        body: [
+          "The v0.14.x releases strengthen the write and review lifecycle for source-backed pages while making model routing explicit and vendor-neutral.",
+        ],
+        bullets: [
+          "Every Page write routes through one gate, including a draft lifecycle and wire contract.",
+          "Page Map v1 adds schema, accessors, routes, and an improve pass.",
+          "Per-job source pins and a resolved-routing endpoint avoid vendor privilege.",
+          "Read scopes and approval-gated lint repair are enforced.",
+          "v0.14.1 preserves the exact canonical page source.",
+          "Stable release date: 2026-07-20.",
         ],
       },
       {
         heading: "v0.13.x highlights",
         body: [
-          "The v0.13.x releases expand diagnostics and external-LLM configuration while hardening release and maintenance behavior.",
+          "The v0.13.x releases expanded diagnostics and external-LLM configuration while hardening release and maintenance behavior.",
         ],
         bullets: [
           "External-LLM API key, config hot-swap, and external status.",
           "Whole-system and deep semantic lint diagnostics.",
           "Directory sync keeps the daemon responsive.",
           "Evidence-driven lint maintenance paths are hardened.",
-          "Stable release date: 2026-07-14.",
         ],
       },
       {
@@ -3872,7 +3885,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.13.2, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.14.1, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },

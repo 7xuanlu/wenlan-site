@@ -673,12 +673,12 @@ const baseArticles: LearnArticle[] = [
     slug: "ai-work-memory-vs-knowledge-base",
     eyebrow: "Comparison",
     category: "Comparisons",
-    title: "AI Work Memory vs Knowledge Base: Which One Do You Need?",
+    title: "AI Work Memory vs Knowledge Base: What’s the Difference?",
     description:
-      "A knowledge base stores what you know. AI work memory carries decisions, handoffs, lessons, and evolving context back into agent sessions.",
-    metaTitle: "AI Work Memory vs Knowledge Base | Wenlan",
+      "A knowledge base maintains what is currently known. AI work memory preserves the decisions, lessons, corrections, and handoffs that agents need while working.",
+    metaTitle: "AI Work Memory vs Knowledge Base: The Difference",
     metaDescription:
-      "Compare AI work memory and knowledge bases, and learn why Wenlan is shaped around sessions, handoffs, provenance, and cross-tool MCP context.",
+      "Compare AI work memory and AI knowledge bases: what each stores, when agents use it, and why durable AI work needs both atomic memory and maintained pages.",
     keywords: [
       "AI work memory vs knowledge base",
       "AI knowledge base",
@@ -686,61 +686,143 @@ const baseArticles: LearnArticle[] = [
       "agent memory workflow",
       "AI memory system",
     ],
-    updatedAt,
+    updatedAt: "2026-07-24",
     author: DEFAULT_AUTHOR,
-    readingTime: "5 min read",
-    audience: "People deciding whether they need a notes system or an AI work context layer",
+    readingTime: "6 min read",
+    audience: "People designing durable context for AI agents and knowledge work",
     heroBullets: [
-      "Knowledge bases are organized around documents and human browsing.",
-      "AI work memory is organized around sessions, handoffs, retrieval, and reuse by agents.",
-      "Wenlan keeps readable artifacts, but the workflow is built around compounding AI work.",
+      "A knowledge base maintains current explanations, reference material, and source-backed pages.",
+      "AI work memory preserves atomic decisions, lessons, corrections, preferences, and handoffs from real work.",
+      "Agents often need both: memory carries the work forward, while pages compile the current answer.",
     ],
     sections: [
       {
-        heading: "The difference in one sentence",
+        heading: "Short answer",
         body: [
-          "A knowledge base helps people store and browse knowledge. AI work memory helps agents carry useful context from one work session into another.",
-          "The overlap is real: both may use Markdown, links, search, and entities. The difference is the center of gravity.",
+          "AI work memory and an AI knowledge base solve different parts of the same problem. Memory preserves what happened during work: a decision, lesson, correction, preference, or handoff. A knowledge base turns current evidence into maintained explanations that people and agents can reuse.",
+          "Choose memory when agents keep starting cold. Choose a knowledge base when the current answer is scattered across notes and documents. For durable AI work, the useful design is usually both with a clear boundary between them.",
         ],
+      },
+      {
+        heading: "What each layer should own",
+        body: [
+          "A source should preserve material you can inspect: a document, imported conversation, or registered file. A memory should preserve one complete thing learned from work. A page should compile the current understanding from relevant sources and memories.",
+          "Keeping those roles distinct prevents two common failures: treating every chat transcript as knowledge, or rewriting a polished page every time one small fact changes.",
+        ],
+        link: {
+          label: "See Wenlan's source-backed page model",
+          href: "/docs/source-backed-pages",
+        },
       },
       {
         heading: "When a knowledge base is enough",
         body: [
-          "Use a knowledge base when the main job is writing durable documents, organizing notes, and browsing a corpus manually.",
-          "That shape is excellent for stable reference material: docs, meeting notes, specs, research notes, and long-lived project explanations.",
+          "Use a conventional knowledge base when the main job is authoring durable documents, organizing reference material, and browsing a corpus. Product docs, research notes, meeting records, policies, and stable project explanations fit this shape.",
+          "It can still be AI-enabled. Search, chat, and MCP access do not by themselves turn a document collection into work memory. The deciding question is whether the system captures what agents learn between sessions and can return it during later work.",
         ],
       },
       {
-        heading: "When AI work memory is the bottleneck",
+        heading: "When AI work memory is the missing layer",
         body: [
-          "Use AI work memory when your pain is session loss. The agent solved a bug yesterday, made a tradeoff last week, or learned a project constraint in another tool, but today's session starts cold.",
-          "The important artifacts are not always polished notes. They are decisions, gotchas, handoffs, corrections, stale facts, and relationships learned during work.",
+          "Use AI work memory when the recurring failure is session loss. An agent fixed a bug yesterday, learned a project constraint in another tool, or received a correction last week, but the next session starts without that context.",
+          "The useful unit is often smaller than a document: one decision and why it was made, one gotcha, one preference, or one explicit replacement for a stale fact. Those memories need provenance and retrieval cues so an agent can use them without loading the full history.",
         ],
+        link: {
+          label: "See the AI work memory model",
+          href: "/learn/ai-work-memory",
+        },
       },
       {
-        heading: "Why Wenlan includes both shapes",
+        heading: "How memory becomes a maintained answer",
         body: [
-          "Wenlan keeps Markdown pages so humans can inspect the record. It also keeps a local libSQL index for vectors, FTS5, graph context, provenance, and retrieval metadata.",
-          "That hybrid model is deliberate. The Markdown record keeps memory accountable. The local index makes it useful to agents at the moment they need context.",
+          "A practical loop starts by recalling relevant knowledge, captures new decisions or lessons while work is happening, and closes with a handoff. Repeated or related material can then be distilled into a maintained page.",
+          "That page is not a raw memory dump. It should state the current answer, cite its support, and be refreshable when a source changes or a later memory supersedes an earlier conclusion.",
+        ],
+        bullets: [
+          "Recall the smallest relevant context at the start of work.",
+          "Capture one durable decision, lesson, correction, preference, or fact at a time.",
+          "Write a handoff that records what changed and what remains open.",
+          "Distill related sources and memories into a page that can be reviewed and refreshed.",
+        ],
+        link: {
+          label: "Follow the daily workflow",
+          href: "/docs/daily-workflow",
+        },
+      },
+      {
+        heading: "How Wenlan combines the two",
+        body: [
+          "Wenlan uses one knowledge system with three roles: traceable sources, atomic memories from AI work, and maintained source-backed pages. Memories preserve how knowledge changed; pages compile what is currently supported.",
+          "Retrieval uses a local index for exact terms, semantic similarity, and graph context. Durable synthesis remains readable Markdown under ~/.wenlan, with citations, revisions, and local git history available for inspection.",
+          "This does not mean every team needs another note editor. Wenlan can read existing document sources and coexist with Obsidian. Its job is to keep the agent work loop and the maintained knowledge layer connected without hiding either one.",
         ],
       },
     ],
+    comparisonTable: {
+      competitorName: "Knowledge base",
+      rows: [
+        {
+          dimension: "Unit of knowledge",
+          wenlan: "Atomic memory: one decision, lesson, correction, preference, fact, or handoff.",
+          competitor: "Document, note, page, record, or collection.",
+        },
+        {
+          dimension: "Primary trigger",
+          wenlan: "An agent learns something during work or needs context in a later session.",
+          competitor: "A person or process authors, imports, or updates reference material.",
+        },
+        {
+          dimension: "Main job",
+          wenlan: "Carry useful context across sessions, tools, projects, and time.",
+          competitor: "Maintain and browse the current body of knowledge.",
+        },
+        {
+          dimension: "Change history",
+          wenlan: "Provenance, corrections, and explicit supersession preserve how a conclusion changed.",
+          competitor: "Document revisions preserve how the maintained answer changed.",
+        },
+        {
+          dimension: "Best combined pattern",
+          wenlan: "Feed durable work lessons into source-backed pages.",
+          competitor: "Give agents a maintained answer backed by inspectable sources and memories.",
+        },
+      ],
+    },
     faqs: [
       {
         question: "Is Wenlan a knowledge base?",
         answer:
-          "Not primarily. Wenlan can project readable Markdown pages, but its core workflow is AI work memory: capture, handoff, distill, and recall across sessions and MCP clients.",
+          "Yes, but not only a document store. Wenlan combines traceable sources, atomic AI work memories, and maintained source-backed pages. The memory layer captures what work teaches; the page layer compiles the current answer.",
       },
       {
-        question: "Can I use Wenlan with an existing knowledge base?",
+        question: "Does AI work memory replace a knowledge base?",
         answer:
-          "Yes. Wenlan's projected Markdown can be read by tools such as Obsidian, and selected durable notes can be migrated through explicit capture flows. The better long-term question is which system owns which kind of context.",
+          "No. Memory is good at preserving decisions, lessons, corrections, and handoffs. A knowledge base is good at maintaining explanations and reference material. The two layers work better when each has a clear role.",
+      },
+      {
+        question: "Can Wenlan work with Obsidian or an existing knowledge base?",
+        answer:
+          "Yes. Wenlan can read document sources, index an Obsidian vault, and project maintained pages as Markdown under ~/.wenlan. You can keep your existing knowledge base while using Wenlan for cross-session agent memory and source-backed synthesis.",
       },
     ],
-    relatedSlugs: ["wenlan-vs-basic-memory", "markdown-local-index-ai-memory", "ai-work-memory"],
+    relatedSlugs: ["ai-work-memory", "distilled-wiki-pages-ai-memory", "wenlan-vs-obsidian-ai-memory"],
+    officialReferences: [
+      {
+        label: "Wenlan source, memory, and page model",
+        href: "https://github.com/7xuanlu/wenlan#what-is-this",
+      },
+      {
+        label: "Wenlan daily workflow",
+        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+      },
+      {
+        label: "Karpathy's LLM Wiki foundation",
+        href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      },
+    ],
     cta: {
-      heading: "Choose the workflow, not the label",
-      body: "If your AI sessions keep losing decisions and project context, Wenlan is built for that loop.",
+      heading: "Connect memory to maintained knowledge",
+      body: "Wenlan carries decisions and lessons across agent sessions, then turns supported context into source-backed pages you can inspect.",
     },
   },
   {
@@ -760,7 +842,7 @@ const baseArticles: LearnArticle[] = [
       "MCP memory knowledge base",
       "local AI work memory",
     ],
-    updatedAt: "2026-07-17",
+    updatedAt: "2026-07-24",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     audience: "People choosing a memory layer for AI-assisted work",
@@ -768,7 +850,7 @@ const baseArticles: LearnArticle[] = [
       "Basic Memory is strongest as a Markdown-centered knowledge base with AI access.",
       "Wenlan is designed around the AI work loop: sessions, handoffs, distillation, provenance, and shared MCP memory.",
       "Both value human-readable memory; the right fit depends on whether you want a knowledge base or a work-session memory layer.",
-      "This page reflects Basic Memory's public docs as of 2026-07-02 and Wenlan v0.13.2 as of 2026-07-14. If something has shifted on either side, please open an issue.",
+      "This page reflects Basic Memory's public docs as of 2026-07-02 and Wenlan v0.14.1 as of 2026-07-20. If something has shifted on either side, please open an issue.",
     ],
     officialReferences: [
       {
@@ -905,7 +987,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "How fresh is this comparison?",
         answer:
-          "Reflects Basic Memory's public docs as of 2026-07-02 and Wenlan v0.13.2 as of 2026-07-14. If something material changes on either side, please open an issue on github.com/7xuanlu/wenlan and I will update.",
+          "Reflects Basic Memory's public docs as of 2026-07-02 and Wenlan v0.14.1 as of 2026-07-20. If something material changes on either side, please open an issue on github.com/7xuanlu/wenlan and I will update.",
       },
     ],
     relatedSlugs: [
@@ -938,7 +1020,7 @@ const baseArticles: LearnArticle[] = [
       "Claude memory workflow",
       "AI work memory",
     ],
-    updatedAt: "2026-07-17",
+    updatedAt: "2026-07-24",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     audience: "Claude Code users choosing a memory workflow",
@@ -946,7 +1028,7 @@ const baseArticles: LearnArticle[] = [
       "claude-mem focuses on automatically observing Claude Code sessions and extracting useful context.",
       "Wenlan focuses on shared local AI work memory across Claude Code and other MCP clients.",
       "Both aim to reduce repeated context, but they choose different centers of gravity.",
-      "Both products are early. This page covers the claude-mem npm package as of 2026-07-02 and Wenlan v0.13.2 as of 2026-07-14.",
+      "Both products are early. This page covers the claude-mem npm package as of 2026-07-02 and Wenlan v0.14.1 as of 2026-07-20.",
     ],
     officialReferences: [
       {
@@ -1119,7 +1201,7 @@ const baseArticles: LearnArticle[] = [
       "AI coding work memory",
     ],
     publishedAt: "2026-05-27",
-    updatedAt: "2026-07-17",
+    updatedAt: "2026-07-24",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     audience: "Developers evaluating local-first memory for AI coding tools",
@@ -1127,7 +1209,7 @@ const baseArticles: LearnArticle[] = [
       "Superlocal Memory now emphasizes a local reliability layer for memory, cache, prompt compression, KV-cache alignment, and LLM cost optimization.",
       "Wenlan emphasizes the AI work loop: capture, handoff, distill, retrieve, and keep readable artifacts inspectable.",
       "The best Superlocal Memory alternative depends on whether you need a reliability layer or an inspectable work-memory workflow across MCP clients.",
-      "Wenlan version and framing reflect v0.13.2 on 2026-07-14. Check both project pages for newer releases before deciding.",
+      "Wenlan version and framing reflect v0.14.1 on 2026-07-20. Check both project pages for newer releases before deciding.",
     ],
     officialReferences: [
       {
@@ -1271,7 +1353,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "How often do these numbers get re-run?",
         answer:
-          "Wenlan's eval harness lives under `crates/wenlan-core/src/eval/` and runs locally on demand against the same fixtures the published numbers use. Anyone can re-run them. I refresh the published number when a release changes it materially. Last release alignment: v0.13.2 on 2026-07-14.",
+          "Wenlan's eval harness lives under `crates/wenlan-core/src/eval/` and runs locally on demand against the same fixtures the published numbers use. Anyone can re-run them. I refresh the published number when a release changes it materially. Last release alignment: v0.14.1 on 2026-07-20.",
       },
     ],
     relatedSlugs: [

@@ -51,8 +51,9 @@ Every started experiment uses one immutable block with these exact fields:
 ```
 
 Allowed start statuses are `approved`, `active`, `live`, `measuring`,
-`extended`, `decided`, `inconclusive`, and `stopped`. The active cap counts
-`approved`, `active`, `live`, `measuring`, and `extended`.
+`extended`, `decided`, `inconclusive`, and `stopped`. Active reporting counts
+`approved`, `active`, `live`, `measuring`, and `extended`; only `approved` and
+`active` consume the single production-in-flight slot.
 
 Allowed asset classes are `refresh`, `integration-hub`,
 `diagnostic-recipe`, and `net-new-search`.
@@ -60,16 +61,18 @@ Allowed asset classes are `refresh`, `integration-hub`,
 Each data window contains seven complete reporting dates, inclusive, on the
 campaign cadence anchored at `2026-07-18..2026-07-24` and advancing in
 seven-day increments. A reporting window does not block an approved launch.
-At most two experiments may be active, and net-new search assets must launch
-at least 14 calendar days apart. No experiment may launch after the frozen
-`2026-08-18` campaign deadline.
+There is no fixed net-new article interval, but the complete candidate gate,
+preceding-change production verification, and non-overlapping-intent guard
+still apply. No experiment may launch after the frozen `2026-08-18` campaign
+deadline.
 
 ## Readout and correction records
 
 Readouts and corrections are appended after the start record. They restate the
 experiment ID, observation timestamp, native metric units, result, decision,
 and next step. They never overwrite the start record. The verifier applies the
-latest appended status for each experiment when enforcing the two-active cap.
+latest appended status for each experiment when enforcing production
+concurrency.
 A readout must follow its experiment-start record. Its `Observed at` value is a
 real ISO-8601 UTC calendar timestamp, cannot predate launch, and must strictly
 increase for that experiment.
@@ -796,3 +799,80 @@ increase for that experiment.
 - Decision: wait
 - Next step: Run the 24-hour technical/evidence readout after `2026-07-24T15:19:18Z`; waiting for that measurement does not block other eligible website work.
 <!-- EXPERIMENT-RECORD:END -->
+
+### 2026-07-24T18:37:21Z — production-throughput correction
+
+- Record type: campaign-correction
+- User approval: proceed with the proposed SEO-only website work and correct
+  the Goal rules that had turned measurement into an idle period
+- Contract change: replace the two-active-experiment and 14-day net-new limits
+  with one production-in-flight website change; production-verified `live`,
+  `measuring`, and `extended` cohorts retain their readouts without blocking
+  another eligible change
+- Article cadence: no fixed quota; a net-new asset still requires the complete
+  candidate gate, a production-verified preceding change, and a non-overlapping
+  intent
+- Latest evidence read: authenticated weekly GSC and Vercel exports for
+  `2026-06-26..2026-07-23`, regenerated as
+  `docs/seo-audits/2026-07-24-weekly-seo.md`
+- Experiments started before this record: 2
+- Active experiments before this record: 2
+- External actions: none
+- Next step: refresh the existing indexed English AI work memory versus
+  knowledge base page, verify it locally, and surface the Git publish boundary
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-24-ai-work-memory-knowledge-base-refresh
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-24-ai-work-memory-knowledge-base-refresh
+- Status: approved
+- Data window: 2026-07-18..2026-07-24
+- Asset class: refresh
+- Launched: 2026-07-24
+- Hypothesis: A more direct title, first answer, and source-backed role comparison on the existing indexed page will earn qualified exposure or clicks for AI work memory and AI knowledge-base intent without adding another URL.
+- Candidate evidence: The authenticated `2026-06-26..2026-07-23` GSC page table reports 9 impressions, 0 clicks, and average position 8.0 for `/learn/ai-work-memory-vs-knowledge-base`; the weekly Searchfit queue recommends a title/meta/intro/quick-answer refresh; the cleaned Google Trends work retains modifier-qualified AI knowledge-base intent as a secondary cluster; Wenlan v0.14.1's maintained README documents distinct Source, Memory, and Page roles with a real capture, recall, handoff, and distill workflow.
+- Baseline: GSC `sc-domain:wenlan.app` reported 7 property clicks and 310 property impressions; visible query rows reported 1 click and 75 impressions, leaving a 6-click and 235-impression visibility gap; the target page reported 0 clicks, 9 impressions, and average position 8.0; Vercel reported 1,402 visitors and 1,593 pageviews, while the target page was absent from the top-page export and no zero was inferred; GitHub reported 47 total stars; Umami and Vercel custom CTA events remained unavailable or account-gated.
+- Change: Refresh only `/learn/ai-work-memory-vs-knowledge-base` in English: title, metadata, first answer, Source/Memory/Page boundary, comparison table, maintained first-party sources, contextual internal links, and visible FAQ copy; create no new URL, Mandarin translation, FAQPage JSON-LD, or external distribution.
+- Publish date: not-published
+- Index date: indexed-before-2026-07-24-date-unavailable
+- Minimum exposure: 20 GSC page impressions in the first 28 complete post-deploy days
+- Success criteria: After at least 20 GSC page impressions, the page earns at least 1 GSC click or average position is 5.0 or better; report Vercel page visitors, GitHub outbound when available, and stars separately without a causal claim.
+- Failure criteria: After 28 complete post-deploy days and at least 20 GSC page impressions, the page has 0 clicks and average position is worse than the 8.0 baseline; fewer than 20 impressions is inconclusive.
+- Stop criteria: Stop or hold if a first-party source becomes invalid; a canonical, indexing, robots, noindex, redirect, structured-data, sitemap, or locale regression appears; another controller edits the same page; or the refreshed page overlaps another acquisition route instead of clarifying its distinct intent.
+- 24h readout: pending — verify live 200, title, description, canonical, indexability, structured data, source links, production render, and separate source-native observations without an SEO-success judgment
+- 7d readout: pending — report GSC latency, target-page clicks, impressions and position when available, Vercel page visitors, and stars separately
+- W2 readout: pending — apply the minimum-exposure guard and inspect the related AI work memory, LLM wiki, Obsidian, and Basic Memory routes for intent overlap
+- W4 readout: pending — evaluate the predeclared success, failure, or inconclusive condition without changing thresholds
+- W8 readout: pending — record a post-campaign follow-up only if it remains useful
+- Result: pending
+- Decision: wait
+- Next step: finish local content, test, build, technical, and rendered verification, then request explicit push, merge, and production-deploy approval.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-07-24T18:46:11Z — knowledge-base refresh locally verified
+
+- Record type: campaign-observation
+- Experiments started: 3
+- Active experiments: 3
+- Production-in-flight changes: 1
+- Current change:
+  `EXP-2026-07-24-ai-work-memory-knowledge-base-refresh`
+- Evidence: `pnpm test:seo` 174/174; `pnpm test:i18n` 52/52;
+  `pnpm lint`; `pnpm seo:goal:check`; `pnpm build` with 209 static pages;
+  built technical SEO with 109 sitemap URLs, 14 checked HTML pages, and no
+  `FAQPage` in 113 built HTML files; built i18n smoke with 19 direct-200 and 5
+  hard-404 routes; current-production technical SEO; `git diff --check`
+- Render evidence: refreshed article at 1440×1000 and 393×852; all six
+  English, Simplified Chinese, and Traditional Chinese About/Get Started pages
+  at 393×852; 1200×630 About social image. Expected title, metadata, canonical,
+  release version, localized dates, and current Remote Access instructions
+  were present with no document overflow, framework overlay, or console error.
+  Evidence remains under
+  `/tmp/wenlan-seo/visual-qa/2026-07-24-growth-unblock/`.
+- Publish date: still `not-published`
+- External actions: none; no push, merge, deployment, indexing request,
+  validation, external post, OSS submission, or paid acquisition
+- Next step: request explicit approval for Git push, merge, and production
+  deploy; after production verification, mark the experiment `live` or
+  `measuring` and free the production slot

@@ -36,8 +36,8 @@ state below this frozen section may change as evidence arrives.
    hypothesis, candidate evidence, baseline, change, publish and index dates,
    24h, 7d, W2, W4, and W8 readouts, result, decision, and next step.
 3. `pnpm seo:goal:check` must be deterministic, use no new dependency, and
-   fail when any protected Goal clause or experiment cap is missing or
-   violated.
+   fail when any protected Goal clause or production-concurrency guard is
+   missing or violated.
 4. Before every campaign action, read `PLAN.md` and run
    `pnpm seo:goal:check`. If the verifier fails, stop; do not continue from a
    summary or chat memory.
@@ -115,8 +115,14 @@ are true:
 - Weekly data windows are reporting boundaries, not launch blockers. A
   verified, evidence-backed website asset with explicit publish approval may
   launch while another experiment is measuring.
-- Keep at most two active experiments.
-- Start at most one net-new search asset in any 14-calendar-day period.
+- Production concurrency is capped at one website change in `approved` or
+  `active` preparation/verification state.
+- Once a change is production-verified, record it as `live` or `measuring`.
+  `live`, `measuring`, and `extended` measurement cohorts do not consume the
+  production slot and do not block another evidence-backed website change.
+- Do not impose a fixed calendar article quota. A net-new search asset may
+  launch after the full candidate gate passes, the preceding website change is
+  production-verified, and the new asset does not overlap an existing intent.
 - Every experiment predeclares its hypothesis, baseline, positive minimum
   exposure threshold and unit, success, failure, and stop criteria, and its
   24h, 7d, W2, W4, and W8 readouts.
@@ -179,12 +185,14 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 
 ### Control-plane status
 
-- Goal status: active. At `2026-07-23T15:14:19Z`, the user rejected delaying an
-  already verified and approved website asset for a reporting-window boundary
-  and directed the controller to merge it immediately. Threads and other
+- Goal status: active. At `2026-07-24T18:37:21Z`, the user approved the
+  throughput correction: measurement cohorts no longer consume the production
+  slot, and there is no fixed calendar article quota. Threads and other
   owned-social work remain outside this SEO-only campaign.
-- The weekly window is now a reporting boundary, not a publish gate. The
-  maximum-two-active and 14-day net-new caps remain protected.
+- The weekly window is a reporting boundary, not a publish gate. Only one
+  website change may be in `approved` or `active` preparation at a time;
+  production-verified `live`, `measuring`, and `extended` cohorts continue
+  their readouts without blocking the next evidence-backed change.
 - PR #58 merged at `2026-07-23T15:18:29Z` as
   `7166bad1e3020bac60c9454780d2b732e17e4242`. Vercel production completed at
   `2026-07-23T15:19:18Z`.
@@ -192,26 +200,25 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-23-zhtw-obsidian-localization`, live in production.
-- Active experiments: 2.
+  `EXP-2026-07-24-ai-work-memory-knowledge-base-refresh`, approved for local
+  preparation and verification; locally verified and not published.
+- Active experiments: 3.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
 - Existing weekly automation: `weekly-origin-seo-cleanup`, ACTIVE, Friday at
   09:00, independent worktree execution; no field was changed in this setup.
-- Latest committed weekly action queue:
-  `docs/seo-audits/2026-07-17-weekly-seo.md`.
+- Latest weekly action queue:
+  `docs/seo-audits/2026-07-24-weekly-seo.md`, regenerated from the authenticated
+  GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Last production observation: `2026-07-20T00:35:13Z`; the refreshed route
-  returned HTTP 200 with its canonical, `index, follow`, visible source-backed
-  copy, and original/modified Article dates; deployed robots, 108 sitemap
-  URLs, 13 key pages, noindex headers, structured-data policy, redirects,
-  bridge-host redirects, and legacy-URL exclusions passed. The rendered
-  English route retained its title, H1, eight H2 sections, install commands,
-  Article JSON-LD, and no document-level horizontal overflow or console
-  warnings. The deployed key-page check separately covered English, zh-TW,
-  and zh-CN acquisition surfaces.
+- Last production observation: `2026-07-23T15:20:40Z`; deployed robots, 109
+  sitemap URLs, 14 key pages, noindex headers, structured-data policy,
+  redirects, bridge-host redirects, and legacy-URL exclusions passed. The new
+  zh-TW Obsidian route returned HTTP 200 with its canonical, visible maintained
+  sources, and mobile-safe render; its unsupported zh-CN counterpart remained
+  a hard 404.
 - Google Trends demand-discovery gate: resolved for the current decision at
   `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
   Seventeen timeline comparisons and nine related-query exports cover
@@ -250,24 +257,26 @@ after the anchor is frozen.
 
 | Metric | Fixed baseline | Verified live observation | Provenance | Gap to target from live observation |
 | --- | ---: | ---: | --- | ---: |
-| GitHub total stars | 47 | 47 | GitHub REST `GET /repos/7xuanlu/wenlan`, captured during the `2026-07-22` America/Los_Angeles campaign check | 53 |
-| GSC rolling-28-day property impressions | 197 | 264 | Search Console API, `sc-domain:wenlan.app`, `2026-06-24..2026-07-21`; `/tmp/wenlan-seo-live-2026-07-22/gsc-metadata.json` | 736 |
-| Vercel rolling-28-day visitors | 323 | 1,142 | Vercel Web Analytics API, project `wenlan-site`, `2026-06-24..2026-07-21`; `/tmp/wenlan-seo-live-2026-07-22/vercel-metadata.json` | 858 |
+| GitHub total stars | 47 | 47 | GitHub REST `GET /repos/7xuanlu/wenlan`, read during the 2026-07-24 weekly SEO task | 53 |
+| GSC rolling-28-day property impressions | 197 | 310 | Search Console API, `sc-domain:wenlan.app`, `2026-06-26..2026-07-23`; `/tmp/wenlan-seo/gsc-metadata.json` | 690 |
+| Vercel rolling-28-day visitors | 323 | 1,402 | Vercel Web Analytics API, project `wenlan-site`, `2026-06-26..2026-07-23`; `/tmp/wenlan-seo/vercel-metadata.json` | 598 |
 
 Supporting quality split for the same live range:
 
-- GSC property totals: 6 clicks, 264 impressions.
-- GSC visible-query totals: 0 clicks, 64 impressions.
-- GSC query visibility gap: 6 clicks, 200 impressions.
-- Visible-query non-brand impressions: 32 using the existing Searchfit group
-  classification; this is a visible-row subset, not a property total.
-- Vercel raw totals: 1,142 visitors and 1,313 pageviews.
-- Vercel direct traffic: 242 visitors and 305 pageviews.
-- Vercel qualified-source aggregate: 912 visitors summed across the existing
+- GSC property totals: 7 clicks, 310 impressions.
+- GSC visible-query totals: 1 click, 75 impressions.
+- GSC query visibility gap: 6 clicks, 235 impressions.
+- Visible-query non-brand impressions: 36 using the existing Searchfit group
+  classification; this is a visible-row subset, not a property total, and the
+  current `Other` bucket still contains noisy Wenlan misspellings.
+- Vercel raw totals: 1,402 visitors and 1,593 pageviews.
+- Vercel direct traffic: 255 visitors and 319 pageviews.
+- Vercel qualified-source aggregate: 1,149 visitors summed across the existing
   separate search, AI, and GitHub referrer allowlist; this is not a
   deduplicated user count.
-- Vercel target-page aggregate: 7 visitors and 19 pageviews for
-  `/learn/claude-code-memory`.
+- Vercel's top-page export did not include
+  `/learn/ai-work-memory-vs-knowledge-base`; no zero or source-to-page count is
+  inferred from its absence.
 - Unique acquisition-surface visitors and source-to-page sessions remain
   unavailable from the separate Vercel aggregates. Vercel custom events
   remain Pro/Enterprise-gated, and no authenticated Umami report was
@@ -279,7 +288,7 @@ Supporting quality split for the same live range:
   candidate gate in
   `docs/seo-audits/2026-07-18-growth-candidate-queue.md`.
 - Current page rows with impressions are preserved in
-  `/tmp/wenlan-seo-live-2026-07-22/gsc-pages.csv`. The pre-publish
+  `/tmp/wenlan-seo/gsc-pages.csv`. The pre-publish
   authenticated query-plus-page capture in
   `/tmp/wenlan-seo/gsc-query-pages.json` exposes 11 of the target page's 23
   baseline impressions; 9 visible impressions belong to the five-query
@@ -299,9 +308,11 @@ Supporting quality split for the same live range:
   the fixed or verified live baselines above.
 - Early GitHub observation: 47 total stars from the read-only REST check during
   the `2026-07-19T18:00Z` heartbeat; no causal claim is attached.
-- GSC: no post-publish complete-day observation was available at the early
-  heartbeat. The latest committed weekly report ends before publication, so
-  no Search result was inferred.
+- Latest target-page evidence: the existing
+  `/learn/ai-work-memory-vs-knowledge-base` route has 9 impressions, 0 clicks,
+  and average position 8.0 in the authenticated `2026-06-26..2026-07-23`
+  page table. This is page evidence for a refresh, not proof of a visible
+  query cluster or future CTR.
 
 ### Current strategy
 
@@ -317,19 +328,21 @@ Supporting quality split for the same live range:
    `LLM wiki`, Claude/agent memory, modifier-qualified Obsidian, MCP memory,
    and modifier-qualified AI knowledge-base clusters. The clarified focus is
    agent-memory demand, a source-backed `LLM wiki for AI agents` product
-   category, and Claude Code/Obsidian/MCP entry points. The current Claude Code
-   memory experiment remains the only active edit; the next existing page is
-   selected from fresh GSC evidence rather than Trends alone. Generic
+   category, and Claude Code/Obsidian/MCP entry points. The next existing page
+   is selected from fresh GSC evidence rather than Trends alone. Generic
    `knowledge base`, `AI memory`, `AI wiki`, and exact Taiwan `AI 知識庫` are
    not primary targets; `AI 筆記` is discovery-only until GSC or another clean
    high-intent observation connects it to Wenlan.
 5. Prefer one existing indexed acquisition page with impressions for the first
    bounded experiment. Consider a net-new search asset only if the complete
-   candidate gate passes and the 14-day cap permits it.
+   candidate gate passes, the preceding website change is production-verified,
+   and the intent does not overlap an existing page.
 6. Prepare local changes and verifier evidence. Ask for approval only at the
    frozen external/shared-state boundaries.
-7. Wait for the predeclared readout instead of stacking edits.
-8. During the wait, continue a read-only net-new article coverage-gap audit
+7. Keep every launched cohort on its predeclared readout schedule, but do not
+   treat measurement as a reason to stop preparing or shipping the next
+   eligible website change.
+8. Continue a read-only net-new article coverage-gap audit
    from the cleaned Trends, related-query, Reddit, OSS, SERP, and current-site
    evidence. This may nominate one later experiment but does not start it.
    The audit now treats a missing localized counterpart as a real coverage gap
@@ -341,23 +354,24 @@ Supporting quality split for the same live range:
 ### Current gap
 
 - Stars: 53 more than the verified live observation.
-- GSC property impressions: 736 more in the fixed final rolling window.
-- Vercel visitors: 858 more in the fixed final rolling window.
+- GSC property impressions: 690 more in the fixed final rolling window.
+- Vercel visitors: 598 more in the fixed final rolling window.
 - Measurement gaps: complete non-brand page impressions, unique
   acquisition-surface visitors, Umami CTA baseline, and verified setup success
   remain unavailable; none may be invented.
 
 ### Current experiment
 
-`EXP-2026-07-23-zhtw-obsidian-localization` is live in production. It publishes
-the evidence-backed zh-TW counterpart of the
-existing English Obsidian comparison, adds contextual links from the two
-existing zh-TW wiki pages, and keeps the unsupported zh-CN route out of static
-params, sitemap, and hreflang.
+`EXP-2026-07-24-ai-work-memory-knowledge-base-refresh` is the only
+production-in-flight change. It refreshes the existing indexed English route
+with 9 GSC impressions, 0 clicks, and average position 8.0. The bounded change
+sharpens the title, meta description, first answer, role table, source-backed
+workflow, and internal links without creating a new URL. Local tests, build,
+technical SEO, and desktop/mobile rendered QA pass.
 
-The earlier English Claude Code memory refresh remains active and measuring.
-Its readouts continue independently; it no longer blocks another verified
-website asset from reaching production.
+The earlier English Claude Code memory refresh and zh-TW Obsidian localization
+remain measurement cohorts. Their readouts continue independently and do not
+consume the production slot.
 
 ### Immediate localized launch
 
@@ -391,8 +405,9 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
   locally.
 - Read the Friday report for measurement and follow-up priorities; do not use
   its calendar boundary to delay a verified, approved website asset.
-- Keep the frozen two-active-experiment and 14-day net-new caps. This is a
-  rolling content system, not an article quota.
+- Keep one website change in production preparation at a time. Production-
+  verified measurement cohorts do not block the next change, and there is no
+  fixed calendar article quota.
 - Do not create a zh-CN counterpart from Taiwan-only evidence.
 
 ### Execution phases
@@ -403,7 +418,7 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
   verifier with RED-to-GREEN tests.
 - [x] Phase 1: receive user approval for the protected Goal contract.
 - [x] Phase 2: refresh the candidate queue from evidence and keep experiment
-  launches inside the active and net-new caps.
+  launches inside the production-concurrency and candidate gates.
 - [x] Phase 3: prepare the approved local experiment change, verify technical
   and locale quality, and stop at any external/shared-state approval boundary.
 - [ ] Phase 4: append 24h, 7d, W2, W4, and W8 readouts as they become due;
@@ -413,14 +428,11 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The one-page English refresh for
-`EXP-2026-07-18-claude-code-memory-refresh` is live and production-verified.
-The actual 24-hour Claude Code memory readout is inconclusive, and its current
-target-page GSC row remains 23 impressions, 0 clicks, and 38.7 average
-position. That readout continues independently. The zh-TW website candidate is
-live and production-verified. The next action is its 24-hour technical/evidence
-readout after `2026-07-24T15:19:18Z`; this does not block preparing or launching
-another eligible asset when the active/net-new caps allow it.
+The English AI work memory versus knowledge base refresh is locally complete
+and verified. The next decision is explicit approval for Git push, merge, and
+production deploy. After production verification, append a `live` or
+`measuring` readout so this experiment no longer consumes the production slot.
+Existing cohort readouts continue on schedule and do not block later work.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.
