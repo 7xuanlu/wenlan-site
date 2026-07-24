@@ -1163,3 +1163,81 @@ increase for that experiment.
 - Next step: run the due Learn-hub and LLM-wiki 24-hour readouts after their
   predeclared timestamps and continue the read-only demand/coverage-gap audit
   without rewriting low-evidence weekly candidates
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-24-mcp-shared-memory-exposure
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-24-mcp-shared-memory-exposure
+- Status: active
+- Data window: 2026-07-18..2026-07-24
+- Asset class: integration-hub
+- Launched: 2026-07-24
+- Hypothesis: Adding one relevant internal link from the high-use MCP memory integration hub to the existing Cursor and Claude Code shared-memory workflow will improve discovery and search exposure for the indexed target without stacking another copy rewrite on a page refreshed on 2026-07-17.
+- Candidate evidence: Authenticated GSC for `2026-06-26..2026-07-23` reports 0 clicks, 8 impressions, and average position 20.8 for `/learn/cursor-claude-code-shared-memory`, and 0 clicks, 2 impressions, and average position 5.5 for `/learn/mcp-memory-server`. Same-range Vercel reports 291 visitors and 293 pageviews for the source; the target is absent from the returned top-page export, so no zero is inferred. Official signed-in Google Trends Explore captures at `2026-07-19T02:47:01Z` record `memory MCP` moving `2.0 → 7.0` inside a focused English Worldwide, past-12-month, request-relative 0–100 series; related queries in the committed integration-cluster interpretation include Claude, Claude Code, Codex, agent, and open memory. Reddit and GitHub/OSS observations captured on `2026-07-18` independently describe cross-session and cross-instance memory and a crowded cross-client MCP-memory category. The target already provides a standalone same-daemon, same-data-directory, same-space smoke test backed by current client documentation and the maintained Wenlan source.
+- Baseline: GSC property totals are 7 clicks and 310 impressions; visible-query totals are 1 click and 75 impressions, leaving a 6-click and 235-impression visibility gap. The target page has 0 clicks, 8 impressions, and average position 20.8; the source page has 0 clicks, 2 impressions, and average position 5.5. Vercel separately reports 1,402 visitors and 1,593 pageviews property-wide and 291 visitors and 293 pageviews for the source; no target count or source-to-target sessions are inferred. GitHub reports 47 total stars. Umami and Vercel custom CTA events remain unavailable or account-gated.
+- Change: Add only `cursor-claude-code-shared-memory` to the English `/learn/mcp-memory-server` article's `relatedSlugs`. Do not edit the source or target copy, metadata, dates, URL, canonical, hreflang, sitemap, schema, CTA, Mandarin coverage, or external distribution.
+- Publish date: not-published
+- Index date: indexed-before-2026-07-24-date-unavailable
+- Minimum exposure: 10 GSC target-page impressions in the first 28 complete post-deploy days
+- Success criteria: After at least 10 GSC target-page impressions, the target earns at least 1 GSC click or average position is 18.0 or better; Vercel target-page visitors and GitHub stars are reported separately without a causal claim.
+- Failure criteria: After 28 complete post-deploy days and at least 10 GSC target-page impressions, the target has 0 clicks and average position is worse than 22.0. Fewer than 10 impressions is inconclusive; after minimum exposure, 0 clicks with average position from 18.1 through 22.0 is also inconclusive.
+- Stop criteria: Stop or hold if the source-target relationship is no longer useful, maintained Wenlan or client sources no longer support the shared-memory workflow, the link creates a canonical, indexing, robots, noindex, structured-data, sitemap, locale, or rendered-layout regression, another controller edits either route, or the experiment would require an untracked source-to-target attribution claim.
+- 24h readout: pending — verify both live routes, the visible source link, target canonical and indexability, structured data, English and Mandarin non-regression, production render, and separate source-native observations without an SEO-success judgment
+- 7d readout: pending — report GSC latency, target-page clicks, impressions, and position when available, Vercel target-page presence when available, and GitHub stars separately
+- W2 readout: pending — apply the minimum-exposure guard and inspect source-target relevance, duplicate anchors, and overlap with the active Claude Code and Learn-hub cohorts
+- W4 readout: pending — evaluate the predeclared success, failure, or inconclusive condition without changing thresholds
+- W8 readout: pending — record a post-campaign follow-up only if it remains useful
+- Result: pending
+- Decision: wait
+- Next step: complete the focused RED-to-GREEN link assertion, full SEO/i18n/lint/build/technical checks, rendered verification, and independent review; then request explicit Git push, merge, and production-deploy approval.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-07-24T21:03:08Z — MCP shared-memory exposure locally verified
+
+- Record type: campaign-observation
+- Current change: `EXP-2026-07-24-mcp-shared-memory-exposure`
+- Production-in-flight changes: 1
+- Scope: add only `cursor-claude-code-shared-memory` to the English
+  `/learn/mcp-memory-server` related-article list; no source or target copy,
+  metadata, date, URL, canonical, hreflang, sitemap, schema, CTA, Mandarin
+  availability, or external-distribution change
+- Focused verification: the new source-scoped related-link assertion failed
+  before implementation and passed after the one-slug addition
+- Full verification: `pnpm test:seo` 175/175 with explicit Wenlan and
+  wenlan-app roots; `pnpm test:i18n` 53/53; `pnpm lint`;
+  `pnpm seo:goal:check`; `pnpm build` with 209 static pages;
+  `pnpm seo:technical:built`; built i18n smoke with 19 direct-200 and five
+  hard-404 routes; `git diff --check`
+- Local production evidence: the source and target returned HTTP 200, the
+  source contained exactly one target link, and the target retained its exact
+  self-canonical and `index, follow`
+- Render evidence: mobile 393×852 and desktop 1440×1000 source renders showed
+  the complete four-link related block; the mobile target retained the
+  expected title and H1; there was no document overflow, framework overlay,
+  `FAQPage`, console warning, or console error; screenshots are under
+  `/tmp/wenlan-seo/visual-qa/2026-07-24-mcp-shared-memory-exposure/`
+- Locale evidence: neither changed English slug entered the translated Learn
+  availability registry; the 53 i18n contracts and localized smoke routes
+  passed
+- External actions: none; no push, merge, deployment, indexing request,
+  validation, external post, OSS submission, paid acquisition, or metric
+  change
+- Next step: finish independent review, then request explicit Git push, merge,
+  and production-deploy approval
+
+### 2026-07-24T21:10:24Z — MCP shared-memory exposure approved for publication
+
+- Record type: campaign-observation
+- Current change: `EXP-2026-07-24-mcp-shared-memory-exposure`
+- Independent review: the initial pass found one stale contradiction in the
+  mutable `PLAN.md` state; after that wording was corrected, the reviewer
+  reread the changed state and returned `SHIP` with no other finding
+- Approval: the user explicitly approved Git push, PR creation, merge, and
+  production deployment in this Codex task
+- Scope unchanged: one English related-article link and its focused contract;
+  no copy, metadata, dates, URL, canonical, hreflang, sitemap, schema, CTA,
+  Mandarin availability, indexing request, validation, external post, OSS
+  submission, paid acquisition, or metric-definition change
+- Next step: publish the reviewed branch and verify the resulting Vercel
+  production deployment before marking the change production-verified

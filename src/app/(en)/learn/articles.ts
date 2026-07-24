@@ -249,7 +249,12 @@ const baseArticles: LearnArticle[] = [
           "Yes, if those tools support MCP and are configured to use the same server. Wenlan is designed for that shared-memory workflow.",
       },
     ],
-    relatedSlugs: ["claude-code-memory", "mcp-memory-server-localhost-7878", "how-to-add-mcp-memory-to-cursor"],
+    relatedSlugs: [
+      "claude-code-memory",
+      "mcp-memory-server-localhost-7878",
+      "how-to-add-mcp-memory-to-cursor",
+      "cursor-claude-code-shared-memory",
+    ],
     officialReferences: [
       {
         label: "MCP server concepts",
