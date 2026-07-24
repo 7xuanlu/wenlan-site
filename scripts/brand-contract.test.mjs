@@ -561,6 +561,42 @@ test("Cursor and Claude Code search page answers shared-memory setup explicitly"
   );
 });
 
+test("stale AI agent memory page exposes a source-backed diagnostic workflow", async () => {
+  const articles = await readRepo("src/app/learn/seo-articles.ts");
+  const marker = 'slug: "review-before-trust-ai-memory"';
+  const start = articles.indexOf(marker);
+  const end = articles.indexOf('\n  {\n    slug: "', start + marker.length);
+  const article = articles.slice(start, end);
+
+  assert.notEqual(start, -1);
+  assert.notEqual(end, -1);
+  assert.match(article, /title: "How to Fix Stale AI Agent Memory"/);
+  assert.match(article, /metaTitle: "Fix Stale AI Agent Memory: Diagnose & Correct \| Wenlan"/);
+  assert.match(article, /updatedAt: "2026-07-24"/);
+  assert.match(article, /stale AI agent memory/);
+  assert.match(article, /contradictory agent memory/);
+  assert.match(article, /\/recall <stale topic>/);
+  assert.match(article, /\/lint deep/);
+  assert.match(article, /\/capture <current fact \+ why>/);
+  assert.match(article, /\/curate revisions/);
+  assert.match(article, /\/forget <source_id>/);
+  assert.match(article, /Destructive; cannot be undone/);
+  assert.match(article, /Plain \/lint and \/lint deep are read-only/);
+  assert.match(article, /href: "https:\/\/wenlan\.app\/docs\/review-and-trust"/);
+  assert.match(
+    article,
+    /href: "https:\/\/github\.com\/7xuanlu\/wenlan\/blob\/main\/plugin\/skills\/curate\/SKILL\.md"/,
+  );
+  assert.match(
+    article,
+    /href: "https:\/\/github\.com\/7xuanlu\/wenlan\/blob\/main\/plugin\/skills\/lint\/SKILL\.md"/,
+  );
+  assert.match(
+    article,
+    /href: "https:\/\/github\.com\/7xuanlu\/wenlan\/blob\/main\/plugin\/skills\/forget\/SKILL\.md"/,
+  );
+});
+
 test("MCP memory article exposes the Cursor and Claude Code shared-memory workflow", async () => {
   const articles = await readRepo("src/app/learn/articles.ts");
   const marker = 'slug: "mcp-memory-server"';
