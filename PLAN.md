@@ -218,9 +218,10 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-24-claude-mem-comparison-refresh`, active in local preparation
-  and occupying the one production slot. The preceding stale-memory and MCP
-  shared-memory changes remain live, production-verified, and measuring.
+  `EXP-2026-07-24-claude-mem-comparison-refresh`, live,
+  production-verified, and measuring. It no longer occupies the production
+  slot. The preceding stale-memory and MCP shared-memory changes also remain
+  live, production-verified, and measuring.
 - Website-affecting technical correction:
   `TECH-2026-07-24-localized-learn-breadcrumb`, production-verified and no
   longer consuming the preparation slot.
@@ -250,16 +251,14 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Last production observation: `2026-07-24T23:08:30Z`; deployed robots, 109
+- Last production observation: `2026-07-24T23:34:19Z`; deployed robots, 109
   sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide
   `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL
-  exclusions passed. Nineteen expected locale routes returned HTTP 200 and
-  five unsupported locale routes returned HTTP 404. The live stale-memory
-  diagnostic retains its exact self-canonical, `index, follow`, Article and
-  BreadcrumbList JSON-LD, `dateModified` `2026-07-24`, four maintained source
-  links, and no `FAQPage`. Desktop and mobile production renders had no
-  document, H1, or command-block overflow, framework overlay, console warning,
-  or console error.
+  exclusions passed. The live claude-mem comparison returned HTTP 200 with the
+  expected title, exact self-canonical, `index, follow`, maintained
+  v13.12.4 sources, the corrected supported-IDE list, Article and
+  BreadcrumbList JSON-LD, and no `FAQPage`. Desktop and mobile production
+  renders had no document or H1 overflow, console warning, or console error.
 - Google Trends demand-discovery gate: resolved for the current decision at
   `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
   Seventeen timeline comparisons and nine related-query exports cover
@@ -406,11 +405,12 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-24-claude-mem-comparison-refresh` is active in local preparation.
-It refreshes only the existing English `/learn/wenlan-vs-claude-mem` route.
-The authenticated target baseline is 7 GSC impressions, 0 clicks, and average
-position 14.4; no visible query row is joined to the target. Same-range Vercel
-reports 1 visitor and 1 pageview for the target.
+`EXP-2026-07-24-claude-mem-comparison-refresh` is live,
+production-verified, and measuring. It refreshes only the existing English
+`/learn/wenlan-vs-claude-mem` route. The authenticated target baseline is
+7 GSC impressions, 0 clicks, and average position 14.4; no visible query row
+is joined to the target. Same-range Vercel reports 1 visitor and 1 pageview
+for the target.
 
 Maintained claude-mem commit
 `132b46343e60ecf4057c427736c57b08f7615dfe` and release `v13.12.4` show that
@@ -423,6 +423,12 @@ capture, handoff, review, and maintained-page workflow. It keeps the URL,
 canonical, sitemap membership, locale availability, schema types, and CTA,
 and adds no Mandarin route, `FAQPage`, indexing request, or external
 distribution.
+
+PR #71 merged at `2026-07-24T23:33:32Z` as
+`f6e5dd083ad5086fe4c4552cee1764c8dc848645`; Vercel production completed at
+`2026-07-24T23:34:19Z`. Deployed technical, metadata, maintained-source, and
+rendered checks passed. The production slot is open. No SEO-success judgment
+is made at production completion.
 
 The stale-memory diagnostic is live, production-verified, and measuring. PR
 #69 merged at `2026-07-24T23:07:44Z` as
@@ -517,20 +523,17 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The claude-mem comparison passed focused and full verification, rendered QA,
-and independent review. The user approved commit, push, PR, merge, deployment,
-and production verification at `2026-07-24T23:27:13Z`. Publish it through the
-normal PR gate, verify production, and then release the production slot. Run
-the Learn-hub 24-hour
+The production slot is open. Run the Learn-hub 24-hour
 readout after `2026-07-25T19:18:03Z`, the LLM-wiki refresh 24-hour readout
 after `2026-07-25T20:19:21Z`, and the MCP shared-memory exposure 24-hour
 technical readout after `2026-07-25T21:13:05Z`. Run the stale-memory
 diagnostic's 24-hour technical/evidence readout after
-`2026-07-25T23:08:30Z`; keep the earlier cohorts on schedule. Waiting for
-those readouts does not prevent preparation of another candidate that passes
-the full gate. Do not rewrite the three recently refreshed weekly candidates
-without fresh query or independently corroborated demand evidence. No indexing
-or non-website publication is authorized.
+`2026-07-25T23:08:30Z`, and this claude-mem comparison's 24-hour technical
+readout after `2026-07-25T23:34:19Z`; keep the earlier cohorts on schedule.
+Waiting for those readouts does not prevent preparation of another candidate
+that passes the full gate. Do not rewrite the three recently refreshed weekly
+candidates without fresh query or independently corroborated demand evidence.
+No indexing or non-website publication is authorized.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.

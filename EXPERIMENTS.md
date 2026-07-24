@@ -1432,3 +1432,21 @@ increase for that experiment.
 - Approval: at `2026-07-24T23:27:13Z`, the user approved commit, push, PR, merge, deployment, and production verification for this website change
 - Still unapproved: request indexing, GSC validation, Reddit or other external publication, OSS submission, paid acquisition, and metric-definition changes
 - Next step: publish through the normal PR gate, verify the production route and technical SEO, append the production evidence, and release the one production slot
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-claude-mem-comparison-refresh at 2026-07-24T23:34:19Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-claude-mem-comparison-refresh
+- Observed at: 2026-07-24T23:34:19Z
+- Readout: correction
+- Status: live
+- Publish date: 2026-07-24
+- Production-in-flight changes: 0
+- Evidence: PR #71 merged at `2026-07-24T23:33:32Z` as `f6e5dd083ad5086fe4c4552cee1764c8dc848645`; Vercel production completed at `2026-07-24T23:34:19Z`. The deployed technical audit passed robots, 109 sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL exclusions. The live English route returned HTTP 200 with the expected title, exact self-canonical, `index, follow`, Article and BreadcrumbList JSON-LD, v13.12.4 and pinned installation sources, the corrected supported-IDE list, and no `FAQPage`. Desktop and mobile production renders showed the expected H1 and corrected copy, no console warning or error, and no document or H1 overflow; desktop and mobile document/client widths were `1274/1274` and `387/387`.
+- Metric interpretation: The authenticated pre-publish target baseline remains 7 GSC impressions, 0 clicks, and average position 14.4. Same-range Vercel remains 1 visitor and 1 pageview for the target, while GitHub remains 47 total stars. No post-deploy SEO result, source-to-page session, CTA, or causal effect is inferred at production completion.
+- Result: pending
+- Decision: wait
+- Unperformed gated actions: no indexing request, GSC validation, Reddit or other external post, OSS submission, paid acquisition, or metric-definition change
+- Next step: run the 24-hour technical/evidence readout after `2026-07-25T23:34:19Z`; this production-verified measurement cohort does not consume the production slot
+<!-- EXPERIMENT-RECORD:END -->
