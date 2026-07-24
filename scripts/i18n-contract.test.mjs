@@ -492,6 +492,27 @@ test("localized Learn articles render inspectable official references when provi
   assert.match(source, /rel="noopener noreferrer external"/);
 });
 
+test("localized Learn article BreadcrumbList uses the localized Learn ancestor", async () => {
+  const source = await readFile(
+    resolve(repoRoot, "src/app/[locale]/learn/[slug]/page.tsx"),
+    "utf8",
+  );
+  const schemaStart = source.indexOf("const breadcrumbSchema = {");
+  const schemaEnd = source.indexOf("\n  return (", schemaStart);
+  const breadcrumbSchema = source.slice(schemaStart, schemaEnd);
+
+  assert.notEqual(schemaStart, -1);
+  assert.notEqual(schemaEnd, -1);
+  assert.match(
+    breadcrumbSchema,
+    /position:\s*2,[\s\S]*?name:\s*chrome\.learn,[\s\S]*?item:\s*canonicalUrl\(resolvedLocale,\s*"\/learn"\)/,
+  );
+  assert.doesNotMatch(
+    breadcrumbSchema,
+    /name:\s*chrome\.learn,[\s\S]*?item:\s*`\$\{SITE_URL\}\/learn`/,
+  );
+});
+
 test("locale model exposes only the supported app locales and metadata", async () => {
   const { locales } = await loadI18nModules();
 

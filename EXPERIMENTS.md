@@ -1086,3 +1086,53 @@ increase for that experiment.
 - Decision: wait
 - Next step: Run the 24-hour technical/evidence readout after `2026-07-25T20:19:21Z`; this production-verified measurement cohort does not block another eligible website change.
 <!-- EXPERIMENT-RECORD:END -->
+
+### 2026-07-24T20:42:43Z — localized Learn BreadcrumbList correction locally verified
+
+- Record type: campaign-observation
+- Current change: `TECH-2026-07-24-localized-learn-breadcrumb`
+- Production-in-flight changes: 1
+- Production-before evidence: localized zh-TW and zh-CN Learn articles
+  returned HTTP 200 with localized home and article BreadcrumbList items, but
+  item 2 incorrectly pointed to the English `https://wenlan.app/learn` hub
+- Scope: use `canonicalUrl(resolvedLocale, "/learn")` for localized Article
+  BreadcrumbList item 2 and add a focused regression test; no visible copy,
+  URL, canonical, hreflang, sitemap, locale availability, schema type, or
+  `FAQPage` change
+- Focused verification: the new contract failed against the hard-coded
+  English ancestor and passed after the one-line implementation fix
+- Full verification: `pnpm test:i18n` 53/53; `pnpm test:seo` 174/174 with
+  explicit Wenlan and wenlan-app roots; `pnpm lint`;
+  `pnpm seo:goal:check`; `pnpm build` with 209 static pages;
+  `pnpm seo:technical:built`; `pnpm i18n:technical:built`; and
+  `git diff --check`
+- Built evidence: zh-TW and zh-CN article BreadcrumbList item 2 now points to
+  the corresponding localized Learn hub; all 19 expected direct-200 and five
+  expected hard-404 locale routes passed
+- Render evidence: zh-TW and zh-CN at 393×852 retained localized title and H1,
+  no document overflow, no framework overlay, and no console warning or error;
+  screenshots are under
+  `/tmp/wenlan-seo/visual-qa/2026-07-24-localized-breadcrumb/`
+- Content decision: no new title/meta experiment starts from the weekly top
+  three because the report keeps them inside recent measurement windows and
+  current query/demand evidence is insufficient for another rewrite
+- External actions: none; no push, merge, deploy, indexing request, validation,
+  external post, OSS submission, paid acquisition, or metric change
+- Next step: finish independent review, then request explicit approval for Git
+  push, merge, and production deploy of this technical correction
+
+### 2026-07-24T20:44:38Z — localized Learn breadcrumb independent review
+
+- Record type: campaign-observation
+- Current change: `TECH-2026-07-24-localized-learn-breadcrumb`
+- Independent review: `SHIP` with no findings
+- Review evidence: production reproduces the English Learn ancestor for both
+  zh-TW and zh-CN; the local build emits the corresponding localized Learn
+  ancestor; English remains `/learn`; Article `isPartOf`, `inLanguage`,
+  sitemap membership, locale availability, and visible rendering remain
+  unchanged
+- Test assessment: the positive localized-helper assertion and explicit
+  rejection of the former hard-coded expression adequately guard the defect
+- External actions: none
+- Next step: request explicit approval for Git push, merge, and production
+  deploy; indexing and non-website publication remain separately gated
