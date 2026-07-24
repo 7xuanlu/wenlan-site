@@ -216,7 +216,7 @@ export default async function LocalizedLearnSlugPage({
         "@type": "ListItem",
         position: 2,
         name: chrome.learn,
-        item: `${SITE_URL}/learn`,
+        item: canonicalUrl(resolvedLocale, "/learn"),
       },
       {
         "@type": "ListItem",

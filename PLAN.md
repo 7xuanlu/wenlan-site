@@ -209,8 +209,10 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-24-llm-wiki-category-refresh`, live and production-verified;
-  no website change is currently in `approved` or `active` preparation.
+  `EXP-2026-07-24-llm-wiki-category-refresh`, live and production-verified.
+- Website-affecting technical correction:
+  `TECH-2026-07-24-localized-learn-breadcrumb`, locally verified and
+  unpublished; this is the only website change in preparation.
 - The user approved Git push, merge, and production deploy for this LLM-wiki
   refresh at `2026-07-24T20:16:19Z`. Reddit or other external publication, OSS
   submission, paid acquisition, request indexing, GSC validation, and metric
@@ -399,6 +401,27 @@ memory versus knowledge-base, and English Learn-hub changes remain
 production-verified measurement cohorts; they do not consume the production
 slot.
 
+### Current technical correction
+
+`TECH-2026-07-24-localized-learn-breadcrumb` fixes a deterministic mismatch
+between localized Learn Article JSON-LD and the visible localized breadcrumb.
+Production-before checks showed the zh-TW and zh-CN article home and article
+items localized correctly while item 2 still pointed to the English
+`https://wenlan.app/learn` hub.
+
+The local change uses `canonicalUrl(resolvedLocale, "/learn")` for item 2 and
+adds a focused regression test. Built production HTML now emits
+`https://wenlan.app/zh-TW/learn` and `https://wenlan.app/zh-CN/learn`.
+It changes no visible copy, article canonical, hreflang, sitemap membership,
+locale availability, schema type, or `FAQPage` policy. Evidence is in
+`docs/seo-audits/2026-07-24-localized-learn-breadcrumb-prelaunch.md`.
+
+The weekly report's three ranked title/meta candidates were not started:
+changelog and data/privacy have page rows but no inspectable matching query or
+independent demand candidate, while Superlocal has only one visible matching
+query impression and stale competitor-source checks. All three are also still
+inside their prior refresh measurement windows.
+
 ### Immediate localized launch
 
 The next eligible localized candidate is a zh-TW counterpart of the existing
@@ -454,12 +477,13 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-Run the Learn-hub 24-hour readout after `2026-07-25T19:18:03Z` and the
+Surface the Git push, merge, and production-deploy approval boundary for
+`TECH-2026-07-24-localized-learn-breadcrumb`. After production verification,
+run the Learn-hub 24-hour readout after `2026-07-25T19:18:03Z` and the
 LLM-wiki refresh 24-hour readout after `2026-07-25T20:19:21Z`. Keep the
-earlier cohorts on schedule, and use the latest authenticated weekly queue to
-prepare the next non-overlapping existing-page refresh without treating these
-measurement cohorts as production blockers. No indexing or non-website
-publication is authorized.
+earlier cohorts on schedule. Do not rewrite the three recently refreshed
+weekly candidates without fresh query or independently corroborated demand
+evidence. No indexing or non-website publication is authorized.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.
