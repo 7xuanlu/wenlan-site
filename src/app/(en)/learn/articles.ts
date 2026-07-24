@@ -578,13 +578,15 @@ const baseArticles: LearnArticle[] = [
     slug: "distilled-wiki-pages-ai-memory",
     eyebrow: "Concept",
     category: "Concepts",
-    title: "LLM Wiki for AI Work: Source-Backed Pages in Wenlan",
+    title: "LLM Wiki for AI Agents: Source-Backed Pages in Wenlan",
     description:
-      "Wenlan turns repeated AI work context into a source-backed AI work wiki that agents and humans can reuse across tools.",
-    metaTitle: "LLM Wiki for AI Work | Wenlan",
+      "An LLM wiki turns sources and durable AI-work memory into maintained pages that agents and humans can inspect, reuse, and refresh.",
+    metaTitle: "LLM Wiki for AI Agents: Source-Backed Pages | Wenlan",
     metaDescription:
-      "Learn how Wenlan acts as an LLM wiki for AI work by distilling captures into source-backed pages with provenance, stale reasons, and refreshable revision state.",
+      "See how an LLM wiki for AI agents turns captures into source-backed pages with /distill and /pages, while keeping code and repository search separate.",
     keywords: [
+      "LLM wiki",
+      "LLM wiki for AI agents",
       "LLM wiki for AI work",
       "source-backed AI work wiki",
       "distilled wiki pages",
@@ -593,21 +595,22 @@ const baseArticles: LearnArticle[] = [
       "AI work wiki",
       "memory provenance",
     ],
-    updatedAt,
+    publishedAt: "2026-06-24",
+    updatedAt: "2026-07-24",
     author: DEFAULT_AUTHOR,
-    readingTime: "5 min read",
-    audience: "People evaluating whether AI memory should stay as storage or become composed, source-backed wiki knowledge",
+    readingTime: "6 min read",
+    audience: "People deciding how AI agents should turn source material and durable work memory into maintained knowledge",
     heroBullets: [
-      "Wenlan treats captured memories as raw material for an LLM wiki, not as the final interface.",
-      "Distilled pages cluster related captures into readable Markdown wiki entries with provenance.",
-      "Source memory IDs, revision state, and git history keep each page inspectable as AI work changes.",
+      "An LLM wiki gives agents maintained pages instead of another pile of chat history or memory snippets.",
+      "Wenlan turns sources and durable captures into readable Markdown pages with inspectable support.",
+      "Stale reasons, revisions, and human review keep the wiki useful as the underlying work changes.",
     ],
     sections: [
       {
         heading: "The short answer",
         body: [
-          "An LLM wiki for AI work is a source-backed knowledge layer that agents can read, update, and cite while they work. It is not a static notes folder and it is not opaque model memory.",
-          "Wenlan is built around that shape: agents capture durable facts, decisions, lessons, and handoffs; /distill turns repeated context into wiki pages; and each page keeps source memory IDs so people can inspect why it says what it says.",
+          "An LLM wiki for AI agents is a maintained knowledge layer built from inspectable sources and durable work memory. It gives an agent a current page to read and reuse without pretending that raw notes, chat logs, or opaque model memory are already a trustworthy answer.",
+          "Wenlan implements that pattern with three roles: Sources preserve the material being read, Memories preserve atomic decisions and lessons from real work, and Pages compile the current explanation with support that people can inspect.",
         ],
         link: {
           label: "Install Wenlan first",
@@ -615,21 +618,49 @@ const baseArticles: LearnArticle[] = [
         },
       },
       {
-        heading: "Why memory needs a wiki layer",
+        heading: "From capture to a maintained page",
         body: [
-          "A long list of memories eventually becomes another inbox. The agent can search it, but the human has to trust that search will reconcile duplicates, stale facts, and contradictions correctly.",
-          "The wiki layer gives repeated work a stable page: the current project constraint, the accepted tradeoff, the hard-earned setup fix, the handoff pattern, or the concept that keeps reappearing across sessions.",
+          "Capture one durable fact, decision, lesson, or correction while the evidence is still clear. Distill related material when it deserves a maintained page, then open that page when a later agent or human needs the compiled answer.",
+          "The commands are deliberately separate. `/capture` preserves one reusable idea, `/distill` creates or refreshes a page from related support, and `/pages` finds and opens the readable Markdown result.",
         ],
+        code: {
+          label: "A minimal LLM-wiki workflow",
+          code: `/capture <durable fact + why>
+/distill <topic>
+/pages <topic>`,
+        },
         link: {
           label: "Use the daily workflow",
           href: "/docs/daily-workflow",
         },
       },
       {
+        heading: "What an LLM wiki does not replace",
+        body: [
+          "An LLM wiki does not replace codebase search, repository maps, current source code, test output, or the native documentation for a tool. Those surfaces remain authoritative for what the software does now.",
+          "The wiki carries a different kind of value: why a decision was made, which sources support the current explanation, what changed across sessions, and which lessons should follow the work into another AI client.",
+        ],
+        link: {
+          label: "See how Wenlan separates the layers",
+          href: "/docs/architecture",
+        },
+      },
+      {
         heading: "How Wenlan keeps pages source-backed",
         body: [
-          "Every distilled page keeps the source memory IDs that produced it. Wenlan's daemon rejects unsourced pages instead of letting attractive summaries enter the store without provenance.",
-          "That source chain matters when memory is wrong. You can inspect the original capture, see when it was written, and supersede it instead of guessing why a page says what it says.",
+          "Each maintained Page records the Sources and Memories that support it. That lets a reader inspect why the page says what it says instead of trusting an attractive summary with no evidence trail.",
+          "This page explains the LLM-wiki category and workflow. For the citation, claim-support, and review mechanics themselves, use the separate source-backed-wiki guide.",
+        ],
+        link: {
+          label: "Inspect the source-backed page model",
+          href: "/learn/source-backed-wiki-pages-ai-work",
+        },
+      },
+      {
+        heading: "Pages can age, refresh, and wait for review",
+        body: [
+          "A useful LLM wiki must admit when knowledge changes. Wenlan carries stale reasons and revision state so changed support can trigger a refresh instead of silently piling a new answer beside the old one.",
+          "Manual `/distill` is the deliberate path. Machine-maintained pages can refresh from current support, while changes to human-edited pages wait as reviewable revisions rather than overwriting the owner's work.",
         ],
         link: {
           label: "Review the local data boundary",
@@ -637,17 +668,10 @@ const baseArticles: LearnArticle[] = [
         },
       },
       {
-        heading: "Pages can age and refresh",
-        body: [
-          "A useful LLM wiki needs to admit that knowledge changes. Wenlan pages carry revision state and stale reasons so repeated captures can refresh old conclusions instead of silently piling up beside them.",
-          "Manual `/distill` is the deliberate path today. Optional local models or API keys can support richer background extraction and page refresh work when you want the daemon to do more between sessions.",
-        ],
-      },
-      {
         heading: "Why this helps agents",
         body: [
-          "Agents need compact context, not raw chat archaeology. A distilled page can say the current decision, cite where it came from, and link related entities.",
-          "That makes retrieval more useful: Wenlan can serve atomic memories, wiki pages, graph context, full-text hits, and vector matches together instead of pretending one memory snippet is the whole answer.",
+          "Agents need compact, current context, not raw chat archaeology. A maintained page can state the present decision, preserve its support, and give different tools the same explanation to work from.",
+          "The page is still inspectable Markdown. Agents can retrieve it alongside atomic memories and graph context, while humans can read, edit, diff, and review the same knowledge outside the chat window.",
         ],
       },
     ],
@@ -655,15 +679,38 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Are distilled pages just summaries?",
         answer:
-          "No. A summary compresses one source. A distilled page composes multiple related memories, cites source IDs, and can refresh as new captures supersede old context.",
+          "No. A summary compresses source material. A maintained page composes related Sources and Memories, retains inspectable support, and can refresh when that support changes.",
       },
       {
         question: "Can I read the pages myself?",
         answer:
           "Yes. Pages are projected as Markdown under ~/.wenlan/pages/ and can be opened in any editor or symlinked into Obsidian.",
       },
+      {
+        question: "Should an LLM wiki replace repository search?",
+        answer:
+          "No. Use current source code, repository search, tests, and tool documentation to verify software behavior. Use the LLM wiki for maintained explanations, decisions, lessons, provenance, and cross-session context.",
+      },
     ],
     relatedSlugs: ["source-backed-wiki-pages-ai-work", "ai-memory-provenance", "local-git-history-ai-memory"],
+    officialReferences: [
+      {
+        label: "Wenlan Source, Memory, and Page model",
+        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+      },
+      {
+        label: "Wenlan daily workflow",
+        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+      },
+      {
+        label: "Karpathy's LLM-wiki note",
+        href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      },
+      {
+        label: "Rohitg00's LLM Wiki v2 proposal",
+        href: "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2",
+      },
+    ],
     cta: {
       heading: "Turn memory into an LLM wiki",
       body: "Wenlan distills repeated captures into source-backed wiki pages your next AI session can actually use.",

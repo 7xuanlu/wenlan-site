@@ -206,9 +206,14 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-24-learn-hub-exposure-refresh`, live and production-verified;
-  no website change is currently in `approved` or `active` preparation.
-- Active experiments: 4.
+  `EXP-2026-07-24-llm-wiki-category-refresh`, approved for local preparation;
+  the preceding Learn-hub change is live and production-verified, so this is
+  the only website change in `approved` or `active` preparation.
+- The user approved Git push, merge, and production deploy for this LLM-wiki
+  refresh at `2026-07-24T20:16:19Z`. Reddit or other external publication, OSS
+  submission, paid acquisition, request indexing, GSC validation, and metric
+  changes remain outside that approval.
+- Active experiments: 5.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -233,11 +238,11 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   Seventeen timeline comparisons and nine related-query exports cover
   Worldwide, US, and Taiwan; English, Traditional Chinese, and Simplified
   Chinese terms; 12 months and one five-year range. Raw request-relative
-  `0–100` values and metadata remain under the
-  `/tmp/wenlan-seo-demand/2026-07-18/trends/` and
-  `/tmp/wenlan-seo-demand/2026-07-19/trends/` capture directories;
-  interpreted decisions are in
-  `docs/seo-audits/2026-07-18-trends-demand-discovery.md`. The official
+  `0–100` values, metadata, geographies, periods, and capture method are
+  preserved in the interpreted provenance record at
+  `docs/seo-audits/2026-07-18-trends-demand-discovery.md`; the temporary raw
+  capture directories are no longer present and no fresh Trends observation
+  is inferred from them. The official
   unattended API remains limited-alpha/account-gated. The follow-up removed
   the false-positive `AI memory` series and the large Taiwan `Obsidian`
   anchor. It classifies `AI 筆記` as real but adjacent NotebookLM/Notion/note
@@ -251,11 +256,14 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   query or page rows for either `2026-07-18` or `2026-07-19`; those dates are
   reporting-latency observations, not evidence of zero search demand. The
   result remains inconclusive.
-- The `wenlan-claude-memory-24h-readout` heartbeat is ACTIVE for the zh-TW
-  article's 24-hour readout after `2026-07-24T15:19:18Z`; it no longer contains
-  a launch gate. After that it will be reused for the earlier Claude Code
-  experiment's 7-day readout. Its prompt is website-SEO-only and carries the
-  2026-07-23 website approval. The independent Friday
+- The zh-TW Obsidian article's actual 24-hour readout was recorded at
+  `2026-07-24T20:10:06Z`. Technical and production-render checks passed; the
+  latest GSC range ends on the launch date, the target has no confirmed index
+  date, and the partial Vercel launch-day row is not a complete post-deploy
+  cohort, so the result remains pending without an SEO-success judgment. Its
+  7-day readout is due after `2026-07-30T15:19:18Z`. The
+  `wenlan-claude-memory-24h-readout` heartbeat can now be reused for the
+  earlier Claude Code experiment's 7-day readout. The independent Friday
   `weekly-origin-seo-cleanup` automation remains ACTIVE and unchanged.
 
 ### Fixed baseline and live provenance
@@ -371,19 +379,22 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-24-learn-hub-exposure-refresh` is live and production-verified.
-The existing English `/learn` hub had 71 GSC impressions, 0 clicks, and average
-position 15.6 in the authenticated `2026-06-26..2026-07-23` range, plus 98
-Vercel visitors and 100 pageviews in the separate same-range page aggregate.
-The bounded change sharpens the title, first-screen answer, and existing
-search-path links around the validated Claude Code memory, Basic Memory, MCP
-memory, and LLM-wiki jobs. It creates no new URL and changes no Mandarin
-route. The production slot is free.
+`EXP-2026-07-24-llm-wiki-category-refresh` is approved for local preparation.
+The existing English `/learn/distilled-wiki-pages-ai-memory` route has 2 GSC
+impressions, 0 clicks, and average position 3.5 in the authenticated
+`2026-06-26..2026-07-23` range. The separate visible query `llm wiki 2.0` has
+1 impression, 0 clicks, and average position 13.0; it is not joined to the
+page row. Same-range Vercel reports 4 visitors and 4 pageviews for the target
+route, without a source-to-page join.
 
-The earlier English Claude Code memory refresh, zh-TW Obsidian localization,
-and English AI work memory versus knowledge-base refresh remain measurement
-cohorts. Their readouts continue independently and do not consume the
-production slot.
+The bounded refresh will make the validated `LLM wiki` category, the real
+`/capture` to `/distill` to `/pages` workflow, the source-backed maintenance
+model, and the boundary from code or repository search explicit. It creates
+no new URL, Mandarin translation, schema type, `FAQPage`, or external
+distribution. The English Claude Code memory, zh-TW Obsidian, English AI work
+memory versus knowledge-base, and English Learn-hub changes remain
+production-verified measurement cohorts; they do not consume the production
+slot.
 
 ### Immediate localized launch
 
@@ -440,12 +451,11 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The English `/learn` hub refresh is live and no longer consumes the production
-slot. Run its 24-hour technical/evidence readout after
-`2026-07-25T19:18:03Z`, keep the earlier cohorts on schedule, and use the next
-authenticated weekly evidence plus the approved demand-discovery lane to
-nominate the next non-overlapping existing-page or coverage-gap action. No
-external publication or indexing action is authorized.
+Publish the fully verified English LLM-wiki page refresh under the user's
+`2026-07-24T20:16:19Z` website approval, then verify Vercel production and
+append the production evidence. Run the Learn-hub 24-hour readout after
+`2026-07-25T19:18:03Z` and keep the earlier cohorts on schedule without
+blocking this launch. No indexing or non-website publication is authorized.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.
