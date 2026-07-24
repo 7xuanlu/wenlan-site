@@ -4,7 +4,7 @@
 
 **Prepared:** `2026-07-24T19:04:17Z`
 
-**Status:** approved for local preparation; not published
+**Status:** live; production-verified at `2026-07-24T19:21:10Z`
 
 ## Decision
 
@@ -93,8 +93,9 @@ knowledge-base page is also excluded.
 - Technical stop: any canonical, indexing, robots, noindex, schema, sitemap,
   locale, or rendered-layout regression.
 
-No Git push, merge, deploy, indexing request, GSC validation, or external
-publication is authorized by this local preparation record.
+The user authorized Git push, merge, and production deployment on
+`2026-07-24`. Indexing requests, GSC validation, and external publication
+remain separately approval-gated.
 
 ## Local verification
 
@@ -126,3 +127,24 @@ publication is authorized by this local preparation record.
   outcome band. It is resolved by the explicit inconclusive rule above.
 - Visual evidence:
   `/tmp/wenlan-seo/visual-qa/2026-07-24-learn-hub-exposure/`.
+
+## Production verification
+
+- PR #62 merged at `2026-07-24T19:17:15Z` as
+  `e8c089a0391795e778b2e02f1bd11355fda4e4e8`.
+- Vercel reported production complete at `2026-07-24T19:18:03Z`.
+- `pnpm seo:technical:deployed` passed robots, 109 sitemap URLs, 14 key
+  pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+  redirects, six bridge-host redirects, and legacy-URL exclusions.
+- `/learn`, all nine promoted destinations, `/zh-TW/learn`, and
+  `/zh-CN/learn` returned production HTTP 200.
+- The rendered English route exposed the expected title, description, H1,
+  quick answer, exact canonical, `index, follow`, reciprocal locale
+  alternates, BreadcrumbList and CollectionPage JSON-LD, and all nine
+  acquisition links. It had no `FAQPage`, document overflow, framework error,
+  console warning, or console error.
+- The production zh-TW and zh-CN Learn hubs retained localized titles and
+  H1s, self-canonicals, no `FAQPage`, no document overflow, and no rendered
+  error.
+- Production screenshot:
+  `/tmp/wenlan-seo/visual-qa/2026-07-24-learn-hub-production/learn-production-desktop.jpg`.

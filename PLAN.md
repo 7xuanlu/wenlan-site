@@ -199,12 +199,15 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - PR #60 merged at `2026-07-24T18:53:32Z` as
   `f8b8adc9dc0cbbcb40c74f8928676d142268f643`. Vercel production completed at
   `2026-07-24T18:54:22Z`.
+- PR #62 merged at `2026-07-24T19:17:15Z` as
+  `e8c089a0391795e778b2e02f1bd11355fda4e4e8`. Vercel production completed at
+  `2026-07-24T19:18:03Z`.
 - Goal deadline: 2026-08-18.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-24-learn-hub-exposure-refresh`, locally implemented and
-  verified; approved state retained and not published.
+  `EXP-2026-07-24-learn-hub-exposure-refresh`, live and production-verified;
+  no website change is currently in `approved` or `active` preparation.
 - Active experiments: 4.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
@@ -216,12 +219,15 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Last production observation: `2026-07-24T18:55:26Z`; deployed robots, 109
+- Last production observation: `2026-07-24T19:21:10Z`; deployed robots, 109
   sitemap URLs, 14 key pages, noindex headers, structured-data policy,
   redirects, bridge-host redirects, and legacy-URL exclusions passed. The
-  refreshed English knowledge-base comparison returned HTTP 200 with its new
-  title and H1, exact canonical, `index, follow`, Article JSON-LD, maintained
-  source links, no `FAQPage`, and a mobile-safe render without console errors.
+  refreshed English Learn hub returned HTTP 200 with its new title,
+  description, H1, quick answer, exact canonical, `index, follow`, reciprocal
+  locale alternates, BreadcrumbList and CollectionPage JSON-LD, nine promoted
+  acquisition links, no `FAQPage`, no document overflow, and no browser
+  errors. The English, zh-TW, and zh-CN Learn hubs and every promoted
+  destination returned HTTP 200.
 - Google Trends demand-discovery gate: resolved for the current decision at
   `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
   Seventeen timeline comparisons and nine related-query exports cover
@@ -365,14 +371,14 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-24-learn-hub-exposure-refresh` is locally implemented and
-verified, and is the only production-in-flight website change. The existing English
-`/learn` hub has 71 GSC impressions, 0 clicks, and average position 15.6 in the
-authenticated `2026-06-26..2026-07-23` range, plus 98 Vercel visitors and 100
-pageviews in the separate same-range page aggregate. The bounded change
-sharpens the title, first-screen answer, and existing search-path links around
-the validated Claude Code memory, Basic Memory, MCP memory, and LLM-wiki jobs.
-It creates no new URL and changes no Mandarin route.
+`EXP-2026-07-24-learn-hub-exposure-refresh` is live and production-verified.
+The existing English `/learn` hub had 71 GSC impressions, 0 clicks, and average
+position 15.6 in the authenticated `2026-06-26..2026-07-23` range, plus 98
+Vercel visitors and 100 pageviews in the separate same-range page aggregate.
+The bounded change sharpens the title, first-screen answer, and existing
+search-path links around the validated Claude Code memory, Basic Memory, MCP
+memory, and LLM-wiki jobs. It creates no new URL and changes no Mandarin
+route. The production slot is free.
 
 The earlier English Claude Code memory refresh, zh-TW Obsidian localization,
 and English AI work memory versus knowledge-base refresh remain measurement
@@ -434,13 +440,12 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The English `/learn` hub refresh is locally complete and verified against the
-predeclared baseline and exhaustive success/failure/inconclusive thresholds in
-`EXPERIMENTS.md` and
-`docs/seo-audits/2026-07-24-learn-hub-prelaunch.md`. The next decision is
-explicit approval for Git push, merge, and production deploy. Keep the existing
-cohort readouts on schedule; no external publication or indexing action is
-authorized.
+The English `/learn` hub refresh is live and no longer consumes the production
+slot. Run its 24-hour technical/evidence readout after
+`2026-07-25T19:18:03Z`, keep the earlier cohorts on schedule, and use the next
+authenticated weekly evidence plus the approved demand-discovery lane to
+nominate the next non-overlapping existing-page or coverage-gap action. No
+external publication or indexing action is authorized.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.

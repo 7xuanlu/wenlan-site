@@ -956,3 +956,17 @@ increase for that experiment.
 - External actions: none; no push, merge, deployment, indexing request,
   validation, external post, OSS submission, or paid acquisition
 - Next step: request explicit Git push, merge, and production-deploy approval
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-learn-hub-exposure-refresh at 2026-07-24T19:21:10Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-learn-hub-exposure-refresh
+- Observed at: 2026-07-24T19:21:10Z
+- Readout: correction
+- Status: live
+- Evidence: PR #62 merged at `2026-07-24T19:17:15Z` as `e8c089a0391795e778b2e02f1bd11355fda4e4e8`; Vercel production completed at `2026-07-24T19:18:03Z`. The deployed technical audit passed robots, 109 sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL exclusions. The live English `/learn` route returned HTTP 200 with the refreshed title, description, H1, quick answer, exact canonical, `index, follow`, reciprocal locale alternates, BreadcrumbList and CollectionPage JSON-LD, and all nine acquisition links. The English, zh-TW, and zh-CN Learn hubs and all promoted destinations returned HTTP 200; rendered checks found no `FAQPage`, document overflow, framework error, console warning, or console error. No search-performance result or causal effect is inferred at production completion.
+- Result: pending
+- Decision: wait
+- Next step: Run the 24-hour technical/evidence readout after `2026-07-25T19:18:03Z`; this measurement cohort does not consume the production slot or block another eligible website change.
+<!-- EXPERIMENT-RECORD:END -->
