@@ -215,8 +215,10 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-24-mcp-shared-memory-exposure`, live and
-  production-verified; there is no website change currently in preparation.
+  `EXP-2026-07-24-stale-ai-memory-diagnostic`, active in local
+  preparation and occupying the one production slot. The preceding
+  `EXP-2026-07-24-mcp-shared-memory-exposure` change is live,
+  production-verified, and measuring.
 - Website-affecting technical correction:
   `TECH-2026-07-24-localized-learn-breadcrumb`, production-verified and no
   longer consuming the preparation slot.
@@ -229,7 +231,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `2026-07-24T20:47:07Z`. That approval did not include indexing, GSC
   validation, non-website publication, OSS submission, paid acquisition, or
   metric changes.
-- Active experiments: 6.
+- The user approved local preparation, Git push, PR creation, merge, and
+  production deployment for
+  `EXP-2026-07-24-stale-ai-memory-diagnostic` in this Codex task on
+  `2026-07-24`. That approval does not include indexing, GSC validation,
+  non-website publication, OSS submission, paid acquisition, or metric
+  changes.
+- Active experiments: 7.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -395,27 +403,32 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-24-mcp-shared-memory-exposure` is live and production-verified.
-It adds one contextual related-article link from the existing English
-`/learn/mcp-memory-server` integration hub to the existing indexed
-`/learn/cursor-claude-code-shared-memory` workflow. It changes neither page's
-copy, metadata, URL, canonical, schema, sitemap entry, or locale availability.
+`EXP-2026-07-24-stale-ai-memory-diagnostic` is active in local preparation.
+It refreshes the existing English
+`/learn/review-before-trust-ai-memory` route from abstract trust framing into
+a standalone diagnostic for stale, contradictory, duplicated, and wrongly
+scoped AI-agent memory. The page keeps its URL, canonical, sitemap entry,
+locale availability, Article and BreadcrumbList schema types, and CTA. It
+adds no Mandarin route, `FAQPage` JSON-LD, indexing request, or external
+distribution.
 
-The authenticated `2026-06-26..2026-07-23` GSC page table reports 0 clicks,
-8 impressions, and average position 20.8 for the target, and 0 clicks,
-2 impressions, and average position 5.5 for the source. Same-range Vercel
-reports 291 visitors and 293 pageviews for the source; the target is absent
-from the returned top-page export, so no target zero is inferred. Official
-Google Trends records `memory MCP` and `MCP memory server` as a validated
-high-intent integration lane in request-relative 0–100 indices, while Reddit
-and OSS evidence independently support cross-session and cross-client memory.
-These sources remain separate and do not establish source-to-target sessions
-or causality.
+The authenticated `2026-06-26..2026-07-23` GSC page export does not contain
+the target route, so no target zero, position, or indexing status is inferred.
+Same-range Vercel reports 1 visitor and 1 pageview for the target, while the
+property reports 1,402 visitors and 1,593 pageviews. Five English Reddit
+discussions captured at `2026-07-24T21:25:46Z` and open
+NousResearch/hermes-agent issue #10771 independently repeat stale,
+contradictory, duplicate, and obsolete-memory symptoms. Their native score,
+comment, and reaction units remain demand-discovery evidence, not GSC or
+keyword volume. Maintained Wenlan `origin/main` commit
+`93451bf0ef58399e08400e3b4ac613942adcfec8`, version `0.14.1`, proves the
+read-only recall/lint diagnosis, curate/revision review, correction, and
+destructive forget boundaries.
 
 The English Claude Code memory, zh-TW Obsidian, English AI work memory versus
-knowledge-base, English Learn-hub, and English LLM-wiki changes remain
-production-verified measurement cohorts; they do not consume the production
-slot.
+knowledge-base, English Learn-hub, English LLM-wiki, and MCP shared-memory
+changes remain production-verified measurement cohorts; they do not consume
+the production slot.
 
 ### Current technical correction
 
@@ -499,13 +512,15 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-Run the Learn-hub 24-hour readout after `2026-07-25T19:18:03Z`, the LLM-wiki
-refresh 24-hour readout after `2026-07-25T20:19:21Z`, and the MCP shared-memory
-exposure 24-hour technical readout after `2026-07-25T21:13:05Z`; keep the
-earlier cohorts on schedule. The production preparation slot is open for the
-next evidence-backed website asset. Do not rewrite the three recently
-refreshed weekly candidates without fresh query or independently corroborated
-demand evidence. No indexing or non-website publication is authorized.
+Finish the stale-memory diagnostic's focused and full verification,
+independent review, user-approved PR/merge/deploy, and production proof. Then
+mark it live so the preparation slot reopens. Run the Learn-hub 24-hour
+readout after `2026-07-25T19:18:03Z`, the LLM-wiki refresh 24-hour readout
+after `2026-07-25T20:19:21Z`, and the MCP shared-memory exposure 24-hour
+technical readout after `2026-07-25T21:13:05Z`; keep the earlier cohorts on
+schedule. Do not rewrite the three recently refreshed weekly candidates
+without fresh query or independently corroborated demand evidence. No
+indexing or non-website publication is authorized.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.

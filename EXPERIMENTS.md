@@ -1286,3 +1286,90 @@ increase for that experiment.
 - Decision: wait
 - Next step: Run the 24-hour technical/evidence readout after `2026-07-25T21:13:05Z`; this production-verified measurement cohort does not block another eligible website change.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-24-stale-ai-memory-diagnostic
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-24-stale-ai-memory-diagnostic
+- Status: active
+- Data window: 2026-07-18..2026-07-24
+- Asset class: diagnostic-recipe
+- Launched: 2026-07-24
+- Hypothesis: Refreshing the existing English trust page into a modifier-qualified, source-backed diagnostic for stale and contradictory AI-agent memory will improve qualified discovery and exposure for that failure-mode intent without overlapping the active Claude Code or MCP workflows.
+- Candidate evidence: Five English Reddit discussions observed at `2026-07-24T21:25:46Z` independently describe stale, contradictory, duplicated, or obsolete agent memory. Their search-result score snapshots were +39, +0, +2, +1, and +2; Reddit JSON returned HTTP 403, so these are not API scores. The directly inspectable HTML URLs and full provenance are recorded in `docs/seo-audits/2026-07-24-stale-ai-memory-diagnostic-prelaunch.md`. GitHub API evidence for open NousResearch/hermes-agent issue #10771 reports 9 comments, 5 reactions, creation at `2026-04-16T05:20:31Z`, and update at `2026-07-19T11:13:41Z`; it independently reports stale relative dates, contradictory entries, duplicates, obsolete notes, and memory rot. The existing Wenlan page partly covers trust but lacks a usable symptom-to-verification workflow. Maintained Wenlan commit `93451bf0ef58399e08400e3b4ac613942adcfec8`, version `0.14.1`, proves `/recall`, read-only `/lint deep`, `/curate revisions`, corrections and supersession, and destructive `/forget`. External observations are demand discovery only, not GSC or keyword volume.
+- Baseline: GSC property totals are 7 clicks and 310 impressions; visible-query totals are 1 click and 75 impressions, leaving a 6-click and 235-impression visibility gap. The target route is absent from the returned GSC page export, so no target zero, position, or indexing status is inferred. Vercel separately reports 1,402 visitors and 1,593 pageviews property-wide and 1 visitor and 1 pageview for the target route. GitHub reports 47 total stars. Umami and Vercel custom CTA events remain unavailable or account-gated. No source-to-page join or causal inference is made.
+- Change: Refresh only the existing English `/learn/review-before-trust-ai-memory` article title, metadata, body, diagnostic code block, FAQ copy, maintained references, and related links. Keep its URL, canonical, sitemap membership, locale availability, Article and BreadcrumbList schema types, and CTA unchanged. Add no Mandarin route, `FAQPage` JSON-LD, indexing request, or external distribution.
+- Publish date: not-published
+- Index date: unknown-existing-route
+- Minimum exposure: 5 GSC target-page impressions in the first 28 complete post-deploy days
+- Success criteria: After at least 5 GSC target-page impressions, the target earns at least 1 GSC click or average position is 20.0 or better; Vercel target-page visitors and GitHub stars are reported separately without a causal claim.
+- Failure criteria: After 28 complete post-deploy days and at least 5 GSC target-page impressions, the target has 0 clicks and average position is worse than 30.0. Fewer than 5 impressions is inconclusive; after minimum exposure, 0 clicks with average position from 20.1 through 30.0 is also inconclusive.
+- Stop criteria: Stop or hold if maintained Wenlan sources no longer support the workflow, the diagnostic overlaps an active Claude Code or MCP page, another controller edits the route, or the change creates a canonical, indexing, robots, noindex, structured-data, sitemap, locale, or rendered-layout regression.
+- 24h readout: pending — verify the live route, title, metadata, canonical, indexability, structured data, maintained references, English and Mandarin non-regression, production render, and separate source-native observations without an SEO-success judgment
+- 7d readout: pending — report GSC latency and target-page clicks, impressions, and position when available, Vercel target-page presence when available, and GitHub stars separately
+- W2 readout: pending — apply the minimum-exposure guard and inspect diagnostic-intent relevance plus overlap with the Claude Code, MCP, Learn-hub, and LLM-wiki cohorts
+- W4 readout: pending — evaluate the predeclared success, failure, or inconclusive condition without changing thresholds
+- W8 readout: pending — record a post-campaign follow-up only if it remains useful
+- Result: pending
+- Decision: wait
+- Next step: complete RED-to-GREEN article verification, full SEO/i18n/lint/build/technical checks, rendered verification, independent review, and the user-approved website publication; do not perform indexing or external distribution.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-07-24T23:02:17Z — stale AI memory diagnostic locally verified
+
+- Record type: campaign-observation
+- Current change: `EXP-2026-07-24-stale-ai-memory-diagnostic`
+- Production-in-flight changes: 1
+- Scope: refresh the existing English
+  `/learn/review-before-trust-ai-memory` route into a source-backed
+  stale/contradictory-memory diagnostic; no new URL, translation, canonical,
+  sitemap, schema type, CTA, `FAQPage`, indexing request, or external
+  distribution
+- Focused verification: the new article contract failed against the old
+  abstract trust page and passed after the diagnostic refresh; rendered mobile
+  QA then exposed an internally scrolling command block, and a second
+  RED-to-GREEN pass shortened only the example lines until the block fit
+  337px inside 337px
+- Full verification: `pnpm test:seo` 176/176 with explicit Wenlan and
+  wenlan-app roots; `pnpm test:i18n` 53/53; `pnpm lint`;
+  `pnpm seo:goal:check`; `pnpm build` with 209 static pages;
+  `pnpm seo:technical:built`; built i18n smoke with 19 direct-200 and five
+  hard-404 routes; `pnpm seo:technical:deployed`; and `git diff --check`
+- Technical evidence: the final build retains 109 sitemap URLs, 26 compiled
+  redirects, seven compiled noindex headers, 14 checked HTML pages, and no
+  `FAQPage` across 113 built HTML files; unchanged production passed robots,
+  109 sitemap URLs, 14 key pages, six utility noindex headers, 25 redirects,
+  six bridge redirects, and legacy exclusions
+- Render evidence: 1280×720 and 393×852 exposed the exact title and H1,
+  canonical, `index, follow`, four maintained source links, Article and
+  BreadcrumbList JSON-LD, and no `FAQPage`, framework overlay, document/H1/code
+  overflow, console warning, or console error; screenshots are under
+  `/tmp/wenlan-seo/visual-qa/2026-07-24-stale-ai-memory-diagnostic/`
+- Metric interpretation: the GSC target remains absent from the authenticated
+  page export, which is not a zero; same-range Vercel target baseline is
+  1 visitor and 1 pageview; no source-to-page session or causal claim is made
+- Approval: the user explicitly approved Git push, PR, merge, and production
+  deployment for this bounded website experiment; indexing, GSC validation,
+  external posts, OSS submission, paid acquisition, and metric changes remain
+  unapproved
+- Next step: complete independent final review, then publish and verify
+  production
+
+### 2026-07-24T23:06:05Z — stale AI memory diagnostic independent review
+
+- Record type: campaign-observation
+- Current change: `EXP-2026-07-24-stale-ai-memory-diagnostic`
+- Independent review: `SHIP` with no P0–P2 findings
+- Review evidence: all five candidate gates and source-native baselines were
+  inspectable; the article preserves the read-only lint, curated revision,
+  correction, and destructive forget boundaries; its failure-mode intent is
+  distinct from Claude Code native memory, MCP setup/shared-client memory, and
+  the product-reference docs; PLAN and the append-only ledger consistently
+  report seven active experiments and one production slot
+- Independent verification: `pnpm seo:goal:check`; `pnpm test:seo` 176/176;
+  `pnpm test:i18n` 53/53; TypeScript lint; focused article contract;
+  `git diff --check`; and fresh desktop/mobile clipping and command-block
+  overflow inspection all passed
+- Next step: commit, push, merge the user-approved PR, wait for Vercel
+  production, and verify the deployed route before marking the experiment live
