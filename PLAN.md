@@ -218,10 +218,9 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-24-stale-ai-memory-diagnostic`, live, production-verified,
-  and measuring. It no longer occupies the production slot. The preceding
-  `EXP-2026-07-24-mcp-shared-memory-exposure` change also remains live,
-  production-verified, and measuring.
+  `EXP-2026-07-24-claude-mem-comparison-refresh`, active in local preparation
+  and occupying the one production slot. The preceding stale-memory and MCP
+  shared-memory changes remain live, production-verified, and measuring.
 - Website-affecting technical correction:
   `TECH-2026-07-24-localized-learn-breadcrumb`, production-verified and no
   longer consuming the preparation slot.
@@ -240,7 +239,7 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `2026-07-24`. That approval does not include indexing, GSC validation,
   non-website publication, OSS submission, paid acquisition, or metric
   changes.
-- Active experiments: 7.
+- Active experiments: 8.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -407,40 +406,34 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-24-stale-ai-memory-diagnostic` is live, production-verified, and
-measuring.
-It refreshes the existing English
-`/learn/review-before-trust-ai-memory` route from abstract trust framing into
-a standalone diagnostic for stale, contradictory, duplicated, and wrongly
-scoped AI-agent memory. The page keeps its URL, canonical, sitemap entry,
-locale availability, Article and BreadcrumbList schema types, and CTA. It
-adds no Mandarin route, `FAQPage` JSON-LD, indexing request, or external
+`EXP-2026-07-24-claude-mem-comparison-refresh` is active in local preparation.
+It refreshes only the existing English `/learn/wenlan-vs-claude-mem` route.
+The authenticated target baseline is 7 GSC impressions, 0 clicks, and average
+position 14.4; no visible query row is joined to the target. Same-range Vercel
+reports 1 visitor and 1 pageview for the target.
+
+Maintained claude-mem commit
+`132b46343e60ecf4057c427736c57b08f7615dfe` and release `v13.12.4` show that
+the current page's Claude-Code-only, MIT-license, and weak cross-agent framing
+is stale. GitHub REST reports 88,477 stars, 7,680 forks, and 274 open issues in
+their native OSS units; issues #1270 and #1328 independently repeat the
+cross-agent job. The bounded refresh compares automatic hook-driven session
+capture and progressive retrieval with Wenlan's explicit source-backed
+capture, handoff, review, and maintained-page workflow. It keeps the URL,
+canonical, sitemap membership, locale availability, schema types, and CTA,
+and adds no Mandarin route, `FAQPage`, indexing request, or external
 distribution.
 
-PR #69 merged at `2026-07-24T23:07:44Z` as
+The stale-memory diagnostic is live, production-verified, and measuring. PR
+#69 merged at `2026-07-24T23:07:44Z` as
 `ee9694d40771a6477bf9b7c294f1ec45f7dd7c69`; Vercel production completed at
-`2026-07-24T23:08:30Z`. Deployed technical, i18n, metadata, structured-data,
-maintained-source, and rendered checks passed. No SEO-success judgment is made
-at production completion. The production slot is open, while this cohort keeps
-its predeclared readouts.
-
-The authenticated `2026-06-26..2026-07-23` GSC page export does not contain
-the target route, so no target zero, position, or indexing status is inferred.
-Same-range Vercel reports 1 visitor and 1 pageview for the target, while the
-property reports 1,402 visitors and 1,593 pageviews. Five English Reddit
-discussions captured at `2026-07-24T21:25:46Z` and open
-NousResearch/hermes-agent issue #10771 independently repeat stale,
-contradictory, duplicate, and obsolete-memory symptoms. Their native score,
-comment, and reaction units remain demand-discovery evidence, not GSC or
-keyword volume. Maintained Wenlan `origin/main` commit
-`93451bf0ef58399e08400e3b4ac613942adcfec8`, version `0.14.1`, proves the
-read-only recall/lint diagnosis, curate/revision review, correction, and
-destructive forget boundaries.
+`2026-07-24T23:08:30Z`. Its deployed technical and rendered checks passed,
+and no SEO-success judgment was made at production completion.
 
 The English Claude Code memory, zh-TW Obsidian, English AI work memory versus
-knowledge-base, English Learn-hub, English LLM-wiki, and MCP shared-memory
-changes remain production-verified measurement cohorts; they do not consume
-the production slot.
+knowledge-base, English Learn-hub, English LLM-wiki, MCP shared-memory, and
+stale-memory changes remain production-verified measurement cohorts; they do
+not consume the production slot.
 
 ### Current technical correction
 
@@ -524,7 +517,11 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The production slot is open. Run the Learn-hub 24-hour
+The claude-mem comparison passed focused and full verification, rendered QA,
+and independent review. The user approved commit, push, PR, merge, deployment,
+and production verification at `2026-07-24T23:27:13Z`. Publish it through the
+normal PR gate, verify production, and then release the production slot. Run
+the Learn-hub 24-hour
 readout after `2026-07-25T19:18:03Z`, the LLM-wiki refresh 24-hour readout
 after `2026-07-25T20:19:21Z`, and the MCP shared-memory exposure 24-hour
 technical readout after `2026-07-25T21:13:05Z`. Run the stale-memory

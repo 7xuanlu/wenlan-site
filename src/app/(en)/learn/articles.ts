@@ -1059,99 +1059,131 @@ const baseArticles: LearnArticle[] = [
     slug: "wenlan-vs-claude-mem",
     eyebrow: "Comparison",
     category: "Comparisons",
-    title: "Wenlan vs claude-mem: Which Claude Memory Workflow Fits Your Work?",
+    title: "Wenlan vs claude-mem: Explicit vs Automatic Agent Memory",
     description:
-      "Compare Wenlan and claude-mem for Claude Code memory, observer-style capture, MCP access, local control, and work that spans tools.",
-    metaTitle: "Wenlan vs claude-mem | Claude Memory Comparison",
+      "Compare Wenlan and claude-mem for automatic session capture, explicit source-backed memory, progressive retrieval, cross-agent support, and local control.",
+    metaTitle: "Wenlan vs claude-mem: Explicit vs Automatic AI Memory",
     metaDescription:
-      "Compare Wenlan and claude-mem for Claude Code memory workflows, observer capture, MCP memory, local control, and cross-tool AI work context.",
+      "Compare Wenlan and claude-mem for automatic session capture, explicit source-backed memory, progressive retrieval, cross-agent workflows, and local control.",
     keywords: [
       "Wenlan vs claude-mem",
       "claude-mem alternative",
+      "automatic AI memory",
       "Claude Code memory",
-      "Claude memory workflow",
-      "AI work memory",
+      "AI agent memory",
     ],
     updatedAt: "2026-07-24",
     author: DEFAULT_AUTHOR,
-    readingTime: "6 min read",
-    audience: "Claude Code users choosing a memory workflow",
+    readingTime: "7 min read",
+    audience: "AI coding-agent users choosing an automatic or explicit memory workflow",
     heroBullets: [
-      "claude-mem focuses on automatically observing Claude Code sessions and extracting useful context.",
-      "Wenlan focuses on shared local AI work memory across Claude Code and other MCP clients.",
-      "Both aim to reduce repeated context, but they choose different centers of gravity.",
-      "Both products are early. This page covers the claude-mem npm package as of 2026-07-02 and Wenlan v0.14.1 as of 2026-07-20.",
+      "claude-mem automatically captures agent sessions, compresses observations, and injects relevant history later.",
+      "Wenlan defaults to explicit source-backed capture, handoffs, review, and maintained wiki pages.",
+      "Both support Claude Code, Codex, and cross-agent retrieval; the real difference is how knowledge enters and stays inspectable.",
+      "This page checks claude-mem v13.12.4 and commit 132b4634 against Wenlan v0.14.1 and commit 93451bf0.",
     ],
     officialReferences: [
       {
         label: "claude-mem official website",
         href: "https://claude-mem.ai/",
       },
+      {
+        label: "claude-mem v13.12.4 release",
+        href: "https://github.com/thedotmack/claude-mem/releases/tag/v13.12.4",
+      },
+      {
+        label: "claude-mem architecture at the reviewed commit",
+        href: "https://github.com/thedotmack/claude-mem/blob/132b46343e60ecf4057c427736c57b08f7615dfe/docs/public/architecture/overview.mdx",
+      },
+      {
+        label: "claude-mem installation guide at the reviewed commit",
+        href: "https://github.com/thedotmack/claude-mem/blob/132b46343e60ecf4057c427736c57b08f7615dfe/docs/public/installation.mdx",
+      },
+      {
+        label: "claude-mem search workflow at the reviewed commit",
+        href: "https://github.com/thedotmack/claude-mem/blob/132b46343e60ecf4057c427736c57b08f7615dfe/docs/public/usage/search-tools.mdx",
+      },
+      {
+        label: "claude-mem Codex hooks at the reviewed commit",
+        href: "https://github.com/thedotmack/claude-mem/blob/132b46343e60ecf4057c427736c57b08f7615dfe/plugin/hooks/codex-hooks.json",
+      },
+      {
+        label: "Wenlan workflow at the reviewed commit",
+        href: "https://github.com/7xuanlu/wenlan/blob/93451bf0ef58399e08400e3b4ac613942adcfec8/README.md",
+      },
     ],
     sections: [
       {
         heading: "Short answer",
         body: [
-          "Choose claude-mem if your primary need is an observer-style memory workflow tightly centered on Claude Code sessions.",
-          "Choose Wenlan if you want local-first AI work memory that can serve Claude Code, Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP-compatible tools.",
+          "Choose claude-mem when you want agent sessions observed automatically, compressed into searchable history, and surfaced through a progressive disclosure flow with little capture-time effort.",
+          "Choose Wenlan when you want durable facts, decisions, handoffs, and pages to be explicit, source-backed, reviewable, and readable outside the agent that captured them.",
+          "Do not choose between them on the old assumption that only Wenlan works across agents. Current claude-mem source includes Codex hooks and other integrations; current Wenlan uses one local daemon plus MCP and native plugin paths. The useful decision is automatic session history versus deliberately maintained work knowledge.",
         ],
       },
       {
-        heading: "What claude-mem emphasizes",
+        heading: "What current claude-mem emphasizes",
         body: [
-          "claude-mem presents itself as a memory sidekick for Claude Code. Its core idea is watching work happen, capturing decisions and context, and retrieving that context later with useful scoping.",
-          "That is compelling when the main product surface is Claude Code and the desired experience is automatic memory capture around that tool.",
+          "claude-mem v13.12.4 is an automatic memory-compression system. Hooks capture prompts and tool activity, a local worker processes observations, and later sessions receive compact context or fetch more through search, timeline, and observation-detail steps.",
+          "The maintained source uses SQLite with FTS5, optional Chroma semantic search, a worker UI, citations by observation ID, and progressive disclosure so an agent can inspect an index before loading full history.",
+          "Its roots remain in Claude Code, but its current repository also includes Codex hooks, adapters, and integrations for other agents. It is no longer accurate to describe claude-mem as a single-tool store.",
         ],
       },
       {
         heading: "What Wenlan emphasizes",
         body: [
-          "Wenlan treats memory as part of a local AI work loop, not a single-client feature. Claude Code is important, but Wenlan also works through MCP so other clients can share the same context.",
-          "Wenlan's workflow includes handoffs, manual distillation, optional model-backed page work, wiki pages, readable artifacts, local indexes, and provenance attached to durable memories.",
+          "Wenlan treats memory as maintained work knowledge. `/capture` records one durable fact, decision, correction, preference, or lesson with provenance; `/handoff` records what changed and what comes next; `/distill` deliberately creates or refreshes source-backed pages.",
+          "Recall and storage run through one local daemon. Claude Code and Codex have plugin paths, while Cursor, Claude Desktop, Gemini CLI, VS Code, and other clients can reach the same knowledge through MCP.",
+          "The default workflow is explicit, but not frozen in manual mode: optional model-backed passes can enrich captures, connect entities, and propose page revisions. `/brief`, `/curate`, and read-only `/lint` keep those proposals and knowledge-health findings inspectable.",
         ],
       },
       {
         heading: "How to decide",
         body: [
-          "If you live entirely in Claude Code and want an observer-style assistant for that environment, claude-mem is directly aimed at that habit.",
-          "If your work moves across coding agents, chat tools, projects, and sessions, Wenlan is designed to make the same context portable across those surfaces.",
+          "Start with the capture contract, not the client list. If missing a useful event is the main risk, automatic observation is attractive. If preserving only deliberate, attributable knowledge is the main risk, explicit capture and review are easier to audit.",
+          "Then inspect the artifact you want to own. claude-mem centers a searchable session timeline and compressed observations. Wenlan centers atomic memories plus maintained Markdown pages, citations, revisions, and local git history.",
+        ],
+        bullets: [
+          "Choose claude-mem for automatic session observation and low capture-time friction.",
+          "Choose Wenlan for explicit durable knowledge, human review, and maintained pages.",
+          "Test both with your real correction, retrieval, and handoff workflow before migrating history.",
         ],
       },
       {
-        heading: "What 'observer mode' means in practice",
+        heading: "Automatic capture changes where the work happens",
         body: [
-          "claude-mem watches your Claude Code session and extracts memorable context without you naming it. The promise is low friction: keep working, memory accumulates on its own.",
-          "Two trade-offs show up over weeks of use. First, false positives: an observer cannot reliably tell which 'decision' is durable versus which is the start of an idea you will revise an hour later. Second, attribution: when the AI later cites memory, you usually want to know whether it came from your considered handoff or from a sentence you typed while still figuring out the problem.",
-          "Wenlan defaults to explicit capture for that reason. `/capture` is one keystroke during flow. `/handoff` preserves session state, and `/distill` deliberately turns repeated context into source-backed pages. Optional local models or API keys can add background extraction and page refresh work. The high-confidence layer is the one you marked.",
+          "Automatic capture moves effort away from the moment of work. claude-mem records activity and uses an AI processor to compress it, so users do not have to label every useful event in real time.",
+          "The later responsibility is retrieval and trust: decide which extracted observation is current, which is merely historical, and how much detail to load. claude-mem exposes observation IDs, citations, search filters, timeline context, and privacy tags to support that review.",
+          "Wenlan front-loads more intent. A user or agent chooses what deserves `/capture`, records a focused `/handoff`, and uses `/distill` only when repeated evidence deserves a maintained page. Proposed revisions and conflicts can then be accepted or dismissed rather than silently replacing the source-backed layer.",
         ],
       },
       {
         heading: "What happens at session end",
         body: [
-          "claude-mem's session-end pattern, as documented, summarizes the Claude Code session into memory entries automatically. That summary lives in claude-mem's store and gets retrieved on the next session via MCP.",
-          "Wenlan's session-end pattern is the `/handoff` flow. You write one to three sentences about what happened, what is blocked, and what is next. The daemon attaches that to your session captures, links related entities, and updates readable session/status artifacts under `~/.wenlan/` that are versioned in `~/.wenlan/.git/`. The next session starts with a handoff brief plus relevant prior context, not a chat-log summary.",
-          "Both reduce repeated context across sessions. The difference is who decides what is worth carrying forward: the model (claude-mem) or you with model help (Wenlan).",
+          "claude-mem's hooks generate observations and session summaries automatically. Future sessions receive a compact index and can progressively fetch a timeline or full observation details.",
+          "Wenlan's `/handoff` asks for a concise record of what changed, what is blocked, and what comes next. The next session can combine that status with relevant atomic memories and maintained pages.",
+          "Both reduce repeated setup. claude-mem preserves a compressed history of what the agent observed; Wenlan preserves the durable knowledge and handoff state that a user or agent chose to keep.",
         ],
         bullets: [
-          "claude-mem: automatic session summary, model picks what is durable.",
-          "Wenlan: explicit `/capture` plus `/handoff`, human picks; manual `/distill` and optional background page work supplement.",
-          "Both expose recall via MCP. Wenlan also exposes `wenlan recall <id>` and the projected Markdown for direct human reading.",
+          "claude-mem: hook-driven observations, summaries, and progressive history retrieval.",
+          "Wenlan: explicit `/capture`, `/handoff`, deliberate `/distill`, and optional reviewed enrichment.",
+          "Both keep local stores and expose identifiers that let a reader trace retrieved context.",
         ],
       },
       {
-        heading: "Cross-tool: Cursor, Codex, Claude Desktop, Gemini CLI",
+        heading: "Cross-agent support is no longer the dividing line",
         body: [
-          "claude-mem's positioning is Claude Code first. MCP exposure exists so other clients can read the store, but the workflow shape (observer of Claude Code sessions) is the product.",
-          "Wenlan's positioning is MCP first, Claude Code as one of many clients. One daemon at `127.0.0.1:7878` serves any MCP-compatible runtime. In my own work I switch between Cursor for refactors, Claude Code for greenfield, and Codex for shell-heavy tasks; the memory is the same memory.",
-          "If you live 100% inside Claude Code, this difference is theoretical. If you context-switch between tools across a typical week, it is the difference between one shared Wenlan system and three disjoint stores.",
+          "Current claude-mem source includes Codex hooks and adapters. Its pinned installation guide lists Claude Code, Cursor, Windsurf, OpenCode, Codex CLI, Antigravity CLI, and OpenClaw as supported IDEs. The exact capture depth depends on each integration, so inspect the maintained setup path for the client you use.",
+          "Wenlan exposes one local source of truth through Claude Code and Codex plugins plus MCP connectors for other clients. Its cross-client promise is shared access to the same atomic memories and pages, not automatic observation of every client by default.",
+          "For a mixed-agent workflow, compare what each client can write, what it can only read, and how failures degrade. A logo list is not enough.",
         ],
       },
       {
         heading: "When claude-mem is the better call",
         body: [
-          "If your AI work is entirely inside Claude Code, you want zero capture friction, and you are comfortable letting an observer pick what is memorable, claude-mem is shaped exactly for that. Single-tool by design, not by oversight.",
-          "If you want explicit human control over what enters memory, multiple AI clients sharing one local context store, or git-versioned audit trails for readable artifacts, those are not claude-mem's headline features. Use Wenlan.",
-          "Cost: claude-mem ships as an npm package under MIT. Wenlan's daemon, CLI, and MCP server are Apache-2.0. Both are free to self-host. The optional Wenlan desktop app lives in a separate repo under AGPL-3.0 if you want a GUI on top.",
+          "Choose claude-mem when automatic observation is the feature, not a compromise: you want session history captured with little interruption, summarized by an AI processor, browsable in a viewer, and retrieved in layers.",
+          "Choose Wenlan when the durable unit should be an explicit fact, decision, correction, handoff, or maintained page with review and provenance. It is also the clearer fit when readable Markdown and local git history are part of the ownership contract.",
+          "Both projects use Apache-2.0 for the compared open-source core. Wenlan's optional desktop app is maintained separately under AGPL-3.0. Licensing therefore is not the useful differentiator; capture and artifact models are.",
         ],
       },
     ],
@@ -1160,38 +1192,38 @@ const baseArticles: LearnArticle[] = [
       rows: [
         {
           dimension: "Center of gravity",
-          wenlan: "Local AI work memory across MCP clients: Claude Code, Cursor, Codex, Claude Desktop, VS Code, Gemini CLI.",
+          wenlan: "Explicit, source-backed work knowledge: atomic memories, handoffs, reviewed revisions, and maintained pages.",
           competitor:
-            "Observer-style memory assistant centered on Claude Code sessions.",
+            "Automatic session observation, AI compression, searchable history, and progressive context injection.",
         },
         {
           dimension: "Capture mode",
-          wenlan: "Explicit /capture in flow, /handoff at session end, plus manual /distill and optional background page work. Low-confidence and contradicting captures surface for review.",
+          wenlan: "Explicit /capture and /handoff, deliberate /distill, plus optional model-backed enrichment and revision proposals.",
           competitor:
-            "Automatic observer of Claude Code sessions; less explicit human control over what enters memory.",
+            "Agent hooks capture prompts and tool activity; a local worker processes observations and summaries automatically.",
         },
         {
-          dimension: "Retrieval",
-          wenlan: "Hybrid retrieval (vector + FTS5 + RRF + graph + CE reranker). LME_Oracle: 93.6% Recall@5, 0.857 MRR, 0.883 NDCG@10. LME_S: 87.7% Recall@5, 0.815 MRR, 0.822 NDCG@10. ~168 tokens per recall query.",
+          dimension: "Retrieval flow",
+          wenlan: "Recall over atomic memories and pages, with source IDs, graph context, and direct human-readable artifacts.",
           competitor:
-            "Semantic recall via MCP scoped to past Claude Code sessions; no published benchmark.",
+            "SQLite/FTS5 plus optional Chroma; progressive disclosure through search, timeline, and full observation details.",
         },
         {
           dimension: "Cross-tool reach",
-          wenlan: "One daemon serves any MCP client. Same memory across coding agents, chat tools, and CLI runtimes.",
+          wenlan: "Claude Code and Codex plugins plus MCP connectors share one local daemon and knowledge store.",
           competitor:
-            "Claude Code first. MCP exposure exists, but the workflow is tuned for the Claude Code surface.",
+            "Claude Code roots plus maintained hooks or adapters for Codex and other agents; capture depth varies by integration.",
         },
         {
           dimension: "Provenance + versioning",
-          wenlan: "Mandatory source IDs on distilled pages; readable pages, sessions, and status artifacts are versioned in ~/.wenlan/.git/.",
+          wenlan: "Source IDs, citations, revisions, readable pages, and local git history for projected artifacts.",
           competitor:
-            "Session-attributed captures; no per-write git history by default.",
+            "Session-attributed observation IDs, citations, SQLite history, and a viewer; no per-write git history by default.",
         },
         {
           dimension: "License",
-          wenlan: "Apache-2.0 daemon, CLI, MCP server.",
-          competitor: "MIT (per claude-mem npm package).",
+          wenlan: "Apache-2.0 runtime, CLI, MCP server, and plugin files.",
+          competitor: "Apache-2.0 repository and current open-source core.",
         },
       ],
     },
@@ -1204,22 +1236,27 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Is claude-mem more automatic than Wenlan?",
         answer:
-          "claude-mem is framed around observer-style capture for Claude Code. Wenlan has capture, handoffs, manual distillation, and optional model-backed page work, but it emphasizes inspectable memory, provenance, and cross-tool use. Less automatic at capture time, more controllable at recall time.",
+          "Yes, automatic session observation and compression are central to claude-mem. Wenlan defaults to explicit capture and handoff, with optional model-backed enrichment and page-refresh proposals that remain reviewable.",
+      },
+      {
+        question: "Does claude-mem support Codex?",
+        answer:
+          "Yes. The reviewed claude-mem source includes Codex hooks and adapters. Check its maintained setup documentation for the current write and read behavior rather than assuming every integration captures the same lifecycle events.",
       },
       {
         question: "Can I migrate from claude-mem to Wenlan?",
         answer:
-          "There is no automated importer at the moment. claude-mem's memories are accessible through MCP, so a one-off script that reads selected durable items and POSTs to Wenlan's `/api/memory/store` endpoint would do the job. So far, manual capture during normal work has been faster than building one.",
+          "There is no maintained one-command importer. Export or retrieve the small set of durable items you still trust, then capture them into Wenlan with provenance and review the result. Do not bulk-copy an automatic history without deciding what remains current.",
       },
       {
         question: "Is automatic capture really lower-friction in the long run?",
         answer:
-          "Friction at capture time is one form. Friction at recall time is another: a store filled with low-signal observations is one the AI has to wade through. Explicit capture front-loads the work; observer mode back-loads it. Wenlan uses explicit capture, handoffs, manual distillation, and optional background page work as the balance.",
+          "It is lower-friction at capture time. The later work is reviewing retrieval quality, stale observations, scope, and correction behavior. Explicit capture spends more attention up front. Test both costs on a real multi-session project.",
       },
       {
         question: "Does Wenlan watch my Claude Code session in the background?",
         answer:
-          "Not by default. There is no observer process. The daemon sees only what you capture or what you import. Session-level observation could be a build target later, but it is not a current feature, and the lack of it is intentional.",
+          "Not by default. Wenlan stores what a user or agent explicitly captures, imports, or hands off. Optional model-backed passes can enrich that material and propose page work, but they do not silently turn every tool event into durable memory.",
       },
     ],
     relatedSlugs: [

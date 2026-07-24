@@ -415,6 +415,49 @@ test("AI work memory comparison answers the knowledge-base role question directl
   assert.doesNotMatch(page, /Quantified dimensions\./);
 });
 
+test("claude-mem comparison reflects current automatic and cross-agent boundaries", async () => {
+  const articles = await readRepo("src/app/learn/articles.ts");
+  const marker = 'slug: "wenlan-vs-claude-mem"';
+  const start = articles.indexOf(marker);
+  const end = articles.indexOf('\n  {\n    slug: "', start + marker.length);
+  const article = articles.slice(start, end);
+
+  assert.notEqual(start, -1);
+  assert.notEqual(end, -1);
+  assert.match(
+    article,
+    /title: "Wenlan vs claude-mem: Explicit vs Automatic Agent Memory"/,
+  );
+  assert.match(
+    article,
+    /metaTitle: "Wenlan vs claude-mem: Explicit vs Automatic AI Memory"/,
+  );
+  assert.match(article, /claude-mem v13\.12\.4/);
+  assert.match(article, /Codex hooks/);
+  assert.match(article, /progressive disclosure/);
+  assert.match(article, /Both projects use Apache-2\.0/);
+  assert.match(
+    article,
+    /href: "https:\/\/github\.com\/thedotmack\/claude-mem\/releases\/tag\/v13\.12\.4"/,
+  );
+  assert.match(
+    article,
+    /href: "https:\/\/github\.com\/thedotmack\/claude-mem\/blob\/132b46343e60ecf4057c427736c57b08f7615dfe\/docs\/public\/architecture\/overview\.mdx"/,
+  );
+  assert.match(
+    article,
+    /Claude Code, Cursor, Windsurf, OpenCode, Codex CLI, Antigravity CLI, and OpenClaw/,
+  );
+  assert.match(
+    article,
+    /href: "https:\/\/github\.com\/thedotmack\/claude-mem\/blob\/132b46343e60ecf4057c427736c57b08f7615dfe\/docs\/public\/installation\.mdx"/,
+  );
+  assert.doesNotMatch(article, /Single-tool by design/);
+  assert.doesNotMatch(article, /three disjoint stores/);
+  assert.doesNotMatch(article, /MIT \(per claude-mem npm package\)/);
+  assert.doesNotMatch(article, /POSTs to Wenlan's `\/api\/memory\/store`/);
+});
+
 test("postbuild URL discovery reads moved English route-group source files", async () => {
   const indexNow = await readRepo("scripts/indexnow-ping.mjs");
 
