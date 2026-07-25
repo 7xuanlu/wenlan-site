@@ -226,10 +226,10 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-25-basic-memory-comparison-refresh`, active in local
-  preparation, locally verified, approved for publication, and consuming the
-  single production slot. The SuperLocalMemory, claude-mem, stale-memory, and
-  MCP shared-memory changes remain live, production-verified, and measuring;
+  `EXP-2026-07-25-basic-memory-comparison-refresh`, live,
+  production-verified, and measuring. It no longer consumes the single
+  production slot. The SuperLocalMemory, claude-mem, stale-memory, and MCP
+  shared-memory changes also remain live, production-verified, and measuring;
   they do not consume the slot.
 - Website-affecting technical correction:
   `TECH-2026-07-24-localized-learn-breadcrumb`, production-verified and no
@@ -272,15 +272,16 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Last production observation: `2026-07-25T00:05:36Z`; deployed robots, 109
+- Last production observation: `2026-07-25T01:04:56Z`; deployed robots, 109
   sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide
   `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL
-  exclusions passed. The live SuperLocalMemory comparison returned HTTP 200
-  with the expected v3.8.3 title and H1, exact self-canonical, `index, follow`,
-  five maintained sources, Article and BreadcrumbList JSON-LD, and no
-  `FAQPage`. Desktop and mobile production renders had no document or H1
-  overflow; the mobile comparison table remained horizontally accessible;
-  browser warning/error logs were empty.
+  exclusions passed. The live Basic Memory comparison returned HTTP 200 with
+  the refreshed H1, exact self-canonical, `index, follow`, nine maintained
+  source links, Article and BreadcrumbList JSON-LD, no `FAQPage`,
+  `datePublished: "2026-05-14"`, and `dateModified: "2026-07-25"`. Desktop and
+  mobile production renders had no document or H1 overflow; the mobile
+  comparison table remained horizontally accessible; browser warning/error
+  logs were empty.
 - Google Trends demand-discovery gate: resolved for the current decision at
   `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
   Seventeen timeline comparisons and nine related-query exports cover
@@ -433,10 +434,11 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-25-basic-memory-comparison-refresh` is active in local
-preparation and consumes the one production slot. It refreshes only the
-existing English `/learn/wenlan-vs-basic-memory` route. The authenticated
-target baseline is 20 GSC impressions, 1 click, and average position 14.6.
+`EXP-2026-07-25-basic-memory-comparison-refresh` is live,
+production-verified, and measuring. It no longer consumes the one production
+slot. It refreshes only the existing English
+`/learn/wenlan-vs-basic-memory` route. The authenticated target baseline is
+20 GSC impressions, 1 click, and average position 14.6.
 Joined visible rows `basic memory` and `basicmemory` have 5 impressions and 0
 clicks; the target's one click is outside those visible rows and remains
 unattributed. Same-range Vercel reports 5 visitors and 5 pageviews for the
@@ -602,12 +604,12 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The production slot is occupied by the locally verified and approved Basic
-Memory comparison refresh. Publish it through the normal PR gate, verify the
-production route and deployed technical SEO, append the production evidence,
-then release the slot. The SuperLocalMemory comparison is production-verified
-and measuring; run its 24-hour technical/evidence readout after
-`2026-07-26T00:05:36Z`.
+The production slot is open. The Basic Memory comparison is
+production-verified and measuring; run its 24-hour technical/evidence readout
+after `2026-07-26T01:04:56Z`. The SuperLocalMemory comparison is also
+production-verified and measuring; run its 24-hour technical/evidence readout
+after `2026-07-26T00:05:36Z`. Waiting for either readout does not block
+preparation of another candidate that passes the full gate.
 
 Run the Learn-hub 24-hour readout after `2026-07-25T19:18:03Z`, the LLM-wiki
 refresh 24-hour readout after `2026-07-25T20:19:21Z`, the MCP shared-memory

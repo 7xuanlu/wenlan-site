@@ -1575,3 +1575,21 @@ increase for that experiment.
 - Next step: publish through the normal PR gate, verify the production route
   and deployed technical SEO, append the production evidence, and release the
   one production slot
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-25-basic-memory-comparison-refresh at 2026-07-25T01:04:56Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-25-basic-memory-comparison-refresh
+- Observed at: 2026-07-25T01:04:56Z
+- Readout: correction
+- Status: live
+- Publish date: 2026-07-25
+- Production-in-flight changes: 0
+- Evidence: PR #76 merged at `2026-07-25T01:04:11Z` as `983f9383b499c73e293b7c61e5f256ea1276388b`; Vercel production completed at `2026-07-25T01:04:56Z`. The deployed technical audit passed robots, 109 sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL exclusions. The live English route returned HTTP 200 with the refreshed H1, exact self-canonical, `index, follow`, English language, SoftwareApplication, WebSite, Organization, Article, and BreadcrumbList JSON-LD, nine maintained source links, no `FAQPage`, `datePublished: "2026-05-14"`, and `dateModified: "2026-07-25"`. Desktop and mobile production renders showed the refreshed page without document or H1 overflow; the mobile comparison table remained horizontally accessible; no unmatched LME metric or browser warning/error was present.
+- Metric interpretation: The authenticated pre-publish target baseline remains 20 GSC impressions, 1 click, and average position 14.6. Joined visible rows remain 5 impressions and 0 clicks, with the page click unattributed. Same-range Vercel remains 5 visitors and 5 pageviews for the target, while GitHub remains 47 Wenlan total stars. No post-deploy SEO result, source-to-page session, CTA, or causal effect is inferred at production completion.
+- Result: pending
+- Decision: wait
+- Unperformed gated actions: no indexing request, GSC validation, Reddit or other external post, OSS submission, paid acquisition, or metric-definition change
+- Next step: run the 24-hour technical/evidence readout after `2026-07-26T01:04:56Z`; this production-verified measurement cohort does not consume the production slot
+<!-- EXPERIMENT-RECORD:END -->
