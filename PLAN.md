@@ -217,14 +217,20 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - PR #73 merged at `2026-07-25T00:04:41Z` as
   `9883ddaf74ae07667a57d752aee59468c2d0ee1c`. Vercel production completed at
   `2026-07-25T00:05:36Z`.
+- PR #75 merged at `2026-07-25T00:40:19Z` as
+  `052fb4952b5c7bd38bca6633197ff7ca8b92c245`. It changed only the weekly SEO
+  report generator, its tests, and the 2026-07-24 audit. Vercel completed the
+  resulting production build, and the deployed technical audit remained
+  green.
 - Goal deadline: 2026-08-18.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-24-superlocalmemory-comparison-refresh`, live,
-  production-verified, and measuring. It no longer consumes the production
-  slot. The preceding claude-mem, stale-memory, and MCP shared-memory changes
-  also remain live, production-verified, and measuring.
+  `EXP-2026-07-25-basic-memory-comparison-refresh`, active in local
+  preparation, locally verified, approved for publication, and consuming the
+  single production slot. The SuperLocalMemory, claude-mem, stale-memory, and
+  MCP shared-memory changes remain live, production-verified, and measuring;
+  they do not consume the slot.
 - Website-affecting technical correction:
   `TECH-2026-07-24-localized-learn-breadcrumb`, production-verified and no
   longer consuming the preparation slot.
@@ -249,7 +255,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `2026-07-25T00:02:30Z`. That approval does not include request indexing,
   GSC validation, non-website publication, OSS submission, paid acquisition,
   or metric changes.
-- Active experiments: 9.
+- The user approved commit, Git push, PR creation, merge, production
+  deployment, and production verification for
+  `EXP-2026-07-25-basic-memory-comparison-refresh` in this Codex task at
+  `2026-07-25T01:01:13Z`. That approval does not include request indexing,
+  GSC validation, non-website publication, OSS submission, paid acquisition,
+  or metric changes.
+- Active experiments: 10.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -386,6 +398,12 @@ Supporting quality split for the same live range:
    `knowledge base`, `AI memory`, `AI wiki`, and exact Taiwan `AI 知識庫` are
    not primary targets; `AI 筆記` is discovery-only until GSC or another clean
    high-intent observation connects it to Wenlan.
+   A 2026-07-25 follow-up found independent direct-comparison surfaces from
+   Mem0, Creed, and Hippo that include Basic Memory in a product-selection
+   decision. Combined with the existing Basic Memory page's authenticated
+   exposure and current-source drift, this clears the candidate gate for a
+   bounded English refresh. Each external page or repository remains one
+   inspectable observation, not keyword volume.
 5. Prefer one existing indexed acquisition page with impressions for the first
    bounded experiment. Consider a net-new search asset only if the complete
    candidate gate passes, the preceding website change is production-verified,
@@ -415,7 +433,34 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-24-superlocalmemory-comparison-refresh` is live,
+`EXP-2026-07-25-basic-memory-comparison-refresh` is active in local
+preparation and consumes the one production slot. It refreshes only the
+existing English `/learn/wenlan-vs-basic-memory` route. The authenticated
+target baseline is 20 GSC impressions, 1 click, and average position 14.6.
+Joined visible rows `basic memory` and `basicmemory` have 5 impressions and 0
+clicks; the target's one click is outside those visible rows and remains
+unattributed. Same-range Vercel reports 5 visitors and 5 pageviews for the
+target.
+
+Basic Memory release v0.22.1, PyPI v0.22.1, current source commit
+`5d444f0974476645f904c1446998c0a938a6e7f7`, and docs commit
+`1c670035987b21f0a93d4e45ea1eed1487775f74` show that the current page's
+local-vault-only framing is incomplete. Maintained sources now document local
+or hosted deployment, Teams, cross-client MCP, semantic and graph search,
+Agent Skills, local sync, snapshots, and hosted file history. Independent
+English comparison surfaces from Mem0, Creed, and Hippo corroborate the
+comparison decision without supplying keyword volume.
+
+The bounded refresh corrects the operating-model boundary and removes
+unsupported retrieval-scale and local-only history claims. It keeps the URL,
+meta title, canonical, sitemap membership, locale availability, schema types,
+related routes, and CTA destination unchanged. It adds no Mandarin route,
+`FAQPage`, indexing request, or external distribution. The source evidence,
+candidate gate, native-unit baseline, and predeclared readouts are recorded
+in
+`docs/seo-audits/2026-07-25-basic-memory-comparison-prelaunch.md`.
+
+The SuperLocalMemory comparison refresh is live,
 production-verified, and measuring. It no longer consumes the production
 slot. It refreshes only the existing English
 `/learn/wenlan-vs-superlocal-memory` route. The authenticated target baseline
@@ -557,10 +602,12 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The production slot is open. The SuperLocalMemory comparison is
-production-verified and measuring; run its 24-hour technical/evidence readout
-after `2026-07-26T00:05:36Z`. Waiting for that readout does not block
-preparation of another candidate that passes the full gate.
+The production slot is occupied by the locally verified and approved Basic
+Memory comparison refresh. Publish it through the normal PR gate, verify the
+production route and deployed technical SEO, append the production evidence,
+then release the slot. The SuperLocalMemory comparison is production-verified
+and measuring; run its 24-hour technical/evidence readout after
+`2026-07-26T00:05:36Z`.
 
 Run the Learn-hub 24-hour readout after `2026-07-25T19:18:03Z`, the LLM-wiki
 refresh 24-hour readout after `2026-07-25T20:19:21Z`, the MCP shared-memory

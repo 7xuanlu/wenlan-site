@@ -1509,3 +1509,69 @@ increase for that experiment.
 - Unperformed gated actions: no indexing request, GSC validation, Reddit or other external post, OSS submission, paid acquisition, or metric-definition change
 - Next step: run the 24-hour technical/evidence readout after `2026-07-26T00:05:36Z`; this production-verified measurement cohort does not consume the production slot
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-25-basic-memory-comparison-refresh
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-25-basic-memory-comparison-refresh
+- Status: active
+- Data window: 2026-07-25..2026-07-31
+- Asset class: refresh
+- Launched: 2026-07-25
+- Hypothesis: Correcting the existing comparison around Basic Memory's current local, Cloud, Teams, search, and maintenance paths versus Wenlan's source-backed AI-work workflow will improve qualified exposure without creating a competing URL.
+- Candidate evidence: The target has 20 authenticated GSC impressions, 1 click, and average position 14.6. Joined visible rows `basic memory` and `basicmemory` have 5 impressions and 0 clicks; the page click is outside those visible rows and remains unattributed. Basic Memory release v0.22.1, PyPI v0.22.1, current source commit `5d444f0974476645f904c1446998c0a938a6e7f7`, and docs commit `1c670035987b21f0a93d4e45ea1eed1487775f74` show material drift from the page's local-vault-only framing to explicit local or hosted deployment, Teams, cross-client MCP, semantic and graph search, agent skills, sync, snapshots, and hosted file history. Independent English comparison surfaces from Mem0, Creed, and Hippo include Basic Memory in direct product-selection decisions. Each external surface is one inspectable observation, not keyword volume. Full provenance is recorded in `docs/seo-audits/2026-07-25-basic-memory-comparison-prelaunch.md`.
+- Baseline: GSC property totals are 7 clicks and 310 impressions; visible-query totals are 1 click and 75 impressions, leaving a 6-click and 235-impression visibility gap. The target has 20 impressions, 1 click, and average position 14.6. Vercel separately reports 1,402 visitors and 1,593 pageviews property-wide and 5 visitors and 5 pageviews for the target. GitHub reports 47 Wenlan total stars. Umami and Vercel custom CTA events remain unavailable or account-gated. No source-to-page join or causal inference is made.
+- Change: Refresh only the existing English `/learn/wenlan-vs-basic-memory` H1, first answer, maintained source links, Basic Memory product boundary, decision framework, comparison table, FAQ copy, and freshness statement. State local and hosted Basic Memory paths separately, remove unsupported retrieval-scale and local-only history claims, and preserve a neutral chooser. Keep the URL, meta title, canonical, sitemap membership, locale availability, Article and BreadcrumbList schema types, related routes, and CTA destination unchanged. Add no Mandarin route, `FAQPage` JSON-LD, indexing request, or external distribution.
+- Publish date: not-published
+- Index date: unknown-existing-route
+- Minimum exposure: 5 GSC target-page impressions in the first 28 complete post-deploy days
+- Success criteria: After at least 5 GSC target-page impressions, the target earns at least 1 GSC click or average position is 12.0 or better; Vercel target-page visitors and GitHub stars are reported separately without a causal claim.
+- Failure criteria: After 28 complete post-deploy days and at least 5 GSC target-page impressions, the target has 0 clicks and average position is worse than 20.0. Fewer than 5 impressions is inconclusive; after minimum exposure, 0 clicks with average position from 12.1 through 20.0 is also inconclusive.
+- Stop criteria: Stop or hold if maintained sources no longer support the comparison, another controller edits the route, a claim cannot be pinned to first-party evidence, or the change creates a canonical, indexing, robots, noindex, structured-data, sitemap, locale, source-link, or rendered-layout regression.
+- 24h readout: pending — verify the live route, title, metadata, canonical, indexability, structured data, maintained references, English and Mandarin non-regression, production render, and separate source-native observations without an SEO-success judgment
+- 7d readout: pending — report GSC latency and target-page clicks, impressions, and position when available, Vercel target-page presence when available, and GitHub stars separately
+- W2 readout: pending — apply the minimum-exposure guard and inspect Basic Memory comparison relevance plus overlap with the knowledge-base, Learn-hub, and other comparison cohorts
+- W4 readout: pending — evaluate the predeclared success, failure, or inconclusive condition without changing thresholds
+- W8 readout: pending — record a post-campaign follow-up only if it remains useful
+- Result: pending
+- Decision: wait
+- Next step: complete focused article verification, full SEO/i18n/lint/build/technical checks, rendered verification, and independent review; stop before push, PR, merge, or deploy without new explicit approval
+<!-- EXPERIMENT-RECORD:END -->
+
+### Campaign observation — 2026-07-25T01:01:13Z
+
+- Experiment: `EXP-2026-07-25-basic-memory-comparison-refresh`
+- Local preparation: complete
+- Change: refreshed the existing English Basic Memory comparison around its
+  current local, Cloud, Teams, semantic and graph search, Agent Skills, hosted
+  history, and collaboration paths versus Wenlan's source-backed Sources,
+  Memories, and Pages workflow; preserved the URL, meta title, canonical,
+  sitemap membership, locale availability, schema types, related routes, and
+  CTA destination
+- Publication-date correction: preserved the original
+  `publishedAt: "2026-05-14"` and set `updatedAt: "2026-07-25"`; removed
+  Wenlan-only LME numbers from the side-by-side table so the page does not
+  imply an unmatched benchmark comparison
+- Reviewer: initial `FIX FIRST` for the publication-date schema and asymmetric
+  benchmark presentation; both were fixed, and the final independent verdict
+  was `SHIP` with no remaining P0-P2 findings
+- Verification: `seo:goal:check` passed; SEO tests 182/182; i18n tests 53/53;
+  TypeScript lint passed; build generated 209 static pages; built technical SEO
+  passed with 109 sitemap locations and no `FAQPage` in 113 built HTML files;
+  production-build locale checks and `git diff --check` passed
+- Rendered QA: desktop 1440x1000 and mobile 393x852 returned 200 with the
+  expected H1, exact self-canonical, `index, follow`, Article and
+  BreadcrumbList schema, no `FAQPage`, correct `datePublished` and
+  `dateModified`, nine HTTPS source links, no document or H1 overflow, and no
+  browser warning or error
+- Locale decision: English refresh only. The authenticated and discovery
+  evidence does not establish a Mandarin Basic Memory comparison cluster;
+  zh-TW and zh-CN unsupported routes remain intentional 404s.
+- Approval: at `2026-07-25T01:01:13Z`, the user approved commit, push, PR,
+  merge, deployment, and production verification for this website change
+- Still unapproved: request indexing, GSC validation, Reddit or other external
+  publication, OSS submission, paid acquisition, and metric-definition changes
+- Next step: publish through the normal PR gate, verify the production route
+  and deployed technical SEO, append the production evidence, and release the
+  one production slot
