@@ -17,6 +17,7 @@ type BaseSpec = {
   metaTitle: string;
   metaDescription: string;
   keywords: string[];
+  publishedAt?: string;
   updatedAt?: string;
   audience: string;
   heroBullets: [string, string, string];
@@ -47,6 +48,7 @@ function makeArticle(spec: BaseSpec): LearnArticle {
     metaTitle: spec.metaTitle,
     metaDescription: spec.metaDescription,
     keywords: spec.keywords,
+    publishedAt: spec.publishedAt,
     updatedAt: spec.updatedAt ?? UPDATED_AT,
     author: AUTHOR,
     readingTime: "5 min read",
@@ -541,60 +543,80 @@ const setupArticles: BaseSpec[] = [
     category: "Concepts",
     title: "Why AI Coding Agents Lose Context Between Sessions",
     description:
-      "Understand why useful coding context disappears and how a local work-memory loop keeps decisions available.",
-    metaTitle: "Why AI Coding Agents Lose Context | Wenlan",
+      "Diagnose context loss after a fresh session, compaction, or tool switch, then choose resume, project instructions, handoffs, or durable memory.",
+    metaTitle: "AI Coding Agent Context Loss: Causes and Fixes | Wenlan",
     metaDescription:
-      "AI coding agents lose context when work lives only in chat history. Wenlan captures decisions, lessons, handoffs, and project facts locally.",
+      "Diagnose why AI coding agents lose context between sessions and choose the right fix: resume, project instructions, handoffs, or durable memory.",
     keywords: [
       "AI coding agent loses context",
+      "AI coding agent context loss",
       "Claude Code loses context",
-      "Cursor loses context",
-      "Codex loses context",
-      "AI agent handoff",
+      "Claude Code context between sessions",
+      "Claude Code auto memory",
+      "AI agent session handoff",
     ],
-    audience: "Developers frustrated by repeated AI session warmup",
+    publishedAt: "2026-06-06",
+    updatedAt: "2026-07-25",
+    audience: "Developers diagnosing repeated AI session warmup",
     heroBullets: [
-      "Chat history is not a durable work-memory layer.",
-      "Important context is usually decisions, lessons, constraints, and open threads.",
-      "Wenlan turns session boundaries into brief, capture, recall, and handoff habits.",
+      "Resume recovers one saved conversation; it does not create shared knowledge across tools.",
+      "Project instructions and native auto memory solve different problems from handoffs.",
+      "Diagnose the missing layer before adding more prompt text or transcript storage.",
     ],
     quickAnswer:
-      "AI coding agents lose context when the useful parts of work stay inside a transient conversation or a client-scoped memory system. Wenlan does not treat the full transcript as memory by default; the user or agent captures durable facts in flow, then retrieves them later without replaying the whole chat.",
+      "First identify what disappeared. If you need the exact previous conversation, resume the native session. If a persistent rule or architecture fact is missing, verify the client’s project instructions or native memory. If decisions, failed paths, and open work must survive a fresh session or tool switch, write a handoff and store the durable knowledge.",
     problem:
-      "The failure shows up as repeated setup explanations, forgotten decisions, stale assumptions, and agents re-debugging problems already solved in a previous session.",
+      "Context loss is not one failure. A fresh session starts without the prior conversation. Compaction can summarize away decision rationale or failed paths. Native project memory may be scoped to one client, repository, or machine. Source files show what changed but often not why, while an overloaded memory file can bury the fact the agent needs.",
     wenlanFit:
-      "Wenlan addresses the session boundary directly. Start with context, capture durable facts during work, and end with a handoff so the next agent can resume from the current state.",
-    actionHeading: "Diagnose the context loss",
+      "Wenlan does not replace a client’s resume command or project instructions. It provides a shared memory boundary for durable decisions, lessons, gotchas, handoffs, and maintained pages that multiple configured clients can reach through the same local daemon.",
+    actionHeading: "Run the context-loss diagnosis",
     actionIntro:
-      "Check which layer failed before adding more prompt text.",
+      "Match the symptom to the smallest recovery path before storing more text.",
     actionBullets: [
-      "Session boundary: the previous chat ended and the next agent has no compact handoff.",
-      "Compacted context: the model kept a summary, but dropped decision rationale or failed paths.",
-      "Client-scoped memory: one tool remembered something that another tool cannot read.",
-      "Repo-state mismatch: files show what changed, but not why the tradeoff was chosen.",
-      "Noisy transcript recall: the right fact exists in history, but it is buried in logs and chatter.",
-      "Wenlan fix: capture durable decisions in flow, use recall for specific history, and write a handoff when work will continue.",
+      "Exact conversation missing: resume the saved native session before reconstructing it from memory.",
+      "Persistent instruction missing: verify that the client loaded the correct project instructions, rules, or native memory files.",
+      "Compaction lost rationale: persist the decision, failed path, or open thread before the active context is summarized.",
+      "Tool switch lost knowledge: use a shared memory boundary instead of copying one client’s private session store.",
+      "Repository state is clear but the why is missing: retrieve the decision or handoff rather than asking the agent to infer history from the diff.",
+      "Recall returns stale or noisy context: check scope and provenance, then correct or supersede the durable fact instead of adding another duplicate.",
     ],
+    code: {
+      label: "Wenlan continuity loop",
+      code: "/brief\n/recall <specific decision or gotcha>\n/capture <one durable fact and why it matters>\n/handoff",
+    },
     caution:
-      "Do not treat memory as a transcript archive. More stored text can make retrieval worse if it is not distilled, reviewed, and scoped.",
+      "Do not use durable memory as a second transcript archive. Native resume is the strongest recovery path for one exact conversation; project instructions are the right home for standing behavior; durable memory should keep only context that remains useful after the session ends.",
     faq: [
-      "Can a longer context window solve this?",
-      "It helps inside one session, but it does not create durable, inspectable, cross-tool memory.",
-      "What is the first habit to add?",
-      "End real work sessions with a handoff. It is the smallest action that prevents the next session from starting cold.",
+      "Should I resume a session or use durable memory?",
+      "Resume when you need the exact conversation and tool history. Use durable memory for decisions, lessons, constraints, and open work that should remain useful in later sessions or other configured clients.",
+      "Can Claude Code auto memory replace a shared memory layer?",
+      "Claude Code auto memory is useful native project memory and is shared across worktrees of the same repository. It does not automatically become a shared memory boundary for Cursor, Codex, or other MCP clients.",
     ],
-    relatedSlugs: ["ai-agent-handoff-loop", "claude-code-session-handoff", "persistent-project-context-for-ai-agents"],
+    relatedSlugs: [
+      "claude-code-memory",
+      "claude-code-session-handoff",
+      "persistent-project-context-for-ai-agents",
+      "ai-agent-memory-types",
+    ],
     officialReferences: [
       {
-        label: "Wenlan daily workflow docs",
+        label: "Claude Code memory",
+        href: "https://code.claude.com/docs/en/memory",
+      },
+      {
+        label: "Claude Code sessions",
+        href: "https://code.claude.com/docs/en/sessions",
+      },
+      {
+        label: "Wenlan daily workflow",
         href: "https://wenlan.app/docs/daily-workflow",
       },
       {
-        label: "Wenlan core concepts docs",
-        href: "https://wenlan.app/docs/core-concepts",
+        label: "Wenlan capture quality",
+        href: "https://wenlan.app/docs/capture-quality",
       },
       {
-        label: "Wenlan MCP clients docs",
+        label: "Wenlan MCP clients",
         href: "https://wenlan.app/docs/mcp-clients",
       },
     ],
