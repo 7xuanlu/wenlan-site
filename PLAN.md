@@ -218,10 +218,11 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-24-claude-mem-comparison-refresh`, live,
-  production-verified, and measuring. It no longer occupies the production
-  slot. The preceding stale-memory and MCP shared-memory changes also remain
-  live, production-verified, and measuring.
+  `EXP-2026-07-24-superlocalmemory-comparison-refresh`, locally verified,
+  independently reviewed, approved for publication, and consuming the one
+  production slot. The preceding
+  claude-mem, stale-memory, and MCP shared-memory changes remain live,
+  production-verified, and measuring.
 - Website-affecting technical correction:
   `TECH-2026-07-24-localized-learn-breadcrumb`, production-verified and no
   longer consuming the preparation slot.
@@ -240,7 +241,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `2026-07-24`. That approval does not include indexing, GSC validation,
   non-website publication, OSS submission, paid acquisition, or metric
   changes.
-- Active experiments: 8.
+- The user approved commit, Git push, PR creation, merge, production
+  deployment, and production verification for
+  `EXP-2026-07-24-superlocalmemory-comparison-refresh` in this Codex task at
+  `2026-07-25T00:02:30Z`. That approval does not include request indexing,
+  GSC validation, non-website publication, OSS submission, paid acquisition,
+  or metric changes.
+- Active experiments: 9.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -405,30 +412,46 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-24-claude-mem-comparison-refresh` is live,
-production-verified, and measuring. It refreshes only the existing English
-`/learn/wenlan-vs-claude-mem` route. The authenticated target baseline is
-7 GSC impressions, 0 clicks, and average position 14.4; no visible query row
-is joined to the target. Same-range Vercel reports 1 visitor and 1 pageview
-for the target.
+`EXP-2026-07-24-superlocalmemory-comparison-refresh` is locally verified,
+independently reviewed, approved for publication, and consumes the one
+production slot. It refreshes only the existing English
+`/learn/wenlan-vs-superlocal-memory` route. The authenticated target baseline
+is 16 GSC impressions, 0 clicks, and average position 8.6.
+The separate visible query `super local memory` has 1 impression, 0 clicks,
+and average position 45.0; it is not joined to the page export. Same-range
+Vercel reports 7 visitors and 7 pageviews for the target.
 
-Maintained claude-mem commit
-`132b46343e60ecf4057c427736c57b08f7615dfe` and release `v13.12.4` show that
-the current page's Claude-Code-only, MIT-license, and weak cross-agent framing
-is stale. GitHub REST reports 88,477 stars, 7,680 forks, and 274 open issues in
-their native OSS units; issues #1270 and #1328 independently repeat the
-cross-agent job. The bounded refresh compares automatic hook-driven session
-capture and progressive retrieval with Wenlan's explicit source-backed
-capture, handoff, review, and maintained-page workflow. It keeps the URL,
-canonical, sitemap membership, locale availability, schema types, and CTA,
-and adds no Mandarin route, `FAQPage`, indexing request, or external
-distribution.
+Maintained SuperLocalMemory tag `v3.8.3`, commit
+`893e6d7d521cef6013d35f0ea468eca3005916de`, npm publication
+`2026-07-24T15:17:25.395Z`, README, and changelog show material drift from
+the page's June reliability-layer snapshot to a local-first agent memory
+control plane with temporal retrieval, team scopes and access, audit,
+cache/compression, bounded loops, and framework adapters. The same source
+corrects the old 74.8% zero-LLM description: Mode A Raw is 60.4% with
+zero-LLM answer construction, while Mode A Retrieval is 74.8% with
+GPT-4.1-mini answer synthesis. The bounded refresh compares that operational
+control plane with Wenlan's explicit source-backed LLM wiki workflow and
+keeps the URL, canonical, sitemap membership, locale availability, schema
+types, and CTA destination unchanged. It adds no Mandarin route, `FAQPage`,
+indexing request, or external distribution.
 
-PR #71 merged at `2026-07-24T23:33:32Z` as
+The current source evidence, candidate gate, native-unit baseline, and
+predeclared readouts are recorded in
+`docs/seo-audits/2026-07-24-superlocalmemory-comparison-prelaunch.md`.
+The focused article contract failed against the old page and passes after the
+refresh. SEO tests pass 178/178; i18n tests pass 53/53; TypeScript lint,
+production build, built technical SEO, locale-route checks, full desktop and
+mobile rendered QA, and `git diff --check` pass. Independent review found one
+P2 gap in benchmark/license regression coverage; the repair added
+article-scoped Mode C and licensing assertions, and re-review returned `SHIP`
+with no remaining P0–P2 findings.
+
+The claude-mem comparison is live, production-verified, and measuring. PR #71
+merged at `2026-07-24T23:33:32Z` as
 `f6e5dd083ad5086fe4c4552cee1764c8dc848645`; Vercel production completed at
-`2026-07-24T23:34:19Z`. Deployed technical, metadata, maintained-source, and
-rendered checks passed. The production slot is open. No SEO-success judgment
-is made at production completion.
+`2026-07-24T23:34:19Z`. Its deployed technical, metadata,
+maintained-source, and rendered checks passed, and no SEO-success judgment
+was made at production completion.
 
 The stale-memory diagnostic is live, production-verified, and measuring. PR
 #69 merged at `2026-07-24T23:07:44Z` as
@@ -462,11 +485,12 @@ PR #65 merged at `2026-07-24T20:47:55Z` as
 and rendered checks passed. The correction is production-verified and no
 longer consumes the preparation slot.
 
-The weekly report's three ranked title/meta candidates were not started:
-changelog and data/privacy have page rows but no inspectable matching query or
-independent demand candidate, while Superlocal has only one visible matching
-query impression and stale competitor-source checks. All three are also still
-inside their prior refresh measurement windows.
+The weekly report's changelog and data/privacy candidates remain unstarted
+because their page rows have no inspectable matching query or independent
+demand candidate. The SuperLocalMemory comparison is now the active
+exception: fresh tagged source and the v3.8.3 package establish material
+product and benchmark drift beyond the one visible query row, so refreshing
+the existing indexed page passes the full candidate gate.
 
 ### Immediate localized launch
 
@@ -523,17 +547,20 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The production slot is open. Run the Learn-hub 24-hour
-readout after `2026-07-25T19:18:03Z`, the LLM-wiki refresh 24-hour readout
-after `2026-07-25T20:19:21Z`, and the MCP shared-memory exposure 24-hour
-technical readout after `2026-07-25T21:13:05Z`. Run the stale-memory
-diagnostic's 24-hour technical/evidence readout after
-`2026-07-25T23:08:30Z`, and this claude-mem comparison's 24-hour technical
-readout after `2026-07-25T23:34:19Z`; keep the earlier cohorts on schedule.
-Waiting for those readouts does not prevent preparation of another candidate
-that passes the full gate. Do not rewrite the three recently refreshed weekly
-candidates without fresh query or independently corroborated demand evidence.
-No indexing or non-website publication is authorized.
+The production slot is occupied by
+`EXP-2026-07-24-superlocalmemory-comparison-refresh`. Its local, technical,
+rendered, and independent-review gates pass, and the user approved commit,
+push, PR, merge, deployment, and production verification at
+`2026-07-25T00:02:30Z`. Publish through the normal PR gate, verify the live
+route and deployed technical SEO, append the production evidence, and then
+release the production slot.
+
+Run the Learn-hub 24-hour readout after `2026-07-25T19:18:03Z`, the LLM-wiki
+refresh 24-hour readout after `2026-07-25T20:19:21Z`, the MCP shared-memory
+exposure readout after `2026-07-25T21:13:05Z`, the stale-memory diagnostic
+readout after `2026-07-25T23:08:30Z`, and the claude-mem comparison readout
+after `2026-07-25T23:34:19Z`; keep earlier cohorts on schedule. No indexing
+or non-website publication is authorized.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.
