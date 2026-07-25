@@ -1491,3 +1491,21 @@ increase for that experiment.
 - Decision: wait
 - Next step: complete RED-to-GREEN article verification, full SEO/i18n/lint/build/technical checks, rendered verification, and independent review; stop before push, PR, merge, or deploy without new explicit approval
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-superlocalmemory-comparison-refresh at 2026-07-25T00:05:36Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-superlocalmemory-comparison-refresh
+- Observed at: 2026-07-25T00:05:36Z
+- Readout: correction
+- Status: live
+- Publish date: 2026-07-24
+- Production-in-flight changes: 0
+- Evidence: PR #73 merged at `2026-07-25T00:04:41Z` as `9883ddaf74ae07667a57d752aee59468c2d0ee1c`; Vercel production deployment `dpl_7ywPX5MLQVhr5NtFWqCNnevbTAGM` completed at `2026-07-25T00:05:36Z`, and `wenlan.app` resolved to that deployment. The deployed technical audit passed robots, 109 sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL exclusions. The live English route returned HTTP 200 with the expected v3.8.3 title and H1, exact self-canonical, `index, follow`, English language, SoftwareApplication, WebSite, Organization, Article, and BreadcrumbList JSON-LD, five maintained source links, and no `FAQPage`. Desktop and mobile production renders showed the refreshed page without document or H1 overflow; desktop document/client widths were `1274/1274`, mobile widths were `387/387`, the mobile comparison table exposed its full 98-pixel horizontal scroll range, and browser warning/error logs were empty.
+- Metric interpretation: The authenticated pre-publish target baseline remains 16 GSC impressions, 0 clicks, and average position 8.6. Same-range Vercel remains 7 visitors and 7 pageviews for the target, while GitHub remains 47 Wenlan total stars. No post-deploy SEO result, source-to-page session, CTA, or causal effect is inferred at production completion.
+- Result: pending
+- Decision: wait
+- Unperformed gated actions: no indexing request, GSC validation, Reddit or other external post, OSS submission, paid acquisition, or metric-definition change
+- Next step: run the 24-hour technical/evidence readout after `2026-07-26T00:05:36Z`; this production-verified measurement cohort does not consume the production slot
+<!-- EXPERIMENT-RECORD:END -->

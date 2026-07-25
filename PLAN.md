@@ -214,15 +214,17 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - PR #69 merged at `2026-07-24T23:07:44Z` as
   `ee9694d40771a6477bf9b7c294f1ec45f7dd7c69`. Vercel production completed at
   `2026-07-24T23:08:30Z`.
+- PR #73 merged at `2026-07-25T00:04:41Z` as
+  `9883ddaf74ae07667a57d752aee59468c2d0ee1c`. Vercel production completed at
+  `2026-07-25T00:05:36Z`.
 - Goal deadline: 2026-08-18.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-24-superlocalmemory-comparison-refresh`, locally verified,
-  independently reviewed, approved for publication, and consuming the one
-  production slot. The preceding
-  claude-mem, stale-memory, and MCP shared-memory changes remain live,
-  production-verified, and measuring.
+  `EXP-2026-07-24-superlocalmemory-comparison-refresh`, live,
+  production-verified, and measuring. It no longer consumes the production
+  slot. The preceding claude-mem, stale-memory, and MCP shared-memory changes
+  also remain live, production-verified, and measuring.
 - Website-affecting technical correction:
   `TECH-2026-07-24-localized-learn-breadcrumb`, production-verified and no
   longer consuming the preparation slot.
@@ -258,14 +260,15 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Last production observation: `2026-07-24T23:34:19Z`; deployed robots, 109
+- Last production observation: `2026-07-25T00:05:36Z`; deployed robots, 109
   sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide
   `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL
-  exclusions passed. The live claude-mem comparison returned HTTP 200 with the
-  expected title, exact self-canonical, `index, follow`, maintained
-  v13.12.4 sources, the corrected supported-IDE list, Article and
-  BreadcrumbList JSON-LD, and no `FAQPage`. Desktop and mobile production
-  renders had no document or H1 overflow, console warning, or console error.
+  exclusions passed. The live SuperLocalMemory comparison returned HTTP 200
+  with the expected v3.8.3 title and H1, exact self-canonical, `index, follow`,
+  five maintained sources, Article and BreadcrumbList JSON-LD, and no
+  `FAQPage`. Desktop and mobile production renders had no document or H1
+  overflow; the mobile comparison table remained horizontally accessible;
+  browser warning/error logs were empty.
 - Google Trends demand-discovery gate: resolved for the current decision at
   `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
   Seventeen timeline comparisons and nine related-query exports cover
@@ -412,9 +415,9 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-24-superlocalmemory-comparison-refresh` is locally verified,
-independently reviewed, approved for publication, and consumes the one
-production slot. It refreshes only the existing English
+`EXP-2026-07-24-superlocalmemory-comparison-refresh` is live,
+production-verified, and measuring. It no longer consumes the production
+slot. It refreshes only the existing English
 `/learn/wenlan-vs-superlocal-memory` route. The authenticated target baseline
 is 16 GSC impressions, 0 clicks, and average position 8.6.
 The separate visible query `super local memory` has 1 impression, 0 clicks,
@@ -445,6 +448,13 @@ mobile rendered QA, and `git diff --check` pass. Independent review found one
 P2 gap in benchmark/license regression coverage; the repair added
 article-scoped Mode C and licensing assertions, and re-review returned `SHIP`
 with no remaining P0–P2 findings.
+
+PR #73 merged at `2026-07-25T00:04:41Z` as
+`9883ddaf74ae07667a57d752aee59468c2d0ee1c`; Vercel production completed at
+`2026-07-25T00:05:36Z`. Deployed robots, sitemap, canonical, indexability,
+utility headers, redirects, bridge hosts, schema, source links, locale
+non-regression, and desktop/mobile renders passed. No SEO-success judgment is
+made at production completion.
 
 The claude-mem comparison is live, production-verified, and measuring. PR #71
 merged at `2026-07-24T23:33:32Z` as
@@ -547,13 +557,10 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The production slot is occupied by
-`EXP-2026-07-24-superlocalmemory-comparison-refresh`. Its local, technical,
-rendered, and independent-review gates pass, and the user approved commit,
-push, PR, merge, deployment, and production verification at
-`2026-07-25T00:02:30Z`. Publish through the normal PR gate, verify the live
-route and deployed technical SEO, append the production evidence, and then
-release the production slot.
+The production slot is open. The SuperLocalMemory comparison is
+production-verified and measuring; run its 24-hour technical/evidence readout
+after `2026-07-26T00:05:36Z`. Waiting for that readout does not block
+preparation of another candidate that passes the full gate.
 
 Run the Learn-hub 24-hour readout after `2026-07-25T19:18:03Z`, the LLM-wiki
 refresh 24-hour readout after `2026-07-25T20:19:21Z`, the MCP shared-memory
