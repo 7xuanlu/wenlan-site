@@ -1593,3 +1593,67 @@ increase for that experiment.
 - Unperformed gated actions: no indexing request, GSC validation, Reddit or other external post, OSS submission, paid acquisition, or metric-definition change
 - Next step: run the 24-hour technical/evidence readout after `2026-07-26T01:04:56Z`; this production-verified measurement cohort does not consume the production slot
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-25-ai-agent-memory-types
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-25-ai-agent-memory-types
+- Status: active
+- Data window: 2026-07-25..2026-07-31
+- Asset class: net-new-search
+- Launched: 2026-07-25
+- Hypothesis: A neutral placement guide for working, episodic, semantic, and procedural AI-agent memory will earn qualified exposure inside the validated English `agent memory` category without competing with Wenlan's existing AI-work-memory definition, capture-quality guide, handoff workflow, or product memory-type reference.
+- Candidate evidence: A signed-in Google Trends Explore export captured at `2026-07-25T01:42:25Z` preserves 53 raw weekly request-relative `0–100` rows for one Worldwide, Web Search, past-12-month request. Inside that request, `AI agent memory` moved from a first-13-week average of 3.7 to a latest-13-week average of 26.9, and `agent memory` from 11.7 to 73.1. The raw CSV and provenance metadata are committed under `docs/seo-audits/data/`. Four English Reddit threads observed at `2026-07-25T01:27:14Z` represent three independent authors; two procedural-memory posts share one author and count as one source. CoALA and LangChain establish the four-role taxonomy, while Letta supports the placement tradeoff. The complete URLs, dates, native units, provenance, limitations, and coverage audit are in `docs/seo-audits/2026-07-25-ai-agent-memory-types-prelaunch.md`. External observations are demand discovery only, not GSC input or keyword volume.
+- Baseline: GSC property totals are 7 clicks and 310 impressions; visible-query totals are 1 click and 75 impressions, leaving a 6-click and 235-impression visibility gap. The target page and target query have no prelaunch rows because the URL is net new; no zero or indexing state is inferred. Vercel separately reports 1,402 visitors and 1,593 pageviews property-wide, with no target-route baseline. GitHub reports 47 Wenlan total stars. Umami and Vercel custom CTA events remain unavailable or account-gated. No source-to-page join or causal inference is made.
+- Change: Add one English `/learn/ai-agent-memory-types` article that defines the four roles, gives a practical placement guide, explains their different lifecycles, and conservatively maps Wenlan's durable captures, handoffs, and source-backed pages while keeping client working context and procedural rules or skills distinct. Explicitly state that Wenlan's six `memory_type` values are capture metadata, not the four cognitive layers. Add no zh-TW or zh-CN route, `FAQPage` JSON-LD, indexing request, or external distribution.
+- Publish date: not-published
+- Index date: unknown-net-new-route
+- Minimum exposure: 5 GSC target-page impressions in the first 28 complete post-deploy days
+- Success criteria: After at least 5 GSC target-page impressions, the target earns at least 1 GSC click or average position is 30.0 or better; Vercel target-page visitors and GitHub stars are reported separately without a causal claim.
+- Failure criteria: After 28 complete post-deploy days and at least 5 GSC target-page impressions, the target has 0 clicks and average position is worse than 40.0. Fewer than 5 impressions is inconclusive; after minimum exposure, 0 clicks with average position from 30.1 through 40.0 is also inconclusive.
+- Stop criteria: Stop or hold if maintained sources do not support the taxonomy, the page conflates cognitive roles with Wenlan's capture metadata, another controller edits the route, or the change creates a canonical, indexing, robots, noindex, structured-data, sitemap, locale, source-link, or rendered-layout regression.
+- 24h readout: pending — verify the live route, title, metadata, canonical, indexability, structured data, maintained references, English and Mandarin non-regression, production render, and separate source-native observations without an SEO-success judgment
+- 7d readout: pending — report GSC latency and target-page clicks, impressions, and position when available, Vercel target-page presence when available, and GitHub stars separately
+- W2 readout: pending — apply the minimum-exposure guard and inspect whether the taxonomy page remains distinct from AI work memory, capture quality, handoff, and Wenlan memory-type docs
+- W4 readout: pending — evaluate the predeclared success, failure, or inconclusive condition without changing thresholds
+- W8 readout: pending — record a post-campaign follow-up only if it remains useful
+- Result: pending
+- Decision: wait
+- Next step: run the focused article contract RED, implement the bounded English page, then complete full SEO/i18n/lint/build/technical, rendered, and independent-review gates before the approved PR and production path
+<!-- EXPERIMENT-RECORD:END -->
+
+### Campaign observation — 2026-07-25T01:45:53Z
+
+- Experiment: `EXP-2026-07-25-ai-agent-memory-types`
+- Local preparation: complete
+- Change: added one English `/learn/ai-agent-memory-types` acquisition page
+  explaining working, episodic, semantic, and procedural memory roles plus a
+  product-independent placement guide; explicitly separated those roles from
+  Wenlan's six capture metadata values
+- Evidence repair: committed the complete signed-in 53-week Google Trends
+  export and metadata, counted four Reddit threads as three independent
+  authors, and used Letta only as placement evidence rather than taxonomy
+  proof
+- Reviewer: initial `FIX FIRST` for evidence provenance and attribution; all
+  findings were corrected, and focused re-review returned `SHIP` with no
+  remaining P0-P2 findings
+- Verification: `seo:goal:check` passed; SEO tests 184/184; i18n tests 53/53;
+  TypeScript lint passed; weekly sample pipeline passed; build generated 211
+  static pages; built technical SEO passed with 110 sitemap locations and no
+  `FAQPage` in 114 built HTML files; built-locale checks passed 19 direct-200
+  routes and five expected 404s; `git diff --check` passed
+- Rendered QA: desktop 1440px and fresh mobile 393x852 returned the expected
+  H1, title, exact canonical, `index, follow`, Article and BreadcrumbList
+  schema, four source links, and visible FAQ behavior with no document or H1
+  overflow. One existing global unused-font preload warning appeared on the
+  fresh mobile render; no page error or target-route defect appeared.
+- Locale decision: English only. No independent zh-TW or zh-CN taxonomy demand
+  has been observed; both unsupported Mandarin routes remain intentional 404s.
+- Approval: the user approved commit, push, PR, merge, deployment, and
+  production verification for this website change
+- Still unapproved: request indexing, GSC validation, Reddit or other external
+  publication, OSS submission, paid acquisition, and metric-definition changes
+- Next step: publish through the normal PR gate, wait for Vercel production,
+  verify the live route and deployed technical SEO, append the production
+  evidence, and release the one production slot

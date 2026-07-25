@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
+import { createHash } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
 import test from "node:test";
@@ -413,6 +414,95 @@ test("AI work memory comparison answers the knowledge-base role question directl
   const page = await readRepo("src/app/learn/[slug]/page.tsx");
   assert.match(page, /Practical dimensions\./);
   assert.doesNotMatch(page, /Quantified dimensions\./);
+});
+
+test("AI agent memory types page separates cognitive roles from Wenlan capture metadata", async () => {
+  const articles = await readRepo("src/app/learn/articles.ts");
+  const marker = 'slug: "ai-agent-memory-types"';
+  const start = articles.indexOf(marker);
+  const end = articles.indexOf('\n  {\n    slug: "', start + marker.length);
+  const article = articles.slice(start, end);
+
+  assert.notEqual(start, -1);
+  assert.notEqual(end, -1);
+  assert.match(
+    article,
+    /title:\s*\n\s*"AI Agent Memory Types: Working, Episodic, Semantic, and Procedural"/,
+  );
+  assert.match(article, /publishedAt: "2026-07-25"/);
+  assert.match(article, /updatedAt: "2026-07-25"/);
+  assert.match(article, /Working memory/);
+  assert.match(article, /Episodic memory/);
+  assert.match(article, /Semantic memory/);
+  assert.match(article, /Procedural memory/);
+  assert.match(article, /current context window or session state/);
+  assert.match(article, /timestamped session history and handoffs/);
+  assert.match(article, /durable facts and maintained knowledge/);
+  assert.match(article, /versioned prompts, rules, skills, or code/);
+  assert.match(
+    article,
+    /identity, preference, decision, lesson, gotcha, and fact are capture metadata/,
+  );
+  assert.match(article, /not four required database tables/);
+  assert.match(
+    article,
+    /href: "https:\/\/arxiv\.org\/abs\/2309\.02427"/,
+  );
+  assert.match(
+    article,
+    /href: "https:\/\/docs\.langchain\.com\/oss\/python\/concepts\/memory"/,
+  );
+  assert.match(
+    article,
+    /href: "https:\/\/docs\.letta\.com\/guides\/core-concepts\/memory\/context-hierarchy"/,
+  );
+  assert.match(
+    article,
+    /href: "https:\/\/wenlan\.app\/docs\/memory-types"/,
+  );
+});
+
+test("AI agent memory Trends evidence preserves the raw request-relative series", async () => {
+  const csv = await readRepo(
+    "docs/seo-audits/data/2026-07-25-ai-agent-memory-trends.csv",
+  );
+  const metadata = JSON.parse(
+    await readRepo(
+      "docs/seo-audits/data/2026-07-25-ai-agent-memory-trends.metadata.json",
+    ),
+  );
+  const rows = csv
+    .trim()
+    .split(/\r?\n/)
+    .slice(3)
+    .map((line) => {
+      const [week, aiAgentMemory, agentMemory] = line.split(",");
+      return {
+        week,
+        aiAgentMemory: Number(aiAgentMemory),
+        agentMemory: Number(agentMemory),
+      };
+    });
+  const average = (values) =>
+    values.reduce((sum, value) => sum + value, 0) / values.length;
+
+  assert.equal(metadata.captured_at, "2026-07-25T01:42:25Z");
+  assert.deepEqual(metadata.queries, ["AI agent memory", "agent memory"]);
+  assert.equal(metadata.geography, "Worldwide");
+  assert.equal(metadata.period, "Past 12 months");
+  assert.equal(metadata.unit, "Google request-relative 0-100 index");
+  assert.equal(metadata.row_count, 53);
+  assert.equal(rows.length, 53);
+  assert.equal(rows[0].week, "2025-07-20");
+  assert.equal(rows.at(-1).week, "2026-07-19");
+  assert.equal(
+    createHash("sha256").update(csv).digest("hex"),
+    metadata.download_sha256,
+  );
+  assert.equal(average(rows.slice(0, 13).map((row) => row.aiAgentMemory)).toFixed(1), "3.7");
+  assert.equal(average(rows.slice(-13).map((row) => row.aiAgentMemory)).toFixed(1), "26.9");
+  assert.equal(average(rows.slice(0, 13).map((row) => row.agentMemory)).toFixed(1), "11.7");
+  assert.equal(average(rows.slice(-13).map((row) => row.agentMemory)).toFixed(1), "73.1");
 });
 
 test("Basic Memory comparison reflects current local, cloud, and team boundaries", async () => {

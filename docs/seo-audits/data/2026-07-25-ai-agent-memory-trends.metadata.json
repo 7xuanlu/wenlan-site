@@ -1,0 +1,21 @@
+{
+  "source": "Google Trends Explore signed-in CSV export",
+  "source_url": "https://trends.google.com/trends/explore?q=AI%20agent%20memory,agent%20memory&hl=en",
+  "captured_at": "2026-07-25T01:42:25Z",
+  "queries": [
+    "AI agent memory",
+    "agent memory"
+  ],
+  "geography": "Worldwide",
+  "period": "Past 12 months",
+  "data_range": {
+    "start": "2025-07-20",
+    "end": "2026-07-19"
+  },
+  "search_type": "Web Search",
+  "category": "All categories",
+  "unit": "Google request-relative 0-100 index",
+  "row_count": 53,
+  "download_sha256": "7f2af835e10faa345d740b6e2f3b5d900bfcd38da039d4c7db54d72330d836c6",
+  "interpretation": "Compare direction only within this two-query request. Do not treat the index as search volume or compare its absolute values with another Trends request."
+}

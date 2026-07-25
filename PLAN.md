@@ -226,11 +226,12 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-25-basic-memory-comparison-refresh`, live,
-  production-verified, and measuring. It no longer consumes the single
-  production slot. The SuperLocalMemory, claude-mem, stale-memory, and MCP
-  shared-memory changes also remain live, production-verified, and measuring;
-  they do not consume the slot.
+  `EXP-2026-07-25-ai-agent-memory-types`, approved and locally verified for
+  publication. It consumes the single production slot until production
+  verification completes. The Basic Memory,
+  SuperLocalMemory, claude-mem, stale-memory, and MCP shared-memory changes
+  remain live, production-verified, and measuring; they do not consume the
+  slot.
 - Website-affecting technical correction:
   `TECH-2026-07-24-localized-learn-breadcrumb`, production-verified and no
   longer consuming the preparation slot.
@@ -261,7 +262,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `2026-07-25T01:01:13Z`. That approval does not include request indexing,
   GSC validation, non-website publication, OSS submission, paid acquisition,
   or metric changes.
-- Active experiments: 10.
+- The user approved local preparation, commit, Git push, PR creation, merge,
+  production deployment, and production verification for
+  `EXP-2026-07-25-ai-agent-memory-types` in this Codex task before
+  `2026-07-25T01:27:14Z`. That approval does not include request indexing,
+  GSC validation, non-website publication, OSS submission, paid acquisition,
+  or metric changes.
+- Active experiments: 11.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -286,12 +293,15 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
   Seventeen timeline comparisons and nine related-query exports cover
   Worldwide, US, and Taiwan; English, Traditional Chinese, and Simplified
-  Chinese terms; 12 months and one five-year range. Raw request-relative
-  `0–100` values, metadata, geographies, periods, and capture method are
-  preserved in the interpreted provenance record at
-  `docs/seo-audits/2026-07-18-trends-demand-discovery.md`; the temporary raw
-  capture directories are no longer present and no fresh Trends observation
-  is inferred from them. The official
+  Chinese terms; 12 months and one five-year range. The interpreted summary
+  remains in
+  `docs/seo-audits/2026-07-18-trends-demand-discovery.md`, but its temporary
+  raw capture directories are no longer present.
+  A fresh signed-in two-query recapture at `2026-07-25T01:42:25Z` now
+  preserves the complete 53-week raw `0–100` series and provenance metadata
+  for `AI agent memory` and `agent memory` under
+  `docs/seo-audits/data/`; values are interpreted only inside that request
+  and never as search volume. The official
   unattended API remains limited-alpha/account-gated. The follow-up removed
   the false-positive `AI memory` series and the large Taiwan `Obsidian`
   anchor. It classifies `AI 筆記` as real but adjacent NotebookLM/Notion/note
@@ -434,9 +444,30 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-25-basic-memory-comparison-refresh` is live,
-production-verified, and measuring. It no longer consumes the one production
-slot. It refreshes only the existing English
+`EXP-2026-07-25-ai-agent-memory-types` is the single website change locally
+verified and approved for publication. It creates one English
+`/learn/ai-agent-memory-types` acquisition page explaining working, episodic,
+semantic, and procedural memory as
+different architectural roles, plus where each should live.
+
+The broader `agent memory` category is supported by the signed-in Trends
+recapture and its committed 53-week raw series. Four English Reddit threads
+from three independent authors repeat the taxonomy or placement problem;
+CoALA and LangChain establish the four-role terminology, while Letta supports
+the placement tradeoff. A coverage audit found no current Wenlan page that
+answers both the taxonomy and placement decision. The page will explicitly
+separate this cognitive architecture from Wenlan's six capture `memory_type`
+metadata values. The complete gate, native-unit baseline, locale decision,
+and predeclared readouts are recorded in
+`docs/seo-audits/2026-07-25-ai-agent-memory-types-prelaunch.md`.
+
+The change is English-only because no matching Mandarin taxonomy demand has
+been observed. It adds no `FAQPage` JSON-LD, indexing request, or external
+distribution.
+
+The Basic Memory comparison refresh is live, production-verified, and
+measuring. It no longer consumes the one production slot. It refreshes only
+the existing English
 `/learn/wenlan-vs-basic-memory` route. The authenticated target baseline is
 20 GSC impressions, 1 click, and average position 14.6.
 Joined visible rows `basic memory` and `basicmemory` have 5 impressions and 0
@@ -604,9 +635,13 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The production slot is open. The Basic Memory comparison is
-production-verified and measuring; run its 24-hour technical/evidence readout
-after `2026-07-26T01:04:56Z`. The SuperLocalMemory comparison is also
+Publish the locally verified `EXP-2026-07-25-ai-agent-memory-types` change
+through the approved normal PR gate, wait for Vercel production, then verify
+the live route, deployed technical SEO, English render, and unsupported
+Mandarin 404s before releasing the production slot. Do not infer SEO success
+at production completion. The Basic
+Memory comparison is production-verified and measuring; run its 24-hour
+technical/evidence readout after `2026-07-26T01:04:56Z`. The SuperLocalMemory comparison is also
 production-verified and measuring; run its 24-hour technical/evidence readout
 after `2026-07-26T00:05:36Z`. Waiting for either readout does not block
 preparation of another candidate that passes the full gate.

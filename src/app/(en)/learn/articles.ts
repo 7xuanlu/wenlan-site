@@ -1615,6 +1615,123 @@ const baseArticles: LearnArticle[] = [
     },
   },
   {
+    slug: "ai-agent-memory-types",
+    eyebrow: "Architecture",
+    category: "Concepts",
+    title:
+      "AI Agent Memory Types: Working, Episodic, Semantic, and Procedural",
+    description:
+      "Learn what the four AI agent memory types do, where each should live, and why facts, events, current context, and procedures need different lifecycles.",
+    metaTitle: "AI Agent Memory Types: 4 Layers Explained | Wenlan",
+    metaDescription:
+      "Compare working, episodic, semantic, and procedural memory for AI agents, with a practical guide to storage, retrieval, and updates.",
+    keywords: [
+      "AI agent memory types",
+      "working memory AI agents",
+      "episodic memory AI agents",
+      "semantic memory AI agents",
+      "procedural memory AI agents",
+      "agent memory architecture",
+    ],
+    publishedAt: "2026-07-25",
+    updatedAt: "2026-07-25",
+    author: DEFAULT_AUTHOR,
+    readingTime: "7 min read",
+    audience: "Developers designing durable memory for AI agents",
+    heroBullets: [
+      "Working memory holds the active task, observations, and temporary state.",
+      "Episodic and semantic memory preserve what happened and what is known.",
+      "Procedural memory controls how the agent behaves and should be updated like instructions, not facts.",
+    ],
+    sections: [
+      {
+        heading: "Short answer",
+        body: [
+          "An AI agent needs different memory roles because current task state, past events, durable knowledge, and operating instructions do not age or change in the same way. Working memory is temporary. Episodic memory records what happened. Semantic memory stores what is known. Procedural memory controls how work is done.",
+          "These are architectural roles, not four required database tables. One system may use a context window, event log, knowledge store, and versioned skills; another may share infrastructure while keeping separate write, retrieval, and update rules.",
+        ],
+      },
+      {
+        heading: "The four AI agent memory types",
+        body: [
+          "The CoALA model separates an agent's short-term working memory from long-term episodic, semantic, and procedural memory. The useful distinction is not the label on a storage engine. It is what the information means and how the system should maintain it.",
+        ],
+        bullets: [
+          "Working memory: the active goal, recent observations, intermediate results, and current tool state needed for the task in front of the agent.",
+          "Episodic memory: records of events and outcomes, such as a debugging session, a deployment, a user interaction, or a handoff between agents.",
+          "Semantic memory: durable facts, concepts, preferences, decisions, and maintained knowledge that can be reused outside the event that produced them.",
+          "Procedural memory: instructions for how to act, including prompts, policies, rules, skills, tools, and code.",
+        ],
+      },
+      {
+        heading: "Where each memory type should live",
+        body: [
+          "Place information according to its lifecycle and consumer. Current state should be cheap to replace; event records need time and outcome context; durable knowledge needs correction and provenance; behavior needs versioning and tests.",
+        ],
+        bullets: [
+          "Working memory belongs in the current context window or session state. Keep only what the active task needs, then discard or compress it when the task ends.",
+          "Episodic memory belongs in timestamped session history and handoffs. Preserve what happened, what changed, the outcome, and links to relevant artifacts.",
+          "Semantic memory belongs in durable facts and maintained knowledge. Give important claims source links, scope, correction paths, and a way to supersede stale versions.",
+          "Procedural memory belongs in versioned prompts, rules, skills, or code. Review it as behavior, test important paths, and retain why a procedure changed.",
+        ],
+      },
+      {
+        heading: "Why one vector store is not enough",
+        body: [
+          "Putting every transcript, fact, event, and instruction into one retrieval index hides the differences that matter. A stale fact should be corrected or superseded. An old event may remain historically true. A failed procedure should be revised and tested. Temporary task state should usually disappear.",
+          "Retrieval can still span multiple roles, but the write and maintenance rules should stay explicit. Otherwise the agent may retrieve an obsolete workflow as if it were a current fact, or treat a one-time event as a lasting rule.",
+        ],
+      },
+      {
+        heading: "How Wenlan fits without changing the taxonomy",
+        body: [
+          "Wenlan is the durable work-memory and source-backed knowledge layer, not the entire agent architecture. The AI client owns working context. Wenlan can preserve useful session handoffs, durable facts, decisions, lessons, and maintained Pages. Prompts, project rules, skills, and executable code remain the procedural layer.",
+          "Wenlan's identity, preference, decision, lesson, gotcha, and fact are capture metadata, not the four cognitive layers. They help classify a durable capture inside Wenlan; they do not relabel working, episodic, semantic, and procedural memory.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Are the four AI agent memory types four separate databases?",
+        answer:
+          "No. They are roles with different lifecycles. A system may share storage, but it should keep the write, retrieval, correction, retention, and versioning rules distinct.",
+      },
+      {
+        question: "Should procedural memory go into a vector database?",
+        answer:
+          "A system can retrieve procedures dynamically, but important behavior should remain inspectable and versioned as prompts, rules, skills, or code. Treating a procedure as an ordinary fact makes changes and failures harder to review.",
+      },
+    ],
+    relatedSlugs: [
+      "ai-work-memory",
+      "what-to-capture-in-ai-work-memory",
+      "ai-agent-handoff-loop",
+      "source-backed-wiki-pages-ai-work",
+    ],
+    officialReferences: [
+      {
+        label: "CoALA: Cognitive Architectures for Language Agents",
+        href: "https://arxiv.org/abs/2309.02427",
+      },
+      {
+        label: "LangChain memory overview",
+        href: "https://docs.langchain.com/oss/python/concepts/memory",
+      },
+      {
+        label: "Letta context hierarchy",
+        href: "https://docs.letta.com/guides/core-concepts/memory/context-hierarchy",
+      },
+      {
+        label: "Wenlan memory types",
+        href: "https://wenlan.app/docs/memory-types",
+      },
+    ],
+    cta: {
+      heading: "Keep durable agent memory inspectable",
+      body: "Wenlan preserves decisions, lessons, handoffs, and source-backed knowledge while your agent keeps current context and procedures in the right layers.",
+    },
+  },
+  {
     slug: "ai-agent-handoff-loop",
     eyebrow: "Workflow",
     category: "Workflows",
