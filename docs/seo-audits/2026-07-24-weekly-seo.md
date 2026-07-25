@@ -9,6 +9,7 @@ Generated from Search Console API. Raw exports stay outside git.
 | Week of | 2026-07-24 |
 | Date range | 2026-06-26 to 2026-07-23 |
 | GSC data source | Search Console API |
+| Evidence fingerprint | sha256:09f6edf1d8afdd938ca5f6107a3e528905f073991a66126554b84f074479d283 |
 | Property clicks | 7 |
 | Property impressions | 310 |
 | Property CTR | 2.26% |
@@ -20,7 +21,7 @@ Generated from Search Console API. Raw exports stay outside git.
 | Query visibility gap | 6 clicks; 235 impressions |
 | Visible page table clicks | 7 |
 | Visible page table impressions | 437 |
-| Top query groups | Brand/entity (39), Other (20), MCP memory (5), Comparisons (5) |
+| Top query groups | Brand/entity (39), Other (18), Comparisons (7), MCP memory (5) |
 | Top page | /learn |
 | Analytics data source | Vercel Web Analytics API |
 | Analytics date range | 2026-06-26 to 2026-07-23 |
@@ -94,7 +95,7 @@ Authenticated Web Analytics API data for the linked Wenlan Vercel project. Prope
 | `claude code memory` | Claude Code | `/learn/claude-code-memory` | 3 | 0 | 0.00% | 51.0 | wait | Mapped page ranks weakly, but evidence is too thin for a new action. Keep measuring and review page quality or internal links. |
 | `claude memory mcp` | MCP memory | `/learn/mcp-memory-server` | 3 | 0 | 0.00% | 50.3 | wait | Mapped page ranks weakly, but evidence is too thin for a new action. Keep measuring and review page quality or internal links. |
 | `wenlan technology` | Brand/entity | `/` | 3 | 0 | 0.00% | 1.0 | wait | Ranking is already strong but clicks are absent. Review SERP intent and title before changing page copy. |
-| `basicmemory` | Other | - | 2 | 0 | 0.00% | 29.5 | wait | Too little query evidence for a new page. Keep tracking before changing content. |
+| `basicmemory` | Comparisons | `/learn/wenlan-vs-basic-memory` | 2 | 0 | 0.00% | 29.5 | wait | No immediate content action. Keep measuring before changing the page. |
 | `wenlanawep3` | Other | - | 2 | 0 | 0.00% | 7.0 | wait | Too little query evidence for a new page. Keep tracking before changing content. |
 | `wenlanvwep3` | Other | - | 2 | 0 | 0.00% | 1.0 | wait | Too little query evidence for a new page. Keep tracking before changing content. |
 | `woflan` | Other | - | 2 | 0 | 0.00% | 91.0 | wait | Too little query evidence for a new page. Keep tracking before changing content. |
@@ -107,7 +108,7 @@ Authenticated Web Analytics API data for the linked Wenlan Vercel project. Prope
 | `md memory` | Other | - | 1 | 0 | 0.00% | 72.0 | wait | Too little query evidence for a new page. Keep tracking before changing content. |
 | `memory md` | Other | - | 1 | 0 | 0.00% | 70.0 | wait | Too little query evidence for a new page. Keep tracking before changing content. |
 | `memory_user_edits` | Other | - | 1 | 0 | 0.00% | 47.0 | wait | Too little query evidence for a new page. Keep tracking before changing content. |
-| `mempalace vs claude-mem` | Comparisons | `/learn/wenlan-vs-basic-memory` | 1 | 0 | 0.00% | 44.0 | wait | No immediate content action. Keep measuring before changing the page. |
+| `mempalace vs claude-mem` | Comparisons | `/learn/wenlan-vs-claude-mem` | 1 | 0 | 0.00% | 44.0 | wait | No immediate content action. Keep measuring before changing the page. |
 | `super local memory` | Comparisons | `/learn/wenlan-vs-superlocal-memory` | 1 | 0 | 0.00% | 45.0 | wait | No immediate content action. Keep measuring before changing the page. |
 | `wenlanvwep` | Other | - | 1 | 0 | 0.00% | 10.0 | wait | Too little query evidence for a new page. Keep tracking before changing content. |
 
@@ -299,6 +300,62 @@ event evidence, not as proven search growth.
 - Visual evidence is under
   `/tmp/wenlan-seo/visual-qa/2026-07-24-growth-unblock/`.
 
+## Query Mapping and Candidate Decision
+
+A same-range read-only Search Console API request added the `query` plus `page`
+dimensions for `2026-06-26..2026-07-23`. The 48 visible rows were captured at
+`2026-07-25T00:14:33Z` under
+`/tmp/wenlan-seo/gsc-query-pages.json`. This visible subset does not replace
+property totals or disclose privacy-filtered rows.
+
+The joined rows exposed two deterministic action-queue errors:
+
+- `basicmemory` was left unmapped even though Google associated both it and
+  `basic memory` with `/learn/wenlan-vs-basic-memory`;
+- `mempalace vs claude-mem` was collapsed onto the generic Basic Memory
+  comparison even though Google associated it with
+  `/learn/wenlan-vs-claude-mem`.
+
+The weekly generator now resolves named comparison products before the generic
+query groups. It also preserves report-specific manual evidence and completed
+follow-up state only when a SHA-256 fingerprint over the normalized GSC,
+Vercel, and Umami evidence plus derived query mappings matches the new run.
+This prevents same-window backfills or classifier changes from carrying stale
+indexing, locale, decision, and verification evidence into a changed report.
+
+Basic Memory is not the next content experiment. The visible target-page
+queries total 5 impressions and 0 clicks, while the page aggregate separately
+reports 20 impressions, 1 click, and average position 14.6. The page-level
+click cannot be attributed to either visible query, and the two product-name
+spellings do not yet establish repeated comparison intent. The existing
+English page should be refreshed when a later window supplies a direct
+comparison/alternative query or independent repeatable evidence. There is no
+locale-specific evidence for a zh-TW or zh-CN translation.
+
+Three adjacent candidates were also rejected rather than converted into
+speculative copy:
+
+- `/learn/cursor-claude-code-shared-memory` is already the live target of
+  `EXP-2026-07-24-mcp-shared-memory-exposure`; stacking another edit would
+  break attribution.
+- A new persistent-memory-versus-codebase-retrieval page lacks a provenance-
+  complete query signal and would duplicate the boundary already shipped on
+  `/learn/distilled-wiki-pages-ai-memory`.
+- `/learn/ai-agent-memory-local-vs-cloud` has validated category-level Trends
+  evidence but no GSC target-page row, remains in the discovered-not-indexed
+  examples, overlaps current local-first comparisons, and lacks maintained
+  cloud-side sources for a fair refresh.
+
+No additional English, zh-TW, or zh-CN website experiment passed all five
+candidate gates in this audit. The production preparation slot stays open;
+the next authenticated GSC window or a provenance-complete demand observation
+can nominate another existing-page refresh without waiting for current live
+cohorts to finish.
+
+Pipeline verification passed `pnpm test:seo` with 181 tests using the explicit
+Wenlan and wenlan-app sibling roots, `pnpm seo:weekly:sample`,
+`pnpm seo:goal:check`, and `git diff --check`.
+
 ## Follow-Up
 
 - [x] Record pre-change GSC snapshot for changed pages in this worksheet.
@@ -306,9 +363,11 @@ event evidence, not as proven search growth.
 - [x] Run `pnpm seo:technical:deployed` to verify deployed robots, sitemap, canonicals, redirects, noindex headers, and checked-page schema.
 - [x] Run `pnpm build` and `pnpm seo:technical:built` to verify local built robots, sitemap, redirects, noindex headers, canonicals, and schema.
 - [x] Verify old `/guides/*` and `/docs/guides/*` URLs redirect to canonical `/learn/*` URLs.
-- [x] Recheck changed redirects with `pnpm seo:technical:deployed -- --require-direct-changed-redirects true`.
-- [x] Run `pnpm seo:vercel:fetch -- --date 2026-07-24`; keep custom CTA events marked account-gated while the Vercel plan blocks them.
+- [x] Recheck changed redirects after deployment with `pnpm seo:technical:deployed -- --require-direct-changed-redirects true`.
+- [x] Run `pnpm seo:vercel:fetch -- --date 2026-07-24` before the weekly report; keep custom CTA events marked account-gated when the Vercel plan blocks them.
 - [ ] Add changed pages to the next weekly comparison.
+- [ ] Generate `pnpm seo:ai-visibility -- --date YYYY-MM-DD` and manually check whether AI assistants mention Wenlan accurately for the tracked prompts in `docs/seo-measurement.md`.
+- [ ] Next measurement date: 2026-07-31.
+
 - [x] Generate `pnpm seo:ai-visibility -- --date 2026-07-24`.
 - [ ] Manually check whether AI assistants mention Wenlan accurately for the tracked prompts in `docs/seo-measurement.md`.
-- [ ] Next measurement date: 2026-07-31.
