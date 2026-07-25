@@ -415,6 +415,54 @@ test("AI work memory comparison answers the knowledge-base role question directl
   assert.doesNotMatch(page, /Quantified dimensions\./);
 });
 
+test("Basic Memory comparison reflects current local, cloud, and team boundaries", async () => {
+  const articles = await readRepo("src/app/learn/articles.ts");
+  const marker = 'slug: "wenlan-vs-basic-memory"';
+  const start = articles.indexOf(marker);
+  const end = articles.indexOf('\n  {\n    slug: "', start + marker.length);
+  const article = articles.slice(start, end);
+
+  assert.notEqual(start, -1);
+  assert.notEqual(end, -1);
+  assert.match(
+    article,
+    /title: "Wenlan vs Basic Memory: Source-Backed AI Work vs Shared Markdown Knowledge"/,
+  );
+  assert.match(article, /publishedAt: "2026-05-14"/);
+  assert.match(article, /updatedAt: "2026-07-25"/);
+  assert.match(article, /Basic Memory v0\.22\.1/);
+  assert.match(article, /local or hosted/);
+  assert.match(article, /Team workspaces/);
+  assert.match(article, /semantic search/);
+  assert.match(article, /Agent Skills/);
+  assert.match(article, /source-backed Pages/);
+  assert.match(article, /AGPL-3\.0/);
+  assert.match(
+    article,
+    /href: "https:\/\/github\.com\/basicmachines-co\/basic-memory\/releases\/tag\/v0\.22\.1"/,
+  );
+  assert.match(
+    article,
+    /href: "https:\/\/github\.com\/basicmachines-co\/basic-memory\/tree\/5d444f0974476645f904c1446998c0a938a6e7f7"/,
+  );
+  assert.match(
+    article,
+    /href: "https:\/\/github\.com\/basicmachines-co\/docs\.basicmemory\.com\/tree\/1c670035987b21f0a93d4e45ea1eed1487775f74"/,
+  );
+  assert.match(article, /href: "https:\/\/docs\.basicmemory\.com\/cloud\/cloud-guide"/);
+  assert.match(article, /href: "https:\/\/docs\.basicmemory\.com\/teams\/about"/);
+  assert.match(
+    article,
+    /href: "https:\/\/docs\.basicmemory\.com\/reference\/ai-assistant-guide"/,
+  );
+  assert.match(article, /does not turn unmatched benchmarks into a winner/);
+  assert.doesNotMatch(article, /LME_Oracle|LME_S/);
+  assert.doesNotMatch(article, /Markdown-only search degrades/);
+  assert.doesNotMatch(article, /File mtime; bring-your-own git/);
+  assert.doesNotMatch(article, /It is not a work-loop optimization/);
+  assert.doesNotMatch(article, /2026-07-02 source check/);
+});
+
 test("claude-mem comparison reflects current automatic and cross-agent boundaries", async () => {
   const articles = await readRepo("src/app/learn/articles.ts");
   const marker = 'slug: "wenlan-vs-claude-mem"';
@@ -529,7 +577,7 @@ test("public eval surfaces publish the latest LME oracle and LME-S framing", asy
     assert.match(source, /0\.857/, path);
     assert.match(source, /0\.883/, path);
     assert.match(source, /LME_S/, path);
-    assert.match(source, /N=90/, path);
+    assert.match(source, /(?:N=90|90-question)/, path);
     assert.match(source, /87\.7%/, path);
     assert.match(source, /0\.815/, path);
     assert.match(source, /0\.822/, path);

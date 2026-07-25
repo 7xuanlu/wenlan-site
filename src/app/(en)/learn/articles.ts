@@ -881,7 +881,7 @@ const baseArticles: LearnArticle[] = [
     slug: "wenlan-vs-basic-memory",
     eyebrow: "Comparison",
     category: "Comparisons",
-    title: "Wenlan vs Basic Memory: Local AI Work Memory vs Markdown Knowledge Base",
+    title: "Wenlan vs Basic Memory: Source-Backed AI Work vs Shared Markdown Knowledge",
     description:
       "Compare Wenlan and Basic Memory across Markdown, MCP, local-first control, workflow fit, and how each product helps AI tools use durable context.",
     metaTitle: "Wenlan vs Basic Memory | AI Memory Comparison",
@@ -894,85 +894,137 @@ const baseArticles: LearnArticle[] = [
       "MCP memory knowledge base",
       "local AI work memory",
     ],
-    updatedAt: "2026-07-24",
+    publishedAt: "2026-05-14",
+    updatedAt: "2026-07-25",
     author: DEFAULT_AUTHOR,
-    readingTime: "6 min read",
+    readingTime: "8 min read",
     audience: "People choosing a memory layer for AI-assisted work",
     heroBullets: [
-      "Basic Memory is strongest as a Markdown-centered knowledge base with AI access.",
-      "Wenlan is designed around the AI work loop: sessions, handoffs, distillation, provenance, and shared MCP memory.",
-      "Both value human-readable memory; the right fit depends on whether you want a knowledge base or a work-session memory layer.",
-      "This page reflects Basic Memory's public docs as of 2026-07-02 and Wenlan v0.14.1 as of 2026-07-20. If something has shifted on either side, please open an issue.",
+      "Basic Memory v0.22.1 is a human-readable Markdown knowledge base with local or hosted deployment paths, one knowledge base across MCP clients, and optional Team workspaces.",
+      "Wenlan v0.14.1 is a local-first Sources, Memories, and Pages system built around capture, handoff, curation, source-backed Pages, and reviewable distillation.",
+      "Choose between a shared Markdown knowledge base and a source-backed AI-work workflow—not between “memory” and “no memory.”",
+      "This page pins Basic Memory's source, release, and documentation on 2026-07-25 and reflects Wenlan v0.14.1 as of 2026-07-20. If either product changes, the source links below make the comparison auditable.",
     ],
     officialReferences: [
       {
-        label: "Basic Memory documentation",
-        href: "https://docs.basicmemory.com/",
+        label: "Basic Memory v0.22.1 release",
+        href: "https://github.com/basicmachines-co/basic-memory/releases/tag/v0.22.1",
+      },
+      {
+        label: "Basic Memory source snapshot",
+        href: "https://github.com/basicmachines-co/basic-memory/tree/5d444f0974476645f904c1446998c0a938a6e7f7",
+      },
+      {
+        label: "Basic Memory documentation snapshot",
+        href: "https://github.com/basicmachines-co/docs.basicmemory.com/tree/1c670035987b21f0a93d4e45ea1eed1487775f74",
+      },
+      {
+        label: "What is Basic Memory?",
+        href: "https://docs.basicmemory.com/start-here/what-is-basic-memory",
+      },
+      {
+        label: "Basic Memory technical information",
+        href: "https://docs.basicmemory.com/reference/technical-information",
+      },
+      {
+        label: "Basic Memory Cloud guide",
+        href: "https://docs.basicmemory.com/cloud/cloud-guide",
+      },
+      {
+        label: "Basic Memory Teams",
+        href: "https://docs.basicmemory.com/teams/about",
+      },
+      {
+        label: "Basic Memory AI assistant guide",
+        href: "https://docs.basicmemory.com/reference/ai-assistant-guide",
+      },
+      {
+        label: "Wenlan v0.14.1 source and documentation",
+        href: "https://github.com/7xuanlu/wenlan/tree/v0.14.1",
       },
     ],
     sections: [
       {
         heading: "Short answer",
         body: [
-          "Choose Basic Memory if you want a Markdown-first knowledge base that humans and AI can both read and update.",
-          "Choose Wenlan if your main problem is making AI work carry across sessions, tools, projects, and weeks without turning memory into a black box.",
+          "Choose Basic Memory if you want people and AI assistants to work in the same Markdown knowledge base. You can keep it local, add Basic Memory Cloud for hosted access and sync, or use Team workspaces for shared knowledge.",
+          "Choose Wenlan if the harder problem is turning AI work into maintained knowledge: capture decisions across sessions, hand work off between agents, and distill supported context into source-backed Pages that remain reviewable.",
+          "Both expose context through MCP, keep important material human-readable, and support semantic search. The meaningful difference is the operating model around that context.",
         ],
       },
       {
-        heading: "What Basic Memory emphasizes",
+        heading: "Basic Memory today: local, Cloud, and Teams",
         body: [
-          "Basic Memory presents itself around readable Markdown files, semantic structure, a knowledge graph, MCP access, and a web editor. That is a strong fit for people who want a knowledge base that AI can work with.",
-          "The center of gravity is the knowledge base: notes, links, entities, and human-readable project knowledge.",
+          "Basic Memory's open-source path stores human-readable Markdown files and builds a secondary index for search and graph operations. Its MCP server lets supported AI clients read and write that knowledge base, while the files remain usable in editors such as Obsidian or VS Code.",
+          "Basic Memory Cloud is the hosted path. It adds remote MCP access, a web editor, optional local sync, snapshots, and file history. Team workspaces add shared projects, membership, collaborative editing, activity, and per-file history.",
+          "Current Basic Memory also provides semantic search, graph traversal, `build_context`, and Agent Skills that teach assistants to search before answering, capture durable knowledge, link related notes, and maintain the knowledge base. It is no longer accurate to describe the product as only a local vault or as having no work-loop guidance.",
         ],
       },
       {
-        heading: "What Wenlan emphasizes",
+        heading: "Wenlan today: Sources, Memories, and Pages",
         body: [
-          "Wenlan starts from the AI work session. It captures decisions, lessons, gotchas, handoffs, and project context, then refines them through manual distillation, optional model-backed page work, linking, and provenance.",
-          "Raw captures and recall live in the daemon-owned store. Readable pages, sessions, and status files are projected under `~/.wenlan/` so people can inspect what agents rely on.",
+          "Wenlan starts from the work an AI agent is doing. Agents explicitly capture decisions, lessons, and corrections as Memories; `/handoff` preserves the state of an unfinished session; `/distill` turns repeated, supported context into Pages; `/curate` and `/lint` make review and repair visible.",
+          "Sources are the evidence layer. Memories retain durable working context. Pages synthesize that context into readable knowledge with source IDs, citations, and revision history. The distinction is deliberate: recalled fragments and maintained wiki pages do not silently become the same thing.",
+          "The local daemon provides retrieval across MCP clients. Readable Pages, sessions, and status artifacts are projected under `~/.wenlan/` with local git history, while capture and retrieval remain backed by the daemon-owned store.",
         ],
       },
       {
-        heading: "How to decide",
+        heading: "The decision in one workflow",
         body: [
-          "If you mainly want a persistent Markdown knowledge base with AI access, Basic Memory may fit naturally. If you want a local memory loop for coding agents and MCP clients, Wenlan is more directly shaped around that workflow.",
-          "The practical question is not which product has the word memory. It is whether your bottleneck is maintaining a knowledge base or carrying work context from one AI session into the next.",
+          "Imagine that three coding agents investigate the same authentication problem over a week. With Basic Memory, the durable object is the shared knowledge base: agents search existing notes, add observations, link related entities, and update a Markdown document that the team can also edit.",
+          "With Wenlan, the durable path is evidence to maintained knowledge: each agent captures the decisions or gotchas it learned, hands off unfinished state, and later distills supported memories into a Page whose source chain can be inspected and revised.",
+          "Basic Memory is the more direct fit when the shared note is the product. Wenlan is the more direct fit when you need to see how session evidence became a maintained answer.",
         ],
       },
       {
-        heading: "How the storage models differ in practice",
+        heading: "Storage, sync, and history are separate choices",
         body: [
-          "Basic Memory keeps your notes as Markdown files in a vault. When the AI reads context, it reads the file content; when a human edits a note, the file changes; the vault is the source.",
-          "Wenlan keeps raw captures in the daemon-owned libSQL store for retrieval and projects readable pages, session logs, and status Markdown under `~/.wenlan/`. Those readable artifacts are versioned in `~/.wenlan/.git/`, so `git log pages/<topic>.md` shows page history while recall and search still come from the daemon.",
-          "The split matters at two scales. Search: a five-thousand-memory store needs vector plus FTS retrieval to answer 'what did I decide about token budgets last sprint' in under a second; Markdown-only search degrades fast past a few thousand notes. Audit: when an AI references a distilled page claim, you usually want source memory IDs, provenance state, and git history for the generated artifacts, not just the current page content.",
+          "For local Basic Memory, Markdown files are the primary human-readable record and a database acts as a derived search index. File history depends on the local tools you choose. Basic Memory Cloud adds managed sync, snapshots, and hosted per-file history; Teams extends that hosted model to collaborators.",
+          "Wenlan keeps raw captures in its local daemon store for recall and projects readable Pages, sessions, and status Markdown under `~/.wenlan/`. Those projected artifacts are versioned locally in `~/.wenlan/.git/`, so Page revisions can be inspected without turning the projection into the retrieval database.",
+          "Neither shape is automatically better. Basic Memory favors a file-first knowledge base that can gain hosted collaboration. Wenlan favors a local retrieval store plus human-readable, source-linked outputs.",
         ],
         bullets: [
-          "Basic Memory: vault is the source. AI reads and writes Markdown directly.",
-          "Wenlan: libSQL is the retrieval source, Markdown is the human projection. Daemon writes both atomically.",
-          "Wenlan artifact history is per write for pages, sessions, and status Markdown. Raw capture retrieval remains daemon-owned.",
+          "Basic Memory local: Markdown files plus a derived search index.",
+          "Basic Memory Cloud and Teams: hosted MCP, sync, snapshots, file history, and collaboration.",
+          "Wenlan: local retrieval store plus Markdown projections with source links and local git history.",
         ],
       },
       {
-        heading: "A concrete walkthrough: distilling a week of sessions",
+        heading: "Search and maintenance",
         body: [
-          "Here is what a week with Wenlan looks like in my own work. Monday I capture three decisions inside Claude Code via the MCP `/capture` tool. Tuesday two more land from a Cursor session. Wednesday I run `/handoff` at the end of the day, then run `/distill` for the repeated auth theme. The result is a wiki page that quotes the original captures with mandatory source IDs.",
-          "Friday I open the projected Markdown at `~/.wenlan/pages/auth.md`. The page reads like a coherent doc, not a chat log. Each claim has a source comment that links back to the originating memory IDs. The next AI session that asks 'what did we decide about retry strategy' gets the distilled answer, not five overlapping captures the model has to reconcile on the fly.",
-          "Basic Memory's analog would be writing the wiki page myself, or asking the AI to draft it inside the vault. That works fine for a knowledge base. It is not a work-loop optimization, and the difference compounds across months.",
+          "Basic Memory combines text and semantic search with graph traversal over observations and relations. Its `build_context` tool assembles connected knowledge, and its Agent Skills give assistants an explicit search, capture, and maintenance routine.",
+          "Wenlan combines full-text and embedding retrieval, weighted fusion, eligible graph context, and optional reranking. Its plugin workflow separates `/recall`, `/capture`, `/handoff`, `/distill`, `/curate`, and `/lint`, so retrieval, capture, synthesis, review, and repair remain distinct actions.",
+          "The products publish different retrieval evidence, so this page does not turn unmatched benchmarks into a winner. Test each system with the same real task: recover an old decision, update it after a correction, and inspect why the final answer should be trusted.",
+        ],
+      },
+      {
+        heading: "The provenance boundary",
+        body: [
+          "Basic Memory makes notes and their relationships inspectable. A team can read the Markdown, follow links, inspect Cloud history, and decide what belongs in its shared knowledge base.",
+          "Wenlan adds a stricter boundary between working memory and a distilled Page. A Page record carries source memory IDs, citations, provenance state, and revisions, and the daemon rejects a Page with no source. That is useful when the question is not only “what does the note say?” but “which captured evidence supports this maintained claim?”",
+          "Basic Memory can still hold source citations, and Wenlan Pages remain editable and reviewable. The difference is which provenance behavior the system requires rather than what a careful author could add manually.",
         ],
       },
       {
         heading: "When Basic Memory is the better call",
         body: [
-          "I want to be specific about this. If your problem is 'I have hundreds of Markdown notes and I want AI to read and write to them naturally,' Basic Memory is closer to the shape of your problem. The vault is the product. AI is a citizen of the vault.",
-          "If your problem is 'AI conversations keep losing context across sessions and tools,' Wenlan is closer. The work session is the product. Markdown is a projection for human readability.",
-          "Both can run in parallel. The MCP layer does not care if two memory servers are registered. I have tested this; the practical limit is the human overhead of remembering which content belongs in which store. Most people end up picking one as primary within a couple of weeks.",
+          "Choose Basic Memory when you already think in Markdown notes, want AI assistants to share that knowledge base, or need a hosted web and Team path without building your own sync layer.",
+          "It is also the clearer fit when people and agents should directly co-edit the same durable notes and the knowledge base—not session provenance—is the primary unit of work.",
+        ],
+      },
+      {
+        heading: "When Wenlan is the better call",
+        body: [
+          "Choose Wenlan when context is scattered across AI sessions and tools, and you want explicit capture and handoff before that context is promoted into maintained knowledge.",
+          "It is the clearer fit when source-backed distillation, reviewable revisions, local operation, and a visible repair loop matter more than hosted team collaboration.",
         ],
       },
       {
         heading: "Migration shape, if you decide to switch",
         body: [
-          "Switching from a Basic Memory vault to Wenlan is selective today: pick durable notes that should become AI work memory and move them through `wenlan capture`, `/capture`, or a small script over `/api/memory/store`. There is no general Markdown-vault importer in the current CLI.",
-          "Going the other way is simpler. Wenlan's projected Markdown under `~/.wenlan/` is readable as plain text. Point Obsidian or another Markdown reader at the pages and sessions when you need a static record. You lose live recall, review, and distillation behavior, but the human-facing record remains portable.",
+          "Moving from Basic Memory to Wenlan is selective today. Choose the durable notes that should become Sources or Memories, capture them through the CLI or MCP workflow, and distill only the claims whose source chain you want Wenlan to maintain. Wenlan does not currently advertise a one-command Basic Memory vault importer.",
+          "Moving Wenlan's readable output into another knowledge base is straightforward at the file level: Pages and sessions under `~/.wenlan/` are Markdown. That preserves readable content, but not Wenlan's live recall, provenance state, curation, or distillation behavior.",
+          "Using both is technically possible because each exposes an MCP server. If you do, assign ownership clearly—for example, Basic Memory for shared team notes and Wenlan for source-backed personal AI-work history—so agents do not create conflicting copies.",
         ],
       },
     ],
@@ -981,37 +1033,51 @@ const baseArticles: LearnArticle[] = [
       rows: [
         {
           dimension: "Center of gravity",
-          wenlan: "AI work session loop: capture, handoff, distill, recall across MCP clients.",
+          wenlan: "Source-backed AI-work loop: capture, recall, handoff, distill, curate, and lint across MCP clients.",
           competitor:
-            "Markdown knowledge base humans and AI both read and edit.",
+            "Human-readable Markdown knowledge base that people and AI assistants read, edit, link, and maintain.",
+        },
+        {
+          dimension: "Deployment",
+          wenlan: "Local-first daemon, CLI, MCP server, plugins, and readable local artifacts.",
+          competitor:
+            "Open-source local server or hosted Basic Memory Cloud with remote MCP and optional local sync.",
+        },
+        {
+          dimension: "Collaboration",
+          wenlan: "Personal local knowledge workflow in v0.14.1; no hosted team workspace is claimed.",
+          competitor:
+            "Team workspaces with membership, collaborative editing, activity, snapshots, and file history.",
         },
         {
           dimension: "Storage",
-          wenlan: "Local libSQL for retrieval plus Markdown projections in ~/.wenlan/; readable artifacts are tracked in ~/.wenlan/.git/.",
-          competitor: "Markdown files in a local Obsidian-style vault.",
+          wenlan: "Local daemon-owned retrieval store plus Markdown projections in ~/.wenlan/; readable artifacts are tracked in local git.",
+          competitor:
+            "File-first Markdown with a derived local index; Cloud adds hosted storage, sync, snapshots, and history.",
         },
         {
           dimension: "Retrieval",
-          wenlan: "Hybrid: vector (BGE-Base-EN-v1.5-Q 768-dim) + FTS5 + reciprocal-rank fusion + knowledge-graph neighbors + CE reranker. LME_Oracle: 93.6% Recall@5, 0.857 MRR, 0.883 NDCG@10 (500 Q). LME_S: 87.7% Recall@5, 0.815 MRR, 0.822 NDCG@10 (deep, N=90).",
+          wenlan: "Full-text and embedding retrieval, weighted fusion, eligible graph context, and optional reranking.",
           competitor:
-            "Semantic + FTS over Markdown notes; emphasis on note linking, not benchmark retrieval.",
+            "Text and semantic search, graph traversal, and build_context over notes, observations, and relations.",
         },
         {
-          dimension: "Provenance",
-          wenlan: "Mandatory source_memory_ids on every distilled page record. Daemon rejects pages with no source (HTTP 422). Pages can grow or refresh without losing the source chain.",
+          dimension: "Maintenance workflow",
+          wenlan: "Separate capture, handoff, distill, curate, and lint actions keep working memory, synthesis, review, and repair visible.",
           competitor:
-            "Wikilinks between notes; provenance is whatever the author writes by hand.",
+            "Agent Skills teach search-before-answer, capture, linking, and knowledge-base maintenance.",
         },
         {
-          dimension: "Versioning",
-          wenlan: "Real git history for readable artifacts in ~/.wenlan/.git/. Raw memory captures remain daemon-owned database records.",
+          dimension: "Provenance and history",
+          wenlan: "Distilled Pages require source memory IDs and retain citations, provenance state, revisions, and local git history for readable artifacts.",
           competitor:
-            "File mtime; bring-your-own git if you want history.",
+            "Readable notes and links; local history uses the user's tools, while Cloud provides snapshots and per-file history.",
         },
         {
           dimension: "License",
           wenlan: "Apache-2.0 daemon, CLI, MCP server.",
-          competitor: "AGPL-3.0 (Basic Memory open-source repo).",
+          competitor:
+            "AGPL-3.0 open-source server and client; Cloud and Teams are hosted product paths.",
         },
       ],
     },
@@ -1019,27 +1085,27 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Is Basic Memory a competitor to Wenlan?",
         answer:
-          "They overlap around AI-readable memory and Markdown, but the product shapes differ. Basic Memory is closer to a Markdown knowledge base; Wenlan is closer to a local AI work memory loop.",
+          "They overlap around MCP, AI-readable memory, Markdown, search, and durable context. Basic Memory centers a knowledge base that people and agents maintain together. Wenlan centers a source-backed workflow from session memory to reviewable Pages.",
       },
       {
         question: "Can someone use both?",
         answer:
-          "Yes, through MCP. Each registers as a distinct memory server with the AI client. The friction is human: you decide which one owns which kind of content. Most people pick one as primary within a few weeks.",
+          "Yes. Each can register as a separate MCP server. Define ownership first—for example, Basic Memory for shared team notes and Wenlan for source-backed personal AI-work history—so an agent does not maintain conflicting copies.",
       },
       {
-        question: "Does Wenlan work without the daemon running?",
+        question: "Is Basic Memory local or hosted?",
         answer:
-          "Reads of the projected Markdown under `~/.wenlan/` work without the daemon since the files are plain text. Anything that needs retrieval, capture, or distillation needs the daemon process. I run it as a launchd user service on macOS so I never think about it; the equivalents on Linux (systemd user unit) and Windows (Task Scheduler ONLOGON) ship in current Wenlan releases.",
+          "Both paths exist. The open-source server works with local Markdown files and a derived index. Basic Memory Cloud adds hosted MCP access, web editing, optional local sync, snapshots, and history. Team workspaces add shared collaboration.",
       },
       {
-        question: "How does Wenlan handle wikilinks compared to Basic Memory?",
+        question: "What is the main provenance difference?",
         answer:
-          "Wenlan extracts wikilinks during capture and creates explicit graph edges in the knowledge-graph layer, alongside the Markdown link. That lets hybrid retrieval traverse neighbors at query time. Basic Memory treats wikilinks primarily as Markdown links between notes.",
+          "Basic Memory makes the note, its links, and—on Cloud—its file history inspectable. Wenlan additionally requires a distilled Page record to name source memory IDs, retaining citations, provenance state, and revisions between captured evidence and the maintained Page.",
       },
       {
         question: "How fresh is this comparison?",
         answer:
-          "Reflects Basic Memory's public docs as of 2026-07-02 and Wenlan v0.14.1 as of 2026-07-20. If something material changes on either side, please open an issue on github.com/7xuanlu/wenlan and I will update.",
+          "The Basic Memory side is pinned to v0.22.1, source commit 5d444f0, and documentation commit 1c67003, checked on 2026-07-25. The Wenlan side is pinned to v0.14.1, released on 2026-07-20. The maintained source links above are the authority if either product changes.",
       },
     ],
     relatedSlugs: [
