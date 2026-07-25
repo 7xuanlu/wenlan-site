@@ -198,3 +198,28 @@ component-rendered article using the existing design system; desktop and
 mobile structure, content, interaction, and responsive layout had no blocking
 finding. There is no concrete pixel-reference target for this copy refresh, so
 no reference image-diff score is claimed.
+
+## Production verification
+
+- PR [#80](https://github.com/7xuanlu/wenlan-site/pull/80) merged at
+  `2026-07-25T02:14:16Z` as
+  `338f5a510d0294b69b7b691d82b6da9e42481a9b`.
+- Vercel production completed at `2026-07-25T02:15:21Z`.
+- The deployed technical audit passed robots, 110 sitemap URLs, 14 key pages,
+  six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects,
+  six bridge-host redirects, and legacy-URL exclusions.
+- The live English route returned HTTP 200 with the expected H1 and title,
+  exact self-canonical, `index, follow`, five maintained references,
+  SoftwareApplication, WebSite, Organization, Article, and BreadcrumbList
+  schema, `datePublished: "2026-06-06"`,
+  `dateModified: "2026-07-25"`, and no `FAQPage`.
+- The unsupported zh-TW and zh-CN routes returned 404 and were absent from the
+  sitemap.
+- Complete production screenshots are under the `production/` subdirectory
+  of the local QA evidence path. Desktop and 390 px mobile covered the full
+  page without document overflow or browser warning/error; the first FAQ
+  opened with the expected answer.
+- This is technical publication evidence only. The pre-publish GSC, Vercel,
+  and GitHub values remain separate native-unit baselines; no SEO success,
+  CTA change, source-to-page session, or causal effect is inferred at
+  production completion.
