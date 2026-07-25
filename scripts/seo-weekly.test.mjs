@@ -44,6 +44,32 @@ function sourcePath(path) {
 async function readRepo(path) {
   return readFile(resolve(repoRoot, sourcePath(path)), "utf8");
 }
+
+async function runWeeklyFixture(
+  outputPath,
+  {
+    queriesPath = resolve(fixtureRoot, "gsc-queries.csv"),
+    pagesPath = resolve(fixtureRoot, "gsc-pages.csv"),
+  } = {},
+) {
+  await execFileAsync(
+    process.execPath,
+    [
+      resolve(repoRoot, "scripts/seo-weekly.mjs"),
+      "--",
+      "--queries",
+      queriesPath,
+      "--pages",
+      pagesPath,
+      "--date",
+      "2026-06-13",
+      "--output",
+      outputPath,
+    ],
+    { cwd: repoRoot },
+  );
+}
+
 const rebrandRedirectPairs = [
   ["/learn/origin-for-claude-code", "/learn/wenlan-for-claude-code"],
   [
@@ -3823,20 +3849,13 @@ test("seo weekly generator preserves manual audit sections when regenerating", a
   try {
     const outputPath = join(outputRoot, "2026-06-13-weekly-seo.md");
 
+    await runWeeklyFixture(outputPath);
+    const generated = await readFile(outputPath, "utf8");
     await writeFile(
       outputPath,
-      [
-        "# Weekly SEO/GEO Audit — 2026-06-13",
-        "",
-        "stale generated body",
-        "",
-        "## Snapshot",
-        "",
-        "| Field | Value |",
-        "| --- | --- |",
-        "| Date range | Last 28 days |",
-        "| GSC data source | CSV export |",
-        "",
+      generated.replace(
+        "## Follow-Up",
+        [
         "## Account-Gated Evidence Notes",
         "",
         "- Preserve captured GSC indexing details.",
@@ -3849,40 +3868,22 @@ test("seo weekly generator preserves manual audit sections when regenerating", a
         "",
         "- Preserve local change notes.",
         "",
-        "## Do Not Write Yet Gate",
-        "",
-        "stale gate",
-        "",
-      ].join("\n"),
+          "## Follow-Up",
+        ].join("\n"),
+      ),
       "utf8",
     );
 
-    await execFileAsync(
-      process.execPath,
-      [
-        resolve(repoRoot, "scripts/seo-weekly.mjs"),
-        "--",
-        "--queries",
-        resolve(fixtureRoot, "gsc-queries.csv"),
-        "--pages",
-        resolve(fixtureRoot, "gsc-pages.csv"),
-        "--date",
-        "2026-06-13",
-        "--output",
-        outputPath,
-      ],
-      { cwd: repoRoot },
-    );
+    await runWeeklyFixture(outputPath);
 
     const report = await readFile(outputPath, "utf8");
 
     assert.match(report, /^# Weekly SEO\/GEO Audit — 2026-06-13/m);
-    assert.doesNotMatch(report, /stale generated body/);
-    assert.doesNotMatch(report, /stale gate/);
     assert.match(report, /## Account-Gated Evidence Notes\n\n- Preserve captured GSC indexing details\./);
     assert.match(report, /## Deployed Technical SEO Checks\n\n- Preserve deployed robots and canonical checks\./);
     assert.match(report, /## Local Changes Made\n\n- Preserve local change notes\./);
-    assert.ok(report.indexOf("## Local Changes Made") < report.indexOf("## Do Not Write Yet Gate"));
+    assert.ok(report.indexOf("## Do Not Write Yet Gate") < report.indexOf("## Local Changes Made"));
+    assert.ok(report.indexOf("## Local Changes Made") < report.indexOf("## Follow-Up"));
     assert.equal(report.match(/## Account-Gated Evidence Notes/g)?.length, 1);
     assert.equal(report.match(/## Deployed Technical SEO Checks/g)?.length, 1);
     assert.equal(report.match(/## Local Changes Made/g)?.length, 1);
@@ -3891,59 +3892,194 @@ test("seo weekly generator preserves manual audit sections when regenerating", a
   }
 });
 
-test("seo weekly generator refreshes preserved visible-table counts from current CSVs", async () => {
-  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-refresh-preserved-counts-"));
+test("seo weekly generator preserves report-specific manual sections in source order", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-preserve-report-manual-"));
   try {
     const outputPath = join(outputRoot, "2026-06-13-weekly-seo.md");
 
+    await runWeeklyFixture(outputPath);
+    const generated = await readFile(outputPath, "utf8");
     await writeFile(
       outputPath,
-      [
-        "# Weekly SEO/GEO Audit — 2026-06-13",
+      generated.replace(
+        /## Follow-Up[\s\S]*$/,
+        [
+        "## Authenticated Indexing Snapshot",
         "",
-        "## Snapshot",
+        "- Preserve indexed and excluded counts.",
         "",
-        "| Field | Value |",
-        "| --- | --- |",
-        "| Date range | Last 28 days |",
-        "| GSC data source | CSV export |",
+        "## English and Mandarin Coverage",
         "",
-        "## Account-Gated Evidence Notes",
+        "- Preserve locale coverage checks.",
         "",
-        "- Normalized visible Search results tables: 999 query rows covering 88 clicks and 777 impressions; 555 page rows covering 44 clicks and 333 impressions. The visible tables are action-queue evidence, not full-property totals.",
-        "- Preserve captured GSC indexing details.",
+        "## Change Decision",
         "",
-        "## Do Not Write Yet Gate",
+        "- Preserve the evidence-backed change decision.",
         "",
-      ].join("\n"),
+        "## Verification Run",
+        "",
+        "- Preserve completed verification.",
+        "",
+        "## Follow-Up",
+        "",
+        "- [x] Run `pnpm build` and `pnpm seo:technical:built` to verify local built robots, sitemap, redirects, noindex headers, canonicals, and schema.",
+        "- [ ] Run `pnpm build` and inspect bundle size.",
+        "- [x] Run `pnpm seo:vercel:fetch -- --date 2026-06-13` before the weekly report; keep custom CTA events marked account-gated when the Vercel plan blocks them.",
+        "- [x] Generate `pnpm seo:ai-visibility -- --date 2026-06-13`.",
+        "- [ ] Manually check whether AI assistants mention Wenlan accurately.",
+        "- [x] Preserve completed follow-up state.",
+        "",
+        ].join("\n"),
+      ),
       "utf8",
     );
 
-    await execFileAsync(
-      process.execPath,
-      [
-        resolve(repoRoot, "scripts/seo-weekly.mjs"),
-        "--",
-        "--queries",
-        resolve(fixtureRoot, "gsc-queries.csv"),
-        "--pages",
-        resolve(fixtureRoot, "gsc-pages.csv"),
-        "--date",
-        "2026-06-13",
-        "--output",
-        outputPath,
-      ],
-      { cwd: repoRoot },
-    );
+    await runWeeklyFixture(outputPath);
 
     const report = await readFile(outputPath, "utf8");
+    const manualHeadings = [
+      "## Authenticated Indexing Snapshot",
+      "## English and Mandarin Coverage",
+      "## Change Decision",
+      "## Verification Run",
+    ];
 
-    assert.doesNotMatch(report, /999 query rows/);
+    for (const heading of manualHeadings) {
+      assert.equal(report.match(new RegExp(heading, "g"))?.length, 1);
+    }
+    assert.match(report, /- Preserve indexed and excluded counts\./);
+    assert.match(report, /- Preserve locale coverage checks\./);
+    assert.match(report, /- Preserve the evidence-backed change decision\./);
+    assert.match(report, /- Preserve completed verification\./);
+    assert.match(report, /- \[x\] Preserve completed follow-up state\./);
     assert.match(
       report,
-      /- Normalized visible Search results tables: 7 query rows covering 1 click and 69 impressions; 5 page rows covering 1 click and 99 impressions\. The visible tables are action-queue evidence, not full-property totals\./,
+      /- \[x\] Run `pnpm build` and `pnpm seo:technical:built`/,
     );
-    assert.match(report, /- Preserve captured GSC indexing details\./);
+    assert.match(
+      report,
+      /- \[ \] Run `pnpm build` and inspect bundle size\./,
+    );
+    assert.match(
+      report,
+      /- \[ \] Run `pnpm seo:technical:deployed` to verify deployed robots/,
+    );
+    assert.match(
+      report,
+      /- \[x\] Run `pnpm seo:vercel:fetch -- --date 2026-06-13`/,
+    );
+    assert.match(
+      report,
+      /- \[ \] Generate `pnpm seo:ai-visibility -- --date YYYY-MM-DD` and manually check/,
+    );
+    assert.match(
+      report,
+      /- \[x\] Generate `pnpm seo:ai-visibility -- --date 2026-06-13`\./,
+    );
+    assert.ok(
+      manualHeadings.every((heading, index) => {
+        if (index === 0) return true;
+        return report.indexOf(manualHeadings[index - 1]) < report.indexOf(heading);
+      }),
+    );
+    assert.ok(report.indexOf("## Verification Run") < report.indexOf("## Follow-Up"));
+    assert.equal(report.match(/## Follow-Up/g)?.length, 1);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly generator ignores fenced and commented H2 examples while preserving manual sections", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-preserve-fenced-h2-"));
+  try {
+    const outputPath = join(outputRoot, "2026-06-13-weekly-seo.md");
+
+    await runWeeklyFixture(outputPath);
+    const generated = await readFile(outputPath, "utf8");
+    const manualSection = [
+      "## Verification Notes",
+      "",
+      "```md",
+      "```js",
+      "## Snapshot",
+      "",
+      "This heading follows a same-character fence prefix with an info string.",
+      "```",
+      "",
+      "<!--",
+      "## Top Actions",
+      "This commented heading is also not a report section.",
+      "-->",
+      "",
+      "- Preserve the text after both examples.",
+    ].join("\n");
+    await writeFile(
+      outputPath,
+      generated.replace(
+        "## Follow-Up",
+        `${manualSection}\n\n## Follow-Up`,
+      ),
+      "utf8",
+    );
+
+    await runWeeklyFixture(outputPath);
+
+    const report = await readFile(outputPath, "utf8");
+    assert.match(report, new RegExp(manualSection.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    assert.match(report, /- Preserve the text after both examples\./);
+    assert.equal(report.match(/^## Verification Notes$/gm)?.length, 1);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly generator drops manual sections when same-range evidence rows change", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-fingerprint-change-"));
+  try {
+    const queriesPath = join(outputRoot, "gsc-queries.csv");
+    const outputPath = join(outputRoot, "2026-06-13-weekly-seo.md");
+
+    await runWeeklyFixture(outputPath);
+    const generated = await readFile(outputPath, "utf8");
+    const initialFingerprint = generated.match(
+      /\| Evidence fingerprint \| ([^|]+) \|/,
+    )?.[1];
+    await writeFile(
+      outputPath,
+      generated.replace(
+        "## Follow-Up",
+        [
+          "## Account-Gated Evidence Notes",
+          "",
+          "- This note belongs only to the original evidence rows.",
+          "",
+          "## Follow-Up",
+        ].join("\n"),
+      ),
+      "utf8",
+    );
+    const queryFixture = await readFile(
+      resolve(fixtureRoot, "gsc-queries.csv"),
+      "utf8",
+    );
+    await writeFile(
+      queriesPath,
+      queryFixture.replace("origin app,0,19,0%,22.1", "origin app,0,18,0%,22.1"),
+      "utf8",
+    );
+
+    await runWeeklyFixture(outputPath, { queriesPath });
+
+    const report = await readFile(outputPath, "utf8");
+    const currentFingerprint = report.match(
+      /\| Evidence fingerprint \| ([^|]+) \|/,
+    )?.[1];
+
+    assert.ok(initialFingerprint);
+    assert.ok(currentFingerprint);
+    assert.notEqual(currentFingerprint, initialFingerprint);
+    assert.doesNotMatch(report, /This note belongs only to the original evidence rows/);
+    assert.doesNotMatch(report, /## Account-Gated Evidence Notes/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }
@@ -4136,6 +4272,85 @@ test("seo weekly generator maps Superlocal queries to the Superlocal comparison 
     assert.doesNotMatch(report, /superlocal memory` \| Comparisons \| `\/learn\/wenlan-vs-basic-memory`/);
     assert.doesNotMatch(report, /super local memory` \| Other \| -/);
     assert.doesNotMatch(report, /super local app` \| Comparisons/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly generator maps named comparison products to their canonical pages", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-seo-comparison-targets-"));
+  try {
+    const queriesPath = join(outputRoot, "gsc-queries.csv");
+    const pagesPath = join(outputRoot, "gsc-pages.csv");
+    const outputPath = join(outputRoot, "2026-06-13-weekly-seo.md");
+
+    await writeFile(
+      queriesPath,
+      [
+        "Query,Clicks,Impressions,CTR,Position",
+        "basic memory,0,1,0%,20.0",
+        "mempalace vs claude-mem,0,1,0%,44.0",
+        "wenlan vs mem0,0,1,0%,30.0",
+        "chatgpt memory alternative,0,1,0%,25.0",
+        "obsidian vs wenlan,0,1,0%,18.0",
+        "notion ai vs wenlan,0,1,0%,22.0",
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+    await writeFile(
+      pagesPath,
+      [
+        "Page,Clicks,Impressions,CTR,Position",
+        "https://wenlan.app/learn/wenlan-vs-basic-memory,0,1,0%,20.0",
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+
+    await execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly.mjs"),
+        "--",
+        "--queries",
+        queriesPath,
+        "--pages",
+        pagesPath,
+        "--date",
+        "2026-06-13",
+        "--output",
+        outputPath,
+      ],
+      { cwd: repoRoot },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+
+    assert.match(
+      report,
+      /\| `basic memory` \| Comparisons \| `\/learn\/wenlan-vs-basic-memory` \|/,
+    );
+    assert.match(
+      report,
+      /\| `mempalace vs claude-mem` \| Comparisons \| `\/learn\/wenlan-vs-claude-mem` \|/,
+    );
+    assert.match(
+      report,
+      /\| `wenlan vs mem0` \| Comparisons \| `\/learn\/wenlan-vs-mem0` \|/,
+    );
+    assert.match(
+      report,
+      /\| `chatgpt memory alternative` \| Comparisons \| `\/learn\/wenlan-vs-chatgpt-memory` \|/,
+    );
+    assert.match(
+      report,
+      /\| `obsidian vs wenlan` \| Comparisons \| `\/learn\/wenlan-vs-obsidian-ai-memory` \|/,
+    );
+    assert.match(
+      report,
+      /\| `notion ai vs wenlan` \| Comparisons \| `\/learn\/wenlan-vs-notion-ai` \|/,
+    );
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }

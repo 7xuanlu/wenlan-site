@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -55,6 +56,33 @@ const GROUPS = [
   },
 ];
 
+const COMPARISON_TARGETS = [
+  {
+    pattern: /\bbasic\s*memory\b/i,
+    page: "/learn/wenlan-vs-basic-memory",
+  },
+  {
+    pattern: /\bclaude-mem\b/i,
+    page: "/learn/wenlan-vs-claude-mem",
+  },
+  {
+    pattern: /\bmem0\b/i,
+    page: "/learn/wenlan-vs-mem0",
+  },
+  {
+    pattern: /\bchatgpt\b/i,
+    page: "/learn/wenlan-vs-chatgpt-memory",
+  },
+  {
+    pattern: /\bobsidian\b/i,
+    page: "/learn/wenlan-vs-obsidian-ai-memory",
+  },
+  {
+    pattern: /\bnotion(?:\s+ai)?\b/i,
+    page: "/learn/wenlan-vs-notion-ai",
+  },
+];
+
 const ACTION_PRIORITY = {
   "technical-check": 1,
   "title-meta-refresh": 2,
@@ -67,14 +95,17 @@ const ACTION_PRIORITY = {
 
 const MIN_QUERY_ACTION_IMPRESSIONS = 3;
 const MIN_PAGE_INTERNAL_LINK_IMPRESSIONS = 20;
-const PRESERVED_SECTION_HEADINGS = [
-  "Account-Gated Evidence Notes",
-  "Deployed Technical SEO Checks",
-  "Local Changes Made",
-  "Verification",
-  "Findings and Next Step",
-];
-const DO_NOT_WRITE_GATE_HEADING = "## Do Not Write Yet Gate";
+const REPORT_SCHEMA_VERSION = 2;
+const GENERATED_SECTION_HEADINGS = new Set([
+  "Snapshot",
+  "Vercel Analytics Evidence",
+  "Umami Evidence",
+  "Top Actions",
+  "Query Action Queue",
+  "Page Action Queue",
+  "Do Not Write Yet Gate",
+]);
+const FOLLOW_UP_HEADING = "## Follow-Up";
 const AI_REFERRER_PATTERNS = [
   /chatgpt/i,
   /openai/i,
@@ -729,6 +760,16 @@ function classifyQuery(query) {
     };
   }
 
+  const comparisonTarget = COMPARISON_TARGETS.find(({ pattern }) =>
+    pattern.test(query),
+  );
+  if (comparisonTarget) {
+    return {
+      group: "Comparisons",
+      page: comparisonTarget.page,
+    };
+  }
+
   const match = GROUPS.find((group) =>
     group.patterns.some((pattern) => pattern.test(query)),
   );
@@ -908,6 +949,21 @@ function rankRows(rows) {
   });
 }
 
+function makeEvidenceFingerprint({ date, queries, pages, evidence, umami, vercel }) {
+  const payload = {
+    reportSchemaVersion: REPORT_SCHEMA_VERSION,
+    date,
+    queries,
+    pages,
+    evidence,
+    umami,
+    vercel,
+  };
+  return `sha256:${createHash("sha256")
+    .update(JSON.stringify(payload))
+    .digest("hex")}`;
+}
+
 function makeMarkdown({ date, queries, pages, evidence, umami, vercel }) {
   const evidenceMetadata =
     evidence ??
@@ -961,6 +1017,14 @@ function makeMarkdown({ date, queries, pages, evidence, umami, vercel }) {
     .slice(0, 8);
   const topPage = [...pages].sort((a, b) => b.impressions - a.impressions)[0];
   const nextDate = addDays(date, 7);
+  const evidenceFingerprint = makeEvidenceFingerprint({
+    date,
+    queries,
+    pages,
+    evidence: evidenceMetadata,
+    umami: umamiSummary,
+    vercel: vercelSummary,
+  });
   const analyticsSnapshot = vercelSummary.hasData
     ? `| Analytics data source | ${escapePipe(vercelSummary.source)} |
 | Analytics date range | ${escapePipe(vercelSummary.dateRange)} |
@@ -992,6 +1056,7 @@ ${evidenceMetadata.intro}
 | Week of | ${date} |
 | Date range | ${escapePipe(evidenceMetadata.dateRange)} |
 | GSC data source | ${escapePipe(evidenceMetadata.source)} |
+| Evidence fingerprint | ${evidenceFingerprint} |
 | Property clicks | ${propertyTotals?.clicks ?? unavailable} |
 | Property impressions | ${propertyTotals?.impressions ?? unavailable} |
 | Property CTR | ${propertyTotals?.ctr != null ? `${(propertyTotals.ctr * 100).toFixed(2)}%` : unavailable} |
@@ -1123,17 +1188,72 @@ function plural(count, singular) {
   return count === 1 ? singular : `${singular}s`;
 }
 
-function metricPhrase(count, singular) {
-  return `${count} ${plural(count, singular)}`;
+function extractMarkdownSections(markdown) {
+  const lines = markdown.split("\n");
+  const sections = [];
+  let current = null;
+  let fence = null;
+  let inHtmlComment = false;
+
+  for (const line of lines) {
+    const blocked = Boolean(fence) || inHtmlComment;
+    const heading = !blocked ? line.match(/^## (.+)$/) : null;
+    if (heading) {
+      if (current) sections.push(current);
+      current = {
+        heading: heading[1].trim(),
+        lines: [line],
+      };
+    } else if (current) {
+      current.lines.push(line);
+    }
+
+    const fenceMarker = !inHtmlComment
+      ? line.match(/^\s*(`{3,}|~{3,})(.*)$/)
+      : null;
+    if (fenceMarker) {
+      const marker = fenceMarker[1];
+      if (!fence) {
+        fence = {
+          character: marker[0],
+          length: marker.length,
+        };
+      } else if (
+        marker[0] === fence.character &&
+        marker.length >= fence.length &&
+        fenceMarker[2].trim() === ""
+      ) {
+        fence = null;
+      }
+    }
+
+    if (!fence) {
+      if (!inHtmlComment && line.includes("<!--") && !line.includes("-->")) {
+        inHtmlComment = true;
+      } else if (inHtmlComment && line.includes("-->")) {
+        inHtmlComment = false;
+      }
+    }
+  }
+
+  if (current) sections.push(current);
+  return sections.map(({ heading, lines: sectionLines }) => ({
+    heading,
+    section: sectionLines.join("\n").trim(),
+  }));
 }
 
-function extractMarkdownSection(markdown, heading) {
-  const marker = `## ${heading}`;
-  const start = markdown.indexOf(marker);
-  if (start === -1) return null;
+function replaceMarkdownSection(markdown, heading, replacement) {
+  const section = extractMarkdownSections(markdown).find(
+    (candidate) => candidate.heading === heading,
+  );
+  if (!section) return markdown;
 
-  const next = markdown.indexOf("\n## ", start + marker.length);
-  return markdown.slice(start, next === -1 ? undefined : next).trim();
+  const start = markdown.indexOf(section.section);
+  const end = start + section.section.length;
+  return `${markdown.slice(0, start).trimEnd()}\n\n${replacement.trim()}\n\n${markdown
+    .slice(end)
+    .trimStart()}`.trimEnd() + "\n";
 }
 
 function extractSnapshotValue(markdown, field) {
@@ -1142,76 +1262,112 @@ function extractSnapshotValue(markdown, field) {
   return match?.[1]?.trim() ?? "";
 }
 
-function canPreserveManualSections(existingMarkdown, evidenceMetadata) {
-  const existingDateRange = extractSnapshotValue(existingMarkdown, "Date range");
-  const existingSource = extractSnapshotValue(existingMarkdown, "GSC data source");
-
-  return (
-    Boolean(existingDateRange) &&
-    Boolean(existingSource) &&
-    existingDateRange === evidenceMetadata.dateRange &&
-    existingSource === evidenceMetadata.source
+function canPreserveManualSections(existingMarkdown, markdown) {
+  const existingFingerprint = extractSnapshotValue(
+    existingMarkdown,
+    "Evidence fingerprint",
   );
+  const currentFingerprint = extractSnapshotValue(markdown, "Evidence fingerprint");
+  return Boolean(existingFingerprint) && existingFingerprint === currentFingerprint;
 }
 
-function preserveManualSections(markdown, existingMarkdown, evidenceMetadata, visibleTableStats) {
-  if (!canPreserveManualSections(existingMarkdown, evidenceMetadata)) {
+function followUpItemKey(line) {
+  const match = line.match(/^- \[[ xX]\] (.+)$/);
+  if (!match) return null;
+
+  const text = match[1]
+    .replace(/\d{4}-\d{2}-\d{2}/g, "YYYY-MM-DD")
+    .replace(/\s+/g, " ")
+    .trim();
+  return `text:${text}`;
+}
+
+function mergeFollowUpSections(generatedSection, existingSection) {
+  const generatedLines = generatedSection.split("\n");
+  const existingLines = existingSection.split("\n");
+  const existingItems = new Map(
+    existingLines
+      .map((line) => [followUpItemKey(line), line])
+      .filter(([key]) => Boolean(key)),
+  );
+  const generatedKeys = new Set();
+
+  const mergedLines = generatedLines.map((line) => {
+    const key = followUpItemKey(line);
+    if (!key) return line;
+    generatedKeys.add(key);
+    const existingLine = existingItems.get(key);
+    if (!existingLine) return line;
+
+    let mergedLine = existingLine.startsWith("- [x]")
+      ? line.replace(/^- \[[ xX]\]/, "- [x]")
+      : line;
+    const existingDate = existingLine.match(/\b\d{4}-\d{2}-\d{2}\b/)?.[0];
+    if (existingDate) {
+      mergedLine = mergedLine.replace("YYYY-MM-DD", existingDate);
+    }
+    return mergedLine;
+  });
+
+  const generatedText = new Set(
+    generatedLines.map((line) => line.trim()).filter(Boolean),
+  );
+  const manualAdditions = existingLines
+    .slice(1)
+    .filter((line) => {
+      const trimmed = line.trim();
+      if (!trimmed) return false;
+      const key = followUpItemKey(line);
+      return key ? !generatedKeys.has(key) : !generatedText.has(trimmed);
+    });
+
+  return [
+    ...mergedLines,
+    ...(manualAdditions.length ? ["", ...manualAdditions] : []),
+  ].join("\n").trim();
+}
+
+function preserveManualSections(markdown, existingMarkdown) {
+  if (!canPreserveManualSections(existingMarkdown, markdown)) {
     return markdown;
   }
 
-  const preservedSections = PRESERVED_SECTION_HEADINGS
-    .map((heading) => extractMarkdownSection(existingMarkdown, heading))
-    .map((section) => refreshPreservedSection(section, visibleTableStats))
+  const existingSections = extractMarkdownSections(existingMarkdown);
+  const preservedSections = existingSections
+    .filter(
+      ({ heading }) =>
+        !GENERATED_SECTION_HEADINGS.has(heading) &&
+        heading !== "Follow-Up",
+    )
+    .map(({ section }) => section)
     .filter(Boolean);
+  const existingFollowUp = existingSections.find(
+    ({ heading }) => heading === "Follow-Up",
+  );
+  const generatedFollowUp = extractMarkdownSections(markdown).find(
+    ({ heading }) => heading === "Follow-Up",
+  );
+  const generatedMarkdown =
+    existingFollowUp && generatedFollowUp
+      ? replaceMarkdownSection(
+          markdown,
+          "Follow-Up",
+          mergeFollowUpSections(generatedFollowUp.section, existingFollowUp.section),
+        )
+    : markdown;
 
-  if (!preservedSections.length) return markdown;
+  if (!preservedSections.length) return generatedMarkdown;
 
-  const insert = `${preservedSections.join("\n\n")}\n\n`;
-  const gateIndex = markdown.indexOf(DO_NOT_WRITE_GATE_HEADING);
+  const insert = preservedSections.join("\n\n");
+  const followUpIndex = generatedMarkdown.indexOf(FOLLOW_UP_HEADING);
 
-  if (gateIndex === -1) {
-    return `${markdown.trimEnd()}\n\n${insert}`;
+  if (followUpIndex === -1) {
+    return `${generatedMarkdown.trimEnd()}\n\n${insert}\n`;
   }
 
-  return `${markdown.slice(0, gateIndex)}${insert}${markdown.slice(gateIndex)}`;
-}
-
-function refreshPreservedSection(section, visibleTableStats) {
-  if (!section || !visibleTableStats) return section;
-  if (!section.startsWith("## Account-Gated Evidence Notes")) return section;
-
-  return section.replace(
-    /^- Normalized visible Search results tables: .*$/m,
-    formatVisibleTableStats(visibleTableStats),
-  );
-}
-
-function makeVisibleTableStats(queries, pages) {
-  return {
-    queryRows: queries.length,
-    queryClicks: queries.reduce((sum, row) => sum + row.clicks, 0),
-    queryImpressions: queries.reduce((sum, row) => sum + row.impressions, 0),
-    pageRows: pages.length,
-    pageClicks: pages.reduce((sum, row) => sum + row.clicks, 0),
-    pageImpressions: pages.reduce((sum, row) => sum + row.impressions, 0),
-  };
-}
-
-function formatVisibleTableStats(stats) {
-  return [
-    "- Normalized visible Search results tables:",
-    metricPhrase(stats.queryRows, "query row"),
-    "covering",
-    metricPhrase(stats.queryClicks, "click"),
-    "and",
-    `${metricPhrase(stats.queryImpressions, "impression")};`,
-    metricPhrase(stats.pageRows, "page row"),
-    "covering",
-    metricPhrase(stats.pageClicks, "click"),
-    "and",
-    `${metricPhrase(stats.pageImpressions, "impression")}.`,
-    "The visible tables are action-queue evidence, not full-property totals.",
-  ].join(" ");
+  return `${generatedMarkdown.slice(0, followUpIndex).trimEnd()}\n\n${insert}\n\n${generatedMarkdown
+    .slice(followUpIndex)
+    .trimStart()}`.trimEnd() + "\n";
 }
 
 function groupTotals(rows) {
@@ -1286,13 +1442,12 @@ async function run() {
     referrerRecords: vercelReferrerRecords,
     metadata: vercelMetadata,
   });
-  const visibleTableStats = makeVisibleTableStats(queries, pages);
   let markdown = makeMarkdown({ date: args.date, queries, pages, evidence, umami, vercel });
 
   await mkdir(dirname(args.outputPath), { recursive: true });
   try {
     const existingMarkdown = await readFile(args.outputPath, "utf8");
-    markdown = preserveManualSections(markdown, existingMarkdown, evidence, visibleTableStats);
+    markdown = preserveManualSections(markdown, existingMarkdown);
   } catch (err) {
     if (err.code !== "ENOENT") throw err;
   }
