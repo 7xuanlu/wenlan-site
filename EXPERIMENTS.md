@@ -1421,6 +1421,18 @@ increase for that experiment.
 - Next step: complete RED-to-GREEN article verification, full SEO/i18n/lint/build/technical checks, rendered verification, and independent review; stop before push, PR, merge, or deploy without new explicit approval
 <!-- EXPERIMENT-RECORD:END -->
 
+### Campaign observation — 2026-07-25T00:02:30Z
+
+- Experiment: `EXP-2026-07-24-superlocalmemory-comparison-refresh`
+- Local preparation: complete
+- Reviewer: initial `FIX FIRST` because the regression contracts did not protect the Mode C `87.7%` scope or the AGPL-family and commercial-license facts; added article-scoped assertions in both SEO contract suites; focused re-review returned `SHIP` with no remaining P0–P2 findings
+- Verification: `seo:goal:check` passed; SEO tests 178/178; i18n tests 53/53; TypeScript lint passed; build generated 209 static pages; built technical SEO passed with 109 sitemap locations and no `FAQPage` in 113 built HTML files; locale-route technical checks and `git diff --check` passed
+- Rendered QA: desktop and mobile production-build frames covered the complete article; document/client widths were `1274/1274` and `387/387`; the comparison table remained intentionally horizontally scrollable on mobile; source links, title, canonical, `index, follow`, Article and BreadcrumbList schema, and visible benchmark/licensing copy passed; browser warnings/errors were empty; both inline visual passes passed
+- Locale decision: English refresh only. The authenticated/localized evidence does not establish a Mandarin SuperLocalMemory comparison cluster, so no zh-TW or zh-CN page was added; the existing localized route matrix passed without regression.
+- Approval: at `2026-07-25T00:02:30Z`, the user approved commit, push, PR, merge, deployment, and production verification for this website change
+- Still unapproved: request indexing, GSC validation, Reddit or other external publication, OSS submission, paid acquisition, and metric-definition changes
+- Next step: publish through the normal PR gate, verify the production route and technical SEO, append the production evidence, and release the one production slot
+
 ### Campaign observation — 2026-07-24T23:27:13Z
 
 - Experiment: `EXP-2026-07-24-claude-mem-comparison-refresh`
@@ -1449,4 +1461,33 @@ increase for that experiment.
 - Decision: wait
 - Unperformed gated actions: no indexing request, GSC validation, Reddit or other external post, OSS submission, paid acquisition, or metric-definition change
 - Next step: run the 24-hour technical/evidence readout after `2026-07-25T23:34:19Z`; this production-verified measurement cohort does not consume the production slot
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-24-superlocalmemory-comparison-refresh
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-24-superlocalmemory-comparison-refresh
+- Status: active
+- Data window: 2026-07-18..2026-07-24
+- Asset class: refresh
+- Launched: 2026-07-24
+- Hypothesis: Correcting the existing SuperLocalMemory comparison around the current control-plane-versus-source-backed-wiki decision and matching the current competitor brand/version will improve qualified exposure for comparison intent without creating a competing URL.
+- Candidate evidence: The target has 16 authenticated GSC impressions, 0 clicks, and average position 8.6. The visible query `super local memory` has 1 impression, 0 clicks, and average position 45.0, but the separate query and page exports are not joined. Earlier overlapping weekly data also returned `superlocal memory` and `super local memory`, establishing recurrence without adding the counts. GitHub REST reports 197 stars, 33 forks, 5 open issues, AGPL-3.0, and current commit `893e6d7d521cef6013d35f0ea468eca3005916de`; npm reports v3.8.3 published at `2026-07-24T15:17:25.395Z`. The v3.8.3 README and changelog show material drift to a local-first agent memory control plane with temporal retrieval, team scopes and access, audit, cache/compression, bounded loops, and framework adapters. Full provenance is recorded in `docs/seo-audits/2026-07-24-superlocalmemory-comparison-prelaunch.md`. OSS observations validate accuracy and intent but are not GSC or keyword volume.
+- Baseline: GSC property totals are 7 clicks and 310 impressions; visible-query totals are 1 click and 75 impressions, leaving a 6-click and 235-impression visibility gap. The target has 16 impressions, 0 clicks, and average position 8.6. Vercel separately reports 1,402 visitors and 1,593 pageviews property-wide and 7 visitors and 7 pageviews for the target. GitHub reports 47 Wenlan total stars. Umami and Vercel custom CTA events remain unavailable or account-gated. No source-to-page join or causal inference is made.
+- Change: Refresh only the existing English `/learn/wenlan-vs-superlocal-memory` title, metadata, first answer, source links, body, comparison table, FAQ copy, and related links. Correct the current SuperLocalMemory product boundary and the published 60.4%, 74.8%, and 87.7% benchmark scopes. Keep the URL, canonical, sitemap membership, locale availability, Article and BreadcrumbList schema types, and CTA destination unchanged. Add no Mandarin route, `FAQPage` JSON-LD, indexing request, or external distribution.
+- Publish date: not-published
+- Index date: unknown-existing-route
+- Minimum exposure: 5 GSC target-page impressions in the first 28 complete post-deploy days
+- Success criteria: After at least 5 GSC target-page impressions, the target earns at least 1 GSC click or average position is 7.0 or better; Vercel target-page visitors and GitHub stars are reported separately without a causal claim.
+- Failure criteria: After 28 complete post-deploy days and at least 5 GSC target-page impressions, the target has 0 clicks and average position is worse than 15.0. Fewer than 5 impressions is inconclusive; after minimum exposure, 0 clicks with average position from 7.1 through 15.0 is also inconclusive.
+- Stop criteria: Stop or hold if maintained sources no longer support the comparison, another controller edits the route, a claim cannot be pinned to first-party evidence, or the change creates a canonical, indexing, robots, noindex, structured-data, sitemap, locale, source-link, or rendered-layout regression.
+- 24h readout: pending — verify the live route, title, metadata, canonical, indexability, structured data, maintained references, English and Mandarin non-regression, production render, and separate source-native observations without an SEO-success judgment
+- 7d readout: pending — report GSC latency and target-page clicks, impressions, and position when available, Vercel target-page presence when available, and GitHub stars separately
+- W2 readout: pending — apply the minimum-exposure guard and inspect comparison-intent relevance plus overlap with the local-first, trust, and claude-mem comparison cohorts
+- W4 readout: pending — evaluate the predeclared success, failure, or inconclusive condition without changing thresholds
+- W8 readout: pending — record a post-campaign follow-up only if it remains useful
+- Result: pending
+- Decision: wait
+- Next step: complete RED-to-GREEN article verification, full SEO/i18n/lint/build/technical checks, rendered verification, and independent review; stop before push, PR, merge, or deploy without new explicit approval
 <!-- EXPERIMENT-RECORD:END -->

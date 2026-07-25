@@ -1276,173 +1276,189 @@ const baseArticles: LearnArticle[] = [
     slug: "wenlan-vs-superlocal-memory",
     eyebrow: "Comparison",
     category: "Comparisons",
-    title: "Wenlan vs Superlocal Memory: Local-First AI Work Memory for Work That Spans Tools",
+    title: "Wenlan vs SuperLocalMemory v3.8.3: Local AI Memory Compared",
     description:
-      "Compare Wenlan and Superlocal Memory as local-first AI memory tools for coding work, retrieval quality, MCP workflows, inspectability, and trust.",
-    metaTitle: "Wenlan vs Superlocal Memory | AI Memory Alternative",
+      "Compare Wenlan and SuperLocalMemory v3.8.3 across local agent memory, temporal retrieval, auditability, team controls, MCP workflows, and source-backed pages.",
+    metaTitle: "Wenlan vs SuperLocalMemory v3.8.3 | Local AI Memory",
     metaDescription:
-      "Compare Wenlan and Superlocal Memory for local-first AI memory, coding workflows, MCP clients, retrieval quality, provenance, and durable work context.",
+      "Compare Wenlan with SuperLocalMemory v3.8.3: local agent memory, temporal retrieval, team controls, MCP workflows, auditability, and source-backed pages.",
     keywords: [
-      "Wenlan vs Superlocal Memory",
-      "Superlocal Memory alternative",
-      "local-first AI work memory",
-      "AI work memory reliability",
-      "AI coding work memory",
+      "Wenlan vs SuperLocalMemory",
+      "SuperLocalMemory alternative",
+      "super local memory",
+      "local AI agent memory",
+      "local-first agent memory",
     ],
     publishedAt: "2026-05-27",
     updatedAt: "2026-07-24",
     author: DEFAULT_AUTHOR,
-    readingTime: "6 min read",
-    audience: "Developers evaluating local-first memory for AI coding tools",
+    readingTime: "7 min read",
+    audience: "Developers and teams comparing local-first memory systems for AI agents",
     heroBullets: [
-      "Superlocal Memory now emphasizes a local reliability layer for memory, cache, prompt compression, KV-cache alignment, and LLM cost optimization.",
-      "Wenlan emphasizes the AI work loop: capture, handoff, distill, retrieve, and keep readable artifacts inspectable.",
-      "The best Superlocal Memory alternative depends on whether you need a reliability layer or an inspectable work-memory workflow across MCP clients.",
-      "Wenlan version and framing reflect v0.14.1 on 2026-07-20. Check both project pages for newer releases before deciding.",
+      "SuperLocalMemory v3.8.3 is a broad local-first control plane for agent memory, temporal retrieval, team access, audit, cache, compression, and bounded loops.",
+      "Wenlan v0.14.1 is a source-backed LLM wiki workflow for explicit capture, handoff, review, retrieval, and maintained readable pages.",
+      "Choose by operating boundary: automated memory operations and team controls, or deliberate knowledge work with inspectable artifacts.",
+      "The comparison is pinned to both projects' maintained sources on 2026-07-24; benchmark numbers retain their original protocol scopes.",
     ],
     officialReferences: [
       {
-        label: "Superlocal Memory official website",
+        label: "SuperLocalMemory v3.8.3 source",
+        href: "https://github.com/qualixar/superlocalmemory/tree/v3.8.3",
+      },
+      {
+        label: "SuperLocalMemory v3.8.3 README",
+        href: "https://github.com/qualixar/superlocalmemory/blob/893e6d7d521cef6013d35f0ea468eca3005916de/README.md",
+      },
+      {
+        label: "SuperLocalMemory v3.8.3 changelog",
+        href: "https://github.com/qualixar/superlocalmemory/blob/893e6d7d521cef6013d35f0ea468eca3005916de/CHANGELOG.md",
+      },
+      {
+        label: "SuperLocalMemory official website",
         href: "https://www.superlocalmemory.com/",
+      },
+      {
+        label: "Wenlan v0.14.1 source",
+        href: "https://github.com/7xuanlu/wenlan/tree/v0.14.1",
       },
     ],
     sections: [
       {
         heading: "Short answer",
         body: [
-          "Superlocal Memory and Wenlan both sit in the local-first AI memory category, but they optimize for different buying questions. Choose Superlocal Memory if its reliability-engineering framing, modes, benchmark positioning, and IDE integration story match your workflow.",
-          "Choose Wenlan as the Superlocal Memory alternative when you want local AI work memory centered on sessions, handoffs, source-backed pages, MCP clients, and deliberate page distillation.",
+          "Choose SuperLocalMemory when you want a local-first agent memory control plane with automated ingestion, temporal and graph-aware retrieval, personal and team scopes, a dashboard, cache and compression controls, bounded loops, and framework adapters.",
+          "Choose Wenlan when you want an LLM wiki for AI work: explicit capture, handoffs between sessions, reviewable memories, source-backed pages, local hybrid retrieval, and readable artifacts that can sit beside an Obsidian vault.",
+          "Both are local-first and MCP-capable. The useful distinction is not whether either product has retrieval; it is whether you want a broad operational control plane or a deliberate, inspectable knowledge workflow.",
         ],
       },
       {
-        heading: "What Superlocal Memory emphasizes",
+        heading: "What changed in SuperLocalMemory v3.8.3",
         body: [
-          "Superlocal Memory presents itself as memory for AI reliability engineering, and its current public positioning goes beyond memory retrieval. It now frames the product as a local reliability layer spanning memory, cache, compression, and cost optimization.",
-          "The official site and README describe repeat-call caching, prompt compression, provider KV-cache alignment, local-first retrieval, memory modes, IDE integrations, open research, AGPL v3 licensing, and benchmark-oriented claims. Treat the published savings numbers as the project's attributed claims and test them against your own workload.",
+          "The maintained v3.8.3 README now describes SuperLocalMemory as an enterprise-oriented, local-first agent memory control plane rather than only a retrieval and optimization layer. SQLite and sqlite-vec remain canonical; optional CozoDB and LanceDB projections stay behind parity checks.",
+          "Its current retrieval path combines semantic, BM25 lexical, temporal retrieval, Hopfield associative, and spreading-activation candidates before fusion and optional reranking. The release also exposes provenance, memory inspection, personal, shared, and global scopes, multi-workspace isolation, role-based access, retention and erasure controls, a hash-chained audit trail, and a dashboard.",
+          "The control plane also covers exact caching, opt-in compression, trusted-peer coordination, bounded loops, and nine framework adapters. Provider-backed enrichment, cloud modes, connectors, and networked adapters remain explicit operator choices rather than requirements of the local core.",
         ],
       },
       {
         heading: "What Wenlan emphasizes",
         body: [
-          "Wenlan focuses on the loop around real AI work: sessions start, work happens, handoffs are written, memory is distilled, and the next session receives relevant context.",
-          "The daemon-owned store powers retrieval, graph context, and hybrid search while Markdown artifacts stay readable and source-backed for inspection.",
+          "Wenlan focuses on turning AI work into a maintained, source-backed LLM wiki. Agents explicitly capture durable facts, write handoffs, retrieve prior context, curate revisions, and distill selected memories into readable pages.",
+          "Its local daemon combines FTS5, BGE embeddings, weighted reciprocal-rank fusion, eligible graph context, and optional reranking. The same memory is available across MCP clients, while projected Markdown pages, citations, revisions, session artifacts, and local git history keep the maintained knowledge layer inspectable.",
+          "Wenlan is not trying to be a team access-control plane, an LLM proxy, or a framework runtime. Its narrower boundary is useful when the primary job is preserving why work changed and keeping the resulting knowledge readable by people.",
         ],
       },
       {
         heading: "How to decide",
         body: [
-          "If you want a reliability-oriented product with its own memory modes and integration claims, Superlocal Memory may be the natural thing to inspect.",
-          "If you want the memory layer to feel like a transparent local record of your work across MCP-compatible tools, Wenlan is the closer fit.",
+          "Start with the artifact you need at the end. If you need a governed operational memory service for several agents or people, test SuperLocalMemory's profiles, scopes, role gates, audit surfaces, cache, compression, and framework adapters.",
+          "If you need a durable project record that an agent can retrieve and a person can open, review, cite, revise, and carry across tools, test Wenlan's capture, handoff, recall, curate, distill, and page workflows.",
+          "A team can reasonably use both boundaries. The comparison matters when choosing which product should own the durable memory and which one, if any, should own optimization or operational controls.",
         ],
       },
       {
-        heading: "Reading benchmark numbers honestly",
+        heading: "Read the benchmark scopes before comparing scores",
         body: [
-          "Superlocal Memory reports ~74.8% on LoCoMo in their zero-LLM (pure-math) retrieval configuration. Wenlan's current public retrieval snapshot now leads with LongMemEval rows instead of preserving the older LoCoMo headline.",
-          "Two things to read alongside it. First, benchmark mix: LongMemEval (LME) is a more recent and more rigorous evaluation, especially for time-aware questions and contradiction handling. Wenlan reports LME_Oracle at 93.6% Recall@5 / 0.857 MRR / 0.883 NDCG@10 on the 500-question snapshot, and LME_S at 87.7% Recall@5 / 0.815 MRR / 0.822 NDCG@10 on the stratified N=90 deep-S retrieval snapshot. I did not find LongMemEval numbers on SuperLocalMemory's official site during the 2026-06-24 source check. The leaderboard story is incomplete without both.",
-          "Second, configuration: 'zero-LLM' means retrieval only, no answer generation. Wenlan's published retrieval rows are also retrieval-only, but Wenlan's product is designed to feed memories into an LLM for answer composition, not to be a SOTA retrieval algorithm in isolation. Different products optimize for different downstream tasks.",
-          "If LoCoMo top score is the deciding factor for you, rerun the current Wenlan harness against the exact protocol you care about. If the question is 'which tool helps me carry AI work across sessions,' the benchmark is one input, not the answer.",
+          "SuperLocalMemory's maintained README separates three LoCoMo results. Mode A Raw reports 60.4% across 10 conversations and 1,276 scored questions with local retrieval and zero-LLM answer construction. Mode A Retrieval reports 74.8% on the same question count, but uses GPT-4.1-mini answer synthesis after local retrieval. Mode C reports 87.7% on one conversation and 81 scored questions with cloud embeddings, answer generation, and judging.",
+          "Wenlan publishes retrieval-only LongMemEval rows: LME_Oracle at 93.6% Recall@5 / 0.857 MRR / 0.883 NDCG@10 on 500 questions, and LME_S at 87.7% Recall@5 / 0.815 MRR / 0.822 NDCG@10 on a stratified 90-question deep-retrieval snapshot.",
+          "Those percentages are not a head-to-head leaderboard. The datasets, sample sizes, answer-construction steps, models, and metrics differ. Use each result to inspect its own retrieval contract, then rerun both products on the same workload if benchmark performance determines the decision.",
         ],
       },
       {
-        heading: "Where Wenlan focuses instead of leaderboards",
+        heading: "Run an inspectability and recovery test",
         body: [
-          "I picked LME_Oracle and LME_S as Wenlan's primary retrieval surfaces because the workload matches what actually breaks AI sessions: multi-turn conversations with implicit time references, contradictions across turns, references to facts established weeks ago. LoCoMo and LongMemEval stress different failure modes; run both against your workload if benchmark fit matters.",
-          "The product gaps I notice in daily use are not retrieval ceiling. They are things like: did the AI capture the decision when I made it, is the wiki page distilled cleanly, can I open `~/.wenlan/pages/auth.md` and read it as prose, can I inspect the source memory IDs and artifact git history, does the same memory show up in Cursor and Claude Code.",
-          "Those are workflow features, not benchmark features. Wenlan trades leaderboard simplicity for explicit capture, MCP-first cross-tool reach, projected Markdown, versioned readable artifacts, and mandatory provenance. If those things matter to your work, the trade is worth it. If they do not, look at Superlocal.",
-        ],
-      },
-      {
-        heading: "The 10-second inspectability test",
-        body: [
-          "Try this on any memory layer you are evaluating, including Wenlan. Open the tool. Find one memory the AI stored about you in the last week. Now answer five questions in under 10 seconds: can you see the verbatim text, can you see when it was stored, can you see what generated it, can you see what changes have been made to it since, can you delete it without an admin panel.",
-          "Wenlan scores high on this test by design. Raw captures live in the daemon store for retrieval, while readable pages, session logs, and project status live under `~/.wenlan/` and are versioned in `~/.wenlan/.git/`. `wenlan recall <query>` shows matching memory text. Deletion goes through `/forget` or the MCP forget tool by source ID.",
-          "Superlocal Memory now publishes source, docs, and research papers as part of its open research positioning. Use those materials to run the same inspection test against its current record format, provenance surface, history, and deletion flow before deciding.",
+          "Install both against disposable test data. Store a decision, its source, and a later correction. Ask a time-qualified question, inspect which evidence was retrieved, verify the correction, delete the original, restart the service, and repeat from a second MCP client.",
+          "In SuperLocalMemory, inspect the operation receipt, provenance, scope, audit event, profile boundary, recall trace, and dashboard record. In Wenlan, inspect the recalled memory, source IDs, curated revision, distilled Markdown page, session handoff, and local git history.",
+          "Then test the failure paths you actually care about: low-confidence recall, conflicting facts, unavailable enrichment, a busy daemon, a profile or Space boundary, and recovery after restart. This produces a decision you can audit instead of a feature-count vote.",
         ],
         bullets: [
-          "Verbatim text visible? `wenlan recall <id>` in Wenlan.",
-          "When was it stored? Daemon metadata for captures and git history for projected readable artifacts in Wenlan.",
-          "What generated it? Source IDs on distilled pages, mandatory.",
-          "Change history? `git log pages/<topic>.md` for projected pages and session artifacts in Wenlan.",
-          "Delete without an admin panel? `/forget <id>` or MCP forget by source ID in Wenlan.",
+          "Can you see the verbatim record, capture time, source, scope, and retrieval trace?",
+          "Can you distinguish a stored assertion from a query-relative ranking score?",
+          "Can you correct or delete one item and prove the old state no longer returns?",
+          "Can another client retrieve the intended record without crossing the wrong workspace boundary?",
+          "Can a person read the durable knowledge artifact without the original chat client?",
         ],
       },
       {
-        heading: "How I would actually evaluate both",
+        heading: "A fair two-week evaluation",
         body: [
-          "If I were picking a memory layer from scratch today, I would run a two-week parallel trial. Week one: install both, point an MCP-capable AI client at each, and use them for real work. No synthesized traffic. Real captures only.",
-          "End of week one, run three queries against each: 'what did I decide about X last Monday,' 'who did I have a conversation with about Y,' 'what is the current status of Z.' Compare not just accuracy, but readability of the response and traceability of where it came from.",
-          "Week two, deliberately try to break each one. Introduce a contradiction by capturing two conflicting facts on consecutive days. Use a different MCP client. Kill the daemon mid-session and restart it. The product that recovers cleanly and surfaces the contradiction is the one I would keep.",
-          "I am biased; I built Wenlan. This trial shape will surface real differences faster than reading either product page, including this one.",
+          "During week one, use real work rather than synthetic prompts. Record capture effort, recall usefulness, source traceability, false positives, and how often a person must repair the memory. Keep SuperLocalMemory's optional cloud modes and Wenlan's optional enrichment settings fixed and documented.",
+          "During week two, test time, contradiction, deletion, restart, and cross-client behavior. If you need team governance, add two profiles and verify read, write, and delete boundaries. If you need a maintained knowledge base, require each system to produce or support a readable project summary with citations.",
+          "I built Wenlan, so treat this page as a source-linked test plan rather than a neutral verdict. The pinned references above are there so you can check every moving product claim before choosing.",
         ],
       },
     ],
     comparisonTable: {
-      competitorName: "Superlocal Memory",
+      competitorName: "SuperLocalMemory v3.8.3",
       rows: [
         {
           dimension: "Center of gravity",
-          wenlan: "Local AI work loop: sessions, handoffs, distilled wiki pages, provenance, readable artifacts.",
+          wenlan: "Source-backed LLM wiki workflow: explicit capture, handoff, review, recall, distillation, and readable maintained pages.",
           competitor:
-            "Local AI reliability layer spanning memory, cache, compression, and cost optimization, with benchmark-led positioning.",
+            "Local-first agent memory control plane: ingestion, retrieval, scopes, audit, operations, cache, compression, coordination, and adapters.",
         },
         {
           dimension: "Retrieval",
-          wenlan: "Hybrid: vector (BGE-Base-EN-v1.5-Q) + FTS5 + reciprocal-rank fusion + knowledge-graph context + CE reranker. LME_Oracle: 93.6% Recall@5, 0.857 MRR, 0.883 NDCG@10. LME_S: 87.7% Recall@5, 0.815 MRR, 0.822 NDCG@10.",
+          wenlan: "FTS5 + local BGE embeddings + weighted RRF, with eligible graph context and optional reranking.",
           competitor:
-          "Pure-math retrieval emphasized in public materials. Reports ~74.8% on LoCoMo in their zero-LLM configuration; compare against current Wenlan runs only when the fixture and protocol match.",
+            "Semantic, BM25, temporal, Hopfield, and spreading-activation candidates, followed by fusion, optional reranking, and graph score enhancement.",
         },
         {
-          dimension: "Human-readable records",
-          wenlan: "Markdown projection under ~/.wenlan/, symlinkable into Obsidian; pages and session logs are plain text.",
+          dimension: "Durable artifact",
+          wenlan: "Local libSQL is retrieval authority; projected Markdown pages, citations, revisions, session artifacts, and git history stay readable.",
           competitor:
-            "Public source, docs, and papers are available; evaluate whether its current memory records expose the plain-file workflow you want.",
+            "SQLite + sqlite-vec are canonical; the dashboard, CLI, MCP, traces, and audit surfaces expose and operate the control-plane records.",
+        },
+        {
+          dimension: "Team boundaries",
+          wenlan: "Spaces and read scopes separate memory contexts; the public product is centered on an individual local knowledge workflow.",
+          competitor:
+            "Profiles, personal/shared/global memory, role-based access, workspace isolation, and optional sign-in for shared deployments.",
         },
         {
           dimension: "Provenance + audit",
-          wenlan: "Mandatory source_memory_ids; daemon returns HTTP 422 on empty source. Low-confidence captures and contradictions surface for review.",
+          wenlan: "Source IDs on distilled pages, review queues, revisions, corrections, and git history for projected readable artifacts.",
           competitor:
-            "Reliability-mode framing with public docs and source. Compare the exact per-memory source, history, and deletion surfaces before choosing.",
+            "Operation receipts, provenance, recall traces, retention/erasure controls, and a hash-chained audit trail.",
         },
         {
-          dimension: "Versioning",
-          wenlan: "Readable pages, session logs, and project status Markdown get local git history in ~/.wenlan/.git/.",
+          dimension: "Optimization + automation",
+          wenlan: "Does not own the primary LLM request path; focuses on memory, handoffs, review, retrieval, and maintained pages.",
           competitor:
-            "No public commitment to per-write git history.",
+            "Exact cache, opt-in compression, proxy/MCP/skill surfaces, bounded loops, peer coordination, and framework adapters.",
         },
         {
-          dimension: "License + openness",
-          wenlan: "Apache-2.0 daemon, CLI, MCP server. Repo: github.com/7xuanlu/wenlan.",
+          dimension: "License",
+          wenlan: "Apache-2.0 for the daemon, CLI, MCP server, and plugin source.",
           competitor:
-            "Current official site presents SuperLocalMemory as open research under AGPL v3, with public source code, documentation, and papers.",
+            "AGPL v3 family licensing in the maintained repository and package metadata; a separate commercial-license file is published.",
         },
       ],
     },
     faqs: [
       {
-        question: "Do Wenlan and Superlocal Memory solve the same problem?",
+        question: "Do Wenlan and SuperLocalMemory solve the same problem?",
         answer:
-          "They overlap around local-first AI work memory and retrieval for coding workflows. The difference is framing: Superlocal Memory emphasizes reliability engineering, Wenlan emphasizes the AI work loop and transparent local records.",
+          "They overlap around local-first agent memory, retrieval, MCP clients, provenance, and durable context. SuperLocalMemory v3.8.3 has the broader operational control-plane boundary; Wenlan has the narrower source-backed LLM wiki and work-memory boundary.",
       },
       {
-        question: "Why does Wenlan talk about Markdown and indexes?",
+        question: "Which is better for team access controls?",
         answer:
-          "Wenlan keeps human-readable artifacts in Markdown and uses the local libSQL store for retrieval indexes. That makes memory easier to inspect (you can open the file in any editor) while still giving agents fast hybrid search.",
+          "SuperLocalMemory v3.8.3 explicitly documents profiles, role-based access, personal/shared/global scopes, workspace isolation, optional sign-in, and governance controls. Wenlan uses Spaces and read scopes, but its public workflow is centered on source-backed local knowledge rather than a multi-user access-control plane.",
       },
       {
-        question: "Why does Wenlan lead with LME_Oracle and LME_S?",
+        question: "Can I compare the published benchmark percentages directly?",
         answer:
-          "Because the current eval work distinguishes the 500-question LongMemEval snapshot from deep LME_S, and that distinction matches the product risk better than a single old LoCoMo headline. LME_Oracle publishes 93.6% Recall@5, 0.857 MRR, and 0.883 NDCG@10; LME_S publishes 87.7% Recall@5, 0.815 MRR, and 0.822 NDCG@10 on the stratified N=90 deep-S retrieval snapshot.",
+          "No. SuperLocalMemory publishes protocol-scoped LoCoMo answer results, while Wenlan publishes retrieval metrics on LongMemEval snapshots. The datasets, sample sizes, models, answer-construction steps, and metrics differ, so the numbers are not a head-to-head leaderboard.",
       },
       {
-        question: "Is Superlocal Memory open-source?",
+        question: "Is SuperLocalMemory open source?",
         answer:
-          "Yes. As of the 2026-06-24 source check, the official SuperLocalMemory site presents it as open source under AGPL v3. Wenlan's daemon, CLI, and MCP server are Apache-2.0 with source on github.com/7xuanlu/wenlan.",
+          "Yes. The v3.8.3 repository and package publish AGPL v3 family licensing and also include a commercial-license file. Wenlan's daemon, CLI, MCP server, and plugin source are Apache-2.0.",
       },
       {
-        question: "How often do these numbers get re-run?",
+        question: "What versions does this comparison cover?",
         answer:
-          "Wenlan's eval harness lives under `crates/wenlan-core/src/eval/` and runs locally on demand against the same fixtures the published numbers use. Anyone can re-run them. I refresh the published number when a release changes it materially. Last release alignment: v0.14.1 on 2026-07-20.",
+          "This page pins SuperLocalMemory v3.8.3 and Wenlan v0.14.1 using maintained first-party source captured on 2026-07-24. Last release alignment: v0.14.1 on 2026-07-20. Check the linked changelog and tagged source before relying on a moving product claim.",
       },
     ],
     relatedSlugs: [
@@ -1451,11 +1467,11 @@ const baseArticles: LearnArticle[] = [
       "ai-agent-handoff-loop",
       "wenlan-vs-basic-memory",
       "wenlan-vs-claude-mem",
-      "ai-work-memory",
+      "review-before-trust-ai-memory",
     ],
     cta: {
-      heading: "Build memory around the work loop",
-      body: "Wenlan keeps AI work context local, inspectable, and available to MCP-compatible tools.",
+      heading: "Build a source-backed LLM wiki",
+      body: "Wenlan keeps AI work context local, reviewable, and available across MCP-compatible tools.",
     },
   },
   {

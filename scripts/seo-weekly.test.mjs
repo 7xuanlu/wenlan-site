@@ -4442,22 +4442,35 @@ test("rss feed uses original publication dates for refreshed articles", async ()
   assert.match(feedRoute, /const latest = sorted\[0\]\?\.updatedAt/);
 });
 
-test("Superlocal comparison scopes missing benchmark evidence to checked sources", async () => {
+test("SuperLocalMemory comparison pins current benchmark protocols to checked sources", async () => {
   const learnArticles = await readRepo("src/app/learn/articles.ts");
+  const marker = 'slug: "wenlan-vs-superlocal-memory"';
+  const start = learnArticles.indexOf(marker);
+  const end = learnArticles.indexOf('\n  {\n    slug: "', start + marker.length);
+  const article = learnArticles.slice(start, end);
 
-  assert.doesNotMatch(learnArticles, /Superlocal Memory has not published LME numbers/);
+  assert.notEqual(start, -1);
+  assert.notEqual(end, -1);
   assert.match(
-    learnArticles,
-    /I did not find LongMemEval numbers on SuperLocalMemory's official site during the 2026-06-24 source check/,
+    article,
+    /Mode A Raw reports 60\.4% across 10 conversations and 1,276 scored questions with local retrieval and zero-LLM answer construction/,
   );
   assert.match(
-    learnArticles,
-    /memory, cache, prompt compression, KV-cache alignment, and LLM cost optimization/,
+    article,
+    /Mode A Retrieval reports 74\.8% on the same question count, but uses GPT-4\.1-mini answer synthesis after local retrieval/,
   );
   assert.match(
-    learnArticles,
-    /local reliability layer spanning memory, cache, compression, and cost optimization/,
+    article,
+    /Mode C reports 87\.7% on one conversation and 81 scored questions with cloud embeddings, answer generation, and judging/,
   );
+  assert.match(article, /AGPL v3 family licensing/);
+  assert.match(article, /a separate commercial-license file is published/);
+  assert.match(
+    article,
+    /href: "https:\/\/github\.com\/qualixar\/superlocalmemory\/tree\/v3\.8\.3"/,
+  );
+  assert.doesNotMatch(article, /zero-LLM \(pure-math\) retrieval configuration/);
+  assert.doesNotMatch(article, /2026-06-24 source check/);
 });
 
 test("Learn index SERP copy leads with the source-backed LLM wiki and AI memory category", async () => {

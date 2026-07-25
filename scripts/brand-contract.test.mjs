@@ -458,6 +458,50 @@ test("claude-mem comparison reflects current automatic and cross-agent boundarie
   assert.doesNotMatch(article, /POSTs to Wenlan's `\/api\/memory\/store`/);
 });
 
+test("SuperLocalMemory comparison reflects the current control-plane boundary and benchmark scopes", async () => {
+  const articles = await readRepo("src/app/learn/articles.ts");
+  const marker = 'slug: "wenlan-vs-superlocal-memory"';
+  const start = articles.indexOf(marker);
+  const end = articles.indexOf('\n  {\n    slug: "', start + marker.length);
+  const article = articles.slice(start, end);
+
+  assert.notEqual(start, -1);
+  assert.notEqual(end, -1);
+  assert.match(
+    article,
+    /title: "Wenlan vs SuperLocalMemory v3\.8\.3: Local AI Memory Compared"/,
+  );
+  assert.match(
+    article,
+    /metaTitle: "Wenlan vs SuperLocalMemory v3\.8\.3 \| Local AI Memory"/,
+  );
+  assert.match(article, /local-first agent memory control plane/);
+  assert.match(article, /temporal retrieval/);
+  assert.match(article, /personal, shared, and global/);
+  assert.match(article, /role-based access/);
+  assert.match(article, /bounded loops/);
+  assert.match(article, /Mode A Raw.*60\.4%/);
+  assert.match(article, /Mode A Retrieval.*74\.8%/);
+  assert.match(article, /GPT-4\.1-mini answer synthesis/);
+  assert.match(
+    article,
+    /Mode C reports 87\.7% on one conversation and 81 scored questions with cloud embeddings, answer generation, and judging/,
+  );
+  assert.match(article, /AGPL v3 family licensing/);
+  assert.match(article, /a separate commercial-license file is published/);
+  assert.match(
+    article,
+    /href: "https:\/\/github\.com\/qualixar\/superlocalmemory\/tree\/v3\.8\.3"/,
+  );
+  assert.match(
+    article,
+    /href: "https:\/\/github\.com\/qualixar\/superlocalmemory\/blob\/893e6d7d521cef6013d35f0ea468eca3005916de\/README\.md"/,
+  );
+  assert.doesNotMatch(article, /zero-LLM \(pure-math\) retrieval configuration/);
+  assert.doesNotMatch(article, /2026-06-24 source check/);
+  assert.doesNotMatch(article, /No public commitment to per-write git history/);
+});
+
 test("postbuild URL discovery reads moved English route-group source files", async () => {
   const indexNow = await readRepo("scripts/indexnow-ping.mjs");
 
