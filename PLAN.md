@@ -226,12 +226,11 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-25-context-loss-diagnostic-refresh`, locally verified and
-  approved for publication. It consumes the single production slot until
-  production verification. The AI agent memory types, Basic Memory,
-  SuperLocalMemory, claude-mem, stale-memory, and MCP shared-memory changes
-  remain live, production-verified, and measuring; they do not consume the
-  slot.
+  `EXP-2026-07-25-context-loss-diagnostic-refresh`, live,
+  production-verified, and measuring. It no longer consumes the single
+  production slot. The AI agent memory types, Basic Memory, SuperLocalMemory,
+  claude-mem, stale-memory, and MCP shared-memory changes remain live,
+  production-verified, and measuring; they do not consume the slot.
 - Website-affecting technical correction:
   `TECH-2026-07-24-localized-learn-breadcrumb`, production-verified and no
   longer consuming the preparation slot.
@@ -285,16 +284,18 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Last production observation: `2026-07-25T01:49:40Z`; PR #78 merged as
-  `4d4ff8abc51fd053809e32ec63da9e8c3d604926`, and deployed robots, 110
+- Last production observation: `2026-07-25T02:15:21Z`; PR #80 merged as
+  `338f5a510d0294b69b7b691d82b6da9e42481a9b`, and deployed robots, 110
   sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide
   `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL
-  exclusions passed. The live AI agent memory types route returned HTTP 200
-  with the expected H1, exact self-canonical, `index, follow`, four maintained
-  source links, Article and BreadcrumbList JSON-LD, and no `FAQPage`. The
-  unsupported zh-TW and zh-CN routes returned 404 and were absent from the
-  sitemap. Desktop and mobile production renders had no document or H1
-  overflow; browser warning/error logs were empty.
+  exclusions passed. The live context-loss route returned HTTP 200 with the
+  expected H1 and title, exact self-canonical, `index, follow`, five
+  maintained source links, Article and BreadcrumbList JSON-LD,
+  `datePublished: "2026-06-06"`, `dateModified: "2026-07-25"`, and no
+  `FAQPage`. The unsupported zh-TW and zh-CN routes returned 404 and were
+  absent from the sitemap. Complete desktop and mobile production renders had
+  no document overflow; browser warning/error logs were empty, and the first
+  FAQ opened with the expected answer.
 - Google Trends demand-discovery gate: resolved for the current decision at
   `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
   Seventeen timeline comparisons and nine related-query exports cover
@@ -455,8 +456,8 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-25-context-loss-diagnostic-refresh` is the single website change
-approved for publication after local verification. It refreshes the existing English
+`EXP-2026-07-25-context-loss-diagnostic-refresh` is live,
+production-verified, and measuring. It refreshes the existing English
 `/learn/ai-coding-agent-loses-context` route around a four-way diagnostic:
 native session resume, project instructions or native memory, a compact
 handoff, and durable cross-session or cross-tool knowledge.
@@ -476,6 +477,14 @@ meta answer, diagnosis, native-versus-durable boundary, maintained references,
 and related internal links. The complete gate, baseline, locale decision, and
 readouts are recorded in
 `docs/seo-audits/2026-07-25-context-loss-diagnostic-prelaunch.md`.
+
+PR #80 merged at `2026-07-25T02:14:16Z` as
+`338f5a510d0294b69b7b691d82b6da9e42481a9b`; Vercel production completed at
+`2026-07-25T02:15:21Z`. The deployed technical audit, stable original and
+modified dates, live metadata and schema, five maintained references,
+unsupported locale 404s, sitemap membership, FAQ interaction, and complete
+desktop/mobile renders passed. No SEO-success judgment is made at production
+completion.
 
 The AI agent memory types cohort is live, production-verified, and measuring.
 It creates one English
@@ -675,12 +684,10 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-Publish `EXP-2026-07-25-context-loss-diagnostic-refresh` through the approved
-commit, PR, merge, and production path. Then verify the live route, stable
-original publication date, updated date, canonical, robots, structured data,
-source links, unsupported Mandarin routes, sitemap membership, deployed
-technical SEO, and desktop/mobile production render before releasing the
-single production slot.
+The production slot is open. Run the context-loss diagnostic's 24-hour
+technical/evidence readout after `2026-07-26T02:15:21Z`; do not infer SEO
+success at 24 hours. Until then, another non-overlapping candidate may be
+prepared only if it passes the complete evidence and candidate gates.
 
 `EXP-2026-07-25-ai-agent-memory-types` is production-verified and measuring;
 run its 24-hour technical/evidence readout after `2026-07-26T01:49:40Z`

@@ -1738,3 +1738,21 @@ increase for that experiment.
   publication, OSS submission, paid acquisition, and metric-definition changes
 - Next step: publish through the normal PR gate, verify production, append the
   production readout, and release the single production slot
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-25-context-loss-diagnostic-refresh at 2026-07-25T02:15:21Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-25-context-loss-diagnostic-refresh
+- Observed at: 2026-07-25T02:15:21Z
+- Readout: correction
+- Status: live
+- Publish date: 2026-07-25
+- Production-in-flight changes: 0
+- Evidence: PR #80 merged at `2026-07-25T02:14:16Z` as `338f5a510d0294b69b7b691d82b6da9e42481a9b`; Vercel production completed successfully at `2026-07-25T02:15:21Z`. The deployed technical audit passed robots, 110 sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL exclusions. The live English route returned HTTP 200 with the expected title and H1, exact self-canonical, `index, follow`, SoftwareApplication, WebSite, Organization, Article, and BreadcrumbList JSON-LD, five maintained source links, `datePublished: "2026-06-06"`, `dateModified: "2026-07-25"`, and no `FAQPage`. The unsupported zh-TW and zh-CN routes returned 404 and were absent from the sitemap. Complete desktop and 390 px mobile production renders covered the full page without document overflow or browser warning/error, and the first FAQ opened with the expected native-session versus durable-memory answer.
+- Metric interpretation: The authenticated pre-publish property baseline remains 7 GSC clicks and 310 impressions; visible-query totals remain 1 click and 75 impressions, leaving a 6-click and 235-impression visibility gap. The target baseline remains 2 impressions, 0 clicks, and average position 9.5 with no visible joined query row; its two-impression page-query visibility gap remains unknown. Same-range Vercel remains 1,402 property visitors and 1,593 pageviews, with 1 visitor and 1 pageview for the target route. GitHub REST reports 47 total Wenlan stars. No post-deploy SEO result, source-to-page session, CTA, or causal effect is inferred at production completion.
+- Result: pending
+- Decision: wait
+- Unperformed gated actions: no indexing request, GSC validation, Reddit or other external post, OSS submission, paid acquisition, or metric-definition change
+- Next step: run the 24-hour technical/evidence readout after `2026-07-26T02:15:21Z`; this production-verified measurement cohort does not consume the production slot
+<!-- EXPERIMENT-RECORD:END -->
