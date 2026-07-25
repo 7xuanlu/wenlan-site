@@ -226,8 +226,9 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-25-ai-agent-memory-types`, live, production-verified, and
-  measuring. It no longer consumes the single production slot. The Basic Memory,
+  `EXP-2026-07-25-context-loss-diagnostic-refresh`, locally verified and
+  approved for publication. It consumes the single production slot until
+  production verification. The AI agent memory types, Basic Memory,
   SuperLocalMemory, claude-mem, stale-memory, and MCP shared-memory changes
   remain live, production-verified, and measuring; they do not consume the
   slot.
@@ -267,7 +268,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `2026-07-25T01:27:14Z`. That approval does not include request indexing,
   GSC validation, non-website publication, OSS submission, paid acquisition,
   or metric changes.
-- Active experiments: 11.
+- At `2026-07-25T02:09:09Z`, the controller recorded the user's approval for
+  local preparation, commit, Git push, PR creation, merge, production
+  deployment, and production verification for
+  `EXP-2026-07-25-context-loss-diagnostic-refresh`. That approval does not
+  include request indexing, GSC validation, non-website publication, OSS
+  submission, paid acquisition, or metric changes.
+- Active experiments: 12.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -431,6 +438,11 @@ Supporting quality split for the same live range:
    Obsidian comparison for a zh-TW localization in
    `docs/seo-audits/2026-07-19-localized-acquisition-gap.md`; generic
    `AI 筆記` remains supporting vocabulary rather than the article's target.
+9. Prefer the existing `/learn/ai-coding-agent-loses-context` diagnostic
+   before another net-new URL. Its page has authenticated exposure, repeated
+   cross-session and compaction pain appears in independent Reddit threads and
+   Anthropic issues, and current Claude Code memory/session documentation
+   exposes accuracy drift in the older article.
 
 ### Current gap
 
@@ -443,8 +455,30 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-25-ai-agent-memory-types` is live, production-verified, and
-measuring. It creates one English
+`EXP-2026-07-25-context-loss-diagnostic-refresh` is the single website change
+approved for publication after local verification. It refreshes the existing English
+`/learn/ai-coding-agent-loses-context` route around a four-way diagnostic:
+native session resume, project instructions or native memory, a compact
+handoff, and durable cross-session or cross-tool knowledge.
+
+The target has 2 authenticated GSC impressions, 0 clicks, and average position
+9.5, but no visible joined query row; the two-impression page-query visibility
+gap remains explicit. Same-range Vercel reports 1 visitor and 1 pageview.
+Two independent Reddit questions and two Anthropic GitHub issues repeat the
+cross-session, compaction, and project-memory problem. Current Claude Code
+documentation confirms that a fresh session, resume, CLAUDE.md, and auto
+memory are separate mechanisms. Maintained Wenlan sources confirm the
+`/brief`, `/recall`, `/capture`, and `/handoff` continuity loop.
+
+The bounded refresh keeps the existing URL and H1, adds no Mandarin route,
+and changes no `FAQPage`, indexing, or distribution behavior. It sharpens the
+meta answer, diagnosis, native-versus-durable boundary, maintained references,
+and related internal links. The complete gate, baseline, locale decision, and
+readouts are recorded in
+`docs/seo-audits/2026-07-25-context-loss-diagnostic-prelaunch.md`.
+
+The AI agent memory types cohort is live, production-verified, and measuring.
+It creates one English
 `/learn/ai-agent-memory-types` acquisition page explaining working, episodic,
 semantic, and procedural memory as
 different architectural roles, plus where each should live.
@@ -455,7 +489,7 @@ from three independent authors repeat the taxonomy or placement problem;
 CoALA and LangChain establish the four-role terminology, while Letta supports
 the placement tradeoff. A coverage audit found no current Wenlan page that
 answers both the taxonomy and placement decision. The page explicitly
-separate this cognitive architecture from Wenlan's six capture `memory_type`
+separates this cognitive architecture from Wenlan's six capture `memory_type`
 metadata values. The complete gate, native-unit baseline, locale decision,
 and predeclared readouts are recorded in
 `docs/seo-audits/2026-07-25-ai-agent-memory-types-prelaunch.md`.
@@ -641,10 +675,16 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The production slot is open.
+Publish `EXP-2026-07-25-context-loss-diagnostic-refresh` through the approved
+commit, PR, merge, and production path. Then verify the live route, stable
+original publication date, updated date, canonical, robots, structured data,
+source links, unsupported Mandarin routes, sitemap membership, deployed
+technical SEO, and desktop/mobile production render before releasing the
+single production slot.
+
 `EXP-2026-07-25-ai-agent-memory-types` is production-verified and measuring;
-run its 24-hour technical/evidence readout after
-`2026-07-26T01:49:40Z` without an SEO-success judgment. The Basic
+run its 24-hour technical/evidence readout after `2026-07-26T01:49:40Z`
+without an SEO-success judgment. The Basic
 Memory comparison is production-verified and measuring; run its 24-hour
 technical/evidence readout after `2026-07-26T01:04:56Z`. The SuperLocalMemory comparison is also
 production-verified and measuring; run its 24-hour technical/evidence readout

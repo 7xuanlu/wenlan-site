@@ -416,6 +416,43 @@ test("AI work memory comparison answers the knowledge-base role question directl
   assert.doesNotMatch(page, /Quantified dimensions\./);
 });
 
+test("AI coding agent context-loss page separates native session recovery from durable memory", async () => {
+  const articles = await readRepo("src/app/learn/seo-articles.ts");
+  const marker = 'slug: "ai-coding-agent-loses-context"';
+  const start = articles.indexOf(marker);
+  const end = articles.indexOf('\n  {\n    slug: "', start + marker.length);
+  const article = articles.slice(start, end);
+
+  assert.notEqual(start, -1);
+  assert.notEqual(end, -1);
+  assert.match(articles, /publishedAt: spec\.publishedAt/);
+  assert.match(article, /title: "Why AI Coding Agents Lose Context Between Sessions"/);
+  assert.match(article, /publishedAt: "2026-06-06"/);
+  assert.match(article, /updatedAt: "2026-07-25"/);
+  assert.match(
+    article,
+    /metaTitle: "AI Coding Agent Context Loss: Causes and Fixes \| Wenlan"/,
+  );
+  assert.match(article, /resume the native session/);
+  assert.match(article, /project instructions/);
+  assert.match(article, /durable decisions/);
+  assert.match(article, /shared memory boundary/);
+  assert.ok(
+    article.includes(
+      'code: "/brief\\n/recall <specific decision or gotcha>\\n/capture <one durable fact and why it matters>\\n/handoff"',
+    ),
+  );
+  assert.match(
+    article,
+    /href: "https:\/\/code\.claude\.com\/docs\/en\/memory"/,
+  );
+  assert.match(
+    article,
+    /href: "https:\/\/code\.claude\.com\/docs\/en\/sessions"/,
+  );
+  assert.match(article, /"ai-agent-memory-types"/);
+});
+
 test("AI agent memory types page separates cognitive roles from Wenlan capture metadata", async () => {
   const articles = await readRepo("src/app/learn/articles.ts");
   const marker = 'slug: "ai-agent-memory-types"';

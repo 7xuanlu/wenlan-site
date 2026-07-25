@@ -1675,3 +1675,66 @@ increase for that experiment.
 - Unperformed gated actions: no indexing request, GSC validation, Reddit or other external post, OSS submission, paid acquisition, or metric-definition change
 - Next step: run the 24-hour technical/evidence readout after `2026-07-26T01:49:40Z`; this production-verified measurement cohort does not consume the production slot
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-25-context-loss-diagnostic-refresh
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-25-context-loss-diagnostic-refresh
+- Status: active
+- Data window: 2026-07-25..2026-07-31
+- Asset class: diagnostic-recipe
+- Launched: 2026-07-25
+- Hypothesis: Refreshing the existing context-loss page as a source-backed symptom-to-recovery diagnostic will improve qualified exposure without competing with the Claude Code memory, handoff, persistent-project-context, or AI-agent-memory-types pages.
+- Candidate evidence: The target has 2 authenticated GSC impressions, 0 clicks, and average position 9.5, but no visible joined query row; the 2-impression page-query visibility gap remains explicit. Same-range Vercel reports 1 visitor and 1 pageview. Two independent Reddit questions observed at `2026-07-25T01:58:34Z` have +8 score snapshots each. Independently authored Anthropic issues #27298 and #34556 have 24 comments and 2 reactions, and 61 comments and 5 reactions, respectively. Current Claude Code memory and session docs distinguish fresh sessions, resume, CLAUDE.md, auto memory, and compaction; current Wenlan source and docs support the brief, recall, capture, and handoff loop. Full URLs, dates, native units, limitations, and overlap analysis are in `docs/seo-audits/2026-07-25-context-loss-diagnostic-prelaunch.md`. External observations are demand discovery only, not GSC input or keyword volume.
+- Baseline: GSC property totals are 7 clicks and 310 impressions; visible-query totals are 1 click and 75 impressions, leaving a 6-click and 235-impression visibility gap. The target has 2 impressions, 0 clicks, and average position 9.5, while its visible joined query total is 0 rows and the 2-impression page-query gap remains unknown. Vercel separately reports 1,402 visitors and 1,593 pageviews property-wide and 1 visitor and 1 pageview for the target. GitHub reports 47 Wenlan total stars. Umami and Vercel custom CTA events remain unavailable or account-gated. No source-to-page join or causal inference is made.
+- Change: Refresh only the existing English `/learn/ai-coding-agent-loses-context` title metadata, description, quick answer, diagnosis, recovery checklist, FAQ, maintained source links, and related links. Keep the URL and H1. Distinguish exact native-session resume, project instructions or native memory, handoffs, and a shared durable-memory boundary; add the verified Wenlan `/brief`, `/recall`, `/capture`, `/handoff` loop. Add no zh-TW or zh-CN route, `FAQPage` JSON-LD, indexing request, or external distribution.
+- Publish date: not-published
+- Index date: unknown-existing-route
+- Minimum exposure: 5 GSC target-page impressions in the first 28 complete post-deploy days
+- Success criteria: After at least 5 GSC target-page impressions, the target earns at least 1 GSC click or average position is 8.0 or better; Vercel target-page visitors and GitHub stars are reported separately without a causal claim.
+- Failure criteria: After 28 complete post-deploy days and at least 5 GSC target-page impressions, the target has 0 clicks and average position is worse than 15.0. Fewer than 5 impressions is inconclusive; after minimum exposure, 0 clicks with average position from 8.1 through 15.0 is also inconclusive.
+- Stop criteria: Stop or hold if maintained sources do not support a native-memory claim, the page overlaps an existing search job, another controller edits the route, or the change creates a canonical, robots, noindex, structured-data, sitemap, locale, source-link, internal-link, or rendered-layout regression.
+- 24h readout: pending — verify the live route, title, metadata, canonical, indexability, structured data, maintained references, internal links, locale non-regression, production render, and separate source-native observations without an SEO-success judgment
+- 7d readout: pending — report GSC latency and target-page clicks, impressions, and position when available, Vercel target-page presence when available, and GitHub stars separately
+- W2 readout: pending — apply the minimum-exposure guard and inspect whether the diagnostic remains distinct from native Claude Code memory, handoff, persistent-project-context, and taxonomy pages
+- W4 readout: pending — evaluate the predeclared success, failure, or inconclusive condition without changing thresholds
+- W8 readout: pending — record a post-campaign follow-up only if it remains useful
+- Result: pending
+- Decision: wait
+- Next step: make the focused article contract pass, then complete full SEO/i18n/lint/build/technical, rendered, and independent-review gates before requesting explicit publication approval
+<!-- EXPERIMENT-RECORD:END -->
+
+### Campaign observation — 2026-07-25T02:09:09Z
+
+- Experiment: `EXP-2026-07-25-context-loss-diagnostic-refresh`
+- Local preparation: complete
+- Change: refreshed the existing English
+  `/learn/ai-coding-agent-loses-context` diagnostic without changing the URL
+  or H1; separated native session resume, project instructions or native
+  memory, handoffs, and durable cross-session or cross-tool knowledge
+- Evidence: retained the authenticated target baseline of 2 GSC impressions,
+  0 clicks, and average position 9.5; retained the empty visible joined query
+  set and two-impression page-query visibility gap; retained Vercel's separate
+  1 visitor and 1 pageview target-route observation
+- Review repair: independent review found that the existing-page refresh would
+  otherwise present the update date as a new publication date. Added
+  `publishedAt` pass-through, pinned the original date to `2026-06-06`, kept
+  `updatedAt: "2026-07-25"`, and added a focused regression assertion
+- Verification: Goal verifier passed; focused test completed RED to GREEN; SEO
+  tests 185/185; i18n tests 53/53; TypeScript lint, weekly sample, build,
+  built technical SEO, built locale checks, and `git diff --check` passed
+- Rendered QA: the final build passed complete desktop and 390 px mobile
+  segmented inspection, exact canonical, `index, follow`, Article and
+  BreadcrumbList schema, stable original and modified dates, maintained
+  references, visible FAQ interaction, no `FAQPage`, no page overflow, and no
+  browser warning or error
+- Locale decision: English refresh only; unsupported zh-TW and zh-CN article
+  routes remain intentional 404s
+- Approval: at `2026-07-25T02:09:09Z`, the controller recorded the user's
+  approval for commit, push, PR, merge, deployment, and production
+  verification
+- Still unapproved: request indexing, GSC validation, Reddit or other external
+  publication, OSS submission, paid acquisition, and metric-definition changes
+- Next step: publish through the normal PR gate, verify production, append the
+  production readout, and release the single production slot
