@@ -178,6 +178,32 @@ Completed against the final diff on 2026-07-25:
   `/tmp/wenlan-seo/basic-memory-desktop-2026-07-25.png` and
   `/tmp/wenlan-seo/basic-memory-mobile-2026-07-25.png`.
 
+## Production verification
+
+- PR [#76](https://github.com/7xuanlu/wenlan-site/pull/76) merged at
+  `2026-07-25T01:04:11Z` as
+  `983f9383b499c73e293b7c61e5f256ea1276388b`.
+- Vercel production completed at `2026-07-25T01:04:56Z`.
+- `pnpm seo:technical:deployed`: passed robots, 109 sitemap URLs, 14 key
+  pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+  redirects, six bridge-host redirects, and legacy-URL exclusions.
+- `I18N_CHECK_BASE_URL=https://wenlan.app pnpm i18n:technical:built`: 19
+  expected 200 routes and five intentional untranslated 404 routes passed.
+- The live English route returned 200 with the refreshed H1, exact
+  self-canonical, `index, follow`, nine maintained source links, Article and
+  BreadcrumbList schema, no `FAQPage`, `datePublished: "2026-05-14"`, and
+  `dateModified: "2026-07-25"`.
+- Live desktop 1440x1000 and mobile 393x852 renders had no document or H1
+  overflow, kept the comparison table horizontally accessible, contained no
+  unmatched LME metric, and emitted no browser warning or error.
+- Production render evidence:
+  `/tmp/wenlan-seo/basic-memory-production-desktop-2026-07-25.png` and
+  `/tmp/wenlan-seo/basic-memory-production-mobile-2026-07-25.png`.
+- This completion proves deployment and technical correctness, not SEO
+  success. The authenticated pre-publish baseline remains 20 GSC impressions,
+  1 click, and average position 14.6; same-range Vercel remains 5 visitors and
+  5 pageviews for the target; GitHub remains 47 total stars.
+
 ## Approval boundary
 
 The user approved commit, push, PR creation, merge, deployment, and production
