@@ -226,9 +226,8 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-25-ai-agent-memory-types`, approved and locally verified for
-  publication. It consumes the single production slot until production
-  verification completes. The Basic Memory,
+  `EXP-2026-07-25-ai-agent-memory-types`, live, production-verified, and
+  measuring. It no longer consumes the single production slot. The Basic Memory,
   SuperLocalMemory, claude-mem, stale-memory, and MCP shared-memory changes
   remain live, production-verified, and measuring; they do not consume the
   slot.
@@ -279,16 +278,16 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Last production observation: `2026-07-25T01:04:56Z`; deployed robots, 109
+- Last production observation: `2026-07-25T01:49:40Z`; PR #78 merged as
+  `4d4ff8abc51fd053809e32ec63da9e8c3d604926`, and deployed robots, 110
   sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide
   `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL
-  exclusions passed. The live Basic Memory comparison returned HTTP 200 with
-  the refreshed H1, exact self-canonical, `index, follow`, nine maintained
-  source links, Article and BreadcrumbList JSON-LD, no `FAQPage`,
-  `datePublished: "2026-05-14"`, and `dateModified: "2026-07-25"`. Desktop and
-  mobile production renders had no document or H1 overflow; the mobile
-  comparison table remained horizontally accessible; browser warning/error
-  logs were empty.
+  exclusions passed. The live AI agent memory types route returned HTTP 200
+  with the expected H1, exact self-canonical, `index, follow`, four maintained
+  source links, Article and BreadcrumbList JSON-LD, and no `FAQPage`. The
+  unsupported zh-TW and zh-CN routes returned 404 and were absent from the
+  sitemap. Desktop and mobile production renders had no document or H1
+  overflow; browser warning/error logs were empty.
 - Google Trends demand-discovery gate: resolved for the current decision at
   `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
   Seventeen timeline comparisons and nine related-query exports cover
@@ -333,7 +332,7 @@ after the anchor is frozen.
 
 | Metric | Fixed baseline | Verified live observation | Provenance | Gap to target from live observation |
 | --- | ---: | ---: | --- | ---: |
-| GitHub total stars | 47 | 47 | GitHub REST `GET /repos/7xuanlu/wenlan`, read during the 2026-07-24 weekly SEO task | 53 |
+| GitHub total stars | 47 | 47 | GitHub REST `GET /repos/7xuanlu/wenlan`, read after the 2026-07-25 production verification | 53 |
 | GSC rolling-28-day property impressions | 197 | 310 | Search Console API, `sc-domain:wenlan.app`, `2026-06-26..2026-07-23`; `/tmp/wenlan-seo/gsc-metadata.json` | 690 |
 | Vercel rolling-28-day visitors | 323 | 1,402 | Vercel Web Analytics API, project `wenlan-site`, `2026-06-26..2026-07-23`; `/tmp/wenlan-seo/vercel-metadata.json` | 598 |
 
@@ -444,8 +443,8 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-25-ai-agent-memory-types` is the single website change locally
-verified and approved for publication. It creates one English
+`EXP-2026-07-25-ai-agent-memory-types` is live, production-verified, and
+measuring. It creates one English
 `/learn/ai-agent-memory-types` acquisition page explaining working, episodic,
 semantic, and procedural memory as
 different architectural roles, plus where each should live.
@@ -455,7 +454,7 @@ recapture and its committed 53-week raw series. Four English Reddit threads
 from three independent authors repeat the taxonomy or placement problem;
 CoALA and LangChain establish the four-role terminology, while Letta supports
 the placement tradeoff. A coverage audit found no current Wenlan page that
-answers both the taxonomy and placement decision. The page will explicitly
+answers both the taxonomy and placement decision. The page explicitly
 separate this cognitive architecture from Wenlan's six capture `memory_type`
 metadata values. The complete gate, native-unit baseline, locale decision,
 and predeclared readouts are recorded in
@@ -464,6 +463,13 @@ and predeclared readouts are recorded in
 The change is English-only because no matching Mandarin taxonomy demand has
 been observed. It adds no `FAQPage` JSON-LD, indexing request, or external
 distribution.
+
+PR #78 merged at `2026-07-25T01:48:42Z` as
+`4d4ff8abc51fd053809e32ec63da9e8c3d604926`; Vercel production completed at
+`2026-07-25T01:49:40Z`. The deployed technical audit, live metadata and
+schema, four maintained references, unsupported locale 404s, sitemap locale
+membership, FAQ interaction, and desktop/mobile renders passed. No
+SEO-success judgment is made at production completion.
 
 The Basic Memory comparison refresh is live, production-verified, and
 measuring. It no longer consumes the one production slot. It refreshes only
@@ -635,11 +641,10 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-Publish the locally verified `EXP-2026-07-25-ai-agent-memory-types` change
-through the approved normal PR gate, wait for Vercel production, then verify
-the live route, deployed technical SEO, English render, and unsupported
-Mandarin 404s before releasing the production slot. Do not infer SEO success
-at production completion. The Basic
+The production slot is open.
+`EXP-2026-07-25-ai-agent-memory-types` is production-verified and measuring;
+run its 24-hour technical/evidence readout after
+`2026-07-26T01:49:40Z` without an SEO-success judgment. The Basic
 Memory comparison is production-verified and measuring; run its 24-hour
 technical/evidence readout after `2026-07-26T01:04:56Z`. The SuperLocalMemory comparison is also
 production-verified and measuring; run its 24-hour technical/evidence readout

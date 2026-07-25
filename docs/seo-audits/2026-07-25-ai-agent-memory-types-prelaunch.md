@@ -4,7 +4,7 @@
 
 **Prepared:** `2026-07-25T01:27:14Z`
 
-**Status:** local preparation complete; approved for website publication
+**Status:** production-verified; measuring
 
 ## Decision
 
@@ -195,3 +195,26 @@ that approval.
   proof. The fixes committed the raw 53-week export, counted the four Reddit
   threads as three independent authors, and limited Letta to placement
   support. Focused re-review returned `SHIP` with no remaining P0-P2 findings.
+
+## Production verification
+
+- PR [#78](https://github.com/7xuanlu/wenlan-site/pull/78) merged at
+  `2026-07-25T01:48:42Z` as
+  `4d4ff8abc51fd053809e32ec63da9e8c3d604926`. The Vercel production status
+  completed successfully at `2026-07-25T01:49:40Z`.
+- `pnpm seo:technical:deployed` passed with 110 sitemap locations, 14 key
+  pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+  redirects, six bridge-host redirects, and legacy-URL exclusions.
+- The live English route returned HTTP 200 with the expected title and H1,
+  exact self-canonical, `index, follow`, English language, Article and
+  BreadcrumbList JSON-LD, four maintained source links, two visible FAQ
+  questions, and no `FAQPage` JSON-LD.
+- The unsupported zh-TW and zh-CN routes returned 404. The sitemap contains
+  the English target and contains neither unsupported localized target.
+- Production desktop and mobile renders had no document or H1 overflow and no
+  browser warning or error. Desktop document/client widths were `1440/1440`;
+  mobile widths were `393/393`. The first FAQ opened and exposed the expected
+  answer. Screenshots are preserved under
+  `/tmp/wenlan-seo/visual-qa/2026-07-25-ai-agent-memory-types/production/`.
+- No SEO-success judgment is made at production completion. The target had no
+  prelaunch GSC or Vercel route baseline because it is a net-new URL.
