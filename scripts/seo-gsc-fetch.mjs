@@ -213,10 +213,11 @@ async function searchAnalytics({
   siteUrl,
   startDate,
   endDate,
-  dimension,
+  dimensions = [],
   apiBaseUrl,
   quotaProject,
 }) {
+  const normalizedDimensions = Array.isArray(dimensions) ? dimensions : [dimensions];
   return gscRequest({
     token,
     path: `sites/${encodeURIComponent(siteUrl)}/searchAnalytics/query`,
@@ -227,10 +228,10 @@ async function searchAnalytics({
       body: JSON.stringify({
         startDate,
         endDate,
-        aggregationType: dimension === "page" ? "byPage" : "byProperty",
-        ...(dimension
+        aggregationType: normalizedDimensions.includes("page") ? "byPage" : "byProperty",
+        ...(normalizedDimensions.length
           ? {
-              dimensions: [dimension],
+              dimensions: normalizedDimensions,
               rowLimit: 25000,
               startRow: 0,
             }
@@ -307,21 +308,23 @@ function propertyTotalsFromResponse(response) {
 
 async function fetchGscData(args) {
   if (args.fixtureDir) {
-    const [queries, pages, property, sitemaps] = await Promise.all([
+    const [queries, pages, queryPages, property, sitemaps] = await Promise.all([
       readFixture(args.fixtureDir, "searchanalytics-query"),
       readFixture(args.fixtureDir, "searchanalytics-page"),
+      readFixture(args.fixtureDir, "searchanalytics-query-page"),
       readFixture(args.fixtureDir, "searchanalytics-property"),
       readFixture(args.fixtureDir, "sitemaps"),
     ]);
-    return { queries, pages, property, sitemaps };
+    return { queries, pages, queryPages, property, sitemaps };
   }
 
   const token = await getAccessToken();
   const quotaProject = await getQuotaProject();
 
-  const [queries, pages, property, sitemaps] = await Promise.all([
-    searchAnalytics({ ...args, token, quotaProject, dimension: "query" }),
-    searchAnalytics({ ...args, token, quotaProject, dimension: "page" }),
+  const [queries, pages, queryPages, property, sitemaps] = await Promise.all([
+    searchAnalytics({ ...args, token, quotaProject, dimensions: ["query"] }),
+    searchAnalytics({ ...args, token, quotaProject, dimensions: ["page"] }),
+    searchAnalytics({ ...args, token, quotaProject, dimensions: ["query", "page"] }),
     searchAnalytics({ ...args, token, quotaProject }),
     gscRequest({
       token,
@@ -330,13 +333,18 @@ async function fetchGscData(args) {
       quotaProject,
     }).catch((error) => ({ error: error.message })),
   ]);
-  return { queries, pages, property, sitemaps };
+  return { queries, pages, queryPages, property, sitemaps };
 }
 
 async function run() {
   const args = parseArgs(process.argv.slice(2));
-  const { queries, pages, property, sitemaps } = await fetchGscData(args);
+  const { queries, pages, queryPages, property, sitemaps } = await fetchGscData(args);
   const propertyTotals = propertyTotalsFromResponse(property);
+  if (queryPages.responseAggregationType !== "byPage") {
+    throw new Error(
+      `GSC query-plus-page response must use byPage aggregation; received ${queryPages.responseAggregationType ?? "missing"}`,
+    );
+  }
 
   await mkdir(args.outputDir, { recursive: true });
   await writeFile(
@@ -362,6 +370,30 @@ async function run() {
     "utf8",
   );
   await writeFile(
+    join(args.outputDir, "gsc-query-pages.json"),
+    JSON.stringify(
+      {
+        siteUrl: args.siteUrl,
+        startDate: args.startDate,
+        endDate: args.endDate,
+        source: args.source,
+        dimensions: ["query", "page"],
+        nativeUnits: {
+          clicks: "clicks",
+          impressions: "impressions",
+          ctr: "ratio",
+          position: "average position",
+        },
+        responseAggregationType: queryPages.responseAggregationType,
+        rowCount: queryPages.rows?.length ?? 0,
+        rows: queryPages.rows ?? [],
+      },
+      null,
+      2,
+    ),
+    "utf8",
+  );
+  await writeFile(
     join(args.outputDir, "gsc-metadata.json"),
     JSON.stringify(
       {
@@ -371,6 +403,7 @@ async function run() {
         source: args.source,
         queryRows: queries.rows?.length ?? 0,
         pageRows: pages.rows?.length ?? 0,
+        queryPageRows: queryPages.rows?.length ?? 0,
         propertyTotals,
         sitemaps,
       },
@@ -388,6 +421,7 @@ async function run() {
         endDate: args.endDate,
         queryRows: queries.rows?.length ?? 0,
         pageRows: pages.rows?.length ?? 0,
+        queryPageRows: queryPages.rows?.length ?? 0,
         propertyTotals,
         sitemapCount: sitemaps.sitemap?.length ?? 0,
         sitemapError: sitemaps.error ?? null,

@@ -281,6 +281,12 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `TECH-2026-07-26-knowledge-base-published-date`. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
+- At `2026-07-26T02:49:29Z`, the controller recorded the user's approval for
+  commit, Git push, PR creation, merge, automatic production deployment, and
+  production verification of the authenticated GSC query-plus-page export
+  and the matching inter-window Goal observation. That approval does not
+  include request indexing, GSC validation, non-website publication, OSS
+  submission, paid acquisition, or metric changes.
 - Active experiments: 12.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
@@ -443,6 +449,17 @@ Supporting quality split for the same live range:
   non-brand Claude-memory cluster at 50.0 impression-weighted average
   position. Keep the remaining 12-impression page-query visibility gap
   explicit.
+- The refreshed authenticated query-plus-page export now comes directly from
+  `pnpm seo:gsc:fetch` and contains 49 visible rows for
+  `2026-06-27..2026-07-24` in
+  `/tmp/wenlan-seo/gsc-query-pages.json`. It maps 8 visible impressions on
+  the Basic Memory comparison to `basic memory`, `basic-memory github`, and
+  `basicmemory`; the separate page row has 23 impressions and one click, so
+  the 15-impression and one-click visibility gap remains explicit. It also
+  shows that all visible rows for `/docs/changelog` and
+  `/docs/data-and-privacy` are brand variants or noisy misspellings, not a
+  product problem cluster. The Learn hub exposes only two visible
+  single-impression rows against its 78-impression page total.
 - Setup starts: no reliable website-to-success measurement; lagging and
   non-gating.
 - Early partial Vercel observation: fetched at `2026-07-19T18:01:59Z` for
@@ -708,12 +725,14 @@ PR #65 merged at `2026-07-24T20:47:55Z` as
 and rendered checks passed. The correction is production-verified and no
 longer consumes the preparation slot.
 
-The weekly report's changelog and data/privacy candidates remain unstarted
-because their page rows have no inspectable matching query or independent
-demand candidate. The SuperLocalMemory comparison is now the active
-exception: fresh tagged source and the v3.8.3 package establish material
-product and benchmark drift beyond the one visible query row, so refreshing
-the existing indexed page passes the full candidate gate.
+The weekly report's changelog and data/privacy candidates remain unstarted.
+The refreshed query-plus-page join shows their visible rows are brand variants
+and noisy misspellings rather than a standalone changelog, privacy, or
+configuration problem cluster; the remaining page impressions stay
+privacy-filtered and cannot be invented. The SuperLocalMemory comparison was
+the evidence-backed exception: fresh tagged source and the v3.8.3 package
+established material product and benchmark drift beyond the one visible query
+row, so refreshing the existing indexed page passed the full candidate gate.
 
 ### Immediate localized launch
 
@@ -817,7 +836,9 @@ Memory page already covers that intent and its refresh was deployed after
 this evidence window. The Learn hub has 78 impressions and no clicks, but the
 range contains only its launch date rather than a complete post-change
 cohort. Neither signal justifies stacking another edit before the scheduled
-readout.
+readout. The current 49-row query-plus-page export confirms these mappings and
+also rejects the changelog and data/privacy queues as brand-noise candidates,
+not new non-brand demand.
 
 No additional English, zh-TW, or zh-CN candidate passed all five gates in the
 latest Friday report or the bounded read-only demand-discovery follow-up.

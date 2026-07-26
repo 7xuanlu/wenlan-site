@@ -50,6 +50,8 @@ mkdir -p /tmp/wenlan-seo
 # Save the GSC Queries export as /tmp/wenlan-seo/gsc-queries.csv
 # Save the GSC Pages export as /tmp/wenlan-seo/gsc-pages.csv
 # Save matching provenance as /tmp/wenlan-seo/gsc-metadata.json
+# Authenticated API fetches also write /tmp/wenlan-seo/gsc-query-pages.json
+# for privacy-filtered query-to-page candidate mapping.
 # Fetch authenticated Vercel page/referrer evidence for the same 28 complete days:
 pnpm seo:vercel:fetch -- --date YYYY-MM-DD
 # Optional when Umami export access is available:
@@ -73,6 +75,8 @@ Normal weekly runs require `gsc-metadata.json` so stale, unsupported-source, or 
 The accepted source labels are `Search Console API`, `authenticated GSC UI export`, and `authenticated GSC CSV export`. The default range is the 28 complete days ending before `--date`. When a deliberate manual GSC range differs, pass `--allow-manual-date-range true`. Fixture mode is bound to the `pnpm seo:weekly:sample` lifecycle and committed fixture directory; direct use is rejected.
 
 API fetches also save a separate `byProperty` aggregate in `propertyTotals`. The weekly report must keep that value separate from visible query and page row sums: anonymized queries are included in property totals but omitted from the query table, while page aggregation can count multiple Wenlan URLs shown in one search. `Query visibility gap` records the difference between the property aggregate and visible query rows.
+
+The API fetcher also writes `/tmp/wenlan-seo/gsc-query-pages.json` with the visible `query + page` rows returned under `byPage` aggregation. Use it to inspect which visible queries map to a candidate page. It is a privacy-filtered diagnostic artifact, not a complete query set: it does not replace `propertyTotals`, close the query visibility gap, or justify inventing the hidden rows. The weekly report generator does not currently consume this JSON automatically.
 
 GSC cannot identify an individual click or exclude site-owner traffic. A click counts only when someone follows a Wenlan result out of Google Search; direct visits, local checks, `curl`, and deployed technical checks do not create GSC Search clicks. Use the report's date, page, country, and device dimensions plus optional Vercel or Umami evidence to investigate suspicious activity, but do not claim exact person-level attribution.
 
