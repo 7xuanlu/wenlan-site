@@ -232,8 +232,10 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   claude-mem, stale-memory, and MCP shared-memory changes remain live,
   production-verified, and measuring; they do not consume the slot.
 - Website-affecting technical correction:
-  `TECH-2026-07-24-localized-learn-breadcrumb`, production-verified and no
-  longer consuming the preparation slot.
+  `TECH-2026-07-26-knowledge-base-published-date`, approved and in local
+  preparation. It consumes the single production slot until production
+  verification. `TECH-2026-07-24-localized-learn-breadcrumb` remains
+  production-verified and does not consume the slot.
 - The user approved Git push, merge, and production deploy for this LLM-wiki
   refresh at `2026-07-24T20:16:19Z`. Reddit or other external publication, OSS
   submission, paid acquisition, request indexing, GSC validation, and metric
@@ -271,6 +273,12 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   local preparation, commit, Git push, PR creation, merge, production
   deployment, and production verification for
   `EXP-2026-07-25-context-loss-diagnostic-refresh`. That approval does not
+  include request indexing, GSC validation, non-website publication, OSS
+  submission, paid acquisition, or metric changes.
+- At `2026-07-26T02:24:10Z`, the controller recorded the user's approval for
+  local preparation, commit, Git push, PR creation, merge, production
+  deployment, and production verification for
+  `TECH-2026-07-26-knowledge-base-published-date`. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
 - Active experiments: 12.
@@ -343,6 +351,44 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   error. The latest authenticated GSC and complete Vercel range still ends on
   `2026-07-23`, before these deployments, so every result remains pending
   without a 24-hour SEO-success judgment. GitHub remains 47 stars.
+- The Claude Code memory refresh's due 7-day readout and the AI-agent-memory
+  types page's due 24-hour readout were recorded at
+  `2026-07-26T02:04:08Z`. The latest authenticated range still ends on
+  `2026-07-23`: it does not contain seven complete post-deploy days for the
+  Claude refresh and predates the AI-agent-memory deployment. The Claude
+  target remains at 0 clicks, 23 impressions, and average position 38.7; its
+  fixed five-query visible cluster remains at 0 clicks, 9 impressions, and
+  50.0 impression-weighted average position. The original 25-impression
+  post-change minimum cannot be applied because no refreshed-page crawl or
+  index date is confirmed. The AI-agent-memory live route, maintained
+  sources, schemas, unsupported locale 404s, and fresh desktop/mobile renders
+  passed. Both results remain measuring without a causal or SEO-success
+  claim, and GitHub remains 47 stars.
+- The context-loss diagnostic's actual 24-hour readout was recorded after its
+  boundary at `2026-07-26T02:15:47Z`. The post-boundary deployed audit passed
+  with 110 sitemap URLs, and the production locale matrix passed 19 expected
+  HTTP 200 routes and five expected hard 404 routes. The live English target
+  retained its exact canonical, `index, follow`, Article and BreadcrumbList
+  schemas, stable original and modified dates, five maintained source links,
+  four related internal links, and no `FAQPage`; unsupported zh-TW and zh-CN
+  routes remained 404. The authenticated range predates deployment, so the
+  target remains at its 0-click, 2-impression, 9.5-position baseline without
+  a 24-hour SEO-success judgment. GitHub remains 47 stars.
+- An independent control-plane review found that
+  `EXP-2026-07-24-ai-work-memory-knowledge-base-refresh` had reached
+  production but its 24-hour readout was omitted from the first batch. The
+  controller recorded a late, non-backdated readout at
+  `2026-07-26T02:19:26Z`. Its live route, canonical, indexability,
+  first-party sources, unsupported locale 404s, and retained production
+  render evidence passed, but a follow-up review found that the Article
+  schema incorrectly used `2026-07-24` as both `datePublished` and
+  `dateModified`. Git history establishes the original page date as
+  `2026-05-27`; the approved local correction preserves that publication
+  date while retaining `2026-07-24` as the modification date. Production
+  remains regressed until the correction is deployed and verified. The
+  authenticated range predates deployment, so the target remains at its
+  0-click, 9-impression, 8.0-position baseline without an SEO-success
+  judgment. Its 7-day readout is due after `2026-07-31T18:54:22Z`.
 
 ### Fixed baseline and live provenance
 
@@ -615,6 +661,21 @@ not consume the production slot.
 
 ### Current technical correction
 
+`TECH-2026-07-26-knowledge-base-published-date` corrects the live Article
+JSON-LD for `/learn/ai-work-memory-vs-knowledge-base`. The existing indexed
+page first shipped with the article registry's `2026-05-27` date, but the
+2026-07-24 refresh supplied only `updatedAt`. The shared schema fallback
+therefore emitted `datePublished: "2026-07-24"` and
+`dateModified: "2026-07-24"`, rewriting the original publication date.
+
+The bounded correction adds `publishedAt: "2026-05-27"` while retaining
+`updatedAt: "2026-07-24"`, plus a focused regression assertion. It changes no
+visible copy, URL, canonical, hreflang, sitemap membership, locale
+availability, schema type, `FAQPage` policy, or experiment baseline. The user
+approved commit, push, PR, merge, deployment, and production verification at
+`2026-07-26T02:24:10Z`. Until production verification passes, this correction
+occupies the single production slot.
+
 `TECH-2026-07-24-localized-learn-breadcrumb` fixes a deterministic mismatch
 between localized Learn Article JSON-LD and the visible localized breadcrumb.
 Production-before checks showed the zh-TW and zh-CN article home and article
@@ -696,16 +757,26 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The production slot is open. Run the context-loss diagnostic's 24-hour
-technical/evidence readout after `2026-07-26T02:15:21Z`; do not infer SEO
-success at 24 hours. Until then, another non-overlapping candidate may be
-prepared only if it passes the complete evidence and candidate gates.
+The production slot is occupied by the approved
+`TECH-2026-07-26-knowledge-base-published-date` correction until its live
+Article JSON-LD emits `datePublished: "2026-05-27"` and
+`dateModified: "2026-07-24"` and the deployed technical checks pass. After
+production verification, release the slot without changing the experiment's
+measurement schedule.
 
-`EXP-2026-07-25-ai-agent-memory-types` is production-verified and measuring;
-run its 24-hour technical/evidence readout after `2026-07-26T01:49:40Z`
-without an SEO-success judgment. The existing same-task heartbeat remains
-scheduled after the later context-loss due time so both remaining 24-hour
-readouts can share one fresh production evidence pass.
+The context-loss diagnostic completed its 24-hour technical/evidence readout
+at `2026-07-26T02:15:47Z`; run its 7-day readout after
+`2026-08-01T02:15:21Z` and apply the original 5-impression minimum.
+
+`EXP-2026-07-25-ai-agent-memory-types` completed its 24-hour
+technical/evidence readout at `2026-07-26T02:04:08Z`; run its 7-day readout
+after `2026-08-01T01:49:40Z` and apply the original 5-impression minimum.
+
+`EXP-2026-07-18-claude-code-memory-refresh` completed its due 7-day readout
+at `2026-07-26T02:04:08Z`, but the authenticated range did not contain seven
+complete post-deploy days and no post-change crawl date is confirmed. Run its
+W2 readout after `2026-08-02T00:26:09Z` with the original page and visible
+qualified-cluster guards.
 
 The Learn-hub, LLM-wiki, MCP shared-memory, stale-memory, claude-mem,
 SuperLocalMemory, and Basic Memory 24-hour readouts were completed at
@@ -714,6 +785,14 @@ authenticated GSC and complete Vercel range ends before deployment, so each
 result remains pending. Run their 7-day readouts after their predeclared
 times from `2026-07-31T19:18:03Z` through `2026-08-01T01:04:56Z`, using the
 Friday weekly evidence rather than duplicating its pipeline.
+
+The same-task `wenlan-claude-memory-24h-readout` heartbeat is scheduled for
+`2026-08-01T02:20:00Z`, safely after the Friday weekly SEO run and the latest
+7-day boundary. It will batch the due zh-TW Obsidian, AI-work-memory versus
+knowledge-base, Learn-hub, LLM-wiki, MCP shared-memory, stale-memory,
+claude-mem, SuperLocalMemory, Basic Memory, AI-agent-memory-types, and
+context-loss 7-day readouts. It must not record the Claude Code memory W2
+readout before `2026-08-02T00:26:09Z`.
 
 No additional English, zh-TW, or zh-CN candidate passed all five gates in the
 latest Friday report or the bounded read-only demand-discovery follow-up.

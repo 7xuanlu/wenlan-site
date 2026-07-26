@@ -738,6 +738,7 @@ const baseArticles: LearnArticle[] = [
       "agent memory workflow",
       "AI memory system",
     ],
+    publishedAt: "2026-05-27",
     updatedAt: "2026-07-24",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",

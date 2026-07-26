@@ -406,6 +406,8 @@ test("AI work memory comparison answers the knowledge-base role question directl
     article,
     /metaDescription:\s*"Compare AI work memory and AI knowledge bases: what each stores, when agents use it, and why durable AI work needs both atomic memory and maintained pages\."/,
   );
+  assert.match(article, /publishedAt: "2026-05-27"/);
+  assert.match(article, /updatedAt: "2026-07-24"/);
   assert.match(article, /heading: "Short answer"/);
   assert.match(article, /competitorName: "Knowledge base"/);
   assert.match(article, /dimension: "Unit of knowledge"/);
