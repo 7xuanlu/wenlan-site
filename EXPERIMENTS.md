@@ -1934,3 +1934,230 @@ increase for that experiment.
 - Next step: wait for the next authenticated GSC window while keeping the
   already scheduled technical/evidence readouts; do not manufacture an
   experiment from generic Trends, Vercel totals, or incomplete cohort data
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-18-claude-code-memory-refresh at 2026-07-26T02:04:08Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-18-claude-code-memory-refresh
+- Observed at: 2026-07-26T02:04:08Z
+- Readout: 7d
+- Status: measuring
+- Evidence: The latest authenticated Friday range is
+  `2026-06-26..2026-07-23`, so it does not contain seven complete
+  post-deploy days after production completed at `2026-07-19T00:26:09Z`.
+  GSC property totals are 7 clicks and 310 impressions; visible-query totals
+  are 1 click and 75 impressions; the query visibility gap is 6 clicks and
+  235 impressions. The target remains at 0 clicks, 23 impressions, and
+  average position 38.7. Its five predeclared visible Claude-memory query
+  rows remain at 0 clicks, 9 impressions, and 50.0
+  impression-weighted average position. The rolling page row and fixed
+  visible cluster therefore match the pre-publish baseline, but they are not
+  a complete seven-day post-deploy cohort and do not establish a refresh
+  effect. The refresh has no confirmed post-change crawl or index date, so
+  the 25-impression minimum-exposure clock cannot be proven from this range.
+- Vercel: The same complete range reports 1,402 raw visitors and 1,593
+  pageviews, including 255 direct visitors and 319 direct pageviews. The
+  existing qualified-source allowlist sums to 1,149 visitors across separate
+  referrer rows and is not deduplicated. The target reports 7 visitors and
+  19 pageviews, compared with the separate 3-visitor and 3-pageview
+  pre-publish baseline. The date ranges differ and the current range is not
+  seven complete post-deploy days, so no lift, source-to-page session, or
+  causal claim is inferred. Unique acquisition-surface visitors remain
+  unavailable.
+- Technical and source evidence: The deployed technical audit passed after
+  the latest production deployment with 110 sitemap URLs. The live target
+  returned HTTP 200 with the exact self-canonical, `index, follow`, Article
+  and BreadcrumbList JSON-LD, `datePublished: "2026-06-07"`,
+  `dateModified: "2026-07-18"`, the current official Claude Code memory
+  source, and no `FAQPage`. Its 24-hour production render evidence remains
+  green; no page change has been made since that readout.
+- GitHub and CTA: GitHub REST reports 47 total Wenlan stars. Vercel custom
+  events remain account-gated and no authenticated Umami observation is
+  available, so GitHub outbound and CTA are not reported.
+- Result: inconclusive
+- Decision: wait
+- Unperformed gated actions: no indexing request, GSC validation, Reddit or
+  other external post, OSS submission, paid acquisition, or metric-definition
+  change
+- Next step: run the W2 readout after `2026-08-02T00:26:09Z`; use the next
+  authenticated Friday evidence, apply the original 25-impression and
+  qualified-cluster guards, and keep the unknown post-change crawl date
+  explicit
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-25-ai-agent-memory-types at 2026-07-26T02:04:08Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-25-ai-agent-memory-types
+- Observed at: 2026-07-26T02:04:08Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The latest authenticated GSC and complete Vercel range remains
+  `2026-06-26..2026-07-23`, before this route was deployed. GSC property
+  totals are 7 clicks and 310 impressions; visible-query totals are 1 click
+  and 75 impressions; the query visibility gap is 6 clicks and
+  235 impressions. The net-new target is absent from the pre-deploy page
+  table, so no zero, index state, or post-deploy demand is inferred. Vercel
+  separately reports 1,402 raw visitors and 1,593 pageviews, 255 direct
+  visitors and 319 direct pageviews, and a non-deduplicated 1,149-visitor
+  qualified-source aggregate. The range predates deployment and provides no
+  target baseline, acquisition-surface visitor count, or source-to-page join.
+- Technical and render evidence: The deployed technical audit passed after
+  the latest production deployment with 110 sitemap URLs. The live English
+  route returned HTTP 200 with the expected title and H1, exact
+  self-canonical, `index, follow`, Article and BreadcrumbList JSON-LD,
+  `datePublished: "2026-07-25"`, `dateModified: "2026-07-25"`, four
+  maintained source links, two visible FAQ questions, and no `FAQPage`.
+  Unsupported zh-TW and zh-CN routes returned HTTP 404. Fresh Chrome
+  desktop and mobile renders showed the expected first screen; document and
+  H1 scroll widths matched their client widths, and no page warning or error
+  was recorded.
+- GitHub and CTA: GitHub REST reports 47 total Wenlan stars. Vercel custom
+  events remain account-gated and no authenticated Umami observation is
+  available, so GitHub outbound and CTA are not reported.
+- Result: pending
+- Decision: wait
+- Unperformed gated actions: no indexing request, GSC validation, Reddit or
+  other external post, OSS submission, paid acquisition, or metric-definition
+  change
+- Next step: run the 7-day readout after `2026-08-01T01:49:40Z`; apply the
+  original 5-impression minimum-exposure guard and keep English, zh-TW, and
+  zh-CN evidence separate
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-25-context-loss-diagnostic-refresh at 2026-07-26T02:15:47Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-25-context-loss-diagnostic-refresh
+- Observed at: 2026-07-26T02:15:47Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The latest authenticated GSC and complete Vercel range remains
+  `2026-06-26..2026-07-23`, before this refresh was deployed. GSC property
+  totals are 7 clicks and 310 impressions; visible-query totals are 1 click
+  and 75 impressions; the query visibility gap is 6 clicks and
+  235 impressions. The target's pre-publish page row remains 0 clicks,
+  2 impressions, and average position 9.5, while its visible joined query set
+  remains empty; the two-impression page-query visibility gap is not
+  interpreted as a target query or post-deploy result. Vercel separately
+  reports 1,402 raw visitors and 1,593 pageviews, 255 direct visitors and
+  319 direct pageviews, and a non-deduplicated 1,149-visitor
+  qualified-source aggregate. The same pre-deploy range reports 1 visitor and
+  1 pageview for the target. It supplies no acquisition-surface visitor
+  count, source-to-page join, or post-deploy cohort.
+- Technical and locale evidence: The post-boundary deployed audit passed
+  robots, 110 sitemap URLs, 14 key pages, six utility noindex headers,
+  sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host redirects,
+  and legacy-URL exclusions. The production locale matrix passed 19 expected
+  HTTP 200 routes and five expected hard 404 routes. The live English target
+  returned HTTP 200 with its exact self-canonical, `index, follow`, Article
+  and BreadcrumbList JSON-LD, `datePublished: "2026-06-06"`,
+  `dateModified: "2026-07-25"`, five maintained source links, four related
+  internal links, and no `FAQPage`. Unsupported zh-TW and zh-CN routes
+  returned HTTP 404.
+- Render evidence: Fresh desktop and mobile Chrome renders in this readout
+  sequence showed the expected title, H1, description, and first-screen
+  layout. Document and H1 scroll widths matched their client widths. The
+  post-boundary live HTML and technical checks confirmed the same production
+  artifact. No Wenlan-origin browser warning or error appeared; one recorded
+  error originated from an unrelated Chrome extension URL and is not treated
+  as a page regression.
+- GitHub and CTA: GitHub REST reports 47 total Wenlan stars. Vercel custom
+  events remain account-gated and no authenticated Umami observation is
+  available, so GitHub outbound and CTA are not reported.
+- Result: pending
+- Decision: wait
+- Unperformed gated actions: no indexing request, GSC validation, Reddit or
+  other external post, OSS submission, paid acquisition, or metric-definition
+  change
+- Next step: run the 7-day readout after `2026-08-01T02:15:21Z`; apply the
+  original 5-impression minimum-exposure guard and keep this diagnostic
+  distinct from native Claude Code memory, handoff, persistent-project
+  context, and taxonomy pages
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-ai-work-memory-knowledge-base-refresh at 2026-07-26T02:19:26Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-ai-work-memory-knowledge-base-refresh
+- Observed at: 2026-07-26T02:19:26Z
+- Readout: 24h
+- Status: measuring
+- Timing: This readout is late and is recorded at the actual observation
+  time. It is not backdated to the original boundary at
+  `2026-07-25T18:54:22Z`.
+- Evidence: The latest authenticated GSC and complete Vercel range remains
+  `2026-06-26..2026-07-23`, before this refresh was deployed. GSC property
+  totals are 7 clicks and 310 impressions; visible-query totals are 1 click
+  and 75 impressions; the query visibility gap is 6 clicks and
+  235 impressions. The target remains at its pre-publish 0 clicks,
+  9 impressions, and average position 8.0. No visible joined target query is
+  claimed. Vercel separately reports 1,402 raw visitors and 1,593 pageviews,
+  255 direct visitors and 319 direct pageviews, and a non-deduplicated
+  1,149-visitor qualified-source aggregate. The target reports 1 visitor and
+  1 pageview in that pre-deploy range; no post-deploy cohort,
+  acquisition-surface visitor count, source-to-page join, or causal effect is
+  inferred.
+- Technical, locale, and render evidence: The post-boundary deployed audit
+  passed robots, 110 sitemap URLs, 14 key pages, six utility noindex headers,
+  sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host redirects,
+  and legacy-URL exclusions. The live English target returned HTTP 200 with
+  its refreshed title, exact self-canonical, `index, follow`, Article and
+  BreadcrumbList JSON-LD, `datePublished: "2026-07-24"`,
+  `dateModified: "2026-07-24"`, maintained first-party source links, and no
+  `FAQPage`; unsupported zh-TW and zh-CN routes returned HTTP 404. The
+  production desktop/mobile render evidence from the deployment readout
+  remains green, and no page change has been made since that verification.
+- GitHub and CTA: GitHub REST reports 47 total Wenlan stars. Vercel custom
+  events remain account-gated and no authenticated Umami observation is
+  available, so GitHub outbound and CTA are not reported.
+- Result: pending
+- Decision: wait
+- Unperformed gated actions: no indexing request, GSC validation, Reddit or
+  other external post, OSS submission, paid acquisition, or metric-definition
+  change
+- Next step: run the 7-day readout after `2026-07-31T18:54:22Z`; apply the
+  original 20-impression minimum-exposure guard and keep this Source/Memory/Page
+  role comparison distinct from generic AI knowledge-base demand
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-ai-work-memory-knowledge-base-refresh correction at 2026-07-26T02:24:10Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-ai-work-memory-knowledge-base-refresh
+- Observed at: 2026-07-26T02:24:10Z
+- Readout: correction
+- Status: active
+- Evidence: This corrects the date-health interpretation in the preceding
+  24-hour readout. The route and its canonical,
+  indexability, maintained sources, unsupported locale 404s, and retained
+  render evidence were healthy, but the date-health interpretation was not.
+  Live Article JSON-LD emits `datePublished: "2026-07-24"` and
+  `dateModified: "2026-07-24"`. Git history establishes that the page first
+  shipped with the article registry's `2026-05-27` date, so the refresh
+  rewrote the original publication date instead of preserving it.
+- Local change: add `publishedAt: "2026-05-27"` while retaining
+  `updatedAt: "2026-07-24"`, protected by a focused regression assertion.
+- Scope: metadata and Article JSON-LD only. No visible copy, URL, canonical,
+  hreflang, sitemap membership, locale availability, schema type,
+  `FAQPage`, experiment baseline, or metric definition changes.
+- Approval: At `2026-07-26T02:24:10Z`, the user approved local preparation,
+  commit, Git push, PR creation, merge, production deployment, and production
+  verification for this correction.
+- Production slot: occupied until the live Article JSON-LD and deployed
+  technical checks verify the correction.
+- Unperformed separately gated actions: no indexing request, GSC validation,
+  Reddit or other external post, OSS submission, paid acquisition, or
+  metric-definition change.
+- Result: pending
+- Decision: refresh
+- Next step: prove the focused test GREEN, run the full relevant build and SEO
+  verification, obtain independent review, publish the approved correction,
+  and append production evidence without changing the experiment's 7-day
+  readout schedule.
+<!-- EXPERIMENT-RECORD:END -->
