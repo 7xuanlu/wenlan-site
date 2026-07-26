@@ -232,9 +232,8 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   claude-mem, stale-memory, and MCP shared-memory changes remain live,
   production-verified, and measuring; they do not consume the slot.
 - Website-affecting technical correction:
-  `TECH-2026-07-26-provider-neutral-cta-tracking`, active in local
-  preparation and consuming the single production slot until it is either
-  rejected or production-verified.
+  `TECH-2026-07-26-provider-neutral-cta-tracking`, production-verified and no
+  longer consuming the single production slot.
   `TECH-2026-07-26-knowledge-base-published-date`, production-verified and no
   longer consuming the preparation slot.
   `TECH-2026-07-24-localized-learn-breadcrumb` remains production-verified
@@ -695,11 +694,11 @@ not consume the production slot.
 
 ### Current technical correction
 
-`TECH-2026-07-26-provider-neutral-cta-tracking` is active in local
-preparation. The live site already loads the configured Umami Cloud tracker,
-but `TrackedLink` sends custom interactions only to Vercel Analytics. Vercel
+`TECH-2026-07-26-provider-neutral-cta-tracking` is production-verified. Before
+the correction, the live site loaded the configured Umami Cloud tracker, but
+`TrackedLink` sent custom interactions only to Vercel Analytics. Vercel
 custom-event reporting is account-plan-gated, so no reliable
-`github_outbound` observation or diagnostic CTA baseline exists.
+`github_outbound` observation or diagnostic CTA baseline existed.
 
 The bounded correction implements the provider-neutral contract already
 approved in
@@ -719,8 +718,14 @@ evidence, privacy boundary, and verification contract are in
 `docs/seo-audits/2026-07-25-cta-measurement-prelaunch.md`. Local preparation
 is complete. The user approved commit, Git push, PR creation, merge,
 automatic Vercel deployment, and production verification at
-`2026-07-26T03:07:04Z`; synthetic production events and authenticated
-production event reads remain separately unavailable or prohibited.
+`2026-07-26T03:07:04Z`. PR #86 merged at
+`2026-07-26T03:12:02Z` as
+`7674c47405ed42a71f8776b8276093fbea05fefd`; Vercel production completed at
+`2026-07-26T03:12:51Z`. The live tag exposes the hardened domain, query, and
+Do Not Track attributes; the disclosure and normalized CTA event names are
+live; and the deployed technical SEO audit passes. The production slot is
+released. Synthetic production events and authenticated production event
+reads remain separately unavailable or prohibited.
 
 `TECH-2026-07-26-knowledge-base-published-date` corrects the live Article
 JSON-LD for `/learn/ai-work-memory-vs-knowledge-base`. The existing indexed
@@ -826,13 +831,12 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The production slot is occupied by the locally prepared
-`TECH-2026-07-26-provider-neutral-cta-tracking` correction. The user approved
-commit, Git push, PR creation, merge, automatic Vercel deployment, and
-production verification at `2026-07-26T03:07:04Z`. Finish its independent
-review and final verification gates, then publish the approved correction.
-Do not generate a synthetic production event; actual Umami totals remain
-manual/account-gated until authenticated access is available.
+The production slot is open after
+`TECH-2026-07-26-provider-neutral-cta-tracking` passed production
+verification. Do not generate a synthetic production event; actual Umami
+totals remain manual/account-gated until authenticated access is available.
+Continue the scheduled evidence readouts and do not launch another search
+asset without a candidate that passes all five gates.
 
 The
 `TECH-2026-07-26-knowledge-base-published-date` correction is

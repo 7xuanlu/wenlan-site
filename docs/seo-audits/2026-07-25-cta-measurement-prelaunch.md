@@ -1,8 +1,7 @@
 # CTA Measurement Technical Correction — 2026-07-25
 
-Status: locally prepared and approved for commit, push, merge, deployment, and
-production verification at `2026-07-26T03:07:04Z`. Production event reads
-remain dependent on authenticated Umami dashboard or export access.
+Status: production-verified. Production event reads remain dependent on
+authenticated Umami dashboard or export access.
 
 ## Why this is next
 
@@ -101,3 +100,19 @@ metric-definition changes remain out of scope.
   route with no browser warning or error.
 - Independent review: APPROVE with no P0-P2 findings.
 - `git diff --check`: pass.
+
+## Production verification
+
+- PR #86 merged at `2026-07-26T03:12:02Z` as
+  `7674c47405ed42a71f8776b8276093fbea05fefd`.
+- Vercel production completed at `2026-07-26T03:12:51Z`.
+- The live Umami tag contains `data-domains="wenlan.app"`,
+  `data-exclude-search="true"`, and `data-do-not-track="true"`.
+- The public website-analytics disclosure and the normalized
+  `github_outbound` and `get_started_click` event code are live.
+- The deployed technical SEO audit passed robots, 110 sitemap URLs, 14 key
+  pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+  redirects, six bridge-host redirects, and legacy-URL exclusions.
+- No synthetic production event, indexing request, GSC validation, external
+  publication, OSS submission, paid acquisition, account mutation, or metric
+  definition change was performed.
