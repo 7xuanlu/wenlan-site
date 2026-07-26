@@ -598,6 +598,25 @@ test("GSC API fetcher normalizes search analytics fixture rows into weekly CSVs"
       "utf8",
     );
     await writeFile(
+      join(fixtureDir, "searchanalytics-query-page.json"),
+      JSON.stringify({
+        rows: [
+          {
+            keys: [
+              "claude code memory",
+              "https://wenlan.app/learn/claude-code-memory",
+            ],
+            clicks: 1,
+            impressions: 11,
+            ctr: 1 / 11,
+            position: 12.45,
+          },
+        ],
+        responseAggregationType: "byPage",
+      }),
+      "utf8",
+    );
+    await writeFile(
       join(fixtureDir, "searchanalytics-property.json"),
       JSON.stringify({
         rows: [
@@ -637,10 +656,14 @@ test("GSC API fetcher normalizes search analytics fixture rows into weekly CSVs"
 
     assert.match(stdout, /"queryRows": 1/);
     assert.match(stdout, /"pageRows": 1/);
+    assert.match(stdout, /"queryPageRows": 1/);
     assert.match(stdout, /"sitemapCount": 1/);
 
     const queriesCsv = await readFile(join(outputDir, "gsc-queries.csv"), "utf8");
     const pagesCsv = await readFile(join(outputDir, "gsc-pages.csv"), "utf8");
+    const queryPages = JSON.parse(
+      await readFile(join(outputDir, "gsc-query-pages.json"), "utf8"),
+    );
     const metadata = JSON.parse(await readFile(join(outputDir, "gsc-metadata.json"), "utf8"));
 
     assert.match(
@@ -655,8 +678,25 @@ test("GSC API fetcher normalizes search analytics fixture rows into weekly CSVs"
       pagesCsv,
       /https:\/\/wenlan\.app\/learn\/claude-code-memory,0,37,0\.00%,33\.1,2026-05-25,2026-06-21,Search Console API fixture/,
     );
+    assert.equal(queryPages.siteUrl, "sc-domain:wenlan.app");
+    assert.equal(queryPages.startDate, "2026-05-25");
+    assert.equal(queryPages.endDate, "2026-06-21");
+    assert.deepEqual(queryPages.dimensions, ["query", "page"]);
+    assert.deepEqual(queryPages.nativeUnits, {
+      clicks: "clicks",
+      impressions: "impressions",
+      ctr: "ratio",
+      position: "average position",
+    });
+    assert.equal(queryPages.responseAggregationType, "byPage");
+    assert.equal(queryPages.rowCount, 1);
+    assert.deepEqual(queryPages.rows[0].keys, [
+      "claude code memory",
+      "https://wenlan.app/learn/claude-code-memory",
+    ]);
     assert.equal(metadata.siteUrl, "sc-domain:wenlan.app");
     assert.equal(metadata.source, "Search Console API fixture");
+    assert.equal(metadata.queryPageRows, 1);
     assert.deepEqual(metadata.propertyTotals, {
       clicks: 3,
       impressions: 67,
@@ -702,6 +742,14 @@ test("GSC API fetcher derives the last 28 complete days from report date", async
             position: 33.12,
           },
         ],
+      }),
+      "utf8",
+    );
+    await writeFile(
+      join(fixtureDir, "searchanalytics-query-page.json"),
+      JSON.stringify({
+        rows: [],
+        responseAggregationType: "byPage",
       }),
       "utf8",
     );
@@ -803,7 +851,7 @@ test("GSC API fetcher falls back to ADC and sends the quota project header", asy
         "    ? { sitemap: [{ path: 'https://wenlan.app/sitemap.xml' }] }",
         "    : request.aggregationType === 'byProperty'",
         "      ? { rows: [{ clicks: 3, impressions: 67, ctr: 3 / 67, position: 10.2 }], responseAggregationType: 'byProperty' }",
-        "      : { rows: [{ keys: ['wenlan'], clicks: 1, impressions: 2, ctr: 0.5, position: 3.25 }] };",
+        "      : { rows: [{ keys: ['wenlan'], clicks: 1, impressions: 2, ctr: 0.5, position: 3.25 }], responseAggregationType: 'byPage' };",
         "  return { ok: true, status: 200, statusText: 'OK', text: async () => JSON.stringify(body) };",
         "};",
         "",
@@ -848,7 +896,7 @@ test("GSC API fetcher falls back to ADC and sends the quota project header", asy
       .trim()
       .split("\n")
       .map((line) => JSON.parse(line));
-    assert.equal(calls.length, 4);
+    assert.equal(calls.length, 5);
     for (const call of calls) {
       assert.equal(call.headers.authorization, "Bearer adc-token-from-gcloud");
       assert.equal(call.headers["x-goog-user-project"], "wenlan-500502");
@@ -873,6 +921,14 @@ test("GSC API fetcher falls back to ADC and sends the quota project header", asy
     assert.equal(
       analyticsBodies.filter(
         (body) => body.aggregationType === "byProperty" && body.dimensions?.[0] === "query",
+      ).length,
+      1,
+    );
+    assert.equal(
+      analyticsBodies.filter(
+        (body) =>
+          body.aggregationType === "byPage" &&
+          body.dimensions?.join(",") === "query,page",
       ).length,
       1,
     );
@@ -906,7 +962,7 @@ test("GSC API fetcher uses GSC_ACCESS_TOKEN before ADC when present", async () =
         "    ? { sitemap: [] }",
         "    : request.aggregationType === 'byProperty'",
         "      ? { rows: [], responseAggregationType: 'byProperty' }",
-        "      : { rows: [] };",
+        "      : { rows: [], responseAggregationType: 'byPage' };",
         "  return { ok: true, status: 200, statusText: 'OK', text: async () => JSON.stringify(body) };",
         "};",
         "",
@@ -941,7 +997,7 @@ test("GSC API fetcher uses GSC_ACCESS_TOKEN before ADC when present", async () =
       .trim()
       .split("\n")
       .map((line) => JSON.parse(line));
-    assert.equal(calls.length, 4);
+    assert.equal(calls.length, 5);
     for (const call of calls) {
       assert.equal(call.headers.authorization, "Bearer explicit-token");
       assert.equal(call.headers["x-goog-user-project"], "custom-quota-project");
@@ -978,7 +1034,7 @@ test("GSC API fetcher sends configured quota project header", async () => {
         rows: [],
         ...(searchRequest.aggregationType === "byProperty"
           ? { responseAggregationType: "byProperty" }
-          : {}),
+          : { responseAggregationType: "byPage" }),
       }));
     });
   });
@@ -1008,7 +1064,7 @@ test("GSC API fetcher sends configured quota project header", async () => {
       },
     );
 
-    assert.equal(requests.length, 4);
+    assert.equal(requests.length, 5);
     for (const request of requests) {
       assert.equal(request.authorization, "Bearer test-token");
       assert.equal(request.quotaProject, "wenlan-500502");

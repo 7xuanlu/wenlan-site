@@ -281,6 +281,12 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `TECH-2026-07-26-knowledge-base-published-date`. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
+- At `2026-07-26T02:49:29Z`, the controller recorded the user's approval for
+  commit, Git push, PR creation, merge, automatic production deployment, and
+  production verification of the authenticated GSC query-plus-page export
+  and the matching inter-window Goal observation. That approval does not
+  include request indexing, GSC validation, non-website publication, OSS
+  submission, paid acquisition, or metric changes.
 - Active experiments: 12.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
@@ -302,6 +308,15 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   its exact self-canonical and `index, follow`; Open Graph and Article JSON-LD
   now emit the original `datePublished: "2026-05-27"` and refreshed
   `dateModified: "2026-07-24"`, with no `FAQPage`.
+- Latest authenticated inter-window observation: fetched on `2026-07-26` for
+  the 28 complete days `2026-06-27..2026-07-24`. Search Console property
+  totals are 7 clicks and 329 impressions; visible-query totals are 1 click
+  and 81 impressions; the visibility gap is 6 clicks and 248 impressions.
+  Vercel reports 1,406 visitors and 1,612 pageviews for the same range.
+  GitHub REST still reports 47 stars. The deterministic temporary report is
+  `/tmp/wenlan-seo/2026-07-25-goal-check.md`, with evidence fingerprint
+  `sha256:05e9acea6da290f494238e55bafb3f9762ab858d44e0dec81b490a2277ba5599`.
+  This is an early evidence refresh, not a scheduled experiment verdict.
 - Google Trends demand-discovery gate: resolved for the current decision at
   `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
   Seventeen timeline comparisons and nine related-query exports cover
@@ -396,26 +411,26 @@ after the anchor is frozen.
 
 | Metric | Fixed baseline | Verified live observation | Provenance | Gap to target from live observation |
 | --- | ---: | ---: | --- | ---: |
-| GitHub total stars | 47 | 47 | GitHub REST `GET /repos/7xuanlu/wenlan`, read after the 2026-07-25 production verification | 53 |
-| GSC rolling-28-day property impressions | 197 | 310 | Search Console API, `sc-domain:wenlan.app`, `2026-06-26..2026-07-23`; `/tmp/wenlan-seo/gsc-metadata.json` | 690 |
-| Vercel rolling-28-day visitors | 323 | 1,402 | Vercel Web Analytics API, project `wenlan-site`, `2026-06-26..2026-07-23`; `/tmp/wenlan-seo/vercel-metadata.json` | 598 |
+| GitHub total stars | 47 | 47 | GitHub REST `GET /repos/7xuanlu/wenlan`, read on 2026-07-26 | 53 |
+| GSC rolling-28-day property impressions | 197 | 329 | Search Console API, `sc-domain:wenlan.app`, `2026-06-27..2026-07-24`; `/tmp/wenlan-seo/gsc-metadata.json` | 671 |
+| Vercel rolling-28-day visitors | 323 | 1,406 | Vercel Web Analytics API, project `wenlan-site`, `2026-06-27..2026-07-24`; `/tmp/wenlan-seo/vercel-metadata.json` | 594 |
 
 Supporting quality split for the same live range:
 
-- GSC property totals: 7 clicks, 310 impressions.
-- GSC visible-query totals: 1 click, 75 impressions.
-- GSC query visibility gap: 6 clicks, 235 impressions.
-- Visible-query non-brand impressions: 36 using the existing Searchfit group
+- GSC property totals: 7 clicks, 329 impressions.
+- GSC visible-query totals: 1 click, 81 impressions.
+- GSC query visibility gap: 6 clicks, 248 impressions.
+- Visible-query non-brand impressions: 40 using the existing Searchfit group
   classification; this is a visible-row subset, not a property total, and the
   current `Other` bucket still contains noisy Wenlan misspellings.
-- Vercel raw totals: 1,402 visitors and 1,593 pageviews.
-- Vercel direct traffic: 255 visitors and 319 pageviews.
+- Vercel raw totals: 1,406 visitors and 1,612 pageviews.
+- Vercel direct traffic: 262 visitors and 341 pageviews.
 - Vercel qualified-source aggregate: 1,149 visitors summed across the existing
   separate search, AI, and GitHub referrer allowlist; this is not a
   deduplicated user count.
-- Vercel's top-page export did not include
-  `/learn/ai-work-memory-vs-knowledge-base`; no zero or source-to-page count is
-  inferred from its absence.
+- Vercel reports 2 visitors and 2 pageviews for
+  `/learn/ai-work-memory-vs-knowledge-base`; the page aggregate does not
+  provide a source-to-page join.
 - Unique acquisition-surface visitors and source-to-page sessions remain
   unavailable from the separate Vercel aggregates. Vercel custom events
   remain Pro/Enterprise-gated, and no authenticated Umami report was
@@ -434,6 +449,17 @@ Supporting quality split for the same live range:
   non-brand Claude-memory cluster at 50.0 impression-weighted average
   position. Keep the remaining 12-impression page-query visibility gap
   explicit.
+- The refreshed authenticated query-plus-page export now comes directly from
+  `pnpm seo:gsc:fetch` and contains 49 visible rows for
+  `2026-06-27..2026-07-24` in
+  `/tmp/wenlan-seo/gsc-query-pages.json`. It maps 8 visible impressions on
+  the Basic Memory comparison to `basic memory`, `basic-memory github`, and
+  `basicmemory`; the separate page row has 23 impressions and one click, so
+  the 15-impression and one-click visibility gap remains explicit. It also
+  shows that all visible rows for `/docs/changelog` and
+  `/docs/data-and-privacy` are brand variants or noisy misspellings, not a
+  product problem cluster. The Learn hub exposes only two visible
+  single-impression rows against its 78-impression page total.
 - Setup starts: no reliable website-to-success measurement; lagging and
   non-gating.
 - Early partial Vercel observation: fetched at `2026-07-19T18:01:59Z` for
@@ -504,8 +530,8 @@ Supporting quality split for the same live range:
 ### Current gap
 
 - Stars: 53 more than the verified live observation.
-- GSC property impressions: 690 more in the fixed final rolling window.
-- Vercel visitors: 598 more in the fixed final rolling window.
+- GSC property impressions: 671 more in the fixed final rolling window.
+- Vercel visitors: 594 more in the fixed final rolling window.
 - Measurement gaps: complete non-brand page impressions, unique
   acquisition-surface visitors, Umami CTA baseline, and verified setup success
   remain unavailable; none may be invented.
@@ -699,12 +725,14 @@ PR #65 merged at `2026-07-24T20:47:55Z` as
 and rendered checks passed. The correction is production-verified and no
 longer consumes the preparation slot.
 
-The weekly report's changelog and data/privacy candidates remain unstarted
-because their page rows have no inspectable matching query or independent
-demand candidate. The SuperLocalMemory comparison is now the active
-exception: fresh tagged source and the v3.8.3 package establish material
-product and benchmark drift beyond the one visible query row, so refreshing
-the existing indexed page passes the full candidate gate.
+The weekly report's changelog and data/privacy candidates remain unstarted.
+The refreshed query-plus-page join shows their visible rows are brand variants
+and noisy misspellings rather than a standalone changelog, privacy, or
+configuration problem cluster; the remaining page impressions stay
+privacy-filtered and cannot be invented. The SuperLocalMemory comparison was
+the evidence-backed exception: fresh tagged source and the v3.8.3 package
+established material product and benchmark drift beyond the one visible query
+row, so refreshing the existing indexed page passed the full candidate gate.
 
 ### Immediate localized launch
 
@@ -797,6 +825,20 @@ knowledge-base, Learn-hub, LLM-wiki, MCP shared-memory, stale-memory,
 claude-mem, SuperLocalMemory, Basic Memory, AI-agent-memory-types, and
 context-loss 7-day readouts. It must not record the Claude Code memory W2
 readout before `2026-08-02T00:26:09Z`.
+
+The authenticated `2026-06-27..2026-07-24` inter-window refresh adds
+19 property impressions, six visible-query impressions, four Vercel visitors,
+and 19 Vercel pageviews relative to the preceding rolling range. These are
+overlapping rolling-window observations, not daily gains or causal lift.
+`basic memory` now has 4 visible impressions and
+`basic-memory github` appears with 2 impressions, but the existing Basic
+Memory page already covers that intent and its refresh was deployed after
+this evidence window. The Learn hub has 78 impressions and no clicks, but the
+range contains only its launch date rather than a complete post-change
+cohort. Neither signal justifies stacking another edit before the scheduled
+readout. The current 49-row query-plus-page export confirms these mappings and
+also rejects the changelog and data/privacy queues as brand-noise candidates,
+not new non-brand demand.
 
 No additional English, zh-TW, or zh-CN candidate passed all five gates in the
 latest Friday report or the bounded read-only demand-discovery follow-up.
