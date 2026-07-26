@@ -2233,3 +2233,30 @@ increase for that experiment.
   `git diff --check` pass. Independent review returned APPROVE with no P0-P2
   findings.
 - Next step: publish and production-verify the approved technical correction
+
+### 2026-07-26T03:14:06Z — provider-neutral CTA measurement correction production verification
+
+- Record type: campaign-observation
+- Technical correction:
+  `TECH-2026-07-26-provider-neutral-cta-tracking`
+- Status: production-verified; production slot released
+- Publication: PR #86 merged at `2026-07-26T03:12:02Z` as
+  `7674c47405ed42a71f8776b8276093fbea05fefd`; Vercel production completed at
+  `2026-07-26T03:12:51Z`.
+- Live evidence: the configured Umami tag exposes the approved
+  `data-domains="wenlan.app"`, `data-exclude-search="true"`, and
+  `data-do-not-track="true"` attributes. The public website-analytics
+  disclosure and normalized `github_outbound` and `get_started_click` event
+  code are live.
+- Technical evidence: the deployed audit passed robots, 110 sitemap URLs, 14
+  key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+  redirects, six bridge-host redirects, and legacy-URL exclusions.
+- Metric role: this verifies deployment and future measurement readiness
+  only. No CTA count, star attribution, SEO lift, or causal result is inferred.
+  Actual Umami totals remain manual/account-gated until authenticated access
+  is available.
+- Unperformed separately gated actions: no synthetic production event,
+  indexing request, GSC validation, external publication, OSS submission,
+  paid acquisition, account mutation, or metric-definition change.
+- Next step: wait for real authenticated Umami observations and the scheduled
+  Goal readouts; do not infer zero events from missing dashboard access.
