@@ -2191,3 +2191,45 @@ increase for that experiment.
   `2026-07-31T18:54:22Z`; apply the predeclared 20-impression minimum-exposure
   guard without attributing any effect to this technical correction.
 <!-- EXPERIMENT-RECORD:END -->
+
+### 2026-07-26T02:59:07Z — provider-neutral CTA measurement correction prepared
+
+- Record type: campaign-observation
+- Technical correction:
+  `TECH-2026-07-26-provider-neutral-cta-tracking`
+- Status: active local preparation; consumes the single production slot
+- Evidence: The live `wenlan.app` homepage returned HTTP 200 at
+  `2026-07-26T02:56:08Z` and loaded the configured Umami Cloud tracker.
+  Before this correction, `TrackedLink` sent the four acquisition
+  interactions only through `@vercel/analytics`, while the authenticated
+  weekly evidence kept Vercel custom events account-plan-gated. No
+  `github_outbound` total or CTA baseline is inferred.
+- Change: normalize the existing events to `github_outbound`,
+  `get_started_click`, `learn_article_click`, and `setup_path_click`; keep
+  Vercel for pageviews; route custom events only to configured Umami; allow
+  only placement, locale, context, and a fixed destination category; harden
+  the tracker to `wenlan.app`, exclude search parameters, and respect Do Not
+  Track; disclose public website analytics separately from installed Wenlan
+  product telemetry.
+- Privacy: no memory content, code, commands, user paths, search terms, names,
+  emails, query strings, full URLs, or stable account identifiers are sent.
+- RED/GREEN: the source contract failed while it still required Vercel custom
+  events, then passed after the provider-neutral seam and disclosure were
+  implemented. Runtime interaction tests pass for all four event mappings and
+  safe no-op behavior when Umami is unavailable.
+- Metric role: this enables a future diagnostic CTA observation only.
+  `github_outbound` is not a star, no metric definition changes, and no
+  search-performance or causal claim is made.
+- Approval: At `2026-07-26T03:07:04Z`, the user approved commit, Git push, PR
+  creation, merge, automatic Vercel deployment, and production verification.
+- Remaining boundary: no synthetic production event, indexing request, GSC
+  validation, external publication, OSS submission, paid acquisition, account
+  mutation, or metric-definition change is authorized.
+- Evidence record:
+  `docs/seo-audits/2026-07-25-cta-measurement-prelaunch.md`
+- Local verification: SEO tests 187/187; i18n tests 53/53; TypeScript, Goal
+  verifier, weekly sample, production build, built technical SEO, built locale
+  matrix, desktop/mobile render, tracked CTA navigation, and
+  `git diff --check` pass. Independent review returned APPROVE with no P0-P2
+  findings.
+- Next step: publish and production-verify the approved technical correction

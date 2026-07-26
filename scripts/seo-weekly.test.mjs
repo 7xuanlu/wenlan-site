@@ -4,7 +4,6 @@ import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFile } from "node:child_process";
-import { createServer } from "node:http";
 import { promisify } from "node:util";
 import test from "node:test";
 
@@ -1009,39 +1008,29 @@ test("GSC API fetcher uses GSC_ACCESS_TOKEN before ADC when present", async () =
 
 test("GSC API fetcher sends configured quota project header", async () => {
   const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-gsc-fetch-quota-"));
-  const requests = [];
-  const server = createServer((request, response) => {
-    let body = "";
-    request.setEncoding("utf8");
-    request.on("data", (chunk) => {
-      body += chunk;
-    });
-    request.on("end", () => {
-      requests.push({
-        method: request.method,
-        url: request.url,
-        authorization: request.headers.authorization,
-        quotaProject: request.headers["x-goog-user-project"],
-        body,
-      });
-      response.writeHead(200, { "content-type": "application/json" });
-      if (request.url?.endsWith("/sitemaps")) {
-        response.end(JSON.stringify({ sitemap: [{ path: "https://wenlan.app/sitemap.xml" }] }));
-        return;
-      }
-      const searchRequest = JSON.parse(body || "{}");
-      response.end(JSON.stringify({
-        rows: [],
-        ...(searchRequest.aggregationType === "byProperty"
-          ? { responseAggregationType: "byProperty" }
-          : { responseAggregationType: "byPage" }),
-      }));
-    });
-  });
-
   try {
-    await new Promise((resolveServer) => server.listen(0, "127.0.0.1", resolveServer));
-    const { port } = server.address();
+    const fetchLogPath = join(outputRoot, "fetch-log.jsonl");
+    const fetchMockPath = join(outputRoot, "mock-fetch.mjs");
+    const apiBaseUrl = "https://gsc-test.invalid/webmasters/v3";
+    await writeFile(
+      fetchMockPath,
+      [
+        "import { appendFileSync } from 'node:fs';",
+        "const logPath = process.env.GSC_FETCH_TEST_LOG;",
+        "globalThis.fetch = async (url, options = {}) => {",
+        "  appendFileSync(logPath, JSON.stringify({ url: String(url), headers: options.headers ?? {}, body: options.body ?? null }) + '\\n');",
+        "  const request = JSON.parse(options.body ?? '{}');",
+        "  const body = String(url).endsWith('/sitemaps')",
+        "    ? { sitemap: [{ path: 'https://wenlan.app/sitemap.xml' }] }",
+        "    : request.aggregationType === 'byProperty'",
+        "      ? { rows: [], responseAggregationType: 'byProperty' }",
+        "      : { rows: [], responseAggregationType: 'byPage' };",
+        "  return { ok: true, status: 200, statusText: 'OK', text: async () => JSON.stringify(body) };",
+        "};",
+        "",
+      ].join("\n"),
+      "utf8",
+    );
 
     await execFileAsync(
       process.execPath,
@@ -1059,18 +1048,24 @@ test("GSC API fetcher sends configured quota project header", async () => {
           ...process.env,
           GSC_ACCESS_TOKEN: "test-token",
           GSC_QUOTA_PROJECT: "wenlan-500502",
-          GSC_API_BASE_URL: `http://127.0.0.1:${port}/webmasters/v3`,
+          GSC_API_BASE_URL: apiBaseUrl,
+          GSC_FETCH_TEST_LOG: fetchLogPath,
+          NODE_OPTIONS: `--import ${fetchMockPath}`,
         },
       },
     );
 
+    const requests = (await readFile(fetchLogPath, "utf8"))
+      .trim()
+      .split("\n")
+      .map((line) => JSON.parse(line));
     assert.equal(requests.length, 5);
     for (const request of requests) {
-      assert.equal(request.authorization, "Bearer test-token");
-      assert.equal(request.quotaProject, "wenlan-500502");
+      assert.match(request.url, new RegExp(`^${apiBaseUrl}/`));
+      assert.equal(request.headers.authorization, "Bearer test-token");
+      assert.equal(request.headers["x-goog-user-project"], "wenlan-500502");
     }
   } finally {
-    await new Promise((resolveServer) => server.close(resolveServer));
     await rm(outputRoot, { recursive: true, force: true });
   }
 });

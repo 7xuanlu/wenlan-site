@@ -225,26 +225,37 @@ test("root document includes Vercel Web Analytics only on Vercel", async () => {
   assert.match(rootDocument, /vercelAnalyticsEnabled\s*\?\s*<Analytics\s*\/>\s*:\s*null/);
 });
 
-test("primary acquisition links emit bounded Vercel CTA events", async () => {
+test("primary acquisition links emit bounded provider-neutral Umami CTA events", async () => {
   const trackedLink = await readRepo("src/components/tracked-link.tsx");
+  const rootDocument = await readRepo("src/app/root-document.tsx");
   const home = await readRepo("src/app/_pages/home.tsx");
   const learnIndex = await readRepo("src/app/learn/page.tsx");
   const learnArticle = await readRepo("src/app/learn/[slug]/page.tsx");
   const getStarted = await readRepo("src/app/_pages/get-started.tsx");
+  const docs = await readRepo("src/app/docs/docs.ts");
 
-  assert.match(trackedLink, /import\s+\{\s*track\s*\}\s+from\s+"@vercel\/analytics"/);
-  assert.match(trackedLink, /"Get Started Click"/);
-  assert.match(trackedLink, /"GitHub Click"/);
-  assert.match(trackedLink, /"Learn Article Click"/);
-  assert.match(trackedLink, /"Setup Path Click"/);
+  assert.doesNotMatch(trackedLink, /from\s+"@vercel\/analytics"/);
+  assert.match(trackedLink, /"get_started_click"/);
+  assert.match(trackedLink, /"github_outbound"/);
+  assert.match(trackedLink, /"learn_article_click"/);
+  assert.match(trackedLink, /"setup_path_click"/);
+  assert.match(trackedLink, /window\.umami\?\.track\(eventName,\s*\{/);
+  assert.match(trackedLink, /destination_category:/);
   assert.doesNotMatch(
     trackedLink,
-    /track\([^)]*\{[^}]*(?:query|email|url|href)\s*:/s,
+    /track\([^)]*\{[^}]*(?:query|email|url|href|name|account_id)\s*:/s,
   );
+  assert.match(rootDocument, /data-domains="wenlan\.app"/);
+  assert.match(rootDocument, /data-exclude-search="true"/);
+  assert.match(rootDocument, /data-do-not-track="true"/);
   assert.match(home, /TrackedLink/);
   assert.match(learnIndex, /TrackedLink/);
   assert.match(learnArticle, /TrackedLink/);
   assert.match(getStarted, /TrackedLocalizedLink/);
+  assert.match(docs, /heading: "Public website analytics"/);
+  assert.match(docs, /Vercel Web Analytics/);
+  assert.match(docs, /Umami/);
+  assert.match(docs, /Do Not Track/);
 });
 
 test("all evidence-backed no-click Docs targets have refreshed SERP copy and quick answers", async () => {

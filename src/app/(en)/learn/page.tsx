@@ -231,7 +231,7 @@ export default function LearnPage() {
                 <TrackedLink
                   key={route.query}
                   href={route.href}
-                  eventName="Learn Article Click"
+                  eventName="learn_article_click"
                   placement="learn-search-path"
                   locale="en"
                   context={route.context}
@@ -270,7 +270,7 @@ export default function LearnPage() {
                       <TrackedLink
                         key={article.slug}
                         href={`/learn/${article.slug}`}
-                        eventName="Learn Article Click"
+                        eventName="learn_article_click"
                         placement="learn-grid"
                         locale="en"
                         context={article.category === "Comparisons" ? "comparisons" : article.category === "Workflows" ? "workflows" : "concepts"}
@@ -321,7 +321,7 @@ export default function LearnPage() {
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <TrackedLink
               href="/docs/get-started"
-              eventName="Get Started Click"
+              eventName="get_started_click"
               placement="learn-footer"
               locale="en"
               context="setup"
@@ -331,7 +331,7 @@ export default function LearnPage() {
             </TrackedLink>
             <TrackedLink
               href="https://github.com/7xuanlu/wenlan"
-              eventName="GitHub Click"
+              eventName="github_outbound"
               placement="learn-footer"
               locale="en"
               context="setup"
