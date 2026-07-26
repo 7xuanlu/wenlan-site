@@ -2161,3 +2161,33 @@ increase for that experiment.
   and append production evidence without changing the experiment's 7-day
   readout schedule.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-ai-work-memory-knowledge-base-refresh production correction at 2026-07-26T02:32:30Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-ai-work-memory-knowledge-base-refresh
+- Observed at: 2026-07-26T02:32:30Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #83 merged at `2026-07-26T02:30:28Z` as
+  `a54f13f891d472774f48cafb8798955bf8906ce4`; Vercel production completed at
+  `2026-07-26T02:31:19Z`. The deployed technical audit passed robots,
+  110 sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide
+  `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL
+  exclusions. The production locale matrix passed 19 expected HTTP 200 routes
+  and five expected hard 404 routes. The live English target retained its
+  exact self-canonical and `index, follow`; Open Graph and Article JSON-LD now
+  emit `datePublished: "2026-05-27"` and
+  `dateModified: "2026-07-24"`, with no `FAQPage`. This verifies the
+  technical correction only and does not establish search-performance lift.
+- Production slot: released after production verification.
+- Unperformed separately gated actions: no indexing request, GSC validation,
+  Reddit or other external post, OSS submission, paid acquisition, or
+  metric-definition change.
+- Result: pending
+- Decision: wait
+- Next step: run the experiment's original 7-day readout after
+  `2026-07-31T18:54:22Z`; apply the predeclared 20-impression minimum-exposure
+  guard without attributing any effect to this technical correction.
+<!-- EXPERIMENT-RECORD:END -->
