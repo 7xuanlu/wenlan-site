@@ -232,10 +232,10 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   claude-mem, stale-memory, and MCP shared-memory changes remain live,
   production-verified, and measuring; they do not consume the slot.
 - Website-affecting technical correction:
-  `TECH-2026-07-26-knowledge-base-published-date`, approved and in local
-  preparation. It consumes the single production slot until production
-  verification. `TECH-2026-07-24-localized-learn-breadcrumb` remains
-  production-verified and does not consume the slot.
+  `TECH-2026-07-26-knowledge-base-published-date`, production-verified and no
+  longer consuming the preparation slot.
+  `TECH-2026-07-24-localized-learn-breadcrumb` remains production-verified
+  and does not consume the slot.
 - The user approved Git push, merge, and production deploy for this LLM-wiki
   refresh at `2026-07-24T20:16:19Z`. Reddit or other external publication, OSS
   submission, paid acquisition, request indexing, GSC validation, and metric
@@ -292,18 +292,16 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Last production observation: `2026-07-25T02:15:21Z`; PR #80 merged as
-  `338f5a510d0294b69b7b691d82b6da9e42481a9b`, and deployed robots, 110
-  sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide
-  `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL
-  exclusions passed. The live context-loss route returned HTTP 200 with the
-  expected H1 and title, exact self-canonical, `index, follow`, five
-  maintained source links, Article and BreadcrumbList JSON-LD,
-  `datePublished: "2026-06-06"`, `dateModified: "2026-07-25"`, and no
-  `FAQPage`. The unsupported zh-TW and zh-CN routes returned 404 and were
-  absent from the sitemap. Complete desktop and mobile production renders had
-  no document overflow; browser warning/error logs were empty, and the first
-  FAQ opened with the expected answer.
+- Last production observation: `2026-07-26T02:32:30Z`; PR #83 merged as
+  `a54f13f891d472774f48cafb8798955bf8906ce4`, and Vercel production completed
+  at `2026-07-26T02:31:19Z`. Deployed robots, 110 sitemap URLs, 14 key pages,
+  six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects,
+  six bridge-host redirects, and legacy-URL exclusions passed. The production
+  locale matrix passed 19 expected HTTP 200 routes and five expected hard 404
+  routes. The live `/learn/ai-work-memory-vs-knowledge-base` route retained
+  its exact self-canonical and `index, follow`; Open Graph and Article JSON-LD
+  now emit the original `datePublished: "2026-05-27"` and refreshed
+  `dateModified: "2026-07-24"`, with no `FAQPage`.
 - Google Trends demand-discovery gate: resolved for the current decision at
   `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
   Seventeen timeline comparisons and nine related-query exports cover
@@ -673,8 +671,14 @@ The bounded correction adds `publishedAt: "2026-05-27"` while retaining
 visible copy, URL, canonical, hreflang, sitemap membership, locale
 availability, schema type, `FAQPage` policy, or experiment baseline. The user
 approved commit, push, PR, merge, deployment, and production verification at
-`2026-07-26T02:24:10Z`. Until production verification passes, this correction
-occupies the single production slot.
+`2026-07-26T02:24:10Z`.
+
+PR #83 merged at `2026-07-26T02:30:28Z` as
+`a54f13f891d472774f48cafb8798955bf8906ce4`; Vercel production completed at
+`2026-07-26T02:31:19Z`. The deployed technical audit, locale-route matrix,
+exact canonical, indexability, Open Graph dates, Article JSON-LD dates, and
+`FAQPage` absence passed at `2026-07-26T02:32:30Z`. The correction is
+production-verified and no longer consumes the production slot.
 
 `TECH-2026-07-24-localized-learn-breadcrumb` fixes a deterministic mismatch
 between localized Learn Article JSON-LD and the visible localized breadcrumb.
@@ -757,12 +761,12 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The production slot is occupied by the approved
-`TECH-2026-07-26-knowledge-base-published-date` correction until its live
-Article JSON-LD emits `datePublished: "2026-05-27"` and
-`dateModified: "2026-07-24"` and the deployed technical checks pass. After
-production verification, release the slot without changing the experiment's
-measurement schedule.
+The production slot is open. The
+`TECH-2026-07-26-knowledge-base-published-date` correction is
+production-verified: live Open Graph and Article JSON-LD preserve
+`datePublished: "2026-05-27"` and `dateModified: "2026-07-24"`, and the
+deployed technical and locale checks pass. Keep the related experiment's
+original measurement schedule.
 
 The context-loss diagnostic completed its 24-hour technical/evidence readout
 at `2026-07-26T02:15:47Z`; run its 7-day readout after
