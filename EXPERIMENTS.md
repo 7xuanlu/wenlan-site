@@ -1756,3 +1756,181 @@ increase for that experiment.
 - Unperformed gated actions: no indexing request, GSC validation, Reddit or other external post, OSS submission, paid acquisition, or metric-definition change
 - Next step: run the 24-hour technical/evidence readout after `2026-07-26T02:15:21Z`; this production-verified measurement cohort does not consume the production slot
 <!-- EXPERIMENT-RECORD:END -->
+
+### 2026-07-26T01:47:53Z — due 24-hour cohort evidence
+
+- Record type: campaign-observation
+- Scope: shared evidence for the seven 24-hour readouts due from the Learn-hub
+  refresh through the Basic Memory comparison refresh; the AI-agent-memory
+  types and context-loss cohorts were not yet due at this observation time
+- Search Console: the latest authenticated Friday weekly range remains
+  `2026-06-26..2026-07-23`, before these deployments. Property totals are
+  7 clicks and 310 impressions; visible-query totals are 1 click and
+  75 impressions; the query visibility gap is 6 clicks and 235 impressions.
+  This range cannot measure a post-deploy 24-hour cohort and is not treated as
+  zero post-deploy demand.
+- Vercel: the same complete range reports 1,402 visitors and 1,593 pageviews,
+  including 255 direct visitors and 319 direct pageviews. The existing
+  qualified-source allowlist sums to 1,149 visitors across separate referrer
+  rows and is not deduplicated. The range predates these deployments and
+  cannot be joined to a post-deploy route cohort.
+- GitHub: the read-only REST observation reports 47 total Wenlan stars.
+  Vercel custom events remain account-gated and no authenticated Umami
+  observation is available, so GitHub outbound and CTA are not reported.
+- Deployed technical SEO: robots passed; the live sitemap contains 110 URLs;
+  14 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence,
+  25 redirects, six bridge-host redirects, and legacy-URL exclusions passed.
+  The production locale matrix passed 19 expected HTTP 200 routes and five
+  expected hard 404 routes.
+- Live cohort routes: `/learn`,
+  `/learn/distilled-wiki-pages-ai-memory`, `/learn/mcp-memory-server`,
+  `/learn/cursor-claude-code-shared-memory`,
+  `/learn/review-before-trust-ai-memory`,
+  `/learn/wenlan-vs-claude-mem`,
+  `/learn/wenlan-vs-superlocal-memory`, and
+  `/learn/wenlan-vs-basic-memory` each returned HTTP 200 with the exact
+  self-canonical and `index, follow`. The Learn hub retained
+  `CollectionPage` and `BreadcrumbList`; every article retained `Article` and
+  `BreadcrumbList`; none emitted `FAQPage`. The MCP source retained exactly
+  one link to the shared-memory target.
+- Production render: fresh desktop and mobile evidence covered all eight
+  routes. Document and H1 scroll widths equaled their client widths on every
+  route; comparison tables remained within their rendered containers; browser
+  warning/error logs were empty. The in-app browser's long-page full-page
+  capture stitched repeated viewport segments on some routes, so those
+  artifacts are not interpreted as page regressions. Objective DOM geometry,
+  fresh viewport evidence, and prior/current desktop image comparisons remain
+  the render gate. The unchanged LLM-wiki desktop capture was pixel-identical
+  to its production reference; the stale-memory desktop comparison remained
+  96/100 similar with differences concentrated near the long-page bottom.
+  Evidence is under
+  `/tmp/wenlan-seo/visual-qa/2026-07-25-due-24h-readouts/`.
+- Interpretation: technical health passed. No SEO success, source-to-page
+  session, CTA, or causal effect is inferred at 24 hours.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-learn-hub-exposure-refresh at 2026-07-26T01:47:53Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-learn-hub-exposure-refresh
+- Observed at: 2026-07-26T01:47:53Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The shared batch observation above passed the live route, canonical, indexability, locale, schema, technical, and render gates. The latest authenticated GSC range ends before deployment; its target baseline remains 0 clicks, 71 impressions, and average position 15.6 for `/learn`. Same-range Vercel remains 98 visitors and 100 pageviews for `/learn`; GitHub reports 47 stars. No complete post-deploy search or visitor cohort is available.
+- Result: pending
+- Decision: wait
+- Next step: run the 7-day readout after `2026-07-31T19:18:03Z`; apply the 100-impression minimum-exposure guard and keep source-native metrics separate
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-llm-wiki-category-refresh at 2026-07-26T01:47:53Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-llm-wiki-category-refresh
+- Observed at: 2026-07-26T01:47:53Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The shared batch observation above passed the live route, reciprocal locale alternates, canonical, indexability, schema, technical, and render gates. The latest authenticated GSC range ends before deployment; its target baseline remains 0 clicks, 2 impressions, and average position 3.5 for `/learn/distilled-wiki-pages-ai-memory`. Same-range Vercel remains 4 visitors and 4 pageviews for the target; GitHub reports 47 stars. No complete post-deploy search or visitor cohort is available.
+- Result: pending
+- Decision: wait
+- Next step: run the 7-day readout after `2026-07-31T20:19:21Z`; apply the 10-impression minimum-exposure guard and keep the LLM-wiki category separate from source-backed trust mechanics
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-mcp-shared-memory-exposure at 2026-07-26T01:47:53Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-mcp-shared-memory-exposure
+- Observed at: 2026-07-26T01:47:53Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The shared batch observation above passed both live routes, the source's single visible target link, the target canonical and indexability, schema, locale, technical, and render gates. The latest authenticated GSC range ends before deployment; its target baseline remains 0 clicks, 8 impressions, and average position 20.8, while the source baseline remains 0 clicks, 2 impressions, and average position 5.5. Same-range Vercel remains 291 visitors and 293 pageviews for the source; the target is absent from the returned top-page export, so no zero is inferred. GitHub reports 47 stars. No source-to-target session or complete post-deploy cohort is available.
+- Result: pending
+- Decision: wait
+- Next step: run the 7-day readout after `2026-07-31T21:13:05Z`; apply the 10-impression target minimum and do not infer source-to-target attribution
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-stale-ai-memory-diagnostic at 2026-07-26T01:47:53Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-stale-ai-memory-diagnostic
+- Observed at: 2026-07-26T01:47:53Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The shared batch observation above passed the live route, canonical, indexability, schema, locale, technical, and render gates. The target remains absent from the latest authenticated GSC page export, whose range ends before deployment; absence is not reported as zero. Same-range Vercel remains 1 visitor and 1 pageview for the target; GitHub reports 47 stars. No complete post-deploy search or visitor cohort is available.
+- Result: pending
+- Decision: wait
+- Next step: run the 7-day readout after `2026-07-31T23:08:30Z`; apply the 5-impression minimum-exposure guard and keep failure-mode intent separate from generic AI memory
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-claude-mem-comparison-refresh at 2026-07-26T01:47:53Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-claude-mem-comparison-refresh
+- Observed at: 2026-07-26T01:47:53Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The shared batch observation above passed the live route, canonical, indexability, schema, locale, technical, and render gates. The latest authenticated GSC range ends before deployment; its target baseline remains 0 clicks, 7 impressions, and average position 14.4 for `/learn/wenlan-vs-claude-mem`. Same-range Vercel remains 1 visitor and 1 pageview for the target; GitHub reports 47 stars. No complete post-deploy search or visitor cohort is available.
+- Result: pending
+- Decision: wait
+- Next step: run the 7-day readout after `2026-07-31T23:34:19Z`; apply the 5-impression minimum-exposure guard and inspect comparison-intent overlap separately
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-superlocalmemory-comparison-refresh at 2026-07-26T01:47:53Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-superlocalmemory-comparison-refresh
+- Observed at: 2026-07-26T01:47:53Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The shared batch observation above passed the live route, canonical, indexability, schema, locale, technical, and render gates. The latest authenticated GSC range ends before deployment; its target baseline remains 0 clicks, 16 impressions, and average position 8.6 for `/learn/wenlan-vs-superlocal-memory`. Same-range Vercel remains 7 visitors and 7 pageviews for the target; GitHub reports 47 stars. No complete post-deploy search or visitor cohort is available.
+- Result: pending
+- Decision: wait
+- Next step: run the 7-day readout after `2026-08-01T00:05:36Z`; apply the 5-impression minimum-exposure guard and inspect local-first comparison overlap separately
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-25-basic-memory-comparison-refresh at 2026-07-26T01:47:53Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-25-basic-memory-comparison-refresh
+- Observed at: 2026-07-26T01:47:53Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The shared batch observation above passed the live route, canonical, indexability, schema, locale, technical, and render gates. The latest authenticated GSC range ends before deployment; its target baseline remains 1 click, 20 impressions, and average position 14.6. Joined visible rows remain 0 clicks and 5 impressions, so the page click remains unattributed. Same-range Vercel remains 5 visitors and 5 pageviews for the target; GitHub reports 47 stars. No complete post-deploy search or visitor cohort is available.
+- Result: pending
+- Decision: wait
+- Next step: run the 7-day readout after `2026-08-01T01:04:56Z`; apply the 5-impression minimum-exposure guard and keep the unattributed page click separate from visible product-name queries
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-07-26T01:51:16Z — next-candidate demand gate
+
+- Record type: campaign-observation
+- Decision: no new English, zh-TW, or zh-CN experiment currently passes all
+  five candidate gates
+- English: repeated agent-memory taxonomy, context-loss, stale-memory, MCP
+  shared-memory, LLM-wiki, Basic Memory, claude-mem, and SuperLocalMemory
+  demand is already covered by live measurement cohorts. The latest
+  authenticated GSC maps the visible Claude Code memory, MCP memory, and Basic
+  Memory terms to existing pages and supplies no new recurring non-brand
+  cluster with a clean coverage gap.
+- zh-TW: the modifier-qualified Obsidian, Claude Code, and MCP intent is
+  already covered by the live Obsidian localization. `AI 筆記` remains
+  adjacent NotebookLM, Notion, meeting-note, and note-tooling demand without a
+  clean Wenlan intent.
+- zh-CN: no inspectable Simplified Chinese demand observation supports a new
+  localized page; Taiwan or Worldwide evidence is not extrapolated.
+- Trends interpretation: the committed 53-row, Worldwide, English,
+  past-12-month `AI agent memory` versus `agent memory` series remains a
+  request-relative `0–100` category signal, not exact-query demand or search
+  volume.
+- Minimum missing evidence: a later authenticated GSC `query + page` window
+  must expose a recurring non-brand cluster that no existing page answers
+  cleanly. A localized candidate also needs matching locale-specific query,
+  Trends, or local-language community evidence.
+- Next step: wait for the next authenticated GSC window while keeping the
+  already scheduled technical/evidence readouts; do not manufacture an
+  experiment from generic Trends, Vercel totals, or incomplete cohort data
