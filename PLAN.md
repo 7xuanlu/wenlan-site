@@ -331,6 +331,18 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `wenlan-claude-memory-24h-readout` heartbeat can now be reused for the
   earlier Claude Code experiment's 7-day readout. The independent Friday
   `weekly-origin-seo-cleanup` automation remains ACTIVE and unchanged.
+- Seven additional 24-hour readouts were recorded at
+  `2026-07-26T01:47:53Z` for the Learn hub, LLM-wiki category, MCP
+  shared-memory exposure, stale-memory diagnostic, claude-mem comparison,
+  SuperLocalMemory comparison, and Basic Memory comparison. All eight live
+  routes in the batch returned HTTP 200 with exact self-canonicals and
+  `index, follow`; the deployed technical audit passed with 110 sitemap URLs,
+  and the production locale matrix passed 19 expected HTTP 200 routes and
+  five expected hard 404 routes. Fresh desktop/mobile DOM and render evidence
+  found no document or H1 overflow, no `FAQPage`, and no browser warning or
+  error. The latest authenticated GSC and complete Vercel range still ends on
+  `2026-07-23`, before these deployments, so every result remains pending
+  without a 24-hour SEO-success judgment. GitHub remains 47 stars.
 
 ### Fixed baseline and live provenance
 
@@ -691,19 +703,29 @@ prepared only if it passes the complete evidence and candidate gates.
 
 `EXP-2026-07-25-ai-agent-memory-types` is production-verified and measuring;
 run its 24-hour technical/evidence readout after `2026-07-26T01:49:40Z`
-without an SEO-success judgment. The Basic
-Memory comparison is production-verified and measuring; run its 24-hour
-technical/evidence readout after `2026-07-26T01:04:56Z`. The SuperLocalMemory comparison is also
-production-verified and measuring; run its 24-hour technical/evidence readout
-after `2026-07-26T00:05:36Z`. Waiting for either readout does not block
-preparation of another candidate that passes the full gate.
+without an SEO-success judgment. The existing same-task heartbeat remains
+scheduled after the later context-loss due time so both remaining 24-hour
+readouts can share one fresh production evidence pass.
 
-Run the Learn-hub 24-hour readout after `2026-07-25T19:18:03Z`, the LLM-wiki
-refresh 24-hour readout after `2026-07-25T20:19:21Z`, the MCP shared-memory
-exposure readout after `2026-07-25T21:13:05Z`, the stale-memory diagnostic
-readout after `2026-07-25T23:08:30Z`, and the claude-mem comparison readout
-after `2026-07-25T23:34:19Z`; keep earlier cohorts on schedule. No indexing
-or non-website publication is authorized.
+The Learn-hub, LLM-wiki, MCP shared-memory, stale-memory, claude-mem,
+SuperLocalMemory, and Basic Memory 24-hour readouts were completed at
+`2026-07-26T01:47:53Z`. Their production gates passed, but the latest
+authenticated GSC and complete Vercel range ends before deployment, so each
+result remains pending. Run their 7-day readouts after their predeclared
+times from `2026-07-31T19:18:03Z` through `2026-08-01T01:04:56Z`, using the
+Friday weekly evidence rather than duplicating its pipeline.
+
+No additional English, zh-TW, or zh-CN candidate passed all five gates in the
+latest Friday report or the bounded read-only demand-discovery follow-up.
+Validated English problem clusters are already covered by live measurement
+cohorts; zh-TW `AI 筆記` remains adjacent note-tooling demand without a clean
+Wenlan intent; and no Simplified Chinese observation supports another
+localized page. The minimum missing evidence is a later authenticated GSC
+`query + page` window with a recurring non-brand cluster that no current page
+answers cleanly; a localized candidate also needs matching locale-specific
+evidence. Do not start a new experiment from unsupported Trends, Vercel, or
+incomplete cohort signals. No indexing or non-website publication is
+authorized.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.
