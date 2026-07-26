@@ -232,6 +232,9 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   claude-mem, stale-memory, and MCP shared-memory changes remain live,
   production-verified, and measuring; they do not consume the slot.
 - Website-affecting technical correction:
+  `TECH-2026-07-26-provider-neutral-cta-tracking`, active in local
+  preparation and consuming the single production slot until it is either
+  rejected or production-verified.
   `TECH-2026-07-26-knowledge-base-published-date`, production-verified and no
   longer consuming the preparation slot.
   `TECH-2026-07-24-localized-learn-breadcrumb` remains production-verified
@@ -298,6 +301,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
+- Latest deployment observation: PR #85 merged at `2026-07-26T02:51:33Z` as
+  `c98625bd6f27bc19bd4244ab7b742c1449402395`; Vercel production completed at
+  `2026-07-26T02:52:20Z`. It added the authenticated GSC query-plus-page
+  export and matching Goal observation, not a content experiment. The
+  deployed technical audit remained green with 110 sitemap URLs, 14 key
+  pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+  redirects, six bridge-host redirects, and legacy-URL exclusions.
 - Last production observation: `2026-07-26T02:32:30Z`; PR #83 merged as
   `a54f13f891d472774f48cafb8798955bf8906ce4`, and Vercel production completed
   at `2026-07-26T02:31:19Z`. Deployed robots, 110 sitemap URLs, 14 key pages,
@@ -685,6 +695,33 @@ not consume the production slot.
 
 ### Current technical correction
 
+`TECH-2026-07-26-provider-neutral-cta-tracking` is active in local
+preparation. The live site already loads the configured Umami Cloud tracker,
+but `TrackedLink` sends custom interactions only to Vercel Analytics. Vercel
+custom-event reporting is account-plan-gated, so no reliable
+`github_outbound` observation or diagnostic CTA baseline exists.
+
+The bounded correction implements the provider-neutral contract already
+approved in
+`docs/seo-audits/2026-07-18-exposure-first-growth-design.md`: Vercel remains
+the pageview source, while configured Umami becomes the single custom-event
+sink for `github_outbound`, `get_started_click`, `learn_article_click`, and
+`setup_path_click`. Event properties are limited to placement, locale,
+context, and a fixed destination category. The Umami script is restricted to
+`wenlan.app`, excludes URL search parameters, and respects Do Not Track.
+`/docs/data-and-privacy` separately discloses public website analytics without
+changing installed Wenlan's no-product-telemetry default.
+
+This is a measurement correction, not an SEO-success or star-attribution
+experiment. It changes no metric definition, URL, canonical, sitemap route,
+locale availability, structured-data type, or `FAQPage` policy. The complete
+evidence, privacy boundary, and verification contract are in
+`docs/seo-audits/2026-07-25-cta-measurement-prelaunch.md`. Local preparation
+is complete. The user approved commit, Git push, PR creation, merge,
+automatic Vercel deployment, and production verification at
+`2026-07-26T03:07:04Z`; synthetic production events and authenticated
+production event reads remain separately unavailable or prohibited.
+
 `TECH-2026-07-26-knowledge-base-published-date` corrects the live Article
 JSON-LD for `/learn/ai-work-memory-vs-knowledge-base`. The existing indexed
 page first shipped with the article registry's `2026-05-27` date, but the
@@ -789,7 +826,15 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The production slot is open. The
+The production slot is occupied by the locally prepared
+`TECH-2026-07-26-provider-neutral-cta-tracking` correction. The user approved
+commit, Git push, PR creation, merge, automatic Vercel deployment, and
+production verification at `2026-07-26T03:07:04Z`. Finish its independent
+review and final verification gates, then publish the approved correction.
+Do not generate a synthetic production event; actual Umami totals remain
+manual/account-gated until authenticated access is available.
+
+The
 `TECH-2026-07-26-knowledge-base-published-date` correction is
 production-verified: live Open Graph and Article JSON-LD preserve
 `datePublished: "2026-05-27"` and `dateModified: "2026-07-24"`, and the

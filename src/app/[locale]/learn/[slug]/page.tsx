@@ -368,7 +368,7 @@ export default async function LocalizedLearnSlugPage({
                   <TrackedLocalizedLink
                     href="/docs/get-started"
                     locale={resolvedLocale}
-                    eventName="Get Started Click"
+                    eventName="get_started_click"
                     placement="learn-article"
                     context={article.category === "Comparisons" ? "comparisons" : article.category === "Workflows" ? "workflows" : "concepts"}
                     className="rounded-xl bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] transition-all hover:shadow-[0_0_28px_var(--o-glow-warm)]"
@@ -377,7 +377,7 @@ export default async function LocalizedLearnSlugPage({
                   </TrackedLocalizedLink>
                   <TrackedLink
                     href="https://github.com/7xuanlu/wenlan"
-                    eventName="GitHub Click"
+                    eventName="github_outbound"
                     placement="learn-article"
                     locale={resolvedLocale}
                     context={article.category === "Comparisons" ? "comparisons" : article.category === "Workflows" ? "workflows" : "concepts"}

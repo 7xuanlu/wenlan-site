@@ -381,7 +381,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   <TrackedLink
                     href="/docs/get-started"
-                    eventName="Get Started Click"
+                    eventName="get_started_click"
                     placement="learn-article"
                     locale="en"
                     context={article.category === "Comparisons" ? "comparisons" : article.category === "Workflows" ? "workflows" : "concepts"}
@@ -391,7 +391,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                   </TrackedLink>
                   <TrackedLink
                     href="https://github.com/7xuanlu/wenlan"
-                    eventName="GitHub Click"
+                    eventName="github_outbound"
                     placement="learn-article"
                     locale="en"
                     context={article.category === "Comparisons" ? "comparisons" : article.category === "Workflows" ? "workflows" : "concepts"}

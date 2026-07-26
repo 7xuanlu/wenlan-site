@@ -2719,12 +2719,13 @@ export const docPages: DocPage[] = [
       "local-first privacy",
       "deletion controls",
     ],
-    updatedAt: DOCS_UPDATED_AT,
+    updatedAt: "2026-07-25",
     author: DEFAULT_AUTHOR,
-    readingTime: "5 min read",
+    readingTime: "6 min read",
     summary: [
       "Quick answer: Wenlan's daemon, database, pages, sessions, and readable artifacts live locally by default.",
       "Connected AI clients may still send prompts to their model providers; Wenlan keeps its own memory store local, inspectable, and removable.",
+      "The public wenlan.app website uses separate privacy-limited analytics; installed Wenlan still has no cloud sync or product telemetry by default.",
     ],
     sections: [
       {
@@ -2732,6 +2733,14 @@ export const docPages: DocPage[] = [
         body: [
           "Wenlan's durable memory store, daemon database, Markdown pages, session handoffs, and project status files live on your machine by default.",
           "There is no Wenlan cloud sync or telemetry path by default. Connected AI clients may still send prompts to their own providers, so treat memory content as sensitive project data.",
+        ],
+      },
+      {
+        heading: "Public website analytics",
+        body: [
+          "The public wenlan.app website is separate from the installed Wenlan runtime. It uses Vercel Web Analytics for aggregate website visits and a configured Umami tracker for bounded GitHub, Get Started, Learn article, and setup-path click events.",
+          "The Umami tracker is restricted to wenlan.app, excludes URL search parameters, and respects the browser's Do Not Track setting. Custom event properties are limited to placement, locale, content context, and a fixed destination category. They never include memory content, code, commands, user paths, search terms, names, email addresses, or stable account identifiers.",
+          "This website measurement does not add cloud sync or telemetry to installed Wenlan.",
         ],
       },
       {

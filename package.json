@@ -19,7 +19,7 @@
     "test:goal": "node --test scripts/seo-goal-check.test.mjs",
     "test:i18n": "node --import tsx --test scripts/i18n-contract.test.mjs",
     "i18n:technical:built": "node scripts/i18n-built-check.mjs",
-    "test:seo": "node --test scripts/brand-contract.test.mjs scripts/app-contract.test.mjs scripts/seo-goal-check.test.mjs scripts/seo-weekly.test.mjs",
+    "test:seo": "node --import tsx --test scripts/analytics-contract.test.mjs scripts/brand-contract.test.mjs scripts/app-contract.test.mjs scripts/seo-goal-check.test.mjs scripts/seo-weekly.test.mjs",
     "start": "next start",
     "lint": "pnpm exec tsc --noEmit --incremental false"
   },

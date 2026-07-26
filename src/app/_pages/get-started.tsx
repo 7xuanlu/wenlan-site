@@ -147,7 +147,7 @@ export function GetStartedPage({ locale }: { locale: Locale }) {
                             key={cta.id}
                             href={cta.href}
                             locale={locale}
-                            eventName="Setup Path Click"
+                            eventName="setup_path_click"
                             placement="docs-get-started"
                             context="setup"
                             className={

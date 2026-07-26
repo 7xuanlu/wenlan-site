@@ -108,7 +108,7 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
               <TrackedLocalizedLink
                 key={article.slug}
                 href={`/learn/${article.slug}`}
-                eventName="Learn Article Click"
+                eventName="learn_article_click"
                 placement="learn-grid"
                 locale={locale}
                 context="concepts"
@@ -148,7 +148,7 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <TrackedLocalizedLink
               href="/docs/get-started"
-              eventName="Get Started Click"
+              eventName="get_started_click"
               placement="learn-footer"
               locale={locale}
               context="setup"
@@ -158,7 +158,7 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
             </TrackedLocalizedLink>
             <TrackedLink
               href="https://github.com/7xuanlu/wenlan"
-              eventName="GitHub Click"
+              eventName="github_outbound"
               placement="learn-footer"
               locale={locale}
               context="setup"

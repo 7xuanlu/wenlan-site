@@ -56,6 +56,9 @@ export default function RootDocument({
             defer
             src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL || "https://cloud.umami.is/script.js"}
             data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+            data-domains="wenlan.app"
+            data-exclude-search="true"
+            data-do-not-track="true"
           />
         )}
         <script

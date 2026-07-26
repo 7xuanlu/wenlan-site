@@ -383,7 +383,7 @@ function HomeCta({
     return (
       <TrackedLink
         href={link.href}
-        eventName="GitHub Click"
+        eventName="github_outbound"
         placement={placement}
         locale={locale}
         context="home"
@@ -399,7 +399,7 @@ function HomeCta({
   return (
     <TrackedLocalizedLink
       href={link.href}
-      eventName="Get Started Click"
+      eventName="get_started_click"
       placement={placement}
       locale={locale}
       context="home"
