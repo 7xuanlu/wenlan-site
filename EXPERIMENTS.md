@@ -2630,3 +2630,42 @@ increase for that experiment.
 - Next step: re-run the frozen Goal and release gates, publish the scoped diff,
   wait for required GitHub checks, merge, and verify the exact production
   commit without making an SEO-success or causal claim.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-27-llm-wiki-implementation-guide-refresh production verification at 2026-07-27T05:38:39Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-27-llm-wiki-implementation-guide-refresh
+- Observed at: 2026-07-27T05:38:39Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #89 merged as the exact commit recorded below; its Vercel
+  status completed successfully, the live target and five inbound paths
+  matched the approved change, and the deployed technical audit passed.
+- Publication: PR #89 merged at `2026-07-27T05:28:59Z` as
+  `a8698b1629e88e4f48949fbc3ec96046e4e39f81`; Vercel production completed at
+  `2026-07-27T05:29:47Z`.
+- Live evidence: the English target returned its exact self-canonical, H1,
+  `datePublished: "2026-06-24"`, `dateModified: "2026-07-27"`, five-minute
+  protocol, verification section, failure repairs, and neutral adjacent-system
+  comparison. Each of the five contextual source pages exposed the exact
+  inbound target link.
+- Technical evidence: the deployed audit passed robots, 110 sitemap URLs,
+  14 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence,
+  25 redirects, six bridge-host redirects, and legacy-URL exclusions.
+- Locale boundary: no Mandarin content or locale availability changed. The
+  existing zh-TW and zh-CN target routes remain outside this English refresh's
+  content attribution.
+- Production slot: released after production verification.
+- Metric interpretation: publication and technical integrity are verified.
+  No SEO lift, exact-query ranking, source-to-page session, CTA conversion,
+  star attribution, setup success, or causal result is inferred.
+- Unperformed separately gated actions: no indexing request, GSC validation,
+  Reddit or other external post, OSS submission, paid acquisition, synthetic
+  analytics event, account mutation, or metric-definition change.
+- Result: pending
+- Decision: wait
+- Next step: run the 24-hour technical/evidence readout after
+  `2026-07-28T05:29:47Z`, keeping page-level GSC data, joined visible queries,
+  Vercel, Umami when authenticated, and GitHub stars in their native units.
+<!-- EXPERIMENT-RECORD:END -->

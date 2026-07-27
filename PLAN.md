@@ -226,13 +226,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-27-llm-wiki-implementation-guide-refresh`, locally verified
-  and active while awaiting separate publication approval, consuming the
-  single production slot. The prior link-only proposal was stopped before
-  publication and its useful links were folded into this larger, separately
-  attributable refresh. The context-loss, AI agent memory types, Basic
-  Memory, SuperLocalMemory, claude-mem, stale-memory, and MCP shared-memory
-  changes remain live,
+  `EXP-2026-07-27-llm-wiki-implementation-guide-refresh`, live,
+  production-verified, and measuring. It no longer consumes the single
+  production slot. The prior link-only proposal was stopped before publication
+  and its useful links were folded into this larger, separately attributable
+  refresh. The context-loss, AI agent memory types, Basic Memory,
+  SuperLocalMemory, claude-mem, stale-memory, and MCP shared-memory changes
+  remain live,
   production-verified, and measuring; they do not consume the slot.
 - Website-affecting technical correction:
   `TECH-2026-07-26-source-release-boundary` is production-verified and no
@@ -305,14 +305,14 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Latest deployment observation: PR #88 merged at
-  `2026-07-27T04:03:09Z` as
-  `f8ca1a975f3c567de934dd757023b0b199e61e15`; Vercel production completed at
-  `2026-07-27T04:03:56Z`. The deployed audit passed 110 sitemap URLs, 14 key
+- Latest deployment observation: PR #89 merged at
+  `2026-07-27T05:28:59Z` as
+  `a8698b1629e88e4f48949fbc3ec96046e4e39f81`; Vercel production completed at
+  `2026-07-27T05:29:47Z`. The deployed audit passed 110 sitemap URLs, 14 key
   pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
-  redirects, six bridge-host redirects, and legacy-URL exclusions. English,
-  zh-TW, and zh-CN homepages returned 200 with the v0.15.0 copy and all four
-  exact asset links; all four GitHub release assets returned 200.
+  redirects, six bridge-host redirects, and legacy-URL exclusions. The live
+  LLM-wiki target retained its exact canonical, original and modified dates,
+  implementation-guide sections, and five contextual inbound links.
 - Latest source-release observation: refreshed at
   `2026-07-27T03:02:34Z`. Wenlan `v0.15.0` was published at
   `2026-07-26T05:13:54Z` with native Windows x64, macOS Apple silicon, Linux
@@ -570,16 +570,17 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-27-llm-wiki-implementation-guide-refresh` is active in local
-preparation and consumes the single production slot. It keeps the indexed
-English `/learn/distilled-wiki-pages-ai-memory` canonical URL and original
-publication date while turning the page into a standalone implementation
-guide: a generic definition, four-plane architecture, five-minute protocol,
-observable success checks, a source-to-page evidence trail, recurring failure
-modes and repairs, neutral RAG/Obsidian/agent-memory boundaries, and Wenlan's
-maintained first-party mapping. Five relevant English pages add contextual
-links into the refreshed guide. Locale availability, sitemap membership,
-schema type, CTA destination, and visible-only FAQ policy remain unchanged.
+`EXP-2026-07-27-llm-wiki-implementation-guide-refresh` is live,
+production-verified, and measuring. It no longer consumes the single
+production slot. It keeps the indexed English
+`/learn/distilled-wiki-pages-ai-memory` canonical URL and original publication
+date while turning the page into a standalone implementation guide: a generic
+definition, four-plane architecture, five-minute protocol, observable success
+checks, a source-to-page evidence trail, recurring failure modes and repairs,
+neutral RAG/Obsidian/agent-memory boundaries, and Wenlan's maintained
+first-party mapping. Five relevant English pages add contextual links into the
+refreshed guide. Locale availability, sitemap membership, schema type, CTA
+destination, and visible-only FAQ policy remain unchanged.
 
 The authenticated `2026-06-27..2026-07-24` baseline keeps source-native units
 separate: GSC property totals are 7 clicks and 329 impressions; visible-query
@@ -610,6 +611,14 @@ breakpoints plus the existing zh-TW and zh-CN target routes on mobile. It
 found no document/H1 overflow, console warning/error, `FAQPage`, canonical or
 schema regression; all five new contextual links navigated to the exact
 target, and the visible FAQ opened correctly.
+
+PR #89 merged at `2026-07-27T05:28:59Z` as
+`a8698b1629e88e4f48949fbc3ec96046e4e39f81`; Vercel production completed at
+`2026-07-27T05:29:47Z`. At `2026-07-27T05:38:39Z`, the exact live title,
+canonical, H1, original and modified dates, implementation-guide sections,
+five inbound paths, and deployed technical SEO audit passed. This verifies
+publication and technical integrity only, not SEO lift, query ranking, CTA
+conversion, star attribution, or causality.
 
 ### Measuring cohorts
 
@@ -931,13 +940,13 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The production slot is occupied by
-`EXP-2026-07-27-llm-wiki-implementation-guide-refresh`, which is locally
-verified and waiting at the publication boundary. Present the exact diff and
-verification evidence for separate push, PR, merge, and deployment approval.
-Do not add a new URL or translate the new framing without locale-specific
-evidence. Do not generate a synthetic production event; actual Umami totals
-remain manual/account-gated.
+The production slot is released. Run the 24-hour technical/evidence readout
+for `EXP-2026-07-27-llm-wiki-implementation-guide-refresh` after
+`2026-07-28T05:29:47Z`; do not infer SEO success from that readout. Keep the
+English target's page aggregate and joined visible queries separate. Do not
+add a new URL or translate the new framing without locale-specific evidence.
+Do not generate a synthetic production event; actual Umami totals remain
+manual/account-gated.
 
 The
 `TECH-2026-07-26-knowledge-base-published-date` correction is
