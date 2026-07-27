@@ -15,6 +15,7 @@ export const SITE_URL = "https://wenlan.app";
 export const CORE_TRANSLATED_PATHS = [
   "/",
   "/about",
+  "/download",
   "/docs",
   "/docs/get-started",
   "/learn",

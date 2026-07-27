@@ -226,14 +226,18 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-27-llm-wiki-implementation-guide-refresh`, live,
-  production-verified, and measuring. It no longer consumes the single
-  production slot. The prior link-only proposal was stopped before publication
-  and its useful links were folded into this larger, separately attributable
-  refresh. The context-loss, AI agent memory types, Basic Memory,
-  SuperLocalMemory, claude-mem, stale-memory, and MCP shared-memory changes
-  remain live,
-  production-verified, and measuring; they do not consume the slot.
+  `EXP-2026-07-27-download-information-architecture`, active in local
+  preparation and consuming the single production slot. The user approved the
+  preserve-redesign direction at `2026-07-27T06:06:34Z`: keep one
+  operating-system recommendation on the homepage and move the complete
+  platform matrix and setup guidance to a localized `/download` route. At
+  `2026-07-27T06:58:14Z`, the user approved commit, Git push, and PR creation
+  for this exact locally verified diff. Merge, deployment, request indexing,
+  GSC validation, and other external publication remain separately gated.
+  The LLM-wiki implementation guide, context-loss, AI agent memory types,
+  Basic Memory, SuperLocalMemory, claude-mem, stale-memory, and MCP
+  shared-memory changes remain live, production-verified, and measuring; they
+  do not consume the slot.
 - Website-affecting technical correction:
   `TECH-2026-07-26-source-release-boundary` is production-verified and no
   longer consumes the single production slot.
@@ -294,7 +298,7 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 13.
+- Active experiments: 14.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -570,57 +574,47 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-27-llm-wiki-implementation-guide-refresh` is live,
-production-verified, and measuring. It no longer consumes the single
-production slot. It keeps the indexed English
-`/learn/distilled-wiki-pages-ai-memory` canonical URL and original publication
-date while turning the page into a standalone implementation guide: a generic
-definition, four-plane architecture, five-minute protocol, observable success
-checks, a source-to-page evidence trail, recurring failure modes and repairs,
-neutral RAG/Obsidian/agent-memory boundaries, and Wenlan's maintained
-first-party mapping. Five relevant English pages add contextual links into the
-refreshed guide. Locale availability, sitemap membership, schema type, CTA
-destination, and visible-only FAQ policy remain unchanged.
+`EXP-2026-07-27-download-information-architecture` is active in local
+preparation and consumes the single production slot. It is a bounded
+conversion-surface redesign, not a search-article experiment.
 
-The authenticated `2026-06-27..2026-07-24` baseline keeps source-native units
-separate: GSC property totals are 7 clicks and 329 impressions; visible-query
-totals are 1 click and 81 impressions, leaving a 6-click and 248-impression
-visibility gap. The target LLM-wiki page has 0 clicks, 2 impressions, and
-page-average position 3.5, but both query impressions are privacy-hidden.
-The only visible `llm wiki 2.0` row has 1 impression at position 13.0 and maps
-to `/zh-TW`, so known qualified query-to-target impressions are 0. Vercel
-separately reports 1,406 visitors and 1,612 pageviews property-wide; GitHub
-reports 47 stars. The corrected evidence, demand boundary, candidate gate,
-Reddit failure modes, SERP observation, and predeclared readouts are in
-`docs/seo-audits/2026-07-27-llm-wiki-implementation-guide-prelaunch.md`.
+The live homepage audit at `2026-07-27` found that the complete download
+matrix consumes about 960 CSS pixels on the inspected desktop viewport and
+about 1,739 to 1,834 CSS pixels on the inspected mobile viewports. The
+`#download` anchor did not expose a download action in the first mobile
+viewport. The current server component also promotes Windows structurally
+before it knows the visitor's system, while three other visible buttons share
+the generic label `Download` or `下載`.
 
-The user approved this corrected local refresh in the current task after the
-query-to-page defect and stronger page design were presented. At
-`2026-07-27T05:26:43Z`, the user approved commit, Git push, ready PR creation,
-merge, the existing automatic Vercel deployment triggered by merge, and
-read-only production verification. Indexing requests, GSC validation, external
-publication, synthetic analytics events, paid acquisition, OSS submission,
-and metric changes remain unapproved for this separately attributable
-experiment.
+The approved local change keeps `#download`, release assets, release truth,
+analytics event names, and English, zh-TW, and zh-CN coverage. The homepage
+will render one compact browser-recommended platform surface plus a localized
+link to a new `/download` hub. The hub will expose all four published runtime
+archives, platform-specific setup steps, release notes, maintained setup
+guidance, and the `wenlan doctor` verification path. Browser detection is only
+a recommendation: all platform and architecture details remain explicit, and
+an uncertain match routes to the complete download hub rather than silently
+choosing an archive.
 
-Local verification completed at `2026-07-27T04:59:46Z`: the focused contract
-ran RED then GREEN; Goal, 189 SEO, 53 i18n, TypeScript, production build,
-compiled technical SEO, and runtime locale gates pass. Fresh rendered QA
-covered the six English direct content/link surfaces at desktop and mobile
-breakpoints plus the existing zh-TW and zh-CN target routes on mobile. It
-found no document/H1 overflow, console warning/error, `FAQPage`, canonical or
-schema regression; all five new contextual links navigated to the exact
-target, and the visible FAQ opened correctly.
-
-PR #89 merged at `2026-07-27T05:28:59Z` as
-`a8698b1629e88e4f48949fbc3ec96046e4e39f81`; Vercel production completed at
-`2026-07-27T05:29:47Z`. At `2026-07-27T05:38:39Z`, the exact live title,
-canonical, H1, original and modified dates, implementation-guide sections,
-five inbound paths, and deployed technical SEO audit passed. This verifies
-publication and technical integrity only, not SEO lift, query ranking, CTA
-conversion, star attribution, or causality.
+The authenticated measurement baseline remains source-separated: GSC property
+totals are 7 clicks and 329 impressions; visible-query totals are 1 click and
+81 impressions; Vercel reports 1,406 visitors and 1,612 pageviews; GitHub
+reports 47 stars. No reliable authenticated Umami CTA baseline is available,
+so no conversion-rate improvement or causal outcome is preclaimed. The full
+scope, acceptance criteria, baseline, and predeclared readouts are in
+`docs/seo-audits/2026-07-27-download-information-architecture-prelaunch.md`.
 
 ### Measuring cohorts
+
+`EXP-2026-07-27-llm-wiki-implementation-guide-refresh` is live,
+production-verified, and measuring. It keeps the indexed English
+`/learn/distilled-wiki-pages-ai-memory` canonical URL and original publication
+date while adding a standalone implementation guide and five contextual
+inbound links. PR #89 merged at `2026-07-27T05:28:59Z`; Vercel production
+completed at `2026-07-27T05:29:47Z`. Its 24-hour readout remains due after
+`2026-07-28T05:29:47Z`. Indexing requests, GSC validation, external
+publication, synthetic analytics events, paid acquisition, OSS submission,
+and metric changes remain unapproved.
 
 `EXP-2026-07-25-context-loss-diagnostic-refresh` is live,
 production-verified, and measuring. It refreshes the existing English
@@ -940,13 +934,20 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The production slot is released. Run the 24-hour technical/evidence readout
-for `EXP-2026-07-27-llm-wiki-implementation-guide-refresh` after
+Publish the exact locally verified
+`EXP-2026-07-27-download-information-architecture` diff to an isolated Git
+branch and draft PR. Keep `#download` stable; preserve the reciprocal English,
+zh-TW, and zh-CN `/download` routes, four immutable release assets, bounded
+analytics events, and rendered mobile evidence. Stop before merge, deployment,
+request indexing, GSC validation, synthetic analytics events, or other
+external publication.
+
+Run the 24-hour technical/evidence readout for
+`EXP-2026-07-27-llm-wiki-implementation-guide-refresh` after
 `2026-07-28T05:29:47Z`; do not infer SEO success from that readout. Keep the
 English target's page aggregate and joined visible queries separate. Do not
-add a new URL or translate the new framing without locale-specific evidence.
-Do not generate a synthetic production event; actual Umami totals remain
-manual/account-gated.
+add a new search URL or translate the new framing without locale-specific
+evidence. Actual Umami totals remain manual/account-gated.
 
 The
 `TECH-2026-07-26-knowledge-base-published-date` correction is

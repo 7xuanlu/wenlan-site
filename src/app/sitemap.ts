@@ -12,6 +12,7 @@ import { docPages, docUrl } from "./(en)/docs/docs";
 import { articles, articleUrl } from "./(en)/learn/articles";
 
 const ABOUT_UPDATED_AT = "2026-07-26";
+const DOWNLOAD_UPDATED_AT = "2026-07-27";
 const GET_STARTED_UPDATED_AT = "2026-07-26";
 
 type CoreTranslatedPath = (typeof CORE_TRANSLATED_PATHS)[number];
@@ -53,6 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     latestArticle,
     latestDoc,
     ABOUT_UPDATED_AT,
+    DOWNLOAD_UPDATED_AT,
     GET_STARTED_UPDATED_AT,
   ]);
 
@@ -66,6 +68,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: latestSiteUpdate,
       changeFrequency: "weekly",
       priority: 1,
+    },
+    {
+      pathname: "/download",
+      lastModified: new Date(DOWNLOAD_UPDATED_AT),
+      changeFrequency: "weekly",
+      priority: 0.95,
     },
     {
       pathname: "/docs",

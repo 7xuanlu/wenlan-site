@@ -63,3 +63,38 @@ test("TrackedLink click remains safe when Umami is unavailable", (t) => {
 
   assert.doesNotThrow(() => link.props.onClick());
 });
+
+test("download-page placement preserves the bounded outbound event shape", (t) => {
+  const previousWindow = globalThis.window;
+  const calls = [];
+  globalThis.window = {
+    umami: {
+      track: (...args) => calls.push(args),
+    },
+  };
+  t.after(() => {
+    globalThis.window = previousWindow;
+  });
+
+  const link = TrackedLink({
+    href: "https://github.com/7xuanlu/wenlan/releases/download/v0.15.0/example.zip",
+    eventName: "github_outbound",
+    placement: "download-page",
+    locale: "zh-TW",
+    context: "setup",
+    children: "下載 Windows x64",
+  });
+
+  link.props.onClick();
+  assert.deepEqual(calls, [
+    [
+      "github_outbound",
+      {
+        placement: "download-page",
+        locale: "zh-TW",
+        context: "setup",
+        destination_category: "github",
+      },
+    ],
+  ]);
+});

@@ -174,6 +174,9 @@ const requiredLocalizedBuiltHtmlPages = requiredLocalizedLearnPaths.map((path) =
 }));
 const requiredBuiltSitemapLocs = [
   "https://wenlan.app",
+  "https://wenlan.app/download",
+  "https://wenlan.app/zh-TW/download",
+  "https://wenlan.app/zh-CN/download",
   "https://wenlan.app/learn",
   "https://wenlan.app/learn/claude-code-memory",
   "https://wenlan.app/learn/mcp-memory-server",
@@ -186,6 +189,17 @@ const requiredBuiltSitemapLocs = [
 ];
 const requiredBuiltHtmlPages = [
   { path: "index.html", canonical: "https://wenlan.app", type: "SoftwareApplication" },
+  { path: "download.html", canonical: "https://wenlan.app/download", type: "WebPage" },
+  {
+    path: "zh-TW/download.html",
+    canonical: "https://wenlan.app/zh-TW/download",
+    type: "WebPage",
+  },
+  {
+    path: "zh-CN/download.html",
+    canonical: "https://wenlan.app/zh-CN/download",
+    type: "WebPage",
+  },
   { path: "learn.html", canonical: "https://wenlan.app/learn", type: "CollectionPage" },
   {
     path: "learn/claude-code-memory.html",
@@ -239,6 +253,9 @@ const requiredBuiltHtmlPages = [
 const allowedRobotsTxt = "User-agent: *\nAllow: /\nSitemap: https://wenlan.app/sitemap.xml\n";
 const requiredDeployedUrls = [
   "/",
+  "/download",
+  "/zh-TW/download",
+  "/zh-CN/download",
   "/learn",
   "/learn/claude-code-memory",
   "/learn/mcp-memory-server",
@@ -305,6 +322,8 @@ function deployedHtmlPage(path, overrides = {}) {
     overrides.type ??
     (path === "/"
       ? "SoftwareApplication"
+      : path === "/download" || path.endsWith("/download")
+        ? "WebPage"
       : path === "/learn"
         ? "CollectionPage"
         : path === "/docs/configuration" || path === "/docs/product-matrix"
@@ -1330,8 +1349,8 @@ test("deployed technical SEO checker verifies robots, sitemap, key pages, utilit
     );
 
     assert.match(stdout, /robots ok/);
-    assert.match(stdout, /sitemap locs ok: 14/);
-    assert.match(stdout, /key pages ok: 14/);
+    assert.match(stdout, /sitemap locs ok: 17/);
+    assert.match(stdout, /key pages ok: 17/);
     assert.match(stdout, /utility noindex headers ok: 6/);
     assert.match(stdout, /redirects ok: 25/);
     assert.match(stdout, /bridge host redirects ok: 6/);
@@ -1422,7 +1441,7 @@ test("deployed technical SEO checker does not require unshipped local internal l
         { cwd: repoRoot },
       );
 
-      assert.match(stdout, /key pages ok: 14/);
+      assert.match(stdout, /key pages ok: 17/);
     },
   );
 });
@@ -1908,9 +1927,9 @@ test("built technical SEO checker verifies compiled redirects, headers, and site
     assert.match(stdout, /redirects ok: 26/);
     assert.match(stdout, /global 404 ok/);
     assert.match(stdout, /noindex headers ok: 7/);
-    assert.match(stdout, /sitemap required locs ok: 14/);
-    assert.match(stdout, /html page checks ok: 14/);
-    assert.match(stdout, /all html FAQPage absent ok: 15/);
+    assert.match(stdout, /sitemap required locs ok: 17/);
+    assert.match(stdout, /html page checks ok: 17/);
+    assert.match(stdout, /all html FAQPage absent ok: 18/);
     assert.match(stdout, /old URLs absent from sitemap/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });

@@ -1004,6 +1004,35 @@ test("public current-release surfaces track the authoritative Wenlan release", a
   );
 });
 
+test("download information architecture keeps the homepage compact and the full matrix on a localized hub", async () => {
+  const homeDownload = await readRepo("src/components/home/download.tsx");
+  const recommendation = await readRepo(
+    "src/components/home/download-recommendation.tsx",
+  );
+  const downloadPage = await readRepo("src/app/_pages/download.tsx");
+  const englishRoute = await readRepo("src/app/(en)/download/page.tsx");
+  const localizedRoute = await readRepo("src/app/[locale]/download/page.tsx");
+  const routing = await readRepo("src/i18n/routing.ts");
+  const sitemap = await readRepo("src/app/sitemap.ts");
+
+  assert.match(homeDownload, /id="download"/);
+  assert.match(homeDownload, /<DownloadRecommendation/);
+  assert.match(homeDownload, /href="\/download"/);
+  assert.doesNotMatch(homeDownload, /WENLAN_RELEASE\.assets\.map/);
+  assert.match(recommendation, /^"use client";/);
+  assert.match(recommendation, /recommendedReleaseAssetId\(navigator\.userAgent\)/);
+  assert.match(recommendation, /placement="home-download"/);
+  assert.match(downloadPage, /WENLAN_RELEASE\.assets\.map/);
+  assert.match(downloadPage, /placement="download-page"/);
+  assert.match(downloadPage, /"@type": "BreadcrumbList"/);
+  assert.match(downloadPage, /wenlan doctor/);
+  assert.match(englishRoute, /buildPageMetadata\(\s*"en",\s*"\/download"/s);
+  assert.match(localizedRoute, /resolveLocalizedRouteLocale/);
+  assert.match(localizedRoute, /buildPageMetadata\(\s*resolvedLocale,\s*"\/download"/s);
+  assert.match(routing, /CORE_TRANSLATED_PATHS[\s\S]*"\/download"/);
+  assert.match(sitemap, /pathname: "\/download"/);
+});
+
 test("public docs expose a product readiness matrix for users and platform boundaries", async () => {
   const docs = await readRepo("src/app/docs/docs.ts");
   const llms = await readRepo("public/llms.txt");

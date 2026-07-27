@@ -374,6 +374,7 @@ test("English app routes live under the unprefixed route group", async () => {
   for (const path of [
     "src/app/(en)/page.tsx",
     "src/app/(en)/about/page.tsx",
+    "src/app/(en)/download/page.tsx",
     "src/app/(en)/docs/page.tsx",
     "src/app/(en)/docs/get-started/page.tsx",
     "src/app/(en)/docs/[slug]/page.tsx",
@@ -391,11 +392,13 @@ test("localized core page wrappers and shared page modules exist", async () => {
   for (const path of [
     "src/app/_pages/home.tsx",
     "src/app/_pages/about.tsx",
+    "src/app/_pages/download.tsx",
     "src/app/_pages/docs-index.tsx",
     "src/app/_pages/get-started.tsx",
     "src/app/_pages/not-found.tsx",
     "src/app/[locale]/page.tsx",
     "src/app/[locale]/about/page.tsx",
+    "src/app/[locale]/download/page.tsx",
     "src/app/[locale]/docs/page.tsx",
     "src/app/[locale]/docs/get-started/page.tsx",
     "src/app/[locale]/not-found.tsx",
@@ -572,12 +575,17 @@ test("localized route helpers keep English canonical and prefix translated core 
   assert.deepEqual(routing.CORE_TRANSLATED_PATHS, [
     "/",
     "/about",
+    "/download",
     "/docs",
     "/docs/get-started",
     "/learn",
   ]);
   assert.equal(routing.localizePath("en", "/docs/get-started"), "/docs/get-started");
   assert.equal(routing.localizePath("zh-TW", "/"), "/zh-TW");
+  assert.equal(
+    routing.localizePath("zh-TW", "/download"),
+    "/zh-TW/download",
+  );
   assert.equal(
     routing.localizePath("zh-TW", "/docs/get-started"),
     "/zh-TW/docs/get-started",
@@ -621,6 +629,7 @@ test("localized route helpers keep English canonical and prefix translated core 
   );
   assert.equal(routing.canonicalUrl("en", "/"), "https://wenlan.app");
   assert.equal(routing.isTranslatedPath("zh-TW", "/docs/get-started"), true);
+  assert.equal(routing.isTranslatedPath("zh-CN", "/download"), true);
   assert.equal(routing.isTranslatedPath("zh-CN", "/about"), true);
   assert.equal(routing.isTranslatedPath("zh-TW", "/learn"), true);
   assert.equal(
@@ -650,6 +659,10 @@ test("localized navigation helper localizes translated internal hrefs only", asy
   const { navigation } = await loadI18nModules();
 
   assert.equal(navigation.localizedHrefForLocale("zh-TW", "/about"), "/zh-TW/about");
+  assert.equal(
+    navigation.localizedHrefForLocale("zh-CN", "/download"),
+    "/zh-CN/download",
+  );
   assert.equal(
     navigation.localizedHrefForLocale("zh-CN", "/docs/get-started?from=nav#install"),
     "/zh-CN/docs/get-started?from=nav#install",
@@ -849,6 +862,11 @@ test("core route wrappers export localized metadata for translated pages", async
       localized: await import("../src/app/[locale]/about/page.tsx"),
     },
     {
+      pathname: "/download",
+      english: await import("../src/app/(en)/download/page.tsx"),
+      localized: await import("../src/app/[locale]/download/page.tsx"),
+    },
+    {
       pathname: "/docs",
       english: await import("../src/app/(en)/docs/page.tsx"),
       localized: await import("../src/app/[locale]/docs/page.tsx"),
@@ -990,8 +1008,9 @@ test("sitemap route alternates are reciprocal for every localized entry", async 
 
 test("localized core page JSON-LD uses localized absolute URLs and languages for translated routes", async () => {
   const { locales, routing } = await loadI18nModules();
-  const [{ AboutPage }, { DocsIndexPage }, { GetStartedPage }] = await Promise.all([
+  const [{ AboutPage }, { DownloadPage }, { DocsIndexPage }, { GetStartedPage }] = await Promise.all([
     import("../src/app/_pages/about.tsx"),
+    import("../src/app/_pages/download.tsx"),
     import("../src/app/_pages/docs-index.tsx"),
     import("../src/app/_pages/get-started.tsx"),
   ]);
@@ -1000,6 +1019,7 @@ test("localized core page JSON-LD uses localized absolute URLs and languages for
     const expectedLanguage = locales.LOCALE_CONFIG[locale].hreflang;
     const homeUrl = routing.canonicalUrl(locale, "/");
     const aboutUrl = routing.canonicalUrl(locale, "/about");
+    const downloadUrl = routing.canonicalUrl(locale, "/download");
     const docsUrl = routing.canonicalUrl(locale, "/docs");
     const getStartedUrl = routing.canonicalUrl(locale, "/docs/get-started");
 
@@ -1013,6 +1033,16 @@ test("localized core page JSON-LD uses localized absolute URLs and languages for
     assert.equal(aboutSchema.url, aboutUrl);
     assert.equal(aboutSchema.inLanguage, expectedLanguage);
     assert.equal(schemaByType(aboutSchemas, "Person").mainEntityOfPage, aboutUrl);
+
+    const downloadSchemas = renderJsonLd(DownloadPage, locale);
+    assertBreadcrumbItems(
+      schemaByType(downloadSchemas, "BreadcrumbList"),
+      [homeUrl, downloadUrl],
+      `${locale}.download.breadcrumbs`,
+    );
+    const downloadSchema = schemaByType(downloadSchemas, "WebPage");
+    assert.equal(downloadSchema.url, downloadUrl);
+    assert.equal(downloadSchema.inLanguage, expectedLanguage);
 
     const docsSchemas = renderJsonLd(DocsIndexPage, locale);
     assertBreadcrumbItems(
