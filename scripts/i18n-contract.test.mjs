@@ -83,9 +83,16 @@ function hasNonProtectedText(value, protectedTokens) {
 
 const allowedUnchangedLeafValues = new Set([
   "Apache-2.0",
+  "Apple silicon",
+  "ARM64 · glibc",
   "GitHub",
+  "Linux",
+  "macOS",
   "Qi-Xuan Lu",
   "Wenlan",
+  "Windows",
+  "x64",
+  "x64 · glibc",
   "7xuanlu",
 ]);
 
@@ -121,6 +128,7 @@ function requiresTranslatedDifference(unitKey, path, value, protectedTokens) {
 function isAllowedUnchangedLeaf(unitKey, path, value) {
   if (isIdLeafPath(path)) return true;
   if (isHrefLeafPath(path)) return true;
+  if (isCommandLeafPath(path)) return true;
   if (isOrdinalLeafPath(path)) return true;
   if (isUrlOnlyValue(value)) return true;
   if (allowedUnchangedLeafValues.has(value)) return true;
@@ -133,6 +141,10 @@ function isIdLeafPath(path) {
 
 function isHrefLeafPath(path) {
   return path === "href" || path.endsWith(".href");
+}
+
+function isCommandLeafPath(path) {
+  return path === "command" || path.includes(".commands[");
 }
 
 function isOrdinalLeafPath(path) {

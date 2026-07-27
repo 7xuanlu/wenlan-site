@@ -2260,3 +2260,145 @@ increase for that experiment.
   paid acquisition, account mutation, or metric-definition change.
 - Next step: wait for real authenticated Umami observations and the scheduled
   Goal readouts; do not infer zero events from missing dashboard access.
+
+### 2026-07-26T03:21:39Z — Wenlan source release-boundary audit
+
+- Record type: campaign-observation
+- Technical correction: `TECH-2026-07-26-source-release-boundary`
+- Status: active local preparation; no public page change
+- Source evidence: Wenlan's published release remains `v0.14.1`, while remote
+  main at `65013459b0909cbb1899e9fd1667f80bad981194` includes merged PR #390
+  and PR #382. wenlan-app's published release remains `v0.14.0`, while remote
+  main at `3ef7332c6a37e2ae5810b89ad1ba630b4d5d426a` includes merged PR #98 and
+  PR #96.
+- Checkout limitation: both local source checkouts were two commits behind.
+  The wenlan-app checkout also contained unrelated user changes, so neither
+  working tree was pulled, reset, or modified. Remote refs and GitHub were
+  inspected read-only.
+- Finding: the Wenlan contract already resolves the latest version tag. The
+  wenlan-app contract instead read the mutable working tree and accepted its
+  unreleased `0.14.1` state as a release even though the latest published app
+  tag is `v0.14.0`.
+- RED/GREEN: the focused contract failed with actual `v0.14.1` versus expected
+  published tag `v0.14.0`. It passes 5/5 after reading immutable tag files with
+  `git show`, failing closed without tags, and supporting both backend-pin
+  manifest shapes. The complete SEO contract passes 189/189; TypeScript, Goal
+  verifier, and `git diff --check` also pass. Independent review returned
+  APPROVE with no remaining P0-P2 findings after mixed-manifest parsing was
+  made fail-closed.
+- Product decision: PR #382, #390, #96, and #98 remain merged but unreleased.
+  Do not change stable website product claims until a containing release is
+  published; no content experiment starts from this audit.
+- Evidence:
+  `docs/seo-audits/2026-07-25-source-release-boundary.md`
+- Approval boundary: local preparation only. No push, merge, deployment,
+  indexing request, GSC validation, external publication, source-repository
+  mutation, or metric-definition change is authorized.
+- Next step: present the verified local diff for explicit push, merge, and
+  automatic deployment approval.
+
+### 2026-07-27T03:02:34Z — Wenlan v0.15.0 release/download correction prepared
+
+- Record type: campaign-observation
+- Technical correction: `TECH-2026-07-26-source-release-boundary`
+- Status: active local public-site preparation; consumes the single production
+  slot
+- Changed premise: Wenlan `v0.15.0` was published at
+  `2026-07-26T05:13:54Z`. The release now provides native Windows x64, macOS
+  Apple silicon, Linux x64, and Linux ARM64 runtime archives. The Windows ZIP
+  includes `wenlan.exe`, `wenlan-server.exe`, `wenlan-mcp.exe`,
+  `onnxruntime.dll`, `vulkan-1.dll`, and the Vulkan runtime license.
+- Desktop-app boundary: wenlan-app's latest published release remains
+  `v0.14.0`. Later Windows-compatible main work does not establish a
+  downloadable Windows desktop app, installer, signer, or updater.
+- Change: centralize exact `v0.15.0` release metadata and four direct assets;
+  add the release-backed homepage Download section; point the main homepage
+  action at it; add English, Traditional Chinese, and Simplified Chinese
+  platform setup; align About, changelog, platform/security/build docs,
+  structured data, social image, and sitemap dates; track direct asset clicks
+  as bounded `github_outbound` events with `placement="home-download"`.
+- URL evidence: read-only HEAD requests followed all four GitHub release
+  redirects and returned HTTP 200.
+- Local verification: Goal verifier passed; SEO tests 189/189; i18n tests
+  53/53; TypeScript passed; the production build generated 211 static pages
+  and correctly skipped IndexNow; compiled technical SEO passed 110 sitemap
+  URLs, 26 redirects, seven noindex headers, 14 checked HTML pages, and
+  sitemap-wide `FAQPage` absence across 114 built HTML files.
+- Render verification: Home, Get Started, and About were captured from the
+  production build in English, Traditional Chinese, and Simplified Chinese at
+  `1440x1000` and `393x852`. All 18 route/viewport pairs returned HTTP 200,
+  none had horizontal overflow, all release assets were present, the
+  `#download` path and Windows focus target worked, and no page or console
+  error appeared. The first visual pass found an unnatural Chinese
+  `直 / 接` break and possible `選 / 擇` and `不需 / 要` breaks; the second
+  fresh-build pass confirmed the exact word-joiner fix.
+- Metric role: this is release accuracy and conversion-path readiness, not
+  proof of SEO lift, CTA conversion, star growth, or causal effect.
+- Evidence:
+  `docs/seo-audits/2026-07-25-source-release-boundary.md`
+- Approval boundary: no push, PR, merge, deployment, indexing request, GSC
+  validation, external publication, source-repository mutation, OSS
+  submission, paid acquisition, account mutation, or metric-definition change
+  was performed.
+- Next step: obtain explicit push, merge, and automatic deployment approval,
+  production-verify the exact runtime/app boundary and four download paths,
+  then release the production slot.
+
+### 2026-07-27T03:02:34Z — LLM-wiki, Obsidian, and knowledge-cluster candidate
+
+- Record type: campaign-observation
+- Status: queued candidate; not an experiment start and does not consume a
+  second production slot
+- User intent: improve discovery for `LLM wiki`, modifier-qualified Obsidian,
+  AI-native notes, and AI knowledge-base searches without opening overlapping
+  URLs.
+- Authenticated GSC evidence: `sc-domain:wenlan.app`,
+  `2026-06-27..2026-07-24`, reports 7 property clicks and 329 property
+  impressions. Visible-query rows report 1 click and 81 impressions, leaving
+  a visibility gap of 6 clicks and 248 impressions. The page rows separately
+  report 2 impressions at average position 3.5 for the LLM-wiki page,
+  4 impressions at 4.5 for the English Obsidian page, and 9 impressions at
+  8.0 for the knowledge-base comparison. The visible `llm wiki 2.0` row has
+  1 impression at position 13.0.
+- Coverage finding: the English Learn hub already has direct search paths to
+  all three pages; the knowledge-base page already links to the LLM-wiki and
+  Obsidian pages; the zh-TW Obsidian page already covers `AI 筆記` and
+  supporting `AI 知識庫` language. The remaining clean gap is that the
+  English LLM-wiki page lacks direct related links to the two comparison
+  pages, and the English Obsidian page lacks a direct related link back to the
+  LLM-wiki category page.
+- Demand boundary: Trends retains request-relative `0–100` indices, not search
+  volume. `AI notes` / `AI 筆記` is real adjacent demand dominated by note-tool
+  and document-QA intent; exact Taiwan `AI 知識庫` remains too sparse for a
+  dedicated asset; generic `knowledge base` is too broad without agent,
+  local, open-source, or source-backed modifiers.
+- Candidate decision: after the current release/download correction is
+  production-verified, launch one bounded English internal-link closure across
+  the existing pages. Do not rewrite titles, change canonical URLs, create a
+  generic notes article, or manufacture zh-CN coverage.
+- Evidence:
+  `docs/seo-audits/2026-07-26-llm-wiki-obsidian-knowledge-cluster.md`
+- Next step: production-verify the current correction, then create the
+  immutable experiment start for this cross-link change with its own baseline
+  and readout thresholds.
+
+### 2026-07-27T04:00:43Z — v0.15.0 release/download publication approved
+
+- Record type: campaign-approval
+- Technical correction: `TECH-2026-07-26-source-release-boundary`
+- Status: approved for publication; continues to consume the single production
+  slot until production verification
+- Approved action: commit the verified local scope, push its existing branch,
+  create and merge its pull request, allow the normal automatic Vercel
+  deployment, and verify the resulting production surface and direct release
+  downloads.
+- Approval provenance: the user replied `批准` after receiving the exact
+  requested boundary: commit, push, PR, merge, Vercel deployment, production
+  verification, then an immediate separately attributable internal-link
+  experiment.
+- Still unapproved: request indexing, submit GSC validation, publish Reddit or
+  other external posts, submit an OSS directory, buy traffic, mutate analytics
+  accounts, generate synthetic production events, or change metric
+  definitions.
+- Next step: run the frozen-contract verifier after this record, commit and
+  publish the bounded correction, then append native-unit production evidence.

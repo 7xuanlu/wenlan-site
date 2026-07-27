@@ -13,6 +13,7 @@ export type AnalyticsEventName =
 
 export type AnalyticsPlacement =
   | "home-hero"
+  | "home-download"
   | "home-footer"
   | "learn-search-path"
   | "learn-grid"

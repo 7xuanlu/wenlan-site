@@ -17,7 +17,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "2eda8645f54472fe4d1808a15d6112a25a826748af65e07c734d564b5185356e",
+    sourceHash: "593a9b5f8f22b778b3caaa6626e36ce59fba01392aaf01273dbac0131837d38d",
     content: {
       seo: {
         title: "Wenlan 文瀾 | AI 工作的 LLM wiki",
@@ -34,6 +34,7 @@ export const zhTWContent = {
           darkLabel: "切換到深色主題",
         },
         links: [
+          { id: "download", href: "#download", label: "下載" },
           { id: "docs", href: "/docs", label: "文件" },
           { id: "learn", href: "/learn", label: "學習" },
           { id: "about", href: "/about", label: "關於" },
@@ -44,7 +45,7 @@ export const zhTWContent = {
         title: "Wenlan 文瀾",
         description:
           "AI 工作的 LLM wiki。AI\u00a0代理捕捉學到的內容，你加入信任來源，Wenlan 讓有來源依據的 wiki 頁面跨工具、跨時間保持最新。",
-        primaryCta: { id: "get-started", href: "/docs/get-started", label: "開始使用" },
+        primaryCta: { id: "download", href: "#download", label: "下載 Wenlan" },
         secondaryCta: {
           id: "github",
           href: "https://github.com/7xuanlu/wenlan",
@@ -76,6 +77,54 @@ export const zhTWContent = {
       demo: {
         title: "Wenlan v0.9 歷史示範",
         playLabel: "播放 Wenlan v0.9 歷史示範",
+      },
+      download: {
+        eyebrow: "下載",
+        title: "本地 runtime，直\u2060接在你的電腦執行。",
+        description:
+          "Wenlan v0.15.0 把 CLI、本地 daemon 與 MCP connector 放在同一份 release。選\u2060擇你的系統\u2060套件，再完成簡短的 setup check。",
+        stableLabel: "穩定版",
+        releaseNotesLabel: "版本說明",
+        windowsLabel: "原生 Windows runtime",
+        packageIncludesLabel: "內含 CLI、daemon 與 MCP connector",
+        platforms: [
+          {
+            id: "windows-x64",
+            name: "Windows",
+            architecture: "x64",
+            description:
+              "完整原生套件，包含 ONNX Runtime 與供支援 GPU 使用的 Vulkan loader。不\u2060需\u2060要 WSL 或 Rust toolchain。",
+            actionLabel: "下載 Windows 版",
+          },
+          {
+            id: "macos-arm64",
+            name: "macOS",
+            architecture: "Apple silicon",
+            description: "Headless runtime；本地 model 路徑支援 Metal。",
+            actionLabel: "下載",
+          },
+          {
+            id: "linux-x64",
+            name: "Linux",
+            architecture: "x64 · glibc",
+            description: "適用於常見 x86_64 Linux 系統的預編譯 runtime。",
+            actionLabel: "下載",
+          },
+          {
+            id: "linux-arm64",
+            name: "Linux",
+            architecture: "ARM64 · glibc",
+            description: "適用於 aarch64 Linux 系統的預編譯 runtime。",
+            actionLabel: "下載",
+          },
+        ],
+        setup: {
+          title: "想用引導式安裝？",
+          description:
+            "macOS Apple silicon 可用一行指令安裝並驗證 runtime。Windows 使用者需保留 ZIP 內全部檔案、把目錄加入 PATH，再執行 setup checks。",
+          command: "npx -y wenlan setup",
+          guideLabel: "開啟各平台設定",
+        },
       },
       useCases: {
         eyebrow: "使用場景",
@@ -271,7 +320,7 @@ export const zhTWContent = {
           title: "在重要的地方保持開放。",
           body: "本地 runtime、CLI、MCP server、Claude Code plugin 和 Codex plugin 都是 Apache-2.0。",
           note: "",
-          primaryCta: { id: "get-started", href: "/docs/get-started", label: "開始使用" },
+          primaryCta: { id: "download", href: "#download", label: "下載 Wenlan" },
           secondaryCta: {
             id: "github",
             href: "https://github.com/7xuanlu/wenlan",
@@ -537,7 +586,7 @@ export const zhTWContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "e393e019618c47d086150f862aefa6d55fb48cfa02b123eb0043388324070af7",
+    sourceHash: "f7903b1ff26387d83b20bebddb6bf6b14ea721f34a62639377b789cb261a74e4",
     content: {
       seo: {
         title: "關於 Wenlan | AI 工作的 LLM wiki",
@@ -554,7 +603,7 @@ export const zhTWContent = {
         description:
           "AI 代理捕捉學到的內容，你加入信任來源，Wenlan 讓有來源依據的 wiki 頁面在 AI 工作中保持最新。",
         statusLabel: "專案狀態",
-        statusItems: ["版本 v0.14.1", "支援 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 建置"],
+        statusItems: ["版本 v0.15.0", "支援 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 建置"],
       },
       sections: [
         {
@@ -581,7 +630,7 @@ export const zhTWContent = {
           number: "04",
           title: "目前狀態",
           paragraphs: [
-            "Wenlan v0.14.1 支援的預編譯執行環境包括 macOS Apple Silicon、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64)。macOS Intel 仍是 source/dev-only，直到 public release workflow 發布該 artifact。daemon、CLI、MCP server、Claude Code plugin 和 Codex plugin 都以 Apache-2.0 open source。",
+            "Wenlan v0.15.0 支援的預編譯執行環境包括 macOS Apple Silicon、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64)。Windows 套件包含 ONNX Runtime，以及供支援 GPU 使用的 Vulkan loader。macOS Intel 仍是 source/dev-only，直到 public release workflow 發布該 artifact。daemon、CLI、MCP server、Claude Code plugin 和 Codex plugin 都以 Apache-2.0 open source。",
           ],
         },
       ],
@@ -1158,7 +1207,7 @@ export const zhTWContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "7caf3da2fb27707f0f2c64f06c664e986158ed934bdee472034176d962d76516",
+    sourceHash: "09947a26cc31d9b988e3e8a133d7fb06a036bd117b03019147b4660cfd653bd2",
     content: {
       seo: {
         title: "安裝 Wenlan：Claude Code、Codex、ChatGPT 與 MCP",
@@ -1174,14 +1223,40 @@ export const zhTWContent = {
         title: "安裝 Wenlan，連接你的\u00a0AI\u00a0工具。",
         description:
           "選擇一條 client 路徑，連到同一個 local daemon，再驗證一次 capture 與 recall round trip。",
-        meta: ["Wenlan 團隊", "更新於 2026 年 7 月 24 日", "4 分鐘設定"],
+        meta: ["Wenlan 團隊", "更新於 2026 年 7 月 26 日", "5 分鐘設定"],
         setupPathLabel: "設定路徑",
-        setupPathItems: ["Claude Code 路徑", "Codex 路徑", "ChatGPT 路徑", "本地 + 遠端 MCP"],
+        setupPathItems: ["執行環境", "Claude Code", "Codex", "本地 + 遠端 MCP"],
       },
       steps: [
         {
-          id: "claude-code-plugin",
+          id: "install-runtime",
           number: "01",
+          title: "安裝適合你系統的 runtime",
+          paragraphs: [
+            "Wenlan v0.15.0 提供 Windows x64、macOS Apple silicon，以及 Linux x64 或 ARM64 glibc 的原生 runtime 套件。每份 archive 都包含 CLI、daemon 與 MCP connector。",
+            "在 Windows 上，請把 wenlan-windows-x64.zip 當成一個整體解壓到使用者擁有且已加入 PATH 的目錄。onnxruntime.dll、vulkan-1.dll 與三個執行檔必須放在一起。",
+          ],
+          commands: [
+            "# macOS Apple silicon\nnpx -y wenlan setup",
+            "# Linux x64 或 ARM64\ncurl -fsSL https://raw.githubusercontent.com/7xuanlu/wenlan/main/install.sh | bash\nwenlan setup --basic\nwenlan background on\nwenlan status",
+            "# Windows x64：解壓 ZIP 並加入 PATH 後\nwenlan setup --basic\nwenlan background on\nwenlan status",
+          ],
+          ctas: [
+            {
+              id: "windows-download",
+              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.15.0/wenlan-windows-x64.zip",
+              label: "下載 Windows x64",
+            },
+            {
+              id: "all-downloads",
+              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.15.0",
+              label: "全部 v0.15.0 下載",
+            },
+          ],
+        },
+        {
+          id: "claude-code-plugin",
+          number: "02",
           title: "Claude Code 外掛",
           paragraphs: [
             "這是最快的路徑。plugin 會處理 daemon setup、MCP wiring、本地 memory setup，以及第一次 round-trip check。",
@@ -1192,20 +1267,17 @@ export const zhTWContent = {
         },
         {
           id: "codex",
-          number: "02",
+          number: "03",
           title: "Codex 設定",
           paragraphs: [
             "先執行 Wenlan setup，再把 Codex 連接到本地 MCP server。主要 Wenlan repo 也提供 Codex plugin 給從 checkout 安裝的使用者；wenlan connect codex 是不需要 checkout 的直接 client 路徑。",
           ],
-          commands: [
-            "npx -y wenlan setup",
-            "~/.wenlan/bin/wenlan connect codex",
-          ],
+          commands: ["wenlan connect codex"],
           ctas: [],
         },
         {
           id: "chatgpt-web",
-          number: "03",
+          number: "04",
           title: "ChatGPT 和 Claude.ai",
           paragraphs: [
             "在 Wenlan desktop app 開啟 Remote Access，為 Streamable HTTP MCP 建立暫時的 HTTPS URL。App 會在 loopback 以 --no-auth 啟動 wenlan-mcp，再透過 tunnel 暴露；任何拿到 URL 的人都能存取。在 ChatGPT 開啟 Settings > Plugins，建立 New Plugin，在 Connection 下選擇 Server URL，貼上 URL，並把 Authentication 設為 None。Claude.ai 則透過 Directory > Plugins 從 7xuanlu/wenlan marketplace 安裝 Wenlan。",
@@ -1216,21 +1288,18 @@ export const zhTWContent = {
         },
         {
           id: "other-mcp-clients",
-          number: "04",
+          number: "05",
           title: "其他本地 MCP clients",
           paragraphs: [
             "Cursor、Claude Desktop、Gemini CLI、VS Code 和其他受支援的本地 MCP clients，要先設定 Wenlan runtime，再讓 CLI 寫入 client-specific MCP configuration。",
             "Wenlan setup 會安裝 CLI、daemon 和 MCP connector，向作業系統的 user service manager 註冊 daemon，並驗證狀態。",
           ],
-          commands: [
-            "npx -y wenlan setup",
-            "~/.wenlan/bin/wenlan connect cursor\n# 或：claude-desktop, vscode, gemini",
-          ],
+          commands: ["wenlan connect cursor\n# 或：claude-desktop, vscode, gemini"],
           ctas: [],
         },
         {
           id: "try-first",
-          number: "05",
+          number: "06",
           title: "先試什麼",
           paragraphs: [
             "保存一個 durable project fact，再請另一個 session 或 client recall。Wenlan 應該能找回這個 fact，並把來源保留給 wiki 與 review flow。",
