@@ -232,6 +232,9 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   claude-mem, stale-memory, and MCP shared-memory changes remain live,
   production-verified, and measuring; they do not consume the slot.
 - Website-affecting technical correction:
+  `TECH-2026-07-26-source-release-boundary` is now an active public-site
+  release/download correction and consumes the single production slot until
+  production verification.
   `TECH-2026-07-26-provider-neutral-cta-tracking`, production-verified and no
   longer consuming the single production slot.
   `TECH-2026-07-26-knowledge-base-published-date`, production-verified and no
@@ -300,13 +303,26 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Latest deployment observation: PR #85 merged at `2026-07-26T02:51:33Z` as
-  `c98625bd6f27bc19bd4244ab7b742c1449402395`; Vercel production completed at
-  `2026-07-26T02:52:20Z`. It added the authenticated GSC query-plus-page
-  export and matching Goal observation, not a content experiment. The
-  deployed technical audit remained green with 110 sitemap URLs, 14 key
-  pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
-  redirects, six bridge-host redirects, and legacy-URL exclusions.
+- Latest deployment observation: record-only PR #87 merged at
+  `2026-07-26T03:15:52Z` as
+  `e922686a39e4ed8dc38a35ff714c405718330472`; Vercel production completed at
+  `2026-07-26T03:16:41Z`. It records the production verification of PR #86,
+  whose provider-neutral CTA correction merged at `2026-07-26T03:12:02Z` as
+  `7674c47405ed42a71f8776b8276093fbea05fefd` and reached production at
+  `2026-07-26T03:12:51Z`. The deployed technical audit remained green with
+  110 sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide
+  `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL
+  exclusions.
+- Latest source-release observation: refreshed at
+  `2026-07-27T03:02:34Z`. Wenlan `v0.15.0` was published at
+  `2026-07-26T05:13:54Z` with native Windows x64, macOS Apple silicon, Linux
+  x64, and Linux ARM64 runtime archives. The tagged Windows package contains
+  the CLI, daemon, MCP connector, ONNX Runtime, and Vulkan loader and is now
+  eligible for a direct website download. wenlan-app's published release
+  remains `v0.14.0`; its later Windows-compatible main work does not establish
+  a released Windows desktop app. Evidence and the active local public-site
+  correction are in
+  `docs/seo-audits/2026-07-25-source-release-boundary.md`.
 - Last production observation: `2026-07-26T02:32:30Z`; PR #83 merged as
   `a54f13f891d472774f48cafb8798955bf8906ce4`, and Vercel production completed
   at `2026-07-26T02:31:19Z`. Deployed robots, 110 sitemap URLs, 14 key pages,
@@ -694,6 +710,33 @@ not consume the production slot.
 
 ### Current technical correction
 
+`TECH-2026-07-26-source-release-boundary` is an active local public-site
+release/download correction and consumes the single production slot.
+The original contract defect remains fixed: published wenlan-app facts come
+from the highest immutable version tag with `git show`, both backend-pin
+manifest shapes are supported, and missing tags fail closed instead of
+silently reading a mutable working tree.
+
+The source premise changed after that audit. Wenlan `v0.15.0` was published at
+`2026-07-26T05:13:54Z` with direct native Windows x64, macOS Apple silicon,
+Linux x64, and Linux ARM64 runtime archives. The bounded public-site change
+adds one exact release contract, a visible homepage Download section, direct
+release-asset CTAs, platform setup instructions in English, Traditional
+Chinese, and Simplified Chinese, and aligned About, docs, schema, sitemap, and
+social-image release claims. Windows is described as a released headless
+runtime with ONNX Runtime and Vulkan support, not as a released desktop app;
+wenlan-app remains pinned to published `v0.14.0`.
+
+Local verification passes the Goal checker, 189 SEO tests, 53 i18n tests,
+TypeScript, production build, compiled technical SEO, four direct release
+asset URL checks, and fresh rendered QA over 18 route/locale/viewport
+combinations. The first visual pass found and the second pass confirmed the
+fix for awkward Chinese compound wrapping. Evidence is in
+`docs/seo-audits/2026-07-25-source-release-boundary.md`. The user explicitly
+approved commit, push, PR creation, merge, automatic Vercel deployment, and
+production verification at `2026-07-27T04:00:43Z`; indexing requests, GSC
+validation, and external publication remain unapproved.
+
 `TECH-2026-07-26-provider-neutral-cta-tracking` is production-verified. Before
 the correction, the live site loaded the configured Umami Cloud tracker, but
 `TrackedLink` sent custom interactions only to Vercel Analytics. Vercel
@@ -831,12 +874,21 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The production slot is open after
-`TECH-2026-07-26-provider-neutral-cta-tracking` passed production
-verification. Do not generate a synthetic production event; actual Umami
-totals remain manual/account-gated until authenticated access is available.
-Continue the scheduled evidence readouts and do not launch another search
-asset without a candidate that passes all five gates.
+The production slot is occupied by
+`TECH-2026-07-26-source-release-boundary` until its `v0.15.0` download surface
+is pushed, merged, automatically deployed, and production-verified under the
+user's explicit `2026-07-27T04:00:43Z` approval. Execute those gates now. Do
+not generate a synthetic production event; actual Umami totals remain
+manual/account-gated until authenticated access is available.
+
+After that production verification, start the bounded English internal-link
+closure recorded in
+`docs/seo-audits/2026-07-26-llm-wiki-obsidian-knowledge-cluster.md`.
+Authenticated GSC already shows the existing LLM-wiki, Obsidian, and
+knowledge-base pages; the clean gap is their incomplete cross-link graph, not
+another `AI notes` or generic knowledge-base URL. Measurement waiting does
+not block this next preparation. Keep zh-CN narrower until locale-specific
+evidence appears.
 
 The
 `TECH-2026-07-26-knowledge-base-published-date` correction is

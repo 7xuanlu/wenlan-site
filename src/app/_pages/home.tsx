@@ -3,6 +3,7 @@ import { WaitlistForm } from "../waitlist-form";
 import { ThemeToggle } from "../theme-toggle";
 import { BrandWordmark } from "@/components/brand-wordmark";
 import { BentoSection } from "@/components/home/bento";
+import { DownloadSection } from "@/components/home/download";
 import { HeroLivingPage } from "@/components/home/hero-living-page";
 import { PainsSection } from "@/components/home/pains";
 import { PipelineSection } from "@/components/home/pipeline";
@@ -202,6 +203,8 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
+      <DownloadSection copy={content.download} locale={locale} />
+
       <section className="border-b border-[var(--o-border-subtle)] px-6 py-16 sm:py-20">
         <div className="mx-auto max-w-5xl">
           <div className="overflow-hidden rounded-xl border border-[var(--o-border)] shadow-[var(--o-shadow-media)]">
@@ -399,7 +402,7 @@ function HomeCta({
   return (
     <TrackedLocalizedLink
       href={link.href}
-      eventName="get_started_click"
+      eventName={link.id === "download" ? "setup_path_click" : "get_started_click"}
       placement={placement}
       locale={locale}
       context="home"

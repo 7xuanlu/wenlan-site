@@ -2,6 +2,8 @@ import { flattenLeafStrings } from "./hash";
 
 const tokenPatterns = [
   /\bWenlan\b/g,
+  /\bClaude Code\b/g,
+  /\bCodex\b/g,
   /\bGitHub\b/g,
   /\/plugin\s+(?:marketplace\s+add|install)\s+[A-Za-z0-9@/_-]+/g,
   /\/setup/g,

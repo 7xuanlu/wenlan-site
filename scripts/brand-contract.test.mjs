@@ -302,13 +302,16 @@ test("root metadata describes Wenlan on the current release surface", async () =
   const englishContent = await readRepo("src/i18n/content/en.ts");
   const rootDocument = await readRepo("src/app/root-document.tsx");
   const structuredData = await readRepo("src/app/structured-data.ts");
+  const releases = await readRepo("src/lib/releases.ts");
 
   assert.match(englishContent, /title:\s*"Wenlan \|/);
   assert.match(metadata, /export function buildRootMetadata/);
   assert.match(metadata, /locale: LOCALE_CONFIG\[locale\]\.openGraphLocale/);
   assert.match(rootDocument, /softwareApplicationSchema\(locale\)/);
   assert.match(structuredData, /name: "Wenlan"/);
-  assert.match(structuredData, new RegExp(`softwareVersion: "${escapeRegExp(version)}"`));
+  assert.match(structuredData, /softwareVersion: WENLAN_RELEASE\.version/);
+  assert.match(structuredData, /downloadUrl: WENLAN_RELEASE\.releaseUrl/);
+  assert.match(releases, new RegExp(`version: "${escapeRegExp(version)}"`));
   assert.match(structuredData, /installUrl: "https:\/\/github\.com\/7xuanlu\/wenlan#quickstart"/);
   assert.match(structuredData, /codeRepository: "https:\/\/github\.com\/7xuanlu\/wenlan"/);
 });
@@ -901,18 +904,28 @@ test("security docs align with the current Wenlan site policy", async () => {
 test("public current-release surfaces track the authoritative Wenlan release", async () => {
   const { version, date } = await currentWenlanRelease();
   const structuredData = await readRepo("src/app/structured-data.ts");
+  const releases = await readRepo("src/lib/releases.ts");
+  const downloadSection = await readRepo("src/components/home/download.tsx");
   const englishContent = await readRepo("src/i18n/content/en.ts");
   const simplifiedContent = await readRepo("src/i18n/content/zh-CN.ts");
   const traditionalContent = await readRepo("src/i18n/content/zh-TW.ts");
   const aboutOg = await readRepo("src/app/about/opengraph-image.tsx");
   const docs = await readRepo("src/app/docs/docs.ts");
-  const learnArticles = await readRepo("src/app/learn/articles.ts");
-  const seoMeasurement = await readRepo("docs/seo-measurement.md");
   const sitemap = await readRepo("src/app/sitemap.ts");
 
   const escapedVersion = escapeRegExp(version);
 
-  assert.match(structuredData, new RegExp(`softwareVersion: "${escapedVersion}"`));
+  assert.match(structuredData, /softwareVersion: WENLAN_RELEASE\.version/);
+  assert.match(structuredData, /downloadUrl: WENLAN_RELEASE\.releaseUrl/);
+  assert.match(releases, new RegExp(`version: "${escapedVersion}"`));
+  assert.match(releases, new RegExp(`tag: "v${escapedVersion}"`));
+  assert.match(releases, new RegExp(`publishedAt: "${escapeRegExp(date)}"`));
+  assert.match(releases, /wenlan-windows-x64\.zip/);
+  assert.match(releases, /wenlan-darwin-arm64\.tar\.gz/);
+  assert.match(releases, /wenlan-linux-x64\.tar\.gz/);
+  assert.match(releases, /wenlan-linux-arm64\.tar\.gz/);
+  assert.match(downloadSection, /id="download"/);
+  assert.match(downloadSection, /placement="home-download"/);
   assert.match(englishContent, new RegExp(`"v${escapedVersion}"`));
   assert.match(englishContent, new RegExp(`Wenlan v${escapedVersion} ships`));
   assert.match(simplifiedContent, new RegExp(`"版本 v${escapedVersion}"`));
@@ -923,9 +936,6 @@ test("public current-release surfaces track the authoritative Wenlan release", a
   assert.match(docs, new RegExp(`current stable ${escapedVersion}`));
   assert.match(docs, new RegExp(`Wenlan version ${escapedVersion}`));
   assert.match(docs, new RegExp(`v${escapedVersion}.*${escapeRegExp(date)}`));
-  assert.match(learnArticles, new RegExp(`Wenlan v${escapedVersion} as of ${escapeRegExp(date)}`));
-  assert.match(learnArticles, new RegExp(`Last release alignment: v${escapedVersion} on ${escapeRegExp(date)}`));
-  assert.match(seoMeasurement, new RegExp("softwareVersion` `" + escapedVersion + "`"));
   assert.match(sitemap, new RegExp(`ABOUT_UPDATED_AT = "${escapeRegExp(date)}"`));
   const getStartedDate = sitemap.match(/GET_STARTED_UPDATED_AT = "(\d{4}-\d{2}-\d{2})"/)?.[1];
   assert.ok(getStartedDate, "sitemap must declare GET_STARTED_UPDATED_AT");

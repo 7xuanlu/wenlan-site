@@ -34,6 +34,7 @@ export const enContent = {
           darkLabel: "Switch to dark theme",
         },
         links: [
+          { id: "download", href: "#download", label: "Download" },
           { id: "docs", href: "/docs", label: "Docs" },
           { id: "learn", href: "/learn", label: "Learn" },
           { id: "about", href: "/about", label: "About" },
@@ -44,7 +45,7 @@ export const enContent = {
         title: "Wenlan",
         description:
           "An LLM wiki for AI work. Agents capture what they learn, you add sources you trust, and Wenlan keeps source-backed wiki pages current across tools and time.",
-        primaryCta: { id: "get-started", href: "/docs/get-started", label: "Get started" },
+        primaryCta: { id: "download", href: "#download", label: "Download Wenlan" },
         secondaryCta: {
           id: "github",
           href: "https://github.com/7xuanlu/wenlan",
@@ -76,6 +77,54 @@ export const enContent = {
       demo: {
         title: "Historical Wenlan demo v0.9",
         playLabel: "Play historical Wenlan demo v0.9",
+      },
+      download: {
+        eyebrow: "Download",
+        title: "The local runtime, ready for your machine.",
+        description:
+          "Wenlan v0.15.0 ships the CLI, local daemon, and MCP connector together. Choose the package for your system, then follow the short setup check.",
+        stableLabel: "Stable",
+        releaseNotesLabel: "Release notes",
+        windowsLabel: "Native Windows runtime",
+        packageIncludesLabel: "CLI · daemon · MCP connector",
+        platforms: [
+          {
+            id: "windows-x64",
+            name: "Windows",
+            architecture: "x64",
+            description:
+              "A complete native archive with ONNX Runtime and the Vulkan loader for supported GPUs. No WSL or Rust toolchain required.",
+            actionLabel: "Download for Windows",
+          },
+          {
+            id: "macos-arm64",
+            name: "macOS",
+            architecture: "Apple silicon",
+            description: "Headless runtime with Metal support for local model paths.",
+            actionLabel: "Download",
+          },
+          {
+            id: "linux-x64",
+            name: "Linux",
+            architecture: "x64 · glibc",
+            description: "Prebuilt runtime for common x86_64 Linux systems.",
+            actionLabel: "Download",
+          },
+          {
+            id: "linux-arm64",
+            name: "Linux",
+            architecture: "ARM64 · glibc",
+            description: "Prebuilt runtime for aarch64 Linux systems.",
+            actionLabel: "Download",
+          },
+        ],
+        setup: {
+          title: "Prefer guided setup?",
+          description:
+            "macOS Apple silicon can install and verify the runtime with one command. Windows users should keep every file in the ZIP together, add that directory to PATH, then run the setup checks.",
+          command: "npx -y wenlan setup",
+          guideLabel: "Open platform setup",
+        },
       },
       useCases: {
         eyebrow: "Use cases",
@@ -270,7 +319,7 @@ export const enContent = {
           title: "Open where it matters.",
           body: "The local runtime, CLI, MCP server, Claude Code plugin, and Codex plugin are Apache-2.0.",
           note: "",
-          primaryCta: { id: "get-started", href: "/docs/get-started", label: "Get started" },
+          primaryCta: { id: "download", href: "#download", label: "Download Wenlan" },
           secondaryCta: {
             id: "github",
             href: "https://github.com/7xuanlu/wenlan",
@@ -554,7 +603,7 @@ export const enContent = {
         description:
           "Agents capture what they learn, you add sources you trust, and Wenlan keeps source-backed wiki pages current across AI work.",
         statusLabel: "Project status",
-        statusItems: ["v0.14.1", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
+        statusItems: ["v0.15.0", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
       },
       sections: [
         {
@@ -581,7 +630,7 @@ export const enContent = {
           number: "04",
           title: "Current status",
           paragraphs: [
-            "Wenlan v0.14.1 ships prebuilt runtime artifacts for macOS Apple Silicon, Linux (x86_64, aarch64; glibc), and Windows (x86_64). macOS Intel remains source/dev-only until a public release workflow publishes that artifact again. The daemon, CLI, MCP server, Claude Code plugin, and Codex plugin are open source under Apache-2.0.",
+            "Wenlan v0.15.0 ships prebuilt runtime artifacts for macOS Apple Silicon, Linux (x86_64, aarch64; glibc), and Windows (x86_64). The Windows archive includes ONNX Runtime and the Vulkan loader for supported GPUs. macOS Intel remains source/dev-only until a public release workflow publishes that artifact again. The daemon, CLI, MCP server, Claude Code plugin, and Codex plugin are open source under Apache-2.0.",
           ],
         },
       ],
@@ -1174,14 +1223,40 @@ export const enContent = {
         title: "Install Wenlan and connect your AI client.",
         description:
           "Choose one client path, connect it to the same local daemon, then verify a capture and recall round trip.",
-        meta: ["Wenlan team", "Updated Jul 24, 2026", "4 min setup"],
+        meta: ["Wenlan team", "Updated Jul 26, 2026", "5 min setup"],
         setupPathLabel: "Setup path",
-        setupPathItems: ["Claude Code", "Codex", "ChatGPT", "Local + remote MCP"],
+        setupPathItems: ["Runtime", "Claude Code", "Codex", "Local + remote MCP"],
       },
       steps: [
         {
-          id: "claude-code-plugin",
+          id: "install-runtime",
           number: "01",
+          title: "Install the runtime for your system",
+          paragraphs: [
+            "Wenlan v0.15.0 ships native runtime packages for Windows x64, macOS Apple silicon, and Linux x64 or ARM64 with glibc. Every archive contains the CLI, daemon, and MCP connector.",
+            "On Windows, extract wenlan-windows-x64.zip as one unit into a user-owned directory on PATH. Keep onnxruntime.dll and vulkan-1.dll beside the three executables.",
+          ],
+          commands: [
+            "# macOS Apple silicon\nnpx -y wenlan setup",
+            "# Linux x64 or ARM64\ncurl -fsSL https://raw.githubusercontent.com/7xuanlu/wenlan/main/install.sh | bash\nwenlan setup --basic\nwenlan background on\nwenlan status",
+            "# Windows x64, after extracting the ZIP and adding it to PATH\nwenlan setup --basic\nwenlan background on\nwenlan status",
+          ],
+          ctas: [
+            {
+              id: "windows-download",
+              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.15.0/wenlan-windows-x64.zip",
+              label: "Download Windows x64",
+            },
+            {
+              id: "all-downloads",
+              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.15.0",
+              label: "All v0.15.0 downloads",
+            },
+          ],
+        },
+        {
+          id: "claude-code-plugin",
+          number: "02",
           title: "Claude Code plugin",
           paragraphs: [
             "This is the fastest path. The plugin handles daemon setup, MCP wiring, local memory setup, and the first round-trip check.",
@@ -1192,20 +1267,17 @@ export const enContent = {
         },
         {
           id: "codex",
-          number: "02",
+          number: "03",
           title: "Codex",
           paragraphs: [
             "Run Wenlan setup, then connect Codex to the local MCP server. The main Wenlan repository also ships a Codex plugin for users installing from a checkout; wenlan connect codex is the direct no-checkout client path.",
           ],
-          commands: [
-            "npx -y wenlan setup",
-            "~/.wenlan/bin/wenlan connect codex",
-          ],
+          commands: ["wenlan connect codex"],
           ctas: [],
         },
         {
           id: "chatgpt-web",
-          number: "03",
+          number: "04",
           title: "ChatGPT and Claude.ai",
           paragraphs: [
             "Open Remote Access in the Wenlan desktop app to create a temporary HTTPS URL for Streamable HTTP MCP. The app starts wenlan-mcp with --no-auth on loopback and exposes it through the tunnel, so possession of the URL grants access. In ChatGPT, open Settings > Plugins, create a New Plugin, choose Server URL under Connection, paste the URL, and set Authentication to None. In Claude.ai, install Wenlan from the 7xuanlu/wenlan marketplace through Directory > Plugins.",
@@ -1216,21 +1288,18 @@ export const enContent = {
         },
         {
           id: "other-mcp-clients",
-          number: "04",
+          number: "05",
           title: "Other local MCP clients",
           paragraphs: [
             "For Cursor, Claude Desktop, Gemini CLI, VS Code, and other supported local MCP clients, set up the Wenlan runtime first. Then let the CLI write the client-specific MCP configuration.",
             "Wenlan setup installs the CLI, daemon, and MCP connector, registers the daemon with your operating system's user service manager, and verifies status.",
           ],
-          commands: [
-            "npx -y wenlan setup",
-            "~/.wenlan/bin/wenlan connect cursor\n# or: claude-desktop, vscode, gemini",
-          ],
+          commands: ["wenlan connect cursor\n# or: claude-desktop, vscode, gemini"],
           ctas: [],
         },
         {
           id: "try-first",
-          number: "05",
+          number: "06",
           title: "What to try first",
           paragraphs: [
             "Store one durable project fact, then ask another session or client to recall it. Wenlan should surface the fact and keep its source available to the wiki and review flow.",

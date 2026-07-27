@@ -1,9 +1,12 @@
 import assert from "node:assert/strict";
+import { execFile } from "node:child_process";
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
+import { promisify } from "node:util";
 
 const repoRoot = resolve(import.meta.dirname, "..");
+const execFileAsync = promisify(execFile);
 
 const englishRouteGroupAliases = new Map([
   ["src/app/llms-full.txt/route.ts", "src/app/(en)/llms-full.txt/route.ts"],
@@ -38,18 +41,64 @@ function cargoVersion(cargoToml) {
   return match[1];
 }
 
+async function latestVersionTag(repo) {
+  const { stdout } = await execFileAsync("git", [
+    "-C",
+    repo,
+    "tag",
+    "--list",
+    "v[0-9]*",
+    "--sort=-v:refname",
+  ]);
+  return stdout.split("\n").find(Boolean);
+}
+
 function appBackendPin(pinFile) {
   const lines = pinFile
     .split(/\r?\n/)
     .map((line) => line.trim())
     .filter(Boolean);
-  assert.ok(lines[0], ".wenlan-backend-version is missing a daemon tag");
-  assert.ok(lines[1], ".wenlan-backend-version is missing a sha256");
+  const keyed = lines.some((line) => line.includes("="));
+  if (!keyed) {
+    assert.equal(lines.length, 2, "legacy backend pin must contain exactly tag and sha256");
+    return {
+      tag: lines[0],
+      sha256: lines[1],
+    };
+  }
+
+  assert.ok(
+    lines.every((line) => line.includes("=")),
+    "keyed backend pin cannot mix key/value and bare lines",
+  );
+  const entries = Object.fromEntries(
+    lines.map((line) => {
+      const separator = line.indexOf("=");
+      return [line.slice(0, separator), line.slice(separator + 1)];
+    }),
+  );
+  assert.equal(
+    Object.keys(entries).length,
+    lines.length,
+    "keyed backend pin cannot contain duplicate fields",
+  );
+  assert.ok(entries.backend_tag, ".wenlan-backend-version is missing backend_tag");
+  assert.ok(
+    entries.backend_darwin_arm64_sha256,
+    ".wenlan-backend-version is missing backend_darwin_arm64_sha256",
+  );
 
   return {
-    tag: lines[0],
-    sha256: lines[1],
+    tag: entries.backend_tag,
+    sha256: entries.backend_darwin_arm64_sha256,
   };
+}
+
+async function readTaggedFile(repo, tag, path) {
+  const { stdout } = await execFileAsync("git", ["-C", repo, "show", `${tag}:${path}`], {
+    maxBuffer: 10 * 1024 * 1024,
+  });
+  return stdout;
 }
 
 async function currentWenlanAppRelease() {
@@ -68,11 +117,16 @@ async function currentWenlanAppRelease() {
     );
   }
 
+  const releaseRef = await latestVersionTag(appRoot);
+  assert.ok(
+    releaseRef,
+    "wenlan-app checkout has no version tag; fetch tags before validating published app facts",
+  );
   const [packageJsonText, tauriText, cargoToml, backendPinText] = await Promise.all([
-    readFile(packagePath, "utf8"),
-    readFile(resolve(appRoot, "app/tauri.conf.json"), "utf8"),
-    readFile(resolve(appRoot, "app/Cargo.toml"), "utf8"),
-    readFile(resolve(appRoot, ".wenlan-backend-version"), "utf8"),
+    readTaggedFile(appRoot, releaseRef, "package.json"),
+    readTaggedFile(appRoot, releaseRef, "app/tauri.conf.json"),
+    readTaggedFile(appRoot, releaseRef, "app/Cargo.toml"),
+    readTaggedFile(appRoot, releaseRef, ".wenlan-backend-version"),
   ]);
   const packageJson = JSON.parse(packageJsonText);
   const tauri = JSON.parse(tauriText);
@@ -100,6 +154,7 @@ async function currentWenlanAppRelease() {
 
   return {
     root: appRoot,
+    releaseRef,
     version,
     tag: pin.tag,
     repository: repositoryUrl(packageJson.repository.url),
@@ -107,9 +162,79 @@ async function currentWenlanAppRelease() {
   };
 }
 
+test("wenlan-app backend pin parser accepts released and keyed manifests", () => {
+  assert.deepEqual(
+    appBackendPin(
+      [
+        "v0.14.0",
+        "667e5cadafece24d520e098b1359e38d94adada8dbcf45913b836c925aa4c87e",
+      ].join("\n"),
+    ),
+    {
+      tag: "v0.14.0",
+      sha256: "667e5cadafece24d520e098b1359e38d94adada8dbcf45913b836c925aa4c87e",
+    },
+  );
+  assert.deepEqual(
+    appBackendPin(
+      [
+        "backend_tag=v0.14.1",
+        "backend_darwin_arm64_sha256=667e5cadafece24d520e098b1359e38d94adada8dbcf45913b836c925aa4c87e",
+        "backend_windows_x64_sha256=94c0e49e69e9b2e2de13acd4518592a899918ebdae50367878dc0edc57e10e4c",
+      ].join("\n"),
+    ),
+    {
+      tag: "v0.14.1",
+      sha256: "667e5cadafece24d520e098b1359e38d94adada8dbcf45913b836c925aa4c87e",
+    },
+  );
+});
+
+test("wenlan-app backend pin parser rejects mixed and incomplete manifests", () => {
+  assert.throws(
+    () =>
+      appBackendPin(
+        [
+          "backend_tag=v0.14.1",
+          "667e5cadafece24d520e098b1359e38d94adada8dbcf45913b836c925aa4c87e",
+        ].join("\n"),
+      ),
+    /cannot mix key\/value and bare lines/,
+  );
+  assert.throws(
+    () => appBackendPin("backend_tag=v0.14.1"),
+    /missing backend_darwin_arm64_sha256/,
+  );
+  assert.throws(
+    () =>
+      appBackendPin(
+        [
+          "backend_tag=v0.14.1",
+          "backend_tag=v0.14.1",
+          "backend_darwin_arm64_sha256=667e5cadafece24d520e098b1359e38d94adada8dbcf45913b836c925aa4c87e",
+        ].join("\n"),
+      ),
+    /duplicate fields/,
+  );
+  assert.throws(
+    () =>
+      appBackendPin(
+        [
+          "v0.14.0",
+          "667e5cadafece24d520e098b1359e38d94adada8dbcf45913b836c925aa4c87e",
+          "unexpected",
+        ].join("\n"),
+      ),
+    /legacy backend pin must contain exactly tag and sha256/,
+  );
+});
+
 test("wenlan-app release metadata exposes its bundled daemon pin", async () => {
   const app = await currentWenlanAppRelease();
+  const publishedTag = await latestVersionTag(app.root);
 
+  assert.equal(app.releaseRef, publishedTag);
+  assert.equal(app.tag, publishedTag);
   assert.match(app.version, /^\d+\.\d+\.\d+$/);
   assert.match(app.tag, /^v\d+\.\d+\.\d+$/);
   assert.equal(app.repository, "https://github.com/7xuanlu/wenlan-app");
@@ -154,9 +279,9 @@ test("public web-client guidance tracks the released wenlan-app remote access bo
     simplified,
     traditional,
   ] = await Promise.all([
-    readFile(resolve(app.root, "src/components/memory/RemoteAccessPanel.tsx"), "utf8"),
-    readFile(resolve(app.root, "src/i18n/resources.ts"), "utf8"),
-    readFile(resolve(app.root, "app/src/remote_access.rs"), "utf8"),
+    readTaggedFile(app.root, app.releaseRef, "src/components/memory/RemoteAccessPanel.tsx"),
+    readTaggedFile(app.root, app.releaseRef, "src/i18n/resources.ts"),
+    readTaggedFile(app.root, app.releaseRef, "app/src/remote_access.rs"),
     readRepo("src/app/docs/docs.ts"),
     readRepo("src/i18n/content/en.ts"),
     readRepo("src/i18n/content/zh-CN.ts"),

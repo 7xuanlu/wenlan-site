@@ -206,7 +206,7 @@ const platformSupportBullets = [
   "macOS Intel - no current prebuilt runtime in the release workflow; launchd code path exists, but treat it as source/dev-only; no current desktop app target.",
   "Linux x86_64 - current prebuilt runtime and systemd user unit; no current desktop app target.",
   "Linux aarch64 glibc - current prebuilt runtime and systemd user unit; no current desktop app target.",
-  "Windows x86_64 - current prebuilt runtime and Task Scheduler ONLOGON task; no current desktop app target.",
+  "Windows x86_64 - current prebuilt runtime with bundled ONNX Runtime and Vulkan loader, plus a Task Scheduler ONLOGON task; no current desktop app release.",
 ];
 
 const platformDataDirs = `macOS:   ~/Library/Application Support/wenlan/
@@ -1778,7 +1778,7 @@ export const docPages: DocPage[] = [
       "Wenlan macOS",
       "Wenlan service manager",
     ],
-    updatedAt: DOCS_UPDATED_AT,
+    updatedAt: "2026-07-26",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
@@ -1816,7 +1816,7 @@ export const docPages: DocPage[] = [
         heading: "Model backends",
         body: [
           "The core memory loop does not require a local model or API key. Store, embed, search, recall, MCP context, and the agent-side workflow still work without configuring daemon-side language models.",
-          "For optional local model paths, macOS keeps Metal acceleration. Linux and Windows release builds are CPU-only by default in the current public shape.",
+          "For optional local model paths, macOS keeps Metal acceleration. Wenlan v0.15.0 bundles the Vulkan loader in the Windows x64 archive for supported GPU acceleration; Linux release builds remain CPU-only by default.",
         ],
       },
       {
@@ -3601,7 +3601,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.14.1 line.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.15.0 line.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3780,22 +3780,35 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.14.1",
+      "Wenlan version 0.15.0",
       "wenlan-mcp release notes",
     ],
-    updatedAt: "2026-07-24",
+    updatedAt: "2026-07-26",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Quick answer: the current stable release in the repository changelog is v0.14.1, dated 2026-07-20.",
-      "Recent main-branch work after v0.14.1 is visible through merged PRs, but it should be treated as unreleased until the next release lands.",
+      "Quick answer: the current stable release in the repository changelog is v0.15.0, dated 2026-07-26.",
+      "The release publishes native runtime archives for macOS Apple Silicon, Linux x64 and ARM64, and Windows x64. The optional desktop app still releases separately.",
     ],
     sections: [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.14.1 is the current stable release recorded in CHANGELOG.md and the release-please manifest. The v0.14.x line routes Page writes through one gate, adds draft lifecycle and Page Map foundations, tightens read scopes and routing, and preserves exact canonical page sources.",
+          "Wenlan v0.15.0 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It publishes the Windows x64 runtime with ONNX Runtime and the Vulkan loader, and ships the current unified graph and Page Map foundations.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
+        ],
+      },
+      {
+        heading: "v0.15.0 highlights",
+        body: [
+          "The v0.15.0 release makes the Windows runtime a direct, tested release path while advancing the source-backed Page and graph substrate.",
+        ],
+        bullets: [
+          "Native Windows x64 archive with the CLI, daemon, MCP connector, ONNX Runtime, and Vulkan loader.",
+          "Vulkan-backed Windows inference for supported GPUs.",
+          "Bounded background enrichment that yields to foreground work.",
+          "Unified graph and Page Map migrations through the M3 wire-freeze and edge-grounding stages.",
+          "Stable release date: 2026-07-26.",
         ],
       },
       {
@@ -3894,7 +3907,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.14.1, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.15.0, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },
@@ -4146,7 +4159,7 @@ export const docPages: DocPage[] = [
       "Wenlan Rust workspace",
       "contribute to Wenlan",
     ],
-    updatedAt: DOCS_UPDATED_AT,
+    updatedAt: "2026-07-26",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
@@ -4183,7 +4196,7 @@ export const docPages: DocPage[] = [
         heading: "Platform notes",
         body: [
           "Wenlan's current prebuilt runtime supports macOS Apple Silicon, Linux x86_64/aarch64 with glibc, and Windows x86_64. macOS Intel has source/dev paths but no current prebuilt runtime. The service manager differs by platform: launchd, systemd user units, or a Task Scheduler logon task.",
-          "Linux and Windows builds are CPU-only by default. macOS keeps Metal acceleration for local model paths.",
+          "Linux builds are CPU-only by default. macOS keeps Metal acceleration for local model paths, while v0.15.0 bundles the Vulkan loader for supported Windows GPU acceleration.",
         ],
       },
       {

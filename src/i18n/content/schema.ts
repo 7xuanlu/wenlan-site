@@ -88,6 +88,28 @@ export type HomeContent = SeoContent & {
     title: string;
     playLabel: string;
   };
+  download: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    stableLabel: string;
+    releaseNotesLabel: string;
+    windowsLabel: string;
+    packageIncludesLabel: string;
+    platforms: readonly {
+      id: "windows-x64" | "macos-arm64" | "linux-x64" | "linux-arm64";
+      name: string;
+      architecture: string;
+      description: string;
+      actionLabel: string;
+    }[];
+    setup: {
+      title: string;
+      description: string;
+      command: string;
+      guideLabel: string;
+    };
+  };
   useCases: {
     eyebrow: string;
     title: string;
