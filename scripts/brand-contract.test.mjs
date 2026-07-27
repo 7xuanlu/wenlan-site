@@ -347,34 +347,74 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   const supportStart = support.indexOf('slug: "source-backed-wiki-pages-ai-work"');
   const supportEnd = support.indexOf("\n  {\n    slug:", supportStart);
   const supportArticle = support.slice(supportStart, supportEnd);
+  const obsidianStart = support.indexOf('slug: "wenlan-vs-obsidian-ai-memory"');
+  const obsidianEnd = support.indexOf("\n  {\n    slug:", obsidianStart);
+  const obsidianArticle = support.slice(obsidianStart, obsidianEnd);
+  const mcpStart = hub.indexOf('slug: "mcp-memory-server"');
+  const mcpEnd = hub.indexOf("\n  {\n    slug:", mcpStart);
+  const mcpArticle = hub.slice(mcpStart, mcpEnd);
+  const claudeStart = hub.indexOf('slug: "claude-code-memory"');
+  const claudeEnd = hub.indexOf("\n  {\n    slug:", claudeStart);
+  const claudeArticle = hub.slice(claudeStart, claudeEnd);
+  const knowledgeBaseStart = hub.indexOf(
+    'slug: "ai-work-memory-vs-knowledge-base"',
+  );
+  const knowledgeBaseEnd = hub.indexOf("\n  {\n    slug:", knowledgeBaseStart);
+  const knowledgeBaseArticle = hub.slice(knowledgeBaseStart, knowledgeBaseEnd);
+  const memoryTypesStart = hub.indexOf('slug: "ai-agent-memory-types"');
+  const memoryTypesEnd = hub.indexOf("\n  {\n    slug:", memoryTypesStart);
+  const memoryTypesArticle = hub.slice(memoryTypesStart, memoryTypesEnd);
 
   assert.notEqual(articleStart, -1);
   assert.notEqual(supportStart, -1);
+  assert.notEqual(obsidianStart, -1);
+  assert.notEqual(mcpStart, -1);
+  assert.notEqual(claudeStart, -1);
+  assert.notEqual(knowledgeBaseStart, -1);
+  assert.notEqual(memoryTypesStart, -1);
   assert.match(
     article,
-    /title:\s*"LLM Wiki for AI Agents: Source-Backed Pages in Wenlan"/,
+    /title:\s*"What Is an LLM Wiki\? Architecture, Workflow, and Failure Modes"/,
   );
   assert.match(
     article,
-    /metaTitle:\s*"LLM Wiki for AI Agents: Source-Backed Pages \| Wenlan"/,
+    /metaTitle:\s*"LLM Wiki for AI Agents: Architecture & Workflow \| Wenlan"/,
   );
   assert.match(article, /publishedAt:\s*"2026-06-24"/);
-  assert.match(article, /updatedAt:\s*"2026-07-24"/);
-  assert.match(article, /\/capture <durable fact \+ why>/);
+  assert.match(article, /updatedAt:\s*"2026-07-27"/);
+  assert.match(article, /heading:\s*"What is an LLM wiki\?"/);
+  assert.match(article, /heading:\s*"The five-minute LLM-wiki protocol"/);
+  assert.match(article, /\/brief <topic>/);
+  assert.match(article, /\/recall <question>/);
+  assert.match(article, /\/capture <decision \+ why>/);
+  assert.match(article, /\/handoff/);
   assert.match(article, /\/distill <topic>/);
   assert.match(article, /\/pages <topic>/);
+  assert.match(article, /heading:\s*"How to verify the loop"/);
+  assert.match(article, /source IDs or citations/);
+  assert.match(article, /heading:\s*"Failure modes and repairs"/);
+  assert.match(article, /context bloat/i);
+  assert.match(article, /stale links and contradictions/i);
+  assert.match(article, /human-authored pages/i);
+  assert.match(
+    article,
+    /heading:\s*"LLM wiki vs RAG, Obsidian, and agent memory"/,
+  );
+  assert.match(article, /RAG retrieves source chunks/i);
+  assert.match(article, /Obsidian is a human-owned vault/i);
+  assert.match(article, /agent memory preserves reusable context/i);
+  assert.match(article, /source document[\s\S]*atomic memory[\s\S]*maintained page/);
   assert.match(article, /does not replace codebase search/);
   assert.match(article, /current source code/);
-  assert.match(article, /This page explains the LLM-wiki category and workflow/);
   assert.match(article, /href:\s*"\/docs\/get-started"/);
   assert.match(article, /href:\s*"\/docs\/daily-workflow"/);
-  assert.match(article, /href:\s*"\/docs\/data-and-privacy"/);
+  assert.match(article, /href:\s*"\/docs\/review-and-trust"/);
   assert.match(article, /https:\/\/github\.com\/7xuanlu\/wenlan#what-does-wenlan-build/);
   assert.match(article, /https:\/\/github\.com\/7xuanlu\/wenlan#daily-workflow/);
   assert.match(article, /https:\/\/gist\.github\.com\/karpathy\/442a6bf555914893e9891c11519de94f/);
   assert.match(
     article,
-    /relatedSlugs:\s*\["source-backed-wiki-pages-ai-work",\s*"ai-memory-provenance",\s*"local-git-history-ai-memory"\]/,
+    /relatedSlugs:\s*\[\s*"source-backed-wiki-pages-ai-work",\s*"ai-work-memory-vs-knowledge-base",\s*"wenlan-vs-obsidian-ai-memory",\s*"ai-memory-provenance",\s*"local-git-history-ai-memory",?\s*\]/,
   );
   assert.match(
     supportArticle,
@@ -392,6 +432,25 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
     supportArticle,
     /relatedSlugs:\s*\["distilled-wiki-pages-ai-memory"/,
   );
+  assert.match(
+    obsidianArticle,
+    /relatedSlugs:\s*\[\s*"distilled-wiki-pages-ai-memory",\s*"markdown-local-index-ai-memory",\s*"source-backed-wiki-pages-ai-work",\s*"ai-work-memory-vs-knowledge-base",?\s*\]/,
+  );
+  assert.match(
+    obsidianArticle,
+    /quickAnswerLink:\s*\{[\s\S]*href:\s*"\/learn\/distilled-wiki-pages-ai-memory"/,
+  );
+  for (const inboundArticle of [
+    mcpArticle,
+    claudeArticle,
+    knowledgeBaseArticle,
+    memoryTypesArticle,
+  ]) {
+    assert.match(
+      inboundArticle,
+      /href:\s*"\/learn\/distilled-wiki-pages-ai-memory"/,
+    );
+  }
   assert.doesNotMatch(supportArticle, /LLM Wiki for AI Agents/);
   assert.match(home, /id:\s*"llm-wiki"/);
   assert.match(home, /href:\s*"\/learn\/distilled-wiki-pages-ai-memory"/);

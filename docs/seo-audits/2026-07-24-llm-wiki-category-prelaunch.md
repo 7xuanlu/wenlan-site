@@ -166,3 +166,22 @@ separately approval-gated.
 The change is locally complete and remains unpublished. Git push, merge, and
 production deployment require explicit approval. Indexing requests, GSC
 validation, and external publication remain separately approval-gated.
+
+## 2026-07-27 evidence correction
+
+The later authenticated query-plus-page export resolves a limitation that was
+explicit but not yet joinable at launch:
+
+- the target page's 2 impressions and average position 3.5 remain valid
+  page-level GSC data, but both underlying query impressions are hidden;
+- the visible `llm wiki 2.0` row maps to `https://wenlan.app/zh-TW`, not to
+  `/learn/distilled-wiki-pages-ai-memory`;
+- known qualified `llm wiki` query-to-target impressions are therefore 0 in
+  the `2026-06-27..2026-07-24` joined export.
+
+This does not erase the original Trends, OSS, maintained-source, or
+existing-page-refresh rationale, and the published experiment remains a
+measuring cohort. It does mean that position 3.5 must never be presented as
+the page's rank for `llm wiki`, and the `llm wiki 2.0` row must not be used as
+evidence that Google mapped the query to the article. Future readouts keep the
+page aggregate and joined visible-query cluster separate.
