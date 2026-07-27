@@ -4,7 +4,7 @@
 
 **Prepared:** `2026-07-27`
 
-**Status:** locally verified; publication approved; not yet published
+**Status:** live, production-verified, and measuring
 
 ## Decision
 
@@ -261,3 +261,25 @@ There is no concrete screenshot or Figma reference packet for this content
 refresh, so pixel-diff similarity and hotspot fields are not applicable. The
 fresh DOM metrics, full-page captures, interaction receipts, and direct visual
 inspection are the rendered evidence.
+
+## Production verification
+
+- PR #89 merged at `2026-07-27T05:28:59Z` as
+  `a8698b1629e88e4f48949fbc3ec96046e4e39f81`.
+- Vercel production completed for that exact commit at
+  `2026-07-27T05:29:47Z`.
+- At `2026-07-27T05:38:39Z`, the live English route exposed the exact title,
+  self-canonical, H1, original and modified dates, protocol, verification,
+  failure-repair, and adjacent-system sections.
+- All five English contextual source pages exposed the exact inbound link to
+  `/learn/distilled-wiki-pages-ai-memory`.
+- The deployed technical audit passed robots, 110 sitemap URLs, 14 key pages,
+  six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects,
+  six bridge-host redirects, and legacy-URL exclusions.
+- No Mandarin content or locale availability changed.
+
+This verifies publication and technical integrity only. It does not establish
+SEO lift, exact-query ranking, CTA conversion, source-to-page sessions, star
+attribution, setup success, or causality. The production slot is released, and
+the 24-hour technical/evidence readout is due after
+`2026-07-28T05:29:47Z`.
