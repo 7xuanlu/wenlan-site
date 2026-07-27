@@ -1,10 +1,32 @@
 # LLM Wiki, Obsidian, and AI Knowledge Cluster — 2026-07-26
 
-Status: candidate decision prepared from current evidence. No experiment is
-started while the `v0.15.0` release/download correction occupies the single
-production slot.
+Status: stopped before publication on `2026-07-27`. The link-only change was
+not pushed or deployed as a standalone experiment. Its useful links are folded
+into `EXP-2026-07-27-llm-wiki-implementation-guide-refresh`.
 
-## Decision
+## Evidence correction
+
+The authenticated query-plus-page join changes the interpretation of the two
+LLM-wiki rows used below:
+
+- `/learn/distilled-wiki-pages-ai-memory` has 0 clicks, 2 impressions, and
+  page-average position 3.5, but both query impressions are privacy-hidden.
+- The visible `llm wiki 2.0` row has 0 clicks, 1 impression, and average
+  position 13.0. It maps to `https://wenlan.app/zh-TW`, not to the target
+  article.
+- Known qualified `llm wiki` query-to-target impressions are therefore 0 in
+  the `2026-06-27..2026-07-24` join.
+- A fixed US English first-page Google SERP observation on `2026-07-27` did
+  not show Wenlan for `llm wiki`.
+
+The page row is still valid authenticated exposure, but position 3.5 cannot
+be described as the target article's rank for `llm wiki`, and the visible
+query cannot be used as proof that Google maps that intent to the article.
+This correction makes a link-only experiment too weak. It does not justify a
+new URL; it just requires the existing page to earn the category with more
+standalone utility.
+
+## Superseded decision
 
 Do not create another URL for generic `AI notes`, `AI 筆記`, `knowledge base`,
 or `AI 知識庫`. The requested discovery surface already exists as three
@@ -53,8 +75,8 @@ property or non-brand totals.
 
 | Existing page/query | Clicks | Impressions | Average position | Decision |
 | --- | ---: | ---: | ---: | --- |
-| LLM-wiki page | 0 | 2 | 3.5 | Keep the current category answer; strengthen its cluster exits only. |
-| `llm wiki 2.0` visible query | 0 | 1 | 13.0 | Confirms the category vocabulary but is too small for another URL. |
+| LLM-wiki page | 0 | 2 | 3.5 | Page aggregate only; both query impressions are hidden. |
+| `llm wiki 2.0` visible query | 0 | 1 | 13.0 | Maps to `/zh-TW`, not to the target article. |
 | English Obsidian page | 0 | 4 | 4.5 | Preserve the strong modifier-qualified page and link it directly to the LLM-wiki hub. |
 | AI work memory vs knowledge base | 0 | 9 | 8.0 | Preserve the current page while its 20-impression experiment threshold is still pending. |
 
@@ -77,7 +99,7 @@ request-relative `0–100` units:
 Those indices are not keyword volume and are not converted into GSC,
 visitors, outbound events, or stars.
 
-## Current coverage graph
+## Production-baseline coverage graph
 
 | Surface | LLM wiki | Obsidian / AI notes | AI knowledge base | Remaining gap |
 | --- | --- | --- | --- | --- |
@@ -88,7 +110,55 @@ visitors, outbound events, or stars.
 | zh-TW Learn/LLM-wiki/Obsidian | Translated hub and article | Translated evidence-backed comparison | Supporting phrase plus English comparison path | No new URL needed |
 | zh-CN Learn/LLM-wiki | Translated hub and article | No locale-specific demand gate | Supporting category only | Keep narrower coverage |
 
-## Candidate gate
+## Historical local preparation
+
+The stopped link-only change had closed exactly the three missing English
+edges locally:
+
+- the LLM-wiki article now includes the existing AI work-memory versus
+  knowledge-base comparison;
+- the LLM-wiki article now includes the existing Wenlan versus Obsidian
+  AI-memory comparison;
+- the Obsidian comparison now includes the LLM-wiki category article.
+
+The Knowledge Base page, Learn hub, titles, canonical URLs, publication dates,
+locale availability, sitemap membership, schema types, FAQ policy, zh-TW
+content, and intentionally narrower zh-CN coverage remain unchanged.
+
+Verification after the last rendered-source edit:
+
+- focused LLM-wiki cluster contract: RED before the link changes, then GREEN;
+- Goal verifier: passed;
+- SEO contract: 189 passed, 0 failed;
+- i18n contract: 53 passed, 0 failed;
+- TypeScript: passed;
+- production build: passed with 211 static pages; IndexNow remained skipped
+  outside production;
+- compiled technical SEO: passed with 110 sitemap URLs, 26 redirects, seven
+  noindex headers, 14 checked HTML pages, and no `FAQPage` across 114 built
+  HTML files;
+- fresh rendered QA: all three English target pages at `1440x1000` and
+  `393x852` returned 200 with no horizontal overflow, console error, or page
+  error; both new navigation paths reached their exact destination.
+
+Fresh screenshot and JSON evidence is under
+`/private/tmp/wenlan-cluster-visual-qa-2026-07-27/fresh/`. With no exact
+reference packet, image-diff similarity is not applicable; both inline visual
+passes use the complete six-capture set plus DOM, link, canonical, overflow,
+and interaction evidence.
+
+- Pass A — design-system and functional integrity: **PASS, high confidence**.
+  The shared Learn article renderer and existing token-driven cards render
+  live DOM links; both new links navigate correctly, all six surfaces fit
+  their viewport, and no fake image, ad-hoc component, or unrelated motion was
+  introduced.
+- Pass B — visual and text precision: **PASS, high confidence**. Direct
+  inspection of every fresh full-page and related-section capture found no
+  clipping, collision, orphaned label, horizontal overflow, or broken link
+  wrapping. The rendered change is English-only; the complete Mandarin i18n
+  contract remains green and no Mandarin content changed.
+
+## Original candidate gate
 
 1. **Inspectable provenance:** authenticated GSC query/page exports, committed
    Trends provenance, exact routes, date range, locales, and native units are
@@ -104,6 +174,11 @@ visitors, outbound events, or stars.
 5. **Standalone utility:** the three pages remain useful decision guides even
    if the reader never installs Wenlan.
 
+The corrected query-to-page evidence weakens item 2 for the target article and
+shows that item 3 was framed too narrowly. The replacement experiment retains
+the useful links but adds the missing standalone definition, architecture,
+protocol, verification, failure-repair, and neutral comparison content.
+
 ## Guardrails
 
 - Keep all three existing canonical URLs, publication dates, hreflang,
@@ -114,3 +189,14 @@ visitors, outbound events, or stars.
   attribution.
 - Do not request indexing, submit validation, publish externally, or deploy
   without the applicable approval.
+
+## Terminal decision
+
+- Result: stopped before publication.
+- Decision: supersede the link-only experiment; do not evaluate its original
+  success or failure thresholds.
+- Production effect: none. No commit, push, PR, merge, deployment, indexing
+  request, validation, or external publication occurred for this standalone
+  experiment.
+- Successor:
+  `EXP-2026-07-27-llm-wiki-implementation-guide-refresh`.

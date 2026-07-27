@@ -1,9 +1,7 @@
 # Wenlan Source Release-Boundary Audit — 2026-07-25
 
-Status: local public-site correction prepared and verified. Commit, push, PR,
-merge, automatic Vercel deployment, and production verification were
-explicitly approved at `2026-07-27T04:00:43Z`; indexing requests and external
-publication remain approval-gated.
+Status: production-verified. Indexing requests and external publication remain
+approval-gated.
 
 ## Question
 
@@ -113,6 +111,23 @@ backend-pin manifest shapes.
 - Fresh visual evidence is under
   `/private/tmp/wenlan-visual-qa-2026-07-26/`.
 
+## Production verification
+
+- PR #88 merged at `2026-07-27T04:03:09Z` as
+  `f8ca1a975f3c567de934dd757023b0b199e61e15`.
+- Vercel production completed at `2026-07-27T04:03:56Z`.
+- The deployed technical audit passed robots, 110 sitemap URLs, 14 key pages,
+  six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects,
+  six bridge-host redirects, and legacy-URL exclusions.
+- English, zh-TW, and zh-CN homepages returned HTTP 200 with the localized
+  v0.15.0 copy and all four exact release-asset links.
+- The Windows x64, macOS Apple silicon, Linux x64, and Linux ARM64 direct
+  GitHub release assets each returned HTTP 200.
+
+These checks establish deployment and download availability only. They do not
+establish SEO lift, CTA conversion, source-to-page sessions, star attribution,
+or causality.
+
 ## Adjacent SEO-cluster decision
 
 The same authenticated GSC evidence window is recorded separately in
@@ -127,6 +142,8 @@ require a duplicate `AI notes` or generic `knowledge base` article.
 
 ## Boundaries
 
-No source repository was modified. No Git push, PR, merge, deployment,
-indexing request, GSC validation, external post, OSS submission, paid
-acquisition, account mutation, or metric-definition change was performed.
+No source repository was modified. The public-site correction was committed,
+pushed, merged through PR #88, automatically deployed, and production-verified
+under the recorded approval. No indexing request, GSC validation, external
+post, OSS submission, paid acquisition, synthetic analytics event, account
+mutation, or metric-definition change was performed.

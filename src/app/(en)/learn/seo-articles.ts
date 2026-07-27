@@ -22,6 +22,10 @@ type BaseSpec = {
   audience: string;
   heroBullets: [string, string, string];
   quickAnswer: string;
+  quickAnswerLink?: {
+    label: string;
+    href: string;
+  };
   problem: string;
   wenlanFit: string;
   actionHeading: string;
@@ -58,6 +62,7 @@ function makeArticle(spec: BaseSpec): LearnArticle {
       {
         heading: "Quick answer",
         body: [spec.quickAnswer, spec.wenlanFit],
+        link: spec.quickAnswerLink,
       },
       {
         heading: "When this problem appears",
@@ -1701,6 +1706,10 @@ const comparisonArticles: BaseSpec[] = [
     ],
     quickAnswer:
       "Use Obsidian-centered projects when your vault is already the operating system for notes, writing, and PKM. Use Wenlan when AI agents need a shared local work-memory loop with capture, recall, review, distillation, provenance, and handoff across Claude Code, Codex, Cursor, Gemini CLI, and other MCP-compatible tools.",
+    quickAnswerLink: {
+      label: "Compare the LLM-wiki architecture and workflow",
+      href: "/learn/distilled-wiki-pages-ai-memory",
+    },
     problem:
       "Obsidian AI projects solve real problems: letting agents read a vault, write notes, run inside Obsidian, or expose vault operations over MCP. The remaining question is whether the vault should be the memory system itself, or whether the vault should stay a readable projection while a local daemon owns indexing, review states, provenance, and work-session handoffs.",
     wenlanFit:
@@ -1724,7 +1733,12 @@ const comparisonArticles: BaseSpec[] = [
       "Can Wenlan pages be used from Obsidian?",
       "Yes. Distilled pages and session artifacts are projected as readable Markdown under ~/.wenlan, so you can inspect them directly or link them into an Obsidian workflow.",
     ],
-    relatedSlugs: ["markdown-local-index-ai-memory", "source-backed-wiki-pages-ai-work", "ai-work-memory-vs-knowledge-base"],
+    relatedSlugs: [
+      "distilled-wiki-pages-ai-memory",
+      "markdown-local-index-ai-memory",
+      "source-backed-wiki-pages-ai-work",
+      "ai-work-memory-vs-knowledge-base",
+    ],
     officialReferences: [
       {
         label: "Obsidian official site",

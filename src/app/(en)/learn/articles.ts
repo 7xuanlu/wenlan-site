@@ -235,6 +235,10 @@ const baseArticles: LearnArticle[] = [
           "Wenlan is more than a bare MCP store. It is a source-backed LLM wiki with a local runtime, CLI, MCP connector, Claude Code plugin, Codex plugin, optional desktop app, and human review paths.",
           "The MCP server is the bridge: AI tools read and write memory, while Wenlan keeps the broader work context visible, searchable, and locally owned.",
         ],
+        link: {
+          label: "See the LLM-wiki architecture and workflow",
+          href: "/learn/distilled-wiki-pages-ai-memory",
+        },
       },
     ],
     faqs: [
@@ -424,6 +428,10 @@ const baseArticles: LearnArticle[] = [
           "Use Wenlan when project context needs provenance, review, deletion, handoff, distillation, and access from more than one MCP-compatible tool.",
           "Useful Wenlan captures are specific and grounded: why a decision was made, what tradeoffs were considered, what command verifies a change, which module owns a behavior, or what gotcha should not be rediscovered next week.",
         ],
+        link: {
+          label: "Turn Claude Code memory into an LLM wiki",
+          href: "/learn/distilled-wiki-pages-ai-memory",
+        },
       },
       {
         heading: "Install path for Claude Code",
@@ -583,16 +591,21 @@ const baseArticles: LearnArticle[] = [
     slug: "distilled-wiki-pages-ai-memory",
     eyebrow: "Concept",
     category: "Concepts",
-    title: "LLM Wiki for AI Agents: Source-Backed Pages in Wenlan",
+    title: "What Is an LLM Wiki? Architecture, Workflow, and Failure Modes",
     description:
-      "An LLM wiki turns sources and durable AI-work memory into maintained pages that agents and humans can inspect, reuse, and refresh.",
-    metaTitle: "LLM Wiki for AI Agents: Source-Backed Pages | Wenlan",
+      "An LLM wiki gives AI agents maintained, source-backed pages they can load on demand instead of replaying a whole vault or chat history.",
+    metaTitle: "LLM Wiki for AI Agents: Architecture & Workflow | Wenlan",
     metaDescription:
-      "See how an LLM wiki for AI agents turns captures into source-backed pages with /distill and /pages, while keeping code and repository search separate.",
+      "Learn how an LLM wiki for AI agents differs from RAG and notes, then use a source-backed workflow with setup, checks, and failure-mode repairs.",
     keywords: [
       "LLM wiki",
       "LLM wiki for AI agents",
       "LLM wiki for AI work",
+      "LLM wiki architecture",
+      "LLM wiki setup",
+      "LLM wiki vs RAG",
+      "LLM wiki Obsidian",
+      "Claude Code LLM wiki",
       "source-backed AI work wiki",
       "distilled wiki pages",
       "AI memory distillation",
@@ -601,21 +614,27 @@ const baseArticles: LearnArticle[] = [
       "memory provenance",
     ],
     publishedAt: "2026-06-24",
-    updatedAt: "2026-07-24",
+    updatedAt: "2026-07-27",
     author: DEFAULT_AUTHOR,
-    readingTime: "6 min read",
-    audience: "People deciding how AI agents should turn source material and durable work memory into maintained knowledge",
+    readingTime: "10 min read",
+    audience: "People designing a maintained knowledge layer for Claude Code, Codex, Cursor, and other AI agents",
     heroBullets: [
-      "An LLM wiki gives agents maintained pages instead of another pile of chat history or memory snippets.",
-      "Wenlan turns sources and durable captures into readable Markdown pages with inspectable support.",
-      "Stale reasons, revisions, and human review keep the wiki useful as the underlying work changes.",
+      "An LLM wiki maintains useful answers instead of treating raw notes, retrieved chunks, or chat logs as finished knowledge.",
+      "The architecture separates source material, atomic memory, maintained pages, and the index that loads only relevant context.",
+      "A practical loop needs observable checks and repairs for stale links, contradictions, context bloat, and human edits.",
     ],
     sections: [
       {
-        heading: "The short answer",
+        heading: "What is an LLM wiki?",
         body: [
-          "An LLM wiki for AI agents is a maintained knowledge layer built from inspectable sources and durable work memory. It gives an agent a current page to read and reuse without pretending that raw notes, chat logs, or opaque model memory are already a trustworthy answer.",
-          "Wenlan implements that pattern with three roles: Sources preserve the material being read, Memories preserve atomic decisions and lessons from real work, and Pages compile the current explanation with support that people can inspect.",
+          "An LLM wiki is a maintained knowledge layer for AI agents. It turns source material and durable work context into topic pages that an agent can load on demand, with enough provenance and maintenance state for a person to inspect why the current answer exists.",
+          "It is not simply a folder of AI-written notes. A useful LLM wiki separates raw evidence from reusable facts and maintained explanations, then gives each layer a different update rule. The result should remain useful even when the reader never installs the product used to build it.",
+        ],
+        bullets: [
+          "Sources preserve documents, conversations, files, and other inspectable evidence.",
+          "Atomic memories preserve one decision, lesson, correction, preference, or fact learned during work.",
+          "Maintained pages compile the current answer and cite the support behind it.",
+          "A routing index finds the relevant page without loading the entire wiki into every prompt.",
         ],
         link: {
           label: "Install Wenlan first",
@@ -623,27 +642,105 @@ const baseArticles: LearnArticle[] = [
         },
       },
       {
-        heading: "From capture to a maintained page",
+        heading: "The architecture behind a useful LLM wiki",
         body: [
-          "Capture one durable fact, decision, lesson, or correction while the evidence is still clear. Distill related material when it deserves a maintained page, then open that page when a later agent or human needs the compiled answer.",
-          "The commands are deliberately separate. `/capture` preserves one reusable idea, `/distill` creates or refreshes a page from related support, and `/pages` finds and opens the readable Markdown result.",
+          "The smallest dependable design has four planes: source storage, durable memory, maintained pages, and selective retrieval. Keeping them separate prevents a polished page from losing its evidence and prevents a raw event log from masquerading as the current answer.",
+          "Maintenance is part of the architecture, not a later cleanup job. When support changes, the system needs to mark the affected page stale, propose or perform a refresh according to ownership, and keep the revision inspectable.",
+        ],
+        bullets: [
+          "Ingest: register source material without rewriting it into a conclusion.",
+          "Capture: keep one complete, reusable idea with scope and provenance.",
+          "Distill: compose related support into a maintained topic page.",
+          "Retrieve: load the smallest useful page or memory set for the current task.",
+          "Refresh and review: expose stale reasons, contradictions, citations, and revisions.",
+        ],
+      },
+      {
+        heading: "The five-minute LLM-wiki protocol",
+        body: [
+          "Start only after Wenlan is installed and connected to the AI client. Use one harmless topic first. The protocol below exercises session startup, targeted retrieval, one durable write, a session boundary, page distillation, and human-readable output.",
+          "The commands are separate on purpose: recall should not silently write, capture should not rewrite a whole page, and distillation should not overwrite human-owned content without a review path.",
         ],
         code: {
-          label: "A minimal LLM-wiki workflow",
-          code: `/capture <durable fact + why>
+          label: "Five-minute protocol",
+          code: `/brief <topic>
+/recall <question>
+/capture <decision + why>
+/handoff
 /distill <topic>
 /pages <topic>`,
         },
         link: {
-          label: "Use the daily workflow",
+          label: "Use the complete daily workflow",
           href: "/docs/daily-workflow",
         },
+      },
+      {
+        heading: "How to verify the loop",
+        body: [
+          "Do not stop at a successful command. Verify the artifacts and the next retrieval. A trustworthy setup proves that the agent can recover the intended context later and that a person can inspect the maintained result outside the chat.",
+          "If any check fails, keep the test capture harmless, diagnose the connection or source boundary, and repeat the same topic before adding real project knowledge.",
+        ],
+        bullets: [
+          "The capture returns or exposes a durable record you can find again with the same topic.",
+          "The handoff records what changed and what the next session should do.",
+          "The page opens as readable Markdown and shows source IDs or citations for important claims.",
+          "A later recall or brief loads the relevant page or memory without pasting the full archive.",
+          "A changed source produces an inspectable stale reason, refresh, or reviewable revision instead of a silent overwrite.",
+        ],
+        link: {
+          label: "Review the trust and repair workflow",
+          href: "/docs/review-and-trust",
+        },
+      },
+      {
+        heading: "Example: from source to maintained answer",
+        body: [
+          "Suppose a release document establishes which platforms are actually supported. The source document remains inspectable, an atomic memory preserves the release decision and why it matters, and a maintained page compiles the current install answer. When the release document changes, the page should become stale or receive a reviewable revision.",
+          "This evidence trail is more useful than a detached summary because each layer has a clear owner and failure mode.",
+        ],
+        code: {
+          label: "Expected evidence trail",
+          code: `source document
+  -> atomic memory: decision + why + source_id
+  -> maintained page: current answer + citations
+
+source changes
+  -> stale reason or reviewable revision
+  -> refreshed page`,
+        },
+      },
+      {
+        heading: "Failure modes and repairs",
+        body: [
+          "The hard part is not generating the first page. It is keeping the wiki small enough to retrieve, current enough to trust, and explicit enough that people can repair it.",
+          "These failure modes repeat across real LLM-wiki, Obsidian, Claude Code, and agent-memory workflows:",
+        ],
+        bullets: [
+          "Context bloat or index truncation: keep the routing index short and load topic pages on demand instead of injecting the full vault.",
+          "Stale links and contradictions: retain provenance, mark affected pages stale, and review replacements rather than stacking another answer beside the old one.",
+          "Human-authored pages overwritten by automation: keep machine refreshes reviewable when a person owns the prose.",
+          "Token-heavy full-vault loading: retrieve the smallest relevant pages, memories, and source excerpts for the current question.",
+          "Cross-session blank starts: pair a compact brief with a handoff instead of depending on the previous chat window.",
+        ],
+      },
+      {
+        heading: "LLM wiki vs RAG, Obsidian, and agent memory",
+        body: [
+          "These tools can work together, but they do not own the same layer. The useful question is not which label wins; it is where evidence, current answers, human writing, and cross-session context should live.",
+        ],
+        bullets: [
+          "RAG retrieves source chunks for a question. An LLM wiki maintains a reusable answer, its support, and its refresh state.",
+          "Obsidian is a human-owned vault and writing surface. It can host or inspect wiki pages, but vault access alone does not define agent-memory policy or page maintenance.",
+          "Agent memory preserves reusable context from work. An LLM wiki composes selected memories and sources into a maintained explanation.",
+          "A plain folder plus prompts can be enough for a small, stable corpus. Add a daemon or MCP layer when several agents need the same retrieval, handoff, provenance, and review rules.",
+        ],
       },
       {
         heading: "What an LLM wiki does not replace",
         body: [
           "An LLM wiki does not replace codebase search, repository maps, current source code, test output, or the native documentation for a tool. Those surfaces remain authoritative for what the software does now.",
-          "The wiki carries a different kind of value: why a decision was made, which sources support the current explanation, what changed across sessions, and which lessons should follow the work into another AI client.",
+          "It is also unnecessary for one-off chats or a small set of stable documents that people already maintain well. Use the wiki when repeated work needs a current, inspectable answer across sessions or tools.",
         ],
         link: {
           label: "See how Wenlan separates the layers",
@@ -651,45 +748,32 @@ const baseArticles: LearnArticle[] = [
         },
       },
       {
-        heading: "How Wenlan keeps pages source-backed",
+        heading: "How Wenlan maps the architecture",
         body: [
-          "Each maintained Page records the Sources and Memories that support it. That lets a reader inspect why the page says what it says instead of trusting an attractive summary with no evidence trail.",
-          "This page explains the LLM-wiki category and workflow. For the citation, claim-support, and review mechanics themselves, use the separate source-backed-wiki guide.",
+          "Wenlan implements the pattern with three durable roles: Sources preserve inspectable material, Memories preserve atomic knowledge from work, and Pages compile maintained explanations. The local daemon owns retrieval while readable Markdown keeps pages and session artifacts visible.",
+          "The page lifecycle is explicit: distill support, cite it, track dependencies, refresh when needed, and review ownership-sensitive changes. That is the difference between a generated note and a maintained LLM wiki.",
         ],
         link: {
           label: "Inspect the source-backed page model",
           href: "/learn/source-backed-wiki-pages-ai-work",
         },
       },
-      {
-        heading: "Pages can age, refresh, and wait for review",
-        body: [
-          "A useful LLM wiki must admit when knowledge changes. Wenlan carries stale reasons and revision state so changed support can trigger a refresh instead of silently piling a new answer beside the old one.",
-          "Manual `/distill` is the deliberate path. Machine-maintained pages can refresh from current support, while changes to human-edited pages wait as reviewable revisions rather than overwriting the owner's work.",
-        ],
-        link: {
-          label: "Review the local data boundary",
-          href: "/docs/data-and-privacy",
-        },
-      },
-      {
-        heading: "Why this helps agents",
-        body: [
-          "Agents need compact, current context, not raw chat archaeology. A maintained page can state the present decision, preserve its support, and give different tools the same explanation to work from.",
-          "The page is still inspectable Markdown. Agents can retrieve it alongside atomic memories and graph context, while humans can read, edit, diff, and review the same knowledge outside the chat window.",
-        ],
-      },
     ],
     faqs: [
       {
-        question: "Are distilled pages just summaries?",
+        question: "What is an LLM wiki?",
         answer:
-          "No. A summary compresses source material. A maintained page composes related Sources and Memories, retains inspectable support, and can refresh when that support changes.",
+          "An LLM wiki is a maintained knowledge layer that turns inspectable sources and durable work context into topic pages AI agents can load on demand. Useful implementations retain provenance, stale state, and a human review path.",
       },
       {
-        question: "Can I read the pages myself?",
+        question: "Is an LLM wiki the same as RAG?",
         answer:
-          "Yes. Pages are projected as Markdown under ~/.wenlan/pages/ and can be opened in any editor or symlinked into Obsidian.",
+          "No. RAG retrieves source chunks for a question. An LLM wiki maintains a reusable explanation with citations and refresh state. A wiki can use RAG underneath, but retrieval alone does not maintain the answer.",
+      },
+      {
+        question: "Can Obsidian be an LLM wiki?",
+        answer:
+          "Obsidian can be the human-owned vault and readable page surface. To behave as an agent LLM wiki, the workflow still needs selective retrieval, provenance, maintenance rules, stale handling, and a safe boundary for automated edits.",
       },
       {
         question: "Should an LLM wiki replace repository search?",
@@ -697,7 +781,13 @@ const baseArticles: LearnArticle[] = [
           "No. Use current source code, repository search, tests, and tool documentation to verify software behavior. Use the LLM wiki for maintained explanations, decisions, lessons, provenance, and cross-session context.",
       },
     ],
-    relatedSlugs: ["source-backed-wiki-pages-ai-work", "ai-memory-provenance", "local-git-history-ai-memory"],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "ai-work-memory-vs-knowledge-base",
+      "wenlan-vs-obsidian-ai-memory",
+      "ai-memory-provenance",
+      "local-git-history-ai-memory",
+    ],
     officialReferences: [
       {
         label: "Wenlan Source, Memory, and Page model",
@@ -798,8 +888,8 @@ const baseArticles: LearnArticle[] = [
           "Distill related sources and memories into a page that can be reviewed and refreshed.",
         ],
         link: {
-          label: "Follow the daily workflow",
-          href: "/docs/daily-workflow",
+          label: "See the complete LLM-wiki workflow",
+          href: "/learn/distilled-wiki-pages-ai-memory",
         },
       },
       {
@@ -1689,6 +1779,10 @@ const baseArticles: LearnArticle[] = [
           "Wenlan is the durable work-memory and source-backed knowledge layer, not the entire agent architecture. The AI client owns working context. Wenlan can preserve useful session handoffs, durable facts, decisions, lessons, and maintained Pages. Prompts, project rules, skills, and executable code remain the procedural layer.",
           "Wenlan's identity, preference, decision, lesson, gotcha, and fact are capture metadata, not the four cognitive layers. They help classify a durable capture inside Wenlan; they do not relabel working, episodic, semantic, and procedural memory.",
         ],
+        link: {
+          label: "See how semantic memory becomes a maintained page",
+          href: "/learn/distilled-wiki-pages-ai-memory",
+        },
       },
     ],
     faqs: [

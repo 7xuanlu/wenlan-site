@@ -226,15 +226,17 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-25-context-loss-diagnostic-refresh`, live,
-  production-verified, and measuring. It no longer consumes the single
-  production slot. The AI agent memory types, Basic Memory, SuperLocalMemory,
-  claude-mem, stale-memory, and MCP shared-memory changes remain live,
+  `EXP-2026-07-27-llm-wiki-implementation-guide-refresh`, locally verified
+  and active while awaiting separate publication approval, consuming the
+  single production slot. The prior link-only proposal was stopped before
+  publication and its useful links were folded into this larger, separately
+  attributable refresh. The context-loss, AI agent memory types, Basic
+  Memory, SuperLocalMemory, claude-mem, stale-memory, and MCP shared-memory
+  changes remain live,
   production-verified, and measuring; they do not consume the slot.
 - Website-affecting technical correction:
-  `TECH-2026-07-26-source-release-boundary` is now an active public-site
-  release/download correction and consumes the single production slot until
-  production verification.
+  `TECH-2026-07-26-source-release-boundary` is production-verified and no
+  longer consumes the single production slot.
   `TECH-2026-07-26-provider-neutral-cta-tracking`, production-verified and no
   longer consuming the single production slot.
   `TECH-2026-07-26-knowledge-base-published-date`, production-verified and no
@@ -292,7 +294,7 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 12.
+- Active experiments: 13.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -303,16 +305,14 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Latest deployment observation: record-only PR #87 merged at
-  `2026-07-26T03:15:52Z` as
-  `e922686a39e4ed8dc38a35ff714c405718330472`; Vercel production completed at
-  `2026-07-26T03:16:41Z`. It records the production verification of PR #86,
-  whose provider-neutral CTA correction merged at `2026-07-26T03:12:02Z` as
-  `7674c47405ed42a71f8776b8276093fbea05fefd` and reached production at
-  `2026-07-26T03:12:51Z`. The deployed technical audit remained green with
-  110 sitemap URLs, 14 key pages, six utility noindex headers, sitemap-wide
-  `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL
-  exclusions.
+- Latest deployment observation: PR #88 merged at
+  `2026-07-27T04:03:09Z` as
+  `f8ca1a975f3c567de934dd757023b0b199e61e15`; Vercel production completed at
+  `2026-07-27T04:03:56Z`. The deployed audit passed 110 sitemap URLs, 14 key
+  pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+  redirects, six bridge-host redirects, and legacy-URL exclusions. English,
+  zh-TW, and zh-CN homepages returned 200 with the v0.15.0 copy and all four
+  exact asset links; all four GitHub release assets returned 200.
 - Latest source-release observation: refreshed at
   `2026-07-27T03:02:34Z`. Wenlan `v0.15.0` was published at
   `2026-07-26T05:13:54Z` with native Windows x64, macOS Apple silicon, Linux
@@ -320,7 +320,7 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   the CLI, daemon, MCP connector, ONNX Runtime, and Vulkan loader and is now
   eligible for a direct website download. wenlan-app's published release
   remains `v0.14.0`; its later Windows-compatible main work does not establish
-  a released Windows desktop app. Evidence and the active local public-site
+  a released Windows desktop app. Evidence and the production-verified
   correction are in
   `docs/seo-audits/2026-07-25-source-release-boundary.md`.
 - Last production observation: `2026-07-26T02:32:30Z`; PR #83 merged as
@@ -342,6 +342,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `/tmp/wenlan-seo/2026-07-25-goal-check.md`, with evidence fingerprint
   `sha256:05e9acea6da290f494238e55bafb3f9762ab858d44e0dec81b490a2277ba5599`.
   This is an early evidence refresh, not a scheduled experiment verdict.
+- LLM-wiki evidence correction: the target page's 2 impressions and average
+  position 3.5 are a page aggregate whose queries are fully privacy-hidden.
+  The only visible `llm wiki 2.0` query row maps to `/zh-TW`, not to the
+  target page. Known qualified `llm wiki` query-to-target impressions are
+  therefore 0 in the authenticated `2026-06-27..2026-07-24` join. The fixed
+  US English first-page SERP observation also did not show Wenlan. Position
+  3.5 must not be reported as the target page's rank for `llm wiki`.
 - Google Trends demand-discovery gate: resolved for the current decision at
   `2026-07-19T02:47:01Z` through signed-in official Explore UI CSV exports.
   Seventeen timeline comparisons and nine related-query exports cover
@@ -563,6 +570,49 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
+`EXP-2026-07-27-llm-wiki-implementation-guide-refresh` is active in local
+preparation and consumes the single production slot. It keeps the indexed
+English `/learn/distilled-wiki-pages-ai-memory` canonical URL and original
+publication date while turning the page into a standalone implementation
+guide: a generic definition, four-plane architecture, five-minute protocol,
+observable success checks, a source-to-page evidence trail, recurring failure
+modes and repairs, neutral RAG/Obsidian/agent-memory boundaries, and Wenlan's
+maintained first-party mapping. Five relevant English pages add contextual
+links into the refreshed guide. Locale availability, sitemap membership,
+schema type, CTA destination, and visible-only FAQ policy remain unchanged.
+
+The authenticated `2026-06-27..2026-07-24` baseline keeps source-native units
+separate: GSC property totals are 7 clicks and 329 impressions; visible-query
+totals are 1 click and 81 impressions, leaving a 6-click and 248-impression
+visibility gap. The target LLM-wiki page has 0 clicks, 2 impressions, and
+page-average position 3.5, but both query impressions are privacy-hidden.
+The only visible `llm wiki 2.0` row has 1 impression at position 13.0 and maps
+to `/zh-TW`, so known qualified query-to-target impressions are 0. Vercel
+separately reports 1,406 visitors and 1,612 pageviews property-wide; GitHub
+reports 47 stars. The corrected evidence, demand boundary, candidate gate,
+Reddit failure modes, SERP observation, and predeclared readouts are in
+`docs/seo-audits/2026-07-27-llm-wiki-implementation-guide-prelaunch.md`.
+
+The user approved this corrected local refresh in the current task after the
+query-to-page defect and stronger page design were presented. At
+`2026-07-27T05:26:43Z`, the user approved commit, Git push, ready PR creation,
+merge, the existing automatic Vercel deployment triggered by merge, and
+read-only production verification. Indexing requests, GSC validation, external
+publication, synthetic analytics events, paid acquisition, OSS submission,
+and metric changes remain unapproved for this separately attributable
+experiment.
+
+Local verification completed at `2026-07-27T04:59:46Z`: the focused contract
+ran RED then GREEN; Goal, 189 SEO, 53 i18n, TypeScript, production build,
+compiled technical SEO, and runtime locale gates pass. Fresh rendered QA
+covered the six English direct content/link surfaces at desktop and mobile
+breakpoints plus the existing zh-TW and zh-CN target routes on mobile. It
+found no document/H1 overflow, console warning/error, `FAQPage`, canonical or
+schema regression; all five new contextual links navigated to the exact
+target, and the visible FAQ opened correctly.
+
+### Measuring cohorts
+
 `EXP-2026-07-25-context-loss-diagnostic-refresh` is live,
 production-verified, and measuring. It refreshes the existing English
 `/learn/ai-coding-agent-loses-context` route around a four-way diagnostic:
@@ -710,8 +760,8 @@ not consume the production slot.
 
 ### Current technical correction
 
-`TECH-2026-07-26-source-release-boundary` is an active local public-site
-release/download correction and consumes the single production slot.
+`TECH-2026-07-26-source-release-boundary` is production-verified and no longer
+consumes the single production slot.
 The original contract defect remains fixed: published wenlan-app facts come
 from the highest immutable version tag with `git show`, both backend-pin
 manifest shapes are supported, and missing tags fail closed instead of
@@ -727,7 +777,7 @@ social-image release claims. Windows is described as a released headless
 runtime with ONNX Runtime and Vulkan support, not as a released desktop app;
 wenlan-app remains pinned to published `v0.14.0`.
 
-Local verification passes the Goal checker, 189 SEO tests, 53 i18n tests,
+Local verification passed the Goal checker, 189 SEO tests, 53 i18n tests,
 TypeScript, production build, compiled technical SEO, four direct release
 asset URL checks, and fresh rendered QA over 18 route/locale/viewport
 combinations. The first visual pass found and the second pass confirmed the
@@ -736,6 +786,13 @@ fix for awkward Chinese compound wrapping. Evidence is in
 approved commit, push, PR creation, merge, automatic Vercel deployment, and
 production verification at `2026-07-27T04:00:43Z`; indexing requests, GSC
 validation, and external publication remain unapproved.
+
+PR #88 merged at `2026-07-27T04:03:09Z` as
+`f8ca1a975f3c567de934dd757023b0b199e61e15`; Vercel production completed at
+`2026-07-27T04:03:56Z`. The deployed technical audit and the exact English,
+zh-TW, zh-CN, and four release-asset checks passed at
+`2026-07-27T04:06:15Z`. This proves release accuracy and availability only,
+not SEO lift, CTA conversion, star attribution, or causality.
 
 `TECH-2026-07-26-provider-neutral-cta-tracking` is production-verified. Before
 the correction, the live site loaded the configured Umami Cloud tracker, but
@@ -875,20 +932,12 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 ### Next decision
 
 The production slot is occupied by
-`TECH-2026-07-26-source-release-boundary` until its `v0.15.0` download surface
-is pushed, merged, automatically deployed, and production-verified under the
-user's explicit `2026-07-27T04:00:43Z` approval. Execute those gates now. Do
-not generate a synthetic production event; actual Umami totals remain
-manual/account-gated until authenticated access is available.
-
-After that production verification, start the bounded English internal-link
-closure recorded in
-`docs/seo-audits/2026-07-26-llm-wiki-obsidian-knowledge-cluster.md`.
-Authenticated GSC already shows the existing LLM-wiki, Obsidian, and
-knowledge-base pages; the clean gap is their incomplete cross-link graph, not
-another `AI notes` or generic knowledge-base URL. Measurement waiting does
-not block this next preparation. Keep zh-CN narrower until locale-specific
-evidence appears.
+`EXP-2026-07-27-llm-wiki-implementation-guide-refresh`, which is locally
+verified and waiting at the publication boundary. Present the exact diff and
+verification evidence for separate push, PR, merge, and deployment approval.
+Do not add a new URL or translate the new framing without locale-specific
+evidence. Do not generate a synthetic production event; actual Umami totals
+remain manual/account-gated.
 
 The
 `TECH-2026-07-26-knowledge-base-published-date` correction is

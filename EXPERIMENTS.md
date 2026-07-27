@@ -2402,3 +2402,231 @@ increase for that experiment.
   definitions.
 - Next step: run the frozen-contract verifier after this record, commit and
   publish the bounded correction, then append native-unit production evidence.
+
+### 2026-07-27T04:06:15Z — v0.15.0 release/download production verification
+
+- Record type: campaign-observation
+- Technical correction: `TECH-2026-07-26-source-release-boundary`
+- Status: production-verified; releases the single production slot
+- Git evidence: PR #88 merged at `2026-07-27T04:03:09Z` as
+  `f8ca1a975f3c567de934dd757023b0b199e61e15`.
+- Deployment evidence: the Vercel status for that exact commit changed to
+  `success` with `Deployment has completed` at `2026-07-27T04:03:56Z`.
+- Technical evidence: the deployed audit passed robots, 110 sitemap URLs, 14
+  key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+  redirects, six bridge-host redirects, and legacy-URL exclusions.
+- Render and asset evidence: English, zh-TW, and zh-CN homepages returned HTTP
+  200 with the localized v0.15.0 copy and all four exact asset links. The
+  Windows x64, macOS Apple silicon, Linux x64, and Linux ARM64 release assets
+  each returned HTTP 200.
+- Metric interpretation: this proves deployment and download availability
+  only. No SEO lift, CTA conversion, source-to-page session, star attribution,
+  setup success, or causal result is inferred.
+- Unperformed gated actions: no indexing request, GSC validation, Reddit or
+  other external post, OSS submission, paid acquisition, synthetic analytics
+  event, account mutation, or metric-definition change.
+- Next step: start the separately attributable LLM-wiki, Obsidian, and
+  knowledge-cluster internal-link experiment already requested by the user.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-27-llm-wiki-knowledge-cluster-links
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-27-llm-wiki-knowledge-cluster-links
+- Status: active
+- Data window: 2026-07-25..2026-07-31
+- Asset class: integration-hub
+- Launched: 2026-07-27
+- Hypothesis: Closing the missing related-link edges among Wenlan's existing LLM-wiki, Obsidian AI-memory, and AI knowledge-base pages will increase qualified Google exposure across that cluster without creating a competing URL or changing its category claims.
+- Candidate evidence: Authenticated GSC API data for `sc-domain:wenlan.app`, complete days `2026-06-27..2026-07-24`, reports the three existing pages separately; signed-in Trends evidence retains request-relative `0–100` indices for Worldwide English and Taiwan Mandarin demand; current route and content inspection proves the incomplete English cross-link graph. Repeated OSS, Reddit, and maintained first-party evidence supports modifier-qualified LLM-wiki, Obsidian, agent-memory, and knowledge-base jobs. Complete URLs, dates, locales, native units, limitations, candidate gate, and coverage graph are in `docs/seo-audits/2026-07-26-llm-wiki-obsidian-knowledge-cluster.md`. External observations remain demand discovery only and are not GSC input or keyword volume.
+- Baseline: GSC property totals are 7 clicks and 329 impressions; visible-query totals are 1 click and 81 impressions, leaving a 6-click and 248-impression visibility gap. The LLM-wiki page has 0 clicks, 2 impressions, and average position 3.5; the English Obsidian page has 0 clicks, 4 impressions, and position 4.5; the knowledge-base comparison has 0 clicks, 9 impressions, and position 8.0. Vercel separately reports 1,406 visitors and 1,612 pageviews property-wide; no target-route or source-to-page baseline is inferred. GitHub reports 47 total Wenlan stars. Umami and Vercel custom CTA observations remain unavailable or account-gated.
+- Change: Keep all three existing canonical URLs and visible answers. Add the English knowledge-base and Obsidian comparison routes to the LLM-wiki page's related paths, and add the English LLM-wiki route to the Obsidian comparison's related paths. Leave the already complete knowledge-base links, English Learn-hub cards, zh-TW cluster, and intentionally narrower zh-CN coverage unchanged. Add no article, title rewrite, `FAQPage` JSON-LD, indexing request, or external distribution.
+- Publish date: not-published
+- Index date: existing-indexed-pages
+- Minimum exposure: 15 combined GSC impressions across the three target pages in the first 28 complete post-deploy days
+- Success criteria: After 28 complete post-deploy days and at least 15 combined GSC target-page impressions, the cluster earns at least 1 GSC click or at least 30 combined impressions; per-page clicks, impressions, and average positions remain separate, and Vercel, Umami, and GitHub observations are reported separately without a causal claim.
+- Failure criteria: After 28 complete post-deploy days and at least 15 combined GSC target-page impressions, the cluster has 0 clicks and no more than 15 combined impressions. A result from 16 through 29 combined impressions with 0 clicks is inconclusive; fewer than 15 impressions is also inconclusive.
+- Stop criteria: Stop or hold if a link targets a missing or redirected route, another controller edits either page, the related paths become duplicative or misleading, or the change creates a canonical, indexing, robots, noindex, structured-data, sitemap, locale, publication-date, source-link, or rendered-layout regression.
+- 24h readout: pending — verify the two live English related-link sets, the unchanged knowledge-base links, canonical/indexability/schema/FAQ policy, English and Mandarin non-regression, production render, and separate source-native observations without an SEO-success judgment
+- 7d readout: pending — report GSC latency plus per-page clicks, impressions, and average position when available; report Vercel target-page presence, Umami internal CTA observations, and GitHub stars separately when available
+- W2 readout: pending — apply the minimum-exposure guard and inspect whether the cluster remains category-distinct rather than collapsing LLM wiki, AI notes, Obsidian, and knowledge base into one claim
+- W4 readout: pending — evaluate the predeclared success, failure, or inconclusive condition without changing thresholds
+- W8 readout: pending — record a post-campaign follow-up only if it remains useful
+- Result: pending
+- Decision: wait
+- Next step: finish the focused RED-to-GREEN contract, run full SEO/i18n/lint/build/technical and rendered verification, then present the exact diff for separate publication approval
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-27-llm-wiki-knowledge-cluster-links at 2026-07-27T04:45:29Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-27-llm-wiki-knowledge-cluster-links
+- Observed at: 2026-07-27T04:45:29Z
+- Readout: correction
+- Status: stopped
+- Evidence: The target LLM-wiki page has 0 clicks, 2 impressions,
+  and page-average position 3.5, but both underlying queries are
+  privacy-hidden. The authenticated query-plus-page join maps the only visible
+  `llm wiki 2.0` row to `https://wenlan.app/zh-TW`, not to the target article.
+  Known qualified `llm wiki` query-to-target impressions are therefore 0 for
+  `2026-06-27..2026-07-24`. A fixed US English first-page SERP observation
+  also did not show Wenlan. Position 3.5 is not an exact-query rank.
+- Result: inconclusive
+- Decision: stop
+- Interpretation: The experiment stopped before publication, so its original
+  minimum exposure, success, failure, and readout thresholds will not be
+  applied. Do not publish the three related-link changes as a standalone
+  experiment; fold the useful links into a stronger existing-page refresh
+  with standalone implementation utility.
+- Production effect: none. No commit, push, PR, merge, deployment, indexing
+  request, validation, or external publication occurred for this standalone
+  experiment.
+- Next step: start
+  `EXP-2026-07-27-llm-wiki-implementation-guide-refresh` in the released
+  production slot.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-27-llm-wiki-implementation-guide-refresh
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-27-llm-wiki-implementation-guide-refresh
+- Status: active
+- Data window: 2026-07-25..2026-07-31
+- Asset class: refresh
+- Launched: 2026-07-27
+- Hypothesis: Turning the existing English LLM-wiki route into a standalone
+  definition, architecture, protocol, verification, failure-repair, and
+  adjacent-system decision guide, with contextual inbound links from five
+  relevant existing pages, will earn qualified Google exposure or clicks
+  without creating a competing URL.
+- Candidate evidence: Authenticated GSC API data for `sc-domain:wenlan.app`,
+  complete days `2026-06-27..2026-07-24`, reports 2 privacy-hidden target-page
+  impressions and no known qualified query-to-target impression. A fixed US
+  English first-page SERP did not show Wenlan. Committed signed-in Trends
+  observations, Karpathy and Rohitg00 notes, the inspectable LLM-wiki OSS
+  surface, and independent Reddit threads repeat high-intent setup, freshness,
+  contradiction, context-bloat, Obsidian, Claude Code, MCP, and cross-session
+  jobs. Wenlan `v0.15.0` provides maintained first-party commands and
+  Source/Memory/Page lifecycle proof. Exact URLs, dates, locales, native units,
+  limitations, and the complete candidate gate are in
+  `docs/seo-audits/2026-07-27-llm-wiki-implementation-guide-prelaunch.md`.
+  External observations remain demand discovery only, not GSC input or
+  keyword volume.
+- Baseline: GSC property totals are 7 clicks and 329 impressions;
+  visible-query totals are 1 click and 81 impressions, leaving a 6-click and
+  248-impression visibility gap. The target page has 0 clicks, 2 impressions,
+  and page-average position 3.5; both queries are hidden. The visible
+  `llm wiki 2.0` row has 0 clicks, 1 impression, and position 13.0 but maps to
+  `/zh-TW`, so known qualified query-to-target impressions are 0. Vercel
+  separately reports 1,406 visitors and 1,612 pageviews property-wide; no
+  source-to-page session is inferred. GitHub reports 47 total Wenlan stars.
+  Umami and Vercel custom CTA observations remain unavailable or
+  account-gated.
+- Change: Keep `/learn/distilled-wiki-pages-ai-memory`, its original
+  publication date, English-only availability, sitemap/hreflang behavior,
+  Article and BreadcrumbList schemas, visible-only FAQ policy, and CTA
+  destination. Refresh H1 and metadata; add the generic four-plane
+  architecture, six-command five-minute protocol, observable success checks,
+  source-to-memory-to-page evidence trail, five recurring failure repairs,
+  and neutral RAG/Obsidian/agent-memory boundaries before the maintained
+  Wenlan mapping. Add contextual inbound links from the MCP memory, Claude
+  Code memory, AI-agent-memory-types, knowledge-base, and Obsidian pages.
+  Retain the prepared related links inside this experiment. Add no new URL,
+  Mandarin translation, `FAQPage` JSON-LD, indexing request, or external
+  distribution.
+- Publish date: not-published
+- Index date: existing-indexed-page-date-unavailable
+- Minimum exposure: 20 GSC target-page impressions in the first 28 complete
+  post-deploy days
+- Success criteria: After minimum exposure, at least 1 GSC target-page click
+  or at least 40 target-page impressions. Page-average position and visible
+  joined query rows remain separate and are not reported as exact-query rank.
+- Failure criteria: After 28 complete post-deploy days and minimum exposure,
+  the target has 0 clicks, fewer than 40 impressions, and page-average
+  position worse than 20.0. Below minimum exposure or any result between the
+  success and failure conditions is inconclusive.
+- Stop criteria: Stop or hold if a maintained Wenlan command or lifecycle
+  claim is invalid, an inbound link is missing or redirected, another
+  controller edits the route, or the change creates a canonical, indexing,
+  robots, noindex, structured-data, sitemap, locale, publication-date,
+  FAQ-policy, source-link, intent-overlap, or rendered-layout regression.
+- 24h readout: pending — verify the live route, H1, metadata, six-command
+  protocol, contextual inbound paths, canonical/indexability/schema/FAQ
+  policy, locale non-regression, and production render without an SEO-success
+  judgment
+- 7d readout: pending — report GSC latency, target-page clicks, impressions,
+  page-average position, and joined visible qualified rows when available;
+  report Vercel target presence, authenticated Umami CTA observations, and
+  GitHub stars separately
+- W2 readout: pending — apply the exposure guard and inspect whether the page
+  earns relevant joined `llm wiki`, Claude Code, Obsidian, and RAG-modified
+  intent without collapsing into generic AI notes or enterprise
+  knowledge-base demand
+- W4 readout: pending — evaluate the predeclared success, failure, or
+  inconclusive condition without changing thresholds
+- W8 readout: pending — record a post-campaign follow-up only if it remains
+  useful
+- Result: pending
+- Decision: wait
+- Next step: finish local SEO/i18n/lint/build/technical and rendered
+  verification, then present the exact diff for separate publication approval
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-07-27T04:59:46Z — LLM-wiki implementation guide locally verified
+
+- Record type: campaign-observation
+- Current experiment:
+  `EXP-2026-07-27-llm-wiki-implementation-guide-refresh`
+- Status: active; locally verified; not published; continues to consume the
+  single production slot until production verification or a terminal decision
+- Evidence correction retained: target-page average position 3.5 remains a
+  two-impression page aggregate with both queries hidden. The visible
+  `llm wiki 2.0` row maps to `/zh-TW`; known qualified query-to-target
+  impressions remain 0. No exact-query rank is inferred.
+- Scope: one existing English canonical refreshed with a generic definition,
+  four-plane architecture, six-command protocol, observable checks,
+  source-to-page evidence trail, five recurring failure repairs, neutral
+  adjacent-system boundaries, and maintained Wenlan proof. Five existing
+  English pages add contextual inbound links. No URL, locale availability,
+  original publication date, sitemap/hreflang behavior, schema type, CTA
+  destination, or visible-only FAQ policy changed.
+- Contract evidence: the focused acquisition assertion failed before the page
+  refresh and passed after it.
+- Static verification: Goal PASS; SEO 189/189; i18n 53/53; TypeScript PASS;
+  production build PASS with 211 static pages; compiled technical SEO PASS
+  with 110 sitemap URLs, 26 redirects, seven noindex headers, 14 checked HTML
+  pages, and no `FAQPage` across 114 built HTML files.
+- Runtime verification: the locale matrix passed 19 expected HTTP 200 routes
+  and five expected hard 404 routes against the isolated production server.
+  Fresh rendered QA covered six English direct content/link surfaces at
+  desktop and mobile breakpoints plus the existing zh-TW and zh-CN target
+  routes on mobile. All five contextual links navigated to the exact target;
+  the mobile FAQ opened; no document/H1 overflow, console warning/error, CJK
+  clipping, canonical, schema, or FAQ-policy regression was found.
+- Evidence path:
+  `/private/tmp/wenlan-llm-wiki-visual-qa-2026-07-27/`
+- Result: pending; no SEO lift or causal effect is inferred before publication
+  or from local verification.
+- Unperformed gated actions: no commit, push, PR, merge, deployment, indexing
+  request, GSC validation, Reddit or other external post, OSS submission,
+  paid acquisition, synthetic analytics event, or metric change.
+- Next step: present the exact local diff and verification results for
+  separate publication approval.
+
+### 2026-07-27T05:26:43Z — LLM-wiki implementation guide publication approved
+
+- Record type: campaign-observation
+- Current experiment:
+  `EXP-2026-07-27-llm-wiki-implementation-guide-refresh`
+- Status: active; locally verified; publication authorized
+- Approval: the user approved commit, Git push, ready PR creation, merge, the
+  existing automatic Vercel deployment triggered by merge, and read-only
+  production verification.
+- Boundaries retained: no request indexing, GSC validation, Reddit or other
+  external post, OSS submission, paid acquisition, synthetic analytics event,
+  account mutation, or metric-definition change is authorized.
+- Next step: re-run the frozen Goal and release gates, publish the scoped diff,
+  wait for required GitHub checks, merge, and verify the exact production
+  commit without making an SEO-success or causal claim.
