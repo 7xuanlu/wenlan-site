@@ -12,7 +12,7 @@ test("desktop user agents map to one explicit published release asset", () => {
   );
   assert.equal(
     recommendedReleaseAssetId(
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15",
+      "Mozilla/5.0 (Macintosh; arm64 Mac OS X 14_6) AppleWebKit/605.1.15",
     ),
     "macos-arm64",
   );
@@ -30,7 +30,7 @@ test("desktop user agents map to one explicit published release asset", () => {
   );
 });
 
-test("mobile and unknown user agents fall back to the complete download hub", () => {
+test("mobile, architecture-ambiguous, and unknown user agents fall back to the complete download hub", () => {
   assert.equal(
     recommendedReleaseAssetId(
       "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36",
@@ -40,6 +40,24 @@ test("mobile and unknown user agents fall back to the complete download hub", ()
   assert.equal(
     recommendedReleaseAssetId(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X)",
+    ),
+    null,
+  );
+  assert.equal(
+    recommendedReleaseAssetId(
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15",
+    ),
+    null,
+  );
+  assert.equal(
+    recommendedReleaseAssetId(
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 Version/18.0 Mobile/15E148 Safari/604.1",
+    ),
+    null,
+  );
+  assert.equal(
+    recommendedReleaseAssetId(
+      "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36",
     ),
     null,
   );

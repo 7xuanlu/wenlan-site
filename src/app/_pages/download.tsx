@@ -1,3 +1,4 @@
+import { DownloadPlatforms } from "@/components/download/download-platforms";
 import { TrackedLink, TrackedLocalizedLink } from "@/components/tracked-link";
 import { getCoreContent } from "@/i18n/content";
 import { LOCALE_CONFIG, type Locale } from "@/i18n/locales";
@@ -52,7 +53,7 @@ export function DownloadPage({ locale }: { locale: Locale }) {
   };
 
   return (
-    <main className="grain min-h-screen">
+    <main className="grain min-h-[100dvh]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -63,7 +64,7 @@ export function DownloadPage({ locale }: { locale: Locale }) {
       />
 
       <article>
-        <header className="relative overflow-hidden border-b border-[var(--o-border-subtle)] px-6 py-20 sm:py-28">
+        <header className="relative overflow-hidden border-b border-[var(--o-border-subtle)] px-5 py-10 sm:px-6 sm:py-16">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-[0.045]"
@@ -96,130 +97,26 @@ export function DownloadPage({ locale }: { locale: Locale }) {
               </span>
             </nav>
 
-            <div className="mt-12 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-              <div className="min-w-0">
-                <p className="font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)] uppercase">
-                  {content.eyebrow}
-                </p>
-                <h1 className="mt-4 max-w-full break-words font-serif text-5xl leading-[1.03] font-medium tracking-tight [overflow-wrap:anywhere] sm:text-7xl">
-                  {content.title}
-                </h1>
-                <p className="mt-7 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">
-                  {content.description}
-                </p>
-              </div>
-              <div className="flex flex-wrap items-center gap-4 lg:flex-col lg:items-end">
-                <span className="font-mono text-xs text-[var(--o-text-muted)]">
-                  {copy.stableLabel} {WENLAN_RELEASE.tag}
-                </span>
-                <TrackedLink
-                  href={WENLAN_RELEASE.releaseUrl}
-                  eventName="github_outbound"
-                  placement="download-page"
-                  locale={locale}
-                  context="setup"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-medium text-[var(--o-text-secondary)] underline decoration-[var(--o-border)] underline-offset-4 transition-colors hover:text-[var(--o-warm)]"
-                >
-                  {content.releaseSourceLabel}
-                </TrackedLink>
-              </div>
+            <div className="mt-8 min-w-0">
+              <h1 className="max-w-full break-words font-serif text-4xl leading-[1.05] font-medium tracking-tight [overflow-wrap:anywhere] sm:text-6xl">
+                {content.title}
+              </h1>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-[var(--o-text-secondary)] sm:text-lg">
+                {content.description}
+              </p>
             </div>
           </div>
         </header>
 
-        <section className="px-6 py-16 sm:py-20">
-          <div className="mx-auto max-w-5xl">
-            <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(240px,0.5fr)] sm:items-end">
-              <h2 className="font-serif text-3xl font-medium tracking-tight sm:text-4xl">
-                {content.buildsTitle}
-              </h2>
-              <p className="text-sm leading-relaxed text-[var(--o-text-muted)] sm:text-right">
-                {content.buildsDescription}
-              </p>
-            </div>
+        <DownloadPlatforms
+          copy={copy}
+          locale={locale}
+          platforms={platforms}
+          releaseTag={WENLAN_RELEASE.tag}
+          releaseUrl={WENLAN_RELEASE.releaseUrl}
+        />
 
-            <div className="mt-8 divide-y divide-[var(--o-border-subtle)] border-y border-[var(--o-border-subtle)]">
-              {platforms.map((platform) => (
-                <article
-                  id={platform.id}
-                  key={platform.id}
-                  className="grid scroll-mt-24 gap-6 py-7 md:grid-cols-[180px_minmax(0,1fr)_auto] md:items-center"
-                >
-                  <div>
-                    <h3 className="font-serif text-2xl font-medium">
-                      {platform.name}
-                    </h3>
-                    <p className="mt-1 font-mono text-[11px] text-[var(--o-warm)]">
-                      {platform.architecture}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="max-w-xl text-sm leading-relaxed text-[var(--o-text-secondary)]">
-                      {platform.description}
-                    </p>
-                    <p className="mt-2 font-mono text-[10px] text-[var(--o-text-muted)]">
-                      {copy.packageIncludesLabel} · {platform.format} ·{" "}
-                      {platform.size}
-                    </p>
-                  </div>
-                  <TrackedLink
-                    href={platform.href}
-                    eventName="github_outbound"
-                    placement="download-page"
-                    locale={locale}
-                    context="setup"
-                    className="inline-flex w-full items-center justify-center rounded-lg bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] transition-transform duration-150 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)] md:w-auto"
-                  >
-                    {platform.actionLabel}
-                  </TrackedLink>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="border-y border-[var(--o-border-subtle)] bg-[var(--o-bg-alt)] px-6 py-16 sm:py-20">
-          <div className="mx-auto max-w-5xl">
-            <h2 className="font-serif text-3xl font-medium tracking-tight sm:text-4xl">
-              {content.setupTitle}
-            </h2>
-            <p className="mt-3 max-w-2xl text-base leading-relaxed text-[var(--o-text-secondary)]">
-              {content.setupDescription}
-            </p>
-
-            <div className="mt-10 grid gap-x-12 gap-y-10 md:grid-cols-2">
-              {platforms.map((platform) => (
-                <section key={`${platform.id}-setup`}>
-                  <div className="flex items-baseline justify-between gap-4 border-b border-[var(--o-border)] pb-3">
-                    <h3 className="font-serif text-xl font-medium">
-                      {platform.name}
-                    </h3>
-                    <span className="font-mono text-[10px] text-[var(--o-text-muted)]">
-                      {platform.architecture}
-                    </span>
-                  </div>
-                  <ol className="mt-5 space-y-4">
-                    {platform.setupSteps.map((step, index) => (
-                      <li
-                        key={step}
-                        className="grid grid-cols-[28px_minmax(0,1fr)] gap-3 text-sm leading-relaxed text-[var(--o-text-secondary)]"
-                      >
-                        <span className="font-mono text-[10px] text-[var(--o-warm)]">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-                        <span>{step}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </section>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="px-6 py-16 sm:py-20">
+        <section className="px-5 py-12 sm:px-6 sm:py-16">
           <div className="mx-auto grid max-w-5xl gap-8 border-b border-[var(--o-border)] pb-12 md:grid-cols-[minmax(0,1fr)_minmax(280px,0.72fr)] md:items-center">
             <div>
               <h2 className="font-serif text-3xl font-medium tracking-tight">
@@ -242,7 +139,7 @@ export function DownloadPage({ locale }: { locale: Locale }) {
               context="setup"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-lg border border-[var(--o-border)] px-5 py-3 text-center text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)]"
+              className="inline-flex min-h-11 items-center justify-center rounded-lg border border-[var(--o-border)] px-5 py-3 text-center text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]"
             >
               {content.setupGuideLabel}
             </TrackedLink>
@@ -252,7 +149,7 @@ export function DownloadPage({ locale }: { locale: Locale }) {
               placement="download-page"
               locale={locale}
               context="setup"
-              className="rounded-lg bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] transition-transform duration-150 hover:-translate-y-0.5 active:scale-[0.98]"
+              className="inline-flex min-h-11 items-center justify-center rounded-lg bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] transition-transform duration-150 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]"
             >
               {content.getStartedLabel}
             </TrackedLocalizedLink>

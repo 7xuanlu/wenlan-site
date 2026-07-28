@@ -80,7 +80,8 @@ export const zhCNContent = {
       },
       download: {
         eyebrow: "下载",
-        title: "下载适合你系统的 Wenlan。",
+        title:
+          "下\u2060载\u2060适\u2060合\u2060你\u2060系\u2060统\u2060的 Wenlan。",
         description:
           "Wenlan v0.15.0 在同一份 release 提供 CLI、本地 daemon 与 MCP connector。",
         stableLabel: "稳定版",

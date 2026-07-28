@@ -3,16 +3,18 @@ import type { WenlanReleaseAssetId } from "./releases";
 export function recommendedReleaseAssetId(
   userAgent: string,
 ): WenlanReleaseAssetId | null {
-  if (!userAgent || /Android|iPhone|iPad|iPod/i.test(userAgent)) {
+  if (!userAgent || /Android|iPhone|iPad|iPod|Mobile/i.test(userAgent)) {
     return null;
   }
 
   if (/Windows NT/i.test(userAgent)) {
-    return "windows-x64";
+    return /Win64|x64|WOW64|amd64/i.test(userAgent)
+      ? "windows-x64"
+      : null;
   }
 
   if (/Macintosh|Mac OS X/i.test(userAgent)) {
-    return "macos-arm64";
+    return /arm64|aarch64/i.test(userAgent) ? "macos-arm64" : null;
   }
 
   if (/Linux/i.test(userAgent)) {

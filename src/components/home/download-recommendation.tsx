@@ -64,7 +64,7 @@ export function DownloadRecommendation({
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-[var(--o-text-secondary)]">
               {platform.description}
             </p>
-            <p className="mt-3 font-mono text-[10px] text-[var(--o-text-muted)]">
+            <p className="mt-3 font-mono text-xs text-[var(--o-text-secondary)]">
               {platform.format} · {platform.size}
             </p>
             <TrackedLink
@@ -73,7 +73,7 @@ export function DownloadRecommendation({
               placement="home-download"
               locale={locale}
               context="home"
-              className="mt-auto inline-flex w-full items-center justify-center rounded-lg bg-[var(--o-text)] px-5 py-3 text-sm font-semibold text-[var(--o-bg)] transition-transform duration-150 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)] sm:w-fit"
+              className="mt-auto inline-flex min-h-11 w-full items-center justify-center whitespace-nowrap rounded-lg bg-[var(--o-text)] px-5 py-3 text-sm font-semibold text-[var(--o-bg)] transition-transform duration-150 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)] sm:w-fit"
             >
               {platform.actionLabel}
             </TrackedLink>
@@ -92,7 +92,7 @@ export function DownloadRecommendation({
               placement="home-download"
               locale={locale}
               context="setup"
-              className="mt-auto inline-flex w-full items-center justify-center rounded-lg bg-[var(--o-text)] px-5 py-3 text-sm font-semibold text-[var(--o-bg)] transition-transform duration-150 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)] sm:w-fit"
+              className="mt-auto inline-flex min-h-11 w-full items-center justify-center whitespace-nowrap rounded-lg bg-[var(--o-text)] px-5 py-3 text-sm font-semibold text-[var(--o-bg)] transition-transform duration-150 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)] sm:w-fit"
             >
               {copy.fallbackActionLabel}
             </TrackedLocalizedLink>

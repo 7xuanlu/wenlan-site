@@ -1,5 +1,5 @@
 import { DownloadRecommendation } from "@/components/home/download-recommendation";
-import { TrackedLink, TrackedLocalizedLink } from "@/components/tracked-link";
+import { TrackedLocalizedLink } from "@/components/tracked-link";
 import type { HomeContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
 import { WENLAN_RELEASE } from "@/lib/releases";
@@ -26,44 +26,23 @@ export function DownloadSection({
     >
       <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(420px,1.18fr)] lg:items-center">
         <div>
-          <p className="font-mono text-[11px] tracking-[0.28em] text-[var(--o-warm)] uppercase">
-            {copy.eyebrow}
-          </p>
-          <h2 className="mt-4 max-w-xl font-serif text-3xl font-medium tracking-tight text-balance sm:text-5xl">
+          <h2 className="max-w-xl font-serif text-3xl font-medium tracking-tight text-balance sm:text-5xl">
             {copy.title}
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-pretty text-[var(--o-text-secondary)]">
             {copy.description}
           </p>
-          <p className="mt-5 font-mono text-[11px] leading-relaxed text-[var(--o-text-muted)]">
-            {copy.recommendation.architectureNote}
-          </p>
-          <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+          <div className="mt-5">
             <TrackedLocalizedLink
               href="/download"
               eventName="setup_path_click"
               placement="home-download"
               locale={locale}
               context="setup"
-              className="text-sm font-semibold text-[var(--o-text)] underline decoration-[var(--o-warm)]/60 underline-offset-4 transition-colors hover:text-[var(--o-warm)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]"
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-[var(--o-text)] underline decoration-[var(--o-warm)]/60 underline-offset-4 transition-colors hover:text-[var(--o-warm)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]"
             >
               {copy.recommendation.allDownloadsLabel}
             </TrackedLocalizedLink>
-            <TrackedLink
-              href={WENLAN_RELEASE.releaseUrl}
-              eventName="github_outbound"
-              placement="home-download"
-              locale={locale}
-              context="home"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-[var(--o-text-muted)] transition-colors hover:text-[var(--o-text-secondary)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]"
-            >
-              {copy.releaseNotesLabel}
-            </TrackedLink>
-            <span className="font-mono text-[10px] text-[var(--o-text-muted)]">
-              {copy.stableLabel} {WENLAN_RELEASE.tag}
-            </span>
           </div>
         </div>
 

@@ -1010,6 +1010,9 @@ test("download information architecture keeps the homepage compact and the full 
     "src/components/home/download-recommendation.tsx",
   );
   const downloadPage = await readRepo("src/app/_pages/download.tsx");
+  const downloadPlatforms = await readRepo(
+    "src/components/download/download-platforms.tsx",
+  );
   const englishRoute = await readRepo("src/app/(en)/download/page.tsx");
   const localizedRoute = await readRepo("src/app/[locale]/download/page.tsx");
   const routing = await readRepo("src/i18n/routing.ts");
@@ -1019,11 +1022,26 @@ test("download information architecture keeps the homepage compact and the full 
   assert.match(homeDownload, /<DownloadRecommendation/);
   assert.match(homeDownload, /href="\/download"/);
   assert.doesNotMatch(homeDownload, /WENLAN_RELEASE\.assets\.map/);
+  assert.doesNotMatch(homeDownload, /copy\.eyebrow/);
+  assert.doesNotMatch(homeDownload, /copy\.releaseNotesLabel/);
+  assert.doesNotMatch(homeDownload, /copy\.stableLabel/);
   assert.match(recommendation, /^"use client";/);
   assert.match(recommendation, /recommendedReleaseAssetId\(navigator\.userAgent\)/);
   assert.match(recommendation, /placement="home-download"/);
   assert.match(downloadPage, /WENLAN_RELEASE\.assets\.map/);
-  assert.match(downloadPage, /placement="download-page"/);
+  assert.match(downloadPage, /<DownloadPlatforms/);
+  assert.match(downloadPage, /min-h-\[100dvh\]/);
+  assert.doesNotMatch(downloadPage, /content\.eyebrow/);
+  assert.match(downloadPlatforms, /^"use client";/);
+  assert.match(
+    downloadPlatforms,
+    /recommendedReleaseAssetId\(navigator\.userAgent\)/,
+  );
+  assert.match(downloadPlatforms, /orderedPlatforms/);
+  assert.match(downloadPlatforms, /<details/);
+  assert.match(downloadPlatforms, /open=\{isRecommended/);
+  assert.match(downloadPlatforms, /placement="download-page"/);
+  assert.match(downloadPlatforms, /copy\.packageIncludesLabel/);
   assert.match(downloadPage, /"@type": "BreadcrumbList"/);
   assert.match(downloadPage, /wenlan doctor/);
   assert.match(englishRoute, /buildPageMetadata\(\s*"en",\s*"\/download"/s);
