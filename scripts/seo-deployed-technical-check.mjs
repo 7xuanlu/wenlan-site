@@ -20,6 +20,9 @@ const BRIDGE_HOST_REDIRECTS = [
 
 const REQUIRED_SITEMAP_LOCS = [
   "https://wenlan.app",
+  "https://wenlan.app/download",
+  "https://wenlan.app/zh-TW/download",
+  "https://wenlan.app/zh-CN/download",
   "https://wenlan.app/learn",
   "https://wenlan.app/learn/claude-code-memory",
   "https://wenlan.app/learn/mcp-memory-server",
@@ -84,6 +87,17 @@ const OLD_SITEMAP_URL_PATTERNS = [
 
 const REQUIRED_HTML_PAGES = [
   { path: "/", canonical: "https://wenlan.app", type: "SoftwareApplication" },
+  { path: "/download", canonical: "https://wenlan.app/download", type: "WebPage" },
+  {
+    path: "/zh-TW/download",
+    canonical: "https://wenlan.app/zh-TW/download",
+    type: "WebPage",
+  },
+  {
+    path: "/zh-CN/download",
+    canonical: "https://wenlan.app/zh-CN/download",
+    type: "WebPage",
+  },
   { path: "/learn", canonical: "https://wenlan.app/learn", type: "CollectionPage" },
   {
     path: "/learn/claude-code-memory",

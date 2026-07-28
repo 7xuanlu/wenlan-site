@@ -47,7 +47,6 @@ Every started experiment uses one immutable block with these exact fields:
 - Decision: wait, scale, refresh, merge, stop, localize, or extend
 - Next step: one concrete next action or wait condition
 <!-- EXPERIMENT-RECORD:END -->
-
 ```
 
 Allowed start statuses are `approved`, `active`, `live`, `measuring`,
@@ -2669,3 +2668,122 @@ increase for that experiment.
   `2026-07-28T05:29:47Z`, keeping page-level GSC data, joined visible queries,
   Vercel, Umami when authenticated, and GitHub stars in their native units.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-27-download-information-architecture
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-27-download-information-architecture
+- Status: active
+- Data window: 2026-07-25..2026-07-31
+- Asset class: integration-hub
+- Launched: 2026-07-27
+- Hypothesis: Replacing the full homepage release matrix with one compact
+  browser-recommended platform action, while moving every archive and setup
+  path to a localized `/download` hub, will make the download action visible
+  in the first mobile anchor viewport and earn qualified GitHub outbound use
+  without weakening release accuracy or technical SEO.
+- Candidate evidence: The live `https://wenlan.app/#download` render inspected
+  on `2026-07-27` measured about 960.45 CSS pixels on desktop and about
+  1,739 to 1,834 CSS pixels on the inspected mobile views. The first mobile
+  anchor viewport exposed no download action. Current source promotes Windows
+  structurally before browser-system evidence exists and gives the other three
+  visible actions the same generic label. The user independently confirmed
+  that the homepage should show only a system recommendation and link to a
+  complete download page. Exact rendered, code, date, and locale provenance is
+  recorded in
+  `docs/seo-audits/2026-07-27-download-information-architecture-prelaunch.md`.
+- Baseline: GSC property totals are 7 clicks and 329 impressions;
+  visible-query totals are 1 click and 81 impressions, leaving a 6-click and
+  248-impression visibility gap. Vercel separately reports 1,406 visitors and
+  1,612 pageviews. GitHub reports 47 total Wenlan stars. Authenticated Umami
+  CTA totals and Vercel source-to-page sessions are unavailable, so no CTA
+  ratio, star attribution, or causal baseline is inferred.
+- Change: Keep the homepage `#download` anchor but replace its full platform
+  matrix with one compact client-leaf recommendation and a localized complete
+  download link. Add `/download`, `/zh-TW/download`, and `/zh-CN/download`
+  with all four immutable release archives, platform-specific setup guidance,
+  `wenlan doctor` verification, reciprocal canonical and hreflang metadata,
+  sitemap membership, and BreadcrumbList JSON-LD. Keep release facts sourced
+  from `WENLAN_RELEASE`; add no search article, `FAQPage` JSON-LD, indexing
+  request, or external distribution.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 100 Vercel pageviews summed in native units across the
+  localized homepage and download-hub paths in the first 28 complete
+  post-deploy days; this is not a deduplicated visitor count
+- Success criteria: After minimum exposure, at least 10 authenticated Umami
+  `github_outbound` events across `home-download` and `download-page`, while
+  technical, release, locale, and rendered-layout gates continue to pass.
+- Failure criteria: After 28 complete post-deploy days and minimum exposure,
+  zero authenticated Umami `github_outbound` events across both placements
+  while tracker coverage is verified.
+- Stop criteria: Stop or repair if the recommendation mismatches the detected
+  desktop OS family, an archive disappears, release facts drift from
+  `WENLAN_RELEASE`, another controller edits the same surfaces, or the change
+  creates a canonical, indexing, robots, noindex, redirect, structured-data,
+  sitemap, locale, analytics, accessibility, or rendered-layout regression.
+- 24h readout: pending - verify the live homepage recommendation, complete
+  download hub, four archive URLs, canonical/hreflang/sitemap/schema contract,
+  locale routes, mobile first-viewport action, and tracker presence without a
+  conversion or causal judgment
+- 7d readout: pending - report Vercel homepage and download-hub pageviews,
+  authenticated Umami outbound events when available, GSC, and GitHub stars
+  separately; keep the result inconclusive without tracker coverage
+- W2 readout: pending - apply the native-unit exposure guard and inspect
+  platform recommendation errors, download-hub engagement, and technical or
+  locale regressions
+- W4 readout: pending - apply the predeclared success, failure, or
+  inconclusive condition without changing thresholds
+- W8 readout: pending - record a post-campaign follow-up only if the
+  conversion surface remains useful to evaluate
+- Result: pending
+- Decision: wait
+- Next step: Implement and verify the approved local scope, then stop before
+  commit, push, PR, merge, deployment, request indexing, GSC validation,
+  synthetic analytics events, or external publication.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-07-27T06:22:51Z — Download information architecture local preflight
+
+- Record type: campaign-observation
+- Current experiment:
+  `EXP-2026-07-27-download-information-architecture`
+- Status: active; locally implemented and verified; not published
+- Verification: frozen Goal verifier, TypeScript, 193 SEO/brand/technical
+  tests, 53 i18n tests, production build, built technical SEO, local
+  production-route i18n checks, and rendered desktop/mobile QA all passed.
+- Rendered result: the English homepage download surface measured about 411
+  CSS pixels on the inspected desktop viewport and about 698 CSS pixels at
+  393 by 852 CSS pixels, versus live baselines of about 960 and 1,834 CSS
+  pixels. English, zh-TW, and zh-CN home/download routes had no document-level
+  horizontal overflow, and every mobile download-hub CTA stayed within the
+  viewport.
+- Technical result: all four immutable release assets, exact localized
+  canonicals, reciprocal hreflang, sitemap membership, `BreadcrumbList` and
+  `WebPage` JSON-LD, visible `wenlan doctor`, and the ordinary-site
+  no-`FAQPage` rule were verified locally.
+- Metric interpretation: local implementation and technical integrity are
+  verified. No pageview, event, search, star, setup, conversion, or causal
+  result is inferred before publication.
+- Unperformed separately gated actions: no commit, push, PR, merge,
+  deployment, indexing request, GSC validation, external post, OSS
+  submission, paid acquisition, synthetic analytics event, or
+  metric-definition change.
+- Next step: present the exact local diff and verification evidence for
+  separate publication approval.
+
+### 2026-07-27T06:58:14Z — Download information architecture PR approved
+
+- Record type: campaign-observation
+- Current experiment:
+  `EXP-2026-07-27-download-information-architecture`
+- Status: active; locally verified; PR publication authorized
+- Approval: the user approved commit, Git push, and PR creation for the exact
+  locally verified download-information-architecture diff.
+- Boundaries retained: no merge, deployment, request indexing, GSC
+  validation, Reddit or other external post, OSS submission, paid
+  acquisition, synthetic analytics event, account mutation, or
+  metric-definition change is authorized.
+- Next step: re-run the frozen Goal and release gates, publish an isolated
+  branch and draft PR, and stop before merge or deployment.

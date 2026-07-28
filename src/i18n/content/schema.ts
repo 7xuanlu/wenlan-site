@@ -94,20 +94,46 @@ export type HomeContent = SeoContent & {
     description: string;
     stableLabel: string;
     releaseNotesLabel: string;
-    windowsLabel: string;
     packageIncludesLabel: string;
+    recommendation: {
+      label: string;
+      fallbackTitle: string;
+      fallbackDescription: string;
+      fallbackActionLabel: string;
+      allDownloadsLabel: string;
+      architectureNote: string;
+    };
     platforms: readonly {
       id: "windows-x64" | "macos-arm64" | "linux-x64" | "linux-arm64";
       name: string;
       architecture: string;
       description: string;
       actionLabel: string;
+      setupSteps: readonly string[];
     }[];
     setup: {
       title: string;
       description: string;
       command: string;
       guideLabel: string;
+    };
+    page: SeoContent & {
+      breadcrumbs: {
+        home: string;
+        current: string;
+      };
+      eyebrow: string;
+      title: string;
+      description: string;
+      buildsTitle: string;
+      buildsDescription: string;
+      setupTitle: string;
+      setupDescription: string;
+      verifyTitle: string;
+      verifyDescription: string;
+      releaseSourceLabel: string;
+      setupGuideLabel: string;
+      getStartedLabel: string;
     };
   };
   useCases: {

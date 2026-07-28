@@ -34,7 +34,7 @@ export const enContent = {
           darkLabel: "Switch to dark theme",
         },
         links: [
-          { id: "download", href: "#download", label: "Download" },
+          { id: "download", href: "/download", label: "Download" },
           { id: "docs", href: "/docs", label: "Docs" },
           { id: "learn", href: "/learn", label: "Learn" },
           { id: "about", href: "/about", label: "About" },
@@ -80,13 +80,22 @@ export const enContent = {
       },
       download: {
         eyebrow: "Download",
-        title: "The local runtime, ready for your machine.",
+        title: "Download Wenlan for your system.",
         description:
-          "Wenlan v0.15.0 ships the CLI, local daemon, and MCP connector together. Choose the package for your system, then follow the short setup check.",
+          "Wenlan v0.15.0 ships the CLI, local daemon, and MCP connector together.",
         stableLabel: "Stable",
         releaseNotesLabel: "Release notes",
-        windowsLabel: "Native Windows runtime",
         packageIncludesLabel: "CLI · daemon · MCP connector",
+        recommendation: {
+          label: "Recommended for this device",
+          fallbackTitle: "Choose the right build",
+          fallbackDescription:
+            "We could not identify a supported desktop build in this browser.",
+          fallbackActionLabel: "View all downloads",
+          allDownloadsLabel: "All downloads and setup",
+          architectureNote:
+            "Check the operating system and architecture before downloading.",
+        },
         platforms: [
           {
             id: "windows-x64",
@@ -94,36 +103,83 @@ export const enContent = {
             architecture: "x64",
             description:
               "A complete native archive with ONNX Runtime and the Vulkan loader for supported GPUs. No WSL or Rust toolchain required.",
-            actionLabel: "Download for Windows",
+            actionLabel: "Download Windows x64",
+            setupSteps: [
+              "Download and extract the ZIP. Keep every included file together.",
+              "Add the extracted directory to PATH.",
+              "Open a new terminal and run wenlan doctor.",
+            ],
           },
           {
             id: "macos-arm64",
             name: "macOS",
             architecture: "Apple silicon",
             description: "Headless runtime with Metal support for local model paths.",
-            actionLabel: "Download",
+            actionLabel: "Download macOS Apple silicon",
+            setupSteps: [
+              "Download and extract the TAR.GZ archive.",
+              "Move the binaries to a directory on PATH.",
+              "Run wenlan doctor to verify the local runtime.",
+            ],
           },
           {
             id: "linux-x64",
             name: "Linux",
             architecture: "x64 · glibc",
             description: "Prebuilt runtime for common x86_64 Linux systems.",
-            actionLabel: "Download",
+            actionLabel: "Download Linux x64",
+            setupSteps: [
+              "Download and extract the TAR.GZ archive.",
+              "Move the binaries to a directory on PATH.",
+              "Run wenlan doctor to verify the local runtime.",
+            ],
           },
           {
             id: "linux-arm64",
             name: "Linux",
             architecture: "ARM64 · glibc",
             description: "Prebuilt runtime for aarch64 Linux systems.",
-            actionLabel: "Download",
+            actionLabel: "Download Linux ARM64",
+            setupSteps: [
+              "Download and extract the TAR.GZ archive.",
+              "Move the binaries to a directory on PATH.",
+              "Run wenlan doctor to verify the local runtime.",
+            ],
           },
         ],
         setup: {
-          title: "Prefer guided setup?",
+          title: "Install and verify",
           description:
-            "macOS Apple silicon can install and verify the runtime with one command. Windows users should keep every file in the ZIP together, add that directory to PATH, then run the setup checks.",
+            "Use the guided setup or follow the exact steps for your platform.",
           command: "npx -y wenlan setup",
-          guideLabel: "Open platform setup",
+          guideLabel: "Open the setup guide",
+        },
+        page: {
+          seo: {
+            title: "Download Wenlan for Windows, macOS, and Linux",
+            description:
+              "Download the current Wenlan CLI, local daemon, and MCP connector for Windows x64, macOS Apple silicon, Linux x64, or Linux ARM64.",
+          },
+          breadcrumbs: {
+            home: "Home",
+            current: "Download",
+          },
+          eyebrow: "Wenlan runtime",
+          title: "Download Wenlan",
+          description:
+            "Choose one published build, keep its files together, and verify the local runtime before connecting an AI tool.",
+          buildsTitle: "Choose your build",
+          buildsDescription:
+            "The current release provides four prebuilt desktop archives.",
+          setupTitle: "Install on your platform",
+          setupDescription:
+            "Each archive contains the CLI, local daemon, and MCP connector.",
+          verifyTitle: "Verify before you connect",
+          verifyDescription:
+            "Run the diagnostic after installation. It checks the local runtime and reports the next repair step.",
+          releaseSourceLabel: "View release source",
+          setupGuideLabel: "Read the full setup guide",
+          getStartedLabel: "Continue to get started",
         },
       },
       useCases: {

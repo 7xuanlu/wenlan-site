@@ -15,6 +15,7 @@ export type AnalyticsPlacement =
   | "home-hero"
   | "home-download"
   | "home-footer"
+  | "download-page"
   | "learn-search-path"
   | "learn-grid"
   | "learn-footer"

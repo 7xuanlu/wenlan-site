@@ -17,7 +17,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "593a9b5f8f22b778b3caaa6626e36ce59fba01392aaf01273dbac0131837d38d",
+    sourceHash: "6139066baaf5454594ff353176e753ce86e8ec82989018d8d7716107def160cb",
     content: {
       seo: {
         title: "Wenlan 文瀾 | AI 工作的 LLM wiki",
@@ -34,7 +34,7 @@ export const zhTWContent = {
           darkLabel: "切換到深色主題",
         },
         links: [
-          { id: "download", href: "#download", label: "下載" },
+          { id: "download", href: "/download", label: "下載" },
           { id: "docs", href: "/docs", label: "文件" },
           { id: "learn", href: "/learn", label: "學習" },
           { id: "about", href: "/about", label: "關於" },
@@ -80,13 +80,21 @@ export const zhTWContent = {
       },
       download: {
         eyebrow: "下載",
-        title: "本地 runtime，直\u2060接在你的電腦執行。",
+        title:
+          "下\u2060載\u2060適\u2060合\u2060你\u2060系\u2060統\u2060的 Wenlan。",
         description:
-          "Wenlan v0.15.0 把 CLI、本地 daemon 與 MCP connector 放在同一份 release。選\u2060擇你的系統\u2060套件，再完成簡短的 setup check。",
+          "Wenlan v0.15.0 在同一份 release 提供 CLI、本地 daemon 與 MCP connector。",
         stableLabel: "穩定版",
         releaseNotesLabel: "版本說明",
-        windowsLabel: "原生 Windows runtime",
         packageIncludesLabel: "內含 CLI、daemon 與 MCP connector",
+        recommendation: {
+          label: "推薦給這台裝置",
+          fallbackTitle: "選擇正確版本",
+          fallbackDescription: "瀏覽器無法辨識這台裝置支援的桌面版本。",
+          fallbackActionLabel: "查看全部下載",
+          allDownloadsLabel: "全部下載與安裝步驟",
+          architectureNote: "下載前請確認作業系統與處理器架構。",
+        },
         platforms: [
           {
             id: "windows-x64",
@@ -94,36 +102,80 @@ export const zhTWContent = {
             architecture: "x64",
             description:
               "完整原生套件，包含 ONNX Runtime 與供支援 GPU 使用的 Vulkan loader。不\u2060需\u2060要 WSL 或 Rust toolchain。",
-            actionLabel: "下載 Windows 版",
+            actionLabel: "下載 Windows x64",
+            setupSteps: [
+              "下載並解壓縮 ZIP，保留所有檔案在同一個目錄。",
+              "把解壓縮後的目錄加入 PATH。",
+              "開啟新的終端機並執行 wenlan doctor。",
+            ],
           },
           {
             id: "macos-arm64",
             name: "macOS",
             architecture: "Apple silicon",
             description: "Headless runtime；本地 model 路徑支援 Metal。",
-            actionLabel: "下載",
+            actionLabel: "下載 macOS Apple silicon",
+            setupSteps: [
+              "下載並解壓縮 TAR.GZ。",
+              "把執行檔移到 PATH 內的目錄。",
+              "執行 wenlan doctor 驗證本地 runtime。",
+            ],
           },
           {
             id: "linux-x64",
             name: "Linux",
             architecture: "x64 · glibc",
             description: "適用於常見 x86_64 Linux 系統的預編譯 runtime。",
-            actionLabel: "下載",
+            actionLabel: "下載 Linux x64",
+            setupSteps: [
+              "下載並解壓縮 TAR.GZ。",
+              "把執行檔移到 PATH 內的目錄。",
+              "執行 wenlan doctor 驗證本地 runtime。",
+            ],
           },
           {
             id: "linux-arm64",
             name: "Linux",
             architecture: "ARM64 · glibc",
             description: "適用於 aarch64 Linux 系統的預編譯 runtime。",
-            actionLabel: "下載",
+            actionLabel: "下載 Linux ARM64",
+            setupSteps: [
+              "下載並解壓縮 TAR.GZ。",
+              "把執行檔移到 PATH 內的目錄。",
+              "執行 wenlan doctor 驗證本地 runtime。",
+            ],
           },
         ],
         setup: {
-          title: "想用引導式安裝？",
-          description:
-            "macOS Apple silicon 可用一行指令安裝並驗證 runtime。Windows 使用者需保留 ZIP 內全部檔案、把目錄加入 PATH，再執行 setup checks。",
+          title: "安裝並驗證",
+          description: "使用引導式安裝，或依照平台的完整步驟操作。",
           command: "npx -y wenlan setup",
-          guideLabel: "開啟各平台設定",
+          guideLabel: "開啟安裝指南",
+        },
+        page: {
+          seo: {
+            title: "下載 Wenlan Windows、macOS 與 Linux 版",
+            description:
+              "下載最新版 Wenlan CLI、本地 daemon 與 MCP connector，支援 Windows x64、macOS Apple silicon、Linux x64 與 Linux ARM64。",
+          },
+          breadcrumbs: {
+            home: "首頁",
+            current: "下載",
+          },
+          eyebrow: "Wenlan 本地執行環境",
+          title: "下載 Wenlan",
+          description:
+            "選擇一個正式發布的版本、保留套件內全部檔案，再驗證本地 runtime，之後才連接 AI 工具。",
+          buildsTitle: "選擇你的版本",
+          buildsDescription: "目前 release 提供四個預編譯桌面套件。",
+          setupTitle: "依平台完成安裝",
+          setupDescription: "每個套件都包含 CLI、本地 daemon 與 MCP connector。",
+          verifyTitle: "連接前先驗證",
+          verifyDescription:
+            "安裝後執行診斷。它會檢查本地 runtime，並告訴你下一個修復步驟。",
+          releaseSourceLabel: "查看 release 來源",
+          setupGuideLabel: "閱讀完整安裝指南",
+          getStartedLabel: "繼續開始使用",
         },
       },
       useCases: {
