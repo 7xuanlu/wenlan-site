@@ -91,6 +91,15 @@ Indexing note: `Alternate page with proper canonical tag` is usually information
 
 Track these groups separately in Search Console:
 
+- AI knowledge base and wiki: `AI knowledge base`, `knowledge base for AI
+  agents`, `LLM wiki`, `source-backed wiki`, `AI 知識庫`, `AI 知识库`
+- Obsidian integration discovery: `obsidian claude code`, `claude code
+  obsidian`, `obsidian claude`, `obsidian mcp`, `obsidian claude code mcp`.
+  These are tool-pair query families observed in Trends related queries,
+  Reddit/OSS wording, or current SERPs; they are not keyword-volume claims.
+  Keep generic `obsidian`, `obsidian workflow`, `obsidian knowledge base`,
+  `markdown knowledge base`, and `obsidian ai memory` discovery-only until
+  visible GSC or another independent high-intent observation qualifies them.
 - Brand/entity: `wenlan ai work`, `wenlan ai work memory`, `wenlan mcp`, `useorigin`
 - AI work memory category: `ai work memory`, `memory for ai work`, `ai work memory layer`, `persistent memory for ai assistants`
 - MCP memory: `mcp memory server`, `memory mcp`, `claude mcp memory`, `cursor mcp memory`
@@ -98,9 +107,48 @@ Track these groups separately in Search Console:
 - Developer workflow: `wenlan claude code`, `wenlan for claude code`, `claude code memory`, `claude code persistent memory`, `cursor memory`, `ai coding agent work memory`
 - Setup and troubleshooting: `where does claude code store memory`, `add memory to claude code`, `codex persistent memory`, `cursor mcp memory`, `claude desktop mcp memory`, `wenlan 7878`
 - Comparisons: `wenlan vs basic memory`, `wenlan vs claude-mem`, `wenlan vs superlocal memory`, `wenlan vs mcp-memory-service`, `wenlan vs chatgpt memory`, `wenlan vs obsidian`, `wenlan vs notion ai`, `wenlan vs mem0`, `basic memory alternative`, `claude-mem alternative`
-- Obsidian AI memory: `obsidian ai memory`, `obsidian-mind alternative`, `claude-obsidian alternative`, `claude obsidian memory`, `obsidian mcp`, `obsidian mcp tools`, `obsidian claude code mcp`, `claude code obsidian memory`
+- Historical Obsidian-memory cohort: `obsidian ai memory`,
+  `obsidian-mind alternative`, `claude-obsidian alternative`, `claude
+  obsidian memory`. Report these when observed, but do not treat the cohort as
+  the acquisition center.
 - Architecture/workflow: `llm wiki for ai work`, `ai work wiki`, `source-backed ai work wiki`, `markdown ai work memory`, `local index ai work memory`, `distilled wiki pages ai work memory`, `ai work memory vs knowledge base`, `ai agent handoff`, `persistent context ai agents`, `ai memory provenance`, `review ai memory`, `git history ai memory`
 - Mandarin AI memory/wiki: `AI 工作 LLM wiki`, `AI 工作的 LLM wiki`, `有來源依據的 AI 記憶`, `有来源依据的 AI 记忆`, `AI 工作記憶`, `AI 工作记忆`
+
+## Simplified Chinese Community Heat
+
+Use public Simplified Chinese community surfaces to discover query wording
+before it appears in Wenlan GSC. This is demand discovery, not search-volume
+measurement and not a substitute for authenticated GSC.
+
+Inspect public V2EX, Bilibili, Juejin, Zhihu, and maintained Chinese OSS
+surfaces at most once per weekly campaign window or when selecting the next
+candidate. Do not create another standalone automation. Treat Xiaohongshu,
+WeChat, and other login- or app-gated surfaces as manual enrichment only.
+
+Preserve each observation's platform, title, exact URL, author, publication
+date, captured-at time, language, query family, and every reported engagement
+metric in its native name and unit. Never compare a Bilibili play with a V2EX
+view, Juejin read, Zhihu vote, GitHub star, Trends index, or GSC impression.
+Keep raw captures under
+`/tmp/wenlan-seo-demand/YYYY-MM-DD/zh-cn-community/`; commit only an
+interpreted, source-linked candidate record.
+
+Track these discovery families without assuming they are all Google queries:
+
+- Core: `LLM Wiki`, `LLM Wiki 知识库`, `AI 知识库`, `本地 AI 知识库`,
+  `AI 维护知识库`
+- Architecture: `RAG vs LLM Wiki`, `持续更新的知识库`, `有来源的知识库`,
+  `Markdown 知识库`
+- Tool bridge: `Claude Code + Obsidian`, `Obsidian CLI + Claude Code`,
+  `Obsidian MCP`, `Claudian`
+- Adjacent vocabulary: `个人知识库`, `第二大脑`, `AI 笔记工作流`,
+  `知识库最佳实践`
+
+A community phrase may nominate advance preparation only after deduplicating
+reposts and passing the complete candidate gate: inspectable provenance,
+independent repetition or clear high intent, a clean Wenlan coverage gap,
+maintained first-party proof, and standalone utility. Prefer refreshing an
+existing zh-CN page before creating a new localized URL.
 
 ## AI Visibility Prompts
 

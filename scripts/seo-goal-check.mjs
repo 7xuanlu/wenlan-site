@@ -9,7 +9,7 @@ const repoRoot = resolve(import.meta.dirname, "..");
 const FROZEN_START = "<!-- FROZEN-GOAL-CONTRACT:START -->";
 const FROZEN_END = "<!-- FROZEN-GOAL-CONTRACT:END -->";
 const EXPECTED_FROZEN_SHA256 =
-  "5a51e387697e66d2ff7836d351b414ea835c63500c8f8717971b93c2a3442415";
+  "bf7a19853ae7baacdb29d0335d452c63f1c42592dbde85e70889a28571bdb945";
 const DAY_MS = 24 * 60 * 60 * 1000;
 const CAMPAIGN_WINDOW_ANCHOR = new Date("2026-07-18T00:00:00.000Z");
 const CAMPAIGN_DEADLINE = new Date("2026-08-18T00:00:00.000Z");
@@ -141,6 +141,22 @@ const requiredFrozenClauses = [
   [
     "demand inputs stay physically separate",
     "`/tmp/wenlan-seo-demand`, physically separate from authenticated GSC inputs under `/tmp/wenlan-seo`.",
+  ],
+  [
+    "AI knowledge-base and wiki acquisition center",
+    "The acquisition center for new experiments is AI knowledge bases, LLM wiki, source-backed wiki, knowledge bases for AI agents, and modifier-qualified Obsidian or knowledge-base workflows.",
+  ],
+  [
+    "generic memory cannot nominate acquisition",
+    "Generic memory demand does not nominate a new acquisition experiment.",
+  ],
+  [
+    "memory cohorts remain measurement only",
+    "Existing memory pages and cohorts remain measurable evidence and may be maintained for factual or technical correctness, but they do not control the next content decision.",
+  ],
+  [
+    "memory route names cannot override acquisition focus",
+    "Historical route slugs or article titles containing `memory` do not change this priority.",
   ],
   [
     "candidate provenance gate",
@@ -384,6 +400,71 @@ function parseExperimentFields(block) {
     fields.set(key, value.trim());
   }
   return { fields, duplicates };
+}
+
+function markdownSection(document, heading) {
+  const marker = `\n### ${heading}\n`;
+  const start = document.indexOf(marker);
+  if (start === -1) return null;
+  const contentStart = start + marker.length;
+  const nextHeading = document.indexOf("\n### ", contentStart);
+  return document.slice(
+    contentStart,
+    nextHeading === -1 ? document.length : nextHeading,
+  );
+}
+
+function inspectAcquisitionFocus(plan, errors) {
+  const strategy = markdownSection(plan, "Current strategy");
+  const nextDecision = markdownSection(plan, "Next decision");
+
+  if (!strategy) {
+    errors.push('PLAN.md must retain one "### Current strategy" section.');
+    return;
+  }
+  if (!nextDecision) {
+    errors.push('PLAN.md must retain one "### Next decision" section.');
+    return;
+  }
+
+  const normalizedStrategy = normalizeWhitespace(strategy);
+  const normalizedNextDecision = normalizeWhitespace(nextDecision);
+  const priorityFamilies = [
+    "AI knowledge base",
+    "LLM wiki",
+    "source-backed wiki",
+    "knowledge base for AI agents",
+    "Obsidian",
+  ];
+
+  if (
+    !normalizedStrategy.includes(
+      "The next candidate must be selected from fresh evidence for",
+    ) ||
+    priorityFamilies.some((family) => !normalizedStrategy.includes(family))
+  ) {
+    errors.push(
+      "PLAN.md Current strategy must retain the AI knowledge-base and wiki priority demand families.",
+    );
+  }
+  if (
+    !normalizedStrategy.includes(
+      "generic memory demand no longer nominates the next acquisition asset.",
+    )
+  ) {
+    errors.push(
+      "PLAN.md Current strategy must retain that generic memory cannot nominate the next acquisition asset.",
+    );
+  }
+  if (
+    !normalizedNextDecision.includes(
+      "Memory is supporting infrastructure, not the acquisition center.",
+    )
+  ) {
+    errors.push(
+      "PLAN.md Next decision must keep memory as supporting infrastructure rather than the acquisition center.",
+    );
+  }
 }
 
 function inspectMutableCampaignState(plan, errors) {
@@ -720,6 +801,7 @@ export function validateGoalControlPlane({ plan, experiments }) {
     errors.push("EXPERIMENTS.md must retain the 24h, 7d, W2, W4, and W8 readout schema.");
   }
   const mutable = inspectMutableCampaignState(plan, errors);
+  inspectAcquisitionFocus(plan, errors);
   const ledger = inspectExperimentLedger(experiments, errors);
   if (mutable.active !== null && mutable.active !== ledger.active) {
     errors.push(
@@ -791,7 +873,7 @@ async function run() {
     return;
   }
   console.log(
-    "[seo-goal] PASS: frozen contract and production-concurrency guard verified.",
+    "[seo-goal] PASS: frozen contract, acquisition focus, and production-concurrency guard verified.",
   );
 }
 

@@ -17,8 +17,11 @@ const experimentFreeExperiments = canonicalExperiments.replace(
   /\n?<!-- EXPERIMENT-RECORD:START -->[\s\S]*?<!-- EXPERIMENT-RECORD:END -->\n?/g,
   "\n",
 );
-const currentExperimentId = canonicalPlan.match(
-  /\n### Current experiment\n\n`(EXP-[A-Za-z0-9][A-Za-z0-9-]*)`/,
+const currentExperimentSection = canonicalPlan.match(
+  /\n### Current experiment\n([\s\S]*?)(?=\n### )/,
+)?.[1];
+const currentExperimentId = currentExperimentSection?.match(
+  /`(EXP-[A-Za-z0-9][A-Za-z0-9-]*)`/,
 )?.[1];
 const canonicalActiveExperimentCount = Number(
   canonicalPlan.match(/^- Active experiments: (\d+)\.$/m)?.[1],
@@ -239,6 +242,37 @@ test("missing demand-discovery or approval clauses fail", () => {
   assert.ok(
     validationErrors({ plan: withoutApproval }).some((error) =>
       error.includes("approval boundary"),
+    ),
+  );
+});
+
+test("frozen and mutable acquisition focus cannot drift back to generic memory", () => {
+  const withoutFrozenCenter = canonicalPlan.replace(
+    "The acquisition center for new experiments is AI knowledge bases, LLM wiki,",
+    "The acquisition center for new experiments is generic memory,",
+  );
+  const withoutPriorityFamilies = canonicalPlan.replace(
+    "The next candidate must be selected from fresh evidence for",
+    "The next candidate may be selected from fresh evidence for",
+  );
+  const withoutMemoryBoundary = canonicalPlan.replace(
+    "generic memory demand no longer nominates the next acquisition asset.",
+    "generic memory demand may nominate the next acquisition asset.",
+  );
+
+  assert.ok(
+    validationErrors({ plan: withoutFrozenCenter }).some((error) =>
+      error.includes("AI knowledge-base and wiki acquisition center"),
+    ),
+  );
+  assert.ok(
+    validationErrors({ plan: withoutPriorityFamilies }).some((error) =>
+      error.includes("priority demand families"),
+    ),
+  );
+  assert.ok(
+    validationErrors({ plan: withoutMemoryBoundary }).some((error) =>
+      error.includes("generic memory cannot nominate"),
     ),
   );
 });
