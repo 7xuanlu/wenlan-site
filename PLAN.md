@@ -239,13 +239,16 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-29-obsidian-claude-code-refresh` is active in isolated local
-  preparation and consumes the single production slot. It refreshes the
+  `EXP-2026-07-29-obsidian-claude-code-refresh` is live,
+  production-verified, and measuring; it no longer consumes the single
+  production slot. It refreshes the
   existing English Obsidian canonical around the modifier-qualified
   `obsidian claude code`, `claude code obsidian`, and `obsidian mcp` intent;
-  it creates no new URL or locale. At `2026-07-29T06:04:29Z`, the user
-  approved commit, push, PR creation, merge, automatic Vercel deployment,
-  and read-only production verification of the locally verified scope.
+  it creates no new URL or locale. PR #95 merged at
+  `2026-07-29T06:06:33Z` as
+  `04fce969e09e56dee72b97bd0b59da05a09b4f61`; Vercel production completed
+  at `2026-07-29T06:07:17Z`. The deployed technical, locale, content, and
+  responsive render checks passed.
   Indexing requests, GSC validation, external publication, paid acquisition,
   synthetic analytics events, and metric changes remain unapproved.
   `EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh` is live,
@@ -651,10 +654,11 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-29-obsidian-claude-code-refresh` is active in isolated local
-preparation and consumes the single production slot. It keeps the existing
-English `/learn/wenlan-vs-obsidian-ai-memory` route while replacing the
-unsupported `Obsidian AI Memory` framing with the evidenced tool-pair intent:
+`EXP-2026-07-29-obsidian-claude-code-refresh` is live,
+production-verified, and measuring; the single production slot is free. It
+keeps the existing English `/learn/wenlan-vs-obsidian-ai-memory` route while
+replacing the unsupported `Obsidian AI Memory` framing with the evidenced
+tool-pair intent:
 `obsidian claude code`, `claude code obsidian`, `obsidian claude`,
 `obsidian mcp`, and `obsidian claude code mcp`.
 
@@ -692,6 +696,19 @@ automatic Vercel deployment, and read-only production verification of this
 exact scope. Request indexing, GSC validation, external publication, paid
 acquisition, synthetic analytics events, and metric changes remain separate
 explicit approval boundaries.
+
+PR #95 merged at `2026-07-29T06:06:33Z` as
+`04fce969e09e56dee72b97bd0b59da05a09b4f61`; Vercel production completed at
+`2026-07-29T06:07:17Z`. The live route returns direct HTTP 200 with its exact
+self-canonical, `index, follow`, stable `datePublished: "2026-06-06"`,
+`dateModified: "2026-07-29"`, Article and BreadcrumbList schema, the four
+intended integration layers, maintained sources, visible FAQ without
+`FAQPage`, and unchanged locale behavior. The deployed technical audit,
+locale matrix, complete desktop/mobile render inspection, and exact
+local-versus-production image differential passed. This verifies publication
+integrity only; it does not establish SEO lift, exact-query rank, conversion,
+star attribution, or causality. Run the 24-hour technical/evidence readout
+after `2026-07-30T06:07:17Z`.
 
 ### Measuring cohorts
 
@@ -1077,12 +1094,17 @@ and a maintained source-backed AI knowledge base. Keep
 `/learn/wenlan-vs-obsidian-ai-memory`; do not add another Obsidian URL or
 translate the refresh without matching locale evidence.
 
-The experiment is locally verified and publication-approved. Preserve the original
-`datePublished: "2026-06-06"`, the canonical, sitemap and locale behavior,
+The experiment is production-verified and measuring. PR #95 merged at
+`2026-07-29T06:06:33Z`; Vercel completed production at
+`2026-07-29T06:07:17Z`. Preserve the original
+`datePublished: "2026-06-06"`, canonical, sitemap and locale behavior,
 Article and BreadcrumbList schema, and visible FAQ without `FAQPage`.
-Publish the exact verified scope through an isolated PR, wait for automatic
-Vercel production, and perform read-only production verification. Request
-indexing and GSC validation remain separately gated.
+Do not rewrite the page again before a declared readout or new evidence.
+The next due experiment check is the 24-hour technical/evidence readout after
+`2026-07-30T06:07:17Z`. A separate non-overlapping website candidate may be
+prepared only after its complete gate passes; no new candidate is started by
+this production record. Request indexing and GSC validation remain separately
+gated.
 
 #### Scheduled measurement maintenance
 
