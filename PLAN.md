@@ -239,8 +239,15 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh` is approved, locally
-  verified, awaiting publication, and consumes the single production slot.
+  `EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh` is active and consumes
+  the single production slot while a production-render correction is in
+  flight. PR #92 merged at `2026-07-29T05:16:36Z` as
+  `1618945972a6957c4fd08501de464d2fb94627f1`; Vercel production completed at
+  `2026-07-29T05:17:23Z`. The refreshed content, canonical, indexability,
+  schema, sitemap, hreflang, and locale matrix passed live verification, but
+  the localized Learn renderer omitted the already-authored command block.
+  The isolated correction renders `section.code` on localized Learn pages and
+  keeps the experiment active until that production render is verified.
   The user approved commit, Git push, PR creation, merge, automatic Vercel
   deployment, and read-only production verification at
   `2026-07-29T05:13:16Z`. It refreshes the existing zh-CN canonical around
@@ -643,9 +650,12 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh` is active, locally
-verified, publication-approved at `2026-07-29T05:13:16Z`, and consumes the
-single production slot until production verification completes. It keeps the existing
+`EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh` is active,
+publication-approved at `2026-07-29T05:13:16Z`, and consumes the single
+production slot until its corrective production verification completes. PR
+#92 merged at `2026-07-29T05:16:36Z` as
+`1618945972a6957c4fd08501de464d2fb94627f1`, and Vercel production completed
+at `2026-07-29T05:17:23Z`. It keeps the existing
 `/zh-CN/learn/distilled-wiki-pages-ai-memory` URL and original
 `datePublished: "2026-07-04"` while changing the page from memory-first
 framing to a standalone Simplified Chinese guide for `LLM Wiki 知识库`,
@@ -675,7 +685,13 @@ user approved commit, Git push, PR creation, merge, automatic Vercel
 deployment, and read-only production verification at
 `2026-07-29T05:13:16Z`. Request indexing, GSC validation, external
 publication, paid acquisition, synthetic analytics events, and metric changes
-remain separate explicit approval boundaries. The complete hypothesis,
+remain separate explicit approval boundaries. Post-deploy verification found
+that the localized Learn renderer did not render the existing `section.code`
+data, so the six-command workflow was absent from live HTML despite the
+content record. A focused RED/GREEN contract and the matching localized
+renderer block are locally green; 393-pixel and 1440-pixel production-build
+renders keep document-level horizontal overflow at zero. This is a correction
+to the same experiment, not a second experiment or an SEO result. The complete hypothesis,
 exposure threshold, success/failure rules, stop conditions, readout schedule,
 and local verification evidence are append-only in `EXPERIMENTS.md`.
 

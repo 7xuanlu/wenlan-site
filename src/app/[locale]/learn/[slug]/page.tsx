@@ -343,6 +343,16 @@ export default async function LocalizedLearnSlugPage({
                         ))}
                       </ul>
                     )}
+                    {section.code && (
+                      <div className="mt-6 overflow-hidden rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)]">
+                        <p className="border-b border-[var(--o-border-subtle)] px-4 py-3 font-mono text-[10px] tracking-[0.18em] text-[var(--o-text-muted)] uppercase">
+                          {section.code.label}
+                        </p>
+                        <pre className="overflow-x-auto p-4 text-sm leading-relaxed text-[var(--o-text-secondary)]">
+                          <code>{section.code.code}</code>
+                        </pre>
+                      </div>
+                    )}
                     {section.link && (
                       <LocalizedLink
                         href={section.link.href}
