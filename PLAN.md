@@ -239,24 +239,22 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh` is live,
-  production-verified, and measuring; it no longer consumes the single
-  production slot. PR #92 merged at `2026-07-29T05:16:36Z` as
-  `1618945972a6957c4fd08501de464d2fb94627f1`; Vercel production completed at
-  `2026-07-29T05:17:23Z`. The refreshed content, canonical, indexability,
-  schema, sitemap, hreflang, and locale matrix passed live verification, but
-  the localized Learn renderer omitted the already-authored command block.
-  PR #93 repaired the localized renderer and merged at
-  `2026-07-29T05:27:38Z` as
-  `5a4cc9264a9fa7554fc20f56bbda07bdbbb50685`; corrected Vercel production
-  completed at `2026-07-29T05:28:22Z`. The live six-command workflow and
-  desktop/mobile production renders now pass.
-  The user approved commit, Git push, PR creation, merge, automatic Vercel
-  deployment, and read-only production verification at
-  `2026-07-29T05:13:16Z`. It refreshes the existing zh-CN canonical around
-  the evidence-backed AI-knowledge-base language without creating a new URL.
-  Request indexing, GSC validation, external publication, paid acquisition,
+  `EXP-2026-07-29-obsidian-claude-code-refresh` is active in isolated local
+  preparation and consumes the single production slot. It refreshes the
+  existing English Obsidian canonical around the modifier-qualified
+  `obsidian claude code`, `claude code obsidian`, and `obsidian mcp` intent;
+  it creates no new URL or locale. At `2026-07-29T06:04:29Z`, the user
+  approved commit, push, PR creation, merge, automatic Vercel deployment,
+  and read-only production verification of the locally verified scope.
+  Indexing requests, GSC validation, external publication, paid acquisition,
   synthetic analytics events, and metric changes remain unapproved.
+  `EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh` is live,
+  production-verified, and measuring; it no longer consumes the slot. PR #92
+  merged at `2026-07-29T05:16:36Z` as
+  `1618945972a6957c4fd08501de464d2fb94627f1`, and corrective PR #93 merged
+  at `2026-07-29T05:27:38Z` as
+  `5a4cc9264a9fa7554fc20f56bbda07bdbbb50685`; corrected Vercel production
+  completed at `2026-07-29T05:28:22Z`.
   `EXP-2026-07-27-download-information-architecture` is live,
   production-verified, and measuring; it no longer consumes the slot. PR #91
   merged at `2026-07-28T14:29:47Z` as
@@ -329,7 +327,7 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 15.
+- Active experiments: 16.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -653,55 +651,47 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh` is live,
-production-verified, and measuring. It no longer consumes the single
-production slot. Publication was approved at `2026-07-29T05:13:16Z`. PR
-#92 merged at `2026-07-29T05:16:36Z` as
-`1618945972a6957c4fd08501de464d2fb94627f1`, and Vercel production completed
-at `2026-07-29T05:17:23Z`. PR #93 repaired the localized renderer, merged at
-`2026-07-29T05:27:38Z` as
-`5a4cc9264a9fa7554fc20f56bbda07bdbbb50685`, and completed corrected
-production at `2026-07-29T05:28:22Z`. It keeps the existing
-`/zh-CN/learn/distilled-wiki-pages-ai-memory` URL and original
-`datePublished: "2026-07-04"` while changing the page from memory-first
-framing to a standalone Simplified Chinese guide for `LLM Wiki 知识库`,
-`AI 知识库`, `本地 AI 知识库`, and `RAG vs LLM Wiki`.
+`EXP-2026-07-29-obsidian-claude-code-refresh` is active in isolated local
+preparation and consumes the single production slot. It keeps the existing
+English `/learn/wenlan-vs-obsidian-ai-memory` route while replacing the
+unsupported `Obsidian AI Memory` framing with the evidenced tool-pair intent:
+`obsidian claude code`, `claude code obsidian`, `obsidian claude`,
+`obsidian mcp`, and `obsidian claude code mcp`.
 
-The candidate gate passed from independent public Bilibili, V2EX, Juejin,
-Chinese SERP, existing-site coverage, and maintained Wenlan-source evidence.
-Platform metrics remain in their native units and do not become keyword
-volume. The page refresh adds the four-layer architecture, Ingest/Query/Lint
-responsibilities, a source-backed five-minute implementation loop, verification
-checks, RAG and Obsidian boundaries, visible FAQs without `FAQPage` JSON-LD,
-and first-party references. Obsidian stays an integration bridge rather than
-the acquisition center.
+The candidate gate passes from the signed-in Taiwan Trends rising-query
+observations, repeated Reddit and current SERP wording, three maintained
+Obsidian/Claude Code OSS implementations, the existing page's four
+authenticated GSC impressions, and maintained Wenlan support for read-only
+Obsidian source sync plus source-backed Pages. The page will answer the
+standalone smallest-layer decision—direct Markdown files, editor context,
+MCP, then durable knowledge lifecycle—before describing Wenlan. Obsidian
+remains an integration bridge into the AI-knowledge-base story, not the
+acquisition center.
 
 The latest aligned baseline remains source-separated: GSC property totals are
 8 clicks and 395 impressions; visible-query totals are 2 clicks and
 92 impressions; the query visibility gap is 6 clicks and 303 impressions.
-The target zh-CN page has no GSC page row, which is not reported as zero.
-Vercel separately reports 2 target-page visitors and 3 pageviews; GitHub
-reports 47 stars; authenticated Umami events remain unavailable. No
-source-to-page session, keyword volume, SEO lift, conversion, star
-attribution, or causal outcome is preclaimed.
+The target page has 0 clicks, 4 impressions, and page-average position 4.5,
+but no visible Obsidian query row. Vercel separately reports 4 target-page
+visitors and 4 pageviews; GitHub reports 47 stars; authenticated Umami events
+remain unavailable. No exact-query rank, source-to-page session, keyword
+volume, SEO lift, conversion, star attribution, or causal outcome is
+preclaimed.
 
-Local preparation passed the Goal, SEO, i18n, TypeScript, production-build,
-built-technical, deployed-baseline, and rendered desktop/mobile gates. The
-user approved commit, Git push, PR creation, merge, automatic Vercel
-deployment, and read-only production verification at
-`2026-07-29T05:13:16Z`. Request indexing, GSC validation, external
-publication, paid acquisition, synthetic analytics events, and metric changes
-remain separate explicit approval boundaries. Post-deploy verification found
-that the localized Learn renderer did not render the existing `section.code`
-data, so the six-command workflow was absent from live HTML despite the
-content record. A focused RED/GREEN contract and the matching localized
-renderer block are locally green; 393-pixel and 1440-pixel production-build
-renders keep document-level horizontal overflow at zero. Production
-verification now confirms the same result on `wenlan.app`, with no browser
-warnings or errors. This is a correction to the same experiment, not a second
-experiment or an SEO result. The complete hypothesis,
-exposure threshold, success/failure rules, stop conditions, readout schedule,
-and local verification evidence are append-only in `EXPERIMENTS.md`.
+The original publication date is pinned from git history and the live Article
+schema as `2026-06-06`; only `dateModified` moves to `2026-07-29`. The focused
+RED-to-GREEN contract, 196 SEO tests, 55 i18n tests, TypeScript lint,
+production build, built technical checks, locale-route matrix, and fresh
+desktop/mobile production-build QA pass. The full hypothesis, evidence
+provenance, exposure threshold, success/failure rules, stop conditions, and
+readout schedule are in
+`docs/seo-audits/2026-07-29-obsidian-claude-code-prelaunch.md` and the
+append-only ledger. The change is locally verified. At
+`2026-07-29T06:04:29Z`, the user approved commit, push, PR creation, merge,
+automatic Vercel deployment, and read-only production verification of this
+exact scope. Request indexing, GSC validation, external publication, paid
+acquisition, synthetic analytics events, and metric changes remain separate
+explicit approval boundaries.
 
 ### Measuring cohorts
 
@@ -723,6 +713,16 @@ completed on 2026-07-28 and returned `Indexing requested`; do not repeat it.
 Additional indexing requests, GSC validation, external publication, synthetic
 analytics events, paid acquisition, OSS submission, and metric changes remain
 separately approval-gated.
+
+The Simplified Chinese LLM-wiki and AI-knowledge-base refresh is live,
+production-verified, and measuring. PR #92 plus the localized renderer
+correction in PR #93 completed corrected production at
+`2026-07-29T05:28:22Z`. The live route preserves
+`datePublished: "2026-07-04"`, emits `dateModified: "2026-07-29"`, and passes
+canonical, indexability, sitemap, hreflang, schema, visible six-command
+workflow, and desktop/mobile render checks. Its 24-hour technical/evidence
+readout is due after `2026-07-30T05:28:22Z`; it does not consume the
+production slot.
 
 `EXP-2026-07-25-context-loss-diagnostic-refresh` is live,
 production-verified, and measuring. It refreshes the existing English
@@ -1068,24 +1068,21 @@ raw/direct/qualified/page rows,
 GitHub stars, and indexing together while preserving every source's native
 unit and refusing a fabricated source-to-page join.
 
-The full candidate gate selected the existing Simplified Chinese LLM-wiki page
-for `EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh`. Memory is
-supporting infrastructure, not the acquisition center. Current public-source
-evidence gives `LLM Wiki 知识库`, `AI 知识库`, and `本地 AI 知识库` a
-stronger core fit than the Obsidian bridge, while the existing
-`/zh-CN/learn/distilled-wiki-pages-ai-memory` page provides the clean refresh
-seam. Keep the current URL and do not add another zh-CN page.
+The next full candidate gate selected a refresh of the existing English
+Obsidian page around modifier-qualified `obsidian claude code`, `claude code
+obsidian`, and `obsidian mcp` intent. Memory is supporting infrastructure, not
+the acquisition center. The standalone answer must distinguish direct
+Markdown file access, real-time editor context, an Obsidian MCP tool surface,
+and a maintained source-backed AI knowledge base. Keep
+`/learn/wenlan-vs-obsidian-ai-memory`; do not add another Obsidian URL or
+translate the refresh without matching locale evidence.
 
-Local content, localization, production-build, rendered desktop and mobile,
-canonical, sitemap, hreflang, schema, and FAQPage-absence checks pass. The user
-authorized commit, Git push, PR creation, merge, automatic Vercel deployment,
-and read-only production verification for this exact locally verified
-experiment at `2026-07-29T05:13:16Z`. PR #92 and the PR #93 renderer
-correction are production-verified. The experiment is now measuring, and its
-24-hour technical/evidence readout is due after
-`2026-07-30T05:28:22Z`. Community engagement remains demand-discovery
-evidence; GSC later measures Wenlan search exposure. Indexing requests and
-GSC validation remain separately gated.
+The experiment is locally verified and publication-approved. Preserve the original
+`datePublished: "2026-06-06"`, the canonical, sitemap and locale behavior,
+Article and BreadcrumbList schema, and visible FAQ without `FAQPage`.
+Publish the exact verified scope through an isolated PR, wait for automatic
+Vercel production, and perform read-only production verification. Request
+indexing and GSC validation remain separately gated.
 
 #### Scheduled measurement maintenance
 
@@ -1129,13 +1126,15 @@ result remains pending. Run their 7-day readouts after their predeclared
 times from `2026-07-31T19:18:03Z` through `2026-08-01T01:04:56Z`, using the
 Friday weekly evidence rather than duplicating its pipeline.
 
-The same-task `wenlan-claude-memory-24h-readout` heartbeat is scheduled for
-`2026-08-01T02:20:00Z`, safely after the Friday weekly SEO run and the latest
-7-day boundary. It will batch the due zh-TW Obsidian, AI-work-memory versus
-knowledge-base, Learn-hub, LLM-wiki, MCP shared-memory, stale-memory,
-claude-mem, SuperLocalMemory, Basic Memory, AI-agent-memory-types, and
-context-loss 7-day readouts. It must not record the Claude Code memory W2
-readout before `2026-08-02T00:26:09Z`.
+The same-task `wenlan-claude-memory-24h-readout` heartbeat is temporarily
+scheduled after `2026-07-30T05:28:22Z` for the actual 24-hour zh-CN LLM-wiki
+technical/evidence readout. After recording that due readout, update the same
+heartbeat back to `2026-08-01T02:20:00Z`, safely after the Friday weekly SEO
+run and the latest 7-day boundary. That batch covers the due zh-TW Obsidian,
+AI-work-memory versus knowledge-base, Learn-hub, LLM-wiki, MCP shared-memory,
+stale-memory, claude-mem, SuperLocalMemory, Basic Memory,
+AI-agent-memory-types, and context-loss 7-day readouts. It must not record the
+Claude Code memory W2 readout before `2026-08-02T00:26:09Z`.
 
 The authenticated `2026-06-27..2026-07-24` inter-window refresh adds
 19 property impressions, six visible-query impressions, four Vercel visitors,

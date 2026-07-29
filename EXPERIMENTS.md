@@ -3289,3 +3289,89 @@ increase for that experiment.
   query visibility gap, target-page rows, Vercel native-unit observations,
   authenticated Umami observations when available, and GitHub stars separate.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-29-obsidian-claude-code-refresh
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-29-obsidian-claude-code-refresh
+- Status: active
+- Data window: 2026-07-25..2026-07-31
+- Asset class: refresh
+- Launched: 2026-07-29
+- Hypothesis: Refocusing the existing English Obsidian comparison on the repeated `obsidian claude code`, `claude code obsidian`, and `obsidian mcp` integration question will increase qualified target-page search exposure without creating a competing URL or moving Wenlan away from its AI-knowledge-base center.
+- Candidate evidence: The signed-in Taiwan Trends capture from `2026-07-18` recorded related rising queries `obsidian claude code` (+3,350%), `obsidian and claude` (+2,400%), and `obsidian claude` (+1,500%); these are rising-query percentages, not search volume. Current Reddit titles, fixed English US SERP observations, and three inspectable unarchived OSS repositories independently repeat direct vault access, editor-context, Claude Code, and MCP intent. The existing English route has four authenticated GSC impressions but still leads with unsupported `Obsidian AI Memory` wording. Exact provenance, current GitHub native units, and maintained Wenlan proof are recorded in `docs/seo-audits/2026-07-29-obsidian-claude-code-prelaunch.md`.
+- Baseline: Authenticated GSC for `2026-06-28..2026-07-25` reports 8 property clicks and 395 property impressions; visible-query totals are 2 clicks and 92 impressions, leaving a 6-click and 303-impression visibility gap. The target page has 0 clicks, 4 impressions, and page-average position 4.5, but no visible Obsidian query row, so no exact-query rank is inferred. Vercel separately reports 1,420 property visitors, 1,628 property pageviews, 4 target-page visitors, and 4 target-page pageviews. GitHub reports 47 total Wenlan stars. Authenticated Umami events are unavailable, so no source-to-page session or CTA baseline is inferred.
+- Change: Refresh only the existing English `/learn/wenlan-vs-obsidian-ai-memory` H1, metadata, first answer, integration decision path, comparison rows, FAQs, maintained sources, and modified date around direct vault access, Claude Code IDE context, Obsidian MCP, and the boundary between access and a durable source-backed AI knowledge base. Preserve the canonical URL, original `datePublished: "2026-06-06"`, sitemap and locale behavior, Article and BreadcrumbList schema, visible FAQ without `FAQPage`, CTA destination, and existing zh-TW copy. Add no new URL or locale.
+- Publish date: not-published
+- Index date: unknown-existing-route
+- Minimum exposure: 5 GSC target-page impressions in the first 28 complete post-deploy days.
+- Success criteria: After minimum exposure, the target records at least 12 GSC target-page impressions or at least 1 target-page click. Page-average position and any visible joined qualified-query rows remain separate and are not substituted for exact-query rank.
+- Failure criteria: After 28 complete post-deploy days and minimum exposure, the target records 0 clicks, fewer than 8 target-page impressions, and page-average position worse than 20.0.
+- Stop criteria: Stop or repair before publication if a claim is not supported by a maintained first-party source, the change edits the zh-TW copy, or it creates a canonical, indexing, robots, noindex, structured-data, sitemap, locale, publication-date, FAQ-policy, source-link, or rendered-layout regression. After publication, stop further copy churn until a declared readout or new evidence.
+- 24h readout: Verify exact production commit, direct HTTP 200, exact canonical, indexability, Article and BreadcrumbList dates, visible direct-files/editor-context/MCP/knowledge-lifecycle decision layers, maintained sources, sitemap membership, FAQPage absence, English and Mandarin non-regression, and desktop/mobile rendering. Keep all available metrics in native units and do not infer SEO success.
+- 7d readout: Reuse the latest authenticated weekly range; report GSC property totals, visible-query totals, visibility gap, target-page rows, joined visible qualified-query rows, Vercel observations, authenticated Umami observations when available, and GitHub stars separately. Mark inconclusive when the range or exposure is incomplete.
+- W2 readout: Apply the same native-unit split and inspect target-page plus joined qualified-query exposure only after enough complete post-deploy days.
+- W4 readout: Apply the predeclared minimum exposure and success, failure, or inconclusive rule.
+- W8 readout: Preserve a post-campaign observation only if useful without moving the Goal's fixed final window.
+- Result: pending
+- Decision: wait
+- Next step: complete RED-to-GREEN content verification, full SEO/i18n/lint/build/technical checks, and rendered desktop/mobile verification, then stop before commit, push, PR, merge, or deploy without new explicit approval.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-07-29T05:57:52Z — Obsidian Claude Code refresh local verification
+
+- Record type: campaign-observation
+- Current experiment: `EXP-2026-07-29-obsidian-claude-code-refresh`
+- Status: active; locally verified; awaiting explicit publication approval
+- Scope: the existing English canonical now answers the smallest useful
+  integration layer in order—direct Markdown files, real-time editor context,
+  an Obsidian MCP tool surface, then a maintained source-backed knowledge
+  lifecycle. It does not create a new URL or locale, and it keeps Obsidian as
+  an integration bridge into the protected AI-knowledge-base acquisition
+  center.
+- RED/GREEN evidence: the focused Obsidian acquisition contract failed
+  against the previous memory-first title and passed after the refresh.
+- Verification: `pnpm seo:goal:check` passes; `pnpm test:seo` passes 196
+  tests with the Wenlan and wenlan-app source roots supplied;
+  `pnpm test:i18n` passes 55 tests; `pnpm lint` passes; `pnpm build`
+  generates 214 static pages; `pnpm seo:technical:built` passes 113 sitemap
+  URLs, 17 required URLs, seven noindex headers, and 117 built HTML pages
+  without `FAQPage`; the local production locale matrix passes 22 expected
+  direct-200 routes and five expected 404 routes; `git diff --check` passes.
+- Rendered evidence: fresh production-build desktop and mobile checks cover
+  the hero, quick answer, integration decision, comparison, CTA, maintained
+  references, related pages, FAQs, and footer. The exact self-canonical,
+  `index, follow`, Article and BreadcrumbList schema,
+  `datePublished: "2026-06-06"`, `dateModified: "2026-07-29"`, and visible
+  FAQ without `FAQPage` pass. The document and H1 do not overflow, the
+  comparison table remains inside its horizontal scroller, and no browser
+  warning or error was observed.
+- Visual QA: the inline design-system and functional-integrity pass and the
+  separate responsive visual-precision pass both pass. Production was a
+  geometry reference rather than a pixel target because its persisted theme
+  state differed from the local capture.
+- Boundaries: no commit, Git push, PR, merge, deployment, indexing request,
+  GSC validation, external post, OSS submission, paid acquisition, synthetic
+  analytics event, account mutation, or metric-definition change was
+  performed for this experiment.
+- Next decision: obtain explicit approval for commit, Git push, PR creation,
+  merge, automatic Vercel deployment, and read-only production verification
+  of this exact locally verified refresh. Indexing and GSC validation remain
+  separately gated.
+
+### 2026-07-29T06:04:29Z — Obsidian Claude Code refresh publication approval
+
+- Record type: campaign-approval
+- Current experiment: `EXP-2026-07-29-obsidian-claude-code-refresh`
+- Approval: the user explicitly approved publication of this locally verified
+  English Obsidian + Claude Code and MCP refresh.
+- Authorized actions: commit the exact verified worktree scope, push the
+  isolated branch, create and merge a pull request, allow the automatic Vercel
+  production deployment, and perform read-only production verification.
+- Boundaries retained: no request indexing, GSC validation, Reddit or other
+  external post, OSS submission, paid acquisition, synthetic analytics event,
+  account mutation, or metric-definition change is authorized.
+- Next step: rerun the Goal and publication gates, publish the isolated branch,
+  verify the exact production commit and live technical/content state, then
+  record production completion without claiming SEO lift or causality.
