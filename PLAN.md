@@ -93,6 +93,19 @@ state below this frozen section may change as evidence arrives.
   under `/tmp/wenlan-seo`. A committed candidate record contains only
   interpreted, redacted, inspectable provenance.
 
+### Acquisition focus
+
+- The acquisition center for new experiments is AI knowledge bases, LLM wiki,
+  source-backed wiki, knowledge bases for AI agents, and modifier-qualified
+  Obsidian or knowledge-base workflows.
+- Generic memory demand does not nominate a new acquisition experiment.
+  Existing memory pages and cohorts remain measurable evidence and may be
+  maintained for factual or technical correctness, but they do not control the
+  next content decision.
+- Historical route slugs or article titles containing `memory` do not change
+  this priority. Treat them as existing coverage only when they answer one of
+  the protected acquisition families above.
+
 ### Candidate gate
 
 An external observation can become an experiment only when all five conditions
@@ -226,14 +239,22 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-27-download-information-architecture`, active in local
-  preparation and consuming the single production slot. The user approved the
-  preserve-redesign direction at `2026-07-27T06:06:34Z`: keep one
-  operating-system recommendation on the homepage and move the complete
-  platform matrix and setup guidance to a localized `/download` route. At
-  `2026-07-27T06:58:14Z`, the user approved commit, Git push, and PR creation
-  for this exact locally verified diff. Merge, deployment, request indexing,
-  GSC validation, and other external publication remain separately gated.
+  `EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh` is approved, locally
+  verified, awaiting publication, and consumes the single production slot.
+  The user approved commit, Git push, PR creation, merge, automatic Vercel
+  deployment, and read-only production verification at
+  `2026-07-29T05:13:16Z`. It refreshes the existing zh-CN canonical around
+  the evidence-backed AI-knowledge-base language without creating a new URL.
+  Request indexing, GSC validation, external publication, paid acquisition,
+  synthetic analytics events, and metric changes remain unapproved.
+  `EXP-2026-07-27-download-information-architecture` is live,
+  production-verified, and measuring; it no longer consumes the slot. PR #91
+  merged at `2026-07-28T14:29:47Z` as
+  `ca89fb2d16f51a15c8b36378a22425af346b5954`. The production audit verified
+  113 sitemap URLs, 17 key pages, six utility noindex headers, sitemap-wide
+  `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL
+  exclusions. The localized homepage recommendation and `/download` routes
+  are live. Request indexing for the download surfaces was not submitted.
   The LLM-wiki implementation guide, context-loss, AI agent memory types,
   Basic Memory, SuperLocalMemory, claude-mem, stale-memory, and MCP
   shared-memory changes remain live, production-verified, and measuring; they
@@ -298,15 +319,20 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 14.
+- Active experiments: 15.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
 - Existing weekly automation: `weekly-origin-seo-cleanup`, ACTIVE, Friday at
   09:00, independent worktree execution; no field was changed in this setup.
-- Latest weekly action queue:
+- Latest completed Friday weekly action queue:
   `docs/seo-audits/2026-07-24-weekly-seo.md`, regenerated from the authenticated
   GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
+- Latest aligned inter-window action view:
+  `/tmp/wenlan-seo-2026-07-28/weekly-seo-corrected.md`, generated from the
+  authenticated `2026-06-28..2026-07-25` GSC and Vercel inputs through the
+  corrected acquisition classifier. Its durable interpretation is
+  `docs/seo-audits/2026-07-29-unified-acquisition-observation.md`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
 - Latest deployment observation: PR #89 merged at
@@ -346,6 +372,19 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `/tmp/wenlan-seo/2026-07-25-goal-check.md`, with evidence fingerprint
   `sha256:05e9acea6da290f494238e55bafb3f9762ab858d44e0dec81b490a2277ba5599`.
   This is an early evidence refresh, not a scheduled experiment verdict.
+- Latest unified acquisition observation: fetched for the aligned 28 complete
+  days `2026-06-28..2026-07-25` and recorded in
+  `docs/seo-audits/2026-07-29-unified-acquisition-observation.md`.
+  `sc-domain:wenlan.app` reports 8 clicks and 395 impressions; visible-query
+  totals are 2 clicks and 92 impressions, leaving a 6-click and
+  303-impression visibility gap. Vercel reports 1,420 visitors and
+  1,628 pageviews for the same range. GitHub reports 47 stars.
+  `sc-domain:useorigin.app` separately reports 5 clicks and 516 impressions;
+  it is a migration diagnostic and is never added to the Wenlan Goal metric.
+  The user submitted Change of Address from `useorigin.app` to `wenlan.app`
+  on 2026-07-28. Search Console now shows the move as active. The refreshed
+  Wenlan sitemap was submitted and read on 2026-07-28 with status `Success`
+  and 113 discovered pages.
 - LLM-wiki evidence correction: the target page's 2 impressions and average
   position 3.5 are a page aggregate whose queries are fully privacy-hidden.
   The only visible `llm wiki 2.0` query row maps to `/zh-TW`, not to the
@@ -447,21 +486,21 @@ after the anchor is frozen.
 
 | Metric | Fixed baseline | Verified live observation | Provenance | Gap to target from live observation |
 | --- | ---: | ---: | --- | ---: |
-| GitHub total stars | 47 | 47 | GitHub REST `GET /repos/7xuanlu/wenlan`, read on 2026-07-26 | 53 |
-| GSC rolling-28-day property impressions | 197 | 329 | Search Console API, `sc-domain:wenlan.app`, `2026-06-27..2026-07-24`; `/tmp/wenlan-seo/gsc-metadata.json` | 671 |
-| Vercel rolling-28-day visitors | 323 | 1,406 | Vercel Web Analytics API, project `wenlan-site`, `2026-06-27..2026-07-24`; `/tmp/wenlan-seo/vercel-metadata.json` | 594 |
+| GitHub total stars | 47 | 47 | GitHub REST `GET /repos/7xuanlu/wenlan`, read on 2026-07-28 | 53 |
+| GSC rolling-28-day property impressions | 197 | 395 | Search Console API, `sc-domain:wenlan.app`, `2026-06-28..2026-07-25`; `/tmp/wenlan-seo-2026-07-28/gsc-metadata.json` | 605 |
+| Vercel rolling-28-day visitors | 323 | 1,420 | Vercel Web Analytics API, project `wenlan-site`, `2026-06-28..2026-07-25`; `/tmp/wenlan-seo-2026-07-28/vercel-metadata.json` | 580 |
 
 Supporting quality split for the same live range:
 
-- GSC property totals: 7 clicks, 329 impressions.
-- GSC visible-query totals: 1 click, 81 impressions.
-- GSC query visibility gap: 6 clicks, 248 impressions.
-- Visible-query non-brand impressions: 40 using the existing Searchfit group
+- GSC property totals: 8 clicks, 395 impressions.
+- GSC visible-query totals: 2 clicks, 92 impressions.
+- GSC query visibility gap: 6 clicks, 303 impressions.
+- Visible-query non-brand impressions: 48 using the existing Searchfit group
   classification; this is a visible-row subset, not a property total, and the
   current `Other` bucket still contains noisy Wenlan misspellings.
-- Vercel raw totals: 1,406 visitors and 1,612 pageviews.
-- Vercel direct traffic: 262 visitors and 341 pageviews.
-- Vercel qualified-source aggregate: 1,149 visitors summed across the existing
+- Vercel raw totals: 1,420 visitors and 1,628 pageviews.
+- Vercel direct traffic: 270 visitors and 351 pageviews.
+- Vercel qualified-source aggregate: 1,152 visitors summed across the existing
   separate search, AI, and GitHub referrer allowlist; this is not a
   deduplicated user count.
 - Vercel reports 2 visitors and 2 pageviews for
@@ -471,10 +510,11 @@ Supporting quality split for the same live range:
   unavailable from the separate Vercel aggregates. Vercel custom events
   remain Pro/Enterprise-gated, and no authenticated Umami report was
   available, so GitHub outbound and CTA are not reported.
-- Visible non-brand candidate clusters currently include Basic Memory, Claude
-  Code memory, MCP memory, LLM wiki, and setup/troubleshooting. Valid problem
+- The visible-query inventory currently includes Basic Memory, Claude Code
+  memory, MCP memory, LLM wiki, and setup/troubleshooting. This inventory is
+  measurement evidence, not the acquisition priority list. Valid problem
   clusters at bootstrap: 0. Valid problem clusters now: 1, because Claude Code
-  native-memory boundaries and cross-session context passed the complete
+  native-memory boundaries and cross-session context passed the historical
   candidate gate in
   `docs/seo-audits/2026-07-18-growth-candidate-queue.md`.
 - Current page rows with impressions are preserved in
@@ -525,21 +565,40 @@ Supporting quality split for the same live range:
    GitHub issue/discussion, OSS documentation/directory, and SERP observations,
    preserving native units and provenance.
    The first multi-group Trends capture and interpretation is recorded in
-   `docs/seo-audits/2026-07-18-trends-demand-discovery.md`; it validates
-   `LLM wiki`, Claude/agent memory, modifier-qualified Obsidian, MCP memory,
-   and modifier-qualified AI knowledge-base clusters. The clarified focus is
-   agent-memory demand, a source-backed `LLM wiki for AI agents` product
-   category, and Claude Code/Obsidian/MCP entry points. The next existing page
-   is selected from fresh GSC evidence rather than Trends alone. Generic
-   `knowledge base`, `AI memory`, `AI wiki`, and exact Taiwan `AI 知識庫` are
-   not primary targets; `AI 筆記` is discovery-only until GSC or another clean
-   high-intent observation connects it to Wenlan.
+   `docs/seo-audits/2026-07-18-trends-demand-discovery.md`. It contains
+   historical observations across wiki, knowledge-base, Obsidian, and memory
+   families; those observations keep their original units but no longer share
+   one priority tier. On `2026-07-29`, the user corrected the acquisition
+   center to AI knowledge bases, LLM wiki,
+   source-backed wiki, and Obsidian or knowledge-base-adjacent workflows.
+   Memory remains enabling product infrastructure and supporting vocabulary;
+   generic memory demand no longer nominates the next acquisition asset.
+   The next candidate must be selected from fresh evidence for `AI knowledge
+   base`, `LLM wiki`, `source-backed wiki`, `knowledge base for AI agents`,
+   or a modifier-qualified Obsidian intent. For Obsidian, the currently
+   evidenced search language is the tool pair: `obsidian claude code`,
+   `claude code obsidian`, `obsidian claude`, `obsidian mcp`, and
+   `obsidian claude code mcp`. `Obsidian workflow` is an internal category,
+   not a proven query. Generic `obsidian`, `obsidian knowledge base`,
+   `markdown knowledge base`, and `obsidian ai memory` remain
+   discovery-only. Generic `knowledge base`, unqualified `AI wiki`, and exact
+   Taiwan `AI 知識庫` still require a clean intent and coverage-gap check;
+   `AI 筆記` remains discovery-only.
    A 2026-07-25 follow-up found independent direct-comparison surfaces from
    Mem0, Creed, and Hippo that include Basic Memory in a product-selection
-   decision. Combined with the existing Basic Memory page's authenticated
-   exposure and current-source drift, this clears the candidate gate for a
-   bounded English refresh. Each external page or repository remains one
-   inspectable observation, not keyword volume.
+   decision. That evidence remains valid for the already-shipped comparison
+   refresh, but it no longer nominates a new acquisition asset. Each external
+   page or repository remains one inspectable observation, not keyword volume.
+   On 2026-07-29, the user added a Simplified Chinese community-heat lane.
+   Once per campaign window or before candidate selection, inspect public
+   V2EX, Bilibili, Juejin, Zhihu, and maintained Chinese OSS wording. Preserve
+   every platform metric in its native unit, deduplicate reposts, and keep
+   login-gated sources manual. The initial snapshot in
+   `docs/seo-audits/2026-07-29-zh-cn-community-demand.md` independently
+   repeats `LLM Wiki 知识库`, `AI 知识库`, `本地 AI 知识库`,
+   `Claude Code + Obsidian`, and `Obsidian CLI + Claude Code`. These phrases
+   can nominate advance preparation through the full candidate gate; they do
+   not enter authenticated GSC input or become keyword-volume estimates.
 5. Prefer one existing indexed acquisition page with impressions for the first
    bounded experiment. Consider a net-new search asset only if the complete
    candidate gate passes, the preceding website change is production-verified,
@@ -557,64 +616,89 @@ Supporting quality split for the same live range:
    Obsidian comparison for a zh-TW localization in
    `docs/seo-audits/2026-07-19-localized-acquisition-gap.md`; generic
    `AI 筆記` remains supporting vocabulary rather than the article's target.
-9. Prefer the existing `/learn/ai-coding-agent-loses-context` diagnostic
-   before another net-new URL. Its page has authenticated exposure, repeated
-   cross-session and compaction pain appears in independent Reddit threads and
-   Anthropic issues, and current Claude Code memory/session documentation
-   exposes accuracy drift in the older article.
+9. Prefer an existing indexed AI knowledge-base, LLM-wiki, or
+   source-backed-wiki page before another net-new URL. Treat Obsidian as an
+   integration bridge when an inspectable modifier-qualified Trends query,
+   independent corroboration, a clean coverage gap, maintained Wenlan proof,
+   and standalone utility pass the complete candidate gate. GSC measures the
+   resulting Wenlan exposure later; it is not a prerequisite for preparing
+   the experiment. A page-level GSC aggregate still cannot prove its hidden
+   query by itself. The next candidate
+   must pass the full provenance, repeated-problem, coverage-gap, maintained
+   Wenlan proof, and standalone-utility gate. Existing memory cohorts continue
+   their scheduled measurement, but they do not control the next content
+   decision.
 
 ### Current gap
 
 - Stars: 53 more than the verified live observation.
-- GSC property impressions: 671 more in the fixed final rolling window.
-- Vercel visitors: 594 more in the fixed final rolling window.
+- GSC property impressions: 605 more in the fixed final rolling window.
+- Vercel visitors: 580 more in the fixed final rolling window.
+- Legacy migration diagnostic: `sc-domain:useorigin.app` still has
+  516 impressions and 5 clicks in the same aligned range. Those values are
+  not added to the Wenlan Goal metric.
 - Measurement gaps: complete non-brand page impressions, unique
   acquisition-surface visitors, Umami CTA baseline, and verified setup success
   remain unavailable; none may be invented.
 
 ### Current experiment
 
-`EXP-2026-07-27-download-information-architecture` is active in local
-preparation and consumes the single production slot. It is a bounded
-conversion-surface redesign, not a search-article experiment.
+`EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh` is active, locally
+verified, publication-approved at `2026-07-29T05:13:16Z`, and consumes the
+single production slot until production verification completes. It keeps the existing
+`/zh-CN/learn/distilled-wiki-pages-ai-memory` URL and original
+`datePublished: "2026-07-04"` while changing the page from memory-first
+framing to a standalone Simplified Chinese guide for `LLM Wiki 知识库`,
+`AI 知识库`, `本地 AI 知识库`, and `RAG vs LLM Wiki`.
 
-The live homepage audit at `2026-07-27` found that the complete download
-matrix consumes about 960 CSS pixels on the inspected desktop viewport and
-about 1,739 to 1,834 CSS pixels on the inspected mobile viewports. The
-`#download` anchor did not expose a download action in the first mobile
-viewport. The current server component also promotes Windows structurally
-before it knows the visitor's system, while three other visible buttons share
-the generic label `Download` or `下載`.
+The candidate gate passed from independent public Bilibili, V2EX, Juejin,
+Chinese SERP, existing-site coverage, and maintained Wenlan-source evidence.
+Platform metrics remain in their native units and do not become keyword
+volume. The page refresh adds the four-layer architecture, Ingest/Query/Lint
+responsibilities, a source-backed five-minute implementation loop, verification
+checks, RAG and Obsidian boundaries, visible FAQs without `FAQPage` JSON-LD,
+and first-party references. Obsidian stays an integration bridge rather than
+the acquisition center.
 
-The approved local change keeps `#download`, release assets, release truth,
-analytics event names, and English, zh-TW, and zh-CN coverage. The homepage
-will render one compact browser-recommended platform surface plus a localized
-link to a new `/download` hub. The hub will expose all four published runtime
-archives, platform-specific setup steps, release notes, maintained setup
-guidance, and the `wenlan doctor` verification path. Browser detection is only
-a recommendation: all platform and architecture details remain explicit, and
-an uncertain match routes to the complete download hub rather than silently
-choosing an archive.
+The latest aligned baseline remains source-separated: GSC property totals are
+8 clicks and 395 impressions; visible-query totals are 2 clicks and
+92 impressions; the query visibility gap is 6 clicks and 303 impressions.
+The target zh-CN page has no GSC page row, which is not reported as zero.
+Vercel separately reports 2 target-page visitors and 3 pageviews; GitHub
+reports 47 stars; authenticated Umami events remain unavailable. No
+source-to-page session, keyword volume, SEO lift, conversion, star
+attribution, or causal outcome is preclaimed.
 
-The authenticated measurement baseline remains source-separated: GSC property
-totals are 7 clicks and 329 impressions; visible-query totals are 1 click and
-81 impressions; Vercel reports 1,406 visitors and 1,612 pageviews; GitHub
-reports 47 stars. No reliable authenticated Umami CTA baseline is available,
-so no conversion-rate improvement or causal outcome is preclaimed. The full
-scope, acceptance criteria, baseline, and predeclared readouts are in
-`docs/seo-audits/2026-07-27-download-information-architecture-prelaunch.md`.
+Local preparation passed the Goal, SEO, i18n, TypeScript, production-build,
+built-technical, deployed-baseline, and rendered desktop/mobile gates. The
+user approved commit, Git push, PR creation, merge, automatic Vercel
+deployment, and read-only production verification at
+`2026-07-29T05:13:16Z`. Request indexing, GSC validation, external
+publication, paid acquisition, synthetic analytics events, and metric changes
+remain separate explicit approval boundaries. The complete hypothesis,
+exposure threshold, success/failure rules, stop conditions, readout schedule,
+and local verification evidence are append-only in `EXPERIMENTS.md`.
 
 ### Measuring cohorts
+
+This section is measurement maintenance for already-published work. It does
+not nominate the next acquisition experiment and must not override the
+protected AI knowledge-base and wiki focus.
 
 `EXP-2026-07-27-llm-wiki-implementation-guide-refresh` is live,
 production-verified, and measuring. It keeps the indexed English
 `/learn/distilled-wiki-pages-ai-memory` canonical URL and original publication
 date while adding a standalone implementation guide and five contextual
 inbound links. PR #89 merged at `2026-07-27T05:28:59Z`; Vercel production
-completed at `2026-07-27T05:29:47Z`. Its 24-hour readout remains due after
-`2026-07-28T05:29:47Z`. Indexing requests, GSC validation, external
-publication, synthetic analytics events, paid acquisition, OSS submission,
-and metric changes remain unapproved.
+completed at `2026-07-27T05:29:47Z`. Its 24-hour readout was recorded at
+`2026-07-28T05:47:53Z`; the available authenticated GSC and complete Vercel
+range still ended before deployment, so the result remains pending without an
+SEO-success judgment. Do not record its 7-day readout before
+`2026-08-03T05:29:47Z`. The target's approved URL Inspection request was
+completed on 2026-07-28 and returned `Indexing requested`; do not repeat it.
+Additional indexing requests, GSC validation, external publication, synthetic
+analytics events, paid acquisition, OSS submission, and metric changes remain
+separately approval-gated.
 
 `EXP-2026-07-25-context-loss-diagnostic-refresh` is live,
 production-verified, and measuring. It refreshes the existing English
@@ -879,7 +963,7 @@ the evidence-backed exception: fresh tagged source and the v3.8.3 package
 established material product and benchmark drift beyond the one visible query
 row, so refreshing the existing indexed page passed the full candidate gate.
 
-### Immediate localized launch
+### Completed localized launch
 
 The next eligible localized candidate is a zh-TW counterpart of the existing
 English `/learn/wenlan-vs-obsidian-ai-memory` page, with modifier-qualified
@@ -934,20 +1018,62 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-Publish the exact locally verified
-`EXP-2026-07-27-download-information-architecture` diff to an isolated Git
-branch and draft PR. Keep `#download` stable; preserve the reciprocal English,
-zh-TW, and zh-CN `/download` routes, four immutable release assets, bounded
-analytics events, and rendered mobile evidence. Stop before merge, deployment,
-request indexing, GSC validation, synthetic analytics events, or other
-external publication.
+#### Acquisition and migration decision
 
-Run the 24-hour technical/evidence readout for
-`EXP-2026-07-27-llm-wiki-implementation-guide-refresh` after
-`2026-07-28T05:29:47Z`; do not infer SEO success from that readout. Keep the
-English target's page aggregate and joined visible queries separate. Do not
-add a new search URL or translate the new framing without locale-specific
-evidence. Actual Umami totals remain manual/account-gated.
+Treat the domain migration and acquisition evidence as one operating view.
+The user submitted Change of Address from `useorigin.app` to `wenlan.app` and
+resubmitted the Wenlan sitemap on 2026-07-28. Search Console verification
+shows the move active and the sitemap successful with 113 discovered pages.
+With explicit approval, URL Inspection confirmed that the following URLs were
+already on Google and then returned `Indexing requested`:
+
+- `/learn/distilled-wiki-pages-ai-memory`
+- `/learn/source-backed-wiki-pages-ai-work`
+- `/learn/ai-work-memory-vs-knowledge-base`
+- `/zh-TW/learn/distilled-wiki-pages-ai-memory`
+
+Do not repeat those requests; Google states that resubmission does not improve
+queue priority. No GSC validation was submitted because there is no matching
+repaired coverage issue awaiting validation.
+
+Use
+`docs/seo-audits/2026-07-29-unified-acquisition-observation.md` as the current
+decision view. The next authenticated read must keep the aligned date range
+and show Wenlan GSC, legacy `useorigin.app` GSC, Vercel
+raw/direct/qualified/page rows,
+GitHub stars, and indexing together while preserving every source's native
+unit and refusing a fabricated source-to-page join.
+
+The full candidate gate selected the existing Simplified Chinese LLM-wiki page
+for `EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh`. Memory is
+supporting infrastructure, not the acquisition center. Current public-source
+evidence gives `LLM Wiki 知识库`, `AI 知识库`, and `本地 AI 知识库` a
+stronger core fit than the Obsidian bridge, while the existing
+`/zh-CN/learn/distilled-wiki-pages-ai-memory` page provides the clean refresh
+seam. Keep the current URL and do not add another zh-CN page.
+
+Local content, localization, production-build, rendered desktop and mobile,
+canonical, sitemap, hreflang, schema, and FAQPage-absence checks pass. The user
+authorized commit, Git push, PR creation, merge, automatic Vercel deployment,
+and read-only production verification for this exact locally verified
+experiment at `2026-07-29T05:13:16Z`. The next action is to publish the
+isolated change, verify the exact production commit and live technical/content
+state, then begin the predeclared readout clock. Community engagement remains
+demand-discovery evidence; GSC later measures Wenlan search exposure.
+Indexing requests and GSC validation remain separately gated.
+
+#### Scheduled measurement maintenance
+
+The following due readouts preserve previously launched experiment contracts.
+They do not nominate new memory content or alter the acquisition priority.
+
+The 24-hour technical/evidence readout for
+`EXP-2026-07-27-llm-wiki-implementation-guide-refresh` completed at
+`2026-07-28T05:47:53Z`. Keep the English target's page aggregate and joined
+visible queries separate, and do not record its 7-day readout before
+`2026-08-03T05:29:47Z`. Do not add a new search URL or translate the new
+framing without locale-specific evidence. Actual Umami totals remain
+manual/account-gated.
 
 The
 `TECH-2026-07-26-knowledge-base-published-date` correction is
@@ -1000,17 +1126,13 @@ readout. The current 49-row query-plus-page export confirms these mappings and
 also rejects the changelog and data/privacy queues as brand-noise candidates,
 not new non-brand demand.
 
-No additional English, zh-TW, or zh-CN candidate passed all five gates in the
-latest Friday report or the bounded read-only demand-discovery follow-up.
-Validated English problem clusters are already covered by live measurement
-cohorts; zh-TW `AI 筆記` remains adjacent note-tooling demand without a clean
-Wenlan intent; and no Simplified Chinese observation supports another
-localized page. The minimum missing evidence is a later authenticated GSC
-`query + page` window with a recurring non-brand cluster that no current page
-answers cleanly; a localized candidate also needs matching locale-specific
-evidence. Do not start a new experiment from unsupported Trends, Vercel, or
-incomplete cohort signals. No indexing or non-website publication is
-authorized.
+No additional English, zh-TW, or zh-CN content experiment is started by this
+indexing action. Reassess the candidate gate under the corrected AI
+knowledge-base and wiki center rather than carrying forward the old
+memory-first queue. A localized candidate still needs matching
+locale-specific evidence. Targeted indexing for the four URLs above was
+approved and completed; any additional indexing, non-website publication, or
+GSC validation remains separately approval-gated.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing, and GSC validation remain separately approval-gated.

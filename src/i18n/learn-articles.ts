@@ -367,31 +367,39 @@ const zhTWArticles = {
 const zhCNArticles = {
   "distilled-wiki-pages-ai-memory": {
     ...zhTWArticles["distilled-wiki-pages-ai-memory"],
-    title: "AI 工作的 LLM wiki：Wenlan 的有来源页面",
+    title: "什么是 LLM Wiki 知识库？架构、RAG 对比与搭建方法",
     description:
-      "Wenlan 把重复出现的 AI 工作 context 蒸馏成有来源依据的 wiki 页面，让 agent 和人都能跨工具复用。",
-    metaTitle: "AI 工作的 LLM wiki | Wenlan 文澜",
+      "LLM Wiki 知识库把原始来源、可复用事实与持续更新的页面分开，让 AI 代理按需读取有来源、可检查的答案。",
+    metaTitle: "LLM Wiki 知识库：架构、RAG 对比与搭建 | Wenlan",
     metaDescription:
-      "了解 Wenlan 如何作为 AI 工作的 LLM wiki，把 captures 蒸馏成有来源依据、可追溯、可刷新 revision state 的页面。",
+      "了解 LLM Wiki 知识库和 RAG、Obsidian 的区别，并用来源、蒸馏、检索与校验流程搭建可持续更新的本地 AI 知识库。",
     keywords: [
-      "AI 工作的 LLM wiki",
-      "有来源依据的 AI 工作 wiki",
-      "AI memory 蒸馏",
+      "LLM Wiki 知识库",
+      "AI 知识库",
+      "本地 AI 知识库",
+      "RAG vs LLM Wiki",
+      "LLM Wiki 搭建",
+      "AI 维护知识库",
+      "有来源的知识库",
+      "Claude Code 知识库",
+      "Obsidian AI 知识库",
       "Wenlan 文澜",
-      "LLM wiki",
     ],
-    audience: "正在评估 AI memory 是否需要 wiki layer 的中文用户",
+    publishedAt: "2026-07-04",
+    updatedAt: "2026-07-29",
+    readingTime: "9 分钟阅读",
+    audience: "正在搭建可由 AI 代理读取、更新并检查来源的本地知识库的中文用户",
     heroBullets: [
-      "Wenlan 把 capture 当成 LLM wiki 的原料，而不是最后界面。",
-      "蒸馏页面会把相关 memories 聚成可读 Markdown wiki entries。",
-      "source memory IDs、revision state 和 git history 让页面可检查。",
+      "LLM Wiki 维护可复用的当前答案，不把聊天记录、检索片段或笔记直接当成成品知识。",
+      "可靠架构会分开原始来源、原子事实、维护页面与按需检索。",
+      "页面需要保留 source IDs、变旧原因和可检查的修订，而不是静默覆盖。",
     ],
     sections: [
       {
-        heading: "一句话答案",
+        heading: "什么是 LLM Wiki 知识库",
         body: [
-          "AI 工作的 LLM wiki 是一层有来源依据的知识层：agent 可以读、更新、引用，人也能检查它为什么这样说。",
-          "Wenlan 的工作流是先捕捉 durable facts、decisions、lessons 和 handoffs，再用 /distill 把重复 context 变成 wiki pages；每个页面保留 source memory IDs。",
+          "LLM Wiki 知识库是给 AI 代理使用、也让人能够检查的维护型知识层。它把文档、对话和文件等来源整理成主题页面，代理只在需要时载入相关答案，不必反复重放整个资料库或聊天历史。",
+          "它不只是让 LLM 自动写一批 Markdown 笔记。真正有用的系统会把原始证据、可复用事实与当前解释分开，保留来源和更新状态；即使读者不安装 Wenlan，这套判断标准也能用来评估自己的知识库。",
         ],
         link: {
           label: "先安装 Wenlan",
@@ -399,50 +407,135 @@ const zhCNArticles = {
         },
       },
       {
-        heading: "为什么 memory 需要 wiki layer",
+        heading: "一个可靠 AI 知识库的四层架构",
         body: [
-          "一长串 memories 很快会变成另一个 inbox。agent 可以 search，但人仍要相信 search 能处理 duplicates、stale facts 和 contradictions。",
-          "wiki layer 给重复出现的工作一个稳定页面：当前 constraint、已接受 tradeoff、setup fix、handoff pattern，或跨 session 不断出现的概念。",
+          "最小可维护架构包含四层：Raw Sources 保存可检查的原始材料；Atomic Knowledge 保存一次决策、纠正或经验；Wiki Pages 汇总当前答案；Schema 与 Index 负责按主题定位所需内容。",
+          "常见流程可以概括为 Ingest、Query、Lint：Ingest 注册来源而不急着改写结论；Query 只取当前问题所需的页面和证据；Lint 检查缺失来源、重复、矛盾、过期依赖与不可维护的页面。",
         ],
+        bullets: [
+          "Raw Sources：保存文档、网页、文件和对话等原始材料。",
+          "Atomic Knowledge：保留一个完整事实、决策、经验或纠正及其来源。",
+          "Wiki Pages：把相关证据编成一个可读、可维护的当前答案。",
+          "Schema 与 Index：记录主题、依赖和状态，并只加载相关内容。",
+        ],
+      },
+      {
+        heading: "LLM Wiki 知识库和 RAG 有什么不同",
+        body: [
+          "RAG 通常在提问时检索原始片段；LLM Wiki 则维护一个可重复使用的答案、支持它的来源以及需要刷新的状态。知识库可以在底层使用 RAG，但只有检索还不会自动维护结论。",
+          "Obsidian 是人拥有的资料库和写作界面，可以承载或查看 Markdown wiki 页面；但开放 vault 给代理读取，并不等于已经处理选择性检索、来源、过期状态和自动修改边界。两者可以配合，不需要互相替代。",
+        ],
+        bullets: [
+          "RAG：为这次问题寻找相关来源片段。",
+          "LLM Wiki：维护以后还能复用的答案、引用和刷新状态。",
+          "Obsidian：保留人可读、可编辑的 Markdown 知识面。",
+          "Agent memory：保存工作中可复用的事实和决策，作为页面原料之一。",
+        ],
+      },
+      {
+        heading: "如何搭建一个会持续更新的 AI 知识库",
+        body: [
+          "先选一个无风险的小主题，不要一开始就导入整个 vault。注册可检查的来源，捕捉一条完整事实，再把相关内容蒸馏成主题页面；随后用同一问题重新检索，并从页面回到 source IDs 检查证据。",
+          "发布第一版不是结束。来源改变时，系统应该标记受影响页面、记录 stale reason，并产生可审查的修订；对于人拥有的文字，自动化不应静默覆盖。",
+        ],
+        code: {
+          label: "Wenlan 五分钟验证流程",
+          code: `/brief <主题>
+/recall <问题>
+/capture <结论 + 原因>
+/handoff
+/distill <主题>
+/pages <主题>`,
+        },
         link: {
-          label: "看 daily workflow",
+          label: "查看完整日常工作流",
           href: "/docs/daily-workflow",
         },
       },
       {
-        heading: "Wenlan 如何保持 source-backed",
+        heading: "如何验证知识库真的可用",
         body: [
-          "每个蒸馏页面都保留产生它的 source memory IDs。Wenlan daemon 会拒绝没有来源的 page record，而不是让好看的 summary 直接进入可信 context。",
-          "当 memory 错了，这条来源链很重要。你可以回到原始 capture、看它何时写下、再用新的 context supersede 旧结论。",
+          "不要只看命令是否返回成功。真正的验收是：下一次会话能找回正确内容，人能在聊天之外阅读页面，而且重要说法可以追溯到来源。",
+          "如果检查失败，先保留测试内容的低风险范围，修复连接、来源或重复问题，再用同一主题复测；不要靠继续生成更多页面掩盖故障。",
+        ],
+        bullets: [
+          "相同主题可以再次找到刚才保存的事实。",
+          "页面是可读 Markdown，并显示重要说法对应的 source IDs。",
+          "后续检索只加载相关页面或来源片段，而不是整个资料库。",
+          "来源变化会产生可检查的过期原因或修订，不会静默覆盖。",
+          "Lint 能暴露缺失来源、重复、矛盾或过期依赖。",
         ],
         link: {
-          label: "检查本地数据边界",
-          href: "/docs/data-and-privacy",
+          label: "查看审查与修复流程",
+          href: "/docs/review-and-trust",
         },
       },
       {
-        heading: "页面可以变旧，也可以刷新",
+        heading: "Wenlan 如何实现本地 LLM Wiki",
         body: [
-          "有用的 LLM wiki 必须承认 knowledge 会变。Wenlan pages 带着 revision state 和 stale reason，让新的 captures 可以刷新旧结论。",
-          "今天的 deliberate path 是手动 /distill。当你想让 daemon 在 session 之间做更多工作时，可以选择本地模型或 API keys 做更丰富的后台整理。",
+          "Wenlan 把 Sources、Memories 和 Pages 分成三种耐久角色：Sources 保存原始材料，Memories 保存工作中产生的原子事实，Pages 编成有来源的当前解释。本地 daemon 负责检索，Markdown 页面和 git 历史让结果保持可见。",
+          "每个蒸馏页面都要保留 source IDs。页面可以随着新证据变旧、刷新或进入审查；memory 在这里是支撑知识库的材料和状态，不是产品的搜索入口。",
         ],
+        link: {
+          label: "检查有来源页面模型",
+          href: "/learn/source-backed-wiki-pages-ai-work",
+        },
+      },
+      {
+        heading: "什么时候不需要 LLM Wiki",
+        body: [
+          "一次性聊天、很小且长期稳定的文档集，或团队已经维护良好的普通 wiki，不一定需要额外系统。当前代码、测试结果和工具官方文档也始终比知识库里的旧解释更权威。",
+          "当多个 AI 工具需要共享同一套检索、来源、交接和审查规则，而且答案会随项目持续变化时，维护型 LLM Wiki 才开始产生独立价值。",
+        ],
+        link: {
+          label: "查看 Wenlan 的层级边界",
+          href: "/docs/architecture",
+        },
       },
     ],
     faqs: [
       {
-        question: "蒸馏页面只是摘要吗？",
+        question: "LLM Wiki 和 RAG 是同一种东西吗？",
         answer:
-          "不是。摘要压缩一个来源；蒸馏页面会组合多个 related memories，保留 source IDs，并能随着新的 captures 更新。",
+          "不是。RAG 在提问时检索来源片段；LLM Wiki 维护可复用的答案、引用和刷新状态。LLM Wiki 可以使用 RAG，但检索本身不会维护答案。",
       },
       {
-        question: "我可以自己读这些页面吗？",
+        question: "Obsidian 可以直接当 AI 知识库吗？",
         answer:
-          "可以。页面会投影成 ~/.wenlan/pages/ 里的 Markdown，也可以用 editor 打开或 symlink 到 Obsidian。",
+          "Obsidian 很适合做人拥有的 Markdown vault 和阅读界面。要让它成为代理可依赖的知识库，还需要选择性检索、来源、过期处理和安全的自动修改边界。",
+      },
+      {
+        question: "本地 AI 知识库一定要导入所有笔记吗？",
+        answer:
+          "不用。先从一个会重复使用的小主题开始，只注册必要来源并检索最小相关集合。整库注入会增加 token 成本、噪音和过期内容风险。",
+      },
+      {
+        question: "Wenlan 的蒸馏页面只是摘要吗？",
+        answer:
+          "不是。摘要通常压缩单一来源；蒸馏页面会组合相关事实与来源，保留 source IDs、修订状态和变旧原因，并能随着新证据更新。",
+      },
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 的 Source、Memory 与 Page 模型",
+        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+      },
+      {
+        label: "Wenlan 日常工作流",
+        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+      },
+      {
+        label: "Karpathy 的 LLM Wiki 说明",
+        href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      },
+      {
+        label: "LLM Wiki v2 提案",
+        href: "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2",
       },
     ],
     cta: {
-      heading: "把 memory 变成 LLM wiki",
-      body: "Wenlan 把重复 captures 蒸馏成 source-backed wiki pages，让下一个 AI session 真正能用。",
+      heading: "搭建可维护的本地 LLM Wiki",
+      body: "用 Wenlan 把来源与工作事实蒸馏成可检查、可刷新、让下一个 AI 会话按需读取的知识页面。",
     },
   },
   "source-backed-wiki-pages-ai-work": {

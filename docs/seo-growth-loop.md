@@ -43,6 +43,11 @@ Raw GSC exports stay outside git. Commit the generated `docs/seo-audits/YYYY-MM-
 | Signal | Action |
 | --- | --- |
 | Important page is not indexed | Fix crawl/indexing/canonical issue first. |
+| Technical blocker or AI knowledge-base, LLM-wiki, or source-backed-wiki row has actionable evidence | Nominate it in Top Actions. |
+| Visible Obsidian query pairs Obsidian with Claude, Claude Code, or MCP and has actionable evidence | Treat it as an integration bridge and nominate it in Top Actions. |
+| Trends exposes a modifier-qualified Obsidian query and independent Reddit/OSS/SERP evidence repeats the intent | Run the complete candidate gate now; GSC is the later measurement source, not a prerequisite for preparation. |
+| Generic or page-only Obsidian evidence lacks either a visible qualifying query or a qualified external-demand record | Keep measuring; do not infer the search wording from the page aggregate alone. |
+| Generic memory row has actionable evidence | Keep it visible in the complete queue and existing-cohort measurements; do not let it nominate the next acquisition experiment. |
 | Page ranks position 8-30 | Refresh the existing page before writing a new one. |
 | Page has impressions but low CTR | Rewrite title/meta and sharpen the first answer. |
 | Query group has impressions but no strong matching page | Create one focused Learn article. |

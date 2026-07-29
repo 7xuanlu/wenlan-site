@@ -4347,6 +4347,110 @@ test("seo weekly generator maps Superlocal queries to the Superlocal comparison 
   }
 });
 
+test("seo weekly generator maps AI knowledge-base and wiki demand before memory-adjacent groups", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-seo-knowledge-base-"));
+  try {
+    const queriesPath = join(outputRoot, "gsc-queries.csv");
+    const pagesPath = join(outputRoot, "gsc-pages.csv");
+    const outputPath = join(outputRoot, "2026-06-13-weekly-seo.md");
+
+    await writeFile(
+      queriesPath,
+      [
+        "Query,Clicks,Impressions,CTR,Position",
+        "llm wiki 2.0,0,3,0%,13.0",
+        "source-backed wiki for ai agents,0,2,0%,18.0",
+        "ai knowledge base for agents,0,4,0%,9.0",
+        "obsidian knowledge base,0,4,0%,17.0",
+        "obsidian claude code,0,3,0%,11.0",
+        "obsidian,0,10,0%,12.0",
+        "agent memory,0,10,0%,12.0",
+        "AI 知識庫,0,1,0%,21.0",
+        "AI 知识库,0,1,0%,19.0",
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+    await writeFile(
+      pagesPath,
+      [
+        "Page,Clicks,Impressions,CTR,Position",
+        "https://wenlan.app/learn/ai-work-memory-vs-knowledge-base,0,4,0%,9.0",
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+
+    await execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly.mjs"),
+        "--",
+        "--queries",
+        queriesPath,
+        "--pages",
+        pagesPath,
+        "--date",
+        "2026-06-13",
+        "--output",
+        outputPath,
+      ],
+      { cwd: repoRoot },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+    const topActions = report.match(
+      /## Top Actions\n\n([\s\S]*?)\n\n## Query Action Queue/,
+    )?.[1];
+
+    assert.ok(topActions);
+    assert.match(
+      report,
+      /\| `llm wiki 2\.0` \| AI knowledge base \/ wiki \| `\/learn\/distilled-wiki-pages-ai-memory` \| 3 \|/,
+    );
+    assert.match(
+      report,
+      /\| `source-backed wiki for ai agents` \| AI knowledge base \/ wiki \| `\/learn\/source-backed-wiki-pages-ai-work` \| 2 \|/,
+    );
+    assert.match(
+      report,
+      /\| `ai knowledge base for agents` \| AI knowledge base \/ wiki \| `\/learn\/ai-work-memory-vs-knowledge-base` \| 4 \|/,
+    );
+    assert.match(
+      report,
+      /\| `obsidian knowledge base` \| Obsidian\/knowledge-base adjacent \| `\/learn\/wenlan-vs-obsidian-ai-memory` \| 4 \|/,
+    );
+    assert.match(
+      report,
+      /\| `obsidian claude code` \| Obsidian\/knowledge-base adjacent \| `\/learn\/wenlan-vs-obsidian-ai-memory` \| 3 \|/,
+    );
+    assert.match(
+      report,
+      /\| `AI 知識庫` \| AI knowledge base \/ wiki \| `\/zh-TW\/learn\/distilled-wiki-pages-ai-memory` \| 1 \|/,
+    );
+    assert.match(
+      report,
+      /\| `AI 知识库` \| AI knowledge base \/ wiki \| `\/zh-CN\/learn\/distilled-wiki-pages-ai-memory` \| 1 \|/,
+    );
+    assert.doesNotMatch(report, /`llm wiki 2\.0` \| Other \| -/);
+    assert.doesNotMatch(report, /`ai knowledge base for agents` \| Obsidian/);
+    assert.match(
+      report,
+      /\| `agent memory` \| AI work memory \| `\/learn\/ai-work-memory` \| 10 \|/,
+    );
+    assert.match(topActions, /obsidian claude code/);
+    assert.doesNotMatch(topActions, /obsidian knowledge base/);
+    assert.doesNotMatch(topActions, /\*\*[^*]+\*\* — `obsidian`:/);
+    assert.doesNotMatch(topActions, /agent memory/);
+    assert.match(
+      report,
+      /The campaign may still act earlier when inspectable Trends, independent corroboration, a clean coverage gap, maintained Wenlan proof, and standalone utility pass the complete candidate gate\./,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
 test("seo weekly generator maps named comparison products to their canonical pages", async () => {
   const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-seo-comparison-targets-"));
   try {
@@ -4581,9 +4685,14 @@ test("seo weekly generator flags high-impression weak-rank Learn pages for inter
       report,
       /\| `\/learn\/claude-code-memory` \| 37 \| 0 \| 0\.00% \| 33\.1 \| internal-link-refresh \| Existing Learn page has search demand but weak ranking\. Add links from stronger related pages before rewriting content\. \|/,
     );
+    const topActions = report.match(
+      /## Top Actions\n\n([\s\S]*?)\n\n## Query Action Queue/,
+    )?.[1];
+    assert.ok(topActions);
+    assert.doesNotMatch(topActions, /claude-code-memory/);
     assert.match(
       report,
-      /internal-link-refresh.*`\/learn\/claude-code-memory`: Existing Learn page has search demand but weak ranking\./,
+      /Generic memory rows remain visible evidence and measuring cohorts, but they do not nominate the next acquisition experiment\./,
     );
   } finally {
     await rm(outputRoot, { recursive: true, force: true });

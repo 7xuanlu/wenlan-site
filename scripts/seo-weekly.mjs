@@ -41,7 +41,7 @@ const GROUPS = [
   },
   {
     name: "Obsidian/knowledge-base adjacent",
-    patterns: [/obsidian/i, /knowledge base/i, /markdown/i, /notion/i],
+    patterns: [/obsidian/i, /markdown/i, /notion/i],
     page: "/learn/wenlan-vs-obsidian-ai-memory",
   },
   {
@@ -83,6 +83,31 @@ const COMPARISON_TARGETS = [
   },
 ];
 
+const KNOWLEDGE_BASE_WIKI_TARGETS = [
+  {
+    pattern:
+      /\bsource[-\s]backed(?:\s+(?:ai|llm))?\s+(?:wiki|knowledge[-\s]?base)\b/i,
+    page: "/learn/source-backed-wiki-pages-ai-work",
+  },
+  {
+    pattern: /\b(?:llm|ai)\s+wiki\b/i,
+    page: "/learn/distilled-wiki-pages-ai-memory",
+  },
+  {
+    pattern: /AI\s*知識庫/i,
+    page: "/zh-TW/learn/distilled-wiki-pages-ai-memory",
+  },
+  {
+    pattern: /AI\s*知识库/i,
+    page: "/zh-CN/learn/distilled-wiki-pages-ai-memory",
+  },
+  {
+    pattern:
+      /\b(?:ai\s+)?knowledge[-\s]?base(?:\s+for\s+(?:ai\s+)?agents?)?\b/i,
+    page: "/learn/ai-work-memory-vs-knowledge-base",
+  },
+];
+
 const ACTION_PRIORITY = {
   "technical-check": 1,
   "title-meta-refresh": 2,
@@ -95,7 +120,12 @@ const ACTION_PRIORITY = {
 
 const MIN_QUERY_ACTION_IMPRESSIONS = 3;
 const MIN_PAGE_INTERNAL_LINK_IMPRESSIONS = 20;
-const REPORT_SCHEMA_VERSION = 2;
+const REPORT_SCHEMA_VERSION = 3;
+const ACQUISITION_PRIORITY_GROUPS = new Set([
+  "AI knowledge base / wiki",
+]);
+const ACQUISITION_PRIORITY_PAGE =
+  /^\/(?:(?:zh-TW|zh-CN)\/)?learn(?:\/(?:ai-work-memory-vs-knowledge-base|source-backed-wiki-pages-ai-work|distilled-wiki-pages-ai-memory))?$/;
 const GENERATED_SECTION_HEADINGS = new Set([
   "Snapshot",
   "Vercel Analytics Evidence",
@@ -760,6 +790,16 @@ function classifyQuery(query) {
     };
   }
 
+  if (
+    /\bobsidian\b/i.test(query) &&
+    !/\b(?:vs|versus|alternative|compare|comparison)\b/i.test(query)
+  ) {
+    return {
+      group: "Obsidian/knowledge-base adjacent",
+      page: "/learn/wenlan-vs-obsidian-ai-memory",
+    };
+  }
+
   const comparisonTarget = COMPARISON_TARGETS.find(({ pattern }) =>
     pattern.test(query),
   );
@@ -767,6 +807,23 @@ function classifyQuery(query) {
     return {
       group: "Comparisons",
       page: comparisonTarget.page,
+    };
+  }
+
+  if (/\bwenlan\b/i.test(query) || /useorigin/i.test(query)) {
+    return {
+      group: "Brand/entity",
+      page: "/",
+    };
+  }
+
+  const knowledgeBaseWikiTarget = KNOWLEDGE_BASE_WIKI_TARGETS.find(
+    ({ pattern }) => pattern.test(query),
+  );
+  if (knowledgeBaseWikiTarget) {
+    return {
+      group: "AI knowledge base / wiki",
+      page: knowledgeBaseWikiTarget.page,
     };
   }
 
@@ -949,6 +1006,19 @@ function rankRows(rows) {
   });
 }
 
+function isTopActionCandidate(row) {
+  if (row.action === "technical-check") return true;
+  if (ACQUISITION_PRIORITY_GROUPS.has(row.group)) return true;
+  if (
+    row.group === "Obsidian/knowledge-base adjacent" &&
+    /\bobsidian\b/i.test(row.query ?? "") &&
+    /\b(?:claude(?:\s+code)?|mcp)\b/i.test(row.query ?? "")
+  ) {
+    return true;
+  }
+  return ACQUISITION_PRIORITY_PAGE.test(row.page ?? "");
+}
+
 function makeEvidenceFingerprint({ date, queries, pages, evidence, umami, vercel }) {
   const payload = {
     reportSchemaVersion: REPORT_SCHEMA_VERSION,
@@ -1013,7 +1083,7 @@ function makeMarkdown({ date, queries, pages, evidence, umami, vercel }) {
   const rankedQueries = rankRows(queries);
   const rankedPages = rankRows(pages);
   const topActions = rankRows([...queries, ...pages])
-    .filter((row) => row.action !== "wait")
+    .filter((row) => row.action !== "wait" && isTopActionCandidate(row))
     .slice(0, 8);
   const topPage = [...pages].sort((a, b) => b.impressions - a.impressions)[0];
   const nextDate = addDays(date, 7);
@@ -1074,6 +1144,8 @@ ${analyticsSnapshot}
 
 ${analyticsEvidence}## Top Actions
 
+Within this authenticated GSC report, only technical blockers, protected AI knowledge-base/wiki rows, and visible Obsidian + Claude/Claude Code/MCP query rows are nominated here. Generic Obsidian and other rows remain visible in the complete queues as measurement evidence. Separately, inspectable Trends plus independent corroboration may nominate a pre-GSC campaign candidate through the full candidate gate.
+
 ${topActions.length ? topActions.map((row, index) => `${index + 1}. **${row.action}** — ${row.query ? `\`${row.query}\`` : `\`${row.page}\``}: ${row.diagnosis}`).join("\n") : "No immediate action. Keep measuring."}
 
 ## Query Action Queue
@@ -1091,6 +1163,8 @@ ${rankedPages.map(pageRow).join("\n")}
 ## Do Not Write Yet Gate
 
 Do not create a new Learn page unless GSC/Searchfit shows a recurring query cluster no current page answers cleanly. Prefer refreshing pages already getting impressions. Wait when pages are newly shipped, when GSC has not reread the sitemap, or when old redirect/canonical URLs are the main noise.
+
+The acquisition queue centers AI knowledge bases, LLM wiki, source-backed wiki, and knowledge bases for AI agents. In this GSC-derived queue, Obsidian enters Top Actions only when a visible query pairs it with Claude, Claude Code, or MCP. The campaign may still act earlier when inspectable Trends, independent corroboration, a clean coverage gap, maintained Wenlan proof, and standalone utility pass the complete candidate gate. Generic memory rows remain visible evidence and measuring cohorts, but they do not nominate the next acquisition experiment.
 
 ## Follow-Up
 

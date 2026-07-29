@@ -848,6 +848,38 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
   assert.deepEqual(missingZhCNMetadata, {});
 });
 
+test("zh-CN LLM wiki guide owns the AI knowledge-base search intent", async () => {
+  const { getLocalizedLearnArticle } = await import("../src/i18n/learn-articles.ts");
+  const article = getLocalizedLearnArticle(
+    "zh-CN",
+    "distilled-wiki-pages-ai-memory",
+  );
+
+  assert.ok(article);
+  assert.match(article.title, /LLM Wiki 知识库/);
+  assert.match(article.metaTitle, /LLM Wiki 知识库/);
+  assert.equal(article.publishedAt, "2026-07-04");
+  assert.equal(article.updatedAt, "2026-07-29");
+  assert.ok(article.keywords.includes("AI 知识库"));
+  assert.ok(article.keywords.includes("本地 AI 知识库"));
+  assert.ok(article.keywords.includes("RAG vs LLM Wiki"));
+
+  const headings = article.sections.map((section) => section.heading);
+  assert.ok(headings.includes("LLM Wiki 知识库和 RAG 有什么不同"));
+  assert.ok(headings.includes("如何搭建一个会持续更新的 AI 知识库"));
+
+  const articleText = JSON.stringify(article);
+  for (const expected of [
+    "Ingest",
+    "Query",
+    "Lint",
+    "/distill",
+    "source IDs",
+  ]) {
+    assert.match(articleText, new RegExp(expected.replace("/", "\\/")));
+  }
+});
+
 test("core route wrappers export localized metadata for translated pages", async () => {
   const { routing } = await loadI18nModules();
   const routeModules = [
