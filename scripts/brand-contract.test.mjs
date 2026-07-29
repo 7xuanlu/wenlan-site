@@ -1627,3 +1627,56 @@ test("Learn article headers keep long Wenlan titles inside mobile viewports", as
   assert.match(visuals, /grid min-w-0 grid-cols-\[32px_minmax\(0,1fr\)\]/);
   assert.match(visuals, /<p className="min-w-0 break-words text-sm/);
 });
+
+test("Obsidian acquisition page answers Claude Code and MCP intent without changing its canonical seam", async () => {
+  const support = await readRepo("src/app/learn/seo-articles.ts");
+  const start = support.indexOf('slug: "wenlan-vs-obsidian-ai-memory"');
+  const end = support.indexOf("\n  {\n    slug:", start);
+  const article = support.slice(start, end);
+
+  assert.notEqual(start, -1);
+  assert.match(
+    article,
+    /title:\s*"Obsidian \+ Claude Code: Vault Access, MCP, and a Durable AI Knowledge Base"/,
+  );
+  assert.match(
+    article,
+    /metaTitle:\s*"Obsidian \+ Claude Code: MCP & AI Knowledge \| Wenlan"/,
+  );
+  assert.match(article, /publishedAt:\s*"2026-06-06"/);
+  assert.match(article, /updatedAt:\s*"2026-07-29"/);
+  for (const query of [
+    "obsidian claude code",
+    "claude code obsidian",
+    "obsidian claude",
+    "obsidian mcp",
+    "obsidian claude code mcp",
+  ]) {
+    assert.match(article.toLowerCase(), new RegExp(`"${query}"`));
+  }
+  assert.match(article, /direct filesystem access/i);
+  assert.match(article, /active file and selection/i);
+  assert.match(article, /structured vault operations/i);
+  assert.match(article, /source-backed AI knowledge base/i);
+  assert.match(
+    article,
+    /actionHeading:\s*"Choose the smallest integration layer that solves the job"/,
+  );
+  assert.match(
+    article,
+    /https:\/\/github\.com\/Roasbeef\/obsidian-claude-code/,
+  );
+  assert.match(
+    article,
+    /https:\/\/github\.com\/petersolopov\/obsidian-claude-ide/,
+  );
+  assert.match(
+    article,
+    /https:\/\/github\.com\/iansinnott\/obsidian-claude-code-mcp/,
+  );
+  assert.match(article, /https:\/\/github\.com\/7xuanlu\/wenlan#daily-workflow/);
+  assert.doesNotMatch(
+    article,
+    /title:\s*"Wenlan vs Obsidian AI Memory/,
+  );
+});
