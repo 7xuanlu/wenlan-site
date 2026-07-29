@@ -3202,3 +3202,40 @@ increase for that experiment.
 - Next step: re-run the frozen Goal and publication gates, publish the isolated
   branch, verify the exact production commit and live technical/content state,
   then record production completion without claiming SEO lift or causality.
+
+### 2026-07-29T05:25:56Z — zh-CN localized code-block production correction
+
+- Record type: campaign-observation
+- Current experiment:
+  `EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh`
+- Status: active; production-render correction in flight
+- Publication provenance: PR #92 merged at `2026-07-29T05:16:36Z` as
+  `1618945972a6957c4fd08501de464d2fb94627f1`; Vercel reported production
+  success at `2026-07-29T05:17:23Z`.
+- Production finding: live technical SEO, canonical, indexability, Article and
+  BreadcrumbList schema, sitemap membership, hreflang, and locale-route checks
+  passed. The visible six-command implementation loop did not: the localized
+  Learn route rendered section body, bullets, and links but omitted the
+  existing `section.code` data. The live HTML therefore lacked `/brief
+  <主题>`.
+- Correction: render localized `section.code` with the same bounded code-block
+  treatment used by English Learn pages, and add a focused renderer contract.
+  The focused test failed before the renderer change and passed afterward.
+- Local verification: `pnpm seo:goal:check` passes; `pnpm test:i18n` passes 55
+  tests; `pnpm test:seo` passes 195 tests; `pnpm lint` passes; `pnpm build`
+  generates 214 static pages; `pnpm seo:technical:built` passes; and the local
+  production locale matrix passes 22 expected 200 routes plus five expected
+  404 routes. At a 393-pixel viewport, the document `scrollWidth` equals its
+  387-pixel `clientWidth`; the zh-CN six-command block is fully visible.
+  Desktop rendering at 1440 pixels also passes. The existing zh-TW long-command
+  block remains contained by its own horizontal scroller without widening the
+  document.
+- Result: no SEO result; production correction pending
+- Decision: repair
+- Boundaries: this correction uses the existing publication approval for the
+  exact experiment. No request indexing, GSC validation, external post, OSS
+  submission, paid acquisition, synthetic analytics event, account mutation,
+  or metric-definition change is performed.
+- Next step: publish the isolated renderer correction, verify the exact live
+  command block and technical state, then start the post-publication readout
+  clock from the corrected production completion time.

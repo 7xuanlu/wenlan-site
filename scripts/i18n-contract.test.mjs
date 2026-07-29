@@ -880,6 +880,17 @@ test("zh-CN LLM wiki guide owns the AI knowledge-base search intent", async () =
   }
 });
 
+test("localized Learn renderer exposes article code blocks", async () => {
+  const source = await readFile(
+    resolve(repoRoot, "src/app/[locale]/learn/[slug]/page.tsx"),
+    "utf8",
+  );
+
+  assert.match(source, /\{section\.code && \(/);
+  assert.match(source, /\{section\.code\.label\}/);
+  assert.match(source, /<code>\{section\.code\.code\}<\/code>/);
+});
+
 test("core route wrappers export localized metadata for translated pages", async () => {
   const { routing } = await loadI18nModules();
   const routeModules = [
