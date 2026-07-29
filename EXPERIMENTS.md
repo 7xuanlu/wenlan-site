@@ -3375,3 +3375,62 @@ increase for that experiment.
 - Next step: rerun the Goal and publication gates, publish the isolated branch,
   verify the exact production commit and live technical/content state, then
   record production completion without claiming SEO lift or causality.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-29-obsidian-claude-code-refresh production verification at 2026-07-29T06:29:58Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-29-obsidian-claude-code-refresh
+- Observed at: 2026-07-29T06:29:58Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #95 is merged and production-deployed; the exact live content,
+  technical SEO, locale matrix, complete responsive renders, and
+  local-versus-production differential checks below passed against
+  `https://wenlan.app`.
+- Publication: commit `a94b42683b73c140316262b476935779d0c01a09`
+  was pushed on the isolated branch; PR #95 merged at
+  `2026-07-29T06:06:33Z` as
+  `04fce969e09e56dee72b97bd0b59da05a09b4f61`; Vercel production completed at
+  `2026-07-29T06:07:17Z`.
+- Live content evidence: the English target returns direct HTTP 200 with the
+  `Obsidian + Claude Code` title, exact self-canonical, `index, follow`,
+  stable `datePublished: "2026-06-06"`, `dateModified: "2026-07-29"`,
+  Article and BreadcrumbList JSON-LD, direct-files, editor-context, MCP, and
+  source-backed knowledge-lifecycle sections, three maintained Obsidian and
+  Claude Code OSS references plus maintained Wenlan anchors, and visible FAQ
+  text without `FAQPage`.
+- Technical evidence: the deployed audit passes robots, 113 sitemap URLs, 17
+  key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+  redirects, six bridge-host redirects, and legacy-URL exclusions. The live
+  locale matrix passes 22 expected direct-200 routes and five expected 404
+  routes; the English and zh-TW routes remain available, while the unsupported
+  zh-CN article route remains a hard 404.
+- Render evidence: fresh production captures cover the entire page in 12
+  mobile tiles at 393 by 852 CSS pixels and five desktop tiles at 1440 by
+  1100 CSS pixels. The document and H1 do not overflow; the comparison table
+  remains contained by its horizontal scroller; no clipping, broken text,
+  or browser warning/error was observed. Native visible FAQ
+  `details`/`summary` markup and answer content are present; the unchanged
+  interaction was not independently clicked during this post-deploy pass.
+- Visual QA: the inline design-system and functional-integrity pass and the
+  separate responsive visual-precision pass both returned PASS. Exact
+  local-build versus production image differentials returned zero differing
+  pixels and a 100 similarity score for both the mobile and desktop top
+  captures, with intact alpha and no hotspots.
+- Production slot: released after production verification.
+- Metric interpretation: publication and technical integrity are verified.
+  No SEO lift, exact-query rank, source-to-page session, CTA conversion, star
+  attribution, setup success, or causal result is inferred at production
+  completion.
+- Unperformed separately gated actions: no indexing request, GSC validation,
+  Reddit or other external post, OSS submission, paid acquisition, synthetic
+  analytics event, account mutation, or metric-definition change.
+- Result: pending
+- Decision: wait
+- Next step: run the 24-hour technical/evidence readout after
+  `2026-07-30T06:07:17Z`, keeping GSC property totals, visible-query totals,
+  query visibility gap, target-page rows, joined visible qualified-query
+  rows, Vercel native-unit observations, authenticated Umami observations
+  when available, and GitHub stars separate.
+<!-- EXPERIMENT-RECORD:END -->
