@@ -239,15 +239,18 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh` is active and consumes
-  the single production slot while a production-render correction is in
-  flight. PR #92 merged at `2026-07-29T05:16:36Z` as
+  `EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh` is live,
+  production-verified, and measuring; it no longer consumes the single
+  production slot. PR #92 merged at `2026-07-29T05:16:36Z` as
   `1618945972a6957c4fd08501de464d2fb94627f1`; Vercel production completed at
   `2026-07-29T05:17:23Z`. The refreshed content, canonical, indexability,
   schema, sitemap, hreflang, and locale matrix passed live verification, but
   the localized Learn renderer omitted the already-authored command block.
-  The isolated correction renders `section.code` on localized Learn pages and
-  keeps the experiment active until that production render is verified.
+  PR #93 repaired the localized renderer and merged at
+  `2026-07-29T05:27:38Z` as
+  `5a4cc9264a9fa7554fc20f56bbda07bdbbb50685`; corrected Vercel production
+  completed at `2026-07-29T05:28:22Z`. The live six-command workflow and
+  desktop/mobile production renders now pass.
   The user approved commit, Git push, PR creation, merge, automatic Vercel
   deployment, and read-only production verification at
   `2026-07-29T05:13:16Z`. It refreshes the existing zh-CN canonical around
@@ -650,12 +653,15 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh` is active,
-publication-approved at `2026-07-29T05:13:16Z`, and consumes the single
-production slot until its corrective production verification completes. PR
+`EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh` is live,
+production-verified, and measuring. It no longer consumes the single
+production slot. Publication was approved at `2026-07-29T05:13:16Z`. PR
 #92 merged at `2026-07-29T05:16:36Z` as
 `1618945972a6957c4fd08501de464d2fb94627f1`, and Vercel production completed
-at `2026-07-29T05:17:23Z`. It keeps the existing
+at `2026-07-29T05:17:23Z`. PR #93 repaired the localized renderer, merged at
+`2026-07-29T05:27:38Z` as
+`5a4cc9264a9fa7554fc20f56bbda07bdbbb50685`, and completed corrected
+production at `2026-07-29T05:28:22Z`. It keeps the existing
 `/zh-CN/learn/distilled-wiki-pages-ai-memory` URL and original
 `datePublished: "2026-07-04"` while changing the page from memory-first
 framing to a standalone Simplified Chinese guide for `LLM Wiki 知识库`,
@@ -690,8 +696,10 @@ that the localized Learn renderer did not render the existing `section.code`
 data, so the six-command workflow was absent from live HTML despite the
 content record. A focused RED/GREEN contract and the matching localized
 renderer block are locally green; 393-pixel and 1440-pixel production-build
-renders keep document-level horizontal overflow at zero. This is a correction
-to the same experiment, not a second experiment or an SEO result. The complete hypothesis,
+renders keep document-level horizontal overflow at zero. Production
+verification now confirms the same result on `wenlan.app`, with no browser
+warnings or errors. This is a correction to the same experiment, not a second
+experiment or an SEO result. The complete hypothesis,
 exposure threshold, success/failure rules, stop conditions, readout schedule,
 and local verification evidence are append-only in `EXPERIMENTS.md`.
 
@@ -1072,11 +1080,12 @@ Local content, localization, production-build, rendered desktop and mobile,
 canonical, sitemap, hreflang, schema, and FAQPage-absence checks pass. The user
 authorized commit, Git push, PR creation, merge, automatic Vercel deployment,
 and read-only production verification for this exact locally verified
-experiment at `2026-07-29T05:13:16Z`. The next action is to publish the
-isolated change, verify the exact production commit and live technical/content
-state, then begin the predeclared readout clock. Community engagement remains
-demand-discovery evidence; GSC later measures Wenlan search exposure.
-Indexing requests and GSC validation remain separately gated.
+experiment at `2026-07-29T05:13:16Z`. PR #92 and the PR #93 renderer
+correction are production-verified. The experiment is now measuring, and its
+24-hour technical/evidence readout is due after
+`2026-07-30T05:28:22Z`. Community engagement remains demand-discovery
+evidence; GSC later measures Wenlan search exposure. Indexing requests and
+GSC validation remain separately gated.
 
 #### Scheduled measurement maintenance
 

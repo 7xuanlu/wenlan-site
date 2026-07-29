@@ -3239,3 +3239,53 @@ increase for that experiment.
 - Next step: publish the isolated renderer correction, verify the exact live
   command block and technical state, then start the post-publication readout
   clock from the corrected production completion time.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh production verification at 2026-07-29T05:30:32Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh
+- Observed at: 2026-07-29T05:30:32Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #92 and corrective PR #93 are merged and production-deployed;
+  the exact live content, technical SEO, locale matrix, and responsive render
+  checks below passed against `https://wenlan.app`.
+- Publication: PR #92 merged at `2026-07-29T05:16:36Z` as
+  `1618945972a6957c4fd08501de464d2fb94627f1`; its Vercel production completed
+  at `2026-07-29T05:17:23Z`. PR #93 merged the localized renderer correction
+  at `2026-07-29T05:27:38Z` as
+  `5a4cc9264a9fa7554fc20f56bbda07bdbbb50685`; corrected Vercel production
+  completed at `2026-07-29T05:28:22Z`.
+- Live content evidence: the target returns direct HTTP 200 with the
+  AI-knowledge-base title, exact self-canonical, `index, follow`, reciprocal
+  `en-US`, `zh-TW`, `zh-CN`, and `x-default` alternates, Article and
+  BreadcrumbList JSON-LD, stable `datePublished: "2026-07-04"`,
+  `dateModified: "2026-07-29"`, seven intended guide sections, four
+  maintained source links, visible FAQs without `FAQPage`, and all six
+  `/brief`, `/recall`, `/capture`, `/handoff`, `/distill`, and `/pages`
+  workflow commands.
+- Technical evidence: the deployed audit passes robots, 113 sitemap URLs, 17
+  key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+  redirects, six bridge-host redirects, and legacy-URL exclusions. The live
+  locale matrix passes 22 expected direct-200 routes and five expected 404
+  routes.
+- Render evidence: at a 393-pixel viewport, document `scrollWidth` equals the
+  387-pixel `clientWidth`, the command block occupies 337 pixels, and the six
+  commands are visible. At 1440 pixels, document `scrollWidth` equals the
+  1434-pixel `clientWidth` and the command block occupies 586 pixels. No
+  browser warning or error was observed.
+- Production slot: released after production verification.
+- Metric interpretation: publication and technical integrity are verified.
+  No SEO lift, exact-query rank, source-to-page session, CTA conversion, star
+  attribution, setup success, or causal result is inferred.
+- Unperformed separately gated actions: no indexing request, GSC validation,
+  Reddit or other external post, OSS submission, paid acquisition, synthetic
+  analytics event, account mutation, or metric-definition change.
+- Result: pending
+- Decision: wait
+- Next step: run the 24-hour technical/evidence readout after
+  `2026-07-30T05:28:22Z`, keeping GSC property totals, visible-query totals,
+  query visibility gap, target-page rows, Vercel native-unit observations,
+  authenticated Umami observations when available, and GitHub stars separate.
+<!-- EXPERIMENT-RECORD:END -->
