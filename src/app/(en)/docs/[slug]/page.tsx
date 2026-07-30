@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { TrackedLink } from "@/components/tracked-link";
 import { ArticleHalo } from "../../learn/article-visuals";
 import { docPages, docUrl, formatDocDate, getDocPage } from "../docs";
 import { SITE_URL } from "../../learn/articles";
@@ -314,7 +315,10 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
             </div>
 
             <aside className="border-t border-[var(--o-border-subtle)] pt-8 lg:sticky lg:top-20 lg:self-start lg:border-t-0 lg:pt-1">
-              <nav aria-label="On this page">
+              <nav
+                aria-label="On this page"
+                className="lg:max-h-[calc(100vh-22rem)] lg:overflow-y-auto lg:pr-2"
+              >
                 <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
                   On this page
                 </p>
@@ -333,6 +337,28 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
                   ))}
                 </div>
               </nav>
+
+              <div className="mt-8 border-t border-[var(--o-border-subtle)] pt-7">
+                <p className="font-serif text-lg font-medium tracking-tight text-[var(--o-text)]">
+                  Built in the open
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--o-text-muted)]">
+                  Inspect the source, follow releases, or star Wenlan if it is
+                  useful.
+                </p>
+                <TrackedLink
+                  href="https://github.com/7xuanlu/wenlan"
+                  eventName="github_outbound"
+                  placement="docs-article"
+                  locale="en"
+                  context="setup"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex min-h-11 items-center rounded-lg border border-[var(--o-border)] px-4 py-2 text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:border-[var(--o-warm)]/50 hover:text-[var(--o-text)]"
+                >
+                  Open GitHub
+                </TrackedLink>
+              </div>
             </aside>
           </div>
         </section>

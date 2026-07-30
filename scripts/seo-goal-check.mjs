@@ -343,6 +343,9 @@ const allowedDecisions = new Set([
   "localize",
   "extend",
 ]);
+const EXPERIMENT_DATE_SCHEMA_MARKER = "<!-- EXPERIMENT-DATE-SCHEMA-V1 -->";
+const FIRST_DATE_SCHEMA_EXPERIMENT_ID =
+  "EXP-2026-07-29-docs-github-acquisition";
 
 function normalizeWhitespace(value) {
   return value.replace(/\r\n/g, "\n").replace(/\s+/g, " ").trim();
@@ -599,11 +602,30 @@ function inspectExperimentLedger(experiments, errors) {
       "EXPERIMENTS.md contains experiment fields outside paired record markers.",
     );
   }
+  const dateSchemaMarkers = [...ledger.matchAll(/<!-- EXPERIMENT-DATE-SCHEMA-V1 -->/g)];
+  if (dateSchemaMarkers.length !== 1) {
+    errors.push(
+      "EXPERIMENTS.md must contain exactly one experiment date-schema cutover marker.",
+    );
+  }
+  const dateSchemaMarkerIndex = dateSchemaMarkers[0]?.index ?? Number.POSITIVE_INFINITY;
+  const expectedDateSchemaBoundary =
+    `${EXPERIMENT_DATE_SCHEMA_MARKER}\n` +
+    "<!-- EXPERIMENT-RECORD:START -->\n" +
+    `## Experiment start: ${FIRST_DATE_SCHEMA_EXPERIMENT_ID}`;
+  if (
+    Number.isFinite(dateSchemaMarkerIndex) &&
+    !ledger.slice(dateSchemaMarkerIndex).startsWith(expectedDateSchemaBoundary)
+  ) {
+    errors.push(
+      `The experiment date-schema cutover marker must remain outside records and immediately precede ${FIRST_DATE_SCHEMA_EXPERIMENT_ID}.`,
+    );
+  }
   const blocks = [
     ...ledger.matchAll(
       /<!-- EXPERIMENT-RECORD:START -->([\s\S]*?)<!-- EXPERIMENT-RECORD:END -->/g,
     ),
-  ].map((match) => match[1]);
+  ].map((match) => ({ body: match[1], index: match.index ?? -1 }));
   const startedIds = new Set();
   const latestStatuses = new Map();
   const launchDatesById = new Map();
@@ -623,7 +645,7 @@ function inspectExperimentLedger(experiments, errors) {
     }
   }
 
-  blocks.forEach((block, index) => {
+  blocks.forEach(({ body: block, index: blockIndex }, index) => {
     const recordLabel = `experiment record ${index + 1}`;
     const { fields, duplicates } = parseExperimentFields(block);
     for (const duplicate of duplicates) {
@@ -760,6 +782,21 @@ function inspectExperimentLedger(experiments, errors) {
       errors.push(
         `${recordLabel} Minimum exposure must contain a positive threshold and native unit.`,
       );
+    }
+
+    if (blockIndex > dateSchemaMarkerIndex) {
+      const publishDate = fields.get("Publish date") ?? "";
+      if (publishDate !== "not-published" && !parseIsoDate(publishDate)) {
+        errors.push(
+          `${recordLabel} Publish date must be YYYY-MM-DD or not-published.`,
+        );
+      }
+      const indexDate = fields.get("Index date") ?? "";
+      if (indexDate !== "not-indexed" && !parseIsoDate(indexDate)) {
+        errors.push(
+          `${recordLabel} Index date must be YYYY-MM-DD or not-indexed.`,
+        );
+      }
     }
   });
 

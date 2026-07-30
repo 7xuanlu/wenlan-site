@@ -13,9 +13,19 @@ const goalCheckScript = resolve(import.meta.dirname, "seo-goal-check.mjs");
 const execFileAsync = promisify(execFile);
 const canonicalPlan = await readFile(resolve(repoRoot, "PLAN.md"), "utf8");
 const canonicalExperiments = await readFile(resolve(repoRoot, "EXPERIMENTS.md"), "utf8");
-const experimentFreeExperiments = canonicalExperiments.replace(
+const experimentsWithoutRecords = canonicalExperiments.replace(
   /\n?<!-- EXPERIMENT-RECORD:START -->[\s\S]*?<!-- EXPERIMENT-RECORD:END -->\n?/g,
   "\n",
+);
+const experimentFreeExperiments = experimentsWithoutRecords.replace(
+  "<!-- EXPERIMENT-DATE-SCHEMA-V1 -->",
+  `<!-- EXPERIMENT-DATE-SCHEMA-V1 -->\n${experimentStart({
+    id: "EXP-2026-07-29-docs-github-acquisition",
+    status: "stopped",
+    windowStart: "2026-07-25",
+    windowEnd: "2026-07-31",
+    launched: "2026-07-29",
+  }).trimStart()}`,
 );
 const currentExperimentSection = canonicalPlan.match(
   /\n### Current experiment\n([\s\S]*?)(?=\n### )/,
@@ -599,6 +609,74 @@ test("minimum exposure requires a positive threshold and a native unit", () => {
       experiments: `${experimentFreeExperiments}\n${negative}`,
     }).some((error) => error.includes("positive threshold and native unit")),
   );
+});
+
+test("date-schema cutover accepts only dates or explicit sentinels", () => {
+  const validSentinels = experimentStart({
+    id: "EXP-022",
+    windowStart: "2026-07-18",
+    windowEnd: "2026-07-24",
+    launched: "2026-07-18",
+  }).replace("- Publish date: 2026-07-18", "- Publish date: not-published");
+  const validDates = experimentStart({
+    id: "EXP-023",
+    windowStart: "2026-07-18",
+    windowEnd: "2026-07-24",
+    launched: "2026-07-18",
+  }).replace("- Index date: not-indexed", "- Index date: 2026-07-19");
+  const ambiguous = experimentStart({
+    id: "EXP-024",
+    windowStart: "2026-07-18",
+    windowEnd: "2026-07-24",
+    launched: "2026-07-18",
+  })
+    .replace(
+      "- Publish date: 2026-07-18",
+      "- Publish date: pending explicit approval",
+    )
+    .replace("- Index date: not-indexed", "- Index date: unknown-request-state");
+
+  for (const valid of [validSentinels, validDates]) {
+    const dateErrors = validationErrors({
+      experiments: `${experimentFreeExperiments}\n${valid}`,
+    }).filter(
+      (error) =>
+        error.includes("Publish date must") ||
+        error.includes("Index date must"),
+    );
+    assert.deepEqual(dateErrors, []);
+  }
+
+  const errors = validationErrors({
+    experiments: `${experimentFreeExperiments}\n${ambiguous}`,
+  });
+
+  assert.ok(
+    errors.some((error) => error.includes("YYYY-MM-DD or not-published")),
+  );
+  assert.ok(
+    errors.some((error) => error.includes("YYYY-MM-DD or not-indexed")),
+  );
+});
+
+test("date-schema cutover cannot move inside or after its first V1 record", () => {
+  const marker = "<!-- EXPERIMENT-DATE-SCHEMA-V1 -->";
+  const firstV1Start =
+    "<!-- EXPERIMENT-RECORD:START -->\n" +
+    `## Experiment start: ${currentExperimentId}`;
+  const insideRecord = canonicalExperiments.replace(
+    `${marker}\n${firstV1Start}`,
+    `<!-- EXPERIMENT-RECORD:START -->\n${marker}\n## Experiment start: ${currentExperimentId}`,
+  );
+  const afterRecord = `${canonicalExperiments.replace(`${marker}\n`, "")}\n${marker}\n`;
+
+  for (const experiments of [insideRecord, afterRecord]) {
+    assert.ok(
+      validationErrors({ experiments }).some((error) =>
+        error.includes("must remain outside records and immediately precede"),
+      ),
+    );
+  }
 });
 
 test("unpaired experiment record markers fail instead of hiding a launch", () => {
