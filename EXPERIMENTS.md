@@ -3612,3 +3612,60 @@ increase for that experiment.
 - Decision: wait
 - Next step: Complete local code, event-contract, responsive-render, and technical verification, then publish under the user's explicit approval.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-29-docs-github-acquisition production verification
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-29-docs-github-acquisition
+- Observed at: 2026-07-30T07:27:30Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #98 merged as `15fbea08073646d977b9c3b1036e592fe99f5a10`; Vercel production completed at this timestamp. The live `/docs/configuration` route returns the exact self-canonical, `index, follow`, one `Open GitHub` link to `https://github.com/7xuanlu/wenlan` with `_blank` and `noopener noreferrer`, no `FAQPage`, no horizontal overflow, and no browser warning or error. The deployed audit passes robots, 113 sitemap URLs, 17 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy exclusions. No post-deploy GSC, Vercel, authenticated Umami, or attributed GitHub outcome is inferred.
+- Result: pending
+- Decision: wait
+- Next step: Measure the predeclared Docs visitor and authenticated Umami event thresholds at the due readouts while allowing the production-verified slot to pass to the next approved non-overlapping website experiment.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-30-knowledge-base-locales-refresh
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-30-knowledge-base-locales-refresh
+- Status: active
+- Data window: 2026-07-25..2026-07-31
+- Asset class: refresh
+- Launched: 2026-07-30
+- Hypothesis: Leading the existing Learn hubs and source-backed article routes with a concrete, maintained AI knowledge-base answer in English, zh-TW, and zh-CN will earn more qualified search exposure without creating another low-evidence URL.
+- Candidate evidence: Authenticated GSC reports 91 impressions for `/learn`, 4 for the English source-backed article, 1 for its zh-TW route, and 1 for its zh-CN route; authenticated Vercel separately reports 100, 5, 1, and 2 visitors on those same surfaces. Simplified-Chinese community sources independently repeat `LLM Wiki 知识库`, `AI 知识库`, `有来源的知识库`, and `知识库最佳实践`. Exact Taiwan `AI 知識庫` evidence is sparse, so zh-TW remains a bounded refresh of an existing route rather than a demand-volume claim.
+- Baseline: GSC property totals are 8 clicks and 395 impressions; visible-query totals are 2 clicks and 92 impressions; the visibility gap is 6 clicks and 303 impressions. Vercel raw totals are 1,420 visitors and 1,628 pageviews. The changed target rows keep GSC clicks at zero and target-page impressions at 91, 4, 1, and 1; Vercel target-page visitors are 100, 5, 1, and 2. Authenticated Umami events are unavailable rather than zero; GitHub public REST reports 46 stars.
+- Change: Refresh existing English, zh-TW, and zh-CN Learn hub copy and the existing source-backed article in all three locales around source-backed AI knowledge bases, LLM wiki, provenance, refresh state, review, and a verifiable Wenlan workflow. Preserve URLs, publication dates, locale availability, canonical, sitemap, structured data, and visible-FAQ policy.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 10 GSC impressions across changed canonical pages in one complete post-deploy readout window
+- Success criteria: At the W2 readout, the changed canonical pages record at least 10 GSC impressions in total, at least two locale surfaces have nonzero page impressions, and the deployed technical floor remains green.
+- Failure criteria: A reliable complete post-deploy readout window reports zero GSC impressions across all changed canonical pages, or the change creates a technical, locale, indexing, or visible-render regression.
+- Stop criteria: Stop for a canonical, sitemap, hreflang, noindex, structured-data, unsupported-locale, source-accuracy, CJK-render, or standalone-utility regression.
+- 24h readout: pending
+- 7d readout: pending
+- W2 readout: pending
+- W4 readout: pending
+- W8 readout: pending
+- Result: pending
+- Decision: wait
+- Next step: Implement the bounded existing-page refresh, verify English and both Mandarin locales in production-rendered desktop and mobile layouts, then publish under the user's explicit approval.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-learn-hub-exposure-refresh superseded at 2026-07-30T07:53:53Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-learn-hub-exposure-refresh
+- Observed at: 2026-07-30T07:53:53Z
+- Readout: correction
+- Status: inconclusive
+- Evidence: The experiment remained below its predeclared 100-impression minimum exposure and had no complete 28-day post-deploy readout. The user-approved `EXP-2026-07-30-knowledge-base-locales-refresh` now changes the same English `/learn` metadata, first-screen answer, and search-path framing around the corrected AI knowledge-base and LLM-wiki center. Continuing the older cohort would mix two interventions and make its attribution invalid. This is a superseding campaign decision, not evidence of SEO success or failure.
+- Result: inconclusive
+- Decision: stop
+- Next step: Remove the older Learn-hub cohort from pending 7-day, W2, W4, and W8 judgments. Use the authenticated `EXP-2026-07-30-knowledge-base-locales-refresh` baseline and its predeclared 10-impression cross-locale exposure guard for future `/learn` interpretation.
+<!-- EXPERIMENT-RECORD:END -->

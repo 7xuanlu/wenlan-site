@@ -4867,24 +4867,26 @@ test("SuperLocalMemory comparison pins current benchmark protocols to checked so
   assert.doesNotMatch(article, /2026-06-24 source check/);
 });
 
-test("Learn index SERP copy leads with the source-backed LLM wiki and AI memory category", async () => {
+test("Learn index SERP copy leads with the source-backed AI knowledge-base and LLM-wiki category", async () => {
   const learnPage = await readRepo("src/app/learn/page.tsx");
   const learnOgImage = await readRepo("src/app/learn/opengraph-image.tsx");
+  const normalizedLearnPage = learnPage.replace(/\s+/g, " ");
 
   assert.match(
     learnPage,
-    /title: "LLM Wiki & AI Memory Guides for Claude Code, MCP \| Wenlan"/,
+    /title: "LLM Wiki & AI Knowledge Base Guides \| Wenlan"/,
   );
   assert.match(
     learnPage,
-    /Find source-backed LLM wiki and AI memory guides for Claude Code, MCP servers, Cursor, local workflows, and honest comparisons such as Basic Memory\./,
+    /Build a source-backed AI knowledge base with maintained LLM wiki pages, citations, review, refresh state, and local workflows for AI agents\./,
   );
-  assert.match(learnPage, />\s*LLM wiki and AI memory guides for work that carries forward\.\s*</);
+  assert.match(learnPage, />\s*LLM wiki and AI knowledge base guides that stay current\.\s*</);
   assert.match(learnPage, />\s*Quick answer\s*</);
   assert.match(
-    learnPage,
-    /Use native memory for tool-specific instructions\.\s*Add Wenlan\s*when decisions, sources, and handoffs need to stay local and\s*move across AI tools\./,
+    normalizedLearnPage,
+    /An AI knowledge base stores and retrieves trusted sources\. A maintained LLM wiki adds reusable pages, citations, review, and refresh state\. Wenlan combines those layers locally for AI agents\./,
   );
+  assert.match(learnPage, /AI knowledge base for agents/);
   assert.match(learnPage, /Claude Code memory/);
   assert.match(learnPage, /Basic Memory comparison/);
   assert.match(learnPage, /MCP memory server/);

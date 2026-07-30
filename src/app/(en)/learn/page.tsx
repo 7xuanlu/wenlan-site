@@ -12,30 +12,36 @@ import { ArticleHalo, MemoryIndex } from "./article-visuals";
 import { alternateUrls } from "@/i18n/routing";
 
 export const metadata: Metadata = {
-  title: "LLM Wiki & AI Memory Guides for Claude Code, MCP | Wenlan",
+  title: "LLM Wiki & AI Knowledge Base Guides | Wenlan",
   description:
-    "Find source-backed LLM wiki and AI memory guides for Claude Code, MCP servers, Cursor, local workflows, and honest comparisons such as Basic Memory.",
+    "Build a source-backed AI knowledge base with maintained LLM wiki pages, citations, review, refresh state, and local workflows for AI agents.",
   alternates: {
     canonical: "/learn",
     languages: alternateUrls("/learn"),
   },
   openGraph: {
-    title: "LLM Wiki & AI Memory Guides for Claude Code, MCP | Wenlan",
+    title: "LLM Wiki & AI Knowledge Base Guides | Wenlan",
     description:
-      "Find source-backed LLM wiki and AI memory guides for Claude Code, MCP servers, Cursor, local workflows, and honest comparisons such as Basic Memory.",
+      "Build a source-backed AI knowledge base with maintained LLM wiki pages, citations, review, refresh state, and local workflows for AI agents.",
     type: "website",
     url: `${SITE_URL}/learn`,
     siteName: "Wenlan",
   },
   twitter: {
     card: "summary_large_image",
-    title: "LLM Wiki & AI Memory Guides for Claude Code, MCP | Wenlan",
+    title: "LLM Wiki & AI Knowledge Base Guides | Wenlan",
     description:
-      "Find source-backed LLM wiki and AI memory guides for Claude Code, MCP servers, Cursor, local workflows, and honest comparisons such as Basic Memory.",
+      "Build a source-backed AI knowledge base with maintained LLM wiki pages, citations, review, refresh state, and local workflows for AI agents.",
   },
 };
 
 const searchRoutes = [
+  {
+    query: "AI knowledge base for agents",
+    intent: "Build maintained pages with sources, review, refresh state, and a verifiable local workflow.",
+    href: "/learn/source-backed-wiki-pages-ai-work",
+    context: "concepts",
+  },
   {
     query: "Claude Code memory",
     intent: "See what native CLAUDE.md and auto memory cover, then decide when shared local context helps.",
@@ -123,7 +129,7 @@ export default function LearnPage() {
     "@id": "https://wenlan.app/learn#collection",
     name: "Wenlan Learn",
     description:
-      "Source-backed LLM wiki and AI memory guides for Claude Code, MCP servers, Cursor, local workflows, and honest comparisons.",
+      "Guides for building a source-backed AI knowledge base with maintained LLM wiki pages, citations, review, refresh state, and local agent workflows.",
     url: `${SITE_URL}/learn`,
     isPartOf: { "@id": "https://wenlan.app/#website" },
     publisher: { "@id": "https://wenlan.app/#organization" },
@@ -170,33 +176,32 @@ export default function LearnPage() {
                 Learn
               </p>
               <h1 className="warm-glow break-words font-serif text-5xl leading-[1.05] font-medium tracking-tight sm:text-7xl">
-                LLM wiki and AI memory guides for work that carries forward.
+                LLM wiki and AI knowledge base guides that stay current.
               </h1>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">
-                Wenlan is a local, source-backed LLM wiki for AI work.
-                Use these guides to connect MCP clients, preserve durable
-                context, and turn trusted sources and captured lessons into
-                maintained pages.
+                Wenlan turns trusted sources and durable work facts into a
+                local, source-backed AI knowledge base with maintained
+                LLM-wiki pages for agents and people.
               </p>
               <div className="mt-8 max-w-2xl rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5">
                 <p className="font-mono text-[10px] tracking-[0.22em] text-[var(--o-warm)]/80 uppercase">
                   Quick answer
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--o-text-secondary)]">
-                  Use native memory for tool-specific instructions. Add Wenlan
-                  when decisions, sources, and handoffs need to stay local and
-                  move across AI tools.
+                  An AI knowledge base stores and retrieves trusted sources. A maintained
+                  LLM wiki adds reusable pages, citations, review, and refresh state.
+                  Wenlan combines those layers locally for AI agents.
                 </p>
               </div>
             </div>
             <MemoryIndex
               label="Learn topics"
               items={[
-                "Claude Code memory",
-                "LLM wiki for AI agents",
-                "MCP memory server",
-                "Basic Memory comparison",
-                "Cursor shared memory",
+                "AI knowledge base architecture",
+                "Source-backed LLM wiki",
+                "Claude Code and MCP",
+                "Knowledge-base maintenance",
+                "Tool comparisons",
                 "Local-first trust",
               ]}
             />
@@ -211,9 +216,8 @@ export default function LearnPage() {
               Start here
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--o-text-secondary)]">
-              Choose the job first: understand a memory boundary, connect a
-              client, compare approaches, or inspect how source-backed pages
-              stay current.
+              Choose the job first: build an AI knowledge base, inspect the
+              LLM-wiki lifecycle, connect a client, or compare adjacent tools.
             </p>
           </div>
 

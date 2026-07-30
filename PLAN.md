@@ -239,18 +239,26 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-29-docs-github-acquisition` is active in the single
-  production slot. It adds one bounded, tracked open-source module to the
-  existing English Docs article rail. The aligned baseline keeps
-  `/docs/configuration` at 774 Vercel visitors and 850 pageviews, while GSC
-  separately reports 12 impressions, 0 clicks, and average position 15.8.
-  GitHub public REST reports 46 stars, and authenticated Umami events remain
-  unavailable rather than zero. The user approved local preparation, commit,
-  push, PR creation, merge, automatic Vercel deployment, read-only production
-  verification, and the later GSC inspection/indexing batch at
-  `2026-07-30T06:57:46Z`. No GSC validation, synthetic event, external post,
-  OSS submission, paid acquisition, analytics account mutation, or metric
-  change is approved.
+  `EXP-2026-07-30-knowledge-base-locales-refresh` is active in the single
+  production slot. It refreshes the existing English, zh-TW, and zh-CN Learn
+  hubs plus the existing source-backed AI knowledge-base article in all three
+  locales. It creates no URL, does not change locale availability, and keeps
+  the category centered on AI knowledge bases and LLM wiki rather than
+  generic memory. The user approved local preparation, commit, push, PR
+  creation, merge, automatic Vercel deployment, read-only production
+  verification, and a later fixed GSC inspection/indexing batch for `/learn`,
+  the zh-TW and zh-CN Learn hubs, and the zh-TW and zh-CN source-backed
+  article routes in this task at `2026-07-30T06:57:46Z`, then explicitly
+  added zh-TW. No GSC validation,
+  synthetic event, external post, OSS submission, paid acquisition,
+  analytics account mutation, or metric change is approved.
+  `EXP-2026-07-29-docs-github-acquisition` is live,
+  production-verified, and measuring; it no longer consumes the single
+  production slot. PR #98 merged at `2026-07-30T07:26:34Z` as
+  `15fbea08073646d977b9c3b1036e592fe99f5a10`; Vercel production completed
+  at `2026-07-30T07:27:30Z`. The live English Docs article renderer exposes
+  one bounded `docs-article` GitHub outbound path, and the deployed technical,
+  canonical, indexability, FAQ policy, console, and responsive checks pass.
   `EXP-2026-07-29-obsidian-claude-code-refresh` is live,
   production-verified, and measuring; it no longer consumes the single
   production slot. It refreshes the
@@ -666,32 +674,40 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-29-docs-github-acquisition` is active in the single production
-slot. The shared English Docs slug renderer currently has no tracked
-repository path even though `/docs/configuration` received 774 Vercel
-visitors and 850 pageviews in the aligned complete range. The route
-separately has 12 GSC impressions, 0 clicks, and average position 15.8.
+`EXP-2026-07-30-knowledge-base-locales-refresh` is active in the single
+production slot. It refreshes existing acquisition surfaces rather than
+creating another article: `/learn`,
+`/learn/source-backed-wiki-pages-ai-work`, their zh-TW and zh-CN Learn hubs,
+and the two existing localized source-backed article routes.
 
-The bounded change adds one quiet open-source module below the existing Docs
-table of contents and extends only the bounded placement union with
-`docs-article`. It sends the existing `github_outbound` event to configured
-Umami with locale `en`, context `setup`, and destination category `github`.
-It changes no URL, metadata, canonical, sitemap entry, Docs content,
-structured-data type, or `FAQPage` policy.
+The aligned GSC baseline keeps `/learn` at 91 impressions and 0 clicks,
+`/learn/source-backed-wiki-pages-ai-work` at 4 impressions and 0 clicks,
+the zh-TW source-backed page at 1 impression and 0 clicks, and the zh-CN
+source-backed page at 1 impression and 0 clicks. Their page-average positions
+remain separate from exact-query rank. Vercel separately reports 100 visitors
+and 102 pageviews for `/learn`, 5 and 5 for the English source-backed page,
+1 and 1 for zh-TW, and 2 and 3 for zh-CN.
 
-The experiment requires 50 post-deploy Vercel visitors to English Docs slug
-routes before interpretation. Authenticated Umami must show at least five
-`docs-article` outbound events by 7d for success; 100 exposed visitors with
-zero authenticated events is failure. Missing exposure or unavailable Umami
-remains inconclusive. GitHub stars remain a separate public REST observation
-and are never attributed causally to the CTA.
+The change leads with source-backed AI knowledge-base and LLM-wiki language,
+adds a standalone provenance, maintenance, review, and verification workflow,
+keeps Obsidian as an ecosystem bridge, and preserves the original publication
+date. Simplified-Chinese community wording supports the zh-CN refresh.
+Exact Taiwan `AI 知識庫` demand remains sparse, so zh-TW is a bounded refresh
+of an existing indexed route with one GSC impression, not a demand or volume
+claim and not a new URL.
 
-The complete gate, source-native baseline, verification contract, and user
-approval are recorded in
-`docs/seo-audits/2026-07-29-docs-github-acquisition-prelaunch.md` and the
-append-only ledger. The user approved commit, push, PR creation, merge,
-automatic Vercel deployment, read-only production verification, and the
-later GSC inspection/indexing batch at `2026-07-30T06:57:46Z`.
+The experiment requires 10 GSC impressions across the changed canonical pages
+in one complete post-deploy readout window before interpretation. Success at
+W2 requires at least 10 target-page impressions, nonzero impressions on at
+least two locale surfaces, and no technical regression. A reliable complete
+window with zero impressions across all changed pages is failure; all other
+low-exposure outcomes remain inconclusive. GSC, Vercel, Umami, and GitHub
+observations stay in their native units and are not combined.
+
+The complete candidate gate, source-native baseline, approval boundary, and
+verification contract are recorded in
+`docs/seo-audits/2026-07-30-knowledge-base-locales-prelaunch.md` and the
+append-only ledger.
 
 ### Measuring cohort: Obsidian Claude Code
 
@@ -934,9 +950,15 @@ The stale-memory diagnostic is live, production-verified, and measuring. PR
 and no SEO-success judgment was made at production completion.
 
 The English Claude Code memory, zh-TW Obsidian, English AI work memory versus
-knowledge-base, English Learn-hub, English LLM-wiki, MCP shared-memory, and
+knowledge-base, English LLM-wiki, MCP shared-memory, and
 stale-memory changes remain production-verified measurement cohorts; they do
 not consume the production slot.
+
+`EXP-2026-07-24-learn-hub-exposure-refresh` ended inconclusive at
+`2026-07-30T07:53:53Z` before reaching its 100-impression minimum. The
+approved three-locale knowledge-base refresh changes the same English
+`/learn` framing, so the older cohort is explicitly superseded rather than
+mixed into future attribution.
 
 ### Current technical correction
 
@@ -1113,11 +1135,11 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 #### Acquisition and migration decision
 
-The active production decision is the Docs-to-GitHub bridge described in the
-Current experiment section. After it is production-verified and releases the
-slot, the user-approved next website change refreshes the English, zh-TW, and
-zh-CN Learn knowledge-base acquisition surfaces while preserving existing
-URLs. Do not start the second production change before the first is verified.
+The Docs-to-GitHub bridge is production-verified and measuring. The active
+production decision is now the English, zh-TW, and zh-CN Learn
+knowledge-base refresh described in the Current experiment section. Preserve
+existing URLs, reciprocal locale behavior, canonical and sitemap membership,
+Article and BreadcrumbList schema, and visible FAQ without `FAQPage`.
 
 Treat the domain migration and acquisition evidence as one operating view.
 The user submitted Change of Address from `useorigin.app` to `wenlan.app` and
@@ -1202,7 +1224,7 @@ complete post-deploy days and no post-change crawl date is confirmed. Run its
 W2 readout after `2026-08-02T00:26:09Z` with the original page and visible
 qualified-cluster guards.
 
-The Learn-hub, LLM-wiki, MCP shared-memory, stale-memory, claude-mem,
+The LLM-wiki, MCP shared-memory, stale-memory, claude-mem,
 SuperLocalMemory, and Basic Memory 24-hour readouts were completed at
 `2026-07-26T01:47:53Z`. Their production gates passed, but the latest
 authenticated GSC and complete Vercel range ends before deployment, so each
@@ -1210,12 +1232,16 @@ result remains pending. Run their 7-day readouts after their predeclared
 times from `2026-07-31T19:18:03Z` through `2026-08-01T01:04:56Z`, using the
 Friday weekly evidence rather than duplicating its pipeline.
 
+Do not run another readout for
+`EXP-2026-07-24-learn-hub-exposure-refresh`; it was stopped as inconclusive
+when the approved 2026-07-30 experiment superseded the same `/learn` surface.
+
 The same-task `wenlan-claude-memory-24h-readout` heartbeat completed the
 actual 24-hour zh-CN LLM-wiki readout and the user-requested early partial
 English Obsidian observation at `2026-07-30T05:39:51Z`. Reuse that same
 heartbeat at `2026-08-01T02:20:00Z`, safely after the Friday weekly SEO run
 and the latest 7-day boundary. That batch covers the due zh-TW Obsidian,
-AI-work-memory versus knowledge-base, Learn-hub, LLM-wiki, MCP shared-memory,
+AI-work-memory versus knowledge-base, LLM-wiki, MCP shared-memory,
 stale-memory, claude-mem, SuperLocalMemory, Basic Memory,
 AI-agent-memory-types, and context-loss 7-day readouts. It must not record the
 Claude Code memory W2 readout before `2026-08-02T00:26:09Z`.
@@ -1234,13 +1260,27 @@ readout. The current 49-row query-plus-page export confirms these mappings and
 also rejects the changelog and data/privacy queues as brand-noise candidates,
 not new non-brand demand.
 
-No additional English, zh-TW, or zh-CN content experiment is started by this
+No additional English, zh-TW, or zh-CN content experiment is started by an
 indexing action. Reassess the candidate gate under the corrected AI
 knowledge-base and wiki center rather than carrying forward the old
 memory-first queue. A localized candidate still needs matching
-locale-specific evidence. Targeted indexing for the four URLs above was
-approved and completed; any additional indexing, non-website publication, or
-GSC validation remains separately approval-gated.
+locale-specific evidence. Targeted indexing for the four URLs listed earlier
+was approved and completed; do not repeat those requests.
+
+The current approved post-deploy GSC batch is limited to URL Inspection and,
+when the Search Console UI permits it, one request-indexing action for each of
+these changed existing URLs:
+
+- `/learn`
+- `/zh-TW/learn`
+- `/zh-CN/learn`
+- `/zh-TW/learn/source-backed-wiki-pages-ai-work`
+- `/zh-CN/learn/source-backed-wiki-pages-ai-work`
+
+The already-requested English source-backed article is excluded. Any URL
+outside this five-URL batch, non-website publication, or GSC validation
+remains separately approval-gated.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
-request indexing, and GSC validation remain separately approval-gated.
+request indexing outside the fixed batch, and GSC validation remain
+separately approval-gated.

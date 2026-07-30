@@ -661,12 +661,14 @@ test("date-schema cutover accepts only dates or explicit sentinels", () => {
 
 test("date-schema cutover cannot move inside or after its first V1 record", () => {
   const marker = "<!-- EXPERIMENT-DATE-SCHEMA-V1 -->";
+  const firstDateSchemaExperimentId =
+    "EXP-2026-07-29-docs-github-acquisition";
   const firstV1Start =
     "<!-- EXPERIMENT-RECORD:START -->\n" +
-    `## Experiment start: ${currentExperimentId}`;
+    `## Experiment start: ${firstDateSchemaExperimentId}`;
   const insideRecord = canonicalExperiments.replace(
     `${marker}\n${firstV1Start}`,
-    `<!-- EXPERIMENT-RECORD:START -->\n${marker}\n## Experiment start: ${currentExperimentId}`,
+    `<!-- EXPERIMENT-RECORD:START -->\n${marker}\n## Experiment start: ${firstDateSchemaExperimentId}`,
   );
   const afterRecord = `${canonicalExperiments.replace(`${marker}\n`, "")}\n${marker}\n`;
 

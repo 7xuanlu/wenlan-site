@@ -75,7 +75,7 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
               <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
                 {content.eyebrow}
               </p>
-              <h1 className="warm-glow break-words font-serif text-5xl leading-[1.08] font-medium tracking-tight sm:text-7xl">
+              <h1 className="warm-glow font-serif text-5xl leading-[1.08] font-medium tracking-tight [word-break:keep-all] [overflow-wrap:break-word] sm:text-7xl">
                 {content.title}
               </h1>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">
@@ -117,7 +117,7 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
                 <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-warm)]/80 uppercase">
                   {article.eyebrow}
                 </p>
-                <h3 className="mt-6 break-words font-serif text-2xl font-medium tracking-tight text-[var(--o-text)]">
+                <h3 className="mt-6 font-serif text-2xl font-medium tracking-tight text-[var(--o-text)] [word-break:keep-all] [overflow-wrap:break-word]">
                   {article.title}
                 </h3>
                 <p className="mt-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
