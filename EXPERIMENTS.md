@@ -3669,3 +3669,17 @@ increase for that experiment.
 - Decision: stop
 - Next step: Remove the older Learn-hub cohort from pending 7-day, W2, W4, and W8 judgments. Use the authenticated `EXP-2026-07-30-knowledge-base-locales-refresh` baseline and its predeclared 10-impression cross-locale exposure guard for future `/learn` interpretation.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-30-knowledge-base-locales-refresh production verification
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-30-knowledge-base-locales-refresh
+- Observed at: 2026-07-30T08:07:02Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #99 merged at `2026-07-30T07:58:58Z` as `5a4c8fe302b4557b4f34ca7ac9c40bad4e39bfbc`; Vercel production completed at `2026-07-30T07:59:58Z`. The deployed audit passes robots, 113 sitemap URLs, 17 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy URL exclusions. Live English, zh-TW, and zh-CN Learn hubs and source-backed article routes expose exact self-canonicals, `index, follow`, reciprocal English/zh-TW/zh-CN/x-default alternates, the expected CollectionPage or Article plus BreadcrumbList schema, stable English dates `2026-06-06` / `2026-07-30`, stable Mandarin dates `2026-07-04` / `2026-07-30`, the visible six-command workflow and FAQ, and no horizontal overflow. GSC URL Inspection reported `/learn`, `/zh-TW/learn`, `/zh-CN/learn`, `/zh-TW/learn/source-backed-wiki-pages-ai-work`, and `/zh-CN/learn/source-backed-wiki-pages-ai-work` already on Google; one request-indexing action for each returned `Indexing requested`. These are current index-presence and crawl-queue observations, not a post-change crawl, rank, traffic, or causal result.
+- Result: pending
+- Decision: wait
+- Next step: Keep the production slot open for a non-overlapping evidence-gated candidate. Do not repeat the five indexing requests. At the predeclared readouts, keep property totals, visible-query totals, target-page rows, Vercel observations, authenticated Umami events, and GitHub stars in their native units; mark exposure below 10 target-page GSC impressions inconclusive.
+<!-- EXPERIMENT-RECORD:END -->

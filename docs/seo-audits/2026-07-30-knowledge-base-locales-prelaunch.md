@@ -121,3 +121,26 @@ definition changes remain outside this approval.
   mismatch: the site publishes `0.15.0` while the checked Wenlan sibling is
   `0.15.1`. Those three release assertions are outside this experiment; all
   changed and non-release acquisition contracts pass.
+
+## Production and GSC execution
+
+- PR #99 merged at `2026-07-30T07:58:58Z` as
+  `5a4c8fe302b4557b4f34ca7ac9c40bad4e39bfbc`.
+- Vercel production completed at `2026-07-30T07:59:58Z`.
+- `pnpm seo:technical:deployed` passed robots, 113 sitemap URLs, 17 key
+  pages, six utility noindex headers, sitemap-wide `FAQPage` absence,
+  25 redirects, six bridge-host redirects, and legacy URL exclusions.
+- Live render verification passed the exact canonical, indexability,
+  reciprocal hreflang, schema, dates, visible workflow, visible FAQ, and
+  overflow checks on the English, zh-TW, and zh-CN Learn hubs and
+  source-backed article routes.
+- GSC URL Inspection reported all five approved URLs already on Google:
+  `/learn`, `/zh-TW/learn`, `/zh-CN/learn`,
+  `/zh-TW/learn/source-backed-wiki-pages-ai-work`, and
+  `/zh-CN/learn/source-backed-wiki-pages-ai-work`.
+- One request-indexing action for each returned `Indexing requested` by
+  `2026-07-30T08:07:02Z`. This proves queue acceptance only; it does not prove
+  a post-change crawl, ranking change, impressions, clicks, or causality.
+- The English source-backed article was excluded because it was already
+  requested on 2026-07-28. No GSC validation or out-of-batch indexing action
+  was performed.

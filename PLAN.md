@@ -239,17 +239,21 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-30-knowledge-base-locales-refresh` is active in the single
-  production slot. It refreshes the existing English, zh-TW, and zh-CN Learn
+  `EXP-2026-07-30-knowledge-base-locales-refresh` is production-verified and
+  measuring. It refreshes the existing English, zh-TW, and zh-CN Learn
   hubs plus the existing source-backed AI knowledge-base article in all three
   locales. It creates no URL, does not change locale availability, and keeps
   the category centered on AI knowledge bases and LLM wiki rather than
   generic memory. The user approved local preparation, commit, push, PR
   creation, merge, automatic Vercel deployment, read-only production
-  verification, and a later fixed GSC inspection/indexing batch for `/learn`,
+  verification, and a fixed GSC inspection/indexing batch for `/learn`,
   the zh-TW and zh-CN Learn hubs, and the zh-TW and zh-CN source-backed
   article routes in this task at `2026-07-30T06:57:46Z`, then explicitly
-  added zh-TW. No GSC validation,
+  added zh-TW. PR #99 merged as
+  `5a4c8fe302b4557b4f34ca7ac9c40bad4e39bfbc`; Vercel production completed at
+  `2026-07-30T07:59:58Z`. The five-URL GSC batch completed by
+  `2026-07-30T08:07:02Z`; all five URLs were already on Google and each
+  returned `Indexing requested`. No GSC validation,
   synthetic event, external post, OSS submission, paid acquisition,
   analytics account mutation, or metric change is approved.
   `EXP-2026-07-29-docs-github-acquisition` is live,
@@ -674,8 +678,8 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-30-knowledge-base-locales-refresh` is active in the single
-production slot. It refreshes existing acquisition surfaces rather than
+`EXP-2026-07-30-knowledge-base-locales-refresh` is production-verified and
+measuring. It refreshes existing acquisition surfaces rather than
 creating another article: `/learn`,
 `/learn/source-backed-wiki-pages-ai-work`, their zh-TW and zh-CN Learn hubs,
 and the two existing localized source-backed article routes.
@@ -708,6 +712,22 @@ The complete candidate gate, source-native baseline, approval boundary, and
 verification contract are recorded in
 `docs/seo-audits/2026-07-30-knowledge-base-locales-prelaunch.md` and the
 append-only ledger.
+
+PR #99 merged at `2026-07-30T07:58:58Z` as
+`5a4c8fe302b4557b4f34ca7ac9c40bad4e39bfbc`; Vercel production completed at
+`2026-07-30T07:59:58Z`. The deployed technical audit passes robots, 113
+sitemap URLs, 17 key pages, six utility noindex headers, sitemap-wide
+`FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy URL
+exclusions. Live render verification passes exact self-canonicals,
+`index, follow`, reciprocal English/zh-TW/zh-CN/x-default alternates,
+Article and BreadcrumbList schema, stable publication and modification
+dates, the visible workflow and FAQ, and zero horizontal overflow across the
+six changed routes.
+
+GSC URL Inspection reported all five approved batch URLs already on Google.
+Each request-indexing action returned `Indexing requested` by
+`2026-07-30T08:07:02Z`. This records queue acceptance only; it is not a
+post-change crawl, ranking, impression, or click result.
 
 ### Measuring cohort: Obsidian Claude Code
 
@@ -1135,11 +1155,12 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 #### Acquisition and migration decision
 
-The Docs-to-GitHub bridge is production-verified and measuring. The active
-production decision is now the English, zh-TW, and zh-CN Learn
-knowledge-base refresh described in the Current experiment section. Preserve
-existing URLs, reciprocal locale behavior, canonical and sitemap membership,
-Article and BreadcrumbList schema, and visible FAQ without `FAQPage`.
+The Docs-to-GitHub bridge and the English, zh-TW, and zh-CN Learn
+knowledge-base refresh are production-verified and measuring. The production
+slot is open for the next non-overlapping candidate that passes the full
+evidence gate. Preserve existing URLs, reciprocal locale behavior, canonical
+and sitemap membership, Article and BreadcrumbList schema, and visible FAQ
+without `FAQPage`.
 
 Treat the domain migration and acquisition evidence as one operating view.
 The user submitted Change of Address from `useorigin.app` to `wenlan.app` and
@@ -1267,9 +1288,9 @@ memory-first queue. A localized candidate still needs matching
 locale-specific evidence. Targeted indexing for the four URLs listed earlier
 was approved and completed; do not repeat those requests.
 
-The current approved post-deploy GSC batch is limited to URL Inspection and,
-when the Search Console UI permits it, one request-indexing action for each of
-these changed existing URLs:
+The approved post-deploy GSC batch completed by `2026-07-30T08:07:02Z`. URL
+Inspection reported each changed existing URL already on Google, and one
+request-indexing action for each returned `Indexing requested`:
 
 - `/learn`
 - `/zh-TW/learn`
@@ -1277,9 +1298,10 @@ these changed existing URLs:
 - `/zh-TW/learn/source-backed-wiki-pages-ai-work`
 - `/zh-CN/learn/source-backed-wiki-pages-ai-work`
 
-The already-requested English source-backed article is excluded. Any URL
-outside this five-URL batch, non-website publication, or GSC validation
-remains separately approval-gated.
+The already-requested English source-backed article was excluded. Do not
+repeat these requests; queue acceptance is not an indexing or ranking result.
+Any URL outside this completed five-URL batch, non-website publication, or
+GSC validation remains separately approval-gated.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing outside the fixed batch, and GSC validation remain
