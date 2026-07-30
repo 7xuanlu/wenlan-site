@@ -98,3 +98,38 @@ test("download-page placement preserves the bounded outbound event shape", (t) =
     ],
   ]);
 });
+
+test("docs-article placement preserves the bounded outbound event shape", (t) => {
+  const previousWindow = globalThis.window;
+  const calls = [];
+  globalThis.window = {
+    umami: {
+      track: (...args) => calls.push(args),
+    },
+  };
+  t.after(() => {
+    globalThis.window = previousWindow;
+  });
+
+  const link = TrackedLink({
+    href: "https://github.com/7xuanlu/wenlan",
+    eventName: "github_outbound",
+    placement: "docs-article",
+    locale: "en",
+    context: "setup",
+    children: "Open GitHub",
+  });
+
+  link.props.onClick();
+  assert.deepEqual(calls, [
+    [
+      "github_outbound",
+      {
+        placement: "docs-article",
+        locale: "en",
+        context: "setup",
+        destination_category: "github",
+      },
+    ],
+  ]);
+});

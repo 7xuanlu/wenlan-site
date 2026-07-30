@@ -231,6 +231,7 @@ test("primary acquisition links emit bounded provider-neutral Umami CTA events",
   const home = await readRepo("src/app/_pages/home.tsx");
   const learnIndex = await readRepo("src/app/learn/page.tsx");
   const learnArticle = await readRepo("src/app/learn/[slug]/page.tsx");
+  const docsArticle = await readRepo("src/app/(en)/docs/[slug]/page.tsx");
   const getStarted = await readRepo("src/app/_pages/get-started.tsx");
   const docs = await readRepo("src/app/docs/docs.ts");
 
@@ -251,6 +252,15 @@ test("primary acquisition links emit bounded provider-neutral Umami CTA events",
   assert.match(home, /TrackedLink/);
   assert.match(learnIndex, /TrackedLink/);
   assert.match(learnArticle, /TrackedLink/);
+  assert.match(docsArticle, /TrackedLink/);
+  assert.match(docsArticle, /href="https:\/\/github\.com\/7xuanlu\/wenlan"/);
+  assert.match(docsArticle, /placement="docs-article"/);
+  assert.match(docsArticle, /eventName="github_outbound"/);
+  assert.match(docsArticle, /locale="en"/);
+  assert.match(docsArticle, /context="setup"/);
+  assert.match(docsArticle, /target="_blank"/);
+  assert.match(docsArticle, /rel="noopener noreferrer"/);
+  assert.match(docsArticle, /Open GitHub/);
   assert.match(getStarted, /TrackedLocalizedLink/);
   assert.match(docs, /heading: "Public website analytics"/);
   assert.match(docs, /Vercel Web Analytics/);

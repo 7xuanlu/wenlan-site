@@ -239,6 +239,18 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
+  `EXP-2026-07-29-docs-github-acquisition` is active in the single
+  production slot. It adds one bounded, tracked open-source module to the
+  existing English Docs article rail. The aligned baseline keeps
+  `/docs/configuration` at 774 Vercel visitors and 850 pageviews, while GSC
+  separately reports 12 impressions, 0 clicks, and average position 15.8.
+  GitHub public REST reports 46 stars, and authenticated Umami events remain
+  unavailable rather than zero. The user approved local preparation, commit,
+  push, PR creation, merge, automatic Vercel deployment, read-only production
+  verification, and the later GSC inspection/indexing batch at
+  `2026-07-30T06:57:46Z`. No GSC validation, synthetic event, external post,
+  OSS submission, paid acquisition, analytics account mutation, or metric
+  change is approved.
   `EXP-2026-07-29-obsidian-claude-code-refresh` is live,
   production-verified, and measuring; it no longer consumes the single
   production slot. It refreshes the
@@ -330,7 +342,7 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 16.
+- Active experiments: 17.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -654,8 +666,37 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
+`EXP-2026-07-29-docs-github-acquisition` is active in the single production
+slot. The shared English Docs slug renderer currently has no tracked
+repository path even though `/docs/configuration` received 774 Vercel
+visitors and 850 pageviews in the aligned complete range. The route
+separately has 12 GSC impressions, 0 clicks, and average position 15.8.
+
+The bounded change adds one quiet open-source module below the existing Docs
+table of contents and extends only the bounded placement union with
+`docs-article`. It sends the existing `github_outbound` event to configured
+Umami with locale `en`, context `setup`, and destination category `github`.
+It changes no URL, metadata, canonical, sitemap entry, Docs content,
+structured-data type, or `FAQPage` policy.
+
+The experiment requires 50 post-deploy Vercel visitors to English Docs slug
+routes before interpretation. Authenticated Umami must show at least five
+`docs-article` outbound events by 7d for success; 100 exposed visitors with
+zero authenticated events is failure. Missing exposure or unavailable Umami
+remains inconclusive. GitHub stars remain a separate public REST observation
+and are never attributed causally to the CTA.
+
+The complete gate, source-native baseline, verification contract, and user
+approval are recorded in
+`docs/seo-audits/2026-07-29-docs-github-acquisition-prelaunch.md` and the
+append-only ledger. The user approved commit, push, PR creation, merge,
+automatic Vercel deployment, read-only production verification, and the
+later GSC inspection/indexing batch at `2026-07-30T06:57:46Z`.
+
+### Measuring cohort: Obsidian Claude Code
+
 `EXP-2026-07-29-obsidian-claude-code-refresh` is live,
-production-verified, and measuring; the single production slot is free. It
+production-verified, and measuring. It
 keeps the existing English `/learn/wenlan-vs-obsidian-ai-memory` route while
 replacing the unsupported `Obsidian AI Memory` framing with the evidenced
 tool-pair intent:
@@ -1071,6 +1112,12 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 ### Next decision
 
 #### Acquisition and migration decision
+
+The active production decision is the Docs-to-GitHub bridge described in the
+Current experiment section. After it is production-verified and releases the
+slot, the user-approved next website change refreshes the English, zh-TW, and
+zh-CN Learn knowledge-base acquisition surfaces while preserving existing
+URLs. Do not start the second production change before the first is verified.
 
 Treat the domain migration and acquisition evidence as one operating view.
 The user submitted Change of Address from `useorigin.app` to `wenlan.app` and

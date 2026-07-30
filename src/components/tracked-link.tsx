@@ -20,7 +20,8 @@ export type AnalyticsPlacement =
   | "learn-grid"
   | "learn-footer"
   | "learn-article"
-  | "docs-get-started";
+  | "docs-get-started"
+  | "docs-article";
 
 export type AnalyticsContext =
   | "home"

@@ -47,6 +47,7 @@ Every started experiment uses one immutable block with these exact fields:
 - Decision: wait, scale, refresh, merge, stop, localize, or extend
 - Next step: one concrete next action or wait condition
 <!-- EXPERIMENT-RECORD:END -->
+
 ```
 
 Allowed start statuses are `approved`, `active`, `live`, `measuring`,
@@ -3580,4 +3581,34 @@ increase for that experiment.
   SEO result and do not rewrite the page. Reuse the next authenticated weekly
   range for its declared later readout while keeping GSC, Vercel, Umami, and
   GitHub observations in their native units.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-DATE-SCHEMA-V1 -->
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-07-29-docs-github-acquisition
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-07-29-docs-github-acquisition
+- Status: active
+- Data window: 2026-07-25..2026-07-31
+- Asset class: integration-hub
+- Launched: 2026-07-29
+- Hypothesis: A persistent, restrained repository path in the shared Docs rail will produce measurable GitHub-outbound interest from existing Docs traffic.
+- Candidate evidence: Authenticated aligned Vercel data reports 774 visitors and 850 pageviews for `/docs/configuration`; GSC separately reports 12 impressions, 0 clicks, and average position 15.8; the current English Docs renderer has no tracked repository path; GitHub REST reports 46 stars; the maintained repository is `https://github.com/7xuanlu/wenlan`.
+- Baseline: GSC property totals are 8 clicks and 395 impressions; visible-query totals are 2 clicks and 92 impressions; the visibility gap is 6 clicks and 303 impressions; Vercel raw totals are 1,420 visitors and 1,628 pageviews; `/docs/configuration` separately has 774 visitors and 850 pageviews; authenticated Umami events are unavailable rather than zero; GitHub has 46 stars.
+- Change: Add one compact open-source module below the existing English Docs table of contents and emit the existing bounded `github_outbound` event with placement `docs-article`, locale `en`, context `setup`, and destination category `github`.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 50 Vercel visitors to English Docs slug routes after production
+- Success criteria: By the 7-day readout, authenticated Umami reports at least five `github_outbound` events with placement `docs-article`, and the deployed technical floor remains green.
+- Failure criteria: At least 100 Vercel visitors reach English Docs slug routes in a complete post-deploy window and authenticated Umami reports zero `docs-article` GitHub outbound events.
+- Stop criteria: Stop for a technical SEO regression, broken navigation, unsafe analytics payload, misleading destination, or sustained evidence that the module harms Docs use.
+- 24h readout: pending
+- 7d readout: pending
+- W2 readout: pending
+- W4 readout: pending
+- W8 readout: pending
+- Result: pending
+- Decision: wait
+- Next step: Complete local code, event-contract, responsive-render, and technical verification, then publish under the user's explicit approval.
 <!-- EXPERIMENT-RECORD:END -->
