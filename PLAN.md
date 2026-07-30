@@ -497,7 +497,7 @@ after the anchor is frozen.
 
 | Metric | Fixed baseline | Verified live observation | Provenance | Gap to target from live observation |
 | --- | ---: | ---: | --- | ---: |
-| GitHub total stars | 47 | 47 | GitHub REST `GET /repos/7xuanlu/wenlan`, read on 2026-07-28 | 53 |
+| GitHub total stars | 47 | 46 | GitHub REST `GET /repos/7xuanlu/wenlan`, read on 2026-07-30 | 54 |
 | GSC rolling-28-day property impressions | 197 | 395 | Search Console API, `sc-domain:wenlan.app`, `2026-06-28..2026-07-25`; `/tmp/wenlan-seo-2026-07-28/gsc-metadata.json` | 605 |
 | Vercel rolling-28-day visitors | 323 | 1,420 | Vercel Web Analytics API, project `wenlan-site`, `2026-06-28..2026-07-25`; `/tmp/wenlan-seo-2026-07-28/vercel-metadata.json` | 580 |
 
@@ -642,7 +642,7 @@ Supporting quality split for the same live range:
 
 ### Current gap
 
-- Stars: 53 more than the verified live observation.
+- Stars: 54 more than the verified live observation.
 - GSC property impressions: 605 more in the fixed final rolling window.
 - Vercel visitors: 580 more in the fixed final rolling window.
 - Legacy migration diagnostic: `sc-domain:useorigin.app` still has
@@ -740,6 +740,17 @@ canonical, indexability, sitemap, hreflang, schema, visible six-command
 workflow, and desktop/mobile render checks. Its 24-hour technical/evidence
 readout is due after `2026-07-30T05:28:22Z`; it does not consume the
 production slot.
+
+The actual 24-hour readout was recorded at `2026-07-30T05:39:51Z`.
+Canonical, indexability, sitemap, hreflang, schema dates, all seven guide
+sections, the six-command workflow, FAQ policy, deployed technical audit, and
+the 22-direct-200 plus five-expected-404 locale matrix pass. The latest
+authenticated GSC and Vercel range still ends before deployment, so no SEO
+outcome is inferred. Fresh full-page visual QA found no document or H1
+overflow, but the focused mobile CJK pass found the H1 splitting `知识库` as
+`知识 / 库` and the article packet splitting `来源` as `来 / 源`. The technical
+readout remains measuring while a bounded mobile wrapping correction awaits
+separate publication approval.
 
 `EXP-2026-07-25-context-loss-diagnostic-refresh` is live,
 production-verified, and measuring. It refreshes the existing English
@@ -1100,10 +1111,14 @@ The experiment is production-verified and measuring. PR #95 merged at
 `datePublished: "2026-06-06"`, canonical, sitemap and locale behavior,
 Article and BreadcrumbList schema, and visible FAQ without `FAQPage`.
 Do not rewrite the page again before a declared readout or new evidence.
-The next due experiment check is the 24-hour technical/evidence readout after
-`2026-07-30T06:07:17Z`. A separate non-overlapping website candidate may be
+At the user's request, an early partial technical/evidence observation was
+recorded at `2026-07-30T05:39:51Z`, 23 hours 32 minutes 34 seconds after
+production completion. It is not labeled as the formal 24-hour readout.
+Technical, locale, content, and responsive render checks pass; the latest
+authenticated GSC and Vercel range still predates deployment, so no SEO
+outcome is inferred. A separate non-overlapping website candidate may be
 prepared only after its complete gate passes; no new candidate is started by
-this production record. Request indexing and GSC validation remain separately
+this observation. Request indexing and GSC validation remain separately
 gated.
 
 #### Scheduled measurement maintenance
@@ -1148,11 +1163,11 @@ result remains pending. Run their 7-day readouts after their predeclared
 times from `2026-07-31T19:18:03Z` through `2026-08-01T01:04:56Z`, using the
 Friday weekly evidence rather than duplicating its pipeline.
 
-The same-task `wenlan-claude-memory-24h-readout` heartbeat is temporarily
-scheduled after `2026-07-30T05:28:22Z` for the actual 24-hour zh-CN LLM-wiki
-technical/evidence readout. After recording that due readout, update the same
-heartbeat back to `2026-08-01T02:20:00Z`, safely after the Friday weekly SEO
-run and the latest 7-day boundary. That batch covers the due zh-TW Obsidian,
+The same-task `wenlan-claude-memory-24h-readout` heartbeat completed the
+actual 24-hour zh-CN LLM-wiki readout and the user-requested early partial
+English Obsidian observation at `2026-07-30T05:39:51Z`. Reuse that same
+heartbeat at `2026-08-01T02:20:00Z`, safely after the Friday weekly SEO run
+and the latest 7-day boundary. That batch covers the due zh-TW Obsidian,
 AI-work-memory versus knowledge-base, Learn-hub, LLM-wiki, MCP shared-memory,
 stale-memory, claude-mem, SuperLocalMemory, Basic Memory,
 AI-agent-memory-types, and context-loss 7-day readouts. It must not record the

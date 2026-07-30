@@ -3434,3 +3434,150 @@ increase for that experiment.
   rows, Vercel native-unit observations, authenticated Umami observations
   when available, and GitHub stars separate.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh at 2026-07-30T05:39:51Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh
+- Observed at: 2026-07-30T05:39:51Z
+- Readout: 24h
+- Status: measuring
+- Timing: This readout is 24 hours 11 minutes 29 seconds after corrected
+  production completed at `2026-07-29T05:28:22Z`; it is recorded at the
+  actual observation time and is not backdated.
+- Evidence: The live technical, metadata, content, locale, and responsive
+  geometry checks pass. The latest authenticated search and visitor range
+  still ends before deployment, while fresh mobile visual inspection found
+  two CJK phrase breaks that require a bounded presentation correction.
+- GSC evidence: The latest reusable authenticated range remains
+  `2026-06-28..2026-07-25`, before this refresh. Property totals are 8 clicks
+  and 395 impressions; visible-query totals are 2 clicks and 92 impressions;
+  the query visibility gap is 6 clicks and 303 impressions. The zh-CN target
+  has no page row and no joined visible qualified-query row; neither is
+  reported as zero. The visible `llm wiki 2.0` row maps to the zh-TW page,
+  not this target. No indexing state, exact-query rank, post-change exposure,
+  or SEO success is inferred.
+- Vercel evidence: The same complete pre-deploy range reports 1,420 raw
+  visitors and 1,628 pageviews. Direct traffic is separately 270 visitors and
+  351 pageviews. The existing qualified-source allowlist sums to 1,152
+  visitors across separate search, AI, and GitHub referrer rows and is not a
+  deduplicated visitor count. The zh-CN target separately reports 2 visitors
+  and 3 pageviews. Unique acquisition-surface visitors and source-to-page
+  sessions remain unavailable; the page row is not joined to a referrer.
+- Umami and GitHub evidence: No authenticated Umami event observation is
+  available, so GitHub outbound and CTA are not reported. GitHub public REST
+  reports 46 total Wenlan stars at this readout, one below the fixed
+  47-star baseline; no attribution or causal claim is made.
+- Technical and content evidence: The target returns direct HTTP 200 with its
+  exact self-canonical, `index, follow`, reciprocal `en-US`, `zh-TW`,
+  `zh-CN`, and `x-default` alternates, Article and BreadcrumbList JSON-LD,
+  stable `datePublished: "2026-07-04"`,
+  `dateModified: "2026-07-29"`, all seven intended guide sections, four
+  visible FAQ controls without `FAQPage`, maintained references, and all six
+  `/brief`, `/recall`, `/capture`, `/handoff`, `/distill`, and `/pages`
+  commands.
+- Deployed technical and locale evidence: The audit passes robots, 113
+  sitemap URLs, 17 key pages, six utility noindex headers, sitemap-wide
+  `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL
+  exclusions. The production locale matrix passes 22 expected direct-200
+  routes and five expected 404 routes.
+- Render evidence: Fresh full-page captures at 393 by 852 and 1440 by 1100
+  CSS pixels cover the entire route at
+  `/private/tmp/wenlan-24h-production-qa/`. Mobile document width is
+  393/393 and H1 width is 345/345; desktop document width is 1434/1434 and
+  H1 width is 664/664. No document overflow, clipped surface, missing section,
+  unexpected alpha channel, browser warning, or browser error was observed.
+- Visual QA pass A: PASS with high confidence. The page remains a real shared
+  DOM and token-driven article surface; canonical links, maintained sources,
+  native FAQ details, schemas, responsive containers, and the six-command
+  workflow are present and functional in the rendered tree.
+- Visual QA pass B: REVISE with high confidence. In the exact 393-pixel hero
+  capture, the H1 breaks `知识库` as `知识 / 库`, and the article packet breaks
+  `来源` as `来 / 源`. Desktop and the remaining mobile surface show no
+  additional clipping or obvious CJK orphan. The synthesized visual verdict
+  is NEEDS WORK until those two mobile phrase breaks are corrected on fresh
+  complete-page evidence.
+- Result: pending
+- Decision: refresh
+- Unperformed gated actions: No push, PR, merge, deployment, indexing request,
+  GSC validation, Reddit or other external post, OSS submission, paid
+  acquisition, synthetic analytics event, account mutation, or
+  metric-definition change was performed.
+- Next step: Prepare only a bounded local mobile wrapping correction for the
+  two confirmed CJK phrases, re-run fresh complete-page visual QA, and obtain
+  separate approval before any push, PR, merge, or deployment. Keep the
+  experiment measuring and apply its original exposure guard at the next
+  authenticated readout.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-29-obsidian-claude-code-refresh early partial at 2026-07-30T05:39:51Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-29-obsidian-claude-code-refresh
+- Observed at: 2026-07-30T05:39:51Z
+- Readout: correction
+- Status: measuring
+- Timing: This user-requested immediate observation is 23 hours 32 minutes
+  34 seconds after production completed at `2026-07-29T06:07:17Z`. It is an
+  early partial technical/evidence observation, not the formal 24-hour
+  readout and not an SEO verdict.
+- Evidence: The live technical, metadata, content, locale, and complete
+  responsive render checks pass. The latest authenticated search and visitor
+  range still ends before deployment.
+- GSC evidence: The latest reusable authenticated range remains
+  `2026-06-28..2026-07-25`, before this refresh. Property totals are 8 clicks
+  and 395 impressions; visible-query totals are 2 clicks and 92 impressions;
+  the query visibility gap is 6 clicks and 303 impressions. The target page
+  separately has 0 clicks, 4 impressions, and page-average position 4.5, but
+  there is no visible Obsidian query row or joined visible qualified-query
+  row. Page-average position is not an exact-query rank, and no post-change
+  search effect is inferred.
+- Vercel evidence: The same complete pre-deploy range reports 1,420 raw
+  visitors and 1,628 pageviews, 270 direct visitors and 351 direct pageviews,
+  and a non-deduplicated 1,152-visitor qualified-source aggregate. The target
+  page separately reports 4 visitors and 4 pageviews. Unique
+  acquisition-surface visitors and source-to-page sessions remain
+  unavailable.
+- Umami and GitHub evidence: No authenticated Umami event observation is
+  available, so GitHub outbound and CTA are not reported. GitHub public REST
+  reports 46 total Wenlan stars; no attribution or causal claim is made.
+- Technical and content evidence: The English target returns direct HTTP 200
+  with the exact self-canonical, `index, follow`, Article and BreadcrumbList
+  JSON-LD, stable `datePublished: "2026-06-06"`,
+  `dateModified: "2026-07-29"`, direct-files, active-editor-context, Obsidian
+  MCP, and source-backed knowledge-lifecycle sections, three maintained
+  Obsidian and Claude Code OSS references plus maintained Wenlan anchors, and
+  two visible FAQ controls without `FAQPage`.
+- Deployed technical and locale evidence: The audit passes robots, 113
+  sitemap URLs, 17 key pages, six utility noindex headers, sitemap-wide
+  `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL
+  exclusions. The production locale matrix passes 22 expected direct-200
+  routes and five expected 404 routes; English and zh-TW remain available,
+  while the unsupported zh-CN article route remains a hard 404.
+- Render evidence: Fresh complete-page captures at 393 by 852 and 1440 by
+  1100 CSS pixels are under `/private/tmp/wenlan-24h-production-qa/`.
+  Mobile document width is 393/393 and H1 width is 345/345; the comparison
+  table remains contained in a 343-pixel horizontal scroller with a
+  378-pixel scroll width. Desktop document width is 1434/1434, H1 width is
+  664/664, and the table is 678/678. No clipping, unexpected alpha channel,
+  browser warning, or browser error was observed.
+- Visual QA pass A: PASS with high confidence. The page is a real shared
+  DOM and token-driven article surface with live links, native FAQ details,
+  schema, responsive layout, and maintained references; it is not a raster
+  substitute.
+- Visual QA pass B: PASS with high confidence. Direct inspection of both
+  complete captures found no clipping, overflow, broken heading, or visual
+  precision defect. The synthesized visual verdict is GOOD.
+- Result: pending
+- Decision: wait
+- Unperformed gated actions: No push, PR, merge, deployment, indexing request,
+  GSC validation, Reddit or other external post, OSS submission, paid
+  acquisition, synthetic analytics event, account mutation, or
+  metric-definition change was performed.
+- Next step: Do not treat this early partial observation as a formal 24-hour
+  SEO result and do not rewrite the page. Reuse the next authenticated weekly
+  range for its declared later readout while keeping GSC, Vercel, Umami, and
+  GitHub observations in their native units.
+<!-- EXPERIMENT-RECORD:END -->
