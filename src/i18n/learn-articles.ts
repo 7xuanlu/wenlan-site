@@ -113,73 +113,119 @@ const zhTWArticles = {
     slug: "source-backed-wiki-pages-ai-work",
     eyebrow: "信任",
     category: "Concepts",
-    title: "AI 工作的 source-backed wiki pages",
+    title: "有來源的 AI 知識庫：來源、更新與審查方法",
     description:
-      "為什麼 Wenlan 會把重複 memories 蒸餾成保留 source IDs 和 refresh state 的頁面。",
-    metaTitle: "Source-Backed Wiki Pages | Wenlan 文瀾",
+      "用 Wenlan 將來源、原子知識與可維護頁面分開，建立能追溯、能刷新、能審查的本地 AI 知識庫。",
+    metaTitle: "有來源的 AI 知識庫：來源、更新與審查 | Wenlan",
     metaDescription:
-      "Wenlan distilled pages 保留 source memory IDs 和 revision state，讓 AI work memory 變得可讀又不失去 provenance。",
+      "建立有來源的 AI 知識庫：分開可信來源、原子知識與 LLM Wiki 頁面，並用 Wenlan 保留引用、更新與審查狀態。",
     keywords: [
-      "source-backed wiki pages",
-      "AI memory provenance",
-      "AI 工作 wiki",
+      "AI 知識庫",
+      "有來源的 AI 知識庫",
+      "本地 AI 知識庫",
+      "LLM Wiki",
+      "知識庫維護",
       "Wenlan 文瀾",
-      "LLM wiki",
     ],
     publishedAt: "2026-07-04",
-    updatedAt: "2026-07-04",
+    updatedAt: "2026-07-30",
     author: "Qi-Xuan Lu",
-    readingTime: "4 分鐘閱讀",
-    audience: "想讓 AI memory 變可讀但仍可驗證的中文使用者",
+    readingTime: "7 分鐘閱讀",
+    audience: "想讓 AI agent 使用本地知識，但仍能檢查來源、更新與審查狀態的繁體中文使用者",
     heroBullets: [
-      "Pages 由 related memories 合成。",
-      "Source IDs 保留下來，summary 不會變成無來源 claims。",
-      "頁面可以隨著 memories 累積而成長或刷新。",
+      "可信來源不和模型產生的結論混在一起。",
+      "原子知識保留細粒度證據，再組成可重用頁面。",
+      "頁面保存引用、修訂、過期原因與審查狀態。",
     ],
     sections: [
       {
         heading: "一句話答案",
         body: [
-          "Source-backed pages 是 Wenlan LLM wiki 的信任層：它們把 related memories 變成可讀 wiki artifacts，同時保留可檢查的 source memory IDs。",
-          "這讓 memory 不只是搜尋結果，也不是自由浮動的 summary；它是能回到來源的工作知識。",
+          "有來源的 AI 知識庫會把可信來源、原子知識與維護型 LLM Wiki 頁面分開。Agent 取得的是可重用答案，人仍能沿著引用回到來源、檢查修訂，並在證據變化時刷新頁面。",
+          "Wenlan 在本機連接這三層，讓知識不只是搜尋片段或脫離來源的摘要。",
         ],
         link: {
-          label: "看 LLM wiki 導覽",
+          label: "查看 LLM Wiki 的完整生命週期",
           href: "/learn/distilled-wiki-pages-ai-memory",
         },
       },
       {
-        heading: "為什麼不能只存 summary",
+        heading: "AI 知識庫為什麼必須保留來源",
         body: [
-          "Summary 很好讀，但一旦失去來源，就很難判斷它是從哪個 session、哪個 decision 或哪個錯誤修正來的。",
-          "Atomic memories 保留細粒度 evidence；pages 把它們組成可讀 context。Wenlan 需要兩者一起存在。",
+          "直接丟入大量文件會讓 agent 每次都重新搜尋；只留下摘要，又會失去支持結論的證據。來源一旦更新，沒有人知道哪些答案也必須重算。",
+          "可維護的知識庫必須回答三件事：這個結論來自哪裡、現在是否仍有效、發生衝突時誰來審查。",
         ],
       },
       {
-        heading: "Wenlan page record 保存什麼",
+        heading: "三層最小架構：Sources、Atomic Knowledge、Pages",
         body: [
-          "Wenlan 的 page record 保留 source IDs、version、changelog、stale reason 和 source counts。人和 agent 都可以檢查這條 chain。",
-          "如果新 capture 顯示舊頁面已經不準，page 可以被標成 stale 或重新 distilled，而不是和舊結論並排堆積。",
+          "Sources 是可檢查的原始資料；Atomic Knowledge 是帶著來源與理由的單一事實；Pages 則把重複、高價值的知識整理成 agent 可以按需讀取的答案。",
+          "不要跳過中間層。原子知識讓頁面保持可追溯，也讓新證據只修正受影響的事實，而不是重寫整個知識庫。",
         ],
       },
       {
-        heading: "什麼時候該使用 pages",
+        heading: "Wenlan 的實際工作流程",
         body: [
-          "不要把每個 capture 都立刻塞進頁面。先捕捉 atomic memories，等 topic 重複、跨 session 仍然重要，再把它 distilled 成 page。",
-          "頁面適合 project constraints、accepted decisions、setup fixes、handoff patterns，以及人和 agent 都會反覆查的概念。",
+          "先用一個會重複查詢的主題驗證閉環，不要一開始就匯入整個筆記庫。記錄一個帶來源與理由的事實，累積到值得重用時再蒸餾成頁面。",
         ],
+        bullets: [
+          "用 /capture 保存單一事實、來源與它為何重要。",
+          "用 /distill 把重複主題整理成維護型頁面。",
+          "用 /pages 開啟頁面並核對支持它的來源。",
+          "用 /lint 找出薄弱、衝突或過期的知識。",
+          "用 /curate 審查修訂，再決定是否刷新頁面。",
+        ],
+        code: {
+          label: "Wenlan 知識庫維護迴圈",
+          code: "/brief <主題>\n/capture <事實 + 來源 + 為何重要>\n/distill <主題>\n/pages <主題>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "如何處理過期與衝突",
+        body: [
+          "來源或工作條件改變時，不要讓新舊答案並排。把舊結論標成過期、記錄替代關係，再依最新證據刷新頁面。",
+          "對高影響結論保留人工審查。自動蒸餾能加快整理，但不應把沒有支持來源的文字升級成可信知識。",
+        ],
+      },
+      {
+        heading: "如何驗收 AI 知識庫",
+        body: [
+          "先用一個主題做小型驗收。Agent 應該能找到目前答案，人應該能回到來源，證據變更後則能看見過期狀態並完成刷新。",
+        ],
+        bullets: [
+          "頁面中的重要結論能追到來源 ID 或維護中的文件。",
+          "重新開啟 AI client 後，仍能按需取得相同主題。",
+          "加入衝突證據時，lint 或 review 流程能把問題暴露出來。",
+          "刷新後保留修訂紀錄，而不是靜默覆寫舊答案。",
+        ],
+      },
+      {
+        heading: "Wenlan 如何對應這套架構",
+        body: [
+          "Wenlan 的 Sources、Memories 與 Pages 對應來源、原子知識與維護型頁面。頁面記錄保留 source IDs、版本、changelog、stale reason 與來源數量。",
+          "這套設計讓 Claude Code、Codex、Cursor 等 MCP client 共用同一個本地知識層，同時保留人可以檢查與修正的路徑。",
+        ],
+        link: {
+          label: "閱讀 Wenlan 的審查與信任指南",
+          href: "/docs/review-and-trust",
+        },
       },
     ],
     faqs: [
       {
-        question: "Wenlan pages 是手寫 notes 嗎？",
+        question: "AI 知識庫和 RAG 是同一件事嗎？",
         answer:
-          "可以像 Markdown notes 一樣閱讀，但 Wenlan 仍會在 page record 裡保留 source provenance。",
+          "不是。RAG 在提問時找來源片段；維護型知識庫還保存可重用答案、引用、審查與刷新狀態，也可以在底層使用檢索。",
       },
       {
-        question: "為什麼不只存 pages？",
+        question: "開始前要匯入全部筆記嗎？",
         answer:
-          "Atomic memories 才是細粒度 evidence。Pages 是用來把它們組成更可讀、更適合 orientation 的 context。",
+          "不用。先挑一個高價值、會重複查詢的主題，驗證來源、capture、distill、pages、lint 與 curate 的完整閉環。",
+      },
+      {
+        question: "Wenlan Pages 可以給人閱讀嗎？",
+        answer:
+          "可以。頁面會成為可讀的 Markdown，同時在 page record 中保留支持它的來源與修訂狀態。",
       },
     ],
     relatedSlugs: [
@@ -188,9 +234,23 @@ const zhTWArticles = {
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
     ],
+    officialReferences: [
+      {
+        label: "Wenlan 的知識模型",
+        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+      },
+      {
+        label: "Wenlan 日常工作流程",
+        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+      },
+      {
+        label: "Wenlan 審查與信任指南",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+    ],
     cta: {
-      heading: "讓 memory 可讀，也可驗證",
-      body: "Wenlan 用 source-backed pages 讓 AI work memory 成為能被檢查、能被刷新、能被 agent 重用的 wiki。",
+      heading: "先建立一個可驗證的 AI 知識庫主題",
+      body: "用 Wenlan 把來源、原子知識與維護型頁面連成小型閉環，再逐步擴大到其他 AI 工具與專案。",
     },
   },
   "wenlan-vs-obsidian-ai-memory": {
@@ -539,75 +599,147 @@ const zhCNArticles = {
     },
   },
   "source-backed-wiki-pages-ai-work": {
-    ...zhTWArticles["source-backed-wiki-pages-ai-work"],
-    title: "AI 工作的 source-backed wiki pages",
+    slug: "source-backed-wiki-pages-ai-work",
+    eyebrow: "信任",
+    category: "Concepts",
+    title: "有来源的 AI 知识库：来源、更新与审核方法",
     description:
-      "为什么 Wenlan 会把重复 memories 蒸馏成保留 source IDs 和 refresh state 的页面。",
-    metaTitle: "Source-Backed Wiki Pages | Wenlan 文澜",
+      "用 Wenlan 把来源、原子知识与可维护页面分开，建立能追溯、能刷新、能审核的本地 AI 知识库。",
+    metaTitle: "有来源的 AI 知识库：来源、更新与审核 | Wenlan",
     metaDescription:
-      "Wenlan distilled pages 保留 source memory IDs 和 revision state，让 AI work memory 变得可读又不失去 provenance。",
+      "建立有来源的 AI 知识库：分开可信来源、原子知识与 LLM Wiki 页面，并用 Wenlan 保留引用、更新与审核状态。",
     keywords: [
-      "source-backed wiki pages",
-      "AI memory provenance",
-      "AI 工作 wiki",
+      "AI 知识库",
+      "有来源的 AI 知识库",
+      "本地 AI 知识库",
+      "LLM Wiki",
+      "知识库维护",
       "Wenlan 文澜",
-      "LLM wiki",
     ],
-    audience: "想让 AI memory 变可读但仍可验证的中文用户",
+    publishedAt: "2026-07-04",
+    updatedAt: "2026-07-30",
+    author: "Qi-Xuan Lu",
+    readingTime: "7 分钟阅读",
+    audience: "想让 AI agent 使用本地知识，但仍能检查来源、更新与审核状态的简体中文用户",
     heroBullets: [
-      "Pages 由 related memories 合成。",
-      "Source IDs 保留下来，summary 不会变成无来源 claims。",
-      "页面可以随着 memories 积累而成长或刷新。",
+      "可信来源不和模型产生的结论混在一起。",
+      "原子知识保留细粒度证据，再组成可复用页面。",
+      "页面保存引用、修订、过期原因与审核状态。",
     ],
     sections: [
       {
         heading: "一句话答案",
         body: [
-          "Source-backed pages 是 Wenlan LLM wiki 的信任层：它们把 related memories 变成可读 wiki artifacts，同时保留可检查的 source memory IDs。",
-          "这让 memory 不只是搜索结果，也不是自由浮动的 summary；它是能回到来源的工作知识。",
+          "有来源的 AI 知识库会把可信来源、原子知识与维护型 LLM Wiki 页面分开。Agent 取得的是可复用答案，人仍能沿着引用回到来源、检查修订，并在证据变化时刷新页面。",
+          "Wenlan 在本地连接这三层，让知识不只是搜索片段或脱离来源的摘要。",
         ],
         link: {
-          label: "看 LLM wiki 导览",
+          label: "查看 LLM Wiki 的完整生命周期",
           href: "/learn/distilled-wiki-pages-ai-memory",
         },
       },
       {
-        heading: "为什么不能只存 summary",
+        heading: "AI 知识库为什么必须保留来源",
         body: [
-          "Summary 很好读，但一旦失去来源，就很难判断它是从哪个 session、哪个 decision 或哪个错误修正来的。",
-          "Atomic memories 保留细粒度 evidence；pages 把它们组成可读 context。Wenlan 需要两者一起存在。",
+          "直接放入大量文档会让 agent 每次都重新搜索；只留下摘要，又会失去支持结论的证据。来源一旦更新，没有人知道哪些答案也必须重算。",
+          "可维护的知识库必须回答三件事：这个结论来自哪里、现在是否仍然有效、发生冲突时由谁审核。",
         ],
       },
       {
-        heading: "Wenlan page record 保存什么",
+        heading: "三层最小架构：Sources、Atomic Knowledge、Pages",
         body: [
-          "Wenlan 的 page record 保留 source IDs、version、changelog、stale reason 和 source counts。人和 agent 都可以检查这条 chain。",
-          "如果新 capture 显示旧页面已经不准，page 可以被标成 stale 或重新 distilled，而不是和旧结论并排堆积。",
+          "Sources 是可检查的原始资料；Atomic Knowledge 是带着来源和理由的单一事实；Pages 则把重复、高价值的知识整理成 agent 可以按需读取的答案。",
+          "不要跳过中间层。原子知识让页面保持可追溯，也让新证据只修正受影响的事实，而不是重写整个知识库。",
         ],
       },
       {
-        heading: "什么时候该使用 pages",
+        heading: "Wenlan 的实际工作流程",
         body: [
-          "不要把每个 capture 都立刻塞进页面。先捕捉 atomic memories，等 topic 重复、跨 session 仍然重要，再把它 distilled 成 page。",
-          "页面适合 project constraints、accepted decisions、setup fixes、handoff patterns，以及人和 agent 都会反复查的概念。",
+          "先用一个会重复查询的主题验证闭环，不要一开始就导入整个笔记库。记录一个带来源与理由的事实，积累到值得复用时再蒸馏成页面。",
         ],
+        bullets: [
+          "用 /capture 保存单一事实、来源和它为什么重要。",
+          "用 /distill 把重复主题整理成维护型页面。",
+          "用 /pages 打开页面并核对支持它的来源。",
+          "用 /lint 找出薄弱、冲突或过期的知识。",
+          "用 /curate 审核修订，再决定是否刷新页面。",
+        ],
+        code: {
+          label: "Wenlan 知识库维护循环",
+          code: "/brief <主题>\n/capture <事实 + 来源 + 为什么重要>\n/distill <主题>\n/pages <主题>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "如何处理过期与冲突",
+        body: [
+          "来源或工作条件改变时，不要让新旧答案并排。把旧结论标成过期、记录替代关系，再按最新证据刷新页面。",
+          "对高影响结论保留人工审核。自动蒸馏能加快整理，但不应把没有支持来源的文字升级成可信知识。",
+        ],
+      },
+      {
+        heading: "如何验收 AI 知识库",
+        body: [
+          "先用一个主题做小型验收。Agent 应该能找到当前答案，人应该能回到来源，证据变更后则能看到过期状态并完成刷新。",
+        ],
+        bullets: [
+          "页面中的重要结论能追到来源 ID 或维护中的文档。",
+          "重新打开 AI client 后，仍能按需取得相同主题。",
+          "加入冲突证据时，lint 或 review 流程能把问题暴露出来。",
+          "刷新后保留修订记录，而不是静默覆盖旧答案。",
+        ],
+      },
+      {
+        heading: "Wenlan 如何对应这套架构",
+        body: [
+          "Wenlan 的 Sources、Memories 与 Pages 对应来源、原子知识与维护型页面。页面记录保留 source IDs、版本、changelog、stale reason 与来源数量。",
+          "这套设计让 Claude Code、Codex、Cursor 等 MCP client 共用同一个本地知识层，同时保留人可以检查和修正的路径。",
+        ],
+        link: {
+          label: "阅读 Wenlan 的审核与信任指南",
+          href: "/docs/review-and-trust",
+        },
       },
     ],
     faqs: [
       {
-        question: "Wenlan pages 是手写 notes 吗？",
+        question: "AI 知识库和 RAG 是同一件事吗？",
         answer:
-          "可以像 Markdown notes 一样阅读，但 Wenlan 仍会在 page record 里保留 source provenance。",
+          "不是。RAG 在提问时找来源片段；维护型知识库还保存可复用答案、引用、审核与刷新状态，也可以在底层使用检索。",
       },
       {
-        question: "为什么不只存 pages？",
+        question: "开始前要导入全部笔记吗？",
         answer:
-          "Atomic memories 才是细粒度 evidence。Pages 是用来把它们组成更可读、更适合 orientation 的 context。",
+          "不用。先选一个高价值、会重复查询的主题，验证来源、capture、distill、pages、lint 与 curate 的完整闭环。",
+      },
+      {
+        question: "Wenlan Pages 可以给人阅读吗？",
+        answer:
+          "可以。页面会成为可读的 Markdown，同时在 page record 中保留支持它的来源与修订状态。",
+      },
+    ],
+    relatedSlugs: [
+      "wenlan-vs-obsidian-ai-memory",
+      "distilled-wiki-pages-ai-memory",
+      "review-before-trust-ai-memory",
+      "ai-memory-provenance",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 的知识模型",
+        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+      },
+      {
+        label: "Wenlan 日常工作流程",
+        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+      },
+      {
+        label: "Wenlan 审核与信任指南",
+        href: "https://wenlan.app/docs/review-and-trust",
       },
     ],
     cta: {
-      heading: "让 memory 可读，也可验证",
-      body: "Wenlan 用 source-backed pages 让 AI work memory 成为能被检查、能被刷新、能被 agent 复用的 wiki。",
+      heading: "先建立一个可验证的 AI 知识库主题",
+      body: "用 Wenlan 把来源、原子知识与维护型页面连成小型闭环，再逐步扩大到其他 AI 工具和项目。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;

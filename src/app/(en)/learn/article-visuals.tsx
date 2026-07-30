@@ -71,7 +71,7 @@ export function MemoryIndex({
             <span className="font-mono text-[11px] text-[var(--o-warm)]">
               {(index + 1).toString().padStart(2, "0")}
             </span>
-            <p className="min-w-0 break-words text-sm leading-relaxed text-[var(--o-text-secondary)]">
+            <p className="min-w-0 text-sm leading-relaxed text-[var(--o-text-secondary)] [word-break:keep-all] [overflow-wrap:break-word]">
               {item}
             </p>
           </div>

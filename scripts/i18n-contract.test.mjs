@@ -880,6 +880,57 @@ test("zh-CN LLM wiki guide owns the AI knowledge-base search intent", async () =
   }
 });
 
+test("localized Learn hubs and source-backed pages lead with AI knowledge-base intent", async () => {
+  const { localizedLearnIndexContent } = await import(
+    "../src/i18n/learn-index.ts"
+  );
+  const { getLocalizedLearnArticle } = await import(
+    "../src/i18n/learn-articles.ts"
+  );
+
+  assert.match(localizedLearnIndexContent["zh-TW"].seo.title, /AI 知識庫/);
+  assert.match(localizedLearnIndexContent["zh-TW"].title, /LLM Wiki.*AI 知識庫/);
+  assert.ok(localizedLearnIndexContent["zh-TW"].topics.includes("AI 知識庫"));
+  assert.match(localizedLearnIndexContent["zh-CN"].seo.title, /AI 知识库/);
+  assert.match(localizedLearnIndexContent["zh-CN"].title, /LLM Wiki.*AI 知识库/);
+  assert.ok(localizedLearnIndexContent["zh-CN"].topics.includes("AI 知识库"));
+
+  const expectations = {
+    "zh-TW": {
+      title: "有來源的 AI 知識庫：來源、更新與審查方法",
+      keyword: "AI 知識庫",
+      workflow: "Wenlan 的實際工作流程",
+      verification: "如何驗收 AI 知識庫",
+    },
+    "zh-CN": {
+      title: "有来源的 AI 知识库：来源、更新与审核方法",
+      keyword: "AI 知识库",
+      workflow: "Wenlan 的实际工作流程",
+      verification: "如何验收 AI 知识库",
+    },
+  };
+
+  for (const [locale, expected] of Object.entries(expectations)) {
+    const article = getLocalizedLearnArticle(
+      locale,
+      "source-backed-wiki-pages-ai-work",
+    );
+    assert.ok(article);
+    assert.equal(article.title, expected.title);
+    assert.equal(article.publishedAt, "2026-07-04");
+    assert.equal(article.updatedAt, "2026-07-30");
+    assert.ok(article.keywords.includes(expected.keyword));
+    const headings = article.sections.map((section) => section.heading);
+    assert.ok(headings.includes(expected.workflow));
+    assert.ok(headings.includes(expected.verification));
+    assert.ok(article.officialReferences?.length >= 3);
+    const articleText = JSON.stringify(article);
+    for (const command of ["/capture", "/distill", "/pages", "/lint", "/curate"]) {
+      assert.match(articleText, new RegExp(command.replace("/", "\\/")));
+    }
+  }
+});
+
 test("localized Learn renderer exposes article code blocks", async () => {
   const source = await readFile(
     resolve(repoRoot, "src/app/[locale]/learn/[slug]/page.tsx"),
@@ -889,6 +940,7 @@ test("localized Learn renderer exposes article code blocks", async () => {
   assert.match(source, /\{section\.code && \(/);
   assert.match(source, /\{section\.code\.label\}/);
   assert.match(source, /<code>\{section\.code\.code\}<\/code>/);
+  assert.match(source, /\[word-break:keep-all\]/);
 });
 
 test("core route wrappers export localized metadata for translated pages", async () => {

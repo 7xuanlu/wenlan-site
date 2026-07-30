@@ -428,16 +428,26 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   );
   assert.match(
     supportArticle,
-    /title:\s*"Source-Backed Wiki Pages for AI Work"/,
+    /title:\s*"Source-Backed AI Knowledge Base for Agents"/,
   );
   assert.match(
     supportArticle,
-    /metaTitle:\s*"Source-Backed Wiki Pages for AI Work \| Wenlan"/,
+    /metaTitle:\s*"Source-Backed AI Knowledge Base for Agents \| Wenlan"/,
   );
+  assert.match(supportArticle, /publishedAt:\s*"2026-06-06"/);
+  assert.match(supportArticle, /updatedAt:\s*"2026-07-30"/);
   assert.match(
     supportArticle,
-    /quickAnswer:\s*\n\s*"Source-backed pages are the trust layer behind Wenlan's LLM wiki for AI work:/,
+    /quickAnswer:\s*\n\s*"A source-backed AI knowledge base separates trusted sources, atomic knowledge, and maintained LLM-wiki pages/,
   );
+  assert.match(supportArticle, /actionHeading:\s*"Build the smallest maintainable loop"/);
+  assert.match(supportArticle, /\/capture <fact \+ source \+ why>/);
+  assert.match(supportArticle, /\/distill <topic>/);
+  assert.match(supportArticle, /\/pages <topic>/);
+  assert.match(supportArticle, /\/lint/);
+  assert.match(supportArticle, /\/curate/);
+  assert.match(supportArticle, /https:\/\/github\.com\/7xuanlu\/wenlan#what-does-wenlan-build/);
+  assert.match(supportArticle, /https:\/\/github\.com\/7xuanlu\/wenlan#daily-workflow/);
   assert.match(
     supportArticle,
     /relatedSlugs:\s*\["distilled-wiki-pages-ai-memory"/,
@@ -464,7 +474,7 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.doesNotMatch(supportArticle, /LLM Wiki for AI Agents/);
   assert.match(home, /id:\s*"llm-wiki"/);
   assert.match(home, /href:\s*"\/learn\/distilled-wiki-pages-ai-memory"/);
-  assert.match(learnIndex, /LLM wiki for AI work/);
+  assert.match(learnIndex, /LLM wiki and AI knowledge base/);
   assert.match(structuredData, /LLM wiki for AI work/);
   assert.match(llms, /LLM wiki for AI work/);
   assert.match(llmsFull, /LLM wiki for AI work/);
@@ -1631,11 +1641,11 @@ test("Learn article headers keep long Wenlan titles inside mobile viewports", as
 
   assert.match(page, /mt-12 grid min-w-0/);
   assert.match(page, /<div className="min-w-0">/);
-  assert.match(page, /<h1 className="[^"]*\bbreak-words\b[^"]*text-\[2rem\][^"]*\[overflow-wrap:anywhere\][^"]*sm:text-7xl/);
+  assert.match(page, /<h1 className="[^"]*text-\[2rem\][^"]*\[word-break:keep-all\][^"]*\[overflow-wrap:break-word\][^"]*sm:text-7xl/);
 
   const visuals = await readRepo("src/app/learn/article-visuals.tsx");
   assert.match(visuals, /grid min-w-0 grid-cols-\[32px_minmax\(0,1fr\)\]/);
-  assert.match(visuals, /<p className="min-w-0 break-words text-sm/);
+  assert.match(visuals, /<p className="min-w-0[^"]*\[word-break:keep-all\][^"]*\[overflow-wrap:break-word\]/);
 });
 
 test("Obsidian acquisition page answers Claude Code and MCP intent without changing its canonical seam", async () => {
