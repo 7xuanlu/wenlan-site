@@ -1424,3 +1424,36 @@ Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing outside the fixed batch, and GSC validation remain
 separately approval-gated.
+
+#### OSS directory publication execution
+
+The approved control-plane scope merged in PR #103 at
+`2026-08-01T05:35:39Z`. The external execution then updated nine existing
+pre-Wenlan PRs in place, opened four PRs that replace already-accepted legacy
+listings, and opened the new exact-topic Awesome LLM Wiki PR #4. Every target
+passed the just-in-time upstream, all-author PR, and directory duplicate gate
+before push. `ComposioHQ/awesome-claude-skills` PR #852 passed its validation
+after the Wenlan line was moved to its current alphabetical position.
+`toolsdk-ai/toolsdk-mcp-registry` PR #433 passed both Package Schema Check and
+biome; its trusted-main validator also checked the changed registry identity
+with zero errors and zero warnings.
+
+Keep three execution boundaries explicit. The prepared
+`appcypher/awesome-mcp-servers` branch could be compared successfully, but
+GitHub denied PR creation through both GraphQL and REST despite the valid fork
+relationship; do not create a duplicate or misreport it as submitted.
+`DhanushNehru/awesome-mcp-servers` PR #52 has a failing whole-repository link
+check caused by nine unrelated upstream URLs, while the Wenlan repository URL
+returns `200`; do not mix that upstream cleanup into the one-line rebrand PR.
+The free `mcpservers.org` form is prepared with Premium unchecked but remains
+unsubmitted until the public contact email is explicitly confirmed for that
+destination. Do not store the address in this repository.
+
+The Glama prerequisite now has an authoritative account boundary: Glama
+requires GitHub OAuth maintainer verification and a connected GitHub App
+before it indexes and scores an open-source server. Installing that app or
+granting repository access was not authorized by this directory batch, so the
+punkpeye resubmission remains blocked. The Codex directory likewise remains
+blocked on the separate repository-root plugin packaging and scanner contract.
+Neither blocker authorizes a website edit, another experiment, paid listing,
+indexing request, GSC validation, or analytics mutation.

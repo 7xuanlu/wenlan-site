@@ -4378,3 +4378,57 @@ increase for that experiment.
 - Decision: execute the non-duplicate publication scope
 - Next step: Publish the corrected control plane and then execute the verified
   external actions. Do not create an experiment-start record for this batch.
+
+### 2026-08-01T06:00:29Z — OSS directory publication execution
+
+- Record type: campaign-observation
+- Related experiment: none; approved distribution action
+- Status: partially-published
+- Control-plane publication: Wenlan site PR #103 merged at
+  `2026-08-01T05:35:39Z` as
+  `554df3bc1b09747fa28bd226883ddc94a8475d97` after the Goal verifier, 204
+  SEO tests, `git diff --check`, independent review, and Vercel checks passed.
+- New exact-topic submission: `gavischneider/awesome-llm-wiki` PR #4 is open,
+  ready, mergeable, and its GitGuardian check passed.
+- Existing PR maintenance: nine existing pre-Wenlan PR branches were updated
+  in place rather than duplicated: `jvidal86` #1, `composio-community` #254,
+  `mcp-finder` #2, `ComposioHQ` #852, `tolkonepiu` #225, `YuzeHao2023` #266,
+  `rohitg00` #231, `XiaomingX` #8, and `wfnuser` #6. Names, repository and
+  package links, current product framing, docs, and the 46-star observations
+  were updated only where the target format carries them.
+- Accepted-listing refreshes: `TeleAI-UAGI` #72, `DhanushNehru` #52,
+  `toolsdk-ai` #433, and `TensorBlock` #1500 are open and mergeable. ToolSDK
+  Package Schema Check and biome passed; a trusted-main local validator checked
+  one changed registry file with zero errors and zero warnings. Composio #852
+  passed validation after its alphabetical-order correction.
+- Runtime evidence: local daemon health returned `ok`; `wenlan-mcp 0.15.1`
+  completed MCP `initialize` and `tools/list` over stdio and returned 29 tools.
+  The npm registry separately reports published `wenlan-mcp 0.15.2`,
+  `Apache-2.0`, repository `7xuanlu/wenlan`, and bin entry `run.js`. These are
+  capability and package observations, not traffic or conversion metrics.
+- Platform blockers: GitHub recognized the prepared appcypher comparison as
+  one commit ahead but denied PR creation through GraphQL and REST. Dhanush
+  #52's link check fails on nine unrelated upstream links, not the Wenlan URL.
+  The `mcpservers.org` free form is prepared with Premium unchecked but remains
+  pending explicit contact-email confirmation. Glama requires GitHub OAuth and
+  GitHub App repository access before the punkpeye prerequisite can pass; that
+  permission mutation was not authorized. The Codex directory still requires
+  a separate repository-root plugin packaging and scanner change.
+- Duplicate evidence: Immediately before each push, current upstream files,
+  all-author open and closed PRs, and the directory surface were checked for
+  Wenlan and `7xuanlu/wenlan`. Existing entries were updated instead of
+  duplicated; no new PR was created where state or permissions were blocked.
+- Native-unit boundary: 14 external PR states, four accepted-listing refresh
+  proposals, nine in-place PR updates, one new exact-topic submission, one
+  prepared form, 46 GitHub stars, GSC, Vercel, and Umami remain separate. No
+  directory-to-star, directory-to-search, or source-to-page causality is
+  inferred.
+- Result: Approved publication scope executed where repository gates permitted;
+  remaining form and prerequisite lanes are account- or permission-gated.
+- Decision: Wait for maintainer review and complete the free form only after
+  the destination-specific email confirmation. Do not repair unrelated
+  upstream link debt, install a GitHub App, pay for Premium, or start another
+  SEO experiment under this action.
+- Next step: Recheck PR state and direct accepted-listing presence after 24
+  hours and seven complete live days. Keep listing-days, GitHub, GSC, Vercel,
+  and Umami in their native units.

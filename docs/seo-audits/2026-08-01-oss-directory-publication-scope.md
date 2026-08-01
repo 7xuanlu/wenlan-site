@@ -153,3 +153,43 @@ ledger and does not consume the website production slot.
 
 No causal claim, keyword-volume claim, source-to-page join, or synthetic event
 is authorized by this publication scope.
+
+## Publication execution — 2026-08-01T06:00:29Z
+
+The docs-only control plane merged as Wenlan site PR #103. The approved
+external batch then produced 14 open directory PRs without adding a website
+content experiment:
+
+- New exact-topic submission: `gavischneider/awesome-llm-wiki` #4.
+- Existing PRs updated in place: `jvidal86` #1,
+  `composio-community` #254, `mcp-finder` #2, `ComposioHQ` #852,
+  `tolkonepiu` #225, `YuzeHao2023` #266, `rohitg00` #231,
+  `XiaomingX` #8, and `wfnuser` #6.
+- Accepted legacy listings updated by new PR: `TeleAI-UAGI` #72,
+  `DhanushNehru` #52, `toolsdk-ai` #433, and `TensorBlock` #1500.
+
+All external pushes followed the just-in-time duplicate gate. The current
+Wenlan MCP handshake was verified locally with 29 listed tools. ToolSDK's
+trusted-main registry validator passed with zero errors and warnings, and its
+live CI Package Schema Check and biome jobs passed. Composio #852 initially
+failed because the renamed line retained its pre-Wenlan alphabetical position;
+moving Wenlan after Webapp Testing made the repository validator pass.
+
+The Dhanush whole-repository link check reports nine existing broken upstream
+URLs; the Wenlan URL is not among them and no unrelated cleanup was added.
+The appcypher fork and one-commit comparison are valid, but GitHub rejected PR
+creation through both GraphQL and REST, so that branch is pushed but not
+reported as a submitted PR.
+
+The supported `mcpservers.org` free form is prepared with the Wenlan name,
+description, repository URL, and Memory category. Premium remains unchecked.
+Submission is pending destination-specific confirmation of the account's
+public contact email, and the address is intentionally absent from this audit.
+
+Glama's current official methodology requires GitHub OAuth maintainer
+verification and repository access through its GitHub App before a server can
+be indexed and scored. That permission mutation was not authorized, so the
+punkpeye prerequisite remains blocked. The Codex directory still requires the
+separate repository-root plugin package and HOL scanner gate. These blockers
+do not authorize a duplicate PR, paid listing, product packaging change, or
+new content experiment.
