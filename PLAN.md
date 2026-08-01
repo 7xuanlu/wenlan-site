@@ -232,6 +232,20 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   correction is production-verified and no longer consumes the production
   slot. No indexing request, GSC validation, analytics mutation, or unrelated
   external publication was performed.
+- At `2026-08-01T16:43:08Z`, the user approved local preparation of a bounded
+  GitHub-download and signup-attribution correction. The work keeps GitHub
+  cumulative release downloads, anonymous Umami events, and Resend contacts
+  in their native units and never sends email to Umami. Local preparation of
+  `TECH-2026-08-01-download-signup-attribution` occupies the website-change
+  slot. Commit, push, PR, merge, deployment, Resend contact-property mutation,
+  Vercel environment mutation, and a live signup remain separately gated.
+- At `2026-08-01T18:42:18Z`, the user confirmed the Resend secrets already
+  exist in Vercel and approved completing the exact measurement scope. The
+  production and preview environments contain the Resend API key, Audience
+  ID, and Umami website ID; values were not copied or printed. All six bounded
+  Resend string properties now exist, and
+  `RESEND_ACQUISITION_PROPERTIES_ENABLED=1` is set for Production and Preview.
+  A deployment is still required before new signups carry those fields.
 - The weekly window is a reporting boundary, not a publish gate. Only one
   website change may be in `approved` or `active` preparation at a time;
   production-verified `live`, `measuring`, and `extended` cohorts continue
@@ -1034,6 +1048,74 @@ approved three-locale knowledge-base refresh changes the same English
 mixed into future attribution.
 
 ### Current technical correction
+
+`TECH-2026-08-01-download-signup-attribution` is locally verified and
+occupies the single website-change slot. It adds a deterministic GitHub REST
+snapshot to the existing weekly pipeline, an anonymous post-success
+`waitlist_signup` Umami event, and an opt-in Resend contact-property path for
+locale, landing path, referrer host, and UTM source, medium, and campaign.
+GitHub downloads remain cumulative point-in-time counters; Umami clicks,
+Resend contacts, GitHub stars, GSC, and Vercel stay separate native-unit
+evidence without a causal or person-level cross-source join.
+
+The first current-release snapshot at `2026-08-01T16:47:51.633Z` reports 46
+stars, 19 cumulative downloads across the four `v0.15.3` assets linked from
+the website, and 1,376 cumulative downloads across all assets in all 44
+returned releases. The homepage waitlist remains in the bottom closing CTA;
+it is not moved directly below the Download section. The production Resend
+property flag now equals `1`, after the six bounded string properties were
+created and verified in Resend. Current production still runs the old site
+code, so the flag has no effect until this exact branch is deployed.
+The implementation also corrects the pre-existing public-site drift from
+`v0.15.2` to the source-backed and publicly released `v0.15.3`. No synthetic
+event, contact creation, push, PR, merge, or deployment has occurred. The
+implementation and boundary are recorded in
+`docs/seo-audits/2026-08-01-download-signup-attribution-prelaunch.md`.
+
+Final local verification at `2026-08-01T17:03:53Z` passed 209 SEO tests, 58
+i18n tests, TypeScript, the 214-page production build, the compiled technical
+SEO audit, the fixture-backed weekly pipeline health check, and the frozen
+Goal verifier. Fresh English, zh-TW, and zh-CN desktop/mobile renders had no
+horizontal overflow; the unchanged closing CTA and all three mobile form
+views matched production at 100/100 pixel similarity while the hidden locale,
+landing-path, referrer-host, and UTM fields carried their intended bounded
+values. A read-only production-key Resend fetch then verified the API path and
+wrote privacy-safe aggregates only for the configured audience: 2 total
+subscribed contacts, 0 contacts
+created in the latest completed 28-day GSC range, and 0 attributed contacts.
+No email address was written to an SEO artifact. Account setup is complete;
+publication and a consented live-signup smoke test remain pending.
+
+### OpenSEO evaluation
+
+The bounded `2026-08-01` OpenSEO trial is complete without connecting GSC or
+buying a plan. OpenSEO remains an optional third-party demand-discovery and
+live-SERP lane, not an authority for Wenlan performance. In its own displayed
+DataForSEO-backed volume unit, the strongest tested seeds were United States
+`llm wiki` at 5,400, United States `AI knowledge base` at 880, United States
+`obsidian claude code` at 210, Taiwan `AI 知識庫` at 210, and United States
+`chatgpt knowledge base` at 50. United States `codex knowledge base` collided
+with an unrelated game intent, and Singapore `AI 知识库` returned insufficient
+data; neither may nominate a direct page.
+
+Keep LLM Wiki, Karpathy, and AI knowledge base as one top acquisition family.
+Keep Obsidian plus Claude Code/MCP as the next clean workflow cluster. Treat
+ChatGPT as a smaller monitored lane and use task-qualified Codex/context/MCP
+phrasing only after independent corroboration. OpenSEO's broad AI expansions
+were noisy and its Simplified Chinese result did not close the evidence gap,
+so GSC, inspectable Trends, and provenance-preserving Chinese-community
+observations remain necessary. No new article or experiment starts from this
+evaluation while the current technical correction occupies the website-change
+slot. Evidence and provenance are recorded in
+`docs/seo-audits/2026-08-01-openseo-evaluation.md`.
+
+The final post-review gate completed at `2026-08-01T19:09:02Z`. The fresh-eye
+review returned `MERGE` after all four findings were resolved. `pnpm
+seo:goal:check`, TypeScript, 215 SEO tests, 58 i18n tests, the 214-page
+production build, compiled technical SEO, 22 expected localized 200 routes,
+5 expected localized 404 routes, the fixture-backed weekly pipeline, the live
+audience-scoped Resend aggregate fetch, and `git diff --check` all pass. The
+branch is ready for its approved PR, merge, and automatic Vercel deployment.
 
 `TECH-2026-07-26-source-release-boundary` is production-verified and no longer
 consumes the single production slot.

@@ -5,18 +5,21 @@ Use this when deciding what to do next for Wenlan search visibility. The rule is
 ## Operating Pattern
 
 1. Fetch GSC query/page data and matching Vercel Web Analytics weekly.
-2. Classify queries into setup, MCP client, comparison, concept, troubleshooting, branded, and generic groups.
-3. Prioritize pages already getting impressions before creating new pages.
-4. Fix technical blockers before writing content.
-5. Publish new articles only for proven query gaps.
-6. Use Reddit and other communities only when the post has standalone utility.
-7. Record before/after metrics for every page update.
+2. Capture the same-day GitHub stars and cumulative release-asset download counters.
+3. Classify queries into setup, MCP client, comparison, concept, troubleshooting, branded, and generic groups.
+4. Prioritize pages already getting impressions before creating new pages.
+5. Fix technical blockers before writing content.
+6. Publish new articles only for proven query gaps.
+7. Use Reddit and other communities only when the post has standalone utility.
+8. Record before/after metrics for every page update.
 
 ## Weekly Inputs
 
 - GSC Performance, last 28 days: queries, pages, clicks, impressions, CTR, average position.
 - GSC Indexing: sitemap status, indexed count, excluded reasons, canonical details for important URLs.
 - Vercel Analytics or Umami: landing pages, referrers, AI assistant referrals, `llms.txt` hits, and community referrals when exports are available.
+- GitHub REST: point-in-time stars and cumulative release-asset `download_count` values.
+- Resend Contacts API: aggregate contacts created in the reporting range and bounded acquisition-property breakdowns, never email addresses.
 - Site audit: sitemap, robots, canonicals, redirects, `noindex`, structured data, broken links.
 
 Generate the weekly action report from CSV exports:
@@ -29,10 +32,13 @@ mkdir -p /tmp/wenlan-seo
 # {"siteUrl":"sc-domain:wenlan.app","startDate":"YYYY-MM-DD","endDate":"YYYY-MM-DD","source":"..."}
 # The API fetcher additionally writes /tmp/wenlan-seo/gsc-query-pages.json
 # for visible query-to-page candidate mapping; manual CSV runs need not create it.
+pnpm seo:vercel:fetch -- --date YYYY-MM-DD
+pnpm seo:github:fetch -- --date YYYY-MM-DD
+vercel env run -e production -- pnpm seo:resend:fetch -- --date YYYY-MM-DD
 pnpm seo:weekly:run -- --date YYYY-MM-DD
 ```
 
-When Vercel CLI authentication is available, run `pnpm seo:vercel:fetch -- --date YYYY-MM-DD` before the weekly report. It writes normalized page, referrer, and metadata inputs to `/tmp/wenlan-seo`; the report prefers them over optional Umami exports. Custom CTA event totals remain account-gated on plans where the Vercel API returns `402`.
+When Vercel CLI authentication is available, run `pnpm seo:vercel:fetch -- --date YYYY-MM-DD` before the weekly report. It writes normalized page, referrer, and metadata inputs to `/tmp/wenlan-seo`; the report prefers them over optional Umami exports. Run `pnpm seo:github:fetch -- --date YYYY-MM-DD` to add a point-in-time GitHub snapshot to the same input directory. Use `vercel env run -e production -- pnpm seo:resend:fetch -- --date YYYY-MM-DD` to add privacy-safe Resend aggregates without copying secrets or email addresses to disk. GitHub release `download_count` values are cumulative counters and stay separate from Umami outbound clicks, Resend contacts, stars, visitors, and GSC clicks. Custom CTA event totals remain account-gated on plans where the Vercel API returns `402`.
 
 Normal runs require metadata for `sc-domain:wenlan.app`, an accepted GSC source label, and the 28 complete days ending the day before `--date`. Metadata declares local provenance but does not authenticate manually copied files, so the operator remains responsible for obtaining them from authenticated GSC. API metadata also carries a separate `byProperty` aggregate; reports show its difference from visible query rows instead of treating anonymized or truncated query tables as complete property totals. Authenticated API fetches additionally write `gsc-query-pages.json`, a privacy-filtered `query + page` join for candidate mapping. When the file is present, the weekly pipeline validates and consumes it automatically so observed pages stay separate from configured targets and the click-opportunity queue can use visible non-brand mappings. It does not replace property totals, reveal omitted queries, or become a required input for manually copied CSVs. Use `--allow-manual-date-range true` only for a deliberate historical or custom-range analysis; dates, row counts, and CSV row metadata must still agree with the sidecar. Fixture mode is bound to `pnpm seo:weekly:sample` and is a pipeline health check, not search evidence.
 

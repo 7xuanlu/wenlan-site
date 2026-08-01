@@ -1,6 +1,8 @@
 "use server";
 
 import { Resend } from "resend";
+import { isSupportedLocale, type Locale } from "@/i18n/locales";
+import { resendSignupProperties } from "@/lib/signup-attribution";
 
 let _resend: Resend | null = null;
 function getResend() {
@@ -17,6 +19,7 @@ export async function joinWaitlist(
   formData: FormData
 ): Promise<WaitlistResult> {
   const email = formData.get("email");
+  const rawLocale = formData.get("locale");
 
   if (!email || typeof email !== "string") {
     return { success: false, errorCode: "required" };
@@ -35,10 +38,23 @@ export async function joinWaitlist(
 
   try {
     const resend = getResend();
-    await resend.contacts.create({
+    const locale: Locale =
+      typeof rawLocale === "string" && isSupportedLocale(rawLocale)
+        ? rawLocale
+        : "en";
+    const properties =
+      process.env.RESEND_ACQUISITION_PROPERTIES_ENABLED === "1"
+        ? resendSignupProperties(formData, locale)
+        : undefined;
+    const result = await resend.contacts.create({
       email: trimmed,
       audienceId,
+      properties,
     });
+    if (result.error) {
+      console.error("Failed to add contact to Resend:", result.error);
+      return { success: false, errorCode: "unknown" };
+    }
     return { success: true };
   } catch (err) {
     console.error("Failed to add to waitlist:", err);

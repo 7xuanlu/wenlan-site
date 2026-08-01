@@ -9,7 +9,8 @@ export type AnalyticsEventName =
   | "get_started_click"
   | "github_outbound"
   | "learn_article_click"
-  | "setup_path_click";
+  | "setup_path_click"
+  | "waitlist_signup";
 
 export type AnalyticsPlacement =
   | "home-hero"
@@ -31,7 +32,7 @@ export type AnalyticsContext =
   | "workflows"
   | "setup";
 
-type AnalyticsDestinationCategory = "github" | "learn" | "setup";
+type AnalyticsDestinationCategory = "email" | "github" | "learn" | "setup";
 
 type AnalyticsEventData = {
   readonly placement: AnalyticsPlacement;
@@ -56,6 +57,7 @@ const destinationCategoryByEvent: Record<
   github_outbound: "github",
   learn_article_click: "learn",
   setup_path_click: "setup",
+  waitlist_signup: "email",
 };
 
 type TrackingProps = {
@@ -64,6 +66,20 @@ type TrackingProps = {
   readonly locale: Locale;
   readonly context: AnalyticsContext;
 };
+
+export function trackAnalyticsEvent({
+  eventName,
+  placement,
+  locale,
+  context,
+}: TrackingProps) {
+  window.umami?.track(eventName, {
+    placement,
+    locale,
+    context,
+    destination_category: destinationCategoryByEvent[eventName],
+  });
+}
 
 type TrackedLinkProps = Omit<ComponentProps<typeof NextLink>, "href" | "onClick"> &
   TrackingProps & {
@@ -81,12 +97,7 @@ export function TrackedLink({
     <NextLink
       {...props}
       onClick={() =>
-        window.umami?.track(eventName, {
-          placement,
-          locale,
-          context,
-          destination_category: destinationCategoryByEvent[eventName],
-        })
+        trackAnalyticsEvent({ eventName, placement, locale, context })
       }
     />
   );

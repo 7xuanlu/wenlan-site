@@ -1,13 +1,13 @@
 const WENLAN_RELEASE_DOWNLOAD_BASE =
-  "https://github.com/7xuanlu/wenlan/releases/download/v0.15.2";
+  "https://github.com/7xuanlu/wenlan/releases/download/v0.15.3";
 
 export const WENLAN_RELEASE = {
-  version: "0.15.2",
-  tag: "v0.15.2",
-  publishedAt: "2026-07-31",
-  releaseUrl: "https://github.com/7xuanlu/wenlan/releases/tag/v0.15.2",
+  version: "0.15.3",
+  tag: "v0.15.3",
+  publishedAt: "2026-08-01",
+  releaseUrl: "https://github.com/7xuanlu/wenlan/releases/tag/v0.15.3",
   setupGuideUrl:
-    "https://github.com/7xuanlu/wenlan/blob/v0.15.2/docs/setup-with-ai.md#install-the-runtime",
+    "https://github.com/7xuanlu/wenlan/blob/v0.15.3/docs/setup-with-ai.md#install-the-runtime",
   assets: [
     {
       id: "windows-x64",
@@ -19,7 +19,7 @@ export const WENLAN_RELEASE = {
       id: "macos-arm64",
       href: `${WENLAN_RELEASE_DOWNLOAD_BASE}/wenlan-darwin-arm64.tar.gz`,
       format: "TAR.GZ",
-      size: "49.9 MB",
+      size: "50.0 MB",
     },
     {
       id: "linux-x64",

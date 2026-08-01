@@ -17,7 +17,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "56bdf4629a8eee6deb1d8fd1e3c73d8cc63295a4d5dd3f0e9f24f22b0966ba3f",
+    sourceHash: "26b69e076265ac92aa6befbeb7d0c2710c18e5bb361bbb774d7b40681e00d8ad",
     content: {
       seo: {
         title: "Wenlan 文瀾 | AI 工作的 LLM wiki",
@@ -78,7 +78,7 @@ export const zhTWContent = {
         title:
           "下\u2060載\u2060適\u2060合\u2060你\u2060系\u2060統\u2060的 Wenlan。",
         description:
-          "Wenlan v0.15.2 在同一份 release 提供 CLI、本地 daemon 與 MCP connector。",
+          "Wenlan v0.15.3 在同一份 release 提供 CLI、本地 daemon 與 MCP connector。",
         stableLabel: "穩定版",
         releaseNotesLabel: "版本說明",
         packageIncludesLabel: "內含 CLI、daemon 與 MCP connector",
@@ -633,7 +633,7 @@ export const zhTWContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "608308979a1a8e054dd1eb400934f15f1e3ea2cc3d31c76526905e0872abf159",
+    sourceHash: "923e4f4dbf127e846744fc118e0bf8b03f15cfa06203506fbae28d9fb589f2bb",
     content: {
       seo: {
         title: "關於 Wenlan | AI 工作的 LLM wiki",
@@ -650,7 +650,7 @@ export const zhTWContent = {
         description:
           "AI 代理捕捉學到的內容，你加入信任來源，Wenlan 讓有來源依據的 wiki 頁面在 AI 工作中保持最新。",
         statusLabel: "專案狀態",
-        statusItems: ["版本 v0.15.2", "支援 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 建置"],
+        statusItems: ["版本 v0.15.3", "支援 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 建置"],
       },
       sections: [
         {
@@ -677,7 +677,7 @@ export const zhTWContent = {
           number: "04",
           title: "目前狀態",
           paragraphs: [
-            "Wenlan v0.15.2 支援的預編譯執行環境包括 macOS Apple Silicon、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64)。Windows 套件包含 ONNX Runtime，以及供支援 GPU 使用的 Vulkan loader。macOS Intel 仍是 source/dev-only，直到 public release workflow 發布該 artifact。daemon、CLI、MCP server、Claude Code plugin 和 Codex plugin 都以 Apache-2.0 open source。",
+            "Wenlan v0.15.3 支援的預編譯執行環境包括 macOS Apple Silicon、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64)。Windows 套件包含 ONNX Runtime，以及供支援 GPU 使用的 Vulkan loader。macOS Intel 仍是 source/dev-only，直到 public release workflow 發布該 artifact。daemon、CLI、MCP server、Claude Code plugin 和 Codex plugin 都以 Apache-2.0 open source。",
           ],
         },
       ],
@@ -1254,7 +1254,7 @@ export const zhTWContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "7aa75132b3b66d9adcc6a209d493ea619a643e8bd53218089d54eec8a349c142",
+    sourceHash: "357e8a9f4390d73157396651e9e2c52a17ba36c98826b8b9084bc2e961f248ad",
     content: {
       seo: {
         title: "安裝 Wenlan：Claude Code、Codex、ChatGPT 與 MCP",
@@ -1280,7 +1280,7 @@ export const zhTWContent = {
           number: "01",
           title: "安裝適合你系統的 runtime",
           paragraphs: [
-            "Wenlan v0.15.2 提供 Windows x64、macOS Apple silicon，以及 Linux x64 或 ARM64 glibc 的原生 runtime 套件。每份 archive 都包含 CLI、daemon 與 MCP connector。",
+            "Wenlan v0.15.3 提供 Windows x64、macOS Apple silicon，以及 Linux x64 或 ARM64 glibc 的原生 runtime 套件。每份 archive 都包含 CLI、daemon 與 MCP connector。",
             "在 Windows 上，請把 wenlan-windows-x64.zip 當成一個整體解壓到使用者擁有且已加入 PATH 的目錄。onnxruntime.dll、vulkan-1.dll 與三個執行檔必須放在一起。",
           ],
           commands: [
@@ -1291,13 +1291,13 @@ export const zhTWContent = {
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.15.2/wenlan-windows-x64.zip",
+              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.15.3/wenlan-windows-x64.zip",
               label: "下載 Windows x64",
             },
             {
               id: "all-downloads",
-              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.15.2",
-              label: "全部 v0.15.2 下載",
+              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.15.3",
+              label: "全部 v0.15.3 下載",
             },
           ],
         },

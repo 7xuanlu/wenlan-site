@@ -2738,8 +2738,9 @@ export const docPages: DocPage[] = [
       {
         heading: "Public website analytics",
         body: [
-          "The public wenlan.app website is separate from the installed Wenlan runtime. It uses Vercel Web Analytics for aggregate website visits and a configured Umami tracker for bounded GitHub, Get Started, Learn article, and setup-path click events.",
+          "The public wenlan.app website is separate from the installed Wenlan runtime. It uses Vercel Web Analytics for aggregate website visits and a configured Umami tracker for bounded GitHub, Get Started, Learn article, setup-path, and successful waitlist-signup events.",
           "The Umami tracker is restricted to wenlan.app, excludes URL search parameters, and respects the browser's Do Not Track setting. Custom event properties are limited to placement, locale, content context, and a fixed destination category. They never include memory content, code, commands, user paths, search terms, names, email addresses, or stable account identifiers.",
+          "The release-update form sends the submitted email to Resend. When bounded acquisition properties are enabled, Resend also stores the signup locale, landing path, referrer host, and UTM source, medium, and campaign with that contact. Those fields are not sent to Umami, and GitHub's cumulative release download counters are reported separately rather than joined to an individual contact.",
           "This website measurement does not add cloud sync or telemetry to installed Wenlan.",
         ],
       },
@@ -3601,7 +3602,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.15.2 line.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.15.3 line.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3780,35 +3781,35 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.15.2",
+      "Wenlan version 0.15.3",
       "wenlan-mcp release notes",
     ],
-    updatedAt: "2026-07-31",
+    updatedAt: "2026-08-01",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Quick answer: the current stable release in the repository changelog is v0.15.2, dated 2026-07-31.",
+      "Quick answer: the current stable release in the repository changelog is v0.15.3, dated 2026-08-01.",
       "The release publishes native runtime archives for macOS Apple Silicon, Linux x64 and ARM64, and Windows x64. The optional desktop app still releases separately.",
     ],
     sections: [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.15.2 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It publishes native archives for Windows x64, macOS Apple Silicon, and Linux x64 or ARM64, and includes the Space Brief workflow introduced in v0.15.1.",
+          "Wenlan v0.15.3 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It publishes native archives for Windows x64, macOS Apple Silicon, and Linux x64 or ARM64, and closes the M5 daemon gaps for cutover readiness, page review, and named-page truth axes.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
         ],
       },
       {
-        heading: "v0.15.2 highlights",
+        heading: "v0.15.3 highlights",
         body: [
-          "The v0.15.2 release hardens setup compatibility and test isolation on top of the Space Brief and source-truth work shipped in v0.15.1.",
+          "The v0.15.3 release adds daemon cutover-readiness checks, the page-review endpoint, and named-page truth axes on top of the setup compatibility and test-isolation fixes shipped in v0.15.2.",
         ],
         bullets: [
-          "Setup skips runtime repair when the installed daemon is newer than the plugin, avoiding accidental downgrade behavior.",
-          "Test builds no longer resolve the developer's real config.json.",
-          "Space Briefs replace session-start context with a CLI, daemon, storage, and plugin workflow.",
+          "Cutover-readiness checks expose whether the daemon is ready for the M5 transition.",
+          "A page-review endpoint makes the review surface available through the daemon API.",
+          "Named-page truth axes make page-specific truth state explicit.",
           "The release keeps native Windows x64, macOS Apple Silicon, and Linux x64 or ARM64 archives.",
-          "Stable release date: 2026-07-31.",
+          "Stable release date: 2026-08-01.",
         ],
       },
       {
@@ -3907,7 +3908,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.15.2, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.15.3, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },

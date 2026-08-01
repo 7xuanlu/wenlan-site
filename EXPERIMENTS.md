@@ -4597,3 +4597,137 @@ increase for that experiment.
   inferred.
 - External boundary: No indexing request, GSC validation, analytics mutation,
   paid acquisition, or unrelated external publication was performed.
+
+### 2026-08-01T16:43:08Z — download and signup attribution prepared locally
+
+- Record type: campaign-observation
+- Related experiment: none; `TECH-2026-08-01-download-signup-attribution`
+- Status: local preparation; website-change slot occupied
+- GitHub evidence: A read-only snapshot at `2026-08-01T16:47:51.633Z`
+  reports 46 stars, 19 cumulative downloads across the four website-linked
+  `v0.15.3` assets, and 1,376 cumulative downloads across all assets in all 44
+  returned releases. These are point-in-time GitHub counters.
+- Umami boundary: A successful waitlist response emits one anonymous
+  `waitlist_signup` event with placement, locale, context, and destination
+  category only. Email, referrer, UTM values, and paths are excluded.
+- Resend boundary: Optional contact properties retain locale, landing path,
+  referrer host, and UTM source, medium, and campaign only after the six
+  properties are initialized and the production feature flag is enabled.
+- Homepage placement: The existing waitlist remains in the bottom closing CTA
+  and is not moved directly below the Download section.
+- Release correction: The local public-site release contract and localized
+  copy now match the source-backed and publicly released `v0.15.3`; the prior
+  `v0.15.2` surface was stale.
+- Decision: Keep GitHub downloads, Umami events, Resend contacts, stars, GSC,
+  and Vercel in separate native units. Do not infer a person-level join or
+  causality.
+- External boundary: No Resend property, Vercel variable, synthetic event,
+  contact, push, PR, merge, or deployment was created. Each remains gated.
+
+### 2026-08-01T17:03:53Z — download and signup attribution locally verified
+
+- Record type: campaign-observation
+- Related experiment: none; `TECH-2026-08-01-download-signup-attribution`
+- Status: local-verified, not published
+- Verification: `pnpm seo:goal:check` passed; `pnpm lint` passed;
+  `pnpm test:seo` passed 209 of 209; `pnpm test:i18n` passed 58 of 58;
+  `pnpm build` emitted 214 pages; `pnpm seo:technical:built` passed; and the
+  fixture-backed weekly pipeline health check passed.
+- Render evidence: English, zh-TW, and zh-CN desktop/mobile views had no
+  horizontal overflow. The unchanged closing CTA and each mobile waitlist
+  form matched production at 100/100 pixel similarity. DOM inspection
+  confirmed the bounded locale, landing-path, referrer-host, and UTM fields.
+- Release evidence: Final review aligned the changelog date and v0.15.3-only
+  highlights with the official release instead of carrying older bullets
+  forward.
+- Interpretation: The three source-native observation lanes are ready for
+  publication and account setup, but no conversion lift, completed-download
+  attribution, person-level join, or causality is inferred.
+- External boundary: Commit, push, PR, merge, deployment, Resend property
+  creation, Vercel environment mutation, synthetic events, and a live signup
+  remain unperformed and separately gated.
+
+### 2026-08-01T18:42:18Z — Resend and Vercel measurement setup verified
+
+- Record type: campaign-observation
+- Related experiment: none; `TECH-2026-08-01-download-signup-attribution`
+- Status: account setup complete; branch deployment pending
+- Existing secrets: Vercel Production and Preview already contained
+  `RESEND_API_KEY`, `RESEND_AUDIENCE_ID`, and
+  `NEXT_PUBLIC_UMAMI_WEBSITE_ID`. Their values were neither copied nor
+  printed.
+- Resend setup: Created and verified six string properties:
+  `signup_locale`, `signup_landing_path`, `signup_referrer_host`,
+  `signup_utm_source`, `signup_utm_medium`, and `signup_utm_campaign`.
+- Vercel setup: Added `RESEND_ACQUISITION_PROPERTIES_ENABLED=1` to Production
+  and Preview. The dashboard explicitly requires a new deployment before it
+  takes effect; current production still runs the old code.
+- API verification: A production-key aggregate fetch succeeded. For the
+  completed `2026-07-03..2026-07-30` GSC-aligned range, the configured Resend
+  audience reports 2 total subscribed contacts, 0 contacts created in range,
+  and 0 attributed contacts in range. The output contains no email addresses.
+- Pipeline verification: The weekly generator consumed the Resend aggregate
+  together with current GSC and Vercel inputs and kept Resend contacts in their
+  own native unit. It did not infer a cross-source user or causal conversion.
+- OpenSEO boundary: The official MCP endpoint was added, but real query testing
+  remains blocked on user-completed OAuth. No paid plan or Google Search
+  Console access was granted.
+- Approval: The user authorized completion and publication of this exact
+  measurement scope. Synthetic events, paid service activation, external
+  posting, indexing requests, GSC validation, and unrelated changes remain
+  excluded.
+
+### 2026-08-01T19:02:55Z — OpenSEO evaluation and pre-merge hardening
+
+- Record type: campaign-observation
+- Related experiment: none; demand discovery plus
+  `TECH-2026-08-01-download-signup-attribution`
+- OpenSEO scope: Added the official hosted project for `wenlan.app` and used
+  trial credits only. GSC was not connected and no paid plan was activated.
+- OpenSEO native observations: United States `llm wiki` displayed 5,400,
+  United States `AI knowledge base` 880, United States
+  `obsidian claude code` 210, Taiwan `AI 知識庫` 210, and United States
+  `chatgpt knowledge base` 50. United States `codex knowledge base` suffered an
+  unrelated intent collision; Singapore `AI 知识库` returned insufficient
+  data. These third-party displayed volumes remain separate from GSC and
+  Trends.
+- SERP observation: Wenlan was absent from the observed top 10 for United
+  States `llm wiki` and Taiwan `AI 知識庫`. The Taiwan result set joined AI
+  knowledge base, Obsidian, and Karpathy in one intent family.
+- Decision: Keep LLM Wiki, Karpathy, and AI knowledge base together as the top
+  acquisition family; keep Obsidian plus Claude Code/MCP as the next clean
+  workflow cluster. OpenSEO is useful for English/Taiwan nomination and SERP
+  inspection, but its generic AI expansion was noisy and it did not close the
+  Simplified Chinese gap. No new site experiment starts from this evaluation.
+- Review correction: Hardened attribution ingestion and export against query
+  or fragment-bearing paths, malformed hosts, disallowed UTM characters, and
+  ASCII or internationalized email-like values. Resend property setup now
+  paginates with an advance guard; GitHub credentials stay on the official API
+  origin; both GitHub REST and `gh` release enumeration have a 1,000-release
+  cap.
+- Verification boundary: Targeted regression tests and TypeScript pass. Full
+  SEO, i18n, build, technical, Goal, and final review gates must be rerun after
+  these last edits before publication.
+- Evidence: `docs/seo-audits/2026-08-01-openseo-evaluation.md` and
+  `/tmp/wenlan-seo-demand/2026-08-01/openseo/observations.json`.
+
+### 2026-08-01T19:09:02Z — measurement correction final gate passed
+
+- Record type: campaign-observation
+- Related experiment: none; `TECH-2026-08-01-download-signup-attribution`
+- Status: approved and ready for GitHub publication
+- Fresh-eye review: `MERGE`; all prior privacy, credential-origin,
+  pagination, and resource-cap findings are resolved with regressions.
+- Verification: `pnpm seo:goal:check` passed; `pnpm lint` passed; `pnpm
+  test:seo` passed 215 of 215; `pnpm test:i18n` passed 58 of 58; `pnpm build`
+  emitted 214 pages; `pnpm seo:technical:built` passed; the local production
+  server passed 22 expected i18n 200 routes and 5 expected 404 routes; `pnpm
+  seo:weekly:sample` passed; and `git diff --check` passed.
+- Account verification: The hardened idempotent property check found all six
+  existing Resend properties. The privacy-filtered, configured-audience fetch
+  again returned 2 total subscribed contacts, 0 contacts in the completed
+  GSC-aligned range, and 0 attributed contacts in that range.
+- External boundary: The approved commit, PR, merge, automatic Vercel
+  deployment, and read-only production verification may proceed. Synthetic
+  events, a fabricated contact, paid activation, indexing requests, GSC
+  validation, and unrelated publication remain excluded.

@@ -54,6 +54,10 @@ mkdir -p /tmp/wenlan-seo
 # for privacy-filtered query-to-page candidate mapping.
 # Fetch authenticated Vercel page/referrer evidence for the same 28 complete days:
 pnpm seo:vercel:fetch -- --date YYYY-MM-DD
+# Capture point-in-time GitHub stars and cumulative release-asset downloads:
+pnpm seo:github:fetch -- --date YYYY-MM-DD
+# Capture privacy-safe aggregate Resend contacts for the same 28 complete days:
+vercel env run -e production -- pnpm seo:resend:fetch -- --date YYYY-MM-DD
 # Optional when Umami export access is available:
 #   /tmp/wenlan-seo/umami-pages.csv
 #   /tmp/wenlan-seo/umami-referrers.csv
@@ -97,7 +101,11 @@ The ADC token must include `https://www.googleapis.com/auth/webmasters.readonly`
 
 The readonly scope is enough to fetch Search Analytics, sitemap metadata, and URL Inspection status. It is not enough to resubmit sitemaps; that write call returns `ACCESS_TOKEN_SCOPE_INSUFFICIENT` unless the ADC token also has a write Search Console scope such as `https://www.googleapis.com/auth/webmasters`. Request indexing for ordinary web pages remains a Search Console UI action; the URL Inspection API reports indexed/indexable status but does not submit indexing requests.
 
-The report is written to `docs/seo-audits/YYYY-MM-DD-weekly-seo.md`. GSC CSVs drive the ranked query/page recommendations. `seo:vercel:fetch` uses the authenticated Vercel CLI to write `vercel-pages.csv`, `vercel-referrers.csv`, and `vercel-metadata.json` under `/tmp/wenlan-seo`; the weekly pipeline auto-detects these files and prefers them over Umami. Optional Umami CSVs remain supported as a fallback. Vercel custom CTA event reporting requires a Pro or Enterprise plan; when the API returns `402`, keep the field account-gated instead of inferring event counts.
+The report is written to `docs/seo-audits/YYYY-MM-DD-weekly-seo.md`. GSC CSVs drive the ranked query/page recommendations. `seo:vercel:fetch` uses the authenticated Vercel CLI to write `vercel-pages.csv`, `vercel-referrers.csv`, and `vercel-metadata.json` under `/tmp/wenlan-seo`; the weekly pipeline auto-detects these files and prefers them over Umami. `seo:github:fetch` writes `github-metadata.json` beside them and records GitHub stars, the current release's per-asset cumulative `download_count`, the website-linked asset subtotal, and the all-release asset total. These are point-in-time GitHub counters, not same-range sessions or completed-download attribution. Optional Umami CSVs remain supported as a fallback. Vercel custom CTA event reporting requires a Pro or Enterprise plan; when the API returns `402`, keep the field account-gated instead of inferring event counts.
+
+The homepage waitlist keeps email in Resend. After a successful Resend contact creation, the browser sends an anonymous `waitlist_signup` event to Umami with only placement, locale, content context, and destination category. To store bounded source context with the Resend contact, first run `pnpm resend:contact-properties:ensure` with `RESEND_API_KEY`, then set `RESEND_ACQUISITION_PROPERTIES_ENABLED=1` in the deployment environment. The stored Resend fields are locale, landing path, referrer host, and `utm_source`, `utm_medium`, and `utm_campaign`; email is never sent to Umami. These acquisition fields are bounded client-reported context, not authenticated attribution. The server rejects malformed paths/hosts and email-like property values before sending them to Resend.
+
+`seo:resend:fetch` reads only the configured `RESEND_AUDIENCE_ID` from the Resend API and writes aggregate totals and acquisition-property breakdowns to `/tmp/wenlan-seo/resend-metadata.json`. It never writes email addresses. The weekly pipeline auto-detects this file and reports Resend contacts in native contact units, separate from Umami events, Vercel sessions, GSC clicks, and GitHub downloads. `vercel env run` injects the existing project secrets into the process without copying their values into a file.
 
 Run the technical checks against the deployed site and the fresh local build before marking the loop complete:
 

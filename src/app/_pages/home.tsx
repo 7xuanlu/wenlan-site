@@ -339,7 +339,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               <p className="mb-3 text-sm text-[var(--o-text-muted)]">
                 {cta.waitlistHeading}
               </p>
-              <WaitlistForm copy={cta.waitlist} />
+              <WaitlistForm copy={cta.waitlist} locale={locale} />
             </div>
           </div>
         </div>

@@ -1,7 +1,14 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { TrackedLink } from "../src/components/tracked-link.tsx";
+import {
+  TrackedLink,
+  trackAnalyticsEvent,
+} from "../src/components/tracked-link.tsx";
+import {
+  browserSignupAttribution,
+  resendSignupProperties,
+} from "../src/lib/signup-attribution.ts";
 
 const cases = [
   ["github_outbound", "github"],
@@ -63,6 +70,96 @@ test("TrackedLink click remains safe when Umami is unavailable", (t) => {
   });
 
   assert.doesNotThrow(() => link.props.onClick());
+});
+
+test("successful waitlist tracking stays anonymous and bounded", (t) => {
+  const previousWindow = globalThis.window;
+  const calls = [];
+  globalThis.window = {
+    umami: {
+      track: (...args) => calls.push(args),
+    },
+  };
+  t.after(() => {
+    globalThis.window = previousWindow;
+  });
+
+  trackAnalyticsEvent({
+    eventName: "waitlist_signup",
+    placement: "home-footer",
+    locale: "zh-TW",
+    context: "home",
+  });
+
+  assert.deepEqual(calls, [
+    [
+      "waitlist_signup",
+      {
+        placement: "home-footer",
+        locale: "zh-TW",
+        context: "home",
+        destination_category: "email",
+      },
+    ],
+  ]);
+  assert.doesNotMatch(JSON.stringify(calls), /email@|utm_|referrer/i);
+});
+
+test("signup attribution keeps bounded campaign fields out of Umami", () => {
+  const attribution = browserSignupAttribution(
+    "https://wenlan.app/zh-TW/?utm_source=reddit&utm_medium=post&utm_campaign=llm%20wiki",
+    "https://www.reddit.com/r/LocalLLaMA/comments/example?secret=ignored",
+  );
+  assert.deepEqual(attribution, {
+    signup_landing_path: "/zh-TW/",
+    signup_referrer_host: "www.reddit.com",
+    signup_utm_source: "reddit",
+    signup_utm_medium: "post",
+    signup_utm_campaign: "llm wiki",
+  });
+
+  const formData = new FormData();
+  for (const [key, value] of Object.entries(attribution)) {
+    formData.set(key, value);
+  }
+  assert.deepEqual(resendSignupProperties(formData, "zh-TW"), {
+    signup_locale: "zh-TW",
+    ...attribution,
+  });
+
+  formData.set("signup_landing_path", "https://attacker.example/private");
+  formData.set("signup_referrer_host", "attacker.example/path");
+  formData.set("signup_utm_campaign", "person@example.com");
+  assert.deepEqual(resendSignupProperties(formData, "zh-TW"), {
+    signup_locale: "zh-TW",
+    signup_utm_source: "reddit",
+    signup_utm_medium: "post",
+  });
+
+  formData.set("signup_landing_path", "/download?token=example-secret");
+  formData.set("signup_referrer_host", "reddit.com");
+  formData.set("signup_utm_campaign", "user@例子.中国");
+  assert.deepEqual(resendSignupProperties(formData, "zh-TW"), {
+    signup_locale: "zh-TW",
+    signup_referrer_host: "reddit.com",
+    signup_utm_source: "reddit",
+    signup_utm_medium: "post",
+  });
+});
+
+test("waitlist source keeps Resend opt-in and Umami email exclusion explicit", async () => {
+  const [actionSource, formSource] = await Promise.all([
+    readFile(new URL("../src/app/actions.ts", import.meta.url), "utf8"),
+    readFile(new URL("../src/app/waitlist-form.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(actionSource, /RESEND_ACQUISITION_PROPERTIES_ENABLED === "1"/);
+  assert.match(actionSource, /if \(result\.error\)/);
+  assert.match(formSource, /eventName: "waitlist_signup"/);
+  assert.match(formSource, /name="locale"/);
+  const trackingCall = formSource.match(/trackAnalyticsEvent\(\{[\s\S]*?\}\);/)?.[0];
+  assert.ok(trackingCall);
+  assert.doesNotMatch(trackingCall, /email|utm|referrer/i);
 });
 
 test("homepage acquisition links preserve their exact analytics tuple", async () => {
