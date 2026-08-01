@@ -64,9 +64,12 @@ function sectionId(heading: string, index: number): string {
   return asciiId || `section-${index + 1}`;
 }
 
-function renderLocalizedHeading(heading: string) {
-  return heading.split(/(AI 知識庫|AI 知识库)/g).map((part, index) =>
-    part === "AI 知識庫" || part === "AI 知识库" ? (
+function renderProtectedCjkTerms(text: string) {
+  return text.split(/(AI 知識庫|AI 知识库|來源|来源)/g).map((part, index) =>
+    part === "AI 知識庫" ||
+    part === "AI 知识库" ||
+    part === "來源" ||
+    part === "来源" ? (
       <span key={`${part}-${index}`} className="whitespace-nowrap">
         {part}
       </span>
@@ -152,6 +155,10 @@ export default async function LocalizedLearnSlugPage({
   const { locale, slug } = await params;
   const { locale: resolvedLocale, article } = translatedArticleOrNotFound(locale, slug);
   const chrome = chromeByLocale[resolvedLocale];
+  const renderArticleText =
+    article.slug === "wenlan-vs-obsidian-ai-memory"
+      ? renderProtectedCjkTerms
+      : (text: string) => text;
 
   const relatedArticles = article.relatedSlugs
     .map((relatedSlug) => relatedArticleForLocale(resolvedLocale, relatedSlug))
@@ -277,10 +284,10 @@ export default async function LocalizedLearnSlugPage({
                   {article.eyebrow}
                 </p>
                 <h1 className="warm-glow max-w-full font-serif text-[2rem] leading-[1.08] font-medium tracking-tight [word-break:keep-all] [overflow-wrap:break-word] sm:text-7xl sm:leading-[1.05]">
-                  {renderLocalizedHeading(article.title)}
+                  {renderArticleText(article.title)}
                 </h1>
                 <p className="mt-8 max-w-2xl break-words text-lg leading-relaxed text-[var(--o-text-secondary)]">
-                  {article.description}
+                  {renderArticleText(article.description)}
                 </p>
                 <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[11px] text-[var(--o-text-muted)]">
                   <span>{article.author}</span>
@@ -314,7 +321,7 @@ export default async function LocalizedLearnSlugPage({
                     {(index + 1).toString().padStart(2, "0")}
                   </p>
                   <p className="text-sm leading-relaxed text-[var(--o-text-secondary)]">
-                    {bullet}
+                    {renderArticleText(bullet)}
                   </p>
                 </div>
               ))}
@@ -336,11 +343,11 @@ export default async function LocalizedLearnSlugPage({
                   </p>
                   <div className="min-w-0">
                     <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)] [word-break:keep-all] [overflow-wrap:break-word]">
-                      {renderLocalizedHeading(section.heading)}
+                      {renderArticleText(section.heading)}
                     </h2>
                     <div className="mt-5 space-y-4 text-base leading-relaxed text-[var(--o-text-secondary)]">
                       {section.body.map((paragraph) => (
-                        <p key={paragraph}>{paragraph}</p>
+                        <p key={paragraph}>{renderArticleText(paragraph)}</p>
                       ))}
                     </div>
                     {section.bullets && (
@@ -350,7 +357,7 @@ export default async function LocalizedLearnSlugPage({
                             key={bullet}
                             className="text-sm leading-relaxed text-[var(--o-text-muted)]"
                           >
-                            {bullet}
+                            {renderArticleText(bullet)}
                           </li>
                         ))}
                       </ul>
@@ -371,7 +378,7 @@ export default async function LocalizedLearnSlugPage({
                         locale={resolvedLocale}
                         className="mt-6 inline-flex rounded-xl border border-[var(--o-border)] px-5 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
                       >
-                        {section.link.label}
+                        {renderArticleText(section.link.label)}
                       </LocalizedLink>
                     )}
                   </div>
@@ -381,10 +388,10 @@ export default async function LocalizedLearnSlugPage({
               <section className="relative overflow-hidden rounded-2xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-8 shadow-[0_18px_70px_rgba(0,0,0,0.18)]">
                 <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full border border-[var(--o-border-subtle)] opacity-50" />
                 <h2 className="font-serif text-3xl font-medium tracking-tight [word-break:keep-all] [overflow-wrap:break-word]">
-                  {renderLocalizedHeading(article.cta.heading)}
+                  {renderArticleText(article.cta.heading)}
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-[var(--o-text-secondary)]">
-                  {article.cta.body}
+                  {renderArticleText(article.cta.body)}
                 </p>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   <TrackedLocalizedLink
@@ -431,7 +438,7 @@ export default async function LocalizedLearnSlugPage({
                       <span className="font-mono text-[10px] text-[var(--o-text-dim)]">
                         {(index + 1).toString().padStart(2, "0")}
                       </span>
-                      <span>{section.heading}</span>
+                      <span>{renderArticleText(section.heading)}</span>
                     </a>
                   ))}
                 </div>
@@ -451,7 +458,7 @@ export default async function LocalizedLearnSlugPage({
                         rel="noopener noreferrer external"
                         className="block text-sm leading-relaxed text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
                       >
-                        {reference.label}
+                        {renderArticleText(reference.label)}
                       </a>
                     ))}
                   </div>
@@ -471,7 +478,7 @@ export default async function LocalizedLearnSlugPage({
                       scroll
                       className="block text-sm leading-relaxed text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
                     >
-                      {relatedArticle.title}
+                      {renderArticleText(relatedArticle.title)}
                     </LocalizedLink>
                   ))}
                 </div>
@@ -489,13 +496,13 @@ export default async function LocalizedLearnSlugPage({
               {article.faqs.map((faq) => (
                 <details key={faq.question} className="group">
                   <summary className="flex cursor-pointer items-center justify-between px-6 py-5 font-serif text-sm font-medium text-[var(--o-text)] transition-colors duration-150 hover:text-[var(--o-text-secondary)] [&::-webkit-details-marker]:hidden">
-                    {faq.question}
+                    <span className="min-w-0">{renderArticleText(faq.question)}</span>
                     <span className="ml-4 text-[var(--o-text-muted)] transition-transform duration-150 group-open:rotate-45">
                       +
                     </span>
                   </summary>
                   <div className="px-6 pb-5 text-sm leading-relaxed text-[var(--o-text-muted)]">
-                    {faq.answer}
+                    {renderArticleText(faq.answer)}
                   </div>
                 </details>
               ))}

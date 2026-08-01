@@ -4863,3 +4863,32 @@ increase for that experiment.
 - Next step: Publish the reviewed branch, wait for required checks and Vercel
   production, verify the exact live locale and technical contract, and record
   the production completion timestamp as the 24-hour boundary.
+
+### 2026-08-01T21:03:54Z — Obsidian locale production visual correction
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-01-obsidian-knowledge-base-locales`
+- Status: published; bounded CJK rendering correction locally verified
+- Publication: PR #110 merged at `2026-08-01T20:45:39Z` as
+  `317bc9152fd8f22bded644c64934ebac7d2bc372`; Vercel completed production at
+  `2026-08-01T20:46:25Z`.
+- Production evidence: The deployed technical audit passed 114 sitemap URLs,
+  18 key pages, utility headers, redirects, bridge-host redirects, and
+  sitemap-wide `FAQPage` absence. The live locale matrix passed 23 expected
+  direct-200 routes and four expected 404 routes.
+- Visual finding: Fresh full-page `393x852` and `1280x720` captures proved no
+  document overflow, but found two semantic phrase breaks in the Mandarin
+  article packet/CTA and a flex-distribution side effect after protecting an
+  FAQ phrase. This is a presentation regression, not an SEO result.
+- Correction: Shorten the packet/CTA copy without changing intent; protect
+  `AI 知識庫`, `AI 知识库`, `來源`, and `来源` only on the Obsidian canonical
+  family; keep the FAQ question inside one flex child. English, URLs,
+  metadata, schema dates, sitemap, hreflang, and experiment thresholds remain
+  unchanged.
+- Verification: Goal passed; SEO passed 217 of 217; i18n passed 60 of 60;
+  TypeScript and the 215-page build passed. Fresh complete-page evidence for
+  both locales and both viewports has zero document overflow and zero split
+  protected phrases; both inline visual passes returned PASS.
+- Decision: Publish this bounded correction under the user's existing exact-
+  scope approval, then use the corrected Vercel production completion time as
+  the experiment's 24-hour boundary.
