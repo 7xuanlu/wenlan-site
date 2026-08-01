@@ -198,6 +198,7 @@ async function run() {
   const queriesPath = join(args.inputDir, "gsc-queries.csv");
   const pagesPath = join(args.inputDir, "gsc-pages.csv");
   const metadataPath = join(args.inputDir, "gsc-metadata.json");
+  const queryPagesPath = join(args.inputDir, "gsc-query-pages.json");
 
   await assertReadable(queriesPath, "queries");
   await assertReadable(pagesPath, "pages");
@@ -219,6 +220,9 @@ async function run() {
 
   if (hasMetadata) {
     generatorArgs.push("--gsc-metadata", metadataPath);
+  }
+  if (await isReadable(queryPagesPath)) {
+    generatorArgs.push("--query-pages", queryPagesPath);
   }
 
   if (args.outputPath) {

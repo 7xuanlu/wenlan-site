@@ -39,9 +39,23 @@ Property totals must come from a separate GSC `byProperty` request or a separate
 
 ## Query Action Queue
 
-| Query | Query group | Current page | Impressions | Clicks | CTR | Avg position | Recommended action | Diagnosis |
-| --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- |
-| `example query` | Query group | `/learn/example` | - | - | - | - | title-meta-refresh / quick-answer-refresh / internal-link-refresh / technical-check / distribution / new-article-candidate / wait | - |
+| Query | Query group | Observed GSC page | Configured target | Impressions | Clicks | CTR | Avg position | Recommended action | Diagnosis |
+| --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- |
+| `example query` | Query group | `/observed-page` | `/learn/example` | - | - | - | - | query-page-review / title-meta-refresh / quick-answer-refresh / internal-link-refresh / technical-check / distribution / new-article-candidate / wait | - |
+
+When authenticated `gsc-query-pages.json` is unavailable, keep the legacy
+single-page column and label it `Current page`; do not describe a configured
+target as an observed GSC mapping.
+
+## GSC Click Opportunity Queue
+
+| Rank | Page | Campaign lane | Page impressions | Page clicks | Page CTR | Avg position | Qualified zero-click query impressions | Observed visible queries | Next move | Why |
+| ---: | --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+| 1 | `/learn/example` | eligible / measuring-only | - | - | - | - | - | `example query` (-) | query-page-review / title-meta-refresh / serp-intent-review / internal-link-refresh / evidence-gap-review | - |
+
+Rank protected AI knowledge-base/wiki and modifier-qualified Obsidian rows
+before measuring-only cohorts. Keep brand and unclassified `Other` rows in the
+full query table without allowing them to nominate this queue.
 
 ## Page Action Queue
 

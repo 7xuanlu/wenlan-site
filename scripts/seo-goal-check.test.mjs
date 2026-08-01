@@ -156,6 +156,41 @@ test("PLAN current experiment must exist as an active ledger start", () => {
   );
 });
 
+test("PLAN current experiment matches the unique production-in-flight experiment", () => {
+  const measuringId = "EXP-030";
+  const productionId = "EXP-031";
+  const experiments = [
+    experimentFreeExperiments,
+    experimentStart({
+      id: measuringId,
+      status: "measuring",
+      windowStart: "2026-08-01",
+      windowEnd: "2026-08-07",
+      launched: "2026-08-01",
+    }),
+    experimentStart({
+      id: productionId,
+      status: "active",
+      windowStart: "2026-08-01",
+      windowEnd: "2026-08-07",
+      launched: "2026-08-02",
+    }),
+  ].join("\n");
+
+  const errors = validationErrors({
+    plan: fixturePlan(measuringId, 2),
+    experiments,
+  });
+
+  assert.ok(
+    errors.some((error) =>
+      error.includes(
+        `Current experiment must match the unique production-in-flight experiment "${productionId}"`,
+      ),
+    ),
+  );
+});
+
 test("PLAN active experiment count must match the ledger", () => {
   const plan = canonicalPlan.replace(
     `- Active experiments: ${canonicalActiveExperimentCount}.`,
@@ -221,15 +256,33 @@ test("CLI path overrides validate the supplied control-plane files", async () =>
   }
 });
 
-test("changed frozen targets fail with a specific contract error", () => {
-  const changed = canonicalPlan.replace(
+test("changed frozen targets fail with specific contract errors", () => {
+  const changedStars = canonicalPlan.replace(
     "GitHub total stars >= 100",
     "GitHub total stars >= 99",
   );
+  const changedClicks = canonicalPlan.replace(
+    "property clicks >= 100",
+    "property clicks >= 99",
+  );
+  const changedImpressions = canonicalPlan.replace(
+    "property impressions >= 10,000",
+    "property impressions >= 9,999",
+  );
 
   assert.ok(
-    validationErrors({ plan: changed }).some((error) =>
+    validationErrors({ plan: changedStars }).some((error) =>
       error.includes("GitHub total stars >= 100"),
+    ),
+  );
+  assert.ok(
+    validationErrors({ plan: changedClicks }).some((error) =>
+      error.includes("GSC property clicks >= 100"),
+    ),
+  );
+  assert.ok(
+    validationErrors({ plan: changedImpressions }).some((error) =>
+      error.includes("GSC property impressions >= 10,000"),
     ),
   );
 });
@@ -258,8 +311,16 @@ test("missing demand-discovery or approval clauses fail", () => {
 
 test("frozen and mutable acquisition focus cannot drift back to generic memory", () => {
   const withoutFrozenCenter = canonicalPlan.replace(
-    "The acquisition center for new experiments is AI knowledge bases, LLM wiki,",
+    "The acquisition center for new experiments is one co-primary, non-ranked",
     "The acquisition center for new experiments is generic memory,",
+  );
+  const withoutParity = canonicalPlan.replace(
+    "one co-primary, non-ranked cluster",
+    "one priority-ordered cluster",
+  );
+  const withoutCodexChatGPT = canonicalPlan.replace(
+    "Codex, ChatGPT, Claude Code, Obsidian, and MCP are first-class",
+    "Claude Code, Obsidian, and MCP are secondary",
   );
   const withoutPriorityFamilies = canonicalPlan.replace(
     "The next candidate must be selected from fresh evidence for",
@@ -272,12 +333,22 @@ test("frozen and mutable acquisition focus cannot drift back to generic memory",
 
   assert.ok(
     validationErrors({ plan: withoutFrozenCenter }).some((error) =>
-      error.includes("AI knowledge-base and wiki acquisition center"),
+      error.includes("co-primary trilingual AI knowledge-base"),
+    ),
+  );
+  assert.ok(
+    validationErrors({ plan: withoutParity }).some((error) =>
+      error.includes("co-primary trilingual AI knowledge-base"),
+    ),
+  );
+  assert.ok(
+    validationErrors({ plan: withoutCodexChatGPT }).some((error) =>
+      error.includes("Codex ChatGPT and tool-workflow acquisition entries"),
     ),
   );
   assert.ok(
     validationErrors({ plan: withoutPriorityFamilies }).some((error) =>
-      error.includes("priority demand families"),
+      error.includes("tool-workflow demand families"),
     ),
   );
   assert.ok(
@@ -377,7 +448,7 @@ test("a terminal readout updates active reporting without blocking later product
     }),
   ].join("\n");
 
-  const plan = fixturePlan("EXP-010", 2);
+  const plan = fixturePlan("EXP-011", 2);
 
   assert.deepEqual(validationErrors({ plan, experiments }), []);
 });

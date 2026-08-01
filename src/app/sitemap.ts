@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SUPPORTED_LOCALES } from "@/i18n/locales";
+import { getLocalizedLearnArticle } from "@/i18n/learn-articles";
 import {
   alternateUrls,
   canonicalUrl,
@@ -11,9 +12,9 @@ import {
 import { docPages, docUrl } from "./(en)/docs/docs";
 import { articles, articleUrl } from "./(en)/learn/articles";
 
-const ABOUT_UPDATED_AT = "2026-07-26";
-const DOWNLOAD_UPDATED_AT = "2026-07-27";
-const GET_STARTED_UPDATED_AT = "2026-07-26";
+const ABOUT_UPDATED_AT = "2026-07-31";
+const DOWNLOAD_UPDATED_AT = "2026-07-31";
+const GET_STARTED_UPDATED_AT = "2026-07-31";
 
 type CoreTranslatedPath = (typeof CORE_TRANSLATED_PATHS)[number];
 type SitemapEntry = MetadataRoute.Sitemap[number];
@@ -133,7 +134,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
       return translatedLocalesForLearnPath(pathname).map((locale) => ({
         url: canonicalUrl(locale, pathname),
-        lastModified: new Date(article.updatedAt),
+        lastModified: new Date(
+          getLocalizedLearnArticle(locale, article.slug)?.updatedAt ??
+            article.updatedAt,
+        ),
         changeFrequency: "monthly" as const,
         priority: 0.68,
         images: sharedImages,

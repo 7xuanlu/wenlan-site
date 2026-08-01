@@ -259,15 +259,29 @@ test("app root layouts are split between English and translated locale roots", a
   assert.match(localizedLayoutSource, /notFound/);
 });
 
-test("Chinese locales use dedicated CJK typography stacks", async () => {
+test("Chinese locales keep the Latin display face and use CJK sans glyphs", async () => {
   const source = await readFile(resolve(repoRoot, "src/app/globals.css"), "utf8");
 
   assert.match(source, /html:lang\(zh-Hant\)/);
   assert.match(source, /html:lang\(zh-Hans\)/);
-  assert.match(source, /Noto Serif TC/);
-  assert.match(source, /Noto Serif SC/);
   assert.match(source, /PingFang TC/);
   assert.match(source, /PingFang SC/);
+  assert.match(source, /Microsoft JhengHei/);
+  assert.match(source, /Microsoft YaHei/);
+  assert.match(source, /Noto Sans TC/);
+  assert.match(source, /Noto Sans SC/);
+  assert.ok(source.indexOf('"PingFang TC"') < source.indexOf('"Noto Sans TC"'));
+  assert.ok(source.indexOf('"PingFang SC"') < source.indexOf('"Noto Sans SC"'));
+  assert.match(
+    source,
+    /html:lang\(zh-Hant\)\s*\{[\s\S]*?--font-serif:\s*var\(--font-fraunces\),\s*var\(--font-cjk-sans-tc\);/,
+  );
+  assert.match(
+    source,
+    /html:lang\(zh-Hans\)\s*\{[\s\S]*?--font-serif:\s*var\(--font-fraunces\),\s*var\(--font-cjk-sans-sc\);/,
+  );
+  assert.doesNotMatch(source, /--font-cjk-serif/);
+  assert.doesNotMatch(source, /Songti|PMingLiU|SimSun|Noto Serif/);
 });
 
 test("bilingual Wenlan wordmark keeps Latin Fraunces and Chinese sans paired", async () => {
@@ -808,7 +822,7 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
 
   assert.equal(
     metadata.title,
-    "AI 工作的 LLM wiki | Wenlan 文瀾",
+    "LLM Wiki 知識庫：架構、RAG 對比與搭建 | Wenlan",
   );
   assert.equal(
     metadata.alternates.canonical,
@@ -846,6 +860,47 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
     }),
   });
   assert.deepEqual(missingZhCNMetadata, {});
+});
+
+test("zh-TW LLM Wiki guide owns the Karpathy v2 and AI knowledge-base intent", async () => {
+  const { getLocalizedLearnArticle } = await import("../src/i18n/learn-articles.ts");
+  const article = getLocalizedLearnArticle(
+    "zh-TW",
+    "distilled-wiki-pages-ai-memory",
+  );
+
+  assert.ok(article);
+  assert.match(article.title, /LLM Wiki 知識庫/);
+  assert.match(article.metaTitle, /LLM Wiki 知識庫/);
+  assert.equal(article.publishedAt, "2026-07-04");
+  assert.equal(article.updatedAt, "2026-08-01");
+  assert.ok(article.keywords.includes("AI 知識庫"));
+  assert.ok(article.keywords.includes("本地 AI 知識庫"));
+  assert.ok(article.keywords.includes("RAG vs LLM Wiki"));
+
+  const headings = article.sections.map((section) => section.heading);
+  assert.equal(headings.length, 7);
+  assert.ok(headings.includes("LLM Wiki 知識庫和 RAG 有什麼不同"));
+  assert.ok(headings.includes("如何搭建會持續更新的 AI 知識庫"));
+  assert.ok(headings.includes("如何驗證知識庫真的可用"));
+
+  const articleText = JSON.stringify(article);
+  for (const expected of [
+    "Ingest",
+    "Query",
+    "Lint",
+    "/brief",
+    "/recall",
+    "/capture",
+    "/handoff",
+    "/distill",
+    "/pages",
+    "source IDs",
+    "Karpathy",
+    "LLM Wiki v2",
+  ]) {
+    assert.match(articleText, new RegExp(expected.replace("/", "\\/")));
+  }
 });
 
 test("zh-CN LLM wiki guide owns the AI knowledge-base search intent", async () => {
@@ -1052,6 +1107,16 @@ test("sitemap includes localized core and Mandarin acquisition routes", async ()
   assert.equal(
     urls.has("https://wenlan.app/zh-CN/learn/wenlan-vs-basic-memory"),
     false,
+  );
+  const zhTWLLMWiki = entries.find(
+    (entry) =>
+      entry.url ===
+      "https://wenlan.app/zh-TW/learn/distilled-wiki-pages-ai-memory",
+  );
+  assert.ok(zhTWLLMWiki);
+  assert.equal(
+    new Date(zhTWLLMWiki.lastModified).toISOString().slice(0, 10),
+    "2026-08-01",
   );
   assert.equal(urls.has("https://wenlan.app/zh-TW/docs/daily-workflow"), false);
   assert.equal(urls.has("https://wenlan.app/zh-CN/docs/daily-workflow"), false);
