@@ -82,7 +82,7 @@ export const enContent = {
         eyebrow: "Download",
         title: "Download Wenlan for your system.",
         description:
-          "Wenlan v0.15.0 ships the CLI, local daemon, and MCP connector together.",
+          "Wenlan v0.15.2 ships the CLI, local daemon, and MCP connector together.",
         stableLabel: "Stable",
         releaseNotesLabel: "Release notes",
         packageIncludesLabel: "CLI · daemon · MCP connector",
@@ -659,7 +659,7 @@ export const enContent = {
         description:
           "Agents capture what they learn, you add sources you trust, and Wenlan keeps source-backed wiki pages current across AI work.",
         statusLabel: "Project status",
-        statusItems: ["v0.15.0", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
+        statusItems: ["v0.15.2", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
       },
       sections: [
         {
@@ -686,7 +686,7 @@ export const enContent = {
           number: "04",
           title: "Current status",
           paragraphs: [
-            "Wenlan v0.15.0 ships prebuilt runtime artifacts for macOS Apple Silicon, Linux (x86_64, aarch64; glibc), and Windows (x86_64). The Windows archive includes ONNX Runtime and the Vulkan loader for supported GPUs. macOS Intel remains source/dev-only until a public release workflow publishes that artifact again. The daemon, CLI, MCP server, Claude Code plugin, and Codex plugin are open source under Apache-2.0.",
+            "Wenlan v0.15.2 ships prebuilt runtime artifacts for macOS Apple Silicon, Linux (x86_64, aarch64; glibc), and Windows (x86_64). The Windows archive includes ONNX Runtime and the Vulkan loader for supported GPUs. macOS Intel remains source/dev-only until a public release workflow publishes that artifact again. The daemon, CLI, MCP server, Claude Code plugin, and Codex plugin are open source under Apache-2.0.",
           ],
         },
       ],
@@ -1279,7 +1279,7 @@ export const enContent = {
         title: "Install Wenlan and connect your AI client.",
         description:
           "Choose one client path, connect it to the same local daemon, then verify a capture and recall round trip.",
-        meta: ["Wenlan team", "Updated Jul 26, 2026", "5 min setup"],
+        meta: ["Wenlan team", "Updated Jul 31, 2026", "5 min setup"],
         setupPathLabel: "Setup path",
         setupPathItems: ["Runtime", "Claude Code", "Codex", "Local + remote MCP"],
       },
@@ -1289,7 +1289,7 @@ export const enContent = {
           number: "01",
           title: "Install the runtime for your system",
           paragraphs: [
-            "Wenlan v0.15.0 ships native runtime packages for Windows x64, macOS Apple silicon, and Linux x64 or ARM64 with glibc. Every archive contains the CLI, daemon, and MCP connector.",
+            "Wenlan v0.15.2 ships native runtime packages for Windows x64, macOS Apple silicon, and Linux x64 or ARM64 with glibc. Every archive contains the CLI, daemon, and MCP connector.",
             "On Windows, extract wenlan-windows-x64.zip as one unit into a user-owned directory on PATH. Keep onnxruntime.dll and vulkan-1.dll beside the three executables.",
           ],
           commands: [
@@ -1300,13 +1300,13 @@ export const enContent = {
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.15.0/wenlan-windows-x64.zip",
+              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.15.2/wenlan-windows-x64.zip",
               label: "Download Windows x64",
             },
             {
               id: "all-downloads",
-              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.15.0",
-              label: "All v0.15.0 downloads",
+              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.15.2",
+              label: "All v0.15.2 downloads",
             },
           ],
         },

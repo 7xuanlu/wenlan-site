@@ -11,9 +11,11 @@ state below this frozen section may change as evidence arrives.
 
 - Deadline: 2026-08-18.
 - GitHub total stars >= 100 at the deadline.
-- GSC `sc-domain:wenlan.app` rolling-28-day property impressions >= 1,000.
+- GSC `sc-domain:wenlan.app` rolling-28-day property clicks >= 100.
+- GSC `sc-domain:wenlan.app` rolling-28-day property impressions >= 10,000.
 - Vercel Web Analytics rolling-28-day visitors >= 2,000 over the same range.
 - Fixed progress baseline: GitHub total stars 47.
+- Fixed progress baseline: GSC property clicks 6.
 - Fixed progress baseline: GSC property impressions 197.
 - Fixed progress baseline: Vercel visitors 323.
 - Verify the fixed progress baselines against the real source on the day the
@@ -56,9 +58,9 @@ state below this frozen section may change as evidence arrives.
 - Report Vercel raw visitors, direct traffic, qualified-source visitors, and
   acquisition-surface visitors separately. If a source-to-page join is not
   available, do not invent source-to-page sessions.
-- GSC impressions, website visitors, GitHub outbound clicks, stars, and setup
-  starts remain separate metrics. Do not create a composite score and do not
-  claim causality among them.
+- GSC clicks, GSC impressions, website visitors, GitHub outbound clicks,
+  stars, and setup starts remain separate metrics. Do not create a composite
+  score and do not claim causality among them.
 - CTA is fixed as `github_outbound / eligible acquisition-surface sessions`.
   Until a reliable Umami baseline exists, CTA is diagnostic only and has no
   invented 4% threshold.
@@ -95,9 +97,13 @@ state below this frozen section may change as evidence arrives.
 
 ### Acquisition focus
 
-- The acquisition center for new experiments is AI knowledge bases, LLM wiki,
-  source-backed wiki, knowledge bases for AI agents, and modifier-qualified
-  Obsidian or knowledge-base workflows.
+- The acquisition center for new experiments is one co-primary, non-ranked
+  cluster: AI knowledge bases, Karpathy or LLM wiki, source-backed wiki, and
+  knowledge bases for AI agents across English, zh-TW, and zh-CN.
+- Codex, ChatGPT, Claude Code, Obsidian, and MCP are first-class tool or
+  workflow entry points into that same cluster when the candidate gate passes.
+  Do not rank Karpathy or LLM-wiki demand below AI-knowledge-base demand by
+  default; select the page or refresh from evidence and coverage gaps.
 - Generic memory demand does not nominate a new acquisition experiment.
   Existing memory pages and cohorts remain measurable evidence and may be
   maintained for factual or technical correctness, but they do not control the
@@ -202,6 +208,10 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   throughput correction: measurement cohorts no longer consume the production
   slot, and there is no fixed calendar article quota. Threads and other
   owned-social work remain outside this SEO-only campaign.
+- At `2026-07-31T23:54:43Z`, the user explicitly expanded the protected GSC
+  targets for the same deadline and final rolling window to 100 property
+  clicks and 10,000 property impressions. The stars, Vercel, quality,
+  evidence-role, approval, and stop-condition clauses remain unchanged.
 - The weekly window is a reporting boundary, not a publish gate. Only one
   website change may be in `approved` or `active` preparation at a time;
   production-verified `live`, `measuring`, and `extended` cohorts continue
@@ -354,15 +364,18 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 17.
+- Active experiments: 18.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
 - Existing weekly automation: `weekly-origin-seo-cleanup`, ACTIVE, Friday at
   09:00, independent worktree execution; no field was changed in this setup.
 - Latest completed Friday weekly action queue:
-  `docs/seo-audits/2026-07-24-weekly-seo.md`, regenerated from the authenticated
-  GSC and Vercel exports preserved under `/tmp/wenlan-seo`.
+  `docs/seo-audits/2026-07-31-gsc-click-priority.md`, regenerated from the
+  authenticated GSC, query-page, and Vercel exports preserved under
+  `/tmp/wenlan-seo`. It separates observed GSC pages from configured targets
+  and ranks click opportunities without allowing brand noise or generic-memory
+  cohorts to nominate the next acquisition experiment.
 - Latest aligned inter-window action view:
   `/tmp/wenlan-seo-2026-07-28/weekly-seo-corrected.md`, generated from the
   authenticated `2026-06-28..2026-07-25` GSC and Vercel inputs through the
@@ -522,20 +535,21 @@ after the anchor is frozen.
 | Metric | Fixed baseline | Verified live observation | Provenance | Gap to target from live observation |
 | --- | ---: | ---: | --- | ---: |
 | GitHub total stars | 47 | 46 | GitHub REST `GET /repos/7xuanlu/wenlan`, read on 2026-07-30 | 54 |
-| GSC rolling-28-day property impressions | 197 | 395 | Search Console API, `sc-domain:wenlan.app`, `2026-06-28..2026-07-25`; `/tmp/wenlan-seo-2026-07-28/gsc-metadata.json` | 605 |
-| Vercel rolling-28-day visitors | 323 | 1,420 | Vercel Web Analytics API, project `wenlan-site`, `2026-06-28..2026-07-25`; `/tmp/wenlan-seo-2026-07-28/vercel-metadata.json` | 580 |
+| GSC rolling-28-day property clicks | 6 | 10 | Search Console API, `sc-domain:wenlan.app`, `2026-07-03..2026-07-30`; `/tmp/wenlan-seo/gsc-metadata.json` | 90 |
+| GSC rolling-28-day property impressions | 197 | 660 | Search Console API, `sc-domain:wenlan.app`, `2026-07-03..2026-07-30`; `/tmp/wenlan-seo/gsc-metadata.json` | 9,340 |
+| Vercel rolling-28-day visitors | 323 | 1,468 | Vercel Web Analytics API, project `wenlan-site`, `2026-07-03..2026-07-30`; `/tmp/wenlan-seo/vercel-metadata.json` | 532 |
 
 Supporting quality split for the same live range:
 
-- GSC property totals: 8 clicks, 395 impressions.
-- GSC visible-query totals: 2 clicks, 92 impressions.
-- GSC query visibility gap: 6 clicks, 303 impressions.
-- Visible-query non-brand impressions: 48 using the existing Searchfit group
+- GSC property totals: 10 clicks, 660 impressions.
+- GSC visible-query totals: 2 clicks, 111 impressions.
+- GSC query visibility gap: 8 clicks, 549 impressions.
+- Visible-query non-brand impressions: 61 using the existing Searchfit group
   classification; this is a visible-row subset, not a property total, and the
   current `Other` bucket still contains noisy Wenlan misspellings.
-- Vercel raw totals: 1,420 visitors and 1,628 pageviews.
-- Vercel direct traffic: 270 visitors and 351 pageviews.
-- Vercel qualified-source aggregate: 1,152 visitors summed across the existing
+- Vercel raw totals: 1,468 visitors and 1,745 pageviews.
+- Vercel direct traffic: 307 visitors and 457 pageviews.
+- Vercel qualified-source aggregate: 1,163 visitors summed across the existing
   separate search, AI, and GitHub referrer allowlist; this is not a
   deduplicated user count.
 - Vercel reports 2 visitors and 2 pageviews for
@@ -592,25 +606,38 @@ Supporting quality split for the same live range:
 
 ### Current strategy
 
-1. Protect the contract and ledger before any campaign action.
-2. Contract approval received on `2026-07-18T22:06:21Z`.
-3. After approval, read the latest Friday weekly report rather than duplicating
+1. Optimize first for authenticated GSC property clicks, then expand GSC
+   property impressions while monitoring visible qualified-query quality
+   separately. The protected final-window targets are 100 clicks and 10,000
+   impressions; CTR, average position, page rows, visible queries, and the
+   query visibility gap remain diagnostics rather than substitutes.
+2. Protect the contract and ledger before any campaign action.
+3. Contract approval received on `2026-07-18T22:06:21Z`; the GSC target
+   expansion was explicitly approved at `2026-07-31T23:54:43Z`.
+4. After approval, read the latest Friday weekly report rather than duplicating
    its GSC, indexing, or technical work.
-4. Build the first candidate queue from inspectable Google Trends, Reddit,
+5. Build the first candidate queue from inspectable Google Trends, Reddit,
    GitHub issue/discussion, OSS documentation/directory, and SERP observations,
    preserving native units and provenance.
    The first multi-group Trends capture and interpretation is recorded in
    `docs/seo-audits/2026-07-18-trends-demand-discovery.md`. It contains
    historical observations across wiki, knowledge-base, Obsidian, and memory
-   families; those observations keep their original units but no longer share
-   one priority tier. On `2026-07-29`, the user corrected the acquisition
-   center to AI knowledge bases, LLM wiki,
-   source-backed wiki, and Obsidian or knowledge-base-adjacent workflows.
+   families; those observations keep their original units. On `2026-07-29`,
+   the user corrected the acquisition center to AI knowledge bases, LLM wiki,
+   source-backed wiki, and Obsidian or knowledge-base-adjacent workflows. On
+   `2026-07-31`, the user clarified that English, zh-TW, and zh-CN are all
+   first-class acquisition languages; Karpathy or LLM-wiki intent and
+   AI-knowledge-base intent form one co-primary, non-ranked cluster; and Codex
+   and ChatGPT join Claude Code, Obsidian, and MCP as first-class tool or
+   workflow entry points. Candidate selection may separate distinct user tasks
+   into pages, but it must not impose a default priority between Karpathy or
+   LLM wiki and AI knowledge bases.
    Memory remains enabling product infrastructure and supporting vocabulary;
    generic memory demand no longer nominates the next acquisition asset.
    The next candidate must be selected from fresh evidence for `AI knowledge
-   base`, `LLM wiki`, `source-backed wiki`, `knowledge base for AI agents`,
-   or a modifier-qualified Obsidian intent. For Obsidian, the currently
+   base`, `Karpathy LLM wiki`, `LLM wiki`, `source-backed wiki`, `knowledge
+   base for AI agents`, or a modifier-qualified Codex, ChatGPT, Claude Code,
+   Obsidian, or MCP intent. For Obsidian, the currently
    evidenced search language is the tool pair: `obsidian claude code`,
    `claude code obsidian`, `obsidian claude`, `obsidian mcp`, and
    `obsidian claude code mcp`. `Obsidian workflow` is an internal category,
@@ -634,16 +661,16 @@ Supporting quality split for the same live range:
    `Claude Code + Obsidian`, and `Obsidian CLI + Claude Code`. These phrases
    can nominate advance preparation through the full candidate gate; they do
    not enter authenticated GSC input or become keyword-volume estimates.
-5. Prefer one existing indexed acquisition page with impressions for the first
+6. Prefer one existing indexed acquisition page with impressions for the first
    bounded experiment. Consider a net-new search asset only if the complete
    candidate gate passes, the preceding website change is production-verified,
    and the intent does not overlap an existing page.
-6. Prepare local changes and verifier evidence. Ask for approval only at the
+7. Prepare local changes and verifier evidence. Ask for approval only at the
    frozen external/shared-state boundaries.
-7. Keep every launched cohort on its predeclared readout schedule, but do not
+8. Keep every launched cohort on its predeclared readout schedule, but do not
    treat measurement as a reason to stop preparing or shipping the next
    eligible website change.
-8. Continue a read-only net-new article coverage-gap audit
+9. Continue a read-only net-new article coverage-gap audit
    from the cleaned Trends, related-query, Reddit, OSS, SERP, and current-site
    evidence. This may nominate one later experiment but does not start it.
    The audit now treats a missing localized counterpart as a real coverage gap
@@ -651,9 +678,10 @@ Supporting quality split for the same live range:
    Obsidian comparison for a zh-TW localization in
    `docs/seo-audits/2026-07-19-localized-acquisition-gap.md`; generic
    `AI 筆記` remains supporting vocabulary rather than the article's target.
-9. Prefer an existing indexed AI knowledge-base, LLM-wiki, or
-   source-backed-wiki page before another net-new URL. Treat Obsidian as an
-   integration bridge when an inspectable modifier-qualified Trends query,
+10. Prefer an existing indexed AI knowledge-base, Karpathy or LLM-wiki, or
+   source-backed-wiki page before another net-new URL. Treat Codex, ChatGPT,
+   Claude Code, Obsidian, and MCP as first-class integration or workflow
+   entry points when an inspectable modifier-qualified Trends query,
    independent corroboration, a clean coverage gap, maintained Wenlan proof,
    and standalone utility pass the complete candidate gate. GSC measures the
    resulting Wenlan exposure later; it is not a prerequisite for preparing
@@ -667,8 +695,9 @@ Supporting quality split for the same live range:
 ### Current gap
 
 - Stars: 54 more than the verified live observation.
-- GSC property impressions: 605 more in the fixed final rolling window.
-- Vercel visitors: 580 more in the fixed final rolling window.
+- GSC property clicks: 90 more in the fixed final rolling window.
+- GSC property impressions: 9,340 more in the fixed final rolling window.
+- Vercel visitors: 532 more in the fixed final rolling window.
 - Legacy migration diagnostic: `sc-domain:useorigin.app` still has
   516 impressions and 5 clicks in the same aligned range. Those values are
   not added to the Wenlan Goal metric.
@@ -728,6 +757,19 @@ GSC URL Inspection reported all five approved batch URLs already on Google.
 Each request-indexing action returned `Indexing requested` by
 `2026-07-30T08:07:02Z`. This records queue acceptance only; it is not a
 post-change crawl, ranking, impression, or click result.
+
+The actual 24-hour technical/evidence readout was recorded at
+`2026-08-01T03:01:49Z`. The live deployed audit and targeted six-route check
+remain green across English, zh-TW, and zh-CN: every hub and source-backed
+article returns direct `200`, exact self-canonical, `index, follow`, reciprocal
+locale alternates, its expected CollectionPage or Article plus BreadcrumbList
+schema, the visible AI-knowledge-base/LLM-wiki answer, and no `FAQPage`.
+The authenticated `2026-07-03..2026-07-30` range includes only a partial
+post-deploy launch date, not one complete post-deploy evidence window. Its
+property, visible-query, page-row, Vercel, Umami, and GitHub observations are
+therefore recorded separately in the ledger without applying the 10-
+impression minimum or inferring a crawl, traffic lift, or SEO outcome. Run
+this experiment's 7-day readout after `2026-08-06T07:59:58Z`.
 
 ### Measuring cohort: Obsidian Claude Code
 
@@ -1153,6 +1195,45 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
+The read-only routing audit for the visible `llm wiki 2.0` query completed at
+`2026-08-01T02:12:56Z` and is recorded in
+`docs/seo-audits/2026-08-01-zhtw-llm-wiki-routing-audit.md`. The observed
+query-page mismatch is not a canonical, hreflang, sitemap, or indexability
+defect. The zh-TW homepage title captures the LLM-wiki intent, but the current
+homepage renderer exposes no visible link to the localized article, and the
+localized article remains the older four-section version without the
+Karpathy, LLM Wiki v2, RAG comparison, setup, and verification coverage now
+maintained in English and zh-CN.
+
+The bounded refresh of the existing
+`/zh-TW/learn/distilled-wiki-pages-ai-memory` route is complete locally and
+verified. It preserves the URL, `datePublished: 2026-07-04`, canonical,
+sitemap, reciprocal locale alternates, Article and BreadcrumbList schema, and
+visible FAQ without `FAQPage`; it adds the maintained seven-section LLM Wiki
+v2 implementation answer and six-command workflow in idiomatic Traditional
+Chinese. The same local package aligns Chinese typography with the App's
+native fallback model: Latin terms in display headings retain Fraunces, while
+Traditional and Simplified Chinese glyphs use the same native sans families as
+the surrounding interface (PingFang on macOS, with script-appropriate
+Microsoft and Noto fallbacks) without adding a multi-megabyte CJK webfont
+payload. No new URL or homepage rewrite was added from
+the single visible query impression. A homepage-to-article link remains a
+separate UI/internal-link candidate. Publication and production verification
+are now the next approval-gated actions; no repeat indexing request or GSC
+validation is due.
+
+The same preflight found a separate release-accuracy defect:
+`src/lib/releases.ts`, localized download/get-started copy, About OG copy,
+changelog/security docs, and sitemap freshness still identify `v0.15.0`,
+while immutable Wenlan tag `v0.15.2` and its GitHub release were published on
+`2026-07-31`. `TECH-2026-08-01-release-v0.15.2-alignment` is now complete
+locally and verified beside the localized refresh. Keep it outside the
+experiment attribution: it updates only release-backed version, date, asset
+URL/size, changelog, and freshness claims and does not start another content
+experiment. Evidence and the exact boundary are in
+`docs/seo-audits/2026-08-01-v0.15.2-release-alignment.md`. Publication remains
+approval-gated with the localized refresh.
+
 #### Acquisition and migration decision
 
 The Docs-to-GitHub bridge and the English, zh-TW, and zh-CN Learn
@@ -1266,6 +1347,16 @@ AI-work-memory versus knowledge-base, LLM-wiki, MCP shared-memory,
 stale-memory, claude-mem, SuperLocalMemory, Basic Memory,
 AI-agent-memory-types, and context-loss 7-day readouts. It must not record the
 Claude Code memory W2 readout before `2026-08-02T00:26:09Z`.
+
+That due batch completed at `2026-08-01T02:37:50Z` using the authenticated
+`2026-07-03..2026-07-30` weekly GSC and Vercel evidence. No source pipeline
+was rerun. Target-page rows, visible joined queries, Vercel page rows, raw and
+direct traffic, non-deduplicated qualified referrer rows, account-gated Umami,
+and 46 GitHub stars remain separate. The range overlaps pre-deploy dates and
+does not contain seven complete post-deploy dates for the 2026-07-24 and
+2026-07-25 changes, so all ten results remain pending. The next scheduled
+campaign readout is the Claude Code memory W2 readout after
+`2026-08-02T00:26:09Z`; do not record it early.
 
 The authenticated `2026-06-27..2026-07-24` inter-window refresh adds
 19 property impressions, six visible-query impressions, four Vercel visitors,

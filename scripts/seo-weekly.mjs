@@ -110,19 +110,32 @@ const KNOWLEDGE_BASE_WIKI_TARGETS = [
 
 const ACTION_PRIORITY = {
   "technical-check": 1,
-  "title-meta-refresh": 2,
-  "quick-answer-refresh": 3,
-  "internal-link-refresh": 4,
-  "new-article-candidate": 5,
-  distribution: 6,
-  wait: 7,
+  "query-page-review": 2,
+  "title-meta-refresh": 3,
+  "quick-answer-refresh": 4,
+  "internal-link-refresh": 5,
+  "new-article-candidate": 6,
+  distribution: 7,
+  wait: 8,
 };
 
 const MIN_QUERY_ACTION_IMPRESSIONS = 3;
 const MIN_PAGE_INTERNAL_LINK_IMPRESSIONS = 20;
-const REPORT_SCHEMA_VERSION = 3;
+const REPORT_SCHEMA_VERSION = 4;
+const EXPECTED_GSC_SITE_URL = "sc-domain:wenlan.app";
 const ACQUISITION_PRIORITY_GROUPS = new Set([
   "AI knowledge base / wiki",
+]);
+const QUALIFIED_CLICK_GROUPS = new Set([
+  "AI knowledge base / wiki",
+  "MCP memory",
+  "Claude Code",
+  "Cursor/Codex workflows",
+  "Setup/troubleshooting",
+  "Comparisons",
+  "Obsidian/knowledge-base adjacent",
+  "Architecture/trust",
+  "AI work memory",
 ]);
 const ACQUISITION_PRIORITY_PAGE =
   /^\/(?:(?:zh-TW|zh-CN)\/)?learn(?:\/(?:ai-work-memory-vs-knowledge-base|source-backed-wiki-pages-ai-work|distilled-wiki-pages-ai-memory))?$/;
@@ -132,6 +145,7 @@ const GENERATED_SECTION_HEADINGS = new Set([
   "Umami Evidence",
   "Top Actions",
   "Query Action Queue",
+  "GSC Click Opportunity Queue",
   "Page Action Queue",
   "Do Not Write Yet Gate",
 ]);
@@ -218,6 +232,9 @@ function parseArgs(argv) {
       : null,
     gscMetadataPath: args["gsc-metadata"]
       ? resolve(process.cwd(), args["gsc-metadata"])
+      : null,
+    queryPagesPath: args["query-pages"]
+      ? resolve(process.cwd(), args["query-pages"])
       : null,
     date: args.date,
     outputPath: args.output
@@ -426,6 +443,117 @@ function extractEvidenceMetadata(queryRecords = [], pageRecords = [], gscMetadat
         ? "Generated from Google Search Console CSV exports. Raw exports stay outside git."
         : `Generated from ${source}. Raw exports stay outside git.`,
   };
+}
+
+function extractQueryPageEvidence(payload, evidence, gscMetadata) {
+  if (!payload) {
+    return {
+      hasData: false,
+      rows: [],
+      byQuery: new Map(),
+      byPage: new Map(),
+    };
+  }
+
+  if (payload.siteUrl !== EXPECTED_GSC_SITE_URL) {
+    throw new Error(
+      `GSC query-page property must be ${EXPECTED_GSC_SITE_URL}; received ${payload.siteUrl ?? "missing"}`,
+    );
+  }
+  if (
+    !Array.isArray(payload.dimensions) ||
+    payload.dimensions.length !== 2 ||
+    payload.dimensions[0] !== "query" ||
+    payload.dimensions[1] !== "page"
+  ) {
+    throw new Error('GSC query-page dimensions must be ["query", "page"]');
+  }
+  if (payload.responseAggregationType !== "byPage") {
+    throw new Error("GSC query-page responseAggregationType must be byPage");
+  }
+
+  const dateRange = `${String(payload.startDate ?? "").trim()} to ${String(payload.endDate ?? "").trim()}`;
+  if (dateRange !== evidence.dateRange) {
+    throw new Error(
+      `GSC query-page date range disagrees with report evidence: query-pages=${dateRange}; evidence=${evidence.dateRange}`,
+    );
+  }
+  if (String(payload.source ?? "").trim() !== evidence.source) {
+    throw new Error(
+      `GSC query-page source disagrees with report evidence: query-pages=${payload.source ?? "missing"}; evidence=${evidence.source}`,
+    );
+  }
+  if (!Array.isArray(payload.rows)) {
+    throw new Error("GSC query-page rows must be an array");
+  }
+  if (!Number.isInteger(payload.rowCount) || payload.rowCount !== payload.rows.length) {
+    throw new Error(
+      `GSC query-page row count disagrees with payload: rows=${payload.rows.length}; rowCount=${payload.rowCount ?? "missing"}`,
+    );
+  }
+  if (
+    Number.isInteger(gscMetadata?.queryPageRows) &&
+    gscMetadata.queryPageRows !== payload.rows.length
+  ) {
+    throw new Error(
+      `GSC query-page row count disagrees with metadata: rows=${payload.rows.length}; metadata=${gscMetadata.queryPageRows}`,
+    );
+  }
+
+  const seen = new Set();
+  const rows = payload.rows.map((row, index) => {
+    if (!Array.isArray(row.keys) || row.keys.length !== 2) {
+      throw new Error(`GSC query-page row ${index + 1} must contain query and page keys`);
+    }
+    const query = String(row.keys[0] ?? "").trim();
+    const page = toPath(String(row.keys[1] ?? "").trim());
+    if (!query || page === "-") {
+      throw new Error(`GSC query-page row ${index + 1} requires a non-empty query and page`);
+    }
+    const key = `${query}\u0000${page}`;
+    if (seen.has(key)) {
+      throw new Error(`GSC query-page rows contain duplicate mapping: ${query} -> ${page}`);
+    }
+    seen.add(key);
+
+    const clicks = parseGscMetric(row.clicks, "query-page", "clicks", {
+      integer: true,
+    });
+    const impressions = parseGscMetric(
+      row.impressions,
+      "query-page",
+      "impressions",
+      { integer: true },
+    );
+    const ctr = parseGscMetric(row.ctr, "query-page", "ctr");
+    const position = parseGscMetric(row.position, "query-page", "position");
+    if (impressions <= 0 || position <= 0 || clicks > impressions) {
+      throw new Error(`GSC query-page row ${index + 1} has invalid native metrics`);
+    }
+    if (Math.abs(ctr - clicks / impressions) > 1e-12) {
+      throw new Error(`GSC query-page row ${index + 1} CTR must equal clicks divided by impressions`);
+    }
+    return { query, page, clicks, impressions, ctr, position };
+  });
+
+  const byQuery = new Map();
+  const byPage = new Map();
+  for (const row of rows) {
+    byQuery.set(row.query, [...(byQuery.get(row.query) ?? []), row]);
+    byPage.set(row.page, [...(byPage.get(row.page) ?? []), row]);
+  }
+  const sortEvidenceRows = (candidates) =>
+    candidates.sort(
+      (a, b) =>
+        b.impressions - a.impressions ||
+        b.clicks - a.clicks ||
+        a.position - b.position ||
+        a.page.localeCompare(b.page),
+    );
+  for (const candidates of byQuery.values()) sortEvidenceRows(candidates);
+  for (const candidates of byPage.values()) sortEvidenceRows(candidates);
+
+  return { hasData: true, rows, byQuery, byPage };
 }
 
 function assertGscRows(records, label) {
@@ -850,6 +978,14 @@ function classifyQuery(query) {
 }
 
 function classifyQueryAction(row) {
+  if (row.mappingMismatch) {
+    return {
+      action: "query-page-review",
+      diagnosis:
+        "Observed GSC page differs from configured target. Inspect query intent, internal links, titles, and locale routing before editing.",
+    };
+  }
+
   if (row.page === "-") {
     return {
       action:
@@ -985,10 +1121,26 @@ function classifyPageAction(row) {
   };
 }
 
-function enrichQueries(rows) {
+function enrichQueries(rows, queryPageEvidence) {
   return rows.map((row) => {
     const classified = classifyQuery(row.query);
-    const enriched = { ...row, ...classified };
+    const observedPages = queryPageEvidence.byQuery.get(row.query) ?? [];
+    const observedPage = observedPages[0]?.page ?? "-";
+    const configuredTarget = classified.page;
+    const mappingMismatch =
+      observedPage !== "-" &&
+      configuredTarget !== "-" &&
+      !observedPages.some((candidate) => candidate.page === configuredTarget);
+    const enriched = {
+      ...row,
+      group: classified.group,
+      page: observedPage === "-" ? configuredTarget : observedPage,
+      configuredTarget,
+      observedPage,
+      observedPages,
+      queryPageEvidenceAvailable: queryPageEvidence.hasData,
+      mappingMismatch,
+    };
     return { ...enriched, ...classifyQueryAction(enriched) };
   });
 }
@@ -1016,15 +1168,35 @@ function isTopActionCandidate(row) {
   ) {
     return true;
   }
+  if (row.query) return false;
   return ACQUISITION_PRIORITY_PAGE.test(row.page ?? "");
 }
 
-function makeEvidenceFingerprint({ date, queries, pages, evidence, umami, vercel }) {
+function isProtectedAcquisitionQuery(query) {
+  const classified = classifyQuery(query);
+  if (ACQUISITION_PRIORITY_GROUPS.has(classified.group)) return true;
+  return (
+    classified.group === "Obsidian/knowledge-base adjacent" &&
+    /\bobsidian\b/i.test(query) &&
+    /\b(?:claude(?:\s+code)?|mcp)\b/i.test(query)
+  );
+}
+
+function makeEvidenceFingerprint({
+  date,
+  queries,
+  pages,
+  queryPages,
+  evidence,
+  umami,
+  vercel,
+}) {
   const payload = {
     reportSchemaVersion: REPORT_SCHEMA_VERSION,
     date,
     queries,
     pages,
+    queryPages: queryPages.rows,
     evidence,
     umami,
     vercel,
@@ -1034,7 +1206,15 @@ function makeEvidenceFingerprint({ date, queries, pages, evidence, umami, vercel
     .digest("hex")}`;
 }
 
-function makeMarkdown({ date, queries, pages, evidence, umami, vercel }) {
+function makeMarkdown({
+  date,
+  queries,
+  pages,
+  queryPages,
+  evidence,
+  umami,
+  vercel,
+}) {
   const evidenceMetadata =
     evidence ??
     extractEvidenceMetadata();
@@ -1082,6 +1262,7 @@ function makeMarkdown({ date, queries, pages, evidence, umami, vercel }) {
   const groups = groupTotals(queries);
   const rankedQueries = rankRows(queries);
   const rankedPages = rankRows(pages);
+  const clickOpportunities = makeClickOpportunities(pages, queryPages);
   const topActions = rankRows([...queries, ...pages])
     .filter((row) => row.action !== "wait" && isTopActionCandidate(row))
     .slice(0, 8);
@@ -1091,6 +1272,7 @@ function makeMarkdown({ date, queries, pages, evidence, umami, vercel }) {
     date,
     queries,
     pages,
+    queryPages,
     evidence: evidenceMetadata,
     umami: umamiSummary,
     vercel: vercelSummary,
@@ -1150,9 +1332,14 @@ ${topActions.length ? topActions.map((row, index) => `${index + 1}. **${row.acti
 
 ## Query Action Queue
 
-| Query | Query group | Current page | Impressions | Clicks | CTR | Avg position | Recommended action | Diagnosis |
-| --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- |
+${queryPages.hasData
+    ? `| Query | Query group | Observed GSC page | Configured target | Impressions | Clicks | CTR | Avg position | Recommended action | Diagnosis |
+| --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- |`
+    : `| Query | Query group | Current page | Impressions | Clicks | CTR | Avg position | Recommended action | Diagnosis |
+| --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- |`}
 ${rankedQueries.map(queryRow).join("\n")}
+
+${queryPages.hasData ? makeClickOpportunityMarkdown(clickOpportunities) : ""}
 
 ## Page Action Queue
 
@@ -1455,8 +1642,115 @@ function groupTotals(rows) {
   return [...totals.values()].sort((a, b) => b.impressions - a.impressions);
 }
 
+function makeClickOpportunities(pages, queryPageEvidence) {
+  const movePriority = new Map([
+    ["query-page-review", 1],
+    ["title-meta-refresh", 2],
+    ["serp-intent-review", 3],
+    ["internal-link-refresh", 4],
+    ["evidence-gap-review", 5],
+  ]);
+
+  return pages
+    .filter((page) => page.impressions > 0 && page.action !== "technical-check")
+    .map((page) => {
+      const observedRows = queryPageEvidence.byPage.get(page.page) ?? [];
+      const visibleQualifiedRows = observedRows.filter(
+        (row) =>
+          row.clicks === 0 &&
+          QUALIFIED_CLICK_GROUPS.has(classifyQuery(row.query).group),
+      );
+      const mismatchedRows = visibleQualifiedRows.filter((row) => {
+        const configuredTarget = classifyQuery(row.query).page;
+        return configuredTarget !== "-" && configuredTarget !== page.page;
+      });
+      const visibleQualifiedImpressions = visibleQualifiedRows.reduce(
+        (sum, row) => sum + row.impressions,
+        0,
+      );
+      const campaignLane =
+        ACQUISITION_PRIORITY_PAGE.test(page.page) ||
+        visibleQualifiedRows.some((row) => isProtectedAcquisitionQuery(row.query))
+          ? "eligible"
+          : "measuring-only";
+
+      let nextMove = "evidence-gap-review";
+      let diagnosis =
+        "Page impressions are present, but qualified zero-click query evidence is hidden or absent. Inspect the privacy-visible join before editing.";
+      if (mismatchedRows.length > 0) {
+        nextMove = "query-page-review";
+        diagnosis =
+          "A visible qualified query lands on a different page than its configured target. Resolve intent and internal-link routing before editing copy.";
+      } else if (visibleQualifiedImpressions > 0 && page.position >= 8 && page.position <= 30) {
+        nextMove = "title-meta-refresh";
+        diagnosis =
+          "Visible qualified demand is in striking distance with zero query clicks. Review title, description, and first answer.";
+      } else if (visibleQualifiedImpressions > 0 && page.position < 8) {
+        nextMove = "serp-intent-review";
+        diagnosis =
+          "Visible qualified demand ranks on page one but earns no query clicks. Inspect SERP intent and snippet alignment.";
+      } else if (visibleQualifiedImpressions > 0) {
+        nextMove = "internal-link-refresh";
+        diagnosis =
+          "Visible qualified demand ranks beyond striking distance with zero query clicks. Strengthen relevant internal links before rewriting copy.";
+      }
+
+      return {
+        ...page,
+        visibleQualifiedRows,
+        visibleQualifiedImpressions,
+        campaignLane,
+        nextMove,
+        diagnosis,
+      };
+    })
+    .filter(
+      (row) =>
+        row.visibleQualifiedImpressions > 0 ||
+        (row.clicks === 0 && row.position <= 30),
+    )
+    .sort(
+      (a, b) =>
+        (a.campaignLane === "eligible" ? 0 : 1) -
+          (b.campaignLane === "eligible" ? 0 : 1) ||
+        (movePriority.get(a.nextMove) ?? 99) -
+          (movePriority.get(b.nextMove) ?? 99) ||
+        b.visibleQualifiedImpressions - a.visibleQualifiedImpressions ||
+        b.impressions - a.impressions ||
+        a.page.localeCompare(b.page),
+    );
+}
+
+function makeClickOpportunityMarkdown(rows) {
+  const tableRows = rows.slice(0, 12).map((row, index) => {
+    const observedQueries = row.visibleQualifiedRows
+      .slice(0, 3)
+      .map((candidate) => `\`${escapePipe(candidate.query)}\` (${candidate.impressions})`)
+      .join("<br>");
+    return `| ${index + 1} | ${formatPage(row.page)} | ${row.campaignLane} | ${row.impressions} | ${row.clicks} | ${pct(row.clicks, row.impressions)} | ${oneDecimal(row.position)} | ${row.visibleQualifiedImpressions} | ${observedQueries || "-"} | ${row.nextMove} | ${row.diagnosis} |`;
+  });
+
+  return `## GSC Click Opportunity Queue
+
+Deterministic order: protected AI knowledge-base/wiki and modifier-qualified Obsidian acquisition rows first; within each lane, zero-click query-page mismatches precede striking-distance pages, page-one snippet reviews, internal-link candidates, and evidence gaps. Existing generic-memory cohorts remain \`measuring-only\`; \`Brand/entity\` and unclassified \`Other\` rows remain visible in the full query table but do not nominate this queue. Metrics remain in native GSC units; this is not a forecast or composite score.
+
+| Rank | Page | Campaign lane | Page impressions | Page clicks | Page CTR | Avg position | Qualified zero-click query impressions | Observed visible queries | Next move | Why |
+| ---: | --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+${tableRows.join("\n") || "| - | - | - | 0 | 0 | 0.00% | 0.0 | 0 | - | wait | No zero-click page opportunity is visible. |"}`;
+}
+
 function queryRow(row) {
+  if (row.queryPageEvidenceAvailable) {
+    return `| \`${escapePipe(row.query)}\` | ${row.group} | ${formatObservedPages(row.observedPages)} | ${formatPage(row.configuredTarget)} | ${row.impressions} | ${row.clicks} | ${pct(row.clicks, row.impressions)} | ${oneDecimal(row.position)} | ${row.action} | ${row.diagnosis} |`;
+  }
   return `| \`${escapePipe(row.query)}\` | ${row.group} | ${formatPage(row.page)} | ${row.impressions} | ${row.clicks} | ${pct(row.clicks, row.impressions)} | ${oneDecimal(row.position)} | ${row.action} | ${row.diagnosis} |`;
+}
+
+function formatObservedPages(rows) {
+  if (!rows.length) return "-";
+  return rows
+    .map((row) => `${formatPage(row.page)}${rows.length > 1 ? ` (${row.impressions})` : ""}`)
+    .join("<br>");
 }
 
 function pageRow(row) {
@@ -1489,6 +1783,7 @@ async function run() {
     vercelReferrerRecords,
     vercelMetadata,
     gscMetadata,
+    queryPagesPayload,
   ] = await Promise.all([
     readFile(args.queriesPath, "utf8"),
     readFile(args.pagesPath, "utf8"),
@@ -1499,12 +1794,18 @@ async function run() {
     readOptionalCsv(args.vercelReferrersPath),
     readOptionalJson(args.vercelMetadataPath),
     readOptionalJson(args.gscMetadataPath),
+    readOptionalJson(args.queryPagesPath),
   ]);
 
   const queryRecords = parseCsv(queryText);
   const pageRecords = parseCsv(pageText);
   const evidence = extractEvidenceMetadata(queryRecords, pageRecords, gscMetadata);
-  const queries = enrichQueries(queryRecords.map(normalizeQuery));
+  const queryPages = extractQueryPageEvidence(
+    queryPagesPayload,
+    evidence,
+    gscMetadata,
+  );
+  const queries = enrichQueries(queryRecords.map(normalizeQuery), queryPages);
   const pages = enrichPages(pageRecords.map(normalizePage));
   const umami = summarizeUmami({
     pageRecords: umamiPageRecords,
@@ -1516,7 +1817,15 @@ async function run() {
     referrerRecords: vercelReferrerRecords,
     metadata: vercelMetadata,
   });
-  let markdown = makeMarkdown({ date: args.date, queries, pages, evidence, umami, vercel });
+  let markdown = makeMarkdown({
+    date: args.date,
+    queries,
+    pages,
+    queryPages,
+    evidence,
+    umami,
+    vercel,
+  });
 
   await mkdir(dirname(args.outputPath), { recursive: true });
   try {

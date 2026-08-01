@@ -3683,3 +3683,465 @@ increase for that experiment.
 - Decision: wait
 - Next step: Keep the production slot open for a non-overlapping evidence-gated candidate. Do not repeat the five indexing requests. At the predeclared readouts, keep property totals, visible-query totals, target-page rows, Vercel observations, authenticated Umami events, and GitHub stars in their native units; mark exposure below 10 target-page GSC impressions inconclusive.
 <!-- EXPERIMENT-RECORD:END -->
+
+### 2026-07-31T23:54:43Z — GSC target expansion approval
+
+- Record type: campaign-contract-update
+- Contract status: approved by the user in this Codex task
+- Deadline: unchanged at 2026-08-18
+- Final window: unchanged at the 28 complete days ending 2026-08-17
+- GSC property-click target: 100
+- GSC property-impression target: 10,000
+- Other targets: GitHub stars and Vercel visitors unchanged
+- Metric definitions: GSC rolling-28-day property clicks and property
+  impressions from `sc-domain:wenlan.app`; property totals remain separate
+  from visible-query totals and the query visibility gap
+- External actions: none
+- Next step: protect the expanded targets in `pnpm seo:goal:check`, then build
+  the next action queue around authenticated GSC click and impression growth.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-01-zhtw-llm-wiki-v2-refresh
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-01-zhtw-llm-wiki-v2-refresh
+- Status: active
+- Data window: 2026-08-01..2026-08-07
+- Asset class: refresh
+- Launched: 2026-08-01
+- Hypothesis: Refreshing the existing zh-TW LLM Wiki article with the
+  maintained Karpathy and LLM Wiki v2 concept, architecture, RAG and Obsidian
+  boundaries, setup, verification, and failure-repair answer will move
+  qualified Traditional Chinese LLM-wiki exposure from the homepage toward
+  the article and earn at least one target-page click without creating a new
+  URL.
+- Candidate evidence: Authenticated GSC for `2026-07-03..2026-07-30` maps
+  the exact visible query `llm wiki 2.0` to `/zh-TW` with 1 impression,
+  0 clicks, and position 13. The zh-TW homepage has 9 impressions, 1 click,
+  and page-average position 5.9. The localized LLM Wiki article has no
+  privacy-visible page row, remains the older four-section version, and lacks
+  the Karpathy and LLM Wiki v2 maintained references present in the English
+  and zh-CN guides. The exact query is clear high intent; the existing route
+  has a clean partial-coverage gap; Wenlan can prove the workflow with six
+  maintained commands; and the standalone architecture and verification
+  answer passes the full candidate gate. The deployed technical audit passes,
+  so the mismatch is not a technical-indexability defect.
+- Baseline: GSC property totals are 10 clicks and 660 impressions;
+  visible-query totals are 2 clicks and 111 impressions; the query visibility
+  gap is 8 clicks and 549 impressions. The exact `llm wiki 2.0` query-page
+  row is 1 impression, 0 clicks, and position 13 on `/zh-TW`. No localized
+  target-page row is visible and is not reported as zero. Same-range Vercel
+  and GitHub observations remain separate and are not used to infer
+  source-to-page sessions or causality.
+- Change: Refresh only
+  `/zh-TW/learn/distilled-wiki-pages-ai-memory` in idiomatic Traditional
+  Chinese. Preserve the existing URL, original `datePublished: 2026-07-04`,
+  locale availability, canonical, sitemap, reciprocal hreflang, Article and
+  BreadcrumbList schema, and visible FAQ without `FAQPage`. Add no new URL
+  and make no homepage change in this experiment.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 5 target-page GSC impressions in one complete
+  post-deploy readout window
+- Success criteria: At the W2 readout, the target has at least 5 GSC
+  impressions and at least 1 GSC click, while the deployed technical and
+  locale floor remains green.
+- Failure criteria: At the W4 readout, at least 20 target-page GSC impressions
+  have accumulated with zero target-page clicks, or a reliable complete
+  post-deploy window shows the visible qualified intent continuing to land
+  only on `/zh-TW` after Google has recrawled the refreshed article.
+- Stop criteria: Stop for a canonical, hreflang, sitemap, indexability,
+  structured-data, source-accuracy, unsupported-locale, visible-FAQ, CJK
+  rendering, or standalone-utility regression.
+- 24h readout: pending
+- 7d readout: pending
+- W2 readout: pending
+- W4 readout: pending
+- W8 readout: pending
+- Result: pending
+- Decision: wait
+- Next step: Prepare and verify the bounded local refresh. Stop before push,
+  PR, merge, deploy, repeat indexing, GSC validation, or external publication.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-01T02:24:46Z — v0.15.2 release alignment prepared
+
+- Record type: campaign-observation
+- Technical correction: `TECH-2026-08-01-release-v0.15.2-alignment`
+- Status: local preparation
+- Source evidence: immutable Wenlan tag `v0.15.2` and GitHub release
+  `https://github.com/7xuanlu/wenlan/releases/tag/v0.15.2` are dated
+  `2026-07-31`; the release publishes native Windows x64, macOS Apple
+  Silicon, Linux x64, and Linux ARM64 archives. The tagged changelog records
+  the setup repair guard and test-config isolation in `v0.15.2`, plus the
+  Space Brief workflow and source-truth work in `v0.15.1`.
+- Defect: website release metadata, localized download/get-started/about
+  copy, About OG copy, changelog/security docs, and sitemap freshness still
+  identify `v0.15.0`.
+- Change boundary: align those factual public surfaces to `v0.15.2`, its
+  immutable assets, and `2026-07-31`. Preserve URLs, canonical/hreflang,
+  schema types, locale availability, and the active zh-TW LLM Wiki
+  experiment's attribution.
+- Metric role: technical and release accuracy only; do not attribute GSC,
+  Vercel, Umami, GitHub, download, or star movement to this correction.
+- External actions: none. Push, PR, merge, deploy, indexing, validation, and
+  external publication remain approval-gated.
+- Evidence:
+  `docs/seo-audits/2026-08-01-v0.15.2-release-alignment.md`
+- Next step: verify immutable asset availability, release contracts,
+  localized content, build output, and rendered release surfaces before
+  requesting publication approval.
+
+### 2026-08-01T02:37:50Z — due seven-day cohort evidence
+
+- Record type: campaign-observation
+- Evidence reuse: the completed authenticated weekly result at
+  `/tmp/wenlan-seo/2026-07-31-click-priority.md`; no GSC or Vercel pipeline
+  was rerun for this readout.
+- Evidence range: `2026-07-03..2026-07-30` for both authenticated GSC and
+  Vercel Web Analytics. This rolling range overlaps pre-deploy dates and, for
+  the 2026-07-24 and 2026-07-25 changes, does not contain seven complete
+  post-deploy dates. It is current aggregate evidence, not a causal cohort.
+- GSC property totals: 10 clicks, 660 impressions, 1.52% CTR, and average
+  position 10.3. Visible-query totals: 2 clicks and 111 impressions. Query
+  visibility gap: 8 clicks and 549 impressions. These remain separate.
+- Vercel raw totals: 1,468 visitors and 1,745 pageviews. Direct referrer row:
+  307 visitors and 457 pageviews. Qualified-source referrer row aggregate:
+  1,163 visitors and 1,286 pageviews, not deduplicated and not joined to page
+  rows. Acquisition-surface page rows are reported per experiment below and
+  are not summed as unique visitors.
+- Umami: authenticated custom-event observations remain account-gated; no CTA
+  baseline or event count is invented.
+- GitHub: the public REST repository record reported 46 total stars at this
+  observation time.
+- Indexing: the sitemap API reports 113 submitted web URLs, zero warnings,
+  zero errors, and last download `2026-07-31T08:54:03.875Z`. No new target
+  URL Inspection read was performed, and a missing GSC page row is not called
+  unindexed.
+- Technical floor: the current deployed audit passes robots, 113 sitemap
+  URLs, 17 key pages, six utility noindex headers, sitemap-wide `FAQPage`
+  absence, 25 redirects, six bridge-host redirects, and legacy exclusions.
+- Interpretation: no experiment below is called successful or failed from
+  this overlapping range. Apply its immutable minimum exposure and final
+  evaluation timing at the later due readout.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-23-zhtw-obsidian-localization at 2026-08-01T02:37:50Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-23-zhtw-obsidian-localization
+- Observed at: 2026-08-01T02:37:50Z
+- Readout: 7d
+- Status: measuring
+- Evidence: The authenticated GSC page export has no privacy-visible row for
+  `/zh-TW/learn/wenlan-vs-obsidian-ai-memory`, and the joined query-page export
+  has no row; neither is reported as zero or an indexing state. Vercel reports
+  2 visitors and 3 pageviews for the target. The route's deployed technical
+  and unsupported-zh-CN 404 floor remains green through the shared audit.
+- Minimum exposure: not established; the required 5 GSC page impressions are
+  not visible.
+- Result: pending
+- Decision: wait
+- Next step: Reassess at W2 with a later complete GSC range; do not translate
+  to zh-CN or repeat indexing from this absence.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-ai-work-memory-knowledge-base-refresh at 2026-08-01T02:37:50Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-ai-work-memory-knowledge-base-refresh
+- Observed at: 2026-08-01T02:37:50Z
+- Readout: 7d
+- Status: measuring
+- Evidence: GSC reports 1 click, 16 impressions, and average position 6.8 for
+  `/learn/ai-work-memory-vs-knowledge-base`; no privacy-visible query-page row
+  is joined to the target. Vercel reports 6 visitors and 6 pageviews. The
+  click remains unattributed to a visible query and the range overlaps the
+  pre-refresh period.
+- Minimum exposure: not reached; 16 target-page impressions are below 20.
+- Result: pending
+- Decision: wait
+- Next step: Keep the existing URL unchanged and apply the 20-impression guard
+  at W2 or the next complete post-deploy range.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-llm-wiki-category-refresh at 2026-08-01T02:37:50Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-llm-wiki-category-refresh
+- Observed at: 2026-08-01T02:37:50Z
+- Readout: 7d
+- Status: measuring
+- Evidence: GSC reports 0 clicks, 5 impressions, and average position 6.2 for
+  `/learn/distilled-wiki-pages-ai-memory`, with no joined visible query row.
+  Vercel reports 11 visitors and 15 pageviews. The separate visible
+  `llm wiki 2.0` row has 1 impression on `/zh-TW`, not this English page, and
+  is not used as target-page exposure.
+- Minimum exposure: not reached; 5 target-page impressions are below 10.
+- Result: pending
+- Decision: wait
+- Next step: Continue the English route's W2 measurement separately from the
+  new zh-TW refresh; do not merge their evidence or infer a locale effect.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-mcp-shared-memory-exposure at 2026-08-01T02:37:50Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-mcp-shared-memory-exposure
+- Observed at: 2026-08-01T02:37:50Z
+- Readout: 7d
+- Status: measuring
+- Evidence: The target `/learn/cursor-claude-code-shared-memory` has 0 GSC
+  clicks, 9 impressions, and average position 19.1, with no joined visible
+  query row; Vercel reports 2 visitors and 3 pageviews. The linking source
+  `/learn/mcp-memory-server` separately has 0 GSC clicks, 15 impressions,
+  average position 7.1, and 295 Vercel visitors with 298 pageviews. No
+  source-to-target session or causal join is inferred.
+- Minimum exposure: not reached; 9 target-page impressions are below 10.
+- Result: pending
+- Decision: wait
+- Next step: Reassess the target at W2 while preserving the single useful
+  internal link and the source/target metric separation.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-stale-ai-memory-diagnostic at 2026-08-01T02:37:50Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-stale-ai-memory-diagnostic
+- Observed at: 2026-08-01T02:37:50Z
+- Readout: 7d
+- Status: measuring
+- Evidence: The authenticated GSC page and joined query-page exports have no
+  privacy-visible row for `/learn/review-before-trust-ai-memory`; absence is
+  not reported as zero or unindexed. Vercel reports 4 visitors and 6
+  pageviews. The technical floor remains green.
+- Minimum exposure: not established; the required 5 GSC page impressions are
+  not visible.
+- Result: pending
+- Decision: wait
+- Next step: Keep the diagnostic measuring until a later GSC row or the W2
+  readout; do not nominate more generic memory content from this absence.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-claude-mem-comparison-refresh at 2026-08-01T02:37:50Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-claude-mem-comparison-refresh
+- Observed at: 2026-08-01T02:37:50Z
+- Readout: 7d
+- Status: measuring
+- Evidence: GSC reports 0 clicks, 27 impressions, and average position 13.1
+  for `/learn/wenlan-vs-claude-mem`. Qualified joined visible rows contribute
+  5 impressions and 0 clicks; unrelated `mem.ai changelog` remains outside
+  that qualified subtotal. Vercel reports 3 visitors and 5 pageviews.
+- Minimum exposure: reached in the overlapping aggregate range, but a
+  complete seven-day post-deploy GSC cohort is unavailable and W4 evaluation
+  is not due.
+- Result: pending
+- Decision: wait
+- Next step: Preserve the page and evaluate the immutable neutral band at W2
+  and W4; do not stack another comparison rewrite now.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-24-superlocalmemory-comparison-refresh at 2026-08-01T02:37:50Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-24-superlocalmemory-comparison-refresh
+- Observed at: 2026-08-01T02:37:50Z
+- Readout: 7d
+- Status: measuring
+- Evidence: GSC reports 0 clicks, 42 impressions, and average position 7.7
+  for `/learn/wenlan-vs-superlocal-memory`; the joined qualified row
+  `super local memory` contributes 1 impression and 0 clicks. Vercel reports
+  10 visitors and 12 pageviews.
+- Minimum exposure: reached in the overlapping aggregate range, but a
+  complete seven-day post-deploy GSC cohort is unavailable and W4 evaluation
+  is not due.
+- Result: pending
+- Decision: wait
+- Next step: Inspect SERP/snippet intent at W2 without changing the current
+  source-backed comparison or treating page-one average position as success.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-25-basic-memory-comparison-refresh at 2026-08-01T02:37:50Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-25-basic-memory-comparison-refresh
+- Observed at: 2026-08-01T02:37:50Z
+- Readout: 7d
+- Status: measuring
+- Evidence: GSC reports 1 click, 60 impressions, and average position 11.2
+  for `/learn/wenlan-vs-basic-memory`. Qualified joined visible rows
+  `basic memory` and `basicmemory` contribute 8 impressions and 0 clicks;
+  the page click is outside those rows and remains unattributed. Vercel
+  reports 6 visitors and 8 pageviews.
+- Minimum exposure: reached in the overlapping aggregate range, but the range
+  does not contain seven complete post-deploy dates and the page click cannot
+  be assigned to the refresh or a visible query.
+- Result: pending
+- Decision: wait
+- Next step: Preserve the current comparison and evaluate at W2/W4 using a
+  later complete range; do not claim early SEO success.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-25-ai-agent-memory-types at 2026-08-01T02:37:50Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-25-ai-agent-memory-types
+- Observed at: 2026-08-01T02:37:50Z
+- Readout: 7d
+- Status: measuring
+- Evidence: GSC reports 0 clicks, 7 impressions, and average position 22.4
+  for `/learn/ai-agent-memory-types`; two joined visible rows contribute 2
+  impressions and 0 clicks. Vercel reports 2 visitors and 2 pageviews. The
+  route remains distinct from Wenlan capture metadata and the technical floor
+  remains green.
+- Minimum exposure: reached in the overlapping aggregate range, but the range
+  ends before seven complete post-deploy dates and no early success is called.
+- Result: pending
+- Decision: wait
+- Next step: Apply the original taxonomy and overlap checks at W2, using a
+  later complete GSC range before any result judgment.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-25-context-loss-diagnostic-refresh at 2026-08-01T02:37:50Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-25-context-loss-diagnostic-refresh
+- Observed at: 2026-08-01T02:37:50Z
+- Readout: 7d
+- Status: measuring
+- Evidence: GSC reports 0 clicks, 3 impressions, and average position 9.7 for
+  `/learn/ai-coding-agent-loses-context`, with no joined visible query row.
+  Vercel reports 3 visitors and 4 pageviews. The current aggregate preserves
+  the diagnostic's separation from Claude Code memory and handoff pages.
+- Minimum exposure: not reached; 3 target-page impressions are below 5.
+- Result: pending
+- Decision: wait
+- Next step: Keep the diagnostic unchanged and reassess at W2 with the
+  original 5-impression minimum.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-01T02:56:04Z — zh-TW LLM Wiki v2 local preparation verified
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-01-zhtw-llm-wiki-v2-refresh`
+- Status: local-prepared
+- Change: The existing zh-TW LLM Wiki route now carries the maintained
+  seven-section architecture, RAG/Obsidian boundary, setup, verification,
+  six-command workflow, failure-repair, and when-not-needed answer. It keeps
+  the original URL and publication date, four visible FAQs without
+  `FAQPage`, and maintained Wenlan, Karpathy, and LLM Wiki v2 sources.
+- Verification: Goal contract pass; SEO tests 202/202; i18n tests 57/57;
+  TypeScript pass; production build pass with 214 static pages; built SEO and
+  locale technical gates pass; mobile and desktop visual QA pass without
+  document overflow or browser errors.
+- Typography: Align the localized site with the App's Fraunces/Instrument Sans
+  design and native CJK fallback model. Prefer PingFang plus Songti on macOS,
+  preserve Microsoft and Noto fallbacks for Windows/Linux, and add no CJK
+  runtime dependency. A rejected self-hosted Noto CJK trial generated 429
+  font files and 21 MB of media, with roughly 2.6–4.1 MB of sampled page font
+  resources; the final build contains 14 font files and 480 KB of media.
+- Publish date: not-published
+- Index date: not-indexed
+- Result: pending
+- Decision: publication approval required
+- Next step: After explicit approval, publish the bounded local package and
+  record the production completion time before starting its 24-hour clock.
+  Do not repeat indexing requests or submit GSC validation without a matching
+  new coverage condition.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-30-knowledge-base-locales-refresh at 2026-08-01T03:01:49Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-30-knowledge-base-locales-refresh
+- Observed at: 2026-08-01T03:01:49Z
+- Readout: 24h
+- Status: measuring
+- Evidence: Production completed at `2026-07-30T07:59:58Z`. The current
+  deployed audit passes robots, 113 sitemap URLs, 17 key pages, six utility
+  noindex headers, sitemap-wide `FAQPage` absence, 25 redirects, six bridge
+  redirects, and legacy exclusions. Targeted live checks pass all six changed
+  English, zh-TW, and zh-CN Learn hubs and source-backed article routes: each
+  returns direct `200`, exact self-canonical, `index, follow`, reciprocal
+  English/zh-TW/zh-CN/x-default alternates, its expected CollectionPage or
+  Article plus BreadcrumbList schema, visible AI-knowledge-base/LLM-wiki
+  wording, the article six-command workflow and stable dates, and no
+  `FAQPage`. Authenticated GSC for `2026-07-03..2026-07-30` reports property
+  totals of 10 clicks and 660 impressions; visible-query totals of 2 clicks
+  and 111 impressions; and a visibility gap of 8 clicks and 549 impressions.
+  Changed-page rows separately report `/learn` at 0 clicks/120 impressions,
+  English source-backed at 0/4, zh-TW source-backed at 0/1, and zh-CN
+  source-backed at 0/1; the two localized Learn hubs have no privacy-visible
+  page row and are not reported as zero. The four visible query-page rows on
+  those page-visible targets total 0 clicks/7 impressions, leaving a 119-
+  impression known-row visibility gap; the report's qualified acquisition
+  join is separately 0 clicks/3 impressions on `/learn`. Vercel reports raw
+  totals of 1,468 visitors/1,745 pageviews, direct at 307/457, and a non-
+  deduplicated qualified-source row aggregate of 1,163/1,286. Target-page
+  rows remain separate: `/learn` 105/110, English source-backed 9/9, zh-TW
+  Learn 5/5, zh-TW source-backed 4/4, zh-CN Learn 5/5, and zh-CN source-
+  backed 6/7; their 134-visitor/140-pageview row sum is not unique visitors
+  and has no source join. Authenticated Umami events remain account-gated;
+  GitHub separately reports 46 stars. The five approved GSC indexing requests
+  were not repeated, and their earlier queue acceptance is not a new crawl.
+- Minimum exposure: not assessable yet. The range is mostly pre-deploy and
+  includes only the partial post-deploy portion of `2026-07-30`, so it is not
+  the required complete post-deploy window even though its overlapping known
+  target-page subtotal exceeds 10 impressions.
+- Result: pending
+- Decision: wait
+- Next step: Preserve the six routes and run the 7-day readout after
+  `2026-08-06T07:59:58Z` with a later authenticated complete range. Do not
+  repeat indexing, submit GSC validation, infer source-to-page sessions, or
+  treat the current page-average positions as exact-query ranks.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-01T03:21:16Z — Chinese heading typography correction
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-01-zhtw-llm-wiki-v2-refresh`
+- Status: local-prepared
+- Observation: Rendered review found the Songti heading fallback visually too
+  close to a Ming-style newspaper face and inconsistent with the surrounding
+  product interface.
+- Change: Retain Fraunces for Latin terms inside display headings, but render
+  Traditional and Simplified Chinese heading glyphs with the same native sans
+  stacks used by body copy: PingFang on macOS, Microsoft JhengHei/YaHei on
+  Windows, and Noto Sans CJK fallbacks on Linux. No CJK webfont was added.
+- Publish date: not-published
+- Result: pending rendered verification
+- Decision: replace the prior local Songti preference before publication
+- Next step: Run the i18n, production-build, rendered mobile/desktop, technical
+  SEO, and Goal contract gates before requesting publication approval.
+
+### 2026-08-01T03:24:50Z — Chinese heading correction verified
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-01-zhtw-llm-wiki-v2-refresh`
+- Status: local-prepared
+- Verification: i18n tests pass 57/57; SEO tests pass 202/202 with explicit
+  Wenlan and wenlan-app source roots; production build passes with 214 static
+  pages; built technical SEO passes with 26 redirects, seven noindex routes,
+  113 sitemap URLs, 17 required pages, and no `FAQPage` across 117 HTML pages;
+  Goal contract and diff checks pass. Ten rendered captures cover four zh-TW
+  and zh-CN surfaces at `393x852` and `1440x1100`. Computed heading stacks are
+  Fraunces plus PingFang TC/SC, every document has equal client and scroll
+  widths, and no browser console or page errors were observed.
+- Evidence: `/private/tmp/wenlan-cjk-sans-heading-visual-qa-2026-08-01/evidence.json`
+- Publish date: not-published
+- Result: local verification passed
+- Decision: keep the native CJK sans heading correction in the unpublished
+  package
+- Next step: Request publication approval for the already bounded package; do
+  not push, merge, or deploy under the current approval state.

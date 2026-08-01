@@ -2493,6 +2493,124 @@ test("seo weekly generator turns GSC exports into a ranked Markdown action repor
   }
 });
 
+test("seo weekly generator separates observed query pages from configured targets", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-seo-query-page-"));
+  try {
+    const queriesPath = join(outputRoot, "gsc-queries.csv");
+    const pagesPath = join(outputRoot, "gsc-pages.csv");
+    const metadataPath = join(outputRoot, "gsc-metadata.json");
+    const queryPagesPath = join(outputRoot, "gsc-query-pages.json");
+    const outputPath = join(outputRoot, "2026-07-31-weekly-seo.md");
+
+    await Promise.all([
+      writeFile(
+        queriesPath,
+        [
+          "Query,Clicks,Impressions,CTR,Position,Start date,End date,Source",
+          "llm wiki 2.0,0,3,0%,13.0,2026-07-03,2026-07-30,Search Console API",
+        ].join("\n"),
+        "utf8",
+      ),
+      writeFile(
+        pagesPath,
+        [
+          "Page,Clicks,Impressions,CTR,Position,Start date,End date,Source",
+          "https://wenlan.app/zh-TW,0,3,0%,13.0,2026-07-03,2026-07-30,Search Console API",
+        ].join("\n"),
+        "utf8",
+      ),
+      writeFile(
+        metadataPath,
+        JSON.stringify({
+          siteUrl: "sc-domain:wenlan.app",
+          startDate: "2026-07-03",
+          endDate: "2026-07-30",
+          source: "Search Console API",
+          queryRows: 1,
+          pageRows: 1,
+          queryPageRows: 1,
+          propertyTotals: {
+            clicks: 0,
+            impressions: 3,
+            ctr: 0,
+            position: 13,
+            aggregationType: "byProperty",
+          },
+        }),
+        "utf8",
+      ),
+      writeFile(
+        queryPagesPath,
+        JSON.stringify({
+          siteUrl: "sc-domain:wenlan.app",
+          startDate: "2026-07-03",
+          endDate: "2026-07-30",
+          source: "Search Console API",
+          dimensions: ["query", "page"],
+          nativeUnits: {
+            clicks: "clicks",
+            impressions: "impressions",
+            ctr: "ratio",
+            position: "average position",
+          },
+          responseAggregationType: "byPage",
+          rowCount: 1,
+          rows: [
+            {
+              keys: ["llm wiki 2.0", "https://wenlan.app/zh-TW"],
+              clicks: 0,
+              impressions: 3,
+              ctr: 0,
+              position: 13,
+            },
+          ],
+        }),
+        "utf8",
+      ),
+    ]);
+
+    await execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly.mjs"),
+        "--",
+        "--queries",
+        queriesPath,
+        "--pages",
+        pagesPath,
+        "--gsc-metadata",
+        metadataPath,
+        "--query-pages",
+        queryPagesPath,
+        "--date",
+        "2026-07-31",
+        "--output",
+        outputPath,
+      ],
+      { cwd: repoRoot },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+    assert.match(
+      report,
+      /\| Query \| Query group \| Observed GSC page \| Configured target \|/,
+    );
+    assert.match(
+      report,
+      /\| `llm wiki 2\.0` \| AI knowledge base \/ wiki \| `\/zh-TW` \| `\/learn\/distilled-wiki-pages-ai-memory` \|/,
+    );
+    assert.match(report, /Observed GSC page differs from configured target/);
+    assert.match(report, /## GSC Click Opportunity Queue/);
+    assert.match(report, /`\/zh-TW` \| eligible .*`llm wiki 2\.0`/);
+    assert.doesNotMatch(
+      report,
+      /\| `llm wiki 2\.0` \| AI knowledge base \/ wiki \| `\/learn\/distilled-wiki-pages-ai-memory` \| 3 \|/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
 test("seo weekly report separates property totals from visible query and page rows", async () => {
   const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-property-totals-"));
   try {
@@ -2525,6 +2643,115 @@ test("seo weekly report separates property totals from visible query and page ro
     assert.match(report, /\| Query visibility gap \| 2 clicks; 1 impressions \|/);
     assert.match(report, /\| Visible page table clicks \| 1 \|/);
     assert.match(report, /\| Visible page table impressions \| 99 \|/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly pipeline automatically consumes authenticated query-page evidence", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-seo-query-page-pipeline-"));
+  try {
+    const inputDir = join(outputRoot, "input");
+    const outputPath = join(outputRoot, "2026-06-07-weekly-seo.md");
+    await writePipelineGscInput(inputDir, { queryPageRows: 1 });
+    await writeFile(
+      join(inputDir, "gsc-query-pages.json"),
+      JSON.stringify({
+        siteUrl: "sc-domain:wenlan.app",
+        startDate: "2026-05-10",
+        endDate: "2026-06-06",
+        source: "Search Console API",
+        dimensions: ["query", "page"],
+        nativeUnits: {
+          clicks: "clicks",
+          impressions: "impressions",
+          ctr: "ratio",
+          position: "average position",
+        },
+        responseAggregationType: "byPage",
+        rowCount: 1,
+        rows: [
+          {
+            keys: ["claude code memory", "https://wenlan.app/learn"],
+            clicks: 0,
+            impressions: 12,
+            ctr: 0,
+            position: 12.4,
+          },
+        ],
+      }),
+      "utf8",
+    );
+
+    await execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly-pipeline.mjs"),
+        "--",
+        "--input-dir",
+        inputDir,
+        "--date",
+        "2026-06-07",
+        "--output",
+        outputPath,
+      ],
+      { cwd: repoRoot },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+    assert.match(
+      report,
+      /\| `claude code memory` \| Claude Code \| `\/learn` \| `\/learn\/claude-code-memory` \|/,
+    );
+    assert.match(report, /Observed GSC page differs from configured target/);
+    assert.match(report, /## GSC Click Opportunity Queue/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly generator rejects a stale query-page evidence range", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-seo-stale-query-page-"));
+  try {
+    const inputDir = join(outputRoot, "input");
+    await writePipelineGscInput(inputDir, { queryPageRows: 0 });
+    const queryPagesPath = join(inputDir, "gsc-query-pages.json");
+    await writeFile(
+      queryPagesPath,
+      JSON.stringify({
+        siteUrl: "sc-domain:wenlan.app",
+        startDate: "2026-05-09",
+        endDate: "2026-06-05",
+        source: "Search Console API",
+        dimensions: ["query", "page"],
+        responseAggregationType: "byPage",
+        rowCount: 0,
+        rows: [],
+      }),
+      "utf8",
+    );
+
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [
+          resolve(repoRoot, "scripts/seo-weekly.mjs"),
+          "--",
+          "--queries",
+          join(inputDir, "gsc-queries.csv"),
+          "--pages",
+          join(inputDir, "gsc-pages.csv"),
+          "--gsc-metadata",
+          join(inputDir, "gsc-metadata.json"),
+          "--query-pages",
+          queryPagesPath,
+          "--date",
+          "2026-06-07",
+        ],
+        { cwd: repoRoot },
+      ),
+      /GSC query-page date range disagrees with report evidence/,
+    );
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }

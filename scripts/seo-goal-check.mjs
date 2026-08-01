@@ -9,7 +9,7 @@ const repoRoot = resolve(import.meta.dirname, "..");
 const FROZEN_START = "<!-- FROZEN-GOAL-CONTRACT:START -->";
 const FROZEN_END = "<!-- FROZEN-GOAL-CONTRACT:END -->";
 const EXPECTED_FROZEN_SHA256 =
-  "bf7a19853ae7baacdb29d0335d452c63f1c42592dbde85e70889a28571bdb945";
+  "188f904a6a923ab3f3f993d016dc56bc710ad3ac7270ec0961ab4dd10a0b99e6";
 const DAY_MS = 24 * 60 * 60 * 1000;
 const CAMPAIGN_WINDOW_ANCHOR = new Date("2026-07-18T00:00:00.000Z");
 const CAMPAIGN_DEADLINE = new Date("2026-08-18T00:00:00.000Z");
@@ -18,14 +18,19 @@ const requiredFrozenClauses = [
   ["deadline 2026-08-18", "Deadline: 2026-08-18."],
   ["GitHub total stars >= 100", "GitHub total stars >= 100 at the deadline."],
   [
-    "GSC property impressions >= 1,000",
-    "GSC `sc-domain:wenlan.app` rolling-28-day property impressions >= 1,000.",
+    "GSC property clicks >= 100",
+    "GSC `sc-domain:wenlan.app` rolling-28-day property clicks >= 100.",
+  ],
+  [
+    "GSC property impressions >= 10,000",
+    "GSC `sc-domain:wenlan.app` rolling-28-day property impressions >= 10,000.",
   ],
   [
     "Vercel visitors >= 2,000",
     "Vercel Web Analytics rolling-28-day visitors >= 2,000 over the same range.",
   ],
   ["fixed GitHub baseline 47", "Fixed progress baseline: GitHub total stars 47."],
+  ["fixed GSC click baseline 6", "Fixed progress baseline: GSC property clicks 6."],
   [
     "fixed GSC baseline 197",
     "Fixed progress baseline: GSC property impressions 197.",
@@ -143,8 +148,16 @@ const requiredFrozenClauses = [
     "`/tmp/wenlan-seo-demand`, physically separate from authenticated GSC inputs under `/tmp/wenlan-seo`.",
   ],
   [
-    "AI knowledge-base and wiki acquisition center",
-    "The acquisition center for new experiments is AI knowledge bases, LLM wiki, source-backed wiki, knowledge bases for AI agents, and modifier-qualified Obsidian or knowledge-base workflows.",
+    "co-primary trilingual AI knowledge-base and Karpathy or LLM-wiki acquisition center",
+    "The acquisition center for new experiments is one co-primary, non-ranked cluster: AI knowledge bases, Karpathy or LLM wiki, source-backed wiki, and knowledge bases for AI agents across English, zh-TW, and zh-CN.",
+  ],
+  [
+    "Codex ChatGPT and tool-workflow acquisition entries",
+    "Codex, ChatGPT, Claude Code, Obsidian, and MCP are first-class tool or workflow entry points into that same cluster when the candidate gate passes.",
+  ],
+  [
+    "Karpathy and AI knowledge-base parity",
+    "Do not rank Karpathy or LLM-wiki demand below AI-knowledge-base demand by default; select the page or refresh from evidence and coverage gaps.",
   ],
   [
     "generic memory cannot nominate acquisition",
@@ -434,20 +447,26 @@ function inspectAcquisitionFocus(plan, errors) {
   const normalizedNextDecision = normalizeWhitespace(nextDecision);
   const priorityFamilies = [
     "AI knowledge base",
+    "Karpathy LLM wiki",
     "LLM wiki",
     "source-backed wiki",
     "knowledge base for AI agents",
+    "Codex",
+    "ChatGPT",
+    "Claude Code",
     "Obsidian",
+    "MCP",
   ];
 
   if (
     !normalizedStrategy.includes(
       "The next candidate must be selected from fresh evidence for",
     ) ||
+    !normalizedStrategy.includes("one co-primary, non-ranked cluster") ||
     priorityFamilies.some((family) => !normalizedStrategy.includes(family))
   ) {
     errors.push(
-      "PLAN.md Current strategy must retain the AI knowledge-base and wiki priority demand families.",
+      "PLAN.md Current strategy must retain the co-primary trilingual AI knowledge-base, Karpathy or LLM-wiki, and tool-workflow demand families.",
     );
   }
   if (
