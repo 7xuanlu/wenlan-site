@@ -1445,9 +1445,18 @@ relationship; do not create a duplicate or misreport it as submitted.
 `DhanushNehru/awesome-mcp-servers` PR #52 has a failing whole-repository link
 check caused by nine unrelated upstream URLs, while the Wenlan repository URL
 returns `200`; do not mix that upstream cleanup into the one-line rebrand PR.
-The free `mcpservers.org` form is prepared with Premium unchecked but remains
-unsubmitted until the public contact email is explicitly confirmed for that
-destination. Do not store the address in this repository.
+Before destination-specific confirmation, the free `mcpservers.org` form was
+prepared with Premium unchecked and held unsubmitted. That confirmation gate
+was cleared by the user; the contact address remains excluded from this
+repository.
+
+The user confirmed the destination-specific public contact email and the free
+`mcpservers.org` submission was accepted at `2026-08-01T06:38:49Z` as
+submission ID `5334`. The authoritative response is `pending`, `plan=free`,
+and `paymentStatus=not_required`; the contact address is not stored in this
+repository. Treat this as one review-queue submission, not an accepted or live
+listing. Do not resubmit or select Premium. Reconcile direct public listing
+presence at the scheduled 24-hour and seven-complete-live-day observations.
 
 The Glama prerequisite now has an authoritative account boundary: Glama
 requires GitHub OAuth maintainer verification and a connected GitHub App

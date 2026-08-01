@@ -181,10 +181,27 @@ The appcypher fork and one-commit comparison are valid, but GitHub rejected PR
 creation through both GraphQL and REST, so that branch is pushed but not
 reported as a submitted PR.
 
-The supported `mcpservers.org` free form is prepared with the Wenlan name,
-description, repository URL, and Memory category. Premium remains unchecked.
-Submission is pending destination-specific confirmation of the account's
-public contact email, and the address is intentionally absent from this audit.
+At the publication-execution capture, the supported `mcpservers.org` free form
+was prepared with the Wenlan name, description, repository URL, and Memory
+category. Premium was unchecked, and submission was held pending
+destination-specific confirmation of the account's public contact email. The
+following result supersedes that historical pending state; the address remains
+intentionally absent from this audit.
+
+## mcpservers.org submission result — 2026-08-01T06:38:49Z
+
+After destination-specific confirmation of the public contact email, the
+repository-supported form accepted Wenlan submission ID `5334`. The returned
+state is `pending`, the plan is `free`, and payment status is `not_required`.
+The contact address is not stored here.
+
+This is evidence that the free submission entered the review queue. It is not
+evidence that the listing is approved, public, indexed, sending visitors, or
+causing stars or search performance. The current repository and directory
+reconciliation found no existing Wenlan entry, repository URL, or prior PR by
+`7xuanlu` in `wong2/awesome-mcp-servers`, and no indexed
+`mcpservers.org` Wenlan result. Do not resubmit while review is pending and do
+not upgrade to Premium under this campaign.
 
 Glama's current official methodology requires GitHub OAuth maintainer
 verification and repository access through its GitHub App before a server can
