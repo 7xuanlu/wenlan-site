@@ -1076,7 +1076,7 @@ test("localized Learn renderer exposes article code blocks", async () => {
   assert.match(source, /\[word-break:keep-all\]/);
 });
 
-test("localized Learn headings keep CJK semantic phrases together on mobile", async () => {
+test("localized Obsidian Learn copy keeps CJK semantic phrases together on mobile", async () => {
   const source = await readFile(
     resolve(repoRoot, "src/app/[locale]/learn/[slug]/page.tsx"),
     "utf8",
@@ -1084,8 +1084,10 @@ test("localized Learn headings keep CJK semantic phrases together on mobile", as
 
   const protectedHeadings = source.match(/<h2 className="[^"]*\[word-break:keep-all\][^"]*\[overflow-wrap:break-word\][^"]*"/g) ?? [];
   assert.equal(protectedHeadings.length, 2);
-  assert.match(source, /heading\.split\(\/\(AI 知識庫\|AI 知识库\)\/g\)/);
-  assert.equal(source.match(/\{renderLocalizedHeading\(/g)?.length, 3);
+  assert.match(source, /text\.split\(\/\(AI 知識庫\|AI 知识库\|來源\|来源\)\/g\)/);
+  assert.match(source, /article\.slug === "wenlan-vs-obsidian-ai-memory"/);
+  assert.ok((source.match(/\{renderArticleText\(/g)?.length ?? 0) >= 12);
+  assert.match(source, /<span className="min-w-0">\{renderArticleText\(faq\.question\)\}<\/span>/);
 });
 
 test("core route wrappers export localized metadata for translated pages", async () => {

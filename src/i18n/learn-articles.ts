@@ -367,8 +367,7 @@ const zhTWArticles = {
     updatedAt: "2026-08-01",
     author: "Qi-Xuan Lu",
     readingTime: "8 分鐘閱讀",
-    audience:
-      "想讓 Claude Code 使用 Obsidian vault，並判斷是否需要 MCP 或可維護 AI 知識庫的繁體中文使用者",
+    audience: "使用 Obsidian vault 的繁體中文 Claude Code 使用者",
     heroBullets: [
       "Claude Code 能存取本地 Markdown 時，直接讀取 vault 通常是最小且最清楚的起點。",
       "IDE bridge 補上目前檔案與選取內容；Obsidian MCP 補上結構化 vault 操作或其他 client surface。",
@@ -543,7 +542,7 @@ const zhTWArticles = {
     ],
     cta: {
       heading: "讓 vault 與 AI 知識庫各司其職",
-      body: "保留 Obsidian 作為人類可讀的知識面；當答案需要跨工具保持目前、可追溯且可審查時，再用 Wenlan 維護有來源的 Pages。",
+      body: "保留 Obsidian 作為人類可讀的知識面；答案需跨工具保持目前、可追溯且可審查時，再用 Wenlan 維護具引用的 Pages。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
@@ -891,8 +890,7 @@ const zhCNArticles = {
     updatedAt: "2026-08-01",
     author: "Qi-Xuan Lu",
     readingTime: "8 分钟阅读",
-    audience:
-      "想让 Claude Code 使用 Obsidian vault，并判断是否需要 MCP 或可维护 AI 知识库的简体中文用户",
+    audience: "使用 Obsidian vault 的简体中文 Claude Code 用户",
     heroBullets: [
       "Claude Code 能访问本地 Markdown 时，直接读取 vault 通常是最小且最清楚的起点。",
       "IDE bridge 补上当前文件与选中内容；Obsidian MCP 补上结构化 vault 操作或其他 client surface。",
@@ -1067,7 +1065,7 @@ const zhCNArticles = {
     ],
     cta: {
       heading: "让 vault 与 AI 知识库各司其职",
-      body: "保留 Obsidian 作为人可读的知识面；答案需要跨工具保持当前、可追溯且可审核时，再用 Wenlan 维护有来源的 Pages。",
+      body: "保留 Obsidian 作为人可读的知识面；答案需跨工具保持当前、可追溯且可审核时，再用 Wenlan 维护带引用的 Pages。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;

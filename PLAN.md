@@ -256,6 +256,15 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `EXP-2026-08-01-obsidian-knowledge-base-locales` scope. Request indexing,
   GSC validation, external publication, paid acquisition, synthetic events,
   and account mutation remain excluded.
+- PR #110 merged at `2026-08-01T20:45:39Z` as
+  `317bc9152fd8f22bded644c64934ebac7d2bc372`; Vercel completed production at
+  `2026-08-01T20:46:25Z`. The deployed SEO and locale matrices passed, and
+  actual `393px` measurement confirmed no document overflow. The fresh full-
+  page visual pass found two CJK semantic-phrase breaks in the article packet
+  and CTA plus a flex-distribution side effect in one FAQ question. A bounded
+  renderer/copy correction is locally verified under the same approved scope;
+  the experiment remains in the production slot until that correction is
+  merged and production-verified.
 - The weekly window is a reporting boundary, not a publish gate. Only one
   website change may be in `approved` or `active` preparation at a time;
   production-verified `live`, `measuring`, and `extended` cohorts continue
@@ -293,8 +302,9 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-01-obsidian-knowledge-base-locales` is locally verified and
-  occupies the single production slot. It refreshes the
+  `EXP-2026-08-01-obsidian-knowledge-base-locales` is published with a locally
+  verified CJK rendering correction in flight and occupies the single
+  production slot. It refreshes the
   existing zh-TW Obsidian + Claude Code route around direct files, editor
   context, MCP, and a maintained AI knowledge-base lifecycle, then adds the
   missing zh-CN counterpart from independently corroborated Simplified-Chinese
@@ -776,8 +786,9 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-01-obsidian-knowledge-base-locales` is locally verified and
-occupies the single production slot. It changes one canonical
+`EXP-2026-08-01-obsidian-knowledge-base-locales` is published with a bounded,
+locally verified CJK rendering correction in flight and occupies the single
+production slot. It changes one canonical
 family only: refresh the existing
 `/zh-TW/learn/wenlan-vs-obsidian-ai-memory` page and add the missing
 `/zh-CN/learn/wenlan-vs-obsidian-ai-memory` counterpart. The English route is
@@ -1283,7 +1294,7 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-Publish and production-verify the approved
+Publish and production-verify the bounded CJK correction for the approved
 `EXP-2026-08-01-obsidian-knowledge-base-locales` candidate. The experiment
 refreshes the existing zh-TW page and fills the corroborated
 zh-CN route gap without changing English or creating another canonical family.
