@@ -203,6 +203,28 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
+      <nav
+        aria-label={content.nav.links.find((link) => link.id === "learn")?.label}
+        className="border-b border-[var(--o-border-subtle)]"
+      >
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 gap-y-3 px-6 py-4">
+          {content.hero.metaLinks.map((link) => (
+            <TrackedLocalizedLink
+              key={link.id}
+              href={link.href}
+              locale={locale}
+              eventName="learn_article_click"
+              placement="home-acquisition"
+              context="concepts"
+              className="inline-flex min-w-0 items-center gap-2 text-sm font-medium text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-warm)]"
+            >
+              <span className="break-keep">{link.label}</span>
+              <ArrowIcon />
+            </TrackedLocalizedLink>
+          ))}
+        </div>
+      </nav>
+
       <DownloadSection copy={content.download} locale={locale} />
 
       <section className="border-b border-[var(--o-border-subtle)] px-6 py-16 sm:py-20">

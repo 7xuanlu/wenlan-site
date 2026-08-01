@@ -17,7 +17,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "12bfef28dffea129584399633c4df1a7a90e97b7fdefa682c42cd6c02fb64714",
+    sourceHash: "56bdf4629a8eee6deb1d8fd1e3c73d8cc63295a4d5dd3f0e9f24f22b0966ba3f",
     content: {
       seo: {
         title: "Wenlan 文瀾 | AI 工作的 LLM wiki",
@@ -63,14 +63,9 @@ export const zhTWContent = {
             label: "LLM wiki 導覽",
           },
           {
-            id: "claude-code-memory",
-            href: "/learn/claude-code-memory",
-            label: "Claude Code 記憶",
-          },
-          {
-            id: "mcp-memory-server",
-            href: "/learn/mcp-memory-server",
-            label: "MCP 伺服器",
+            id: "ai-knowledge-base",
+            href: "/learn/source-backed-wiki-pages-ai-work",
+            label: "AI 知識庫導覽",
           },
         ],
       },

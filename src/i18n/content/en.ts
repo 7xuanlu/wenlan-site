@@ -63,14 +63,9 @@ export const enContent = {
             label: "LLM wiki guide",
           },
           {
-            id: "claude-code-memory",
-            href: "/learn/claude-code-memory",
-            label: "Claude Code memory",
-          },
-          {
-            id: "mcp-memory-server",
-            href: "/learn/mcp-memory-server",
-            label: "MCP server",
+            id: "ai-knowledge-base",
+            href: "/learn/source-backed-wiki-pages-ai-work",
+            label: "AI knowledge base guide",
           },
         ],
       },

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { TrackedLink } from "../src/components/tracked-link.tsx";
 
@@ -62,6 +63,21 @@ test("TrackedLink click remains safe when Umami is unavailable", (t) => {
   });
 
   assert.doesNotThrow(() => link.props.onClick());
+});
+
+test("homepage acquisition links preserve their exact analytics tuple", async () => {
+  const homeSource = await readFile(
+    new URL("../src/app/_pages/home.tsx", import.meta.url),
+    "utf8",
+  );
+  const acquisitionNav = homeSource.match(
+    /<nav[\s\S]*?content\.hero\.metaLinks\.map[\s\S]*?<\/nav>/,
+  )?.[0];
+
+  assert.ok(acquisitionNav, "homepage acquisition nav must render hero meta links");
+  assert.match(acquisitionNav, /eventName="learn_article_click"/);
+  assert.match(acquisitionNav, /placement="home-acquisition"/);
+  assert.match(acquisitionNav, /context="concepts"/);
 });
 
 test("download-page placement preserves the bounded outbound event shape", (t) => {
