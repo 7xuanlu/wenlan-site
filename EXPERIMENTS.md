@@ -4161,3 +4161,102 @@ increase for that experiment.
   account mutations, and metric-definition changes.
 - Next step: Resolve pre-merge review findings, rerun the full gates, update PR
   #101, and merge only when CI and mergeability remain green.
+
+### 2026-08-01T04:11:03Z — zh-TW LLM Wiki v2 production verification
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-01-zhtw-llm-wiki-v2-refresh`
+- Status: measuring
+- Publication evidence: PR #101 merged to `main` at
+  `2026-08-01T04:04:21Z` as
+  `ee72f1dea9bd46e93db220fb70cca420d4684f56`; the Vercel commit status
+  reported `Deployment has completed` at `2026-08-01T04:05:07Z`.
+- Technical evidence: The deployed audit passes robots, 113 sitemap URLs, 17
+  key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+  redirects, six bridge-host redirects, and legacy exclusions. The live
+  `/zh-TW/learn/distilled-wiki-pages-ai-memory` route returns direct `200`,
+  exact self-canonical, `index, follow`, Article and BreadcrumbList schema,
+  stable `datePublished: 2026-07-04`, `dateModified: 2026-08-01`, all seven
+  intended sections, the six-command workflow, maintained sources, and
+  visible FAQ text without `FAQPage`. Its sitemap entry retains reciprocal
+  English, zh-TW, zh-CN, and x-default alternates and the localized
+  `2026-08-01T00:00:00.000Z` last-modified value.
+- Measurement evidence: No complete authenticated post-deploy GSC or Vercel
+  window exists at production verification time. No click, impression,
+  visitor, indexing, or causality result is inferred. Umami remains
+  account-gated and GitHub stars remain a separate native-unit observation.
+- Publish date: `2026-08-01T04:05:07Z` production completion
+- Index date: unknown; no indexing request was repeated
+- Result: pending
+- Decision: wait for the predeclared exposure window; the production slot is
+  open for a separate candidate that passes the full evidence gate
+- Next step: Append the actual 24-hour technical/evidence readout after
+  `2026-08-02T04:05:07Z`. Do not stack another change on this route or infer
+  SEO success before the target-page exposure gate.
+
+### 2026-08-01T04:20:26Z — priority-cluster Trends refresh
+
+- Record type: campaign-observation
+- Related experiment: none; demand-discovery only
+- Status: candidate-evidence-refreshed
+- Source: Signed-in official Google Trends Explore, Google Web Search, past
+  12 months. Three requests preserve 53 raw weekly `0–100` index rows for
+  English Worldwide, Traditional Chinese Taiwan, and Simplified Chinese
+  phrases Worldwide. Raw CSVs and SHA-256 provenance are recorded in
+  `docs/seo-audits/2026-08-01-priority-cluster-trends-refresh.md` and remain
+  under `/tmp/wenlan-seo-demand/2026-08-01/trends/`.
+- Evidence: English `LLM wiki` moved from a first-13-week average of 6.5 to a
+  latest-13-week average of 63.1, while `AI knowledge base` moved from 29.5
+  to 61.7 inside the same request. Taiwan `LLM wiki` moved from 0.0 to 48.6.
+  The Simplified-Chinese Worldwide request moved `LLM wiki` from 6.5 to 63.1
+  and `AI 知识库` from 1.5 to 14.1; this is not mainland-China demand. Exact
+  Codex and ChatGPT knowledge-base phrases remained much smaller.
+  Related-query panels were not retained and are excluded from the decision
+  evidence.
+- Native-unit boundary: Every value is a request-relative Trends index, not
+  search volume, GSC, traffic, or a cross-request conversion. GSC property,
+  visible-query, visibility-gap, Vercel, Umami, and GitHub observations remain
+  separate.
+- Result: The retained time series supports the co-primary LLM Wiki plus AI
+  knowledge-base lane and rejects separate exact-phrase Codex/ChatGPT
+  knowledge-base articles. Karpathy remains explicit and
+  modifier-qualified Obsidian remains an ecosystem bridge under the Frozen
+  Goal Contract and prior inspectable evidence, not this unretained
+  related-query view.
+- Decision: nominate a three-locale existing-page/snippet/internal-link audit
+  without treating the weekly window or a measuring experiment as a launch
+  blocker
+- Next step: Reconcile the next available authenticated GSC query-page join
+  with the existing English, zh-TW, and zh-CN LLM-wiki and source-backed
+  knowledge-base pages. A separate non-overlapping candidate may proceed when
+  it passes the full gate. Do not create a new URL or publish from Trends
+  alone.
+
+### 2026-08-01T04:36:11Z — v0.15.2 release alignment production verification
+
+- Record type: campaign-observation
+- Technical correction: `TECH-2026-08-01-release-v0.15.2-alignment`
+- Status: production-verified
+- Publication evidence: PR #101 merged to `main` at
+  `2026-08-01T04:04:21Z` as
+  `ee72f1dea9bd46e93db220fb70cca420d4684f56`; Vercel reported production
+  completion at `2026-08-01T04:05:07Z`.
+- Live evidence: English, zh-TW, and zh-CN `/download` routes return direct
+  `200` and expose `v0.15.2` plus all four immutable platform asset names.
+  English, zh-TW, and zh-CN `/docs/get-started` routes return direct `200` and
+  expose `v0.15.2` plus the Windows asset. All three About routes return
+  direct `200` and expose `v0.15.2`. The live sitemap records
+  `2026-07-31T00:00:00.000Z` for all nine localized Download, About, and Get
+  Started URLs.
+- Technical evidence: The same production deployment passed robots, 113
+  sitemap URLs, 17 key pages, six utility noindex headers, sitemap-wide
+  `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy
+  exclusions.
+- Metric role: release and download accuracy only. No GSC, Vercel, Umami,
+  GitHub, download, setup, or star movement is attributed to this correction.
+- Result: production verification passed
+- Decision: close the technical correction as production-verified; it does
+  not consume the website production slot
+- Next step: Keep release claims aligned to immutable Wenlan releases; no
+  indexing request, GSC validation, external publication, or metric change is
+  implied.
