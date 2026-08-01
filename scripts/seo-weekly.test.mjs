@@ -5243,13 +5243,13 @@ test("Learn index SERP copy leads with the source-backed AI knowledge-base and L
   assert.doesNotMatch(learnOgImage, /Before you add memory to AI work\./);
 });
 
-test("homepage links directly to the Claude Code memory guide", async () => {
+test("homepage acquisition links point to the core LLM-wiki and knowledge-base guides", async () => {
   const homepage = await readRepo("src/i18n/content/en.ts");
 
-  assert.match(homepage, /href:\s*"\/learn\/claude-code-memory"/);
-  assert.match(homepage, /Claude Code memory/);
-  assert.match(homepage, /href:\s*"\/learn\/mcp-memory-server"/);
-  assert.match(homepage, /MCP server/);
+  assert.match(homepage, /href:\s*"\/learn\/distilled-wiki-pages-ai-memory"/);
+  assert.match(homepage, /LLM wiki guide/);
+  assert.match(homepage, /href:\s*"\/learn\/source-backed-wiki-pages-ai-work"/);
+  assert.match(homepage, /AI knowledge base guide/);
 });
 
 test("configuration docs link to the Claude Code memory guide", async () => {

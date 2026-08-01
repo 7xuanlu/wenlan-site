@@ -4456,3 +4456,119 @@ increase for that experiment.
 - Next step: At the 24-hour and seven-complete-live-day checks, record the
   direct listing state and listing-days only if the Wenlan listing becomes
   publicly accessible.
+
+### 2026-08-01T07:05:47Z — homepage acquisition-link restoration prepared
+
+- Record type: campaign-observation
+- Related experiment: none; technical information-architecture candidate
+- Status: local-prepared, not published
+- Evidence: The authenticated 2026-07-03 through 2026-07-30 GSC range has
+  10 property clicks and 660 property impressions. The visible exact query
+  `llm wiki 2.0` maps 1 impression, 0 clicks, and average position 13 to
+  `/zh-TW`, while the intended localized guide is a different URL. Same-range
+  Vercel remains separate at 1,468 visitors and 1,745 pageviews.
+- Defect: English, zh-TW, and zh-CN content dictionaries retained direct LLM
+  Wiki guide metadata, but the homepage renderer stopped emitting it after the
+  redesign. Deployed homepages therefore had no direct link to either the
+  localized LLM Wiki guide or the localized source-backed AI knowledge-base
+  guide.
+- Local change: Add a low-density navigation row after the hero, replace the
+  unused memory-first homepage link metadata with the two acquisition-center
+  guides, localize both targets in all three languages, and track bounded
+  `learn_article_click` events with `placement="home-acquisition"`. Preserve
+  Download and GitHub CTAs and every public URL.
+- RED evidence: An actual `HomePage` static-render contract failed for all
+  three locales before implementation. The same contract passes after the
+  local correction; full verification and rendered QA remain pending.
+- Attribution boundary: This is not an experiment start and no result is
+  inferred. If deployed, it adds inbound exposure to the measuring zh-TW LLM
+  Wiki target, so that deployment time must be recorded in its readout.
+- External boundary: No push, PR, merge, deployment, indexing request, GSC
+  validation, analytics mutation, or external publication is authorized by
+  this preparation.
+- Evidence: `docs/seo-audits/2026-08-01-home-acquisition-links-prelaunch.md`
+- Next step: Complete the local test, build, technical SEO, and fresh
+  desktop/mobile render gates, then request a distinct website-publication
+  approval if the candidate remains green.
+
+### 2026-08-01T07:22:42Z — homepage acquisition-link restoration locally verified
+
+- Record type: campaign-observation
+- Related experiment: none; technical information-architecture candidate
+- Status: local-verified, not published
+- Verification: `pnpm test:i18n` passed 58 of 58, `pnpm lint` passed,
+  `pnpm test:seo` passed 204 of 204 with explicit Wenlan sibling roots,
+  `pnpm build` emitted 214 pages, `pnpm seo:technical:built` passed, and the
+  built locale check passed 22 expected 200 routes plus 5 expected 404 routes.
+- Render evidence: English, zh-TW, and zh-CN were inspected at 1440-pixel
+  desktop and 393-pixel mobile widths in dark and light themes. All six
+  viewports had no horizontal overflow. Both acquisition links remained
+  readable without clipping or CJK phrase-break regressions, and Download and
+  GitHub retained primary CTA hierarchy.
+- Visual decision: Pass A implementation fidelity PASS; Pass B design quality
+  PASS; synthesized verdict GOOD. Baseline diffs were attributable to the
+  existing animated hero, the intended new row, and its expected downstream
+  shift rather than an unrelated regression.
+- Performance boundary: two existing localized link components were added;
+  no dependency, script, media, animation, or client boundary was introduced.
+  Lighthouse is unavailable locally, so no score is claimed.
+- External boundary: This verification does not authorize a commit, push, PR,
+  merge, deployment, indexing request, GSC validation, or external post.
+- Evidence: `docs/seo-audits/2026-08-01-home-acquisition-links-prelaunch.md`
+- Next step: Request a distinct website-publication approval, then record the
+  production completion time against the existing zh-TW LLM Wiki readout.
+
+### 2026-08-01T07:28:06Z — homepage production contrast reconfirmed
+
+- Record type: campaign-observation
+- Related experiment: none; technical information-architecture candidate
+- Status: production defect confirmed; local fix remains unpublished
+- Evidence: Fresh direct reads returned HTTP 200 for the English, zh-TW, and
+  zh-CN homepages. None of the three production HTML responses contained the
+  localized LLM Wiki guide href or source-backed AI knowledge-base guide href.
+- Interpretation: The live site still requires a Learn-hub detour, while the
+  local verified candidate restores both direct paths. This is technical
+  corroboration, not an SEO result or evidence of causality.
+- Decision: Keep the local candidate unchanged and do not stack a `/learn`
+  rewrite. The authenticated 120-impression Learn row mostly predates its
+  latest production refresh and cannot justify another edit yet.
+- External boundary: Push, PR, merge, deployment, indexing request, and GSC
+  validation still require a distinct explicit website-publication approval.
+
+### 2026-08-01T07:32:20Z — core-guide internal-link graph quantified
+
+- Record type: campaign-observation
+- Related experiment: none; technical information-architecture candidate
+- Status: local-verified, not published
+- Production evidence: A deterministic rendered-anchor crawl fetched all 113
+  canonical sitemap pages without a failure. Each English core guide has 7
+  unique non-self source pages, each zh-TW guide has 3, and each zh-CN guide
+  has 2. Link occurrences remain a separate native count: English LLM Wiki
+  20, English AI knowledge base 14, zh-TW 12 and 12, zh-CN 11 and 11.
+- Local-build evidence: The matching 113-route crawl also had no failures and
+  adds exactly one occurrence and one unique non-self source to every target:
+  `/`, `/zh-TW`, or `/zh-CN` respectively. No other inbound source changes.
+- Interpretation: The Mandarin graph is thinner than English but no target is
+  orphaned. The evidence supports the existing bounded homepage correction;
+  it does not support another article, a broad link spray, or a `/learn`
+  rewrite.
+- Raw boundary: Machine crawl output remains outside git under
+  `/private/tmp`; only this interpreted native-unit summary is committed to
+  the campaign ledger.
+- External boundary: Push, PR, merge, deployment, indexing request, and GSC
+  validation still require a distinct explicit website-publication approval.
+
+### 2026-08-01T14:05:56Z — homepage acquisition links approved for publication
+
+- Record type: campaign-observation
+- Related experiment: none; technical information-architecture correction
+- Status: approved, awaiting GitHub publication
+- Approval: The user explicitly approved publishing the exact locally
+  verified three-language homepage acquisition-links scope.
+- Authorized actions: commit, push, PR creation, merge, automatic Vercel
+  deployment, and read-only production verification.
+- Excluded actions: request indexing, GSC validation, another website change,
+  analytics mutation, paid acquisition, and unrelated external publication.
+- Attribution boundary: Record production completion against the measuring
+  zh-TW LLM Wiki experiment because the new homepage link adds inbound
+  exposure; do not claim SEO lift or causality at deployment.

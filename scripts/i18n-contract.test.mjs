@@ -428,6 +428,32 @@ test("localized home hero allows long words to wrap on mobile", async () => {
   assert.match(source, /className="[^"]*\bbreak-words\b[^"]*"/);
 });
 
+test("home renders direct localized acquisition links to the core wiki guides", async () => {
+  const { HomePage } = await import("../src/app/_pages/home.tsx");
+  const expectedByLocale = {
+    en: [
+      "/learn/distilled-wiki-pages-ai-memory",
+      "/learn/source-backed-wiki-pages-ai-work",
+    ],
+    "zh-TW": [
+      "/zh-TW/learn/distilled-wiki-pages-ai-memory",
+      "/zh-TW/learn/source-backed-wiki-pages-ai-work",
+    ],
+    "zh-CN": [
+      "/zh-CN/learn/distilled-wiki-pages-ai-memory",
+      "/zh-CN/learn/source-backed-wiki-pages-ai-work",
+    ],
+  };
+
+  for (const [locale, expectedHrefs] of Object.entries(expectedByLocale)) {
+    const html = renderToStaticMarkup(React.createElement(HomePage, { locale }));
+
+    for (const href of expectedHrefs) {
+      assert.match(html, new RegExp(`href="${href}"`), `${locale}.${href}`);
+    }
+  }
+});
+
 test("localized about hero allows translated text to wrap on mobile", async () => {
   const source = await readFile(resolve(repoRoot, "src/app/_pages/about.tsx"), "utf8");
 

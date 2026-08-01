@@ -220,6 +220,12 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   indexing, GSC validation, analytics mutation, paid acquisition, unrelated
   external posts, and prerequisite product/plugin packaging changes remain
   excluded.
+- At `2026-08-01T14:05:56Z`, the user explicitly approved publication of the
+  locally verified three-language homepage acquisition-links correction. The
+  approval covers commit, push, PR, merge, automatic Vercel deployment, and
+  read-only production verification of that exact scope. It does not cover
+  request indexing, GSC validation, another website change, analytics
+  mutation, or another external publication.
 - The weekly window is a reporting boundary, not a publish gate. Only one
   website change may be in `approved` or `active` preparation at a time;
   production-verified `live`, `measuring`, and `extended` cohorts continue
@@ -1221,6 +1227,31 @@ inspection may proceed without waiting for a weekly boundary when a
 non-overlapping candidate passes the full gate. The preserved raw series and
 full decision are in
 `docs/seo-audits/2026-08-01-priority-cluster-trends-refresh.md`.
+
+The Friday query-page audit exposed a narrower technical acquisition defect.
+All three homepage dictionaries retained direct guide metadata after the
+homepage redesign, but the shared homepage renderer no longer emitted those
+links. Deployed English, zh-TW, and zh-CN homepages therefore route LLM Wiki
+and AI knowledge-base visitors through the Learn hub instead of linking to the
+existing localized guides directly. A bounded correction is now
+`approved` in
+`docs/seo-audits/2026-08-01-home-acquisition-links-prelaunch.md`: restore one
+low-density homepage navigation row to the localized LLM Wiki and
+source-backed AI knowledge-base guides, preserve Download and GitHub CTAs,
+and add an actual render contract so dictionary-only strings cannot satisfy
+the link floor. It is a technical information-architecture correction, not a
+new article or experiment start. Publication of this exact scope was approved
+at `2026-08-01T14:05:56Z`; record the production completion time because it
+adds inbound exposure to the measuring zh-TW LLM Wiki page.
+
+A 113-page production internal-link crawl and matching local-build crawl now
+quantify the correction. It adds exactly one new same-locale homepage source
+to each of the six English, zh-TW, and zh-CN core-guide targets. Production
+currently exposes seven non-self sources per English guide, three per zh-TW
+guide, and two per zh-CN guide; the local candidate raises those counts to
+eight, four, and three respectively without changing another source. This
+supports publishing the bounded homepage correction but does not nominate a
+second article or an additional link edit.
 
 The account-wide distribution correction is complete at
 `docs/seo-audits/2026-08-01-oss-directory-publication-scope.md`, and the user
