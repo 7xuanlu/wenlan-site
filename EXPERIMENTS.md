@@ -4260,3 +4260,45 @@ increase for that experiment.
 - Next step: Keep release claims aligned to immutable Wenlan releases; no
   indexing request, GSC validation, external publication, or metric change is
   implied.
+
+### 2026-08-01T04:51:43Z — OSS directory distribution candidate prepared
+
+- Record type: campaign-observation
+- Related experiment: none; approval-gated candidate only
+- Status: local-prepared
+- Candidate: one coordinated distribution proposal for
+  `punkpeye/awesome-mcp-servers` and
+  `gavischneider/awesome-llm-wiki`. Wenlan is absent from both current
+  repositories.
+- Native source evidence: GitHub reports 91,667 stars for Awesome MCP Servers
+  and 43 stars for Awesome LLM Wiki at capture. Those repository stargazer
+  counts are audience-size observations only; they are not Wenlan impressions,
+  traffic, clicks, or predicted stars.
+- Candidate evidence: the current provider search set contains multiple
+  exact-topic LLM Wiki products, directories, implementations, and guides but
+  not Wenlan. Awesome MCP Servers is active and recently merged inspectable
+  Knowledge & Memory additions within minutes to roughly one day. Awesome LLM
+  Wiki explicitly accepts local compilers, daemons, MCP integrations, and
+  agent skills. Search-result order is not reported as GSC or Google rank.
+- Coverage and proof: Wenlan already has maintained English, zh-TW, and zh-CN
+  LLM Wiki and source-backed knowledge-base coverage. Its public source proves
+  the Rust CLI, daemon, MCP server, citation-gated Markdown Pages, agent
+  plugins, local Git history, and released macOS, Windows, and Linux runtimes.
+  The clean gap is third-party discovery, not another article.
+- Local change: exactly one non-promotional README line is prepared in each
+  pinned clone under `/private/tmp`. Both diffs pass `git diff --check`; the
+  Awesome LLM Wiki patch also passes its official `npm test` and
+  `awesome-lint README.md` gate.
+- Baseline: GitHub reports 46 Wenlan stars. The latest authenticated GSC
+  property totals remain 10 clicks and 660 impressions; Vercel remains 1,468
+  visitors in its separate same-range observation. No source is joined or
+  attributed to another.
+- Result: candidate gate passed; external action not started
+- Decision: request one explicit approval covering the two factual directory
+  PR submissions. Treat the large MCP directory as reach and the smaller LLM
+  Wiki directory as topical relevance; do not claim either will cause stars or
+  search lift.
+- Next step: If approved, append the immutable experiment start and submit
+  only the two verified one-line PRs. Otherwise keep the patches local. Do not
+  fork, push, open external PRs, request indexing, submit GSC validation, or
+  mutate analytics without approval.

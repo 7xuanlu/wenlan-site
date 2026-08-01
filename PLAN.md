@@ -1214,6 +1214,20 @@ non-overlapping candidate passes the full gate. The preserved raw series and
 full decision are in
 `docs/seo-audits/2026-08-01-priority-cluster-trends-refresh.md`.
 
+The resulting distribution audit is complete at
+`docs/seo-audits/2026-08-01-oss-directory-distribution-candidate.md`.
+Wenlan is absent from both the 91,667-star
+`punkpeye/awesome-mcp-servers` Knowledge & Memory section and the 43-star
+`gavischneider/awesome-llm-wiki` CLI Compilers and Builders section. The
+first is the primary high-reach MCP discovery surface; the second is the
+exact-topic LLM Wiki surface. Both repositories are active, both proposed
+entries are one factual non-promotional README line, and local patches are
+prepared under `/private/tmp`. The LLM Wiki repository's official
+`awesome-lint` test passes. This candidate passes the complete gate without
+another Wenlan article or same-route edit. External forks, pushes, and PR
+submissions remain the next explicit approval boundary; no distribution
+experiment has started.
+
 The same preflight found that `src/lib/releases.ts`, localized
 download/get-started copy, About OG copy, changelog/security docs, and sitemap
 freshness still identified `v0.15.0`, while immutable Wenlan tag `v0.15.2`
