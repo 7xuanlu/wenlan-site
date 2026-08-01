@@ -146,3 +146,24 @@ expected localized 200 routes, 5 expected localized 404 routes, the weekly
 fixture pipeline, and `git diff --check`. The configured-audience Resend fetch
 also passed again with 2 total subscribed contacts and no contacts or
 attributed contacts in the completed GSC-aligned range.
+
+## Production verification
+
+PR #108 merged at `2026-08-01T19:14:11Z` as
+`3daf34b31d43ecaa4f4eaaf365a7fb3565ba3327`. Vercel marked the main-branch
+production deployment complete at `2026-08-01T19:14:59Z`.
+
+The read-only deployed audit passed robots, 113 sitemap URLs, 17 key pages,
+six utility noindex headers, sitemap-wide absence of `FAQPage`, 25 redirects,
+six bridge-host redirects, and legacy-URL sitemap exclusion. Live English,
+zh-TW, and zh-CN homepages and the Download page expose the configured Umami
+script, `v0.15.3` structured data and release URLs, the four current prebuilt
+asset URLs, and the bounded `setup_path_click` and `github_outbound` wiring.
+
+The six Resend properties and
+`RESEND_ACQUISITION_PROPERTIES_ENABLED=1` were verified before the production
+deployment. Therefore new successful signups can now store the bounded
+acquisition fields in the configured audience and then emit the anonymous
+`waitlist_signup` event. This verification did not submit a form because no
+consented test address was supplied. It created no fabricated contact or
+synthetic analytics event and makes no causal or person-level join claim.

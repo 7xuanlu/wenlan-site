@@ -245,7 +245,11 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   ID, and Umami website ID; values were not copied or printed. All six bounded
   Resend string properties now exist, and
   `RESEND_ACQUISITION_PROPERTIES_ENABLED=1` is set for Production and Preview.
-  A deployment is still required before new signups carry those fields.
+  PR #108 merged at `2026-08-01T19:14:11Z` as
+  `3daf34b31d43ecaa4f4eaaf365a7fb3565ba3327`; Vercel production completed at
+  `2026-08-01T19:14:59Z`. New successful signups can now carry those bounded
+  Resend fields and emit the anonymous Umami success event. No fabricated
+  contact or synthetic analytics event was created.
 - The weekly window is a reporting boundary, not a publish gate. Only one
   website change may be in `approved` or `active` preparation at a time;
   production-verified `live`, `measuring`, and `extended` cohorts continue
@@ -335,6 +339,10 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   shared-memory changes remain live, production-verified, and measuring; they
   do not consume the slot.
 - Website-affecting technical correction:
+  `TECH-2026-08-01-download-signup-attribution` is production-verified and no
+  longer consumes the single production slot. GitHub release downloads,
+  anonymous Umami events, and configured-audience Resend contacts remain
+  separate native-unit evidence lanes.
   `TECH-2026-08-01-home-acquisition-links` is production-verified and no
   longer consumes the single production slot.
   `TECH-2026-08-01-release-v0.15.2-alignment` is production-verified and no
