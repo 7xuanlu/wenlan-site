@@ -1108,6 +1108,16 @@ test("sitemap includes localized core and Mandarin acquisition routes", async ()
     urls.has("https://wenlan.app/zh-CN/learn/wenlan-vs-basic-memory"),
     false,
   );
+  const zhTWLLMWiki = entries.find(
+    (entry) =>
+      entry.url ===
+      "https://wenlan.app/zh-TW/learn/distilled-wiki-pages-ai-memory",
+  );
+  assert.ok(zhTWLLMWiki);
+  assert.equal(
+    new Date(zhTWLLMWiki.lastModified).toISOString().slice(0, 10),
+    "2026-08-01",
+  );
   assert.equal(urls.has("https://wenlan.app/zh-TW/docs/daily-workflow"), false);
   assert.equal(urls.has("https://wenlan.app/zh-CN/docs/daily-workflow"), false);
 });

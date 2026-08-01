@@ -4145,3 +4145,19 @@ increase for that experiment.
   package
 - Next step: Request publication approval for the already bounded package; do
   not push, merge, or deploy under the current approval state.
+
+### 2026-08-01T03:53:42Z — zh-TW LLM Wiki publication approval
+
+- Record type: campaign-approval
+- Related experiment: `EXP-2026-08-01-zhtw-llm-wiki-v2-refresh`
+- Contract status: approved by the user in this Codex task
+- Approved scope: Commit, push, Draft PR creation, merge to `main`, automatic
+  Vercel deployment, and read-only production verification for the bounded
+  multilingual SEO package in PR #101. The package includes the existing-route
+  zh-TW LLM Wiki refresh, v0.15.2 factual alignment, click-priority pipeline
+  correction, and native CJK sans heading correction.
+- Excluded scope: Repeat indexing requests, GSC validation, external posts,
+  OSS submissions, paid acquisition, synthetic analytics events, analytics
+  account mutations, and metric-definition changes.
+- Next step: Resolve pre-merge review findings, rerun the full gates, update PR
+  #101, and merge only when CI and mergeability remain green.

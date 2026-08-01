@@ -1668,6 +1668,13 @@ function makeClickOpportunities(pages, queryPageEvidence) {
         (sum, row) => sum + row.impressions,
         0,
       );
+      const visibleQualifiedPosition =
+        visibleQualifiedImpressions > 0
+          ? visibleQualifiedRows.reduce(
+              (sum, row) => sum + row.position * row.impressions,
+              0,
+            ) / visibleQualifiedImpressions
+          : null;
       const campaignLane =
         ACQUISITION_PRIORITY_PAGE.test(page.page) ||
         visibleQualifiedRows.some((row) => isProtectedAcquisitionQuery(row.query))
@@ -1681,11 +1688,15 @@ function makeClickOpportunities(pages, queryPageEvidence) {
         nextMove = "query-page-review";
         diagnosis =
           "A visible qualified query lands on a different page than its configured target. Resolve intent and internal-link routing before editing copy.";
-      } else if (visibleQualifiedImpressions > 0 && page.position >= 8 && page.position <= 30) {
+      } else if (
+        visibleQualifiedPosition !== null &&
+        visibleQualifiedPosition >= 8 &&
+        visibleQualifiedPosition <= 30
+      ) {
         nextMove = "title-meta-refresh";
         diagnosis =
           "Visible qualified demand is in striking distance with zero query clicks. Review title, description, and first answer.";
-      } else if (visibleQualifiedImpressions > 0 && page.position < 8) {
+      } else if (visibleQualifiedPosition !== null && visibleQualifiedPosition < 8) {
         nextMove = "serp-intent-review";
         diagnosis =
           "Visible qualified demand ranks on page one but earns no query clicks. Inspect SERP intent and snippet alignment.";
@@ -1699,6 +1710,7 @@ function makeClickOpportunities(pages, queryPageEvidence) {
         ...page,
         visibleQualifiedRows,
         visibleQualifiedImpressions,
+        visibleQualifiedPosition,
         campaignLane,
         nextMove,
         diagnosis,
@@ -1727,16 +1739,20 @@ function makeClickOpportunityMarkdown(rows) {
       .slice(0, 3)
       .map((candidate) => `\`${escapePipe(candidate.query)}\` (${candidate.impressions})`)
       .join("<br>");
-    return `| ${index + 1} | ${formatPage(row.page)} | ${row.campaignLane} | ${row.impressions} | ${row.clicks} | ${pct(row.clicks, row.impressions)} | ${oneDecimal(row.position)} | ${row.visibleQualifiedImpressions} | ${observedQueries || "-"} | ${row.nextMove} | ${row.diagnosis} |`;
+    const qualifiedPosition =
+      row.visibleQualifiedPosition === null
+        ? "-"
+        : oneDecimal(row.visibleQualifiedPosition);
+    return `| ${index + 1} | ${formatPage(row.page)} | ${row.campaignLane} | ${row.impressions} | ${row.clicks} | ${pct(row.clicks, row.impressions)} | ${oneDecimal(row.position)} | ${qualifiedPosition} | ${row.visibleQualifiedImpressions} | ${observedQueries || "-"} | ${row.nextMove} | ${row.diagnosis} |`;
   });
 
   return `## GSC Click Opportunity Queue
 
 Deterministic order: protected AI knowledge-base/wiki and modifier-qualified Obsidian acquisition rows first; within each lane, zero-click query-page mismatches precede striking-distance pages, page-one snippet reviews, internal-link candidates, and evidence gaps. Existing generic-memory cohorts remain \`measuring-only\`; \`Brand/entity\` and unclassified \`Other\` rows remain visible in the full query table but do not nominate this queue. Metrics remain in native GSC units; this is not a forecast or composite score.
 
-| Rank | Page | Campaign lane | Page impressions | Page clicks | Page CTR | Avg position | Qualified zero-click query impressions | Observed visible queries | Next move | Why |
-| ---: | --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
-${tableRows.join("\n") || "| - | - | - | 0 | 0 | 0.00% | 0.0 | 0 | - | wait | No zero-click page opportunity is visible. |"}`;
+| Rank | Page | Campaign lane | Page impressions | Page clicks | Page CTR | Page avg position | Qualified avg position | Qualified zero-click query impressions | Observed visible queries | Next move | Why |
+| ---: | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+${tableRows.join("\n") || "| - | - | - | 0 | 0 | 0.00% | 0.0 | - | 0 | - | wait | No zero-click page opportunity is visible. |"}`;
 }
 
 function queryRow(row) {

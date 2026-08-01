@@ -2611,6 +2611,124 @@ test("seo weekly generator separates observed query pages from configured target
   }
 });
 
+test("click opportunities use qualified-query position instead of page position", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-seo-qualified-position-"));
+  try {
+    const queriesPath = join(outputRoot, "gsc-queries.csv");
+    const pagesPath = join(outputRoot, "gsc-pages.csv");
+    const metadataPath = join(outputRoot, "gsc-metadata.json");
+    const queryPagesPath = join(outputRoot, "gsc-query-pages.json");
+    const outputPath = join(outputRoot, "2026-07-31-weekly-seo.md");
+
+    await Promise.all([
+      writeFile(
+        queriesPath,
+        [
+          "Query,Clicks,Impressions,CTR,Position,Start date,End date,Source",
+          "super local memory,0,1,0%,45.0,2026-07-03,2026-07-30,Search Console API",
+        ].join("\n"),
+        "utf8",
+      ),
+      writeFile(
+        pagesPath,
+        [
+          "Page,Clicks,Impressions,CTR,Position,Start date,End date,Source",
+          "https://wenlan.app/learn/wenlan-vs-superlocal-memory,0,42,0%,7.7,2026-07-03,2026-07-30,Search Console API",
+        ].join("\n"),
+        "utf8",
+      ),
+      writeFile(
+        metadataPath,
+        JSON.stringify({
+          siteUrl: "sc-domain:wenlan.app",
+          startDate: "2026-07-03",
+          endDate: "2026-07-30",
+          source: "Search Console API",
+          queryRows: 1,
+          pageRows: 1,
+          queryPageRows: 1,
+          propertyTotals: {
+            clicks: 0,
+            impressions: 42,
+            ctr: 0,
+            position: 7.7,
+            aggregationType: "byProperty",
+          },
+        }),
+        "utf8",
+      ),
+      writeFile(
+        queryPagesPath,
+        JSON.stringify({
+          siteUrl: "sc-domain:wenlan.app",
+          startDate: "2026-07-03",
+          endDate: "2026-07-30",
+          source: "Search Console API",
+          dimensions: ["query", "page"],
+          nativeUnits: {
+            clicks: "clicks",
+            impressions: "impressions",
+            ctr: "ratio",
+            position: "average position",
+          },
+          responseAggregationType: "byPage",
+          rowCount: 1,
+          rows: [
+            {
+              keys: [
+                "super local memory",
+                "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
+              ],
+              clicks: 0,
+              impressions: 1,
+              ctr: 0,
+              position: 45,
+            },
+          ],
+        }),
+        "utf8",
+      ),
+    ]);
+
+    await execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly.mjs"),
+        "--",
+        "--queries",
+        queriesPath,
+        "--pages",
+        pagesPath,
+        "--gsc-metadata",
+        metadataPath,
+        "--query-pages",
+        queryPagesPath,
+        "--date",
+        "2026-07-31",
+        "--output",
+        outputPath,
+      ],
+      { cwd: repoRoot },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+    assert.match(
+      report,
+      /\| Page avg position \| Qualified avg position \|/,
+    );
+    assert.match(
+      report,
+      /\| `\/learn\/wenlan-vs-superlocal-memory` \| measuring-only \| 42 \| 0 \| 0\.00% \| 7\.7 \| 45\.0 \| 1 \| `super local memory` \(1\) \| internal-link-refresh \|/,
+    );
+    assert.doesNotMatch(
+      report,
+      /`\/learn\/wenlan-vs-superlocal-memory`[^\n]+serp-intent-review/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
 test("seo weekly report separates property totals from visible query and page rows", async () => {
   const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-property-totals-"));
   try {

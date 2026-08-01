@@ -582,6 +582,7 @@ function inspectExperimentLedger(experiments, errors) {
       active: 0,
       startedIds: new Set(),
       activeIds: new Set(),
+      productionInFlightIds: [],
       campaignRecords: [],
     };
   }
@@ -822,12 +823,16 @@ function inspectExperimentLedger(experiments, errors) {
   const active = [...latestStatuses]
     .filter(([, status]) => activeStatuses.has(status))
     .map(([id]) => id);
+  const productionInFlightIds = [...latestStatuses]
+    .filter(([, status]) => productionInFlightStatuses.has(status))
+    .map(([id]) => id);
 
   return {
     starts: startedIds.size,
     active: active.length,
     startedIds,
     activeIds: new Set(active),
+    productionInFlightIds,
     campaignRecords: campaignRecords(ledger),
   };
 }
@@ -872,6 +877,14 @@ export function validateGoalControlPlane({ plan, experiments }) {
   if (!mutable.currentId && ledger.active > 0) {
     errors.push(
       "PLAN.md Current experiment must identify an active experiment while the ledger has active experiments.",
+    );
+  }
+  if (
+    ledger.productionInFlightIds.length === 1 &&
+    mutable.currentId !== ledger.productionInFlightIds[0]
+  ) {
+    errors.push(
+      `PLAN.md Current experiment must match the unique production-in-flight experiment "${ledger.productionInFlightIds[0]}".`,
     );
   }
   if (mutable.approvalTimestamp) {

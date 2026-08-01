@@ -156,6 +156,41 @@ test("PLAN current experiment must exist as an active ledger start", () => {
   );
 });
 
+test("PLAN current experiment matches the unique production-in-flight experiment", () => {
+  const measuringId = "EXP-030";
+  const productionId = "EXP-031";
+  const experiments = [
+    experimentFreeExperiments,
+    experimentStart({
+      id: measuringId,
+      status: "measuring",
+      windowStart: "2026-08-01",
+      windowEnd: "2026-08-07",
+      launched: "2026-08-01",
+    }),
+    experimentStart({
+      id: productionId,
+      status: "active",
+      windowStart: "2026-08-01",
+      windowEnd: "2026-08-07",
+      launched: "2026-08-02",
+    }),
+  ].join("\n");
+
+  const errors = validationErrors({
+    plan: fixturePlan(measuringId, 2),
+    experiments,
+  });
+
+  assert.ok(
+    errors.some((error) =>
+      error.includes(
+        `Current experiment must match the unique production-in-flight experiment "${productionId}"`,
+      ),
+    ),
+  );
+});
+
 test("PLAN active experiment count must match the ledger", () => {
   const plan = canonicalPlan.replace(
     `- Active experiments: ${canonicalActiveExperimentCount}.`,
@@ -413,7 +448,7 @@ test("a terminal readout updates active reporting without blocking later product
     }),
   ].join("\n");
 
-  const plan = fixturePlan("EXP-010", 2);
+  const plan = fixturePlan("EXP-011", 2);
 
   assert.deepEqual(validationErrors({ plan, experiments }), []);
 });

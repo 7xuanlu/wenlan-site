@@ -249,23 +249,16 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-07-30-knowledge-base-locales-refresh` is production-verified and
-  measuring. It refreshes the existing English, zh-TW, and zh-CN Learn
-  hubs plus the existing source-backed AI knowledge-base article in all three
-  locales. It creates no URL, does not change locale availability, and keeps
-  the category centered on AI knowledge bases and LLM wiki rather than
-  generic memory. The user approved local preparation, commit, push, PR
-  creation, merge, automatic Vercel deployment, read-only production
-  verification, and a fixed GSC inspection/indexing batch for `/learn`,
-  the zh-TW and zh-CN Learn hubs, and the zh-TW and zh-CN source-backed
-  article routes in this task at `2026-07-30T06:57:46Z`, then explicitly
-  added zh-TW. PR #99 merged as
-  `5a4c8fe302b4557b4f34ca7ac9c40bad4e39bfbc`; Vercel production completed at
-  `2026-07-30T07:59:58Z`. The five-URL GSC batch completed by
-  `2026-07-30T08:07:02Z`; all five URLs were already on Google and each
-  returned `Indexing requested`. No GSC validation,
-  synthetic event, external post, OSS submission, paid acquisition,
-  analytics account mutation, or metric change is approved.
+  `EXP-2026-08-01-zhtw-llm-wiki-v2-refresh` is the unique active production
+  change. It refreshes only the existing zh-TW LLM Wiki article with the
+  maintained Karpathy and LLM Wiki v2 architecture, RAG and Obsidian
+  boundaries, setup, verification, failure-repair, and six-command workflow.
+  It preserves the URL, publication date, canonical, reciprocal hreflang,
+  Article and BreadcrumbList schema, and visible FAQ without `FAQPage`. The
+  user approved the GitHub publish flow and then explicitly approved merge in
+  this task; PR #101 contains the verified local package. No repeat indexing,
+  GSC validation, synthetic event, external post, OSS submission, paid
+  acquisition, analytics account mutation, or metric change is approved.
   `EXP-2026-07-29-docs-github-acquisition` is live,
   production-verified, and measuring; it no longer consumes the single
   production slot. PR #98 merged at `2026-07-30T07:26:34Z` as
@@ -707,69 +700,37 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-07-30-knowledge-base-locales-refresh` is production-verified and
-measuring. It refreshes existing acquisition surfaces rather than
-creating another article: `/learn`,
-`/learn/source-backed-wiki-pages-ai-work`, their zh-TW and zh-CN Learn hubs,
-and the two existing localized source-backed article routes.
+`EXP-2026-08-01-zhtw-llm-wiki-v2-refresh` is the unique production-in-flight
+experiment. The authenticated GSC baseline maps the exact visible query
+`llm wiki 2.0` to `/zh-TW` with 1 impression, 0 clicks, and position 13. The
+localized target article has no privacy-visible page row and is not reported
+as zero. Property totals, visible-query totals, the visibility gap, Vercel,
+Umami, and GitHub observations remain separate native-unit evidence.
 
-The aligned GSC baseline keeps `/learn` at 91 impressions and 0 clicks,
-`/learn/source-backed-wiki-pages-ai-work` at 4 impressions and 0 clicks,
-the zh-TW source-backed page at 1 impression and 0 clicks, and the zh-CN
-source-backed page at 1 impression and 0 clicks. Their page-average positions
-remain separate from exact-query rank. Vercel separately reports 100 visitors
-and 102 pageviews for `/learn`, 5 and 5 for the English source-backed page,
-1 and 1 for zh-TW, and 2 and 3 for zh-CN.
+The bounded change keeps the existing
+`/zh-TW/learn/distilled-wiki-pages-ai-memory` URL and original
+`datePublished: 2026-07-04`. It adds the maintained seven-section Traditional
+Chinese LLM Wiki answer, Karpathy and LLM Wiki v2 sources, RAG and Obsidian
+boundaries, setup and repair guidance, and a six-command verification
+workflow. Canonical, reciprocal hreflang, Article and BreadcrumbList schema,
+and visible FAQ without `FAQPage` remain unchanged. Chinese display glyphs use
+native sans fallbacks while Latin display terms retain Fraunces; no CJK
+webfont payload is added.
 
-The change leads with source-backed AI knowledge-base and LLM-wiki language,
-adds a standalone provenance, maintenance, review, and verification workflow,
-keeps Obsidian as an ecosystem bridge, and preserves the original publication
-date. Simplified-Chinese community wording supports the zh-CN refresh.
-Exact Taiwan `AI 知識庫` demand remains sparse, so zh-TW is a bounded refresh
-of an existing indexed route with one GSC impression, not a demand or volume
-claim and not a new URL.
+The experiment requires 5 target-page GSC impressions in one complete
+post-deploy window before interpretation. W2 success additionally requires at
+least 1 target-page click and a green technical and locale floor. W4 failure
+requires at least 20 target-page impressions with zero clicks, or reliable
+post-recrawl evidence that the qualified intent continues landing only on the
+homepage. Lower exposure remains inconclusive.
 
-The experiment requires 10 GSC impressions across the changed canonical pages
-in one complete post-deploy readout window before interpretation. Success at
-W2 requires at least 10 target-page impressions, nonzero impressions on at
-least two locale surfaces, and no technical regression. A reliable complete
-window with zero impressions across all changed pages is failure; all other
-low-exposure outcomes remain inconclusive. GSC, Vercel, Umami, and GitHub
-observations stay in their native units and are not combined.
-
-The complete candidate gate, source-native baseline, approval boundary, and
-verification contract are recorded in
-`docs/seo-audits/2026-07-30-knowledge-base-locales-prelaunch.md` and the
-append-only ledger.
-
-PR #99 merged at `2026-07-30T07:58:58Z` as
-`5a4c8fe302b4557b4f34ca7ac9c40bad4e39bfbc`; Vercel production completed at
-`2026-07-30T07:59:58Z`. The deployed technical audit passes robots, 113
-sitemap URLs, 17 key pages, six utility noindex headers, sitemap-wide
-`FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy URL
-exclusions. Live render verification passes exact self-canonicals,
-`index, follow`, reciprocal English/zh-TW/zh-CN/x-default alternates,
-Article and BreadcrumbList schema, stable publication and modification
-dates, the visible workflow and FAQ, and zero horizontal overflow across the
-six changed routes.
-
-GSC URL Inspection reported all five approved batch URLs already on Google.
-Each request-indexing action returned `Indexing requested` by
-`2026-07-30T08:07:02Z`. This records queue acceptance only; it is not a
-post-change crawl, ranking, impression, or click result.
-
-The actual 24-hour technical/evidence readout was recorded at
-`2026-08-01T03:01:49Z`. The live deployed audit and targeted six-route check
-remain green across English, zh-TW, and zh-CN: every hub and source-backed
-article returns direct `200`, exact self-canonical, `index, follow`, reciprocal
-locale alternates, its expected CollectionPage or Article plus BreadcrumbList
-schema, the visible AI-knowledge-base/LLM-wiki answer, and no `FAQPage`.
-The authenticated `2026-07-03..2026-07-30` range includes only a partial
-post-deploy launch date, not one complete post-deploy evidence window. Its
-property, visible-query, page-row, Vercel, Umami, and GitHub observations are
-therefore recorded separately in the ledger without applying the 10-
-impression minimum or inferring a crawl, traffic lift, or SEO outcome. Run
-this experiment's 7-day readout after `2026-08-06T07:59:58Z`.
+Local verification passes the Goal contract, 57 i18n tests, 204 SEO tests,
+TypeScript, the 214-page production build, built technical SEO, and mobile and
+desktop rendered QA. The user invoked the GitHub publish flow and then
+explicitly approved merge at `2026-08-01T03:53:42Z`. PR #101 is the approved
+publication path. Repeat indexing, GSC validation, external posts, OSS
+submissions, paid acquisition, synthetic analytics events, and metric changes
+remain outside that approval.
 
 ### Measuring cohort: Obsidian Claude Code
 
