@@ -64,6 +64,18 @@ function sectionId(heading: string, index: number): string {
   return asciiId || `section-${index + 1}`;
 }
 
+function renderLocalizedHeading(heading: string) {
+  return heading.split(/(AI 知識庫|AI 知识库)/g).map((part, index) =>
+    part === "AI 知識庫" || part === "AI 知识库" ? (
+      <span key={`${part}-${index}`} className="whitespace-nowrap">
+        {part}
+      </span>
+    ) : (
+      part
+    ),
+  );
+}
+
 function translatedArticleOrNotFound(locale: string, slug: string) {
   const resolvedLocale = resolveLocalizedRouteLocale(locale);
   const article = getLocalizedLearnArticle(resolvedLocale, slug);
@@ -265,7 +277,7 @@ export default async function LocalizedLearnSlugPage({
                   {article.eyebrow}
                 </p>
                 <h1 className="warm-glow max-w-full font-serif text-[2rem] leading-[1.08] font-medium tracking-tight [word-break:keep-all] [overflow-wrap:break-word] sm:text-7xl sm:leading-[1.05]">
-                  {article.title}
+                  {renderLocalizedHeading(article.title)}
                 </h1>
                 <p className="mt-8 max-w-2xl break-words text-lg leading-relaxed text-[var(--o-text-secondary)]">
                   {article.description}
@@ -323,8 +335,8 @@ export default async function LocalizedLearnSlugPage({
                     {(index + 1).toString().padStart(2, "0")}
                   </p>
                   <div className="min-w-0">
-                    <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
-                      {section.heading}
+                    <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)] [word-break:keep-all] [overflow-wrap:break-word]">
+                      {renderLocalizedHeading(section.heading)}
                     </h2>
                     <div className="mt-5 space-y-4 text-base leading-relaxed text-[var(--o-text-secondary)]">
                       {section.body.map((paragraph) => (
@@ -368,8 +380,8 @@ export default async function LocalizedLearnSlugPage({
 
               <section className="relative overflow-hidden rounded-2xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-8 shadow-[0_18px_70px_rgba(0,0,0,0.18)]">
                 <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full border border-[var(--o-border-subtle)] opacity-50" />
-                <h2 className="font-serif text-3xl font-medium tracking-tight">
-                  {article.cta.heading}
+                <h2 className="font-serif text-3xl font-medium tracking-tight [word-break:keep-all] [overflow-wrap:break-word]">
+                  {renderLocalizedHeading(article.cta.heading)}
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-[var(--o-text-secondary)]">
                   {article.cta.body}

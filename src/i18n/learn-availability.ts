@@ -20,6 +20,7 @@ export const TRANSLATED_LEARN_SLUGS_BY_LOCALE = {
   "zh-CN": [
     "distilled-wiki-pages-ai-memory",
     "source-backed-wiki-pages-ai-work",
+    "wenlan-vs-obsidian-ai-memory",
   ],
 } as const satisfies Record<
   TranslatedLocale,

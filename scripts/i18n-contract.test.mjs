@@ -504,10 +504,11 @@ test("built i18n checker treats Mandarin Learn hubs and translated articles as p
     "/zh-TW/learn/distilled-wiki-pages-ai-memory",
     "/zh-CN/learn/source-backed-wiki-pages-ai-work",
     "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
+    "/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
   ]) {
     assert.match(okRoutes, new RegExp(`"${route}"`), route);
   }
-  assert.match(
+  assert.doesNotMatch(
     notFoundRoutes,
     /"\/zh-CN\/learn\/wenlan-vs-obsidian-ai-memory"/,
   );
@@ -646,7 +647,7 @@ test("localized route helpers keep English canonical and prefix translated core 
   );
   assert.equal(
     routing.localizePath("zh-CN", "/learn/wenlan-vs-obsidian-ai-memory"),
-    "/learn/wenlan-vs-obsidian-ai-memory",
+    "/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
   );
   assert.deepEqual(routing.stripLocalePrefix("/zh-TW/docs/get-started"), {
     locale: "zh-TW",
@@ -686,7 +687,7 @@ test("localized route helpers keep English canonical and prefix translated core 
   );
   assert.equal(
     routing.isTranslatedPath("zh-CN", "/learn/wenlan-vs-obsidian-ai-memory"),
-    false,
+    true,
   );
   assert.equal(
     routing.isTranslatedPath("zh-TW", "/learn/wenlan-vs-basic-memory"),
@@ -776,6 +777,8 @@ test("alternate URLs are reciprocal and include x-default for core translated pa
       "en-US": "https://wenlan.app/learn/wenlan-vs-obsidian-ai-memory",
       "zh-TW":
         "https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
+      "zh-CN":
+        "https://wenlan.app/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
       "x-default":
         "https://wenlan.app/learn/wenlan-vs-obsidian-ai-memory",
     },
@@ -837,6 +840,7 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
     { locale: "zh-TW", slug: "source-backed-wiki-pages-ai-work" },
     { locale: "zh-CN", slug: "source-backed-wiki-pages-ai-work" },
     { locale: "zh-TW", slug: "wenlan-vs-obsidian-ai-memory" },
+    { locale: "zh-CN", slug: "wenlan-vs-obsidian-ai-memory" },
   ]);
 
   const metadata = await localizedLearnSlug.generateMetadata({
@@ -879,13 +883,61 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
     routing.alternateUrls("/learn/wenlan-vs-obsidian-ai-memory"),
   );
 
-  const missingZhCNMetadata = await localizedLearnSlug.generateMetadata({
+  const zhCNObsidianMetadata = await localizedLearnSlug.generateMetadata({
     params: Promise.resolve({
       locale: "zh-CN",
       slug: "wenlan-vs-obsidian-ai-memory",
     }),
   });
-  assert.deepEqual(missingZhCNMetadata, {});
+  assert.equal(
+    zhCNObsidianMetadata.title,
+    "Obsidian + Claude Code：MCP 与 AI 知识库 | Wenlan",
+  );
+  assert.equal(
+    zhCNObsidianMetadata.alternates.canonical,
+    "https://wenlan.app/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
+  );
+  assert.deepEqual(
+    zhCNObsidianMetadata.alternates.languages,
+    routing.alternateUrls("/learn/wenlan-vs-obsidian-ai-memory"),
+  );
+});
+
+test("Mandarin Obsidian guides own the Claude Code, MCP, and AI knowledge-base intent", async () => {
+  const { getLocalizedLearnArticle } = await import("../src/i18n/learn-articles.ts");
+
+  for (const [locale, script] of [
+    ["zh-TW", "traditional"],
+    ["zh-CN", "simplified"],
+  ]) {
+    const article = getLocalizedLearnArticle(locale, "wenlan-vs-obsidian-ai-memory");
+    assert.ok(article, `${locale} article`);
+    assert.match(article.title, /Obsidian \+ Claude Code/);
+    assert.match(article.title, script === "traditional" ? /AI 知識庫/ : /AI 知识库/);
+    assert.equal(
+      article.publishedAt,
+      locale === "zh-TW" ? "2026-07-22" : "2026-08-01",
+    );
+    assert.equal(article.updatedAt, "2026-08-01");
+    assert.ok(article.keywords.includes("Obsidian MCP"));
+    assert.equal(article.sections.length, 6);
+
+    const articleText = JSON.stringify(article);
+    for (const expected of [
+      "read-only Source",
+      "IDE bridge",
+      "MCP",
+      "provenance",
+      "/distill",
+      "/pages",
+      "/lint",
+      "Roasbeef/obsidian-claude-code",
+      "petersolopov/obsidian-claude-ide",
+      "iansinnott/obsidian-claude-code-mcp",
+    ]) {
+      assert.match(articleText, new RegExp(expected.replaceAll("/", "\\/")), `${locale}: ${expected}`);
+    }
+  }
 });
 
 test("zh-TW LLM Wiki guide owns the Karpathy v2 and AI knowledge-base intent", async () => {
@@ -1024,6 +1076,18 @@ test("localized Learn renderer exposes article code blocks", async () => {
   assert.match(source, /\[word-break:keep-all\]/);
 });
 
+test("localized Learn headings keep CJK semantic phrases together on mobile", async () => {
+  const source = await readFile(
+    resolve(repoRoot, "src/app/[locale]/learn/[slug]/page.tsx"),
+    "utf8",
+  );
+
+  const protectedHeadings = source.match(/<h2 className="[^"]*\[word-break:keep-all\][^"]*\[overflow-wrap:break-word\][^"]*"/g) ?? [];
+  assert.equal(protectedHeadings.length, 2);
+  assert.match(source, /heading\.split\(\/\(AI 知識庫\|AI 知识库\)\/g\)/);
+  assert.equal(source.match(/\{renderLocalizedHeading\(/g)?.length, 3);
+});
+
 test("core route wrappers export localized metadata for translated pages", async () => {
   const { routing } = await loadI18nModules();
   const routeModules = [
@@ -1124,7 +1188,7 @@ test("sitemap includes localized core and Mandarin acquisition routes", async ()
   );
   assert.equal(
     urls.has("https://wenlan.app/zh-CN/learn/wenlan-vs-obsidian-ai-memory"),
-    false,
+    true,
   );
   assert.equal(
     urls.has("https://wenlan.app/zh-TW/learn/wenlan-vs-basic-memory"),

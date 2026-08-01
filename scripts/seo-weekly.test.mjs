@@ -163,14 +163,26 @@ const requiredLocalizedLearnPaths = [
   "/zh-TW/learn/source-backed-wiki-pages-ai-work",
   "/zh-CN/learn/source-backed-wiki-pages-ai-work",
   "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
+  "/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
 ];
 const requiredLocalizedLearnLocs = requiredLocalizedLearnPaths.map(
   (path) => `https://wenlan.app${path}`,
 );
+const expectedArticleDates = new Map([
+  [
+    "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
+    { datePublished: "2026-07-22", dateModified: "2026-08-01" },
+  ],
+  [
+    "/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
+    { datePublished: "2026-08-01", dateModified: "2026-08-01" },
+  ],
+]);
 const requiredLocalizedBuiltHtmlPages = requiredLocalizedLearnPaths.map((path) => ({
   path: `${path.slice(1)}.html`,
   canonical: `https://wenlan.app${path}`,
   type: "Article",
+  ...expectedArticleDates.get(path),
 }));
 const requiredBuiltSitemapLocs = [
   "https://wenlan.app",
@@ -292,6 +304,16 @@ function builtHtmlPage(page, overrides = {}) {
   const typeName = overrides.type ?? type;
   const canonicalHref = overrides.canonical ?? canonical;
   const robots = overrides.robots ?? "index, follow";
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": typeName,
+    ...(overrides.datePublished ?? page.datePublished
+      ? { datePublished: overrides.datePublished ?? page.datePublished }
+      : {}),
+    ...(overrides.dateModified ?? page.dateModified
+      ? { dateModified: overrides.dateModified ?? page.dateModified }
+      : {}),
+  };
   const extraSchema = overrides.extraSchema ?? "";
   const extraHead = overrides.extraHead ?? "";
   const body =
@@ -306,7 +328,7 @@ function builtHtmlPage(page, overrides = {}) {
     "<!DOCTYPE html><html><head>",
     `<link rel="canonical" href="${canonicalHref}"/>`,
     `<meta name="robots" content="${robots}"/>`,
-    `<script type="application/ld+json">{"@context":"https://schema.org","@type":"${typeName}"}</script>`,
+    `<script type="application/ld+json">${JSON.stringify(articleSchema)}</script>`,
     extraSchema,
     extraHead,
     `</head><body>${body}</body></html>`,
@@ -340,12 +362,23 @@ function deployedHtmlPage(path, overrides = {}) {
   const body = overrides.body ?? (requiredLinks[path] ?? ["ok"]).join("");
   const extraSchema = overrides.extraSchema ?? "";
   const extraHead = overrides.extraHead ?? "";
+  const expectedDates = expectedArticleDates.get(path) ?? {};
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": type,
+    ...(overrides.datePublished ?? expectedDates.datePublished
+      ? { datePublished: overrides.datePublished ?? expectedDates.datePublished }
+      : {}),
+    ...(overrides.dateModified ?? expectedDates.dateModified
+      ? { dateModified: overrides.dateModified ?? expectedDates.dateModified }
+      : {}),
+  };
 
   return [
     "<!DOCTYPE html><html><head>",
     `<link rel="canonical" href="${canonical}"/>`,
     `<meta name="robots" content="${robots}"/>`,
-    `<script type="application/ld+json">{"@context":"https://schema.org","@type":"${type}"}</script>`,
+    `<script type="application/ld+json">${JSON.stringify(articleSchema)}</script>`,
     extraSchema,
     extraHead,
     `</head><body>${body}</body></html>`,
@@ -1349,8 +1382,8 @@ test("deployed technical SEO checker verifies robots, sitemap, key pages, utilit
     );
 
     assert.match(stdout, /robots ok/);
-    assert.match(stdout, /sitemap locs ok: 17/);
-    assert.match(stdout, /key pages ok: 17/);
+    assert.match(stdout, /sitemap locs ok: 18/);
+    assert.match(stdout, /key pages ok: 18/);
     assert.match(stdout, /utility noindex headers ok: 6/);
     assert.match(stdout, /redirects ok: 25/);
     assert.match(stdout, /bridge host redirects ok: 6/);
@@ -1441,7 +1474,7 @@ test("deployed technical SEO checker does not require unshipped local internal l
         { cwd: repoRoot },
       );
 
-      assert.match(stdout, /key pages ok: 17/);
+      assert.match(stdout, /key pages ok: 18/);
     },
   );
 });
@@ -1558,6 +1591,28 @@ test("deployed technical SEO checker rejects FAQPage JSON-LD without a robots fa
           { cwd: repoRoot },
         ),
         /FAQPage JSON-LD present: \/learn/,
+      );
+    },
+  );
+});
+
+test("deployed technical SEO checker rejects changed localized article dates", async () => {
+  await withDeployedFixture(
+    {
+      pages: {
+        "/zh-TW/learn/wenlan-vs-obsidian-ai-memory": {
+          datePublished: "2026-08-01",
+        },
+      },
+    },
+    async (fixtureDir) => {
+      await assert.rejects(
+        execFileAsync(
+          process.execPath,
+          [deployedCheckerScript, "--", "--fixture-dir", fixtureDir],
+          { cwd: repoRoot },
+        ),
+        /page schema dates invalid: \/zh-TW\/learn\/wenlan-vs-obsidian-ai-memory/,
       );
     },
   );
@@ -1927,9 +1982,9 @@ test("built technical SEO checker verifies compiled redirects, headers, and site
     assert.match(stdout, /redirects ok: 26/);
     assert.match(stdout, /global 404 ok/);
     assert.match(stdout, /noindex headers ok: 7/);
-    assert.match(stdout, /sitemap required locs ok: 17/);
-    assert.match(stdout, /html page checks ok: 17/);
-    assert.match(stdout, /all html FAQPage absent ok: 18/);
+    assert.match(stdout, /sitemap required locs ok: 18/);
+    assert.match(stdout, /html page checks ok: 18/);
+    assert.match(stdout, /all html FAQPage absent ok: 19/);
     assert.match(stdout, /old URLs absent from sitemap/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
@@ -2184,6 +2239,30 @@ test("built technical SEO checker rejects key pages with wrong canonical URLs", 
         { cwd: repoRoot },
       ),
       /page canonical invalid: learn\/claude-code-memory\.html/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("built technical SEO checker rejects changed localized article dates", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-built-article-dates-"));
+  try {
+    const buildDir = await writeBuiltSeoFixture(outputRoot, {
+      htmlPages: {
+        "zh-CN/learn/wenlan-vs-obsidian-ai-memory.html": {
+          dateModified: "2026-07-31",
+        },
+      },
+    });
+
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [builtCheckerScript, "--", "--build-dir", buildDir],
+        { cwd: repoRoot },
+      ),
+      /page schema dates invalid: zh-CN\/learn\/wenlan-vs-obsidian-ai-memory\.html/,
     );
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
