@@ -4432,3 +4432,27 @@ increase for that experiment.
 - Next step: Recheck PR state and direct accepted-listing presence after 24
   hours and seven complete live days. Keep listing-days, GitHub, GSC, Vercel,
   and Umami in their native units.
+
+### 2026-08-01T06:38:49Z — mcpservers.org free submission accepted
+
+- Record type: campaign-observation
+- Related experiment: none; approved distribution action
+- Status: submitted-pending-review
+- Submission: The repository-supported `mcpservers.org` form accepted Wenlan
+  submission ID `5334` with category `memory`, `plan=free`, and
+  `paymentStatus=not_required`. The destination returned `pending`; this is a
+  review-queue state, not an accepted or live directory listing.
+- Contact boundary: The user explicitly confirmed the public contact email for
+  this destination. The address is intentionally not stored in the repository.
+- Duplicate gate: The prepared submission had already passed the directory
+  inventory gate. A current post-submit reconciliation found no Wenlan name or
+  `7xuanlu/wenlan` match in `wong2/awesome-mcp-servers`, no open or closed PR
+  by `7xuanlu` there, and no indexed `mcpservers.org` result for Wenlan.
+- Native-unit boundary: One pending free-form submission remains separate from
+  accepted listing count, complete listing-days, external PR states, GitHub
+  stars, GSC, Vercel, and Umami. No acquisition or ranking effect is inferred.
+- Result: free submission accepted into review queue
+- Decision: wait for maintainer review; do not resubmit or select Premium
+- Next step: At the 24-hour and seven-complete-live-day checks, record the
+  direct listing state and listing-days only if the Wenlan listing becomes
+  publicly accessible.
