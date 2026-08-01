@@ -121,7 +121,7 @@ const ACTION_PRIORITY = {
 
 const MIN_QUERY_ACTION_IMPRESSIONS = 3;
 const MIN_PAGE_INTERNAL_LINK_IMPRESSIONS = 20;
-const REPORT_SCHEMA_VERSION = 4;
+const REPORT_SCHEMA_VERSION = 6;
 const EXPECTED_GSC_SITE_URL = "sc-domain:wenlan.app";
 const ACQUISITION_PRIORITY_GROUPS = new Set([
   "AI knowledge base / wiki",
@@ -141,6 +141,8 @@ const ACQUISITION_PRIORITY_PAGE =
   /^\/(?:(?:zh-TW|zh-CN)\/)?learn(?:\/(?:ai-work-memory-vs-knowledge-base|source-backed-wiki-pages-ai-work|distilled-wiki-pages-ai-memory))?$/;
 const GENERATED_SECTION_HEADINGS = new Set([
   "Snapshot",
+  "GitHub Release Evidence",
+  "Resend Signup Evidence",
   "Vercel Analytics Evidence",
   "Umami Evidence",
   "Top Actions",
@@ -229,6 +231,12 @@ function parseArgs(argv) {
       : null,
     vercelMetadataPath: args["vercel-metadata"]
       ? resolve(process.cwd(), args["vercel-metadata"])
+      : null,
+    githubMetadataPath: args["github-metadata"]
+      ? resolve(process.cwd(), args["github-metadata"])
+      : null,
+    resendMetadataPath: args["resend-metadata"]
+      ? resolve(process.cwd(), args["resend-metadata"])
       : null,
     gscMetadataPath: args["gsc-metadata"]
       ? resolve(process.cwd(), args["gsc-metadata"])
@@ -1190,6 +1198,8 @@ function makeEvidenceFingerprint({
   evidence,
   umami,
   vercel,
+  github,
+  resend,
 }) {
   const payload = {
     reportSchemaVersion: REPORT_SCHEMA_VERSION,
@@ -1200,6 +1210,8 @@ function makeEvidenceFingerprint({
     evidence,
     umami,
     vercel,
+    github,
+    resend,
   };
   return `sha256:${createHash("sha256")
     .update(JSON.stringify(payload))
@@ -1214,6 +1226,8 @@ function makeMarkdown({
   evidence,
   umami,
   vercel,
+  github,
+  resend,
 }) {
   const evidenceMetadata =
     evidence ??
@@ -1228,6 +1242,18 @@ function makeMarkdown({
     referrerRecords: [],
     metadata: null,
   });
+  const githubSummary = github ?? summarizeGithub(null);
+  const resendSummary = resend ?? summarizeResend(null);
+  if (githubSummary.hasData && githubSummary.reportDate !== date) {
+    throw new Error(
+      `GitHub metadata reportDate must match the report date: github=${githubSummary.reportDate}; report=${date}`,
+    );
+  }
+  if (resendSummary.hasData && resendSummary.reportDate !== date) {
+    throw new Error(
+      `Resend metadata reportDate must match the report date: resend=${resendSummary.reportDate}; report=${date}`,
+    );
+  }
   if (
     vercelSummary.hasData &&
     vercelSummary.dateRange !== "manual / unavailable" &&
@@ -1276,6 +1302,8 @@ function makeMarkdown({
     evidence: evidenceMetadata,
     umami: umamiSummary,
     vercel: vercelSummary,
+    github: githubSummary,
+    resend: resendSummary,
   });
   const analyticsSnapshot = vercelSummary.hasData
     ? `| Analytics data source | ${escapePipe(vercelSummary.source)} |
@@ -1291,6 +1319,20 @@ function makeMarkdown({
 | AI referrals | ${formatReferrerSummary(umamiSummary.aiReferrerVisits, umamiSummary.aiReferrerCount, umamiSummary.hasReferrerData)} |
 | Reddit referrals | ${formatReferrerSummary(umamiSummary.redditVisits, umamiSummary.redditReferrerCount, umamiSummary.hasReferrerData)} |
 | llms.txt hits | ${umamiSummary.hasLlmsData ? umamiSummary.llmsHits : "manual"} |`;
+  const githubSnapshot = githubSummary.hasData
+    ? `| GitHub captured at | ${escapePipe(githubSummary.capturedAt)} |
+| GitHub stars | ${githubSummary.stars} |
+| Website-linked ${escapePipe(githubSummary.currentRelease.tag)} asset downloads | ${githubSummary.currentRelease.websiteAssetDownloads} |
+| All release asset downloads | ${githubSummary.allReleaseAssetDownloads} |`
+    : `| GitHub stars | manual / unavailable |
+| Website release asset downloads | manual / unavailable |`;
+  const resendSnapshot = resendSummary.hasData
+    ? `| Resend fetched at | ${escapePipe(resendSummary.fetchedAt)} |
+| Resend total contacts | ${resendSummary.totals.contacts} point-in-time |
+| Resend contacts in range | ${resendSummary.totals.rangeContacts} |
+| Resend attributed contacts in range | ${resendSummary.totals.rangeAttributedContacts} |`
+    : `| Resend contacts in range | manual / account-gated |
+| Resend attributed contacts in range | manual / account-gated |`;
   const analyticsEvidence = vercelSummary.hasData
     ? `${makeVercelMarkdown(vercelSummary)}\n\n`
     : umamiSummary.hasData
@@ -1323,8 +1365,10 @@ ${evidenceMetadata.intro}
 | Top query groups | ${groups.slice(0, 4).map((group) => `${group.name} (${group.impressions})`).join(", ") || "-"} |
 | Top page | ${topPage?.page ?? "-"} |
 ${analyticsSnapshot}
+${githubSnapshot}
+${resendSnapshot}
 
-${analyticsEvidence}## Top Actions
+${analyticsEvidence}${makeGithubMarkdown(githubSummary)}${makeResendMarkdown(resendSummary)}## Top Actions
 
 Within this authenticated GSC report, only technical blockers, protected AI knowledge-base/wiki rows, and visible Obsidian + Claude/Claude Code/MCP query rows are nominated here. Generic Obsidian and other rows remain visible in the complete queues as measurement evidence. Separately, inspectable Trends plus independent corroboration may nominate a pre-GSC campaign candidate through the full candidate gate.
 
@@ -1362,6 +1406,8 @@ The acquisition queue centers AI knowledge bases, LLM wiki, source-backed wiki, 
 - [ ] Verify old \`/guides/*\` and \`/docs/guides/*\` URLs redirect to canonical \`/learn/*\` URLs.
 - [ ] Recheck changed redirects after deployment with \`pnpm seo:technical:deployed -- --require-direct-changed-redirects true\`.
 - [ ] Run \`pnpm seo:vercel:fetch -- --date YYYY-MM-DD\` before the weekly report; keep custom CTA events marked account-gated when the Vercel plan blocks them.
+- [ ] Run \`pnpm seo:github:fetch -- --date YYYY-MM-DD\` before the weekly report; treat release download counts as cumulative point-in-time GitHub evidence, not a date-range conversion metric.
+- [ ] Run \`pnpm seo:resend:fetch -- --date YYYY-MM-DD\` before the weekly report; keep contact counts in native Resend units and never write email addresses into SEO artifacts.
 - [ ] Add changed pages to the next weekly comparison.
 - [ ] Generate \`pnpm seo:ai-visibility -- --date YYYY-MM-DD\` and manually check whether AI assistants mention Wenlan accurately for the tracked prompts in \`docs/seo-measurement.md\`.
 - [ ] Next measurement date: ${nextDate}.
@@ -1371,6 +1417,250 @@ The acquisition queue centers AI knowledge bases, LLM wiki, source-backed wiki, 
 function formatUmamiLandingViews(umami) {
   if (!umami.hasPageData) return "manual";
   return `${umami.totalLandingViews} across ${umami.landingPages.length} ${plural(umami.landingPages.length, "row")}`;
+}
+
+function summarizeGithub(metadata) {
+  if (!metadata) return { hasData: false };
+  if (metadata.schemaVersion !== 1) {
+    throw new Error("GitHub metadata schemaVersion must be 1");
+  }
+  if (metadata.source !== "GitHub REST API") {
+    throw new Error("GitHub metadata source must be GitHub REST API");
+  }
+  if (metadata.repository !== "7xuanlu/wenlan") {
+    throw new Error("GitHub metadata repository must be 7xuanlu/wenlan");
+  }
+  if (!/^\d{4}-\d{2}-\d{2}T/.test(metadata.capturedAt ?? "")) {
+    throw new Error("GitHub metadata capturedAt must be an ISO timestamp");
+  }
+  for (const [label, value] of [
+    ["stars", metadata.stars],
+    ["allReleaseAssetDownloads", metadata.allReleaseAssetDownloads],
+    ["currentRelease.assetDownloads", metadata.currentRelease?.assetDownloads],
+    [
+      "currentRelease.websiteAssetDownloads",
+      metadata.currentRelease?.websiteAssetDownloads,
+    ],
+  ]) {
+    if (!Number.isSafeInteger(value) || value < 0) {
+      throw new Error(`GitHub metadata ${label} must be a non-negative integer`);
+    }
+  }
+  if (!metadata.currentRelease?.tag || !Array.isArray(metadata.currentRelease.assets)) {
+    throw new Error("GitHub metadata must include the current release and its assets");
+  }
+
+  const currentTotal = metadata.currentRelease.assets.reduce((sum, asset) => {
+    if (!Number.isSafeInteger(asset.downloadCount) || asset.downloadCount < 0) {
+      throw new Error(
+        `GitHub metadata asset ${asset.name ?? "unknown"} downloadCount must be a non-negative integer`,
+      );
+    }
+    return sum + asset.downloadCount;
+  }, 0);
+  const websiteTotal = metadata.currentRelease.assets
+    .filter((asset) => asset.websiteLinked)
+    .reduce((sum, asset) => sum + asset.downloadCount, 0);
+  if (currentTotal !== metadata.currentRelease.assetDownloads) {
+    throw new Error("GitHub metadata current release asset total does not match its rows");
+  }
+  if (websiteTotal !== metadata.currentRelease.websiteAssetDownloads) {
+    throw new Error("GitHub metadata website asset total does not match its rows");
+  }
+  if (metadata.allReleaseAssetDownloads < metadata.currentRelease.assetDownloads) {
+    throw new Error(
+      "GitHub metadata all-release downloads cannot be lower than the current release total",
+    );
+  }
+
+  return { ...metadata, hasData: true };
+}
+
+function makeGithubMarkdown(github) {
+  if (!github.hasData) return "";
+  const assetRows = github.currentRelease.assets
+    .map(
+      (asset) =>
+        `| \`${escapePipe(asset.name)}\` | ${asset.websiteLinked ? "yes" : "no"} | ${asset.downloadCount} |`,
+    )
+    .join("\n");
+
+  return `## GitHub Release Evidence
+
+GitHub release asset counts are cumulative point-in-time counters captured at ${github.capturedAt}. They are not the same unit as Umami outbound clicks, email contacts, stars, visitors, or GSC clicks, and this report does not infer a person-level join or causality.
+
+| Asset | Linked from wenlan.app | Cumulative downloads |
+| --- | --- | ---: |
+${assetRows}
+
+`;
+}
+
+const RESEND_PROPERTY_KEYS = [
+  "signup_locale",
+  "signup_landing_path",
+  "signup_referrer_host",
+  "signup_utm_source",
+  "signup_utm_medium",
+  "signup_utm_campaign",
+];
+const RESEND_UTM_VALUE = /^[\p{L}\p{N}][\p{L}\p{N} ._~-]*$/u;
+
+function validResendBreakdownValue(key, value) {
+  if (!value || value.length > 120 || value.includes("@")) return false;
+  if (key === "signup_locale") return /^(?:en|zh-TW|zh-CN)$/.test(value);
+  if (key === "signup_landing_path") {
+    let decoded;
+    try {
+      decoded = decodeURIComponent(value);
+    } catch {
+      return false;
+    }
+    return (
+      value.startsWith("/") &&
+      !value.startsWith("//") &&
+      !/[?#\\]/.test(value) &&
+      !decoded.includes("@")
+    );
+  }
+  if (key === "signup_referrer_host") {
+    if (value === "direct") return true;
+    try {
+      const parsed = new URL(`https://${value}`);
+      return (
+        parsed.hostname.toLowerCase() === value.toLowerCase() &&
+        !parsed.username &&
+        !parsed.password &&
+        !parsed.port
+      );
+    } catch {
+      return false;
+    }
+  }
+  return RESEND_UTM_VALUE.test(value);
+}
+
+function summarizeResend(metadata) {
+  if (!metadata) return { hasData: false };
+  if (metadata.schemaVersion !== 1) {
+    throw new Error("Resend metadata schemaVersion must be 1");
+  }
+  if (metadata.source !== "Resend Contacts API") {
+    throw new Error("Resend metadata source must be Resend Contacts API");
+  }
+  if (metadata.scope !== "configured Resend audience") {
+    throw new Error("Resend metadata must be scoped to the configured audience");
+  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(metadata.reportDate ?? "")) {
+    throw new Error("Resend metadata reportDate must be YYYY-MM-DD");
+  }
+  if (!/^\d{4}-\d{2}-\d{2}T/.test(metadata.fetchedAt ?? "")) {
+    throw new Error("Resend metadata fetchedAt must be an ISO timestamp");
+  }
+  const expectedStartDate = addDays(metadata.reportDate, -28);
+  const expectedEndDate = addDays(metadata.reportDate, -1);
+  if (
+    metadata.startDate !== expectedStartDate ||
+    metadata.endDate !== expectedEndDate
+  ) {
+    throw new Error(
+      `Resend metadata must cover ${expectedStartDate}..${expectedEndDate}`,
+    );
+  }
+
+  const totals = metadata.totals ?? {};
+  for (const key of [
+    "contacts",
+    "subscribedContacts",
+    "attributedContacts",
+    "rangeContacts",
+    "rangeAttributedContacts",
+  ]) {
+    if (!Number.isSafeInteger(totals[key]) || totals[key] < 0) {
+      throw new Error(`Resend metadata totals.${key} must be a non-negative integer`);
+    }
+  }
+  if (totals.subscribedContacts > totals.contacts) {
+    throw new Error("Resend subscribed contacts cannot exceed total contacts");
+  }
+  if (totals.attributedContacts > totals.contacts) {
+    throw new Error("Resend attributed contacts cannot exceed total contacts");
+  }
+  if (totals.rangeContacts > totals.contacts) {
+    throw new Error("Resend range contacts cannot exceed total contacts");
+  }
+  if (
+    totals.rangeAttributedContacts > totals.rangeContacts ||
+    totals.rangeAttributedContacts > totals.attributedContacts
+  ) {
+    throw new Error(
+      "Resend attributed contacts in range cannot exceed its parent totals",
+    );
+  }
+
+  const rangeBreakdowns = metadata.rangeBreakdowns ?? {};
+  for (const key of RESEND_PROPERTY_KEYS) {
+    const rows = rangeBreakdowns[key];
+    if (!Array.isArray(rows)) {
+      throw new Error(`Resend metadata rangeBreakdowns.${key} must be an array`);
+    }
+    let breakdownTotal = 0;
+    for (const row of rows) {
+      if (typeof row.value !== "string" || row.value.length === 0) {
+        throw new Error(`Resend metadata ${key} breakdown values must be strings`);
+      }
+      if (!validResendBreakdownValue(key, row.value)) {
+        throw new Error(`Resend metadata ${key} breakdown contains an unsafe value`);
+      }
+      if (!Number.isSafeInteger(row.count) || row.count < 0) {
+        throw new Error(`Resend metadata ${key} breakdown counts must be non-negative integers`);
+      }
+      if (row.count > totals.rangeAttributedContacts) {
+        throw new Error(`Resend metadata ${key} breakdown count exceeds attributed range total`);
+      }
+      breakdownTotal += row.count;
+    }
+    if (breakdownTotal > totals.rangeAttributedContacts) {
+      throw new Error(`Resend metadata ${key} breakdown total exceeds attributed range total`);
+    }
+  }
+
+  return { ...metadata, hasData: true };
+}
+
+function makeResendMarkdown(resend) {
+  if (!resend.hasData) return "";
+  const labels = {
+    signup_locale: "Locale",
+    signup_landing_path: "Landing path",
+    signup_referrer_host: "Referrer host",
+    signup_utm_source: "UTM source",
+    signup_utm_medium: "UTM medium",
+    signup_utm_campaign: "UTM campaign",
+  };
+  const rows = RESEND_PROPERTY_KEYS.flatMap((key) =>
+    resend.rangeBreakdowns[key].map(
+      (row) =>
+        `| ${labels[key]} | ${escapePipe(row.value)} | ${row.count} |`,
+    ),
+  );
+
+  return `## Resend Signup Evidence
+
+Resend contact counts are native contact records, not Umami events, Vercel sessions, GSC clicks, GitHub downloads, or identified cross-source users. This report contains aggregate counts only and intentionally omits email addresses.
+
+| Field | Value |
+| --- | ---: |
+| All contacts at capture | ${resend.totals.contacts} |
+| Subscribed contacts at capture | ${resend.totals.subscribedContacts} |
+| Contacts created in ${resend.startDate}–${resend.endDate} | ${resend.totals.rangeContacts} |
+| Attributed contacts created in range | ${resend.totals.rangeAttributedContacts} |
+
+| Acquisition property | Value | Contacts in range |
+| --- | --- | ---: |
+${rows.length ? rows.join("\n") : "| - | No attributed contacts in range | 0 |"}
+
+`;
 }
 
 function formatReferrerSummary(visits, count, hasData) {
@@ -1798,6 +2088,8 @@ async function run() {
     vercelPageRecords,
     vercelReferrerRecords,
     vercelMetadata,
+    githubMetadata,
+    resendMetadata,
     gscMetadata,
     queryPagesPayload,
   ] = await Promise.all([
@@ -1809,6 +2101,8 @@ async function run() {
     readOptionalCsv(args.vercelPagesPath),
     readOptionalCsv(args.vercelReferrersPath),
     readOptionalJson(args.vercelMetadataPath),
+    readOptionalJson(args.githubMetadataPath),
+    readOptionalJson(args.resendMetadataPath),
     readOptionalJson(args.gscMetadataPath),
     readOptionalJson(args.queryPagesPath),
   ]);
@@ -1833,6 +2127,8 @@ async function run() {
     referrerRecords: vercelReferrerRecords,
     metadata: vercelMetadata,
   });
+  const github = summarizeGithub(githubMetadata);
+  const resend = summarizeResend(resendMetadata);
   let markdown = makeMarkdown({
     date: args.date,
     queries,
@@ -1841,6 +2137,8 @@ async function run() {
     evidence,
     umami,
     vercel,
+    github,
+    resend,
   });
 
   await mkdir(dirname(args.outputPath), { recursive: true });

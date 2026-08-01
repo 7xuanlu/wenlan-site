@@ -1,15 +1,55 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
+import { trackAnalyticsEvent } from "@/components/tracked-link";
 import type { WaitlistContent } from "@/i18n/content";
+import type { Locale } from "@/i18n/locales";
+import {
+  browserSignupAttribution,
+  type SignupAttribution,
+} from "@/lib/signup-attribution";
 import { joinWaitlist } from "./actions";
 
-export function WaitlistForm({ copy }: { copy: WaitlistContent }) {
+const emptyAttribution: SignupAttribution = {
+  signup_landing_path: "/",
+  signup_referrer_host: "direct",
+  signup_utm_source: "",
+  signup_utm_medium: "",
+  signup_utm_campaign: "",
+};
+
+export function WaitlistForm({
+  copy,
+  locale,
+}: {
+  copy: WaitlistContent;
+  locale: Locale;
+}) {
   const [state, action, isPending] = useActionState(joinWaitlist, null);
+  const [attribution, setAttribution] =
+    useState<SignupAttribution>(emptyAttribution);
+  const signupTracked = useRef(false);
   const errorMessage =
     state && !state.success
       ? (copy.errors[state.errorCode] ?? copy.fallbackError)
       : null;
+
+  useEffect(() => {
+    setAttribution(
+      browserSignupAttribution(window.location.href, document.referrer),
+    );
+  }, []);
+
+  useEffect(() => {
+    if (!state?.success || signupTracked.current) return;
+    signupTracked.current = true;
+    trackAnalyticsEvent({
+      eventName: "waitlist_signup",
+      placement: "home-footer",
+      locale,
+      context: "home",
+    });
+  }, [locale, state]);
 
   if (state?.success) {
     return (
@@ -26,6 +66,15 @@ export function WaitlistForm({ copy }: { copy: WaitlistContent }) {
 
   return (
     <form action={action} className="w-full max-w-md">
+      <input type="hidden" name="locale" value={locale} />
+      {Object.entries(attribution).map(([name, value]) => (
+        <input
+          key={name}
+          type="hidden"
+          name={name}
+          value={value}
+        />
+      ))}
       <div className="flex gap-2">
         <input
           type="email"
