@@ -212,6 +212,14 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   targets for the same deadline and final rolling window to 100 property
   clicks and 10,000 property impressions. The stars, Vercel, quality,
   evidence-role, approval, and stop-condition clauses remain unchanged.
+- At `2026-08-01T05:11:57Z`, the user corrected the two-repository OSS
+  inventory and approved the complete non-duplicate publication scope:
+  publish the docs-only control-plane correction, update valid existing pre-Wenlan
+  PRs and accepted listings in place, and submit new high-fit directory
+  candidates whose current contribution gates pass. Website content, request
+  indexing, GSC validation, analytics mutation, paid acquisition, unrelated
+  external posts, and prerequisite product/plugin packaging changes remain
+  excluded.
 - The weekly window is a reporting boundary, not a publish gate. Only one
   website change may be in `approved` or `active` preparation at a time;
   production-verified `live`, `measuring`, and `extended` cohorts continue
@@ -1213,6 +1221,34 @@ inspection may proceed without waiting for a weekly boundary when a
 non-overlapping candidate passes the full gate. The preserved raw series and
 full decision are in
 `docs/seo-audits/2026-08-01-priority-cluster-trends-refresh.md`.
+
+The account-wide distribution correction is complete at
+`docs/seo-audits/2026-08-01-oss-directory-publication-scope.md`, and the user
+approved its complete non-duplicate publication scope at
+`2026-08-01T05:11:57Z`. The inventory found ten still-open pre-Wenlan PRs, four
+upstream-merged pre-Wenlan PRs, one additional entry merged manually after PR
+closure, one closed unmerged PR with a new Glama prerequisite, and four forks
+without an external PR. Existing PRs and accepted listings must be updated in
+place; do not add a second Wenlan entry.
+
+The immediate new-PR lane is the verified
+`gavischneider/awesome-llm-wiki` entry. An exact `Note Taking` patch for
+`appcypher/awesome-mcp-servers` must pass its current format and link checks
+before it joins that lane. The repository-supported website lane for
+`wong2/awesome-mcp-servers` remains pending an approved contact email; its
+documented free submission path is the only permitted option, and the $39
+Premium path remains prohibited as paid acquisition. Immediately before every
+push or submission, search the current upstream, all-author PRs, and directory
+surface for an existing Wenlan name or repository URL. The older
+`punkpeye/awesome-mcp-servers` patch is not submission-ready because public
+Glama reads for both Wenlan and the legacy slug return 404, and PR #7080
+documents a mandatory Glama listing, runtime check, and score badge. The current Codex
+plugin directory also cannot be submitted until a separately approved
+repository-root plugin package and HOL scanner CI satisfy its published gate.
+Publish the control-plane correction first, then execute the verified
+in-place updates and eligible new submissions. Keep PR state, accepted
+listing count, listing-days, GitHub stars, GSC, Vercel, and Umami in their
+native units without attribution.
 
 The same preflight found that `src/lib/releases.ts`, localized
 download/get-started copy, About OG copy, changelog/security docs, and sitemap
