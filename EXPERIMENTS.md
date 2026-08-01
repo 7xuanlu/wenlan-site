@@ -4892,3 +4892,28 @@ increase for that experiment.
 - Decision: Publish this bounded correction under the user's existing exact-
   scope approval, then use the corrected Vercel production completion time as
   the experiment's 24-hour boundary.
+
+### 2026-08-01T21:12:41Z — Obsidian locale correction production verification
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-01-obsidian-knowledge-base-locales`
+- Status: live; measuring
+- Publication: PR #111 merged at `2026-08-01T21:09:03Z` as
+  `4c67e4c54b90c6f05fda29f0390cc380157c9849`; Vercel production completed at
+  `2026-08-01T21:09:50Z`.
+- Technical evidence: The deployed audit passed 114 sitemap URLs, 18 key
+  pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+  redirects, six bridge-host redirects, and old-URL exclusion. The live locale
+  matrix passed 23 expected direct-200 routes and four expected 404 routes.
+- Render evidence: Fresh complete-page captures for zh-TW and zh-CN at
+  `393x852` and `1280x1000` report document `scrollWidth == clientWidth` and
+  zero protected-phrase splits. Direct screenshot inspection found no
+  actionable clipping or FAQ fragmentation; reported off-canvas elements are
+  the intentional decorative halo and screen-reader-only skip link.
+- Metric interpretation: This is production and presentation verification,
+  not evidence of indexing, traffic lift, click lift, rank change, or
+  causality. No GSC, Vercel Analytics, Umami, or GitHub metric was synthesized
+  for this observation.
+- Next readout: The actual 24-hour boundary is after
+  `2026-08-02T21:09:50Z`; use only reliable post-deploy observations in their
+  native units and mark insufficient exposure inconclusive.

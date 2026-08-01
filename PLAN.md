@@ -262,9 +262,14 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   actual `393px` measurement confirmed no document overflow. The fresh full-
   page visual pass found two CJK semantic-phrase breaks in the article packet
   and CTA plus a flex-distribution side effect in one FAQ question. A bounded
-  renderer/copy correction is locally verified under the same approved scope;
-  the experiment remains in the production slot until that correction is
-  merged and production-verified.
+  renderer/copy correction was published through PR #111, which merged at
+  `2026-08-01T21:09:03Z` as
+  `4c67e4c54b90c6f05fda29f0390cc380157c9849`; Vercel completed production at
+  `2026-08-01T21:09:50Z`. The deployed technical and locale matrices passed
+  again. Fresh production captures at `393px` and `1280px` for both locales
+  have no document overflow and zero protected-phrase splits. The experiment
+  is now live and measuring; its actual 24-hour boundary is after
+  `2026-08-02T21:09:50Z`.
 - The weekly window is a reporting boundary, not a publish gate. Only one
   website change may be in `approved` or `active` preparation at a time;
   production-verified `live`, `measuring`, and `extended` cohorts continue
