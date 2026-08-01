@@ -121,6 +121,7 @@ const REQUIRED_SITEMAP_LOCS = [
   "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",
   "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work",
   "https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
+  "https://wenlan.app/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
   "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
   "https://wenlan.app/docs/configuration",
   "https://wenlan.app/docs/product-matrix",
@@ -191,6 +192,15 @@ const REQUIRED_HTML_PAGES = [
     path: "zh-TW/learn/wenlan-vs-obsidian-ai-memory.html",
     canonical: "https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
     type: "Article",
+    datePublished: "2026-07-22",
+    dateModified: "2026-08-01",
+  },
+  {
+    path: "zh-CN/learn/wenlan-vs-obsidian-ai-memory.html",
+    canonical: "https://wenlan.app/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
+    type: "Article",
+    datePublished: "2026-08-01",
+    dateModified: "2026-08-01",
   },
   {
     path: "learn/wenlan-vs-superlocal-memory.html",
@@ -335,6 +345,28 @@ function extractRobotsTags(html) {
     .map((attrs) => attrs.content ?? "");
 }
 
+function collectJsonLdNodes(value, nodes = []) {
+  if (Array.isArray(value)) {
+    for (const item of value) collectJsonLdNodes(item, nodes);
+    return nodes;
+  }
+
+  if (!value || typeof value !== "object") return nodes;
+
+  nodes.push(value);
+
+  for (const nested of Object.values(value)) {
+    collectJsonLdNodes(nested, nodes);
+  }
+
+  return nodes;
+}
+
+function nodeHasJsonLdType(node, expectedType) {
+  const type = node["@type"];
+  return Array.isArray(type) ? type.includes(expectedType) : type === expectedType;
+}
+
 function collectJsonLdTypes(value, types = []) {
   if (Array.isArray(value)) {
     for (const item of value) collectJsonLdTypes(item, types);
@@ -357,15 +389,15 @@ function collectJsonLdTypes(value, types = []) {
   return types;
 }
 
-function extractJsonLdTypes(html, pagePath) {
-  const types = [];
+function extractJsonLdNodes(html, pagePath) {
+  const nodes = [];
   const invalidScripts = [];
 
   for (const match of html.matchAll(
     /<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi,
   )) {
     try {
-      types.push(...collectJsonLdTypes(JSON.parse(match[1])));
+      nodes.push(...collectJsonLdNodes(JSON.parse(match[1])));
     } catch {
       invalidScripts.push(pagePath);
     }
@@ -375,7 +407,7 @@ function extractJsonLdTypes(html, pagePath) {
     throw new Error(`invalid JSON-LD: ${invalidScripts.join(", ")}`);
   }
 
-  return types;
+  return nodes;
 }
 
 function routeSourceMatchesPath(source, path) {
@@ -606,7 +638,8 @@ async function run() {
 
     const canonicals = extractCanonicalTags(html);
     const robotsTags = extractRobotsTags(html);
-    const schemaTypes = extractJsonLdTypes(html, page.path);
+    const schemaNodes = extractJsonLdNodes(html, page.path);
+    const schemaTypes = collectJsonLdTypes(schemaNodes);
     const pageRoutePath = routePathFromCanonical(page.canonical);
 
     if (canonicals.length !== 1 || canonicals[0] !== page.canonical) {
@@ -617,6 +650,16 @@ async function run() {
     }
     if (!schemaTypes.includes(page.type)) {
       pageFailures.push(`page schema missing ${page.type}: ${page.path}`);
+    }
+    if (page.datePublished || page.dateModified) {
+      const articleNode = schemaNodes.find((node) => nodeHasJsonLdType(node, page.type));
+      if (
+        !articleNode ||
+        articleNode.datePublished !== page.datePublished ||
+        articleNode.dateModified !== page.dateModified
+      ) {
+        pageFailures.push(`page schema dates invalid: ${page.path}`);
+      }
     }
     if (schemaTypes.includes("FAQPage")) {
       pageFailures.push(`FAQPage JSON-LD present: ${page.path}`);
@@ -640,7 +683,7 @@ async function run() {
   for (const htmlPath of allHtmlFiles) {
     const html = await readFile(resolve(htmlRoot, htmlPath), "utf8");
     const displayedHtmlPath = displayHtmlPath(htmlPath);
-    const schemaTypes = extractJsonLdTypes(html, displayedHtmlPath);
+    const schemaTypes = collectJsonLdTypes(extractJsonLdNodes(html, displayedHtmlPath));
     if (schemaTypes.includes("FAQPage")) {
       pageFailures.push(`FAQPage JSON-LD present: ${displayedHtmlPath}`);
     }

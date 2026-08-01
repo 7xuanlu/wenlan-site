@@ -4760,3 +4760,106 @@ increase for that experiment.
 - External boundary: No indexing request, GSC validation, paid activation,
   unrelated publication, fabricated contact, or synthetic analytics event was
   performed.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-23-zhtw-obsidian-localization superseded at 2026-08-01T19:34:18Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-23-zhtw-obsidian-localization
+- Observed at: 2026-08-01T19:34:18Z
+- Readout: correction
+- Status: inconclusive
+- Evidence: The latest authenticated `2026-07-03..2026-07-30` GSC page table still has no privacy-visible row for the zh-TW target and is not reported as zero; Vercel separately reports 2 visitors and 3 pageviews. Fresh official Trends, OpenSEO, live-SERP, maintained OSS, and Mandarin community evidence now supports replacing the page's older `AI 筆記` and `Agent Memory` framing with a direct-files, editor-context, MCP, and source-backed AI knowledge-base answer. The new experiment changes the same title, first answer, and workflow surface, so continuing the older cohort would mix interventions. No SEO success or failure is inferred.
+- Result: inconclusive
+- Decision: stop
+- Next step: Remove the earlier zh-TW-only cohort from future verdicts. Preserve its historical observations, but use `EXP-2026-08-01-obsidian-knowledge-base-locales` and its separate per-locale exposure guards after publication.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-01-zhtw-llm-wiki-v2-refresh production verification at 2026-08-01T04:11:03Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-01-zhtw-llm-wiki-v2-refresh
+- Observed at: 2026-08-01T04:11:03Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #101 merged to `main` at `2026-08-01T04:04:21Z` as `ee72f1dea9bd46e93db220fb70cca420d4684f56`; Vercel reported production completion at `2026-08-01T04:05:07Z`. The deployed technical audit passed and the live zh-TW LLM Wiki route retained its self-canonical, reciprocal locale alternates, sitemap membership, indexability, Article and BreadcrumbList schema, stable `datePublished: 2026-07-04`, `dateModified: 2026-08-01`, seven intended sections, six-command workflow, maintained sources, and visible FAQ without `FAQPage`. No complete post-deploy GSC or Vercel window existed at verification time.
+- Result: pending
+- Decision: wait
+- Next step: Append the actual 24-hour technical/evidence readout after `2026-08-02T04:05:07Z`; do not stack another change on this route or infer SEO success before the target-page exposure gate.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-01-obsidian-knowledge-base-locales
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-01-obsidian-knowledge-base-locales
+- Status: active
+- Data window: 2026-08-01..2026-08-07
+- Asset class: net-new-search
+- Launched: 2026-08-01
+- Hypothesis: Refreshing the existing zh-TW Obsidian + Claude Code page and publishing its independently corroborated zh-CN counterpart around direct files, editor context, MCP, and a maintained AI knowledge-base lifecycle will create qualified Mandarin search exposure without changing the English canonical or adding another topic URL.
+- Candidate evidence: Authenticated GSC for `2026-07-03..2026-07-30` gives the unchanged English canonical 0 clicks, 8 impressions, and page-average position 5.6; the zh-TW target has no privacy-visible page row and is not reported as zero. Vercel separately reports 2 zh-TW target visitors and 3 pageviews. Taiwan Trends recorded `obsidian claude code` at `+3,350%`, `obsidian and claude` at `+2,400%`, and `obsidian claude` at `+1,500%` in their preserved request. OpenSEO separately displayed United States `obsidian claude code` at 210. Bilibili, V2EX, and Juejin independently repeat Simplified-Chinese Obsidian, Claude Code, LLM Wiki, and AI-knowledge-base workflows in their native platform units. Wenlan source proves read-only Obsidian Source ingestion, Markdown resync and projection, MCP, distillation, lint, and review. The existing zh-TW framing is partial coverage; the zh-CN route is a clean 404 gap; and the integration-layer decision has standalone utility.
+- Baseline: GSC property totals are 10 clicks and 660 impressions; visible-query totals are 2 clicks and 111 impressions; the query visibility gap is 8 clicks and 549 impressions. The English page has 0 clicks, 8 impressions, and page-average position 5.6 with no visible joined Obsidian query. The zh-TW page has no privacy-visible GSC row; Vercel reports 2 visitors and 3 pageviews. The zh-CN route is unpublished and has no page baseline. Vercel property totals are 1,468 visitors and 1,745 pageviews; GitHub public REST reports 46 stars; authenticated Umami custom events remain unavailable rather than zero.
+- Change: Preserve the English page. Refresh the existing zh-TW page with its original `datePublished: 2026-07-22` and `dateModified: 2026-08-01`; add the matching zh-CN route with `datePublished` and `dateModified` set to `2026-08-01`. Both Mandarin routes answer the six-section integration and verification job, cite maintained sources, emit Article and BreadcrumbList schema, use reciprocal locale alternates, appear in the sitemap, and keep visible FAQ without `FAQPage`.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 5 GSC page impressions per Mandarin route in a complete post-deploy window; locale thresholds are evaluated separately and never combined
+- Success criteria: After its own minimum exposure, a locale route earns at least 1 GSC click or has page-average position 20.0 or better, while the deployed technical and locale floor remains green.
+- Failure criteria: After 28 complete post-index days and its own minimum exposure, a locale route has 0 clicks and page-average position worse than 20.0, or the publication creates a technical, source-accuracy, or rendered-layout regression.
+- Stop criteria: Stop for a canonical, reciprocal hreflang, sitemap, indexability, Article or BreadcrumbList schema, publication-date, maintained-source, visible-FAQ, locale-routing, CJK-rendering, direct-200, or standalone-utility regression.
+- 24h readout: pending
+- 7d readout: pending
+- W2 readout: pending
+- W4 readout: pending
+- W8 readout: pending
+- Result: pending
+- Decision: wait
+- Next step: Complete the local content, locale, sitemap, technical, build, and rendered desktop/mobile verification. Stop before push, PR, merge, deployment, request indexing, GSC validation, external publication, paid acquisition, synthetic analytics events, or account mutation without explicit user approval.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-01T19:52:07Z — Obsidian knowledge-base locales locally verified
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-01-obsidian-knowledge-base-locales`
+- Status: active; locally verified; not published
+- Change evidence: The existing zh-TW route now answers direct Markdown, editor-context, Obsidian MCP, source-backed knowledge lifecycle, minimal workflow, and end-to-end verification intent while preserving `datePublished: 2026-07-22` and setting `dateModified: 2026-08-01`. The missing zh-CN counterpart uses the same six-section contract with both dates set to `2026-08-01`. English remains unchanged.
+- Verification: Goal passed; SEO passed 215 of 215; i18n passed 59 of 59; TypeScript and build passed with 215 generated pages; the built technical audit passed 114 sitemap URLs and 18 required pages; the local route matrix passed 23 direct-200 and four expected 404 routes; `git diff --check` passed.
+- Render evidence: Fresh `393x852` and `1440x1100` top-fold and complete-page captures for both Mandarin routes had no horizontal overflow, clipping, tofu, orphaned CJK heading, code or table overflow, or missing section. Exact locale canonicals, `index, follow`, Article and BreadcrumbList schema, and `FAQPage` absence were observed in the rendered DOM.
+- Decision: wait for explicit publication approval. Do not commit, push, create or merge a PR, deploy, request indexing, submit GSC validation, publish externally, generate synthetic events, or mutate accounts from this observation.
+- Next step: If the user approves this exact publication scope, publish the bounded branch and verify production before recording the 24-hour measurement boundary.
+
+### 2026-08-01T20:30:38Z — Obsidian locale candidate final premerge correction
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-01-obsidian-knowledge-base-locales`
+- Status: active; locally verified; not published
+- Review corrections: Fresh review separated Wenlan Source ingestion/resync, MCP tools, and plugin `/handoff` responsibilities; clarified that original Markdown remains in the read-only vault while Wenlan indexes projected content; added exact Article-date guards for both locales in contract, built, and deployed checks; and protected core CJK acquisition phrases from mobile line splitting without changing metadata or schema text.
+- Verification: Goal passed; SEO passed 217 of 217; i18n passed 60 of 60; TypeScript passed; build generated 215 pages; built technical checks passed 114 sitemap URLs, 18 required pages, redirects, robots, noindex headers, exact Article dates, and sitemap-wide `FAQPage` absence; the local route matrix passed 23 direct-200 and four expected 404 routes; `git diff --check` passed.
+- Render evidence: Fresh post-correction `393x852` and `1280x720` captures for both locale routes showed no horizontal overflow or clipped content. Character-level line inspection kept `來源` / `来源` and `AI 知識庫` / `AI 知识库` intact. The design-system/functional and CJK-precision passes both returned PASS.
+- Decision: wait for explicit publication approval. No commit, push, PR, merge, deployment, indexing request, GSC validation, external publication, synthetic event, or account mutation was performed.
+- Next step: On explicit approval of this exact bounded publication, commit, push, create and merge the PR, verify Vercel production, then record the production timestamp that starts the 24-hour boundary.
+
+### 2026-08-01T20:36:41Z — Obsidian Source wording correction
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-01-obsidian-knowledge-base-locales`
+- Status: active; locally verified; not published
+- Correction: The preceding observation's phrase "indexes projected content" was imprecise. The read-only Obsidian Source keeps the original Markdown in the vault while Wenlan rescans, chunks, and indexes the vault's current content. Markdown projection is a separate Pages export boundary. This correction changes no site code, metric, experiment rule, or publication status.
+- Decision: wait for explicit publication approval under the unchanged boundary.
+
+### 2026-08-01T20:43:01Z — Obsidian locale publication approved
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-01-obsidian-knowledge-base-locales`
+- Status: approved for bounded GitHub publication and production verification
+- Approval: The user explicitly approved commit, Git push, PR creation,
+  merge, automatic Vercel deployment, and read-only production verification
+  of the exact locally verified zh-TW refresh plus zh-CN counterpart. English
+  remains unchanged.
+- Excluded actions: Request indexing, GSC validation, external publication,
+  paid acquisition, synthetic analytics events, and account mutation remain
+  unapproved.
+- Next step: Publish the reviewed branch, wait for required checks and Vercel
+  production, verify the exact live locale and technical contract, and record
+  the production completion timestamp as the 24-hour boundary.

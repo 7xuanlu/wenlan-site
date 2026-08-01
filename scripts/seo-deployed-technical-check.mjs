@@ -33,6 +33,7 @@ const REQUIRED_SITEMAP_LOCS = [
   "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",
   "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work",
   "https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
+  "https://wenlan.app/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
   "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
   "https://wenlan.app/docs/configuration",
   "https://wenlan.app/docs/product-matrix",
@@ -143,6 +144,15 @@ const REQUIRED_HTML_PAGES = [
     path: "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
     canonical: "https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
     type: "Article",
+    datePublished: "2026-07-22",
+    dateModified: "2026-08-01",
+  },
+  {
+    path: "/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
+    canonical: "https://wenlan.app/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
+    type: "Article",
+    datePublished: "2026-08-01",
+    dateModified: "2026-08-01",
   },
   {
     path: "/learn/wenlan-vs-superlocal-memory",
@@ -360,6 +370,28 @@ function extractRobotsTags(html) {
     .map((attrs) => attrs.content ?? "");
 }
 
+function collectJsonLdNodes(value, nodes = []) {
+  if (Array.isArray(value)) {
+    for (const item of value) collectJsonLdNodes(item, nodes);
+    return nodes;
+  }
+
+  if (!value || typeof value !== "object") return nodes;
+
+  nodes.push(value);
+
+  for (const nested of Object.values(value)) {
+    collectJsonLdNodes(nested, nodes);
+  }
+
+  return nodes;
+}
+
+function nodeHasJsonLdType(node, expectedType) {
+  const type = node["@type"];
+  return Array.isArray(type) ? type.includes(expectedType) : type === expectedType;
+}
+
 function collectJsonLdTypes(value, types = []) {
   if (Array.isArray(value)) {
     for (const item of value) collectJsonLdTypes(item, types);
@@ -382,20 +414,20 @@ function collectJsonLdTypes(value, types = []) {
   return types;
 }
 
-function extractJsonLdTypes(html, pagePath) {
-  const types = [];
+function extractJsonLdNodes(html, pagePath) {
+  const nodes = [];
 
   for (const match of html.matchAll(
     /<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi,
   )) {
     try {
-      types.push(...collectJsonLdTypes(JSON.parse(match[1])));
+      nodes.push(...collectJsonLdNodes(JSON.parse(match[1])));
     } catch {
       throw new Error(`invalid JSON-LD: ${pagePath}`);
     }
   }
 
-  return types;
+  return nodes;
 }
 
 function isNoindex(value) {
@@ -499,7 +531,8 @@ async function assertHtmlPages(request, timeoutMs) {
     }
     const canonicals = extractCanonicalTags(html);
     const robotsTags = extractRobotsTags(html);
-    const schemaTypes = extractJsonLdTypes(html, page.path);
+    const schemaNodes = extractJsonLdNodes(html, page.path);
+    const schemaTypes = collectJsonLdTypes(schemaNodes);
 
     if (canonicals.length !== 1 || canonicals[0] !== page.canonical) {
       failures.push(`page canonical invalid: ${page.path}`);
@@ -509,6 +542,16 @@ async function assertHtmlPages(request, timeoutMs) {
     }
     if (!schemaTypes.includes(page.type)) {
       failures.push(`page schema missing ${page.type}: ${page.path}`);
+    }
+    if (page.datePublished || page.dateModified) {
+      const articleNode = schemaNodes.find((node) => nodeHasJsonLdType(node, page.type));
+      if (
+        !articleNode ||
+        articleNode.datePublished !== page.datePublished ||
+        articleNode.dateModified !== page.dateModified
+      ) {
+        failures.push(`page schema dates invalid: ${page.path}`);
+      }
     }
     if (schemaTypes.includes("FAQPage")) {
       failures.push(`FAQPage JSON-LD present: ${page.path}`);
@@ -557,7 +600,7 @@ async function assertSitemapFaqPageAbsent(request, locs, timeoutMs) {
             maxBytes: MAX_SITEMAP_HTML_BYTES,
             timeoutMs,
           });
-          const schemaTypes = extractJsonLdTypes(html, path);
+          const schemaTypes = collectJsonLdTypes(extractJsonLdNodes(html, path));
           if (schemaTypes.includes("FAQPage")) {
             failures.push(`FAQPage JSON-LD present: ${path}`);
           }

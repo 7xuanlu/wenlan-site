@@ -250,6 +250,12 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `2026-08-01T19:14:59Z`. New successful signups can now carry those bounded
   Resend fields and emit the anonymous Umami success event. No fabricated
   contact or synthetic analytics event was created.
+- At `2026-08-01T20:43:01Z`, the user explicitly approved commit, Git push,
+  PR creation, merge, automatic Vercel deployment, and read-only production
+  verification for the exact
+  `EXP-2026-08-01-obsidian-knowledge-base-locales` scope. Request indexing,
+  GSC validation, external publication, paid acquisition, synthetic events,
+  and account mutation remain excluded.
 - The weekly window is a reporting boundary, not a publish gate. Only one
   website change may be in `approved` or `active` preparation at a time;
   production-verified `live`, `measuring`, and `extended` cohorts continue
@@ -287,19 +293,20 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
+  `EXP-2026-08-01-obsidian-knowledge-base-locales` is locally verified and
+  occupies the single production slot. It refreshes the
+  existing zh-TW Obsidian + Claude Code route around direct files, editor
+  context, MCP, and a maintained AI knowledge-base lifecycle, then adds the
+  missing zh-CN counterpart from independently corroborated Simplified-Chinese
+  community evidence. The English page remains unchanged. Its bounded commit,
+  push, PR, merge, automatic deployment, and production verification are
+  approved; indexing, validation, external publication, paid acquisition,
+  synthetic events, and account mutation remain separately approval-gated.
   `EXP-2026-08-01-zhtw-llm-wiki-v2-refresh` is live,
   production-verified, and measuring; it no longer consumes the single
-  production slot. It refreshes only the existing zh-TW LLM Wiki article with the
-  maintained Karpathy and LLM Wiki v2 architecture, RAG and Obsidian
-  boundaries, setup, verification, failure-repair, and six-command workflow.
-  It preserves the URL, publication date, canonical, reciprocal hreflang,
-  Article and BreadcrumbList schema, and visible FAQ without `FAQPage`. The
-  user approved the GitHub publish flow and then explicitly approved merge in
-  this task. PR #101 merged at `2026-08-01T04:04:21Z` as
+  production slot. PR #101 merged at `2026-08-01T04:04:21Z` as
   `ee72f1dea9bd46e93db220fb70cca420d4684f56`; Vercel production completed at
-  `2026-08-01T04:05:07Z`. No repeat indexing,
-  GSC validation, synthetic event, external post, OSS submission, paid
-  acquisition, analytics account mutation, or metric change is approved.
+  `2026-08-01T04:05:07Z`. No repeat indexing request is due.
   `EXP-2026-07-29-docs-github-acquisition` is live,
   production-verified, and measuring; it no longer consumes the single
   production slot. PR #98 merged at `2026-07-30T07:26:34Z` as
@@ -769,40 +776,39 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-01-zhtw-llm-wiki-v2-refresh` is live,
-production-verified, and measuring. It no longer consumes the single
-production slot. The authenticated GSC baseline maps the exact visible query
-`llm wiki 2.0` to `/zh-TW` with 1 impression, 0 clicks, and position 13. The
-localized target article has no privacy-visible page row and is not reported
-as zero. Property totals, visible-query totals, the visibility gap, Vercel,
-Umami, and GitHub observations remain separate native-unit evidence.
+`EXP-2026-08-01-obsidian-knowledge-base-locales` is locally verified and
+occupies the single production slot. It changes one canonical
+family only: refresh the existing
+`/zh-TW/learn/wenlan-vs-obsidian-ai-memory` page and add the missing
+`/zh-CN/learn/wenlan-vs-obsidian-ai-memory` counterpart. The English route is
+already measuring the current direct-files, editor-context, MCP, and durable
+knowledge-lifecycle answer and remains unchanged.
 
-The bounded change keeps the existing
-`/zh-TW/learn/distilled-wiki-pages-ai-memory` URL and original
-`datePublished: 2026-07-04`. It adds the maintained seven-section Traditional
-Chinese LLM Wiki answer, Karpathy and LLM Wiki v2 sources, RAG and Obsidian
-boundaries, setup and repair guidance, and a six-command verification
-workflow. Canonical, reciprocal hreflang, Article and BreadcrumbList schema,
-and visible FAQ without `FAQPage` remain unchanged. Chinese display glyphs use
-native sans fallbacks while Latin display terms retain Fraunces; no CJK
-webfont payload is added.
+The latest authenticated baseline remains source-separated: GSC property
+totals are 10 clicks and 660 impressions; visible-query totals are 2 clicks
+and 111 impressions; the visibility gap is 8 clicks and 549 impressions. The
+English page has 0 clicks, 8 impressions, and page-average position 5.6 but no
+visible joined Obsidian query. The zh-TW page has no privacy-visible GSC page
+row and is not reported as zero; Vercel separately reports 2 visitors and 3
+pageviews. The zh-CN route remains a hard 404 in current production and has no
+baseline; the local production build now serves the candidate route directly.
 
-The experiment requires 5 target-page GSC impressions in one complete
-post-deploy window before interpretation. W2 success additionally requires at
-least 1 target-page click and a green technical and locale floor. W4 failure
-requires at least 20 target-page impressions with zero clicks, or reliable
-post-recrawl evidence that the qualified intent continues landing only on the
-homepage. Lower exposure remains inconclusive.
+The full candidate gate passes from Taiwan Trends, the OpenSEO tool-pair and
+live-SERP observation, repeated English community and maintained OSS wording,
+and independently repeated Simplified-Chinese Bilibili, V2EX, and Juejin
+workflows. Current Wenlan source proves read-only Obsidian Source ingestion,
+Markdown resync and projection, MCP, distillation, lint, and review. Each
+locale keeps its own 5-impression minimum; one locale cannot supply exposure
+for the other.
 
-Local verification passed the Goal contract, 57 i18n tests, 204 SEO tests,
-TypeScript, the 214-page production build, built technical SEO, and mobile and
-desktop rendered QA. PR #101 merged at `2026-08-01T04:04:21Z`, and Vercel
-reported production completion at `2026-08-01T04:05:07Z`. The targeted live
-route and deployed technical checks pass. The 24-hour clock therefore begins
-at that production completion time; exposure and SEO result remain pending.
-Repeat indexing, GSC validation, external posts, OSS
-submissions, paid acquisition, synthetic analytics events, and metric changes
-remain outside that approval.
+The earlier zh-TW-only Obsidian cohort is superseded as inconclusive rather
+than mixed with this new zh-TW framing. Local preparation and verification
+are complete under the approved Goal contract. The user approved this exact
+bounded commit, push, PR, merge, automatic deployment, and production
+verification at `2026-08-01T20:43:01Z`; request indexing, GSC validation,
+external publication, paid acquisition, synthetic analytics events, and
+account mutation remain separately approval-gated. The immutable contract and evidence are in
+`docs/seo-audits/2026-08-01-obsidian-knowledge-base-locales-prelaunch.md`.
 
 ### Measuring cohort: Obsidian Claude Code
 
@@ -1055,44 +1061,22 @@ approved three-locale knowledge-base refresh changes the same English
 `/learn` framing, so the older cohort is explicitly superseded rather than
 mixed into future attribution.
 
-### Current technical correction
+### Latest technical correction
 
-`TECH-2026-08-01-download-signup-attribution` is locally verified and
-occupies the single website-change slot. It adds a deterministic GitHub REST
-snapshot to the existing weekly pipeline, an anonymous post-success
-`waitlist_signup` Umami event, and an opt-in Resend contact-property path for
-locale, landing path, referrer host, and UTM source, medium, and campaign.
-GitHub downloads remain cumulative point-in-time counters; Umami clicks,
-Resend contacts, GitHub stars, GSC, and Vercel stay separate native-unit
-evidence without a causal or person-level cross-source join.
+`TECH-2026-08-01-download-signup-attribution` is production-verified and no
+longer consumes the website-change slot. PR #108 merged at
+`2026-08-01T19:14:11Z` as
+`3daf34b31d43ecaa4f4eaaf365a7fb3565ba3327`; Vercel production completed at
+`2026-08-01T19:14:59Z`. The deployed technical audit and live English,
+zh-TW, zh-CN, and Download acquisition surfaces pass.
 
-The first current-release snapshot at `2026-08-01T16:47:51.633Z` reports 46
-stars, 19 cumulative downloads across the four `v0.15.3` assets linked from
-the website, and 1,376 cumulative downloads across all assets in all 44
-returned releases. The homepage waitlist remains in the bottom closing CTA;
-it is not moved directly below the Download section. The production Resend
-property flag now equals `1`, after the six bounded string properties were
-created and verified in Resend. Current production still runs the old site
-code, so the flag has no effect until this exact branch is deployed.
-The implementation also corrects the pre-existing public-site drift from
-`v0.15.2` to the source-backed and publicly released `v0.15.3`. No synthetic
-event, contact creation, push, PR, merge, or deployment has occurred. The
-implementation and boundary are recorded in
+GitHub release downloads remain cumulative point-in-time counters. Anonymous
+Umami events, configured-audience Resend contacts, GitHub stars, GSC, and
+Vercel remain separate native-unit evidence without a causal or person-level
+join. All six Resend properties and the production feature flag are live. No
+fabricated contact or synthetic analytics event was created. The complete
+production record is in
 `docs/seo-audits/2026-08-01-download-signup-attribution-prelaunch.md`.
-
-Final local verification at `2026-08-01T17:03:53Z` passed 209 SEO tests, 58
-i18n tests, TypeScript, the 214-page production build, the compiled technical
-SEO audit, the fixture-backed weekly pipeline health check, and the frozen
-Goal verifier. Fresh English, zh-TW, and zh-CN desktop/mobile renders had no
-horizontal overflow; the unchanged closing CTA and all three mobile form
-views matched production at 100/100 pixel similarity while the hidden locale,
-landing-path, referrer-host, and UTM fields carried their intended bounded
-values. A read-only production-key Resend fetch then verified the API path and
-wrote privacy-safe aggregates only for the configured audience: 2 total
-subscribed contacts, 0 contacts
-created in the latest completed 28-day GSC range, and 0 attributed contacts.
-No email address was written to an SEO artifact. Account setup is complete;
-publication and a consented live-signup smoke test remain pending.
 
 ### OpenSEO evaluation
 
@@ -1113,8 +1097,11 @@ phrasing only after independent corroboration. OpenSEO's broad AI expansions
 were noisy and its Simplified Chinese result did not close the evidence gap,
 so GSC, inspectable Trends, and provenance-preserving Chinese-community
 observations remain necessary. No new article or experiment starts from this
-evaluation while the current technical correction occupies the website-change
-slot. Evidence and provenance are recorded in
+evaluation alone. After the technical correction reached production, the
+OpenSEO tool-pair observation combined with authenticated page evidence,
+official Trends, maintained OSS, and Simplified-Chinese community provenance
+to nominate the current Obsidian locale experiment through the full gate.
+Evidence and provenance are recorded in
 `docs/seo-audits/2026-08-01-openseo-evaluation.md`.
 
 The final post-review gate completed at `2026-08-01T19:09:02Z`. The fresh-eye
@@ -1123,7 +1110,7 @@ seo:goal:check`, TypeScript, 215 SEO tests, 58 i18n tests, the 214-page
 production build, compiled technical SEO, 22 expected localized 200 routes,
 5 expected localized 404 routes, the fixture-backed weekly pipeline, the live
 audience-scoped Resend aggregate fetch, and `git diff --check` all pass. The
-branch is ready for its approved PR, merge, and automatic Vercel deployment.
+approved scope merged in PR #108 and is production-verified.
 
 `TECH-2026-07-26-source-release-boundary` is production-verified and no longer
 consumes the single production slot.
@@ -1296,22 +1283,27 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-The bounded refresh of the existing
-`/zh-TW/learn/distilled-wiki-pages-ai-memory` route is now production-verified.
-PR #101 merged at `2026-08-01T04:04:21Z`, Vercel completed production at
-`2026-08-01T04:05:07Z`, and the targeted live route plus deployed technical
-audit pass. The experiment is measuring, the production slot is open, and its
-actual 24-hour technical/evidence readout is due after
-`2026-08-02T04:05:07Z`. Do not infer an SEO result before the predeclared
-exposure gate or stack another edit on this route while it measures.
+Publish and production-verify the approved
+`EXP-2026-08-01-obsidian-knowledge-base-locales` candidate. The experiment
+refreshes the existing zh-TW page and fills the corroborated
+zh-CN route gap without changing English or creating another canonical family.
+It follows the priority order: refresh the existing locale before publishing
+the missing counterpart, and answer the concrete direct-files, editor-context,
+MCP, and source-backed AI knowledge-base job rather than generic memory.
 
-Use the corrected authenticated click-priority queue to inspect the next
-non-overlapping existing-page candidate. Exclude this just-shipped zh-TW
-LLM-wiki route from immediate nomination, preserve the acquisition focus on
-LLM Wiki, AI knowledge base, Karpathy, Codex/ChatGPT, and qualified Obsidian
-workflows across English, zh-TW, and zh-CN, and require the full candidate
-gate before preparation. No new website publication is approved by this
-production verification; no repeat indexing request or GSC validation is due.
+The earlier zh-TW localization cohort is superseded as inconclusive because
+the same URL receives a new title, first answer, and workflow framing. Keep the
+English Obsidian experiment measuring independently. Each Mandarin route has
+its own minimum exposure and result; do not aggregate locales or infer exact
+query rank from page-average position.
+
+The focused locale contract, full SEO and i18n suites, TypeScript, build,
+compiled technical audit, locale route matrix, and rendered desktop/mobile
+inspection pass. Commit, push, PR creation, merge, automatic deployment, and
+read-only production verification are approved for this exact scope. Stop
+before request indexing, GSC validation, external publication, paid
+acquisition, synthetic analytics events, or account mutation. Memory is
+supporting infrastructure, not the acquisition center.
 
 The fresh signed-in Google Trends refresh at `2026-08-01T04:20:26Z` narrows
 that inspection further. It keeps `LLM wiki` and `AI knowledge base` in one
