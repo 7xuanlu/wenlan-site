@@ -4260,3 +4260,121 @@ increase for that experiment.
 - Next step: Keep release claims aligned to immutable Wenlan releases; no
   indexing request, GSC validation, external publication, or metric change is
   implied.
+
+### 2026-08-01T04:51:43Z — OSS directory distribution candidate prepared
+
+- Record type: campaign-observation
+- Related experiment: none; approval-gated candidate only
+- Status: local-prepared
+- Candidate: one coordinated distribution proposal for
+  `punkpeye/awesome-mcp-servers` and
+  `gavischneider/awesome-llm-wiki`. Wenlan is absent from both current
+  repositories.
+- Native source evidence: GitHub reports 91,667 stars for Awesome MCP Servers
+  and 43 stars for Awesome LLM Wiki at capture. Those repository stargazer
+  counts are audience-size observations only; they are not Wenlan impressions,
+  traffic, clicks, or predicted stars.
+- Candidate evidence: the current provider search set contains multiple
+  exact-topic LLM Wiki products, directories, implementations, and guides but
+  not Wenlan. Awesome MCP Servers is active and recently merged inspectable
+  Knowledge & Memory additions within minutes to roughly one day. Awesome LLM
+  Wiki explicitly accepts local compilers, daemons, MCP integrations, and
+  agent skills. Search-result order is not reported as GSC or Google rank.
+- Coverage and proof: Wenlan already has maintained English, zh-TW, and zh-CN
+  LLM Wiki and source-backed knowledge-base coverage. Its public source proves
+  the Rust CLI, daemon, MCP server, citation-gated Markdown Pages, agent
+  plugins, local Git history, and released macOS, Windows, and Linux runtimes.
+  The clean gap is third-party discovery, not another article.
+- Local change: exactly one non-promotional README line is prepared in each
+  pinned clone under `/private/tmp`. Both diffs pass `git diff --check`; the
+  Awesome LLM Wiki patch also passes its official `npm test` and
+  `awesome-lint README.md` gate.
+- Baseline: GitHub reports 46 Wenlan stars. The latest authenticated GSC
+  property totals remain 10 clicks and 660 impressions; Vercel remains 1,468
+  visitors in its separate same-range observation. No source is joined or
+  attributed to another.
+- Result: candidate gate passed; external action not started
+- Decision: request one explicit approval covering the two factual directory
+  PR submissions. Treat the large MCP directory as reach and the smaller LLM
+  Wiki directory as topical relevance; do not claim either will cause stars or
+  search lift.
+- Next step: If approved, append the immutable experiment start and submit
+  only the two verified one-line PRs. Otherwise keep the patches local. Do not
+  fork, push, open external PRs, request indexing, submit GSC validation, or
+  mutate analytics without approval.
+
+### 2026-08-01T05:11:57Z — OSS directory candidate inventory correction
+
+- Record type: campaign-observation
+- Related experiment: none; approval-gated distribution correction
+- Status: candidate-evidence-refreshed
+- Correction: The first two-repository audit was incomplete. The account-wide
+  GitHub inventory found 20 relevant forks, ten still-open pre-Wenlan PRs, four
+  upstream-merged pre-Wenlan PRs, one additional entry merged manually after PR
+  closure, one closed unmerged PR with a new Glama prerequisite, and four
+  forks without an external PR. No prior external PR authored by `7xuanlu`
+  contains the Wenlan brand.
+- Maintainer evidence: `punkpeye/awesome-mcp-servers` PR #7080 was closed after
+  the project required a Glama listing, runtime/introspection checks, and score
+  badge. Public Glama API reads for both `7xuanlu/wenlan` and
+  `7xuanlu/origin` returned HTTP 404. The earlier local patch is therefore not
+  submission-ready. `hashgraph-online/awesome-codex-plugins` separately
+  requires a repository-root plugin manifest, HOL scanner CI, score >=80/130,
+  and no high or critical findings; Wenlan's plugin currently lives under
+  `plugin-codex/`, so a directory PR would fail its published gate.
+- Decision: Update valid existing PRs and accepted listings in place, submit
+  only new directories whose current gate passes, and keep the Glama and Codex
+  packaging prerequisites explicit. Do not duplicate old pre-Wenlan submissions
+  or disguise an obsolete bundled plugin as a mechanical rebrand.
+- Evidence: `docs/seo-audits/2026-08-01-oss-directory-publication-scope.md`
+- Result: corrected publication scope prepared
+- Next step: Record explicit publication approval, publish the control-plane
+  correction, then update or submit the non-duplicate external changes.
+
+### 2026-08-01T05:11:57Z — complete OSS directory publication approval
+
+- Record type: campaign-approval
+- Related experiment: OSS directory rebrand and distribution campaign
+- Contract status: approved by the user in this Codex task
+- Approved scope: Commit, push, ready PR creation, merge to `wenlan-site`
+  `main`, automatic Vercel deployment of the docs-only control-plane update,
+  and external fork/branch pushes plus PR or repository-supported directory
+  submission for the non-duplicate scope in
+  `docs/seo-audits/2026-08-01-oss-directory-publication-scope.md`. Existing
+  pre-Wenlan PRs and accepted listings must be updated in place where possible.
+- Excluded scope: Wenlan website content changes, request indexing, GSC
+  validation, analytics mutation, paid acquisition, unsupported ranking or
+  benchmark claims, unrelated external posts, and prerequisite product or
+  plugin-packaging changes that require a separate contract.
+- Native-unit boundary: PR states, accepted listing count, listing-days,
+  GitHub stars, GSC, Vercel, and Umami remain separate. No causal claim or
+  source-to-page join is authorized.
+- Next step: Publish this control-plane correction, then execute the verified
+  in-place updates and new high-fit submissions. Stop at any newly discovered
+  maintainer or prerequisite boundary rather than forcing a duplicate PR.
+
+### 2026-08-01T05:11:57Z — OSS publication action classification correction
+
+- Record type: campaign-observation
+- Related experiment: none
+- Status: approved-distribution-action
+- Correction: The superseded two-repository preflight said approval would be
+  followed by an immutable experiment start. The complete inventory shows a
+  mixed maintenance and distribution action: most work updates existing PRs or
+  accepted entries, and no reliable directory-to-GitHub, GSC, Vercel, or Umami
+  attribution exists. It is therefore tracked as a campaign action rather than
+  a new Goal experiment.
+- Guard: The action does not increment the active experiment count or consume
+  the website production slot. Append campaign observations for PR state,
+  maintainer feedback, accepted-listing presence, and complete live
+  listing-days. Keep GitHub, GSC, Vercel, and authenticated Umami separate.
+- Submission boundary: The `mcpservers.org` form requires a contact email and
+  offers an optional $39 Premium path. Keep it pending until an approved email
+  is available, do not store that address in the repository, and use only the
+  free path. Before every external push or form submission, search the current
+  upstream, all-author PRs, and directory surface for an existing Wenlan name
+  or repository URL; update an existing path instead of creating a duplicate.
+- Result: approved
+- Decision: execute the non-duplicate publication scope
+- Next step: Publish the corrected control plane and then execute the verified
+  external actions. Do not create an experiment-start record for this batch.
