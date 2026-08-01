@@ -4572,3 +4572,28 @@ increase for that experiment.
 - Attribution boundary: Record production completion against the measuring
   zh-TW LLM Wiki experiment because the new homepage link adds inbound
   exposure; do not claim SEO lift or causality at deployment.
+
+### 2026-08-01T14:22:36Z — homepage acquisition links production verified
+
+- Record type: campaign-observation
+- Related experiment: none; `TECH-2026-08-01-home-acquisition-links`
+- Status: production-verified
+- GitHub: PR #106 merged at `2026-08-01T14:19:05Z` as
+  `c8ae3c82a281464bc29966785d77bf670bc439cc` after its Vercel preview checks
+  passed.
+- Deployment: Vercel marked the main-branch production deployment complete at
+  `2026-08-01T14:19:53Z`.
+- Live render: English, zh-TW, and zh-CN homepages each returned direct HTTP
+  200 and rendered both exact localized guide hrefs and labels.
+- Technical floor: The deployed audit passed robots, 113 sitemap URLs, 17 key
+  pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+  redirects, six bridge-host redirects, and old-URL sitemap exclusion.
+- Link graph: The post-deploy crawl fetched 113 of 113 sitemap pages without a
+  failure and confirmed the predeclared one-source increase: 8 non-self
+  sources per English core guide, 4 per zh-TW guide, and 3 per zh-CN guide.
+- Attribution boundary: Record `2026-08-01T14:19:53Z` in the measuring zh-TW
+  LLM Wiki readout as an added homepage exposure. Production integrity is
+  verified; no SEO lift, click, conversion, star attribution, or causality is
+  inferred.
+- External boundary: No indexing request, GSC validation, analytics mutation,
+  paid acquisition, or unrelated external publication was performed.

@@ -1,7 +1,7 @@
 # Homepage acquisition-link restoration prelaunch
 
 Date: 2026-08-01
-Status: approved for publication, not yet published
+Status: production-verified
 Controller: Wenlan exposure Goal
 
 ## Decision
@@ -33,8 +33,9 @@ correction, not a new article or a new search experiment.
   Learn hub.
 - A fresh production contrast at `2026-08-01T07:28:06Z` returned HTTP 200 for
   `/`, `/zh-TW`, and `/zh-CN`, but none of the three HTML responses contained
-  either localized guide href. This confirms the defect is still live and the
-  local candidate has not leaked into production.
+  either localized guide href. This confirmed that the defect was still live
+  before deployment and that the local candidate had not leaked into
+  production.
 - English, zh-TW, and zh-CN versions of both target guides already exist with
   canonical URLs, reciprocal locale support, sitemap membership, Article and
   BreadcrumbList schema, and maintained first-party sources. No new URL or
@@ -98,17 +99,17 @@ stacking unrelated internal links. Raw crawl output remains outside git at
 
 ## Measurement boundary
 
-This local correction is not yet an experiment start and has no publication
-time. If separately approved and deployed, record its production completion
-and treat the direct-link render as the technical success condition. Continue
+This technical correction reached production at `2026-08-01T14:19:53Z`; it
+does not start a separate search experiment. The direct-link render is its
+technical success condition. Continue
 reporting each target page's GSC impressions and clicks separately by locale,
 plus Vercel target-page observations and authenticated Umami
 `home-acquisition` clicks when available. Do not infer source-to-page sessions
 or attribute a target-page change to the link row alone.
 
-Publishing this correction would add inbound exposure to the currently
-measuring zh-TW LLM Wiki page. Record that timing explicitly in the existing
-experiment readout rather than claiming clean content-only attribution.
+This correction adds inbound exposure to the currently measuring zh-TW LLM
+Wiki page. Its production time is recorded explicitly so the existing
+experiment readout does not claim clean content-only attribution.
 
 ## Prelaunch verification
 
@@ -117,7 +118,7 @@ experiment readout rather than claiming clean content-only attribution.
   required direct links before implementation.
 - GREEN render contract and i18n: `pnpm test:i18n` passed 58 of 58 tests.
 - TypeScript: `pnpm lint` passed.
-- SEO contract: `pnpm test:seo` passed 204 of 204 tests with the current Wenlan
+- SEO contract: `pnpm test:seo` passed 205 of 205 tests with the current Wenlan
   and wenlan-app repositories supplied explicitly.
 - Production build: `pnpm build` passed and emitted 214 pages. The postbuild
   IndexNow step correctly skipped because `VERCEL_ENV` was unset.
@@ -173,5 +174,25 @@ Pass A verdict: PASS.
 
 Pass B verdict: PASS.
 
-Synthesized verdict: GOOD. The local candidate is technically and visually
-ready for a separate website-publication decision.
+Synthesized prelaunch verdict: GOOD. The candidate subsequently passed the
+production checks below.
+
+## Production verification
+
+- PR #106 merged at `2026-08-01T14:19:05Z` as
+  `c8ae3c82a281464bc29966785d77bf670bc439cc` after the Vercel preview gate
+  passed.
+- Vercel marked the main-branch production deployment complete at
+  `2026-08-01T14:19:53Z`.
+- English, zh-TW, and zh-CN homepages each returned direct HTTP 200 and
+  rendered both exact localized guide hrefs and labels.
+- `pnpm seo:technical:deployed` passed robots, 113 sitemap URLs, 17 key pages,
+  six utility noindex headers, sitemap-wide `FAQPage` absence, 25 redirects,
+  six bridge-host redirects, and old-URL sitemap exclusion.
+- The post-deploy rendered-anchor crawl at `2026-08-01T14:22:36Z` fetched all
+  113 sitemap pages without a failure. It confirmed 8 non-self sources for
+  each English guide, 4 for each zh-TW guide, and 3 for each zh-CN guide,
+  exactly matching the predeclared one-source increase.
+- No indexing request, GSC validation, analytics mutation, or unrelated
+  external publication was performed. Production integrity is verified; SEO
+  lift, clicks, conversion, star attribution, and causality remain unclaimed.
