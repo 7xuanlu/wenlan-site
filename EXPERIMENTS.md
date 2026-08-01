@@ -4731,3 +4731,32 @@ increase for that experiment.
   deployment, and read-only production verification may proceed. Synthetic
   events, a fabricated contact, paid activation, indexing requests, GSC
   validation, and unrelated publication remain excluded.
+
+### 2026-08-01T19:17:55Z — download and signup attribution production-verified
+
+- Record type: campaign-observation
+- Related experiment: none; `TECH-2026-08-01-download-signup-attribution`
+- Status: production-verified; website-change slot released
+- Publication: PR #108 merged at `2026-08-01T19:14:11Z` as
+  `3daf34b31d43ecaa4f4eaaf365a7fb3565ba3327`; Vercel marked the main-branch
+  production deployment complete at `2026-08-01T19:14:59Z`.
+- Technical floor: The deployed audit passed robots, 113 sitemap URLs, 17 key
+  pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+  redirects, six bridge-host redirects, and old-URL sitemap exclusion.
+- Live acquisition surface: English, zh-TW, and zh-CN homepages and the
+  download page expose the Umami script, current `v0.15.3` release metadata,
+  current Windows, macOS Apple Silicon, Linux x86_64, and Linux aarch64 asset
+  URLs, and the bounded `setup_path_click` and `github_outbound` event wiring.
+- Signup measurement: All six Resend string properties and the production
+  feature flag were verified before deployment. Future successful signups can
+  store the bounded acquisition fields in the configured Resend audience and
+  emit one anonymous `waitlist_signup` event. No consented test address was
+  supplied, so no contact or synthetic event was generated for this check.
+- Baseline remains native-unit and non-causal: 2 total subscribed contacts in
+  the configured Resend audience, 0 contacts created in the completed
+  `2026-07-03..2026-07-30` range, and 0 attributed contacts in that range.
+  GitHub downloads, Umami events, Resend contacts, stars, GSC, and Vercel are
+  not joined or converted into one score.
+- External boundary: No indexing request, GSC validation, paid activation,
+  unrelated publication, fabricated contact, or synthetic analytics event was
+  performed.
