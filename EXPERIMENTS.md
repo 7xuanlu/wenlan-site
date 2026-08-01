@@ -4917,3 +4917,155 @@ increase for that experiment.
 - Next readout: The actual 24-hour boundary is after
   `2026-08-02T21:09:50Z`; use only reliable post-deploy observations in their
   native units and mark insufficient exposure inconclusive.
+
+### 2026-08-01T21:22:46Z — post-publication Goal and OSS exposure reconciliation
+
+- Record type: campaign-observation
+- Related experiment: none; controller-state and approved-distribution read
+- Status: website production slot open; wait for new authenticated evidence
+- Goal guard: The controller reread the complete current `PLAN.md`; `pnpm
+  seo:goal:check` passed before this action.
+- Search evidence: The latest authenticated Friday range remains
+  `2026-07-03..2026-07-30`: GSC property totals are 10 clicks and 660
+  impressions, visible-query totals are 2 clicks and 111 impressions, and the
+  visibility gap is 8 clicks and 549 impressions. It predates the completed
+  August 1 website changes and cannot support another rewrite yet.
+- GitHub evidence: GitHub REST reports 47 total stars, in the source's native
+  cumulative unit. This restores the fixed campaign baseline but remains 53
+  stars below the target; no directory-to-star attribution is inferred.
+- OSS evidence: Of the 14 previously approved external PRs, one is merged and
+  13 remain open. `gavischneider/awesome-llm-wiki` PR #4 merged at
+  `2026-08-01T18:55:52Z`; the repository's current default-branch README lists
+  Wenlan directly at line 234 with `https://github.com/7xuanlu/wenlan`. The
+  listing has zero complete live days at this observation boundary. The
+  other public PR states are nine `clean`, two `blocked`, and two `unstable`;
+  these are GitHub mergeability states, not accepted-listing or traffic units.
+- Decision: The Obsidian locale correction is production-verified and no
+  longer consumes the website slot. Do not start a new article or another
+  same-page edit from pre-deploy GSC evidence. Reconcile the next authenticated
+  query-page window across English, zh-TW, and zh-CN acquisition families,
+  while the already-approved OSS PRs continue maintainer review.
+- Approval boundary: No push, PR, merge, deployment, new external submission,
+  indexing request, GSC validation, paid acquisition, synthetic event, or
+  account mutation is authorized by this read-only observation.
+
+### 2026-08-01T21:25:26Z — non-clean OSS PR blocker audit
+
+- Record type: campaign-observation
+- Related experiment: none; approved-distribution maintenance audit
+- Status: no author-side correction nominated
+- `ComposioHQ/awesome-claude-skills` PR #852 is mergeable and blocked only by
+  required maintainer review. Its validation and both Socket Security checks
+  are successful; it has no review or comment requesting a change.
+- `TensorBlock/awesome-mcp-servers` PR #1500 is mergeable and blocked only by
+  required maintainer review. It has no status check, review, or comment
+  requesting a change.
+- `DhanushNehru/awesome-mcp-servers` PR #52 is mergeable. Hypersweep succeeds;
+  the repository-wide Lychee check fails. Prior direct evidence established
+  that the Wenlan URL returns `200` and the failures are unrelated upstream
+  links, so repairing that repository-wide debt remains outside the one-line
+  listing update.
+- `TeleAI-UAGI/Awesome-Agent-Memory` PR #72 is mergeable, with no check run,
+  commit status, review, or comment requesting a change. GitHub reports the
+  empty aggregate status as `pending`; there is no inspectable author-side
+  failure to repair.
+- Decision: Do not push no-op commits, broaden patches, or prompt maintainers.
+  Continue passive review-state observation and record a new action only when
+  a maintainer requests a scoped correction or a current entry becomes live.
+
+### 2026-08-01T21:33:26Z — self-updating codebase-wiki candidate gate
+
+- Record type: campaign-observation
+- Related experiment: none; no experiment started
+- Status: candidate rejected for this window
+- Demand evidence: Multiple independent English Reddit discussions repeat
+  self-updating codebase-wiki and documentation-drift problems. Six maintained
+  adjacent GitHub repositories were read in native cumulative units: 40, 354,
+  11, 758, 305, and 1,264 stars respectively, with provenance recorded in the
+  coverage audit. A Simplified-Chinese Bilibili workflow corroborates Claude
+  Code, Obsidian, LLM Wiki, and AI-knowledge-base interest, but not a distinct
+  codebase-sync query; no matching Traditional-Chinese exact observation was
+  retained. None of these observations is GSC evidence or keyword volume.
+- Coverage evidence: The existing English, zh-TW, and zh-CN LLM Wiki and
+  source-backed knowledge-base canonicals already explain Sources, maintained
+  Pages, stale reasons, refresh, review, and the boundary that current code,
+  tests, repository search, and native documentation remain authoritative.
+- Product-proof boundary: First-party Directory Source ingestion scans only
+  `.md`, `.txt`, and `.pdf`. Although a generic chunker recognizes code
+  extensions, it is not wired into Directory Source ingestion. Wenlan can
+  prove maintained source-backed engineering documentation from supported
+  documents and work evidence, but not automatic arbitrary codebase indexing.
+- Candidate-gate result: provenance passes; repeated English problem passes;
+  standalone utility passes; clean coverage gap fails; maintained proof for a
+  code-sync promise fails. Mandarin exact-intent evidence is also insufficient
+  for a separate localized page.
+- Decision: Do not create or translate a new article. Monitor the qualified
+  phrases and prefer a bounded clarification on the existing LLM Wiki
+  canonical only if a future authenticated query-page join supports it.
+- Evidence: `docs/seo-audits/2026-08-01-self-updating-codebase-wiki-coverage-gate.md`.
+- Approval boundary: No website edit, push, PR, merge, deployment, indexing
+  request, GSC validation, external publication, synthetic event, or account
+  mutation was performed or authorized by this observation.
+
+### 2026-08-01T21:47:09Z — core acquisition crawl-freshness inspection
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-07-27-llm-wiki-implementation-guide-refresh`,
+  `EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh`,
+  `EXP-2026-07-29-obsidian-claude-code-refresh`, and
+  `EXP-2026-08-01-obsidian-knowledge-base-locales`
+- Status: authenticated read-only GSC observation; no experiment started
+- Authority: Google Search Console URL Inspection API for
+  `sc-domain:wenlan.app`, captured at `2026-08-01T21:47:09Z`.
+- Indexed technical evidence: All six LLM Wiki and source-backed
+  knowledge-base URLs returned exact Google-selected self-canonicals,
+  indexing allowed, successful fetches, and `Submitted and indexed`.
+- Freshness evidence: English LLM Wiki has a post-implementation-refresh
+  crawl. Both Mandarin source-backed knowledge-base pages have post-content-
+  deploy crawls. The zh-TW and zh-CN LLM Wiki, English and zh-TW Obsidian,
+  and English source-backed pages have crawl times that predate their latest
+  content changes.
+- New-locale evidence: The live zh-CN Obsidian page is `URL is unknown to
+  Google`, with no crawl, canonical, sitemap, referring URL, or fetch fields
+  returned by GSC. Missing fields are not reported as zero.
+- Decision: Do not rewrite an existing page or create another overlapping
+  article. Nominate one fixed, separately approval-gated request-indexing
+  batch for the new zh-CN Obsidian URL plus the stale zh-TW and English
+  Obsidian URLs and stale zh-CN LLM Wiki URL. Do not repeat previously
+  completed requests for English source-backed or zh-TW LLM Wiki.
+- Evidence: `docs/seo-audits/2026-08-01-core-acquisition-url-inspection.md`.
+- Approval boundary: No request indexing, GSC validation, website edit, push,
+  PR, merge, deployment, external publication, paid acquisition, synthetic
+  event, or account mutation was performed.
+
+### 2026-08-01T22:00:20Z — approved four-URL indexing-request batch
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-07-27-llm-wiki-implementation-guide-refresh`,
+  `EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh`,
+  `EXP-2026-07-29-obsidian-claude-code-refresh`, and
+  `EXP-2026-08-01-obsidian-knowledge-base-locales`
+- Status: request-indexing batch completed; wait for a later crawl observation
+- Approval: The user explicitly approved the fixed four-URL GSC Request
+  Indexing batch. The approval did not include validation or another URL.
+- Results: Signed-in Search Console returned `Indexing requested` for
+  `/zh-CN/learn/wenlan-vs-obsidian-ai-memory`,
+  `/zh-TW/learn/wenlan-vs-obsidian-ai-memory`,
+  `/learn/wenlan-vs-obsidian-ai-memory`, and
+  `/zh-CN/learn/distilled-wiki-pages-ai-memory` by
+  `2026-08-01T22:00:20Z`.
+- Pre-request state: The new zh-CN Obsidian URL was not on Google and unknown
+  to Google. The other three URLs were on Google and indexed, but their latest
+  GSC crawl timestamps predated the meaningful content changes recorded in the
+  experiment ledger.
+- Interpretation: Each result confirms priority-crawl queue acceptance only.
+  It is not evidence of a new crawl, indexing success for the new locale,
+  ranking or impression lift, clicks, traffic, or causality. Do not resubmit
+  any URL in this batch.
+- Next step: At the experiment's actual 24-hour boundary or a later
+  authenticated window, re-read URL Inspection crawl state without requesting
+  again; keep each locale and metric in its native unit.
+- Evidence: `docs/seo-audits/2026-08-01-core-acquisition-url-inspection.md`.
+- Excluded actions: No GSC validation, website edit, push, PR, merge,
+  deployment, external publication, paid acquisition, synthetic event, or
+  unrelated account mutation was performed.
