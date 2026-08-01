@@ -5,7 +5,8 @@
 **Authority:** authenticated Google Search Console URL Inspection API for
 `sc-domain:wenlan.app`
 
-**Status:** read-only observation; no indexing request or validation submitted
+**Status:** fixed four-URL request-indexing batch completed; no validation
+submitted
 
 ## Result
 
@@ -42,8 +43,9 @@ not converted into fabricated values.
 Do not rewrite these pages and do not create another overlapping article from
 this observation. The current titles and content already answer the protected
 LLM Wiki, AI knowledge-base, source-backed wiki, and Obsidian integration
-intents. The next search action is a fixed, approval-gated URL Inspection
-request batch for URLs whose meaningful content has not been fetched:
+intents. The user approved, and the controller completed, a fixed URL
+Inspection request batch for URLs whose meaningful content had not been
+fetched:
 
 1. `/zh-CN/learn/wenlan-vs-obsidian-ai-memory` — new and unknown to Google.
 2. `/zh-TW/learn/wenlan-vs-obsidian-ai-memory` — indexed, but last crawl
@@ -53,17 +55,35 @@ request batch for URLs whose meaningful content has not been fetched:
 4. `/zh-CN/learn/distilled-wiki-pages-ai-memory` — indexed, but last crawl
    predates the July 29 refresh by fourteen days.
 
-Do not repeat requests for the English source-backed page or zh-TW LLM Wiki
-page: both already received approved requests in the existing campaign, and a
-repeat request does not create a stronger queue priority. The two Mandarin
-source-backed knowledge-base pages already have post-refresh crawl evidence.
+Do not repeat any URL in this completed batch. Also do not repeat requests for
+the English source-backed page or zh-TW LLM Wiki page: both already received
+approved requests in the existing campaign, and a repeat request does not
+create a stronger queue priority. The two Mandarin source-backed knowledge-
+base pages already have post-refresh crawl evidence.
 
-Queue acceptance, if later approved and returned, will remain only a GSC
-operation result. It will not establish a new crawl, indexing success, rank,
-traffic lift, click lift, or causality.
+## Request-indexing execution
+
+The user explicitly approved the exact four-URL batch. By
+`2026-08-01T22:00:20Z`, signed-in Search Console returned the authoritative
+`Indexing requested` dialog for each URL. Google described each result as the
+URL being added to a priority crawl queue and stated that submitting a page
+multiple times does not change its queue position or priority.
+
+| URL | Pre-request GSC state | Request result |
+| --- | --- | --- |
+| `/zh-CN/learn/wenlan-vs-obsidian-ai-memory` | URL is not on Google; unknown to Google | Indexing requested |
+| `/zh-TW/learn/wenlan-vs-obsidian-ai-memory` | URL is on Google; page is indexed | Indexing requested |
+| `/learn/wenlan-vs-obsidian-ai-memory` | URL is on Google; page is indexed | Indexing requested |
+| `/zh-CN/learn/distilled-wiki-pages-ai-memory` | URL is on Google; page is indexed | Indexing requested |
+
+Queue acceptance remains only a GSC operation result. It does not establish a
+new crawl, indexing success for the new locale, rank, traffic lift, click lift,
+or causality. Recheck crawl timestamps only at a declared readout or later
+authenticated evidence window.
 
 ## Approval boundary
 
-This read used authenticated GSC data only. No request indexing, GSC
+The user's approval covered only the exact four URL requests above. No GSC
 validation, website edit, push, PR, merge, deployment, external publication,
-paid acquisition, synthetic event, or account mutation was performed.
+paid acquisition, synthetic event, or unrelated account mutation was
+performed.

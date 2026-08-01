@@ -5037,3 +5037,35 @@ increase for that experiment.
 - Approval boundary: No request indexing, GSC validation, website edit, push,
   PR, merge, deployment, external publication, paid acquisition, synthetic
   event, or account mutation was performed.
+
+### 2026-08-01T22:00:20Z — approved four-URL indexing-request batch
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-07-27-llm-wiki-implementation-guide-refresh`,
+  `EXP-2026-07-29-zhcn-llm-wiki-knowledge-base-refresh`,
+  `EXP-2026-07-29-obsidian-claude-code-refresh`, and
+  `EXP-2026-08-01-obsidian-knowledge-base-locales`
+- Status: request-indexing batch completed; wait for a later crawl observation
+- Approval: The user explicitly approved the fixed four-URL GSC Request
+  Indexing batch. The approval did not include validation or another URL.
+- Results: Signed-in Search Console returned `Indexing requested` for
+  `/zh-CN/learn/wenlan-vs-obsidian-ai-memory`,
+  `/zh-TW/learn/wenlan-vs-obsidian-ai-memory`,
+  `/learn/wenlan-vs-obsidian-ai-memory`, and
+  `/zh-CN/learn/distilled-wiki-pages-ai-memory` by
+  `2026-08-01T22:00:20Z`.
+- Pre-request state: The new zh-CN Obsidian URL was not on Google and unknown
+  to Google. The other three URLs were on Google and indexed, but their latest
+  GSC crawl timestamps predated the meaningful content changes recorded in the
+  experiment ledger.
+- Interpretation: Each result confirms priority-crawl queue acceptance only.
+  It is not evidence of a new crawl, indexing success for the new locale,
+  ranking or impression lift, clicks, traffic, or causality. Do not resubmit
+  any URL in this batch.
+- Next step: At the experiment's actual 24-hour boundary or a later
+  authenticated window, re-read URL Inspection crawl state without requesting
+  again; keep each locale and metric in its native unit.
+- Evidence: `docs/seo-audits/2026-08-01-core-acquisition-url-inspection.md`.
+- Excluded actions: No GSC validation, website edit, push, PR, merge,
+  deployment, external publication, paid acquisition, synthetic event, or
+  unrelated account mutation was performed.

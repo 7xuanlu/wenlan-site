@@ -270,6 +270,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   have no document overflow and zero protected-phrase splits. The experiment
   is now live and measuring; its actual 24-hour boundary is after
   `2026-08-02T21:09:50Z`.
+- At `2026-08-01T22:00:20Z`, the user's explicit approval for the fixed
+  four-URL GSC Request Indexing batch was completed. Search Console returned
+  `Indexing requested` for the English, zh-TW, and zh-CN Obsidian URLs and the
+  zh-CN LLM Wiki URL. The new zh-CN Obsidian URL was not on Google before the
+  request; the other three were indexed but had stale crawl timestamps. Do
+  not repeat these requests. Queue acceptance is not a new crawl, indexing,
+  ranking, traffic, click, or causal result. No GSC validation was submitted.
 - The weekly window is a reporting boundary, not a publish gate. Only one
   website change may be in `approved` or `active` preparation at a time;
   production-verified `live`, `measuring`, and `extended` cohorts continue
@@ -1295,17 +1302,16 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-Authenticated GSC URL Inspection at `2026-08-01T21:47:09Z` now isolates crawl
-freshness as the immediate search constraint. The live zh-CN Obsidian route is
-`URL is unknown to Google`; the zh-TW and English Obsidian pages and zh-CN LLM
-Wiki page are indexed but their last crawls predate the latest meaningful
-content changes. All inspected indexed URLs return exact Google-selected
-self-canonicals, indexing allowed, and successful fetches, so no canonical,
-robots, or indexability repair is nominated. The next action is a fixed,
-separately approval-gated request-indexing batch for those four URLs. Do not
-repeat the already-completed English source-backed or zh-TW LLM Wiki requests,
-and do not describe queue acceptance as a new crawl or ranking result. The
-source-native inspection matrix is in
+Authenticated GSC URL Inspection at `2026-08-01T21:47:09Z` isolated crawl
+freshness as the immediate search constraint. The user approved the fixed
+four-URL request-indexing batch, and Search Console returned `Indexing
+requested` for the English, zh-TW, and zh-CN Obsidian URLs and the zh-CN LLM
+Wiki URL by `2026-08-01T22:00:20Z`. Do not repeat those requests, the earlier
+English source-backed request, or the earlier zh-TW LLM Wiki request. Queue
+acceptance is not a new crawl, indexing, ranking, traffic, click, or causal
+result. Wait for the actual Obsidian-locale 24-hour boundary or later
+authenticated evidence before re-reading crawl state; do not rewrite content
+from this operation. The source-native inspection matrix and execution are in
 `docs/seo-audits/2026-08-01-core-acquisition-url-inspection.md`.
 
 Do not start another website edit from the current authenticated range. The
