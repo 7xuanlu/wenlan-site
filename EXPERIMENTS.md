@@ -5686,3 +5686,41 @@ increase for that experiment.
 - External actions: none. No website edit, new experiment, push, PR, merge,
   deployment, indexing request, GSC validation, external publication, paid
   action, synthetic event, or metric-definition change occurred.
+
+### 2026-08-02T06:49:33Z — AI knowledge-base tool-selection candidate gate
+
+- Record type: campaign-observation
+- Related experiment: none; demand-discovery and coverage-gap preparation
+- Candidate: one three-locale `choose an AI knowledge-base tool` canonical
+  family, not a best-tools ranking or vendor-comparison page.
+- Demand evidence: an English Reddit selection discussion retained 33 votes
+  in its 2026-01-09 search observation; a Simplified-Chinese V2EX request for
+  a reliable AI knowledge base has 6,166 views and 28 replies; Taiwan-language
+  result pages target AI knowledge-base tool selection and comparison. The
+  previously captured OpenSEO United States `AI knowledge base` 880 and Taiwan
+  `AI 知識庫` 210 remain separate third-party units. The current authenticated
+  GSC visible-query export contains no tool-selection row and is unavailable,
+  not zero.
+- Coverage decision: reject separate `RAG vs LLM Wiki`, Codex/ChatGPT
+  knowledge-base, and duplicate local/open-source build URLs. Existing LLM
+  Wiki, MCP, source-backed knowledge, and document-workflow pages already own
+  those questions. No current page owns the tool-selection intent.
+- Gate result: pass. Provenance is inspectable, the problem repeats across
+  language surfaces, the coverage gap is clean, first-party Wenlan sources can
+  prove the proposed criteria, and the eight-test checklist remains useful
+  without selecting Wenlan.
+- Prepared scope: `/learn/choose-ai-knowledge-base-tool` with zh-TW and zh-CN
+  counterparts; distinguish document upload, RAG/document QA, note-editor
+  access, and maintained source-backed agent knowledge, then test provenance,
+  freshness, conflicts/review, ownership/export, privacy, interoperability,
+  input limits, and reproducible acceptance. No `FAQPage` JSON-LD and no
+  unsupported vendor claims.
+- Decision: prepare, do not start or publish. The prior net-new document guide
+  completed production at `2026-08-02T02:42:26Z`, so the frozen 14-day cap
+  makes `2026-08-16T02:42:26Z` the earliest unchanged-contract launch.
+- Approval boundary: earlier publication requires an explicit amendment to
+  the experiment-cap clause. Push, PR, merge, deployment, indexing request,
+  GSC validation, external publication, paid action, synthetic event, and
+  metric-definition changes remain unperformed and gated.
+- Evidence artifact:
+  `docs/seo-audits/2026-08-02-ai-knowledge-base-tool-selection-gate.md`.

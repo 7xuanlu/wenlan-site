@@ -1888,3 +1888,28 @@ diagnostic floor and the range predates the August 1 routing and localized
 content changes, the hierarchy remains unproven rather than wrong. Do not edit
 or create a page from this observation; rerun the same deterministic section
 with the next authenticated query-page window.
+
+#### Next non-overlapping content candidate
+
+A bounded 2026-08-02 demand and coverage-gap pass rejected separate
+`RAG vs LLM Wiki`, Codex/ChatGPT knowledge-base, and duplicate local/open-source
+build URLs because the current LLM Wiki, MCP, and document-workflow owners
+already cover those intents. The strongest clean gap is instead the
+high-intent selection question: how to choose a reliable AI knowledge-base
+tool.
+
+The candidate has inspectable English Reddit, Simplified-Chinese V2EX, and
+Taiwan-language result-shape evidence. OpenSEO's previously captured United
+States `AI knowledge base` 880 and Taiwan `AI 知識庫` 210 remain in OpenSEO's
+native third-party unit; authenticated GSC exposes no visible tool-selection
+query and is not reported as zero. First-party Wenlan sources can prove the
+proposed eight-test framework, and the asset remains useful without choosing
+Wenlan. The clean provisional canonical family is
+`/learn/choose-ai-knowledge-base-tool` plus zh-TW and zh-CN counterparts.
+
+Decision: prepare, do not launch. The document knowledge-base guide became a
+net-new production search asset at `2026-08-02T02:42:26Z`, so the unchanged
+14-day cap places the earliest launch at `2026-08-16T02:42:26Z`. Earlier
+publication requires an explicit amendment to the experiment-cap clause; no
+deadline or metric definition needs to change. See
+`docs/seo-audits/2026-08-02-ai-knowledge-base-tool-selection-gate.md`.
