@@ -323,6 +323,14 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   endorsement copy, and 393px plus 320px production renders are green. The
   experiment is measuring, the production slot is open, and its actual
   24-hour boundary is after `2026-08-03T04:39:55Z`.
+- At `2026-08-02T07:41:27Z`, the user explicitly approved commit, Git push,
+  PR creation and merge, automatic Vercel deployment, and read-only production
+  verification for the exact
+  `EXP-2026-08-02-ai-knowledge-base-tool-selection` three-locale family.
+  Request indexing, GSC validation, paid actions, external publication,
+  synthetic events, analytics mutation, and metric-definition changes remain
+  excluded. The approved change continues to consume the single production
+  slot until production verification completes.
 - The weekly window is a reporting boundary, not a publish gate. Only one
   website change may be in `approved` or `active` preparation at a time;
   production-verified `live`, `measuring`, and `extended` cohorts continue
@@ -360,6 +368,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
+  `EXP-2026-08-02-ai-knowledge-base-tool-selection` is publication-approved
+  for its exact English, zh-TW, and zh-CN tool-selection canonical family.
+  The approved shared-state scope is limited to commit, Git push, PR creation
+  and merge, automatic Vercel deployment, and read-only production
+  verification. Request indexing, GSC validation, external publication, paid
+  action, synthetic events, analytics mutation, and metric changes remain
+  approval-gated.
   `EXP-2026-08-01-karpathy-llm-wiki-locales-refresh` is production-verified
   and measuring; it no longer occupies the single production slot. It
   refreshes only the existing English, zh-TW,
@@ -495,7 +510,7 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 19.
+- Active experiments: 20.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -685,14 +700,16 @@ after the anchor is frozen.
 | --- | ---: | ---: | --- | ---: |
 | GitHub total stars | 47 | 47 | GitHub REST `GET /repos/7xuanlu/wenlan`, read on 2026-08-01 | 53 |
 | GSC rolling-28-day property clicks | 6 | 10 | Search Console API, `sc-domain:wenlan.app`, `2026-07-03..2026-07-30`; `/tmp/wenlan-seo/gsc-metadata.json` | 90 |
-| GSC rolling-28-day property impressions | 197 | 660 | Search Console API, `sc-domain:wenlan.app`, `2026-07-03..2026-07-30`; `/tmp/wenlan-seo/gsc-metadata.json` | 9,340 |
+| GSC rolling-28-day property impressions | 197 | 706 | Search Console API focused backfill, `sc-domain:wenlan.app`, `2026-07-03..2026-07-30`, captured 2026-08-02 | 9,294 |
 | Vercel rolling-28-day visitors | 323 | 1,468 | Vercel Web Analytics API, project `wenlan-site`, `2026-07-03..2026-07-30`; `/tmp/wenlan-seo/vercel-metadata.json` | 532 |
 
 Supporting quality split for the same live range:
 
-- GSC property totals: 10 clicks, 660 impressions.
-- GSC visible-query totals: 2 clicks, 111 impressions.
-- GSC query visibility gap: 8 clicks, 549 impressions.
+- GSC property totals: 10 clicks, 706 impressions.
+- GSC visible-query totals: 2 clicks, 120 impressions.
+- GSC query visibility gap: 8 clicks, 586 impressions. These same-range
+  values include Search Console backfill captured on 2026-08-02; the frozen
+  2026-07-31 weekly report remains unchanged at its earlier capture.
 - Visible-query non-brand impressions: 61 using the existing Searchfit group
   classification; this is a visible-row subset, not a property total, and the
   current `Other` bucket still contains noisy Wenlan misspellings.
@@ -704,6 +721,20 @@ Supporting quality split for the same live range:
 - Vercel reports 2 visitors and 2 pageviews for
   `/learn/ai-work-memory-vs-knowledge-base`; the page aggregate does not
   provide a source-to-page join.
+- A same-range traffic-quality audit on 2026-08-01 found that 1,132 of the
+  1,148 `google.com`-referrer visitors share the exact
+  `Chrome + GNU/Linux + desktop` signature. Of those, 1,109 occurred during
+  2026-07-15..2026-07-23, while finalized GSC Web data records one click in
+  that interval and zero clicks across Image, Video, News, Discover, and
+  Google News for the full range. The authenticated Vercel Production
+  dashboard's broader 30-day Hostnames view reports `wenlan.app` at 100%, so
+  another production hostname does not explain the cohort. Preserve 1,468
+  raw visitors as the Goal metric; report the 1,132 as
+  `suspected automated/referrer-incompatible` and the remaining 336 only as
+  `not matched by the exact signature`, never as confirmed human traffic.
+  This diagnostic does not silently redefine qualified-source visitors. Full
+  provenance and the daily reconciliation are in
+  `docs/seo-audits/2026-08-01-vercel-google-referrer-quality-audit.md`.
 - Unique acquisition-surface visitors and source-to-page sessions remain
   unavailable from the separate Vercel aggregates. Vercel custom events
   remain Pro/Enterprise-gated, and no authenticated Umami report was
@@ -845,7 +876,7 @@ Supporting quality split for the same live range:
 
 - Stars: 53 more than the verified live observation.
 - GSC property clicks: 90 more in the fixed final rolling window.
-- GSC property impressions: 9,340 more in the fixed final rolling window.
+- GSC property impressions: 9,294 more in the fixed final rolling window.
 - Vercel visitors: 532 more in the fixed final rolling window.
 - Legacy migration diagnostic: `sc-domain:useorigin.app` still has
   516 impressions and 5 clicks in the same aligned range. Those values are
@@ -855,6 +886,37 @@ Supporting quality split for the same live range:
   remain unavailable; none may be invented.
 
 ### Current experiment
+
+`EXP-2026-08-02-ai-knowledge-base-tool-selection` is in active local
+preparation and consumes the single website preparation slot. It creates one
+new canonical family only:
+`/learn/choose-ai-knowledge-base-tool`,
+`/zh-TW/learn/choose-ai-knowledge-base-tool`, and
+`/zh-CN/learn/choose-ai-knowledge-base-tool`.
+
+The candidate gate passes from the preserved OpenSEO United States
+`AI knowledge base` 880 and Taiwan `AI 知識庫` 210 third-party units, an
+English Reddit selection discussion, a 6,166-view/28-reply Simplified-Chinese
+V2EX request, Taiwan-language result-shape evidence, a clean current-site gap,
+and maintained Wenlan proof. These source-native observations are not GSC or
+keyword-volume estimates.
+
+The page owns the selection question, not category definition, document
+construction, source-backed maintenance, MCP access, or Obsidian workflow. It
+distinguishes one-session upload, RAG/document QA, note-editor access, and
+maintained agent knowledge, then applies eight repeatable tests. Each locale
+has its own 5-impression minimum exposure after publication; no locale is
+pooled and no exact-query rank or outcome is preclaimed.
+
+Local preparation and publication are approved. The publication scope covers
+commit, Git push, PR creation and merge, automatic Vercel deployment, and
+read-only production verification for this exact three-locale family. Request
+indexing, GSC validation, external publication, paid action, synthetic events,
+analytics mutation, and metric changes remain unapproved. The immutable
+experiment contract is in `EXPERIMENTS.md`; the candidate evidence is in
+`docs/seo-audits/2026-08-02-ai-knowledge-base-tool-selection-gate.md`.
+
+### Measuring experiment: Karpathy LLM Wiki locales
 
 `EXP-2026-08-01-karpathy-llm-wiki-locales-refresh` is production-verified and
 measuring; the single production slot is open. It refreshes the existing
@@ -1424,6 +1486,16 @@ earlier wake and let it advance to the document-guide boundary afterward
 rather than creating another automation. Do not infer crawl, indexing,
 impressions, clicks, or visitor lift from the successful deployment.
 
+Keep the Vercel Goal metric raw and add the preserved traffic-quality split to
+future complete-window observations before using referrer totals as evidence
+of acquisition quality. The current aggregate evidence supports an exact
+`suspected automated/referrer-incompatible` cohort, not a general Linux,
+Chrome, Google-referrer, or bot exclusion rule. Do not call the 336-visitor
+complement human traffic and do not change the protected qualified-source or
+visitor definitions without explicit approval. The deterministic evidence and
+capability boundary are recorded in
+`docs/seo-audits/2026-08-01-vercel-google-referrer-quality-audit.md`.
+
 Authenticated GSC URL Inspection at `2026-08-01T21:47:09Z` isolated crawl
 freshness as the immediate search constraint. The user approved the fixed
 four-URL request-indexing batch, and Search Console returned `Indexing
@@ -1648,6 +1720,17 @@ complete post-deploy days and no post-change crawl date is confirmed. Run its
 W2 readout after `2026-08-02T00:26:09Z` with the original page and visible
 qualified-cluster guards.
 
+That W2 readout completed at `2026-08-02T06:17:58Z`. Authenticated URL
+Inspection reports the page as submitted and indexed with the exact
+self-canonical, but its last crawl remains `2026-07-04T09:03:21Z`, before the
+July 18 refresh. The same-range backfilled page row is still below the
+25-impression minimum at 0 clicks, 24 impressions, and 38.8 average position;
+the fixed five-query guard is unchanged at 0 clicks, 9 impressions, and 50.0
+impression-weighted average position. The W2 result is therefore
+inconclusive, not a failure. Keep the page unchanged and evaluate it again at
+W4 only after a post-refresh crawl can be confirmed or the original contract
+otherwise becomes assessable.
+
 The LLM-wiki, MCP shared-memory, stale-memory, claude-mem,
 SuperLocalMemory, and Basic Memory 24-hour readouts were completed at
 `2026-07-26T01:47:53Z`. Their production gates passed, but the latest
@@ -1800,3 +1883,110 @@ punkpeye resubmission remains blocked. The Codex directory likewise remains
 blocked on the separate repository-root plugin packaging and scanner contract.
 Neither blocker authorizes a website edit, another experiment, paid listing,
 indexing request, GSC validation, or analytics mutation.
+
+The approved OSS batch received a second upstream acceptance at
+`2026-08-01T22:15:12Z`: `TeleAI-UAGI/Awesome-Agent-Memory` PR #72 merged as
+`62f9864ca13ced26dd645025940d72aaeb5b2f96`, and the default-branch README now
+links the Wenlan site and `7xuanlu/wenlan` repository directly. Together with
+the already-live `gavischneider/awesome-llm-wiki` entry, the batch now has two
+merged listings and twelve open PRs. The open set is nine `CLEAN`, two
+`BLOCKED` only on required maintainer review, and one `UNSTABLE` only because
+of the previously verified unrelated whole-repository link failures. No
+maintainer comment or review requests an author-side correction. Continue
+passive review-state observation; do not push no-op commits or contact
+maintainers from this evidence.
+
+#### Release-to-download integrity observation
+
+The official GitHub latest release remained `v0.15.3`, published at
+`2026-08-01T08:47:47Z`, when checked at `2026-08-02T06:29:47Z`; the official
+tag list contained no `v0.15.4`. All four public site download assets for
+Windows x64, macOS Apple Silicon, Linux x64, and Linux ARM64 resolved with
+HTTP 200. The live `/`, `/download`, `/zh-TW/download`, `/zh-CN/download`,
+`/about`, and `/docs/get-started` routes also returned HTTP 200, displayed
+`v0.15.3`, and did not display `v0.15.4`; the applicable download surfaces
+linked the expected release assets.
+
+GitHub PRs #430 and #431 are evidence of mutable, unreleased repository work,
+not a published release contract. No website correction is warranted until an
+official release or tag exists and its artifacts can be verified. This
+read-only observation made no website edit, push, PR, merge, deployment,
+indexing request, validation submission, external publication, or analytics
+mutation.
+
+#### Acquisition hierarchy evidence guard
+
+The local weekly report generator now prepares an explicit deterministic
+`Acquisition Hierarchy Validation` section from the authenticated GSC
+query-plus-page join. It keeps query impressions, joined owner impressions,
+their visibility difference, observed owner pages, configured owner, and the
+decision separate. A visible split or mismatch is only a routing-review signal,
+not proof of cannibalization; a missing row is unavailable, not zero. Protected
+locale rows are never pooled, and joined evidence below the existing
+three-impression query-action floor remains `wait`.
+
+Running the prepared generator against the latest preserved authenticated
+`2026-07-03..2026-07-30` inputs produced one privacy-visible protected row:
+`llm wiki 2.0` has one query impression and one joined impression on `/zh-TW`,
+rather than the configured English LLM Wiki owner. No protected query is
+visibly split across multiple pages. Because the only row is below the
+diagnostic floor and the range predates the August 1 routing and localized
+content changes, the hierarchy remains unproven rather than wrong. Do not edit
+or create a page from this observation; rerun the same deterministic section
+with the next authenticated query-page window.
+
+#### Next non-overlapping content candidate
+
+A bounded 2026-08-02 demand and coverage-gap pass rejected separate
+`RAG vs LLM Wiki`, Codex/ChatGPT knowledge-base, and duplicate local/open-source
+build URLs because the current LLM Wiki, MCP, and document-workflow owners
+already cover those intents. The strongest clean gap is instead the
+high-intent selection question: how to choose a reliable AI knowledge-base
+tool.
+
+The candidate has inspectable English Reddit, Simplified-Chinese V2EX, and
+Taiwan-language result-shape evidence. OpenSEO's previously captured United
+States `AI knowledge base` 880 and Taiwan `AI 知識庫` 210 remain in OpenSEO's
+native third-party unit; authenticated GSC exposes no visible tool-selection
+query and is not reported as zero. First-party Wenlan sources can prove the
+proposed eight-test framework, and the asset remains useful without choosing
+Wenlan. The clean provisional canonical family is
+`/learn/choose-ai-knowledge-base-tool` plus zh-TW and zh-CN counterparts.
+
+Decision: prepare locally; publication remains approval-gated. The current
+Frozen Goal Contract has no fixed calendar article quota. The prior website
+changes are production-verified and measuring, so the single preparation slot
+is open and this non-overlapping candidate may enter local preparation now.
+Push, PR creation, merge, deployment, request indexing, GSC validation, and
+external publication remain separately gated. See
+`docs/seo-audits/2026-08-02-ai-knowledge-base-tool-selection-gate.md`.
+
+At `2026-08-02T06:57:00Z`, the candidate entered local preparation as
+`EXP-2026-08-02-ai-knowledge-base-tool-selection`. It occupies the single
+website preparation slot until local verification finishes. The bounded scope
+is one English, zh-TW, and zh-CN canonical family plus same-locale Learn-hub
+routing and deterministic SEO coverage. It must not alter the existing LLM
+Wiki, document-build, source-backed trust, MCP, or Obsidian canonical owners.
+No publication or external/shared-state action is approved by this local
+preparation.
+
+At `2026-08-02T07:17:04Z`, local preparation passed its deterministic and
+rendered gates. The query-owner fixture keeps tool selection, document build,
+LLM Wiki/category, source-backed maintenance, and Obsidian workflow intent on
+distinct configured owners in English, zh-TW, and zh-CN. The complete SEO
+suite passed 222/222, the i18n contract passed 63/63, TypeScript and the
+production build passed, and the built technical checker verified 120 sitemap
+URLs, 24 required canonicals, 24 checked pages, and no `FAQPage` across 124
+built HTML pages. Fresh 393px and 1440px Chrome captures covered all three
+routes; titles, hierarchy, CJK wrapping, code containment, CTA, and visible
+FAQ passed, and each FAQ surface opened without browser errors.
+
+This proves implementation separation, not search-market correctness. After
+publication, each locale must independently reach its declared GSC exposure
+floor. An above-floor visible query split or mismatch nominates routing review;
+it does not justify preserving the new URL. The experiment remains the single
+active website change. At `2026-08-02T07:41:27Z`, the user approved commit,
+push, PR creation and merge, automatic Vercel deployment, and read-only
+production verification of this exact scope. Request indexing, GSC validation,
+external publication, paid action, synthetic event, analytics mutation, and
+metric-definition changes remain excluded.

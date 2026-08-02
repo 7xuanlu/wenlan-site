@@ -5521,3 +5521,367 @@ increase for that experiment.
   `2026-08-03T04:39:55Z`, using the latest authenticated weekly evidence when
   available and without starting another overlapping refresh of this family.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-18-claude-code-memory-refresh at 2026-08-02T06:17:58Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-18-claude-code-memory-refresh
+- Observed at: 2026-08-02T06:17:58Z
+- Readout: W2
+- Status: measuring
+- Evidence: The latest completed Friday report remains the immutable
+  `2026-07-03..2026-07-30` weekly capture at 10 property clicks and 660
+  property impressions, 2 visible-query clicks and 111 visible-query
+  impressions, and an 8-click/549-impression visibility gap. A focused
+  authenticated backfill of the same range, captured on 2026-08-02 without
+  rerunning the weekly pipeline, now reports 10 property clicks and 706
+  property impressions, 2 visible-query clicks and 120 visible-query
+  impressions, and an 8-click/586-impression visibility gap. These captures
+  remain separate evidence snapshots rather than a rewritten historical
+  report.
+- Target and qualified guard: The target page reports 0 clicks, 24
+  impressions, and 38.8 average position. It remains below the predeclared
+  25-impression minimum. The fixed five-query Claude-memory guard remains
+  visible at 0 clicks, 9 impressions, and 50.0 impression-weighted average
+  position: `claude code memory` 0/3/51.0, `claude mcp memory` 0/1/46.0,
+  `claude memory mcp` 0/3/50.3, `claude memory md` 0/1/55.0, and
+  `claudecode memory` 0/1/45.0. It meets the 9-impression visibility floor
+  but does not improve clicks, impressions, or position under the immutable
+  qualified-exposure guard.
+- Crawl and index evidence: Search Console URL Inspection for
+  `https://wenlan.app/learn/claude-code-memory`, captured
+  `2026-08-02T06:11:32Z`, reports `PASS`, `Submitted and indexed`, robots
+  allowed, indexing allowed, successful mobile fetch, and exact matching
+  user-selected and Google-selected canonicals. Its last crawl is
+  `2026-07-04T09:03:21Z`, before the refresh completed production at
+  `2026-07-19T00:26:09Z`. A post-refresh crawl is therefore not confirmed and
+  the original post-crawl minimum-exposure clock cannot be anchored.
+- Vercel evidence: Reused, without refetching, the latest complete
+  `2026-07-03..2026-07-30` Friday range: 1,468 raw visitors/1,745 pageviews,
+  307 direct visitors/457 pageviews, and a non-deduplicated 1,163-visitor/
+  1,286-pageview qualified-source row aggregate. The target-page row remains
+  separate at 9 visitors/21 pageviews. Unique acquisition-surface visitors
+  and source-to-page sessions are unavailable. The separate traffic-quality
+  audit labels 1,132 raw visitors as an exact suspected automated/referrer-
+  incompatible cohort; it does not redefine the protected raw or qualified-
+  source metrics.
+- Technical and rendered evidence: The live English route returns direct
+  HTTP 200 with the exact self-canonical, `index, follow`, Article and
+  BreadcrumbList JSON-LD, `datePublished: "2026-06-07"`,
+  `dateModified: "2026-07-18"`, the maintained Claude Code memory source,
+  visible `/memory` and Wenlan plugin guidance, sitemap membership, and no
+  `FAQPage`. Unsupported zh-TW and zh-CN counterparts remain direct 404s with
+  `noindex` and remain absent from the sitemap. Fresh 1440x1200 desktop and
+  emulated 393x852 mobile renders show the expected responsive article hero;
+  the mobile document has 393px client and scroll widths, and the long install
+  command is contained by a 337px internal horizontal scroller. No visual,
+  locale, canonical, schema, indexability, or document-overflow regression was
+  found. Evidence screenshots:
+  `/tmp/wenlan-claude-memory-w2-desktop.png` and
+  `/tmp/wenlan-claude-memory-w2-mobile-emulated.png`.
+- GitHub and CTA: GitHub REST reports 47 total stars. Authenticated Umami
+  observations and Vercel custom CTA events remain unavailable/account-gated,
+  so GitHub outbound and CTA are not reported.
+- Minimum exposure: not reached. The target has 24 page impressions, and URL
+  Inspection does not confirm any crawl after the refresh.
+- Result: inconclusive
+- Decision: wait
+- Unperformed gated actions: no indexing request, GSC validation, website
+  edit, push, PR, merge, deployment, external publication, OSS submission,
+  paid acquisition, synthetic analytics event, or metric-definition change.
+- Next step: Preserve the page and run W4 only when due, after a confirmed
+  post-refresh crawl can anchor the exposure clock. Do not classify the page
+  as success or failure or rewrite it from this evidence. Separately continue
+  the current AI-knowledge-base/LLM-wiki/Obsidian acquisition lane; this legacy
+  memory measurement does not nominate the next content experiment.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-02T06:26:05Z — approved OSS distribution second merge
+
+- Record type: campaign-observation
+- Related experiment: none; approved-distribution maintenance observation
+- Status: two merged listings; twelve open PRs
+- New acceptance: `TeleAI-UAGI/Awesome-Agent-Memory` PR #72 merged at
+  `2026-08-01T22:15:12Z` as
+  `62f9864ca13ced26dd645025940d72aaeb5b2f96`. The upstream default-branch
+  README now contains the visible Wenlan site link, GitHub star badge, and
+  `https://github.com/7xuanlu/wenlan` code link.
+- Existing acceptance: `gavischneider/awesome-llm-wiki` PR #4 remains merged
+  at `2026-08-01T18:55:52Z` as
+  `046112f2b49b4410fe569c2c7065411aed180980`; its default-branch README still
+  contains the exact Wenlan repository link and source-backed LLM-wiki
+  description.
+- Open inventory: twelve approved listing PRs remain open. Nine are
+  `CLEAN`; `ComposioHQ/awesome-claude-skills` #852 and
+  `TensorBlock/awesome-mcp-servers` #1500 are mergeable and `BLOCKED` only on
+  required maintainer review; `DhanushNehru/awesome-mcp-servers` #52 is
+  mergeable and `UNSTABLE` only because its whole-repository Lychee check
+  still reports unrelated upstream links while Hypersweep succeeds. None has
+  a maintainer comment or review requesting an author-side change.
+- GitHub evidence: GitHub REST reports 47 total Wenlan stars and 6 forks in
+  their native cumulative units. No listing-to-star attribution or causal
+  claim is made.
+- Decision: wait; do not manufacture no-op commits, broaden the one-line
+  listing patches, contact maintainers, resubmit the pending free directory
+  form, or mutate Glama/Codex-directory prerequisites.
+- External actions: none in this observation; all calls were read-only.
+- Next step: Reconcile the same twelve PRs only when a maintainer acts or at
+  the predeclared seven-complete-live-day boundary. Keep the earlier
+  Obsidian-locale 24-hour website readout as the next scheduled campaign
+  action.
+
+### 2026-08-02T06:29:47Z — release-to-download integrity observation
+
+- Record type: campaign-observation
+- Related experiment: none; release-integrity guard
+- Official release evidence: GitHub `releases/latest` reports `v0.15.3`,
+  published `2026-08-01T08:47:47Z`, and the official tag inventory contains no
+  `v0.15.4`.
+- Artifact evidence: the Windows x64, macOS Apple Silicon, Linux x64, and Linux
+  ARM64 `v0.15.3` public download assets each resolve with HTTP 200.
+- Live-site evidence: `/`, `/download`, `/zh-TW/download`,
+  `/zh-CN/download`, `/about`, and `/docs/get-started` each return HTTP 200,
+  visibly identify `v0.15.3`, and do not identify `v0.15.4`. Home and localized
+  download surfaces contain all four release asset URLs; the get-started page
+  contains the Windows installer link.
+- Pending repository evidence: GitHub PRs #430 and #431 concern a possible
+  `0.15.4` release but are not an official published tag or release and cannot
+  override the public release contract.
+- Result: pass; current website release and download claims match the official
+  published release.
+- Decision: no change. Recheck only after an official newer release is
+  published, then verify its complete artifact matrix before changing the site.
+- External actions: none; all checks were read-only. No website edit, push, PR,
+  merge, deployment, indexing request, GSC validation, external publication,
+  or analytics mutation occurred.
+
+### 2026-08-02T06:41:10Z — acquisition hierarchy evidence guard
+
+- Record type: campaign-observation
+- Related experiment: none; deterministic measurement-control improvement
+- Change: the local weekly report generator now emits an `Acquisition
+  Hierarchy Validation` table from authenticated query-plus-page evidence. It
+  reports protected acquisition layer, query, observed owner pages, configured
+  owner, query impressions, joined owner impressions, their visibility
+  difference, ownership state, and decision without pooling locales or sources.
+- Guard: a visible split or mismatch is a routing-review signal rather than
+  proof of cannibalization. Missing rows are unavailable rather than zero, and
+  joined evidence below the existing three-impression query-action floor waits.
+- Current evidence: the preserved authenticated `2026-07-03..2026-07-30`
+  inputs expose only `llm wiki 2.0` in the protected acquisition set: 1 query
+  impression, 1 joined impression, and one observed owner `/zh-TW` versus the
+  configured English LLM Wiki owner. No protected query is visibly split over
+  multiple pages.
+- Result: inconclusive. The only protected row is below the diagnostic floor,
+  and the evidence range predates the August 1 routing and localized content
+  changes.
+- Decision: keep the current hierarchy unchanged and rerun the same section
+  with the next authenticated query-page window. A future above-floor visible
+  split or mismatch nominates routing review; an aligned row supports only the
+  visible query, not the hidden property total.
+- Verification: focused split-owner and below-floor tests pass; the generated
+  current-state report is
+  `/tmp/wenlan-seo/2026-08-01-hierarchy-validation.md`.
+- External actions: none. No website edit, new experiment, push, PR, merge,
+  deployment, indexing request, GSC validation, external publication, paid
+  action, synthetic event, or metric-definition change occurred.
+
+### 2026-08-02T06:49:33Z — AI knowledge-base tool-selection candidate gate
+
+- Record type: campaign-observation
+- Related experiment: none; demand-discovery and coverage-gap preparation
+- Candidate: one three-locale `choose an AI knowledge-base tool` canonical
+  family, not a best-tools ranking or vendor-comparison page.
+- Demand evidence: an English Reddit selection discussion retained 33 votes
+  in its 2026-01-09 search observation; a Simplified-Chinese V2EX request for
+  a reliable AI knowledge base has 6,166 views and 28 replies; Taiwan-language
+  result pages target AI knowledge-base tool selection and comparison. The
+  previously captured OpenSEO United States `AI knowledge base` 880 and Taiwan
+  `AI 知識庫` 210 remain separate third-party units. The current authenticated
+  GSC visible-query export contains no tool-selection row and is unavailable,
+  not zero.
+- Coverage decision: reject separate `RAG vs LLM Wiki`, Codex/ChatGPT
+  knowledge-base, and duplicate local/open-source build URLs. Existing LLM
+  Wiki, MCP, source-backed knowledge, and document-workflow pages already own
+  those questions. No current page owns the tool-selection intent.
+- Gate result: pass. Provenance is inspectable, the problem repeats across
+  language surfaces, the coverage gap is clean, first-party Wenlan sources can
+  prove the proposed criteria, and the eight-test checklist remains useful
+  without selecting Wenlan.
+- Prepared scope: `/learn/choose-ai-knowledge-base-tool` with zh-TW and zh-CN
+  counterparts; distinguish document upload, RAG/document QA, note-editor
+  access, and maintained source-backed agent knowledge, then test provenance,
+  freshness, conflicts/review, ownership/export, privacy, interoperability,
+  input limits, and reproducible acceptance. No `FAQPage` JSON-LD and no
+  unsupported vendor claims.
+- Decision: prepare, do not start or publish. The prior net-new document guide
+  completed production at `2026-08-02T02:42:26Z`, so the frozen 14-day cap
+  makes `2026-08-16T02:42:26Z` the earliest unchanged-contract launch.
+- Approval boundary: earlier publication requires an explicit amendment to
+  the experiment-cap clause. Push, PR, merge, deployment, indexing request,
+  GSC validation, external publication, paid action, synthetic event, and
+  metric-definition changes remain unperformed and gated.
+- Evidence artifact:
+  `docs/seo-audits/2026-08-02-ai-knowledge-base-tool-selection-gate.md`.
+
+### 2026-08-02T06:56:05Z — tool-selection gate cap correction
+
+- Record type: campaign-observation correction
+- Corrects: the publication-boundary statements in the immediately preceding
+  `2026-08-02T06:49:33Z` observation.
+- Correction: the current Frozen Goal Contract explicitly has no fixed
+  calendar article quota. The older two-active/14-day limits were replaced by
+  the production-concurrency rule approved on 2026-07-24. The document guide
+  and Karpathy refresh are production-verified and measuring, so they do not
+  consume the single preparation slot.
+- Decision: the three-locale tool-selection candidate may enter local
+  preparation now. It still does not start a public experiment until the
+  immutable experiment fields are recorded and publication is explicitly
+  approved.
+- Unchanged boundaries: no push, PR, merge, deployment, request indexing, GSC
+  validation, external publication, paid action, synthetic event, analytics
+  mutation, or metric-definition change is authorized by this correction.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-02-ai-knowledge-base-tool-selection
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-02-ai-knowledge-base-tool-selection
+- Status: active
+- Data window: 2026-08-01..2026-08-07
+- Asset class: net-new-search
+- Launched: 2026-08-02
+- Hypothesis: A standalone, source-backed selection guide that distinguishes
+  document upload, RAG/document QA, note-editor access, and maintained agent
+  knowledge will earn qualified non-brand impressions and clicks for AI
+  knowledge-base tool-selection intent without splitting the current category,
+  construction, trust, MCP, or Obsidian owners.
+- Candidate evidence: OpenSEO's United States `AI knowledge base` result
+  displayed 880 in its third-party unit and exposed tools, builder, examples,
+  open-source, GitHub, and free modifiers; its Taiwan `AI 知識庫` result
+  displayed 210 in the same unit. An English Reddit tool-selection discussion
+  retained 33 votes in the captured result; a Simplified-Chinese V2EX request
+  for a reliable AI knowledge base has 6,166 views and 28 replies; Taiwan-
+  language result pages independently use AI-knowledge-base tool-selection
+  and comparison-guide framing. None of these numbers is GSC or keyword
+  volume.
+- Coverage gate: pass. Existing pages own category definition, document
+  construction, source-backed maintenance, MCP access, and Obsidian workflow;
+  none owns the tool-selection question. Separate RAG-vs-LLM-Wiki,
+  Codex/ChatGPT knowledge-base, and duplicate local/open-source build URLs are
+  rejected.
+- First-party proof: maintained Wenlan source documents local storage,
+  supported document inputs, source-backed Pages, citations, review, refresh,
+  MCP clients, open-source scope, and explicit limitations. The page must not
+  claim that Wenlan is best or make an unverified third-party product claim.
+- Baseline: Authenticated `2026-07-03..2026-07-30` GSC reports 10 property clicks and 706 property impressions after same-range backfill, 2 visible-query clicks and 120 visible-query impressions, and no visible tool-selection row; Vercel reports 1,468 raw visitors; GitHub reports 47 stars.
+- Baseline date range: authenticated `2026-07-03..2026-07-30` rolling range,
+  with the same-range GSC backfill captured on 2026-08-02 kept separate from
+  the immutable Friday report.
+- Baseline GSC property: 10 clicks and 706 impressions.
+- Baseline GSC visible queries: 2 clicks and 120 impressions; 8-click and
+  586-impression visibility gap. No visible query row contains the prepared
+  tool-selection phrases; this is unavailable, not zero.
+- Baseline target pages: not applicable before publication; all three
+  proposed URLs are new and have no prelaunch Search Console page row.
+- Baseline Vercel: 1,468 raw visitors and 1,745 pageviews; 307 direct visitors
+  and 457 pageviews; 1,163 visitors and 1,286 pageviews in the separate,
+  non-deduplicated qualified-source row aggregate. No target-page observation
+  exists before publication.
+- Baseline GitHub: 47 total stars. Umami custom-event totals remain account-
+  gated and are not inferred.
+- Change: add `/learn/choose-ai-knowledge-base-tool` with zh-TW and
+  zh-CN counterparts, reciprocal hreflang, sitemap membership, Article and
+  BreadcrumbList schema, visible FAQ without `FAQPage`, eight evaluation
+  tests, first-party Wenlan proof, and one same-locale Learn-hub route.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 5 GSC target-page impressions per locale after a confirmed post-publish crawl or a complete post-publish range; locale exposure is never pooled.
+  Each locale independently needs at least 5 GSC target-page
+  impressions after a confirmed post-publish crawl or a complete post-publish
+  range. Locale exposure is never pooled.
+- Success criteria: after minimum exposure, a locale succeeds when it records
+  at least 1 target-page click, or at least 10 target-page impressions with
+  page-average position at or above the top 30 and no visible above-floor
+  qualified query owned by a conflicting canonical.
+- Failure criteria: at W4 or later, after at least 10 target-page impressions
+  and a confirmed post-publish crawl, a locale fails when it has 0 clicks,
+  page-average position worse than 50, and no visible qualified tool-selection
+  query aligned to the target. Below exposure remains inconclusive.
+- Stop criteria: stop or correct immediately for a canonical, hreflang,
+  sitemap, robots, noindex, schema, locale, mobile-render, source-accuracy, or
+  standalone-utility regression; stop a locale if an above-floor joined query
+  consistently belongs to an existing protected owner rather than the new
+  page. Do not continuously rewrite while exposure is insufficient.
+- 24h readout: technical/indexability and available native-unit evidence only;
+  never infer SEO success
+- 7d readout: target-page and joined-query evidence if a complete authenticated
+  post-publish range exists; otherwise inconclusive
+- W2 readout: apply the independent locale minimums and success/failure bands
+- W4 readout: apply the same immutable bands after confirmed crawl/exposure
+- W8 readout: terminal cohort read if the Goal remains active or a later
+  controller preserves it
+- Result: pending
+- Decision: wait
+- Next step: add the bounded three-locale canonical family and deterministic
+  coverage, then run the full local SEO, TypeScript, build, technical, locale,
+  and responsive-render gates before asking for publication approval.
+- Excluded actions: push, PR, merge, deployment, request indexing, GSC
+  validation, external publication, paid action, synthetic event, analytics
+  mutation, and metric-definition change.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-02T07:17:04Z — tool-selection hierarchy local verification
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-02-ai-knowledge-base-tool-selection`
+- Status: local verification passed; publication approval pending
+- Hierarchy contract: tool-selection queries map to the new canonical family;
+  document-build queries remain on the document workflow; LLM Wiki/category,
+  source-backed maintenance, MCP access, and Obsidian workflow keep their
+  existing owners. The three locale owners remain independent and are not
+  pooled.
+- Deterministic verification: `pnpm seo:goal:check` passed; the full SEO suite
+  passed 222/222; the i18n contract passed 63/63; TypeScript passed; the
+  production build generated 223 static pages; the built technical checker
+  passed 120 sitemap URLs, 24 required canonicals, 24 checked pages, and the
+  site-wide `FAQPage` absence check across 124 built HTML pages.
+- Rendered verification: fresh full-height Chrome captures covered English,
+  zh-TW, and zh-CN at 393px and 1440px widths. The exact title hierarchy,
+  article packet, body sections, eight-test list, code block, CTA, references,
+  related links, and visible FAQ were inspected. Document widths matched their
+  scroll widths; CJK titles and semantic phrases wrapped without clipping or
+  single-character orphan lines. The first FAQ opened on every locale route,
+  and the browser recorded no errors or warnings.
+- Interpretation: this verifies a coherent implementation and a falsifiable
+  query-to-owner hypothesis. It is not indexing evidence, GSC demand, ranking,
+  clicks, Vercel visitor lift, or causality. After publication, each locale
+  needs its own declared five target-page GSC impressions before evaluation.
+  An above-floor visible split or mismatch triggers routing review rather than
+  a forced defense of the new URL.
+- Result: local verification passed
+- Decision: wait
+- Next step: request explicit approval to commit, push, create and merge a PR,
+  allow Vercel production deployment, and perform read-only production
+  verification for this bounded three-locale family.
+- External actions: none. No push, PR, merge, deployment, request indexing,
+  GSC validation, external publication, paid action, synthetic event,
+  analytics mutation, or metric-definition change occurred.
+
+### 2026-08-02T07:41:27Z — tool-selection publication approval
+
+- Record type: campaign-approval
+- Related experiment: `EXP-2026-08-02-ai-knowledge-base-tool-selection`
+- Status: active; publication authorized; consumes the single production slot
+- Approved scope: commit the verified English, zh-TW, and zh-CN canonical
+  family and its deterministic hierarchy, locale, sitemap, schema, and
+  technical coverage; push the current branch; create and merge the PR; allow
+  automatic Vercel production deployment; and perform read-only production
+  verification.
+- Excluded actions: request indexing, GSC validation, external publication,
+  paid action, synthetic event, analytics mutation, and metric-definition
+  changes remain unapproved.
+- Next step: rerun the frozen Goal and publication gates, publish the isolated
+  branch, wait for Vercel production completion, and verify the exact live
+  three-locale contract before releasing the production slot.
