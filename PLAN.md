@@ -277,6 +277,15 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   request; the other three were indexed but had stale crawl timestamps. Do
   not repeat these requests. Queue acceptance is not a new crawl, indexing,
   ranking, traffic, click, or causal result. No GSC validation was submitted.
+- At `2026-08-02T00:36:22Z`, the user explicitly approved commit, push, PR
+  creation, merge, automatic Vercel deployment, and read-only production
+  verification for `EXP-2026-08-01-document-knowledge-base-guide`. The exact
+  scope is the English, zh-TW, and zh-CN document-to-local-AI-knowledge-base
+  guide family plus deterministic Vercel acquisition source-to-page report
+  support. Request indexing, GSC validation, paid OpenSEO actions,
+  rank-tracking setup, external publication, paid acquisition, synthetic
+  events, and metric-definition changes remain excluded. The approved change
+  occupies the single production slot until production verification.
 - The weekly window is a reporting boundary, not a publish gate. Only one
   website change may be in `approved` or `active` preparation at a time;
   production-verified `live`, `measuring`, and `extended` cohorts continue
@@ -314,6 +323,12 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
+  `EXP-2026-08-01-document-knowledge-base-guide` is approved and in active
+  publication preparation, so it occupies the single production slot. Its
+  three locale URLs keep independent 5-impression minimum-exposure guards and
+  do not start their measurement clocks until the exact production completion
+  time. The immutable contract is in
+  `docs/seo-audits/2026-08-01-tool-boundaries-and-document-knowledge-base-gate.md`.
   `EXP-2026-08-01-obsidian-knowledge-base-locales` is live,
   production-verified, and measuring; it no longer consumes the single
   production slot. It refreshes the existing zh-TW Obsidian + Claude Code
@@ -434,7 +449,7 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 18.
+- Active experiments: 19.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -794,6 +809,36 @@ Supporting quality split for the same live range:
   remain unavailable; none may be invented.
 
 ### Current experiment
+
+`EXP-2026-08-01-document-knowledge-base-guide` is approved and in active
+publication preparation, occupying the single production slot. It adds one
+non-overlapping canonical family in English, zh-TW, and zh-CN for the
+document-ingestion, supported-source, repeatable-sync, scanned-PDF,
+read-only-Obsidian, distill, citation, lint, and review workflow. The existing
+LLM-wiki and source-backed knowledge-base pages remain the conceptual
+canonicals and receive contextual links rather than duplicated answers.
+
+The authenticated pre-publish range is `2026-07-03..2026-07-30`. None of the
+three new URLs appears in its GSC or Vercel target-page exports, so their
+baselines are unavailable rather than zero. Same-range GSC property totals are
+10 clicks and 660 impressions; visible-query totals are 2 clicks and 111
+impressions; the visibility gap is 8 clicks and 549 impressions. Vercel
+reports 1,468 visitors and 1,745 pageviews, while GitHub REST separately
+reports 46 stars. Each locale independently requires 5 GSC target-page
+impressions after its first confirmed crawl or index date; locale exposure is
+never pooled.
+
+At `2026-08-02T00:36:22Z`, the user approved commit, push, PR creation, merge,
+automatic Vercel deployment, and read-only production verification of the
+exact article family and deterministic Vercel report support. Request
+indexing, GSC validation, paid OpenSEO work, rank tracking, external
+publication, paid acquisition, synthetic events, and metric changes remain
+outside the approval. Production completion starts the 24h, 7d, W2, W4, and
+W8 clocks. The complete immutable experiment contract and local verification
+are in
+`docs/seo-audits/2026-08-01-tool-boundaries-and-document-knowledge-base-gate.md`.
+
+### Measuring experiment: Obsidian knowledge-base locales
 
 `EXP-2026-08-01-obsidian-knowledge-base-locales` is live,
 production-verified, and measuring; the single production slot is open. It
@@ -1593,6 +1638,38 @@ The already-requested English source-backed article was excluded. Do not
 repeat these requests; queue acceptance is not an indexing or ranking result.
 Any URL outside this completed five-URL batch, non-website publication, or
 GSC validation remains separately approval-gated.
+
+#### 2026-08-01 authenticated tool boundary and new-content decision
+
+The user clarified that low traffic makes eligible net-new articles a valid
+growth tactic; waiting for another GSC window is not a blanket launch rule.
+OpenSEO and Vercel were therefore verified inside their actual signed-in
+account surfaces before changing the queue.
+
+OpenSEO is authenticated for the `wenlan.app` project, but the hosted account
+has exhausted its credits and GSC is not connected. Existing result pages are
+readable; new keyword research, audit, rank tracking, GSC connection, and paid
+actions remain unavailable, unverified, or separately approval-gated.
+
+Vercel CLI 52.0.0 proved that the current Wenlan account can filter Web
+Analytics by `referrerHostname` and group by `requestPath`, or filter by
+`requestPath` and group by `referrerHostname`. The deterministic weekly lane
+may therefore report authenticated acquisition source-to-page aggregates
+without inventing a join. CTA custom events remain account-gated by HTTP 402
+and must not be inferred.
+
+The candidate gate passed for one non-overlapping three-locale workflow:
+`/learn/build-local-ai-knowledge-base-from-documents`. It owns the document
+ingestion, supported source types, repeatable sync, scanned-PDF boundary,
+Obsidian read-only boundary, and end-to-end validation intent that the existing
+conceptual LLM Wiki and source-backed knowledge-base pages do not. First-party
+Wenlan source proves every product claim. The user approved commit, push, PR
+creation, merge, automatic Vercel deployment, and read-only production
+verification at `2026-08-02T00:36:22Z`; the change now occupies the single
+production slot until production verification. Indexing requests, GSC
+validation, external publication, paid actions, and account mutations remain
+separately gated. See
+`docs/seo-audits/2026-08-01-tool-boundaries-and-document-knowledge-base-gate.md`.
 Report GSC, Vercel, Umami, GitHub, and technical evidence only when available
 in their native units. Reddit or other external publication, OSS submission,
 request indexing outside the fixed batch, and GSC validation remain

@@ -83,7 +83,26 @@ const COMPARISON_TARGETS = [
   },
 ];
 
+const DOCUMENT_KNOWLEDGE_BASE_TARGETS = [
+  {
+    pattern:
+      /\b(?:(?:build|create|make|set(?:ting)?\s+up)\s+(?:an?\s+)?(?:local\s+|open[-\s]?source\s+)?ai\s+knowledge[-\s]?base|local\s+ai\s+knowledge[-\s]?base|(?:markdown|pdfs?|documents?)\b.{0,40}\b(?:ai\s+)?knowledge[-\s]?base|obsidian\b.{0,40}\bai\s+knowledge[-\s]?base)\b/i,
+    page: "/learn/build-local-ai-knowledge-base-from-documents",
+  },
+  {
+    pattern:
+      /(?:(?:建立|建置|搭建|打造|本地).{0,24}AI\s*知識庫|(?:Markdown|PDF|文件|Obsidian).{0,24}AI\s*知識庫)/i,
+    page: "/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
+  },
+  {
+    pattern:
+      /(?:(?:建立|搭建|打造|本地).{0,24}AI\s*知识库|(?:Markdown|PDF|文档|文件|Obsidian).{0,24}AI\s*知识库)/i,
+    page: "/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
+  },
+];
+
 const KNOWLEDGE_BASE_WIKI_TARGETS = [
+  ...DOCUMENT_KNOWLEDGE_BASE_TARGETS,
   {
     pattern:
       /\bsource[-\s]backed(?:\s+(?:ai|llm))?\s+(?:wiki|knowledge[-\s]?base)\b/i,
@@ -228,6 +247,9 @@ function parseArgs(argv) {
       : null,
     vercelReferrersPath: args["vercel-referrers"]
       ? resolve(process.cwd(), args["vercel-referrers"])
+      : null,
+    vercelSourcePagesPath: args["vercel-source-pages"]
+      ? resolve(process.cwd(), args["vercel-source-pages"])
       : null,
     vercelMetadataPath: args["vercel-metadata"]
       ? resolve(process.cwd(), args["vercel-metadata"])
@@ -830,7 +852,7 @@ function summarizeUmami({ pageRecords, referrerRecords, eventRecords }) {
   };
 }
 
-function summarizeVercel({ pageRecords, referrerRecords, metadata }) {
+function summarizeVercel({ pageRecords, referrerRecords, sourcePageRecords, metadata }) {
   if (metadata?.source && metadata.source !== "Vercel Web Analytics API") {
     throw new Error(`Unsupported Vercel Analytics source: ${metadata.source}`);
   }
@@ -854,6 +876,63 @@ function summarizeVercel({ pageRecords, referrerRecords, metadata }) {
     })
     .filter((row) => row.referrer && (row.visitors > 0 || row.pageviews > 0))
     .sort((a, b) => b.visitors - a.visitors);
+  const sourcePages = sourcePageRecords
+    .map((row) => ({
+      source: row.source || row.referrer || row.referrer_hostname || "",
+      page: toPath(row.path || row.page || row.request_path || row.requestpath || ""),
+      visitors: parseFirstMetric(row, ["visitors"]),
+      pageviews: parseFirstMetric(row, ["pageviews", "page_views", "views"]),
+    }))
+    .filter(
+      (row) =>
+        row.source &&
+        row.page !== "-" &&
+        (row.visitors > 0 || row.pageviews > 0),
+    )
+    .sort((a, b) => b.visitors - a.visitors || b.pageviews - a.pageviews);
+  const sourcePageBreakdown = metadata?.sourcePageBreakdown;
+  if (sourcePageRecords.length > 0) {
+    if (!sourcePageBreakdown || sourcePageBreakdown.status !== "available") {
+      throw new Error(
+        "Vercel source-page CSV requires metadata.sourcePageBreakdown.status=available",
+      );
+    }
+    if (
+      !Number.isInteger(sourcePageBreakdown.rows) ||
+      sourcePageBreakdown.rows < 0 ||
+      sourcePageBreakdown.rows !== sourcePageRecords.length ||
+      sourcePageBreakdown.rows !== sourcePages.length
+    ) {
+      throw new Error(
+        "Vercel source-page metadata row count must match the validated CSV rows",
+      );
+    }
+    if (
+      !Array.isArray(sourcePageBreakdown.referrers) ||
+      sourcePageBreakdown.referrers.length === 0 ||
+      sourcePageBreakdown.referrers.some(
+        (referrer) => typeof referrer !== "string" || referrer.trim() === "",
+      )
+    ) {
+      throw new Error(
+        "Vercel source-page metadata referrers must be a non-empty string allowlist",
+      );
+    }
+    const allowedReferrers = new Set(
+      sourcePageBreakdown.referrers.map((referrer) => referrer.trim().toLowerCase()),
+    );
+    if (!sourcePages.every((row) => allowedReferrers.has(row.source.trim().toLowerCase()))) {
+      throw new Error(
+        "Vercel source-page CSV contains a source outside the metadata referrer allowlist",
+      );
+    }
+  } else if (sourcePageBreakdown?.status === "available") {
+    if (!Number.isInteger(sourcePageBreakdown.rows) || sourcePageBreakdown.rows !== 0) {
+      throw new Error(
+        "Vercel source-page metadata reports rows without a matching CSV",
+      );
+    }
+  }
   const totals = metadata?.totals ?? null;
   if (totals) {
     for (const field of ["visitors", "pageviews"]) {
@@ -880,6 +959,8 @@ function summarizeVercel({ pageRecords, referrerRecords, metadata }) {
     customEvents,
     pages,
     referrers,
+    sourcePages,
+    hasSourcePageData: sourcePages.length > 0,
     hasReferrerData: referrerRecords.length > 0,
     aiReferrerVisits: aiReferrers.reduce((sum, row) => sum + row.visitors, 0),
     aiReferrerCount: aiReferrers.length,
@@ -923,6 +1004,16 @@ function classifyQuery(query) {
     return {
       group: "Comparisons",
       page: "/learn/wenlan-vs-superlocal-memory",
+    };
+  }
+
+  const documentKnowledgeBaseTarget = DOCUMENT_KNOWLEDGE_BASE_TARGETS.find(
+    ({ pattern }) => pattern.test(query),
+  );
+  if (documentKnowledgeBaseTarget) {
+    return {
+      group: "AI knowledge base / wiki",
+      page: documentKnowledgeBaseTarget.page,
     };
   }
 
@@ -1684,6 +1775,13 @@ function makeVercelMarkdown(vercel) {
     .slice(0, 12)
     .map((row) => `| ${escapePipe(row.referrer)} | ${row.visitors} | ${row.pageviews} | ${row.channel} |`)
     .join("\n");
+  const sourcePageRows = vercel.sourcePages
+    .slice(0, 20)
+    .map(
+      (row) =>
+        `| ${escapePipe(row.source)} | ${formatPage(row.page)} | ${row.visitors} | ${row.pageviews} |`,
+    )
+    .join("\n");
 
   return `## Vercel Analytics Evidence
 
@@ -1699,7 +1797,15 @@ ${pageRows || "| - | 0 | 0 |"}
 
 | Referrer | Visitors | Pageviews | Channel |
 | --- | ---: | ---: | --- |
-${referrerRows || "| - | 0 | 0 | - |"}`;
+${referrerRows || "| - | 0 | 0 | - |"}
+
+### Acquisition source → page
+
+These are authenticated Vercel aggregates filtered by one referrer hostname and grouped by page. They support source-to-page observation for the listed rows, but do not identify users or prove that a source caused a later action.
+
+| Source | Page | Visitors | Pageviews |
+| --- | --- | ---: | ---: |
+${sourcePageRows || "| manual / unavailable | - | - | - |"}`;
 }
 
 function makeUmamiMarkdown(umami) {
@@ -2087,6 +2193,7 @@ async function run() {
     umamiEventRecords,
     vercelPageRecords,
     vercelReferrerRecords,
+    vercelSourcePageRecords,
     vercelMetadata,
     githubMetadata,
     resendMetadata,
@@ -2100,6 +2207,7 @@ async function run() {
     readOptionalCsv(args.umamiEventsPath),
     readOptionalCsv(args.vercelPagesPath),
     readOptionalCsv(args.vercelReferrersPath),
+    readOptionalCsv(args.vercelSourcePagesPath),
     readOptionalJson(args.vercelMetadataPath),
     readOptionalJson(args.githubMetadataPath),
     readOptionalJson(args.resendMetadataPath),
@@ -2125,6 +2233,7 @@ async function run() {
   const vercel = summarizeVercel({
     pageRecords: vercelPageRecords,
     referrerRecords: vercelReferrerRecords,
+    sourcePageRecords: vercelSourcePageRecords,
     metadata: vercelMetadata,
   });
   const github = summarizeGithub(githubMetadata);

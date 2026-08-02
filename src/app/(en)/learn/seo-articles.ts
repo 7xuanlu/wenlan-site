@@ -40,6 +40,7 @@ type BaseSpec = {
   relatedSlugs: string[];
   officialReferences?: OfficialReference[];
   comparisonTable?: ComparisonTable;
+  cta?: LearnArticle["cta"];
 };
 
 function makeArticle(spec: BaseSpec): LearnArticle {
@@ -92,7 +93,7 @@ function makeArticle(spec: BaseSpec): LearnArticle {
     ],
     relatedSlugs: spec.relatedSlugs,
     officialReferences: spec.officialReferences,
-    cta: {
+    cta: spec.cta ?? {
       heading: "Try the local memory loop",
       body: "Install Wenlan, connect your AI client, and verify that capture, recall, and handoff work on your machine.",
     },
@@ -1483,6 +1484,92 @@ const workflowArticles: BaseSpec[] = [
         href: "https://wenlan.app/docs/data-and-privacy",
       },
     ],
+  },
+  {
+    slug: "build-local-ai-knowledge-base-from-documents",
+    eyebrow: "Workflow",
+    category: "Workflows",
+    title: "How to Build a Local AI Knowledge Base from Markdown, PDFs, and Obsidian",
+    description:
+      "Use supported document sources, repeatable sync, source-backed pages, and verification to build a local AI knowledge base for coding agents.",
+    metaTitle: "Build a Local AI Knowledge Base from Documents | Wenlan",
+    metaDescription:
+      "Build a local AI knowledge base from Markdown, text files, text PDFs, folders, or an Obsidian vault, then verify sources and maintained pages.",
+    keywords: [
+      "build AI knowledge base",
+      "local AI knowledge base",
+      "AI knowledge base builder",
+      "open source AI knowledge base",
+      "Markdown AI knowledge base",
+      "PDF AI knowledge base",
+      "Obsidian AI knowledge base",
+      "AI knowledge base for coding agents",
+    ],
+    publishedAt: "2026-08-01",
+    updatedAt: "2026-08-01",
+    audience: "People building a local document knowledge base for Claude Code, Codex, Cursor, or another AI agent",
+    heroBullets: [
+      "Start with one bounded folder or file instead of importing everything.",
+      "Use Markdown, text, text-extractable PDFs, or an Obsidian vault as inspectable sources.",
+      "Verify source sync and page citations before trusting generated answers.",
+    ],
+    quickAnswer:
+      "Follow Wenlan's platform and client setup guide, then point `wenlan sources add <path>` at one Markdown or text file, a text-extractable PDF, a folder, or an Obsidian vault. Re-running the same command resyncs an already registered path. In a client with the Wenlan plugin, distill one repeated topic into a maintained Page; in an MCP-only client, use the Wenlan tools exposed by that client.",
+    wenlanFit:
+      "Wenlan keeps registered Sources separate from atomic Memories and maintained Pages. Regular files and folders can sync incrementally; an Obsidian vault remains read-only and resyncs on demand. The resulting Page stays readable as Markdown and keeps inspectable source support.",
+    problem:
+      "A folder search is not yet a knowledge base, while a one-time AI summary becomes detached from the documents that support it. The useful middle is a small source boundary, repeatable sync, a maintained answer for one real question, and a check that every important claim can still reach its evidence.",
+    actionHeading: "Build one document-to-page loop",
+    actionIntro:
+      "Use one topic and a small source set so failures stay visible.",
+    actionBullets: [
+      "Install the runtime for your operating system, connect the current AI client, and verify the connection before importing documents.",
+      "Choose one folder, file, or Obsidian vault that answers a repeated work question.",
+      "Keep supported inputs to `.md`, `.txt`, and text-extractable `.pdf`; put unrelated material outside the source boundary.",
+      "Run `wenlan sources add <path>` and inspect the found, ingested, skipped, and error counts.",
+      "Re-run the same command after a source changes; registration is idempotent and the path is resynced.",
+      "In Claude Code or Codex with the Wenlan plugin, use `/distill <topic>` only after the source set can answer the topic, then open it with `/pages <topic>`.",
+      "Run `/lint` and `/curate` in a plugin client, or use the equivalent Wenlan tools exposed by an MCP-only client, before relying on the Page.",
+    ],
+    code: {
+      label: "After platform and client setup",
+      code: "wenlan status\nwenlan sources add ~/Knowledge/project-docs",
+    },
+    caution:
+      "Image-only or scanned PDFs need OCR before Wenlan can extract their text, and Directory Sources do not ingest arbitrary source-code files. Keep code, tests, and native project docs authoritative; use this workflow for supported documents and maintained synthesis.",
+    faq: [
+      "Does Wenlan copy or rewrite my Obsidian vault?",
+      "No. Wenlan reads an Obsidian vault as a source and keeps the original Markdown human-owned. Page export or a symlink into the vault is a separate choice.",
+      "Is this the same as uploading files to a chatbot?",
+      "No. A chatbot upload is usually session-scoped. This workflow registers a reusable local source, resyncs it, and builds a maintained Page whose support can be inspected and reviewed.",
+    ],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "distilled-wiki-pages-ai-memory",
+      "wenlan-vs-obsidian-ai-memory",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan platform and client setup",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md",
+      },
+      {
+        label: "Wenlan supported document sources",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan sources add CLI",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+      },
+      {
+        label: "Wenlan source-backed Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+    ],
+    cta: {
+      heading: "Build one local knowledge-base loop",
+      body: "Install Wenlan, add one inspectable document set, then verify sync, Pages, citations, and review before expanding.",
+    },
   },
 ];
 

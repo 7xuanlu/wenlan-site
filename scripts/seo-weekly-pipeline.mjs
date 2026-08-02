@@ -232,6 +232,7 @@ async function run() {
   for (const [filename, flag] of [
     ["vercel-pages.csv", "--vercel-pages"],
     ["vercel-referrers.csv", "--vercel-referrers"],
+    ["vercel-source-pages.csv", "--vercel-source-pages"],
     ["vercel-metadata.json", "--vercel-metadata"],
     ["github-metadata.json", "--github-metadata"],
     ["resend-metadata.json", "--resend-metadata"],

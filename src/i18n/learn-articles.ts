@@ -545,6 +545,132 @@ const zhTWArticles = {
       body: "保留 Obsidian 作為人類可讀的知識面；答案需跨工具保持目前、可追溯且可審查時，再用 Wenlan 維護具引用的 Pages。",
     },
   },
+  "build-local-ai-knowledge-base-from-documents": {
+    slug: "build-local-ai-knowledge-base-from-documents",
+    eyebrow: "實作",
+    category: "Workflows",
+    title: "如何用 Markdown、PDF 與 Obsidian 建立本地 AI 知識庫",
+    description:
+      "從一個文件範圍開始，用可重複同步的 Sources、有來源的 Pages 與驗證步驟，建立 AI agent 真正能重用的本地知識庫。",
+    metaTitle: "用 Markdown、PDF 與 Obsidian 建立 AI 知識庫 | Wenlan",
+    metaDescription:
+      "用 Markdown、文字檔、文字型 PDF、資料夾或 Obsidian vault 建立本地 AI 知識庫，並驗證同步、來源與維護型頁面。",
+    keywords: [
+      "建立 AI 知識庫",
+      "本地 AI 知識庫",
+      "AI 知識庫搭建",
+      "開源 AI 知識庫",
+      "Markdown AI 知識庫",
+      "PDF AI 知識庫",
+      "Obsidian AI 知識庫",
+      "AI agent 知識庫",
+      "Wenlan 文瀾",
+    ],
+    publishedAt: "2026-08-01",
+    updatedAt: "2026-08-01",
+    author: "Qi-Xuan Lu",
+    readingTime: "7 分鐘閱讀",
+    audience: "想讓 Claude Code、Codex、Cursor 或其他 AI agent 使用本地文件的繁體中文使用者",
+    heroBullets: [
+      "先選一個檔案或資料夾，不要一次匯入全部資料。",
+      "支援 Markdown、文字檔、可擷取文字的 PDF 與 Obsidian vault。",
+      "先驗證同步與來源，再信任 AI 整理出的頁面。",
+    ],
+    sections: [
+      {
+        heading: "一句話做法",
+        body: [
+          "先依作業系統安裝 Wenlan runtime、連接目前使用的 AI 客戶端並驗證連線，再對一個 `.md`、`.txt`、可擷取文字的 `.pdf`、資料夾或 Obsidian vault 執行 `wenlan sources add <path>`。同一路徑再次執行會重新同步。",
+          "來源能回答真實問題後，在已安裝 Wenlan plugin 的 Claude Code 或 Codex 使用 `/distill <主題>`、`/pages`、`/lint` 與 `/curate`；只有 MCP 連線的客戶端則使用該客戶端顯示的 Wenlan 工具完成同一流程。",
+        ],
+      },
+      {
+        heading: "先劃定支援的來源範圍",
+        body: [
+          "Wenlan 的 Directory Source 會讀取單一檔案或遞迴掃描資料夾，支援 `.md`、`.txt` 與能直接擷取文字的 `.pdf`。Obsidian vault 可作為唯讀 Markdown 來源，人寫的原始檔仍由 vault 管理。",
+          "掃描型 PDF 必須先做 OCR；任意程式碼檔案目前不屬於 Directory Source 的支援範圍。程式碼、測試與專案原生文件仍應是權威，知識庫負責維護可檢查的綜合答案。",
+        ],
+      },
+      {
+        heading: "建立最小文件到頁面流程",
+        body: [
+          "先選一個會重複詢問的主題和一小組文件，讓錯誤、跳過與缺少來源都看得見。",
+        ],
+        bullets: [
+          "執行 sources add，確認 found、ingested、skipped 與 errors 數量。",
+          "修改來源後重跑同一指令，確認同步結果符合預期。",
+          "來源足夠時才 distill，不用把每份文件都變成 Page。",
+          "開啟 Page，核對重要結論能回到來源或引用。",
+          "執行 lint 與 curate，處理薄弱、衝突、過期或待審查內容。",
+        ],
+        code: {
+          label: "完成平台與客戶端設定後",
+          code: "wenlan status\nwenlan sources add ~/Knowledge/project-docs",
+        },
+      },
+      {
+        heading: "如何驗收，而不是只看匯入成功",
+        body: [
+          "用一個來源中存在的問題和一個來源中不存在的問題測試。前者應能找到支持材料，後者不應被補成確定答案。接著修改一份文件、重新同步，確認 Page 能顯示需要刷新或產生可審查修訂。",
+          "驗收重點是來源邊界、同步結果、引用與修訂，不是一次匯入多少檔案。這讓知識庫即使不使用 Wenlan，也有可重複的品質判準。",
+        ],
+      },
+      {
+        heading: "何時再擴大資料範圍",
+        body: [
+          "只有當一個主題能完成來源、同步、Page、lint 與 review 閉環後，才加入下一個資料夾或 vault。這能避免同名文件、過期版本與無關內容一起進入檢索結果。",
+        ],
+        link: {
+          label: "了解有來源 AI 知識庫的維護架構",
+          href: "/learn/source-backed-wiki-pages-ai-work",
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 會改寫我的 Obsidian vault 嗎？",
+        answer:
+          "不會。vault 會作為唯讀來源重新掃描與索引，原始 Markdown 仍由你管理；Pages 匯出或 symlink 是另一個明確選擇。",
+      },
+      {
+        question: "掃描型 PDF 可以直接加入嗎？",
+        answer:
+          "不行。PDF 必須能直接擷取文字；只有影像的掃描型 PDF 需要先經過 OCR，再把可讀文字納入來源。",
+      },
+      {
+        question: "這和把文件上傳到聊天機器人有什麼不同？",
+        answer:
+          "聊天附件通常只服務當次對話；這個流程會保留可重複同步的本地來源，並建立能檢查引用、過期狀態與修訂的維護型 Page。",
+      },
+    ],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "distilled-wiki-pages-ai-memory",
+      "wenlan-vs-obsidian-ai-memory",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 平台與客戶端設定",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md",
+      },
+      {
+        label: "Wenlan 支援的文件來源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "wenlan sources add CLI",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+      },
+      {
+        label: "Wenlan 有來源 Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+    ],
+    cta: {
+      heading: "先用一個資料夾驗證完整閉環",
+      body: "安裝 Wenlan，加入一組可檢查的文件，再驗證同步、Page、引用與審查流程。",
+    },
+  },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
 
 const zhCNArticles = {
@@ -1066,6 +1192,132 @@ const zhCNArticles = {
     cta: {
       heading: "让 vault 与 AI 知识库各司其职",
       body: "保留 Obsidian 作为人可读的知识面；答案需跨工具保持当前、可追溯且可审核时，再用 Wenlan 维护带引用的 Pages。",
+    },
+  },
+  "build-local-ai-knowledge-base-from-documents": {
+    slug: "build-local-ai-knowledge-base-from-documents",
+    eyebrow: "实作",
+    category: "Workflows",
+    title: "如何用 Markdown、PDF 与 Obsidian 建立本地 AI 知识库",
+    description:
+      "从一个文档范围开始，用可重复同步的 Sources、有来源的 Pages 与验证步骤，建立 AI agent 真正能复用的本地知识库。",
+    metaTitle: "用 Markdown、PDF 与 Obsidian 建立 AI 知识库 | Wenlan",
+    metaDescription:
+      "用 Markdown、文本文件、文本型 PDF、文件夹或 Obsidian vault 搭建本地 AI 知识库，并验证同步、来源与维护型页面。",
+    keywords: [
+      "搭建 AI 知识库",
+      "本地 AI 知识库",
+      "AI 知识库搭建",
+      "开源 AI 知识库",
+      "Markdown AI 知识库",
+      "PDF AI 知识库",
+      "Obsidian AI 知识库",
+      "AI agent 知识库",
+      "Wenlan 文澜",
+    ],
+    publishedAt: "2026-08-01",
+    updatedAt: "2026-08-01",
+    author: "Qi-Xuan Lu",
+    readingTime: "7 分钟阅读",
+    audience: "想让 Claude Code、Codex、Cursor 或其他 AI agent 使用本地文档的简体中文用户",
+    heroBullets: [
+      "先选一个文件或文件夹，不要一次导入全部资料。",
+      "支持 Markdown、文本文件、可提取文字的 PDF 与 Obsidian vault。",
+      "先验证同步与来源，再信任 AI 整理出的页面。",
+    ],
+    sections: [
+      {
+        heading: "一句话做法",
+        body: [
+          "先按操作系统安装 Wenlan runtime、连接当前使用的 AI 客户端并验证连接，再对一个 `.md`、`.txt`、可提取文字的 `.pdf`、文件夹或 Obsidian vault 执行 `wenlan sources add <path>`。同一路径再次执行会重新同步。",
+          "来源能回答真实问题后，在已安装 Wenlan plugin 的 Claude Code 或 Codex 使用 `/distill <主题>`、`/pages`、`/lint` 与 `/curate`；只有 MCP 连接的客户端则使用该客户端显示的 Wenlan 工具完成同一流程。",
+        ],
+      },
+      {
+        heading: "先划定支持的来源范围",
+        body: [
+          "Wenlan 的 Directory Source 会读取单一文件或递归扫描文件夹，支持 `.md`、`.txt` 与能直接提取文字的 `.pdf`。Obsidian vault 可作为只读 Markdown 来源，人写的原始文件仍由 vault 管理。",
+          "扫描型 PDF 必须先做 OCR；任意源代码文件目前不属于 Directory Source 的支持范围。代码、测试与项目原生文档仍应是权威，知识库负责维护可检查的综合答案。",
+        ],
+      },
+      {
+        heading: "建立最小文档到页面流程",
+        body: [
+          "先选一个会重复询问的主题和一小组文档，让错误、跳过与缺少来源都看得见。",
+        ],
+        bullets: [
+          "执行 sources add，确认 found、ingested、skipped 与 errors 数量。",
+          "修改来源后重跑同一命令，确认同步结果符合预期。",
+          "来源足够时才 distill，不用把每份文档都变成 Page。",
+          "打开 Page，核对重要结论能回到来源或引用。",
+          "执行 lint 与 curate，处理薄弱、冲突、过期或待审核内容。",
+        ],
+        code: {
+          label: "完成平台与客户端设置后",
+          code: "wenlan status\nwenlan sources add ~/Knowledge/project-docs",
+        },
+      },
+      {
+        heading: "如何验收，而不是只看导入成功",
+        body: [
+          "用一个来源中存在的问题和一个来源中不存在的问题测试。前者应能找到支持材料，后者不应被补成确定答案。接着修改一份文档、重新同步，确认 Page 能显示需要刷新或产生可审核修订。",
+          "验收重点是来源边界、同步结果、引用与修订，不是一次导入多少文件。这让知识库即使不使用 Wenlan，也有可重复的质量标准。",
+        ],
+      },
+      {
+        heading: "何时再扩大资料范围",
+        body: [
+          "只有当一个主题能完成来源、同步、Page、lint 与 review 闭环后，才加入下一个文件夹或 vault。这能避免同名文档、过期版本与无关内容一起进入检索结果。",
+        ],
+        link: {
+          label: "了解有来源 AI 知识库的维护架构",
+          href: "/learn/source-backed-wiki-pages-ai-work",
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 会改写我的 Obsidian vault 吗？",
+        answer:
+          "不会。vault 会作为只读来源重新扫描与索引，原始 Markdown 仍由你管理；Pages 导出或 symlink 是另一个明确选择。",
+      },
+      {
+        question: "扫描型 PDF 可以直接加入吗？",
+        answer:
+          "不行。PDF 必须能直接提取文字；只有图片的扫描型 PDF 需要先经过 OCR，再把可读文本纳入来源。",
+      },
+      {
+        question: "这和把文档上传到聊天机器人有什么不同？",
+        answer:
+          "聊天附件通常只服务当次对话；这个流程会保留可重复同步的本地来源，并建立能检查引用、过期状态与修订的维护型 Page。",
+      },
+    ],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "distilled-wiki-pages-ai-memory",
+      "wenlan-vs-obsidian-ai-memory",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 平台与客户端设置",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md",
+      },
+      {
+        label: "Wenlan 支持的文档来源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "wenlan sources add CLI",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+      },
+      {
+        label: "Wenlan 有来源 Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+    ],
+    cta: {
+      heading: "先用一个文件夹验证完整闭环",
+      body: "安装 Wenlan，加入一组可检查的文档，再验证同步、Page、引用与审核流程。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;

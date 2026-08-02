@@ -11,6 +11,17 @@ const DEFAULT_PROJECT_ID = "prj_nqR9IMJGE0Sw4lpFUdMtc1pCo4nb";
 const DEFAULT_PROJECT_NAME = "wenlan-site";
 const DEFAULT_SCOPE = "7xuanlus-projects";
 const DAY_MS = 24 * 60 * 60 * 1000;
+const ACQUISITION_REFERRERS = [
+  "google.com",
+  "bing.com",
+  "duckduckgo.com",
+  "m.baidu.com",
+  "chatgpt.com",
+  "github.com",
+  "search.brave.com",
+  "search.yahoo.com",
+  "yandex.ru",
+];
 
 function parseIsoDate(value, label) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value ?? "")) {
@@ -60,7 +71,7 @@ function parseArgs(argv) {
   };
 }
 
-function endpoint(pathname, args, by = null) {
+function endpoint(pathname, args, by = null, filter = null) {
   const query = new URLSearchParams({
     projectId: args.projectId,
     since: `${args.startDate}T00:00:00.000Z`,
@@ -70,6 +81,7 @@ function endpoint(pathname, args, by = null) {
     query.set("by", by);
     query.set("limit", "100");
   }
+  if (filter) query.set("filter", filter);
   return `${pathname}?${query.toString()}`;
 }
 
@@ -135,9 +147,32 @@ async function fetchCustomEventStatus(args) {
   }
 }
 
+async function fetchSourcePageRows(args) {
+  const responses = await Promise.all(
+    ACQUISITION_REFERRERS.map(async (referrer) => ({
+      referrer,
+      response: await runVercelApi(
+        args,
+        endpoint(
+          "/v1/query/web-analytics/visits/aggregate",
+          args,
+          "requestPath",
+          `referrerHostname eq '${referrer}'`,
+        ),
+      ),
+    })),
+  );
+
+  return responses.flatMap(({ referrer, response }) =>
+    aggregateRows(response, "requestPath")
+      .filter((row) => row.visitors > 0 || row.pageviews > 0)
+      .map((row) => ({ source: referrer, ...row })),
+  );
+}
+
 async function run() {
   const args = parseArgs(process.argv.slice(2));
-  const [countResponse, pageResponse, referrerResponse, customEvents] = await Promise.all([
+  const [countResponse, pageResponse, referrerResponse, sourcePages, customEvents] = await Promise.all([
     runVercelApi(args, endpoint("/v1/query/web-analytics/visits/count", args)),
     runVercelApi(
       args,
@@ -147,6 +182,7 @@ async function run() {
       args,
       endpoint("/v1/query/web-analytics/visits/aggregate", args, "referrerHostname"),
     ),
+    fetchSourcePageRows(args),
     fetchCustomEventStatus(args),
   ]);
   const totals = {
@@ -175,6 +211,19 @@ async function run() {
       "utf8",
     ),
     writeFile(
+      join(args.outputDir, "vercel-source-pages.csv"),
+      rowsToCsv(
+        "Source,Path,Visitors,Pageviews",
+        sourcePages.map((row) => [
+          row.source,
+          row.label || "/",
+          row.visitors,
+          row.pageviews,
+        ]),
+      ),
+      "utf8",
+    ),
+    writeFile(
       join(args.outputDir, "vercel-metadata.json"),
       `${JSON.stringify({
         source: "Vercel Web Analytics API",
@@ -184,6 +233,11 @@ async function run() {
         startDate: args.startDate,
         endDate: args.endDate,
         totals,
+        sourcePageBreakdown: {
+          status: "available",
+          referrers: ACQUISITION_REFERRERS,
+          rows: sourcePages.length,
+        },
         customEvents,
         fetchedAt: new Date().toISOString(),
       }, null, 2)}\n`,
@@ -198,6 +252,7 @@ async function run() {
     totals,
     pageRows: pages.length,
     referrerRows: referrers.length,
+    sourcePageRows: sourcePages.length,
     customEvents,
   }, null, 2));
 }
