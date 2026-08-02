@@ -368,11 +368,14 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-02-ai-knowledge-base-tool-selection` is publication-approved
-  for its exact English, zh-TW, and zh-CN tool-selection canonical family.
-  The approved shared-state scope is limited to commit, Git push, PR creation
-  and merge, automatic Vercel deployment, and read-only production
-  verification. Request indexing, GSC validation, external publication, paid
+  `EXP-2026-08-02-ai-knowledge-base-tool-selection` is live and measuring for
+  its exact English, zh-TW, and zh-CN tool-selection canonical family. PR #118
+  merged at `2026-08-02T07:54:17Z` as
+  `4d4d805b82527bff1d312779047c7ee37408f855`; Vercel production completed at
+  `2026-08-02T07:55:01Z`. The deployed technical contract passed. A narrow
+  same-experiment CJK phrase-wrap correction is in local preparation after
+  fresh device-emulated visual QA found semantic phrase breaks but no page
+  overflow. Request indexing, GSC validation, external publication, paid
   action, synthetic events, analytics mutation, and metric changes remain
   approval-gated.
   `EXP-2026-08-01-karpathy-llm-wiki-locales-refresh` is production-verified
@@ -1990,3 +1993,40 @@ push, PR creation and merge, automatic Vercel deployment, and read-only
 production verification of this exact scope. Request indexing, GSC validation,
 external publication, paid action, synthetic event, analytics mutation, and
 metric-definition changes remain excluded.
+
+At `2026-08-02T07:54:17Z`, PR #118 squash-merged as
+`4d4d805b82527bff1d312779047c7ee37408f855`; Vercel production completed at
+`2026-08-02T07:55:01Z`. The live deployed checker passed 120 sitemap URLs, 24
+key pages, six utility noindex headers, 120 sitemap-page `FAQPage` absence
+checks, 25 redirects, six bridge-host redirects, and old-URL sitemap absence.
+The experiment's publish and measurement boundary is that production
+completion time; a later markup-only phrase-wrap correction does not move it.
+
+Fresh Chrome device emulation then verified the exact 393px and 1440px CSS
+viewports for all three routes. Each document's root and body scroll widths
+equaled its viewport width, the title bounds stayed inside the content column,
+the complete pages rendered, and the first visible FAQ opened with a non-empty
+answer. The earlier apparent 393px clipping came from Chrome's command-line
+window minimum, not the page. The stricter CJK pass did find that the new
+localized route had not inherited the existing semantic-term wrapper, allowing
+`驗收資料` / `验收资料` and `8 項` / `8 项` to split awkwardly. A focused
+same-experiment correction now protects those phrases and `AI 知識庫` /
+`AI 知识库`; its regression test first failed and now passes 63/63. This is a
+render-only correction: visible text, metadata, canonical ownership, and the
+measurement boundary remain unchanged. The correction must pass build,
+technical, responsive, PR, deployment, and live verification gates before the
+production readout is closed.
+
+At `2026-08-02T08:15:04Z`, the focused correction passed its complete local
+gate. The i18n contract passed 63/63, the full SEO suite passed 222/222,
+TypeScript passed, the Goal verifier passed, the production build generated
+223 static pages, and the built technical checker again passed 120 sitemap
+URLs, 24 key pages, and `FAQPage` absence across 124 built HTML pages. The
+built i18n route matrix passed 27 direct 200 routes and four intentional 404s.
+Fresh exact-device Chrome captures covered all three routes at 393px and
+1440px; both inline visual passes passed. The real component tree and shared
+tokens remained intact, root/body width matched every viewport, complete-page
+and FAQ-open states rendered, and `AI 知識庫` / `AI 知识库`, `知識庫` /
+`知识库`, `驗收資料` / `验收资料`, and `8 項` / `8 项` no longer split
+inside their semantic phrases. No visible copy, metadata, schema, canonical,
+or experiment metric changed.
