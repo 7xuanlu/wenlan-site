@@ -1907,9 +1907,10 @@ proposed eight-test framework, and the asset remains useful without choosing
 Wenlan. The clean provisional canonical family is
 `/learn/choose-ai-knowledge-base-tool` plus zh-TW and zh-CN counterparts.
 
-Decision: prepare, do not launch. The document knowledge-base guide became a
-net-new production search asset at `2026-08-02T02:42:26Z`, so the unchanged
-14-day cap places the earliest launch at `2026-08-16T02:42:26Z`. Earlier
-publication requires an explicit amendment to the experiment-cap clause; no
-deadline or metric definition needs to change. See
+Decision: prepare locally; publication remains approval-gated. The current
+Frozen Goal Contract has no fixed calendar article quota. The prior website
+changes are production-verified and measuring, so the single preparation slot
+is open and this non-overlapping candidate may enter local preparation now.
+Push, PR creation, merge, deployment, request indexing, GSC validation, and
+external publication remain separately gated. See
 `docs/seo-audits/2026-08-02-ai-knowledge-base-tool-selection-gate.md`.

@@ -106,16 +106,15 @@ maintained first-party source captured close to publication.
 
 ## Decision and boundary
 
-Decision: **prepare, do not launch**.
+Decision: **prepare locally; publication remains approval-gated**.
 
-This candidate is distinct and passes the content gate, but the document
-knowledge-base guide became a net-new production search asset at
-`2026-08-02T02:42:26Z`. Under the frozen maximum of one net-new search asset
-per 14 days, the earliest unchanged-contract launch boundary is
-`2026-08-16T02:42:26Z`. Existing measuring category pages also must not be
-silently rewritten to smuggle this candidate into production.
+This candidate is distinct and passes the content gate. The current Frozen
+Goal Contract has no fixed calendar article quota. The document knowledge-base
+guide and Karpathy refresh are production-verified and measuring, so neither
+consumes the single preparation slot. This candidate may therefore enter local
+preparation now.
 
-Implementation can be prepared locally before that boundary. Publishing
-earlier requires an explicit amendment to the experiment-cap portion of the
-Frozen Goal Contract; it does not require changing the deadline or metric
-definitions. No such amendment is made by this audit.
+Push, PR creation, merge, deployment, request indexing, GSC validation, and
+external publication remain separately approval-gated. Existing measuring
+category pages must not be silently rewritten to smuggle this candidate into
+their attribution windows.

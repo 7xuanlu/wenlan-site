@@ -5724,3 +5724,21 @@ increase for that experiment.
   metric-definition changes remain unperformed and gated.
 - Evidence artifact:
   `docs/seo-audits/2026-08-02-ai-knowledge-base-tool-selection-gate.md`.
+
+### 2026-08-02T06:56:05Z — tool-selection gate cap correction
+
+- Record type: campaign-observation correction
+- Corrects: the publication-boundary statements in the immediately preceding
+  `2026-08-02T06:49:33Z` observation.
+- Correction: the current Frozen Goal Contract explicitly has no fixed
+  calendar article quota. The older two-active/14-day limits were replaced by
+  the production-concurrency rule approved on 2026-07-24. The document guide
+  and Karpathy refresh are production-verified and measuring, so they do not
+  consume the single preparation slot.
+- Decision: the three-locale tool-selection candidate may enter local
+  preparation now. It still does not start a public experiment until the
+  immutable experiment fields are recorded and publication is explicitly
+  approved.
+- Unchanged boundaries: no push, PR, merge, deployment, request indexing, GSC
+  validation, external publication, paid action, synthetic event, analytics
+  mutation, or metric-definition change is authorized by this correction.
