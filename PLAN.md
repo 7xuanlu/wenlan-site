@@ -685,14 +685,16 @@ after the anchor is frozen.
 | --- | ---: | ---: | --- | ---: |
 | GitHub total stars | 47 | 47 | GitHub REST `GET /repos/7xuanlu/wenlan`, read on 2026-08-01 | 53 |
 | GSC rolling-28-day property clicks | 6 | 10 | Search Console API, `sc-domain:wenlan.app`, `2026-07-03..2026-07-30`; `/tmp/wenlan-seo/gsc-metadata.json` | 90 |
-| GSC rolling-28-day property impressions | 197 | 660 | Search Console API, `sc-domain:wenlan.app`, `2026-07-03..2026-07-30`; `/tmp/wenlan-seo/gsc-metadata.json` | 9,340 |
+| GSC rolling-28-day property impressions | 197 | 706 | Search Console API focused backfill, `sc-domain:wenlan.app`, `2026-07-03..2026-07-30`, captured 2026-08-02 | 9,294 |
 | Vercel rolling-28-day visitors | 323 | 1,468 | Vercel Web Analytics API, project `wenlan-site`, `2026-07-03..2026-07-30`; `/tmp/wenlan-seo/vercel-metadata.json` | 532 |
 
 Supporting quality split for the same live range:
 
-- GSC property totals: 10 clicks, 660 impressions.
-- GSC visible-query totals: 2 clicks, 111 impressions.
-- GSC query visibility gap: 8 clicks, 549 impressions.
+- GSC property totals: 10 clicks, 706 impressions.
+- GSC visible-query totals: 2 clicks, 120 impressions.
+- GSC query visibility gap: 8 clicks, 586 impressions. These same-range
+  values include Search Console backfill captured on 2026-08-02; the frozen
+  2026-07-31 weekly report remains unchanged at its earlier capture.
 - Visible-query non-brand impressions: 61 using the existing Searchfit group
   classification; this is a visible-row subset, not a property total, and the
   current `Other` bucket still contains noisy Wenlan misspellings.
@@ -704,6 +706,20 @@ Supporting quality split for the same live range:
 - Vercel reports 2 visitors and 2 pageviews for
   `/learn/ai-work-memory-vs-knowledge-base`; the page aggregate does not
   provide a source-to-page join.
+- A same-range traffic-quality audit on 2026-08-01 found that 1,132 of the
+  1,148 `google.com`-referrer visitors share the exact
+  `Chrome + GNU/Linux + desktop` signature. Of those, 1,109 occurred during
+  2026-07-15..2026-07-23, while finalized GSC Web data records one click in
+  that interval and zero clicks across Image, Video, News, Discover, and
+  Google News for the full range. The authenticated Vercel Production
+  dashboard's broader 30-day Hostnames view reports `wenlan.app` at 100%, so
+  another production hostname does not explain the cohort. Preserve 1,468
+  raw visitors as the Goal metric; report the 1,132 as
+  `suspected automated/referrer-incompatible` and the remaining 336 only as
+  `not matched by the exact signature`, never as confirmed human traffic.
+  This diagnostic does not silently redefine qualified-source visitors. Full
+  provenance and the daily reconciliation are in
+  `docs/seo-audits/2026-08-01-vercel-google-referrer-quality-audit.md`.
 - Unique acquisition-surface visitors and source-to-page sessions remain
   unavailable from the separate Vercel aggregates. Vercel custom events
   remain Pro/Enterprise-gated, and no authenticated Umami report was
@@ -845,7 +861,7 @@ Supporting quality split for the same live range:
 
 - Stars: 53 more than the verified live observation.
 - GSC property clicks: 90 more in the fixed final rolling window.
-- GSC property impressions: 9,340 more in the fixed final rolling window.
+- GSC property impressions: 9,294 more in the fixed final rolling window.
 - Vercel visitors: 532 more in the fixed final rolling window.
 - Legacy migration diagnostic: `sc-domain:useorigin.app` still has
   516 impressions and 5 clicks in the same aligned range. Those values are
@@ -1424,6 +1440,16 @@ earlier wake and let it advance to the document-guide boundary afterward
 rather than creating another automation. Do not infer crawl, indexing,
 impressions, clicks, or visitor lift from the successful deployment.
 
+Keep the Vercel Goal metric raw and add the preserved traffic-quality split to
+future complete-window observations before using referrer totals as evidence
+of acquisition quality. The current aggregate evidence supports an exact
+`suspected automated/referrer-incompatible` cohort, not a general Linux,
+Chrome, Google-referrer, or bot exclusion rule. Do not call the 336-visitor
+complement human traffic and do not change the protected qualified-source or
+visitor definitions without explicit approval. The deterministic evidence and
+capability boundary are recorded in
+`docs/seo-audits/2026-08-01-vercel-google-referrer-quality-audit.md`.
+
 Authenticated GSC URL Inspection at `2026-08-01T21:47:09Z` isolated crawl
 freshness as the immediate search constraint. The user approved the fixed
 four-URL request-indexing batch, and Search Console returned `Indexing
@@ -1648,6 +1674,17 @@ complete post-deploy days and no post-change crawl date is confirmed. Run its
 W2 readout after `2026-08-02T00:26:09Z` with the original page and visible
 qualified-cluster guards.
 
+That W2 readout completed at `2026-08-02T06:17:58Z`. Authenticated URL
+Inspection reports the page as submitted and indexed with the exact
+self-canonical, but its last crawl remains `2026-07-04T09:03:21Z`, before the
+July 18 refresh. The same-range backfilled page row is still below the
+25-impression minimum at 0 clicks, 24 impressions, and 38.8 average position;
+the fixed five-query guard is unchanged at 0 clicks, 9 impressions, and 50.0
+impression-weighted average position. The W2 result is therefore
+inconclusive, not a failure. Keep the page unchanged and evaluate it again at
+W4 only after a post-refresh crawl can be confirmed or the original contract
+otherwise becomes assessable.
+
 The LLM-wiki, MCP shared-memory, stale-memory, claude-mem,
 SuperLocalMemory, and Basic Memory 24-hour readouts were completed at
 `2026-07-26T01:47:53Z`. Their production gates passed, but the latest
@@ -1800,3 +1837,33 @@ punkpeye resubmission remains blocked. The Codex directory likewise remains
 blocked on the separate repository-root plugin packaging and scanner contract.
 Neither blocker authorizes a website edit, another experiment, paid listing,
 indexing request, GSC validation, or analytics mutation.
+
+The approved OSS batch received a second upstream acceptance at
+`2026-08-01T22:15:12Z`: `TeleAI-UAGI/Awesome-Agent-Memory` PR #72 merged as
+`62f9864ca13ced26dd645025940d72aaeb5b2f96`, and the default-branch README now
+links the Wenlan site and `7xuanlu/wenlan` repository directly. Together with
+the already-live `gavischneider/awesome-llm-wiki` entry, the batch now has two
+merged listings and twelve open PRs. The open set is nine `CLEAN`, two
+`BLOCKED` only on required maintainer review, and one `UNSTABLE` only because
+of the previously verified unrelated whole-repository link failures. No
+maintainer comment or review requests an author-side correction. Continue
+passive review-state observation; do not push no-op commits or contact
+maintainers from this evidence.
+
+#### Release-to-download integrity observation
+
+The official GitHub latest release remained `v0.15.3`, published at
+`2026-08-01T08:47:47Z`, when checked at `2026-08-02T06:29:47Z`; the official
+tag list contained no `v0.15.4`. All four public site download assets for
+Windows x64, macOS Apple Silicon, Linux x64, and Linux ARM64 resolved with
+HTTP 200. The live `/`, `/download`, `/zh-TW/download`, `/zh-CN/download`,
+`/about`, and `/docs/get-started` routes also returned HTTP 200, displayed
+`v0.15.3`, and did not display `v0.15.4`; the applicable download surfaces
+linked the expected release assets.
+
+GitHub PRs #430 and #431 are evidence of mutable, unreleased repository work,
+not a published release contract. No website correction is warranted until an
+official release or tag exists and its artifacts can be verified. This
+read-only observation made no website edit, push, PR, merge, deployment,
+indexing request, validation submission, external publication, or analytics
+mutation.

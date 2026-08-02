@@ -5521,3 +5521,137 @@ increase for that experiment.
   `2026-08-03T04:39:55Z`, using the latest authenticated weekly evidence when
   available and without starting another overlapping refresh of this family.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-18-claude-code-memory-refresh at 2026-08-02T06:17:58Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-18-claude-code-memory-refresh
+- Observed at: 2026-08-02T06:17:58Z
+- Readout: W2
+- Status: measuring
+- Evidence: The latest completed Friday report remains the immutable
+  `2026-07-03..2026-07-30` weekly capture at 10 property clicks and 660
+  property impressions, 2 visible-query clicks and 111 visible-query
+  impressions, and an 8-click/549-impression visibility gap. A focused
+  authenticated backfill of the same range, captured on 2026-08-02 without
+  rerunning the weekly pipeline, now reports 10 property clicks and 706
+  property impressions, 2 visible-query clicks and 120 visible-query
+  impressions, and an 8-click/586-impression visibility gap. These captures
+  remain separate evidence snapshots rather than a rewritten historical
+  report.
+- Target and qualified guard: The target page reports 0 clicks, 24
+  impressions, and 38.8 average position. It remains below the predeclared
+  25-impression minimum. The fixed five-query Claude-memory guard remains
+  visible at 0 clicks, 9 impressions, and 50.0 impression-weighted average
+  position: `claude code memory` 0/3/51.0, `claude mcp memory` 0/1/46.0,
+  `claude memory mcp` 0/3/50.3, `claude memory md` 0/1/55.0, and
+  `claudecode memory` 0/1/45.0. It meets the 9-impression visibility floor
+  but does not improve clicks, impressions, or position under the immutable
+  qualified-exposure guard.
+- Crawl and index evidence: Search Console URL Inspection for
+  `https://wenlan.app/learn/claude-code-memory`, captured
+  `2026-08-02T06:11:32Z`, reports `PASS`, `Submitted and indexed`, robots
+  allowed, indexing allowed, successful mobile fetch, and exact matching
+  user-selected and Google-selected canonicals. Its last crawl is
+  `2026-07-04T09:03:21Z`, before the refresh completed production at
+  `2026-07-19T00:26:09Z`. A post-refresh crawl is therefore not confirmed and
+  the original post-crawl minimum-exposure clock cannot be anchored.
+- Vercel evidence: Reused, without refetching, the latest complete
+  `2026-07-03..2026-07-30` Friday range: 1,468 raw visitors/1,745 pageviews,
+  307 direct visitors/457 pageviews, and a non-deduplicated 1,163-visitor/
+  1,286-pageview qualified-source row aggregate. The target-page row remains
+  separate at 9 visitors/21 pageviews. Unique acquisition-surface visitors
+  and source-to-page sessions are unavailable. The separate traffic-quality
+  audit labels 1,132 raw visitors as an exact suspected automated/referrer-
+  incompatible cohort; it does not redefine the protected raw or qualified-
+  source metrics.
+- Technical and rendered evidence: The live English route returns direct
+  HTTP 200 with the exact self-canonical, `index, follow`, Article and
+  BreadcrumbList JSON-LD, `datePublished: "2026-06-07"`,
+  `dateModified: "2026-07-18"`, the maintained Claude Code memory source,
+  visible `/memory` and Wenlan plugin guidance, sitemap membership, and no
+  `FAQPage`. Unsupported zh-TW and zh-CN counterparts remain direct 404s with
+  `noindex` and remain absent from the sitemap. Fresh 1440x1200 desktop and
+  emulated 393x852 mobile renders show the expected responsive article hero;
+  the mobile document has 393px client and scroll widths, and the long install
+  command is contained by a 337px internal horizontal scroller. No visual,
+  locale, canonical, schema, indexability, or document-overflow regression was
+  found. Evidence screenshots:
+  `/tmp/wenlan-claude-memory-w2-desktop.png` and
+  `/tmp/wenlan-claude-memory-w2-mobile-emulated.png`.
+- GitHub and CTA: GitHub REST reports 47 total stars. Authenticated Umami
+  observations and Vercel custom CTA events remain unavailable/account-gated,
+  so GitHub outbound and CTA are not reported.
+- Minimum exposure: not reached. The target has 24 page impressions, and URL
+  Inspection does not confirm any crawl after the refresh.
+- Result: inconclusive
+- Decision: wait
+- Unperformed gated actions: no indexing request, GSC validation, website
+  edit, push, PR, merge, deployment, external publication, OSS submission,
+  paid acquisition, synthetic analytics event, or metric-definition change.
+- Next step: Preserve the page and run W4 only when due, after a confirmed
+  post-refresh crawl can anchor the exposure clock. Do not classify the page
+  as success or failure or rewrite it from this evidence. Separately continue
+  the current AI-knowledge-base/LLM-wiki/Obsidian acquisition lane; this legacy
+  memory measurement does not nominate the next content experiment.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-02T06:26:05Z — approved OSS distribution second merge
+
+- Record type: campaign-observation
+- Related experiment: none; approved-distribution maintenance observation
+- Status: two merged listings; twelve open PRs
+- New acceptance: `TeleAI-UAGI/Awesome-Agent-Memory` PR #72 merged at
+  `2026-08-01T22:15:12Z` as
+  `62f9864ca13ced26dd645025940d72aaeb5b2f96`. The upstream default-branch
+  README now contains the visible Wenlan site link, GitHub star badge, and
+  `https://github.com/7xuanlu/wenlan` code link.
+- Existing acceptance: `gavischneider/awesome-llm-wiki` PR #4 remains merged
+  at `2026-08-01T18:55:52Z` as
+  `046112f2b49b4410fe569c2c7065411aed180980`; its default-branch README still
+  contains the exact Wenlan repository link and source-backed LLM-wiki
+  description.
+- Open inventory: twelve approved listing PRs remain open. Nine are
+  `CLEAN`; `ComposioHQ/awesome-claude-skills` #852 and
+  `TensorBlock/awesome-mcp-servers` #1500 are mergeable and `BLOCKED` only on
+  required maintainer review; `DhanushNehru/awesome-mcp-servers` #52 is
+  mergeable and `UNSTABLE` only because its whole-repository Lychee check
+  still reports unrelated upstream links while Hypersweep succeeds. None has
+  a maintainer comment or review requesting an author-side change.
+- GitHub evidence: GitHub REST reports 47 total Wenlan stars and 6 forks in
+  their native cumulative units. No listing-to-star attribution or causal
+  claim is made.
+- Decision: wait; do not manufacture no-op commits, broaden the one-line
+  listing patches, contact maintainers, resubmit the pending free directory
+  form, or mutate Glama/Codex-directory prerequisites.
+- External actions: none in this observation; all calls were read-only.
+- Next step: Reconcile the same twelve PRs only when a maintainer acts or at
+  the predeclared seven-complete-live-day boundary. Keep the earlier
+  Obsidian-locale 24-hour website readout as the next scheduled campaign
+  action.
+
+### 2026-08-02T06:29:47Z — release-to-download integrity observation
+
+- Record type: campaign-observation
+- Related experiment: none; release-integrity guard
+- Official release evidence: GitHub `releases/latest` reports `v0.15.3`,
+  published `2026-08-01T08:47:47Z`, and the official tag inventory contains no
+  `v0.15.4`.
+- Artifact evidence: the Windows x64, macOS Apple Silicon, Linux x64, and Linux
+  ARM64 `v0.15.3` public download assets each resolve with HTTP 200.
+- Live-site evidence: `/`, `/download`, `/zh-TW/download`,
+  `/zh-CN/download`, `/about`, and `/docs/get-started` each return HTTP 200,
+  visibly identify `v0.15.3`, and do not identify `v0.15.4`. Home and localized
+  download surfaces contain all four release asset URLs; the get-started page
+  contains the Windows installer link.
+- Pending repository evidence: GitHub PRs #430 and #431 concern a possible
+  `0.15.4` release but are not an official published tag or release and cannot
+  override the public release contract.
+- Result: pass; current website release and download claims match the official
+  published release.
+- Decision: no change. Recheck only after an official newer release is
+  published, then verify its complete artifact matrix before changing the site.
+- External actions: none; all checks were read-only. No website edit, push, PR,
+  merge, deployment, indexing request, GSC validation, external publication,
+  or analytics mutation occurred.
