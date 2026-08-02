@@ -286,6 +286,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   rank-tracking setup, external publication, paid acquisition, synthetic
   events, and metric-definition changes remain excluded. The approved change
   occupies the single production slot until production verification.
+- PR #114 merged at `2026-08-02T02:41:40Z` as
+  `8577a2730946a110ac6d6d26d15e27c4e250505c`; Vercel completed production at
+  `2026-08-02T02:42:26Z`. The deployed technical, locale, canonical, schema,
+  source, FAQ-policy, and responsive-render gates passed. The experiment is
+  now live and measuring, the production slot is open, and its actual 24-hour
+  boundary is after `2026-08-03T02:42:26Z`. No indexing request or GSC
+  validation was submitted.
 - The weekly window is a reporting boundary, not a publish gate. Only one
   website change may be in `approved` or `active` preparation at a time;
   production-verified `live`, `measuring`, and `extended` cohorts continue
@@ -323,11 +330,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-01-document-knowledge-base-guide` is approved and in active
-  publication preparation, so it occupies the single production slot. Its
+  `EXP-2026-08-01-document-knowledge-base-guide` is live,
+  production-verified, and measuring; it no longer consumes the single
+  production slot. Its
   three locale URLs keep independent 5-impression minimum-exposure guards and
-  do not start their measurement clocks until the exact production completion
-  time. The immutable contract is in
+  start their measurement clocks from Vercel production completion at
+  `2026-08-02T02:42:26Z`. PR #114 merged as
+  `8577a2730946a110ac6d6d26d15e27c4e250505c`. The immutable contract is in
   `docs/seo-audits/2026-08-01-tool-boundaries-and-document-knowledge-base-gate.md`.
   `EXP-2026-08-01-obsidian-knowledge-base-locales` is live,
   production-verified, and measuring; it no longer consumes the single
@@ -468,16 +477,16 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `docs/seo-audits/2026-07-29-unified-acquisition-observation.md`.
 - Prior reviewed growth design:
   `docs/seo-audits/2026-07-18-exposure-first-growth-design.md`.
-- Latest website-affecting deployment observation: corrective PR #111 merged
-  at `2026-08-01T21:09:03Z` as
-  `4c67e4c54b90c6f05fda29f0390cc380157c9849`; Vercel reported production
-  completion at `2026-08-01T21:09:50Z`. The deployed audit passed robots, 114
-  sitemap URLs, 18 key pages, six utility noindex headers, sitemap-wide
-  `FAQPage` absence, 25 redirects, six bridge-host redirects, and legacy-URL
-  exclusions. The live locale matrix passed 23 direct-200 routes and four
-  expected 404 routes. Fresh zh-TW and zh-CN renders at `393px` and `1280px`
-  have no document overflow and zero protected-phrase splits. Ledger-only PR
-  #112 subsequently merged without changing the rendered experiment.
+- Latest website-affecting deployment observation: PR #114 merged at
+  `2026-08-02T02:41:40Z` as
+  `8577a2730946a110ac6d6d26d15e27c4e250505c`; Vercel reported production
+  completion at `2026-08-02T02:42:26Z`. The deployed audit passed robots, 117
+  sitemap URLs, 21 key pages, six utility noindex headers, sitemap-wide
+  `FAQPage` absence, 25 redirects, six bridge-host redirects, 18 direct changed
+  redirects, and legacy-URL exclusions. The live locale matrix passed 25
+  direct-200 routes and four expected 404 routes. Fresh English, zh-TW, and
+  zh-CN renders at `393px` and `1280px` have no document overflow or protected-
+  phrase split.
 - Latest source-release observation: refreshed and production-verified at
   `2026-08-01T04:36:11Z`. Wenlan `v0.15.2` was published at
   `2026-07-31T10:16:24Z` with native Windows x64, macOS Apple silicon, Linux
@@ -810,8 +819,9 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-01-document-knowledge-base-guide` is approved and in active
-publication preparation, occupying the single production slot. It adds one
+`EXP-2026-08-01-document-knowledge-base-guide` is live,
+production-verified, and measuring; the single production slot is open. It
+adds one
 non-overlapping canonical family in English, zh-TW, and zh-CN for the
 document-ingestion, supported-source, repeatable-sync, scanned-PDF,
 read-only-Obsidian, distill, citation, lint, and review workflow. The existing
@@ -828,14 +838,14 @@ reports 46 stars. Each locale independently requires 5 GSC target-page
 impressions after its first confirmed crawl or index date; locale exposure is
 never pooled.
 
-At `2026-08-02T00:36:22Z`, the user approved commit, push, PR creation, merge,
-automatic Vercel deployment, and read-only production verification of the
-exact article family and deterministic Vercel report support. Request
-indexing, GSC validation, paid OpenSEO work, rank tracking, external
-publication, paid acquisition, synthetic events, and metric changes remain
-outside the approval. Production completion starts the 24h, 7d, W2, W4, and
-W8 clocks. The complete immutable experiment contract and local verification
-are in
+PR #114 merged at `2026-08-02T02:41:40Z` as
+`8577a2730946a110ac6d6d26d15e27c4e250505c`, and Vercel completed production
+at `2026-08-02T02:42:26Z`. That exact time starts the 24h, 7d, W2, W4, and W8
+clocks. The deployed technical audit, live locale matrix, and fresh English,
+zh-TW, and zh-CN `393px` and `1280px` renders pass. Request indexing, GSC
+validation, paid OpenSEO work, rank tracking, external publication, paid
+acquisition, synthetic events, and metric changes remain outside the
+approval. The complete immutable experiment contract and verification are in
 `docs/seo-audits/2026-08-01-tool-boundaries-and-document-knowledge-base-gate.md`.
 
 ### Measuring experiment: Obsidian knowledge-base locales
@@ -1347,6 +1357,14 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
+The document knowledge-base guide family is production-verified and measuring
+from `2026-08-02T02:42:26Z`. Run its actual 24-hour technical and evidence
+readout only after `2026-08-03T02:42:26Z`. The existing same-task heartbeat has
+an earlier Obsidian-locale readout due after `2026-08-02T21:09:50Z`; keep that
+earlier wake and let it advance to the document-guide boundary afterward
+rather than creating another automation. Do not infer crawl, indexing,
+impressions, clicks, or visitor lift from the successful deployment.
+
 Authenticated GSC URL Inspection at `2026-08-01T21:47:09Z` isolated crawl
 freshness as the immediate search constraint. The user approved the fixed
 four-URL request-indexing batch, and Search Console returned `Indexing
@@ -1359,10 +1377,10 @@ authenticated evidence before re-reading crawl state; do not rewrite content
 from this operation. The source-native inspection matrix and execution are in
 `docs/seo-audits/2026-08-01-core-acquisition-url-inspection.md`.
 
-Do not start another website edit from the current authenticated range. The
+Do not start another overlapping website edit from the current authenticated range. The
 range ends on `2026-07-30`, before the August 1 homepage links, zh-TW LLM Wiki
 refresh, and Obsidian locale experiment have a complete post-deploy day. The
-production slot is open, but the next website candidate must wait for either a
+production slot is open, but another website candidate still requires either a
 new authenticated query-page join or a separately inspectable demand signal
 that passes the complete candidate gate.
 
@@ -1593,6 +1611,11 @@ stale-memory, claude-mem, SuperLocalMemory, Basic Memory,
 AI-agent-memory-types, and context-loss 7-day readouts. It must not record the
 Claude Code memory W2 readout before `2026-08-02T00:26:09Z`.
 
+The document knowledge-base guide's production-verification record starts its
+24-hour boundary at `2026-08-02T02:42:26Z`; do not record that readout before
+`2026-08-03T02:42:26Z`. Keep the earlier Obsidian-locale heartbeat boundary
+first and reuse the same task rather than creating a duplicate automation.
+
 That due batch completed at `2026-08-01T02:37:50Z` using the authenticated
 `2026-07-03..2026-07-30` weekly GSC and Vercel evidence. No source pipeline
 was rerun. Target-page rows, visible joined queries, Vercel page rows, raw and
@@ -1665,8 +1688,10 @@ Obsidian read-only boundary, and end-to-end validation intent that the existing
 conceptual LLM Wiki and source-backed knowledge-base pages do not. First-party
 Wenlan source proves every product claim. The user approved commit, push, PR
 creation, merge, automatic Vercel deployment, and read-only production
-verification at `2026-08-02T00:36:22Z`; the change now occupies the single
-production slot until production verification. Indexing requests, GSC
+verification at `2026-08-02T00:36:22Z`. PR #114 merged as
+`8577a2730946a110ac6d6d26d15e27c4e250505c`, and Vercel completed production
+at `2026-08-02T02:42:26Z`; the change is live and measuring and no longer
+consumes the production slot. Indexing requests, GSC
 validation, external publication, paid actions, and account mutations remain
 separately gated. See
 `docs/seo-audits/2026-08-01-tool-boundaries-and-document-knowledge-base-gate.md`.
