@@ -5069,3 +5069,203 @@ increase for that experiment.
 - Excluded actions: No GSC validation, website edit, push, PR, merge,
   deployment, external publication, paid acquisition, synthetic event, or
   unrelated account mutation was performed.
+
+### 2026-08-01 — document knowledge-base article candidate locally prepared
+
+- Record type: candidate-preparation observation
+- Related experiment: none; no experiment or measurement clock started
+- Status: full candidate gate passed; English, zh-TW, and zh-CN local implementation in progress
+- Demand evidence: OpenSEO's previously captured US `AI knowledge base` result exposed builder, examples, open-source, tools, GitHub, and free modifiers; the Taiwan `AI 知識庫` result corroborated the locale family. Current English and Chinese SERP/community observations independently repeat document-ingestion, Markdown, local-control, and implementation intent. OpenSEO displayed volumes remain third-party units, not GSC data or forecasts.
+- Coverage evidence: Existing LLM Wiki and source-backed knowledge-base pages explain architecture and maintenance, but do not provide one focused document-to-page recipe with supported source types, idempotent resync, scanned-PDF limits, the Obsidian read-only boundary, and an end-to-end verification loop.
+- Product proof: Current Wenlan README, CLI implementation, and tests support `wenlan sources add <path>`, `.md`, `.txt`, text-extractable `.pdf`, recursive folders, read-only Obsidian sources, resync, maintained Pages, lint, and review. The candidate explicitly excludes arbitrary code ingestion and direct support for image-only PDFs.
+- Tool boundary: The signed-in OpenSEO account has exhausted credits and has no GSC connection. Authenticated Vercel API queries proved referrer-filtered page aggregates and page-filtered referrer aggregates on the current plan; CTA events returned HTTP 402 and remain account-gated.
+- Candidate family: `/learn/build-local-ai-knowledge-base-from-documents` in English, zh-TW, and zh-CN.
+- Decision: prepare and verify locally. Do not label this an active experiment until Vercel production completes after a separately approved publication.
+- Evidence: `docs/seo-audits/2026-08-01-tool-boundaries-and-document-knowledge-base-gate.md`.
+- Approval boundary: No push, PR, merge, deployment, request indexing, GSC validation, paid OpenSEO action, rank-tracking setup, or external publication is authorized by this observation.
+
+### 2026-08-01 — document knowledge-base candidate local verification closed
+
+- Record type: candidate-preparation observation
+- Related experiment: none; no experiment or measurement clock started
+- Status: locally ready for publication review
+- Deterministic verification: 217 SEO tests passed; 62 i18n contract tests passed; TypeScript passed; the production build generated 219 static pages; the built technical checker passed 117 sitemap URLs, 21 required canonicals, 21 checked pages, and the site-wide `FAQPage` absence check; the built-server locale matrix passed 25 intended 200 routes and four expected 404 routes; `pnpm seo:goal:check` and `git diff --check` passed.
+- Rendered verification: English, zh-TW, and zh-CN article routes were inspected at 393px and 1280px widths. Exact canonicals, indexability, Article and BreadcrumbList schema, visible FAQ without `FAQPage`, CJK phrase wrapping, code containment, and the acquisition CTA passed without a blocking issue.
+- Interpretation: This closes local implementation risk only. It is not production completion, an active experiment, indexing evidence, GSC lift, Vercel visitor lift, or causality.
+- Approval boundary: No commit, push, PR, merge, deployment, indexing request, GSC validation, paid OpenSEO action, rank-tracking setup, or external publication was performed.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-18-claude-code-memory-refresh at 2026-08-02T00:36:22Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-18-claude-code-memory-refresh
+- Observed at: 2026-08-02T00:36:22Z
+- Readout: W2
+- Status: measuring
+- Evidence: Completed Friday report
+  `docs/seo-audits/2026-07-31-gsc-click-priority.md`, authenticated exports
+  under `/tmp/wenlan-seo`, read-only Search Console URL Inspection, clean
+  `origin/main` deployed technical audit, and fresh production DOM/render
+  inspection.
+- Evidence window: Reused the completed Friday authenticated
+  `2026-07-03..2026-07-30` GSC and Vercel range; no Search Analytics or
+  Vercel source pipeline was rerun. The range contains 11 complete dates
+  after Vercel production completed at `2026-07-19T00:26:09Z`, not a
+  complete 14-day post-deploy cohort.
+- GSC property totals: 10 clicks and 660 impressions. Visible-query totals:
+  2 clicks and 111 impressions. Query visibility gap: 8 clicks and 549
+  impressions. These remain separate native GSC aggregates.
+- Target-page guard: `/learn/claude-code-memory` has 0 clicks, 24 impressions,
+  and page-average position 38.8. Its five predeclared visible qualified
+  query-to-page rows have 0 clicks, 9 impressions, and 50.0
+  impression-weighted average position; the remaining 15 target-page
+  impressions are not attributed to that visible qualified cluster.
+- Crawl and exposure guard: A read-only URL Inspection observation returned
+  `Submitted and indexed`, `INDEXING_ALLOWED`, `SUCCESSFUL`, and exact matching
+  user and Google canonicals, but its last crawl is
+  `2026-07-04T09:03:21Z`, before the 2026-07-18 refresh. A first confirmed
+  post-change crawl or index date therefore remains unavailable. The rolling
+  target row is also one impression below the immutable 25-page-impression
+  minimum. The minimum-exposure clock and 28-complete-post-index-day failure
+  guard cannot be satisfied from this evidence.
+- Neutral-band decision: The target has neither two clicks nor the required
+  10-position improvement. Its 0 clicks and 38.8 page-average position are
+  not classified as failure because minimum exposure, a confirmed
+  post-change crawl, and 28 complete post-index days are all missing. The
+  immutable success/failure gap is not collapsed into a verdict.
+- Vercel: The same complete range reports 1,468 raw visitors and 1,745
+  pageviews, including 307 direct visitors and 457 direct pageviews. The
+  existing search, AI, and GitHub qualified-source allowlist sums to 1,163
+  visitors across separate referrer rows and is not deduplicated. The target
+  page reports 9 visitors and 21 pageviews. The authenticated source-to-page
+  export does not return this target in its 25 rows, so source-to-target
+  visitors are unavailable rather than zero. Unique acquisition-surface
+  visitors remain unavailable.
+- Umami, CTA, and GitHub: No authenticated Umami observation is available.
+  Vercel custom events remain HTTP-402 account-gated, so GitHub outbound and
+  CTA are not reported. A separate GitHub REST capture reports 46 total stars;
+  no page attribution or causality is inferred.
+- Technical and production render: The clean `origin/main` deployed audit
+  passed robots, 114 sitemap URLs, 18 key pages, six utility noindex headers,
+  sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host redirects,
+  and legacy-URL exclusions. The target returns 200, is present in the
+  sitemap, and renders its exact self-canonical, `index, follow`, Article and
+  BreadcrumbList schema, stable `datePublished: "2026-06-07"` and
+  `dateModified: "2026-07-18"`, visible native-memory-first answer, current
+  Claude Code memory and MCP references, and no `FAQPage`. A fresh 1280px
+  production render had no document overflow or console warnings/errors.
+  Unsupported zh-TW and zh-CN counterparts remain the expected 404s.
+- Result: inconclusive
+- Decision: wait
+- Rationale: Preserve the page and do not stack another memory-content edit.
+  This measuring cohort does not nominate the next acquisition asset.
+- Unperformed gated actions: no repeat indexing request, GSC validation,
+  website edit, commit, push, PR, merge, deployment, external publication,
+  paid acquisition, synthetic event, or metric-definition change.
+- Next step: Keep the original W4 evaluation and exposure guards. The next
+  campaign heartbeat should run the due 24-hour readout for
+  `EXP-2026-08-01-obsidian-knowledge-base-locales` after
+  `2026-08-02T21:09:50Z`, reusing the next available authenticated evidence
+  and not repeating its completed indexing requests.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-01-obsidian-knowledge-base-locales production verification at 2026-08-01T21:09:50Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-01-obsidian-knowledge-base-locales
+- Observed at: 2026-08-01T21:09:50Z
+- Readout: correction
+- Status: measuring
+- Evidence: Corrective PR #111 merged as
+  `4c67e4c54b90c6f05fda29f0390cc380157c9849`, Vercel production completed at
+  `2026-08-01T21:09:50Z`, and the deployed technical, locale, canonical,
+  schema, source, FAQ, CJK wrapping, and desktop/mobile render gates passed.
+- Result: pending
+- Decision: wait
+- Next step: Run the actual 24-hour technical/evidence readout after
+  `2026-08-02T21:09:50Z`; keep zh-TW and zh-CN exposure separate and do not
+  repeat the completed indexing requests.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-01-document-knowledge-base-guide
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-01-document-knowledge-base-guide
+- Status: approved
+- Data window: 2026-08-01..2026-08-07
+- Asset class: net-new-search
+- Launched: 2026-08-01
+- Hypothesis: A source-backed implementation guide that turns Markdown,
+  text-extractable PDFs, and an Obsidian vault into a maintained local AI
+  knowledge base will earn qualified search exposure across English, zh-TW,
+  and zh-CN without replacing the existing conceptual LLM-wiki and
+  source-backed-knowledge-base pages.
+- Candidate evidence: OpenSEO's prior US `AI knowledge base` modifier result
+  and Taiwan `AI 知識庫` result in their native third-party unit; independently
+  repeated English and Chinese SERP/community document-ingestion intent; the
+  clean coverage gap; and current Wenlan README, CLI, tests, and source
+  behavior. None is GSC evidence or a forecast.
+- Baseline: The three target URLs do not exist in the authenticated
+  `2026-07-03..2026-07-30` GSC or Vercel exports and are unavailable rather
+  than zero. Same-range GSC property totals are 10 clicks and 660 impressions;
+  visible-query totals are 2 clicks and 111 impressions; the visibility gap
+  is 8 clicks and 549 impressions. Vercel reports 1,468 visitors and 1,745
+  pageviews. GitHub REST separately reports 46 stars. Umami is unavailable
+  and Vercel custom events are HTTP-402 account-gated.
+- Change: Publish
+  `/learn/build-local-ai-knowledge-base-from-documents`,
+  `/zh-TW/learn/build-local-ai-knowledge-base-from-documents`, and
+  `/zh-CN/learn/build-local-ai-knowledge-base-from-documents`; add one English
+  Learn search-path link; preserve contextual links to the existing LLM-wiki
+  and source-backed knowledge-base canonicals; and add deterministic Vercel
+  acquisition source-to-page reporting without inferring causality.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 5 GSC target-page impressions per locale within the first
+  28 complete days after that exact
+  locale URL is first confirmed crawled or indexed; locale impressions are
+  never pooled.
+- Success criteria: After its own minimum exposure, a locale earns at least 1
+  GSC target-page click or reaches page-average position 20.0 or better while
+  the technical, source-accuracy, and locale floors remain green.
+- Failure criteria: After 28 complete post-index days and its own minimum
+  exposure, a locale has 0 clicks and page-average position worse than 20.0,
+  or the publication creates a technical, source-accuracy, or rendered-layout
+  regression.
+- Inconclusive criteria: A locale below 5 target-page impressions, without a
+  confirmed post-change crawl/index date, or without 28 complete post-index
+  days remains inconclusive; missing rows remain unavailable rather than zero.
+- Stop criteria: Hold or repair the experiment if a supported-source claim
+  becomes false, the new page overlaps an existing canonical's intent, any
+  canonical, robots, sitemap, hreflang, noindex, redirect, schema, or
+  direct-200 contract regresses, or a second controller edits the same
+  canonical family.
+- 24h readout: verify publication integrity, live three-locale routes,
+  canonicals, hreflang, sitemap, Article and BreadcrumbList schema, visible
+  answer, sources, FAQ policy, and production renders without judging SEO
+  success.
+- 7d readout: report authenticated property, visible-query, visibility-gap,
+  per-locale page, joined visible-query, Vercel, Umami, and GitHub evidence in
+  native units when available; otherwise keep the result inconclusive.
+- W2 readout: apply each locale's independent 5-impression exposure guard and
+  inspect overlap with the existing LLM-wiki and source-backed knowledge-base
+  canonicals.
+- W4 readout: apply the 28-complete-post-index-day success, failure, or
+  inconclusive contract separately per locale.
+- W8 readout: post-campaign follow-up; scale, refresh, merge, stop, or mark
+  inconclusive without moving the fixed Goal window.
+- Result: pending
+- Decision: wait
+- Evidence: `docs/seo-audits/2026-08-01-tool-boundaries-and-document-knowledge-base-gate.md`.
+- Approval: At `2026-08-02T00:36:22Z`, the user explicitly approved commit,
+  push, PR creation, merge, automatic Vercel deployment, and read-only
+  production verification for this exact scope.
+- Excluded actions: request indexing, GSC validation, paid OpenSEO actions,
+  rank-tracking setup, external publication, paid acquisition, synthetic
+  events, and metric-definition changes.
+- Next step: Complete the merge and production gate, record the exact Vercel
+  production completion time, then schedule the 24-hour readout from that
+  boundary.
+<!-- EXPERIMENT-RECORD:END -->

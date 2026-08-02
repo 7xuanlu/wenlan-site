@@ -529,6 +529,7 @@ test("localized Learn slug route supports per-locale acquisition page availabili
     "/learn/distilled-wiki-pages-ai-memory",
     "/learn/source-backed-wiki-pages-ai-work",
     "/learn/wenlan-vs-obsidian-ai-memory",
+    "/learn/build-local-ai-knowledge-base-from-documents",
   ]);
   assert.match(source, /getLocalizedLearnArticle/);
   assert.match(source, /TRANSLATED_LEARN_SLUGS/);
@@ -841,6 +842,8 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
     { locale: "zh-CN", slug: "source-backed-wiki-pages-ai-work" },
     { locale: "zh-TW", slug: "wenlan-vs-obsidian-ai-memory" },
     { locale: "zh-CN", slug: "wenlan-vs-obsidian-ai-memory" },
+    { locale: "zh-TW", slug: "build-local-ai-knowledge-base-from-documents" },
+    { locale: "zh-CN", slug: "build-local-ai-knowledge-base-from-documents" },
   ]);
 
   const metadata = await localizedLearnSlug.generateMetadata({
@@ -1062,6 +1065,62 @@ test("localized Learn hubs and source-backed pages lead with AI knowledge-base i
       assert.match(articleText, new RegExp(command.replace("/", "\\/")));
     }
   }
+});
+
+test("localized document-to-knowledge-base guides keep supported source boundaries", async () => {
+  const { getLocalizedLearnArticle } = await import(
+    "../src/i18n/learn-articles.ts"
+  );
+  const expectations = {
+    "zh-TW": {
+      title: "如何用 Markdown、PDF 與 Obsidian 建立本地 AI 知識庫",
+      keyword: "建立 AI 知識庫",
+      unsupportedPdf: "掃描型 PDF",
+    },
+    "zh-CN": {
+      title: "如何用 Markdown、PDF 与 Obsidian 建立本地 AI 知识库",
+      keyword: "搭建 AI 知识库",
+      unsupportedPdf: "扫描型 PDF",
+    },
+  };
+
+  for (const [locale, expected] of Object.entries(expectations)) {
+    const article = getLocalizedLearnArticle(
+      locale,
+      "build-local-ai-knowledge-base-from-documents",
+    );
+    assert.ok(article);
+    assert.equal(article.title, expected.title);
+    assert.equal(article.publishedAt, "2026-08-01");
+    assert.equal(article.updatedAt, "2026-08-01");
+    assert.ok(article.keywords.includes(expected.keyword));
+    assert.match(JSON.stringify(article), /wenlan sources add/);
+    assert.match(JSON.stringify(article), /\.md/);
+    assert.match(JSON.stringify(article), /\.txt/);
+    assert.match(JSON.stringify(article), /\.pdf/);
+    assert.match(JSON.stringify(article), new RegExp(expected.unsupportedPdf));
+    assert.ok(article.officialReferences?.length >= 3);
+  }
+});
+
+test("English document-to-knowledge-base guide owns the implementation gap", async () => {
+  const { getArticle } = await import("../src/app/(en)/learn/articles.ts");
+  const article = getArticle("build-local-ai-knowledge-base-from-documents");
+
+  assert.ok(article);
+  assert.equal(
+    article.title,
+    "How to Build a Local AI Knowledge Base from Markdown, PDFs, and Obsidian",
+  );
+  assert.equal(article.publishedAt, "2026-08-01");
+  assert.equal(article.updatedAt, "2026-08-01");
+  assert.ok(article.keywords.includes("AI knowledge base builder"));
+  const text = JSON.stringify(article);
+  assert.match(text, /wenlan sources add/);
+  assert.match(text, /Image-only or scanned PDFs need OCR/);
+  assert.match(text, /do not ingest arbitrary source-code files/);
+  assert.match(article.cta.heading, /knowledge-base loop/);
+  assert.ok(article.officialReferences?.length >= 3);
 });
 
 test("localized Learn renderer exposes article code blocks", async () => {

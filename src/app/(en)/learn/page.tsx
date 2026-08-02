@@ -37,6 +37,12 @@ export const metadata: Metadata = {
 
 const searchRoutes = [
   {
+    query: "Build a local AI knowledge base",
+    intent: "Turn Markdown, text files, text PDFs, or an Obsidian vault into a source-backed knowledge workflow.",
+    href: "/learn/build-local-ai-knowledge-base-from-documents",
+    context: "workflows",
+  },
+  {
     query: "AI knowledge base for agents",
     intent: "Build maintained pages with sources, review, refresh state, and a verifiable local workflow.",
     href: "/learn/source-backed-wiki-pages-ai-work",

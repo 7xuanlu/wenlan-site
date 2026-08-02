@@ -164,17 +164,31 @@ const requiredLocalizedLearnPaths = [
   "/zh-CN/learn/source-backed-wiki-pages-ai-work",
   "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
   "/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
+  "/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
+  "/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
 ];
 const requiredLocalizedLearnLocs = requiredLocalizedLearnPaths.map(
   (path) => `https://wenlan.app${path}`,
 );
 const expectedArticleDates = new Map([
   [
+    "/learn/build-local-ai-knowledge-base-from-documents",
+    { datePublished: "2026-08-01", dateModified: "2026-08-01" },
+  ],
+  [
     "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
     { datePublished: "2026-07-22", dateModified: "2026-08-01" },
   ],
   [
     "/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
+    { datePublished: "2026-08-01", dateModified: "2026-08-01" },
+  ],
+  [
+    "/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
+    { datePublished: "2026-08-01", dateModified: "2026-08-01" },
+  ],
+  [
+    "/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
     { datePublished: "2026-08-01", dateModified: "2026-08-01" },
   ],
 ]);
@@ -195,6 +209,7 @@ const requiredBuiltSitemapLocs = [
   "https://wenlan.app/learn/how-to-add-mcp-memory-to-cursor",
   "https://wenlan.app/learn/ai-work-memory",
   "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
+  "https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents",
   ...requiredLocalizedLearnLocs,
   "https://wenlan.app/docs/configuration",
   "https://wenlan.app/docs/product-matrix",
@@ -244,6 +259,13 @@ const requiredBuiltHtmlPages = [
     canonical: "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
     type: "Article",
   },
+  {
+    path: "learn/build-local-ai-knowledge-base-from-documents.html",
+    canonical: "https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents",
+    type: "Article",
+    datePublished: "2026-08-01",
+    dateModified: "2026-08-01",
+  },
   ...requiredLocalizedBuiltHtmlPages,
   {
     path: "docs/configuration.html",
@@ -274,6 +296,7 @@ const requiredDeployedUrls = [
   "/learn/how-to-add-mcp-memory-to-cursor",
   "/learn/ai-work-memory",
   "/learn/wenlan-vs-superlocal-memory",
+  "/learn/build-local-ai-knowledge-base-from-documents",
   ...requiredLocalizedLearnPaths,
   "/docs/configuration",
   "/docs/product-matrix",
@@ -1382,8 +1405,8 @@ test("deployed technical SEO checker verifies robots, sitemap, key pages, utilit
     );
 
     assert.match(stdout, /robots ok/);
-    assert.match(stdout, /sitemap locs ok: 18/);
-    assert.match(stdout, /key pages ok: 18/);
+    assert.match(stdout, /sitemap locs ok: 21/);
+    assert.match(stdout, /key pages ok: 21/);
     assert.match(stdout, /utility noindex headers ok: 6/);
     assert.match(stdout, /redirects ok: 25/);
     assert.match(stdout, /bridge host redirects ok: 6/);
@@ -1474,7 +1497,7 @@ test("deployed technical SEO checker does not require unshipped local internal l
         { cwd: repoRoot },
       );
 
-      assert.match(stdout, /key pages ok: 18/);
+      assert.match(stdout, /key pages ok: 21/);
     },
   );
 });
@@ -1982,9 +2005,9 @@ test("built technical SEO checker verifies compiled redirects, headers, and site
     assert.match(stdout, /redirects ok: 26/);
     assert.match(stdout, /global 404 ok/);
     assert.match(stdout, /noindex headers ok: 7/);
-    assert.match(stdout, /sitemap required locs ok: 18/);
-    assert.match(stdout, /html page checks ok: 18/);
-    assert.match(stdout, /all html FAQPage absent ok: 19/);
+    assert.match(stdout, /sitemap required locs ok: 21/);
+    assert.match(stdout, /html page checks ok: 21/);
+    assert.match(stdout, /all html FAQPage absent ok: 22/);
     assert.match(stdout, /old URLs absent from sitemap/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
@@ -3402,6 +3425,7 @@ test("seo weekly generator prefers Vercel Web Analytics evidence and records eve
   try {
     const pagesPath = join(outputRoot, "vercel-pages.csv");
     const referrersPath = join(outputRoot, "vercel-referrers.csv");
+    const sourcePagesPath = join(outputRoot, "vercel-source-pages.csv");
     const metadataPath = join(outputRoot, "vercel-metadata.json");
     const outputPath = join(outputRoot, "2026-06-07-weekly-seo.md");
     await writeFile(
@@ -3415,6 +3439,16 @@ test("seo weekly generator prefers Vercel Web Analytics evidence and records eve
       "utf8",
     );
     await writeFile(
+      sourcePagesPath,
+      [
+        "Source,Path,Visitors,Pageviews",
+        "google.com,/learn,5,5",
+        "chatgpt.com,/learn/source-backed-wiki-pages-ai-work,1,1",
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+    await writeFile(
       metadataPath,
       JSON.stringify({
         source: "Vercel Web Analytics API",
@@ -3423,11 +3457,152 @@ test("seo weekly generator prefers Vercel Web Analytics evidence and records eve
         startDate: "2026-05-10",
         endDate: "2026-06-06",
         totals: { visitors: 153, pageviews: 192 },
+        sourcePageBreakdown: {
+          status: "available",
+          referrers: ["google.com", "chatgpt.com"],
+          rows: 2,
+        },
         customEvents: { status: "account-gated", reason: "Pro or Enterprise plan required" },
       }),
       "utf8",
     );
 
+    await execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly.mjs"),
+        "--",
+        "--queries",
+        resolve(fixtureRoot, "gsc-queries.csv"),
+        "--pages",
+        resolve(fixtureRoot, "gsc-pages.csv"),
+        "--vercel-pages",
+        pagesPath,
+        "--vercel-referrers",
+        referrersPath,
+        "--vercel-source-pages",
+        sourcePagesPath,
+        "--vercel-metadata",
+        metadataPath,
+        "--date",
+        "2026-06-07",
+        "--output",
+        outputPath,
+      ],
+      { cwd: repoRoot },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+    assert.match(report, /\| Analytics data source \| Vercel Web Analytics API \|/);
+    assert.match(report, /\| Analytics visitors \| 153 \|/);
+    assert.match(report, /\| Analytics pageviews \| 192 \|/);
+    assert.match(report, /\| AI referrals \| 1 visit from 1 referrer \|/);
+    assert.match(report, /\| CTA custom events \| account-gated: Pro or Enterprise plan required \|/);
+    assert.match(report, /## Vercel Analytics Evidence/);
+    assert.match(report, /\| `\/learn` \| 3 \| 5 \|/);
+    assert.match(report, /### Acquisition source → page/);
+    assert.match(report, /\| google\.com \| `\/learn` \| 5 \| 5 \|/);
+    assert.match(
+      report,
+      /\| chatgpt\.com \| `\/learn\/source-backed-wiki-pages-ai-work` \| 1 \| 1 \|/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly generator rejects source-page CSVs without a matching authenticated sidecar", async (t) => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-seo-vercel-source-page-proof-"));
+  try {
+    const pagesPath = join(outputRoot, "vercel-pages.csv");
+    const referrersPath = join(outputRoot, "vercel-referrers.csv");
+    const sourcePagesPath = join(outputRoot, "vercel-source-pages.csv");
+    const metadataPath = join(outputRoot, "vercel-metadata.json");
+    const outputPath = join(outputRoot, "weekly-seo.md");
+    await writeFile(pagesPath, ["Path,Visitors,Pageviews", "/learn,5,5", ""].join("\n"), "utf8");
+    await writeFile(
+      referrersPath,
+      ["Referrer,Visitors,Pageviews", "google.com,5,5", ""].join("\n"),
+      "utf8",
+    );
+    await writeFile(
+      sourcePagesPath,
+      ["Source,Path,Visitors,Pageviews", "google.com,/learn,5,5", ""].join("\n"),
+      "utf8",
+    );
+
+    const baseMetadata = {
+      source: "Vercel Web Analytics API",
+      startDate: "2026-05-10",
+      endDate: "2026-06-06",
+      totals: { visitors: 5, pageviews: 5 },
+    };
+    const cases = [
+      {
+        name: "missing sidecar",
+        metadata: baseMetadata,
+        error: /requires metadata\.sourcePageBreakdown\.status=available/,
+      },
+      {
+        name: "unavailable sidecar",
+        metadata: {
+          ...baseMetadata,
+          sourcePageBreakdown: { status: "account-gated", referrers: ["google.com"], rows: 1 },
+        },
+        error: /requires metadata\.sourcePageBreakdown\.status=available/,
+      },
+      {
+        name: "row mismatch",
+        metadata: {
+          ...baseMetadata,
+          sourcePageBreakdown: { status: "available", referrers: ["google.com"], rows: 2 },
+        },
+        error: /row count must match the validated CSV rows/,
+      },
+      {
+        name: "source outside allowlist",
+        metadata: {
+          ...baseMetadata,
+          sourcePageBreakdown: { status: "available", referrers: ["chatgpt.com"], rows: 1 },
+        },
+        error: /outside the metadata referrer allowlist/,
+      },
+    ];
+
+    for (const entry of cases) {
+      await t.test(entry.name, async () => {
+        await writeFile(metadataPath, JSON.stringify(entry.metadata), "utf8");
+        await assert.rejects(
+          execFileAsync(
+            process.execPath,
+            [
+              resolve(repoRoot, "scripts/seo-weekly.mjs"),
+              "--",
+              "--queries",
+              resolve(fixtureRoot, "gsc-queries.csv"),
+              "--pages",
+              resolve(fixtureRoot, "gsc-pages.csv"),
+              "--vercel-pages",
+              pagesPath,
+              "--vercel-referrers",
+              referrersPath,
+              "--vercel-source-pages",
+              sourcePagesPath,
+              "--vercel-metadata",
+              metadataPath,
+              "--date",
+              "2026-06-07",
+              "--output",
+              outputPath,
+            ],
+            { cwd: repoRoot },
+          ),
+          entry.error,
+        );
+      });
+    }
+
+    await writeFile(metadataPath, JSON.stringify(baseMetadata), "utf8");
     await execFileAsync(
       process.execPath,
       [
@@ -3450,15 +3625,9 @@ test("seo weekly generator prefers Vercel Web Analytics evidence and records eve
       ],
       { cwd: repoRoot },
     );
-
-    const report = await readFile(outputPath, "utf8");
-    assert.match(report, /\| Analytics data source \| Vercel Web Analytics API \|/);
-    assert.match(report, /\| Analytics visitors \| 153 \|/);
-    assert.match(report, /\| Analytics pageviews \| 192 \|/);
-    assert.match(report, /\| AI referrals \| 1 visit from 1 referrer \|/);
-    assert.match(report, /\| CTA custom events \| account-gated: Pro or Enterprise plan required \|/);
-    assert.match(report, /## Vercel Analytics Evidence/);
-    assert.match(report, /\| `\/learn` \| 3 \| 5 \|/);
+    const unavailableReport = await readFile(outputPath, "utf8");
+    assert.match(unavailableReport, /\| manual \/ unavailable \| - \| - \| - \|/);
+    assert.doesNotMatch(unavailableReport, /\| manual \/ unavailable \| - \| 0 \| 0 \|/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }
@@ -4782,6 +4951,15 @@ test("seo weekly generator maps AI knowledge-base and wiki demand before memory-
       queriesPath,
       [
         "Query,Clicks,Impressions,CTR,Position",
+        "build local ai knowledge base,0,2,0%,15.0",
+        "markdown ai knowledge base,0,2,0%,16.0",
+        "build ai knowledge base from obsidian,0,2,0%,16.5",
+        "建立本地 AI 知識庫,0,2,0%,17.0",
+        "Markdown AI 知識庫,0,2,0%,18.0",
+        "如何用 Obsidian 建立 AI 知識庫,0,2,0%,18.5",
+        "搭建本地 AI 知识库,0,2,0%,19.0",
+        "文档 AI 知识库,0,2,0%,20.0",
+        "用 Obsidian 搭建 AI 知识库,0,2,0%,20.5",
         "llm wiki 2.0,0,3,0%,13.0",
         "source-backed wiki for ai agents,0,2,0%,18.0",
         "ai knowledge base for agents,0,4,0%,9.0",
@@ -4828,6 +5006,42 @@ test("seo weekly generator maps AI knowledge-base and wiki demand before memory-
     )?.[1];
 
     assert.ok(topActions);
+    assert.match(
+      report,
+      /\| `build local ai knowledge base` \| AI knowledge base \/ wiki \| `\/learn\/build-local-ai-knowledge-base-from-documents` \| 2 \|/,
+    );
+    assert.match(
+      report,
+      /\| `markdown ai knowledge base` \| AI knowledge base \/ wiki \| `\/learn\/build-local-ai-knowledge-base-from-documents` \| 2 \|/,
+    );
+    assert.match(
+      report,
+      /\| `build ai knowledge base from obsidian` \| AI knowledge base \/ wiki \| `\/learn\/build-local-ai-knowledge-base-from-documents` \| 2 \|/,
+    );
+    assert.match(
+      report,
+      /\| `建立本地 AI 知識庫` \| AI knowledge base \/ wiki \| `\/zh-TW\/learn\/build-local-ai-knowledge-base-from-documents` \| 2 \|/,
+    );
+    assert.match(
+      report,
+      /\| `Markdown AI 知識庫` \| AI knowledge base \/ wiki \| `\/zh-TW\/learn\/build-local-ai-knowledge-base-from-documents` \| 2 \|/,
+    );
+    assert.match(
+      report,
+      /\| `如何用 Obsidian 建立 AI 知識庫` \| AI knowledge base \/ wiki \| `\/zh-TW\/learn\/build-local-ai-knowledge-base-from-documents` \| 2 \|/,
+    );
+    assert.match(
+      report,
+      /\| `搭建本地 AI 知识库` \| AI knowledge base \/ wiki \| `\/zh-CN\/learn\/build-local-ai-knowledge-base-from-documents` \| 2 \|/,
+    );
+    assert.match(
+      report,
+      /\| `文档 AI 知识库` \| AI knowledge base \/ wiki \| `\/zh-CN\/learn\/build-local-ai-knowledge-base-from-documents` \| 2 \|/,
+    );
+    assert.match(
+      report,
+      /\| `用 Obsidian 搭建 AI 知识库` \| AI knowledge base \/ wiki \| `\/zh-CN\/learn\/build-local-ai-knowledge-base-from-documents` \| 2 \|/,
+    );
     assert.match(
       report,
       /\| `llm wiki 2\.0` \| AI knowledge base \/ wiki \| `\/learn\/distilled-wiki-pages-ai-memory` \| 3 \|/,
