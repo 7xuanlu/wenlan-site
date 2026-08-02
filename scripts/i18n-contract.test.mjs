@@ -855,7 +855,7 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
 
   assert.equal(
     metadata.title,
-    "LLM Wiki 知識庫：架構、RAG 對比與搭建 | Wenlan",
+    "Karpathy LLM Wiki 與 AI 知識庫 | Wenlan",
   );
   assert.equal(
     metadata.alternates.canonical,
@@ -951,10 +951,14 @@ test("zh-TW LLM Wiki guide owns the Karpathy v2 and AI knowledge-base intent", a
   );
 
   assert.ok(article);
-  assert.match(article.title, /LLM Wiki 知識庫/);
-  assert.match(article.metaTitle, /LLM Wiki 知識庫/);
+  assert.match(article.title, /Karpathy LLM Wiki/);
+  assert.match(article.title, /AI 知識庫/);
+  assert.match(article.metaTitle, /Karpathy LLM Wiki/);
+  assert.match(article.metaTitle, /AI 知識庫/);
   assert.equal(article.publishedAt, "2026-07-04");
   assert.equal(article.updatedAt, "2026-08-01");
+  assert.match(article.sections[0].heading, /Karpathy LLM Wiki/);
+  assert.match(JSON.stringify(article), /不代表 Karpathy 為 Wenlan 背書/);
   assert.ok(article.keywords.includes("AI 知識庫"));
   assert.ok(article.keywords.includes("本地 AI 知識庫"));
   assert.ok(article.keywords.includes("RAG vs LLM Wiki"));
@@ -992,10 +996,12 @@ test("zh-CN LLM wiki guide owns the AI knowledge-base search intent", async () =
   );
 
   assert.ok(article);
-  assert.match(article.title, /LLM Wiki 知识库/);
-  assert.match(article.metaTitle, /LLM Wiki 知识库/);
+  assert.match(article.title, /Karpathy LLM Wiki/);
+  assert.match(article.metaTitle, /AI 知识库/);
   assert.equal(article.publishedAt, "2026-07-04");
-  assert.equal(article.updatedAt, "2026-07-29");
+  assert.equal(article.updatedAt, "2026-08-01");
+  assert.match(article.sections[0].heading, /Karpathy LLM Wiki/);
+  assert.match(JSON.stringify(article), /不代表 Karpathy 为 Wenlan 背书/);
   assert.ok(article.keywords.includes("AI 知识库"));
   assert.ok(article.keywords.includes("本地 AI 知识库"));
   assert.ok(article.keywords.includes("RAG vs LLM Wiki"));
@@ -1135,7 +1141,7 @@ test("localized Learn renderer exposes article code blocks", async () => {
   assert.match(source, /\[word-break:keep-all\]/);
 });
 
-test("localized Obsidian Learn copy keeps CJK semantic phrases together on mobile", async () => {
+test("localized acquisition copy keeps CJK semantic phrases together on mobile", async () => {
   const source = await readFile(
     resolve(repoRoot, "src/app/[locale]/learn/[slug]/page.tsx"),
     "utf8",
@@ -1143,8 +1149,14 @@ test("localized Obsidian Learn copy keeps CJK semantic phrases together on mobil
 
   const protectedHeadings = source.match(/<h2 className="[^"]*\[word-break:keep-all\][^"]*\[overflow-wrap:break-word\][^"]*"/g) ?? [];
   assert.equal(protectedHeadings.length, 2);
-  assert.match(source, /text\.split\(\/\(AI 知識庫\|AI 知识库\|來源\|来源\)\/g\)/);
-  assert.match(source, /article\.slug === "wenlan-vs-obsidian-ai-memory"/);
+  assert.match(
+    source,
+    /split\(\/\(Karpathy LLM Wiki：\|AI 知識庫\|AI 知识库\|來源\|来源\)\/g\)/,
+  );
+  assert.match(
+    source,
+    /article\.slug === "wenlan-vs-obsidian-ai-memory"[\s\S]*article\.slug === "distilled-wiki-pages-ai-memory"/,
+  );
   assert.ok((source.match(/\{renderArticleText\(/g)?.length ?? 0) >= 12);
   assert.match(source, /<span className="min-w-0">\{renderArticleText\(faq\.question\)\}<\/span>/);
 });

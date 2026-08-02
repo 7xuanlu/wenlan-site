@@ -5528,7 +5528,7 @@ test("Learn index SERP copy leads with the source-backed AI knowledge-base and L
   assert.match(learnPage, /Claude Code memory/);
   assert.match(learnPage, /Basic Memory comparison/);
   assert.match(learnPage, /MCP memory server/);
-  assert.match(learnPage, /LLM wiki for AI agents/);
+  assert.match(learnPage, /Karpathy LLM wiki for AI agents/);
   assert.match(learnPage, /AI work memory vs knowledge base/);
   assert.match(learnPage, /Obsidian AI memory/);
   assert.doesNotMatch(learnPage, /Before you add memory to AI work\./);

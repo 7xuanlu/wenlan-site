@@ -5315,3 +5315,163 @@ increase for that experiment.
   `2026-08-02T21:09:50Z`, then reuse that same task for this later boundary;
   do not create another automation.
 <!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-02T03:52:06Z — Karpathy / LLM Wiki three-language demand gate
+
+- Record type: campaign-observation
+- Related experiment: none; candidate evidence only
+- Status: candidate-nominated
+- Evidence: Signed-in Google Trends Explore retained exact United States,
+  Taiwan, and Worldwide Simplified-Chinese phrase requests for the past 12
+  months. The request-relative averages were respectively `25 / 46 / 7 / 0 /
+  1`, `20 / 0 / 4 / 0 / 0`, and `28 / 6 / 7 / 0 / 0`; every source retains
+  its own terms and geography in the linked audit. Related-query panels repeat
+  Karpathy, LLM Wiki, Obsidian, and GitHub wording. Prior OpenSEO native-unit
+  results, English Reddit and maintained OSS, and public Simplified-Chinese
+  community sources independently corroborate the same family.
+- Coverage: The document-ingestion and LLM Wiki canonical families already
+  answer builder, source, RAG, Obsidian, setup, maintenance, and failure-mode
+  jobs in English, zh-TW, and zh-CN. A new URL would overlap them. The bounded
+  gap is discoverability: Karpathy appears only in reference labels, not in
+  the three LLM Wiki titles, first answers, section headings, or internal-link
+  anchors.
+- Tool boundary: The authenticated OpenSEO workspace has used all trial
+  credits and is not connected to GSC. No new paid or credit-consuming query,
+  GSC connection, rank tracker, or account mutation was performed.
+- Decision: nominate a later three-language refresh of the existing LLM Wiki
+  canonicals; do not start it before the zh-TW route's actual 24-hour readout
+  after `2026-08-02T04:05:07Z`.
+- Evidence record:
+  `docs/seo-audits/2026-08-01-karpathy-llm-wiki-three-language-demand.md`.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-01-zhtw-llm-wiki-v2-refresh 24h superseded at 2026-08-02T04:14:53Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-01-zhtw-llm-wiki-v2-refresh
+- Observed at: 2026-08-02T04:14:53Z
+- Readout: 24h
+- Status: inconclusive
+- Evidence: The latest authenticated GSC export remains
+  `2026-07-03..2026-07-30`, before the production completion at
+  `2026-08-01T04:05:07Z`. It has no privacy-visible target-page row, which is
+  unavailable rather than zero, and cannot satisfy the five-impression
+  minimum-exposure guard. The same-range Vercel export is also pre-deploy and
+  cannot measure a target-page visitor change. No authenticated Umami event or
+  fresh GitHub-star observation was used for this readout.
+- Technical evidence: The live zh-TW route returns direct `200`, exact
+  self-canonical, `index, follow`, reciprocal English, zh-TW, zh-CN, and
+  x-default alternates, Article and BreadcrumbList schema, stable
+  `datePublished: 2026-07-04`, `dateModified: 2026-08-01`, seven visible
+  sections, the six-command workflow, maintained references, and visible FAQ
+  without `FAQPage`. The deployed sitemap contains all three localized
+  canonicals and reciprocal hreflang links.
+- Result: inconclusive
+- Decision: stop
+- Next step: Preserve the historical cohort, but do not attribute later
+  observations to this copy version. Start the separately gated
+  three-language Karpathy / LLM Wiki / AI knowledge-base refresh with its own
+  per-locale exposure guards.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-01-karpathy-llm-wiki-locales-refresh
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-01-karpathy-llm-wiki-locales-refresh
+- Status: approved
+- Data window: 2026-08-01..2026-08-07
+- Asset class: refresh
+- Launched: 2026-08-01
+- Hypothesis: Exposing the independently corroborated `Karpathy LLM Wiki`
+  phrase while keeping `LLM wiki` and `AI knowledge base` co-primary on the
+  existing English, zh-TW, and zh-CN canonical family will earn qualified
+  page impressions and at least one click per exposed locale without creating
+  a duplicate URL.
+- Candidate evidence: The complete gate in
+  `docs/seo-audits/2026-08-01-karpathy-llm-wiki-three-language-demand.md`
+  preserves exact Trends queries, geography, period, capture time, and native
+  `0-100` units; prior OpenSEO native units; Reddit observations; maintained
+  OSS; and public Simplified-Chinese community corroboration. These sources
+  repeat Karpathy, LLM Wiki, Obsidian, and GitHub wording. Existing Wenlan
+  coverage answers the job, but Karpathy appears only in reference labels.
+- Baseline: Authenticated GSC for `2026-07-03..2026-07-30` reports property
+  totals of 10 clicks and 660 impressions, visible-query totals of 2 clicks
+  and 111 impressions, and a visibility gap of 8 clicks and 549 impressions.
+  The target family has no complete post-August-1 authenticated page window;
+  missing locale rows remain unavailable rather than zero. Same-range Vercel
+  reports 1,468 visitors and 1,745 pageviews at property level; no
+  source-to-page session or causality is inferred.
+- Change: Refresh only the existing English, zh-TW, and zh-CN
+  `/learn/distilled-wiki-pages-ai-memory` canonical family. Expose `Karpathy
+  LLM Wiki` in each locale's title or metadata, first answer, one
+  maintained-source-backed section heading, and same-locale Learn link text;
+  keep AI knowledge base, RAG, Obsidian, source maintenance, and failure-mode
+  utility visible. State that Andrej Karpathy described the pattern and did
+  not endorse Wenlan. Preserve URLs, locale availability, reciprocal
+  hreflang, sitemap membership, original publication dates, Article and
+  BreadcrumbList schema, and visible FAQ without `FAQPage`.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 5 target-page GSC impressions per locale in a complete
+  post-deploy window; locale thresholds are evaluated separately and never
+  combined
+- Success criteria: At W2, after its own minimum exposure, a locale target has
+  at least 1 GSC click or page-average position 20.0 or better while the
+  technical, locale, source-accuracy, and rendered-layout floor remains green.
+- Failure criteria: After 28 complete post-index days and its own minimum
+  exposure, a locale target has 0 clicks and page-average position worse than
+  20.0, or the publication creates an evidence, intent-overlap, or technical
+  regression.
+- Stop criteria: Stop for canonical, hreflang, sitemap, indexability, Article
+  or BreadcrumbList schema, publication-date, maintained-source,
+  endorsement-clarity, visible-FAQ, locale-routing, CJK-rendering, direct-200,
+  or standalone-utility regression.
+- 24h readout: pending
+- 7d readout: pending
+- W2 readout: pending
+- W4 readout: pending
+- W8 readout: pending
+- Result: pending
+- Decision: refresh
+- Next step: Implement the bounded approved refresh, verify it, publish through
+  PR and Vercel, then start the measurement clock from production completion.
+- Approval: At `2026-08-02T04:14:53Z`, after reviewing the exact three-language
+  scope, the user explicitly approved implementation, build, PR, merge,
+  automatic Vercel deployment, and read-only production verification.
+- Excluded actions: request indexing, GSC validation, paid OpenSEO actions,
+  rank-tracking setup, external posts, paid acquisition, synthetic events,
+  analytics mutation, and metric-definition changes.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-01-karpathy-llm-wiki-locales-refresh local preparation at 2026-08-02T04:34:55Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-01-karpathy-llm-wiki-locales-refresh
+- Observed at: 2026-08-02T04:34:55Z
+- Readout: correction
+- Status: active
+- Evidence: The approved bounded refresh is implemented on the existing
+  English, zh-TW, and zh-CN canonical family. It exposes Karpathy LLM Wiki and
+  AI knowledge-base intent in titles, metadata, first answers, maintained
+  source-backed sections, visible FAQ, and same-locale Learn routing without
+  adding a URL. Publication dates remain `2026-06-24` for English and
+  `2026-07-04` for both Mandarin locales; all three modification dates are
+  `2026-08-01`. The copy distinguishes Karpathy's public pattern from any
+  endorsement of Wenlan.
+- Verification: `pnpm test:seo` passed `222/222`; `pnpm lint`,
+  `pnpm build`, `pnpm seo:technical:built`, `pnpm seo:goal:check`, and
+  `git diff --check` passed. The built audit checked 26 redirects, 7 noindex
+  headers, 117 sitemap locations, 21 required locations and HTML pages, and
+  all 121 built HTML artifacts for absence of `FAQPage`. Fresh English,
+  zh-TW, and zh-CN renders at 393px and 1274px had no document overflow,
+  clipping, or CJK phrase break. A separate 320px zh-TW check reported
+  `clientWidth = scrollWidth = 314`; the long Karpathy phrase is allowed to
+  wrap below 361px instead of creating overflow.
+- Result: pending
+- Decision: merge
+- Next step: Complete the approved commit, PR, merge, Vercel deployment, and
+  read-only production verification, then replace the pre-publish sentinel
+  with the production completion time and begin the measurement clock.
+<!-- EXPERIMENT-RECORD:END -->

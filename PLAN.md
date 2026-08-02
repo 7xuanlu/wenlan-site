@@ -293,6 +293,29 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   now live and measuring, the production slot is open, and its actual 24-hour
   boundary is after `2026-08-03T02:42:26Z`. No indexing request or GSC
   validation was submitted.
+- At `2026-08-02T04:14:53Z`, the due 24-hour readout for
+  `EXP-2026-08-01-zhtw-llm-wiki-v2-refresh` found no complete authenticated
+  post-deploy GSC or Vercel window. Its five-impression exposure guard was not
+  met, so the result is inconclusive rather than success or failure. The live
+  technical, canonical, hreflang, schema, sitemap, source, FAQ-policy, and
+  visible-content floor remained green. The intervention is stopped and
+  superseded before another change touches the same canonical family.
+- At `2026-08-02T04:14:53Z`, the user approved implementation, build, PR,
+  merge, automatic Vercel deployment, and read-only production verification
+  for `EXP-2026-08-01-karpathy-llm-wiki-locales-refresh`. The bounded change
+  refreshes the existing English, zh-TW, and zh-CN LLM Wiki canonicals around
+  the co-primary Karpathy LLM Wiki and AI knowledge-base intent. It creates no
+  new URL. Request indexing, GSC validation, paid OpenSEO actions, external
+  posts, paid acquisition, synthetic events, analytics mutation, and metric
+  changes remain excluded. This approved preparation occupies the single
+  production slot until production verification.
+- At `2026-08-02T04:34:55Z`, the three-language refresh completed local
+  implementation and verification. The experiment is active and still
+  occupies the production slot until the approved PR, merge, Vercel
+  deployment, and production checks complete. The local gate passed 222 SEO
+  tests, lint, build, the built technical audit, the Goal verifier, diff
+  hygiene, and English, zh-TW, and zh-CN responsive rendering including a
+  separate 320px no-overflow check.
 - The weekly window is a reporting boundary, not a publish gate. Only one
   website change may be in `approved` or `active` preparation at a time;
   production-verified `live`, `measuring`, and `extended` cohorts continue
@@ -330,6 +353,12 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
+  `EXP-2026-08-01-karpathy-llm-wiki-locales-refresh` is active and occupies
+  the single production slot. It refreshes only the existing English, zh-TW,
+  and zh-CN LLM Wiki canonical family, keeps LLM Wiki and AI knowledge base
+  co-primary, and exposes the independently corroborated Karpathy modifier
+  without implying an endorsement. Publication must retain independent
+  five-impression per-locale exposure guards.
   `EXP-2026-08-01-document-knowledge-base-guide` is live,
   production-verified, and measuring; it no longer consumes the single
   production slot. Its
@@ -347,9 +376,9 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   production completed at `2026-08-01T21:09:50Z`. English remains unchanged.
   Indexing, validation, external publication, paid acquisition, synthetic
   events, and account mutation remain separately approval-gated.
-  `EXP-2026-08-01-zhtw-llm-wiki-v2-refresh` is live,
-  production-verified, and measuring; it no longer consumes the single
-  production slot. PR #101 merged at `2026-08-01T04:04:21Z` as
+  `EXP-2026-08-01-zhtw-llm-wiki-v2-refresh` is stopped and superseded after an
+  inconclusive 24-hour readout with no complete authenticated post-deploy
+  window. PR #101 merged at `2026-08-01T04:04:21Z` as
   `ee72f1dea9bd46e93db220fb70cca420d4684f56`; Vercel production completed at
   `2026-08-01T04:05:07Z`. No repeat indexing request is due.
   `EXP-2026-07-29-docs-github-acquisition` is live,
@@ -819,34 +848,29 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-01-document-knowledge-base-guide` is live,
-production-verified, and measuring; the single production slot is open. It
-adds one
-non-overlapping canonical family in English, zh-TW, and zh-CN for the
-document-ingestion, supported-source, repeatable-sync, scanned-PDF,
-read-only-Obsidian, distill, citation, lint, and review workflow. The existing
-LLM-wiki and source-backed knowledge-base pages remain the conceptual
-canonicals and receive contextual links rather than duplicated answers.
+`EXP-2026-08-01-karpathy-llm-wiki-locales-refresh` is active and occupies
+the single production slot. It refreshes the existing English, zh-TW, and
+zh-CN LLM Wiki canonical family, keeps LLM Wiki and AI knowledge base
+co-primary, and exposes the independently corroborated Karpathy modifier
+without implying that Andrej Karpathy endorsed Wenlan. It creates no new URL.
 
-The authenticated pre-publish range is `2026-07-03..2026-07-30`. None of the
-three new URLs appears in its GSC or Vercel target-page exports, so their
-baselines are unavailable rather than zero. Same-range GSC property totals are
-10 clicks and 660 impressions; visible-query totals are 2 clicks and 111
-impressions; the visibility gap is 8 clicks and 549 impressions. Vercel
-reports 1,468 visitors and 1,745 pageviews, while GitHub REST separately
-reports 46 stars. Each locale independently requires 5 GSC target-page
-impressions after its first confirmed crawl or index date; locale exposure is
-never pooled.
+The authenticated pre-publish range is `2026-07-03..2026-07-30`. GSC property
+totals are 10 clicks and 660 impressions; visible-query totals are 2 clicks
+and 111 impressions; the visibility gap is 8 clicks and 549 impressions.
+Vercel separately reports 1,468 visitors and 1,745 pageviews. The target
+family has no complete post-August-1 authenticated page window, so missing
+locale rows remain unavailable rather than zero. Each locale independently
+requires 5 target-page GSC impressions; locale exposure is never pooled.
 
-PR #114 merged at `2026-08-02T02:41:40Z` as
-`8577a2730946a110ac6d6d26d15e27c4e250505c`, and Vercel completed production
-at `2026-08-02T02:42:26Z`. That exact time starts the 24h, 7d, W2, W4, and W8
-clocks. The deployed technical audit, live locale matrix, and fresh English,
-zh-TW, and zh-CN `393px` and `1280px` renders pass. Request indexing, GSC
-validation, paid OpenSEO work, rank tracking, external publication, paid
-acquisition, synthetic events, and metric changes remain outside the
-approval. The complete immutable experiment contract and verification are in
-`docs/seo-audits/2026-08-01-tool-boundaries-and-document-knowledge-base-gate.md`.
+The user approved implementation, build, PR, merge, automatic Vercel
+deployment, and read-only production verification at
+`2026-08-02T04:14:53Z`. Request indexing, GSC validation, paid OpenSEO work,
+rank tracking, external posts, paid acquisition, synthetic events, analytics
+mutation, and metric changes remain outside the approval. Local preparation
+completed at `2026-08-02T04:34:55Z` with 222 SEO tests, lint, build, built
+technical checks, the Goal verifier, diff hygiene, and three-locale responsive
+rendering green. The complete demand gate is in
+`docs/seo-audits/2026-08-01-karpathy-llm-wiki-three-language-demand.md`.
 
 ### Measuring experiment: Obsidian knowledge-base locales
 
@@ -1356,6 +1380,23 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
   GSC reporting latency, then deliver the terminal decision.
 
 ### Next decision
+
+The fresh three-language Karpathy / LLM Wiki gate completed at
+`2026-08-02T03:52:06Z`. Signed-in Trends related-query panels now independently
+repeat `Karpathy`, `LLM Wiki`, `Obsidian`, and `GitHub` across the United
+States, Taiwan, and a Worldwide Simplified-Chinese phrase comparison. OpenSEO's
+prior native-unit results, English Reddit and maintained OSS, and public
+Simplified-Chinese community wording corroborate the same family. Existing
+coverage rejects another URL: the clean gap is that `Karpathy` appears only in
+reference labels, not in the three localized LLM Wiki titles, first answers,
+section headings, or internal-link anchors. The due zh-TW readout at
+`2026-08-02T04:14:53Z` was inconclusive because no complete authenticated
+post-deploy GSC or Vercel window exists, and that intervention is now stopped
+and superseded. The user approved the bounded existing-canonical
+three-language refresh; implement, verify, publish, and record its Vercel
+production completion as the new measurement boundary. The complete
+provenance and candidate gate are in
+`docs/seo-audits/2026-08-01-karpathy-llm-wiki-three-language-demand.md`.
 
 The document knowledge-base guide family is production-verified and measuring
 from `2026-08-02T02:42:26Z`. Run its actual 24-hour technical and evidence

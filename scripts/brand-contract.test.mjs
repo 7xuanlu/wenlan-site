@@ -384,15 +384,16 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.notEqual(memoryTypesStart, -1);
   assert.match(
     article,
-    /title:\s*"What Is an LLM Wiki\? Architecture, Workflow, and Failure Modes"/,
+    /title:\s*"Karpathy LLM Wiki: Build a Source-Backed AI Knowledge Base"/,
   );
   assert.match(
     article,
-    /metaTitle:\s*"LLM Wiki for AI Agents: Architecture & Workflow \| Wenlan"/,
+    /metaTitle:\s*"Karpathy LLM Wiki & AI Knowledge Base \| Wenlan"/,
   );
   assert.match(article, /publishedAt:\s*"2026-06-24"/);
-  assert.match(article, /updatedAt:\s*"2026-07-27"/);
-  assert.match(article, /heading:\s*"What is an LLM wiki\?"/);
+  assert.match(article, /updatedAt:\s*"2026-08-01"/);
+  assert.match(article, /heading:\s*"The Karpathy LLM Wiki pattern"/);
+  assert.match(article, /does not imply that Karpathy endorses Wenlan/);
   assert.match(article, /heading:\s*"The five-minute LLM-wiki protocol"/);
   assert.match(article, /\/brief <topic>/);
   assert.match(article, /\/recall <question>/);
