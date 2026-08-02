@@ -5963,3 +5963,30 @@ increase for that experiment.
 - Excluded actions: no request indexing, GSC validation, external publication,
   paid action, synthetic event, analytics mutation, or metric-definition
   change.
+
+### 2026-08-02T08:22:13Z — tool-selection CJK correction production verification
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-02-ai-knowledge-base-tool-selection`
+- Status: live and measuring; same-experiment correction production-verified
+- Publication: PR #119 squash-merged at `2026-08-02T08:21:25Z` as
+  `cde12da7226f8129822ae45fa61a8cc85592adce`; Vercel production completed at
+  `2026-08-02T08:22:13Z`.
+- Deployed technical evidence: `pnpm seo:technical:deployed` passed 120
+  sitemap URLs, 24 key pages, six utility noindex headers, 120 sitemap-page
+  `FAQPage` absence checks, 25 redirects, six bridge-host redirects, and
+  old-URL sitemap absence.
+- Rendered evidence: fresh production Chrome device emulation covered the
+  English, zh-TW, and zh-CN routes at exact 393px and 1440px CSS viewports.
+  Root and body scroll widths matched every viewport, H1 bounds stayed within
+  their content columns, complete pages rendered, and the first FAQ on every
+  route opened with a non-empty answer. `AI 知識庫` / `AI 知识库`, `知識庫` /
+  `知识库`, `驗收資料` / `验收资料`, and `8 項` / `8 项` remained intact.
+- Interpretation: the focused render correction is production-verified. It is
+  not crawl, ranking, click, visitor, or causal evidence, and does not move the
+  original `2026-08-02T07:55:01Z` measurement boundary.
+- Decision: close the correction path and wait for the experiment's declared
+  24-hour and 7-day evidence boundaries.
+- Excluded actions: no request indexing, GSC validation, external publication,
+  paid action, synthetic event, analytics mutation, or metric-definition
+  change.

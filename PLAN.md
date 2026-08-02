@@ -2030,3 +2030,18 @@ and FAQ-open states rendered, and `AI 知識庫` / `AI 知识库`, `知識庫` /
 `知识库`, `驗收資料` / `验收资料`, and `8 項` / `8 项` no longer split
 inside their semantic phrases. No visible copy, metadata, schema, canonical,
 or experiment metric changed.
+
+At `2026-08-02T08:21:25Z`, PR #119 squash-merged the focused correction as
+`cde12da7226f8129822ae45fa61a8cc85592adce`; Vercel production completed at
+`2026-08-02T08:22:13Z`. The deployed technical checker again passed 120
+sitemap URLs, 24 key pages, six utility noindex headers, 120 sitemap-page
+`FAQPage` absence checks, 25 redirects, six bridge-host redirects, and
+old-URL sitemap absence. Fresh production Chrome device emulation covered all
+three routes at exact 393px and 1440px CSS viewports. Root and body scroll
+widths matched every viewport, titles stayed inside their content columns,
+complete pages rendered, all first FAQs opened with non-empty answers, and the
+four protected CJK phrase families remained intact. The correction is now
+production-verified. The experiment remains live and measuring from its
+original `2026-08-02T07:55:01Z` boundary; no indexing request, GSC validation,
+external publication, paid action, synthetic event, analytics mutation, or
+metric-definition change occurred.
