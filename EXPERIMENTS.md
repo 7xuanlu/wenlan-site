@@ -5655,3 +5655,34 @@ increase for that experiment.
 - External actions: none; all checks were read-only. No website edit, push, PR,
   merge, deployment, indexing request, GSC validation, external publication,
   or analytics mutation occurred.
+
+### 2026-08-02T06:41:10Z — acquisition hierarchy evidence guard
+
+- Record type: campaign-observation
+- Related experiment: none; deterministic measurement-control improvement
+- Change: the local weekly report generator now emits an `Acquisition
+  Hierarchy Validation` table from authenticated query-plus-page evidence. It
+  reports protected acquisition layer, query, observed owner pages, configured
+  owner, query impressions, joined owner impressions, their visibility
+  difference, ownership state, and decision without pooling locales or sources.
+- Guard: a visible split or mismatch is a routing-review signal rather than
+  proof of cannibalization. Missing rows are unavailable rather than zero, and
+  joined evidence below the existing three-impression query-action floor waits.
+- Current evidence: the preserved authenticated `2026-07-03..2026-07-30`
+  inputs expose only `llm wiki 2.0` in the protected acquisition set: 1 query
+  impression, 1 joined impression, and one observed owner `/zh-TW` versus the
+  configured English LLM Wiki owner. No protected query is visibly split over
+  multiple pages.
+- Result: inconclusive. The only protected row is below the diagnostic floor,
+  and the evidence range predates the August 1 routing and localized content
+  changes.
+- Decision: keep the current hierarchy unchanged and rerun the same section
+  with the next authenticated query-page window. A future above-floor visible
+  split or mismatch nominates routing review; an aligned row supports only the
+  visible query, not the hidden property total.
+- Verification: focused split-owner and below-floor tests pass; the generated
+  current-state report is
+  `/tmp/wenlan-seo/2026-08-01-hierarchy-validation.md`.
+- External actions: none. No website edit, new experiment, push, PR, merge,
+  deployment, indexing request, GSC validation, external publication, paid
+  action, synthetic event, or metric-definition change occurred.

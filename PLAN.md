@@ -1867,3 +1867,24 @@ official release or tag exists and its artifacts can be verified. This
 read-only observation made no website edit, push, PR, merge, deployment,
 indexing request, validation submission, external publication, or analytics
 mutation.
+
+#### Acquisition hierarchy evidence guard
+
+The local weekly report generator now prepares an explicit deterministic
+`Acquisition Hierarchy Validation` section from the authenticated GSC
+query-plus-page join. It keeps query impressions, joined owner impressions,
+their visibility difference, observed owner pages, configured owner, and the
+decision separate. A visible split or mismatch is only a routing-review signal,
+not proof of cannibalization; a missing row is unavailable, not zero. Protected
+locale rows are never pooled, and joined evidence below the existing
+three-impression query-action floor remains `wait`.
+
+Running the prepared generator against the latest preserved authenticated
+`2026-07-03..2026-07-30` inputs produced one privacy-visible protected row:
+`llm wiki 2.0` has one query impression and one joined impression on `/zh-TW`,
+rather than the configured English LLM Wiki owner. No protected query is
+visibly split across multiple pages. Because the only row is below the
+diagnostic floor and the range predates the August 1 routing and localized
+content changes, the hierarchy remains unproven rather than wrong. Do not edit
+or create a page from this observation; rerun the same deterministic section
+with the next authenticated query-page window.

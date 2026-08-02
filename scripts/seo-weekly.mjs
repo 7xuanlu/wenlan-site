@@ -166,6 +166,7 @@ const GENERATED_SECTION_HEADINGS = new Set([
   "Umami Evidence",
   "Top Actions",
   "Query Action Queue",
+  "Acquisition Hierarchy Validation",
   "GSC Click Opportunity Queue",
   "Page Action Queue",
   "Do Not Write Yet Gate",
@@ -1379,6 +1380,10 @@ function makeMarkdown({
   const groups = groupTotals(queries);
   const rankedQueries = rankRows(queries);
   const rankedPages = rankRows(pages);
+  const acquisitionHierarchyRows = makeAcquisitionHierarchyRows(
+    queries,
+    queryPages,
+  );
   const clickOpportunities = makeClickOpportunities(pages, queryPages);
   const topActions = rankRows([...queries, ...pages])
     .filter((row) => row.action !== "wait" && isTopActionCandidate(row))
@@ -1473,6 +1478,8 @@ ${queryPages.hasData
     : `| Query | Query group | Current page | Impressions | Clicks | CTR | Avg position | Recommended action | Diagnosis |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- |`}
 ${rankedQueries.map(queryRow).join("\n")}
+
+${makeAcquisitionHierarchyMarkdown(acquisitionHierarchyRows, queryPages.hasData)}
 
 ${queryPages.hasData ? makeClickOpportunityMarkdown(clickOpportunities) : ""}
 
@@ -2036,6 +2043,98 @@ function groupTotals(rows) {
     totals.set(row.group, current);
   }
   return [...totals.values()].sort((a, b) => b.impressions - a.impressions);
+}
+
+function acquisitionHierarchyLayer(query) {
+  const classified = classifyQuery(query);
+  if (classified.group === "AI knowledge base / wiki") {
+    return "Core acquisition";
+  }
+  if (isProtectedAcquisitionQuery(query)) {
+    return "Tool/workflow bridge";
+  }
+  return null;
+}
+
+function makeAcquisitionHierarchyRows(queries, queryPageEvidence) {
+  if (!queryPageEvidence.hasData) return [];
+
+  const ownershipPriority = new Map([
+    ["visible split", 1],
+    ["visible mismatch", 2],
+    ["owner hidden", 3],
+    ["visible aligned", 4],
+  ]);
+
+  return queries
+    .map((row) => {
+      const layer = acquisitionHierarchyLayer(row.query);
+      if (!layer) return null;
+
+      const joinedImpressions = row.observedPages.reduce(
+        (sum, candidate) => sum + candidate.impressions,
+        0,
+      );
+      const visibilityGap = row.impressions - joinedImpressions;
+      let ownership = "owner hidden";
+      if (row.observedPages.length > 1) {
+        ownership = "visible split";
+      } else if (row.observedPages.length === 1) {
+        ownership = row.observedPages[0].page === row.configuredTarget
+          ? "visible aligned"
+          : "visible mismatch";
+      }
+
+      const belowFloor = joinedImpressions < MIN_QUERY_ACTION_IMPRESSIONS;
+      const decision = belowFloor
+        ? `wait — below ${MIN_QUERY_ACTION_IMPRESSIONS}-impression joined floor`
+        : ownership === "visible split" || ownership === "visible mismatch"
+          ? "query-page-review"
+          : ownership === "visible aligned"
+            ? "keep"
+            : "wait — owner unavailable";
+
+      return {
+        query: row.query,
+        layer,
+        configuredTarget: row.configuredTarget,
+        observedPages: row.observedPages,
+        queryImpressions: row.impressions,
+        joinedImpressions,
+        visibilityGap,
+        ownership,
+        decision,
+      };
+    })
+    .filter(Boolean)
+    .sort(
+      (a, b) =>
+        (a.layer === "Core acquisition" ? 0 : 1) -
+          (b.layer === "Core acquisition" ? 0 : 1) ||
+        (ownershipPriority.get(a.ownership) ?? 99) -
+          (ownershipPriority.get(b.ownership) ?? 99) ||
+        b.joinedImpressions - a.joinedImpressions ||
+        a.query.localeCompare(b.query),
+    );
+}
+
+function makeAcquisitionHierarchyMarkdown(rows, hasQueryPageData) {
+  const tableRows = rows.map((row) => {
+    const observedOwners = formatObservedPages(row.observedPages);
+    return `| ${row.layer} | \`${escapePipe(row.query)}\` | ${observedOwners} | ${formatPage(row.configuredTarget)} | ${row.queryImpressions} | ${row.joinedImpressions} | ${row.visibilityGap} | ${row.ownership} | ${row.decision} |`;
+  });
+
+  const availability = hasQueryPageData
+    ? "Only privacy-visible protected acquisition rows are evaluated. A split or mismatch is a routing-review signal, not proof of cannibalization; an absent row is unavailable, not zero. The query-minus-join visibility gap remains explicit, and no locale or source is pooled."
+    : "Authenticated query-page evidence is unavailable, so hierarchy ownership cannot be evaluated from this report.";
+
+  return `## Acquisition Hierarchy Validation
+
+${availability}
+
+| Layer | Query | Observed owner pages | Configured owner | Query impressions | Joined owner impressions | Query-minus-join visibility gap | Ownership state | Decision |
+| --- | --- | --- | --- | ---: | ---: | ---: | --- | --- |
+${tableRows.join("\n") || "| - | - | - | - | 0 | 0 | 0 | unavailable | wait |"}`;
 }
 
 function makeClickOpportunities(pages, queryPageEvidence) {

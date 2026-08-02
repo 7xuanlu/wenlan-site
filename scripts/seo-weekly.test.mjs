@@ -2610,6 +2610,7 @@ test("seo weekly generator separates observed query pages from configured target
         [
           "Query,Clicks,Impressions,CTR,Position,Start date,End date,Source",
           "llm wiki 2.0,0,3,0%,13.0,2026-07-03,2026-07-30,Search Console API",
+          "ai knowledge base,0,1,0%,22.0,2026-07-03,2026-07-30,Search Console API",
         ].join("\n"),
         "utf8",
       ),
@@ -2628,14 +2629,14 @@ test("seo weekly generator separates observed query pages from configured target
           startDate: "2026-07-03",
           endDate: "2026-07-30",
           source: "Search Console API",
-          queryRows: 1,
+          queryRows: 2,
           pageRows: 1,
-          queryPageRows: 1,
+          queryPageRows: 3,
           propertyTotals: {
             clicks: 0,
-            impressions: 3,
+            impressions: 4,
             ctr: 0,
-            position: 13,
+            position: 15.25,
             aggregationType: "byProperty",
           },
         }),
@@ -2656,14 +2657,31 @@ test("seo weekly generator separates observed query pages from configured target
             position: "average position",
           },
           responseAggregationType: "byPage",
-          rowCount: 1,
+          rowCount: 3,
           rows: [
             {
               keys: ["llm wiki 2.0", "https://wenlan.app/zh-TW"],
               clicks: 0,
-              impressions: 3,
+              impressions: 2,
               ctr: 0,
               position: 13,
+            },
+            {
+              keys: ["llm wiki 2.0", "https://wenlan.app/learn"],
+              clicks: 0,
+              impressions: 1,
+              ctr: 0,
+              position: 17,
+            },
+            {
+              keys: [
+                "ai knowledge base",
+                "https://wenlan.app/learn/ai-work-memory-vs-knowledge-base",
+              ],
+              clicks: 0,
+              impressions: 1,
+              ctr: 0,
+              position: 22,
             },
           ],
         }),
@@ -2699,9 +2717,22 @@ test("seo weekly generator separates observed query pages from configured target
     );
     assert.match(
       report,
-      /\| `llm wiki 2\.0` \| AI knowledge base \/ wiki \| `\/zh-TW` \| `\/learn\/distilled-wiki-pages-ai-memory` \|/,
+      /\| `llm wiki 2\.0` \| AI knowledge base \/ wiki \| `\/zh-TW` \(2\)<br>`\/learn` \(1\) \| `\/learn\/distilled-wiki-pages-ai-memory` \|/,
     );
     assert.match(report, /Observed GSC page differs from configured target/);
+    assert.match(report, /## Acquisition Hierarchy Validation/);
+    assert.match(
+      report,
+      /\| Core acquisition \| `llm wiki 2\.0` \| `\/zh-TW` \(2\)<br>`\/learn` \(1\) \| `\/learn\/distilled-wiki-pages-ai-memory` \| 3 \| 3 \| 0 \| visible split \| query-page-review \|/,
+    );
+    assert.match(
+      report,
+      /A split or mismatch is a routing-review signal, not proof of cannibalization/,
+    );
+    assert.match(
+      report,
+      /\| Core acquisition \| `ai knowledge base` \| `\/learn\/ai-work-memory-vs-knowledge-base` \| `\/learn\/ai-work-memory-vs-knowledge-base` \| 1 \| 1 \| 0 \| visible aligned \| wait — below 3-impression joined floor \|/,
+    );
     assert.match(report, /## GSC Click Opportunity Queue/);
     assert.match(report, /`\/zh-TW` \| eligible .*`llm wiki 2\.0`/);
     assert.doesNotMatch(
