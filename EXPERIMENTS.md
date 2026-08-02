@@ -5475,3 +5475,49 @@ increase for that experiment.
   read-only production verification, then replace the pre-publish sentinel
   with the production completion time and begin the measurement clock.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-01-karpathy-llm-wiki-locales-refresh production verification at 2026-08-02T04:43:17Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-01-karpathy-llm-wiki-locales-refresh
+- Observed at: 2026-08-02T04:43:17Z
+- Readout: correction
+- Status: measuring
+- Publish date: 2026-08-01
+- Index date: not-indexed
+- Evidence: PR #116 merged at `2026-08-02T04:39:10Z` as
+  `93c943637e8e7dad4db881fd2564b18abca4a208`; its Vercel production status
+  changed to `Deployment has completed` at `2026-08-02T04:39:55Z`.
+- Technical verification: The deployed audit passed robots, 117 sitemap URLs,
+  21 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence,
+  25 redirects, six bridge-host redirects, and old-URL exclusion. All three
+  target routes return direct `200`, exact self-canonicals, `index, follow`,
+  reciprocal `en-US`, `zh-TW`, `zh-CN`, and `x-default` alternates, Article
+  and BreadcrumbList schema, and no `FAQPage`; all three canonicals remain in
+  the deployed sitemap.
+- Content and render verification: Production exposes the intended English,
+  Traditional-Chinese, and Simplified-Chinese titles, first answers, Karpathy
+  source attribution, and endorsement distinction. English retains
+  `datePublished: 2026-06-24`; zh-TW and zh-CN retain
+  `datePublished: 2026-07-04`; all three emit `dateModified: 2026-08-01`.
+  Fresh production renders at 393px report `scrollWidth = clientWidth = 387`
+  for all locales, with the protected Mandarin Karpathy phrase on one line.
+  The 320px zh-TW check reports `scrollWidth = clientWidth = 314` and allows
+  that long phrase to wrap rather than overflow.
+- Measurement boundary: The latest authenticated GSC and Vercel evidence is
+  still the pre-deploy `2026-07-03..2026-07-30` range. This production gate
+  establishes no new crawl, index date, impression, click, visitor, CTA,
+  GitHub-star change, or causality. Each locale retains its independent five
+  GSC target-page-impression minimum-exposure guard; missing rows remain
+  unavailable rather than zero.
+- Unperformed gated actions: No request indexing, GSC validation, paid
+  OpenSEO action, rank-tracking setup, external post, paid acquisition,
+  synthetic event, analytics mutation, or metric-definition change was
+  performed.
+- Result: pending
+- Decision: wait
+- Next step: Run the actual 24-hour technical/evidence readout after
+  `2026-08-03T04:39:55Z`, using the latest authenticated weekly evidence when
+  available and without starting another overlapping refresh of this family.
+<!-- EXPERIMENT-RECORD:END -->

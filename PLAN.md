@@ -316,6 +316,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   tests, lint, build, the built technical audit, the Goal verifier, diff
   hygiene, and English, zh-TW, and zh-CN responsive rendering including a
   separate 320px no-overflow check.
+- PR #116 merged at `2026-08-02T04:39:10Z` as
+  `93c943637e8e7dad4db881fd2564b18abca4a208`, and Vercel production completed
+  at `2026-08-02T04:39:55Z`. The deployed technical audit, exact three-locale
+  canonical and schema matrix, sitemap and hreflang membership, source and
+  endorsement copy, and 393px plus 320px production renders are green. The
+  experiment is measuring, the production slot is open, and its actual
+  24-hour boundary is after `2026-08-03T04:39:55Z`.
 - The weekly window is a reporting boundary, not a publish gate. Only one
   website change may be in `approved` or `active` preparation at a time;
   production-verified `live`, `measuring`, and `extended` cohorts continue
@@ -353,8 +360,9 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-01-karpathy-llm-wiki-locales-refresh` is active and occupies
-  the single production slot. It refreshes only the existing English, zh-TW,
+  `EXP-2026-08-01-karpathy-llm-wiki-locales-refresh` is production-verified
+  and measuring; it no longer occupies the single production slot. It
+  refreshes only the existing English, zh-TW,
   and zh-CN LLM Wiki canonical family, keeps LLM Wiki and AI knowledge base
   co-primary, and exposes the independently corroborated Karpathy modifier
   without implying an endorsement. Publication must retain independent
@@ -848,11 +856,12 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-01-karpathy-llm-wiki-locales-refresh` is active and occupies
-the single production slot. It refreshes the existing English, zh-TW, and
-zh-CN LLM Wiki canonical family, keeps LLM Wiki and AI knowledge base
-co-primary, and exposes the independently corroborated Karpathy modifier
-without implying that Andrej Karpathy endorsed Wenlan. It creates no new URL.
+`EXP-2026-08-01-karpathy-llm-wiki-locales-refresh` is production-verified and
+measuring; the single production slot is open. It refreshes the existing
+English, zh-TW, and zh-CN LLM Wiki canonical family, keeps LLM Wiki and AI
+knowledge base co-primary, and exposes the independently corroborated
+Karpathy modifier without implying that Andrej Karpathy endorsed Wenlan. It
+creates no new URL.
 
 The authenticated pre-publish range is `2026-07-03..2026-07-30`. GSC property
 totals are 10 clicks and 660 impressions; visible-query totals are 2 clicks
@@ -871,6 +880,14 @@ completed at `2026-08-02T04:34:55Z` with 222 SEO tests, lint, build, built
 technical checks, the Goal verifier, diff hygiene, and three-locale responsive
 rendering green. The complete demand gate is in
 `docs/seo-audits/2026-08-01-karpathy-llm-wiki-three-language-demand.md`.
+
+PR #116 merged at `2026-08-02T04:39:10Z` as
+`93c943637e8e7dad4db881fd2564b18abca4a208`, and Vercel production completed at
+`2026-08-02T04:39:55Z`. That exact time starts the 24h, 7d, W2, W4, and W8
+clocks. The deployed audit and live three-locale route, schema, sitemap,
+hreflang, visible-copy, 393px, and 320px checks pass. No new authenticated
+post-deploy GSC or Vercel window exists yet, so the result remains pending and
+no search or traffic lift is inferred.
 
 ### Measuring experiment: Obsidian knowledge-base locales
 
@@ -1393,9 +1410,10 @@ section headings, or internal-link anchors. The due zh-TW readout at
 `2026-08-02T04:14:53Z` was inconclusive because no complete authenticated
 post-deploy GSC or Vercel window exists, and that intervention is now stopped
 and superseded. The user approved the bounded existing-canonical
-three-language refresh; implement, verify, publish, and record its Vercel
-production completion as the new measurement boundary. The complete
-provenance and candidate gate are in
+three-language refresh. PR #116 is merged and production-verified from
+`2026-08-02T04:39:55Z`; wait for its actual 24-hour technical and evidence
+readout after `2026-08-03T04:39:55Z`, without inferring a crawl or SEO result
+from deployment. The complete provenance and candidate gate are in
 `docs/seo-audits/2026-08-01-karpathy-llm-wiki-three-language-demand.md`.
 
 The document knowledge-base guide family is production-verified and measuring
