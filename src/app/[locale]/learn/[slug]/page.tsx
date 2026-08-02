@@ -65,18 +65,24 @@ function sectionId(heading: string, index: number): string {
 }
 
 function renderProtectedCjkTerms(text: string) {
-  return text.split(/(AI 知識庫|AI 知识库|來源|来源)/g).map((part, index) =>
-    part === "AI 知識庫" ||
-    part === "AI 知识库" ||
-    part === "來源" ||
-    part === "来源" ? (
-      <span key={`${part}-${index}`} className="whitespace-nowrap">
-        {part}
-      </span>
-    ) : (
-      part
-    ),
-  );
+  return text
+    .split(/(Karpathy LLM Wiki：|AI 知識庫|AI 知识库|來源|来源)/g)
+    .map((part, index) =>
+      part === "Karpathy LLM Wiki：" ||
+      part === "AI 知識庫" ||
+      part === "AI 知识库" ||
+      part === "來源" ||
+      part === "来源" ? (
+        <span
+          key={`${part}-${index}`}
+          className="whitespace-nowrap max-[360px]:whitespace-normal"
+        >
+          {part}
+        </span>
+      ) : (
+        part
+      ),
+    );
 }
 
 function translatedArticleOrNotFound(locale: string, slug: string) {
@@ -156,7 +162,8 @@ export default async function LocalizedLearnSlugPage({
   const { locale: resolvedLocale, article } = translatedArticleOrNotFound(locale, slug);
   const chrome = chromeByLocale[resolvedLocale];
   const renderArticleText =
-    article.slug === "wenlan-vs-obsidian-ai-memory"
+    article.slug === "wenlan-vs-obsidian-ai-memory" ||
+    article.slug === "distilled-wiki-pages-ai-memory"
       ? renderProtectedCjkTerms
       : (text: string) => text;
 

@@ -21,14 +21,16 @@ const zhTWArticles = {
     slug: "distilled-wiki-pages-ai-memory",
     eyebrow: "概念",
     category: "Concepts",
-    title: "什麼是 LLM Wiki 知識庫？架構、RAG 對比與搭建方法",
+    title: "Karpathy LLM Wiki：如何搭建有來源的 AI 知識庫",
     description:
-      "LLM Wiki 知識庫把原始來源、可重用事實與持續更新的頁面分開，讓 AI 代理按需讀取有來源、可檢查的答案。",
-    metaTitle: "LLM Wiki 知識庫：架構、RAG 對比與搭建 | Wenlan",
+      "Karpathy LLM Wiki 模式把可信來源、原子知識與維護頁面分開，建立讓 AI 代理按需讀取的知識庫。",
+    metaTitle: "Karpathy LLM Wiki 與 AI 知識庫 | Wenlan",
     metaDescription:
-      "了解 LLM Wiki 知識庫和 RAG、Obsidian 的差異，並用來源、蒸餾、檢索與驗證流程搭建可持續更新的本地 AI 知識庫。",
+      "了解 Karpathy LLM Wiki 的架構、它和 RAG 的差異，以及來源頁面、Obsidian、驗證與持續更新如何配合。",
     keywords: [
       "LLM Wiki 知識庫",
+      "Karpathy LLM Wiki",
+      "Andrej Karpathy LLM Wiki",
       "AI 知識庫",
       "本地 AI 知識庫",
       "RAG vs LLM Wiki",
@@ -45,15 +47,16 @@ const zhTWArticles = {
     readingTime: "9 分鐘閱讀",
     audience: "正在搭建可由 AI 代理讀取、更新並檢查來源的本地知識庫的繁體中文使用者",
     heroBullets: [
-      "LLM Wiki 維護可重用的目前答案，不把聊天紀錄、檢索片段或筆記直接當成成品知識。",
+      "Karpathy LLM Wiki 模式維護可重用的目前答案，不把聊天紀錄、檢索片段或筆記直接當成成品知識。",
       "可靠架構會分開原始來源、原子事實、維護頁面與按需檢索。",
       "頁面需要保留 source IDs、過期原因和可檢查的修訂，而不是靜默覆蓋。",
     ],
     sections: [
       {
-        heading: "什麼是 LLM Wiki 知識庫",
+        heading: "Karpathy LLM Wiki 是什麼",
         body: [
-          "LLM Wiki 知識庫是供 AI 代理使用、也讓人能檢查的維護型知識層。它把文件、對話和檔案等來源整理成主題頁面，代理只在需要時載入相關答案，不必反覆重播整個資料庫或聊天紀錄。",
+          "Andrej Karpathy 用 LLM Wiki 描述一種把原始知識整理成精選、互相連結頁面的模式，讓 AI 代理只在需要時載入相關內容。本文把他的公開說明當作可維護來源，不代表 Karpathy 為 Wenlan 背書。",
+          "實作上，LLM Wiki 是供 AI 代理使用、也讓人能檢查的維護型 AI 知識庫。它把文件、對話和檔案等來源整理成主題頁面，不必反覆重播整個資料庫或聊天紀錄。",
           "它不只是讓 LLM 自動寫出一批 Markdown 筆記。真正有用的系統會把原始證據、可重用事實與目前解釋分開，保留來源和更新狀態；即使讀者不安裝 Wenlan，這套判斷標準也能用來評估自己的知識庫。",
         ],
         link: {
@@ -149,6 +152,11 @@ const zhTWArticles = {
       },
     ],
     faqs: [
+      {
+        question: "Karpathy LLM Wiki 的核心想法是什麼？",
+        answer:
+          "Andrej Karpathy 描述的是一組經過整理、彼此連結，並能由代理按需讀取的個人 wiki 頁面。重點是維護有用頁面及其結構，而不是每次載入沒有區分的完整資料庫；引用他的說明不代表他為 Wenlan 背書。",
+      },
       {
         question: "LLM Wiki 和 RAG 是同一種東西嗎？",
         answer:
@@ -676,14 +684,16 @@ const zhTWArticles = {
 const zhCNArticles = {
   "distilled-wiki-pages-ai-memory": {
     ...zhTWArticles["distilled-wiki-pages-ai-memory"],
-    title: "什么是 LLM Wiki 知识库？架构、RAG 对比与搭建方法",
+    title: "Karpathy LLM Wiki：如何搭建有来源的 AI 知识库",
     description:
-      "LLM Wiki 知识库把原始来源、可复用事实与持续更新的页面分开，让 AI 代理按需读取有来源、可检查的答案。",
-    metaTitle: "LLM Wiki 知识库：架构、RAG 对比与搭建 | Wenlan",
+      "Karpathy LLM Wiki 模式把可信来源、原子知识与维护页面分开，建立让 AI 代理按需读取的知识库。",
+    metaTitle: "Karpathy LLM Wiki 与 AI 知识库 | Wenlan",
     metaDescription:
-      "了解 LLM Wiki 知识库和 RAG、Obsidian 的区别，并用来源、蒸馏、检索与校验流程搭建可持续更新的本地 AI 知识库。",
+      "了解 Karpathy LLM Wiki 的架构、它和 RAG 的区别，以及来源页面、Obsidian、校验与持续更新如何配合。",
     keywords: [
       "LLM Wiki 知识库",
+      "Karpathy LLM Wiki",
+      "Andrej Karpathy LLM Wiki",
       "AI 知识库",
       "本地 AI 知识库",
       "RAG vs LLM Wiki",
@@ -695,19 +705,20 @@ const zhCNArticles = {
       "Wenlan 文澜",
     ],
     publishedAt: "2026-07-04",
-    updatedAt: "2026-07-29",
+    updatedAt: "2026-08-01",
     readingTime: "9 分钟阅读",
     audience: "正在搭建可由 AI 代理读取、更新并检查来源的本地知识库的中文用户",
     heroBullets: [
-      "LLM Wiki 维护可复用的当前答案，不把聊天记录、检索片段或笔记直接当成成品知识。",
+      "Karpathy LLM Wiki 模式维护可复用的当前答案，不把聊天记录、检索片段或笔记直接当成成品知识。",
       "可靠架构会分开原始来源、原子事实、维护页面与按需检索。",
       "页面需要保留 source IDs、变旧原因和可检查的修订，而不是静默覆盖。",
     ],
     sections: [
       {
-        heading: "什么是 LLM Wiki 知识库",
+        heading: "Karpathy LLM Wiki 是什么",
         body: [
-          "LLM Wiki 知识库是给 AI 代理使用、也让人能够检查的维护型知识层。它把文档、对话和文件等来源整理成主题页面，代理只在需要时载入相关答案，不必反复重放整个资料库或聊天历史。",
+          "Andrej Karpathy 用 LLM Wiki 描述一种把原始知识整理成精选、互相连接页面的模式，让 AI 代理只在需要时加载相关内容。本文把他的公开说明作为可维护来源，不代表 Karpathy 为 Wenlan 背书。",
+          "实现上，LLM Wiki 是给 AI 代理使用、也让人能够检查的维护型 AI 知识库。它把文档、对话和文件等来源整理成主题页面，不必反复重放整个资料库或聊天历史。",
           "它不只是让 LLM 自动写一批 Markdown 笔记。真正有用的系统会把原始证据、可复用事实与当前解释分开，保留来源和更新状态；即使读者不安装 Wenlan，这套判断标准也能用来评估自己的知识库。",
         ],
         link: {
@@ -803,6 +814,11 @@ const zhCNArticles = {
       },
     ],
     faqs: [
+      {
+        question: "Karpathy LLM Wiki 的核心想法是什么？",
+        answer:
+          "Andrej Karpathy 描述的是一组经过整理、彼此连接，并能由代理按需读取的个人 wiki 页面。重点是维护有用页面及其结构，而不是每次加载没有区分的完整资料库；引用他的说明不代表他为 Wenlan 背书。",
+      },
       {
         question: "LLM Wiki 和 RAG 是同一种东西吗？",
         answer:

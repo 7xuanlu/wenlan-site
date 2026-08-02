@@ -591,14 +591,18 @@ const baseArticles: LearnArticle[] = [
     slug: "distilled-wiki-pages-ai-memory",
     eyebrow: "Concept",
     category: "Concepts",
-    title: "What Is an LLM Wiki? Architecture, Workflow, and Failure Modes",
+    title: "Karpathy LLM Wiki: Build a Source-Backed AI Knowledge Base",
     description:
-      "An LLM wiki gives AI agents maintained, source-backed pages they can load on demand instead of replaying a whole vault or chat history.",
-    metaTitle: "LLM Wiki for AI Agents: Architecture & Workflow | Wenlan",
+      "The Karpathy LLM Wiki pattern turns trusted sources into maintained AI knowledge-base pages that agents can load on demand.",
+    metaTitle: "Karpathy LLM Wiki & AI Knowledge Base | Wenlan",
     metaDescription:
-      "Learn how an LLM wiki for AI agents differs from RAG and notes, then use a source-backed workflow with setup, checks, and failure-mode repairs.",
+      "Learn the Karpathy LLM Wiki pattern, how it differs from RAG, and how source-backed pages, Obsidian, checks, and refreshes fit together.",
     keywords: [
       "LLM wiki",
+      "Karpathy LLM wiki",
+      "Andrej Karpathy LLM wiki",
+      "AI knowledge base",
+      "source-backed AI knowledge base",
       "LLM wiki for AI agents",
       "LLM wiki for AI work",
       "LLM wiki architecture",
@@ -608,26 +612,24 @@ const baseArticles: LearnArticle[] = [
       "Claude Code LLM wiki",
       "source-backed AI work wiki",
       "distilled wiki pages",
-      "AI memory distillation",
-      "source-backed AI memory",
       "AI work wiki",
-      "memory provenance",
     ],
     publishedAt: "2026-06-24",
-    updatedAt: "2026-07-27",
+    updatedAt: "2026-08-01",
     author: DEFAULT_AUTHOR,
     readingTime: "10 min read",
     audience: "People designing a maintained knowledge layer for Claude Code, Codex, Cursor, and other AI agents",
     heroBullets: [
-      "An LLM wiki maintains useful answers instead of treating raw notes, retrieved chunks, or chat logs as finished knowledge.",
+      "The Karpathy LLM Wiki pattern maintains useful answers instead of treating raw notes, retrieved chunks, or chat logs as finished knowledge.",
       "The architecture separates source material, atomic memory, maintained pages, and the index that loads only relevant context.",
       "A practical loop needs observable checks and repairs for stale links, contradictions, context bloat, and human edits.",
     ],
     sections: [
       {
-        heading: "What is an LLM wiki?",
+        heading: "The Karpathy LLM Wiki pattern",
         body: [
-          "An LLM wiki is a maintained knowledge layer for AI agents. It turns source material and durable work context into topic pages that an agent can load on demand, with enough provenance and maintenance state for a person to inspect why the current answer exists.",
+          "Andrej Karpathy described an LLM Wiki pattern for turning raw knowledge into curated, interconnected pages that an AI agent can load on demand. This article uses his public note as a maintained source for the pattern; it does not imply that Karpathy endorses Wenlan.",
+          "In practical terms, an LLM wiki is a maintained AI knowledge base. It turns source material and durable work context into topic pages with enough provenance and maintenance state for a person to inspect why the current answer exists.",
           "It is not simply a folder of AI-written notes. A useful LLM wiki separates raw evidence from reusable facts and maintained explanations, then gives each layer a different update rule. The result should remain useful even when the reader never installs the product used to build it.",
         ],
         bullets: [
@@ -760,6 +762,11 @@ source changes
       },
     ],
     faqs: [
+      {
+        question: "What is the Karpathy LLM Wiki idea?",
+        answer:
+          "Andrej Karpathy described a personal LLM wiki made of curated, interconnected pages that an agent can retrieve as needed. The durable idea is to maintain useful pages and their structure instead of repeatedly loading an undifferentiated archive. Citing his note does not imply an endorsement of Wenlan.",
+      },
       {
         question: "What is an LLM wiki?",
         answer:

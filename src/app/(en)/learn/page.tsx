@@ -67,8 +67,8 @@ const searchRoutes = [
     context: "concepts",
   },
   {
-    query: "LLM wiki for AI agents",
-    intent: "Turn trusted sources and durable memories into maintained pages with inspectable support.",
+    query: "Karpathy LLM wiki for AI agents",
+    intent: "Turn trusted sources and durable work context into a maintained AI knowledge base with inspectable support.",
     href: "/learn/distilled-wiki-pages-ai-memory",
     context: "concepts",
   },
