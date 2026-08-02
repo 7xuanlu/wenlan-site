@@ -5269,3 +5269,49 @@ increase for that experiment.
   production completion time, then schedule the 24-hour readout from that
   boundary.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-01-document-knowledge-base-guide production verification at 2026-08-02T02:43:57Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-01-document-knowledge-base-guide
+- Observed at: 2026-08-02T02:43:57Z
+- Readout: correction
+- Status: measuring
+- Publish date: 2026-08-01
+- Index date: not-indexed
+- Evidence: PR #114 merged at `2026-08-02T02:41:40Z` as
+  `8577a2730946a110ac6d6d26d15e27c4e250505c`; the attached Vercel production
+  deployment changed to `Deployment has completed` at
+  `2026-08-02T02:42:26Z`.
+- Technical verification: The live audit passed robots, 117 sitemap URLs, 21
+  key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+  redirects, six bridge-host redirects, 18 direct changed redirects, and
+  legacy-URL exclusions. The production locale matrix passed 25 intended
+  direct-200 routes and four expected 404 routes.
+- Locale and render verification: English, zh-TW, and zh-CN target routes
+  return their exact titles and visible document workflow. Fresh production
+  captures at `393px` and `1280px` have no horizontal overflow; every mobile
+  capture has `scrollWidth=clientWidth=393`. The CLI block contains
+  `wenlan status` and `wenlan sources add ~/Knowledge/project-docs`; setup copy
+  separates platform installation, plugin slash commands, and MCP-only client
+  tools. CJK headings and protected phrases have no blocking split.
+- Schema and source verification: The exact self-canonicals, reciprocal
+  hreflang, Article and BreadcrumbList schema, `datePublished: "2026-08-01"`,
+  `dateModified: "2026-08-01"`, maintained official references, visible FAQ,
+  and absence of `FAQPage` remain green.
+- Measurement boundary: This readout verifies production integrity only. It
+  does not establish a new crawl, index date, GSC impression or click, Vercel
+  visitor lift, CTA result, star attribution, or causality. The three locales
+  retain independent five-impression minimum-exposure guards; missing rows
+  remain unavailable rather than zero.
+- Unperformed gated actions: No request indexing, GSC validation, paid
+  OpenSEO action, rank-tracking setup, external publication, paid acquisition,
+  synthetic event, or metric-definition change was performed.
+- Result: pending
+- Decision: wait
+- Next step: Run the actual 24-hour technical/evidence readout after
+  `2026-08-03T02:42:26Z`. Keep the earlier Obsidian-locale heartbeat due after
+  `2026-08-02T21:09:50Z`, then reuse that same task for this later boundary;
+  do not create another automation.
+<!-- EXPERIMENT-RECORD:END -->
