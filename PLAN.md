@@ -368,10 +368,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-02-ai-knowledge-base-tool-selection` is in active local
-  preparation and consumes the single website preparation slot. It adds one
-  non-overlapping English, zh-TW, and zh-CN tool-selection canonical family;
-  publication and every external/shared-state action remain approval-gated.
+  `EXP-2026-08-02-ai-knowledge-base-tool-selection` is publication-approved
+  for its exact English, zh-TW, and zh-CN tool-selection canonical family.
+  The approved shared-state scope is limited to commit, Git push, PR creation
+  and merge, automatic Vercel deployment, and read-only production
+  verification. Request indexing, GSC validation, external publication, paid
+  action, synthetic events, analytics mutation, and metric changes remain
+  approval-gated.
   `EXP-2026-08-01-karpathy-llm-wiki-locales-refresh` is production-verified
   and measuring; it no longer occupies the single production slot. It
   refreshes only the existing English, zh-TW,
