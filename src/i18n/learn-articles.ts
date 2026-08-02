@@ -679,6 +679,133 @@ const zhTWArticles = {
       body: "安裝 Wenlan，加入一組可檢查的文件，再驗證同步、Page、引用與審查流程。",
     },
   },
+  "choose-ai-knowledge-base-tool": {
+    slug: "choose-ai-knowledge-base-tool",
+    eyebrow: "選型指南",
+    category: "Workflows",
+    title: "如何選 AI 知識庫工具：8 個真正重要的檢查",
+    description:
+      "先分清文件問答、RAG、筆記工具與維護型知識庫，再用來源、更新、審查、資料控制與實測結果選擇工具。",
+    metaTitle: "如何選 AI 知識庫工具：8 個檢查 | Wenlan",
+    metaDescription:
+      "用 8 個實際測試選擇 AI 知識庫工具，比較文件問答、RAG、本地筆記與跨 AI agent 維護知識的差異。",
+    keywords: [
+      "AI 知識庫工具",
+      "AI 知識庫軟體推薦",
+      "如何選 AI 知識庫",
+      "本地 AI 知識庫工具",
+      "開源 AI 知識庫",
+      "AI agent 知識庫",
+      "AI 知識庫比較",
+      "Wenlan 文瀾",
+    ],
+    publishedAt: "2026-08-02",
+    updatedAt: "2026-08-02",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分鐘閱讀",
+    audience: "正在選擇文件問答、RAG、本地筆記或跨 AI agent 知識系統的繁體中文使用者",
+    heroBullets: [
+      "先選操作模式，再比較功能清單。",
+      "用來源改變與衝突測試答案是否仍可追溯、可更新。",
+      "用自己的小型文件集對每個候選工具執行同一套驗收。",
+    ],
+    sections: [
+      {
+        heading: "先分清你需要哪一種 AI 知識庫",
+        body: [
+          "不要先問哪個工具最好。先判斷需要的是當次會話的文件上傳、針對一組文件的 RAG 問答、讓 AI 直接讀取筆記或 Markdown vault，還是跨會話與多個 agent 維護有來源的目前答案。",
+          "這四種模式可以組合，但解決的問題不同。把它們放在同一張功能表比較，通常會買到不符合實際工作方式的產品。",
+        ],
+      },
+      {
+        heading: "8 個真正重要的檢查",
+        body: ["用一小組具代表性的文件，先寫下預期答案，再對每個候選工具做相同測試。"],
+        bullets: [
+          "來源可追溯：重要答案能否開啟支持它的確切來源或引用？",
+          "更新狀態：來源改變後，哪些答案過期、哪些需要刷新是否看得見？",
+          "衝突與審查：矛盾證據會進入明確審查，還是被模型靜默改寫？",
+          "資料所有權與匯出：能否保留或匯出可讀檔案與歷史，不被單一服務綁住？",
+          "隱私邊界：哪些檔案、提示、檢索片段與模型呼叫會離開電腦？",
+          "Agent 互通：同一份知識能否供實際使用的 Claude Code、Codex、Cursor 或 ChatGPT 讀取？",
+          "輸入限制：真正支援哪些格式、掃描文件、資料夾、vault 與檔案大小？",
+          "可重複驗收：工具能否處理可回答、不可回答、跨來源三種問題，並在來源修改後得到正確結果？",
+        ],
+      },
+      {
+        heading: "一組能揭露問題的驗收資料",
+        body: [
+          "不要一開始匯入整個資料庫。準備一份乾淨來源、一份過期版本、一組互相矛盾的說法，以及一個資料中沒有答案的問題。好的工具應該暴露不確定性和衝突，而不是只產生流暢文字。",
+          "修改其中一份來源後重跑相同問題。若答案不會顯示過期、引用仍指向舊內容，或無法判斷哪些頁面需要更新，這套系統就還不適合承擔長期知識。",
+        ],
+      },
+      {
+        heading: "Wenlan 適合哪一種模式",
+        body: [
+          "Wenlan 對應維護型、具來源的本地知識層。Sources、原子知識與 Pages 分開保存；Claude Code、Codex、Cursor、ChatGPT 等客戶端透過 plugin 或 MCP 使用同一套知識；引用、過期狀態、修訂與人工審查保持可見。",
+          "完成平台與客戶端設定後，可用一個小型來源集驗證，而不是只相信產品描述。",
+        ],
+        code: {
+          label: "Wenlan 驗證流程",
+          code: "wenlan status\nwenlan sources add ~/Knowledge/evaluation-set\n/distill <測試主題>\n/pages <測試主題>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "何時不該增加另一套知識庫",
+        body: [
+          "如果只是讀一份短文件、現有 wiki 已由團隊穩定維護，或 AI 不需要跨會話重用答案，直接文件閱讀或目前的筆記工具可能已經足夠。",
+          "選擇的標準不是功能最多，而是以最低維護成本通過你的來源、更新、衝突、隱私與可重複驗收。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "最好的 AI 知識庫一定是 RAG 工具嗎？",
+        answer:
+          "不一定。RAG 很適合在提問時找來源片段，但有些需求只要臨時讀文件，另一些則需要跨會話維護可審查、可重用的答案。",
+      },
+      {
+        question: "測試時應該匯入全部資料嗎？",
+        answer:
+          "不用。先用包含乾淨來源、過期版本、衝突與無答案問題的小型資料集。工具通過後再逐步擴大。",
+      },
+      {
+        question: "開源就代表資料一定不會離開本機嗎？",
+        answer:
+          "不代表。仍要檢查儲存位置、模型供應商、embedding 與 reranking 呼叫，以及遠端同步或遙測設定。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "source-backed-wiki-pages-ai-work",
+      "distilled-wiki-pages-ai-memory",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 知識模型",
+        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+      },
+      {
+        label: "Wenlan 支援的文件來源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan MCP 客戶端",
+        href: "https://wenlan.app/docs/mcp-clients",
+      },
+      {
+        label: "Wenlan 審查與信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+      {
+        label: "Wenlan 資料與隱私",
+        href: "https://wenlan.app/docs/data-and-privacy",
+      },
+    ],
+    cta: {
+      heading: "用同一套 8 項檢查測試 Wenlan",
+      body: "從一組小型來源開始，驗證引用、更新與審查，再判斷維護型本地知識層是否適合你的工作流。",
+    },
+  },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
 
 const zhCNArticles = {
@@ -1334,6 +1461,133 @@ const zhCNArticles = {
     cta: {
       heading: "先用一个文件夹验证完整闭环",
       body: "安装 Wenlan，加入一组可检查的文档，再验证同步、Page、引用与审核流程。",
+    },
+  },
+  "choose-ai-knowledge-base-tool": {
+    slug: "choose-ai-knowledge-base-tool",
+    eyebrow: "选型指南",
+    category: "Workflows",
+    title: "如何选 AI 知识库工具：8 个真正重要的检查",
+    description:
+      "先分清文档问答、RAG、笔记工具与维护型知识库，再用来源、更新、审核、数据控制与实测结果选择工具。",
+    metaTitle: "如何选 AI 知识库工具：8 个检查 | Wenlan",
+    metaDescription:
+      "用 8 个实际测试选择 AI 知识库工具，比较文档问答、RAG、本地笔记与跨 AI agent 维护知识的区别。",
+    keywords: [
+      "AI 知识库工具",
+      "AI 知识库软件推荐",
+      "如何选 AI 知识库",
+      "本地 AI 知识库工具",
+      "开源 AI 知识库",
+      "AI agent 知识库",
+      "AI 知识库比较",
+      "Wenlan 文澜",
+    ],
+    publishedAt: "2026-08-02",
+    updatedAt: "2026-08-02",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分钟阅读",
+    audience: "正在选择文档问答、RAG、本地笔记或跨 AI agent 知识系统的简体中文用户",
+    heroBullets: [
+      "先选运行模式，再比较功能列表。",
+      "用来源变化与冲突测试答案是否仍可追溯、可更新。",
+      "用自己的小型文档集对每个候选工具执行同一套验收。",
+    ],
+    sections: [
+      {
+        heading: "先分清你需要哪一种 AI 知识库",
+        body: [
+          "不要先问哪个工具最好。先判断需要的是当次会话的文档上传、针对一组文档的 RAG 问答、让 AI 直接读取笔记或 Markdown vault，还是跨会话与多个 agent 维护有来源的当前答案。",
+          "这四种模式可以组合，但解决的问题不同。把它们放在同一张功能表比较，通常会选到不符合实际工作方式的产品。",
+        ],
+      },
+      {
+        heading: "8 个真正重要的检查",
+        body: ["用一小组有代表性的文档，先写下预期答案，再对每个候选工具做相同测试。"],
+        bullets: [
+          "来源可追溯：重要答案能否打开支持它的确切来源或引用？",
+          "更新状态：来源变化后，哪些答案过期、哪些需要刷新是否看得见？",
+          "冲突与审核：矛盾证据会进入明确审核，还是被模型静默改写？",
+          "数据所有权与导出：能否保留或导出可读文件与历史，不被单一服务绑定？",
+          "隐私边界：哪些文件、提示、检索片段与模型调用会离开电脑？",
+          "Agent 互通：同一份知识能否供实际使用的 Claude Code、Codex、Cursor 或 ChatGPT 读取？",
+          "输入限制：真正支持哪些格式、扫描文档、文件夹、vault 与文件大小？",
+          "可重复验收：工具能否处理可回答、不可回答、跨来源三种问题，并在来源修改后得到正确结果？",
+        ],
+      },
+      {
+        heading: "一组能暴露问题的验收资料",
+        body: [
+          "不要一开始导入整个资料库。准备一份干净来源、一份过期版本、一组互相矛盾的说法，以及一个资料中没有答案的问题。好的工具应该暴露不确定性和冲突，而不是只生成流畅文字。",
+          "修改其中一份来源后重跑相同问题。如果答案不会显示过期、引用仍指向旧内容，或无法判断哪些页面需要更新，这套系统就还不适合承担长期知识。",
+        ],
+      },
+      {
+        heading: "Wenlan 适合哪一种模式",
+        body: [
+          "Wenlan 对应维护型、有来源的本地知识层。Sources、原子知识与 Pages 分开保存；Claude Code、Codex、Cursor、ChatGPT 等客户端通过 plugin 或 MCP 使用同一套知识；引用、过期状态、修订与人工审核保持可见。",
+          "完成平台与客户端设置后，可以用一个小型来源集验证，而不是只相信产品描述。",
+        ],
+        code: {
+          label: "Wenlan 验证流程",
+          code: "wenlan status\nwenlan sources add ~/Knowledge/evaluation-set\n/distill <测试主题>\n/pages <测试主题>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "什么时候不该增加另一套知识库",
+        body: [
+          "如果只是阅读一份短文档、现有 wiki 已由团队稳定维护，或 AI 不需要跨会话复用答案，直接文档阅读或当前笔记工具可能已经足够。",
+          "选择标准不是功能最多，而是以最低维护成本通过你的来源、更新、冲突、隐私与可重复验收。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "最好的 AI 知识库一定是 RAG 工具吗？",
+        answer:
+          "不一定。RAG 很适合在提问时找来源片段，但有些需求只要临时读文档，另一些则需要跨会话维护可审核、可复用的答案。",
+      },
+      {
+        question: "测试时应该导入全部资料吗？",
+        answer:
+          "不用。先用包含干净来源、过期版本、冲突与无答案问题的小型资料集。工具通过后再逐步扩大。",
+      },
+      {
+        question: "开源就代表数据一定不会离开本机吗？",
+        answer:
+          "不代表。仍要检查存储位置、模型提供方、embedding 与 reranking 调用，以及远程同步或遥测设置。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "source-backed-wiki-pages-ai-work",
+      "distilled-wiki-pages-ai-memory",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 知识模型",
+        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+      },
+      {
+        label: "Wenlan 支持的文档来源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan MCP 客户端",
+        href: "https://wenlan.app/docs/mcp-clients",
+      },
+      {
+        label: "Wenlan 审核与信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+      {
+        label: "Wenlan 数据与隐私",
+        href: "https://wenlan.app/docs/data-and-privacy",
+      },
+    ],
+    cta: {
+      heading: "用同一套 8 项检查测试 Wenlan",
+      body: "从一组小型来源开始，验证引用、更新与审核，再判断维护型本地知识层是否适合你的工作流。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;

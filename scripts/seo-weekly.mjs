@@ -101,7 +101,26 @@ const DOCUMENT_KNOWLEDGE_BASE_TARGETS = [
   },
 ];
 
+const KNOWLEDGE_BASE_TOOL_SELECTION_TARGETS = [
+  {
+    pattern:
+      /(?:\b(?:choose|select|best|reliable|compare|comparison|tools?|software)\b.{0,40}\bai\s+knowledge[-\s]?base\b|\bai\s+knowledge[-\s]?base\b.{0,40}\b(?:choose|select|best|reliable|compare|comparison|tools?|software)\b)/i,
+    page: "/learn/choose-ai-knowledge-base-tool",
+  },
+  {
+    pattern:
+      /(?:AI\s*知識庫.{0,20}(?:工具|軟體|推薦|比較|選擇)|(?:如何選|選擇|推薦|可靠|比較).{0,20}AI\s*知識庫)/i,
+    page: "/zh-TW/learn/choose-ai-knowledge-base-tool",
+  },
+  {
+    pattern:
+      /(?:AI\s*知识库.{0,20}(?:工具|软件|推荐|比较|选择)|(?:如何选|选择|推荐|可靠|比较).{0,20}AI\s*知识库)/i,
+    page: "/zh-CN/learn/choose-ai-knowledge-base-tool",
+  },
+];
+
 const KNOWLEDGE_BASE_WIKI_TARGETS = [
+  ...KNOWLEDGE_BASE_TOOL_SELECTION_TARGETS,
   ...DOCUMENT_KNOWLEDGE_BASE_TARGETS,
   {
     pattern:
@@ -157,7 +176,7 @@ const QUALIFIED_CLICK_GROUPS = new Set([
   "AI work memory",
 ]);
 const ACQUISITION_PRIORITY_PAGE =
-  /^\/(?:(?:zh-TW|zh-CN)\/)?learn(?:\/(?:ai-work-memory-vs-knowledge-base|source-backed-wiki-pages-ai-work|distilled-wiki-pages-ai-memory))?$/;
+  /^\/(?:(?:zh-TW|zh-CN)\/)?learn(?:\/(?:ai-work-memory-vs-knowledge-base|source-backed-wiki-pages-ai-work|distilled-wiki-pages-ai-memory|build-local-ai-knowledge-base-from-documents|choose-ai-knowledge-base-tool))?$/;
 const GENERATED_SECTION_HEADINGS = new Set([
   "Snapshot",
   "GitHub Release Evidence",
@@ -1005,6 +1024,17 @@ function classifyQuery(query) {
     return {
       group: "Comparisons",
       page: "/learn/wenlan-vs-superlocal-memory",
+    };
+  }
+
+  const knowledgeBaseToolSelectionTarget =
+    KNOWLEDGE_BASE_TOOL_SELECTION_TARGETS.find(({ pattern }) =>
+      pattern.test(query),
+    );
+  if (knowledgeBaseToolSelectionTarget) {
+    return {
+      group: "AI knowledge base / wiki",
+      page: knowledgeBaseToolSelectionTarget.page,
     };
   }
 

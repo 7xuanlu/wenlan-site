@@ -323,6 +323,14 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   endorsement copy, and 393px plus 320px production renders are green. The
   experiment is measuring, the production slot is open, and its actual
   24-hour boundary is after `2026-08-03T04:39:55Z`.
+- At `2026-08-02T07:41:27Z`, the user explicitly approved commit, Git push,
+  PR creation and merge, automatic Vercel deployment, and read-only production
+  verification for the exact
+  `EXP-2026-08-02-ai-knowledge-base-tool-selection` three-locale family.
+  Request indexing, GSC validation, paid actions, external publication,
+  synthetic events, analytics mutation, and metric-definition changes remain
+  excluded. The approved change continues to consume the single production
+  slot until production verification completes.
 - The weekly window is a reporting boundary, not a publish gate. Only one
   website change may be in `approved` or `active` preparation at a time;
   production-verified `live`, `measuring`, and `extended` cohorts continue
@@ -360,6 +368,10 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
+  `EXP-2026-08-02-ai-knowledge-base-tool-selection` is in active local
+  preparation and consumes the single website preparation slot. It adds one
+  non-overlapping English, zh-TW, and zh-CN tool-selection canonical family;
+  publication and every external/shared-state action remain approval-gated.
   `EXP-2026-08-01-karpathy-llm-wiki-locales-refresh` is production-verified
   and measuring; it no longer occupies the single production slot. It
   refreshes only the existing English, zh-TW,
@@ -495,7 +507,7 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 19.
+- Active experiments: 20.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -871,6 +883,37 @@ Supporting quality split for the same live range:
   remain unavailable; none may be invented.
 
 ### Current experiment
+
+`EXP-2026-08-02-ai-knowledge-base-tool-selection` is in active local
+preparation and consumes the single website preparation slot. It creates one
+new canonical family only:
+`/learn/choose-ai-knowledge-base-tool`,
+`/zh-TW/learn/choose-ai-knowledge-base-tool`, and
+`/zh-CN/learn/choose-ai-knowledge-base-tool`.
+
+The candidate gate passes from the preserved OpenSEO United States
+`AI knowledge base` 880 and Taiwan `AI 知識庫` 210 third-party units, an
+English Reddit selection discussion, a 6,166-view/28-reply Simplified-Chinese
+V2EX request, Taiwan-language result-shape evidence, a clean current-site gap,
+and maintained Wenlan proof. These source-native observations are not GSC or
+keyword-volume estimates.
+
+The page owns the selection question, not category definition, document
+construction, source-backed maintenance, MCP access, or Obsidian workflow. It
+distinguishes one-session upload, RAG/document QA, note-editor access, and
+maintained agent knowledge, then applies eight repeatable tests. Each locale
+has its own 5-impression minimum exposure after publication; no locale is
+pooled and no exact-query rank or outcome is preclaimed.
+
+Local preparation and publication are approved. The publication scope covers
+commit, Git push, PR creation and merge, automatic Vercel deployment, and
+read-only production verification for this exact three-locale family. Request
+indexing, GSC validation, external publication, paid action, synthetic events,
+analytics mutation, and metric changes remain unapproved. The immutable
+experiment contract is in `EXPERIMENTS.md`; the candidate evidence is in
+`docs/seo-audits/2026-08-02-ai-knowledge-base-tool-selection-gate.md`.
+
+### Measuring experiment: Karpathy LLM Wiki locales
 
 `EXP-2026-08-01-karpathy-llm-wiki-locales-refresh` is production-verified and
 measuring; the single production slot is open. It refreshes the existing
@@ -1914,3 +1957,33 @@ is open and this non-overlapping candidate may enter local preparation now.
 Push, PR creation, merge, deployment, request indexing, GSC validation, and
 external publication remain separately gated. See
 `docs/seo-audits/2026-08-02-ai-knowledge-base-tool-selection-gate.md`.
+
+At `2026-08-02T06:57:00Z`, the candidate entered local preparation as
+`EXP-2026-08-02-ai-knowledge-base-tool-selection`. It occupies the single
+website preparation slot until local verification finishes. The bounded scope
+is one English, zh-TW, and zh-CN canonical family plus same-locale Learn-hub
+routing and deterministic SEO coverage. It must not alter the existing LLM
+Wiki, document-build, source-backed trust, MCP, or Obsidian canonical owners.
+No publication or external/shared-state action is approved by this local
+preparation.
+
+At `2026-08-02T07:17:04Z`, local preparation passed its deterministic and
+rendered gates. The query-owner fixture keeps tool selection, document build,
+LLM Wiki/category, source-backed maintenance, and Obsidian workflow intent on
+distinct configured owners in English, zh-TW, and zh-CN. The complete SEO
+suite passed 222/222, the i18n contract passed 63/63, TypeScript and the
+production build passed, and the built technical checker verified 120 sitemap
+URLs, 24 required canonicals, 24 checked pages, and no `FAQPage` across 124
+built HTML pages. Fresh 393px and 1440px Chrome captures covered all three
+routes; titles, hierarchy, CJK wrapping, code containment, CTA, and visible
+FAQ passed, and each FAQ surface opened without browser errors.
+
+This proves implementation separation, not search-market correctness. After
+publication, each locale must independently reach its declared GSC exposure
+floor. An above-floor visible query split or mismatch nominates routing review;
+it does not justify preserving the new URL. The experiment remains the single
+active website change. At `2026-08-02T07:41:27Z`, the user approved commit,
+push, PR creation and merge, automatic Vercel deployment, and read-only
+production verification of this exact scope. Request indexing, GSC validation,
+external publication, paid action, synthetic event, analytics mutation, and
+metric-definition changes remain excluded.

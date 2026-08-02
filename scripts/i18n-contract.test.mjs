@@ -530,6 +530,7 @@ test("localized Learn slug route supports per-locale acquisition page availabili
     "/learn/source-backed-wiki-pages-ai-work",
     "/learn/wenlan-vs-obsidian-ai-memory",
     "/learn/build-local-ai-knowledge-base-from-documents",
+    "/learn/choose-ai-knowledge-base-tool",
   ]);
   assert.match(source, /getLocalizedLearnArticle/);
   assert.match(source, /TRANSLATED_LEARN_SLUGS/);
@@ -844,6 +845,8 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
     { locale: "zh-CN", slug: "wenlan-vs-obsidian-ai-memory" },
     { locale: "zh-TW", slug: "build-local-ai-knowledge-base-from-documents" },
     { locale: "zh-CN", slug: "build-local-ai-knowledge-base-from-documents" },
+    { locale: "zh-TW", slug: "choose-ai-knowledge-base-tool" },
+    { locale: "zh-CN", slug: "choose-ai-knowledge-base-tool" },
   ]);
 
   const metadata = await localizedLearnSlug.generateMetadata({
@@ -1127,6 +1130,64 @@ test("English document-to-knowledge-base guide owns the implementation gap", asy
   assert.match(text, /do not ingest arbitrary source-code files/);
   assert.match(article.cta.heading, /knowledge-base loop/);
   assert.ok(article.officialReferences?.length >= 3);
+});
+
+test("AI knowledge-base tool-selection guide is available in all acquisition locales", async () => {
+  const { getArticle } = await import("../src/app/(en)/learn/articles.ts");
+  const { getLocalizedLearnArticle } = await import(
+    "../src/i18n/learn-articles.ts"
+  );
+  const english = getArticle("choose-ai-knowledge-base-tool");
+
+  assert.ok(english);
+  assert.equal(
+    english.title,
+    "How to Choose an AI Knowledge Base Tool: 8 Tests That Matter",
+  );
+  assert.equal(english.publishedAt, "2026-08-02");
+  assert.equal(english.updatedAt, "2026-08-02");
+  assert.ok(english.keywords.includes("AI knowledge base tools"));
+  assert.equal(english.heroBullets.length, 3);
+  assert.equal(english.sections[2]?.bullets?.length, 8);
+  assert.match(JSON.stringify(english), /Source traceability/);
+  assert.match(JSON.stringify(english), /Acceptance test/);
+  assert.match(JSON.stringify(english), /wenlan sources add/);
+  assert.ok(english.officialReferences?.length >= 5);
+
+  const expectations = {
+    "zh-TW": {
+      title: "如何選 AI 知識庫工具：8 個真正重要的檢查",
+      keyword: "AI 知識庫工具",
+      source: "來源可追溯",
+      review: "衝突與審查",
+    },
+    "zh-CN": {
+      title: "如何选 AI 知识库工具：8 个真正重要的检查",
+      keyword: "AI 知识库工具",
+      source: "来源可追溯",
+      review: "冲突与审核",
+    },
+  };
+
+  for (const [locale, expected] of Object.entries(expectations)) {
+    const article = getLocalizedLearnArticle(
+      locale,
+      "choose-ai-knowledge-base-tool",
+    );
+    assert.ok(article);
+    assert.equal(article.title, expected.title);
+    assert.equal(article.publishedAt, "2026-08-02");
+    assert.equal(article.updatedAt, "2026-08-02");
+    assert.ok(article.keywords.includes(expected.keyword));
+    const text = JSON.stringify(article);
+    assert.match(text, new RegExp(expected.source));
+    assert.match(text, new RegExp(expected.review));
+    assert.match(text, /wenlan sources add/);
+    assert.match(text, /Claude Code/);
+    assert.match(text, /Codex/);
+    assert.match(text, /ChatGPT/);
+    assert.ok(article.officialReferences?.length >= 5);
+  }
 });
 
 test("localized Learn renderer exposes article code blocks", async () => {

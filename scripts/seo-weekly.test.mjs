@@ -166,11 +166,17 @@ const requiredLocalizedLearnPaths = [
   "/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
   "/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
   "/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
+  "/zh-TW/learn/choose-ai-knowledge-base-tool",
+  "/zh-CN/learn/choose-ai-knowledge-base-tool",
 ];
 const requiredLocalizedLearnLocs = requiredLocalizedLearnPaths.map(
   (path) => `https://wenlan.app${path}`,
 );
 const expectedArticleDates = new Map([
+  [
+    "/learn/choose-ai-knowledge-base-tool",
+    { datePublished: "2026-08-02", dateModified: "2026-08-02" },
+  ],
   [
     "/learn/build-local-ai-knowledge-base-from-documents",
     { datePublished: "2026-08-01", dateModified: "2026-08-01" },
@@ -191,6 +197,14 @@ const expectedArticleDates = new Map([
     "/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
     { datePublished: "2026-08-01", dateModified: "2026-08-01" },
   ],
+  [
+    "/zh-TW/learn/choose-ai-knowledge-base-tool",
+    { datePublished: "2026-08-02", dateModified: "2026-08-02" },
+  ],
+  [
+    "/zh-CN/learn/choose-ai-knowledge-base-tool",
+    { datePublished: "2026-08-02", dateModified: "2026-08-02" },
+  ],
 ]);
 const requiredLocalizedBuiltHtmlPages = requiredLocalizedLearnPaths.map((path) => ({
   path: `${path.slice(1)}.html`,
@@ -210,6 +224,7 @@ const requiredBuiltSitemapLocs = [
   "https://wenlan.app/learn/ai-work-memory",
   "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
   "https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents",
+  "https://wenlan.app/learn/choose-ai-knowledge-base-tool",
   ...requiredLocalizedLearnLocs,
   "https://wenlan.app/docs/configuration",
   "https://wenlan.app/docs/product-matrix",
@@ -266,6 +281,13 @@ const requiredBuiltHtmlPages = [
     datePublished: "2026-08-01",
     dateModified: "2026-08-01",
   },
+  {
+    path: "learn/choose-ai-knowledge-base-tool.html",
+    canonical: "https://wenlan.app/learn/choose-ai-knowledge-base-tool",
+    type: "Article",
+    datePublished: "2026-08-02",
+    dateModified: "2026-08-02",
+  },
   ...requiredLocalizedBuiltHtmlPages,
   {
     path: "docs/configuration.html",
@@ -297,6 +319,7 @@ const requiredDeployedUrls = [
   "/learn/ai-work-memory",
   "/learn/wenlan-vs-superlocal-memory",
   "/learn/build-local-ai-knowledge-base-from-documents",
+  "/learn/choose-ai-knowledge-base-tool",
   ...requiredLocalizedLearnPaths,
   "/docs/configuration",
   "/docs/product-matrix",
@@ -1405,8 +1428,8 @@ test("deployed technical SEO checker verifies robots, sitemap, key pages, utilit
     );
 
     assert.match(stdout, /robots ok/);
-    assert.match(stdout, /sitemap locs ok: 21/);
-    assert.match(stdout, /key pages ok: 21/);
+    assert.match(stdout, /sitemap locs ok: 24/);
+    assert.match(stdout, /key pages ok: 24/);
     assert.match(stdout, /utility noindex headers ok: 6/);
     assert.match(stdout, /redirects ok: 25/);
     assert.match(stdout, /bridge host redirects ok: 6/);
@@ -1497,7 +1520,7 @@ test("deployed technical SEO checker does not require unshipped local internal l
         { cwd: repoRoot },
       );
 
-      assert.match(stdout, /key pages ok: 21/);
+      assert.match(stdout, /key pages ok: 24/);
     },
   );
 });
@@ -2005,9 +2028,9 @@ test("built technical SEO checker verifies compiled redirects, headers, and site
     assert.match(stdout, /redirects ok: 26/);
     assert.match(stdout, /global 404 ok/);
     assert.match(stdout, /noindex headers ok: 7/);
-    assert.match(stdout, /sitemap required locs ok: 21/);
-    assert.match(stdout, /html page checks ok: 21/);
-    assert.match(stdout, /all html FAQPage absent ok: 22/);
+    assert.match(stdout, /sitemap required locs ok: 24/);
+    assert.match(stdout, /html page checks ok: 24/);
+    assert.match(stdout, /all html FAQPage absent ok: 25/);
     assert.match(stdout, /old URLs absent from sitemap/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
@@ -4991,6 +5014,9 @@ test("seo weekly generator maps AI knowledge-base and wiki demand before memory-
         "搭建本地 AI 知识库,0,2,0%,19.0",
         "文档 AI 知识库,0,2,0%,20.0",
         "用 Obsidian 搭建 AI 知识库,0,2,0%,20.5",
+        "best ai knowledge base tool,0,4,0%,14.0",
+        "如何選 AI 知識庫工具,0,4,0%,15.0",
+        "可靠的 AI 知识库,0,4,0%,16.0",
         "llm wiki 2.0,0,3,0%,13.0",
         "source-backed wiki for ai agents,0,2,0%,18.0",
         "ai knowledge base for agents,0,4,0%,9.0",
@@ -5072,6 +5098,18 @@ test("seo weekly generator maps AI knowledge-base and wiki demand before memory-
     assert.match(
       report,
       /\| `用 Obsidian 搭建 AI 知识库` \| AI knowledge base \/ wiki \| `\/zh-CN\/learn\/build-local-ai-knowledge-base-from-documents` \| 2 \|/,
+    );
+    assert.match(
+      report,
+      /\| `best ai knowledge base tool` \| AI knowledge base \/ wiki \| `\/learn\/choose-ai-knowledge-base-tool` \| 4 \|/,
+    );
+    assert.match(
+      report,
+      /\| `如何選 AI 知識庫工具` \| AI knowledge base \/ wiki \| `\/zh-TW\/learn\/choose-ai-knowledge-base-tool` \| 4 \|/,
+    );
+    assert.match(
+      report,
+      /\| `可靠的 AI 知识库` \| AI knowledge base \/ wiki \| `\/zh-CN\/learn\/choose-ai-knowledge-base-tool` \| 4 \|/,
     );
     assert.match(
       report,

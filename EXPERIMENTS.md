@@ -5742,3 +5742,146 @@ increase for that experiment.
 - Unchanged boundaries: no push, PR, merge, deployment, request indexing, GSC
   validation, external publication, paid action, synthetic event, analytics
   mutation, or metric-definition change is authorized by this correction.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-02-ai-knowledge-base-tool-selection
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-02-ai-knowledge-base-tool-selection
+- Status: active
+- Data window: 2026-08-01..2026-08-07
+- Asset class: net-new-search
+- Launched: 2026-08-02
+- Hypothesis: A standalone, source-backed selection guide that distinguishes
+  document upload, RAG/document QA, note-editor access, and maintained agent
+  knowledge will earn qualified non-brand impressions and clicks for AI
+  knowledge-base tool-selection intent without splitting the current category,
+  construction, trust, MCP, or Obsidian owners.
+- Candidate evidence: OpenSEO's United States `AI knowledge base` result
+  displayed 880 in its third-party unit and exposed tools, builder, examples,
+  open-source, GitHub, and free modifiers; its Taiwan `AI 知識庫` result
+  displayed 210 in the same unit. An English Reddit tool-selection discussion
+  retained 33 votes in the captured result; a Simplified-Chinese V2EX request
+  for a reliable AI knowledge base has 6,166 views and 28 replies; Taiwan-
+  language result pages independently use AI-knowledge-base tool-selection
+  and comparison-guide framing. None of these numbers is GSC or keyword
+  volume.
+- Coverage gate: pass. Existing pages own category definition, document
+  construction, source-backed maintenance, MCP access, and Obsidian workflow;
+  none owns the tool-selection question. Separate RAG-vs-LLM-Wiki,
+  Codex/ChatGPT knowledge-base, and duplicate local/open-source build URLs are
+  rejected.
+- First-party proof: maintained Wenlan source documents local storage,
+  supported document inputs, source-backed Pages, citations, review, refresh,
+  MCP clients, open-source scope, and explicit limitations. The page must not
+  claim that Wenlan is best or make an unverified third-party product claim.
+- Baseline: Authenticated `2026-07-03..2026-07-30` GSC reports 10 property clicks and 706 property impressions after same-range backfill, 2 visible-query clicks and 120 visible-query impressions, and no visible tool-selection row; Vercel reports 1,468 raw visitors; GitHub reports 47 stars.
+- Baseline date range: authenticated `2026-07-03..2026-07-30` rolling range,
+  with the same-range GSC backfill captured on 2026-08-02 kept separate from
+  the immutable Friday report.
+- Baseline GSC property: 10 clicks and 706 impressions.
+- Baseline GSC visible queries: 2 clicks and 120 impressions; 8-click and
+  586-impression visibility gap. No visible query row contains the prepared
+  tool-selection phrases; this is unavailable, not zero.
+- Baseline target pages: not applicable before publication; all three
+  proposed URLs are new and have no prelaunch Search Console page row.
+- Baseline Vercel: 1,468 raw visitors and 1,745 pageviews; 307 direct visitors
+  and 457 pageviews; 1,163 visitors and 1,286 pageviews in the separate,
+  non-deduplicated qualified-source row aggregate. No target-page observation
+  exists before publication.
+- Baseline GitHub: 47 total stars. Umami custom-event totals remain account-
+  gated and are not inferred.
+- Change: add `/learn/choose-ai-knowledge-base-tool` with zh-TW and
+  zh-CN counterparts, reciprocal hreflang, sitemap membership, Article and
+  BreadcrumbList schema, visible FAQ without `FAQPage`, eight evaluation
+  tests, first-party Wenlan proof, and one same-locale Learn-hub route.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 5 GSC target-page impressions per locale after a confirmed post-publish crawl or a complete post-publish range; locale exposure is never pooled.
+  Each locale independently needs at least 5 GSC target-page
+  impressions after a confirmed post-publish crawl or a complete post-publish
+  range. Locale exposure is never pooled.
+- Success criteria: after minimum exposure, a locale succeeds when it records
+  at least 1 target-page click, or at least 10 target-page impressions with
+  page-average position at or above the top 30 and no visible above-floor
+  qualified query owned by a conflicting canonical.
+- Failure criteria: at W4 or later, after at least 10 target-page impressions
+  and a confirmed post-publish crawl, a locale fails when it has 0 clicks,
+  page-average position worse than 50, and no visible qualified tool-selection
+  query aligned to the target. Below exposure remains inconclusive.
+- Stop criteria: stop or correct immediately for a canonical, hreflang,
+  sitemap, robots, noindex, schema, locale, mobile-render, source-accuracy, or
+  standalone-utility regression; stop a locale if an above-floor joined query
+  consistently belongs to an existing protected owner rather than the new
+  page. Do not continuously rewrite while exposure is insufficient.
+- 24h readout: technical/indexability and available native-unit evidence only;
+  never infer SEO success
+- 7d readout: target-page and joined-query evidence if a complete authenticated
+  post-publish range exists; otherwise inconclusive
+- W2 readout: apply the independent locale minimums and success/failure bands
+- W4 readout: apply the same immutable bands after confirmed crawl/exposure
+- W8 readout: terminal cohort read if the Goal remains active or a later
+  controller preserves it
+- Result: pending
+- Decision: wait
+- Next step: add the bounded three-locale canonical family and deterministic
+  coverage, then run the full local SEO, TypeScript, build, technical, locale,
+  and responsive-render gates before asking for publication approval.
+- Excluded actions: push, PR, merge, deployment, request indexing, GSC
+  validation, external publication, paid action, synthetic event, analytics
+  mutation, and metric-definition change.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-02T07:17:04Z — tool-selection hierarchy local verification
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-02-ai-knowledge-base-tool-selection`
+- Status: local verification passed; publication approval pending
+- Hierarchy contract: tool-selection queries map to the new canonical family;
+  document-build queries remain on the document workflow; LLM Wiki/category,
+  source-backed maintenance, MCP access, and Obsidian workflow keep their
+  existing owners. The three locale owners remain independent and are not
+  pooled.
+- Deterministic verification: `pnpm seo:goal:check` passed; the full SEO suite
+  passed 222/222; the i18n contract passed 63/63; TypeScript passed; the
+  production build generated 223 static pages; the built technical checker
+  passed 120 sitemap URLs, 24 required canonicals, 24 checked pages, and the
+  site-wide `FAQPage` absence check across 124 built HTML pages.
+- Rendered verification: fresh full-height Chrome captures covered English,
+  zh-TW, and zh-CN at 393px and 1440px widths. The exact title hierarchy,
+  article packet, body sections, eight-test list, code block, CTA, references,
+  related links, and visible FAQ were inspected. Document widths matched their
+  scroll widths; CJK titles and semantic phrases wrapped without clipping or
+  single-character orphan lines. The first FAQ opened on every locale route,
+  and the browser recorded no errors or warnings.
+- Interpretation: this verifies a coherent implementation and a falsifiable
+  query-to-owner hypothesis. It is not indexing evidence, GSC demand, ranking,
+  clicks, Vercel visitor lift, or causality. After publication, each locale
+  needs its own declared five target-page GSC impressions before evaluation.
+  An above-floor visible split or mismatch triggers routing review rather than
+  a forced defense of the new URL.
+- Result: local verification passed
+- Decision: wait
+- Next step: request explicit approval to commit, push, create and merge a PR,
+  allow Vercel production deployment, and perform read-only production
+  verification for this bounded three-locale family.
+- External actions: none. No push, PR, merge, deployment, request indexing,
+  GSC validation, external publication, paid action, synthetic event,
+  analytics mutation, or metric-definition change occurred.
+
+### 2026-08-02T07:41:27Z — tool-selection publication approval
+
+- Record type: campaign-approval
+- Related experiment: `EXP-2026-08-02-ai-knowledge-base-tool-selection`
+- Status: active; publication authorized; consumes the single production slot
+- Approved scope: commit the verified English, zh-TW, and zh-CN canonical
+  family and its deterministic hierarchy, locale, sitemap, schema, and
+  technical coverage; push the current branch; create and merge the PR; allow
+  automatic Vercel production deployment; and perform read-only production
+  verification.
+- Excluded actions: request indexing, GSC validation, external publication,
+  paid action, synthetic event, analytics mutation, and metric-definition
+  changes remain unapproved.
+- Next step: rerun the frozen Goal and publication gates, publish the isolated
+  branch, wait for Vercel production completion, and verify the exact live
+  three-locale contract before releasing the production slot.

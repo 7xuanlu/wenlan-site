@@ -1571,6 +1571,98 @@ const workflowArticles: BaseSpec[] = [
       body: "Install Wenlan, add one inspectable document set, then verify sync, Pages, citations, and review before expanding.",
     },
   },
+  {
+    slug: "choose-ai-knowledge-base-tool",
+    eyebrow: "Selection guide",
+    category: "Workflows",
+    title: "How to Choose an AI Knowledge Base Tool: 8 Tests That Matter",
+    description:
+      "Choose an AI knowledge base by testing sources, freshness, review, ownership, privacy, agent access, input limits, and real answer quality.",
+    metaTitle: "How to Choose an AI Knowledge Base Tool | 8 Tests",
+    metaDescription:
+      "Use eight practical tests to choose an AI knowledge base tool for documents, RAG, local notes, or maintained knowledge across AI agents.",
+    keywords: [
+      "AI knowledge base tools",
+      "AI knowledge base software",
+      "choose AI knowledge base",
+      "best AI knowledge base tool",
+      "local AI knowledge base tool",
+      "open source AI knowledge base",
+      "AI knowledge base for agents",
+      "AI knowledge base evaluation",
+    ],
+    publishedAt: "2026-08-02",
+    updatedAt: "2026-08-02",
+    audience:
+      "People choosing a document, local-note, RAG, or maintained knowledge system for AI agents",
+    heroBullets: [
+      "Choose the operating model before comparing feature lists.",
+      "Test whether answers stay traceable and current when sources change.",
+      "Run the same acceptance test on every candidate with your own documents.",
+    ],
+    quickAnswer:
+      "First decide which job you need: a one-session document upload, RAG over a document set, AI access to a note editor or Markdown vault, or maintained source-backed knowledge shared across agents and sessions. Then test every candidate against the same eight criteria instead of trusting a generic best-tools list.",
+    wenlanFit:
+      "Wenlan fits the fourth model. It keeps local Sources, atomic knowledge, and maintained Pages separate; exposes them to Claude Code, Codex, Cursor, ChatGPT, and other clients through plugins or MCP; and keeps citations, stale state, revisions, and human review visible.",
+    problem:
+      "AI knowledge base products often use the same label for different jobs. A chatbot upload may answer questions for one session, a RAG service may retrieve document chunks, a notes tool may give an agent direct file access, and a maintained wiki may preserve reviewed answers over time. Comparing them as one feature list produces the wrong choice.",
+    actionHeading: "Run these eight tests",
+    actionIntro:
+      "Use one small, representative document set and write down the expected result before testing a tool.",
+    actionBullets: [
+      "Source traceability: can every important answer open the exact supporting source or citation?",
+      "Freshness: after a source changes, can you see what is stale and what needs to refresh?",
+      "Conflict and review: does contradictory evidence become a visible review decision instead of a silent rewrite?",
+      "Ownership and export: can you keep or export readable files and history without depending on one vendor?",
+      "Privacy boundary: which files, prompts, retrieved passages, and model calls stay local, and which leave the machine?",
+      "Agent interoperability: can the same knowledge serve the AI clients you actually use without copying it into each one?",
+      "Input limits: which formats, scanned documents, folders, vaults, and source sizes are really supported?",
+      "Acceptance test: ask an answerable question, an unanswerable question, and a cross-source question; then edit one source and repeat all three.",
+    ],
+    code: {
+      label: "Wenlan proof loop after setup",
+      code: "wenlan status\nwenlan sources add ~/Knowledge/evaluation-set\n# In a Wenlan plugin client:\n/distill <tested topic>\n/pages <tested topic>\n/lint\n/curate",
+    },
+    caution:
+      "Do not choose from a leaderboard alone. Product capabilities and pricing change, while your source quality, privacy boundary, maintenance effort, and acceptance questions determine whether a knowledge base is trustworthy for your work.",
+    faq: [
+      "Is the best AI knowledge base always a RAG tool?",
+      "No. RAG is useful for retrieving source fragments, but some workflows need only a temporary document reader while others need reviewed, reusable answers that stay current across sessions and agents.",
+      "Should I test with my entire archive?",
+      "No. Start with a small set containing one clean source, one outdated source, one contradiction, and one question the sources cannot answer. Expand only after the tool handles that set correctly.",
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "source-backed-wiki-pages-ai-work",
+      "distilled-wiki-pages-ai-memory",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan knowledge model",
+        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+      },
+      {
+        label: "Wenlan supported document sources",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan MCP clients",
+        href: "https://wenlan.app/docs/mcp-clients",
+      },
+      {
+        label: "Wenlan review and trust",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+      {
+        label: "Wenlan data and privacy",
+        href: "https://wenlan.app/docs/data-and-privacy",
+      },
+    ],
+    cta: {
+      heading: "Run the same eight tests on Wenlan",
+      body: "Use one bounded source set, verify citations and refresh behavior, then decide whether a maintained local knowledge layer fits your workflow.",
+    },
+  },
 ];
 
 const comparisonArticles: BaseSpec[] = [
