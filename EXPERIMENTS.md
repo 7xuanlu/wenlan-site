@@ -5885,3 +5885,81 @@ increase for that experiment.
 - Next step: rerun the frozen Goal and publication gates, publish the isolated
   branch, wait for Vercel production completion, and verify the exact live
   three-locale contract before releasing the production slot.
+
+### 2026-08-02T07:55:01Z — tool-selection production publication and visual correction
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-02-ai-knowledge-base-tool-selection`
+- Status: live and measuring; narrow same-experiment CJK correction in local
+  preparation
+- Publication: PR #118 squash-merged at `2026-08-02T07:54:17Z` as
+  `4d4d805b82527bff1d312779047c7ee37408f855`. Vercel production completed at
+  `2026-08-02T07:55:01Z`; this is the experiment's fixed publish and
+  measurement boundary.
+- Deployed technical evidence: `pnpm seo:technical:deployed` passed 120
+  sitemap URLs, 24 key pages, six utility noindex headers, 120 sitemap-page
+  `FAQPage` absence checks, 25 redirects, six bridge-host redirects, and
+  old-URL sitemap absence.
+- Rendered evidence: fresh Chrome device emulation captured every English,
+  zh-TW, and zh-CN route at exact 393px and 1440px CSS viewports. Root and body
+  scroll widths equaled the viewport widths, H1 bounds stayed within the
+  content column, full-page renders completed, and the first FAQ on every
+  route opened with a non-empty answer. Earlier command-line Chrome captures
+  that appeared clipped used a 393px bitmap over Chrome's larger minimum
+  layout viewport and are rejected as invalid evidence.
+- Correction evidence: the stricter CJK pass found that the new localized slug
+  did not use the existing semantic-term wrapper, so `驗收資料` /
+  `验收资料` and `8 項` / `8 项` could split awkwardly on mobile. A focused
+  local correction adds this slug and those phrases, plus `AI 知識庫` /
+  `AI 知识库`, to the existing wrapper. The regression test failed before the
+  implementation and the i18n suite now passes 63/63.
+- Interpretation: publication, indexability, and responsive containment are
+  verified. The phrase correction changes only rendered wrapping; it does not
+  change visible text, metadata, canonical ownership, the immutable
+  experiment bands, or the `2026-08-02T07:55:01Z` measurement boundary. This
+  is not crawl evidence, ranking, GSC demand, visitor lift, or causality.
+- Result: production technical pass; CJK correction pending full publication
+  gates
+- Decision: finish the same-experiment correction, then wait for the declared
+  24-hour and 7-day evidence boundaries
+- Excluded actions: no request indexing, GSC validation, external publication,
+  paid action, synthetic event, analytics mutation, or metric-definition
+  change.
+
+### 2026-08-02T08:15:04Z — tool-selection CJK correction local verification
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-02-ai-knowledge-base-tool-selection`
+- Status: same-experiment render correction locally verified; publication
+  pending
+- Change: extend the existing localized semantic-term wrapper to the new
+  tool-selection slug and keep `AI 知識庫` / `AI 知识库`, `知識庫` /
+  `知识库`, `驗收資料` / `验收资料`, and `8 項` / `8 项` intact above
+  the existing 360px escape hatch. Visible strings and search metadata are
+  unchanged.
+- Regression proof: the updated i18n contract failed before implementation,
+  then passed 63/63 after the focused correction. The full SEO suite passed
+  222/222, TypeScript and the Goal verifier passed, the production build
+  generated 223 static pages, the built technical checker passed 120 sitemap
+  URLs, 24 key pages, and no `FAQPage` across 124 built HTML pages, and the
+  built route matrix passed 27 direct 200 routes plus four intentional 404s.
+- Visual Pass A — design-system and functional integrity: PASS. The shared
+  Learn renderer, existing wrapper seam, live DOM, typography and color tokens,
+  responsive grid, links, CTA, code scroller, and FAQ interaction remain real
+  and functional; no raster or one-off replacement was introduced.
+- Visual Pass B — visual fidelity and CJK precision: PASS. Fresh full-page and
+  FAQ-open Chrome captures covered English, zh-TW, and zh-CN at exact 393px
+  and 1440px CSS viewports. Root and body widths equaled each viewport, H1
+  bounds remained inside the content column, and the four protected phrase
+  families did not split or orphan. Decorative SVG and horizontally scrollable
+  code contents extend inside intentional clipped/scroll containers without
+  changing document width.
+- Interpretation: this closes the local render defect, not a GSC, visitor,
+  click, crawl, ranking, or causal readout. The original
+  `2026-08-02T07:55:01Z` measurement boundary remains fixed.
+- Decision: publish the focused same-experiment correction through the
+  existing approved PR, Vercel, and read-only production verification path;
+  then wait for the declared evidence boundaries.
+- Excluded actions: no request indexing, GSC validation, external publication,
+  paid action, synthetic event, analytics mutation, or metric-definition
+  change.

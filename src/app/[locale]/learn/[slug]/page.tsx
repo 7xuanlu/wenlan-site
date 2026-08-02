@@ -66,11 +66,17 @@ function sectionId(heading: string, index: number): string {
 
 function renderProtectedCjkTerms(text: string) {
   return text
-    .split(/(Karpathy LLM Wiki：|AI 知識庫|AI 知识库|來源|来源)/g)
+    .split(/(Karpathy LLM Wiki：|AI 知識庫|AI 知识库|知識庫|知识库|驗收資料|验收资料|8 項|8 项|來源|来源)/g)
     .map((part, index) =>
       part === "Karpathy LLM Wiki：" ||
       part === "AI 知識庫" ||
       part === "AI 知识库" ||
+      part === "知識庫" ||
+      part === "知识库" ||
+      part === "驗收資料" ||
+      part === "验收资料" ||
+      part === "8 項" ||
+      part === "8 项" ||
       part === "來源" ||
       part === "来源" ? (
         <span
@@ -163,7 +169,8 @@ export default async function LocalizedLearnSlugPage({
   const chrome = chromeByLocale[resolvedLocale];
   const renderArticleText =
     article.slug === "wenlan-vs-obsidian-ai-memory" ||
-    article.slug === "distilled-wiki-pages-ai-memory"
+    article.slug === "distilled-wiki-pages-ai-memory" ||
+    article.slug === "choose-ai-knowledge-base-tool"
       ? renderProtectedCjkTerms
       : (text: string) => text;
 

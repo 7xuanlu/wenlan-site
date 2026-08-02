@@ -1212,11 +1212,11 @@ test("localized acquisition copy keeps CJK semantic phrases together on mobile",
   assert.equal(protectedHeadings.length, 2);
   assert.match(
     source,
-    /split\(\/\(Karpathy LLM Wiki：\|AI 知識庫\|AI 知识库\|來源\|来源\)\/g\)/,
+    /split\(\/\(Karpathy LLM Wiki：\|AI 知識庫\|AI 知识库\|知識庫\|知识库\|驗收資料\|验收资料\|8 項\|8 项\|來源\|来源\)\/g\)/,
   );
   assert.match(
     source,
-    /article\.slug === "wenlan-vs-obsidian-ai-memory"[\s\S]*article\.slug === "distilled-wiki-pages-ai-memory"/,
+    /article\.slug === "wenlan-vs-obsidian-ai-memory"[\s\S]*article\.slug === "distilled-wiki-pages-ai-memory"[\s\S]*article\.slug === "choose-ai-knowledge-base-tool"/,
   );
   assert.ok((source.match(/\{renderArticleText\(/g)?.length ?? 0) >= 12);
   assert.match(source, /<span className="min-w-0">\{renderArticleText\(faq\.question\)\}<\/span>/);
