@@ -2180,12 +2180,12 @@ const trustArticles: BaseSpec[] = [
     slug: "source-backed-wiki-pages-ai-work",
     eyebrow: "Trust",
     category: "Concepts",
-    title: "Source-Backed AI Knowledge Base for Agents",
+    title: "Build a Source-Backed AI Knowledge Base for Agents",
     description:
-      "Build an AI knowledge base that keeps trusted sources, atomic knowledge, maintained LLM-wiki pages, review, and refresh state connected.",
-    metaTitle: "Source-Backed AI Knowledge Base for Agents | Wenlan",
+      "Build a source-backed AI knowledge base by connecting trusted sources, atomic knowledge, maintained LLM-wiki pages, citations, review, and refresh state.",
+    metaTitle: "Build a Source-Backed AI Knowledge Base | Wenlan",
     metaDescription:
-      "Build a source-backed AI knowledge base for agents with trusted sources, atomic knowledge, maintained LLM-wiki pages, review, and refresh state.",
+      "Build a source-backed AI knowledge base with trusted sources, atomic knowledge, maintained LLM-wiki pages, citations, review, and refresh.",
     keywords: [
       "source backed AI knowledge base",
       "AI knowledge base for agents",
@@ -2194,7 +2194,7 @@ const trustArticles: BaseSpec[] = [
       "knowledge base provenance",
     ],
     publishedAt: "2026-06-06",
-    updatedAt: "2026-07-30",
+    updatedAt: "2026-08-08",
     audience: "Teams building a local AI knowledge base that agents and people can inspect",
     heroBullets: [
       "Trusted sources remain separate from the knowledge derived from them.",
@@ -2202,7 +2202,7 @@ const trustArticles: BaseSpec[] = [
       "Maintained pages carry citations, review, revisions, and refresh state.",
     ],
     quickAnswer:
-      "A source-backed AI knowledge base separates trusted sources, atomic knowledge, and maintained LLM-wiki pages. Wenlan keeps those layers local and connected so agents can retrieve a current answer while people can inspect its sources, revisions, and review state.",
+      "To build a source-backed AI knowledge base, keep trusted sources, atomic knowledge, and maintained LLM-wiki pages separate. Connect them with citations, review, revisions, and refresh state so agents retrieve current answers and people can inspect why those answers are trusted.",
     problem:
       "Raw document dumps and one-off summaries both decay. A dump makes agents search too much context; a detached summary can become stale without showing which source supported it or what should refresh it.",
     wenlanFit:
