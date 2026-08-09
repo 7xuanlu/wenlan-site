@@ -216,7 +216,9 @@ export function HomePage({ locale }: { locale: Locale }) {
               eventName="learn_article_click"
               placement="home-acquisition"
               context="concepts"
-              className="inline-flex min-w-0 items-center gap-2 text-sm font-medium text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-warm)]"
+              className={`inline-flex min-w-0 items-center gap-2 text-sm font-medium text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-warm)] ${
+                link.id === "ai-knowledge-base-tool" ? "w-full sm:w-auto" : ""
+              }`}
             >
               <span className="break-keep">{link.label}</span>
               <ArrowIcon />

@@ -17,7 +17,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "26b69e076265ac92aa6befbeb7d0c2710c18e5bb361bbb774d7b40681e00d8ad",
+    sourceHash: "d9925c705c63da7fcab119174eca41c54f689c805f933c099f3a1154d0a903ed",
     content: {
       seo: {
         title: "Wenlan 文瀾 | AI 工作的 LLM wiki",
@@ -66,6 +66,11 @@ export const zhTWContent = {
             id: "ai-knowledge-base",
             href: "/learn/source-backed-wiki-pages-ai-work",
             label: "AI 知識庫導覽",
+          },
+          {
+            id: "ai-knowledge-base-tool",
+            href: "/learn/choose-ai-knowledge-base-tool",
+            label: "AI 知識庫選型",
           },
         ],
       },

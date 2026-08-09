@@ -5605,13 +5605,27 @@ test("Learn index SERP copy leads with the source-backed AI knowledge-base and L
   assert.doesNotMatch(learnOgImage, /Before you add memory to AI work\./);
 });
 
-test("homepage acquisition links point to the core LLM-wiki and knowledge-base guides", async () => {
-  const homepage = await readRepo("src/i18n/content/en.ts");
+test("homepage acquisition links expose the three-locale tool-selection guide", async () => {
+  const [homePageComponent, ...homepages] = await Promise.all([
+    readRepo("src/app/_pages/home.tsx"),
+    ...["en", "zh-TW", "zh-CN"].map((locale) =>
+      readRepo(`src/i18n/content/${locale}.ts`),
+    ),
+  ]);
 
-  assert.match(homepage, /href:\s*"\/learn\/distilled-wiki-pages-ai-memory"/);
-  assert.match(homepage, /LLM wiki guide/);
-  assert.match(homepage, /href:\s*"\/learn\/source-backed-wiki-pages-ai-work"/);
-  assert.match(homepage, /AI knowledge base guide/);
+  for (const homepage of homepages) {
+    assert.match(homepage, /href:\s*"\/learn\/distilled-wiki-pages-ai-memory"/);
+    assert.match(homepage, /href:\s*"\/learn\/source-backed-wiki-pages-ai-work"/);
+    assert.match(homepage, /href:\s*"\/learn\/choose-ai-knowledge-base-tool"/);
+  }
+
+  assert.match(homepages[0], /Choose an AI knowledge base tool/);
+  assert.match(homepages[1], /AI 知識庫選型/);
+  assert.match(homepages[2], /AI 知识库选型/);
+  assert.match(
+    homePageComponent,
+    /link\.id === "ai-knowledge-base-tool"[\s\S]*"w-full sm:w-auto"/,
+  );
 });
 
 test("configuration docs link to the Claude Code memory guide", async () => {
