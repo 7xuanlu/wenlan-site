@@ -429,17 +429,21 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   );
   assert.match(
     supportArticle,
-    /title:\s*"Source-Backed AI Knowledge Base for Agents"/,
+    /title:\s*"Build a Source-Backed AI Knowledge Base for Agents"/,
   );
   assert.match(
     supportArticle,
-    /metaTitle:\s*"Source-Backed AI Knowledge Base for Agents \| Wenlan"/,
+    /metaTitle:\s*"Build a Source-Backed AI Knowledge Base \| Wenlan"/,
+  );
+  assert.match(
+    supportArticle,
+    /metaDescription:\s*\n\s*"Build a source-backed AI knowledge base with trusted sources, atomic knowledge, maintained LLM-wiki pages, citations, review, and refresh\.",/,
   );
   assert.match(supportArticle, /publishedAt:\s*"2026-06-06"/);
-  assert.match(supportArticle, /updatedAt:\s*"2026-07-30"/);
+  assert.match(supportArticle, /updatedAt:\s*"2026-08-08"/);
   assert.match(
     supportArticle,
-    /quickAnswer:\s*\n\s*"A source-backed AI knowledge base separates trusted sources, atomic knowledge, and maintained LLM-wiki pages/,
+    /quickAnswer:\s*\n\s*"To build a source-backed AI knowledge base, keep trusted sources, atomic knowledge, and maintained LLM-wiki pages separate/,
   );
   assert.match(supportArticle, /actionHeading:\s*"Build the smallest maintainable loop"/);
   assert.match(supportArticle, /\/capture <fact \+ source \+ why>/);
