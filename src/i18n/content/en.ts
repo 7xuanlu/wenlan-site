@@ -67,6 +67,11 @@ export const enContent = {
             href: "/learn/source-backed-wiki-pages-ai-work",
             label: "AI knowledge base guide",
           },
+          {
+            id: "ai-knowledge-base-tool",
+            href: "/learn/choose-ai-knowledge-base-tool",
+            label: "Choose an AI knowledge base tool",
+          },
         ],
       },
       demo: {
