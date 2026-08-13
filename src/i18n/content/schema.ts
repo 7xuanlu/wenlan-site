@@ -104,11 +104,18 @@ export type HomeContent = SeoContent & {
       architectureNote: string;
     };
     platforms: readonly {
-      id: "windows-x64" | "macos-arm64" | "linux-x64" | "linux-arm64";
+      id:
+        | "windows-x64"
+        | "macos-arm64"
+        | "macos-runtime-arm64"
+        | "linux-x64"
+        | "linux-arm64";
       name: string;
       architecture: string;
       description: string;
       actionLabel: string;
+      packageIncludesLabel?: string;
+      guideLabel?: string;
       setupSteps: readonly string[];
     }[];
     setup: {

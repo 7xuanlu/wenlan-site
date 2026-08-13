@@ -102,17 +102,17 @@ async function readTaggedFile(repo, tag, path) {
 }
 
 async function currentWenlanAppRelease() {
-  const appRoot = process.env.WENLAN_APP_REPO_ROOT
-    ? resolve(process.env.WENLAN_APP_REPO_ROOT)
-    : resolve(repoRoot, "../wenlan-app");
-  const packagePath = resolve(appRoot, "package.json");
+  const appRoot = process.env.WENLAN_REPO_ROOT
+    ? resolve(process.env.WENLAN_REPO_ROOT)
+    : resolve(repoRoot, "../wenlan");
+  const versionPath = resolve(appRoot, "version.txt");
   try {
-    await access(packagePath);
+    await access(versionPath);
   } catch {
     throw new Error(
       [
-        `WENLAN_APP_REPO_ROOT does not contain a wenlan-app checkout: ${appRoot}`,
-        "Set WENLAN_APP_REPO_ROOT to an explicit wenlan-app checkout before validating public app facts.",
+        `WENLAN_REPO_ROOT does not contain a Wenlan checkout: ${appRoot}`,
+        "Set WENLAN_REPO_ROOT to an explicit Wenlan checkout before validating public app facts.",
       ].join(" "),
     );
   }
@@ -120,27 +120,21 @@ async function currentWenlanAppRelease() {
   const releaseRef = await latestVersionTag(appRoot);
   assert.ok(
     releaseRef,
-    "wenlan-app checkout has no version tag; fetch tags before validating published app facts",
+    "Wenlan checkout has no version tag; fetch tags before validating published app facts",
   );
-  const [packageJsonText, tauriText, cargoToml, backendPinText] = await Promise.all([
-    readTaggedFile(appRoot, releaseRef, "package.json"),
+  const [versionText, tauriText, cargoToml] = await Promise.all([
+    readTaggedFile(appRoot, releaseRef, "version.txt"),
     readTaggedFile(appRoot, releaseRef, "app/tauri.conf.json"),
     readTaggedFile(appRoot, releaseRef, "app/Cargo.toml"),
-    readTaggedFile(appRoot, releaseRef, ".wenlan-backend-version"),
   ]);
-  const packageJson = JSON.parse(packageJsonText);
   const tauri = JSON.parse(tauriText);
-  const pin = appBackendPin(backendPinText);
-  const version = packageJson.version;
+  const version = versionText.trim();
 
-  assert.equal(packageJson.name, "wenlan-app");
-  assert.equal(repositoryUrl(packageJson.repository.url), "https://github.com/7xuanlu/wenlan-app");
   assert.equal(tauri.productName, "Wenlan");
   assert.equal(tauri.identifier, "com.wenlan.desktop");
   assert.equal(tauri.version, version);
   assert.equal(cargoVersion(cargoToml), version);
-  assert.equal(pin.tag, `v${version}`);
-  assert.match(pin.sha256, /^[a-f0-9]{64}$/);
+  assert.equal(releaseRef, `v${version}`);
   assert.ok(
     ["binaries/wenlan", "binaries/wenlan-server", "binaries/wenlan-mcp"].every((path) =>
       tauri.bundle.externalBin.includes(path),
@@ -148,7 +142,7 @@ async function currentWenlanAppRelease() {
   );
   assert.ok(
     tauri.plugins.updater.endpoints.includes(
-      "https://github.com/7xuanlu/wenlan-app/releases/latest/download/latest.json",
+      "https://github.com/7xuanlu/wenlan/releases/latest/download/latest.json",
     ),
   );
 
@@ -156,8 +150,8 @@ async function currentWenlanAppRelease() {
     root: appRoot,
     releaseRef,
     version,
-    tag: pin.tag,
-    repository: repositoryUrl(packageJson.repository.url),
+    tag: releaseRef,
+    repository: "https://github.com/7xuanlu/wenlan",
     updaterEndpoint: tauri.plugins.updater.endpoints[0],
   };
 }
@@ -229,7 +223,7 @@ test("wenlan-app backend pin parser rejects mixed and incomplete manifests", () 
   );
 });
 
-test("wenlan-app release metadata exposes its bundled daemon pin", async () => {
+test("Wenlan unified release metadata exposes the version-locked desktop app", async () => {
   const app = await currentWenlanAppRelease();
   const publishedTag = await latestVersionTag(app.root);
 
@@ -237,35 +231,38 @@ test("wenlan-app release metadata exposes its bundled daemon pin", async () => {
   assert.equal(app.tag, publishedTag);
   assert.match(app.version, /^\d+\.\d+\.\d+$/);
   assert.match(app.tag, /^v\d+\.\d+\.\d+$/);
-  assert.equal(app.repository, "https://github.com/7xuanlu/wenlan-app");
+  assert.equal(app.repository, "https://github.com/7xuanlu/wenlan");
   assert.equal(
     app.updaterEndpoint,
-    "https://github.com/7xuanlu/wenlan-app/releases/latest/download/latest.json",
+    "https://github.com/7xuanlu/wenlan/releases/latest/download/latest.json",
   );
 });
 
-test("public desktop-app surfaces track wenlan-app source facts", async () => {
+test("public desktop-app surfaces track the unified Wenlan source facts", async () => {
   const app = await currentWenlanAppRelease();
   const docs = await readRepo("src/app/docs/docs.ts");
   const structuredData = await readRepo("src/app/structured-data.ts");
   const llms = await readRepo("public/llms.txt");
   const llmsFull = await readRepo("src/app/llms-full.txt/route.ts");
 
-  assert.match(docs, /href: "https:\/\/github\.com\/7xuanlu\/wenlan-app"/);
-  assert.match(docs, /Tauri 2 \+ React 19/);
+  assert.match(docs, /href: "https:\/\/github\.com\/7xuanlu\/wenlan\/tree\/v0\.15\.8\/app"/);
+  assert.match(docs, /Tauri 2 desktop shell/);
   assert.match(docs, /localhost:7878/);
-  assert.match(docs, /\.wenlan-backend-version/);
-  assert.match(docs, /app releases can trail the daemon release/);
+  assert.match(docs, /version-locked to the workspace release train/);
+  assert.match(docs, /unified Wenlan release/);
   assert.doesNotMatch(docs, /origin-app/);
+  assert.doesNotMatch(docs, /github\.com\/7xuanlu\/wenlan-app/);
+  assert.doesNotMatch(docs, /desktop app (?:lives in|is) a separate repo(?:sitory)?/i);
 
-  assert.match(structuredData, /github\.com\/7xuanlu\/wenlan-app/);
+  assert.match(structuredData, /github\.com\/7xuanlu\/wenlan\/tree\/v0\.15\.8\/app/);
   assert.match(structuredData, /Tauri 2 \+ React 19/);
   assert.match(structuredData, /localhost:7878/);
-  assert.match(structuredData, /bundled daemon pin/);
+  assert.match(structuredData, /unified release manifest/);
 
-  assert.match(llms, /Wenlan desktop app repository/);
-  assert.match(llms, /github\.com\/7xuanlu\/wenlan-app/);
-  assert.match(llmsFull, /github\.com\/7xuanlu\/wenlan-app/);
+  assert.match(llms, /Wenlan desktop app source/);
+  assert.match(llms, /github\.com\/7xuanlu\/wenlan\/tree\/v0\.15\.8\/app/);
+  assert.doesNotMatch(llms, /separate repository boundary/i);
+  assert.match(llmsFull, /github\.com\/7xuanlu\/wenlan\/tree\/v0\.15\.8\/app/);
 });
 
 test("public web-client guidance tracks the released wenlan-app remote access boundary", async () => {
