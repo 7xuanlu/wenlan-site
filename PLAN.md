@@ -376,10 +376,12 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-11-llm-wiki-schema-template-refresh` is approved for
-  publication and consumes the single website production slot. It refreshes
+  `EXP-2026-08-11-llm-wiki-schema-template-refresh` is production-verified
+  and measuring; it no longer consumes the single website production slot. It refreshes
   only the existing English, zh-TW, and zh-CN LLM Wiki canonical family and
-  creates no URL. Production verification must close the slot after merge.
+  creates no URL. PR #124 squash-merged at `2026-08-13T05:21:47Z` as
+  `38e5a6b69a0b30a73550f97732b59c2fff0b5b8c`; Vercel Production deployment
+  `5882382588` completed successfully at `2026-08-13T05:22:32Z`.
   `EXP-2026-08-02-ai-knowledge-base-tool-selection` is live and measuring for
   its exact English, zh-TW, and zh-CN tool-selection canonical family. PR #118
   merged at `2026-08-02T07:54:17Z` as
@@ -947,9 +949,23 @@ Article plus BreadcrumbList, and zero `FAQPage` occurrences. All four current
 maintained external references return HTTP 200. Publication remains
 separately approval-gated.
 
-The earlier approval stop condition is cleared by the user's exact publication
-approval. Publish only this verified candidate, then record the production
-boundary and release the production slot.
+The earlier approval stop condition was cleared by the user's exact
+publication approval. PR #124 and Vercel Production are verified; the
+production slot is open. The experiment's 24-hour readout boundary is after
+`2026-08-14T05:22:32Z`.
+
+Production verification passed the repository's deployed technical audit:
+120 sitemap URLs, 24 key pages, six utility noindex headers, sitemap-wide
+`FAQPage` absence, 25 redirects, six bridge-host redirects, and old-URL
+sitemap exclusion. Direct production HTML confirms all three exact
+self-canonicals, `index, follow`, stable `datePublished`,
+`dateModified: 2026-08-12`, Article and BreadcrumbList schema, the starter
+schema and acceptance-test sections, and maintained reference links. Fresh
+393px and 1440px production rendering confirms no document overflow, all
+three localized content floors, five visible FAQ items per locale, and no
+browser warning or error. No indexing request, GSC validation, external
+publication, paid action, synthetic event, analytics mutation, or metric
+change occurred.
 
 ### Measuring experiment: Karpathy LLM Wiki locales
 
