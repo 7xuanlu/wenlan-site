@@ -6188,3 +6188,341 @@ increase for that experiment.
 - Interpretation: publication integrity is proven; search and traffic effect
   is not. The original independent 10-impression post-crawl locale guards and
   all approval exclusions remain unchanged.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-08-source-backed-ai-knowledge-base-snippet-refresh
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-08-source-backed-ai-knowledge-base-snippet-refresh
+- Status: measuring
+- Data window: 2026-08-08..2026-08-14
+- Asset class: refresh
+- Launched: 2026-08-09
+- Hypothesis: a build-task title, description, H1, and quick answer on the
+  existing English source-backed AI knowledge-base canonical can earn a first
+  target-page click without creating another overlapping URL.
+- Candidate evidence: authenticated GSC reports 0 clicks and 8 impressions
+  for the target at page-average position 9.5; the deterministic weekly
+  report ranked it first among protected AI-knowledge-base and wiki snippet
+  actions. Only 3 brand/entity impressions are visible in the query-page
+  join, so no hidden query is invented. Full provenance is preserved in
+  `docs/seo-audits/2026-08-08-source-backed-ai-knowledge-base-snippet-prelaunch.md`.
+- Baseline: GSC property 8 clicks/874 impressions; visible queries 2/172;
+  query visibility gap 6/702; target page 0/8 at 9.5. Vercel separately
+  reports 1,387 visitors/1,666 pageviews, 231 direct visitors/383 pageviews,
+  and target page 5 visitors/5 pageviews. GitHub's separate observation is 47
+  stars; Umami is unavailable.
+- Change: refresh only the English H1, page description, meta title, meta
+  description, and quick answer. Preserve the six-command workflow,
+  maintained sources, canonical ownership, locale behavior, Article and
+  BreadcrumbList schema, visible FAQ, and absence of `FAQPage`.
+- Publish date: 2026-08-09
+- Index date: not-indexed
+- Minimum exposure: 10 GSC target-page impressions after a confirmed
+  post-deploy Google crawl.
+- Success criteria: after both guards, at least 1 target-page GSC click while
+  the technical and content floor remains green.
+- Failure criteria: after 28 complete post-deploy days and both guards, 0
+  target-page clicks, or a technical, source, locale, schema, FAQ, or render
+  regression.
+- Inconclusive: fewer than 10 target-page impressions, no confirmed
+  post-deploy crawl, or mixed evidence from another edit to this canonical.
+- Stop criteria: another controller edits the same canonical or any protected
+  technical/content floor regresses.
+- 24h readout: inconclusive at 2026-08-13T05:35:20Z; see the source-native
+  readout below.
+- 7d readout: pending after 2026-08-16T15:32:38Z.
+- W2 readout: pending after 2026-08-23T15:32:38Z.
+- W4 readout: pending after 2026-09-06T15:32:38Z.
+- W8 readout: pending after 2026-10-04T15:32:38Z.
+- Result: pending
+- Decision: wait
+- Next step: keep this canonical unchanged until a post-deploy crawl and the
+  minimum exposure guard exist; do not repeat the prior indexing request.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-08-source-backed-ai-knowledge-base-snippet-refresh 24h
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-08-source-backed-ai-knowledge-base-snippet-refresh
+- Observed at: 2026-08-13T05:35:20Z
+- Readout: 24h
+- Status: measuring
+- Evidence: PR #121 squash-merged at `2026-08-09T15:31:50Z` as
+  `3736a89135be0ef826cb6eaf1f1d039140bf7145`; Vercel Production deployment
+  `5820163298` completed successfully at `2026-08-09T15:32:38Z`. Current live
+  HTML returns HTTP 200, exact self-canonical, `index, follow`, the deployed
+  build-task title and description, `dateModified: 2026-08-08`, Article and
+  BreadcrumbList schema, visible quick answer, and no `FAQPage`. Authenticated
+  GSC URL Inspection reports `PASS`, submitted and indexed, allowed fetch and
+  indexing, exact Google and user canonical, sitemap discovery, successful
+  mobile fetch, and last crawl `2026-07-29T01:09:32Z`.
+- Result: inconclusive
+- Interpretation: Google's recorded crawl predates deployment, so the
+  post-deploy-crawl guard is not met. The latest preserved complete GSC and
+  Vercel window ends 2026-08-11 and remains mixed; it is not used to judge
+  success or failure.
+- Decision: wait
+- Next step: run the 7-day source-native readout after
+  `2026-08-16T15:32:38Z`; do not edit this canonical, request indexing again,
+  submit validation, or infer indexing-request effect.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-13-ai-agent-knowledge-graph-refresh
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-13-ai-agent-knowledge-graph-refresh
+- Status: active
+- Data window: 2026-08-08..2026-08-14
+- Asset class: refresh
+- Launched: 2026-08-13
+- Hypothesis: a task-qualified title and compact first answer on the existing
+  indexed `/docs/knowledge-graph` owner can earn a first target-page click or
+  visible AI-agent knowledge-graph query without creating an overlapping
+  Learn URL.
+- Candidate evidence: independent English GitHub and Reddit observations,
+  Simplified-Chinese V2EX and Zhihu observations, authenticated URL
+  Inspection, and maintained Wenlan first-party source pass the five-part
+  gate. Full URLs, capture dates, languages, native units, coverage analysis,
+  and product proof are preserved in
+  `docs/seo-audits/2026-08-13-ai-agent-knowledge-graph-coverage-gate.md`.
+- Baseline: authenticated GSC `2026-07-15..2026-08-11` reports 7 property
+  clicks and 855 impressions, 2 visible-query clicks and 170 impressions,
+  and a 5-click/685-impression visibility gap. The target is absent from the
+  returned page table and is unavailable, not zero. URL Inspection reports
+  the target indexed on the exact canonical with last crawl
+  `2026-07-16T09:43:37Z`. Vercel target rows are unavailable; GitHub's
+  separate observation is 47 stars; Umami is unavailable.
+- Change: refresh only the existing English `/docs/knowledge-graph` metadata,
+  H1/description, and first answer. Keep the URL, canonical, sitemap,
+  TechArticle/BreadcrumbList schema, adjacent Docs routing, and intentional
+  zh-TW/zh-CN 404 behavior. Graph context must remain supporting evidence,
+  not authority over source memories and maintained pages.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 10 GSC target-page impressions after a confirmed
+  post-deploy Google crawl.
+- Success criteria: after both guards, at least 1 target-page click or at
+  least 5 privacy-visible qualified AI-agent knowledge-graph impressions on
+  the intended canonical, with technical floors green.
+- Failure criteria: after 28 complete post-deploy days and both guards, 0
+  target-page clicks and no qualified visible query reaches 5 impressions,
+  or a technical, source, locale, schema, or render regression.
+- Inconclusive: minimum exposure is not reached, no post-deploy crawl is
+  confirmed, or another edit mixes the same canonical.
+- Stop criteria: controller overlap; product-truth drift; canonical,
+  indexability, schema, source, or responsive regression; or copy that treats
+  graph context as authority without inspectable sources.
+- 24h readout: pending after production completion.
+- 7d readout: pending after production completion plus seven days.
+- W2 readout: pending after production completion plus fourteen days.
+- W4 readout: pending after production completion plus twenty-eight days.
+- W8 readout: pending after production completion plus fifty-six days.
+- Result: pending
+- Decision: wait
+- Next step: prepare and verify the bounded existing-page refresh locally;
+  stop before commit, push, PR, merge, deployment, or indexing actions.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-13-ai-agent-knowledge-graph-refresh local verification
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-13-ai-agent-knowledge-graph-refresh
+- Observed at: 2026-08-13T05:57:03Z
+- Readout: correction
+- Status: active
+- Evidence: the RED content-contract control failed against the prior page.
+  After the bounded refresh, `pnpm test:seo` passed 223/223; `pnpm lint`,
+  `pnpm seo:goal:check`, `git diff --check`, `pnpm build`, and
+  `pnpm seo:technical:built` passed. The non-production build skipped
+  IndexNow. Fresh local production rendering covered all four desktop and
+  eight 393px mobile viewports with no clipped text, horizontal overflow,
+  broken images, or awkward heading orphan. Exact canonical, `index, follow`,
+  intended H1, and the visible quick answer were present.
+- Result: pending
+- Decision: wait
+- Next step: obtain explicit approval for commit, push, PR creation, merge,
+  automatic Vercel deployment, and read-only production verification. Keep
+  indexing request, GSC validation, external publication, paid action,
+  synthetic events, analytics mutation, and metric changes gated.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-07-29-obsidian-claude-code-refresh W2 at 2026-08-13T06:07:55Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-07-29-obsidian-claude-code-refresh
+- Observed at: 2026-08-13T06:07:55Z
+- Readout: W2
+- Status: measuring
+- Evidence: the latest completed weekly evidence is the authenticated
+  `2026-07-10..2026-08-06` range. GSC property totals are 8 clicks and 874
+  impressions; visible-query totals are 2 clicks and 172 impressions; the
+  query visibility gap is 6 clicks and 702 impressions. The mixed target-page
+  row is 0 clicks, 12 impressions, and 17.5 page-average position. A narrow
+  final GSC query for eight complete post-deploy dates
+  `2026-07-30..2026-08-06` reports 0 target-page clicks, 6 impressions, and
+  28.8 page-average position; the only privacy-visible target join is
+  `stevenstavrakis/obsidian-mcp` with 1 impression at position 46. Vercel
+  separately reports 1,387 raw visitors and 1,666 pageviews, 231 direct
+  visitors and 383 direct pageviews, and 8 target-page visitors plus 13
+  target-page pageviews for its aligned rolling range; no target-specific
+  source-to-page row is returned, so none is inferred. Umami remains
+  unavailable/account-gated. GitHub public REST reports 47 stars. Read-only
+  GSC URL Inspection reports `PASS`, submitted and indexed, successful mobile
+  fetch, exact Google and user canonicals, and a post-deploy crawl at
+  `2026-08-03T11:30:48Z`. Current live HTML returns direct 200 with exact
+  canonical, `index, follow`, stable `datePublished: 2026-06-06` and
+  `dateModified: 2026-07-29`, Article and BreadcrumbList schema, direct-files,
+  editor-context, Obsidian MCP, and source-backed knowledge-lifecycle content,
+  two visible FAQs without `FAQPage`, and sitemap membership.
+- Result: inconclusive
+- Decision: wait
+- Next step: keep the English canonical unchanged and run W4 after
+  `2026-08-26T06:07:17Z`; do not infer exact-query rank, source-to-page
+  sessions, indexing-request effect, causality, or SEO success, and do not
+  request indexing or submit validation.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-01-document-knowledge-base-guide 7d at 2026-08-13T06:21:12Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-01-document-knowledge-base-guide
+- Observed at: 2026-08-13T06:21:12Z
+- Readout: 7d
+- Status: measuring
+- Evidence: The latest authenticated rolling observation remains
+  `2026-07-15..2026-08-11`: GSC property totals are 7 clicks and 855
+  impressions; visible-query totals are 2 clicks and 170 impressions; the
+  query visibility gap is 5 clicks and 685 impressions. A narrow authenticated
+  page query for the nine complete post-publish dates `2026-08-03..2026-08-11`
+  reports English at 0 clicks, 2 impressions, and page-average position 51.0;
+  zh-TW at 0 clicks, 1 impression, and position 1.0; and no zh-CN page row,
+  which is unavailable rather than zero. The only privacy-visible target join
+  is English `local ai knowledge base` at 0 clicks, 1 impression, and position
+  56. Read-only URL Inspection reports all three URLs submitted and indexed,
+  successfully fetched as mobile, and using exact matching Google and user
+  canonicals; last crawls are `2026-08-02T14:11:47Z`,
+  `2026-08-03T12:56:06Z`, and `2026-08-03T17:27:04Z`. Vercel separately
+  reports 74 raw visitors and 214 pageviews, 65 direct visitors and 203 direct
+  pageviews, and a non-deduplicated qualified-referrer row sum of 9 visitors
+  and 10 pageviews for the same dates. The English target has 2 visitors and
+  3 pageviews; the Mandarin targets have no returned page row. No qualified
+  source-to-target row was returned. Umami remains unavailable/account-gated,
+  and GitHub public REST reports 47 stars.
+- Result: inconclusive
+- Decision: wait
+- Next step: Keep the three canonicals unchanged and run W2 after
+  `2026-08-16T02:42:26Z`. Each locale remains below its independent five-
+  impression minimum; do not pool locales, interpret a missing row as zero,
+  infer exact-query rank, source-to-page sessions, causality, or SEO success,
+  or request indexing or submit validation.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-01-karpathy-llm-wiki-locales-refresh 7d at 2026-08-13T06:21:13Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-01-karpathy-llm-wiki-locales-refresh
+- Observed at: 2026-08-13T06:21:13Z
+- Readout: 7d
+- Status: stopped
+- Evidence: The same source-native rolling observation keeps GSC property
+  totals at 7 clicks and 855 impressions, visible-query totals at 2 clicks and
+  170 impressions, and the visibility gap at 5 clicks and 685 impressions.
+  The narrow authenticated `2026-08-03..2026-08-11` page rows report English
+  at 0 clicks, 1 impression, and page-average position 5.0; zh-TW at 0 clicks,
+  1 impression, and position 8.0; and zh-CN at 0 clicks, 3 impressions, and
+  position 10.3. No target query is privacy-visible. All three URLs are
+  submitted and indexed with exact Google and user canonicals, but their last
+  crawls—`2026-07-29T01:09:29Z`, `2026-07-29T01:10:28Z`, and
+  `2026-08-01T22:01:38Z`—predate the `2026-08-02T04:39:55Z` Karpathy refresh.
+  Vercel separately returns 8 visitors and 8 pageviews for zh-CN and no page
+  row for English or zh-TW in the same complete-date window; no qualified
+  source-to-target row is returned. Umami remains unavailable/account-gated,
+  and GitHub public REST reports 47 stars. On `2026-08-13T05:22:32Z`,
+  `EXP-2026-08-11-llm-wiki-schema-template-refresh` changed this exact
+  canonical family in production, ending attributable exposure for the older
+  copy.
+- Result: inconclusive
+- Decision: stop
+- Next step: Stop this intervention as superseded and make no W2 or later
+  attribution to its copy. Each locale remained below its five-impression
+  minimum before controller overlap; the newer schema-template experiment now
+  owns future measurement. Do not infer endorsement, exact-query rank,
+  causality, or SEO success, and do not repeat indexing requests or submit
+  validation.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-02-ai-knowledge-base-tool-selection 7d at 2026-08-13T06:21:14Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-02-ai-knowledge-base-tool-selection
+- Observed at: 2026-08-13T06:21:14Z
+- Readout: 7d
+- Status: measuring
+- Evidence: The same authenticated rolling observation reports 7 GSC property
+  clicks and 855 impressions, 2 visible-query clicks and 170 impressions, and
+  a 5-click and 685-impression visibility gap. The narrow authenticated
+  `2026-08-03..2026-08-11` page rows report English at 0 clicks, 1 impression,
+  and page-average position 1.0; zh-TW at 0 clicks, 1 impression, and position
+  7.0; and no zh-CN page row, which is unavailable rather than zero. No target
+  query is privacy-visible. Read-only URL Inspection reports all three URLs
+  submitted and indexed with successful fetches and exact Google and user
+  canonicals; last crawls are `2026-08-02T14:20:50Z`,
+  `2026-08-03T10:19:09Z`, and `2026-08-03T13:05:24Z`. Vercel separately
+  reports 2 English visitors and 6 pageviews, 1 zh-TW visitor and 1 pageview,
+  and no zh-CN page row for the same dates; no qualified source-to-target row
+  is returned. Umami remains unavailable/account-gated, and GitHub public REST
+  reports 47 stars.
+- Result: inconclusive
+- Decision: wait
+- Next step: Keep the three canonicals unchanged and run W2 after
+  `2026-08-16T07:55:01Z`. Each locale remains below its independent five-
+  impression minimum; do not pool locales, convert a missing row to zero,
+  infer hidden query intent, exact-query rank, source-to-page sessions,
+  causality, or SEO success, or request indexing or submit validation.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-13T06:29:00Z — approved OSS distribution reconciliation
+
+- Record type: campaign-observation
+- Related experiment: none; approved OSS distribution lane
+- Status: external permission blocked
+- Evidence: A just-in-time check found no `Wenlan`, `7xuanlu/wenlan`, or
+  pre-Wenlan duplicate in `appcypher/awesome-mcp-servers` upstream `main`
+  or its all-state pull requests. Fork branch `add-wenlan-appcypher` remains
+  exactly one commit and one README line ahead of upstream. The maintained
+  repository and `https://wenlan.app/favicon.svg` both return HTTP 200. A
+  fresh `gh pr create` attempt for the previously approved exact entry failed
+  before PR creation with `GraphQL: 7xuanlu does not have the correct
+  permissions to execute CreatePullRequest (createPullRequest)`.
+- Interpretation: The patch remains valid, but the upstream/fork permission
+  relationship blocks GitHub PR creation. No PR, comment, maintainer message,
+  duplicate listing, website edit, indexing request, or analytics mutation was
+  created. The other approved Wenlan directory PRs remain twelve clean or
+  maintainer-review-waiting submissions plus one upstream-link-check failure
+  already proven unrelated to the Wenlan URL.
+- Decision: stop retrying this destination unless its permission state changes;
+  continue passive review-state observation for the submitted directory set.
+
+### 2026-08-13T06:36:02Z — AI-agent knowledge-graph publication approval
+
+- Record type: campaign-approval
+- Related experiment: EXP-2026-08-13-ai-agent-knowledge-graph-refresh
+- Status: active
+- Approved scope: commit, push, ready PR creation, merge, automatic Vercel
+  deployment, and read-only production verification for the exact
+  `codex/ai-agent-knowledge-graph-refresh` candidate. The candidate contains
+  only the existing English `/docs/knowledge-graph` metadata, visible title
+  and description, first answer, focused regression test, candidate audit,
+  and campaign records.
+- Excluded actions: request indexing, GSC validation, external publication,
+  paid action, synthetic events, analytics mutation, and metric changes.
+- Decision: publish the exact locally verified scope and keep the production
+  slot occupied until the Vercel deployment and live checks pass.

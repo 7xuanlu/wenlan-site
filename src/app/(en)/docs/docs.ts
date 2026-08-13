@@ -2176,33 +2176,35 @@ export const docPages: DocPage[] = [
   {
     slug: "knowledge-graph",
     group: "Reference",
-    eyebrow: "Graph",
-    title: "Knowledge Graph",
+    eyebrow: "Agent Knowledge",
+    title: "AI Agent Knowledge Graph",
     description:
-      "Understand how Wenlan links people, projects, tools, observations, and relations so recall can recover context through more than text similarity.",
-    metaTitle: "Wenlan Knowledge Graph | Docs",
+      "Build a source-backed AI knowledge base that links people, projects, tools, observations, and relations without treating graph context as authority.",
+    metaTitle: "AI Agent Knowledge Graph for a Source-Backed Knowledge Base | Wenlan",
     metaDescription:
-      "Learn how Wenlan's knowledge graph uses entities, relations, observations, post-ingest enrichment, imported wikilinks, and graph context during retrieval.",
+      "Learn how an AI agent knowledge graph links entities, relations, observations, sources, and maintained pages for inspectable retrieval.",
     keywords: [
       "Wenlan knowledge graph",
+      "AI agent knowledge graph",
+      "agent knowledge graph",
+      "source-backed AI knowledge base",
       "AI work knowledge graph",
-      "memory entities",
       "graph context",
       "local knowledge graph",
     ],
-    updatedAt: DOCS_UPDATED_AT,
+    updatedAt: "2026-08-13",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "The graph turns repeated names, projects, tools, and observations into retrievable context instead of leaving every memory isolated.",
-      "Graph context supplements hybrid search; it does not replace source-backed memories, pages, or human review.",
+      "Quick answer: an AI agent knowledge graph connects typed entities, relations, and observations so retrieval can recover relationships that text similarity misses.",
+      "Use graph context as supporting evidence. Source memories and maintained pages remain the inspectable authority and human review remains part of the workflow.",
     ],
     sections: [
       {
-        heading: "Why the graph exists",
+        heading: "Quick answer: what an AI agent knowledge graph adds",
         body: [
-          "Text search can find matching words, and vector search can find similar meaning. The graph helps with relationships: who worked on what, which project uses which tool, and which observations belong together.",
-          "Wenlan uses graph context in retrieval so agents can recover surrounding facts without replaying a full chat history.",
+          "Use text or vector search for direct matches. Use an AI agent knowledge graph for typed relationships: who worked on a project, which tool it uses, and which grounded observations belong to the same entity.",
+          "A reliable source-backed AI knowledge base keeps that graph beside inspectable source memories and maintained pages. Graph context supplies nearby facts; it does not become authority or replace provenance and review.",
         ],
       },
       {
