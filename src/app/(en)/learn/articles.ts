@@ -615,9 +615,9 @@ const baseArticles: LearnArticle[] = [
       "AI work wiki",
     ],
     publishedAt: "2026-06-24",
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-08-12",
     author: DEFAULT_AUTHOR,
-    readingTime: "10 min read",
+    readingTime: "12 min read",
     audience: "People designing a maintained knowledge layer for Claude Code, Codex, Cursor, and other AI agents",
     heroBullets: [
       "The Karpathy LLM Wiki pattern maintains useful answers instead of treating raw notes, retrieved chunks, or chat logs as finished knowledge.",
@@ -676,6 +676,49 @@ const baseArticles: LearnArticle[] = [
           label: "Use the complete daily workflow",
           href: "/docs/daily-workflow",
         },
+      },
+      {
+        heading: "A minimum LLM-wiki starter schema",
+        body: [
+          "Keep the always-loaded contract small. A CLAUDE.md or AGENTS.md should describe what the wiki is for, what never changes silently, and which procedures the agent should load on demand. It should not contain the whole wiki or a long copy of every maintenance instruction.",
+          "This is a vendor-neutral information and maintenance contract, not a required folder layout or product database. Adapt the names to your tools while keeping every boundary observable.",
+        ],
+        bullets: [
+          "Purpose and scope: which decisions or questions belong in this wiki, and which do not.",
+          "Immutable source boundary: where raw evidence lives and which files automation must never rewrite.",
+          "Page ownership: which pages are machine-maintained, human-owned, or changed only through review.",
+          "Naming and linking rules: stable topics, aliases, page links, and the smallest routing index.",
+          "Citation requirement: important claims point back to an inspectable source.",
+          "Ingest, query, lint, and maintenance log: separate on-demand procedures plus an append-only record of changes.",
+          "Stale and review behavior: what happens when a source changes, support conflicts, or a person owns the prose.",
+        ],
+        code: {
+          label: "Compact client contract",
+          code: [
+            "# LLM Wiki",
+            "Purpose: <the repeated decisions this wiki maintains>",
+            "Sources: <immutable evidence locations>",
+            "Pages: <ownership, naming, links, citations>",
+            "Index: <small topic router; load pages on demand>",
+            "Procedures: ingest | query | lint | review",
+            "Log: <append-only maintenance record>",
+            "Stale rule: <source change -> stale or review>",
+          ].join("\n"),
+        },
+      },
+      {
+        heading: "A small acceptance test before real use",
+        body: [
+          "A template is not proven when the files merely exist. Test one harmless topic end to end, including a source change, before importing private or business-critical material.",
+          "This test works for a folder-and-prompts setup, an Obsidian workflow, or a dedicated LLM-wiki product. The expected result is evidence you can inspect, not just a fluent answer.",
+        ],
+        bullets: [
+          "Ingest one harmless source and confirm the original remains unchanged.",
+          "Answer one question and cite the source for the important claim.",
+          "Run lint and confirm missing citations, broken links, or duplicates are visible.",
+          "Change the source, then repeat the same question.",
+          "Confirm the old answer becomes stale or reviewable instead of being silently overwritten.",
+        ],
       },
       {
         heading: "How to verify the loop",
@@ -754,6 +797,7 @@ source changes
         body: [
           "Wenlan implements the pattern with three durable roles: Sources preserve inspectable material, Memories preserve atomic knowledge from work, and Pages compile maintained explanations. The local daemon owns retrieval while readable Markdown keeps pages and session artifacts visible.",
           "The page lifecycle is explicit: distill support, cite it, track dependencies, refresh when needed, and review ownership-sensitive changes. That is the difference between a generated note and a maintained LLM wiki.",
+          "Wenlan does not require a user-authored Page schema. Typed Memory fields and built-in Page rules already govern provenance, citations, refresh, ownership, and review; the starter schema above remains a portable evaluation contract for the client and workflow.",
         ],
         link: {
           label: "Inspect the source-backed page model",
@@ -807,6 +851,14 @@ source changes
       {
         label: "Karpathy's LLM-wiki note",
         href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      },
+      {
+        label: "jackwener LLM-wiki implementation",
+        href: "https://github.com/jackwener/llm-wiki",
+      },
+      {
+        label: "Hjarni's CLAUDE.md template",
+        href: "https://hjarni.com/blog/llm-wiki-claude-md-template",
       },
       {
         label: "Rohitg00's LLM Wiki v2 proposal",

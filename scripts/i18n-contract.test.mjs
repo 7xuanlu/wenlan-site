@@ -959,7 +959,7 @@ test("zh-TW LLM Wiki guide owns the Karpathy v2 and AI knowledge-base intent", a
   assert.match(article.metaTitle, /Karpathy LLM Wiki/);
   assert.match(article.metaTitle, /AI 知識庫/);
   assert.equal(article.publishedAt, "2026-07-04");
-  assert.equal(article.updatedAt, "2026-08-01");
+  assert.equal(article.updatedAt, "2026-08-12");
   assert.match(article.sections[0].heading, /Karpathy LLM Wiki/);
   assert.match(JSON.stringify(article), /不代表 Karpathy 為 Wenlan 背書/);
   assert.ok(article.keywords.includes("AI 知識庫"));
@@ -967,10 +967,12 @@ test("zh-TW LLM Wiki guide owns the Karpathy v2 and AI knowledge-base intent", a
   assert.ok(article.keywords.includes("RAG vs LLM Wiki"));
 
   const headings = article.sections.map((section) => section.heading);
-  assert.equal(headings.length, 7);
+  assert.equal(headings.length, 9);
   assert.ok(headings.includes("LLM Wiki 知識庫和 RAG 有什麼不同"));
   assert.ok(headings.includes("如何搭建會持續更新的 AI 知識庫"));
   assert.ok(headings.includes("如何驗證知識庫真的可用"));
+  assert.ok(headings.includes("一份最小可用的 LLM Wiki Schema"));
+  assert.ok(headings.includes("正式使用前的最小驗收測試"));
 
   const articleText = JSON.stringify(article);
   for (const expected of [
@@ -986,6 +988,11 @@ test("zh-TW LLM Wiki guide owns the Karpathy v2 and AI knowledge-base intent", a
     "source IDs",
     "Karpathy",
     "LLM Wiki v2",
+    "CLAUDE.md",
+    "AGENTS.md",
+    "按需載入",
+    "不可變來源邊界",
+    "Wenlan 不要求使用者自訂 Page schema",
   ]) {
     assert.match(articleText, new RegExp(expected.replace("/", "\\/")));
   }
@@ -1002,7 +1009,7 @@ test("zh-CN LLM wiki guide owns the AI knowledge-base search intent", async () =
   assert.match(article.title, /Karpathy LLM Wiki/);
   assert.match(article.metaTitle, /AI 知识库/);
   assert.equal(article.publishedAt, "2026-07-04");
-  assert.equal(article.updatedAt, "2026-08-01");
+  assert.equal(article.updatedAt, "2026-08-12");
   assert.match(article.sections[0].heading, /Karpathy LLM Wiki/);
   assert.match(JSON.stringify(article), /不代表 Karpathy 为 Wenlan 背书/);
   assert.ok(article.keywords.includes("AI 知识库"));
@@ -1012,6 +1019,8 @@ test("zh-CN LLM wiki guide owns the AI knowledge-base search intent", async () =
   const headings = article.sections.map((section) => section.heading);
   assert.ok(headings.includes("LLM Wiki 知识库和 RAG 有什么不同"));
   assert.ok(headings.includes("如何搭建一个会持续更新的 AI 知识库"));
+  assert.ok(headings.includes("一份最小可用的 LLM Wiki Schema"));
+  assert.ok(headings.includes("正式使用前的最小验收测试"));
 
   const articleText = JSON.stringify(article);
   for (const expected of [
@@ -1020,6 +1029,11 @@ test("zh-CN LLM wiki guide owns the AI knowledge-base search intent", async () =
     "Lint",
     "/distill",
     "source IDs",
+    "CLAUDE.md",
+    "AGENTS.md",
+    "按需加载",
+    "不可变来源边界",
+    "Wenlan 不要求用户自定义 Page schema",
   ]) {
     assert.match(articleText, new RegExp(expected.replace("/", "\\/")));
   }
@@ -1340,7 +1354,7 @@ test("sitemap includes localized core and Mandarin acquisition routes", async ()
   assert.ok(zhTWLLMWiki);
   assert.equal(
     new Date(zhTWLLMWiki.lastModified).toISOString().slice(0, 10),
-    "2026-08-01",
+    "2026-08-12",
   );
   assert.equal(urls.has("https://wenlan.app/zh-TW/docs/daily-workflow"), false);
   assert.equal(urls.has("https://wenlan.app/zh-CN/docs/daily-workflow"), false);
