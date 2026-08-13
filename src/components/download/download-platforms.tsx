@@ -14,6 +14,7 @@ export type DownloadPlatform = PlatformCopy & {
   href: string;
   format: string;
   size: string;
+  guideHref?: string;
 };
 
 export function DownloadPlatforms({
@@ -113,8 +114,22 @@ export function DownloadPlatforms({
                       {platform.format} · {platform.size}
                     </p>
                     <p className="mt-1 text-xs leading-relaxed text-[var(--o-text-secondary)]">
-                      {copy.packageIncludesLabel}
+                      {platform.packageIncludesLabel ?? copy.packageIncludesLabel}
                     </p>
+                    {platform.guideHref && platform.guideLabel ? (
+                      <TrackedLink
+                        href={platform.guideHref}
+                        eventName="get_started_click"
+                        placement="download-page"
+                        locale={locale}
+                        context="setup"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-flex min-h-11 items-center text-sm font-medium text-[var(--o-text-secondary)] underline decoration-[var(--o-border)] underline-offset-4 transition-colors hover:text-[var(--o-warm)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]"
+                      >
+                        {platform.guideLabel}
+                      </TrackedLink>
+                    ) : null}
                   </div>
                   <TrackedLink
                     href={platform.href}

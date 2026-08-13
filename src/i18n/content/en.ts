@@ -82,7 +82,7 @@ export const enContent = {
         eyebrow: "Download",
         title: "Download Wenlan for your system.",
         description:
-          "Wenlan v0.15.3 ships the CLI, local daemon, and MCP connector together.",
+          "Wenlan v0.15.8 ships a macOS desktop preview plus native CLI, local daemon, and MCP connector builds.",
         stableLabel: "Stable",
         releaseNotesLabel: "Release notes",
         packageIncludesLabel: "CLI · daemon · MCP connector",
@@ -112,10 +112,25 @@ export const enContent = {
           },
           {
             id: "macos-arm64",
-            name: "macOS",
-            architecture: "Apple silicon",
-            description: "Headless runtime with Metal support for local model paths.",
-            actionLabel: "Download macOS Apple silicon",
+            name: "Wenlan Desktop",
+            architecture: "macOS · Apple silicon preview",
+            description:
+              "The fastest way to read Pages and inspect their sources. This preview is not yet notarized; use the inspectable installer guide if macOS blocks the app.",
+            actionLabel: "Download macOS desktop preview",
+            packageIncludesLabel: "Desktop app · bundled runtime",
+            guideLabel: "Open the safe installer guide",
+            setupSteps: [
+              "Download the DMG and drag Wenlan to Applications.",
+              "Open Wenlan. If macOS blocks the preview, use the inspectable installer guide.",
+              "The installer verifies the GitHub release and clears quarantine for Wenlan only.",
+            ],
+          },
+          {
+            id: "macos-runtime-arm64",
+            name: "macOS runtime",
+            architecture: "Apple silicon · headless",
+            description: "CLI, daemon, and MCP connector with Metal support for local model paths.",
+            actionLabel: "Download macOS runtime",
             setupSteps: [
               "Download and extract the TAR.GZ archive.",
               "Move the binaries to a directory on PATH.",
@@ -170,10 +185,10 @@ export const enContent = {
             "Choose one published build, keep its files together, and verify the local runtime before connecting an AI tool.",
           buildsTitle: "Choose your build",
           buildsDescription:
-            "The current release provides four prebuilt desktop archives.",
+            "The current release provides a macOS desktop preview and four native runtime archives.",
           setupTitle: "Install on your platform",
           setupDescription:
-            "Each archive contains the CLI, local daemon, and MCP connector.",
+            "Choose the desktop app or keep the CLI, local daemon, and MCP connector together.",
           verifyTitle: "Verify before you connect",
           verifyDescription:
             "Run the diagnostic after installation. It checks the local runtime and reports the next repair step.",
@@ -659,7 +674,7 @@ export const enContent = {
         description:
           "Agents capture what they learn, you add sources you trust, and Wenlan keeps source-backed wiki pages current across AI work.",
         statusLabel: "Project status",
-        statusItems: ["v0.15.3", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
+        statusItems: ["v0.15.8", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
       },
       sections: [
         {
@@ -686,7 +701,7 @@ export const enContent = {
           number: "04",
           title: "Current status",
           paragraphs: [
-            "Wenlan v0.15.3 ships prebuilt runtime artifacts for macOS Apple Silicon, Linux (x86_64, aarch64; glibc), and Windows (x86_64). The Windows archive includes ONNX Runtime and the Vulkan loader for supported GPUs. macOS Intel remains source/dev-only until a public release workflow publishes that artifact again. The daemon, CLI, MCP server, Claude Code plugin, and Codex plugin are open source under Apache-2.0.",
+            "Wenlan v0.15.8 ships a macOS Apple Silicon desktop preview plus native runtime artifacts for macOS, Linux (x86_64, aarch64; glibc), and Windows (x86_64). The macOS preview is not yet notarized, and Windows remains a runtime ZIP rather than a desktop app. The daemon, CLI, MCP server, Claude Code plugin, and Codex plugin are Apache-2.0; the desktop app crate is AGPL-3.0-only.",
           ],
         },
       ],
@@ -1289,7 +1304,7 @@ export const enContent = {
           number: "01",
           title: "Install the runtime for your system",
           paragraphs: [
-            "Wenlan v0.15.3 ships native runtime packages for Windows x64, macOS Apple silicon, and Linux x64 or ARM64 with glibc. Every archive contains the CLI, daemon, and MCP connector.",
+            "Wenlan v0.15.8 ships native runtime packages for Windows x64, macOS Apple silicon, and Linux x64 or ARM64 with glibc. Every runtime archive contains the CLI, daemon, and MCP connector.",
             "On Windows, extract wenlan-windows-x64.zip as one unit into a user-owned directory on PATH. Keep onnxruntime.dll and vulkan-1.dll beside the three executables.",
           ],
           commands: [
@@ -1300,13 +1315,13 @@ export const enContent = {
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.15.3/wenlan-windows-x64.zip",
+              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.15.8/wenlan-windows-x64.zip",
               label: "Download Windows x64",
             },
             {
               id: "all-downloads",
-              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.15.3",
-              label: "All v0.15.3 downloads",
+              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.15.8",
+              label: "All v0.15.8 downloads",
             },
           ],
         },

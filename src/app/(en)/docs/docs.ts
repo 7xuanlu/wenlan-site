@@ -181,9 +181,9 @@ const productSurfaceBullets = [
   "MCP connector - owner: wenlan; released as wenlan-mcp; run wenlan connect <client>; verify with wenlan connect codex --dry-run.",
   "Claude Code plugin - owner: wenlan; released plugin workflow; install wenlan@7xuanlu; verify with /setup.",
   "Codex plugin - owner: wenlan; released Codex plugin surface; use the plugin-codex setup skill; verify with wenlan connect codex --dry-run.",
-  "ChatGPT and Claude.ai remote MCP - owner: wenlan plus wenlan-app; released Streamable HTTP MCP endpoint with a guided desktop Remote Access path; verify the generated URL before adding a custom app or connector.",
+  "ChatGPT and Claude.ai remote MCP - owner: wenlan; released Streamable HTTP MCP endpoint with a guided desktop Remote Access path; verify the generated URL before adding a custom app or connector.",
   "other MCP clients - owner: wenlan; client-specific config; run wenlan connect cursor or the matching client; restart the client, then call context.",
-  "optional desktop app - owner: wenlan-app; optional daemon client; download the current app release; verify the app talks to localhost:7878.",
+  "optional desktop app - owner: wenlan app/ crate; optional daemon client in the unified release; verify the app talks to localhost:7878.",
   "source build - owner: wenlan; contributor/dev path; run cargo build --workspace; verify with cargo test --workspace.",
   "eval/docs provenance - owner: wenlan; CI/release guarded docs; update the README eval block and check README translations.",
 ];
@@ -1039,7 +1039,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Workspace map",
         body: [
-          "The public repository is a Cargo workspace. The desktop app lives in a separate repo, while the local runtime, CLI, MCP server, shared wire types, core logic, Claude Code plugin, and Codex plugin live together.",
+          "The public repository is a Cargo workspace. The local runtime, CLI, MCP server, shared wire types, core logic, Claude Code plugin, Codex plugin, and AGPL-3.0-only desktop app crate now live together in the versioned monorepo.",
         ],
         code: {
           label: "Repository map",
@@ -1201,7 +1201,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Optional desktop app",
         body: [
-          "The desktop app is a GUI client over the same daemon, not a requirement. Current app releases live in the wenlan-app repo and should be verified against the app version, .wenlan-backend-version pin, and release target before public copy claims support.",
+          "The desktop app is a GUI client over the same daemon, not a requirement. Current app releases come from the main Wenlan repository's version-locked app/ crate and unified release manifest.",
         ],
         link: {
           label: "Read desktop app status",
@@ -3482,7 +3482,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Do I need the desktop app?",
         body: [
-          "No. The daemon, CLI, and MCP connector are the product path. The desktop app is optional and lives in a separate repository.",
+          "No. The daemon, CLI, and MCP connector are the product path. The desktop app is optional and lives in the main repository's AGPL-3.0-only app/ crate.",
           "If you only want agents to use Wenlan, install the plugin or runtime setup and verify the MCP route. You do not need a GUI.",
         ],
         link: {
@@ -3602,7 +3602,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.15.3 line.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.15.8 line.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3698,7 +3698,7 @@ export const docPages: DocPage[] = [
       "Understand how the optional Wenlan desktop app relates to the daemon, plugins, source-backed wiki, and Remote Access for ChatGPT and Claude.ai.",
     metaTitle: "Wenlan Desktop App Status | Docs",
     metaDescription:
-      "Learn whether the Wenlan desktop app is required, what the main Wenlan repo owns, how the separate desktop repo fits, and which license boundary applies.",
+      "Learn whether the Wenlan desktop app is required, how it ships from the main Wenlan repo, and which license boundary applies.",
     keywords: [
       "Wenlan desktop app",
       "Wenlan GUI",
@@ -3710,8 +3710,8 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "4 min read",
     summary: [
-      "The core Wenlan product path is the local daemon, CLI, MCP server, Claude Code plugin, and Codex plugin.",
-      "The desktop app is optional, provides the richest human wiki view, and offers Remote Access for ChatGPT and Claude.ai.",
+      "The core Wenlan product path is the local daemon, CLI, MCP server, Claude Code plugin, and Codex plugin; the desktop app now ships from the same versioned monorepo.",
+      "The desktop app is optional, provides the richest human wiki view, and remains AGPL-3.0-only inside the otherwise Apache-2.0 workspace.",
     ],
     sections: [
       {
@@ -3724,20 +3724,19 @@ export const docPages: DocPage[] = [
       {
         heading: "What the main repo owns",
         body: [
-          "The main Wenlan repo owns the daemon, business logic, CLI, MCP server, shared wire types, Claude Code plugin, and Codex plugin files.",
+          "The main Wenlan repo owns the daemon, business logic, CLI, MCP server, shared wire types, Claude Code plugin, Codex plugin, and the app/ desktop crate.",
           "That is the runtime path documented on this website: setup, capture, recall, handoff, distill, pages, data paths, diagnostics, and releases.",
         ],
       },
       {
-        heading: "What the desktop repo owns",
+        heading: "Where the desktop app lives",
         body: [
-          "The desktop app lives separately so the GUI can evolve without making the local runtime depend on a specific frontend shell.",
-          "When an issue is about memory behavior, retrieval, MCP tools, setup, service management, or the CLI, use the main Wenlan repo. When an issue is about the desktop UI itself, use the desktop app repo.",
-          "The app repo owns the Tauri 2 + React 19 desktop shell, sidecar packaging, app-to-daemon bridge, updater metadata, and .wenlan-backend-version pin. Check the wenlan-app release and pin before publishing an exact app-version claim; app releases can trail the daemon release and still talk to the same local daemon over HTTP at localhost:7878.",
+          "The desktop app now lives under app/ in the main Wenlan repository and is version-locked to the workspace release train. The older split wenlan-app repository is historical, not the current release source.",
+          "The app crate owns the Tauri 2 desktop shell, sidecar packaging, app-to-daemon bridge, updater metadata, source integrations, and Remote Access controls. Release artifacts and updater metadata now come from the unified Wenlan release.",
         ],
         link: {
-          label: "Open desktop app repo",
-          href: "https://github.com/7xuanlu/wenlan-app",
+          label: "Open the app source",
+          href: "https://github.com/7xuanlu/wenlan/tree/v0.15.8/app",
         },
       },
       {
@@ -3762,7 +3761,7 @@ export const docPages: DocPage[] = [
         heading: "License boundary",
         body: [
           "The main daemon, CLI, MCP server, core, shared types, and plugin files are Apache-2.0.",
-          "The optional desktop app has its own repository and AGPL-3.0-only license boundary. Check the desktop repo before reusing app code or contributing across that boundary.",
+          "The optional app/ desktop crate is AGPL-3.0-only inside the same repository. Check the crate license before reusing app code or contributing across that boundary.",
         ],
       },
     ],
@@ -3781,35 +3780,35 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.15.3",
+      "Wenlan version 0.15.8",
       "wenlan-mcp release notes",
     ],
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-08-09",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Quick answer: the current stable release in the repository changelog is v0.15.3, dated 2026-08-01.",
-      "The release publishes native runtime archives for macOS Apple Silicon, Linux x64 and ARM64, and Windows x64. The optional desktop app still releases separately.",
+      "Quick answer: the current stable release in the repository changelog is v0.15.8, dated 2026-08-09.",
+      "The unified release publishes native runtime archives plus a macOS Apple Silicon desktop preview and signed updater artifact.",
     ],
     sections: [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.15.3 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It publishes native archives for Windows x64, macOS Apple Silicon, and Linux x64 or ARM64, and closes the M5 daemon gaps for cutover readiness, page review, and named-page truth axes.",
+          "Wenlan v0.15.8 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It points the desktop updater at the unified release manifest, following v0.15.7's app-bundle promotion and v0.15.6's move of the desktop crate into the monorepo.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
         ],
       },
       {
-        heading: "v0.15.3 highlights",
+        heading: "v0.15.8 highlights",
         body: [
-          "The v0.15.3 release adds daemon cutover-readiness checks, the page-review endpoint, and named-page truth axes on top of the setup compatibility and test-isolation fixes shipped in v0.15.2.",
+          "The v0.15.8 release completes the unified desktop release path by pointing the app updater at the shared manifest. The same release surface carries the macOS desktop preview and native runtime archives.",
         ],
         bullets: [
-          "Cutover-readiness checks expose whether the daemon is ready for the M5 transition.",
-          "A page-review endpoint makes the review surface available through the daemon API.",
-          "Named-page truth axes make page-specific truth state explicit.",
-          "The release keeps native Windows x64, macOS Apple Silicon, and Linux x64 or ARM64 archives.",
-          "Stable release date: 2026-08-01.",
+          "The app updater reads the unified Wenlan release manifest.",
+          "The macOS Apple Silicon app bundle ships from the same versioned monorepo as its sidecars.",
+          "The release keeps native Windows x64, macOS Apple Silicon, and Linux x64 or ARM64 runtime archives.",
+          "The macOS desktop preview is not yet notarized; the maintained installer verifies the release before clearing quarantine for Wenlan only.",
+          "Stable release date: 2026-08-09.",
         ],
       },
       {
@@ -3908,7 +3907,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.15.3, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.15.8, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },
@@ -4426,7 +4425,7 @@ export const docPages: DocPage[] = [
         heading: "What belongs in the main repo",
         body: [
           "The main Wenlan repo contains wenlan-server, wenlan-core, wenlan CLI, wenlan-mcp, wenlan-types, and the Claude Code plugin. Runtime, memory behavior, MCP tooling, docs, evals, and release infrastructure belong there.",
-          "The desktop app is a separate repository. If an issue is about the local runtime, CLI, MCP server, plugin, or memory behavior, the main repo is the right place.",
+          "The desktop app is the AGPL-3.0-only app/ crate in the main repository. If an issue is about the local runtime, CLI, MCP server, plugin, or desktop interface, the Wenlan repository is the right place.",
         ],
       },
       {

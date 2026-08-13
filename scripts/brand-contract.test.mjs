@@ -1008,14 +1008,23 @@ test("public current-release surfaces track the authoritative Wenlan release", a
   assert.match(releases, /wenlan-darwin-arm64\.tar\.gz/);
   assert.match(releases, /wenlan-linux-x64\.tar\.gz/);
   assert.match(releases, /wenlan-linux-arm64\.tar\.gz/);
+  assert.match(
+    releases,
+    new RegExp(`Wenlan_${escapedVersion}_aarch64\\.dmg`),
+  );
+  assert.match(releases, /id: "macos-runtime-arm64"/);
+  assert.doesNotMatch(releases, /Wenlan_aarch64\.app\.tar\.gz/);
   assert.match(downloadSection, /id="download"/);
   assert.match(downloadSection, /placement="home-download"/);
   assert.match(englishContent, new RegExp(`"v${escapedVersion}"`));
   assert.match(englishContent, new RegExp(`Wenlan v${escapedVersion} ships`));
   assert.match(simplifiedContent, new RegExp(`"版本 v${escapedVersion}"`));
-  assert.match(simplifiedContent, new RegExp(`Wenlan v${escapedVersion} 支持`));
+  assert.match(simplifiedContent, new RegExp(`Wenlan v${escapedVersion} 提供`));
   assert.match(traditionalContent, new RegExp(`"版本 v${escapedVersion}"`));
-  assert.match(traditionalContent, new RegExp(`Wenlan v${escapedVersion} 支援`));
+  assert.match(traditionalContent, new RegExp(`Wenlan v${escapedVersion} 提供`));
+  assert.match(englishContent, /preview is not yet notarized/);
+  assert.match(traditionalContent, /預覽版尚未完成 notarization/);
+  assert.match(simplifiedContent, /预览版尚未完成 notarization/);
   assert.match(aboutOg, new RegExp(`v${escapedVersion} · Apache-2\\.0`));
   assert.match(docs, new RegExp(`current stable ${escapedVersion}`));
   assert.match(docs, new RegExp(`Wenlan version ${escapedVersion}`));
@@ -1067,6 +1076,9 @@ test("download information architecture keeps the homepage compact and the full 
   assert.match(downloadPlatforms, /open=\{isRecommended/);
   assert.match(downloadPlatforms, /placement="download-page"/);
   assert.match(downloadPlatforms, /copy\.packageIncludesLabel/);
+  assert.match(downloadPlatforms, /platform\.packageIncludesLabel/);
+  assert.match(downloadPlatforms, /platform\.guideHref/);
+  assert.match(downloadPlatforms, /platform\.guideLabel/);
   assert.match(downloadPage, /"@type": "BreadcrumbList"/);
   assert.match(downloadPage, /wenlan doctor/);
   assert.match(englishRoute, /buildPageMetadata\(\s*"en",\s*"\/download"/s);
