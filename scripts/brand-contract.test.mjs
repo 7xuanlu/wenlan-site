@@ -215,6 +215,22 @@ test("package metadata uses the wenlan-site identity", async () => {
   assert.match(packageJson.scripts["seo:weekly:sample"], /\/tmp\/wenlan-weekly-seo-sample\.md$/);
 });
 
+test("knowledge graph docs answer the AI-agent knowledge-base job without replacing sources", async () => {
+  const docs = await readRepo("src/app/docs/docs.ts");
+  const knowledgeGraph = docs.match(
+    /slug: "knowledge-graph",[\s\S]*?(?=\n  \{\n    slug: "source-backed-pages")/,
+  )?.[0];
+
+  assert.ok(knowledgeGraph, "expected the knowledge-graph docs record");
+  assert.match(knowledgeGraph, /AI Agent Knowledge Graph/);
+  assert.match(knowledgeGraph, /source-backed AI knowledge base/i);
+  assert.match(knowledgeGraph, /Quick answer:/);
+  assert.match(knowledgeGraph, /entities, relations, and observations/i);
+  assert.match(knowledgeGraph, /source memories and maintained pages/i);
+  assert.match(knowledgeGraph, /supporting evidence/i);
+  assert.doesNotMatch(knowledgeGraph, /graph context (?:is|becomes) (?:the )?authority/i);
+});
+
 test("root document includes Vercel Web Analytics only on Vercel", async () => {
   const packageJson = JSON.parse(await readRepo("package.json"));
   const rootDocument = await readRepo("src/app/root-document.tsx");
