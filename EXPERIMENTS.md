@@ -6145,3 +6145,46 @@ increase for that experiment.
   changes remain unapproved.
 - Decision: publish the verified candidate and keep the production slot until
   the merged Vercel Production deployment and live three-locale gates pass.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-11-llm-wiki-schema-template-refresh production verification
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-11-llm-wiki-schema-template-refresh
+- Observed at: 2026-08-13T05:22:32Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #124 squash-merged at `2026-08-13T05:21:47Z` as
+  `38e5a6b69a0b30a73550f97732b59c2fff0b5b8c`; Vercel Production deployment
+  `5882382588` completed successfully at `2026-08-13T05:22:32Z`. The deployed
+  technical audit passed 120 sitemap URLs, 24 key pages, six utility noindex
+  headers, sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host
+  redirects, and old-URL exclusion. Direct live HTML and fresh 393px plus
+  1440px renders pass all three locale content, canonical, robots, schema,
+  FAQ, overflow, and browser-console floors.
+- Result: pending
+- Decision: wait
+- Next step: preserve the production pages unchanged and run the technical
+  and source-native 24-hour readout after `2026-08-14T05:22:32Z`; do not infer
+  crawl, indexing, ranking, impression, click, visitor, star, or causality
+  from deployment.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-13T05:22:32Z — LLM Wiki starter-schema production record
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-11-llm-wiki-schema-template-refresh`
+- Status: production-verified and measuring; production slot open
+- Publication: commit `16e30743f2b818732f6d9f48e91ff24105b683d2`
+  published through PR #124; squash merge
+  `38e5a6b69a0b30a73550f97732b59c2fff0b5b8c` entered `main` at
+  `2026-08-13T05:21:47Z`.
+- Deployment: Vercel Production deployment `5882382588` completed with state
+  `success` at `2026-08-13T05:22:32Z`.
+- Live verification: deployed technical SEO, exact three-locale HTML, 393px
+  and 1440px responsive rendering, content sections, FAQ count, canonical,
+  indexability, schema dates, Article/BreadcrumbList, reference links, and
+  browser console all pass.
+- Interpretation: publication integrity is proven; search and traffic effect
+  is not. The original independent 10-impression post-crawl locale guards and
+  all approval exclusions remain unchanged.
