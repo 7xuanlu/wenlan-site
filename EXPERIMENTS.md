@@ -5990,3 +5990,158 @@ increase for that experiment.
 - Excluded actions: no request indexing, GSC validation, external publication,
   paid action, synthetic event, analytics mutation, or metric-definition
   change.
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-02-ai-knowledge-base-tool-selection correction
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-02-ai-knowledge-base-tool-selection
+- Observed at: 2026-08-02T08:22:13Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #118 published the three-locale family at
+  `2026-08-02T07:55:01Z`; PR #119 production-verified its render-only CJK
+  correction at `2026-08-02T08:22:13Z`. The deployed technical checker and
+  exact 393px and 1440px locale renders passed. This correction records the
+  already-preserved production observation in verifier-readable form.
+- Result: pending
+- Decision: wait
+- Next step: keep the original production boundary and independent locale
+  exposure guards; wait for source-native readouts rather than holding the
+  production slot.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-11-llm-wiki-schema-template-refresh
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-11-llm-wiki-schema-template-refresh
+- Status: active
+- Data window: 2026-08-08..2026-08-14
+- Asset class: refresh
+- Launched: 2026-08-13
+- Hypothesis: adding a concise vendor-neutral starter schema, on-demand
+  procedure boundary, and source-change acceptance test to the existing LLM
+  Wiki canonicals will help each locale earn a first target-page click or a
+  privacy-visible qualified template/schema query without splitting category
+  ownership into another URL.
+- Candidate evidence: Karpathy's inspectable LLM-wiki note; the maintained
+  jackwener implementation; an independent English CLAUDE.md template; two
+  independent Reddit implementation/verification questions; maintained
+  Simplified-Chinese OSS and a Chinese walkthrough; two independent
+  Traditional-Chinese explanations; and maintained Wenlan first-party source.
+  Source URLs, capture dates, languages, and available native units are
+  preserved in
+  `docs/seo-audits/2026-08-11-llm-wiki-schema-template-candidate.md`.
+- Baseline: authenticated GSC `2026-07-14..2026-08-10` reports 7 property
+  clicks and 869 impressions, 2 visible-query clicks and 174 impressions,
+  and a 5-click and 695-impression visibility gap. English, zh-TW, and zh-CN
+  target rows are independently 0 clicks/5 impressions, 0/1, and 0/3.
+  Vercel target rows remain separate at 10/15, 5/9, and 16/21
+  visitors/pageviews. Missing visible schema queries are unavailable, not
+  zero; no source-to-page or causal join is inferred.
+- Change: refresh only the existing English, zh-TW, and zh-CN
+  `/learn/distilled-wiki-pages-ai-memory` canonical family. Add a minimum
+  schema checklist, compact CLAUDE.md/AGENTS.md client contract, on-demand
+  ingest/query/lint/review boundary, a five-step source-change acceptance
+  test, two maintained implementation references, and the explicit Wenlan
+  boundary that users do not author its internal Page schema.
+- Fixed surfaces: keep each current URL, title and category ownership,
+  `datePublished` (`2026-06-24` English; `2026-07-04` Mandarin), canonical,
+  reciprocal hreflang, sitemap membership, Article and BreadcrumbList schema,
+  maintained source list, visible FAQ, and absence of `FAQPage`. Only
+  `dateModified` moves to `2026-08-12`.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 10 GSC target-page impressions per locale after a
+  confirmed post-deploy crawl; locales are never pooled.
+- Success criteria: after minimum exposure, the locale records at least one
+  target-page click, or a privacy-visible qualified template/schema query
+  records at least 5 impressions on the intended locale canonical without a
+  visible owner split.
+- Failure criteria: after minimum exposure and a confirmed post-deploy crawl,
+  the locale has zero target-page clicks and no privacy-visible qualified
+  query reaches 5 impressions by W4.
+- Inconclusive: the locale remains below 10 target-page impressions, lacks a
+  confirmed post-deploy crawl, or available performance data mixes another
+  edit to the same canonical.
+- Stop criteria: another controller edits the same canonical; canonical,
+  indexability, hreflang, schema, source, FAQ, or responsive floors regress;
+  first-party product truth changes; or the copy implies an unsupported user-
+  authored Wenlan Page schema.
+- 24h readout: pending after production completion; technical and source-
+  native evidence only.
+- 7d readout: pending after production completion plus seven days.
+- W2 readout: pending after production completion plus fourteen days.
+- W4 readout: pending after production completion plus twenty-eight days.
+- W8 readout: pending after production completion plus fifty-six days.
+- Result: pending
+- Decision: wait
+- Next step: run the full local content, SEO, i18n, TypeScript, build,
+  technical, locale, and responsive visual gates. Do not publish or request
+  indexing from this start record.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-13 — LLM Wiki starter-schema local verification
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-11-llm-wiki-schema-template-refresh`
+- Status: active; local preparation verified; publication pending approval
+- Verification: `pnpm seo:goal:check`, 222 SEO tests, 63 i18n tests,
+  TypeScript, the 223-page production build, the built technical audit, 27
+  expected localized 200 routes, four expected localized 404 routes, and
+  `git diff --check` pass.
+- Render evidence: fresh English, zh-TW, and zh-CN production-build checks at
+  393px and 1440px show no document overflow; H1 and the new starter-schema
+  and acceptance-test sections remain inside the content column; mobile code
+  blocks scroll only inside their own containers; FAQ content remains
+  present; and the browser reports no warning or error.
+- Built SEO packet: each locale has its exact self-canonical, `index, follow`,
+  reciprocal English, zh-TW, zh-CN, and x-default alternates, its stable
+  original `datePublished`, `dateModified: 2026-08-12`, Article and
+  BreadcrumbList schema, and zero `FAQPage` occurrences. The Karpathy,
+  Rohitg00, jackwener, and Hjarni reference URLs each return HTTP 200.
+- Interpretation: this verifies local implementation and presentation only.
+  It is not publication, crawl, indexing, ranking, impression, click,
+  visitor, star, or causal evidence.
+- Decision: request the separate publication approval already required by the
+  frozen boundary. Do not request indexing or submit GSC validation.
+
+### 2026-08-13 — publication-approval blocker audit
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-11-llm-wiki-schema-template-refresh`
+- Status: active local candidate; shared-state work paused
+- Evidence: the candidate gate, implementation, deterministic tests, build,
+  built SEO packet, three-locale route matrix, responsive render inspection,
+  external-reference checks, and diff hygiene are complete. The same explicit
+  approval boundary has prevented commit, push, PR creation, merge, automatic
+  Vercel deployment, and production verification for three consecutive Goal
+  turns.
+- Result: the repository can make no further attributable progress on this
+  experiment without a user decision. Repeating local checks would add no new
+  evidence and would not increase exposure.
+- Decision: pause the Goal controller at its frozen approval stop condition.
+  Preserve the prepared branch and resume from this exact candidate if the
+  user approves publication.
+- Next decision needed: approve or reject commit, push, PR creation, merge,
+  automatic Vercel deployment, and read-only production verification for
+  `codex/llm-wiki-starter-schema`. Request indexing, GSC validation, external
+  publication, paid actions, synthetic events, analytics mutation, and metric
+  changes remain excluded.
+
+### 2026-08-13 — LLM Wiki starter-schema publication approval
+
+- Record type: campaign-observation
+- Related experiment: `EXP-2026-08-11-llm-wiki-schema-template-refresh`
+- Status: approved; consumes the single website production slot
+- Approval: the user explicitly approved commit, push, PR creation, merge,
+  automatic Vercel deployment, and read-only production verification for the
+  exact `codex/llm-wiki-starter-schema` candidate.
+- Included scope: the existing English, zh-TW, and zh-CN LLM Wiki canonical
+  refresh, focused contracts, the candidate audit, and its PLAN and ledger
+  records.
+- Excluded actions: request indexing, GSC validation, external publication,
+  paid actions, synthetic events, analytics mutation, and metric-definition
+  changes remain unapproved.
+- Decision: publish the verified candidate and keep the production slot until
+  the merged Vercel Production deployment and live three-locale gates pass.

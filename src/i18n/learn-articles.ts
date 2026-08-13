@@ -42,7 +42,7 @@ const zhTWArticles = {
       "Wenlan 文瀾",
     ],
     publishedAt: "2026-07-04",
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-08-12",
     author: "Qi-Xuan Lu",
     readingTime: "9 分鐘閱讀",
     audience: "正在搭建可由 AI 代理讀取、更新並檢查來源的本地知識庫的繁體中文使用者",
@@ -91,6 +91,49 @@ const zhTWArticles = {
         ],
       },
       {
+        heading: "一份最小可用的 LLM Wiki Schema",
+        body: [
+          "讓固定載入的合約保持精簡。CLAUDE.md 或 AGENTS.md 只需說明知識庫的用途、不可靜默改變的邊界，以及需要時才按需載入的操作流程；不要把整個 wiki 或所有維護指令都塞進每次 context。",
+          "這是工具無關的資訊與維護合約，不強迫特定資料夾或產品儲存格式；可以調整名稱，但每個邊界都應該能被檢查。",
+        ],
+        bullets: [
+          "用途與範圍：哪些重複問題或決策屬於這個 wiki，哪些不屬於。",
+          "不可變來源邊界：原始證據放在哪裡，以及自動化絕不能改寫哪些檔案。",
+          "頁面所有權：哪些頁面由機器維護、人擁有，或只能透過審查修改。",
+          "命名與連結規則：穩定主題、別名、頁面連結和最小 routing index。",
+          "引用要求：重要說法必須能回到可檢查來源。",
+          "Ingest、Query、Lint 與維護紀錄：分開按需載入的流程，加上 append-only 變更紀錄。",
+          "過期與審查行為：來源改變、證據衝突或人擁有文字時要怎麼處理。",
+        ],
+        code: {
+          label: "精簡 client 合約",
+          code: [
+            "# LLM Wiki",
+            "用途：<這個 wiki 維護的重複決策>",
+            "來源：<不可變來源邊界>",
+            "頁面：<所有權、命名、連結、引用>",
+            "索引：<最小主題路由；頁面按需載入>",
+            "流程：ingest | query | lint | review",
+            "紀錄：<append-only 維護紀錄>",
+            "過期規則：<來源改變 -> stale 或 review>",
+          ].join("\n"),
+        },
+      },
+      {
+        heading: "正式使用前的最小驗收測試",
+        body: [
+          "檔案存在不代表 template 已經可用。先用一個無風險主題做端到端測試，而且必須包含一次來源變更，再匯入私人或重要資料。",
+          "這套驗收可用於資料夾加 prompt、Obsidian 工作流或專門的 LLM Wiki 工具；預期結果是人能檢查的證據，不只是一段流暢回答。",
+        ],
+        bullets: [
+          "匯入一份無風險來源，確認原始內容沒有被改寫。",
+          "回答一個問題，並替重要說法引用來源。",
+          "執行 lint，確認缺少引用、斷鏈或重複能被看見。",
+          "修改來源，再問一次相同問題。",
+          "確認舊答案進入 stale 或 review，而不是被靜默覆蓋。",
+        ],
+      },
+      {
         heading: "如何搭建會持續更新的 AI 知識庫",
         body: [
           "先選一個低風險的小主題，不要一開始就匯入整個 vault。註冊可檢查的來源，捕捉一條完整事實，再把相關內容蒸餾成主題頁面；接著用同一問題重新檢索，並從頁面回到 source IDs 檢查證據。",
@@ -133,6 +176,7 @@ const zhTWArticles = {
         body: [
           "Wenlan 把 Sources、Memories 和 Pages 分成三種耐久角色：Sources 保存原始材料，Memories 保存工作中產生的原子事實，Pages 編成有來源的目前解釋。本地 daemon 負責檢索，Markdown 頁面和 git 歷史讓結果保持可見。",
           "每個蒸餾頁面都要保留 source IDs。頁面可以隨著新證據過期、刷新或進入審查；memory 在這裡是支撐知識庫的材料和狀態，不是產品的搜尋入口。",
+          "Wenlan 不要求使用者自訂 Page schema。typed Memory fields 與內建 Page 規則已管理來源、引用、刷新、所有權和審查；上面的 starter schema 是可攜的 client 與流程驗收合約。",
         ],
         link: {
           label: "檢查有來源頁面模型",
@@ -190,6 +234,14 @@ const zhTWArticles = {
       {
         label: "Karpathy 的 LLM Wiki 說明",
         href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      },
+      {
+        label: "jackwener LLM Wiki 實作",
+        href: "https://github.com/jackwener/llm-wiki",
+      },
+      {
+        label: "LLM Wiki CLAUDE.md template",
+        href: "https://hjarni.com/blog/llm-wiki-claude-md-template",
       },
       {
         label: "LLM Wiki v2 提案",
@@ -832,7 +884,7 @@ const zhCNArticles = {
       "Wenlan 文澜",
     ],
     publishedAt: "2026-07-04",
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-08-12",
     readingTime: "9 分钟阅读",
     audience: "正在搭建可由 AI 代理读取、更新并检查来源的本地知识库的中文用户",
     heroBullets: [
@@ -880,6 +932,49 @@ const zhCNArticles = {
         ],
       },
       {
+        heading: "一份最小可用的 LLM Wiki Schema",
+        body: [
+          "让固定加载的契约保持精简。CLAUDE.md 或 AGENTS.md 只需说明知识库的用途、不可静默改变的边界，以及需要时才按需加载的操作流程；不要把整个 wiki 或所有维护指令都塞进每次 context。",
+          "这是工具无关的信息与维护契约，不强迫特定文件夹或产品存储格式；可以调整名称，但每个边界都应该能够检查。",
+        ],
+        bullets: [
+          "用途与范围：哪些重复问题或决策属于这个 wiki，哪些不属于。",
+          "不可变来源边界：原始证据放在哪里，以及自动化绝不能改写哪些文件。",
+          "页面所有权：哪些页面由机器维护、人拥有，或只能通过审核修改。",
+          "命名与链接规则：稳定主题、别名、页面链接和最小 routing index。",
+          "引用要求：重要说法必须能够回到可检查来源。",
+          "Ingest、Query、Lint 与维护记录：分开按需加载的流程，加上 append-only 变更记录。",
+          "过期与审核行为：来源改变、证据冲突或人拥有文字时要如何处理。",
+        ],
+        code: {
+          label: "精简 client 契约",
+          code: [
+            "# LLM Wiki",
+            "用途：<这个 wiki 维护的重复决策>",
+            "来源：<不可变来源边界>",
+            "页面：<所有权、命名、链接、引用>",
+            "索引：<最小主题路由；页面按需加载>",
+            "流程：ingest | query | lint | review",
+            "记录：<append-only 维护记录>",
+            "过期规则：<来源改变 -> stale 或 review>",
+          ].join("\n"),
+        },
+      },
+      {
+        heading: "正式使用前的最小验收测试",
+        body: [
+          "文件存在不代表 template 已经可用。先用一个无风险主题做端到端测试，而且必须包含一次来源变更，再导入私人或重要资料。",
+          "这套验收可用于文件夹加 prompt、Obsidian 工作流或专门的 LLM Wiki 工具；预期结果是人能检查的证据，不只是一段流畅回答。",
+        ],
+        bullets: [
+          "导入一份无风险来源，确认原始内容没有被改写。",
+          "回答一个问题，并为重要说法引用来源。",
+          "运行 lint，确认缺失引用、断链或重复能够被看见。",
+          "修改来源，再问一次相同问题。",
+          "确认旧答案进入 stale 或 review，而不是被静默覆盖。",
+        ],
+      },
+      {
         heading: "如何搭建一个会持续更新的 AI 知识库",
         body: [
           "先选一个无风险的小主题，不要一开始就导入整个 vault。注册可检查的来源，捕捉一条完整事实，再把相关内容蒸馏成主题页面；随后用同一问题重新检索，并从页面回到 source IDs 检查证据。",
@@ -922,6 +1017,7 @@ const zhCNArticles = {
         body: [
           "Wenlan 把 Sources、Memories 和 Pages 分成三种耐久角色：Sources 保存原始材料，Memories 保存工作中产生的原子事实，Pages 编成有来源的当前解释。本地 daemon 负责检索，Markdown 页面和 git 历史让结果保持可见。",
           "每个蒸馏页面都要保留 source IDs。页面可以随着新证据变旧、刷新或进入审查；memory 在这里是支撑知识库的材料和状态，不是产品的搜索入口。",
+          "Wenlan 不要求用户自定义 Page schema。typed Memory fields 与内置 Page 规则已经管理来源、引用、刷新、所有权和审核；上面的 starter schema 是可移植的 client 与流程验收契约。",
         ],
         link: {
           label: "检查有来源页面模型",
@@ -979,6 +1075,14 @@ const zhCNArticles = {
       {
         label: "Karpathy 的 LLM Wiki 说明",
         href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      },
+      {
+        label: "jackwener LLM Wiki 实现",
+        href: "https://github.com/jackwener/llm-wiki",
+      },
+      {
+        label: "LLM Wiki CLAUDE.md template",
+        href: "https://hjarni.com/blog/llm-wiki-claude-md-template",
       },
       {
         label: "LLM Wiki v2 提案",

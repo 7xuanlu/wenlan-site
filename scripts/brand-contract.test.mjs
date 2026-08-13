@@ -391,7 +391,7 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
     /metaTitle:\s*"Karpathy LLM Wiki & AI Knowledge Base \| Wenlan"/,
   );
   assert.match(article, /publishedAt:\s*"2026-06-24"/);
-  assert.match(article, /updatedAt:\s*"2026-08-01"/);
+  assert.match(article, /updatedAt:\s*"2026-08-12"/);
   assert.match(article, /heading:\s*"The Karpathy LLM Wiki pattern"/);
   assert.match(article, /does not imply that Karpathy endorses Wenlan/);
   assert.match(article, /heading:\s*"The five-minute LLM-wiki protocol"/);
@@ -403,6 +403,19 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.match(article, /\/pages <topic>/);
   assert.match(article, /heading:\s*"How to verify the loop"/);
   assert.match(article, /source IDs or citations/);
+  assert.match(article, /heading:\s*"A minimum LLM-wiki starter schema"/);
+  assert.match(article, /Purpose and scope/);
+  assert.match(article, /Immutable source boundary/);
+  assert.match(article, /Naming and linking rules/);
+  assert.match(article, /Ingest, query, lint, and maintenance log/);
+  assert.match(article, /CLAUDE\.md or AGENTS\.md/);
+  assert.match(article, /load on demand/);
+  assert.match(article, /heading:\s*"A small acceptance test before real use"/);
+  assert.match(article, /Ingest one harmless source/);
+  assert.match(article, /Answer one question and cite the source/);
+  assert.match(article, /Change the source/);
+  assert.match(article, /stale or review/);
+  assert.match(article, /Wenlan does not require a user-authored Page schema/);
   assert.match(article, /heading:\s*"Failure modes and repairs"/);
   assert.match(article, /context bloat/i);
   assert.match(article, /stale links and contradictions/i);
