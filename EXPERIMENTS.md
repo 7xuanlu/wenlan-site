@@ -6526,3 +6526,34 @@ increase for that experiment.
   paid action, synthetic events, analytics mutation, and metric changes.
 - Decision: publish the exact locally verified scope and keep the production
   slot occupied until the Vercel deployment and live checks pass.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-13-ai-agent-knowledge-graph-refresh production verification
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-13-ai-agent-knowledge-graph-refresh
+- Observed at: 2026-08-13T06:43:11Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #126 squash-merged at `2026-08-13T06:39:04Z` as
+  `fe5e6c7816c397d207de71ae6d28069b355b313d`; Vercel Production deployment
+  `5883194191` completed successfully at `2026-08-13T06:39:50Z`. The deployed
+  technical checker passed 120 sitemap URLs, 24 key pages, six utility
+  noindex headers, `FAQPage` absence across every sitemap page, 25 redirects,
+  six bridge-host redirects, and old-URL sitemap exclusion. The live English
+  target returns direct HTTP 200 with exact self-canonical, `index, follow`,
+  the intended AI-agent knowledge-graph H1 and compact first answer,
+  TechArticle and BreadcrumbList schema, and sitemap membership; `FAQPage` is
+  absent and the unsupported zh-TW and zh-CN Docs routes remain direct 404s.
+  Fresh Chrome device emulation measured exact 393px and 1440px CSS viewports:
+  document and body scroll widths equal their client widths, the H1 stays
+  inside the viewport, both content floors are visible, no image is broken,
+  and no page exception occurred. Complete screenshots were inspected.
+- Result: pending
+- Decision: wait
+- Next step: use `2026-08-13T06:39:50Z` as the production and measurement
+  boundary; run the 24-hour source-native readout only after
+  `2026-08-14T06:39:50Z`. Do not infer a Google crawl, indexing effect,
+  impressions, clicks, traffic lift, or causality from deployment, and do not
+  request indexing or submit validation.
+<!-- EXPERIMENT-RECORD:END -->

@@ -214,6 +214,15 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   campaign records. Request indexing, GSC validation, external publication,
   paid action, synthetic events, analytics mutation, and metric changes remain
   excluded.
+- PR #126 squash-merged at `2026-08-13T06:39:04Z` as
+  `fe5e6c7816c397d207de71ae6d28069b355b313d`; Vercel Production deployment
+  `5883194191` completed successfully at `2026-08-13T06:39:50Z`. The deployed
+  technical audit, exact page contract, schema, sitemap, intentional locale
+  404 behavior, and fresh 393px plus 1440px production renders pass. The
+  Knowledge Graph experiment is production-verified and measuring; it no
+  longer consumes the website production slot. No indexing request, GSC
+  validation, external publication, paid action, synthetic event, analytics
+  mutation, or metric change occurred.
 - At `2026-08-13`, the user explicitly approved commit, push, PR creation,
   merge, automatic Vercel deployment, and read-only production verification
   for the exact `EXP-2026-08-11-llm-wiki-schema-template-refresh` candidate on
@@ -386,12 +395,15 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-13-ai-agent-knowledge-graph-refresh` is in active local
-  preparation and consumes the single website preparation slot. It refreshes
-  only the existing indexed English `/docs/knowledge-graph` canonical and
-  creates no URL or Mandarin Docs route. Commit, push, PR, merge, deployment,
-  indexing, validation, external publication, paid action, synthetic events,
-  analytics mutation, and metric changes remain separately gated.
+  `EXP-2026-08-13-ai-agent-knowledge-graph-refresh` is production-verified
+  and measuring; it no longer consumes the single website production slot.
+  It refreshes only the existing indexed English `/docs/knowledge-graph`
+  canonical and creates no URL or Mandarin Docs route. PR #126 squash-merged
+  at `2026-08-13T06:39:04Z` as
+  `fe5e6c7816c397d207de71ae6d28069b355b313d`; Vercel Production deployment
+  `5883194191` completed successfully at `2026-08-13T06:39:50Z`. Indexing,
+  validation, external publication, paid action, synthetic events, analytics
+  mutation, and metric changes remain separately gated.
   `EXP-2026-08-11-llm-wiki-schema-template-refresh` is production-verified
   and measuring; it no longer consumes the single website production slot.
   It refreshes only the existing English, zh-TW, and zh-CN LLM Wiki canonical
@@ -944,8 +956,8 @@ fixed baseline or the fixed final read.
 
 ### Current experiment
 
-`EXP-2026-08-13-ai-agent-knowledge-graph-refresh` is in active local
-preparation and consumes the single website preparation slot. It refreshes
+`EXP-2026-08-13-ai-agent-knowledge-graph-refresh` is production-verified and
+measuring; the single website production slot is open. It refreshes
 only the existing indexed English `/docs/knowledge-graph` canonical and
 creates no URL or Mandarin Docs route. The candidate gate passes from
 independent English GitHub and Reddit observations, public Simplified-Chinese
@@ -971,9 +983,19 @@ copy. The full suite passed 223/223; TypeScript, the Goal verifier, diff
 hygiene, production build, and built-site technical SEO passed. Fresh local
 production rendering covered the complete page in four desktop and eight
 393px mobile viewports with no text clipping, horizontal overflow, broken
-images, or awkward heading orphan. Publication is approved for this exact
-verified branch; the candidate remains active until Vercel production and the
-read-only production checks complete.
+images, or awkward heading orphan.
+
+PR #126 squash-merged at `2026-08-13T06:39:04Z` as
+`fe5e6c7816c397d207de71ae6d28069b355b313d`; Vercel Production deployment
+`5883194191` completed successfully at `2026-08-13T06:39:50Z`. The deployed
+technical audit passed 120 sitemap URLs, 24 key pages, six utility noindex
+headers, sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host
+redirects, and old-URL exclusions. Direct production HTML confirms HTTP 200,
+exact canonical, `index, follow`, the intended H1 and first answer,
+TechArticle plus BreadcrumbList, sitemap membership, and intentional zh-TW
+and zh-CN 404s. Fresh exact 393px and 1440px browser renders have no document
+overflow, clipped H1, broken image, or page exception. The experiment's 24h
+readout is due after `2026-08-14T06:39:50Z`.
 
 ### Stopped experiment: Karpathy LLM Wiki locales
 
@@ -1597,13 +1619,14 @@ contract is in
 `docs/seo-audits/2026-08-13-ai-agent-knowledge-graph-coverage-gate.md`.
 External observations remain demand discovery, not GSC or keyword volume.
 
-The bounded English Docs refresh is locally ready and the user approved its
-exact commit, push, PR creation, merge, automatic Vercel deployment, and
-read-only production verification at `2026-08-13T06:36:02Z`. Publish only
-that verified branch, then close the production slot after the live technical,
-content, locale, and rendered checks pass. Request indexing, GSC validation,
-external posts, paid action, synthetic events, analytics mutation, and metric
-changes remain outside that publication scope.
+The bounded English Docs refresh is production-verified from Vercel deployment
+`5883194191` at `2026-08-13T06:39:50Z`. Its live technical, content, locale,
+schema, sitemap, and exact-device rendered checks pass, so the production slot
+is open. Wait for its 24-hour source-native readout after
+`2026-08-14T06:39:50Z`; do not infer a Google crawl, impression or click lift,
+or causal result from deployment. Request indexing, GSC validation, external
+posts, paid action, synthetic events, analytics mutation, and metric changes
+remain outside the publication scope.
 
 The overdue W2 readout for the existing English Obsidian + Claude Code page
 was reconciled at `2026-08-13T06:07:55Z` without rerunning the weekly pipeline.
