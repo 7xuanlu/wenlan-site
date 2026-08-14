@@ -2294,7 +2294,12 @@ const trustArticles: BaseSpec[] = [
       "Where do I find the source IDs?",
       "Use Wenlan page-source views or APIs for page sources, and use recall/review surfaces for atomic memory records and corrections.",
     ],
-    relatedSlugs: ["source-backed-wiki-pages-ai-work", "review-before-trust-ai-memory", "local-git-history-ai-memory"],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "ai-work-memory-vs-knowledge-base",
+      "review-before-trust-ai-memory",
+      "local-git-history-ai-memory",
+    ],
   },
   {
     slug: "local-git-history-ai-memory",
@@ -2467,7 +2472,12 @@ const trustArticles: BaseSpec[] = [
       "Can Wenlan still work beside broader tools?",
       "Yes. Use Wenlan for local AI work memory and other tools for notes, tasks, calendars, or app infrastructure.",
     ],
-    relatedSlugs: ["ai-work-memory", "wenlan-vs-mem0", "persistent-project-context-for-ai-agents"],
+    relatedSlugs: [
+      "ai-work-memory",
+      "ai-work-memory-vs-knowledge-base",
+      "wenlan-vs-mem0",
+      "persistent-project-context-for-ai-agents",
+    ],
     officialReferences: [
       {
         label: "Wenlan project scope docs",

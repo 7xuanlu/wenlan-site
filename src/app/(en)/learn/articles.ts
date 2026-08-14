@@ -1758,7 +1758,12 @@ source changes
           "A database-only memory layer can become opaque. Wenlan keeps readable artifacts available so people can inspect and correct what AI tools rely on.",
       },
     ],
-    relatedSlugs: ["local-first-ai-memory", "wenlan-vs-basic-memory", "ai-work-memory"],
+    relatedSlugs: [
+      "local-first-ai-memory",
+      "ai-work-memory-vs-knowledge-base",
+      "wenlan-vs-basic-memory",
+      "ai-work-memory",
+    ],
     cta: {
       heading: "Keep memory readable and searchable",
       body: "Wenlan pairs readable artifacts with a local retrieval store so memory stays useful to agents and visible to people.",

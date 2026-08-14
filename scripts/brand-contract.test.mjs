@@ -520,9 +520,16 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
 
 test("AI work memory comparison answers the knowledge-base role question directly", async () => {
   const articles = await readRepo("src/app/learn/articles.ts");
+  const supportingArticles = await readRepo("src/app/learn/seo-articles.ts");
   const start = articles.indexOf('slug: "ai-work-memory-vs-knowledge-base"');
   const end = articles.indexOf("\n  {\n    slug:", start);
   const article = articles.slice(start, end);
+
+  const relatedSources = [
+    [articles, "markdown-local-index-ai-memory"],
+    [supportingArticles, "ai-memory-provenance"],
+    [supportingArticles, "project-scope-ai-memory"],
+  ];
 
   assert.notEqual(start, -1);
   assert.match(
@@ -539,6 +546,18 @@ test("AI work memory comparison answers the knowledge-base role question directl
   assert.match(article, /competitorName: "Knowledge base"/);
   assert.match(article, /dimension: "Unit of knowledge"/);
   assert.match(article, /label: "Wenlan source, memory, and page model"/);
+
+  for (const [sourceFile, slug] of relatedSources) {
+    const sourceStart = sourceFile.indexOf(`slug: "${slug}"`);
+    const sourceEnd = sourceFile.indexOf("\n  {\n    slug:", sourceStart);
+    const source = sourceFile.slice(sourceStart, sourceEnd);
+
+    assert.notEqual(sourceStart, -1);
+    assert.match(
+      source,
+      /relatedSlugs:\s*\[[^\]]*"ai-work-memory-vs-knowledge-base"[^\]]*\]/,
+    );
+  }
 
   const page = await readRepo("src/app/learn/[slug]/page.tsx");
   assert.match(page, /Practical dimensions\./);
