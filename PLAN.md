@@ -212,9 +212,17 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   contextual related-article links, their focused regression test, the
   immutable candidate audit, and required campaign records. Request indexing,
   GSC validation, external publication, paid action, synthetic events,
-  analytics mutation, and metric changes remain excluded. The experiment is
-  active and occupies the single website production slot until production
-  verification passes.
+  analytics mutation, and metric changes remain excluded.
+- PR #128 squash-merged at `2026-08-14T05:41:10Z` as
+  `764649dbeae42684e33d0d1cc8a151be438d98b6`; Vercel Production deployment
+  `CjgnT33d3KWotANpYXSf479Gruve` completed successfully at
+  `2026-08-14T05:41:58Z`. The deployed technical audit, exact source and target
+  contracts, schema, sitemap, intentional unsupported locale 404 behavior,
+  and fresh 393px plus 1440px production renders pass. The contextual-link
+  experiment is production-verified and measuring; it no longer consumes the
+  website production slot. No indexing request, GSC validation, external
+  publication, paid action, synthetic event, analytics mutation, or metric
+  change occurred.
 - At `2026-08-13T06:36:02Z`, the user explicitly approved commit, push, PR
   creation, merge, automatic Vercel deployment, and read-only production
   verification for the exact
@@ -406,11 +414,14 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-13-ai-knowledge-base-context-links` is active and occupies the
-  single production slot. It adds exactly three English contextual links to
-  the existing comparison owner and changes no canonical, schema, sitemap,
-  date, copy, or locale route. Publication was explicitly approved at
-  `2026-08-14T05:24:28Z`; request indexing, validation, external publication,
+  `EXP-2026-08-13-ai-knowledge-base-context-links` is production-verified and
+  measuring; the single website production slot is open. It adds exactly
+  three English contextual links to the existing comparison owner and changes
+  no canonical, schema, sitemap, date, copy, or locale route. PR #128
+  squash-merged at `2026-08-14T05:41:10Z` as
+  `764649dbeae42684e33d0d1cc8a151be438d98b6`; Vercel Production deployment
+  `CjgnT33d3KWotANpYXSf479Gruve` completed successfully at
+  `2026-08-14T05:41:58Z`. Request indexing, validation, external publication,
   paid action, synthetic events, analytics mutation, and metric changes remain
   gated.
   `EXP-2026-08-13-ai-agent-knowledge-graph-refresh` is production-verified
@@ -974,11 +985,10 @@ fixed baseline or the fixed final read.
 
 ### Current experiment
 
-`EXP-2026-08-13-ai-knowledge-base-context-links` is active and occupies the
-single website production slot until its approved Vercel deployment and
-read-only production verification pass. It adds exactly one existing Related
-Articles link from each of the stable English provenance, project-scope, and
-readable-artifact/local-store owners to the existing
+`EXP-2026-08-13-ai-knowledge-base-context-links` is production-verified and
+measuring; the single website production slot is open. It adds exactly one
+existing Related Articles link from each of the stable English provenance,
+project-scope, and readable-artifact/local-store owners to the existing
 `/learn/ai-work-memory-vs-knowledge-base` comparison. It creates no URL and
 changes no target or source title, description, body copy, date, metadata,
 canonical, schema, sitemap entry, or locale route.
@@ -1004,6 +1014,22 @@ assertions, and fresh 393px plus 1440px visual QA. The user approved the exact
 publication scope at `2026-08-14T05:24:28Z`; request indexing, GSC validation,
 external publication, paid action, synthetic events, analytics mutation, and
 metric changes remain separately gated.
+
+PR #128 squash-merged at `2026-08-14T05:41:10Z` as
+`764649dbeae42684e33d0d1cc8a151be438d98b6`; Vercel Production deployment
+`CjgnT33d3KWotANpYXSf479Gruve` completed successfully at
+`2026-08-14T05:41:58Z`. The deployed technical audit passed 120 sitemap URLs,
+24 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+redirects, six bridge-host redirects, and old-URL exclusions. Each live source
+and the unchanged target return direct 200 with exact self-canonical, `index,
+follow`, Article and BreadcrumbList schema, sitemap membership, no `FAQPage`,
+and unchanged dates. Each source exposes exactly one target link. Fresh exact
+393px and 1440px renders have no horizontal overflow, broken image, console
+warning, or console error. The zh-TW and zh-CN Learn hubs remain direct 200;
+the six unsupported localized source routes remain direct 404. The 24-hour
+technical and source-native readout is due only after
+`2026-08-15T05:41:58Z`; the seven-day readout is due only after
+`2026-08-21T05:41:58Z`.
 
 ### Stopped experiment: Karpathy LLM Wiki locales
 

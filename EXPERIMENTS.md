@@ -6631,3 +6631,36 @@ increase for that experiment.
   paid action, synthetic events, analytics mutation, and metric changes.
 - Decision: publish the exact locally verified scope and keep the production
   slot occupied until Vercel deployment and live checks pass.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-13-ai-knowledge-base-context-links production verification
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-13-ai-knowledge-base-context-links
+- Observed at: 2026-08-14T05:46:09Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #128 squash-merged at `2026-08-14T05:41:10Z` as
+  `764649dbeae42684e33d0d1cc8a151be438d98b6`; Vercel Production deployment
+  `CjgnT33d3KWotANpYXSf479Gruve` completed successfully at
+  `2026-08-14T05:41:58Z`. The deployed technical checker passed 120 sitemap
+  URLs, 24 key pages, six utility noindex headers, sitemap-wide `FAQPage`
+  absence, 25 redirects, six bridge-host redirects, and old-URL exclusion.
+  Each of the three live English sources and the unchanged target return
+  direct 200 with exact self-canonical, `index, follow`, Article and
+  BreadcrumbList schema, sitemap membership, no `FAQPage`, and unchanged
+  dates. Each source exposes exactly one target link. Fresh exact 393px and
+  1440px Chrome renders have no document overflow, broken image, console
+  warning, or console error. The zh-TW and zh-CN Learn hubs remain direct 200;
+  the six unsupported localized source routes remain direct 404.
+- Publish date: 2026-08-14T05:41:58Z
+- Index date: unavailable; no indexing request or crawl inference was made.
+- Result: pending
+- Decision: wait
+- Next step: use `2026-08-14T05:41:58Z` as the fixed production and
+  measurement boundary. Run the 24-hour technical and source-native readout
+  only after `2026-08-15T05:41:58Z`, and the seven-day readout only after
+  `2026-08-21T05:41:58Z`. Do not infer a Google crawl, indexing effect,
+  impressions, clicks, traffic lift, or causality from deployment, and do not
+  request indexing or submit validation.
+<!-- EXPERIMENT-RECORD:END -->
