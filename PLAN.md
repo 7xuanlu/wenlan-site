@@ -1633,6 +1633,25 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
+At `2026-08-14T06:05:19Z`, the due 24-hour readout for
+`EXP-2026-08-11-llm-wiki-schema-template-refresh` passed its complete deployed
+technical, three-locale canonical, indexability, hreflang, schema-date,
+starter-schema, acceptance-test, maintained-source, visible-FAQ, and direct-
+200 floors. Read-only URL Inspection reports all three URLs submitted and
+indexed with exact Google and user canonicals, but their last crawls remain
+`2026-07-29T01:09:29Z`, `2026-07-29T01:10:28Z`, and
+`2026-08-01T22:01:38Z`, before production completion at
+`2026-08-13T05:22:32Z`.
+
+The freshest complete performance range also ends on `2026-08-12`, before
+deployment. Its English, zh-TW, and zh-CN GSC page rows are 0 clicks/8
+impressions, 0/1, and 0/4; none satisfies the independent 10-impression plus
+post-deploy-crawl guard. The result is inconclusive and the three canonicals
+remain unchanged until the seven-day read after `2026-08-20T05:22:32Z`.
+Do not attribute the separate Vercel target rows or 47 GitHub stars to this
+change. The Knowledge Graph 24-hour boundary is still later at
+`2026-08-14T06:39:50Z` and must not be recorded early.
+
 At `2026-08-14T05:58:00Z`, the controller evaluated the fresh inter-window
 GSC query-page rows without replacing the independent Friday report. The
 English Learn hub has 132 impressions and zero clicks, but only three

@@ -6852,3 +6852,57 @@ increase for that experiment.
   publication decision.
 - Excluded actions: no request indexing, GSC validation, external publication,
   paid action, synthetic event, analytics mutation, or metric change occurred.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-11-llm-wiki-schema-template-refresh 24h at 2026-08-14T06:05:19Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-11-llm-wiki-schema-template-refresh
+- Observed at: 2026-08-14T06:05:19Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The latest separate inter-window capture covers the 28 complete
+  dates `2026-07-16..2026-08-12`, which end before Vercel Production
+  completion at `2026-08-13T05:22:32Z`. GSC property totals are 8 clicks and
+  958 impressions; visible-query totals are 3 clicks and 208 impressions;
+  the visibility gap is 5 clicks and 750 impressions. The English, zh-TW,
+  and zh-CN target-page rows are independently 0 clicks/8 impressions at
+  page-average position 11.3, 0/1 at 8.0, and 0/4 at 18.5. The only visible
+  qualified join is English `llm wiki for codebase` with one impression at
+  position 7; it remains below the configured three-impression routing floor
+  and is not a schema/template-query result. These rows are pre-deploy or
+  mixed rolling-window evidence and do not satisfy the independent
+  post-crawl 10-impression locale guards.
+- Technical evidence: The deployed technical audit passes 120 sitemap URLs,
+  24 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence,
+  25 redirects, six bridge-host redirects, and old-URL exclusion. All three
+  live routes return direct 200 with exact self-canonicals, `index, follow`,
+  reciprocal `en-US`, `zh-TW`, `zh-CN`, and `x-default` alternates, Article
+  and BreadcrumbList schema, stable English `datePublished: 2026-06-24`,
+  stable Mandarin `datePublished: 2026-07-04`, and
+  `dateModified: 2026-08-12`. The starter-schema and acceptance-test sections,
+  maintained references, and five visible FAQs remain present without
+  `FAQPage`.
+- Indexing evidence: Read-only URL Inspection reports all three canonicals
+  submitted and indexed, fetch successful, indexing allowed, and exact
+  matching Google and user canonicals. Last crawls remain
+  `2026-07-29T01:09:29Z` for English, `2026-07-29T01:10:28Z` for zh-TW, and
+  `2026-08-01T22:01:38Z` for zh-CN, all before this deployment. No indexing
+  request or validation was submitted.
+- Vercel evidence: The same complete pre-deploy range reports 1,339 raw
+  visitors and 1,773 pageviews, 234 direct visitors and 545 direct pageviews,
+  and a non-deduplicated search-referrer row sum of 1,107 visitors and 1,229
+  pageviews. Unique acquisition-surface visitors remain unavailable. Target
+  rows remain separate at English 10 visitors/15 pageviews, zh-TW 6/10, and
+  zh-CN 16/21; no authenticated qualified source-to-target row was returned.
+  Umami remains unavailable/account-gated. GitHub public REST reports 47
+  stars.
+- Result: inconclusive
+- Decision: wait
+- Next step: Keep all three canonicals unchanged. Run the seven-day readout
+  only after `2026-08-20T05:22:32Z`, using complete post-deploy performance
+  dates and the original independent 10-impression plus confirmed-crawl guard.
+  Do not pool locales, convert missing rows to zero, infer exact-query rank,
+  source-to-page sessions, indexing effect, causality, or SEO success, and do
+  not repeat indexing requests or submit validation.
+<!-- EXPERIMENT-RECORD:END -->
