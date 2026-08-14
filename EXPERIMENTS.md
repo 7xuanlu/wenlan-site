@@ -6557,3 +6557,77 @@ increase for that experiment.
   impressions, clicks, traffic lift, or causality from deployment, and do not
   request indexing or submit validation.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-13-ai-knowledge-base-context-links
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-13-ai-knowledge-base-context-links
+- Status: active
+- Data window: 2026-08-08..2026-08-14
+- Asset class: refresh
+- Launched: 2026-08-14
+- Hypothesis: Three additional semantically exact contextual entry points will
+  help Google and users discover the existing English comparison owner
+  without disturbing its successful answer, increasing attributable
+  target-page exposure or clicks.
+- Candidate evidence: The authenticated weekly action queue recommends an
+  internal-link refresh after the target reached 1 click and 44 impressions.
+  Read-only URL Inspection reports `Crawled - currently not indexed`; stable
+  provenance, project-scope, and readable-artifact owners each expose a clean
+  contextual gap. Full source-native evidence, coverage exclusions, product
+  proof, and rendered evidence are preserved in
+  `docs/seo-audits/2026-08-13-ai-knowledge-base-context-links-prelaunch.md`.
+- Baseline: GSC `2026-07-25..2026-08-12` reports the target at 1 click, 44
+  impressions, 2.27% CTR, and page-average position 10.0. The only
+  privacy-visible joined query is `knowledge db` with one impression at
+  position 81 and does not reveal the clicked query. Vercel separately
+  reports 4 visitors and 4 pageviews. GitHub reports 47 stars; Umami CTA
+  evidence and a source-to-star path are unavailable.
+- Change: Add `ai-work-memory-vs-knowledge-base` to `relatedSlugs` for exactly
+  `/learn/ai-memory-provenance`, `/learn/project-scope-ai-memory`, and
+  `/learn/markdown-local-index-ai-memory`. Change no target or source copy,
+  dates, metadata, canonical, schema, sitemap entry, or locale route.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions in the first 28 complete
+  post-deploy days.
+- Success criteria: after at least 20 target-page impressions, the target
+  earns at least 2 clicks or page-average position is 8.0 or better.
+- Failure criteria: after 28 complete post-deploy days and at least 20
+  impressions, the target remains at 1 or fewer clicks and page-average
+  position is worse than 10.0.
+- Inconclusive: fewer than 20 target-page impressions in the first 28 complete
+  post-deploy days.
+- Stop criteria: another controller edits the target or any of the three
+  source pages, or a link, direct-200, canonical, indexability, sitemap,
+  schema, related-card render, or locale regression appears. Source-backed,
+  document-guide, tool-selection, Knowledge Graph, and LLM Wiki measurement
+  surfaces must remain unchanged.
+- 24h readout: pending after production completion.
+- 7d readout: pending after production completion plus seven days.
+- W2 readout: pending after production completion plus fourteen days.
+- W4 readout: pending after production completion plus twenty-eight days.
+- W8 readout: pending after production completion plus fifty-six days if
+  useful.
+- Result: pending
+- Decision: wait
+- Next step: publish the exact approved branch, keep the production slot
+  occupied until Vercel and live verification pass, and do not request
+  indexing or submit GSC validation.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-14T05:24:28Z — AI knowledge-base contextual-link publication approval
+
+- Record type: campaign-approval
+- Related experiment: EXP-2026-08-13-ai-knowledge-base-context-links
+- Status: active
+- Approved scope: commit, push, ready PR creation, merge, automatic Vercel
+  deployment, and read-only production verification for the exact
+  `codex/ai-knowledge-base-context-links` candidate. The candidate contains
+  only three English contextual related-article links, the focused regression
+  test, immutable candidate audit, and required campaign records.
+- Excluded actions: request indexing, GSC validation, external publication,
+  paid action, synthetic events, analytics mutation, and metric changes.
+- Decision: publish the exact locally verified scope and keep the production
+  slot occupied until Vercel deployment and live checks pass.

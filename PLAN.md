@@ -204,6 +204,17 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 
 ### Control-plane status
 
+- At `2026-08-14T05:24:28Z`, the user explicitly resumed the active Goal and
+  approved commit, push, ready PR creation, merge, automatic Vercel
+  deployment, and read-only production verification for the exact
+  `EXP-2026-08-13-ai-knowledge-base-context-links` candidate on
+  `codex/ai-knowledge-base-context-links`. The scope is exactly three English
+  contextual related-article links, their focused regression test, the
+  immutable candidate audit, and required campaign records. Request indexing,
+  GSC validation, external publication, paid action, synthetic events,
+  analytics mutation, and metric changes remain excluded. The experiment is
+  active and occupies the single website production slot until production
+  verification passes.
 - At `2026-08-13T06:36:02Z`, the user explicitly approved commit, push, PR
   creation, merge, automatic Vercel deployment, and read-only production
   verification for the exact
@@ -395,6 +406,13 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
+  `EXP-2026-08-13-ai-knowledge-base-context-links` is active and occupies the
+  single production slot. It adds exactly three English contextual links to
+  the existing comparison owner and changes no canonical, schema, sitemap,
+  date, copy, or locale route. Publication was explicitly approved at
+  `2026-08-14T05:24:28Z`; request indexing, validation, external publication,
+  paid action, synthetic events, analytics mutation, and metric changes remain
+  gated.
   `EXP-2026-08-13-ai-agent-knowledge-graph-refresh` is production-verified
   and measuring; it no longer consumes the single website production slot.
   It refreshes only the existing indexed English `/docs/knowledge-graph`
@@ -565,7 +583,7 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 22.
+- Active experiments: 23.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -956,46 +974,36 @@ fixed baseline or the fixed final read.
 
 ### Current experiment
 
-`EXP-2026-08-13-ai-agent-knowledge-graph-refresh` is production-verified and
-measuring; the single website production slot is open. It refreshes
-only the existing indexed English `/docs/knowledge-graph` canonical and
-creates no URL or Mandarin Docs route. The candidate gate passes from
-independent English GitHub and Reddit observations, public Simplified-Chinese
-community evidence, maintained Wenlan first-party source, and authenticated
-URL Inspection. The complete source-native provenance, existing-owner
-coverage decision, and immutable readout contract are in
-`docs/seo-audits/2026-08-13-ai-agent-knowledge-graph-coverage-gate.md`.
+`EXP-2026-08-13-ai-knowledge-base-context-links` is active and occupies the
+single website production slot until its approved Vercel deployment and
+read-only production verification pass. It adds exactly one existing Related
+Articles link from each of the stable English provenance, project-scope, and
+readable-artifact/local-store owners to the existing
+`/learn/ai-work-memory-vs-knowledge-base` comparison. It creates no URL and
+changes no target or source title, description, body copy, date, metadata,
+canonical, schema, sitemap entry, or locale route.
 
-Local preparation may change only the existing page's metadata, visible title
-and description, and first answer. It must preserve the canonical, sitemap,
-TechArticle and BreadcrumbList schema, adjacent Docs routing, intentional
-zh-TW/zh-CN 404 behavior, and the boundary that graph context supports rather
-than replaces inspectable source memories and maintained pages. The user
-approved the exact commit, push, PR creation, merge, automatic Vercel
-deployment, and read-only production-verification scope at
-`2026-08-13T06:36:02Z`. Request indexing, GSC validation, external
-publication, paid action, synthetic events, analytics mutation, and metric
-changes remain separately gated.
+Authenticated GSC for `2026-07-25..2026-08-12` reports the target at 1 click,
+44 impressions, 2.27% CTR, and page-average position 10.0. The only
+privacy-visible joined query is `knowledge db` with one impression at
+position 81; it does not reveal the clicked query or an exact-query rank.
+Vercel separately reports 4 visitors and 4 pageviews for the target, while
+GitHub remains 47 stars and Umami CTA evidence remains unavailable. Read-only
+URL Inspection at `2026-08-13T10:06:00Z` reports `Crawled - currently not
+indexed`, successful fetch, indexing allowed, exact Google and user
+canonicals, sitemap discovery, and last crawl `2026-07-29T01:10:28Z`.
 
-Local preparation and verification completed on `2026-08-13`. The RED control
-failed against the prior page, then the focused test passed with the bounded
-copy. The full suite passed 223/223; TypeScript, the Goal verifier, diff
-hygiene, production build, and built-site technical SEO passed. Fresh local
-production rendering covered the complete page in four desktop and eight
-393px mobile viewports with no text clipping, horizontal overflow, broken
-images, or awkward heading orphan.
-
-PR #126 squash-merged at `2026-08-13T06:39:04Z` as
-`fe5e6c7816c397d207de71ae6d28069b355b313d`; Vercel Production deployment
-`5883194191` completed successfully at `2026-08-13T06:39:50Z`. The deployed
-technical audit passed 120 sitemap URLs, 24 key pages, six utility noindex
-headers, sitemap-wide `FAQPage` absence, 25 redirects, six bridge-host
-redirects, and old-URL exclusions. Direct production HTML confirms HTTP 200,
-exact canonical, `index, follow`, the intended H1 and first answer,
-TechArticle plus BreadcrumbList, sitemap membership, and intentional zh-TW
-and zh-CN 404s. Fresh exact 393px and 1440px browser renders have no document
-overflow, clipped H1, broken image, or page exception. The experiment's 24h
-readout is due after `2026-08-14T06:39:50Z`.
+The candidate deliberately excludes the source-backed, document-ingestion,
+and tool-selection pages because their separate attribution windows remain
+open. The exact source selection, immutable 20-impression exposure floor,
+success, failure, stop criteria, and rendered evidence are in
+`docs/seo-audits/2026-08-13-ai-knowledge-base-context-links-prelaunch.md`.
+Local verification passes 223/223 SEO tests, TypeScript, the Goal verifier,
+diff hygiene, a 223-page production build, the built technical audit, DOM
+assertions, and fresh 393px plus 1440px visual QA. The user approved the exact
+publication scope at `2026-08-14T05:24:28Z`; request indexing, GSC validation,
+external publication, paid action, synthetic events, analytics mutation, and
+metric changes remain separately gated.
 
 ### Stopped experiment: Karpathy LLM Wiki locales
 
