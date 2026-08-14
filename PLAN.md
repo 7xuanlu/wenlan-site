@@ -1008,6 +1008,15 @@ visitors and 383 direct pageviews. GitHub public REST reports 47 stars at
 `2026-08-13T06:07:55Z`. These source-native values do not silently replace the
 fixed baseline or the fixed final read.
 
+An earlier inter-window capture for the 28 complete dates
+`2026-07-16..2026-08-12`, collected at `2026-08-14T05:54:00Z`, reports GSC
+property totals of 8 clicks and 958 impressions, visible-query totals of 3
+clicks and 208 impressions, and a visibility gap of 5 clicks and 750
+impressions. Vercel separately reports 1,339 visitors and 1,773 pageviews;
+GitHub public REST reports 47 stars. These are rolling-window observations,
+not attributed experiment lift or regression. Raw inputs remain outside git
+under `/tmp/wenlan-seo-goal-20260814`.
+
 The newer authenticated inter-window capture covers `2026-07-17..2026-08-13`
 and does not replace the independent Friday report. GSC property totals are 8
 clicks and 951 impressions; visible-query totals are 3 clicks and 208
@@ -1623,6 +1632,30 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
   GSC reporting latency, then deliver the terminal decision.
 
 ### Next decision
+
+At `2026-08-14T05:58:00Z`, the controller evaluated the fresh inter-window
+GSC query-page rows without replacing the independent Friday report. The
+English Learn hub has 132 impressions and zero clicks, but only three
+privacy-visible qualified impressions: two for
+`ai memory mcp persistent context llm` and one for
+`claude agents sdk memory`. Google already crawled the current
+knowledge-base-first hub after its prior refresh, and the live source already
+exposes direct routes for AI knowledge-base tool selection, document ingest,
+source-backed pages, Karpathy LLM Wiki, Claude Code, MCP, and Obsidian. Hidden
+rows therefore do not justify another hub title, snippet, or card rewrite.
+
+The remaining core query-page joins are individually sparse: one impression
+for `llm wiki for codebase`, one for `local ai knowledge base`, and one for
+`stevenstavrakis/obsidian-mcp`. Their owners are already measuring or have a
+near-term predeclared readout, so no overlapping content edit is started.
+The approved directory lane was also reconciled read-only: all 13 submitted
+PRs remain open, no maintainer correction is requested, 11 are `CLEAN`, one
+is `BLOCKED` only on required review, and one is `UNSTABLE` on the previously
+documented unrelated whole-repository link failures. No no-op push,
+maintainer message, duplicate submission, website edit, indexing request, or
+validation action is supported by this evidence. Run the due LLM-Wiki and
+AI-agent-knowledge-graph 24-hour reads at their existing boundary before
+selecting another same-surface change.
 
 At `2026-08-13T06:21:14Z`, the controller completed the overdue seven-day
 readouts for the three core August acquisition families without rerunning the
