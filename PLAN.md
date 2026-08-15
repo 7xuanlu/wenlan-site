@@ -204,6 +204,16 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 
 ### Control-plane status
 
+- PR #130 squash-merged at `2026-08-15T00:23:03Z` as
+  `3f2eeb9aabb40213f0526e571e66bb29788988a2`; Vercel Production deployment
+  `dpl_GPLMqStz21H724odWXZv8jQZMRQE` completed successfully at
+  `2026-08-15T00:23:48.475Z`. The deployed technical audit, exact canonical,
+  indexability, corrected TechArticle dates, BreadcrumbList, sitemap
+  membership, visible source boundary, intentional unsupported locale 404s,
+  and `FAQPage` absence pass. The correction is production-verified and no
+  longer consumes the website production slot. No indexing request, GSC
+  validation, external publication, paid action, synthetic event, analytics
+  mutation, or metric change occurred.
 - At `2026-08-15T00:20:38Z`, the user explicitly resumed the Goal and
   approved commit, push, ready PR creation, merge, automatic Vercel
   deployment, and read-only production verification for the exact
@@ -1058,14 +1068,15 @@ technical and source-native readout is due only after
 `2026-08-15T05:41:58Z`; the seven-day readout is due only after
 `2026-08-21T05:41:58Z`.
 
-`TECH-2026-08-14-knowledge-graph-published-date` is approved and occupies the
-single website production slot until its merged Vercel Production deployment
-and live read-only verification pass. It restores only the stable
+`TECH-2026-08-14-knowledge-graph-published-date` is production-verified and no
+longer consumes the single website production slot. It restores only the stable
 `datePublished: 2026-07-09` value on `/docs/knowledge-graph`, retains
 `dateModified: 2026-08-13`, and adds the focused regression guard. The user
-approved the exact publication scope at `2026-08-15T00:20:38Z`. Request
-indexing, GSC validation, external publication, paid action, synthetic events,
-analytics mutation, and metric changes remain separately gated.
+approved the exact publication scope at `2026-08-15T00:20:38Z`; PR #130 and
+Vercel Production completed at `2026-08-15T00:23:48.475Z`, and the live gate
+passed. Request indexing, GSC validation, external publication, paid action,
+synthetic events, analytics mutation, and metric changes remain separately
+gated.
 
 ### Stopped experiment: Karpathy LLM Wiki locales
 
@@ -1732,9 +1743,12 @@ production build, built technical audit, and compiled TechArticle date check
 pass. It changes no visible copy, URL, canonical, sitemap, locale route,
 schema type, or experiment metric. At `2026-08-15T00:20:38Z`, the user
 explicitly approved its commit, push, ready PR creation, merge, automatic
-Vercel deployment, and live read-only verification. Publish this correction
-before another content change and keep the production slot occupied until the
-live gate passes.
+Vercel deployment, and live read-only verification. PR #130 and Vercel
+Production completed successfully at `2026-08-15T00:23:48.475Z`; the live
+technical and exact schema gate passed, so the correction is closed and the
+production slot is open. Reassess the already prepared non-overlapping MCP
+knowledge-base-server candidate against the latest evidence before asking for
+another publication approval.
 
 The overdue W2 readout for the existing English Obsidian + Claude Code page
 was reconciled at `2026-08-13T06:07:55Z` without rerunning the weekly pipeline.
