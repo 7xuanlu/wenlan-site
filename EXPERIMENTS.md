@@ -6820,3 +6820,35 @@ increase for that experiment.
 - Decision: publish the exact locally verified scope and keep the production
   slot occupied until the merged Vercel Production deployment and live
   read-only verification pass.
+
+### 2026-08-15T00:25:58Z — Knowledge Graph published-date correction production verification
+
+- Record type: campaign-observation
+- Related experiment: EXP-2026-08-13-ai-agent-knowledge-graph-refresh
+- Related correction: TECH-2026-08-14-knowledge-graph-published-date
+- Status: production-verified; production slot open
+- GitHub evidence: PR #130 squash-merged at `2026-08-15T00:23:03Z` as
+  `3f2eeb9aabb40213f0526e571e66bb29788988a2`.
+- Vercel evidence: Production deployment
+  `dpl_GPLMqStz21H724odWXZv8jQZMRQE` targets the exact merge commit and entered
+  `READY` at `2026-08-15T00:23:48.475Z`. The production URL is aliased to
+  `wenlan.app`, `www.wenlan.app`, and the two approved legacy bridge hosts.
+- Deployed technical evidence: `pnpm seo:technical:deployed` passes robots,
+  120 sitemap URLs, 24 key pages, six utility noindex headers, sitemap-wide
+  `FAQPage` absence, 25 redirects, six bridge-host redirects, and old-URL
+  exclusion. The English target returns direct 200; the unsupported zh-TW and
+  zh-CN detail routes remain direct 404; the sitemap returns direct 200 and
+  contains the exact target once.
+- Exact page evidence: `/docs/knowledge-graph` retains its exact self-canonical,
+  `index, follow`, visible `AI Agent Knowledge Graph` title, source-backed quick
+  answer and source-authority boundary, TechArticle and BreadcrumbList schema,
+  `datePublished: 2026-07-09`, `dateModified: 2026-08-13`, and no `FAQPage`.
+- Result: pass. This closes the technical regression only; it does not prove a
+  Google crawl, indexing effect, impression or click lift, visitor change,
+  star change, or causality.
+- Decision: close the correction and release the single website production
+  slot. Keep the stopped experiment's original performance result separate;
+  reassess the prepared MCP knowledge-base-server candidate before another
+  publication decision.
+- Excluded actions: no request indexing, GSC validation, external publication,
+  paid action, synthetic event, analytics mutation, or metric change occurred.
