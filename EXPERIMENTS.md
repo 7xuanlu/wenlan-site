@@ -7079,3 +7079,37 @@ increase for that experiment.
 - Next step: commit, push, open a ready PR, merge after checks, wait for the
   automatic Vercel production deployment, and perform read-only live
   verification before releasing the production slot.
+
+### 2026-08-15T05:59:42Z — MCP production verification
+
+- Record type: campaign-observation
+- Related experiment: EXP-2026-08-13-mcp-knowledge-base-server-refresh
+- Status: production-verified; measuring
+- Publication: PR #132 squash-merged at `2026-08-15T05:56:07Z` as
+  `44b0ad40275554c65444a7941e7c5038d02b7ece`. Vercel Production deployment
+  `3zcJXN1enGp3w3GQKVTd7KP3kTCm` completed at
+  `2026-08-15T05:56:51Z`; that time is the fixed measurement boundary.
+- Technical evidence: the deployed technical audit passes 120 sitemap URLs,
+  24 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence,
+  25 redirects, six bridge-host redirects, and old-URL exclusion. The target
+  returns direct HTTP 200 with exact canonical
+  `https://wenlan.app/learn/mcp-memory-server`, `index, follow`, Article and
+  BreadcrumbList schema, stable `datePublished: 2026-06-07`,
+  `dateModified: 2026-08-13`, and exactly one sitemap `<loc>` entry.
+- Content evidence: the production page exposes the exact MCP knowledge-base
+  title and first answer, memory-server comparison, source/citation/freshness
+  contract, four-step validation loop, maintained references, and three
+  visible FAQs without `FAQPage`.
+- Render evidence: fresh production renders at exact 393x852 and 1440x1000
+  have matching document and body client/scroll widths, no horizontal
+  overflow, zero broken images, zero console warnings or errors, and all three
+  FAQ answers open. Direct inspection found no clipping or missing content.
+- Result: pending
+- Decision: measure
+- Next step: run the 24-hour technical and source-native readout only after
+  `2026-08-16T05:56:51Z`, retaining the original 15-target-impression plus
+  confirmed post-deploy-crawl guards. Run the seven-day readout only after
+  `2026-08-22T05:56:51Z`. Do not infer a crawl, indexing effect, exact-query
+  rank, source-to-page sessions, causality, or SEO success from publication.
+- Excluded actions: no indexing request, GSC validation, external publication,
+  paid action, synthetic event, analytics mutation, or metric change occurred.
