@@ -204,6 +204,20 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 
 ### Control-plane status
 
+- At `2026-08-15T00:20:38Z`, the user explicitly resumed the Goal and
+  approved commit, push, ready PR creation, merge, automatic Vercel
+  deployment, and read-only production verification for the exact
+  `TECH-2026-08-14-knowledge-graph-published-date` correction on
+  `codex/knowledge-graph-published-date-fix`. The approved scope restores the
+  existing English `/docs/knowledge-graph` TechArticle
+  `datePublished: 2026-07-09`, retains `dateModified: 2026-08-13`, adds the
+  focused regression assertion and immutable correction audit, and includes
+  the required campaign records. It changes no visible copy, URL, canonical,
+  sitemap membership, locale route, schema type, or experiment metric.
+  Request indexing, GSC validation, external publication, paid action,
+  synthetic events, analytics mutation, and metric changes remain excluded.
+  The correction is approved and occupies the single website production slot
+  until production verification passes.
 - At `2026-08-14T05:24:28Z`, the user explicitly resumed the active Goal and
   approved commit, push, ready PR creation, merge, automatic Vercel
   deployment, and read-only production verification for the exact
@@ -424,9 +438,10 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   `2026-08-14T05:41:58Z`. Request indexing, validation, external publication,
   paid action, synthetic events, analytics mutation, and metric changes remain
   gated.
-  `EXP-2026-08-13-ai-agent-knowledge-graph-refresh` is production-verified
-  and measuring; it no longer consumes the single website production slot.
-  It refreshes only the existing indexed English `/docs/knowledge-graph`
+  `EXP-2026-08-13-ai-agent-knowledge-graph-refresh` is stopped after its
+  24-hour technical readout found a publication-date schema regression; it
+  no longer consumes the single website production slot. It refreshed only
+  the existing indexed English `/docs/knowledge-graph`
   canonical and creates no URL or Mandarin Docs route. PR #126 squash-merged
   at `2026-08-13T06:39:04Z` as
   `fe5e6c7816c397d207de71ae6d28069b355b313d`; Vercel Production deployment
@@ -594,7 +609,7 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 23.
+- Active experiments: 22.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -785,28 +800,28 @@ after the anchor is frozen.
 
 | Metric | Fixed baseline | Verified live observation | Provenance | Gap to target from live observation |
 | --- | ---: | ---: | --- | ---: |
-| GitHub total stars | 47 | 47 | GitHub REST, read on 2026-08-12T07:17Z | 53 |
-| GSC rolling-28-day property clicks | 6 | 7 | Search Console API, `sc-domain:wenlan.app`, `2026-07-15..2026-08-11`; `/tmp/wenlan-seo-goal-2026-08-12/gsc-metadata.json` | 93 |
-| GSC rolling-28-day property impressions | 197 | 855 | Search Console API, `sc-domain:wenlan.app`, `2026-07-15..2026-08-11`; `/tmp/wenlan-seo-goal-2026-08-12/gsc-metadata.json` | 9,145 |
-| Vercel rolling-28-day visitors | 323 | 1,378 | Vercel Web Analytics API, project `wenlan-site`, `2026-07-15..2026-08-11`; `/tmp/wenlan-seo-goal-2026-08-12/vercel-metadata.json` | 622 |
+| GitHub total stars | 47 | 47 | GitHub REST, read on 2026-08-14T06:41Z | 53 |
+| GSC rolling-28-day property clicks | 6 | 8 | Search Console API, `sc-domain:wenlan.app`, `2026-07-17..2026-08-13`; `/tmp/wenlan-seo-goal-20260815/gsc-metadata.json` | 92 |
+| GSC rolling-28-day property impressions | 197 | 951 | Search Console API, `sc-domain:wenlan.app`, `2026-07-17..2026-08-13`; `/tmp/wenlan-seo-goal-20260815/gsc-metadata.json` | 9,049 |
+| Vercel rolling-28-day visitors | 323 | 1,268 | Vercel Web Analytics API, project `wenlan-site`, `2026-07-17..2026-08-13`; `/tmp/wenlan-seo-goal-20260815/vercel-metadata.json` | 732 |
 
 Supporting quality split for the same live range:
 
-- GSC property totals: 7 clicks, 855 impressions.
-- GSC visible-query totals: 2 clicks, 170 impressions.
-- GSC query visibility gap: 5 clicks, 685 impressions.
-- Visible-query non-brand impressions: 63 using a conservative explicit
-  brand, legacy-host, and obvious Wenlan-misspelling exclusion over the
-  current query export. This is a visible-row subset, not a property total.
+- GSC property totals: 8 clicks, 951 impressions.
+- GSC visible-query totals: 3 clicks, 208 impressions.
+- GSC query visibility gap: 5 clicks, 743 impressions.
+- The weekly classifier has not recomputed visible-query non-brand impressions
+  for this inter-window capture. Keep the latest weekly classified value
+  separate rather than applying an ad hoc exclusion to the new query rows.
 - The deterministic weekly report's existing group classification remains
   the action-queue authority and still contains noisy Wenlan misspellings in
   `Other`.
-- Vercel raw totals: 1,378 visitors and 1,773 pageviews.
-- Vercel direct traffic: 235 visitors and 507 pageviews.
-- Vercel qualified-source source-to-page row sum: 1,187 visitors and 1,265
+- Vercel raw totals: 1,268 visitors and 1,785 pageviews.
+- Vercel direct traffic: 234 visitors and 628 pageviews.
+- Vercel qualified-source source-to-page row sum: 1,078 visitors and 1,156
   pageviews across the existing separate search, AI, and GitHub referrer
   allowlist; this is not a deduplicated user count.
-- Vercel reports 2 visitors and 2 pageviews for
+- Vercel reports 5 visitors and 5 pageviews for
   `/learn/ai-work-memory-vs-knowledge-base`; the page aggregate does not
   provide a source-to-page join.
 - A same-range traffic-quality audit on 2026-08-01 found that 1,132 of the
@@ -964,9 +979,9 @@ Supporting quality split for the same live range:
 ### Current gap
 
 - Stars: 53 more than the verified live observation.
-- GSC property clicks: 93 more in the fixed final rolling window.
-- GSC property impressions: 9,145 more in the fixed final rolling window.
-- Vercel visitors: 622 more in the fixed final rolling window.
+- GSC property clicks: 92 more in the fixed final rolling window.
+- GSC property impressions: 9,049 more in the fixed final rolling window.
+- Vercel visitors: 732 more in the fixed final rolling window.
 - Legacy migration diagnostic: `sc-domain:useorigin.app` still has
   516 impressions and 5 clicks in the same aligned range. Those values are
   not added to the Wenlan Goal metric.
@@ -982,6 +997,18 @@ separately reports 1,387 visitors and 1,666 pageviews, including 231 direct
 visitors and 383 direct pageviews. GitHub public REST reports 47 stars at
 `2026-08-13T06:07:55Z`. These source-native values do not silently replace the
 fixed baseline or the fixed final read.
+
+The newer authenticated inter-window capture covers `2026-07-17..2026-08-13`
+and does not replace the independent Friday report. GSC property totals are 8
+clicks and 951 impressions; visible-query totals are 3 clicks and 208
+impressions; the query visibility gap is 5 clicks and 743 impressions. Vercel
+separately reports 1,268 raw visitors and 1,785 pageviews, 234 direct visitors
+and 628 direct pageviews, and a non-deduplicated qualified source-to-page row
+sum of 1,078 visitors and 1,156 pageviews. GitHub remains 47 stars; Umami
+custom events remain account-gated. The rolling-window decreases from the
+preceding inter-window capture show older dates leaving faster than the newest
+date replaces them; they are not daily losses or evidence of a CTA problem.
+No new privacy-visible query cluster passes the candidate gate.
 
 ### Current experiment
 
@@ -1030,6 +1057,15 @@ the six unsupported localized source routes remain direct 404. The 24-hour
 technical and source-native readout is due only after
 `2026-08-15T05:41:58Z`; the seven-day readout is due only after
 `2026-08-21T05:41:58Z`.
+
+`TECH-2026-08-14-knowledge-graph-published-date` is approved and occupies the
+single website production slot until its merged Vercel Production deployment
+and live read-only verification pass. It restores only the stable
+`datePublished: 2026-07-09` value on `/docs/knowledge-graph`, retains
+`dateModified: 2026-08-13`, and adds the focused regression guard. The user
+approved the exact publication scope at `2026-08-15T00:20:38Z`. Request
+indexing, GSC validation, external publication, paid action, synthetic events,
+analytics mutation, and metric changes remain separately gated.
 
 ### Stopped experiment: Karpathy LLM Wiki locales
 
@@ -1600,16 +1636,30 @@ causal claim is made. GitHub remains 47 stars. This confirms that the immediate
 growth constraint is discovery and exposure rather than an observed CTA-rate
 problem.
 
-The approved OSS distribution lane was also reconciled at
-`2026-08-13T06:29:00Z`. Twelve open Wenlan PRs are clean or waiting only for
-maintainer review; one remains unstable solely because its whole-repository
-link checker reports unrelated upstream URLs. The prepared one-line
+The approved OSS distribution lane was refreshed at
+`2026-08-14T07:06:01Z`. `TensorBlock/awesome-mcp-servers` PR #1500 merged at
+`2026-08-03T00:09:13Z`, and the default-branch knowledge-management file now
+contains the exact `7xuanlu/wenlan` repository link and the approved
+AI-knowledge-base plus LLM-wiki description. Eleven Wenlan PRs remain open;
+all eleven currently report `MERGEABLE`. One explicitly requires maintainer
+review, and the only failing check remains the previously verified unrelated
+whole-repository link checker. No maintainer review or comment requests an
+author-side correction. The prepared one-line
 `appcypher/awesome-mcp-servers` entry still has no upstream or all-state PR
 duplicate, its repository and icon links return HTTP 200, and its fork branch
 is exactly one commit ahead. GitHub nevertheless rejected a fresh PR creation
 attempt before mutation with `7xuanlu does not have the correct permissions to
 execute CreatePullRequest`. No PR or maintainer message was created. Stop
 retrying that destination until the permission relationship changes.
+
+The previously pending free `mcpservers.org` submission is now publicly live
+at `/servers/7xuanlu/wenlan`. A direct read returned HTTP 200; the page is not
+marked `noindex`, links to both `https://github.com/7xuanlu/wenlan` and
+`https://wenlan.app`, and contains the approved `AI knowledge base` and `LLM
+wiki` wording. The public server sitemap includes the exact listing URL with
+`lastmod` `2026-08-13T06:35:37.000Z`. Treat this as one live free-directory
+surface, not a search click, star, visitor, or causal result, and do not
+resubmit submission ID `5334`.
 
 At `2026-08-13T05:35:20Z`, the controller reconciled an omitted published
 experiment record before selecting another website edit. The English
@@ -1661,6 +1711,30 @@ is open. Wait for its 24-hour source-native readout after
 or causal result from deployment. Request indexing, GSC validation, external
 posts, paid action, synthetic events, analytics mutation, and metric changes
 remain outside the publication scope.
+
+At `2026-08-14T06:43:56Z`, the formal 24-hour readout found that the search
+performance and crawl guards are still unmet: the latest complete GSC range
+ends before deployment, the target row remains unavailable, and URL Inspection
+still reports the pre-deploy `2026-07-16T09:43:37Z` crawl. The live technical
+checker otherwise passes, but the deployed TechArticle now emits
+`datePublished: 2026-08-13` together with `dateModified: 2026-08-13`. Before
+the refresh, the page inherited `2026-07-09` from `DOCS_UPDATED_AT`; the
+approved candidate contract required that publication date to remain stable.
+This schema-date regression triggers the original technical stop criterion.
+Prioritize a bounded explicit `publishedAt: 2026-07-09` correction and focused
+regression test before another content publication. Commit, push, PR, merge,
+deployment, request indexing, and validation remain separately approval-gated.
+
+The bounded correction is locally verified on
+`codex/knowledge-graph-published-date-fix` at `2026-08-14T06:51:40Z`.
+The focused RED-to-GREEN control, 223 SEO tests, TypeScript, Goal verifier,
+production build, built technical audit, and compiled TechArticle date check
+pass. It changes no visible copy, URL, canonical, sitemap, locale route,
+schema type, or experiment metric. At `2026-08-15T00:20:38Z`, the user
+explicitly approved its commit, push, ready PR creation, merge, automatic
+Vercel deployment, and live read-only verification. Publish this correction
+before another content change and keep the production slot occupied until the
+live gate passes.
 
 The overdue W2 readout for the existing English Obsidian + Claude Code page
 was reconciled at `2026-08-13T06:07:55Z` without rerunning the weekly pipeline.
@@ -2091,9 +2165,11 @@ The user confirmed the destination-specific public contact email and the free
 `mcpservers.org` submission was accepted at `2026-08-01T06:38:49Z` as
 submission ID `5334`. The authoritative response is `pending`, `plan=free`,
 and `paymentStatus=not_required`; the contact address is not stored in this
-repository. Treat this as one review-queue submission, not an accepted or live
-listing. Do not resubmit or select Premium. Reconcile direct public listing
-presence at the scheduled 24-hour and seven-complete-live-day observations.
+repository. At `2026-08-14T07:06:01Z`, a direct public read confirmed that
+this submission is now a live free listing at
+`https://mcpservers.org/servers/7xuanlu/wenlan`; the public sitemap carries the
+same URL. Do not resubmit or select Premium. Keep this listing separate from
+GitHub PR acceptance and from GSC, Vercel, stars, or causal attribution.
 
 The Glama prerequisite now has an authoritative account boundary: Glama
 requires GitHub OAuth maintainer verification and a connected GitHub App
@@ -2108,13 +2184,14 @@ The approved OSS batch received a second upstream acceptance at
 `2026-08-01T22:15:12Z`: `TeleAI-UAGI/Awesome-Agent-Memory` PR #72 merged as
 `62f9864ca13ced26dd645025940d72aaeb5b2f96`, and the default-branch README now
 links the Wenlan site and `7xuanlu/wenlan` repository directly. Together with
-the already-live `gavischneider/awesome-llm-wiki` entry, the batch now has two
-merged listings and twelve open PRs. The open set is nine `CLEAN`, two
-`BLOCKED` only on required maintainer review, and one `UNSTABLE` only because
-of the previously verified unrelated whole-repository link failures. No
-maintainer comment or review requests an author-side correction. Continue
-passive review-state observation; do not push no-op commits or contact
-maintainers from this evidence.
+the already-live `gavischneider/awesome-llm-wiki` entry and the now-merged
+`TensorBlock/awesome-mcp-servers` PR #1500, the batch now has three merged OSS
+listings and eleven open PRs. All eleven report `MERGEABLE`; one explicitly
+requires maintainer review, while `DhanushNehru/awesome-mcp-servers` PR #52
+still has the previously verified unrelated whole-repository link-check
+failure. No maintainer comment or review requests an author-side correction.
+Continue passive review-state observation; do not push no-op commits or
+contact maintainers from this evidence.
 
 #### Release-to-download integrity observation
 
