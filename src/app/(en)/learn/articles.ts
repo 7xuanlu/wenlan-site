@@ -157,68 +157,79 @@ const baseArticles: LearnArticle[] = [
     slug: "mcp-memory-server",
     eyebrow: "Protocol",
     category: "Concepts",
-    title: "MCP Server for Wenlan in Claude Code, Codex, ChatGPT, and Cursor",
+    title: "MCP Knowledge Base Server for AI Agents",
     description:
-      "Learn what an MCP memory server does, how it connects AI tools to durable context, and how Wenlan keeps that memory local and inspectable.",
-    metaTitle: "Wenlan MCP for Claude Code, Codex, ChatGPT, Cursor",
+      "Connect Claude Code, Codex, ChatGPT, Cursor, and other AI clients to a local, source-backed knowledge base through MCP.",
+    metaTitle: "MCP Knowledge Base Server for AI Agents | Wenlan",
     metaDescription:
-      "Connect Claude Code, Codex, Cursor, ChatGPT, Claude.ai, and other clients to Wenlan with local or Streamable HTTP MCP.",
+      "Learn what an MCP knowledge base server should expose, how it differs from session memory, and how to verify sources, citations, and freshness across AI clients.",
     keywords: [
+      "MCP knowledge base server",
+      "MCP knowledge server",
+      "knowledge base MCP",
+      "MCP knowledge base for AI agents",
       "MCP memory server",
-      "memory MCP",
-      "Claude MCP memory",
-      "Cursor MCP memory",
-      "MCP memory server GitHub",
-      "persistent memory for AI agents",
+      "Claude Code knowledge base",
+      "Codex knowledge base",
+      "ChatGPT MCP knowledge base",
+      "Cursor MCP knowledge base",
     ],
-    updatedAt: "2026-06-07",
+    publishedAt: "2026-06-07",
+    updatedAt: "2026-08-13",
     author: DEFAULT_AUTHOR,
-    readingTime: "7 min read",
-    audience: "Developers and AI power users connecting multiple MCP clients",
+    readingTime: "8 min read",
+    audience: "Developers connecting AI agents to a shared knowledge base",
     heroBullets: [
-      "MCP servers expose tools, resources, and prompts to AI applications through a standard protocol.",
-      "A memory server gives clients a way to store, search, recall, and manage durable work context.",
-      "Wenlan uses local MCP for coding tools and Streamable HTTP MCP for ChatGPT and Claude.ai, with the same source-backed wiki behind both paths.",
+      "MCP gives AI clients a standard way to query knowledge, call tools, and retrieve resources.",
+      "A useful knowledge-base server preserves sources, citations, maintained answers, and freshness—not just chat history.",
+      "Wenlan connects coding tools locally and ChatGPT or Claude.ai through Streamable HTTP MCP, backed by the same source-aware knowledge system.",
     ],
     sections: [
       {
         heading: "Quick answer",
         body: [
-          "If you searched for an MCP memory server, you probably want an AI tool to remember project facts, decisions, preferences, and handoffs across sessions without pasting the same context every time.",
-          "Wenlan is the local-first version of that workflow: the daemon owns the memory store, wenlan-mcp is the connector clients launch, and MCP-compatible tools call Wenlan when they need context.",
+          "An MCP knowledge base server lets AI clients query durable project knowledge through a standard connection. The useful version does more than return remembered snippets: it keeps the original sources inspectable, returns citations or source IDs, and makes stale answers reviewable.",
+          "Wenlan provides that local-first route. Claude Code, Codex, Cursor, ChatGPT, Claude.ai, and other MCP clients can reach the same source-backed memories and maintained wiki pages without copying the whole knowledge base into every prompt.",
         ],
         bullets: [
-          "Use MCP when the memory should be available outside one chat product.",
-          "Use a local daemon when the memory includes private project context.",
-          "Use Wenlan when you also want capture, recall, handoff, provenance, wiki pages, and human-readable artifacts.",
+          "Use MCP when several AI clients need the same knowledge through one standard interface.",
+          "Keep sources and citations when an answer must remain auditable after the source changes.",
+          "Use a local server when private project documents and decisions should stay on your machine.",
         ],
       },
       {
-        heading: "What MCP adds to memory",
+        heading: "What MCP adds to a knowledge base",
         body: [
-          "The Model Context Protocol gives AI clients a standard way to call external capabilities. MCP servers expose those capabilities; MCP clients are created by host applications such as IDEs or AI tools to talk to particular servers.",
-          "For memory, that protocol boundary matters. The AI tool can stay focused on the conversation while the memory server handles durable context, search, and storage.",
+          "The Model Context Protocol lets servers expose tools, resources, and prompts to AI applications. A knowledge-base server can therefore offer search and retrieval without forcing each host application to invent a custom connector.",
+          "That boundary matters across Claude Code, Codex, ChatGPT, Cursor, and other clients. The client handles the current task; the server owns durable sources, retrieval, and the maintained knowledge that should survive one session or tool.",
         ],
       },
       {
-        heading: "What a memory server should expose",
+        heading: "What an MCP knowledge-base server should expose",
         body: [
-          "A useful MCP memory server should do more than append notes. It needs a way to capture one durable fact, recall relevant context, list or inspect stored memory, forget stale entries, and diagnose whether the local route is connected.",
-          "Wenlan exposes that path through MCP tools around context, capture, recall, distillation, review, forget, and doctor checks. The goal is not a raw database endpoint; the goal is a memory loop agents can use safely during work.",
+          "A useful server needs a narrow query path, inspectable sources, citations or stable source IDs, and a way to tell whether an answer is current. Write access should be explicit, and stale or contradictory knowledge should enter review instead of silently replacing a trusted source.",
+          "Wenlan exposes context, capture, recall, distillation, page access, review, forget, and diagnostic paths through its CLI, plugins, and MCP connector. Atomic memories retain provenance while maintained pages turn reviewed evidence into reusable answers.",
         ],
       },
       {
-        heading: "Local vs hosted memory",
+        heading: "MCP memory server vs knowledge base",
         body: [
-          "Hosted memory servers are easy to start, but they require sending memory to someone else's infrastructure. Local memory servers take more care, but they keep private project context, preferences, and decisions under your control.",
-          "Wenlan is built around the local-first path. The daemon runs on your machine, owns the database, and serves memory to MCP clients through the local wenlan-mcp connector.",
+          "An MCP memory server usually focuses on facts or context carried across sessions. An MCP knowledge base goes further: it connects those facts to documents, source boundaries, citations, maintained pages, and a refresh or review lifecycle.",
+          "The two can share one server. In Wenlan, small durable memories help agents recall context, while source-backed pages organize reviewed knowledge into human-readable answers. Neither layer makes the source code or original document unnecessary.",
+        ],
+      },
+      {
+        heading: "Local vs hosted knowledge base",
+        body: [
+          "Hosted servers can be convenient, but private documents and project decisions leave your machine. A local knowledge base takes more setup while keeping its store, sources, and review trail under your control.",
+          "Wenlan uses a local daemon and local MCP connector for coding tools. Its optional Streamable HTTP route is for web clients such as ChatGPT and Claude.ai; enabling remote access is a separate choice rather than the default storage model.",
         ],
       },
       {
         heading: "Install path",
         body: [
-          "Claude Code and Codex have plugin paths. Local MCP clients should run Wenlan setup, then use wenlan connect <client> to write the client-specific configuration.",
-          "ChatGPT and Claude.ai use Streamable HTTP MCP. The guided path is the desktop app's Remote Access panel, which creates the URL and shows each web client's setup steps.",
+          "Claude Code and Codex have Wenlan plugin paths. For local MCP clients, run Wenlan setup, then use wenlan connect <client> to write the client-specific configuration.",
+          "ChatGPT and Claude.ai use Streamable HTTP MCP. The desktop app's Remote Access panel creates the URL and shows the web-client setup steps.",
         ],
         code: {
           label: "MCP client setup",
@@ -230,33 +241,43 @@ const baseArticles: LearnArticle[] = [
         },
       },
       {
-        heading: "How Wenlan fits",
+        heading: "Verify the MCP knowledge-base route",
         body: [
-          "Wenlan is more than a bare MCP store. It is a source-backed LLM wiki with a local runtime, CLI, MCP connector, Claude Code plugin, Codex plugin, optional desktop app, and human review paths.",
-          "The MCP server is the bridge: AI tools read and write memory, while Wenlan keeps the broader work context visible, searchable, and locally owned.",
+          "Do not trust a knowledge-base connection because the client merely reports that an MCP server is configured. Test retrieval, provenance, and cross-client consistency with a harmless source before relying on it for real work.",
+        ],
+        bullets: [
+          "List the server tools from one MCP client and confirm the expected read path is available.",
+          "Query one harmless source and inspect the citation or source ID behind the answer.",
+          "Change the source, then verify that stale knowledge is refreshed or enters review.",
+          "Confirm a second client can retrieve the same maintained answer without copying the source into its prompt.",
         ],
         link: {
-          label: "See the LLM-wiki architecture and workflow",
+          label: "See the source-backed LLM-wiki workflow",
           href: "/learn/distilled-wiki-pages-ai-memory",
         },
       },
     ],
     faqs: [
       {
-        question: "Is Wenlan just an MCP memory server?",
+        question: "Is an MCP knowledge base the same as RAG?",
         answer:
-          "No. Wenlan includes an MCP server path, but the product also includes local storage, manual distillation, optional model-backed page work, contradiction detection, provenance, search, and wiki pages.",
+          "No. MCP is the connection protocol. RAG is one retrieval pattern a server may use. A dependable knowledge base also needs inspectable sources, citations, freshness checks, and a maintenance path.",
       },
       {
-        question: "Can one MCP memory server work with multiple AI tools?",
+        question: "Can one MCP knowledge base work with multiple AI tools?",
         answer:
-          "Yes, if those tools support MCP and are configured to use the same server. Wenlan is designed for that shared-memory workflow.",
+          "Yes, if the tools support the server's MCP transport and are configured for the same knowledge base. Wenlan supports local coding clients and an optional Streamable HTTP route for compatible web clients.",
+      },
+      {
+        question: "Does Wenlan replace the original documents or codebase?",
+        answer:
+          "No. Wenlan keeps sources, memories, and maintained pages separate. Agents should still inspect the current source code or original document when the task depends on exact implementation or wording.",
       },
     ],
     relatedSlugs: [
-      "claude-code-memory",
-      "mcp-memory-server-localhost-7878",
-      "how-to-add-mcp-memory-to-cursor",
+      "source-backed-wiki-pages-ai-work",
+      "build-local-ai-knowledge-base-from-documents",
+      "distilled-wiki-pages-ai-memory",
       "cursor-claude-code-shared-memory",
     ],
     officialReferences: [
@@ -269,6 +290,10 @@ const baseArticles: LearnArticle[] = [
         href: "https://modelcontextprotocol.io/docs/learn/client-concepts",
       },
       {
+        label: "MCP Knowledge Base package",
+        href: "https://pypi.org/project/mcp-kb/",
+      },
+      {
         label: "Claude Code MCP setup",
         href: "https://code.claude.com/docs/en/mcp",
       },
@@ -278,8 +303,8 @@ const baseArticles: LearnArticle[] = [
       },
     ],
     cta: {
-      heading: "Connect an MCP memory server locally",
-      body: "Install Wenlan, add the MCP connector to your client, and verify capture and recall before trusting memory in real work.",
+      heading: "Connect a source-backed knowledge base",
+      body: "Install Wenlan, connect one MCP client, and verify retrieval, citations, freshness, and cross-client access before using it for real work.",
     },
   },
   {

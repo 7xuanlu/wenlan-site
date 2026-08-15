@@ -204,6 +204,18 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 
 ### Control-plane status
 
+- At `2026-08-15T05:53:43Z`, the user explicitly resumed the Goal and
+  approved commit, push, ready PR creation, merge, automatic Vercel
+  deployment, and read-only production verification for the exact
+  `EXP-2026-08-13-mcp-knowledge-base-server-refresh` candidate on
+  `codex/mcp-knowledge-base-server-refresh`. The scope refreshes only the
+  existing English `/learn/mcp-memory-server` canonical, preserves
+  `datePublished: 2026-06-07`, moves only `dateModified` to `2026-08-13`,
+  adds its focused regression guard, candidate audit, and required campaign
+  records, and creates no URL or locale route. Request indexing, GSC
+  validation, external publication, paid action, synthetic events, analytics
+  mutation, and metric changes remain excluded. The approved change occupies
+  the single website production slot until production verification passes.
 - PR #130 squash-merged at `2026-08-15T00:23:03Z` as
   `3f2eeb9aabb40213f0526e571e66bb29788988a2`; Vercel Production deployment
   `dpl_GPLMqStz21H724odWXZv8jQZMRQE` completed successfully at
@@ -438,15 +450,12 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-13-ai-knowledge-base-context-links` is production-verified and
-  measuring; the single website production slot is open. It adds exactly
-  three English contextual links to the existing comparison owner and changes
-  no canonical, schema, sitemap, date, copy, or locale route. PR #128
-  squash-merged at `2026-08-14T05:41:10Z` as
-  `764649dbeae42684e33d0d1cc8a151be438d98b6`; Vercel Production deployment
-  `CjgnT33d3KWotANpYXSf479Gruve` completed successfully at
-  `2026-08-14T05:41:58Z`. Request indexing, validation, external publication,
-  paid action, synthetic events, analytics mutation, and metric changes remain
+  `EXP-2026-08-13-mcp-knowledge-base-server-refresh` is in active local
+  preparation and occupies the single website production slot. It refreshes
+  only the existing indexed English `/learn/mcp-memory-server` canonical and
+  creates no URL or locale route. Commit, push, PR creation, merge,
+  deployment, request indexing, validation, external publication, paid
+  action, synthetic events, analytics mutation, and metric changes remain
   gated.
   `EXP-2026-08-13-ai-agent-knowledge-graph-refresh` is stopped after its
   24-hour technical readout found a publication-date schema regression; it
@@ -619,7 +628,7 @@ controller has read the frozen section and `pnpm seo:goal:check` passes.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 22.
+- Active experiments: 23.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -1008,6 +1017,15 @@ visitors and 383 direct pageviews. GitHub public REST reports 47 stars at
 `2026-08-13T06:07:55Z`. These source-native values do not silently replace the
 fixed baseline or the fixed final read.
 
+An earlier inter-window capture for the 28 complete dates
+`2026-07-16..2026-08-12`, collected at `2026-08-14T05:54:00Z`, reports GSC
+property totals of 8 clicks and 958 impressions, visible-query totals of 3
+clicks and 208 impressions, and a visibility gap of 5 clicks and 750
+impressions. Vercel separately reports 1,339 visitors and 1,773 pageviews;
+GitHub public REST reports 47 stars. These are rolling-window observations,
+not attributed experiment lift or regression. Raw inputs remain outside git
+under `/tmp/wenlan-seo-goal-20260814`.
+
 The newer authenticated inter-window capture covers `2026-07-17..2026-08-13`
 and does not replace the independent Friday report. GSC property totals are 8
 clicks and 951 impressions; visible-query totals are 3 clicks and 208
@@ -1021,6 +1039,44 @@ date replaces them; they are not daily losses or evidence of a CTA problem.
 No new privacy-visible query cluster passes the candidate gate.
 
 ### Current experiment
+
+`EXP-2026-08-13-mcp-knowledge-base-server-refresh` is in active local
+preparation and occupies the single website production slot. It refreshes the
+existing indexed English `/learn/mcp-memory-server` owner around the repeated
+`MCP knowledge base server` task, keeps memory-server intent as a comparison,
+and creates no URL or Mandarin translation. The authenticated target baseline
+is 0 clicks, 24 impressions, and page-average position 7.2 for
+`2026-07-16..2026-08-12`. The completed Friday report for
+`2026-07-17..2026-08-13` independently keeps the target at 0 clicks,
+24 impressions, and page-average position 7.2; its deterministic GSC page
+queue says `wait`, and it exposes no exact MCP knowledge-base query.
+Read-only URL Inspection reports submitted and indexed with exact canonicals
+and last crawl `2026-08-10T00:37:43Z`. The full
+candidate gate, source-native evidence, hidden-query boundary, product proof,
+and immutable readout contract are recorded in
+`docs/seo-audits/2026-08-13-mcp-knowledge-base-server-coverage-gate.md`.
+
+This candidate supersedes the older July MCP shared-memory copy on the same
+canonical. Commit, push, PR creation, merge, deployment, request indexing,
+GSC validation, external publication, paid action, synthetic events,
+analytics mutation, and metric changes remain separately gated.
+
+The rebased local build caught the same publication-date fallback class that
+previously affected the Knowledge Graph refresh: changing only `updatedAt`
+would have rewritten both Article dates to `2026-08-13`. Current production
+proves `datePublished: 2026-06-07`; the candidate now pins that value and uses
+`2026-08-13` only as `dateModified`. The focused guard must remain green.
+
+Local preparation is complete. The RED control failed against the prior copy;
+the focused contracts and complete SEO suite now pass 224/224. TypeScript, the
+Goal verifier, diff hygiene, the 223-page production build, built technical
+SEO, direct DOM assertions, all three FAQ interactions, and fresh complete
+393px plus 1440px rendered inspection pass. The user approved its exact
+commit, push, ready PR, merge, automatic Vercel deployment, and read-only
+production verification scope at `2026-08-15T05:53:43Z`; the candidate now
+occupies the production slot until the live gate passes.
+
+### Measuring experiment: AI knowledge-base contextual links
 
 `EXP-2026-08-13-ai-knowledge-base-context-links` is production-verified and
 measuring; the single website production slot is open. It adds exactly one
@@ -1623,6 +1679,66 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
   GSC reporting latency, then deliver the terminal decision.
 
 ### Next decision
+
+The next non-overlapping candidate is the existing English
+`/learn/mcp-memory-server` page, not a new article. It has 24 authenticated GSC
+impressions at page-average position 7.2 and a successful Google crawl on
+`2026-08-10T00:37:43Z`. Current official MCP documentation, maintained
+knowledge-base implementations, integration documentation, and independent
+user discussions repeat the `MCP knowledge base server` task, while Wenlan
+`v0.15.8` can prove source-backed knowledge, citations, refresh, review, and
+multi-client MCP setup. The page may therefore enter English-only local
+preparation; weak Mandarin exact-intent evidence does not justify translation.
+The completed `2026-08-14` Friday report leaves the target at 0 clicks,
+24 impressions, and page-average position 7.2 and labels the GSC-only page
+action `wait`. That label does not invalidate the separate external candidate
+gate: this remains an existing-page refresh backed by inspectable protocol,
+implementation, and repeated problem evidence, not a claim that GSC revealed
+the exact hidden query. Raw Vercel target traffic remains non-causal and is
+not used to nominate the change.
+
+At `2026-08-14T06:05:19Z`, the due 24-hour readout for
+`EXP-2026-08-11-llm-wiki-schema-template-refresh` passed its complete deployed
+technical, three-locale canonical, indexability, hreflang, schema-date,
+starter-schema, acceptance-test, maintained-source, visible-FAQ, and direct-
+200 floors. Read-only URL Inspection reports all three URLs submitted and
+indexed with exact Google and user canonicals, but their last crawls remain
+`2026-07-29T01:09:29Z`, `2026-07-29T01:10:28Z`, and
+`2026-08-01T22:01:38Z`, before production completion at
+`2026-08-13T05:22:32Z`.
+
+The freshest complete performance range also ends on `2026-08-12`, before
+deployment. Its English, zh-TW, and zh-CN GSC page rows are 0 clicks/8
+impressions, 0/1, and 0/4; none satisfies the independent 10-impression plus
+post-deploy-crawl guard. The result is inconclusive and the three canonicals
+remain unchanged until the seven-day read after `2026-08-20T05:22:32Z`.
+Do not attribute the separate Vercel target rows or 47 GitHub stars to this
+change. The Knowledge Graph 24-hour boundary is still later at
+`2026-08-14T06:39:50Z` and must not be recorded early.
+
+At `2026-08-14T05:58:00Z`, the controller evaluated the fresh inter-window
+GSC query-page rows without replacing the independent Friday report. The
+English Learn hub has 132 impressions and zero clicks, but only three
+privacy-visible qualified impressions: two for
+`ai memory mcp persistent context llm` and one for
+`claude agents sdk memory`. Google already crawled the current
+knowledge-base-first hub after its prior refresh, and the live source already
+exposes direct routes for AI knowledge-base tool selection, document ingest,
+source-backed pages, Karpathy LLM Wiki, Claude Code, MCP, and Obsidian. Hidden
+rows therefore do not justify another hub title, snippet, or card rewrite.
+
+The remaining core query-page joins are individually sparse: one impression
+for `llm wiki for codebase`, one for `local ai knowledge base`, and one for
+`stevenstavrakis/obsidian-mcp`. Their owners are already measuring or have a
+near-term predeclared readout, so no overlapping content edit is started.
+The approved directory lane was also reconciled read-only: all 13 submitted
+PRs remain open, no maintainer correction is requested, 11 are `CLEAN`, one
+is `BLOCKED` only on required review, and one is `UNSTABLE` on the previously
+documented unrelated whole-repository link failures. No no-op push,
+maintainer message, duplicate submission, website edit, indexing request, or
+validation action is supported by this evidence. Run the due LLM-Wiki and
+AI-agent-knowledge-graph 24-hour reads at their existing boundary before
+selecting another same-surface change.
 
 At `2026-08-13T06:21:14Z`, the controller completed the overdue seven-day
 readouts for the three core August acquisition families without rerunning the
