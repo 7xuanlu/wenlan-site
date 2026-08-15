@@ -6666,6 +6666,60 @@ increase for that experiment.
 <!-- EXPERIMENT-RECORD:END -->
 
 <!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-11-llm-wiki-schema-template-refresh 24h at 2026-08-14T06:05:19Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-11-llm-wiki-schema-template-refresh
+- Observed at: 2026-08-14T06:05:19Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The latest separate inter-window capture covers the 28 complete
+  dates `2026-07-16..2026-08-12`, which end before Vercel Production
+  completion at `2026-08-13T05:22:32Z`. GSC property totals are 8 clicks and
+  958 impressions; visible-query totals are 3 clicks and 208 impressions;
+  the visibility gap is 5 clicks and 750 impressions. The English, zh-TW,
+  and zh-CN target-page rows are independently 0 clicks/8 impressions at
+  page-average position 11.3, 0/1 at 8.0, and 0/4 at 18.5. The only visible
+  qualified join is English `llm wiki for codebase` with one impression at
+  position 7; it remains below the configured three-impression routing floor
+  and is not a schema/template-query result. These rows are pre-deploy or
+  mixed rolling-window evidence and do not satisfy the independent
+  post-crawl 10-impression locale guards.
+- Technical evidence: The deployed technical audit passes 120 sitemap URLs,
+  24 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence,
+  25 redirects, six bridge-host redirects, and old-URL exclusion. All three
+  live routes return direct 200 with exact self-canonicals, `index, follow`,
+  reciprocal `en-US`, `zh-TW`, `zh-CN`, and `x-default` alternates, Article
+  and BreadcrumbList schema, stable English `datePublished: 2026-06-24`,
+  stable Mandarin `datePublished: 2026-07-04`, and
+  `dateModified: 2026-08-12`. The starter-schema and acceptance-test sections,
+  maintained references, and five visible FAQs remain present without
+  `FAQPage`.
+- Indexing evidence: Read-only URL Inspection reports all three canonicals
+  submitted and indexed, fetch successful, indexing allowed, and exact
+  matching Google and user canonicals. Last crawls remain
+  `2026-07-29T01:09:29Z` for English, `2026-07-29T01:10:28Z` for zh-TW, and
+  `2026-08-01T22:01:38Z` for zh-CN, all before this deployment. No indexing
+  request or validation was submitted.
+- Vercel evidence: The same complete pre-deploy range reports 1,339 raw
+  visitors and 1,773 pageviews, 234 direct visitors and 545 direct pageviews,
+  and a non-deduplicated search-referrer row sum of 1,107 visitors and 1,229
+  pageviews. Unique acquisition-surface visitors remain unavailable. Target
+  rows remain separate at English 10 visitors/15 pageviews, zh-TW 6/10, and
+  zh-CN 16/21; no authenticated qualified source-to-target row was returned.
+  Umami remains unavailable/account-gated. GitHub public REST reports 47
+  stars.
+- Result: inconclusive
+- Decision: wait
+- Next step: Keep all three canonicals unchanged. Run the seven-day readout
+  only after `2026-08-20T05:22:32Z`, using complete post-deploy performance
+  dates and the original independent 10-impression plus confirmed-crawl guard.
+  Do not pool locales, convert missing rows to zero, infer exact-query rank,
+  source-to-page sessions, indexing effect, causality, or SEO success, and do
+  not repeat indexing requests or submit validation.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
 ## Experiment readout: EXP-2026-08-13-ai-agent-knowledge-graph-refresh 24h at 2026-08-14T06:43:56Z
 
 - Record type: experiment-readout
@@ -6854,55 +6908,174 @@ increase for that experiment.
   paid action, synthetic event, analytics mutation, or metric change occurred.
 
 <!-- EXPERIMENT-RECORD:START -->
-## Experiment readout: EXP-2026-08-11-llm-wiki-schema-template-refresh 24h at 2026-08-14T06:05:19Z
+## Experiment start: EXP-2026-08-13-mcp-knowledge-base-server-refresh
 
-- Record type: experiment-readout
-- Experiment ID: EXP-2026-08-11-llm-wiki-schema-template-refresh
-- Observed at: 2026-08-14T06:05:19Z
-- Readout: 24h
-- Status: measuring
-- Evidence: The latest separate inter-window capture covers the 28 complete
-  dates `2026-07-16..2026-08-12`, which end before Vercel Production
-  completion at `2026-08-13T05:22:32Z`. GSC property totals are 8 clicks and
-  958 impressions; visible-query totals are 3 clicks and 208 impressions;
-  the visibility gap is 5 clicks and 750 impressions. The English, zh-TW,
-  and zh-CN target-page rows are independently 0 clicks/8 impressions at
-  page-average position 11.3, 0/1 at 8.0, and 0/4 at 18.5. The only visible
-  qualified join is English `llm wiki for codebase` with one impression at
-  position 7; it remains below the configured three-impression routing floor
-  and is not a schema/template-query result. These rows are pre-deploy or
-  mixed rolling-window evidence and do not satisfy the independent
-  post-crawl 10-impression locale guards.
-- Technical evidence: The deployed technical audit passes 120 sitemap URLs,
-  24 key pages, six utility noindex headers, sitemap-wide `FAQPage` absence,
-  25 redirects, six bridge-host redirects, and old-URL exclusion. All three
-  live routes return direct 200 with exact self-canonicals, `index, follow`,
-  reciprocal `en-US`, `zh-TW`, `zh-CN`, and `x-default` alternates, Article
-  and BreadcrumbList schema, stable English `datePublished: 2026-06-24`,
-  stable Mandarin `datePublished: 2026-07-04`, and
-  `dateModified: 2026-08-12`. The starter-schema and acceptance-test sections,
-  maintained references, and five visible FAQs remain present without
-  `FAQPage`.
-- Indexing evidence: Read-only URL Inspection reports all three canonicals
-  submitted and indexed, fetch successful, indexing allowed, and exact
-  matching Google and user canonicals. Last crawls remain
-  `2026-07-29T01:09:29Z` for English, `2026-07-29T01:10:28Z` for zh-TW, and
-  `2026-08-01T22:01:38Z` for zh-CN, all before this deployment. No indexing
-  request or validation was submitted.
-- Vercel evidence: The same complete pre-deploy range reports 1,339 raw
-  visitors and 1,773 pageviews, 234 direct visitors and 545 direct pageviews,
-  and a non-deduplicated search-referrer row sum of 1,107 visitors and 1,229
-  pageviews. Unique acquisition-surface visitors remain unavailable. Target
-  rows remain separate at English 10 visitors/15 pageviews, zh-TW 6/10, and
-  zh-CN 16/21; no authenticated qualified source-to-target row was returned.
-  Umami remains unavailable/account-gated. GitHub public REST reports 47
-  stars.
-- Result: inconclusive
-- Decision: wait
-- Next step: Keep all three canonicals unchanged. Run the seven-day readout
-  only after `2026-08-20T05:22:32Z`, using complete post-deploy performance
-  dates and the original independent 10-impression plus confirmed-crawl guard.
-  Do not pool locales, convert missing rows to zero, infer exact-query rank,
-  source-to-page sessions, indexing effect, causality, or SEO success, and do
-  not repeat indexing requests or submit validation.
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-13-mcp-knowledge-base-server-refresh
+- Status: active
+- Data window: 2026-08-08..2026-08-14
+- Asset class: refresh
+- Launched: 2026-08-13
+- Hypothesis: Reframing the existing indexed MCP page around the repeated
+  `MCP knowledge base server` task, while answering memory-server intent as a
+  comparison, will improve qualified discovery without creating a competing
+  canonical.
+- Candidate evidence: Official MCP concepts say servers expose tools,
+  resources, and prompts and can provide knowledge-base resources. Maintained
+  packages and integrations explicitly use `MCP Knowledge Base Server`, while
+  independent user discussions repeat shared documents, coding standards,
+  citations, source sync, and cross-client access. Wenlan `v0.15.8` proves a
+  source-backed knowledge base, provenance, maintained Pages, citations,
+  refresh, review, local MCP, Streamable HTTP MCP, and supported client setup.
+  Full provenance and exclusions are in
+  `docs/seo-audits/2026-08-13-mcp-knowledge-base-server-coverage-gate.md`.
+- Baseline: GSC property totals are 8 clicks and 958 impressions; visible-query
+  totals are 3 clicks and 208 impressions; the visibility gap is 5 clicks and
+  750 impressions. The target has 0 clicks, 24 impressions, and page-average
+  position 7.2. Its six privacy-visible joined impressions are unrelated or
+  branded; the other 18 impressions are hidden and their intent is not
+  inferred. Read-only URL Inspection reports submitted and indexed, exact
+  canonicals, successful fetch, and last crawl `2026-08-10T00:37:43Z`.
+  Vercel separately reports 293 visitors and 296 pageviews; the 285-visitor
+  `google.com` source-to-target row is preserved as possibly automated or
+  referrer-incompatible, not human search traffic. GitHub reports 47 stars;
+  Umami remains unavailable.
+- Change: Keep `/learn/mcp-memory-server` and make `MCP knowledge base server`
+  the primary H1, snippet, and first answer. Add the memory-versus-knowledge-
+  base distinction, source/citation/freshness contract, a four-step MCP
+  validation loop, source-backed related paths, and maintained references.
+  Preserve `datePublished: 2026-06-07`, move `dateModified` to `2026-08-13`,
+  and create no URL or locale route.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 15 GSC target-page impressions after a confirmed
+  post-deploy Google crawl.
+- Success criteria: after both guards, at least 1 target-page click or at least
+  5 privacy-visible qualified `MCP knowledge base server`, `MCP knowledge
+  server`, or tool-qualified MCP knowledge-base impressions on this canonical,
+  with technical floors green.
+- Failure criteria: after 28 complete post-deploy days and both guards, 0
+  target clicks and no qualified visible query reaches 5 impressions, or any
+  technical, source, product-truth, or render regression occurs.
+- Inconclusive: either guard is unmet within the first 28 complete post-deploy
+  days.
+- Stop criteria: another controller edits this canonical, product truth
+  changes, or the page implies MCP itself supplies provenance or freshness.
+- 24h readout: pending after production completion.
+- 7d readout: pending after production completion plus seven days.
+- W2 readout: pending after production completion plus fourteen days.
+- W4 readout: pending after production completion plus twenty-eight days.
+- W8 readout: pending after production completion plus fifty-six days if
+  useful.
+- Result: pending
+- Decision: refresh
+- Next step: complete deterministic, build, technical, and rendered checks;
+  then stop for explicit publication approval. Do not request indexing or
+  submit GSC validation.
 <!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-14T06:32:15Z — MCP knowledge-base server local verification
+
+- Record type: campaign-observation
+- Related experiment: EXP-2026-08-13-mcp-knowledge-base-server-refresh
+- Status: active; locally verified; publication approval required
+- Evidence: The focused RED control failed on the previous copy and passes
+  after the refresh. Both the new knowledge-base contract and preserved MCP
+  shared-memory contract pass. The complete SEO suite passes 224/224;
+  TypeScript, the Goal verifier, diff hygiene, a 223-page production build,
+  and the built technical audit pass. Fresh exact 393px and 1440px local
+  production renders cover the complete route without overflow, clipping,
+  broken images, console warnings, or console errors. Article and
+  BreadcrumbList remain present, `FAQPage` remains absent, and all three
+  visible FAQ rows expand to their complete answer.
+- Decision: wait for explicit publication approval.
+- Excluded actions: no commit, push, PR, merge, deployment, indexing request,
+  GSC validation, external publication, analytics mutation, paid action, or
+  synthetic event occurred.
+
+### 2026-08-15T00:34:51Z — MCP publication-date regression caught locally
+
+- Record type: campaign-observation
+- Related experiment: EXP-2026-08-13-mcp-knowledge-base-server-refresh
+- Status: active; local correction required before publication
+- Evidence: current production emits `datePublished: 2026-06-07`. The rebased
+  local build initially emitted both `datePublished` and `dateModified` as
+  `2026-08-13` because the candidate changed `updatedAt` without pinning
+  `publishedAt`. A focused assertion for `publishedAt: 2026-06-07` failed
+  against that candidate before the correction.
+- Decision: pin `publishedAt: 2026-06-07`, retain
+  `updatedAt: 2026-08-13`, rerun the complete gates, and inspect compiled
+  schema dates. This correction remains inside the same unpublished candidate.
+- Excluded actions: no commit, push, PR, merge, deployment, indexing request,
+  GSC validation, external publication, analytics mutation, paid action, or
+  synthetic event occurred.
+
+### 2026-08-15T00:34:51Z — MCP candidate Friday-evidence reassessment
+
+- Record type: campaign-observation
+- Related experiment: EXP-2026-08-13-mcp-knowledge-base-server-refresh
+- Status: active; locally prepared; publication approval required
+- GSC evidence: the completed `2026-08-14` weekly report covers
+  `2026-07-17..2026-08-13` and reports 8 property clicks and 951 property
+  impressions, 3 visible-query clicks and 208 visible-query impressions, and
+  a 5-click plus 743-impression visibility gap. The target remains at
+  0 clicks, 24 impressions, and page-average position 7.2. The deterministic
+  page queue says `wait`; no visible row proves exact MCP knowledge-base
+  intent, and hidden target queries remain uninterpreted.
+- Vercel evidence: the same aligned range separately reports 240 target
+  visitors and 243 pageviews, including a `google.com` source-to-target row
+  of 232 visitors and 234 pageviews. The known referrer/device anomaly keeps
+  these as raw, possibly automated or referrer-incompatible observations, not
+  confirmed human search sessions or candidate-demand evidence.
+- Candidate-gate decision: retain the candidate. Official MCP documentation,
+  maintained knowledge-base implementations, independent repeated user
+  problems, the clean existing-page owner, maintained Wenlan proof, and the
+  standalone validation loop still pass all five external-evidence gates.
+  This is not a GSC exact-query claim, a second URL, or a locale expansion.
+- Next step: rerun the deterministic, TypeScript, build, and built technical
+  gates on the rebased current-main candidate, then stop for explicit commit,
+  push, PR, merge, automatic Vercel deployment, and read-only production
+  verification approval.
+- Excluded actions: no commit, push, PR, merge, deployment, indexing request,
+  GSC validation, external publication, analytics mutation, paid action, or
+  synthetic event occurred.
+
+### 2026-08-15T00:47:26Z — MCP current-main verification after date correction
+
+- Record type: campaign-observation
+- Related experiment: EXP-2026-08-13-mcp-knowledge-base-server-refresh
+- Status: active; locally verified; publication approval required
+- Evidence: The candidate is rebased onto current `origin/main`. The focused
+  publication-date assertion first failed against the regressed candidate and
+  now passes with `publishedAt: 2026-06-07` and
+  `updatedAt: 2026-08-13`. Compiled metadata preserves the original published
+  date and emits `dateModified: 2026-08-13`. The Goal verifier passes; the
+  complete SEO suite passes 224/224; TypeScript passes; the production build
+  emits 223/223 pages; and the built technical audit passes. Fresh complete
+  production renders at 393x852 and 1440x1000 show no horizontal overflow,
+  clipping, broken images, console warnings, or console errors, with all three
+  visible FAQ answers expanded. Canonical and indexability remain exact,
+  Article and BreadcrumbList remain present, and `FAQPage` remains absent.
+- Decision: candidate is ready for an explicit publication decision.
+- Excluded actions: no commit, push, PR, merge, deployment, indexing request,
+  GSC validation, external publication, analytics mutation, paid action, or
+  synthetic event occurred.
+
+### 2026-08-15T05:53:43Z — MCP publication scope approved
+
+- Record type: campaign-observation
+- Related experiment: EXP-2026-08-13-mcp-knowledge-base-server-refresh
+- Status: approved; publication in progress
+- Approval: The user explicitly approved commit, push, ready PR creation,
+  merge, automatic Vercel deployment, and read-only production verification
+  for the exact `codex/mcp-knowledge-base-server-refresh` candidate.
+- Included scope: the existing English `/learn/mcp-memory-server` refresh,
+  stable `datePublished: 2026-06-07`, `dateModified: 2026-08-13`, focused
+  regression coverage, the immutable candidate audit, and required campaign
+  records. No URL or locale route is created.
+- Excluded actions: request indexing, GSC validation, external publication,
+  paid action, synthetic events, analytics mutation, and metric changes remain
+  unapproved.
+- Next step: commit, push, open a ready PR, merge after checks, wait for the
+  automatic Vercel production deployment, and perform read-only live
+  verification before releasing the production slot.
