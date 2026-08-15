@@ -2192,6 +2192,7 @@ export const docPages: DocPage[] = [
       "graph context",
       "local knowledge graph",
     ],
+    publishedAt: "2026-07-09",
     updatedAt: "2026-08-13",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",

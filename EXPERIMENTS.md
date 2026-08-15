@@ -6664,3 +6664,159 @@ increase for that experiment.
   impressions, clicks, traffic lift, or causality from deployment, and do not
   request indexing or submit validation.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-13-ai-agent-knowledge-graph-refresh 24h at 2026-08-14T06:43:56Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-13-ai-agent-knowledge-graph-refresh
+- Observed at: 2026-08-14T06:43:56Z
+- Readout: 24h
+- Status: stopped
+- Evidence: The latest separate authenticated performance capture covers the
+  28 complete dates `2026-07-16..2026-08-12`, which end before Vercel
+  Production completion at `2026-08-13T06:39:50Z`. GSC property totals are 8
+  clicks and 958 impressions; visible-query totals are 3 clicks and 208
+  impressions; the query visibility gap is 5 clicks and 750 impressions. The
+  target page and its qualified AI-agent knowledge-graph joins are absent from
+  the returned rows and remain unavailable rather than zero. The original
+  10-impression exposure guard is therefore unmet.
+- Indexing evidence: Read-only GSC URL Inspection reports `PASS`, submitted
+  and indexed, indexing allowed, successful mobile fetch, and exact matching
+  Google and user canonicals. The last crawl remains
+  `2026-07-16T09:43:37Z`, before deployment. No indexing request or validation
+  was submitted.
+- Technical evidence: The deployed checker passes 120 sitemap URLs, 24 key
+  pages, six utility noindex headers, sitemap-wide `FAQPage` absence, 25
+  redirects, six bridge-host redirects, and old-URL exclusion. The target
+  returns direct 200 with exact canonical, `index, follow`, TechArticle and
+  BreadcrumbList schema, maintained-source links, the source-backed quick
+  answer, and sitemap membership. The unsupported zh-TW and zh-CN detail
+  routes remain direct 404. However, the refresh changed the record from the
+  previous `updatedAt: 2026-07-09` fallback to `updatedAt: 2026-08-13`
+  without preserving `publishedAt`. Live TechArticle schema now emits both
+  `datePublished` and `dateModified` as `2026-08-13`, violating the declared
+  stable-publication-date floor.
+- Vercel evidence: The same complete pre-deploy range reports 1,339 raw
+  visitors and 1,773 pageviews, 234 direct visitors and 545 direct pageviews,
+  and a non-deduplicated search-referrer row sum of 1,107 visitors and 1,228
+  pageviews. The target has 2 visitors and 2 pageviews; no authenticated
+  qualified source-to-target row was returned. Unique acquisition-surface
+  visitors remain unavailable. Umami remains unavailable/account-gated.
+  GitHub public REST reports 47 stars.
+- Result: failure
+- Decision: stop
+- Next step: restore the stable `datePublished: 2026-07-09` with an explicit
+  `publishedAt` field while keeping `dateModified: 2026-08-13`, add a focused
+  regression assertion, and run the complete local technical gate. Publishing
+  the correction still requires explicit approval; do not request indexing,
+  submit validation, or infer SEO performance from the pre-deploy evidence.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-14T06:51:40Z — Knowledge Graph published-date correction local verification
+
+- Record type: campaign-observation
+- Related experiment: EXP-2026-08-13-ai-agent-knowledge-graph-refresh
+- Related correction: TECH-2026-08-14-knowledge-graph-published-date
+- Status: locally verified; publication approval required
+- Evidence: The focused RED control failed because the existing record lacked
+  `publishedAt`. The correction explicitly restores `publishedAt: 2026-07-09`
+  while retaining `updatedAt: 2026-08-13`; the focused test then passed. The
+  complete SEO suite passes 223/223 with explicit sibling source roots;
+  TypeScript, Goal verifier, diff hygiene, the 223-page production build, and
+  the built technical audit pass. Built HTML emits the exact self-canonical,
+  `index, follow`, one TechArticle with `datePublished: 2026-07-09` and
+  `dateModified: 2026-08-13`, and no `FAQPage`.
+- Decision: wait for explicit publication approval.
+- Excluded actions: no commit, push, PR, merge, deployment, request indexing,
+  GSC validation, external publication, analytics mutation, paid action, or
+  synthetic event occurred.
+
+### 2026-08-14T06:57:39Z — authenticated inter-window evidence
+
+- Record type: campaign-observation
+- Data window: `2026-07-17..2026-08-13`
+- GSC evidence: `sc-domain:wenlan.app` reports 8 property clicks and 951
+  property impressions. The visible query table reports 3 clicks and 208
+  impressions, leaving a 5-click and 743-impression visibility gap. The
+  English Learn hub has 0 clicks and 129 impressions; the existing MCP page
+  has 0/24; the English Obsidian page has 0/16; the source-backed article has
+  0/9; and the LLM Wiki page has 0/8. The knowledge-graph target has no
+  returned GSC page row and remains unavailable rather than zero. The only
+  visible protected acquisition phrases are individually sparse: `ai memory
+  mcp persistent context llm` at 2 impressions, plus `llm wiki for codebase`,
+  `local ai knowledge base`, `obsidian 筆記`, and
+  `stevenstavrakis/obsidian-mcp` at 1 impression each.
+- Vercel evidence: the aligned range reports 1,268 raw visitors and 1,785
+  pageviews, 234 direct visitors and 628 direct pageviews, and a
+  non-deduplicated qualified source-to-page row sum of 1,078 visitors and
+  1,156 pageviews. The knowledge-graph target has 3 visitors and 11
+  pageviews; the comparison target has 5/5. No qualified source-to-target row
+  was returned for either page, and unique acquisition-surface visitors
+  remain unavailable. Custom events remain account-gated.
+- Other evidence: GitHub remains 47 stars. Umami remains unavailable without
+  a paid account and is not substituted by Vercel page aggregates.
+- Decision: the newest rolling window is weaker than the preceding
+  inter-window capture because older dates leave faster than the newest date
+  replaces them. This is not a daily-loss, CTA, source-to-page, or causal
+  result. No new privacy-visible cluster passes the candidate gate. Publish
+  the locally verified Knowledge Graph date correction after explicit
+  approval, then reassess the already prepared MCP candidate; do not stack a
+  new page rewrite from hidden-query impressions.
+- Excluded actions: no website edit from this evidence, indexing request,
+  validation, external publication, paid action, synthetic event, analytics
+  mutation, or metric change occurred.
+
+### 2026-08-14T07:06:01Z — OSS and free-directory exposure reconciliation
+
+- Record type: campaign-observation
+- OSS acceptance evidence: `TensorBlock/awesome-mcp-servers` PR #1500 merged
+  at `2026-08-03T00:09:13Z` as
+  `5baf490be39676ed39b92e0eef98ed290113684a`. Its current default-branch
+  knowledge-management file contains the exact
+  `https://github.com/7xuanlu/wenlan` link and describes Wenlan as a local-first
+  AI knowledge base and LLM wiki. The approved OSS batch therefore has three
+  merged listings rather than two.
+- Remaining PR evidence: eleven directory PRs remain open and all eleven
+  report `MERGEABLE`. `ComposioHQ/awesome-claude-skills` PR #852 explicitly
+  requires maintainer review. `DhanushNehru/awesome-mcp-servers` PR #52 still
+  has one failing whole-repository link check previously traced to unrelated
+  upstream URLs; its other link check passes. No maintainer review or comment
+  requests an author-side correction on any of the eleven PRs.
+- Free-directory evidence: the previously pending `mcpservers.org` submission
+  ID `5334` is publicly live at
+  `https://mcpservers.org/servers/7xuanlu/wenlan`. A direct read returned HTTP
+  200. The page is not marked `noindex`, links to both the Wenlan GitHub
+  repository and `https://wenlan.app`, and contains the approved `AI knowledge
+  base` and `LLM wiki` wording. The public server sitemap includes the exact
+  listing URL with `lastmod` `2026-08-13T06:35:37.000Z`.
+- Goal evidence: GitHub public REST still reports 47 stars. Listing and PR
+  state are exposure surfaces only; they are not GSC impressions, Vercel
+  visitors, stars, or evidence of causality.
+- Decision: keep the eleven mergeable PRs in passive maintainer review, count
+  the three merged OSS listings and the separate live free-directory page in
+  their own native units, and do not push no-op commits, contact maintainers,
+  resubmit ID `5334`, or select Premium.
+- Excluded actions: no website edit, commit, push, PR creation, external
+  message, directory resubmission, paid action, indexing request, GSC
+  validation, analytics mutation, synthetic event, or metric change occurred.
+
+### 2026-08-15T00:20:38Z — Knowledge Graph published-date correction publication approval
+
+- Record type: campaign-observation
+- Related experiment: EXP-2026-08-13-ai-agent-knowledge-graph-refresh
+- Related correction: TECH-2026-08-14-knowledge-graph-published-date
+- Status: approved; occupies the single website production slot
+- Approved scope: commit, push, ready PR creation, merge, automatic Vercel
+  deployment, and read-only production verification for the exact
+  `codex/knowledge-graph-published-date-fix` candidate. The correction restores
+  only `publishedAt: 2026-07-09` on the existing English
+  `/docs/knowledge-graph` record, retains `updatedAt: 2026-08-13`, adds the
+  focused regression guard and immutable correction audit, and includes the
+  required campaign records.
+- Excluded actions: request indexing, GSC validation, external publication,
+  paid action, synthetic events, analytics mutation, and metric changes remain
+  outside this approval.
+- Decision: publish the exact locally verified scope and keep the production
+  slot occupied until the merged Vercel Production deployment and live
+  read-only verification pass.

@@ -228,6 +228,8 @@ test("knowledge graph docs answer the AI-agent knowledge-base job without replac
   assert.match(knowledgeGraph, /entities, relations, and observations/i);
   assert.match(knowledgeGraph, /source memories and maintained pages/i);
   assert.match(knowledgeGraph, /supporting evidence/i);
+  assert.match(knowledgeGraph, /publishedAt:\s*"2026-07-09"/);
+  assert.match(knowledgeGraph, /updatedAt:\s*"2026-08-13"/);
   assert.doesNotMatch(knowledgeGraph, /graph context (?:is|becomes) (?:the )?authority/i);
 });
 
