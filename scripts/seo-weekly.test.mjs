@@ -2874,12 +2874,120 @@ test("click opportunities use qualified-query position instead of page position"
     );
     assert.match(
       report,
-      /\| `\/learn\/wenlan-vs-superlocal-memory` \| measuring-only \| 42 \| 0 \| 0\.00% \| 7\.7 \| 45\.0 \| 1 \| `super local memory` \(1\) \| internal-link-refresh \|/,
+      /\| `\/learn\/wenlan-vs-superlocal-memory` \| measuring-only \| 42 \| 0 \| 0\.00% \| 7\.7 \| 45\.0 \| 1 \| `super local memory` \(1\) \| evidence-gap-review \| Qualified visible demand is below the 3-impression joined floor\./,
     );
     assert.doesNotMatch(
       report,
-      /`\/learn\/wenlan-vs-superlocal-memory`[^\n]+serp-intent-review/,
+      /`\/learn\/wenlan-vs-superlocal-memory`[^\n]+(?:serp-intent-review|internal-link-refresh)/,
     );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
++test("click opportunities do not pool different search intents into one action floor", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-seo-intent-floor-"));
+  try {
+    const queriesPath = join(outputRoot, "gsc-queries.csv");
+    const pagesPath = join(outputRoot, "gsc-pages.csv");
+    const metadataPath = join(outputRoot, "gsc-metadata.json");
+    const queryPagesPath = join(outputRoot, "gsc-query-pages.json");
+    const outputPath = join(outputRoot, "weekly-seo.md");
+    const rows = [
+      ["llm wiki v2", 50],
+      ["mcp memory server", 45],
+      ["claude code memory", 40],
+    ];
+
+    await Promise.all([
+      writeFile(
+        queriesPath,
+        [
+          "Query,Clicks,Impressions,CTR,Position,Start date,End date,Source",
+          ...rows.map(
+            ([query, position]) =>
+              `${query},0,1,0%,${position}.0,2026-07-24,2026-08-20,Search Console API`,
+          ),
+        ].join("\n"),
+        "utf8",
+      ),
+      writeFile(
+        pagesPath,
+        [
+          "Page,Clicks,Impressions,CTR,Position,Start date,End date,Source",
+          "https://wenlan.app/learn,0,140,0%,35.8,2026-07-24,2026-08-20,Search Console API",
+        ].join("\n"),
+        "utf8",
+      ),
+      writeFile(
+        metadataPath,
+        JSON.stringify({
+          siteUrl: "sc-domain:wenlan.app",
+          startDate: "2026-07-24",
+          endDate: "2026-08-20",
+          source: "Search Console API",
+          queryRows: 3,
+          pageRows: 1,
+          queryPageRows: 3,
+          propertyTotals: {
+            clicks: 0,
+            impressions: 140,
+            ctr: 0,
+            position: 35.8,
+            aggregationType: "byProperty",
+          },
+        }),
+        "utf8",
+      ),
+      writeFile(
+        queryPagesPath,
+        JSON.stringify({
+          siteUrl: "sc-domain:wenlan.app",
+          startDate: "2026-07-24",
+          endDate: "2026-08-20",
+          source: "Search Console API",
+          dimensions: ["query", "page"],
+          responseAggregationType: "byPage",
+          rowCount: 3,
+          rows: rows.map(([query, position]) => ({
+            keys: [query, "https://wenlan.app/learn"],
+            clicks: 0,
+            impressions: 1,
+            ctr: 0,
+            position,
+          })),
+        }),
+        "utf8",
+      ),
+    ]);
+
+    await execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly.mjs"),
+        "--",
+        "--queries",
+        queriesPath,
+        "--pages",
+        pagesPath,
+        "--gsc-metadata",
+        metadataPath,
+        "--query-pages",
+        queryPagesPath,
+        "--date",
+        "2026-08-21",
+        "--output",
+        outputPath,
+      ],
+      { cwd: repoRoot },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+    assert.match(
+      report,
+      /`\/learn`[^\n]+evidence-gap-review[^\n]+No single configured owner reaches the 3-impression joined floor\./,
+    );
+    assert.doesNotMatch(report, /`\/learn`[^\n]+query-page-review/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }
@@ -5231,6 +5339,83 @@ test("seo weekly generator maps named comparison products to their canonical pag
     assert.match(
       report,
       /\| `notion ai vs wenlan` \| Comparisons \| `\/learn\/wenlan-vs-notion-ai` \|/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
++test("seo weekly generator routes specific intent variants to their page owners", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-seo-intent-owners-"));
+  try {
+    const queriesPath = join(outputRoot, "gsc-queries.csv");
+    const pagesPath = join(outputRoot, "gsc-pages.csv");
+    const outputPath = join(outputRoot, "weekly-seo.md");
+
+    await Promise.all([
+      writeFile(
+        queriesPath,
+        [
+          "Query,Clicks,Impressions,CTR,Position",
+          "types of ai agent memory,0,11,0%,82.6",
+          "ai agent memory glossary,0,3,0%,88.7",
+          "obsidian 筆記,0,1,0%,35.0",
+          "obsidian 笔记,0,1,0%,36.0",
+          "stevenstavrakis/obsidian-mcp,0,1,0%,46.0",
+          "",
+        ].join("\n"),
+        "utf8",
+      ),
+      writeFile(
+        pagesPath,
+        [
+          "Page,Clicks,Impressions,CTR,Position",
+          "https://wenlan.app/learn/ai-agent-memory-types,0,14,0%,84.0",
+          "https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory,0,1,0%,35.0",
+          "https://wenlan.app/zh-CN/learn/wenlan-vs-obsidian-ai-memory,0,1,0%,36.0",
+          "",
+        ].join("\n"),
+        "utf8",
+      ),
+    ]);
+
+    await execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly.mjs"),
+        "--",
+        "--queries",
+        queriesPath,
+        "--pages",
+        pagesPath,
+        "--date",
+        "2026-08-22",
+        "--output",
+        outputPath,
+      ],
+      { cwd: repoRoot },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+    assert.match(
+      report,
+      /\| `types of ai agent memory` \| AI work memory \| `\/learn\/ai-agent-memory-types` \| 11 \|/,
+    );
+    assert.match(
+      report,
+      /\| `ai agent memory glossary` \| AI work memory \| `\/learn\/ai-agent-memory-types` \| 3 \|/,
+    );
+    assert.match(
+      report,
+      /\| `obsidian 筆記` \| Obsidian\/knowledge-base adjacent \| `\/zh-TW\/learn\/wenlan-vs-obsidian-ai-memory` \| 1 \|/,
+    );
+    assert.match(
+      report,
+      /\| `obsidian 笔记` \| Obsidian\/knowledge-base adjacent \| `\/zh-CN\/learn\/wenlan-vs-obsidian-ai-memory` \| 1 \|/,
+    );
+    assert.match(
+      report,
+      /\| `stevenstavrakis\/obsidian-mcp` \| Obsidian\/knowledge-base adjacent \| `\/learn\/wenlan-vs-obsidian-ai-memory` \| 1 \|/,
     );
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
