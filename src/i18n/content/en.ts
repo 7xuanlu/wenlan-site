@@ -82,7 +82,7 @@ export const enContent = {
         eyebrow: "Download",
         title: "Download Wenlan for your system.",
         description:
-          "Wenlan v0.15.8 ships a macOS desktop preview plus native CLI, local daemon, and MCP connector builds.",
+          "Wenlan v0.16.0 ships desktop builds for Windows x64 and macOS Apple silicon, plus headless runtime builds for Windows, macOS, and Linux.",
         stableLabel: "Stable",
         releaseNotesLabel: "Release notes",
         packageIncludesLabel: "CLI · daemon · MCP connector",
@@ -98,12 +98,27 @@ export const enContent = {
         },
         platforms: [
           {
+            id: "windows-desktop-x64",
+            name: "Wenlan Desktop",
+            architecture: "Windows · x64",
+            description:
+              "Install the desktop app with its bundled daemon, CLI, MCP connector, and runtime libraries. No WSL or Rust toolchain required.",
+            actionLabel: "Download Windows desktop",
+            packageIncludesLabel: "Desktop app · bundled runtime",
+            guideLabel: "Open the desktop setup guide",
+            setupSteps: [
+              "Download and run the x64 setup executable.",
+              "Open Wenlan. The app starts its bundled daemon and offers to connect detected AI clients.",
+              "Check the app status or run wenlan doctor to verify the local runtime.",
+            ],
+          },
+          {
             id: "windows-x64",
-            name: "Windows",
-            architecture: "x64",
+            name: "Windows runtime",
+            architecture: "x64 · headless",
             description:
               "A complete native archive with ONNX Runtime and the Vulkan loader for supported GPUs. No WSL or Rust toolchain required.",
-            actionLabel: "Download Windows x64",
+            actionLabel: "Download Windows runtime",
             setupSteps: [
               "Download and extract the ZIP. Keep every included file together.",
               "Add the extracted directory to PATH.",
@@ -173,7 +188,7 @@ export const enContent = {
           seo: {
             title: "Download Wenlan for Windows, macOS, and Linux",
             description:
-              "Download the current Wenlan CLI, local daemon, and MCP connector for Windows x64, macOS Apple silicon, Linux x64, or Linux ARM64.",
+              "Download the Wenlan desktop app for Windows x64 or macOS Apple silicon, or install the headless CLI, local daemon, and MCP connector for Windows, macOS, and Linux.",
           },
           breadcrumbs: {
             home: "Home",
@@ -185,7 +200,7 @@ export const enContent = {
             "Choose one published build, keep its files together, and verify the local runtime before connecting an AI tool.",
           buildsTitle: "Choose your build",
           buildsDescription:
-            "The current release provides a macOS desktop preview and four native runtime archives.",
+            "The current release provides desktop builds for Windows x64 and macOS Apple silicon plus four native headless runtime archives.",
           setupTitle: "Install on your platform",
           setupDescription:
             "Choose the desktop app or keep the CLI, local daemon, and MCP connector together.",
@@ -674,7 +689,7 @@ export const enContent = {
         description:
           "Agents capture what they learn, you add sources you trust, and Wenlan keeps source-backed wiki pages current across AI work.",
         statusLabel: "Project status",
-        statusItems: ["v0.15.8", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
+        statusItems: ["v0.16.0", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
       },
       sections: [
         {
@@ -701,7 +716,7 @@ export const enContent = {
           number: "04",
           title: "Current status",
           paragraphs: [
-            "Wenlan v0.15.8 ships a macOS Apple Silicon desktop preview plus native runtime artifacts for macOS, Linux (x86_64, aarch64; glibc), and Windows (x86_64). The macOS preview is not yet notarized, and Windows remains a runtime ZIP rather than a desktop app. The daemon, CLI, MCP server, Claude Code plugin, and Codex plugin are Apache-2.0; the desktop app crate is AGPL-3.0-only.",
+            "Wenlan v0.16.0 ships installable desktop builds for macOS Apple Silicon and Windows x64, plus native headless runtime artifacts for macOS, Linux (x86_64, aarch64; glibc), and Windows (x86_64). The macOS preview is not yet notarized; Windows users can choose the desktop setup executable or the headless runtime ZIP. The daemon, CLI, MCP server, Claude Code plugin, and Codex plugin are Apache-2.0; the desktop app crate is AGPL-3.0-only.",
           ],
         },
       ],
@@ -1304,7 +1319,7 @@ export const enContent = {
           number: "01",
           title: "Install the runtime for your system",
           paragraphs: [
-            "Wenlan v0.15.8 ships native runtime packages for Windows x64, macOS Apple silicon, and Linux x64 or ARM64 with glibc. Every runtime archive contains the CLI, daemon, and MCP connector.",
+            "Wenlan v0.16.0 ships native runtime packages for Windows x64, macOS Apple silicon, and Linux x64 or ARM64 with glibc. Every runtime archive contains the CLI, daemon, and MCP connector.",
             "On Windows, extract wenlan-windows-x64.zip as one unit into a user-owned directory on PATH. Keep onnxruntime.dll and vulkan-1.dll beside the three executables.",
           ],
           commands: [
@@ -1315,13 +1330,13 @@ export const enContent = {
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.15.8/wenlan-windows-x64.zip",
+              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.16.0/wenlan-windows-x64.zip",
               label: "Download Windows x64",
             },
             {
               id: "all-downloads",
-              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.15.8",
-              label: "All v0.15.8 downloads",
+              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.16.0",
+              label: "All v0.16.0 downloads",
             },
           ],
         },

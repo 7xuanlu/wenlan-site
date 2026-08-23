@@ -206,7 +206,7 @@ const platformSupportBullets = [
   "macOS Intel - no current prebuilt runtime in the release workflow; launchd code path exists, but treat it as source/dev-only; no current desktop app target.",
   "Linux x86_64 - current prebuilt runtime and systemd user unit; no current desktop app target.",
   "Linux aarch64 glibc - current prebuilt runtime and systemd user unit; no current desktop app target.",
-  "Windows x86_64 - current prebuilt runtime with bundled ONNX Runtime and Vulkan loader, plus a Task Scheduler ONLOGON task; no current desktop app release.",
+  "Windows x86_64 - current prebuilt runtime with bundled ONNX Runtime and Vulkan loader, plus a Task Scheduler ONLOGON task and a current desktop setup executable.",
 ];
 
 const platformDataDirs = `macOS:   ~/Library/Application Support/wenlan/
@@ -1129,7 +1129,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Platform boundaries",
         body: [
-          "Do not collapse runtime support and desktop app support into one claim. The current product release workflow publishes the runtime for macOS Apple Silicon, Linux x86_64, Linux aarch64 glibc, and Windows x86_64. The optional desktop app release path is narrower and currently targets macOS Apple Silicon.",
+          "Do not collapse runtime support and desktop app support into one claim. The current product release workflow publishes the runtime for macOS Apple Silicon, Linux x86_64, Linux aarch64 glibc, and Windows x86_64. The desktop app release path currently targets macOS Apple Silicon and Windows x86_64.",
           "macOS Intel still has a launchd service model in the code path, but there is no current prebuilt runtime or desktop app target in the public release workflow. Treat that as source/dev-only until a release workflow adds an artifact.",
         ],
         bullets: platformSupportBullets,
@@ -3605,7 +3605,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.15.8 line.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.16.0 line.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3739,7 +3739,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Open the app source",
-          href: "https://github.com/7xuanlu/wenlan/tree/v0.15.8/app",
+          href: "https://github.com/7xuanlu/wenlan/tree/v0.16.0/app",
         },
       },
       {
@@ -3783,35 +3783,36 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.15.8",
+      "Wenlan version 0.16.0",
       "wenlan-mcp release notes",
     ],
-    updatedAt: "2026-08-09",
+    updatedAt: "2026-08-19",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Quick answer: the current stable release in the repository changelog is v0.15.8, dated 2026-08-09.",
-      "The unified release publishes native runtime archives plus a macOS Apple Silicon desktop preview and signed updater artifact.",
+      "Quick answer: the current stable release in the repository changelog is v0.16.0, dated 2026-08-19.",
+      "The unified release publishes native runtime archives plus macOS Apple Silicon and Windows x64 desktop builds and updater artifacts.",
     ],
     sections: [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.15.8 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It points the desktop updater at the unified release manifest, following v0.15.7's app-bundle promotion and v0.15.6's move of the desktop crate into the monorepo.",
+          "Wenlan v0.16.0 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It adds the installable Windows x64 desktop build while keeping the unified release manifest and headless runtime archives.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
         ],
       },
       {
-        heading: "v0.15.8 highlights",
+        heading: "v0.16.0 highlights",
         body: [
-          "The v0.15.8 release completes the unified desktop release path by pointing the app updater at the shared manifest. The same release surface carries the macOS desktop preview and native runtime archives.",
+          "The v0.16.0 release makes the Windows desktop build installable from the same release surface as the macOS preview and native runtime archives, while strengthening the app's source-backed knowledge workflow.",
         ],
         bullets: [
-          "The app updater reads the unified Wenlan release manifest.",
-          "The macOS Apple Silicon app bundle ships from the same versioned monorepo as its sidecars.",
-          "The release keeps native Windows x64, macOS Apple Silicon, and Linux x64 or ARM64 runtime archives.",
+          "Windows x64 now has a desktop setup executable in addition to the headless runtime ZIP.",
+          "App runtime paths and tests are portable across the published desktop targets.",
+          "Page truth badges, human-reviewed Page capability, and the two-zone knowledge graph make evidence and review state more visible.",
+          "Page Map and community-map surfaces are restored, daemon auto-start is hardened, and capture or handoff writes can survive an offline daemon through the durable outbox.",
           "The macOS desktop preview is not yet notarized; the maintained installer verifies the release before clearing quarantine for Wenlan only.",
-          "Stable release date: 2026-08-09.",
+          "Stable release date: 2026-08-19.",
         ],
       },
       {
@@ -3910,7 +3911,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.15.8, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.16.0, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },
@@ -3967,7 +3968,7 @@ export const docPages: DocPage[] = [
         heading: "How a release moves",
         body: [
           "Wenlan uses release-please to maintain a release PR from merged commits. When that release PR is merged, tag-based workflows build and publish the local runtime.",
-          "The release workflow ships the daemon CLI, wenlan-server, wenlan-mcp, standalone binaries, npm packages, crates, and Homebrew tap updates. The optional desktop app releases from its own repository.",
+          "The release workflow ships the daemon CLI, wenlan-server, wenlan-mcp, standalone binaries, npm packages, crates, Homebrew tap updates, and the optional desktop app from the unified Wenlan repository.",
         ],
         code: {
           label: "Release flow",
@@ -4481,7 +4482,7 @@ export const docPages: DocPage[] = [
         heading: "License",
         body: [
           "The main repo is Apache-2.0. By contributing, you agree that your changes are licensed under the license that applies to the files you modify.",
-          "The desktop app has its own repository and AGPL-3.0-only license. Check the target repo before contributing across that boundary.",
+          "The desktop app lives under app/ in the unified Wenlan repository, and that crate is AGPL-3.0-only. Check this license boundary when contributing to the desktop app.",
         ],
         link: {
           label: "Read CONTRIBUTING.md",

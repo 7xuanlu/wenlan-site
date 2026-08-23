@@ -9,7 +9,7 @@ export function recommendedReleaseAssetId(
 
   if (/Windows NT/i.test(userAgent)) {
     return /Win64|x64|WOW64|amd64/i.test(userAgent)
-      ? "windows-x64"
+      ? "windows-desktop-x64"
       : null;
   }
 
