@@ -170,7 +170,8 @@ export default async function LocalizedLearnSlugPage({
   const renderArticleText =
     article.slug === "wenlan-vs-obsidian-ai-memory" ||
     article.slug === "distilled-wiki-pages-ai-memory" ||
-    article.slug === "choose-ai-knowledge-base-tool"
+    article.slug === "choose-ai-knowledge-base-tool" ||
+    article.slug === "coding-agent-source-backed-knowledge-base"
       ? renderProtectedCjkTerms
       : (text: string) => text;
 
