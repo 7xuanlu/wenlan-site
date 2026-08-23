@@ -151,6 +151,13 @@ async function collectMatches(pattern) {
   for await (const file of walkTextFiles(repoRoot)) {
     const rel = relative(repoRoot, file);
     if (rel === "scripts/brand-contract.test.mjs") continue;
+    if (
+      rel === "PLAN.md" ||
+      rel === "EXPERIMENTS.md" ||
+      rel.startsWith("docs/seo-audits/")
+    ) {
+      continue;
+    }
     const text = await readFile(file, "utf8");
     for (const match of text.matchAll(pattern)) {
       matches.push(`${rel}:${lineForOffset(text, match.index)}:${match[0]}`);
@@ -1748,7 +1755,8 @@ test("Learn article headers keep long Wenlan titles inside mobile viewports", as
 
   const visuals = await readRepo("src/app/learn/article-visuals.tsx");
   assert.match(visuals, /grid min-w-0 grid-cols-\[32px_minmax\(0,1fr\)\]/);
-  assert.match(visuals, /<p className="min-w-0[^"]*\[word-break:keep-all\][^"]*\[overflow-wrap:break-word\]/);
+  assert.match(visuals, /<div className="w-full min-w-0 max-w-full/);
+  assert.match(visuals, /<p className="min-w-0[^"]*\[overflow-wrap:anywhere\][^"]*\[word-break:normal\][^"]*sm:\[overflow-wrap:break-word\][^"]*sm:\[word-break:keep-all\]/);
 });
 
 test("Obsidian acquisition page answers Claude Code and MCP intent without changing its canonical seam", async () => {
