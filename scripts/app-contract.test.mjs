@@ -240,12 +240,14 @@ test("Wenlan unified release metadata exposes the version-locked desktop app", a
 
 test("public desktop-app surfaces track the unified Wenlan source facts", async () => {
   const app = await currentWenlanAppRelease();
+  const appSourceUrl = `https://github.com/7xuanlu/wenlan/tree/${app.tag}/app`;
+  const appSourcePath = appSourceUrl.replace("https://", "");
   const docs = await readRepo("src/app/docs/docs.ts");
   const structuredData = await readRepo("src/app/structured-data.ts");
   const llms = await readRepo("public/llms.txt");
   const llmsFull = await readRepo("src/app/llms-full.txt/route.ts");
 
-  assert.match(docs, /href: "https:\/\/github\.com\/7xuanlu\/wenlan\/tree\/v0\.15\.8\/app"/);
+  assert.ok(docs.includes(`href: "${appSourceUrl}"`));
   assert.match(docs, /Tauri 2 desktop shell/);
   assert.match(docs, /localhost:7878/);
   assert.match(docs, /version-locked to the workspace release train/);
@@ -253,16 +255,17 @@ test("public desktop-app surfaces track the unified Wenlan source facts", async 
   assert.doesNotMatch(docs, /origin-app/);
   assert.doesNotMatch(docs, /github\.com\/7xuanlu\/wenlan-app/);
   assert.doesNotMatch(docs, /desktop app (?:lives in|is) a separate repo(?:sitory)?/i);
+  assert.doesNotMatch(docs, /desktop app.*(?:own|separate) repo(?:sitory)?/i);
 
-  assert.match(structuredData, /github\.com\/7xuanlu\/wenlan\/tree\/v0\.15\.8\/app/);
+  assert.ok(structuredData.includes(appSourcePath));
   assert.match(structuredData, /Tauri 2 \+ React 19/);
   assert.match(structuredData, /localhost:7878/);
   assert.match(structuredData, /unified release manifest/);
 
   assert.match(llms, /Wenlan desktop app source/);
-  assert.match(llms, /github\.com\/7xuanlu\/wenlan\/tree\/v0\.15\.8\/app/);
+  assert.ok(llms.includes(appSourceUrl));
   assert.doesNotMatch(llms, /separate repository boundary/i);
-  assert.match(llmsFull, /github\.com\/7xuanlu\/wenlan\/tree\/v0\.15\.8\/app/);
+  assert.ok(llmsFull.includes(appSourcePath));
 });
 
 test("public web-client guidance tracks the released wenlan-app remote access boundary", async () => {

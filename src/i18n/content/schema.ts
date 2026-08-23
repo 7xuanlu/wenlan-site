@@ -105,6 +105,7 @@ export type HomeContent = SeoContent & {
     };
     platforms: readonly {
       id:
+        | "windows-desktop-x64"
         | "windows-x64"
         | "macos-arm64"
         | "macos-runtime-arm64"

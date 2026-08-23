@@ -17,7 +17,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "9a1da9f2783cc6ba55373459cfba07d2bfec365a446d53d4345f1effa9a04dd4",
+    sourceHash: "97c339fc604f1703e47bc2f0bd9a6f075f35aa065952e22cf46218ad89239c8a",
     content: {
       seo: {
         title: "Wenlan 文澜 | AI 工作的 LLM wiki",
@@ -83,7 +83,7 @@ export const zhCNContent = {
         title:
           "下\u2060载\u2060适\u2060合\u2060你\u2060系\u2060统\u2060的 Wenlan。",
         description:
-          "Wenlan v0.15.8 提供 macOS 桌面预览版，以及原生 CLI、本地 daemon 与 MCP connector 包。",
+          "Wenlan v0.16.0 提供 Windows x64 与 macOS Apple silicon 桌面版，以及 Windows、macOS、Linux 的 headless runtime 包。",
         stableLabel: "稳定版",
         releaseNotesLabel: "版本说明",
         packageIncludesLabel: "内含 CLI、daemon 与 MCP connector",
@@ -97,12 +97,27 @@ export const zhCNContent = {
         },
         platforms: [
           {
+            id: "windows-desktop-x64",
+            name: "Wenlan 桌面版",
+            architecture: "Windows · x64 桌面版",
+            description:
+              "安装内置 daemon、CLI、MCP connector 与所需 runtime libraries 的桌面 App；不\u2060需\u2060要 WSL 或 Rust toolchain。",
+            actionLabel: "下载 Windows 桌面版",
+            packageIncludesLabel: "桌面 App · 内置 runtime",
+            guideLabel: "打开桌面版安装指南",
+            setupSteps: [
+              "下载并运行 x64 setup 安装程序。",
+              "打开 Wenlan；App 会启动内置 daemon，并提供连接检测到的 AI 客户端。",
+              "查看 App 状态，或运行 wenlan doctor 验证本地 runtime。",
+            ],
+          },
+          {
             id: "windows-x64",
-            name: "Windows",
-            architecture: "x64",
+            name: "Windows 运行环境",
+            architecture: "x64 · 无界面",
             description:
               "完整原生包，包含 ONNX Runtime 与供受支持 GPU 使用的 Vulkan loader。不\u2060需\u2060要 WSL 或 Rust toolchain。",
-            actionLabel: "下载 Windows x64",
+            actionLabel: "下载 Windows runtime",
             setupSteps: [
               "下载并解压 ZIP，把所有文件保留在同一个目录。",
               "把解压后的目录加入 PATH。",
@@ -171,7 +186,7 @@ export const zhCNContent = {
           seo: {
             title: "下载 Wenlan Windows、macOS 与 Linux 版",
             description:
-              "下载最新版 Wenlan CLI、本地 daemon 与 MCP connector，支持 Windows x64、macOS Apple silicon、Linux x64 与 Linux ARM64。",
+              "下载 Windows x64 或 macOS Apple silicon 的 Wenlan 桌面 App，或安装支持 Windows、macOS 与 Linux 的 headless CLI、本地 daemon 与 MCP connector。",
           },
           breadcrumbs: {
             home: "首页",
@@ -182,7 +197,7 @@ export const zhCNContent = {
           description:
             "选择一个正式发布的版本、保留包内全部文件，再验证本地 runtime，之后才连接 AI 工具。",
           buildsTitle: "选择你的版本",
-          buildsDescription: "当前 release 提供 macOS 桌面预览版与四个原生 runtime 包。",
+          buildsDescription: "当前 release 提供 Windows x64 与 macOS Apple silicon 桌面版，以及四个原生 headless runtime 包。",
           setupTitle: "按平台完成安装",
           setupDescription: "选择桌面 App，或把 CLI、本地 daemon 与 MCP connector 保留在一起。",
           verifyTitle: "连接前先验证",
@@ -653,7 +668,7 @@ export const zhCNContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "0e95e32d83b241de1181b5ccf6b20ab0572485e42b3c40144fcda0f28a98545e",
+    sourceHash: "c2a34723f4c59a9a110806a313817b195f5ded1d3882ab8f344a5d367362d93f",
     content: {
       seo: {
         title: "关于 Wenlan | AI 工作的 LLM wiki",
@@ -670,7 +685,7 @@ export const zhCNContent = {
         description:
           "AI 代理捕捉学到的内容，你加入信任来源，Wenlan 让有来源依据的 wiki 页面在 AI 工作中保持最新。",
         statusLabel: "项目状态",
-        statusItems: ["版本 v0.15.8", "支持 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 构建"],
+        statusItems: ["版本 v0.16.0", "支持 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 构建"],
       },
       sections: [
         {
@@ -697,7 +712,7 @@ export const zhCNContent = {
           number: "04",
           title: "当前状态",
           paragraphs: [
-            "Wenlan v0.15.8 提供 macOS Apple Silicon 桌面预览版，以及 macOS、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64) 原生 runtime 包。macOS 预览版尚未完成 notarization，Windows 仍是 runtime ZIP，不是桌面 App。daemon、CLI、MCP server、Claude Code plugin 与 Codex plugin 采用 Apache-2.0；桌面 App crate 采用 AGPL-3.0-only。",
+            "Wenlan v0.16.0 提供 macOS Apple Silicon 与 Windows x64 桌面版，以及 macOS、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64) 原生 headless runtime 包。macOS 预览版尚未完成 notarization；Windows 用户可以选择桌面版 setup 安装程序或 headless runtime ZIP。daemon、CLI、MCP server、Claude Code plugin 与 Codex plugin 采用 Apache-2.0；桌面 App crate 采用 AGPL-3.0-only。",
           ],
         },
       ],
@@ -1274,7 +1289,7 @@ export const zhCNContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "ff7503874ecf35e9e705ff801dc59ded5d52a94cdbc2173201273f67fe72a6d3",
+    sourceHash: "32377a948d26c3b4e5c52cb5d18da6d7505e1ef3a52bbe5943a401560c460d7f",
     content: {
       seo: {
         title: "安装 Wenlan：Claude Code、Codex、ChatGPT 与 MCP",
@@ -1300,7 +1315,7 @@ export const zhCNContent = {
           number: "01",
           title: "安装适合你系统的 runtime",
           paragraphs: [
-            "Wenlan v0.15.8 提供 Windows x64、macOS Apple silicon，以及 Linux x64 或 ARM64 glibc 的原生 runtime 包。每份 runtime archive 都包含 CLI、daemon 与 MCP connector。",
+            "Wenlan v0.16.0 提供 Windows x64、macOS Apple silicon，以及 Linux x64 或 ARM64 glibc 的原生 runtime 包。每份 runtime archive 都包含 CLI、daemon 与 MCP connector。",
             "在 Windows 上，请把 wenlan-windows-x64.zip 当成一个整体解压到用户拥有且已加入 PATH 的目录。onnxruntime.dll、vulkan-1.dll 与三个可执行文件必须放在一起。",
           ],
           commands: [
@@ -1311,13 +1326,13 @@ export const zhCNContent = {
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.15.8/wenlan-windows-x64.zip",
+              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.16.0/wenlan-windows-x64.zip",
               label: "下载 Windows x64",
             },
             {
               id: "all-downloads",
-              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.15.8",
-              label: "全部 v0.15.8 下载",
+              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.16.0",
+              label: "全部 v0.16.0 下载",
             },
           ],
         },

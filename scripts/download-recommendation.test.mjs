@@ -8,7 +8,7 @@ test("desktop user agents map to one explicit published release asset", () => {
     recommendedReleaseAssetId(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
     ),
-    "windows-x64",
+    "windows-desktop-x64",
   );
   assert.equal(
     recommendedReleaseAssetId(
