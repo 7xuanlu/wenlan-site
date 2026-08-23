@@ -252,6 +252,7 @@ const zhTWArticles = {
       "coding-agent-source-backed-knowledge-base",
       "wenlan-vs-obsidian-ai-memory",
       "source-backed-wiki-pages-ai-work",
+      "verify-ai-knowledge-base-citations",
       "ai-memory-provenance",
       "local-git-history-ai-memory",
     ],
@@ -383,6 +384,7 @@ const zhTWArticles = {
       "coding-agent-source-backed-knowledge-base",
       "wenlan-vs-obsidian-ai-memory",
       "distilled-wiki-pages-ai-memory",
+      "verify-ai-knowledge-base-citations",
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
     ],
@@ -966,6 +968,7 @@ const zhTWArticles = {
       "build-local-ai-knowledge-base-from-documents",
       "source-backed-wiki-pages-ai-work",
       "distilled-wiki-pages-ai-memory",
+      "verify-ai-knowledge-base-citations",
     ],
     officialReferences: [
       {
@@ -992,6 +995,127 @@ const zhTWArticles = {
     cta: {
       heading: "用同一套 8 項檢查測試 Wenlan",
       body: "從一組小型來源開始，驗證引用、更新與審查，再判斷維護型本地知識層是否適合你的工作流。",
+    },
+  },
+  "verify-ai-knowledge-base-citations": {
+    slug: "verify-ai-knowledge-base-citations",
+    eyebrow: "引用除錯",
+    category: "Workflows",
+    title: "AI 知識庫引用對不上？逐項驗證來源與無依據回答",
+    description:
+      "把 RAG 或 AI 知識庫回答拆成可檢查主張，找出錯頁、錯片段、過期來源與沒有證據支持的結論。",
+    metaTitle: "AI 知識庫引用對不上？驗證來源與回答 | Wenlan",
+    metaDescription:
+      "逐項驗證 AI 知識庫引用，診斷錯頁、錯片段、過期版本與無依據回答，並建立可重複的來源檢查流程。",
+    keywords: [
+      "AI 知識庫引用對不上",
+      "驗證 AI 知識庫引用",
+      "AI 知識庫回答沒有依據",
+      "RAG 引用錯誤",
+      "引用來源可追溯",
+      "AI 知識庫來源驗證",
+    ],
+    publishedAt: "2026-08-23",
+    updatedAt: "2026-08-23",
+    author: "Qi-Xuan Lu",
+    readingTime: "7 分鐘閱讀",
+    audience: "看到 AI 回答附了引用，卻發現頁碼、片段、版本或內容對不上的繁體中文使用者",
+    heroBullets: [
+      "有引用標記，只代表系統附上來源，不代表來源真的支持這句話。",
+      "每個重要主張都要回到確切頁面、片段與文件版本檢查。",
+      "檢查結果分成支持、部分支持、無依據與過期，不用一個模糊分數帶過。",
+    ],
+    sections: [
+      {
+        heading: "先回答：引用存在，不等於回答有依據",
+        body: [
+          "驗證 AI 知識庫回答時，先把文字拆成可單獨判斷的事實主張，再逐項打開它引用的頁面或片段。只有目前版本的來源完整支持主張的內容、範圍、數字與歸屬，這一項才算通過。",
+          "如果引用打不開、指向錯頁、只支持半句、引用的是舊版本，或來源根本沒說這件事，就要分別記錄。不要因為回答讀起來合理，或頁尾列了三個來源，就把它當成已驗證。",
+        ],
+      },
+      {
+        heading: "先分清楚五種引用失敗",
+        body: [
+          "缺少引用、連結失效、引用錯頁、來源不支持主張，以及來源已過期，是五個不同問題。分類正確，才知道應該修檢索、metadata、文件版本，還是直接撤回結論。",
+        ],
+        bullets: [
+          "缺少：重要事實沒有任何可檢查來源。",
+          "失效：source ID、連結、頁碼或片段已無法開啟。",
+          "錯配：來源存在，但指向另一頁、另一段或另一個主張。",
+          "無依據：來源內容沒有支持回答所下的結論。",
+          "過期：舊版本曾支持，但目前文件、程式或政策已改變。",
+        ],
+      },
+      {
+        heading: "逐項做 claim-to-evidence 檢查",
+        body: [
+          "從一個可疑回答開始，替每個事實主張記下引用標記、source ID、文件名稱、頁碼或段落，以及能取得的版本。打開原文後，判斷它是完整支持、部分支持、無依據或過期。",
+          "數字、否定詞、適用範圍、作者歸屬與日期要分開檢查。相鄰段落看起來很像，也可能剛好否定回答；缺資料時應標示未知，不能把 unavailable 當成通過。",
+        ],
+        code: {
+          label: "檢查一個 Wenlan Page",
+          code: "/pages <主題>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "修正後要用同一個問題重測",
+        body: [
+          "找到錯頁或無依據主張後，先修正來源 metadata、刪除錯誤結論，或把 Page 標記為需要刷新與審查。接著用同一個問題重跑，確認答案回到預期來源，而不是換一個看似合理的錯誤片段。",
+          "Wenlan 會把 Sources、原子知識與維護型 Pages 分開，並提供 source IDs、修訂、stale 狀態、lint 與人工審查；這讓證據路徑可檢查，但不會自動保證來源本身正確。",
+        ],
+      },
+      {
+        heading: "這不是自動化真實性分數",
+        body: [
+          "這套方法是可重複的除錯清單，不是宣稱一個分數就能證明整套 RAG 正確。高風險結論仍要回到目前的第一方來源，必要時由熟悉領域的人審查。",
+          "即使不使用 Wenlan，也可以用相同表格記錄 claim、來源位置、版本、判定與修正結果；它的獨立價值在於讓『哪一句沒有依據』變得具體。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "回答有引用，就代表沒有幻覺嗎？",
+        answer:
+          "不代表。引用可能指向錯頁、錯片段、舊版本，或只支持部分內容；每個重要主張仍需對照原文。",
+      },
+      {
+        question: "引用頁面不對時應該怎麼修？",
+        answer:
+          "先記錄為引用錯配，再尋找真正支持主張的目前來源。找不到就撤回或標示未知，不要因為回答聽起來合理而保留。",
+      },
+      {
+        question: "Wenlan 能自動證明來源一定正確嗎？",
+        answer:
+          "不能。Wenlan 讓來源、source IDs、修訂與審查可見，但來源的權威性與重要結論仍需人工判斷。",
+      },
+    ],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "choose-ai-knowledge-base-tool",
+      "distilled-wiki-pages-ai-memory",
+      "coding-agent-source-backed-knowledge-base",
+    ],
+    officialReferences: [
+      {
+        label: "Anthropic 繁體中文引用文件",
+        href: "https://platform.claude.com/docs/zh-TW/build-with-claude/citations",
+      },
+      {
+        label: "Open WebUI 引用錯誤來源 issue",
+        href: "https://github.com/open-webui/open-webui/issues/12655",
+      },
+      {
+        label: "Open WebUI 重複片段引用 issue",
+        href: "https://github.com/open-webui/open-webui/issues/20435",
+      },
+      {
+        label: "Wenlan 審查與信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+    ],
+    cta: {
+      heading: "先驗證一個回答，再擴大知識庫",
+      body: "用 Wenlan 打開 Page、來源、過期狀態、lint 與審查路徑，只保留目前證據真的支持的主張。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
@@ -1353,6 +1477,7 @@ const zhCNArticles = {
       "coding-agent-source-backed-knowledge-base",
       "wenlan-vs-obsidian-ai-memory",
       "distilled-wiki-pages-ai-memory",
+      "verify-ai-knowledge-base-citations",
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
     ],
@@ -1938,6 +2063,7 @@ const zhCNArticles = {
       "build-local-ai-knowledge-base-from-documents",
       "source-backed-wiki-pages-ai-work",
       "distilled-wiki-pages-ai-memory",
+      "verify-ai-knowledge-base-citations",
     ],
     officialReferences: [
       {
@@ -1964,6 +2090,127 @@ const zhCNArticles = {
     cta: {
       heading: "用同一套 8 项检查测试 Wenlan",
       body: "从一组小型来源开始，验证引用、更新与审核，再判断维护型本地知识层是否适合你的工作流。",
+    },
+  },
+  "verify-ai-knowledge-base-citations": {
+    slug: "verify-ai-knowledge-base-citations",
+    eyebrow: "引用排错",
+    category: "Workflows",
+    title: "AI 知识库引用对不上？逐项验证来源与无依据回答",
+    description:
+      "把 RAG 或 AI 知识库回答拆成可检查的主张，找出错页、错片段、过期来源与没有证据支持的结论。",
+    metaTitle: "AI 知识库引用对不上？验证来源与回答 | Wenlan",
+    metaDescription:
+      "逐项验证 AI 知识库引用，诊断错页、错片段、过期版本与无依据回答，并建立可重复的来源检查流程。",
+    keywords: [
+      "AI 知识库引用对不上",
+      "验证 AI 知识库引用",
+      "知识库回答无依据",
+      "RAG 引用错误",
+      "引用溯源",
+      "AI 知识库来源校验",
+    ],
+    publishedAt: "2026-08-23",
+    updatedAt: "2026-08-23",
+    author: "Qi-Xuan Lu",
+    readingTime: "7 分钟阅读",
+    audience: "看到 AI 回答附了引用，却发现页码、片段、版本或内容对不上的简体中文用户",
+    heroBullets: [
+      "有引用标记，只代表系统附上来源，不代表来源真的支持这句话。",
+      "每个重要主张都要回到准确页面、片段与文档版本检查。",
+      "检查结果分成支持、部分支持、无依据与过期，不用一个模糊分数带过。",
+    ],
+    sections: [
+      {
+        heading: "先说结论：引用存在，不等于回答有依据",
+        body: [
+          "验证 AI 知识库回答时，先把文字拆成可单独判断的事实主张，再逐项打开它引用的页面或片段。只有当前版本的来源完整支持主张的内容、范围、数字与归属，这一项才算通过。",
+          "如果引用打不开、指向错页、只支持半句话、引用的是旧版本，或来源根本没说这件事，就要分别记录。不要因为回答读起来合理，或页尾列了三个来源，就把它当成已验证。",
+        ],
+      },
+      {
+        heading: "先分清五种引用失败",
+        body: [
+          "缺少引用、链接失效、引用错页、来源不支持主张，以及来源已过期，是五个不同问题。分类正确，才知道应该修检索、metadata、文档版本，还是直接撤回结论。",
+        ],
+        bullets: [
+          "缺少：重要事实没有任何可检查来源。",
+          "失效：source ID、链接、页码或片段已经无法打开。",
+          "错配：来源存在，但指向另一页、另一段或另一个主张。",
+          "无依据：来源内容没有支持回答得出的结论。",
+          "过期：旧版本曾支持，但当前文档、代码或政策已经变化。",
+        ],
+      },
+      {
+        heading: "逐项做 claim-to-evidence 校验",
+        body: [
+          "从一个可疑回答开始，为每个事实主张记录引用标记、source ID、文档名称、页码或段落，以及能取得的版本。打开原文后，判断它是完整支持、部分支持、无依据还是过期。",
+          "数字、否定词、适用范围、作者归属与日期要分开检查。相邻段落看起来很像，也可能正好否定回答；缺数据时应标记未知，不能把 unavailable 当成通过。",
+        ],
+        code: {
+          label: "检查一个 Wenlan Page",
+          code: "/pages <主题>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "修正后用同一个问题重测",
+        body: [
+          "找到错页或无依据主张后，先修正来源 metadata、删除错误结论，或把 Page 标记为需要刷新与审核。接着用同一个问题重跑，确认答案回到预期来源，而不是换一个看似合理的错误片段。",
+          "Wenlan 把 Sources、原子知识与维护型 Pages 分开，并提供 source IDs、修订、stale 状态、lint 与人工审核；这让证据路径可检查，但不会自动保证来源本身正确。",
+        ],
+      },
+      {
+        heading: "这不是自动化真实性分数",
+        body: [
+          "这套方法是可重复的排错清单，不是宣称一个分数就能证明整套 RAG 正确。高风险结论仍要回到当前第一方来源，必要时由熟悉领域的人审核。",
+          "即使不使用 Wenlan，也可以用同一张表记录 claim、来源位置、版本、判定与修正结果；它的独立价值在于让『哪一句没有依据』变得具体。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "回答有引用，就代表没有幻觉吗？",
+        answer:
+          "不代表。引用可能指向错页、错片段、旧版本，或只支持部分内容；每个重要主张仍需对照原文。",
+      },
+      {
+        question: "引用页面不对时应该怎么修？",
+        answer:
+          "先记录为引用错配，再寻找真正支持主张的当前来源。找不到就撤回或标记未知，不要因为回答听起来合理而保留。",
+      },
+      {
+        question: "Wenlan 能自动证明来源一定正确吗？",
+        answer:
+          "不能。Wenlan 让来源、source IDs、修订与审核可见，但来源的权威性与重要结论仍需人工判断。",
+      },
+    ],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "choose-ai-knowledge-base-tool",
+      "distilled-wiki-pages-ai-memory",
+      "coding-agent-source-backed-knowledge-base",
+    ],
+    officialReferences: [
+      {
+        label: "Anthropic 简体中文引用文档",
+        href: "https://platform.claude.com/docs/zh-CN/build-with-claude/citations",
+      },
+      {
+        label: "Open WebUI 引用错误来源 issue",
+        href: "https://github.com/open-webui/open-webui/issues/12655",
+      },
+      {
+        label: "Open WebUI 重复片段引用 issue",
+        href: "https://github.com/open-webui/open-webui/issues/20435",
+      },
+      {
+        label: "Wenlan 审核与信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+    ],
+    cta: {
+      heading: "先验证一个回答，再扩大知识库",
+      body: "用 Wenlan 打开 Page、来源、过期状态、lint 与审核路径，只保留当前证据真正支持的主张。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;

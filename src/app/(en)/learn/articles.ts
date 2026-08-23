@@ -859,6 +859,7 @@ source changes
     ],
     relatedSlugs: [
       "source-backed-wiki-pages-ai-work",
+      "verify-ai-knowledge-base-citations",
       "ai-work-memory-vs-knowledge-base",
       "wenlan-vs-obsidian-ai-memory",
       "ai-memory-provenance",

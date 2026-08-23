@@ -110,12 +110,12 @@ Demand discovery:
 
 - ID: `coding-agent-source-backed-knowledge-base`
 - Stage: `integrate`
-- Decision: `net-new`
+- Decision: `measuring`
 - Planned window: `2026-08-24..2026-08-30`
-- Publication: `prepared`
+- Publication: `measuring`
 - Standalone utility: The page can show any coding-agent user how to keep source-of-truth files authoritative, retrieve only needed context, and validate cited conclusions.
 - Overlap check: The existing Codex workflow answers session context, capture, recall, and handoff. The existing source-backed page answers generic knowledge architecture and maintenance. The new owner answers a different integration decision: what belongs in AGENTS.md or CLAUDE.md, what remains repository truth, what becomes on-demand cited knowledge, and how a coding agent verifies it. Keep Codex, Claude Code, and coding-agent query variants on this one owner unless joined GSC evidence proves distinct tasks.
-- Next research: Finish the one-owner English, zh-TW, and zh-CN implementation, then measure each locale independently. Keep the verified handbook contribution unsubmitted until the website family and external publication receive separate approval; continue monitoring OpenSEO only as auxiliary SERP evidence when authenticated access returns.
+- Next research: Published through PR #136 and production-verified on 2026-08-23. Preserve independent English, zh-TW, and zh-CN GSC page and joined-query readouts; do not rewrite from deployment completion or missing rows.
 
 ### Locale intent and ownership
 
@@ -198,57 +198,63 @@ Demand discovery:
 
 - ID: `verify-citations-provenance-unsupported-claims`
 - Stage: `evaluate`
-- Decision: `research`
+- Decision: `net-new`
 - Planned window: `2026-09-07..2026-09-13`
-- Publication: `not-published`
+- Publication: `prepared`
 - Standalone utility: The output can be a tool-neutral checklist that traces each important claim to a source, tests unsupported claims, and records what requires review.
-- Overlap check: The current source-backed guide is the default owner. Only create a diagnostic URL if the citation-verification SERP and workflow are independently clear; otherwise refresh the owner after its evidence gate.
-- Next research: Capture result sets for citation verification and unsupported-claim searches, compare them with broad knowledge-base results, and inspect OSS issues for repeated failure language before choosing refresh or net-new.
+- Overlap check: The current source-backed guide owns how to build and maintain the architecture. This candidate owns a different diagnostic task: start from one suspect answer, map each important claim to the exact source revision and location, then classify missing, invalid, mismatched, stale, or unsupported evidence. Keep that boundary or reject the new URL.
+- Next research: The complete candidate gate now passes and the English, zh-TW, and zh-CN diagnostic family is locally prepared. Finish deterministic and rendered verification, then request separate approval for commit, push, PR, merge, deployment, indexing, or the later Awesome-RAG resource proposal.
 
 ### Locale intent and ownership
 
 | Locale | Query family | Coverage | Existing owner | Research needed |
 | --- | --- | --- | --- | --- |
-| en | verify AI knowledge base citations; AI knowledge base provenance checklist; find unsupported claims in AI knowledge base | partial | [owner](https://wenlan.app/learn/source-backed-wiki-pages-ai-work) | Determine whether citation verification and unsupported-claim diagnosis form a practical SERP distinct from the broad source-backed knowledge-base guide. |
-| zh-TW | 驗證 AI 知識庫引用; AI 知識庫來源追溯檢查; 找出 AI 知識庫無來源主張 | partial | [owner](https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work) | Inspect Taiwan searches for citation, source traceability, hallucination, and unsupported claims; preserve the terms users actually use. |
-| zh-CN | 验证 AI 知识库引用; AI 知识库来源追溯检查; 找出 AI 知识库无来源结论 | partial | [owner](https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work) | Inspect mainland Chinese searches for citation verification, source attribution, hallucination, and unsupported conclusions. |
+| en | verify AI knowledge base citations; RAG wrong page citations; RAG citation faithfulness; find unsupported claims in a RAG answer | partial | [owner](https://wenlan.app/learn/source-backed-wiki-pages-ai-work) | Demand and overlap research is complete. Keep the task diagnostic: start from one suspect answer and verify exact claim-to-source support; do not broaden it into another source-backed architecture guide. |
+| zh-TW | RAG 引用對不上; AI 知識庫回答沒有依據; 驗證 AI 知識庫引用; 引用來源可追溯 | partial | [owner](https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work) | Taiwan evidence supports natural wording around 引用對不上, 回答沒有依據, 頁碼, 來源, and 可追溯. Keep those terms instead of a literal translation of citation faithfulness. |
+| zh-CN | RAG 引用总是对不上; 验证 AI 知识库引用; 知识库回答无依据; 引用溯源和引用校验 | partial | [owner](https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work) | Simplified-Chinese evidence supports natural wording around 引用对不上, 错页, 错片段, 无依据结论, 溯源, and 引用校验. |
 
 #### en evidence
 
 SERP:
-No captured evidence yet; research is required.
+- web-search-result: [RAG wrong page citations](https://stackoverflow.com/questions/79934606/rag-pipeline-returns-correct-answers-but-wrong-page-citations-and-occasional-hal) — 159 views; 1 answer page views and answers; en/web-search geography unspecified; captured 2026-08-23. A concrete developer question asks how to fix correct-looking answers whose cited pages and rendered sources do not match; this is not keyword volume.
+- web-search-result: [verify AI knowledge base citations](https://multigrid.ai/learn/rag-citations) — published 2026-08-03 published guide observation; en/web-search geography unspecified; captured 2026-08-23. The guide treats claim-to-span verification, stable chunk identity, and unsupported claims as a practical workflow distinct from generic RAG setup.
 
 Demand discovery:
-No captured evidence yet; research is required.
+- github-issue: [RAG knowledge collection cites wrong source](https://github.com/open-webui/open-webui/issues/12655) — 2 reactions; reproducible bug; fix merged GitHub issue reactions and resolution; en/global; captured 2026-08-23. The issue shows a knowledge collection citing the first source instead of the sources actually used.
+- github-issue: [RAG citation markers identical chunks](https://github.com/open-webui/open-webui/issues/20435) — closed bug with exact reproduction steps GitHub issue observation; en with a Chinese example/global; captured 2026-08-23. Different answer statements expose identical chunks, preventing claim-level source verification.
 
 #### zh-TW evidence
 
 SERP:
-No captured evidence yet; research is required.
+- web-search-result: [台灣 RAG 引用錯誤 知識庫 驗證](https://ithelp.ithome.com.tw/articles/10393293) — 1252 views page views; zh-TW/Taiwan; captured 2026-08-23. The Taiwan practitioner article demonstrates statement-level evidence checks and flags unsupported output; this is not keyword volume.
+- web-search-result: [site:ithelp.ithome.com.tw RAG 引用 對不上 來源 無法驗證 知識庫](https://ithelp.ithome.com.tw/articles/10396963) — returned for the exact Taiwan citation-source debugging search returned result observation; zh-TW/Taiwan; captured 2026-08-23. A Notion RAG implementation reports that mismatched metadata makes displayed sources unusable and repairs the source tracker.
 
 Demand discovery:
-No captured evidence yet; research is required.
+- taiwan-practitioner-guide: [台灣 AI 知識庫 回答來源 頁碼 版本](https://ithelp.ithome.com.tw/articles/10402032) — returned for the exact Taiwan source-traceability search returned result observation; zh-TW/Taiwan; captured 2026-08-23. The implementation keeps source, page, and document-version metadata so an answer can return to evidence.
+- official-documentation: [Claude 引用 驗證 來源 zh-TW](https://platform.claude.com/docs/zh-TW/build-with-claude/citations) — current documentation page official documentation observation; zh-TW/Taiwan localization; captured 2026-08-23. The official localized documentation describes citations that preserve pointers into supplied documents.
 
 #### zh-CN evidence
 
 SERP:
-No captured evidence yet; research is required.
+- web-search-result: [RAG 引用总是对不上](https://juejin.cn/post/7646581145124225075) — 67 reads page reads; zh-CN/mainland China community; captured 2026-08-23. The developer walkthrough rebuilds a knowledge-base retrieval chain around evidence IDs because answers point to the wrong passage.
+- web-search-result: [RAG 有召回仍答错 引用校验](https://segmentfault.com/a/1190000048020724) — 482 reads page reads; zh-CN/mainland China community; captured 2026-08-23. The guide separates retrieval from usable evidence and validates each assertion against a current, locatable source.
 
 Demand discovery:
-No captured evidence yet; research is required.
+- developer-community-guide: [RAG 自动源引文验证](https://developer.volcengine.com/articles/7387287273853141042) — published 2024-07-03 published guide observation; zh-CN/mainland China community; captured 2026-08-23. The workflow verifies whether an LLM response corresponds to a specific cited source and records evidence checks.
+- official-documentation: [Claude 引用 验证 来源 zh-CN](https://platform.claude.com/docs/zh-CN/build-with-claude/citations) — current documentation page official documentation observation; zh-CN/mainland China localization; captured 2026-08-23. The official localized documentation describes citations with valid pointers into supplied documents.
 
 ### Candidate gate
 
 | Gate | Status | Reason | Evidence refs |
 | --- | --- | --- | --- |
-| provenance | pending | No current trilingual demand observations with native units have been captured. | none |
-| repeatedDemand | pending | The verification problem needs repeated or high-intent evidence beyond product positioning. | none |
-| trilingualSerp | pending | Independent English, zh-TW, and zh-CN result sets are not yet recorded. | none |
-| cleanGap | pending | The source-backed owner already covers citations and provenance; a diagnostic URL requires a distinct task and SERP. | none |
+| provenance | passed | Every retained English, zh-TW, and zh-CN observation preserves an inspectable URL, exact query, capture date, language or geography, and source-native unit; none is treated as keyword volume or GSC evidence. | locales.en.serpEvidence[0]; locales.zh-TW.serpEvidence[0]; locales.zh-CN.serpEvidence[0] |
+| repeatedDemand | passed | Independent Stack Overflow, Open WebUI, Taiwan iThome, Juejin, SegmentFault, developer-community, and official documentation sources repeat one concrete failure: an answer looks grounded while its cited page, chunk, version, or source does not support the claim. | locales.en.serpEvidence[0]; locales.en.demandEvidence[0]; locales.zh-TW.serpEvidence[0]; locales.zh-TW.demandEvidence[0]; locales.zh-CN.serpEvidence[0]; locales.zh-CN.demandEvidence[0] |
+| trilingualSerp | passed | Separate English, Taiwan Traditional-Chinese, and mainland-community Simplified-Chinese result sets expose the same diagnostic task through natural local wording rather than literal translations. | locales.en.serpEvidence[0]; locales.en.serpEvidence[1]; locales.zh-TW.serpEvidence[0]; locales.zh-TW.serpEvidence[1]; locales.zh-CN.serpEvidence[0]; locales.zh-CN.serpEvidence[1] |
+| cleanGap | passed | The existing source-backed owner teaches architecture and maintenance. The retained result sets start from one suspect answer and diagnose claim-to-evidence failures, including wrong pages, identical chunks, stale versions, and unsupported conclusions; that complete audit workflow is not owned by the current page. | overlapCheck; locales.en.serpEvidence[0]; locales.zh-TW.serpEvidence[1]; locales.zh-CN.serpEvidence[1] |
 | firstPartyProof | passed | Current product docs describe citation-gated synthesis, per-claim citations, source IDs, lint, stale state, and human review. | src/app/(en)/docs/docs.ts:v0.12.0; src/app/(en)/learn/seo-articles.ts:source-backed-wiki-pages-ai-work |
 | standaloneUtility | passed | A citation and unsupported-claim audit is independently useful regardless of product choice. | standaloneUtility |
 | internalLinks | passed | Source-backed, tool-selection, and LLM Wiki owners are predeclared by locale. | internalLinks |
-| authorityPath | pending | A relevant evaluation, documentation, or issue surface has not been selected. | none |
+| authorityPath | passed | The user explicitly reopened this research lane on 2026-08-23. Danielskry/Awesome-RAG is a maintained 1,345-star resource map with a dedicated Production & Best Practices section, accepted an external learning-resource PR on 2026-06-30, and already has Qi-Xuan Lu's separate Wenlan framework listing PR #142 open. After the citation guide is published and #142 resolves, one neutral article reference can be proposed without messaging maintainers automatically; acceptance is not assumed. | authorityPath |
 
 ### Wenlan proof
 
@@ -269,7 +275,7 @@ No captured evidence yet; research is required.
 
 ### Authority path and readout
 
-- Authority path: evaluation-checklist-reference — An active OSS evaluation, provenance, or documentation surface where a neutral verification checklist has exact fit (research-required).
+- Authority path: production-best-practices-resource — https://github.com/Danielskry/Awesome-RAG — propose one neutral citation-verification guide under Production & Best Practices only after the three-locale website family is published and existing Wenlan framework PR #142 resolves (verified-candidate).
 - GSC: unavailable; native unit: page impressions, joined-query impressions, clicks.
 - Vercel: unavailable; native unit: target-page visitors and referrer visitors.
 

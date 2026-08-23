@@ -1723,6 +1723,7 @@ const workflowArticles: BaseSpec[] = [
       "build-local-ai-knowledge-base-from-documents",
       "source-backed-wiki-pages-ai-work",
       "distilled-wiki-pages-ai-memory",
+      "verify-ai-knowledge-base-citations",
     ],
     officialReferences: [
       {
@@ -2265,6 +2266,92 @@ const comparisonArticles: BaseSpec[] = [
 
 const trustArticles: BaseSpec[] = [
   {
+    slug: "verify-ai-knowledge-base-citations",
+    eyebrow: "Trust check",
+    category: "Workflows",
+    title: "How to Verify AI Knowledge Base Citations and Unsupported Claims",
+    description:
+      "Audit a RAG or AI knowledge-base answer claim by claim to find wrong pages, mismatched chunks, stale sources, and unsupported conclusions.",
+    metaTitle: "Verify AI Knowledge Base Citations | Wenlan",
+    metaDescription:
+      "Check AI knowledge-base citations claim by claim. Diagnose wrong pages, mismatched chunks, stale revisions, and unsupported RAG answers.",
+    keywords: [
+      "verify AI knowledge base citations",
+      "RAG wrong page citations",
+      "RAG citation faithfulness",
+      "unsupported claims RAG",
+      "AI knowledge base provenance",
+      "citation verification checklist",
+    ],
+    publishedAt: "2026-08-23",
+    updatedAt: "2026-08-23",
+    audience:
+      "People debugging AI knowledge-base answers that look grounded but cite the wrong page, chunk, version, or source",
+    heroBullets: [
+      "A citation marker proves that a source was attached, not that the source supports the claim.",
+      "Check each important claim against the exact page, chunk, and source revision.",
+      "Classify the result as supported, partial, unsupported, or stale before reusing the answer.",
+    ],
+    quickAnswer:
+      "To verify an AI knowledge-base answer, split it into testable claims, open the exact cited page or chunk for each claim, and record whether the current source fully supports it. Treat missing, broken, wrong-page, mismatched, and stale citations as different failures instead of one generic hallucination score.",
+    problem:
+      "An answer can be factually plausible while its citation points to the first retrieved source, an unrelated chunk, or an older document revision. The failure stays hidden when reviewers check only that citation markers exist instead of comparing each claim with the cited evidence.",
+    wenlanFit:
+      "Wenlan keeps Sources, atomic knowledge, and maintained Pages separate. Page citations, source IDs, revisions, stale state, lint, and human review make the evidence trail inspectable, but Wenlan does not automatically prove that every source is true or replace review of important claims.",
+    actionHeading: "Run a claim-to-evidence audit",
+    actionIntro:
+      "Start with one suspect answer. Keep the audit small enough that another person can reproduce every decision.",
+    actionBullets: [
+      "Copy the answer into separate factual claims; ignore transitions and opinions that make no factual assertion.",
+      "For each claim, record the citation marker, source ID, document title, page or section, and source revision when available.",
+      "Open the cited location and check whether it supports the whole claim, only part of it, a different claim, or nothing at all.",
+      "Mark the claim supported, partial, unsupported, or stale; do not convert a missing row or unavailable source into a pass.",
+      "Check numbers, negations, attribution, scope, and dates separately because a nearby passage can still contradict the answer.",
+      "Correct the answer or keep the conclusion unknown before refreshing a maintained page.",
+      "Run lint and human review, then repeat the same question to confirm the repaired answer returns to the intended source.",
+    ],
+    code: {
+      label: "Inspect and review one Wenlan Page",
+      code: "/pages <topic>\n/lint\n/curate",
+    },
+    caution:
+      "This workflow is a diagnostic checklist, not an automatic RAG benchmark. A cited source may itself be wrong, outdated, or non-authoritative, so consequential claims still require the maintained first-party source and appropriate human review.",
+    faq: [
+      "Does a citation mean the answer is grounded?",
+      "No. It means a source reference exists. The cited location must still support the exact claim, scope, number, attribution, and current version.",
+      "What should I do when the citation points to the wrong page?",
+      "Record it as a mismatched citation, locate the actual supporting source if one exists, and correct or withhold the claim. Do not silently keep the answer because it sounds plausible.",
+    ],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "choose-ai-knowledge-base-tool",
+      "distilled-wiki-pages-ai-memory",
+      "ai-memory-provenance",
+    ],
+    officialReferences: [
+      {
+        label: "Anthropic citations documentation",
+        href: "https://platform.claude.com/docs/en/build-with-claude/citations",
+      },
+      {
+        label: "Open WebUI wrong-source issue",
+        href: "https://github.com/open-webui/open-webui/issues/12655",
+      },
+      {
+        label: "Open WebUI identical-chunk citation issue",
+        href: "https://github.com/open-webui/open-webui/issues/20435",
+      },
+      {
+        label: "Wenlan review and trust guide",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+    ],
+    cta: {
+      heading: "Verify one answer before expanding the knowledge base",
+      body: "Use Wenlan to inspect the Page, source IDs, stale state, lint findings, and review path, then keep only claims the current evidence supports.",
+    },
+  },
+  {
     slug: "source-backed-wiki-pages-ai-work",
     eyebrow: "Trust",
     category: "Concepts",
@@ -2318,7 +2405,7 @@ const trustArticles: BaseSpec[] = [
       "Should I import every note before starting?",
       "No. Start with one repeated, high-value topic and prove its source, capture, distill, inspection, lint, and review loop before expanding.",
     ],
-    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "review-before-trust-ai-memory", "ai-memory-provenance"],
+    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "verify-ai-knowledge-base-citations", "review-before-trust-ai-memory", "ai-memory-provenance"],
     officialReferences: [
       {
         label: "Wenlan knowledge model",
