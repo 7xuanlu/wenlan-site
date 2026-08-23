@@ -532,6 +532,7 @@ test("localized Learn slug route supports per-locale acquisition page availabili
     "/learn/build-local-ai-knowledge-base-from-documents",
     "/learn/choose-ai-knowledge-base-tool",
     "/learn/coding-agent-source-backed-knowledge-base",
+    "/learn/verify-ai-knowledge-base-citations",
   ]);
   assert.match(source, /getLocalizedLearnArticle/);
   assert.match(source, /TRANSLATED_LEARN_SLUGS/);
@@ -850,6 +851,8 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
     { locale: "zh-CN", slug: "choose-ai-knowledge-base-tool" },
     { locale: "zh-TW", slug: "coding-agent-source-backed-knowledge-base" },
     { locale: "zh-CN", slug: "coding-agent-source-backed-knowledge-base" },
+    { locale: "zh-TW", slug: "verify-ai-knowledge-base-citations" },
+    { locale: "zh-CN", slug: "verify-ai-knowledge-base-citations" },
   ]);
 
   const metadata = await localizedLearnSlug.generateMetadata({
@@ -968,6 +971,53 @@ test("coding-agent knowledge-base family owns one distinct trilingual integratio
     "choose-ai-knowledge-base-tool",
   ];
   for (const owner of localizedInboundOwners) {
+    for (const locale of ["zh-TW", "zh-CN"]) {
+      assert.ok(
+        getLocalizedLearnArticle(locale, owner)?.relatedSlugs.includes(slug),
+        `${locale} ${owner} must link to ${slug}`,
+      );
+    }
+  }
+});
+
+test("citation verification family owns one distinct trilingual diagnostic task", async () => {
+  const [{ articles }, { getLocalizedLearnArticle }] = await Promise.all([
+    import("../src/app/(en)/learn/articles.ts"),
+    import("../src/i18n/learn-articles.ts"),
+  ]);
+  const slug = "verify-ai-knowledge-base-citations";
+  const english = articles.find((article) => article.slug === slug);
+
+  assert.ok(english, "English citation-verification article");
+  assert.match(english.title, /Verify AI Knowledge Base Citations/);
+  assert.match(JSON.stringify(english), /wrong page|unsupported claim/i);
+  assert.match(JSON.stringify(english), /supported|partial|unsupported|stale/i);
+  assert.equal(english.publishedAt, "2026-08-23");
+  assert.equal(english.updatedAt, "2026-08-23");
+
+  for (const [locale, titlePattern, evidencePattern] of [
+    ["zh-TW", /AI 知識庫引用對不上/, /無依據|過期/],
+    ["zh-CN", /AI 知识库引用对不上/, /无依据|过期/],
+  ]) {
+    const article = getLocalizedLearnArticle(locale, slug);
+    assert.ok(article, `${locale} citation-verification article`);
+    assert.match(article.title, titlePattern);
+    assert.match(JSON.stringify(article), evidencePattern);
+    assert.equal(article.publishedAt, "2026-08-23");
+    assert.equal(article.updatedAt, "2026-08-23");
+    assert.ok(article.officialReferences?.length >= 4);
+  }
+
+  const inboundOwners = [
+    "source-backed-wiki-pages-ai-work",
+    "choose-ai-knowledge-base-tool",
+    "distilled-wiki-pages-ai-memory",
+  ];
+  for (const owner of inboundOwners) {
+    assert.ok(
+      articles.find((article) => article.slug === owner)?.relatedSlugs.includes(slug),
+      `${owner} must link to ${slug}`,
+    );
     for (const locale of ["zh-TW", "zh-CN"]) {
       assert.ok(
         getLocalizedLearnArticle(locale, owner)?.relatedSlugs.includes(slug),

@@ -19,6 +19,7 @@ const expectedOkRoutes = [
   "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
   "/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
   "/zh-TW/learn/choose-ai-knowledge-base-tool",
+  "/zh-TW/learn/verify-ai-knowledge-base-citations",
   "/zh-CN",
   "/zh-CN/about",
   "/zh-CN/download",
@@ -30,6 +31,7 @@ const expectedOkRoutes = [
   "/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
   "/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
   "/zh-CN/learn/choose-ai-knowledge-base-tool",
+  "/zh-CN/learn/verify-ai-knowledge-base-citations",
 ];
 
 const expectedNotFoundRoutes = [

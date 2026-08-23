@@ -8045,3 +8045,60 @@ increase for that experiment.
   control transport disconnected after approval. This did not block the MCP
   read-only smoke test and does not change GSC's role as the only authority
   for Wenlan Google Search performance and indexing.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-23-coding-agent-source-backed-knowledge-base production completion
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-23-coding-agent-source-backed-knowledge-base
+- Observed at: 2026-08-23T18:05:09Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #136 merged at 2026-08-23T18:04:33Z as e3ea912d458bfbe7c0ad864872effe48a9ca9c97; Vercel production deployment 6051054690 completed at 2026-08-23T18:05:09Z and the three locale routes were production-verified without requesting indexing.
+- Result: pending
+- Decision: wait
+- Next step: Keep the coding-agent family stable and read each locale in native GSC and Vercel units after sufficient post-crawl exposure. It no longer consumes the production-in-flight slot.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-23-citation-verification-locales
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-23-citation-verification-locales
+- Status: approved
+- Data window: 2026-08-22..2026-08-28
+- Asset class: net-new-search
+- Launched: 2026-08-23
+- Hypothesis: A task-specific trilingual owner for claim-to-evidence citation diagnosis can earn qualified AI knowledge-base verification exposure without cannibalizing the existing source-backed architecture guide.
+- Candidate evidence: Dated English, zh-TW, and zh-CN SERP, issue, practitioner, official-documentation, overlap, product-proof, internal-link, and authority-path observations with native units are stored in docs/seo-scenario-backlog.json.
+- Baseline: GSC property 8 clicks and 1,005 impressions; visible-query 2 clicks and 216 impressions; visibility gap 6 clicks and 789 impressions; Vercel 248 visitors with 30 attributed to Google; GitHub 48 stars; new target-page rows unavailable, all kept separate.
+- Change: Add exactly one English, zh-TW, and zh-CN canonical for citation verification, with locale-natural wording, claim-to-evidence workflow, maintained sources, reciprocal hreflang, sitemap membership, and contextual inbound paths from the source-backed, tool-selection, and LLM Wiki owners.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions per locale in 28 complete post-crawl days
+- Success criteria: Per locale, at least 3 qualified joined-query impressions and at least 1 GSC click after the minimum exposure; report CTR and position separately.
+- Failure criteria: After 28 complete post-crawl days and the minimum exposure, a locale has no qualified joined-query impressions or no GSC click, or an above-floor join assigns the same task to an existing owner.
+- Stop criteria: Stop on a technical, factual, unsupported-claim, duplicate-intent, controller-overlap, or approval-boundary violation.
+- 24h readout: pending technical and indexability observation after production completion
+- 7d readout: pending early source-native GSC page/query and Vercel page/referrer observation
+- W2 readout: pending
+- W4 readout: pending formal 28-complete-post-crawl-day decision when eligible
+- W8 readout: pending only if useful after the Goal deadline
+- Result: pending
+- Decision: wait
+- Next step: Publish the exact verified branch after the approval record below, then start the measurement clock from production completion without requesting indexing.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-23-citation-verification-locales publication approval
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-23-citation-verification-locales
+- Observed at: 2026-08-23T22:08:21Z
+- Readout: correction
+- Status: active
+- Evidence: The user explicitly approved the exact commit, push, PR creation, merge, automatic Vercel deployment, and read-only production-verification scope after reviewing the local implementation, evidence, and responsive previews. Request indexing, GSC validation, external publication, paid actions, synthetic events, analytics mutation, and metric-definition changes remain excluded.
+- Result: pending
+- Decision: merge
+- Next step: Commit and push only the citation-verification family and its deterministic control records, merge only after required checks pass, then wait for automatic Vercel production completion and verify the three live routes.
+<!-- EXPERIMENT-RECORD:END -->

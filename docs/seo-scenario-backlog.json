@@ -58,36 +58,108 @@
       "publicationStatus": "rejected",
       "locales": {
         "en": {
-          "queryFamily": ["update AI knowledge base after source changes", "fix stale AI knowledge base pages", "AI knowledge base refresh workflow"],
+          "queryFamily": [
+            "update AI knowledge base after source changes",
+            "fix stale AI knowledge base pages",
+            "AI knowledge base refresh workflow"
+          ],
           "serpEvidence": [
-            {"sourceType": "web-search-result", "sourceUrl": "https://www.kapa.ai/library/how-to-keep-a-rag-knowledge-base-in-sync-with-changing-docs", "query": "how to keep AI knowledge base up to date when source documents change stale pages", "capturedAt": "2026-08-23", "language": "en", "geography": "web-search geography unspecified", "nativeUnit": "returned result observation", "value": "returned in result set", "note": "The result owns the explicit changing-documents synchronization task; this is demand discovery, not Google rank or keyword volume."}
+            {
+              "sourceType": "web-search-result",
+              "sourceUrl": "https://www.kapa.ai/library/how-to-keep-a-rag-knowledge-base-in-sync-with-changing-docs",
+              "query": "how to keep AI knowledge base up to date when source documents change stale pages",
+              "capturedAt": "2026-08-23",
+              "language": "en",
+              "geography": "web-search geography unspecified",
+              "nativeUnit": "returned result observation",
+              "value": "returned in result set",
+              "note": "The result owns the explicit changing-documents synchronization task; this is demand discovery, not Google rank or keyword volume."
+            }
           ],
           "demandEvidence": [
-            {"sourceType": "Reddit discussion", "sourceUrl": "https://www.reddit.com/r/LLMDevs/comments/1qwmgfw/how_to_autoupdate_rag_knowledge_base_from_website/", "query": "How to auto-update RAG knowledge base from website changes?", "capturedAt": "2026-08-23", "language": "en", "geography": "community geography unavailable", "nativeUnit": "inspectable discussion", "value": "1 discussion", "note": "The question asks for change detection, versioning, deletion, and staleness handling; engagement is not claimed."}
+            {
+              "sourceType": "Reddit discussion",
+              "sourceUrl": "https://www.reddit.com/r/LLMDevs/comments/1qwmgfw/how_to_autoupdate_rag_knowledge_base_from_website/",
+              "query": "How to auto-update RAG knowledge base from website changes?",
+              "capturedAt": "2026-08-23",
+              "language": "en",
+              "geography": "community geography unavailable",
+              "nativeUnit": "inspectable discussion",
+              "value": "1 discussion",
+              "note": "The question asks for change detection, versioning, deletion, and staleness handling; engagement is not claimed."
+            }
           ],
           "existingOwner": "https://wenlan.app/learn/source-backed-wiki-pages-ai-work",
           "coverage": "covered",
           "researchNeeded": "No net-new page research is warranted now. Move to family 2; revisit only as an existing-owner refresh after its post-crawl 20/3/cooldown gate passes."
         },
         "zh-TW": {
-          "queryFamily": ["來源文件更新後 AI 知識庫怎麼同步", "AI 知識庫過期頁面處理", "AI 知識庫更新流程"],
+          "queryFamily": [
+            "來源文件更新後 AI 知識庫怎麼同步",
+            "AI 知識庫過期頁面處理",
+            "AI 知識庫更新流程"
+          ],
           "serpEvidence": [
-            {"sourceType": "web-search-result", "sourceUrl": "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work", "query": "AI 知識庫 過期 更新 來源 文件", "capturedAt": "2026-08-23", "language": "zh-TW", "geography": "web-search geography unspecified", "nativeUnit": "returned result observation", "value": "returned in result set", "note": "The existing Wenlan owner was returned for the exact stale-source task; this is not a Google position claim."}
+            {
+              "sourceType": "web-search-result",
+              "sourceUrl": "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",
+              "query": "AI 知識庫 過期 更新 來源 文件",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "web-search geography unspecified",
+              "nativeUnit": "returned result observation",
+              "value": "returned in result set",
+              "note": "The existing Wenlan owner was returned for the exact stale-source task; this is not a Google position claim."
+            }
           ],
           "demandEvidence": [
-            {"sourceType": "Taiwan product documentation", "sourceUrl": "https://docs.uof.tw/operationdoc/v2026R1.128/base/function-manage/ai-assistant/", "query": "文件異動自動同步至 AI 知識庫", "capturedAt": "2026-08-23", "language": "zh-TW", "geography": "Taiwan", "nativeUnit": "inspectable documentation page", "value": "1 documentation page", "note": "The page documents add, update, delete, restore, move, format-limit, and sync-failure behavior."}
+            {
+              "sourceType": "Taiwan product documentation",
+              "sourceUrl": "https://docs.uof.tw/operationdoc/v2026R1.128/base/function-manage/ai-assistant/",
+              "query": "文件異動自動同步至 AI 知識庫",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "inspectable documentation page",
+              "value": "1 documentation page",
+              "note": "The page documents add, update, delete, restore, move, format-limit, and sync-failure behavior."
+            }
           ],
           "existingOwner": "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",
           "coverage": "covered",
           "researchNeeded": "No net-new page research is warranted now. Move to family 2; revisit only as an existing-owner refresh after its post-crawl 20/3/cooldown gate passes."
         },
         "zh-CN": {
-          "queryFamily": ["源文件更新后 AI 知识库怎么同步", "AI 知识库过期页面处理", "AI 知识库更新流程"],
+          "queryFamily": [
+            "源文件更新后 AI 知识库怎么同步",
+            "AI 知识库过期页面处理",
+            "AI 知识库更新流程"
+          ],
           "serpEvidence": [
-            {"sourceType": "web-search-result", "sourceUrl": "https://docs.netapp.com/zh-cn/workload-genai/pdfs/sidebar/%E7%AE%A1%E7%90%86%E5%92%8C%E7%9B%91%E6%8E%A7.pdf", "query": "源文件 更新 AI 知识库 过期 内容 同步", "capturedAt": "2026-08-23", "language": "zh-CN", "geography": "web-search geography unspecified", "nativeUnit": "returned result observation", "value": "returned in result set", "note": "The result documents updating a data source and resynchronizing it into the knowledge base; this is not a Google position claim."}
+            {
+              "sourceType": "web-search-result",
+              "sourceUrl": "https://docs.netapp.com/zh-cn/workload-genai/pdfs/sidebar/%E7%AE%A1%E7%90%86%E5%92%8C%E7%9B%91%E6%8E%A7.pdf",
+              "query": "源文件 更新 AI 知识库 过期 内容 同步",
+              "capturedAt": "2026-08-23",
+              "language": "zh-CN",
+              "geography": "web-search geography unspecified",
+              "nativeUnit": "returned result observation",
+              "value": "returned in result set",
+              "note": "The result documents updating a data source and resynchronizing it into the knowledge base; this is not a Google position claim."
+            }
           ],
           "demandEvidence": [
-            {"sourceType": "Chinese Obsidian community post", "sourceUrl": "https://forum-zh.obsidian.md/t/topic/62709", "query": "中文优先的 LLM 知识库运营工具链", "capturedAt": "2026-08-22", "language": "zh-CN", "geography": "Chinese-language community", "nativeUnit": "inspectable community post", "value": "1 post", "note": "The maintained 1,900+ page workflow names long-term decay, evidence links, logs, and concurrent writes as operating problems; no engagement total is claimed."}
+            {
+              "sourceType": "Chinese Obsidian community post",
+              "sourceUrl": "https://forum-zh.obsidian.md/t/topic/62709",
+              "query": "中文优先的 LLM 知识库运营工具链",
+              "capturedAt": "2026-08-22",
+              "language": "zh-CN",
+              "geography": "Chinese-language community",
+              "nativeUnit": "inspectable community post",
+              "value": "1 post",
+              "note": "The maintained 1,900+ page workflow names long-term decay, evidence links, logs, and concurrent writes as operating problems; no engagement total is claimed."
+            }
           ],
           "existingOwner": "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work",
           "coverage": "covered",
@@ -95,18 +167,80 @@
         }
       },
       "gates": {
-        "provenance": {"status": "passed", "reason": "Dated English, zh-TW, and zh-CN web-search and inspectable community or documentation observations preserve query, language or geography, URL, and native unit.", "evidenceRefs": ["locales.en.serpEvidence[0]", "locales.en.demandEvidence[0]", "locales.zh-TW.serpEvidence[0]", "locales.zh-TW.demandEvidence[0]", "locales.zh-CN.serpEvidence[0]", "locales.zh-CN.demandEvidence[0]"]},
-        "repeatedDemand": {"status": "passed", "reason": "Independent English, Taiwan, and Chinese sources repeat source synchronization, stale-content, change detection, deletion, refresh, and review problems.", "evidenceRefs": ["locales.en.demandEvidence[0]", "locales.zh-TW.demandEvidence[0]", "locales.zh-CN.demandEvidence[0]"]},
-        "trilingualSerp": {"status": "pending", "reason": "All three query languages were inspected, but the web-search provider did not expose stable Taiwan/mainland geolocation or Google rank; do not label this a regional Google SERP pass.", "evidenceRefs": []},
-        "cleanGap": {"status": "failed", "reason": "The current source-backed AI knowledge-base owner in each locale already directly answers source changes, stale state, conflicts, refresh, citations, and review. A new URL would duplicate the same task.", "evidenceRefs": ["locales.en.existingOwner", "locales.zh-TW.existingOwner", "locales.zh-CN.existingOwner"]},
-        "firstPartyProof": {"status": "passed", "reason": "The maintained site source documents idempotent source resync, stale state, review, refresh, citations, and lint behavior.", "evidenceRefs": ["src/app/(en)/learn/seo-articles.ts:build-local-ai-knowledge-base-from-documents", "src/app/(en)/learn/articles.ts:distilled-wiki-pages-ai-memory"]},
-        "standaloneUtility": {"status": "passed", "reason": "A source-change checklist and stale-page repair workflow is useful for any maintained knowledge base.", "evidenceRefs": ["standaloneUtility"]},
-        "internalLinks": {"status": "passed", "reason": "Nine same-topic, locale-aware sitemap entries are predeclared below.", "evidenceRefs": ["internalLinks"]},
-        "authorityPath": {"status": "pending", "reason": "The exact external reference or distribution venue must be validated before publication.", "evidenceRefs": []}
+        "provenance": {
+          "status": "passed",
+          "reason": "Dated English, zh-TW, and zh-CN web-search and inspectable community or documentation observations preserve query, language or geography, URL, and native unit.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.en.demandEvidence[0]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-TW.demandEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]",
+            "locales.zh-CN.demandEvidence[0]"
+          ]
+        },
+        "repeatedDemand": {
+          "status": "passed",
+          "reason": "Independent English, Taiwan, and Chinese sources repeat source synchronization, stale-content, change detection, deletion, refresh, and review problems.",
+          "evidenceRefs": [
+            "locales.en.demandEvidence[0]",
+            "locales.zh-TW.demandEvidence[0]",
+            "locales.zh-CN.demandEvidence[0]"
+          ]
+        },
+        "trilingualSerp": {
+          "status": "pending",
+          "reason": "All three query languages were inspected, but the web-search provider did not expose stable Taiwan/mainland geolocation or Google rank; do not label this a regional Google SERP pass.",
+          "evidenceRefs": []
+        },
+        "cleanGap": {
+          "status": "failed",
+          "reason": "The current source-backed AI knowledge-base owner in each locale already directly answers source changes, stale state, conflicts, refresh, citations, and review. A new URL would duplicate the same task.",
+          "evidenceRefs": [
+            "locales.en.existingOwner",
+            "locales.zh-TW.existingOwner",
+            "locales.zh-CN.existingOwner"
+          ]
+        },
+        "firstPartyProof": {
+          "status": "passed",
+          "reason": "The maintained site source documents idempotent source resync, stale state, review, refresh, citations, and lint behavior.",
+          "evidenceRefs": [
+            "src/app/(en)/learn/seo-articles.ts:build-local-ai-knowledge-base-from-documents",
+            "src/app/(en)/learn/articles.ts:distilled-wiki-pages-ai-memory"
+          ]
+        },
+        "standaloneUtility": {
+          "status": "passed",
+          "reason": "A source-change checklist and stale-page repair workflow is useful for any maintained knowledge base.",
+          "evidenceRefs": [
+            "standaloneUtility"
+          ]
+        },
+        "internalLinks": {
+          "status": "passed",
+          "reason": "Nine same-topic, locale-aware sitemap entries are predeclared below.",
+          "evidenceRefs": [
+            "internalLinks"
+          ]
+        },
+        "authorityPath": {
+          "status": "pending",
+          "reason": "The exact external reference or distribution venue must be validated before publication.",
+          "evidenceRefs": []
+        }
       },
       "wenlanProof": [
-        {"claim": "Re-running wenlan sources add on a registered path resyncs changed source material.", "sourceRef": "src/app/(en)/learn/seo-articles.ts", "verification": "rg -n \"Re-running the same command resyncs|source changes\" src/app/(en)/learn/seo-articles.ts"},
-        {"claim": "Maintained pages expose citations, stale reasons, review, and refresh behavior.", "sourceRef": "src/app/(en)/learn/articles.ts", "verification": "rg -n \"stale reason|Refresh and review\" src/app/(en)/learn/articles.ts"}
+        {
+          "claim": "Re-running wenlan sources add on a registered path resyncs changed source material.",
+          "sourceRef": "src/app/(en)/learn/seo-articles.ts",
+          "verification": "rg -n \"Re-running the same command resyncs|source changes\" src/app/(en)/learn/seo-articles.ts"
+        },
+        {
+          "claim": "Maintained pages expose citations, stale reasons, review, and refresh behavior.",
+          "sourceRef": "src/app/(en)/learn/articles.ts",
+          "verification": "rg -n \"stale reason|Refresh and review\" src/app/(en)/learn/articles.ts"
+        }
       ],
       "standaloneUtility": "A tool-neutral maintenance runbook can teach source registration, change detection, stale marking, claim review, and safe refresh without requiring Wenlan.",
       "overlapCheck": "The existing source-backed AI knowledge-base page fully owns this task in all three locales. Reject a net-new URL; only a later refresh of that owner is eligible after its post-crawl 20/3/cooldown gate passes.",
@@ -121,61 +255,233 @@
         "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work",
         "https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents"
       ],
-      "authorityPath": {"type": "maintained-source-reference", "target": "A relevant active OSS docs or issue thread that accepts a neutral stale-knowledge maintenance reference", "status": "research-required"},
+      "authorityPath": {
+        "type": "maintained-source-reference",
+        "target": "A relevant active OSS docs or issue thread that accepts a neutral stale-knowledge maintenance reference",
+        "status": "research-required"
+      },
       "nextResearchDirection": "Move immediately to family 2. Keep family 1 rejected for net-new publication; revisit only through the existing source-backed owner's authenticated post-crawl evidence gate.",
       "readout": {
-        "gsc": {"status": "unavailable", "nativeUnit": "page impressions, joined-query impressions, clicks"},
-        "vercel": {"status": "unavailable", "nativeUnit": "target-page visitors and referrer visitors"}
+        "gsc": {
+          "status": "unavailable",
+          "nativeUnit": "page impressions, joined-query impressions, clicks"
+        },
+        "vercel": {
+          "status": "unavailable",
+          "nativeUnit": "target-page visitors and referrer visitors"
+        }
       }
     },
     {
       "id": "coding-agent-source-backed-knowledge-base",
       "userTask": "Give Codex or another coding agent a source-backed project knowledge base without overloading AGENTS.md, CLAUDE.md, or generic memory",
       "stage": "integrate",
-      "decision": "net-new",
+      "decision": "measuring",
       "plannedWindow": "2026-08-24..2026-08-30",
-      "publicationStatus": "prepared",
+      "publicationStatus": "measuring",
       "locales": {
         "en": {
-          "queryFamily": ["Codex source backed project knowledge base", "coding agent knowledge base workflow", "AGENTS.md knowledge base"],
+          "queryFamily": [
+            "Codex source backed project knowledge base",
+            "coding agent knowledge base workflow",
+            "AGENTS.md knowledge base"
+          ],
           "serpEvidence": [
-            {"sourceType": "web-search-result", "sourceUrl": "https://openai.com/index/harness-engineering/", "query": "Codex source backed knowledge base coding agent workflow citations", "capturedAt": "2026-08-23", "language": "en", "geography": "web-search geography unspecified", "nativeUnit": "returned result observation", "value": "1 returned result", "note": "OpenAI describes a structured docs directory as the system of record and warns that a giant instruction file crowds out task context; this is discovery evidence, not Google rank."},
-            {"sourceType": "web-search-result", "sourceUrl": "https://www.reddit.com/r/codex/comments/1uuoo59/how_do_you_persist_knowledge_for_your_ai_agents/", "query": "Codex source backed project knowledge base", "capturedAt": "2026-08-23", "language": "en", "geography": "web-search geography unspecified", "nativeUnit": "returned result observation", "value": "1 returned result", "note": "The result asks how coding agents should persist verified, source-backed domain knowledge and whether humans approve writes; no rank or engagement is claimed."}
+            {
+              "sourceType": "web-search-result",
+              "sourceUrl": "https://openai.com/index/harness-engineering/",
+              "query": "Codex source backed knowledge base coding agent workflow citations",
+              "capturedAt": "2026-08-23",
+              "language": "en",
+              "geography": "web-search geography unspecified",
+              "nativeUnit": "returned result observation",
+              "value": "1 returned result",
+              "note": "OpenAI describes a structured docs directory as the system of record and warns that a giant instruction file crowds out task context; this is discovery evidence, not Google rank."
+            },
+            {
+              "sourceType": "web-search-result",
+              "sourceUrl": "https://www.reddit.com/r/codex/comments/1uuoo59/how_do_you_persist_knowledge_for_your_ai_agents/",
+              "query": "Codex source backed project knowledge base",
+              "capturedAt": "2026-08-23",
+              "language": "en",
+              "geography": "web-search geography unspecified",
+              "nativeUnit": "returned result observation",
+              "value": "1 returned result",
+              "note": "The result asks how coding agents should persist verified, source-backed domain knowledge and whether humans approve writes; no rank or engagement is claimed."
+            }
           ],
           "demandEvidence": [
-            {"sourceType": "Reddit discussion", "sourceUrl": "https://www.reddit.com/r/ChatGPT/comments/1vaazvb/i_built_a_local_cited_evidence_layer_for_codex_to/", "query": "local cited evidence layer for Codex", "capturedAt": "2026-08-23", "language": "en", "geography": "community geography unavailable", "nativeUnit": "inspectable discussion", "value": "1 discussion", "note": "The author describes a persistent repository evidence layer that Codex can search and cite; engagement is not claimed."},
-            {"sourceType": "Reddit discussion", "sourceUrl": "https://www.reddit.com/r/codex/comments/1sf4ccl/selfmaintaining_wiki_useless_overhead_or/", "query": "Codex self-maintaining wiki project knowledge", "capturedAt": "2026-08-23", "language": "en", "geography": "community geography unavailable", "nativeUnit": "inspectable discussion", "value": "1 discussion", "note": "The author describes a Codex hook, raw-doc-first update, wiki refresh, and health-check workflow; engagement is not claimed."}
+            {
+              "sourceType": "Reddit discussion",
+              "sourceUrl": "https://www.reddit.com/r/ChatGPT/comments/1vaazvb/i_built_a_local_cited_evidence_layer_for_codex_to/",
+              "query": "local cited evidence layer for Codex",
+              "capturedAt": "2026-08-23",
+              "language": "en",
+              "geography": "community geography unavailable",
+              "nativeUnit": "inspectable discussion",
+              "value": "1 discussion",
+              "note": "The author describes a persistent repository evidence layer that Codex can search and cite; engagement is not claimed."
+            },
+            {
+              "sourceType": "Reddit discussion",
+              "sourceUrl": "https://www.reddit.com/r/codex/comments/1sf4ccl/selfmaintaining_wiki_useless_overhead_or/",
+              "query": "Codex self-maintaining wiki project knowledge",
+              "capturedAt": "2026-08-23",
+              "language": "en",
+              "geography": "community geography unavailable",
+              "nativeUnit": "inspectable discussion",
+              "value": "1 discussion",
+              "note": "The author describes a Codex hook, raw-doc-first update, wiki refresh, and health-check workflow; engagement is not claimed."
+            }
           ],
           "existingOwner": null,
           "coverage": "gap",
           "researchNeeded": "Measure the new task-specific owner separately from the existing session-memory Codex workflow and generic source-backed architecture owner; do not split Codex and Claude Code variants unless future query-page evidence shows different tasks."
         },
         "zh-TW": {
-          "queryFamily": ["Codex 有來源的專案知識庫", "coding agent 專案知識庫", "AGENTS.md 知識庫"],
+          "queryFamily": [
+            "Codex 有來源的專案知識庫",
+            "coding agent 專案知識庫",
+            "AGENTS.md 知識庫"
+          ],
           "serpEvidence": [
-            {"sourceType": "web-search-result", "sourceUrl": "https://yazelin.github.io/ai/2026/07/09/kb-driven-dev-flow.html", "query": "Claude Code Codex 專案 知識庫 工作流", "capturedAt": "2026-08-23", "language": "zh-TW", "geography": "web-search geography unspecified", "nativeUnit": "returned result observation", "value": "1 returned result", "note": "The result leads with Claude Code reading a versioned knowledge-base specification, writing a report back, and keeping the knowledge base as the single source of truth; this is not a Google rank claim."},
-            {"sourceType": "web-search-result", "sourceUrl": "https://signals.tw/articles/what-is-agents-md/", "query": "AGENTS.md Codex 專案知識 context", "capturedAt": "2026-08-23", "language": "zh-TW", "geography": "web-search geography unspecified", "nativeUnit": "returned result observation", "value": "1 returned result", "note": "The result distinguishes short agent instructions from detailed API or frequently changing project knowledge and names Codex, Claude Code, and context-window limits."}
+            {
+              "sourceType": "web-search-result",
+              "sourceUrl": "https://yazelin.github.io/ai/2026/07/09/kb-driven-dev-flow.html",
+              "query": "Claude Code Codex 專案 知識庫 工作流",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "web-search geography unspecified",
+              "nativeUnit": "returned result observation",
+              "value": "1 returned result",
+              "note": "The result leads with Claude Code reading a versioned knowledge-base specification, writing a report back, and keeping the knowledge base as the single source of truth; this is not a Google rank claim."
+            },
+            {
+              "sourceType": "web-search-result",
+              "sourceUrl": "https://signals.tw/articles/what-is-agents-md/",
+              "query": "AGENTS.md Codex 專案知識 context",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "web-search geography unspecified",
+              "nativeUnit": "returned result observation",
+              "value": "1 returned result",
+              "note": "The result distinguishes short agent instructions from detailed API or frequently changing project knowledge and names Codex, Claude Code, and context-window limits."
+            }
           ],
           "demandEvidence": [
-            {"sourceType": "Taiwan practitioner article", "sourceUrl": "https://yazelin.github.io/ai/2026/07/09/kb-driven-dev-flow.html", "query": "知識驅動開發 Claude Code", "capturedAt": "2026-08-23", "language": "zh-TW", "geography": "Taiwan", "nativeUnit": "inspectable article", "value": "1 article", "note": "The workflow uses Markdown, a CLI, explicit read/write permissions, and a human-triggered agent loop; it states that the pattern is product-neutral."},
-            {"sourceType": "Taiwan practitioner article", "sourceUrl": "https://signals.tw/articles/what-is-agents-md/", "query": "AGENTS.md 給 agent 讀的 README", "capturedAt": "2026-08-23", "language": "zh-TW", "geography": "Taiwan", "nativeUnit": "inspectable article", "value": "1 article", "note": "The article repeats the need to keep always-loaded instructions short and link to detailed knowledge rather than embedding it."},
-            {"sourceType": "Taiwan practitioner article", "sourceUrl": "https://tonylee.im/zh-TW/blog/create-three-spec-files-before-using-claude-code-codex/", "query": "Claude Code Codex 三份規格檔", "capturedAt": "2026-08-23", "language": "zh-TW", "geography": "Taiwan", "nativeUnit": "inspectable article", "value": "1 article", "note": "The article uses CLAUDE.md, SPEC.md, plan.md, and Git history as a structured project-context workflow."},
-            {"sourceType": "Taiwan practitioner article", "sourceUrl": "https://chichu.co/blog/claude-code-codex-migration-guide", "query": "Claude Code Codex AGENTS.md 專案知識", "capturedAt": "2026-08-23", "language": "zh-TW", "geography": "Taiwan", "nativeUnit": "inspectable article", "value": "1 article", "note": "The migration guide repeats AGENTS.md, shared skills, and project knowledge as distinct reusable surfaces."}
+            {
+              "sourceType": "Taiwan practitioner article",
+              "sourceUrl": "https://yazelin.github.io/ai/2026/07/09/kb-driven-dev-flow.html",
+              "query": "知識驅動開發 Claude Code",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "inspectable article",
+              "value": "1 article",
+              "note": "The workflow uses Markdown, a CLI, explicit read/write permissions, and a human-triggered agent loop; it states that the pattern is product-neutral."
+            },
+            {
+              "sourceType": "Taiwan practitioner article",
+              "sourceUrl": "https://signals.tw/articles/what-is-agents-md/",
+              "query": "AGENTS.md 給 agent 讀的 README",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "inspectable article",
+              "value": "1 article",
+              "note": "The article repeats the need to keep always-loaded instructions short and link to detailed knowledge rather than embedding it."
+            },
+            {
+              "sourceType": "Taiwan practitioner article",
+              "sourceUrl": "https://tonylee.im/zh-TW/blog/create-three-spec-files-before-using-claude-code-codex/",
+              "query": "Claude Code Codex 三份規格檔",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "inspectable article",
+              "value": "1 article",
+              "note": "The article uses CLAUDE.md, SPEC.md, plan.md, and Git history as a structured project-context workflow."
+            },
+            {
+              "sourceType": "Taiwan practitioner article",
+              "sourceUrl": "https://chichu.co/blog/claude-code-codex-migration-guide",
+              "query": "Claude Code Codex AGENTS.md 專案知識",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "inspectable article",
+              "value": "1 article",
+              "note": "The migration guide repeats AGENTS.md, shared skills, and project knowledge as distinct reusable surfaces."
+            }
           ],
           "existingOwner": null,
           "coverage": "gap",
           "researchNeeded": "Track whether Taiwan users search the task through Codex, Claude Code, AGENTS.md, 專案知識, or 知識庫; keep all phrases on the same owner until GSC proves a separate task."
         },
         "zh-CN": {
-          "queryFamily": ["给 Codex 做外挂知识库", "code agent 项目知识库", "AGENTS.md 知识库"],
+          "queryFamily": [
+            "给 Codex 做外挂知识库",
+            "code agent 项目知识库",
+            "AGENTS.md 知识库"
+          ],
           "serpEvidence": [
-            {"sourceType": "web-search-result", "sourceUrl": "https://www.v2ex.com/t/1221777", "query": "code agent 提供 知识库 AGENTS.md", "capturedAt": "2026-08-23", "language": "zh-CN", "geography": "web-search geography unspecified", "nativeUnit": "returned result observation", "value": "1 returned result", "note": "The result leads with repeated agent mistakes, overloaded AGENTS.md, and a direct request for a code-agent knowledge base; this is not a Google rank claim."},
-            {"sourceType": "web-search-result", "sourceUrl": "https://juejin.cn/post/7671867883983896618", "query": "Codex Obsidian 自生长知识库 LLM Wiki", "capturedAt": "2026-08-23", "language": "zh-CN", "geography": "web-search geography unspecified", "nativeUnit": "returned result observation", "value": "1 returned result", "note": "The result uses Codex, Obsidian, LLM Wiki, source traceability, and Git history in one implementation workflow."}
+            {
+              "sourceType": "web-search-result",
+              "sourceUrl": "https://www.v2ex.com/t/1221777",
+              "query": "code agent 提供 知识库 AGENTS.md",
+              "capturedAt": "2026-08-23",
+              "language": "zh-CN",
+              "geography": "web-search geography unspecified",
+              "nativeUnit": "returned result observation",
+              "value": "1 returned result",
+              "note": "The result leads with repeated agent mistakes, overloaded AGENTS.md, and a direct request for a code-agent knowledge base; this is not a Google rank claim."
+            },
+            {
+              "sourceType": "web-search-result",
+              "sourceUrl": "https://juejin.cn/post/7671867883983896618",
+              "query": "Codex Obsidian 自生长知识库 LLM Wiki",
+              "capturedAt": "2026-08-23",
+              "language": "zh-CN",
+              "geography": "web-search geography unspecified",
+              "nativeUnit": "returned result observation",
+              "value": "1 returned result",
+              "note": "The result uses Codex, Obsidian, LLM Wiki, source traceability, and Git history in one implementation workflow."
+            }
           ],
           "demandEvidence": [
-            {"sourceType": "V2EX discussion", "sourceUrl": "https://www.v2ex.com/t/1223201", "query": "给 Codex 做外挂知识库", "capturedAt": "2026-08-22", "language": "zh-CN", "geography": "Chinese developer community", "nativeUnit": "inspectable discussion", "value": "1 discussion", "note": "A concrete handover problem connects code, external documents, historical decisions, and human knowledge; no engagement total is claimed."},
-            {"sourceType": "V2EX question", "sourceUrl": "https://www.v2ex.com/t/1221777", "query": "有没有办法给 code agent 提供知识库？", "capturedAt": "2026-08-22", "language": "zh-CN", "geography": "Chinese developer community", "nativeUnit": "inspectable question", "value": "1 question", "note": "The high-intent question describes repeated agent mistakes, overloaded AGENTS.md, retrieval timing, and MCP or file-based workarounds."},
-            {"sourceType": "Juejin practitioner article", "sourceUrl": "https://juejin.cn/post/7671867883983896618", "query": "Codex + Obsidian 自生长知识库", "capturedAt": "2026-08-22", "language": "zh-CN", "geography": "Chinese developer community", "nativeUnit": "inspectable article", "value": "1 article", "note": "The article uses Codex plus LLM wiki plus Obsidian wording and describes raw, wiki, schema, and Git-traceable history."}
+            {
+              "sourceType": "V2EX discussion",
+              "sourceUrl": "https://www.v2ex.com/t/1223201",
+              "query": "给 Codex 做外挂知识库",
+              "capturedAt": "2026-08-22",
+              "language": "zh-CN",
+              "geography": "Chinese developer community",
+              "nativeUnit": "inspectable discussion",
+              "value": "1 discussion",
+              "note": "A concrete handover problem connects code, external documents, historical decisions, and human knowledge; no engagement total is claimed."
+            },
+            {
+              "sourceType": "V2EX question",
+              "sourceUrl": "https://www.v2ex.com/t/1221777",
+              "query": "有没有办法给 code agent 提供知识库？",
+              "capturedAt": "2026-08-22",
+              "language": "zh-CN",
+              "geography": "Chinese developer community",
+              "nativeUnit": "inspectable question",
+              "value": "1 question",
+              "note": "The high-intent question describes repeated agent mistakes, overloaded AGENTS.md, retrieval timing, and MCP or file-based workarounds."
+            },
+            {
+              "sourceType": "Juejin practitioner article",
+              "sourceUrl": "https://juejin.cn/post/7671867883983896618",
+              "query": "Codex + Obsidian 自生长知识库",
+              "capturedAt": "2026-08-22",
+              "language": "zh-CN",
+              "geography": "Chinese developer community",
+              "nativeUnit": "inspectable article",
+              "value": "1 article",
+              "note": "The article uses Codex plus LLM wiki plus Obsidian wording and describes raw, wiki, schema, and Git-traceable history."
+            }
           ],
           "existingOwner": null,
           "coverage": "gap",
@@ -183,18 +489,93 @@
         }
       },
       "gates": {
-        "provenance": {"status": "passed", "reason": "Every English, zh-TW, and zh-CN observation preserves a URL, query, capture date, language or geography, and source-native observation unit; no row is treated as keyword volume.", "evidenceRefs": ["locales.en.serpEvidence[0]", "locales.en.demandEvidence[0]", "locales.zh-TW.serpEvidence[0]", "locales.zh-TW.demandEvidence[0]", "locales.zh-CN.serpEvidence[0]", "locales.zh-CN.demandEvidence[0]"]},
-        "repeatedDemand": {"status": "passed", "reason": "Independent official, Reddit, Taiwan practitioner, V2EX, and Juejin sources repeat one high-intent task: keep project instructions small while agents retrieve versioned, source-backed project knowledge on demand.", "evidenceRefs": ["locales.en.serpEvidence[0]", "locales.en.demandEvidence[0]", "locales.en.demandEvidence[1]", "locales.zh-TW.demandEvidence[0]", "locales.zh-TW.demandEvidence[1]", "locales.zh-CN.demandEvidence[0]", "locales.zh-CN.demandEvidence[1]"]},
-        "trilingualSerp": {"status": "passed", "reason": "Separate English, zh-TW, and zh-CN result sets return the same integration task using natural locale wording around Codex or coding agents, project knowledge, AGENTS.md, and a knowledge base.", "evidenceRefs": ["locales.en.serpEvidence[0]", "locales.en.serpEvidence[1]", "locales.zh-TW.serpEvidence[0]", "locales.zh-TW.serpEvidence[1]", "locales.zh-CN.serpEvidence[0]", "locales.zh-CN.serpEvidence[1]"]},
-        "cleanGap": {"status": "passed", "reason": "The existing Codex workflow owns session context, capture, recall, and handoff; the source-backed page owns generic knowledge architecture. Neither answers how coding-agent instruction files, repository truth, on-demand knowledge, citations, and acceptance tests divide responsibility. One new trilingual integration owner is therefore cleaner than rewriting or duplicating either page.", "evidenceRefs": ["overlapCheck", "src/app/(en)/learn/seo-articles.ts:wenlan-codex-workflow", "src/app/(en)/learn/seo-articles.ts:source-backed-wiki-pages-ai-work"]},
-        "firstPartyProof": {"status": "passed", "reason": "The current site documents Wenlan setup, Codex connection, capture, recall, pages, provenance, and local source workflows.", "evidenceRefs": ["src/app/(en)/learn/seo-articles.ts:wenlan-codex-workflow", "src/app/(en)/docs/docs.ts"]},
-        "standaloneUtility": {"status": "passed", "reason": "A neutral coding-agent knowledge-base workflow can teach source selection, retrieval boundaries, citations, and verification.", "evidenceRefs": ["standaloneUtility"]},
-        "internalLinks": {"status": "passed", "reason": "The Learn hub plus existing Codex, source-backed, document-build, and tool-selection owners provide at least three same-locale contextual entry paths without changing their primary intent.", "evidenceRefs": ["internalLinks"]},
-        "authorityPath": {"status": "passed", "reason": "The current bilingual ai-prompting-guide repository is active, focuses on Claude Code, Codex, AGENTS.md, context engineering, and verification, and explicitly welcomes synchronized English and zh-TW documentation PRs. It is a small exact-fit candidate, not claimed high authority; any contribution remains separately approval-gated.", "evidenceRefs": ["authorityPath"]}
+        "provenance": {
+          "status": "passed",
+          "reason": "Every English, zh-TW, and zh-CN observation preserves a URL, query, capture date, language or geography, and source-native observation unit; no row is treated as keyword volume.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.en.demandEvidence[0]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-TW.demandEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]",
+            "locales.zh-CN.demandEvidence[0]"
+          ]
+        },
+        "repeatedDemand": {
+          "status": "passed",
+          "reason": "Independent official, Reddit, Taiwan practitioner, V2EX, and Juejin sources repeat one high-intent task: keep project instructions small while agents retrieve versioned, source-backed project knowledge on demand.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.en.demandEvidence[0]",
+            "locales.en.demandEvidence[1]",
+            "locales.zh-TW.demandEvidence[0]",
+            "locales.zh-TW.demandEvidence[1]",
+            "locales.zh-CN.demandEvidence[0]",
+            "locales.zh-CN.demandEvidence[1]"
+          ]
+        },
+        "trilingualSerp": {
+          "status": "passed",
+          "reason": "Separate English, zh-TW, and zh-CN result sets return the same integration task using natural locale wording around Codex or coding agents, project knowledge, AGENTS.md, and a knowledge base.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.en.serpEvidence[1]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-TW.serpEvidence[1]",
+            "locales.zh-CN.serpEvidence[0]",
+            "locales.zh-CN.serpEvidence[1]"
+          ]
+        },
+        "cleanGap": {
+          "status": "passed",
+          "reason": "The existing Codex workflow owns session context, capture, recall, and handoff; the source-backed page owns generic knowledge architecture. Neither answers how coding-agent instruction files, repository truth, on-demand knowledge, citations, and acceptance tests divide responsibility. One new trilingual integration owner is therefore cleaner than rewriting or duplicating either page.",
+          "evidenceRefs": [
+            "overlapCheck",
+            "src/app/(en)/learn/seo-articles.ts:wenlan-codex-workflow",
+            "src/app/(en)/learn/seo-articles.ts:source-backed-wiki-pages-ai-work"
+          ]
+        },
+        "firstPartyProof": {
+          "status": "passed",
+          "reason": "The current site documents Wenlan setup, Codex connection, capture, recall, pages, provenance, and local source workflows.",
+          "evidenceRefs": [
+            "src/app/(en)/learn/seo-articles.ts:wenlan-codex-workflow",
+            "src/app/(en)/docs/docs.ts"
+          ]
+        },
+        "standaloneUtility": {
+          "status": "passed",
+          "reason": "A neutral coding-agent knowledge-base workflow can teach source selection, retrieval boundaries, citations, and verification.",
+          "evidenceRefs": [
+            "standaloneUtility"
+          ]
+        },
+        "internalLinks": {
+          "status": "passed",
+          "reason": "The Learn hub plus existing Codex, source-backed, document-build, and tool-selection owners provide at least three same-locale contextual entry paths without changing their primary intent.",
+          "evidenceRefs": [
+            "internalLinks"
+          ]
+        },
+        "authorityPath": {
+          "status": "passed",
+          "reason": "The current bilingual ai-prompting-guide repository is active, focuses on Claude Code, Codex, AGENTS.md, context engineering, and verification, and explicitly welcomes synchronized English and zh-TW documentation PRs. It is a small exact-fit candidate, not claimed high authority; any contribution remains separately approval-gated.",
+          "evidenceRefs": [
+            "authorityPath"
+          ]
+        }
       },
       "wenlanProof": [
-        {"claim": "Wenlan exposes a maintained Codex workflow and local MCP connection path.", "sourceRef": "src/app/(en)/learn/seo-articles.ts", "verification": "rg -n \"wenlan-codex-workflow|connect codex\" src/app/(en)/learn/seo-articles.ts src/app/(en)/docs/docs.ts"},
-        {"claim": "Sources, memories, and maintained pages remain distinct and inspectable.", "sourceRef": "src/app/(en)/learn/seo-articles.ts", "verification": "rg -n \"Sources, Memories, and Pages|citations\" src/app/(en)/learn/seo-articles.ts"}
+        {
+          "claim": "Wenlan exposes a maintained Codex workflow and local MCP connection path.",
+          "sourceRef": "src/app/(en)/learn/seo-articles.ts",
+          "verification": "rg -n \"wenlan-codex-workflow|connect codex\" src/app/(en)/learn/seo-articles.ts src/app/(en)/docs/docs.ts"
+        },
+        {
+          "claim": "Sources, memories, and maintained pages remain distinct and inspectable.",
+          "sourceRef": "src/app/(en)/learn/seo-articles.ts",
+          "verification": "rg -n \"Sources, Memories, and Pages|citations\" src/app/(en)/learn/seo-articles.ts"
+        }
       ],
       "standaloneUtility": "The page can show any coding-agent user how to keep source-of-truth files authoritative, retrieve only needed context, and validate cited conclusions.",
       "overlapCheck": "The existing Codex workflow answers session context, capture, recall, and handoff. The existing source-backed page answers generic knowledge architecture and maintenance. The new owner answers a different integration decision: what belongs in AGENTS.md or CLAUDE.md, what remains repository truth, what becomes on-demand cited knowledge, and how a coding agent verifies it. Keep Codex, Claude Code, and coding-agent query variants on this one owner unless joined GSC evidence proves distinct tasks.",
@@ -209,62 +590,297 @@
         "https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
         "https://wenlan.app/zh-CN/learn/choose-ai-knowledge-base-tool"
       ],
-      "authorityPath": {"type": "bilingual-coding-agent-handbook-contribution", "target": "https://github.com/thc1006/ai-prompting-guide — prepare, but do not publish, a neutral English and zh-TW project-knowledge-layer reference only if the website family is approved for publication", "status": "verified-candidate"},
-      "nextResearchDirection": "Finish the one-owner English, zh-TW, and zh-CN implementation, then measure each locale independently. Keep the verified handbook contribution unsubmitted until the website family and external publication receive separate approval; continue monitoring OpenSEO only as auxiliary SERP evidence when authenticated access returns.",
+      "authorityPath": {
+        "type": "bilingual-coding-agent-handbook-contribution",
+        "target": "https://github.com/thc1006/ai-prompting-guide — prepare, but do not publish, a neutral English and zh-TW project-knowledge-layer reference only if the website family is approved for publication",
+        "status": "verified-candidate"
+      },
+      "nextResearchDirection": "Published through PR #136 and production-verified on 2026-08-23. Preserve independent English, zh-TW, and zh-CN GSC page and joined-query readouts; do not rewrite from deployment completion or missing rows.",
       "readout": {
-        "gsc": {"status": "unavailable", "nativeUnit": "page impressions, joined-query impressions, clicks"},
-        "vercel": {"status": "unavailable", "nativeUnit": "target-page visitors and referrer visitors"}
+        "gsc": {
+          "status": "unavailable",
+          "nativeUnit": "page impressions, joined-query impressions, clicks"
+        },
+        "vercel": {
+          "status": "unavailable",
+          "nativeUnit": "target-page visitors and referrer visitors"
+        }
       }
     },
     {
       "id": "verify-citations-provenance-unsupported-claims",
       "userTask": "Verify AI knowledge-base citations, provenance, and unsupported claims before trusting an answer",
       "stage": "evaluate",
-      "decision": "research",
+      "decision": "net-new",
       "plannedWindow": "2026-09-07..2026-09-13",
-      "publicationStatus": "not-published",
+      "publicationStatus": "prepared",
       "locales": {
         "en": {
-          "queryFamily": ["verify AI knowledge base citations", "AI knowledge base provenance checklist", "find unsupported claims in AI knowledge base"],
-          "serpEvidence": [],
-          "demandEvidence": [],
+          "queryFamily": [
+            "verify AI knowledge base citations",
+            "RAG wrong page citations",
+            "RAG citation faithfulness",
+            "find unsupported claims in a RAG answer"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "web-search-result",
+              "sourceUrl": "https://stackoverflow.com/questions/79934606/rag-pipeline-returns-correct-answers-but-wrong-page-citations-and-occasional-hal",
+              "query": "RAG wrong page citations",
+              "capturedAt": "2026-08-23",
+              "language": "en",
+              "geography": "web-search geography unspecified",
+              "nativeUnit": "page views and answers",
+              "value": "159 views; 1 answer",
+              "note": "A concrete developer question asks how to fix correct-looking answers whose cited pages and rendered sources do not match; this is not keyword volume."
+            },
+            {
+              "sourceType": "web-search-result",
+              "sourceUrl": "https://multigrid.ai/learn/rag-citations",
+              "query": "verify AI knowledge base citations",
+              "capturedAt": "2026-08-23",
+              "language": "en",
+              "geography": "web-search geography unspecified",
+              "nativeUnit": "published guide observation",
+              "value": "published 2026-08-03",
+              "note": "The guide treats claim-to-span verification, stable chunk identity, and unsupported claims as a practical workflow distinct from generic RAG setup."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "github-issue",
+              "sourceUrl": "https://github.com/open-webui/open-webui/issues/12655",
+              "query": "RAG knowledge collection cites wrong source",
+              "capturedAt": "2026-08-23",
+              "language": "en",
+              "geography": "global",
+              "nativeUnit": "GitHub issue reactions and resolution",
+              "value": "2 reactions; reproducible bug; fix merged",
+              "note": "The issue shows a knowledge collection citing the first source instead of the sources actually used."
+            },
+            {
+              "sourceType": "github-issue",
+              "sourceUrl": "https://github.com/open-webui/open-webui/issues/20435",
+              "query": "RAG citation markers identical chunks",
+              "capturedAt": "2026-08-23",
+              "language": "en with a Chinese example",
+              "geography": "global",
+              "nativeUnit": "GitHub issue observation",
+              "value": "closed bug with exact reproduction steps",
+              "note": "Different answer statements expose identical chunks, preventing claim-level source verification."
+            }
+          ],
           "existingOwner": "https://wenlan.app/learn/source-backed-wiki-pages-ai-work",
           "coverage": "partial",
-          "researchNeeded": "Determine whether citation verification and unsupported-claim diagnosis form a practical SERP distinct from the broad source-backed knowledge-base guide."
+          "researchNeeded": "Demand and overlap research is complete. Keep the task diagnostic: start from one suspect answer and verify exact claim-to-source support; do not broaden it into another source-backed architecture guide."
         },
         "zh-TW": {
-          "queryFamily": ["驗證 AI 知識庫引用", "AI 知識庫來源追溯檢查", "找出 AI 知識庫無來源主張"],
-          "serpEvidence": [],
-          "demandEvidence": [],
+          "queryFamily": [
+            "RAG 引用對不上",
+            "AI 知識庫回答沒有依據",
+            "驗證 AI 知識庫引用",
+            "引用來源可追溯"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "web-search-result",
+              "sourceUrl": "https://ithelp.ithome.com.tw/articles/10393293",
+              "query": "台灣 RAG 引用錯誤 知識庫 驗證",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "page views",
+              "value": "1252 views",
+              "note": "The Taiwan practitioner article demonstrates statement-level evidence checks and flags unsupported output; this is not keyword volume."
+            },
+            {
+              "sourceType": "web-search-result",
+              "sourceUrl": "https://ithelp.ithome.com.tw/articles/10396963",
+              "query": "site:ithelp.ithome.com.tw RAG 引用 對不上 來源 無法驗證 知識庫",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "returned result observation",
+              "value": "returned for the exact Taiwan citation-source debugging search",
+              "note": "A Notion RAG implementation reports that mismatched metadata makes displayed sources unusable and repairs the source tracker."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "taiwan-practitioner-guide",
+              "sourceUrl": "https://ithelp.ithome.com.tw/articles/10402032",
+              "query": "台灣 AI 知識庫 回答來源 頁碼 版本",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "returned result observation",
+              "value": "returned for the exact Taiwan source-traceability search",
+              "note": "The implementation keeps source, page, and document-version metadata so an answer can return to evidence."
+            },
+            {
+              "sourceType": "official-documentation",
+              "sourceUrl": "https://platform.claude.com/docs/zh-TW/build-with-claude/citations",
+              "query": "Claude 引用 驗證 來源 zh-TW",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "Taiwan localization",
+              "nativeUnit": "official documentation observation",
+              "value": "current documentation page",
+              "note": "The official localized documentation describes citations that preserve pointers into supplied documents."
+            }
+          ],
           "existingOwner": "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",
           "coverage": "partial",
-          "researchNeeded": "Inspect Taiwan searches for citation, source traceability, hallucination, and unsupported claims; preserve the terms users actually use."
+          "researchNeeded": "Taiwan evidence supports natural wording around 引用對不上, 回答沒有依據, 頁碼, 來源, and 可追溯. Keep those terms instead of a literal translation of citation faithfulness."
         },
         "zh-CN": {
-          "queryFamily": ["验证 AI 知识库引用", "AI 知识库来源追溯检查", "找出 AI 知识库无来源结论"],
-          "serpEvidence": [],
-          "demandEvidence": [],
+          "queryFamily": [
+            "RAG 引用总是对不上",
+            "验证 AI 知识库引用",
+            "知识库回答无依据",
+            "引用溯源和引用校验"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "web-search-result",
+              "sourceUrl": "https://juejin.cn/post/7646581145124225075",
+              "query": "RAG 引用总是对不上",
+              "capturedAt": "2026-08-23",
+              "language": "zh-CN",
+              "geography": "mainland China community",
+              "nativeUnit": "page reads",
+              "value": "67 reads",
+              "note": "The developer walkthrough rebuilds a knowledge-base retrieval chain around evidence IDs because answers point to the wrong passage."
+            },
+            {
+              "sourceType": "web-search-result",
+              "sourceUrl": "https://segmentfault.com/a/1190000048020724",
+              "query": "RAG 有召回仍答错 引用校验",
+              "capturedAt": "2026-08-23",
+              "language": "zh-CN",
+              "geography": "mainland China community",
+              "nativeUnit": "page reads",
+              "value": "482 reads",
+              "note": "The guide separates retrieval from usable evidence and validates each assertion against a current, locatable source."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "developer-community-guide",
+              "sourceUrl": "https://developer.volcengine.com/articles/7387287273853141042",
+              "query": "RAG 自动源引文验证",
+              "capturedAt": "2026-08-23",
+              "language": "zh-CN",
+              "geography": "mainland China community",
+              "nativeUnit": "published guide observation",
+              "value": "published 2024-07-03",
+              "note": "The workflow verifies whether an LLM response corresponds to a specific cited source and records evidence checks."
+            },
+            {
+              "sourceType": "official-documentation",
+              "sourceUrl": "https://platform.claude.com/docs/zh-CN/build-with-claude/citations",
+              "query": "Claude 引用 验证 来源 zh-CN",
+              "capturedAt": "2026-08-23",
+              "language": "zh-CN",
+              "geography": "mainland China localization",
+              "nativeUnit": "official documentation observation",
+              "value": "current documentation page",
+              "note": "The official localized documentation describes citations with valid pointers into supplied documents."
+            }
+          ],
           "existingOwner": "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work",
           "coverage": "partial",
-          "researchNeeded": "Inspect mainland Chinese searches for citation verification, source attribution, hallucination, and unsupported conclusions."
+          "researchNeeded": "Simplified-Chinese evidence supports natural wording around 引用对不上, 错页, 错片段, 无依据结论, 溯源, and 引用校验."
         }
       },
       "gates": {
-        "provenance": {"status": "pending", "reason": "No current trilingual demand observations with native units have been captured.", "evidenceRefs": []},
-        "repeatedDemand": {"status": "pending", "reason": "The verification problem needs repeated or high-intent evidence beyond product positioning.", "evidenceRefs": []},
-        "trilingualSerp": {"status": "pending", "reason": "Independent English, zh-TW, and zh-CN result sets are not yet recorded.", "evidenceRefs": []},
-        "cleanGap": {"status": "pending", "reason": "The source-backed owner already covers citations and provenance; a diagnostic URL requires a distinct task and SERP.", "evidenceRefs": []},
-        "firstPartyProof": {"status": "passed", "reason": "Current product docs describe citation-gated synthesis, per-claim citations, source IDs, lint, stale state, and human review.", "evidenceRefs": ["src/app/(en)/docs/docs.ts:v0.12.0", "src/app/(en)/learn/seo-articles.ts:source-backed-wiki-pages-ai-work"]},
-        "standaloneUtility": {"status": "passed", "reason": "A citation and unsupported-claim audit is independently useful regardless of product choice.", "evidenceRefs": ["standaloneUtility"]},
-        "internalLinks": {"status": "passed", "reason": "Source-backed, tool-selection, and LLM Wiki owners are predeclared by locale.", "evidenceRefs": ["internalLinks"]},
-        "authorityPath": {"status": "pending", "reason": "A relevant evaluation, documentation, or issue surface has not been selected.", "evidenceRefs": []}
+        "provenance": {
+          "status": "passed",
+          "reason": "Every retained English, zh-TW, and zh-CN observation preserves an inspectable URL, exact query, capture date, language or geography, and source-native unit; none is treated as keyword volume or GSC evidence.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]"
+          ]
+        },
+        "repeatedDemand": {
+          "status": "passed",
+          "reason": "Independent Stack Overflow, Open WebUI, Taiwan iThome, Juejin, SegmentFault, developer-community, and official documentation sources repeat one concrete failure: an answer looks grounded while its cited page, chunk, version, or source does not support the claim.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.en.demandEvidence[0]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-TW.demandEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]",
+            "locales.zh-CN.demandEvidence[0]"
+          ]
+        },
+        "trilingualSerp": {
+          "status": "passed",
+          "reason": "Separate English, Taiwan Traditional-Chinese, and mainland-community Simplified-Chinese result sets expose the same diagnostic task through natural local wording rather than literal translations.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.en.serpEvidence[1]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-TW.serpEvidence[1]",
+            "locales.zh-CN.serpEvidence[0]",
+            "locales.zh-CN.serpEvidence[1]"
+          ]
+        },
+        "cleanGap": {
+          "status": "passed",
+          "reason": "The existing source-backed owner teaches architecture and maintenance. The retained result sets start from one suspect answer and diagnose claim-to-evidence failures, including wrong pages, identical chunks, stale versions, and unsupported conclusions; that complete audit workflow is not owned by the current page.",
+          "evidenceRefs": [
+            "overlapCheck",
+            "locales.en.serpEvidence[0]",
+            "locales.zh-TW.serpEvidence[1]",
+            "locales.zh-CN.serpEvidence[1]"
+          ]
+        },
+        "firstPartyProof": {
+          "status": "passed",
+          "reason": "Current product docs describe citation-gated synthesis, per-claim citations, source IDs, lint, stale state, and human review.",
+          "evidenceRefs": [
+            "src/app/(en)/docs/docs.ts:v0.12.0",
+            "src/app/(en)/learn/seo-articles.ts:source-backed-wiki-pages-ai-work"
+          ]
+        },
+        "standaloneUtility": {
+          "status": "passed",
+          "reason": "A citation and unsupported-claim audit is independently useful regardless of product choice.",
+          "evidenceRefs": [
+            "standaloneUtility"
+          ]
+        },
+        "internalLinks": {
+          "status": "passed",
+          "reason": "Source-backed, tool-selection, and LLM Wiki owners are predeclared by locale.",
+          "evidenceRefs": [
+            "internalLinks"
+          ]
+        },
+        "authorityPath": {
+          "status": "passed",
+          "reason": "The user explicitly reopened this research lane on 2026-08-23. Danielskry/Awesome-RAG is a maintained 1,345-star resource map with a dedicated Production & Best Practices section, accepted an external learning-resource PR on 2026-06-30, and already has Qi-Xuan Lu's separate Wenlan framework listing PR #142 open. After the citation guide is published and #142 resolves, one neutral article reference can be proposed without messaging maintainers automatically; acceptance is not assumed.",
+          "evidenceRefs": [
+            "authorityPath"
+          ]
+        }
       },
       "wenlanProof": [
-        {"claim": "The release docs describe citation-gated synthesis and per-claim verified citations.", "sourceRef": "src/app/(en)/docs/docs.ts", "verification": "rg -n \"citation-gated synthesis|Per-claim verified citations\" src/app/(en)/docs/docs.ts"},
-        {"claim": "The source-backed guide documents source IDs, revisions, stale reasons, review, refresh, and lint.", "sourceRef": "src/app/(en)/learn/seo-articles.ts", "verification": "rg -n \"unsupported|stale-reason|Run lint\" src/app/(en)/learn/seo-articles.ts"}
+        {
+          "claim": "The release docs describe citation-gated synthesis and per-claim verified citations.",
+          "sourceRef": "src/app/(en)/docs/docs.ts",
+          "verification": "rg -n \"citation-gated synthesis|Per-claim verified citations\" src/app/(en)/docs/docs.ts"
+        },
+        {
+          "claim": "The source-backed guide documents source IDs, revisions, stale reasons, review, refresh, and lint.",
+          "sourceRef": "src/app/(en)/learn/seo-articles.ts",
+          "verification": "rg -n \"unsupported|stale-reason|Run lint\" src/app/(en)/learn/seo-articles.ts"
+        }
       ],
       "standaloneUtility": "The output can be a tool-neutral checklist that traces each important claim to a source, tests unsupported claims, and records what requires review.",
-      "overlapCheck": "The current source-backed guide is the default owner. Only create a diagnostic URL if the citation-verification SERP and workflow are independently clear; otherwise refresh the owner after its evidence gate.",
+      "overlapCheck": "The current source-backed guide owns how to build and maintain the architecture. This candidate owns a different diagnostic task: start from one suspect answer, map each important claim to the exact source revision and location, then classify missing, invalid, mismatched, stale, or unsupported evidence. Keep that boundary or reject the new URL.",
       "internalLinks": [
         "https://wenlan.app/learn/source-backed-wiki-pages-ai-work",
         "https://wenlan.app/learn/choose-ai-knowledge-base-tool",
@@ -276,11 +892,21 @@
         "https://wenlan.app/zh-CN/learn/choose-ai-knowledge-base-tool",
         "https://wenlan.app/zh-CN/learn/distilled-wiki-pages-ai-memory"
       ],
-      "authorityPath": {"type": "evaluation-checklist-reference", "target": "An active OSS evaluation, provenance, or documentation surface where a neutral verification checklist has exact fit", "status": "research-required"},
-      "nextResearchDirection": "Capture result sets for citation verification and unsupported-claim searches, compare them with broad knowledge-base results, and inspect OSS issues for repeated failure language before choosing refresh or net-new.",
+      "authorityPath": {
+        "type": "production-best-practices-resource",
+        "target": "https://github.com/Danielskry/Awesome-RAG — propose one neutral citation-verification guide under Production & Best Practices only after the three-locale website family is published and existing Wenlan framework PR #142 resolves",
+        "status": "verified-candidate"
+      },
+      "nextResearchDirection": "The complete candidate gate now passes and the English, zh-TW, and zh-CN diagnostic family is locally prepared. Finish deterministic and rendered verification, then request separate approval for commit, push, PR, merge, deployment, indexing, or the later Awesome-RAG resource proposal.",
       "readout": {
-        "gsc": {"status": "unavailable", "nativeUnit": "page impressions, joined-query impressions, clicks"},
-        "vercel": {"status": "unavailable", "nativeUnit": "target-page visitors and referrer visitors"}
+        "gsc": {
+          "status": "unavailable",
+          "nativeUnit": "page impressions, joined-query impressions, clicks"
+        },
+        "vercel": {
+          "status": "unavailable",
+          "nativeUnit": "target-page visitors and referrer visitors"
+        }
       }
     },
     {
@@ -292,7 +918,11 @@
       "publicationStatus": "not-published",
       "locales": {
         "en": {
-          "queryFamily": ["Obsidian read only AI knowledge base source", "Obsidian vault vs maintained AI knowledge base", "use Obsidian vault with AI without rewriting notes"],
+          "queryFamily": [
+            "Obsidian read only AI knowledge base source",
+            "Obsidian vault vs maintained AI knowledge base",
+            "use Obsidian vault with AI without rewriting notes"
+          ],
           "serpEvidence": [],
           "demandEvidence": [],
           "existingOwner": "https://wenlan.app/learn/wenlan-vs-obsidian-ai-memory",
@@ -300,7 +930,11 @@
           "researchNeeded": "Verify whether a narrower read-only-source SERP exists; the current owner already states the source and maintenance boundary."
         },
         "zh-TW": {
-          "queryFamily": ["Obsidian 唯讀來源 AI 知識庫", "Obsidian vault 與維護型 AI 知識庫差異", "AI 讀取 Obsidian 不改寫筆記"],
+          "queryFamily": [
+            "Obsidian 唯讀來源 AI 知識庫",
+            "Obsidian vault 與維護型 AI 知識庫差異",
+            "AI 讀取 Obsidian 不改寫筆記"
+          ],
           "serpEvidence": [],
           "demandEvidence": [],
           "existingOwner": "https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
@@ -308,7 +942,11 @@
           "researchNeeded": "Verify Taiwan phrasing and whether the current localized owner already answers the complete task."
         },
         "zh-CN": {
-          "queryFamily": ["Obsidian 只读来源 AI 知识库", "Obsidian vault 和维护型 AI 知识库区别", "AI 读取 Obsidian 不改写笔记"],
+          "queryFamily": [
+            "Obsidian 只读来源 AI 知识库",
+            "Obsidian vault 和维护型 AI 知识库区别",
+            "AI 读取 Obsidian 不改写笔记"
+          ],
           "serpEvidence": [],
           "demandEvidence": [],
           "existingOwner": "https://wenlan.app/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
@@ -317,18 +955,64 @@
         }
       },
       "gates": {
-        "provenance": {"status": "pending", "reason": "No new trilingual SERP or community capture is stored for this narrower task.", "evidenceRefs": []},
-        "repeatedDemand": {"status": "pending", "reason": "The narrower read-only-source language needs external corroboration.", "evidenceRefs": []},
-        "trilingualSerp": {"status": "pending", "reason": "The result sets have not been compared in the three locales.", "evidenceRefs": []},
-        "cleanGap": {"status": "pending", "reason": "All three current Obsidian owners already cover direct files, read-only source behavior, MCP, provenance, and maintenance; a new URL is likely overlapping unless SERP evidence proves otherwise.", "evidenceRefs": []},
-        "firstPartyProof": {"status": "passed", "reason": "The current site states that an Obsidian vault remains human-owned and read-only while maintained pages add citations, staleness, revisions, and review.", "evidenceRefs": ["src/app/(en)/learn/seo-articles.ts:wenlan-vs-obsidian-ai-memory"]},
-        "standaloneUtility": {"status": "passed", "reason": "A decision tree for direct files, editor context, MCP, and maintenance is useful without Wenlan.", "evidenceRefs": ["standaloneUtility"]},
-        "internalLinks": {"status": "passed", "reason": "Obsidian, document-build, and tool-selection owners are predeclared by locale.", "evidenceRefs": ["internalLinks"]},
-        "authorityPath": {"status": "pending", "reason": "The exact Obsidian or coding-tool reference path needs validation.", "evidenceRefs": []}
+        "provenance": {
+          "status": "pending",
+          "reason": "No new trilingual SERP or community capture is stored for this narrower task.",
+          "evidenceRefs": []
+        },
+        "repeatedDemand": {
+          "status": "pending",
+          "reason": "The narrower read-only-source language needs external corroboration.",
+          "evidenceRefs": []
+        },
+        "trilingualSerp": {
+          "status": "pending",
+          "reason": "The result sets have not been compared in the three locales.",
+          "evidenceRefs": []
+        },
+        "cleanGap": {
+          "status": "pending",
+          "reason": "All three current Obsidian owners already cover direct files, read-only source behavior, MCP, provenance, and maintenance; a new URL is likely overlapping unless SERP evidence proves otherwise.",
+          "evidenceRefs": []
+        },
+        "firstPartyProof": {
+          "status": "passed",
+          "reason": "The current site states that an Obsidian vault remains human-owned and read-only while maintained pages add citations, staleness, revisions, and review.",
+          "evidenceRefs": [
+            "src/app/(en)/learn/seo-articles.ts:wenlan-vs-obsidian-ai-memory"
+          ]
+        },
+        "standaloneUtility": {
+          "status": "passed",
+          "reason": "A decision tree for direct files, editor context, MCP, and maintenance is useful without Wenlan.",
+          "evidenceRefs": [
+            "standaloneUtility"
+          ]
+        },
+        "internalLinks": {
+          "status": "passed",
+          "reason": "Obsidian, document-build, and tool-selection owners are predeclared by locale.",
+          "evidenceRefs": [
+            "internalLinks"
+          ]
+        },
+        "authorityPath": {
+          "status": "pending",
+          "reason": "The exact Obsidian or coding-tool reference path needs validation.",
+          "evidenceRefs": []
+        }
       },
       "wenlanProof": [
-        {"claim": "Wenlan reads an Obsidian vault as a read-only source and resyncs Markdown on demand.", "sourceRef": "src/app/(en)/learn/seo-articles.ts", "verification": "rg -n \"read-only Source|resync its Markdown\" src/app/(en)/learn/seo-articles.ts"},
-        {"claim": "The current comparison distinguishes file access, editor context, MCP, and maintained knowledge lifecycle.", "sourceRef": "src/app/(en)/learn/seo-articles.ts", "verification": "rg -n \"direct filesystem access|IDE bridge|knowledge lifecycle\" src/app/(en)/learn/seo-articles.ts"}
+        {
+          "claim": "Wenlan reads an Obsidian vault as a read-only source and resyncs Markdown on demand.",
+          "sourceRef": "src/app/(en)/learn/seo-articles.ts",
+          "verification": "rg -n \"read-only Source|resync its Markdown\" src/app/(en)/learn/seo-articles.ts"
+        },
+        {
+          "claim": "The current comparison distinguishes file access, editor context, MCP, and maintained knowledge lifecycle.",
+          "sourceRef": "src/app/(en)/learn/seo-articles.ts",
+          "verification": "rg -n \"direct filesystem access|IDE bridge|knowledge lifecycle\" src/app/(en)/learn/seo-articles.ts"
+        }
       ],
       "standaloneUtility": "The page can help Obsidian users choose between direct file access, live editor context, MCP operations, and a separate maintenance layer without forcing a product choice.",
       "overlapCheck": "This is currently covered in all three locales. The default outcome is refresh-existing only after the old-page evidence gate; net-new requires a demonstrably separate read-only-source task and SERP.",
@@ -343,11 +1027,21 @@
         "https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
         "https://wenlan.app/zh-CN/learn/choose-ai-knowledge-base-tool"
       ],
-      "authorityPath": {"type": "obsidian-workflow-reference", "target": "A maintained Obsidian, Claude Code, or MCP workflow surface with an exact read-only-source decision gap", "status": "research-required"},
+      "authorityPath": {
+        "type": "obsidian-workflow-reference",
+        "target": "A maintained Obsidian, Claude Code, or MCP workflow surface with an exact read-only-source decision gap",
+        "status": "research-required"
+      },
       "nextResearchDirection": "Check the three locale SERPs for a distinct read-only-source task. If absent, retain the current owner and move immediately to family 5 instead of producing another Obsidian page.",
       "readout": {
-        "gsc": {"status": "unavailable", "nativeUnit": "page impressions, joined-query impressions, clicks"},
-        "vercel": {"status": "unavailable", "nativeUnit": "target-page visitors and referrer visitors"}
+        "gsc": {
+          "status": "unavailable",
+          "nativeUnit": "page impressions, joined-query impressions, clicks"
+        },
+        "vercel": {
+          "status": "unavailable",
+          "nativeUnit": "target-page visitors and referrer visitors"
+        }
       }
     },
     {
@@ -359,7 +1053,11 @@
       "publicationStatus": "not-published",
       "locales": {
         "en": {
-          "queryFamily": ["when should AI agent query knowledge base", "reduce AI agent context token cost with knowledge base", "avoid rereading documents AI agent"],
+          "queryFamily": [
+            "when should AI agent query knowledge base",
+            "reduce AI agent context token cost with knowledge base",
+            "avoid rereading documents AI agent"
+          ],
           "serpEvidence": [],
           "demandEvidence": [],
           "existingOwner": "https://wenlan.app/learn/ai-work-memory-vs-knowledge-base",
@@ -367,7 +1065,11 @@
           "researchNeeded": "Separate architectural token-optimization results from practical retrieval-policy searches and check whether the existing comparison owns the task."
         },
         "zh-TW": {
-          "queryFamily": ["AI agent 何時查詢知識庫", "AI 知識庫降低 context token 成本", "避免 AI 重複讀取文件"],
+          "queryFamily": [
+            "AI agent 何時查詢知識庫",
+            "AI 知識庫降低 context token 成本",
+            "避免 AI 重複讀取文件"
+          ],
           "serpEvidence": [],
           "demandEvidence": [],
           "existingOwner": null,
@@ -375,7 +1077,11 @@
           "researchNeeded": "Identify natural Taiwan wording for context window, token use, document rereading, and retrieval timing."
         },
         "zh-CN": {
-          "queryFamily": ["AI agent 什么时候查询知识库", "AI 知识库降低上下文 token 成本", "避免 AI 重复读取文档"],
+          "queryFamily": [
+            "AI agent 什么时候查询知识库",
+            "AI 知识库降低上下文 token 成本",
+            "避免 AI 重复读取文档"
+          ],
           "serpEvidence": [],
           "demandEvidence": [],
           "existingOwner": null,
@@ -384,18 +1090,65 @@
         }
       },
       "gates": {
-        "provenance": {"status": "pending", "reason": "No current trilingual demand capture has been stored.", "evidenceRefs": []},
-        "repeatedDemand": {"status": "pending", "reason": "The cost and retrieval task needs independent high-intent or repeated evidence.", "evidenceRefs": []},
-        "trilingualSerp": {"status": "pending", "reason": "Three locale result sets are not captured.", "evidenceRefs": []},
-        "cleanGap": {"status": "pending", "reason": "English partially overlaps an existing memory-versus-knowledge-base comparison; Mandarin appears unmapped but still needs SERP proof.", "evidenceRefs": []},
-        "firstPartyProof": {"status": "passed", "reason": "Current sources document selective recall, local hybrid retrieval, and maintained pages rather than repeated full-history loading.", "evidenceRefs": ["src/app/(en)/learn/articles.ts", "src/app/(en)/learn/seo-articles.ts"]},
-        "standaloneUtility": {"status": "passed", "reason": "A retrieval timing and context-budget checklist is useful across tools.", "evidenceRefs": ["standaloneUtility"]},
-        "internalLinks": {"status": "passed", "reason": "Knowledge-base comparison, build, and source-backed owners are predeclared.", "evidenceRefs": ["internalLinks"]},
-        "authorityPath": {"status": "pending", "reason": "A suitable agent-runtime or context-engineering reference surface must be selected.", "evidenceRefs": []}
+        "provenance": {
+          "status": "pending",
+          "reason": "No current trilingual demand capture has been stored.",
+          "evidenceRefs": []
+        },
+        "repeatedDemand": {
+          "status": "pending",
+          "reason": "The cost and retrieval task needs independent high-intent or repeated evidence.",
+          "evidenceRefs": []
+        },
+        "trilingualSerp": {
+          "status": "pending",
+          "reason": "Three locale result sets are not captured.",
+          "evidenceRefs": []
+        },
+        "cleanGap": {
+          "status": "pending",
+          "reason": "English partially overlaps an existing memory-versus-knowledge-base comparison; Mandarin appears unmapped but still needs SERP proof.",
+          "evidenceRefs": []
+        },
+        "firstPartyProof": {
+          "status": "passed",
+          "reason": "Current sources document selective recall, local hybrid retrieval, and maintained pages rather than repeated full-history loading.",
+          "evidenceRefs": [
+            "src/app/(en)/learn/articles.ts",
+            "src/app/(en)/learn/seo-articles.ts"
+          ]
+        },
+        "standaloneUtility": {
+          "status": "passed",
+          "reason": "A retrieval timing and context-budget checklist is useful across tools.",
+          "evidenceRefs": [
+            "standaloneUtility"
+          ]
+        },
+        "internalLinks": {
+          "status": "passed",
+          "reason": "Knowledge-base comparison, build, and source-backed owners are predeclared.",
+          "evidenceRefs": [
+            "internalLinks"
+          ]
+        },
+        "authorityPath": {
+          "status": "pending",
+          "reason": "A suitable agent-runtime or context-engineering reference surface must be selected.",
+          "evidenceRefs": []
+        }
       },
       "wenlanProof": [
-        {"claim": "Wenlan uses local lexical, semantic, and graph retrieval while keeping maintained Markdown artifacts inspectable.", "sourceRef": "src/app/(en)/learn/articles.ts", "verification": "rg -n \"weighted reciprocal-rank|local index|graph context\" src/app/(en)/learn/articles.ts"},
-        {"claim": "Maintained pages reduce repeated raw-source loading but do not replace current code, tests, or documentation.", "sourceRef": "src/app/(en)/learn/articles.ts", "verification": "rg -n \"Do not replace code search|retrieval alone\" src/app/(en)/learn/articles.ts"}
+        {
+          "claim": "Wenlan uses local lexical, semantic, and graph retrieval while keeping maintained Markdown artifacts inspectable.",
+          "sourceRef": "src/app/(en)/learn/articles.ts",
+          "verification": "rg -n \"weighted reciprocal-rank|local index|graph context\" src/app/(en)/learn/articles.ts"
+        },
+        {
+          "claim": "Maintained pages reduce repeated raw-source loading but do not replace current code, tests, or documentation.",
+          "sourceRef": "src/app/(en)/learn/articles.ts",
+          "verification": "rg -n \"Do not replace code search|retrieval alone\" src/app/(en)/learn/articles.ts"
+        }
       ],
       "standaloneUtility": "A neutral policy can tell agents when to retrieve an index, open an exact source, use a maintained page, or skip retrieval because the authoritative file is already in context.",
       "overlapCheck": "English may refresh the current comparison if SERP intent matches. Mandarin net-new routes require independent locale evidence and must not become generic token-optimization pages.",
@@ -410,11 +1163,21 @@
         "https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
         "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work"
       ],
-      "authorityPath": {"type": "context-engineering-reference", "target": "An active coding-agent or context-engineering documentation or discussion surface with an exact retrieval-policy gap", "status": "research-required"},
+      "authorityPath": {
+        "type": "context-engineering-reference",
+        "target": "An active coding-agent or context-engineering documentation or discussion surface with an exact retrieval-policy gap",
+        "status": "research-required"
+      },
       "nextResearchDirection": "Compare retrieval-timing and token-cost SERPs across locales, then corroborate with current agent-runtime issues or docs before deciding whether the English owner is enough.",
       "readout": {
-        "gsc": {"status": "unavailable", "nativeUnit": "page impressions, joined-query impressions, clicks"},
-        "vercel": {"status": "unavailable", "nativeUnit": "target-page visitors and referrer visitors"}
+        "gsc": {
+          "status": "unavailable",
+          "nativeUnit": "page impressions, joined-query impressions, clicks"
+        },
+        "vercel": {
+          "status": "unavailable",
+          "nativeUnit": "target-page visitors and referrer visitors"
+        }
       }
     },
     {
@@ -426,7 +1189,11 @@
       "publicationStatus": "not-published",
       "locales": {
         "en": {
-          "queryFamily": ["AI knowledge base PDF ingestion failed", "scanned PDF AI knowledge base OCR", "long document knowledge base ingestion limits"],
+          "queryFamily": [
+            "AI knowledge base PDF ingestion failed",
+            "scanned PDF AI knowledge base OCR",
+            "long document knowledge base ingestion limits"
+          ],
           "serpEvidence": [],
           "demandEvidence": [],
           "existingOwner": "https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents",
@@ -434,7 +1201,11 @@
           "researchNeeded": "Determine whether troubleshooting ingestion failures is a distinct SERP from the existing build guide, which already states text-PDF and OCR boundaries."
         },
         "zh-TW": {
-          "queryFamily": ["AI 知識庫 PDF 匯入失敗", "掃描 PDF AI 知識庫 OCR", "長文件知識庫匯入限制"],
+          "queryFamily": [
+            "AI 知識庫 PDF 匯入失敗",
+            "掃描 PDF AI 知識庫 OCR",
+            "長文件知識庫匯入限制"
+          ],
           "serpEvidence": [],
           "demandEvidence": [],
           "existingOwner": "https://wenlan.app/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
@@ -442,7 +1213,11 @@
           "researchNeeded": "Inspect Taiwan searches for 匯入, 擷取, 解析, OCR, and long-document failures."
         },
         "zh-CN": {
-          "queryFamily": ["AI 知识库 PDF 导入失败", "扫描 PDF AI 知识库 OCR", "长文档知识库导入限制"],
+          "queryFamily": [
+            "AI 知识库 PDF 导入失败",
+            "扫描 PDF AI 知识库 OCR",
+            "长文档知识库导入限制"
+          ],
           "serpEvidence": [],
           "demandEvidence": [],
           "existingOwner": "https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
@@ -451,18 +1226,64 @@
         }
       },
       "gates": {
-        "provenance": {"status": "pending", "reason": "No trilingual troubleshooting demand capture is stored.", "evidenceRefs": []},
-        "repeatedDemand": {"status": "pending", "reason": "The ingestion failure task needs repeated or high-intent external evidence.", "evidenceRefs": []},
-        "trilingualSerp": {"status": "pending", "reason": "Locale-specific result sets remain unobserved.", "evidenceRefs": []},
-        "cleanGap": {"status": "pending", "reason": "The existing document-build family already documents text files, text-extractable PDFs, scanned-PDF OCR, and unsupported code ingestion; a separate route requires a distinct troubleshooting SERP.", "evidenceRefs": []},
-        "firstPartyProof": {"status": "passed", "reason": "The product page states the supported document types, idempotent resync, scanned-PDF OCR requirement, and source-code boundary.", "evidenceRefs": ["src/app/(en)/learn/seo-articles.ts:build-local-ai-knowledge-base-from-documents"]},
-        "standaloneUtility": {"status": "passed", "reason": "A document-ingestion decision tree and failure checklist is tool-neutral.", "evidenceRefs": ["standaloneUtility"]},
-        "internalLinks": {"status": "passed", "reason": "Document-build, tool-selection, and source-backed routes are predeclared.", "evidenceRefs": ["internalLinks"]},
-        "authorityPath": {"status": "pending", "reason": "A document-processing or OCR authority path has not been selected.", "evidenceRefs": []}
+        "provenance": {
+          "status": "pending",
+          "reason": "No trilingual troubleshooting demand capture is stored.",
+          "evidenceRefs": []
+        },
+        "repeatedDemand": {
+          "status": "pending",
+          "reason": "The ingestion failure task needs repeated or high-intent external evidence.",
+          "evidenceRefs": []
+        },
+        "trilingualSerp": {
+          "status": "pending",
+          "reason": "Locale-specific result sets remain unobserved.",
+          "evidenceRefs": []
+        },
+        "cleanGap": {
+          "status": "pending",
+          "reason": "The existing document-build family already documents text files, text-extractable PDFs, scanned-PDF OCR, and unsupported code ingestion; a separate route requires a distinct troubleshooting SERP.",
+          "evidenceRefs": []
+        },
+        "firstPartyProof": {
+          "status": "passed",
+          "reason": "The product page states the supported document types, idempotent resync, scanned-PDF OCR requirement, and source-code boundary.",
+          "evidenceRefs": [
+            "src/app/(en)/learn/seo-articles.ts:build-local-ai-knowledge-base-from-documents"
+          ]
+        },
+        "standaloneUtility": {
+          "status": "passed",
+          "reason": "A document-ingestion decision tree and failure checklist is tool-neutral.",
+          "evidenceRefs": [
+            "standaloneUtility"
+          ]
+        },
+        "internalLinks": {
+          "status": "passed",
+          "reason": "Document-build, tool-selection, and source-backed routes are predeclared.",
+          "evidenceRefs": [
+            "internalLinks"
+          ]
+        },
+        "authorityPath": {
+          "status": "pending",
+          "reason": "A document-processing or OCR authority path has not been selected.",
+          "evidenceRefs": []
+        }
       },
       "wenlanProof": [
-        {"claim": "Wenlan supports Markdown, text, text-extractable PDFs, folders, and read-only Obsidian vault sources.", "sourceRef": "src/app/(en)/learn/seo-articles.ts", "verification": "rg -n \"text-extractable PDF|Obsidian vault\" src/app/(en)/learn/seo-articles.ts"},
-        {"claim": "Image-only or scanned PDFs require OCR and directory sources do not ingest arbitrary source code.", "sourceRef": "src/app/(en)/learn/seo-articles.ts", "verification": "rg -n \"scanned PDFs need OCR|do not ingest arbitrary source-code\" src/app/(en)/learn/seo-articles.ts"}
+        {
+          "claim": "Wenlan supports Markdown, text, text-extractable PDFs, folders, and read-only Obsidian vault sources.",
+          "sourceRef": "src/app/(en)/learn/seo-articles.ts",
+          "verification": "rg -n \"text-extractable PDF|Obsidian vault\" src/app/(en)/learn/seo-articles.ts"
+        },
+        {
+          "claim": "Image-only or scanned PDFs require OCR and directory sources do not ingest arbitrary source code.",
+          "sourceRef": "src/app/(en)/learn/seo-articles.ts",
+          "verification": "rg -n \"scanned PDFs need OCR|do not ingest arbitrary source-code\" src/app/(en)/learn/seo-articles.ts"
+        }
       ],
       "standaloneUtility": "A neutral troubleshooting flow can classify extractable text, OCR needs, unsupported file types, source authority, and post-ingestion citation checks.",
       "overlapCheck": "All locales already have a document-build owner with the key boundaries. Default to refresh-existing only after the old-page gate unless troubleshooting SERPs clearly separate setup from failure diagnosis.",
@@ -477,11 +1298,21 @@
         "https://wenlan.app/zh-CN/learn/choose-ai-knowledge-base-tool",
         "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work"
       ],
-      "authorityPath": {"type": "document-ingestion-reference", "target": "An active OCR, document-processing, or AI knowledge-base support surface with an exact troubleshooting gap", "status": "research-required"},
+      "authorityPath": {
+        "type": "document-ingestion-reference",
+        "target": "An active OCR, document-processing, or AI knowledge-base support surface with an exact troubleshooting gap",
+        "status": "research-required"
+      },
       "nextResearchDirection": "Capture text-PDF, scanned-PDF, OCR, and ingestion-failure SERPs separately; if the results converge on the current build task, keep one owner and do not add a troubleshooting URL.",
       "readout": {
-        "gsc": {"status": "unavailable", "nativeUnit": "page impressions, joined-query impressions, clicks"},
-        "vercel": {"status": "unavailable", "nativeUnit": "target-page visitors and referrer visitors"}
+        "gsc": {
+          "status": "unavailable",
+          "nativeUnit": "page impressions, joined-query impressions, clicks"
+        },
+        "vercel": {
+          "status": "unavailable",
+          "nativeUnit": "target-page visitors and referrer visitors"
+        }
       }
     },
     {
@@ -493,7 +1324,11 @@
       "publicationStatus": "not-published",
       "locales": {
         "en": {
-          "queryFamily": ["multiple AI agents knowledge base conflicts", "prevent stale shared agent knowledge", "multi agent knowledge write conflict workflow"],
+          "queryFamily": [
+            "multiple AI agents knowledge base conflicts",
+            "prevent stale shared agent knowledge",
+            "multi agent knowledge write conflict workflow"
+          ],
           "serpEvidence": [],
           "demandEvidence": [],
           "existingOwner": "https://wenlan.app/learn/multi-agent-memory-workflow",
@@ -501,7 +1336,11 @@
           "researchNeeded": "Separate shared-memory coordination searches from maintained-knowledge conflict and stale-page searches; inspect whether the existing workflow owns both."
         },
         "zh-TW": {
-          "queryFamily": ["多個 AI agents 共用知識衝突", "避免共享 AI 知識過期", "多代理知識寫入衝突流程"],
+          "queryFamily": [
+            "多個 AI agents 共用知識衝突",
+            "避免共享 AI 知識過期",
+            "多代理知識寫入衝突流程"
+          ],
           "serpEvidence": [],
           "demandEvidence": [],
           "existingOwner": null,
@@ -509,7 +1348,11 @@
           "researchNeeded": "Determine whether Taiwan users search 多代理, 多智能體, AI agents, shared context, or shared knowledge, and whether write conflict is a visible task."
         },
         "zh-CN": {
-          "queryFamily": ["多个 AI agents 共享知识冲突", "避免共享 AI 知识过期", "多智能体知识写入冲突流程"],
+          "queryFamily": [
+            "多个 AI agents 共享知识冲突",
+            "避免共享 AI 知识过期",
+            "多智能体知识写入冲突流程"
+          ],
           "serpEvidence": [],
           "demandEvidence": [],
           "existingOwner": null,
@@ -518,18 +1361,65 @@
         }
       },
       "gates": {
-        "provenance": {"status": "pending", "reason": "No dated trilingual result or community evidence is captured.", "evidenceRefs": []},
-        "repeatedDemand": {"status": "pending", "reason": "The multi-agent conflict problem needs independent repeated or high-intent evidence.", "evidenceRefs": []},
-        "trilingualSerp": {"status": "pending", "reason": "The three language/region result sets are not recorded.", "evidenceRefs": []},
-        "cleanGap": {"status": "pending", "reason": "English partially overlaps multi-agent memory workflow; Mandarin has no owner but requires proof of a distinct knowledge-maintenance task.", "evidenceRefs": []},
-        "firstPartyProof": {"status": "passed", "reason": "Current pages describe shared local access, explicit scope, contradiction review, stale context handling, source-backed pages, and git history.", "evidenceRefs": ["src/app/(en)/learn/seo-articles.ts:multi-agent-memory-workflow", "src/app/(en)/learn/articles.ts"]},
-        "standaloneUtility": {"status": "passed", "reason": "Ownership, conflict, stale-state, and review rules are useful for any multi-agent knowledge system.", "evidenceRefs": ["standaloneUtility"]},
-        "internalLinks": {"status": "passed", "reason": "Multi-agent, source-backed, and LLM Wiki owners are predeclared.", "evidenceRefs": ["internalLinks"]},
-        "authorityPath": {"status": "pending", "reason": "A multi-agent framework or OSS discussion with exact fit must be found.", "evidenceRefs": []}
+        "provenance": {
+          "status": "pending",
+          "reason": "No dated trilingual result or community evidence is captured.",
+          "evidenceRefs": []
+        },
+        "repeatedDemand": {
+          "status": "pending",
+          "reason": "The multi-agent conflict problem needs independent repeated or high-intent evidence.",
+          "evidenceRefs": []
+        },
+        "trilingualSerp": {
+          "status": "pending",
+          "reason": "The three language/region result sets are not recorded.",
+          "evidenceRefs": []
+        },
+        "cleanGap": {
+          "status": "pending",
+          "reason": "English partially overlaps multi-agent memory workflow; Mandarin has no owner but requires proof of a distinct knowledge-maintenance task.",
+          "evidenceRefs": []
+        },
+        "firstPartyProof": {
+          "status": "passed",
+          "reason": "Current pages describe shared local access, explicit scope, contradiction review, stale context handling, source-backed pages, and git history.",
+          "evidenceRefs": [
+            "src/app/(en)/learn/seo-articles.ts:multi-agent-memory-workflow",
+            "src/app/(en)/learn/articles.ts"
+          ]
+        },
+        "standaloneUtility": {
+          "status": "passed",
+          "reason": "Ownership, conflict, stale-state, and review rules are useful for any multi-agent knowledge system.",
+          "evidenceRefs": [
+            "standaloneUtility"
+          ]
+        },
+        "internalLinks": {
+          "status": "passed",
+          "reason": "Multi-agent, source-backed, and LLM Wiki owners are predeclared.",
+          "evidenceRefs": [
+            "internalLinks"
+          ]
+        },
+        "authorityPath": {
+          "status": "pending",
+          "reason": "A multi-agent framework or OSS discussion with exact fit must be found.",
+          "evidenceRefs": []
+        }
       },
       "wenlanProof": [
-        {"claim": "Wenlan documents shared multi-agent workflows while warning that shared memory is not automatic truth.", "sourceRef": "src/app/(en)/learn/seo-articles.ts", "verification": "rg -n \"Multi-agent workflows|Shared memory is not automatic truth\" src/app/(en)/learn/seo-articles.ts"},
-        {"claim": "Source-backed pages retain citations, revisions, stale state, review, and local git history.", "sourceRef": "src/app/(en)/learn/articles.ts", "verification": "rg -n \"citations, revisions|stale state|local git history\" src/app/(en)/learn/articles.ts"}
+        {
+          "claim": "Wenlan documents shared multi-agent workflows while warning that shared memory is not automatic truth.",
+          "sourceRef": "src/app/(en)/learn/seo-articles.ts",
+          "verification": "rg -n \"Multi-agent workflows|Shared memory is not automatic truth\" src/app/(en)/learn/seo-articles.ts"
+        },
+        {
+          "claim": "Source-backed pages retain citations, revisions, stale state, review, and local git history.",
+          "sourceRef": "src/app/(en)/learn/articles.ts",
+          "verification": "rg -n \"citations, revisions|stale state|local git history\" src/app/(en)/learn/articles.ts"
+        }
       ],
       "standaloneUtility": "A neutral operating model can assign source ownership, isolate write scopes, expose conflicts, review superseding claims, and preserve an audit trail.",
       "overlapCheck": "English may belong to the existing multi-agent workflow if users search shared memory rather than maintained knowledge. Mandarin routes are gaps only after locale-specific SERP evidence proves the task.",
@@ -544,11 +1434,21 @@
         "https://wenlan.app/zh-CN/learn/distilled-wiki-pages-ai-memory",
         "https://wenlan.app/zh-CN/learn/choose-ai-knowledge-base-tool"
       ],
-      "authorityPath": {"type": "multi-agent-operations-reference", "target": "An active multi-agent framework, issue, or discussion with a maintained-knowledge conflict gap", "status": "research-required"},
+      "authorityPath": {
+        "type": "multi-agent-operations-reference",
+        "target": "An active multi-agent framework, issue, or discussion with a maintained-knowledge conflict gap",
+        "status": "research-required"
+      },
       "nextResearchDirection": "Compare shared memory, shared context, multi-agent knowledge, conflict, and stale-state searches in each locale; then corroborate with active framework issues before assigning an owner.",
       "readout": {
-        "gsc": {"status": "unavailable", "nativeUnit": "page impressions, joined-query impressions, clicks"},
-        "vercel": {"status": "unavailable", "nativeUnit": "target-page visitors and referrer visitors"}
+        "gsc": {
+          "status": "unavailable",
+          "nativeUnit": "page impressions, joined-query impressions, clicks"
+        },
+        "vercel": {
+          "status": "unavailable",
+          "nativeUnit": "target-page visitors and referrer visitors"
+        }
       }
     }
   ]

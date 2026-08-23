@@ -168,11 +168,17 @@ const requiredLocalizedLearnPaths = [
   "/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
   "/zh-TW/learn/choose-ai-knowledge-base-tool",
   "/zh-CN/learn/choose-ai-knowledge-base-tool",
+  "/zh-TW/learn/verify-ai-knowledge-base-citations",
+  "/zh-CN/learn/verify-ai-knowledge-base-citations",
 ];
 const requiredLocalizedLearnLocs = requiredLocalizedLearnPaths.map(
   (path) => `https://wenlan.app${path}`,
 );
 const expectedArticleDates = new Map([
+  [
+    "/learn/verify-ai-knowledge-base-citations",
+    { datePublished: "2026-08-23", dateModified: "2026-08-23" },
+  ],
   [
     "/learn/choose-ai-knowledge-base-tool",
     { datePublished: "2026-08-02", dateModified: "2026-08-02" },
@@ -205,6 +211,14 @@ const expectedArticleDates = new Map([
     "/zh-CN/learn/choose-ai-knowledge-base-tool",
     { datePublished: "2026-08-02", dateModified: "2026-08-02" },
   ],
+  [
+    "/zh-TW/learn/verify-ai-knowledge-base-citations",
+    { datePublished: "2026-08-23", dateModified: "2026-08-23" },
+  ],
+  [
+    "/zh-CN/learn/verify-ai-knowledge-base-citations",
+    { datePublished: "2026-08-23", dateModified: "2026-08-23" },
+  ],
 ]);
 const requiredLocalizedBuiltHtmlPages = requiredLocalizedLearnPaths.map((path) => ({
   path: `${path.slice(1)}.html`,
@@ -225,6 +239,7 @@ const requiredBuiltSitemapLocs = [
   "https://wenlan.app/learn/wenlan-vs-superlocal-memory",
   "https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents",
   "https://wenlan.app/learn/choose-ai-knowledge-base-tool",
+  "https://wenlan.app/learn/verify-ai-knowledge-base-citations",
   ...requiredLocalizedLearnLocs,
   "https://wenlan.app/docs/configuration",
   "https://wenlan.app/docs/product-matrix",
@@ -288,6 +303,13 @@ const requiredBuiltHtmlPages = [
     datePublished: "2026-08-02",
     dateModified: "2026-08-02",
   },
+  {
+    path: "learn/verify-ai-knowledge-base-citations.html",
+    canonical: "https://wenlan.app/learn/verify-ai-knowledge-base-citations",
+    type: "Article",
+    datePublished: "2026-08-23",
+    dateModified: "2026-08-23",
+  },
   ...requiredLocalizedBuiltHtmlPages,
   {
     path: "docs/configuration.html",
@@ -320,6 +342,7 @@ const requiredDeployedUrls = [
   "/learn/wenlan-vs-superlocal-memory",
   "/learn/build-local-ai-knowledge-base-from-documents",
   "/learn/choose-ai-knowledge-base-tool",
+  "/learn/verify-ai-knowledge-base-citations",
   ...requiredLocalizedLearnPaths,
   "/docs/configuration",
   "/docs/product-matrix",
@@ -1428,8 +1451,8 @@ test("deployed technical SEO checker verifies robots, sitemap, key pages, utilit
     );
 
     assert.match(stdout, /robots ok/);
-    assert.match(stdout, /sitemap locs ok: 24/);
-    assert.match(stdout, /key pages ok: 24/);
+    assert.match(stdout, /sitemap locs ok: 27/);
+    assert.match(stdout, /key pages ok: 27/);
     assert.match(stdout, /utility noindex headers ok: 6/);
     assert.match(stdout, /redirects ok: 25/);
     assert.match(stdout, /bridge host redirects ok: 6/);
@@ -1520,7 +1543,7 @@ test("deployed technical SEO checker does not require unshipped local internal l
         { cwd: repoRoot },
       );
 
-      assert.match(stdout, /key pages ok: 24/);
+      assert.match(stdout, /key pages ok: 27/);
     },
   );
 });
@@ -2030,7 +2053,7 @@ test("built technical SEO checker verifies compiled redirects, headers, and site
     assert.match(stdout, /noindex headers ok: 7/);
     assert.match(stdout, /sitemap required locs ok: 24/);
     assert.match(stdout, /html page checks ok: 24/);
-    assert.match(stdout, /all html FAQPage absent ok: 25/);
+    assert.match(stdout, /all html FAQPage absent ok: 28/);
     assert.match(stdout, /old URLs absent from sitemap/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });

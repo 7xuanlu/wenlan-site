@@ -675,15 +675,20 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-23-coding-agent-source-backed-knowledge-base` is locally
-  implemented and verified, remains unpublished, and consumes the single
+  `EXP-2026-08-23-citation-verification-locales` is locally implemented,
+  verified, publication-approved, and unpublished, so it consumes the single
   production-in-flight slot. It adds one English, zh-TW, and zh-CN canonical
-  for the coding-agent source-backed project-knowledge task. At
-  `2026-08-23T17:41:09Z`, the controller recorded the user's explicit approval
+  for the claim-to-evidence citation diagnostic task. At
+  `2026-08-23T22:08:21Z`, the controller recorded the user's explicit approval
   for the exact commit, push, PR creation, merge, automatic Vercel deployment,
   and read-only production-verification scope. Request indexing, GSC
   validation, external publication, paid actions, synthetic events, analytics
   mutation, and metric-definition changes remain excluded.
+  `EXP-2026-08-23-coding-agent-source-backed-knowledge-base` is live,
+  production-verified, and measuring; it no longer consumes the production
+  slot. PR #136 merged at `2026-08-23T18:04:33Z` as
+  `e3ea912d458bfbe7c0ad864872effe48a9ca9c97`, and Vercel production completed
+  at `2026-08-23T18:05:09Z` as deployment `6051054690`.
   Historical experiment
   EXP-2026-08-08-source-backed-ai-knowledge-base-snippet-refresh is live,
   production-verified, and measuring for the existing English source-backed AI
@@ -848,7 +853,7 @@ action returns for separate explicit approval.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 24.
+- Active experiments: 25.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -1234,21 +1239,20 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-23-coding-agent-source-backed-knowledge-base` is locally
-implemented and verified, publication-approved but still unpublished, and
-consumes the single website preparation slot. It adds
-one English, zh-TW, and zh-CN canonical for the same task: give Codex or
-another coding agent a source-backed project knowledge base while keeping
-`AGENTS.md` or `CLAUDE.md` short and the current repository authoritative.
+`EXP-2026-08-23-citation-verification-locales` is locally implemented and
+verified, publication-approved but still unpublished, and consumes the single
+website preparation slot. It adds one English, zh-TW, and zh-CN canonical for
+the same diagnostic task: start with one suspect RAG or AI knowledge-base
+answer and verify each important claim against the cited page, chunk, source
+ID, and revision.
 
 The family passed the complete trilingual scenario gate from separate
-English, Taiwan, and Simplified-Chinese result sets, repeated official and
-community evidence, a clean task gap, maintained Wenlan product proof, three
-same-locale contextual inbound paths, standalone utility, and one inspectable
-small authority path. The existing `/learn/wenlan-codex-workflow` remains the
-owner for session context, capture, recall, and handoff; the existing source-
-backed guide remains the owner for generic knowledge architecture. Neither is
-rewritten by this experiment.
+English, Taiwan, and Simplified-Chinese result sets, repeated issue and
+practitioner evidence, a clean diagnostic gap, maintained Wenlan product
+proof, three same-locale contextual inbound paths, standalone utility, and one
+inspectable authority path. The existing source-backed guide remains the owner
+for architecture and maintenance; this new family owns wrong-page,
+mismatched-chunk, stale-version, and unsupported-claim diagnosis.
 
 The latest authenticated baseline remains source-separated: GSC property
 totals are 8 clicks and 1,005 impressions, visible-query totals are 2 clicks
@@ -1261,10 +1265,11 @@ click for success. The immutable experiment fields and approval boundary are
 in `EXPERIMENTS.md`; the editable evidence and overlap decision are in
 `docs/seo-scenario-backlog.json`.
 
-The user later approved the exact commit, push, PR creation, merge, automatic
-Vercel deployment, and read-only production-verification scope. Request
-indexing, GSC validation, external publication, paid action, synthetic events,
-analytics mutation, and metric-definition changes remain excluded.
+The user approved the exact commit, push, PR creation, merge, automatic Vercel
+deployment, and read-only production-verification scope at
+`2026-08-23T22:08:21Z`. Request indexing, GSC validation, external publication,
+paid action, synthetic events, analytics mutation, and metric-definition
+changes remain excluded.
 
 #### Historical pre-final experiment records
 
@@ -3282,3 +3287,35 @@ unchanged.
 - Excluded actions: no content experiment, indexing request, GSC validation,
   analytics mutation, paid action, external message, directory submission,
   synthetic event, or metric-definition change occurred.
+
+## Campaign control: citation-verification trilingual publication at 2026-08-23T22:08:21Z
+
+- Record type: publication-approved website candidate; production completion
+  and measurement have not started.
+- Exact task: start from one suspect AI knowledge-base or RAG answer, map each
+  important claim to the cited page, chunk, source ID, and revision, then mark
+  the claim supported, partial, unsupported, or stale. This remains distinct
+  from the existing source-backed architecture owner.
+- Exact routes:
+  `/learn/verify-ai-knowledge-base-citations`,
+  `/zh-TW/learn/verify-ai-knowledge-base-citations`, and
+  `/zh-CN/learn/verify-ai-knowledge-base-citations`. Each has one locale-
+  natural intent, a self-canonical URL, reciprocal hreflang, Article and
+  BreadcrumbList schema, maintained references, visible FAQ without FAQPage
+  JSON-LD, and contextual inbound links from the source-backed, tool-selection,
+  and LLM Wiki owners.
+- Content inventory: the source tree contains 48 English Learn pages and 7
+  pages in each Mandarin locale after this family. The remaining 41 English
+  slugs missing in each Mandarin locale are an audit queue, not an automatic
+  translation quota; the complete inventory and priority rules are stored in
+  `docs/seo-audits/2026-08-23-chinese-learn-gap-priority.md`.
+- Authority path: after this family is live and Qi-Xuan Lu's existing
+  `Danielskry/Awesome-RAG` PR #142 resolves, one neutral guide reference may be
+  proposed to that repository's Production & Best Practices section. Do not
+  open a concurrent promotional PR, message maintainers, or assume acceptance.
+- Approval: at `2026-08-23T22:08:21Z`, the user approved the exact commit,
+  push, PR, merge, automatic Vercel deployment, and read-only production
+  verification scope.
+- Excluded actions: request indexing, GSC validation, analytics mutation,
+  external publication, paid action, synthetic events, and metric-definition
+  changes remain excluded.

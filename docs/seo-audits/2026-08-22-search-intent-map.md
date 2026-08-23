@@ -1,6 +1,6 @@
 # Wenlan Search Intent Map
 
-Captured at: 2026-08-23T07:58:56.818Z
+Captured at: 2026-08-23T22:10:51.568Z
 
 This is a deterministic planning and ownership contract for every canonical URL in the sitemap. A primary search phrase identifies the page owner; it is not keyword volume, a ranking promise, or a claim that Google uses the site's meta-keywords field. Locale variants may own the same concept in different languages.
 
@@ -8,10 +8,10 @@ This is a deterministic planning and ownership contract for every canonical URL 
 
 | Locale | Mapped sitemap URLs |
 | --- | ---: |
-| English | 99 |
-| zh-TW | 12 |
-| zh-CN | 12 |
-| Total | 123 |
+| English | 100 |
+| zh-TW | 13 |
+| zh-CN | 13 |
+| Total | 126 |
 
 The contract fails when a sitemap URL has no owner, one URL has multiple records, a locale has duplicate primary searches or titles, or required intent fields are empty. Technical canonical, hreflang, indexability, and rendering checks remain separate regression gates.
 
@@ -49,7 +49,7 @@ The contract fails when a sitemap URL has no owner, one URL has multiple records
 | /docs/glossary | docs | reference | Wenlan glossary | Define Wenlan product terms including memories, handoffs, distilled pages, spaces, daemon, MCP connector, Markdown projection, local index, provenance, revisions, and retrieval metrics. |
 | /docs/http-api | docs | reference | Wenlan HTTP API | Reference Wenlan's local daemon HTTP API surfaces for health, setup, memory store/search, context, review, distill, model setup, and Anthropic key setup. |
 | /docs/import-and-portability | docs | reference | Wenlan migration | Migrate selected durable notes into Wenlan, understand the current no-bulk-import boundary, and read Wenlan's projected Markdown pages and session logs outside the daemon. |
-| /docs/knowledge-graph | docs | reference | Wenlan knowledge graph | Learn how Wenlan's knowledge graph uses entities, relations, observations, post-ingest enrichment, imported wikilinks, and graph context during retrieval. |
+| /docs/knowledge-graph | docs | reference | Wenlan knowledge graph | Learn how an AI agent knowledge graph links entities, relations, observations, sources, and maintained pages for inspectable retrieval. |
 | /docs/local-git-history | docs | reference | Wenlan git history | Learn how Wenlan uses a real local git repository under ~/.wenlan/.git to version readable pages, sessions, handoffs, and status files. |
 | /docs/mcp-clients | docs | reference | MCP client setup | Connect local clients with wenlan connect, or connect ChatGPT and Claude.ai through Wenlan's Streamable HTTP MCP Remote Access path. |
 | /docs/memory-types | docs | reference | Wenlan memory types | Reference Wenlan memory_type values for identity, preference, decision, lesson, gotcha, and fact, with selection rules, stability tiers, and aliases. |
@@ -69,7 +69,7 @@ The contract fails when a sitemap URL has no owner, one URL has multiple records
 | /docs/typed-clients | docs | reference | wenlan-types | Learn when to use the wenlan-types crate for Wenlan daemon request and response types, what stability to expect before 1.0, and why the local daemon remains the boundary. |
 | /docs/updates-and-uninstall | docs | reference | update Wenlan | Learn how to update Wenlan's local runtime, verify status with wenlan doctor, handle MCP client restarts, and uninstall the daemon safely. |
 | /docs/upgrade-notes | docs | reference | Wenlan upgrade notes | Upgrade Wenlan safely across plugin, npm setup, MCP connector, daemon service, spaces, platform support, and local data paths. |
-| /download | core | transactional | download Wenlan | Download the current Wenlan CLI, local daemon, and MCP connector for Windows x64, macOS Apple silicon, Linux x64, or Linux ARM64. |
+| /download | core | transactional | download Wenlan | Download the Wenlan desktop app for Windows x64 or macOS Apple silicon, or install the headless CLI, local daemon, and MCP connector for Windows, macOS, and Linux. |
 | /learn | core | informational-hub | AI knowledge base guides | Build a source-backed AI knowledge base with maintained LLM wiki pages, citations, review, refresh state, and local workflows for AI agents. |
 | /learn/ai-agent-handoff-loop | learn | task-completion | AI agent handoff | Learn how the AI agent handoff loop helps coding agents and AI tools carry decisions, lessons, project context, and next steps across sessions. |
 | /learn/ai-agent-memory-local-vs-cloud | learn | informational | local AI agent memory | Compare local-first AI agent memory with hosted memory services and learn when Wenlan's local daemon is the right fit. |
@@ -95,13 +95,14 @@ The contract fails when a sitemap URL has no owner, one URL has multiple records
 | /learn/local-first-ai-memory | learn | informational | local-first AI work memory | Learn why local-first AI work memory matters for privacy, ownership, and long-running work. Wenlan keeps work context visible, correctable, and on your machine. |
 | /learn/local-git-history-ai-memory | learn | informational | git history AI memory artifacts | Wenlan keeps real local git history for readable pages, session logs, and project status Markdown so AI work artifacts can be inspected and recovered. |
 | /learn/markdown-local-index-ai-memory | learn | informational | readable AI memory | Learn why Wenlan combines a daemon-owned local retrieval store with human-readable artifacts instead of hiding AI memory inside an opaque database. |
-| /learn/mcp-memory-server | learn | informational | MCP memory server | Connect Claude Code, Codex, Cursor, ChatGPT, Claude.ai, and other clients to Wenlan with local or Streamable HTTP MCP. |
+| /learn/mcp-memory-server | learn | informational | MCP knowledge base server | Learn what an MCP knowledge base server should expose, how it differs from session memory, and how to verify sources, citations, and freshness across AI clients. |
 | /learn/mcp-memory-server-localhost-7878 | learn | informational | 127.0.0.1 7878 Wenlan | Debug Wenlan's local MCP memory server on 127.0.0.1:7878: daemon status, wenlan-mcp config, client restart, and doctor checks. |
 | /learn/multi-agent-memory-workflow | learn | task-completion | multi-agent memory workflow | Use Wenlan's daemon, MCP tools, spaces, capture, recall, handoff, and distill to coordinate multi-agent AI work locally. |
 | /learn/persistent-project-context-for-ai-agents | learn | informational | persistent project context | Learn what persistent project context means for AI agents and how Wenlan keeps decisions, lessons, handoffs, and pages available locally. |
 | /learn/project-scope-ai-memory | learn | informational | what Wenlan is not | Wenlan scopes to local-first AI work memory. It is not a life OS, workflow suite, generic memory infrastructure SDK, or one-off chat tool. |
 | /learn/review-before-trust-ai-memory | learn | informational | stale AI agent memory | Fix stale AI agent memory by tracing the source, checking scope, reviewing contradictions, preserving corrections, and deleting only records that should not remain. |
 | /learn/source-backed-wiki-pages-ai-work | learn | informational | source backed AI knowledge base | Build a source-backed AI knowledge base with trusted sources, atomic knowledge, maintained LLM-wiki pages, citations, review, and refresh. |
+| /learn/verify-ai-knowledge-base-citations | learn | task-completion | verify AI knowledge base citations | Check AI knowledge-base citations claim by claim. Diagnose wrong pages, mismatched chunks, stale revisions, and unsupported RAG answers. |
 | /learn/wenlan-claude-desktop-workflow | learn | task-completion | Wenlan Claude Desktop workflow | Claude Desktop can use Wenlan through MCP to capture planning decisions, recall local context, and share memory with coding tools. |
 | /learn/wenlan-codex-workflow | learn | task-completion | Wenlan Codex workflow | A practical Wenlan workflow for Codex users: connect MCP, load context, capture decisions, recall project memory, and hand off to future sessions. |
 | /learn/wenlan-cursor-workflow | learn | task-completion | Wenlan Cursor workflow | A Cursor workflow for Wenlan: connect MCP, load context, capture decisions, recall prior work, and share memory with Claude Code or Codex. |
@@ -127,13 +128,14 @@ The contract fails when a sitemap URL has no owner, one URL has multiple records
 | /zh-TW/about | core | informational | 文瀾是什麼 | Wenlan 是 open-source、local-first 的 AI 工作 LLM wiki，由 AI 代理建立，並以來源為根基。 |
 | /zh-TW/docs | core | navigational | 文瀾文件 | 安裝 Wenlan，學習 AI 工作記憶循環，理解有來源依據的 wiki 頁面、provenance、retrieval 和 MCP clients 如何配合。 |
 | /zh-TW/docs/get-started | core | task-completion | 安裝文瀾 | 安裝 Wenlan，連接 Claude Code、Codex、ChatGPT、Claude.ai 或其他 MCP client，再驗證第一次 capture 與 recall round trip。 |
-| /zh-TW/download | core | transactional | 下載文瀾 | 下載最新版 Wenlan CLI、本地 daemon 與 MCP connector，支援 Windows x64、macOS Apple silicon、Linux x64 與 Linux ARM64。 |
+| /zh-TW/download | core | transactional | 下載文瀾 | 下載 Windows x64 或 macOS Apple silicon 的 Wenlan 桌面 App，或安裝支援 Windows、macOS 與 Linux 的 headless CLI、本地 daemon 與 MCP connector。 |
 | /zh-TW/learn | core | informational-hub | AI 知識庫指南 | 建立有來源、可審查、會持續更新的 AI 知識庫，並用 Wenlan 將可信資料整理成 AI agent 可重用的 LLM Wiki 頁面。 |
 | /zh-TW/learn/build-local-ai-knowledge-base-from-documents | learn | task-completion | 建立 AI 知識庫 | 用 Markdown、文字檔、文字型 PDF、資料夾或 Obsidian vault 建立本地 AI 知識庫，並驗證同步、來源與維護型頁面。 |
 | /zh-TW/learn/choose-ai-knowledge-base-tool | learn | task-completion | AI 知識庫工具 | 用 8 個實際測試選擇 AI 知識庫工具，比較文件問答、RAG、本地筆記與跨 AI agent 維護知識的差異。 |
 | /zh-TW/learn/coding-agent-source-backed-knowledge-base | learn | task-completion | Codex 知識庫 | 用 AGENTS.md、專案文件、引用、按需檢索與驗證，為 Codex、Claude Code 或其他 coding agent 建立有來源的專案知識庫。 |
 | /zh-TW/learn/distilled-wiki-pages-ai-memory | learn | informational | LLM Wiki 知識庫 | 了解 Karpathy LLM Wiki 的架構、它和 RAG 的差異，以及來源頁面、Obsidian、驗證與持續更新如何配合。 |
 | /zh-TW/learn/source-backed-wiki-pages-ai-work | learn | informational | AI 知識庫 | 建立有來源的 AI 知識庫：分開可信來源、原子知識與 LLM Wiki 頁面，並用 Wenlan 保留引用、更新與審查狀態。 |
+| /zh-TW/learn/verify-ai-knowledge-base-citations | learn | task-completion | AI 知識庫引用對不上 | 逐項驗證 AI 知識庫引用，診斷錯頁、錯片段、過期版本與無依據回答，並建立可重複的來源檢查流程。 |
 | /zh-TW/learn/wenlan-vs-obsidian-ai-memory | learn | commercial-investigation | Obsidian Claude Code | 了解 Claude Code 何時直接讀 Obsidian vault 就夠、IDE 與 MCP bridge 增加什麼，以及 AI 知識庫何時需要來源、更新與審查流程。 |
 
 ## zh-CN
@@ -144,11 +146,12 @@ The contract fails when a sitemap URL has no owner, one URL has multiple records
 | /zh-CN/about | core | informational | 文澜是什么 | Wenlan 是 open-source、local-first 的 AI 工作 LLM wiki，由 AI 代理建立，并以来源为根基。 |
 | /zh-CN/docs | core | navigational | 文澜文档 | 安装 Wenlan，学习 AI 工作记忆循环，理解有来源依据的 wiki 页面、provenance、retrieval 和 MCP clients 如何配合。 |
 | /zh-CN/docs/get-started | core | task-completion | 安装文澜 | 安装 Wenlan，连接 Claude Code、Codex、ChatGPT、Claude.ai 或其他 MCP client，再验证第一次 capture 与 recall round trip。 |
-| /zh-CN/download | core | transactional | 下载文澜 | 下载最新版 Wenlan CLI、本地 daemon 与 MCP connector，支持 Windows x64、macOS Apple silicon、Linux x64 与 Linux ARM64。 |
+| /zh-CN/download | core | transactional | 下载文澜 | 下载 Windows x64 或 macOS Apple silicon 的 Wenlan 桌面 App，或安装支持 Windows、macOS 与 Linux 的 headless CLI、本地 daemon 与 MCP connector。 |
 | /zh-CN/learn | core | informational-hub | AI 知识库指南 | 建立有来源、可审核、会持续更新的 AI 知识库，并用 Wenlan 把可信资料整理成 AI agent 可复用的 LLM Wiki 页面。 |
 | /zh-CN/learn/build-local-ai-knowledge-base-from-documents | learn | task-completion | 搭建 AI 知识库 | 用 Markdown、文本文件、文本型 PDF、文件夹或 Obsidian vault 搭建本地 AI 知识库，并验证同步、来源与维护型页面。 |
 | /zh-CN/learn/choose-ai-knowledge-base-tool | learn | task-completion | AI 知识库工具 | 用 8 个实际测试选择 AI 知识库工具，比较文档问答、RAG、本地笔记与跨 AI agent 维护知识的区别。 |
 | /zh-CN/learn/coding-agent-source-backed-knowledge-base | learn | task-completion | Codex 知识库 | 用 AGENTS.md、项目文档、引用、按需检索与验证，为 Codex、Claude Code 或其他 coding agent 建立有来源的项目知识库。 |
 | /zh-CN/learn/distilled-wiki-pages-ai-memory | learn | informational | LLM Wiki 知识库 | 了解 Karpathy LLM Wiki 的架构、它和 RAG 的区别，以及来源页面、Obsidian、校验与持续更新如何配合。 |
 | /zh-CN/learn/source-backed-wiki-pages-ai-work | learn | informational | AI 知识库 | 建立有来源的 AI 知识库：分开可信来源、原子知识与 LLM Wiki 页面，并用 Wenlan 保留引用、更新与审核状态。 |
+| /zh-CN/learn/verify-ai-knowledge-base-citations | learn | task-completion | AI 知识库引用对不上 | 逐项验证 AI 知识库引用，诊断错页、错片段、过期版本与无依据回答，并建立可重复的来源检查流程。 |
 | /zh-CN/learn/wenlan-vs-obsidian-ai-memory | learn | commercial-investigation | Obsidian Claude Code | 了解 Claude Code 何时直接读取 Obsidian vault 就够、IDE 与 MCP bridge 增加什么，以及 AI 知识库何时需要来源、更新与审核流程。 |
