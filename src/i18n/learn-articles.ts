@@ -249,6 +249,7 @@ const zhTWArticles = {
       },
     ],
     relatedSlugs: [
+      "coding-agent-source-backed-knowledge-base",
       "wenlan-vs-obsidian-ai-memory",
       "source-backed-wiki-pages-ai-work",
       "ai-memory-provenance",
@@ -379,6 +380,7 @@ const zhTWArticles = {
       },
     ],
     relatedSlugs: [
+      "coding-agent-source-backed-knowledge-base",
       "wenlan-vs-obsidian-ai-memory",
       "distilled-wiki-pages-ai-memory",
       "review-before-trust-ai-memory",
@@ -605,6 +607,138 @@ const zhTWArticles = {
       body: "保留 Obsidian 作為人類可讀的知識面；答案需跨工具保持目前、可追溯且可審查時，再用 Wenlan 維護具引用的 Pages。",
     },
   },
+  "coding-agent-source-backed-knowledge-base": {
+    slug: "coding-agent-source-backed-knowledge-base",
+    eyebrow: "Coding agent 知識",
+    category: "Workflows",
+    title: "如何讓 Codex 使用有來源的專案知識庫",
+    description:
+      "把 AGENTS.md、原始程式與文件、維護型知識頁分工，讓 Codex 按需取得有來源、可審查的專案知識。",
+    metaTitle: "Codex 有來源專案知識庫工作流 | Wenlan",
+    metaDescription:
+      "用 AGENTS.md、專案文件、引用、按需檢索與驗證，為 Codex、Claude Code 或其他 coding agent 建立有來源的專案知識庫。",
+    keywords: [
+      "Codex 知識庫",
+      "Codex 專案知識",
+      "coding agent 知識庫",
+      "AI agent 專案知識庫",
+      "AGENTS.md 知識庫",
+      "Claude Code 知識庫",
+      "有來源的專案知識庫",
+    ],
+    publishedAt: "2026-08-23",
+    updatedAt: "2026-08-23",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分鐘閱讀",
+    audience: "希望 Codex、Claude Code 或其他 coding agent 能重用可信專案知識的開發者",
+    heroBullets: [
+      "AGENTS.md 或 CLAUDE.md 只放每次都必須載入的短規則。",
+      "程式、測試、規格與第一方文件繼續作為單一事實來源。",
+      "維護型知識頁只保存需要跨檔整理、附來源並反覆重用的結論。",
+    ],
+    sections: [
+      {
+        heading: "一句話做法",
+        body: [
+          "把 coding agent 的專案知識分成三層：AGENTS.md 或 CLAUDE.md 放短而穩定的操作規則；程式、測試、規格與文件保留為單一事實來源；有來源的知識庫保存需要跨檔整理、引用與審查的目前答案。",
+          "Agent 接到任務時先讀最小規則，再按問題取用一個相關 Page，最後回到引用、程式與測試驗證。這比把全部內容塞進 instruction file，或每次重掃整個 repo 更容易保持目前與可檢查。",
+        ],
+      },
+      {
+        heading: "AGENTS.md、CLAUDE.md 與知識庫各做什麼",
+        body: [
+          "AGENTS.md 適合放 build、test、branch、權限與禁區等 agent 無法只靠讀 code 推出的規則；Claude Code 使用者可用 CLAUDE.md 表達同一類專案指引。檔案越長，越容易擠掉目前任務真正需要的 context。",
+          "知識庫不應複製 repo。架構理由、外部限制、跨檔結論、決策歷史與已驗證的操作手冊，才是適合維護成有引用 Page 的內容。程式與測試一旦改變，Page 應進入 stale 或 review，而不是繼續假裝正確。",
+        ],
+        bullets: [
+          "每次載入：非顯而易見的專案規則與安全邊界。",
+          "單一事實來源：目前程式、測試、規格與第一方文件。",
+          "按需知識：有來源、可審查、需要跨會話重用的結論。",
+        ],
+      },
+      {
+        heading: "建立 coding agent 可用的有來源工作流",
+        body: [
+          "先選一個會重複詢問的小主題，例如 release 流程或資料遷移邊界。完成 Wenlan 與 Codex 連線後，只加入能回答該主題的 Markdown、文字或可擷取文字 PDF；不要一開始匯入整個 repository。",
+          "把來源蒸餾成 Page 後，檢查重要說法能回到來源，再跑 lint 與 review。只有 MCP 連線的 client 應使用該 client 顯示的 Wenlan tools；下列 slash commands 適用於已安裝 Wenlan plugin 的 client。",
+        ],
+        code: {
+          label: "一個有界的 Codex 專案知識流程",
+          code: "wenlan status\nwenlan connect codex\nwenlan sources add ~/project/docs\n/distill <專案主題>\n/pages <專案主題>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "每次任務只取用足夠的 context",
+        body: [
+          "不要在每次 session 開始時重播全部文件。先用任務名稱、錯誤症狀或模組查詢最相關的 Page，再沿引用打開真正需要的來源。若答案直接存在目前 code 或 test，就讓 agent 讀原檔，不要多繞一層摘要。",
+          "任務結束時只保存能影響未來工作的決策、限制、修正或交接。聊天摘要、暫時探索與 agent 自己可以從 repo 推出的內容，不應自動升格為專案知識。",
+        ],
+      },
+      {
+        heading: "如何驗證引用與不支援的答案",
+        body: [
+          "準備一個來源中有答案的問題、一個必須跨兩份文件才能回答的問題，以及一個來源沒有答案的問題。前兩者應顯示支持材料；最後一個應保持未知，不應因為文字流暢就補成確定結論。",
+          "修改其中一份來源並重新同步，再確認受影響 Page 能被標成需要刷新或產生可審查修訂。這個 acceptance test 比『agent 看起來記得』更能證明知識庫有用。",
+        ],
+      },
+      {
+        heading: "什麼時候不需要另一套知識庫",
+        body: [
+          "如果資訊已在一份短而目前的 README、規格或測試裡，coding agent 直接讀來源通常更準。只有當同一問題跨多個來源、反覆出現，且重建答案的成本明顯時，才值得維護額外的 source-backed Page。",
+          "這條邊界即使不使用 Wenlan 也成立：先維持權威來源，再決定哪些結論值得做成可查詢、可引用、可刷新的專案知識。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "AGENTS.md 應該放完整專案知識嗎？",
+        answer:
+          "不應該。它只需放 agent 每次都要知道、又無法從 repo 自己推出的規則。較長的架構說明、決策與外部限制應留在權威文件或按需知識頁。",
+      },
+      {
+        question: "知識庫可以取代程式與測試嗎？",
+        answer:
+          "不可以。程式、測試、規格與核准的第一方文件仍是權威；知識頁應保留引用，並在來源改變時進入 stale、refresh 或 review。",
+      },
+      {
+        question: "Claude Code 也能用同一套方法嗎？",
+        answer:
+          "可以。工具的指令入口不同，但短規則、權威來源、按需 Page、引用與驗證的分層相同；Wenlan 也能讓多個已連接 client 使用同一套本地知識。",
+      },
+    ],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "build-local-ai-knowledge-base-from-documents",
+      "choose-ai-knowledge-base-tool",
+      "distilled-wiki-pages-ai-memory",
+    ],
+    officialReferences: [
+      {
+        label: "OpenAI harness engineering",
+        href: "https://openai.com/index/harness-engineering/",
+      },
+      {
+        label: "AGENTS.md 開放格式",
+        href: "https://agents.md/",
+      },
+      {
+        label: "Wenlan 與 AI client 設定",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md",
+      },
+      {
+        label: "Wenlan 有來源 Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "Wenlan 審查與信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+    ],
+    cta: {
+      heading: "先讓 Codex 驗證一個專案主題",
+      body: "連接 Codex、加入一組可檢查來源，再確認 Page 的引用、刷新與審查都從屬於目前 repo。",
+    },
+  },
   "build-local-ai-knowledge-base-from-documents": {
     slug: "build-local-ai-knowledge-base-from-documents",
     eyebrow: "實作",
@@ -704,6 +838,7 @@ const zhTWArticles = {
       },
     ],
     relatedSlugs: [
+      "coding-agent-source-backed-knowledge-base",
       "source-backed-wiki-pages-ai-work",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
@@ -827,6 +962,7 @@ const zhTWArticles = {
       },
     ],
     relatedSlugs: [
+      "coding-agent-source-backed-knowledge-base",
       "build-local-ai-knowledge-base-from-documents",
       "source-backed-wiki-pages-ai-work",
       "distilled-wiki-pages-ai-memory",
@@ -1214,6 +1350,7 @@ const zhCNArticles = {
       },
     ],
     relatedSlugs: [
+      "coding-agent-source-backed-knowledge-base",
       "wenlan-vs-obsidian-ai-memory",
       "distilled-wiki-pages-ai-memory",
       "review-before-trust-ai-memory",
@@ -1441,6 +1578,139 @@ const zhCNArticles = {
       body: "保留 Obsidian 作为人可读的知识面；答案需跨工具保持当前、可追溯且可审核时，再用 Wenlan 维护带引用的 Pages。",
     },
   },
+  "coding-agent-source-backed-knowledge-base": {
+    slug: "coding-agent-source-backed-knowledge-base",
+    eyebrow: "Coding agent 知识",
+    category: "Workflows",
+    title: "如何让 Codex 使用有来源的项目知识库",
+    description:
+      "让 AGENTS.md、源代码与文档、维护型知识页面分工，使 Codex 按需获取有来源、可审核的项目知识。",
+    metaTitle: "Codex 有来源项目知识库工作流 | Wenlan",
+    metaDescription:
+      "用 AGENTS.md、项目文档、引用、按需检索与验证，为 Codex、Claude Code 或其他 coding agent 建立有来源的项目知识库。",
+    keywords: [
+      "Codex 知识库",
+      "Codex 项目知识",
+      "code agent 知识库",
+      "coding agent 知识库",
+      "AI agent 项目知识库",
+      "AGENTS.md 知识库",
+      "Claude Code 知识库",
+      "有来源的项目知识库",
+    ],
+    publishedAt: "2026-08-23",
+    updatedAt: "2026-08-23",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分钟阅读",
+    audience: "希望 Codex、Claude Code 或其他 coding agent 能复用可信项目知识的开发者",
+    heroBullets: [
+      "AGENTS.md 或 CLAUDE.md 只放每次都必须加载的短规则。",
+      "代码、测试、规范与第一方文档继续作为单一事实来源。",
+      "维护型知识页面只保存需要跨文件整理、有引用并反复复用的结论。",
+    ],
+    sections: [
+      {
+        heading: "一句话做法",
+        body: [
+          "把 coding agent 的项目知识分成三层：AGENTS.md 或 CLAUDE.md 放短而稳定的操作规则；代码、测试、规范与文档保留为单一事实来源；有来源的知识库保存需要跨文件整理、引用与审核的当前答案。",
+          "Agent 接到任务时先读最小规则，再按问题获取一个相关 Page，最后回到引用、代码与测试验证。这比把全部内容塞进 instruction file，或每次重扫整个 repo 更容易保持当前与可检查。",
+        ],
+      },
+      {
+        heading: "AGENTS.md、CLAUDE.md 与知识库各做什么",
+        body: [
+          "AGENTS.md 适合放 build、test、branch、权限与禁区等 agent 无法只靠读 code 推出的规则；Claude Code 用户可用 CLAUDE.md 表达同一类项目指引。文件越长，越容易挤掉当前任务真正需要的 context。",
+          "知识库不应复制 repo。架构理由、外部限制、跨文件结论、决策历史与已验证的操作手册，才适合维护成有引用的 Page。代码与测试一旦改变，Page 应进入 stale 或 review，而不是继续假装正确。",
+        ],
+        bullets: [
+          "每次加载：不明显的项目规则与安全边界。",
+          "单一事实来源：当前代码、测试、规范与第一方文档。",
+          "按需知识：有来源、可审核、需要跨会话复用的结论。",
+        ],
+      },
+      {
+        heading: "建立 coding agent 可用的有来源工作流",
+        body: [
+          "先选一个会重复询问的小主题，例如 release 流程或数据迁移边界。完成 Wenlan 与 Codex 连接后，只加入能回答该主题的 Markdown、文本或可提取文字的 PDF；不要一开始导入整个 repository。",
+          "把来源蒸馏成 Page 后，检查重要说法能回到来源，再运行 lint 与 review。只有 MCP 连接的 client 应使用该 client 显示的 Wenlan tools；下列 slash commands 适用于已安装 Wenlan plugin 的 client。",
+        ],
+        code: {
+          label: "一个有界的 Codex 项目知识流程",
+          code: "wenlan status\nwenlan connect codex\nwenlan sources add ~/project/docs\n/distill <项目主题>\n/pages <项目主题>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "每次任务只获取足够的 context",
+        body: [
+          "不要在每次 session 开始时重放全部文档。先用任务名称、错误症状或模块查询最相关的 Page，再沿引用打开真正需要的来源。如果答案直接存在当前 code 或 test，就让 agent 读原文件，不要多绕一层摘要。",
+          "任务结束时只保存能影响未来工作的决策、限制、修正或交接。聊天摘要、临时探索与 agent 自己可以从 repo 推出的内容，不应自动升级为项目知识。",
+        ],
+      },
+      {
+        heading: "如何验证引用与不支持的答案",
+        body: [
+          "准备一个来源中有答案的问题、一个必须跨两份文档才能回答的问题，以及一个来源没有答案的问题。前两者应显示支持材料；最后一个应保持未知，不应因为文字流畅就补成确定结论。",
+          "修改其中一份来源并重新同步，再确认受影响 Page 能被标成需要刷新或产生可审核修订。这个 acceptance test 比『agent 看起来记得』更能证明知识库有用。",
+        ],
+      },
+      {
+        heading: "什么时候不需要另一套知识库",
+        body: [
+          "如果信息已在一份短而当前的 README、规范或测试里，coding agent 直接读来源通常更准。只有当同一问题跨多个来源、反复出现，且重建答案的成本明显时，才值得维护额外的 source-backed Page。",
+          "这条边界即使不使用 Wenlan 也成立：先维护权威来源，再决定哪些结论值得做成可查询、可引用、可刷新的项目知识。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "AGENTS.md 应该放完整项目知识吗？",
+        answer:
+          "不应该。它只需放 agent 每次都要知道、又无法从 repo 自己推出的规则。较长的架构说明、决策与外部限制应留在权威文档或按需知识页面。",
+      },
+      {
+        question: "知识库可以取代代码与测试吗？",
+        answer:
+          "不可以。代码、测试、规范与批准的第一方文档仍是权威；知识页面应保留引用，并在来源变化时进入 stale、refresh 或 review。",
+      },
+      {
+        question: "Claude Code 也能用同一套方法吗？",
+        answer:
+          "可以。工具的命令入口不同，但短规则、权威来源、按需 Page、引用与验证的分层相同；Wenlan 也能让多个已连接 client 使用同一套本地知识。",
+      },
+    ],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "build-local-ai-knowledge-base-from-documents",
+      "choose-ai-knowledge-base-tool",
+      "distilled-wiki-pages-ai-memory",
+    ],
+    officialReferences: [
+      {
+        label: "OpenAI harness engineering",
+        href: "https://openai.com/index/harness-engineering/",
+      },
+      {
+        label: "AGENTS.md 开放格式",
+        href: "https://agents.md/",
+      },
+      {
+        label: "Wenlan 与 AI client 设置",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md",
+      },
+      {
+        label: "Wenlan 有来源 Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "Wenlan 审核与信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+    ],
+    cta: {
+      heading: "先让 Codex 验证一个项目主题",
+      body: "连接 Codex、加入一组可检查来源，再确认 Page 的引用、刷新与审核都从属于当前 repo。",
+    },
+  },
   "build-local-ai-knowledge-base-from-documents": {
     slug: "build-local-ai-knowledge-base-from-documents",
     eyebrow: "实作",
@@ -1540,6 +1810,7 @@ const zhCNArticles = {
       },
     ],
     relatedSlugs: [
+      "coding-agent-source-backed-knowledge-base",
       "source-backed-wiki-pages-ai-work",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
@@ -1663,6 +1934,7 @@ const zhCNArticles = {
       },
     ],
     relatedSlugs: [
+      "coding-agent-source-backed-knowledge-base",
       "build-local-ai-knowledge-base-from-documents",
       "source-backed-wiki-pages-ai-work",
       "distilled-wiki-pages-ai-memory",

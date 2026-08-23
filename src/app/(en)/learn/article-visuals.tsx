@@ -61,7 +61,7 @@ export function MemoryIndex({
   items: string[];
 }) {
   return (
-    <div className="min-w-0 rounded-2xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5 shadow-[0_18px_70px_rgba(0,0,0,0.18)] backdrop-blur">
+    <div className="w-full min-w-0 max-w-full rounded-2xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5 shadow-[0_18px_70px_rgba(0,0,0,0.18)] backdrop-blur">
       <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
         {label}
       </p>
@@ -71,7 +71,7 @@ export function MemoryIndex({
             <span className="font-mono text-[11px] text-[var(--o-warm)]">
               {(index + 1).toString().padStart(2, "0")}
             </span>
-            <p className="min-w-0 text-sm leading-relaxed text-[var(--o-text-secondary)] [word-break:keep-all] [overflow-wrap:break-word]">
+            <p className="min-w-0 text-sm leading-relaxed text-[var(--o-text-secondary)] [overflow-wrap:anywhere] [word-break:normal] sm:[overflow-wrap:break-word] sm:[word-break:keep-all]">
               {item}
             </p>
           </div>

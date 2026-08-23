@@ -9,6 +9,7 @@ export const TRANSLATED_LEARN_SLUGS = [
   "wenlan-vs-obsidian-ai-memory",
   "build-local-ai-knowledge-base-from-documents",
   "choose-ai-knowledge-base-tool",
+  "coding-agent-source-backed-knowledge-base",
 ] as const;
 
 export type TranslatedLearnSlug = (typeof TRANSLATED_LEARN_SLUGS)[number];
@@ -20,6 +21,7 @@ export const TRANSLATED_LEARN_SLUGS_BY_LOCALE = {
     "wenlan-vs-obsidian-ai-memory",
     "build-local-ai-knowledge-base-from-documents",
     "choose-ai-knowledge-base-tool",
+    "coding-agent-source-backed-knowledge-base",
   ],
   "zh-CN": [
     "distilled-wiki-pages-ai-memory",
@@ -27,6 +29,7 @@ export const TRANSLATED_LEARN_SLUGS_BY_LOCALE = {
     "wenlan-vs-obsidian-ai-memory",
     "build-local-ai-knowledge-base-from-documents",
     "choose-ai-knowledge-base-tool",
+    "coding-agent-source-backed-knowledge-base",
   ],
 } as const satisfies Record<
   TranslatedLocale,
