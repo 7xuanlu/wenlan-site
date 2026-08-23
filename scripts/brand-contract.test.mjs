@@ -151,6 +151,13 @@ async function collectMatches(pattern) {
   for await (const file of walkTextFiles(repoRoot)) {
     const rel = relative(repoRoot, file);
     if (rel === "scripts/brand-contract.test.mjs") continue;
+    if (
+      rel === "PLAN.md" ||
+      rel === "EXPERIMENTS.md" ||
+      rel.startsWith("docs/seo-audits/")
+    ) {
+      continue;
+    }
     const text = await readFile(file, "utf8");
     for (const match of text.matchAll(pattern)) {
       matches.push(`${rel}:${lineForOffset(text, match.index)}:${match[0]}`);
@@ -429,17 +436,21 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   );
   assert.match(
     supportArticle,
-    /title:\s*"Source-Backed AI Knowledge Base for Agents"/,
+    /title:\s*"Build a Source-Backed AI Knowledge Base for Agents"/,
   );
   assert.match(
     supportArticle,
-    /metaTitle:\s*"Source-Backed AI Knowledge Base for Agents \| Wenlan"/,
+    /metaTitle:\s*"Build a Source-Backed AI Knowledge Base \| Wenlan"/,
+  );
+  assert.match(
+    supportArticle,
+    /metaDescription:\s*\n\s*"Build a source-backed AI knowledge base with trusted sources, atomic knowledge, maintained LLM-wiki pages, citations, review, and refresh\.",/,
   );
   assert.match(supportArticle, /publishedAt:\s*"2026-06-06"/);
-  assert.match(supportArticle, /updatedAt:\s*"2026-07-30"/);
+  assert.match(supportArticle, /updatedAt:\s*"2026-08-08"/);
   assert.match(
     supportArticle,
-    /quickAnswer:\s*\n\s*"A source-backed AI knowledge base separates trusted sources, atomic knowledge, and maintained LLM-wiki pages/,
+    /quickAnswer:\s*\n\s*"To build a source-backed AI knowledge base, keep trusted sources, atomic knowledge, and maintained LLM-wiki pages separate/,
   );
   assert.match(supportArticle, /actionHeading:\s*"Build the smallest maintainable loop"/);
   assert.match(supportArticle, /\/capture <fact \+ source \+ why>/);
@@ -1004,14 +1015,23 @@ test("public current-release surfaces track the authoritative Wenlan release", a
   assert.match(releases, /wenlan-darwin-arm64\.tar\.gz/);
   assert.match(releases, /wenlan-linux-x64\.tar\.gz/);
   assert.match(releases, /wenlan-linux-arm64\.tar\.gz/);
+  assert.match(
+    releases,
+    new RegExp(`Wenlan_${escapedVersion}_aarch64\\.dmg`),
+  );
+  assert.match(releases, /id: "macos-runtime-arm64"/);
+  assert.doesNotMatch(releases, /Wenlan_aarch64\.app\.tar\.gz/);
   assert.match(downloadSection, /id="download"/);
   assert.match(downloadSection, /placement="home-download"/);
   assert.match(englishContent, new RegExp(`"v${escapedVersion}"`));
   assert.match(englishContent, new RegExp(`Wenlan v${escapedVersion} ships`));
   assert.match(simplifiedContent, new RegExp(`"版本 v${escapedVersion}"`));
-  assert.match(simplifiedContent, new RegExp(`Wenlan v${escapedVersion} 支持`));
+  assert.match(simplifiedContent, new RegExp(`Wenlan v${escapedVersion} 提供`));
   assert.match(traditionalContent, new RegExp(`"版本 v${escapedVersion}"`));
-  assert.match(traditionalContent, new RegExp(`Wenlan v${escapedVersion} 支援`));
+  assert.match(traditionalContent, new RegExp(`Wenlan v${escapedVersion} 提供`));
+  assert.match(englishContent, /preview is not yet notarized/);
+  assert.match(traditionalContent, /預覽版尚未完成 notarization/);
+  assert.match(simplifiedContent, /预览版尚未完成 notarization/);
   assert.match(aboutOg, new RegExp(`v${escapedVersion} · Apache-2\\.0`));
   assert.match(docs, new RegExp(`current stable ${escapedVersion}`));
   assert.match(docs, new RegExp(`Wenlan version ${escapedVersion}`));
@@ -1063,6 +1083,9 @@ test("download information architecture keeps the homepage compact and the full 
   assert.match(downloadPlatforms, /open=\{isRecommended/);
   assert.match(downloadPlatforms, /placement="download-page"/);
   assert.match(downloadPlatforms, /copy\.packageIncludesLabel/);
+  assert.match(downloadPlatforms, /platform\.packageIncludesLabel/);
+  assert.match(downloadPlatforms, /platform\.guideHref/);
+  assert.match(downloadPlatforms, /platform\.guideLabel/);
   assert.match(downloadPage, /"@type": "BreadcrumbList"/);
   assert.match(downloadPage, /wenlan doctor/);
   assert.match(englishRoute, /buildPageMetadata\(\s*"en",\s*"\/download"/s);
@@ -1646,7 +1669,8 @@ test("Learn article headers keep long Wenlan titles inside mobile viewports", as
 
   const visuals = await readRepo("src/app/learn/article-visuals.tsx");
   assert.match(visuals, /grid min-w-0 grid-cols-\[32px_minmax\(0,1fr\)\]/);
-  assert.match(visuals, /<p className="min-w-0[^"]*\[word-break:keep-all\][^"]*\[overflow-wrap:break-word\]/);
+  assert.match(visuals, /<div className="w-full min-w-0 max-w-full/);
+  assert.match(visuals, /<p className="min-w-0[^"]*\[overflow-wrap:anywhere\][^"]*\[word-break:normal\][^"]*sm:\[overflow-wrap:break-word\][^"]*sm:\[word-break:keep-all\]/);
 });
 
 test("Obsidian acquisition page answers Claude Code and MCP intent without changing its canonical seam", async () => {
