@@ -6,13 +6,26 @@ import { join, resolve } from "node:path";
 import test from "node:test";
 import { promisify } from "node:util";
 
-import { validateGoalControlPlane } from "./seo-goal-check.mjs";
+import {
+  validateExperimentsAppendOnlyBaseline,
+  validateGoalControlPlane,
+} from "./seo-goal-check.mjs";
+import { buildPageIntentRows } from "./seo-intent-map.mjs";
 
 const repoRoot = resolve(import.meta.dirname, "..");
 const goalCheckScript = resolve(import.meta.dirname, "seo-goal-check.mjs");
 const execFileAsync = promisify(execFile);
 const canonicalPlan = await readFile(resolve(repoRoot, "PLAN.md"), "utf8");
 const canonicalExperiments = await readFile(resolve(repoRoot, "EXPERIMENTS.md"), "utf8");
+const canonicalScenarioBacklog = JSON.parse(
+  await readFile(resolve(repoRoot, "docs/seo-scenario-backlog.json"), "utf8"),
+);
+const canonicalScenarioReport = await readFile(
+  resolve(repoRoot, "docs/seo-scenario-backlog.md"),
+  "utf8",
+);
+const canonicalSitemapRows = buildPageIntentRows();
+const successorSchemaMarker = "<!-- SUCCESSOR-EXPERIMENT-SCHEMA-V1 -->";
 const experimentsWithoutRecords = canonicalExperiments.replace(
   /\n?<!-- EXPERIMENT-RECORD:START -->[\s\S]*?<!-- EXPERIMENT-RECORD:END -->\n?/g,
   "\n",
@@ -62,8 +75,24 @@ function removeCampaignApproval(experiments = canonicalExperiments) {
 function validationErrors({
   plan = canonicalPlan,
   experiments = canonicalExperiments,
+  scenarioBacklog = canonicalScenarioBacklog,
+  scenarioReport = canonicalScenarioReport,
+  sitemapRows = canonicalSitemapRows,
 } = {}) {
-  return validateGoalControlPlane({ plan, experiments });
+  return validateGoalControlPlane({
+    plan,
+    experiments,
+    scenarioBacklog,
+    scenarioReport,
+    sitemapRows,
+  });
+}
+
+function appendSuccessorExperiment(experiments, experiment) {
+  const withMarker = experiments.includes(successorSchemaMarker)
+    ? experiments
+    : `${experiments}\n${successorSchemaMarker}`;
+  return `${withMarker}\n${experiment}`;
 }
 
 function fixturePlan(currentId, activeCount) {
@@ -142,6 +171,20 @@ function experimentReadout({
 
 test("canonical Goal control plane passes", () => {
   assert.deepEqual(validationErrors(), []);
+  assert.deepEqual(validateExperimentsAppendOnlyBaseline(canonicalExperiments), []);
+});
+
+test("historical experiment ledger bytes are immutable before the append-only marker", () => {
+  const experiments = canonicalExperiments.replace(
+    "### 2026-08-15T05:59:42Z — MCP production verification",
+    "### Removed MCP production verification",
+  );
+
+  assert.ok(
+    validateExperimentsAppendOnlyBaseline(experiments).some((error) =>
+      error.includes("append-only baseline changed"),
+    ),
+  );
 });
 
 test("PLAN current experiment must exist as an active ledger start", () => {
@@ -224,6 +267,8 @@ test("CLI path overrides validate the supplied control-plane files", async () =>
       writeFile(experimentsPath, canonicalExperiments, "utf8"),
     ]);
     const passing = await execFileAsync(process.execPath, [
+      "--import",
+      "tsx",
       goalCheckScript,
       "--plan",
       planPath,
@@ -239,6 +284,8 @@ test("CLI path overrides validate the supplied control-plane files", async () =>
     );
     await assert.rejects(
       execFileAsync(process.execPath, [
+        "--import",
+        "tsx",
         goalCheckScript,
         "--plan",
         planPath,
@@ -305,6 +352,149 @@ test("missing demand-discovery or approval clauses fail", () => {
   assert.ok(
     validationErrors({ plan: withoutApproval }).some((error) =>
       error.includes("approval boundary"),
+    ),
+  );
+});
+
+test("authority-first correction protects the evidence floors and no-churn stop", () => {
+  const withoutPageFloor = canonicalPlan.replace(
+    "the same complete 28-day GSC range contains at least 20",
+    "the same complete 28-day GSC range contains at least 2",
+  );
+  const withoutJoinedFloor = canonicalPlan.replace(
+    "the query-page join contains at least 3",
+    "the query-page join contains at least 1",
+  );
+  const withoutOnPageStop = canonicalPlan.replace(
+    "If two consecutive website experiments remain below their post-crawl",
+    "If many website experiments remain below their post-crawl",
+  );
+  const withoutHistoricalGuard = canonicalPlan.replace(
+    "Pre-final candidate and readout text retained below is historical",
+    "Pre-final candidate and readout text retained below is current",
+  );
+
+  assert.ok(
+    validationErrors({ plan: withoutPageFloor }).some((error) =>
+      error.includes("existing-page 20-impression floor"),
+    ),
+  );
+  assert.ok(
+    validationErrors({ plan: withoutJoinedFloor }).some((error) =>
+      error.includes("existing-page 3-impression joined-query floor"),
+    ),
+  );
+  assert.ok(
+    validationErrors({ plan: withoutOnPageStop }).some((error) =>
+      error.includes("two-inconclusive-experiment on-page stop"),
+    ),
+  );
+  assert.ok(
+    validationErrors({ plan: withoutHistoricalGuard }).some((error) =>
+      error.includes("pre-final candidate text cannot restart website work"),
+    ),
+  );
+});
+
+test("authority-first correction requires its append-only decision records", () => {
+  const withoutFinalRead = canonicalExperiments.replace(
+    "## Campaign observation: fixed final window at 2026-08-21T04:28:22Z",
+    "## Removed final window record",
+  );
+  const withoutCorrection = canonicalExperiments.replace(
+    "## Campaign correction: authority-first execution at 2026-08-21T04:28:22Z",
+    "## Removed authority-first record",
+  );
+
+  assert.ok(
+    validationErrors({ experiments: withoutFinalRead }).some((error) =>
+      error.includes("fixed final-window observation"),
+    ),
+  );
+  assert.ok(
+    validationErrors({ experiments: withoutCorrection }).some((error) =>
+      error.includes("authority-first campaign correction"),
+    ),
+  );
+});
+
+test("successor Goal contract protects its targets, window, baselines, and authority gate", () => {
+  const mutateSuccessor = (from, to) => {
+    const startMarker = "<!-- SUCCESSOR-GOAL-CONTRACT:START -->";
+    const endMarker = "<!-- SUCCESSOR-GOAL-CONTRACT:END -->";
+    const start = canonicalPlan.indexOf(startMarker) + startMarker.length;
+    const end = canonicalPlan.indexOf(endMarker);
+    return `${canonicalPlan.slice(0, start)}${canonicalPlan
+      .slice(start, end)
+      .replace(from, to)}${canonicalPlan.slice(end)}`;
+  };
+  const changedDeadline = mutateSuccessor(
+    "Deadline: 2026-09-21.",
+    "Deadline: 2026-10-21.",
+  );
+  const changedClicks = mutateSuccessor(
+    "rolling-28-day property clicks >= 100.",
+    "rolling-28-day property clicks >= 10.",
+  );
+  const changedWindow = mutateSuccessor(
+    "`2026-08-24..2026-09-20`",
+    "`2026-08-25..2026-09-21`",
+  );
+  const changedBaseline = mutateSuccessor(
+    "GSC property clicks 8 and property",
+    "GSC property clicks 80 and property",
+  );
+  const removedAuthorityGate = mutateSuccessor(
+    "Publish it only when current upstream plus the exact",
+    "Publish it even when current upstream plus the exact",
+  );
+
+  for (const plan of [
+    changedDeadline,
+    changedClicks,
+    changedWindow,
+    changedBaseline,
+    removedAuthorityGate,
+  ]) {
+    assert.ok(
+      validationErrors({ plan }).some((error) =>
+        error.includes("Successor Goal contract"),
+      ),
+    );
+  }
+});
+
+test("successor Goal contract requires its append-only approval record", () => {
+  const experiments = canonicalExperiments.replace(
+    "## Campaign approval: successor authority-first campaign at 2026-08-21T08:24:29Z",
+    "## Removed successor campaign approval",
+  );
+
+  assert.ok(
+    validationErrors({ experiments }).some((error) =>
+      error.includes("approved successor campaign record"),
+    ),
+  );
+});
+
+test("successor waiting work is hash-protected and requires its approval record", () => {
+  const changedPlan = canonicalPlan.replace(
+    "Run trilingual demand reconnaissance across English, zh-TW, and zh-CN",
+    "Run English-only demand reconnaissance",
+  );
+  assert.ok(
+    validationErrors({ plan: changedPlan }).some((error) =>
+      error.includes("Successor waiting work"),
+    ),
+  );
+
+  const changedExperiments = canonicalExperiments.replace(
+    "## Campaign approval: successor waiting work at 2026-08-22T20:55:14Z",
+    "## Removed successor waiting-work approval",
+  );
+  assert.ok(
+    validationErrors({ experiments: changedExperiments }).some((error) =>
+      error.includes("approved successor waiting-work record"),
     ),
   );
 });
@@ -620,18 +810,104 @@ test("net-new search assets may launch fewer than 14 days apart after production
   assert.deepEqual(validationErrors({ plan, experiments }), []);
 });
 
-test("an experiment cannot launch after the frozen campaign deadline", () => {
-  const experiments = `${experimentFreeExperiments}
-${experimentStart({
-  id: "EXP-020",
-  windowStart: "2026-08-15",
-  windowEnd: "2026-08-21",
-  launched: "2026-08-19",
-})}`;
+test("historical experiments before the successor cutover retain the frozen deadline", () => {
+  const historicalStart = experimentStart({
+    id: "EXP-020",
+    windowStart: "2026-08-15",
+    windowEnd: "2026-08-21",
+    launched: "2026-08-19",
+  });
+  const experiments = canonicalExperiments.replace(
+    successorSchemaMarker,
+    `${historicalStart}\n${successorSchemaMarker}`,
+  );
 
   assert.ok(
     validationErrors({ experiments }).some((error) =>
       error.includes("cannot launch after 2026-08-18"),
+    ),
+  );
+});
+
+test("successor experiments may launch from 2026-08-19 through 2026-09-21", () => {
+  for (const [id, windowStart, windowEnd, launched] of [
+    ["EXP-SUCCESSOR-FIRST", "2026-08-15", "2026-08-21", "2026-08-19"],
+    ["EXP-SUCCESSOR-LAST", "2026-09-19", "2026-09-25", "2026-09-21"],
+  ]) {
+    const experiments = appendSuccessorExperiment(
+      experimentFreeExperiments,
+      experimentStart({
+        id,
+        status: "decided",
+        windowStart,
+        windowEnd,
+        launched,
+      }),
+    );
+    const deadlineErrors = validationErrors({ experiments }).filter((error) =>
+      error.includes("cannot launch after"),
+    );
+    assert.deepEqual(deadlineErrors, []);
+  }
+});
+
+test("successor experiments cannot launch after 2026-09-21", () => {
+  const experiments = appendSuccessorExperiment(
+    experimentFreeExperiments,
+    experimentStart({
+      id: "EXP-SUCCESSOR-TOO-LATE",
+      status: "decided",
+      windowStart: "2026-09-19",
+      windowEnd: "2026-09-25",
+      launched: "2026-09-22",
+    }),
+  );
+
+  assert.ok(
+    validationErrors({ experiments }).some((error) =>
+      error.includes("cannot launch after 2026-09-21"),
+    ),
+  );
+});
+
+test("content expansion correction protects weekly trilingual scenario execution", () => {
+  const withoutCadence = canonicalPlan.replace(
+    "Every week must select one trilingual scenario family",
+    "Every month may consider one scenario family",
+  );
+  const withoutCleanIntentBoundary = canonicalPlan.replace(
+    "Those existing-page floors must not block",
+    "Those existing-page floors block",
+  );
+
+  assert.ok(
+    validationErrors({ plan: withoutCadence }).some((error) =>
+      error.includes("weekly trilingual scenario family"),
+    ),
+  );
+  assert.ok(
+    validationErrors({ plan: withoutCleanIntentBoundary }).some((error) =>
+      error.includes("existing-page gate cannot block clean new intent"),
+    ),
+  );
+});
+
+test("goal verifier fails when the scenario source, report, or weekly cadence drifts", () => {
+  assert.ok(
+    validationErrors({ scenarioBacklog: null }).some((error) =>
+      error.includes("seo-scenario-backlog.json"),
+    ),
+  );
+  assert.ok(
+    validationErrors({ scenarioReport: null }).some((error) =>
+      error.includes("seo-scenario-backlog.md"),
+    ),
+  );
+  const changed = structuredClone(canonicalScenarioBacklog);
+  changed.campaign.weeklyCadence.pop();
+  assert.ok(
+    validationErrors({ scenarioBacklog: changed }).some((error) =>
+      error.includes("four weekly target windows"),
     ),
   );
 });

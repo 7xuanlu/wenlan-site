@@ -5,14 +5,36 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import {
+  renderScenarioBacklog,
+  validateScenarioBacklog,
+} from "./seo-scenario-check.mjs";
+
 const repoRoot = resolve(import.meta.dirname, "..");
 const FROZEN_START = "<!-- FROZEN-GOAL-CONTRACT:START -->";
 const FROZEN_END = "<!-- FROZEN-GOAL-CONTRACT:END -->";
+const AUTHORITY_FIRST_START = "<!-- AUTHORITY-FIRST-CORRECTION:START -->";
+const AUTHORITY_FIRST_END = "<!-- AUTHORITY-FIRST-CORRECTION:END -->";
+const SUCCESSOR_START = "<!-- SUCCESSOR-GOAL-CONTRACT:START -->";
+const SUCCESSOR_END = "<!-- SUCCESSOR-GOAL-CONTRACT:END -->";
+const SUCCESSOR_WAITING_START = "<!-- SUCCESSOR-WAITING-WORK:START -->";
+const SUCCESSOR_WAITING_END = "<!-- SUCCESSOR-WAITING-WORK:END -->";
+const CONTENT_EXPANSION_START = "<!-- CONTENT-EXPANSION-CORRECTION:START -->";
+const CONTENT_EXPANSION_END = "<!-- CONTENT-EXPANSION-CORRECTION:END -->";
 const EXPECTED_FROZEN_SHA256 =
   "188f904a6a923ab3f3f993d016dc56bc710ad3ac7270ec0961ab4dd10a0b99e6";
+const EXPECTED_SUCCESSOR_SHA256 =
+  "e5942b1f5a535103f01caa8c3388061057e567ea1fb8f2d824ae013ed494f0b4";
+const EXPECTED_SUCCESSOR_WAITING_SHA256 =
+  "a64c56a6d8d64ff3ceb4dc86ee24e7532619671d6eb007df0b9d7c108f38ba8d";
+const EXPECTED_EXPERIMENTS_APPEND_ONLY_BASELINE_SHA256 =
+  "637df82ff50bf214692d6bc9b3b391b625263148dd173f543a5579b68b252403";
+const EXPERIMENTS_APPEND_ONLY_BASELINE_MARKER =
+  `<!-- EXPERIMENTS-APPEND-ONLY-BASELINE-SHA256:${EXPECTED_EXPERIMENTS_APPEND_ONLY_BASELINE_SHA256} -->`;
 const DAY_MS = 24 * 60 * 60 * 1000;
 const CAMPAIGN_WINDOW_ANCHOR = new Date("2026-07-18T00:00:00.000Z");
-const CAMPAIGN_DEADLINE = new Date("2026-08-18T00:00:00.000Z");
+const HISTORICAL_CAMPAIGN_DEADLINE = new Date("2026-08-18T00:00:00.000Z");
+const SUCCESSOR_CAMPAIGN_DEADLINE = new Date("2026-09-21T00:00:00.000Z");
 
 const requiredFrozenClauses = [
   ["deadline 2026-08-18", "Deadline: 2026-08-18."],
@@ -281,6 +303,182 @@ const requiredFrozenClauses = [
   ],
 ];
 
+const requiredAuthorityFirstClauses = [
+  [
+    "qualified query ownership and durable external authority objective",
+    "The execution objective is authenticated non-brand query ownership and durable external authority",
+  ],
+  [
+    "output counts are not growth outcomes",
+    "Article count, indexed-page count, technical checks, indexing requests, and raw Vercel visitors are not growth outcomes.",
+  ],
+  [
+    "technical SEO remains a guardrail",
+    "Technical SEO is a regression guardrail.",
+  ],
+  [
+    "existing-page post-deploy crawl gate",
+    "only after Google has confirmed a post-deploy crawl of its current version",
+  ],
+  [
+    "existing-page 20-impression floor",
+    "the same complete 28-day GSC range contains at least 20 target-page impressions",
+  ],
+  [
+    "existing-page 3-impression joined-query floor",
+    "the query-page join contains at least 3 qualified visible impressions for that owner",
+  ],
+  [
+    "net-new authority path gate",
+    "one predeclared authority or distribution path.",
+  ],
+  [
+    "same-canonical post-crawl cooldown",
+    "do not change the same canonical again until 28 complete days after a confirmed post-deploy crawl.",
+  ],
+  [
+    "two-inconclusive-experiment on-page stop",
+    "If two consecutive website experiments remain below their post-crawl exposure floor, stop the on-page lane.",
+  ],
+  [
+    "open submissions do not count as authority",
+    "An external submission or open pull request is attempted distribution, not authority.",
+  ],
+  [
+    "Vercel raw visitors are not human acquisition",
+    "never present them as human search acquisition without the separate traffic-quality split.",
+  ],
+  [
+    "no on-page action is valid",
+    "When neither passes its gate, the correct action is no on-page change.",
+  ],
+  [
+    "pre-final candidate text cannot restart website work",
+    "Pre-final candidate and readout text retained below is historical provenance.",
+  ],
+  [
+    "no invented next campaign target",
+    "A new numeric deadline or target is not invented by the controller",
+  ],
+];
+
+const requiredSuccessorClauses = [
+  ["successor deadline 2026-09-21", "Deadline: 2026-09-21."],
+  ["successor stars target 100", "GitHub total stars >= 100 at the deadline."],
+  [
+    "successor GSC clicks target 100",
+    "GSC `sc-domain:wenlan.app` rolling-28-day property clicks >= 100.",
+  ],
+  [
+    "successor GSC impressions target 10,000",
+    "GSC `sc-domain:wenlan.app` rolling-28-day property impressions >= 10,000.",
+  ],
+  [
+    "successor Vercel target 2,000",
+    "Vercel Web Analytics rolling-28-day visitors >= 2,000 over the same range.",
+  ],
+  ["successor fixed final range", "`2026-08-24..2026-09-20`"],
+  ["successor GSC delay guard", "delay the final read; do not move this window."],
+  ["successor stars baseline 48", "Fixed successor starting observation: GitHub total stars 48."],
+  [
+    "successor GSC baseline 8 and 985",
+    "Fixed successor starting observation: GSC property clicks 8 and property impressions 985",
+  ],
+  ["successor Vercel baseline 248", "Fixed successor starting observation: Vercel visitors 248"],
+  ["successor visible query split", "2 visible-query clicks and 212 visible-query impressions"],
+  ["successor immutable definitions", "Target values, deadline, metric definitions, starting observations, and the final window must not be changed by the Goal controller."],
+  ["successor inherited full contract", "The complete quality conditions, evidence roles, demand-discovery rules, candidate gate, experiment rules, weekly-SEO-controller relationship, and approval boundaries"],
+  ["successor authority outcome", "Progress means qualified non-brand query ownership or an inspectable live or merged authority source."],
+  ["successor existing-page evidence gate", "without a confirmed post-deploy Google crawl, at least 20 target-page impressions, and at least 3 joined qualified visible impressions"],
+  ["successor cooldown and stop", "Keep the 28-complete-day post-crawl canonical cooldown and stop the on-page lane after two consecutive below-exposure website experiments."],
+  ["successor net-new gate", "A net-new or translated search asset requires the complete candidate gate"],
+  ["successor Awesome Selfhosted approval", "The user approved the exact one-file Awesome Selfhosted authority submission"],
+  ["successor upstream green gate", "Publish it only when current upstream plus the exact candidate pass the upstream pull-request gate."],
+  ["successor other actions excluded", "No other external publication, website deployment, request indexing, GSC validation, paid acquisition, synthetic analytics event, or metric change is approved"],
+  ["successor weekly relationship", "The existing `weekly-origin-seo-cleanup` automation remains independent."],
+  ["successor deadline stop", "The 2026-09-21 deadline arrives and one or more successor targets are unmet."],
+  ["successor unreliable-data stop", "Two consecutive complete windows have no reliable authenticated data."],
+  ["successor no-path stop", "No reasonable authority path or experiment passes its protected gate."],
+  ["successor approval stop", "An approval boundary blocks a necessary action."],
+];
+
+const requiredSuccessorWaitingClauses = [
+  ["waiting approval timestamp", "2026-08-22T20:55:14Z"],
+  ["trilingual demand reconnaissance", "Run trilingual demand reconnaissance across English, zh-TW, and zh-CN"],
+  ["co-primary demand families", "AI knowledge base, Karpathy or LLM Wiki, source-backed wiki, Codex or ChatGPT knowledge-base workflows"],
+  ["demand provenance", "Preserve source URL or query, capture date, language or geography, and each source's native unit."],
+  ["demand does not impersonate GSC", "physically and semantically separate from GSC"],
+  ["GitHub conversion audit", "Audit the public GitHub conversion path from a first-time visitor to a star"],
+  ["GitHub audit scope", "README first screen, concrete product proof, install and download entry points, current release assets, and localized README consistency."],
+  ["authority PR maintenance", "awesome-selfhosted/awesome-selfhosted-data#2955"],
+  ["second authority PR maintenance", "DhanushNehru/awesome-mcp-servers#52"],
+  ["one additional authority candidate cap", "Research at most one additional non-duplicate, active, exact-fit high-authority path"],
+  ["Aug 28 decision matrix", "Prepare the `2026-08-28` decision matrix"],
+  ["protected page gate", "post-crawl gate: at least 20 target-page impressions and 3 joined qualified visible-query impressions"],
+  ["waiting work no production slot", "These lanes are not website experiments and do not consume the production slot."],
+  ["waiting work approval exclusions", "No deployment, external publication, new directory submission, maintainer message, request indexing, GSC validation, paid acquisition, synthetic event, analytics mutation, or metric-definition change is authorized here."],
+];
+
+const requiredContentExpansionClauses = [
+  [
+    "technical and owner counts are not content sufficiency",
+    "Technical green, indexed-page count, sitemap size, and intent-owner count are quality floors. They do not prove that search scenarios are sufficiently covered and do not mean growth is complete.",
+  ],
+  [
+    "weekly trilingual scenario family",
+    "Every week must select one trilingual scenario family",
+  ],
+  [
+    "natural locale search language",
+    "represent the same user task in natural local search language; they are not keyword-by-keyword translations.",
+  ],
+  [
+    "failed candidate reasons and next research",
+    "record every failed candidate and its failed gate plus the next research direction.",
+  ],
+  ["bare wait prohibited", "A bare `wait` is not a valid weekly content decision"],
+  [
+    "existing-page gate scope",
+    "apply only when rewriting an existing owner.",
+  ],
+  [
+    "existing-page gate cannot block clean new intent",
+    "must not block a clean net-new intent backed by external demand evidence",
+  ],
+  [
+    "measuring page does not block next family",
+    "A measuring page does not block preparation of the next non-overlapping trilingual scenario family.",
+  ],
+  [
+    "scenario JSON source of truth",
+    "`docs/seo-scenario-backlog.json` is the only editable scenario source.",
+  ],
+  [
+    "scenario generated report",
+    "`docs/seo-scenario-backlog.md` is deterministic generated output.",
+  ],
+  [
+    "scenario verifier command",
+    "synchronized through `pnpm seo:scenario:check`",
+  ],
+  [
+    "goal verifier fails closed",
+    "`pnpm seo:goal:check` must fail closed when this correction, the scenario files, or the four-week cadence is missing.",
+  ],
+  [
+    "external demand lane remains separate",
+    "It does not enter authenticated GSC input and is not keyword volume.",
+  ],
+  [
+    "four weekly scenario windows",
+    "`2026-08-24..2026-08-30`, `2026-08-31..2026-09-06`, `2026-09-07..2026-09-13`, and `2026-09-14..2026-09-20`.",
+  ],
+  [
+    "publication approvals remain separate",
+    "Local implementation and verification do not grant commit, push, PR, merge, Vercel deployment, request indexing, GSC validation, or external-publication approval.",
+  ],
+];
+
 const allowedStatuses = new Set([
   "approved",
   "active",
@@ -357,6 +555,8 @@ const allowedDecisions = new Set([
   "extend",
 ]);
 const EXPERIMENT_DATE_SCHEMA_MARKER = "<!-- EXPERIMENT-DATE-SCHEMA-V1 -->";
+const SUCCESSOR_EXPERIMENT_SCHEMA_MARKER =
+  "<!-- SUCCESSOR-EXPERIMENT-SCHEMA-V1 -->";
 const FIRST_DATE_SCHEMA_EXPERIMENT_ID =
   "EXP-2026-07-29-docs-github-acquisition";
 
@@ -380,6 +580,97 @@ function frozenContract(plan, errors) {
   }
 
   return plan.slice(start + FROZEN_START.length, end).replace(/\r\n/g, "\n").trim();
+}
+
+function authorityFirstCorrection(plan, errors) {
+  const start = plan.indexOf(AUTHORITY_FIRST_START);
+  const end = plan.indexOf(AUTHORITY_FIRST_END);
+  if (start === -1 || end === -1 || end <= start) {
+    errors.push(
+      "PLAN.md must contain one ordered authority-first correction marker pair.",
+    );
+    return null;
+  }
+  if (
+    plan.indexOf(AUTHORITY_FIRST_START, start + AUTHORITY_FIRST_START.length) !== -1 ||
+    plan.indexOf(AUTHORITY_FIRST_END, end + AUTHORITY_FIRST_END.length) !== -1
+  ) {
+    errors.push(
+      "PLAN.md must contain exactly one authority-first correction marker pair.",
+    );
+    return null;
+  }
+
+  return plan
+    .slice(start + AUTHORITY_FIRST_START.length, end)
+    .replace(/\r\n/g, "\n")
+    .trim();
+}
+
+function successorGoalContract(plan, errors) {
+  const start = plan.indexOf(SUCCESSOR_START);
+  const end = plan.indexOf(SUCCESSOR_END);
+  if (start === -1 || end === -1 || end <= start) {
+    errors.push("PLAN.md must contain one ordered successor Goal contract marker pair.");
+    return null;
+  }
+  if (
+    plan.indexOf(SUCCESSOR_START, start + SUCCESSOR_START.length) !== -1 ||
+    plan.indexOf(SUCCESSOR_END, end + SUCCESSOR_END.length) !== -1
+  ) {
+    errors.push("PLAN.md must contain exactly one successor Goal contract marker pair.");
+    return null;
+  }
+
+  return plan
+    .slice(start + SUCCESSOR_START.length, end)
+    .replace(/\r\n/g, "\n")
+    .trim();
+}
+
+function successorWaitingWork(plan, errors) {
+  const start = plan.indexOf(SUCCESSOR_WAITING_START);
+  const end = plan.indexOf(SUCCESSOR_WAITING_END);
+  if (start === -1 || end === -1 || end <= start) {
+    errors.push("PLAN.md must contain one ordered successor waiting-work marker pair.");
+    return null;
+  }
+  if (
+    plan.indexOf(SUCCESSOR_WAITING_START, start + SUCCESSOR_WAITING_START.length) !== -1 ||
+    plan.indexOf(SUCCESSOR_WAITING_END, end + SUCCESSOR_WAITING_END.length) !== -1
+  ) {
+    errors.push("PLAN.md must contain exactly one successor waiting-work marker pair.");
+    return null;
+  }
+  return plan
+    .slice(start + SUCCESSOR_WAITING_START.length, end)
+    .replace(/\r\n/g, "\n")
+    .trim();
+}
+
+function contentExpansionCorrection(plan, errors) {
+  const start = plan.indexOf(CONTENT_EXPANSION_START);
+  const end = plan.indexOf(CONTENT_EXPANSION_END);
+  if (start === -1 || end === -1 || end <= start) {
+    errors.push(
+      "PLAN.md must contain one ordered content-expansion correction marker pair.",
+    );
+    return null;
+  }
+  if (
+    plan.indexOf(CONTENT_EXPANSION_START, start + CONTENT_EXPANSION_START.length) !==
+      -1 ||
+    plan.indexOf(CONTENT_EXPANSION_END, end + CONTENT_EXPANSION_END.length) !== -1
+  ) {
+    errors.push(
+      "PLAN.md must contain exactly one content-expansion correction marker pair.",
+    );
+    return null;
+  }
+  return plan
+    .slice(start + CONTENT_EXPANSION_START.length, end)
+    .replace(/\r\n/g, "\n")
+    .trim();
 }
 
 function parseIsoDate(value) {
@@ -572,6 +863,36 @@ function campaignRecords(ledger) {
   return records;
 }
 
+export function validateExperimentsAppendOnlyBaseline(experiments) {
+  const errors = [];
+  const markerIndex = experiments.indexOf(EXPERIMENTS_APPEND_ONLY_BASELINE_MARKER);
+  if (markerIndex === -1) {
+    errors.push(
+      "EXPERIMENTS.md must retain its immutable append-only baseline marker.",
+    );
+    return errors;
+  }
+  if (
+    experiments.indexOf(
+      EXPERIMENTS_APPEND_ONLY_BASELINE_MARKER,
+      markerIndex + EXPERIMENTS_APPEND_ONLY_BASELINE_MARKER.length,
+    ) !== -1
+  ) {
+    errors.push(
+      "EXPERIMENTS.md must contain exactly one immutable append-only baseline marker.",
+    );
+  }
+
+  const protectedPrefix = experiments.slice(0, markerIndex);
+  const digest = createHash("sha256").update(protectedPrefix).digest("hex");
+  if (digest !== EXPECTED_EXPERIMENTS_APPEND_ONLY_BASELINE_SHA256) {
+    errors.push(
+      `EXPERIMENTS.md append-only baseline changed: expected ${EXPECTED_EXPERIMENTS_APPEND_ONLY_BASELINE_SHA256}, received ${digest}. Restore the protected history and append a correction instead.`,
+    );
+  }
+  return errors;
+}
+
 function inspectExperimentLedger(experiments, errors) {
   const ledgerHeading = "\n## Ledger\n";
   const ledgerIndex = experiments.indexOf(ledgerHeading);
@@ -641,11 +962,36 @@ function inspectExperimentLedger(experiments, errors) {
       `The experiment date-schema cutover marker must remain outside records and immediately precede ${FIRST_DATE_SCHEMA_EXPERIMENT_ID}.`,
     );
   }
+  const successorSchemaMarkers = [
+    ...ledger.matchAll(/<!-- SUCCESSOR-EXPERIMENT-SCHEMA-V1 -->/g),
+  ];
+  if (successorSchemaMarkers.length !== 1) {
+    errors.push(
+      "EXPERIMENTS.md must contain exactly one successor experiment-schema cutover marker.",
+    );
+  }
+  const successorSchemaMarkerIndex =
+    successorSchemaMarkers[0]?.index ?? Number.POSITIVE_INFINITY;
+  if (
+    Number.isFinite(successorSchemaMarkerIndex) &&
+    successorSchemaMarkerIndex <= dateSchemaMarkerIndex
+  ) {
+    errors.push(
+      "The successor experiment-schema cutover must follow the historical date-schema cutover.",
+    );
+  }
   const blocks = [
     ...ledger.matchAll(
       /<!-- EXPERIMENT-RECORD:START -->([\s\S]*?)<!-- EXPERIMENT-RECORD:END -->/g,
     ),
   ].map((match) => ({ body: match[1], index: match.index ?? -1 }));
+  if (
+    blocks.some(({ body }) => body.includes(SUCCESSOR_EXPERIMENT_SCHEMA_MARKER))
+  ) {
+    errors.push(
+      "The successor experiment-schema cutover marker must remain outside experiment records.",
+    );
+  }
   const startedIds = new Set();
   const latestStatuses = new Map();
   const launchDatesById = new Map();
@@ -790,8 +1136,13 @@ function inspectExperimentLedger(experiments, errors) {
       if (startDate && endDate && (launched < startDate || launched > endDate)) {
         errors.push(`${recordLabel} launch date must fall inside its Data window.`);
       }
-      if (launched > CAMPAIGN_DEADLINE) {
-        errors.push(`${recordLabel} cannot launch after 2026-08-18.`);
+      const isSuccessorExperiment = blockIndex > successorSchemaMarkerIndex;
+      const deadline = isSuccessorExperiment
+        ? SUCCESSOR_CAMPAIGN_DEADLINE
+        : HISTORICAL_CAMPAIGN_DEADLINE;
+      const deadlineText = isSuccessorExperiment ? "2026-09-21" : "2026-08-18";
+      if (launched > deadline) {
+        errors.push(`${recordLabel} cannot launch after ${deadlineText}.`);
       }
       if (id && startedIds.has(id)) launchDatesById.set(id, launched);
     }
@@ -837,7 +1188,13 @@ function inspectExperimentLedger(experiments, errors) {
   };
 }
 
-export function validateGoalControlPlane({ plan, experiments }) {
+export function validateGoalControlPlane({
+  plan,
+  experiments,
+  scenarioBacklog,
+  scenarioReport,
+  sitemapRows,
+}) {
   const errors = [];
   const frozen = frozenContract(plan, errors);
   if (frozen) {
@@ -854,12 +1211,115 @@ export function validateGoalControlPlane({ plan, experiments }) {
       );
     }
   }
+  const correction = authorityFirstCorrection(plan, errors);
+  if (correction) {
+    const normalized = normalizeWhitespace(correction);
+    for (const [label, clause] of requiredAuthorityFirstClauses) {
+      if (!normalized.includes(normalizeWhitespace(clause))) {
+        errors.push(`Authority-first correction is missing or changed: ${label}.`);
+      }
+    }
+  }
+  const successor = successorGoalContract(plan, errors);
+  if (successor) {
+    const normalized = normalizeWhitespace(successor);
+    for (const [label, clause] of requiredSuccessorClauses) {
+      if (!normalized.includes(normalizeWhitespace(clause))) {
+        errors.push(`Successor Goal contract is missing or changed: ${label}.`);
+      }
+    }
+    const digest = createHash("sha256").update(successor).digest("hex");
+    if (digest !== EXPECTED_SUCCESSOR_SHA256) {
+      errors.push(
+        `Successor Goal contract hash changed: expected ${EXPECTED_SUCCESSOR_SHA256}, received ${digest}.`,
+      );
+    }
+  }
+  const successorWaiting = successorWaitingWork(plan, errors);
+  if (successorWaiting) {
+    const normalized = normalizeWhitespace(successorWaiting);
+    for (const [label, clause] of requiredSuccessorWaitingClauses) {
+      if (!normalized.includes(normalizeWhitespace(clause))) {
+        errors.push(`Successor waiting work is missing or changed: ${label}.`);
+      }
+    }
+    const digest = createHash("sha256").update(successorWaiting).digest("hex");
+    if (digest !== EXPECTED_SUCCESSOR_WAITING_SHA256) {
+      errors.push(
+        `Successor waiting-work contract hash changed: expected ${EXPECTED_SUCCESSOR_WAITING_SHA256}, received ${digest}.`,
+      );
+    }
+  }
+  const contentExpansion = contentExpansionCorrection(plan, errors);
+  if (contentExpansion) {
+    const normalized = normalizeWhitespace(contentExpansion);
+    for (const [label, clause] of requiredContentExpansionClauses) {
+      if (!normalized.includes(normalizeWhitespace(clause))) {
+        errors.push(`Content-expansion correction is missing or changed: ${label}.`);
+      }
+    }
+  }
 
   if (!experiments.includes("This file is append-only.")) {
     errors.push("EXPERIMENTS.md must retain its append-only policy.");
   }
   if (!experiments.includes("24h readout") || !experiments.includes("W8 readout")) {
     errors.push("EXPERIMENTS.md must retain the 24h, 7d, W2, W4, and W8 readout schema.");
+  }
+  if (
+    !experiments.includes(
+      "## Campaign observation: fixed final window at 2026-08-21T04:28:22Z",
+    )
+  ) {
+    errors.push("EXPERIMENTS.md must retain the fixed final-window observation.");
+  }
+  if (
+    !experiments.includes(
+      "## Campaign correction: authority-first execution at 2026-08-21T04:28:22Z",
+    )
+  ) {
+    errors.push("EXPERIMENTS.md must retain the authority-first campaign correction.");
+  }
+  if (
+    !experiments.includes(
+      "## Campaign approval: successor authority-first campaign at 2026-08-21T08:24:29Z",
+    )
+  ) {
+    errors.push("EXPERIMENTS.md must retain the approved successor campaign record.");
+  }
+  if (
+    !experiments.includes(
+      "## Campaign approval: successor waiting work at 2026-08-22T20:55:14Z",
+    )
+  ) {
+    errors.push("EXPERIMENTS.md must retain the approved successor waiting-work record.");
+  }
+  if (
+    !experiments.includes(
+      "## Campaign control: trilingual scenario expansion approved at 2026-08-23T05:00:00Z",
+    )
+  ) {
+    errors.push(
+      "EXPERIMENTS.md must retain the approved trilingual scenario-expansion record.",
+    );
+  }
+  if (!scenarioBacklog || typeof scenarioBacklog !== "object") {
+    errors.push("docs/seo-scenario-backlog.json must be present and valid JSON.");
+  } else if (typeof scenarioReport !== "string") {
+    errors.push("docs/seo-scenario-backlog.md must be present.");
+  } else if (!Array.isArray(sitemapRows) || sitemapRows.length === 0) {
+    errors.push("The scenario verifier requires the current sitemap intent rows.");
+  } else {
+    const scenario = validateScenarioBacklog(scenarioBacklog, {
+      sitemapRows,
+      renderedReport: scenarioReport,
+    });
+    for (const error of scenario.errors) {
+      errors.push(`Scenario backlog: ${error}`);
+    }
+    if (renderScenarioBacklog(scenarioBacklog) !== scenarioReport) {
+      errors.push("Scenario backlog generated report must remain synchronized.");
+    }
   }
   const mutable = inspectMutableCampaignState(plan, errors);
   inspectAcquisitionFocus(plan, errors);
@@ -912,7 +1372,7 @@ function parseArgs(argv) {
       throw new Error(`Unexpected argument: ${argument}`);
     }
     const key = argument.slice(2);
-    if (!["plan", "experiments"].includes(key)) {
+    if (!["plan", "experiments", "scenario", "scenario-report"].includes(key)) {
       throw new Error(`Unknown option: ${argument}`);
     }
     const value = argv[index + 1];
@@ -925,16 +1385,38 @@ function parseArgs(argv) {
   return {
     planPath: resolve(values.plan ?? resolve(repoRoot, "PLAN.md")),
     experimentsPath: resolve(values.experiments ?? resolve(repoRoot, "EXPERIMENTS.md")),
+    scenarioPath: resolve(
+      values.scenario ?? resolve(repoRoot, "docs/seo-scenario-backlog.json"),
+    ),
+    scenarioReportPath: resolve(
+      values["scenario-report"] ??
+        resolve(repoRoot, "docs/seo-scenario-backlog.md"),
+    ),
   };
 }
 
 async function run() {
-  const { planPath, experimentsPath } = parseArgs(process.argv.slice(2));
-  const [plan, experiments] = await Promise.all([
+  const { planPath, experimentsPath, scenarioPath, scenarioReportPath } = parseArgs(
+    process.argv.slice(2),
+  );
+  const [plan, experiments, scenarioJson, scenarioReport] = await Promise.all([
     readFile(planPath, "utf8"),
     readFile(experimentsPath, "utf8"),
+    readFile(scenarioPath, "utf8"),
+    readFile(scenarioReportPath, "utf8"),
   ]);
-  const errors = validateGoalControlPlane({ plan, experiments });
+  const scenarioBacklog = JSON.parse(scenarioJson);
+  const { buildPageIntentRows } = await import("./seo-intent-map.mjs");
+  const errors = [
+    ...validateExperimentsAppendOnlyBaseline(experiments),
+    ...validateGoalControlPlane({
+      plan,
+      experiments,
+      scenarioBacklog,
+      scenarioReport,
+      sitemapRows: buildPageIntentRows(),
+    }),
+  ];
   if (errors.length > 0) {
     console.error(`[seo-goal] FAIL (${errors.length} violations)`);
     for (const error of errors) console.error(`- ${error}`);
@@ -942,7 +1424,7 @@ async function run() {
     return;
   }
   console.log(
-    "[seo-goal] PASS: frozen contract, acquisition focus, and production-concurrency guard verified.",
+    "[seo-goal] PASS: goal contracts, trilingual scenario backlog, acquisition focus, and production-concurrency guard verified.",
   );
 }
 

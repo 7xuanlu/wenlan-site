@@ -7113,3 +7113,935 @@ increase for that experiment.
   rank, source-to-page sessions, causality, or SEO success from publication.
 - Excluded actions: no indexing request, GSC validation, external publication,
   paid action, synthetic event, analytics mutation, or metric change occurred.
+<!-- EXPERIMENTS-APPEND-ONLY-BASELINE-SHA256:637df82ff50bf214692d6bc9b3b391b625263148dd173f543a5579b68b252403 -->
+
+## Campaign observation: fixed final window at 2026-08-21T04:28:22Z
+
+- Record type: campaign-observation
+- Related experiment: none; this is the terminal read of the original fixed
+  campaign window and does not start another experiment.
+- Evidence: authenticated Search Console API, Vercel Web Analytics API,
+  GitHub REST plus timestamped public stargazer evidence, and the deterministic
+  report at `/tmp/wenlan-seo-final-2026-08-18/final-window-seo.md`.
+- Fixed range: `2026-07-21..2026-08-17`; reporting latency delayed the read
+  but did not move the range.
+- GSC property evidence: 9 clicks, 1,024 impressions, 0.88% CTR, and 15.5
+  property-average position. Visible-query rows separately report 3 clicks
+  and 222 impressions, leaving a 6-click and 802-impression visibility gap.
+- Core query evidence: the exact privacy-visible `llm wiki`,
+  `llm wiki for codebase`, and `local ai knowledge base` rows total 0 clicks
+  and 3 impressions. This is not a complete non-brand total.
+- Vercel evidence: 605 raw visitors and 1,026 pageviews; direct reports 219
+  visitors and 615 pageviews; `google.com` reports 383 visitors and 406
+  pageviews. AI referrals, Reddit referrals, and `llms.txt` hits are zero.
+  Custom CTA events remain account-gated.
+- GitHub evidence: timestamped stargazer evidence reports 47 stars at the
+  2026-08-18 deadline; REST reports 48 at the later final read. The fixed
+  deadline value is 47.
+- Result: failure. The campaign missed 91 clicks, 8,976 impressions, 1,395
+  Vercel visitors, and 53 stars at the protected deadline and window.
+- Decision: stop the original campaign under its deadline stop condition.
+  Preserve the final metrics and do not move its window or redefine success.
+- Excluded actions: no website edit, push, PR, merge, deployment, indexing
+  request, GSC validation, external publication, paid action, synthetic event,
+  analytics mutation, or metric-definition change occurred.
+
+## Campaign correction: authority-first execution at 2026-08-21T04:28:22Z
+
+- Record type: campaign-correction
+- Approval: the user explicitly instructed the controller to modify the Goal
+  from the root-cause finding and not repeat work in ineffective directions.
+- Objective: establish qualified non-brand query ownership and inspectable
+  external authority for the protected AI knowledge-base and LLM-wiki cluster.
+- Non-progress outputs: article count, indexed-page count, technical passes,
+  indexing requests, open directory pull requests, and raw Vercel visitors.
+- Existing-page gate: confirmed post-deploy Google crawl, at least 20
+  target-page impressions in one complete 28-day GSC range, and at least 3
+  joined qualified visible impressions before another SEO content, title,
+  metadata, or internal-link experiment.
+- Net-new gate: full candidate gate, no existing query owner, locale-specific
+  evidence for translations, and one predeclared authority or distribution
+  path.
+- Cooldown: do not edit the same canonical again until 28 complete days after
+  a confirmed post-deploy crawl, except for factual or technical corrections.
+- Stop rule: two consecutive below-exposure website experiments stop the
+  on-page lane; the next action must build inspectable authority or wait.
+- Next step: update the deterministic Goal verifier and weekly action queue so
+  sparse page rows cannot silently re-enable the old strategy. Do not invent a
+  new numeric deadline or target.
+
+## Campaign observation: authority-path reconciliation at 2026-08-21T04:43:02Z
+
+- Record type: campaign-observation
+- Related experiment: none; this is read-only post-campaign authority
+  preparation and does not restart the stopped campaign.
+- Existing attempts: twelve of the thirteen directory PRs recorded on
+  2026-08-12 remain open with no new merge. `tolkonepiu/best-of-mcp-servers#225`
+  was closed on 2026-08-18 because Wenlan did not meet that catalog's 50-star
+  threshold. An open PR remains attempted distribution rather than authority.
+- Selected candidate: Awesome Selfhosted is the only prepared next authority
+  path. The rendered repository reports 314,007 stars, remains active, and
+  merged recent additions through 2026-08-17. Wenlan now passes its four-month
+  release-age gate, current maintenance, license, installation, category, and
+  required duplicate checks.
+- Candidate artifact:
+  `docs/seo-audits/2026-08-20-awesome-selfhosted-authority-candidate.md`
+  records the exact one-file `software/wenlan.yml` proposal and provenance.
+- Risk: the repository rejects noncompliant machine-generated contributions,
+  and a recent similar AI-tool submission received a maintainer rejection
+  focused on generated tone and development style. Mechanical eligibility is
+  not publication approval or likely acceptance.
+- Decision: do not submit automatically. Ask the user to review the exact YAML
+  and explicitly approve the one-file external PR. If approved, use only the
+  upstream template and factual YAML without marketing prose or automated
+  maintainer interaction.
+- Excluded actions: no fork, branch, commit, push, PR, issue, comment,
+  maintainer message, website change, deployment, indexing request, GSC
+  validation, paid action, synthetic event, analytics mutation, or metric-
+  definition change occurred.
+
+## Campaign observation: Awesome Selfhosted local gate at 2026-08-21T04:47:45Z
+
+- Record type: campaign-observation
+- Related experiment: none; this is isolated local validation of the prepared
+  authority candidate and does not restart the stopped campaign.
+- Upstream base: current master
+  `237fd410a7e9d8ba68a2cc7b4324ae604728e14b`, fetched into a temporary clone.
+- Candidate scope: one untracked file, `software/wenlan.yml`, matching the
+  reviewed audit artifact. No upstream or fork state was changed.
+- Passing gates: upstream's pinned `hecat@1.6.0` toolchain installed;
+  `make export_markdown` completed and rendered Wenlan under Knowledge
+  Management Tools; `git diff --check` passed; no Wenlan lint finding was
+  emitted.
+- Failing gate: `make awesome_lint` failed on the existing `ZincSearch` entry
+  because its source repository is now archived. Current master advanced to
+  this metadata state after the last observed successful build, so a new PR
+  would be expected to reproduce the unrelated whole-tree failure.
+- Decision: do not submit yet and do not mix an unrelated ZincSearch fix into
+  the Wenlan one-file contribution. After explicit publication approval,
+  refetch current master and require the baseline plus candidate PR workflow
+  to pass before any push.
+- Excluded actions: no fork, branch, commit, push, PR, issue, comment,
+  maintainer message, website change, deployment, indexing request, GSC
+  validation, paid action, synthetic event, analytics mutation, or metric-
+  definition change occurred.
+
+## Campaign approval: successor authority-first campaign at 2026-08-21T08:24:29Z
+
+- Record type: campaign-approval
+- Contract status: approved by the user in this Codex task
+- Deadline and final window: deadline `2026-09-21`; fixed final range
+  `2026-08-24..2026-09-20`, with delayed reading allowed but no window move.
+- Protected targets: GitHub total stars >=100; GSC property clicks >=100;
+  GSC property impressions >=10,000; Vercel visitors >=2,000.
+- Authenticated starting range: `2026-07-24..2026-08-20`.
+- Starting GSC property totals: 8 clicks, 985 impressions, 0.81% CTR, and 16.5
+  property-average position. Visible-query totals remain separate at 2 clicks
+  and 212 impressions, leaving a 6-click and 773-impression visibility gap.
+- Starting Vercel totals: 248 raw visitors and 646 pageviews. Referrers remain
+  separate at 217 direct visitors, 30 `google.com`, 1 `cn.bing.com`, and 1
+  DuckDuckGo; authenticated source-to-page rows are retained in
+  `/tmp/wenlan-seo-successor-2026-08-21` without person-level attribution.
+- Starting GitHub total: 48 stars from GitHub REST at
+  `2026-08-21T08:23:54.719Z`.
+- Deterministic report:
+  `/tmp/wenlan-seo-successor-2026-08-21/successor-baseline.md`, fingerprint
+  `sha256:c830faf477da514f59754da066223b6080c60a6da745b4482a9fe9abb5434fa4`.
+- Execution correction: qualified non-brand query ownership and inspectable
+  live or merged authority are the growth outcomes. The approved 20-page,
+  3-joined-query, post-crawl, canonical-cooldown, and two-below-exposure stops
+  remain protected; the starting report nominates no on-page action.
+- Exact external approval: the user approved the one-file Awesome Selfhosted
+  scope in
+  `docs/seo-audits/2026-08-20-awesome-selfhosted-authority-candidate.md`,
+  including fork, branch, commit, push, PR creation, and read-only result
+  verification, only after current upstream plus candidate pass the upstream
+  PR gate.
+- Goal API state: `create_goal` rejected the successor because the prior
+  blocked Goal remains unfinished; the old Goal cannot truthfully be marked
+  complete. The repo contract is therefore protected while app-level Goal
+  replacement remains user-controlled.
+- Excluded actions: no other external publication, website deployment,
+  request indexing, GSC validation, paid acquisition, synthetic event,
+  analytics mutation, or metric-definition change is approved.
+
+## Campaign observation: Awesome Selfhosted authority PR at 2026-08-22T04:11:12Z
+
+- Record type: campaign-observation
+- Related experiment: none; this is the approved authority-path publication,
+  not a website or search-content experiment.
+- Upstream gate: current `awesome-selfhosted/awesome-selfhosted-data` master
+  `8d4c53ae49dd67b54447fb10da781fc681d78e04` plus the exact candidate passed
+  `make awesome_lint`, `make export_markdown`, and `git diff --check` after
+  upstream removed the stale ZincSearch entry that blocked the earlier read.
+- Duplicate gate: repository content plus open and closed issue and pull-
+  request searches for `Wenlan`, `wenlan.app`, and `7xuanlu/wenlan` found no
+  prior submission.
+- Publication: fork `7xuanlu/awesome-selfhosted-data`, branch
+  `codex/add-wenlan`, commit
+  `5db2d2953f342d0ea953f8bfe98dea3dc2e319ec`, and upstream PR
+  `https://github.com/awesome-selfhosted/awesome-selfhosted-data/pull/2955`.
+- Exact scope: one added file, `software/wenlan.yml`, with 11 additions and no
+  deletions. The PR uses the unmodified upstream template with applicable
+  boxes checked and contains no extra marketing prose.
+- First result read: PR open, not draft, and mergeable; no review, comment, or
+  status check was reported. Missing checks are unavailable, not passing.
+- Decision: wait for maintainer review. An open PR is attempted distribution,
+  not authority. Count authority only after merge and a rendered upstream
+  listing with correct Wenlan website and source links.
+- Excluded actions: no maintainer message, automated reply, unrelated upstream
+  fix, website edit, deployment, indexing request, GSC validation, paid
+  action, synthetic event, analytics mutation, or metric-definition change
+  occurred.
+
+## Campaign observation: directory PR conflict reconciliation at 2026-08-22T04:41:52Z
+
+- Record type: campaign-observation
+- Related experiment: none; this is read-only authority-path maintenance and
+  local conflict preparation, not a website experiment.
+- Source-native result: no remaining submitted directory PR merged.
+  Awesome Selfhosted PR #2955 remains open and mergeable with no review,
+  comment, or reported check. Eleven older PRs remain open and mergeable without
+  an author-side request. `tolkonepiu/best-of-mcp-servers#225` remains closed
+  on its documented 50-star threshold.
+- Actionable blocker: `DhanushNehru/awesome-mcp-servers#52` is open but now
+  conflicting. Current upstream keeps the correct `7xuanlu/wenlan` URL but
+  still displays the legacy `Origin MCP` name and description.
+- Local candidate: merge current upstream
+  `31a75ed430ece9952da413ef81fe907780c45d46` into the existing
+  `7xuanlu:update-wenlan-listing` branch and resolve the only content conflict
+  in favor of the existing Wenlan line. The resulting comparison against
+  upstream is exactly one README replacement, with no unrelated workflow or
+  catalog change.
+- Verification: `git diff --check` passed, the compared diff contains the
+  single Origin-to-Wenlan replacement, and the Wenlan GitHub URL returned HTTP
+  200.
+- Decision: hold the local resolution for explicit commit-and-push approval.
+  Do not create a new PR or message the maintainer. A repaired open PR remains
+  attempted distribution, not authority.
+- Excluded actions: no commit, push, PR mutation, maintainer message, website
+  edit, deployment, indexing request, GSC validation, paid action, synthetic
+  event, analytics mutation, or metric-definition change occurred.
+
+## Campaign observation: directory PR conflict repair at 2026-08-22T04:46:49Z
+
+- Record type: campaign-observation
+- Related experiment: none; this is the explicitly approved maintenance of an
+  existing distribution attempt, not a website experiment or new submission.
+- Publication: merge commit
+  `7247b2294e98f0556c5594915716513d6bf462d9` incorporates upstream main
+  `31a75ed430ece9952da413ef81fe907780c45d46` and was pushed to
+  `7xuanlu/dhanushnehru-awesome-mcp-servers:update-wenlan-listing`.
+- Remote scope: `DhanushNehru/awesome-mcp-servers#52` now compares exactly one
+  README replacement, from the legacy `Origin MCP` name and description to
+  the factual `Wenlan MCP` entry. No upstream workflow or unrelated catalog
+  change appears in the pull-request diff.
+- Result: PR #52 is open, non-draft, and mergeable again. `hypersweep` passes.
+  `lychee` fails on 16 whole-repository links reported as rejected HTTP 200
+  responses; its failure list does not include `github.com/7xuanlu/wenlan`.
+- Decision: wait for maintainer review. Do not repair the unrelated upstream
+  checker in this PR or send an automated maintainer message. The open PR
+  remains attempted distribution, not authority.
+- Excluded actions: no new PR, maintainer message, website edit, deployment,
+  indexing request, GSC validation, paid action, synthetic event, analytics
+  mutation, or metric-definition change occurred.
+
+## Campaign observation: authority PR check refresh at 2026-08-22T20:18:56Z
+
+- Record type: campaign-observation
+- Related experiment: none; this is a read-only source-native authority and
+  GitHub-star refresh.
+- Awesome Selfhosted: PR #2955 remains open, non-draft, and mergeable. Its
+  `syntax-checks` workflow completed successfully at
+  `2026-08-22T07:16:55Z`; no maintainer review, comment, or merge exists.
+- Existing PR maintenance: `DhanushNehru/awesome-mcp-servers#52` remains open
+  and mergeable with the exact one-file replacement. `hypersweep` passes and
+  the previously reconciled unrelated whole-repository `lychee` failure
+  remains unchanged.
+- GitHub native unit: `7xuanlu/wenlan` reports 48 total stars, unchanged from
+  the fixed successor starting observation. This is a point-in-time REST
+  value, not an attributed result of either pull request.
+- Weekly evidence boundary: no committed weekly SEO report newer than
+  `2026-08-07` exists in this worktree. The authenticated successor capture
+  ending `2026-08-20` remains the newer protected baseline; the old weekly
+  action queue does not authorize an on-page change.
+- Decision: keep both PRs stable and wait for maintainer state. Do not create
+  a no-op update, maintainer message, new directory submission, or website
+  experiment from unchanged star or stale weekly evidence.
+- Excluded actions: no push, PR mutation, maintainer message, website edit,
+  deployment, indexing request, GSC validation, paid action, synthetic event,
+  analytics mutation, or metric-definition change occurred.
+
+## Campaign correction: 2026-08-21 weekly evidence import at 2026-08-22
+
+- Record type: campaign-correction and evidence observation.
+- Correction: the `2026-08-21` weekly automation completed successfully in
+  its isolated worktree. The preceding observation's statement that no newer
+  weekly report existed described only this worktree and was not the campaign-
+  wide state. The exact primary report is now imported unchanged at
+  `docs/seo-audits/2026-08-21-weekly-seo.md`.
+- Evidence range and fingerprint: authenticated `2026-07-24..2026-08-20`;
+  `sha256:20b31bcecc2f92ee54f7808a04f6d2a5f406c171614e19c59ca77024e1b5b1b6`.
+- GSC native units: property totals are 8 clicks and 1,005 impressions;
+  visible-query totals are 2 clicks and 216 impressions; the visibility gap
+  is 6 clicks and 789 impressions. Page-table impressions remain a separate
+  1,663-impression aggregate and are not substituted for property impressions.
+- Other native units: Vercel reports 248 visitors and 646 pageviews; GitHub
+  reports 48 stars at `2026-08-21T16:03:11.543Z`. The fixed successor starting
+  observation remains 8 clicks, 985 impressions, 248 visitors, and 48 stars;
+  the later GSC backfill is an observation, not a baseline rewrite.
+- Protected action read: no owner passes a clean post-crawl window with both
+  20 page impressions and 3 joined qualified visible-query impressions.
+  English LLM Wiki is 16/2, English Obsidian is 18/1, and the document
+  knowledge-base guide is 7/1. `/learn` has 140 page impressions, but its
+  three qualified impressions are split across three mismatched intents.
+- Decision: no on-page or net-new article action. Keep the affected canonicals
+  stable until the next clean comparison on `2026-08-28`; continue treating
+  Awesome Selfhosted PR #2955 and Dhanush PR #52 as attempted distribution
+  until source-native maintainer state changes.
+- Excluded actions: no website edit, deployment, indexing request, GSC
+  validation, paid action, synthetic event, analytics mutation, external
+  publication, or metric-definition change occurred.
+
+## Campaign approval: successor waiting work at 2026-08-22T20:55:14Z
+
+- Record type: campaign-approval
+- Contract status: approved by the user in this Codex task
+- Approved work: trilingual demand reconnaissance; public GitHub conversion-
+  path audit; source-native maintenance of the two current authority PRs plus
+  research for at most one exact-fit high-authority candidate; and preparation
+  of the `2026-08-28` native-unit decision matrix.
+- Output boundary: evidence matrices, audit findings, and local candidate
+  diffs only. These lanes are not website experiments and do not consume the
+  production slot.
+- Excluded actions: no website or README mutation, commit, push, PR, merge,
+  deployment, external publication, directory submission, maintainer message,
+  request indexing, GSC validation, paid acquisition, synthetic event,
+  analytics mutation, or metric-definition change is approved by this record.
+
+## Campaign observation: successor App Goal replacement attempt at 2026-08-22T20:55:14Z
+
+- Record type: campaign-observation
+- User direction: replace the app's stale `2026-08-18` Goal with the approved
+  `2026-09-21` successor and preserve the approved waiting work against drift.
+- Repository result: the waiting-work block is hash-protected in `PLAN.md`,
+  this append-only approval record exists, and the deterministic verifier has
+  a mutation test for both the work scope and approval record.
+- App result: the old Goal is blocked, but `create_goal` returned
+  `cannot create a new goal because this thread has an unfinished goal;
+  complete the existing goal first.` The unmet historical Goal cannot be
+  truthfully marked complete, and no supported tool can mutate its objective.
+- Decision: keep executing the repository-protected successor. The user must
+  clear or replace the old Goal through the app; after that state change,
+  create the successor Goal with the exact protected 9/21 objective.
+- Excluded actions: no metric, deadline, final window, website, README,
+  external publication, indexing, validation, analytics, or paid state was
+  changed to work around the Goal API limitation.
+
+## Campaign observation: successor waiting-work initial audit at 2026-08-22
+
+- Record type: campaign-observation
+- Artifact: `docs/seo-audits/2026-08-22-successor-waiting-work-initial-audit.md`.
+- Demand evidence: 96 Exa results across 12 English, zh-TW, zh-CN, and Reddit-
+  aimed workstreams deduplicated to 81 URLs. Exa returned no exact Reddit URL
+  for its Reddit-aimed searches; three domain-filtered retries supplied the
+  retained Reddit evidence. No source is treated as GSC or keyword volume.
+- Demand result: the repeated job is a maintained, source-backed AI knowledge
+  base or LLM Wiki with ingest, query, lint, citations, stale-state, review,
+  and source ownership. zh-CN adds explicit `Codex knowledge base` wording;
+  generic memory, generic Obsidian workflow, and AI notes remain non-nominating.
+- GitHub audit: the four localized public READMEs already provide a strong
+  implementation-backed first screen and install path. They contain no literal
+  star request, but that is only a candidate conversion gap. GitHub latest is
+  `v0.16.0`, while the live homepage, download, and about surfaces render
+  `v0.15.8`; this factual release drift is the first discrete repair candidate.
+- Decision: no article, translation, metadata, internal-link, or README change.
+  Keep current page owners stable to `2026-08-28`. Prepare the release-alignment
+  proposal separately from any optional star CTA and request separate approval
+  before changing or publishing it.
+- Excluded actions: no website or README edit, commit, push, PR, merge,
+  deployment, external publication, directory submission, maintainer message,
+  indexing request, GSC validation, analytics mutation, paid action, synthetic
+  event, or metric-definition change occurred.
+
+## Campaign correction: successor App Goal activated at 2026-08-22T21:09:02Z
+
+- Record type: campaign-correction
+- User action: the user cleared the historical blocked Goal through the app.
+- Precondition: `get_goal` returned `goal: null` and
+  `pnpm seo:goal:check` passed before replacement.
+- Result: `create_goal` created the exact protected `2026-09-21` successor
+  objective with status `active`, zero initial token usage, and zero initial
+  elapsed-time usage. It includes the fixed `2026-08-24..2026-09-20` final
+  window, four independent numeric targets, fixed starting observations,
+  post-crawl 20/3 gate, complete inherited quality and evidence contract, four
+  approved waiting-work lanes, and all external-state approval boundaries.
+- Correction to preceding observation: the Goal API limitation was resolved
+  by the user's app state change; the repository contract and App Goal are now
+  aligned. The prior failed attempt remains append-only history.
+- Excluded actions: no metric, deadline, final window, website, README,
+  external publication, indexing, validation, analytics, or paid state was
+  changed during Goal replacement.
+
+## Campaign observation: Awesome Mac authority candidate gate at 2026-08-22
+
+- Record type: campaign-observation
+- Related experiment: none; this is the one bounded new authority-path review
+  allowed by the approved successor waiting work.
+- Artifact:
+  `docs/seo-audits/2026-08-22-awesome-mac-authority-gate.md`.
+- Source-native state: `jaywcjlove/awesome-mac` reported 111,611 GitHub stars,
+  `archived: false`, last push `2026-08-21T08:08:53Z`, default branch `master`,
+  and license `CC0-1.0` at capture.
+- Fit evidence: the current repository has both `AI Tools` and `Note-taking`
+  categories. Recent merged third-party precedents include Loadout PR #2586,
+  NoteGen PR #2462, and AQBot PR #2423; each changed the four required locale
+  README files.
+- Contribution gate: one useful, non-duplicate suggestion per PR; concise and
+  alphabetized entry; English, simplified Chinese, Japanese, and Korean README
+  synchronization required by the current contribution instructions.
+- Duplicate check: current GitHub code search found no `Wenlan`, `wenlan.app`,
+  or `7xuanlu/wenlan` match, and issue search found no Wenlan or
+  `useorigin.app` PR.
+- Decision: pass as the single researched successor candidate under `AI
+  Tools`; stop additional directory discovery in this window. It remains a
+  candidate, not submitted distribution or earned authority.
+- Excluded actions: no fork, external-repository edit, commit, push, PR,
+  maintainer message, website or README edit, deployment, indexing request,
+  GSC validation, analytics mutation, paid action, synthetic event, or metric
+  change occurred.
+
+## Campaign observation: August 28 decision matrix prepared at 2026-08-22T21:16:21Z
+
+- Record type: campaign-observation
+- Related experiment: none; this is the approved waiting-period decision
+  control, not a website experiment or performance readout.
+- Artifact:
+  `docs/seo-audits/2026-08-28-successor-decision-matrix.md`.
+- Evidence boundary: the latest completed weekly report remains
+  `docs/seo-audits/2026-08-21-weekly-seo.md` for
+  `2026-07-24..2026-08-20`. Its values appear only as an explicitly labeled
+  reference and do not pre-fill the August 28 observation.
+- Prepared gate: the August 28 result must reuse the successfully completed
+  weekly pipeline and separately preserve GSC property totals, visible-query
+  totals, visibility gap, page rows, joined qualified rows, URL Inspection,
+  Vercel aggregates, GitHub observations, and source-native authority state.
+- Action rule: an existing-page change requires a post-deploy crawl, at least
+  20 target-page impressions, at least 3 joined qualified visible impressions,
+  the 28-complete-day crawl cooldown, owner alignment, and an open production
+  slot. A net-new or translated asset still requires the complete candidate
+  gate and a predeclared authority path.
+- Decision: wait for the August 28 completed weekly evidence; do not turn
+  pending or unavailable cells into zero or an on-page task.
+- Excluded actions: no website, README, release, analytics, indexing,
+  validation, external repository, paid, synthetic-event, or metric state was
+  changed.
+
+## Campaign observation: release alignment and star proposals at 2026-08-22T21:26:06Z
+
+- Record type: campaign-observation; no website experiment was started.
+- Artifact:
+  `docs/seo-audits/2026-08-22-release-and-star-proposals.md`.
+- Release evidence: GitHub's latest release is `v0.16.0`, published
+  `2026-08-19T03:57:54Z`; the tagged app configuration is version `0.16.0`,
+  and the release includes `Wenlan_0.16.0_x64-setup.exe` plus the separate
+  `wenlan-windows-x64.zip` headless runtime. The tagged setup guide and four
+  localized READMEs independently preserve those two Windows paths.
+- Production evidence: rendered `https://wenlan.app/`, `/download`, and
+  `/about` surfaces still expose `v0.15.8`; the about copy incorrectly says
+  Windows has no desktop app. The same stale facts exist in checked
+  `origin/main`, so this is a factual source and deployment correction
+  candidate rather than an inferred SEO opportunity.
+- Exact release proposal: update the release manifest to six website-linked
+  assets; recommend the Windows desktop installer to unambiguous Windows x64
+  browsers while retaining the headless ZIP; align English, zh-TW, zh-CN,
+  docs, structured data, LLM-readable surfaces, OG version, and deterministic
+  tests. Existing generic rendering components do not require redesign.
+- Separate star proposal: add one localized request after the product screenshot
+  proof in English, zh-Hant, zh-Hans, and Spanish READMEs. GitHub provides no
+  native README-view-to-star funnel, so the hypothesis remains unproven and
+  only total stars may be observed in their native unit.
+- Decision: request separate implementation/publication approval for the
+  factual v0.16.0 correction first. Keep the README CTA isolated for a later
+  decision; neither proposal changes the August 28 SEO evidence gate.
+- Excluded actions: no website, README, source repo, release, commit, push, PR,
+  merge, deployment, external publication, indexing, validation, analytics,
+  paid, synthetic-event, or metric state was changed.
+
+## Campaign observation: exact v0.16.0 patch prepared at 2026-08-22T21:40:26Z
+
+- Record type: campaign-observation; no website experiment was started.
+- Artifact:
+  `docs/seo-audits/2026-08-22-wenlan-v0.16.0-proposal.patch`.
+- Base and identity: exact diff from `origin/main`
+  `721b862cde31a767f58c58a46c9f734a1a660114`; SHA-256
+  `6dce422661f86a6303c5445ae12fb5727bd2ecaa4a2c3625a39d65b6374a4f98`.
+- Scope: 15 files, 150 insertions, 92 deletions. It adds the Windows x64
+  desktop installer without removing the headless ZIP, aligns v0.16.0 facts
+  across English, zh-TW, zh-CN, docs, structured data, LLM-readable surfaces,
+  OG output, sitemap dates, recommendation logic, translation hashes, and
+  deterministic contracts.
+- Verification: `pnpm lint` passed; `pnpm test:i18n` passed 63/63;
+  `pnpm test:seo` passed 224/224; `pnpm build` passed and generated 223 static
+  pages; `pnpm seo:technical:built`, `git diff --check`, and reverse patch
+  validation passed.
+- Decision: keep the candidate unapplied until separate implementation and
+  publication approval. It is a factual release correction, not an SEO or
+  star-growth result, and does not change the August 28 decision gate.
+- Excluded actions: no campaign website source, README, source repository,
+  release, commit, push, PR, merge, deployment, external publication,
+  indexing request, GSC validation, analytics mutation, paid action,
+  synthetic event, or metric definition changed.
+
+## Campaign observation: August 28 heartbeat scheduled at 2026-08-22T21:43:49Z
+
+- Record type: campaign-control observation; no experiment was started.
+- The existing heartbeat `wenlan-claude-memory-24h-readout` was updated in
+  place, renamed `wenlan-successor-aug28-decision`, and retargeted to the main
+  successor Goal task. Its next boundary is `2026-08-28T17:30:00Z`, safely
+  after the Friday weekly SEO run.
+- The prompt reuses the completed weekly pipeline, fills the fixed
+  `2026-07-31..2026-08-27` decision matrix, preserves all source-native metric
+  splits, checks the two named authority PRs once, and reapplies the protected
+  crawl, 20-page-impression, 3-qualified-impression, cooldown, owner, and
+  production-slot gates.
+- Decision: stop immediate empty continuations and wait for the scheduled
+  evidence boundary. The same heartbeat must update itself to the next due
+  boundary after the August 28 read; no second automation may be created.
+- Excluded actions: no website, README, release, directory, analytics,
+  indexing, validation, paid, maintainer-message, or other external state was
+  changed.
+
+
+## Campaign correction: Goal blocked for bounded evidence wait at 2026-08-22T21:44:36Z
+
+- Record type: campaign-control correction; no experiment was started or
+  stopped.
+- The same no-action condition repeated across more than three automatic Goal
+  continuations after all four approved waiting-work lanes were complete.
+  No new weekly evidence exists before August 28, no authority PR state change
+  was plausible within minutes, and all website or publication actions still
+  require separate approval.
+- Decision: mark the App Goal `blocked` to stop empty immediate continuations.
+  The successor contract, `2026-09-21` deadline, fixed final window, targets,
+  baselines, and August 28 decision gate remain unchanged. The existing
+  `wenlan-successor-aug28-decision` heartbeat remains active and points to this
+  main task for `2026-08-28T17:30:00Z`.
+- Excluded actions: no website, README, release, directory, analytics,
+  indexing, validation, paid, maintainer-message, or other external state was
+  changed.
+
+## Campaign observation: v0.16.0 website release alignment published at 2026-08-23T03:10:12Z
+
+- Record type: campaign-observation; this factual correction is not a search
+  experiment and does not consume or reset the August 28 evidence gate.
+- Approval boundary: the user approved the exact website correction through
+  commit, push, PR, merge, automatic Vercel deployment, and production
+  read-only verification. The four-language README star request remained
+  excluded.
+- Source result: branch `codex/wenlan-v0160-release-alignment` produced commit
+  `cda3c7adc574a408ed5d40d3a5f182092dcf0e01`; 15 public-site and deterministic
+  contract files changed by 153 insertions and 94 deletions. The final scope
+  adds the Windows x64 desktop setup executable without removing the separate
+  headless runtime ZIP, aligns v0.16.0 facts across English, zh-TW, zh-CN,
+  structured data, Docs, LLM-readable surfaces, OG output, sitemap dates, and
+  recommendation logic, and removes two remaining false separate-repository
+  statements.
+- Publication result: GitHub PR #134
+  `https://github.com/7xuanlu/wenlan-site/pull/134` merged at
+  `2026-08-23T03:06:52Z` as
+  `e614035c65526f30d10832886e6ef047e4a58454`. Vercel reported production
+  deployment success at `2026-08-23T03:07:27Z`; the remote publication branch
+  was deleted.
+- Local verification: `pnpm lint` passed; `pnpm test:i18n` passed 63/63;
+  source-backed `pnpm test:seo` passed 224/224 with explicit Wenlan and
+  wenlan-app checkout roots; `pnpm build` generated 223 static pages;
+  `pnpm seo:technical:built` and `git diff --check` passed. Browser QA inspected
+  17 changed routes at 393x852 and 1280x900 after their entry animations
+  settled; there was no horizontal overflow, broken image, FAQPage schema, or
+  visible English/zh-TW/zh-CN wrapping regression.
+- Production verification: `pnpm seo:technical:deployed` passed with 120
+  sitemap URLs, 24 key pages, 6 utility noindex surfaces, 25 legacy redirects,
+  and 6 bridge-host redirects. Browser DOM checks passed on 18 live routes with
+  exact canonicals, no overflow, no broken images, no FAQPage schema, and no
+  stale separate-repository claim. The live download hub exposes all six
+  v0.16.0 GitHub assets, including both the Windows x64 setup EXE and headless
+  ZIP; English, zh-TW, and zh-CN mobile renders plus the English desktop render
+  were inspected. `llms.txt`, `llms-full.txt`, and all three localized download
+  sitemap entries expose the published state. Windows recommendation mapping
+  is covered by deterministic user-agent tests; this run did not claim a real
+  Windows-browser render from the available browser session.
+- Decision: retain this as an authority-first factual correction, not evidence
+  of search growth. Continue to the fixed August 28 source-native decision
+  matrix; do not restart copy churn or infer clicks, impressions, visitors,
+  downloads, or stars from deployment completion.
+- Excluded actions: no Wenlan README edit, star CTA, new article, new
+  experiment, indexing request, GSC validation, analytics mutation, paid
+  action, external directory submission, maintainer message, synthetic event,
+  or metric-definition change occurred.
+
+## Campaign observation: Awesome Mac distribution PR opened at 2026-08-23T03:37:10Z
+
+- Record type: authority-distribution attempt; this is not a website or search
+  experiment and does not consume or reset the August 28 evidence gate.
+- Approval boundary: the user approved forking `jaywcjlove/awesome-mac`, editing
+  the four required locale READMEs, committing, pushing, and opening an upstream
+  PR. Upstream merge and maintainer messaging remained excluded.
+- Upstream and duplicate evidence: the submission used upstream `master` commit
+  `b4043d92c04720f24bd0855cbc9fe6374205efec`. The repository was active and not
+  archived; exact repository code search and open-PR searches found no existing
+  Wenlan, `wenlan.app`, or `7xuanlu/wenlan` entry before submission.
+- Published attempt: fork `7xuanlu/awesome-mac`, branch
+  `codex/add-wenlan-ai-tools`, commit
+  `e594429f7890089ba3c0633f69eb7ed853f491ed`, and upstream PR #2643
+  `https://github.com/jaywcjlove/awesome-mac/pull/2643`. At capture time the PR
+  is public, open, non-draft, and GitHub reports it mergeable; License
+  Compliance passed.
+- Exact scope: `README.md`, `README-zh.md`, `README-ja.md`, and `README-ko.md`
+  each received one synchronized Wenlan line under AI Tools. The product link
+  is `https://wenlan.app`; the open-source badge links to
+  `https://github.com/7xuanlu/wenlan`; no unrelated entry was changed.
+- Verification: each target README contains exactly one Wenlan entry;
+  `git diff --check` passed; the final diff is four insertions and no deletions;
+  both public links returned HTTP 200; GitHub's PR file list matches exactly
+  the four intended README files.
+- Decision: treat PR #2643 only as attempted distribution. It becomes earned
+  authority evidence only after an upstream merge and a live rendered listing;
+  do not infer impressions, clicks, visitors, downloads, stars, or causality
+  from the open PR.
+- Excluded actions: no Wenlan website or source-repository change, new article,
+  indexing request, GSC validation, analytics mutation, paid action, maintainer
+  message, upstream merge, synthetic event, or metric-definition change
+  occurred.
+
+## Campaign control: search-intent ownership guard at 2026-08-23T03:56:37Z
+
+- Record type: campaign-control correction; not an experiment and no public
+  page changed.
+- Change: added a deterministic locale-aware intent registry and verifier for
+  all 120 canonical sitemap URLs, then corrected weekly GSC ownership routing
+  so narrow variants resolve before broad acquisition clusters.
+- Evidence: the authenticated `2026-07-24..2026-08-20` query-page join contains
+  115 visible rows and no visible protected query split across multiple URLs.
+  Property totals remain 8 clicks / 1,005 impressions; visible-query totals
+  remain 2 clicks / 216 impressions; the visibility gap remains 6 clicks / 789
+  impressions. Hidden rows are unavailable rather than zero.
+- Decision: keep one useful page per user task, not one page per keyword
+  variation. Locale translations may own equivalent intents through distinct
+  self-canonical URLs and reciprocal hreflang. Correct the AI-agent-memory-types
+  and generic CJK Obsidian owners, preserve document-building intent for
+  explicit build/setup queries, and require each configured owner to meet the
+  existing impression floor independently.
+- Artifact: `docs/seo-audits/2026-08-22-search-intent-map.md`.
+- Verification: weekly pipeline tests passed 133/133;
+  `pnpm seo:intent:check`, `pnpm seo:weekly:sample`,
+  `pnpm seo:goal:check`, and `git diff --check` passed.
+- Excluded actions: no website copy or metadata edit, publication, deployment,
+  indexing request, GSC validation, analytics mutation, new experiment, or
+  metric-definition change occurred.
+
+## Campaign control: search-intent ownership guard published at 2026-08-23T04:35:49Z
+
+- Record type: campaign-control publication; not an experiment and no public
+  content or metadata changed.
+- Publication: PR #135
+  `https://github.com/7xuanlu/wenlan-site/pull/135` squash-merged at
+  `2026-08-23T04:33:46Z` as
+  `9d30003eaf1c3965ccc329494f9fc1cd19d3728b`; Vercel Production completed at
+  `2026-08-23T04:34:30Z`; the remote branch was deleted.
+- Scope: deterministic one-intent ownership for all 120 sitemap URLs, narrow
+  query-owner corrections, and independent per-owner evidence floors in the
+  weekly GSC action queue. No rendered page, title, H1, body, canonical,
+  sitemap, redirect, locale route, or analytics integration changed.
+- Verification: complete SEO suite 228/228; weekly pipeline 132/132; intent
+  tests 2/2; intent ownership 120/120; weekly sample, Goal verifier, diff
+  hygiene, Vercel deployment, and the complete deployed technical audit
+  passed.
+- Decision: retain as a campaign-control correction and continue to the
+  August 28 evidence gate without resetting an experiment window.
+- Excluded actions: no indexing request, GSC validation, analytics mutation,
+  external publication other than the approved code PR, paid action,
+  synthetic event, or metric-definition change occurred.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-13-mcp-knowledge-base-server-refresh production verification migration
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-13-mcp-knowledge-base-server-refresh
+- Observed at: 2026-08-15T05:59:42Z
+- Readout: correction
+- Status: measuring
+- Evidence: The protected origin/main campaign record proves PR #132
+  squash-merged as `44b0ad40275554c65444a7941e7c5038d02b7ece`, Vercel Production
+  completed at `2026-08-15T05:56:51Z`, and the deployed route passed direct
+  200, exact canonical, indexability, Article and BreadcrumbList schema,
+  stable `datePublished: 2026-06-07`, `dateModified: 2026-08-13`, sitemap
+  membership, maintained content, FAQ without FAQPage, and responsive render
+  checks. This typed correction changes neither that evidence nor its fixed
+  measurement boundary.
+- Result: pending
+- Decision: wait
+- Next step: Continue the source-native measurement schedule recorded in the
+  protected campaign observation; this cohort does not consume the production
+  slot.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- SUCCESSOR-EXPERIMENT-SCHEMA-V1 -->
+
+## Campaign control: trilingual scenario expansion approved at 2026-08-23T05:00:00Z
+
+- Record type: campaign-control approval; this is not an experiment and does
+  not change historical experiment records.
+- Approval: the user approved the Wenlan trilingual SEO scenario expansion
+  plan, including its protected content correction, successor experiment-date
+  cutover, deterministic scenario registry, four-week target queue, and local
+  verification work.
+- Deadline schema: experiment starts before the marker above remain governed
+  by the historical `2026-08-18` deadline. Later starts use the protected
+  successor deadline `2026-09-21`; starts on `2026-09-22` or later fail.
+- Scenario source: `docs/seo-scenario-backlog.json` is the editable source and
+  `docs/seo-scenario-backlog.md` is generated. Empty SERP or demand evidence is
+  recorded as research required, not zero demand and not a passed gate.
+- Execution: audit the seven ordered families across English, zh-TW, and zh-CN.
+  A measuring owner does not block the next non-overlapping family. Existing-
+  page exposure floors apply only to another rewrite of that owner.
+- Excluded actions: no public page, metadata, canonical, sitemap, redirect,
+  commit, push, PR, merge, deployment, indexing request, GSC validation,
+  analytics mutation, external publication, paid action, or metric definition
+  is authorized or changed by this control record.
+
+## Campaign control: trilingual scenario expansion implemented at 2026-08-23T06:12:00Z
+
+- Record type: campaign-control implementation; this is not a website or
+  search experiment and does not consume a production slot.
+- Artifacts: added the seven-family trilingual source
+  `docs/seo-scenario-backlog.json`, deterministic generated report
+  `docs/seo-scenario-backlog.md`, scenario validator/generator, tests, package
+  commands, protected PLAN correction, and successor deadline cutover.
+- Baseline: the registry preserves 120 sitemap URLs, 46 English Learn URLs,
+  five strict English AI knowledge-base or LLM Wiki owners plus one Obsidian-
+  adjacent owner, five zh-TW Learn URLs, five zh-CN Learn URLs, 1,005 GSC
+  impressions, 8 GSC clicks, 0.80% GSC CTR, 248 Vercel visitors, and 30 Google-
+  referred Vercel visitors as native-unit baselines rather than demand or
+  causal evidence.
+- Gate state: all seven families remain `research`. Empty external evidence is
+  explicitly unavailable, not zero. No family is marked executable until its
+  provenance, repeated-demand, trilingual SERP, clean-gap, product-proof,
+  standalone-utility, internal-link, and authority-path gates all pass.
+- Verification: `pnpm seo:goal:check`, `pnpm seo:scenario:check`,
+  `pnpm test:goal` (40/40), `pnpm test:i18n` (63/63), `pnpm lint`,
+  `pnpm build` (223 static pages), `pnpm seo:technical:built`, and
+  `git diff --check` passed. The source-backed full SEO suite passed 238/241;
+  its three failures are an existing release-alignment mismatch between this
+  dirty worktree's v0.15.8 public constants and the authoritative Wenlan
+  v0.16.0 source, outside this control-plane change.
+- Visual QA: not applicable because no rendered page, metadata, or public
+  content changed in this implementation.
+- Excluded actions: no public page, commit, push, PR, merge, deployment,
+  request indexing, GSC validation, external publication, analytics mutation,
+  paid action, synthetic event, or metric definition changed.
+
+## Campaign control: scenario family 1 gate decision at 2026-08-23T06:15:44Z
+
+- Record type: campaign-control correction; this supersedes only the earlier
+  statement that all seven scenario families remained `research`.
+- Decision: reject a net-new source-change or stale-page family. Independent
+  English, Taiwan, and Chinese-language sources repeat the maintenance problem,
+  but the existing source-backed AI knowledge-base owner in each locale already
+  answers source changes, stale state, conflicts, refresh, citations, and
+  review. Another URL would duplicate the same user task.
+- Evidence boundary: dated web-search result observations and inspectable
+  Reddit, Taiwan documentation, and Chinese-community sources are stored in
+  `docs/seo-scenario-backlog.json` with their native units. The search provider
+  did not expose stable Google rank or Taiwan/mainland geolocation, so the
+  regional Google SERP gate remains pending and no rank is claimed.
+- Existing-owner boundary: family 1 can return only as a refresh of the current
+  source-backed owner after its confirmed post-deploy crawl, 20 page
+  impressions, 3 joined qualified visible-query impressions, and cooldown gate
+  pass. Those floors do not block research on family 2.
+- Next step: audit family 2, the Codex or coding-agent source-backed knowledge-
+  base task, across the three locales. No website experiment starts here.
+- Excluded actions: no public content, commit, push, PR, merge, deployment,
+  indexing request, GSC validation, external publication, analytics mutation,
+  paid action, synthetic event, or metric definition changed.
+
+## Campaign control: scenario family 2 evidence read at 2026-08-23T06:16:50Z
+
+- Record type: campaign-control evidence read; no website experiment starts.
+- Evidence: English results include OpenAI's repository-docs system-of-record
+  and stale-doc gardening workflow plus an inspectable Codex cited-evidence
+  implementation. zh-CN has two high-intent V2EX questions and a Juejin
+  Codex/LLM-wiki implementation. Each source, query, date, language or
+  geography, and native observation unit is stored in the scenario JSON.
+- Current gate: provenance and repeated-demand pass. The trilingual SERP gate
+  remains pending because no exact zh-TW coding-agent knowledge-base result set
+  or stable regional Google capture is stored. Missing zh-TW evidence is
+  unavailable, not zero, and the family remains `research`.
+- Coverage: the English Wenlan Codex workflow partially owns the task; zh-TW
+  and zh-CN have no dedicated Codex knowledge-base owner. The next audit must
+  decide whether English is a gated refresh and whether Mandarin result sets
+  support locale-specific net-new routes, without splitting query variants.
+- Next step: research Taiwan developer and Obsidian communities using natural
+  Codex, coding-agent, project-knowledge, source, citation, and context-loss
+  wording. If that evidence remains weak, record the failure and move to
+  family 3 in the same execution lane.
+- Excluded actions: no content, commit, push, PR, merge, deployment, indexing
+  request, GSC validation, external publication, analytics mutation, paid
+  action, synthetic event, or metric definition changed.
+
+## EXP-2026-08-23-coding-agent-source-backed-knowledge-base
+
+- Status: local preparation; not published and no production measurement clock
+  has started.
+- Successor deadline: `2026-09-21` under
+  `SUCCESSOR-EXPERIMENT-SCHEMA-V1`.
+- User task: give Codex or another coding agent a source-backed project
+  knowledge base without overloading `AGENTS.md`, `CLAUDE.md`, or generic
+  memory.
+- Canonical family:
+  - `https://wenlan.app/learn/coding-agent-source-backed-knowledge-base`
+  - `https://wenlan.app/zh-TW/learn/coding-agent-source-backed-knowledge-base`
+  - `https://wenlan.app/zh-CN/learn/coding-agent-source-backed-knowledge-base`
+- Hypothesis: one task-specific owner per locale that separates always-loaded
+  agent instructions, repository truth, on-demand cited project knowledge,
+  and acceptance tests can earn qualified coding-agent knowledge-base search
+  exposure without cannibalizing the existing Codex session workflow or the
+  generic source-backed architecture guide.
+- Candidate evidence: the complete source-native English, zh-TW, and zh-CN
+  SERP, community, overlap, Wenlan-proof, internal-link, and authority-path
+  gate is stored in `docs/seo-scenario-backlog.json`. The observations are
+  not keyword volume, GSC data, or rank claims.
+- Baseline: the authenticated `2026-07-24..2026-08-20` Wenlan property range
+  reports 8 clicks and 1,005 impressions; visible-query rows report 2 clicks
+  and 216 impressions, leaving a 6-click and 789-impression visibility gap.
+  Vercel separately reports 248 visitors, including 30 attributed to Google;
+  GitHub reports 48 stars. The three new URLs have no pre-publication GSC or
+  Vercel page row. Missing rows are unavailable, not zero.
+- Change: add exactly one English, zh-TW, and zh-CN canonical for the same
+  locale-natural integration task; add reciprocal hreflang, sitemap and
+  Learn-hub membership, Article and BreadcrumbList schema through the shared
+  renderer, visible maintained sources and FAQ without `FAQPage`, and at
+  least three same-locale contextual inbound paths. Do not rewrite the
+  existing Codex workflow owner.
+- Product boundary: current code, tests, specifications, and approved
+  first-party documents remain authoritative. Wenlan supports Markdown,
+  text, text-extractable PDF, folders, and read-only Obsidian Sources; this
+  experiment does not claim arbitrary source-code ingestion or autonomous
+  truth.
+- Publication and index dates: unavailable until separately approved commit,
+  push, PR, merge, Vercel deployment, and production verification. Request
+  indexing and GSC validation are separate approval boundaries.
+- Minimum exposure: each locale independently requires at least 20 GSC
+  target-page impressions in 28 complete days after a confirmed post-deploy
+  Google crawl. Locale exposure is never pooled.
+- Success: after the minimum exposure, a locale records at least 3 qualified
+  joined-query impressions and at least 1 GSC click. Position and CTR are
+  reported separately and cannot replace either condition.
+- Failure: after 28 complete post-crawl days and at least 20 target-page
+  impressions, a locale has no qualified joined-query impressions or no GSC
+  click, or an above-floor query-page join shows that the same task belongs
+  to an existing owner. A technical, factual, unsupported-claim, or duplicate-
+  intent regression stops publication immediately.
+- Inconclusive: fewer than 20 target-page impressions, no confirmed post-
+  deploy crawl, privacy-hidden joined queries, incomplete days, or mixed
+  controller exposure. Inconclusive measurement does not block the next
+  non-overlapping scenario family.
+- Readouts: 24 hours after production completion for technical/indexability
+  only; 7 days for early native-unit GSC page/query and Vercel page/referrer
+  observations; W2 and W4 for continued source-native observation; W8 only
+  if it remains useful after the Goal deadline. The formal decision uses 28
+  complete post-crawl days.
+- Authority path: `https://github.com/thc1006/ai-prompting-guide` is a current
+  exact-fit, English/zh-TW handbook that explicitly welcomes synchronized
+  documentation PRs. It has only 2 GitHub stars at the 2026-08-23 capture, so
+  it is recorded as a small executable path rather than high authority. No
+  contribution or maintainer message is approved by this experiment.
+- Approval boundary: the user approved the trilingual scenario implementation
+  and local verification. Commit, push, PR, merge, deployment, indexing,
+  validation, external publication, paid action, synthetic events, analytics
+  mutation, and metric-definition changes remain excluded.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-23-coding-agent-source-backed-knowledge-base
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-23-coding-agent-source-backed-knowledge-base
+- Status: approved
+- Data window: 2026-08-22..2026-08-28
+- Asset class: net-new-search
+- Launched: 2026-08-23
+- Hypothesis: A task-specific trilingual owner that separates agent instructions, repository truth, and on-demand cited project knowledge will earn qualified coding-agent knowledge-base exposure without cannibalizing the existing Codex session workflow or generic source-backed guide.
+- Candidate evidence: Dated English, zh-TW, and zh-CN official, SERP, Reddit, Taiwan practitioner, V2EX, Juejin, overlap, product-proof, internal-link, and authority-path observations with native units are stored in docs/seo-scenario-backlog.json.
+- Baseline: GSC property 8 clicks and 1,005 impressions; visible-query 2 clicks and 216 impressions; visibility gap 6 clicks and 789 impressions; Vercel 248 visitors with 30 attributed to Google; GitHub 48 stars; new target-page rows unavailable, all kept separate.
+- Change: Add exactly one English, zh-TW, and zh-CN canonical for the coding-agent source-backed project-knowledge task, with same-locale routing, citations, workflow, acceptance tests, reciprocal hreflang, sitemap membership, and at least three contextual inbound paths.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions per locale in 28 complete post-crawl days
+- Success criteria: Per locale, at least 3 qualified joined-query impressions and at least 1 GSC click after the minimum exposure; report CTR and position separately.
+- Failure criteria: After 28 complete post-crawl days and the minimum exposure, a locale has no qualified joined-query impressions or no GSC click, or an above-floor join assigns the same task to an existing owner.
+- Stop criteria: Stop on a technical, factual, unsupported-claim, duplicate-intent, controller-overlap, or approval-boundary violation.
+- 24h readout: pending technical and indexability observation after production completion
+- 7d readout: pending early source-native GSC page/query and Vercel page/referrer observation
+- W2 readout: pending
+- W4 readout: pending formal 28-complete-post-crawl-day decision when eligible
+- W8 readout: pending only if useful after the Goal deadline
+- Result: pending
+- Decision: wait
+- Next step: Complete local deterministic and rendered verification, then request separate publication approval with the exact diff and evidence.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-23 local verification — EXP-2026-08-23-coding-agent-source-backed-knowledge-base
+
+- Observed at: `2026-08-23T08:21:08Z`.
+- Status: prepared locally; not published, no production crawl or measurement
+  clock has started, and the experiment-start record above remains immutable.
+- Routes: the English, zh-TW, and zh-CN candidates each returned local
+  production status `200`, emitted one exact canonical, `index, follow`, one
+  `Article`, one `BreadcrumbList`, reciprocal locale routing, and no
+  `FAQPage` schema.
+- Content: all seven declared Wenlan workflow commands, maintained source and
+  limitation boundaries, visible FAQ, and same-locale contextual paths were
+  present in the production render.
+- Responsive evidence: exact Playwright viewports at `393x852` and
+  `1440x1200` had no horizontal overflow. English, zh-TW, and zh-CN hero,
+  packet, article, and expanded FAQ states were inspected. The Mandarin
+  renderer keeps `知識庫` and `知识库` intact rather than orphaning the final
+  character.
+- Deterministic evidence: `pnpm test:i18n` and `pnpm build` passed after the
+  final render correction. The complete verifier set is recorded in the task
+  handoff after it runs.
+- Decision: request a separate publication approval only after the final
+  verifier set remains green. Commit, push, PR, merge, Vercel deployment,
+  indexing, validation, external publication, paid action, synthetic events,
+  analytics mutation, and metric-definition changes remain excluded.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-23-coding-agent-source-backed-knowledge-base publication approval
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-23-coding-agent-source-backed-knowledge-base
+- Observed at: 2026-08-23T17:41:09Z
+- Readout: correction
+- Status: active
+- Evidence: The user explicitly approved the exact commit, push, PR creation, merge, automatic Vercel deployment, and read-only production-verification scope after reviewing the local implementation and verification result. Request indexing, GSC validation, external publication, paid actions, synthetic events, analytics mutation, and metric-definition changes remain excluded.
+- Result: pending
+- Decision: merge
+- Next step: Complete the independent pre-merge review, push the exact branch, merge only after required checks pass, wait for automatic Vercel production completion, and verify the three live locale routes without requesting indexing.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-23 OpenSEO MCP restoration and authenticated boundary
+
+- The official hosted MCP endpoint `https://app.openseo.so/mcp` was restored
+  to the global Codex configuration and its OAuth flow completed successfully.
+- A fresh read-only Codex execution called `list_projects` and
+  `get_project_context` through OpenSEO without an access error. The returned
+  project is `Default` for `wenlan.app`.
+- Business overview, current goal, positioning, competitors, key pages, and
+  research log remain empty. No project context was written.
+- The signed-in hosted account still reports exhausted credits. GSC and GA4
+  remain unconnected, no keyword or SERP research, site audit, rank tracker,
+  Brand Lookup, paid action, or credit-consuming call was run.
+- GSC connection remains separately pending because the Chrome extension
+  control transport disconnected after approval. This did not block the MCP
+  read-only smoke test and does not change GSC's role as the only authority
+  for Wenlan Google Search performance and indexing.

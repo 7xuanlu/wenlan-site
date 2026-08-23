@@ -1,6 +1,6 @@
 # Wenlan Search Intent Map
 
-Captured at: 2026-08-23T03:49:23.630Z
+Captured at: 2026-08-23T07:58:56.818Z
 
 This is a deterministic planning and ownership contract for every canonical URL in the sitemap. A primary search phrase identifies the page owner; it is not keyword volume, a ranking promise, or a claim that Google uses the site's meta-keywords field. Locale variants may own the same concept in different languages.
 
@@ -8,76 +8,12 @@ This is a deterministic planning and ownership contract for every canonical URL 
 
 | Locale | Mapped sitemap URLs |
 | --- | ---: |
-| English | 98 |
-| zh-TW | 11 |
-| zh-CN | 11 |
-| Total | 120 |
+| English | 99 |
+| zh-TW | 12 |
+| zh-CN | 12 |
+| Total | 123 |
 
 The contract fails when a sitemap URL has no owner, one URL has multiple records, a locale has duplicate primary searches or titles, or required intent fields are empty. Technical canonical, hreflang, indexability, and rendering checks remain separate regression gates.
-
-## Google Search guardrails
-
-- One owner means one clear user need and one preferred canonical URL. It does
-  not mean creating a page for every wording variant. Google's people-first
-  guidance warns against producing many search-first pages or query variants
-  without independent value:
-  https://developers.google.com/search/docs/fundamentals/creating-helpful-content
-- Every page needs a distinct, descriptive, concise title that matches its
-  visible main content. Repeated boilerplate and keyword stuffing are rejected
-  by this operating rule:
-  https://developers.google.com/search/docs/appearance/title-link
-- The `Primary search` column is an internal owner label. Google does not use
-  the `meta keywords` tag for indexing or ranking:
-  https://developers.google.com/search/docs/crawling-indexing/special-tags
-- Internal links should use crawlable `<a href>` links and descriptive anchor
-  text that explains the destination rather than generic `click here` copy:
-  https://developers.google.com/search/docs/crawling-indexing/links-crawlable
-- Duplicate or substantially overlapping URLs should consolidate through a
-  preferred canonical, consistent internal links, sitemap inclusion, or a
-  redirect when the duplicate should disappear:
-  https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
-- English, zh-TW, and zh-CN pages may own the same concept independently when
-  their main content is genuinely localized. Every locale page remains
-  self-canonical and participates in a reciprocal `hreflang` cluster:
-  https://developers.google.com/search/docs/specialty/international/localized-versions
-
-## Latest authenticated ownership evidence
-
-- Source: Search Console API for `sc-domain:wenlan.app`, complete range
-  `2026-07-24..2026-08-20`, captured in
-  `/tmp/wenlan-seo/gsc-query-pages.json` with 115 privacy-visible query-page
-  rows. Property totals, visible-query totals, and the visibility gap remain
-  separate in `docs/seo-audits/2026-08-21-weekly-seo.md`.
-- No privacy-visible protected AI knowledge-base, LLM-wiki, source-backed-wiki,
-  or modifier-qualified Obsidian query appeared on more than one URL in this
-  capture. Hidden rows remain unknown, so this is not proof that no
-  cannibalization exists.
-- `types of ai agent memory` contributes 11 visible impressions and
-  `ai agent memory glossary` contributes 3, both on
-  `/learn/ai-agent-memory-types`. The old weekly classifier incorrectly named
-  `/learn/ai-work-memory` as their owner; the classifier now preserves the
-  observed dedicated types-page intent.
-- `obsidian 筆記` contributes one visible impression on the zh-TW Obsidian
-  route. The classifier now preserves that locale owner and uses the equivalent
-  Simplified-Chinese script guard for zh-CN instead of sending Mandarin intent
-  to the English route.
-- `llm wiki v2` remains a one-impression owner mismatch on `/learn` versus the
-  dedicated LLM-wiki article. It stays a measurement item below the protected
-  three-qualified-impression action floor; this audit does not authorize a
-  copy, title, internal-link, indexing, or canonical change.
-- The old click-opportunity queue pooled three unrelated one-impression
-  mismatches on `/learn`—MCP memory, Claude Code memory, and LLM wiki—into one
-  artificial three-impression action floor. The queue now groups mismatches by
-  configured owner and keeps them separate; no single owner clears the floor.
-
-## Scope and interpretation
-
-The 120 primary search phrases below are ownership declarations derived from
-the current content model and explicit core-page records. They do not claim
-keyword volume or demand. GSC remains the authority for whether Google has
-actually associated a query with a page. This change adds a deterministic
-guard and corrects report routing only; it does not change public page copy,
-metadata, canonicals, sitemap membership, or deployment state.
 
 ## en
 
@@ -150,6 +86,7 @@ metadata, canonicals, sitemap membership, or deployment state.
 | /learn/claude-code-session-handoff | learn | task-completion | Claude Code handoff | Use Wenlan /handoff in Claude Code to preserve decisions, lessons, gotchas, open threads, and project status for the next session. |
 | /learn/claude-desktop-mcp-memory-setup | learn | task-completion | Claude Desktop MCP memory | Set up Claude Desktop with Wenlan MCP memory using the local runtime, wenlan connect claude-desktop, and a doctor/capture/recall check. |
 | /learn/codex-claude-code-shared-memory | learn | task-completion | Codex Claude Code shared memory | Wenlan lets Codex and Claude Code share one local, source-backed system for decisions, gotchas, handoffs, and project context. |
+| /learn/coding-agent-source-backed-knowledge-base | learn | task-completion | Codex knowledge base | Build a source-backed project knowledge base for Codex or another coding agent with AGENTS.md, maintained docs, citations, retrieval, and verification. |
 | /learn/cursor-claude-code-shared-memory | learn | task-completion | Cursor Claude Code shared memory | Connect Cursor through MCP and Claude Code through the Wenlan plugin so both AI coding tools share one local, source-backed memory store. |
 | /learn/distilled-wiki-pages-ai-memory | learn | informational | LLM wiki | Learn the Karpathy LLM Wiki pattern, how it differs from RAG, and how source-backed pages, Obsidian, checks, and refreshes fit together. |
 | /learn/how-to-add-mcp-memory-to-cursor | learn | task-completion | Cursor MCP memory | Add local-first MCP memory to Cursor with Wenlan setup, wenlan connect cursor, client restart checks, and a capture/recall verification loop. |
@@ -194,6 +131,7 @@ metadata, canonicals, sitemap membership, or deployment state.
 | /zh-TW/learn | core | informational-hub | AI 知識庫指南 | 建立有來源、可審查、會持續更新的 AI 知識庫，並用 Wenlan 將可信資料整理成 AI agent 可重用的 LLM Wiki 頁面。 |
 | /zh-TW/learn/build-local-ai-knowledge-base-from-documents | learn | task-completion | 建立 AI 知識庫 | 用 Markdown、文字檔、文字型 PDF、資料夾或 Obsidian vault 建立本地 AI 知識庫，並驗證同步、來源與維護型頁面。 |
 | /zh-TW/learn/choose-ai-knowledge-base-tool | learn | task-completion | AI 知識庫工具 | 用 8 個實際測試選擇 AI 知識庫工具，比較文件問答、RAG、本地筆記與跨 AI agent 維護知識的差異。 |
+| /zh-TW/learn/coding-agent-source-backed-knowledge-base | learn | task-completion | Codex 知識庫 | 用 AGENTS.md、專案文件、引用、按需檢索與驗證，為 Codex、Claude Code 或其他 coding agent 建立有來源的專案知識庫。 |
 | /zh-TW/learn/distilled-wiki-pages-ai-memory | learn | informational | LLM Wiki 知識庫 | 了解 Karpathy LLM Wiki 的架構、它和 RAG 的差異，以及來源頁面、Obsidian、驗證與持續更新如何配合。 |
 | /zh-TW/learn/source-backed-wiki-pages-ai-work | learn | informational | AI 知識庫 | 建立有來源的 AI 知識庫：分開可信來源、原子知識與 LLM Wiki 頁面，並用 Wenlan 保留引用、更新與審查狀態。 |
 | /zh-TW/learn/wenlan-vs-obsidian-ai-memory | learn | commercial-investigation | Obsidian Claude Code | 了解 Claude Code 何時直接讀 Obsidian vault 就夠、IDE 與 MCP bridge 增加什麼，以及 AI 知識庫何時需要來源、更新與審查流程。 |
@@ -210,6 +148,7 @@ metadata, canonicals, sitemap membership, or deployment state.
 | /zh-CN/learn | core | informational-hub | AI 知识库指南 | 建立有来源、可审核、会持续更新的 AI 知识库，并用 Wenlan 把可信资料整理成 AI agent 可复用的 LLM Wiki 页面。 |
 | /zh-CN/learn/build-local-ai-knowledge-base-from-documents | learn | task-completion | 搭建 AI 知识库 | 用 Markdown、文本文件、文本型 PDF、文件夹或 Obsidian vault 搭建本地 AI 知识库，并验证同步、来源与维护型页面。 |
 | /zh-CN/learn/choose-ai-knowledge-base-tool | learn | task-completion | AI 知识库工具 | 用 8 个实际测试选择 AI 知识库工具，比较文档问答、RAG、本地笔记与跨 AI agent 维护知识的区别。 |
+| /zh-CN/learn/coding-agent-source-backed-knowledge-base | learn | task-completion | Codex 知识库 | 用 AGENTS.md、项目文档、引用、按需检索与验证，为 Codex、Claude Code 或其他 coding agent 建立有来源的项目知识库。 |
 | /zh-CN/learn/distilled-wiki-pages-ai-memory | learn | informational | LLM Wiki 知识库 | 了解 Karpathy LLM Wiki 的架构、它和 RAG 的区别，以及来源页面、Obsidian、校验与持续更新如何配合。 |
 | /zh-CN/learn/source-backed-wiki-pages-ai-work | learn | informational | AI 知识库 | 建立有来源的 AI 知识库：分开可信来源、原子知识与 LLM Wiki 页面，并用 Wenlan 保留引用、更新与审核状态。 |
 | /zh-CN/learn/wenlan-vs-obsidian-ai-memory | learn | commercial-investigation | Obsidian Claude Code | 了解 Claude Code 何时直接读取 Obsidian vault 就够、IDE 与 MCP bridge 增加什么，以及 AI 知识库何时需要来源、更新与审核流程。 |

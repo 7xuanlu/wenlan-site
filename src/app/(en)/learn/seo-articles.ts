@@ -886,7 +886,7 @@ const workflowArticles: BaseSpec[] = [
       "Does Codex get /brief and /handoff slash commands?",
       "No. Codex uses MCP tools. The slash-command workflow belongs to the Claude Code plugin.",
     ],
-    relatedSlugs: ["how-to-give-codex-persistent-memory", "codex-claude-code-shared-memory", "what-to-capture-in-ai-work-memory"],
+    relatedSlugs: ["coding-agent-source-backed-knowledge-base", "how-to-give-codex-persistent-memory", "codex-claude-code-shared-memory", "what-to-capture-in-ai-work-memory"],
     officialReferences: [
       {
         label: "Codex Memories docs",
@@ -897,6 +897,93 @@ const workflowArticles: BaseSpec[] = [
         href: "https://developers.openai.com/codex/mcp",
       },
     ],
+  },
+  {
+    slug: "coding-agent-source-backed-knowledge-base",
+    eyebrow: "Coding agent knowledge",
+    category: "Workflows",
+    title: "How to Give Codex a Source-Backed Project Knowledge Base",
+    description:
+      "Keep repository rules, source-of-truth documents, and maintained project knowledge separate so Codex can retrieve evidence without loading everything.",
+    metaTitle: "Codex Source-Backed Project Knowledge Base | Wenlan",
+    metaDescription:
+      "Build a source-backed project knowledge base for Codex or another coding agent with AGENTS.md, maintained docs, citations, retrieval, and verification.",
+    keywords: [
+      "Codex knowledge base",
+      "coding agent knowledge base",
+      "Codex project knowledge",
+      "source backed knowledge base for AI agents",
+      "AGENTS.md knowledge base",
+      "Claude Code project knowledge base",
+    ],
+    publishedAt: "2026-08-23",
+    updatedAt: "2026-08-23",
+    audience: "Developers who want Codex or another coding agent to reuse trustworthy project knowledge",
+    heroBullets: [
+      "Keep AGENTS.md or CLAUDE.md short and reserve it for instructions the agent must load every time.",
+      "Keep code, tests, specifications, and maintained documents as the source of truth.",
+      "Retrieve only the relevant cited page, then verify the conclusion against the repository and tests.",
+    ],
+    quickAnswer:
+      "Use AGENTS.md or CLAUDE.md for short operating instructions, keep repository files as the source of truth for current facts, and use a source-backed knowledge base for decisions and explanations that must remain cited, reviewable, and reusable across sessions.",
+    problem:
+      "A giant instruction file consumes context and becomes stale, while raw repository search repeatedly rediscovers the same architecture decisions and external constraints. A coding agent needs a small always-loaded contract plus an on-demand, source-backed project knowledge layer.",
+    wenlanFit:
+      "Wenlan keeps Sources, atomic knowledge, and maintained Pages separate. Codex can connect to the local daemon, retrieve a relevant Page, inspect its citations, and share the same reviewed project knowledge with Claude Code or another MCP client.",
+    actionHeading: "Use AGENTS.md and the knowledge base for different jobs",
+    actionIntro:
+      "Start with one bounded project topic and one inspectable document set. The slash commands below require the Wenlan Codex plugin: install it and run /setup once. The wenlan connect codex command configures the MCP connection only; MCP-only clients should use the equivalent Wenlan tools instead of slash commands. Then prove the complete read, cite, verify, and refresh loop before adding more material.",
+    actionBullets: [
+      "Put build commands, repository boundaries, and non-obvious rules in AGENTS.md or CLAUDE.md.",
+      "Keep code, tests, specifications, and first-party docs authoritative; do not copy facts the agent can read directly.",
+      "Add only supported Markdown, text, text-extractable PDF, or Obsidian sources to the maintained knowledge layer.",
+      "Distill one repeated question into a Page, then check that important claims return to a source or repository fact.",
+      "Run lint and review before trusting a refreshed answer, especially after source files change.",
+    ],
+    code: {
+      label: "One bounded Codex knowledge workflow",
+      code: "wenlan status\nwenlan connect codex\nwenlan sources add ~/project/docs\n/distill <project topic>\n/pages <project topic>\n/lint\n/curate",
+    },
+    caution:
+      "Do not turn the knowledge base into a second copy of the repository. If the answer is already clear in current code or tests, link to that source; maintain only the reasoning, external constraint, or cross-file conclusion that is expensive to reconstruct.",
+    faq: [
+      "Should AGENTS.md contain the whole project knowledge base?",
+      "No. Keep it short and always relevant. Put longer explanations in maintained documents or on-demand knowledge pages so they do not crowd out the task and current code.",
+      "Can the knowledge base override the repository?",
+      "No. Current code, tests, specifications, and approved first-party documents remain authoritative. A knowledge page should expose citations and become stale or reviewable when those sources change.",
+    ],
+    relatedSlugs: [
+      "wenlan-codex-workflow",
+      "source-backed-wiki-pages-ai-work",
+      "build-local-ai-knowledge-base-from-documents",
+      "review-before-trust-ai-memory",
+    ],
+    officialReferences: [
+      {
+        label: "OpenAI harness engineering",
+        href: "https://openai.com/index/harness-engineering/",
+      },
+      {
+        label: "AGENTS.md open format",
+        href: "https://agents.md/",
+      },
+      {
+        label: "Wenlan setup with AI clients",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md",
+      },
+      {
+        label: "Wenlan source-backed Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "Wenlan review and trust",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+    ],
+    cta: {
+      heading: "Give Codex one project topic it can verify",
+      body: "Connect Codex, add one inspectable source set, and prove that the resulting Page stays cited, reviewable, and subordinate to the repository.",
+    },
   },
   {
     slug: "wenlan-cursor-workflow",
@@ -1544,6 +1631,7 @@ const workflowArticles: BaseSpec[] = [
       "No. A chatbot upload is usually session-scoped. This workflow registers a reusable local source, resyncs it, and builds a maintained Page whose support can be inspected and reviewed.",
     ],
     relatedSlugs: [
+      "coding-agent-source-backed-knowledge-base",
       "source-backed-wiki-pages-ai-work",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
@@ -2230,7 +2318,7 @@ const trustArticles: BaseSpec[] = [
       "Should I import every note before starting?",
       "No. Start with one repeated, high-value topic and prove its source, capture, distill, inspection, lint, and review loop before expanding.",
     ],
-    relatedSlugs: ["distilled-wiki-pages-ai-memory", "review-before-trust-ai-memory", "ai-memory-provenance"],
+    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "review-before-trust-ai-memory", "ai-memory-provenance"],
     officialReferences: [
       {
         label: "Wenlan knowledge model",
