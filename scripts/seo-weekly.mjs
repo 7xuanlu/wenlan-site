@@ -83,6 +83,25 @@ const COMPARISON_TARGETS = [
   },
 ];
 
+const SPECIFIC_INTENT_TARGETS = [
+  {
+    pattern:
+      /\b(?:types?\s+of\s+(?:ai\s+)?(?:agent|agentic)\s+memory|(?:ai\s+)?(?:agent|agentic)\s+memory\s+(?:types?|taxonomy|glossary|architecture)|ai\s+memory\s+types?)\b/i,
+    group: "AI work memory",
+    page: "/learn/ai-agent-memory-types",
+  },
+  {
+    pattern: /(?:obsidian.{0,24}筆記|筆記.{0,24}obsidian)/i,
+    group: "Obsidian/knowledge-base adjacent",
+    page: "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
+  },
+  {
+    pattern: /(?:obsidian.{0,24}笔记|笔记.{0,24}obsidian)/i,
+    group: "Obsidian/knowledge-base adjacent",
+    page: "/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
+  },
+];
+
 const DOCUMENT_KNOWLEDGE_BASE_TARGETS = [
   {
     pattern:
@@ -1027,6 +1046,16 @@ function classifyQuery(query) {
     };
   }
 
+  const specificIntentTarget = SPECIFIC_INTENT_TARGETS.find(({ pattern }) =>
+    pattern.test(query),
+  );
+  if (specificIntentTarget) {
+    return {
+      group: specificIntentTarget.group,
+      page: specificIntentTarget.page,
+    };
+  }
+
   const knowledgeBaseToolSelectionTarget =
     KNOWLEDGE_BASE_TOOL_SELECTION_TARGETS.find(({ pattern }) =>
       pattern.test(query),
@@ -1109,6 +1138,13 @@ function classifyQuery(query) {
 
 function classifyQueryAction(row) {
   if (row.mappingMismatch) {
+    if (row.impressions < MIN_QUERY_ACTION_IMPRESSIONS) {
+      return {
+        action: "wait",
+        diagnosis:
+          "Observed GSC page differs from the configured target, but the visible query is below the action floor. Preserve the routing observation without editing.",
+      };
+    }
     return {
       action: "query-page-review",
       diagnosis:
@@ -2189,9 +2225,28 @@ function makeClickOpportunities(pages, queryPageEvidence) {
         const configuredTarget = classifyQuery(row.query).page;
         return configuredTarget !== "-" && configuredTarget !== page.page;
       });
+      const alignedRows = visibleQualifiedRows.filter(
+        (row) => classifyQuery(row.query).page === page.page,
+      );
       const visibleQualifiedImpressions = visibleQualifiedRows.reduce(
         (sum, row) => sum + row.impressions,
         0,
+      );
+      const alignedImpressions = alignedRows.reduce(
+        (sum, row) => sum + row.impressions,
+        0,
+      );
+      const mismatchedImpressionsByOwner = new Map();
+      for (const row of mismatchedRows) {
+        const owner = classifyQuery(row.query).page;
+        mismatchedImpressionsByOwner.set(
+          owner,
+          (mismatchedImpressionsByOwner.get(owner) ?? 0) + row.impressions,
+        );
+      }
+      const maxMismatchedOwnerImpressions = Math.max(
+        0,
+        ...mismatchedImpressionsByOwner.values(),
       );
       const visibleQualifiedPosition =
         visibleQualifiedImpressions > 0
@@ -2199,6 +2254,13 @@ function makeClickOpportunities(pages, queryPageEvidence) {
               (sum, row) => sum + row.position * row.impressions,
               0,
             ) / visibleQualifiedImpressions
+          : null;
+      const alignedPosition =
+        alignedImpressions > 0
+          ? alignedRows.reduce(
+              (sum, row) => sum + row.position * row.impressions,
+              0,
+            ) / alignedImpressions
           : null;
       const campaignLane =
         ACQUISITION_PRIORITY_PAGE.test(page.page) ||
@@ -2209,23 +2271,30 @@ function makeClickOpportunities(pages, queryPageEvidence) {
       let nextMove = "evidence-gap-review";
       let diagnosis =
         "Page impressions are present, but qualified zero-click query evidence is hidden or absent. Inspect the privacy-visible join before editing.";
-      if (mismatchedRows.length > 0) {
+      if (maxMismatchedOwnerImpressions >= MIN_QUERY_ACTION_IMPRESSIONS) {
         nextMove = "query-page-review";
         diagnosis =
           "A visible qualified query lands on a different page than its configured target. Resolve intent and internal-link routing before editing copy.";
       } else if (
-        visibleQualifiedPosition !== null &&
-        visibleQualifiedPosition >= 8 &&
-        visibleQualifiedPosition <= 30
+        mismatchedRows.length > 0 &&
+        alignedImpressions < MIN_QUERY_ACTION_IMPRESSIONS
+      ) {
+        diagnosis = `No single configured owner reaches the ${MIN_QUERY_ACTION_IMPRESSIONS}-impression joined floor. Keep the distinct intent mismatches separate and wait.`;
+      } else if (alignedImpressions < MIN_QUERY_ACTION_IMPRESSIONS) {
+        diagnosis = `Qualified visible demand is below the ${MIN_QUERY_ACTION_IMPRESSIONS}-impression joined floor. Preserve the evidence gap without editing.`;
+      } else if (
+        alignedPosition !== null &&
+        alignedPosition >= 8 &&
+        alignedPosition <= 30
       ) {
         nextMove = "title-meta-refresh";
         diagnosis =
           "Visible qualified demand is in striking distance with zero query clicks. Review title, description, and first answer.";
-      } else if (visibleQualifiedPosition !== null && visibleQualifiedPosition < 8) {
+      } else if (alignedPosition !== null && alignedPosition < 8) {
         nextMove = "serp-intent-review";
         diagnosis =
           "Visible qualified demand ranks on page one but earns no query clicks. Inspect SERP intent and snippet alignment.";
-      } else if (visibleQualifiedImpressions > 0) {
+      } else if (alignedImpressions > 0) {
         nextMove = "internal-link-refresh";
         diagnosis =
           "Visible qualified demand ranks beyond striking distance with zero query clicks. Strengthen relevant internal links before rewriting copy.";
