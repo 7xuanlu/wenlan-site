@@ -378,12 +378,12 @@ Demand discovery:
 - Trigger: The agent repeatedly reloads the same raw documents, consumes too much context, or retrieves knowledge even when the authoritative file is already available
 - Desired outcome: Use a clear retrieval policy that opens exact sources only when needed, avoids redundant context, and never treats token savings as permission to skip authoritative evidence
 - Stage: `integrate`
-- Decision: `net-new`
+- Decision: `measuring`
 - Planned window: `2026-08-24..2026-08-30`
-- Publication: `prepared`
+- Publication: `measuring`
 - Standalone utility: A neutral policy can tell agents when to retrieve an index, open an exact source, use a maintained page, or skip retrieval because the authoritative file is already in context.
 - Overlap check: The memory-versus-knowledge-base owner explains which layer stores what, and the coding-agent owner explains AGENTS.md versus repository and maintained knowledge. This family alone owns the per-task retrieval policy: when to query, skip, pre-retrieve, inspect an index, open an exact source, and stop searching.
-- Next research: The trilingual retrieval-policy family is locally implemented, verified, and publication-approved. Commit and publish only the approved website and control-plane scope, then verify production without requesting indexing. Keep the external authority path waiting until existing Wenlan PR #108 resolves.
+- Next research: The trilingual retrieval-policy family is live and production-verified from 2026-08-24T01:35:46Z. Keep the three locale owners stable and read each locale in native GSC page/query and Vercel page/referrer units after sufficient post-crawl exposure. Keep the external authority path waiting until existing Wenlan PR #108 resolves.
 
 ### Locale intent and ownership
 

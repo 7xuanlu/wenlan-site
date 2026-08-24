@@ -8159,3 +8159,17 @@ increase for that experiment.
 - Decision: merge
 - Next step: Complete the independent pre-merge fixes and review, push the exact branch, merge only after required checks pass, wait for automatic Vercel production completion, and verify the three live locale routes without requesting indexing.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-23-knowledge-retrieval-policy-locales production completion
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-23-knowledge-retrieval-policy-locales
+- Observed at: 2026-08-24T01:35:46Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #138 merged at 2026-08-24T01:35:09Z as c95d009437b910a6b85f9d648e667e2d89b70d66; Vercel production completed at 2026-08-24T01:35:46Z. The English, zh-TW, and zh-CN routes returned direct 200 responses with exact canonicals, reciprocal hreflang, Article and BreadcrumbList schema dated 2026-08-23, visible FAQ without FAQPage JSON-LD, the corrected Wenlan plugin, MCP recall, and local wenlan pages CLI boundary, no horizontal overflow at 393x852 or 1280x720, no broken images, and no browser console errors. The deployed technical audit passed 129 sitemap URLs, 27 key pages, six utility noindex surfaces, FAQPage absence, 25 redirects, six bridge-host redirects, 18 direct changed redirects, and legacy URL exclusion.
+- Result: pending
+- Decision: wait
+- Next step: Keep all three locale owners stable and read each locale in native GSC page/query and Vercel page/referrer units after sufficient post-crawl exposure. The experiment no longer consumes the production-in-flight slot. Do not move the 2026-08-24T01:35:46Z content measurement boundary for a later control-record-only deployment.
+<!-- EXPERIMENT-RECORD:END -->

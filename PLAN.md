@@ -677,11 +677,13 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-23-knowledge-retrieval-policy-locales` is publication-approved,
-  locally verified, and active, so it consumes the single production-in-flight
-  slot until Vercel production completion is verified. It adds one English,
-  zh-TW, and zh-CN canonical for the per-task query, pre-retrieve, autonomous-
-  retrieval, progressive-disclosure, and skip decision. At
+  `EXP-2026-08-23-knowledge-retrieval-policy-locales` is live,
+  production-verified, and measuring, so it no longer consumes the single
+  production-in-flight slot. It adds one English, zh-TW, and zh-CN canonical
+  for the per-task query, pre-retrieve, autonomous-retrieval, progressive-
+  disclosure, and skip decision. PR #138 merged at `2026-08-24T01:35:09Z` as
+  `c95d009437b910a6b85f9d648e667e2d89b70d66`; Vercel production completed at
+  `2026-08-24T01:35:46Z`. At
   `2026-08-24T01:21:21Z`, the controller recorded the user's explicit approval
   for the exact commit, push, PR creation, merge, automatic Vercel deployment,
   and read-only production-verification scope. Request indexing, GSC validation,
@@ -1254,9 +1256,11 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-23-knowledge-retrieval-policy-locales` is publication-approved,
-locally verified, and active, so it consumes the website production-in-flight
-slot. It adds one English, zh-TW, and zh-CN canonical for the same task: decide
+`EXP-2026-08-23-knowledge-retrieval-policy-locales` is live,
+production-verified, and measuring without consuming the website production-
+in-flight slot. PR #138 merged at `2026-08-24T01:35:09Z` as
+`c95d009437b910a6b85f9d648e667e2d89b70d66`; Vercel production completed at
+`2026-08-24T01:35:46Z`. The three locale owners cover the same task: decide
 when an AI agent should query, pre-retrieve, autonomously retrieve,
 progressively disclose, or skip a knowledge base without treating token
 savings as permission to skip authoritative evidence.
@@ -1268,8 +1272,9 @@ proof, three same-locale contextual inbound paths, standalone utility, and one
 inspectable authority path. Existing owners retain role comparison and
 repository-source boundaries; this family owns the query-or-skip decision.
 Its slash-command example explicitly requires the Wenlan Codex plugin and
-`/setup`; MCP-only clients must use the equivalent Wenlan tools exposed by
-their client.
+`/setup`; MCP-only clients use Wenlan `recall` and inspect returned Page
+results, while local `wenlan pages <topic>` provides Page listing and opening
+without the plugin.
 
 The latest authenticated baseline remains source-separated: GSC property
 totals are 8 clicks and 1,005 impressions, visible-query totals are 2 clicks
@@ -3339,9 +3344,8 @@ unchanged.
 
 ## Campaign preparation: retrieval-policy trilingual family at 2026-08-24T00:19:18Z
 
-- Record type: publication-approved local website candidate; its immutable
-  experiment-start and approval records now consume the production-in-flight
-  slot until Vercel production completion is verified.
+- Record type: live, production-verified website experiment; it no longer
+  consumes the production-in-flight slot.
 - Audience: developers operating AI agents over large documentation sets that
   are consulted repeatedly across tasks or sessions.
 - Trigger: the agent repeatedly reloads the same raw documents, spends context
@@ -3373,7 +3377,13 @@ unchanged.
 - Approval: at `2026-08-24T01:21:21Z`, the user approved the exact commit,
   push, PR creation, merge, automatic Vercel deployment, and read-only
   production-verification scope.
-- Local status: prepared, verified, and publication-approved. No commit, push,
-  PR, merge, deployment, request indexing, GSC validation, analytics mutation,
-  paid action, synthetic event, or external publication has occurred yet for
-  this family.
+- Production: PR #138 merged at `2026-08-24T01:35:09Z` as
+  `c95d009437b910a6b85f9d648e667e2d89b70d66`; Vercel production completed at
+  `2026-08-24T01:35:46Z`. The three routes passed direct production rendering,
+  canonical, reciprocal hreflang, Article and BreadcrumbList, FAQPage absence,
+  393px and 1280px overflow, image, and console checks.
+- Measurement boundary: keep `2026-08-24T01:35:46Z` fixed for this content
+  experiment. A later control-record-only deployment does not move it.
+- Excluded actions remain unchanged: no request indexing, GSC validation,
+  analytics mutation, paid action, synthetic event, or external publication
+  occurred for this family.
