@@ -1632,6 +1632,7 @@ const workflowArticles: BaseSpec[] = [
       "No. A chatbot upload is usually session-scoped. This workflow registers a reusable local source, resyncs it, and builds a maintained Page whose support can be inspected and reviewed.",
     ],
     relatedSlugs: [
+      "fix-pdf-ingestion-ai-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
       "source-backed-wiki-pages-ai-work",
       "distilled-wiki-pages-ai-memory",
@@ -1721,6 +1722,7 @@ const workflowArticles: BaseSpec[] = [
       "No. Start with a small set containing one clean source, one outdated source, one contradiction, and one question the sources cannot answer. Expand only after the tool handles that set correctly.",
     ],
     relatedSlugs: [
+      "fix-pdf-ingestion-ai-knowledge-base",
       "build-local-ai-knowledge-base-from-documents",
       "source-backed-wiki-pages-ai-work",
       "distilled-wiki-pages-ai-memory",
@@ -2267,6 +2269,100 @@ const comparisonArticles: BaseSpec[] = [
 
 const trustArticles: BaseSpec[] = [
   {
+    slug: "fix-pdf-ingestion-ai-knowledge-base",
+    eyebrow: "Ingestion troubleshooting",
+    category: "Workflows",
+    title: "PDF Failed to Ingest into Your AI Knowledge Base? Diagnose It First",
+    description:
+      "Diagnose empty, skipped, malformed, oversized, or image-only PDFs before trusting an AI knowledge base or RAG answer.",
+    metaTitle: "AI Knowledge Base PDF Ingestion Failed? Fix It",
+    metaDescription:
+      "Troubleshoot AI knowledge-base PDF ingestion: check the text layer, OCR scanned pages, file limits, parser errors, and extracted evidence.",
+    keywords: [
+      "AI knowledge base PDF ingestion failed",
+      "scanned PDF AI knowledge base OCR",
+      "PDF RAG empty chunks",
+      "AI knowledge base document parsing error",
+      "PDF text extraction failed",
+      "knowledge base skipped PDF",
+    ],
+    publishedAt: "2026-08-23",
+    updatedAt: "2026-08-23",
+    audience:
+      "People whose AI knowledge-base import reports success, skip, or error but produces empty, incomplete, or unusable PDF content",
+    heroBullets: [
+      "First distinguish a text PDF from a scanned or image-only PDF.",
+      "Treat found, ingested, skipped, and error counts as diagnostics, not proof that usable text reached retrieval.",
+      "Verify one known answer and its exact source before trusting the document set.",
+    ],
+    quickAnswer:
+      "If a PDF produces no usable knowledge, first try selecting and copying text from the file. An image-only scan needs OCR before Wenlan can ingest it; Wenlan has no OCR in v1. Next check that the PDF is at most 10 MB, is not malformed, and contains enough real text. Run `wenlan sources add <path>`, inspect the found, ingested, skipped, and error counts, then verify that a known passage can be retrieved and cited. A successful registration or batch summary alone does not prove that extraction succeeded.",
+    problem:
+      "PDF ingestion can fail loudly with a parser error or quietly with an empty text layer. The dangerous case is an import that looks complete while the knowledge base contains no useful chunks, loses layout relationships, or cannot cite the passage a user expects.",
+    wenlanFit:
+      "Wenlan accepts `.md`, `.txt`, and text-extractable `.pdf` Sources. Its current source connector caps PDFs at 10 MB, skips image-only or near-empty extraction, reports malformed PDF parsing as an error, and continues processing the rest of a folder. It does not perform OCR in v1.",
+    actionHeading: "Diagnose the file before changing retrieval",
+    actionIntro:
+      "Work from the source inward. Do not tune embeddings or prompts until you know the expected text actually entered the index.",
+    actionBullets: [
+      "Classify the PDF: if text cannot be selected or copied, treat it as a scan or image-only document.",
+      "OCR scanned pages outside Wenlan, then save a text-extractable PDF or a clean `.md` or `.txt` file. Spot-check names, dates, numbers, tables, and page order against the original.",
+      "Check the input boundary: folder Sources accept `.md`, `.txt`, and `.pdf`; PDFs over 10 MB, unsupported extensions, hidden files, symlinks, and skipped directories do not enter the normal folder scan.",
+      "Run `wenlan sources add <path>` and record the found, ingested, skipped, and error counts. An error suggests read or parse failure; a skip can mean unchanged content, no extractable text, or content below the minimum quality floor.",
+      "Wait for document processing, then retrieve a distinctive sentence that definitely exists in the source. Confirm the result opens the intended file or source reference.",
+      "Ask one answerable question and one question the document cannot answer. The first should cite supporting text; the second should remain unknown.",
+      "If extraction is incomplete, simplify the source to Markdown or plain text and re-run the same acceptance test. Do not hide missing tables or scanned pages behind a fluent summary.",
+    ],
+    code: {
+      label: "Register or resync one diagnostic source",
+      code: "wenlan status\nwenlan sources add ~/Knowledge/pdf-diagnostic",
+    },
+    caution:
+      "OCR can introduce wrong characters, reading order, and table structure. A searchable PDF is not automatically a faithful PDF. Compare important passages with the rendered page and keep the original file authoritative.",
+    faq: [
+      "Why was my PDF found but no useful text appeared?",
+      "The file may be image-only, contain too little extractable text, fail parsing, or still be processing. Check the text layer and source result, then retrieve a distinctive known sentence instead of trusting the batch summary.",
+      "Does Wenlan OCR scanned PDFs?",
+      "No. The current v1 document connector extracts an existing text layer; scan or image-only PDFs need OCR before import.",
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "choose-ai-knowledge-base-tool",
+      "verify-ai-knowledge-base-citations",
+      "source-backed-wiki-pages-ai-work",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan supported document sources",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan directory ingestion source and limits",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/src/sources/directory.rs",
+      },
+      {
+        label: "Wenlan folder-ingestion acceptance test",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/tests/folder_ingest_e2e.rs",
+      },
+      {
+        label: "Google Cloud PDF OCR and layout parsing",
+        href: "https://cloud.google.com/generative-ai-app-builder/docs/parse-chunk-documents",
+      },
+      {
+        label: "DeepTutor scanned-PDF empty-document issue",
+        href: "https://github.com/HKUDS/DeepTutor/issues/431",
+      },
+      {
+        label: "Kodit silent PDF extraction failure issue",
+        href: "https://github.com/helixml/kodit/issues/553",
+      },
+    ],
+    cta: {
+      heading: "Verify one PDF before importing the archive",
+      body: "Install Wenlan, add one controlled document, and prove that its text, source, and citations survive the complete ingestion path.",
+    },
+  },
+  {
     slug: "when-ai-agent-should-query-knowledge-base",
     eyebrow: "Retrieval policy",
     category: "Workflows",
@@ -2439,6 +2535,7 @@ const trustArticles: BaseSpec[] = [
       "Record it as a mismatched citation, locate the actual supporting source if one exists, and correct or withhold the claim. Do not silently keep the answer because it sounds plausible.",
     ],
     relatedSlugs: [
+      "fix-pdf-ingestion-ai-knowledge-base",
       "source-backed-wiki-pages-ai-work",
       "choose-ai-knowledge-base-tool",
       "distilled-wiki-pages-ai-memory",

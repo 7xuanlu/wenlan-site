@@ -8173,3 +8173,43 @@ increase for that experiment.
 - Decision: wait
 - Next step: Keep all three locale owners stable and read each locale in native GSC page/query and Vercel page/referrer units after sufficient post-crawl exposure. The experiment no longer consumes the production-in-flight slot. Do not move the 2026-08-24T01:35:46Z content measurement boundary for a later control-record-only deployment.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-23-pdf-ingestion-troubleshooting-locales
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-23-pdf-ingestion-troubleshooting-locales
+- Status: approved
+- Data window: 2026-08-22..2026-08-28
+- Asset class: net-new-search
+- Launched: 2026-08-23
+- Hypothesis: A task-specific trilingual owner for diagnosing skipped, empty, oversized, image-only, near-empty, or parser-error PDFs can earn qualified AI knowledge-base ingestion-troubleshooting exposure without cannibalizing the existing document-build guide.
+- Candidate evidence: Dated English, zh-TW, and zh-CN official documentation, SERP, OSS issue, Taiwan practitioner, overlap, product-proof, internal-link, and authority-path observations with native units are stored in docs/seo-scenario-backlog.json. They are not keyword volume, GSC data, or rank claims.
+- Baseline: GSC property 8 clicks and 1,005 impressions; visible-query 2 clicks and 216 impressions; visibility gap 6 clicks and 789 impressions; Vercel 248 visitors with 30 attributed to Google; GitHub 48 stars; new target-page rows unavailable, all kept separate.
+- Change: Prepare exactly one English, zh-TW, and zh-CN canonical for PDF ingestion diagnosis, with locale-natural wording, text-layer and OCR decision flow, Wenlan input limits and parser outcomes, extracted-evidence acceptance tests, reciprocal hreflang, sitemap membership, visible FAQ without FAQPage, and contextual inbound paths from document-build, tool-selection, and citation-verification owners.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions per locale in 28 complete post-crawl days
+- Success criteria: Per locale, at least 3 qualified joined-query impressions and at least 1 GSC click after the minimum exposure; report CTR and position separately.
+- Failure criteria: After 28 complete post-crawl days and the minimum exposure, a locale has no qualified joined-query impressions or no GSC click, or an above-floor join assigns the same task to the existing document-build owner.
+- Stop criteria: Stop on a technical, factual, unsupported-claim, duplicate-intent, command-prerequisite, controller-overlap, or approval-boundary violation.
+- 24h readout: pending technical and indexability observation after production completion
+- 7d readout: pending early source-native GSC page/query and Vercel page/referrer observation
+- W2 readout: pending
+- W4 readout: pending formal 28-complete-post-crawl-day decision when eligible
+- W8 readout: pending only if useful after the Goal deadline
+- Result: pending
+- Decision: wait
+- Next step: Complete local deterministic and rendered verification, then request separate publication approval with the exact diff and evidence.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-24 local verification — EXP-2026-08-23-pdf-ingestion-troubleshooting-locales
+
+- Observed at: `2026-08-24T03:08:37Z`.
+- Status: prepared locally; not published, no production crawl or measurement clock has started, and the experiment-start record above remains immutable.
+- Routes: English, zh-TW, and zh-CN returned local production status `200`, one exact canonical, `index, follow`, reciprocal hreflang, one `Article`, one `BreadcrumbList`, and no `FAQPage` schema.
+- Content: the rendered pages preserve the text-layer, external-OCR, 1 MB text, 10 MB PDF, skipped/error, parser, known-sentence, answerable/unanswerable, source, and limitation boundaries. Each locale has contextual links from its document-build, tool-selection, and citation-verification owners.
+- Responsive evidence: fresh full-page and close-up captures under `/private/tmp/wenlan-pdf-ingestion-qa` cover all three routes at exact `393x852` and `1440x1200`. No page had horizontal overflow or broken images; English, zh-TW, and zh-CN headings, workflow, code, CTA, expanded FAQ, and footer were inspected with no CJK orphan or clipping finding.
+- Browser integrity: every page has one main article and one H1, visible FAQ expansion works, links have visible names, and no browser console warning or error was recorded.
+- Deterministic evidence: `pnpm test:goal`, `pnpm seo:scenario:check`, source-backed `pnpm test:seo`, `pnpm test:i18n`, `pnpm lint`, `pnpm build`, `pnpm seo:technical:built`, `pnpm seo:intent:check`, `pnpm seo:goal:check`, and `git diff --check` passed after the final content correction.
+- Decision: request separate publication approval for the exact verified diff. Commit, push, PR, merge, Vercel deployment, indexing, validation, external publication, paid action, synthetic events, analytics mutation, and metric-definition changes remain excluded.

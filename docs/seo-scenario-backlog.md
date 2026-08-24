@@ -460,78 +460,78 @@ Demand discovery:
 - Trigger: A document import returns empty text, garbled chunks, missing citations, unsupported files, or an apparent ingestion failure
 - Desired outcome: Classify the source correctly, apply OCR only when required, preserve file and page provenance, and verify usable text before trusting downstream answers
 - Stage: `troubleshoot`
-- Decision: `research`
-- Planned window: `unassigned-fallback`
-- Publication: `not-published`
+- Decision: `net-new`
+- Planned window: `2026-08-24..2026-08-30`
+- Publication: `prepared`
 - Standalone utility: A neutral troubleshooting flow can classify extractable text, OCR needs, unsupported file types, source authority, and post-ingestion citation checks.
-- Overlap check: All locales already have a document-build owner with the key boundaries. Default to refresh-existing only after the old-page gate unless troubleshooting SERPs clearly separate setup from failure diagnosis.
-- Next research: Capture text-PDF, scanned-PDF, OCR, and ingestion-failure SERPs separately; if the results converge on the current build task, keep one owner and do not add a troubleshooting URL.
+- Overlap check: The existing three-locale document-build route owns setup, supported-source selection, and the happy path. The new route owns a different trigger and outcome: diagnosing an import that returns skipped, empty, oversized, image-only, near-empty, or parser-error output before testing retrieval.
+- Next research: Local deterministic and rendered verification passed; present the exact diff for separate publication approval, then measure each locale independently and keep any DeepTutor contribution separately approval-gated.
 
 ### Locale intent and ownership
 
 | Locale | Query family | Coverage | Existing owner | Research needed |
 | --- | --- | --- | --- | --- |
-| en | AI knowledge base PDF ingestion failed; scanned PDF AI knowledge base OCR; long document knowledge base ingestion limits | partial | [owner](https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents) | Determine whether troubleshooting ingestion failures is a distinct SERP from the existing build guide, which already states text-PDF and OCR boundaries. |
-| zh-TW | AI 知識庫 PDF 匯入失敗; 掃描 PDF AI 知識庫 OCR; 長文件知識庫匯入限制 | partial | [owner](https://wenlan.app/zh-TW/learn/build-local-ai-knowledge-base-from-documents) | Inspect Taiwan searches for 匯入, 擷取, 解析, OCR, and long-document failures. |
-| zh-CN | AI 知识库 PDF 导入失败; 扫描 PDF AI 知识库 OCR; 长文档知识库导入限制 | partial | [owner](https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents) | Inspect mainland Chinese searches for 导入, 解析, OCR, extraction, and long-document failures. |
+| en | AI knowledge base PDF ingestion failed; scanned PDF AI knowledge base OCR; long document knowledge base ingestion limits | gap | none | The result set separates failure diagnosis from initial setup; prepare one diagnostic owner and keep the existing build guide as the setup owner. |
+| zh-TW | AI 知識庫 PDF 匯入失敗; 掃描 PDF AI 知識庫 OCR; 長文件知識庫匯入限制 | gap | none | Use Taiwan-native 匯入, 文字層, 擷取, 掃描型 PDF, and 解析錯誤 phrasing for a diagnostic owner distinct from the build guide. |
+| zh-CN | AI 知识库 PDF 导入失败; 扫描 PDF AI 知识库 OCR; 长文档知识库导入限制 | gap | none | Use mainland-native 导入, 扫描件, 文本层, 空内容, and 解析错误 phrasing for a diagnostic owner distinct from the build guide. |
 
 #### en evidence
 
 SERP:
-No captured evidence yet; research is required.
+- official-documentation-serp: [scanned PDF AI knowledge base OCR](https://docs.cloud.google.com/document-ai/docs/overview?hl=en) — 1 result set observed SERP result set; en/global; captured 2026-08-23. Google separates OCR digitization for scanned images from layout parsing and chunk extraction, supporting a diagnostic task before embedding or retrieval tuning.
 
 Demand discovery:
-No captured evidence yet; research is required.
+- github-issue: [AI knowledge base PDF ingestion failed](https://github.com/HKUDS/DeepTutor/issues/431) — 1 issue report issue report; en/global; captured 2026-08-23. A user reports a scanned PDF with no text layer producing Skipped empty document and no valid documents, even after attempting an OCR-related parser.
 
 #### zh-TW evidence
 
 SERP:
-No captured evidence yet; research is required.
+- taiwan-technical-serp: [AI 知識庫 PDF 匯入失敗 OCR](https://ithelp.ithome.com.tw/articles/10394605) — 445 page views shown on article; zh-TW/Taiwan; captured 2026-08-23. The Taiwan result directly frames PDF parsing and OCR as the preprocessing step before embedding, using local terms such as 文件上傳 and 文字擷取.
 
 Demand discovery:
-No captured evidence yet; research is required.
+- taiwan-technical-article: [RAG PDF 文字擷取失敗](https://ithelp.ithome.com.tw/articles/10391152) — 157 page views shown on article; zh-TW/Taiwan; captured 2026-08-23. An independent Taiwan article treats document parsing and text extraction as a separate prerequisite before chunking, embedding, and retrieval.
 
 #### zh-CN evidence
 
 SERP:
-No captured evidence yet; research is required.
+- oss-documentation-serp: [AI 知识库 PDF 解析失败 OCR](https://github.com/labring/FastGPT/blob/main/document/content/self-host/custom-models/marker.mdx) — 1 result set observed SERP result set; zh-CN/Mainland China; captured 2026-08-23. FastGPT documentation says logical PDF parsing performs poorly on images, tables, and formulas and documents an enhanced parsing path, confirming a parser-boundary intent.
 
 Demand discovery:
-No captured evidence yet; research is required.
+- github-issue: [知识库 PDF 解析 0 content blocks](https://github.com/HKUDS/DeepTutor/issues/31) — 1 issue report issue report; zh-CN/Mainland China; captured 2026-08-23. A Chinese issue reports a large PDF completing with zero extracted content blocks and asks how to diagnose the parser failure.
 
 ### Candidate gate
 
 | Gate | Status | Reason | Evidence refs |
 | --- | --- | --- | --- |
-| provenance | pending | No trilingual troubleshooting demand capture is stored. | none |
-| repeatedDemand | pending | The ingestion failure task needs repeated or high-intent external evidence. | none |
-| trilingualSerp | pending | Locale-specific result sets remain unobserved. | none |
-| cleanGap | pending | The existing document-build family already documents text files, text-extractable PDFs, scanned-PDF OCR, and unsupported code ingestion; a separate route requires a distinct troubleshooting SERP. | none |
-| firstPartyProof | passed | The product page states the supported document types, idempotent resync, scanned-PDF OCR requirement, and source-code boundary. | src/app/(en)/learn/seo-articles.ts:build-local-ai-knowledge-base-from-documents |
+| provenance | passed | Every observation stores a checkable URL, capture date, locale, geography, native unit, and unconverted value. | locales.en.serpEvidence; locales.en.demandEvidence; locales.zh-TW.serpEvidence; locales.zh-TW.demandEvidence; locales.zh-CN.serpEvidence; locales.zh-CN.demandEvidence |
+| repeatedDemand | passed | Independent English and Chinese issue reports plus Taiwan technical articles repeat the same high-intent failure: PDF import yields no usable text before retrieval can work. | https://github.com/HKUDS/DeepTutor/issues/431; https://github.com/HKUDS/DeepTutor/issues/31; https://ithelp.ithome.com.tw/articles/10394605 |
+| trilingualSerp | passed | English, Taiwan Traditional Chinese, and Mainland Simplified Chinese result sets each surface parsing, OCR, or empty-content diagnosis rather than a generic knowledge-base setup list. | locales.en.serpEvidence; locales.zh-TW.serpEvidence; locales.zh-CN.serpEvidence |
+| cleanGap | passed | The existing document guide owns setup and supported-source selection; this family owns the post-import diagnostic task for skipped, empty, oversized, image-only, near-empty, and parser-error PDFs. | src/app/(en)/learn/seo-articles.ts:build-local-ai-knowledge-base-from-documents; src/app/(en)/learn/seo-articles.ts:fix-pdf-ingestion-ai-knowledge-base |
+| firstPartyProof | passed | Wenlan source code and end-to-end tests define supported extensions, size and minimum-text limits, no OCR in v1, image-only skips, and malformed-parser errors. | /Users/lucian/Repos/wenlan/crates/wenlan-core/src/sources/directory.rs; /Users/lucian/Repos/wenlan/crates/wenlan-core/tests/folder_ingest_e2e.rs |
 | standaloneUtility | passed | A document-ingestion decision tree and failure checklist is tool-neutral. | standaloneUtility |
-| internalLinks | passed | Document-build, tool-selection, and source-backed routes are predeclared. | internalLinks |
-| authorityPath | pending | A document-processing or OCR authority path has not been selected. | none |
+| internalLinks | passed | Document-build, tool-selection, and citation-verification owners in all three locales are predeclared and locally link to the new route. | internalLinks |
+| authorityPath | passed | The DeepTutor scanned-PDF discussion is an exact maintained troubleshooting surface; any contribution remains separately approval-gated until the Wenlan page is live. | https://github.com/HKUDS/DeepTutor/issues/431 |
 
 ### Wenlan proof
 
-- Wenlan supports Markdown, text, text-extractable PDFs, folders, and read-only Obsidian vault sources. — `src/app/(en)/learn/seo-articles.ts`; verify with `rg -n "text-extractable PDF|Obsidian vault" src/app/(en)/learn/seo-articles.ts`.
-- Image-only or scanned PDFs require OCR and directory sources do not ingest arbitrary source code. — `src/app/(en)/learn/seo-articles.ts`; verify with `rg -n "scanned PDFs need OCR|do not ingest arbitrary source-code" src/app/(en)/learn/seo-articles.ts`.
+- Wenlan Directory Sources accept .md, .txt, and .pdf; text files are limited to 1 MB, PDFs to 10 MB, and v1 has no OCR fallback. — `/Users/lucian/Repos/wenlan/crates/wenlan-core/src/sources/directory.rs`; verify with `rg -n "MAX_TEXT_FILE_SIZE|MAX_PDF_FILE_SIZE|OCR is not available|is_supported_extension" /Users/lucian/Repos/wenlan/crates/wenlan-core/src/sources/directory.rs`.
+- Wenlan skips image-only or near-empty PDFs, records malformed or panicking parser cases as errors, and its end-to-end tests distinguish a text PDF that creates chunks from an image-only PDF that creates none. — `/Users/lucian/Repos/wenlan/crates/wenlan-core/tests/folder_ingest_e2e.rs`; verify with `rg -n "image_only_pdf|text_pdf|zero chunks|source page" /Users/lucian/Repos/wenlan/crates/wenlan-core/tests/folder_ingest_e2e.rs`.
 
 ### Planned internal links
 
 - https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents
 - https://wenlan.app/learn/choose-ai-knowledge-base-tool
-- https://wenlan.app/learn/source-backed-wiki-pages-ai-work
+- https://wenlan.app/learn/verify-ai-knowledge-base-citations
 - https://wenlan.app/zh-TW/learn/build-local-ai-knowledge-base-from-documents
 - https://wenlan.app/zh-TW/learn/choose-ai-knowledge-base-tool
-- https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work
+- https://wenlan.app/zh-TW/learn/verify-ai-knowledge-base-citations
 - https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents
 - https://wenlan.app/zh-CN/learn/choose-ai-knowledge-base-tool
-- https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work
+- https://wenlan.app/zh-CN/learn/verify-ai-knowledge-base-citations
 
 ### Authority path and readout
 
-- Authority path: document-ingestion-reference — An active OCR, document-processing, or AI knowledge-base support surface with an exact troubleshooting gap (research-required).
+- Authority path: ingestion-troubleshooting-reference — HKUDS/DeepTutor issue 431 exact scanned-PDF failure discussion, only after the page is live and with separate approval (predeclared-no-external-action).
 - GSC: unavailable; native unit: page impressions, joined-query impressions, clicks.
 - Vercel: unavailable; native unit: target-page visitors and referrer visitors.
 

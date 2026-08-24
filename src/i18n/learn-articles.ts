@@ -842,6 +842,7 @@ const zhTWArticles = {
       },
     ],
     relatedSlugs: [
+      "fix-pdf-ingestion-ai-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
       "source-backed-wiki-pages-ai-work",
       "distilled-wiki-pages-ai-memory",
@@ -966,6 +967,7 @@ const zhTWArticles = {
       },
     ],
     relatedSlugs: [
+      "fix-pdf-ingestion-ai-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
       "build-local-ai-knowledge-base-from-documents",
       "source-backed-wiki-pages-ai-work",
@@ -997,6 +999,132 @@ const zhTWArticles = {
     cta: {
       heading: "用同一套 8 項檢查測試 Wenlan",
       body: "從一組小型來源開始，驗證引用、更新與審查，再判斷維護型本地知識層是否適合你的工作流。",
+    },
+  },
+  "fix-pdf-ingestion-ai-knowledge-base": {
+    slug: "fix-pdf-ingestion-ai-knowledge-base",
+    eyebrow: "匯入排錯",
+    category: "Workflows",
+    title: "AI 知識庫匯入 PDF 失敗？先判斷掃描檔、文字層與解析錯誤",
+    description:
+      "從文字層、OCR、檔案大小、解析錯誤與實際引用逐步排查 AI 知識庫的 PDF 匯入問題。",
+    metaTitle: "AI 知識庫 PDF 匯入失敗？完整排錯清單",
+    metaDescription:
+      "排查 AI 知識庫 PDF 匯入失敗：辨識掃描型 PDF、OCR、檔案限制、解析錯誤與空內容，並驗證來源。",
+    keywords: [
+      "AI 知識庫 PDF 匯入失敗",
+      "掃描 PDF AI 知識庫 OCR",
+      "PDF 文字擷取失敗",
+      "RAG PDF 空內容",
+      "知識庫文件解析錯誤",
+      "PDF 匯入排錯",
+    ],
+    publishedAt: "2026-08-23",
+    updatedAt: "2026-08-23",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分鐘閱讀",
+    audience: "PDF 顯示已匯入、被略過或出錯，但知識庫裡沒有完整可用內容的繁體中文使用者",
+    heroBullets: [
+      "先分清文字型 PDF 與掃描型 PDF，不要先調 embedding。",
+      "found、ingested、skipped 與 error 是排錯訊號，不是內容可用的證明。",
+      "用一段確定存在的文字與其來源，驗證完整匯入路徑。",
+    ],
+    sections: [
+      {
+        heading: "先說結論：確認 PDF 真的有文字層",
+        body: [
+          "先在 PDF 閱讀器中選取並複製一段文字。如果整頁只能當成圖片選取，這是掃描型或 image-only PDF，必須先做 OCR；Wenlan v1 不會自行 OCR。",
+          "完成 OCR 後，另存成可擷取文字的 PDF，或轉成乾淨的 `.md` / `.txt`。先抽查姓名、日期、數字、表格與閱讀順序，再交給知識庫；搜尋得到文字不代表 OCR 結果一定正確。",
+        ],
+      },
+      {
+        heading: "把失敗分成五種，不要全部叫做上傳失敗",
+        body: [
+          "Wenlan 的資料夾來源只處理 `.md`、`.txt` 與 `.pdf`。文字檔上限為 1 MB，PDF 上限為 10 MB；隱藏檔、symlink 與已排除的資料夾不會進入一般掃描。不同結果要用不同修法。",
+        ],
+        bullets: [
+          "完全找不到檔案：先檢查副檔名、大小、隱藏檔、symlink 與資料夾範圍。",
+          "found 但沒有內容：檢查是否為掃描型 PDF、空文字層或只有極少可用文字。",
+          "skipped：可能是檔案未變、沒有可擷取文字，或內容未通過最低品質門檻。",
+          "error：可能是讀取失敗、截斷、損壞或 PDF parser 無法解析；先用原閱讀器重新匯出一份乾淨副本。",
+          "有文字但回答錯：抽查多欄、表格、頁碼與段落順序，確認錯誤不是在解析階段就發生。",
+        ],
+      },
+      {
+        heading: "用一個最小來源重跑 Wenlan",
+        body: [
+          "不要用整個文件庫測試。複製一份無敏感資料的代表性 PDF 到單獨資料夾，完成平台與 client 設定後，註冊或重新同步這個路徑。",
+          "記錄 found、ingested、skipped 與 error，但不要停在批次摘要。文件處理完成後，搜尋一段只會出現在該 PDF 的句子，確認結果能回到正確檔案或來源。",
+        ],
+        code: {
+          label: "註冊或重新同步一個排錯來源",
+          code: "wenlan status\nwenlan sources add ~/Knowledge/pdf-diagnostic",
+        },
+      },
+      {
+        heading: "用可回答與不可回答問題驗收",
+        body: [
+          "準備一個文件中確實有答案的問題，以及一個來源完全沒有答案的問題。第一個答案應能指出支持內容；第二個應保持未知，不能用流暢文字掩蓋缺少證據。",
+          "若 Markdown 或純文字版本能通過，但原 PDF 不能，問題就在 PDF 擷取路徑，不是 embedding 或提示詞。若兩者都失敗，再檢查來源範圍、同步、檢索與引用。",
+        ],
+      },
+      {
+        heading: "何時該停下來而不是硬救 PDF",
+        body: [
+          "對重要合約、報表或表格，OCR 與重新匯出仍可能破壞數字或結構。若無法用抽查證明結果可靠，就保留原 PDF 為權威來源，改用人工校驗的 Markdown 或文字摘要，並清楚記錄其來源與限制。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "為什麼 PDF 顯示已處理，知識庫卻找不到內容？",
+        answer:
+          "可能是檔案只有圖片、抽出的文字太少、解析失敗，或批次摘要只代表註冊／排程完成。用一段確定存在的文字驗證實際檢索結果。",
+      },
+      {
+        question: "Wenlan 會自動對掃描型 PDF 做 OCR 嗎？",
+        answer: "不會。現行 v1 只擷取已有文字層的 PDF；掃描檔需先在外部完成 OCR。",
+      },
+      {
+        question: "空內容時應該先換 embedding 模型嗎？",
+        answer: "不用。沒有成功擷取的文字無法靠 embedding 補回來；先修正或轉換來源，再重跑同一組驗收。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "choose-ai-knowledge-base-tool",
+      "verify-ai-knowledge-base-citations",
+      "source-backed-wiki-pages-ai-work",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 支援的文件來源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan Directory Source 與檔案限制",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/src/sources/directory.rs",
+      },
+      {
+        label: "Wenlan 資料夾匯入驗收測試",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/tests/folder_ingest_e2e.rs",
+      },
+      {
+        label: "Google Cloud PDF OCR 與版面解析",
+        href: "https://docs.cloud.google.com/gemini/enterprise/docs/parse-chunk-documents?hl=zh-tw",
+      },
+      {
+        label: "DeepTutor 掃描 PDF 空文件 issue",
+        href: "https://github.com/HKUDS/DeepTutor/issues/431",
+      },
+      {
+        label: "Cherry Studio 雙層 PDF 空內容 issue",
+        href: "https://github.com/CherryHQ/cherry-studio/issues/688",
+      },
+    ],
+    cta: {
+      heading: "先驗證一份 PDF，再擴大文件庫",
+      body: "連接 Wenlan、加入一份可控文件，確認文字、來源與引用都通過後再匯入其他資料。",
     },
   },
   "when-ai-agent-should-query-knowledge-base": {
@@ -1238,6 +1366,7 @@ const zhTWArticles = {
       },
     ],
     relatedSlugs: [
+      "fix-pdf-ingestion-ai-knowledge-base",
       "source-backed-wiki-pages-ai-work",
       "choose-ai-knowledge-base-tool",
       "distilled-wiki-pages-ai-memory",
@@ -1270,6 +1399,132 @@ const zhTWArticles = {
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
 
 const zhCNArticles = {
+  "fix-pdf-ingestion-ai-knowledge-base": {
+    slug: "fix-pdf-ingestion-ai-knowledge-base",
+    eyebrow: "导入排错",
+    category: "Workflows",
+    title: "AI 知识库导入 PDF 失败？先判断扫描件、文本层与解析错误",
+    description:
+      "从文本层、OCR、文件大小、解析错误和实际引用逐步排查 AI 知识库的 PDF 导入问题。",
+    metaTitle: "AI 知识库 PDF 导入失败？完整排错清单",
+    metaDescription:
+      "排查 AI 知识库 PDF 导入失败：识别扫描件、OCR、文件限制、解析错误与空内容，并验证来源。",
+    keywords: [
+      "AI 知识库 PDF 导入失败",
+      "扫描 PDF AI 知识库 OCR",
+      "PDF 文本提取失败",
+      "RAG PDF 空内容",
+      "知识库文档解析错误",
+      "PDF 导入排错",
+    ],
+    publishedAt: "2026-08-23",
+    updatedAt: "2026-08-23",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分钟阅读",
+    audience: "PDF 显示已导入、被跳过或报错，但知识库里没有完整可用内容的简体中文用户",
+    heroBullets: [
+      "先分清文本型 PDF 与扫描型 PDF，不要先调 embedding。",
+      "found、ingested、skipped 与 error 是排错信号，不是内容可用的证明。",
+      "用一段确定存在的文字及其来源，验证完整导入路径。",
+    ],
+    sections: [
+      {
+        heading: "先说结论：确认 PDF 真的有文本层",
+        body: [
+          "先在 PDF 阅读器里选中并复制一段文字。如果整页只能作为图片选中，这就是扫描型或 image-only PDF，必须先做 OCR；Wenlan v1 不会自行 OCR。",
+          "完成 OCR 后，另存为可提取文字的 PDF，或转成干净的 `.md` / `.txt`。先抽查姓名、日期、数字、表格和阅读顺序，再交给知识库；能搜到文字不代表 OCR 结果一定正确。",
+        ],
+      },
+      {
+        heading: "把失败分成五类，不要都叫上传失败",
+        body: [
+          "Wenlan 的文件夹来源只处理 `.md`、`.txt` 和 `.pdf`。文本文件上限为 1 MB，PDF 上限为 10 MB；隐藏文件、symlink 和被排除的文件夹不会进入常规扫描。不同结果需要不同修法。",
+        ],
+        bullets: [
+          "完全找不到文件：先检查扩展名、大小、隐藏文件、symlink 和文件夹范围。",
+          "found 但没有内容：检查是否为扫描型 PDF、空文本层或只有极少可用文字。",
+          "skipped：可能是文件未变化、没有可提取文字，或内容未通过最低质量门槛。",
+          "error：可能是读取失败、截断、损坏或 PDF parser 无法解析；先用原阅读器重新导出一份干净副本。",
+          "有文字但回答错误：抽查多栏、表格、页码和段落顺序，确认问题不是解析阶段造成的。",
+        ],
+      },
+      {
+        heading: "用一个最小来源重跑 Wenlan",
+        body: [
+          "不要用整个文档库测试。复制一份无敏感信息的代表性 PDF 到单独文件夹，完成平台与客户端设置后，注册或重新同步这个路径。",
+          "记录 found、ingested、skipped 与 error，但不要停在批次摘要。文档处理完成后，搜索一段只会出现在该 PDF 的句子，确认结果能回到正确文件或来源。",
+        ],
+        code: {
+          label: "注册或重新同步一个排错来源",
+          code: "wenlan status\nwenlan sources add ~/Knowledge/pdf-diagnostic",
+        },
+      },
+      {
+        heading: "用可回答和不可回答问题验收",
+        body: [
+          "准备一个文档中确实有答案的问题，以及一个来源完全没有答案的问题。第一个答案应能指出支持内容；第二个应保持未知，不能用流畅文字掩盖缺少证据。",
+          "如果 Markdown 或纯文本版本能通过，但原 PDF 不能，问题就在 PDF 提取路径，不是 embedding 或提示词。如果两者都失败，再检查来源范围、同步、检索和引用。",
+        ],
+      },
+      {
+        heading: "什么时候该停止硬救 PDF",
+        body: [
+          "对于重要合同、报表或表格，OCR 与重新导出仍可能破坏数字或结构。如果无法通过抽查证明结果可靠，就保留原 PDF 作为权威来源，改用人工校验的 Markdown 或文本摘要，并清楚记录来源和限制。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "为什么 PDF 显示已处理，知识库却找不到内容？",
+        answer:
+          "可能是文件只有图片、提取文字太少、解析失败，或批次摘要只代表注册／排程完成。用一段确定存在的文字验证实际检索结果。",
+      },
+      {
+        question: "Wenlan 会自动对扫描型 PDF 做 OCR 吗？",
+        answer: "不会。当前 v1 只提取已有文本层的 PDF；扫描件需要先在外部完成 OCR。",
+      },
+      {
+        question: "空内容时应该先换 embedding 模型吗？",
+        answer: "不用。没有成功提取的文字无法靠 embedding 补回来；先修正或转换来源，再重跑同一组验收。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "choose-ai-knowledge-base-tool",
+      "verify-ai-knowledge-base-citations",
+      "source-backed-wiki-pages-ai-work",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 支持的文档来源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan Directory Source 与文件限制",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/src/sources/directory.rs",
+      },
+      {
+        label: "Wenlan 文件夹导入验收测试",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/tests/folder_ingest_e2e.rs",
+      },
+      {
+        label: "Google Cloud PDF OCR 与版面解析",
+        href: "https://cloud.google.com/generative-ai-app-builder/docs/parse-chunk-documents?hl=zh-cn",
+      },
+      {
+        label: "DeepTutor 扫描 PDF 空文档 issue",
+        href: "https://github.com/HKUDS/DeepTutor/issues/431",
+      },
+      {
+        label: "FastGPT PDF 空内容 issue",
+        href: "https://github.com/labring/FastGPT/issues/1852",
+      },
+    ],
+    cta: {
+      heading: "先验证一份 PDF，再扩大文档库",
+      body: "连接 Wenlan、加入一份可控文档，确认文字、来源和引用都通过后再导入其他资料。",
+    },
+  },
   "when-ai-agent-should-query-knowledge-base": {
     slug: "when-ai-agent-should-query-knowledge-base",
     eyebrow: "检索策略",
@@ -2232,6 +2487,7 @@ const zhCNArticles = {
       },
     ],
     relatedSlugs: [
+      "fix-pdf-ingestion-ai-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
       "source-backed-wiki-pages-ai-work",
       "distilled-wiki-pages-ai-memory",
@@ -2356,6 +2612,7 @@ const zhCNArticles = {
       },
     ],
     relatedSlugs: [
+      "fix-pdf-ingestion-ai-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
       "build-local-ai-knowledge-base-from-documents",
       "source-backed-wiki-pages-ai-work",
@@ -2482,6 +2739,7 @@ const zhCNArticles = {
       },
     ],
     relatedSlugs: [
+      "fix-pdf-ingestion-ai-knowledge-base",
       "source-backed-wiki-pages-ai-work",
       "choose-ai-knowledge-base-tool",
       "distilled-wiki-pages-ai-memory",

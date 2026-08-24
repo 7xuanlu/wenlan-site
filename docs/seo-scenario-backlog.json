@@ -1400,9 +1400,9 @@
       "userTask": "Handle long documents, text PDFs, scanned PDFs, and AI knowledge-base ingestion failures",
       "desiredOutcome": "Classify the source correctly, apply OCR only when required, preserve file and page provenance, and verify usable text before trusting downstream answers",
       "stage": "troubleshoot",
-      "decision": "research",
-      "plannedWindow": "unassigned-fallback",
-      "publicationStatus": "not-published",
+      "decision": "net-new",
+      "plannedWindow": "2026-08-24..2026-08-30",
+      "publicationStatus": "prepared",
       "locales": {
         "en": {
           "queryFamily": [
@@ -1410,11 +1410,35 @@
             "scanned PDF AI knowledge base OCR",
             "long document knowledge base ingestion limits"
           ],
-          "serpEvidence": [],
-          "demandEvidence": [],
-          "existingOwner": "https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents",
-          "coverage": "partial",
-          "researchNeeded": "Determine whether troubleshooting ingestion failures is a distinct SERP from the existing build guide, which already states text-PDF and OCR boundaries."
+          "serpEvidence": [
+            {
+              "sourceType": "official-documentation-serp",
+              "sourceUrl": "https://docs.cloud.google.com/document-ai/docs/overview?hl=en",
+              "query": "scanned PDF AI knowledge base OCR",
+              "capturedAt": "2026-08-23",
+              "language": "en",
+              "geography": "global",
+              "nativeUnit": "SERP result set",
+              "value": "1 result set observed",
+              "note": "Google separates OCR digitization for scanned images from layout parsing and chunk extraction, supporting a diagnostic task before embedding or retrieval tuning."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "github-issue",
+              "sourceUrl": "https://github.com/HKUDS/DeepTutor/issues/431",
+              "query": "AI knowledge base PDF ingestion failed",
+              "capturedAt": "2026-08-23",
+              "language": "en",
+              "geography": "global",
+              "nativeUnit": "issue report",
+              "value": "1 issue report",
+              "note": "A user reports a scanned PDF with no text layer producing Skipped empty document and no valid documents, even after attempting an OCR-related parser."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "The result set separates failure diagnosis from initial setup; prepare one diagnostic owner and keep the existing build guide as the setup owner."
         },
         "zh-TW": {
           "queryFamily": [
@@ -1422,11 +1446,35 @@
             "掃描 PDF AI 知識庫 OCR",
             "長文件知識庫匯入限制"
           ],
-          "serpEvidence": [],
-          "demandEvidence": [],
-          "existingOwner": "https://wenlan.app/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
-          "coverage": "partial",
-          "researchNeeded": "Inspect Taiwan searches for 匯入, 擷取, 解析, OCR, and long-document failures."
+          "serpEvidence": [
+            {
+              "sourceType": "taiwan-technical-serp",
+              "sourceUrl": "https://ithelp.ithome.com.tw/articles/10394605",
+              "query": "AI 知識庫 PDF 匯入失敗 OCR",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "page views shown on article",
+              "value": "445",
+              "note": "The Taiwan result directly frames PDF parsing and OCR as the preprocessing step before embedding, using local terms such as 文件上傳 and 文字擷取."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "taiwan-technical-article",
+              "sourceUrl": "https://ithelp.ithome.com.tw/articles/10391152",
+              "query": "RAG PDF 文字擷取失敗",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "page views shown on article",
+              "value": "157",
+              "note": "An independent Taiwan article treats document parsing and text extraction as a separate prerequisite before chunking, embedding, and retrieval."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Use Taiwan-native 匯入, 文字層, 擷取, 掃描型 PDF, and 解析錯誤 phrasing for a diagnostic owner distinct from the build guide."
         },
         "zh-CN": {
           "queryFamily": [
@@ -1434,39 +1482,82 @@
             "扫描 PDF AI 知识库 OCR",
             "长文档知识库导入限制"
           ],
-          "serpEvidence": [],
-          "demandEvidence": [],
-          "existingOwner": "https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
-          "coverage": "partial",
-          "researchNeeded": "Inspect mainland Chinese searches for 导入, 解析, OCR, extraction, and long-document failures."
+          "serpEvidence": [
+            {
+              "sourceType": "oss-documentation-serp",
+              "sourceUrl": "https://github.com/labring/FastGPT/blob/main/document/content/self-host/custom-models/marker.mdx",
+              "query": "AI 知识库 PDF 解析失败 OCR",
+              "capturedAt": "2026-08-23",
+              "language": "zh-CN",
+              "geography": "Mainland China",
+              "nativeUnit": "SERP result set",
+              "value": "1 result set observed",
+              "note": "FastGPT documentation says logical PDF parsing performs poorly on images, tables, and formulas and documents an enhanced parsing path, confirming a parser-boundary intent."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "github-issue",
+              "sourceUrl": "https://github.com/HKUDS/DeepTutor/issues/31",
+              "query": "知识库 PDF 解析 0 content blocks",
+              "capturedAt": "2026-08-23",
+              "language": "zh-CN",
+              "geography": "Mainland China",
+              "nativeUnit": "issue report",
+              "value": "1 issue report",
+              "note": "A Chinese issue reports a large PDF completing with zero extracted content blocks and asks how to diagnose the parser failure."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Use mainland-native 导入, 扫描件, 文本层, 空内容, and 解析错误 phrasing for a diagnostic owner distinct from the build guide."
         }
       },
       "gates": {
         "provenance": {
-          "status": "pending",
-          "reason": "No trilingual troubleshooting demand capture is stored.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "Every observation stores a checkable URL, capture date, locale, geography, native unit, and unconverted value.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence",
+            "locales.en.demandEvidence",
+            "locales.zh-TW.serpEvidence",
+            "locales.zh-TW.demandEvidence",
+            "locales.zh-CN.serpEvidence",
+            "locales.zh-CN.demandEvidence"
+          ]
         },
         "repeatedDemand": {
-          "status": "pending",
-          "reason": "The ingestion failure task needs repeated or high-intent external evidence.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "Independent English and Chinese issue reports plus Taiwan technical articles repeat the same high-intent failure: PDF import yields no usable text before retrieval can work.",
+          "evidenceRefs": [
+            "https://github.com/HKUDS/DeepTutor/issues/431",
+            "https://github.com/HKUDS/DeepTutor/issues/31",
+            "https://ithelp.ithome.com.tw/articles/10394605"
+          ]
         },
         "trilingualSerp": {
-          "status": "pending",
-          "reason": "Locale-specific result sets remain unobserved.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "English, Taiwan Traditional Chinese, and Mainland Simplified Chinese result sets each surface parsing, OCR, or empty-content diagnosis rather than a generic knowledge-base setup list.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence",
+            "locales.zh-TW.serpEvidence",
+            "locales.zh-CN.serpEvidence"
+          ]
         },
         "cleanGap": {
-          "status": "pending",
-          "reason": "The existing document-build family already documents text files, text-extractable PDFs, scanned-PDF OCR, and unsupported code ingestion; a separate route requires a distinct troubleshooting SERP.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "The existing document guide owns setup and supported-source selection; this family owns the post-import diagnostic task for skipped, empty, oversized, image-only, near-empty, and parser-error PDFs.",
+          "evidenceRefs": [
+            "src/app/(en)/learn/seo-articles.ts:build-local-ai-knowledge-base-from-documents",
+            "src/app/(en)/learn/seo-articles.ts:fix-pdf-ingestion-ai-knowledge-base"
+          ]
         },
         "firstPartyProof": {
           "status": "passed",
-          "reason": "The product page states the supported document types, idempotent resync, scanned-PDF OCR requirement, and source-code boundary.",
+          "reason": "Wenlan source code and end-to-end tests define supported extensions, size and minimum-text limits, no OCR in v1, image-only skips, and malformed-parser errors.",
           "evidenceRefs": [
-            "src/app/(en)/learn/seo-articles.ts:build-local-ai-knowledge-base-from-documents"
+            "/Users/lucian/Repos/wenlan/crates/wenlan-core/src/sources/directory.rs",
+            "/Users/lucian/Repos/wenlan/crates/wenlan-core/tests/folder_ingest_e2e.rs"
           ]
         },
         "standaloneUtility": {
@@ -1478,48 +1569,50 @@
         },
         "internalLinks": {
           "status": "passed",
-          "reason": "Document-build, tool-selection, and source-backed routes are predeclared.",
+          "reason": "Document-build, tool-selection, and citation-verification owners in all three locales are predeclared and locally link to the new route.",
           "evidenceRefs": [
             "internalLinks"
           ]
         },
         "authorityPath": {
-          "status": "pending",
-          "reason": "A document-processing or OCR authority path has not been selected.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "The DeepTutor scanned-PDF discussion is an exact maintained troubleshooting surface; any contribution remains separately approval-gated until the Wenlan page is live.",
+          "evidenceRefs": [
+            "https://github.com/HKUDS/DeepTutor/issues/431"
+          ]
         }
       },
       "wenlanProof": [
         {
-          "claim": "Wenlan supports Markdown, text, text-extractable PDFs, folders, and read-only Obsidian vault sources.",
-          "sourceRef": "src/app/(en)/learn/seo-articles.ts",
-          "verification": "rg -n \"text-extractable PDF|Obsidian vault\" src/app/(en)/learn/seo-articles.ts"
+          "claim": "Wenlan Directory Sources accept .md, .txt, and .pdf; text files are limited to 1 MB, PDFs to 10 MB, and v1 has no OCR fallback.",
+          "sourceRef": "/Users/lucian/Repos/wenlan/crates/wenlan-core/src/sources/directory.rs",
+          "verification": "rg -n \"MAX_TEXT_FILE_SIZE|MAX_PDF_FILE_SIZE|OCR is not available|is_supported_extension\" /Users/lucian/Repos/wenlan/crates/wenlan-core/src/sources/directory.rs"
         },
         {
-          "claim": "Image-only or scanned PDFs require OCR and directory sources do not ingest arbitrary source code.",
-          "sourceRef": "src/app/(en)/learn/seo-articles.ts",
-          "verification": "rg -n \"scanned PDFs need OCR|do not ingest arbitrary source-code\" src/app/(en)/learn/seo-articles.ts"
+          "claim": "Wenlan skips image-only or near-empty PDFs, records malformed or panicking parser cases as errors, and its end-to-end tests distinguish a text PDF that creates chunks from an image-only PDF that creates none.",
+          "sourceRef": "/Users/lucian/Repos/wenlan/crates/wenlan-core/tests/folder_ingest_e2e.rs",
+          "verification": "rg -n \"image_only_pdf|text_pdf|zero chunks|source page\" /Users/lucian/Repos/wenlan/crates/wenlan-core/tests/folder_ingest_e2e.rs"
         }
       ],
       "standaloneUtility": "A neutral troubleshooting flow can classify extractable text, OCR needs, unsupported file types, source authority, and post-ingestion citation checks.",
-      "overlapCheck": "All locales already have a document-build owner with the key boundaries. Default to refresh-existing only after the old-page gate unless troubleshooting SERPs clearly separate setup from failure diagnosis.",
+      "overlapCheck": "The existing three-locale document-build route owns setup, supported-source selection, and the happy path. The new route owns a different trigger and outcome: diagnosing an import that returns skipped, empty, oversized, image-only, near-empty, or parser-error output before testing retrieval.",
       "internalLinks": [
         "https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents",
         "https://wenlan.app/learn/choose-ai-knowledge-base-tool",
-        "https://wenlan.app/learn/source-backed-wiki-pages-ai-work",
+        "https://wenlan.app/learn/verify-ai-knowledge-base-citations",
         "https://wenlan.app/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
         "https://wenlan.app/zh-TW/learn/choose-ai-knowledge-base-tool",
-        "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",
+        "https://wenlan.app/zh-TW/learn/verify-ai-knowledge-base-citations",
         "https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
         "https://wenlan.app/zh-CN/learn/choose-ai-knowledge-base-tool",
-        "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work"
+        "https://wenlan.app/zh-CN/learn/verify-ai-knowledge-base-citations"
       ],
       "authorityPath": {
-        "type": "document-ingestion-reference",
-        "target": "An active OCR, document-processing, or AI knowledge-base support surface with an exact troubleshooting gap",
-        "status": "research-required"
+        "type": "ingestion-troubleshooting-reference",
+        "target": "HKUDS/DeepTutor issue 431 exact scanned-PDF failure discussion, only after the page is live and with separate approval",
+        "status": "predeclared-no-external-action"
       },
-      "nextResearchDirection": "Capture text-PDF, scanned-PDF, OCR, and ingestion-failure SERPs separately; if the results converge on the current build task, keep one owner and do not add a troubleshooting URL.",
+      "nextResearchDirection": "Local deterministic and rendered verification passed; present the exact diff for separate publication approval, then measure each locale independently and keep any DeepTutor contribution separately approval-gated.",
       "readout": {
         "gsc": {
           "status": "unavailable",

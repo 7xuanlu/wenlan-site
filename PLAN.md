@@ -677,6 +677,13 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
+  `EXP-2026-08-23-pdf-ingestion-troubleshooting-locales` is approved for local
+  implementation and verification and is the unique production-in-flight
+  experiment. It prepares one English, zh-TW, and zh-CN canonical for the
+  post-import PDF diagnosis task. It is not published; commit, push, PR,
+  merge, Vercel deployment, request indexing, GSC validation, external
+  publication, paid actions, synthetic events, analytics mutation, and
+  metric-definition changes remain excluded.
   `EXP-2026-08-23-knowledge-retrieval-policy-locales` is live,
   production-verified, and measuring, so it no longer consumes the single
   production-in-flight slot. It adds one English, zh-TW, and zh-CN canonical
@@ -870,7 +877,7 @@ action returns for separate explicit approval.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 26.
+- Active experiments: 27.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -1256,42 +1263,37 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-23-knowledge-retrieval-policy-locales` is live,
-production-verified, and measuring without consuming the website production-
-in-flight slot. PR #138 merged at `2026-08-24T01:35:09Z` as
-`c95d009437b910a6b85f9d648e667e2d89b70d66`; Vercel production completed at
-`2026-08-24T01:35:46Z`. The three locale owners cover the same task: decide
-when an AI agent should query, pre-retrieve, autonomously retrieve,
-progressively disclose, or skip a knowledge base without treating token
-savings as permission to skip authoritative evidence.
+`EXP-2026-08-23-pdf-ingestion-troubleshooting-locales` is prepared and locally
+verified and is the unique website production-in-flight experiment. It is not
+published, so no production crawl or measurement clock has started. The
+three locale owners cover one task: diagnose a PDF that was skipped, produced
+empty or near-empty text, exceeded a supported boundary, or failed parsing,
+then verify extracted evidence before changing chunking, embeddings, or
+retrieval.
 
-The family passed the complete trilingual scenario gate from separate
-English, Taiwan, and Simplified-Chinese result sets, official and practitioner
-evidence, a clean per-task retrieval-policy gap, maintained Wenlan product
-proof, three same-locale contextual inbound paths, standalone utility, and one
-inspectable authority path. Existing owners retain role comparison and
-repository-source boundaries; this family owns the query-or-skip decision.
-Its slash-command example explicitly requires the Wenlan Codex plugin and
-`/setup`; MCP-only clients use Wenlan `recall` and inspect returned Page
-results, while local `wenlan pages <topic>` provides Page listing and opening
-without the plugin.
+The family passed the complete trilingual scenario gate from separate English,
+Taiwan, and Simplified-Chinese result sets; repeated OSS and practitioner
+evidence; a clean post-import diagnostic gap; Wenlan source-code and end-to-end
+proof; three same-locale contextual inbound paths; standalone utility; and one
+inspectable authority path. The existing document-build pages retain initial
+setup and supported-source selection. This family owns failure diagnosis and
+does not claim that Wenlan v1 performs OCR.
 
 The latest authenticated baseline remains source-separated: GSC property
 totals are 8 clicks and 1,005 impressions, visible-query totals are 2 clicks
 and 216 impressions, and the visibility gap is 6 clicks and 789 impressions.
 Vercel separately reports 248 visitors, including 30 attributed to Google;
-GitHub reports 48 stars. The three new URLs have no pre-publication page rows,
-which are unavailable rather than zero. Each locale independently requires 20
-post-crawl page impressions, 3 qualified joined-query impressions, and 1 GSC
-click for success. The immutable experiment fields and approval boundary are
-in `EXPERIMENTS.md`; the editable evidence and overlap decision are in
-`docs/seo-scenario-backlog.json`.
+GitHub reports 48 stars. The three prepared URLs have no pre-publication page
+rows, which are unavailable rather than zero. Each locale independently
+requires 20 post-crawl page impressions, 3 qualified joined-query impressions,
+and 1 GSC click for success. The immutable experiment fields and approval
+boundary are in `EXPERIMENTS.md`; the editable evidence and overlap decision
+are in `docs/seo-scenario-backlog.json`.
 
-The user approved the exact commit, push, PR creation, merge, automatic Vercel
-deployment, and read-only production-verification scope at
-`2026-08-24T01:21:21Z`. Request indexing, GSC validation, external publication,
-paid action, synthetic events, analytics mutation, and metric-definition
-changes remain excluded.
+The user approved implementation and local verification only. Commit, push,
+PR creation, merge, Vercel deployment, request indexing, GSC validation,
+external publication, paid action, synthetic events, analytics mutation, and
+metric-definition changes remain excluded.
 
 #### Historical pre-final experiment records
 
@@ -3387,3 +3389,44 @@ unchanged.
 - Excluded actions remain unchanged: no request indexing, GSC validation,
   analytics mutation, paid action, synthetic event, or external publication
   occurred for this family.
+
+## Campaign preparation: PDF ingestion troubleshooting family at 2026-08-23
+
+- Record type: approved local website candidate; no production measurement
+  clock has started.
+- Audience: people building an AI knowledge base from mixed Markdown, text
+  PDFs, scanned PDFs, and long documents.
+- Trigger: a document import reports skipped, empty, oversized, near-empty, or
+  parser-error output, or appears successful but produces no usable evidence.
+- User task: determine whether the PDF has a text layer, needs external OCR,
+  exceeds the supported boundary, or failed parsing, then verify extracted
+  source text before changing chunking, embeddings, or retrieval.
+- Intent boundary: the existing document-build route owns initial setup and
+  supported-source selection. This candidate owns post-import diagnosis and
+  therefore has a separate trigger, workflow, and expected result.
+- Exact local routes:
+  `/learn/fix-pdf-ingestion-ai-knowledge-base`,
+  `/zh-TW/learn/fix-pdf-ingestion-ai-knowledge-base`, and
+  `/zh-CN/learn/fix-pdf-ingestion-ai-knowledge-base`.
+- Product boundary: Wenlan v1 accepts `.md`, `.txt`, and `.pdf`; text files are
+  limited to 1 MB and PDFs to 10 MB; scanned or image-only PDFs require OCR
+  outside Wenlan. Batch counts are diagnostics, not proof that searchable
+  evidence exists, so the page requires a distinctive-text and citation check.
+- Internal paths: each locale receives contextual inbound links from its
+  document-build, tool-selection, and citation-verification owners.
+- External authority path: `HKUDS/DeepTutor#431` is an exact scanned-PDF
+  troubleshooting discussion. No contribution, maintainer message, or other
+  external action is approved before the page is live and separate approval is
+  given.
+- Current status: local implementation and verification only. Commit, push,
+  PR, merge, Vercel deployment, request indexing, GSC validation, analytics
+  mutation, paid action, synthetic event, and external publication remain
+  excluded.
+
+- Local verification completed at `2026-08-24T03:08:37Z`: the Goal, scenario,
+  intent, SEO, i18n, TypeScript, build, and built technical checks passed. All
+  three routes were inspected at `393x852` and `1440x1200` with exact
+  canonicals, reciprocal hreflang, one Article and one BreadcrumbList schema,
+  visible expanded FAQ without FAQPage, no horizontal overflow, no broken
+  images, no browser console errors, and natural English, zh-TW, and zh-CN
+  wrapping.
