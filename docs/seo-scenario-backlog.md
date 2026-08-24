@@ -542,12 +542,12 @@ Demand discovery:
 - Trigger: Two or more agents create overlapping summaries, supersede the same conclusion, or reuse knowledge after its source has changed
 - Desired outcome: Assign source and write ownership, surface conflicts before publication, review superseding claims, and preserve an auditable history
 - Stage: `maintain`
-- Decision: `net-new`
+- Decision: `measuring`
 - Planned window: `2026-08-24..2026-08-30`
-- Publication: `prepared`
+- Publication: `measuring`
 - Standalone utility: A neutral operating model can assign source ownership, isolate write scopes, expose conflicts, review superseding claims, and preserve an audit trail.
 - Overlap check: The existing English multi-agent workflow owns connection and coordination through one daemon, data directory, space, capture, recall, handoff, and distill. This family owns a separate maintenance trigger and outcome: detect stale candidates before acceptance, classify contradictory evidence, review candidate claims, and preserve supersession history. It does not promise an atomic stale-write guard on the current public MCP write_page path. Mandarin has no current route for that task.
-- Next research: The trilingual owner is locally implemented and verified with exact product limits and at least three same-locale inbound paths. Present the exact diff for separate publication approval; do not infer keyword volume or publish to Hindsight without approval.
+- Next research: The trilingual owner is live and production-verified from the fixed 2026-08-24T06:26:03Z content boundary. Measure each locale independently in source-native GSC page/query and Vercel page/referrer units; do not infer keyword volume or publish to Hindsight without separate approval.
 
 ### Locale intent and ownership
 

@@ -1631,9 +1631,9 @@
       "userTask": "Prevent conflicts and stale conclusions when multiple AI agents write to shared knowledge",
       "desiredOutcome": "Assign source and write ownership, surface conflicts before publication, review superseding claims, and preserve an auditable history",
       "stage": "maintain",
-      "decision": "net-new",
+      "decision": "measuring",
       "plannedWindow": "2026-08-24..2026-08-30",
-      "publicationStatus": "prepared",
+      "publicationStatus": "measuring",
       "locales": {
         "en": {
           "queryFamily": [
@@ -1857,7 +1857,7 @@
         "target": "vectorize-io/hindsight discussion 1576, only as a neutral source-backed maintenance reference after the page is live and with separate approval",
         "status": "predeclared-no-external-action"
       },
-      "nextResearchDirection": "The trilingual owner is locally implemented and verified with exact product limits and at least three same-locale inbound paths. Present the exact diff for separate publication approval; do not infer keyword volume or publish to Hindsight without approval.",
+      "nextResearchDirection": "The trilingual owner is live and production-verified from the fixed 2026-08-24T06:26:03Z content boundary. Measure each locale independently in source-native GSC page/query and Vercel page/referrer units; do not infer keyword volume or publish to Hindsight without separate approval.",
       "readout": {
         "gsc": {
           "status": "unavailable",
