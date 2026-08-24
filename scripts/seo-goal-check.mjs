@@ -433,6 +433,14 @@ const requiredContentExpansionClauses = [
     "represent the same user task in natural local search language; they are not keyword-by-keyword translations.",
   ],
   [
+    "scenario audience trigger task outcome model",
+    "Each scenario family must explicitly preserve its audience, trigger, user task, and desired outcome.",
+  ],
+  [
+    "audience alone cannot split URL ownership",
+    "A user group alone does not justify a separate URL; split only when the search task and observed SERP are materially different.",
+  ],
+  [
     "failed candidate reasons and next research",
     "record every failed candidate and its failed gate plus the next research direction.",
   ],

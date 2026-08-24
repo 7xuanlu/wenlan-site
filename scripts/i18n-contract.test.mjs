@@ -533,6 +533,7 @@ test("localized Learn slug route supports per-locale acquisition page availabili
     "/learn/choose-ai-knowledge-base-tool",
     "/learn/coding-agent-source-backed-knowledge-base",
     "/learn/verify-ai-knowledge-base-citations",
+    "/learn/when-ai-agent-should-query-knowledge-base",
   ]);
   assert.match(source, /getLocalizedLearnArticle/);
   assert.match(source, /TRANSLATED_LEARN_SLUGS/);
@@ -853,6 +854,8 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
     { locale: "zh-CN", slug: "coding-agent-source-backed-knowledge-base" },
     { locale: "zh-TW", slug: "verify-ai-knowledge-base-citations" },
     { locale: "zh-CN", slug: "verify-ai-knowledge-base-citations" },
+    { locale: "zh-TW", slug: "when-ai-agent-should-query-knowledge-base" },
+    { locale: "zh-CN", slug: "when-ai-agent-should-query-knowledge-base" },
   ]);
 
   const metadata = await localizedLearnSlug.generateMetadata({
@@ -1014,6 +1017,117 @@ test("citation verification family owns one distinct trilingual diagnostic task"
     "distilled-wiki-pages-ai-memory",
   ];
   for (const owner of inboundOwners) {
+    assert.ok(
+      articles.find((article) => article.slug === owner)?.relatedSlugs.includes(slug),
+      `${owner} must link to ${slug}`,
+    );
+    for (const locale of ["zh-TW", "zh-CN"]) {
+      assert.ok(
+        getLocalizedLearnArticle(locale, owner)?.relatedSlugs.includes(slug),
+        `${locale} ${owner} must link to ${slug}`,
+      );
+    }
+  }
+});
+
+test("knowledge retrieval policy family owns one audience-trigger-task-outcome intent", async () => {
+  const [{ articles }, { getLocalizedLearnArticle }] = await Promise.all([
+    import("../src/app/(en)/learn/articles.ts"),
+    import("../src/i18n/learn-articles.ts"),
+  ]);
+  const slug = "when-ai-agent-should-query-knowledge-base";
+  const english = articles.find((article) => article.slug === slug);
+  const scenarioBacklog = JSON.parse(
+    await readFile(resolve(repoRoot, "docs/seo-scenario-backlog.json"), "utf8"),
+  );
+  const scenario = scenarioBacklog.families.find(
+    (family) => family.id === "knowledge-retrieval-context-token-cost",
+  );
+
+  assert.deepEqual(
+    {
+      audience: scenario.audience,
+      trigger: scenario.trigger,
+      userTask: scenario.userTask,
+      desiredOutcome: scenario.desiredOutcome,
+    },
+    {
+      audience:
+        "Developers operating AI agents over large documentation sets that are consulted repeatedly across tasks or sessions",
+      trigger:
+        "The agent repeatedly reloads the same raw documents, consumes too much context, or retrieves knowledge even when the authoritative file is already available",
+      userTask:
+        "Decide when an AI agent should query a knowledge base and reduce repeated document context or token cost",
+      desiredOutcome:
+        "Use a clear retrieval policy that opens exact sources only when needed, avoids redundant context, and never treats token savings as permission to skip authoritative evidence",
+    },
+  );
+
+  assert.ok(english, "English retrieval-policy article");
+  assert.match(english.title, /When Should an AI Agent Query a Knowledge Base/);
+  assert.match(JSON.stringify(english), /Query|Skip retrieval|Pre-retrieve|Progressive disclosure/);
+  assert.match(JSON.stringify(english), /does not guarantee lower token cost|do not reuse another system's savings percentage/i);
+  assert.equal(english.publishedAt, "2026-08-23");
+  assert.ok(english.officialReferences?.length >= 5);
+
+  for (const [locale, titlePattern, policyPattern] of [
+    ["zh-TW", /AI Agent 何時該查知識庫/, /預先檢索|略過檢索|漸進揭露/],
+    ["zh-CN", /AI Agent 何时该查知识库/, /预检索|跳过检索|渐进披露/],
+  ]) {
+    const article = getLocalizedLearnArticle(locale, slug);
+    assert.ok(article, `${locale} retrieval-policy article`);
+    assert.match(article.title, titlePattern);
+    assert.match(JSON.stringify(article), policyPattern);
+    assert.match(JSON.stringify(article), /Token/);
+    assert.equal(article.sections.length, 4);
+    assert.ok(article.officialReferences?.length >= 5);
+  }
+
+  const [{ default: EnglishPage }, { default: LocalizedPage }] = await Promise.all([
+    import("../src/app/(en)/learn/[slug]/page.tsx"),
+    import("../src/app/[locale]/learn/[slug]/page.tsx"),
+  ]);
+  const rendered = {
+    en: renderToStaticMarkup(
+      await EnglishPage({ params: Promise.resolve({ slug }) }),
+    ),
+    "zh-TW": renderToStaticMarkup(
+      await LocalizedPage({
+        params: Promise.resolve({ locale: "zh-TW", slug }),
+      }),
+    ),
+    "zh-CN": renderToStaticMarkup(
+      await LocalizedPage({
+        params: Promise.resolve({ locale: "zh-CN", slug }),
+      }),
+    ),
+  };
+
+  assert.match(rendered.en, /Developers operating AI agents over documentation/);
+  assert.match(rendered.en, /repeatedly loading irrelevant documents|Always injecting a document collection/);
+  assert.match(rendered.en, /Use this query-or-skip decision policy/);
+  assert.match(rendered.en, /open the smallest exact passage needed/);
+  assert.match(rendered.en, /slash-command example requires the Wenlan Codex plugin/);
+  assert.match(rendered.en, /MCP-only clients should call Wenlan recall/);
+  assert.match(rendered.en, /wenlan pages &lt;topic&gt;/);
+  assert.match(rendered["zh-TW"], /反覆把無關文件塞進上下文|每輪強制注入整批文件/);
+  assert.match(rendered["zh-TW"], /查詢或略過清單/);
+  assert.match(rendered["zh-TW"], /確切引用|確切權威檔案/);
+  assert.match(rendered["zh-TW"], /需要先安裝 Wenlan Codex plugin/);
+  assert.match(rendered["zh-TW"], /Wenlan recall 並檢查它回傳的 Page/);
+  assert.match(rendered["zh-TW"], /wenlan pages &lt;主題&gt;/);
+  assert.match(rendered["zh-CN"], /反复把无关文档塞进上下文|每轮强制注入整批文件/);
+  assert.match(rendered["zh-CN"], /查询或跳过清单/);
+  assert.match(rendered["zh-CN"], /准确引用|准确权威文件/);
+  assert.match(rendered["zh-CN"], /需要先安装 Wenlan Codex plugin/);
+  assert.match(rendered["zh-CN"], /Wenlan recall 并检查它返回的 Page/);
+  assert.match(rendered["zh-CN"], /wenlan pages &lt;主题&gt;/);
+
+  for (const owner of [
+    "source-backed-wiki-pages-ai-work",
+    "coding-agent-source-backed-knowledge-base",
+    "verify-ai-knowledge-base-citations",
+  ]) {
     assert.ok(
       articles.find((article) => article.slug === owner)?.relatedSlugs.includes(slug),
       `${owner} must link to ${slug}`,
