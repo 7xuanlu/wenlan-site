@@ -1492,7 +1492,12 @@ const workflowArticles: BaseSpec[] = [
       "How do I avoid cross-project leakage?",
       "Use spaces intentionally. Run wenlan doctor from the terminal to inspect resolver state, then verify with a same-space capture/recall round trip.",
     ],
-    relatedSlugs: ["codex-claude-code-shared-memory", "mcp-memory-server", "review-before-trust-ai-memory"],
+    relatedSlugs: [
+      "prevent-multi-agent-knowledge-conflicts",
+      "codex-claude-code-shared-memory",
+      "mcp-memory-server",
+      "review-before-trust-ai-memory",
+    ],
     officialReferences: [
       {
         label: "Wenlan MCP clients docs",
@@ -1632,6 +1637,7 @@ const workflowArticles: BaseSpec[] = [
       "No. A chatbot upload is usually session-scoped. This workflow registers a reusable local source, resyncs it, and builds a maintained Page whose support can be inspected and reviewed.",
     ],
     relatedSlugs: [
+      "prevent-multi-agent-knowledge-conflicts",
       "fix-pdf-ingestion-ai-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
       "source-backed-wiki-pages-ai-work",
@@ -2269,6 +2275,99 @@ const comparisonArticles: BaseSpec[] = [
 
 const trustArticles: BaseSpec[] = [
   {
+    slug: "prevent-multi-agent-knowledge-conflicts",
+    eyebrow: "Shared knowledge maintenance",
+    category: "Workflows",
+    title: "How to Prevent Multi-Agent Knowledge Conflicts and Stale Conclusions",
+    description:
+      "Prevent AI agents from overwriting shared knowledge, promoting unsupported claims, or reusing conclusions after their sources change.",
+    metaTitle: "Prevent Multi-Agent Knowledge Conflicts | Wenlan",
+    metaDescription:
+      "Use evidence, candidate claims, version checks, review, and history to prevent stale or conflicting knowledge from spreading across AI agents.",
+    keywords: [
+      "multi agent shared knowledge conflict",
+      "prevent stale agent knowledge",
+      "AI agent memory conflict resolution",
+      "multiple agents overwrite shared memory",
+      "multi agent knowledge base governance",
+      "shared agent knowledge provenance",
+    ],
+    publishedAt: "2026-08-24",
+    updatedAt: "2026-08-24",
+    audience:
+      "Teams whose coding, research, or operations agents read from and write to the same project knowledge",
+    heroBullets: [
+      "Do not let every agent write directly into accepted shared knowledge.",
+      "Keep evidence, candidate claims, and accepted conclusions as separate states.",
+      "Detect stale writes before acceptance, review contradictions, and preserve the history they replace.",
+    ],
+    quickAnswer:
+      "Prevent multi-agent knowledge conflicts by treating every agent write as a candidate claim, not immediate shared truth. Store its source, writer, scope, captured time, and expected version; re-read the target before acceptance; if it changed, do not publish the stale candidate. Compare contradictions with the current source, then let a reviewer promote, replace, or leave the claim unresolved. Preserve the replaced conclusion and its provenance so later agents can see why it changed.",
+    problem:
+      "The failure appears when one agent reads version A, another changes the source or conclusion, and the first agent later writes from its stale snapshot. It also appears when two plausible summaries contradict each other or an agent records a claimed completion without a verifiable result. A shared file or vector store makes the information visible, but does not decide which statement is current or supported.",
+    wenlanFit:
+      "Wenlan separates Sources, atomic Memories, and maintained Pages. Captures keep provenance; explicit replacements preserve a supersedes chain; stale Pages can be rebuilt from current support; machine changes to human-owned writing become reviewable revisions; and an optional reconcile pass can queue protected conflicts instead of overwriting history. That pass is off by default and does not replace source review.",
+    actionHeading: "Use a staged write and review loop",
+    actionIntro:
+      "Use one small conflict fixture before several agents depend on the same knowledge base. The slash-command recipe below requires the Wenlan Codex plugin after `/setup`.",
+    actionBullets: [
+      "Define the authoritative source and the write scope for the fact or Page. Agent identity alone is not authority.",
+      "Record the evidence, candidate claim, writer, source revision, captured time, and expected version together.",
+      "Before accepting a write, re-read the source and target and compare them with the version recorded by the agent. A mismatch should stop the workflow before `write_page` and force a fresh read.",
+      "Compare competing claims with the original evidence. Mark them supported, contradicted, stale, replaced, or unresolved; do not let recency alone decide.",
+      "Promote only reviewed claims into accepted shared knowledge. Preserve the previous conclusion, its citations, and the replacement reason.",
+      "Run the same recall from a second agent and verify that it sees the accepted state, the current source, and any unresolved conflict rather than a silent last write.",
+    ],
+    code: {
+      label: "Wenlan Codex plugin: inspect, capture, distill, and review",
+      code: "/pages <shared topic>\n/capture <candidate claim + source + why it matters>\n/distill <shared topic>\n/lint\n/curate",
+    },
+    caution:
+      "Wenlan is not a multi-agent scheduler, distributed lock service, or automatic consensus engine. Repository files, tests, specifications, and maintained first-party documents remain authoritative. The current public MCP `write_page` does not accept `expected_version`, so this recipe performs the source-and-version comparison before the write instead of claiming an atomic stale-write rejection. Human-owned Page refreshes become reviewable revisions. Agents without the Codex plugin can use local MCP tools (`recall`, `capture`, `distill`, `lint`, and `list_pending_revisions`) or the local CLI (`wenlan pages`, `wenlan capture`, `wenlan lint`, and `wenlan curate revisions`). Local Page refresh is available only through local stdio MCP; semantic conflicts still require evidence and review.",
+    faq: [
+      "Should every agent write to the same shared Page?",
+      "No. Agents can capture atomic evidence and candidate claims, but accepted Pages should have a defined scope and review path so one agent cannot silently overwrite another's supported conclusion.",
+      "Does the optional reconcile pass resolve every contradiction automatically?",
+      "No. It can queue protected conflicts for review and preserve supersession, but it is off by default and cannot decide whether the underlying source is correct.",
+    ],
+    relatedSlugs: [
+      "multi-agent-memory-workflow",
+      "source-backed-wiki-pages-ai-work",
+      "verify-ai-knowledge-base-citations",
+      "distilled-wiki-pages-ai-memory",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan knowledge lifecycle",
+        href: "https://github.com/7xuanlu/wenlan#how-knowledge-stays-current",
+      },
+      {
+        label: "Wenlan review and trust guide",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+      {
+        label: "Governed Shared Memory for Multi-Agent LLM Systems",
+        href: "https://arxiv.org/abs/2606.24535",
+      },
+      {
+        label: "MemTX transactional belief commit",
+        href: "https://arxiv.org/abs/2607.23929",
+      },
+      {
+        label: "Hindsight multi-agent shared-memory discussion",
+        href: "https://github.com/vectorize-io/hindsight/discussions/1576",
+      },
+      {
+        label: "Anthropic SDK multi-agent memory discussion",
+        href: "https://github.com/anthropics/anthropic-sdk-python/discussions/1419",
+      },
+    ],
+    cta: {
+      heading: "Test one conflicting conclusion",
+      body: "Connect two agents to Wenlan, stage one conflicting claim with its source, and verify that review and history stay visible before either agent reuses it.",
+    },
+  },
+  {
     slug: "fix-pdf-ingestion-ai-knowledge-base",
     eyebrow: "Ingestion troubleshooting",
     category: "Workflows",
@@ -2619,7 +2718,7 @@ const trustArticles: BaseSpec[] = [
       "Should I import every note before starting?",
       "No. Start with one repeated, high-value topic and prove its source, capture, distill, inspection, lint, and review loop before expanding.",
     ],
-    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "review-before-trust-ai-memory", "ai-memory-provenance"],
+    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "prevent-multi-agent-knowledge-conflicts", "review-before-trust-ai-memory", "ai-memory-provenance"],
     officialReferences: [
       {
         label: "Wenlan knowledge model",

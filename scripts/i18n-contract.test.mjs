@@ -535,6 +535,7 @@ test("localized Learn slug route supports per-locale acquisition page availabili
     "/learn/verify-ai-knowledge-base-citations",
     "/learn/when-ai-agent-should-query-knowledge-base",
     "/learn/fix-pdf-ingestion-ai-knowledge-base",
+    "/learn/prevent-multi-agent-knowledge-conflicts",
   ]);
   assert.match(source, /getLocalizedLearnArticle/);
   assert.match(source, /TRANSLATED_LEARN_SLUGS/);
@@ -859,6 +860,8 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
     { locale: "zh-CN", slug: "when-ai-agent-should-query-knowledge-base" },
     { locale: "zh-TW", slug: "fix-pdf-ingestion-ai-knowledge-base" },
     { locale: "zh-CN", slug: "fix-pdf-ingestion-ai-knowledge-base" },
+    { locale: "zh-TW", slug: "prevent-multi-agent-knowledge-conflicts" },
+    { locale: "zh-CN", slug: "prevent-multi-agent-knowledge-conflicts" },
   ]);
 
   const metadata = await localizedLearnSlug.generateMetadata({
@@ -1428,6 +1431,71 @@ test("PDF ingestion troubleshooting guide owns a distinct three-locale diagnosti
     assert.match(JSON.stringify(article), new RegExp(expected.scan));
     assert.match(JSON.stringify(article), new RegExp(expected.error));
     assert.match(JSON.stringify(article), /wenlan sources add/);
+    assert.ok(article.officialReferences?.length >= 5);
+  }
+});
+
+test("multi-agent knowledge conflict guide owns a distinct three-locale maintenance task", async () => {
+  const { getArticle } = await import("../src/app/(en)/learn/articles.ts");
+  const { getLocalizedLearnArticle } = await import(
+    "../src/i18n/learn-articles.ts"
+  );
+  const slug = "prevent-multi-agent-knowledge-conflicts";
+  const english = getArticle(slug);
+
+  assert.ok(english);
+  assert.equal(
+    english.title,
+    "How to Prevent Multi-Agent Knowledge Conflicts and Stale Conclusions",
+  );
+  assert.equal(english.publishedAt, "2026-08-24");
+  assert.equal(english.updatedAt, "2026-08-24");
+  assert.ok(english.keywords.includes("multi agent shared knowledge conflict"));
+  assert.match(JSON.stringify(english), /candidate claim/);
+  assert.match(JSON.stringify(english), /accepted shared knowledge/);
+  assert.match(JSON.stringify(english), /expected version/);
+  assert.match(
+    JSON.stringify(english),
+    /current public MCP `write_page` does not accept `expected_version`/,
+  );
+  assert.match(JSON.stringify(english), /Codex plugin/);
+  assert.match(JSON.stringify(english), /local MCP/);
+  assert.match(JSON.stringify(english), /wenlan pages/);
+  assert.match(JSON.stringify(english), /optional reconcile pass/);
+  assert.ok(english.officialReferences?.length >= 5);
+
+  const expectations = {
+    "zh-TW": {
+      title: "多個 AI Agent 共用知識衝突？避免覆寫與過期結論",
+      keyword: "多個 AI Agent 共用知識衝突",
+      candidate: "候選主張",
+      stale: "過期結論",
+      localMcp: "本機 MCP",
+    },
+    "zh-CN": {
+      title: "多智能体共享知识冲突？避免覆盖与过期结论",
+      keyword: "多智能体共享知识冲突",
+      candidate: "候选主张",
+      stale: "过期结论",
+      localMcp: "本地 MCP",
+    },
+  };
+
+  for (const [locale, expected] of Object.entries(expectations)) {
+    const article = getLocalizedLearnArticle(locale, slug);
+    assert.ok(article);
+    assert.equal(article.title, expected.title);
+    assert.equal(article.publishedAt, "2026-08-24");
+    assert.equal(article.updatedAt, "2026-08-24");
+    assert.ok(article.keywords.includes(expected.keyword));
+    assert.match(JSON.stringify(article), new RegExp(expected.candidate));
+    assert.match(JSON.stringify(article), new RegExp(expected.stale));
+    assert.match(JSON.stringify(article), /Codex plugin/);
+    assert.match(JSON.stringify(article), new RegExp(expected.localMcp));
+    assert.match(JSON.stringify(article), /wenlan pages/);
+    assert.match(JSON.stringify(article), /不接受 `expected_version`/);
+    assert.match(JSON.stringify(article), /\/lint/);
+    assert.match(JSON.stringify(article), /\/curate/);
     assert.ok(article.officialReferences?.length >= 5);
   }
 });

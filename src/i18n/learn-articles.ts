@@ -17,6 +17,136 @@ export {
 } from "./learn-availability";
 
 const zhTWArticles = {
+  "prevent-multi-agent-knowledge-conflicts": {
+    slug: "prevent-multi-agent-knowledge-conflicts",
+    eyebrow: "共享知識維護",
+    category: "Workflows",
+    title: "多個 AI Agent 共用知識衝突？避免覆寫與過期結論",
+    description:
+      "避免多個 AI Agent 覆寫共享知識、採用缺乏證據的主張，或在來源改變後繼續使用過期結論。",
+    metaTitle: "多個 AI Agent 共用知識衝突與過期結論 | Wenlan",
+    metaDescription:
+      "用證據、候選主張、版本檢查、人工審查與歷史記錄，避免多個 AI Agent 傳播衝突或過期的共享知識。",
+    keywords: [
+      "多個 AI Agent 共用知識衝突",
+      "避免共享 AI 知識過期",
+      "AI Agent 記憶衝突",
+      "多代理知識寫入衝突",
+      "AI 知識庫版本衝突",
+      "共享知識來源追蹤",
+    ],
+    publishedAt: "2026-08-24",
+    updatedAt: "2026-08-24",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分鐘閱讀",
+    audience: "讓多個 coding、研究或營運 Agent 讀寫同一份專案知識的團隊",
+    heroBullets: [
+      "不要讓每個 Agent 直接把輸出寫成已接受的共享知識。",
+      "把原始證據、候選主張與已接受結論分成三個狀態。",
+      "在接受前辨識過期寫入、審查矛盾，並保留被取代結論的歷史。",
+    ],
+    sections: [
+      {
+        heading: "先說結論：Agent 寫入只是候選主張",
+        body: [
+          "多個 AI Agent 共用知識時，不要採用最後寫入者自動勝出的規則。每次寫入先保留來源、寫入者、適用範圍、擷取時間與預期版本；只有重新檢查目前來源並完成審查後，候選主張才能成為已接受的共享知識。",
+          "若目標版本已變，就在呼叫 `write_page` 前停止流程並重新讀取；若兩個結論互相矛盾，就保留衝突，不用新文字靜默覆蓋舊歷史。",
+        ],
+      },
+      {
+        heading: "先分清五種失敗",
+        body: [
+          "共享檔案、向量庫或記憶服務只能讓 Agent 看到同一批資料，不能自動判斷哪一條是目前正確的知識。先把失敗分類，才能選擇版本檢查、來源重讀或人工審查。",
+        ],
+        bullets: [
+          "覆寫：Agent B 的最後寫入把 Agent A 有證據的內容直接蓋掉。",
+          "過期：Agent 依照舊版來源產生結論，寫入前來源已經改變。",
+          "矛盾：兩個主張都看似合理，但內容、範圍或時間互不相容。",
+          "範圍污染：一個 Agent 的專案、角色或個人資料流入不該共享的空間。",
+          "假完成：Agent 記錄工作已完成，卻沒有測試、檔案或可重現結果。",
+        ],
+      },
+      {
+        heading: "使用候選、驗證、接受三階段流程",
+        body: [
+          "先指定事實或 Page 的權威來源與寫入範圍。Agent 身分本身不是權威；程式、測試、規格與維護中的第一方文件仍優先。",
+          "審查時回到原始證據，把主張標記為 supported、contradicted、stale、replaced 或 unresolved。資訊較新不代表一定正確；證據不足時，保留未解狀態。",
+          "下列斜線命令只適用於已透過 `/setup` 安裝 Wenlan Codex plugin 的 Codex。其他 Agent 可使用本機 MCP 的 `recall`、`capture`、`distill`、`lint`、`list_pending_revisions`，或本機 CLI 的 `wenlan pages`、`wenlan capture`、`wenlan lint`、`wenlan curate revisions`。",
+        ],
+        code: {
+          label: "Wenlan Codex plugin：檢查、保存、整理與審查",
+          code: "/pages <共享主題>\n/capture <候選主張 + 來源 + 為何重要>\n/distill <共享主題>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "Wenlan 能做什麼，以及不能做什麼",
+        body: [
+          "Wenlan 把 Sources、原子 Memories 與維護型 Pages 分開。明確取代會保留 supersedes 鏈；stale Page 可依目前證據重建；機器要改寫人工擁有的內容時，會先成為可審查修訂。可選的 Reconcile 流程能把受保護衝突排入審查，但預設關閉。",
+          "Wenlan 不是 Agent 排程器、分散式鎖服務或自動共識引擎。目前公開的 MCP `write_page` 不接受 `expected_version`，所以這個流程必須在寫入前自行重讀並比較來源與版本，不能宣稱 Wenlan 會原子化拒絕過期的機器 Page 更新。人工擁有的 Page 更新會進入可審查修訂；本機 Page refresh 只支援本機 stdio MCP，語意衝突仍要靠來源與判斷處理。",
+        ],
+      },
+      {
+        heading: "用兩個 Agent 做最小驗收",
+        body: [
+          "準備一份來源與兩個互相矛盾的候選結論。讓第一個 Agent 保存有來源的主張，再修改來源或 Page；第二個 Agent 使用舊版本時，寫入前檢查應發現版本已變並停止，或把人工擁有的 Page 更新送進審查，而不是靜默蓋掉新內容。",
+          "最後從另一個 Agent 重新查詢，確認它看到已接受狀態、目前來源與未解衝突，並能追查被取代的結論及原因。即使不用 Wenlan，這組驗收也適用於其他共享知識系統。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "所有 Agent 都應該直接寫入同一個 Page 嗎？",
+        answer:
+          "不應該。Agent 可以保存原子證據與候選主張，但已接受的 Page 應有明確範圍與審查路徑，避免任何 Agent 靜默覆寫結論。",
+      },
+      {
+        question: "可選的 Reconcile 會自動解決所有矛盾嗎？",
+        answer:
+          "不會。它能把受保護衝突排入審查並保留取代關係，但預設關閉，也無法替你判斷原始來源是否正確。",
+      },
+      {
+        question: "只用 Git 就能避免共享知識衝突嗎？",
+        answer:
+          "Git 能保留檔案歷史與顯示文字衝突，但不會自動發現跨檔案的語意矛盾或過期證據；仍需來源版本、驗證規則與審查。",
+      },
+    ],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "verify-ai-knowledge-base-citations",
+      "distilled-wiki-pages-ai-memory",
+      "choose-ai-knowledge-base-tool",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 知識生命週期",
+        href: "https://github.com/7xuanlu/wenlan#how-knowledge-stays-current",
+      },
+      {
+        label: "Wenlan 審查與信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+      {
+        label: "Governed Shared Memory 論文",
+        href: "https://arxiv.org/abs/2606.24535",
+      },
+      {
+        label: "iThome 多代理協作衝突報導",
+        href: "https://www.ithome.com.tw/news/178146",
+      },
+      {
+        label: "繁體中文多 Agent 證據衝突處理",
+        href: "https://github.com/bojieli/ai-agent-book/blob/main/book-zhtw/chapter3.zhtw.md",
+      },
+      {
+        label: "Hindsight 多 Agent 共享記憶討論",
+        href: "https://github.com/vectorize-io/hindsight/discussions/1576",
+      },
+    ],
+    cta: {
+      heading: "先測一個互相矛盾的結論",
+      body: "讓兩個 Agent 連接 Wenlan，保存一條有來源的衝突主張，確認審查與歷史在重用前都看得見。",
+    },
+  },
   "distilled-wiki-pages-ai-memory": {
     slug: "distilled-wiki-pages-ai-memory",
     eyebrow: "概念",
@@ -249,6 +379,7 @@ const zhTWArticles = {
       },
     ],
     relatedSlugs: [
+      "prevent-multi-agent-knowledge-conflicts",
       "coding-agent-source-backed-knowledge-base",
       "wenlan-vs-obsidian-ai-memory",
       "source-backed-wiki-pages-ai-work",
@@ -381,6 +512,7 @@ const zhTWArticles = {
       },
     ],
     relatedSlugs: [
+      "prevent-multi-agent-knowledge-conflicts",
       "coding-agent-source-backed-knowledge-base",
       "wenlan-vs-obsidian-ai-memory",
       "distilled-wiki-pages-ai-memory",
@@ -1366,6 +1498,7 @@ const zhTWArticles = {
       },
     ],
     relatedSlugs: [
+      "prevent-multi-agent-knowledge-conflicts",
       "fix-pdf-ingestion-ai-knowledge-base",
       "source-backed-wiki-pages-ai-work",
       "choose-ai-knowledge-base-tool",
@@ -1399,6 +1532,136 @@ const zhTWArticles = {
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
 
 const zhCNArticles = {
+  "prevent-multi-agent-knowledge-conflicts": {
+    slug: "prevent-multi-agent-knowledge-conflicts",
+    eyebrow: "共享知识维护",
+    category: "Workflows",
+    title: "多智能体共享知识冲突？避免覆盖与过期结论",
+    description:
+      "避免多个 AI Agent 覆盖共享知识、采用缺乏证据的主张，或在来源变化后继续使用过期结论。",
+    metaTitle: "多智能体共享知识冲突与过期结论 | Wenlan",
+    metaDescription:
+      "用证据、候选主张、版本检查、人工审核与历史记录，避免多个 AI Agent 传播冲突或过期的共享知识。",
+    keywords: [
+      "多智能体共享知识冲突",
+      "避免共享 AI 知识过期",
+      "AI Agent 记忆冲突",
+      "多 Agent 知识写入冲突",
+      "AI 知识库版本冲突",
+      "共享知识来源追踪",
+    ],
+    publishedAt: "2026-08-24",
+    updatedAt: "2026-08-24",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分钟阅读",
+    audience: "让多个 coding、研究或运营 Agent 读写同一份项目知识的团队",
+    heroBullets: [
+      "不要让每个 Agent 直接把输出写成已接受的共享知识。",
+      "把原始证据、候选主张与已接受结论分成三种状态。",
+      "在接受前发现过期写入、审核矛盾，并保留被取代结论的历史。",
+    ],
+    sections: [
+      {
+        heading: "先说结论：Agent 写入只是候选主张",
+        body: [
+          "多智能体共享知识时，不要采用最后写入者自动胜出的规则。每次写入先保留来源、写入者、适用范围、采集时间与预期版本；只有重新检查当前来源并完成审核后，候选主张才能成为已接受的共享知识。",
+          "如果目标版本已经变化，就在调用 `write_page` 前停止流程并重新读取；如果两个结论互相矛盾，就保留冲突，不要用新文字静默覆盖旧历史。",
+        ],
+      },
+      {
+        heading: "先分清五种失败",
+        body: [
+          "共享文件、向量库或记忆服务只能让 Agent 看到同一批数据，不能自动判断哪一条是当前正确的知识。先把失败分类，才能选择版本检查、来源重读或人工审核。",
+        ],
+        bullets: [
+          "覆盖：Agent B 的最后写入把 Agent A 有证据的内容直接盖掉。",
+          "过期：Agent 按旧版来源生成结论，写入前来源已经改变。",
+          "矛盾：两个主张都看似合理，但内容、范围或时间互不相容。",
+          "范围污染：一个 Agent 的项目、角色或个人数据流入不该共享的空间。",
+          "假完成：Agent 记录工作已完成，却没有测试、文件或可复现结果。",
+        ],
+      },
+      {
+        heading: "使用候选、验证、接受三阶段流程",
+        body: [
+          "先指定事实或 Page 的权威来源与写入范围。Agent 身份本身不是权威；代码、测试、规格与维护中的第一方文档仍然优先。",
+          "审核时回到原始证据，把主张标记为 supported、contradicted、stale、replaced 或 unresolved。信息更新不代表一定正确；证据不足时，保留未解决状态。",
+          "下面的斜线命令只适用于已经通过 `/setup` 安装 Wenlan Codex plugin 的 Codex。其他 Agent 可以使用本地 MCP 的 `recall`、`capture`、`distill`、`lint`、`list_pending_revisions`，或本地 CLI 的 `wenlan pages`、`wenlan capture`、`wenlan lint`、`wenlan curate revisions`。",
+        ],
+        code: {
+          label: "Wenlan Codex plugin：检查、保存、整理与审核",
+          code: "/pages <共享主题>\n/capture <候选主张 + 来源 + 为什么重要>\n/distill <共享主题>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "Wenlan 能做什么，以及不能做什么",
+        body: [
+          "Wenlan 把 Sources、原子 Memories 与维护型 Pages 分开。明确取代会保留 supersedes 链；stale Page 可以按当前证据重建；机器要改写人工拥有的内容时，会先成为可审核修订。可选的 Reconcile 流程能把受保护冲突排入审核，但默认关闭。",
+          "Wenlan 不是 Agent 调度器、分布式锁服务或自动共识引擎。目前公开的 MCP `write_page` 不接受 `expected_version`，所以这个流程必须在写入前自行重读并比较来源与版本，不能宣称 Wenlan 会原子化拒绝过期的机器 Page 更新。人工拥有的 Page 更新会进入可审核修订；本地 Page refresh 只支持本地 stdio MCP，语义冲突仍要靠来源与判断处理。",
+        ],
+      },
+      {
+        heading: "用两个 Agent 做最小验收",
+        body: [
+          "准备一份来源与两个互相矛盾的候选结论。让第一个 Agent 保存有来源的主张，再修改来源或 Page；第二个 Agent 使用旧版本时，写入前检查应该发现版本已经变化并停止，或把人工拥有的 Page 更新送进审核，而不是静默盖掉新内容。",
+          "最后从另一个 Agent 重新查询，确认它看到已接受状态、当前来源与未解决冲突，并能追查被取代的结论及原因。即使不用 Wenlan，这组验收也适用于其他共享知识系统。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "所有 Agent 都应该直接写入同一个 Page 吗？",
+        answer:
+          "不应该。Agent 可以保存原子证据与候选主张，但已接受的 Page 应有明确范围与审核路径，避免任何 Agent 静默覆盖结论。",
+      },
+      {
+        question: "可选的 Reconcile 会自动解决所有矛盾吗？",
+        answer:
+          "不会。它能把受保护冲突排入审核并保留取代关系，但默认关闭，也无法替你判断原始来源是否正确。",
+      },
+      {
+        question: "只用 Git 就能避免共享知识冲突吗？",
+        answer:
+          "Git 能保留文件历史并显示文本冲突，但不会自动发现跨文件的语义矛盾或过期证据；仍需要来源版本、验证规则与审核。",
+      },
+    ],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "verify-ai-knowledge-base-citations",
+      "distilled-wiki-pages-ai-memory",
+      "choose-ai-knowledge-base-tool",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 知识生命周期",
+        href: "https://github.com/7xuanlu/wenlan#how-knowledge-stays-current",
+      },
+      {
+        label: "Wenlan 审核与信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+      {
+        label: "Governed Shared Memory 论文",
+        href: "https://arxiv.org/abs/2606.24535",
+      },
+      {
+        label: "DeerFlow 多智能体记忆污染 bug",
+        href: "https://github.com/bytedance/deer-flow/issues/4802",
+      },
+      {
+        label: "多 Agent 共享文件并发冲突",
+        href: "https://github.com/bojieli/ai-agent-book/blob/main/book/chapter10.md",
+      },
+      {
+        label: "AutoGen 长期多智能体记忆讨论",
+        href: "https://github.com/microsoft/autogen/discussions/7794",
+      },
+    ],
+    cta: {
+      heading: "先测试一个互相矛盾的结论",
+      body: "让两个 Agent 连接 Wenlan，保存一条有来源的冲突主张，确认审核与历史在复用前都能看见。",
+    },
+  },
   "fix-pdf-ingestion-ai-knowledge-base": {
     slug: "fix-pdf-ingestion-ai-knowledge-base",
     eyebrow: "导入排错",
@@ -2024,6 +2287,7 @@ const zhCNArticles = {
       },
     ],
     relatedSlugs: [
+      "prevent-multi-agent-knowledge-conflicts",
       "coding-agent-source-backed-knowledge-base",
       "wenlan-vs-obsidian-ai-memory",
       "distilled-wiki-pages-ai-memory",
@@ -2739,6 +3003,7 @@ const zhCNArticles = {
       },
     ],
     relatedSlugs: [
+      "prevent-multi-agent-knowledge-conflicts",
       "fix-pdf-ingestion-ai-knowledge-base",
       "source-backed-wiki-pages-ai-work",
       "choose-ai-knowledge-base-tool",

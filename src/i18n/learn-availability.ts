@@ -13,6 +13,7 @@ export const TRANSLATED_LEARN_SLUGS = [
   "verify-ai-knowledge-base-citations",
   "when-ai-agent-should-query-knowledge-base",
   "fix-pdf-ingestion-ai-knowledge-base",
+  "prevent-multi-agent-knowledge-conflicts",
 ] as const;
 
 export type TranslatedLearnSlug = (typeof TRANSLATED_LEARN_SLUGS)[number];
@@ -28,6 +29,7 @@ export const TRANSLATED_LEARN_SLUGS_BY_LOCALE = {
     "verify-ai-knowledge-base-citations",
     "when-ai-agent-should-query-knowledge-base",
     "fix-pdf-ingestion-ai-knowledge-base",
+    "prevent-multi-agent-knowledge-conflicts",
   ],
   "zh-CN": [
     "distilled-wiki-pages-ai-memory",
@@ -39,6 +41,7 @@ export const TRANSLATED_LEARN_SLUGS_BY_LOCALE = {
     "verify-ai-knowledge-base-citations",
     "when-ai-agent-should-query-knowledge-base",
     "fix-pdf-ingestion-ai-knowledge-base",
+    "prevent-multi-agent-knowledge-conflicts",
   ],
 } as const satisfies Record<
   TranslatedLocale,

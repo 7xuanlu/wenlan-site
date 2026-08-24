@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-23",
+  "updatedAt": "2026-08-24",
   "campaign": {
     "deadline": "2026-09-21",
     "finalWindow": "2026-08-24..2026-09-20",
@@ -1400,9 +1400,9 @@
       "userTask": "Handle long documents, text PDFs, scanned PDFs, and AI knowledge-base ingestion failures",
       "desiredOutcome": "Classify the source correctly, apply OCR only when required, preserve file and page provenance, and verify usable text before trusting downstream answers",
       "stage": "troubleshoot",
-      "decision": "net-new",
+      "decision": "measuring",
       "plannedWindow": "2026-08-24..2026-08-30",
-      "publicationStatus": "prepared",
+      "publicationStatus": "measuring",
       "locales": {
         "en": {
           "queryFamily": [
@@ -1612,7 +1612,7 @@
         "target": "HKUDS/DeepTutor issue 431 exact scanned-PDF failure discussion, only after the page is live and with separate approval",
         "status": "predeclared-no-external-action"
       },
-      "nextResearchDirection": "Local deterministic and rendered verification passed; present the exact diff for separate publication approval, then measure each locale independently and keep any DeepTutor contribution separately approval-gated.",
+      "nextResearchDirection": "PR 140 merged at 2026-08-24T03:33:23Z and Vercel production completed at 2026-08-24T03:34:00Z; keep the production boundary fixed, measure each locale independently, and keep any DeepTutor contribution separately approval-gated.",
       "readout": {
         "gsc": {
           "status": "unavailable",
@@ -1631,9 +1631,9 @@
       "userTask": "Prevent conflicts and stale conclusions when multiple AI agents write to shared knowledge",
       "desiredOutcome": "Assign source and write ownership, surface conflicts before publication, review superseding claims, and preserve an auditable history",
       "stage": "maintain",
-      "decision": "research",
-      "plannedWindow": "unassigned-fallback",
-      "publicationStatus": "not-published",
+      "decision": "net-new",
+      "plannedWindow": "2026-08-24..2026-08-30",
+      "publicationStatus": "prepared",
       "locales": {
         "en": {
           "queryFamily": [
@@ -1641,11 +1641,46 @@
             "prevent stale shared agent knowledge",
             "multi agent knowledge write conflict workflow"
           ],
-          "serpEvidence": [],
-          "demandEvidence": [],
+          "serpEvidence": [
+            {
+              "sourceType": "research-paper-serp",
+              "sourceUrl": "https://arxiv.org/abs/2606.24535",
+              "query": "multi agent shared knowledge conflict stale provenance",
+              "capturedAt": "2026-08-24",
+              "language": "en",
+              "geography": "global",
+              "nativeUnit": "paper result",
+              "value": "1 paper result",
+              "note": "The 2026 paper names stale propagation, contradiction persistence, and provenance collapse as separate shared-memory failure modes; this is not keyword volume."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "github-discussion",
+              "sourceUrl": "https://github.com/vectorize-io/hindsight/discussions/1576",
+              "query": "multi-agent shared memory stale duplicates",
+              "capturedAt": "2026-08-24",
+              "language": "en",
+              "geography": "global",
+              "nativeUnit": "discussion and comments",
+              "value": "1 discussion, 1 comment",
+              "note": "A two-agent coding workflow reports stale shared files, duplicate memories, and missing cross-document consolidation in a maintained memory project."
+            },
+            {
+              "sourceType": "github-discussion",
+              "sourceUrl": "https://github.com/anthropics/anthropic-sdk-python/discussions/1419",
+              "query": "multiple agents overwrite shared memory",
+              "capturedAt": "2026-08-24",
+              "language": "en",
+              "geography": "global",
+              "nativeUnit": "discussion and comments",
+              "value": "1 discussion, 8 comments",
+              "note": "A 90-day five-agent deployment reports shared-file overwrites and hallucinated shared state, then discusses candidate claims and stale, contradicted, or replaced edges."
+            }
+          ],
           "existingOwner": "https://wenlan.app/learn/multi-agent-memory-workflow",
           "coverage": "partial",
-          "researchNeeded": "Separate shared-memory coordination searches from maintained-knowledge conflict and stale-page searches; inspect whether the existing workflow owns both."
+          "researchNeeded": "Use a separate diagnostic owner for conflicting or stale accepted knowledge; keep the existing multi-agent memory page as the client-connection and shared-workflow owner."
         },
         "zh-TW": {
           "queryFamily": [
@@ -1653,11 +1688,35 @@
             "避免共享 AI 知識過期",
             "多代理知識寫入衝突流程"
           ],
-          "serpEvidence": [],
-          "demandEvidence": [],
+          "serpEvidence": [
+            {
+              "sourceType": "taiwan-news-serp",
+              "sourceUrl": "https://www.ithome.com.tw/news/178146",
+              "query": "多個 AI 代理 共用 知識 衝突",
+              "capturedAt": "2026-08-24",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "SERP article result",
+              "value": "1 article result",
+              "note": "The Taiwan result uses AI 代理 and reports shared-code conflicts, resource contention, and overlapping agent decisions from a current multi-agent experiment."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "taiwan-practitioner-article",
+              "sourceUrl": "https://blog.arc.idv.tw/2026/02/27/knowledge-base-institutional-memory-2026-02-27/",
+              "query": "多 Agent shared-knowledge 知識庫",
+              "capturedAt": "2026-08-24",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "practitioner article",
+              "value": "1 article",
+              "note": "A Taiwan implementation distinguishes low-quality short-lived shared-knowledge summaries from a reviewed long-lived knowledge base and asks whether injected knowledge changes agent behavior."
+            }
+          ],
           "existingOwner": null,
           "coverage": "gap",
-          "researchNeeded": "Determine whether Taiwan users search 多代理, 多智能體, AI agents, shared context, or shared knowledge, and whether write conflict is a visible task."
+          "researchNeeded": "Use Taiwan-native 多個 AI Agent or AI 代理, 共用知識, 覆寫, 過期結論, and 審查 wording; avoid forcing the less natural 多智能體 phrase into the title."
         },
         "zh-CN": {
           "queryFamily": [
@@ -1665,33 +1724,78 @@
             "避免共享 AI 知识过期",
             "多智能体知识写入冲突流程"
           ],
-          "serpEvidence": [],
-          "demandEvidence": [],
+          "serpEvidence": [
+            {
+              "sourceType": "maintained-oss-book-serp",
+              "sourceUrl": "https://github.com/bojieli/ai-agent-book/blob/main/book/chapter10.md",
+              "query": "多智能体 共享知识 写入冲突",
+              "capturedAt": "2026-08-24",
+              "language": "zh-CN",
+              "geography": "Mainland China",
+              "nativeUnit": "SERP chapter result",
+              "value": "1 chapter result",
+              "note": "The Simplified Chinese chapter distinguishes file-level overwrites from semantic conflicts and describes version checks before writes."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "github-bug-report",
+              "sourceUrl": "https://github.com/bytedance/deer-flow/issues/4802",
+              "query": "多智能体 共享记忆 污染",
+              "capturedAt": "2026-08-24",
+              "language": "zh-CN",
+              "geography": "Mainland China",
+              "nativeUnit": "issue report",
+              "value": "1 issue report",
+              "note": "A current DeerFlow bug reports multi-agent memory leakage and personality contamination when agent-scoped facts reach the shared default memory bucket."
+            }
+          ],
           "existingOwner": null,
           "coverage": "gap",
-          "researchNeeded": "Determine whether mainland Chinese users search 多智能体, 多代理, shared memory, shared knowledge, or conflict resolution."
+          "researchNeeded": "Use mainland-native 多智能体, 共享知识, 覆盖, 过期结论, and 写入冲突 wording; keep memory contamination as corroboration rather than the primary owner."
         }
       },
       "gates": {
         "provenance": {
-          "status": "pending",
-          "reason": "No dated trilingual result or community evidence is captured.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "Every observation stores a checkable URL, capture date, locale, geography, native unit, and unconverted value.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence",
+            "locales.en.demandEvidence",
+            "locales.zh-TW.serpEvidence",
+            "locales.zh-TW.demandEvidence",
+            "locales.zh-CN.serpEvidence",
+            "locales.zh-CN.demandEvidence"
+          ]
         },
         "repeatedDemand": {
-          "status": "pending",
-          "reason": "The multi-agent conflict problem needs independent repeated or high-intent evidence.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "Independent papers, multi-agent framework discussions, a Taiwan implementation, a Simplified Chinese bug report, and a maintained Chinese chapter repeat overwrite, stale-state, contradiction, or scope-pollution failures.",
+          "evidenceRefs": [
+            "https://arxiv.org/abs/2606.24535",
+            "https://github.com/vectorize-io/hindsight/discussions/1576",
+            "https://github.com/anthropics/anthropic-sdk-python/discussions/1419",
+            "https://www.ithome.com.tw/news/178146",
+            "https://github.com/bytedance/deer-flow/issues/4802"
+          ]
         },
         "trilingualSerp": {
-          "status": "pending",
-          "reason": "The three language/region result sets are not recorded.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "English, Taiwan Traditional Chinese, and Mainland Simplified Chinese result sets each surface shared-state overwrite, stale knowledge, semantic conflict, or memory-scope contamination as a maintain-or-troubleshoot task.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence",
+            "locales.zh-TW.serpEvidence",
+            "locales.zh-CN.serpEvidence"
+          ]
         },
         "cleanGap": {
-          "status": "pending",
-          "reason": "English partially overlaps multi-agent memory workflow; Mandarin has no owner but requires proof of a distinct knowledge-maintenance task.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "The existing English multi-agent page owns shared daemon, data directory, space, capture, recall, handoff, and distill setup. The new family owns a later failure trigger: contradictory, overwritten, scope-polluted, or stale accepted knowledge, with version checks and review. Mandarin has no current owner for that task.",
+          "evidenceRefs": [
+            "src/app/(en)/learn/seo-articles.ts:multi-agent-memory-workflow",
+            "src/app/(en)/learn/seo-articles.ts:prevent-multi-agent-knowledge-conflicts",
+            "overlapCheck"
+          ]
         },
         "firstPartyProof": {
           "status": "passed",
@@ -1716,9 +1820,11 @@
           ]
         },
         "authorityPath": {
-          "status": "pending",
-          "reason": "A multi-agent framework or OSS discussion with exact fit must be found.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "Hindsight discussion 1576 is an exact maintained multi-agent shared-memory maintenance surface; any neutral reply or reference remains separately approval-gated after the page is live.",
+          "evidenceRefs": [
+            "https://github.com/vectorize-io/hindsight/discussions/1576"
+          ]
         }
       },
       "wenlanProof": [
@@ -1728,13 +1834,13 @@
           "verification": "rg -n \"Multi-agent workflows|Shared memory is not automatic truth\" src/app/(en)/learn/seo-articles.ts"
         },
         {
-          "claim": "Source-backed pages retain citations, revisions, stale state, review, and local git history.",
-          "sourceRef": "src/app/(en)/learn/articles.ts",
-          "verification": "rg -n \"citations, revisions|stale state|local git history\" src/app/(en)/learn/articles.ts"
+          "claim": "Wenlan's core manual Page update request supports expected_version, but the current public MCP write_page refresh input does not expose it; the public workflow must preflight source and version changes, while human-owned Page refreshes become reviewable revisions.",
+          "sourceRef": "/Users/lucian/Repos/wenlan/crates/wenlan-types/src/requests.rs and /Users/lucian/Repos/wenlan/crates/wenlan-mcp/src/tools.rs",
+          "verification": "rg -n \"expected_version|struct RefreshPageRequest|struct WritePageParams|human-owned page\" /Users/lucian/Repos/wenlan/crates/wenlan-types/src/requests.rs /Users/lucian/Repos/wenlan/crates/wenlan-mcp/src/tools.rs"
         }
       ],
       "standaloneUtility": "A neutral operating model can assign source ownership, isolate write scopes, expose conflicts, review superseding claims, and preserve an audit trail.",
-      "overlapCheck": "English may belong to the existing multi-agent workflow if users search shared memory rather than maintained knowledge. Mandarin routes are gaps only after locale-specific SERP evidence proves the task.",
+      "overlapCheck": "The existing English multi-agent workflow owns connection and coordination through one daemon, data directory, space, capture, recall, handoff, and distill. This family owns a separate maintenance trigger and outcome: detect stale candidates before acceptance, classify contradictory evidence, review candidate claims, and preserve supersession history. It does not promise an atomic stale-write guard on the current public MCP write_page path. Mandarin has no current route for that task.",
       "internalLinks": [
         "https://wenlan.app/learn/multi-agent-memory-workflow",
         "https://wenlan.app/learn/source-backed-wiki-pages-ai-work",
@@ -1748,10 +1854,10 @@
       ],
       "authorityPath": {
         "type": "multi-agent-operations-reference",
-        "target": "An active multi-agent framework, issue, or discussion with a maintained-knowledge conflict gap",
-        "status": "research-required"
+        "target": "vectorize-io/hindsight discussion 1576, only as a neutral source-backed maintenance reference after the page is live and with separate approval",
+        "status": "predeclared-no-external-action"
       },
-      "nextResearchDirection": "Compare shared memory, shared context, multi-agent knowledge, conflict, and stale-state searches in each locale; then corroborate with active framework issues before assigning an owner.",
+      "nextResearchDirection": "The trilingual owner is locally implemented and verified with exact product limits and at least three same-locale inbound paths. Present the exact diff for separate publication approval; do not infer keyword volume or publish to Hindsight without approval.",
       "readout": {
         "gsc": {
           "status": "unavailable",
