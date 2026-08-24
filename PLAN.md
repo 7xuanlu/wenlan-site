@@ -677,13 +677,19 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-23-pdf-ingestion-troubleshooting-locales` is approved for local
+  `EXP-2026-08-24-multi-agent-knowledge-conflicts-locales` is approved for local
   implementation and verification and is the unique production-in-flight
-  experiment. It prepares one English, zh-TW, and zh-CN canonical for the
-  post-import PDF diagnosis task. It is not published; commit, push, PR,
+  experiment. It prepares one English, zh-TW, and zh-CN canonical for stale
+  shared-knowledge writes, contradictory claims, and supersession history. It
+  is not published; commit, push, PR,
   merge, Vercel deployment, request indexing, GSC validation, external
   publication, paid actions, synthetic events, analytics mutation, and
   metric-definition changes remain excluded.
+  `EXP-2026-08-23-pdf-ingestion-troubleshooting-locales` is live,
+  production-verified, and measuring, so it no longer consumes the production
+  slot. PR #140 merged at `2026-08-24T03:33:23Z` as
+  `3a4b2aedc7d827cf9999161a1f27bc1e678ebcda`; Vercel production completed at
+  `2026-08-24T03:34:00Z`.
   `EXP-2026-08-23-knowledge-retrieval-policy-locales` is live,
   production-verified, and measuring, so it no longer consumes the single
   production-in-flight slot. It adds one English, zh-TW, and zh-CN canonical
@@ -877,7 +883,7 @@ action returns for separate explicit approval.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 27.
+- Active experiments: 28.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -1263,21 +1269,24 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-23-pdf-ingestion-troubleshooting-locales` is prepared and locally
-verified and is the unique website production-in-flight experiment. It is not
+`EXP-2026-08-24-multi-agent-knowledge-conflicts-locales` is prepared locally
+and is the unique website production-in-flight experiment. It is not
 published, so no production crawl or measurement clock has started. The
-three locale owners cover one task: diagnose a PDF that was skipped, produced
-empty or near-empty text, exceeded a supported boundary, or failed parsing,
-then verify extracted evidence before changing chunking, embeddings, or
-retrieval.
+three locale owners cover one task: prevent contradictory, overwritten,
+scope-polluted, or stale agent output from becoming accepted shared knowledge
+without evidence and review.
 
 The family passed the complete trilingual scenario gate from separate English,
-Taiwan, and Simplified-Chinese result sets; repeated OSS and practitioner
-evidence; a clean post-import diagnostic gap; Wenlan source-code and end-to-end
-proof; three same-locale contextual inbound paths; standalone utility; and one
-inspectable authority path. The existing document-build pages retain initial
-setup and supported-source selection. This family owns failure diagnosis and
-does not claim that Wenlan v1 performs OCR.
+Taiwan, and Simplified-Chinese result sets; repeated paper, framework,
+practitioner, maintained-OSS, and bug evidence; a clean maintenance gap;
+Wenlan source-code and test proof; three same-locale contextual inbound paths;
+standalone utility; and one inspectable authority path. The existing English
+multi-agent workflow retains shared-daemon, space, capture, recall, handoff,
+and distill setup. This family owns stale-write and contradiction maintenance
+and does not claim automatic consensus, distributed locking, or an atomic
+stale-write guard on the current public MCP `write_page` path. That path does
+not accept `expected_version`; the published workflow must re-read and compare
+before writing, while human-owned Page refreshes remain reviewable revisions.
 
 The latest authenticated baseline remains source-separated: GSC property
 totals are 8 clicks and 1,005 impressions, visible-query totals are 2 clicks
@@ -1290,10 +1299,23 @@ and 1 GSC click for success. The immutable experiment fields and approval
 boundary are in `EXPERIMENTS.md`; the editable evidence and overlap decision
 are in `docs/seo-scenario-backlog.json`.
 
-The user approved implementation and local verification only. Commit, push,
-PR creation, merge, Vercel deployment, request indexing, GSC validation,
-external publication, paid action, synthetic events, analytics mutation, and
-metric-definition changes remain excluded.
+The user selected this scenario and initially approved implementation and local
+verification. At `2026-08-24T06:23:36Z`, after the local diff was presented,
+the user explicitly approved commit, push, PR creation, merge, the automatic
+Vercel deployment, and read-only production verification for the corrected
+exact diff. Request indexing, GSC validation, external publication, paid
+action, synthetic events, analytics mutation, and metric-definition changes
+remain excluded.
+
+Local verification completed at `2026-08-24T05:24:02Z`. The full Goal,
+scenario, intent-owner, SEO, i18n, TypeScript, production-build, built technical
+SEO, and diff checks passed. Fresh browser checks found exact canonicals,
+reciprocal hreflang, `index, follow`, one `Article`, one `BreadcrumbList`, no
+`FAQPage`, no broken images, and no horizontal overflow for all three locales.
+The browser viewport control exposed 308 and 1,146 CSS-pixel widths rather than
+the requested exact 393 and 1,440 widths; those narrower captures were inspected
+and passed, but they are recorded as conservative responsive evidence rather
+than mislabeled exact-device captures.
 
 #### Historical pre-final experiment records
 
@@ -3430,3 +3452,53 @@ unchanged.
   visible expanded FAQ without FAQPage, no horizontal overflow, no broken
   images, no browser console errors, and natural English, zh-TW, and zh-CN
   wrapping.
+
+## Campaign publication: PDF ingestion troubleshooting at 2026-08-24T03:34:00Z
+
+- PR #140 merged at `2026-08-24T03:33:23Z` as
+  `3a4b2aedc7d827cf9999161a1f27bc1e678ebcda`; Vercel production completed at
+  `2026-08-24T03:34:00Z`.
+- The English, zh-TW, and zh-CN PDF-ingestion routes returned direct 200
+  responses with exact canonicals, reciprocal hreflang, Article and
+  BreadcrumbList schema, visible FAQ without FAQPage, and clean mobile and
+  desktop rendering. This family is now measuring and no longer consumes the
+  production-in-flight slot.
+- Keep `2026-08-24T03:34:00Z` as its fixed production boundary. No request
+  indexing, GSC validation, analytics mutation, or external publication was
+  performed.
+
+## Campaign preparation: multi-agent shared-knowledge conflicts at 2026-08-24
+
+- Record type: local website candidate; no production measurement clock has
+  started.
+- Audience: teams whose coding, research, or operations agents read from and
+  write to the same project knowledge.
+- Trigger: a conclusion is overwritten, contradicted, scope-polluted, or reused
+  after its source changes.
+- User task: detect stale writes before acceptance, compare candidate claims
+  with current evidence, review them before acceptance, and preserve
+  supersession history.
+- Intent boundary: `/learn/multi-agent-memory-workflow` owns client connection,
+  shared daemon, data directory, space, capture, recall, handoff, and distill.
+  The new family owns the later maintenance failure after shared access works.
+- Exact local routes:
+  `/learn/prevent-multi-agent-knowledge-conflicts`,
+  `/zh-TW/learn/prevent-multi-agent-knowledge-conflicts`, and
+  `/zh-CN/learn/prevent-multi-agent-knowledge-conflicts`.
+- Candidate gate: dated English, Taiwan Traditional Chinese, and Mainland
+  Simplified Chinese paper, SERP, practitioner, framework-discussion, maintained
+  OSS, and bug evidence is stored in `docs/seo-scenario-backlog.json` and
+  `docs/seo-audits/2026-08-24-multi-agent-knowledge-conflicts-gate.md` in native
+  units. It is not keyword volume or Wenlan performance evidence.
+- Product boundary: Wenlan supports provenance, supersession, stale Pages,
+  reviewable revisions, and an optional reconcile pass that is off by default.
+  The current public MCP `write_page` input does not expose
+  `expected_version`, so the agent workflow must re-read and compare before a
+  machine-owned Page refresh; it must not claim atomic stale-write rejection.
+  Slash commands require the Wenlan Codex plugin, while other agents use local
+  MCP tools or the local CLI. Wenlan is not a scheduler, distributed lock, or
+  automatic consensus system.
+- Current status: local implementation and verification only. Commit, push,
+  PR, merge, Vercel deployment, request indexing, GSC validation, analytics
+  mutation, paid action, synthetic event, and external publication remain
+  excluded.

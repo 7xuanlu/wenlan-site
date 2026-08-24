@@ -172,7 +172,8 @@ export default async function LocalizedLearnSlugPage({
     article.slug === "distilled-wiki-pages-ai-memory" ||
     article.slug === "choose-ai-knowledge-base-tool" ||
     article.slug === "coding-agent-source-backed-knowledge-base" ||
-    article.slug === "fix-pdf-ingestion-ai-knowledge-base"
+    article.slug === "fix-pdf-ingestion-ai-knowledge-base" ||
+    article.slug === "prevent-multi-agent-knowledge-conflicts"
       ? renderProtectedCjkTerms
       : (text: string) => text;
 

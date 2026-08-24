@@ -275,6 +275,7 @@ const baseArticles: LearnArticle[] = [
       },
     ],
     relatedSlugs: [
+      "prevent-multi-agent-knowledge-conflicts",
       "source-backed-wiki-pages-ai-work",
       "build-local-ai-knowledge-base-from-documents",
       "distilled-wiki-pages-ai-memory",

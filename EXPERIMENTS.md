@@ -8213,3 +8213,131 @@ increase for that experiment.
 - Browser integrity: every page has one main article and one H1, visible FAQ expansion works, links have visible names, and no browser console warning or error was recorded.
 - Deterministic evidence: `pnpm test:goal`, `pnpm seo:scenario:check`, source-backed `pnpm test:seo`, `pnpm test:i18n`, `pnpm lint`, `pnpm build`, `pnpm seo:technical:built`, `pnpm seo:intent:check`, `pnpm seo:goal:check`, and `git diff --check` passed after the final content correction.
 - Decision: request separate publication approval for the exact verified diff. Commit, push, PR, merge, Vercel deployment, indexing, validation, external publication, paid action, synthetic events, analytics mutation, and metric-definition changes remain excluded.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-23-pdf-ingestion-troubleshooting-locales production completion
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-23-pdf-ingestion-troubleshooting-locales
+- Observed at: 2026-08-24T03:34:00Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #140 merged at 2026-08-24T03:33:23Z as 3a4b2aedc7d827cf9999161a1f27bc1e678ebcda; Vercel production completed at 2026-08-24T03:34:00Z. The English, zh-TW, and zh-CN routes returned direct 200 responses with exact canonicals, reciprocal hreflang, Article and BreadcrumbList schema, visible FAQ without FAQPage, and clean mobile and desktop rendering.
+- Result: pending
+- Decision: wait
+- Next step: Keep `2026-08-24T03:34:00Z` fixed as the production boundary and measure each locale independently in source-native GSC page/query and Vercel page/referrer units. No indexing request, validation, analytics mutation, or external publication occurred.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-24-multi-agent-knowledge-conflicts-locales
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-24-multi-agent-knowledge-conflicts-locales
+- Status: approved
+- Data window: 2026-08-22..2026-08-28
+- Asset class: net-new-search
+- Launched: 2026-08-24
+- Hypothesis: One task-specific English, zh-TW, and zh-CN owner for preventing shared-knowledge overwrites, stale writes, contradictions, scope pollution, and unsupported promotion can earn qualified maintenance exposure without cannibalizing the existing multi-agent client-connection workflow.
+- Candidate evidence: Dated English papers and framework discussions, a Taiwan news result and practitioner implementation, a maintained Simplified Chinese chapter, and a current Chinese bug report are stored in `docs/seo-scenario-backlog.json` in native units. They are not keyword volume, rank, GSC data, or causal evidence.
+- Baseline: GSC property 8 clicks and 1,005 impressions; visible-query 2 clicks and 216 impressions; visibility gap 6 clicks and 789 impressions; Vercel 248 visitors with 30 attributed to Google; GitHub 48 stars; new target-page rows unavailable, all kept separate.
+- Change: Prepare exactly one English, zh-TW, and zh-CN canonical for the conflict-and-stale-conclusion maintenance task, with locale-natural phrasing, evidence/candidate/accepted states, expected-version and review workflow, truthful Wenlan limits, reciprocal hreflang, sitemap membership, visible FAQ without FAQPage, and at least three same-locale contextual inbound paths.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions per locale in 28 complete post-crawl days
+- Success criteria: Per locale, at least 3 qualified joined-query impressions and at least 1 GSC click after the minimum exposure; report CTR and position separately.
+- Failure criteria: After 28 complete post-crawl days and minimum exposure, a locale has no qualified joined-query impressions or no GSC click, or an above-floor join assigns the same maintenance task to the existing multi-agent workflow owner.
+- Stop criteria: Stop on a technical, factual, unsupported automatic-conflict-resolution, duplicate-intent, controller-overlap, canonical, locale, or approval-boundary violation.
+- 24h readout: pending technical and indexability observation after production completion
+- 7d readout: pending early source-native GSC page/query and Vercel page/referrer observation
+- W2 readout: pending
+- W4 readout: pending formal 28-complete-post-crawl-day decision when eligible
+- W8 readout: pending only if useful after the Goal deadline
+- Result: pending
+- Decision: wait
+- Next step: Complete local deterministic and rendered verification, then request separate publication approval with the exact diff and evidence.
+<!-- EXPERIMENT-RECORD:END -->
+
+### 2026-08-24T05:24:02Z — multi-agent knowledge-conflict family locally verified
+
+- Record type: campaign-observation
+- Experiment ID: `EXP-2026-08-24-multi-agent-knowledge-conflicts-locales`
+- Status: prepared locally; not published, so no production crawl or
+  measurement clock has started and the experiment-start record remains
+  immutable.
+- Intent boundary: the existing multi-agent workflow remains the owner for
+  connection, shared daemon, data directory, space, capture, recall, handoff,
+  and distill. The new trilingual family owns stale writes, contradictory or
+  scope-polluted candidate claims, evidence review, expected-version refusal,
+  and supersession history.
+- Content evidence: English, zh-TW, and zh-CN each provide one direct answer,
+  failure taxonomy, staged candidate-to-accepted workflow, a source-backed
+  Wenlan command loop, truthful scheduler/lock/consensus limits, visible FAQ,
+  maintained sources, and at least three same-locale inbound paths.
+- Browser evidence: all three local production routes exposed exact canonicals,
+  reciprocal hreflang, `index, follow`, one `Article`, one `BreadcrumbList`, no
+  `FAQPage`, no broken images, and no horizontal overflow. Fresh mobile and
+  desktop captures were inspected for heading, prose, workflow, code, CTA, FAQ,
+  and CJK wrapping with no clipping or orphan finding. The browser control
+  yielded 308 and 1,146 CSS-pixel widths instead of exact 393 and 1,440; those
+  narrower captures are conservative responsive evidence, not exact-device
+  claims. A calibrated recapture was blocked by browser URL policy and was not
+  bypassed.
+- Deterministic evidence: `pnpm seo:goal:check`, `pnpm seo:scenario:check`,
+  `pnpm test:goal`, source-backed `pnpm test:seo` (245/245), `pnpm test:i18n`
+  (68/68), `pnpm lint`, `pnpm build` (243 static pages),
+  `pnpm seo:technical:built` (135 sitemap URLs, 24 checked HTML pages, no
+  `FAQPage` in 140 built HTML files), `pnpm seo:intent:check` (135/135), and
+  `git diff --check` passed.
+- Decision: request separate publication approval for this exact verified diff.
+  Commit, push, PR, merge, Vercel deployment, indexing, validation, external
+  publication, paid action, synthetic events, analytics mutation, and
+  metric-definition changes remain excluded.
+
+### 2026-08-24T06:20:00Z — pre-merge product-boundary correction
+
+- Record type: campaign-correction
+- Experiment ID: `EXP-2026-08-24-multi-agent-knowledge-conflicts-locales`
+- Supersedes: the experiment-start phrase `expected-version and review
+  workflow` and the local-verification phrases `expected-version refusal` and
+  generic `Wenlan command loop` wherever they imply a capability of the
+  current public Agent path.
+- Corrected capability: Wenlan's core manual Page update request supports an
+  `expected_version`, but the current public MCP `write_page` refresh input
+  does not expose it. The public multi-agent recipe therefore records the
+  version, re-reads the source and target, and stops before `write_page` when
+  they changed; it does not claim an atomic stale-write rejection for a
+  machine-owned Page. Human-owned Page refreshes still become reviewable
+  revisions.
+- Corrected command boundary: `/pages`, `/capture`, `/distill`, `/lint`, and
+  `/curate` are Wenlan Codex plugin commands and require plugin setup. Other
+  agents use local MCP tools or the local `wenlan pages`, `wenlan capture`,
+  `wenlan lint`, and `wenlan curate revisions` commands. Local Page refresh is
+  available only over local stdio MCP.
+- Scope: three locale articles, tests, mutable PLAN/scenario/gate records, and
+  this append-only correction. The intent, canonical routes, baseline,
+  measurement contract, and publication approval do not change.
+- Decision: re-run the full local gate and obtain a fresh independent SHIP
+  review before publishing the corrected exact diff.
+
+### 2026-08-24T06:23:36Z — corrected publication scope approved
+
+- Record type: campaign-approval
+- Experiment ID: `EXP-2026-08-24-multi-agent-knowledge-conflicts-locales`
+- Approval: the user explicitly approved the presented local experiment for
+  commit, Git push, PR creation, merge, automatic Vercel deployment, and
+  read-only production verification. The factual product-boundary correction
+  is part of that same publication scope.
+- Independent review: `SHIP`; the public MCP `write_page` limitation and the
+  Codex-plugin versus local MCP/CLI command boundary are accurate in all three
+  locales and pinned by the trilingual contract test. No critical or important
+  issue remains.
+- Passing gate: `pnpm seo:goal:check`, `pnpm seo:scenario:check`,
+  `pnpm test:goal` (43/43), source-backed `pnpm test:seo` (245/245),
+  `pnpm test:i18n` (68/68), `pnpm lint`, `pnpm build` (243 static pages),
+  `pnpm seo:technical:built` (135 sitemap URLs),
+  `pnpm seo:intent:check` (135/135), and `git diff --check`.
+- Boundaries retained: no request indexing, GSC validation, Reddit or other
+  external publication, OSS submission, paid action, synthetic analytics
+  event, analytics/account mutation, or metric-definition change.
+- Next step: publish the exact corrected diff, wait for the automatic Vercel
+  production deployment, and verify the three production routes read-only.
