@@ -677,14 +677,15 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-24-multi-agent-knowledge-conflicts-locales` is approved for local
-  implementation and verification and is the unique production-in-flight
-  experiment. It prepares one English, zh-TW, and zh-CN canonical for stale
-  shared-knowledge writes, contradictory claims, and supersession history. It
-  is not published; commit, push, PR,
-  merge, Vercel deployment, request indexing, GSC validation, external
-  publication, paid actions, synthetic events, analytics mutation, and
-  metric-definition changes remain excluded.
+  `EXP-2026-08-24-multi-agent-knowledge-conflicts-locales` is live,
+  production-verified, and measuring, so it no longer consumes the production
+  slot. PR #141 merged at `2026-08-24T06:25:27Z` as
+  `ffa458414ce462bc8eb953da1e4ffb1c03c116e8`; Vercel production completed at
+  `2026-08-24T06:26:03Z`. It adds one English, zh-TW, and zh-CN canonical for
+  stale shared-knowledge candidates, contradictory claims, and supersession
+  history. Request indexing, GSC validation, external publication, paid
+  actions, synthetic events, analytics mutation, and metric-definition
+  changes remain excluded.
   `EXP-2026-08-23-pdf-ingestion-troubleshooting-locales` is live,
   production-verified, and measuring, so it no longer consumes the production
   slot. PR #140 merged at `2026-08-24T03:33:23Z` as
@@ -1269,12 +1270,11 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-24-multi-agent-knowledge-conflicts-locales` is prepared locally
-and is the unique website production-in-flight experiment. It is not
-published, so no production crawl or measurement clock has started. The
-three locale owners cover one task: prevent contradictory, overwritten,
-scope-polluted, or stale agent output from becoming accepted shared knowledge
-without evidence and review.
+`EXP-2026-08-24-multi-agent-knowledge-conflicts-locales` is live,
+production-verified, and measuring. It no longer consumes the website
+production slot. The three locale owners cover one task: prevent
+contradictory, overwritten, scope-polluted, or stale agent output from becoming
+accepted shared knowledge without evidence and review.
 
 The family passed the complete trilingual scenario gate from separate English,
 Taiwan, and Simplified-Chinese result sets; repeated paper, framework,
@@ -1292,8 +1292,8 @@ The latest authenticated baseline remains source-separated: GSC property
 totals are 8 clicks and 1,005 impressions, visible-query totals are 2 clicks
 and 216 impressions, and the visibility gap is 6 clicks and 789 impressions.
 Vercel separately reports 248 visitors, including 30 attributed to Google;
-GitHub reports 48 stars. The three prepared URLs have no pre-publication page
-rows, which are unavailable rather than zero. Each locale independently
+GitHub reports 48 stars. The three new URLs have no current source-native page
+rows yet, which are unavailable rather than zero. Each locale independently
 requires 20 post-crawl page impressions, 3 qualified joined-query impressions,
 and 1 GSC click for success. The immutable experiment fields and approval
 boundary are in `EXPERIMENTS.md`; the editable evidence and overlap decision
@@ -1316,6 +1316,16 @@ The browser viewport control exposed 308 and 1,146 CSS-pixel widths rather than
 the requested exact 393 and 1,440 widths; those narrower captures were inspected
 and passed, but they are recorded as conservative responsive evidence rather
 than mislabeled exact-device captures.
+
+Production verification completed at `2026-08-24T06:28:41Z`. All three live
+routes returned direct `200`, exact canonicals, reciprocal `en-US`, `zh-TW`,
+`zh-CN`, and `x-default` hreflang, `index, follow`, one `Article`, one
+`BreadcrumbList`, no `FAQPage`, and the corrected public-MCP, Codex-plugin,
+local-MCP, and CLI boundaries. The deployed technical audit passed 135 sitemap
+URLs, 27 key pages, six utility noindex headers, 25 redirects, six bridge-host
+redirects, FAQPage absence across the sitemap, and old-URL exclusions. The
+fixed content-production boundary is `2026-08-24T06:26:03Z`; a later
+controller-only record deployment does not move it.
 
 #### Historical pre-final experiment records
 

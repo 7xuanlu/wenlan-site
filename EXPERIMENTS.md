@@ -8341,3 +8341,17 @@ increase for that experiment.
   event, analytics/account mutation, or metric-definition change.
 - Next step: publish the exact corrected diff, wait for the automatic Vercel
   production deployment, and verify the three production routes read-only.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-24-multi-agent-knowledge-conflicts-locales production completion
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-24-multi-agent-knowledge-conflicts-locales
+- Observed at: 2026-08-24T06:28:41Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #141 merged at 2026-08-24T06:25:27Z as ffa458414ce462bc8eb953da1e4ffb1c03c116e8; Vercel production completed at 2026-08-24T06:26:03Z. English, zh-TW, and zh-CN returned direct 200 responses with exact canonicals, reciprocal hreflang, index, follow, one Article, one BreadcrumbList, no FAQPage, and the corrected public-MCP, Codex-plugin, local-MCP, and CLI boundaries. The full deployed technical audit passed 135 sitemap URLs, 27 key pages, six utility noindex headers, 25 redirects, six bridge-host redirects, FAQPage absence across the sitemap, and old-URL exclusions.
+- Result: pending
+- Decision: wait
+- Next step: Keep 2026-08-24T06:26:03Z fixed as the content production boundary and measure each locale independently in source-native GSC page/query and Vercel page/referrer units. A later controller-only deployment does not move the boundary. No request indexing, GSC validation, analytics mutation, or external publication occurred.
+<!-- EXPERIMENT-RECORD:END -->
