@@ -1166,9 +1166,9 @@
       "userTask": "Decide when an AI agent should query a knowledge base and reduce repeated document context or token cost",
       "desiredOutcome": "Use a clear retrieval policy that opens exact sources only when needed, avoids redundant context, and never treats token savings as permission to skip authoritative evidence",
       "stage": "integrate",
-      "decision": "net-new",
+      "decision": "measuring",
       "plannedWindow": "2026-08-24..2026-08-30",
-      "publicationStatus": "prepared",
+      "publicationStatus": "measuring",
       "locales": {
         "en": {
           "queryFamily": [
@@ -1381,7 +1381,7 @@
         "target": "Meirtz/Awesome-Context-Engineering context optimization or coding-agent project-memory section after existing Wenlan PR #108 resolves",
         "status": "predeclared-waiting-on-existing-pr-108"
       },
-      "nextResearchDirection": "The trilingual retrieval-policy family is locally implemented, verified, and publication-approved. Commit and publish only the approved website and control-plane scope, then verify production without requesting indexing. Keep the external authority path waiting until existing Wenlan PR #108 resolves.",
+      "nextResearchDirection": "The trilingual retrieval-policy family is live and production-verified from 2026-08-24T01:35:46Z. Keep the three locale owners stable and read each locale in native GSC page/query and Vercel page/referrer units after sufficient post-crawl exposure. Keep the external authority path waiting until existing Wenlan PR #108 resolves.",
       "readout": {
         "gsc": {
           "status": "unavailable",
