@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -56,6 +57,8 @@ const EXPECTED_FAMILY_IDS = [
   "document-pdf-ingestion-failures",
   "multi-agent-knowledge-write-conflicts",
 ];
+const APPROVED_SCENARIO_CONTRACT_SHA256 =
+  "1fafdc699a4c9b8741ac9c34996b40dab13290c065f701dc999eea3e1681c52f";
 const EXPECTED_WEEKLY_WINDOWS = [
   ["2026-08-24", "2026-08-30", "source-change-stale-pages"],
   ["2026-08-31", "2026-09-06", "coding-agent-source-backed-knowledge-base"],
@@ -100,6 +103,19 @@ function requireText(value, label, errors) {
   if (!text(value)) errors.push(`${label} must be a non-empty string.`);
 }
 
+function scenarioContractHash(families) {
+  const contract = families.map(
+    ({ id, audience, trigger, userTask, desiredOutcome }) => ({
+      id,
+      audience,
+      trigger,
+      userTask,
+      desiredOutcome,
+    }),
+  );
+  return createHash("sha256").update(JSON.stringify(contract)).digest("hex");
+}
+
 function validateEvidence(record, label, errors) {
   for (const field of [
     "sourceType",
@@ -130,8 +146,8 @@ export function validateScenarioBacklog(
   { sitemapRows = [], renderedReport = null } = {},
 ) {
   const errors = [];
-  if (backlog?.schemaVersion !== 1) {
-    errors.push("scenario backlog schemaVersion must be 1.");
+  if (backlog?.schemaVersion !== 2) {
+    errors.push("scenario backlog schemaVersion must be 2.");
   }
   requireText(backlog?.updatedAt, "updatedAt", errors);
   if (backlog?.campaign?.deadline !== "2026-09-21") {
@@ -195,6 +211,11 @@ export function validateScenarioBacklog(
   ) {
     errors.push("scenario families must retain the approved seven-item order.");
   }
+  if (scenarioContractHash(families) !== APPROVED_SCENARIO_CONTRACT_SHA256) {
+    errors.push(
+      "scenario audience, trigger, user task, and desired outcome contract changed without approval.",
+    );
+  }
 
   const sitemapSet = new Set(
     sitemapRows.map((row) => normalizeUrl(row.url)).filter(Boolean),
@@ -206,7 +227,10 @@ export function validateScenarioBacklog(
     requireText(family?.id, `${label}.id`, errors);
     if (ids.has(family?.id)) errors.push(`duplicate scenario family id: ${family.id}.`);
     ids.add(family?.id);
+    requireText(family?.audience, `${label}.audience`, errors);
+    requireText(family?.trigger, `${label}.trigger`, errors);
     requireText(family?.userTask, `${label}.userTask`, errors);
+    requireText(family?.desiredOutcome, `${label}.desiredOutcome`, errors);
     if (!STAGES.has(family?.stage)) {
       errors.push(`${family?.id ?? label} has invalid stage.`);
     }
@@ -392,7 +416,7 @@ export function renderScenarioBacklog(backlog) {
         )
         .join("\n");
       const links = family.internalLinks.map((link) => `- ${link}`).join("\n");
-      return `## ${index + 1}. ${family.userTask}\n\n- ID: \`${family.id}\`\n- Stage: \`${family.stage}\`\n- Decision: \`${family.decision}\`\n- Planned window: \`${family.plannedWindow}\`\n- Publication: \`${family.publicationStatus}\`\n- Standalone utility: ${family.standaloneUtility}\n- Overlap check: ${family.overlapCheck}\n- Next research: ${family.nextResearchDirection}\n\n### Locale intent and ownership\n\n| Locale | Query family | Coverage | Existing owner | Research needed |\n| --- | --- | --- | --- | --- |\n${localeRows}\n\n${evidence}\n\n### Candidate gate\n\n| Gate | Status | Reason | Evidence refs |\n| --- | --- | --- | --- |\n${gates}\n\n### Wenlan proof\n\n${proof}\n\n### Planned internal links\n\n${links}\n\n### Authority path and readout\n\n- Authority path: ${family.authorityPath.type} — ${family.authorityPath.target} (${family.authorityPath.status}).\n- GSC: ${family.readout.gsc.status}; native unit: ${family.readout.gsc.nativeUnit}.\n- Vercel: ${family.readout.vercel.status}; native unit: ${family.readout.vercel.nativeUnit}.`;
+      return `## ${index + 1}. ${family.userTask}\n\n- ID: \`${family.id}\`\n- Audience: ${family.audience}\n- Trigger: ${family.trigger}\n- Desired outcome: ${family.desiredOutcome}\n- Stage: \`${family.stage}\`\n- Decision: \`${family.decision}\`\n- Planned window: \`${family.plannedWindow}\`\n- Publication: \`${family.publicationStatus}\`\n- Standalone utility: ${family.standaloneUtility}\n- Overlap check: ${family.overlapCheck}\n- Next research: ${family.nextResearchDirection}\n\n### Locale intent and ownership\n\n| Locale | Query family | Coverage | Existing owner | Research needed |\n| --- | --- | --- | --- | --- |\n${localeRows}\n\n${evidence}\n\n### Candidate gate\n\n| Gate | Status | Reason | Evidence refs |\n| --- | --- | --- | --- |\n${gates}\n\n### Wenlan proof\n\n${proof}\n\n### Planned internal links\n\n${links}\n\n### Authority path and readout\n\n- Authority path: ${family.authorityPath.type} — ${family.authorityPath.target} (${family.authorityPath.status}).\n- GSC: ${family.readout.gsc.status}; native unit: ${family.readout.gsc.nativeUnit}.\n- Vercel: ${family.readout.vercel.status}; native unit: ${family.readout.vercel.nativeUnit}.`;
     })
     .join("\n\n");
 

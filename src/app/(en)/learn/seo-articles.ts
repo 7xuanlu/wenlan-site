@@ -956,6 +956,7 @@ const workflowArticles: BaseSpec[] = [
       "wenlan-codex-workflow",
       "source-backed-wiki-pages-ai-work",
       "build-local-ai-knowledge-base-from-documents",
+      "when-ai-agent-should-query-knowledge-base",
       "review-before-trust-ai-memory",
     ],
     officialReferences: [
@@ -2266,6 +2267,121 @@ const comparisonArticles: BaseSpec[] = [
 
 const trustArticles: BaseSpec[] = [
   {
+    slug: "when-ai-agent-should-query-knowledge-base",
+    eyebrow: "Retrieval policy",
+    category: "Workflows",
+    title: "When Should an AI Agent Query a Knowledge Base?",
+    description:
+      "Use a query-or-skip policy so AI agents retrieve authoritative knowledge when needed without repeatedly loading irrelevant documents into context.",
+    metaTitle: "When Should an AI Agent Query a Knowledge Base?",
+    metaDescription:
+      "Decide when an AI agent should query a knowledge base, skip retrieval, inspect an index, or open the exact source without wasting context.",
+    keywords: [
+      "when should AI agent query knowledge base",
+      "AI agent knowledge retrieval policy",
+      "reduce AI agent context token cost",
+      "avoid rereading documents AI agent",
+      "just in time context retrieval",
+      "progressive disclosure AI agent",
+    ],
+    publishedAt: "2026-08-23",
+    updatedAt: "2026-08-23",
+    audience:
+      "Developers operating AI agents over documentation that is consulted repeatedly across tasks or sessions",
+    heroBullets: [
+      "Query when the answer depends on current, private, project-specific, or citable evidence.",
+      "Skip retrieval when the exact authoritative source is already in context or the task does not depend on the corpus.",
+      "Use an index to choose a source, then open the smallest exact passage needed to verify the answer.",
+    ],
+    quickAnswer:
+      "An AI agent should query a knowledge base when the task depends on current, organization-specific, private, or citable information that is not already available in its context. It should skip retrieval for greetings, fixed control flow, or a task whose exact authoritative source is already open. When retrieval is needed, inspect a compact index first, load the smallest relevant page, and return to the cited source for consequential claims.",
+    problem:
+      "Always injecting a document collection adds irrelevant text, latency, and attention pressure. Never retrieving forces the agent to guess or repeatedly rediscover project decisions. The useful boundary is a reproducible task-level policy, not a promise that every retrieval saves a fixed number of tokens.",
+    wenlanFit:
+      "Wenlan keeps Sources, atomic knowledge, and maintained Pages separate. An agent can recall a narrow topic or open a relevant Page, inspect its citations, and return to the current source instead of replaying a whole archive; Wenlan does not replace direct code, test, policy, or document verification.",
+    actionHeading: "Use this query-or-skip decision policy",
+    actionIntro:
+      "Classify the task before searching, then increase context only when the previous layer cannot support the answer. The slash-command example requires the Wenlan Codex plugin: install it and run /setup once. The wenlan connect codex command configures only the MCP connection; MCP-only clients should call Wenlan recall and inspect the Page results it returns. Use the local wenlan pages <topic> CLI when you need to list or open Pages without the plugin.",
+    actionBullets: [
+      "Query: the answer depends on current project facts, private material, organizational policy, exact numbers, or a citation.",
+      "Pre-retrieve: every valid answer must use one controlled source, such as a compliance rule or operating procedure.",
+      "Let the agent decide: only some requests in the workflow need the corpus, and the tool description states its scope and exclusions.",
+      "Skip: the task is a greeting, static routing step, deterministic operation, or the exact authoritative file is already open.",
+      "Progressively disclose: inspect titles, paths, abstracts, or a maintained index before loading the full page or document.",
+      "Verify: open the exact cited passage for important claims and mark unavailable evidence unknown rather than filling the gap from memory.",
+      "Measure: record retrieved tokens, latency, answer quality, and failed searches on your own workload; do not reuse another system's savings percentage as a guarantee.",
+    ],
+    code: {
+      label: "Retrieve a narrow topic, then inspect its maintained page",
+      code: "# Wenlan plugin:\n/recall <topic>\n/pages <topic>\n\n# MCP-only client: call Wenlan recall and inspect returned Page results.\n# Local CLI for Page listing or opening:\nwenlan pages <topic>",
+    },
+    caution:
+      "Smaller context is not automatically better. A skipped lookup can save tokens and still produce a wrong answer; an eager lookup can add irrelevant chunks and reduce focus. Keep the authoritative source boundary explicit and measure retrieval behavior with representative tasks.",
+    faq: [
+      "Should an AI agent query the knowledge base for every question?",
+      "No. Always-on retrieval is appropriate only when every answer must use a controlled source. Otherwise expose a clearly scoped tool and let the workflow or agent query only when the task depends on that corpus.",
+      "Does a knowledge base guarantee lower token cost?",
+      "No. A compact index and selective retrieval can reduce repeated document reading, but embeddings, tool calls, returned chunks, and failed searches also cost time or tokens. Measure the complete workflow on your own tasks.",
+    ],
+    relatedSlugs: [
+      "ai-work-memory-vs-knowledge-base",
+      "coding-agent-source-backed-knowledge-base",
+      "source-backed-wiki-pages-ai-work",
+      "verify-ai-knowledge-base-citations",
+    ],
+    officialReferences: [
+      {
+        label: "Anthropic context engineering for AI agents",
+        href: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+      },
+      {
+        label: "CareerWise knowledge-search tool-use case",
+        href: "https://www.cythilya.tw/2026/07/16/careerwise-search-knowledge-tool/",
+      },
+      {
+        label: "JitAI scenario-based knowledge-base retrieval",
+        href: "https://jit.pro/zh/docs/devguide/knowledge-base/integrate-knowledge-base-into-agent",
+      },
+      {
+        label: "OpenViking progressive context layers",
+        href: "https://docs.openviking.ai/zh/concepts/03-context-layers",
+      },
+      {
+        label: "Wenlan source-backed pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+    ],
+    comparisonTable: {
+      competitorName: "Retrieval action",
+      rows: [
+        {
+          dimension: "Current, private, or citable fact",
+          wenlan: "Query a narrow topic, then open the cited current source.",
+          competitor: "Query",
+        },
+        {
+          dimension: "Mandatory controlled evidence",
+          wenlan: "Pre-retrieve the required source and keep later source access available.",
+          competitor: "Pre-retrieve",
+        },
+        {
+          dimension: "Exact authoritative file already open",
+          wenlan: "Read and verify that file directly; do not add a redundant search.",
+          competitor: "Skip retrieval",
+        },
+        {
+          dimension: "Large or unfamiliar corpus",
+          wenlan: "Inspect the index or maintained page before loading exact source sections.",
+          competitor: "Progressive disclosure",
+        },
+      ],
+    },
+    cta: {
+      heading: "Test one retrieval boundary",
+      body: "Connect Wenlan, choose one repeated project question, and compare always-load, query-on-demand, and direct-source workflows without assuming a token-saving result.",
+    },
+  },
+  {
     slug: "verify-ai-knowledge-base-citations",
     eyebrow: "Trust check",
     category: "Workflows",
@@ -2326,6 +2442,7 @@ const trustArticles: BaseSpec[] = [
       "source-backed-wiki-pages-ai-work",
       "choose-ai-knowledge-base-tool",
       "distilled-wiki-pages-ai-memory",
+      "when-ai-agent-should-query-knowledge-base",
       "ai-memory-provenance",
     ],
     officialReferences: [
@@ -2405,7 +2522,7 @@ const trustArticles: BaseSpec[] = [
       "Should I import every note before starting?",
       "No. Start with one repeated, high-value topic and prove its source, capture, distill, inspection, lint, and review loop before expanding.",
     ],
-    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "verify-ai-knowledge-base-citations", "review-before-trust-ai-memory", "ai-memory-provenance"],
+    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "review-before-trust-ai-memory", "ai-memory-provenance"],
     officialReferences: [
       {
         label: "Wenlan knowledge model",

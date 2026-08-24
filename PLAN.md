@@ -346,6 +346,8 @@ exposure as a reason to stop all content preparation.
   `docs/seo-scenario-backlog.json` after applying every candidate gate. The
   English, zh-TW, and zh-CN versions represent the same user task in natural
   local search language; they are not keyword-by-keyword translations.
+- Each scenario family must explicitly preserve its audience, trigger, user task, and desired outcome.
+- A user group alone does not justify a separate URL; split only when the search task and observed SERP are materially different.
 - If no family passes, record every failed candidate and its failed gate plus
   the next research direction. A bare `wait` is not a valid weekly content
   decision; research continues to the next ordered family in the same window.
@@ -675,10 +677,23 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-23-citation-verification-locales` is locally implemented,
-  verified, publication-approved, and unpublished, so it consumes the single
+  `EXP-2026-08-23-knowledge-retrieval-policy-locales` is publication-approved,
+  locally verified, and active, so it consumes the single production-in-flight
+  slot until Vercel production completion is verified. It adds one English,
+  zh-TW, and zh-CN canonical for the per-task query, pre-retrieve, autonomous-
+  retrieval, progressive-disclosure, and skip decision. At
+  `2026-08-24T01:21:21Z`, the controller recorded the user's explicit approval
+  for the exact commit, push, PR creation, merge, automatic Vercel deployment,
+  and read-only production-verification scope. Request indexing, GSC validation,
+  external publication, paid actions, synthetic events, analytics mutation,
+  and metric-definition changes remain excluded.
+  `EXP-2026-08-23-citation-verification-locales` is live,
+  production-verified, and measuring, so it no longer consumes the single
   production-in-flight slot. It adds one English, zh-TW, and zh-CN canonical
-  for the claim-to-evidence citation diagnostic task. At
+  for the claim-to-evidence citation diagnostic task. PR #137 merged at
+  `2026-08-23T22:20:42Z` as
+  `b04a5e2ea480bf6a689e14bf6bac7267b8d7ed12`, and Vercel production completed
+  at `2026-08-23T22:21:18Z`. At
   `2026-08-23T22:08:21Z`, the controller recorded the user's explicit approval
   for the exact commit, push, PR creation, merge, automatic Vercel deployment,
   and read-only production-verification scope. Request indexing, GSC
@@ -853,7 +868,7 @@ action returns for separate explicit approval.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 25.
+- Active experiments: 26.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -1239,20 +1254,22 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-23-citation-verification-locales` is locally implemented and
-verified, publication-approved but still unpublished, and consumes the single
-website preparation slot. It adds one English, zh-TW, and zh-CN canonical for
-the same diagnostic task: start with one suspect RAG or AI knowledge-base
-answer and verify each important claim against the cited page, chunk, source
-ID, and revision.
+`EXP-2026-08-23-knowledge-retrieval-policy-locales` is publication-approved,
+locally verified, and active, so it consumes the website production-in-flight
+slot. It adds one English, zh-TW, and zh-CN canonical for the same task: decide
+when an AI agent should query, pre-retrieve, autonomously retrieve,
+progressively disclose, or skip a knowledge base without treating token
+savings as permission to skip authoritative evidence.
 
 The family passed the complete trilingual scenario gate from separate
-English, Taiwan, and Simplified-Chinese result sets, repeated issue and
-practitioner evidence, a clean diagnostic gap, maintained Wenlan product
+English, Taiwan, and Simplified-Chinese result sets, official and practitioner
+evidence, a clean per-task retrieval-policy gap, maintained Wenlan product
 proof, three same-locale contextual inbound paths, standalone utility, and one
-inspectable authority path. The existing source-backed guide remains the owner
-for architecture and maintenance; this new family owns wrong-page,
-mismatched-chunk, stale-version, and unsupported-claim diagnosis.
+inspectable authority path. Existing owners retain role comparison and
+repository-source boundaries; this family owns the query-or-skip decision.
+Its slash-command example explicitly requires the Wenlan Codex plugin and
+`/setup`; MCP-only clients must use the equivalent Wenlan tools exposed by
+their client.
 
 The latest authenticated baseline remains source-separated: GSC property
 totals are 8 clicks and 1,005 impressions, visible-query totals are 2 clicks
@@ -1267,7 +1284,7 @@ in `EXPERIMENTS.md`; the editable evidence and overlap decision are in
 
 The user approved the exact commit, push, PR creation, merge, automatic Vercel
 deployment, and read-only production-verification scope at
-`2026-08-23T22:08:21Z`. Request indexing, GSC validation, external publication,
+`2026-08-24T01:21:21Z`. Request indexing, GSC validation, external publication,
 paid action, synthetic events, analytics mutation, and metric-definition
 changes remain excluded.
 
@@ -3319,3 +3336,44 @@ unchanged.
 - Excluded actions: request indexing, GSC validation, analytics mutation,
   external publication, paid action, synthetic events, and metric-definition
   changes remain excluded.
+
+## Campaign preparation: retrieval-policy trilingual family at 2026-08-24T00:19:18Z
+
+- Record type: publication-approved local website candidate; its immutable
+  experiment-start and approval records now consume the production-in-flight
+  slot until Vercel production completion is verified.
+- Audience: developers operating AI agents over large documentation sets that
+  are consulted repeatedly across tasks or sessions.
+- Trigger: the agent repeatedly reloads the same raw documents, spends context
+  on material already available, or retrieves knowledge for every task without
+  deciding whether retrieval is needed.
+- User task: decide when an AI agent should query a knowledge base and reduce
+  repeated document context or token cost without skipping authoritative
+  evidence.
+- Desired outcome: apply a query, pre-retrieve, agent-decides, skip, progressive-
+  disclosure, verify, and measure policy that opens exact sources only when
+  needed. Smaller context is not automatically better and no token-saving
+  percentage is promised.
+- Exact local routes:
+  `/learn/when-ai-agent-should-query-knowledge-base`,
+  `/zh-TW/learn/when-ai-agent-should-query-knowledge-base`, and
+  `/zh-CN/learn/when-ai-agent-should-query-knowledge-base`.
+- Intent boundary: the existing memory-versus-knowledge-base page explains
+  product roles, and the coding-agent knowledge-base page explains repository
+  source boundaries. Neither owns the per-task query-or-skip retrieval policy,
+  so this family has a distinct task and result set rather than a persona-only
+  split.
+- Internal paths: each locale receives contextual inbound links from its
+  source-backed knowledge-base, coding-agent knowledge-base, and citation-
+  verification owners.
+- External authority path: `Meirtz/Awesome-Context-Engineering` is an exact-fit
+  maintained candidate, but no new proposal may overlap Qi-Xuan Lu's open PR
+  #108. Wait for that PR to resolve and obtain separate approval before any
+  external action.
+- Approval: at `2026-08-24T01:21:21Z`, the user approved the exact commit,
+  push, PR creation, merge, automatic Vercel deployment, and read-only
+  production-verification scope.
+- Local status: prepared, verified, and publication-approved. No commit, push,
+  PR, merge, deployment, request indexing, GSC validation, analytics mutation,
+  paid action, synthetic event, or external publication has occurred yet for
+  this family.

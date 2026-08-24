@@ -384,6 +384,7 @@ const zhTWArticles = {
       "coding-agent-source-backed-knowledge-base",
       "wenlan-vs-obsidian-ai-memory",
       "distilled-wiki-pages-ai-memory",
+      "when-ai-agent-should-query-knowledge-base",
       "verify-ai-knowledge-base-citations",
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
@@ -712,6 +713,7 @@ const zhTWArticles = {
       "source-backed-wiki-pages-ai-work",
       "build-local-ai-knowledge-base-from-documents",
       "choose-ai-knowledge-base-tool",
+      "when-ai-agent-should-query-knowledge-base",
       "distilled-wiki-pages-ai-memory",
     ],
     officialReferences: [
@@ -997,6 +999,152 @@ const zhTWArticles = {
       body: "從一組小型來源開始，驗證引用、更新與審查，再判斷維護型本地知識層是否適合你的工作流。",
     },
   },
+  "when-ai-agent-should-query-knowledge-base": {
+    slug: "when-ai-agent-should-query-knowledge-base",
+    eyebrow: "檢索策略",
+    category: "Workflows",
+    title: "AI Agent 何時該查知識庫？按需讀取文件",
+    description:
+      "用查詢或略過的判斷流程，讓 AI Agent 在需要證據時讀知識庫，也避免反覆把無關文件塞進上下文。",
+    metaTitle: "AI Agent 何時該查知識庫？| Wenlan",
+    metaDescription:
+      "判斷 AI Agent 何時查知識庫、略過檢索、先看索引或打開確切來源，減少無關上下文又保留證據。",
+    keywords: [
+      "AI Agent 何時查知識庫",
+      "AI 知識庫檢索策略",
+      "AI 知識庫 token 成本",
+      "避免 AI 重複讀取文件",
+      "按需載入上下文",
+      "AI Agent 上下文管理",
+    ],
+    publishedAt: "2026-08-23",
+    updatedAt: "2026-08-23",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分鐘閱讀",
+    audience: "讓 AI Agent 反覆處理大型文件集、專案資料或內部規範的繁體中文開發者",
+    heroBullets: [
+      "答案依賴最新、私有、專案特定或必須引用的資訊時才查。",
+      "確切權威檔案已在上下文，或任務根本不靠文件時就略過。",
+      "先用索引選來源，再只打開足以驗證答案的確切段落。",
+    ],
+    sections: [
+      {
+        heading: "先回答：知識庫不用每題都查",
+        body: [
+          "當答案依賴目前版本的專案事實、私有資料、組織規範、精確數字或可引用證據，而且這些內容還不在上下文時，AI Agent 才應查知識庫。打招呼、固定流程、純資料操作，或確切權威檔案已經打開時，不必再做一次相同檢索。",
+          "需要查詢時，先讀標題、路徑、摘要或維護型索引，確認方向後再載入最小的相關頁面，最後回到引用的原文驗證重要主張。省 Token 不能變成略過證據的理由。",
+        ],
+      },
+      {
+        heading: "為什麼一直查與完全不查都會失敗",
+        body: [
+          "每輪強制注入整批文件，會增加無關文字、延遲與注意力壓力；完全不查，又會讓 Agent 猜測目前事實或反覆重新發現相同決策。真正需要的是每個任務都能重複使用的查詢邊界。",
+          "台灣的 CareerWise 實作把四種 intent 分開，只有需要其職涯知識的路徑開放知識庫工具；這是具體設計案例，不是 Wenlan 的固定 Token 節省保證。",
+        ],
+      },
+      {
+        heading: "用這張查詢或略過清單",
+        body: [
+          "先判斷答案是否依賴外部證據，再決定預先檢索、讓 Agent 自主查詢、直接讀來源，或完全略過。每次只增加完成任務需要的下一層資訊。",
+          "下方 slash commands 需要先安裝 Wenlan Codex plugin 並執行一次 /setup；wenlan connect codex 只設定 MCP 連線。只有 MCP 連線的客戶端，請使用 Wenlan recall 並檢查它回傳的 Page 結果；若未安裝 plugin 但要列出或打開 Pages，請改用本地 wenlan pages <主題> CLI。",
+        ],
+        bullets: [
+          "查詢：需要最新專案事實、私有資料、組織政策、精確數字或引用。",
+          "預先檢索：每個有效答案都必須根據同一受控來源，例如法規、作業程序或產品手冊。",
+          "自主查詢：只有部分問題需要文件，而且工具描述清楚寫出資料範圍與不適用情況。",
+          "略過：問候、固定路由、確定性操作，或確切權威檔案已經在眼前。",
+          "漸進揭露：先看索引或 Page，再打開相關段落，不一次載入整個 vault 或文件集。",
+          "驗證：重要結論回到確切引用；找不到資料時標示未知，不用模型記憶補答案。",
+          "量測：在自己的工作負載記錄檢索 Token、延遲、答案品質與失敗搜尋。",
+        ],
+        code: {
+          label: "先查窄主題，再檢查維護型 Page",
+          code: "# Wenlan plugin：\n/recall <主題>\n/pages <主題>\n\n# 只有 MCP：呼叫 Wenlan recall 並檢查回傳的 Page。\n# 本地 CLI 列出或打開 Page：\nwenlan pages <主題>",
+        },
+      },
+      {
+        heading: "Wenlan 在這個流程負責什麼",
+        body: [
+          "Wenlan 把 Sources、原子知識與維護型 Pages 分開。Agent 可以先 recall 一個窄主題或打開相關 Page，檢查引用後再回到目前的原始文件，不用每次重播整個資料庫。",
+          "Wenlan 不會取代程式碼、測試、政策或目前文件的直接驗證，也不保證一定降低 Token。較小的上下文仍可能漏掉關鍵內容；無關檢索也可能讓答案更差，因此要用代表性任務比較完整流程。",
+        ],
+      },
+    ],
+    comparisonTable: {
+      competitorName: "檢索動作",
+      rows: [
+        {
+          dimension: "最新、私有或需引用的事實",
+          wenlan: "查窄主題，再打開目前引用來源。",
+          competitor: "查詢",
+        },
+        {
+          dimension: "每次都必須依據受控文件",
+          wenlan: "預先帶入必要來源，並保留後續來源查閱。",
+          competitor: "預先檢索",
+        },
+        {
+          dimension: "權威檔案已經打開",
+          wenlan: "直接讀檔驗證，不增加重複搜尋。",
+          competitor: "略過檢索",
+        },
+        {
+          dimension: "大型或陌生文件集",
+          wenlan: "先看索引或 Page，再載入確切來源段落。",
+          competitor: "漸進揭露",
+        },
+      ],
+    },
+    faqs: [
+      {
+        question: "AI Agent 每次回答都應該查知識庫嗎？",
+        answer:
+          "不應該。只有每個答案都必須依據受控來源時才適合固定預先檢索；其他流程應讓任務或 Agent 在確實依賴該資料時才查。",
+      },
+      {
+        question: "使用知識庫就一定能降低 Token 嗎？",
+        answer:
+          "不一定。索引與選擇性檢索可以減少重讀文件，但 embedding、工具呼叫、回傳片段與失敗搜尋也有成本，必須用自己的任務量測完整流程。",
+      },
+      {
+        question: "什麼時候必須回到原始文件？",
+        answer:
+          "精確數字、否定條件、合規規則、目前程式行為與其他重要結論，都應打開確切引用位置驗證；Page 或檢索摘要只能幫你找到來源。",
+      },
+    ],
+    relatedSlugs: [
+      "ai-work-memory-vs-knowledge-base",
+      "coding-agent-source-backed-knowledge-base",
+      "source-backed-wiki-pages-ai-work",
+      "verify-ai-knowledge-base-citations",
+    ],
+    officialReferences: [
+      {
+        label: "Anthropic AI Agent 上下文工程",
+        href: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+      },
+      {
+        label: "CareerWise 知識庫搜尋 Tool Use 實作",
+        href: "https://www.cythilya.tw/2026/07/16/careerwise-search-knowledge-tool/",
+      },
+      {
+        label: "JitAI 按場景查閱知識庫",
+        href: "https://jit.pro/zh/docs/devguide/knowledge-base/integrate-knowledge-base-into-agent",
+      },
+      {
+        label: "OpenViking 上下文層級",
+        href: "https://docs.openviking.ai/zh/concepts/03-context-layers",
+      },
+      {
+        label: "Wenlan source-backed Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+    ],
+    cta: {
+      heading: "先測一條檢索邊界",
+      body: "連接 Wenlan，選一個會重複出現的專案問題，比較整批載入、按需查詢與直接讀來源，不預設一定省 Token。",
+    },
+  },
   "verify-ai-knowledge-base-citations": {
     slug: "verify-ai-knowledge-base-citations",
     eyebrow: "引用除錯",
@@ -1093,6 +1241,7 @@ const zhTWArticles = {
       "source-backed-wiki-pages-ai-work",
       "choose-ai-knowledge-base-tool",
       "distilled-wiki-pages-ai-memory",
+      "when-ai-agent-should-query-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
     ],
     officialReferences: [
@@ -1121,6 +1270,152 @@ const zhTWArticles = {
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
 
 const zhCNArticles = {
+  "when-ai-agent-should-query-knowledge-base": {
+    slug: "when-ai-agent-should-query-knowledge-base",
+    eyebrow: "检索策略",
+    category: "Workflows",
+    title: "AI Agent 何时该查知识库？按需读取文档",
+    description:
+      "用查询或跳过的判断流程，让 AI Agent 在需要证据时查知识库，也避免反复把无关文档塞进上下文。",
+    metaTitle: "AI Agent 什么时候该查知识库？| Wenlan",
+    metaDescription:
+      "判断 AI Agent 何时查知识库、跳过检索、先看索引或打开准确来源，减少无关上下文并保留证据。",
+    keywords: [
+      "AI Agent 什么时候查询知识库",
+      "AI 知识库检索策略",
+      "AI 知识库上下文成本",
+      "避免 AI 重复读取文档",
+      "按需加载上下文",
+      "AI Agent token 成本",
+    ],
+    publishedAt: "2026-08-23",
+    updatedAt: "2026-08-23",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分钟阅读",
+    audience: "让 AI Agent 反复处理大型文档集、项目资料或内部制度的简体中文开发者",
+    heroBullets: [
+      "答案依赖最新、私有、项目特定或必须引用的信息时才查询。",
+      "准确权威文件已在上下文，或任务不依赖文档时就跳过。",
+      "先用索引选择来源，再只打开足以验证答案的准确段落。",
+    ],
+    sections: [
+      {
+        heading: "先说结论：知识库不用每题都查",
+        body: [
+          "当答案依赖当前版本的项目事实、私有资料、组织制度、精确数字或可引用证据，而且这些内容还不在上下文时，AI Agent 才应查询知识库。问候、固定流程、纯数据操作，或准确权威文件已经打开时，不必再做一次相同检索。",
+          "需要查询时，先读标题、路径、摘要或维护型索引，确认方向后再加载最小的相关页面，最后回到引用原文验证重要主张。省 Token 不能成为跳过证据的理由。",
+        ],
+      },
+      {
+        heading: "为什么每次都查和完全不查都会失败",
+        body: [
+          "每轮强制注入整批文档，会增加无关文本、延迟和注意力压力；完全不查，又会让 Agent 猜测当前事实或反复重新发现同一个决定。真正需要的是每个任务都能重复执行的查询边界。",
+          "JitAI 文档把智能、自定义和禁用三种知识库模式分开，并继续区分 Agent 自主查询与每轮预检索；这说明检索方式取决于任务，不是所有问题共用一个开关。",
+        ],
+      },
+      {
+        heading: "使用这份查询或跳过清单",
+        body: [
+          "先判断答案是否依赖外部证据，再决定预检索、让 Agent 自主查询、直接读取来源，或完全跳过。每次只增加完成任务所需的下一层信息。",
+          "下方 slash commands 需要先安装 Wenlan Codex plugin 并执行一次 /setup；wenlan connect codex 只配置 MCP 连接。只有 MCP 连接的客户端，请使用 Wenlan recall 并检查它返回的 Page 结果；若未安装 plugin 但要列出或打开 Pages，请改用本地 wenlan pages <主题> CLI。",
+        ],
+        bullets: [
+          "查询：需要最新项目事实、私有资料、组织制度、精确数字或引用。",
+          "预检索：每个有效答案都必须依据同一个受控来源，例如合规条款、标准流程或产品手册。",
+          "自主查询：只有部分问题需要文档，而且工具描述清楚写明资料范围与不适用情况。",
+          "跳过：问候、固定路由、确定性操作，或准确权威文件已经在眼前。",
+          "渐进披露：先看索引或 Page，再打开相关段落，不一次加载整个知识库或文档集。",
+          "验证：重要结论回到准确引用；找不到资料时标记未知，不用模型记忆补答案。",
+          "测量：在自己的工作负载记录检索 Token、延迟、回答质量与失败搜索。",
+        ],
+        code: {
+          label: "先查窄主题，再检查维护型 Page",
+          code: "# Wenlan plugin：\n/recall <主题>\n/pages <主题>\n\n# 只有 MCP：调用 Wenlan recall 并检查返回的 Page。\n# 本地 CLI 列出或打开 Page：\nwenlan pages <主题>",
+        },
+      },
+      {
+        heading: "Wenlan 在这个流程负责什么",
+        body: [
+          "Wenlan 把 Sources、原子知识和维护型 Pages 分开。Agent 可以先 recall 一个窄主题或打开相关 Page，检查引用后再回到当前原始文档，不必每次重放整个资料库。",
+          "Wenlan 不会取代代码、测试、制度或当前文档的直接验证，也不保证一定降低 Token。更小的上下文仍可能漏掉关键信息；无关检索也可能让回答变差，因此要用代表性任务比较完整流程。",
+        ],
+      },
+    ],
+    comparisonTable: {
+      competitorName: "检索动作",
+      rows: [
+        {
+          dimension: "最新、私有或需要引用的事实",
+          wenlan: "查询窄主题，再打开当前引用来源。",
+          competitor: "查询",
+        },
+        {
+          dimension: "每次都必须依据受控文档",
+          wenlan: "预先带入必要来源，并保留后续来源访问。",
+          competitor: "预检索",
+        },
+        {
+          dimension: "权威文件已经打开",
+          wenlan: "直接读取并验证，不增加重复搜索。",
+          competitor: "跳过检索",
+        },
+        {
+          dimension: "大型或陌生文档集",
+          wenlan: "先看索引或 Page，再加载准确来源段落。",
+          competitor: "渐进披露",
+        },
+      ],
+    },
+    faqs: [
+      {
+        question: "AI Agent 每次回答都应该查知识库吗？",
+        answer:
+          "不应该。只有每个答案都必须依据受控来源时才适合固定预检索；其他流程应让任务或 Agent 在确实依赖这些资料时再查询。",
+      },
+      {
+        question: "使用知识库就一定能降低 Token 吗？",
+        answer:
+          "不一定。索引与选择性检索可以减少重复读取文档，但 embedding、工具调用、返回片段和失败搜索也有成本，必须用自己的任务测量完整流程。",
+      },
+      {
+        question: "什么时候必须回到原始文档？",
+        answer:
+          "精确数字、否定条件、合规规则、当前代码行为和其他重要结论，都应打开准确引用位置验证；Page 或检索摘要只能帮助找到来源。",
+      },
+    ],
+    relatedSlugs: [
+      "ai-work-memory-vs-knowledge-base",
+      "coding-agent-source-backed-knowledge-base",
+      "source-backed-wiki-pages-ai-work",
+      "verify-ai-knowledge-base-citations",
+    ],
+    officialReferences: [
+      {
+        label: "Anthropic AI Agent 上下文工程",
+        href: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+      },
+      {
+        label: "JitAI 按场景查阅知识库",
+        href: "https://jit.pro/zh/docs/devguide/knowledge-base/integrate-knowledge-base-into-agent",
+      },
+      {
+        label: "OpenViking 上下文层级",
+        href: "https://docs.openviking.ai/zh/concepts/03-context-layers",
+      },
+      {
+        label: "CareerWise 知识库搜索 Tool Use 案例",
+        href: "https://www.cythilya.tw/2026/07/16/careerwise-search-knowledge-tool/",
+      },
+      {
+        label: "Wenlan source-backed Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+    ],
+    cta: {
+      heading: "先测试一条检索边界",
+      body: "连接 Wenlan，选择一个会重复出现的项目问题，比较整批加载、按需查询和直接读取来源，不预设一定省 Token。",
+    },
+  },
   "distilled-wiki-pages-ai-memory": {
     ...zhTWArticles["distilled-wiki-pages-ai-memory"],
     title: "Karpathy LLM Wiki：如何搭建有来源的 AI 知识库",
@@ -1477,6 +1772,7 @@ const zhCNArticles = {
       "coding-agent-source-backed-knowledge-base",
       "wenlan-vs-obsidian-ai-memory",
       "distilled-wiki-pages-ai-memory",
+      "when-ai-agent-should-query-knowledge-base",
       "verify-ai-knowledge-base-citations",
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
@@ -1807,6 +2103,7 @@ const zhCNArticles = {
       "source-backed-wiki-pages-ai-work",
       "build-local-ai-knowledge-base-from-documents",
       "choose-ai-knowledge-base-tool",
+      "when-ai-agent-should-query-knowledge-base",
       "distilled-wiki-pages-ai-memory",
     ],
     officialReferences: [
@@ -2188,6 +2485,7 @@ const zhCNArticles = {
       "source-backed-wiki-pages-ai-work",
       "choose-ai-knowledge-base-tool",
       "distilled-wiki-pages-ai-memory",
+      "when-ai-agent-should-query-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
     ],
     officialReferences: [

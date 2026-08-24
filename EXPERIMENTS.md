@@ -8102,3 +8102,60 @@ increase for that experiment.
 - Decision: merge
 - Next step: Commit and push only the citation-verification family and its deterministic control records, merge only after required checks pass, then wait for automatic Vercel production completion and verify the three live routes.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-23-citation-verification-locales production completion
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-23-citation-verification-locales
+- Observed at: 2026-08-23T22:21:18Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #137 merged at 2026-08-23T22:20:42Z as b04a5e2ea480bf6a689e14bf6bac7267b8d7ed12; Vercel production completed at 2026-08-23T22:21:18Z. The English, zh-TW, and zh-CN routes returned direct 200 responses with exact canonicals, reciprocal hreflang, Article and BreadcrumbList schema dated 2026-08-23, visible FAQ without FAQPage JSON-LD, same-locale links, no horizontal overflow at 393x852 or 1280x720, and no browser console errors.
+- Result: pending
+- Decision: wait
+- Next step: Keep all three locale owners stable and read each locale in native GSC page/query and Vercel page/referrer units after sufficient post-crawl exposure. The experiment no longer consumes the production-in-flight slot.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-23-knowledge-retrieval-policy-locales
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-23-knowledge-retrieval-policy-locales
+- Status: approved
+- Data window: 2026-08-22..2026-08-28
+- Asset class: net-new-search
+- Launched: 2026-08-23
+- Hypothesis: A task-specific trilingual owner for deciding when an AI agent should query, pre-retrieve, autonomously retrieve, progressively disclose, or skip a knowledge base can earn qualified retrieval-policy exposure without cannibalizing the existing role-comparison or coding-agent source-boundary owners.
+- Candidate evidence: Dated English, zh-TW, and zh-CN official, practitioner, SERP, overlap, product-proof, internal-link, and authority-path observations with native units are stored in docs/seo-scenario-backlog.json.
+- Baseline: GSC property 8 clicks and 1,005 impressions; visible-query 2 clicks and 216 impressions; visibility gap 6 clicks and 789 impressions; Vercel 248 visitors with 30 attributed to Google; GitHub 48 stars; new target-page rows unavailable, all kept separate.
+- Change: Add exactly one English, zh-TW, and zh-CN canonical for the per-task retrieval-policy job, with locale-natural wording, query-or-skip workflow, Wenlan plugin and MCP-only command boundaries, maintained sources, reciprocal hreflang, sitemap membership, and at least three same-locale contextual inbound paths.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions per locale in 28 complete post-crawl days
+- Success criteria: Per locale, at least 3 qualified joined-query impressions and at least 1 GSC click after the minimum exposure; report CTR and position separately.
+- Failure criteria: After 28 complete post-crawl days and the minimum exposure, a locale has no qualified joined-query impressions or no GSC click, or an above-floor join assigns the same task to an existing owner.
+- Stop criteria: Stop on a technical, factual, unsupported-claim, duplicate-intent, command-prerequisite, controller-overlap, or approval-boundary violation.
+- 24h readout: pending technical and indexability observation after production completion
+- 7d readout: pending early source-native GSC page/query and Vercel page/referrer observation
+- W2 readout: pending
+- W4 readout: pending formal 28-complete-post-crawl-day decision when eligible
+- W8 readout: pending only if useful after the Goal deadline
+- Result: pending
+- Decision: wait
+- Next step: Publish the exact verified branch after the approval record below, then start the measurement clock from production completion without requesting indexing.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-23-knowledge-retrieval-policy-locales publication approval
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-23-knowledge-retrieval-policy-locales
+- Observed at: 2026-08-24T01:21:21Z
+- Readout: correction
+- Status: active
+- Evidence: The user explicitly approved the exact commit, push, PR creation, merge, automatic Vercel deployment, and read-only production-verification scope after reviewing the audience-trigger-task-outcome contract, local implementation, evidence, and responsive QA. Request indexing, GSC validation, external publication, paid actions, synthetic events, analytics mutation, and metric-definition changes remain excluded.
+- Result: pending
+- Decision: merge
+- Next step: Complete the independent pre-merge fixes and review, push the exact branch, merge only after required checks pass, wait for automatic Vercel production completion, and verify the three live locale routes without requesting indexing.
+<!-- EXPERIMENT-RECORD:END -->

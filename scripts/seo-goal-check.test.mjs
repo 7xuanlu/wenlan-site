@@ -879,6 +879,14 @@ test("content expansion correction protects weekly trilingual scenario execution
     "Those existing-page floors must not block",
     "Those existing-page floors block",
   );
+  const withoutScenarioActorModel = canonicalPlan.replace(
+    "Each scenario family must explicitly preserve its audience, trigger, user task, and desired outcome.",
+    "Each scenario family may describe a topic.",
+  );
+  const withoutAudienceUrlBoundary = canonicalPlan.replace(
+    "A user group alone does not justify a separate URL; split only when the search task and observed SERP are materially different.",
+    "Each user group receives a separate URL.",
+  );
 
   assert.ok(
     validationErrors({ plan: withoutCadence }).some((error) =>
@@ -888,6 +896,16 @@ test("content expansion correction protects weekly trilingual scenario execution
   assert.ok(
     validationErrors({ plan: withoutCleanIntentBoundary }).some((error) =>
       error.includes("existing-page gate cannot block clean new intent"),
+    ),
+  );
+  assert.ok(
+    validationErrors({ plan: withoutScenarioActorModel }).some((error) =>
+      error.includes("scenario audience trigger task outcome model"),
+    ),
+  );
+  assert.ok(
+    validationErrors({ plan: withoutAudienceUrlBoundary }).some((error) =>
+      error.includes("audience alone cannot split URL ownership"),
     ),
   );
 });

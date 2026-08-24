@@ -11,7 +11,7 @@ test("every sitemap URL has one explicit locale-aware search intent", () => {
   const result = validatePageIntentRows(rows);
 
   assert.deepEqual(result.errors, []);
-  assert.equal(rows.length, 126);
+  assert.equal(rows.length, 129);
   assert.deepEqual(
     Object.fromEntries(
       ["en", "zh-TW", "zh-CN"].map((locale) => [
@@ -20,9 +20,9 @@ test("every sitemap URL has one explicit locale-aware search intent", () => {
       ]),
     ),
     {
-      en: 100,
-      "zh-TW": 13,
-      "zh-CN": 13,
+      en: 101,
+      "zh-TW": 14,
+      "zh-CN": 14,
     },
   );
 });

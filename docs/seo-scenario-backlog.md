@@ -30,6 +30,9 @@ This queue nominates user tasks, not keyword-volume claims. GSC remains the auth
 ## 1. Keep an AI knowledge base current after source documents change and repair stale pages
 
 - ID: `source-change-stale-pages`
+- Audience: People who maintain an AI knowledge base whose source documents continue to change after the first import
+- Trigger: A tracked document, policy, repository, or note set is revised, moved, or removed and an existing knowledge page may now be stale
+- Desired outcome: Identify every affected page, preserve the current source of truth, and refresh or withhold stale claims before they are reused
 - Stage: `maintain`
 - Decision: `reject`
 - Planned window: `2026-08-24..2026-08-30`
@@ -109,6 +112,9 @@ Demand discovery:
 ## 2. Give Codex or another coding agent a source-backed project knowledge base without overloading AGENTS.md, CLAUDE.md, or generic memory
 
 - ID: `coding-agent-source-backed-knowledge-base`
+- Audience: Developers using Codex, Claude Code, or another coding agent on a repository where instruction files must stay short and the repository remains authoritative
+- Trigger: A coding agent repeatedly needs project decisions or documentation across sessions, but copying all context into AGENTS.md, CLAUDE.md, or prompts is becoming noisy and stale
+- Desired outcome: Let the agent retrieve only relevant, cited project knowledge on demand while current code, tests, and maintained documentation remain the final authority
 - Stage: `integrate`
 - Decision: `measuring`
 - Planned window: `2026-08-24..2026-08-30`
@@ -197,13 +203,16 @@ Demand discovery:
 ## 3. Verify AI knowledge-base citations, provenance, and unsupported claims before trusting an answer
 
 - ID: `verify-citations-provenance-unsupported-claims`
+- Audience: People reviewing RAG or AI knowledge-base answers that display citations but may still cite the wrong page, chunk, revision, or source
+- Trigger: An answer looks plausible and includes citation markers, yet a reviewer cannot confirm that the cited evidence supports each important claim
+- Desired outcome: Classify every consequential claim as supported, partial, unsupported, or stale and retain a reproducible claim-to-evidence record
 - Stage: `evaluate`
-- Decision: `net-new`
+- Decision: `measuring`
 - Planned window: `2026-09-07..2026-09-13`
-- Publication: `prepared`
+- Publication: `measuring`
 - Standalone utility: The output can be a tool-neutral checklist that traces each important claim to a source, tests unsupported claims, and records what requires review.
 - Overlap check: The current source-backed guide owns how to build and maintain the architecture. This candidate owns a different diagnostic task: start from one suspect answer, map each important claim to the exact source revision and location, then classify missing, invalid, mismatched, stale, or unsupported evidence. Keep that boundary or reject the new URL.
-- Next research: The complete candidate gate now passes and the English, zh-TW, and zh-CN diagnostic family is locally prepared. Finish deterministic and rendered verification, then request separate approval for commit, push, PR, merge, deployment, indexing, or the later Awesome-RAG resource proposal.
+- Next research: The English, zh-TW, and zh-CN diagnostic family is live and production-verified from 2026-08-23T22:21:18Z. Keep all three owners stable, measure each locale in native GSC and Vercel units, and do not pursue the later Awesome-RAG resource proposal until the existing Wenlan framework PR #142 resolves and separate approval is granted.
 
 ### Locale intent and ownership
 
@@ -282,58 +291,62 @@ Demand discovery:
 ## 4. Use an Obsidian vault as a read-only source and decide when a maintained AI knowledge base is still needed
 
 - ID: `obsidian-read-only-source-vs-maintained-knowledge-base`
+- Audience: Obsidian users and developers who want AI agents to read a vault without silently rewriting notes or confusing file access with maintained knowledge
+- Trigger: An agent can already access vault files or editor context, but the user must decide whether direct reading is enough or a separate maintained knowledge layer is justified
+- Desired outcome: Keep the vault authoritative and read-only while choosing the smallest workflow that provides the required retrieval, provenance, review, and refresh behavior
 - Stage: `evaluate`
-- Decision: `research`
+- Decision: `reject`
 - Planned window: `2026-09-14..2026-09-20`
-- Publication: `not-published`
+- Publication: `rejected`
 - Standalone utility: The page can help Obsidian users choose between direct file access, live editor context, MCP operations, and a separate maintenance layer without forcing a product choice.
 - Overlap check: This is currently covered in all three locales. The default outcome is refresh-existing only after the old-page evidence gate; net-new requires a demonstrably separate read-only-source task and SERP.
-- Next research: Check the three locale SERPs for a distinct read-only-source task. If absent, retain the current owner and move immediately to family 5 instead of producing another Obsidian page.
+- Next research: Retain the existing trilingual Obsidian owner. The new evidence can nominate a future proposed-edits or AI-Inbox refresh only after the existing-page post-crawl, 20-page-impression, 3-qualified-query-impression, and cooldown gate passes. Move immediately to family 5 instead of producing another Obsidian URL.
 
 ### Locale intent and ownership
 
 | Locale | Query family | Coverage | Existing owner | Research needed |
 | --- | --- | --- | --- | --- |
-| en | Obsidian read only AI knowledge base source; Obsidian vault vs maintained AI knowledge base; use Obsidian vault with AI without rewriting notes | covered | [owner](https://wenlan.app/learn/wenlan-vs-obsidian-ai-memory) | Verify whether a narrower read-only-source SERP exists; the current owner already states the source and maintenance boundary. |
-| zh-TW | Obsidian 唯讀來源 AI 知識庫; Obsidian vault 與維護型 AI 知識庫差異; AI 讀取 Obsidian 不改寫筆記 | covered | [owner](https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory) | Verify Taiwan phrasing and whether the current localized owner already answers the complete task. |
-| zh-CN | Obsidian 只读来源 AI 知识库; Obsidian vault 和维护型 AI 知识库区别; AI 读取 Obsidian 不改写笔记 | covered | [owner](https://wenlan.app/zh-CN/learn/wenlan-vs-obsidian-ai-memory) | Verify mainland Chinese phrasing and whether users distinguish read-only source access from knowledge maintenance. |
+| en | Obsidian read only AI knowledge base source; Obsidian vault vs maintained AI knowledge base; use Obsidian vault with AI without rewriting notes | covered | [owner](https://wenlan.app/learn/wenlan-vs-obsidian-ai-memory) | Research is complete. English results confirm the audience and trigger, but the current owner already answers direct file access, read-only source behavior, MCP, and the maintained-knowledge decision. Retain one owner. |
+| zh-TW | Obsidian 唯讀來源 AI 知識庫; Obsidian vault 與維護型 AI 知識庫差異; AI 讀取 Obsidian 不改寫筆記 | covered | [owner](https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory) | Taiwan results support wording around 直接讀寫, 唯讀權限, 原始資料, and AI 維護. The current zh-TW owner already covers the complete integration-layer decision, so no second URL is justified. |
+| zh-CN | Obsidian 只读来源 AI 知识库; Obsidian vault 和维护型 AI 知识库区别; AI 读取 Obsidian 不改写笔记 | covered | [owner](https://wenlan.app/zh-CN/learn/wenlan-vs-obsidian-ai-memory) | Simplified-Chinese results support wording around raw 不可改写, AI 维护 wiki, 分层, and 人工判断. The current zh-CN owner already answers that source-versus-maintenance boundary. |
 
 #### en evidence
 
 SERP:
-No captured evidence yet; research is required.
+- obsidian-community-workflow: [Obsidian AI read only vault proposed edits source of truth](https://forum.obsidian.md/t/using-claude-with-a-proposed-edits-folder-before-changing-my-vault/114517) — 1 workflow post; 1 like forum posts and likes; en/global Obsidian community; captured 2026-08-23. A practitioner keeps raw, proposed, and trusted-note zones separate because Claude is useful for search and drafting but should not silently rewrite the long-running vault. This is not keyword volume.
+- practitioner-guide: [use Claude with Obsidian without changing notes](https://practicalpkm.com/how-to-use-claude-with-obsidian-to-do-your-best-thinking/) — published 2026-08-10 after several months of near-daily vault use published guide observation; en/web-search geography unspecified; captured 2026-08-23. The workflow lets Claude read the whole vault, isolates generated output in AI Inbox, excludes that folder from retrieval, and leaves final edits to the human.
 
 Demand discovery:
-No captured evidence yet; research is required.
+- practitioner-guide: [keep AI out of Obsidian vault generated notes](https://www.ssp.sh/brain/using-obsidian-with-ai/) — 25,979 files; 3.5 GB vault; published 2026-04-24 vault size and published guide observation; en/web-search geography unspecified; captured 2026-08-23. An active Obsidian practitioner argues that generated notes and automated links can dilute human-curated thinking, reinforcing the read-versus-maintain boundary rather than a generic tool comparison.
 
 #### zh-TW evidence
 
 SERP:
-No captured evidence yet; research is required.
+- traditional-chinese-practitioner-guide: [台灣 Obsidian Claude AI vault 唯讀 權限](https://www.itnotetk.com/2026/04/20/obsidian-mcp-%e5%af%a6%e6%88%b0%ef%bc%9a%e8%ae%93-claude-%e7%9b%b4%e6%8e%a5%e8%ae%80%e5%af%ab%e7%ad%86%e8%a8%98%e5%ba%ab%ef%bc%8c%e5%80%8b%e4%ba%ba%e7%9f%a5%e8%ad%98%e7%ae%a1%e7%90%86%e9%80%b2/) — published 2026-04-19 published implementation guide observation; zh-TW/Taiwan-oriented Traditional Chinese web; captured 2026-08-23. The implementation distinguishes read, search, write, append, security, limited vault scope, read-only mode, and audit logs.
 
 Demand discovery:
-No captured evidence yet; research is required.
+- taiwan-technology-publication: [台灣 Obsidian Claude Code LLM 知識庫 原始資料 維護](https://www.bnext.com.tw/article/90530/llm-knowledge-base-obsidian-claude-code) — published 2026-04-07; describes roughly 100 notes and 400,000 words published article observation; zh-TW/Taiwan; captured 2026-08-23. The article presents Obsidian as the local Markdown surface and Claude Code as the maintenance layer, repeating the same source-versus-derived-knowledge decision in natural Taiwan wording.
 
 #### zh-CN evidence
 
 SERP:
-No captured evidence yet; research is required.
+- simplified-chinese-practitioner-report: [Obsidian AI 知识库 raw 原始资料 不可改写](https://blog.xiaohuangyu.space/p/karpathy-llm-wiki-obsidian/) — 2 months; 200+ wiki pages self-reported operating duration and page count; zh-CN/mainland Chinese developer web; captured 2026-08-23. The practitioner keeps raw sources immutable, AI-maintained wiki pages separate, and AGENTS.md or CLAUDE.md rules explicit; it also reports stale and quality-control limits.
 
 Demand discovery:
-No captured evidence yet; research is required.
+- simplified-chinese-implementation-guide: [Obsidian LLM Wiki raw wiki 分层 Agent 维护](https://diors.tech/blog/091-llm-wiki-obsidian/) — published 2026-04-25 published guide observation; zh-CN/Chinese developer web; captured 2026-08-23. The guide treats Obsidian as the human browsing and review interface while the agent maintains a separate raw/wiki/schema/index lifecycle.
 
 ### Candidate gate
 
 | Gate | Status | Reason | Evidence refs |
 | --- | --- | --- | --- |
-| provenance | pending | No new trilingual SERP or community capture is stored for this narrower task. | none |
-| repeatedDemand | pending | The narrower read-only-source language needs external corroboration. | none |
-| trilingualSerp | pending | The result sets have not been compared in the three locales. | none |
-| cleanGap | pending | All three current Obsidian owners already cover direct files, read-only source behavior, MCP, provenance, and maintenance; a new URL is likely overlapping unless SERP evidence proves otherwise. | none |
+| provenance | passed | Every retained English, zh-TW, and zh-CN observation preserves its URL, exact query, capture date, language or geography, and source-native unit; none is treated as GSC evidence or keyword volume. | locales.en.serpEvidence[0]; locales.zh-TW.serpEvidence[0]; locales.zh-CN.serpEvidence[0] |
+| repeatedDemand | passed | Independent Obsidian community, practitioner, Taiwan technology, and Simplified-Chinese implementation sources repeat the same user concern: AI may read a vault, but original notes and derived AI-maintained knowledge need explicit ownership and write boundaries. | locales.en.serpEvidence[0]; locales.en.serpEvidence[1]; locales.zh-TW.serpEvidence[0]; locales.zh-CN.serpEvidence[0] |
+| trilingualSerp | passed | Separate English, Taiwan Traditional-Chinese, and Simplified-Chinese searches converge on the same task using locale-natural language around proposed edits, 唯讀權限 and 原始資料, and raw 不可改写 and AI 维护 wiki. | locales.en.serpEvidence[0]; locales.zh-TW.serpEvidence[0]; locales.zh-CN.serpEvidence[0] |
+| cleanGap | failed | The evidence confirms the audience and trigger but not a second search owner. All three current Obsidian pages already answer direct filesystem access, IDE context, MCP, read-only source behavior, and when citations, staleness, revisions, and review justify a maintained knowledge layer. | overlapCheck; src/app/(en)/learn/seo-articles.ts:wenlan-vs-obsidian-ai-memory; src/i18n/learn-articles.ts:wenlan-vs-obsidian-ai-memory |
 | firstPartyProof | passed | The current site states that an Obsidian vault remains human-owned and read-only while maintained pages add citations, staleness, revisions, and review. | src/app/(en)/learn/seo-articles.ts:wenlan-vs-obsidian-ai-memory |
 | standaloneUtility | passed | A decision tree for direct files, editor context, MCP, and maintenance is useful without Wenlan. | standaloneUtility |
 | internalLinks | passed | Obsidian, document-build, and tool-selection owners are predeclared by locale. | internalLinks |
-| authorityPath | pending | The exact Obsidian or coding-tool reference path needs validation. | none |
+| authorityPath | failed | No external authority proposal should be pursued for a duplicate page. The Obsidian Forum Workflows & Templates surface is inspectable, but it is retained only as a possible path for a future materially distinct workflow after separate approval. | authorityPath; locales.en.serpEvidence[0] |
 
 ### Wenlan proof
 
@@ -354,65 +367,68 @@ No captured evidence yet; research is required.
 
 ### Authority path and readout
 
-- Authority path: obsidian-workflow-reference — A maintained Obsidian, Claude Code, or MCP workflow surface with an exact read-only-source decision gap (research-required).
+- Authority path: obsidian-workflow-reference — https://forum.obsidian.md/c/share-showcase/workflows/69 — only for a future materially distinct, standalone workflow after separate approval (not-pursued-because-current-owner-covers-task).
 - GSC: unavailable; native unit: page impressions, joined-query impressions, clicks.
 - Vercel: unavailable; native unit: target-page visitors and referrer visitors.
 
 ## 5. Decide when an AI agent should query a knowledge base and reduce repeated document context or token cost
 
 - ID: `knowledge-retrieval-context-token-cost`
+- Audience: Developers operating AI agents over large documentation sets that are consulted repeatedly across tasks or sessions
+- Trigger: The agent repeatedly reloads the same raw documents, consumes too much context, or retrieves knowledge even when the authoritative file is already available
+- Desired outcome: Use a clear retrieval policy that opens exact sources only when needed, avoids redundant context, and never treats token savings as permission to skip authoritative evidence
 - Stage: `integrate`
-- Decision: `research`
-- Planned window: `unassigned-fallback`
-- Publication: `not-published`
+- Decision: `net-new`
+- Planned window: `2026-08-24..2026-08-30`
+- Publication: `prepared`
 - Standalone utility: A neutral policy can tell agents when to retrieve an index, open an exact source, use a maintained page, or skip retrieval because the authoritative file is already in context.
-- Overlap check: English may refresh the current comparison if SERP intent matches. Mandarin net-new routes require independent locale evidence and must not become generic token-optimization pages.
-- Next research: Compare retrieval-timing and token-cost SERPs across locales, then corroborate with current agent-runtime issues or docs before deciding whether the English owner is enough.
+- Overlap check: The memory-versus-knowledge-base owner explains which layer stores what, and the coding-agent owner explains AGENTS.md versus repository and maintained knowledge. This family alone owns the per-task retrieval policy: when to query, skip, pre-retrieve, inspect an index, open an exact source, and stop searching.
+- Next research: The trilingual retrieval-policy family is locally implemented, verified, and publication-approved. Commit and publish only the approved website and control-plane scope, then verify production without requesting indexing. Keep the external authority path waiting until existing Wenlan PR #108 resolves.
 
 ### Locale intent and ownership
 
 | Locale | Query family | Coverage | Existing owner | Research needed |
 | --- | --- | --- | --- | --- |
-| en | when should AI agent query knowledge base; reduce AI agent context token cost with knowledge base; avoid rereading documents AI agent | partial | [owner](https://wenlan.app/learn/ai-work-memory-vs-knowledge-base) | Separate architectural token-optimization results from practical retrieval-policy searches and check whether the existing comparison owns the task. |
-| zh-TW | AI agent 何時查詢知識庫; AI 知識庫降低 context token 成本; 避免 AI 重複讀取文件 | gap | none | Identify natural Taiwan wording for context window, token use, document rereading, and retrieval timing. |
-| zh-CN | AI agent 什么时候查询知识库; AI 知识库降低上下文 token 成本; 避免 AI 重复读取文档 | gap | none | Identify mainland Chinese phrasing for context cost, token consumption, document rereading, and retrieval strategy. |
+| en | when should AI agent query knowledge base; reduce AI agent context token cost with knowledge base; avoid rereading documents AI agent | gap | none | Keep the page on the retrieval decision policy; do not broaden it into generic context engineering or repeat the memory-versus-knowledge-base comparison. |
+| zh-TW | AI agent 何時查詢知識庫; AI 知識庫降低 context token 成本; 避免 AI 重複讀取文件 | gap | none | Use Taiwan-natural terms such as 查知識庫, 上下文, and token 成本; avoid a literal translation of the English title. |
+| zh-CN | AI agent 什么时候查询知识库; AI 知识库降低上下文 token 成本; 避免 AI 重复读取文档 | gap | none | Use simplified-Chinese decision wording such as 按场景查阅, 自主决定查询, 预检索, and 按需加载 instead of a generic token-saving headline. |
 
 #### en evidence
 
 SERP:
-No captured evidence yet; research is required.
+- official-engineering-serp-observation: [when should AI agent retrieve context just in time](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) — 1 official engineering guide published 2025-09-29 search-result observation; en/global; captured 2026-08-23. Anthropic treats context as finite, recommends the smallest high-signal token set, and describes just-in-time retrieval plus the trade-off between preloaded and runtime context.
 
 Demand discovery:
-No captured evidence yet; research is required.
+- practitioner-cost-observation: [AI agent rereading documentation token cost](https://tsukumo.ch/blog/the-token-cost-of-agents-rereading-docs) — about 720 before and 280 after; author reports about 60 percent fewer document-read tokens document-read tokens in the author's example; en/global; captured 2026-08-23. This is one practitioner measurement, not keyword volume or a whole-request cost guarantee; the page explicitly says teams should measure their own workload.
 
 #### zh-TW evidence
 
 SERP:
-No captured evidence yet; research is required.
+- taiwan-implementation-serp-observation: [AI Agent 何時查知識庫 token](https://www.cythilya.tw/2026/07/16/careerwise-search-knowledge-tool/) — 1 case published 2026-07-16 with 4 intent routes and 1 knowledge-search route published implementation case; zh-TW/TW; captured 2026-08-23. The Taiwan implementation separates greetings, career questions, resume processing, and booking, then explains why only the evidence-dependent route should expose knowledge search.
 
 Demand discovery:
-No captured evidence yet; research is required.
+- taiwan-practitioner-series-observation: [RAG 上下文優化 token 成本](https://ithelp.ithome.com.tw/articles/10387588) — 4 RAG context-optimization strategies tested strategies in one article; zh-TW/TW; captured 2026-08-23. The article frames retrieved-context selection as a practical token and answer-quality problem; it is independent corroboration, not search-volume evidence.
 
 #### zh-CN evidence
 
 SERP:
-No captured evidence yet; research is required.
+- simplified-chinese-product-doc-serp-observation: [Agent 什么时候查询知识库](https://jit.pro/zh/docs/devguide/knowledge-base/integrate-knowledge-base-into-agent) — 3 knowledge-base modes plus autonomous-query or pre-retrieval choice documented retrieval modes; zh-CN/CN; captured 2026-08-23. JitAI documents intelligent, custom, and disabled modes, then distinguishes agent-decided querying from mandatory pre-retrieval for evidence-critical tasks.
 
 Demand discovery:
-No captured evidence yet; research is required.
+- simplified-chinese-oss-doc-observation: [AI 知识库 上下文 分层 按需加载](https://docs.openviking.ai/zh/concepts/03-context-layers) — L0 256 characters, L1 4000 characters, and L2 full content loaded on demand documented context layers; zh-CN/CN; captured 2026-08-23. The maintained OSS documentation independently demonstrates progressive disclosure from a short abstract to an overview and then exact source content.
 
 ### Candidate gate
 
 | Gate | Status | Reason | Evidence refs |
 | --- | --- | --- | --- |
-| provenance | pending | No current trilingual demand capture has been stored. | none |
-| repeatedDemand | pending | The cost and retrieval task needs independent high-intent or repeated evidence. | none |
-| trilingualSerp | pending | Three locale result sets are not captured. | none |
-| cleanGap | pending | English partially overlaps an existing memory-versus-knowledge-base comparison; Mandarin appears unmapped but still needs SERP proof. | none |
+| provenance | passed | Every stored observation preserves the exact query, URL, capture date, language, geography, source-native unit, value, and interpretation boundary. | locales.en.serpEvidence; locales.en.demandEvidence; locales.zh-TW.serpEvidence; locales.zh-TW.demandEvidence; locales.zh-CN.serpEvidence; locales.zh-CN.demandEvidence |
+| repeatedDemand | passed | Independent official, practitioner, product-documentation, and OSS sources repeat the same retrieval-timing and progressive-disclosure task across all three locales. | https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents; https://www.cythilya.tw/2026/07/16/careerwise-search-knowledge-tool/; https://jit.pro/zh/docs/devguide/knowledge-base/integrate-knowledge-base-into-agent; https://docs.openviking.ai/zh/concepts/03-context-layers |
+| trilingualSerp | passed | Separate English, Taiwan, and Simplified-Chinese result sets expose the same decision task through locale-natural wording rather than translated keyword variants. | locales.en.queryFamily; locales.zh-TW.queryFamily; locales.zh-CN.queryFamily |
+| cleanGap | passed | Existing owners explain layer roles, setup, and source-backed architecture, but none owns the task-level decision matrix for query, skip, pre-retrieve, index-first, exact-source, and progressive-disclosure behavior. | src/app/(en)/learn/articles.ts:900; src/app/(en)/learn/seo-articles.ts:928; docs/seo-audits/2026-08-22-search-intent-map.md |
 | firstPartyProof | passed | Current sources document selective recall, local hybrid retrieval, and maintained pages rather than repeated full-history loading. | src/app/(en)/learn/articles.ts; src/app/(en)/learn/seo-articles.ts |
 | standaloneUtility | passed | A retrieval timing and context-budget checklist is useful across tools. | standaloneUtility |
 | internalLinks | passed | Knowledge-base comparison, build, and source-backed owners are predeclared. | internalLinks |
-| authorityPath | pending | A suitable agent-runtime or context-engineering reference surface must be selected. | none |
+| authorityPath | passed | Awesome Context Engineering is active, explicitly accepts pull requests, and contains context optimization and coding-agent project-memory sections; any Wenlan follow-up must wait for existing PR #108 to resolve. | https://github.com/Meirtz/Awesome-Context-Engineering; https://github.com/Meirtz/Awesome-Context-Engineering/pull/108 |
 
 ### Wenlan proof
 
@@ -433,13 +449,16 @@ No captured evidence yet; research is required.
 
 ### Authority path and readout
 
-- Authority path: context-engineering-reference — An active coding-agent or context-engineering documentation or discussion surface with an exact retrieval-policy gap (research-required).
+- Authority path: context-engineering-reference — Meirtz/Awesome-Context-Engineering context optimization or coding-agent project-memory section after existing Wenlan PR #108 resolves (predeclared-waiting-on-existing-pr-108).
 - GSC: unavailable; native unit: page impressions, joined-query impressions, clicks.
 - Vercel: unavailable; native unit: target-page visitors and referrer visitors.
 
 ## 6. Handle long documents, text PDFs, scanned PDFs, and AI knowledge-base ingestion failures
 
 - ID: `document-pdf-ingestion-failures`
+- Audience: People building an AI knowledge base from mixed long documents, Markdown, text PDFs, and scanned PDFs
+- Trigger: A document import returns empty text, garbled chunks, missing citations, unsupported files, or an apparent ingestion failure
+- Desired outcome: Classify the source correctly, apply OCR only when required, preserve file and page provenance, and verify usable text before trusting downstream answers
 - Stage: `troubleshoot`
 - Decision: `research`
 - Planned window: `unassigned-fallback`
@@ -519,6 +538,9 @@ No captured evidence yet; research is required.
 ## 7. Prevent conflicts and stale conclusions when multiple AI agents write to shared knowledge
 
 - ID: `multi-agent-knowledge-write-conflicts`
+- Audience: Teams running multiple AI agents that read from and write to shared project knowledge
+- Trigger: Two or more agents create overlapping summaries, supersede the same conclusion, or reuse knowledge after its source has changed
+- Desired outcome: Assign source and write ownership, surface conflicts before publication, review superseding claims, and preserve an auditable history
 - Stage: `maintain`
 - Decision: `research`
 - Planned window: `unassigned-fallback`

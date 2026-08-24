@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "updatedAt": "2026-08-23",
   "campaign": {
     "deadline": "2026-09-21",
@@ -51,7 +51,10 @@
   "families": [
     {
       "id": "source-change-stale-pages",
+      "audience": "People who maintain an AI knowledge base whose source documents continue to change after the first import",
+      "trigger": "A tracked document, policy, repository, or note set is revised, moved, or removed and an existing knowledge page may now be stale",
       "userTask": "Keep an AI knowledge base current after source documents change and repair stale pages",
+      "desiredOutcome": "Identify every affected page, preserve the current source of truth, and refresh or withhold stale claims before they are reused",
       "stage": "maintain",
       "decision": "reject",
       "plannedWindow": "2026-08-24..2026-08-30",
@@ -274,7 +277,10 @@
     },
     {
       "id": "coding-agent-source-backed-knowledge-base",
+      "audience": "Developers using Codex, Claude Code, or another coding agent on a repository where instruction files must stay short and the repository remains authoritative",
+      "trigger": "A coding agent repeatedly needs project decisions or documentation across sessions, but copying all context into AGENTS.md, CLAUDE.md, or prompts is becoming noisy and stale",
       "userTask": "Give Codex or another coding agent a source-backed project knowledge base without overloading AGENTS.md, CLAUDE.md, or generic memory",
+      "desiredOutcome": "Let the agent retrieve only relevant, cited project knowledge on demand while current code, tests, and maintained documentation remain the final authority",
       "stage": "integrate",
       "decision": "measuring",
       "plannedWindow": "2026-08-24..2026-08-30",
@@ -609,11 +615,14 @@
     },
     {
       "id": "verify-citations-provenance-unsupported-claims",
+      "audience": "People reviewing RAG or AI knowledge-base answers that display citations but may still cite the wrong page, chunk, revision, or source",
+      "trigger": "An answer looks plausible and includes citation markers, yet a reviewer cannot confirm that the cited evidence supports each important claim",
       "userTask": "Verify AI knowledge-base citations, provenance, and unsupported claims before trusting an answer",
+      "desiredOutcome": "Classify every consequential claim as supported, partial, unsupported, or stale and retain a reproducible claim-to-evidence record",
       "stage": "evaluate",
-      "decision": "net-new",
+      "decision": "measuring",
       "plannedWindow": "2026-09-07..2026-09-13",
-      "publicationStatus": "prepared",
+      "publicationStatus": "measuring",
       "locales": {
         "en": {
           "queryFamily": [
@@ -897,7 +906,7 @@
         "target": "https://github.com/Danielskry/Awesome-RAG — propose one neutral citation-verification guide under Production & Best Practices only after the three-locale website family is published and existing Wenlan framework PR #142 resolves",
         "status": "verified-candidate"
       },
-      "nextResearchDirection": "The complete candidate gate now passes and the English, zh-TW, and zh-CN diagnostic family is locally prepared. Finish deterministic and rendered verification, then request separate approval for commit, push, PR, merge, deployment, indexing, or the later Awesome-RAG resource proposal.",
+      "nextResearchDirection": "The English, zh-TW, and zh-CN diagnostic family is live and production-verified from 2026-08-23T22:21:18Z. Keep all three owners stable, measure each locale in native GSC and Vercel units, and do not pursue the later Awesome-RAG resource proposal until the existing Wenlan framework PR #142 resolves and separate approval is granted.",
       "readout": {
         "gsc": {
           "status": "unavailable",
@@ -911,11 +920,14 @@
     },
     {
       "id": "obsidian-read-only-source-vs-maintained-knowledge-base",
+      "audience": "Obsidian users and developers who want AI agents to read a vault without silently rewriting notes or confusing file access with maintained knowledge",
+      "trigger": "An agent can already access vault files or editor context, but the user must decide whether direct reading is enough or a separate maintained knowledge layer is justified",
       "userTask": "Use an Obsidian vault as a read-only source and decide when a maintained AI knowledge base is still needed",
+      "desiredOutcome": "Keep the vault authoritative and read-only while choosing the smallest workflow that provides the required retrieval, provenance, review, and refresh behavior",
       "stage": "evaluate",
-      "decision": "research",
+      "decision": "reject",
       "plannedWindow": "2026-09-14..2026-09-20",
-      "publicationStatus": "not-published",
+      "publicationStatus": "rejected",
       "locales": {
         "en": {
           "queryFamily": [
@@ -923,11 +935,46 @@
             "Obsidian vault vs maintained AI knowledge base",
             "use Obsidian vault with AI without rewriting notes"
           ],
-          "serpEvidence": [],
-          "demandEvidence": [],
+          "serpEvidence": [
+            {
+              "sourceType": "obsidian-community-workflow",
+              "sourceUrl": "https://forum.obsidian.md/t/using-claude-with-a-proposed-edits-folder-before-changing-my-vault/114517",
+              "query": "Obsidian AI read only vault proposed edits source of truth",
+              "capturedAt": "2026-08-23",
+              "language": "en",
+              "geography": "global Obsidian community",
+              "nativeUnit": "forum posts and likes",
+              "value": "1 workflow post; 1 like",
+              "note": "A practitioner keeps raw, proposed, and trusted-note zones separate because Claude is useful for search and drafting but should not silently rewrite the long-running vault. This is not keyword volume."
+            },
+            {
+              "sourceType": "practitioner-guide",
+              "sourceUrl": "https://practicalpkm.com/how-to-use-claude-with-obsidian-to-do-your-best-thinking/",
+              "query": "use Claude with Obsidian without changing notes",
+              "capturedAt": "2026-08-23",
+              "language": "en",
+              "geography": "web-search geography unspecified",
+              "nativeUnit": "published guide observation",
+              "value": "published 2026-08-10 after several months of near-daily vault use",
+              "note": "The workflow lets Claude read the whole vault, isolates generated output in AI Inbox, excludes that folder from retrieval, and leaves final edits to the human."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "practitioner-guide",
+              "sourceUrl": "https://www.ssp.sh/brain/using-obsidian-with-ai/",
+              "query": "keep AI out of Obsidian vault generated notes",
+              "capturedAt": "2026-08-23",
+              "language": "en",
+              "geography": "web-search geography unspecified",
+              "nativeUnit": "vault size and published guide observation",
+              "value": "25,979 files; 3.5 GB vault; published 2026-04-24",
+              "note": "An active Obsidian practitioner argues that generated notes and automated links can dilute human-curated thinking, reinforcing the read-versus-maintain boundary rather than a generic tool comparison."
+            }
+          ],
           "existingOwner": "https://wenlan.app/learn/wenlan-vs-obsidian-ai-memory",
           "coverage": "covered",
-          "researchNeeded": "Verify whether a narrower read-only-source SERP exists; the current owner already states the source and maintenance boundary."
+          "researchNeeded": "Research is complete. English results confirm the audience and trigger, but the current owner already answers direct file access, read-only source behavior, MCP, and the maintained-knowledge decision. Retain one owner."
         },
         "zh-TW": {
           "queryFamily": [
@@ -935,11 +982,35 @@
             "Obsidian vault 與維護型 AI 知識庫差異",
             "AI 讀取 Obsidian 不改寫筆記"
           ],
-          "serpEvidence": [],
-          "demandEvidence": [],
+          "serpEvidence": [
+            {
+              "sourceType": "traditional-chinese-practitioner-guide",
+              "sourceUrl": "https://www.itnotetk.com/2026/04/20/obsidian-mcp-%e5%af%a6%e6%88%b0%ef%bc%9a%e8%ae%93-claude-%e7%9b%b4%e6%8e%a5%e8%ae%80%e5%af%ab%e7%ad%86%e8%a8%98%e5%ba%ab%ef%bc%8c%e5%80%8b%e4%ba%ba%e7%9f%a5%e8%ad%98%e7%ae%a1%e7%90%86%e9%80%b2/",
+              "query": "台灣 Obsidian Claude AI vault 唯讀 權限",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "Taiwan-oriented Traditional Chinese web",
+              "nativeUnit": "published implementation guide observation",
+              "value": "published 2026-04-19",
+              "note": "The implementation distinguishes read, search, write, append, security, limited vault scope, read-only mode, and audit logs."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "taiwan-technology-publication",
+              "sourceUrl": "https://www.bnext.com.tw/article/90530/llm-knowledge-base-obsidian-claude-code",
+              "query": "台灣 Obsidian Claude Code LLM 知識庫 原始資料 維護",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "published article observation",
+              "value": "published 2026-04-07; describes roughly 100 notes and 400,000 words",
+              "note": "The article presents Obsidian as the local Markdown surface and Claude Code as the maintenance layer, repeating the same source-versus-derived-knowledge decision in natural Taiwan wording."
+            }
+          ],
           "existingOwner": "https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
           "coverage": "covered",
-          "researchNeeded": "Verify Taiwan phrasing and whether the current localized owner already answers the complete task."
+          "researchNeeded": "Taiwan results support wording around 直接讀寫, 唯讀權限, 原始資料, and AI 維護. The current zh-TW owner already covers the complete integration-layer decision, so no second URL is justified."
         },
         "zh-CN": {
           "queryFamily": [
@@ -947,33 +1018,74 @@
             "Obsidian vault 和维护型 AI 知识库区别",
             "AI 读取 Obsidian 不改写笔记"
           ],
-          "serpEvidence": [],
-          "demandEvidence": [],
+          "serpEvidence": [
+            {
+              "sourceType": "simplified-chinese-practitioner-report",
+              "sourceUrl": "https://blog.xiaohuangyu.space/p/karpathy-llm-wiki-obsidian/",
+              "query": "Obsidian AI 知识库 raw 原始资料 不可改写",
+              "capturedAt": "2026-08-23",
+              "language": "zh-CN",
+              "geography": "mainland Chinese developer web",
+              "nativeUnit": "self-reported operating duration and page count",
+              "value": "2 months; 200+ wiki pages",
+              "note": "The practitioner keeps raw sources immutable, AI-maintained wiki pages separate, and AGENTS.md or CLAUDE.md rules explicit; it also reports stale and quality-control limits."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "simplified-chinese-implementation-guide",
+              "sourceUrl": "https://diors.tech/blog/091-llm-wiki-obsidian/",
+              "query": "Obsidian LLM Wiki raw wiki 分层 Agent 维护",
+              "capturedAt": "2026-08-23",
+              "language": "zh-CN",
+              "geography": "Chinese developer web",
+              "nativeUnit": "published guide observation",
+              "value": "published 2026-04-25",
+              "note": "The guide treats Obsidian as the human browsing and review interface while the agent maintains a separate raw/wiki/schema/index lifecycle."
+            }
+          ],
           "existingOwner": "https://wenlan.app/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
           "coverage": "covered",
-          "researchNeeded": "Verify mainland Chinese phrasing and whether users distinguish read-only source access from knowledge maintenance."
+          "researchNeeded": "Simplified-Chinese results support wording around raw 不可改写, AI 维护 wiki, 分层, and 人工判断. The current zh-CN owner already answers that source-versus-maintenance boundary."
         }
       },
       "gates": {
         "provenance": {
-          "status": "pending",
-          "reason": "No new trilingual SERP or community capture is stored for this narrower task.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "Every retained English, zh-TW, and zh-CN observation preserves its URL, exact query, capture date, language or geography, and source-native unit; none is treated as GSC evidence or keyword volume.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]"
+          ]
         },
         "repeatedDemand": {
-          "status": "pending",
-          "reason": "The narrower read-only-source language needs external corroboration.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "Independent Obsidian community, practitioner, Taiwan technology, and Simplified-Chinese implementation sources repeat the same user concern: AI may read a vault, but original notes and derived AI-maintained knowledge need explicit ownership and write boundaries.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.en.serpEvidence[1]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]"
+          ]
         },
         "trilingualSerp": {
-          "status": "pending",
-          "reason": "The result sets have not been compared in the three locales.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "Separate English, Taiwan Traditional-Chinese, and Simplified-Chinese searches converge on the same task using locale-natural language around proposed edits, 唯讀權限 and 原始資料, and raw 不可改写 and AI 维护 wiki.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]"
+          ]
         },
         "cleanGap": {
-          "status": "pending",
-          "reason": "All three current Obsidian owners already cover direct files, read-only source behavior, MCP, provenance, and maintenance; a new URL is likely overlapping unless SERP evidence proves otherwise.",
-          "evidenceRefs": []
+          "status": "failed",
+          "reason": "The evidence confirms the audience and trigger but not a second search owner. All three current Obsidian pages already answer direct filesystem access, IDE context, MCP, read-only source behavior, and when citations, staleness, revisions, and review justify a maintained knowledge layer.",
+          "evidenceRefs": [
+            "overlapCheck",
+            "src/app/(en)/learn/seo-articles.ts:wenlan-vs-obsidian-ai-memory",
+            "src/i18n/learn-articles.ts:wenlan-vs-obsidian-ai-memory"
+          ]
         },
         "firstPartyProof": {
           "status": "passed",
@@ -997,9 +1109,12 @@
           ]
         },
         "authorityPath": {
-          "status": "pending",
-          "reason": "The exact Obsidian or coding-tool reference path needs validation.",
-          "evidenceRefs": []
+          "status": "failed",
+          "reason": "No external authority proposal should be pursued for a duplicate page. The Obsidian Forum Workflows & Templates surface is inspectable, but it is retained only as a possible path for a future materially distinct workflow after separate approval.",
+          "evidenceRefs": [
+            "authorityPath",
+            "locales.en.serpEvidence[0]"
+          ]
         }
       },
       "wenlanProof": [
@@ -1029,10 +1144,10 @@
       ],
       "authorityPath": {
         "type": "obsidian-workflow-reference",
-        "target": "A maintained Obsidian, Claude Code, or MCP workflow surface with an exact read-only-source decision gap",
-        "status": "research-required"
+        "target": "https://forum.obsidian.md/c/share-showcase/workflows/69 — only for a future materially distinct, standalone workflow after separate approval",
+        "status": "not-pursued-because-current-owner-covers-task"
       },
-      "nextResearchDirection": "Check the three locale SERPs for a distinct read-only-source task. If absent, retain the current owner and move immediately to family 5 instead of producing another Obsidian page.",
+      "nextResearchDirection": "Retain the existing trilingual Obsidian owner. The new evidence can nominate a future proposed-edits or AI-Inbox refresh only after the existing-page post-crawl, 20-page-impression, 3-qualified-query-impression, and cooldown gate passes. Move immediately to family 5 instead of producing another Obsidian URL.",
       "readout": {
         "gsc": {
           "status": "unavailable",
@@ -1046,11 +1161,14 @@
     },
     {
       "id": "knowledge-retrieval-context-token-cost",
+      "audience": "Developers operating AI agents over large documentation sets that are consulted repeatedly across tasks or sessions",
+      "trigger": "The agent repeatedly reloads the same raw documents, consumes too much context, or retrieves knowledge even when the authoritative file is already available",
       "userTask": "Decide when an AI agent should query a knowledge base and reduce repeated document context or token cost",
+      "desiredOutcome": "Use a clear retrieval policy that opens exact sources only when needed, avoids redundant context, and never treats token savings as permission to skip authoritative evidence",
       "stage": "integrate",
-      "decision": "research",
-      "plannedWindow": "unassigned-fallback",
-      "publicationStatus": "not-published",
+      "decision": "net-new",
+      "plannedWindow": "2026-08-24..2026-08-30",
+      "publicationStatus": "prepared",
       "locales": {
         "en": {
           "queryFamily": [
@@ -1058,11 +1176,35 @@
             "reduce AI agent context token cost with knowledge base",
             "avoid rereading documents AI agent"
           ],
-          "serpEvidence": [],
-          "demandEvidence": [],
-          "existingOwner": "https://wenlan.app/learn/ai-work-memory-vs-knowledge-base",
-          "coverage": "partial",
-          "researchNeeded": "Separate architectural token-optimization results from practical retrieval-policy searches and check whether the existing comparison owns the task."
+          "serpEvidence": [
+            {
+              "sourceType": "official-engineering-serp-observation",
+              "sourceUrl": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+              "query": "when should AI agent retrieve context just in time",
+              "capturedAt": "2026-08-23",
+              "language": "en",
+              "geography": "global",
+              "nativeUnit": "search-result observation",
+              "value": "1 official engineering guide published 2025-09-29",
+              "note": "Anthropic treats context as finite, recommends the smallest high-signal token set, and describes just-in-time retrieval plus the trade-off between preloaded and runtime context."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "practitioner-cost-observation",
+              "sourceUrl": "https://tsukumo.ch/blog/the-token-cost-of-agents-rereading-docs",
+              "query": "AI agent rereading documentation token cost",
+              "capturedAt": "2026-08-23",
+              "language": "en",
+              "geography": "global",
+              "nativeUnit": "document-read tokens in the author's example",
+              "value": "about 720 before and 280 after; author reports about 60 percent fewer document-read tokens",
+              "note": "This is one practitioner measurement, not keyword volume or a whole-request cost guarantee; the page explicitly says teams should measure their own workload."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Keep the page on the retrieval decision policy; do not broaden it into generic context engineering or repeat the memory-versus-knowledge-base comparison."
         },
         "zh-TW": {
           "queryFamily": [
@@ -1070,11 +1212,35 @@
             "AI 知識庫降低 context token 成本",
             "避免 AI 重複讀取文件"
           ],
-          "serpEvidence": [],
-          "demandEvidence": [],
+          "serpEvidence": [
+            {
+              "sourceType": "taiwan-implementation-serp-observation",
+              "sourceUrl": "https://www.cythilya.tw/2026/07/16/careerwise-search-knowledge-tool/",
+              "query": "AI Agent 何時查知識庫 token",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "TW",
+              "nativeUnit": "published implementation case",
+              "value": "1 case published 2026-07-16 with 4 intent routes and 1 knowledge-search route",
+              "note": "The Taiwan implementation separates greetings, career questions, resume processing, and booking, then explains why only the evidence-dependent route should expose knowledge search."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "taiwan-practitioner-series-observation",
+              "sourceUrl": "https://ithelp.ithome.com.tw/articles/10387588",
+              "query": "RAG 上下文優化 token 成本",
+              "capturedAt": "2026-08-23",
+              "language": "zh-TW",
+              "geography": "TW",
+              "nativeUnit": "tested strategies in one article",
+              "value": "4 RAG context-optimization strategies",
+              "note": "The article frames retrieved-context selection as a practical token and answer-quality problem; it is independent corroboration, not search-volume evidence."
+            }
+          ],
           "existingOwner": null,
           "coverage": "gap",
-          "researchNeeded": "Identify natural Taiwan wording for context window, token use, document rereading, and retrieval timing."
+          "researchNeeded": "Use Taiwan-natural terms such as 查知識庫, 上下文, and token 成本; avoid a literal translation of the English title."
         },
         "zh-CN": {
           "queryFamily": [
@@ -1082,33 +1248,77 @@
             "AI 知识库降低上下文 token 成本",
             "避免 AI 重复读取文档"
           ],
-          "serpEvidence": [],
-          "demandEvidence": [],
+          "serpEvidence": [
+            {
+              "sourceType": "simplified-chinese-product-doc-serp-observation",
+              "sourceUrl": "https://jit.pro/zh/docs/devguide/knowledge-base/integrate-knowledge-base-into-agent",
+              "query": "Agent 什么时候查询知识库",
+              "capturedAt": "2026-08-23",
+              "language": "zh-CN",
+              "geography": "CN",
+              "nativeUnit": "documented retrieval modes",
+              "value": "3 knowledge-base modes plus autonomous-query or pre-retrieval choice",
+              "note": "JitAI documents intelligent, custom, and disabled modes, then distinguishes agent-decided querying from mandatory pre-retrieval for evidence-critical tasks."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "simplified-chinese-oss-doc-observation",
+              "sourceUrl": "https://docs.openviking.ai/zh/concepts/03-context-layers",
+              "query": "AI 知识库 上下文 分层 按需加载",
+              "capturedAt": "2026-08-23",
+              "language": "zh-CN",
+              "geography": "CN",
+              "nativeUnit": "documented context layers",
+              "value": "L0 256 characters, L1 4000 characters, and L2 full content loaded on demand",
+              "note": "The maintained OSS documentation independently demonstrates progressive disclosure from a short abstract to an overview and then exact source content."
+            }
+          ],
           "existingOwner": null,
           "coverage": "gap",
-          "researchNeeded": "Identify mainland Chinese phrasing for context cost, token consumption, document rereading, and retrieval strategy."
+          "researchNeeded": "Use simplified-Chinese decision wording such as 按场景查阅, 自主决定查询, 预检索, and 按需加载 instead of a generic token-saving headline."
         }
       },
       "gates": {
         "provenance": {
-          "status": "pending",
-          "reason": "No current trilingual demand capture has been stored.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "Every stored observation preserves the exact query, URL, capture date, language, geography, source-native unit, value, and interpretation boundary.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence",
+            "locales.en.demandEvidence",
+            "locales.zh-TW.serpEvidence",
+            "locales.zh-TW.demandEvidence",
+            "locales.zh-CN.serpEvidence",
+            "locales.zh-CN.demandEvidence"
+          ]
         },
         "repeatedDemand": {
-          "status": "pending",
-          "reason": "The cost and retrieval task needs independent high-intent or repeated evidence.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "Independent official, practitioner, product-documentation, and OSS sources repeat the same retrieval-timing and progressive-disclosure task across all three locales.",
+          "evidenceRefs": [
+            "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+            "https://www.cythilya.tw/2026/07/16/careerwise-search-knowledge-tool/",
+            "https://jit.pro/zh/docs/devguide/knowledge-base/integrate-knowledge-base-into-agent",
+            "https://docs.openviking.ai/zh/concepts/03-context-layers"
+          ]
         },
         "trilingualSerp": {
-          "status": "pending",
-          "reason": "Three locale result sets are not captured.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "Separate English, Taiwan, and Simplified-Chinese result sets expose the same decision task through locale-natural wording rather than translated keyword variants.",
+          "evidenceRefs": [
+            "locales.en.queryFamily",
+            "locales.zh-TW.queryFamily",
+            "locales.zh-CN.queryFamily"
+          ]
         },
         "cleanGap": {
-          "status": "pending",
-          "reason": "English partially overlaps an existing memory-versus-knowledge-base comparison; Mandarin appears unmapped but still needs SERP proof.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "Existing owners explain layer roles, setup, and source-backed architecture, but none owns the task-level decision matrix for query, skip, pre-retrieve, index-first, exact-source, and progressive-disclosure behavior.",
+          "evidenceRefs": [
+            "src/app/(en)/learn/articles.ts:900",
+            "src/app/(en)/learn/seo-articles.ts:928",
+            "docs/seo-audits/2026-08-22-search-intent-map.md"
+          ]
         },
         "firstPartyProof": {
           "status": "passed",
@@ -1133,9 +1343,12 @@
           ]
         },
         "authorityPath": {
-          "status": "pending",
-          "reason": "A suitable agent-runtime or context-engineering reference surface must be selected.",
-          "evidenceRefs": []
+          "status": "passed",
+          "reason": "Awesome Context Engineering is active, explicitly accepts pull requests, and contains context optimization and coding-agent project-memory sections; any Wenlan follow-up must wait for existing PR #108 to resolve.",
+          "evidenceRefs": [
+            "https://github.com/Meirtz/Awesome-Context-Engineering",
+            "https://github.com/Meirtz/Awesome-Context-Engineering/pull/108"
+          ]
         }
       },
       "wenlanProof": [
@@ -1151,7 +1364,7 @@
         }
       ],
       "standaloneUtility": "A neutral policy can tell agents when to retrieve an index, open an exact source, use a maintained page, or skip retrieval because the authoritative file is already in context.",
-      "overlapCheck": "English may refresh the current comparison if SERP intent matches. Mandarin net-new routes require independent locale evidence and must not become generic token-optimization pages.",
+      "overlapCheck": "The memory-versus-knowledge-base owner explains which layer stores what, and the coding-agent owner explains AGENTS.md versus repository and maintained knowledge. This family alone owns the per-task retrieval policy: when to query, skip, pre-retrieve, inspect an index, open an exact source, and stop searching.",
       "internalLinks": [
         "https://wenlan.app/learn/ai-work-memory-vs-knowledge-base",
         "https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents",
@@ -1165,10 +1378,10 @@
       ],
       "authorityPath": {
         "type": "context-engineering-reference",
-        "target": "An active coding-agent or context-engineering documentation or discussion surface with an exact retrieval-policy gap",
-        "status": "research-required"
+        "target": "Meirtz/Awesome-Context-Engineering context optimization or coding-agent project-memory section after existing Wenlan PR #108 resolves",
+        "status": "predeclared-waiting-on-existing-pr-108"
       },
-      "nextResearchDirection": "Compare retrieval-timing and token-cost SERPs across locales, then corroborate with current agent-runtime issues or docs before deciding whether the English owner is enough.",
+      "nextResearchDirection": "The trilingual retrieval-policy family is locally implemented, verified, and publication-approved. Commit and publish only the approved website and control-plane scope, then verify production without requesting indexing. Keep the external authority path waiting until existing Wenlan PR #108 resolves.",
       "readout": {
         "gsc": {
           "status": "unavailable",
@@ -1182,7 +1395,10 @@
     },
     {
       "id": "document-pdf-ingestion-failures",
+      "audience": "People building an AI knowledge base from mixed long documents, Markdown, text PDFs, and scanned PDFs",
+      "trigger": "A document import returns empty text, garbled chunks, missing citations, unsupported files, or an apparent ingestion failure",
       "userTask": "Handle long documents, text PDFs, scanned PDFs, and AI knowledge-base ingestion failures",
+      "desiredOutcome": "Classify the source correctly, apply OCR only when required, preserve file and page provenance, and verify usable text before trusting downstream answers",
       "stage": "troubleshoot",
       "decision": "research",
       "plannedWindow": "unassigned-fallback",
@@ -1317,7 +1533,10 @@
     },
     {
       "id": "multi-agent-knowledge-write-conflicts",
+      "audience": "Teams running multiple AI agents that read from and write to shared project knowledge",
+      "trigger": "Two or more agents create overlapping summaries, supersede the same conclusion, or reuse knowledge after its source has changed",
       "userTask": "Prevent conflicts and stale conclusions when multiple AI agents write to shared knowledge",
+      "desiredOutcome": "Assign source and write ownership, surface conflicts before publication, review superseding claims, and preserve an auditable history",
       "stage": "maintain",
       "decision": "research",
       "plannedWindow": "unassigned-fallback",
