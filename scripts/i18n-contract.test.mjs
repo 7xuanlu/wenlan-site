@@ -534,6 +534,7 @@ test("localized Learn slug route supports per-locale acquisition page availabili
     "/learn/coding-agent-source-backed-knowledge-base",
     "/learn/verify-ai-knowledge-base-citations",
     "/learn/when-ai-agent-should-query-knowledge-base",
+    "/learn/fix-pdf-ingestion-ai-knowledge-base",
   ]);
   assert.match(source, /getLocalizedLearnArticle/);
   assert.match(source, /TRANSLATED_LEARN_SLUGS/);
@@ -856,6 +857,8 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
     { locale: "zh-CN", slug: "verify-ai-knowledge-base-citations" },
     { locale: "zh-TW", slug: "when-ai-agent-should-query-knowledge-base" },
     { locale: "zh-CN", slug: "when-ai-agent-should-query-knowledge-base" },
+    { locale: "zh-TW", slug: "fix-pdf-ingestion-ai-knowledge-base" },
+    { locale: "zh-CN", slug: "fix-pdf-ingestion-ai-knowledge-base" },
   ]);
 
   const metadata = await localizedLearnSlug.generateMetadata({
@@ -1376,6 +1379,57 @@ test("English document-to-knowledge-base guide owns the implementation gap", asy
   assert.match(text, /do not ingest arbitrary source-code files/);
   assert.match(article.cta.heading, /knowledge-base loop/);
   assert.ok(article.officialReferences?.length >= 3);
+});
+
+test("PDF ingestion troubleshooting guide owns a distinct three-locale diagnostic task", async () => {
+  const { getArticle } = await import("../src/app/(en)/learn/articles.ts");
+  const { getLocalizedLearnArticle } = await import(
+    "../src/i18n/learn-articles.ts"
+  );
+  const slug = "fix-pdf-ingestion-ai-knowledge-base";
+  const english = getArticle(slug);
+
+  assert.ok(english);
+  assert.equal(
+    english.title,
+    "PDF Failed to Ingest into Your AI Knowledge Base? Diagnose It First",
+  );
+  assert.equal(english.publishedAt, "2026-08-23");
+  assert.equal(english.updatedAt, "2026-08-23");
+  assert.ok(english.keywords.includes("AI knowledge base PDF ingestion failed"));
+  assert.match(JSON.stringify(english), /10 MB/);
+  assert.match(JSON.stringify(english), /no OCR in v1/);
+  assert.match(JSON.stringify(english), /wenlan sources add/);
+  assert.match(JSON.stringify(english), /found, ingested, skipped, and error/);
+  assert.ok(english.officialReferences?.length >= 5);
+
+  const expectations = {
+    "zh-TW": {
+      title: "AI 知識庫匯入 PDF 失敗？先判斷掃描檔、文字層與解析錯誤",
+      keyword: "AI 知識庫 PDF 匯入失敗",
+      scan: "掃描型 PDF",
+      error: "解析錯誤",
+    },
+    "zh-CN": {
+      title: "AI 知识库导入 PDF 失败？先判断扫描件、文本层与解析错误",
+      keyword: "AI 知识库 PDF 导入失败",
+      scan: "扫描型 PDF",
+      error: "解析错误",
+    },
+  };
+
+  for (const [locale, expected] of Object.entries(expectations)) {
+    const article = getLocalizedLearnArticle(locale, slug);
+    assert.ok(article);
+    assert.equal(article.title, expected.title);
+    assert.equal(article.publishedAt, "2026-08-23");
+    assert.equal(article.updatedAt, "2026-08-23");
+    assert.ok(article.keywords.includes(expected.keyword));
+    assert.match(JSON.stringify(article), new RegExp(expected.scan));
+    assert.match(JSON.stringify(article), new RegExp(expected.error));
+    assert.match(JSON.stringify(article), /wenlan sources add/);
+    assert.ok(article.officialReferences?.length >= 5);
+  }
 });
 
 test("AI knowledge-base tool-selection guide is available in all acquisition locales", async () => {
