@@ -20,6 +20,10 @@ pnpm seo:weekly:sample    # Fixture-backed weekly SEO pipeline health check
 pnpm seo:weekly:run -- --date YYYY-MM-DD
 pnpm seo:gsc:fetch -- --date YYYY-MM-DD
 pnpm seo:ai-visibility -- --date YYYY-MM-DD
+pnpm seo:goal:check
+pnpm seo:scenario:check
+pnpm seo:scenario:update
+pnpm seo:intent:check
 pnpm seo:technical:built
 pnpm seo:technical:deployed
 ```
@@ -46,6 +50,29 @@ The SEO tests read sibling Wenlan and wenlan-app checkouts for current source fa
 - Keep visible FAQ text where useful, but do not add `FAQPage` JSON-LD unless Google eligibility changes for ordinary software sites.
 - Keep canonical public URLs in the sitemap. Old `/guides/*`, `/docs/guides/*`, and legacy pre-Wenlan Learn slugs should redirect, not appear in the sitemap.
 - `/llms.txt`, `/llms-full.txt`, `/feed.xml`, `/humans.txt`, manifest, and static assets intentionally receive noindex-style headers where configured.
+
+## SEO Campaign Control Plane
+
+This section is an index, not a second copy of the campaign contract. Keep the
+detailed rules in their versioned source files so they cannot drift between
+documents.
+
+- **Tier 0 — entrypoint:** `AGENTS.md` contains routing, required reads, commands,
+  and stop conditions only. Do not copy the full campaign contract into it.
+- **Tier 1 — contract:** Before every SEO campaign action, read the complete
+  current `PLAN.md` and run `pnpm seo:goal:check`. Stop if it fails; do not
+  continue from a chat summary.
+- **Tier 2 — structured state:** `EXPERIMENTS.md` is the append-only experiment
+  and readout ledger. `docs/seo-scenario-backlog.json` is the only editable
+  scenario source; `docs/seo-scenario-backlog.md` is generated. Validate with
+  `pnpm seo:scenario:check` and regenerate with `pnpm seo:scenario:update`.
+  Search-intent ownership is derived from the canonical sitemap and content by
+  `scripts/seo-intent-map.mjs`; run `pnpm seo:intent:check`.
+- **Tier 3 — evidence:** Reuse the latest successfully completed weekly SEO
+  report before collecting overlapping GSC or Vercel evidence. Dated files
+  under `docs/seo-audits/` are evidence snapshots, not editable contract or
+  state. Keep GSC, Vercel, Umami, GitHub, Trends, SERP, community, and OSS
+  observations in their native units and evidence roles defined by `PLAN.md`.
 
 ## Theming And UI
 
