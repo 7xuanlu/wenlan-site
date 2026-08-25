@@ -36,6 +36,36 @@ const CAMPAIGN_WINDOW_ANCHOR = new Date("2026-07-18T00:00:00.000Z");
 const HISTORICAL_CAMPAIGN_DEADLINE = new Date("2026-08-18T00:00:00.000Z");
 const SUCCESSOR_CAMPAIGN_DEADLINE = new Date("2026-09-21T00:00:00.000Z");
 
+const requiredAgentsSeoIndexClauses = [
+  "## SEO Campaign Control Plane",
+  "Tier 0 — entrypoint",
+  "Tier 1 — contract",
+  "Tier 2 — structured state",
+  "Tier 3 — evidence",
+  "Before every SEO campaign action",
+  "read the complete current `PLAN.md`",
+  "`pnpm seo:goal:check`",
+  "`EXPERIMENTS.md` is the append-only experiment and readout ledger",
+  "`docs/seo-scenario-backlog.json` is the only editable scenario source",
+  "`docs/seo-scenario-backlog.md` is generated",
+  "`pnpm seo:scenario:check`",
+  "`pnpm seo:scenario:update`",
+  "`scripts/seo-intent-map.mjs`",
+  "`pnpm seo:intent:check`",
+  "Reuse the latest successfully completed weekly SEO report",
+];
+
+export function validateAgentsSeoIndex(agents) {
+  const errors = [];
+  const normalizedAgents = agents.replace(/\s+/g, " ");
+  for (const clause of requiredAgentsSeoIndexClauses) {
+    if (!normalizedAgents.includes(clause)) {
+      errors.push(`AGENTS.md SEO campaign index is missing: ${clause}`);
+    }
+  }
+  return errors;
+}
+
 const requiredFrozenClauses = [
   ["deadline 2026-08-18", "Deadline: 2026-08-18."],
   ["GitHub total stars >= 100", "GitHub total stars >= 100 at the deadline."],
@@ -1380,7 +1410,11 @@ function parseArgs(argv) {
       throw new Error(`Unexpected argument: ${argument}`);
     }
     const key = argument.slice(2);
-    if (!["plan", "experiments", "scenario", "scenario-report"].includes(key)) {
+    if (
+      !["plan", "experiments", "scenario", "scenario-report", "agents"].includes(
+        key,
+      )
+    ) {
       throw new Error(`Unknown option: ${argument}`);
     }
     const value = argv[index + 1];
@@ -1391,6 +1425,7 @@ function parseArgs(argv) {
     index += 1;
   }
   return {
+    agentsPath: resolve(values.agents ?? resolve(repoRoot, "AGENTS.md")),
     planPath: resolve(values.plan ?? resolve(repoRoot, "PLAN.md")),
     experimentsPath: resolve(values.experiments ?? resolve(repoRoot, "EXPERIMENTS.md")),
     scenarioPath: resolve(
@@ -1404,10 +1439,15 @@ function parseArgs(argv) {
 }
 
 async function run() {
-  const { planPath, experimentsPath, scenarioPath, scenarioReportPath } = parseArgs(
-    process.argv.slice(2),
-  );
-  const [plan, experiments, scenarioJson, scenarioReport] = await Promise.all([
+  const {
+    agentsPath,
+    planPath,
+    experimentsPath,
+    scenarioPath,
+    scenarioReportPath,
+  } = parseArgs(process.argv.slice(2));
+  const [agents, plan, experiments, scenarioJson, scenarioReport] = await Promise.all([
+    readFile(agentsPath, "utf8"),
     readFile(planPath, "utf8"),
     readFile(experimentsPath, "utf8"),
     readFile(scenarioPath, "utf8"),
@@ -1416,6 +1456,7 @@ async function run() {
   const scenarioBacklog = JSON.parse(scenarioJson);
   const { buildPageIntentRows } = await import("./seo-intent-map.mjs");
   const errors = [
+    ...validateAgentsSeoIndex(agents),
     ...validateExperimentsAppendOnlyBaseline(experiments),
     ...validateGoalControlPlane({
       plan,
@@ -1432,7 +1473,7 @@ async function run() {
     return;
   }
   console.log(
-    "[seo-goal] PASS: goal contracts, trilingual scenario backlog, acquisition focus, and production-concurrency guard verified.",
+    "[seo-goal] PASS: AGENTS index, goal contracts, trilingual scenario backlog, acquisition focus, and production-concurrency guard verified.",
   );
 }
 

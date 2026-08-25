@@ -8355,3 +8355,17 @@ increase for that experiment.
 - Decision: wait
 - Next step: Keep 2026-08-24T06:26:03Z fixed as the content production boundary and measure each locale independently in source-native GSC page/query and Vercel page/referrer units. A later controller-only deployment does not move the boundary. No request indexing, GSC validation, analytics mutation, or external publication occurred.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-24-multi-agent-knowledge-conflicts-locales indexing request
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-24-multi-agent-knowledge-conflicts-locales
+- Observed at: 2026-08-25T02:18:58Z
+- Readout: correction
+- Status: measuring
+- Evidence: Using authenticated Search Console account `Qi-Xuan Lu (h164654156465@gmail.com)`, the live English, zh-TW, and zh-CN routes each showed `URL is not on Google`, `URL is unknown to Google`, and no last crawl before the one approved request. All three returned `Indexing requested` and were accepted into Google's priority crawl queue. This does not prove a crawl, indexing, rank, impressions, or clicks, and repeated submission does not change queue position or priority.
+- Result: pending
+- Decision: wait
+- Next step: Keep the fixed `2026-08-24T06:26:03Z` production boundary, do not repeat the indexing requests, and read each locale independently in source-native GSC page/query and Vercel page/referrer units when available.
+<!-- EXPERIMENT-RECORD:END -->

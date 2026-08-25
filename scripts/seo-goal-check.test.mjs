@@ -7,6 +7,7 @@ import test from "node:test";
 import { promisify } from "node:util";
 
 import {
+  validateAgentsSeoIndex,
   validateExperimentsAppendOnlyBaseline,
   validateGoalControlPlane,
 } from "./seo-goal-check.mjs";
@@ -16,6 +17,7 @@ const repoRoot = resolve(import.meta.dirname, "..");
 const goalCheckScript = resolve(import.meta.dirname, "seo-goal-check.mjs");
 const execFileAsync = promisify(execFile);
 const canonicalPlan = await readFile(resolve(repoRoot, "PLAN.md"), "utf8");
+const canonicalAgents = await readFile(resolve(repoRoot, "AGENTS.md"), "utf8");
 const canonicalExperiments = await readFile(resolve(repoRoot, "EXPERIMENTS.md"), "utf8");
 const canonicalScenarioBacklog = JSON.parse(
   await readFile(resolve(repoRoot, "docs/seo-scenario-backlog.json"), "utf8"),
@@ -55,6 +57,27 @@ assert.ok(
   Number.isInteger(canonicalActiveExperimentCount),
   "PLAN.md must expose the active experiment count",
 );
+
+test("AGENTS.md keeps the fail-closed SEO control-plane index", () => {
+  assert.deepEqual(validateAgentsSeoIndex(canonicalAgents), []);
+
+  for (const requiredText of [
+    "Before every SEO campaign action",
+    "Tier 0 — entrypoint",
+    "Tier 1 — contract",
+    "Tier 2 — structured state",
+    "Tier 3 — evidence",
+    "docs/seo-scenario-backlog.json",
+    "pnpm seo:intent:check",
+  ]) {
+    const mutated = canonicalAgents.replaceAll(requiredText, "removed-index-entry");
+    assert.ok(
+      validateAgentsSeoIndex(mutated).some((error) =>
+        error.includes("AGENTS.md SEO campaign index"),
+      ),
+    );
+  }
+});
 
 function removeCurrentExperiment(experiments = canonicalExperiments) {
   return experiments.replace(

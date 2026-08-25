@@ -3512,3 +3512,103 @@ unchanged.
   PR, merge, Vercel deployment, request indexing, GSC validation, analytics
   mutation, paid action, synthetic event, and external publication remain
   excluded.
+
+## Campaign action: GSC queue and next-scenario demand research at 2026-08-25T02:18:58Z
+
+- The user explicitly approved one GSC Request Indexing action for each live
+  locale of `EXP-2026-08-24-multi-agent-knowledge-conflicts-locales` and a new
+  trilingual demand-research pass.
+- Authenticated Search Console account: `Qi-Xuan Lu
+  (h164654156465@gmail.com)`. English, zh-TW, and zh-CN each showed `URL is not
+  on Google`, `URL is unknown to Google`, and no last crawl before submission.
+  All three returned `Indexing requested`. This is queue acceptance only, not
+  evidence of a crawl, indexing, rank, impressions, or clicks; do not repeat
+  the requests to try to change queue priority.
+- Research decision: promote `retrieval-regression-golden-dataset` for exact
+  contract review. Its task is to build a versioned golden query set and
+  compare retrieval after corpus, chunking, embedding, reranker, top-k, or
+  retrieval-policy changes. English, Taiwan Traditional Chinese, and Mainland
+  Simplified Chinese each have dated independent observations, a clean owner
+  gap, maintained Wenlan evaluation proof, standalone utility, three planned
+  same-locale internal paths, and a first-party authority path.
+- Duplicate or unsupported candidates were not promoted: source-deletion
+  reconciliation overlaps the existing source-backed owner; coding-agent
+  onboarding overlaps an experiment already measuring; permission-aware team
+  knowledge lacks current Wenlan RBAC or tenant-ACL proof.
+- Complete provenance and native-unit observations are stored in
+  `docs/seo-audits/2026-08-24-next-scenario-demand-research.md`. The exact new
+  family is not yet added to the protected scenario backlog and no content
+  implementation, publication, deployment, additional indexing request, GSC
+  validation, analytics mutation, or external action is authorized by this
+  research record.
+- Evidence continuity: the latest completed weekly report available to this
+  task is the `2026-08-21` report, but it is not committed on current
+  `origin/main`. Preserve its source-native values as an external read-only
+  input and record the missing report as a version-control gap; do not rebuild
+  or invent a substitute.
+
+## Campaign correction: highest-leverage intent at 2026-08-25T04:50:58Z
+
+- Supersedes only the next-action recommendation to promote
+  `retrieval-regression-golden-dataset`. That candidate still passes its
+  quality gate but remains in research because it is not the largest current
+  opportunity.
+- The corrected next priority is the existing trilingual LLM Wiki owner. In a
+  single worldwide past-12-month Google Trends comparison, normalized average
+  indices were `Obsidian AI` 49, `AI knowledge base` 31, `LLM wiki` 22,
+  `RAG evaluation` 19, and `RAG tutorial` 9. Ubersuggest separately estimated
+  US monthly volumes of `LLM wiki` 6,600, `Obsidian AI` 4,400,
+  `AI powered knowledge base software` 1,600, `AI knowledge base` 880,
+  `RAG evaluation` 210, and `RAG knowledge base` 140. Do not convert or combine
+  these source-native units.
+- OpenSEO is authenticated as `h164654156465@gmail.com` for the `wenlan.app`
+  project, but reports zero hosted credits, so paid DataForSEO keyword metrics
+  were unavailable. Its authenticated GSC read worked. Ubersuggest's requested
+  Taiwan and China reports linked to US `locId=2840`, so their localized
+  absolute-volume rows are invalid and excluded.
+- Current final GSC range `2026-07-25..2026-08-22`: the English LLM Wiki page
+  has 21 page impressions and 1 click; its visible query rows have 7
+  impressions and 1 click. Exact `llm wiki` has 4 impressions, 1 click, and
+  average position 11.5. The zh-TW page has 1 page impression and the zh-CN
+  page has 6; their missing visible query rows remain unavailable rather than
+  zero.
+- The generic `llm wiki` SERP matches Wenlan directly but does not show Wenlan
+  in the first ten organic results; a `site:wenlan.app` query returns the live
+  canonical. Treat this as a ranking and authority gap, not an indexing gap.
+  `Obsidian AI` is larger but primarily navigational/plugin intent, while broad
+  AI-knowledge-base software results primarily serve enterprise customer
+  support. LLM Wiki therefore has the best demand-to-product-fit leverage.
+- Next action: prepare an exact English existing-page refresh and authority
+  plan without changing the canonical or starting a new URL. The English page
+  clears the 20-page-impression and three-qualified-query floor; the Mandarin
+  pages do not and remain stable. No website edit, content experiment,
+  authority placement, commit, push, PR, merge, deployment, indexing request,
+  validation, analytics mutation, or external publication is authorized by
+  this correction.
+
+## Campaign gate: LLM Wiki post-crawl hold at 2026-08-25T05:07:10Z
+
+- The user approved local execution of the highest-leverage LLM Wiki work and
+  requested that the durable SEO rules be indexed from `AGENTS.md` rather than
+  left in chat memory. The durable hierarchy is Tier 0 `AGENTS.md` entrypoint,
+  Tier 1 `PLAN.md` contract, Tier 2 structured experiment, scenario, and intent
+  state, and Tier 3 dated evidence. The Goal verifier now checks that index and
+  tier structure instead of duplicating the full contract in `AGENTS.md`.
+- Authenticated OpenSEO URL Inspection for
+  `https://wenlan.app/learn/distilled-wiki-pages-ai-memory` reports submitted
+  and indexed, exact Google and user canonicals, indexing allowed, successful
+  fetch, mobile crawl, and last crawl `2026-07-29T01:09:29Z`.
+- That crawl predates the current LLM Wiki production version deployed at
+  `2026-08-02T04:39:55Z`. The English page clears the 20-page-impression and
+  three-qualified-query performance floors, but it does not have a confirmed
+  post-deploy crawl or 28 complete cooldown days. Do not stack another page,
+  metadata, schema, internal-link, or copy edit on the same canonical.
+- Authority-first preparation is recorded in
+  `docs/seo-audits/2026-08-25-llm-wiki-authority-plan.md`. The preferred next
+  publication is a three-language link from Wenlan's maintained source README
+  LLM-wiki explanation to the existing locale guide. A neutral companion-guide
+  link on the existing Awesome LLM Wiki row is a separate external candidate.
+- No website article, Mandarin copy, canonical, sitemap, schema, or internal
+  link changed. No commit, push, PR, merge, deployment, indexing request, GSC
+  validation, analytics mutation, paid action, or external publication is
+  authorized by this gate record.
