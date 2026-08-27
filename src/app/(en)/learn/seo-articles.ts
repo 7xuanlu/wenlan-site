@@ -1733,6 +1733,7 @@ const workflowArticles: BaseSpec[] = [
       "source-backed-wiki-pages-ai-work",
       "distilled-wiki-pages-ai-memory",
       "verify-ai-knowledge-base-citations",
+      "test-ai-knowledge-base-retrieval-after-changes",
     ],
     officialReferences: [
       {
@@ -2640,6 +2641,7 @@ const trustArticles: BaseSpec[] = [
       "distilled-wiki-pages-ai-memory",
       "when-ai-agent-should-query-knowledge-base",
       "ai-memory-provenance",
+      "test-ai-knowledge-base-retrieval-after-changes",
     ],
     officialReferences: [
       {
@@ -2718,7 +2720,7 @@ const trustArticles: BaseSpec[] = [
       "Should I import every note before starting?",
       "No. Start with one repeated, high-value topic and prove its source, capture, distill, inspection, lint, and review loop before expanding.",
     ],
-    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "prevent-multi-agent-knowledge-conflicts", "review-before-trust-ai-memory", "ai-memory-provenance"],
+    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "test-ai-knowledge-base-retrieval-after-changes", "prevent-multi-agent-knowledge-conflicts", "review-before-trust-ai-memory", "ai-memory-provenance"],
     officialReferences: [
       {
         label: "Wenlan knowledge model",
@@ -2979,9 +2981,145 @@ const trustArticles: BaseSpec[] = [
   },
 ];
 
+const retrievalRegressionArticle: LearnArticle = {
+  slug: "test-ai-knowledge-base-retrieval-after-changes",
+  eyebrow: "Retrieval regression",
+  category: "Workflows",
+  title: "How to Regression-Test AI Knowledge Base Retrieval After Changes",
+  description:
+    "Use a versioned golden query set to find RAG retrieval regressions after corpus, embedding, chunking, hybrid search, or reranker changes.",
+  metaTitle: "RAG Retrieval Regression Testing | Wenlan",
+  metaDescription:
+    "Regression-test AI knowledge-base retrieval with golden queries, expected sources, Recall@k, MRR, no-answer cases, failure triage, and rollback.",
+  keywords: [
+    "RAG retrieval regression testing",
+    "RAG golden dataset",
+    "AI knowledge base retrieval evaluation",
+    "embedding change retrieval regression",
+    "chunking regression test RAG",
+    "reranker regression testing",
+  ],
+  publishedAt: "2026-08-26",
+  updatedAt: "2026-08-26",
+  author: AUTHOR,
+  readingTime: "8 min read",
+  audience:
+    "Developers changing an AI knowledge base corpus, embedding model, chunking, hybrid retrieval, or reranker",
+  heroBullets: [
+    "Freeze representative questions and their expected sources before changing retrieval.",
+    "Change one factor, then compare retrieval before evaluating answer generation.",
+    "Inspect every regression and keep rollback available until the new baseline is justified.",
+  ],
+  sections: [
+    {
+      heading: "Quick answer",
+      body: [
+        "To regression-test an AI knowledge base, version a small golden query set with expected source IDs or documents, no-answer cases, and a baseline manifest. Run the same set before and after one corpus or retrieval change, compare retrieval-only results first, inspect every lost or newly introduced source, and accept the change only when the differences are understood.",
+        "This is different from citation verification. Citation verification starts with one produced answer and checks whether its evidence supports each claim. Retrieval regression starts before generation and asks whether the same questions still retrieve the intended evidence after the system changes.",
+      ],
+    },
+    {
+      heading: "Run the test whenever retrieval inputs change",
+      body: [
+        "Re-run the suite after adding, deleting, or revising source documents; changing embeddings or chunk size; adjusting lexical-vector fusion; replacing a reranker; or changing filters and metadata. A fluent demo query is not enough because a change can improve one topic while silently removing evidence for another.",
+      ],
+      bullets: [
+        "Include frequent real questions, known failures, edge cases, and questions the corpus should not answer.",
+        "Keep the authoritative source revision beside each expected result so an intentional corpus change can invalidate the old label explicitly.",
+        "Do not refresh the golden set merely because the new system disagrees with it; investigate the disagreement first.",
+      ],
+    },
+    {
+      heading: "Define a versioned golden query set",
+      body: [
+        "Each case needs a stable ID, the natural user question, expected source IDs or documents, optional excluded sources, whether no answer is valid, and the reason the case matters. Store the corpus revision and retrieval configuration separately so two runs remain comparable.",
+      ],
+      code: {
+        label: "Minimal product-neutral golden-set record",
+        code: "version: 1\ncorpus_revision: docs-2026-08-26\ncases:\n  - id: install-windows\n    query: Which Windows package includes the desktop app?\n    expected_sources: [release-v0.16.0]\n    excluded_sources: [runtime-zip]\n    no_answer: false\n  - id: unsupported-pricing\n    query: What is the enterprise price?\n    expected_sources: []\n    no_answer: true",
+      },
+    },
+    {
+      heading: "Freeze the baseline, then change one factor",
+      body: [
+        "Record the corpus revision, embedding model, chunker and parameters, filters, hybrid weights, reranker version, top-k, and runtime environment. Change one factor at a time when possible. Otherwise the result may reveal drift without showing which change caused it.",
+        "Compare source-level Recall@k or Hit@k first, then MRR or NDCG when rank order matters. Keep no-answer cases and latency visible, but do not combine every measure into one score that hides a lost critical source.",
+      ],
+    },
+    {
+      heading: "Inspect regressions before judging generated answers",
+      body: [
+        "For every failed case, inspect the rewritten query, retrieved chunks, scores, source IDs, filters, fusion result, reranker output, and final ordering. Separate missing documents, wrong labels, extraction defects, metadata filters, embedding drift, chunk-boundary loss, and reranker changes. A bad expected-source label can make the test wrong, while a good aggregate score can still hide one dangerous regression.",
+        "Only after the expected evidence is available should you evaluate grounding or answer quality. Retrieval success does not prove that a model will use the evidence correctly; citation verification remains a separate downstream check.",
+      ],
+    },
+    {
+      heading: "Use Wenlan's maintainer drift test honestly",
+      body: [
+        "Wenlan's repository maintains labeled retrieval fixtures, retrieval-only Recall@5, MRR, and NDCG@10 snapshots, frozen ranking goldens, and an ignored ranking-drift test used by the main canary. The test detects drift, not correctness: it compares the current ranking with a trusted reference.",
+        "This is a Wenlan maintainer workflow, not a released `wenlan eval` end-user command or hosted CI feature. Users can still apply the product-neutral golden-set method above to any knowledge base and keep the exact source and rollback decision in their own repository.",
+      ],
+      code: {
+        label: "Wenlan repository maintainer-only drift check",
+        code: "cargo test -p wenlan-core --lib \\\n  eval::retrieval_drift::tests::ranking_drift_vs_golden \\\n  -- --ignored --nocapture",
+      },
+    },
+  ],
+  faqs: [
+    {
+      question: "How large should a RAG golden dataset be?",
+      answer:
+        "Start with enough representative questions to cover important sources, known failures, and no-answer behavior. A small reviewed set is better than a large unverified one; expand it from real failures and record why each case belongs.",
+    },
+    {
+      question: "Should I update the golden set after the corpus changes?",
+      answer:
+        "Only when the source contract intentionally changed. Review the old expectation against the new authoritative source, record the reason, and version the update instead of silently blessing the new result.",
+    },
+    {
+      question: "Does a passing retrieval regression test prove answer quality?",
+      answer:
+        "No. It proves that the tested retrieval behavior stayed within its declared contract. Generation, citation faithfulness, and source correctness require separate checks.",
+    },
+  ],
+  relatedSlugs: [
+    "verify-ai-knowledge-base-citations",
+    "source-backed-wiki-pages-ai-work",
+    "choose-ai-knowledge-base-tool",
+    "fix-pdf-ingestion-ai-knowledge-base",
+    "when-ai-agent-should-query-knowledge-base",
+  ],
+  officialReferences: [
+    {
+      label: "Wenlan evaluation methodology",
+      href: "https://wenlan.app/docs/evaluation",
+    },
+    {
+      label: "Wenlan retrieval drift source",
+      href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/src/eval/retrieval_drift.rs",
+    },
+    {
+      label: "Haystack retrieval debugging discussion",
+      href: "https://github.com/deepset-ai/haystack/discussions/11697",
+    },
+    {
+      label: "RAG evaluation and golden-set guide",
+      href: "https://dataaspirant.com/blog/rag-evaluation/",
+    },
+    {
+      label: "Merged retrieval regression implementation",
+      href: "https://github.com/inherent-prime/inherent/pull/140",
+    },
+  ],
+  cta: {
+    heading: "Freeze one retrieval baseline",
+    body: "Choose representative project questions, record their expected sources, and keep the baseline beside the source revisions before changing retrieval.",
+  },
+};
+
 export const seoArticles: LearnArticle[] = [
   ...setupArticles,
   ...workflowArticles,
   ...comparisonArticles,
   ...trustArticles,
-].map(makeArticle);
+].map(makeArticle).concat(retrievalRegressionArticle);

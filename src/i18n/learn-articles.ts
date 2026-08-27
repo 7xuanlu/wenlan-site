@@ -520,6 +520,7 @@ const zhTWArticles = {
       "verify-ai-knowledge-base-citations",
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
+      "test-ai-knowledge-base-retrieval-after-changes",
     ],
     officialReferences: [
       {
@@ -1105,6 +1106,7 @@ const zhTWArticles = {
       "source-backed-wiki-pages-ai-work",
       "distilled-wiki-pages-ai-memory",
       "verify-ai-knowledge-base-citations",
+      "test-ai-knowledge-base-retrieval-after-changes",
     ],
     officialReferences: [
       {
@@ -1405,6 +1407,140 @@ const zhTWArticles = {
       body: "連接 Wenlan，選一個會重複出現的專案問題，比較整批載入、按需查詢與直接讀來源，不預設一定省 Token。",
     },
   },
+  "test-ai-knowledge-base-retrieval-after-changes": {
+    slug: "test-ai-knowledge-base-retrieval-after-changes",
+    eyebrow: "檢索回歸測試",
+    category: "Workflows",
+    title: "AI 知識庫改版後，怎麼做 RAG 檢索回歸測試？",
+    description:
+      "用版本化黃金資料集，比較語料、embedding、切塊、混合檢索或 reranker 改動前後，是否仍找得到預期來源。",
+    metaTitle: "RAG 檢索回歸測試與黃金資料集 | Wenlan",
+    metaDescription:
+      "用黃金問題、預期來源、Recall@k、MRR、無答案案例、失敗分類與回滾，驗證 AI 知識庫改版後的檢索品質。",
+    keywords: [
+      "RAG 檢索回歸測試",
+      "RAG 黃金資料集",
+      "AI 知識庫召回準確率怎麼測",
+      "換 embedding 後怎麼驗證",
+      "RAG reranker 測試",
+      "AI 知識庫檢索評估",
+    ],
+    publishedAt: "2026-08-26",
+    updatedAt: "2026-08-26",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分鐘閱讀",
+    audience: "正在更換 AI 知識庫語料、embedding、切塊、混合檢索或 reranker 的開發者",
+    heroBullets: [
+      "改檢索前，先固定代表性問題與預期來源。",
+      "一次改一個因素，先比較檢索，再評估生成回答。",
+      "逐筆檢查退步案例，原因未釐清前保留回滾能力。",
+    ],
+    sections: [
+      {
+        heading: "先說結論",
+        body: [
+          "要驗證 AI 知識庫改版後的檢索品質，先建立一份有版本的黃金資料集：每題記錄自然提問、預期 source ID 或文件、無答案案例與基準設定。改動一項語料或檢索因素後，重跑同一批問題，先比較檢索結果，再檢查遺失或新增的來源，差異能被解釋才接受新版本。",
+          "這和引用驗證不同。引用驗證從一個已產生的回答出發，檢查來源是否支持每個主張；檢索回歸測試在生成回答之前，確認改版後是否仍取回原本應該出現的證據。",
+        ],
+      },
+      {
+        heading: "哪些改動之後要重跑？",
+        body: [
+          "新增、刪除或更新來源文件，更換 embedding，調整 chunk size、metadata filter、BM25 與向量權重、top-k 或 reranker，都可能讓某些問題變好、另一些問題卻找不到原本的證據。不要只用一題 demo 判定整體成功。",
+        ],
+        bullets: [
+          "收錄常見真實問題、已知失敗、邊界案例，以及知識庫不該回答的問題。",
+          "每個預期結果旁保留權威來源版本，來源真的改變時才明確更新標籤。",
+          "新系統與黃金答案不同時，先調查原因，不要直接把新結果 bless 成正確。",
+        ],
+      },
+      {
+        heading: "黃金資料集至少要記什麼？",
+        body: [
+          "每個案例需要穩定 ID、使用者自然問題、預期來源、禁止出現的來源、是否允許無答案，以及這題為何重要。語料版本與檢索設定要另外保存，否則兩次結果無法公平比較。",
+        ],
+        code: {
+          label: "最小黃金案例",
+          code: "version: 1\ncorpus_revision: docs-2026-08-26\ncases:\n  - id: windows-installer\n    query: Windows 桌面版應下載哪個檔案？\n    expected_sources: [release-v0.16.0]\n    excluded_sources: [runtime-zip]\n    no_answer: false\n  - id: enterprise-price\n    query: 企業版價格是多少？\n    expected_sources: []\n    no_answer: true",
+        },
+      },
+      {
+        heading: "固定基準，一次只改一個因素",
+        body: [
+          "記錄語料 revision、embedding 模型、切塊參數、filter、混合檢索權重、reranker 版本、top-k 與執行環境。能一次只改一項最好；同時改很多項時，測試可能看得出 drift，卻無法指出原因。",
+          "先比較 source-level Recall@k 或 Hit@k；排序重要時再看 MRR 或 NDCG。無答案案例與 latency 要分開保留，不要把所有數字合成一個分數，掩蓋關鍵來源消失。",
+        ],
+      },
+      {
+        heading: "先查檢索失敗，再看回答好不好",
+        body: [
+          "對每個失敗案例，依序檢查 query rewrite、取回片段、分數、source ID、filter、融合結果、reranker 與最後排序。把文件缺失、錯誤標籤、擷取失敗、metadata filter、embedding drift、切塊邊界與 reranker 變化分開。",
+          "預期來源本身也可能標錯；相反地，整體平均分數很好，也可能漏掉一個高風險問題。只有預期證據確實被取回後，才進一步評估 grounding、回答品質與引用。",
+        ],
+      },
+      {
+        heading: "誠實使用 Wenlan 的 maintainer drift test",
+        body: [
+          "Wenlan repository 維護有標籤的檢索 fixtures、只針對 retrieval 的 Recall@5、MRR、NDCG@10 快照、固定 ranking goldens，以及 main canary 使用的 ignored drift test。它偵測的是相對可信基準的漂移，不是絕對正確性。",
+          "這是 Wenlan 維護者工作流，不是已發布的 `wenlan eval` 使用者命令，也不是 hosted CI 功能。即使不用 Wenlan，你仍可把黃金資料集、來源版本與回滾決策放在自己的 repository。",
+        ],
+        code: {
+          label: "僅供 Wenlan repository 維護者使用",
+          code: "cargo test -p wenlan-core --lib \\\n  eval::retrieval_drift::tests::ranking_drift_vs_golden \\\n  -- --ignored --nocapture",
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: "RAG 黃金資料集要準備多少題？",
+        answer:
+          "先涵蓋重要來源、常見問題、已知失敗與無答案行為。少量但經過人工驗證的案例，比大量錯誤標籤更有用；之後再從真實失敗持續加入。",
+      },
+      {
+        question: "語料改變後，可以直接更新黃金答案嗎？",
+        answer:
+          "只有權威來源的契約真的改變時才更新。先對照新舊來源、記錄理由並建立新版本，不能因為新檢索結果不同就靜默 bless。",
+      },
+      {
+        question: "檢索回歸測試通過，就代表回答一定正確嗎？",
+        answer:
+          "不代表。它只證明測試範圍內的檢索符合契約；生成品質、引用是否支持主張，以及來源本身是否正確，都要另外檢查。",
+      },
+    ],
+    relatedSlugs: [
+      "verify-ai-knowledge-base-citations",
+      "source-backed-wiki-pages-ai-work",
+      "choose-ai-knowledge-base-tool",
+      "fix-pdf-ingestion-ai-knowledge-base",
+      "when-ai-agent-should-query-knowledge-base",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 評估方法",
+        href: "https://wenlan.app/docs/evaluation",
+      },
+      {
+        label: "Wenlan retrieval drift source",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/src/eval/retrieval_drift.rs",
+      },
+      {
+        label: "小丁的 RAG 檢索準確率除錯實錄",
+        href: "https://blog.tomting.com/2026/08/13/rag-retrieval-accuracy-eval-debug/",
+      },
+      {
+        label: "小丁的 BM25、切塊與 reranker ablation",
+        href: "https://blog.tomting.com/2026/08/15/rag-ablation-bm25-chunksize-reranker/",
+      },
+      {
+        label: "Microsoft zh-TW RAG 評估指南",
+        href: "https://learn.microsoft.com/zh-tw/azure/architecture/ai-ml/guide/rag/rag-llm-evaluation-phase",
+      },
+    ],
+    cta: {
+      heading: "先固定一份檢索基準",
+      body: "挑選代表性專案問題，記錄預期來源與版本，再開始改 embedding、切塊或 reranker。",
+    },
+  },
   "verify-ai-knowledge-base-citations": {
     slug: "verify-ai-knowledge-base-citations",
     eyebrow: "引用除錯",
@@ -1505,6 +1641,7 @@ const zhTWArticles = {
       "distilled-wiki-pages-ai-memory",
       "when-ai-agent-should-query-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
+      "test-ai-knowledge-base-retrieval-after-changes",
     ],
     officialReferences: [
       {
@@ -2295,6 +2432,7 @@ const zhCNArticles = {
       "verify-ai-knowledge-base-citations",
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
+      "test-ai-knowledge-base-retrieval-after-changes",
     ],
     officialReferences: [
       {
@@ -2882,6 +3020,7 @@ const zhCNArticles = {
       "source-backed-wiki-pages-ai-work",
       "distilled-wiki-pages-ai-memory",
       "verify-ai-knowledge-base-citations",
+      "test-ai-knowledge-base-retrieval-after-changes",
     ],
     officialReferences: [
       {
@@ -2908,6 +3047,140 @@ const zhCNArticles = {
     cta: {
       heading: "用同一套 8 项检查测试 Wenlan",
       body: "从一组小型来源开始，验证引用、更新与审核，再判断维护型本地知识层是否适合你的工作流。",
+    },
+  },
+  "test-ai-knowledge-base-retrieval-after-changes": {
+    slug: "test-ai-knowledge-base-retrieval-after-changes",
+    eyebrow: "召回回归测试",
+    category: "Workflows",
+    title: "AI 知识库改版后，怎么做 RAG 召回回归测试？",
+    description:
+      "用版本化黄金评测集，对比语料、Embedding、切块、混合检索或 reranker 改动前后，是否仍能召回预期来源。",
+    metaTitle: "RAG 召回回归测试与黄金评测集 | Wenlan",
+    metaDescription:
+      "用黄金问题、预期来源、Recall@k、MRR、无答案案例、失败分类与回滚，验证 AI 知识库改版后的召回质量。",
+    keywords: [
+      "RAG 召回回归测试",
+      "RAG 黄金评测集",
+      "知识库检索怎么评测",
+      "Embedding 升级召回漂移",
+      "RAG reranker 测试",
+      "AI 知识库检索评估",
+    ],
+    publishedAt: "2026-08-26",
+    updatedAt: "2026-08-26",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分钟阅读",
+    audience: "正在更换 AI 知识库语料、Embedding、切块、混合检索或 reranker 的开发者",
+    heroBullets: [
+      "改检索前，先固定代表性问题与预期来源。",
+      "一次改一个因素，先对比召回，再评估生成回答。",
+      "逐条检查退步案例，原因没查清前保留回滚能力。",
+    ],
+    sections: [
+      {
+        heading: "先说结论",
+        body: [
+          "要验证 AI 知识库改版后的检索质量，先建立一份有版本的黄金评测集：每题记录自然提问、预期 source ID 或文档、无答案案例与基准配置。改动一项语料或检索因素后，重跑同一批问题，先对比召回结果，再检查丢失或新增的来源，差异能够解释才接受新版本。",
+          "这和引用校验不同。引用校验从一个已经生成的回答出发，检查来源是否支持每个主张；召回回归测试发生在生成之前，确认改版后是否仍能取回原本应该出现的证据。",
+        ],
+      },
+      {
+        heading: "哪些改动之后要重跑？",
+        body: [
+          "新增、删除或更新来源文档，更换 Embedding，调整 chunk size、metadata filter、BM25 与向量权重、top-k 或 reranker，都可能让部分问题变好，却让另一些问题找不到原来的证据。不要只用一道 demo 题判断整体成功。",
+        ],
+        bullets: [
+          "收录常见真实问题、已知失败、边界案例，以及知识库不应该回答的问题。",
+          "每个预期结果旁保留权威来源版本，来源真的改变时才明确更新标签。",
+          "新系统与黄金答案不同时，先调查原因，不要直接把新结果 bless 成正确。",
+        ],
+      },
+      {
+        heading: "黄金评测集至少记录什么？",
+        body: [
+          "每个案例需要稳定 ID、用户自然问题、预期来源、禁止出现的来源、是否允许无答案，以及这道题为什么重要。语料版本与检索配置要单独保存，否则两次结果无法公平比较。",
+        ],
+        code: {
+          label: "最小黄金案例",
+          code: "version: 1\ncorpus_revision: docs-2026-08-26\ncases:\n  - id: windows-installer\n    query: Windows 桌面版应该下载哪个文件？\n    expected_sources: [release-v0.16.0]\n    excluded_sources: [runtime-zip]\n    no_answer: false\n  - id: enterprise-price\n    query: 企业版价格是多少？\n    expected_sources: []\n    no_answer: true",
+        },
+      },
+      {
+        heading: "固定基线，一次只改一个因素",
+        body: [
+          "记录语料 revision、Embedding 模型、切块参数、filter、混合检索权重、reranker 版本、top-k 与运行环境。能一次只改一项最好；同时改很多项时，测试也许看得出 drift，却无法指出原因。",
+          "先对比 source-level Recall@k 或 Hit@k；排序重要时再看 MRR 或 NDCG。无答案案例与 latency 要分开保留，不要把所有数字合成一个分数，掩盖关键来源消失。",
+        ],
+      },
+      {
+        heading: "先查召回失败，再看回答好不好",
+        body: [
+          "对每个失败案例，依次检查 query rewrite、召回片段、分数、source ID、filter、融合结果、reranker 与最终排序。把文档缺失、错误标签、提取失败、metadata filter、Embedding drift、切块边界与 reranker 变化分开。",
+          "预期来源本身也可能标错；反过来，整体平均分数很好，也可能漏掉一个高风险问题。只有预期证据确实被取回后，才继续评估 grounding、回答质量与引用。",
+        ],
+      },
+      {
+        heading: "诚实使用 Wenlan 的 maintainer drift test",
+        body: [
+          "Wenlan repository 维护了带标签的检索 fixtures、仅针对 retrieval 的 Recall@5、MRR、NDCG@10 快照、固定 ranking goldens，以及 main canary 使用的 ignored drift test。它检测的是相对可信基线的漂移，不是绝对正确性。",
+          "这是 Wenlan 维护者工作流，不是已发布的 `wenlan eval` 用户命令，也不是 hosted CI 功能。即使不用 Wenlan，你仍可把黄金评测集、来源版本与回滚决策保存在自己的 repository。",
+        ],
+        code: {
+          label: "仅供 Wenlan repository 维护者使用",
+          code: "cargo test -p wenlan-core --lib \\\n  eval::retrieval_drift::tests::ranking_drift_vs_golden \\\n  -- --ignored --nocapture",
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: "RAG 黄金评测集需要准备多少题？",
+        answer:
+          "先覆盖重要来源、常见问题、已知失败与无答案行为。少量但经过人工验证的案例，比大量错误标签更有用；之后再从真实失败持续补充。",
+      },
+      {
+        question: "语料改变后，可以直接更新黄金答案吗？",
+        answer:
+          "只有权威来源契约确实改变时才更新。先对照新旧来源、记录理由并创建新版本，不能因为新召回结果不同就静默 bless。",
+      },
+      {
+        question: "召回回归测试通过，就代表回答一定正确吗？",
+        answer:
+          "不代表。它只证明测试范围内的检索符合契约；生成质量、引用是否支持主张，以及来源本身是否正确，都要单独检查。",
+      },
+    ],
+    relatedSlugs: [
+      "verify-ai-knowledge-base-citations",
+      "source-backed-wiki-pages-ai-work",
+      "choose-ai-knowledge-base-tool",
+      "fix-pdf-ingestion-ai-knowledge-base",
+      "when-ai-agent-should-query-knowledge-base",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 评估方法",
+        href: "https://wenlan.app/docs/evaluation",
+      },
+      {
+        label: "Wenlan retrieval drift source",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/src/eval/retrieval_drift.rs",
+      },
+      {
+        label: "RAG 知识库召回调试指南",
+        href: "https://www.promptnet.cn/2026/06/09/rag-knowledge-base-retrieval-debugging/",
+      },
+      {
+        label: "Embedding 升级召回漂移指南",
+        href: "https://segmentfault.com/a/1190000048058746",
+      },
+      {
+        label: "CRUD-RAG 评测基准",
+        href: "https://github.com/IAAR-Shanghai/CRUD_RAG",
+      },
+    ],
+    cta: {
+      heading: "先固定一份召回基线",
+      body: "选择代表性项目问题，记录预期来源与版本，再开始更换 Embedding、切块或 reranker。",
     },
   },
   "verify-ai-knowledge-base-citations": {
@@ -3010,6 +3283,7 @@ const zhCNArticles = {
       "distilled-wiki-pages-ai-memory",
       "when-ai-agent-should-query-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
+      "test-ai-knowledge-base-retrieval-after-changes",
     ],
     officialReferences: [
       {

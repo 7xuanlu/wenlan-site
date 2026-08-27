@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-24",
+  "updatedAt": "2026-08-26",
   "campaign": {
     "deadline": "2026-09-21",
     "finalWindow": "2026-08-24..2026-09-20",
@@ -1858,6 +1858,281 @@
         "status": "predeclared-no-external-action"
       },
       "nextResearchDirection": "The trilingual owner is live and production-verified from the fixed 2026-08-24T06:26:03Z content boundary. Measure each locale independently in source-native GSC page/query and Vercel page/referrer units; do not infer keyword volume or publish to Hindsight without separate approval.",
+      "readout": {
+        "gsc": {
+          "status": "unavailable",
+          "nativeUnit": "page impressions, joined-query impressions, clicks"
+        },
+        "vercel": {
+          "status": "unavailable",
+          "nativeUnit": "target-page visitors and referrer visitors"
+        }
+      }
+    },
+    {
+      "id": "retrieval-regression-after-knowledge-base-changes",
+      "audience": "Developers and knowledge-base maintainers changing source documents, embeddings, chunking, hybrid retrieval, or reranking",
+      "trigger": "A retrieval configuration or corpus changes and the team needs to know whether representative questions still return the expected evidence",
+      "userTask": "Regression-test AI knowledge-base retrieval after corpus, embedding, chunking, or reranker changes",
+      "desiredOutcome": "Use a versioned golden query set to compare retrieval before and after one controlled change, identify regressions by expected source, and preserve a rollback decision",
+      "stage": "evaluate",
+      "decision": "net-new",
+      "plannedWindow": "2026-08-24..2026-08-30",
+      "publicationStatus": "prepared",
+      "locales": {
+        "en": {
+          "queryFamily": [
+            "RAG retrieval regression testing",
+            "RAG golden dataset",
+            "test AI knowledge base retrieval after embedding changes"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "practitioner-guide",
+              "sourceUrl": "https://dataaspirant.com/blog/rag-evaluation/",
+              "query": "RAG retrieval regression testing golden dataset",
+              "capturedAt": "2026-08-25",
+              "language": "en",
+              "geography": "web-search geography unspecified",
+              "nativeUnit": "published guide observation",
+              "value": "1 current evaluation guide",
+              "note": "The guide separates retrieval from generation, records expected sources, includes no-answer cases, and reuses a fixed set as a regression harness; this is not keyword volume."
+            },
+            {
+              "sourceType": "github-discussion",
+              "sourceUrl": "https://github.com/deepset-ai/haystack/discussions/11697",
+              "query": "debug retrieval failures golden set RAG",
+              "capturedAt": "2026-08-25",
+              "language": "en",
+              "geography": "global",
+              "nativeUnit": "discussion observation",
+              "value": "1 production-practitioner discussion",
+              "note": "The discussion separates single-query debugging, corpus health, and regression evaluation with a small golden set and document-level metrics."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "github-issue",
+              "sourceUrl": "https://github.com/lelabdev/rag-ferrite/issues/206",
+              "query": "versioned golden dataset retrieval regression",
+              "capturedAt": "2026-08-25",
+              "language": "en",
+              "geography": "global",
+              "nativeUnit": "issue request",
+              "value": "1 maintained-project feature request",
+              "note": "The request asks for a versioned golden dataset, Recall@k, MRR or nDCG, source precision, latency, deterministic comparison, and machine-readable output."
+            },
+            {
+              "sourceType": "merged-github-pull-request",
+              "sourceUrl": "https://github.com/inherent-prime/inherent/pull/140",
+              "query": "retrieval regression deltas quality gate",
+              "capturedAt": "2026-08-25",
+              "language": "en",
+              "geography": "global",
+              "nativeUnit": "merged implementation",
+              "value": "1 merged pull request",
+              "note": "The implementation compares retrieval runs, records deltas, and documents why an unverified zero baseline can make a hard gate ineffective."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Research is complete. Keep one owner for corpus, embedding, chunking, hybrid retrieval, and reranker changes; do not split implementation variants into separate pages."
+        },
+        "zh-TW": {
+          "queryFamily": [
+            "RAG 檢索回歸測試",
+            "RAG 黃金資料集",
+            "換 embedding 後怎麼驗證"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "taiwan-practitioner-guide",
+              "sourceUrl": "https://blog.tomting.com/2026/08/13/rag-retrieval-accuracy-eval-debug/",
+              "query": "RAG 檢索準確率 黃金資料集 除錯",
+              "capturedAt": "2026-08-25",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "practitioner result",
+              "value": "1 dated debugging record",
+              "note": "The record uses a gold set and Hit@k, then shows how a bad label pipeline created a false low score; it is not keyword volume."
+            },
+            {
+              "sourceType": "taiwan-practitioner-guide",
+              "sourceUrl": "https://blog.tomting.com/2026/08/15/rag-ablation-bm25-chunksize-reranker/",
+              "query": "RAG ablation chunk size reranker 黃金資料集",
+              "capturedAt": "2026-08-25",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "practitioner result",
+              "value": "1 dated ablation record",
+              "note": "The follow-up keeps one gold set, changes one factor at a time, and corrects an earlier reranker conclusion after increasing the question set."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "official-localized-documentation",
+              "sourceUrl": "https://learn.microsoft.com/zh-tw/azure/architecture/ai-ml/guide/rag/rag-llm-evaluation-phase",
+              "query": "RAG 評估 檢索 zh-TW",
+              "capturedAt": "2026-08-25",
+              "language": "zh-TW",
+              "geography": "Taiwan localization",
+              "nativeUnit": "official documentation observation",
+              "value": "1 current localized guide",
+              "note": "The guide separates retrieval relevance, grounding, completeness, utilization, and correctness; locale does not establish user geography."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Research is complete. Use Taiwan-natural 檢索回歸測試, 黃金資料集, 召回準確率, and 換 embedding 後怎麼驗證 wording."
+        },
+        "zh-CN": {
+          "queryFamily": [
+            "RAG 召回回归测试",
+            "RAG 黄金评测集",
+            "Embedding 升级召回漂移"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "mainland-developer-guide",
+              "sourceUrl": "https://www.promptnet.cn/2026/06/09/rag-knowledge-base-retrieval-debugging/",
+              "query": "知识库检索怎么评测 RAG 召回",
+              "capturedAt": "2026-08-25",
+              "language": "zh-CN",
+              "geography": "Mainland China community",
+              "nativeUnit": "published guide observation",
+              "value": "1 dated debugging guide",
+              "note": "The guide inspects query, retrieved chunks, scores, sources, rerank output, final context, and citations before changing the model."
+            },
+            {
+              "sourceType": "mainland-developer-guide",
+              "sourceUrl": "https://segmentfault.com/a/1190000048058746",
+              "query": "Embedding 升级 召回漂移 回归测试",
+              "capturedAt": "2026-08-25",
+              "language": "zh-CN",
+              "geography": "Mainland China community",
+              "nativeUnit": "published guide observation",
+              "value": "1 exact-task guide",
+              "note": "The guide uses a fixed evaluation set with expected document and revision evidence, no-answer cases, shadow indexes, and rollback acceptance."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "maintained-oss",
+              "sourceUrl": "https://github.com/IAAR-Shanghai/CRUD_RAG",
+              "query": "RAG 检索评测 黄金数据集",
+              "capturedAt": "2026-08-25",
+              "language": "zh-CN",
+              "geography": "global maintained Chinese OSS",
+              "nativeUnit": "repository observation",
+              "value": "1 maintained benchmark repository",
+              "note": "The repository supports the availability of a Chinese retrieval-evaluation method but predates the recent research window and is not counted as recent demand."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Research is complete. Use mainland-natural 召回回归测试, 黄金评测集, 检索评测, and Embedding 升级召回漂移 wording."
+        }
+      },
+      "gates": {
+        "provenance": {
+          "status": "passed",
+          "reason": "Every retained source stores its URL, capture date, language or locale, geography boundary, native source unit, and unconverted value.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence",
+            "locales.zh-TW.serpEvidence",
+            "locales.zh-CN.serpEvidence"
+          ]
+        },
+        "repeatedDemand": {
+          "status": "passed",
+          "reason": "Independent practitioner guides, official documentation, OSS issues, and a merged implementation repeat golden queries, expected sources, before-and-after retrieval metrics, failure inspection, and rollback.",
+          "evidenceRefs": [
+            "locales.en.demandEvidence",
+            "locales.zh-TW.serpEvidence",
+            "locales.zh-CN.serpEvidence"
+          ]
+        },
+        "trilingualSerp": {
+          "status": "passed",
+          "reason": "Separate English, Taiwan Traditional-Chinese, and Mainland Simplified-Chinese result sets expose the same regression-testing task through natural locale wording.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence",
+            "locales.zh-TW.serpEvidence",
+            "locales.zh-CN.serpEvidence"
+          ]
+        },
+        "cleanGap": {
+          "status": "passed",
+          "reason": "The citation owner checks whether one answer's claims match cited evidence, and the evaluation docs explain Wenlan benchmarks. Neither teaches a user-owned golden query set and controlled before-and-after retrieval regression workflow.",
+          "evidenceRefs": [
+            "overlapCheck",
+            "https://wenlan.app/learn/verify-ai-knowledge-base-citations",
+            "https://wenlan.app/docs/evaluation"
+          ]
+        },
+        "firstPartyProof": {
+          "status": "passed",
+          "reason": "Wenlan maintains labeled retrieval fixtures, published retrieval-only Recall@5, MRR, and NDCG@10 snapshots, frozen ranking goldens, and a guarded maintainer drift test, without claiming a released end-user eval command.",
+          "evidenceRefs": [
+            "crates/wenlan-core/src/eval/retrieval_drift.rs",
+            "README.md:retrieval evaluation",
+            "src/app/(en)/docs/docs.ts:evaluation"
+          ]
+        },
+        "standaloneUtility": {
+          "status": "passed",
+          "reason": "A product-neutral golden-set and one-factor comparison workflow remains useful without Wenlan.",
+          "evidenceRefs": [
+            "standaloneUtility"
+          ]
+        },
+        "internalLinks": {
+          "status": "passed",
+          "reason": "Learn hub, citation verification, source-backed knowledge-base, tool-selection, and evaluation owners are predeclared by locale.",
+          "evidenceRefs": [
+            "internalLinks"
+          ]
+        },
+        "authorityPath": {
+          "status": "passed",
+          "reason": "Danielskry/Awesome-RAG has a Production & Best Practices section suitable for one neutral regression-testing reference after the current Wenlan contribution resolves; any proposal remains separately approval-gated.",
+          "evidenceRefs": [
+            "authorityPath"
+          ]
+        }
+      },
+      "wenlanProof": [
+        {
+          "claim": "Wenlan freezes retrieval rankings and provides a guarded maintainer drift test that detects drift rather than correctness.",
+          "sourceRef": "crates/wenlan-core/src/eval/retrieval_drift.rs",
+          "verification": "rg -n \"detects drift, not correctness|refresh_retrieval_goldens|retrieval_drift\" /Users/lucian/Repos/wenlan/crates/wenlan-core/src/eval/retrieval_drift.rs"
+        },
+        {
+          "claim": "Wenlan publishes retrieval-only Recall@5, MRR, and NDCG@10 snapshots with method boundaries.",
+          "sourceRef": "README.md and src/app/(en)/docs/docs.ts",
+          "verification": "rg -n \"Recall@5|NDCG@10|retrieval-only|Evaluation\" /Users/lucian/Repos/wenlan/README.md src/app/(en)/docs/docs.ts"
+        }
+      ],
+      "standaloneUtility": "A neutral workflow can define representative questions, expected sources, no-answer cases, a baseline manifest, one controlled change, retrieval-only metrics, failure triage, and a rollback decision.",
+      "overlapCheck": "Citation verification starts from one suspect answer and checks claim-to-source support. Wenlan evaluation docs explain maintained benchmark results. This family starts before answer generation and compares the same user-owned golden questions before and after one corpus or retrieval change. Keep that boundary or reject the new URL.",
+      "internalLinks": [
+        "https://wenlan.app/learn/verify-ai-knowledge-base-citations",
+        "https://wenlan.app/learn/source-backed-wiki-pages-ai-work",
+        "https://wenlan.app/learn/choose-ai-knowledge-base-tool",
+        "https://wenlan.app/docs/evaluation",
+        "https://wenlan.app/zh-TW/learn/verify-ai-knowledge-base-citations",
+        "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",
+        "https://wenlan.app/zh-TW/learn/choose-ai-knowledge-base-tool",
+        "https://wenlan.app/zh-CN/learn/verify-ai-knowledge-base-citations",
+        "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work",
+        "https://wenlan.app/zh-CN/learn/choose-ai-knowledge-base-tool"
+      ],
+      "authorityPath": {
+        "type": "production-best-practices-resource",
+        "target": "https://github.com/Danielskry/Awesome-RAG — propose one neutral retrieval-regression guide only after the current Wenlan contribution resolves and with separate approval",
+        "status": "predeclared-no-external-action"
+      },
+      "nextResearchDirection": "The family is selected for local implementation. Preserve the user-owned golden-set workflow and truthful maintainer-only Wenlan proof, complete deterministic and rendered verification, then present the exact publication diff for separate approval.",
       "readout": {
         "gsc": {
           "status": "unavailable",

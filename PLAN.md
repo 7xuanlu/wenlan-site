@@ -677,6 +677,13 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
+  `EXP-2026-08-26-retrieval-regression-locales` is prepared locally and is the
+  only production-in-flight experiment. It adds one English, zh-TW, and zh-CN
+  canonical for regression-testing retrieval after corpus, embedding,
+  chunking, hybrid-search, filter, or reranker changes. Publication, deployment,
+  indexing requests, GSC validation, analytics mutation, paid actions,
+  synthetic events, and external publication remain excluded until separately
+  approved.
   `EXP-2026-08-24-multi-agent-knowledge-conflicts-locales` is live,
   production-verified, and measuring, so it no longer consumes the production
   slot. PR #141 merged at `2026-08-24T06:25:27Z` as
@@ -884,7 +891,7 @@ action returns for separate explicit approval.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 28.
+- Active experiments: 29.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -1270,62 +1277,42 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-24-multi-agent-knowledge-conflicts-locales` is live,
-production-verified, and measuring. It no longer consumes the website
-production slot. The three locale owners cover one task: prevent
-contradictory, overwritten, scope-polluted, or stale agent output from becoming
-accepted shared knowledge without evidence and review.
+`EXP-2026-08-26-retrieval-regression-locales` is the selected August 28
+scenario and the only production-in-flight experiment. It is prepared locally,
+not published, so no crawl or measurement clock has started.
 
-The family passed the complete trilingual scenario gate from separate English,
-Taiwan, and Simplified-Chinese result sets; repeated paper, framework,
-practitioner, maintained-OSS, and bug evidence; a clean maintenance gap;
-Wenlan source-code and test proof; three same-locale contextual inbound paths;
-standalone utility; and one inspectable authority path. The existing English
-multi-agent workflow retains shared-daemon, space, capture, recall, handoff,
-and distill setup. This family owns stale-write and contradiction maintenance
-and does not claim automatic consensus, distributed locking, or an atomic
-stale-write guard on the current public MCP `write_page` path. That path does
-not accept `expected_version`; the published workflow must re-read and compare
-before writing, while human-owned Page refreshes remain reviewable revisions.
+The family owns one before-generation task: preserve a versioned golden query
+set, run it before and after one corpus or retrieval-system change, compare
+expected sources with Recall@k and MRR, inspect no-answer cases and regressions,
+and keep rollback available. The existing citation-verification family starts
+from a generated answer and checks claim-to-source support; `/docs/evaluation`
+documents Wenlan's maintainer evaluation methodology. Neither owns this
+user-operated before-and-after retrieval workflow.
 
-The latest authenticated baseline remains source-separated: GSC property
-totals are 8 clicks and 1,005 impressions, visible-query totals are 2 clicks
-and 216 impressions, and the visibility gap is 6 clicks and 789 impressions.
-Vercel separately reports 248 visitors, including 30 attributed to Google;
-GitHub reports 48 stars. The three new URLs have no current source-native page
-rows yet, which are unavailable rather than zero. Each locale independently
-requires 20 post-crawl page impressions, 3 qualified joined-query impressions,
-and 1 GSC click for success. The immutable experiment fields and approval
-boundary are in `EXPERIMENTS.md`; the editable evidence and overlap decision
-are in `docs/seo-scenario-backlog.json`.
+English, zh-TW, and zh-CN SERPs were checked separately. Repeated product-neutral
+guides, maintained issue or discussion evidence, and an implemented OSS change
+support the task without becoming GSC or keyword-volume data. Wenlan's own
+repository supplies truthful maintained proof through retrieval-only Recall@5,
+MRR, NDCG@10, frozen ranking goldens, and the ignored
+`ranking_drift_vs_golden` maintainer test. The page states that this detects
+drift, not correctness, and is not a released `wenlan eval` user command.
 
-The user selected this scenario and initially approved implementation and local
-verification. At `2026-08-24T06:23:36Z`, after the local diff was presented,
-the user explicitly approved commit, push, PR creation, merge, the automatic
-Vercel deployment, and read-only production verification for the corrected
-exact diff. Request indexing, GSC validation, external publication, paid
-action, synthetic events, analytics mutation, and metric-definition changes
-remain excluded.
+The latest authenticated baseline remains source-separated: GSC property totals
+are 8 clicks and 1,005 impressions, visible-query totals are 2 clicks and 216
+impressions, and the visibility gap is 6 clicks and 789 impressions. Vercel
+separately reports 248 visitors, including 30 attributed to Google; GitHub
+reports 48 stars. The three proposed URLs have no source-native page rows yet,
+which are unavailable rather than zero. Each locale independently requires 20
+post-crawl page impressions, 3 qualified joined-query impressions, and 1 GSC
+click for success.
 
-Local verification completed at `2026-08-24T05:24:02Z`. The full Goal,
-scenario, intent-owner, SEO, i18n, TypeScript, production-build, built technical
-SEO, and diff checks passed. Fresh browser checks found exact canonicals,
-reciprocal hreflang, `index, follow`, one `Article`, one `BreadcrumbList`, no
-`FAQPage`, no broken images, and no horizontal overflow for all three locales.
-The browser viewport control exposed 308 and 1,146 CSS-pixel widths rather than
-the requested exact 393 and 1,440 widths; those narrower captures were inspected
-and passed, but they are recorded as conservative responsive evidence rather
-than mislabeled exact-device captures.
-
-Production verification completed at `2026-08-24T06:28:41Z`. All three live
-routes returned direct `200`, exact canonicals, reciprocal `en-US`, `zh-TW`,
-`zh-CN`, and `x-default` hreflang, `index, follow`, one `Article`, one
-`BreadcrumbList`, no `FAQPage`, and the corrected public-MCP, Codex-plugin,
-local-MCP, and CLI boundaries. The deployed technical audit passed 135 sitemap
-URLs, 27 key pages, six utility noindex headers, 25 redirects, six bridge-host
-redirects, FAQPage absence across the sitemap, and old-URL exclusions. The
-fixed content-production boundary is `2026-08-24T06:26:03Z`; a later
-controller-only record deployment does not move it.
+The user approved resolving the authority-PR conflict and selecting and changing
+this scenario before 2026-08-28. At `2026-08-27T04:09:57Z`, after reviewing the
+prepared scenario and its alternatives, the user explicitly approved publishing
+this exact verified family through commit, push, PR creation, merge, automatic
+Vercel deployment, and read-only production verification. Request indexing,
+GSC validation, external publication, paid action, synthetic events, analytics
+mutation, and metric-definition changes remain excluded.
 
 #### Historical pre-final experiment records
 
@@ -1949,6 +1936,13 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
   it, record the missed targets, and stop the original campaign.
 
 ### Next decision
+
+Publish the already verified
+`EXP-2026-08-26-retrieval-regression-locales` family under the explicit approval
+record above. Merge only after the integrated branch gates pass, wait for the
+automatic Vercel production deployment, then verify the three live locale routes
+without requesting indexing or changing any account state. Measurement of
+already-live pages does not block this clean, non-overlapping scenario family.
 
 The fixed final read now governs this section. For `2026-07-21..2026-08-17`,
 GSC reports 9 property clicks and 1,024 impressions; visible-query rows report
