@@ -170,11 +170,25 @@ const requiredLocalizedLearnPaths = [
   "/zh-CN/learn/choose-ai-knowledge-base-tool",
   "/zh-TW/learn/verify-ai-knowledge-base-citations",
   "/zh-CN/learn/verify-ai-knowledge-base-citations",
+  "/zh-TW/learn/test-ai-knowledge-base-retrieval-after-changes",
+  "/zh-CN/learn/test-ai-knowledge-base-retrieval-after-changes",
 ];
 const requiredLocalizedLearnLocs = requiredLocalizedLearnPaths.map(
   (path) => `https://wenlan.app${path}`,
 );
 const expectedArticleDates = new Map([
+  [
+    "/learn/test-ai-knowledge-base-retrieval-after-changes",
+    { datePublished: "2026-08-26", dateModified: "2026-08-26" },
+  ],
+  [
+    "/zh-TW/learn/test-ai-knowledge-base-retrieval-after-changes",
+    { datePublished: "2026-08-26", dateModified: "2026-08-26" },
+  ],
+  [
+    "/zh-CN/learn/test-ai-knowledge-base-retrieval-after-changes",
+    { datePublished: "2026-08-26", dateModified: "2026-08-26" },
+  ],
   [
     "/learn/verify-ai-knowledge-base-citations",
     { datePublished: "2026-08-23", dateModified: "2026-08-23" },
@@ -240,6 +254,7 @@ const requiredBuiltSitemapLocs = [
   "https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents",
   "https://wenlan.app/learn/choose-ai-knowledge-base-tool",
   "https://wenlan.app/learn/verify-ai-knowledge-base-citations",
+  "https://wenlan.app/learn/test-ai-knowledge-base-retrieval-after-changes",
   ...requiredLocalizedLearnLocs,
   "https://wenlan.app/docs/configuration",
   "https://wenlan.app/docs/product-matrix",
@@ -310,6 +325,13 @@ const requiredBuiltHtmlPages = [
     datePublished: "2026-08-23",
     dateModified: "2026-08-23",
   },
+  {
+    path: "learn/test-ai-knowledge-base-retrieval-after-changes.html",
+    canonical: "https://wenlan.app/learn/test-ai-knowledge-base-retrieval-after-changes",
+    type: "Article",
+    datePublished: "2026-08-26",
+    dateModified: "2026-08-26",
+  },
   ...requiredLocalizedBuiltHtmlPages,
   {
     path: "docs/configuration.html",
@@ -343,6 +365,7 @@ const requiredDeployedUrls = [
   "/learn/build-local-ai-knowledge-base-from-documents",
   "/learn/choose-ai-knowledge-base-tool",
   "/learn/verify-ai-knowledge-base-citations",
+  "/learn/test-ai-knowledge-base-retrieval-after-changes",
   ...requiredLocalizedLearnPaths,
   "/docs/configuration",
   "/docs/product-matrix",
@@ -1451,8 +1474,8 @@ test("deployed technical SEO checker verifies robots, sitemap, key pages, utilit
     );
 
     assert.match(stdout, /robots ok/);
-    assert.match(stdout, /sitemap locs ok: 27/);
-    assert.match(stdout, /key pages ok: 27/);
+    assert.match(stdout, /sitemap locs ok: 30/);
+    assert.match(stdout, /key pages ok: 30/);
     assert.match(stdout, /utility noindex headers ok: 6/);
     assert.match(stdout, /redirects ok: 25/);
     assert.match(stdout, /bridge host redirects ok: 6/);
@@ -1543,7 +1566,7 @@ test("deployed technical SEO checker does not require unshipped local internal l
         { cwd: repoRoot },
       );
 
-      assert.match(stdout, /key pages ok: 27/);
+      assert.match(stdout, /key pages ok: 30/);
     },
   );
 });
@@ -2053,7 +2076,7 @@ test("built technical SEO checker verifies compiled redirects, headers, and site
     assert.match(stdout, /noindex headers ok: 7/);
     assert.match(stdout, /sitemap required locs ok: 24/);
     assert.match(stdout, /html page checks ok: 24/);
-    assert.match(stdout, /all html FAQPage absent ok: 28/);
+    assert.match(stdout, /all html FAQPage absent ok: 31/);
     assert.match(stdout, /old URLs absent from sitemap/);
   } finally {
     await rm(outputRoot, { recursive: true, force: true });

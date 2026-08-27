@@ -536,6 +536,7 @@ test("localized Learn slug route supports per-locale acquisition page availabili
     "/learn/when-ai-agent-should-query-knowledge-base",
     "/learn/fix-pdf-ingestion-ai-knowledge-base",
     "/learn/prevent-multi-agent-knowledge-conflicts",
+    "/learn/test-ai-knowledge-base-retrieval-after-changes",
   ]);
   assert.match(source, /getLocalizedLearnArticle/);
   assert.match(source, /TRANSLATED_LEARN_SLUGS/);
@@ -862,6 +863,14 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
     { locale: "zh-CN", slug: "fix-pdf-ingestion-ai-knowledge-base" },
     { locale: "zh-TW", slug: "prevent-multi-agent-knowledge-conflicts" },
     { locale: "zh-CN", slug: "prevent-multi-agent-knowledge-conflicts" },
+    {
+      locale: "zh-TW",
+      slug: "test-ai-knowledge-base-retrieval-after-changes",
+    },
+    {
+      locale: "zh-CN",
+      slug: "test-ai-knowledge-base-retrieval-after-changes",
+    },
   ]);
 
   const metadata = await localizedLearnSlug.generateMetadata({
@@ -1023,6 +1032,55 @@ test("citation verification family owns one distinct trilingual diagnostic task"
     "distilled-wiki-pages-ai-memory",
   ];
   for (const owner of inboundOwners) {
+    assert.ok(
+      articles.find((article) => article.slug === owner)?.relatedSlugs.includes(slug),
+      `${owner} must link to ${slug}`,
+    );
+    for (const locale of ["zh-TW", "zh-CN"]) {
+      assert.ok(
+        getLocalizedLearnArticle(locale, owner)?.relatedSlugs.includes(slug),
+        `${locale} ${owner} must link to ${slug}`,
+      );
+    }
+  }
+});
+
+test("retrieval regression family owns one distinct trilingual before-and-after task", async () => {
+  const [{ articles }, { getLocalizedLearnArticle }] = await Promise.all([
+    import("../src/app/(en)/learn/articles.ts"),
+    import("../src/i18n/learn-articles.ts"),
+  ]);
+  const slug = "test-ai-knowledge-base-retrieval-after-changes";
+  const english = articles.find((article) => article.slug === slug);
+
+  assert.ok(english, "English retrieval-regression article");
+  assert.match(english.title, /Regression-Test AI Knowledge Base Retrieval/);
+  assert.match(JSON.stringify(english), /golden query set|expected source/i);
+  assert.match(JSON.stringify(english), /Recall@k|MRR|no-answer/i);
+  assert.match(JSON.stringify(english), /detects drift, not correctness/i);
+  assert.match(JSON.stringify(english), /not a released.*wenlan eval/i);
+  assert.equal(english.publishedAt, "2026-08-26");
+  assert.equal(english.updatedAt, "2026-08-26");
+
+  for (const [locale, titlePattern, workflowPattern] of [
+    ["zh-TW", /AI 知識庫改版後.*RAG 檢索回歸測試/, /黃金資料集|預期來源/],
+    ["zh-CN", /AI 知识库改版后.*RAG 召回回归测试/, /黄金评测集|预期来源/],
+  ]) {
+    const article = getLocalizedLearnArticle(locale, slug);
+    assert.ok(article, `${locale} retrieval-regression article`);
+    assert.match(article.title, titlePattern);
+    assert.match(JSON.stringify(article), workflowPattern);
+    assert.match(JSON.stringify(article), /Recall@k|MRR/);
+    assert.equal(article.publishedAt, "2026-08-26");
+    assert.equal(article.updatedAt, "2026-08-26");
+    assert.ok(article.officialReferences?.length >= 4);
+  }
+
+  for (const owner of [
+    "verify-ai-knowledge-base-citations",
+    "source-backed-wiki-pages-ai-work",
+    "choose-ai-knowledge-base-tool",
+  ]) {
     assert.ok(
       articles.find((article) => article.slug === owner)?.relatedSlugs.includes(slug),
       `${owner} must link to ${slug}`,
@@ -1580,11 +1638,11 @@ test("localized acquisition copy keeps CJK semantic phrases together on mobile",
   assert.equal(protectedHeadings.length, 2);
   assert.match(
     source,
-    /split\(\/\(Karpathy LLM Wiki：\|AI 知識庫\|AI 知识库\|知識庫\|知识库\|驗收資料\|验收资料\|8 項\|8 项\|來源\|来源\)\/g\)/,
+    /split\(\/\(Karpathy LLM Wiki：\|AI 知識庫\|AI 知识库\|知識庫\|知识库\|驗收資料\|验收资料\|8 項\|8 项\|來源\|来源\|記什麼？\|记录什么？\)\/g\)/,
   );
   assert.match(
     source,
-    /article\.slug === "wenlan-vs-obsidian-ai-memory"[\s\S]*article\.slug === "distilled-wiki-pages-ai-memory"[\s\S]*article\.slug === "choose-ai-knowledge-base-tool"[\s\S]*article\.slug === "coding-agent-source-backed-knowledge-base"/,
+    /article\.slug === "wenlan-vs-obsidian-ai-memory"[\s\S]*article\.slug === "distilled-wiki-pages-ai-memory"[\s\S]*article\.slug === "choose-ai-knowledge-base-tool"[\s\S]*article\.slug === "test-ai-knowledge-base-retrieval-after-changes"[\s\S]*article\.slug === "coding-agent-source-backed-knowledge-base"/,
   );
   assert.ok((source.match(/\{renderArticleText\(/g)?.length ?? 0) >= 12);
   assert.match(source, /<span className="min-w-0">\{renderArticleText\(faq\.question\)\}<\/span>/);

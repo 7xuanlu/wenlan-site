@@ -56,9 +56,10 @@ const EXPECTED_FAMILY_IDS = [
   "knowledge-retrieval-context-token-cost",
   "document-pdf-ingestion-failures",
   "multi-agent-knowledge-write-conflicts",
+  "retrieval-regression-after-knowledge-base-changes",
 ];
 const APPROVED_SCENARIO_CONTRACT_SHA256 =
-  "1fafdc699a4c9b8741ac9c34996b40dab13290c065f701dc999eea3e1681c52f";
+  "8143cbb10ed09cd768c653a38a044b690f1cf4bf21f3b1b82473c6c8513b5038";
 const EXPECTED_WEEKLY_WINDOWS = [
   ["2026-08-24", "2026-08-30", "source-change-stale-pages"],
   ["2026-08-31", "2026-09-06", "coding-agent-source-backed-knowledge-base"],
@@ -209,7 +210,7 @@ export function validateScenarioBacklog(
     families.length !== EXPECTED_FAMILY_IDS.length ||
     families.some((family, index) => family?.id !== EXPECTED_FAMILY_IDS[index])
   ) {
-    errors.push("scenario families must retain the approved seven-item order.");
+    errors.push("scenario families must retain the approved eight-item order.");
   }
   if (scenarioContractHash(families) !== APPROVED_SCENARIO_CONTRACT_SHA256) {
     errors.push(

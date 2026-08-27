@@ -20,6 +20,7 @@ const expectedOkRoutes = [
   "/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
   "/zh-TW/learn/choose-ai-knowledge-base-tool",
   "/zh-TW/learn/verify-ai-knowledge-base-citations",
+  "/zh-TW/learn/test-ai-knowledge-base-retrieval-after-changes",
   "/zh-CN",
   "/zh-CN/about",
   "/zh-CN/download",
@@ -32,6 +33,7 @@ const expectedOkRoutes = [
   "/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
   "/zh-CN/learn/choose-ai-knowledge-base-tool",
   "/zh-CN/learn/verify-ai-knowledge-base-citations",
+  "/zh-CN/learn/test-ai-knowledge-base-retrieval-after-changes",
 ];
 
 const expectedNotFoundRoutes = [

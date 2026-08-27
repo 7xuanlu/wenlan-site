@@ -8369,3 +8369,69 @@ increase for that experiment.
 - Decision: wait
 - Next step: Keep the fixed `2026-08-24T06:26:03Z` production boundary, do not repeat the indexing requests, and read each locale independently in source-native GSC page/query and Vercel page/referrer units when available.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-26-retrieval-regression-locales
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-26-retrieval-regression-locales
+- Status: active
+- Data window: 2026-08-22..2026-08-28
+- Asset class: net-new-search
+- Launched: 2026-08-26
+- Hypothesis: One task-specific English, zh-TW, and zh-CN owner for regression-testing retrieval after corpus, embedding, chunking, hybrid-search, filter, or reranker changes can earn qualified evaluation-workflow exposure without cannibalizing citation verification or Wenlan's maintainer evaluation documentation.
+- Candidate evidence: Separate English, Taiwan, and Simplified-Chinese SERP observations plus dated product-neutral guides, a maintained discussion, and an implemented OSS change are stored in `docs/seo-scenario-backlog.json` in their native units. They are not keyword volume, rank, authenticated GSC data, or causal evidence.
+- Baseline: GSC property 8 clicks and 1,005 impressions; visible-query 2 clicks and 216 impressions; visibility gap 6 clicks and 789 impressions; Vercel 248 visitors with 30 attributed to Google; GitHub 48 stars; new target-page rows unavailable, all kept separate.
+- Change: Prepare exactly one English, zh-TW, and zh-CN canonical for a versioned golden-query, expected-source, Recall@k, MRR, no-answer, regression-triage, and rollback workflow. Keep Wenlan's maintainer-only drift test distinct from a released end-user command and state that it detects drift, not correctness.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions per locale in 28 complete post-crawl days
+- Success criteria: Per locale, at least 3 qualified joined-query impressions and at least 1 GSC click after minimum exposure; report CTR and position separately.
+- Failure criteria: After 28 complete post-crawl days and minimum exposure, a locale has no qualified joined-query impressions or no GSC click, or an above-floor join assigns the same task to citation verification or the existing evaluation documentation.
+- Stop criteria: Stop on a technical, factual, unsupported product-command, duplicate-intent, controller-overlap, canonical, locale, responsive-render, or approval-boundary violation.
+- 24h readout: pending technical and indexability observation after production completion
+- 7d readout: pending early source-native GSC page/query and Vercel page/referrer observation
+- W2 readout: pending
+- W4 readout: pending formal 28-complete-post-crawl-day decision when eligible
+- W8 readout: pending only if useful after the Goal deadline
+- Result: pending
+- Decision: wait
+- Next step: Complete local deterministic and rendered verification, then request separate publication approval with the exact diff and evidence.
+<!-- EXPERIMENT-RECORD:END -->
+
+## 2026-08-26T07:54:44Z — retrieval-regression local prelaunch verification
+
+- Experiment ID: `EXP-2026-08-26-retrieval-regression-locales`
+- Scope remains local preparation only; the three routes are not published or
+  indexed, and no performance readout is recorded.
+- Passing gates: `pnpm seo:goal:check`, `pnpm seo:scenario:check` (8 trilingual
+  families; 138 sitemap owners), `pnpm test:goal` (44/44),
+  `pnpm test:i18n` (69/69), `pnpm lint`, `pnpm build` (247 static pages),
+  `pnpm seo:technical:built` (138 sitemap URLs),
+  `pnpm seo:intent:check` (138/138), the focused weekly technical fixture, and
+  `git diff --check`.
+- Full `pnpm test:seo`: the scenario and technical fixture pass. Four unrelated
+  release-contract tests remain red because the site still publishes v0.16.0
+  while the sibling Wenlan repository reports v0.17.0. That release-sync gap
+  is not changed or hidden in this scenario diff.
+- Render QA: English, zh-TW, and zh-CN passed at exact 393x852 and 1440x1200
+  viewports with no horizontal overflow, broken images, console warnings, or
+  console errors. All seven article sections and an expanded FAQ were checked;
+  the discovered zh-TW/zh-CN orphan-question-mark break was fixed and rechecked.
+- Approval boundary: commit, push, PR, merge, deployment, request indexing,
+  GSC validation, analytics mutation, and external publication still require
+  separate explicit approval.
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-26-retrieval-regression-locales publication approval
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-26-retrieval-regression-locales
+- Observed at: 2026-08-27T04:09:57Z
+- Readout: correction
+- Status: active
+- Evidence: The user explicitly approved publishing the exact verified English, zh-TW, and zh-CN retrieval-regression family through commit, push, PR creation, merge, automatic Vercel deployment, and read-only production verification. Request indexing, GSC validation, external publication, paid actions, synthetic events, analytics mutation, and metric-definition changes remain excluded.
+- Result: pending
+- Decision: merge
+- Next step: Re-run the complete local gates on the exact branch, commit and push only the prepared family and its deterministic control records, merge after required checks pass, wait for automatic Vercel production completion, and verify all three live routes without requesting indexing.
+<!-- EXPERIMENT-RECORD:END -->
