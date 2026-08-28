@@ -11,7 +11,7 @@ test("every sitemap URL has one explicit locale-aware search intent", () => {
   const result = validatePageIntentRows(rows);
 
   assert.deepEqual(result.errors, []);
-  assert.equal(rows.length, 138);
+  assert.equal(rows.length, 141);
   assert.deepEqual(
     Object.fromEntries(
       ["en", "zh-TW", "zh-CN"].map((locale) => [
@@ -20,11 +20,18 @@ test("every sitemap URL has one explicit locale-aware search intent", () => {
       ]),
     ),
     {
-      en: 104,
-      "zh-TW": 17,
-      "zh-CN": 17,
+      en: 105,
+      "zh-TW": 18,
+      "zh-CN": 18,
     },
   );
+  for (const url of [
+    "https://wenlan.app/learn/source-backed-research-knowledge-base",
+    "https://wenlan.app/zh-TW/learn/source-backed-research-knowledge-base",
+    "https://wenlan.app/zh-CN/learn/source-backed-research-knowledge-base",
+  ]) {
+    assert.ok(rows.some((row) => row.url === url), url);
+  }
 });
 test("intent validation rejects duplicate owners and unmapped sitemap URLs", () => {
   const rows = buildPageIntentRows();

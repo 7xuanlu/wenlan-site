@@ -518,6 +518,7 @@ const zhTWArticles = {
       "distilled-wiki-pages-ai-memory",
       "when-ai-agent-should-query-knowledge-base",
       "verify-ai-knowledge-base-citations",
+      "source-backed-research-knowledge-base",
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
       "test-ai-knowledge-base-retrieval-after-changes",
@@ -978,6 +979,7 @@ const zhTWArticles = {
       "fix-pdf-ingestion-ai-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
       "source-backed-wiki-pages-ai-work",
+      "source-backed-research-knowledge-base",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
     ],
@@ -1642,6 +1644,7 @@ const zhTWArticles = {
       "when-ai-agent-should-query-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
       "test-ai-knowledge-base-retrieval-after-changes",
+      "source-backed-research-knowledge-base",
     ],
     officialReferences: [
       {
@@ -1664,6 +1667,135 @@ const zhTWArticles = {
     cta: {
       heading: "先驗證一個回答，再擴大知識庫",
       body: "用 Wenlan 打開 Page、來源、過期狀態、lint 與審查路徑，只保留目前證據真的支持的主張。",
+    },
+  },
+  "source-backed-research-knowledge-base": {
+    slug: "source-backed-research-knowledge-base",
+    eyebrow: "研究工作流",
+    category: "Workflows",
+    title: "如何用論文與 PDF 建立可追溯的研究知識庫",
+    description:
+      "從一組已選定的論文建立研究知識庫，保留文獻矩陣、方法、限制、矛盾、引用與來源更新。",
+    metaTitle: "用論文與 PDF 建立可追溯研究知識庫 | Wenlan",
+    metaDescription:
+      "用已選定的論文與文字型 PDF 建立研究知識庫，保留文獻矩陣、精確引用、矛盾、限制與來源更新。",
+    keywords: [
+      "用論文 PDF 建立研究知識庫",
+      "AI 論文筆記保留引用",
+      "論文大腦 文獻回顧",
+      "可追溯來源的研究筆記",
+      "文獻矩陣 AI",
+      "研究知識管理",
+    ],
+    publishedAt: "2026-08-27",
+    updatedAt: "2026-08-27",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分鐘閱讀",
+    audience: "已經選好一組論文，希望整理文獻又不失去引用、矛盾與研究限制的學生及研究者",
+    heroBullets: [
+      "先固定一個研究問題與一組已取得的論文，不把自動找文獻混進同一工作。",
+      "每個主張、方法、樣本、結果與限制都回到確切頁面或段落。",
+      "新論文加入時分開更新共識、矛盾與未知，不重寫成一段順暢結論。",
+    ],
+    sections: [
+      {
+        heading: "先回答：研究知識庫要保存什麼",
+        body: [
+          "從一個研究問題和一組已選定的論文開始。原始論文保持權威，研究知識庫保存可檢查的文獻矩陣：主張、方法、樣本、結果、限制、確切來源位置與目前驗證狀態。",
+          "這不是請 AI 代寫文獻回顧。真正有用的產物會把同意、矛盾與未知分開，讓下一位讀者能從每個綜合結論回到原文重做判斷。",
+        ],
+      },
+      {
+        heading: "先把來源範圍縮到能逐項驗證",
+        body: [
+          "只加入目前研究問題需要的論文。Wenlan 可讀 Markdown、文字檔、可直接擷取文字的 PDF、資料夾與唯讀 Obsidian vault；影像型或掃描 PDF 必須先在外部完成 OCR。",
+          "Wenlan 不會搜尋學術資料庫、找 DOI、匯入 Zotero、替引用排格式或判斷研究品質。選文、方法評估、統計判讀與學術誠信仍由研究者負責。",
+        ],
+      },
+      {
+        heading: "建立可重做的文獻矩陣",
+        body: [
+          "每個重要結果各佔一列，不要先寫成一段總結。欄位至少包含 paper、claim、method、sample、result、limitation、page 或 section、版本與驗證狀態。",
+        ],
+        bullets: [
+          "研究問題與納入範圍：說明這一輪包含與排除哪些論文。",
+          "方法與樣本：避免把不同設計和母體直接合併。",
+          "結果與限制：把作者實際報告和你的解讀分開。",
+          "引用位置：保存頁碼、段落、source ID 與可取得的版本。",
+          "證據狀態：標記支持、部分支持、無依據、矛盾或待查。",
+        ],
+        code: {
+          label: "完成 Wenlan 與 AI 客戶端設定後",
+          code: "wenlan status\nwenlan sources add ~/Research/papers\n/distill <研究問題>\n/pages <研究問題>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "不要把矛盾與限制磨成假共識",
+        body: [
+          "兩篇論文結果不同時，先比較樣本、方法、時間、適用範圍與限制，再決定是否能形成更窄的結論。證據不足就保留未知，不要為了讓筆記好讀而補成一致答案。",
+          "重要數字、否定詞、作者歸屬和範圍都要打開引用段落核對。引用存在只代表有路徑，不代表來源本身正確，也不代表它完整支持這句話。",
+        ],
+        link: {
+          label: "查看逐項引用驗證工作流",
+          href: "/learn/verify-ai-knowledge-base-citations",
+        },
+      },
+      {
+        heading: "新論文加入時只刷新受影響的綜合",
+        body: [
+          "加入新論文或替換修訂版後，重新同步來源，標出哪些矩陣列和結論受影響，再產生可審查的 Page 修訂。保留舊版本與變更原因，才能看出知識如何改變。",
+          "最後保留一份人能直接閱讀的研究筆記。Wenlan 可以維護來源、Page、引用、stale 狀態與修訂，但研究者仍負責解讀、引用格式與最終寫作。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 可以幫我找論文或直接寫文獻回顧嗎？",
+        answer:
+          "不行。請先用適合的學術搜尋工具選好論文。Wenlan 負責維護可檢查的來源與研究綜合，不取代檢索、選文、引用格式、解讀或作者責任。",
+      },
+      {
+        question: "不同論文互相矛盾時怎麼處理？",
+        answer:
+          "分開保留每篇研究的方法、樣本、結果、限制與來源位置，再明確標記矛盾。只有證據支持時才寫成更窄的綜合，否則保持未知。",
+      },
+      {
+        question: "掃描型 PDF 能直接加入嗎？",
+        answer:
+          "不能。PDF 必須能直接擷取文字；只有影像的掃描檔要先做 OCR，再將可讀文字納入研究來源。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "verify-ai-knowledge-base-citations",
+      "source-backed-wiki-pages-ai-work",
+      "choose-ai-knowledge-base-tool",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 支援的文件來源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan 有來源 Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "臺大生成式 AI 研究與引用指南",
+        href: "https://www.lib.ntu.edu.tw/img/tulblog/HELP/HELP_20260525_AI.pdf",
+      },
+      {
+        label: "Distill 研究工作區",
+        href: "https://github.com/luisalarcon-gauntlet/Distill",
+      },
+      {
+        label: "UReKA 研究知識工作流",
+        href: "https://github.com/Agents4Academia-AI/UReKA",
+      },
+    ],
+    cta: {
+      heading: "先建立一份可逐項檢查的研究筆記",
+      body: "加入一組有界論文、建立文獻矩陣，再確認每個重要綜合都能回到目前來源。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
@@ -2430,6 +2562,7 @@ const zhCNArticles = {
       "distilled-wiki-pages-ai-memory",
       "when-ai-agent-should-query-knowledge-base",
       "verify-ai-knowledge-base-citations",
+      "source-backed-research-knowledge-base",
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
       "test-ai-knowledge-base-retrieval-after-changes",
@@ -2892,6 +3025,7 @@ const zhCNArticles = {
       "fix-pdf-ingestion-ai-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
       "source-backed-wiki-pages-ai-work",
+      "source-backed-research-knowledge-base",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
     ],
@@ -3284,6 +3418,7 @@ const zhCNArticles = {
       "when-ai-agent-should-query-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
       "test-ai-knowledge-base-retrieval-after-changes",
+      "source-backed-research-knowledge-base",
     ],
     officialReferences: [
       {
@@ -3306,6 +3441,135 @@ const zhCNArticles = {
     cta: {
       heading: "先验证一个回答，再扩大知识库",
       body: "用 Wenlan 打开 Page、来源、过期状态、lint 与审核路径，只保留当前证据真正支持的主张。",
+    },
+  },
+  "source-backed-research-knowledge-base": {
+    slug: "source-backed-research-knowledge-base",
+    eyebrow: "研究工作流",
+    category: "Workflows",
+    title: "如何用论文与 PDF 建立可追溯的研究知识库",
+    description:
+      "从一组已经选定的论文建立研究知识库，保留文献矩阵、方法、局限、矛盾、引用与来源更新。",
+    metaTitle: "用论文与 PDF 建立可追溯研究知识库 | Wenlan",
+    metaDescription:
+      "用已经选定的论文与文本型 PDF 建立研究知识库，保留文献矩阵、准确引用、矛盾、局限与来源更新。",
+    keywords: [
+      "用论文 PDF 建立研究知识库",
+      "AI 论文笔记保留引用",
+      "论文知识库 文献综述",
+      "可追溯来源的研究笔记",
+      "文献矩阵 AI",
+      "研究知识管理",
+    ],
+    publishedAt: "2026-08-27",
+    updatedAt: "2026-08-27",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分钟阅读",
+    audience: "已经选好一组论文，希望整理文献又不丢失引用、矛盾与研究局限的学生和研究者",
+    heroBullets: [
+      "先固定一个研究问题和一组已经取得的论文，不把自动找文献混入同一工作。",
+      "每个主张、方法、样本、结果与局限都回到准确页面或段落。",
+      "新论文加入时分别更新共识、矛盾与未知，不重写成一段流畅结论。",
+    ],
+    sections: [
+      {
+        heading: "先回答：研究知识库应该保存什么",
+        body: [
+          "从一个研究问题和一组已经选定的论文开始。原始论文保持权威，研究知识库保存可检查的文献矩阵：主张、方法、样本、结果、局限、准确来源位置与当前验证状态。",
+          "这不是请 AI 代写文献综述。真正有用的产物会把一致、矛盾与未知分开，让下一位读者能从每个综合结论回到原文重新判断。",
+        ],
+      },
+      {
+        heading: "先把来源范围缩到能逐项验证",
+        body: [
+          "只加入当前研究问题需要的论文。Wenlan 可以读取 Markdown、文本文件、可直接提取文字的 PDF、文件夹与只读 Obsidian vault；图片型或扫描 PDF 必须先在外部完成 OCR。",
+          "Wenlan 不会搜索学术数据库、查找 DOI、导入 Zotero、设置参考文献格式或判断研究质量。选文、方法评估、统计解读与学术诚信仍由研究者负责。",
+        ],
+      },
+      {
+        heading: "建立可以重做的文献矩阵",
+        body: [
+          "每个重要结果各占一行，不要先写成一段总结。字段至少包含 paper、claim、method、sample、result、limitation、page 或 section、版本与验证状态。",
+        ],
+        bullets: [
+          "研究问题与纳入范围：说明这一轮包含和排除了哪些论文。",
+          "方法与样本：避免把不同设计和人群直接合并。",
+          "结果与局限：把作者实际报告和你的解读分开。",
+          "引用位置：保存页码、段落、source ID 与能取得的版本。",
+          "证据状态：标记支持、部分支持、无依据、矛盾或待查。",
+        ],
+        code: {
+          label: "完成 Wenlan 与 AI 客户端设置后",
+          code: "wenlan status\nwenlan sources add ~/Research/papers\n/distill <研究问题>\n/pages <研究问题>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "不要把矛盾与局限磨成假共识",
+        body: [
+          "两篇论文结果不同时，先比较样本、方法、时间、适用范围与局限，再判断能否形成更窄的结论。证据不足就保留未知，不要为了让笔记好读而补成一致答案。",
+          "重要数字、否定词、作者归属和范围都要打开引用段落核对。引用存在只代表有路径，不代表来源本身正确，也不代表它完整支持这句话。",
+        ],
+        link: {
+          label: "查看逐项引用校验工作流",
+          href: "/learn/verify-ai-knowledge-base-citations",
+        },
+      },
+      {
+        heading: "新论文加入时只刷新受影响的综合",
+        body: [
+          "加入新论文或替换修订版后，重新同步来源，标出哪些矩阵行和结论受到影响，再生成可审核的 Page 修订。保留旧版本与变更原因，才能看出知识如何变化。",
+          "最后保留一份人能直接阅读的研究笔记。Wenlan 可以维护来源、Page、引用、stale 状态与修订，但研究者仍负责解读、引用格式与最终写作。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 可以帮我找论文或直接写文献综述吗？",
+        answer:
+          "不可以。请先用适合的学术搜索工具选好论文。Wenlan 负责维护可检查的来源与研究综合，不取代检索、选文、引用格式、解读或作者责任。",
+      },
+      {
+        question: "不同论文互相矛盾时怎么处理？",
+        answer:
+          "分别保留每篇研究的方法、样本、结果、局限与来源位置，再明确标记矛盾。只有证据支持时才写成更窄的综合，否则保持未知。",
+      },
+      {
+        question: "扫描型 PDF 能直接加入吗？",
+        answer:
+          "不能。PDF 必须能直接提取文字；只有图片的扫描文件要先做 OCR，再把可读文本纳入研究来源。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "verify-ai-knowledge-base-citations",
+      "source-backed-wiki-pages-ai-work",
+      "choose-ai-knowledge-base-tool",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 支持的文档来源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan 有来源 Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "台湾大学生成式 AI 研究与引用指南",
+        href: "https://www.lib.ntu.edu.tw/img/tulblog/HELP/HELP_20260525_AI.pdf",
+      },
+      {
+        label: "Distill 研究工作区",
+        href: "https://github.com/luisalarcon-gauntlet/Distill",
+      },
+      {
+        label: "UReKA 研究知识工作流",
+        href: "https://github.com/Agents4Academia-AI/UReKA",
+      },
+    ],
+    cta: {
+      heading: "先建立一份能逐项检查的研究笔记",
+      body: "加入一组有界论文、建立文献矩阵，再确认每个重要综合都能回到当前来源。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
