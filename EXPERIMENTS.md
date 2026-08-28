@@ -8435,3 +8435,74 @@ increase for that experiment.
 - Decision: merge
 - Next step: Re-run the complete local gates on the exact branch, commit and push only the prepared family and its deterministic control records, merge after required checks pass, wait for automatic Vercel production completion, and verify all three live routes without requesting indexing.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-26-retrieval-regression-locales production publication
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-26-retrieval-regression-locales
+- Observed at: 2026-08-27T04:32:45Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #144 merged at `2026-08-27T04:31:56Z` as `681754936193cb035b4285709bd98ed82189e466`; Vercel reported production deployment success at `2026-08-27T04:32:45Z`. The English, zh-TW, and zh-CN routes passed direct 200, exact canonical, reciprocal hreflang, sitemap, Article and BreadcrumbList, visible FAQ without FAQPage, maintained-source, and responsive-render verification. This proves publication and technical availability only.
+- Result: pending
+- Decision: wait
+- Next step: Keep `2026-08-27T04:32:45Z` as the fixed production boundary. At 24 hours record technical and indexability evidence only; judge each locale independently after a confirmed crawl and 28 complete post-crawl days with its original 20-page-impression, 3-qualified-joined-query-impression, and 1-click contract. Do not request indexing or publish the authority candidate without separate approval.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-27-source-backed-research-knowledge-base-locales
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-27-source-backed-research-knowledge-base-locales
+- Status: measuring
+- Data window: 2026-08-22..2026-08-28
+- Asset class: net-new-search
+- Launched: 2026-08-27
+- Hypothesis: One bounded English, zh-TW, and zh-CN owner for turning an already selected paper or PDF set into an inspectable literature matrix and synthesis can earn qualified research-workflow exposure without cannibalizing generic document ingestion, citation debugging, scholarly discovery, or manuscript-generation intent.
+- Candidate evidence: Separate English/US, Taiwan Traditional-Chinese, and mainland-parameter Simplified-Chinese SERP observations plus request-relative Trends indices, maintained OSS workflows, a first-hand citation-ledger report, and current university guidance are stored in `docs/seo-scenario-backlog.json` in native units. They are not keyword volume, rank, authenticated GSC data, or causal evidence.
+- Baseline: GSC property 8 clicks and 1,005 impressions; visible-query 2 clicks and 216 impressions; visibility gap 6 clicks and 789 impressions; Vercel 248 visitors with 30 attributed to Google; GitHub 48 stars; new target-page rows unavailable, all kept separate.
+- Change: Publish exactly one English, zh-TW, and zh-CN canonical that starts with a bounded paper set, builds a claim/method/sample/result/limitation matrix, preserves contradictions and exact source locations, refreshes changed papers, and excludes scholarly search, DOI discovery, Zotero import, citation formatting, scanned-PDF OCR, and manuscript generation.
+- Publish date: 2026-08-28
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions per locale in 28 complete post-crawl days
+- Success criteria: Per locale, at least 3 qualified joined-query impressions and at least 1 GSC click after minimum exposure; report CTR and position separately.
+- Failure criteria: After 28 complete post-crawl days and minimum exposure, a locale has no qualified joined-query impressions or no GSC click, or an above-floor join shows that document ingestion, citation verification, or an unsupported literature-generator intent owns the same task.
+- Stop criteria: Stop on a technical, factual, unsupported discovery or writing claim, duplicate-intent, controller-overlap, canonical, locale, responsive-render, or approval-boundary violation.
+- 24h readout: pending technical and indexability observation after 2026-08-29T03:49:51Z
+- 7d readout: pending early source-native GSC page/query and Vercel page/referrer observation after 2026-09-04T03:49:51Z
+- W2 readout: pending
+- W4 readout: pending formal 28-complete-post-crawl-day decision when eligible
+- W8 readout: pending only if useful after the Goal deadline
+- Result: pending
+- Decision: wait
+- Next step: Keep `2026-08-28T03:49:51Z` as the fixed production boundary. Prepare only the exact `0x11c11e/awesome-ai-research-tools` candidate against current upstream; do not fork, push, open a pull request, message maintainers, request indexing, or change account state without separate approval.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-27-source-backed-research-knowledge-base-locales production publication
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-27-source-backed-research-knowledge-base-locales
+- Observed at: 2026-08-28T03:49:51Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #145 merged at `2026-08-28T03:49:03Z` as `37b28a0df3e2e85a41ca7ec4bb9d25db3149ca89`; Vercel reported production deployment success at `2026-08-28T03:49:51Z`. All three live routes returned 200 with exact canonicals, reciprocal alternates, sitemap membership, Article and BreadcrumbList schema, no FAQPage, and the locale-specific literature-matrix, contradiction, limitation, and source-update workflow. The deployed technical audit passed all 141 sitemap URLs. This proves publication and technical availability only.
+- Result: pending
+- Decision: wait
+- Next step: Keep the canonical family stable, record the due 24-hour technical/indexability observation without an SEO-success verdict, and pursue external authority only after its exact candidate receives separate approval.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-27-source-backed-research-knowledge-base-locales authority-path correction
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-27-source-backed-research-knowledge-base-locales
+- Observed at: 2026-08-28T04:22:23Z
+- Readout: correction
+- Status: measuring
+- Evidence: Current `0x11c11e/awesome-ai-research-tools` is public, non-archived, CC0-1.0, at 67 GitHub stars, last pushed `2026-08-15T04:00:55Z`, and has no Wenlan duplicate. Its owner recently rejected a maintainer submission partly because the same product was being added to several Awesome lists and the activity read as promotion. Because Wenlan already has multiple directory submissions, hold this low-reach path. Current Wenlan source main `76a127bf3779b2aa5d9a6b7601159cf88b908499` names researchers and proves the relevant workflow but has no direct research-guide link. A local-only four-README proposal adds that link in English, zh-Hant, zh-Hans, and Spanish and passes the README translation-sync checker, its self-test, and `git diff --check`.
+- Result: pending
+- Decision: wait
+- Next step: Present `docs/seo-audits/2026-08-27-wenlan-research-readme-authority-proposal.patch` for separate source-repository publication approval. Do not submit the Awesome-list candidate, apply the source diff, push, open a pull request, message maintainers, or change account state under this record.
+<!-- EXPERIMENT-RECORD:END -->

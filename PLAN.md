@@ -677,11 +677,13 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-26-retrieval-regression-locales` is prepared locally and is the
-  only production-in-flight experiment. It adds one English, zh-TW, and zh-CN
-  canonical for regression-testing retrieval after corpus, embedding,
-  chunking, hybrid-search, filter, or reranker changes. Publication, deployment,
-  indexing requests, GSC validation, analytics mutation, paid actions,
+  `EXP-2026-08-27-source-backed-research-knowledge-base-locales` is live,
+  production-verified, and measuring, so no website change consumes the
+  production slot. PR #145 merged at `2026-08-28T03:49:03Z` as
+  `37b28a0df3e2e85a41ca7ec4bb9d25db3149ca89`; Vercel production completed at
+  `2026-08-28T03:49:51Z`. The retrieval-regression family is also live and
+  measuring from its fixed `2026-08-27T04:32:45Z` production boundary.
+  Request indexing, GSC validation, analytics mutation, paid actions,
   synthetic events, and external publication remain excluded until separately
   approved.
   `EXP-2026-08-24-multi-agent-knowledge-conflicts-locales` is live,
@@ -891,7 +893,7 @@ action returns for separate explicit approval.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 29.
+- Active experiments: 30.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -1277,42 +1279,41 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-26-retrieval-regression-locales` is the selected August 28
-scenario and the only production-in-flight experiment. It is prepared locally,
-not published, so no crawl or measurement clock has started.
+No website change is currently in production preparation. The production slot
+is open. Two new trilingual scenario families are live, production-verified,
+and measuring; neither consumes the production slot.
 
-The family owns one before-generation task: preserve a versioned golden query
-set, run it before and after one corpus or retrieval-system change, compare
-expected sources with Recall@k and MRR, inspect no-answer cases and regressions,
-and keep rollback available. The existing citation-verification family starts
-from a generated answer and checks claim-to-source support; `/docs/evaluation`
-documents Wenlan's maintainer evaluation methodology. Neither owns this
-user-operated before-and-after retrieval workflow.
+- The retrieval-regression family went live through PR #144,
+  merged as `681754936193cb035b4285709bd98ed82189e466` at
+  `2026-08-27T04:31:56Z`. Vercel production completed at
+  `2026-08-27T04:32:45Z`; keep that as the fixed measurement boundary.
+- `EXP-2026-08-27-source-backed-research-knowledge-base-locales` went live
+  through PR #145, merged as
+  `37b28a0df3e2e85a41ca7ec4bb9d25db3149ca89` at
+  `2026-08-28T03:49:03Z`. Vercel production completed at
+  `2026-08-28T03:49:51Z`; keep that as the fixed measurement boundary.
 
-English, zh-TW, and zh-CN SERPs were checked separately. Repeated product-neutral
-guides, maintained issue or discussion evidence, and an implemented OSS change
-support the task without becoming GSC or keyword-volume data. Wenlan's own
-repository supplies truthful maintained proof through retrieval-only Recall@5,
-MRR, NDCG@10, frozen ranking goldens, and the ignored
-`ranking_drift_vs_golden` maintainer test. The page states that this detects
-drift, not correctness, and is not a released `wenlan eval` user command.
+The retrieval-regression family owns the before-generation task of comparing a
+versioned golden query set before and after one controlled retrieval change.
+The research family owns the bounded-paper task of building a literature
+matrix and synthesis that preserve citations, contradictions, limitations,
+and source updates. Their source, task, SERP, and product boundaries remain
+distinct from citation verification, generic document ingestion, and Wenlan's
+maintainer evaluation documentation.
 
 The latest authenticated baseline remains source-separated: GSC property totals
 are 8 clicks and 1,005 impressions, visible-query totals are 2 clicks and 216
 impressions, and the visibility gap is 6 clicks and 789 impressions. Vercel
 separately reports 248 visitors, including 30 attributed to Google; GitHub
-reports 48 stars. The three proposed URLs have no source-native page rows yet,
-which are unavailable rather than zero. Each locale independently requires 20
-post-crawl page impressions, 3 qualified joined-query impressions, and 1 GSC
-click for success.
+reports 48 stars. The six new locale routes have no source-native page rows yet;
+that evidence is unavailable rather than zero. For each family, each locale is
+judged independently after a confirmed crawl and 28 complete post-crawl days,
+with at least 20 target-page impressions, 3 qualified joined-query impressions,
+and 1 GSC click. The 24-hour boundary is technical and indexability evidence
+only, not an SEO-success readout.
 
-The user approved resolving the authority-PR conflict and selecting and changing
-this scenario before 2026-08-28. At `2026-08-27T04:09:57Z`, after reviewing the
-prepared scenario and its alternatives, the user explicitly approved publishing
-this exact verified family through commit, push, PR creation, merge, automatic
-Vercel deployment, and read-only production verification. Request indexing,
-GSC validation, external publication, paid action, synthetic events, analytics
-mutation, and metric-definition changes remain excluded.
+Request indexing, GSC validation, external publication, paid action, synthetic
+events, analytics mutation, and metric-definition changes remain excluded.
 
 #### Historical pre-final experiment records
 
@@ -1937,12 +1938,22 @@ user on `2026-07-23`. PR #58 is merged and production-verified.
 
 ### Next decision
 
-Publish the already verified
-`EXP-2026-08-26-retrieval-regression-locales` family under the explicit approval
-record above. Merge only after the integrated branch gates pass, wait for the
-automatic Vercel production deployment, then verify the three live locale routes
-without requesting indexing or changing any account state. Measurement of
-already-live pages does not block this clean, non-overlapping scenario family.
+The publication ledger for PR #144 and PR #145 is corrected. The live
+`0x11c11e/awesome-ai-research-tools` contribution rules and recent owner
+decisions now show a material promotion-risk signal for another maintainer-led
+Awesome-list submission, so do not publish that candidate.
+
+The preferred next authority action is the exact four-README maintained-source
+proposal in
+`docs/seo-audits/2026-08-27-wenlan-research-readme-authority-proposal.patch`.
+It adds one locale-aware research-workflow link from Wenlan's current source
+README family and keeps every translation-sync marker valid. Return this exact
+diff for separate source-repo publication approval before applying, committing,
+pushing, opening or merging a pull request, or relying on automatic publication.
+
+Do not rewrite either new canonical while it measures. Their 24-hour technical
+readouts and later source-native GSC/Vercel observations do not block authority
+preparation or research for the next clean, non-overlapping scenario family.
 
 The fixed final read now governs this section. For `2026-07-21..2026-08-17`,
 GSC reports 9 property clicks and 1,024 impressions; visible-query rows report

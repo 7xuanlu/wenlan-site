@@ -625,12 +625,12 @@ Demand discovery:
 - Trigger: A retrieval configuration or corpus changes and the team needs to know whether representative questions still return the expected evidence
 - Desired outcome: Use a versioned golden query set to compare retrieval before and after one controlled change, identify regressions by expected source, and preserve a rollback decision
 - Stage: `evaluate`
-- Decision: `net-new`
+- Decision: `measuring`
 - Planned window: `2026-08-24..2026-08-30`
-- Publication: `prepared`
+- Publication: `measuring`
 - Standalone utility: A neutral workflow can define representative questions, expected sources, no-answer cases, a baseline manifest, one controlled change, retrieval-only metrics, failure triage, and a rollback decision.
 - Overlap check: Citation verification starts from one suspect answer and checks claim-to-source support. Wenlan evaluation docs explain maintained benchmark results. This family starts before answer generation and compares the same user-owned golden questions before and after one corpus or retrieval change. Keep that boundary or reject the new URL.
-- Next research: The family is selected for local implementation. Preserve the user-owned golden-set workflow and truthful maintainer-only Wenlan proof, complete deterministic and rendered verification, then present the exact publication diff for separate approval.
+- Next research: PR 144 merged at 2026-08-27T04:31:56Z as 681754936193cb035b4285709bd98ed82189e466 and Vercel production completed at 2026-08-27T04:32:45Z. Keep that production boundary fixed, measure each locale independently, and keep any Awesome-RAG contribution separately approval-gated.
 
 ### Locale intent and ownership
 
@@ -712,12 +712,12 @@ Demand discovery:
 - Trigger: A folder of papers or PDFs must become a reusable research synthesis without losing exact citations, contradictory findings, study limitations, or later source changes
 - Desired outcome: Maintain a literature matrix and readable synthesis in which each consequential claim can be traced to the current paper version and disagreements remain explicit
 - Stage: `build`
-- Decision: `net-new`
+- Decision: `measuring`
 - Planned window: `next-eligible-window-after-2026-08-26`
-- Publication: `prepared`
+- Publication: `measuring`
 - Standalone utility: A neutral research runbook can bound a paper set, maintain a claim/method/sample/result/limitation matrix, preserve exact source locations, separate contradictions from consensus, and refresh the synthesis as new papers arrive.
 - Overlap check: Do not duplicate the generic document-import or citation-debugging owners. The new owner is eligible only while it starts from a research question and papers already acquired, builds a literature matrix, preserves contradictions and limitations, and explicitly excludes scholarly search, DOI discovery, Zotero import, citation formatting, scanned-PDF OCR, and manuscript generation.
-- Next research: The English, zh-TW, and zh-CN family is locally prepared with separate natural query language, literature-matrix workflow, contradiction and limitation handling, citation checks, source updates, product boundaries, and same-locale internal links. Complete deterministic and rendered verification, then return for exact publication approval; do not submit the authority candidate yet.
+- Next research: PR 145 merged at 2026-08-28T03:49:03Z as 37b28a0df3e2e85a41ca7ec4bb9d25db3149ca89 and Vercel production completed at 2026-08-28T03:49:51Z. Keep that production boundary fixed and measure each locale independently. The exact maintained-source README proposal is locally prepared; hold the awesome-ai-research-tools submission because current maintainer evidence flags multi-list maintainer promotion risk, and request separate approval before any source-repo publication.
 
 ### Locale intent and ownership
 
@@ -766,7 +766,7 @@ Demand discovery:
 | firstPartyProof | passed | Maintained Wenlan source proves text-extractable PDF and Markdown ingestion, folders and read-only Obsidian sources, incremental sync, source-backed Pages, citations, stale/revision/review state, and lint. | /Users/lucian/Repos/wenlan/README.md:102; /Users/lucian/Repos/wenlan/README.md:240; /Users/lucian/Repos/wenlan/README.md:244 |
 | standaloneUtility | passed | A bounded-paper, literature-matrix, contradiction, citation, and refresh workflow is useful without Wenlan. | standaloneUtility |
 | internalLinks | passed | The generic document-import, citation-verification, source-backed knowledge-base, and Learn-hub owners are available in every locale. | internalLinks |
-| authorityPath | passed | 0x11c11e/awesome-ai-research-tools is active, non-archived, CC0, had 65 stars and a 2026-08-15 push at capture, contains a Notes & Knowledge Management category, welcomes factual sub-18-word PRs, and contains no Wenlan duplicate. Any proposal remains separately approval-gated. | authorityPath |
+| authorityPath | passed | The current Wenlan v0.17.3 source README family is a maintained first-party reference that names researchers and proves the underlying PDF, source-backed Page, citation, refresh, and review capabilities but lacks a direct research-workflow entry. A four-README locale-aware proposal passes the repository translation-sync and diff gates. This is first-party authority, not independent endorsement. | authorityPath; docs/seo-audits/2026-08-27-research-authority-next-action.md |
 
 ### Wenlan proof
 
@@ -787,6 +787,6 @@ Demand discovery:
 
 ### Authority path and readout
 
-- Authority path: research-notes-knowledge-management-directory — https://github.com/0x11c11e/awesome-ai-research-tools — after the trilingual family is published, propose one neutral factual entry under Notes & Knowledge Management only with separate approval (verified-candidate).
+- Authority path: maintained-first-party-reference — https://github.com/7xuanlu/wenlan — add one locale-aware research-workflow entry to the current English, zh-Hant, zh-Hans, and Spanish README Learn-more sections only after separate source-repo publication approval (prepared-local-awaiting-separate-publication-approval).
 - GSC: unavailable; native unit: page impressions, joined-query impressions, clicks.
 - Vercel: unavailable; native unit: target-page visitors and referrer visitors.

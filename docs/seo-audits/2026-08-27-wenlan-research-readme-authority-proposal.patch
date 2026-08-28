@@ -1,0 +1,66 @@
+diff --git a/README.es-ES.md b/README.es-ES.md
+index 0270bfa..20da8a5 100644
+--- a/README.es-ES.md
++++ b/README.es-ES.md
+@@ -1,4 +1,4 @@
+-<!-- README_SYNC: source=README.md sha256=90db35bbc97fc5e4c0d30948df87d79d26a6a79a924f0ec60bd1a3ea5974c769 -->
++<!-- README_SYNC: source=README.md sha256=a0a769a739c5e46353dc5a2c480ce641cc39512b6a517dc976aa174aa35d6c3d -->
+ 
+ <p align="center">
+   <picture>
+@@ -329,6 +329,7 @@ Documentación más detallada, conceptos y comparaciones:
+ - [Memoria de IA local-first](https://wenlan.app/learn/local-first-ai-memory): datos, privacidad y control.
+ - [Markdown e índice local](https://wenlan.app/learn/markdown-local-index-ai-memory): almacenamiento, recuperación y propiedad.
+ - [Bucle de entrega de agentes de IA](https://wenlan.app/learn/ai-agent-handoff-loop): cómo trasladar el trabajo limpiamente a la siguiente sesión.
++- [Base de conocimiento para investigación](https://wenlan.app/learn/source-backed-research-knowledge-base): convierte artículos seleccionados en una matriz bibliográfica y una síntesis verificable con fuentes.
+ 
+ ### Comparaciones
+ 
+diff --git a/README.md b/README.md
+index 1d448cd..6ad064a 100644
+--- a/README.md
++++ b/README.md
+@@ -329,6 +329,7 @@ More detailed documentation, concepts, and comparisons:
+ - [Local-first AI memory](https://wenlan.app/learn/local-first-ai-memory): data, privacy, and control.
+ - [Markdown and local index](https://wenlan.app/learn/markdown-local-index-ai-memory): storage, retrieval, and ownership.
+ - [AI agent handoff loop](https://wenlan.app/learn/ai-agent-handoff-loop): carrying work cleanly into the next session.
++- [Research knowledge base from papers](https://wenlan.app/learn/source-backed-research-knowledge-base): build an inspectable literature matrix and source-backed synthesis from papers you already have.
+ 
+ ### Comparisons
+ 
+diff --git a/README.zh-Hans.md b/README.zh-Hans.md
+index 44a7af5..040ff64 100644
+--- a/README.zh-Hans.md
++++ b/README.zh-Hans.md
+@@ -1,4 +1,4 @@
+-<!-- README_SYNC: source=README.md sha256=90db35bbc97fc5e4c0d30948df87d79d26a6a79a924f0ec60bd1a3ea5974c769 -->
++<!-- README_SYNC: source=README.md sha256=a0a769a739c5e46353dc5a2c480ce641cc39512b6a517dc976aa174aa35d6c3d -->
+ 
+ <p align="center">
+   <picture>
+@@ -331,6 +331,7 @@ a1b2c3d distill: 4 pages
+ - [本地优先的 AI 记忆](https://wenlan.app/learn/local-first-ai-memory)：数据、隐私与控制权。
+ - [Markdown 与本地索引](https://wenlan.app/learn/markdown-local-index-ai-memory)：存储、检索与所有权。
+ - [AI agent 的交接循环](https://wenlan.app/learn/ai-agent-handoff-loop)：把工作完整带到下一次会话。
++- [用论文建立研究知识库](https://wenlan.app/zh-CN/learn/source-backed-research-knowledge-base)：把已选好的论文整理成可检查的文献矩阵与来源支撑综述。
+ 
+ ### 比较
+ 
+diff --git a/README.zh-Hant.md b/README.zh-Hant.md
+index 225ecc5..0efb170 100644
+--- a/README.zh-Hant.md
++++ b/README.zh-Hant.md
+@@ -1,4 +1,4 @@
+-<!-- README_SYNC: source=README.md sha256=90db35bbc97fc5e4c0d30948df87d79d26a6a79a924f0ec60bd1a3ea5974c769 -->
++<!-- README_SYNC: source=README.md sha256=a0a769a739c5e46353dc5a2c480ce641cc39512b6a517dc976aa174aa35d6c3d -->
+ 
+ <p align="center">
+   <picture>
+@@ -331,6 +331,7 @@ a1b2c3d distill: 4 pages
+ - [本機優先的 AI 記憶](https://wenlan.app/learn/local-first-ai-memory)：資料、隱私與控制權。
+ - [Markdown 與本地索引](https://wenlan.app/learn/markdown-local-index-ai-memory)：儲存、檢索與所有權。
+ - [AI agent 的交接循環](https://wenlan.app/learn/ai-agent-handoff-loop)：把工作完整帶到下一次會話。
++- [用論文建立研究知識庫](https://wenlan.app/zh-TW/learn/source-backed-research-knowledge-base)：把已選好的論文整理成可檢查的文獻矩陣與來源支撐綜合。
+ 
+ ### 比較
+ 
