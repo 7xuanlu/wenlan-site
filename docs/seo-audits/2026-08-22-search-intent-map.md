@@ -1,6 +1,6 @@
 # Wenlan Search Intent Map
 
-Captured at: 2026-08-23T07:58:56.818Z
+Captured at: 2026-08-27T22:10:01.166Z
 
 This is a deterministic planning and ownership contract for every canonical URL in the sitemap. A primary search phrase identifies the page owner; it is not keyword volume, a ranking promise, or a claim that Google uses the site's meta-keywords field. Locale variants may own the same concept in different languages.
 
@@ -8,10 +8,10 @@ This is a deterministic planning and ownership contract for every canonical URL 
 
 | Locale | Mapped sitemap URLs |
 | --- | ---: |
-| English | 99 |
-| zh-TW | 12 |
-| zh-CN | 12 |
-| Total | 123 |
+| English | 101 |
+| zh-TW | 14 |
+| zh-CN | 14 |
+| Total | 129 |
 
 The contract fails when a sitemap URL has no owner, one URL has multiple records, a locale has duplicate primary searches or titles, or required intent fields are empty. Technical canonical, hreflang, indexability, and rendering checks remain separate regression gates.
 
@@ -101,7 +101,9 @@ The contract fails when a sitemap URL has no owner, one URL has multiple records
 | /learn/persistent-project-context-for-ai-agents | learn | informational | persistent project context | Learn what persistent project context means for AI agents and how Wenlan keeps decisions, lessons, handoffs, and pages available locally. |
 | /learn/project-scope-ai-memory | learn | informational | what Wenlan is not | Wenlan scopes to local-first AI work memory. It is not a life OS, workflow suite, generic memory infrastructure SDK, or one-off chat tool. |
 | /learn/review-before-trust-ai-memory | learn | informational | stale AI agent memory | Fix stale AI agent memory by tracing the source, checking scope, reviewing contradictions, preserving corrections, and deleting only records that should not remain. |
+| /learn/source-backed-research-knowledge-base | learn | task-completion | build research knowledge base from papers | Build a source-backed research knowledge base from papers and text PDFs with a literature matrix, exact citations, contradictions, limitations, and updates. |
 | /learn/source-backed-wiki-pages-ai-work | learn | informational | source backed AI knowledge base | Build a source-backed AI knowledge base with trusted sources, atomic knowledge, maintained LLM-wiki pages, citations, review, and refresh. |
+| /learn/verify-ai-knowledge-base-citations | learn | task-completion | verify AI knowledge base citations | Check AI knowledge-base citations claim by claim. Diagnose wrong pages, mismatched chunks, stale revisions, and unsupported RAG answers. |
 | /learn/wenlan-claude-desktop-workflow | learn | task-completion | Wenlan Claude Desktop workflow | Claude Desktop can use Wenlan through MCP to capture planning decisions, recall local context, and share memory with coding tools. |
 | /learn/wenlan-codex-workflow | learn | task-completion | Wenlan Codex workflow | A practical Wenlan workflow for Codex users: connect MCP, load context, capture decisions, recall project memory, and hand off to future sessions. |
 | /learn/wenlan-cursor-workflow | learn | task-completion | Wenlan Cursor workflow | A Cursor workflow for Wenlan: connect MCP, load context, capture decisions, recall prior work, and share memory with Claude Code or Codex. |
@@ -133,7 +135,9 @@ The contract fails when a sitemap URL has no owner, one URL has multiple records
 | /zh-TW/learn/choose-ai-knowledge-base-tool | learn | task-completion | AI 知識庫工具 | 用 8 個實際測試選擇 AI 知識庫工具，比較文件問答、RAG、本地筆記與跨 AI agent 維護知識的差異。 |
 | /zh-TW/learn/coding-agent-source-backed-knowledge-base | learn | task-completion | Codex 知識庫 | 用 AGENTS.md、專案文件、引用、按需檢索與驗證，為 Codex、Claude Code 或其他 coding agent 建立有來源的專案知識庫。 |
 | /zh-TW/learn/distilled-wiki-pages-ai-memory | learn | informational | LLM Wiki 知識庫 | 了解 Karpathy LLM Wiki 的架構、它和 RAG 的差異，以及來源頁面、Obsidian、驗證與持續更新如何配合。 |
+| /zh-TW/learn/source-backed-research-knowledge-base | learn | task-completion | 用論文 PDF 建立研究知識庫 | 用已選定的論文與文字型 PDF 建立研究知識庫，保留文獻矩陣、精確引用、矛盾、限制與來源更新。 |
 | /zh-TW/learn/source-backed-wiki-pages-ai-work | learn | informational | AI 知識庫 | 建立有來源的 AI 知識庫：分開可信來源、原子知識與 LLM Wiki 頁面，並用 Wenlan 保留引用、更新與審查狀態。 |
+| /zh-TW/learn/verify-ai-knowledge-base-citations | learn | task-completion | AI 知識庫引用對不上 | 逐項驗證 AI 知識庫引用，診斷錯頁、錯片段、過期版本與無依據回答，並建立可重複的來源檢查流程。 |
 | /zh-TW/learn/wenlan-vs-obsidian-ai-memory | learn | commercial-investigation | Obsidian Claude Code | 了解 Claude Code 何時直接讀 Obsidian vault 就夠、IDE 與 MCP bridge 增加什麼，以及 AI 知識庫何時需要來源、更新與審查流程。 |
 
 ## zh-CN
@@ -150,5 +154,7 @@ The contract fails when a sitemap URL has no owner, one URL has multiple records
 | /zh-CN/learn/choose-ai-knowledge-base-tool | learn | task-completion | AI 知识库工具 | 用 8 个实际测试选择 AI 知识库工具，比较文档问答、RAG、本地笔记与跨 AI agent 维护知识的区别。 |
 | /zh-CN/learn/coding-agent-source-backed-knowledge-base | learn | task-completion | Codex 知识库 | 用 AGENTS.md、项目文档、引用、按需检索与验证，为 Codex、Claude Code 或其他 coding agent 建立有来源的项目知识库。 |
 | /zh-CN/learn/distilled-wiki-pages-ai-memory | learn | informational | LLM Wiki 知识库 | 了解 Karpathy LLM Wiki 的架构、它和 RAG 的区别，以及来源页面、Obsidian、校验与持续更新如何配合。 |
+| /zh-CN/learn/source-backed-research-knowledge-base | learn | task-completion | 用论文 PDF 建立研究知识库 | 用已经选定的论文与文本型 PDF 建立研究知识库，保留文献矩阵、准确引用、矛盾、局限与来源更新。 |
 | /zh-CN/learn/source-backed-wiki-pages-ai-work | learn | informational | AI 知识库 | 建立有来源的 AI 知识库：分开可信来源、原子知识与 LLM Wiki 页面，并用 Wenlan 保留引用、更新与审核状态。 |
+| /zh-CN/learn/verify-ai-knowledge-base-citations | learn | task-completion | AI 知识库引用对不上 | 逐项验证 AI 知识库引用，诊断错页、错片段、过期版本与无依据回答，并建立可重复的来源检查流程。 |
 | /zh-CN/learn/wenlan-vs-obsidian-ai-memory | learn | commercial-investigation | Obsidian Claude Code | 了解 Claude Code 何时直接读取 Obsidian vault 就够、IDE 与 MCP bridge 增加什么，以及 AI 知识库何时需要来源、更新与审核流程。 |

@@ -19,6 +19,7 @@ type BaseSpec = {
   keywords: string[];
   publishedAt?: string;
   updatedAt?: string;
+  readingTime?: string;
   audience: string;
   heroBullets: [string, string, string];
   quickAnswer: string;
@@ -56,7 +57,7 @@ function makeArticle(spec: BaseSpec): LearnArticle {
     publishedAt: spec.publishedAt,
     updatedAt: spec.updatedAt ?? UPDATED_AT,
     author: AUTHOR,
-    readingTime: "5 min read",
+    readingTime: spec.readingTime ?? "5 min read",
     audience: spec.audience,
     heroBullets: spec.heroBullets,
     sections: [
@@ -1633,6 +1634,7 @@ const workflowArticles: BaseSpec[] = [
     relatedSlugs: [
       "coding-agent-source-backed-knowledge-base",
       "source-backed-wiki-pages-ai-work",
+      "source-backed-research-knowledge-base",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
     ],
@@ -1657,6 +1659,97 @@ const workflowArticles: BaseSpec[] = [
     cta: {
       heading: "Build one local knowledge-base loop",
       body: "Install Wenlan, add one inspectable document set, then verify sync, Pages, citations, and review before expanding.",
+    },
+  },
+  {
+    slug: "source-backed-research-knowledge-base",
+    eyebrow: "Research workflow",
+    category: "Workflows",
+    title: "Build a Research Knowledge Base from Papers and PDFs",
+    description:
+      "Turn a bounded paper set into inspectable research notes that preserve claims, methods, limitations, contradictions, citations, and source updates.",
+    metaTitle: "Build a Research Knowledge Base from Papers & PDFs",
+    metaDescription:
+      "Build a source-backed research knowledge base from papers and text PDFs with a literature matrix, exact citations, contradictions, limitations, and updates.",
+    keywords: [
+      "build research knowledge base from papers",
+      "source backed literature review workflow",
+      "AI research notes with citations",
+      "PDF research knowledge base",
+      "literature matrix AI",
+      "research knowledge management",
+    ],
+    publishedAt: "2026-08-27",
+    updatedAt: "2026-08-27",
+    readingTime: "8 min read",
+    audience:
+      "Students and researchers who already have a bounded paper set and need inspectable synthesis rather than automatic paper discovery or writing",
+    heroBullets: [
+      "Begin with one research question and papers you have already selected.",
+      "Track each claim, method, sample, result, and limitation back to an exact source location.",
+      "Keep agreement, contradiction, and unknowns separate as new papers arrive.",
+    ],
+    quickAnswer:
+      "Start with one research question and a bounded set of papers you already have. Keep the papers authoritative, extract only readable text, and build a literature matrix with one row per important claim: method, sample, result, limitation, exact source location, and current verification state.",
+    wenlanFit:
+      "Wenlan can register Markdown, text, text-extractable PDFs, folders, and read-only Obsidian sources, then maintain source-backed Pages with citations, stale state, revisions, lint, and human review. It does not search scholarly databases, discover papers, format bibliographies, or judge whether a study is academically valid.",
+    problem:
+      "A folder of PDFs is difficult to compare, while a smooth AI summary can erase disagreements, omit study limitations, or invent support. The useful research artifact preserves the question, evidence table, contradiction record, and exact passage behind every consequential synthesis so another reader can reproduce the reasoning.",
+    actionHeading: "Build one inspectable paper-to-synthesis loop",
+    actionIntro:
+      "Use papers already acquired for one question. Keep the first pass small enough to verify every row.",
+    actionBullets: [
+      "Write one research question and freeze a bounded initial paper set; record the inclusion boundary instead of asking an assistant to discover an unknown corpus.",
+      "Keep original papers authoritative. Use text-extractable PDFs or derived Markdown and text; run OCR outside Wenlan before adding scanned or image-only PDFs.",
+      "Create a literature matrix with claim, method, sample, result, limitation, exact page or section, paper version, and verification status.",
+      "Group agreement, contradiction, and unknowns separately. Do not flatten conflicting findings into one consensus paragraph.",
+      "Open the cited passage for every important claim and verify numbers, scope, attribution, negation, and current source version.",
+      "When a new or revised paper arrives, resync the source and refresh only the affected synthesis; preserve the earlier revision for review.",
+      "Export or retain a readable research note. A human researcher remains responsible for interpretation, study-quality assessment, citations, and final writing.",
+    ],
+    code: {
+      label: "After Wenlan and the AI client are configured",
+      code: "wenlan status\nwenlan sources add ~/Research/papers\n# In a Wenlan plugin client:\n/distill <research question>\n/pages <research question>\n/lint\n/curate",
+    },
+    caution:
+      "This workflow is not scholarly search, DOI discovery, Zotero import, reference formatting, automatic literature-review writing, or proof that a cited paper is true. Wenlan reads text-extractable PDFs; scanned PDFs require OCR first, and study quality, statistics, and academic integrity still require human review.",
+    faq: [
+      "Can Wenlan find papers or write my literature review?",
+      "No. Begin with papers you already selected. Wenlan can help maintain an inspectable source-backed research artifact, but it does not replace scholarly search, source selection, interpretation, citation formatting, or authorship.",
+      "How should I handle papers that disagree?",
+      "Keep separate matrix rows for each result, scope, method, and limitation. Record the contradiction explicitly and leave the synthesis unresolved until the evidence supports a narrower conclusion.",
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "verify-ai-knowledge-base-citations",
+      "source-backed-wiki-pages-ai-work",
+      "choose-ai-knowledge-base-tool",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan supported document sources",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan source-backed Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "National Taiwan University AI research guidance",
+        href: "https://www.lib.ntu.edu.tw/img/tulblog/HELP/HELP_20260525_AI.pdf",
+      },
+      {
+        label: "Distill research workspace",
+        href: "https://github.com/luisalarcon-gauntlet/Distill",
+      },
+      {
+        label: "UReKA research knowledge workflow",
+        href: "https://github.com/Agents4Academia-AI/UReKA",
+      },
+    ],
+    cta: {
+      heading: "Build one inspectable research artifact",
+      body: "Add a bounded paper set, create a literature matrix, and verify every important synthesis against the current source before expanding.",
     },
   },
   {
@@ -1723,6 +1816,7 @@ const workflowArticles: BaseSpec[] = [
       "build-local-ai-knowledge-base-from-documents",
       "source-backed-wiki-pages-ai-work",
       "distilled-wiki-pages-ai-memory",
+      "verify-ai-knowledge-base-citations",
     ],
     officialReferences: [
       {
@@ -2265,6 +2359,93 @@ const comparisonArticles: BaseSpec[] = [
 
 const trustArticles: BaseSpec[] = [
   {
+    slug: "verify-ai-knowledge-base-citations",
+    eyebrow: "Trust check",
+    category: "Workflows",
+    title: "How to Verify AI Knowledge Base Citations and Unsupported Claims",
+    description:
+      "Audit a RAG or AI knowledge-base answer claim by claim to find wrong pages, mismatched chunks, stale sources, and unsupported conclusions.",
+    metaTitle: "Verify AI Knowledge Base Citations | Wenlan",
+    metaDescription:
+      "Check AI knowledge-base citations claim by claim. Diagnose wrong pages, mismatched chunks, stale revisions, and unsupported RAG answers.",
+    keywords: [
+      "verify AI knowledge base citations",
+      "RAG wrong page citations",
+      "RAG citation faithfulness",
+      "unsupported claims RAG",
+      "AI knowledge base provenance",
+      "citation verification checklist",
+    ],
+    publishedAt: "2026-08-23",
+    updatedAt: "2026-08-23",
+    audience:
+      "People debugging AI knowledge-base answers that look grounded but cite the wrong page, chunk, version, or source",
+    heroBullets: [
+      "A citation marker proves that a source was attached, not that the source supports the claim.",
+      "Check each important claim against the exact page, chunk, and source revision.",
+      "Classify the result as supported, partial, unsupported, or stale before reusing the answer.",
+    ],
+    quickAnswer:
+      "To verify an AI knowledge-base answer, split it into testable claims, open the exact cited page or chunk for each claim, and record whether the current source fully supports it. Treat missing, broken, wrong-page, mismatched, and stale citations as different failures instead of one generic hallucination score.",
+    problem:
+      "An answer can be factually plausible while its citation points to the first retrieved source, an unrelated chunk, or an older document revision. The failure stays hidden when reviewers check only that citation markers exist instead of comparing each claim with the cited evidence.",
+    wenlanFit:
+      "Wenlan keeps Sources, atomic knowledge, and maintained Pages separate. Page citations, source IDs, revisions, stale state, lint, and human review make the evidence trail inspectable, but Wenlan does not automatically prove that every source is true or replace review of important claims.",
+    actionHeading: "Run a claim-to-evidence audit",
+    actionIntro:
+      "Start with one suspect answer. Keep the audit small enough that another person can reproduce every decision.",
+    actionBullets: [
+      "Copy the answer into separate factual claims; ignore transitions and opinions that make no factual assertion.",
+      "For each claim, record the citation marker, source ID, document title, page or section, and source revision when available.",
+      "Open the cited location and check whether it supports the whole claim, only part of it, a different claim, or nothing at all.",
+      "Mark the claim supported, partial, unsupported, or stale; do not convert a missing row or unavailable source into a pass.",
+      "Check numbers, negations, attribution, scope, and dates separately because a nearby passage can still contradict the answer.",
+      "Correct the answer or keep the conclusion unknown before refreshing a maintained page.",
+      "Run lint and human review, then repeat the same question to confirm the repaired answer returns to the intended source.",
+    ],
+    code: {
+      label: "Inspect and review one Wenlan Page",
+      code: "/pages <topic>\n/lint\n/curate",
+    },
+    caution:
+      "This workflow is a diagnostic checklist, not an automatic RAG benchmark. A cited source may itself be wrong, outdated, or non-authoritative, so consequential claims still require the maintained first-party source and appropriate human review.",
+    faq: [
+      "Does a citation mean the answer is grounded?",
+      "No. It means a source reference exists. The cited location must still support the exact claim, scope, number, attribution, and current version.",
+      "What should I do when the citation points to the wrong page?",
+      "Record it as a mismatched citation, locate the actual supporting source if one exists, and correct or withhold the claim. Do not silently keep the answer because it sounds plausible.",
+    ],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "choose-ai-knowledge-base-tool",
+      "source-backed-research-knowledge-base",
+      "distilled-wiki-pages-ai-memory",
+      "ai-memory-provenance",
+    ],
+    officialReferences: [
+      {
+        label: "Anthropic citations documentation",
+        href: "https://platform.claude.com/docs/en/build-with-claude/citations",
+      },
+      {
+        label: "Open WebUI wrong-source issue",
+        href: "https://github.com/open-webui/open-webui/issues/12655",
+      },
+      {
+        label: "Open WebUI identical-chunk citation issue",
+        href: "https://github.com/open-webui/open-webui/issues/20435",
+      },
+      {
+        label: "Wenlan review and trust guide",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+    ],
+    cta: {
+      heading: "Verify one answer before expanding the knowledge base",
+      body: "Use Wenlan to inspect the Page, source IDs, stale state, lint findings, and review path, then keep only claims the current evidence supports.",
+    },
+  },
+  {
     slug: "source-backed-wiki-pages-ai-work",
     eyebrow: "Trust",
     category: "Concepts",
@@ -2318,7 +2499,7 @@ const trustArticles: BaseSpec[] = [
       "Should I import every note before starting?",
       "No. Start with one repeated, high-value topic and prove its source, capture, distill, inspection, lint, and review loop before expanding.",
     ],
-    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "review-before-trust-ai-memory", "ai-memory-provenance"],
+    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "verify-ai-knowledge-base-citations", "source-backed-research-knowledge-base", "review-before-trust-ai-memory", "ai-memory-provenance"],
     officialReferences: [
       {
         label: "Wenlan knowledge model",
