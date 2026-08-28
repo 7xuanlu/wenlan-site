@@ -1876,9 +1876,9 @@
       "userTask": "Regression-test AI knowledge-base retrieval after corpus, embedding, chunking, or reranker changes",
       "desiredOutcome": "Use a versioned golden query set to compare retrieval before and after one controlled change, identify regressions by expected source, and preserve a rollback decision",
       "stage": "evaluate",
-      "decision": "net-new",
+      "decision": "measuring",
       "plannedWindow": "2026-08-24..2026-08-30",
-      "publicationStatus": "prepared",
+      "publicationStatus": "measuring",
       "locales": {
         "en": {
           "queryFamily": [
@@ -2132,7 +2132,7 @@
         "target": "https://github.com/Danielskry/Awesome-RAG — propose one neutral retrieval-regression guide only after the current Wenlan contribution resolves and with separate approval",
         "status": "predeclared-no-external-action"
       },
-      "nextResearchDirection": "The family is selected for local implementation. Preserve the user-owned golden-set workflow and truthful maintainer-only Wenlan proof, complete deterministic and rendered verification, then present the exact publication diff for separate approval.",
+      "nextResearchDirection": "PR 144 merged at 2026-08-27T04:31:56Z as 681754936193cb035b4285709bd98ed82189e466 and Vercel production completed at 2026-08-27T04:32:45Z. Keep that production boundary fixed, measure each locale independently, and keep any Awesome-RAG contribution separately approval-gated.",
       "readout": {
         "gsc": {
           "status": "unavailable",
@@ -2151,9 +2151,9 @@
       "userTask": "Build an inspectable research knowledge base from papers and PDFs without losing citations, contradictions, limitations, or source updates",
       "desiredOutcome": "Maintain a literature matrix and readable synthesis in which each consequential claim can be traced to the current paper version and disagreements remain explicit",
       "stage": "build",
-      "decision": "net-new",
+      "decision": "measuring",
       "plannedWindow": "next-eligible-window-after-2026-08-26",
-      "publicationStatus": "prepared",
+      "publicationStatus": "measuring",
       "locales": {
         "en": {
           "queryFamily": [
@@ -2372,9 +2372,10 @@
         },
         "authorityPath": {
           "status": "passed",
-          "reason": "0x11c11e/awesome-ai-research-tools is active, non-archived, CC0, had 65 stars and a 2026-08-15 push at capture, contains a Notes & Knowledge Management category, welcomes factual sub-18-word PRs, and contains no Wenlan duplicate. Any proposal remains separately approval-gated.",
+          "reason": "The current Wenlan v0.17.3 source README family is a maintained first-party reference that names researchers and proves the underlying PDF, source-backed Page, citation, refresh, and review capabilities but lacks a direct research-workflow entry. A four-README locale-aware proposal passes the repository translation-sync and diff gates. This is first-party authority, not independent endorsement.",
           "evidenceRefs": [
-            "authorityPath"
+            "authorityPath",
+            "docs/seo-audits/2026-08-27-research-authority-next-action.md"
           ]
         }
       },
@@ -2404,11 +2405,11 @@
         "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work"
       ],
       "authorityPath": {
-        "type": "research-notes-knowledge-management-directory",
-        "target": "https://github.com/0x11c11e/awesome-ai-research-tools — after the trilingual family is published, propose one neutral factual entry under Notes & Knowledge Management only with separate approval",
-        "status": "verified-candidate"
+        "type": "maintained-first-party-reference",
+        "target": "https://github.com/7xuanlu/wenlan — add one locale-aware research-workflow entry to the current English, zh-Hant, zh-Hans, and Spanish README Learn-more sections only after separate source-repo publication approval",
+        "status": "prepared-local-awaiting-separate-publication-approval"
       },
-      "nextResearchDirection": "The English, zh-TW, and zh-CN family is locally prepared with separate natural query language, literature-matrix workflow, contradiction and limitation handling, citation checks, source updates, product boundaries, and same-locale internal links. Complete deterministic and rendered verification, then return for exact publication approval; do not submit the authority candidate yet.",
+      "nextResearchDirection": "PR 145 merged at 2026-08-28T03:49:03Z as 37b28a0df3e2e85a41ca7ec4bb9d25db3149ca89 and Vercel production completed at 2026-08-28T03:49:51Z. Keep that production boundary fixed and measure each locale independently. The exact maintained-source README proposal is locally prepared; hold the awesome-ai-research-tools submission because current maintainer evidence flags multi-list maintainer promotion risk, and request separate approval before any source-repo publication.",
       "readout": {
         "gsc": {
           "status": "unavailable",
