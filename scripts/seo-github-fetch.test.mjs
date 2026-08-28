@@ -20,13 +20,13 @@ const fixtureRoot = resolve(__dirname, "fixtures/seo-weekly");
 
 const currentAssets = [
   ["wenlan-cli-darwin-arm64.tar.gz", 0],
-  ["wenlan-darwin-arm64.tar.gz", 2],
-  ["wenlan-linux-arm64.tar.gz", 2],
-  ["wenlan-linux-x64.tar.gz", 8],
-  ["wenlan-mcp-darwin-arm64.tar.gz", 0],
-  ["wenlan-windows-x64.zip", 3],
-  ["Wenlan_0.16.0_aarch64.dmg", 1],
-  ["Wenlan_0.16.0_x64-setup.exe", 1],
+  ["wenlan-darwin-arm64.tar.gz", 7],
+  ["wenlan-linux-arm64.tar.gz", 3],
+  ["wenlan-linux-x64.tar.gz", 11],
+  ["wenlan-mcp-darwin-arm64.tar.gz", 2],
+  ["wenlan-windows-x64.zip", 4],
+  ["Wenlan_0.17.3_aarch64.dmg", 2],
+  ["Wenlan_0.17.3_x64-setup.exe", 1],
 ].map(([name, download_count], index) => ({
   name,
   size: 1_000 + index,
@@ -41,8 +41,8 @@ test("GitHub fetch records stars and cumulative website release downloads", asyn
       repository: { stargazers_count: 47 },
       releases: [
           {
-            tag_name: "v0.16.0",
-            published_at: "2026-08-19T03:57:54Z",
+            tag_name: "v0.17.3",
+            published_at: "2026-08-27T22:15:26Z",
             assets: currentAssets,
           },
           {
@@ -58,10 +58,10 @@ test("GitHub fetch records stars and cumulative website release downloads", asyn
     const metadataPath = join(outputRoot, "github-metadata.json");
     await writeFile(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`, "utf8");
     assert.equal(metadata.stars, 47);
-    assert.equal(metadata.currentRelease.tag, "v0.16.0");
-    assert.equal(metadata.currentRelease.websiteAssetDownloads, 17);
-    assert.equal(metadata.currentRelease.assetDownloads, 17);
-    assert.equal(metadata.allReleaseAssetDownloads, 22);
+    assert.equal(metadata.currentRelease.tag, "v0.17.3");
+    assert.equal(metadata.currentRelease.websiteAssetDownloads, 28);
+    assert.equal(metadata.currentRelease.assetDownloads, 30);
+    assert.equal(metadata.allReleaseAssetDownloads, 35);
 
     const reportPath = join(outputRoot, "weekly.md");
     await execFileAsync(
@@ -83,8 +83,8 @@ test("GitHub fetch records stars and cumulative website release downloads", asyn
     );
     const report = await readFile(reportPath, "utf8");
     assert.match(report, /GitHub stars \| 47/);
-    assert.match(report, /Website-linked v0\.16\.0 asset downloads \| 17/);
-    assert.match(report, /All release asset downloads \| 22/);
+    assert.match(report, /Website-linked v0\.17\.3 asset downloads \| 28/);
+    assert.match(report, /All release asset downloads \| 35/);
     assert.match(report, /GitHub Release Evidence/);
     assert.match(report, /cumulative point-in-time counters/);
   } finally {
