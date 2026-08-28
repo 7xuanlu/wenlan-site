@@ -3605,7 +3605,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.16.0 line.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.17.3 line.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3739,7 +3739,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Open the app source",
-          href: "https://github.com/7xuanlu/wenlan/tree/v0.16.0/app",
+          href: "https://github.com/7xuanlu/wenlan/tree/v0.17.3/app",
         },
       },
       {
@@ -3783,36 +3783,36 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.16.0",
+      "Wenlan version 0.17.3",
       "wenlan-mcp release notes",
     ],
-    updatedAt: "2026-08-19",
+    updatedAt: "2026-08-27",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Quick answer: the current stable release in the repository changelog is v0.16.0, dated 2026-08-19.",
+      "Quick answer: the current stable release in the repository changelog is v0.17.3, dated 2026-08-27.",
       "The unified release publishes native runtime archives plus macOS Apple Silicon and Windows x64 desktop builds and updater artifacts.",
     ],
     sections: [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.16.0 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It adds the installable Windows x64 desktop build while keeping the unified release manifest and headless runtime archives.",
+          "Wenlan v0.17.3 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It keeps the Windows x64 and macOS Apple Silicon desktop builds plus the native headless runtime archives, and adds release and source-write trust hardening.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
         ],
       },
       {
-        heading: "v0.16.0 highlights",
+        heading: "v0.17.3 highlights",
         body: [
-          "The v0.16.0 release makes the Windows desktop build installable from the same release surface as the macOS preview and native runtime archives, while strengthening the app's source-backed knowledge workflow.",
+          "The v0.17.3 release verifies published downloads, fences citation and Page writes against source revisions, and hardens the experimental Remote Access boundary.",
         ],
         bullets: [
-          "Windows x64 now has a desktop setup executable in addition to the headless runtime ZIP.",
-          "App runtime paths and tests are portable across the published desktop targets.",
-          "Page truth badges, human-reviewed Page capability, and the two-zone knowledge graph make evidence and review state more visible.",
-          "Page Map and community-map surfaces are restored, daemon auto-start is hardened, and capture or handoff writes can survive an offline daemon through the durable outbox.",
+          "The release publishes SHA256SUMS and supports verified exact-release installation.",
+          "Citation and Page writes are fenced on the source revision so a changed source cannot silently accept an outdated write.",
+          "Remote Access adds a Sec-Fetch-Site guard while remaining experimental and URL-possession based.",
+          "The v0.17 line also improves desktop daemon lifecycle handling and makes the Atlas knowledge view the default app surface.",
           "The macOS desktop preview is not yet notarized; the maintained installer verifies the release before clearing quarantine for Wenlan only.",
-          "Stable release date: 2026-08-19.",
+          "Stable release date: 2026-08-27.",
         ],
       },
       {
@@ -3911,7 +3911,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.16.0, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.17.3, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },
