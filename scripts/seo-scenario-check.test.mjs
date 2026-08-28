@@ -26,13 +26,13 @@ test("canonical trilingual scenario backlog is complete and generated report is 
   });
 
   assert.deepEqual(result.errors, []);
-  assert.equal(backlog.families.length, 8);
+  assert.equal(backlog.families.length, 9);
   assert.equal(
     backlog.families.at(-1)?.id,
-    "retrieval-regression-after-knowledge-base-changes",
+    "source-backed-research-knowledge-base",
   );
   assert.equal(backlog.campaign.baseline.sitemapUrls, 120);
-  assert.equal(sitemapRows.length, 138);
+  assert.equal(sitemapRows.length, 141);
   assert.equal(result.sitemapCount, sitemapRows.length);
   assert.equal(renderScenarioBacklog(backlog), report);
 });
