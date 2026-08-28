@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-26",
+  "updatedAt": "2026-08-27",
   "campaign": {
     "deadline": "2026-09-21",
     "finalWindow": "2026-08-24..2026-09-20",
@@ -2133,6 +2133,282 @@
         "status": "predeclared-no-external-action"
       },
       "nextResearchDirection": "The family is selected for local implementation. Preserve the user-owned golden-set workflow and truthful maintainer-only Wenlan proof, complete deterministic and rendered verification, then present the exact publication diff for separate approval.",
+      "readout": {
+        "gsc": {
+          "status": "unavailable",
+          "nativeUnit": "page impressions, joined-query impressions, clicks"
+        },
+        "vercel": {
+          "status": "unavailable",
+          "nativeUnit": "target-page visitors and referrer visitors"
+        }
+      }
+    },
+    {
+      "id": "source-backed-research-knowledge-base",
+      "audience": "Students and researchers who already have a bounded paper set and need inspectable synthesis rather than automatic paper discovery or writing",
+      "trigger": "A folder of papers or PDFs must become a reusable research synthesis without losing exact citations, contradictory findings, study limitations, or later source changes",
+      "userTask": "Build an inspectable research knowledge base from papers and PDFs without losing citations, contradictions, limitations, or source updates",
+      "desiredOutcome": "Maintain a literature matrix and readable synthesis in which each consequential claim can be traced to the current paper version and disagreements remain explicit",
+      "stage": "build",
+      "decision": "net-new",
+      "plannedWindow": "next-eligible-window-after-2026-08-26",
+      "publicationStatus": "prepared",
+      "locales": {
+        "en": {
+          "queryFamily": [
+            "build research knowledge base from papers",
+            "source backed literature review workflow",
+            "AI research notes with citations"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "signed-in-google-serp",
+              "sourceUrl": "https://www.google.com/search?hl=en&gl=us&q=AI+research+assistant+literature+review+PDF+citations",
+              "query": "AI research assistant literature review PDF citations",
+              "capturedAt": "2026-08-26",
+              "language": "en",
+              "geography": "United States parameter; signed-in personalized surface",
+              "nativeUnit": "returned result observation",
+              "value": "research tools, university guidance, and community results",
+              "note": "The result set emphasizes paper discovery, PDF reading, literature review, and citations. It proves result shape, not keyword volume or exact rank."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "google-trends",
+              "sourceUrl": "https://trends.google.com/trends/explore?date=today%2012-m&q=AI%20for%20students,AI%20research%20assistant,AI%20for%20consultants,AI%20for%20finance,AI%20for%20product%20managers",
+              "query": "AI for students; AI research assistant; AI for consultants; AI for finance; AI for product managers",
+              "capturedAt": "2026-08-26",
+              "language": "en",
+              "geography": "Worldwide",
+              "nativeUnit": "request-relative Google Trends average 0-100 index",
+              "value": "53; 10; 4; 37; 1",
+              "note": "The values stay request-relative and do not establish search volume. AI for finance is ambiguous."
+            },
+            {
+              "sourceType": "open-source-workflow",
+              "sourceUrl": "https://github.com/luisalarcon-gauntlet/Distill",
+              "query": "research papers course PDFs source cited wiki",
+              "capturedAt": "2026-08-26",
+              "language": "en",
+              "geography": "global OSS",
+              "nativeUnit": "inspectable repository",
+              "value": "1 maintained implementation observation",
+              "note": "The project turns papers and course material into an interlinked, source-aware research workspace."
+            },
+            {
+              "sourceType": "firsthand-practitioner-post",
+              "sourceUrl": "https://dev.to/magickong/my-study-bot-invented-citations-a-30-line-ledger-caught-them-2ki2",
+              "query": "study bot invented citations source ledger",
+              "capturedAt": "2026-08-26",
+              "language": "en",
+              "geography": "community geography unavailable",
+              "nativeUnit": "firsthand published workflow",
+              "value": "1 reproducible citation-ledger report",
+              "note": "The author records fabricated and unsupported study answers and a claim-to-source verification method; the author's counts are not generalized."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Keep the owner narrower than AI literature-review generators: start from papers the user already has, build a claim/method/limitation matrix, preserve exact source support, and refresh when papers change."
+        },
+        "zh-TW": {
+          "queryFamily": [
+            "用論文 PDF 建立研究知識庫",
+            "AI 論文筆記保留引用",
+            "論文大腦 文獻回顧"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "signed-in-google-serp",
+              "sourceUrl": "https://www.google.com/search?hl=zh-TW&gl=tw&q=AI+%E8%AB%96%E6%96%87+PDF+%E5%BC%95%E7%94%A8+%E6%96%87%E7%8D%BB%E5%9B%9E%E9%A1%A7",
+              "query": "AI 論文 PDF 引用 文獻回顧",
+              "capturedAt": "2026-08-26",
+              "language": "zh-TW",
+              "geography": "Taiwan parameter",
+              "nativeUnit": "returned result observation",
+              "value": "university guide, practitioner workflows, tool guides, and 論文大腦 result",
+              "note": "The natural result language is AI 論文, 文獻回顧, 文獻筆記, and 論文大腦; this is not a rank or volume claim."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "google-trends",
+              "sourceUrl": "https://trends.google.com/trends/explore?date=today%2012-m&geo=TW&q=AI%20%E7%9F%A5%E8%AD%98%E5%BA%AB,AI%20%E7%AD%86%E8%A8%98,AI%20%E7%A0%94%E7%A9%B6%E5%8A%A9%E6%89%8B,AI%20%E8%AB%96%E6%96%87,AI%20%E9%A1%A7%E5%95%8F",
+              "query": "AI 知識庫; AI 筆記; AI 研究助手; AI 論文; AI 顧問",
+              "capturedAt": "2026-08-26",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "request-relative Google Trends average 0-100 index",
+              "value": "0; 26; 0; 55; 10",
+              "note": "AI 論文 and AI 筆記 are stronger discovery handles inside this comparison. The index is not search volume."
+            },
+            {
+              "sourceType": "university-library-guidance",
+              "sourceUrl": "https://www.lib.ntu.edu.tw/img/tulblog/HELP/HELP_20260525_AI.pdf",
+              "query": "AI 研究 引用 查核 論文",
+              "capturedAt": "2026-08-26",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "official guidance document",
+              "value": "1 current university guide",
+              "note": "The guidance requires source, citation, version, hallucination, and research-integrity checks."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Use AI 論文, 文獻筆記, 論文大腦, and 可追溯來源 naturally. Do not translate AI research assistant literally or imply automatic thesis writing."
+        },
+        "zh-CN": {
+          "queryFamily": [
+            "用论文 PDF 建立研究知识库",
+            "AI 论文笔记保留引用",
+            "论文知识库 文献综述"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "signed-in-google-serp",
+              "sourceUrl": "https://www.google.com/search?hl=zh-CN&gl=cn&q=AI+%E8%AE%BA%E6%96%87+PDF+%E5%BC%95%E7%94%A8+%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0",
+              "query": "AI 论文 PDF 引用 文献综述",
+              "capturedAt": "2026-08-26",
+              "language": "zh-CN",
+              "geography": "mainland-China parameter",
+              "nativeUnit": "returned result observation",
+              "value": "Zhihu, CSDN, Bilibili, and research-tool workflows",
+              "note": "Results emphasize PDF reading, literature-review generation, real citations, and reference formatting; unsupported generator features remain excluded."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "google-trends",
+              "sourceUrl": "https://trends.google.com/trends/explore?date=today%2012-m&geo=CN&q=AI%20%E7%9F%A5%E8%AF%86%E5%BA%93,AI%20%E7%AC%94%E8%AE%B0,AI%20%E7%A0%94%E7%A9%B6%E5%8A%A9%E6%89%8B,AI%20%E8%AE%BA%E6%96%87,AI%20%E5%92%A8%E8%AF%A2",
+              "query": "AI 知识库; AI 笔记; AI 研究助手; AI 论文; AI 咨询",
+              "capturedAt": "2026-08-26",
+              "language": "zh-CN",
+              "geography": "China",
+              "nativeUnit": "request-relative Google Trends average 0-100 index",
+              "value": "7; 1; 0; 31; 7",
+              "note": "Google use and Trends coverage are sparse in mainland China. The comparison is retained as one source-native signal, not population demand."
+            },
+            {
+              "sourceType": "open-source-workflow",
+              "sourceUrl": "https://github.com/Agents4Academia-AI/UReKA",
+              "query": "research knowledge base Zotero Obsidian cited answers",
+              "capturedAt": "2026-08-26",
+              "language": "en with globally applicable workflow",
+              "geography": "global OSS",
+              "nativeUnit": "inspectable repository",
+              "value": "1 maintained implementation observation",
+              "note": "The project independently corroborates a unified, source-cited research workflow; Wenlan does not claim its Zotero or discovery features."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Use AI 论文, 文献综述, 论文知识库, and 可追溯来源. Keep academic search, citation formatting, and manuscript generation outside the product claim."
+        }
+      },
+      "gates": {
+        "provenance": {
+          "status": "passed",
+          "reason": "Every retained Trends, SERP, community, university, and OSS observation includes an inspectable query or URL, capture date, language or geography, and native unit.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]",
+            "locales.en.demandEvidence[0]",
+            "locales.zh-TW.demandEvidence[0]",
+            "locales.zh-CN.demandEvidence[0]"
+          ]
+        },
+        "repeatedDemand": {
+          "status": "passed",
+          "reason": "Independent research OSS, firsthand student workflow, university guidance, Trends, and locale result sets repeat multi-paper synthesis, citation verification, source traceability, and PDF extraction concerns.",
+          "evidenceRefs": [
+            "locales.en.demandEvidence[1]",
+            "locales.en.demandEvidence[2]",
+            "locales.zh-TW.demandEvidence[1]",
+            "locales.zh-CN.demandEvidence[1]"
+          ]
+        },
+        "trilingualSerp": {
+          "status": "passed",
+          "reason": "Separate English/US, Traditional-Chinese/Taiwan, and Simplified-Chinese/mainland-parameter result sets expose the same research/PDF/citation task while also identifying unsupported literature-generator intent to exclude.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]"
+          ]
+        },
+        "cleanGap": {
+          "status": "passed",
+          "reason": "The document-import owner teaches supported inputs and sync, while the citation owner teaches claim-level debugging. No current owner combines a research question, literature matrix, method/sample/limitation extraction, contradiction handling, new-paper refresh, and academic-integrity boundary as one task.",
+          "evidenceRefs": [
+            "overlapCheck"
+          ]
+        },
+        "firstPartyProof": {
+          "status": "passed",
+          "reason": "Maintained Wenlan source proves text-extractable PDF and Markdown ingestion, folders and read-only Obsidian sources, incremental sync, source-backed Pages, citations, stale/revision/review state, and lint.",
+          "evidenceRefs": [
+            "/Users/lucian/Repos/wenlan/README.md:102",
+            "/Users/lucian/Repos/wenlan/README.md:240",
+            "/Users/lucian/Repos/wenlan/README.md:244"
+          ]
+        },
+        "standaloneUtility": {
+          "status": "passed",
+          "reason": "A bounded-paper, literature-matrix, contradiction, citation, and refresh workflow is useful without Wenlan.",
+          "evidenceRefs": [
+            "standaloneUtility"
+          ]
+        },
+        "internalLinks": {
+          "status": "passed",
+          "reason": "The generic document-import, citation-verification, source-backed knowledge-base, and Learn-hub owners are available in every locale.",
+          "evidenceRefs": [
+            "internalLinks"
+          ]
+        },
+        "authorityPath": {
+          "status": "passed",
+          "reason": "0x11c11e/awesome-ai-research-tools is active, non-archived, CC0, had 65 stars and a 2026-08-15 push at capture, contains a Notes & Knowledge Management category, welcomes factual sub-18-word PRs, and contains no Wenlan duplicate. Any proposal remains separately approval-gated.",
+          "evidenceRefs": [
+            "authorityPath"
+          ]
+        }
+      },
+      "wenlanProof": [
+        {
+          "claim": "Wenlan ingests Markdown, text, text-extractable PDF, folders, and read-only Obsidian vaults, then keeps regular sources synchronized.",
+          "sourceRef": "/Users/lucian/Repos/wenlan/README.md",
+          "verification": "rg -n \"Document Sources|Incremental sync\" /Users/lucian/Repos/wenlan/README.md"
+        },
+        {
+          "claim": "Wenlan distills sources and memories into maintained Markdown Pages with source references and per-claim citation verification.",
+          "sourceRef": "/Users/lucian/Repos/wenlan/README.md",
+          "verification": "rg -n \"Source-backed Pages|per-claim citations\" /Users/lucian/Repos/wenlan/README.md"
+        }
+      ],
+      "standaloneUtility": "A neutral research runbook can bound a paper set, maintain a claim/method/sample/result/limitation matrix, preserve exact source locations, separate contradictions from consensus, and refresh the synthesis as new papers arrive.",
+      "overlapCheck": "Do not duplicate the generic document-import or citation-debugging owners. The new owner is eligible only while it starts from a research question and papers already acquired, builds a literature matrix, preserves contradictions and limitations, and explicitly excludes scholarly search, DOI discovery, Zotero import, citation formatting, scanned-PDF OCR, and manuscript generation.",
+      "internalLinks": [
+        "https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents",
+        "https://wenlan.app/learn/verify-ai-knowledge-base-citations",
+        "https://wenlan.app/learn/source-backed-wiki-pages-ai-work",
+        "https://wenlan.app/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
+        "https://wenlan.app/zh-TW/learn/verify-ai-knowledge-base-citations",
+        "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",
+        "https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
+        "https://wenlan.app/zh-CN/learn/verify-ai-knowledge-base-citations",
+        "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work"
+      ],
+      "authorityPath": {
+        "type": "research-notes-knowledge-management-directory",
+        "target": "https://github.com/0x11c11e/awesome-ai-research-tools — after the trilingual family is published, propose one neutral factual entry under Notes & Knowledge Management only with separate approval",
+        "status": "verified-candidate"
+      },
+      "nextResearchDirection": "The English, zh-TW, and zh-CN family is locally prepared with separate natural query language, literature-matrix workflow, contradiction and limitation handling, citation checks, source updates, product boundaries, and same-locale internal links. Complete deterministic and rendered verification, then return for exact publication approval; do not submit the authority candidate yet.",
       "readout": {
         "gsc": {
           "status": "unavailable",

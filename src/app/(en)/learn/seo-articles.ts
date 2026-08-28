@@ -19,6 +19,7 @@ type BaseSpec = {
   keywords: string[];
   publishedAt?: string;
   updatedAt?: string;
+  readingTime?: string;
   audience: string;
   heroBullets: [string, string, string];
   quickAnswer: string;
@@ -56,7 +57,7 @@ function makeArticle(spec: BaseSpec): LearnArticle {
     publishedAt: spec.publishedAt,
     updatedAt: spec.updatedAt ?? UPDATED_AT,
     author: AUTHOR,
-    readingTime: "5 min read",
+    readingTime: spec.readingTime ?? "5 min read",
     audience: spec.audience,
     heroBullets: spec.heroBullets,
     sections: [
@@ -1641,6 +1642,7 @@ const workflowArticles: BaseSpec[] = [
       "fix-pdf-ingestion-ai-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
       "source-backed-wiki-pages-ai-work",
+      "source-backed-research-knowledge-base",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
     ],
@@ -1665,6 +1667,97 @@ const workflowArticles: BaseSpec[] = [
     cta: {
       heading: "Build one local knowledge-base loop",
       body: "Install Wenlan, add one inspectable document set, then verify sync, Pages, citations, and review before expanding.",
+    },
+  },
+  {
+    slug: "source-backed-research-knowledge-base",
+    eyebrow: "Research workflow",
+    category: "Workflows",
+    title: "Build a Research Knowledge Base from Papers and PDFs",
+    description:
+      "Turn a bounded paper set into inspectable research notes that preserve claims, methods, limitations, contradictions, citations, and source updates.",
+    metaTitle: "Build a Research Knowledge Base from Papers & PDFs",
+    metaDescription:
+      "Build a source-backed research knowledge base from papers and text PDFs with a literature matrix, exact citations, contradictions, limitations, and updates.",
+    keywords: [
+      "build research knowledge base from papers",
+      "source backed literature review workflow",
+      "AI research notes with citations",
+      "PDF research knowledge base",
+      "literature matrix AI",
+      "research knowledge management",
+    ],
+    publishedAt: "2026-08-27",
+    updatedAt: "2026-08-27",
+    readingTime: "8 min read",
+    audience:
+      "Students and researchers who already have a bounded paper set and need inspectable synthesis rather than automatic paper discovery or writing",
+    heroBullets: [
+      "Begin with one research question and papers you have already selected.",
+      "Track each claim, method, sample, result, and limitation back to an exact source location.",
+      "Keep agreement, contradiction, and unknowns separate as new papers arrive.",
+    ],
+    quickAnswer:
+      "Start with one research question and a bounded set of papers you already have. Keep the papers authoritative, extract only readable text, and build a literature matrix with one row per important claim: method, sample, result, limitation, exact source location, and current verification state.",
+    wenlanFit:
+      "Wenlan can register Markdown, text, text-extractable PDFs, folders, and read-only Obsidian sources, then maintain source-backed Pages with citations, stale state, revisions, lint, and human review. It does not search scholarly databases, discover papers, format bibliographies, or judge whether a study is academically valid.",
+    problem:
+      "A folder of PDFs is difficult to compare, while a smooth AI summary can erase disagreements, omit study limitations, or invent support. The useful research artifact preserves the question, evidence table, contradiction record, and exact passage behind every consequential synthesis so another reader can reproduce the reasoning.",
+    actionHeading: "Build one inspectable paper-to-synthesis loop",
+    actionIntro:
+      "Use papers already acquired for one question. Keep the first pass small enough to verify every row.",
+    actionBullets: [
+      "Write one research question and freeze a bounded initial paper set; record the inclusion boundary instead of asking an assistant to discover an unknown corpus.",
+      "Keep original papers authoritative. Use text-extractable PDFs or derived Markdown and text; run OCR outside Wenlan before adding scanned or image-only PDFs.",
+      "Create a literature matrix with claim, method, sample, result, limitation, exact page or section, paper version, and verification status.",
+      "Group agreement, contradiction, and unknowns separately. Do not flatten conflicting findings into one consensus paragraph.",
+      "Open the cited passage for every important claim and verify numbers, scope, attribution, negation, and current source version.",
+      "When a new or revised paper arrives, resync the source and refresh only the affected synthesis; preserve the earlier revision for review.",
+      "Export or retain a readable research note. A human researcher remains responsible for interpretation, study-quality assessment, citations, and final writing.",
+    ],
+    code: {
+      label: "After Wenlan and the AI client are configured",
+      code: "wenlan status\nwenlan sources add ~/Research/papers\n# In a Wenlan plugin client:\n/distill <research question>\n/pages <research question>\n/lint\n/curate",
+    },
+    caution:
+      "This workflow is not scholarly search, DOI discovery, Zotero import, reference formatting, automatic literature-review writing, or proof that a cited paper is true. Wenlan reads text-extractable PDFs; scanned PDFs require OCR first, and study quality, statistics, and academic integrity still require human review.",
+    faq: [
+      "Can Wenlan find papers or write my literature review?",
+      "No. Begin with papers you already selected. Wenlan can help maintain an inspectable source-backed research artifact, but it does not replace scholarly search, source selection, interpretation, citation formatting, or authorship.",
+      "How should I handle papers that disagree?",
+      "Keep separate matrix rows for each result, scope, method, and limitation. Record the contradiction explicitly and leave the synthesis unresolved until the evidence supports a narrower conclusion.",
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "verify-ai-knowledge-base-citations",
+      "source-backed-wiki-pages-ai-work",
+      "choose-ai-knowledge-base-tool",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan supported document sources",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan source-backed Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "National Taiwan University AI research guidance",
+        href: "https://www.lib.ntu.edu.tw/img/tulblog/HELP/HELP_20260525_AI.pdf",
+      },
+      {
+        label: "Distill research workspace",
+        href: "https://github.com/luisalarcon-gauntlet/Distill",
+      },
+      {
+        label: "UReKA research knowledge workflow",
+        href: "https://github.com/Agents4Academia-AI/UReKA",
+      },
+    ],
+    cta: {
+      heading: "Build one inspectable research artifact",
+      body: "Add a bounded paper set, create a literature matrix, and verify every important synthesis against the current source before expanding.",
     },
   },
   {
@@ -2642,6 +2735,7 @@ const trustArticles: BaseSpec[] = [
       "when-ai-agent-should-query-knowledge-base",
       "ai-memory-provenance",
       "test-ai-knowledge-base-retrieval-after-changes",
+      "source-backed-research-knowledge-base",
     ],
     officialReferences: [
       {
@@ -2720,7 +2814,7 @@ const trustArticles: BaseSpec[] = [
       "Should I import every note before starting?",
       "No. Start with one repeated, high-value topic and prove its source, capture, distill, inspection, lint, and review loop before expanding.",
     ],
-    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "test-ai-knowledge-base-retrieval-after-changes", "prevent-multi-agent-knowledge-conflicts", "review-before-trust-ai-memory", "ai-memory-provenance"],
+    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "test-ai-knowledge-base-retrieval-after-changes", "prevent-multi-agent-knowledge-conflicts", "source-backed-research-knowledge-base", "review-before-trust-ai-memory", "ai-memory-provenance"],
     officialReferences: [
       {
         label: "Wenlan knowledge model",
