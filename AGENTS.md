@@ -50,6 +50,11 @@ The SEO tests read sibling Wenlan and wenlan-app checkouts for current source fa
 - Keep visible FAQ text where useful, but do not add `FAQPage` JSON-LD unless Google eligibility changes for ordinary software sites.
 - Keep canonical public URLs in the sitemap. Old `/guides/*`, `/docs/guides/*`, and legacy pre-Wenlan Learn slugs should redirect, not appear in the sitemap.
 - `/llms.txt`, `/llms-full.txt`, `/feed.xml`, `/humans.txt`, manifest, and static assets intentionally receive noindex-style headers where configured.
+- **Product evidence quality floor:** Before publishing a new or substantially
+  expanded scenario page, follow `docs/seo-product-evidence-standard.md`. Use a
+  real sanitized product view, an inspectable workflow, a scenario-specific
+  action, natural three-locale copy, and responsive browser QA. Simulated UI is
+  not product proof.
 
 ## SEO Campaign Control Plane
 

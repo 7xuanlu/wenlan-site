@@ -44,6 +44,32 @@ export type ComparisonTable = {
   rows: ComparisonRow[];
 };
 
+export type ProductEvidence = {
+  heading: string;
+  summary: string;
+  image: {
+    src: string;
+    alt: string;
+    caption: string;
+    width: number;
+    height: number;
+  };
+  workflow: Array<{
+    label: string;
+    detail: string;
+  }>;
+  artifactHeading: string;
+  artifactNote: string;
+  artifactRows: Array<{
+    label: string;
+    detail: string;
+  }>;
+  action: {
+    label: string;
+    href: string;
+  };
+};
+
 export type LearnArticle = {
   slug: string;
   eyebrow: string;
@@ -64,6 +90,7 @@ export type LearnArticle = {
   faqs: LearnArticleFaq[];
   relatedSlugs: string[];
   officialReferences?: OfficialReference[];
+  productEvidence?: ProductEvidence;
   cta: {
     heading: string;
     body: string;

@@ -2053,7 +2053,7 @@ const zhTWArticles = {
       "產品探索證據",
     ],
     publishedAt: "2026-08-28",
-    updatedAt: "2026-08-28",
+    updatedAt: "2026-08-29",
     author: "Qi-Xuan Lu",
     readingTime: "8 分鐘閱讀",
     audience: "準備 PRD 或路線圖審查的產品經理、UX 研究員與產品營運團隊",
@@ -2062,6 +2062,54 @@ const zhTWArticles = {
       "讓每個需求都能回到有日期的研究、客服、業務或決策來源。",
       "分開保存觀察、解讀、假設、矛盾與待解問題。",
     ],
+    productEvidence: {
+      heading: "看看審查者實際檢查的有來源工作區",
+      summary:
+        "下方是 Wenlan App 從確定性測試資料擷取的真實桌面畫面。畫面列出有來源數量的近期 Pages，也讓來源衝突與新來源等待審查。這不是客戶資料；同一個審查介面也支援產品研究證據。",
+      image: {
+        src: "/images/product-evidence/wenlan-space-review-fixture.png",
+        alt: "Wenlan 桌面 Space 畫面，顯示近期整理的 Pages、各頁來源數量，以及來源衝突與新來源的審查佇列。",
+        caption:
+          "Wenlan App 確定性測試資料的真實擷取畫面。Page 列表顯示來源數量，審查佇列則保留來源衝突與新來源等待處理。",
+        width: 1586,
+        height: 992,
+      },
+      workflow: [
+        {
+          label: "核准來源邊界",
+          detail: "只加入團隊可以檢查、允許用於這次產品決策的研究與決策來源。",
+        },
+        {
+          label: "整理一個產品決策",
+          detail: "把觀察、解讀、假設、矛盾與待解問題分開，並讓重要主張連回來源。",
+        },
+        {
+          label: "寫 PRD 前先審查",
+          detail: "打開引用與原始記錄，確認需求有依據，過期或無法證明的內容保持可見。",
+        },
+      ],
+      artifactHeading: "PRD 證據封包範例",
+      artifactNote:
+        "這是可檢查輸出的結構範例，不代表任何特定使用者研究或真實產品決策。",
+      artifactRows: [
+        {
+          label: "證據輸入",
+          detail: "有日期的訪談段落、客服訊號與已核准的過往決策。",
+        },
+        {
+          label: "候選需求",
+          detail: "把一項需求連回來源，並分開記錄團隊解讀、假設與衝突證據。",
+        },
+        {
+          label: "審查結果",
+          detail: "保留、縮小或維持未解；決定時留下理由、目前修訂與待補證據。",
+        },
+      ],
+      action: {
+        label: "查看證據工作流",
+        href: "#product-evidence",
+      },
+    },
     sections: [
       {
         heading: "先從一個產品決策開始，不是公司檔案庫",
@@ -4192,7 +4240,7 @@ const zhCNArticles = {
       "产品探索证据",
     ],
     publishedAt: "2026-08-28",
-    updatedAt: "2026-08-28",
+    updatedAt: "2026-08-29",
     author: "Qi-Xuan Lu",
     readingTime: "8 分钟阅读",
     audience: "准备 PRD 或路线图评审的产品经理、UX 研究员与产品运营团队",
@@ -4201,6 +4249,54 @@ const zhCNArticles = {
       "让每个需求都能回到有日期的研究、客服、销售或决策来源。",
       "分开保存观察、解读、假设、矛盾与待解问题。",
     ],
+    productEvidence: {
+      heading: "看看评审者实际检查的有来源工作区",
+      summary:
+        "下方是 Wenlan App 从确定性测试数据截取的真实桌面画面。画面列出带来源数量的近期 Pages，也让来源冲突与新来源等待评审。这不是客户数据；同一个评审界面也支持产品研究证据。",
+      image: {
+        src: "/images/product-evidence/wenlan-space-review-fixture.png",
+        alt: "Wenlan 桌面 Space 画面，显示近期整理的 Pages、各页来源数量，以及来源冲突与新来源的评审队列。",
+        caption:
+          "Wenlan App 确定性测试数据的真实截取画面。Page 列表显示来源数量，评审队列则保留来源冲突与新来源等待处理。",
+        width: 1586,
+        height: 992,
+      },
+      workflow: [
+        {
+          label: "批准来源边界",
+          detail: "只加入团队可以检查、允许用于这次产品决策的研究与决策来源。",
+        },
+        {
+          label: "整理一个产品决策",
+          detail: "把观察、解读、假设、矛盾与待解问题分开，并让重要主张连接回来源。",
+        },
+        {
+          label: "写 PRD 前先评审",
+          detail: "打开引用与原始记录，确认需求有依据，过期或无法证明的内容保持可见。",
+        },
+      ],
+      artifactHeading: "PRD 证据包示例",
+      artifactNote:
+        "这是可检查输出的结构示例，不代表任何特定用户研究或真实产品决策。",
+      artifactRows: [
+        {
+          label: "证据输入",
+          detail: "有日期的访谈段落、客服信号与已批准的过往决策。",
+        },
+        {
+          label: "候选需求",
+          detail: "把一项需求连接回来源，并分开记录团队解读、假设与冲突证据。",
+        },
+        {
+          label: "评审结果",
+          detail: "保留、缩小或保持未解；决定时留下理由、当前修订与待补证据。",
+        },
+      ],
+      action: {
+        label: "查看证据工作流",
+        href: "#product-evidence",
+      },
+    },
     sections: [
       {
         heading: "先从一个产品决策开始，不是公司档案库",

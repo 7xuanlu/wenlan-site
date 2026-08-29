@@ -10,6 +10,7 @@ import {
   validateAgentsSeoIndex,
   validateExperimentsAppendOnlyBaseline,
   validateGoalControlPlane,
+  validateProductEvidenceStandard,
 } from "./seo-goal-check.mjs";
 import { buildPageIntentRows } from "./seo-intent-map.mjs";
 
@@ -18,6 +19,10 @@ const goalCheckScript = resolve(import.meta.dirname, "seo-goal-check.mjs");
 const execFileAsync = promisify(execFile);
 const canonicalPlan = await readFile(resolve(repoRoot, "PLAN.md"), "utf8");
 const canonicalAgents = await readFile(resolve(repoRoot, "AGENTS.md"), "utf8");
+const canonicalProductEvidenceStandard = await readFile(
+  resolve(repoRoot, "docs/seo-product-evidence-standard.md"),
+  "utf8",
+);
 const canonicalExperiments = await readFile(resolve(repoRoot, "EXPERIMENTS.md"), "utf8");
 const canonicalScenarioBacklog = JSON.parse(
   await readFile(resolve(repoRoot, "docs/seo-scenario-backlog.json"), "utf8"),
@@ -69,11 +74,38 @@ test("AGENTS.md keeps the fail-closed SEO control-plane index", () => {
     "Tier 3 — evidence",
     "docs/seo-scenario-backlog.json",
     "pnpm seo:intent:check",
+    "Product evidence quality floor",
+    "docs/seo-product-evidence-standard.md",
   ]) {
     const mutated = canonicalAgents.replaceAll(requiredText, "removed-index-entry");
     assert.ok(
       validateAgentsSeoIndex(mutated).some((error) =>
         error.includes("AGENTS.md SEO campaign index"),
+      ),
+    );
+  }
+});
+
+test("product evidence standard exists and its quality floor is fail-closed", () => {
+  assert.deepEqual(
+    validateProductEvidenceStandard(canonicalProductEvidenceStandard),
+    [],
+  );
+
+  for (const requiredText of [
+    "real, current, sanitized product view",
+    "A visible input to decision to output sequence",
+    "Natural English, zh-TW, and zh-CN localization",
+    "Do not use simulated div-based product chrome as proof",
+    "at exactly 393px",
+  ]) {
+    const mutated = canonicalProductEvidenceStandard.replaceAll(
+      requiredText,
+      "removed-standard-clause",
+    );
+    assert.ok(
+      validateProductEvidenceStandard(mutated).some((error) =>
+        error.includes("Product evidence standard is missing"),
       ),
     );
   }
@@ -299,6 +331,25 @@ test("CLI path overrides validate the supplied control-plane files", async () =>
       experimentsPath,
     ]);
     assert.match(passing.stdout, /\[seo-goal\] PASS/);
+
+    await assert.rejects(
+      execFileAsync(process.execPath, [
+        "--import",
+        "tsx",
+        goalCheckScript,
+        "--plan",
+        planPath,
+        "--experiments",
+        experimentsPath,
+        "--product-evidence-standard",
+        join(fixtureRoot, "missing-product-evidence-standard.md"),
+      ]),
+      (error) => {
+        assert.equal(error.code, 1);
+        assert.match(error.stderr, /missing-product-evidence-standard\.md/);
+        return true;
+      },
+    );
 
     await writeFile(
       planPath,

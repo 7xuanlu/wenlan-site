@@ -53,6 +53,19 @@ const requiredAgentsSeoIndexClauses = [
   "`scripts/seo-intent-map.mjs`",
   "`pnpm seo:intent:check`",
   "Reuse the latest successfully completed weekly SEO report",
+  "Product evidence quality floor",
+  "`docs/seo-product-evidence-standard.md`",
+];
+
+const requiredProductEvidenceStandardClauses = [
+  "# SEO Product Evidence Standard",
+  "one canonical URL",
+  "real, current, sanitized product view",
+  "A visible input to decision to output sequence",
+  "Natural English, zh-TW, and zh-CN localization",
+  "Do not use simulated div-based product chrome as proof",
+  "at exactly 393px",
+  "The product-research-to-PRD family is the reference implementation",
 ];
 
 export function validateAgentsSeoIndex(agents) {
@@ -61,6 +74,17 @@ export function validateAgentsSeoIndex(agents) {
   for (const clause of requiredAgentsSeoIndexClauses) {
     if (!normalizedAgents.includes(clause)) {
       errors.push(`AGENTS.md SEO campaign index is missing: ${clause}`);
+    }
+  }
+  return errors;
+}
+
+export function validateProductEvidenceStandard(standard) {
+  const errors = [];
+  const normalizedStandard = standard.replace(/\s+/g, " ");
+  for (const clause of requiredProductEvidenceStandardClauses) {
+    if (!normalizedStandard.includes(clause)) {
+      errors.push(`Product evidence standard is missing: ${clause}`);
     }
   }
   return errors;
@@ -1411,9 +1435,14 @@ function parseArgs(argv) {
     }
     const key = argument.slice(2);
     if (
-      !["plan", "experiments", "scenario", "scenario-report", "agents"].includes(
-        key,
-      )
+      ![
+        "plan",
+        "experiments",
+        "scenario",
+        "scenario-report",
+        "agents",
+        "product-evidence-standard",
+      ].includes(key)
     ) {
       throw new Error(`Unknown option: ${argument}`);
     }
@@ -1426,6 +1455,10 @@ function parseArgs(argv) {
   }
   return {
     agentsPath: resolve(values.agents ?? resolve(repoRoot, "AGENTS.md")),
+    productEvidenceStandardPath: resolve(
+      values["product-evidence-standard"] ??
+        resolve(repoRoot, "docs/seo-product-evidence-standard.md"),
+    ),
     planPath: resolve(values.plan ?? resolve(repoRoot, "PLAN.md")),
     experimentsPath: resolve(values.experiments ?? resolve(repoRoot, "EXPERIMENTS.md")),
     scenarioPath: resolve(
@@ -1441,13 +1474,22 @@ function parseArgs(argv) {
 async function run() {
   const {
     agentsPath,
+    productEvidenceStandardPath,
     planPath,
     experimentsPath,
     scenarioPath,
     scenarioReportPath,
   } = parseArgs(process.argv.slice(2));
-  const [agents, plan, experiments, scenarioJson, scenarioReport] = await Promise.all([
+  const [
+    agents,
+    productEvidenceStandard,
+    plan,
+    experiments,
+    scenarioJson,
+    scenarioReport,
+  ] = await Promise.all([
     readFile(agentsPath, "utf8"),
+    readFile(productEvidenceStandardPath, "utf8"),
     readFile(planPath, "utf8"),
     readFile(experimentsPath, "utf8"),
     readFile(scenarioPath, "utf8"),
@@ -1457,6 +1499,7 @@ async function run() {
   const { buildPageIntentRows } = await import("./seo-intent-map.mjs");
   const errors = [
     ...validateAgentsSeoIndex(agents),
+    ...validateProductEvidenceStandard(productEvidenceStandard),
     ...validateExperimentsAppendOnlyBaseline(experiments),
     ...validateGoalControlPlane({
       plan,
