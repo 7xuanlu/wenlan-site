@@ -678,8 +678,10 @@ action returns for separate explicit approval.
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
   `EXP-2026-08-28-source-backed-investment-research-knowledge-base-locales`
-  is approved and active in local preparation, so it consumes the single
-  production slot until the approved production deployment is verified.
+  is live, production-verified, and measuring without consuming the production
+  slot. PR #150 merged at `2026-08-29T06:01:49Z` as
+  `b9fb06d1eb0fdd3c07c0a271332f8166c9fcef6e`; Vercel production completed at
+  `2026-08-29T06:02:35Z`. The production slot is open.
   The consultant client-project knowledge-base family is live,
   production-verified, and measuring without consuming the production slot;
   PR #148 merged at `2026-08-29T04:58:27Z` as
@@ -1288,14 +1290,15 @@ Supporting quality split for the same live range:
 ### Current experiment
 
 `EXP-2026-08-28-source-backed-investment-research-knowledge-base-locales` is
-active and occupies the single production slot. The exact locally verified
-English, zh-TW, and zh-CN family is approved for commit, Git push, PR creation,
-merge, automatic Vercel deployment, and read-only production verification. It
-owns one company and reporting cycle across annual reports, filings, earnings
-material, thesis changes, contradictions, stale evidence, and open questions;
-it does not claim live market data, licensed transcripts or research, XBRL,
-reliable table extraction, valuation, portfolio monitoring, trading signals,
-or investment advice.
+live, production-verified, and measuring without consuming the production
+slot. PR #150 merged as `b9fb06d1eb0fdd3c07c0a271332f8166c9fcef6e` at
+`2026-08-29T06:01:49Z`, and Vercel production completed at
+`2026-08-29T06:02:35Z`. The three live routes passed direct 200, exact
+canonical, reciprocal hreflang, Article and BreadcrumbList schema, sitemap,
+visible workflow, and deployed technical verification. This is technical
+publication evidence only, not a crawl, indexing, ranking, traffic, or
+causality claim. The production slot is open for the next independently gated
+scenario.
 
 The consultant client-project knowledge-base family remains live,
 production-verified, and measuring without consuming the production slot. PR

@@ -8606,3 +8606,17 @@ increase for that experiment.
 - Decision: merge
 - Next step: Re-run the Goal and integration gates on the exact branch, commit and push only the approved files, merge after required checks pass, verify the integrated commit and live deployment, and keep request indexing, GSC validation, analytics mutation, directory submission, paid action, maintainer messaging, synthetic events, metric-definition changes, and unrelated external publication excluded.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-28-source-backed-investment-research-knowledge-base-locales production publication
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-28-source-backed-investment-research-knowledge-base-locales
+- Observed at: 2026-08-29T06:04:09Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #150 merged at `2026-08-29T06:01:49Z` as `b9fb06d1eb0fdd3c07c0a271332f8166c9fcef6e`; Vercel reported production deployment success at `2026-08-29T06:02:35Z`. The merged tree is identical to the fully verified branch tree. The English, zh-TW, and zh-CN live routes returned direct 200 responses with exact canonicals, reciprocal en-US/zh-TW/zh-CN/x-default hreflang, Article and BreadcrumbList schema, visible filing-to-thesis workflow, and no FAQPage schema. The deployed technical audit passed 147 sitemap URLs, 30 key pages, utility noindex headers, redirects, and bridge-host redirects. This proves publication and technical availability only; it is not a crawl, indexing, ranking, traffic, or causality claim.
+- Result: pending
+- Decision: wait
+- Next step: Keep `2026-08-29T06:02:35Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-08-30T06:02:35Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-05T06:02:35Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with its original 20-page-impression, 3-qualified-joined-query-impression, and 1-click contract. The now-open production slot may be used for the next independently gated scenario; do not request indexing, submit GSC validation, mutate analytics, or publish externally under this record.
+<!-- EXPERIMENT-RECORD:END -->
