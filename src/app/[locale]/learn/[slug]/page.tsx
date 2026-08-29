@@ -20,6 +20,7 @@ import {
 } from "../../../(en)/learn/articles";
 import { ArticleHalo, MemoryIndex } from "../../../(en)/learn/article-visuals";
 import { TrackedLink, TrackedLocalizedLink } from "@/components/tracked-link";
+import { ProductEvidencePanel } from "@/components/learn/product-evidence-panel";
 
 type LocalizedLearnArticlePageProps = {
   params: Promise<{
@@ -337,6 +338,14 @@ export default async function LocalizedLearnSlugPage({
                   </span>
                   <span>{article.readingTime}</span>
                 </div>
+                {article.productEvidence && (
+                  <a
+                    href={article.productEvidence.action.href}
+                    className="mt-7 inline-flex rounded-xl border border-[var(--o-border)] px-5 py-3 text-sm font-semibold text-[var(--o-text)] transition-colors hover:border-[var(--o-warm)] hover:text-[var(--o-warm)]"
+                  >
+                    {renderArticleText(article.productEvidence.action.label)}
+                  </a>
+                )}
               </div>
               <MemoryIndex
                 label={chrome.articlePacket}
@@ -366,6 +375,13 @@ export default async function LocalizedLearnSlugPage({
             </div>
           </div>
         </section>
+
+        {article.productEvidence && (
+          <ProductEvidencePanel
+            evidence={article.productEvidence}
+            renderText={renderArticleText}
+          />
+        )}
 
         <section className="px-6 pb-20">
           <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-[minmax(0,680px)_1fr]">

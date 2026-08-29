@@ -1094,7 +1094,7 @@ test("product-research family owns one distinct trilingual evidence-to-PRD workf
     assert.match(JSON.stringify(article), /假設|假设/);
     assert.match(JSON.stringify(article), /待解問題|待解问题/);
     assert.equal(article.publishedAt, "2026-08-28");
-    assert.equal(article.updatedAt, "2026-08-28");
+    assert.equal(article.updatedAt, "2026-08-29");
     assert.ok(article.officialReferences?.length >= 4);
   }
 
@@ -1114,6 +1114,49 @@ test("product-research family owns one distinct trilingual evidence-to-PRD workf
       );
     }
   }
+});
+
+test("product-research family carries the reusable product-evidence landing-page contract", async () => {
+  const [{ articles }, { getLocalizedLearnArticle }] = await Promise.all([
+    import("../src/app/(en)/learn/articles.ts"),
+    import("../src/i18n/learn-articles.ts"),
+  ]);
+  const slug = "build-product-research-knowledge-base-for-prd";
+  const assetPath = "public/images/product-evidence/wenlan-space-review-fixture.png";
+  const renderers = await Promise.all([
+    readFile(resolve(repoRoot, "src/app/(en)/learn/[slug]/page.tsx"), "utf8"),
+    readFile(resolve(repoRoot, "src/app/[locale]/learn/[slug]/page.tsx"), "utf8"),
+  ]);
+
+  for (const [locale, article] of [
+    ["en", articles.find((candidate) => candidate.slug === slug)],
+    ["zh-TW", getLocalizedLearnArticle("zh-TW", slug)],
+    ["zh-CN", getLocalizedLearnArticle("zh-CN", slug)],
+  ]) {
+    assert.ok(article, `${locale} product-research article`);
+    assert.ok(article.productEvidence, `${locale} product evidence`);
+    assert.equal(
+      article.productEvidence.image.src,
+      "/images/product-evidence/wenlan-space-review-fixture.png",
+    );
+    assert.equal(article.productEvidence.image.width, 1586);
+    assert.equal(article.productEvidence.image.height, 992);
+    assert.ok(article.productEvidence.image.alt.length >= 30);
+    assert.ok(article.productEvidence.image.caption.length >= 40);
+    assert.equal(article.productEvidence.workflow.length, 3);
+    assert.equal(article.productEvidence.artifactRows.length, 3);
+    assert.match(article.productEvidence.action.href, /^#product-evidence$/);
+  }
+
+  await access(resolve(repoRoot, assetPath));
+  const asset = await readFile(resolve(repoRoot, assetPath));
+  assert.equal(asset.includes(Buffer.from("trainedAlgorithmicMedia")), false);
+  assert.equal(asset.includes(Buffer.from("OpenAI Media Service API")), false);
+  for (const renderer of renderers) {
+    assert.match(renderer, /ProductEvidencePanel/);
+    assert.match(renderer, /article\.productEvidence/);
+  }
+  assert.match(renderers[1], /renderText=\{renderArticleText\}/);
 });
 
 test("coding-agent knowledge-base family owns one distinct trilingual integration task", async () => {

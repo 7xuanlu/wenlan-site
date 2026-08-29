@@ -3426,7 +3426,7 @@ const productResearchArticle: LearnArticle = {
     "product discovery evidence",
   ],
   publishedAt: "2026-08-28",
-  updatedAt: "2026-08-28",
+  updatedAt: "2026-08-29",
   author: "Qi-Xuan Lu",
   readingTime: "8 min read",
   audience:
@@ -3436,6 +3436,60 @@ const productResearchArticle: LearnArticle = {
     "Trace each requirement to dated research, support, sales, or decision sources.",
     "Keep observations, interpretations, assumptions, contradictions, and open questions separate.",
   ],
+  productEvidence: {
+    heading: "See the source-backed workspace a reviewer inspects",
+    summary:
+      "The product proof below is a genuine Wenlan desktop capture from the app's deterministic test fixture. It shows recently refined Pages with source counts plus a review queue for conflicts and newly available sources. The fixture is not customer data; the same review surface supports product-research evidence.",
+    image: {
+      src: "/images/product-evidence/wenlan-space-review-fixture.png",
+      alt: "Wenlan desktop Space view showing recently refined Pages with source counts and a review queue for a source conflict and newly available sources.",
+      caption:
+        "Genuine Wenlan app capture from a deterministic test fixture. Page rows expose source counts, while the review queue keeps a source conflict and newly available sources visible.",
+      width: 1586,
+      height: 992,
+    },
+    workflow: [
+      {
+        label: "Approve the source boundary",
+        detail:
+          "Include only dated research notes, support or sales passages, and prior decisions the product team is allowed to inspect.",
+      },
+      {
+        label: "Distill one product decision",
+        detail:
+          "Build one maintained Page for the question under review, with source IDs and contradictions attached to each consequential claim.",
+      },
+      {
+        label: "Review before drafting",
+        detail:
+          "Open the cited passage, check the current revision and stale state, then carry only supported or explicitly unresolved requirements into the PRD.",
+      },
+    ],
+    artifactHeading: "Worked PRD evidence packet",
+    artifactNote:
+      "This is an example structure, not a claim about your users. Replace every row with approved evidence from the product decision you are reviewing.",
+    artifactRows: [
+      {
+        label: "Evidence input",
+        detail:
+          "A dated interview observation, support passage, sales note, or prior decision with an exact source location.",
+      },
+      {
+        label: "Requirement candidate",
+        detail:
+          "One reviewable statement that separates the observed problem from interpretation, scope, and assumptions.",
+      },
+      {
+        label: "Review result",
+        detail:
+          "Supported, contradicted, stale, or unresolved, with the reviewer and next check recorded before PRD approval.",
+      },
+    ],
+    action: {
+      label: "See evidence workflow",
+      href: "#product-evidence",
+    },
+  },
   sections: [
     {
       heading: "Start with one product decision, not a company-wide archive",
