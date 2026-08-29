@@ -521,6 +521,7 @@ const zhTWArticles = {
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
+      "build-product-research-knowledge-base-for-prd",
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
       "test-ai-knowledge-base-retrieval-after-changes",
@@ -984,6 +985,7 @@ const zhTWArticles = {
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
+      "build-product-research-knowledge-base-for-prd",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
     ],
@@ -1651,6 +1653,7 @@ const zhTWArticles = {
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
+      "build-product-research-knowledge-base-for-prd",
     ],
     officialReferences: [
       {
@@ -2028,6 +2031,136 @@ const zhTWArticles = {
     cta: {
       heading: "先建立一份可檢查的公司研究檔案",
       body: "加入一個報告週期、核對每個重要主張，再保存哪些證據與論點發生改變。",
+    },
+  },
+  "build-product-research-knowledge-base-for-prd": {
+    slug: "build-product-research-knowledge-base-for-prd",
+    eyebrow: "產品研究工作流",
+    category: "Workflows",
+    title: "建立產品研究知識庫，再開始寫 PRD",
+    description:
+      "把核准的研究筆記、客服與業務訊號、過往決策整理成有來源的證據庫，支援可辯護的 PRD 審查。",
+    metaTitle: "建立產品研究知識庫，再開始寫 PRD | Wenlan",
+    metaDescription:
+      "把使用者研究連到可辯護的 PRD：保留有日期的來源、可追溯需求、矛盾、假設、待解問題與決策歷史。",
+    keywords: [
+      "產品研究知識庫",
+      "使用者研究到 PRD",
+      "產品決策來源",
+      "有證據的 PRD",
+      "UX 研究知識庫",
+      "產品營運知識庫",
+      "產品探索證據",
+    ],
+    publishedAt: "2026-08-28",
+    updatedAt: "2026-08-28",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分鐘閱讀",
+    audience: "準備 PRD 或路線圖審查的產品經理、UX 研究員與產品營運團隊",
+    heroBullets: [
+      "從一個產品決策和核准的證據邊界開始。",
+      "讓每個需求都能回到有日期的研究、客服、業務或決策來源。",
+      "分開保存觀察、解讀、假設、矛盾與待解問題。",
+    ],
+    sections: [
+      {
+        heading: "先從一個產品決策開始，不是公司檔案庫",
+        body: [
+          "開始寫 PRD 前，先為正在審查的決策建立一個產品範圍內的證據庫。只收集團隊可以檢查的核准訪談筆記、客服或業務筆記、研究資料與過往決策；目標是讓每個需求都可追溯，不是把所有對話做成一個泛用資料夾。",
+          "Wenlan 可以把支援的 Markdown、文字、可擷取文字的 PDF、資料夾與唯讀 Obsidian 來源，連到有來源的 Pages、引用、修訂、過期狀態與審查。它不會替你決定產品路線，也不會把來源自動變成已核准的產品需求。",
+        ],
+      },
+      {
+        heading: "綜合前先固定來源邊界",
+        body: [
+          "在請 Agent 綜合前，先寫下產品範圍、審查問題、日期區間、納入的來源類型與排除的資料。一個窄邊界能幫你分辨需求是來自使用者觀察、團隊解讀、假設，還是需要重新檢視的決策。",
+          "在小型來源登錄表中保存來源日期、文件版本與確切標題或段落。如果筆記不完整，或來源沒有獲准用於這個產品決策，應記錄為無法取得，不要默默補上缺口。",
+        ],
+        bullets: [
+          "核准的訪談或研究筆記：保留觀察與來源位置。",
+          "客服或業務筆記：把重複出現的問題訊號和未驗證的要求分開。",
+          "過往決策：記錄決策日期、理由、範圍，以及當時可用的證據。",
+          "假設與待解問題：保持可見，不要把它們寫成使用者事實。",
+        ],
+      },
+      {
+        heading: "把筆記連成需求的證據鏈",
+        body: [
+          "每個重要需求使用一列或一個 Page 段落。把需求連到有日期的來源段落，分開記錄原始觀察和你的解讀，並在判斷需求應保留、縮小或維持未解前，先留下互相矛盾的證據。",
+          "同一條證據鏈應能通過 PRD 審查：審查者可以打開來源，看見目前修訂，理解仍存在的假設，並追蹤過往決策如何改變。來源變動時，只刷新受影響的 Page，並保留舊修訂供審查。",
+        ],
+        bullets: [
+          "記錄產品問題、source ID、日期、確切位置與適用範圍。",
+          "把每句話分類為觀察、解讀、假設、決策或待解問題。",
+          "把接受或拒絕的理由連到證據，不只連到會議結論。",
+          "比較衝突訊號；證據無法解決時就保留矛盾。",
+          "需求進入 PRD 草稿前，先標記無依據或已過期的內容。",
+        ],
+        code: {
+          label: "有界的產品研究知識工作流",
+          code: "wenlan status\nwenlan sources add ~/Research/product-notes\n/distill <產品決策>\n/pages <產品決策>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "證據可檢查後才開始寫 PRD",
+        body: [
+          "PRD 可以整理證據庫，但不應用流暢文字遮住證據。審查前確認每個需求都有來源路徑或明確的未解標記，每個重要假設都有負責人或下一個檢查，每個過往決策仍符合目前的來源集合。",
+          "即使不使用 Wenlan，這仍是一套實用的產品研究方法：小型證據登錄表、需求到來源的對照、矛盾記錄、假設清單與決策歷史，都能讓審查者重做判斷。",
+        ],
+      },
+      {
+        heading: "知道這個工作流不會自動化什麼",
+        body: [
+          "Wenlan 不會轉錄會議、遮蔽個人識別資訊、招募研究參與者、匯入分析資料、連接 Jira、Linear、Slack 或 CRM，也不會自動排序機會、產生完整 PRD、選擇路線圖或聲稱產品結果。這些決策與控制仍需要維護中的來源和人工審查。",
+          "它也不能讓沒有依據的要求變成事實。保持來源、主張、日期、限制與審查狀態可見，讓 Agent 協助整理證據，但不要取代產品團隊的判斷。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 能把使用者研究直接變成 PRD 嗎？",
+        answer:
+          "不能。它能協助維護有來源的證據庫，以及從核准筆記到可追溯需求的對照；產品經理和研究員仍須解讀證據、處理優先順序，並撰寫和核准 PRD。",
+      },
+      {
+        question: "訪談筆記和客服要求互相矛盾時怎麼辦？",
+        answer:
+          "保留兩個有日期的來源，說明各自範圍，並記錄矛盾或待解問題。不要把客服要求、使用者觀察和產品決策合併成一個沒有依據的需求。",
+      },
+      {
+        question: "這會連接 Jira、Linear、Slack 或 CRM 嗎？",
+        answer:
+          "不會。請使用支援的 Markdown、文字、可擷取文字的 PDF、資料夾或唯讀 Obsidian 來源，並明確維護你獲准使用的匯出檔或筆記。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "verify-ai-knowledge-base-citations",
+      "source-backed-wiki-pages-ai-work",
+      "source-backed-research-knowledge-base",
+      "build-client-project-knowledge-base-for-consulting",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 支援的文件來源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan 有來源 Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "Wenlan 審查與信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+      {
+        label: "Wenlan 日常工作流",
+        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+      },
+    ],
+    cta: {
+      heading: "讓一個產品決策可追溯",
+      body: "從核准的來源集合開始，把需求連到有日期的證據，並在 PRD 審查前保留矛盾與待解問題。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
@@ -2797,6 +2930,7 @@ const zhCNArticles = {
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
+      "build-product-research-knowledge-base-for-prd",
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
       "test-ai-knowledge-base-retrieval-after-changes",
@@ -3262,6 +3396,7 @@ const zhCNArticles = {
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
+      "build-product-research-knowledge-base-for-prd",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
     ],
@@ -3657,6 +3792,7 @@ const zhCNArticles = {
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
+      "build-product-research-knowledge-base-for-prd",
     ],
     officialReferences: [
       {
@@ -4034,6 +4170,136 @@ const zhCNArticles = {
     cta: {
       heading: "先建立一份能检查的公司研究档案",
       body: "加入一个报告周期、核对每个重要主张，再保存哪些证据和论点发生变化。",
+    },
+  },
+  "build-product-research-knowledge-base-for-prd": {
+    slug: "build-product-research-knowledge-base-for-prd",
+    eyebrow: "产品研究工作流",
+    category: "Workflows",
+    title: "建立产品研究知识库，再开始写 PRD",
+    description:
+      "把批准的研究笔记、客服与销售信号、过往决策整理成有来源的证据库，支持可辩护的 PRD 评审。",
+    metaTitle: "建立产品研究知识库，再开始写 PRD | Wenlan",
+    metaDescription:
+      "把用户研究连接到可辩护的 PRD：保留有日期的来源、可追溯需求、矛盾、假设、待解问题与决策历史。",
+    keywords: [
+      "产品研究知识库",
+      "用户研究到 PRD",
+      "产品决策依据",
+      "有证据的 PRD",
+      "UX 研究知识库",
+      "产品运营知识库",
+      "产品探索证据",
+    ],
+    publishedAt: "2026-08-28",
+    updatedAt: "2026-08-28",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分钟阅读",
+    audience: "准备 PRD 或路线图评审的产品经理、UX 研究员与产品运营团队",
+    heroBullets: [
+      "从一个产品决策和批准的证据边界开始。",
+      "让每个需求都能回到有日期的研究、客服、销售或决策来源。",
+      "分开保存观察、解读、假设、矛盾与待解问题。",
+    ],
+    sections: [
+      {
+        heading: "先从一个产品决策开始，不是公司档案库",
+        body: [
+          "开始写 PRD 前，先为正在评审的决策建立一个产品范围内的证据库。只收集团队可以检查的批准访谈笔记、客服或销售笔记、研究资料与过往决策；目标是让每个需求都可追溯，而不是把所有对话做成一个通用文件夹。",
+          "Wenlan 可以把支持的 Markdown、文本、可提取文本的 PDF、文件夹与只读 Obsidian 来源，连接到有来源的 Pages、引用、修订、过期状态与审核。它不会替你决定产品路线，也不会把来源自动变成已批准的产品需求。",
+        ],
+      },
+      {
+        heading: "综合前先固定来源边界",
+        body: [
+          "在请 Agent 综合前，先写下产品范围、评审问题、日期区间、纳入的来源类型与排除的资料。一个窄边界能帮你分辨需求来自用户观察、团队解读、假设，还是需要重新检查的决策。",
+          "在小型来源登记表中保存来源日期、文档版本与准确标题或段落。如果笔记不完整，或来源没有获准用于这个产品决策，应记录为无法取得，不要默默填补缺口。",
+        ],
+        bullets: [
+          "批准的访谈或研究笔记：保留观察与来源位置。",
+          "客服或销售笔记：把重复出现的问题信号和未验证的请求分开。",
+          "过往决策：记录决策日期、理由、范围，以及当时可用的证据。",
+          "假设与待解问题：保持可见，不要把它们写成用户事实。",
+        ],
+      },
+      {
+        heading: "把笔记连成需求的证据链",
+        body: [
+          "每个重要需求使用一行或一个 Page 段落。把需求连接到有日期的来源段落，分开记录原始观察和你的解读，并在判断需求应保留、缩小或保持未解前，先留下互相矛盾的证据。",
+          "同一条证据链应能通过 PRD 评审：评审者可以打开来源，看见当前修订，理解仍存在的假设，并追踪过往决策如何改变。来源变动时，只刷新受影响的 Page，并保留旧修订供审核。",
+        ],
+        bullets: [
+          "记录产品问题、source ID、日期、准确位置与适用范围。",
+          "把每句话分类为观察、解读、假设、决策或待解问题。",
+          "把接受或拒绝的理由连接到证据，而不只是会议结论。",
+          "比较冲突信号；证据无法解决时就保留矛盾。",
+          "需求进入 PRD 草稿前，先标记无依据或已经过期的内容。",
+        ],
+        code: {
+          label: "有界的产品研究知识工作流",
+          code: "wenlan status\nwenlan sources add ~/Research/product-notes\n/distill <产品决策>\n/pages <产品决策>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "证据可检查后才开始写 PRD",
+        body: [
+          "PRD 可以整理证据库，但不应用流畅文字遮住证据。评审前确认每个需求都有来源路径或明确的未解标记，每个重要假设都有负责人或下一项检查，每个过往决策仍符合当前来源集合。",
+          "即使不使用 Wenlan，这仍是一套实用的产品研究方法：小型证据登记表、需求到来源的对照、矛盾记录、假设清单与决策历史，都能让评审者重做判断。",
+        ],
+      },
+      {
+        heading: "知道这个工作流不会自动化什么",
+        body: [
+          "Wenlan 不会转录会议、遮蔽个人身份信息、招募研究参与者、导入分析数据、连接 Jira、Linear、Slack 或 CRM，也不会自动排序机会、生成完整 PRD、选择路线图或声称产品结果。这些决策与控制仍需要维护中的来源和人工审核。",
+          "它也不能让没有依据的请求变成事实。保持来源、主张、日期、限制与审核状态可见，让 Agent 协助整理证据，但不要取代产品团队的判断。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 能把用户研究直接变成 PRD 吗？",
+        answer:
+          "不能。它能协助维护有来源的证据库，以及从批准笔记到可追溯需求的对照；产品经理和研究员仍须解读证据、处理优先顺序，并撰写和批准 PRD。",
+      },
+      {
+        question: "访谈笔记和客服请求互相矛盾时怎么办？",
+        answer:
+          "保留两个有日期的来源，说明各自范围，并记录矛盾或待解问题。不要把客服请求、用户观察和产品决策合并成一个没有依据的需求。",
+      },
+      {
+        question: "这会连接 Jira、Linear、Slack 或 CRM 吗？",
+        answer:
+          "不会。请使用支持的 Markdown、文本、可提取文本的 PDF、文件夹或只读 Obsidian 来源，并明确维护你获准使用的导出文件或笔记。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "verify-ai-knowledge-base-citations",
+      "source-backed-wiki-pages-ai-work",
+      "source-backed-research-knowledge-base",
+      "build-client-project-knowledge-base-for-consulting",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 支持的文档来源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan 有来源 Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "Wenlan 审核与信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+      {
+        label: "Wenlan 日常工作流",
+        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+      },
+    ],
+    cta: {
+      heading: "让一个产品决策可追溯",
+      body: "从批准的来源集合开始，把需求连接到有日期的证据，并在 PRD 评审前保留矛盾与待解问题。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;

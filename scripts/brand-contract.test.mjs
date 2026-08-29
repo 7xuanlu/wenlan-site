@@ -1751,7 +1751,7 @@ test("Learn article headers keep long Wenlan titles inside mobile viewports", as
 
   assert.match(page, /mt-12 grid min-w-0/);
   assert.match(page, /<div className="min-w-0">/);
-  assert.match(page, /<h1 className="[^"]*text-\[2rem\][^"]*\[word-break:keep-all\][^"]*\[overflow-wrap:break-word\][^"]*sm:text-7xl/);
+  assert.match(page, /<h1 className="[^"]*text-\[2rem\][^"]*\[overflow-wrap:anywhere\][^"]*\[word-break:normal\][^"]*sm:\[overflow-wrap:break-word\][^"]*sm:\[word-break:keep-all\][^"]*sm:text-7xl/);
 
   const visuals = await readRepo("src/app/learn/article-visuals.tsx");
   assert.match(visuals, /grid min-w-0 grid-cols-\[32px_minmax\(0,1fr\)\]/);

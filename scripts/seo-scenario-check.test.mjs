@@ -26,15 +26,46 @@ test("canonical trilingual scenario backlog is complete and generated report is 
   });
 
   assert.deepEqual(result.errors, []);
-  assert.equal(backlog.families.length, 11);
+  assert.equal(backlog.families.length, 12);
   assert.equal(
     backlog.families.at(-1)?.id,
-    "source-backed-investment-research-knowledge-base",
+    "product-research-to-prd-knowledge-base",
   );
   assert.equal(backlog.campaign.baseline.sitemapUrls, 120);
-  assert.equal(sitemapRows.length, 147);
+  assert.equal(sitemapRows.length, 150);
   assert.equal(result.sitemapCount, sitemapRows.length);
   assert.equal(renderScenarioBacklog(backlog), report);
+});
+
+test("product-research family preserves one trilingual evidence-to-PRD task", () => {
+  const family = backlog.families.find(
+    (candidate) => candidate.id === "product-research-to-prd-knowledge-base",
+  );
+
+  assert.ok(family, "product-research scenario family");
+  assert.match(family.audience, /product managers|UX researchers|product operations/i);
+  assert.match(family.trigger, /PRD|roadmap review|stakeholder decision/i);
+  assert.match(family.userTask, /source-backed product research knowledge base/i);
+  assert.match(family.desiredOutcome, /trace|contradictions|decision history/i);
+  assert.equal(family.decision, "net-new");
+  assert.equal(family.publicationStatus, "prepared");
+  assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
+  assert.ok(
+    Object.values(family.locales).every(
+      (locale) => locale.coverage === "gap" && locale.queryFamily.length >= 3,
+    ),
+    "every locale must preserve a clean query-family gap",
+  );
+  assert.ok(
+    Object.values(family.gates).every((gate) => gate.status === "passed"),
+    "every product-research candidate gate must pass",
+  );
+  assert.equal(family.internalLinks.length, 9);
+  assert.match(family.authorityPath.target, /PANGKAIFENG\/ai-product-manager-skills/);
+  assert.match(
+    family.overlapCheck,
+    /automatic PRD generation|Jira|CRM sync|roadmap decisions/i,
+  );
 });
 
 test("investment-research family preserves one trilingual filing-to-thesis task", () => {

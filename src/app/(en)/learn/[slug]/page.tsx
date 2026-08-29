@@ -224,7 +224,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                 <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
                   {article.eyebrow}
                 </p>
-                <h1 className="warm-glow max-w-full font-serif text-[2rem] leading-[1.08] font-medium tracking-tight [word-break:keep-all] [overflow-wrap:break-word] sm:text-7xl sm:leading-[1.05]">
+                <h1 className="warm-glow max-w-full font-serif text-[2rem] leading-[1.08] font-medium tracking-tight [overflow-wrap:anywhere] [word-break:normal] sm:[overflow-wrap:break-word] sm:[word-break:keep-all] sm:text-7xl sm:leading-[1.05]">
                   {article.title}
                 </h1>
                 <p className="mt-8 max-w-2xl break-words text-lg leading-relaxed text-[var(--o-text-secondary)]">

@@ -1645,6 +1645,7 @@ const workflowArticles: BaseSpec[] = [
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
+      "build-product-research-knowledge-base-for-prd",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
     ],
@@ -2929,6 +2930,7 @@ const trustArticles: BaseSpec[] = [
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
+      "build-product-research-knowledge-base-for-prd",
     ],
     officialReferences: [
       {
@@ -3007,7 +3009,7 @@ const trustArticles: BaseSpec[] = [
       "Should I import every note before starting?",
       "No. Start with one repeated, high-value topic and prove its source, capture, distill, inspection, lint, and review loop before expanding.",
     ],
-    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "test-ai-knowledge-base-retrieval-after-changes", "prevent-multi-agent-knowledge-conflicts", "source-backed-research-knowledge-base", "build-client-project-knowledge-base-for-consulting", "build-investment-research-knowledge-base", "review-before-trust-ai-memory", "ai-memory-provenance"],
+    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "test-ai-knowledge-base-retrieval-after-changes", "prevent-multi-agent-knowledge-conflicts", "source-backed-research-knowledge-base", "build-client-project-knowledge-base-for-consulting", "build-investment-research-knowledge-base", "build-product-research-knowledge-base-for-prd", "review-before-trust-ai-memory", "ai-memory-provenance"],
     officialReferences: [
       {
         label: "Wenlan knowledge model",
@@ -3404,9 +3406,141 @@ const retrievalRegressionArticle: LearnArticle = {
   },
 };
 
+const productResearchArticle: LearnArticle = {
+  slug: "build-product-research-knowledge-base-for-prd",
+  eyebrow: "Product research workflow",
+  category: "Workflows",
+  title: "Build a Product Research Knowledge Base Before Writing a PRD",
+  description:
+    "Turn approved research notes, support and sales signals, and prior decisions into a source-backed evidence base for a defensible PRD.",
+  metaTitle: "Build a Product Research Knowledge Base Before a PRD | Wenlan",
+  metaDescription:
+    "Connect user research to a defensible PRD with dated sources, traceable requirements, contradictions, assumptions, open questions, and decision history.",
+  keywords: [
+    "product research knowledge base",
+    "user research to PRD",
+    "source-backed product decisions",
+    "evidence-based PRD",
+    "UX research knowledge base",
+    "product operations knowledge base",
+    "product discovery evidence",
+  ],
+  publishedAt: "2026-08-28",
+  updatedAt: "2026-08-28",
+  author: "Qi-Xuan Lu",
+  readingTime: "8 min read",
+  audience:
+    "Product managers, UX researchers, and product operations teams preparing a PRD or roadmap review",
+  heroBullets: [
+    "Start with one product decision and its approved evidence boundary.",
+    "Trace each requirement to dated research, support, sales, or decision sources.",
+    "Keep observations, interpretations, assumptions, contradictions, and open questions separate.",
+  ],
+  sections: [
+    {
+      heading: "Start with one product decision, not a company-wide archive",
+      body: [
+        "Before drafting a PRD, build one product-scoped evidence base for the decision under review. Collect only approved interview notes, support or sales notes, research artifacts, and prior decisions that the team can inspect; the goal is to make each requirement traceable, not to create a generic repository of every conversation.",
+        "Wenlan can keep those supported Markdown, text, text-extractable PDF, folder, and read-only Obsidian sources connected to source-backed Pages, citations, revisions, stale state, and review. It does not decide the roadmap or turn a source into an approved product requirement.",
+      ],
+    },
+    {
+      heading: "Freeze the source boundary before synthesis",
+      body: [
+        "Write down the product area, review question, date range, included source types, and excluded material before asking an agent to synthesize. A narrow boundary makes it possible to tell whether a requirement is supported by an observed user need, a team interpretation, an assumption, or a decision that needs to be revisited.",
+        "Keep source dates, document versions, and exact headings or passages in a small source register. If a note is incomplete or a source is not approved for this product decision, record it as unavailable rather than silently filling the gap.",
+      ],
+      bullets: [
+        "Approved interview or research notes: preserve the observation and its source location.",
+        "Support or sales notes: separate a repeated problem signal from an unverified request.",
+        "Prior decisions: record the decision date, rationale, scope, and evidence available then.",
+        "Assumptions and open questions: keep them visible instead of presenting them as user facts.",
+      ],
+    },
+    {
+      heading: "Build the evidence chain from note to requirement",
+      body: [
+        "Use one row or Page section per important requirement. Link the requirement to dated source passages, distinguish reported observations from your interpretation, and record contradictory evidence before deciding whether the requirement should remain, narrow, or stay unresolved.",
+        "The same chain should survive a PRD review: a reviewer can open the source, see the current revision, understand which assumptions remain, and follow how a prior decision changed. If a source changes, refresh only the affected Page and leave the previous revision available for review.",
+      ],
+      bullets: [
+        "Record the product question, source ID, date, exact location, and scope.",
+        "Classify each statement as observation, interpretation, assumption, decision, or open question.",
+        "Attach acceptance or rejection rationale to the evidence, not just to a meeting outcome.",
+        "Compare conflicting signals and preserve the contradiction when the evidence cannot resolve it.",
+        "Mark unsupported or stale requirements before they enter a PRD draft.",
+      ],
+      code: {
+        label: "A bounded product-research knowledge workflow",
+        code: "wenlan status\nwenlan sources add ~/Research/product-notes\n/distill <product decision>\n/pages <product decision>\n/lint\n/curate",
+      },
+    },
+    {
+      heading: "Draft the PRD only after the evidence is inspectable",
+      body: [
+        "A PRD can summarize the evidence base, but it should not hide the evidence behind polished prose. Before the review, check that every requirement has a source path or an explicit unresolved label, every important assumption has an owner or next check, and every prior decision still matches the current source set.",
+        "This makes the document useful even without Wenlan: a small evidence register, requirement-to-source map, contradiction log, assumption list, and decision history are a repeatable product-research practice rather than a vendor-specific format.",
+      ],
+    },
+    {
+      heading: "Know what this workflow does not automate",
+      body: [
+        "Wenlan does not transcribe meetings, redact personally identifiable information, recruit participants, ingest analytics, connect Jira, Linear, Slack, or a CRM, automatically prioritize opportunities, generate a complete PRD, choose a roadmap, or claim a product outcome. Use maintained sources and human review for those decisions and controls.",
+        "It also cannot make an unsupported request true. Keep the source, claim, date, limitation, and review state visible so an agent can help organize evidence without replacing the product team's judgment.",
+      ],
+    },
+  ],
+  faqs: [
+    {
+      question: "Can Wenlan turn user research directly into a PRD?",
+      answer:
+        "No. It can help maintain a source-backed evidence base and a traceable requirement map from approved notes, but product managers and researchers still interpret evidence, resolve priorities, and write and approve the PRD.",
+    },
+    {
+      question: "What if interview notes and support requests disagree?",
+      answer:
+        "Keep both dated sources, state their scope, and record the contradiction or unresolved question. Do not merge a support request, an observation, and a product decision into one unsupported requirement.",
+    },
+    {
+      question: "Does this connect to Jira, Linear, Slack, or a CRM?",
+      answer:
+        "Not in this workflow. Use supported Markdown, text, text-extractable PDFs, folders, or a read-only Obsidian source, and explicitly maintain any exports or notes you are allowed to use.",
+    },
+  ],
+  relatedSlugs: [
+    "build-local-ai-knowledge-base-from-documents",
+    "verify-ai-knowledge-base-citations",
+    "source-backed-wiki-pages-ai-work",
+    "source-backed-research-knowledge-base",
+    "build-client-project-knowledge-base-for-consulting",
+  ],
+  officialReferences: [
+    {
+      label: "Wenlan supported document sources",
+      href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+    },
+    {
+      label: "Wenlan source-backed Pages",
+      href: "https://wenlan.app/docs/source-backed-pages",
+    },
+    {
+      label: "Wenlan review and trust",
+      href: "https://wenlan.app/docs/review-and-trust",
+    },
+    {
+      label: "Wenlan daily workflow",
+      href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+    },
+  ],
+  cta: {
+    heading: "Make one product decision traceable",
+    body: "Start with an approved source set, map requirements to dated evidence, and keep contradictions and open questions visible before the PRD review.",
+  },
+};
+
 export const seoArticles: LearnArticle[] = [
   ...setupArticles,
   ...workflowArticles,
   ...comparisonArticles,
   ...trustArticles,
-].map(makeArticle).concat(retrievalRegressionArticle);
+].map(makeArticle).concat(retrievalRegressionArticle, productResearchArticle);
