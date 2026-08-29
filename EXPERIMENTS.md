@@ -8620,3 +8620,60 @@ increase for that experiment.
 - Decision: wait
 - Next step: Keep `2026-08-29T06:02:35Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-08-30T06:02:35Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-05T06:02:35Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with its original 20-page-impression, 3-qualified-joined-query-impression, and 1-click contract. The now-open production slot may be used for the next independently gated scenario; do not request indexing, submit GSC validation, mutate analytics, or publish externally under this record.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-28-product-research-to-prd-knowledge-base-locales
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-28-product-research-to-prd-knowledge-base-locales
+- Status: active
+- Data window: 2026-08-22..2026-08-28
+- Asset class: net-new-search
+- Launched: 2026-08-28
+- Hypothesis: One product-scoped English, zh-TW, and zh-CN owner for preserving dated user evidence, contradictions, assumptions, open questions, requirement rationale, and decision history before PRD drafting can earn qualified product-research exposure without cannibalizing generic document ingestion, academic research, consulting, investment research, or citation-verification intent.
+- Candidate evidence: Separate English, Taiwan Traditional-Chinese, and Simplified-Chinese SERP observations, native-unit Google Trends indices, current practitioner workflows, and maintained OSS workflows are stored in `docs/seo-scenario-backlog.json` and `docs/seo-audits/2026-08-28-product-research-prd-knowledge-base-candidate.md`. They are not authenticated GSC data, keyword volume, exact rank, or causal evidence.
+- Baseline: GSC property 7 clicks and 913 impressions; visible-query 2 clicks and 221 impressions; visibility gap 5 clicks and 692 impressions; Vercel 289 visitors with 257 direct and 28 attributed to Google; GitHub 51 stars; new target-page rows unavailable, all kept separate.
+- Change: Publish exactly one English, zh-TW, and zh-CN canonical that registers approved product evidence, separates observations from interpretations and decisions, preserves contradictions and assumptions, maps requirement claims to sources, and leaves open questions visible before PRD drafting. Explicitly exclude transcription, PII redaction, research recruiting, analytics ingestion, Jira, Linear, Slack or CRM integration, automatic prioritization, automatic PRD generation, roadmap decisions, and product-outcome claims.
+- Publish date: 2026-08-29
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions per locale in 28 complete post-crawl days
+- Success criteria: Per locale, at least 3 qualified joined-query impressions and at least 1 GSC click after minimum exposure; report CTR and position separately.
+- Failure criteria: After 28 complete post-crawl days and minimum exposure, a locale has no qualified joined-query impressions or no GSC click, or an above-floor join assigns the same task to generic document ingestion, academic research, consulting, investment research, citation verification, or product-management software intent.
+- Stop criteria: Stop on a technical, unsupported product claim, duplicate-intent, controller-overlap, canonical, locale, responsive-render, or approval-boundary violation.
+- 24h readout: pending technical and indexability observation after 2026-08-30T06:44:59Z
+- 7d readout: pending early source-native GSC page/query and Vercel page/referrer observation after 2026-09-05T06:44:59Z
+- W2 readout: pending
+- W4 readout: pending formal 28-complete-post-crawl-day decision when eligible
+- W8 readout: pending only if useful after the Goal deadline
+- Result: pending
+- Decision: wait
+- Next step: Keep the published canonical family stable, record the due technical and source-native readouts, and pursue the predeclared authority path only after its exact external change receives separate approval.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-28-product-research-to-prd-knowledge-base-locales publication approval
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-28-product-research-to-prd-knowledge-base-locales
+- Observed at: 2026-08-29T06:43:32Z
+- Readout: correction
+- Status: active
+- Evidence: By this observation, the current task contained the user's explicit approval for the locally verified English, zh-TW, and zh-CN product-research-to-PRD family to be committed, pushed, opened as a PR, merged, automatically deployed by Vercel, and verified read-only in production. Request indexing, GSC validation, analytics mutation, OSS contribution, maintainer messaging, paid action, synthetic events, metric-definition changes, and unrelated external publication remained excluded.
+- Result: pending
+- Decision: merge
+- Next step: Merge only after required checks pass, verify the integrated commit and production deployment, and keep the production boundary fixed at Vercel completion.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-28-product-research-to-prd-knowledge-base-locales production publication
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-28-product-research-to-prd-knowledge-base-locales
+- Observed at: 2026-08-29T06:44:59Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #152 merged at `2026-08-29T06:43:59Z` as `66f7b012f25174cac63e94dcec8b27b9b3d6e5e2`; Vercel reported production deployment success at `2026-08-29T06:44:59Z`. The integrated commit passed the Goal, scenario, 47 goal tests, 249 SEO tests, 73 i18n tests, TypeScript, production build, and built technical audit. The English, zh-TW, and zh-CN live routes returned direct 200 responses with exact canonicals, reciprocal en-US/zh-TW/zh-CN/x-default hreflang, Article and BreadcrumbList schema, visible evidence-to-PRD workflow, three visible FAQ items, and no FAQPage schema. The deployed technical audit passed all 150 sitemap URLs, key pages, utility noindex headers, redirects, and bridge-host redirects. This proves publication and technical availability only; it is not a crawl, indexing, ranking, traffic, or causality claim.
+- Result: pending
+- Decision: wait
+- Next step: Keep `2026-08-29T06:44:59Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-08-30T06:44:59Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-05T06:44:59Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with its original 20-page-impression, 3-qualified-joined-query-impression, and 1-click contract. Do not request indexing, submit GSC validation, mutate analytics, or publish externally under this record.
+<!-- EXPERIMENT-RECORD:END -->

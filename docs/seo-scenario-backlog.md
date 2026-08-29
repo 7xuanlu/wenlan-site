@@ -966,11 +966,11 @@ Demand discovery:
 - Desired outcome: Trace every important product claim to dated user evidence, preserve contradictions and assumptions, expose open questions, and keep the decision history reviewable
 - Stage: `build`
 - Decision: `net-new`
-- Planned window: `2026-08-31..2026-09-06-local-preparation`
-- Publication: `prepared`
+- Planned window: `2026-08-28..2026-08-29-published`
+- Publication: `measuring`
 - Standalone utility: A neutral product-research runbook can register approved evidence, separate observations from interpretations and decisions, preserve contradictions and assumptions, map requirement claims to sources, and leave open questions visible before PRD drafting.
 - Overlap check: Do not duplicate the academic-research, consultant, investment-research, generic document-import, citation-verification, or project-context owners. This page remains distinct only while it owns one product or initiative from approved user research through problem evidence, requirement rationale, contradictions, assumptions, open questions, and decision history before PRD drafting. It explicitly excludes transcription, Jira, Linear, Slack or CRM sync, PII redaction, recruiting, analytics ingestion, automatic prioritization, automatic PRD generation, roadmap decisions, and product-outcome claims.
-- Next research: Finish the three locale pages and deterministic overlap, locale, sitemap, and render checks. OpenSEO is authenticated for the wenlan.app project but currently reports all hosted credits used, so it supplied no new paid keyword metrics; do not invent them. Stop before commit, push, PR, merge, deployment, indexing request, GSC validation, analytics mutation, OSS contribution, maintainer message, or external publication.
+- Next research: Keep the three published locale owners stable from the fixed 2026-08-29T06:44:59Z production boundary. Record the 24-hour technical/indexability observation and the seven-day source-native GSC page/query and Vercel page/referrer observation; judge each locale only after a confirmed post-deploy crawl and the original 28-day exposure contract. OpenSEO is authenticated for wenlan.app but has no hosted credits, so it supplied no paid keyword metrics. Do not request indexing, submit GSC validation, mutate analytics, contribute to OSS, message maintainers, buy traffic, generate synthetic events, or publish externally without separate approval.
 
 ### Locale intent and ownership
 
