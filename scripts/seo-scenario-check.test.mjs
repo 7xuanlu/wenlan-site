@@ -26,15 +26,37 @@ test("canonical trilingual scenario backlog is complete and generated report is 
   });
 
   assert.deepEqual(result.errors, []);
-  assert.equal(backlog.families.length, 9);
+  assert.equal(backlog.families.length, 10);
   assert.equal(
     backlog.families.at(-1)?.id,
-    "source-backed-research-knowledge-base",
+    "consultant-client-project-knowledge-base",
   );
   assert.equal(backlog.campaign.baseline.sitemapUrls, 120);
-  assert.equal(sitemapRows.length, 141);
+  assert.equal(sitemapRows.length, 144);
   assert.equal(result.sitemapCount, sitemapRows.length);
   assert.equal(renderScenarioBacklog(backlog), report);
+});
+
+test("consultant client-project family preserves its approved trilingual task contract", () => {
+  const family = backlog.families.find(
+    (candidate) => candidate.id === "consultant-client-project-knowledge-base",
+  );
+
+  assert.ok(family, "consultant client-project scenario family");
+  assert.match(family.audience, /consultants/i);
+  assert.match(family.trigger, /client/i);
+  assert.match(family.userTask, /client-project knowledge base/i);
+  assert.match(family.desiredOutcome, /traceable|current/i);
+  assert.equal(family.decision, "net-new");
+  assert.equal(family.publicationStatus, "prepared");
+  assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
+  assert.ok(
+    Object.values(family.gates).every((gate) => gate.status === "passed"),
+    "every approved candidate gate must pass",
+  );
+  assert.equal(family.internalLinks.length, 9);
+  assert.equal(family.readout.gsc.status, "unavailable");
+  assert.equal(family.readout.vercel.status, "unavailable");
 });
 
 test("scenario validation rejects a missing locale and an owner outside the sitemap", () => {

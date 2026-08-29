@@ -1643,6 +1643,7 @@ const workflowArticles: BaseSpec[] = [
       "coding-agent-source-backed-knowledge-base",
       "source-backed-wiki-pages-ai-work",
       "source-backed-research-knowledge-base",
+      "build-client-project-knowledge-base-for-consulting",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
     ],
@@ -1856,6 +1857,100 @@ const workflowArticles: BaseSpec[] = [
     },
   },
 ];
+
+const consultantClientProjectArticle: BaseSpec = {
+  slug: "build-client-project-knowledge-base-for-consulting",
+  eyebrow: "Consulting workflow",
+  category: "Workflows",
+  title: "How to Build a Client Project Knowledge Base for Consulting",
+  description:
+    "Keep one consulting engagement's sources, research, decisions, deliverables, and handoff context in a traceable client-project knowledge base.",
+  metaTitle: "Build a Client Project Knowledge Base for Consulting",
+  metaDescription:
+    "Build a client-scoped consulting knowledge base for sources, research, decisions, deliverables, stale evidence, and project handoff.",
+  keywords: [
+    "consultant client knowledge base",
+    "consulting engagement knowledge base",
+    "client project knowledge handoff",
+    "consulting research knowledge base",
+    "client deliverable source tracking",
+  ],
+  publishedAt: "2026-08-28",
+  updatedAt: "2026-08-28",
+  readingTime: "8 min read",
+  audience:
+    "Independent consultants, boutique consulting teams, and research analysts delivering client engagements",
+  heroBullets: [
+    "Keep each client in a separate source boundary instead of mixing engagements.",
+    "Trace findings, decisions, and deliverable claims back to current client-approved sources.",
+    "Leave a reviewable handoff that records open questions, stale evidence, and the next owner.",
+  ],
+  quickAnswer:
+    "Create one client-scoped knowledge base per engagement. Register only the approved project sources, keep a decision and open-question log, distill reusable findings into a source-backed Page, and verify every deliverable claim before handoff.",
+  wenlanFit:
+    "Wenlan can keep Sources, atomic Memories, and maintained Pages inside a client Space, with source references, revisions, stale state, lint, and review. It does not provide CRM ingestion, email or calendar sync, role-based access control, automatic redaction, legal compliance, billing, or project management.",
+  problem:
+    "A consultant often starts the next proposal, workshop, deliverable, or handoff by reconstructing context from folders, interview notes, slide decks, chats, and personal memory. The risk is not only wasted time: evidence from another client can leak into the engagement, an old decision can look current, and a polished claim can lose its source.",
+  actionHeading: "Build one client-to-handoff loop",
+  actionIntro:
+    "Start with a non-sensitive sample engagement. Use the client's contractual and security controls before adding confidential material.",
+  actionBullets: [
+    "Create one Space and one source folder for a single client engagement; never use a shared catch-all client corpus.",
+    "Register the approved proposal, scope, research, interview notes, source documents, decisions, and current deliverables with `wenlan sources add <path>`.",
+    "Record each important decision with its date, owner, evidence, alternatives, and what would reopen it; keep unanswered questions separate.",
+    "Distill one repeated project question into a maintained Page, then verify the cited source and revision before copying a claim into a deliverable.",
+    "When a source changes, resync it and review only the affected Pages; mark unresolved claims stale instead of silently preserving them.",
+    "Before handoff, record current scope, accepted decisions, open questions, deliverables, source boundaries, risks, and the next responsible person.",
+    "Run lint and review before sharing. Keep confidential or regulated material out unless the engagement's approved controls permit it.",
+  ],
+  code: {
+    label: "After Wenlan and the AI client are configured",
+    code: "wenlan status\nwenlan sources add ~/Clients/acme-approved-sources\n# In a Wenlan plugin client:\n/distill <client project question>\n/pages <client project question>\n/lint\n/curate\n/handoff",
+  },
+  caution:
+    "Local-first storage does not replace a consulting agreement, client consent, access control, retention policy, redaction, or a secure document system. Start with non-sensitive sample data, keep each client isolated, and withhold any claim whose current source cannot be verified.",
+  faq: [
+    "Should all consulting clients share one knowledge base?",
+    "No. Give each engagement its own source boundary and Space. Reuse only explicitly approved general methods or templates, never another client's facts, files, or decisions.",
+    "Does Wenlan manage client confidentiality or permissions for me?",
+    "No. Wenlan keeps local, source-backed knowledge inspectable, but it is not a CRM, document access-control system, redaction tool, or legal-compliance service. Apply the client's approved security and retention controls first.",
+  ],
+  relatedSlugs: [
+    "source-backed-wiki-pages-ai-work",
+    "build-local-ai-knowledge-base-from-documents",
+    "verify-ai-knowledge-base-citations",
+    "source-backed-research-knowledge-base",
+    "prevent-multi-agent-knowledge-conflicts",
+  ],
+  officialReferences: [
+    {
+      label: "Wenlan knowledge model and Spaces",
+      href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+    },
+    {
+      label: "Wenlan daily workflow",
+      href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+    },
+    {
+      label: "Cogni Consult client-delivery workspace",
+      href: "https://github.com/cogni-work/insight-wave/tree/main/cogni-consult",
+    },
+    {
+      label: "AI Consulting Methodology engagement lifecycle",
+      href: "https://github.com/mardy123/AI-Consulting-Methodology-Toolkit/blob/main/06_Delivery/ENGAGEMENT_LIFECYCLE.md",
+    },
+    {
+      label: "Market research workflow reference",
+      href: "https://github.com/genli-ai/market-research-skills/blob/main/skills/analyst-research/references/workflow_medium.zh.md",
+    },
+  ],
+  cta: {
+    heading: "Build one inspectable client handoff",
+    body: "Create a client-scoped source boundary, verify one deliverable claim, and leave a handoff another consultant can reproduce.",
+  },
+};
+
+workflowArticles.push(consultantClientProjectArticle);
 
 const comparisonArticles: BaseSpec[] = [
   {
@@ -2736,6 +2831,7 @@ const trustArticles: BaseSpec[] = [
       "ai-memory-provenance",
       "test-ai-knowledge-base-retrieval-after-changes",
       "source-backed-research-knowledge-base",
+      "build-client-project-knowledge-base-for-consulting",
     ],
     officialReferences: [
       {
@@ -2814,7 +2910,7 @@ const trustArticles: BaseSpec[] = [
       "Should I import every note before starting?",
       "No. Start with one repeated, high-value topic and prove its source, capture, distill, inspection, lint, and review loop before expanding.",
     ],
-    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "test-ai-knowledge-base-retrieval-after-changes", "prevent-multi-agent-knowledge-conflicts", "source-backed-research-knowledge-base", "review-before-trust-ai-memory", "ai-memory-provenance"],
+    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "test-ai-knowledge-base-retrieval-after-changes", "prevent-multi-agent-knowledge-conflicts", "source-backed-research-knowledge-base", "build-client-project-knowledge-base-for-consulting", "review-before-trust-ai-memory", "ai-memory-provenance"],
     officialReferences: [
       {
         label: "Wenlan knowledge model",
