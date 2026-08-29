@@ -539,6 +539,7 @@ test("localized Learn slug route supports per-locale acquisition page availabili
     "/learn/test-ai-knowledge-base-retrieval-after-changes",
     "/learn/source-backed-research-knowledge-base",
     "/learn/build-client-project-knowledge-base-for-consulting",
+    "/learn/build-investment-research-knowledge-base",
   ]);
   assert.match(source, /getLocalizedLearnArticle/);
   assert.match(source, /TRANSLATED_LEARN_SLUGS/);
@@ -883,6 +884,14 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
       locale: "zh-CN",
       slug: "build-client-project-knowledge-base-for-consulting",
     },
+    {
+      locale: "zh-TW",
+      slug: "build-investment-research-knowledge-base",
+    },
+    {
+      locale: "zh-CN",
+      slug: "build-investment-research-knowledge-base",
+    },
   ]);
 
   const metadata = await localizedLearnSlug.generateMetadata({
@@ -982,6 +991,56 @@ test("consultant client-project family owns one distinct trilingual engagement w
     "source-backed-wiki-pages-ai-work",
     "build-local-ai-knowledge-base-from-documents",
     "verify-ai-knowledge-base-citations",
+  ]) {
+    assert.ok(
+      articles.find((article) => article.slug === owner)?.relatedSlugs.includes(slug),
+      `${owner} must link to ${slug}`,
+    );
+    for (const locale of ["zh-TW", "zh-CN"]) {
+      assert.ok(
+        getLocalizedLearnArticle(locale, owner)?.relatedSlugs.includes(slug),
+        `${locale} ${owner} must link to ${slug}`,
+      );
+    }
+  }
+});
+
+test("investment-research family owns one distinct trilingual filing-to-thesis workflow", async () => {
+  const [{ articles }, { getLocalizedLearnArticle }] = await Promise.all([
+    import("../src/app/(en)/learn/articles.ts"),
+    import("../src/i18n/learn-articles.ts"),
+  ]);
+  const slug = "build-investment-research-knowledge-base";
+  const english = articles.find((article) => article.slug === slug);
+
+  assert.ok(english, "English investment-research article");
+  assert.match(english.title, /Investment Research Knowledge Base/i);
+  assert.match(JSON.stringify(english), /annual report|filing/i);
+  assert.match(JSON.stringify(english), /earnings call/i);
+  assert.match(JSON.stringify(english), /thesis|open question/i);
+  assert.match(JSON.stringify(english), /not investment advice/i);
+  assert.match(
+    JSON.stringify(english),
+    /does not provide|does not fetch|no live market data/i,
+  );
+
+  for (const [locale, titlePattern, workflowPattern] of [
+    ["zh-TW", /投資研究知識庫|投研知識庫/, /財報|法說會/],
+    ["zh-CN", /投资研究知识库|投研知识库/, /财报|公告/],
+  ]) {
+    const article = getLocalizedLearnArticle(locale, slug);
+    assert.ok(article, `${locale} investment-research article`);
+    assert.match(article.title, titlePattern);
+    assert.match(JSON.stringify(article), workflowPattern);
+    assert.equal(article.publishedAt, "2026-08-28");
+    assert.equal(article.updatedAt, "2026-08-28");
+    assert.ok(article.officialReferences?.length >= 4);
+  }
+
+  for (const owner of [
+    "build-local-ai-knowledge-base-from-documents",
+    "verify-ai-knowledge-base-citations",
+    "source-backed-wiki-pages-ai-work",
   ]) {
     assert.ok(
       articles.find((article) => article.slug === owner)?.relatedSlugs.includes(slug),

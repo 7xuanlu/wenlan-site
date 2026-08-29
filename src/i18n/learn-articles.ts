@@ -520,6 +520,7 @@ const zhTWArticles = {
       "verify-ai-knowledge-base-citations",
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
+      "build-investment-research-knowledge-base",
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
       "test-ai-knowledge-base-retrieval-after-changes",
@@ -982,6 +983,7 @@ const zhTWArticles = {
       "source-backed-wiki-pages-ai-work",
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
+      "build-investment-research-knowledge-base",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
     ],
@@ -1648,6 +1650,7 @@ const zhTWArticles = {
       "test-ai-knowledge-base-retrieval-after-changes",
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
+      "build-investment-research-knowledge-base",
     ],
     officialReferences: [
       {
@@ -1912,6 +1915,119 @@ const zhTWArticles = {
     cta: {
       heading: "先建立一份可檢查的客戶交接",
       body: "切開客戶來源、驗證一個交付物主張，再留下下一位顧問能重做判斷的交接。",
+    },
+  },
+  "build-investment-research-knowledge-base": {
+    slug: "build-investment-research-knowledge-base",
+    eyebrow: "投資研究工作流",
+    category: "Workflows",
+    title: "如何建立投資研究知識庫：從財報、法說會到投資論點",
+    description:
+      "把財報、法說會資料與研究問題整理成可追溯的公司研究檔案，並在新證據出現時更新論點。",
+    metaTitle: "如何建立投資研究知識庫 | Wenlan",
+    metaDescription:
+      "用財報、年報與法說會資料建立有來源的投資研究知識庫，保留引用、論點變更與過期證據審查。",
+    keywords: [
+      "投資研究知識庫",
+      "AI 財報研究工作流",
+      "年報 法說會 研究筆記",
+      "公司研究 來源引用",
+      "投研資料 知識管理",
+    ],
+    publishedAt: "2026-08-28",
+    updatedAt: "2026-08-28",
+    author: "Qi-Xuan Lu",
+    readingTime: "9 分鐘閱讀",
+    audience: "使用財報、法說會與公司公告做研究的證券研究員、獨立投資人與財務專業人員",
+    heroBullets: [
+      "一家公司與一個報告期間使用明確來源邊界。",
+      "每個重要主張都回到目前財報、年報或法說會段落。",
+      "記錄哪些證據改變、哪些與論點矛盾，以及哪些問題仍未解答。",
+    ],
+    sections: [
+      {
+        heading: "先回答：研究檔案要能從論點回到原始資料",
+        body: [
+          "為每家公司建立獨立的投資研究知識庫，只加入你有權使用的目前年報、財報、重大訊息、法說會簡報與有日期的逐字稿或筆記。至少維護來源登錄表、指標與展望變更紀錄、投資論點、矛盾紀錄和待查問題。",
+          "Wenlan 可以維護有來源 Page、引用、修訂、stale 狀態、lint 與人工審查；它不提供即時行情、付費逐字稿、XBRL 或表格解析、估值計算、投資組合監控、交易訊號或投資建議。",
+        ],
+      },
+      {
+        heading: "先固定公司、期間與來源版本",
+        body: [
+          "來源登錄表至少記錄公司、文件類型、報告期間、發布日期、修訂版、權威來源與本機檔名。將公司報告的事實、自己的計算與投資判斷分開，不要把分析推論寫成公司原話。",
+          "掃描 PDF 必須先在外部完成 OCR。財務報表、表格與計算仍應回到原始申報資料和可重做的試算表或模型核對。",
+        ],
+      },
+      {
+        heading: "建立一個財報到論點的更新閉環",
+        body: [
+          "先用一家公司與一個報告週期驗證流程；重要數字、風險、展望和管理階層說法都保存準確頁碼或段落。",
+        ],
+        bullets: [
+          "加入目前年報或財報、最新季報、法說會簡報與有日期的研究筆記。",
+          "整理商業模式、部門、關鍵指標、展望、風險、催化劑與待查問題。",
+          "將新期間和前一期逐項比較，標出展望、指標定義、風險與管理說法的改變。",
+          "每個論點記錄來源、日期、信心、反證與失效條件。",
+          "來源修訂後只更新受影響 Page，無法再支持的主張標成 stale。",
+        ],
+        code: {
+          label: "完成 Wenlan 與 AI 客戶端設定後",
+          code: "wenlan status\nwenlan sources add ~/Research/companies/acme\n/distill <公司與報告期間問題>\n/pages <公司研究主題>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "引用存在，不等於分析正確",
+        body: [
+          "使用主張前要打開引用段落，核對數字、單位、期間、否定詞與管理階層歸屬。引用只證明有路徑，不證明來源本身正確，也不證明你的解讀成立。",
+          "這個流程不是投資建議，也不能取代授權資料、法遵審查、估值模型或專業判斷。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 會自動抓財報、行情或法說會逐字稿嗎？",
+        answer:
+          "不會。請加入你有權使用的文件。Wenlan 不提供即時金融資料、逐字稿授權、XBRL 管線、估值引擎或投資組合監控。",
+      },
+      {
+        question: "如何避免投資論點在新財報後過期？",
+        answer:
+          "每個論點都連到有日期的來源和失效條件。新財報或法說會後比較來源組，將已被取代的主張標成 stale，並保留舊修訂供審查。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "verify-ai-knowledge-base-citations",
+      "source-backed-wiki-pages-ai-work",
+      "source-backed-research-knowledge-base",
+      "test-ai-knowledge-base-retrieval-after-changes",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 支援的文件來源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan 有來源 Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "Anthropic 股票研究財報工作流",
+        href: "https://github.com/anthropics/financial-services/blob/main/plugins/vertical-plugins/equity-research/commands/earnings.md",
+      },
+      {
+        label: "數位時代：券商分析師 AI 研究工作流",
+        href: "https://www.bnext.com.tw/article/91590/notebooklm-gemini-claude-ai-research-workflow",
+      },
+      {
+        label: "Investor Harness 證據導向投研工作流",
+        href: "https://github.com/joansongjr/investor-harness",
+      },
+    ],
+    cta: {
+      heading: "先建立一份可檢查的公司研究檔案",
+      body: "加入一個報告週期、核對每個重要主張，再保存哪些證據與論點發生改變。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
@@ -2680,6 +2796,7 @@ const zhCNArticles = {
       "verify-ai-knowledge-base-citations",
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
+      "build-investment-research-knowledge-base",
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
       "test-ai-knowledge-base-retrieval-after-changes",
@@ -3144,6 +3261,7 @@ const zhCNArticles = {
       "source-backed-wiki-pages-ai-work",
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
+      "build-investment-research-knowledge-base",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
     ],
@@ -3538,6 +3656,7 @@ const zhCNArticles = {
       "test-ai-knowledge-base-retrieval-after-changes",
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
+      "build-investment-research-knowledge-base",
     ],
     officialReferences: [
       {
@@ -3802,6 +3921,119 @@ const zhCNArticles = {
     cta: {
       heading: "先建立一份可检查的客户交接",
       body: "分开客户来源、验证一个交付物主张，再留下下一位顾问能重做判断的交接。",
+    },
+  },
+  "build-investment-research-knowledge-base": {
+    slug: "build-investment-research-knowledge-base",
+    eyebrow: "投资研究工作流",
+    category: "Workflows",
+    title: "如何建立投资研究知识库：从财报、公告到投资论点",
+    description:
+      "把财报、公告、业绩说明会材料和研究问题整理成可追溯的公司研究档案，并在新证据出现时更新论点。",
+    metaTitle: "如何建立投资研究知识库 | Wenlan",
+    metaDescription:
+      "用财报、年报、公告和业绩说明材料建立有来源的投资研究知识库，保留引用、论点变化与过期证据审核。",
+    keywords: [
+      "AI 投研知识库",
+      "财报 研报 公告 知识库",
+      "投资研究知识库",
+      "投研资料 可追溯",
+      "公司研究 来源引用",
+    ],
+    publishedAt: "2026-08-28",
+    updatedAt: "2026-08-28",
+    author: "Qi-Xuan Lu",
+    readingTime: "9 分钟阅读",
+    audience: "使用财报、公告和业绩说明材料做研究的证券研究员、独立投资者和财务专业人员",
+    heroBullets: [
+      "一家公司和一个报告期使用明确来源边界。",
+      "每个重要主张都回到当前财报、公告或业绩说明材料。",
+      "记录哪些证据变化、哪些与论点矛盾，以及哪些问题仍未解决。",
+    ],
+    sections: [
+      {
+        heading: "先回答：研究档案要能从论点回到原始材料",
+        body: [
+          "为每家公司建立独立的投资研究知识库，只加入你有权使用的当前年报、财报、公司公告、业绩说明材料和有日期的会议笔记。至少维护来源登记表、指标与指引变化、投资论点、矛盾记录和待查问题。",
+          "Wenlan 可以维护有来源 Page、引用、修订、stale 状态、lint 和人工审核；它不提供实时行情、付费研报或逐字稿、XBRL 或表格解析、估值计算、投资组合监控、交易信号或投资建议。",
+        ],
+      },
+      {
+        heading: "先固定公司、报告期和来源版本",
+        body: [
+          "来源登记表至少记录公司、文件类型、报告期、发布日期、修订版、权威来源和本地文件名。将公司披露事实、自己的计算和投资判断分开，不要把分析推断写成公司表述。",
+          "扫描 PDF 必须先在外部完成 OCR。财务报表、表格和计算仍应回到原始披露材料和可复算的表格或模型核对。",
+        ],
+      },
+      {
+        heading: "建立一个财报到论点的更新闭环",
+        body: [
+          "先用一家公司和一个报告周期验证流程；重要数字、风险、指引和管理层说法都保留准确页码或段落。",
+        ],
+        bullets: [
+          "加入当前年报或财报、最新季报、公司公告、业绩说明材料和有日期的研究笔记。",
+          "整理商业模式、业务分部、关键指标、指引、风险、催化剂和待查问题。",
+          "将新报告期与上一期逐项比较，标出指引、指标定义、风险和管理层表述的变化。",
+          "每个论点记录来源、日期、信心、反证和失效条件。",
+          "来源修订后只更新受影响 Page，无法继续支持的主张标成 stale。",
+        ],
+        code: {
+          label: "完成 Wenlan 与 AI 客户端设置后",
+          code: "wenlan status\nwenlan sources add ~/Research/companies/acme\n/distill <公司与报告期问题>\n/pages <公司研究主题>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "引用存在，不等于分析正确",
+        body: [
+          "使用主张前要打开引用段落，核对数字、单位、报告期、否定词和管理层归属。引用只证明有路径，不证明来源本身正确，也不证明你的解读成立。",
+          "这个流程不是投资建议，也不能替代授权数据、合规审核、估值模型或专业判断。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 会自动抓取财报、行情或业绩说明逐字稿吗？",
+        answer:
+          "不会。请加入你有权使用的文件。Wenlan 不提供实时金融数据、逐字稿授权、XBRL 管线、估值引擎或投资组合监控。",
+      },
+      {
+        question: "如何避免投资论点在新财报后过期？",
+        answer:
+          "每个论点都连接到有日期的来源和失效条件。新财报或业绩说明后比较来源集，将已被取代的主张标成 stale，并保留旧修订供审核。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "verify-ai-knowledge-base-citations",
+      "source-backed-wiki-pages-ai-work",
+      "source-backed-research-knowledge-base",
+      "test-ai-knowledge-base-retrieval-after-changes",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 支持的文档来源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan 有来源 Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "Anthropic 股票研究财报工作流",
+        href: "https://github.com/anthropics/financial-services/blob/main/plugins/vertical-plugins/equity-research/commands/earnings.md",
+      },
+      {
+        label: "大禹投研智能体",
+        href: "https://github.com/huangbochn/dayu-agent",
+      },
+      {
+        label: "Investor Harness 证据导向投研工作流",
+        href: "https://github.com/joansongjr/investor-harness",
+      },
+    ],
+    cta: {
+      heading: "先建立一份能检查的公司研究档案",
+      body: "加入一个报告周期、核对每个重要主张，再保存哪些证据和论点发生变化。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;

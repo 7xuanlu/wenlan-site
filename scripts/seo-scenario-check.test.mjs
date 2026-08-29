@@ -26,15 +26,36 @@ test("canonical trilingual scenario backlog is complete and generated report is 
   });
 
   assert.deepEqual(result.errors, []);
-  assert.equal(backlog.families.length, 10);
+  assert.equal(backlog.families.length, 11);
   assert.equal(
     backlog.families.at(-1)?.id,
-    "consultant-client-project-knowledge-base",
+    "source-backed-investment-research-knowledge-base",
   );
   assert.equal(backlog.campaign.baseline.sitemapUrls, 120);
-  assert.equal(sitemapRows.length, 144);
+  assert.equal(sitemapRows.length, 147);
   assert.equal(result.sitemapCount, sitemapRows.length);
   assert.equal(renderScenarioBacklog(backlog), report);
+});
+
+test("investment-research family preserves one trilingual filing-to-thesis task", () => {
+  const family = backlog.families.find(
+    (candidate) =>
+      candidate.id === "source-backed-investment-research-knowledge-base",
+  );
+
+  assert.ok(family, "investment-research scenario family");
+  assert.match(family.audience, /investment|equity|financial/i);
+  assert.match(family.trigger, /filing|annual report|earnings/i);
+  assert.match(family.userTask, /investment research knowledge base/i);
+  assert.match(family.desiredOutcome, /traceable|current|thesis/i);
+  assert.equal(family.decision, "net-new");
+  assert.equal(family.publicationStatus, "prepared");
+  assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
+  assert.ok(
+    Object.values(family.gates).every((gate) => gate.status === "passed"),
+    "every investment-research candidate gate must pass",
+  );
+  assert.equal(family.internalLinks.length, 9);
 });
 
 test("consultant client-project family preserves its approved trilingual task contract", () => {

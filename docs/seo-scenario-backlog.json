@@ -2661,6 +2661,259 @@
           "nativeUnit": "per-locale target-page visitors and referrer visitors"
         }
       }
+    },
+    {
+      "id": "source-backed-investment-research-knowledge-base",
+      "audience": "Equity and investment research analysts, independent investors, and finance professionals who work from company filings and earnings materials",
+      "trigger": "A new annual report, filing, earnings release, or earnings call changes the evidence behind a company research thesis",
+      "userTask": "Build and maintain one source-backed investment research knowledge base from company filings, annual reports, and earnings-call material",
+      "desiredOutcome": "Keep a current traceable company dossier that separates reported facts, analyst calculations, thesis judgments, contradictions, stale evidence, and open questions",
+      "stage": "build",
+      "decision": "net-new",
+      "plannedWindow": "2026-08-31..2026-09-06-approved-local-preparation",
+      "publicationStatus": "prepared",
+      "locales": {
+        "en": {
+          "queryFamily": [
+            "investment research knowledge base",
+            "AI investment research workflow",
+            "annual report earnings call research"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "google-serp-observation",
+              "sourceUrl": "https://www.google.com/search?hl=en&gl=us&q=investment+research+knowledge+base+annual+report+earnings+call",
+              "query": "investment research knowledge base annual report earnings call",
+              "capturedAt": "2026-08-28",
+              "language": "en",
+              "geography": "United States parameter",
+              "nativeUnit": "returned result observation",
+              "value": "equity-research workflows, filing analysis, earnings-call synthesis, cited evidence, and research-repository results",
+              "note": "The result shape supports a company-research task but is not keyword volume, exact rank, or Wenlan performance evidence."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "maintained-first-party-workflow",
+              "sourceUrl": "https://github.com/anthropics/financial-services/blob/main/plugins/vertical-plugins/equity-research/commands/earnings.md",
+              "query": "equity research earnings filing source workflow",
+              "capturedAt": "2026-08-28",
+              "language": "en",
+              "geography": "global OSS",
+              "nativeUnit": "inspectable workflow document",
+              "value": "1 maintained earnings-analysis workflow",
+              "note": "Anthropic's workflow independently repeats latest-data checks, filings, earnings calls, thesis updates, and source citations; its financial-analysis capabilities are not attributed to Wenlan."
+            },
+            {
+              "sourceType": "maintained-open-source-directory",
+              "sourceUrl": "https://github.com/AI4Finance-Foundation/Awesome_AI4Finance",
+              "query": "AI finance investment research agents filings",
+              "capturedAt": "2026-08-28",
+              "language": "en",
+              "geography": "global OSS",
+              "nativeUnit": "curated repository observations",
+              "value": "multiple filing, report, and investment-research workflow entries",
+              "note": "The directory corroborates an active finance-research tool category; it is not search volume or an endorsement of Wenlan."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Keep the page on user-provided company documents, source tracking, and thesis maintenance. Exclude live market data, transcript licensing, XBRL, valuation, portfolio monitoring, trading signals, and investment advice."
+        },
+        "zh-TW": {
+          "queryFamily": [
+            "投資研究知識庫",
+            "AI 財報研究工作流",
+            "年報 法說會 研究筆記"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "google-serp-observation",
+              "sourceUrl": "https://www.google.com/search?hl=zh-TW&gl=tw&q=AI+%E8%B2%A1%E5%A0%B1+%E6%B3%95%E8%AA%AA%E6%9C%83+%E7%A0%94%E7%A9%B6%E5%B7%A5%E4%BD%9C%E6%B5%81+%E7%9F%A5%E8%AD%98%E5%BA%AB",
+              "query": "AI 財報 法說會 研究工作流 知識庫",
+              "capturedAt": "2026-08-28",
+              "language": "zh-TW",
+              "geography": "Taiwan parameter",
+              "nativeUnit": "returned result observation",
+              "value": "財報分析、法說會、公司研究、研究筆記與來源引用結果",
+              "note": "自然用語以財報、法說會、公司研究與研究筆記為主；這不是搜尋量或 Wenlan 排名證據。"
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "practitioner-workflow-report",
+              "sourceUrl": "https://www.bnext.com.tw/article/91590/notebooklm-gemini-claude-ai-research-workflow",
+              "query": "券商分析師 AI 財報 法說會 研究工作流",
+              "capturedAt": "2026-08-28",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "published practitioner workflow",
+              "value": "1 reported sell-side analyst workflow",
+              "note": "The report describes one notebook per company, multi-year earnings calls, financial reports, interview notes, standardized Markdown, and cross-company comparison."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Use 財報、法說會、公司研究、研究筆記、來源引用 and 投資論點 naturally. Do not force AI 知識庫 into every phrase or imply recommendations."
+        },
+        "zh-CN": {
+          "queryFamily": [
+            "AI 投研知识库",
+            "财报 研报 公告 知识库",
+            "投研资料 可追溯"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "google-serp-observation",
+              "sourceUrl": "https://www.google.com/search?hl=zh-CN&gl=cn&q=AI+%E6%8A%95%E7%A0%94+%E8%B4%A2%E6%8A%A5+%E5%85%AC%E5%91%8A+%E7%9F%A5%E8%AF%86%E5%BA%93+%E5%8F%AF%E8%BF%BD%E6%BA%AF",
+              "query": "AI 投研 财报 公告 知识库 可追溯",
+              "capturedAt": "2026-08-28",
+              "language": "zh-CN",
+              "geography": "mainland-China parameter",
+              "nativeUnit": "returned result observation",
+              "value": "投研、财报、研报、公告、知识库、来源与可追溯结果",
+              "note": "Google mainland coverage is limited; the result shape is not total demand, keyword volume, or Wenlan rank."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "maintained-open-source-workflow",
+              "sourceUrl": "https://github.com/huangbochn/dayu-agent",
+              "query": "可追溯 财报 投研 智能体",
+              "capturedAt": "2026-08-28",
+              "language": "zh-CN",
+              "geography": "global OSS",
+              "nativeUnit": "inspectable repository workflow",
+              "value": "1 traceable financial-report research workflow",
+              "note": "The project independently repeats financial-report input, evidence traceability, and reviewable investment conclusions; its agent features are not attributed to Wenlan."
+            },
+            {
+              "sourceType": "maintained-open-source-research-method",
+              "sourceUrl": "https://github.com/joansongjr/investor-harness",
+              "query": "investment research evidence levels gaps structured archive",
+              "capturedAt": "2026-08-28",
+              "language": "English repository with language-neutral workflow",
+              "geography": "global OSS",
+              "nativeUnit": "inspectable repository workflow",
+              "value": "1 evidence-led investment research workflow",
+              "note": "The repository corroborates evidence levels, gaps, structured archives, and resumable research; it is not Chinese search volume."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Use 投研、财报、公告、研报、知识库、可追溯 and 来源 naturally. Exclude real-time market data, valuation automation, trading advice, and licensed reports."
+        }
+      },
+      "gates": {
+        "provenance": {
+          "status": "passed",
+          "reason": "Every retained SERP and workflow observation records a source URL or query, capture date, language or geography, native unit, and interpretation boundary.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]",
+            "docs/seo-audits/2026-08-28-investment-research-knowledge-base-candidate.md"
+          ]
+        },
+        "repeatedDemand": {
+          "status": "passed",
+          "reason": "Independent first-party, practitioner, open-source, and directory evidence repeats a filing and earnings-material research workflow with source citations, freshness checks, and thesis or report updates.",
+          "evidenceRefs": [
+            "locales.en.demandEvidence[0]",
+            "locales.en.demandEvidence[1]",
+            "locales.zh-TW.demandEvidence[0]",
+            "locales.zh-CN.demandEvidence[0]",
+            "locales.zh-CN.demandEvidence[1]"
+          ]
+        },
+        "trilingualSerp": {
+          "status": "passed",
+          "reason": "English, Taiwan Traditional Chinese, and mainland-parameter Simplified Chinese result sets were checked separately and yielded distinct natural task language.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]"
+          ]
+        },
+        "cleanGap": {
+          "status": "passed",
+          "reason": "Existing owners cover generic document ingestion, paper synthesis, consulting engagements, and citation debugging. None owns one company and reporting cycle across filings, earnings materials, source changes, thesis invalidation, and stale research claims.",
+          "evidenceRefs": [
+            "overlapCheck"
+          ]
+        },
+        "firstPartyProof": {
+          "status": "passed",
+          "reason": "Maintained Wenlan source proves supported document inputs, source-backed Pages, citations, revisions, stale state, lint, review, and the plugin workflow used by the guide.",
+          "evidenceRefs": [
+            "/Users/lucian/Repos/wenlan/README.md:102",
+            "/Users/lucian/Repos/wenlan/README.md:246",
+            "/Users/lucian/Repos/wenlan/README.md:267"
+          ]
+        },
+        "standaloneUtility": {
+          "status": "passed",
+          "reason": "A source register, period comparison, fact-calculation-judgment separation, thesis ledger, contradiction log, and stale-evidence checklist remain useful without Wenlan.",
+          "evidenceRefs": [
+            "standaloneUtility"
+          ]
+        },
+        "internalLinks": {
+          "status": "passed",
+          "reason": "Three stable same-locale owners can link contextually from document ingestion, source-backed architecture, and citation verification without editing currently measuring audience pages.",
+          "evidenceRefs": [
+            "internalLinks"
+          ]
+        },
+        "authorityPath": {
+          "status": "passed",
+          "reason": "A future locale-aware first-party README workflow link is predeclared; finance awesome-list submissions remain unapproved and would require exact-fit maintainer review plus separate user approval.",
+          "evidenceRefs": [
+            "authorityPath"
+          ]
+        }
+      },
+      "wenlanProof": [
+        {
+          "claim": "Wenlan can register Markdown, text, text-extractable PDF, directory, and read-only Obsidian sources.",
+          "sourceRef": "/Users/lucian/Repos/wenlan/README.md",
+          "verification": "rg -n \"Markdown|text-extractable|PDF|Obsidian|sources add\" /Users/lucian/Repos/wenlan/README.md"
+        },
+        {
+          "claim": "Wenlan maintains source-backed Pages with citations, revisions, stale state, lint, and review.",
+          "sourceRef": "/Users/lucian/Repos/wenlan/README.md",
+          "verification": "rg -n \"Cite|Refresh|stale|Review|lint\" /Users/lucian/Repos/wenlan/README.md"
+        }
+      ],
+      "standaloneUtility": "A neutral company-research runbook can register filings, compare reporting periods, separate facts from calculations and judgments, track thesis invalidation, preserve contradictions, and recheck stale evidence.",
+      "overlapCheck": "Do not duplicate the paper-research owner, generic document-import owner, consulting client owner, or citation diagnostic. This page remains distinct only while it owns one company and reporting cycle across annual reports, filings, earnings material, source versions, reported fact versus analyst judgment, thesis changes, contradictions, and stale evidence. It explicitly excludes live market data, licensed transcripts or research, XBRL, reliable table extraction, valuation, portfolio monitoring, trading signals, and investment advice.",
+      "internalLinks": [
+        "https://wenlan.app/learn/source-backed-wiki-pages-ai-work",
+        "https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents",
+        "https://wenlan.app/learn/verify-ai-knowledge-base-citations",
+        "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",
+        "https://wenlan.app/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
+        "https://wenlan.app/zh-TW/learn/verify-ai-knowledge-base-citations",
+        "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work",
+        "https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
+        "https://wenlan.app/zh-CN/learn/verify-ai-knowledge-base-citations"
+      ],
+      "authorityPath": {
+        "type": "maintained-first-party-reference",
+        "target": "https://github.com/7xuanlu/wenlan — propose one locale-aware investment-research workflow link only after the website family is separately approved and published; do not submit finance directories without another exact approval",
+        "status": "planned-not-published"
+      },
+      "nextResearchDirection": "Finish deterministic checks and exact desktop plus 393px local rendering. Ubersuggest returned zero for nine exact long-tail phrases and exhausted the account's three-report daily quota; treat those exact-phrase observations as low-resolution and recheck broader task phrases after the quota resets. Stop before commit, push, PR, merge, deployment, indexing request, GSC validation, analytics mutation, directory submission, or external publication.",
+      "readout": {
+        "gsc": {
+          "status": "unavailable",
+          "nativeUnit": "per-locale page impressions, joined-query impressions, clicks"
+        },
+        "vercel": {
+          "status": "unavailable",
+          "nativeUnit": "per-locale target-page visitors and referrer visitors"
+        }
+      }
     }
   ]
 }

@@ -677,11 +677,14 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-28-consultant-client-project-knowledge-base-locales` is live,
-  production-verified, and measuring without consuming the production slot.
+  `EXP-2026-08-28-source-backed-investment-research-knowledge-base-locales`
+  is approved and active in local preparation, so it consumes the single
+  production slot until the approved production deployment is verified.
+  The consultant client-project knowledge-base family is live,
+  production-verified, and measuring without consuming the production slot;
   PR #148 merged at `2026-08-29T04:58:27Z` as
-  `8dc5990c2ed2892ce0afbd10962ea175cb53d534`; Vercel production completed at
-  `2026-08-29T04:59:15Z`. The production slot is open.
+  `8dc5990c2ed2892ce0afbd10962ea175cb53d534`, and Vercel production completed
+  at `2026-08-29T04:59:15Z`.
   `EXP-2026-08-27-source-backed-research-knowledge-base-locales` remains live,
   production-verified, and measuring without consuming the slot. PR #145
   merged at `2026-08-28T03:49:03Z` as
@@ -898,7 +901,7 @@ action returns for separate explicit approval.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 31.
+- Active experiments: 32.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -1284,15 +1287,21 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-28-consultant-client-project-knowledge-base-locales` is live,
-production-verified, and measuring; the single production slot is open. PR
+`EXP-2026-08-28-source-backed-investment-research-knowledge-base-locales` is
+active and occupies the single production slot. The exact locally verified
+English, zh-TW, and zh-CN family is approved for commit, Git push, PR creation,
+merge, automatic Vercel deployment, and read-only production verification. It
+owns one company and reporting cycle across annual reports, filings, earnings
+material, thesis changes, contradictions, stale evidence, and open questions;
+it does not claim live market data, licensed transcripts or research, XBRL,
+reliable table extraction, valuation, portfolio monitoring, trading signals,
+or investment advice.
+
+The consultant client-project knowledge-base family remains live,
+production-verified, and measuring without consuming the production slot. PR
 #148 merged as `8dc5990c2ed2892ce0afbd10962ea175cb53d534` at
 `2026-08-29T04:58:27Z`, and Vercel production completed at
-`2026-08-29T04:59:15Z`. The three live canonicals maintain one isolated
-consulting engagement's approved sources, research, decisions, deliverables,
-stale evidence, and reproducible handoff. They do not claim CRM ingestion,
-email or calendar sync, RBAC, automatic redaction, compliance, billing, or
-project management.
+`2026-08-29T04:59:15Z`.
 
 The retrieval-regression and source-backed-research families remain live,
 production-verified, and measuring; neither consumes the production slot.
@@ -3674,3 +3683,46 @@ unchanged.
   analytics mutation, paid action, maintainer messaging, synthetic events,
   metric-definition changes, and any unrelated website or external action
   remain excluded.
+
+## Campaign preparation: source-backed investment research at 2026-08-28
+
+- The next locally prepared audience scenario is one company-scoped investment
+  research knowledge base for annual reports, filings, earnings releases,
+  presentations, earnings-call material, thesis changes, contradictions, stale
+  evidence, and open questions.
+- Exact routes are `/learn/build-investment-research-knowledge-base`,
+  `/zh-TW/learn/build-investment-research-knowledge-base`, and
+  `/zh-CN/learn/build-investment-research-knowledge-base`.
+- This is not a generic `AI for finance` owner. It must separate reported facts,
+  analyst calculations, and investment judgments, and it must not claim live
+  market data, paid transcript or research access, XBRL, reliable table
+  extraction, valuation, portfolio monitoring, trading signals, or investment
+  advice.
+- English, Taiwan Traditional Chinese, and Simplified Chinese demand evidence,
+  query families, clean-gap reasoning, Wenlan proof, internal links, and the
+  predeclared first-party authority path are stored in
+  `docs/seo-audits/2026-08-28-investment-research-knowledge-base-candidate.md`
+  and `docs/seo-scenario-backlog.json`.
+- Ubersuggest returned `volume: 0`, no suggestions, and no intent label for the
+  nine exact long-tail phrases, then exhausted the account's three-report daily
+  quota before broader phrases could be tested. Preserve those exact tool
+  results as low-resolution observations; do not infer that the broader task has
+  zero demand or combine them with GSC.
+- Local page, test, build, technical, and exact `393px` render preparation is
+  authorized. Commit, push, PR, merge, deployment, request indexing, GSC
+  validation, analytics mutation, directory submission, and external
+  publication remain excluded until separately approved.
+- Local verification completed on `2026-08-28`: Goal 46/46, SEO 248/248,
+  i18n 72/72, scenario and intent checks 11/11, TypeScript, the 259-page
+  production build, and the built technical checker all passed. The sitemap
+  contains 147 canonical URLs. Fresh browser checks covered all three routes at
+  `1280x900` and exact `393x852`; every route had the exact canonical, one
+  Article schema, one BreadcrumbList, visible FAQ without FAQPage, no
+  horizontal overflow, and no console warning or error. The related-guide
+  navigation from the English page was opened and returned successfully.
+- At `2026-08-29T05:55:25Z`, the user explicitly approved publishing this
+  exact verified scope through commit, Git push, PR creation, merge, automatic
+  Vercel deployment, and read-only production verification. Request indexing,
+  GSC validation, analytics mutation, directory submission, paid action,
+  maintainer messaging, synthetic events, metric-definition changes, and
+  unrelated external publication remain excluded.

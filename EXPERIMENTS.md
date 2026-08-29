@@ -8563,3 +8563,46 @@ increase for that experiment.
 - Decision: wait
 - Next step: Keep `2026-08-29T04:59:15Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-08-30T04:59:15Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-05T04:59:15Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with its original 20-page-impression, 3-qualified-joined-query-impression, and 1-click contract. Do not request indexing, submit GSC validation, mutate analytics, or publish externally under this record.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-28-source-backed-investment-research-knowledge-base-locales
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-28-source-backed-investment-research-knowledge-base-locales
+- Status: active
+- Data window: 2026-08-22..2026-08-28
+- Asset class: net-new-search
+- Launched: 2026-08-28
+- Hypothesis: One company-scoped English, zh-TW, and zh-CN owner for maintaining annual reports, filings, earnings material, thesis changes, contradictions, stale evidence, and open questions can earn qualified investment-research exposure without cannibalizing generic document ingestion, paper research, consulting engagements, citation verification, or financial-data intent.
+- Candidate evidence: Separate English, Taiwan Traditional-Chinese, and mainland-parameter Simplified-Chinese SERP observations plus a maintained first-party finance workflow, a Taiwan analyst workflow, maintained OSS research methods, and finance directories are stored in `docs/seo-scenario-backlog.json` and `docs/seo-audits/2026-08-28-investment-research-knowledge-base-candidate.md` in native units. They are not authenticated GSC data, Wenlan rank, causal evidence, or proof that broad finance queries share this intent.
+- Baseline: GSC property 7 clicks and 913 impressions; visible-query 2 clicks and 221 impressions; visibility gap 5 clicks and 692 impressions; Vercel 289 visitors with 257 direct and 28 attributed to Google; GitHub 51 stars; new target-page rows unavailable, all kept separate.
+- Change: Publish exactly one English, zh-TW, and zh-CN canonical that registers user-provided company disclosures, separates reported facts from calculations and judgments, compares reporting periods, preserves citations and thesis invalidation, and reviews stale evidence. Explicitly exclude live market data, licensed transcripts or research, XBRL, reliable table extraction, valuation, portfolio monitoring, trading signals, and investment advice.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions per locale in 28 complete post-crawl days
+- Success criteria: Per locale, at least 3 qualified joined-query impressions and at least 1 GSC click after minimum exposure; report CTR and position separately.
+- Failure criteria: After 28 complete post-crawl days and minimum exposure, a locale has no qualified joined-query impressions or no GSC click, or an above-floor join assigns the same task to generic document ingestion, paper research, consulting, citation verification, or live financial-data intent.
+- Stop criteria: Stop on a technical, financial-capability, investment-advice, duplicate-intent, controller-overlap, canonical, locale, responsive-render, or approval-boundary violation.
+- 24h readout: pending technical and indexability observation after production completion
+- 7d readout: pending early source-native GSC page/query and Vercel page/referrer observation
+- W2 readout: pending
+- W4 readout: pending formal 28-complete-post-crawl-day decision when eligible
+- W8 readout: pending only if useful after the Goal deadline
+- Result: pending
+- Decision: merge
+- Next step: Publish the exact verified trilingual scope, wait for automatic Vercel production completion, verify the three live routes read-only, and keep request indexing and all other external actions separately gated.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-28-source-backed-investment-research-knowledge-base-locales publication approval
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-28-source-backed-investment-research-knowledge-base-locales
+- Observed at: 2026-08-29T05:55:25Z
+- Readout: correction
+- Status: active
+- Evidence: The user explicitly approved the locally verified English, zh-TW, and zh-CN investment-research knowledge-base family for commit, Git push, PR creation, merge, automatic Vercel deployment, and read-only production verification. The approved diff includes the scenario and intent controls, trilingual content, three stable same-locale inbound paths, finance-specific limitations, deterministic tests, and dated candidate record.
+- Result: pending
+- Decision: merge
+- Next step: Re-run the Goal and integration gates on the exact branch, commit and push only the approved files, merge after required checks pass, verify the integrated commit and live deployment, and keep request indexing, GSC validation, analytics mutation, directory submission, paid action, maintainer messaging, synthetic events, metric-definition changes, and unrelated external publication excluded.
+<!-- EXPERIMENT-RECORD:END -->

@@ -1644,6 +1644,7 @@ const workflowArticles: BaseSpec[] = [
       "source-backed-wiki-pages-ai-work",
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
+      "build-investment-research-knowledge-base",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
     ],
@@ -1951,6 +1952,101 @@ const consultantClientProjectArticle: BaseSpec = {
 };
 
 workflowArticles.push(consultantClientProjectArticle);
+
+const investmentResearchKnowledgeBaseArticle: BaseSpec = {
+  slug: "build-investment-research-knowledge-base",
+  eyebrow: "Investment research workflow",
+  category: "Workflows",
+  title: "How to Build an Investment Research Knowledge Base",
+  description:
+    "Turn annual reports, filings, earnings-call notes, and research questions into a source-backed company dossier that stays reviewable as evidence changes.",
+  metaTitle: "Build an Investment Research Knowledge Base | Wenlan",
+  metaDescription:
+    "Build a source-backed investment research knowledge base from filings, annual reports, and earnings calls with citations, thesis changes, and stale-evidence review.",
+  keywords: [
+    "investment research knowledge base",
+    "AI investment research workflow",
+    "annual report research workflow",
+    "earnings call research notes",
+    "source backed equity research",
+    "financial research knowledge management",
+  ],
+  publishedAt: "2026-08-28",
+  updatedAt: "2026-08-28",
+  readingTime: "9 min read",
+  audience:
+    "Equity research analysts, independent investors, and finance professionals working from company filings and earnings materials",
+  heroBullets: [
+    "Keep one company and reporting period inside an explicit source boundary.",
+    "Trace every material claim to the current filing, annual report, or earnings-call passage.",
+    "Record what changed, what contradicts the thesis, and which questions remain open.",
+  ],
+  quickAnswer:
+    "Create one company-scoped research knowledge base from documents you are allowed to use. Register the current annual report, filings, earnings releases, presentation, and your dated call notes; then maintain a source register, metric-and-guidance change log, thesis ledger, contradiction log, and open-question list.",
+  wenlanFit:
+    "Wenlan can ingest Markdown, text, text-extractable PDFs, folders, and read-only Obsidian sources, then maintain source-backed Pages with citations, revisions, stale state, lint, and human review. It does not fetch live market data, parse XBRL or tables reliably, calculate valuation, monitor portfolios, produce trading signals, or provide investment advice.",
+  problem:
+    "Company research becomes unreliable when each quarter adds another filing, transcript, model note, and management claim. A polished summary can silently mix periods, preserve superseded guidance, or turn an analyst inference into a sourced fact. The useful artifact preserves the exact document, reporting period, page or section, revision, and reviewer behind every consequential conclusion.",
+  actionHeading: "Build one filing-to-thesis update loop",
+  actionIntro:
+    "Use one company and one reporting cycle first. Keep calculations in a spreadsheet or financial model and use the knowledge base for source-backed qualitative research and change tracking.",
+  actionBullets: [
+    "Create one company folder and source register with document type, reporting period, publication date, revision, authority, and local filename.",
+    "Add the current annual report or 10-K, latest interim filing, earnings release, investor presentation, and dated earnings-call notes only when you have lawful access.",
+    "Extract a compact Page for business model, segments, key metrics, guidance, risks, catalysts, management claims, and unresolved questions; cite the exact source location for every material statement.",
+    "Keep reported facts, your calculations, and investment judgments in separate fields. Never let a Page turn an inference into a company statement.",
+    "Compare the new period with the previous source set. Record changed guidance, newly disclosed risks, metric-definition changes, contradictions, and thesis implications.",
+    "When a filing or transcript is corrected, resync the source and review only affected Pages. Mark unsupported or superseded claims stale instead of preserving them.",
+    "Open the cited passage before using a claim in a memo. A citation proves a path exists, not that the claim, number, or interpretation is correct.",
+  ],
+  code: {
+    label: "After Wenlan and the AI client are configured",
+    code: "wenlan status\nwenlan sources add ~/Research/companies/acme\n# In a Wenlan plugin client:\n/distill <company and reporting-period question>\n/pages <company research topic>\n/lint\n/curate",
+  },
+  caution:
+    "This workflow is for organizing user-provided, text-extractable research sources. Scanned PDFs require external OCR; tables, financial statements, and calculations must be checked against the original filing and a deterministic model. It is not investment advice and does not replace licensed data, compliance review, or professional judgment.",
+  faq: [
+    "Can Wenlan fetch SEC filings, market data, or earnings transcripts for me?",
+    "No. Bring documents you are allowed to use. Wenlan does not provide a live financial-data feed, transcript license, XBRL pipeline, valuation engine, or portfolio monitor.",
+    "How do I keep an investment thesis from going stale?",
+    "Attach each thesis claim to a dated source and invalidation condition. After every filing or earnings call, compare the new source set, mark superseded claims stale, and preserve the prior revision for review.",
+  ],
+  relatedSlugs: [
+    "build-local-ai-knowledge-base-from-documents",
+    "verify-ai-knowledge-base-citations",
+    "source-backed-wiki-pages-ai-work",
+    "source-backed-research-knowledge-base",
+    "test-ai-knowledge-base-retrieval-after-changes",
+  ],
+  officialReferences: [
+    {
+      label: "Wenlan supported document sources",
+      href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+    },
+    {
+      label: "Wenlan source-backed Pages",
+      href: "https://wenlan.app/docs/source-backed-pages",
+    },
+    {
+      label: "Anthropic equity-research earnings workflow",
+      href: "https://github.com/anthropics/financial-services/blob/main/plugins/vertical-plugins/equity-research/commands/earnings.md",
+    },
+    {
+      label: "AI4Finance finance research resources",
+      href: "https://github.com/AI4Finance-Foundation/Awesome_AI4Finance",
+    },
+    {
+      label: "Investor Harness evidence-led research workflow",
+      href: "https://github.com/joansongjr/investor-harness",
+    },
+  ],
+  cta: {
+    heading: "Build one inspectable company dossier",
+    body: "Add one reporting cycle, verify every material claim, and preserve what changed before expanding the research set.",
+  },
+};
+
+workflowArticles.push(investmentResearchKnowledgeBaseArticle);
 
 const comparisonArticles: BaseSpec[] = [
   {
@@ -2832,6 +2928,7 @@ const trustArticles: BaseSpec[] = [
       "test-ai-knowledge-base-retrieval-after-changes",
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
+      "build-investment-research-knowledge-base",
     ],
     officialReferences: [
       {
@@ -2910,7 +3007,7 @@ const trustArticles: BaseSpec[] = [
       "Should I import every note before starting?",
       "No. Start with one repeated, high-value topic and prove its source, capture, distill, inspection, lint, and review loop before expanding.",
     ],
-    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "test-ai-knowledge-base-retrieval-after-changes", "prevent-multi-agent-knowledge-conflicts", "source-backed-research-knowledge-base", "build-client-project-knowledge-base-for-consulting", "review-before-trust-ai-memory", "ai-memory-provenance"],
+    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "test-ai-knowledge-base-retrieval-after-changes", "prevent-multi-agent-knowledge-conflicts", "source-backed-research-knowledge-base", "build-client-project-knowledge-base-for-consulting", "build-investment-research-knowledge-base", "review-before-trust-ai-memory", "ai-memory-provenance"],
     officialReferences: [
       {
         label: "Wenlan knowledge model",
