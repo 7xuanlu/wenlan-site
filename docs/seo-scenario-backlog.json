@@ -2923,8 +2923,8 @@
       "desiredOutcome": "Trace every important product claim to dated user evidence, preserve contradictions and assumptions, expose open questions, and keep the decision history reviewable",
       "stage": "build",
       "decision": "net-new",
-      "plannedWindow": "2026-08-31..2026-09-06-local-preparation",
-      "publicationStatus": "prepared",
+      "plannedWindow": "2026-08-28..2026-08-29-published",
+      "publicationStatus": "measuring",
       "locales": {
         "en": {
           "queryFamily": [
@@ -3193,7 +3193,7 @@
         "target": "https://github.com/PANGKAIFENG/ai-product-manager-skills — after the website family is separately approved and published, prepare a neutral source-backed evidence example or update to the closest existing research/decision workflow; do not open an issue or PR without another exact approval",
         "status": "planned-not-published"
       },
-      "nextResearchDirection": "Finish the three locale pages and deterministic overlap, locale, sitemap, and render checks. OpenSEO is authenticated for the wenlan.app project but currently reports all hosted credits used, so it supplied no new paid keyword metrics; do not invent them. Stop before commit, push, PR, merge, deployment, indexing request, GSC validation, analytics mutation, OSS contribution, maintainer message, or external publication.",
+      "nextResearchDirection": "Keep the three published locale owners stable from the fixed 2026-08-29T06:44:59Z production boundary. Record the 24-hour technical/indexability observation and the seven-day source-native GSC page/query and Vercel page/referrer observation; judge each locale only after a confirmed post-deploy crawl and the original 28-day exposure contract. OpenSEO is authenticated for wenlan.app but has no hosted credits, so it supplied no paid keyword metrics. Do not request indexing, submit GSC validation, mutate analytics, contribute to OSS, message maintainers, buy traffic, generate synthetic events, or publish externally without separate approval.",
       "readout": {
         "gsc": {
           "status": "unavailable",

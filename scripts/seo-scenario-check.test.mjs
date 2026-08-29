@@ -48,7 +48,7 @@ test("product-research family preserves one trilingual evidence-to-PRD task", ()
   assert.match(family.userTask, /source-backed product research knowledge base/i);
   assert.match(family.desiredOutcome, /trace|contradictions|decision history/i);
   assert.equal(family.decision, "net-new");
-  assert.equal(family.publicationStatus, "prepared");
+  assert.equal(family.publicationStatus, "measuring");
   assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
   assert.ok(
     Object.values(family.locales).every(

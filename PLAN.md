@@ -677,11 +677,16 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-28-source-backed-investment-research-knowledge-base-locales`
-  is live, production-verified, and measuring without consuming the production
-  slot. PR #150 merged at `2026-08-29T06:01:49Z` as
+  `EXP-2026-08-28-product-research-to-prd-knowledge-base-locales` is live,
+  production-verified, and measuring without consuming the production slot.
+  PR #152 merged at `2026-08-29T06:43:59Z` as
+  `66f7b012f25174cac63e94dcec8b27b9b3d6e5e2`; Vercel production completed at
+  `2026-08-29T06:44:59Z`. The production slot is open.
+  The source-backed investment-research family is also live,
+  production-verified, and measuring without consuming the slot. PR #150
+  merged at `2026-08-29T06:01:49Z` as
   `b9fb06d1eb0fdd3c07c0a271332f8166c9fcef6e`; Vercel production completed at
-  `2026-08-29T06:02:35Z`. The production slot is open.
+  `2026-08-29T06:02:35Z`.
   The consultant client-project knowledge-base family is live,
   production-verified, and measuring without consuming the production slot;
   PR #148 merged at `2026-08-29T04:58:27Z` as
@@ -903,7 +908,7 @@ action returns for separate explicit approval.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 32.
+- Active experiments: 33.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -1289,16 +1294,22 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-28-source-backed-investment-research-knowledge-base-locales` is
-live, production-verified, and measuring without consuming the production
-slot. PR #150 merged as `b9fb06d1eb0fdd3c07c0a271332f8166c9fcef6e` at
-`2026-08-29T06:01:49Z`, and Vercel production completed at
-`2026-08-29T06:02:35Z`. The three live routes passed direct 200, exact
+`EXP-2026-08-28-product-research-to-prd-knowledge-base-locales` is live,
+production-verified, and measuring without consuming the production slot. PR
+#152 merged as `66f7b012f25174cac63e94dcec8b27b9b3d6e5e2` at
+`2026-08-29T06:43:59Z`, and Vercel production completed at
+`2026-08-29T06:44:59Z`. The three live routes passed direct 200, exact
 canonical, reciprocal hreflang, Article and BreadcrumbList schema, sitemap,
-visible workflow, and deployed technical verification. This is technical
-publication evidence only, not a crawl, indexing, ranking, traffic, or
-causality claim. The production slot is open for the next independently gated
-scenario.
+visible evidence-to-PRD workflow, and deployed technical verification. This is
+technical publication evidence only, not a crawl, indexing, ranking, traffic,
+or causality claim. The production slot is open for the next independently
+gated scenario.
+
+The source-backed investment-research family remains live,
+production-verified, and measuring without consuming the production slot. PR
+#150 merged as `b9fb06d1eb0fdd3c07c0a271332f8166c9fcef6e` at
+`2026-08-29T06:01:49Z`, and Vercel production completed at
+`2026-08-29T06:02:35Z`.
 
 The consultant client-project knowledge-base family remains live,
 production-verified, and measuring without consuming the production slot. PR
@@ -3764,11 +3775,11 @@ unchanged.
 - OpenSEO was authenticated to the `wenlan.app` project in the Qi-Xuan Chrome
   profile, but all hosted credits were used. It supplied no new paid keyword or
   live-SERP metric, so none is invented or substituted for GSC.
-- The current approval covers local implementation, deterministic checks, and
-  desktop plus exact `393px` previews. Commit, push, PR, merge, Vercel
-  deployment, request indexing, GSC validation, analytics mutation, OSS
+- The user subsequently approved the exact verified scope for commit, Git push,
+  PR creation, merge, automatic Vercel deployment, and read-only production
+  verification. Request indexing, GSC validation, analytics mutation, OSS
   contribution, maintainer messaging, paid action, synthetic events, and other
-  external publication remain excluded until separately approved.
+  external publication remain excluded.
 - Local preparation completed on `2026-08-28`: Goal 47/47, SEO 249/249, i18n
   73/73, TypeScript, the 263-page production build, scenario validation, and
   the built technical checker all passed. The sitemap contains 150 canonical
@@ -3779,3 +3790,12 @@ unchanged.
   no FAQPage schema, no horizontal overflow, and no console warning or error.
   A mobile title-wrap regression found during visual QA was fixed and protected
   by deterministic English and localized renderer tests.
+- PR #152 merged at `2026-08-29T06:43:59Z` as
+  `66f7b012f25174cac63e94dcec8b27b9b3d6e5e2`; Vercel production completed at
+  `2026-08-29T06:44:59Z`. The integrated commit passed the Goal, scenario, goal,
+  SEO, i18n, TypeScript, production-build, and built-technical gates. All three
+  live routes passed direct 200, exact canonical, reciprocal hreflang, Article
+  and BreadcrumbList schema, visible FAQ without FAQPage schema, production
+  rendering, and the deployed technical audit. Keep this timestamp as the
+  fixed production boundary; it proves publication and technical availability,
+  not a Google crawl, indexing, ranking, traffic, or causality.
