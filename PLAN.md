@@ -3729,3 +3729,53 @@ unchanged.
   GSC validation, analytics mutation, directory submission, paid action,
   maintainer messaging, synthetic events, metric-definition changes, and
   unrelated external publication remain excluded.
+
+## Campaign preparation: product research to PRD at 2026-08-28
+
+- The user approved preparing the next highest-leverage audience scenario after
+  the investment-research family was published. English, Taiwan Traditional
+  Chinese, and Simplified-Chinese demand and result shapes were checked before
+  selecting the owner.
+- Customer-support knowledge-base demand was stronger in the checked relative
+  Trends requests, but it was rejected because Wenlan does not provide the
+  expected help-desk or CRM ingestion, team permissions, customer-data
+  redaction, or answer-deployment workflow. A broad student-study owner was
+  deferred because current results expect transcription, flashcards, quizzes,
+  spaced repetition, and exam planning that Wenlan does not provide.
+- The selected task is one product-scoped, source-backed evidence base before
+  drafting or reviewing a PRD. The audience is product managers, UX
+  researchers, and product operations teams. Requirements must remain linked
+  to approved dated research, support or sales notes, prior decisions,
+  contradictions, assumptions, and open questions.
+- Exact prepared routes are
+  `/learn/build-product-research-knowledge-base-for-prd`,
+  `/zh-TW/learn/build-product-research-knowledge-base-for-prd`, and
+  `/zh-CN/learn/build-product-research-knowledge-base-for-prd`.
+- This family does not claim meeting transcription, PII redaction, research
+  recruiting, analytics ingestion, Jira, Linear, Slack or CRM integration,
+  automatic prioritization, automatic PRD generation, roadmap decisions, or
+  product outcomes.
+- Complete provenance, Google Trends values in their original relative units,
+  OpenSEO's account boundary, three-locale query families, clean-gap reasoning,
+  first-party Wenlan proof, internal links, and the separately approval-gated
+  OSS authority path are stored in
+  `docs/seo-audits/2026-08-28-product-research-prd-knowledge-base-candidate.md`
+  and `docs/seo-scenario-backlog.json`.
+- OpenSEO was authenticated to the `wenlan.app` project in the Qi-Xuan Chrome
+  profile, but all hosted credits were used. It supplied no new paid keyword or
+  live-SERP metric, so none is invented or substituted for GSC.
+- The current approval covers local implementation, deterministic checks, and
+  desktop plus exact `393px` previews. Commit, push, PR, merge, Vercel
+  deployment, request indexing, GSC validation, analytics mutation, OSS
+  contribution, maintainer messaging, paid action, synthetic events, and other
+  external publication remain excluded until separately approved.
+- Local preparation completed on `2026-08-28`: Goal 47/47, SEO 249/249, i18n
+  73/73, TypeScript, the 263-page production build, scenario validation, and
+  the built technical checker all passed. The sitemap contains 150 canonical
+  URLs, and all 154 built HTML pages remain free of FAQPage JSON-LD. Fresh
+  browser checks covered all three routes at exact `393x852` and `1280x900`:
+  every route returned 200, had one exact canonical, reciprocal locale
+  alternates, one Article schema, one BreadcrumbList, three visible FAQ items,
+  no FAQPage schema, no horizontal overflow, and no console warning or error.
+  A mobile title-wrap regression found during visual QA was fixed and protected
+  by deterministic English and localized renderer tests.

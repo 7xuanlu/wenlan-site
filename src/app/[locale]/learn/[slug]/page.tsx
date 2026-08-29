@@ -66,7 +66,7 @@ function sectionId(heading: string, index: number): string {
 
 function renderProtectedCjkTerms(text: string) {
   return text
-    .split(/(Karpathy LLM Wiki：|客戶專案知識庫|客户项目知识库|顧問案|咨询项目|研究知識庫|研究知识库|論文 PDF|论文 PDF|文獻矩陣|文献矩阵|AI 知識庫|AI 知识库|知識庫|知识库|驗收資料|验收资料|8 項|8 项|來源|来源|記什麼？|记录什么？)/g)
+    .split(/(Karpathy LLM Wiki：|客戶專案知識庫|客户项目知识库|顧問案|咨询项目|研究知識庫|研究知识库|產品研究|产品研究|產品決策|产品决策|論文 PDF|论文 PDF|文獻矩陣|文献矩阵|AI 知識庫|AI 知识库|知識庫|知识库|驗收資料|验收资料|8 項|8 项|來源|来源|記什麼？|记录什么？)/g)
     .map((part, index) =>
       part === "Karpathy LLM Wiki：" ||
       part === "客戶專案知識庫" ||
@@ -75,6 +75,10 @@ function renderProtectedCjkTerms(text: string) {
       part === "咨询项目" ||
       part === "研究知識庫" ||
       part === "研究知识库" ||
+      part === "產品研究" ||
+      part === "产品研究" ||
+      part === "產品決策" ||
+      part === "产品决策" ||
       part === "論文 PDF" ||
       part === "论文 PDF" ||
       part === "文獻矩陣" ||
@@ -189,7 +193,8 @@ export default async function LocalizedLearnSlugPage({
     article.slug === "prevent-multi-agent-knowledge-conflicts" ||
     article.slug === "source-backed-research-knowledge-base" ||
     article.slug === "build-client-project-knowledge-base-for-consulting" ||
-    article.slug === "build-investment-research-knowledge-base"
+    article.slug === "build-investment-research-knowledge-base" ||
+    article.slug === "build-product-research-knowledge-base-for-prd"
       ? renderProtectedCjkTerms
       : (text: string) => text;
 
@@ -316,7 +321,7 @@ export default async function LocalizedLearnSlugPage({
                 <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
                   {article.eyebrow}
                 </p>
-                <h1 className="warm-glow max-w-full font-serif text-[2rem] leading-[1.08] font-medium tracking-tight [word-break:keep-all] [overflow-wrap:break-word] sm:text-7xl sm:leading-[1.05]">
+                <h1 className="warm-glow max-w-full font-serif text-[2rem] leading-[1.08] font-medium tracking-tight [overflow-wrap:anywhere] [word-break:normal] sm:[overflow-wrap:break-word] sm:[word-break:keep-all] sm:text-7xl sm:leading-[1.05]">
                   {renderArticleText(article.title)}
                 </h1>
                 <p className="mt-8 max-w-2xl break-words text-lg leading-relaxed text-[var(--o-text-secondary)]">

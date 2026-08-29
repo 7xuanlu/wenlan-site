@@ -540,6 +540,7 @@ test("localized Learn slug route supports per-locale acquisition page availabili
     "/learn/source-backed-research-knowledge-base",
     "/learn/build-client-project-knowledge-base-for-consulting",
     "/learn/build-investment-research-knowledge-base",
+    "/learn/build-product-research-knowledge-base-for-prd",
   ]);
   assert.match(source, /getLocalizedLearnArticle/);
   assert.match(source, /TRANSLATED_LEARN_SLUGS/);
@@ -892,6 +893,14 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
       locale: "zh-CN",
       slug: "build-investment-research-knowledge-base",
     },
+    {
+      locale: "zh-TW",
+      slug: "build-product-research-knowledge-base-for-prd",
+    },
+    {
+      locale: "zh-CN",
+      slug: "build-product-research-knowledge-base-for-prd",
+    },
   ]);
 
   const metadata = await localizedLearnSlug.generateMetadata({
@@ -1032,6 +1041,58 @@ test("investment-research family owns one distinct trilingual filing-to-thesis w
     assert.ok(article, `${locale} investment-research article`);
     assert.match(article.title, titlePattern);
     assert.match(JSON.stringify(article), workflowPattern);
+    assert.equal(article.publishedAt, "2026-08-28");
+    assert.equal(article.updatedAt, "2026-08-28");
+    assert.ok(article.officialReferences?.length >= 4);
+  }
+
+  for (const owner of [
+    "build-local-ai-knowledge-base-from-documents",
+    "verify-ai-knowledge-base-citations",
+    "source-backed-wiki-pages-ai-work",
+  ]) {
+    assert.ok(
+      articles.find((article) => article.slug === owner)?.relatedSlugs.includes(slug),
+      `${owner} must link to ${slug}`,
+    );
+    for (const locale of ["zh-TW", "zh-CN"]) {
+      assert.ok(
+        getLocalizedLearnArticle(locale, owner)?.relatedSlugs.includes(slug),
+        `${locale} ${owner} must link to ${slug}`,
+      );
+    }
+  }
+});
+
+test("product-research family owns one distinct trilingual evidence-to-PRD workflow", async () => {
+  const [{ articles }, { getLocalizedLearnArticle }] = await Promise.all([
+    import("../src/app/(en)/learn/articles.ts"),
+    import("../src/i18n/learn-articles.ts"),
+  ]);
+  const slug = "build-product-research-knowledge-base-for-prd";
+  const english = articles.find((article) => article.slug === slug);
+
+  assert.ok(english, "English product-research article");
+  assert.match(english.title, /Product Research Knowledge Base.*PRD/i);
+  assert.match(JSON.stringify(english), /interview notes|support and sales/i);
+  assert.match(JSON.stringify(english), /requirement|evidence chain/i);
+  assert.match(JSON.stringify(english), /assumption|open question|decision history/i);
+  assert.match(JSON.stringify(english), /does not transcribe|does not.*Jira|does not.*roadmap/i);
+  assert.match(
+    english.sections.map((section) => section.code?.code ?? "").join("\n"),
+    /wenlan sources add[\s\S]*\/distill[\s\S]*\/lint[\s\S]*\/curate/,
+  );
+
+  for (const [locale, titlePattern, workflowPattern] of [
+    ["zh-TW", /產品研究知識庫.*PRD/, /訪談筆記|客服|業務/],
+    ["zh-CN", /产品研究知识库.*PRD/, /访谈笔记|客服|销售/],
+  ]) {
+    const article = getLocalizedLearnArticle(locale, slug);
+    assert.ok(article, `${locale} product-research article`);
+    assert.match(article.title, titlePattern);
+    assert.match(JSON.stringify(article), workflowPattern);
+    assert.match(JSON.stringify(article), /假設|假设/);
+    assert.match(JSON.stringify(article), /待解問題|待解问题/);
     assert.equal(article.publishedAt, "2026-08-28");
     assert.equal(article.updatedAt, "2026-08-28");
     assert.ok(article.officialReferences?.length >= 4);
@@ -1818,7 +1879,11 @@ test("localized acquisition copy keeps CJK semantic phrases together on mobile",
   assert.equal(protectedHeadings.length, 2);
   assert.match(
     source,
-    /split\(\/\(Karpathy LLM Wiki：\|客戶專案知識庫\|客户项目知识库\|顧問案\|咨询项目\|研究知識庫\|研究知识库\|論文 PDF\|论文 PDF\|文獻矩陣\|文献矩阵\|AI 知識庫\|AI 知识库\|知識庫\|知识库\|驗收資料\|验收资料\|8 項\|8 项\|來源\|来源\|記什麼？\|记录什么？\)\/g\)/,
+    /split\(\/\(Karpathy LLM Wiki：\|客戶專案知識庫\|客户项目知识库\|顧問案\|咨询项目\|研究知識庫\|研究知识库\|產品研究\|产品研究\|產品決策\|产品决策\|論文 PDF\|论文 PDF\|文獻矩陣\|文献矩阵\|AI 知識庫\|AI 知识库\|知識庫\|知识库\|驗收資料\|验收资料\|8 項\|8 项\|來源\|来源\|記什麼？\|记录什么？\)\/g\)/,
+  );
+  assert.match(
+    source,
+    /<h1 className="[^"]*\[overflow-wrap:anywhere\][^"]*\[word-break:normal\][^"]*sm:\[overflow-wrap:break-word\][^"]*sm:\[word-break:keep-all\][^"]*"/,
   );
   assert.match(
     source,

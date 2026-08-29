@@ -2914,6 +2914,296 @@
           "nativeUnit": "per-locale target-page visitors and referrer visitors"
         }
       }
+    },
+    {
+      "id": "product-research-to-prd-knowledge-base",
+      "audience": "Product managers, UX researchers, and product operations leads who must defend requirements with dated user evidence",
+      "trigger": "A PRD, roadmap review, or stakeholder decision requires reconstructing why a requirement exists from scattered interviews, support notes, sales notes, research, and prior decisions",
+      "userTask": "Build one source-backed product research knowledge base before drafting or reviewing a PRD",
+      "desiredOutcome": "Trace every important product claim to dated user evidence, preserve contradictions and assumptions, expose open questions, and keep the decision history reviewable",
+      "stage": "build",
+      "decision": "net-new",
+      "plannedWindow": "2026-08-31..2026-09-06-local-preparation",
+      "publicationStatus": "prepared",
+      "locales": {
+        "en": {
+          "queryFamily": [
+            "product research knowledge base",
+            "user research to PRD workflow",
+            "source-backed product decisions"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "web-search-result-observation",
+              "sourceUrl": "https://github.com/AliMahmoud15486/pm-llm-wiki",
+              "query": "product manager user research PRD decisions source backed knowledge base workflow practitioner",
+              "capturedAt": "2026-08-28",
+              "language": "en",
+              "geography": "global web",
+              "nativeUnit": "returned result observation",
+              "value": "PM LLM wiki, customer-evidence-to-PRD, product research notebook, and decision-workflow results",
+              "note": "The result shape supports a product-evidence workflow but is not keyword volume, exact Google rank, or Wenlan performance evidence."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "google-trends",
+              "sourceUrl": "https://trends.google.com/trends/explore?date=today%2012-m&geo=US&q=AI%20study%20guide,AI%20product%20manager,AI%20customer%20support,AI%20research%20assistant,AI%20knowledge%20base",
+              "query": "AI study guide; AI product manager; AI customer support; AI research assistant; AI knowledge base",
+              "capturedAt": "2026-08-28",
+              "language": "en",
+              "geography": "United States",
+              "nativeUnit": "request-relative Google Trends average 0-100 index",
+              "value": "20; 24; 43; 16; 12",
+              "note": "AI product manager averaged 24 inside this one request. The values are relative indices, not search volume, and the broader customer-support term was rejected because Wenlan lacks the required support integrations."
+            },
+            {
+              "sourceType": "maintained-open-source-workflow",
+              "sourceUrl": "https://github.com/AliMahmoud15486/pm-llm-wiki",
+              "query": "product manager LLM wiki user research decisions PRD evidence",
+              "capturedAt": "2026-08-28",
+              "language": "en",
+              "geography": "global OSS",
+              "nativeUnit": "inspectable repository workflow",
+              "value": "1 product-management LLM wiki with 20 GitHub stars",
+              "note": "GitHub REST verification found a public, non-archived repository pushed 2026-07-03. It independently repeats problems, decisions, assumptions, open questions, customer evidence, and PRD traceability; its features are not attributed to Wenlan."
+            },
+            {
+              "sourceType": "product-workflow-observation",
+              "sourceUrl": "https://pmread.org/",
+              "query": "customer evidence to engineering spec",
+              "capturedAt": "2026-08-28",
+              "language": "en",
+              "geography": "global web",
+              "nativeUnit": "inspectable product workflow",
+              "value": "1 evidence-to-PRD workflow",
+              "note": "The workflow independently repeats interviews, feedback, insights, citations, and requirements. Wenlan does not claim PMRead's transcription, connectors, frequency ranking, or automatic PRD generation."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Keep the page on preparing a traceable product-evidence base before PRD drafting. Exclude automatic PRD generation, meeting transcription, customer-data connectors, prioritization, and roadmap decisions."
+        },
+        "zh-TW": {
+          "queryFamily": [
+            "產品研究知識庫",
+            "使用者研究到 PRD",
+            "產品決策來源"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "web-search-result-observation",
+              "sourceUrl": "https://www.managertoday.com.tw/articles/view/72779",
+              "query": "台灣 產品經理 使用者研究 PRD 決策 AI 知識庫 工作流程",
+              "capturedAt": "2026-08-28",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "returned result observation",
+              "value": "產品經理 AI 工作情境、使用者研究、PRD、產品決策與知識工作流結果",
+              "note": "自然用語以產品經理、使用者研究、PRD、產品決策與證據為主；這不是搜尋量或 Wenlan 排名證據。"
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "google-trends",
+              "sourceUrl": "https://trends.google.com/trends/explore?date=today%2012-m&geo=TW&q=AI%20study%20guide,AI%20product%20manager,AI%20customer%20support,AI%20research%20assistant,AI%20knowledge%20base",
+              "query": "AI study guide; AI product manager; AI customer support; AI research assistant; AI knowledge base",
+              "capturedAt": "2026-08-28",
+              "language": "English search phrases used in Taiwan",
+              "geography": "Taiwan",
+              "nativeUnit": "request-relative Google Trends average 0-100 index",
+              "value": "24; 20; 29; 14; 10",
+              "note": "AI product manager averaged 20 inside this sparse Taiwan request. A separate native-phrase request returned AI 學習工具 2, AI 讀書筆記 1, AI 產品經理 1, AI 客服 61, and AI 知識庫 1; neither request is search volume."
+            },
+            {
+              "sourceType": "taiwan-practitioner-publication",
+              "sourceUrl": "https://www.managertoday.com.tw/articles/view/72779",
+              "query": "PM AI 使用者研究 PRD 證據",
+              "capturedAt": "2026-08-28",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "published workflow article",
+              "value": "1 current ten-scenario product-management workflow",
+              "note": "The article says AI should support evidence and exploration rather than replace PM judgment, and treats the PRD as a team draft grounded in user research."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Use 產品研究、使用者研究、PRD、產品決策、來源依據 and 待驗證假設 naturally. Do not promise interview transcription, Jira or CRM sync, automatic prioritization, or automatic PRD writing."
+        },
+        "zh-CN": {
+          "queryFamily": [
+            "产品研究知识库",
+            "用户研究到 PRD",
+            "产品决策依据"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "web-search-result-observation",
+              "sourceUrl": "https://github.com/PANGKAIFENG/ai-product-manager-skills",
+              "query": "中国 产品经理 用户研究 PRD 决策 AI 知识库 工作流",
+              "capturedAt": "2026-08-28",
+              "language": "zh-CN",
+              "geography": "global Chinese web",
+              "nativeUnit": "returned result observation",
+              "value": "产品研究、PRD、需求评审、决策研究与产品经理 Agent workflow results",
+              "note": "The result shape uses 产品研究、PRD、需求评审 and 决策依据 naturally; it is not mainland search volume or Wenlan rank."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "google-trends",
+              "sourceUrl": "https://trends.google.com/trends/explore?date=today%2012-m&q=AI%20%E5%AD%A6%E4%B9%A0%E5%B7%A5%E5%85%B7,AI%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0,AI%20%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86,AI%20%E5%AE%A2%E6%9C%8D,AI%20%E7%9F%A5%E8%AF%86%E5%BA%93",
+              "query": "AI 学习工具; AI 学习笔记; AI 产品经理; AI 客服; AI 知识库",
+              "capturedAt": "2026-08-28",
+              "language": "zh-CN phrases",
+              "geography": "Worldwide",
+              "nativeUnit": "request-relative Google Trends average 0-100 index",
+              "value": "5; 0; 19; 42; 16",
+              "note": "AI 产品经理 averaged 19 inside this request. China-specific Google coverage is not claimed; this is worldwide interest in Simplified-Chinese phrases, not search volume."
+            },
+            {
+              "sourceType": "maintained-open-source-workflow",
+              "sourceUrl": "https://github.com/PANGKAIFENG/ai-product-manager-skills",
+              "query": "中文 AI 产品经理 产品研究 PRD 决策 workflow",
+              "capturedAt": "2026-08-28",
+              "language": "zh-CN",
+              "geography": "global OSS",
+              "nativeUnit": "inspectable repository workflow",
+              "value": "1 MIT-licensed Chinese-first PM skill library pushed 2026-08-26",
+              "note": "GitHub REST and the contribution guide verify active product-research, decision, PRD, review, and handoff workflows. These features are not attributed to Wenlan."
+            },
+            {
+              "sourceType": "maintained-open-source-directory",
+              "sourceUrl": "https://github.com/killvxk/pm-skills-zh",
+              "query": "产品经理 skills 用户研究 PRD 工作流",
+              "capturedAt": "2026-08-28",
+              "language": "zh-CN",
+              "geography": "global OSS",
+              "nativeUnit": "inspectable repository and contribution guide",
+              "value": "65 product-manager skills, 36 workflows, 148 GitHub stars",
+              "note": "The maintained MIT repository independently corroborates an active Chinese PM workflow category; it is not search volume or an endorsement of Wenlan."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Use 产品研究、用户研究、PRD、决策依据、来源 and 待验证假设 naturally. Exclude automatic PRD generation, interview transcription, customer-data connectors, prioritization, and roadmap decisions."
+        }
+      },
+      "gates": {
+        "provenance": {
+          "status": "passed",
+          "reason": "Every retained Trends, result-set, publication, product-workflow, and OSS observation records its query or URL, capture date, language or geography, native unit, and interpretation boundary.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]",
+            "docs/seo-audits/2026-08-28-product-research-prd-knowledge-base-candidate.md"
+          ]
+        },
+        "repeatedDemand": {
+          "status": "passed",
+          "reason": "Independent Trends requests, a current Taiwan PM publication, an English PM wiki, an evidence-to-PRD product workflow, and two maintained Chinese PM repositories repeat the research-to-decision-to-PRD task.",
+          "evidenceRefs": [
+            "locales.en.demandEvidence[0]",
+            "locales.en.demandEvidence[1]",
+            "locales.en.demandEvidence[2]",
+            "locales.zh-TW.demandEvidence[0]",
+            "locales.zh-TW.demandEvidence[1]",
+            "locales.zh-CN.demandEvidence[0]",
+            "locales.zh-CN.demandEvidence[1]",
+            "locales.zh-CN.demandEvidence[2]"
+          ]
+        },
+        "trilingualSerp": {
+          "status": "passed",
+          "reason": "English, Taiwan Traditional Chinese, and Simplified-Chinese result sets were checked separately and produced distinct natural product-research and PRD wording.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]"
+          ]
+        },
+        "cleanGap": {
+          "status": "passed",
+          "reason": "Existing owners cover generic document ingestion, academic research, consulting engagements, investment research, coding agents, and citation debugging. None owns product discovery evidence from user research through requirement rationale and decision history.",
+          "evidenceRefs": [
+            "overlapCheck"
+          ]
+        },
+        "firstPartyProof": {
+          "status": "passed",
+          "reason": "Maintained Wenlan source explicitly names product teams and proves supported document inputs, source-backed Pages, citations, revisions, stale state, lint, and review. It does not prove the excluded PM integrations or automatic decisions.",
+          "evidenceRefs": [
+            "/Users/lucian/Repos/wenlan/README.md:113",
+            "/Users/lucian/Repos/wenlan/README.md:119",
+            "/Users/lucian/Repos/wenlan/README.md:205",
+            "/Users/lucian/Repos/wenlan/README.md:240"
+          ]
+        },
+        "standaloneUtility": {
+          "status": "passed",
+          "reason": "A neutral evidence register, problem-and-segment map, contradiction log, assumption ledger, requirement-source matrix, open-question list, and decision history remain useful without Wenlan.",
+          "evidenceRefs": [
+            "standaloneUtility"
+          ]
+        },
+        "internalLinks": {
+          "status": "passed",
+          "reason": "Three stable same-locale generic owners can link contextually from document ingestion, source-backed architecture, and citation verification without editing currently measuring audience pages.",
+          "evidenceRefs": [
+            "internalLinks"
+          ]
+        },
+        "authorityPath": {
+          "status": "passed",
+          "reason": "The current MIT-licensed Chinese-first AI PM skill library is active, has contribution rules, and accepts reusable product-research and PRD workflows. Any neutral example or reference remains separately approval-gated and must update an existing boundary when appropriate rather than duplicate it.",
+          "evidenceRefs": [
+            "authorityPath"
+          ]
+        }
+      },
+      "wenlanProof": [
+        {
+          "claim": "Wenlan explicitly serves product teams whose knowledge is scattered across documents, notes, and AI conversations.",
+          "sourceRef": "/Users/lucian/Repos/wenlan/README.md:113",
+          "verification": "rg -n \"Built for work that continues\" /Users/lucian/Repos/wenlan/README.md"
+        },
+        {
+          "claim": "Wenlan supports Markdown, text, text-extractable PDF, and source-backed Pages with citations, stale state, revisions, lint, and review.",
+          "sourceRef": "/Users/lucian/Repos/wenlan/README.md:119-256",
+          "verification": "rg -n \"Document Sources|Source-backed Pages|Cite|Track|Refresh|Review|lint\" /Users/lucian/Repos/wenlan/README.md"
+        }
+      ],
+      "standaloneUtility": "A neutral product-research runbook can register approved evidence, separate observations from interpretations and decisions, preserve contradictions and assumptions, map requirement claims to sources, and leave open questions visible before PRD drafting.",
+      "overlapCheck": "Do not duplicate the academic-research, consultant, investment-research, generic document-import, citation-verification, or project-context owners. This page remains distinct only while it owns one product or initiative from approved user research through problem evidence, requirement rationale, contradictions, assumptions, open questions, and decision history before PRD drafting. It explicitly excludes transcription, Jira, Linear, Slack or CRM sync, PII redaction, recruiting, analytics ingestion, automatic prioritization, automatic PRD generation, roadmap decisions, and product-outcome claims.",
+      "internalLinks": [
+        "https://wenlan.app/learn/source-backed-wiki-pages-ai-work",
+        "https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents",
+        "https://wenlan.app/learn/verify-ai-knowledge-base-citations",
+        "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",
+        "https://wenlan.app/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
+        "https://wenlan.app/zh-TW/learn/verify-ai-knowledge-base-citations",
+        "https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work",
+        "https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
+        "https://wenlan.app/zh-CN/learn/verify-ai-knowledge-base-citations"
+      ],
+      "authorityPath": {
+        "type": "maintained-oss-workflow",
+        "target": "https://github.com/PANGKAIFENG/ai-product-manager-skills — after the website family is separately approved and published, prepare a neutral source-backed evidence example or update to the closest existing research/decision workflow; do not open an issue or PR without another exact approval",
+        "status": "planned-not-published"
+      },
+      "nextResearchDirection": "Finish the three locale pages and deterministic overlap, locale, sitemap, and render checks. OpenSEO is authenticated for the wenlan.app project but currently reports all hosted credits used, so it supplied no new paid keyword metrics; do not invent them. Stop before commit, push, PR, merge, deployment, indexing request, GSC validation, analytics mutation, OSS contribution, maintainer message, or external publication.",
+      "readout": {
+        "gsc": {
+          "status": "unavailable",
+          "nativeUnit": "per-locale page impressions, joined-query impressions, clicks"
+        },
+        "vercel": {
+          "status": "unavailable",
+          "nativeUnit": "per-locale target-page visitors and referrer visitors"
+        }
+      }
     }
   ]
 }
