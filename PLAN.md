@@ -677,10 +677,11 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-28-consultant-client-project-knowledge-base-locales` is active
-  and occupies the single production slot until the approved PR, merge,
-  automatic Vercel deployment, and production verification complete. The
-  exact local diff was explicitly approved for publication on `2026-08-28`.
+  `EXP-2026-08-28-consultant-client-project-knowledge-base-locales` is live,
+  production-verified, and measuring without consuming the production slot.
+  PR #148 merged at `2026-08-29T04:58:27Z` as
+  `8dc5990c2ed2892ce0afbd10962ea175cb53d534`; Vercel production completed at
+  `2026-08-29T04:59:15Z`. The production slot is open.
   `EXP-2026-08-27-source-backed-research-knowledge-base-locales` remains live,
   production-verified, and measuring without consuming the slot. PR #145
   merged at `2026-08-28T03:49:03Z` as
@@ -1283,12 +1284,13 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-28-consultant-client-project-knowledge-base-locales` is the one
-active website change and consumes the production slot until the approved PR,
-merge, automatic Vercel deployment, and production verification finish. It
-adds one English, zh-TW, and zh-CN canonical for maintaining one isolated
+`EXP-2026-08-28-consultant-client-project-knowledge-base-locales` is live,
+production-verified, and measuring; the single production slot is open. PR
+#148 merged as `8dc5990c2ed2892ce0afbd10962ea175cb53d534` at
+`2026-08-29T04:58:27Z`, and Vercel production completed at
+`2026-08-29T04:59:15Z`. The three live canonicals maintain one isolated
 consulting engagement's approved sources, research, decisions, deliverables,
-stale evidence, and reproducible handoff. It does not claim CRM ingestion,
+stale evidence, and reproducible handoff. They do not claim CRM ingestion,
 email or calendar sync, RBAC, automatic redaction, compliance, billing, or
 project management.
 

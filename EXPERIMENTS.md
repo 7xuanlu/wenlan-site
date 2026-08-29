@@ -8549,3 +8549,17 @@ increase for that experiment.
 - Decision: merge
 - Next step: Re-run the Goal and integration gates on the exact branch, commit and push only the approved files, merge after checks pass, verify the integrated commit and live deployment, and keep the production boundary fixed at Vercel completion.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-28-consultant-client-project-knowledge-base-locales production publication
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-28-consultant-client-project-knowledge-base-locales
+- Observed at: 2026-08-29T04:59:15Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #148 merged at `2026-08-29T04:58:27Z` as `8dc5990c2ed2892ce0afbd10962ea175cb53d534`; Vercel reported production deployment success at `2026-08-29T04:59:15Z`. The integrated commit passed the Goal, scenario, 45 goal tests, 247 SEO tests, 71 i18n tests, TypeScript, production build, and built technical audit. The English, zh-TW, and zh-CN live routes returned direct 200 responses with exact canonicals, reciprocal en-US/zh-TW/zh-CN/x-default hreflang, Article and BreadcrumbList schema, visible consulting-workflow answers, and no FAQPage schema. The deployed technical audit passed 144 sitemap URLs, 30 key pages, utility noindex headers, redirects, and bridge-host redirects. This proves publication and technical availability only; it is not a crawl, indexing, ranking, traffic, or causality claim.
+- Result: pending
+- Decision: wait
+- Next step: Keep `2026-08-29T04:59:15Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-08-30T04:59:15Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-05T04:59:15Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with its original 20-page-impression, 3-qualified-joined-query-impression, and 1-click contract. Do not request indexing, submit GSC validation, mutate analytics, or publish externally under this record.
+<!-- EXPERIMENT-RECORD:END -->
