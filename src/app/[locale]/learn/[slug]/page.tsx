@@ -188,7 +188,8 @@ export default async function LocalizedLearnSlugPage({
     article.slug === "fix-pdf-ingestion-ai-knowledge-base" ||
     article.slug === "prevent-multi-agent-knowledge-conflicts" ||
     article.slug === "source-backed-research-knowledge-base" ||
-    article.slug === "build-client-project-knowledge-base-for-consulting"
+    article.slug === "build-client-project-knowledge-base-for-consulting" ||
+    article.slug === "build-investment-research-knowledge-base"
       ? renderProtectedCjkTerms
       : (text: string) => text;
 
