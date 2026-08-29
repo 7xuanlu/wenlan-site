@@ -519,6 +519,7 @@ const zhTWArticles = {
       "when-ai-agent-should-query-knowledge-base",
       "verify-ai-knowledge-base-citations",
       "source-backed-research-knowledge-base",
+      "build-client-project-knowledge-base-for-consulting",
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
       "test-ai-knowledge-base-retrieval-after-changes",
@@ -980,6 +981,7 @@ const zhTWArticles = {
       "coding-agent-source-backed-knowledge-base",
       "source-backed-wiki-pages-ai-work",
       "source-backed-research-knowledge-base",
+      "build-client-project-knowledge-base-for-consulting",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
     ],
@@ -1645,6 +1647,7 @@ const zhTWArticles = {
       "coding-agent-source-backed-knowledge-base",
       "test-ai-knowledge-base-retrieval-after-changes",
       "source-backed-research-knowledge-base",
+      "build-client-project-knowledge-base-for-consulting",
     ],
     officialReferences: [
       {
@@ -1796,6 +1799,119 @@ const zhTWArticles = {
     cta: {
       heading: "先建立一份可逐項檢查的研究筆記",
       body: "加入一組有界論文、建立文獻矩陣，再確認每個重要綜合都能回到目前來源。",
+    },
+  },
+  "build-client-project-knowledge-base-for-consulting": {
+    slug: "build-client-project-knowledge-base-for-consulting",
+    eyebrow: "顧問工作流",
+    category: "Workflows",
+    title: "顧問如何建立客戶專案知識庫：從研究到交接",
+    description:
+      "把單一顧問案的來源、研究、決策、交付物與交接脈絡整理成可追溯、可更新的客戶專案知識庫。",
+    metaTitle: "顧問如何建立客戶專案知識庫 | Wenlan",
+    metaDescription:
+      "建立單一客戶範圍的顧問專案知識庫，管理研究來源、決策、交付物、過期證據與專案交接。",
+    keywords: [
+      "顧問 客戶專案 知識庫",
+      "顧問案 研究資料 交接",
+      "客戶研究 知識庫 引用",
+      "顧問 專案知識管理",
+      "顧問案 交付物 來源",
+    ],
+    publishedAt: "2026-08-28",
+    updatedAt: "2026-08-28",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分鐘閱讀",
+    audience: "需要交付研究、建議與專案交接的獨立顧問、小型顧問團隊與研究分析人員",
+    heroBullets: [
+      "每個客戶使用獨立來源邊界，不把不同顧問案混在一起。",
+      "研究、決策與交付物主張都能回到客戶已核准的目前來源。",
+      "交接時留下待辦、過期證據、風險與下一位負責人。",
+    ],
+    sections: [
+      {
+        heading: "先回答：一個客戶，一個可檢查的知識邊界",
+        body: [
+          "每個顧問案建立獨立的客戶專案知識庫。只加入這次合作核准使用的提案、範圍、訪談筆記、研究來源、決策與交付物，並把待確認問題分開保存。",
+          "重點不是把所有檔案交給 AI，而是讓下一份簡報、報告或交接中的重要主張，都能回到目前來源、決策日期與負責人。",
+        ],
+      },
+      {
+        heading: "先切開客戶、方法與機密資料",
+        body: [
+          "客戶事實與檔案不得進入共用資料夾。可以重用的通用方法、範本與公開研究應放在另一個明確邊界，並確認合約允許重用。",
+          "先用不敏感的範例驗證流程。Wenlan 的本地優先儲存不會取代客戶同意、權限控管、保留政策、遮罩、法遵或安全文件系統。",
+        ],
+      },
+      {
+        heading: "建立來源、決策與交付物閉環",
+        body: [
+          "為每個重要決策記錄日期、負責人、依據、替代方案，以及什麼新證據會重新開啟它。交付物中的數字、結論與建議，要逐項核對來源與版本。",
+        ],
+        bullets: [
+          "建立一個客戶 Space 與一個核准來源資料夾。",
+          "加入 scope、研究、訪談筆記、決策紀錄與目前交付物。",
+          "將重複使用的專案問題整理成有來源 Page。",
+          "來源改變時只刷新受影響 Page，無法確認的主張標成 stale。",
+          "分享前執行 lint 與人工審查。",
+        ],
+        code: {
+          label: "完成 Wenlan 與 AI 客戶端設定後",
+          code: "wenlan status\nwenlan sources add ~/Clients/acme-approved-sources\n/distill <客戶專案問題>\n/pages <客戶專案問題>\n/lint\n/curate\n/handoff",
+        },
+      },
+      {
+        heading: "交接要讓下一位顧問可以重做判斷",
+        body: [
+          "交接至少包含目前範圍、已接受決策、未決問題、交付物狀態、來源邊界、過期證據、已知風險與下一位負責人。不要只留一段流暢摘要。",
+          "Wenlan 可以維護 Sources、Memories、Pages、引用、修訂、stale 狀態與審查，但不會自動連接 CRM、電子郵件或行事曆，也不提供 RBAC、自動遮罩、計費或專案管理。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "所有客戶可以共用同一個知識庫嗎？",
+        answer:
+          "不應該。每個顧問案要有獨立來源邊界與 Space；只有明確允許重用的通用方法或範本可以放在另一個共用範圍。",
+      },
+      {
+        question: "Wenlan 會替我處理客戶機密與權限嗎？",
+        answer:
+          "不會。Wenlan 讓本地、有來源的知識可檢查，但不是 CRM、文件權限、遮罩或法遵系統；必須先套用客戶核准的安全與保留規則。",
+      },
+    ],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "build-local-ai-knowledge-base-from-documents",
+      "verify-ai-knowledge-base-citations",
+      "source-backed-research-knowledge-base",
+      "prevent-multi-agent-knowledge-conflicts",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 知識模型與 Spaces",
+        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+      },
+      {
+        label: "Wenlan 日常工作流程",
+        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+      },
+      {
+        label: "Cogni Consult 客戶交付工作區",
+        href: "https://github.com/cogni-work/insight-wave/tree/main/cogni-consult",
+      },
+      {
+        label: "AI Consulting Methodology 顧問案生命週期",
+        href: "https://github.com/mardy123/AI-Consulting-Methodology-Toolkit/blob/main/06_Delivery/ENGAGEMENT_LIFECYCLE.md",
+      },
+      {
+        label: "市場研究工作流參考",
+        href: "https://github.com/genli-ai/market-research-skills/blob/main/skills/analyst-research/references/workflow_medium.zh.md",
+      },
+    ],
+    cta: {
+      heading: "先建立一份可檢查的客戶交接",
+      body: "切開客戶來源、驗證一個交付物主張，再留下下一位顧問能重做判斷的交接。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
@@ -2563,6 +2679,7 @@ const zhCNArticles = {
       "when-ai-agent-should-query-knowledge-base",
       "verify-ai-knowledge-base-citations",
       "source-backed-research-knowledge-base",
+      "build-client-project-knowledge-base-for-consulting",
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
       "test-ai-knowledge-base-retrieval-after-changes",
@@ -3026,6 +3143,7 @@ const zhCNArticles = {
       "coding-agent-source-backed-knowledge-base",
       "source-backed-wiki-pages-ai-work",
       "source-backed-research-knowledge-base",
+      "build-client-project-knowledge-base-for-consulting",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
     ],
@@ -3419,6 +3537,7 @@ const zhCNArticles = {
       "coding-agent-source-backed-knowledge-base",
       "test-ai-knowledge-base-retrieval-after-changes",
       "source-backed-research-knowledge-base",
+      "build-client-project-knowledge-base-for-consulting",
     ],
     officialReferences: [
       {
@@ -3570,6 +3689,119 @@ const zhCNArticles = {
     cta: {
       heading: "先建立一份能逐项检查的研究笔记",
       body: "加入一组有界论文、建立文献矩阵，再确认每个重要综合都能回到当前来源。",
+    },
+  },
+  "build-client-project-knowledge-base-for-consulting": {
+    slug: "build-client-project-knowledge-base-for-consulting",
+    eyebrow: "咨询工作流",
+    category: "Workflows",
+    title: "咨询顾问如何建立客户项目知识库：从调研到交接",
+    description:
+      "把单一咨询项目的来源、调研、决策、交付物与交接信息整理成可追溯、可更新的客户项目知识库。",
+    metaTitle: "咨询顾问如何建立客户项目知识库 | Wenlan",
+    metaDescription:
+      "建立单一客户范围的咨询项目知识库，管理调研来源、决策、交付物、过期证据与项目交接。",
+    keywords: [
+      "咨询顾问 客户项目 知识库",
+      "咨询项目 调研资料 交付",
+      "客户研究 知识库 来源引用",
+      "咨询 项目知识管理",
+      "咨询交付物 来源追溯",
+    ],
+    publishedAt: "2026-08-28",
+    updatedAt: "2026-08-28",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分钟阅读",
+    audience: "需要交付调研、建议与项目交接的独立顾问、小型咨询团队和研究分析人员",
+    heroBullets: [
+      "每个客户使用独立来源边界，不把不同咨询项目混在一起。",
+      "调研、决策与交付物主张都能回到客户已批准的当前来源。",
+      "交接时留下待办、过期证据、风险与下一位负责人。",
+    ],
+    sections: [
+      {
+        heading: "先回答：一个客户，一个可检查的知识边界",
+        body: [
+          "每个咨询项目建立独立的客户项目知识库。只加入本次合作批准使用的提案、范围、访谈记录、调研来源、决策与交付物，并把待确认问题分开保存。",
+          "重点不是把所有文件交给 AI，而是让下一份演示、报告或交接中的重要主张，都能回到当前来源、决策日期与负责人。",
+        ],
+      },
+      {
+        heading: "先分开客户、方法与敏感资料",
+        body: [
+          "客户事实与文件不得进入共享文件夹。可以复用的通用方法、模板与公开研究应放在另一个明确边界，并确认合同允许复用。",
+          "先用非敏感示例验证流程。Wenlan 的本地优先存储不会替代客户同意、权限控制、保留政策、脱敏、合规或安全文档系统。",
+        ],
+      },
+      {
+        heading: "建立来源、决策与交付物闭环",
+        body: [
+          "为每个重要决策记录日期、负责人、依据、替代方案，以及什么新证据会重新开启它。交付物中的数字、结论与建议，要逐项核对来源与版本。",
+        ],
+        bullets: [
+          "建立一个客户 Space 与一个批准来源文件夹。",
+          "加入 scope、调研、访谈记录、决策记录与当前交付物。",
+          "把重复使用的项目问题整理成有来源 Page。",
+          "来源改变时只刷新受影响 Page，无法确认的主张标为 stale。",
+          "分享前执行 lint 与人工审核。",
+        ],
+        code: {
+          label: "完成 Wenlan 与 AI 客户端设置后",
+          code: "wenlan status\nwenlan sources add ~/Clients/acme-approved-sources\n/distill <客户项目问题>\n/pages <客户项目问题>\n/lint\n/curate\n/handoff",
+        },
+      },
+      {
+        heading: "交接要让下一位顾问能够重做判断",
+        body: [
+          "交接至少包含当前范围、已接受决策、未决问题、交付物状态、来源边界、过期证据、已知风险与下一位负责人。不要只留一段流畅摘要。",
+          "Wenlan 可以维护 Sources、Memories、Pages、引用、修订、stale 状态与审核，但不会自动连接 CRM、邮件或日历，也不提供 RBAC、自动脱敏、计费或项目管理。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "所有客户可以共用同一个知识库吗？",
+        answer:
+          "不应该。每个咨询项目要有独立来源边界与 Space；只有明确允许复用的通用方法或模板可以放在另一个共享范围。",
+      },
+      {
+        question: "Wenlan 会替我处理客户机密与权限吗？",
+        answer:
+          "不会。Wenlan 让本地、有来源的知识可检查，但不是 CRM、文档权限、脱敏或合规系统；必须先应用客户批准的安全与保留规则。",
+      },
+    ],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "build-local-ai-knowledge-base-from-documents",
+      "verify-ai-knowledge-base-citations",
+      "source-backed-research-knowledge-base",
+      "prevent-multi-agent-knowledge-conflicts",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 知识模型与 Spaces",
+        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+      },
+      {
+        label: "Wenlan 日常工作流程",
+        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+      },
+      {
+        label: "Cogni Consult 客户交付工作区",
+        href: "https://github.com/cogni-work/insight-wave/tree/main/cogni-consult",
+      },
+      {
+        label: "AI Consulting Methodology 咨询项目生命周期",
+        href: "https://github.com/mardy123/AI-Consulting-Methodology-Toolkit/blob/main/06_Delivery/ENGAGEMENT_LIFECYCLE.md",
+      },
+      {
+        label: "市场研究工作流参考",
+        href: "https://github.com/genli-ai/market-research-skills/blob/main/skills/analyst-research/references/workflow_medium.zh.md",
+      },
+    ],
+    cta: {
+      heading: "先建立一份可检查的客户交接",
+      body: "分开客户来源、验证一个交付物主张，再留下下一位顾问能重做判断的交接。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;

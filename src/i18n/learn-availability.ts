@@ -16,6 +16,7 @@ export const TRANSLATED_LEARN_SLUGS = [
   "prevent-multi-agent-knowledge-conflicts",
   "test-ai-knowledge-base-retrieval-after-changes",
   "source-backed-research-knowledge-base",
+  "build-client-project-knowledge-base-for-consulting",
 ] as const;
 
 export type TranslatedLearnSlug = (typeof TRANSLATED_LEARN_SLUGS)[number];
@@ -34,6 +35,7 @@ export const TRANSLATED_LEARN_SLUGS_BY_LOCALE = {
     "prevent-multi-agent-knowledge-conflicts",
     "test-ai-knowledge-base-retrieval-after-changes",
     "source-backed-research-knowledge-base",
+    "build-client-project-knowledge-base-for-consulting",
   ],
   "zh-CN": [
     "distilled-wiki-pages-ai-memory",
@@ -48,6 +50,7 @@ export const TRANSLATED_LEARN_SLUGS_BY_LOCALE = {
     "prevent-multi-agent-knowledge-conflicts",
     "test-ai-knowledge-base-retrieval-after-changes",
     "source-backed-research-knowledge-base",
+    "build-client-project-knowledge-base-for-consulting",
   ],
 } as const satisfies Record<
   TranslatedLocale,

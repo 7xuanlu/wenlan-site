@@ -677,9 +677,13 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-27-source-backed-research-knowledge-base-locales` is live,
-  production-verified, and measuring, so no website change consumes the
-  production slot. PR #145 merged at `2026-08-28T03:49:03Z` as
+  `EXP-2026-08-28-consultant-client-project-knowledge-base-locales` is active
+  and occupies the single production slot until the approved PR, merge,
+  automatic Vercel deployment, and production verification complete. The
+  exact local diff was explicitly approved for publication on `2026-08-28`.
+  `EXP-2026-08-27-source-backed-research-knowledge-base-locales` remains live,
+  production-verified, and measuring without consuming the slot. PR #145
+  merged at `2026-08-28T03:49:03Z` as
   `37b28a0df3e2e85a41ca7ec4bb9d25db3149ca89`; Vercel production completed at
   `2026-08-28T03:49:51Z`. The retrieval-regression family is also live and
   measuring from its fixed `2026-08-27T04:32:45Z` production boundary.
@@ -893,7 +897,7 @@ action returns for separate explicit approval.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 30.
+- Active experiments: 31.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -1279,15 +1283,23 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-No website change is currently in production preparation. The production slot
-is open. Two new trilingual scenario families are live, production-verified,
-and measuring; neither consumes the production slot.
+`EXP-2026-08-28-consultant-client-project-knowledge-base-locales` is the one
+active website change and consumes the production slot until the approved PR,
+merge, automatic Vercel deployment, and production verification finish. It
+adds one English, zh-TW, and zh-CN canonical for maintaining one isolated
+consulting engagement's approved sources, research, decisions, deliverables,
+stale evidence, and reproducible handoff. It does not claim CRM ingestion,
+email or calendar sync, RBAC, automatic redaction, compliance, billing, or
+project management.
+
+The retrieval-regression and source-backed-research families remain live,
+production-verified, and measuring; neither consumes the production slot.
 
 - The retrieval-regression family went live through PR #144,
   merged as `681754936193cb035b4285709bd98ed82189e466` at
   `2026-08-27T04:31:56Z`. Vercel production completed at
   `2026-08-27T04:32:45Z`; keep that as the fixed measurement boundary.
-- `EXP-2026-08-27-source-backed-research-knowledge-base-locales` went live
+- The source-backed research knowledge-base family went live
   through PR #145, merged as
   `37b28a0df3e2e85a41ca7ec4bb9d25db3149ca89` at
   `2026-08-28T03:49:03Z`. Vercel production completed at
@@ -3617,3 +3629,46 @@ unchanged.
   link changed. No commit, push, PR, merge, deployment, indexing request, GSC
   validation, analytics mutation, paid action, or external publication is
   authorized by this gate record.
+
+## Campaign preparation: consultant client-project knowledge base at 2026-08-28
+
+- The user approved adding `consultant-client-project-knowledge-base` to the
+  verifier-protected scenario queue and preparing its English, zh-TW, and
+  zh-CN pages locally.
+- The task is one client-scoped consulting knowledge base for approved sources,
+  research, decisions, open questions, deliverables, stale evidence, and a
+  reproducible handoff. It must not mix clients or claim CRM ingestion,
+  email/calendar sync, RBAC, redaction, compliance, billing, or project
+  management.
+- Exact routes are
+  `/learn/build-client-project-knowledge-base-for-consulting`,
+  `/zh-TW/learn/build-client-project-knowledge-base-for-consulting`, and
+  `/zh-CN/learn/build-client-project-knowledge-base-for-consulting`.
+- Three stable same-locale owners provide contextual inbound links. The freshly
+  measuring research-knowledge-base canonical is not edited, preserving its
+  attribution while satisfying the three-link floor.
+- Complete provenance, candidate-gate reasoning, query families, first-party
+  proof, and safety boundaries are stored in
+  `docs/seo-audits/2026-08-28-consultant-client-knowledge-base-candidate.md`
+  and `docs/seo-scenario-backlog.json`.
+- This approval stops at local implementation, deterministic verification, and
+  desktop plus exact 393px previews. Commit, push, PR, merge, deployment,
+  request indexing, GSC validation, analytics mutation, and external
+  publication remain excluded.
+- Local implementation verification completed on `2026-08-28`: Goal 45/45,
+  SEO 247/247, i18n 71/71, TypeScript, the 255-page production build, and the
+  built technical checker all passed. The sitemap contains 144 canonical URLs.
+  Fresh browser checks covered all three routes at `1280x900` and exact
+  `393x852`; every route had one exact canonical, one Article schema, one
+  BreadcrumbList, visible FAQ without FAQPage, no horizontal overflow, no
+  broken images, and no browser warning or error. Separate viewport captures
+  confirmed natural English, zh-TW, and zh-CN wrapping. The in-app browser's
+  full-page JPEG stitch repeated rendered regions, but DOM counts and segmented
+  viewport captures confirmed a single `main`, `article`, and `footer` in the
+  actual page.
+- The user then explicitly approved publishing this exact verified scope
+  through commit, Git push, PR creation, merge, automatic Vercel deployment,
+  and read-only production verification. Request indexing, GSC validation,
+  analytics mutation, paid action, maintainer messaging, synthetic events,
+  metric-definition changes, and any unrelated website or external action
+  remain excluded.

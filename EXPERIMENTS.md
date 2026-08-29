@@ -8506,3 +8506,46 @@ increase for that experiment.
 - Decision: wait
 - Next step: Present `docs/seo-audits/2026-08-27-wenlan-research-readme-authority-proposal.patch` for separate source-repository publication approval. Do not submit the Awesome-list candidate, apply the source diff, push, open a pull request, message maintainers, or change account state under this record.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-28-consultant-client-project-knowledge-base-locales
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-28-consultant-client-project-knowledge-base-locales
+- Status: active
+- Data window: 2026-08-22..2026-08-28
+- Asset class: net-new-search
+- Launched: 2026-08-28
+- Hypothesis: One client-scoped English, zh-TW, and zh-CN owner for maintaining approved consulting sources, research, decisions, deliverables, stale evidence, and a reproducible handoff can earn qualified consulting-workflow exposure without cannibalizing generic document ingestion, paper research, citation verification, or project-management intent.
+- Candidate evidence: Separate English, Taiwan Traditional-Chinese, and mainland-parameter Simplified-Chinese SERP observations plus dated consulting-delivery, engagement-lifecycle, and research-workflow sources are stored in `docs/seo-scenario-backlog.json` and `docs/seo-audits/2026-08-28-consultant-client-knowledge-base-candidate.md` in their native units. They are not keyword volume, rank, authenticated GSC data, or causal evidence.
+- Baseline: GSC property 7 clicks and 913 impressions; visible-query 2 clicks and 221 impressions; visibility gap 5 clicks and 692 impressions; Vercel 289 visitors with 257 direct and 28 attributed to Google; GitHub 51 stars; new target-page rows unavailable, all kept separate.
+- Change: Publish exactly one English, zh-TW, and zh-CN canonical that isolates one client engagement, registers approved sources, records decisions and open questions, verifies deliverable claims, reviews stale evidence, and leaves a reproducible handoff. Explicitly exclude CRM ingestion, email or calendar sync, RBAC, automatic redaction, compliance, billing, and project management.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions per locale in 28 complete post-crawl days
+- Success criteria: Per locale, at least 3 qualified joined-query impressions and at least 1 GSC click after minimum exposure; report CTR and position separately.
+- Failure criteria: After 28 complete post-crawl days and minimum exposure, a locale has no qualified joined-query impressions or no GSC click, or an above-floor join shows that document ingestion, paper research, citation verification, or project-management intent owns the same task.
+- Stop criteria: Stop on a technical, confidentiality-boundary, unsupported product claim, duplicate-intent, controller-overlap, canonical, locale, responsive-render, or approval-boundary violation.
+- 24h readout: pending technical and indexability observation after production completion
+- 7d readout: pending early source-native GSC page/query and Vercel page/referrer observation
+- W2 readout: pending
+- W4 readout: pending formal 28-complete-post-crawl-day decision when eligible
+- W8 readout: pending only if useful after the Goal deadline
+- Result: pending
+- Decision: merge
+- Next step: Publish the exact verified trilingual scope, wait for automatic Vercel production completion, verify the three live routes read-only, and keep request indexing and all other external actions separately gated.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-28-consultant-client-project-knowledge-base-locales publication approval
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-28-consultant-client-project-knowledge-base-locales
+- Observed at: 2026-08-28T18:05:00Z
+- Readout: correction
+- Status: active
+- Evidence: The user explicitly approved the locally verified English, zh-TW, and zh-CN consultant client-project knowledge-base family for commit, Git push, PR creation, merge, automatic Vercel deployment, and read-only production verification. The approved diff includes the scenario and intent controls, trilingual content, three stable same-locale inbound paths, safety boundaries, deterministic tests, and dated candidate record. Request indexing, GSC validation, analytics mutation, paid action, maintainer messaging, synthetic events, metric-definition changes, and unrelated external publication remain excluded.
+- Result: pending
+- Decision: merge
+- Next step: Re-run the Goal and integration gates on the exact branch, commit and push only the approved files, merge after checks pass, verify the integrated commit and live deployment, and keep the production boundary fixed at Vercel completion.
+<!-- EXPERIMENT-RECORD:END -->
