@@ -800,10 +800,10 @@ Demand discovery:
 - Stage: `build`
 - Decision: `net-new`
 - Planned window: `2026-08-24..2026-08-30-approved-local-preparation`
-- Publication: `prepared`
+- Publication: `measuring`
 - Standalone utility: A neutral consulting runbook can isolate each client, register approved sources, keep dated decisions and open questions, verify deliverable claims, review stale evidence, and leave a reproducible handoff.
 - Overlap check: Do not duplicate the generic document-import, source-backed architecture, citation-diagnostic, or research-paper owners. This owner remains distinct only while it covers one client engagement, source isolation, decision and open-question logs, deliverable verification, source updates, and handoff, while excluding CRM, email/calendar sync, RBAC, redaction, legal compliance, billing, and project management.
-- Next research: Complete local three-locale implementation, deterministic technical and intent checks, and desktop plus exact 393px rendering. Stop before commit, push, PR, merge, deployment, indexing request, GSC validation, analytics mutation, or external publication.
+- Next research: PR 148 merged at 2026-08-29T04:58:27Z as 8dc5990c2ed2892ce0afbd10962ea175cb53d534 and Vercel production completed at 2026-08-29T04:59:15Z. Keep that boundary fixed, measure each locale independently, and do not request indexing, submit GSC validation, mutate analytics, or publish externally without separate approval.
 
 ### Locale intent and ownership
 
@@ -883,10 +883,10 @@ Demand discovery:
 - Stage: `build`
 - Decision: `net-new`
 - Planned window: `2026-08-31..2026-09-06-approved-local-preparation`
-- Publication: `prepared`
+- Publication: `measuring`
 - Standalone utility: A neutral company-research runbook can register filings, compare reporting periods, separate facts from calculations and judgments, track thesis invalidation, preserve contradictions, and recheck stale evidence.
 - Overlap check: Do not duplicate the paper-research owner, generic document-import owner, consulting client owner, or citation diagnostic. This page remains distinct only while it owns one company and reporting cycle across annual reports, filings, earnings material, source versions, reported fact versus analyst judgment, thesis changes, contradictions, and stale evidence. It explicitly excludes live market data, licensed transcripts or research, XBRL, reliable table extraction, valuation, portfolio monitoring, trading signals, and investment advice.
-- Next research: Finish deterministic checks and exact desktop plus 393px local rendering. Ubersuggest returned zero for nine exact long-tail phrases and exhausted the account's three-report daily quota; treat those exact-phrase observations as low-resolution and recheck broader task phrases after the quota resets. Stop before commit, push, PR, merge, deployment, indexing request, GSC validation, analytics mutation, directory submission, or external publication.
+- Next research: PR 150 merged at 2026-08-29T06:01:49Z as b9fb06d1eb0fdd3c07c0a271332f8166c9fcef6e and Vercel production completed at 2026-08-29T06:02:35Z. Keep that boundary fixed, measure each locale independently, and preserve the zero-result exact long-tail Ubersuggest observations as low-resolution rather than demand proof.
 
 ### Locale intent and ownership
 
@@ -1042,5 +1042,90 @@ Demand discovery:
 ### Authority path and readout
 
 - Authority path: maintained-oss-workflow — https://github.com/PANGKAIFENG/ai-product-manager-skills — after the website family is separately approved and published, prepare a neutral source-backed evidence example or update to the closest existing research/decision workflow; do not open an issue or PR without another exact approval (planned-not-published).
+- GSC: unavailable; native unit: per-locale page impressions, joined-query impressions, clicks.
+- Vercel: unavailable; native unit: per-locale target-page visitors and referrer visitors.
+
+## 13. Build and maintain an SRE incident knowledge base from runbooks, postmortems, and approved incident notes
+
+- ID: `sre-incident-runbook-knowledge-base`
+- Audience: SRE, platform engineering, and on-call teams maintaining runbooks and post-incident operational knowledge
+- Trigger: An incident repeats, an on-call engineer cannot find what worked last time, or a runbook may no longer match the current service and environment
+- Desired outcome: Keep reproducible, traceable, current operational knowledge with explicit scope, evidence, safety limits, owners, and review state
+- Stage: `maintain`
+- Decision: `net-new`
+- Planned window: `next-eligible-window-after-2026-08-29`
+- Publication: `prepared`
+- Standalone utility: A neutral SRE runbook workflow can define one service and environment, register current runbooks and postmortems, separate observations from hypotheses and mitigations, record risk and abort conditions, mark stale guidance, and test the result in an approved exercise.
+- Overlap check: Do not duplicate generic document ingestion, coding-agent knowledge, retrieval regression, citation verification, or multi-agent conflict owners. This page owns post-incident operational knowledge from runbooks and postmortems through source revision, stale review, safety boundaries, and reproducible testing. It explicitly excludes monitoring, alerting, live telemetry, automatic RCA, incident management, automatic remediation, command execution, approvals, and emergency access.
+- Next research: Finish the local three-locale implementation, product-evidence contract, deterministic checks, and desktop plus exact 393px rendering. Google Trends returned no inspectable series in this pass, so no relative index or keyword volume is claimed. Stop before commit, push, PR, merge, deployment, indexing request, GSC validation, analytics mutation, source-repository change, or external publication.
+
+### Locale intent and ownership
+
+| Locale | Query family | Coverage | Existing owner | Research needed |
+| --- | --- | --- | --- | --- |
+| en | SRE incident knowledge base; runbook knowledge base; postmortem knowledge base | gap | none | Keep the owner on post-incident knowledge maintenance. Exclude live telemetry, alert routing, automatic RCA, incident command, runbook execution, and remediation automation. |
+| zh-TW | SRE 事故知識庫; runbook 知識庫; 事故復盤 知識沉澱 | gap | none | 使用事故、值班、runbook、事故復盤、操作知識、過期與驗證等台灣自然用語；不要把自動修復或即時監控寫進頁面。 |
+| zh-CN | SRE 故障知识库; runbook 知识库; 故障复盘 知识沉淀 | gap | none | 使用故障复盘、运行手册、值班、运维知识、过期、版本与验证等自然用语；排除自动 RCA、监控告警与命令执行。 |
+
+#### en evidence
+
+SERP:
+- google-serp-observation: [SRE incident knowledge base runbook postmortem](https://www.google.com/search?hl=en&gl=us&q=SRE+incident+knowledge+base+runbook+postmortem) — official SRE knowledge, runbook, postmortem, incident-learning, and on-call documentation results returned result observation; en/United States parameter; captured 2026-08-29. The result shape supports one operational-knowledge task; it is not keyword volume, exact rank, or Wenlan performance evidence.
+
+Demand discovery:
+- official-product-documentation: [SRE knowledge documents runbooks troubleshooting postmortems](https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/sre-agent/upload-knowledge-document.md) — 1 current official SRE knowledge-document workflow maintained documentation observation; en/global official documentation; captured 2026-08-29. The document repeats the problem of stale runbooks and incident knowledge buried in chat or engineer memory; Microsoft product features are not attributed to Wenlan.
+- recent-community-thread: [runbooks constantly out of date](https://www.reddit.com/r/sre/comments/1tzyrvn/anyone_elses_dr_runbooks_constantly_out_of_date/) — 1 recent runbook-drift discussion one inspectable discussion thread; en/global Reddit community; captured 2026-08-29. The thread independently repeats silent documentation drift, versioned scripts, and tabletop testing; engagement is not generalized.
+- recent-community-thread: [find what was tried during a previous production incident](https://www.reddit.com/r/sre/comments/1vndr8z/when_a_production_incident_repeats_months_later/) — 1 recent recurring-incident knowledge question one inspectable discussion thread; en/global Reddit community; captured 2026-08-29. The question asks where teams recover prior postmortems, runbooks, tickets, or remembered context; no traffic or engagement total is claimed.
+
+#### zh-TW evidence
+
+SERP:
+- google-serp-observation: [SRE 事故復盤 runbook 知識庫](https://www.google.com/search?hl=zh-TW&gl=tw&q=SRE+事故復盤+runbook+知識庫) — 繁中 SRE Agent 知識文件、runbook、事故復盤與事件後知識結果 returned result observation; zh-TW/Taiwan parameter; captured 2026-08-29. 自然用語以事故、值班、runbook、復盤、來源與過期為主；這不是搜尋量或 Wenlan 排名證據。
+
+Demand discovery:
+- official-localized-documentation: [SRE Agent runbook 知識庫 事故後知識擷取](https://learn.microsoft.com/zh-tw/azure/sre-agent/tutorial-upload-knowledge-document) — 1 current localized runbook-to-knowledge workflow maintained localized documentation observation; zh-TW/Taiwan localized documentation; captured 2026-08-29. 官方文件明確描述從調查建立 runbook、在新對話驗證檢索、事件後擷取與更新文件；其產品能力不歸因給 Wenlan。
+- official-reliability-guidance: [故障調查 playbook 事件後更新](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_testing_resiliency_playbook_resiliency.html) — 1 playbook investigation and update workflow one maintained guidance page; zh-TW-compatible technical guidance/global official guidance; captured 2026-08-29. AWS 指南把未知故障調查步驟與事件後補回 playbook 連成一個閉環；這不是 Wenlan 需求量。
+
+#### zh-CN evidence
+
+SERP:
+- google-serp-observation: [SRE 故障复盘 runbook 知识库](https://www.google.com/search?hl=zh-CN&gl=cn&q=SRE+故障复盘+runbook+知识库) — 故障复盘、运行手册、运维知识库、版本维护与值班流程结果 returned result observation; zh-CN/mainland-China parameter; captured 2026-08-29. Google 中国大陆覆盖有限；结果形态不是总体需求、关键词量或 Wenlan 排名。
+
+Demand discovery:
+- published-practice-whitepaper: [故障复盘 文档 知识传承 SRE](https://docs.sre-elite.com/SRE-White-Paper-v1.0.5.pdf) — 1 standardized fault-review and knowledge-record workflow one inspectable practice whitepaper; zh-CN/mainland Chinese SRE practice; captured 2026-08-29. 白皮书要求故障文档、复盘流程与经验传承；它不是搜索量，也不证明 Wenlan 的生产运维能力。
+- published-practitioner-guide: [Runbook 运维知识 可复现 版本管理 质量评审](https://www.sre.wang/posts/sre-runbook-playbook/) — 1 runbook maintenance and review workflow one inspectable guide; zh-CN/Chinese SRE practitioner site; captured 2026-08-29. 指南独立重复可复现步骤、版本管理、质量评审与持续更新问题；没有把它当作关键词量。
+
+### Candidate gate
+
+| Gate | Status | Reason | Evidence refs |
+| --- | --- | --- | --- |
+| provenance | passed | Every retained result, official document, community thread, and practice source records its URL or query, capture date, language or geography, native unit, and interpretation boundary. | locales.en.serpEvidence[0]; locales.zh-TW.serpEvidence[0]; locales.zh-CN.serpEvidence[0]; docs/seo-audits/2026-08-29-sre-incident-knowledge-base-candidate.md |
+| repeatedDemand | passed | Independent official SRE documentation, reliability guidance, recent Reddit threads, a Chinese practice whitepaper, and a practitioner runbook guide repeat the same stale-runbook and incident-learning task. | locales.en.demandEvidence[0]; locales.en.demandEvidence[1]; locales.en.demandEvidence[2]; locales.zh-TW.demandEvidence[0]; locales.zh-CN.demandEvidence[0]; locales.zh-CN.demandEvidence[1] |
+| trilingualSerp | passed | English, Taiwan Traditional Chinese, and Simplified-Chinese result sets were checked separately and produced natural wording around incidents, runbooks, postmortems or fault reviews, on-call work, and stale operational knowledge. | locales.en.serpEvidence[0]; locales.zh-TW.serpEvidence[0]; locales.zh-CN.serpEvidence[0] |
+| cleanGap | passed | Existing owners cover generic document ingestion, coding-agent project knowledge, retrieval regression, citation checks, and multi-agent conflicts. None owns the post-incident task from runbook and postmortem evidence to a reviewed operational Page. | overlapCheck |
+| firstPartyProof | passed | Maintained Wenlan source proves supported documents, source-backed Pages, citations, revisions, stale state, lint, and review. The page explicitly excludes monitoring, alerting, telemetry, incident command, and runbook execution. | /Users/lucian/Repos/wenlan/README.md:119; /Users/lucian/Repos/wenlan/README.md:205; /Users/lucian/Repos/wenlan/README.md:240 |
+| standaloneUtility | passed | A neutral incident evidence register, runbook scope, source revision, safety boundary, verification-signal checklist, stale review, and tabletop test remain useful without Wenlan. | standaloneUtility |
+| internalLinks | passed | Three stable same-locale generic owners can link contextually from document ingestion, source-backed architecture, and citation verification. | internalLinks |
+| authorityPath | passed | Wenlan's maintained first-party README can add one accurate SRE incident-knowledge workflow link after the website family is published; source-repository publication remains separately approval-gated. | authorityPath |
+
+### Wenlan proof
+
+- Wenlan supports Markdown, text, text-extractable PDF, source-backed Pages, citations, revisions, stale state, lint, and review. — `/Users/lucian/Repos/wenlan/README.md:119-256`; verify with `rg -n "Document Sources|Source-backed Pages|Cite|Track|Refresh|Review|lint" /Users/lucian/Repos/wenlan/README.md`.
+
+### Planned internal links
+
+- https://wenlan.app/learn/source-backed-wiki-pages-ai-work
+- https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents
+- https://wenlan.app/learn/verify-ai-knowledge-base-citations
+- https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work
+- https://wenlan.app/zh-TW/learn/build-local-ai-knowledge-base-from-documents
+- https://wenlan.app/zh-TW/learn/verify-ai-knowledge-base-citations
+- https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work
+- https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents
+- https://wenlan.app/zh-CN/learn/verify-ai-knowledge-base-citations
+
+### Authority path and readout
+
+- Authority path: maintained-first-party-reference — https://github.com/7xuanlu/wenlan — after the website family is separately approved and published, prepare one locale-aware SRE incident-knowledge workflow link; do not commit, push, or merge source-repository changes without another exact approval (planned-not-published).
 - GSC: unavailable; native unit: per-locale page impressions, joined-query impressions, clicks.
 - Vercel: unavailable; native unit: per-locale target-page visitors and referrer visitors.

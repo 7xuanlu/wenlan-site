@@ -8677,3 +8677,46 @@ increase for that experiment.
 - Decision: wait
 - Next step: Keep `2026-08-29T06:44:59Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-08-30T06:44:59Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-05T06:44:59Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with its original 20-page-impression, 3-qualified-joined-query-impression, and 1-click contract. Do not request indexing, submit GSC validation, mutate analytics, or publish externally under this record.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-29-sre-incident-knowledge-base-locales
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-29-sre-incident-knowledge-base-locales
+- Status: approved
+- Data window: 2026-08-29..2026-09-04
+- Asset class: net-new-search
+- Launched: 2026-08-29
+- Hypothesis: One English, zh-TW, and zh-CN owner for maintaining source-backed runbooks and postmortem knowledge can earn qualified discovery from SRE and on-call searches without claiming monitoring, incident-management, or automatic-remediation features.
+- Candidate evidence: Dated official Microsoft and AWS documentation, current English Reddit SRE discussions, a Taiwan-localized Microsoft workflow, a Simplified-Chinese SRE practice whitepaper, and a Chinese runbook-maintenance guide independently repeat stale runbooks, missing incident learning, reproducible procedures, and post-incident review. Full provenance remains in `docs/seo-scenario-backlog.json` and `docs/seo-audits/2026-08-29-sre-incident-knowledge-base-candidate.md`.
+- Baseline: Target-page GSC and Vercel rows are unavailable before publication. Keep them unavailable rather than zero. Google Trends returned no inspectable series in this pass, so no relative index or keyword volume is recorded.
+- Change: Prepare exactly one English, zh-TW, and zh-CN canonical that turns approved runbooks, postmortems, architecture notes, and sanitized incident summaries into a reviewed operational Page with source revisions, stale state, safety limits, abort conditions, verification signals, owners, and test results. Explicitly exclude monitoring, alerts, live telemetry, automatic RCA, incident command, runbook execution, approvals, credentials, and emergency access.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions per locale in 28 complete post-crawl days
+- Success criteria: Per locale, at least 3 qualified joined-query impressions and at least 1 GSC click after minimum exposure; report CTR and position separately.
+- Failure criteria: After 28 complete post-crawl days and minimum exposure, a locale has no qualified joined-query impressions or no GSC click, or an above-floor query-page join assigns the task to incident-management software, generic runbook templates, or an existing Wenlan owner.
+- Stop criteria: Stop on a technical, unsafe operational claim, unsupported product capability, duplicate-intent, canonical, locale, responsive-render, controller-overlap, or approval-boundary violation.
+- 24h readout: pending only after a production deployment is separately approved and completed
+- 7d readout: pending only after a production deployment is separately approved and completed
+- W2 readout: pending
+- W4 readout: pending formal 28-complete-post-crawl-day decision when eligible
+- W8 readout: pending only if useful after the Goal deadline
+- Result: pending
+- Decision: wait
+- Next step: Finish deterministic and visual verification, then stop for exact publication approval. Do not commit, push, open or merge a PR, deploy, request indexing, submit GSC validation, mutate analytics, change the source repository, or publish externally under this record.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-29-sre-incident-knowledge-base-locales publication approval
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-29-sre-incident-knowledge-base-locales
+- Observed at: 2026-08-30T04:19:59Z
+- Readout: correction
+- Status: active
+- Evidence: The user explicitly approved the locally verified English, zh-TW, and zh-CN SRE incident knowledge-base family for commit, Git push, PR creation, merge, automatic Vercel deployment, and read-only production verification. GitHub Releases was re-read before publication and confirmed `v0.17.4` as the authoritative current product release; its separate website-alignment commit resolves the pre-existing release-contract failures without mixing that repair into the SRE experiment commit.
+- Result: pending
+- Decision: merge
+- Next step: Run the complete Goal, scenario, SEO, i18n, TypeScript, production-build, and technical gates on the combined branch; commit the SRE family separately; push, open and merge the PR only after checks pass; then verify the integrated commit and live production routes. Request indexing, GSC validation, analytics mutation, source-repository changes, paid action, maintainer messaging, synthetic events, metric-definition changes, and unrelated external publication remain excluded.
+<!-- EXPERIMENT-RECORD:END -->

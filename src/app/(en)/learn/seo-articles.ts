@@ -41,6 +41,7 @@ type BaseSpec = {
   relatedSlugs: string[];
   officialReferences?: OfficialReference[];
   comparisonTable?: ComparisonTable;
+  productEvidence?: LearnArticle["productEvidence"];
   cta?: LearnArticle["cta"];
 };
 
@@ -82,6 +83,7 @@ function makeArticle(spec: BaseSpec): LearnArticle {
       },
     ],
     comparisonTable: spec.comparisonTable,
+    productEvidence: spec.productEvidence,
     faqs: [
       {
         question: spec.faq[0],
@@ -1646,6 +1648,7 @@ const workflowArticles: BaseSpec[] = [
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
       "build-product-research-knowledge-base-for-prd",
+      "build-sre-incident-knowledge-base",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
     ],
@@ -2931,6 +2934,7 @@ const trustArticles: BaseSpec[] = [
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
       "build-product-research-knowledge-base-for-prd",
+      "build-sre-incident-knowledge-base",
     ],
     officialReferences: [
       {
@@ -3009,7 +3013,7 @@ const trustArticles: BaseSpec[] = [
       "Should I import every note before starting?",
       "No. Start with one repeated, high-value topic and prove its source, capture, distill, inspection, lint, and review loop before expanding.",
     ],
-    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "test-ai-knowledge-base-retrieval-after-changes", "prevent-multi-agent-knowledge-conflicts", "source-backed-research-knowledge-base", "build-client-project-knowledge-base-for-consulting", "build-investment-research-knowledge-base", "build-product-research-knowledge-base-for-prd", "review-before-trust-ai-memory", "ai-memory-provenance"],
+    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "test-ai-knowledge-base-retrieval-after-changes", "prevent-multi-agent-knowledge-conflicts", "source-backed-research-knowledge-base", "build-client-project-knowledge-base-for-consulting", "build-investment-research-knowledge-base", "build-product-research-knowledge-base-for-prd", "build-sre-incident-knowledge-base", "review-before-trust-ai-memory", "ai-memory-provenance"],
     officialReferences: [
       {
         label: "Wenlan knowledge model",
@@ -3405,6 +3409,159 @@ const retrievalRegressionArticle: LearnArticle = {
     body: "Choose representative project questions, record their expected sources, and keep the baseline beside the source revisions before changing retrieval.",
   },
 };
+
+const sreIncidentKnowledgeBaseArticle: BaseSpec = {
+  slug: "build-sre-incident-knowledge-base",
+  eyebrow: "SRE knowledge workflow",
+  category: "Workflows",
+  title: "How to Build an SRE Incident Knowledge Base",
+  description:
+    "Turn runbooks, postmortems, and approved incident notes into current, source-backed operational knowledge for on-call engineers.",
+  metaTitle: "Build an SRE Incident Knowledge Base | Wenlan",
+  metaDescription:
+    "Build a source-backed SRE incident knowledge base from runbooks and postmortems, with current revisions, verification steps, stale-state review, and clear safety limits.",
+  keywords: [
+    "SRE incident knowledge base",
+    "runbook knowledge base",
+    "postmortem knowledge base",
+    "on-call operational knowledge",
+    "AI SRE runbook",
+    "incident learning workflow",
+  ],
+  publishedAt: "2026-08-29",
+  updatedAt: "2026-08-29",
+  readingTime: "9 min read",
+  audience:
+    "SRE, platform engineering, and on-call teams maintaining runbooks and post-incident knowledge",
+  heroBullets: [
+    "Keep one service, environment, and incident class inside a clear source boundary.",
+    "Trace each diagnostic step, mitigation, and verification signal to a current runbook or postmortem.",
+    "Review stale steps after every incident instead of letting old operational advice stay silently active.",
+  ],
+  quickAnswer:
+    "Build one incident knowledge base per service or operational boundary. Register approved runbooks, postmortems, architecture notes, and incident summaries; then maintain one reviewable Page for the incident class with symptoms, preconditions, diagnostic steps, mitigation limits, abort conditions, verification signals, owner, and review date.",
+  quickAnswerLink: {
+    label: "See the incident evidence workflow",
+    href: "#product-evidence",
+  },
+  wenlanFit:
+    "Wenlan can keep supported documents connected to source-backed Pages, citations, revisions, stale state, lint, and human review. It does not monitor production, receive alerts, ingest live telemetry, execute runbooks, approve changes, or replace an incident-management system.",
+  problem:
+    "The failure appears when an engineer is paged for a problem the team has seen before, but the useful context is split across an old runbook, a postmortem, chat history, architecture notes, and somebody's memory. A plausible AI summary can make this worse if it hides the service version, environment, source revision, risk, or evidence behind a command.",
+  actionHeading: "Build one incident-to-runbook review loop",
+  actionIntro:
+    "Start after the incident is stable. Use sanitized, approved documents and keep live credentials, customer data, raw secrets, and unreviewed production commands outside the knowledge base.",
+  actionBullets: [
+    "Choose one service, environment, and incident class. Record what is included, what stays in the monitoring or incident system, and who owns the operational knowledge.",
+    "Register the current runbook, relevant postmortem, architecture note, and sanitized incident summary with their dates, versions, owners, and source locations.",
+    "Create one maintained Page with symptoms, scope, preconditions, read-only checks, mitigation boundaries, escalation triggers, abort conditions, verification signals, and the next review date.",
+    "Keep observed facts, hypotheses, mitigations, and confirmed causes separate. Do not rewrite a postmortem into a single neat cause when the evidence shows several contributing factors.",
+    "After an incident or system change, resync the approved sources and mark affected steps stale until an owner verifies them against the current service and environment.",
+    "Run a tabletop or staging exercise. Record which steps were reproducible, which links or commands were outdated, and what evidence was missing before the page is trusted for on-call use.",
+    "Open the exact source before acting. A retrieved runbook is context for a qualified engineer, not permission to execute a production change.",
+  ],
+  code: {
+    label: "After Wenlan and the AI client are configured",
+    code: "wenlan status\nwenlan sources add ~/Ops/approved-incident-knowledge\n# In a Wenlan plugin client:\n/distill <service and incident class>\n/pages <service incident runbook>\n/lint\n/curate",
+  },
+  caution:
+    "Keep monitoring, alert routing, telemetry, incident command, credentials, change approvals, rollback execution, and emergency access in their purpose-built systems. Wenlan does not validate a command against production or guarantee that a runbook is safe. A named owner must review service version, environment, permissions, risk, expected output, abort conditions, and rollback before operational use.",
+  productEvidence: {
+    heading: "Inspect the source and review state before trusting a runbook",
+    summary:
+      "This genuine Wenlan desktop capture comes from the app's deterministic test fixture, not an incident or customer workspace. It shows maintained Pages with source counts and a review queue, the same product surfaces an SRE can use to keep source changes and unresolved conflicts visible.",
+    image: {
+      src: "/images/product-evidence/wenlan-space-review-fixture.png",
+      alt: "Wenlan desktop Space showing maintained Pages with source counts and a review queue for source conflicts and newly available evidence.",
+      caption:
+        "Genuine Wenlan app capture from a deterministic test fixture. Source counts and the review queue remain visible; the screenshot is a general product example, not production incident evidence.",
+      width: 1586,
+      height: 992,
+    },
+    workflow: [
+      {
+        label: "Bound the incident knowledge",
+        detail:
+          "Select one service, environment, incident class, and approved source set instead of importing an unrestricted operational archive.",
+      },
+      {
+        label: "Distill a reviewable runbook Page",
+        detail:
+          "Keep symptoms, evidence, read-only checks, mitigations, risks, abort conditions, and verification signals attached to current sources.",
+      },
+      {
+        label: "Review after change or incident",
+        detail:
+          "Recheck the cited revision, stale state, and unresolved conflicts, then test the procedure in an approved non-production exercise.",
+      },
+    ],
+    artifactHeading: "Worked incident knowledge packet",
+    artifactNote:
+      "This example defines the fields a reviewer should inspect. Replace every row with approved evidence for one service and incident class.",
+    artifactRows: [
+      {
+        label: "Evidence input",
+        detail:
+          "A current runbook, dated postmortem, architecture note, or sanitized incident summary with owner and revision.",
+      },
+      {
+        label: "Operational claim",
+        detail:
+          "One symptom, diagnostic step, mitigation boundary, or verification signal linked to the exact supporting passage.",
+      },
+      {
+        label: "Review result",
+        detail:
+          "Current, contradicted, stale, unsafe, or unresolved, with the service version, environment, reviewer, and next test recorded.",
+      },
+    ],
+    action: {
+      label: "See the incident evidence workflow",
+      href: "#product-evidence",
+    },
+  },
+  faq: [
+    "Can Wenlan monitor incidents or run remediation commands?",
+    "No. Wenlan does not receive alerts, ingest live telemetry, execute runbooks, approve changes, or replace monitoring and incident-management systems. It keeps approved operational knowledge source-backed and reviewable.",
+    "How do we stop an old runbook from misleading on-call engineers?",
+    "Give each Page a source revision, service and environment scope, owner, review date, expected signals, and abort conditions. After a source or system change, mark affected guidance stale until an approved exercise verifies it again.",
+  ],
+  relatedSlugs: [
+    "build-local-ai-knowledge-base-from-documents",
+    "source-backed-wiki-pages-ai-work",
+    "verify-ai-knowledge-base-citations",
+    "test-ai-knowledge-base-retrieval-after-changes",
+    "prevent-multi-agent-knowledge-conflicts",
+  ],
+  officialReferences: [
+    {
+      label: "Wenlan supported document sources",
+      href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+    },
+    {
+      label: "Wenlan review and trust",
+      href: "https://wenlan.app/docs/review-and-trust",
+    },
+    {
+      label: "Microsoft Azure SRE Agent knowledge documents",
+      href: "https://learn.microsoft.com/en-us/azure/sre-agent/tutorial-upload-knowledge-document",
+    },
+    {
+      label: "AWS playbooks for failure investigation",
+      href: "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_testing_resiliency_playbook_resiliency.html",
+    },
+    {
+      label: "Operate First incident and postmortem process",
+      href: "https://github.com/operate-first/sre/blob/main/process/incident_management.md",
+    },
+  ],
+  cta: {
+    heading: "Make one incident lesson reproducible",
+    body: "Choose one service and incident class, connect the current runbook and postmortem, then review every operational claim before the next on-call shift.",
+  },
+};
+
+workflowArticles.push(sreIncidentKnowledgeBaseArticle);
 
 const productResearchArticle: LearnArticle = {
   slug: "build-product-research-knowledge-base-for-prd",
