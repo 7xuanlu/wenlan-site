@@ -8847,3 +8847,17 @@ increase for that experiment.
 - Decision: merge
 - Next step: Commit and push only the clean manifest-owned diff, open and merge its pull request in turn, verify the integrated commit, wait for the automatic Vercel deployment, and verify all three production routes. Do not request indexing, submit GSC validation, mutate analytics, contact maintainers, publish the separately planned OSS authority proposal, buy traffic, generate synthetic events, or perform another external action.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-30-competitive-intelligence-knowledge-base-locales production publication
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-30-competitive-intelligence-knowledge-base-locales
+- Observed at: 2026-08-30T23:40:14Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #158 merged at `2026-08-30T19:47:24Z` as `f68b16b82d1c6c28f816c4ab0cf5c164232fe3c1`; Vercel reported production deployment success at `2026-08-30T19:48:14Z`. The integrated commit passed the Goal, scenario, 50 Goal tests, 252 SEO tests, 76 i18n tests, TypeScript, the 271-page production build, and the 156-owner built technical audit. The deployed audit passed robots, sitemap, key pages, utility noindex surfaces, redirects, bridge-host redirects, and sitemap-wide FAQPage absence. English, zh-TW, and zh-CN returned direct 200 with exact canonicals, reciprocal hreflang, Article and BreadcrumbList schema, visible bounded competitor-dossier answers, loaded product evidence, and visible FAQ without FAQPage. Exact `393x852` and `1280x900` production checks found no overflow, broken image, console warning or error, or protected CJK phrase split. This proves publication and technical availability only; it is not a crawl, indexing, rank, impression, click, visitor, or causal result.
+- Result: pending
+- Decision: wait
+- Next step: Keep `2026-08-30T19:48:14Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-08-31T19:48:14Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-06T19:48:14Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with at least 20 target-page impressions, 3 qualified joined-query impressions, and 1 GSC click. Do not request indexing, submit GSC validation, mutate analytics, publish the planned OSS proposal, message maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
+<!-- EXPERIMENT-RECORD:END -->
