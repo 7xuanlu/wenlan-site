@@ -8734,3 +8734,45 @@ increase for that experiment.
 - Decision: wait
 - Next step: Keep `2026-08-30T05:06:25Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-08-31T05:06:25Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-06T05:06:25Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with its original 20-page-impression, 3-qualified-joined-query-impression, and 1-click contract. Do not request indexing, submit GSC validation, mutate analytics, change the source repository, message maintainers, buy traffic, generate synthetic events, change metric definitions, or publish externally under this record.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-28-consultant-client-project-knowledge-base-locales 24h technical and indexability
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-28-consultant-client-project-knowledge-base-locales
+- Observed at: 2026-08-30T06:33:09Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The fixed production boundary was `2026-08-29T04:59:15Z`. At `2026-08-30T06:30:32Z`, direct GETs for the English, zh-TW, and zh-CN canonicals each returned 200 with no redirect, exact self-canonical, reciprocal en-US/zh-TW/zh-CN/x-default hreflang, sitemap membership, Article and BreadcrumbList, visible consulting task, limitations, and FAQ, and no FAQPage schema. The latest preserved authenticated GSC and Vercel capture covers `2026-07-31..2026-08-27`, ending before publication: GSC property is 7 clicks / 913 impressions, visible-query is 2 / 221, and the 5-click / 692-impression visibility gap remains separate. No target page or target query-page row appears, so every locale target observation is unavailable rather than zero. Vercel remains 289 visitors / 690 pageviews, with direct and referrer rows separate; no target page or source-to-page row exists. GitHub is 51 stars, separately. No persisted authenticated URL Inspection evidence exists for this family, so post-deploy crawl and indexability remain unavailable.
+- Result: inconclusive
+- Decision: wait
+- Next step: Run the due seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-05T04:59:15Z`; do not request indexing, submit validation, mutate analytics, or publish externally.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-28-source-backed-investment-research-knowledge-base-locales 24h technical and indexability
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-28-source-backed-investment-research-knowledge-base-locales
+- Observed at: 2026-08-30T06:33:09Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The fixed production boundary was `2026-08-29T06:02:35Z`. At `2026-08-30T06:30:32Z`, direct GETs for the English, zh-TW, and zh-CN canonicals each returned 200 with no redirect, exact self-canonical, reciprocal en-US/zh-TW/zh-CN/x-default hreflang, sitemap membership, Article and BreadcrumbList, visible filing-to-thesis task, limitations, and FAQ, and no FAQPage schema. The latest preserved authenticated GSC and Vercel capture covers `2026-07-31..2026-08-27`, ending before publication: GSC property is 7 clicks / 913 impressions, visible-query is 2 / 221, and the 5-click / 692-impression visibility gap remains separate. No target page or target query-page row appears, so every locale target observation is unavailable rather than zero. Vercel remains 289 visitors / 690 pageviews, with direct and referrer rows separate; no target page or source-to-page row exists. GitHub is 51 stars, separately. No persisted authenticated URL Inspection evidence exists for this family, so post-deploy crawl and indexability remain unavailable.
+- Result: inconclusive
+- Decision: wait
+- Next step: Run the due seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-05T06:02:35Z`; do not request indexing, submit validation, mutate analytics, or publish externally.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-28-product-research-to-prd-knowledge-base-locales 24h
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-28-product-research-to-prd-knowledge-base-locales
+- Observed at: 2026-08-30T06:45:29Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The fixed production boundary was `2026-08-29T06:44:59Z`. At `2026-08-30T06:45:31Z`, direct GETs for the English, zh-TW, and zh-CN product-research-to-PRD canonicals each returned 200 with no redirect, exact self-canonical, reciprocal en-US/zh-TW/zh-CN/x-default hreflang, sitemap membership, Article and BreadcrumbList, visible evidence-to-PRD task, limitations, and FAQ, and no FAQPage schema. The latest preserved authenticated GSC and Vercel capture covers `2026-07-31..2026-08-27`, ending before publication: GSC property is 7 clicks / 913 impressions, visible-query is 2 / 221, and the 5-click / 692-impression visibility gap remains separate. No target page or target query-page row appears, so every locale target observation is unavailable rather than zero. Vercel remains 289 visitors / 690 pageviews, with direct and referrer rows separate; no target page or source-to-page row exists. GitHub is 51 stars, separately. No persisted authenticated URL Inspection evidence exists for this family, so post-deploy crawl and indexability remain unavailable.
+- Result: inconclusive
+- Decision: wait
+- Next step: Run the due seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-05T06:44:59Z`; do not request indexing, submit validation, mutate analytics, or publish externally.
+<!-- EXPERIMENT-RECORD:END -->

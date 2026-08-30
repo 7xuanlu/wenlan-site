@@ -3871,3 +3871,45 @@ unchanged.
   `2026-08-30T05:06:25Z` as the fixed production boundary; it proves
   publication and technical availability, not a Google crawl, indexing,
   ranking, traffic, or causality.
+
+## Campaign observation: consultant, investment, and product-research 24-hour readouts at 2026-08-30T06:45:29Z
+
+- The English, zh-TW, and zh-CN consultant, investment, and product-research
+  routes each return
+  direct 200 with exact self-canonicals, reciprocal hreflang, sitemap
+  membership, Article and BreadcrumbList schema, visible task and limitation
+  text, visible FAQ, and no FAQPage schema.
+- The latest authenticated `2026-07-31..2026-08-27` evidence ends before both
+  publication boundaries. GSC property totals remain 7 clicks and 913
+  impressions; visible-query totals remain 2 clicks and 221 impressions; the
+  visibility gap remains 5 clicks and 692 impressions. No target page or
+  query-page row exists for either family, so locale observations are
+  unavailable rather than zero.
+- Vercel remains 289 visitors and 690 pageviews, with direct, referrer,
+  target-page, and source-to-page evidence kept separate. GitHub remains 51
+  stars. No persisted authenticated URL Inspection evidence exists for either
+  family.
+- All three 24-hour results are inconclusive. This is technical availability
+  evidence only; it does not establish a crawl, indexing, ranking, traffic,
+  or causality. Keep the pages stable until their seven-day observations after
+  `2026-09-05T04:59:15Z`, `2026-09-05T06:02:35Z`, and
+  `2026-09-05T06:44:59Z`.
+
+## Campaign research: engineering ADR and RFC demand at 2026-08-29
+
+- English, zh-TW, and zh-CN official documentation, maintained OSS, and
+  practitioner discussions repeat the task of recovering the rationale,
+  alternatives, consequences, status, and supersession history behind an
+  architecture or technical-design decision.
+- A new URL fails the clean-gap gate. The existing trilingual
+  `coding-agent-source-backed-knowledge-base` owner already covers repository
+  truth, architecture decisions, cited Pages, and code/test verification.
+- Do not create an ADR or RFC canonical. The evidence is stored in
+  `docs/seo-audits/2026-08-29-engineering-adr-rfc-demand-gate.md`. It may
+  nominate a bounded section on the existing owner only after a confirmed
+  post-deploy crawl, 20 target-page impressions, 3 qualified joined-query
+  impressions, and the 28-complete-day cooldown all pass.
+- Do not claim automated code-to-ADR compliance, drift detection, policy
+  enforcement, or architecture approval. The next clean scenario research
+  must move to a different user task rather than a persona or query-variant
+  split.

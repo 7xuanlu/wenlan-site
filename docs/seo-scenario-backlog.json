@@ -290,7 +290,9 @@
           "queryFamily": [
             "Codex source backed project knowledge base",
             "coding agent knowledge base workflow",
-            "AGENTS.md knowledge base"
+            "AGENTS.md knowledge base",
+            "ADR RFC design doc decision history",
+            "why was this architecture decision made"
           ],
           "serpEvidence": [
             {
@@ -314,6 +316,17 @@
               "nativeUnit": "returned result observation",
               "value": "1 returned result",
               "note": "The result asks how coding agents should persist verified, source-backed domain knowledge and whether humans approve writes; no rank or engagement is claimed."
+            },
+            {
+              "sourceType": "Exa demand-discovery result",
+              "sourceUrl": "https://adr.github.io/",
+              "query": "ADR RFC design doc decision history for coding agents",
+              "capturedAt": "2026-08-29",
+              "language": "en",
+              "geography": "Exa result geography unavailable",
+              "nativeUnit": "maintained documentation page",
+              "value": "1 page",
+              "note": "Maintained ADR guidance repeats rationale, alternatives, consequences, status, and supersession. It supports a refresh angle on this owner, not a new URL, Google rank, or keyword volume."
             }
           ],
           "demandEvidence": [
@@ -348,7 +361,9 @@
           "queryFamily": [
             "Codex 有來源的專案知識庫",
             "coding agent 專案知識庫",
-            "AGENTS.md 知識庫"
+            "AGENTS.md 知識庫",
+            "架構決策紀錄 ADR 找回當初為什麼這樣設計",
+            "RFC 技術設計文件 決策脈絡"
           ],
           "serpEvidence": [
             {
@@ -372,6 +387,17 @@
               "nativeUnit": "returned result observation",
               "value": "1 returned result",
               "note": "The result distinguishes short agent instructions from detailed API or frequently changing project knowledge and names Codex, Claude Code, and context-window limits."
+            },
+            {
+              "sourceType": "Exa demand-discovery result",
+              "sourceUrl": "https://learn.microsoft.com/zh-tw/azure/well-architected/architect-role/architecture-decision-record",
+              "query": "架構決策紀錄 ADR 找回當初為什麼這樣設計",
+              "capturedAt": "2026-08-29",
+              "language": "zh-TW",
+              "geography": "Taiwan Traditional Chinese documentation",
+              "nativeUnit": "official documentation page",
+              "value": "1 page",
+              "note": "The localized guidance repeats decision context, rationale, append-only history, supersession, and shared source-of-truth language. It supports a refresh angle on this owner, not a new URL or rank claim."
             }
           ],
           "demandEvidence": [
@@ -428,7 +454,9 @@
           "queryFamily": [
             "给 Codex 做外挂知识库",
             "code agent 项目知识库",
-            "AGENTS.md 知识库"
+            "AGENTS.md 知识库",
+            "架构决策记录 ADR 找回当初为什么这样设计",
+            "RFC 技术方案 决策上下文"
           ],
           "serpEvidence": [
             {
@@ -452,6 +480,17 @@
               "nativeUnit": "returned result observation",
               "value": "1 returned result",
               "note": "The result uses Codex, Obsidian, LLM Wiki, source traceability, and Git history in one implementation workflow."
+            },
+            {
+              "sourceType": "Exa demand-discovery result",
+              "sourceUrl": "https://docs.aws.amazon.com/zh_cn/prescriptive-guidance/latest/architectural-decision-records/adr-process.html",
+              "query": "架构决策记录 ADR 找回当初为什么这样设计",
+              "capturedAt": "2026-08-29",
+              "language": "zh-CN",
+              "geography": "Simplified Chinese documentation",
+              "nativeUnit": "official documentation page",
+              "value": "1 page",
+              "note": "The localized process repeats rationale, ownership, review, lifecycle, and supersession. It supports a refresh angle on this owner, not a new URL, Google rank, or keyword volume."
             }
           ],
           "demandEvidence": [
@@ -601,7 +640,7 @@
         "target": "https://github.com/thc1006/ai-prompting-guide — prepare, but do not publish, a neutral English and zh-TW project-knowledge-layer reference only if the website family is approved for publication",
         "status": "verified-candidate"
       },
-      "nextResearchDirection": "Published through PR #136 and production-verified on 2026-08-23. Preserve independent English, zh-TW, and zh-CN GSC page and joined-query readouts; do not rewrite from deployment completion or missing rows.",
+      "nextResearchDirection": "Published through PR #136 and production-verified on 2026-08-23. The 2026-08-29 trilingual ADR/RFC pass confirms real decision-history demand but fails the clean-gap gate for a new URL because this owner already covers repository truth, architecture decisions, cited Pages, and verification. Preserve independent English, zh-TW, and zh-CN GSC page and joined-query readouts; only consider a bounded ADR/RFC section after a confirmed post-deploy crawl, 20 target-page impressions, 3 qualified joined-query impressions, and the 28-complete-day cooldown all pass.",
       "readout": {
         "gsc": {
           "status": "unavailable",

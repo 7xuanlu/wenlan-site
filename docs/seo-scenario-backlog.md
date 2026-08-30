@@ -121,21 +121,22 @@ Demand discovery:
 - Publication: `measuring`
 - Standalone utility: The page can show any coding-agent user how to keep source-of-truth files authoritative, retrieve only needed context, and validate cited conclusions.
 - Overlap check: The existing Codex workflow answers session context, capture, recall, and handoff. The existing source-backed page answers generic knowledge architecture and maintenance. The new owner answers a different integration decision: what belongs in AGENTS.md or CLAUDE.md, what remains repository truth, what becomes on-demand cited knowledge, and how a coding agent verifies it. Keep Codex, Claude Code, and coding-agent query variants on this one owner unless joined GSC evidence proves distinct tasks.
-- Next research: Published through PR #136 and production-verified on 2026-08-23. Preserve independent English, zh-TW, and zh-CN GSC page and joined-query readouts; do not rewrite from deployment completion or missing rows.
+- Next research: Published through PR #136 and production-verified on 2026-08-23. The 2026-08-29 trilingual ADR/RFC pass confirms real decision-history demand but fails the clean-gap gate for a new URL because this owner already covers repository truth, architecture decisions, cited Pages, and verification. Preserve independent English, zh-TW, and zh-CN GSC page and joined-query readouts; only consider a bounded ADR/RFC section after a confirmed post-deploy crawl, 20 target-page impressions, 3 qualified joined-query impressions, and the 28-complete-day cooldown all pass.
 
 ### Locale intent and ownership
 
 | Locale | Query family | Coverage | Existing owner | Research needed |
 | --- | --- | --- | --- | --- |
-| en | Codex source backed project knowledge base; coding agent knowledge base workflow; AGENTS.md knowledge base | gap | none | Measure the new task-specific owner separately from the existing session-memory Codex workflow and generic source-backed architecture owner; do not split Codex and Claude Code variants unless future query-page evidence shows different tasks. |
-| zh-TW | Codex 有來源的專案知識庫; coding agent 專案知識庫; AGENTS.md 知識庫 | gap | none | Track whether Taiwan users search the task through Codex, Claude Code, AGENTS.md, 專案知識, or 知識庫; keep all phrases on the same owner until GSC proves a separate task. |
-| zh-CN | 给 Codex 做外挂知识库; code agent 项目知识库; AGENTS.md 知识库 | gap | none | Measure 给 Codex 做外挂知识库, code agent 知识库, AGENTS.md, and 项目知识 wording on one owner; do not split query variants without joined GSC evidence. |
+| en | Codex source backed project knowledge base; coding agent knowledge base workflow; AGENTS.md knowledge base; ADR RFC design doc decision history; why was this architecture decision made | gap | none | Measure the new task-specific owner separately from the existing session-memory Codex workflow and generic source-backed architecture owner; do not split Codex and Claude Code variants unless future query-page evidence shows different tasks. |
+| zh-TW | Codex 有來源的專案知識庫; coding agent 專案知識庫; AGENTS.md 知識庫; 架構決策紀錄 ADR 找回當初為什麼這樣設計; RFC 技術設計文件 決策脈絡 | gap | none | Track whether Taiwan users search the task through Codex, Claude Code, AGENTS.md, 專案知識, or 知識庫; keep all phrases on the same owner until GSC proves a separate task. |
+| zh-CN | 给 Codex 做外挂知识库; code agent 项目知识库; AGENTS.md 知识库; 架构决策记录 ADR 找回当初为什么这样设计; RFC 技术方案 决策上下文 | gap | none | Measure 给 Codex 做外挂知识库, code agent 知识库, AGENTS.md, and 项目知识 wording on one owner; do not split query variants without joined GSC evidence. |
 
 #### en evidence
 
 SERP:
 - web-search-result: [Codex source backed knowledge base coding agent workflow citations](https://openai.com/index/harness-engineering/) — 1 returned result returned result observation; en/web-search geography unspecified; captured 2026-08-23. OpenAI describes a structured docs directory as the system of record and warns that a giant instruction file crowds out task context; this is discovery evidence, not Google rank.
 - web-search-result: [Codex source backed project knowledge base](https://www.reddit.com/r/codex/comments/1uuoo59/how_do_you_persist_knowledge_for_your_ai_agents/) — 1 returned result returned result observation; en/web-search geography unspecified; captured 2026-08-23. The result asks how coding agents should persist verified, source-backed domain knowledge and whether humans approve writes; no rank or engagement is claimed.
+- Exa demand-discovery result: [ADR RFC design doc decision history for coding agents](https://adr.github.io/) — 1 page maintained documentation page; en/Exa result geography unavailable; captured 2026-08-29. Maintained ADR guidance repeats rationale, alternatives, consequences, status, and supersession. It supports a refresh angle on this owner, not a new URL, Google rank, or keyword volume.
 
 Demand discovery:
 - Reddit discussion: [local cited evidence layer for Codex](https://www.reddit.com/r/ChatGPT/comments/1vaazvb/i_built_a_local_cited_evidence_layer_for_codex_to/) — 1 discussion inspectable discussion; en/community geography unavailable; captured 2026-08-23. The author describes a persistent repository evidence layer that Codex can search and cite; engagement is not claimed.
@@ -146,6 +147,7 @@ Demand discovery:
 SERP:
 - web-search-result: [Claude Code Codex 專案 知識庫 工作流](https://yazelin.github.io/ai/2026/07/09/kb-driven-dev-flow.html) — 1 returned result returned result observation; zh-TW/web-search geography unspecified; captured 2026-08-23. The result leads with Claude Code reading a versioned knowledge-base specification, writing a report back, and keeping the knowledge base as the single source of truth; this is not a Google rank claim.
 - web-search-result: [AGENTS.md Codex 專案知識 context](https://signals.tw/articles/what-is-agents-md/) — 1 returned result returned result observation; zh-TW/web-search geography unspecified; captured 2026-08-23. The result distinguishes short agent instructions from detailed API or frequently changing project knowledge and names Codex, Claude Code, and context-window limits.
+- Exa demand-discovery result: [架構決策紀錄 ADR 找回當初為什麼這樣設計](https://learn.microsoft.com/zh-tw/azure/well-architected/architect-role/architecture-decision-record) — 1 page official documentation page; zh-TW/Taiwan Traditional Chinese documentation; captured 2026-08-29. The localized guidance repeats decision context, rationale, append-only history, supersession, and shared source-of-truth language. It supports a refresh angle on this owner, not a new URL or rank claim.
 
 Demand discovery:
 - Taiwan practitioner article: [知識驅動開發 Claude Code](https://yazelin.github.io/ai/2026/07/09/kb-driven-dev-flow.html) — 1 article inspectable article; zh-TW/Taiwan; captured 2026-08-23. The workflow uses Markdown, a CLI, explicit read/write permissions, and a human-triggered agent loop; it states that the pattern is product-neutral.
@@ -158,6 +160,7 @@ Demand discovery:
 SERP:
 - web-search-result: [code agent 提供 知识库 AGENTS.md](https://www.v2ex.com/t/1221777) — 1 returned result returned result observation; zh-CN/web-search geography unspecified; captured 2026-08-23. The result leads with repeated agent mistakes, overloaded AGENTS.md, and a direct request for a code-agent knowledge base; this is not a Google rank claim.
 - web-search-result: [Codex Obsidian 自生长知识库 LLM Wiki](https://juejin.cn/post/7671867883983896618) — 1 returned result returned result observation; zh-CN/web-search geography unspecified; captured 2026-08-23. The result uses Codex, Obsidian, LLM Wiki, source traceability, and Git history in one implementation workflow.
+- Exa demand-discovery result: [架构决策记录 ADR 找回当初为什么这样设计](https://docs.aws.amazon.com/zh_cn/prescriptive-guidance/latest/architectural-decision-records/adr-process.html) — 1 page official documentation page; zh-CN/Simplified Chinese documentation; captured 2026-08-29. The localized process repeats rationale, ownership, review, lifecycle, and supersession. It supports a refresh angle on this owner, not a new URL, Google rank, or keyword volume.
 
 Demand discovery:
 - V2EX discussion: [给 Codex 做外挂知识库](https://www.v2ex.com/t/1223201) — 1 discussion inspectable discussion; zh-CN/Chinese developer community; captured 2026-08-22. A concrete handover problem connects code, external documents, historical decisions, and human knowledge; no engagement total is claimed.
