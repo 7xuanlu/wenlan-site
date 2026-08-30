@@ -3605,7 +3605,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.17.4 line.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.17.5 line.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3739,7 +3739,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Open the app source",
-          href: "https://github.com/7xuanlu/wenlan/tree/v0.17.4/app",
+          href: "https://github.com/7xuanlu/wenlan/tree/v0.17.5/app",
         },
       },
       {
@@ -3783,36 +3783,46 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.17.4",
+      "Wenlan version 0.17.5",
       "wenlan-mcp release notes",
     ],
     updatedAt: "2026-08-30",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Quick answer: the current stable release in the repository changelog is v0.17.4, dated 2026-08-30.",
+      "Quick answer: the current stable release in the repository changelog is v0.17.5, dated 2026-08-30.",
       "The unified release publishes native runtime archives plus macOS Apple Silicon and Windows x64 desktop builds and updater artifacts.",
     ],
     sections: [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.17.4 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It keeps the Windows x64 desktop build and native headless runtime archives, notarizes the macOS Apple Silicon DMG, and tightens app, security, and source-opening behavior.",
+          "Wenlan v0.17.5 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It keeps the Windows x64 desktop build and native headless runtime archives, carries the notarized macOS Apple Silicon DMG, and stops the Remote Access secret from being written to the app log.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
+        ],
+      },
+      {
+        heading: "v0.17.5 highlights",
+        body: [
+          "The v0.17.5 patch release keeps the v0.17.4 desktop and runtime improvements and hardens Remote Access by stopping its secret from being written to the app log.",
+        ],
+        bullets: [
+          "Remote Access no longer writes its secret into the app log.",
+          "The v0.17.4 desktop and runtime improvements remain part of the current release line: notarized macOS Apple Silicon DMG, source-opening citations, signed cloudflared updates, and the open and relay security fixes.",
+          "The v0.17 line still includes verified exact-release installation, source-revision write fences, and the Atlas knowledge view.",
+          "Stable release date: 2026-08-30.",
         ],
       },
       {
         heading: "v0.17.4 highlights",
         body: [
-          "The v0.17.4 release notarizes the macOS DMG, makes document citations open their backing file, prevents cloudflared from replacing its signed binary, and closes the remaining open and relay security findings.",
+          "The v0.17.4 release notarized the macOS DMG, made document citations open their backing file, prevented cloudflared from replacing its signed binary, and closed the remaining open and relay security findings.",
         ],
         bullets: [
-          "The macOS Apple Silicon DMG is notarized so first launch no longer requires the preview quarantine workaround.",
+          "The macOS Apple Silicon DMG was notarized so first launch no longer requires the preview quarantine workaround.",
           "Document citations can show and open the file path behind the cited source.",
           "The app keeps the signed cloudflared binary from replacing itself during updates.",
-          "Open and relay paths close the three remaining security-audit findings, and five transitive npm packages move past their advisories.",
-          "The v0.17 line still includes verified exact-release installation, source-revision write fences, and the Atlas knowledge view.",
-          "Stable release date: 2026-08-30.",
+          "Open and relay paths closed the three remaining security-audit findings, and five transitive npm packages moved past their advisories.",
         ],
       },
       {
@@ -3911,7 +3921,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.17.4, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.17.5, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },
