@@ -1054,10 +1054,10 @@ Demand discovery:
 - Stage: `maintain`
 - Decision: `net-new`
 - Planned window: `next-eligible-window-after-2026-08-29`
-- Publication: `prepared`
+- Publication: `measuring`
 - Standalone utility: A neutral SRE runbook workflow can define one service and environment, register current runbooks and postmortems, separate observations from hypotheses and mitigations, record risk and abort conditions, mark stale guidance, and test the result in an approved exercise.
 - Overlap check: Do not duplicate generic document ingestion, coding-agent knowledge, retrieval regression, citation verification, or multi-agent conflict owners. This page owns post-incident operational knowledge from runbooks and postmortems through source revision, stale review, safety boundaries, and reproducible testing. It explicitly excludes monitoring, alerting, live telemetry, automatic RCA, incident management, automatic remediation, command execution, approvals, and emergency access.
-- Next research: Finish the local three-locale implementation, product-evidence contract, deterministic checks, and desktop plus exact 393px rendering. Google Trends returned no inspectable series in this pass, so no relative index or keyword volume is claimed. Stop before commit, push, PR, merge, deployment, indexing request, GSC validation, analytics mutation, source-repository change, or external publication.
+- Next research: Keep the three published locale owners stable from the fixed 2026-08-30T05:06:25Z production boundary. Record the 24-hour technical and indexability observation after 2026-08-31T05:06:25Z and the seven-day source-native GSC page/query and Vercel page/referrer observation after 2026-09-06T05:06:25Z. Judge each locale only after a confirmed post-deploy crawl and the original 28-day exposure contract. Do not request indexing, submit GSC validation, mutate analytics, change the source repository, message maintainers, buy traffic, generate synthetic events, or publish externally without separate approval.
 
 ### Locale intent and ownership
 
