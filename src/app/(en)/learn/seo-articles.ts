@@ -3563,6 +3563,160 @@ const sreIncidentKnowledgeBaseArticle: BaseSpec = {
 
 workflowArticles.push(sreIncidentKnowledgeBaseArticle);
 
+const competitiveIntelligenceKnowledgeBaseArticle: BaseSpec = {
+  slug: "build-competitive-intelligence-knowledge-base",
+  eyebrow: "Competitive intelligence workflow",
+  category: "Workflows",
+  title: "How to Build a Source-Backed Competitive Intelligence Knowledge Base",
+  description:
+    "Keep competitor research current with a bounded source register, dated evidence, explicit uncertainty, and reviewable knowledge-base Pages.",
+  metaTitle: "Build a Source-Backed Competitive Intelligence Knowledge Base | Wenlan",
+  metaDescription:
+    "Organize competitor research from permitted documents with source dates, revisions, stale claims, contradictions, and a human review loop.",
+  keywords: [
+    "competitive intelligence knowledge base",
+    "competitor research knowledge base",
+    "how to organize competitor research",
+    "source-backed competitor research",
+    "competitive intelligence workflow",
+    "competitor information update",
+    "AI knowledge base for product research",
+  ],
+  publishedAt: "2026-08-30",
+  updatedAt: "2026-08-30",
+  readingTime: "9 min read",
+  audience:
+    "Product marketing managers, founders, and product, strategy, or market researchers maintaining competitor evidence",
+  heroBullets: [
+    "Start with one decision and a bounded set of competitors instead of an unreviewed market archive.",
+    "Register each source with its date, revision, scope, and next review so stale claims stay visible.",
+    "Separate observations, inferences, assumptions, and unknowns before a battlecard or product decision uses them.",
+  ],
+  quickAnswer:
+    "Build one competitor dossier for one decision, review question, or product area. Register user-collected and permitted product docs, manuals, release notes, and research notes with source, date, revision, scope, and review owner. Then maintain a source-backed Page that separates observations from inferences, preserves contradictions, and marks stale claims before anyone uses the dossier.",
+  wenlanFit:
+    "Wenlan can connect supported Markdown, text, text-extractable PDFs, folders, and read-only Obsidian sources to source-backed Pages, citations, revisions, stale state, lint, and human review. It does not crawl competitor sites, scrape reviews, monitor live pricing, discover competitors, send alerts, score vendors, make recommendations, or decide legal or commercial strategy.",
+  problem:
+    "A competitor spreadsheet or battlecard goes stale when product pages, documentation, releases, and positioning change but nobody can tell which claim came from which revision. A polished AI summary can hide that gap. A useful competitive intelligence knowledge base keeps a small, inspectable evidence chain so a researcher can tell what was observed, what was inferred, what is unknown, and what needs another check.",
+  actionHeading: "Build one competitor dossier that can be reviewed",
+  actionIntro:
+    "Use one decision and a small source boundary first. The workflow remains useful without Wenlan because the source register and claim classifications are the durable practice.",
+  actionBullets: [
+    "Name the decision, review question, competitors, date range, source types, and excluded material. Do not ask an assistant to discover an unrestricted market corpus.",
+    "Collect only permitted, user-provided sources such as product documentation, user manuals, release notes, dated research notes, or a read-only Obsidian vault. Keep credentials, private customer data, and restricted material outside the boundary.",
+    "Record each source URL or file, publication or access date, version or revision, competitor, scope, authority, allowed use, and next review date.",
+    "Classify every important statement as observation, inference, assumption, contradiction, or unknown. Preserve the exact passage and do not turn an inference into a competitor fact.",
+    "Compare one product question or module at a time across the same source class. Record missing evidence instead of filling a row with generic market language.",
+    "When a release or source changes, resync the affected source and mark dependent claims stale or contradicted until a reviewer checks the new revision.",
+    "Before using a battlecard, positioning update, or product decision, open the source, check its scope and date, and leave the unresolved questions visible.",
+  ],
+  code: {
+    label: "A bounded competitor-evidence workflow",
+    code: "wenlan status\nwenlan sources add ~/Research/competitors\n# In a Wenlan plugin client:\n/distill <competitor research question>\n/pages <competitor topic>\n/lint\n/curate",
+  },
+  caution:
+    "This is not automated market intelligence. Wenlan does not crawl or scrape competitor sites, monitor live websites or pricing, ingest reviews, discover competitors, run alerts, score products, generate recommendations, or make legal or commercial decisions. It only organizes supported sources you are allowed to use; verify public facts, permissions, dates, and strategic conclusions with the responsible human reviewer.",
+  productEvidence: {
+    heading: "Inspect the evidence and review state before using a dossier",
+    summary:
+      "This genuine Wenlan desktop capture comes from the app's deterministic test fixture, not a competitor workspace or customer data. It shows maintained Pages with source counts and a review queue, the product surfaces used to keep source changes and unresolved evidence visible.",
+    image: {
+      src: "/images/product-evidence/wenlan-space-review-fixture.png",
+      alt: "Wenlan desktop Space showing maintained Pages with source counts and a review queue for source conflicts and newly available evidence.",
+      caption:
+        "Genuine Wenlan app capture from a deterministic test fixture. It is a general product example, not competitor research evidence; source counts and review state remain directly inspectable.",
+      width: 1586,
+      height: 992,
+    },
+    workflow: [
+      {
+        label: "Bound the research question",
+        detail:
+          "Choose one decision, product question, competitor set, time range, and permitted source boundary instead of importing an unrestricted market archive.",
+      },
+      {
+        label: "Distill a source-backed dossier",
+        detail:
+          "Keep observations, inferences, contradictions, stale claims, and unknowns connected to dated source revisions in a maintained Page.",
+      },
+      {
+        label: "Review before reuse",
+        detail:
+          "Open the cited passage, confirm its scope and revision, and leave unresolved evidence visible before a battlecard or product decision uses it.",
+      },
+    ],
+    artifactHeading: "Worked competitor evidence packet",
+    artifactNote:
+      "This is a product-neutral structure, not a claim about any competitor. Replace every row with permitted, dated evidence from the decision you are reviewing.",
+    artifactRows: [
+      {
+        label: "Evidence input",
+        detail:
+          "A product document, manual, release note, or dated research note with source location, revision, scope, and allowed-use status.",
+      },
+      {
+        label: "Claim classification",
+        detail:
+          "An observation, inference, assumption, contradiction, or unknown linked to the exact passage rather than a polished summary alone.",
+      },
+      {
+        label: "Review result",
+        detail:
+          "Current, stale, contradicted, or unresolved, with reviewer, next check, and the decision context recorded before reuse.",
+      },
+    ],
+    action: {
+      label: "See the evidence review workflow",
+      href: "#product-evidence",
+    },
+  },
+  faq: [
+    "Can Wenlan monitor competitors or track live pricing?",
+    "No. Wenlan does not crawl or scrape competitor sites, monitor live pricing or reviews, discover competitors, or send alerts. Add only supported sources you are permitted to use, then review their dates and scope yourself.",
+    "Should an AI agent automatically write the final competitor recommendation?",
+    "No. Wenlan can organize source-backed observations and surface stale or conflicting claims, but a responsible human must interpret the evidence and make product, positioning, legal, or commercial decisions.",
+  ],
+  relatedSlugs: [
+    "source-backed-research-knowledge-base",
+    "verify-ai-knowledge-base-citations",
+    "build-local-ai-knowledge-base-from-documents",
+    "test-ai-knowledge-base-retrieval-after-changes",
+    "build-product-research-knowledge-base-for-prd",
+  ],
+  officialReferences: [
+    {
+      label: "Wenlan supported document sources",
+      href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+    },
+    {
+      label: "Wenlan source-backed Pages",
+      href: "https://wenlan.app/docs/source-backed-pages",
+    },
+    {
+      label: "Wenlan review and trust",
+      href: "https://wenlan.app/docs/review-and-trust",
+    },
+    {
+      label: "How to Build a Competitive Intelligence Program",
+      href: "https://www.aqute.com/blog/build-competitive-intelligence-program",
+    },
+    {
+      label: "Competitive intelligence source guidance (Taiwan Marketing Research)",
+      href: "https://tmrmds.co/article-business/21696/",
+    },
+    {
+      label: "竞品调研 workflow case (人人都是产品经理)",
+      href: "https://www.woshipm.com/pd/6395378.html",
+    },
+  ],
+  cta: {
+    heading: "Make one competitor decision traceable",
+    body: "Choose a bounded question, connect permitted sources, and review every consequential claim before it reaches a battlecard or product decision.",
+  },
+};
+
+workflowArticles.push(competitiveIntelligenceKnowledgeBaseArticle);
+
 const productResearchArticle: LearnArticle = {
   slug: "build-product-research-knowledge-base-for-prd",
   eyebrow: "Product research workflow",

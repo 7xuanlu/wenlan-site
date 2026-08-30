@@ -542,6 +542,7 @@ test("localized Learn slug route supports per-locale acquisition page availabili
     "/learn/build-investment-research-knowledge-base",
     "/learn/build-product-research-knowledge-base-for-prd",
     "/learn/build-sre-incident-knowledge-base",
+    "/learn/build-competitive-intelligence-knowledge-base",
   ]);
   assert.match(source, /getLocalizedLearnArticle/);
   assert.match(source, /TRANSLATED_LEARN_SLUGS/);
@@ -909,6 +910,14 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
     {
       locale: "zh-CN",
       slug: "build-sre-incident-knowledge-base",
+    },
+    {
+      locale: "zh-TW",
+      slug: "build-competitive-intelligence-knowledge-base",
+    },
+    {
+      locale: "zh-CN",
+      slug: "build-competitive-intelligence-knowledge-base",
     },
   ]);
 
@@ -1967,7 +1976,7 @@ test("localized acquisition copy keeps CJK semantic phrases together on mobile",
   assert.equal(protectedHeadings.length, 2);
   assert.match(
     source,
-    /split\(\/\(Karpathy LLM Wiki：\|SRE 事故知識庫\|SRE 故障知识库\|與事故復盤\|与故障复盘\|事故復盤\|故障复盘\|客戶專案知識庫\|客户项目知识库\|顧問案\|咨询项目\|研究知識庫\|研究知识库\|產品研究\|产品研究\|產品決策\|产品决策\|論文 PDF\|论文 PDF\|文獻矩陣\|文献矩阵\|AI 知識庫\|AI 知识库\|知識庫\|知识库\|驗收資料\|验收资料\|8 項\|8 项\|來源\|来源\|記什麼？\|记录什么？\)\/g\)/,
+    /split\(\/\(Karpathy LLM Wiki：\|SRE 事故知識庫\|SRE 故障知识库\|與事故復盤\|与故障复盘\|事故復盤\|故障复盘\|客戶專案知識庫\|客户项目知识库\|競品檔案\|竞品档案\|顧問案\|咨询项目\|研究知識庫\|研究知识库\|產品研究\|产品研究\|產品決策\|产品决策\|論文 PDF\|论文 PDF\|文獻矩陣\|文献矩阵\|AI 知識庫\|AI 知识库\|知識庫\|知识库\|驗收資料\|验收资料\|證據\|证据\|追溯\|8 項\|8 项\|來源\|来源\|記什麼？\|记录什么？\)\/g\)/,
   );
   assert.match(
     source,
@@ -2899,4 +2908,59 @@ test("protected token guard rejects translated product names", async () => {
       ),
     /zh-TW\.home.*seo\.title.*Wenlan/s,
   );
+});
+
+test("competitive intelligence knowledge-base article owns one trilingual scenario", async () => {
+  const [{ articles }, { getLocalizedLearnArticle }] = await Promise.all([
+    import("../src/app/(en)/learn/articles.ts"),
+    import("../src/i18n/learn-articles.ts"),
+  ]);
+  const slug = "build-competitive-intelligence-knowledge-base";
+  const english = articles.find((article) => article.slug === slug);
+
+  assert.ok(english, "English competitive-intelligence article");
+  assert.equal(english.title, "How to Build a Source-Backed Competitive Intelligence Knowledge Base");
+  assert.equal(english.publishedAt, "2026-08-30");
+  assert.equal(english.updatedAt, "2026-08-30");
+  assert.match(JSON.stringify(english), /source|date|revision|stale|contradict|observation|inference/i);
+  assert.match(JSON.stringify(english), /does not crawl|does not monitor|scrap|automatic scoring|recommend/i);
+  assert.ok(english.productEvidence, "English product evidence");
+  assert.equal(
+    english.productEvidence.image.src,
+    "/images/product-evidence/wenlan-space-review-fixture.png",
+  );
+  assert.match(english.sections.map((section) => section.code?.code ?? "").join("\n"), /wenlan status/);
+  assert.ok(english.relatedSlugs.length >= 3);
+
+  for (const [locale, titlePattern] of [
+    ["zh-TW", /如何建立有來源依據的競品研究知識庫/],
+    ["zh-CN", /如何建立有来源依据的竞品调研知识库/],
+  ]) {
+    const article = getLocalizedLearnArticle(locale, slug);
+    assert.ok(article, `${locale} competitive-intelligence article`);
+    assert.match(article.title, titlePattern);
+    assert.equal(article.publishedAt, "2026-08-30");
+    assert.equal(article.updatedAt, "2026-08-30");
+    assert.match(JSON.stringify(article), /来源|來源|source|日期|日期|修订|修訂|过期|過期/i);
+    assert.match(JSON.stringify(article), /不会爬取|不會爬取|不会监控|不會監控|scrap|自动评分|自動評分/i);
+    assert.ok(article.productEvidence, `${locale} product evidence`);
+    assert.equal(
+      article.productEvidence.image.src,
+      "/images/product-evidence/wenlan-space-review-fixture.png",
+    );
+    assert.ok(article.relatedSlugs.length >= 3);
+  }
+
+  const renderer = await readFile(
+    resolve(repoRoot, "src/app/[locale]/learn/[slug]/page.tsx"),
+    "utf8",
+  );
+  assert.match(renderer, /article\.slug === "build-competitive-intelligence-knowledge-base"/);
+  for (const protectedTerm of ["競品檔案", "竞品档案", "證據", "证据", "追溯"]) {
+    assert.match(
+      renderer,
+      new RegExp(`part === "${protectedTerm}"`),
+      `protected CJK phrase: ${protectedTerm}`,
+    );
+  }
 });
