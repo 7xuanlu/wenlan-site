@@ -48,7 +48,7 @@ test("competitive-intelligence family preserves one trilingual source-backed com
   assert.match(family.userTask, /competitive intelligence knowledge base|competitor research/i);
   assert.match(family.desiredOutcome, /traceable|current|contradiction|stale/i);
   assert.equal(family.decision, "net-new");
-  assert.equal(family.publicationStatus, "prepared");
+  assert.equal(family.publicationStatus, "measuring");
   assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
   assert.ok(
     Object.values(family.gates).every((gate) => gate.status === "passed"),

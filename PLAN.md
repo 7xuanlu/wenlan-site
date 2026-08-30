@@ -677,10 +677,11 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-30-competitive-intelligence-knowledge-base-locales` is locally
-  prepared and occupies the single production slot while deterministic and
-  visual verification is in progress. Publication remains separately
-  approval-gated.
+  `EXP-2026-08-30-competitive-intelligence-knowledge-base-locales` is live,
+  production-verified, and measuring from the fixed
+  `2026-08-30T19:48:14Z` boundary. PR #158 merged as
+  `f68b16b82d1c6c28f816c4ab0cf5c164232fe3c1`; it no longer consumes the
+  production slot.
   The product-research-to-PRD family is live, production-verified, and
   measuring without consuming the production slot.
   PR #152 merged at `2026-08-29T06:43:59Z` as
@@ -1298,8 +1299,9 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-30-competitive-intelligence-knowledge-base-locales` is the one
-locally prepared production candidate. It owns the task of maintaining a
+`EXP-2026-08-30-competitive-intelligence-knowledge-base-locales` is live,
+production-verified, and measuring from the fixed
+`2026-08-30T19:48:14Z` production boundary. It owns the task of maintaining a
 bounded competitor dossier from permitted, user-collected documents with
 source class, date, revision, observations, inferences, assumptions,
 contradictions, stale claims, and open questions. It does not claim competitor
@@ -1317,9 +1319,14 @@ BreadcrumbList schema, no horizontal overflow, no console warning or error, a
 loaded product-evidence image, and an expandable visible FAQ. Source-native DOM
 evidence confirmed one article, one product-evidence panel, and one instance of
 each H2; duplication in an earlier stitched full-page capture was a capture
-artifact rather than rendered DOM duplication. The candidate occupies the
-production slot and is ready only for a separately approved publication action;
-no external or indexing action is implied.
+artifact rather than rendered DOM duplication. PR #158 merged at
+`2026-08-30T19:47:24Z` as
+`f68b16b82d1c6c28f816c4ab0cf5c164232fe3c1`; Vercel reported production
+success at `2026-08-30T19:48:14Z`. All three live routes passed direct 200,
+exact canonical, reciprocal hreflang, Article and BreadcrumbList schema,
+desktop and exact 393px rendering, and the deployed technical audit. The
+production slot is open. This proves publication integrity only; no crawl,
+indexing, ranking, traffic, click, or causal result is inferred.
 
 The clean reconstruction found that the first exact 393px Mandarin render
 split `競品檔案` / `竞品档案`, `證據` / `证据`, and `追溯`.
@@ -3968,9 +3975,10 @@ unchanged.
   deterministic Wenlan product evidence, Article and BreadcrumbList schema,
   reciprocal hreflang, sitemap membership, visible FAQ without FAQPage, and
   exact `393px` plus desktop rendered verification.
-- Current status: publication approved at `2026-08-30T19:44:10Z`. The approval
-  covers the exact clean candidate's commit, Git push, pull request, merge,
-  automatic Vercel deployment, and read-only production verification.
+- Current status: live, production-verified, and measuring from
+  `2026-08-30T19:48:14Z`. PR #158 merged at `2026-08-30T19:47:24Z` as
+  `f68b16b82d1c6c28f816c4ab0cf5c164232fe3c1`, and Vercel completed the
+  automatic production deployment at `2026-08-30T19:48:14Z`.
   Request indexing, GSC validation, analytics mutation, paid action,
   maintainer messaging, the separately planned OSS contribution, synthetic
   events, and other external publication remain excluded.
@@ -4005,3 +4013,54 @@ unchanged.
   mutation, maintainer contact, the planned `ferdinandobons/startup-skill`
   authority proposal, paid action, synthetic events, or any other external
   publication.
+
+## Campaign publication: competitive intelligence knowledge base at 2026-08-30T19:48:14Z
+
+- PR #158 merged at `2026-08-30T19:47:24Z` as
+  `f68b16b82d1c6c28f816c4ab0cf5c164232fe3c1`; Vercel reported production
+  deployment success at `2026-08-30T19:48:14Z`.
+- The integrated commit passed the Goal, scenario, 50 Goal tests, 252 SEO
+  tests, 76 i18n tests, TypeScript, the 271-page production build, and the
+  156-owner built technical audit. The deployed audit passed robots, sitemap,
+  key pages, utility noindex surfaces, redirects, bridge-host redirects, and
+  sitemap-wide FAQPage absence.
+- English, zh-TW, and zh-CN production routes returned direct 200 with exact
+  self-canonicals, reciprocal hreflang, Article and BreadcrumbList schema,
+  visible bounded competitor-dossier answers, loaded product evidence, and a
+  visible FAQ without FAQPage schema. Exact `393x852` and `1280x900` checks
+  found no overflow, broken image, console warning or error, or protected CJK
+  phrase split.
+- Keep `2026-08-30T19:48:14Z` as the fixed production boundary. The 24-hour
+  technical and indexability observation is due after
+  `2026-08-31T19:48:14Z`; the seven-day source-native GSC page/query and
+  Vercel page/referrer observation is due after `2026-09-06T19:48:14Z`.
+- This is publication evidence only. No request indexing, GSC validation,
+  analytics mutation, OSS proposal, maintainer message, paid action, synthetic
+  event, or other external publication occurred.
+
+## Campaign research: RFP proposal-readiness authority path at 2026-08-30T23:40:14Z
+
+- The files-first RFP proposal-readiness task still passes demand, clean-gap,
+  trilingual wording, first-party proof, standalone utility, and internal-link
+  checks. It still fails the required authority-path gate.
+- Eight Exa workstreams returned 64 result slots, followed by full-page reads
+  and source-native GitHub checks for the most plausible candidates. The count
+  describes research coverage, not demand or keyword volume.
+- `ProjectManagement.com` exposes a legitimate editorial submission route,
+  but it rejects promotional material, product reviews, and software tutorials,
+  accepts only a small fraction of submissions, may take up to one month, and
+  requires original human experience plus AI-use disclosure. It can host a
+  future neutral practitioner article, but it is not a predeclared Wenlan link
+  path.
+- `patwalls/awesome-government-contracting` accepts neutral free resources but
+  is a one-star fork last pushed on `2026-06-16`, maintained by the vendor it
+  promotes, and has no demonstrated review reach. `The-RFP-Hub/the-rfp-hub`
+  uses RFP to mean Ethereum funding opportunities. The maintained PnP
+  SharePoint skills repository accepts native SharePoint skills, not unrelated
+  product links. The small `gener8v` RFP toolkit has no curated-resource or
+  documented external-reference slot. None is a clean authority fit.
+- Decision: keep the candidate in `research`; do not prepare or publish its
+  three locale pages. Move the next scenario search to another files-first task
+  rather than opening a promotional issue or pull request. The complete
+  source and rejection record is in
+  `docs/seo-audits/2026-08-30-rfp-proposal-readiness-demand-gate.md`.

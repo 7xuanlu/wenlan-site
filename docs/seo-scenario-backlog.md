@@ -1142,10 +1142,10 @@ Demand discovery:
 - Stage: `maintain`
 - Decision: `net-new`
 - Planned window: `next-eligible-window-after-2026-08-30`
-- Publication: `prepared`
+- Publication: `measuring`
 - Standalone utility: A neutral competitive-intelligence workflow can bound one decision and competitor set, register permitted source classes with dates and revisions, separate observations from inferences and assumptions, record contradictions and stale claims, and require a human review before a battlecard or product decision.
 - Overlap check: Do not duplicate generic research, product research before a PRD, consulting delivery, investment research, document ingestion, citation verification, or AI knowledge-base tool selection. This page owns the maintained competitor dossier. It explicitly excludes crawl or scrape behavior, live monitoring, current pricing or review collection, competitor discovery, alerts, automatic scoring or recommendation, and legal or commercial decisions.
-- Next research: Keep this family local until exact publication approval. After a fixed production boundary, record 24-hour technical and indexability evidence, then seven-day source-native GSC page/query and Vercel page/referrer observations. Judge each locale only after a confirmed post-deploy crawl and 28 complete days with at least 20 target-page impressions, 3 qualified joined-query impressions, and 1 GSC click. Do not request indexing, submit validation, mutate analytics, open an OSS issue or pull request, message maintainers, buy traffic, generate synthetic events, or publish externally without separate approval.
+- Next research: Keep the three published locale owners stable from the fixed 2026-08-30T19:48:14Z production boundary. Record the 24-hour technical and indexability observation after 2026-08-31T19:48:14Z and the seven-day source-native GSC page/query and Vercel page/referrer observation after 2026-09-06T19:48:14Z. Judge each locale only after a confirmed post-deploy crawl and 28 complete days with at least 20 target-page impressions, 3 qualified joined-query impressions, and 1 GSC click. Do not request indexing, submit validation, mutate analytics, open an OSS issue or pull request, message maintainers, buy traffic, generate synthetic events, or publish externally without separate approval.
 
 ### Locale intent and ownership
 
