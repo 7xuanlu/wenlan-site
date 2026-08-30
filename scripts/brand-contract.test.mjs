@@ -1115,9 +1115,12 @@ test("public current-release surfaces track the authoritative Wenlan release", a
   assert.match(simplifiedContent, new RegExp(`Wenlan v${escapedVersion} 提供`));
   assert.match(traditionalContent, new RegExp(`"版本 v${escapedVersion}"`));
   assert.match(traditionalContent, new RegExp(`Wenlan v${escapedVersion} 提供`));
-  assert.match(englishContent, /preview is not yet notarized/);
-  assert.match(traditionalContent, /預覽版尚未完成 notarization/);
-  assert.match(simplifiedContent, /预览版尚未完成 notarization/);
+  assert.match(englishContent, /Apple silicon DMG is notarized/);
+  assert.match(traditionalContent, /Apple silicon DMG 已完成 notarization/);
+  assert.match(simplifiedContent, /Apple silicon DMG 已完成 notarization/);
+  assert.doesNotMatch(englishContent, /preview is not yet notarized/);
+  assert.doesNotMatch(traditionalContent, /預覽版尚未完成 notarization/);
+  assert.doesNotMatch(simplifiedContent, /预览版尚未完成 notarization/);
   assert.match(aboutOg, new RegExp(`v${escapedVersion} · Apache-2\\.0`));
   assert.match(docs, new RegExp(`current stable ${escapedVersion}`));
   assert.match(docs, new RegExp(`Wenlan version ${escapedVersion}`));

@@ -1,21 +1,21 @@
 const WENLAN_RELEASE_DOWNLOAD_BASE =
-  "https://github.com/7xuanlu/wenlan/releases/download/v0.17.3";
+  "https://github.com/7xuanlu/wenlan/releases/download/v0.17.4";
 
 export const WENLAN_RELEASE = {
-  version: "0.17.3",
-  tag: "v0.17.3",
-  publishedAt: "2026-08-27",
-  releaseUrl: "https://github.com/7xuanlu/wenlan/releases/tag/v0.17.3",
+  version: "0.17.4",
+  tag: "v0.17.4",
+  publishedAt: "2026-08-30",
+  releaseUrl: "https://github.com/7xuanlu/wenlan/releases/tag/v0.17.4",
   setupGuideUrl:
-    "https://github.com/7xuanlu/wenlan/blob/v0.17.3/docs/setup-with-ai.md#install-the-runtime",
+    "https://github.com/7xuanlu/wenlan/blob/v0.17.4/docs/setup-with-ai.md#install-the-runtime",
   assets: [
     {
       id: "windows-desktop-x64",
-      href: `${WENLAN_RELEASE_DOWNLOAD_BASE}/Wenlan_0.17.3_x64-setup.exe`,
+      href: `${WENLAN_RELEASE_DOWNLOAD_BASE}/Wenlan_0.17.4_x64-setup.exe`,
       format: "EXE",
       size: "59.3 MiB",
       guideHref:
-        "https://github.com/7xuanlu/wenlan/blob/v0.17.3/README.md#desktop-app",
+        "https://github.com/7xuanlu/wenlan/blob/v0.17.4/README.md#desktop-app",
     },
     {
       id: "windows-x64",
@@ -25,17 +25,17 @@ export const WENLAN_RELEASE = {
     },
     {
       id: "macos-arm64",
-      href: `${WENLAN_RELEASE_DOWNLOAD_BASE}/Wenlan_0.17.3_aarch64.dmg`,
+      href: `${WENLAN_RELEASE_DOWNLOAD_BASE}/Wenlan_0.17.4_aarch64.dmg`,
       format: "DMG",
       size: "83.5 MiB",
       guideHref:
-        "https://github.com/7xuanlu/wenlan/blob/v0.17.3/README.md#desktop-app",
+        "https://github.com/7xuanlu/wenlan/blob/v0.17.4/README.md#desktop-app",
     },
     {
       id: "macos-runtime-arm64",
       href: `${WENLAN_RELEASE_DOWNLOAD_BASE}/wenlan-darwin-arm64.tar.gz`,
       format: "TAR.GZ",
-      size: "49.9 MiB",
+      size: "50.0 MiB",
     },
     {
       id: "linux-x64",
