@@ -1,6 +1,6 @@
 # Engineering ADR / RFC knowledge-base demand gate
 
-Captured: 2026-08-29  
+Captured: 2026-08-29
 Evidence role: demand discovery only; not GSC, keyword volume, or rank evidence.
 
 ## Decision
