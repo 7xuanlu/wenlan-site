@@ -61,9 +61,10 @@ const EXPECTED_FAMILY_IDS = [
   "consultant-client-project-knowledge-base",
   "source-backed-investment-research-knowledge-base",
   "product-research-to-prd-knowledge-base",
+  "sre-incident-runbook-knowledge-base",
 ];
 const APPROVED_SCENARIO_CONTRACT_SHA256 =
-  "a8778b78527eebb9af1f7d572076bd50c16cdfa92e3657d48b004a98adfe1740";
+  "757061314520fe0d7a16b0b198b8922ce146592cd65f57ec00bb1ff98766fcc1";
 const EXPECTED_WEEKLY_WINDOWS = [
   ["2026-08-24", "2026-08-30", "source-change-stale-pages"],
   ["2026-08-31", "2026-09-06", "coding-agent-source-backed-knowledge-base"],

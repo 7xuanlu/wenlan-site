@@ -522,6 +522,7 @@ const zhTWArticles = {
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
       "build-product-research-knowledge-base-for-prd",
+      "build-sre-incident-knowledge-base",
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
       "test-ai-knowledge-base-retrieval-after-changes",
@@ -986,6 +987,7 @@ const zhTWArticles = {
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
       "build-product-research-knowledge-base-for-prd",
+      "build-sre-incident-knowledge-base",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
     ],
@@ -1654,6 +1656,7 @@ const zhTWArticles = {
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
       "build-product-research-knowledge-base-for-prd",
+      "build-sre-incident-knowledge-base",
     ],
     officialReferences: [
       {
@@ -2209,6 +2212,165 @@ const zhTWArticles = {
     cta: {
       heading: "讓一個產品決策可追溯",
       body: "從核准的來源集合開始，把需求連到有日期的證據，並在 PRD 審查前保留矛盾與待解問題。",
+    },
+  },
+  "build-sre-incident-knowledge-base": {
+    slug: "build-sre-incident-knowledge-base",
+    eyebrow: "SRE 知識工作流",
+    category: "Workflows",
+    title: "建立 SRE 事故知識庫：整理 runbook 與事故復盤",
+    description:
+      "把 runbook、事故復盤與核准的事件筆記整理成有來源、可審查且不會默默過期的值班知識。",
+    metaTitle: "建立 SRE 事故知識庫與 runbook 工作流 | Wenlan",
+    metaDescription:
+      "用 runbook 與事故復盤建立有來源的 SRE 事故知識庫，保留修訂、驗證訊號、過期狀態與安全邊界。",
+    keywords: [
+      "SRE 事故知識庫",
+      "runbook 知識庫",
+      "事故復盤 知識沉澱",
+      "值班操作知識",
+      "SRE runbook 維護",
+      "事件後知識整理",
+    ],
+    publishedAt: "2026-08-29",
+    updatedAt: "2026-08-29",
+    author: "Qi-Xuan Lu",
+    readingTime: "9 分鐘閱讀",
+    audience: "維護 runbook、事故復盤與值班知識的 SRE、平台工程與 on-call 團隊",
+    heroBullets: [
+      "用一個服務、環境與事故類型固定來源邊界。",
+      "讓診斷步驟、緩解限制與驗證訊號回到目前 runbook 或事故復盤。",
+      "每次事故或系統變更後審查過期步驟，不讓舊建議默默留在值班流程。",
+    ],
+    productEvidence: {
+      heading: "信任 runbook 前，先檢查來源與審查狀態",
+      summary:
+        "這是 Wenlan App 確定性測試資料的真實桌面畫面，不是事故或客戶工作區。畫面顯示有來源數量的 Pages 與審查佇列；SRE 可以用相同介面讓來源變動與未解衝突保持可見。",
+      image: {
+        src: "/images/product-evidence/wenlan-space-review-fixture.png",
+        alt: "Wenlan 桌面 Space 畫面，顯示有來源數量的 Pages，以及來源衝突與新證據的審查佇列。",
+        caption:
+          "Wenlan App 確定性測試資料的真實畫面。這是一般產品範例，不是正式站事故證據；來源數量與審查狀態仍可直接檢查。",
+        width: 1586,
+        height: 992,
+      },
+      workflow: [
+        {
+          label: "固定事故知識邊界",
+          detail: "選定一個服務、環境、事故類型與核准來源，不匯入不受控的操作檔案庫。",
+        },
+        {
+          label: "整理可審查的 runbook Page",
+          detail: "保存症狀、證據、唯讀檢查、緩解限制、停止條件與驗證訊號，並連回目前來源。",
+        },
+        {
+          label: "事故或變更後再驗證",
+          detail: "檢查引用修訂、stale 狀態與未解衝突，再於核准的非生產環境演練。",
+        },
+      ],
+      artifactHeading: "事故知識封包範例",
+      artifactNote: "這是審查欄位的結構範例，請以一個服務與事故類型的核准證據取代每一列。",
+      artifactRows: [
+        {
+          label: "證據輸入",
+          detail: "目前 runbook、有日期的事故復盤、架構筆記或去識別事件摘要，並附負責人與修訂。",
+        },
+        {
+          label: "操作主張",
+          detail: "一個症狀、診斷步驟、緩解邊界或驗證訊號，連到確切支持段落。",
+        },
+        {
+          label: "審查結果",
+          detail: "目前有效、互相矛盾、已過期、不安全或仍未解，並記錄服務版本、環境、審查者與下次測試。",
+        },
+      ],
+      action: {
+        label: "查看事故證據工作流",
+        href: "#product-evidence",
+      },
+    },
+    sections: [
+      {
+        heading: "先回答：一個事故類型維護一份可重做的知識",
+        body: [
+          "每個服務或操作邊界建立一份事故知識庫。只加入核准的 runbook、事故復盤、架構筆記與去識別事件摘要；維護症狀、前置條件、唯讀診斷、緩解限制、停止條件、驗證訊號、負責人與審查日期。",
+          "Wenlan 能讓支援的文件連到有來源 Pages、引用、修訂、stale 狀態、lint 與人工審查。它不會監控正式環境、接收告警、匯入即時 telemetry、執行 runbook、核准變更或取代事故管理系統。",
+        ],
+      },
+      {
+        heading: "事故穩定後，再整理來源",
+        body: [
+          "從一個服務、環境與事故類型開始。把即時監控、原始 log、憑證、客戶資料與變更核准留在專用系統，只把經核准且可引用的文件加入來源邊界。",
+          "保存每份來源的日期、修訂、負責人與適用環境。把觀察事實、假設、緩解措施與確認原因分開，不要為了寫出順暢摘要而把多個 contributing factors 壓成一個原因。",
+        ],
+      },
+      {
+        heading: "建立事故到 runbook 的審查閉環",
+        body: [
+          "每次事故或系統變更後，只刷新受影響的知識，並讓負責人重新驗證步驟。",
+        ],
+        bullets: [
+          "記錄服務、環境、事故類型、來源修訂與知識負責人。",
+          "保存症狀、適用條件、唯讀檢查、風險、停止條件與驗證訊號。",
+          "來源或系統改變時，先把受影響內容標成 stale。",
+          "在 staging 或 tabletop 演練中測試步驟、連結、預期輸出與回復方式。",
+          "值班使用前打開確切來源；檢索到 runbook 不等於獲准執行正式變更。",
+        ],
+        code: {
+          label: "完成 Wenlan 與 AI 客戶端設定後",
+          code: "wenlan status\nwenlan sources add ~/Ops/approved-incident-knowledge\n/distill <服務與事故類型>\n/pages <服務事故 runbook>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "保留正式操作的安全邊界",
+        body: [
+          "監控、告警分派、telemetry、事故指揮、權限、變更核准、rollback 執行與緊急存取仍應留在專用系統。Wenlan 不會對正式環境驗證命令，也不能保證 runbook 安全。",
+          "操作前由具名負責人核對服務版本、環境、權限、風險、預期輸出、停止條件與 rollback。這份知識提供可檢查情境，不是自動執行授權。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 會監控事故或自動執行修復命令嗎？",
+        answer: "不會。Wenlan 不接收告警、不匯入即時 telemetry、不執行 runbook，也不取代監控與事故管理系統。",
+      },
+      {
+        question: "如何避免過期 runbook 誤導值班工程師？",
+        answer: "為每個 Page 保存來源修訂、服務與環境範圍、負責人、審查日期、預期訊號與停止條件。來源或系統改變後先標成 stale，直到核准演練重新驗證。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "source-backed-wiki-pages-ai-work",
+      "verify-ai-knowledge-base-citations",
+      "test-ai-knowledge-base-retrieval-after-changes",
+      "prevent-multi-agent-knowledge-conflicts",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 支援的文件來源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan 審查與信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+      {
+        label: "Microsoft Azure SRE Agent 知識文件教學",
+        href: "https://learn.microsoft.com/zh-tw/azure/sre-agent/tutorial-upload-knowledge-document",
+      },
+      {
+        label: "AWS 失敗調查 playbook 指南",
+        href: "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_testing_resiliency_playbook_resiliency.html",
+      },
+      {
+        label: "Operate First 事故與 postmortem 流程",
+        href: "https://github.com/operate-first/sre/blob/main/process/incident_management.md",
+      },
+    ],
+    cta: {
+      heading: "讓一個事故教訓能被重做",
+      body: "選定一個服務與事故類型，連接目前 runbook 與事故復盤，再於下一次值班前審查每個操作主張。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
@@ -2979,6 +3141,7 @@ const zhCNArticles = {
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
       "build-product-research-knowledge-base-for-prd",
+      "build-sre-incident-knowledge-base",
       "review-before-trust-ai-memory",
       "ai-memory-provenance",
       "test-ai-knowledge-base-retrieval-after-changes",
@@ -3445,6 +3608,7 @@ const zhCNArticles = {
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
       "build-product-research-knowledge-base-for-prd",
+      "build-sre-incident-knowledge-base",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
     ],
@@ -3841,6 +4005,7 @@ const zhCNArticles = {
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
       "build-product-research-knowledge-base-for-prd",
+      "build-sre-incident-knowledge-base",
     ],
     officialReferences: [
       {
@@ -4396,6 +4561,165 @@ const zhCNArticles = {
     cta: {
       heading: "让一个产品决策可追溯",
       body: "从批准的来源集合开始，把需求连接到有日期的证据，并在 PRD 评审前保留矛盾与待解问题。",
+    },
+  },
+  "build-sre-incident-knowledge-base": {
+    slug: "build-sre-incident-knowledge-base",
+    eyebrow: "SRE 知识工作流",
+    category: "Workflows",
+    title: "建立 SRE 故障知识库：整理 runbook 与故障复盘",
+    description:
+      "把 runbook、故障复盘与批准的事件笔记整理成有来源、可审核且不会悄悄过期的值班知识。",
+    metaTitle: "建立 SRE 故障知识库与 runbook 工作流 | Wenlan",
+    metaDescription:
+      "用 runbook 与故障复盘建立有来源的 SRE 故障知识库，保留修订、验证信号、过期状态与安全边界。",
+    keywords: [
+      "SRE 故障知识库",
+      "runbook 知识库",
+      "故障复盘 知识沉淀",
+      "值班运行手册",
+      "SRE runbook 维护",
+      "故障知识管理",
+    ],
+    publishedAt: "2026-08-29",
+    updatedAt: "2026-08-29",
+    author: "Qi-Xuan Lu",
+    readingTime: "9 分钟阅读",
+    audience: "维护 runbook、故障复盘与值班知识的 SRE、平台工程与 on-call 团队",
+    heroBullets: [
+      "用一个服务、环境与故障类型固定来源边界。",
+      "让诊断步骤、缓解限制与验证信号回到当前 runbook 或故障复盘。",
+      "每次故障或系统变更后审核过期步骤，不让旧建议悄悄留在值班流程。",
+    ],
+    productEvidence: {
+      heading: "信任 runbook 前，先检查来源与审核状态",
+      summary:
+        "这是 Wenlan App 确定性测试数据的真实桌面画面，不是故障或客户工作区。画面显示带来源数量的 Pages 与审核队列；SRE 可以用同一个界面让来源变化与未解决冲突保持可见。",
+      image: {
+        src: "/images/product-evidence/wenlan-space-review-fixture.png",
+        alt: "Wenlan 桌面 Space 画面，显示带来源数量的 Pages，以及来源冲突与新证据的审核队列。",
+        caption:
+          "Wenlan App 确定性测试数据的真实画面。这是通用产品示例，不是生产故障证据；来源数量与审核状态仍可直接检查。",
+        width: 1586,
+        height: 992,
+      },
+      workflow: [
+        {
+          label: "固定故障知识边界",
+          detail: "选定一个服务、环境、故障类型与批准来源，不导入不受控的运维资料库。",
+        },
+        {
+          label: "整理可审核的 runbook Page",
+          detail: "保存症状、证据、只读检查、缓解限制、停止条件与验证信号，并连接到当前来源。",
+        },
+        {
+          label: "故障或变更后再验证",
+          detail: "检查引用修订、stale 状态与未解决冲突，再在批准的非生产环境演练。",
+        },
+      ],
+      artifactHeading: "故障知识包示例",
+      artifactNote: "这是审核字段的结构示例，请用一个服务与故障类型的批准证据替换每一行。",
+      artifactRows: [
+        {
+          label: "证据输入",
+          detail: "当前 runbook、有日期的故障复盘、架构笔记或脱敏事件摘要，并附负责人和修订。",
+        },
+        {
+          label: "运维主张",
+          detail: "一个症状、诊断步骤、缓解边界或验证信号，连接到准确支持段落。",
+        },
+        {
+          label: "审核结果",
+          detail: "当前有效、互相矛盾、已经过期、不安全或仍未解决，并记录服务版本、环境、审核人和下次测试。",
+        },
+      ],
+      action: {
+        label: "查看故障证据工作流",
+        href: "#product-evidence",
+      },
+    },
+    sections: [
+      {
+        heading: "先回答：一个故障类型维护一份可复现的知识",
+        body: [
+          "每个服务或运维边界建立一份故障知识库。只加入批准的 runbook、故障复盘、架构笔记与脱敏事件摘要；维护症状、前置条件、只读诊断、缓解限制、停止条件、验证信号、负责人和审核日期。",
+          "Wenlan 能让支持的文档连接到有来源 Pages、引用、修订、stale 状态、lint 与人工审核。它不会监控生产环境、接收告警、导入实时 telemetry、执行 runbook、批准变更或替代故障管理系统。",
+        ],
+      },
+      {
+        heading: "故障稳定后，再整理来源",
+        body: [
+          "从一个服务、环境与故障类型开始。把实时监控、原始日志、凭证、客户数据与变更批准留在专用系统，只把经过批准且可以引用的文档加入来源边界。",
+          "保存每份来源的日期、修订、负责人和适用环境。把观察事实、假设、缓解措施与确认原因分开，不要为了写出顺畅摘要而把多个 contributing factors 压成一个原因。",
+        ],
+      },
+      {
+        heading: "建立故障到 runbook 的审核闭环",
+        body: [
+          "每次故障或系统变更后，只刷新受影响的知识，并让负责人重新验证步骤。",
+        ],
+        bullets: [
+          "记录服务、环境、故障类型、来源修订与知识负责人。",
+          "保存症状、适用条件、只读检查、风险、停止条件与验证信号。",
+          "来源或系统改变时，先把受影响内容标成 stale。",
+          "在 staging 或桌面演练中测试步骤、链接、预期输出与回退方式。",
+          "值班使用前打开准确来源；检索到 runbook 不等于获准执行生产变更。",
+        ],
+        code: {
+          label: "完成 Wenlan 与 AI 客户端设置后",
+          code: "wenlan status\nwenlan sources add ~/Ops/approved-incident-knowledge\n/distill <服务与故障类型>\n/pages <服务故障 runbook>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "保留生产操作的安全边界",
+        body: [
+          "监控、告警分派、telemetry、故障指挥、权限、变更批准、rollback 执行与紧急访问仍应留在专用系统。Wenlan 不会对生产环境验证命令，也不能保证 runbook 安全。",
+          "操作前由具名负责人核对服务版本、环境、权限、风险、预期输出、停止条件与 rollback。这份知识提供可检查上下文，不是自动执行授权。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 会监控故障或自动执行修复命令吗？",
+        answer: "不会。Wenlan 不接收告警、不导入实时 telemetry、不执行 runbook，也不替代监控与故障管理系统。",
+      },
+      {
+        question: "如何避免过期 runbook 误导值班工程师？",
+        answer: "为每个 Page 保存来源修订、服务与环境范围、负责人、审核日期、预期信号与停止条件。来源或系统改变后先标成 stale，直到批准演练重新验证。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "source-backed-wiki-pages-ai-work",
+      "verify-ai-knowledge-base-citations",
+      "test-ai-knowledge-base-retrieval-after-changes",
+      "prevent-multi-agent-knowledge-conflicts",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 支持的文档来源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan 审核与信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+      {
+        label: "Microsoft Azure SRE Agent 知识文档教程",
+        href: "https://learn.microsoft.com/zh-cn/azure/sre-agent/tutorial-upload-knowledge-document",
+      },
+      {
+        label: "AWS 失效调查 playbook 指南",
+        href: "https://docs.aws.amazon.com/zh_cn/wellarchitected/latest/reliability-pillar/rel_testing_resiliency_playbook_resiliency.html",
+      },
+      {
+        label: "SRE 实践白皮书故障复盘流程",
+        href: "https://docs.sre-elite.com/SRE-White-Paper-v1.0.5.pdf",
+      },
+    ],
+    cta: {
+      heading: "让一个故障教训能够复现",
+      body: "选定一个服务与故障类型，连接当前 runbook 与故障复盘，再在下一次值班前审核每个运维主张。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;

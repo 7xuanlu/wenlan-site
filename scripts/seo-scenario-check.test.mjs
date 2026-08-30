@@ -26,13 +26,13 @@ test("canonical trilingual scenario backlog is complete and generated report is 
   });
 
   assert.deepEqual(result.errors, []);
-  assert.equal(backlog.families.length, 12);
+  assert.equal(backlog.families.length, 13);
   assert.equal(
     backlog.families.at(-1)?.id,
-    "product-research-to-prd-knowledge-base",
+    "sre-incident-runbook-knowledge-base",
   );
   assert.equal(backlog.campaign.baseline.sitemapUrls, 120);
-  assert.equal(sitemapRows.length, 150);
+  assert.equal(sitemapRows.length, 153);
   assert.equal(result.sitemapCount, sitemapRows.length);
   assert.equal(renderScenarioBacklog(backlog), report);
 });
@@ -80,7 +80,7 @@ test("investment-research family preserves one trilingual filing-to-thesis task"
   assert.match(family.userTask, /investment research knowledge base/i);
   assert.match(family.desiredOutcome, /traceable|current|thesis/i);
   assert.equal(family.decision, "net-new");
-  assert.equal(family.publicationStatus, "prepared");
+  assert.equal(family.publicationStatus, "measuring");
   assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
   assert.ok(
     Object.values(family.gates).every((gate) => gate.status === "passed"),
@@ -100,7 +100,7 @@ test("consultant client-project family preserves its approved trilingual task co
   assert.match(family.userTask, /client-project knowledge base/i);
   assert.match(family.desiredOutcome, /traceable|current/i);
   assert.equal(family.decision, "net-new");
-  assert.equal(family.publicationStatus, "prepared");
+  assert.equal(family.publicationStatus, "measuring");
   assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
   assert.ok(
     Object.values(family.gates).every((gate) => gate.status === "passed"),
@@ -109,6 +109,30 @@ test("consultant client-project family preserves its approved trilingual task co
   assert.equal(family.internalLinks.length, 9);
   assert.equal(family.readout.gsc.status, "unavailable");
   assert.equal(family.readout.vercel.status, "unavailable");
+});
+
+test("SRE incident family preserves one trilingual runbook-maintenance task", () => {
+  const family = backlog.families.find(
+    (candidate) => candidate.id === "sre-incident-runbook-knowledge-base",
+  );
+
+  assert.ok(family, "SRE incident scenario family");
+  assert.match(family.audience, /SRE|on-call|platform/i);
+  assert.match(family.trigger, /incident|runbook|postmortem/i);
+  assert.match(family.userTask, /incident knowledge base|runbook/i);
+  assert.match(family.desiredOutcome, /trace|current|reproduc/i);
+  assert.equal(family.decision, "net-new");
+  assert.equal(family.publicationStatus, "prepared");
+  assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
+  assert.ok(
+    Object.values(family.gates).every((gate) => gate.status === "passed"),
+    "every SRE candidate gate must pass",
+  );
+  assert.equal(family.internalLinks.length, 9);
+  assert.match(
+    family.overlapCheck,
+    /monitoring|alerting|automatic remediation|incident management/i,
+  );
 });
 
 test("scenario validation rejects a missing locale and an owner outside the sitemap", () => {

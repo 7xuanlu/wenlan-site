@@ -677,8 +677,11 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-28-product-research-to-prd-knowledge-base-locales` is live,
-  production-verified, and measuring without consuming the production slot.
+  `EXP-2026-08-29-sre-incident-knowledge-base-locales` is locally prepared and
+  occupies the single production slot while deterministic and visual
+  verification is in progress. Publication remains separately approval-gated.
+  The product-research-to-PRD family is live, production-verified, and
+  measuring without consuming the production slot.
   PR #152 merged at `2026-08-29T06:43:59Z` as
   `66f7b012f25174cac63e94dcec8b27b9b3d6e5e2`; Vercel production completed at
   `2026-08-29T06:44:59Z`. The production slot is open.
@@ -908,7 +911,7 @@ action returns for separate explicit approval.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 33.
+- Active experiments: 34.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -1294,8 +1297,18 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-28-product-research-to-prd-knowledge-base-locales` is live,
-production-verified, and measuring without consuming the production slot. PR
+`EXP-2026-08-29-sre-incident-knowledge-base-locales` is the one locally
+prepared production candidate. It owns the task of turning reviewed runbooks,
+postmortems, architecture notes, and sanitized incident summaries into an SRE
+knowledge base with source revisions, stale state, safety limits, abort
+conditions, verification signals, owners, and test results. It does not claim
+monitoring, alerts, live telemetry, automatic root-cause analysis, incident
+command, runbook execution, approvals, credentials, or emergency access. The
+candidate occupies the production slot until verification finishes and the
+user separately approves publication.
+
+The product-research-to-PRD family remains live, production-verified, and
+measuring without consuming the production slot. PR
 #152 merged as `66f7b012f25174cac63e94dcec8b27b9b3d6e5e2` at
 `2026-08-29T06:43:59Z`, and Vercel production completed at
 `2026-08-29T06:44:59Z`. The three live routes passed direct 200, exact
@@ -3799,3 +3812,50 @@ unchanged.
   rendering, and the deployed technical audit. Keep this timestamp as the
   fixed production boundary; it proves publication and technical availability,
   not a Google crawl, indexing, ranking, traffic, or causality.
+
+## Campaign preparation: SRE incident knowledge base at 2026-08-29
+
+- A control-plane reconciliation found that the consultant and investment
+  scenario records still said `prepared` after PRs #148 and #150 were already
+  production-verified. Their scenario status is corrected to `measuring`;
+  this does not move either production or measurement boundary.
+- The next locally prepared audience scenario is one source-backed SRE
+  incident knowledge base for current runbooks, postmortems, architecture
+  notes, and sanitized incident summaries.
+- Exact routes are `/learn/build-sre-incident-knowledge-base`,
+  `/zh-TW/learn/build-sre-incident-knowledge-base`, and
+  `/zh-CN/learn/build-sre-incident-knowledge-base`.
+- The task begins after an incident is stable: keep one service, environment,
+  and incident class inside a reviewed source boundary; separate observations,
+  hypotheses, mitigations, and confirmed causes; preserve safety limits,
+  abort conditions, verification signals, owners, revisions, and stale state.
+- Wenlan does not monitor production, receive alerts, ingest live telemetry,
+  run automatic RCA, command an incident, execute a runbook, approve a change,
+  or provide emergency access. A retrieved Page is context for a qualified
+  engineer, not permission to act on production.
+- English, Taiwan Traditional Chinese, and Simplified-Chinese result and demand
+  evidence is stored in
+  `docs/seo-audits/2026-08-29-sre-incident-knowledge-base-candidate.md` and
+  `docs/seo-scenario-backlog.json`. Google Trends returned no inspectable
+  series in this pass, so no Trends index or keyword volume is claimed.
+- The family uses the genuine deterministic Wenlan app fixture and the
+  verifier-protected product-evidence contract. Three same-locale contextual
+  entries come from document ingestion, source-backed architecture, and
+  citation verification.
+- The user explicitly approved the exact verified SRE family for commit, Git
+  push, PR creation, merge, automatic Vercel deployment, and read-only
+  production verification. Request indexing, GSC validation, analytics
+  mutation, source-repository changes, maintainer messaging, paid action, and
+  unrelated external publication remain excluded.
+- Local preparation is complete: Goal 49/49, the 13-family scenario verifier,
+  the 13 focused intent/scenario tests, i18n 75/75, TypeScript, the 267-page
+  production build, and the 153-URL built technical audit pass. Twelve fresh
+  browser states cover three locales, `1280x900` and exact `393x852`, and dark
+  plus light themes. A first-pass CJK trailing-character break was fixed and
+  added to the localized renderer contract.
+- The independent public-release drift was repaired before publication in a
+  separate commit: GitHub Releases confirms `v0.17.4` published on
+  `2026-08-30`, and the website release metadata, download surfaces, About,
+  Docs, schema, sitemap dates, and machine-readable surfaces now agree. The
+  five focused release contracts and all 75 i18n contracts pass. The full SEO,
+  build, and technical gates still run on the combined branch before merge.

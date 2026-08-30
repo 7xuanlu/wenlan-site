@@ -67,9 +67,15 @@ function sectionId(heading: string, index: number): string {
 
 function renderProtectedCjkTerms(text: string) {
   return text
-    .split(/(Karpathy LLM Wiki：|客戶專案知識庫|客户项目知识库|顧問案|咨询项目|研究知識庫|研究知识库|產品研究|产品研究|產品決策|产品决策|論文 PDF|论文 PDF|文獻矩陣|文献矩阵|AI 知識庫|AI 知识库|知識庫|知识库|驗收資料|验收资料|8 項|8 项|來源|来源|記什麼？|记录什么？)/g)
+    .split(/(Karpathy LLM Wiki：|SRE 事故知識庫|SRE 故障知识库|與事故復盤|与故障复盘|事故復盤|故障复盘|客戶專案知識庫|客户项目知识库|顧問案|咨询项目|研究知識庫|研究知识库|產品研究|产品研究|產品決策|产品决策|論文 PDF|论文 PDF|文獻矩陣|文献矩阵|AI 知識庫|AI 知识库|知識庫|知识库|驗收資料|验收资料|8 項|8 项|來源|来源|記什麼？|记录什么？)/g)
     .map((part, index) =>
       part === "Karpathy LLM Wiki：" ||
+      part === "SRE 事故知識庫" ||
+      part === "SRE 故障知识库" ||
+      part === "與事故復盤" ||
+      part === "与故障复盘" ||
+      part === "事故復盤" ||
+      part === "故障复盘" ||
       part === "客戶專案知識庫" ||
       part === "客户项目知识库" ||
       part === "顧問案" ||
@@ -195,7 +201,8 @@ export default async function LocalizedLearnSlugPage({
     article.slug === "source-backed-research-knowledge-base" ||
     article.slug === "build-client-project-knowledge-base-for-consulting" ||
     article.slug === "build-investment-research-knowledge-base" ||
-    article.slug === "build-product-research-knowledge-base-for-prd"
+    article.slug === "build-product-research-knowledge-base-for-prd" ||
+    article.slug === "build-sre-incident-knowledge-base"
       ? renderProtectedCjkTerms
       : (text: string) => text;
 

@@ -541,6 +541,7 @@ test("localized Learn slug route supports per-locale acquisition page availabili
     "/learn/build-client-project-knowledge-base-for-consulting",
     "/learn/build-investment-research-knowledge-base",
     "/learn/build-product-research-knowledge-base-for-prd",
+    "/learn/build-sre-incident-knowledge-base",
   ]);
   assert.match(source, /getLocalizedLearnArticle/);
   assert.match(source, /TRANSLATED_LEARN_SLUGS/);
@@ -901,6 +902,14 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
       locale: "zh-CN",
       slug: "build-product-research-knowledge-base-for-prd",
     },
+    {
+      locale: "zh-TW",
+      slug: "build-sre-incident-knowledge-base",
+    },
+    {
+      locale: "zh-CN",
+      slug: "build-sre-incident-knowledge-base",
+    },
   ]);
 
   const metadata = await localizedLearnSlug.generateMetadata({
@@ -1157,6 +1166,42 @@ test("product-research family carries the reusable product-evidence landing-page
     assert.match(renderer, /article\.productEvidence/);
   }
   assert.match(renderers[1], /renderText=\{renderArticleText\}/);
+});
+
+test("SRE incident family owns one distinct trilingual runbook knowledge task", async () => {
+  const [{ articles }, { getLocalizedLearnArticle }] = await Promise.all([
+    import("../src/app/(en)/learn/articles.ts"),
+    import("../src/i18n/learn-articles.ts"),
+  ]);
+  const slug = "build-sre-incident-knowledge-base";
+  const english = articles.find((article) => article.slug === slug);
+
+  assert.ok(english, "English SRE incident article");
+  assert.match(english.title, /SRE Incident Knowledge Base/i);
+  assert.match(JSON.stringify(english), /runbook|postmortem/i);
+  assert.match(JSON.stringify(english), /stale|outdated/i);
+  assert.match(
+    JSON.stringify(english),
+    /does not.*monitor|does not.*execute|not an incident-management/i,
+  );
+  assert.ok(english.productEvidence, "English SRE product evidence");
+
+  for (const [locale, titlePattern, workflowPattern] of [
+    ["zh-TW", /SRE.*事故.*知識庫/, /runbook|事故復盤|值班/],
+    ["zh-CN", /SRE.*故障.*知识库/, /runbook|故障复盘|值班/],
+  ]) {
+    const article = getLocalizedLearnArticle(locale, slug);
+    assert.ok(article, `${locale} SRE incident article`);
+    assert.match(article.title, titlePattern);
+    assert.match(JSON.stringify(article), workflowPattern);
+    assert.equal(article.publishedAt, "2026-08-29");
+    assert.equal(article.updatedAt, "2026-08-29");
+    assert.ok(article.officialReferences?.length >= 4);
+    assert.ok(article.productEvidence, `${locale} SRE product evidence`);
+    assert.equal(article.productEvidence.workflow.length, 3);
+    assert.equal(article.productEvidence.artifactRows.length, 3);
+    assert.equal(article.productEvidence.action.href, "#product-evidence");
+  }
 });
 
 test("coding-agent knowledge-base family owns one distinct trilingual integration task", async () => {
@@ -1922,7 +1967,7 @@ test("localized acquisition copy keeps CJK semantic phrases together on mobile",
   assert.equal(protectedHeadings.length, 2);
   assert.match(
     source,
-    /split\(\/\(Karpathy LLM Wiki：\|客戶專案知識庫\|客户项目知识库\|顧問案\|咨询项目\|研究知識庫\|研究知识库\|產品研究\|产品研究\|產品決策\|产品决策\|論文 PDF\|论文 PDF\|文獻矩陣\|文献矩阵\|AI 知識庫\|AI 知识库\|知識庫\|知识库\|驗收資料\|验收资料\|8 項\|8 项\|來源\|来源\|記什麼？\|记录什么？\)\/g\)/,
+    /split\(\/\(Karpathy LLM Wiki：\|SRE 事故知識庫\|SRE 故障知识库\|與事故復盤\|与故障复盘\|事故復盤\|故障复盘\|客戶專案知識庫\|客户项目知识库\|顧問案\|咨询项目\|研究知識庫\|研究知识库\|產品研究\|产品研究\|產品決策\|产品决策\|論文 PDF\|论文 PDF\|文獻矩陣\|文献矩阵\|AI 知識庫\|AI 知识库\|知識庫\|知识库\|驗收資料\|验收资料\|8 項\|8 项\|來源\|来源\|記什麼？\|记录什么？\)\/g\)/,
   );
   assert.match(
     source,
@@ -1930,7 +1975,7 @@ test("localized acquisition copy keeps CJK semantic phrases together on mobile",
   );
   assert.match(
     source,
-    /article\.slug === "wenlan-vs-obsidian-ai-memory"[\s\S]*article\.slug === "distilled-wiki-pages-ai-memory"[\s\S]*article\.slug === "choose-ai-knowledge-base-tool"[\s\S]*article\.slug === "test-ai-knowledge-base-retrieval-after-changes"[\s\S]*article\.slug === "coding-agent-source-backed-knowledge-base"[\s\S]*article\.slug === "source-backed-research-knowledge-base"[\s\S]*article\.slug === "build-client-project-knowledge-base-for-consulting"/,
+    /article\.slug === "wenlan-vs-obsidian-ai-memory"[\s\S]*article\.slug === "distilled-wiki-pages-ai-memory"[\s\S]*article\.slug === "choose-ai-knowledge-base-tool"[\s\S]*article\.slug === "test-ai-knowledge-base-retrieval-after-changes"[\s\S]*article\.slug === "coding-agent-source-backed-knowledge-base"[\s\S]*article\.slug === "source-backed-research-knowledge-base"[\s\S]*article\.slug === "build-client-project-knowledge-base-for-consulting"[\s\S]*article\.slug === "build-sre-incident-knowledge-base"/,
   );
   assert.ok((source.match(/\{renderArticleText\(/g)?.length ?? 0) >= 12);
   assert.match(source, /<span className="min-w-0">\{renderArticleText\(faq\.question\)\}<\/span>/);
