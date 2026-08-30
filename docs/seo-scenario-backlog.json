@@ -3214,7 +3214,7 @@
       "stage": "maintain",
       "decision": "net-new",
       "plannedWindow": "next-eligible-window-after-2026-08-29",
-      "publicationStatus": "prepared",
+      "publicationStatus": "measuring",
       "locales": {
         "en": {
           "queryFamily": [
@@ -3436,7 +3436,7 @@
         "target": "https://github.com/7xuanlu/wenlan — after the website family is separately approved and published, prepare one locale-aware SRE incident-knowledge workflow link; do not commit, push, or merge source-repository changes without another exact approval",
         "status": "planned-not-published"
       },
-      "nextResearchDirection": "Finish the local three-locale implementation, product-evidence contract, deterministic checks, and desktop plus exact 393px rendering. Google Trends returned no inspectable series in this pass, so no relative index or keyword volume is claimed. Stop before commit, push, PR, merge, deployment, indexing request, GSC validation, analytics mutation, source-repository change, or external publication.",
+      "nextResearchDirection": "Keep the three published locale owners stable from the fixed 2026-08-30T05:06:25Z production boundary. Record the 24-hour technical and indexability observation after 2026-08-31T05:06:25Z and the seven-day source-native GSC page/query and Vercel page/referrer observation after 2026-09-06T05:06:25Z. Judge each locale only after a confirmed post-deploy crawl and the original 28-day exposure contract. Do not request indexing, submit GSC validation, mutate analytics, change the source repository, message maintainers, buy traffic, generate synthetic events, or publish externally without separate approval.",
       "readout": {
         "gsc": {
           "status": "unavailable",

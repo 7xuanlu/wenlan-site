@@ -8720,3 +8720,17 @@ increase for that experiment.
 - Decision: merge
 - Next step: Run the complete Goal, scenario, SEO, i18n, TypeScript, production-build, and technical gates on the combined branch; commit the SRE family separately; push, open and merge the PR only after checks pass; then verify the integrated commit and live production routes. Request indexing, GSC validation, analytics mutation, source-repository changes, paid action, maintainer messaging, synthetic events, metric-definition changes, and unrelated external publication remain excluded.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-29-sre-incident-knowledge-base-locales production publication
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-29-sre-incident-knowledge-base-locales
+- Observed at: 2026-08-30T05:08:59Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #155 merged at `2026-08-30T05:05:37Z` as `1e05812ed436f1ff829f0c523bdf9755772f3c92`; Vercel reported production deployment success at `2026-08-30T05:06:25Z`. The integrated commit passed the Goal, scenario, 49 goal tests, 251 SEO tests, 75 i18n tests, TypeScript, production build, and built technical audit. The English, zh-TW, and zh-CN live routes returned direct 200 responses with exact canonicals, reciprocal en-US/zh-TW/zh-CN/x-default hreflang, Article and BreadcrumbList schema dated `2026-08-29`, visible SRE runbook and postmortem answers, exact 393px rendering, and no FAQPage schema, overflow, framework overlay, console warning, or console error. The deployed technical audit passed all 153 sitemap URLs, 30 key pages, utility noindex headers, redirects, and bridge-host redirects. The public download page also rendered authoritative `v0.17.4`, notarized macOS DMG copy, and the exact GitHub release link. This proves publication and technical availability only; it is not a crawl, indexing, ranking, traffic, or causality claim.
+- Result: pending
+- Decision: wait
+- Next step: Keep `2026-08-30T05:06:25Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-08-31T05:06:25Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-06T05:06:25Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with its original 20-page-impression, 3-qualified-joined-query-impression, and 1-click contract. Do not request indexing, submit GSC validation, mutate analytics, change the source repository, message maintainers, buy traffic, generate synthetic events, change metric definitions, or publish externally under this record.
+<!-- EXPERIMENT-RECORD:END -->

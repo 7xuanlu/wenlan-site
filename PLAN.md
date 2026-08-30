@@ -3859,3 +3859,15 @@ unchanged.
   Docs, schema, sitemap dates, and machine-readable surfaces now agree. The
   five focused release contracts and all 75 i18n contracts pass. The full SEO,
   build, and technical gates still run on the combined branch before merge.
+- PR #155 merged at `2026-08-30T05:05:37Z` as
+  `1e05812ed436f1ff829f0c523bdf9755772f3c92`; Vercel production completed at
+  `2026-08-30T05:06:25Z`. The integrated commit passed the Goal, scenario,
+  49 goal tests, 251 SEO tests, 75 i18n tests, TypeScript, the 267-page build,
+  and the 153-URL built technical audit. All three live routes passed direct
+  200, exact canonical, reciprocal hreflang, Article and BreadcrumbList
+  schema, visible answers, 393px rendering, and no FAQPage schema or browser
+  errors. The deployed technical audit passed 153 sitemap URLs, 30 key pages,
+  noindex utilities, redirects, and bridge-host redirects. Keep
+  `2026-08-30T05:06:25Z` as the fixed production boundary; it proves
+  publication and technical availability, not a Google crawl, indexing,
+  ranking, traffic, or causality.
