@@ -2373,6 +2373,171 @@ const zhTWArticles = {
       body: "選定一個服務與事故類型，連接目前 runbook 與事故復盤，再於下一次值班前審查每個操作主張。",
     },
   },
+  "build-competitive-intelligence-knowledge-base": {
+    slug: "build-competitive-intelligence-knowledge-base",
+    eyebrow: "競品研究工作流",
+    category: "Workflows",
+    title: "如何建立有來源依據的競品研究知識庫",
+    description:
+      "用有界的來源登錄表、日期與修訂，整理可審查的競品研究，讓過期主張與矛盾保持可見。",
+    metaTitle: "如何建立有來源依據的競品研究知識庫 | Wenlan",
+    metaDescription:
+      "從獲准的文件、產品手冊與 release notes 建立競品研究知識庫，保留來源日期、修訂、過期主張與人工審查。",
+    keywords: [
+      "競品分析知識庫",
+      "競品研究知識庫",
+      "競爭情報資料整理",
+      "競品資料更新",
+      "有來源的競品研究",
+      "AI 知識庫產品研究",
+    ],
+    publishedAt: "2026-08-30",
+    updatedAt: "2026-08-30",
+    author: "Qi-Xuan Lu",
+    readingTime: "9 分鐘閱讀",
+    audience: "維護競品證據的產品行銷經理、創業者，以及產品、策略或市場研究員",
+    heroBullets: [
+      "先從一個決策與有限的競品集合開始，不建立未審查的市場資料庫。",
+      "為每個來源保留日期、修訂、範圍與下次審查時間，讓過期主張可見。",
+      "在 battlecard 或產品決策使用前，分開觀察、解讀、假設與未知。",
+    ],
+    sections: [
+      {
+        heading: "先說結論：一個決策配一份有界的競品檔案",
+        body: [
+          "為一個產品問題、競品檢視或定位更新建立一份競品檔案。只加入你已取得且獲准使用的產品文件、使用手冊、release notes、研究筆記或唯讀 Obsidian 來源，並記錄來源、日期、修訂、範圍與審查負責人。",
+          "Wenlan 可以把支援的 Markdown、文字、可擷取文字的 PDF、資料夾與唯讀 Obsidian 來源，連到有來源的 Pages、引用、修訂、過期狀態、lint 與人工審查。它不會爬取競品網站、抓取評論、監控即時價格、發現競品、發送告警、評分產品、提出建議，也不替你做法律或商業決策。",
+        ],
+      },
+      {
+        heading: "競品研究為什麼會過期",
+        body: [
+          "試算表或 battlecard 常把競品事實、研究員推論與團隊假設混在一起。當文件、產品頁或版本變更，沒有人知道哪一句來自哪一個修訂；流暢的 AI 摘要還可能把缺少證據的推論寫得像事實。",
+          "有用的競品研究知識庫保留小而可檢查的證據鏈。研究員能分辨觀察、解讀、假設、矛盾與未知，也能看出哪項主張需要重新檢查。即使不使用 Wenlan，來源登錄表和這些分類仍然有用。",
+        ],
+      },
+      {
+        heading: "建立一份可審查的競品檔案",
+        body: [
+          "先寫下檢視問題、競品集合、日期範圍、來源類型與排除項目。比較同一個產品問題時，盡量使用相同來源類型；證據不足時標為未知，不要用泛泛的市場語言填滿空白。",
+        ],
+        bullets: [
+          "來源登錄：保存 URL 或檔案、發布或存取日期、版本、競品、範圍、權威性、允許用途與下次審查日期。",
+          "主張分類：把每句重要話分成觀察、解讀、假設、矛盾或未知，並連到確切段落。",
+          "變更追蹤：來源或 release 改變時，只重新同步受影響的來源，把依賴它的主張標為過期或矛盾。",
+          "使用前審查：打開來源、確認範圍與修訂，再把結果帶入 battlecard、定位更新或產品決策。",
+        ],
+        code: {
+          label: "有界的競品證據工作流",
+          code: "wenlan status\nwenlan sources add ~/Research/competitors\n# 在 Wenlan plugin client 中：\n/distill <競品研究問題>\n/pages <競品主題>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "Wenlan 能做什麼，以及不能做什麼",
+        body: [
+          "Wenlan 能整理獲准的來源，維護有來源的 Page，並讓引用、修訂、過期狀態、矛盾與審查保持可見。支援的輸入包括 Markdown、文字、可擷取文字的 PDF、資料夾與唯讀 Obsidian；自訂整合也可以傳入你已準備好的網頁內容。",
+          "這不是自動化的市場情報系統。Wenlan 不會爬取或抓取競品網站、不會監控即時網站、價格或評論、不會發現競品、執行告警、評分產品或自動產生建議。請由負責人確認資料權限、公共事實、日期與策略結論。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 會監控競品或追蹤即時價格嗎？",
+        answer:
+          "不會。Wenlan 不會爬取或抓取競品網站、不會監控即時價格或評論、不會發現競品，也不會發送告警。只加入你獲准使用的支援來源，再自行檢查日期與範圍。",
+      },
+      {
+        question: "可以讓 AI Agent 自動寫出最後的競品建議嗎？",
+        answer:
+          "不應該。Wenlan 能整理有來源的觀察、顯示過期或互相矛盾的主張，但負責任的人仍要解讀證據，並作出產品、定位、法律或商業決策。",
+      },
+    ],
+    relatedSlugs: [
+      "source-backed-research-knowledge-base",
+      "verify-ai-knowledge-base-citations",
+      "build-local-ai-knowledge-base-from-documents",
+      "test-ai-knowledge-base-retrieval-after-changes",
+      "build-product-research-knowledge-base-for-prd",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 支援的文件來源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan 有來源 Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "Wenlan 審查與信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+      {
+        label: "How to Build a Competitive Intelligence Program",
+        href: "https://www.aqute.com/blog/build-competitive-intelligence-program",
+      },
+      {
+        label: "競爭情報資料來源（臺灣行銷研究）",
+        href: "https://tmrmds.co/article-business/21696/",
+      },
+      {
+        label: "競品調研 workflow 案例（人人都是產品經理）",
+        href: "https://www.woshipm.com/pd/6395378.html",
+      },
+    ],
+    productEvidence: {
+      heading: "使用競品檔案前先檢查證據與審查狀態",
+      summary:
+        "這是真實的 Wenlan 桌面畫面，來自 App 的確定性測試 fixture，不是競品或客戶資料。它顯示帶有來源數量的維護型 Pages 與審查佇列；同樣的產品介面可用來讓來源變化和未解決證據保持可見。",
+      image: {
+        src: "/images/product-evidence/wenlan-space-review-fixture.png",
+        alt: "Wenlan 桌面 Space 顯示帶有來源數量的維護型 Pages，以及來源衝突和新證據的審查佇列。",
+        caption:
+          "Wenlan App 確定性測試 fixture 的真實畫面。這是通用產品示例，不是競品研究證據；來源數量與審查狀態仍可直接檢查。",
+        width: 1586,
+        height: 992,
+      },
+      workflow: [
+        {
+          label: "固定研究問題邊界",
+          detail: "選定一個決策、產品問題、競品集合、時間範圍與獲准來源，不要匯入不受控的市場資料庫。",
+        },
+        {
+          label: "整理有來源的競品檔案",
+          detail: "把觀察、解讀、矛盾、過期主張與未知連到有日期的來源修訂，放在可維護的 Page 中。",
+        },
+        {
+          label: "重用前先審查",
+          detail: "打開引用段落，確認範圍與修訂，再把仍未解決的證據留在 battlecard 或產品決策旁。",
+        },
+      ],
+      artifactHeading: "競品證據封包示例",
+      artifactNote:
+        "這是產品無關的結構示例，不代表任何競品。請用正在審查的決策中獲准且有日期的證據替換每一列。",
+      artifactRows: [
+        {
+          label: "證據輸入",
+          detail: "產品文件、手冊、release note 或研究筆記，附來源位置、修訂、範圍與允許用途狀態。",
+        },
+        {
+          label: "主張分類",
+          detail: "觀察、解讀、假設、矛盾或未知，連到確切段落，不只保留一段潤飾過的摘要。",
+        },
+        {
+          label: "審查結果",
+          detail: "目前有效、過期、互相矛盾或仍未解決，並記錄審查人、下次檢查與決策情境。",
+        },
+      ],
+      action: {
+        label: "查看證據審查工作流",
+        href: "#product-evidence",
+      },
+    },
+    cta: {
+      heading: "讓一個競品決策可追溯",
+      body: "選定有界問題，連接獲准來源，並在 battlecard 或產品決策使用前審查每個重要主張。",
+    },
+  },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
 
 const zhCNArticles = {
@@ -4720,6 +4885,171 @@ const zhCNArticles = {
     cta: {
       heading: "让一个故障教训能够复现",
       body: "选定一个服务与故障类型，连接当前 runbook 与故障复盘，再在下一次值班前审核每个运维主张。",
+    },
+  },
+  "build-competitive-intelligence-knowledge-base": {
+    slug: "build-competitive-intelligence-knowledge-base",
+    eyebrow: "竞品调研工作流",
+    category: "Workflows",
+    title: "如何建立有来源依据的竞品调研知识库",
+    description:
+      "用有边界的来源登记表、日期与修订，整理可审核的竞品调研，让过期主张与矛盾保持可见。",
+    metaTitle: "如何建立有来源依据的竞品调研知识库 | Wenlan",
+    metaDescription:
+      "从获准的文档、产品手册与 release notes 建立竞品调研知识库，保留来源日期、修订、过期主张与人工审核。",
+    keywords: [
+      "竞品分析知识库",
+      "竞品调研资料库",
+      "竞品信息更新",
+      "竞争情报资料整理",
+      "有来源的竞品调研",
+      "AI 知识库产品研究",
+    ],
+    publishedAt: "2026-08-30",
+    updatedAt: "2026-08-30",
+    author: "Qi-Xuan Lu",
+    readingTime: "9 分钟阅读",
+    audience: "维护竞品证据的产品营销经理、创业者，以及产品、战略或市场研究员",
+    heroBullets: [
+      "先从一个决策与有限的竞品集合开始，不建立未经审核的市场资料库。",
+      "为每个来源保留日期、修订、范围与下次审核时间，让过期主张可见。",
+      "在 battlecard 或产品决策使用前，分开观察、解读、假设与未知。",
+    ],
+    sections: [
+      {
+        heading: "先说结论：一个决策配一份有边界的竞品档案",
+        body: [
+          "为一个产品问题、竞品评审或定位更新建立一份竞品档案。只加入你已经取得且获准使用的产品文档、用户手册、release notes、研究笔记或只读 Obsidian 来源，并记录来源、日期、修订、范围与审核负责人。",
+          "Wenlan 可以把支持的 Markdown、文本、可提取文本的 PDF、文件夹与只读 Obsidian 来源，连接到有来源的 Pages、引用、修订、过期状态、lint 与人工审核。它不会爬取竞品网站、抓取评论、监控实时价格、发现竞品、发送告警、给产品评分、提出建议，也不替你做法律或商业决策。",
+        ],
+      },
+      {
+        heading: "竞品调研为什么会过期",
+        body: [
+          "电子表格或 battlecard 常常把竞品事实、研究员推论与团队假设混在一起。当文档、产品页面或版本变化时，没有人知道哪句话来自哪一次修订；流畅的 AI 摘要还可能把缺少证据的推论写成事实。",
+          "有用的竞品调研知识库保留小而可检查的证据链。研究员能分辨观察、解读、假设、矛盾与未知，也能看出哪项主张需要重新检查。即使不使用 Wenlan，来源登记表和这些分类仍然有用。",
+        ],
+      },
+      {
+        heading: "建立一份可审核的竞品档案",
+        body: [
+          "先写下评审问题、竞品集合、日期范围、来源类型与排除项。比较同一个产品问题时，尽量使用相同来源类型；证据不足时标为未知，不要用泛泛的市场语言填满空白。",
+        ],
+        bullets: [
+          "来源登记：保存 URL 或文件、发布或访问日期、版本、竞品、范围、权威性、允许用途与下次审核日期。",
+          "主张分类：把每句重要话分成观察、解读、假设、矛盾或未知，并连接到准确段落。",
+          "变更追踪：来源或 release 改变时，只重新同步受影响的来源，把依赖它的主张标为过期或矛盾。",
+          "使用前审核：打开来源、确认范围与修订，再把结果带入 battlecard、定位更新或产品决策。",
+        ],
+        code: {
+          label: "有边界的竞品证据工作流",
+          code: "wenlan status\nwenlan sources add ~/Research/competitors\n# 在 Wenlan plugin client 中：\n/distill <竞品调研问题>\n/pages <竞品主题>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "Wenlan 能做什么，以及不能做什么",
+        body: [
+          "Wenlan 能整理获准的来源，维护有来源的 Page，并让引用、修订、过期状态、矛盾与审核保持可见。支持的输入包括 Markdown、文本、可提取文本的 PDF、文件夹与只读 Obsidian；自定义集成也可以传入你已经准备好的网页内容。",
+          "这不是自动化的市场情报系统。Wenlan 不会爬取或抓取竞品网站、不会监控实时网站、价格或评论、不会发现竞品、执行告警、给产品评分或自动生成建议。请由负责人确认数据权限、公共事实、日期与策略结论。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 会监控竞品或跟踪实时价格吗？",
+        answer:
+          "不会。Wenlan 不会爬取或抓取竞品网站、不会监控实时价格或评论、不会发现竞品，也不会发送告警。只加入你获准使用的支持来源，再自行检查日期与范围。",
+      },
+      {
+        question: "可以让 AI Agent 自动写出最后的竞品建议吗？",
+        answer:
+          "不应该。Wenlan 能整理有来源的观察、显示过期或互相矛盾的主张，但负责的人仍要解读证据，并作出产品、定位、法律或商业决策。",
+      },
+    ],
+    relatedSlugs: [
+      "source-backed-research-knowledge-base",
+      "verify-ai-knowledge-base-citations",
+      "build-local-ai-knowledge-base-from-documents",
+      "test-ai-knowledge-base-retrieval-after-changes",
+      "build-product-research-knowledge-base-for-prd",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 支持的文档来源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan 有来源 Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "Wenlan 审核与信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+      {
+        label: "How to Build a Competitive Intelligence Program",
+        href: "https://www.aqute.com/blog/build-competitive-intelligence-program",
+      },
+      {
+        label: "竞争情报资料来源（台湾营销研究）",
+        href: "https://tmrmds.co/article-business/21696/",
+      },
+      {
+        label: "竞品调研 workflow 案例（人人都是产品经理）",
+        href: "https://www.woshipm.com/pd/6395378.html",
+      },
+    ],
+    productEvidence: {
+      heading: "使用竞品档案前先检查证据与审核状态",
+      summary:
+        "这是来自 Wenlan App 确定性测试 fixture 的真实桌面画面，不是竞品或客户数据。它显示带有来源数量的维护型 Pages 与审核队列；同一个产品界面可用于让来源变化和未解决证据保持可见。",
+      image: {
+        src: "/images/product-evidence/wenlan-space-review-fixture.png",
+        alt: "Wenlan 桌面 Space 显示带有来源数量的维护型 Pages，以及来源冲突和新证据的审核队列。",
+        caption:
+          "Wenlan App 确定性测试 fixture 的真实画面。这是通用产品示例，不是竞品调研证据；来源数量与审核状态仍可直接检查。",
+        width: 1586,
+        height: 992,
+      },
+      workflow: [
+        {
+          label: "固定调研问题边界",
+          detail: "选定一个决策、产品问题、竞品集合、时间范围与获准来源，不要导入不受控的市场资料库。",
+        },
+        {
+          label: "整理有来源的竞品档案",
+          detail: "把观察、解读、矛盾、过期主张与未知连接到有日期的来源修订，放在可维护的 Page 中。",
+        },
+        {
+          label: "重用前先审核",
+          detail: "打开引用段落，确认范围与修订，再把仍未解决的证据留在 battlecard 或产品决策旁。",
+        },
+      ],
+      artifactHeading: "竞品证据包示例",
+      artifactNote:
+        "这是产品无关的结构示例，不代表任何竞品。请用正在审核的决策中获准且有日期的证据替换每一行。",
+      artifactRows: [
+        {
+          label: "证据输入",
+          detail: "产品文档、手册、release note 或研究笔记，附来源位置、修订、范围与允许用途状态。",
+        },
+        {
+          label: "主张分类",
+          detail: "观察、解读、假设、矛盾或未知，连接到准确段落，而不只保留一段润色后的摘要。",
+        },
+        {
+          label: "审核结果",
+          detail: "当前有效、过期、互相矛盾或仍未解决，并记录审核人、下次检查与决策情境。",
+        },
+      ],
+      action: {
+        label: "查看证据审核工作流",
+        href: "#product-evidence",
+      },
+    },
+    cta: {
+      heading: "让一个竞品决策可追溯",
+      body: "选定有边界的问题，连接获准来源，并在 battlecard 或产品决策使用前审核每个重要主张。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;

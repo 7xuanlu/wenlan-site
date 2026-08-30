@@ -677,9 +677,10 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-29-sre-incident-knowledge-base-locales` is locally prepared and
-  occupies the single production slot while deterministic and visual
-  verification is in progress. Publication remains separately approval-gated.
+  `EXP-2026-08-30-competitive-intelligence-knowledge-base-locales` is locally
+  prepared and occupies the single production slot while deterministic and
+  visual verification is in progress. Publication remains separately
+  approval-gated.
   The product-research-to-PRD family is live, production-verified, and
   measuring without consuming the production slot.
   PR #152 merged at `2026-08-29T06:43:59Z` as
@@ -911,7 +912,7 @@ action returns for separate explicit approval.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 34.
+- Active experiments: 35.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -1297,15 +1298,39 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-29-sre-incident-knowledge-base-locales` is the one locally
-prepared production candidate. It owns the task of turning reviewed runbooks,
-postmortems, architecture notes, and sanitized incident summaries into an SRE
-knowledge base with source revisions, stale state, safety limits, abort
-conditions, verification signals, owners, and test results. It does not claim
-monitoring, alerts, live telemetry, automatic root-cause analysis, incident
-command, runbook execution, approvals, credentials, or emergency access. The
-candidate occupies the production slot until verification finishes and the
-user separately approves publication.
+`EXP-2026-08-30-competitive-intelligence-knowledge-base-locales` is the one
+locally prepared production candidate. It owns the task of maintaining a
+bounded competitor dossier from permitted, user-collected documents with
+source class, date, revision, observations, inferences, assumptions,
+contradictions, stale claims, and open questions. It does not claim competitor
+discovery, crawling, scraping, live monitoring, current pricing or review
+collection, alerts, automatic scoring or recommendations, or legal and
+commercial decisions. Local verification completed on `2026-08-30`: the Goal
+and scenario verifiers passed; the focused scenario and intent tests passed
+`14/14`; the full Goal suite passed `50/50`; i18n passed `76/76`; SEO passed
+`252/252`; TypeScript lint passed; the production build generated `271` static
+pages; the built technical audit passed with `156` sitemap owners, `24` key
+pages, and no `FAQPage` in `160` built HTML files. Fresh in-app Browser checks
+covered English, zh-TW, and zh-CN at desktop and exact `393px` mobile width:
+every route had one H1, one exact canonical, reciprocal hreflang, Article and
+BreadcrumbList schema, no horizontal overflow, no console warning or error, a
+loaded product-evidence image, and an expandable visible FAQ. Source-native DOM
+evidence confirmed one article, one product-evidence panel, and one instance of
+each H2; duplication in an earlier stitched full-page capture was a capture
+artifact rather than rendered DOM duplication. The candidate occupies the
+production slot and is ready only for a separately approved publication action;
+no external or indexing action is implied.
+
+The clean reconstruction found that the first exact 393px Mandarin render
+split `競品檔案` / `竞品档案`, `證據` / `证据`, and `追溯`.
+The existing localized renderer now protects those terms, the fail-closed i18n
+contract covers them, and fresh exact-width captures plus single-rectangle DOM
+evidence pass. Complete clean-rebuild evidence is stored in
+`docs/seo-audits/2026-08-30-competitive-intelligence-clean-rebuild-verification.md`.
+
+The SRE incident family is live, production-verified, and measuring from its
+fixed `2026-08-30T05:06:25Z` boundary; it no longer consumes the production
+slot.
 
 The product-research-to-PRD family remains live, production-verified, and
 measuring without consuming the production slot. PR
@@ -3913,3 +3938,70 @@ unchanged.
   enforcement, or architecture approval. The next clean scenario research
   must move to a different user task rather than a persona or query-variant
   split.
+
+## Campaign preparation: competitive intelligence knowledge base at 2026-08-30
+
+- The user approved local implementation of the next trilingual scenario after
+  a demand, clean-gap, capability, and authority-path review.
+- Exact prepared routes are
+  `/learn/build-competitive-intelligence-knowledge-base`,
+  `/zh-TW/learn/build-competitive-intelligence-knowledge-base`, and
+  `/zh-CN/learn/build-competitive-intelligence-knowledge-base`.
+- The audience is product marketing managers, founders, and product, strategy,
+  or market researchers. The trigger is a competitor review, battlecard,
+  product decision, positioning update, or periodic research refresh whose
+  underlying evidence may have changed.
+- The task is a bounded, source-backed competitor dossier from permitted,
+  user-collected documents. It preserves source class, dates, revisions,
+  observations, inferences, assumptions, contradictions, stale claims, and
+  open questions for human review.
+- Wenlan does not discover competitors, crawl or scrape websites, monitor live
+  pricing or reviews, send alerts, score competitors, recommend strategy, or
+  make legal or commercial decisions.
+- Complete English, Taiwan Traditional-Chinese, and Simplified-Chinese query
+  families, result observations, practitioner evidence, clean-gap reasoning,
+  first-party proof, internal links, and the separately approval-gated
+  `ferdinandobons/startup-skill` authority path are stored in
+  `docs/seo-audits/2026-08-30-competitive-intelligence-knowledge-base-candidate.md`
+  and `docs/seo-scenario-backlog.json`.
+- The three routes use one clear task in natural locale language, genuine
+  deterministic Wenlan product evidence, Article and BreadcrumbList schema,
+  reciprocal hreflang, sitemap membership, visible FAQ without FAQPage, and
+  exact `393px` plus desktop rendered verification.
+- Current status: publication approved at `2026-08-30T19:44:10Z`. The approval
+  covers the exact clean candidate's commit, Git push, pull request, merge,
+  automatic Vercel deployment, and read-only production verification.
+  Request indexing, GSC validation, analytics mutation, paid action,
+  maintainer messaging, the separately planned OSS contribution, synthetic
+  events, and other external publication remain excluded.
+
+## Campaign publication preparation: competitive intelligence clean rebuild
+
+- The locally verified trilingual competitive-intelligence candidate was
+  reconstructed from current `origin/main`
+  `d94b807cc83f66ac5be85500682066fdb68d0d05` in the isolated worktree
+  `/tmp/wenlan-competitive-intelligence`; the detached dirty readout worktree
+  must not be pushed.
+- The exact candidate-owned include list, exclusions, reconstruction steps,
+  verification floor, and remaining approval boundary are stored in
+  `docs/seo-audits/2026-08-30-competitive-intelligence-publication-manifest.md`.
+- The unrelated zh-CN SRE indentation-only hunk and all weekly, authority,
+  README-star, RFP, and other scenario artifacts were excluded from this clean
+  reconstruction.
+- No commit, push, pull request, merge, Vercel deployment, indexing request,
+  GSC validation, analytics mutation, maintainer contact, OSS contribution,
+  paid action, or other external state changed while preparing the clean
+  candidate.
+- Final clean verification passed Goal `50/50`, i18n `76/76`, SEO
+  `252/252`, TypeScript, a 271-page production build, the 156-owner built
+  technical audit, and desktop plus exact 393px rendered checks for all three
+  locales. The detailed failure, rerun, and CJK-correction evidence is stored
+  in
+  `docs/seo-audits/2026-08-30-competitive-intelligence-clean-rebuild-verification.md`.
+- At `2026-08-30T19:44:10Z`, the user explicitly approved publishing this
+  exact isolated candidate through commit, Git push, pull request, merge,
+  automatic Vercel deployment, and read-only production verification. The
+  approval does not include request indexing, GSC validation, analytics
+  mutation, maintainer contact, the planned `ferdinandobons/startup-skill`
+  authority proposal, paid action, synthetic events, or any other external
+  publication.

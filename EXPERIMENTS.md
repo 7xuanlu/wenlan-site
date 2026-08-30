@@ -8776,3 +8776,74 @@ increase for that experiment.
 - Decision: wait
 - Next step: Run the due seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-05T06:44:59Z`; do not request indexing, submit validation, mutate analytics, or publish externally.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-30-competitive-intelligence-knowledge-base-locales
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-30-competitive-intelligence-knowledge-base-locales
+- Status: active
+- Data window: 2026-08-29..2026-09-04
+- Asset class: net-new-search
+- Launched: 2026-08-30
+- Hypothesis: One English, zh-TW, and zh-CN owner for maintaining permitted competitor evidence can earn qualified discovery from competitive-intelligence and competitor-research searches without cannibalizing generic research, product research before a PRD, consulting delivery, investment research, document ingestion, citation verification, or AI knowledge-base tool-selection intent.
+- Candidate evidence: Dated English, Taiwan Traditional-Chinese, and Simplified-Chinese practitioner sources and separate result observations repeat source registers, evidence chains, scoped comparison, continuous updates, revision or date tracking, and human review. Full provenance remains in `docs/seo-scenario-backlog.json` and `docs/seo-audits/2026-08-30-competitive-intelligence-knowledge-base-candidate.md`. These observations are not authenticated GSC data, keyword volume, exact rank, or causal evidence.
+- Baseline: The latest completed authenticated range is `2026-07-31..2026-08-27`: GSC property 7 clicks and 913 impressions; visible-query 2 clicks and 221 impressions; visibility gap 5 clicks and 692 impressions; Vercel 289 visitors and 690 pageviews; GitHub 51 stars. New target-page and joined-query rows are unavailable rather than zero, and every source remains separate.
+- Change: Prepare exactly one English, zh-TW, and zh-CN canonical that bounds one decision and competitor set, registers permitted sources with dates and revisions, separates observations from inferences and assumptions, preserves contradictions and stale claims, and requires human review before a battlecard, product decision, or positioning update. Explicitly exclude competitor discovery, crawling, scraping, live monitoring, current pricing or review collection, alerts, automatic scoring or recommendations, and legal or commercial decisions.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions per locale in 28 complete post-crawl days
+- Success criteria: Per locale, at least 3 qualified joined-query impressions and at least 1 GSC click after minimum exposure; report CTR and position separately.
+- Failure criteria: After 28 complete post-crawl days and minimum exposure, a locale has no qualified joined-query impressions or no GSC click, or an above-floor query-page join assigns the task to generic research, product research, consulting, investment research, tool selection, live competitor monitoring, or an existing Wenlan owner.
+- Stop criteria: Stop on a technical, unsupported collection or decision claim, duplicate-intent, controller-overlap, canonical, locale, responsive-render, authority-path, or approval-boundary violation.
+- 24h readout: pending only after a production deployment is separately approved and completed
+- 7d readout: pending only after a production deployment is separately approved and completed
+- W2 readout: pending
+- W4 readout: pending formal 28-complete-post-crawl-day decision when eligible
+- W8 readout: pending only if useful after the Goal deadline
+- Result: pending
+- Decision: wait
+- Next step: Finish deterministic and visual verification, then stop for exact publication approval. Do not commit, push, open or merge a PR, deploy, request indexing, submit GSC validation, mutate analytics, open an OSS issue or pull request, message maintainers, buy traffic, generate synthetic events, or publish externally under this record.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-30-competitive-intelligence-knowledge-base-locales at 2026-08-30T17:07:28Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-30-competitive-intelligence-knowledge-base-locales
+- Observed at: 2026-08-30T17:07:28Z
+- Readout: correction
+- Status: active
+- Evidence: Goal and scenario verifiers passed; focused scenario and intent tests passed 14/14; Goal tests passed 50/50; i18n passed 76/76; SEO passed 252/252; TypeScript lint passed; the production build generated 271 static pages; the built technical audit passed with 156 sitemap owners, 24 key pages, and no FAQPage in 160 built HTML files. Fresh in-app Browser checks covered English, zh-TW, and zh-CN at desktop and exact 393px mobile width. Every route had one H1, one exact canonical, reciprocal hreflang, Article and BreadcrumbList schema, no horizontal overflow, no console warning or error, a loaded product-evidence image, and an expandable visible FAQ. Source-native DOM checks confirmed one article, one product-evidence panel, and one instance of each H2; duplication seen in an earlier stitched full-page capture was a capture artifact rather than rendered DOM duplication. The pages remain unpublished and unindexed.
+- Result: pending
+- Decision: wait
+- Next step: Stop for exact commit, push, PR, merge, automatic Vercel deployment, and production-read verification approval. Request indexing and the declared OSS authority proposal remain separate approval decisions.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-30-competitive-intelligence-knowledge-base-locales at 2026-08-30T17:47:52Z
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-30-competitive-intelligence-knowledge-base-locales
+- Observed at: 2026-08-30T17:47:52Z
+- Readout: correction
+- Status: active
+- Evidence: The candidate was reconstructed from current `origin/main` `d94b807cc83f66ac5be85500682066fdb68d0d05` in an isolated clean worktree with unrelated dirty hunks excluded. Goal tests passed 50/50, i18n passed 76/76, SEO passed 252/252 with explicit authoritative sibling checkout paths, TypeScript passed, the production build generated 271/271 static pages, and the built technical audit passed with 156 sitemap owners, 24 required pages, and no FAQPage in 160 built HTML files. The first valid exact 393px Mandarin renders exposed semantic splits in `競品檔案` / `竞品档案`, `證據` / `证据`, and `追溯`; the existing localized renderer seam and fail-closed i18n contract now protect them. Fresh English, zh-TW, and zh-CN desktop and exact 393px captures have the correct viewport, canonical, reciprocal hreflang, Article and BreadcrumbList schema, one article and product-evidence panel, loaded image, expandable FAQ, no document overflow, no console warning or error, and no remaining protected-phrase split. Full provenance is in `docs/seo-audits/2026-08-30-competitive-intelligence-clean-rebuild-verification.md`.
+- Result: pending
+- Decision: wait
+- Next step: Stop for exact commit, push, pull request, merge, automatic Vercel deployment, and read-only production verification approval. Request indexing, GSC validation, analytics mutation, maintainer contact, the planned OSS authority proposal, paid actions, synthetic events, and other external publication remain separate decisions.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-30-competitive-intelligence-knowledge-base-locales publication approval
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-30-competitive-intelligence-knowledge-base-locales
+- Observed at: 2026-08-30T19:44:10Z
+- Readout: correction
+- Status: active
+- Evidence: The user explicitly approved the exact isolated `codex/competitive-intelligence-knowledge-base` candidate for commit, Git push, pull request creation, merge, automatic Vercel deployment, and read-only production verification. The candidate is based on current `origin/main` `d94b807cc83f66ac5be85500682066fdb68d0d05`; the complete clean verification receipt and publication manifest remain part of the approved scope.
+- Result: pending
+- Decision: merge
+- Next step: Commit and push only the clean manifest-owned diff, open and merge its pull request in turn, verify the integrated commit, wait for the automatic Vercel deployment, and verify all three production routes. Do not request indexing, submit GSC validation, mutate analytics, contact maintainers, publish the separately planned OSS authority proposal, buy traffic, generate synthetic events, or perform another external action.
+<!-- EXPERIMENT-RECORD:END -->

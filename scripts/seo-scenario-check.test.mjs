@@ -26,15 +26,40 @@ test("canonical trilingual scenario backlog is complete and generated report is 
   });
 
   assert.deepEqual(result.errors, []);
-  assert.equal(backlog.families.length, 13);
+  assert.equal(backlog.families.length, 14);
   assert.equal(
     backlog.families.at(-1)?.id,
-    "sre-incident-runbook-knowledge-base",
+    "competitive-intelligence-knowledge-base",
   );
   assert.equal(backlog.campaign.baseline.sitemapUrls, 120);
-  assert.equal(sitemapRows.length, 153);
+  assert.equal(sitemapRows.length, 156);
   assert.equal(result.sitemapCount, sitemapRows.length);
   assert.equal(renderScenarioBacklog(backlog), report);
+});
+
+test("competitive-intelligence family preserves one trilingual source-backed competitor-evidence task", () => {
+  const family = backlog.families.find(
+    (candidate) => candidate.id === "competitive-intelligence-knowledge-base",
+  );
+
+  assert.ok(family, "competitive-intelligence scenario family");
+  assert.match(family.audience, /product marketing|founders|strategy|market research/i);
+  assert.match(family.trigger, /competitor|battlecard|positioning|quarterly/i);
+  assert.match(family.userTask, /competitive intelligence knowledge base|competitor research/i);
+  assert.match(family.desiredOutcome, /traceable|current|contradiction|stale/i);
+  assert.equal(family.decision, "net-new");
+  assert.equal(family.publicationStatus, "prepared");
+  assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
+  assert.ok(
+    Object.values(family.gates).every((gate) => gate.status === "passed"),
+    "every competitive-intelligence candidate gate must pass",
+  );
+  assert.equal(family.internalLinks.length, 9);
+  assert.match(family.authorityPath.target, /startup-skill\/.*startup-competitors/i);
+  assert.match(
+    family.overlapCheck,
+    /crawl|scrap|live monitoring|pricing|automatic scoring|recommendation/i,
+  );
 });
 
 test("product-research family preserves one trilingual evidence-to-PRD task", () => {
