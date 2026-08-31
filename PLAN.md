@@ -677,10 +677,11 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-30-ict-supplier-due-diligence-locales` is active with exact
-  implementation, commit, push, PR, merge, automatic Vercel deployment, and
-  read-only production-verification approval recorded at
-  `2026-08-31T01:10:00Z`.
+  `EXP-2026-08-30-ict-supplier-due-diligence-locales` is live,
+  production-verified, and measuring from the fixed
+  `2026-08-31T01:26:37Z` boundary. PR #160 merged as
+  `6608763f95f016a611041ddf50324e2ac616c77e`; it no longer consumes the
+  production slot.
   `EXP-2026-08-30-competitive-intelligence-knowledge-base-locales` is live,
   production-verified, and measuring from the fixed
   `2026-08-30T19:48:14Z` boundary. PR #158 merged as
@@ -1303,11 +1304,11 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-30-ict-supplier-due-diligence-locales` is active in local
-implementation with the user's exact publication approval recorded at
-`2026-08-31T01:10:00Z`. It owns one source-bounded ICT/software supplier
-evidence pack per locale: provenance, data-access scope, resilience and
-security evidence, dependencies, gaps, questions, owner, and review date.
+`EXP-2026-08-30-ict-supplier-due-diligence-locales` is live,
+production-verified, and measuring from the fixed
+`2026-08-31T01:26:37Z` boundary. It owns one source-bounded ICT/software
+supplier evidence pack per locale: provenance, data-access scope, resilience
+and security evidence, dependencies, gaps, questions, owner, and review date.
 Certification validation, legal or privacy advice, vendor discovery,
 crawling, live monitoring, vulnerability scanning, automatic scoring,
 approval/rejection, and material outside approved controls are excluded.
@@ -4136,3 +4137,28 @@ unchanged.
   and no console warning or error. Protected Mandarin phrases did not split.
 - This proves only local technical readiness. Publication, crawl, indexing,
   impressions, clicks, visitors, authority, and causality remain unproven.
+
+## Campaign publication: ICT supplier due diligence at 2026-08-31T01:26:37Z
+
+- PR #160 merged at `2026-08-31T01:25:45Z` as
+  `6608763f95f016a611041ddf50324e2ac616c77e`; Vercel reported production
+  deployment success at `2026-08-31T01:26:37Z`.
+- The integrated merge commit passed Goal and scenario verification, 51 Goal
+  tests, 253 SEO tests, 77 i18n tests, TypeScript lint, the 275-page production
+  build, and the 159-owner built technical audit. A fresh merged-diff read found
+  the expected three routes, locale availability, nine contextual inbound
+  links, bounded capability claims, and no semantic integration conflict.
+- The deployed audit passed robots, all 159 sitemap URLs, 30 key pages, utility
+  noindex surfaces, 25 redirect checks, six bridge-host checks, and sitemap-wide
+  FAQPage absence. English, zh-TW, and zh-CN returned direct 200 with exact
+  canonicals, reciprocal hreflang, Article and BreadcrumbList schema, loaded
+  product evidence on the exact mobile checks, visible FAQ without FAQPage, no
+  horizontal overflow, and no console warning or error.
+- Keep `2026-08-31T01:26:37Z` as the fixed production boundary. The 24-hour
+  technical and indexability observation is due after
+  `2026-09-01T01:26:37Z`; the seven-day source-native GSC page/query and Vercel
+  page/referrer observation is due after `2026-09-07T01:26:37Z`.
+- This is publication evidence only. No crawl, indexing, rank, impression,
+  click, visitor, authority, or causal result is claimed, and no indexing
+  request, GSC validation, analytics mutation, OSS contribution, maintainer
+  message, paid action, or synthetic event occurred.

@@ -8918,3 +8918,17 @@ increase for that experiment.
 - Decision: merge
 - Next step: Commit and push the bounded candidate, open and merge one pull request, verify the integrated commit, wait for automatic Vercel production deployment, and verify all three live routes. Do not request indexing, submit GSC validation, mutate analytics, contribute to `pm-claude-skills`, contact another maintainer, buy traffic, generate synthetic events, or perform unrelated external publication.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-30-ict-supplier-due-diligence-locales production publication
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-30-ict-supplier-due-diligence-locales
+- Observed at: 2026-08-31T01:26:37Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #160 merged at `2026-08-31T01:25:45Z` as `6608763f95f016a611041ddf50324e2ac616c77e`; Vercel reported production deployment success at `2026-08-31T01:26:37Z`. The integrated commit passed Goal and scenario verification, 51/51 Goal tests, 253/253 SEO tests, 77/77 i18n tests, TypeScript lint, the 275-page production build, and the 159-owner built technical audit. A fresh merged-diff read found the expected route, locale, internal-link, and bounded-capability changes without semantic integration conflict. The deployed audit passed robots, all 159 sitemap URLs, 30 key pages, utility noindex surfaces, redirects, bridge hosts, and sitemap-wide FAQPage absence. English, zh-TW, and zh-CN returned direct 200 with exact canonicals, reciprocal hreflang, Article and BreadcrumbList schema, visible bounded supplier-evidence answers, loaded product evidence in the exact mobile checks, visible FAQ without FAQPage, no horizontal overflow, and no console warning or error. This proves publication and technical availability only; it is not a crawl, indexing, rank, impression, click, visitor, authority, or causal result.
+- Result: pending
+- Decision: wait
+- Next step: Keep `2026-08-31T01:26:37Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-09-01T01:26:37Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-07T01:26:37Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with at least 20 target-page impressions, 3 qualified joined-query impressions, and 1 GSC click. Do not request indexing, submit GSC validation, mutate analytics, contribute to `pm-claude-skills`, contact maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
+<!-- EXPERIMENT-RECORD:END -->
