@@ -8861,3 +8861,60 @@ increase for that experiment.
 - Decision: wait
 - Next step: Keep `2026-08-30T19:48:14Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-08-31T19:48:14Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-06T19:48:14Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with at least 20 target-page impressions, 3 qualified joined-query impressions, and 1 GSC click. Do not request indexing, submit GSC validation, mutate analytics, publish the planned OSS proposal, message maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Campaign readout: authority follow-up and ICT supplier due-diligence gate at 2026-08-31
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-30-competitive-intelligence-knowledge-base-locales
+- Observed at: 2026-08-31T00:13:40Z
+- Readout: correction
+- Status: measuring
+- Evidence: The user-approved one-time follow-up was posted to `awesome-selfhosted/awesome-selfhosted-data#2955` at `https://github.com/awesome-selfhosted/awesome-selfhosted-data/pull/2955#issuecomment-5472149912`. The comment only offered to adjust metadata or category when maintainers review the existing one-file submission. It remains attempted distribution, not earned authority: count it only after the PR is merged and the listing is visibly rendered upstream. No backlink, acceptance, or traffic is assumed, and no further maintainer contact is authorized under this record. Separately, the trilingual `ict-supplier-due-diligence-evidence-pack` candidate passes provenance, repeated demand, separate locale SERP, clean gap, Wenlan first-party proof, standalone utility, internal links, and its conditional authority-path gate. Full native-unit evidence is recorded in `docs/seo-scenario-backlog.json` and `docs/seo-audits/2026-08-30-ict-supplier-due-diligence-demand-gate.md`; it is not GSC data, keyword volume, rank, backlink, or causal evidence.
+- Result: inconclusive
+- Decision: scale
+- Next step: The production slot is open. Prepare the supplier family's English, zh-TW, and zh-CN pages locally while keeping it `net-new` / `not-published`; publication still requires a separate exact website approval. The conditional `mohitagw15856/pm-claude-skills/blob/main/skills/vendor-security-review/SKILL.md` path requires a separate contribution decision; maintainer acceptance and any backlink are not assumed. Do not open another OSS issue or PR, request indexing, validate GSC, mutate analytics, buy traffic, generate synthetic events, or publish externally under this record.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-30-ict-supplier-due-diligence-locales
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-30-ict-supplier-due-diligence-locales
+- Status: active
+- Data window: 2026-08-29..2026-09-04
+- Asset class: net-new-search
+- Launched: 2026-08-30
+- Hypothesis: One English, zh-TW, and zh-CN owner for a source-bounded ICT/software supplier due-diligence evidence pack can earn qualified discovery from supplier-security and due-diligence searches without cannibalizing investment research, RFP preparation, document ingestion, citation verification, tool selection, consulting, SRE, or competitive-intelligence intent.
+- Candidate evidence: Dated NIST, Taiwan NICS, New Taipei procurement, Microsoft supplier-assurance, separate locale result observations, maintained Wenlan source, overlap, internal-link, and conditional authority-path evidence is stored in `docs/seo-scenario-backlog.json` and `docs/seo-audits/2026-08-30-ict-supplier-due-diligence-demand-gate.md`. These observations are not authenticated GSC data, keyword volume, exact rank, backlink, or causal evidence.
+- Baseline: The latest completed authenticated range is `2026-07-31..2026-08-27`: GSC property 7 clicks and 913 impressions; visible-query 2 clicks and 221 impressions; visibility gap 5 clicks and 692 impressions; Vercel 289 visitors and 690 pageviews; GitHub 51 stars. New target-page and joined-query rows are unavailable rather than zero, and every source remains separate.
+- Change: Publish exactly one English, zh-TW, and zh-CN canonical that registers approved supplier sources, provenance, data-access scope, resilience and security evidence, dependencies, gaps, questions, owner, and review date. Explicitly exclude certification validation, legal or privacy advice, vendor discovery, crawling, live monitoring, vulnerability scanning, automatic scoring, approval/rejection, and material outside approved controls.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions per locale in 28 complete post-crawl days
+- Success criteria: Per locale, at least 3 qualified joined-query impressions and at least 1 GSC click after minimum exposure; report CTR and position separately.
+- Failure criteria: After 28 complete post-crawl days and minimum exposure, a locale has no qualified joined-query impressions or no GSC click, or an above-floor query-page join assigns the task to an existing owner or unsupported compliance, monitoring, scoring, or procurement-decision intent.
+- Stop criteria: Stop on a technical, unsupported compliance or decision claim, duplicate-intent, controller-overlap, canonical, locale, responsive-render, authority-path, or approval-boundary violation.
+- 24h readout: pending only after the production deployment completes
+- 7d readout: pending only after the production deployment completes
+- W2 readout: pending
+- W4 readout: pending formal 28-complete-post-crawl-day decision when eligible
+- W8 readout: pending only if useful after the Goal deadline
+- Result: pending
+- Decision: merge
+- Next step: Implement and verify the exact three-locale family, commit and push the bounded diff, open and merge one pull request, wait for automatic Vercel deployment, and verify all three production routes. Do not request indexing, submit GSC validation, mutate analytics, contribute to `pm-claude-skills`, contact another maintainer, buy traffic, generate synthetic events, or perform unrelated external publication.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-30-ict-supplier-due-diligence-locales local verification
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-30-ict-supplier-due-diligence-locales
+- Observed at: 2026-08-31T01:23:11Z
+- Readout: correction
+- Status: active
+- Evidence: The isolated candidate passed Goal and scenario verification with 15 trilingual families and 159 sitemap owners, 51/51 Goal tests, 253/253 SEO tests, 77/77 i18n tests, TypeScript lint, the 275-page production build, and the built technical audit with 159 sitemap URLs, 24 required pages, and no FAQPage in 163 built HTML pages. Fresh in-app Browser checks covered English, zh-TW, and zh-CN at exact `393x852` mobile and `1280x900` desktop sizes in light and dark themes. Every route had one H1, an exact self-canonical, reciprocal en-US/zh-TW/zh-CN/x-default hreflang, Article and BreadcrumbList schema, a loaded product-evidence image, visible FAQ without FAQPage, no horizontal overflow, and no console warning or error. Protected Traditional- and Simplified-Chinese supplier due-diligence phrases rendered without mobile splits. This is local technical evidence only; the pages remain unpublished and unindexed.
+- Result: pending
+- Decision: merge
+- Next step: Commit and push the bounded candidate, open and merge one pull request, verify the integrated commit, wait for automatic Vercel production deployment, and verify all three live routes. Do not request indexing, submit GSC validation, mutate analytics, contribute to `pm-claude-skills`, contact another maintainer, buy traffic, generate synthetic events, or perform unrelated external publication.
+<!-- EXPERIMENT-RECORD:END -->

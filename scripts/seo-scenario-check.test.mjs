@@ -26,13 +26,13 @@ test("canonical trilingual scenario backlog is complete and generated report is 
   });
 
   assert.deepEqual(result.errors, []);
-  assert.equal(backlog.families.length, 14);
+  assert.equal(backlog.families.length, 15);
   assert.equal(
     backlog.families.at(-1)?.id,
-    "competitive-intelligence-knowledge-base",
+    "ict-supplier-due-diligence-evidence-pack",
   );
   assert.equal(backlog.campaign.baseline.sitemapUrls, 120);
-  assert.equal(sitemapRows.length, 156);
+  assert.equal(sitemapRows.length, 159);
   assert.equal(result.sitemapCount, sitemapRows.length);
   assert.equal(renderScenarioBacklog(backlog), report);
 });
@@ -60,6 +60,38 @@ test("competitive-intelligence family preserves one trilingual source-backed com
     family.overlapCheck,
     /crawl|scrap|live monitoring|pricing|automatic scoring|recommendation/i,
   );
+});
+
+test("ICT supplier due-diligence family preserves its bounded trilingual evidence task", () => {
+  const family = backlog.families.find(
+    (candidate) => candidate.id === "ict-supplier-due-diligence-evidence-pack",
+  );
+
+  assert.ok(family, "ICT supplier due-diligence scenario family");
+  assert.match(family.audience, /procurement|security|IT/i);
+  assert.match(family.trigger, /supplier|provenance|currentness|evidence/i);
+  assert.match(family.userTask, /ICT|software supplier.*due-diligence/i);
+  assert.match(family.desiredOutcome, /provenance|resilience|security|review date/i);
+  assert.equal(family.decision, "net-new");
+  assert.equal(family.publicationStatus, "prepared");
+  assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
+  assert.ok(
+    Object.values(family.locales).every(
+      (locale) => locale.coverage === "gap" && locale.queryFamily.length >= 3,
+    ),
+    "every locale must preserve a clean supplier evidence gap",
+  );
+  assert.ok(
+    Object.values(family.gates).every((gate) => gate.status === "passed"),
+    "every supplier due-diligence candidate gate must pass",
+  );
+  assert.equal(family.internalLinks.length, 9);
+  assert.match(
+    family.authorityPath.target,
+    /pm-claude-skills.*skills\/vendor-security-review\/SKILL\.md/i,
+  );
+  assert.match(family.authorityPath.target, /backlink.*not assumed/i);
+  assert.match(family.overlapCheck, /certification|vulnerability scanning|approval|rejection/i);
 });
 
 test("product-research family preserves one trilingual evidence-to-PRD task", () => {
