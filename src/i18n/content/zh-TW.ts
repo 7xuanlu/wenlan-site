@@ -17,7 +17,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "e7f17f5869159324959a56fbe68512386230aec654984ac4751c8e84aa506cbf",
+    sourceHash: "109e11bfa9fdf80453b8146fe83de7fdef4950265b13f5fe98b6d63d4fa7cb4c",
     content: {
       seo: {
         title: "Wenlan 文瀾 | AI 工作的 LLM wiki",
@@ -83,7 +83,7 @@ export const zhTWContent = {
         title:
           "下\u2060載\u2060適\u2060合\u2060你\u2060系\u2060統\u2060的 Wenlan。",
         description:
-          "Wenlan v0.17.5 提供 Windows x64 桌面版與已公證的 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 套件。",
+          "Wenlan v0.17.6 提供 Windows x64 桌面版與已公證的 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 套件。",
         stableLabel: "穩定版",
         releaseNotesLabel: "版本說明",
         packageIncludesLabel: "內含 CLI、daemon 與 MCP connector",
@@ -129,7 +129,7 @@ export const zhTWContent = {
             name: "Wenlan 桌面版",
             architecture: "macOS · Apple silicon 預覽版",
             description:
-              "最快開始閱讀 Page 與檢查來源的方式。v0.17.5 Apple silicon DMG 已完成 notarization，可正常首次啟動。",
+              "最快開始閱讀 Page 與檢查來源的方式。v0.17.6 Apple silicon DMG 已完成 notarization，可正常首次啟動。",
             actionLabel: "下載 macOS 桌面預覽版",
             packageIncludesLabel: "桌面 App · 內含本地 runtime",
             guideLabel: "開啟安全安裝指南",
@@ -668,7 +668,7 @@ export const zhTWContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "3d837a529cb8a20f396a55f37a1851e82b0409886dab935666469097cf7b31a3",
+    sourceHash: "76178d52dbef4d60fee1366ba2c682244e49324f8d908626939f2a17e7ca8927",
     content: {
       seo: {
         title: "關於 Wenlan | AI 工作的 LLM wiki",
@@ -685,7 +685,7 @@ export const zhTWContent = {
         description:
           "AI 代理捕捉學到的內容，你加入信任來源，Wenlan 讓有來源依據的 wiki 頁面在 AI 工作中保持最新。",
         statusLabel: "專案狀態",
-        statusItems: ["版本 v0.17.5", "支援 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 建置"],
+        statusItems: ["版本 v0.17.6", "支援 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 建置"],
       },
       sections: [
         {
@@ -712,7 +712,7 @@ export const zhTWContent = {
           number: "04",
           title: "目前狀態",
           paragraphs: [
-            "Wenlan v0.17.5 提供已公證的 macOS Apple Silicon DMG 與 Windows x64 桌面版，以及 macOS、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64) 原生 headless runtime 套件。Windows 使用者可以選擇桌面版 setup 安裝檔或 headless runtime ZIP。daemon、CLI、MCP server、Claude Code plugin 與 Codex plugin 採 Apache-2.0；桌面 App crate 採 AGPL-3.0-only。",
+            "Wenlan v0.17.6 提供已公證的 macOS Apple Silicon DMG 與 Windows x64 桌面版，以及 macOS、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64) 原生 headless runtime 套件。Windows 使用者可以選擇桌面版 setup 安裝檔或 headless runtime ZIP。daemon、CLI、MCP server、Claude Code plugin 與 Codex plugin 採 Apache-2.0；桌面 App crate 採 AGPL-3.0-only。",
           ],
         },
       ],
@@ -1289,7 +1289,7 @@ export const zhTWContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "4c86a5adf8a207af74c04310d1d93155b426280704aeec730cf4e83ddb686b01",
+    sourceHash: "92defadd2f989cd66e6d7a7ddbb5cc7249578561f28970f27a785be40600a15e",
     content: {
       seo: {
         title: "安裝 Wenlan：Claude Code、Codex、ChatGPT 與 MCP",
@@ -1315,7 +1315,7 @@ export const zhTWContent = {
           number: "01",
           title: "安裝適合你系統的 runtime",
           paragraphs: [
-            "Wenlan v0.17.5 提供 Windows x64、macOS Apple silicon，以及 Linux x64 或 ARM64 glibc 的原生 runtime 套件。每份 runtime archive 都包含 CLI、daemon 與 MCP connector。",
+            "Wenlan v0.17.6 提供 Windows x64、macOS Apple silicon，以及 Linux x64 或 ARM64 glibc 的原生 runtime 套件。每份 runtime archive 都包含 CLI、daemon 與 MCP connector。",
             "在 Windows 上，請把 wenlan-windows-x64.zip 當成一個整體解壓到使用者擁有且已加入 PATH 的目錄。onnxruntime.dll、vulkan-1.dll 與三個執行檔必須放在一起。",
           ],
           commands: [
@@ -1326,13 +1326,13 @@ export const zhTWContent = {
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.17.5/wenlan-windows-x64.zip",
+              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.17.6/wenlan-windows-x64.zip",
               label: "下載 Windows x64",
             },
             {
               id: "all-downloads",
-              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.17.5",
-              label: "全部 v0.17.5 下載",
+              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.17.6",
+              label: "全部 v0.17.6 下載",
             },
           ],
         },
