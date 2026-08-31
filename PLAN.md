@@ -4162,3 +4162,83 @@ unchanged.
   click, visitor, authority, or causal result is claimed, and no indexing
   request, GSC validation, analytics mutation, OSS contribution, maintainer
   message, paid action, or synthetic event occurred.
+
+## Factual release correction approval: Wenlan v0.17.6 at 2026-08-31
+
+- GitHub Releases is the immutable product-release source for this correction.
+  It reports `v0.17.6`, published `2026-08-31T00:25:35Z`, while the production
+  download page still renders `v0.17.5`.
+- The user explicitly approved correcting and publishing the website release
+  surfaces. The exact scope is release metadata and real asset links, download,
+  About, Get Started, changelog, structured data, sitemap dates, Open Graph,
+  `llms.txt`, `llms-full.txt`, and the corresponding trilingual and deterministic
+  contracts.
+- The release keeps the published Windows x64 desktop and runtime assets, the
+  notarized macOS Apple Silicon desktop asset, and macOS and Linux headless
+  runtimes. Its source-backed highlights are Page summary and citation fixes,
+  MCP recall scope, installed Codex skill path resolution, and bounded desktop
+  UI corrections recorded in the tagged changelog.
+- This is an early factual release correction permitted by the authority-first
+  contract, not a search-growth experiment. It does not move any experiment
+  boundary or claim crawl, indexing, ranking, impressions, clicks, visitors,
+  downloads caused by the website, or SEO success.
+- Approval covers the bounded commit, Git push, pull request, merge, automatic
+  Vercel deployment, and read-only production verification. Request indexing,
+  GSC validation, analytics mutation, source-repository changes, paid action,
+  maintainer messaging, synthetic events, and unrelated publication remain
+  excluded.
+
+## Campaign observation: recent GitHub star wave at 2026-08-31T05:44:24Z
+
+- GitHub reports 60 current stars. The latest authenticated weekly report
+  captured 51 at `2026-08-28T16:02:33.553Z`, so the source-native net increase
+  from that fixed capture is 9. GitHub exposes nine current stargazer events
+  between `2026-08-30T08:48:22Z` and `2026-08-31T02:00:36Z`. A user-observed
+  increase of 10 may use an earlier starting point or include a later removed
+  star; do not overwrite the current net evidence.
+- GitHub's rolling traffic referrers separately report 9 unique visitors from
+  `github.com`, 7 from `t.co`, 5 from `l.threads.com`, 2 from Google, and 1 each
+  from `lib.rs` and mobile Facebook. Popular paths separately report 34 unique
+  visitors to the repository overview and 8 to `README.zh-Hans.md`. These are
+  aggregate referrer and path units, not person-level source-to-star joins.
+- Release `v0.17.5` was published at `2026-08-30T04:02:06Z`, before the nine-star
+  cluster. At capture time it had 41 total release-asset downloads, including
+  11 Windows desktop setup downloads and 10 Linux x64 runtime downloads.
+  Release `v0.17.6` was published at `2026-08-31T00:25:35Z`, after six of the
+  nine star events, and had 12 total asset downloads. These are cumulative
+  point-in-time counters; they do not prove downloader-to-star causality.
+- The supported inference is a release-led Mandarin social burst: X and
+  Threads referrers, the simplified-Chinese README path, a directly installable
+  Windows release, and the concentrated timestamps align. The evidence does
+  not support attributing this wave to website SEO; Google contributed only 2
+  unique GitHub referrers, and `wenlan.app` does not appear in the returned
+  popular-referrer rows.
+- Treat this as a repeatable candidate channel, not a durable result yet. For
+  the next two or three meaningful releases, preserve each English, zh-TW, and
+  zh-CN distribution timestamp and separately read 24-hour and seven-day
+  GitHub stars, unique views, referrers, popular paths, and release-asset
+  downloads. Only repeated source-native waves establish sustainability.
+
+## Local verification: Wenlan v0.17.6 website alignment at 2026-08-31T05:44:24Z
+
+- The release contract first failed against the immutable `v0.17.6` tag because
+  the website still declared `0.17.5`; the same focused contract passes after
+  the correction. GitHub release metadata, tagged CHANGELOG, README, exact asset
+  names, published time, and asset sizes were used as source facts.
+- Goal and scenario verification passes with 51 tests. SEO passes with 253
+  tests, i18n with 77 tests, TypeScript lint passes, the 275-page production
+  build passes, and the built technical audit passes 159 sitemap URLs, 24 key
+  HTML pages, redirects, noindex surfaces, robots, and sitemap-wide FAQPage
+  absence. The first build attempt was invalid because Turbopack rejected an
+  out-of-root `node_modules` symlink; the reported pass is from a clean worktree
+  install and a new successful build.
+- The English, zh-TW, and zh-CN download routes render `v0.17.6`, exact locale
+  canonicals, the six published asset links, no `v0.17.5` text, no horizontal
+  overflow, and no browser warnings or errors at desktop and exact `393x852`
+  mobile sizes. English structured data exposes software version `0.17.6`.
+  Screenshots are stored under `/tmp/wenlan-v0176-download-*.png` for this run.
+- Read-only HEAD checks followed every website-linked `v0.17.6` asset through
+  GitHub's redirect and returned 200. This proves local release-surface
+  readiness and current asset availability only. Production publication and
+  live-site alignment remain pending until the approved PR is merged and the
+  automatic Vercel deployment completes.

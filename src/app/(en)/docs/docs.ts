@@ -3605,7 +3605,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.17.5 line.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.17.6 line.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3739,7 +3739,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Open the app source",
-          href: "https://github.com/7xuanlu/wenlan/tree/v0.17.5/app",
+          href: "https://github.com/7xuanlu/wenlan/tree/v0.17.6/app",
         },
       },
       {
@@ -3783,22 +3783,35 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.17.5",
+      "Wenlan version 0.17.6",
       "wenlan-mcp release notes",
     ],
-    updatedAt: "2026-08-30",
+    updatedAt: "2026-08-31",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Quick answer: the current stable release in the repository changelog is v0.17.5, dated 2026-08-30.",
+      "Quick answer: the current stable release in the repository changelog is v0.17.6, dated 2026-08-31.",
       "The unified release publishes native runtime archives plus macOS Apple Silicon and Windows x64 desktop builds and updater artifacts.",
     ],
     sections: [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.17.5 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It keeps the Windows x64 desktop build and native headless runtime archives, carries the notarized macOS Apple Silicon DMG, and stops the Remote Access secret from being written to the app log.",
+          "Wenlan v0.17.6 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It keeps the Windows x64 desktop build, native headless runtime archives, and notarized macOS Apple Silicon DMG while fixing page summaries, citation chips, MCP recall scope, Codex plugin path resolution, and several desktop UI states.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
+        ],
+      },
+      {
+        heading: "v0.17.6 highlights",
+        body: [
+          "The v0.17.6 patch release fixes source-backed Page summaries and citations, broadens MCP recall to the intended cross-agent result set, repairs installed Codex skill path resolution, and corrects several desktop review and Atlas states.",
+        ],
+        bullets: [
+          "Page summaries now use the first prose sentence instead of the first bullet, rebuild when a Page is rebuilt, and preserve citation chips when the lede is the first sentence.",
+          "MCP recall no longer filters results to the calling agent.",
+          "Installed Codex plugin skills can locate resolve-space.sh.",
+          "Desktop fixes cover archived-card opacity, Atlas region labels, and opening the Home review dialog on the decisions counted by its rail.",
+          "Stable release date: 2026-08-31.",
         ],
       },
       {
@@ -3921,7 +3934,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.17.5, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.17.6, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },
