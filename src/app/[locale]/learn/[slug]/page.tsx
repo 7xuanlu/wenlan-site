@@ -67,7 +67,7 @@ function sectionId(heading: string, index: number): string {
 
 function renderProtectedCjkTerms(text: string) {
   return text
-    .split(/(Karpathy LLM Wiki：|供應商盡職調查|供应商尽职调查|證據包|证据包|複審|复审|SRE 事故知識庫|SRE 故障知识库|與事故復盤|与故障复盘|事故復盤|故障复盘|客戶專案知識庫|客户项目知识库|競品檔案|竞品档案|顧問案|咨询项目|研究知識庫|研究知识库|產品研究|产品研究|產品決策|产品决策|論文 PDF|论文 PDF|文獻矩陣|文献矩阵|AI 知識庫|AI 知识库|知識庫|知识库|驗收資料|验收资料|證據|证据|追溯|8 項|8 项|來源|来源|記什麼？|记录什么？)/g)
+    .split(/(Karpathy LLM Wiki：|供應商盡職調查|供应商尽职调查|證據包|证据包|複審|复审|SRE 事故知識庫|SRE 故障知识库|與事故復盤|与故障复盘|事故復盤|故障复盘|客戶專案知識庫|客户项目知识库|競品檔案|竞品档案|顧問案|咨询项目|研究知識庫|研究知识库|產品研究|产品研究|產品決策|产品决策|論文 PDF|论文 PDF|文獻矩陣|文献矩阵|AI 知識庫|AI 知识库|客服答案知識庫|客服答案知识库|知識庫|知识库|驗收資料|验收资料|證據|证据|追溯|8 項|8 项|來源|来源|記什麼？|记录什么？|不可承諾|不可承诺|禁止承诺|轉人工|转人工)/g)
     .map((part, index) =>
       part === "Karpathy LLM Wiki：" ||
       part === "供應商盡職調查" ||
@@ -112,7 +112,14 @@ function renderProtectedCjkTerms(text: string) {
       part === "來源" ||
       part === "来源" ||
       part === "記什麼？" ||
-      part === "记录什么？" ? (
+      part === "记录什么？" ||
+      part === "客服答案知識庫" ||
+      part === "客服答案知识库" ||
+      part === "不可承諾" ||
+      part === "不可承诺" ||
+      part === "禁止承诺" ||
+      part === "轉人工" ||
+      part === "转人工" ? (
         <span
           key={`${part}-${index}`}
           className="whitespace-nowrap max-[360px]:whitespace-normal"
@@ -215,7 +222,8 @@ export default async function LocalizedLearnSlugPage({
     article.slug === "build-product-research-knowledge-base-for-prd" ||
     article.slug === "build-sre-incident-knowledge-base" ||
     article.slug === "build-competitive-intelligence-knowledge-base" ||
-    article.slug === "build-ict-supplier-due-diligence-evidence-pack"
+    article.slug === "build-ict-supplier-due-diligence-evidence-pack" ||
+    article.slug === "build-customer-support-answer-knowledge-base"
       ? renderProtectedCjkTerms
       : (text: string) => text;
 
@@ -337,7 +345,7 @@ export default async function LocalizedLearnSlugPage({
                 {chrome.learn}
               </LocalizedLink>
             </nav>
-            <div className="mt-12 grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
+            <div className="mt-12 grid min-w-0 grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
               <div className="min-w-0">
                 <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
                   {article.eyebrow}
@@ -381,7 +389,7 @@ export default async function LocalizedLearnSlugPage({
 
         <section className="px-6 py-16">
           <div className="mx-auto max-w-5xl">
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-3">
               {article.heroBullets.map((bullet, index) => (
                 <div key={bullet} className="card-wenlan rounded-xl p-5">
                   <p className="mb-5 font-mono text-[11px] text-[var(--o-warm)]">

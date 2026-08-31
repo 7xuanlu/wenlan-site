@@ -8932,3 +8932,17 @@ increase for that experiment.
 - Decision: wait
 - Next step: Keep `2026-08-31T01:26:37Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-09-01T01:26:37Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-07T01:26:37Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with at least 20 target-page impressions, 3 qualified joined-query impressions, and 1 GSC click. Do not request indexing, submit GSC validation, mutate analytics, contribute to `pm-claude-skills`, contact maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-29-sre-incident-knowledge-base-locales 24h technical and indexability
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-29-sre-incident-knowledge-base-locales
+- Observed at: 2026-08-31T05:06:46Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The fixed production boundary remains `2026-08-30T05:06:25Z`. Direct live GETs for the English, zh-TW, and zh-CN canonicals each returned 200 with no redirect, exact self-canonical, reciprocal en-US/zh-TW/zh-CN/x-default hreflang, sitemap membership, Article and BreadcrumbList dated `2026-08-29`, visible runbook, postmortem or incident-review, safety-limit, and FAQ answers, and no FAQPage schema. The latest successfully completed authenticated Friday capture covers `2026-07-31..2026-08-27`, ending before publication: GSC property is 7 clicks / 913 impressions, visible-query is 2 / 221, and the 5-click / 692-impression visibility gap remains separate. No SRE target-page or joined query-page row exists in that pre-deploy range, so all three locale observations are unavailable rather than zero. Vercel remains 289 visitors / 690 pageviews; direct is 257 visitors / 654 pageviews, and qualified referrers remain separate. No SRE page or source-to-page row exists in the preserved range. GitHub is 51 stars at the report's `2026-08-28T16:02:33.553Z` capture. Authenticated URL Inspection was unavailable in this task, so post-deploy crawl and indexing state remain unavailable. Independently, GitHub Releases now reports immutable `v0.17.6`, published `2026-08-31T00:25:35Z`, with 12 asset downloads at capture time, while the live download page still renders `v0.17.5`; this is a release-alignment finding, not SRE traffic evidence.
+- Result: inconclusive
+- Decision: wait
+- Next step: Run the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-06T05:06:25Z`. Separately align the website to immutable `v0.17.6` only with explicit publication approval. Do not request indexing, submit GSC validation, mutate analytics, contact maintainers, buy traffic, generate synthetic events, change metric definitions, or publish externally under this record.
+<!-- EXPERIMENT-RECORD:END -->
