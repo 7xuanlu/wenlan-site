@@ -4242,3 +4242,26 @@ unchanged.
   readiness and current asset availability only. Production publication and
   live-site alignment remain pending until the approved PR is merged and the
   automatic Vercel deployment completes.
+
+## Campaign publication: Wenlan v0.17.6 website alignment at 2026-08-31T05:49:10Z
+
+- PR #162 merged at `2026-08-31T05:48:21Z` as
+  `ed5344e018f1f09cc4905d2a77abf43aaaa00476`; Vercel reported production
+  deployment success at `2026-08-31T05:49:10Z`.
+- The integrated merge commit passed Goal verification, 51 Goal tests, 253 SEO
+  tests, 77 i18n tests, TypeScript lint, the 275-page production build, and the
+  159-owner built technical audit. The merged diff contains only the approved
+  release surfaces, deterministic contracts, and campaign evidence.
+- The deployed audit passed robots, all 159 sitemap URLs, 30 key pages, six
+  utility noindex surfaces, 25 redirect checks, six bridge-host checks, and
+  sitemap-wide FAQPage absence. English, zh-TW, and zh-CN download routes return
+  direct 200 responses with exact canonicals and `v0.17.6`; the English
+  structured data reports software version `0.17.6` and all six published asset
+  links remain visible. The live desktop render has no visible release-layout
+  regression. Historical `v0.17.5` changelog text in `llms-full.txt` remains
+  intentionally preserved and is not the current-release declaration.
+- This closes the factual release correction only. It does not move a search
+  experiment boundary or claim a new crawl, indexing, ranking, impressions,
+  clicks, visitors, download attribution, star attribution, or SEO success. No
+  indexing request, GSC validation, analytics mutation, source-repository
+  change, paid action, maintainer message, or synthetic event occurred.
