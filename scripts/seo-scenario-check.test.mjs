@@ -32,7 +32,7 @@ test("canonical trilingual scenario backlog is complete and generated report is 
     "ict-supplier-due-diligence-evidence-pack",
   );
   assert.equal(backlog.campaign.baseline.sitemapUrls, 120);
-  assert.equal(sitemapRows.length, 156);
+  assert.equal(sitemapRows.length, 159);
   assert.equal(result.sitemapCount, sitemapRows.length);
   assert.equal(renderScenarioBacklog(backlog), report);
 });
@@ -73,7 +73,7 @@ test("ICT supplier due-diligence family preserves its bounded trilingual evidenc
   assert.match(family.userTask, /ICT|software supplier.*due-diligence/i);
   assert.match(family.desiredOutcome, /provenance|resilience|security|review date/i);
   assert.equal(family.decision, "net-new");
-  assert.equal(family.publicationStatus, "not-published");
+  assert.equal(family.publicationStatus, "prepared");
   assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
   assert.ok(
     Object.values(family.locales).every(

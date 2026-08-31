@@ -1651,6 +1651,7 @@ const workflowArticles: BaseSpec[] = [
       "build-sre-incident-knowledge-base",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
+      "build-ict-supplier-due-diligence-evidence-pack",
     ],
     officialReferences: [
       {
@@ -1738,6 +1739,7 @@ const workflowArticles: BaseSpec[] = [
       "verify-ai-knowledge-base-citations",
       "source-backed-wiki-pages-ai-work",
       "choose-ai-knowledge-base-tool",
+      "build-ict-supplier-due-diligence-evidence-pack",
     ],
     officialReferences: [
       {
@@ -2935,6 +2937,7 @@ const trustArticles: BaseSpec[] = [
       "build-investment-research-knowledge-base",
       "build-product-research-knowledge-base-for-prd",
       "build-sre-incident-knowledge-base",
+      "build-ict-supplier-due-diligence-evidence-pack",
     ],
     officialReferences: [
       {
@@ -3716,6 +3719,159 @@ const competitiveIntelligenceKnowledgeBaseArticle: BaseSpec = {
 };
 
 workflowArticles.push(competitiveIntelligenceKnowledgeBaseArticle);
+
+const ictSupplierDueDiligenceArticle: BaseSpec = {
+  slug: "build-ict-supplier-due-diligence-evidence-pack",
+  eyebrow: "Supplier review workflow",
+  category: "Workflows",
+  title: "How to Build an ICT Supplier Due Diligence Evidence Pack",
+  description:
+    "Organize approved software-supplier documents into a source-backed evidence pack with provenance, scope, gaps, owners, and review dates.",
+  metaTitle: "Build an ICT Supplier Due Diligence Evidence Pack | Wenlan",
+  metaDescription:
+    "Build a source-backed ICT supplier due diligence evidence pack for software vendor security review, with provenance, scope, gaps, and re-review dates.",
+  keywords: [
+    "ICT supplier due diligence",
+    "software vendor security assessment",
+    "supplier cybersecurity evidence pack",
+    "third party risk assessment documents",
+    "vendor due diligence checklist",
+    "supplier security review",
+  ],
+  publishedAt: "2026-08-30",
+  updatedAt: "2026-08-30",
+  readingTime: "9 min read",
+  audience:
+    "Procurement, security, and IT owners reviewing one ICT or software supplier before approval or renewal",
+  heroBullets: [
+    "Keep every supplier claim attached to an approved document, date, revision, and evidence scope.",
+    "Record data access, resilience, foundational security evidence, dependencies, and unanswered questions separately.",
+    "Give the packet an owner and re-review date instead of turning old questionnaire answers into permanent truth.",
+  ],
+  quickAnswer:
+    "Build one evidence pack for one ICT or software supplier. Register only approved source documents, then record each claim's provenance, revision, data-access scope, resilience and security evidence, dependencies, gaps, owner, and review date. Mark unsupported or stale claims as unverified and keep the final approval decision with procurement, security, legal, and privacy reviewers.",
+  quickAnswerLink: {
+    label: "See the supplier evidence workflow",
+    href: "#product-evidence",
+  },
+  wenlanFit:
+    "Wenlan can connect supported Markdown, text, text-extractable PDFs, folders, and read-only Obsidian sources to source-backed Pages, citations, revisions, stale state, lint, and human review. It does not validate certifications, crawl vendor sites, monitor suppliers, scan vulnerabilities, score risk, or approve procurement.",
+  problem:
+    "Supplier reviews often mix a current security policy, an old questionnaire, an architecture diagram, a certification claim, and an email clarification into one spreadsheet. Without source dates and scope, a confident summary can hide which statement is current, which applies only to one service, and which still lacks evidence.",
+  actionHeading: "Build one reviewable supplier evidence pack",
+  actionIntro:
+    "Start with one supplier and one procurement or renewal decision. The source register and review fields remain useful even if the team does not use Wenlan.",
+  actionBullets: [
+    "Define the supplier, product or service, decision, business owner, review team, date range, approved source set, and excluded confidential material.",
+    "Register current policies, architecture and data-flow documents, resilience material, subprocessors or dependencies, completed questionnaires, and dated clarifications only when your organization has approved their use.",
+    "For every important claim, record the exact source passage, document revision, service scope, data-access profile, evidence owner, and next review date.",
+    "Separate supplied evidence, reviewer interpretation, residual risk, missing evidence, contradictions, and open questions. Never turn an unanswered questionnaire row into an affirmative control claim.",
+    "Map dependencies and supplier tiers explicitly. A downstream service, subprocessor, or hosting dependency may need its own evidence and owner.",
+    "When a document or service scope changes, resync the affected source and mark dependent claims stale until a qualified reviewer checks the new revision.",
+    "Before approval or renewal, open the cited source and let procurement, security, legal, and privacy owners make the decision under the organization's existing controls.",
+  ],
+  code: {
+    label: "A bounded supplier-evidence workflow",
+    code: "wenlan status\nwenlan sources add ~/Reviews/approved-supplier-docs\n# In a Wenlan plugin client:\n/distill <supplier and review scope>\n/pages <supplier evidence pack>\n/lint\n/curate",
+  },
+  caution:
+    "A questionnaire or evidence pack is not a security guarantee. Wenlan does not validate certifications, perform legal or privacy review, discover vendors, crawl websites, monitor live supplier changes, scan vulnerabilities, score risk, or approve or reject a supplier. Keep sensitive material inside your organization's approved access controls and use qualified human reviewers.",
+  productEvidence: {
+    heading: "Inspect source and review state before reusing a supplier claim",
+    summary:
+      "This genuine Wenlan desktop capture comes from the app's deterministic test fixture, not a supplier review or customer workspace. It shows maintained Pages with source counts and a review queue, the product surfaces used to keep source changes and unresolved evidence visible.",
+    image: {
+      src: "/images/product-evidence/wenlan-space-review-fixture.png",
+      alt: "Wenlan desktop Space showing maintained Pages with source counts and a review queue for source conflicts and newly available evidence.",
+      caption:
+        "Genuine Wenlan app capture from a deterministic test fixture. It is a general product example, not supplier security evidence; source counts and review state remain directly inspectable.",
+      width: 1586,
+      height: 992,
+    },
+    workflow: [
+      {
+        label: "Bound the supplier review",
+        detail:
+          "Choose one supplier, service, decision, approved source set, and responsible reviewers before adding material.",
+      },
+      {
+        label: "Build a cited evidence register",
+        detail:
+          "Keep provenance, revision, data-access scope, resilience and security evidence, dependencies, gaps, and questions attached to exact sources.",
+      },
+      {
+        label: "Re-review before a decision",
+        detail:
+          "Open the cited passage, inspect stale or conflicting evidence, and leave approval with the organization's qualified procurement, security, legal, and privacy owners.",
+      },
+    ],
+    artifactHeading: "Worked supplier evidence packet",
+    artifactNote:
+      "This is a vendor-neutral review structure, not a certification or procurement decision. Replace every row with approved evidence for one supplier and service scope.",
+    artifactRows: [
+      {
+        label: "Evidence input",
+        detail:
+          "An approved policy, architecture or data-flow document, resilience plan, questionnaire, subprocessor record, or dated clarification with revision and owner.",
+      },
+      {
+        label: "Review statement",
+        detail:
+          "One supplied fact, reviewer interpretation, residual risk, contradiction, missing item, or open question linked to the exact passage and service scope.",
+      },
+      {
+        label: "Review state",
+        detail:
+          "Current, stale, contradicted, unsupported, or pending, with evidence owner, reviewer, dependency, and next review date recorded.",
+      },
+    ],
+    action: {
+      label: "See the supplier evidence workflow",
+      href: "#product-evidence",
+    },
+  },
+  faq: [
+    "Can Wenlan validate a supplier's certification or approve the vendor?",
+    "No. Wenlan does not validate certifications, score supplier risk, or approve procurement. It helps keep approved documents, claims, gaps, revisions, and review state inspectable for qualified reviewers.",
+    "Is a completed vendor questionnaire enough evidence?",
+    "No. Treat each answer as one supplied claim. Record its source, date, scope, owner, supporting document, contradictions, and next review date; leave unsupported answers explicitly unverified.",
+  ],
+  relatedSlugs: [
+    "build-local-ai-knowledge-base-from-documents",
+    "verify-ai-knowledge-base-citations",
+    "source-backed-research-knowledge-base",
+    "choose-ai-knowledge-base-tool",
+    "build-competitive-intelligence-knowledge-base",
+  ],
+  officialReferences: [
+    {
+      label: "Wenlan supported document sources",
+      href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+    },
+    {
+      label: "Wenlan source-backed Pages",
+      href: "https://wenlan.app/docs/source-backed-pages",
+    },
+    {
+      label: "Wenlan review and trust",
+      href: "https://wenlan.app/docs/review-and-trust",
+    },
+    {
+      label: "NIST SP 1326 ICT supplier due diligence guide",
+      href: "https://www.nist.gov/publications/nist-cybersecurity-supply-chain-management-due-diligence-assessment-quick-start-guide",
+    },
+    {
+      label: "Microsoft Supplier Security and Privacy Assurance",
+      href: "https://learn.microsoft.com/en-us/compliance/assurance/assurance-supplier-security-and-privacy-assurance-program",
+    },
+  ],
+  cta: {
+    heading: "Make one supplier review traceable",
+    body: "Choose one supplier and service scope, connect approved evidence, and leave every unsupported or stale claim visible before the decision meeting.",
+  },
+};
+
+workflowArticles.push(ictSupplierDueDiligenceArticle);
 
 const productResearchArticle: LearnArticle = {
   slug: "build-product-research-knowledge-base-for-prd",

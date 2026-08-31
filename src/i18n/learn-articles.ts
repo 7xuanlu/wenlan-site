@@ -990,6 +990,7 @@ const zhTWArticles = {
       "build-sre-incident-knowledge-base",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
+      "build-ict-supplier-due-diligence-evidence-pack",
     ],
     officialReferences: [
       {
@@ -1657,6 +1658,7 @@ const zhTWArticles = {
       "build-investment-research-knowledge-base",
       "build-product-research-knowledge-base-for-prd",
       "build-sre-incident-knowledge-base",
+      "build-ict-supplier-due-diligence-evidence-pack",
     ],
     officialReferences: [
       {
@@ -1782,6 +1784,7 @@ const zhTWArticles = {
       "verify-ai-knowledge-base-citations",
       "source-backed-wiki-pages-ai-work",
       "choose-ai-knowledge-base-tool",
+      "build-ict-supplier-due-diligence-evidence-pack",
     ],
     officialReferences: [
       {
@@ -2536,6 +2539,145 @@ const zhTWArticles = {
     cta: {
       heading: "讓一個競品決策可追溯",
       body: "選定有界問題，連接獲准來源，並在 battlecard 或產品決策使用前審查每個重要主張。",
+    },
+  },
+  "build-ict-supplier-due-diligence-evidence-pack": {
+    slug: "build-ict-supplier-due-diligence-evidence-pack",
+    eyebrow: "供應商審查工作流",
+    category: "Workflows",
+    title: "如何建立 ICT 供應商資安盡職調查證據包",
+    description:
+      "把核准的軟體供應商文件整理成可追溯的證據包，清楚標示來源、適用範圍、缺口、負責人與複審日期。",
+    metaTitle: "建立 ICT 供應商資安盡職調查證據包 | Wenlan",
+    metaDescription:
+      "建立軟體供應商資安盡職調查證據包，保存文件來源、服務範圍、風險缺口、待確認事項與複審日期。",
+    keywords: [
+      "ICT 供應商資安盡職調查",
+      "軟體供應商資安評估",
+      "供應商風險評估問卷",
+      "資通服務採購資安佐證",
+      "第三方供應商風險評估",
+      "供應商資安證據包",
+    ],
+    publishedAt: "2026-08-30",
+    updatedAt: "2026-08-30",
+    author: "Qi-Xuan Lu",
+    readingTime: "9 分鐘閱讀",
+    audience: "在採購或續約前審查單一 ICT 或軟體供應商的採購、資安與 IT 負責人",
+    heroBullets: [
+      "讓每個供應商主張都連回核准文件、日期、修訂與適用服務範圍。",
+      "分開記錄資料存取、營運韌性、資安佐證、依賴關係與尚未回答的問題。",
+      "為證據包指定負責人與複審日期，不把舊問卷答案當成永久事實。",
+    ],
+    sections: [
+      {
+        heading: "先說結論：一次審查只處理一個供應商與服務範圍",
+        body: [
+          "先固定供應商、產品或服務、採購或續約決策、資料存取範圍、審查人員與核准來源。證據包至少要記錄來源文件、修訂、適用範圍、韌性與資安佐證、相依服務、缺口、待確認事項、負責人與複審日期。",
+          "無法由來源支持或已過期的主張要明確標為未驗證。最後的採購判斷仍由組織內的採購、資安、法務與隱私負責人依既有制度作出。",
+        ],
+      },
+      {
+        heading: "把問卷、政策與架構文件拆成可檢查的證據",
+        body: [
+          "供應商審查常把現行資安政策、舊問卷、架構圖、驗證聲明與郵件補充混在同一張表。若沒有日期與適用範圍，摘要再流暢也無法回答某項控制是否適用於正在採購的服務。",
+        ],
+        bullets: [
+          "建立來源登錄：保存文件名稱、版本、日期、提供者、適用服務與允許使用範圍。",
+          "逐項記錄主張：連到確切段落，分開供應商陳述、審查者解讀、殘餘風險、矛盾與缺件。",
+          "標示資料與系統存取：記錄資料類型、權限、儲存位置、保留方式與次處理者或關鍵依賴。",
+          "設定複審：來源或服務範圍改變時，先把依賴該證據的結論標為過期，再交由具名負責人確認。",
+        ],
+        code: {
+          label: "有界的供應商證據工作流",
+          code: "wenlan status\nwenlan sources add ~/Reviews/approved-supplier-docs\n# 在 Wenlan plugin client 中：\n/distill <供應商與審查範圍>\n/pages <供應商證據包>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "一份可複審的供應商證據包應包含什麼",
+        body: [
+          "把每一項內容標為目前有效、過期、互相矛盾、缺乏支持或待補件，並保留證據負責人、審查者、相依服務與下次複審日期。問卷答案只能算供應商提供的一項主張，不能直接等同控制已有效落實。",
+          "即使不使用 Wenlan，這份來源登錄、缺口清單與複審欄位仍可作為採購會議中的獨立工作產物。",
+        ],
+      },
+      {
+        heading: "Wenlan 的能力與安全邊界",
+        body: [
+          "Wenlan 能把核准的 Markdown、文字、可擷取文字的 PDF、資料夾與唯讀 Obsidian 來源，整理成有來源的 Pages，並顯示引用、修訂、過期狀態、lint 與人工審查。",
+          "Wenlan 不會驗證認證真偽、不提供法律或隱私意見、不發現供應商、不爬取網站、不做即時監控或弱點掃描、不自動評分，也不核准或拒絕採購。敏感文件仍須留在組織核准的存取控制中。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 可以驗證供應商認證或直接核准採購嗎？",
+        answer:
+          "不可以。Wenlan 不驗證認證、不評分供應商，也不做採購決策；它只讓核准文件、主張、缺口、修訂與審查狀態可追溯。",
+      },
+      {
+        question: "完成供應商風險評估問卷就足夠嗎？",
+        answer:
+          "不夠。每個答案都要附來源、日期、適用範圍、負責人與支持文件；缺乏佐證、互相矛盾或已過期的答案必須明確標示。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "verify-ai-knowledge-base-citations",
+      "source-backed-research-knowledge-base",
+      "choose-ai-knowledge-base-tool",
+      "build-competitive-intelligence-knowledge-base",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 支援的文件來源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan 有來源 Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "Wenlan 審查與信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+      {
+        label: "NIST SP 1326 ICT 供應商盡職調查指南",
+        href: "https://www.nist.gov/publications/nist-cybersecurity-supply-chain-management-due-diligence-assessment-quick-start-guide",
+      },
+      {
+        label: "臺灣資安服務廠商評鑑機制（NICS）",
+        href: "https://www.nics.nat.gov.tw/core_business/information_security_information_sharing/Cybersecurity_Service_Provider_Evaluation/",
+      },
+    ],
+    productEvidence: {
+      heading: "重用供應商主張前，先檢查來源與審查狀態",
+      summary:
+        "這是 Wenlan App 確定性測試資料的真實桌面畫面，不是供應商或客戶工作區。畫面顯示有來源數量的 Pages 與審查佇列，可用同一介面讓來源變動與未解證據保持可見。",
+      image: {
+        src: "/images/product-evidence/wenlan-space-review-fixture.png",
+        alt: "Wenlan 桌面 Space 顯示有來源數量的 Pages，以及來源衝突與新證據的審查佇列。",
+        caption:
+          "Wenlan App 確定性測試資料的真實畫面。這是一般產品範例，不是供應商資安證據。",
+        width: 1586,
+        height: 992,
+      },
+      workflow: [
+        { label: "固定審查邊界", detail: "選定一個供應商、服務、決策、核准來源與具名審查人員。" },
+        { label: "建立有引用的證據登錄", detail: "把修訂、資料存取、韌性、資安佐證、依賴、缺口與問題連到確切來源。" },
+        { label: "決策前複審", detail: "打開引用段落，檢查過期或矛盾證據，再由採購、資安、法務與隱私負責人判斷。" },
+      ],
+      artifactHeading: "供應商證據包範例",
+      artifactNote: "這是中立的審查結構，不是認證或採購結論。請以單一供應商與服務範圍的核准證據替換每一列。",
+      artifactRows: [
+        { label: "證據輸入", detail: "政策、架構或資料流程文件、韌性計畫、問卷、次處理者清單或有日期的補充說明。" },
+        { label: "審查陳述", detail: "供應商主張、審查解讀、殘餘風險、矛盾、缺件或待確認問題，連到確切段落。" },
+        { label: "審查狀態", detail: "目前有效、過期、矛盾、缺乏支持或待處理，附負責人、審查者與複審日期。" },
+      ],
+      action: { label: "查看供應商證據工作流", href: "#product-evidence" },
+    },
+    cta: {
+      heading: "讓一次供應商審查可追溯",
+      body: "選定一個供應商與服務範圍，連接核准證據，並在決策會議前保留所有過期或缺乏支持的主張。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
@@ -3776,6 +3918,7 @@ const zhCNArticles = {
       "build-sre-incident-knowledge-base",
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
+      "build-ict-supplier-due-diligence-evidence-pack",
     ],
     officialReferences: [
       {
@@ -4171,6 +4314,7 @@ const zhCNArticles = {
       "build-investment-research-knowledge-base",
       "build-product-research-knowledge-base-for-prd",
       "build-sre-incident-knowledge-base",
+      "build-ict-supplier-due-diligence-evidence-pack",
     ],
     officialReferences: [
       {
@@ -4296,6 +4440,7 @@ const zhCNArticles = {
       "verify-ai-knowledge-base-citations",
       "source-backed-wiki-pages-ai-work",
       "choose-ai-knowledge-base-tool",
+      "build-ict-supplier-due-diligence-evidence-pack",
     ],
     officialReferences: [
       {
@@ -5050,6 +5195,145 @@ const zhCNArticles = {
     cta: {
       heading: "让一个竞品决策可追溯",
       body: "选定有边界的问题，连接获准来源，并在 battlecard 或产品决策使用前审核每个重要主张。",
+    },
+  },
+  "build-ict-supplier-due-diligence-evidence-pack": {
+    slug: "build-ict-supplier-due-diligence-evidence-pack",
+    eyebrow: "供应商审核工作流",
+    category: "Workflows",
+    title: "如何建立 ICT 供应商安全尽职调查证据包",
+    description:
+      "把获准的软件供应商资料整理成可追溯的证据包，明确标注来源、适用范围、缺口、负责人和复审日期。",
+    metaTitle: "建立 ICT 供应商安全尽职调查证据包 | Wenlan",
+    metaDescription:
+      "建立软件供应商安全尽职调查证据包，保留文件来源、服务范围、风险缺口、待确认事项与复审日期。",
+    keywords: [
+      "ICT 供应商安全尽职调查",
+      "软件供应商安全评估",
+      "供应商风险评估问卷",
+      "第三方供应商风险评估",
+      "供应商信息安全证据",
+      "软件采购尽职调查资料",
+    ],
+    publishedAt: "2026-08-30",
+    updatedAt: "2026-08-30",
+    author: "Qi-Xuan Lu",
+    readingTime: "9 分钟阅读",
+    audience: "在采购或续约前审核单个 ICT 或软件供应商的采购、安全与 IT 负责人",
+    heroBullets: [
+      "让每个供应商主张都连接到获准文件、日期、修订和适用服务范围。",
+      "分别记录数据访问、业务韧性、安全证据、依赖关系和尚未回答的问题。",
+      "为证据包指定负责人和复审日期，不把旧问卷答案当成永久事实。",
+    ],
+    sections: [
+      {
+        heading: "先说结论：一次审核只处理一个供应商和服务范围",
+        body: [
+          "先固定供应商、产品或服务、采购或续约决策、数据访问范围、审核人员与获准来源。证据包至少要记录来源文件、修订、适用范围、韧性与安全证据、依赖服务、缺口、待确认事项、负责人和复审日期。",
+          "无法由来源支持或已经过期的主张要明确标为未验证。最终采购判断仍由组织内的采购、安全、法务和隐私负责人按照现有制度作出。",
+        ],
+      },
+      {
+        heading: "把问卷、政策和架构资料拆成可检查的证据",
+        body: [
+          "供应商审核经常把现行安全政策、旧问卷、架构图、认证声明和邮件补充混在一张表里。没有日期和适用范围，再流畅的摘要也无法说明某项控制是否适用于正在采购的服务。",
+        ],
+        bullets: [
+          "建立来源登记：保存文件名、版本、日期、提供者、适用服务和允许使用范围。",
+          "逐项记录主张：连接到准确段落，区分供应商陈述、审核解读、残余风险、矛盾和缺件。",
+          "标注数据与系统访问：记录数据类型、权限、存储位置、保留方式和分包商或关键依赖。",
+          "设置复审：来源或服务范围变化时，先把依赖该证据的结论标为过期，再交给具名负责人确认。",
+        ],
+        code: {
+          label: "有边界的供应商证据工作流",
+          code: "wenlan status\nwenlan sources add ~/Reviews/approved-supplier-docs\n# 在 Wenlan plugin client 中：\n/distill <供应商与审核范围>\n/pages <供应商证据包>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "一份可复审的供应商证据包应包含什么",
+        body: [
+          "把每项内容标为当前有效、过期、互相矛盾、缺乏支持或待补件，并保留证据负责人、审核人、依赖服务和下次复审日期。问卷答案只能算供应商提供的一项主张，不能直接等同控制已经有效落实。",
+          "即使不使用 Wenlan，这份来源登记、缺口清单和复审字段仍可作为采购会议中的独立工作成果。",
+        ],
+      },
+      {
+        heading: "Wenlan 的能力与安全边界",
+        body: [
+          "Wenlan 能把获准的 Markdown、文本、可提取文本的 PDF、文件夹与只读 Obsidian 来源整理成有来源的 Pages，并显示引用、修订、过期状态、lint 和人工审核。",
+          "Wenlan 不会验证认证真伪、不提供法律或隐私意见、不发现供应商、不爬取网站、不做实时监控或漏洞扫描、不自动评分，也不批准或拒绝采购。敏感资料仍须留在组织批准的访问控制中。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 可以验证供应商认证或直接批准采购吗？",
+        answer:
+          "不可以。Wenlan 不验证认证、不为供应商打分，也不做采购决策；它只让获准资料、主张、缺口、修订和审核状态可追溯。",
+      },
+      {
+        question: "完成供应商风险评估问卷就足够吗？",
+        answer:
+          "不够。每个答案都要附来源、日期、适用范围、负责人和支持文件；缺乏证据、互相矛盾或已经过期的答案必须明确标注。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "verify-ai-knowledge-base-citations",
+      "source-backed-research-knowledge-base",
+      "choose-ai-knowledge-base-tool",
+      "build-competitive-intelligence-knowledge-base",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 支持的文档来源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan 有来源 Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "Wenlan 审核与信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+      {
+        label: "NIST SP 1326 ICT 供应商尽职调查指南",
+        href: "https://www.nist.gov/publications/nist-cybersecurity-supply-chain-management-due-diligence-assessment-quick-start-guide",
+      },
+      {
+        label: "Microsoft 供应商安全和隐私保证计划",
+        href: "https://learn.microsoft.com/en-us/compliance/assurance/assurance-supplier-security-and-privacy-assurance-program",
+      },
+    ],
+    productEvidence: {
+      heading: "复用供应商主张前，先检查来源与审核状态",
+      summary:
+        "这是来自 Wenlan App 确定性测试资料的真实桌面画面，不是供应商或客户工作区。画面显示带有来源数量的 Pages 和审核队列，可用同一界面让来源变化与未解决证据保持可见。",
+      image: {
+        src: "/images/product-evidence/wenlan-space-review-fixture.png",
+        alt: "Wenlan 桌面 Space 显示带有来源数量的 Pages，以及来源冲突和新证据的审核队列。",
+        caption:
+          "Wenlan App 确定性测试资料的真实画面。这是通用产品示例，不是供应商安全证据。",
+        width: 1586,
+        height: 992,
+      },
+      workflow: [
+        { label: "固定审核边界", detail: "选定一个供应商、服务、决策、获准来源和具名审核人员。" },
+        { label: "建立有引用的证据登记", detail: "把修订、数据访问、韧性、安全证据、依赖、缺口和问题连接到准确来源。" },
+        { label: "决策前复审", detail: "打开引用段落，检查过期或矛盾证据，再由采购、安全、法务与隐私负责人判断。" },
+      ],
+      artifactHeading: "供应商证据包示例",
+      artifactNote: "这是中立的审核结构，不是认证或采购结论。请使用单个供应商与服务范围的获准证据替换每一行。",
+      artifactRows: [
+        { label: "证据输入", detail: "政策、架构或数据流文档、韧性计划、问卷、分包商清单或有日期的补充说明。" },
+        { label: "审核陈述", detail: "供应商主张、审核解读、残余风险、矛盾、缺件或待确认问题，连接到准确段落。" },
+        { label: "审核状态", detail: "当前有效、过期、矛盾、缺乏支持或待处理，附负责人、审核人和复审日期。" },
+      ],
+      action: { label: "查看供应商证据工作流", href: "#product-evidence" },
+    },
+    cta: {
+      heading: "让一次供应商审核可追溯",
+      body: "选定一个供应商与服务范围，连接获准证据，并在决策会议前保留所有过期或缺乏支持的主张。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;

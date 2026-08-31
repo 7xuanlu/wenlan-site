@@ -677,6 +677,10 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
+  `EXP-2026-08-30-ict-supplier-due-diligence-locales` is active with exact
+  implementation, commit, push, PR, merge, automatic Vercel deployment, and
+  read-only production-verification approval recorded at
+  `2026-08-31T01:10:00Z`.
   `EXP-2026-08-30-competitive-intelligence-knowledge-base-locales` is live,
   production-verified, and measuring from the fixed
   `2026-08-30T19:48:14Z` boundary. PR #158 merged as
@@ -913,7 +917,7 @@ action returns for separate explicit approval.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 35.
+- Active experiments: 36.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -1298,6 +1302,17 @@ Supporting quality split for the same live range:
   remain unavailable; none may be invented.
 
 ### Current experiment
+
+`EXP-2026-08-30-ict-supplier-due-diligence-locales` is active in local
+implementation with the user's exact publication approval recorded at
+`2026-08-31T01:10:00Z`. It owns one source-bounded ICT/software supplier
+evidence pack per locale: provenance, data-access scope, resilience and
+security evidence, dependencies, gaps, questions, owner, and review date.
+Certification validation, legal or privacy advice, vendor discovery,
+crawling, live monitoring, vulnerability scanning, automatic scoring,
+approval/rejection, and material outside approved controls are excluded.
+
+### Latest measuring publication
 
 `EXP-2026-08-30-competitive-intelligence-knowledge-base-locales` is live,
 production-verified, and measuring from the fixed
@@ -4093,3 +4108,31 @@ unchanged.
   slot is open, so local page preparation is the next eligible action. Full
   provenance is in
   `docs/seo-audits/2026-08-30-ict-supplier-due-diligence-demand-gate.md`.
+
+## Campaign publication approval: ICT supplier due diligence at 2026-08-31T01:10:00Z
+
+- The user approved the exact English, zh-TW, and zh-CN supplier due-diligence
+  evidence-pack family for local implementation, verification, commit, Git
+  push, pull request creation, merge, automatic Vercel deployment, and
+  read-only production verification.
+- Exact routes are
+  `/learn/build-ict-supplier-due-diligence-evidence-pack`,
+  `/zh-TW/learn/build-ict-supplier-due-diligence-evidence-pack`, and
+  `/zh-CN/learn/build-ict-supplier-due-diligence-evidence-pack`.
+- Request indexing, GSC validation, analytics mutation, the conditional
+  `pm-claude-skills` contribution, further maintainer contact, paid action,
+  synthetic events, metric-definition changes, and unrelated external
+  publication remain excluded.
+
+## Local verification: ICT supplier due diligence at 2026-08-31T01:23:11Z
+
+- The bounded three-locale candidate passed Goal and scenario verification,
+  51 Goal tests, 253 SEO tests, 77 i18n tests, TypeScript lint, the 275-page
+  production build, and the 159-owner built technical audit.
+- Fresh English, zh-TW, and zh-CN checks at exact `393x852` mobile and
+  `1280x900` desktop sizes covered light and dark themes. Each route had one
+  H1, exact canonical, reciprocal hreflang, Article and BreadcrumbList schema,
+  loaded product evidence, visible FAQ without FAQPage, no horizontal overflow,
+  and no console warning or error. Protected Mandarin phrases did not split.
+- This proves only local technical readiness. Publication, crawl, indexing,
+  impressions, clicks, visitors, authority, and causality remain unproven.

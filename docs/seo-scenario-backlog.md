@@ -1223,11 +1223,11 @@ Demand discovery:
 - Desired outcome: Record source provenance, data-access scope, resilience and foundational security evidence, dependencies, gaps, unanswered questions, an owner, and a review date without turning the packet into a certification or approval decision
 - Stage: `evaluate`
 - Decision: `net-new`
-- Planned window: `next-eligible-window-after-2026-08-30`
-- Publication: `not-published`
+- Planned window: `2026-08-29..2026-09-04-approved-publication`
+- Publication: `prepared`
 - Standalone utility: A neutral ICT supplier due-diligence workflow can register approved sources, data-access scope, resilience and foundational security evidence, dependencies, gaps, unanswered questions, an owner, and a review date while preserving human review and decision boundaries.
 - Overlap check: Do not duplicate generic document ingestion, citation verification, research, consulting delivery, investment research, product research, SRE runbooks, competitive intelligence, or AI knowledge-base tool selection. This page owns one ICT/software supplier evidence packet. It explicitly excludes certification validation, legal or privacy advice, vendor discovery, crawling, live monitoring, vulnerability scanning, automatic scoring, approval or rejection, and material outside approved controls.
-- Next research: The production slot is open, so prepare the gate-passed trilingual website family locally as the next eligible action. Keep it not published until a separate exact website publication approval. Do not contribute to pm-claude-skills, request a backlink, contact maintainers, request indexing, submit validation, mutate analytics, or publish externally without separate approval.
+- Next research: The user approved the exact trilingual website publication scope at 2026-08-31T01:10:00Z. Implement and verify the three locale pages, then commit, push, open and merge one pull request, wait for automatic Vercel deployment, and verify production. Do not contribute to pm-claude-skills, request a backlink, contact maintainers, request indexing, submit validation, mutate analytics, or perform another external publication without separate approval.
 
 ### Locale intent and ownership
 

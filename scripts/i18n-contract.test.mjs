@@ -543,6 +543,7 @@ test("localized Learn slug route supports per-locale acquisition page availabili
     "/learn/build-product-research-knowledge-base-for-prd",
     "/learn/build-sre-incident-knowledge-base",
     "/learn/build-competitive-intelligence-knowledge-base",
+    "/learn/build-ict-supplier-due-diligence-evidence-pack",
   ]);
   assert.match(source, /getLocalizedLearnArticle/);
   assert.match(source, /TRANSLATED_LEARN_SLUGS/);
@@ -918,6 +919,14 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
     {
       locale: "zh-CN",
       slug: "build-competitive-intelligence-knowledge-base",
+    },
+    {
+      locale: "zh-TW",
+      slug: "build-ict-supplier-due-diligence-evidence-pack",
+    },
+    {
+      locale: "zh-CN",
+      slug: "build-ict-supplier-due-diligence-evidence-pack",
     },
   ]);
 
@@ -1976,7 +1985,7 @@ test("localized acquisition copy keeps CJK semantic phrases together on mobile",
   assert.equal(protectedHeadings.length, 2);
   assert.match(
     source,
-    /split\(\/\(Karpathy LLM Wiki：\|SRE 事故知識庫\|SRE 故障知识库\|與事故復盤\|与故障复盘\|事故復盤\|故障复盘\|客戶專案知識庫\|客户项目知识库\|競品檔案\|竞品档案\|顧問案\|咨询项目\|研究知識庫\|研究知识库\|產品研究\|产品研究\|產品決策\|产品决策\|論文 PDF\|论文 PDF\|文獻矩陣\|文献矩阵\|AI 知識庫\|AI 知识库\|知識庫\|知识库\|驗收資料\|验收资料\|證據\|证据\|追溯\|8 項\|8 项\|來源\|来源\|記什麼？\|记录什么？\)\/g\)/,
+    /split\(\/\(Karpathy LLM Wiki：\|供應商盡職調查\|供应商尽职调查\|證據包\|证据包\|複審\|复审\|SRE 事故知識庫\|SRE 故障知识库\|與事故復盤\|与故障复盘\|事故復盤\|故障复盘\|客戶專案知識庫\|客户项目知识库\|競品檔案\|竞品档案\|顧問案\|咨询项目\|研究知識庫\|研究知识库\|產品研究\|产品研究\|產品決策\|产品决策\|論文 PDF\|论文 PDF\|文獻矩陣\|文献矩阵\|AI 知識庫\|AI 知识库\|知識庫\|知识库\|驗收資料\|验收资料\|證據\|证据\|追溯\|8 項\|8 项\|來源\|来源\|記什麼？\|记录什么？\)\/g\)/,
   );
   assert.match(
     source,
@@ -2957,6 +2966,69 @@ test("competitive intelligence knowledge-base article owns one trilingual scenar
   );
   assert.match(renderer, /article\.slug === "build-competitive-intelligence-knowledge-base"/);
   for (const protectedTerm of ["競品檔案", "竞品档案", "證據", "证据", "追溯"]) {
+    assert.match(
+      renderer,
+      new RegExp(`part === "${protectedTerm}"`),
+      `protected CJK phrase: ${protectedTerm}`,
+    );
+  }
+});
+
+test("ICT supplier due-diligence article owns one bounded trilingual evidence-pack scenario", async () => {
+  const [{ articles }, { getLocalizedLearnArticle }] = await Promise.all([
+    import("../src/app/(en)/learn/articles.ts"),
+    import("../src/i18n/learn-articles.ts"),
+  ]);
+  const slug = "build-ict-supplier-due-diligence-evidence-pack";
+  const english = articles.find((article) => article.slug === slug);
+
+  assert.ok(english, "English ICT supplier due-diligence article");
+  assert.equal(english.title, "How to Build an ICT Supplier Due Diligence Evidence Pack");
+  assert.equal(english.publishedAt, "2026-08-30");
+  assert.equal(english.updatedAt, "2026-08-30");
+  assert.match(JSON.stringify(english), /provenance|data-access|resilience|security evidence|review date/i);
+  assert.match(
+    JSON.stringify(english),
+    /does not validate certifications|does not crawl|does not monitor|vulnerability scan|does not score|approval/i,
+  );
+  assert.ok(english.productEvidence, "English product evidence");
+  assert.equal(
+    english.productEvidence.image.src,
+    "/images/product-evidence/wenlan-space-review-fixture.png",
+  );
+  assert.equal(english.productEvidence.workflow.length, 3);
+  assert.equal(english.productEvidence.artifactRows.length, 3);
+  assert.equal(english.productEvidence.action.href, "#product-evidence");
+  assert.ok(english.relatedSlugs.length >= 3);
+
+  for (const [locale, titlePattern] of [
+    ["zh-TW", /建立 ICT 供應商資安盡職調查證據包/],
+    ["zh-CN", /建立 ICT 供应商安全尽职调查证据包/],
+  ]) {
+    const article = getLocalizedLearnArticle(locale, slug);
+    assert.ok(article, `${locale} ICT supplier due-diligence article`);
+    assert.match(article.title, titlePattern);
+    assert.equal(article.publishedAt, "2026-08-30");
+    assert.equal(article.updatedAt, "2026-08-30");
+    assert.match(JSON.stringify(article), /來源|来源|資料範圍|数据范围|韌性|韧性|證據|证据|複審|复审/i);
+    assert.match(JSON.stringify(article), /不會驗證|不会验证|不會爬取|不会爬取|弱點掃描|漏洞扫描|自動評分|自动评分/i);
+    assert.ok(article.productEvidence, `${locale} product evidence`);
+    assert.equal(
+      article.productEvidence.image.src,
+      "/images/product-evidence/wenlan-space-review-fixture.png",
+    );
+    assert.equal(article.productEvidence.workflow.length, 3);
+    assert.equal(article.productEvidence.artifactRows.length, 3);
+    assert.equal(article.productEvidence.action.href, "#product-evidence");
+    assert.ok(article.relatedSlugs.length >= 3);
+  }
+
+  const renderer = await readFile(
+    resolve(repoRoot, "src/app/[locale]/learn/[slug]/page.tsx"),
+    "utf8",
+  );
+  assert.match(renderer, /article\.slug === "build-ict-supplier-due-diligence-evidence-pack"/);
+  for (const protectedTerm of ["供應商盡職調查", "供应商尽职调查", "證據包", "证据包", "複審", "复审"]) {
     assert.match(
       renderer,
       new RegExp(`part === "${protectedTerm}"`),
