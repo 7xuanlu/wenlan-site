@@ -8946,3 +8946,46 @@ increase for that experiment.
 - Decision: wait
 - Next step: Run the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-06T05:06:25Z`. Separately align the website to immutable `v0.17.6` only with explicit publication approval. Do not request indexing, submit GSC validation, mutate analytics, contact maintainers, buy traffic, generate synthetic events, change metric definitions, or publish externally under this record.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-31-customer-support-answer-knowledge-base-locales
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-31-customer-support-answer-knowledge-base-locales
+- Status: measuring
+- Data window: 2026-08-29..2026-09-04
+- Asset class: net-new-search
+- Launched: 2026-08-31
+- Hypothesis: One English, zh-TW, and zh-CN owner for maintaining approved customer-support answers can earn qualified discovery from customer-support knowledge-base searches without cannibalizing generic document ingestion, citation verification, stale-page repair, retrieval regression, or broad AI-customer-support platform intent.
+- Candidate evidence: Ubersuggest's US report, KCS, Microsoft, Emergent, separate Taiwan Traditional-Chinese and Simplified-Chinese result observations, maintained Wenlan source, overlap, internal-link, and conditional authority-path evidence remain in `docs/seo-scenario-backlog.json` and `docs/seo-audits/2026-08-30-customer-support-answer-knowledge-base-demand-gate.md`. These observations are not authenticated GSC data, Taiwan or China keyword volume, exact rank, backlink, or causal evidence.
+- Baseline: The latest completed authenticated range is `2026-07-31..2026-08-27`: GSC property 7 clicks and 913 impressions; visible-query 2 clicks and 221 impressions; visibility gap 5 clicks and 692 impressions; Vercel 289 visitors and 690 pageviews; GitHub 51 stars. New target-page and joined-query rows are unavailable rather than zero, and every source remains separate.
+- Change: Publish exactly one English, zh-TW, and zh-CN canonical that turns approved product and policy documents into one reviewable support-answer pack with the customer question, supported answer, scope, prohibited promise, escalation condition, source revision, owner, and next review date. Explicitly exclude ticket or CRM ingestion, raw customer conversations, PII handling, team permissions, support analytics, automatic policy approval, customer-facing publication, reply generation or delivery, channel synchronization, and automatic escalation.
+- Publish date: 2026-08-31
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions per locale in 28 complete post-crawl days
+- Success criteria: Per locale, at least 3 qualified joined-query impressions and at least 1 GSC click after minimum exposure; report CTR and position separately.
+- Failure criteria: After 28 complete post-crawl days and minimum exposure, a locale has no qualified joined-query impressions or no GSC click, or an above-floor query-page join assigns the task to an existing owner or unsupported help-desk, CRM, reply automation, or customer-data intent.
+- Stop criteria: Stop on a technical, unsupported customer-support-platform claim, duplicate-intent, controller-overlap, canonical, locale, responsive-render, authority-path, or approval-boundary violation.
+- 24h readout: pending after 2026-09-01T15:27:07Z
+- 7d readout: pending after 2026-09-07T15:27:07Z
+- W2 readout: pending
+- W4 readout: pending formal 28-complete-post-crawl-day decision when eligible
+- W8 readout: pending only if useful after the Goal deadline
+- Result: pending
+- Decision: wait
+- Next step: Keep `2026-08-31T15:27:07Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-09-01T15:27:07Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-07T15:27:07Z`. Do not request indexing, submit GSC validation, mutate analytics, publish the conditional `awesome-customer-success` proposal, contact maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-31-customer-support-answer-knowledge-base-locales production publication
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-31-customer-support-answer-knowledge-base-locales
+- Observed at: 2026-08-31T15:31:22Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #164 merged at `2026-08-31T15:26:16Z` as `19636df9cdcc170639fab9c652353028b39ffd00`; Vercel reported production deployment success at `2026-08-31T15:27:07Z`. The integrated commit passed Goal and scenario verification, 52 Goal tests, 254 SEO tests, 79 i18n tests, TypeScript, the 279-page production build, and the 162-owner built technical audit. A fresh merged-diff read found the expected bounded route, locale, internal-link, CJK, and responsive-grid changes without semantic integration conflict. The deployed audit passed robots, all 162 sitemap URLs, 30 key pages, utility noindex surfaces, redirects, bridge hosts, and sitemap-wide FAQPage absence. English, zh-TW, and zh-CN returned direct 200 with exact canonicals, reciprocal hreflang, Article and BreadcrumbList schema, the visible bounded answer-pack task, loaded product evidence, and visible FAQ without FAQPage. Exact `393x852` and `1280x900` production checks found no overflow, broken image, console warning or error. This proves publication and technical availability only; it is not a crawl, indexing, rank, impression, click, visitor, authority, or causal result.
+- Result: pending
+- Decision: wait
+- Next step: Keep `2026-08-31T15:27:07Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-09-01T15:27:07Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-07T15:27:07Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with at least 20 target-page impressions, 3 qualified joined-query impressions, and 1 GSC click. Do not request indexing, submit GSC validation, mutate analytics, publish the planned OSS proposal, message maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
+<!-- EXPERIMENT-RECORD:END -->

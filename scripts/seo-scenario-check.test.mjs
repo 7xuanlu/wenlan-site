@@ -48,7 +48,8 @@ test("customer-support family preserves the approved-document answer-pack bounda
   assert.match(family.userTask, /customer-support answer knowledge base/i);
   assert.match(family.desiredOutcome, /scope|prohibited promises|escalation|review date/i);
   assert.equal(family.decision, "net-new");
-  assert.equal(family.publicationStatus, "prepared");
+  assert.equal(family.publicationStatus, "measuring");
+  assert.match(family.nextResearchDirection, /PR #164|19636df|2026-08-31T15:27:07Z/);
   assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
   assert.ok(
     Object.values(family.gates).every((gate) => gate.status === "passed"),

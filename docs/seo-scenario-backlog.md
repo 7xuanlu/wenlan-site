@@ -1309,11 +1309,11 @@ Demand discovery:
 - Desired outcome: Keep a reviewable support answer pack with scope, prohibited promises, escalation conditions, source revision, owner, and next review date
 - Stage: `maintain`
 - Decision: `net-new`
-- Planned window: `next-eligible-window-after-2026-08-31`
-- Publication: `prepared`
+- Planned window: `2026-08-29..2026-09-04-published`
+- Publication: `measuring`
 - Standalone utility: A neutral support-answer workflow can record a customer question, supported answer, applicability, prohibited promise, escalation condition, source revision, human owner, and next review date without requiring Wenlan or automating customer support.
 - Overlap check: Do not duplicate generic document ingestion, stale-page repair, source-backed architecture, citation verification, or retrieval regression. This page owns one approved-document to support-answer workflow. It explicitly excludes raw customer conversations, ticket or CRM ingestion, PII handling, team permissions, support analytics, automatic policy approval, customer-facing publication, reply generation or delivery, channel synchronization, and automatic escalation.
-- Next research: The exact English, zh-TW, and zh-CN family is locally prepared and verified. Keep it unpublished until the user separately approves commit, push, PR, merge, automatic deployment, and read-only production verification. Preserve the broad AI-customer-support rejection and the manual approved-document boundary. Do not submit the awesome-customer-success entry, contact maintainers, request indexing, submit validation, mutate analytics, or publish externally without separate approval.
+- Next research: PR #164 merged at 2026-08-31T15:26:16Z as 19636df9cdcc170639fab9c652353028b39ffd00; Vercel production completed at 2026-08-31T15:27:07Z. Keep that fixed production boundary, run the 24-hour technical and indexability observation after 2026-09-01T15:27:07Z, and run the seven-day source-native GSC page/query and Vercel page/referrer observation after 2026-09-07T15:27:07Z. Preserve the broad AI-customer-support rejection and manual approved-document boundary. Do not submit the awesome-customer-success entry, contact maintainers, request indexing, submit validation, mutate analytics, or publish externally without separate approval.
 
 ### Locale intent and ownership
 
