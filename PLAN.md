@@ -918,7 +918,7 @@ action returns for separate explicit approval.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 36.
+- Active experiments: 37.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -4388,3 +4388,27 @@ unchanged.
   website release-alignment finding, not SRE growth evidence. No website,
   analytics, indexing, validation, paid, maintainer-message, or other external
   state was changed by this readout.
+
+## Campaign publication: customer-support answer knowledge base at 2026-08-31T15:31:22Z
+
+- The user approved publication. PR #164 merged at `2026-08-31T15:26:16Z` as
+  `19636df9cdcc170639fab9c652353028b39ffd00`; Vercel production completed at
+  `2026-08-31T15:27:07Z`.
+- The integrated merge commit passes Goal and scenario verification, 52 Goal
+  tests, 254 SEO tests, 79 i18n tests, TypeScript lint, the 279-page production
+  build, and the 162-owner built technical audit. The deployed audit passes all
+  162 sitemap URLs, 30 key pages, utility noindex surfaces, redirects, bridge
+  hosts, and sitemap-wide FAQPage absence.
+- English, zh-TW, and zh-CN return direct 200 with exact self-canonicals,
+  reciprocal hreflang, Article and BreadcrumbList schema, the visible bounded
+  support-answer pack, no FAQPage schema, and no broken image, console issue, or
+  horizontal overflow at exact `393x852` and `1280x900` viewports.
+- Keep `2026-08-31T15:27:07Z` as the fixed production boundary. This proves
+  publication and technical availability only; it is not a crawl, indexing,
+  rank, impression, click, visitor, authority, or causal result. The 24-hour
+  technical observation is due after `2026-09-01T15:27:07Z`; the seven-day
+  source-native GSC and Vercel observation is due after
+  `2026-09-07T15:27:07Z`.
+- Request indexing, GSC validation, analytics mutation, the conditional
+  `awesome-customer-success` proposal, maintainer contact, paid actions,
+  synthetic events, and every other external publication remain excluded.
