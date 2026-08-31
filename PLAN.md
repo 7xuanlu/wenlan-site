@@ -4064,3 +4064,30 @@ unchanged.
   rather than opening a promotional issue or pull request. The complete
   source and rejection record is in
   `docs/seo-audits/2026-08-30-rfp-proposal-readiness-demand-gate.md`.
+
+## Campaign authority follow-up and supplier due-diligence gate at 2026-08-31
+
+- The user-approved one-time follow-up was posted to
+  `awesome-selfhosted/awesome-selfhosted-data#2955` at
+  `2026-08-31T00:13:40Z`:
+  `https://github.com/awesome-selfhosted/awesome-selfhosted-data/pull/2955#issuecomment-5472149912`.
+  This remains an attempted distribution action, not earned authority. Count
+  the path only after the PR is merged and the listing is visibly rendered
+  upstream. No further maintainer contact is authorized by this record.
+- The ICT/software supplier due-diligence evidence-pack family passes the
+  trilingual demand, clean-gap, Wenlan-proof, standalone-utility, internal-link,
+  and conditional authority-path gates. Its audience is procurement, security,
+  and IT owners; its task is to preserve supplier provenance, data-access
+  scope, resilience/security evidence, dependencies, gaps, questions, owner,
+  and review date. It explicitly excludes certification validation, legal or
+  privacy advice, vendor discovery, crawling, live monitoring, vulnerability
+  scanning, automatic scoring, approval/rejection, and material outside
+  approved controls.
+- Keep family ID
+  `ict-supplier-due-diligence-evidence-pack` at `net-new` / `research`. The
+  conditional authority path is the existing
+  `mohitagw15856/pm-claude-skills/vendor-security-review` contribution seam;
+  acceptance and any backlink are not assumed. Do not prepare or publish its
+  three locale pages until the current production slot is clear and a separate
+  exact website publication approval is given. Full provenance is in
+  `docs/seo-audits/2026-08-30-ict-supplier-due-diligence-demand-gate.md`.
