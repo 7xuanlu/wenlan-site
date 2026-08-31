@@ -1652,6 +1652,7 @@ const workflowArticles: BaseSpec[] = [
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
       "build-ict-supplier-due-diligence-evidence-pack",
+      "build-customer-support-answer-knowledge-base",
     ],
     officialReferences: [
       {
@@ -2938,6 +2939,7 @@ const trustArticles: BaseSpec[] = [
       "build-product-research-knowledge-base-for-prd",
       "build-sre-incident-knowledge-base",
       "build-ict-supplier-due-diligence-evidence-pack",
+      "build-customer-support-answer-knowledge-base",
     ],
     officialReferences: [
       {
@@ -3384,6 +3386,7 @@ const retrievalRegressionArticle: LearnArticle = {
     "choose-ai-knowledge-base-tool",
     "fix-pdf-ingestion-ai-knowledge-base",
     "when-ai-agent-should-query-knowledge-base",
+    "build-customer-support-answer-knowledge-base",
   ],
   officialReferences: [
     {
@@ -3872,6 +3875,152 @@ const ictSupplierDueDiligenceArticle: BaseSpec = {
 };
 
 workflowArticles.push(ictSupplierDueDiligenceArticle);
+
+const customerSupportAnswerKnowledgeBaseArticle: BaseSpec = {
+  slug: "build-customer-support-answer-knowledge-base",
+  eyebrow: "Support answer workflow",
+  category: "Workflows",
+  title: "How to Build a Customer Support Answer Knowledge Base",
+  description:
+    "Keep customer-support answers reviewable after product or policy changes with approved sources, explicit scope, prohibited promises, owners, and review dates.",
+  metaTitle: "Build a Customer Support Answer Knowledge Base | Wenlan",
+  metaDescription:
+    "Build a source-backed customer-support answer knowledge base from approved product and policy documents, with scope, prohibited promises, escalation, owners, and review dates.",
+  keywords: [
+    "customer support knowledge base",
+    "customer service knowledge base",
+    "support answer knowledge base",
+    "how to keep support knowledge base updated",
+    "source-backed support answers",
+    "customer support content workflow",
+  ],
+  publishedAt: "2026-08-31",
+  updatedAt: "2026-08-31",
+  readingTime: "8 min read",
+  audience:
+    "Support operations, technical writers, product support, and customer-success content owners maintaining approved customer answers",
+  heroBullets: [
+    "Start with one approved product or policy change and the support questions it affects.",
+    "Record the supported answer, scope, prohibited promises, escalation condition, source revision, owner, and next review date.",
+    "Keep stale or unsupported answers visible for human review instead of publishing or sending them automatically.",
+  ],
+  quickAnswer:
+    "Build one answer pack for one support area and an approved set of product or policy documents. For each customer question, record the supported answer, scope, prohibited promise, escalation condition, source revision, human owner, and next review date. When a source changes, mark dependent answers stale or unresolved until the owner reviews the current passage.",
+  quickAnswerLink: {
+    label: "See the support answer evidence workflow",
+    href: "#product-evidence",
+  },
+  wenlanFit:
+    "Wenlan can connect supported Markdown, text, text-extractable PDFs, folders, and read-only Obsidian sources to source-backed Pages, citations, revisions, stale state, lint, and human review. It does not ingest help-desk tickets, CRM records, or raw customer conversations; it does not handle PII; it does not connect to support channels; it does not publish customer-facing answers; it does not generate replies; it does not synchronize channels; it does not automatically escalate.",
+  problem:
+    "The failure appears after a product release or policy change: a support answer still sounds plausible, but its scope, effective date, exception, or promise no longer matches the approved source. A shared document or polished AI summary hides which revision supports the answer and who must review it. A useful support knowledge base keeps each answer small enough to check and leaves unsupported questions visible rather than filling them with confident language.",
+  actionHeading: "Build one question-to-answer review loop",
+  actionIntro:
+    "Start with one support area and a small set of approved product or policy documents. Keep customer conversations, tickets, CRM records, personal data, and any material you are not authorized to use outside the source boundary.",
+  actionBullets: [
+    "Name the product or policy area, effective date, support audience, included documents, excluded material, and human content owner.",
+    "Register the approved Markdown, text, text-extractable PDF, folder, or read-only Obsidian source with its title, revision, date, and allowed scope.",
+    "Create one answer record per recurring customer question. Separate the supported answer from applicability, prohibited promises, escalation conditions, and unresolved exceptions.",
+    "Connect each important answer statement to the exact source passage and keep the source revision beside the record.",
+    "When a release or policy changes, resync the affected source and mark dependent answers stale or unsupported until the owner checks the new revision.",
+    "Before an answer is reused, have the owner open the source, confirm scope and effective date, and record the next review date. This workflow does not publish or send a reply.",
+  ],
+  code: {
+    label: "Wenlan workflow and a neutral support answer record",
+    code: "wenlan status\nwenlan sources add ~/Support/approved-product-policy\n# In a Wenlan plugin client:\n/distill <support answer topic>\n/pages <support answer topic>\n/lint\n/curate\n\nquestion: Can an existing subscription change plans immediately?\nsupported_answer: <answer supported by the approved policy>\nscope: <plan, region, account state, and effective date>\ndo_not_promise: <actions or outcomes the source does not authorize>\nescalate_when: <conditions requiring a human owner>\nsource_revision: <document ID, section, and revision>\nowner: <human content owner>\nnext_review: <date or product-change trigger>",
+  },
+  caution:
+    "This is a source-backed content review workflow, not a help desk or customer-support automation system. Wenlan does not handle PII or promise redaction, provide team permissions, run support analytics, approve policies automatically, publish customer-facing answers, generate or deliver replies, synchronize channels, or automatically escalate a case. A qualified human owner must decide what an approved answer means and when it can be reused.",
+  productEvidence: {
+    heading: "Inspect source and review state before reusing an answer",
+    summary:
+      "This genuine Wenlan desktop capture comes from the app's deterministic test fixture, not a customer-support workspace or customer conversation. It shows maintained Pages with source counts and a review queue, the product surfaces used to keep source changes and unresolved evidence visible.",
+    image: {
+      src: "/images/product-evidence/wenlan-space-review-fixture.png",
+      alt: "Wenlan desktop Space showing maintained Pages with source counts and a review queue for source conflicts and newly available evidence.",
+      caption:
+        "Genuine Wenlan app capture from a deterministic test fixture. It is a general product example, not customer-support evidence; source counts and review state remain directly inspectable.",
+      width: 1586,
+      height: 992,
+    },
+    workflow: [
+      {
+        label: "Bound the answer pack",
+        detail:
+          "Choose one support area, approved source set, effective date, and human content owner before drafting answers.",
+      },
+      {
+        label: "Distill a cited answer record",
+        detail:
+          "Keep the question, supported answer, scope, prohibited promise, escalation condition, source revision, and next review attached to exact sources.",
+      },
+      {
+        label: "Review before reuse",
+        detail:
+          "Open the cited passage, inspect stale or conflicting evidence, and leave publication or reply delivery outside this workflow.",
+      },
+    ],
+    artifactHeading: "Worked support answer record",
+    artifactNote:
+      "This neutral template is not a customer promise. Replace every placeholder with an approved source and a named human owner before reuse.",
+    artifactRows: [
+      {
+        label: "Question and answer",
+        detail:
+          "One customer question paired with the shortest answer the approved product or policy source actually supports.",
+      },
+      {
+        label: "Scope and boundaries",
+        detail:
+          "Applicable plan, region, account state, effective date, prohibited promises, exceptions, and conditions that require escalation.",
+      },
+      {
+        label: "Review ownership",
+        detail:
+          "Source document and revision, human owner, current review state, and next review date or product-change trigger.",
+      },
+    ],
+    action: {
+      label: "See the support answer evidence workflow",
+      href: "#product-evidence",
+    },
+  },
+  faq: [
+    "Can Wenlan ingest support tickets or send customer replies?",
+    "No. This workflow uses approved documents you can inspect. Wenlan does not ingest help-desk tickets, CRM records, or raw customer conversations, and it does not publish, generate, deliver, or synchronize customer replies.",
+    "What should happen when a product or policy changes?",
+    "Resync the approved source, mark dependent answers stale or unresolved, and have the named owner review the current passage, scope, prohibited promises, escalation condition, source revision, and next review date before reuse.",
+  ],
+  relatedSlugs: [
+    "build-local-ai-knowledge-base-from-documents",
+    "verify-ai-knowledge-base-citations",
+    "test-ai-knowledge-base-retrieval-after-changes",
+  ],
+  officialReferences: [
+    {
+      label: "Wenlan supported document sources",
+      href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+    },
+    {
+      label: "Wenlan sources add CLI",
+      href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+    },
+    {
+      label: "Wenlan source-backed Pages",
+      href: "https://wenlan.app/docs/source-backed-pages",
+    },
+    {
+      label: "Wenlan review and trust",
+      href: "https://wenlan.app/docs/review-and-trust",
+    },
+  ],
+  cta: {
+    heading: "Make one support answer reviewable",
+    body: "Choose an approved product or policy source, record one bounded answer, and keep its revision, owner, limitations, and next review visible before anyone reuses it.",
+  },
+};
+
+workflowArticles.push(customerSupportAnswerKnowledgeBaseArticle);
 
 const productResearchArticle: LearnArticle = {
   slug: "build-product-research-knowledge-base-for-prd",

@@ -544,6 +544,7 @@ test("localized Learn slug route supports per-locale acquisition page availabili
     "/learn/build-sre-incident-knowledge-base",
     "/learn/build-competitive-intelligence-knowledge-base",
     "/learn/build-ict-supplier-due-diligence-evidence-pack",
+    "/learn/build-customer-support-answer-knowledge-base",
   ]);
   assert.match(source, /getLocalizedLearnArticle/);
   assert.match(source, /TRANSLATED_LEARN_SLUGS/);
@@ -927,6 +928,14 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
     {
       locale: "zh-CN",
       slug: "build-ict-supplier-due-diligence-evidence-pack",
+    },
+    {
+      locale: "zh-TW",
+      slug: "build-customer-support-answer-knowledge-base",
+    },
+    {
+      locale: "zh-CN",
+      slug: "build-customer-support-answer-knowledge-base",
     },
   ]);
 
@@ -1985,7 +1994,7 @@ test("localized acquisition copy keeps CJK semantic phrases together on mobile",
   assert.equal(protectedHeadings.length, 2);
   assert.match(
     source,
-    /split\(\/\(Karpathy LLM Wiki：\|供應商盡職調查\|供应商尽职调查\|證據包\|证据包\|複審\|复审\|SRE 事故知識庫\|SRE 故障知识库\|與事故復盤\|与故障复盘\|事故復盤\|故障复盘\|客戶專案知識庫\|客户项目知识库\|競品檔案\|竞品档案\|顧問案\|咨询项目\|研究知識庫\|研究知识库\|產品研究\|产品研究\|產品決策\|产品决策\|論文 PDF\|论文 PDF\|文獻矩陣\|文献矩阵\|AI 知識庫\|AI 知识库\|知識庫\|知识库\|驗收資料\|验收资料\|證據\|证据\|追溯\|8 項\|8 项\|來源\|来源\|記什麼？\|记录什么？\)\/g\)/,
+    /split\(\/\(Karpathy LLM Wiki：\|供應商盡職調查\|供应商尽职调查\|證據包\|证据包\|複審\|复审\|SRE 事故知識庫\|SRE 故障知识库\|與事故復盤\|与故障复盘\|事故復盤\|故障复盘\|客戶專案知識庫\|客户项目知识库\|競品檔案\|竞品档案\|顧問案\|咨询项目\|研究知識庫\|研究知识库\|產品研究\|产品研究\|產品決策\|产品决策\|論文 PDF\|论文 PDF\|文獻矩陣\|文献矩阵\|AI 知識庫\|AI 知识库\|客服答案知識庫\|客服答案知识库\|知識庫\|知识库\|驗收資料\|验收资料\|證據\|证据\|追溯\|8 項\|8 项\|來源\|来源\|記什麼？\|记录什么？\|不可承諾\|不可承诺\|禁止承诺\|轉人工\|转人工\)\/g\)/,
   );
   assert.match(
     source,
@@ -1997,6 +2006,26 @@ test("localized acquisition copy keeps CJK semantic phrases together on mobile",
   );
   assert.ok((source.match(/\{renderArticleText\(/g)?.length ?? 0) >= 12);
   assert.match(source, /<span className="min-w-0">\{renderArticleText\(faq\.question\)\}<\/span>/);
+});
+
+test("Learn article hero grids use shrinkable mobile tracks", async () => {
+  for (const relativePath of [
+    "src/app/(en)/learn/[slug]/page.tsx",
+    "src/app/[locale]/learn/[slug]/page.tsx",
+  ]) {
+    const source = await readFile(resolve(repoRoot, relativePath), "utf8");
+
+    assert.match(
+      source,
+      /className="mt-12 grid min-w-0 grid-cols-\[minmax\(0,1fr\)\] gap-10 lg:grid-cols-\[minmax\(0,1fr\)_320px\]/,
+      `${relativePath} must not let the implicit mobile grid track expand past 393px`,
+    );
+    assert.match(
+      source,
+      /className="grid min-w-0 grid-cols-\[minmax\(0,1fr\)\] gap-4 md:grid-cols-3"/,
+      `${relativePath} hero bullets must remain shrinkable on mobile`,
+    );
+  }
 });
 
 test("core route wrappers export localized metadata for translated pages", async () => {
@@ -3029,6 +3058,73 @@ test("ICT supplier due-diligence article owns one bounded trilingual evidence-pa
   );
   assert.match(renderer, /article\.slug === "build-ict-supplier-due-diligence-evidence-pack"/);
   for (const protectedTerm of ["供應商盡職調查", "供应商尽职调查", "證據包", "证据包", "複審", "复审"]) {
+    assert.match(
+      renderer,
+      new RegExp(`part === "${protectedTerm}"`),
+      `protected CJK phrase: ${protectedTerm}`,
+    );
+  }
+});
+
+test("customer-support answer article owns one bounded trilingual answer-pack scenario", async () => {
+  const [{ articles }, { getLocalizedLearnArticle }] = await Promise.all([
+    import("../src/app/(en)/learn/articles.ts"),
+    import("../src/i18n/learn-articles.ts"),
+  ]);
+  const slug = "build-customer-support-answer-knowledge-base";
+  const english = articles.find((article) => article.slug === slug);
+
+  assert.ok(english, "English customer-support answer article");
+  assert.equal(english.title, "How to Build a Customer Support Answer Knowledge Base");
+  assert.equal(english.publishedAt, "2026-08-31");
+  assert.equal(english.updatedAt, "2026-08-31");
+  assert.match(JSON.stringify(english), /question|supported answer|scope|prohibited|escalat|source revision|owner|next review/i);
+  assert.match(
+    JSON.stringify(english),
+    /does not ingest|does not handle PII|does not connect|does not publish|does not generate replies|does not synchronize|does not automatically escalate/i,
+  );
+  assert.ok(english.productEvidence, "English product evidence");
+  assert.equal(
+    english.productEvidence.image.src,
+    "/images/product-evidence/wenlan-space-review-fixture.png",
+  );
+  assert.equal(english.productEvidence.workflow.length, 3);
+  assert.equal(english.productEvidence.artifactRows.length, 3);
+  assert.equal(english.productEvidence.action.href, "#product-evidence");
+  assert.match(
+    english.sections.map((section) => section.code?.code ?? "").join("\n"),
+    /question:[\s\S]*supported_answer:[\s\S]*scope:[\s\S]*do_not_promise:[\s\S]*escalate_when:[\s\S]*source_revision:[\s\S]*owner:[\s\S]*next_review:/,
+  );
+  assert.ok(english.relatedSlugs.length >= 3);
+
+  for (const [locale, titlePattern] of [
+    ["zh-TW", /如何建立客服答案知識庫/],
+    ["zh-CN", /如何建立客服答案知识库/],
+  ]) {
+    const article = getLocalizedLearnArticle(locale, slug);
+    assert.ok(article, `${locale} customer-support answer article`);
+    assert.match(article.title, titlePattern);
+    assert.equal(article.publishedAt, "2026-08-31");
+    assert.equal(article.updatedAt, "2026-08-31");
+    assert.match(JSON.stringify(article), /問題|问题|回答|答案|適用範圍|适用范围|不可承諾|不可承诺|轉人工|转人工|來源|来源|負責人|负责人|複審|复审/i);
+    assert.match(JSON.stringify(article), /不會導入|不会导入|不會處理個資|不会处理个人信息|不會發布|不会发布|不會自動回覆|不会自动回复|不會同步|不会同步|不會自動轉人工|不会自动转人工/i);
+    assert.ok(article.productEvidence, `${locale} product evidence`);
+    assert.equal(
+      article.productEvidence.image.src,
+      "/images/product-evidence/wenlan-space-review-fixture.png",
+    );
+    assert.equal(article.productEvidence.workflow.length, 3);
+    assert.equal(article.productEvidence.artifactRows.length, 3);
+    assert.equal(article.productEvidence.action.href, "#product-evidence");
+    assert.ok(article.relatedSlugs.length >= 3);
+  }
+
+  const renderer = await readFile(
+    resolve(repoRoot, "src/app/[locale]/learn/[slug]/page.tsx"),
+    "utf8",
+  );
+  assert.match(renderer, /article\.slug === "build-customer-support-answer-knowledge-base"/);
+  for (const protectedTerm of ["客服答案知識庫", "客服答案知识库", "不可承諾", "不可承诺", "禁止承诺", "轉人工", "转人工"]) {
     assert.match(
       renderer,
       new RegExp(`part === "${protectedTerm}"`),

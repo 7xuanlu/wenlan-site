@@ -64,9 +64,10 @@ const EXPECTED_FAMILY_IDS = [
   "sre-incident-runbook-knowledge-base",
   "competitive-intelligence-knowledge-base",
   "ict-supplier-due-diligence-evidence-pack",
+  "customer-support-answer-knowledge-base",
 ];
 const APPROVED_SCENARIO_CONTRACT_SHA256 =
-  "bab338699e6e0e7c2fe198130039dd6567190d12f4c8b19553351a228326b391";
+  "df133cbd23592ce2618406d6c1b41c08d9cc2c7801a84b86bf6e0eaaa07474e6";
 const EXPECTED_WEEKLY_WINDOWS = [
   ["2026-08-24", "2026-08-30", "source-change-stale-pages"],
   ["2026-08-31", "2026-09-06", "coding-agent-source-backed-knowledge-base"],

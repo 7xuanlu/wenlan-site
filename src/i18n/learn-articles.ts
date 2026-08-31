@@ -991,6 +991,7 @@ const zhTWArticles = {
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
       "build-ict-supplier-due-diligence-evidence-pack",
+      "build-customer-support-answer-knowledge-base",
     ],
     officialReferences: [
       {
@@ -1524,6 +1525,7 @@ const zhTWArticles = {
       "choose-ai-knowledge-base-tool",
       "fix-pdf-ingestion-ai-knowledge-base",
       "when-ai-agent-should-query-knowledge-base",
+      "build-customer-support-answer-knowledge-base",
     ],
     officialReferences: [
       {
@@ -1659,6 +1661,7 @@ const zhTWArticles = {
       "build-product-research-knowledge-base-for-prd",
       "build-sre-incident-knowledge-base",
       "build-ict-supplier-due-diligence-evidence-pack",
+      "build-customer-support-answer-knowledge-base",
     ],
     officialReferences: [
       {
@@ -2678,6 +2681,176 @@ const zhTWArticles = {
     cta: {
       heading: "讓一次供應商審查可追溯",
       body: "選定一個供應商與服務範圍，連接核准證據，並在決策會議前保留所有過期或缺乏支持的主張。",
+    },
+  },
+  "build-customer-support-answer-knowledge-base": {
+    slug: "build-customer-support-answer-knowledge-base",
+    eyebrow: "客服回答工作流",
+    category: "Workflows",
+    title: "如何建立客服答案知識庫：讓支援回答可追溯",
+    description:
+      "產品或政策變更後，用核准來源、適用範圍、不可承諾、轉人工條件、負責人與複審日期維護可檢查的客服答案。",
+    metaTitle: "建立客服答案知識庫與可追溯回答 | Wenlan",
+    metaDescription:
+      "從核准的產品與政策文件建立客服答案知識庫，保留問題、支持的回答、適用範圍、不可承諾、轉人工條件、來源修訂、負責人與複審日期。",
+    keywords: [
+      "客服知識庫",
+      "客服話術知識庫",
+      "客服知識庫更新",
+      "客服答案管理",
+      "有來源客服回答",
+      "客服內容審查工作流",
+    ],
+    publishedAt: "2026-08-31",
+    updatedAt: "2026-08-31",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分鐘閱讀",
+    audience: "維護核准客服回答的客服營運、技術寫作者、產品支援與客戶成功內容負責人",
+    heroBullets: [
+      "先從一項核准的產品或政策變更，以及受影響的客服問題開始。",
+      "記錄支持的回答、適用範圍、不可承諾、轉人工條件、來源修訂、負責人與下次複審日期。",
+      "讓過期或缺乏支持的回答留在人工審查中，不自動發布或回覆客戶。",
+    ],
+    sections: [
+      {
+        heading: "先說結論：一個客服問題配一筆可審查答案",
+        body: [
+          "為一個支援主題和一組核准的產品或政策文件建立答案知識庫。每個客服問題都要記錄支持的回答、適用範圍、不可承諾、需要轉人工的條件、來源修訂、具名負責人與下次複審日期；來源改變時，先把相關回答標為過期或未解決。",
+          "Wenlan 可以把核准的 Markdown、文字、可擷取文字的 PDF、資料夾與唯讀 Obsidian 來源連到有來源的 Pages、引用、修訂、過期狀態、lint 與人工審查。它不會導入客服工單、CRM 紀錄或原始客戶對話，也不會處理個資、連接支援渠道、發布面向客戶的答案、產生回覆、同步渠道或自動轉人工。",
+        ],
+        link: {
+          label: "查看客服答案證據工作流",
+          href: "#product-evidence",
+        },
+      },
+      {
+        heading: "產品或政策變動時，為什麼答案會失效",
+        body: [
+          "產品發布或政策異動後，原本聽起來合理的回答可能已不符合適用方案、生效日期、例外條件或承諾邊界。若共用文件或潤飾過的 AI 摘要沒有保留來源修訂，就很難知道哪一句仍受支持、哪一句需要負責人重審。",
+          "可重用的客服內容應把問題、回答、範圍、不可承諾與轉人工條件拆開；支持不足時保留未知，不用流暢文字補齊答案。即使不使用 Wenlan，這份欄位清楚的答案登錄也能作為獨立的內容審查成果。",
+        ],
+      },
+      {
+        heading: "建立一個問題到回答的審查閉環",
+        body: [
+          "先選一個客服主題與少量核准文件，讓每一筆答案都能回到確切來源段落。把原始來源的說法、內容負責人的解讀、不能承諾的事項與必須交給人的例外分開保存。",
+        ],
+        bullets: [
+          "寫下產品或政策主題、生效日期、客服讀者、納入文件、排除資料與內容負責人。",
+          "登錄核准的 Markdown、文字、可擷取文字 PDF、資料夾或唯讀 Obsidian 來源，保存標題、日期、修訂與適用範圍。",
+          "每個常見問題建立一筆答案紀錄，分開支持的回答、適用範圍、不可承諾、例外與轉人工條件。",
+          "把重要回答連回確切來源段落，並在紀錄旁保留來源修訂。",
+          "產品或政策變更後重新同步受影響來源，把相關答案標為過期或未解決，直到負責人檢查新修訂。",
+          "重用前由負責人打開來源，確認範圍與生效日期，再寫下下次複審日期；這個工作流不發布答案，也不傳送回覆。",
+        ],
+        code: {
+          label: "完成 Wenlan 與 AI 客戶端設定後",
+          code: "wenlan status\nwenlan sources add ~/Support/approved-product-policy\n# 在 Wenlan plugin client 中：\n/distill <客服答案主題>\n/pages <客服答案主題>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "客服答案紀錄應該記什麼？",
+        body: [
+          "下面的中立範本把一個可回答的問題與它的限制放在同一筆紀錄。答案不是承諾；只有來源和負責人確認後，才可以在適用範圍內重用。",
+        ],
+        code: {
+          label: "中立的客服答案紀錄範本",
+          code: "question: 現有訂閱可以立即更換方案嗎？\nsupported_answer: <核准政策真正支持的回答>\nscope: <方案、地區、帳戶狀態與生效日期>\ndo_not_promise: <來源沒有授權的動作或結果>\nescalate_when: <必須交給人工負責人的條件>\nsource_revision: <文件 ID、段落與修訂>\nowner: <內容負責人>\nnext_review: <日期或產品變更觸發條件>",
+        },
+      },
+      {
+        heading: "知道這個工作流不會自動化什麼",
+        body: [
+          "Wenlan 不會處理個資或宣稱替你遮蔽個資，不提供團隊權限，不做客服分析，不自動核准政策，不會發布面向客戶的答案，不會自動回覆或傳送回覆，不會同步 LINE、Email 或其他渠道，也不會自動轉人工。內容負責人仍要判斷來源是否適用、答案能否重用，以及何時需要交給適當的人。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 會導入客服工單或替我發送回覆嗎？",
+        answer:
+          "不會。這個工作流只使用你能檢查的核准文件；Wenlan 不會導入客服工單、CRM 紀錄或原始客戶對話，也不會發布、產生、傳送或同步客戶回覆。",
+      },
+      {
+        question: "產品或政策變更後，舊客服答案應該怎麼辦？",
+        answer:
+          "重新同步核准來源，把受影響答案標為過期或未解決，再由具名負責人檢查目前段落、適用範圍、不可承諾、轉人工條件、來源修訂與下次複審日期。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "verify-ai-knowledge-base-citations",
+      "test-ai-knowledge-base-retrieval-after-changes",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 支援的文件來源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan sources add CLI",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+      },
+      {
+        label: "Wenlan 有來源 Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "Wenlan 審查與信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+    ],
+    productEvidence: {
+      heading: "重用回答前先檢查來源與審查狀態",
+      summary:
+        "這是 Wenlan App 確定性測試資料的真實桌面畫面，不是客服工作區或客戶對話。畫面顯示有來源數量的 Pages 與審查佇列，可用同一產品介面讓來源變動與未解證據保持可見。",
+      image: {
+        src: "/images/product-evidence/wenlan-space-review-fixture.png",
+        alt: "Wenlan 桌面 Space 顯示有來源數量的 Pages，以及來源衝突與新證據的審查佇列。",
+        caption:
+          "Wenlan App 確定性測試資料的真實畫面。這是一般產品範例，不是客服證據；來源數量與審查狀態仍可直接檢查。",
+        width: 1586,
+        height: 992,
+      },
+      workflow: [
+        {
+          label: "固定答案範圍",
+          detail: "選定一個客服主題、核准來源、生效日期與內容負責人，再開始整理回答。",
+        },
+        {
+          label: "整理有引用的答案紀錄",
+          detail: "把問題、支持的回答、適用範圍、不可承諾、轉人工條件、來源修訂與下次複審連到確切來源。",
+        },
+        {
+          label: "重用前先審查",
+          detail: "打開引用段落，檢查過期或矛盾證據，並把發布或回覆傳送留在本工作流之外。",
+        },
+      ],
+      artifactHeading: "客服答案紀錄示例",
+      artifactNote:
+        "這是中立範本，不是對任何客戶的承諾。重用前請以核准來源和具名內容負責人替換每個欄位。",
+      artifactRows: [
+        {
+          label: "問題與回答",
+          detail: "一個客服問題，以及核准產品或政策來源真正支持的最短回答。",
+        },
+        {
+          label: "範圍與邊界",
+          detail: "適用方案、地區、帳戶狀態、生效日期、不可承諾、例外與需要轉人工的條件。",
+        },
+        {
+          label: "審查與負責人",
+          detail: "來源文件與修訂、內容負責人、目前審查狀態，以及下次複審日期或產品變更觸發條件。",
+        },
+      ],
+      action: {
+        label: "查看客服答案證據工作流",
+        href: "#product-evidence",
+      },
+    },
+    cta: {
+      heading: "讓一個客服答案可審查",
+      body: "選定核准的產品或政策來源，記錄一個有界回答，並在重用前讓修訂、負責人、限制與下次複審保持可見。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
@@ -3919,6 +4092,7 @@ const zhCNArticles = {
       "distilled-wiki-pages-ai-memory",
       "wenlan-vs-obsidian-ai-memory",
       "build-ict-supplier-due-diligence-evidence-pack",
+      "build-customer-support-answer-knowledge-base",
     ],
     officialReferences: [
       {
@@ -4180,6 +4354,7 @@ const zhCNArticles = {
       "choose-ai-knowledge-base-tool",
       "fix-pdf-ingestion-ai-knowledge-base",
       "when-ai-agent-should-query-knowledge-base",
+      "build-customer-support-answer-knowledge-base",
     ],
     officialReferences: [
       {
@@ -4315,6 +4490,7 @@ const zhCNArticles = {
       "build-product-research-knowledge-base-for-prd",
       "build-sre-incident-knowledge-base",
       "build-ict-supplier-due-diligence-evidence-pack",
+      "build-customer-support-answer-knowledge-base",
     ],
     officialReferences: [
       {
@@ -5334,6 +5510,176 @@ const zhCNArticles = {
     cta: {
       heading: "让一次供应商审核可追溯",
       body: "选定一个供应商与服务范围，连接获准证据，并在决策会议前保留所有过期或缺乏支持的主张。",
+    },
+  },
+  "build-customer-support-answer-knowledge-base": {
+    slug: "build-customer-support-answer-knowledge-base",
+    eyebrow: "客服回答工作流",
+    category: "Workflows",
+    title: "如何建立客服答案知识库：让客服回答可追溯",
+    description:
+      "产品或政策变化后，用获准来源、适用范围、禁止承诺、转人工条件、负责人和复审日期维护可检查的客服答案。",
+    metaTitle: "建立客服答案知识库与可追溯回答 | Wenlan",
+    metaDescription:
+      "从获准的产品与政策文档建立客服答案知识库，保留问题、支持的客服回答、适用范围、禁止承诺、转人工条件、来源修订、负责人和复审日期。",
+    keywords: [
+      "客服知识库",
+      "客服话术知识库",
+      "客服知识库更新",
+      "客服答案管理",
+      "有来源客服回答",
+      "客服内容审核工作流",
+    ],
+    publishedAt: "2026-08-31",
+    updatedAt: "2026-08-31",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分钟阅读",
+    audience: "维护获准客服回答的客服运营、技术写作者、产品支持与客户成功内容负责人",
+    heroBullets: [
+      "先从一项获准的产品或政策变更，以及受影响的客服问题开始。",
+      "记录支持的客服回答、适用范围、禁止承诺、转人工条件、来源修订、负责人和下次复审日期。",
+      "让过期或缺乏支持的回答留在人工审核中，不自动发布或回复客户。",
+    ],
+    sections: [
+      {
+        heading: "先说结论：一个客服问题配一笔可审核答案",
+        body: [
+          "为一个支持主题和一组获准的产品或政策文档建立答案知识库。每个客服问题都要记录支持的客服回答、适用范围、禁止承诺、需要转人工的条件、来源修订、具名负责人和下次复审日期；来源变化时，先把相关回答标为过期或未解决。",
+          "Wenlan 可以把获准的 Markdown、文本、可提取文本的 PDF、文件夹与只读 Obsidian 来源连接到有来源的 Pages、引用、修订、过期状态、lint 与人工审核。它不会导入客服工单、CRM 记录或原始客户对话，也不会处理个人信息、连接支持渠道、发布面向客户的答案、生成回复、同步渠道或自动转人工。",
+        ],
+        link: {
+          label: "查看客服答案证据工作流",
+          href: "#product-evidence",
+        },
+      },
+      {
+        heading: "产品或政策变化时，为什么答案会失效",
+        body: [
+          "产品发布或政策变化后，原本听起来合理的回答可能已经不符合适用方案、生效日期、例外条件或承诺边界。如果共享文档或润色过的 AI 摘要没有保留来源修订，就很难知道哪一句仍受支持、哪一句需要负责人重新审核。",
+          "可复用的客服内容应该把问题、回答、范围、禁止承诺与转人工条件拆开；支持不足时保留未知，不用流畅文字补齐答案。即使不使用 Wenlan，这份字段清楚的答案登记也能作为独立的内容审核成果。",
+        ],
+      },
+      {
+        heading: "建立一个问题到回答的审核闭环",
+        body: [
+          "先选择一个客服主题和少量获准文档，让每一笔答案都能回到准确来源段落。把原始来源的说法、内容负责人的解读、不能承诺的事项和必须交给人的例外分开保存。",
+        ],
+        bullets: [
+          "写下产品或政策主题、生效日期、客服读者、纳入文档、排除资料和内容负责人。",
+          "登记获准的 Markdown、文本、可提取文本 PDF、文件夹或只读 Obsidian 来源，保存标题、日期、修订和适用范围。",
+          "每个常见问题建立一笔答案记录，分开支持的回答、适用范围、禁止承诺、例外与转人工条件。",
+          "把重要回答连回准确来源段落，并在记录旁保留来源修订。",
+          "产品或政策变化后重新同步受影响来源，把相关答案标为过期或未解决，直到负责人检查新修订。",
+          "复用前由负责人打开来源，确认范围和生效日期，再写下下次复审日期；这个工作流不发布答案，也不发送回复。",
+        ],
+        code: {
+          label: "完成 Wenlan 与 AI 客户端设置后",
+          code: "wenlan status\nwenlan sources add ~/Support/approved-product-policy\n# 在 Wenlan plugin client 中：\n/distill <客服答案主题>\n/pages <客服答案主题>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "客服答案记录应该记什么？",
+        body: [
+          "下面的中立模板把一个可回答的问题与它的限制放在同一笔记录。答案不是承诺；只有来源和负责人确认后，才可以在适用范围内复用。",
+        ],
+        code: {
+          label: "中立的客服答案记录模板",
+          code: "question: 现有订阅可以立即更换方案吗？\nsupported_answer: <获准政策真正支持的回答>\nscope: <方案、地区、账户状态与生效日期>\ndo_not_promise: <来源没有授权的动作或结果>\nescalate_when: <必须交给人工负责人的条件>\nsource_revision: <文档 ID、段落与修订>\nowner: <内容负责人>\nnext_review: <日期或产品变化触发条件>",
+        },
+      },
+      {
+        heading: "知道这个工作流不会自动化什么",
+        body: [
+          "Wenlan 不会处理个人信息或宣称替你遮蔽个人信息，不提供团队权限，不做客服分析，不自动批准政策，不会发布面向客户的答案，不会自动回复或发送回复，不会同步 LINE、Email 或其他渠道，也不会自动转人工。内容负责人仍要判断来源是否适用、答案能否复用，以及何时需要交给适当的人。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 会导入客服工单或替我发送回复吗？",
+        answer:
+          "不会。这个工作流只使用你能检查的获准文档；Wenlan 不会导入客服工单、CRM 记录或原始客户对话，也不会发布、生成、发送或同步客户回复。",
+      },
+      {
+        question: "产品或政策变化后，旧客服答案应该怎么办？",
+        answer:
+          "重新同步获准来源，把受影响答案标为过期或未解决，再由具名负责人检查当前段落、适用范围、禁止承诺、转人工条件、来源修订和下次复审日期。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "verify-ai-knowledge-base-citations",
+      "test-ai-knowledge-base-retrieval-after-changes",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan 支持的文档来源",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan sources add CLI",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+      },
+      {
+        label: "Wenlan 有来源 Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "Wenlan 审核与信任",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+    ],
+    productEvidence: {
+      heading: "复用回答前先检查来源与审核状态",
+      summary:
+        "这是 Wenlan App 确定性测试资料的真实桌面画面，不是客服工作区或客户对话。画面显示带有来源数量的 Pages 与审核队列，可用同一产品界面让来源变化与未解决证据保持可见。",
+      image: {
+        src: "/images/product-evidence/wenlan-space-review-fixture.png",
+        alt: "Wenlan 桌面 Space 显示带有来源数量的 Pages，以及来源冲突与新证据的审核队列。",
+        caption:
+          "Wenlan App 确定性测试资料的真实画面。这是通用产品示例，不是客服证据；来源数量与审核状态仍可直接检查。",
+        width: 1586,
+        height: 992,
+      },
+      workflow: [
+        {
+          label: "固定答案范围",
+          detail: "选定一个客服主题、获准来源、生效日期和内容负责人，再开始整理回答。",
+        },
+        {
+          label: "整理有引用的答案记录",
+          detail: "把问题、支持的回答、适用范围、禁止承诺、转人工条件、来源修订和下次复审连到准确来源。",
+        },
+        {
+          label: "复用前先审核",
+          detail: "打开引用段落，检查过期或矛盾证据，并把发布或回复发送留在本工作流之外。",
+        },
+      ],
+      artifactHeading: "客服答案记录示例",
+      artifactNote:
+        "这是中立模板，不是对任何客户的承诺。复用前请以获准来源和具名内容负责人替换每个字段。",
+      artifactRows: [
+        {
+          label: "问题与回答",
+          detail: "一个客服问题，以及获准产品或政策来源真正支持的最短回答。",
+        },
+        {
+          label: "范围与边界",
+          detail: "适用方案、地区、账户状态、生效日期、禁止承诺、例外与需要转人工的条件。",
+        },
+        {
+          label: "审核与负责人",
+          detail: "来源文档与修订、内容负责人、当前审核状态，以及下次复审日期或产品变化触发条件。",
+        },
+      ],
+      action: {
+        label: "查看客服答案证据工作流",
+        href: "#product-evidence",
+      },
+    },
+    cta: {
+      heading: "让一个客服答案可审核",
+      body: "选定获准的产品或政策来源，记录一个有界回答，并在复用前让修订、负责人、限制和下次复审保持可见。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;

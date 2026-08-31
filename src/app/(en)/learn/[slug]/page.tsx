@@ -220,7 +220,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                 Learn
               </Link>
             </nav>
-            <div className="mt-12 grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
+            <div className="mt-12 grid min-w-0 grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
               <div className="min-w-0">
                 <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
                   {article.eyebrow}
@@ -264,7 +264,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
 
         <section className="px-6 py-16">
           <div className="mx-auto max-w-5xl">
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-3">
               {article.heroBullets.map((bullet, index) => (
                 <div key={bullet} className="card-wenlan rounded-xl p-5">
                   <p className="mb-5 font-mono text-[11px] text-[var(--o-warm)]">

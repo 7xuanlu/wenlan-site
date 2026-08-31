@@ -4001,6 +4001,278 @@
           "nativeUnit": "per-locale target-page visitors and referrer visitors"
         }
       }
+    },
+    {
+      "id": "customer-support-answer-knowledge-base",
+      "audience": "Support operations, technical writers, product support, and customer-success content owners who maintain approved customer answers",
+      "trigger": "A product release or policy change may leave support answers outdated, ambiguous, unsupported, or unsafe to reuse",
+      "userTask": "Build and maintain one source-backed customer-support answer knowledge base from approved product and policy documents",
+      "desiredOutcome": "Keep a reviewable support answer pack with scope, prohibited promises, escalation conditions, source revision, owner, and next review date",
+      "stage": "maintain",
+      "decision": "net-new",
+      "plannedWindow": "next-eligible-window-after-2026-08-31",
+      "publicationStatus": "prepared",
+      "locales": {
+        "en": {
+          "queryFamily": [
+            "customer support knowledge base",
+            "customer service knowledge base",
+            "how to keep support knowledge base updated"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "google-serp-observation",
+              "sourceUrl": "https://www.google.com/search?hl=en&gl=us&q=customer+support+knowledge+base+keep+updated",
+              "query": "customer support knowledge base keep updated",
+              "capturedAt": "2026-08-30",
+              "language": "en",
+              "geography": "United States parameter",
+              "nativeUnit": "returned result observation",
+              "value": "support-content lifecycle, product-release, owner, review, source, and escalation results",
+              "note": "The result shape supports a support-answer maintenance task; it is not Wenlan rank, traffic, or keyword volume."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "authenticated-keyword-tool",
+              "sourceUrl": "https://app.neilpatel.com/en/ubersuggest/keyword_ideas/?keyword=customer%20support%20knowledge%20base&lang=en&locId=2840&mode=keyword",
+              "query": "customer support knowledge base",
+              "capturedAt": "2026-08-30",
+              "language": "en",
+              "geography": "United States locId 2840",
+              "nativeUnit": "Ubersuggest estimated monthly searches",
+              "value": "70 for customer support knowledge base; 110 for related customer service knowledge base",
+              "note": "The US report is a source-native estimate, not GSC or guaranteed Wenlan demand; CPC and difficulty remain separate fields."
+            },
+            {
+              "sourceType": "official-kcs-practice-guide",
+              "sourceUrl": "https://library.serviceinnovation.org/KCS/KCS_v6/KCS_v6_Practices_Guide/030/040/010",
+              "query": "KCS content health support knowledge article lifecycle",
+              "capturedAt": "2026-08-30",
+              "language": "en",
+              "geography": "global official service-innovation guidance",
+              "nativeUnit": "one maintained practice guide",
+              "value": "1 support-knowledge content-health and lifecycle workflow",
+              "note": "KCS repeats structured articles, reuse, improvement, governance, archiving, and content-health checks; its roles and permissions are not attributed to Wenlan."
+            },
+            {
+              "sourceType": "official-practitioner-case",
+              "sourceUrl": "https://www.microsoft.com/insidetrack/blog/ai-for-knowledge-management-keeping-support-content-up-to-date-at-microsoft/",
+              "query": "Microsoft Global Help Desk keeping support content up to date",
+              "capturedAt": "2026-08-30",
+              "language": "en",
+              "geography": "global English first-party publication",
+              "nativeUnit": "one inspectable support-knowledge case",
+              "value": "1 current help-desk content-maintenance problem and workflow",
+              "note": "Microsoft describes outdated distributed support content and human review; its automation and enterprise systems are not attributed to Wenlan."
+            },
+            {
+              "sourceType": "recent-practitioner-case",
+              "sourceUrl": "https://emergent.sh/blog/our-knowledge-base-is-code",
+              "query": "support knowledge base stale after product change",
+              "capturedAt": "2026-08-30",
+              "language": "en",
+              "geography": "global English practitioner publication",
+              "nativeUnit": "one dated product-support case",
+              "value": "1 product-change to NEW INCOMPLETE OUTDATED review workflow",
+              "note": "The case repeats confidently wrong support answers from old product knowledge; its event automation and outcomes are not Wenlan features or causal evidence."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Keep the owner on a manual answer pack from approved documents. Exclude ticket or CRM ingestion, PII, team permissions, analytics, channel sync, automatic policy approval, reply deployment, and automatic escalation."
+        },
+        "zh-TW": {
+          "queryFamily": [
+            "客服知識庫",
+            "客服話術知識庫",
+            "客服知識庫更新"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "google-serp-observation",
+              "sourceUrl": "https://www.google.com/search?hl=zh-TW&gl=tw&q=客服知識庫+客服話術+更新",
+              "query": "客服知識庫 客服話術 更新",
+              "capturedAt": "2026-08-30",
+              "language": "zh-TW",
+              "geography": "Taiwan parameter",
+              "nativeUnit": "returned result observation",
+              "value": "客服答案、政策異動、來源、負責人、複審與轉人工結果",
+              "note": "台灣結果形態支持客服答案維護任務；這不是搜尋量、Wenlan 排名或流量。"
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "taiwan-practitioner-guide",
+              "sourceUrl": "https://richardmarketings.com/ai-customer-service-knowledge-base-taiwan-smes/",
+              "query": "AI 客服答錯 客服知識庫 來源 例外 轉人工 更新",
+              "capturedAt": "2026-08-30",
+              "language": "zh-TW",
+              "geography": "Taiwan practitioner publication",
+              "nativeUnit": "one dated locale-specific workflow article",
+              "value": "1 客服答案欄位、風險邊界、來源、更新與轉人工流程",
+              "note": "文章提供台灣自然用語與獨立工作流佐證；它是實務／行銷來源，不是關鍵字量或 Wenlan 產品證明。"
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "使用客服知識庫、客服話術、適用範圍、不可承諾、轉人工、資料來源、負責人與複審等台灣自然用語；排除 LINE、CRM、工單、個資處理與自動回覆能力。"
+        },
+        "zh-CN": {
+          "queryFamily": [
+            "客服知识库",
+            "客服话术知识库",
+            "客服知识库更新"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "google-serp-observation",
+              "sourceUrl": "https://www.google.com/search?hl=zh-CN&q=客服知识库+客服话术+更新",
+              "query": "客服知识库 客服话术 更新",
+              "capturedAt": "2026-08-30",
+              "language": "zh-CN",
+              "geography": "Simplified-Chinese result surface",
+              "nativeUnit": "returned result observation",
+              "value": "版本、政策变更、来源、负责人、审核、回滚与转人工结果",
+              "note": "结果形态支持客服答案维护任务；不是总体需求、关键词量、Wenlan 排名或流量。"
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "recent-simplified-chinese-operating-guide",
+              "sourceUrl": "https://solvea.shulex.com/blog/ai-customer-service-knowledge-base-update-version-control",
+              "query": "客服知识库 更新 版本 审批 回滚 来源 负责人",
+              "capturedAt": "2026-08-30",
+              "language": "zh-CN",
+              "geography": "Simplified-Chinese publication",
+              "nativeUnit": "one dated operating workflow",
+              "value": "1 来源、范围、生效时间、负责人、审核、测试、停用与回滚流程",
+              "note": "文章重复具体维护问题；它是厂商来源，其自动化、渠道和业务系统能力不归因给 Wenlan。"
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "使用客服知识库、客服话术、适用范围、禁止承诺、转人工、资料来源、负责人和复审等自然用语；排除 CRM、工单、客户数据、渠道同步和自动回复。"
+        }
+      },
+      "gates": {
+        "provenance": {
+          "status": "passed",
+          "reason": "Every retained query, tool result, official guide, and practitioner source records its URL, capture or publication date, language or geography, native unit, and interpretation boundary.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.en.demandEvidence[0]",
+            "locales.en.demandEvidence[1]",
+            "locales.en.demandEvidence[2]",
+            "locales.en.demandEvidence[3]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-TW.demandEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]",
+            "locales.zh-CN.demandEvidence[0]",
+            "docs/seo-audits/2026-08-30-customer-support-answer-knowledge-base-demand-gate.md"
+          ]
+        },
+        "repeatedDemand": {
+          "status": "passed",
+          "reason": "KCS, Microsoft, Emergent, Taiwan practitioner evidence, and a Simplified-Chinese operating guide repeat the stale-answer, source, ownership, review, and escalation problem.",
+          "evidenceRefs": [
+            "locales.en.demandEvidence[1]",
+            "locales.en.demandEvidence[2]",
+            "locales.en.demandEvidence[3]",
+            "locales.zh-TW.demandEvidence[0]",
+            "locales.zh-CN.demandEvidence[0]"
+          ]
+        },
+        "trilingualSerp": {
+          "status": "passed",
+          "reason": "English, Taiwan Traditional-Chinese, and Simplified-Chinese result surfaces were inspected separately and produced natural wording for one support-answer maintenance task.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]"
+          ]
+        },
+        "cleanGap": {
+          "status": "passed",
+          "reason": "Existing owners cover generic document ingestion, source-backed architecture, citation verification, stale Pages, and retrieval regression. None starts from an approved support question and produces a reviewable answer record with scope, prohibited promises, escalation, source revision, owner, and review date; the broad AI-support platform intent remains rejected.",
+          "evidenceRefs": [
+            "overlapCheck",
+            "docs/seo-audits/2026-08-30-customer-support-answer-knowledge-base-demand-gate.md"
+          ]
+        },
+        "firstPartyProof": {
+          "status": "passed",
+          "reason": "Maintained Wenlan source proves supported local documents, source-backed Pages, citations, revisions, stale state, lint, and human review. The candidate excludes ticket, CRM, permissions, PII, analytics, channel, and reply-deployment features.",
+          "evidenceRefs": [
+            "/Users/lucian/Repos/wenlan/README.md:102",
+            "/Users/lucian/Repos/wenlan/README.md:206",
+            "/Users/lucian/Repos/wenlan/README.md:240"
+          ]
+        },
+        "standaloneUtility": {
+          "status": "passed",
+          "reason": "A neutral support-answer record and review checklist remain useful without Wenlan and do not operate a help desk or send customer replies.",
+          "evidenceRefs": [
+            "standaloneUtility"
+          ]
+        },
+        "internalLinks": {
+          "status": "passed",
+          "reason": "Three same-locale generic owners can link contextually from document ingestion, citation verification, and retrieval-regression testing after a separately approved, attribution-safe publication boundary.",
+          "evidenceRefs": [
+            "internalLinks"
+          ]
+        },
+        "authorityPath": {
+          "status": "passed",
+          "reason": "The maintained awesome-customer-success repository has an exact Knowledge Base and Documentation section and merged relevant tool additions in 2026; its limited reach, missing written contribution guide, maintainer acceptance, and any backlink remain explicit uncertainties.",
+          "evidenceRefs": [
+            "authorityPath",
+            "docs/seo-audits/2026-08-30-customer-support-answer-knowledge-base-demand-gate.md"
+          ]
+        }
+      },
+      "wenlanProof": [
+        {
+          "claim": "Wenlan supports local Markdown, text, text-extractable PDF, source-backed Pages, citations, revisions, stale state, lint, and review.",
+          "sourceRef": "/Users/lucian/Repos/wenlan/README.md:102-248",
+          "verification": "rg -n \"documents|source-backed knowledge base|Cite|Track|Refresh|Review|Document Sources|Source-backed Pages\" /Users/lucian/Repos/wenlan/README.md"
+        },
+        {
+          "claim": "The released CLI supports source registration and status while plugin workflows expose distill, pages, lint, and curate.",
+          "sourceRef": "/Users/lucian/Repos/wenlan/crates/wenlan-cli/README.md:60 and /Users/lucian/Repos/wenlan/README.md",
+          "verification": "rg -n \"wenlan status|wenlan sources add|/distill|/pages|/lint|/curate\" /Users/lucian/Repos/wenlan/crates/wenlan-cli/README.md /Users/lucian/Repos/wenlan/README.md"
+        }
+      ],
+      "standaloneUtility": "A neutral support-answer workflow can record a customer question, supported answer, applicability, prohibited promise, escalation condition, source revision, human owner, and next review date without requiring Wenlan or automating customer support.",
+      "overlapCheck": "Do not duplicate generic document ingestion, stale-page repair, source-backed architecture, citation verification, or retrieval regression. This page owns one approved-document to support-answer workflow. It explicitly excludes raw customer conversations, ticket or CRM ingestion, PII handling, team permissions, support analytics, automatic policy approval, customer-facing publication, reply generation or delivery, channel synchronization, and automatic escalation.",
+      "internalLinks": [
+        "https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents",
+        "https://wenlan.app/learn/verify-ai-knowledge-base-citations",
+        "https://wenlan.app/learn/test-ai-knowledge-base-retrieval-after-changes",
+        "https://wenlan.app/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
+        "https://wenlan.app/zh-TW/learn/verify-ai-knowledge-base-citations",
+        "https://wenlan.app/zh-TW/learn/test-ai-knowledge-base-retrieval-after-changes",
+        "https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
+        "https://wenlan.app/zh-CN/learn/verify-ai-knowledge-base-citations",
+        "https://wenlan.app/zh-CN/learn/test-ai-knowledge-base-retrieval-after-changes"
+      ],
+      "authorityPath": {
+        "type": "conditional-maintained-oss-listing",
+        "target": "https://github.com/keon/awesome-customer-success#knowledge-base-and-documentation — after separate website publication approval, prepare one neutral Wenlan knowledge-base tool entry through a normal pull request; the repository had 24 stars and current 2026 review activity at capture time, but maintainer acceptance and any backlink are not assumed",
+        "status": "planned-not-published"
+      },
+      "nextResearchDirection": "The exact English, zh-TW, and zh-CN family is locally prepared and verified. Keep it unpublished until the user separately approves commit, push, PR, merge, automatic deployment, and read-only production verification. Preserve the broad AI-customer-support rejection and the manual approved-document boundary. Do not submit the awesome-customer-success entry, contact maintainers, request indexing, submit validation, mutate analytics, or publish externally without separate approval.",
+      "readout": {
+        "gsc": {
+          "status": "unavailable",
+          "nativeUnit": "per-locale page impressions, joined-query impressions, clicks"
+        },
+        "vercel": {
+          "status": "unavailable",
+          "nativeUnit": "per-locale target-page visitors and referrer visitors"
+        }
+      }
     }
   ]
 }

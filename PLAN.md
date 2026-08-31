@@ -4143,6 +4143,7 @@ unchanged.
 - PR #160 merged at `2026-08-31T01:25:45Z` as
   `6608763f95f016a611041ddf50324e2ac616c77e`; Vercel reported production
   deployment success at `2026-08-31T01:26:37Z`.
+
 - The integrated merge commit passed Goal and scenario verification, 51 Goal
   tests, 253 SEO tests, 77 i18n tests, TypeScript lint, the 275-page production
   build, and the 159-owner built technical audit. A fresh merged-diff read found
@@ -4217,7 +4218,9 @@ unchanged.
   the next two or three meaningful releases, preserve each English, zh-TW, and
   zh-CN distribution timestamp and separately read 24-hour and seven-day
   GitHub stars, unique views, referrers, popular paths, and release-asset
-  downloads. Only repeated source-native waves establish sustainability.
+  downloads. Only repeated source-native waves establish sustainability. The
+  fixed observations and protocol are preserved in
+  `docs/seo-audits/2026-08-31-release-distribution-cohort.md`.
 
 ## Local verification: Wenlan v0.17.6 website alignment at 2026-08-31T05:44:24Z
 
@@ -4265,3 +4268,123 @@ unchanged.
   clicks, visitors, download attribution, star attribution, or SEO success. No
   indexing request, GSC validation, analytics mutation, source-repository
   change, paid action, maintainer message, or synthetic event occurred.
+## Campaign research: customer-support answer knowledge base at 2026-08-31T04:18:27Z
+
+- The broad `AI customer support` candidate remains rejected. Wenlan does not
+  provide help-desk or CRM ingestion, customer-data redaction, team
+  permissions, ticket analytics, reply deployment, channel synchronization,
+  or automatic escalation.
+- A narrower files-first task passes all candidate gates: support operations,
+  technical writers, product support, or customer-success content owners can
+  turn approved product and policy documents into one reviewable support
+  answer pack. Each answer preserves the customer question, supported answer,
+  scope, prohibited promise, escalation condition, source revision, owner, and
+  next review date.
+- Ubersuggest estimated `70` US monthly searches for
+  `customer support knowledge base` and `110` for the related
+  `customer service knowledge base` phrase. Those tool-native estimates are
+  materially below the recorded `LLM wiki` estimate and do not replace GSC.
+  Ubersuggest's Taiwan and China-labelled reports still linked to US
+  `locId=2840`; their localized absolute-volume rows are invalid and excluded.
+- KCS, Microsoft, Emergent, a Taiwan practitioner workflow, and a
+  Simplified-Chinese operating guide repeat stale answers, source revisions,
+  ownership, review, and escalation. English, zh-TW, and zh-CN result surfaces
+  were inspected separately; no external observation is treated as Wenlan
+  rank, traffic, GSC, or causality.
+- The clean gap is the answer record, not a renamed generic knowledge-base
+  guide and not an AI-support platform. Existing owners cover document
+  ingestion, source-backed architecture, citation verification, stale Pages,
+  and retrieval regression; none owns the approved support-question to
+  bounded answer-pack task.
+- The conditional authority path is
+  `keon/awesome-customer-success#knowledge-base-and-documentation`. The
+  repository is active and merged relevant tool additions in 2026, but had 24
+  stars and no written contribution guide at capture time. Treat it as an
+  exact-fit, limited-reach proposal path; acceptance and any backlink are not
+  assumed.
+- The verifier-protected family is
+  `customer-support-answer-knowledge-base` at `net-new` /
+  `not-published`. Complete source provenance, locale wording, product
+  boundaries, internal links, and authority checks are stored in
+  `docs/seo-audits/2026-08-30-customer-support-answer-knowledge-base-demand-gate.md`
+  and `docs/seo-scenario-backlog.json`.
+- No page, translation, content experiment, commit, push, PR, merge,
+  deployment, indexing request, GSC validation, analytics mutation, OSS
+  proposal, maintainer message, paid action, or external publication is
+  authorized or performed by this research record. Exact three-locale local
+  page preparation requires a separate user approval.
+
+## Campaign preparation: customer-support answer knowledge base at 2026-08-31
+
+- The user separately approved exact local preparation of the English, zh-TW,
+  and zh-CN customer-support answer knowledge-base family. The approved scope
+  included the three pages, exactly three same-locale contextual inbound
+  owners, deterministic SEO and localization contracts, a production build,
+  the built technical audit, and desktop plus exact `393px` visual checks.
+- Exact prepared routes are
+  `/learn/build-customer-support-answer-knowledge-base`,
+  `/zh-TW/learn/build-customer-support-answer-knowledge-base`, and
+  `/zh-CN/learn/build-customer-support-answer-knowledge-base`.
+- Each page owns one approved-document to reviewable-answer-pack task. It
+  preserves the customer question, supported answer, scope, prohibited
+  promise, escalation condition, source revision, human owner, and next review
+  date. The broad AI-customer-support platform intent remains rejected.
+- The implementation explicitly excludes ticket or CRM ingestion, raw customer
+  conversations, PII handling, team permissions, support analytics, automatic
+  policy approval, customer-facing publication, reply generation or delivery,
+  channel synchronization, and automatic escalation.
+- The scenario is `prepared`, not published or measuring. Commit, push, PR,
+  merge, Vercel deployment, request indexing, GSC validation, analytics
+  mutation, the conditional `awesome-customer-success` proposal, maintainer
+  contact, paid action, synthetic events, and every other external publication
+  remain excluded until separately approved.
+- Local verification passes Goal and scenario checks, 52 Goal tests, 254 SEO
+  tests, 79 i18n tests, TypeScript lint, a 279-page production build, the
+  162-URL built technical audit, and the running-build locale matrix with 35
+  expected 200 routes and four intentional 404 routes.
+- Fresh browser checks cover all three routes at exact `393x852` and
+  `1280x900`. Each state has the exact canonical, reciprocal hreflang, Article
+  and BreadcrumbList schema, the copyable eight-field answer template, two
+  visible FAQ items without FAQPage, no overflow, no broken image, no framework
+  overlay, and no console warning or error. The protected Mandarin answer-pack,
+  prohibited-promise, and escalation phrases each remain inside one rendered
+  text rectangle at 393px; a final FAQ interaction opens its answer.
+- The browser pass corrected two defects before the final build: the English
+  page now contains the same eight-field record as both Mandarin pages, and the
+  simplified-Chinese `禁止承诺` phrase has an explicit CJK no-split contract.
+  A final responsive regression contract also makes both article hero grids use
+  an explicit shrinkable mobile track. These are prelaunch corrections and do
+  not start a measurement boundary.
+
+## Campaign observation: SRE incident knowledge base 24-hour readout at 2026-08-31T05:06:46Z
+
+- Keep `2026-08-30T05:06:25Z` as the fixed production boundary. The live
+  English, zh-TW, and zh-CN routes each return a direct 200 with exact
+  self-canonical, reciprocal en-US/zh-TW/zh-CN/x-default hreflang, sitemap
+  membership, Article and BreadcrumbList dated `2026-08-29`, visible runbook,
+  postmortem or incident-review, safety-limit, and FAQ answers, and no FAQPage
+  schema. The newer supplier-publication deployed audit already passed all 159
+  live sitemap URLs and the broader technical surface, so this readout did not
+  duplicate that full pipeline.
+- The latest successfully completed authenticated Friday evidence remains
+  `2026-07-31..2026-08-27`, before SRE publication. GSC property totals are 7
+  clicks / 913 impressions; visible-query totals are 2 / 221; the visibility
+  gap is 5 clicks / 692 impressions. No SRE target-page or joined query-page row
+  exists in that range, so every locale observation is unavailable rather than
+  zero.
+- Vercel remains 289 visitors / 690 pageviews. Direct remains 257 visitors /
+  654 pageviews, while Google is 28 / 29, Bing is 2 / 2, cn.bing.com is 1 / 1,
+  DuckDuckGo is 1 / 2, Gemini is 1 / 1, and Kagi is 1 / 1. No SRE target-page
+  or authenticated source-to-page row exists in the preserved pre-deploy
+  range. GitHub remains a separate 51-star observation captured at
+  `2026-08-28T16:02:33.553Z`.
+- Authenticated URL Inspection was unavailable in this task. No post-deploy
+  crawl, indexing state, source-to-page session, rank, traffic, or causal result
+  is inferred. The 24-hour result is `inconclusive`; run the seven-day
+  source-native readout after `2026-09-06T05:06:25Z`.
+- Independent release reconciliation found GitHub Releases at immutable
+  `v0.17.6`, published `2026-08-31T00:25:35Z`, with 12 asset downloads at
+  capture time, while the live download page still renders `v0.17.5`. This is a
+  website release-alignment finding, not SRE growth evidence. No website,
+  analytics, indexing, validation, paid, maintainer-message, or other external
+  state was changed by this readout.

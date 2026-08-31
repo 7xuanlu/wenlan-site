@@ -26,15 +26,40 @@ test("canonical trilingual scenario backlog is complete and generated report is 
   });
 
   assert.deepEqual(result.errors, []);
-  assert.equal(backlog.families.length, 15);
+  assert.equal(backlog.families.length, 16);
   assert.equal(
     backlog.families.at(-1)?.id,
-    "ict-supplier-due-diligence-evidence-pack",
+    "customer-support-answer-knowledge-base",
   );
   assert.equal(backlog.campaign.baseline.sitemapUrls, 120);
-  assert.equal(sitemapRows.length, 159);
+  assert.equal(sitemapRows.length, 162);
   assert.equal(result.sitemapCount, sitemapRows.length);
   assert.equal(renderScenarioBacklog(backlog), report);
+});
+
+test("customer-support family preserves the approved-document answer-pack boundary", () => {
+  const family = backlog.families.find(
+    (candidate) => candidate.id === "customer-support-answer-knowledge-base",
+  );
+
+  assert.ok(family, "customer-support answer scenario family");
+  assert.match(family.audience, /support operations|technical writers|customer-success/i);
+  assert.match(family.trigger, /product release|policy change|outdated/i);
+  assert.match(family.userTask, /customer-support answer knowledge base/i);
+  assert.match(family.desiredOutcome, /scope|prohibited promises|escalation|review date/i);
+  assert.equal(family.decision, "net-new");
+  assert.equal(family.publicationStatus, "prepared");
+  assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
+  assert.ok(
+    Object.values(family.gates).every((gate) => gate.status === "passed"),
+    "every customer-support candidate gate must pass",
+  );
+  assert.equal(family.internalLinks.length, 9);
+  assert.match(family.authorityPath.target, /awesome-customer-success/i);
+  assert.match(
+    family.overlapCheck,
+    /ticket or CRM ingestion|PII handling|reply generation or delivery/i,
+  );
 });
 
 test("competitive-intelligence family preserves one trilingual source-backed competitor-evidence task", () => {
