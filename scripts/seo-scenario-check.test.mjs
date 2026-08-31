@@ -73,7 +73,7 @@ test("ICT supplier due-diligence family preserves its bounded trilingual evidenc
   assert.match(family.userTask, /ICT|software supplier.*due-diligence/i);
   assert.match(family.desiredOutcome, /provenance|resilience|security|review date/i);
   assert.equal(family.decision, "net-new");
-  assert.equal(family.publicationStatus, "prepared");
+  assert.equal(family.publicationStatus, "measuring");
   assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
   assert.ok(
     Object.values(family.locales).every(
