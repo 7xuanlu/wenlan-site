@@ -1214,3 +1214,89 @@ Demand discovery:
 - Authority path: maintained-oss-reference-contribution — https://github.com/ferdinandobons/startup-skill/blob/main/startup-competitors/SKILL.md — after the website family is separately approved and published, prepare a neutral source-provenance and staleness reference improvement under the repository contribution rules; Wenlan may appear at most as one accurate implementation example (planned-not-published).
 - GSC: unavailable; native unit: per-locale page impressions, joined-query impressions, clicks.
 - Vercel: unavailable; native unit: per-locale target-page visitors and referrer visitors.
+
+## 15. Build a source-bounded ICT and software supplier due-diligence evidence pack
+
+- ID: `ict-supplier-due-diligence-evidence-pack`
+- Audience: Procurement, security, and IT owners reviewing an ICT or software supplier before approval or renewal
+- Trigger: Approved supplier documents exist but their provenance, currentness, access scope, evidence gaps, or next review are unclear
+- Desired outcome: Record source provenance, data-access scope, resilience and foundational security evidence, dependencies, gaps, unanswered questions, an owner, and a review date without turning the packet into a certification or approval decision
+- Stage: `evaluate`
+- Decision: `net-new`
+- Planned window: `next-eligible-window-after-2026-08-30`
+- Publication: `not-published`
+- Standalone utility: A neutral ICT supplier due-diligence workflow can register approved sources, data-access scope, resilience and foundational security evidence, dependencies, gaps, unanswered questions, an owner, and a review date while preserving human review and decision boundaries.
+- Overlap check: Do not duplicate generic document ingestion, citation verification, research, consulting delivery, investment research, product research, SRE runbooks, competitive intelligence, or AI knowledge-base tool selection. This page owns one ICT/software supplier evidence packet. It explicitly excludes certification validation, legal or privacy advice, vendor discovery, crawling, live monitoring, vulnerability scanning, automatic scoring, approval or rejection, and material outside approved controls.
+- Next research: The production slot is open, so prepare the gate-passed trilingual website family locally as the next eligible action. Keep it not published until a separate exact website publication approval. Do not contribute to pm-claude-skills, request a backlink, contact maintainers, request indexing, submit validation, mutate analytics, or publish externally without separate approval.
+
+### Locale intent and ownership
+
+| Locale | Query family | Coverage | Existing owner | Research needed |
+| --- | --- | --- | --- | --- |
+| en | ICT supplier due diligence; software vendor security assessment; supplier cybersecurity evidence pack | gap | none | Keep the owner on a source-bounded ICT supplier evidence pack. Exclude certification validation, vendor discovery, crawling, live monitoring, vulnerability scanning, automatic scoring, approval or rejection, legal advice, and data outside approved controls. |
+| zh-TW | ICT 供應商資安盡職調查; 軟體供應商資安評估; 供應商資安證據清單 | gap | none | 使用供應商、委外、資安評估、資料範圍、韌性、佐證、缺口與複審等台灣自然用語；排除認證驗證、即時監控、弱點掃描、自動評分與核准或拒絕。 |
+| zh-CN | ICT 供应商安全尽职调查; 软件供应商安全评估; 供应商安全证据清单 | gap | none | 使用供应商安全审查、尽职调查、资料范围、韧性、证据、依赖、缺口与复审等自然用语；排除认证验证、实时监控、漏洞扫描、自动评分与审批结论。 |
+
+#### en evidence
+
+SERP:
+- google-serp-observation: [ICT supplier due diligence software vendor security assessment](https://www.google.com/search?hl=en&gl=us&q=ICT+supplier+due+diligence+software+vendor+security+assessment) — ICT supplier due diligence, provenance, resilience, foundational cyber practices, and vendor-security assessment results returned result observation; en/United States parameter; captured 2026-08-30. The result shape supports one evidence-packet task; it is not keyword volume, exact rank, or Wenlan performance evidence.
+
+Demand discovery:
+- official-standard-guide: [NIST ICT supplier due diligence provenance resilience foundational cyber practices](https://www.nist.gov/publications/nist-cybersecurity-supply-chain-management-due-diligence-assessment-quick-start-guide) — 1 ICT-supplier due-diligence assessment guide one maintained official guide; en/United States official publication; captured 2026-08-30. NIST SP 1326 scopes due-diligence assessment to ICT suppliers and names FOCI, provenance, resilience, foundational cyber practices, and supply-chain tiers; it is not a Wenlan capability or search-volume claim.
+- official-vendor-assurance-documentation: [Microsoft supplier security privacy assurance data access profile subcontractors](https://learn.microsoft.com/en-us/compliance/assurance/assurance-supplier-security-and-privacy-assurance-program) — 1 data-processing-profile and supplier-assurance workflow one maintained supplier-assurance program description; en/global official documentation; captured 2026-08-30. Microsoft's documentation repeats data-access scope, annual self-attestation, subcontractor disclosure, and higher-risk assurance; Microsoft product and compliance claims are not attributed to Wenlan.
+
+#### zh-TW evidence
+
+SERP:
+- google-serp-observation: [ICT 供應商資安盡職調查 軟體供應商評估](https://www.google.com/search?hl=zh-TW&gl=tw&q=ICT+供應商+資安+盡職調查+軟體+供應商+評估) — 供應商資安評估、委外服務控制、資料範圍、證據與風險審查結果 returned result observation; zh-TW/Taiwan parameter; captured 2026-08-30. 結果形態支持一項供應商證據整理任務；這不是搜尋量、排名或 Wenlan 成效證據。
+
+Demand discovery:
+- official-taiwan-cybersecurity-guidance: [資安服務廠商評鑑 供應商 委外 資安證據](https://www.nics.nat.gov.tw/core_business/information_security_information_sharing/Cybersecurity_Service_Provider_Evaluation/) — 1 supplier-evaluation and outsourced-security reference workflow one maintained official supplier-evaluation page; zh-TW/Taiwan official source; captured 2026-08-30. NICS 說明機關選擇資安服務廠商時可參考評鑑結果與委外資安指引；它不是 Wenlan 合規認證或需求量證據。
+- official-taiwan-supply-chain-announcement: [資安供應鏈韌性 供應商 風險 證據](https://www.nics.nat.gov.tw/latest_news/announcements/Latest_Announcement/1752/) — 1 supply-chain cybersecurity resilience and cooperation observation one maintained official announcement; zh-TW/Taiwan official announcement; captured 2026-08-30. NICS 與台積電公告重複供應鏈資安管理、韌性與產業協作；這不是搜尋量或 Wenlan 背書。
+- official-new-taipei-procurement-guidance: [新北市 資訊雲端服務 採購 供應商 資安要求](https://www.cop.ntpc.gov.tw/uploaddowndoc?file=downloaddata%2F202405231446012.pdf&flag=doc) — 1 outsourced-cloud supplier and product security evidence template one official procurement template; zh-TW/New Taipei City official procurement guidance; captured 2026-08-30. 新北市採購範本列出供應商與產品安全佐證、傳輸機密性與完整性、日誌保存及風險控制；它不要求 Wenlan 提供法律、認證或採購決定。
+
+#### zh-CN evidence
+
+SERP:
+- google-serp-observation: [ICT 供应商安全尽职调查 软件供应商评估](https://www.google.com/search?hl=zh-CN&gl=cn&q=ICT+供应商+安全+尽职调查+软件+供应商+评估) — 供应商安全审查、来源与数据范围、韧性、基础安全实践和供应链分层结果 returned result observation; zh-CN/mainland-China parameter; captured 2026-08-30. 大陆结果覆盖有限；结果形态支持一项供应商证据整理任务，不是总体需求、关键词量或 Wenlan 排名。
+
+Demand discovery:
+- official-standard-guide: [ICT 供应商 尽职调查 来源 韧性 基础网络安全实践](https://www.nist.gov/publications/nist-cybersecurity-supply-chain-management-due-diligence-assessment-quick-start-guide) — 1 ICT供应商尽职调查评估指南 one maintained official guide; zh-CN-compatible official source/global official publication; captured 2026-08-30. NIST SP 1326 可作为技术参考；这里不把英文官方文件当作简中搜索量，也不把 NIST 内容归因给 Wenlan。
+- official-vendor-assurance-documentation: [软件供应商 数据访问范围 安全保障 分包商](https://learn.microsoft.com/en-us/compliance/assurance/assurance-supplier-security-and-privacy-assurance-program) — 1 supplier data-processing-profile and assurance workflow one maintained supplier-assurance program description; zh-CN-compatible official source/global official documentation; captured 2026-08-30. Microsoft 文件提供供应商资料范围、分包商与保障审查的具体例子；不证明简中关键词量、Wenlan 合规能力或背书。
+
+### Candidate gate
+
+| Gate | Status | Reason | Evidence refs |
+| --- | --- | --- | --- |
+| provenance | passed | Every retained query and source records its URL, query, capture or publication date, language or geography, native unit, and interpretation boundary. | locales.en.serpEvidence[0]; locales.en.demandEvidence[0]; locales.en.demandEvidence[1]; locales.zh-TW.serpEvidence[0]; locales.zh-TW.demandEvidence[0]; locales.zh-TW.demandEvidence[1]; locales.zh-TW.demandEvidence[2]; locales.zh-CN.serpEvidence[0]; locales.zh-CN.demandEvidence[0]; locales.zh-CN.demandEvidence[1]; docs/seo-audits/2026-08-30-ict-supplier-due-diligence-demand-gate.md |
+| repeatedDemand | passed | NIST, NICS, New Taipei procurement guidance, Microsoft supplier assurance, and independent locale result observations repeat a bounded supplier-evidence and review task. | locales.en.demandEvidence[0]; locales.en.demandEvidence[1]; locales.zh-TW.demandEvidence[0]; locales.zh-TW.demandEvidence[1]; locales.zh-TW.demandEvidence[2]; locales.zh-CN.demandEvidence[0]; locales.zh-CN.demandEvidence[1] |
+| trilingualSerp | passed | English, Taiwan Traditional Chinese, and Simplified Chinese result surfaces were inspected separately and each produced natural wording for ICT supplier due diligence and security-evidence review. | locales.en.serpEvidence[0]; locales.zh-TW.serpEvidence[0]; locales.zh-CN.serpEvidence[0] |
+| cleanGap | passed | Existing owners cover generic ingestion, AI knowledge-base tool selection, citation checks, research, consulting, investment, product research, SRE runbooks, and competitive intelligence. None owns an ICT supplier evidence pack with access scope, resilience and security evidence, dependencies, gaps, questions, owner, and review date. | overlapCheck |
+| firstPartyProof | passed | Maintained Wenlan source proves local Markdown, text, text-extractable PDF, source-backed Pages, citations, revisions, stale state, lint, and review. The candidate excludes certification, scanning, live monitoring, scoring, and procurement decisions. | /Users/lucian/Repos/wenlan/README.md:119-272; /Users/lucian/Repos/wenlan/crates/wenlan-cli/README.md:60 |
+| standaloneUtility | passed | A neutral supplier source register and review packet remains useful without Wenlan and does not make a certification, approval, rejection, or legal decision. | standaloneUtility |
+| internalLinks | passed | Three stable same-locale owners can link contextually from source-backed research, citation verification, and document ingestion. | internalLinks |
+| authorityPath | passed | The maintained pm-claude-skills repository has an existing vendor-security-review contribution seam for a neutral evidence-packet reference after separate website approval and publication; acceptance and any backlink are not assumed. | authorityPath |
+
+### Wenlan proof
+
+- Wenlan supports local Markdown, text, text-extractable PDF, source-backed Pages, citations, revisions, stale state, lint, and review. — `/Users/lucian/Repos/wenlan/README.md:119-272`; verify with `rg -n "Document Sources|Source-backed Pages|Cite|Track|Refresh|Review|lint" /Users/lucian/Repos/wenlan/README.md`.
+- The released CLI supports source registration and status while the plugin workflow exposes distill, pages, lint, and curate. — `/Users/lucian/Repos/wenlan/crates/wenlan-cli/README.md:60 and /Users/lucian/Repos/wenlan/crates/wenlan-cli/src/commands/ingest.rs:1`; verify with `rg -n "wenlan status|wenlan sources add|/distill|/pages|/lint|/curate" /Users/lucian/Repos/wenlan/crates/wenlan-cli/README.md /Users/lucian/Repos/wenlan/crates/wenlan-cli/src/commands/ingest.rs /Users/lucian/Repos/wenlan/README.md`.
+
+### Planned internal links
+
+- https://wenlan.app/learn/source-backed-research-knowledge-base
+- https://wenlan.app/learn/verify-ai-knowledge-base-citations
+- https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents
+- https://wenlan.app/zh-TW/learn/source-backed-research-knowledge-base
+- https://wenlan.app/zh-TW/learn/verify-ai-knowledge-base-citations
+- https://wenlan.app/zh-TW/learn/build-local-ai-knowledge-base-from-documents
+- https://wenlan.app/zh-CN/learn/source-backed-research-knowledge-base
+- https://wenlan.app/zh-CN/learn/verify-ai-knowledge-base-citations
+- https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents
+
+### Authority path and readout
+
+- Authority path: conditional-maintained-oss-reference-contribution — https://github.com/mohitagw15856/pm-claude-skills/blob/main/skills/vendor-security-review/SKILL.md — after the trilingual website family is separately approved and published, prepare a neutral evidence-packet workflow reference through the existing vendor-security-review contribution seam; maintainer acceptance and any Wenlan backlink are not assumed (planned-not-published).
+- GSC: unavailable; native unit: per-locale page impressions, joined-query impressions, clicks.
+- Vercel: unavailable; native unit: per-locale target-page visitors and referrer visitors.

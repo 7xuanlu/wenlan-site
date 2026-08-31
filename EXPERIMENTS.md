@@ -8861,3 +8861,17 @@ increase for that experiment.
 - Decision: wait
 - Next step: Keep `2026-08-30T19:48:14Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-08-31T19:48:14Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-06T19:48:14Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with at least 20 target-page impressions, 3 qualified joined-query impressions, and 1 GSC click. Do not request indexing, submit GSC validation, mutate analytics, publish the planned OSS proposal, message maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Campaign readout: authority follow-up and ICT supplier due-diligence gate at 2026-08-31
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-30-competitive-intelligence-knowledge-base-locales
+- Observed at: 2026-08-31T00:13:40Z
+- Readout: correction
+- Status: measuring
+- Evidence: The user-approved one-time follow-up was posted to `awesome-selfhosted/awesome-selfhosted-data#2955` at `https://github.com/awesome-selfhosted/awesome-selfhosted-data/pull/2955#issuecomment-5472149912`. The comment only offered to adjust metadata or category when maintainers review the existing one-file submission. It remains attempted distribution, not earned authority: count it only after the PR is merged and the listing is visibly rendered upstream. No backlink, acceptance, or traffic is assumed, and no further maintainer contact is authorized under this record. Separately, the trilingual `ict-supplier-due-diligence-evidence-pack` candidate passes provenance, repeated demand, separate locale SERP, clean gap, Wenlan first-party proof, standalone utility, internal links, and its conditional authority-path gate. Full native-unit evidence is recorded in `docs/seo-scenario-backlog.json` and `docs/seo-audits/2026-08-30-ict-supplier-due-diligence-demand-gate.md`; it is not GSC data, keyword volume, rank, backlink, or causal evidence.
+- Result: inconclusive
+- Decision: scale
+- Next step: The production slot is open. Prepare the supplier family's English, zh-TW, and zh-CN pages locally while keeping it `net-new` / `not-published`; publication still requires a separate exact website approval. The conditional `mohitagw15856/pm-claude-skills/blob/main/skills/vendor-security-review/SKILL.md` path requires a separate contribution decision; maintainer acceptance and any backlink are not assumed. Do not open another OSS issue or PR, request indexing, validate GSC, mutate analytics, buy traffic, generate synthetic events, or publish externally under this record.
+<!-- EXPERIMENT-RECORD:END -->
