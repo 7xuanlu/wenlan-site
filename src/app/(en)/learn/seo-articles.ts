@@ -2628,6 +2628,7 @@ const trustArticles: BaseSpec[] = [
       "multi-agent-memory-workflow",
       "source-backed-wiki-pages-ai-work",
       "verify-ai-knowledge-base-citations",
+      "build-business-metric-definition-knowledge-base",
       "distilled-wiki-pages-ai-memory",
     ],
     officialReferences: [
@@ -2942,6 +2943,7 @@ const trustArticles: BaseSpec[] = [
       "build-sre-incident-knowledge-base",
       "build-ict-supplier-due-diligence-evidence-pack",
       "build-customer-support-answer-knowledge-base",
+      "build-business-metric-definition-knowledge-base",
     ],
     officialReferences: [
       {
@@ -3020,7 +3022,7 @@ const trustArticles: BaseSpec[] = [
       "Should I import every note before starting?",
       "No. Start with one repeated, high-value topic and prove its source, capture, distill, inspection, lint, and review loop before expanding.",
     ],
-    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "test-ai-knowledge-base-retrieval-after-changes", "prevent-multi-agent-knowledge-conflicts", "source-backed-research-knowledge-base", "build-client-project-knowledge-base-for-consulting", "build-investment-research-knowledge-base", "build-product-research-knowledge-base-for-prd", "build-sre-incident-knowledge-base", "review-before-trust-ai-memory", "ai-memory-provenance"],
+    relatedSlugs: ["distilled-wiki-pages-ai-memory", "coding-agent-source-backed-knowledge-base", "when-ai-agent-should-query-knowledge-base", "verify-ai-knowledge-base-citations", "build-business-metric-definition-knowledge-base", "test-ai-knowledge-base-retrieval-after-changes", "prevent-multi-agent-knowledge-conflicts", "source-backed-research-knowledge-base", "build-client-project-knowledge-base-for-consulting", "build-investment-research-knowledge-base", "build-product-research-knowledge-base-for-prd", "build-sre-incident-knowledge-base", "review-before-trust-ai-memory", "ai-memory-provenance"],
     officialReferences: [
       {
         label: "Wenlan knowledge model",
@@ -4170,6 +4172,153 @@ const courseWikiFromLectureNotesArticle: BaseSpec = {
 };
 
 workflowArticles.push(courseWikiFromLectureNotesArticle);
+
+const businessMetricDefinitionKnowledgeBaseArticle: BaseSpec = {
+  slug: "build-business-metric-definition-knowledge-base",
+  eyebrow: "Data dictionary workflow",
+  category: "Workflows",
+  title: "How to Build a Business Metric Definition Knowledge Base",
+  description:
+    "Turn approved KPI specifications into a source-backed data dictionary with formula text, grain, exclusions, owners, revisions, and review state.",
+  metaTitle: "Build a Business Metric Definition Knowledge Base | Wenlan",
+  metaDescription:
+    "Build a reviewable metric-definition knowledge base from approved files, with formulas, grain, exclusions, owners, citations, revisions, and supersession.",
+  keywords: [
+    "business metric data dictionary",
+    "metric definition knowledge base",
+    "business glossary for AI agents",
+    "KPI definition template",
+    "metric glossary",
+    "source backed data dictionary",
+  ],
+  publishedAt: "2026-09-01",
+  updatedAt: "2026-09-01",
+  readingTime: "8 min read",
+  audience:
+    "Data, analytics, product, finance, and operations teams resolving conflicting KPI definitions for people and AI agents",
+  heroBullets: [
+    "Start with approved metric specifications, not dashboards or inferred formulas.",
+    "Keep formula text, grain, dimensions, exclusions, owner, and source revision in one record.",
+    "Supersede stale definitions explicitly instead of letting agents blend them together.",
+  ],
+  quickAnswer:
+    "Create one reviewed record per business metric. Record the business definition, formula as non-executable text, grain, dimensions, exclusions, owner, exact source IDs and revisions, review state, and which older definition it supersedes. When two approved sources disagree, preserve the conflict until a named reviewer resolves it; do not let an AI agent invent one blended definition.",
+  quickAnswerLink: {
+    label: "See the metric-definition evidence workflow",
+    href: "#product-evidence",
+  },
+  wenlanFit:
+    "Wenlan can read approved Markdown, text, and text-extractable PDFs, maintain source-backed Pages, preserve citations and source revisions, run provenance lint, and leave an exact revision for human review. It does not ingest CSV or YAML, does not run SQL, does not connect to a warehouse or BI tool, does not compute metrics, does not provide lineage, does not monitor data quality, does not manage permissions, does not approve definitions, and does not automatically reconcile conflicts.",
+  problem:
+    "A metric name such as active customer or net revenue can appear in a finance memo, analytics specification, product dashboard note, and operations handbook with different formulas, grains, exclusions, or owners. A polished summary can hide those differences. A useful data dictionary keeps each approved definition traceable, makes conflicts visible, and states which version is current without pretending to calculate the metric.",
+  actionHeading: "Build one approved-specification to metric-record loop",
+  actionIntro:
+    "Begin with one metric family and a small set of approved definition files. The goal is a definition lookup and conflict-resolution record, not a live catalog of every table and dashboard.",
+  actionBullets: [
+    "Name the metric, business question, accountable owner, included files, excluded sources, and reviewer before synthesis.",
+    "Register approved Markdown, text, or text-extractable PDF specifications. Keep CSV, YAML, SQL, warehouse metadata, and dashboard APIs outside this workflow.",
+    "Write the formula as reviewable text and record its grain, dimensions, time window, inclusions, exclusions, and known edge cases.",
+    "Attach each important field to the exact source ID, heading or page, source revision, and effective date.",
+    "When approved sources disagree, keep both definitions and mark the record contradicted or unresolved instead of averaging or merging them.",
+    "After a reviewer selects a current definition, record which version it supersedes, retain the earlier revision, and set the next review trigger.",
+  ],
+  code: {
+    label: "Wenlan workflow and a neutral metric-definition record",
+    code: "wenlan status\nwenlan sources add ~/Metrics/approved-specifications\n# In a Wenlan plugin client:\n/distill <metric definition>\n/pages <metric name>\n/lint\n/curate\n\nmetric: activated customer\nbusiness_definition: <what the approved sources mean>\nformula_text: <non-executable formula from the approved spec>\ngrain: <account | workspace | user | event>\ndimensions: <allowed breakdowns>\ninclusions: <included states or events>\nexclusions: <excluded states, events, or time windows>\nowner: <accountable team or reviewer>\nsources: <source IDs and exact locations>\nsource_revision: <version or effective date>\nreview_state: <current | stale | contradicted | unresolved>\nsupersedes: <previous definition or none>\nnext_review: <source-change trigger or date>",
+  },
+  caution:
+    "This workflow maintains reviewed definition records; it is not a data catalog, semantic layer, metric store, governance platform, or calculation engine. Wenlan does not ingest CSV, does not run SQL, does not connect to a warehouse or BI system, does not compute metrics, does not provide lineage, does not monitor data quality, does not manage permissions, does not approve definitions, and does not automatically reconcile conflicting formulas. A named domain owner remains responsible for the business decision.",
+  productEvidence: {
+    heading: "Inspect source revision and review state before trusting a metric",
+    summary:
+      "This genuine Wenlan desktop capture comes from the app's deterministic test fixture, not a company's analytics or finance workspace. It shows maintained Pages with source counts and a review queue, the same product surfaces used to keep conflicting or revised metric evidence visible.",
+    image: {
+      src: "/images/product-evidence/wenlan-space-review-fixture.png",
+      alt: "Wenlan desktop Space showing maintained Pages with source counts and a review queue for changed and conflicting evidence.",
+      caption:
+        "Genuine Wenlan app capture from a deterministic test fixture. It is a general product example, not a live data catalog or company metric record.",
+      width: 1586,
+      height: 992,
+    },
+    workflow: [
+      {
+        label: "Bound the approved specifications",
+        detail:
+          "Choose one metric family, allowed definition files, excluded systems, accountable owner, and named reviewer.",
+      },
+      {
+        label: "Distill one definition record",
+        detail:
+          "Keep definition, formula text, grain, dimensions, exclusions, citations, source revision, and conflicts in one reviewable Page.",
+      },
+      {
+        label: "Review before superseding",
+        detail:
+          "Open the cited source, inspect contradictions and stale state, then mark the current definition and retain the superseded revision.",
+      },
+    ],
+    artifactHeading: "Worked business metric record",
+    artifactNote:
+      "This neutral template does not calculate a KPI. Replace every placeholder with approved specifications and a named domain reviewer.",
+    artifactRows: [
+      {
+        label: "Meaning and formula text",
+        detail:
+          "Business definition, non-executable formula, grain, dimensions, inclusions, exclusions, and edge cases.",
+      },
+      {
+        label: "Owner and sources",
+        detail:
+          "Accountable owner, exact source IDs and locations, source revisions, and effective dates.",
+      },
+      {
+        label: "Review and supersession",
+        detail:
+          "Current, stale, contradicted, or unresolved, plus the reviewer, superseded version, and next review trigger.",
+      },
+    ],
+    action: {
+      label: "See the metric-definition evidence workflow",
+      href: "#product-evidence",
+    },
+  },
+  faq: [
+    "Does this connect to a warehouse, BI tool, or metric store?",
+    "No. This workflow uses approved Markdown, text, and text-extractable PDF specifications. Wenlan does not discover tables, run SQL, calculate KPIs, or synchronize a warehouse, BI tool, semantic layer, or metric store.",
+    "What should happen when two approved metric definitions disagree?",
+    "Keep both cited definitions, record their formula, grain, exclusions, owner, and revision, and mark the record contradicted or unresolved. A named domain reviewer decides which definition becomes current and records what it supersedes.",
+  ],
+  relatedSlugs: [
+    "source-backed-wiki-pages-ai-work",
+    "verify-ai-knowledge-base-citations",
+    "prevent-multi-agent-knowledge-conflicts",
+    "build-investment-research-knowledge-base",
+  ],
+  officialReferences: [
+    {
+      label: "Wenlan supported document sources",
+      href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+    },
+    {
+      label: "Wenlan source-backed Pages",
+      href: "https://wenlan.app/docs/source-backed-pages",
+    },
+    {
+      label: "Wenlan review and trust",
+      href: "https://wenlan.app/docs/review-and-trust",
+    },
+    {
+      label: "DataHub business glossary documentation",
+      href: "https://github.com/datahub-project/datahub/blob/master/docs/glossary/business-glossary.md",
+    },
+  ],
+  cta: {
+    heading: "Make one metric definition inspectable",
+    body: "Start with approved specification files, preserve conflicts and exact sources, and supersede an older definition only after a named reviewer checks it.",
+  },
+};
+
+workflowArticles.push(businessMetricDefinitionKnowledgeBaseArticle);
 
 const productResearchArticle: LearnArticle = {
   slug: "build-product-research-knowledge-base-for-prd",

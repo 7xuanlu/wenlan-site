@@ -9046,3 +9046,74 @@ increase for that experiment.
 - Decision: merge
 - Next step: Commit and push only the verified manifest-owned candidate, merge its pull request in turn after required checks, verify the integrated commit, wait for automatic Vercel production completion, and verify the three live routes read-only. Do not request indexing, submit GSC validation, mutate analytics, publish the conditional `awesome-ai-tools-for-students` proposal, contact maintainers, buy traffic, generate synthetic events, change metric definitions, or perform another external action.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-31-course-wiki-from-lecture-notes-locales production publication
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-31-course-wiki-from-lecture-notes-locales
+- Observed at: 2026-09-01T04:26:43Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #166 merged at `2026-09-01T04:25:50Z` as `9b12ad73eb51c95d013e69e455c1a67d03f0e08d`, and Vercel production completed at `2026-09-01T04:26:43Z`. The integrated tree exactly matched the verified candidate. Goal and scenario checks, 53 Goal tests, 255 SEO tests against Wenlan v0.17.6, 80 i18n tests, TypeScript, the 283-page build, 165-owner intent check, built technical audit, and 37 expected 200 / four expected 404 route matrix passed on the merge commit. The deployed audit passed all 165 sitemap URLs and the broader technical surface. English, zh-TW, and zh-CN returned direct 200 with exact canonicals, reciprocal hreflang, Article and BreadcrumbList schema, working visible FAQ without FAQPage, loaded images, no console issue, no overflow, and no protected Mandarin phrase split at 1280x900 and exact 393x852. This proves publication and technical availability only; it is not a crawl, indexing, rank, impression, click, visitor, authority, or causal result.
+- Result: pending
+- Decision: wait
+- Next step: Keep `2026-09-01T04:26:43Z` as the fixed production boundary. Record the 24-hour technical observation after `2026-09-02T04:26:43Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-08T04:26:43Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with at least 20 target-page impressions, 3 qualified joined-query impressions, and 1 GSC click. Do not request indexing, submit GSC validation, mutate analytics, publish the conditional student-tools proposal, contact maintainers, buy traffic, generate synthetic events, or perform another external action.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-09-01-business-metric-definition-knowledge-base-locales
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-09-01-business-metric-definition-knowledge-base-locales
+- Status: active
+- Data window: 2026-08-29..2026-09-04
+- Asset class: net-new-search
+- Launched: 2026-09-01
+- Hypothesis: One English, zh-TW, and zh-CN owner for turning approved metric-definition files into a reviewed source-backed data dictionary can earn qualified discovery without cannibalizing document ingestion, citation verification, financial research, or multi-agent conflict intent.
+- Candidate evidence: Separate English, Taiwan Traditional-Chinese, and Simplified-Chinese Trends, SERP, standards, OSS, and practitioner observations are stored in `docs/seo-audits/2026-08-31-business-metrics-glossary-demand-gate.md`. They are not authenticated GSC data, keyword volume, Wenlan rank, backlinks, or causal evidence.
+- Baseline: The latest completed authenticated range remains `2026-07-31..2026-08-27`: GSC property 7 clicks and 913 impressions; visible-query 2 clicks and 221 impressions; visibility gap 5 clicks and 692 impressions; Vercel 289 visitors and 690 pageviews; Google referrer 28 visitors and 29 pageviews; GitHub 51 stars. New target-page and joined-query rows are unavailable rather than zero, and every source remains separate.
+- Change: Prepare exactly one English, zh-TW, and zh-CN canonical that turns approved Markdown, text, and text-extractable PDF metric specifications into a reviewable definition record with metric name, business definition, formula as non-executable text, grain, dimensions, exclusions, owner, source IDs and revisions, review state, and supersession. Explicitly exclude CSV, YAML, SQL, warehouse or BI ingestion, metric execution, lineage, data-quality monitoring, permissions, approval workflow, and automatic reconciliation.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions per locale in 28 complete post-crawl days
+- Success criteria: Per locale, at least 3 qualified joined-query impressions and at least 1 GSC click after minimum exposure; report CTR and position separately.
+- Failure criteria: After 28 complete post-crawl days and minimum exposure, a locale has no qualified joined-query impressions or no GSC click, or an above-floor query-page join assigns the task to an existing owner or unsupported data-catalog, BI, SQL, metric-computation, governance, or approval intent.
+- Stop criteria: Stop on a technical, unsupported data capability, duplicate-intent, controller-overlap, canonical, locale, responsive-render, authority-path, or approval-boundary violation.
+- 24h readout: pending only after a separately approved production deployment completes
+- 7d readout: pending only after a separately approved production deployment completes
+- W2 readout: pending
+- W4 readout: pending formal 28-complete-post-crawl-day decision when eligible
+- W8 readout: pending only if useful after the Goal deadline
+- Result: pending
+- Decision: wait
+- Next step: Complete local deterministic and rendered verification, then stop for exact commit, push, PR, merge, automatic Vercel deployment, and read-only production-verification approval. Do not change the Wenlan source README, request indexing, submit GSC validation, mutate analytics, contact maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-09-01-business-metric-definition-knowledge-base-locales local verification
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-09-01-business-metric-definition-knowledge-base-locales
+- Observed at: 2026-09-01T04:54:48Z
+- Readout: correction
+- Status: active
+- Evidence: Goal and scenario checks passed with 18 trilingual families and 168 sitemap owners; Goal tests passed 54/54, SEO tests passed 256/256 against Wenlan v0.17.6, i18n passed 81/81, TypeScript lint passed, the production build generated 287 static pages, the built technical audit passed all 168 sitemap URLs and found no FAQPage in 172 built HTML pages, and the running-build locale matrix returned 200 for 39 expected routes plus four intentional 404s. Fresh in-app Browser checks covered English, zh-TW, and zh-CN at `1280x900` and exact `393x852`: one H1, exact self-canonical, reciprocal hreflang, Article and BreadcrumbList schema, visible FAQ without FAQPage, a loaded product-evidence image, working evidence-anchor and FAQ interactions, no framework overlay, no console warning or error, no horizontal overflow, and no protected Mandarin phrase split. The initial zh-CN desktop capture caught font loading in progress; a fresh capture after `document.fonts.ready` showed the stable layout without overlap. This is local technical evidence only; the pages are not published, crawled, indexed, ranked, or measured.
+- Result: pending
+- Decision: wait
+- Next step: Stop for exact commit, push, PR, merge, automatic Vercel deployment, and read-only production-verification approval. Do not change the Wenlan source README, request indexing, submit GSC validation, mutate analytics, contact maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-09-01-business-metric-definition-knowledge-base-locales publication approval
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-09-01-business-metric-definition-knowledge-base-locales
+- Observed at: 2026-09-01T05:03:53Z
+- Readout: correction
+- Status: active
+- Evidence: The user explicitly approved the locally verified English, zh-TW, and zh-CN business-metric definition candidate for commit, Git push, pull request creation, merge, automatic Vercel deployment, and read-only production verification. The approved diff is restricted to the candidate-owned files and exclusions recorded in `docs/seo-audits/2026-09-01-business-metric-definition-publication-manifest.md`.
+- Result: pending
+- Decision: merge
+- Next step: Commit and push only the verified candidate, open and merge one pull request after required checks, verify the integrated commit, wait for automatic Vercel production completion, and verify the three live routes read-only. Do not change the Wenlan source README, request indexing, submit GSC validation, mutate analytics, contact maintainers, buy traffic, generate synthetic events, or perform another external action.
+<!-- EXPERIMENT-RECORD:END -->

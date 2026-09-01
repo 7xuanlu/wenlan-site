@@ -1474,3 +1474,88 @@ Demand discovery:
 - Authority path: conditional-maintained-oss-listing — https://github.com/sohailakhtar01/awesome-ai-tools-for-students — after separate website publication approval and live verification, propose one neutral Wenlan entry in the AI Study and Learning Tools or AI Note-Taking section through a normal pull request; disclose affiliation, describe only verified source-backed course-wiki capabilities, and do not claim flashcards, quizzes, audio, or NotebookLM equivalence; maintainer acceptance and any backlink are not assumed (planned-not-published).
 - GSC: unavailable; native unit: per-locale page impressions, joined-query impressions, clicks.
 - Vercel: unavailable; native unit: per-locale target-page visitors and referrer visitors.
+
+## 18. Turn approved metric specifications into a source-backed metric-definition wiki and data dictionary that agents and humans can inspect
+
+- ID: `business-metric-definition-knowledge-base`
+- Audience: Data, analytics, product, finance, and operations teams whose AI agents repeatedly encounter conflicting KPI definitions
+- Trigger: The same metric name has different formulas, grains, exclusions, or owners across approved documents and dashboards
+- Desired outcome: Retrieve the current definition with citations, source revision, owner, review state, and supersession instead of silently mixing conflicting KPI definitions
+- Stage: `build`
+- Decision: `net-new`
+- Planned window: `next-eligible-authority-backed-window-after-2026-09-01`
+- Publication: `prepared`
+- Standalone utility: A neutral team can maintain a metric dictionary that records the metric name, definition, non-executable formula text, grain, dimensions, exclusions, owner, source IDs and revisions, review state, and superseded version without using Wenlan.
+- Overlap check: Do not duplicate generic document ingestion, citation verification, investment research, or multi-agent write-conflict owners. This page owns approved KPI specifications to one reviewed metric-definition wiki. It explicitly excludes CSV, YAML, SQL, warehouse and BI ingestion, metric computation, lineage, data-quality monitoring, permissions, approval workflows, and automatic reconciliation.
+- Next research: Complete local deterministic, built-output, and responsive verification for the exact trilingual files-first owner. Stop for separate website publication approval and keep the source README path, indexing, validation, analytics, and every external action separately gated.
+
+### Locale intent and ownership
+
+| Locale | Query family | Coverage | Existing owner | Research needed |
+| --- | --- | --- | --- | --- |
+| en | build a business metric data dictionary; metric definition knowledge base; business glossary for AI agents | gap | none | Lead with data dictionary and metric definition. Answer conflicting formulas, grain, exclusions, owner, source revision, review state, and supersession while excluding warehouse, BI, SQL, computation, lineage, governance, and approval claims. |
+| zh-TW | 建立商業指標定義知識庫; 資料字典 指標口徑; AI agent 指標定義 | gap | none | 以指標定義、資料字典、指標口徑、公式、粒度、排除條件、負責人、來源修訂與複核狀態等台灣自然用語擁有任務；排除資料倉儲、BI、SQL、血緣與核准流程。 |
+| zh-CN | 建立业务指标定义知识库; 数据字典 指标口径; AI agent 指标定义 | gap | none | 使用指标定义、数据字典、指标口径、公式、粒度、排除条件、负责人、来源修订、审核状态和替代关系；排除数据仓库、BI、SQL、血缘、权限和自动批准。 |
+
+#### en evidence
+
+SERP:
+- exa-search-result-observation: [business metric definition data dictionary glossary owner formula grain exclusions](https://github.com/datahub-project/datahub/blob/master/docs/glossary/business-glossary.md) — results repeatedly exposed business definitions, ownership, terms, and glossary maintenance returned result observations; en/United States and global English sources; captured 2026-08-31. Commercial data catalogs dominate much of the result shape. This candidate owns approved files to reviewed definition records, not live catalog discovery, and this is not keyword volume or Wenlan rank.
+
+Demand discovery:
+- google-trends: [business glossary; data dictionary; metric definition; security questionnaire; maintenance knowledge base](https://trends.google.com/trends/explore?date=today%2012-m&geo=US&q=business%20glossary,data%20dictionary,metric%20definition,security%20questionnaire,maintenance%20knowledge%20base) — 3; 28; 10; 6; 0 request-relative Google Trends average 0-100 index; en/United States; captured 2026-08-31. Data dictionary is the strongest discovery handle in this comparison. The values are request-relative indexes, not search volume.
+- maintained-oss-documentation: [business glossary definitions ownership maintenance](https://docs.opendatadiscovery.org/features/data-glossary/business-glossary) — one inspectable terms, definitions, ownership, and maintenance workflow one maintained documentation surface; en/global OSS; captured 2026-08-31. This independently supports the definition-maintenance task; its catalog capabilities are not attributed to Wenlan.
+
+#### zh-TW evidence
+
+SERP:
+- exa-search-result-observation: [台灣 指標定義 資料字典 指標口徑 負責人 版本](https://ithelp.ithome.com.tw/articles/10399352) — results repeated glossary, definition, ownership, version, and review work returned result observations; zh-TW/Taiwan; captured 2026-08-31. 台灣結果同時包含商業資料治理平台；本頁只擁有核准檔案到可複核指標紀錄的任務，不宣稱資料目錄整合。
+
+Demand discovery:
+- google-trends: [指標定義; 資料字典; 指標口徑; 資安問卷; 維修知識庫](https://trends.google.com/trends/explore?date=today%2012-m&geo=TW&q=%E6%8C%87%E6%A8%99%E5%AE%9A%E7%BE%A9,%E8%B3%87%E6%96%99%E5%AD%97%E5%85%B8,%E6%8C%87%E6%A8%99%E5%8F%A3%E5%BE%91,%E8%B3%87%E5%AE%89%E5%95%8F%E5%8D%B7,%E7%B6%AD%E4%BF%AE%E7%9F%A5%E8%AD%98%E5%BA%AB) — 12; 0; 0; 0; 0 request-relative Google Trends average 0-100 index; zh-TW/Taiwan; captured 2026-08-31. 指標定義是這組比較唯一明顯訊號；零值不代表沒有需求，這些值也不是搜尋量。
+- official-metadata-guide: [資料集詮釋資料 定義 負責人 版本](https://file.data.gov.tw/content/%E8%B3%87%E6%96%99%E9%9B%86%E8%A9%AE%E9%87%8B%E8%B3%87%E6%96%99%E6%A8%99%E6%BA%96%E6%8C%87%E5%BC%95.pdf) — one inspectable metadata-definition standard one official guide; zh-TW/Taiwan; captured 2026-08-31. 官方指南提供欄位與定義工作的獨立佐證；不代表 Wenlan 是政府資料目錄或治理平台。
+
+#### zh-CN evidence
+
+SERP:
+- exa-search-result-observation: [指标定义 数据字典 指标口径 负责人 版本](https://study.sf.163.com/documents/read/easydatav9.0-update03/easyindex_index.md) — results repeated metric dictionaries, definitions, ownership, and governance returned result observations; zh-CN/Simplified-Chinese sources; captured 2026-08-31. 简中结果大量期待平台治理和计算能力；本页只回答获准文件到可审核定义记录，不归因平台能力给 Wenlan。
+
+Demand discovery:
+- google-trends: [指标定义; 数据字典; 指标口径; 安全问卷; 维修知识库](https://trends.google.com/trends/explore?date=today%2012-m&q=%E6%8C%87%E6%A0%87%E5%AE%9A%E4%B9%89,%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8,%E6%8C%87%E6%A0%87%E5%8F%A3%E5%BE%84,%E5%AE%89%E5%85%A8%E9%97%AE%E5%8D%B7,%E7%BB%B4%E4%BF%AE%E7%9F%A5%E8%AF%86%E5%BA%93) — 31; 8; 2; 2; 0 request-relative Google Trends average 0-100 index; zh-CN/Worldwide Simplified-Chinese phrases; captured 2026-08-31. Worldwide 简中不是中国大陆需求测量；指数不可解释为搜索量。
+- industry-standard-guide: [银行 数据字典 定义 版本 维护](https://www.china-cba.net/Index/show/catid/251/id/45936.html) — one inspectable data-dictionary standard surface one industry association guide; zh-CN/China; captured 2026-08-31. 行业指南独立佐证定义和维护任务；它不证明 Wenlan 具备银行治理、计算或合规能力。
+
+### Candidate gate
+
+| Gate | Status | Reason | Evidence refs |
+| --- | --- | --- | --- |
+| provenance | passed | Every retained Trends, search-result, official, standards, OSS, and practitioner observation records an inspectable URL, date, locale or geography, native unit, and interpretation boundary. | locales.en.serpEvidence[0]; locales.en.demandEvidence[0]; locales.zh-TW.serpEvidence[0]; locales.zh-TW.demandEvidence[0]; locales.zh-CN.serpEvidence[0]; locales.zh-CN.demandEvidence[0]; docs/seo-audits/2026-08-31-business-metrics-glossary-demand-gate.md |
+| repeatedDemand | passed | All three Trends comparisons, maintained glossary documentation, official metadata guidance, practitioner material, and an industry data-dictionary guide independently repeat definition, ownership, version, and maintenance work. | locales.en.demandEvidence[0]; locales.en.demandEvidence[1]; locales.zh-TW.demandEvidence[0]; locales.zh-TW.demandEvidence[1]; locales.zh-CN.demandEvidence[0]; locales.zh-CN.demandEvidence[1] |
+| trilingualSerp | passed | Separate English, Taiwan Traditional-Chinese, and Simplified-Chinese results expose one definition lookup and conflict-resolution task while showing unsupported catalog, BI, SQL, lineage, governance, and approval intent to exclude. | locales.en.serpEvidence[0]; locales.zh-TW.serpEvidence[0]; locales.zh-CN.serpEvidence[0] |
+| cleanGap | passed | The financial-research owner only mentions changed metric definitions; document ingestion covers source formats; citation verification covers unsupported claims; multi-agent conflict covers concurrent writes. No owner turns conflicting approved KPI specifications into one reviewed definition wiki. | overlapCheck; docs/seo-audits/2026-08-31-business-metrics-glossary-demand-gate.md |
+| firstPartyProof | passed | Wenlan v0.17.6 source proves Markdown, text, text-extractable PDF, source revisions, claim-level citations, provenance lint, and review bound to exact content bytes. The candidate excludes every catalog, computation, governance, and permission capability source does not prove. | wenlanProof; docs/seo-audits/2026-08-31-business-metrics-glossary-demand-gate.md |
+| standaloneUtility | passed | A neutral template for metric name, business definition, formula text, grain, dimensions, exclusions, owner, source revision, review state, and supersession is independently useful without Wenlan. | standaloneUtility |
+| internalLinks | passed | Three same-locale owners can link from source-backed wiki, citation verification, and multi-agent conflict pages without changing their primary intent. | internalLinks |
+| authorityPath | passed | The maintained Wenlan source README already has same-locale Workflow guides lists. A factual guide link can be proposed only after the site pages are live, with separate source-repository approval and translation sync; no external acceptance or backlink is assumed. | authorityPath; docs/seo-audits/2026-08-31-business-metrics-glossary-demand-gate.md |
+
+### Wenlan proof
+
+- Wenlan ingests Markdown, text, and text-extractable PDF sources while preserving source revisions. — `crates/wenlan-core/src/sources/directory.rs in Wenlan v0.17.6`; verify with `Inspect the released v0.17.6 directory source implementation and its explicit supported extension and image-only PDF boundaries.`.
+- Wenlan records claim-level citations, provenance lint results, and review state bound to exact content bytes and version. — `crates/wenlan-core/src/citations.rs, crates/wenlan-core/src/lint/pages/provenance_checks.rs, and app/src/page_review.rs in Wenlan v0.17.6`; verify with `Inspect the released v0.17.6 citation, provenance-lint, and page-review implementations.`.
+
+### Planned internal links
+
+- https://wenlan.app/learn/source-backed-wiki-pages-ai-work
+- https://wenlan.app/learn/verify-ai-knowledge-base-citations
+- https://wenlan.app/learn/prevent-multi-agent-knowledge-conflicts
+- https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work
+- https://wenlan.app/zh-TW/learn/verify-ai-knowledge-base-citations
+- https://wenlan.app/zh-TW/learn/prevent-multi-agent-knowledge-conflicts
+- https://wenlan.app/zh-CN/learn/source-backed-wiki-pages-ai-work
+- https://wenlan.app/zh-CN/learn/verify-ai-knowledge-base-citations
+- https://wenlan.app/zh-CN/learn/prevent-multi-agent-knowledge-conflicts
+
+### Authority path and readout
+
+- Authority path: maintained-first-party-source-link — After the three pages are live and production-verified, separately propose one natural same-locale link in the Workflow guides lists of README.md, README.zh-Hant.md, and README.zh-Hans.md; source-repository commit, push, PR, merge, and release remain separately approval-gated, translation sync is required, and no external backlink is assumed (planned-not-published).
+- GSC: unavailable; native unit: per-locale page impressions, joined-query impressions, clicks.
+- Vercel: unavailable; native unit: per-locale target-page visitors and referrer visitors.

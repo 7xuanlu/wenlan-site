@@ -677,9 +677,15 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-31-course-wiki-from-lecture-notes-locales` is locally prepared,
-  not published, and uniquely consumes the production slot until its exact
-  publication scope is approved or stopped.
+  `EXP-2026-09-01-business-metric-definition-knowledge-base-locales` is the
+  unique locally prepared production-in-flight experiment. It is not
+  published and consumes the production slot until exact verification and a
+  separate publication decision.
+  `EXP-2026-08-31-course-wiki-from-lecture-notes-locales` is live,
+  production-verified, and measuring from the fixed
+  `2026-09-01T04:26:43Z` boundary. PR #166 merged as
+  `9b12ad73eb51c95d013e69e455c1a67d03f0e08d`; it no longer consumes the
+  production slot.
   `EXP-2026-08-30-ict-supplier-due-diligence-locales` is live,
   production-verified, and measuring from the fixed
   `2026-08-31T01:26:37Z` boundary. PR #160 merged as
@@ -921,7 +927,7 @@ action returns for separate explicit approval.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 38.
+- Active experiments: 39.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -1307,15 +1313,15 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-31-course-wiki-from-lecture-notes-locales` is the unique
-production-in-flight experiment. Its English, zh-TW, and zh-CN owners are
-prepared locally but not published. They turn one approved set of readable
-lecture slides, notes, and course PDFs into linked concept pages with exact
-sources, prerequisites, source revisions, and review state. Flashcards,
-quizzes, audio or video transcription, OCR, grading, tutoring, homework
-solving, exam planning, automatic academic judgment, and NotebookLM
-equivalence are excluded. Finish local deterministic and rendered checks,
-then stop for separate publication approval.
+`EXP-2026-09-01-business-metric-definition-knowledge-base-locales` is the
+unique production-in-flight experiment. Its English, zh-TW, and zh-CN owners
+are local preparation only. They turn approved Markdown, text, and
+text-extractable PDF metric specifications into a reviewable metric-definition
+wiki with formula text, grain, exclusions, owner, source revision, review
+state, and supersession. Warehouse discovery, BI integration, SQL or metric
+execution, lineage, data-quality monitoring, permissions, and automatic
+approval or reconciliation are excluded. Finish deterministic and rendered
+checks, then stop for separate publication approval.
 
 ### Latest measuring publication
 
@@ -4532,3 +4538,89 @@ unchanged.
   in turn after required checks, verify the integrated commit, wait for Vercel
   production completion, and run read-only production verification. Keep the
   Vercel completion timestamp as the fixed experiment boundary.
+
+## Campaign publication: course wiki from lecture notes at 2026-09-01T04:26:43Z
+
+- PR #166 merged at `2026-09-01T04:25:50Z` as
+  `9b12ad73eb51c95d013e69e455c1a67d03f0e08d`; Vercel production completed at
+  `2026-09-01T04:26:43Z`. Keep that completion time as the fixed experiment
+  boundary.
+- The integrated merge tree exactly matched the verified candidate. Goal and
+  scenario checks, 53 Goal tests, 255 SEO tests against Wenlan v0.17.6, 80
+  i18n tests, TypeScript, the 283-page build, 165-owner intent check, built
+  technical audit, and 37 expected 200 / four expected 404 route matrix passed
+  again on the merge commit.
+- The deployed audit passed robots, all 165 sitemap URLs, 30 key pages, six
+  utility noindex surfaces, sitemap-wide FAQPage absence, 25 redirects, six
+  bridge-host redirects, and removal of old URLs from the sitemap.
+- English, zh-TW, and zh-CN returned direct 200 with exact self-canonicals,
+  reciprocal en-US / zh-TW / zh-CN / x-default hreflang, Article and
+  BreadcrumbList schema, visible working FAQ without FAQPage, loaded images,
+  no console issue, no horizontal overflow, and no protected Mandarin phrase
+  split at 1280x900 and exact 393x852.
+- This proves publication and technical availability only. It is not a crawl,
+  indexing, rank, impression, click, visitor, authority, or causal result.
+  Request indexing, GSC validation, analytics mutation, the conditional
+  student-tools proposal, maintainer contact, paid action, and synthetic events
+  remain excluded.
+
+## Campaign preparation: business metric definition knowledge base at 2026-09-01T04:37:44Z
+
+- The production slot is open after Course Wiki production verification. The
+  next candidate is `business-metric-definition-knowledge-base`, whose complete
+  gate is recorded in
+  `docs/seo-audits/2026-08-31-business-metrics-glossary-demand-gate.md`.
+- English discovery leads with `data dictionary` and `metric definition`;
+  zh-TW leads with `指標定義`; zh-CN leads with `指标定义`. These are
+  source-native Trends and result observations, not keyword volume or Wenlan
+  performance.
+- The one owned task is to resolve conflicting KPI definitions from approved
+  files into a cited, versioned, human-reviewed definition record. Data,
+  analytics, product, finance, operations, and AI-agent users share this result
+  shape, so they do not receive separate duplicate landing pages.
+- Local preparation is allowed. Commit, push, PR, merge, Vercel deployment,
+  source-repository README links, request indexing, GSC validation, analytics
+  mutation, maintainer contact, paid actions, synthetic events, and every other
+  external action remain separately gated.
+
+## Campaign verification: business metric definition knowledge base at 2026-09-01T04:54:48Z
+
+- Local verification passed. Goal and scenario checks report 18 trilingual
+  families and 168 sitemap owners; Goal tests pass 54/54, SEO passes 256/256
+  against Wenlan v0.17.6, i18n passes 81/81, and TypeScript lint passes.
+- The production build generated 287 static pages. The built technical audit
+  passed all 168 sitemap URLs, 24 required pages, 26 redirects, robots,
+  noindex headers, and FAQPage absence across 172 built HTML pages. The running
+  build returned 200 for 39 expected routes and 404 for four intentional
+  unsupported routes.
+- Fresh in-app Browser checks covered English, zh-TW, and zh-CN at `1280x900`
+  and exact `393x852`. Every route had one H1, exact self-canonical,
+  reciprocal hreflang, Article and BreadcrumbList schema, loaded product
+  evidence, a working evidence anchor and FAQ expansion, visible FAQ without
+  FAQPage, no framework overlay, no console warning or error, no horizontal
+  overflow, and no protected Mandarin phrase split. The initial zh-CN desktop
+  screenshot caught a font-loading race; after `document.fonts.ready`, its
+  stable layout had no overlap.
+- Exact evidence, task boundary, routes, commands, internal links, and temporary
+  screenshot paths are recorded in
+  `docs/seo-audits/2026-09-01-business-metric-definition-knowledge-base-prelaunch.md`.
+- The three routes remain local and unpublished. Stop for explicit commit,
+  push, PR, merge, automatic Vercel deployment, and read-only production
+  verification approval. The Wenlan source README link, request indexing, GSC
+  validation, analytics mutation, maintainer contact, paid actions, synthetic
+  events, and every other external action remain separate.
+
+## Campaign publication approval: business metric definition knowledge base at 2026-09-01T05:03:53Z
+
+- The user explicitly approved the locally verified English, zh-TW, and zh-CN
+  business-metric definition family for commit, Git push, pull request
+  creation, merge, automatic Vercel deployment, and read-only production
+  verification.
+- The approved scope is exactly the candidate-owned files and exclusions in
+  `docs/seo-audits/2026-09-01-business-metric-definition-publication-manifest.md`.
+- The Wenlan source README authority link, request indexing, GSC validation,
+  analytics mutation, maintainer contact, paid actions, synthetic events, and
+  every other external action remain excluded.
+- Next step: commit and push only the verified candidate, merge its pull
+  request in turn after required checks, verify the integrated commit, wait
+  for Vercel production completion, and run read-only production verification.
