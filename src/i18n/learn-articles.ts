@@ -992,6 +992,7 @@ const zhTWArticles = {
       "wenlan-vs-obsidian-ai-memory",
       "build-ict-supplier-due-diligence-evidence-pack",
       "build-customer-support-answer-knowledge-base",
+      "build-course-wiki-from-lecture-notes",
     ],
     officialReferences: [
       {
@@ -1526,6 +1527,7 @@ const zhTWArticles = {
       "fix-pdf-ingestion-ai-knowledge-base",
       "when-ai-agent-should-query-knowledge-base",
       "build-customer-support-answer-knowledge-base",
+      "build-course-wiki-from-lecture-notes",
     ],
     officialReferences: [
       {
@@ -1662,6 +1664,7 @@ const zhTWArticles = {
       "build-sre-incident-knowledge-base",
       "build-ict-supplier-due-diligence-evidence-pack",
       "build-customer-support-answer-knowledge-base",
+      "build-course-wiki-from-lecture-notes",
     ],
     officialReferences: [
       {
@@ -2851,6 +2854,136 @@ const zhTWArticles = {
     cta: {
       heading: "讓一個客服答案可審查",
       body: "選定核准的產品或政策來源，記錄一個有界回答，並在重用前讓修訂、負責人、限制與下次複審保持可見。",
+    },
+  },
+  "build-course-wiki-from-lecture-notes": {
+    slug: "build-course-wiki-from-lecture-notes",
+    eyebrow: "課程 Wiki 工作流",
+    category: "Workflows",
+    title: "把課堂講義與 PDF 整理成課程 Wiki",
+    description:
+      "把一門課的可讀講義、課件與 PDF 整理成有來源的課程 Wiki，保留概念、先備知識、來源修訂與複核狀態。",
+    metaTitle: "課堂講義與 PDF 如何整理成課程 Wiki | Wenlan",
+    metaDescription:
+      "從課堂講義、課件與可擷取文字的 PDF 建立有來源課程 Wiki，維護概念頁、先備知識、引用、來源修訂與複核狀態。",
+    keywords: [
+      "把課堂講義整理成 AI 知識庫",
+      "講義 PDF 轉學習筆記",
+      "學生 LLM Wiki",
+      "課程 Wiki",
+      "可追溯學習筆記",
+      "課件知識庫",
+    ],
+    publishedAt: "2026-08-31",
+    updatedAt: "2026-08-31",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分鐘閱讀",
+    audience: "已有一門課的可讀課堂講義、課件或 PDF，想維護可檢查學習 Wiki 的學生、自學者與教師",
+    heroBullets: [
+      "先固定一門課與一組有權使用的可讀課程資料。",
+      "每個概念各自成頁，連回確切來源與先備知識。",
+      "記錄來源修訂與複核狀態，避免課件改版後筆記仍看似正確。",
+    ],
+    sections: [
+      {
+        heading: "先說結論：一個概念配一頁與一組確切來源",
+        body: [
+          "先為一門課建立明確來源邊界，登錄可讀的課堂講義、筆記與可擷取文字 PDF，再把每個可重用概念維護成獨立頁面。每頁都要回答一個問題、列出先備知識、引用確切講次或頁碼、記錄來源修訂，並標示目前有效、過期、矛盾或待複核。",
+          "Wenlan 可以同步支援的文件來源、建立有來源 Pages、保留引用與 wikilink、顯示過期依賴並留下可審查修訂。它不等同 NotebookLM，不會產生單字卡、不會自動出題、不會轉錄音訊、不會執行 OCR、不會評分、不會當家教、不會解題，也不會規劃考試。",
+        ],
+        link: { label: "查看課程 Wiki 證據工作流", href: "#product-evidence" },
+      },
+      {
+        heading: "為什麼一份大摘要很快就會過期",
+        body: [
+          "一個定義可能在第二週講義，先備概念在第一週，修正在後續課件，例外又藏在閱讀筆記裡。一次性摘要會把這些關係壓成流暢文字，也可能在教師更新來源後繼續保留舊答案。",
+          "可維護的課程 Wiki 應該讓概念、來源與修訂保持分離，讓學習者能看出哪一段受哪份資料支持，以及哪一頁需要重新複核。即使不用 Wenlan，這種結構也能作為獨立、可檢查的學習成果。",
+        ],
+      },
+      {
+        heading: "建立課程資料到概念頁的閉環",
+        body: [
+          "先用少量資料驗證流程。只納入你有權儲存與閱讀的內容，並指定課程版本、學期、來源擁有者、排除資料與複核人員。",
+        ],
+        bullets: [
+          "登錄 Markdown、文字與可擷取文字的 PDF；掃描或純圖片 PDF 先在外部完成 OCR，再人工核對文字。",
+          "每個概念頁只回答一個穩定問題，不要把整門課壓成一份巨型摘要。",
+          "明確連結先備知識、相鄰概念、矛盾說法、例題與尚未解決的問題。",
+          "每個重要主張附上講次、頁碼、段落或 source ID，並保存學期、檔案版本或資料日期。",
+          "講義或課件更新後重新同步，把受影響概念標為過期或待複核，再打開新來源確認。",
+          "最後執行 lint 與人工審查；來源不足時保留未知，不用 AI 自動補答案。",
+        ],
+        code: {
+          label: "完成 Wenlan 與 AI 客戶端設定後",
+          code: "wenlan status\nwenlan sources add ~/Courses/distributed-systems/materials\n# 在 Wenlan plugin client 中：\n/distill <課程概念>\n/pages <課程概念>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "概念頁應該記錄什麼",
+        body: [
+          "下面的中立範本不是答案卡，而是一筆可檢查的學習紀錄。每個欄位都要回到有權使用的課程資料與具名複核人員。",
+        ],
+        code: {
+          label: "中立的課程概念紀錄",
+          code: "concept: leader election\nquestion: 為什麼同一個 term 不能長期存在兩個 leader？\nprerequisites: term；quorum intersection\nanswer: <目前課程資料真正支持的短答>\nsources: <講次、投影片或頁碼與 source ID>\nsource_revision: <學期、檔案修訂或資料日期>\nreview_state: <目前有效｜過期｜矛盾｜未解>\nreviewer: <學生或教師>\nnext_review: <來源變更觸發條件或日期>",
+        },
+      },
+      {
+        heading: "知道這不是 AI 家教或考試工具",
+        body: [
+          "這個工作流只整理有來源的課程概念。Wenlan 不會製作單字卡或測驗，不會轉錄影音，不會對掃描檔執行 OCR，不會評分、代寫、解題、預測考題或安排複習進度。學生或教師仍要負責來源權利、理解、學術誠信與最後複核。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 能直接把掃描講義、錄音或影片變成學習筆記嗎？",
+        answer: "不能。這個流程使用 Markdown、文字與可擷取文字的 PDF。掃描檔需要外部 OCR，錄音或影片需要外部轉錄，再由你核對結果後才能作為來源。",
+      },
+      {
+        question: "課程 Wiki 等於讀書摘要或 AI 家教嗎？",
+        answer: "不等於。課程 Wiki 維護可追溯的概念解釋、先備知識、來源與修訂狀態；它不產生答案卡、不評分、不代寫，也不決定考試重點。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "distilled-wiki-pages-ai-memory",
+      "source-backed-research-knowledge-base",
+      "verify-ai-knowledge-base-citations",
+    ],
+    officialReferences: [
+      { label: "Wenlan 支援的文件來源", href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in" },
+      { label: "Wenlan 有來源 Pages", href: "https://wenlan.app/docs/source-backed-pages" },
+      { label: "Wenlan 審查與信任", href: "https://wenlan.app/docs/review-and-trust" },
+      { label: "Karpathy 的 LLM-wiki 筆記", href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" },
+    ],
+    productEvidence: {
+      heading: "信任概念頁前，先檢查來源與複核狀態",
+      summary: "這是 Wenlan App 確定性測試資料的真實桌面畫面，不是學校、課程或學生工作區。畫面顯示有來源數量的 Pages 與審查佇列，可用同一產品介面讓課件修訂與未解證據保持可見。",
+      image: {
+        src: "/images/product-evidence/wenlan-space-review-fixture.png",
+        alt: "Wenlan 桌面 Space 顯示有來源數量的 Pages，以及來源變動與矛盾證據的審查佇列。",
+        caption: "Wenlan App 確定性測試資料的真實畫面。這是一般產品範例，不是課程資料或學生紀錄。",
+        width: 1586,
+        height: 992,
+      },
+      workflow: [
+        { label: "固定一門課", detail: "先選定課程、學期、可讀來源、排除資料與具名複核人員。" },
+        { label: "整理有連結的概念", detail: "把概念、先備知識、解釋、來源位置、修訂與開放問題放在同一筆可審查紀錄。" },
+        { label: "來源變動後再複核", detail: "打開引用講義，檢查過期或矛盾支持，理解目前資料後才更新概念頁。" },
+      ],
+      artifactHeading: "課程概念紀錄範例",
+      artifactNote: "這是中立範本，不是答案卡。請以有權使用的課程資料與具名複核人員替換每個欄位。",
+      artifactRows: [
+        { label: "概念與問題", detail: "一個可重用概念、它回答的問題，以及目前資料支持的最短解釋。" },
+        { label: "先備知識與來源", detail: "必要概念、確切講次或頁碼、source ID、資料日期與來源修訂。" },
+        { label: "複核狀態", detail: "目前有效、過期、矛盾或未解，附學生或教師複核人員與下次觸發條件。" },
+      ],
+      action: { label: "查看課程 Wiki 證據工作流", href: "#product-evidence" },
+    },
+    cta: {
+      heading: "先建立一頁可檢查的課程概念",
+      body: "加入一小組核准來源，維護一頁有先備知識與確切來源的概念，再於課件變動後複核。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
@@ -4093,6 +4226,7 @@ const zhCNArticles = {
       "wenlan-vs-obsidian-ai-memory",
       "build-ict-supplier-due-diligence-evidence-pack",
       "build-customer-support-answer-knowledge-base",
+      "build-course-wiki-from-lecture-notes",
     ],
     officialReferences: [
       {
@@ -4355,6 +4489,7 @@ const zhCNArticles = {
       "fix-pdf-ingestion-ai-knowledge-base",
       "when-ai-agent-should-query-knowledge-base",
       "build-customer-support-answer-knowledge-base",
+      "build-course-wiki-from-lecture-notes",
     ],
     officialReferences: [
       {
@@ -4491,6 +4626,7 @@ const zhCNArticles = {
       "build-sre-incident-knowledge-base",
       "build-ict-supplier-due-diligence-evidence-pack",
       "build-customer-support-answer-knowledge-base",
+      "build-course-wiki-from-lecture-notes",
     ],
     officialReferences: [
       {
@@ -5680,6 +5816,136 @@ const zhCNArticles = {
     cta: {
       heading: "让一个客服答案可审核",
       body: "选定获准的产品或政策来源，记录一个有界回答，并在复用前让修订、负责人、限制和下次复审保持可见。",
+    },
+  },
+  "build-course-wiki-from-lecture-notes": {
+    slug: "build-course-wiki-from-lecture-notes",
+    eyebrow: "课程 Wiki 工作流",
+    category: "Workflows",
+    title: "把课程讲义与 PDF 整理成课程 Wiki",
+    description:
+      "把一门课的可读讲义、课件与 PDF 整理成有来源的课程 Wiki，保留概念、前置知识、来源修订和审核状态。",
+    metaTitle: "课程讲义与 PDF 如何整理成课程 Wiki | Wenlan",
+    metaDescription:
+      "从课程讲义、课件与可提取文本的 PDF 建立有来源课程 Wiki，维护概念页、前置知识、引用、来源修订和审核状态。",
+    keywords: [
+      "把课程讲义整理成 AI 知识库",
+      "课件 PDF 转学习笔记",
+      "学生 LLM Wiki",
+      "课程 Wiki",
+      "可追溯学习笔记",
+      "课件知识库",
+    ],
+    publishedAt: "2026-08-31",
+    updatedAt: "2026-08-31",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分钟阅读",
+    audience: "已有一门课的可读课程讲义、课件或 PDF，想维护可检查学习 Wiki 的学生、自学者与教师",
+    heroBullets: [
+      "先固定一门课和一组有权使用的可读课程资料。",
+      "每个概念单独成页，连接到准确来源和前置知识。",
+      "记录来源修订和审核状态，避免课件更新后笔记仍看似正确。",
+    ],
+    sections: [
+      {
+        heading: "先说结论：一个概念配一页和一组准确来源",
+        body: [
+          "先为一门课建立明确来源边界，登记可读的课程讲义、笔记和可提取文本 PDF，再把每个可复用概念维护成独立页面。每页都要回答一个问题、列出前置知识、引用准确讲次或页码、记录来源修订，并标注当前有效、过期、矛盾或待审核。",
+          "Wenlan 可以同步支持的文档来源、建立有来源 Pages、保留引用和 wikilink、显示过期依赖并留下可审核修订。它不等同 NotebookLM，不会生成闪卡、不会自动出题、不会转录音频、不会执行 OCR、不会评分、不会当家教、不会解题，也不会规划考试。",
+        ],
+        link: { label: "查看课程 Wiki 证据工作流", href: "#product-evidence" },
+      },
+      {
+        heading: "为什么一份大摘要很快就会过期",
+        body: [
+          "一个定义可能在第二周讲义，前置概念在第一周，修正在后续课件，例外又藏在阅读笔记里。一次性摘要会把这些关系压成流畅文字，也可能在教师更新来源后继续保留旧答案。",
+          "可维护的课程 Wiki 应该让概念、来源和修订保持分离，让学习者能看出哪一段受哪份资料支持，以及哪一页需要重新审核。即使不用 Wenlan，这种结构也能作为独立、可检查的学习成果。",
+        ],
+      },
+      {
+        heading: "建立课程资料到概念页的闭环",
+        body: [
+          "先用少量资料验证流程。只纳入你有权存储和阅读的内容，并指定课程版本、学期、来源所有者、排除资料和审核人员。",
+        ],
+        bullets: [
+          "登记 Markdown、文本和可提取文本的 PDF；扫描或纯图片 PDF 先在外部完成 OCR，再人工核对文字。",
+          "每个概念页只回答一个稳定问题，不要把整门课压成一份巨型摘要。",
+          "明确连接前置知识、相邻概念、矛盾说法、例题和尚未解决的问题。",
+          "每个重要主张附上讲次、页码、段落或 source ID，并保存学期、文件版本或资料日期。",
+          "讲义或课件更新后重新同步，把受影响概念标为过期或待审核，再打开新来源确认。",
+          "最后执行 lint 和人工审核；来源不足时保留未知，不用 AI 自动补答案。",
+        ],
+        code: {
+          label: "完成 Wenlan 与 AI 客户端设置后",
+          code: "wenlan status\nwenlan sources add ~/Courses/distributed-systems/materials\n# 在 Wenlan plugin client 中：\n/distill <课程概念>\n/pages <课程概念>\n/lint\n/curate",
+        },
+      },
+      {
+        heading: "概念页应该记录什么",
+        body: [
+          "下面的中立模板不是答案卡，而是一笔可检查的学习记录。每个字段都要回到有权使用的课程资料和具名审核人员。",
+        ],
+        code: {
+          label: "中立的课程概念记录",
+          code: "concept: leader election\nquestion: 为什么同一个 term 不能长期存在两个 leader？\nprerequisites: term；quorum intersection\nanswer: <当前课程资料真正支持的短答>\nsources: <讲次、幻灯片或页码和 source ID>\nsource_revision: <学期、文件修订或资料日期>\nreview_state: <当前有效｜过期｜矛盾｜未解决>\nreviewer: <学生或教师>\nnext_review: <来源变化触发条件或日期>",
+        },
+      },
+      {
+        heading: "知道这不是 AI 家教或考试工具",
+        body: [
+          "这个工作流只整理有来源的课程概念。Wenlan 不会制作闪卡或测验，不会转录音视频，不会对扫描文件执行 OCR，不会评分、代写、解题、预测考题或安排复习进度。学生或教师仍要负责来源权利、理解、学术诚信和最终审核。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Wenlan 能直接把扫描讲义、录音或视频变成学习笔记吗？",
+        answer: "不能。这个流程使用 Markdown、文本和可提取文本的 PDF。扫描文件需要外部 OCR，录音或视频需要外部转录，再由你核对结果后才能作为来源。",
+      },
+      {
+        question: "课程 Wiki 等于复习摘要或 AI 家教吗？",
+        answer: "不等于。课程 Wiki 维护可追溯的概念解释、前置知识、来源和修订状态；它不生成答案卡、不评分、不代写，也不决定考试重点。",
+      },
+    ],
+    relatedSlugs: [
+      "build-local-ai-knowledge-base-from-documents",
+      "distilled-wiki-pages-ai-memory",
+      "source-backed-research-knowledge-base",
+      "verify-ai-knowledge-base-citations",
+    ],
+    officialReferences: [
+      { label: "Wenlan 支持的文档来源", href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in" },
+      { label: "Wenlan 有来源 Pages", href: "https://wenlan.app/docs/source-backed-pages" },
+      { label: "Wenlan 审核与信任", href: "https://wenlan.app/docs/review-and-trust" },
+      { label: "Karpathy 的 LLM-wiki 笔记", href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" },
+    ],
+    productEvidence: {
+      heading: "信任概念页前，先检查来源和审核状态",
+      summary: "这是 Wenlan App 确定性测试资料的真实桌面画面，不是学校、课程或学生工作区。画面显示带有来源数量的 Pages 和审核队列，可用同一产品界面让课件修订与未解决证据保持可见。",
+      image: {
+        src: "/images/product-evidence/wenlan-space-review-fixture.png",
+        alt: "Wenlan 桌面 Space 显示带有来源数量的 Pages，以及来源变化与矛盾证据的审核队列。",
+        caption: "Wenlan App 确定性测试资料的真实画面。这是通用产品示例，不是课程资料或学生记录。",
+        width: 1586,
+        height: 992,
+      },
+      workflow: [
+        { label: "固定一门课", detail: "先选定课程、学期、可读来源、排除资料和具名审核人员。" },
+        { label: "整理有关联的概念", detail: "把概念、前置知识、解释、来源位置、修订和开放问题放在同一笔可审核记录。" },
+        { label: "来源变化后再审核", detail: "打开引用讲义，检查过期或矛盾支持，理解当前资料后才更新概念页。" },
+      ],
+      artifactHeading: "课程概念记录示例",
+      artifactNote: "这是中立模板，不是答案卡。请使用有权使用的课程资料和具名审核人员替换每个字段。",
+      artifactRows: [
+        { label: "概念与问题", detail: "一个可复用概念、它回答的问题，以及当前资料支持的最短解释。" },
+        { label: "前置知识与来源", detail: "必要概念、准确讲次或页码、source ID、资料日期和来源修订。" },
+        { label: "审核状态", detail: "当前有效、过期、矛盾或未解决，附学生或教师审核人员和下次触发条件。" },
+      ],
+      action: { label: "查看课程 Wiki 证据工作流", href: "#product-evidence" },
+    },
+    cta: {
+      heading: "先建立一页可检查的课程概念",
+      body: "加入一小组获准来源，维护一页带有前置知识和准确来源的概念，再在课件变化后审核。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;

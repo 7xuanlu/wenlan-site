@@ -463,7 +463,7 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.match(article, /https:\/\/gist\.github\.com\/karpathy\/442a6bf555914893e9891c11519de94f/);
   assert.match(
     article,
-    /relatedSlugs:\s*\[\s*"source-backed-wiki-pages-ai-work",\s*"verify-ai-knowledge-base-citations",\s*"ai-work-memory-vs-knowledge-base",\s*"wenlan-vs-obsidian-ai-memory",\s*"ai-memory-provenance",\s*"local-git-history-ai-memory",?\s*\]/,
+    /relatedSlugs:\s*\[\s*"source-backed-wiki-pages-ai-work",\s*"verify-ai-knowledge-base-citations",\s*"build-course-wiki-from-lecture-notes",\s*"ai-work-memory-vs-knowledge-base",\s*"wenlan-vs-obsidian-ai-memory",\s*"ai-memory-provenance",\s*"local-git-history-ai-memory",?\s*\]/,
   );
   assert.match(
     supportArticle,

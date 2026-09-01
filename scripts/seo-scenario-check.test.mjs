@@ -26,15 +26,40 @@ test("canonical trilingual scenario backlog is complete and generated report is 
   });
 
   assert.deepEqual(result.errors, []);
-  assert.equal(backlog.families.length, 16);
+  assert.equal(backlog.families.length, 17);
   assert.equal(
     backlog.families.at(-1)?.id,
-    "customer-support-answer-knowledge-base",
+    "course-slides-source-backed-llm-wiki",
   );
   assert.equal(backlog.campaign.baseline.sitemapUrls, 120);
-  assert.equal(sitemapRows.length, 162);
+  assert.equal(sitemapRows.length, 165);
   assert.equal(result.sitemapCount, sitemapRows.length);
   assert.equal(renderScenarioBacklog(backlog), report);
+});
+
+test("course-slide family preserves the source-backed study-wiki boundary", () => {
+  const family = backlog.families.find(
+    (candidate) => candidate.id === "course-slides-source-backed-llm-wiki",
+  );
+
+  assert.ok(family, "course-slide source-backed LLM Wiki scenario family");
+  assert.match(family.audience, /students|learners|educators/i);
+  assert.match(family.trigger, /lecture|course|slides|notes|PDF/i);
+  assert.match(family.userTask, /course wiki|lecture slides|study notes/i);
+  assert.match(family.desiredOutcome, /citation|concept|revision|review/i);
+  assert.equal(family.decision, "net-new");
+  assert.equal(family.publicationStatus, "prepared");
+  assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
+  assert.ok(
+    Object.values(family.gates).every((gate) => gate.status === "passed"),
+    "every course-slide candidate gate must pass",
+  );
+  assert.equal(family.internalLinks.length, 9);
+  assert.match(family.authorityPath.target, /awesome-ai-tools-for-students/i);
+  assert.match(
+    family.overlapCheck,
+    /flashcards|quizzes|audio|transcription|exam planning/i,
+  );
 });
 
 test("customer-support family preserves the approved-document answer-pack boundary", () => {

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-30",
+  "updatedAt": "2026-08-31",
   "campaign": {
     "deadline": "2026-09-21",
     "finalWindow": "2026-08-24..2026-09-20",
@@ -4263,6 +4263,323 @@
         "status": "planned-not-published"
       },
       "nextResearchDirection": "PR #164 merged at 2026-08-31T15:26:16Z as 19636df9cdcc170639fab9c652353028b39ffd00; Vercel production completed at 2026-08-31T15:27:07Z. Keep that fixed production boundary, run the 24-hour technical and indexability observation after 2026-09-01T15:27:07Z, and run the seven-day source-native GSC page/query and Vercel page/referrer observation after 2026-09-07T15:27:07Z. Preserve the broad AI-customer-support rejection and manual approved-document boundary. Do not submit the awesome-customer-success entry, contact maintainers, request indexing, submit validation, mutate analytics, or publish externally without separate approval.",
+      "readout": {
+        "gsc": {
+          "status": "unavailable",
+          "nativeUnit": "per-locale page impressions, joined-query impressions, clicks"
+        },
+        "vercel": {
+          "status": "unavailable",
+          "nativeUnit": "per-locale target-page visitors and referrer visitors"
+        }
+      }
+    },
+    {
+      "id": "course-slides-source-backed-llm-wiki",
+      "audience": "Students, independent learners, and educators who already have course slides, lecture notes, or readable course PDFs and want an inspectable local study wiki",
+      "trigger": "A course accumulates revised lecture slides, notes, and text-extractable PDFs that are hard to connect, verify, and reuse across later study sessions",
+      "userTask": "Turn one course's lecture slides and study notes into a source-backed course wiki without losing citations or source revisions",
+      "desiredOutcome": "Maintain a reviewable course wiki whose concept pages link to exact sources, show prerequisite relationships, and refresh when lecture material changes",
+      "stage": "build",
+      "decision": "net-new",
+      "plannedWindow": "next-eligible-authority-backed-window-after-2026-08-31",
+      "publicationStatus": "prepared",
+      "locales": {
+        "en": {
+          "queryFamily": [
+            "turn lecture slides into a course wiki",
+            "source backed AI study notes",
+            "student LLM wiki"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "exa-search-result-observation",
+              "sourceUrl": "https://github.com/georgia-tech-db/TokenSmith",
+              "query": "student lecture notes PDF source-backed study knowledge base citations",
+              "capturedAt": "2026-08-31",
+              "language": "en",
+              "geography": "United States and global English sources",
+              "nativeUnit": "returned result observations",
+              "value": "8 results including student course-PDF, cited-answer, local-first, and lecture-note workflows",
+              "note": "The result set shows a course-material task, but many results also promise quizzes, flashcards, audio, tutoring, or transcription that Wenlan must not claim. This is not keyword volume or Wenlan rank."
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "google-trends",
+              "sourceUrl": "https://trends.google.com/trends/explore?date=today%2012-m&geo=US&q=AI%20study%20guide,AI%20notes,lecture%20notes,NotebookLM,study%20guide",
+              "query": "AI study guide; AI notes; lecture notes; NotebookLM; study guide",
+              "capturedAt": "2026-08-31",
+              "language": "en",
+              "geography": "United States",
+              "nativeUnit": "request-relative Google Trends average 0-100 index",
+              "value": "5; 27; 13; 30; 68",
+              "note": "Study guide and NotebookLM are stronger discovery handles than the narrow source-backed phrase. The index is request-relative, not search volume."
+            },
+            {
+              "sourceType": "open-source-workflow",
+              "sourceUrl": "https://github.com/IssacW228/student-llm-wiki",
+              "query": "student LLM wiki course slides Obsidian Karpathy",
+              "capturedAt": "2026-08-31",
+              "language": "en and zh-CN",
+              "geography": "global OSS",
+              "nativeUnit": "GitHub repository stars and forks",
+              "value": "172 stars; 4 forks",
+              "note": "The repository independently validates a course-slides to persistent wiki workflow. It is not affiliated with or an endorsement of Wenlan, and its exam-prep features are not Wenlan capabilities."
+            },
+            {
+              "sourceType": "university-open-source-workflow",
+              "sourceUrl": "https://github.com/georgia-tech-db/TokenSmith",
+              "query": "local course PDFs lecture slides cited answers",
+              "capturedAt": "2026-08-31",
+              "language": "en",
+              "geography": "global OSS",
+              "nativeUnit": "GitHub repository stars and forks",
+              "value": "7 stars; 26 forks",
+              "note": "The Georgia Tech project repeats local PDF ingestion, lecture-slide retrieval, cited answers, incremental indexing, and student use. Its RAG chat and model stack are not attributed to Wenlan."
+            },
+            {
+              "sourceType": "student-community-thread",
+              "sourceUrl": "https://boredofstudies.org/threads/paper-notion-%C3%97-notebooklm-%C3%97-anki-study-tool-for-students.416434/",
+              "query": "student PDF lecture notes cited study workspace source confusion",
+              "capturedAt": "2026-08-31",
+              "language": "en",
+              "geography": "Australia student community",
+              "nativeUnit": "one dated discussion thread",
+              "value": "1 firsthand feature and source-confusion discussion",
+              "note": "The thread repeats source-grounded study demand and reports cross-source confusion. It also shows that flashcards, quizzes, and spaced repetition are expected in the broader SERP and must remain outside this page's claim."
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "Own the maintained course-wiki task, not a general AI tutor. Use course slides, lecture notes, source citations, concept links, prerequisite links, revised-source refresh, and review language. Exclude flashcards, quizzes, audio, transcription, grading, and exam planning."
+        },
+        "zh-TW": {
+          "queryFamily": [
+            "把課堂講義整理成 AI 知識庫",
+            "講義 PDF 轉可追溯學習筆記",
+            "學生 LLM Wiki"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "exa-search-result-observation",
+              "sourceUrl": "https://www.theai.tw/guide/notebooklm-tutorial",
+              "query": "台灣學生 課堂講義 PDF 可追溯 AI 學習知識庫 引用",
+              "capturedAt": "2026-08-31",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "returned result observations",
+              "value": "8 results including NotebookLM guides, AI study-note workflows, course-PDF tools, and local wiki examples",
+              "note": "台灣結果自然使用講義、PDF、AI 筆記、來源與 NotebookLM；結果也大量期待語音、心智圖與測驗，這些不是 Wenlan 功能。"
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "google-trends",
+              "sourceUrl": "https://trends.google.com/trends/explore?date=today%2012-m&geo=TW&q=AI%20%E7%AD%86%E8%A8%98,%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98,%E8%AA%B2%E5%A0%82%E8%AC%9B%E7%BE%A9,NotebookLM,%E8%AE%80%E6%9B%B8%E7%AD%86%E8%A8%98",
+              "query": "AI 筆記; 學習筆記; 課堂講義; NotebookLM; 讀書筆記",
+              "capturedAt": "2026-08-31",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "request-relative Google Trends average 0-100 index",
+              "value": "1; 0; 0; 66; 0",
+              "note": "NotebookLM 是這組比較中明顯的需求入口；不得把品牌索引當成通用關鍵字量，也不得暗示 Wenlan 具備其語音、影片或測驗功能。"
+            },
+            {
+              "sourceType": "taiwan-practitioner-guide",
+              "sourceUrl": "https://www.theai.tw/guide/notebooklm-tutorial",
+              "query": "NotebookLM 講義 PDF 學習 引用",
+              "capturedAt": "2026-08-31",
+              "language": "zh-TW",
+              "geography": "Taiwan",
+              "nativeUnit": "one dated local-language workflow guide",
+              "value": "1 course-material, source-citation, and study-guide workflow",
+              "note": "文章證實台灣自然語言與來源核對需求；其 Google 產品功能不歸因給 Wenlan。"
+            },
+            {
+              "sourceType": "official-product-surface",
+              "sourceUrl": "https://notebooklm.google/students?hl=zh-TW",
+              "query": "學生的 AI 學習工具",
+              "capturedAt": "2026-08-31",
+              "language": "zh-TW",
+              "geography": "Taiwan-localized official surface",
+              "nativeUnit": "one official student landing page",
+              "value": "1 official student-course-material use-case surface",
+              "note": "官方頁證實學生情境是獨立產品入口；它不證明 Wenlan 需求量或功能對等。"
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "以課堂講義、課件、PDF、可追溯學習筆記、概念頁、先備知識、來源修訂與人工複核等台灣自然用語擁有任務；排除語音導讀、影片、測驗、轉錄、評分與考試規劃。"
+        },
+        "zh-CN": {
+          "queryFamily": [
+            "把课程讲义整理成 AI 知识库",
+            "课件 PDF 转可追溯学习笔记",
+            "学生 LLM Wiki"
+          ],
+          "serpEvidence": [
+            {
+              "sourceType": "exa-search-result-observation",
+              "sourceUrl": "https://github.com/IssacW228/student-llm-wiki",
+              "query": "中国学生 课程讲义 PDF 可追溯 AI 学习知识库 引用",
+              "capturedAt": "2026-08-31",
+              "language": "zh-CN",
+              "geography": "Simplified-Chinese sources",
+              "nativeUnit": "returned result observations",
+              "value": "8 results including student LLM Wiki, course-note generators, PDF question-answer tools, and Obsidian workflows",
+              "note": "简中结果自然使用课件、讲义、学习笔记、知识库和 LLM Wiki；自动出题、音频、OCR 与教材生成属于被排除能力。"
+            }
+          ],
+          "demandEvidence": [
+            {
+              "sourceType": "google-trends",
+              "sourceUrl": "https://trends.google.com/trends/explore?date=today%2012-m&geo=CN&q=AI%20%E7%AC%94%E8%AE%B0,%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0,%E8%AF%BE%E7%A8%8B%E8%AE%B2%E4%B9%89,NotebookLM,%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0",
+              "query": "AI 笔记; 学习笔记; 课程讲义; NotebookLM; 读书笔记",
+              "capturedAt": "2026-08-31",
+              "language": "zh-CN",
+              "geography": "China",
+              "nativeUnit": "request-relative Google Trends average 0-100 index",
+              "value": "0; 0; 0; 51; 1",
+              "note": "Google 在中国大陆覆盖有限，这组值仅保留为来源原生信号。NotebookLM 是品牌入口，不是通用搜索量。"
+            },
+            {
+              "sourceType": "open-source-workflow",
+              "sourceUrl": "https://github.com/IssacW228/student-llm-wiki",
+              "query": "学生 LLM Wiki 课件 知识库 Obsidian",
+              "capturedAt": "2026-08-31",
+              "language": "zh-CN and en",
+              "geography": "global OSS",
+              "nativeUnit": "GitHub repository stars and forks",
+              "value": "172 stars; 4 forks",
+              "note": "项目提供独立的简中学生工作流佐证；与 Wenlan 无隶属或背书关系，其复习与出题能力不归因给 Wenlan。"
+            },
+            {
+              "sourceType": "open-source-course-note-workflow",
+              "sourceUrl": "https://github.com/WZYQAQ0v0/AutoCourseNote",
+              "query": "课程资料 PDF PPTX 结构化笔记 可追溯来源",
+              "capturedAt": "2026-08-31",
+              "language": "zh-CN",
+              "geography": "global OSS",
+              "nativeUnit": "one inspectable repository",
+              "value": "1 Chinese course-material to traceable-note workflow",
+              "note": "项目重复课程资料分类、解析、结构化笔记和溯源需求；其教材生成、OCR 和排版能力不归因给 Wenlan。"
+            }
+          ],
+          "existingOwner": null,
+          "coverage": "gap",
+          "researchNeeded": "使用课程讲义、课件、PDF、可追溯学习笔记、概念页、前置知识、来源修订和人工复核等自然用语；排除自动出题、音频、转录、OCR、评分和考试规划。"
+        }
+      },
+      "gates": {
+        "provenance": {
+          "status": "passed",
+          "reason": "Every retained Trends, search-result, community, official, and OSS observation records an inspectable URL, capture date, language or geography, native unit, and interpretation boundary.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.en.demandEvidence[0]",
+            "locales.en.demandEvidence[1]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-TW.demandEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]",
+            "locales.zh-CN.demandEvidence[0]",
+            "docs/seo-audits/2026-08-31-next-scenario-demand-comparison.md"
+          ]
+        },
+        "repeatedDemand": {
+          "status": "passed",
+          "reason": "Google Trends, a 172-star student LLM Wiki, a Georgia Tech course-PDF system, a student community thread, Taiwan guides, an official student surface, and Simplified-Chinese OSS independently repeat the course-material to grounded-study-workspace task.",
+          "evidenceRefs": [
+            "locales.en.demandEvidence[0]",
+            "locales.en.demandEvidence[1]",
+            "locales.en.demandEvidence[2]",
+            "locales.en.demandEvidence[3]",
+            "locales.zh-TW.demandEvidence[1]",
+            "locales.zh-TW.demandEvidence[2]",
+            "locales.zh-CN.demandEvidence[1]",
+            "locales.zh-CN.demandEvidence[2]"
+          ]
+        },
+        "trilingualSerp": {
+          "status": "passed",
+          "reason": "Separate English, Taiwan Traditional-Chinese, and Simplified-Chinese result sets show one course-slides and notes task while exposing unsupported quiz, flashcard, audio, transcription, OCR, and exam-planning intent to exclude.",
+          "evidenceRefs": [
+            "locales.en.serpEvidence[0]",
+            "locales.zh-TW.serpEvidence[0]",
+            "locales.zh-CN.serpEvidence[0]"
+          ]
+        },
+        "cleanGap": {
+          "status": "passed",
+          "reason": "The research owner starts from papers and produces a literature matrix; the document-import owner teaches supported inputs; the LLM Wiki owner explains the general pattern. No current owner starts from one course's lecture slides and notes and produces a maintained course wiki with concept, prerequisite, source-revision, and review state.",
+          "evidenceRefs": [
+            "overlapCheck",
+            "docs/seo-audits/2026-08-31-next-scenario-demand-comparison.md"
+          ]
+        },
+        "firstPartyProof": {
+          "status": "passed",
+          "reason": "Maintained Wenlan source proves Markdown, text, text-extractable PDF, folders, read-only Obsidian sources, incremental sync, source-backed Pages, per-claim citations, wikilinks, stale refresh, reviewable revisions, and lint. The candidate excludes every study feature that source does not prove.",
+          "evidenceRefs": [
+            "/Users/lucian/Repos/wenlan/README.md:123-126",
+            "/Users/lucian/Repos/wenlan/README.md:207-221",
+            "/Users/lucian/Repos/wenlan/README.md:240-256"
+          ]
+        },
+        "standaloneUtility": {
+          "status": "passed",
+          "reason": "A neutral course-wiki workflow for readable materials, exact source links, concept and prerequisite pages, revision tracking, and manual review is useful without Wenlan.",
+          "evidenceRefs": [
+            "standaloneUtility"
+          ]
+        },
+        "internalLinks": {
+          "status": "passed",
+          "reason": "Three same-locale owners can link from document ingestion, the Karpathy or LLM Wiki implementation guide, and the paper-research workflow without changing their primary intent.",
+          "evidenceRefs": [
+            "internalLinks"
+          ]
+        },
+        "authorityPath": {
+          "status": "passed",
+          "reason": "The maintained awesome-ai-tools-for-students repository has AI Study and Learning Tools plus AI Note-Taking sections, asks for verifiable actively maintained tools with meaningful student use cases, and accepts normal pull requests. Acceptance and any backlink remain unknown and separately approval-gated.",
+          "evidenceRefs": [
+            "authorityPath",
+            "docs/seo-audits/2026-08-31-next-scenario-demand-comparison.md"
+          ]
+        }
+      },
+      "wenlanProof": [
+        {
+          "claim": "Wenlan follows the Karpathy LLM Wiki foundation and maintains Pages with provenance, citations, refresh, ownership, and review.",
+          "sourceRef": "/Users/lucian/Repos/wenlan/README.md:123-126",
+          "verification": "rg -n \"LLM-wiki v1|provenance, citations, refresh, ownership, and review|maintained Pages\" /Users/lucian/Repos/wenlan/README.md"
+        },
+        {
+          "claim": "Wenlan ingests Markdown, text, text-extractable PDFs, folders, and read-only Obsidian sources, tracks changes, and builds source-backed Markdown Pages with citations and wikilinks.",
+          "sourceRef": "/Users/lucian/Repos/wenlan/README.md:240-245",
+          "verification": "rg -n \"Document Sources|Incremental sync|Source-backed Pages|Citation-gated refresh\" /Users/lucian/Repos/wenlan/README.md"
+        }
+      ],
+      "standaloneUtility": "A neutral workflow can inventory one course's readable lecture materials, preserve source locations, create one concept per page, link prerequisites and contradictions, record the source revision, and review changes without requiring Wenlan or any AI study product.",
+      "overlapCheck": "Do not duplicate the paper-focused research knowledge-base owner, generic document ingestion, or the general Karpathy and LLM Wiki implementation guide. This page owns one course-material to maintained source-backed course-wiki task. It explicitly excludes flashcards, quizzes, audio, transcription, OCR, grading, tutoring, homework solving, exam planning, automatic academic judgments, and claims of NotebookLM equivalence.",
+      "internalLinks": [
+        "https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents",
+        "https://wenlan.app/learn/distilled-wiki-pages-ai-memory",
+        "https://wenlan.app/learn/source-backed-research-knowledge-base",
+        "https://wenlan.app/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
+        "https://wenlan.app/zh-TW/learn/distilled-wiki-pages-ai-memory",
+        "https://wenlan.app/zh-TW/learn/source-backed-research-knowledge-base",
+        "https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
+        "https://wenlan.app/zh-CN/learn/distilled-wiki-pages-ai-memory",
+        "https://wenlan.app/zh-CN/learn/source-backed-research-knowledge-base"
+      ],
+      "authorityPath": {
+        "type": "conditional-maintained-oss-listing",
+        "target": "https://github.com/sohailakhtar01/awesome-ai-tools-for-students — after separate website publication approval and live verification, propose one neutral Wenlan entry in the AI Study and Learning Tools or AI Note-Taking section through a normal pull request; disclose affiliation, describe only verified source-backed course-wiki capabilities, and do not claim flashcards, quizzes, audio, or NotebookLM equivalence; maintainer acceptance and any backlink are not assumed",
+        "status": "planned-not-published"
+      },
+      "nextResearchDirection": "Local deterministic, built-output, and rendered verification passed for the exact English, zh-TW, and zh-CN owner family. Stop for separate commit, push, PR, merge, Vercel deployment, and production-verification approval. Keep customer-support measurement independent, do not edit an existing owner, and do not submit the authority proposal, request indexing, mutate analytics, or publish externally without separate approval.",
       "readout": {
         "gsc": {
           "status": "unavailable",
