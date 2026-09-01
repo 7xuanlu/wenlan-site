@@ -4717,3 +4717,19 @@ unchanged.
   latest merge was `2026-06-17` and two newer submissions remain open, so the
   exact one-row Course Wiki proposal is prepared but not published. The
   proposal and two rejected alternatives are recorded in the same audit.
+
+## Campaign authority submission: Course Wiki student-tools PR at 2026-09-01T08:11:06Z
+
+- The user explicitly approved the control-plane publication and external
+  listing submission. GitHub identity was verified as `Qi-Xuan Lu`
+  (`7xuanlu`).
+- The exact one-row, affiliation-disclosed Course Wiki proposal was committed
+  as `052c297b2b811f2221dc9c03e6eee05becbe47a8` in the fork and opened upstream
+  as `bydeng01/student-gpt-tools#18`.
+- Source-native state at capture is open, non-draft, mergeable, with no review
+  decision and no status checks. It is not a merged or visibly rendered
+  listing, backlink, referral, crawl, indexing, rank, impression, click,
+  visitor, star, or causal result.
+- Wait for maintainer action and re-read the PR once at the next due Goal
+  boundary. Do not contact the maintainer again or count authority before an
+  upstream merge and visible render.

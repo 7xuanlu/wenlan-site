@@ -2,7 +2,7 @@
 
 ## Decision
 
-`REJECT the original target. PREPARE, but do not publish, one replacement proposal.`
+`REJECT the original target. SUBMIT the approved replacement proposal, then wait for the maintainer.`
 
 The predeclared target, `sohailakhtar01/awesome-ai-tools-for-students`, has relevant categories and contribution wording, but its source-native maintenance record does not support treating it as a credible authority path. No pull request, issue, or maintainer message was created.
 
@@ -71,4 +71,16 @@ Proposed pull-request disclosure:
 
 > Affiliation disclosure: this entry is submitted by a Wenlan project maintainer. Wenlan is a local, open-source knowledge system. The linked guide describes the bounded student Course Wiki workflow; Wenlan does not generate quizzes, flashcards, audio, transcripts, grades, tutoring answers, or exam plans.
 
-This proposal is deliberately one row, uses the repository's existing three-column format, links the exact Course Wiki owner, and does not claim endorsement, acceptance, traffic, ranking, or superiority. Creating a fork, branch, pull request, issue, or maintainer message requires separate explicit approval.
+This proposal is deliberately one row, uses the repository's existing three-column format, links the exact Course Wiki owner, and does not claim endorsement, acceptance, traffic, ranking, or superiority.
+
+## Approved submission result
+
+- The user explicitly approved the Wenlan control-plane publication and the external listing submission.
+- GitHub identity was verified as `Qi-Xuan Lu` (`7xuanlu`).
+- Fork: `7xuanlu/student-gpt-tools`.
+- Commit: `052c297b2b811f2221dc9c03e6eee05becbe47a8` (`Add Wenlan course wiki tool`).
+- Upstream pull request: `bydeng01/student-gpt-tools#18`, opened at `2026-09-01T08:11:06Z`.
+- Source-native state at capture: open, non-draft, mergeable, no review decision, and no status checks.
+- The exact destination returned HTTP 200 before submission.
+
+The pull request is not a merged listing, rendered backlink, referral, crawl, indexing, rank, impression, click, visitor, star, or causal result. Authority counts only if the row is merged and visibly rendered upstream. Do not contact the maintainer again or poll repeatedly without a due Goal boundary or new approval.
