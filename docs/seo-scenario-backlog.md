@@ -1394,11 +1394,11 @@ Demand discovery:
 - Desired outcome: Maintain a reviewable course wiki whose concept pages link to exact sources, show prerequisite relationships, and refresh when lecture material changes
 - Stage: `build`
 - Decision: `net-new`
-- Planned window: `next-eligible-authority-backed-window-after-2026-08-31`
-- Publication: `prepared`
+- Planned window: `2026-08-29..2026-09-04-published`
+- Publication: `measuring`
 - Standalone utility: A neutral workflow can inventory one course's readable lecture materials, preserve source locations, create one concept per page, link prerequisites and contradictions, record the source revision, and review changes without requiring Wenlan or any AI study product.
 - Overlap check: Do not duplicate the paper-focused research knowledge-base owner, generic document ingestion, or the general Karpathy and LLM Wiki implementation guide. This page owns one course-material to maintained source-backed course-wiki task. It explicitly excludes flashcards, quizzes, audio, transcription, OCR, grading, tutoring, homework solving, exam planning, automatic academic judgments, and claims of NotebookLM equivalence.
-- Next research: Local deterministic, built-output, and rendered verification passed for the exact English, zh-TW, and zh-CN owner family. Stop for separate commit, push, PR, merge, Vercel deployment, and production-verification approval. Keep customer-support measurement independent, do not edit an existing owner, and do not submit the authority proposal, request indexing, mutate analytics, or publish externally without separate approval.
+- Next research: PR #166 merged at 2026-09-01T04:25:50Z as 9b12ad73eb51c95d013e69e455c1a67d03f0e08d; Vercel production completed at 2026-09-01T04:26:43Z. Keep that fixed production boundary, run the 24-hour technical and indexability observation after 2026-09-02T04:26:43Z, and run the seven-day source-native GSC page/query and Vercel page/referrer observation after 2026-09-08T04:26:43Z. Keep the conditional awesome-ai-tools-for-students proposal, request indexing, GSC validation, analytics mutation, maintainer contact, paid actions, synthetic events, and every other external action separately gated.
 
 ### Locale intent and ownership
 
@@ -1487,7 +1487,7 @@ Demand discovery:
 - Publication: `measuring`
 - Standalone utility: A neutral team can maintain a metric dictionary that records the metric name, definition, non-executable formula text, grain, dimensions, exclusions, owner, source IDs and revisions, review state, and superseded version without using Wenlan.
 - Overlap check: Do not duplicate generic document ingestion, citation verification, investment research, or multi-agent write-conflict owners. This page owns approved KPI specifications to one reviewed metric-definition wiki. It explicitly excludes CSV, YAML, SQL, warehouse and BI ingestion, metric computation, lineage, data-quality monitoring, permissions, approval workflows, and automatic reconciliation.
-- Next research: PR #167 merged at 2026-09-01T05:07:45Z as 7664d1a3d3578533fab8aed626856930e3d04b11; Vercel production completed at 2026-09-01T05:08:53Z. Keep that fixed production boundary, run the 24-hour technical and indexability observation after 2026-09-02T05:08:53Z, and run the seven-day source-native GSC page/query and Vercel page/referrer observation after 2026-09-08T05:08:53Z. Keep the Wenlan source README authority path, request indexing, GSC validation, analytics mutation, maintainer contact, paid actions, synthetic events, and every other external action separately gated.
+- Next research: PR #167 merged at 2026-09-01T05:07:45Z as 7664d1a3d3578533fab8aed626856930e3d04b11; Vercel production completed at 2026-09-01T05:08:53Z. Wenlan source PR #655 merged at 2026-09-01T06:53:31Z as e450c4371f224802666a53e4dcbe7b4990935ca8 and visibly renders the three same-locale Workflow guide links. Keep the site production boundary fixed, run the 24-hour technical and indexability observation after 2026-09-02T05:08:53Z, and run the seven-day source-native GSC page/query and Vercel page/referrer observation after 2026-09-08T05:08:53Z. Keep request indexing, GSC validation, analytics mutation, maintainer contact, paid actions, synthetic events, and every other external action separately gated.
 
 ### Locale intent and ownership
 
@@ -1556,6 +1556,6 @@ Demand discovery:
 
 ### Authority path and readout
 
-- Authority path: maintained-first-party-source-link — After the three pages are live and production-verified, separately propose one natural same-locale link in the Workflow guides lists of README.md, README.zh-Hant.md, and README.zh-Hans.md; source-repository commit, push, PR, merge, and release remain separately approval-gated, translation sync is required, and no external backlink is assumed (planned-not-published).
+- Authority path: maintained-first-party-source-link — PR #655 merged at 2026-09-01T06:53:31Z as e450c4371f224802666a53e4dcbe7b4990935ca8 and visibly renders one natural same-locale Business Metric Guide link in the Workflow guides lists of README.md, README.zh-Hant.md, and README.zh-Hans.md; translation sync passed, no Wenlan release was created, and no referral, crawl, backlink, rank, or causal effect is assumed (published).
 - GSC: unavailable; native unit: per-locale page impressions, joined-query impressions, clicks.
 - Vercel: unavailable; native unit: per-locale target-page visitors and referrer visitors.

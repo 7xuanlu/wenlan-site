@@ -678,9 +678,10 @@ action returns for separate explicit approval.
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
   `EXP-2026-09-01-business-metric-definition-knowledge-base-locales` is the
-  unique locally prepared production-in-flight experiment. It is not
-  published and consumes the production slot until exact verification and a
-  separate publication decision.
+  latest live, production-verified, measuring experiment from the fixed
+  `2026-09-01T05:08:53Z` boundary. PR #167 merged as
+  `7664d1a3d3578533fab8aed626856930e3d04b11`; it no longer consumes the
+  production slot, which is open.
   `EXP-2026-08-31-course-wiki-from-lecture-notes-locales` is live,
   production-verified, and measuring from the fixed
   `2026-09-01T04:26:43Z` boundary. PR #166 merged as
@@ -1314,14 +1315,16 @@ Supporting quality split for the same live range:
 ### Current experiment
 
 `EXP-2026-09-01-business-metric-definition-knowledge-base-locales` is the
-unique production-in-flight experiment. Its English, zh-TW, and zh-CN owners
-are local preparation only. They turn approved Markdown, text, and
-text-extractable PDF metric specifications into a reviewable metric-definition
-wiki with formula text, grain, exclusions, owner, source revision, review
-state, and supersession. Warehouse discovery, BI integration, SQL or metric
-execution, lineage, data-quality monitoring, permissions, and automatic
-approval or reconciliation are excluded. Finish deterministic and rendered
-checks, then stop for separate publication approval.
+latest live, production-verified, measuring experiment from the fixed
+`2026-09-01T05:08:53Z` boundary. Its English, zh-TW, and zh-CN owners turn
+approved Markdown, text, and text-extractable PDF metric specifications into a
+reviewable metric-definition wiki with formula text, grain, exclusions, owner,
+source revision, review state, and supersession. Warehouse discovery, BI
+integration, SQL or metric execution, lineage, data-quality monitoring,
+permissions, and automatic approval or reconciliation remain excluded. The
+production slot is open; the next due observations remain the 24-hour boundary
+after `2026-09-02T05:08:53Z` and the seven-day boundary after
+`2026-09-08T05:08:53Z`.
 
 ### Latest measuring publication
 
@@ -4656,3 +4659,38 @@ unchanged.
 - The Wenlan source README authority link, request indexing, GSC validation,
   analytics mutation, maintainer contact, paid actions, synthetic events, and
   every other external action remain excluded.
+
+## Campaign authority approval: business metric definition README links at 2026-09-01T06:49:30Z
+
+- The user approved the predeclared maintained first-party authority path and
+  the control-plane state correction. The publication scope is one natural
+  same-locale Business Metric Guide link in Wenlan source `README.md`,
+  `README.zh-Hant.md`, and `README.zh-Hans.md`, plus only the mechanical
+  translated-README sync-marker update required by that repository.
+- The same correction marks Course Wiki and Business Metric as live,
+  production-verified, and measuring, with the production slot open. It does
+  not alter either fixed production boundary or any metric definition.
+- Commit, push, PR, merge, and read-only GitHub rendering verification are
+  approved for those exact README and control-plane files. A Wenlan release,
+  site-page edit, request indexing, GSC validation, analytics mutation,
+  maintainer contact, paid action, synthetic event, and every other external
+  action remain excluded.
+
+## Campaign authority publication: business metric definition README links at 2026-09-01T06:54:33Z
+
+- Wenlan source PR #655 merged at `2026-09-01T06:53:31Z` as
+  `e450c4371f224802666a53e4dcbe7b4990935ca8` after its docs-provenance check
+  passed. The integrated commit passes the translated-README sync check and its
+  self-test.
+- GitHub main visibly renders the English, Traditional-Chinese, and
+  Simplified-Chinese Business Metric Guide links. Their locale-matched
+  `wenlan.app` targets each returned a direct 200 before publication. The
+  Spanish README content is unchanged; only its required English-source sync
+  marker advanced.
+- This proves a maintained first-party source link, not a referral, crawl,
+  indexing, rank, impression, click, visitor, star, backlink acceptance, or
+  causal result. The site measurement boundary remains
+  `2026-09-01T05:08:53Z`.
+- No Wenlan release, site-page edit, request indexing, GSC validation,
+  analytics mutation, maintainer contact, paid action, synthetic event, or
+  other external action occurred.
