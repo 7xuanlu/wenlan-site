@@ -9159,3 +9159,17 @@ increase for that experiment.
 - Decision: wait
 - Next step: Keep `2026-09-01T05:08:53Z` as the fixed site production boundary. Record the 24-hour technical and indexability observation after `2026-09-02T05:08:53Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-08T05:08:53Z`; keep the new GitHub source link as a separate authority observation. Do not create a Wenlan release, edit a site page, request indexing, submit GSC validation, mutate analytics, contact maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-31-course-wiki-from-lecture-notes-locales authority-path gate
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-31-course-wiki-from-lecture-notes-locales
+- Observed at: 2026-09-01T07:13:17Z
+- Readout: correction
+- Status: measuring
+- Evidence: The predeclared `sohailakhtar01/awesome-ai-tools-for-students` authority target was checked source-natively before any submission. Its current README has relevant AI Study and Learning plus AI Note-Taking categories, its contribution rules require a maintained non-duplicate student tool with a real free tier, honest limitations, first-hand use, and affiliation disclosure, and Wenlan is not currently listed. However, the repository has 0 stars, 3 forks, one initial commit dated 2026-05-10, no merged pull requests, and three unattended open pull requests (#1 since 2026-06-01, #2 since 2026-06-02, and draft #4 since 2026-07-31). These are GitHub-native repository observations, not GSC data, search volume, backlink value, referral traffic, or causal evidence.
+- Result: failure
+- Decision: stop
+- Next step: Do not submit to or contact the rejected repository. Replacement research selected `bydeng01/student-gpt-tools` as the best conditional match: 85 stars, 15 forks, six merged pull requests including external tool submissions, last merge 2026-06-17, and two newer open submissions. The exact neutral one-row proposal and affiliation disclosure are prepared in `docs/seo-audits/2026-09-01-course-wiki-authority-gate.md`, but creating a fork, branch, pull request, issue, or maintainer message remains separately approval-gated. Keep the Course Wiki measurement boundary at `2026-09-01T04:26:43Z` and run due readouts on schedule.
+<!-- EXPERIMENT-RECORD:END -->

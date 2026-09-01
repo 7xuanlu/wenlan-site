@@ -84,7 +84,20 @@ test("course-slide family preserves the source-backed study-wiki boundary", () =
     "every course-slide candidate gate must pass",
   );
   assert.equal(family.internalLinks.length, 9);
-  assert.match(family.authorityPath.target, /awesome-ai-tools-for-students/i);
+  assert.match(family.authorityPath.target, /bydeng01\/student-gpt-tools/i);
+  assert.equal(family.authorityPath.status, "planned-not-published");
+  assert.match(
+    family.authorityPath.target,
+    /85 stars|15 forks|six merged pull requests|last merge 2026-06-17/i,
+  );
+  assert.match(
+    family.nextResearchDirection,
+    /awesome-ai-tools-for-students.*failed|neutral one-row proposal/i,
+  );
+  assert.match(
+    family.gates.authorityPath.reason,
+    /original.*rejected|external tool submissions|not approved or published/i,
+  );
   assert.match(
     family.overlapCheck,
     /flashcards|quizzes|audio|transcription|exam planning/i,

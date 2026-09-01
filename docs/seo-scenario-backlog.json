@@ -4542,10 +4542,11 @@
         },
         "authorityPath": {
           "status": "passed",
-          "reason": "The maintained awesome-ai-tools-for-students repository has AI Study and Learning Tools plus AI Note-Taking sections, asks for verifiable actively maintained tools with meaningful student use cases, and accepts normal pull requests. Acceptance and any backlink remain unknown and separately approval-gated.",
+          "reason": "The original awesome-ai-tools-for-students target was rejected source-natively before submission. Replacement research found bydeng01/student-gpt-tools: it directly serves students and researchers, has 85 stars and 15 forks, and has merged six pull requests including external tool submissions. Its latest merge was 2026-06-17 and two newer submissions remain open, so the neutral one-row proposal is prepared but not approved or published.",
           "evidenceRefs": [
             "authorityPath",
-            "docs/seo-audits/2026-08-31-next-scenario-demand-comparison.md"
+            "docs/seo-audits/2026-08-31-next-scenario-demand-comparison.md",
+            "docs/seo-audits/2026-09-01-course-wiki-authority-gate.md"
           ]
         }
       },
@@ -4575,11 +4576,11 @@
         "https://wenlan.app/zh-CN/learn/source-backed-research-knowledge-base"
       ],
       "authorityPath": {
-        "type": "conditional-maintained-oss-listing",
-        "target": "https://github.com/sohailakhtar01/awesome-ai-tools-for-students — after separate website publication approval and live verification, propose one neutral Wenlan entry in the AI Study and Learning Tools or AI Note-Taking section through a normal pull request; disclose affiliation, describe only verified source-backed course-wiki capabilities, and do not claim flashcards, quizzes, audio, or NotebookLM equivalence; maintainer acceptance and any backlink are not assumed",
+        "type": "conditional-maintained-student-listing",
+        "target": "https://github.com/bydeng01/student-gpt-tools — propose one disclosed, neutral Wenlan row in General Study only after separate approval; current source-native evidence is 85 stars, 15 forks, six merged pull requests including external tool submissions, last merge 2026-06-17, and two newer open submissions; do not claim acceptance, backlink value, or referral traffic",
         "status": "planned-not-published"
       },
-      "nextResearchDirection": "PR #166 merged at 2026-09-01T04:25:50Z as 9b12ad73eb51c95d013e69e455c1a67d03f0e08d; Vercel production completed at 2026-09-01T04:26:43Z. Keep that fixed production boundary, run the 24-hour technical and indexability observation after 2026-09-02T04:26:43Z, and run the seven-day source-native GSC page/query and Vercel page/referrer observation after 2026-09-08T04:26:43Z. Keep the conditional awesome-ai-tools-for-students proposal, request indexing, GSC validation, analytics mutation, maintainer contact, paid actions, synthetic events, and every other external action separately gated.",
+      "nextResearchDirection": "PR #166 merged at 2026-09-01T04:25:50Z as 9b12ad73eb51c95d013e69e455c1a67d03f0e08d; Vercel production completed at 2026-09-01T04:26:43Z. Keep that fixed production boundary, run the 24-hour technical and indexability observation after 2026-09-02T04:26:43Z, and run the seven-day source-native GSC page/query and Vercel page/referrer observation after 2026-09-08T04:26:43Z. The awesome-ai-tools-for-students target failed the source-native maintenance gate and must not receive a submission. A neutral one-row proposal for bydeng01/student-gpt-tools is prepared in the authority audit because it has direct audience fit and demonstrated external merges; its latest merge was 2026-06-17, so acceptance and timing remain unknown. External submission, maintainer contact, request indexing, GSC validation, analytics mutation, paid actions, synthetic events, and every other external action remain separately gated.",
       "readout": {
         "gsc": {
           "status": "unavailable",

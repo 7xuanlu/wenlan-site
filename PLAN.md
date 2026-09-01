@@ -4694,3 +4694,26 @@ unchanged.
 - No Wenlan release, site-page edit, request indexing, GSC validation,
   analytics mutation, maintainer contact, paid action, synthetic event, or
   other external action occurred.
+
+## Campaign authority gate: Course Wiki OSS listing at 2026-09-01T07:13:17Z
+
+- The predeclared `sohailakhtar01/awesome-ai-tools-for-students` target was
+  checked source-natively before any submission. Its README categories and
+  contribution format fit the student Course Wiki task, and Wenlan is not
+  already listed.
+- The maintenance and reach gate failed: the repository has 0 stars, one
+  initial commit, no merged pull requests, and three unattended open pull
+  requests. The target is now `rejected-inactive`; no pull request, issue, or
+  maintainer message was created.
+- Exact repository counts, timestamps, rules, and interpretation boundaries
+  are recorded in
+  `docs/seo-audits/2026-09-01-course-wiki-authority-gate.md`.
+- Next research must find a student, course-material, or LLM-Wiki authority
+  surface with direct audience fit, recent maintainer activity, and visible
+  review or merge cadence. A replacement submission remains separately
+  approval-gated.
+- The best current replacement is `bydeng01/student-gpt-tools`: 85 stars, 15
+  forks, six merged pull requests, and demonstrated external tool merges. Its
+  latest merge was `2026-06-17` and two newer submissions remain open, so the
+  exact one-row Course Wiki proposal is prepared but not published. The
+  proposal and two rejected alternatives are recorded in the same audit.
