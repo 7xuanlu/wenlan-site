@@ -546,6 +546,7 @@ test("localized Learn slug route supports per-locale acquisition page availabili
     "/learn/build-ict-supplier-due-diligence-evidence-pack",
     "/learn/build-customer-support-answer-knowledge-base",
     "/learn/build-course-wiki-from-lecture-notes",
+    "/learn/build-business-metric-definition-knowledge-base",
   ]);
   assert.match(source, /getLocalizedLearnArticle/);
   assert.match(source, /TRANSLATED_LEARN_SLUGS/);
@@ -945,6 +946,14 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
     {
       locale: "zh-CN",
       slug: "build-course-wiki-from-lecture-notes",
+    },
+    {
+      locale: "zh-TW",
+      slug: "build-business-metric-definition-knowledge-base",
+    },
+    {
+      locale: "zh-CN",
+      slug: "build-business-metric-definition-knowledge-base",
     },
   ]);
 
@@ -2003,7 +2012,7 @@ test("localized acquisition copy keeps CJK semantic phrases together on mobile",
   assert.equal(protectedHeadings.length, 2);
   assert.match(
     source,
-    /split\(\/\(Karpathy LLM Wiki：\|課程 Wiki\|课程 Wiki\|課堂講義\|课程讲义\|先備知識\|前置知识\|來源修訂\|来源修订\|供應商盡職調查\|供应商尽职调查\|證據包\|证据包\|複審\|复审\|SRE 事故知識庫\|SRE 故障知识库\|與事故復盤\|与故障复盘\|事故復盤\|故障复盘\|客戶專案知識庫\|客户项目知识库\|競品檔案\|竞品档案\|顧問案\|咨询项目\|研究知識庫\|研究知识库\|產品研究\|产品研究\|產品決策\|产品决策\|論文 PDF\|论文 PDF\|文獻矩陣\|文献矩阵\|AI 知識庫\|AI 知识库\|客服答案知識庫\|客服答案知识库\|知識庫\|知识库\|驗收資料\|验收资料\|證據\|证据\|追溯\|8 項\|8 项\|來源\|来源\|記什麼？\|记录什么？\|不可承諾\|不可承诺\|禁止承诺\|轉人工\|转人工\)\/g\)/,
+    /split\(\/\(Karpathy LLM Wiki：\|課程 Wiki\|课程 Wiki\|課堂講義\|课程讲义\|先備知識\|前置知识\|指標定義\|指标定义\|資料字典\|数据字典\|來源修訂\|来源修订\|供應商盡職調查\|供应商尽职调查\|證據包\|证据包\|複審\|复审\|SRE 事故知識庫\|SRE 故障知识库\|與事故復盤\|与故障复盘\|事故復盤\|故障复盘\|客戶專案知識庫\|客户项目知识库\|競品檔案\|竞品档案\|顧問案\|咨询项目\|研究知識庫\|研究知识库\|產品研究\|产品研究\|產品決策\|产品决策\|論文 PDF\|论文 PDF\|文獻矩陣\|文献矩阵\|AI 知識庫\|AI 知识库\|客服答案知識庫\|客服答案知识库\|知識庫\|知识库\|驗收資料\|验收资料\|證據\|证据\|追溯\|8 項\|8 项\|來源\|来源\|記什麼？\|记录什么？\|不可承諾\|不可承诺\|禁止承诺\|轉人工\|转人工\)\/g\)/,
   );
   assert.match(
     source,
@@ -3208,6 +3217,81 @@ test("course wiki article owns one bounded trilingual lecture-material scenario"
     "课程讲义",
     "先備知識",
     "前置知识",
+    "來源修訂",
+    "来源修订",
+  ]) {
+    assert.match(
+      renderer,
+      new RegExp(`part === "${protectedTerm}"`),
+      `protected CJK phrase: ${protectedTerm}`,
+    );
+  }
+});
+
+test("business metric definition article owns one bounded trilingual data-dictionary task", async () => {
+  const [{ articles }, { getLocalizedLearnArticle }] = await Promise.all([
+    import("../src/app/(en)/learn/articles.ts"),
+    import("../src/i18n/learn-articles.ts"),
+  ]);
+  const slug = "build-business-metric-definition-knowledge-base";
+  const english = articles.find((article) => article.slug === slug);
+
+  assert.ok(english, "English business metric definition article");
+  assert.equal(english.title, "How to Build a Business Metric Definition Knowledge Base");
+  assert.equal(english.publishedAt, "2026-09-01");
+  assert.equal(english.updatedAt, "2026-09-01");
+  assert.match(
+    JSON.stringify(english),
+    /data dictionary|metric definition|formula|grain|dimensions|exclusions|owner|source revision|review state|supersedes/i,
+  );
+  assert.match(
+    JSON.stringify(english),
+    /does not ingest CSV|does not run SQL|does not connect to a warehouse|does not compute metrics|does not provide lineage|does not monitor data quality|does not manage permissions|does not approve|does not automatically reconcile/i,
+  );
+  assert.ok(english.productEvidence, "English product evidence");
+  assert.equal(
+    english.productEvidence.image.src,
+    "/images/product-evidence/wenlan-space-review-fixture.png",
+  );
+  assert.equal(english.productEvidence.workflow.length, 3);
+  assert.equal(english.productEvidence.artifactRows.length, 3);
+  assert.ok(english.relatedSlugs.length >= 3);
+
+  for (const [locale, titlePattern] of [
+    ["zh-TW", /建立商業指標定義知識庫/],
+    ["zh-CN", /建立业务指标定义知识库/],
+  ]) {
+    const article = getLocalizedLearnArticle(locale, slug);
+    assert.ok(article, `${locale} business metric definition article`);
+    assert.match(article.title, titlePattern);
+    assert.equal(article.publishedAt, "2026-09-01");
+    assert.equal(article.updatedAt, "2026-09-01");
+    assert.match(
+      JSON.stringify(article),
+      /資料字典|数据字典|指標定義|指标定义|公式|粒度|維度|维度|排除|負責人|负责人|來源修訂|来源修订|複核|审核|取代|替代/i,
+    );
+    assert.match(
+      JSON.stringify(article),
+      /不會導入 CSV|不会导入 CSV|不會執行 SQL|不会执行 SQL|不會連接資料倉儲|不会连接数据仓库|不會計算指標|不会计算指标|不會提供血緣|不会提供血缘|不會監控資料品質|不会监控数据质量|不會管理權限|不会管理权限|不會自動核准|不会自动批准|不會自動調和|不会自动协调/i,
+    );
+    assert.ok(article.productEvidence, `${locale} product evidence`);
+    assert.equal(
+      article.productEvidence.image.src,
+      "/images/product-evidence/wenlan-space-review-fixture.png",
+    );
+    assert.ok(article.relatedSlugs.length >= 3);
+  }
+
+  const renderer = await readFile(
+    resolve(repoRoot, "src/app/[locale]/learn/[slug]/page.tsx"),
+    "utf8",
+  );
+  assert.match(renderer, /article\.slug === "build-business-metric-definition-knowledge-base"/);
+  for (const protectedTerm of [
+    "指標定義",
+    "指标定义",
+    "資料字典",
+    "数据字典",
     "來源修訂",
     "来源修订",
   ]) {

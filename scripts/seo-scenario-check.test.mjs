@@ -26,15 +26,40 @@ test("canonical trilingual scenario backlog is complete and generated report is 
   });
 
   assert.deepEqual(result.errors, []);
-  assert.equal(backlog.families.length, 17);
+  assert.equal(backlog.families.length, 18);
   assert.equal(
     backlog.families.at(-1)?.id,
-    "course-slides-source-backed-llm-wiki",
+    "business-metric-definition-knowledge-base",
   );
   assert.equal(backlog.campaign.baseline.sitemapUrls, 120);
-  assert.equal(sitemapRows.length, 165);
+  assert.equal(sitemapRows.length, 168);
   assert.equal(result.sitemapCount, sitemapRows.length);
   assert.equal(renderScenarioBacklog(backlog), report);
+});
+
+test("business metric family preserves one files-first trilingual definition task", () => {
+  const family = backlog.families.find(
+    (candidate) => candidate.id === "business-metric-definition-knowledge-base",
+  );
+
+  assert.ok(family, "business metric definition scenario family");
+  assert.match(family.audience, /data|analytics|product|finance|operations/i);
+  assert.match(family.trigger, /metric|formula|grain|exclusion|owner/i);
+  assert.match(family.userTask, /metric-definition wiki|data dictionary/i);
+  assert.match(family.desiredOutcome, /citation|version|review|supersed/i);
+  assert.equal(family.decision, "net-new");
+  assert.equal(family.publicationStatus, "prepared");
+  assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
+  assert.ok(
+    Object.values(family.gates).every((gate) => gate.status === "passed"),
+    "every business metric candidate gate must pass",
+  );
+  assert.equal(family.internalLinks.length, 9);
+  assert.match(family.authorityPath.target, /README\.zh-Hant\.md|Workflow guides/i);
+  assert.match(
+    family.overlapCheck,
+    /CSV|SQL|warehouse|BI|lineage|automatic reconciliation/i,
+  );
 });
 
 test("course-slide family preserves the source-backed study-wiki boundary", () => {

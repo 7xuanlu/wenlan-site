@@ -24,6 +24,7 @@ const expectedOkRoutes = [
   "/zh-TW/learn/source-backed-research-knowledge-base",
   "/zh-TW/learn/build-customer-support-answer-knowledge-base",
   "/zh-TW/learn/build-course-wiki-from-lecture-notes",
+  "/zh-TW/learn/build-business-metric-definition-knowledge-base",
   "/zh-CN",
   "/zh-CN/about",
   "/zh-CN/download",
@@ -40,6 +41,7 @@ const expectedOkRoutes = [
   "/zh-CN/learn/source-backed-research-knowledge-base",
   "/zh-CN/learn/build-customer-support-answer-knowledge-base",
   "/zh-CN/learn/build-course-wiki-from-lecture-notes",
+  "/zh-CN/learn/build-business-metric-definition-knowledge-base",
 ];
 
 const expectedNotFoundRoutes = [

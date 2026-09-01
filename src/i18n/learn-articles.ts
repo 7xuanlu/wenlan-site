@@ -113,6 +113,7 @@ const zhTWArticles = {
     relatedSlugs: [
       "source-backed-wiki-pages-ai-work",
       "verify-ai-knowledge-base-citations",
+      "build-business-metric-definition-knowledge-base",
       "distilled-wiki-pages-ai-memory",
       "choose-ai-knowledge-base-tool",
     ],
@@ -518,6 +519,7 @@ const zhTWArticles = {
       "distilled-wiki-pages-ai-memory",
       "when-ai-agent-should-query-knowledge-base",
       "verify-ai-knowledge-base-citations",
+      "build-business-metric-definition-knowledge-base",
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
@@ -1664,6 +1666,7 @@ const zhTWArticles = {
       "build-sre-incident-knowledge-base",
       "build-ict-supplier-due-diligence-evidence-pack",
       "build-customer-support-answer-knowledge-base",
+      "build-business-metric-definition-knowledge-base",
       "build-course-wiki-from-lecture-notes",
     ],
     officialReferences: [
@@ -2986,6 +2989,132 @@ const zhTWArticles = {
       body: "加入一小組核准來源，維護一頁有先備知識與確切來源的概念，再於課件變動後複核。",
     },
   },
+  "build-business-metric-definition-knowledge-base": {
+    slug: "build-business-metric-definition-knowledge-base",
+    eyebrow: "指標定義工作流",
+    category: "Workflows",
+    title: "建立商業指標定義知識庫",
+    description:
+      "把核准的 KPI 規格整理成有來源的資料字典，保留公式文字、粒度、維度、排除條件、負責人、來源修訂與複核狀態。",
+    metaTitle: "如何建立商業指標定義知識庫與資料字典 | Wenlan",
+    metaDescription:
+      "從核准檔案建立可複核的指標定義知識庫，記錄公式、粒度、維度、排除條件、負責人、引用、版本與取代關係。",
+    keywords: [
+      "建立商業指標定義知識庫",
+      "資料字典 指標口徑",
+      "AI agent 指標定義",
+      "KPI 定義範本",
+      "商業詞彙表",
+      "有來源資料字典",
+    ],
+    publishedAt: "2026-09-01",
+    updatedAt: "2026-09-01",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分鐘閱讀",
+    audience: "需要為人員與 AI agent 解決 KPI 定義衝突的資料、分析、產品、財務與營運團隊",
+    heroBullets: [
+      "從核准的指標規格開始，不從儀表板或推測公式開始。",
+      "把公式文字、粒度、維度、排除條件、負責人與來源修訂放在同一筆紀錄。",
+      "明確取代過期定義，不讓 AI agent 把衝突版本混成一個答案。",
+    ],
+    sections: [
+      {
+        heading: "先說結論：一個指標配一筆有來源、可取代的定義紀錄",
+        body: [
+          "每個商業指標維護一筆可複核紀錄：商業定義、不可執行的公式文字、粒度、維度、納入與排除條件、負責人、確切來源與來源修訂、複核狀態，以及它取代的舊定義。兩份核准來源互相衝突時，先保留衝突並交給具名負責人判斷，不讓 AI 自動調和。",
+          "Wenlan 可以讀取核准的 Markdown、文字與可擷取文字 PDF，建立有來源 Pages、保留引用與來源修訂、執行 provenance lint 並留下可審查版本。它不會導入 CSV 或 YAML、不會執行 SQL、不會連接資料倉儲或 BI、不會計算指標、不會提供血緣、不會監控資料品質、不會管理權限、不會自動核准，也不會自動調和衝突。",
+        ],
+        link: { label: "查看指標定義證據工作流", href: "#product-evidence" },
+      },
+      {
+        heading: "為什麼同名 KPI 仍可能不是同一件事",
+        body: [
+          "活躍客戶、淨收入或轉換率可能同時出現在財務備忘錄、分析規格、產品儀表板說明與營運手冊，但公式、粒度、時間窗、排除條件或負責人各不相同。把它們整理成一段流暢摘要，反而會隱藏真正需要決策的差異。",
+          "可維護的資料字典應該讓每個版本回到確切來源，清楚標記目前有效、過期、矛盾或未解，並在新版核准後保留舊版本與取代關係。即使不用 Wenlan，這也是可獨立採用的指標治理基本紀錄。",
+        ],
+      },
+      {
+        heading: "建立核准規格到指標紀錄的閉環",
+        body: [
+          "先選一組指標與少量核准檔案。這個工作流只負責定義查找與衝突處理，不建立所有資料表、儀表板或即時運算的目錄。",
+        ],
+        bullets: [
+          "先記錄指標名稱、商業問題、核准來源、排除系統、具名負責人與複核人。",
+          "只加入核准的 Markdown、文字或可擷取文字 PDF；CSV、YAML、SQL、資料倉儲 metadata 與 API 不在這個流程。",
+          "把公式寫成可複核文字，並記錄粒度、維度、時間窗、納入、排除與例外。",
+          "每個重要欄位連回 source ID、確切標題或頁碼、來源修訂與生效日期。",
+          "來源衝突時保留兩個版本，標成矛盾或未解，不自行平均或合併。",
+          "負責人選定目前版本後，記錄取代的舊定義、保留歷史版本並設定下次複核條件。",
+        ],
+        code: {
+          label: "完成 Wenlan 與 AI 用戶端設定後",
+          code: "wenlan status\nwenlan sources add ~/Metrics/approved-specifications\n# 在 Wenlan plugin client 中：\n/distill <指標定義>\n/pages <指標名稱>\n/lint\n/curate\n\nmetric: activated customer\nbusiness_definition: <核准來源真正定義的意義>\nformula_text: <不可執行的公式文字>\ngrain: <帳戶 | workspace | 使用者 | 事件>\ndimensions: <允許的拆分維度>\ninclusions: <納入狀態或事件>\nexclusions: <排除狀態、事件或時間窗>\nowner: <負責團隊或複核人>\nsources: <source ID 與確切位置>\nsource_revision: <版本或生效日期>\nreview_state: <目前有效 | 過期 | 矛盾 | 未解>\nsupersedes: <舊定義或無>\nnext_review: <來源變更條件或日期>",
+        },
+      },
+      {
+        heading: "指標紀錄應該保留什麼",
+        body: [
+          "一筆可用紀錄不只是一句定義。它要讓讀者知道公式文字在什麼粒度成立、哪些狀態被排除、誰有權決定目前版本，以及這個版本依據哪份來源。",
+        ],
+      },
+      {
+        heading: "知道這不是資料目錄、BI 或計算引擎",
+        body: [
+          "Wenlan 不會導入 CSV、不會執行 SQL、不會連接資料倉儲、不會同步 BI 或 semantic layer、不會計算 KPI、不會提供欄位血緣、不會監控資料品質、不會管理權限、不會自動核准定義，也不會自動調和衝突公式。具名領域負責人仍要做商業判斷與最終複核。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "這會連接資料倉儲、BI 或 metric store 嗎？",
+        answer: "不會。這個流程使用核准的 Markdown、文字與可擷取文字 PDF。Wenlan 不會探索資料表、不會執行 SQL、不會計算 KPI，也不會同步資料倉儲、BI、semantic layer 或 metric store。",
+      },
+      {
+        question: "兩份核准指標定義互相衝突時怎麼辦？",
+        answer: "保留兩份有引用的定義，記錄公式、粒度、排除條件、負責人與來源修訂，並標成矛盾或未解。由具名領域負責人決定哪個版本成為目前定義，並記錄它取代的舊版本。",
+      },
+    ],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "verify-ai-knowledge-base-citations",
+      "prevent-multi-agent-knowledge-conflicts",
+      "build-investment-research-knowledge-base",
+    ],
+    officialReferences: [
+      { label: "Wenlan 支援的文件來源", href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in" },
+      { label: "Wenlan 有來源 Pages", href: "https://wenlan.app/docs/source-backed-pages" },
+      { label: "Wenlan 複核與信任", href: "https://wenlan.app/docs/review-and-trust" },
+      { label: "台灣資料集詮釋資料標準指引", href: "https://file.data.gov.tw/content/%E8%B3%87%E6%96%99%E9%9B%86%E8%A9%AE%E9%87%8B%E8%B3%87%E6%96%99%E6%A8%99%E6%BA%96%E6%8C%87%E5%BC%95.pdf" },
+    ],
+    productEvidence: {
+      heading: "信任指標前，先檢查來源修訂與複核狀態",
+      summary: "這是 Wenlan App 確定性測試資料的真實桌面畫面，不是公司的分析或財務工作區。畫面顯示帶有來源數量的 Pages 與複核佇列，可用同一產品介面讓衝突或修訂後的指標證據保持可見。",
+      image: {
+        src: "/images/product-evidence/wenlan-space-review-fixture.png",
+        alt: "Wenlan 桌面 Space 顯示帶有來源數量的 Pages，以及來源變更與矛盾證據的複核佇列。",
+        caption: "Wenlan App 確定性測試資料的真實畫面。這是通用產品示例，不是即時資料目錄或公司指標紀錄。",
+        width: 1586,
+        height: 992,
+      },
+      workflow: [
+        { label: "固定核准規格", detail: "選定一組指標、允許的定義檔、排除系統、具名負責人與複核人。" },
+        { label: "整理一筆定義", detail: "把定義、公式文字、粒度、維度、排除條件、引用、來源修訂與衝突放在同一頁。" },
+        { label: "複核後再取代", detail: "打開引用來源，檢查矛盾與過期狀態，再標記目前定義並保留被取代版本。" },
+      ],
+      artifactHeading: "商業指標紀錄示例",
+      artifactNote: "這個中立範本不會計算 KPI。請用核准規格與具名領域複核人替換每個欄位。",
+      artifactRows: [
+        { label: "意義與公式文字", detail: "商業定義、不可執行公式、粒度、維度、納入、排除與例外。" },
+        { label: "負責人與來源", detail: "負責人、確切 source ID 與位置、來源修訂和生效日期。" },
+        { label: "複核與取代", detail: "目前有效、過期、矛盾或未解，附複核人、被取代版本與下次複核條件。" },
+      ],
+      action: { label: "查看指標定義證據工作流", href: "#product-evidence" },
+    },
+    cta: {
+      heading: "讓一個指標定義可檢查",
+      body: "從核准規格開始，保留衝突與確切來源，只在具名負責人複核後取代舊定義。",
+    },
+  },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;
 
 const zhCNArticles = {
@@ -3085,6 +3214,7 @@ const zhCNArticles = {
     relatedSlugs: [
       "source-backed-wiki-pages-ai-work",
       "verify-ai-knowledge-base-citations",
+      "build-business-metric-definition-knowledge-base",
       "distilled-wiki-pages-ai-memory",
       "choose-ai-knowledge-base-tool",
     ],
@@ -3750,6 +3880,7 @@ const zhCNArticles = {
       "distilled-wiki-pages-ai-memory",
       "when-ai-agent-should-query-knowledge-base",
       "verify-ai-knowledge-base-citations",
+      "build-business-metric-definition-knowledge-base",
       "source-backed-research-knowledge-base",
       "build-client-project-knowledge-base-for-consulting",
       "build-investment-research-knowledge-base",
@@ -4626,6 +4757,7 @@ const zhCNArticles = {
       "build-sre-incident-knowledge-base",
       "build-ict-supplier-due-diligence-evidence-pack",
       "build-customer-support-answer-knowledge-base",
+      "build-business-metric-definition-knowledge-base",
       "build-course-wiki-from-lecture-notes",
     ],
     officialReferences: [
@@ -5946,6 +6078,132 @@ const zhCNArticles = {
     cta: {
       heading: "先建立一页可检查的课程概念",
       body: "加入一小组获准来源，维护一页带有前置知识和准确来源的概念，再在课件变化后审核。",
+    },
+  },
+  "build-business-metric-definition-knowledge-base": {
+    slug: "build-business-metric-definition-knowledge-base",
+    eyebrow: "指标定义工作流",
+    category: "Workflows",
+    title: "建立业务指标定义知识库",
+    description:
+      "把获准的 KPI 规范整理成有来源的数据字典，保留公式文本、粒度、维度、排除条件、负责人、来源修订和审核状态。",
+    metaTitle: "如何建立业务指标定义知识库和数据字典 | Wenlan",
+    metaDescription:
+      "从获准文件建立可审核的指标定义知识库，记录公式、粒度、维度、排除条件、负责人、引用、版本和替代关系。",
+    keywords: [
+      "建立业务指标定义知识库",
+      "数据字典 指标口径",
+      "AI agent 指标定义",
+      "KPI 定义模板",
+      "业务术语表",
+      "有来源数据字典",
+    ],
+    publishedAt: "2026-09-01",
+    updatedAt: "2026-09-01",
+    author: "Qi-Xuan Lu",
+    readingTime: "8 分钟阅读",
+    audience: "需要为人员和 AI agent 解决 KPI 定义冲突的数据、分析、产品、财务和运营团队",
+    heroBullets: [
+      "从获准的指标规范开始，不从仪表盘或推测公式开始。",
+      "把公式文本、粒度、维度、排除条件、负责人和来源修订放在同一条记录。",
+      "明确替代过期定义，不让 AI agent 把冲突版本混成一个答案。",
+    ],
+    sections: [
+      {
+        heading: "先说结论：一个指标配一条有来源、可替代的定义记录",
+        body: [
+          "每个业务指标维护一条可审核记录：业务定义、不可执行的公式文本、粒度、维度、纳入和排除条件、负责人、准确来源和来源修订、审核状态，以及它替代的旧定义。两份获准来源互相冲突时，先保留冲突并交给具名负责人判断，不让 AI 自动协调。",
+          "Wenlan 可以读取获准的 Markdown、文本和可提取文本 PDF，建立有来源 Pages、保留引用和来源修订、执行 provenance lint 并留下可审核版本。它不会导入 CSV 或 YAML、不会执行 SQL、不会连接数据仓库或 BI、不会计算指标、不会提供血缘、不会监控数据质量、不会管理权限、不会自动批准，也不会自动协调冲突。",
+        ],
+        link: { label: "查看指标定义证据工作流", href: "#product-evidence" },
+      },
+      {
+        heading: "为什么同名 KPI 仍可能不是同一件事",
+        body: [
+          "活跃客户、净收入或转化率可能同时出现在财务备忘录、分析规范、产品仪表盘说明和运营手册中，但公式、粒度、时间窗、排除条件或负责人各不相同。把它们整理成一段流畅摘要，反而会隐藏真正需要决策的差异。",
+          "可维护的数据字典应让每个版本回到准确来源，清楚标记当前有效、过期、矛盾或未解决，并在新版批准后保留旧版本和替代关系。即使不用 Wenlan，这也是可以独立采用的指标治理基本记录。",
+        ],
+      },
+      {
+        heading: "建立获准规范到指标记录的闭环",
+        body: [
+          "先选择一组指标和少量获准文件。这个工作流只负责定义查找和冲突处理，不建立所有数据表、仪表盘或实时计算的目录。",
+        ],
+        bullets: [
+          "先记录指标名称、业务问题、获准来源、排除系统、具名负责人和审核人。",
+          "只加入获准的 Markdown、文本或可提取文本 PDF；CSV、YAML、SQL、数据仓库 metadata 和 API 不在这个流程。",
+          "把公式写成可审核文本，并记录粒度、维度、时间窗、纳入、排除和例外。",
+          "每个重要字段连接到 source ID、准确标题或页码、来源修订和生效日期。",
+          "来源冲突时保留两个版本，标成矛盾或未解决，不自行平均或合并。",
+          "负责人选定当前版本后，记录替代的旧定义、保留历史版本并设置下次审核条件。",
+        ],
+        code: {
+          label: "完成 Wenlan 与 AI 客户端设置后",
+          code: "wenlan status\nwenlan sources add ~/Metrics/approved-specifications\n# 在 Wenlan plugin client 中：\n/distill <指标定义>\n/pages <指标名称>\n/lint\n/curate\n\nmetric: activated customer\nbusiness_definition: <获准来源真正定义的含义>\nformula_text: <不可执行的公式文本>\ngrain: <账户 | workspace | 用户 | 事件>\ndimensions: <允许的拆分维度>\ninclusions: <纳入状态或事件>\nexclusions: <排除状态、事件或时间窗>\nowner: <负责团队或审核人>\nsources: <source ID 和准确位置>\nsource_revision: <版本或生效日期>\nreview_state: <当前有效 | 过期 | 矛盾 | 未解决>\nsupersedes: <旧定义或无>\nnext_review: <来源变化条件或日期>",
+        },
+      },
+      {
+        heading: "指标记录应该保留什么",
+        body: [
+          "一条可用记录不只是一句定义。它要让读者知道公式文本在什么粒度成立、哪些状态被排除、谁有权决定当前版本，以及这个版本依据哪份来源。",
+        ],
+      },
+      {
+        heading: "知道这不是数据目录、BI 或计算引擎",
+        body: [
+          "Wenlan 不会导入 CSV、不会执行 SQL、不会连接数据仓库、不会同步 BI 或 semantic layer、不会计算 KPI、不会提供字段血缘、不会监控数据质量、不会管理权限、不会自动批准定义，也不会自动协调冲突公式。具名领域负责人仍要做业务判断和最终审核。",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "这会连接数据仓库、BI 或 metric store 吗？",
+        answer: "不会。这个流程使用获准的 Markdown、文本和可提取文本 PDF。Wenlan 不会探索数据表、不会执行 SQL、不会计算 KPI，也不会同步数据仓库、BI、semantic layer 或 metric store。",
+      },
+      {
+        question: "两份获准指标定义互相冲突时怎么办？",
+        answer: "保留两份有引用的定义，记录公式、粒度、排除条件、负责人和来源修订，并标成矛盾或未解决。由具名领域负责人决定哪个版本成为当前定义，并记录它替代的旧版本。",
+      },
+    ],
+    relatedSlugs: [
+      "source-backed-wiki-pages-ai-work",
+      "verify-ai-knowledge-base-citations",
+      "prevent-multi-agent-knowledge-conflicts",
+      "build-investment-research-knowledge-base",
+    ],
+    officialReferences: [
+      { label: "Wenlan 支持的文档来源", href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in" },
+      { label: "Wenlan 有来源 Pages", href: "https://wenlan.app/docs/source-backed-pages" },
+      { label: "Wenlan 审核与信任", href: "https://wenlan.app/docs/review-and-trust" },
+      { label: "银行业数据字典指引", href: "https://www.china-cba.net/Index/show/catid/251/id/45936.html" },
+    ],
+    productEvidence: {
+      heading: "信任指标前，先检查来源修订和审核状态",
+      summary: "这是 Wenlan App 确定性测试资料的真实桌面画面，不是公司的分析或财务工作区。画面显示带有来源数量的 Pages 和审核队列，可以用同一产品界面让冲突或修订后的指标证据保持可见。",
+      image: {
+        src: "/images/product-evidence/wenlan-space-review-fixture.png",
+        alt: "Wenlan 桌面 Space 显示带有来源数量的 Pages，以及来源变化和矛盾证据的审核队列。",
+        caption: "Wenlan App 确定性测试资料的真实画面。这是通用产品示例，不是实时数据目录或公司指标记录。",
+        width: 1586,
+        height: 992,
+      },
+      workflow: [
+        { label: "固定获准规范", detail: "选定一组指标、允许的定义文件、排除系统、具名负责人和审核人。" },
+        { label: "整理一条定义", detail: "把定义、公式文本、粒度、维度、排除条件、引用、来源修订和冲突放在同一页面。" },
+        { label: "审核后再替代", detail: "打开引用来源，检查矛盾和过期状态，再标记当前定义并保留被替代版本。" },
+      ],
+      artifactHeading: "业务指标记录示例",
+      artifactNote: "这个中立模板不会计算 KPI。请用获准规范和具名领域审核人替换每个字段。",
+      artifactRows: [
+        { label: "含义与公式文本", detail: "业务定义、不可执行公式、粒度、维度、纳入、排除和例外。" },
+        { label: "负责人和来源", detail: "负责人、准确 source ID 和位置、来源修订和生效日期。" },
+        { label: "审核与替代", detail: "当前有效、过期、矛盾或未解决，附审核人、被替代版本和下次审核条件。" },
+      ],
+      action: { label: "查看指标定义证据工作流", href: "#product-evidence" },
+    },
+    cta: {
+      heading: "让一个指标定义可检查",
+      body: "从获准规范开始，保留冲突和准确来源，只在具名负责人审核后替代旧定义。",
     },
   },
 } satisfies Partial<Record<TranslatedLearnSlug, LearnArticle>>;

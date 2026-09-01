@@ -66,9 +66,10 @@ const EXPECTED_FAMILY_IDS = [
   "ict-supplier-due-diligence-evidence-pack",
   "customer-support-answer-knowledge-base",
   "course-slides-source-backed-llm-wiki",
+  "business-metric-definition-knowledge-base",
 ];
 const APPROVED_SCENARIO_CONTRACT_SHA256 =
-  "c2f84e9f1c258b82f219e56bc674d49276923fa7a4bc55532e7330491ad43be3";
+  "072aefff3cb83a756ac8673a9d222ef3d97bee5c0905e7665d46c505f3abef76";
 const EXPECTED_WEEKLY_WINDOWS = [
   ["2026-08-24", "2026-08-30", "source-change-stale-pages"],
   ["2026-08-31", "2026-09-06", "coding-agent-source-backed-knowledge-base"],

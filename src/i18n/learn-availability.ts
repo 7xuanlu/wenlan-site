@@ -24,6 +24,7 @@ export const TRANSLATED_LEARN_SLUGS = [
   "build-ict-supplier-due-diligence-evidence-pack",
   "build-customer-support-answer-knowledge-base",
   "build-course-wiki-from-lecture-notes",
+  "build-business-metric-definition-knowledge-base",
 ] as const;
 
 export type TranslatedLearnSlug = (typeof TRANSLATED_LEARN_SLUGS)[number];
@@ -50,6 +51,7 @@ export const TRANSLATED_LEARN_SLUGS_BY_LOCALE = {
     "build-ict-supplier-due-diligence-evidence-pack",
     "build-customer-support-answer-knowledge-base",
     "build-course-wiki-from-lecture-notes",
+    "build-business-metric-definition-knowledge-base",
   ],
   "zh-CN": [
     "distilled-wiki-pages-ai-memory",
@@ -72,6 +74,7 @@ export const TRANSLATED_LEARN_SLUGS_BY_LOCALE = {
     "build-ict-supplier-due-diligence-evidence-pack",
     "build-customer-support-answer-knowledge-base",
     "build-course-wiki-from-lecture-notes",
+    "build-business-metric-definition-knowledge-base",
   ],
 } as const satisfies Record<
   TranslatedLocale,
