@@ -11,7 +11,7 @@ test("every sitemap URL has one explicit locale-aware search intent", () => {
   const result = validatePageIntentRows(rows);
 
   assert.deepEqual(result.errors, []);
-  assert.equal(rows.length, 162);
+  assert.equal(rows.length, 165);
   assert.deepEqual(
     Object.fromEntries(
       ["en", "zh-TW", "zh-CN"].map((locale) => [
@@ -20,9 +20,9 @@ test("every sitemap URL has one explicit locale-aware search intent", () => {
       ]),
     ),
     {
-      en: 112,
-      "zh-TW": 25,
-      "zh-CN": 25,
+      en: 113,
+      "zh-TW": 26,
+      "zh-CN": 26,
     },
   );
   for (const url of [
@@ -78,6 +78,13 @@ test("every sitemap URL has one explicit locale-aware search intent", () => {
     "https://wenlan.app/learn/build-customer-support-answer-knowledge-base",
     "https://wenlan.app/zh-TW/learn/build-customer-support-answer-knowledge-base",
     "https://wenlan.app/zh-CN/learn/build-customer-support-answer-knowledge-base",
+  ]) {
+    assert.ok(rows.some((row) => row.url === url), url);
+  }
+  for (const url of [
+    "https://wenlan.app/learn/build-course-wiki-from-lecture-notes",
+    "https://wenlan.app/zh-TW/learn/build-course-wiki-from-lecture-notes",
+    "https://wenlan.app/zh-CN/learn/build-course-wiki-from-lecture-notes",
   ]) {
     assert.ok(rows.some((row) => row.url === url), url);
   }

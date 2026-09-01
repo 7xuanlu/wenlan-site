@@ -8989,3 +8989,60 @@ increase for that experiment.
 - Decision: wait
 - Next step: Keep `2026-08-31T15:27:07Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-09-01T15:27:07Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-07T15:27:07Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with at least 20 target-page impressions, 3 qualified joined-query impressions, and 1 GSC click. Do not request indexing, submit GSC validation, mutate analytics, publish the planned OSS proposal, message maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment start: EXP-2026-08-31-course-wiki-from-lecture-notes-locales
+
+- Record type: experiment-start
+- Experiment ID: EXP-2026-08-31-course-wiki-from-lecture-notes-locales
+- Status: active
+- Data window: 2026-08-29..2026-09-04
+- Asset class: net-new-search
+- Launched: 2026-08-31
+- Hypothesis: One English, zh-TW, and zh-CN owner for turning readable lecture slides, notes, and course PDFs into a maintained course wiki can earn qualified discovery without cannibalizing generic document ingestion, paper research, the general Karpathy / LLM Wiki implementation guide, or unsupported AI-study-product intent.
+- Candidate evidence: Separate English, Taiwan Traditional-Chinese, and Simplified-Chinese SERP observations, request-relative Google Trends indexes, independent OSS course-material workflows, maintained Wenlan source, clean-gap, internal-link, and conditional authority-path evidence are stored in `docs/seo-scenario-backlog.json`, `docs/seo-audits/2026-08-31-next-scenario-demand-comparison.md`, and `docs/seo-audits/2026-08-31-course-wiki-from-lecture-notes-prelaunch.md`. These observations are not authenticated GSC data, keyword volume, Wenlan rank, backlink, or causal evidence.
+- Baseline: The latest completed authenticated range is `2026-07-31..2026-08-27`: GSC property 7 clicks and 913 impressions; visible-query 2 clicks and 221 impressions; visibility gap 5 clicks and 692 impressions; Vercel 289 visitors and 690 pageviews; Google referrer 28 visitors and 29 pageviews; GitHub 51 stars. New target-page and joined-query rows are unavailable rather than zero, and every source remains separate.
+- Change: Prepare exactly one English, zh-TW, and zh-CN canonical that turns one approved set of readable course materials into linked concept pages with a question, prerequisites, exact source locations, source revision, review state, reviewer, and next review trigger. Explicitly exclude flashcards, quizzes, audio or video transcription, OCR, grading, tutoring, homework solving, exam planning, automatic academic judgment, and NotebookLM equivalence.
+- Publish date: not-published
+- Index date: not-indexed
+- Minimum exposure: 20 GSC target-page impressions per locale in 28 complete post-crawl days
+- Success criteria: Per locale, at least 3 qualified joined-query impressions and at least 1 GSC click after minimum exposure; report CTR and position separately.
+- Failure criteria: After 28 complete post-crawl days and minimum exposure, a locale has no qualified joined-query impressions or no GSC click, or an above-floor query-page join assigns the task to an existing owner or unsupported tutoring, assessment, transcription, OCR, flashcard, quiz, or exam-planning intent.
+- Stop criteria: Stop on a technical, unsupported study-product claim, duplicate-intent, controller-overlap, canonical, locale, responsive-render, authority-path, or approval-boundary violation.
+- 24h readout: pending only after a separately approved production deployment completes
+- 7d readout: pending only after a separately approved production deployment completes
+- W2 readout: pending
+- W4 readout: pending formal 28-complete-post-crawl-day decision when eligible
+- W8 readout: pending only if useful after the Goal deadline
+- Result: pending
+- Decision: wait
+- Next step: Finish deterministic and rendered local verification, then stop for exact commit, push, PR, merge, automatic Vercel deployment, and read-only production-verification approval. Do not request indexing, submit GSC validation, mutate analytics, publish the conditional `awesome-ai-tools-for-students` proposal, contact maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-31-course-wiki-from-lecture-notes-locales local verification
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-31-course-wiki-from-lecture-notes-locales
+- Observed at: 2026-08-31T18:36:02Z
+- Readout: correction
+- Status: active
+- Evidence: Goal and scenario checks passed with 17 trilingual families and 165 sitemap owners; Goal tests passed 53/53, SEO tests passed 255/255 against the published Wenlan `v0.17.6` tag, i18n passed 80/80, TypeScript lint passed, the production build generated 283 static pages, the built technical audit passed all 165 sitemap URLs and found no FAQPage in 169 built HTML files, and the running-build locale matrix returned 200 for 37 expected routes plus four intentional 404s. The in-app Browser control tool was not exposed in this task, so bundled Playwright and local Chrome ran the permitted fallback. English, zh-TW, and zh-CN passed at `1280x900` and exact `393x852` with exact titles, H1s, canonicals, reciprocal hreflang, Article and BreadcrumbList schema, visible FAQ without FAQPage, a loaded product-evidence image, working FAQ expansion, no framework overlay, no console warning or error, no horizontal overflow, and no protected Mandarin phrase split. This is local technical evidence only; the pages are not published, crawled, indexed, ranked, or measured.
+- Result: pending
+- Decision: wait
+- Next step: Stop for exact commit, push, PR, merge, automatic Vercel deployment, and read-only production-verification approval. Do not request indexing, submit GSC validation, mutate analytics, publish the conditional `awesome-ai-tools-for-students` proposal, contact maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-31-course-wiki-from-lecture-notes-locales publication approval
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-31-course-wiki-from-lecture-notes-locales
+- Observed at: 2026-09-01T04:21:18Z
+- Readout: correction
+- Status: active
+- Evidence: The user explicitly approved the locally verified English, zh-TW, and zh-CN Course Wiki family for commit, Git push, pull request creation, merge, automatic Vercel deployment, and read-only production verification. The approved diff is restricted to the publication manifest's candidate-owned files and hunks.
+- Result: pending
+- Decision: merge
+- Next step: Commit and push only the verified manifest-owned candidate, merge its pull request in turn after required checks, verify the integrated commit, wait for automatic Vercel production completion, and verify the three live routes read-only. Do not request indexing, submit GSC validation, mutate analytics, publish the conditional `awesome-ai-tools-for-students` proposal, contact maintainers, buy traffic, generate synthetic events, change metric definitions, or perform another external action.
+<!-- EXPERIMENT-RECORD:END -->

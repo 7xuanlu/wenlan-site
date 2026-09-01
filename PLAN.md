@@ -677,6 +677,9 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
+  `EXP-2026-08-31-course-wiki-from-lecture-notes-locales` is locally prepared,
+  not published, and uniquely consumes the production slot until its exact
+  publication scope is approved or stopped.
   `EXP-2026-08-30-ict-supplier-due-diligence-locales` is live,
   production-verified, and measuring from the fixed
   `2026-08-31T01:26:37Z` boundary. PR #160 merged as
@@ -918,7 +921,7 @@ action returns for separate explicit approval.
   and the matching inter-window Goal observation. That approval does not
   include request indexing, GSC validation, non-website publication, OSS
   submission, paid acquisition, or metric changes.
-- Active experiments: 37.
+- Active experiments: 38.
 - Execution mode: primary Codex coordinator with bounded, short-lived native
   Codex subagents when parallel work helps; do not use Superpowers SDD, per
   the user's token-cost preference.
@@ -1304,14 +1307,15 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-30-ict-supplier-due-diligence-locales` is live,
-production-verified, and measuring from the fixed
-`2026-08-31T01:26:37Z` boundary. It owns one source-bounded ICT/software
-supplier evidence pack per locale: provenance, data-access scope, resilience
-and security evidence, dependencies, gaps, questions, owner, and review date.
-Certification validation, legal or privacy advice, vendor discovery,
-crawling, live monitoring, vulnerability scanning, automatic scoring,
-approval/rejection, and material outside approved controls are excluded.
+`EXP-2026-08-31-course-wiki-from-lecture-notes-locales` is the unique
+production-in-flight experiment. Its English, zh-TW, and zh-CN owners are
+prepared locally but not published. They turn one approved set of readable
+lecture slides, notes, and course PDFs into linked concept pages with exact
+sources, prerequisites, source revisions, and review state. Flashcards,
+quizzes, audio or video transcription, OCR, grading, tutoring, homework
+solving, exam planning, automatic academic judgment, and NotebookLM
+equivalence are excluded. Finish local deterministic and rendered checks,
+then stop for separate publication approval.
 
 ### Latest measuring publication
 
@@ -4412,3 +4416,119 @@ unchanged.
 - Request indexing, GSC validation, analytics mutation, the conditional
   `awesome-customer-success` proposal, maintainer contact, paid actions,
   synthetic events, and every other external publication remain excluded.
+
+## Campaign research: next trilingual scenario at 2026-08-31T17:53:42Z
+
+- A three-way demand comparison covered RFP / tender answer libraries,
+  employee onboarding / training knowledge bases, and student lecture / PDF
+  study knowledge bases across English, zh-TW, and zh-CN. The research reviewed
+  160 requested Exa results, fetched 12 source pages, inspected signed-in
+  Google Trends, and checked the signed-in Qi-Xuan Lu OpenSEO workspace.
+- OpenSEO keyword research is unavailable because the current account has no
+  credits. Its GSC surface was used only to confirm existing `llm wiki`
+  adjacency; no ambiguous date-range total was copied into the Goal or treated
+  as demand.
+- The selected next family is `course-slides-source-backed-llm-wiki`. It owns
+  one course-material to maintained course-wiki task, not a generic student
+  persona: readable lecture slides, notes, and PDFs become concept pages with
+  exact sources, prerequisite links, source revisions, and review state.
+- The family explicitly excludes flashcards, quizzes, audio, transcription,
+  OCR, grading, tutoring, homework solving, exam planning, automatic academic
+  judgment, and claims that Wenlan is equivalent to NotebookLM. These excluded
+  capabilities dominate much of the broader student-study result set.
+- RFP remains a future high-intent candidate, but the exact knowledge-base
+  phrases have little Trends data and the dominant result intent expects
+  response generation, document export, approvals, CRM, permissions, and bid
+  management. Employee onboarding is rejected at the broad level because
+  multi-user access, HR permissions, LMS / HRIS integration, training media,
+  quizzes, and progress tracking are central to the result intent.
+- The selected family has the stronger current acquisition leverage because
+  it joins broad study demand with Wenlan's already visible LLM Wiki cluster
+  and maintained first-party proof. A bilingual student LLM Wiki repository
+  had 172 GitHub stars and a Georgia Tech course-PDF system had 7 stars and 26
+  forks at capture; these remain independent observations, not endorsements.
+- Full provenance, native-unit Trends values, source URLs, candidate failures,
+  locale wording, owner overlap, first-party proof, internal links, and the
+  separately approval-gated authority path are stored in
+  `docs/seo-audits/2026-08-31-next-scenario-demand-comparison.md` and the
+  verifier-protected `docs/seo-scenario-backlog.json` entry.
+- No page was implemented or published. Exact local preparation of the three
+  proposed routes requires separate user approval. Commit, push, PR, merge,
+  Vercel deployment, request indexing, GSC validation, analytics mutation,
+  the conditional `awesome-ai-tools-for-students` proposal, maintainer contact,
+  paid actions, synthetic events, and every other external publication remain
+  excluded.
+
+## Campaign preparation: course wiki from lecture notes at 2026-08-31
+
+- The user approved local preparation of the selected
+  `course-slides-source-backed-llm-wiki` family. English, zh-TW, and zh-CN now
+  have one local owner for turning readable lecture slides, notes, and course
+  PDFs into a maintained course wiki with exact sources, prerequisite links,
+  source revisions, and review state.
+- The exact routes are `/learn/build-course-wiki-from-lecture-notes`,
+  `/zh-TW/learn/build-course-wiki-from-lecture-notes`, and
+  `/zh-CN/learn/build-course-wiki-from-lecture-notes`. The general document,
+  LLM Wiki, and research owners provide the three same-locale inbound paths.
+- The implementation uses real Wenlan source-backed Page, citation, wikilink,
+  stale-dependency, revision, lint, and review behavior. It excludes flashcards,
+  quizzes, transcription, OCR, grading, tutoring, homework solving, exam
+  planning, academic judgment, and NotebookLM equivalence.
+- The latest source-native weekly baseline remains GSC 7 clicks / 913
+  impressions, visible-query 2 / 221, visibility gap 5 / 692, Vercel 289
+  visitors / 690 pageviews, Google referrer 28 / 29, and GitHub 51 stars. New
+  target rows remain unavailable rather than zero.
+- Authority state changed independently: `awesome-selfhosted-data#2955` closed
+  without merge or a recorded maintainer reason, while
+  `awesome-mcp-servers#52` is merged and visibly renders a Wenlan repository
+  listing. Neither observation is attributed traffic for this new family.
+- Full demand, overlap, content, technical, measurement, and approval details
+  are persisted in `docs/seo-scenario-backlog.json`,
+  `docs/seo-audits/2026-08-31-next-scenario-demand-comparison.md`, and
+  `docs/seo-audits/2026-08-31-course-wiki-from-lecture-notes-prelaunch.md`.
+- The family is `prepared`, not published. Finish deterministic and rendered
+  local verification, then stop for separate commit, push, PR, merge, Vercel
+  deployment, and production-verification approval. Request indexing, GSC
+  validation, analytics mutation, the planned OSS proposal, maintainer contact,
+  paid actions, synthetic events, and other external publication remain
+  excluded.
+
+## Campaign verification: course wiki from lecture notes at 2026-08-31T18:36:02Z
+
+- Local verification passed. Goal and scenario checks report 17 trilingual
+  families and 165 sitemap owners; Goal tests pass 53/53, SEO passes 255/255
+  against the published Wenlan `v0.17.6` tag, i18n passes 80/80, and TypeScript
+  lint passes.
+- The production build generated 283 static pages. The built technical audit
+  passed 165 sitemap URLs, 24 required pages, 26 redirects, robots, noindex
+  headers, and FAQPage absence across 169 HTML files. The running-build locale
+  check returned 200 for 37 expected routes and 404 for four intentional
+  unsupported routes.
+- Because the in-app Browser control tool was unavailable in this task,
+  bundled Playwright and local Chrome performed the permitted fallback.
+  English, zh-TW, and zh-CN passed at `1280x900` and exact `393x852`: correct
+  title, H1, canonical, reciprocal hreflang, Article and BreadcrumbList,
+  visible FAQ without FAQPage, loaded evidence image, working FAQ expansion,
+  no framework overlay, no console warning or error, no horizontal overflow,
+  and no protected Mandarin phrase split.
+- The three routes remain local and unpublished. The next decision is the
+  exact commit, push, PR, merge, automatic Vercel deployment, and read-only
+  production-verification scope. Indexing requests, GSC validation, analytics
+  mutation, the planned OSS proposal, maintainer contact, paid actions,
+  synthetic events, and every other external action remain separate.
+
+## Campaign publication approval: course wiki from lecture notes at 2026-09-01T04:21:18Z
+
+- The user explicitly approved the locally verified English, zh-TW, and zh-CN
+  Course Wiki family for commit, Git push, pull request creation, merge,
+  automatic Vercel deployment, and read-only production verification.
+- The approved scope is exactly the manifest-owned candidate recorded in
+  `docs/seo-audits/2026-08-31-course-wiki-publication-manifest.md`.
+- Request indexing, GSC validation, analytics mutation, the conditional
+  `awesome-ai-tools-for-students` proposal, maintainer contact, paid actions,
+  synthetic events, metric-definition changes, and every other external action
+  remain excluded.
+- Next step: commit and push only the verified candidate, merge its pull request
+  in turn after required checks, verify the integrated commit, wait for Vercel
+  production completion, and run read-only production verification. Keep the
+  Vercel completion timestamp as the fixed experiment boundary.

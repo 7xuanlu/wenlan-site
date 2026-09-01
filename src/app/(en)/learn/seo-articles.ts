@@ -1653,6 +1653,7 @@ const workflowArticles: BaseSpec[] = [
       "wenlan-vs-obsidian-ai-memory",
       "build-ict-supplier-due-diligence-evidence-pack",
       "build-customer-support-answer-knowledge-base",
+      "build-course-wiki-from-lecture-notes",
     ],
     officialReferences: [
       {
@@ -1741,6 +1742,7 @@ const workflowArticles: BaseSpec[] = [
       "source-backed-wiki-pages-ai-work",
       "choose-ai-knowledge-base-tool",
       "build-ict-supplier-due-diligence-evidence-pack",
+      "build-course-wiki-from-lecture-notes",
     ],
     officialReferences: [
       {
@@ -4021,6 +4023,153 @@ const customerSupportAnswerKnowledgeBaseArticle: BaseSpec = {
 };
 
 workflowArticles.push(customerSupportAnswerKnowledgeBaseArticle);
+
+const courseWikiFromLectureNotesArticle: BaseSpec = {
+  slug: "build-course-wiki-from-lecture-notes",
+  eyebrow: "Course wiki workflow",
+  category: "Workflows",
+  title: "How to Build a Course Wiki from Lecture Notes and PDFs",
+  description:
+    "Turn one course's readable lecture slides, notes, and PDFs into a maintained wiki with exact sources, prerequisite links, revisions, and review state.",
+  metaTitle: "Build a Course Wiki from Lecture Notes and PDFs | Wenlan",
+  metaDescription:
+    "Build a source-backed course wiki from lecture slides, notes, and readable PDFs, with concept pages, prerequisites, citations, source revisions, and review state.",
+  keywords: [
+    "course wiki from lecture notes",
+    "turn lecture slides into a wiki",
+    "source backed AI study notes",
+    "student LLM wiki",
+    "lecture notes knowledge base",
+    "course PDF knowledge base",
+  ],
+  publishedAt: "2026-08-31",
+  updatedAt: "2026-08-31",
+  readingTime: "8 min read",
+  audience:
+    "Students, independent learners, and educators organizing one course's readable lecture slides, notes, and PDFs",
+  heroBullets: [
+    "Start with one course and an approved folder of readable lecture materials.",
+    "Create one concept page at a time with exact sources, prerequisite links, and open questions.",
+    "Track source revisions and review state so revised slides do not leave polished but stale notes behind.",
+  ],
+  quickAnswer:
+    "Create one source boundary for one course, register its readable lecture slides, notes, and text-extractable PDFs, then maintain one page per durable concept. Each concept page should name its prerequisite concepts, cite the exact lecture or page, record the source revision, and show whether the explanation is current, stale, contradicted, or awaiting review.",
+  quickAnswerLink: {
+    label: "See the course-wiki evidence workflow",
+    href: "#product-evidence",
+  },
+  wenlanFit:
+    "Wenlan can sync supported course documents, distill source-backed Pages, preserve citations and wikilinks, surface stale dependencies, and keep revisions reviewable. It is not equivalent to NotebookLM and does not generate flashcards, create quizzes, transcribe audio, run OCR, grade work, tutor students, solve homework, plan exams, or make academic judgments.",
+  problem:
+    "Lecture materials accumulate by week, but the durable ideas do not follow the same structure. A definition may live in week two, its prerequisite in week one, a correction in a later slide deck, and an exception in a reading note. A one-time summary hides those relationships and can stay fluent after the instructor revises the source. A useful course wiki keeps the explanation small, linked, and traceable to the current material.",
+  actionHeading: "Build one course-material to concept-page loop",
+  actionIntro:
+    "Use materials you are allowed to store and inspect. Begin with one course, one term or version, and a small source set so that every concept page can still be checked against its lecture material.",
+  actionBullets: [
+    "Name the course, term, source owner, included folders, excluded material, and the learner or educator responsible for review.",
+    "Register readable Markdown, text, or text-extractable PDFs. Keep scanned PDFs outside the workflow until an external OCR step produces text you can verify.",
+    "Create one page per durable concept instead of one giant course summary. Give every page a question it answers and a short current explanation.",
+    "Link prerequisite concepts explicitly and record unresolved terms, conflicting explanations, and examples that belong to another page.",
+    "Attach important statements to the exact lecture, page, section, or source ID and record the source revision or course-material date.",
+    "When slides or notes change, resync the source, mark dependent pages stale or unresolved, and review the cited passage before accepting the new explanation.",
+  ],
+  code: {
+    label: "Wenlan workflow and a neutral course concept record",
+    code: "wenlan status\nwenlan sources add ~/Courses/distributed-systems/materials\n# In a Wenlan plugin client:\n/distill <course concept>\n/pages <course concept>\n/lint\n/curate\n\nconcept: leader election\nquestion: Why can two nodes not both remain leader in the same term?\nprerequisites: terms; quorum intersection\nanswer: <short explanation supported by the course material>\nsources: <lecture, slide or page, and source ID>\nsource_revision: <term, file revision, or material date>\nreview_state: <current | stale | contradicted | unresolved>\nreviewer: <student or educator>\nnext_review: <source-change trigger or date>",
+  },
+  caution:
+    "This is a source-backed study organization workflow, not an AI tutor or assessment system. Wenlan does not generate flashcards, does not create quizzes, does not transcribe audio, does not run OCR, does not grade work, does not tutor students, does not solve homework, does not plan exams, and is not equivalent to NotebookLM. The learner or educator remains responsible for source rights, interpretation, academic integrity, and review.",
+  productEvidence: {
+    heading: "Inspect source and review state before trusting a concept page",
+    summary:
+      "This genuine Wenlan desktop capture comes from the app's deterministic test fixture, not a school, course, or student workspace. It shows maintained Pages with source counts and a review queue, the same product surfaces used to keep revised course material and unresolved evidence visible.",
+    image: {
+      src: "/images/product-evidence/wenlan-space-review-fixture.png",
+      alt: "Wenlan desktop Space showing maintained Pages with source counts and a review queue for changed and conflicting evidence.",
+      caption:
+        "Genuine Wenlan app capture from a deterministic test fixture. It is a general product example, not course data or a student record.",
+      width: 1586,
+      height: 992,
+    },
+    workflow: [
+      {
+        label: "Bound one course",
+        detail:
+          "Choose one course, term, readable source set, excluded material, and named reviewer before creating concept pages.",
+      },
+      {
+        label: "Distill linked concepts",
+        detail:
+          "Keep each concept, prerequisite, explanation, source location, revision, and open question together in a reviewable record.",
+      },
+      {
+        label: "Review after source changes",
+        detail:
+          "Open the cited lecture passage, inspect stale or conflicting support, and update the page only after the current material is understood.",
+      },
+    ],
+    artifactHeading: "Worked course concept record",
+    artifactNote:
+      "This neutral template is not an answer key. Replace every placeholder with material you are allowed to use and a named reviewer.",
+    artifactRows: [
+      {
+        label: "Concept and question",
+        detail:
+          "One durable course concept, the question it answers, and the shortest explanation the current material supports.",
+      },
+      {
+        label: "Prerequisites and sources",
+        detail:
+          "Required concepts, exact lecture or page references, source IDs, material date, and source revision.",
+      },
+      {
+        label: "Review state",
+        detail:
+          "Current, stale, contradicted, or unresolved, with a learner or educator reviewer and the next review trigger.",
+      },
+    ],
+    action: {
+      label: "See the course-wiki evidence workflow",
+      href: "#product-evidence",
+    },
+  },
+  faq: [
+    "Can Wenlan turn scanned slides, audio, or video into study notes?",
+    "No. Wenlan supports Markdown, text, and text-extractable PDFs for this workflow. Scanned or image-only files need external OCR, and audio or video needs an external transcription process before you can verify the resulting text.",
+    "Is a course wiki the same as a study guide or an AI tutor?",
+    "No. A course wiki maintains inspectable concept explanations, prerequisites, sources, and revision state. It does not generate an answer key, grade work, tutor a learner, create quizzes or flashcards, or decide what will appear on an exam.",
+  ],
+  relatedSlugs: [
+    "build-local-ai-knowledge-base-from-documents",
+    "distilled-wiki-pages-ai-memory",
+    "source-backed-research-knowledge-base",
+    "verify-ai-knowledge-base-citations",
+  ],
+  officialReferences: [
+    {
+      label: "Wenlan supported document sources",
+      href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+    },
+    {
+      label: "Wenlan source-backed Pages",
+      href: "https://wenlan.app/docs/source-backed-pages",
+    },
+    {
+      label: "Wenlan review and trust",
+      href: "https://wenlan.app/docs/review-and-trust",
+    },
+    {
+      label: "Karpathy's LLM-wiki note",
+      href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+    },
+  ],
+  cta: {
+    heading: "Build one inspectable course concept",
+    body: "Add a small approved source set, maintain one concept page with prerequisites and exact sources, then revise it only after checking the changed material.",
+  },
+};
+
+workflowArticles.push(courseWikiFromLectureNotesArticle);
 
 const productResearchArticle: LearnArticle = {
   slug: "build-product-research-knowledge-base-for-prd",
