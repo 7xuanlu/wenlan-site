@@ -9131,3 +9131,31 @@ increase for that experiment.
 - Decision: wait
 - Next step: Keep `2026-09-01T05:08:53Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-09-02T05:08:53Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-08T05:08:53Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with at least 20 target-page impressions, 3 qualified joined-query impressions, and 1 GSC click. Do not change the Wenlan source README, request indexing, submit GSC validation, mutate analytics, contact maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-09-01-business-metric-definition-knowledge-base-locales README authority approval
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-09-01-business-metric-definition-knowledge-base-locales
+- Observed at: 2026-09-01T06:49:30Z
+- Readout: correction
+- Status: measuring
+- Evidence: The user explicitly approved the predeclared maintained first-party authority path: one natural same-locale Business Metric Guide link in Wenlan source `README.md`, `README.zh-Hant.md`, and `README.zh-Hans.md`, plus only the mechanical translated-README sync-marker update required by that repository. The user also approved correcting Course Wiki from prepared to measuring and correcting Business Metric from production-in-flight to live, production-verified, and measuring without changing either fixed production boundary. Commit, push, PR, merge, and read-only GitHub rendering verification are approved for those exact files. This is approval evidence, not a rendered link, referral, crawl, indexing, rank, impression, click, visitor, star, authority acceptance, or causal result.
+- Result: pending
+- Decision: merge
+- Next step: Publish only the approved README links after the Goal verifier passes, verify the merged GitHub README rendering read-only, append the resulting source-native merge evidence, and merge the control-plane correction. Do not create a Wenlan release, edit a site page, request indexing, submit GSC validation, mutate analytics, contact maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-09-01-business-metric-definition-knowledge-base-locales README authority publication
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-09-01-business-metric-definition-knowledge-base-locales
+- Observed at: 2026-09-01T06:54:33Z
+- Readout: correction
+- Status: measuring
+- Evidence: Wenlan source PR #655 merged at `2026-09-01T06:53:31Z` as `e450c4371f224802666a53e4dcbe7b4990935ca8` after its docs-provenance check passed. The integrated commit passed translated-README sync verification and its self-test. GitHub main visibly renders the English, Traditional-Chinese, and Simplified-Chinese Business Metric Guide links, and each locale-matched `wenlan.app` target returned a direct 200 before publication. The Spanish README content is unchanged; only its required English-source sync marker advanced. This proves a maintained first-party source link, not a referral, crawl, indexing, rank, impression, click, visitor, star, backlink acceptance, or causal result.
+- Result: pending
+- Decision: wait
+- Next step: Keep `2026-09-01T05:08:53Z` as the fixed site production boundary. Record the 24-hour technical and indexability observation after `2026-09-02T05:08:53Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-08T05:08:53Z`; keep the new GitHub source link as a separate authority observation. Do not create a Wenlan release, edit a site page, request indexing, submit GSC validation, mutate analytics, contact maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
+<!-- EXPERIMENT-RECORD:END -->

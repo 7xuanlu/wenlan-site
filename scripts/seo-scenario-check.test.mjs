@@ -57,6 +57,8 @@ test("business metric family preserves one files-first trilingual definition tas
   );
   assert.equal(family.internalLinks.length, 9);
   assert.match(family.authorityPath.target, /README\.zh-Hant\.md|Workflow guides/i);
+  assert.equal(family.authorityPath.status, "published");
+  assert.match(family.authorityPath.target, /PR #655|e450c437|2026-09-01T06:53:31Z/);
   assert.match(
     family.overlapCheck,
     /CSV|SQL|warehouse|BI|lineage|automatic reconciliation/i,
@@ -74,7 +76,8 @@ test("course-slide family preserves the source-backed study-wiki boundary", () =
   assert.match(family.userTask, /course wiki|lecture slides|study notes/i);
   assert.match(family.desiredOutcome, /citation|concept|revision|review/i);
   assert.equal(family.decision, "net-new");
-  assert.equal(family.publicationStatus, "prepared");
+  assert.equal(family.publicationStatus, "measuring");
+  assert.match(family.nextResearchDirection, /PR #166|9b12ad7|2026-09-01T04:26:43Z/);
   assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
   assert.ok(
     Object.values(family.gates).every((gate) => gate.status === "passed"),
