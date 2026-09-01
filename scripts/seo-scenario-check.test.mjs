@@ -48,7 +48,8 @@ test("business metric family preserves one files-first trilingual definition tas
   assert.match(family.userTask, /metric-definition wiki|data dictionary/i);
   assert.match(family.desiredOutcome, /citation|version|review|supersed/i);
   assert.equal(family.decision, "net-new");
-  assert.equal(family.publicationStatus, "prepared");
+  assert.equal(family.publicationStatus, "measuring");
+  assert.match(family.nextResearchDirection, /PR #167|7664d1a|2026-09-01T05:08:53Z/);
   assert.deepEqual(Object.keys(family.locales), ["en", "zh-TW", "zh-CN"]);
   assert.ok(
     Object.values(family.gates).every((gate) => gate.status === "passed"),

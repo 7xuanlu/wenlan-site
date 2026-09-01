@@ -4624,3 +4624,35 @@ unchanged.
 - Next step: commit and push only the verified candidate, merge its pull
   request in turn after required checks, verify the integrated commit, wait
   for Vercel production completion, and run read-only production verification.
+
+## Campaign publication: business metric definition knowledge base at 2026-09-01T05:16:00Z
+
+- PR #167 merged at `2026-09-01T05:07:45Z` as
+  `7664d1a3d3578533fab8aed626856930e3d04b11`; Vercel production completed at
+  `2026-09-01T05:08:53Z`.
+- The integrated merge commit passes Goal and scenario verification, 54 Goal
+  tests, 256 SEO tests against Wenlan v0.17.6, 81 i18n tests, TypeScript lint,
+  the 287-page production build, the 39 expected 200 / four intentional 404
+  route matrix, and the 168-owner built technical audit.
+- The deployed audit passes robots, all 168 sitemap URLs, 30 key pages, six
+  utility noindex surfaces, 25 redirects, six bridge-host redirects, and
+  sitemap-wide FAQPage absence. English, zh-TW, and zh-CN return direct 200
+  with exact self-canonicals, reciprocal hreflang, Article and BreadcrumbList
+  schema, loaded product evidence, a working evidence anchor and FAQ, and
+  visible FAQ without FAQPage.
+- Fresh production captures at `1280x900` render all three locales correctly.
+  Exact `393x852` mobile emulation reports `innerWidth`, HTML scroll width, and
+  body scroll width all equal to 393 for every locale, with one H1 contained
+  inside the viewport, no browser warning or error, no broken image, and no
+  protected Mandarin phrase split. A command-line-only narrow screenshot had
+  first appeared cropped because it did not emulate a mobile layout viewport;
+  the measured mobile viewport disproved that false positive.
+- Keep `2026-09-01T05:08:53Z` as the fixed production boundary. This proves
+  publication and technical availability only; it is not a crawl, indexing,
+  rank, impression, click, visitor, authority, or causal result. The 24-hour
+  technical observation is due after `2026-09-02T05:08:53Z`; the seven-day
+  source-native GSC and Vercel observation is due after
+  `2026-09-08T05:08:53Z`.
+- The Wenlan source README authority link, request indexing, GSC validation,
+  analytics mutation, maintainer contact, paid actions, synthetic events, and
+  every other external action remain excluded.

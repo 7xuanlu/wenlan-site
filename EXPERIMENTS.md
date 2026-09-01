@@ -9117,3 +9117,17 @@ increase for that experiment.
 - Decision: merge
 - Next step: Commit and push only the verified candidate, open and merge one pull request after required checks, verify the integrated commit, wait for automatic Vercel production completion, and verify the three live routes read-only. Do not change the Wenlan source README, request indexing, submit GSC validation, mutate analytics, contact maintainers, buy traffic, generate synthetic events, or perform another external action.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-09-01-business-metric-definition-knowledge-base-locales production publication
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-09-01-business-metric-definition-knowledge-base-locales
+- Observed at: 2026-09-01T05:16:00Z
+- Readout: correction
+- Status: measuring
+- Evidence: PR #167 merged at `2026-09-01T05:07:45Z` as `7664d1a3d3578533fab8aed626856930e3d04b11`; Vercel reported production deployment success at `2026-09-01T05:08:53Z`. The integrated commit passed Goal and scenario verification, 54 Goal tests, 256 SEO tests against Wenlan v0.17.6, 81 i18n tests, TypeScript, the 287-page production build, the 39 expected 200 / four intentional 404 route matrix, and the 168-owner built technical audit. The deployed audit passed robots, all 168 sitemap URLs, 30 key pages, six utility noindex surfaces, 25 redirects, six bridge-host redirects, and sitemap-wide FAQPage absence. English, zh-TW, and zh-CN returned direct 200 with exact canonicals, reciprocal hreflang, Article and BreadcrumbList schema, loaded product evidence, a working evidence anchor and FAQ, and visible FAQ without FAQPage. Fresh `1280x900` production captures rendered correctly. Exact `393x852` mobile emulation measured `innerWidth`, HTML scroll width, and body scroll width as 393 for every locale, one viewport-contained H1, no broken image, no browser warning or error, and no protected Mandarin phrase split. A command-line-only narrow screenshot had first appeared cropped because it did not emulate a mobile layout viewport; the measured mobile viewport disproved that false positive. This proves publication and technical availability only; it is not a crawl, indexing, rank, impression, click, visitor, authority, or causal result.
+- Result: pending
+- Decision: wait
+- Next step: Keep `2026-09-01T05:08:53Z` as the fixed production boundary. Record the 24-hour technical and indexability observation after `2026-09-02T05:08:53Z`, then the seven-day source-native GSC page/query and Vercel page/referrer observation after `2026-09-08T05:08:53Z`. Judge each locale independently only after a confirmed post-deploy crawl and 28 complete post-crawl days with at least 20 target-page impressions, 3 qualified joined-query impressions, and 1 GSC click. Do not change the Wenlan source README, request indexing, submit GSC validation, mutate analytics, contact maintainers, buy traffic, generate synthetic events, or perform another external action under this record.
+<!-- EXPERIMENT-RECORD:END -->

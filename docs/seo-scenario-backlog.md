@@ -1483,11 +1483,11 @@ Demand discovery:
 - Desired outcome: Retrieve the current definition with citations, source revision, owner, review state, and supersession instead of silently mixing conflicting KPI definitions
 - Stage: `build`
 - Decision: `net-new`
-- Planned window: `next-eligible-authority-backed-window-after-2026-09-01`
-- Publication: `prepared`
+- Planned window: `2026-08-29..2026-09-04-published`
+- Publication: `measuring`
 - Standalone utility: A neutral team can maintain a metric dictionary that records the metric name, definition, non-executable formula text, grain, dimensions, exclusions, owner, source IDs and revisions, review state, and superseded version without using Wenlan.
 - Overlap check: Do not duplicate generic document ingestion, citation verification, investment research, or multi-agent write-conflict owners. This page owns approved KPI specifications to one reviewed metric-definition wiki. It explicitly excludes CSV, YAML, SQL, warehouse and BI ingestion, metric computation, lineage, data-quality monitoring, permissions, approval workflows, and automatic reconciliation.
-- Next research: Complete local deterministic, built-output, and responsive verification for the exact trilingual files-first owner. Stop for separate website publication approval and keep the source README path, indexing, validation, analytics, and every external action separately gated.
+- Next research: PR #167 merged at 2026-09-01T05:07:45Z as 7664d1a3d3578533fab8aed626856930e3d04b11; Vercel production completed at 2026-09-01T05:08:53Z. Keep that fixed production boundary, run the 24-hour technical and indexability observation after 2026-09-02T05:08:53Z, and run the seven-day source-native GSC page/query and Vercel page/referrer observation after 2026-09-08T05:08:53Z. Keep the Wenlan source README authority path, request indexing, GSC validation, analytics mutation, maintainer contact, paid actions, synthetic events, and every other external action separately gated.
 
 ### Locale intent and ownership
 
