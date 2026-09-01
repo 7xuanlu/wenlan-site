@@ -9173,3 +9173,17 @@ increase for that experiment.
 - Decision: stop
 - Next step: Do not submit to or contact the rejected repository. Replacement research selected `bydeng01/student-gpt-tools` as the best conditional match: 85 stars, 15 forks, six merged pull requests including external tool submissions, last merge 2026-06-17, and two newer open submissions. The exact neutral one-row proposal and affiliation disclosure are prepared in `docs/seo-audits/2026-09-01-course-wiki-authority-gate.md`, but creating a fork, branch, pull request, issue, or maintainer message remains separately approval-gated. Keep the Course Wiki measurement boundary at `2026-09-01T04:26:43Z` and run due readouts on schedule.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-31-course-wiki-from-lecture-notes-locales authority submission
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-31-course-wiki-from-lecture-notes-locales
+- Observed at: 2026-09-01T08:11:06Z
+- Readout: correction
+- Status: measuring
+- Evidence: After explicit user approval, GitHub identity was verified as Qi-Xuan Lu (`7xuanlu`), the exact Course Wiki destination returned HTTP 200, and the disclosed neutral one-row proposal was committed as `052c297b2b811f2221dc9c03e6eee05becbe47a8` in `7xuanlu/student-gpt-tools`. Upstream `bydeng01/student-gpt-tools#18` opened at this timestamp and its source-native state was open, non-draft, mergeable, with no review decision and no status checks. The row links the exact Course Wiki owner and states supported inputs, citations, concept links, revision state, and human review; the PR body discloses maintainer affiliation and explicitly excludes quizzes, flashcards, audio, transcripts, grades, tutoring answers, and exam plans. This is a submitted proposal, not a merged or rendered listing, backlink, referral, crawl, indexing, rank, impression, click, visitor, star, or causal result.
+- Result: pending
+- Decision: wait
+- Next step: Keep the Course Wiki measurement boundary at `2026-09-01T04:26:43Z`. Re-read PR #18 once at the next due Goal boundary and count authority only after an upstream merge and visible README render. Do not contact the maintainer again, request indexing, submit GSC validation, mutate analytics, buy traffic, generate synthetic events, or perform another external action without new approval.
+<!-- EXPERIMENT-RECORD:END -->
