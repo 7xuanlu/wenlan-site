@@ -9187,3 +9187,45 @@ increase for that experiment.
 - Decision: wait
 - Next step: Keep the Course Wiki measurement boundary at `2026-09-01T04:26:43Z`. Re-read PR #18 once at the next due Goal boundary and count authority only after an upstream merge and visible README render. Do not contact the maintainer again, request indexing, submit GSC validation, mutate analytics, buy traffic, generate synthetic events, or perform another external action without new approval.
 <!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-27-source-backed-research-knowledge-base-locales README authority reconciliation
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-27-source-backed-research-knowledge-base-locales
+- Observed at: 2026-09-01T14:14:03Z
+- Readout: correction
+- Status: measuring
+- Evidence: Wenlan source PR #624 merged the locale-aware research-workflow README links at `2026-08-28T05:16:37Z` as `368fabcf667736e1b116dac8a9e79b017ae4d6bf`. Current source main `e450c4371f224802666a53e4dcbe7b4990935ca8` still contains the English, Traditional-Chinese, Simplified-Chinese, and Spanish links; `git blame` assigns them to that merge, and the translated-README sync checker and its self-test pass. The English, zh-TW, and zh-CN site destinations each return a direct HTTP 200. This proves maintained first-party publication and destination availability only, not independent endorsement, referral traffic, crawl, indexing, rank, impressions, clicks, visitors, or causality.
+- Result: success
+- Decision: wait
+- Next step: Mark the authority path published and do not reapply the stale proposal patch. Keep `2026-08-28T03:49:51Z` as the fixed site production boundary, append the overdue 24-hour technical/indexability readout, and run the seven-day source-native GSC/Vercel readout after `2026-09-04T03:49:51Z`. Keep the awesome-ai-research-tools submission on hold.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-27-source-backed-research-knowledge-base-locales overdue technical observation
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-27-source-backed-research-knowledge-base-locales
+- Observed at: 2026-09-01T14:39:32Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The fixed production boundary remains `2026-08-28T03:49:51Z`. Direct live GETs for the English, zh-TW, and zh-CN canonicals each returned 200 with no redirect, exact self-canonical, reciprocal en-US/zh-TW/zh-CN/x-default hreflang, `index, follow`, Article and BreadcrumbList schema dated `2026-08-27`, visible literature-matrix, contradiction, limitation, source-update, and human-review answers, and no FAQPage schema. The deployed technical audit passed robots, 168 sitemap URLs, 30 key pages, six utility noindex surfaces, sitemap-wide FAQPage absence, 25 redirects, six bridge-host redirects, and legacy URL exclusion. The latest preserved authenticated GSC and Vercel capture covers `2026-07-31..2026-08-27`, ending before publication: GSC property is 7 clicks / 913 impressions, visible-query totals and the visibility gap remain separate, and no target page or joined query-page row exists; Vercel remains 289 visitors / 690 pageviews and has no target page or source-to-page row. Those target observations are unavailable rather than zero. Authenticated URL Inspection could not be read in this task, so post-deploy crawl and indexing state are unchecked. GitHub separately reports 60 stars; no star attribution is inferred.
+- Result: inconclusive
+- Decision: wait
+- Next step: Keep the fixed production boundary and current pages unchanged. Run the seven-day source-native GSC page/query and Vercel page/referrer readout after `2026-09-04T03:49:51Z`; re-read authenticated URL Inspection when available without requesting indexing. Do not infer SEO success, source-to-page sessions, or star causality.
+<!-- EXPERIMENT-RECORD:END -->
+
+<!-- EXPERIMENT-RECORD:START -->
+## Experiment readout: EXP-2026-08-31-customer-support-answer-knowledge-base-locales 24-hour technical observation
+
+- Record type: experiment-readout
+- Experiment ID: EXP-2026-08-31-customer-support-answer-knowledge-base-locales
+- Observed at: 2026-09-01T15:29:34Z
+- Readout: 24h
+- Status: measuring
+- Evidence: The fixed production boundary remains `2026-08-31T15:27:07Z`. Direct live GETs for the English, zh-TW, and zh-CN customer-support canonicals each returned 200 with no redirect, exact self-canonical, reciprocal en-US/zh-TW/zh-CN/x-default hreflang, `index, follow`, Article and BreadcrumbList schema, the bounded approved-document support-answer task, maintained-source and limitation boundaries, human review, and visible FAQ without FAQPage schema. The current deployed audit passed robots, 168 sitemap URLs, 30 key pages, six utility noindex surfaces, sitemap-wide FAQPage absence, 25 redirects, six bridge-host redirects, and legacy URL exclusion. The exact `393x852` and `1280x900` production render evidence from publication remains applicable: later shared-renderer changes only extended protected CJK terms for the separate Course Wiki and Business Metric owners and did not alter this route's layout or customer-support terms. The latest successfully completed authenticated GSC and Vercel capture remains `2026-07-31..2026-08-27`, ending before publication: GSC property is 7 clicks / 913 impressions, target-page and joined query-page rows are unavailable rather than zero, and property, visible-query, and visibility-gap units remain separate; Vercel is 289 visitors / 690 pageviews, while target-page and source-to-page rows are unavailable rather than zero and direct/qualified referrers remain separate. Authenticated URL Inspection was unavailable, so post-deploy crawl and indexing state are unchecked. GitHub separately reports 60 stars at `2026-09-01T15:28:19Z`; release `v0.17.6` separately reports 22 cumulative asset downloads at the same capture, with no attribution to this page.
+- Result: inconclusive
+- Decision: wait
+- Next step: Keep the fixed production boundary and current pages unchanged. Run the seven-day source-native GSC page/query and Vercel page/referrer readout after `2026-09-07T15:27:07Z`; re-read authenticated URL Inspection when available without requesting indexing. Do not infer SEO success, source-to-page sessions, authority, release-download attribution, or star causality.
+<!-- EXPERIMENT-RECORD:END -->

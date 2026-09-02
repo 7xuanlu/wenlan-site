@@ -720,7 +720,7 @@ Demand discovery:
 - Publication: `measuring`
 - Standalone utility: A neutral research runbook can bound a paper set, maintain a claim/method/sample/result/limitation matrix, preserve exact source locations, separate contradictions from consensus, and refresh the synthesis as new papers arrive.
 - Overlap check: Do not duplicate the generic document-import or citation-debugging owners. The new owner is eligible only while it starts from a research question and papers already acquired, builds a literature matrix, preserves contradictions and limitations, and explicitly excludes scholarly search, DOI discovery, Zotero import, citation formatting, scanned-PDF OCR, and manuscript generation.
-- Next research: PR 145 merged at 2026-08-28T03:49:03Z as 37b28a0df3e2e85a41ca7ec4bb9d25db3149ca89 and Vercel production completed at 2026-08-28T03:49:51Z. Keep that production boundary fixed and measure each locale independently. The exact maintained-source README proposal is locally prepared; hold the awesome-ai-research-tools submission because current maintainer evidence flags multi-list maintainer promotion risk, and request separate approval before any source-repo publication.
+- Next research: Site PR #145 merged at 2026-08-28T03:49:03Z as 37b28a0df3e2e85a41ca7ec4bb9d25db3149ca89 and Vercel production completed at 2026-08-28T03:49:51Z. Source PR #624 already merged the four README research-workflow links at 2026-08-28T05:16:37Z; do not reapply the stale proposal patch. The overdue technical readout passed at 2026-09-01T14:39:32Z, while authenticated URL Inspection remained unchecked. Keep the site production boundary fixed and run the seven-day source-native GSC/Vercel readout after 2026-09-04T03:49:51Z. Hold the awesome-ai-research-tools submission because current maintainer evidence flags multi-list maintainer promotion risk.
 
 ### Locale intent and ownership
 
@@ -769,7 +769,7 @@ Demand discovery:
 | firstPartyProof | passed | Maintained Wenlan source proves text-extractable PDF and Markdown ingestion, folders and read-only Obsidian sources, incremental sync, source-backed Pages, citations, stale/revision/review state, and lint. | /Users/lucian/Repos/wenlan/README.md:102; /Users/lucian/Repos/wenlan/README.md:240; /Users/lucian/Repos/wenlan/README.md:244 |
 | standaloneUtility | passed | A bounded-paper, literature-matrix, contradiction, citation, and refresh workflow is useful without Wenlan. | standaloneUtility |
 | internalLinks | passed | The generic document-import, citation-verification, source-backed knowledge-base, and Learn-hub owners are available in every locale. | internalLinks |
-| authorityPath | passed | The current Wenlan v0.17.3 source README family is a maintained first-party reference that names researchers and proves the underlying PDF, source-backed Page, citation, refresh, and review capabilities but lacks a direct research-workflow entry. A four-README locale-aware proposal passes the repository translation-sync and diff gates. This is first-party authority, not independent endorsement. | authorityPath; docs/seo-audits/2026-08-27-research-authority-next-action.md |
+| authorityPath | passed | Wenlan source PR #624 merged the locale-aware research-workflow links into README.md, README.zh-Hant.md, README.zh-Hans.md, and README.es-ES.md at 2026-08-28T05:16:37Z. Current main still contains all four links and passes the translated-README sync checker and its self-test. This is a maintained first-party reference, not independent endorsement or traffic evidence. | authorityPath; docs/seo-audits/2026-08-27-research-authority-next-action.md |
 
 ### Wenlan proof
 
@@ -790,7 +790,7 @@ Demand discovery:
 
 ### Authority path and readout
 
-- Authority path: maintained-first-party-reference — https://github.com/7xuanlu/wenlan — add one locale-aware research-workflow entry to the current English, zh-Hant, zh-Hans, and Spanish README Learn-more sections only after separate source-repo publication approval (prepared-local-awaiting-separate-publication-approval).
+- Authority path: maintained-first-party-reference — https://github.com/7xuanlu/wenlan/pull/624 — merged at 2026-08-28T05:16:37Z as 368fabcf667736e1b116dac8a9e79b017ae4d6bf; current main e450c4371f224802666a53e4dcbe7b4990935ca8 still contains all four locale-aware research-workflow links and passes the translated-README sync checker and self-test (published).
 - GSC: unavailable; native unit: page impressions, joined-query impressions, clicks.
 - Vercel: unavailable; native unit: target-page visitors and referrer visitors.
 
