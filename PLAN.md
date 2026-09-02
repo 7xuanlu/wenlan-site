@@ -4733,3 +4733,46 @@ unchanged.
 - Wait for maintainer action and re-read the PR once at the next due Goal
   boundary. Do not contact the maintainer again or count authority before an
   upstream merge and visible render.
+
+## Campaign authority reconciliation: research README links at 2026-09-01T14:14:03Z
+
+- The control plane incorrectly described the source-backed research
+  knowledge-base README authority path as locally prepared. Source-native
+  history shows Wenlan source PR #624 already merged it at
+  `2026-08-28T05:16:37Z` as
+  `368fabcf667736e1b116dac8a9e79b017ae4d6bf`.
+- Current Wenlan main `e450c4371f224802666a53e4dcbe7b4990935ca8`
+  still contains all four locale-aware README links. The translated-README sync
+  checker and self-test pass, and the three website targets return direct 200.
+- Mark the authority path `published`; do not reapply the stale proposal patch.
+  This is first-party publication evidence only, not independent endorsement,
+  referral traffic, crawl, indexing, rank, impressions, clicks, visitors, or
+  causal growth.
+- Keep the site production boundary at `2026-08-28T03:49:51Z`. Append the
+  overdue 24-hour technical/indexability readout next, then run the seven-day
+  GSC/Vercel readout after `2026-09-04T03:49:51Z`.
+
+## Research technical readout and GitHub star diagnosis at 2026-09-01T14:39:32Z
+
+- The overdue Research Knowledge Base technical readout passed: all three
+  locale routes return direct 200, exact self-canonicals, reciprocal hreflang,
+  `index, follow`, Article and BreadcrumbList schema, no FAQPage schema, and
+  the visible literature-matrix, contradiction, limitation, and source-update
+  task. The deployed audit passed 168 sitemap owners and every protected
+  robots, redirect, utility-noindex, and FAQPage absence check.
+- The latest authenticated GSC/Vercel evidence ends `2026-08-27`, before the
+  fixed production boundary. Target-page/query/referrer rows are unavailable,
+  not zero. Authenticated URL Inspection could not be read in this task and is
+  `unchecked`; no crawl or indexing success is inferred.
+- GitHub now reports 60 stars. The nine stars after the fixed 51-star weekly
+  capture all arrived between `2026-08-30T08:48:22Z` and
+  `2026-08-31T02:00:36Z`, with none afterward at capture. GitHub's aggregate
+  referrers show much more X/Threads exposure than Google, but do not join a
+  referrer to an individual star. Treat this as one distribution burst, not a
+  sustainable daily rate or SEO attribution.
+- Full source-native counters and interpretation boundaries are preserved in
+  `docs/seo-audits/2026-09-01-github-star-burst-diagnosis.md`.
+- Next due evidence: the Research family seven-day GSC/Vercel readout after
+  `2026-09-04T03:49:51Z`. The 60-star plateau requires a repeatable qualified
+  distribution cohort in parallel with SEO; keeping pages live alone is not a
+  star-growth mechanism.

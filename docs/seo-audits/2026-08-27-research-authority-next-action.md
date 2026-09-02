@@ -6,10 +6,9 @@ Website canonical family: `/learn/source-backed-research-knowledge-base`
 
 ## Decision
 
-Do not submit another Awesome-list pull request now. Prepare one maintained
-first-party source reference from the current Wenlan repository README family
-to the new locale-aware research workflow, then return for explicit source-repo
-publication approval.
+Do not submit another Awesome-list pull request now. The maintained first-party
+source reference was already published through Wenlan source PR #624; do not
+reapply the historical local proposal patch.
 
 This is an authority-path correction, not a claim of search growth. A live
 Wenlan README link would be a maintained first-party reference; it would not be
@@ -76,10 +75,25 @@ All passed in an isolated clone. The candidate is four README files, seven
 insertions and three generated-hash replacements. It is not committed, pushed,
 merged, or published.
 
-## Approval boundary
+## Source-native reconciliation at 2026-09-01T14:14:03Z
 
-Separate explicit approval is required before applying this proposal to the
-Wenlan source repository, committing, pushing, opening or merging a pull
-request, or relying on automatic publication. Request indexing, GSC validation,
-maintainer messages, synthetic analytics events, and any third-party directory
-submission remain excluded.
+- Wenlan source PR #624 merged at `2026-08-28T05:16:37Z` as
+  `368fabcf667736e1b116dac8a9e79b017ae4d6bf`.
+- Current Wenlan main `e450c4371f224802666a53e4dcbe7b4990935ca8`
+  still contains the English, Traditional-Chinese, Simplified-Chinese, and
+  Spanish research-workflow links; `git blame` assigns those lines to the PR
+  #624 merge.
+- `python3 scripts/check-readme-translations.py` and
+  `bash scripts/check-readme-translations.test.sh` pass on current main.
+- The English, zh-TW, and zh-CN website targets each return a direct HTTP 200.
+
+The proposal patch above is now historical evidence only. Applying it again
+would duplicate already-published work. These checks prove maintained
+first-party publication and destination availability, not referral traffic,
+crawl, indexing, rank, impressions, clicks, visitors, or causality.
+
+## Current approval boundary
+
+No Wenlan source change is required. Any new site edit, request indexing, GSC
+validation, maintainer message, synthetic analytics event, or third-party
+directory submission remains separately approval-gated.
