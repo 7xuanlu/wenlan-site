@@ -4,6 +4,7 @@ import { execFile } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { promisify } from "node:util";
+import { sourceReferrers } from "./seo-referrers.mjs";
 
 const execFileAsync = promisify(execFile);
 const DEFAULT_OUTPUT_DIR = "/tmp/wenlan-seo";
@@ -11,17 +12,6 @@ const DEFAULT_PROJECT_ID = "prj_nqR9IMJGE0Sw4lpFUdMtc1pCo4nb";
 const DEFAULT_PROJECT_NAME = "wenlan-site";
 const DEFAULT_SCOPE = "7xuanlus-projects";
 const DAY_MS = 24 * 60 * 60 * 1000;
-const ACQUISITION_REFERRERS = [
-  "google.com",
-  "bing.com",
-  "duckduckgo.com",
-  "m.baidu.com",
-  "chatgpt.com",
-  "github.com",
-  "search.brave.com",
-  "search.yahoo.com",
-  "yandex.ru",
-];
 
 function parseIsoDate(value, label) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value ?? "")) {
@@ -138,18 +128,20 @@ async function fetchCustomEventStatus(args) {
       args,
       endpoint("/v1/query/web-analytics/events/count", args),
     );
-    return {
-      status: "available",
-      count: response.data?.events ?? response.data?.count ?? 0,
-    };
+    const count = response.data?.events ?? response.data?.count;
+    return Number.isFinite(count) && count >= 0
+      ? { status: "available", count }
+      : { status: "unavailable", reason: "Response omitted a numeric event count" };
   } catch (error) {
     return eventGate(error);
   }
 }
 
-async function fetchSourcePageRows(args) {
-  const responses = await Promise.all(
-    ACQUISITION_REFERRERS.map(async (referrer) => ({
+async function fetchSourcePageRows(args, referrers) {
+  const responses = [];
+  for (let offset = 0; offset < referrers.length; offset += 4) {
+    responses.push(...await Promise.all(
+    referrers.slice(offset, offset + 4).map(async (referrer) => ({
       referrer,
       response: await runVercelApi(
         args,
@@ -161,7 +153,8 @@ async function fetchSourcePageRows(args) {
         ),
       ),
     })),
-  );
+    ));
+  }
 
   return responses.flatMap(({ referrer, response }) =>
     aggregateRows(response, "requestPath")
@@ -172,7 +165,7 @@ async function fetchSourcePageRows(args) {
 
 async function run() {
   const args = parseArgs(process.argv.slice(2));
-  const [countResponse, pageResponse, referrerResponse, sourcePages, customEvents] = await Promise.all([
+  const [countResponse, pageResponse, referrerResponse, customEvents] = await Promise.all([
     runVercelApi(args, endpoint("/v1/query/web-analytics/visits/count", args)),
     runVercelApi(
       args,
@@ -182,7 +175,6 @@ async function run() {
       args,
       endpoint("/v1/query/web-analytics/visits/aggregate", args, "referrerHostname"),
     ),
-    fetchSourcePageRows(args),
     fetchCustomEventStatus(args),
   ]);
   const totals = {
@@ -191,6 +183,7 @@ async function run() {
   };
   const pages = aggregateRows(pageResponse, "requestPath");
   const referrers = aggregateRows(referrerResponse, "referrerHostname");
+  const sourcePages = await fetchSourcePageRows(args, sourceReferrers(referrers));
 
   await mkdir(args.outputDir, { recursive: true });
   await Promise.all([
@@ -235,7 +228,8 @@ async function run() {
         totals,
         sourcePageBreakdown: {
           status: "available",
-          referrers: ACQUISITION_REFERRERS,
+          referrers: sourceReferrers(referrers),
+          coverage: "Requested top 100 referrers and top 100 paths per observed hostname; the API may also return an Others aggregate. Row visitors are not additive unique people.",
           rows: sourcePages.length,
         },
         customEvents,

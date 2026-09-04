@@ -6,6 +6,7 @@ import { join, relative, resolve } from "node:path";
 import test from "node:test";
 import ts from "typescript";
 import { promisify } from "node:util";
+import { selectedReleaseTag } from "./release-check.mjs";
 
 const repoRoot = resolve(import.meta.dirname, "..");
 const execFileAsync = promisify(execFile);
@@ -65,41 +66,26 @@ async function currentWenlanRelease() {
     ? resolve(process.env.WENLAN_REPO_ROOT)
     : resolve(repoRoot, "../wenlan");
   const taggedRelease = await currentWenlanTaggedRelease(wenlanRoot);
-  if (taggedRelease) return taggedRelease;
-
-  const versionPath = resolve(wenlanRoot, "version.txt");
-  const changelogPath = resolve(wenlanRoot, "CHANGELOG.md");
-  const version = (await readFile(versionPath, "utf8")).trim();
-  const changelog = await readFile(changelogPath, "utf8");
-
-  return parseRelease({ version, changelog, changelogPath });
+  return taggedRelease;
 }
 
 async function currentWenlanTaggedRelease(wenlanRoot) {
   try {
-    const { stdout: tagStdout } = await execFileAsync("git", [
-      "-C",
-      wenlanRoot,
-      "tag",
-      "--list",
-      "v[0-9]*",
-      "--sort=-v:refname",
-    ]);
-    const tag = tagStdout.split("\n").find(Boolean);
-    if (!tag) return null;
+    const tag = selectedReleaseTag();
 
     const [{ stdout: versionStdout }, { stdout: changelog }] = await Promise.all([
       execFileAsync("git", ["-C", wenlanRoot, "show", `${tag}:version.txt`]),
       execFileAsync("git", ["-C", wenlanRoot, "show", `${tag}:CHANGELOG.md`]),
     ]);
+    assert.equal(`v${versionStdout.trim()}`, tag, "Selected tag and source version differ");
 
     return parseRelease({
       version: versionStdout.trim(),
       changelog,
       changelogPath: `${wenlanRoot}:${tag}:CHANGELOG.md`,
     });
-  } catch {
-    return null;
+  } catch (error) {
+    throw new Error(`Cannot validate selected release ${selectedReleaseTag()} in ${wenlanRoot}; fetch that tag before running source contracts`, { cause: error });
   }
 }
 
@@ -1078,7 +1064,7 @@ test("security docs align with the current Wenlan site policy", async () => {
 });
 
 
-test("public current-release surfaces track the authoritative Wenlan release", async () => {
+test("public current-release surfaces track the selected Wenlan release source", async () => {
   const { version, date } = await currentWenlanRelease();
   const structuredData = await readRepo("src/app/structured-data.ts");
   const releases = await readRepo("src/lib/releases.ts");
@@ -1096,7 +1082,10 @@ test("public current-release surfaces track the authoritative Wenlan release", a
   assert.match(structuredData, /downloadUrl: WENLAN_RELEASE\.releaseUrl/);
   assert.match(releases, new RegExp(`version: "${escapedVersion}"`));
   assert.match(releases, new RegExp(`tag: "v${escapedVersion}"`));
-  assert.match(releases, new RegExp(`publishedAt: "${escapeRegExp(date)}"`));
+  assert.match(
+    releases,
+    new RegExp(`publishedAt: "${escapeRegExp(date)}(?:T|")`),
+  );
   assert.match(releases, /wenlan-windows-x64\.zip/);
   assert.match(releases, /wenlan-darwin-arm64\.tar\.gz/);
   assert.match(releases, /wenlan-linux-x64\.tar\.gz/);
@@ -1132,6 +1121,75 @@ test("public current-release surfaces track the authoritative Wenlan release", a
     new Date(getStartedDate) >= new Date(date),
     "get-started sitemap date must not predate the current release",
   );
+});
+
+test("public release surfaces expose the verified v0.18.0 artifacts and highlights", async () => {
+  const { WENLAN_RELEASE } = await import("../src/lib/releases.ts");
+  const docs = await readRepo("src/app/docs/docs.ts");
+  const structuredData = await readRepo("src/app/structured-data.ts");
+  const aboutOg = await readRepo("src/app/about/opengraph-image.tsx");
+  const llms = await readRepo("public/llms.txt");
+
+  assert.equal(WENLAN_RELEASE.version, "0.18.0");
+  assert.equal(WENLAN_RELEASE.tag, "v0.18.0");
+  assert.equal(WENLAN_RELEASE.publishedAt, "2026-09-04T20:31:03Z");
+  assert.equal(
+    WENLAN_RELEASE.releaseUrl,
+    "https://github.com/7xuanlu/wenlan/releases/tag/v0.18.0",
+  );
+  assert.equal(
+    WENLAN_RELEASE.setupGuideUrl,
+    "https://github.com/7xuanlu/wenlan/blob/v0.18.0/docs/setup-with-ai.md#install-the-runtime",
+  );
+  assert.deepEqual(
+    WENLAN_RELEASE.assets.map(({ id, href, format, size }) => ({ id, href, format, size })),
+    [
+      {
+        id: "windows-desktop-x64",
+        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.0/Wenlan_0.18.0_x64-setup.exe",
+        format: "EXE",
+        size: "59.3 MiB",
+      },
+      {
+        id: "windows-x64",
+        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.0/wenlan-windows-x64.zip",
+        format: "ZIP",
+        size: "73.7 MiB",
+      },
+      {
+        id: "macos-arm64",
+        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.0/Wenlan_0.18.0_aarch64.dmg",
+        format: "DMG",
+        size: "83.6 MiB",
+      },
+      {
+        id: "macos-runtime-arm64",
+        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.0/wenlan-darwin-arm64.tar.gz",
+        format: "TAR.GZ",
+        size: "50.0 MiB",
+      },
+      {
+        id: "linux-x64",
+        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.0/wenlan-linux-x64.tar.gz",
+        format: "TAR.GZ",
+        size: "62.6 MiB",
+      },
+      {
+        id: "linux-arm64",
+        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.0/wenlan-linux-arm64.tar.gz",
+        format: "TAR.GZ",
+        size: "62.8 MiB",
+      },
+    ],
+  );
+  assert.match(docs, /v0\.18\.0 highlights/);
+  assert.match(docs, /one home page with an honest empty state/);
+  assert.match(docs, /removes the .*Where AI looked.* section/);
+  assert.match(docs, /global shortcut is occupied/);
+  assert.match(docs, /window stays still after launch/);
+  assert.match(structuredData, /tree\/v0\.18\.0\/app/);
+  assert.match(aboutOg, /v0\.18\.0 · Apache-2\.0/);
+  assert.match(llms, /tree\/v0\.18\.0\/app/);
 });
 
 test("download information architecture keeps the homepage compact and the full matrix on a localized hub", async () => {
@@ -1297,7 +1355,7 @@ test("public onboarding is Wenlan-first and distinguishes plugin, local MCP, and
   assert.match(llmsFull, /ChatGPT/);
 });
 
-test("public framing stays LLM-wiki-first across footer, social images, and the legacy demo", async () => {
+test("public framing stays LLM-wiki-first across footer, social images, and the current demo", async () => {
   const surfaces = [
     ["src/i18n/content/en.ts", await readRepo("src/i18n/content/en.ts")],
     ["src/app/learn/opengraph-image.tsx", await readRepo("src/app/learn/opengraph-image.tsx")],
@@ -1310,7 +1368,8 @@ test("public framing stays LLM-wiki-first across footer, social images, and the 
     assert.match(source, /LLM wiki/, path);
   }
 
-  assert.match(surfaces[0][1], /Historical Wenlan demo v0\.9/);
+  assert.match(surfaces[0][1], /title: "Wenlan demo"/);
+  assert.doesNotMatch(surfaces[0][1], /Historical Wenlan demo v0\.9/);
   assert.match(surfaces[1][1], /ChatGPT/);
 });
 

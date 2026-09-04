@@ -4,6 +4,7 @@ import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
 import { promisify } from "node:util";
+import { selectedReleaseTag } from "./release-check.mjs";
 
 const repoRoot = resolve(import.meta.dirname, "..");
 const execFileAsync = promisify(execFile);
@@ -39,18 +40,6 @@ function cargoVersion(cargoToml) {
   const match = cargoToml.match(/^version = "([^"]+)"/m);
   assert.ok(match, "app/Cargo.toml is missing a package version");
   return match[1];
-}
-
-async function latestVersionTag(repo) {
-  const { stdout } = await execFileAsync("git", [
-    "-C",
-    repo,
-    "tag",
-    "--list",
-    "v[0-9]*",
-    "--sort=-v:refname",
-  ]);
-  return stdout.split("\n").find(Boolean);
 }
 
 function appBackendPin(pinFile) {
@@ -117,7 +106,7 @@ async function currentWenlanAppRelease() {
     );
   }
 
-  const releaseRef = await latestVersionTag(appRoot);
+  const releaseRef = selectedReleaseTag();
   assert.ok(
     releaseRef,
     "Wenlan checkout has no version tag; fetch tags before validating published app facts",
@@ -225,7 +214,7 @@ test("wenlan-app backend pin parser rejects mixed and incomplete manifests", () 
 
 test("Wenlan unified release metadata exposes the version-locked desktop app", async () => {
   const app = await currentWenlanAppRelease();
-  const publishedTag = await latestVersionTag(app.root);
+  const publishedTag = selectedReleaseTag();
 
   assert.equal(app.releaseRef, publishedTag);
   assert.equal(app.tag, publishedTag);

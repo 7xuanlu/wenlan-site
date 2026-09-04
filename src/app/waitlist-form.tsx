@@ -5,7 +5,7 @@ import { trackAnalyticsEvent } from "@/components/tracked-link";
 import type { WaitlistContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
 import {
-  browserSignupAttribution,
+  currentSignupAttribution,
   type SignupAttribution,
 } from "@/lib/signup-attribution";
 import { joinWaitlist } from "./actions";
@@ -35,9 +35,7 @@ export function WaitlistForm({
       : null;
 
   useEffect(() => {
-    setAttribution(
-      browserSignupAttribution(window.location.href, document.referrer),
-    );
+    setAttribution(currentSignupAttribution());
   }, []);
 
   useEffect(() => {

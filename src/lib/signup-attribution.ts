@@ -22,6 +22,53 @@ export type SignupAttribution = Record<
   string
 >;
 
+export const ATTRIBUTION_KEY = "wenlan-acquisition-v1";
+export const ATTRIBUTION_TTL_MS = 30 * 60 * 1000;
+type AttributionStorage = Pick<Storage, "getItem" | "setItem">;
+
+function safeAttribution(value: SignupAttribution): SignupAttribution {
+  return Object.fromEntries(
+    Object.entries(signupAttributionFieldNames).map(([name, key]) => [
+      key,
+      serverSafeAttributionValue(name as keyof typeof resendSignupPropertyKeys, boundedValue(value[key])),
+    ]),
+  ) as SignupAttribution;
+}
+
+// A short-lived first landing, never a persistent visitor identifier.
+export function captureSignupAttribution(
+  locationHref: string,
+  referrer: string,
+  storage?: AttributionStorage,
+  now = Date.now(),
+): SignupAttribution {
+  const current = safeAttribution(browserSignupAttribution(locationHref, referrer));
+  try {
+    const raw = storage?.getItem(ATTRIBUTION_KEY);
+    if (raw) {
+      const saved = JSON.parse(raw);
+      if (saved.version === 1 && Number.isFinite(saved.at) && saved.at <= now &&
+          now - saved.at < ATTRIBUTION_TTL_MS && saved.data &&
+          Object.values(signupAttributionFieldNames).every(key => typeof saved.data[key] === "string")) {
+        return safeAttribution(saved.data);
+      }
+    }
+  } catch { /* Private browsing and malformed storage must not break navigation. */ }
+  try {
+    storage?.setItem(ATTRIBUTION_KEY, JSON.stringify({ version: 1, at: now, data: current }));
+  } catch { /* Continue with the current page when storage is unavailable. */ }
+  return current;
+}
+
+export function currentSignupAttribution(): SignupAttribution {
+  if (typeof window === "undefined" || window.navigator?.doNotTrack === "1" || window.navigator?.doNotTrack === "yes") {
+    return { signup_landing_path: "", signup_referrer_host: "", signup_utm_source: "", signup_utm_medium: "", signup_utm_campaign: "" };
+  }
+  let storage: AttributionStorage | undefined;
+  try { storage = window.sessionStorage; } catch { /* Storage can be denied. */ }
+  return captureSignupAttribution(window.location.href, document.referrer, storage);
+}
+
 const MAX_ATTRIBUTION_VALUE_LENGTH = 120;
 const UTM_VALUE = /^[\p{L}\p{N}][\p{L}\p{N} ._~-]*$/u;
 

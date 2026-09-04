@@ -1,35 +1,35 @@
 const WENLAN_RELEASE_DOWNLOAD_BASE =
-  "https://github.com/7xuanlu/wenlan/releases/download/v0.17.6";
+  "https://github.com/7xuanlu/wenlan/releases/download/v0.18.0";
 
 export const WENLAN_RELEASE = {
-  version: "0.17.6",
-  tag: "v0.17.6",
-  publishedAt: "2026-08-31",
-  releaseUrl: "https://github.com/7xuanlu/wenlan/releases/tag/v0.17.6",
+  version: "0.18.0",
+  tag: "v0.18.0",
+  publishedAt: "2026-09-04T20:31:03Z",
+  releaseUrl: "https://github.com/7xuanlu/wenlan/releases/tag/v0.18.0",
   setupGuideUrl:
-    "https://github.com/7xuanlu/wenlan/blob/v0.17.6/docs/setup-with-ai.md#install-the-runtime",
+    "https://github.com/7xuanlu/wenlan/blob/v0.18.0/docs/setup-with-ai.md#install-the-runtime",
   assets: [
     {
       id: "windows-desktop-x64",
-      href: `${WENLAN_RELEASE_DOWNLOAD_BASE}/Wenlan_0.17.6_x64-setup.exe`,
+      href: `${WENLAN_RELEASE_DOWNLOAD_BASE}/Wenlan_0.18.0_x64-setup.exe`,
       format: "EXE",
       size: "59.3 MiB",
       guideHref:
-        "https://github.com/7xuanlu/wenlan/blob/v0.17.6/README.md#desktop-app",
+        "https://github.com/7xuanlu/wenlan/blob/v0.18.0/README.md#desktop-app",
     },
     {
       id: "windows-x64",
       href: `${WENLAN_RELEASE_DOWNLOAD_BASE}/wenlan-windows-x64.zip`,
       format: "ZIP",
-      size: "73.6 MiB",
+      size: "73.7 MiB",
     },
     {
       id: "macos-arm64",
-      href: `${WENLAN_RELEASE_DOWNLOAD_BASE}/Wenlan_0.17.6_aarch64.dmg`,
+      href: `${WENLAN_RELEASE_DOWNLOAD_BASE}/Wenlan_0.18.0_aarch64.dmg`,
       format: "DMG",
       size: "83.6 MiB",
       guideHref:
-        "https://github.com/7xuanlu/wenlan/blob/v0.17.6/README.md#desktop-app",
+        "https://github.com/7xuanlu/wenlan/blob/v0.18.0/README.md#desktop-app",
     },
     {
       id: "macos-runtime-arm64",
@@ -41,13 +41,13 @@ export const WENLAN_RELEASE = {
       id: "linux-x64",
       href: `${WENLAN_RELEASE_DOWNLOAD_BASE}/wenlan-linux-x64.tar.gz`,
       format: "TAR.GZ",
-      size: "62.5 MiB",
+      size: "62.6 MiB",
     },
     {
       id: "linux-arm64",
       href: `${WENLAN_RELEASE_DOWNLOAD_BASE}/wenlan-linux-arm64.tar.gz`,
       format: "TAR.GZ",
-      size: "62.7 MiB",
+      size: "62.8 MiB",
     },
   ],
 } as const;

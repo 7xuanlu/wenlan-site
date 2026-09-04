@@ -17,7 +17,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "109e11bfa9fdf80453b8146fe83de7fdef4950265b13f5fe98b6d63d4fa7cb4c",
+    sourceHash: "3d22276738d761d8bff9ca19885e79ec2e762bf78689a76e531ed558df895e3c",
     content: {
       seo: {
         title: "Wenlan 文澜 | AI 工作的 LLM wiki",
@@ -75,15 +75,15 @@ export const zhCNContent = {
         ],
       },
       demo: {
-        title: "Wenlan v0.9 历史演示",
-        playLabel: "播放 Wenlan v0.9 历史演示",
+        title: "Wenlan 产品演示",
+        playLabel: "播放 Wenlan 产品演示",
       },
       download: {
         eyebrow: "下载",
         title:
           "下\u2060载\u2060适\u2060合\u2060你\u2060系\u2060统\u2060的 Wenlan。",
         description:
-          "Wenlan v0.17.6 提供 Windows x64 桌面版与已公证的 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 包。",
+          "Wenlan v0.18.0 提供 Windows x64 桌面版与已公证的 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 包。",
         stableLabel: "稳定版",
         releaseNotesLabel: "版本说明",
         packageIncludesLabel: "内含 CLI、daemon 与 MCP connector",
@@ -129,7 +129,7 @@ export const zhCNContent = {
             name: "Wenlan 桌面版",
             architecture: "macOS · Apple silicon 预览版",
             description:
-              "最快开始阅读 Page 与检查来源的方式。v0.17.6 Apple silicon DMG 已完成 notarization，可正常首次启动。",
+              "最快开始阅读 Page 与检查来源的方式。v0.18.0 Apple silicon DMG 已完成 notarization，可正常首次启动。",
             actionLabel: "下载 macOS 桌面预览版",
             packageIncludesLabel: "桌面 App · 内含本地 runtime",
             guideLabel: "打开安全安装指南",
@@ -668,7 +668,7 @@ export const zhCNContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "76178d52dbef4d60fee1366ba2c682244e49324f8d908626939f2a17e7ca8927",
+    sourceHash: "05bf0f253730ae4524c7b143d582c68bd57389ea9598e81646b47d8c97eaa7b3",
     content: {
       seo: {
         title: "关于 Wenlan | AI 工作的 LLM wiki",
@@ -685,7 +685,7 @@ export const zhCNContent = {
         description:
           "AI 代理捕捉学到的内容，你加入信任来源，Wenlan 让有来源依据的 wiki 页面在 AI 工作中保持最新。",
         statusLabel: "项目状态",
-        statusItems: ["版本 v0.17.6", "支持 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 构建"],
+        statusItems: ["版本 v0.18.0", "支持 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 构建"],
       },
       sections: [
         {
@@ -712,7 +712,7 @@ export const zhCNContent = {
           number: "04",
           title: "当前状态",
           paragraphs: [
-            "Wenlan v0.17.6 提供已公证的 macOS Apple Silicon DMG 与 Windows x64 桌面版，以及 macOS、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64) 原生 headless runtime 包。Windows 用户可以选择桌面版 setup 安装程序或 headless runtime ZIP。daemon、CLI、MCP server、Claude Code plugin 与 Codex plugin 采用 Apache-2.0；桌面 App crate 采用 AGPL-3.0-only。",
+            "Wenlan v0.18.0 提供已公证的 macOS Apple Silicon DMG 与 Windows x64 桌面版，以及 macOS、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64) 原生 headless runtime 包。Windows 用户可以选择桌面版 setup 安装程序或 headless runtime ZIP。daemon、CLI、MCP server、Claude Code plugin 与 Codex plugin 采用 Apache-2.0；桌面 App crate 采用 AGPL-3.0-only。",
           ],
         },
       ],
@@ -791,7 +791,7 @@ export const zhCNContent = {
   },
   docs: {
     status: "translated",
-    sourceHash: "a7c04edd2da7835a4d77cf1cbe45e91477e60da5e8f7ebf5c692fbf9746fdec4",
+    sourceHash: "e21926e641813121b13ad92603d66fca7d97494042cca9bf3bdb51157e0c8527",
     content: {
       seo: {
         title: "Wenlan 文档 | AI 工作的 LLM wiki",
@@ -1201,7 +1201,7 @@ export const zhCNContent = {
                 title: "Wenlan Changelog 与版本记录",
                 description:
                   "查看 Wenlan 当前版本、已发布变更，以及如何区分 tagged releases 与 main 上尚未发布的工作。",
-                meta: "Qi-Xuan Lu · 更新于 2026 年 7 月 17 日 · 5 分钟阅读",
+                meta: "Qi-Xuan Lu · 更新于 2026 年 9 月 4 日 · 5 分钟阅读",
               },
               {
                 id: "releases-and-versioning",
@@ -1289,7 +1289,7 @@ export const zhCNContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "92defadd2f989cd66e6d7a7ddbb5cc7249578561f28970f27a785be40600a15e",
+    sourceHash: "b05b606fee5b581cc398bfd36201f904fcac4037f88c515a43f9354f8ed412c5",
     content: {
       seo: {
         title: "安装 Wenlan：Claude Code、Codex、ChatGPT 与 MCP",
@@ -1315,7 +1315,7 @@ export const zhCNContent = {
           number: "01",
           title: "安装适合你系统的 runtime",
           paragraphs: [
-            "Wenlan v0.17.6 提供 Windows x64、macOS Apple silicon，以及 Linux x64 或 ARM64 glibc 的原生 runtime 包。每份 runtime archive 都包含 CLI、daemon 与 MCP connector。",
+            "Wenlan v0.18.0 提供 Windows x64、macOS Apple silicon，以及 Linux x64 或 ARM64 glibc 的原生 runtime 包。每份 runtime archive 都包含 CLI、daemon 与 MCP connector。",
             "在 Windows 上，请把 wenlan-windows-x64.zip 当成一个整体解压到用户拥有且已加入 PATH 的目录。onnxruntime.dll、vulkan-1.dll 与三个可执行文件必须放在一起。",
           ],
           commands: [
@@ -1326,13 +1326,13 @@ export const zhCNContent = {
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.17.6/wenlan-windows-x64.zip",
+              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.0/wenlan-windows-x64.zip",
               label: "下载 Windows x64",
             },
             {
               id: "all-downloads",
-              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.17.6",
-              label: "全部 v0.17.6 下载",
+              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.18.0",
+              label: "全部 v0.18.0 下载",
             },
           ],
         },

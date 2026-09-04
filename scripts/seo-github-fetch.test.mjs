@@ -6,6 +6,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import test from "node:test";
+import { WENLAN_RELEASE } from "../src/lib/releases.ts";
 import {
   buildGithubMetadata,
   collectReleasePages,
@@ -25,8 +26,8 @@ const currentAssets = [
   ["wenlan-linux-x64.tar.gz", 11],
   ["wenlan-mcp-darwin-arm64.tar.gz", 2],
   ["wenlan-windows-x64.zip", 4],
-  ["Wenlan_0.17.6_aarch64.dmg", 2],
-  ["Wenlan_0.17.6_x64-setup.exe", 1],
+  [`Wenlan_${WENLAN_RELEASE.version}_aarch64.dmg`, 2],
+  [`Wenlan_${WENLAN_RELEASE.version}_x64-setup.exe`, 1],
 ].map(([name, download_count], index) => ({
   name,
   size: 1_000 + index,
@@ -41,8 +42,8 @@ test("GitHub fetch records stars and cumulative website release downloads", asyn
       repository: { stargazers_count: 47 },
       releases: [
           {
-            tag_name: "v0.17.6",
-            published_at: "2026-08-31T00:25:35Z",
+            tag_name: WENLAN_RELEASE.tag,
+            published_at: WENLAN_RELEASE.publishedAt,
             assets: currentAssets,
           },
           {
@@ -58,7 +59,7 @@ test("GitHub fetch records stars and cumulative website release downloads", asyn
     const metadataPath = join(outputRoot, "github-metadata.json");
     await writeFile(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`, "utf8");
     assert.equal(metadata.stars, 47);
-    assert.equal(metadata.currentRelease.tag, "v0.17.6");
+    assert.equal(metadata.currentRelease.tag, WENLAN_RELEASE.tag);
     assert.equal(metadata.currentRelease.websiteAssetDownloads, 28);
     assert.equal(metadata.currentRelease.assetDownloads, 30);
     assert.equal(metadata.allReleaseAssetDownloads, 35);
@@ -83,7 +84,7 @@ test("GitHub fetch records stars and cumulative website release downloads", asyn
     );
     const report = await readFile(reportPath, "utf8");
     assert.match(report, /GitHub stars \| 47/);
-    assert.match(report, /Website-linked v0\.17\.6 asset downloads \| 28/);
+    assert.ok(report.includes(`Website-linked ${WENLAN_RELEASE.tag} asset downloads | 28`));
     assert.match(report, /All release asset downloads \| 35/);
     assert.match(report, /GitHub Release Evidence/);
     assert.match(report, /cumulative point-in-time counters/);

@@ -2722,7 +2722,7 @@ export const docPages: DocPage[] = [
       "local-first privacy",
       "deletion controls",
     ],
-    updatedAt: "2026-07-25",
+    updatedAt: "2026-09-04",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     summary: [
@@ -2742,8 +2742,8 @@ export const docPages: DocPage[] = [
         heading: "Public website analytics",
         body: [
           "The public wenlan.app website is separate from the installed Wenlan runtime. It uses Vercel Web Analytics for aggregate website visits and a configured Umami tracker for bounded GitHub, Get Started, Learn article, setup-path, and successful waitlist-signup events.",
-          "The Umami tracker is restricted to wenlan.app, excludes URL search parameters, and respects the browser's Do Not Track setting. Custom event properties are limited to placement, locale, content context, and a fixed destination category. They never include memory content, code, commands, user paths, search terms, names, email addresses, or stable account identifiers.",
-          "The release-update form sends the submitted email to Resend. When bounded acquisition properties are enabled, Resend also stores the signup locale, landing path, referrer host, and UTM source, medium, and campaign with that contact. Those fields are not sent to Umami, and GitHub's cumulative release download counters are reported separately rather than joined to an individual contact.",
+          "The Umami tracker is restricted to wenlan.app, excludes URL search parameters, and respects the browser's Do Not Track setting. Events carry placement, locale, content context, and a fixed destination category. Known launch links may also carry a predefined campaign, source, and medium; direct release-asset clicks include the public asset ID and release tag. Arbitrary query strings, memory content, code, commands, user file paths, names, email addresses, and stable account identifiers are not sent as event properties. A video-play click records intent to play, not viewing duration or completion.",
+          "The website stores a sanitized first landing path, referrer host, and UTM source, medium, and campaign in per-tab sessionStorage. It reuses that context for 30 minutes, then replaces it on the next capture; this is not a persistent visitor ID. Optional capture is skipped for Do Not Track. The form sends the submitted email to Resend. When acquisition properties are enabled, those fields and the signup locale are stored with the contact. Only predefined launch campaign labels, not the contact or arbitrary attribution fields, can be included in Umami events. GitHub's cumulative release download counters remain separate from individual contacts.",
           "This website measurement does not add cloud sync or telemetry to installed Wenlan.",
         ],
       },
@@ -3605,7 +3605,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.17.6 line.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository also carries the canonical security policy, including best-effort acknowledgment within 72 hours, hot-fix handling for critical issues, and the current stable 0.18.0 line.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3739,7 +3739,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Open the app source",
-          href: "https://github.com/7xuanlu/wenlan/tree/v0.17.6/app",
+          href: "https://github.com/7xuanlu/wenlan/tree/v0.18.0/app",
         },
       },
       {
@@ -3783,35 +3783,36 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.17.6",
+      "Wenlan version 0.18.0",
       "wenlan-mcp release notes",
     ],
-    updatedAt: "2026-08-31",
+    updatedAt: "2026-09-04",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Quick answer: the current stable release in the repository changelog is v0.17.6, dated 2026-08-31.",
+      "Quick answer: the current stable release in the repository changelog is v0.18.0, dated 2026-09-04.",
       "The unified release publishes native runtime archives plus macOS Apple Silicon and Windows x64 desktop builds and updater artifacts.",
     ],
     sections: [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.17.6 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It keeps the Windows x64 desktop build, native headless runtime archives, and notarized macOS Apple Silicon DMG while fixing page summaries, citation chips, MCP recall scope, Codex plugin path resolution, and several desktop UI states.",
+          "Wenlan v0.18.0 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It gives every library one home page with an honest empty state, keeps the app starting when a global shortcut is already taken, and keeps the window still while the daemon starts and reports readiness.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
         ],
       },
       {
-        heading: "v0.17.6 highlights",
+        heading: "v0.18.0 highlights",
         body: [
-          "The v0.17.6 patch release fixes source-backed Page summaries and citations, broadens MCP recall to the intended cross-agent result set, repairs installed Codex skill path resolution, and corrects several desktop review and Atlas states.",
+          "The v0.18.0 release improves the desktop home around the library you are actually viewing, removes the \"Where AI looked\" section, fits the empty-state ghost cards at the default window size, keeps startup moving when a global shortcut is occupied, and holds the window in place with a starting status until the daemon answers.",
         ],
         bullets: [
-          "Page summaries now use the first prose sentence instead of the first bullet, rebuild when a Page is rebuilt, and preserve citation chips when the lede is the first sentence.",
-          "MCP recall no longer filters results to the calling agent.",
-          "Installed Codex plugin skills can locate resolve-space.sh.",
-          "Desktop fixes cover archived-card opacity, Atlas region labels, and opening the Home review dialog on the decisions counted by its rail.",
-          "Stable release date: 2026-08-31.",
+          "Each library gets one home page with an honest empty state when it has no pages yet.",
+          "The home page no longer shows a \"Where AI looked\" section.",
+          "Empty-state ghost cards fit at the default window size.",
+          "Startup continues when another app already owns the global shortcut.",
+          "The window stays still after launch and shows a starting status until the daemon answers.",
+          "Stable release date: 2026-09-04.",
         ],
       },
       {
@@ -3934,7 +3935,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.17.6, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.18.0, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },
