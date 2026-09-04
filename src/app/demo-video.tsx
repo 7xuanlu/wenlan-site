@@ -1,15 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { trackAnalyticsEvent } from "@/components/tracked-link";
+import type { Locale } from "@/i18n/locales";
 
 type DemoVideoProps = {
   embedUrl: string;
   posterUrl: string;
   playLabel: string;
   title: string;
+  locale: Locale;
 };
 
-export function DemoVideo({ embedUrl, posterUrl, playLabel, title }: DemoVideoProps) {
+export function DemoVideo({ embedUrl, posterUrl, playLabel, title, locale }: DemoVideoProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   if (isPlaying) {
@@ -30,7 +33,10 @@ export function DemoVideo({ embedUrl, posterUrl, playLabel, title }: DemoVideoPr
     <button
       type="button"
       aria-label={playLabel}
-      onClick={() => setIsPlaying(true)}
+      onClick={() => {
+        trackAnalyticsEvent({ eventName: "video_play_click", placement: "home-demo", locale, context: "home" });
+        setIsPlaying(true);
+      }}
       className="group absolute inset-0 block overflow-hidden bg-[var(--o-bg-deep)] text-left"
     >
       <img

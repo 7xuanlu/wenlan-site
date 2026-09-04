@@ -14,6 +14,7 @@ import { getCoreContent, type HomeContent, type LinkContent } from "@/i18n/conte
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/locales";
 import { LocalizedLink, localizedHrefForLocale } from "@/i18n/navigation";
 import { SITE_URL } from "@/i18n/routing";
+import { demoVideoForLocale } from "@/lib/demo-video";
 
 function GitHubIcon() {
   return (
@@ -47,10 +48,6 @@ function WenlanMark() {
     </svg>
   );
 }
-
-const demoVideoId = "k37gjWVPHwI";
-const demoVideoEmbedUrl = `https://www.youtube.com/embed/${demoVideoId}?autoplay=1&rel=0`;
-const demoVideoPosterUrl = `https://i.ytimg.com/vi/${demoVideoId}/maxresdefault.jpg`;
 
 const localeLabels = {
   en: { label: "English", short: "EN" },
@@ -108,6 +105,7 @@ export function HomePage({ locale }: { locale: Locale }) {
   const siteNavigationSchema = buildSiteNavigationSchema(locale, content.nav);
   const redesign = content.redesign;
   const cta = content.sections.openSourceCta;
+  const demoVideo = demoVideoForLocale(locale);
 
   return (
     <div className="grain relative min-h-screen">
@@ -234,8 +232,9 @@ export function HomePage({ locale }: { locale: Locale }) {
           <div className="overflow-hidden rounded-xl border border-[var(--o-border)] shadow-[var(--o-shadow-media)]">
             <div className="relative aspect-video bg-[var(--o-bg-deep)]">
               <DemoVideo
-                embedUrl={demoVideoEmbedUrl}
-                posterUrl={demoVideoPosterUrl}
+                locale={locale}
+                embedUrl={demoVideo.embedUrl}
+                posterUrl={demoVideo.posterUrl}
                 playLabel={content.demo.playLabel}
                 title={content.demo.title}
               />
