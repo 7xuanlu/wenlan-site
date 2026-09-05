@@ -102,11 +102,6 @@ Umami is included only when `NEXT_PUBLIC_UMAMI_WEBSITE_ID` is set. `NEXT_PUBLIC_
 
 The waitlist server action lives in `src/app/actions.ts` and uses Resend. It requires `RESEND_API_KEY` and `RESEND_AUDIENCE_ID` for successful submissions.
 
-## PR Proof
-
-Follow `docs/pr-proof.md`: screenshots in the body for visual PRs,
-narrated dry-run or live smoke-test output for non-visual PRs.
-
 ## Quality Bar
 
 - Before claiming a change is done, run the narrow relevant check. For site or SEO changes, prefer `pnpm test:seo`, `pnpm seo:weekly:sample`, and `pnpm build` as applicable.
