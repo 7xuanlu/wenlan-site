@@ -528,11 +528,6 @@ export const enContent = {
           headline: { pre: "A ", emphasis: "living", post: " wiki you can trust." },
           description:
             "The second brain your agents write as they work: repo facts, client calls, training plans. Every page stays cited, linked, and current, so you don't have to.",
-          assurances: [
-            { id: "cited", label: "every claim cited" },
-            { id: "superseded", label: "stale facts superseded" },
-            { id: "linked", label: "pages linked" },
-          ],
           worksWithLabel: "Works with",
           worksWithNote: "Local-first, MCP server",
         },

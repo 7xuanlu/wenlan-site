@@ -222,7 +222,6 @@ export type HomeContent = SeoContent & {
     hero: {
       headline: EmphasisText;
       description: string;
-      assurances: readonly { id: string; label: string }[];
       worksWithLabel: string;
       worksWithNote: string;
     };

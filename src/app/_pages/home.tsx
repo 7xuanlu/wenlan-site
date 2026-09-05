@@ -2,6 +2,15 @@ import { DemoVideo } from "../demo-video";
 import { WaitlistForm } from "../waitlist-form";
 import { ThemeToggle } from "../theme-toggle";
 import { BrandWordmark } from "@/components/brand-wordmark";
+import {
+  ArrowRightIcon,
+  ClaudeBrandIcon,
+  CursorBrandIcon,
+  GitHubLogoIcon,
+  ObsidianBrandIcon,
+  OpenAiBrandIcon,
+  VSCodeBrandIcon,
+} from "@/components/icons";
 import { BentoSection } from "@/components/home/bento";
 import { DownloadSection } from "@/components/home/download";
 import { HeroLivingPage } from "@/components/home/hero-living-page";
@@ -15,23 +24,6 @@ import { SUPPORTED_LOCALES, type Locale } from "@/i18n/locales";
 import { LocalizedLink, localizedHrefForLocale } from "@/i18n/navigation";
 import { SITE_URL } from "@/i18n/routing";
 import { demoVideoForLocale } from "@/lib/demo-video";
-
-function GitHubIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="size-5">
-      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-    </svg>
-  );
-}
-
-function ArrowIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-4">
-      <path d="M5 12h14" />
-      <path d="m12 5 7 7-7 7" />
-    </svg>
-  );
-}
 
 function WenlanMark() {
   return (
@@ -55,10 +47,18 @@ const localeLabels = {
   "zh-CN": { label: "简体中文", short: "简" },
 } as const satisfies Record<Locale, { label: string; short: string }>;
 
-/* The works-with strip and the hero assurance dot accents are design texture:
-   client names are product names and stay English in every locale. */
-const worksWithClients = ["Claude Code", "Cursor", "Codex", "Claude Desktop", "VS Code", "Obsidian"];
-const assuranceAccents = ["var(--o-warm)", "var(--o-sage)", "var(--o-indigo)"];
+/* The works-with strip pairs each client's official mark with its name for
+   screen readers. Client names are product names and stay English in every
+   locale. Claude Code and Claude Desktop share the Claude mark. Codex ships
+   under OpenAI, so it carries the OpenAI mark. */
+const worksWithClients = [
+  { id: "claude-code", label: "Claude Code", Icon: ClaudeBrandIcon },
+  { id: "cursor", label: "Cursor", Icon: CursorBrandIcon },
+  { id: "codex", label: "Codex", Icon: OpenAiBrandIcon },
+  { id: "claude-desktop", label: "Claude Desktop", Icon: ClaudeBrandIcon },
+  { id: "vscode", label: "VS Code", Icon: VSCodeBrandIcon },
+  { id: "obsidian", label: "Obsidian", Icon: ObsidianBrandIcon },
+] as const;
 
 function MetricBar({
   label,
@@ -140,7 +140,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               aria-label={content.nav.githubAriaLabel}
               className="hidden items-center gap-2 text-sm text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-text)] sm:flex"
             >
-              <GitHubIcon />
+              <GitHubLogoIcon className="size-5" />
             </a>
             <div className="hidden sm:block">
               <ThemeToggle
@@ -155,7 +155,7 @@ export function HomePage({ locale }: { locale: Locale }) {
       {/* Hero: the product is the hero. The living page loops the /capture →
           /distill refresh; the wordmark sits as a brand eyebrow above the
           message headline. */}
-      <section className="relative overflow-hidden border-b border-[var(--o-border-subtle)] px-6 pt-28 pb-16 sm:pt-32">
+      <section className="relative overflow-hidden border-b border-[var(--o-border-subtle)] px-6 pt-24 pb-16">
         <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-12">
           <div className="min-w-0 lg:col-span-6">
             <p className="animate-fade-up motion-reduce:animate-none font-serif text-xl sm:text-2xl">
@@ -169,18 +169,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             <p className="animate-fade-up motion-reduce:animate-none delay-200 mt-6 max-w-lg text-lg leading-relaxed break-words text-[var(--o-text-secondary)] sm:text-xl">
               {redesign.hero.description}
             </p>
-            <div className="animate-fade-up motion-reduce:animate-none delay-300 mt-6 flex flex-wrap items-center gap-x-4 gap-y-1.5 font-mono text-[11px] tracking-[0.14em] text-[var(--o-text-muted)] uppercase">
-              {redesign.hero.assurances.map((assurance, index) => (
-                <span key={assurance.id} className="flex items-center gap-1.5">
-                  <span
-                    className="size-1 rounded-full"
-                    style={{ background: assuranceAccents[index % assuranceAccents.length] }}
-                  />
-                  {assurance.label}
-                </span>
-              ))}
-            </div>
-            <div className="animate-fade-up motion-reduce:animate-none delay-400 mt-8 flex flex-wrap items-center gap-4">
+            <div className="animate-fade-up motion-reduce:animate-none delay-200 mt-8 flex flex-wrap items-center gap-4">
               <HomeCta link={content.hero.primaryCta} locale={locale} placement="home-hero" variant="primary" />
               <HomeCta link={content.hero.secondaryCta} locale={locale} placement="home-hero" variant="secondary" />
             </div>
@@ -191,8 +180,11 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
         <div className="mx-auto mt-16 flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 border-t border-[var(--o-border-subtle)] pt-5 text-sm text-[var(--o-text-muted)]">
           <span className="text-[var(--o-text-secondary)]">{redesign.hero.worksWithLabel}</span>
-          {worksWithClients.map((client) => (
-            <span key={client}>{client}</span>
+          {worksWithClients.map(({ id, label, Icon }) => (
+            <span key={id} className="inline-flex items-center">
+              <Icon className="size-4 text-[var(--o-text-secondary)]" />
+              <span className="sr-only">{label}</span>
+            </span>
           ))}
           <span className="ml-auto hidden sm:inline">{redesign.hero.worksWithNote}</span>
         </div>
@@ -216,7 +208,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               }`}
             >
               <span className="break-keep">{link.label}</span>
-              <ArrowIcon />
+              <ArrowRightIcon className="size-4" />
             </TrackedLocalizedLink>
           ))}
         </div>
@@ -265,7 +257,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               className="mt-5 inline-flex items-center gap-2 text-[15px] font-medium text-[var(--o-text-secondary)] underline decoration-[var(--o-border)] underline-offset-4 transition-colors hover:text-[var(--o-warm)]"
             >
               {content.metrics.link.label}
-              <ArrowIcon />
+              <ArrowRightIcon className="size-4" />
             </a>
           </div>
           <div className="lg:col-span-8">
@@ -396,9 +388,9 @@ function HomeCta({
 
   const children = (
     <>
-      {showGithubIcon && <GitHubIcon />}
+      {showGithubIcon && <GitHubLogoIcon className="size-5" />}
       {link.label}
-      {!showGithubIcon && <ArrowIcon />}
+      {!showGithubIcon && <ArrowRightIcon className="size-4" />}
     </>
   );
 

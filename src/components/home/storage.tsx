@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ArrowRightIcon } from "@/components/icons";
 import type { HomeContent } from "@/i18n/content";
 
 type StorageCopy = HomeContent["redesign"]["storage"];
@@ -18,15 +19,6 @@ type StorageCopy = HomeContent["redesign"]["storage"];
  */
 
 type Stage = "final" | "pre" | "played";
-
-function ArrowIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-4">
-      <path d="M5 12h14" />
-      <path d="m12 5 7 7-7 7" />
-    </svg>
-  );
-}
 
 const methodChip =
   "w-[9.5rem] shrink-0 rounded border px-2 py-1 text-center font-mono text-[10px] tracking-wide uppercase transition-colors duration-300";
@@ -169,7 +161,7 @@ export function StorageSection({ copy }: { readonly copy: StorageCopy }) {
             <div className="flex flex-row items-center gap-2 sm:flex-col">
               <p className="font-mono text-[11px] text-[var(--o-warm)]">/distill</p>
               <span className="animate-arrow-nudge flex rotate-90 text-[var(--o-text-muted)] sm:rotate-0">
-                <ArrowIcon />
+                <ArrowRightIcon className="size-4" />
               </span>
               <p className="max-w-24 font-mono text-[10px] leading-relaxed text-[var(--o-text-muted)] sm:text-center">
                 {copy.distillCaption}
@@ -178,7 +170,7 @@ export function StorageSection({ copy }: { readonly copy: StorageCopy }) {
             <div className="flex flex-row items-center gap-2 sm:flex-col">
               <p className="font-mono text-[11px] text-[var(--o-sage)]">ingest</p>
               <span className="animate-arrow-nudge flex -rotate-90 text-[var(--o-text-muted)] sm:rotate-180" style={{ animationDelay: "1.2s" }}>
-                <ArrowIcon />
+                <ArrowRightIcon className="size-4" />
               </span>
               <p className="max-w-24 font-mono text-[10px] leading-relaxed text-[var(--o-text-muted)] sm:text-center">
                 {copy.ingestCaption}
