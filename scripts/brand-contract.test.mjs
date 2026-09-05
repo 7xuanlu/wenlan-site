@@ -1104,9 +1104,9 @@ test("public current-release surfaces track the selected Wenlan release source",
   assert.match(simplifiedContent, new RegExp(`Wenlan v${escapedVersion} 提供`));
   assert.match(traditionalContent, new RegExp(`"版本 v${escapedVersion}"`));
   assert.match(traditionalContent, new RegExp(`Wenlan v${escapedVersion} 提供`));
-  assert.match(englishContent, /Apple silicon DMG is notarized/);
-  assert.match(traditionalContent, /Apple silicon DMG 已完成 notarization/);
-  assert.match(simplifiedContent, /Apple silicon DMG 已完成 notarization/);
+  assert.match(englishContent, /Download macOS desktop/);
+  assert.match(traditionalContent, /下載 macOS 桌面版/);
+  assert.match(simplifiedContent, /下载 macOS 桌面版/);
   assert.doesNotMatch(englishContent, /preview is not yet notarized/);
   assert.doesNotMatch(traditionalContent, /預覽版尚未完成 notarization/);
   assert.doesNotMatch(simplifiedContent, /预览版尚未完成 notarization/);
@@ -1225,9 +1225,9 @@ test("download information architecture keeps the homepage compact and the full 
     downloadPlatforms,
     /recommendedReleaseAssetId\(navigator\.userAgent\)/,
   );
-  assert.match(downloadPlatforms, /orderedPlatforms/);
+  assert.match(downloadPlatforms, /otherPlatforms/);
   assert.match(downloadPlatforms, /<details/);
-  assert.match(downloadPlatforms, /open=\{isRecommended/);
+  assert.match(downloadPlatforms, /open=\{index === 0/);
   assert.match(downloadPlatforms, /placement="download-page"/);
   assert.match(downloadPlatforms, /copy\.packageIncludesLabel/);
   assert.match(downloadPlatforms, /platform\.packageIncludesLabel/);

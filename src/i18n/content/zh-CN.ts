@@ -17,7 +17,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "3d22276738d761d8bff9ca19885e79ec2e762bf78689a76e531ed558df895e3c",
+    sourceHash: "7ccac2cd15d872975997c5926b55352a43a4bbbee4a7fb9dd52ca50eb63ca981",
     content: {
       seo: {
         title: "Wenlan 文澜 | AI 工作的 LLM wiki",
@@ -27,7 +27,6 @@ export const zhCNContent = {
       nav: {
         schemaName: "Wenlan 文澜网站导航",
         brand: "Wenlan 文澜",
-        previewBadge: "预览版",
         githubAriaLabel: "在 GitHub 查看 Wenlan",
         themeToggle: {
           lightLabel: "切换到浅色主题",
@@ -107,6 +106,7 @@ export const zhCNContent = {
             guideLabel: "打开桌面版安装指南",
             setupSteps: [
               "下载并运行 x64 setup 安装程序。",
+              "如果出现 SmartScreen，选择更多信息，然后选择仍要运行。",
               "打开 Wenlan；App 会启动内置 daemon，并提供连接检测到的 AI 客户端。",
               "查看 App 状态，或运行 wenlan doctor 验证本地 runtime。",
             ],
@@ -127,10 +127,9 @@ export const zhCNContent = {
           {
             id: "macos-arm64",
             name: "Wenlan 桌面版",
-            architecture: "macOS · Apple silicon 预览版",
-            description:
-              "最快开始阅读 Page 与检查来源的方式。v0.18.0 Apple silicon DMG 已完成 notarization，可正常首次启动。",
-            actionLabel: "下载 macOS 桌面预览版",
+            architecture: "macOS · Apple silicon 桌面版",
+            description: "最快开始阅读 Page 与检查来源的方式。",
+            actionLabel: "下载 macOS 桌面版",
             packageIncludesLabel: "桌面 App · 内含本地 runtime",
             guideLabel: "打开安全安装指南",
             setupSteps: [
@@ -198,8 +197,6 @@ export const zhCNContent = {
             "选择一个正式发布的版本、保留包内全部文件，再验证本地 runtime，之后才连接 AI 工具。",
           buildsTitle: "选择你的版本",
           buildsDescription: "当前 release 提供 Windows x64 与 macOS Apple silicon 桌面版，以及四个原生 headless runtime 包。",
-          setupTitle: "按平台完成安装",
-          setupDescription: "选择桌面 App，或把 CLI、本地 daemon 与 MCP connector 保留在一起。",
           verifyTitle: "连接前先验证",
           verifyDescription:
             "安装后运行诊断。它会检查本地 runtime，并告诉你下一个修复步骤。",

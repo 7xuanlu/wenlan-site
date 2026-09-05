@@ -3833,7 +3833,7 @@ export const docPages: DocPage[] = [
           "The v0.17.4 release notarized the macOS DMG, made document citations open their backing file, prevented cloudflared from replacing its signed binary, and closed the remaining open and relay security findings.",
         ],
         bullets: [
-          "The macOS Apple Silicon DMG was notarized so first launch no longer requires the preview quarantine workaround.",
+          "The macOS Apple Silicon DMG opens with a normal first launch.",
           "Document citations can show and open the file path behind the cited source.",
           "The app keeps the signed cloudflared binary from replacing itself during updates.",
           "Open and relay paths closed the three remaining security-audit findings, and five transitive npm packages moved past their advisories.",

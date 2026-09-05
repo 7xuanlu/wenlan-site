@@ -17,7 +17,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "3d22276738d761d8bff9ca19885e79ec2e762bf78689a76e531ed558df895e3c",
+    sourceHash: "7ccac2cd15d872975997c5926b55352a43a4bbbee4a7fb9dd52ca50eb63ca981",
     content: {
       seo: {
         title: "Wenlan 文瀾 | AI 工作的 LLM wiki",
@@ -27,7 +27,6 @@ export const zhTWContent = {
       nav: {
         schemaName: "Wenlan 文瀾網站導覽",
         brand: "Wenlan 文瀾",
-        previewBadge: "預覽版",
         githubAriaLabel: "在 GitHub 查看 Wenlan",
         themeToggle: {
           lightLabel: "切換到淺色主題",
@@ -107,6 +106,7 @@ export const zhTWContent = {
             guideLabel: "開啟桌面版安裝指南",
             setupSteps: [
               "下載並執行 x64 setup 安裝檔。",
+              "如果出現 SmartScreen，依次選擇更多資訊與仍要執行。",
               "開啟 Wenlan；App 會啟動內建 daemon，並提供連接偵測到的 AI 用戶端。",
               "查看 App 狀態，或執行 wenlan doctor 驗證本地 runtime。",
             ],
@@ -127,10 +127,9 @@ export const zhTWContent = {
           {
             id: "macos-arm64",
             name: "Wenlan 桌面版",
-            architecture: "macOS · Apple silicon 預覽版",
-            description:
-              "最快開始閱讀 Page 與檢查來源的方式。v0.18.0 Apple silicon DMG 已完成 notarization，可正常首次啟動。",
-            actionLabel: "下載 macOS 桌面預覽版",
+            architecture: "macOS · Apple silicon 桌面版",
+            description: "最快開始閱讀 Page 與檢查來源的方式。",
+            actionLabel: "下載 macOS 桌面版",
             packageIncludesLabel: "桌面 App · 內含本地 runtime",
             guideLabel: "開啟安全安裝指南",
             setupSteps: [
@@ -198,8 +197,6 @@ export const zhTWContent = {
             "選擇一個正式發布的版本、保留套件內全部檔案，再驗證本地 runtime，之後才連接 AI 工具。",
           buildsTitle: "選擇你的版本",
           buildsDescription: "目前 release 提供 Windows x64 與 macOS Apple silicon 桌面版，以及四個原生 headless runtime 套件。",
-          setupTitle: "依平台完成安裝",
-          setupDescription: "選擇桌面 App，或把 CLI、本地 daemon 與 MCP connector 保留在一起。",
           verifyTitle: "連接前先驗證",
           verifyDescription:
             "安裝後執行診斷。它會檢查本地 runtime，並告訴你下一個修復步驟。",
