@@ -17,7 +17,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "7ccac2cd15d872975997c5926b55352a43a4bbbee4a7fb9dd52ca50eb63ca981",
+    sourceHash: "67b260c4b738ec6802f2796df25368e7b2682c6e4cf53b458fbcf41ef5b0453a",
     content: {
       seo: {
         title: "Wenlan 文澜 | AI 工作的 LLM wiki",
@@ -524,11 +524,6 @@ export const zhCNContent = {
           headline: { pre: "值得信任的", emphasis: "活", post: " wiki。" },
           description:
             "你的 agents 边工作边写的第二大脑：repo 事实、客户通话、训练计划。每一页都保持有引用、有链接、跟得上现况，你不用自己维护。",
-          assurances: [
-            { id: "cited", label: "每个 claim 都有引用" },
-            { id: "superseded", label: "过时事实自动被取代" },
-            { id: "linked", label: "页面彼此链接" },
-          ],
           worksWithLabel: "可搭配",
           worksWithNote: "Local-first、MCP server",
         },

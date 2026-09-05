@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ArrowRightIcon } from "@/components/icons";
 import type { HomeContent } from "@/i18n/content";
 
 type PipelineCopy = HomeContent["redesign"]["pipeline"];
@@ -17,15 +18,6 @@ type SolutionCopy = HomeContent["sections"]["solution"];
  */
 
 type Stage = "final" | "pre" | "played";
-
-function ArrowIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-4">
-      <path d="M5 12h14" />
-      <path d="m12 5 7 7-7 7" />
-    </svg>
-  );
-}
 
 function PipelineStage({
   accent,
@@ -151,12 +143,6 @@ export function PipelineSection({
       ref={sectionRef}
       className="relative overflow-hidden border-b border-[var(--o-border-subtle)] px-6 py-20 sm:py-24"
     >
-      <p
-        className="pointer-events-none absolute top-16 left-6 hidden origin-left rotate-90 font-mono text-[11px] tracking-[0.25em] whitespace-nowrap text-[var(--o-text-muted)] uppercase xl:block"
-        aria-hidden="true"
-      >
-        each pass leaves the store sharper
-      </p>
       <div className="mx-auto max-w-5xl">
         <div className="max-w-2xl">
           <h2 className="font-serif text-3xl font-medium tracking-tight text-balance sm:text-5xl">
@@ -213,7 +199,7 @@ export function PipelineSection({
                   aria-hidden="true"
                 >
                   <span className="animate-arrow-nudge flex" style={index === 2 ? { animationDelay: "1.2s" } : undefined}>
-                    <ArrowIcon />
+                    <ArrowRightIcon className="size-4" />
                   </span>
                 </div>
               )}
