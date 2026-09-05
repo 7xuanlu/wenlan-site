@@ -920,7 +920,7 @@ const workflowArticles: BaseSpec[] = [
       "Claude Code project knowledge base",
     ],
     publishedAt: "2026-08-23",
-    updatedAt: "2026-08-23",
+    updatedAt: "2026-09-04",
     audience: "Developers who want Codex or another coding agent to reuse trustworthy project knowledge",
     heroBullets: [
       "Keep AGENTS.md or CLAUDE.md short and reserve it for instructions the agent must load every time.",
@@ -940,8 +940,8 @@ const workflowArticles: BaseSpec[] = [
       "Put build commands, repository boundaries, and non-obvious rules in AGENTS.md or CLAUDE.md.",
       "Keep code, tests, specifications, and first-party docs authoritative; do not copy facts the agent can read directly.",
       "Add only supported Markdown, text, text-extractable PDF, or Obsidian sources to the maintained knowledge layer.",
-      "Distill one repeated question into a Page, then check that important claims return to a source or repository fact.",
-      "Run lint and review before trusting a refreshed answer, especially after source files change.",
+      "Distill one repeated question into a Page, then verify that each important claim is actually supported by the cited passage; a valid source ID is only a pointer, not proof.",
+      "Change one source the Page already cites and verify that the Page becomes stale before trusting the workflow. Adding a separate superseding record can preserve history without updating that Page, so lint and review are still required.",
     ],
     code: {
       label: "One bounded Codex knowledge workflow",
@@ -953,7 +953,7 @@ const workflowArticles: BaseSpec[] = [
       "Should AGENTS.md contain the whole project knowledge base?",
       "No. Keep it short and always relevant. Put longer explanations in maintained documents or on-demand knowledge pages so they do not crowd out the task and current code.",
       "Can the knowledge base override the repository?",
-      "No. Current code, tests, specifications, and approved first-party documents remain authoritative. A knowledge page should expose citations and become stale or reviewable when those sources change.",
+      "No. Current code, tests, specifications, and approved first-party documents remain authoritative. A citation does not prove that the prose follows from its source. When a cited source changes, verify that the Page is marked stale, then rebuild and review it before reuse.",
     ],
     relatedSlugs: [
       "wenlan-codex-workflow",
