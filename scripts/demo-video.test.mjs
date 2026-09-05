@@ -8,9 +8,9 @@ import { zhTWContent } from "../src/i18n/content/zh-TW.ts";
 const homeSource = await readFile(new URL("../src/app/_pages/home.tsx", import.meta.url), "utf8");
 
 const expectedVideos = {
-  en: "1K_Zjogwxrw",
-  "zh-TW": "bTGvS8wg4rQ",
-  "zh-CN": "Ie3FvmDo4Ho",
+  en: "4r3_rJVjBwI",
+  "zh-TW": "NPJMRityir4",
+  "zh-CN": "HGh7br0SPFI",
 };
 
 test("each homepage locale resolves its assigned YouTube demo", async () => {
