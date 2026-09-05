@@ -7,9 +7,9 @@ export type DemoVideo = {
 };
 
 const DEMO_VIDEO_IDS = {
-  en: "1K_Zjogwxrw",
-  "zh-TW": "bTGvS8wg4rQ",
-  "zh-CN": "Ie3FvmDo4Ho",
+  en: "4r3_rJVjBwI",
+  "zh-TW": "NPJMRityir4",
+  "zh-CN": "HGh7br0SPFI",
 } as const satisfies Record<Locale, string>;
 
 export function demoVideoForLocale(locale: Locale): DemoVideo {
