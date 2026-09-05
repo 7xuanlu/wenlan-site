@@ -104,13 +104,8 @@ The waitlist server action lives in `src/app/actions.ts` and uses Resend. It req
 
 ## PR Proof
 
-- Frontend/visual PRs: attach before/after screenshots of every changed
-  surface in the PR body. Code and words stay minimal and make space for the
-  screenshots; a reviewer should not have to render the branch to see it.
-- Non-visual PRs (server actions, scripts, SEO pipeline, config): paste a
-  dry-run or live smoke-test narrated in your own words showing real behavior
-  the automated suites cannot capture (unit, integration, e2e, smoke). Quote
-  the decisive observed output, not a summary of it.
+Follow `docs/pr-proof.md`: screenshots in the body for visual PRs,
+narrated dry-run or live smoke-test output for non-visual PRs.
 
 ## Quality Bar
 
