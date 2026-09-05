@@ -27,7 +27,6 @@ export const enContent = {
       nav: {
         schemaName: "Wenlan site navigation",
         brand: "Wenlan",
-        previewBadge: "PREVIEW",
         githubAriaLabel: "Wenlan on GitHub",
         themeToggle: {
           lightLabel: "Switch to light theme",
@@ -108,6 +107,7 @@ export const enContent = {
             guideLabel: "Open the desktop setup guide",
             setupSteps: [
               "Download and run the x64 setup executable.",
+              "If Windows SmartScreen appears, choose More info, then Run anyway.",
               "Open Wenlan. The app starts its bundled daemon and offers to connect detected AI clients.",
               "Check the app status or run wenlan doctor to verify the local runtime.",
             ],
@@ -128,10 +128,10 @@ export const enContent = {
           {
             id: "macos-arm64",
             name: "Wenlan Desktop",
-            architecture: "macOS · Apple silicon preview",
+            architecture: "macOS · Apple silicon",
             description:
-              "The fastest way to read Pages and inspect their sources. The v0.18.0 Apple silicon DMG is notarized for a normal first launch.",
-            actionLabel: "Download macOS desktop preview",
+              "The fastest way to read Pages and inspect their sources.",
+            actionLabel: "Download macOS desktop",
             packageIncludesLabel: "Desktop app · bundled runtime",
             guideLabel: "Open the safe installer guide",
             setupSteps: [
@@ -201,9 +201,6 @@ export const enContent = {
           buildsTitle: "Choose your build",
           buildsDescription:
             "The current release provides desktop builds for Windows x64 and macOS Apple silicon plus four native headless runtime archives.",
-          setupTitle: "Install on your platform",
-          setupDescription:
-            "Choose the desktop app or keep the CLI, local daemon, and MCP connector together.",
           verifyTitle: "Verify before you connect",
           verifyDescription:
             "Run the diagnostic after installation. It checks the local runtime and reports the next repair step.",

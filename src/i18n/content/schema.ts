@@ -65,7 +65,6 @@ export type HomeContent = SeoContent & {
   nav: {
     schemaName: string;
     brand: string;
-    previewBadge: string;
     githubAriaLabel: string;
     themeToggle: {
       lightLabel: string;
@@ -135,8 +134,6 @@ export type HomeContent = SeoContent & {
       description: string;
       buildsTitle: string;
       buildsDescription: string;
-      setupTitle: string;
-      setupDescription: string;
       verifyTitle: string;
       verifyDescription: string;
       releaseSourceLabel: string;

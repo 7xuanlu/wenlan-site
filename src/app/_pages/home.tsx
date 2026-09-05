@@ -118,9 +118,6 @@ export function HomePage({ locale }: { locale: Locale }) {
           <div className="flex items-center gap-3">
             <WenlanMark />
             <BrandWordmark label={content.nav.brand} variant="nav" />
-            <span className="hidden rounded-full border border-[var(--o-warm)]/20 bg-[var(--o-warm)]/5 px-2 py-0.5 font-mono text-[10px] font-medium text-[var(--o-warm)] sm:inline-flex">
-              {content.nav.previewBadge}
-            </span>
           </div>
           <div className="flex items-center gap-3 sm:gap-4">
             {content.nav.links

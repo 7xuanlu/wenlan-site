@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 import { TrackedLink, TrackedLocalizedLink } from "@/components/tracked-link";
 import type { HomeContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
-import { recommendedReleaseAssetId } from "@/lib/platform-recommendation";
+import {
+  detectReleaseAssetId,
+  recommendedReleaseAssetId,
+  type NavigatorLike,
+} from "@/lib/platform-recommendation";
 import type { WenlanReleaseAssetId } from "@/lib/releases";
 
 type PlatformCopy = HomeContent["download"]["platforms"][number];
@@ -28,7 +32,18 @@ export function DownloadRecommendation({
     useState<WenlanReleaseAssetId | null>(null);
 
   useEffect(() => {
+    let cancelled = false;
+    // Synchronous UA baseline keeps first paint consistent; Client Hints
+    // then refine it (notably Apple Silicon Macs, which report Intel UA).
     setRecommendedId(recommendedReleaseAssetId(navigator.userAgent));
+    detectReleaseAssetId(navigator as unknown as NavigatorLike).then((id) => {
+      if (!cancelled) {
+        setRecommendedId(id);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const platform = platforms.find((item) => item.id === recommendedId);

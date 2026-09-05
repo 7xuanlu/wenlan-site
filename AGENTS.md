@@ -16,6 +16,7 @@ pnpm build                # Production build; postbuild skips IndexNow unless pr
 pnpm start                # Serve the production build
 pnpm lint                 # TypeScript check: tsc --noEmit --incremental false
 pnpm test:seo             # node:test suite for brand, SEO, redirects, schema, and pipeline behavior
+pnpm seo:release:bump     # rewrite mechanical release surfaces (docs highlights stay manual)
 pnpm seo:weekly:sample    # Fixture-backed weekly SEO pipeline health check
 pnpm seo:weekly:run -- --date YYYY-MM-DD
 pnpm seo:gsc:fetch -- --date YYYY-MM-DD

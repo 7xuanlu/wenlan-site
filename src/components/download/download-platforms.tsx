@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import { TrackedLink } from "@/components/tracked-link";
 import type { HomeContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
-import { recommendedReleaseAssetId } from "@/lib/platform-recommendation";
+import {
+  detectReleaseAssetId,
+  isDesktopApp,
+  recommendedReleaseAssetId,
+  type NavigatorLike,
+} from "@/lib/platform-recommendation";
 import type { WenlanReleaseAssetId } from "@/lib/releases";
 
 type DownloadCopy = HomeContent["download"];
@@ -16,6 +21,31 @@ export type DownloadPlatform = PlatformCopy & {
   size: string;
   guideHref?: string;
 };
+
+function GuideLink({
+  href,
+  label,
+  locale,
+}: {
+  href: string;
+  label: string;
+  locale: Locale;
+}) {
+  return (
+    <TrackedLink
+      href={href}
+      eventName="get_started_click"
+      placement="download-page"
+      locale={locale}
+      context="setup"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex min-h-11 items-center text-sm font-medium text-[var(--o-text-secondary)] underline decoration-[var(--o-border)] underline-offset-4 transition-colors hover:text-[var(--o-warm)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]"
+    >
+      {label}
+    </TrackedLink>
+  );
+}
 
 export function DownloadPlatforms({
   copy,
@@ -34,147 +64,157 @@ export function DownloadPlatforms({
     useState<WenlanReleaseAssetId | null>(null);
 
   useEffect(() => {
+    let cancelled = false;
+    // Synchronous UA baseline keeps first paint consistent; Client Hints
+    // then refine it (notably Apple Silicon Macs, which report Intel UA).
     setRecommendedId(recommendedReleaseAssetId(navigator.userAgent));
+    detectReleaseAssetId(navigator as unknown as NavigatorLike).then((id) => {
+      if (!cancelled) {
+        setRecommendedId(id);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  const orderedPlatforms = recommendedId
-    ? [
-        ...platforms.filter((platform) => platform.id === recommendedId),
-        ...platforms.filter((platform) => platform.id !== recommendedId),
-      ]
-    : platforms;
-  const recommendedPlatform = platforms.find(
-    (platform) => platform.id === recommendedId,
-  );
+  const recommendedPlatform =
+    platforms.find((platform) => platform.id === recommendedId) ?? null;
+  const otherPlatforms = recommendedPlatform
+    ? platforms.filter((platform) => platform.id !== recommendedId)
+    : [...platforms];
 
   return (
     <>
       <section className="px-5 py-10 sm:px-6 sm:py-16">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="font-serif text-3xl font-medium tracking-tight sm:text-4xl">
-            {copy.page.buildsTitle}
-          </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--o-text-secondary)]">
-            {copy.page.buildsDescription}
-          </p>
-          <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
-            <span className="font-mono text-xs text-[var(--o-text-secondary)]">
-              {copy.stableLabel} {releaseTag}
-            </span>
-            <TrackedLink
-              href={releaseUrl}
-              eventName="github_outbound"
-              placement="download-page"
-              locale={locale}
-              context="setup"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center text-sm font-medium text-[var(--o-text-secondary)] underline decoration-[var(--o-border)] underline-offset-4 transition-colors hover:text-[var(--o-warm)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]"
-            >
-              {copy.page.releaseSourceLabel}
-            </TrackedLink>
+        <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
+          <div>
+            <h2 className="font-serif text-3xl font-medium tracking-tight sm:text-4xl">
+              {copy.page.buildsTitle}
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--o-text-secondary)]">
+              {copy.page.buildsDescription}
+            </p>
+            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+              <span className="font-mono text-xs text-[var(--o-text-secondary)]">
+                {copy.stableLabel} {releaseTag}
+              </span>
+              <TrackedLink
+                href={releaseUrl}
+                eventName="github_outbound"
+                placement="download-page"
+                locale={locale}
+                context="setup"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center text-sm font-medium text-[var(--o-text-secondary)] underline decoration-[var(--o-border)] underline-offset-4 transition-colors hover:text-[var(--o-warm)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]"
+              >
+                {copy.page.releaseSourceLabel}
+              </TrackedLink>
+            </div>
+            <p className="mt-4 max-w-md text-xs leading-relaxed text-[var(--o-text-muted)]">
+              {copy.recommendation.architectureNote}
+            </p>
           </div>
 
-          <p className="sr-only" aria-live="polite">
-            {recommendedPlatform
-              ? `${copy.recommendation.label}: ${recommendedPlatform.name} ${recommendedPlatform.architecture}`
-              : copy.recommendation.fallbackDescription}
-          </p>
-
-          <div className="mt-5 overflow-hidden rounded-xl border border-[var(--o-border)] bg-[var(--o-bg)]">
-            {orderedPlatforms.map((platform) => {
-              const isRecommended = platform.id === recommendedId;
-
-              return (
-                <article
-                  id={platform.id}
-                  key={platform.id}
-                  className={`grid scroll-mt-24 gap-5 border-b border-[var(--o-border-subtle)] p-5 last:border-b-0 sm:p-6 md:grid-cols-[180px_minmax(0,1fr)_auto] md:items-center ${
-                    isRecommended ? "bg-[var(--o-card-bg)]" : ""
-                  }`}
+          <div
+            className="flex min-h-[280px] flex-col rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-6 sm:min-h-[300px] sm:p-8"
+            aria-live="polite"
+          >
+            {recommendedPlatform ? (
+              <>
+                <p className="font-mono text-[10px] tracking-[0.2em] text-[var(--o-warm)] uppercase">
+                  {copy.recommendation.label}
+                </p>
+                <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <h3 className="font-serif text-3xl font-medium">
+                    {recommendedPlatform.name}
+                  </h3>
+                  <span className="font-mono text-xs text-[var(--o-text-muted)]">
+                    {recommendedPlatform.architecture}
+                  </span>
+                </div>
+                <p className="mt-3 max-w-xl text-sm leading-relaxed text-[var(--o-text-secondary)]">
+                  {recommendedPlatform.description}
+                </p>
+                <p className="mt-3 font-mono text-xs text-[var(--o-text-secondary)]">
+                  {recommendedPlatform.format} · {recommendedPlatform.size}
+                </p>
+                <TrackedLink
+                  href={recommendedPlatform.href}
+                  eventName="github_outbound"
+                  placement="download-page"
+                  locale={locale}
+                  context="setup"
+                  className="mt-6 inline-flex min-h-11 w-full items-center justify-center whitespace-nowrap rounded-lg bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] transition-transform duration-150 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)] sm:w-fit"
                 >
-                  {isRecommended ? (
-                    <p className="font-mono text-[10px] tracking-[0.2em] text-[var(--o-warm)] uppercase md:col-span-3">
-                      {copy.recommendation.label}
-                    </p>
-                  ) : null}
-                  <div>
-                    <h3 className="font-serif text-2xl font-medium">
-                      {platform.name}
-                    </h3>
-                    <p className="mt-1 font-mono text-xs text-[var(--o-text-secondary)]">
-                      {platform.architecture}
-                    </p>
+                  {recommendedPlatform.actionLabel}
+                </TrackedLink>
+                {isDesktopApp(recommendedPlatform.id) ? null : (
+                  <p className="mt-3 text-xs leading-relaxed text-[var(--o-text-secondary)]">
+                    {recommendedPlatform.packageIncludesLabel ??
+                      copy.packageIncludesLabel}
+                  </p>
+                )}
+                {recommendedPlatform.guideHref &&
+                recommendedPlatform.guideLabel ? (
+                  <div className="mt-2">
+                    <GuideLink
+                      href={recommendedPlatform.guideHref}
+                      label={recommendedPlatform.guideLabel}
+                      locale={locale}
+                    />
                   </div>
-                  <div>
-                    <p className="max-w-xl text-sm leading-relaxed text-[var(--o-text-secondary)]">
-                      {platform.description}
-                    </p>
-                    <p className="mt-3 font-mono text-xs text-[var(--o-text-secondary)]">
-                      {platform.format} · {platform.size}
-                    </p>
-                    <p className="mt-1 text-xs leading-relaxed text-[var(--o-text-secondary)]">
-                      {platform.packageIncludesLabel ?? copy.packageIncludesLabel}
-                    </p>
-                    {platform.guideHref && platform.guideLabel ? (
-                      <TrackedLink
-                        href={platform.guideHref}
-                        eventName="get_started_click"
-                        placement="download-page"
-                        locale={locale}
-                        context="setup"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-2 inline-flex min-h-11 items-center text-sm font-medium text-[var(--o-text-secondary)] underline decoration-[var(--o-border)] underline-offset-4 transition-colors hover:text-[var(--o-warm)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]"
-                      >
-                        {platform.guideLabel}
-                      </TrackedLink>
-                    ) : null}
-                  </div>
-                  <TrackedLink
-                    href={platform.href}
-                    eventName="github_outbound"
-                    placement="download-page"
-                    locale={locale}
-                    context="setup"
-                    className="inline-flex min-h-11 w-full items-center justify-center whitespace-nowrap rounded-lg bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] transition-transform duration-150 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)] md:w-auto"
-                  >
-                    {platform.actionLabel}
-                  </TrackedLink>
-                </article>
-              );
-            })}
+                ) : null}
+              </>
+            ) : (
+              <>
+                <h3 className="mt-1 font-serif text-3xl font-medium">
+                  {copy.recommendation.fallbackTitle}
+                </h3>
+                <p className="mt-3 max-w-xl text-sm leading-relaxed text-[var(--o-text-secondary)]">
+                  {copy.recommendation.fallbackDescription}
+                </p>
+                <a
+                  href="#all-builds"
+                  className="mt-6 inline-flex min-h-11 w-full items-center justify-center whitespace-nowrap rounded-lg bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] transition-transform duration-150 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)] sm:w-fit"
+                >
+                  {copy.recommendation.fallbackActionLabel}
+                </a>
+              </>
+            )}
           </div>
         </div>
       </section>
 
-      <section className="border-y border-[var(--o-border-subtle)] bg-[var(--o-bg-alt)] px-5 py-12 sm:px-6 sm:py-16">
+      <section
+        id="all-builds"
+        className="scroll-mt-24 border-y border-[var(--o-border-subtle)] bg-[var(--o-bg-alt)] px-5 py-12 sm:px-6 sm:py-16"
+      >
         <div className="mx-auto max-w-5xl">
-          <h2 className="font-serif text-3xl font-medium tracking-tight sm:text-4xl">
-            {copy.page.setupTitle}
+          <h2 className="font-serif text-2xl font-medium tracking-tight sm:text-3xl">
+            {copy.recommendation.allDownloadsLabel}
           </h2>
-          <p className="mt-3 max-w-2xl text-base leading-relaxed text-[var(--o-text-secondary)]">
-            {copy.page.setupDescription}
-          </p>
-
-          <div className="mt-7 overflow-hidden rounded-xl border border-[var(--o-border)] bg-[var(--o-bg)]">
-            {orderedPlatforms.map((platform) => {
-              const isRecommended = platform.id === recommendedId;
-
-              return (
-                <details
-                  key={`${platform.id}-setup`}
-                  open={isRecommended || undefined}
-                  className="group border-b border-[var(--o-border-subtle)] last:border-b-0"
-                >
-                  <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[var(--o-warm)] sm:px-6 [&::-webkit-details-marker]:hidden">
-                    <span>
-                      <span className="font-serif text-xl font-medium">
-                        {platform.name}
-                      </span>
-                      <span className="ml-3 font-mono text-xs text-[var(--o-text-secondary)]">
-                        {platform.architecture}
-                      </span>
+          <div className="mt-6 overflow-hidden rounded-xl border border-[var(--o-border)] bg-[var(--o-bg)]">
+            {otherPlatforms.map((platform, index) => (
+              <details
+                key={platform.id}
+                id={platform.id}
+                open={index === 0 || undefined}
+                className="group scroll-mt-24 border-b border-[var(--o-border-subtle)] last:border-b-0"
+              >
+                <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[var(--o-warm)] sm:px-6 [&::-webkit-details-marker]:hidden">
+                  <span>
+                    <span className="font-serif text-xl font-medium">
+                      {platform.name}
+                    </span>
+                    <span className="ml-3 font-mono text-xs text-[var(--o-text-secondary)]">
+                      {platform.architecture}
+                    </span>
+                  </span>
+                  <span className="flex items-center gap-4">
+                    <span className="hidden font-mono text-xs text-[var(--o-text-muted)] sm:inline">
+                      {platform.format} · {platform.size}
                     </span>
                     <span
                       aria-hidden="true"
@@ -183,23 +223,53 @@ export function DownloadPlatforms({
                       <span className="group-open:hidden">+</span>
                       <span className="hidden group-open:inline">-</span>
                     </span>
-                  </summary>
-                  <ol className="space-y-4 px-5 pb-6 sm:px-6">
-                    {platform.setupSteps.map((step, index) => (
+                  </span>
+                </summary>
+                <div className="space-y-4 px-5 pb-6 sm:px-6">
+                  <p className="max-w-xl text-sm leading-relaxed text-[var(--o-text-secondary)]">
+                    {platform.description}
+                  </p>
+                  {isDesktopApp(platform.id) ? null : (
+                    <p className="font-mono text-xs text-[var(--o-text-secondary)]">
+                      {platform.packageIncludesLabel ??
+                        copy.packageIncludesLabel}
+                    </p>
+                  )}
+                  <TrackedLink
+                    href={platform.href}
+                    eventName="github_outbound"
+                    placement="download-page"
+                    locale={locale}
+                    context="setup"
+                    className="inline-flex min-h-11 w-full items-center justify-center whitespace-nowrap rounded-lg border border-[var(--o-border)] px-5 py-3 text-center text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)] sm:w-fit"
+                  >
+                    {platform.actionLabel}
+                  </TrackedLink>
+                  {platform.guideHref && platform.guideLabel ? (
+                    <div>
+                      <GuideLink
+                        href={platform.guideHref}
+                        label={platform.guideLabel}
+                        locale={locale}
+                      />
+                    </div>
+                  ) : null}
+                  <ol className="space-y-4">
+                    {platform.setupSteps.map((step, stepIndex) => (
                       <li
                         key={step}
                         className="grid grid-cols-[28px_minmax(0,1fr)] gap-3 text-sm leading-relaxed text-[var(--o-text-secondary)]"
                       >
                         <span className="font-mono text-xs text-[var(--o-warm)]">
-                          {String(index + 1).padStart(2, "0")}
+                          {String(stepIndex + 1).padStart(2, "0")}
                         </span>
                         <span>{step}</span>
                       </li>
                     ))}
                   </ol>
-                </details>
-              );
-            })}
+                </div>
+              </details>
+            ))}
           </div>
         </div>
       </section>
