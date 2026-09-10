@@ -133,7 +133,7 @@ function shouldSkipPublicScanEntry(name) {
   return publicScanIgnoredNames.has(name);
 }
 
-async function collectMatches(pattern) {
+async function collectMatches(pattern, ignoreMatch = () => false) {
   const matches = [];
   for await (const file of walkTextFiles(repoRoot)) {
     const rel = relative(repoRoot, file);
@@ -147,6 +147,7 @@ async function collectMatches(pattern) {
     }
     const text = await readFile(file, "utf8");
     for (const match of text.matchAll(pattern)) {
+      if (ignoreMatch(text, match)) continue;
       matches.push(`${rel}:${lineForOffset(text, match.index)}:${match[0]}`);
     }
   }
@@ -919,13 +920,23 @@ test("public source contains no stale Origin package, repo, install, or local-pa
   assert.deepEqual(failures, []);
 });
 
-test("public prose displays Wenlan instead of stale Origin branding", async () => {
-  const matches = await collectMatches(/\bOrigin\b/g);
-  const allowed = matches.filter((match) =>
-    /wenlan-site|Origin header|allowed Origin|HTTP Origin/.test(match),
-  );
-  const failures = matches.filter((match) => !allowed.includes(match));
+function isHttpOriginMention(text, match) {
+  const before = text.slice(0, match.index);
+  const after = text.slice(match.index + match[0].length);
+  return /(?:HTTP |browser |explicit |allowed |no-|no )$/.test(before)
+    || /^(?: header\b|: null\b)/.test(after);
+}
 
+test("brand scan distinguishes HTTP header mentions from old product copy", () => {
+  const scan = (text) => [...text.matchAll(/\bOrigin\b/g)]
+    .filter((match) => !isHttpOriginMention(text, match)).map((match) => match[0]);
+  assert.deepEqual(scan("HTTP Origin; browser Origin/CORS; no-Origin calls; explicit Origin; no Origin. Origin: null; Origin header"), []);
+  assert.deepEqual(scan("Origin is your knowledge base"), ["Origin"]);
+  assert.deepEqual(scan("HTTP Origin header; install Origin"), ["Origin"]);
+});
+
+test("public prose displays Wenlan instead of stale Origin branding", async () => {
+  const failures = await collectMatches(/\bOrigin\b/g, isHttpOriginMention);
   assert.deepEqual(failures, []);
 });
 

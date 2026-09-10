@@ -2785,6 +2785,10 @@ const trustArticles: BaseSpec[] = [
     ],
     quickAnswer:
       "An AI agent should query a knowledge base when the task depends on current, organization-specific, private, or citable information that is not already available in its context. It should skip retrieval for greetings, fixed control flow, or a task whose exact authoritative source is already open. When retrieval is needed, inspect a compact index first, load the smallest relevant page, and return to the cited source for consequential claims.",
+    quickAnswerLink: {
+      label: "Building an agent knowledge base? Start with the setup guide",
+      href: "/learn/source-backed-wiki-pages-ai-work",
+    },
     problem:
       "Always injecting a document collection adds irrelevant text, latency, and attention pressure. Never retrieving forces the agent to guess or repeatedly rediscover project decisions. The useful boundary is a reproducible task-level policy, not a promise that every retrieval saves a fixed number of tokens.",
     wenlanFit:
@@ -2998,7 +3002,7 @@ const trustArticles: BaseSpec[] = [
     problem:
       "Raw document dumps and one-off summaries both decay. A dump makes agents search too much context; a detached summary can become stale without showing which source supported it or what should refresh it.",
     wenlanFit:
-      "Wenlan separates Sources, Memories, and Pages. Source IDs connect maintained pages to supporting knowledge, while revision, stale-reason, review, and refresh flows keep the knowledge base inspectable instead of silently rewriting it.",
+      "Wenlan separates Sources, Memories, and Pages. Pages retain source links, revisions, stale reasons, and review state so you can inspect what changed after a rebuild. Those records do not establish that the model preserved every number or exposed every source conflict.",
     actionHeading: "Build the smallest maintainable loop",
     actionIntro:
       "Prove one topic end to end before importing a large archive.",
