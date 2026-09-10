@@ -1,18 +1,16 @@
 import type { LearnArticleSection } from "@/app/(en)/learn/articles";
 import type { Locale } from "@/i18n/locales";
+import { retryPolicySourceText } from "@/lib/llm-wiki-source-fixture";
 
 // Authored teaching fixtures and reference answers, not captured product output.
 const sources = `# api-v1.md — fictional API specification, revision 1
-GET /reports: after a failed first attempt, allow up to 3 retries.
-POST /payments: do not retry automatically.
+${retryPolicySourceText.api}
 
 # decision-07.md — fictional client decision
-Use the API's GET retry cap of 3 to limit repeated requests.
-Automatic POST retries are disabled because duplicate payments are unsafe.
+${retryPolicySourceText.decision}
 
 # runbook-v1.md — fictional operator note
-Record the endpoint, attempt number, and final failure in the local test log.
-The request timeout has not been decided.`;
+${retryPolicySourceText.runbook}`;
 
 const reference = `# Request retry policy — reference answer, revision 1
 GET: at most 3 retries after the first attempt (4 attempts total).

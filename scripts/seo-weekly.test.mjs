@@ -1261,18 +1261,53 @@ test("AI visibility worksheet generator turns measurement prompts into manual ro
     const worksheet = await readFile(outputPath, "utf8");
 
     assert.match(worksheet, /^# AI Visibility Worksheet — 2026-06-13/m);
-    assert.match(worksheet, /Do not infer results/);
-    assert.match(worksheet, /Wenlan appears\?/);
-    assert.doesNotMatch(worksheet, new RegExp("Or" + "igin appears\\?"));
+    assert.match(worksheet, /Do not\s+infer results/);
+    assert.match(worksheet, /## Context record/);
+    assert.match(worksheet, /## Surface observations/);
+    assert.match(worksheet, /Google AI Overview/);
+    assert.match(worksheet, /Linked citation\?/);
     assert.match(
       worksheet,
-      /\| 1 \| What is the best AI work memory for people who use Claude Code and Cursor\? \| Claude \| manual \| manual \| manual \| manual \| manual \| manual \|/,
+      /\| 1 \| Unspecified task \| unknown \| unknown \| What is the best AI work memory for people who use Claude Code and Cursor\? \|/,
     );
     assert.match(
       worksheet,
-      /\| 2 \| What MCP memory server should I use for persistent memory across Claude Code and Cursor\? \| Perplexity \| manual \| manual \| manual \| manual \| manual \| manual \|/,
+      /\| 2-perplexity \| 2 \| Perplexity \| unrun \| unrun \| unrun \| unrun \| unrun \| unrun \|/,
     );
-    assert.doesNotMatch(worksheet, /\| 3 \|/);
+    const tableCellCount = (line) => line.trim().split("|").slice(1, -1).length;
+    const promptCatalogHeader = worksheet
+      .split("\n")
+      .find((line) => line.startsWith("| Prompt # | Task | Target language"));
+    const contextHeader = worksheet
+      .split("\n")
+      .find((line) => line.startsWith("| Observation ID | Prompt # | Surface | Target language"));
+    const observationsHeader = worksheet
+      .split("\n")
+      .find((line) => line.startsWith("| Observation ID | Prompt # | Surface | Triggered?"));
+    assert.equal(tableCellCount(promptCatalogHeader), 5);
+    assert.equal(tableCellCount(contextHeader), 11);
+    assert.equal(tableCellCount(observationsHeader), 10);
+    const observationRows = worksheet
+      .split("\n")
+      .filter((line) => /^\| \d+-[a-z0-9-]+ \| \d+ \| (?:Google AI Overview|Google AI Mode|Claude|ChatGPT|Gemini|Perplexity) \| unrun \|/.test(line));
+    assert.ok(observationRows.every((line) => tableCellCount(line) === 10));
+    const contextRows = worksheet
+      .split("\n")
+      .filter((line) => /^\| \d+-[a-z0-9-]+ \| \d+ \| [^|]+ \| unknown \| unknown \| unrun \|/.test(line));
+    assert.ok(contextRows.every((line) => tableCellCount(line) === 11));
+    const catalogRows = worksheet
+      .split("\n")
+      .filter((line) => /^\| \d+ \|/.test(line));
+    assert.ok(catalogRows.every((line) => tableCellCount(line) === 5));
+    const contextIds = worksheet
+      .match(/^\| \d+-[a-z0-9-]+ \| \d+ \| [^|]+ \| (?:unknown) \| (?:unknown) \| unrun /gm)
+      ?.map((line) => line.split("|")[1].trim());
+    const observationIds = worksheet
+      .match(/^\| \d+-[a-z0-9-]+ \| \d+ \| (?:Google AI Overview|Google AI Mode|Claude|ChatGPT|Gemini|Perplexity) \| unrun \| unrun \| unrun /gm)
+      ?.map((line) => line.split("|")[1].trim());
+    assert.equal(contextIds?.length, 12);
+    assert.equal(observationIds?.length, 12);
+    assert.deepEqual(new Set(contextIds), new Set(observationIds));
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }
@@ -1424,7 +1459,7 @@ test("AI visibility worksheet generator rejects non-contiguous prompt numbering"
   }
 });
 
-test("AI visibility worksheet generator reads the current 28-prompt measurement list", async () => {
+test("AI visibility worksheet generator defaults to the nine-prompt core cohort", async () => {
   const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-ai-visibility-current-"));
   try {
     const outputPath = join(outputRoot, "ai-visibility.md");
@@ -1443,14 +1478,70 @@ test("AI visibility worksheet generator reads the current 28-prompt measurement 
     );
 
     const worksheet = await readFile(outputPath, "utf8");
-    const rows = worksheet
-      .split("\n")
-      .filter((line) => /^\| \d+ \|/.test(line));
-
-    assert.equal(rows.length, 112);
-    assert.match(worksheet, /Generated from `docs\/seo-measurement\.md`\./);
+    assert.match(worksheet, /Generated from `docs\/seo-measurement\.md` \(cohort: \*\*core\*\*\)\./);
     assert.doesNotMatch(worksheet, new RegExp(repoRoot.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-    assert.match(worksheet, /\| 28 \| What should I capture in AI work memory\? \| Perplexity \|/);
+    assert.match(worksheet, /\| 9 \| Task 3 — Verify citations after a source change \| zh-CN \| CN \|/);
+    assert.match(worksheet, /\| 9 \| Perplexity \| unrun \|/);
+    assert.doesNotMatch(worksheet, /Compare Wenlan vs Basic Memory/);
+    const tableCellCount = (line) => line.trim().split("|").slice(1, -1).length;
+    const tableHeaders = [
+      ["| Prompt # | Task | Target language", 5],
+      ["| Observation ID | Prompt # | Surface | Target language", 11],
+      ["| Observation ID | Prompt # | Surface | Triggered?", 10],
+    ];
+    for (const [prefix, expectedCount] of tableHeaders) {
+      const header = worksheet.split("\n").find((line) => line.startsWith(prefix));
+      assert.equal(tableCellCount(header), expectedCount);
+    }
+    assert.equal(worksheet.match(/^\| \d+ \| [^|]+ \| (?:EN|zh-TW|zh-CN) \| (?:US|TW|CN) \|/gm)?.length, 9);
+    const coreContextIds = worksheet
+      .match(/^\| \d+-[a-z0-9-]+ \| \d+ \| [^|]+ \| (?:EN|zh-TW|zh-CN) \| (?:US|TW|CN) \| unrun \| unrun /gm)
+      ?.map((line) => line.split("|")[1].trim());
+    const coreObservationIds = worksheet
+      .match(/^\| \d+-[a-z0-9-]+ \| \d+ \| (?:Google AI Overview|Google AI Mode|Claude|ChatGPT|Gemini|Perplexity) \| unrun \| unrun \| unrun /gm)
+      ?.map((line) => line.split("|")[1].trim());
+    assert.equal(coreContextIds?.length, 54);
+    assert.equal(coreObservationIds?.length, 54);
+    assert.deepEqual(new Set(coreContextIds), new Set(coreObservationIds));
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("AI visibility worksheet generator keeps the historical cohort opt-in", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-ai-visibility-legacy-"));
+  try {
+    const outputPath = join(outputRoot, "ai-visibility.md");
+
+    await execFileAsync(
+      process.execPath,
+      [
+        aiVisibilityScript,
+        "--",
+        "--date",
+        "2026-06-13",
+        "--cohort",
+        "legacy",
+        "--output",
+        outputPath,
+      ],
+      { cwd: repoRoot },
+    );
+
+    const worksheet = await readFile(outputPath, "utf8");
+
+    assert.match(worksheet, /cohort: \*\*legacy\*\*/);
+    assert.match(worksheet, /\| 28 \| Unspecified task \| unknown \| unknown \| What should I capture in AI work memory\?/);
+    assert.equal(worksheet.match(/^\| \d+ \| [^|]+ \| unknown \| unknown \|/gm)?.length, 28);
+    const legacyContextIds = worksheet
+      .match(/^\| \d+-[a-z0-9-]+ \| \d+ \| [^|]+ \| unknown \| unknown \| unrun \| unrun /gm)
+      ?.map((line) => line.split("|")[1].trim());
+    const legacyObservationIds = worksheet
+      .match(/^\| \d+-[a-z0-9-]+ \| \d+ \| (?:Google AI Overview|Google AI Mode|Claude|ChatGPT|Gemini|Perplexity) \| unrun \| unrun \| unrun /gm)
+      ?.map((line) => line.split("|")[1].trim());
+    assert.equal(legacyContextIds?.length, 168);
+    assert.equal(legacyObservationIds?.length, 168);
+    assert.deepEqual(new Set(legacyContextIds), new Set(legacyObservationIds));
   } finally {
     await rm(outputRoot, { recursive: true, force: true });
   }

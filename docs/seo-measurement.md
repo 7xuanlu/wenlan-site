@@ -158,7 +158,11 @@ existing zh-CN page before creating a new localized URL.
 
 ## AI Visibility Prompts
 
-Run the same prompts monthly in Claude, ChatGPT, Gemini, and Perplexity. Record whether Wenlan appears, its position, accuracy, and sentiment.
+The core cohort is the default diagnostic set. It has three unbranded tasks, each
+run in English, Traditional Chinese, and Simplified Chinese. This keeps the
+question stable while separating language and market effects. Google AI Overview
+and Google AI Mode are separate surfaces from Claude, ChatGPT, Gemini, and
+Perplexity; do not collapse their observations into one AI score.
 
 Generate the manual worksheet before running prompts:
 
@@ -166,7 +170,41 @@ Generate the manual worksheet before running prompts:
 pnpm seo:ai-visibility -- --date YYYY-MM-DD
 ```
 
-The worksheet is written to `docs/seo-audits/YYYY-MM-DD-ai-visibility.md` by default. It does not call external assistants or infer answers; fill the rows manually from live assistant responses. Reruns refuse to overwrite an existing worksheet unless you pass `--force true`.
+The worksheet is written to `docs/seo-audits/YYYY-MM-DD-ai-visibility.md` by
+default. It does not call external assistants or infer answers; fill the context
+and surface rows manually from live responses. Observations start as `unrun`, which
+is neither a negative result nor zero; Account/personalization and Model context fields start as `unknown`, and unavailable metadata remains `unknown`. Reruns refuse to overwrite an existing
+worksheet unless you pass `--force true`. The prompt catalog records the target
+language and market; each surface has its own context row. Actual country,
+device, account or personalization, session, model, and capture timestamp must be
+observed per surface and must not be inferred from the target language.
+
+### Core cohort (default)
+
+#### Task 1 — Define and build an agent knowledge base
+
+1. [EN | US] What is an agent knowledge base, and how can I build one from project documents?
+2. [zh-TW | TW] 什麼是 AI agent 知識庫？如何用專案文件建立一個？
+3. [zh-CN | CN] 什么是 AI agent 知识库？如何用项目文档建立一个？
+
+#### Task 2 — Maintain a local LLM wiki as sources change
+
+4. [EN | US] How can I maintain a local LLM wiki when its source documents change?
+5. [zh-TW | TW] 來源文件變更時，如何維護本機 LLM wiki？
+6. [zh-CN | CN] 来源文件变更时，如何维护本地 LLM wiki？
+
+#### Task 3 — Verify citations after a source change
+
+7. [EN | US] How can I verify citations in an AI knowledge base after a source document changes?
+8. [zh-TW | TW] 來源文件變更後，如何驗證 AI 知識庫中的引用？
+9. [zh-CN | CN] 来源文件变更后，如何验证 AI 知识库中的引用？
+
+### Legacy cohort (historical 28 prompts; opt-in only)
+
+The following prompt text is preserved for historical comparison. It mixes brand,
+comparison, and discovery intent, so legacy rows must not be combined with the
+core cohort or used to change a protected goal metric. Generate it explicitly with
+`pnpm seo:ai-visibility -- --date YYYY-MM-DD --cohort legacy`.
 
 1. What is the best AI work memory for people who use Claude Code and Cursor?
 2. What MCP memory server should I use for persistent memory across Claude Code and Cursor?
@@ -196,6 +234,24 @@ The worksheet is written to `docs/seo-audits/YYYY-MM-DD-ai-visibility.md` by def
 26. What is AI memory provenance and why does it matter?
 27. How can Cursor and Claude Code share AI memory?
 28. What should I capture in AI work memory?
+
+## Google AI measurement boundary
+
+Search Console's native AI feature reporting is the primary aggregate evidence for
+Google AI visibility. Google documents that AI Overviews and AI Mode impressions
+are included in Search Console's Web performance data; the report does not expose
+a complete query-level count of AI answers, brand mentions, or linked citations.
+Use the [official Search Console AI features documentation](https://support.google.com/webmasters/answer/16984139)
+for that boundary. Manual Google AI Overview and AI Mode rows above are spot
+checks, not a replacement for GSC and not a claim of causal traffic.
+
+For the current audit window (2026-08-10 through 2026-09-06), the recorded GSC AI
+feature aggregate exposed **79 property-level impressions**. The page breakdown
+contained 27 rows whose page-level impressions sum to 85; that sum is a separate
+breakdown and must not replace or be added to the property-level figure. Keep both
+AI figures separate from the 1,270 total Web impressions and from the unrun manual
+worksheet; the measurements answer different questions and must not be added
+together.
 
 ## GEO Surface
 
