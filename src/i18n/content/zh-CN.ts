@@ -17,12 +17,12 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "26b69e076265ac92aa6befbeb7d0c2710c18e5bb361bbb774d7b40681e00d8ad",
+    sourceHash: "ca170730a5f3b48d56ec652af9dda32b404218a935956365a86dd308b929df79",
     content: {
       seo: {
         title: "Wenlan 文澜 | AI 工作的 LLM wiki",
         description:
-          "Wenlan 文澜是 AI 工作的 LLM wiki：AI 代理捕捉学到的内容，你加入信任来源，本地 daemon 让有来源依据的 wiki 页面保持最新。",
+          "Wenlan 文澜是 AI 工作的 LLM wiki：加入本地来源、保存有用决策，建立可由已配置 AI 客户端查找和审核的 Pages。",
       },
       nav: {
         schemaName: "Wenlan 文澜网站导航",
@@ -44,7 +44,7 @@ export const zhCNContent = {
       hero: {
         title: "Wenlan 文澜",
         description:
-          "AI 工作的 LLM wiki。AI\u00a0代理捕捉学到的内容，你加入信任来源，Wenlan 让有来源依据的 wiki 页面跨工具、跨时间保持最新。",
+          "完成配置后，保存有用决策、建立有来源的 Pages，再通过已配置的 AI 工具找回。",
         primaryCta: { id: "download", href: "#download", label: "下载 Wenlan" },
         secondaryCta: {
           id: "github",
@@ -78,7 +78,7 @@ export const zhCNContent = {
         title:
           "下\u2060载\u2060适\u2060合\u2060你\u2060系\u2060统\u2060的 Wenlan。",
         description:
-          "Wenlan v0.15.3 在同一份 release 提供 CLI、本地 daemon 与 MCP connector。",
+          "Wenlan v0.15.8 提供 macOS 桌面预览版，以及原生 CLI、本地 daemon 与 MCP connector 包。",
         stableLabel: "稳定版",
         releaseNotesLabel: "版本说明",
         packageIncludesLabel: "内含 CLI、daemon 与 MCP connector",
@@ -106,10 +106,25 @@ export const zhCNContent = {
           },
           {
             id: "macos-arm64",
-            name: "macOS",
-            architecture: "Apple silicon",
-            description: "Headless runtime；本地 model 路径支持 Metal。",
-            actionLabel: "下载 macOS Apple silicon",
+            name: "Wenlan 桌面版",
+            architecture: "macOS · Apple silicon 预览版",
+            description:
+              "最快开始阅读 Page 与检查来源的方式。此预览版尚未完成 notarization；若 macOS 阻止 App，请使用可检查的安全安装指南。",
+            actionLabel: "下载 macOS 桌面预览版",
+            packageIncludesLabel: "桌面 App · 内含本地 runtime",
+            guideLabel: "打开安全安装指南",
+            setupSteps: [
+              "下载 DMG，并将 Wenlan 拖入 Applications。",
+              "打开 Wenlan；若 macOS 阻止预览版，请改用可检查的安装指南。",
+              "安装程序会验证 GitHub release，且只为 Wenlan 清除 quarantine。",
+            ],
+          },
+          {
+            id: "macos-runtime-arm64",
+            name: "macOS 运行环境",
+            architecture: "Apple silicon · 无界面",
+            description: "CLI、daemon 与 MCP connector；本地 model 路径支持 Metal。",
+            actionLabel: "下载 macOS runtime",
             setupSteps: [
               "下载并解压 TAR.GZ。",
               "把可执行文件移到 PATH 内的目录。",
@@ -162,9 +177,9 @@ export const zhCNContent = {
           description:
             "选择一个正式发布的版本、保留包内全部文件，再验证本地 runtime，之后才连接 AI 工具。",
           buildsTitle: "选择你的版本",
-          buildsDescription: "当前 release 提供四个预编译桌面包。",
+          buildsDescription: "当前 release 提供 macOS 桌面预览版与四个原生 runtime 包。",
           setupTitle: "按平台完成安装",
-          setupDescription: "每个包都包含 CLI、本地 daemon 与 MCP connector。",
+          setupDescription: "选择桌面 App，或把 CLI、本地 daemon 与 MCP connector 保留在一起。",
           verifyTitle: "连接前先验证",
           verifyDescription:
             "安装后运行诊断。它会检查本地 runtime，并告诉你下一个修复步骤。",
@@ -199,7 +214,7 @@ export const zhCNContent = {
             railLabel: "代码",
             summary: "会持续更新的工程文档",
             lead: "维护工程师真的会更新的 codebase 文档。",
-            body: "Wenlan 让有来源的工程页面持续更新：架构地图、runbook、migration plan、integration note、debugging log 都会跟着 repo 变化。",
+            body: "Wenlan 可以把 repo 事实整理成有来源的工程 Pages：架构地图、runbook、migration plan、integration note、debugging log。更新行为取决于你配置的处理流程与来源变化。",
             evidence: [
               {
                 id: "architecture",
@@ -222,7 +237,7 @@ export const zhCNContent = {
                 detail: "Dependency quirks、版本限制、adapter decisions，以及连到 source docs 的 upstream issues。",
               },
             ],
-            outcome: "下一个 agent 打开的是工程师也会更新的 living docs。",
+            outcome: "下一个 agent 可以打开工程 Page，并检查它的来源。",
           },
           {
             id: "product-customers",
@@ -323,15 +338,15 @@ export const zhCNContent = {
       sections: {
         problem: {
           eyebrow: "问题",
-          title: "每一次新的 AI session 都从冷启动开始。",
-          body: "工作已经发生，但 context 没有留下来。决策、修 bug 的教训和项目直觉都困在旧聊天里，没有帮到下一个 agent。",
-          note: "少一次 handoff，就足以让下一段对话重跑上一段工作。",
+          title: "新的 AI session 可能从冷启动开始。",
+          body: "工作已经发生，但 context 不一定会延续。决策、修 bug 的教训和项目直觉可能困在旧聊天里，没有帮到下一个 agent。",
+          note: "少了一次 handoff，下一段对话就可能重跑上一段工作。",
         },
         solution: {
           eyebrow: "Wenlan 带来什么",
           title: "给 AI 工作用的 handoff 循环。",
-          body: "Wenlan 会在工作发生时捕捉决策、教训和下一步，并在下一个 agent 开始时加载 handoff。",
-          note: "下一段对话从 handoff 开始，而不是重新拼回过去。",
+          body: "完成配置后，Wenlan 可以在工作发生时捕捉决策、教训和下一步，并在下一个 agent 开始时提供 handoff。",
+          note: "下一段对话可以从 handoff 开始，而不是重新拼回过去。",
           visualLabels: {
             start: "开始",
             capture: "捕捉",
@@ -343,7 +358,7 @@ export const zhCNContent = {
           eyebrow: "刻意蒸馏",
           title: "Wenlan 把重复出现的 context 变成 LLM wiki。",
           body: "当重复捕捉的内容值得变成可读的 wiki 页面时，运行 /distill。可选的本地模型或 API key 路径可以加入背景提取与页面更新。",
-          note: "下一次运行从有引用的 context 开始，而不是从 transcript 残留开始。",
+          note: "配置好的下一次运行可以从有引用的 context 开始，而不是从 transcript 残留开始。",
           visualLabels: {
             merged: "合并",
             linked: "连接",
@@ -365,7 +380,7 @@ export const zhCNContent = {
         openSourceCta: {
           eyebrow: "开源",
           title: "在重要的地方保持开放。",
-          body: "本地 runtime、CLI、MCP server、Claude Code plugin 和 Codex plugin 都是 Apache-2.0。",
+          body: "本地 runtime 与 plugins 都是 open source。确切的许可边界请查看 repository license。",
           note: "",
           primaryCta: { id: "download", href: "#download", label: "下载 Wenlan" },
           secondaryCta: {
@@ -391,8 +406,8 @@ export const zhCNContent = {
       },
       metrics: {
         eyebrow: "Hybrid retrieval，实测",
-        title: "少 96% tokens。诚实的 retrieval metrics。",
-        description: "Hybrid retrieval 不需要重放聊天历史，也能找到正确的本地 context。",
+        title: "Retrieval snapshot 范围。",
+        description: "固定的 retrieval snapshot 测量每次查询提供的 context，不代表一般生产力或成本结果。",
         headers: {
           surface: "表面",
           scope: "范围",
@@ -419,7 +434,7 @@ export const zhCNContent = {
           },
         ],
         note:
-          "Retrieval-only snapshots。LME_Oracle 也记录 0.857 MRR；LME_S 在 90-question deep-S fixture 的 84 个可评分 rows 上记录 0.815 MRR。Token 对比是完整重放对 retrieved context。",
+          "固定 fixture 上的 retrieval-only snapshots。LME_Oracle 也记录 0.857 MRR；LME_S 在 90-question deep-S fixture 的 84 个可评分 rows 上记录 0.815 MRR。这不是一般的时间或 token 节省保证，也不是 Wenlan 与其他工具的比较。Token 对比只限于这项 retrieval 测试中的完整重放与 retrieved context。",
         link: {
           id: "harness",
           href: "https://github.com/7xuanlu/wenlan/tree/main/crates/wenlan-core/src/eval",
@@ -433,17 +448,17 @@ export const zhCNContent = {
           {
             id: "what-is-wenlan",
             q: "Wenlan 是什么？",
-            a: "Wenlan 是 AI 工作的 LLM wiki。AI 代理捕捉学到的内容，你加入信任来源，本地 daemon 让有来源依据的 wiki 页面跨 chats、tools、projects 和时间保持最新。",
+            a: "Wenlan 是 AI 工作的本地 source-backed Pages 层。完成 provider 与 client 配置后，它可以捕捉决策、建立 Pages，并提供 shared lookup。把 Page 当成可信内容前，请先检查来源。",
           },
           {
             id: "built-in-memory",
             q: "Wenlan 和内建 AI memory 有什么不同？",
-            a: "内建 memory 会保存 AI 认为重要的内容。你通常无法追踪、修正，或从另一个工具使用它。Wenlan 让 memory 留在本地、可见、可修正、可追溯。可读 pages、session logs 和 project status 都 versioned in ~/.wenlan/.git/，每个 distilled page 都会引用产生它的 source memory IDs。",
+            a: "内建 memory 会保存 AI 认为重要的内容。你通常无法追踪、修正，或从另一个工具使用它。Wenlan 让 memory 留在本地、可见、可修正、可追溯。可读 Pages、session logs 和 project status 都 versioned in ~/.wenlan/.git/，蒸馏出的 Pages 会记录建立它们时使用的 source memory IDs。",
           },
           {
             id: "retrieval-quality",
             q: "Wenlan 的 retrieval quality 到哪里？",
-            a: "Hybrid retrieval 结合 vector search (BGE-Base-EN-v1.5-Q, 768-dim)、FTS5、reciprocal-rank fusion、knowledge-graph context 和本地 BGE reranker。LME_Oracle 在 500-question snapshot 上是 93.6% Recall@5、0.857 MRR、0.883 NDCG@10。LME_S 在 stratified N=90 deep-S snapshot 上是 87.7% Recall@5、0.815 MRR、0.822 NDCG@10。Eval harness 放在 repo 的 crates/wenlan-core/src/eval/。",
+            a: "Hybrid retrieval 结合 vector search (BGE-Base-EN-v1.5-Q, 768-dim)、FTS5、reciprocal-rank fusion、knowledge-graph context 和本地 BGE reranker。LME_Oracle 在 500-question snapshot 上是 93.6% Recall@5、0.857 MRR、0.883 NDCG@10。LME_S 在 stratified N=90 deep-S snapshot 上是 87.7% Recall@5、0.815 MRR、0.822 NDCG@10。这些分数只适用于指定 fixture，不能证明正确性，也不能证明每个 claim。Eval harness 放在 repo 的 crates/wenlan-core/src/eval/。",
           },
           {
             id: "privacy",
@@ -453,22 +468,22 @@ export const zhCNContent = {
           {
             id: "memory-mcp",
             q: "Wenlan 只是另一个 memory MCP 吗？",
-            a: "不是。MCP server 只是 connector。Wenlan 还包含本地 daemon、manual /distill、可选的 model-backed background extraction 和 page work、具备 DiskANN vectors 的 libSQL store、FTS5 + knowledge graph、mandatory provenance、memory/page/session artifacts 的真实 git versioning，以及可读的 Markdown export paths。",
+            a: "不是。MCP server 是 connector。Wenlan 也包含本地 daemon、manual /distill、可选的 model-backed extraction 与 Page work、本地 retrieval、source references、review surfaces、memory、Page 和 session artifacts 的真实 git versioning，以及可读的 Markdown export paths。",
           },
           {
             id: "tools",
             q: "哪些 AI tools 可以搭配 Wenlan？",
-            a: "Claude Code 和 Codex 有 plugin 路径。Cursor、Claude Desktop、VS Code、Gemini CLI 等本地 clients 通过 Wenlan 的 MCP server 连接。ChatGPT 和 Claude.ai 使用 Streamable HTTP MCP，desktop app 的 Remote Access 提供引导式路径。Remote Access 没有身份验证；任何拿到 URL 的人都能访问 Wenlan，因此不用时请停止 Remote Access。",
+            a: "Claude Code 和 Codex 有 plugin 路径。Cursor、Claude Desktop、VS Code、Gemini CLI 和其他支持的本地 clients 通过 Wenlan 的 MCP server 连接。ChatGPT 和 Claude.ai 使用 Streamable HTTP MCP，desktop app 的 Remote Access 提供引导式路径。Obsidian 是只读的来源工作流程，不是这份清单中的 MCP 客户端。Remote Access 没有身份验证；任何拿到 URL 的人都能访问 Wenlan，因此不用时请停止 Remote Access。",
           },
           {
             id: "not-notes",
             q: "Wenlan 能取代 Notion 或 Obsidian 吗？",
-            a: "不能。Wenlan 不是 notes app，也不是 writing tool。它捕捉并整理你从 AI conversations 学到的内容。如果你想在 Obsidian 阅读，可以把 ~/.wenlan/ 底下的 Markdown projection symlink 进去。",
+            a: "不能。Wenlan 不是 notes app。它可以把 Markdown、text、可提取文字的 PDF、文件夹和 Obsidian vault 登记为来源。Obsidian 输入是只读，按需重新同步；Wenlan 自己的 Pages 仍是 ~/.wenlan/ 底下可读的 Markdown。",
           },
           {
             id: "setup",
             q: "我要怎么设置？",
-            a: "Claude Code 使用 marketplace plugin 和 /setup。Codex 可以使用 Wenlan plugin，或运行 wenlan connect codex。其他本地 clients 使用 wenlan connect <client>。ChatGPT 和 Claude.ai 通过 desktop app 的 Remote Access URL 使用 Streamable HTTP MCP。该 URL 没有身份验证，请视为秘密，并在不用时停止 Remote Access。",
+            a: "先安装 runtime 并连接 client。Claude Code 使用 marketplace plugin 和 /setup。Codex 可以使用 Wenlan plugin，或运行 wenlan connect codex。其他本地 clients 使用 wenlan connect <client>。ChatGPT 和 Claude.ai 通过 desktop app 的 Remote Access URL 使用 Streamable HTTP MCP。本地 capture 与 retrieval 可以不使用 model 或 API key；automatic Page distillation 和后台处理需要已配置的 on-device model 或 provider API key。该 URL 没有身份验证，请视为秘密，并在不用时停止 Remote Access。",
           },
           {
             id: "platforms",
@@ -483,59 +498,59 @@ export const zhCNContent = {
           {
             id: "free",
             q: "Wenlan 免费吗？",
-            a: "是。Wenlan 是 open-source。Wenlan repo 里的本地 runtime、CLI、MCP server、Claude Code plugin 和 Codex plugin files 都是 Apache-2.0。",
+            a: "是。Wenlan 是 open source。runtime、plugins 与 desktop app 的确切许可边界请查看 repository license。",
           },
         ],
       },
       redesign: {
         hero: {
-          headline: { pre: "值得信任的", emphasis: "活", post: " wiki。" },
+          headline: { pre: "给持续进行的工作用的 AI ", emphasis: "知识库", post: "。" },
           description:
-            "你的 agents 边工作边写的第二大脑：repo 事实、客户通话、训练计划。每一页都保持有引用、有链接、跟得上现况，你不用自己维护。",
+            "把项目文件与决策整理成有链接的 wiki 页面，让 AI 工具找得到，你也能检查。",
           assurances: [
-            { id: "cited", label: "每个 claim 都有引用" },
-            { id: "superseded", label: "过时事实自动被取代" },
-            { id: "linked", label: "页面彼此链接" },
+            { id: "cited", label: "来源链接" },
+            { id: "superseded", label: "可审核的变更" },
+            { id: "linked", label: "本地 Markdown" },
           ],
           worksWithLabel: "可搭配",
-          worksWithNote: "Local-first、MCP server",
+          worksWithNote: "Obsidian 是只读的来源工作流程，不是 MCP 客户端。",
         },
         pains: {
-          title: "每个 wiki 都死于乏人照料。",
+          title: "选择适合你的知识工作流程。",
           intro:
-            "先是手工照料的 vault，接着是挂上 wiki 的 agents：写得更快，一样腐坏。Wenlan 是接下来的那一步。",
+            "不同工具解决不同工作。纯 Markdown 加 agent 适合小型、稳定的集合；Obsidian 或其他 vault 适合搭配工具与 plugins 维护的手写笔记；以来源为主的 notebook 适合询问单一 collection。Wenlan 再加上本地 source-backed Pages、shared lookup 和明确的审核流程。",
           generations: [
             {
               id: "wiki-graveyard",
-              name: "Wiki 墓园",
-              body: "Obsidian vaults、Notion 页面、团队 wiki。全靠手工照料，你的纪律撑多久，它就活多久。",
+              name: "纯 Markdown + agent",
+              body: "如果你已有清楚的文件夹边界，这很适合小型、稳定的笔记集合。集合变大或变化后，可能需要自己安排 retrieval 和审核流程。",
             },
             {
               id: "llm-wiki-1",
-              name: "初代 llm-wiki",
-              body: "Agents 把笔记倒进 Markdown 文件。没有来源、没有 recall、没有维护。它腐坏得更快，还更有自信。",
+              name: "Obsidian 或其他 vault",
+              body: "适合放置你亲自撰写的笔记，也能搭配 vault 周边的工具与 plugins。访问方式与维护程度仍取决于你选择的工作流程。",
             },
             {
               id: "vault-agents",
-              name: "Obsidian 加上 agents",
-              body: "Agents 写进你的 vault，但园艺活还是你的。捕捉变容易了，腐坏照旧。",
+              name: "以来源为主的 notebook",
+              body: "适合询问单一文档 collection。当你不需要跨项目 memory 或维护中的 Page 层时，这可能就是合适的范围。",
             },
           ],
           current: {
             name: "Wenlan",
-            body: "会自我维护的 llm-wiki：在真实工作中写成、引用到来源、由 hybrid recall 找回、在你睡觉时持续 enrich。",
+            body: "Wenlan 加上本地 source-backed Pages、跨已配置 clients 的 shared lookup，以及明确的审核流程。来源保持可检查，但 Wenlan 不保证内容正确，也不会消除维护工作。Provider 配置与已配置的处理流程决定哪些内容会更新。",
           },
-          closer: { pre: "而在你睡觉时，wiki 只会变得", emphasis: "更好", post: "。" },
+          closer: { pre: "让重要内容留下，并把", emphasis: "审核", post: "放进流程。" },
         },
         pipeline: {
           intro:
-            "Wenlan 在工作发生时捕捉决策，在 sessions 之间精炼 wiki，并在下一个 session 开始时送上简报。",
+            "完成 provider 与 client 配置后，Wenlan 可以在工作发生时保存有用决策，在配置好的处理流程运行时建立有来源的 Page，并帮助下一个 session 找回它。",
           stages: [
-            { id: "capture", step: "/capture · session 进行中", title: "工作留下轨迹" },
-            { id: "distill", step: "/distill · sessions 之间", title: "重复出现的内容变成页面" },
-            { id: "brief", step: "/brief · 下一个 session", title: "下一个 agent 热启动" },
+            { id: "capture", step: "/capture · session 进行中", title: "保存有用决策" },
+            { id: "distill", step: "/distill · sessions 之间", title: "建立有来源的 Page" },
+            { id: "brief", step: "/brief · 下一个 session", title: "下次把它找回来" },
           ],
-          distillNote: "当某个主题值得立刻成页时，agents 也会直接创建页面。",
+          distillNote: "当某个主题值得立刻成页时，agents 也可以直接创建 Page；provider 与 client 配置仍然适用。",
           arcLabel: "/handoff 收尾每一轮",
         },
         bento: {
@@ -548,27 +563,27 @@ export const zhCNContent = {
             {
               id: "graph",
               title: "Recall 带着脉络一起回来",
-              body: "人、项目、页面会连着 memory 也彼此相连地回来，recall 到手时就带着整个邻域。",
+              body: "已配置的 retrieval 可以带回人、项目与 Pages，并附上连到 source memories 和相关项目的链接。",
             },
             {
               id: "citations",
-              title: "每个 claim 都留着来源",
-              body: "Wenlan 拒绝没有来源的页面。每个蒸馏出的 claim 都引用产生它的 memory，随时可以回溯重查。",
+              title: "来源链接",
+              body: "Wenlan 会在蒸馏出的 Pages 上记录来源链接，让你检查支持它的 memory。来源链接本身不代表每个 claim 都已被证明。",
             },
             {
               id: "review",
-              title: "先审核，再信任",
-              body: "低信心的捕捉和矛盾会浮上来等你审核，而不是悄悄进入 context。你只在要紧时介入。",
+              title: "可审核的变更",
+              body: "已配置的审核流程可以提出低信心捕捉和矛盾。由你决定哪些内容在未来 context 中值得信任。",
             },
             {
               id: "nurture",
-              title: "每一轮都更新鲜",
-              body: "在 sessions 之间，后台批次会链接 entities、扩充相符的页面、淡化过时的 memories。",
+              title: "维护取决于配置好的处理流程",
+              body: "配置后台处理后，批次可以链接 entities、更新相符的 Pages，并标记过时 memories 供你留意。",
             },
             {
               id: "spaces",
               title: "Spaces 让工作各归各位",
-              body: "捕捉和 recall 都带上 space 标签，客户事实永远不会渗进 side project 的简报。",
+              body: "为 capture 和 recall 加上 space 标签，在 client 与 active space 都配置好时，让不同 context 保持分开。",
             },
             {
               id: "git",
@@ -577,40 +592,40 @@ export const zhCNContent = {
             },
             {
               id: "mcp",
-              title: "一个家，不被任何工具绑死",
-              body: "每个 MCP client 都通过同一个本地 daemon 读同一份共享记忆。文件永远是你的。",
+              title: "跨已配置 clients 的 shared lookup",
+              body: "已配置的 MCP clients 可以通过同一个 daemon 读取本地 memory；setup 与 client 权限决定它们能访问什么。",
             },
           ],
         },
         storage: {
           title: "Agents 拿到索引。\n你拿到文件。",
           intro:
-            "捕捉先进到快速的本地索引，再凝固成你能打开、diff、保存的 Markdown 页面。",
+            "完成配置后，captures 可以先进入本地索引；配置好的 Page work 则可以投射成你能打开、diff、保存的 Markdown。",
           indexLabel: "索引 · agents 的工作记忆",
           filesLabel: "Markdown · 属于你的长期记录",
-          fusionNote: "三条路进来，一次查询。任何单一路径都会漏掉其中两条。",
+          fusionNote: "文件、索引和 Page work 解决不同需求。选择你的工作流程能够维护的边界。",
           distillCaption: "staging 变成页面",
           ingestCaption: "页面被索引供 recall",
           tradeoffs: [
             {
               id: "files-alone",
-              title: "只有文件",
-              body: "每次 recall 都要重读整个文件夹，context window 买单。",
+              title: "纯文件",
+              body: "适合你或 agent 能直接搜索的小型、稳定集合。集合变大或变化后，可能需要明确的 retrieval 和审核。",
             },
             {
               id: "db-alone",
-              title: "只有数据库",
-              body: "快但不透明。没有东西可以打开、diff 或搬走。",
+              title: "索引",
+              body: "适合对已配置来源快速查找；如果人需要检查变更，应搭配可读 artifacts 和审核路径。",
             },
             {
               id: "index-files",
-              title: "索引 + 文件",
-              body: "给 agents 一次查询。给你可读、有版本的文件。",
+              title: "索引加文件",
+              body: "把查找与可读、有版本的 artifacts 放在一起。是否合适取决于来源边界和维护流程。",
             },
           ],
         },
         metrics: {
-          title: "少 96% tokens。",
+          title: "Retrieval snapshot 范围。",
           bars: [
             {
               id: "full-replay",
@@ -626,14 +641,14 @@ export const zhCNContent = {
             },
           ],
           footnote:
-            "Retrieval-only snapshots。LME_S 在 stratified N=90 deep-S fixture 上记录 87.7% R@5 和 0.815 MRR。Token 比较是完整重播对 retrieved context。",
+            "固定 fixture 上的 retrieval-only snapshots。LME_S 在 stratified N=90 deep-S fixture 上记录 87.7% R@5 和 0.815 MRR。这不是一般的时间或 token 节省保证，也不是 Wenlan 与其他工具的比较。Token 对比只限于这项 retrieval 测试中的完整重放与 retrieved context。",
         },
       },
     },
   },
   about: {
     status: "translated",
-    sourceHash: "923e4f4dbf127e846744fc118e0bf8b03f15cfa06203506fbae28d9fb589f2bb",
+    sourceHash: "0e95e32d83b241de1181b5ccf6b20ab0572485e42b3c40144fcda0f28a98545e",
     content: {
       seo: {
         title: "关于 Wenlan | AI 工作的 LLM wiki",
@@ -650,7 +665,7 @@ export const zhCNContent = {
         description:
           "AI 代理捕捉学到的内容，你加入信任来源，Wenlan 让有来源依据的 wiki 页面在 AI 工作中保持最新。",
         statusLabel: "项目状态",
-        statusItems: ["版本 v0.15.3", "支持 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 构建"],
+        statusItems: ["版本 v0.15.8", "支持 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 构建"],
       },
       sections: [
         {
@@ -677,7 +692,7 @@ export const zhCNContent = {
           number: "04",
           title: "当前状态",
           paragraphs: [
-            "Wenlan v0.15.3 支持的预编译运行时包括 macOS Apple Silicon、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64)。Windows 包包含 ONNX Runtime，以及供受支持 GPU 使用的 Vulkan loader。macOS Intel 仍是 source/dev-only，直到 public release workflow 发布该 artifact。daemon、CLI、MCP server、Claude Code plugin 和 Codex plugin 都以 Apache-2.0 open source。",
+            "Wenlan v0.15.8 提供 macOS Apple Silicon 桌面预览版，以及 macOS、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64) 原生 runtime 包。macOS 预览版尚未完成 notarization，Windows 仍是 runtime ZIP，不是桌面 App。daemon、CLI、MCP server、Claude Code plugin 与 Codex plugin 采用 Apache-2.0；桌面 App crate 采用 AGPL-3.0-only。",
           ],
         },
       ],
@@ -1254,7 +1269,7 @@ export const zhCNContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "357e8a9f4390d73157396651e9e2c52a17ba36c98826b8b9084bc2e961f248ad",
+    sourceHash: "ff7503874ecf35e9e705ff801dc59ded5d52a94cdbc2173201273f67fe72a6d3",
     content: {
       seo: {
         title: "安装 Wenlan：Claude Code、Codex、ChatGPT 与 MCP",
@@ -1280,7 +1295,7 @@ export const zhCNContent = {
           number: "01",
           title: "安装适合你系统的 runtime",
           paragraphs: [
-            "Wenlan v0.15.3 提供 Windows x64、macOS Apple silicon，以及 Linux x64 或 ARM64 glibc 的原生 runtime 包。每份 archive 都包含 CLI、daemon 与 MCP connector。",
+            "Wenlan v0.15.8 提供 Windows x64、macOS Apple silicon，以及 Linux x64 或 ARM64 glibc 的原生 runtime 包。每份 runtime archive 都包含 CLI、daemon 与 MCP connector。",
             "在 Windows 上，请把 wenlan-windows-x64.zip 当成一个整体解压到用户拥有且已加入 PATH 的目录。onnxruntime.dll、vulkan-1.dll 与三个可执行文件必须放在一起。",
           ],
           commands: [
@@ -1291,13 +1306,13 @@ export const zhCNContent = {
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.15.3/wenlan-windows-x64.zip",
+              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.15.8/wenlan-windows-x64.zip",
               label: "下载 Windows x64",
             },
             {
               id: "all-downloads",
-              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.15.3",
-              label: "全部 v0.15.3 下载",
+              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.15.8",
+              label: "全部 v0.15.8 下载",
             },
           ],
         },
@@ -1427,7 +1442,7 @@ export const zhCNContent = {
   },
   footer: {
     status: "translated",
-    sourceHash: "1714d73686bccf763c739c64094ff99091f9eaca217172514695c9dad5b54c69",
+    sourceHash: "558ca7745c25cdaa3abd7bde264e12bbdcb08277e2415857775db600912c7978",
     content: {
       ariaLabel: "网站页脚",
       brand: "Wenlan",
@@ -1452,14 +1467,10 @@ export const zhCNContent = {
           id: "learn",
           title: "学习",
           links: [
-            { id: "learn-hub", href: "/learn", label: "学习中心" },
-            { id: "vs-basic-memory", href: "/learn/wenlan-vs-basic-memory", label: "与 Basic Memory 对比" },
-            { id: "vs-claude-mem", href: "/learn/wenlan-vs-claude-mem", label: "与 claude-mem 对比" },
-            {
-              id: "vs-superlocal-memory",
-              href: "/learn/wenlan-vs-superlocal-memory",
-              label: "与 Superlocal Memory 对比",
-            },
+            { id: "llm-wiki", href: "/learn/distilled-wiki-pages-ai-memory", label: "LLM wiki 导览" },
+            { id: "ai-knowledge-base", href: "/learn/source-backed-wiki-pages-ai-work", label: "AI 知识库导览" },
+            { id: "tool-selection", href: "/learn/choose-ai-knowledge-base-tool", label: "AI 知识库工具选择" },
+            { id: "obsidian", href: "/learn/wenlan-vs-obsidian-ai-memory", label: "Obsidian 与 AI 工作" },
           ],
         },
         {

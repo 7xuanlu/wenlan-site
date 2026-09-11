@@ -25,6 +25,7 @@ const currentAssets = [
   ["wenlan-linux-x64.tar.gz", 8],
   ["wenlan-mcp-darwin-arm64.tar.gz", 0],
   ["wenlan-windows-x64.zip", 3],
+  ["Wenlan_0.15.8_aarch64.dmg", 1],
 ].map(([name, download_count], index) => ({
   name,
   size: 1_000 + index,
@@ -39,8 +40,8 @@ test("GitHub fetch records stars and cumulative website release downloads", asyn
       repository: { stargazers_count: 47 },
       releases: [
           {
-            tag_name: "v0.15.3",
-            published_at: "2026-08-01T08:47:47Z",
+            tag_name: "v0.15.8",
+            published_at: "2026-08-09T17:34:28Z",
             assets: currentAssets,
           },
           {
@@ -56,10 +57,10 @@ test("GitHub fetch records stars and cumulative website release downloads", asyn
     const metadataPath = join(outputRoot, "github-metadata.json");
     await writeFile(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`, "utf8");
     assert.equal(metadata.stars, 47);
-    assert.equal(metadata.currentRelease.tag, "v0.15.3");
-    assert.equal(metadata.currentRelease.websiteAssetDownloads, 15);
-    assert.equal(metadata.currentRelease.assetDownloads, 15);
-    assert.equal(metadata.allReleaseAssetDownloads, 20);
+    assert.equal(metadata.currentRelease.tag, "v0.15.8");
+    assert.equal(metadata.currentRelease.websiteAssetDownloads, 16);
+    assert.equal(metadata.currentRelease.assetDownloads, 16);
+    assert.equal(metadata.allReleaseAssetDownloads, 21);
 
     const reportPath = join(outputRoot, "weekly.md");
     await execFileAsync(
@@ -81,8 +82,8 @@ test("GitHub fetch records stars and cumulative website release downloads", asyn
     );
     const report = await readFile(reportPath, "utf8");
     assert.match(report, /GitHub stars \| 47/);
-    assert.match(report, /Website-linked v0\.15\.3 asset downloads \| 15/);
-    assert.match(report, /All release asset downloads \| 20/);
+    assert.match(report, /Website-linked v0\.15\.8 asset downloads \| 16/);
+    assert.match(report, /All release asset downloads \| 21/);
     assert.match(report, /GitHub Release Evidence/);
     assert.match(report, /cumulative point-in-time counters/);
   } finally {

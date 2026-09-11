@@ -55,6 +55,7 @@ const EXPECTED_FAMILY_IDS = [
   "knowledge-retrieval-context-token-cost",
   "document-pdf-ingestion-failures",
   "multi-agent-knowledge-write-conflicts",
+  "source-backed-research-knowledge-base",
 ];
 const EXPECTED_WEEKLY_WINDOWS = [
   ["2026-08-24", "2026-08-30", "source-change-stale-pages"],
@@ -193,7 +194,7 @@ export function validateScenarioBacklog(
     families.length !== EXPECTED_FAMILY_IDS.length ||
     families.some((family, index) => family?.id !== EXPECTED_FAMILY_IDS[index])
   ) {
-    errors.push("scenario families must retain the approved seven-item order.");
+    errors.push("scenario families must retain the approved ordered item list.");
   }
 
   const sitemapSet = new Set(

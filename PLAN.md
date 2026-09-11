@@ -465,6 +465,18 @@ action returns for separate explicit approval.
   28 complete cooldown days, owner alignment, and an open production slot
   before an existing-page edit can be nominated. It also keeps net-new asset,
   authority, Vercel, GitHub, and factual-release decisions separate.
+- At `2026-08-26T04:57:49Z`, the user-preapproved Wenlan source README
+  authority bridge was squash-merged through `7xuanlu/wenlan#599` as
+  `2f36e4203414edba2ef8dc20d21201d4f6fd8aba`. The exact four-file change adds
+  natural English, zh-TW, and zh-CN links from the source READMEs to the
+  matching LLM Wiki implementation guides and updates only the required
+  Spanish translation-sync marker. Translation checks, three destination
+  `200` checks, integrated CI, and rendered GitHub `main` verification passed.
+  The durable publication record is
+  `docs/seo-audits/2026-08-26-llm-wiki-readme-authority-publication.md`.
+  This is inspectable first-party authority, not evidence of ranking or traffic
+  lift. Keep it stable and use the August 28 GSC/Vercel decision window for the
+  next source-native decision.
 - The exact, unapplied v0.16.0 factual-correction candidate is stored at
   `docs/seo-audits/2026-08-22-wenlan-v0.16.0-proposal.patch`, based on
   `origin/main` commit `721b862cde31a767f58c58a46c9f734a1a660114`. Its
@@ -675,13 +687,15 @@ action returns for separate explicit approval.
 - Contract approval: approved by the user in this Codex task on
   `2026-07-18T22:06:21Z`.
 - Website-affecting experiment:
-  `EXP-2026-08-23-coding-agent-source-backed-knowledge-base` is locally
-  implemented and verified, remains unpublished, and consumes the single
-  production-in-flight slot. It
-  adds one English, zh-TW, and zh-CN canonical for the coding-agent source-
-  backed project-knowledge task. Commit, push, PR, merge, deployment,
-  indexing, validation, analytics mutation, and external publication remain
-  excluded.
+  `EXP-2026-08-23-coding-agent-source-backed-knowledge-base` is live,
+  production-verified, and measuring; it no longer consumes the single
+  production-in-flight slot. PR #136 merged at `2026-08-23T18:04:33Z` as
+  `e3ea912d458bfbe7c0ad864872effe48a9ca9c97`, and Vercel production completed
+  at `2026-08-23T18:05:09Z` as deployment `6051054690`. The live family adds
+  one English, zh-TW, and zh-CN canonical for the coding-agent source-backed
+  project-knowledge task. Request indexing, GSC validation, external
+  distribution, paid action, synthetic events, analytics mutation, and
+  metric-definition changes remain excluded.
   Historical experiment
   EXP-2026-08-08-source-backed-ai-knowledge-base-snippet-refresh is live,
   production-verified, and measuring for the existing English source-backed AI
@@ -1232,12 +1246,14 @@ Supporting quality split for the same live range:
 
 ### Current experiment
 
-`EXP-2026-08-23-coding-agent-source-backed-knowledge-base` is locally
-implemented and verified, remains unpublished, and consumes the single
-website preparation slot. It adds
-one English, zh-TW, and zh-CN canonical for the same task: give Codex or
-another coding agent a source-backed project knowledge base while keeping
-`AGENTS.md` or `CLAUDE.md` short and the current repository authoritative.
+`EXP-2026-08-23-coding-agent-source-backed-knowledge-base` is live,
+production-verified, and measuring; it does not consume the single website
+preparation slot. PR #136 merged at `2026-08-23T18:04:33Z` as
+`e3ea912d458bfbe7c0ad864872effe48a9ca9c97`, and Vercel production completed
+at `2026-08-23T18:05:09Z` as deployment `6051054690`. The experiment adds one
+English, zh-TW, and zh-CN canonical for the same task: give Codex or another
+coding agent a source-backed project knowledge base while keeping `AGENTS.md`
+or `CLAUDE.md` short and the current repository authoritative.
 
 The family passed the complete trilingual scenario gate from separate
 English, Taiwan, and Simplified-Chinese result sets, repeated official and
@@ -1252,16 +1268,16 @@ The latest authenticated baseline remains source-separated: GSC property
 totals are 8 clicks and 1,005 impressions, visible-query totals are 2 clicks
 and 216 impressions, and the visibility gap is 6 clicks and 789 impressions.
 Vercel separately reports 248 visitors, including 30 attributed to Google;
-GitHub reports 48 stars. The three new URLs have no pre-publication page rows,
-which are unavailable rather than zero. Each locale independently requires 20
-post-crawl page impressions, 3 qualified joined-query impressions, and 1 GSC
-click for success. The immutable experiment fields and approval boundary are
-in `EXPERIMENTS.md`; the editable evidence and overlap decision are in
-`docs/seo-scenario-backlog.json`.
+GitHub reports 48 stars. No source-native post-publication page rows are yet
+available for the three new URLs; unavailable is not zero. Each locale
+independently requires 20 post-crawl page impressions, 3 qualified joined-
+query impressions, and 1 GSC click for success. The immutable experiment
+fields and approval boundary are in `EXPERIMENTS.md`; the editable evidence
+and overlap decision are in `docs/seo-scenario-backlog.json`.
 
-The user approved local implementation and verification only. Commit, push,
-PR, merge, Vercel deployment, request indexing, GSC validation, external
-publication, paid action, synthetic events, analytics mutation, and metric-
+Commit, push, PR, merge, Vercel deployment, and production verification are
+complete for this exact family. Request indexing, GSC validation, external
+distribution, paid action, synthetic events, analytics mutation, and metric-
 definition changes remain excluded.
 
 #### Historical pre-final experiment records
@@ -3113,6 +3129,45 @@ readout is the Karpathy / LLM Wiki locale family after
 validation, analytics mutation, paid action, synthetic event, or metric change
 occurred.
 
+## Campaign observation: authority and repository-reach refresh at 2026-08-26T08:00:45Z
+
+- The complete Goal contract was reread and `pnpm seo:goal:check` passed
+  before this read-only campaign action.
+- `DhanushNehru/awesome-mcp-servers#52` was owner-approved and merged at
+  `2026-08-24T10:01:32Z` as
+  `47ea4cb2f509bb1b1b102b719a755d865f2f1ba3`. Current upstream `main`
+  visibly lists `Wenlan MCP` under Productivity & Collaboration and links to
+  `https://github.com/7xuanlu/wenlan`; the former `Origin MCP` line is absent.
+  This is one earned, inspectable authority source. It does not prove or cause
+  a GSC impression, Vercel visitor, download, or star.
+- `awesome-selfhosted/awesome-selfhosted-data#2955` remains open, non-draft,
+  `MERGEABLE/CLEAN`, with its one-file Wenlan diff, successful
+  `syntax-checks`, and no review or comment. It remains attempted
+  distribution rather than authority.
+- The approved Awesome Mac conflict resolution updated the existing PR #2643
+  branch to commit `59700ec37cecd909c697ee0f52253ea5cdf611ba`.
+  GitHub now reports the open PR `MERGEABLE/CLEAN`; License Compliance passes
+  and its public diff remains exactly one Wenlan insertion in each required
+  English, Chinese, Japanese, and Korean README. No maintainer message was
+  sent. It remains attempted distribution until upstream merges and renders
+  it.
+- GitHub's read-only traffic window `2026-08-12..2026-08-25` reports `238`
+  repository views from `41` unique viewers and `63` Overview views from `27`
+  unique viewers. GitHub separately reports `51` stars, unchanged from the
+  prior read. The sliding window added one unique repository viewer but no
+  Overview viewer or star. Clones remain a separate non-comparable unit at
+  `7,700` clones from `1,830` unique cloners.
+- The immediate constraint remains qualified repository reach, not evidence
+  of a broken star CTA. Keep the optional README star request on hold and do
+  not infer a visitor-to-star conversion rate or attribute any source-native
+  metric to the Dhanush merge or the two open PRs.
+- The selected pre-August-28 website candidate remains the distinct
+  trilingual retrieval-regression task prepared on the isolated
+  `codex/retrieval-regression-scenario` branch. It is not published and does
+  not pre-fill the August 28 GSC or Vercel decision. Website commit, push, PR,
+  merge, Vercel deployment, indexing, validation, or external contribution
+  still requires the exact separate approval recorded by the controller.
+
 At `2026-08-22T21:26:06Z`, the approved read-only public GitHub conversion
 lane produced
 `docs/seo-audits/2026-08-22-release-and-star-proposals.md`. Source-native
@@ -3280,3 +3335,45 @@ unchanged.
 - Excluded actions: no content experiment, indexing request, GSC validation,
   analytics mutation, paid action, external message, directory submission,
   synthetic event, or metric-definition change occurred.
+
+## Campaign control: citation-verification trilingual candidate at 2026-08-23
+
+- Record type: locally prepared website candidate; no experiment was started
+  and no public page was changed.
+- User correction: the citation, provenance, and unsupported-claim diagnostic
+  family is allowed to proceed now. Measurement of another non-overlapping
+  family does not block this preparation.
+- Exact task: start from one suspect AI knowledge-base or RAG answer, map each
+  important claim to the cited page, chunk, source ID, and revision, then mark
+  the claim supported, partial, unsupported, or stale. This remains distinct
+  from the existing source-backed architecture owner.
+- Local routes prepared:
+  `/learn/verify-ai-knowledge-base-citations`,
+  `/zh-TW/learn/verify-ai-knowledge-base-citations`, and
+  `/zh-CN/learn/verify-ai-knowledge-base-citations`. Each has a natural local
+  query family, one self-canonical URL, reciprocal hreflang, Article and
+  BreadcrumbList schema, maintained references, visible FAQ without FAQPage
+  JSON-LD, and contextual inbound links from the source-backed, tool-selection,
+  and LLM Wiki owners.
+- Content inventory: the source tree now contains 48 English Learn pages and
+  7 pages in each Mandarin locale. Before this candidate it contained 47, 6,
+  and 6 respectively. The remaining 41 English slugs missing in each Mandarin
+  locale are an audit queue, not an automatic translation quota; the complete
+  gap and priority rules are stored in
+  `docs/seo-audits/2026-08-23-chinese-learn-gap-priority.md`.
+- Authority path: after the website family is published and Qi-Xuan Lu's
+  existing `Danielskry/Awesome-RAG` PR #142 resolves, one neutral guide
+  reference may be proposed to that repository's Production & Best Practices
+  section. Do not open a concurrent promotional PR, message maintainers, or
+  assume acceptance.
+- Local verification: the intent registry covers 126/126 sitemap URLs;
+  `pnpm build`, `pnpm seo:technical:built`, `pnpm seo:scenario:check`,
+  `pnpm seo:goal:check`, `pnpm test:goal`, `pnpm test:i18n`, and `pnpm lint`
+  passed. Browser QA passed at 1280x720 and 393x852 for English, zh-TW, and
+  zh-CN with exact canonicals, no horizontal overflow, no framework overlay,
+  no relevant console warnings or errors, and a working same-locale related
+  guide link.
+- Next decision: review this exact local family for publication. Commit, push,
+  PR, merge, Vercel deployment, request indexing, GSC validation, analytics
+  mutation, external publication, paid action, synthetic events, and metric-
+  definition changes remain excluded until separately approved.

@@ -12,9 +12,9 @@ type BentoCellCopy = HomeContent["redesign"]["bento"]["cells"][number];
  * its source memory, the review queue surfaces a contradiction, spaces pull
  * apart, the git rail lights in commit order, and every MCP client converges
  * on one store. Cells land staggered on first scroll-in (final state by
- * default, same contract as pains.tsx) and carry a cursor spotlight tinted
- * to their accent. Cell titles and bodies come from the dictionary; the
- * artifact internals are mock tool output and stay English in every locale.
+ * default, same contract as pains.tsx). Cell titles and bodies come from the
+ * dictionary; the artifact internals are mock tool output and stay English in
+ * every locale.
  */
 
 type Stage = "final" | "pre" | "played";
@@ -44,20 +44,7 @@ function BentoCell({
       <div
         className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-[var(--o-border)] bg-[var(--o-bg-alt)] p-6 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[color-mix(in_srgb,var(--cell-accent)_30%,var(--o-border))]"
         style={{ "--cell-accent": accent } as React.CSSProperties}
-        onPointerMove={(event) => {
-          const rect = event.currentTarget.getBoundingClientRect();
-          event.currentTarget.style.setProperty("--mx", `${event.clientX - rect.left}px`);
-          event.currentTarget.style.setProperty("--my", `${event.clientY - rect.top}px`);
-        }}
       >
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-          style={{
-            background:
-              "radial-gradient(220px circle at var(--mx, 70%) var(--my, 30%), color-mix(in srgb, var(--cell-accent) 9%, transparent), transparent 70%)",
-          }}
-        />
         <h3 className="relative font-serif text-xl font-medium tracking-tight">{title}</h3>
         <p className="relative mt-2 max-w-md text-base leading-relaxed text-[var(--o-text-secondary)]">{body}</p>
         <div className="relative mt-auto pt-6">{children}</div>
@@ -309,8 +296,8 @@ const cellArtifacts: Record<string, React.ReactNode> = {
     </div>
   ),
   mcp: (
-    <div className="flex flex-col items-stretch gap-5 sm:flex-row sm:items-center sm:gap-6">
-      <div className="grid shrink-0 grid-cols-3 gap-1.5 font-mono text-[12px] sm:grid-cols-2">
+    <div data-mcp-flow className="flex min-w-0 flex-col items-center gap-4">
+      <div className="grid w-full min-w-0 max-w-sm grid-cols-2 gap-1.5 font-mono text-[12px]">
         {mcpClients.map((client, index) => (
           <span
             key={client}
@@ -321,18 +308,18 @@ const cellArtifacts: Record<string, React.ReactNode> = {
           </span>
         ))}
       </div>
-      <svg viewBox="0 0 140 120" preserveAspectRatio="none" className="hidden h-24 min-w-0 flex-1 sm:block" aria-hidden="true">
-        {[12, 31, 50, 70, 89, 108].map((y, index) => (
+      <svg viewBox="0 0 180 64" className="h-10 w-full max-w-[14rem] shrink-0" aria-hidden="true">
+        {[18, 47, 76, 104, 133, 162].map((x, index) => (
           <path
-            key={y}
-            d={`M0 ${y} C 70 ${y}, 90 60, 140 60`}
+            key={x}
+            d={`M${x} 0 C ${x} 22, 90 28, 90 64`}
             strokeWidth="1"
             className="fill-none stroke-[var(--o-border)] transition-[stroke] duration-300 group-hover:stroke-[color-mix(in_srgb,var(--o-warm)_55%,var(--o-border))]"
             style={{ transitionDelay: `${140 + index * 60}ms` }}
           />
         ))}
       </svg>
-      <div className="shrink-0 text-center sm:text-left">
+      <div className="min-w-0 text-center">
         <p className="font-mono text-[12px] text-[var(--o-text-muted)]">~/.wenlan</p>
         <span className="mt-1.5 inline-block rounded border border-[var(--o-warm)]/40 bg-[var(--o-glow-warm-bg)] px-2.5 py-1 font-mono text-[12px] text-[var(--o-warm)]">
           one shared memory

@@ -83,6 +83,27 @@ const COMPARISON_TARGETS = [
   },
 ];
 
+const SPECIFIC_INTENT_TARGETS = [
+  {
+    pattern:
+      /\b(?:types?\s+of\s+(?:ai\s+)?(?:agent|agentic)\s+memory|(?:ai\s+)?(?:agent|agentic)\s+memory\s+(?:types?|taxonomy|glossary|architecture)|ai\s+memory\s+types?)\b/i,
+    group: "AI work memory",
+    page: "/learn/ai-agent-memory-types",
+  },
+  {
+    pattern:
+      /(?:obsidian.{0,24}筆記|筆記.{0,24}obsidian)/i,
+    group: "Obsidian/knowledge-base adjacent",
+    page: "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
+  },
+  {
+    pattern:
+      /(?:obsidian.{0,24}笔记|笔记.{0,24}obsidian)/i,
+    group: "Obsidian/knowledge-base adjacent",
+    page: "/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
+  },
+];
+
 const DOCUMENT_KNOWLEDGE_BASE_TARGETS = [
   {
     pattern:
@@ -158,8 +179,9 @@ const ACTION_PRIORITY = {
 };
 
 const MIN_QUERY_ACTION_IMPRESSIONS = 3;
+const MIN_PAGE_ACTION_IMPRESSIONS = 20;
 const MIN_PAGE_INTERNAL_LINK_IMPRESSIONS = 20;
-const REPORT_SCHEMA_VERSION = 6;
+const REPORT_SCHEMA_VERSION = 7;
 const EXPECTED_GSC_SITE_URL = "sc-domain:wenlan.app";
 const ACQUISITION_PRIORITY_GROUPS = new Set([
   "AI knowledge base / wiki",
@@ -1027,6 +1049,16 @@ function classifyQuery(query) {
     };
   }
 
+  const specificIntentTarget = SPECIFIC_INTENT_TARGETS.find(({ pattern }) =>
+    pattern.test(query),
+  );
+  if (specificIntentTarget) {
+    return {
+      group: specificIntentTarget.group,
+      page: specificIntentTarget.page,
+    };
+  }
+
   const knowledgeBaseToolSelectionTarget =
     KNOWLEDGE_BASE_TOOL_SELECTION_TARGETS.find(({ pattern }) =>
       pattern.test(query),
@@ -1109,6 +1141,13 @@ function classifyQuery(query) {
 
 function classifyQueryAction(row) {
   if (row.mappingMismatch) {
+    if (row.impressions < MIN_QUERY_ACTION_IMPRESSIONS) {
+      return {
+        action: "wait",
+        diagnosis:
+          "Observed GSC page differs from the configured target, but the visible query is below the action floor. Preserve the routing observation without editing.",
+      };
+    }
     return {
       action: "query-page-review",
       diagnosis:
@@ -1202,7 +1241,7 @@ function classifyPageAction(row) {
   if (
     row.page === "/learn" &&
     row.clicks === 0 &&
-    row.impressions >= MIN_QUERY_ACTION_IMPRESSIONS &&
+    row.impressions >= MIN_PAGE_ACTION_IMPRESSIONS &&
     row.position < 8
   ) {
     return {
@@ -1212,7 +1251,12 @@ function classifyPageAction(row) {
     };
   }
 
-  if (row.clicks === 0 && row.impressions > 0 && row.position >= 8 && row.position <= 30) {
+  if (
+    row.clicks === 0 &&
+    row.impressions >= MIN_PAGE_ACTION_IMPRESSIONS &&
+    row.position >= 8 &&
+    row.position <= 30
+  ) {
     const action = row.page === "/learn" ? "quick-answer-refresh" : "title-meta-refresh";
     return {
       action,
@@ -1233,14 +1277,6 @@ function classifyPageAction(row) {
       action: "internal-link-refresh",
       diagnosis:
         "Existing Learn page has search demand but weak ranking. Add links from stronger related pages before rewriting content.",
-    };
-  }
-
-  if (row.position >= 8 && row.position <= 30) {
-    return {
-      action: "internal-link-refresh",
-      diagnosis:
-        "Page has search demand. Add internal links from stronger related pages.",
     };
   }
 
@@ -1415,8 +1451,21 @@ function makeMarkdown({
     queryPages,
   );
   const clickOpportunities = makeClickOpportunities(pages, queryPages);
+  const pageImpressions = new Map(pages.map((row) => [row.page, row.impressions]));
   const topActions = rankRows([...queries, ...pages])
     .filter((row) => row.action !== "wait" && isTopActionCandidate(row))
+    .filter((row) => {
+      if (row.action === "technical-check") return true;
+      if (!row.query) return row.impressions >= MIN_PAGE_ACTION_IMPRESSIONS;
+      if (row.page === "-") return row.impressions >= MIN_QUERY_ACTION_IMPRESSIONS;
+      if (row.action === "query-page-review") {
+        return row.impressions >= MIN_QUERY_ACTION_IMPRESSIONS;
+      }
+      return (
+        row.impressions >= MIN_QUERY_ACTION_IMPRESSIONS &&
+        (pageImpressions.get(row.page) ?? 0) >= MIN_PAGE_ACTION_IMPRESSIONS
+      );
+    })
     .slice(0, 8);
   const topPage = [...pages].sort((a, b) => b.impressions - a.impressions)[0];
   const nextDate = addDays(date, 7);
@@ -1496,9 +1545,9 @@ ${resendSnapshot}
 
 ${analyticsEvidence}${makeGithubMarkdown(githubSummary)}${makeResendMarkdown(resendSummary)}## Top Actions
 
-Within this authenticated GSC report, only technical blockers, protected AI knowledge-base/wiki rows, and visible Obsidian + Claude/Claude Code/MCP query rows are nominated here. Generic Obsidian and other rows remain visible in the complete queues as measurement evidence. Separately, inspectable Trends plus independent corroboration may nominate a pre-GSC campaign candidate through the full candidate gate.
+Within this authenticated GSC report, only technical blockers, protected AI knowledge-base/wiki rows, and visible Obsidian + Claude/Claude Code/MCP query rows are nominated here. An existing-page content action additionally requires at least ${MIN_PAGE_ACTION_IMPRESSIONS} page impressions and ${MIN_QUERY_ACTION_IMPRESSIONS} qualified visible query impressions in the same complete range. Generic Obsidian and other rows remain visible in the complete queues as measurement evidence. Separately, inspectable Trends plus independent corroboration may nominate a pre-GSC campaign candidate through the full candidate gate.
 
-${topActions.length ? topActions.map((row, index) => `${index + 1}. **${row.action}** — ${row.query ? `\`${row.query}\`` : `\`${row.page}\``}: ${row.diagnosis}`).join("\n") : "No immediate action. Keep measuring."}
+${topActions.length ? topActions.map((row, index) => `${index + 1}. **${row.action}** — ${row.query ? `\`${row.query}\`` : `\`${row.page}\``}: ${row.diagnosis}`).join("\n") : "No on-page action. Pursue one inspectable live or merged authority path, or wait for new qualified evidence."}
 
 ## Query Action Queue
 
@@ -1521,7 +1570,9 @@ ${rankedPages.map(pageRow).join("\n")}
 
 ## Do Not Write Yet Gate
 
-Do not create a new Learn page unless GSC/Searchfit shows a recurring query cluster no current page answers cleanly. Prefer refreshing pages already getting impressions. Wait when pages are newly shipped, when GSC has not reread the sitemap, or when old redirect/canonical URLs are the main noise.
+Do not create a new Learn page unless GSC/Searchfit shows a recurring query cluster no current page answers cleanly. An existing-page SEO change requires a confirmed post-deploy Google crawl, at least ${MIN_PAGE_ACTION_IMPRESSIONS} target-page impressions in one complete 28-day range, and at least ${MIN_QUERY_ACTION_IMPRESSIONS} joined qualified visible impressions. Evidence below either floor is an evidence gap, not a title, metadata, translation, or internal-link task.
+
+Technical checks, page count, indexing requests, and raw Vercel visitors are guardrails or separate native units, not acquisition progress. After two consecutive website experiments remain below their post-crawl exposure floors, stop the on-page lane and pursue an inspectable live or merged authority path, or wait. An open directory pull request does not count as authority.
 
 The acquisition queue centers AI knowledge bases, LLM wiki, source-backed wiki, and knowledge bases for AI agents. In this GSC-derived queue, Obsidian enters Top Actions only when a visible query pairs it with Claude, Claude Code, or MCP. The campaign may still act earlier when inspectable Trends, independent corroboration, a clean coverage gap, maintained Wenlan proof, and standalone utility pass the complete candidate gate. Generic memory rows remain visible evidence and measuring cohorts, but they do not nominate the next acquisition experiment.
 
@@ -2189,9 +2240,28 @@ function makeClickOpportunities(pages, queryPageEvidence) {
         const configuredTarget = classifyQuery(row.query).page;
         return configuredTarget !== "-" && configuredTarget !== page.page;
       });
+      const alignedRows = visibleQualifiedRows.filter(
+        (row) => classifyQuery(row.query).page === page.page,
+      );
       const visibleQualifiedImpressions = visibleQualifiedRows.reduce(
         (sum, row) => sum + row.impressions,
         0,
+      );
+      const alignedImpressions = alignedRows.reduce(
+        (sum, row) => sum + row.impressions,
+        0,
+      );
+      const mismatchedImpressionsByOwner = new Map();
+      for (const row of mismatchedRows) {
+        const owner = classifyQuery(row.query).page;
+        mismatchedImpressionsByOwner.set(
+          owner,
+          (mismatchedImpressionsByOwner.get(owner) ?? 0) + row.impressions,
+        );
+      }
+      const maxMismatchedOwnerImpressions = Math.max(
+        0,
+        ...mismatchedImpressionsByOwner.values(),
       );
       const visibleQualifiedPosition =
         visibleQualifiedImpressions > 0
@@ -2199,6 +2269,13 @@ function makeClickOpportunities(pages, queryPageEvidence) {
               (sum, row) => sum + row.position * row.impressions,
               0,
             ) / visibleQualifiedImpressions
+          : null;
+      const alignedPosition =
+        alignedImpressions > 0
+          ? alignedRows.reduce(
+              (sum, row) => sum + row.position * row.impressions,
+              0,
+            ) / alignedImpressions
           : null;
       const campaignLane =
         ACQUISITION_PRIORITY_PAGE.test(page.page) ||
@@ -2209,23 +2286,29 @@ function makeClickOpportunities(pages, queryPageEvidence) {
       let nextMove = "evidence-gap-review";
       let diagnosis =
         "Page impressions are present, but qualified zero-click query evidence is hidden or absent. Inspect the privacy-visible join before editing.";
-      if (mismatchedRows.length > 0) {
+      if (maxMismatchedOwnerImpressions >= MIN_QUERY_ACTION_IMPRESSIONS) {
         nextMove = "query-page-review";
         diagnosis =
           "A visible qualified query lands on a different page than its configured target. Resolve intent and internal-link routing before editing copy.";
+      } else if (mismatchedRows.length > 0 && alignedImpressions < MIN_QUERY_ACTION_IMPRESSIONS) {
+        diagnosis = `No single configured owner reaches the ${MIN_QUERY_ACTION_IMPRESSIONS}-impression joined floor. Keep the distinct intent mismatches separate and wait.`;
+      } else if (alignedImpressions < MIN_QUERY_ACTION_IMPRESSIONS) {
+        diagnosis = `Qualified visible demand is below the ${MIN_QUERY_ACTION_IMPRESSIONS}-impression joined floor. Preserve the evidence gap without editing.`;
+      } else if (page.impressions < MIN_PAGE_ACTION_IMPRESSIONS) {
+        diagnosis = `The page is below the ${MIN_PAGE_ACTION_IMPRESSIONS}-impression action floor. Preserve the qualified query evidence without editing.`;
       } else if (
-        visibleQualifiedPosition !== null &&
-        visibleQualifiedPosition >= 8 &&
-        visibleQualifiedPosition <= 30
+        alignedPosition !== null &&
+        alignedPosition >= 8 &&
+        alignedPosition <= 30
       ) {
         nextMove = "title-meta-refresh";
         diagnosis =
           "Visible qualified demand is in striking distance with zero query clicks. Review title, description, and first answer.";
-      } else if (visibleQualifiedPosition !== null && visibleQualifiedPosition < 8) {
+      } else if (alignedPosition !== null && alignedPosition < 8) {
         nextMove = "serp-intent-review";
         diagnosis =
           "Visible qualified demand ranks on page one but earns no query clicks. Inspect SERP intent and snippet alignment.";
-      } else if (visibleQualifiedImpressions > 0) {
+      } else if (alignedImpressions > 0) {
         nextMove = "internal-link-refresh";
         diagnosis =
           "Visible qualified demand ranks beyond striking distance with zero query clicks. Strengthen relevant internal links before rewriting copy.";
