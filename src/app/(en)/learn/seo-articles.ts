@@ -1867,6 +1867,193 @@ const workflowArticles: BaseSpec[] = [
       body: "Use one bounded source set, verify citations and refresh behavior, then decide whether a maintained local knowledge layer fits your workflow.",
     },
   },
+  {
+    slug: "migrate-obsidian-vault-to-llm-wiki",
+    eyebrow: "Migration guide",
+    category: "Workflows",
+    title: "Migrate an Obsidian Vault to a Source-Backed LLM Wiki",
+    description:
+      "Register an Obsidian vault as a read-only Wenlan source, resync it on demand, and distill the most-reused notes into citation-backed wiki pages that AI agents can query.",
+    metaTitle: "Migrate an Obsidian Vault to a Source-Backed LLM Wiki | Wenlan",
+    metaDescription:
+      "Move Obsidian notes into an AI-readable LLM wiki without leaving Obsidian: a read-only vault source, on-demand resync, distilled pages with citations, and human review.",
+    keywords: [
+      "obsidian llm wiki",
+      "migrate Obsidian to Wenlan",
+      "Obsidian vault knowledge base",
+      "Obsidian AI wiki migration",
+      "obsidian notes for AI agents",
+      "Obsidian to LLM wiki guide",
+    ],
+    publishedAt: "2026-09-12",
+    updatedAt: "2026-09-12",
+    readingTime: "6 min read",
+    audience:
+      "Obsidian users who want AI agents to read their notes through a maintained wiki",
+    heroBullets: [
+      "Register the vault as a read-only source; Obsidian stays the human-owned writing surface.",
+      "Resync the source on demand after editing sessions, then refresh the distilled pages.",
+      "Agents query cited, reviewed answers instead of re-reading raw notes every session.",
+    ],
+    quickAnswer:
+      "Register the vault as a read-only Wenlan Source with `wenlan sources add <vault path>` and keep writing in Obsidian. Resync on demand after edits, then distill the topics you and your agents re-read most often into maintained Pages with citations. Your notes are never moved, rewritten, or deleted by the migration.",
+    quickAnswerLink: {
+      label: "See the source-backed LLM-wiki workflow",
+      href: "/learn/distilled-wiki-pages-ai-memory",
+    },
+    problem:
+      "An Obsidian vault grows into a personal archive, but AI agents can only use it through direct file access. They re-read raw Markdown every session, mix up old and current notes, and leave no trail of which conclusion came from which note. Copying notes into a second tool fixes nothing: the truth splits in two, and the copy goes stale while the vault keeps evolving.",
+    wenlanFit:
+      "Wenlan is a local-first, open-source (Apache 2.0) LLM wiki built around a lightweight Rust daemon. It reads an Obsidian vault as a read-only Source and resyncs its Markdown on demand. Distilled Pages keep citations, staleness, revisions, and human review, and automatic refresh rejects citation-poor drafts. Nothing about your vault is moved or rewritten.",
+    actionHeading: "Migrate one topic at a time",
+    actionIntro:
+      "Do not import the whole vault on day one. One topic keeps the first loop visible and the first failure small.",
+    actionBullets: [
+      "Back up the vault first. A vault is plain Markdown files on disk, so copy the folder or rely on your existing backup before the first import.",
+      "Pick one topic that you and your agents ask about often, such as a project folder or an MOC. A small boundary keeps failures visible.",
+      "Install the runtime for your operating system and run `wenlan status` to confirm the local daemon is healthy.",
+      "Run `wenlan sources add <vault path>` and read the found, ingested, and skipped counts. Markdown content ingests; plugin-specific features like Dataview queries, Canvas boards, and embedded views are treated as plain Markdown text, not re-executed.",
+      "In a Wenlan plugin client, run `/distill <topic>` and then `/pages <topic>`. In an MCP-only client, use the equivalent Wenlan tools that client exposes.",
+      "Run `/lint` and `/curate` to catch malformed citations, orphan links, and broken embeddings before anyone relies on the Page.",
+      "Optional round trip: symlink `~/.wenlan/pages/` into the vault so distilled Pages are visible where you write. Your edits stay human-owned; machine refreshes become reviewable revisions.",
+      "Verify the loop: ask your agent a question the vault answers, open the citation behind the answer, edit the source note, and confirm the Page is marked stale before trusting it again.",
+    ],
+    code: {
+      label: "Register the vault and distill one topic",
+      code: "wenlan status\nwenlan sources add ~/Documents/obsidian-vault\n# in a Wenlan plugin client:\n/distill <topic you re-read often>\n/pages <topic you re-read often>\n/lint\n/curate",
+    },
+    caution:
+      "Keep Obsidian as the writing surface. The vault Source resyncs on demand, not in the background, so re-run the sync after heavy editing sessions. Image-only or scanned attachments need OCR before their text is extractable, and a Page is only as current as its last reviewed refresh.",
+    faq: [
+      "Will migration move, rewrite, or delete my Obsidian notes?",
+      "No. Wenlan registers the vault as a read-only Source. Notes stay where they are; only the derived Pages live in Wenlan, and those are Markdown you can inspect or export.",
+      "Do I have to stop writing in Obsidian after migrating?",
+      "No, keep writing there. Resync the Source on demand after edits, then review the refreshed Pages. The workflow is built for Obsidian to remain the human-owned surface while Wenlan keeps the agent-readable answers current.",
+    ],
+    relatedSlugs: [
+      "wenlan-vs-obsidian-ai-memory",
+      "build-local-ai-knowledge-base-from-documents",
+      "distilled-wiki-pages-ai-memory",
+      "verify-ai-knowledge-base-citations",
+      "source-backed-wiki-pages-ai-work",
+    ],
+    officialReferences: [
+      {
+        label: "Obsidian data storage docs",
+        href: "https://obsidian.md/help/data-storage",
+      },
+      {
+        label: "Wenlan supported document sources",
+        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      },
+      {
+        label: "Wenlan source-backed Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "Wenlan review and trust",
+        href: "https://wenlan.app/docs/review-and-trust",
+      },
+    ],
+    cta: {
+      heading: "Move one vault topic, verify the loop",
+      body: "Register the vault as a read-only source, distill one repeated topic, then prove that citations and staleness work before migrating more.",
+    },
+  },
+  {
+    slug: "setup-agent-knowledge-base-for-coding-agents",
+    eyebrow: "Setup guide",
+    category: "Workflows",
+    title: "Set Up a Knowledge Base Your Coding Agents Can Query",
+    description:
+      "Install the Wenlan runtime, connect Claude Code, Codex, and Cursor, add one project source set, and prove the capture, distill, cite, and refresh loop before expanding.",
+    metaTitle: "Set Up an AI Agent Knowledge Base for Coding Agents | Wenlan",
+    metaDescription:
+      "A practical setup walkthrough: install the local runtime, connect coding clients over MCP, add project sources, distill the first cited page, and verify the refresh loop.",
+    keywords: [
+      "agent knowledge base",
+      "set up AI agent knowledge base",
+      "coding agent knowledge base setup",
+      "knowledge base for Claude Code",
+      "knowledge base for Codex",
+      "local knowledge base for AI agents",
+      "MCP knowledge base setup",
+    ],
+    publishedAt: "2026-09-12",
+    updatedAt: "2026-09-12",
+    readingTime: "8 min read",
+    audience:
+      "Developers setting up shared, cited project knowledge for Claude Code, Codex, Cursor, or another coding agent",
+    heroBullets: [
+      "One local daemon holds the knowledge; every connected client queries the same sources and pages.",
+      "Start with one client and one bounded source set, then prove citations and refresh before expanding.",
+      "Keep the repository authoritative; the knowledge base holds the reasoning that is expensive to reconstruct.",
+    ],
+    quickAnswer:
+      "Install the runtime for your operating system, run `wenlan status`, connect one coding client, point `wenlan sources add <path>` at one bounded project folder, distill one repeated topic into a cited Page, then verify that a second client can retrieve it and that editing a source marks the Page stale.",
+    quickAnswerLink: {
+      label: "See the content strategy behind this setup",
+      href: "/learn/coding-agent-source-backed-knowledge-base",
+    },
+    problem:
+      "A coding agent starts every session by re-reading the repository and rediscovering the same architecture decisions, external constraints, and tribal knowledge. Stuffing all of it into AGENTS.md burns context on every task and goes stale quietly. Raw search finds text, but it cannot tell which conclusion is current, cited, and reviewed.",
+    wenlanFit:
+      "Wenlan is a local-first, open-source (Apache 2.0) knowledge base built around a lightweight Rust daemon. Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, and other clients reach the same sources, memories, and maintained Pages over MCP or plugins, with citations, staleness, revisions, and human review kept visible.",
+    actionHeading: "Build the loop in one afternoon",
+    actionIntro:
+      "Resist the urge to connect every client and import the whole company drive. The setup is done when one bounded topic survives the full read, cite, verify, and refresh loop.",
+    actionBullets: [
+      "Install the runtime for your operating system. On macOS Apple Silicon with Node.js: `npx -y wenlan setup`. Linux and Windows have their own one-command paths; the setup doc below lists them all.",
+      "Run `wenlan status` and confirm the local daemon reports healthy before touching any client configuration.",
+      "Connect one coding client first. Claude Code and Codex have Wenlan plugin paths with a `/setup` skill that installs or repairs the runtime and verifies the MCP round trip. For Cursor and other local MCP clients, `~/.wenlan/bin/wenlan connect cursor` writes the client configuration.",
+      "Add one bounded source set: `wenlan sources add <project docs folder>`. Read the found, ingested, and skipped counts; supported inputs are Markdown, text, text-extractable PDFs, folders, and read-only Obsidian vaults.",
+      "Capture two or three real decisions or lessons with the client's capture path, then run `/distill <topic>` and `/pages <topic>` in a plugin client, or the equivalent Wenlan tools in an MCP-only client. Distill only what the sources can actually support.",
+      "Run `/lint` and `/curate` to catch malformed citations, orphan links, and broken embeddings before anyone relies on the Page.",
+      "Verify from a second client: retrieve the Page, open the citation to confirm it supports the claim, edit the cited source, and confirm the Page is marked stale.",
+      "Only then add the next source set or client. Growing in small verified steps keeps one bad import from poisoning the whole knowledge base.",
+    ],
+    code: {
+      label: "First-client setup sequence",
+      code: "npx -y wenlan setup\nwenlan status\n~/.wenlan/bin/wenlan connect cursor\nwenlan sources add ~/projects/my-app/docs\n# in a Wenlan plugin client:\n/distill <recurring project topic>\n/pages <recurring project topic>\n/lint\n/curate",
+    },
+    caution:
+      "Do not duplicate the repository inside the knowledge base. Current code, tests, and specifications stay authoritative; maintain only the reasoning, external constraints, and cross-file conclusions that are expensive to reconstruct. Keep AGENTS.md or CLAUDE.md short and let cited Pages carry the long explanations on demand.",
+    faq: [
+      "Should I connect every AI client on day one?",
+      "No. Connect the client you use most, prove the full loop, then add the next one. Each client points at the same local daemon, so adding clients later is cheap once the knowledge layer is sound.",
+      "How is this different from putting everything in AGENTS.md?",
+      "AGENTS.md loads on every task, so it should stay short. A knowledge base keeps long explanations out of the context window and serves them on demand, with citations, staleness, and review that a static instruction file cannot provide.",
+    ],
+    relatedSlugs: [
+      "coding-agent-source-backed-knowledge-base",
+      "mcp-memory-server",
+      "choose-ai-knowledge-base-tool",
+      "review-before-trust-ai-memory",
+      "wenlan-codex-workflow",
+    ],
+    officialReferences: [
+      {
+        label: "Wenlan platform and client setup",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md",
+      },
+      {
+        label: "Wenlan CLI and MCP setup",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-cli/README.md",
+      },
+      {
+        label: "Wenlan source-backed Pages",
+        href: "https://wenlan.app/docs/source-backed-pages",
+      },
+      {
+        label: "Wenlan MCP clients",
+        href: "https://wenlan.app/docs/mcp-clients",
+      },
+    ],
+    cta: {
+      heading: "Prove one topic before scaling",
+      body: "Set up one client and one source set, verify citations and refresh, then grow the knowledge base in small verified steps.",
+    },
+  },
 ];
 
 const consultantClientProjectArticle: BaseSpec = {
