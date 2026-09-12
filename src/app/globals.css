@@ -148,6 +148,17 @@ html:lang(zh-Hans) .font-serif {
   color-scheme: light;
 }
 
+/* ToolPilot directory badge: swap artwork per theme (dark default). */
+.tp-badge-light {
+  display: none;
+}
+[data-theme="light"] .tp-badge-dark {
+  display: none;
+}
+[data-theme="light"] .tp-badge-light {
+  display: inline-block;
+}
+
 body {
   font-family: var(--font-sans);
   background: var(--o-bg);
