@@ -1384,14 +1384,15 @@ const workflowArticles: BaseSpec[] = [
     slug: "codex-claude-code-shared-memory",
     eyebrow: "Workflow",
     category: "Workflows",
-    title: "Shared Memory Between Codex and Claude Code",
+    title: "How to Share Memory Between Codex and Claude Code",
     description:
-      "Use Wenlan to carry implementation context between Codex sessions and Claude Code plugin workflows.",
-    metaTitle: "Shared Memory Between Codex and Claude Code | Wenlan",
+      "Wenlan keeps one local, source-backed memory store for both tools: Codex connects over MCP, Claude Code through the plugin, and captures from one are recallable from the other.",
+    metaTitle: "Share Memory Between Codex and Claude Code | Wenlan",
     metaDescription:
-      "Wenlan lets Codex and Claude Code share one local, source-backed system for decisions, gotchas, handoffs, and project context.",
+      "Yes — point Codex (MCP) and Claude Code (plugin) at the same Wenlan daemon, data dir, and space, and a capture from one is recallable from the other.",
     keywords: [
       "Codex Claude Code shared memory",
+      "how to share memory between Codex and Claude Code",
       "Codex Claude Code handoff",
       "shared memory AI coding agents",
       "Wenlan Codex Claude Code",
@@ -1404,7 +1405,7 @@ const workflowArticles: BaseSpec[] = [
       "Handoffs make cross-tool continuation explicit.",
     ],
     quickAnswer:
-      "Use Wenlan as the shared store: configure Codex through MCP, configure Claude Code through the plugin, and verify that a capture from one can be recalled from the other with the same daemon, data dir, and space.",
+      "Yes — run one Wenlan daemon as the shared store: connect Codex over MCP and install the Claude Code plugin, then point both at the same data directory and space. A fact captured in Codex can then be recalled in Claude Code, and vice versa. Codex's native Memories and AGENTS.md only help Codex itself; Wenlan keeps memory independent of the tool that wrote it.",
     problem:
       "Codex may handle one coding pass while Claude Code handles another. Codex native Memories and AGENTS.md still help Codex itself, but they do not automatically become Claude Code memory.",
     wenlanFit:

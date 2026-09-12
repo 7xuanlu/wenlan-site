@@ -28,9 +28,9 @@ export const localizedLearnIndexContent: Record<
 > = {
   "zh-TW": {
     seo: {
-      title: "LLM Wiki 與 AI 知識庫指南 | Wenlan 文瀾",
+      title: "AI 記憶與 AI 知識庫指南：LLM Wiki 實戰 | Wenlan 文瀾",
       description:
-        "建立有來源、可審查、會持續更新的 AI 知識庫，並用 Wenlan 將可信資料整理成 AI agent 可重用的 LLM Wiki 頁面。",
+        "AI 記憶與知識庫怎麼做？用 Wenlan 把可信資料整理成有來源、可引用、可審查的 LLM Wiki 頁面，建立會持續更新的 AI 知識庫，為 Claude Code、Codex 等 AI 代理提供本地記憶。從概念解析、工具選型到實戰工作流程，帶你一步步上手。",
     },
     breadcrumb: "學習",
     eyebrow: "Learn",
@@ -52,9 +52,9 @@ export const localizedLearnIndexContent: Record<
   },
   "zh-CN": {
     seo: {
-      title: "LLM Wiki 与 AI 知识库指南 | Wenlan 文澜",
+      title: "AI 记忆与 AI 知识库指南：LLM Wiki 实战 | Wenlan 文澜",
       description:
-        "建立有来源、可审核、会持续更新的 AI 知识库，并用 Wenlan 把可信资料整理成 AI agent 可复用的 LLM Wiki 页面。",
+        "AI 记忆与知识库怎么做？用 Wenlan 把可信资料整理成有来源、可引用、可审核的 LLM Wiki 页面，建立会持续更新的 AI 知识库，为 Claude Code、Codex 等 AI 智能体提供本地记忆。从概念解析、工具选型到实战工作流，带你一步步上手。",
     },
     breadcrumb: "学习",
     eyebrow: "Learn",

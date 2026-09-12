@@ -17,12 +17,12 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "4df0d0a9ebddbd003e1e3550d4ee2d99e09e522e18014323bf749d745fe825be",
+    sourceHash: "fcfce2b70aa153be0876e35a1be9117dec2aaa235f93de9d0fc5e846b67a3d81",
     content: {
       seo: {
-        title: "Wenlan 文澜 | AI 工作的 LLM wiki",
+        title: "Wenlan 文澜官网 | AI 工作的 LLM wiki",
         description:
-          "Wenlan 文澜是有来源依据的 AI 知识库，也是 AI 工作的 LLM wiki：整理文档与决策，让你和 AI 能查找、核对与审核页面。",
+          "Wenlan 文澜是有来源依据的 AI 知识库，也是 AI 工作的 LLM wiki：把文档、笔记和决策整理成可查找、可核对、可审核的页面，让你和 AI 接着往前做。本地运行，连接 Claude Code、Codex、ChatGPT 等 AI 工具，开源免费。",
       },
       nav: {
         schemaName: "Wenlan 文澜网站导航",
@@ -185,7 +185,7 @@ export const zhCNContent = {
           seo: {
             title: "下载 Wenlan Windows、macOS 与 Linux 版",
             description:
-              "下载 Windows x64 或 macOS Apple silicon 的 Wenlan 桌面 App，或安装支持 Windows、macOS 与 Linux 的 headless CLI、本地 daemon 与 MCP connector。",
+              "下载 Wenlan 桌面 App（Windows x64、macOS Apple silicon），或安装支持 Windows、macOS 与 Linux 的 headless CLI、本地 daemon 与 MCP connector：从 GitHub 正式发布页获取版本，验证后连接你的 AI 工具。",
           },
           breadcrumbs: {
             home: "首页",
@@ -526,7 +526,7 @@ export const zhCNContent = {
           eyebrow: "你与 AI 共用的 Living Wiki",
           headline: { pre: "笔记一直在积累，", emphasis: "工作却还得从头来？", post: "" },
           description:
-            "文澜把文档、笔记与工作中积累的决策，整理成有来源、能持续更新的 Wiki。让你和 AI 不只是找回资料，更能基于已有的理解，接着往前做。",
+            "文澜是为 AI 工作打造的有来源 LLM Wiki：把文档、笔记与决策整理成有来源、能持续更新的 Wiki 页面，让你和 AI 不只找回资料，更能基于已有的理解，接着往前做。",
           worksWithLabel: "可搭配",
           worksWithNote: "可读取 Obsidian 笔记，保留原文。",
         },
@@ -962,7 +962,7 @@ export const zhCNContent = {
       seo: {
         title: "关于 Wenlan | AI 工作的 LLM wiki",
         description:
-          "Wenlan 是 open-source、local-first 的 AI 工作 LLM wiki，由 AI 代理建立，并以来源为根基。",
+          "Wenlan 是开源、本地优先的 AI 工作 LLM wiki，由 AI 智能体打造并以来源为根基：把文档、笔记与决策整理成可引用、可审核、可更新的页面，让 AI 工作有据可查、持续积累。支持 Windows、macOS 与 Linux，免费下载使用。了解文澜的理念、开源协议与产品路线图。",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -1085,7 +1085,7 @@ export const zhCNContent = {
       seo: {
         title: "Wenlan 文档 | AI 工作的 LLM wiki",
         description:
-          "安装 Wenlan，学习 AI 工作记忆循环，理解有来源依据的 wiki 页面、provenance、retrieval 和 MCP clients 如何配合。",
+          "安装 Wenlan，学习 AI 工作记忆循环：从安装、连接到 Claude Code、Codex、ChatGPT 等 MCP 客户端，再到理解有来源依据的 wiki 页面、引用、检索与更新机制如何配合，让 AI 记住你的工作。包含分步安装指南、客户端接入说明与常见问题解答。",
       },
       breadcrumbs: {
         home: "Wenlan",

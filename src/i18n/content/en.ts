@@ -531,7 +531,7 @@ export const enContent = {
           eyebrow: "A living wiki for you and your AI",
           headline: { pre: "Your notes keep growing.", emphasis: "Still starting from scratch?", post: "" },
           description:
-            "Wenlan turns documents, notes, and decisions into a source-backed wiki that evolves with your work. You and your AI can build on what you already know, not just find what you saved.",
+            "Wenlan is a source-backed wiki for your AI work: an LLM wiki that turns documents, notes, and decisions into maintained pages you and your AI build on. Your context carries forward instead of starting from scratch.",
           worksWithLabel: "Works with",
           worksWithNote: "Read from your Obsidian vault without changing your notes.",
         },

@@ -1334,14 +1334,15 @@ source changes
     slug: "wenlan-vs-claude-mem",
     eyebrow: "Comparison",
     category: "Comparisons",
-    title: "Wenlan vs claude-mem: Explicit vs Automatic Agent Memory",
+    title: "Wenlan vs claude-mem: Which AI Memory Tool Should You Use?",
     description:
-      "Compare Wenlan and claude-mem for automatic session capture, explicit source-backed memory, progressive retrieval, cross-agent support, and local control.",
-    metaTitle: "Wenlan vs claude-mem: Explicit vs Automatic AI Memory",
+      "claude-mem automatically captures and compresses your agent sessions; Wenlan keeps explicit, source-backed memory you review and maintain as readable pages. Compare capture, retrieval, cross-agent support, and control.",
+    metaTitle: "Wenlan vs claude-mem: Which AI Memory Should You Use?",
     metaDescription:
-      "Compare Wenlan and claude-mem for automatic session capture, explicit source-backed memory, progressive retrieval, cross-agent workflows, and local control.",
+      "Pick claude-mem for automatic session capture and compression; pick Wenlan for explicit, source-backed memory you can review, correct, and keep as pages.",
     keywords: [
       "Wenlan vs claude-mem",
+      "claude-mem vs Wenlan",
       "claude-mem alternative",
       "automatic AI memory",
       "Claude Code memory",
@@ -1391,7 +1392,7 @@ source changes
       {
         heading: "Short answer",
         body: [
-          "Choose claude-mem when you want agent sessions observed automatically, compressed into searchable history, and surfaced through a progressive disclosure flow with little capture-time effort.",
+          "Choose claude-mem when you want memory to happen by itself: hooks observe your agent sessions, compress them into searchable history, and inject the relevant parts back later with little effort from you.",
           "Choose Wenlan when you want durable facts, decisions, handoffs, and pages to be explicit, source-backed, reviewable, and readable outside the agent that captured them.",
           "Do not choose between them on the old assumption that only Wenlan works across agents. Current claude-mem source includes Codex hooks and other integrations; current Wenlan uses one local daemon plus MCP and native plugin paths. The useful decision is automatic session history versus deliberately maintained work knowledge.",
         ],
@@ -1551,14 +1552,15 @@ source changes
     slug: "wenlan-vs-superlocal-memory",
     eyebrow: "Comparison",
     category: "Comparisons",
-    title: "Wenlan vs SuperLocalMemory v3.8.3: Local AI Memory Compared",
+    title: "Wenlan vs SuperLocalMemory v3.8.3: Which Local AI Memory Fits Your Work?",
     description:
-      "Compare Wenlan and SuperLocalMemory v3.8.3 across local agent memory, temporal retrieval, auditability, team controls, MCP workflows, and source-backed pages.",
-    metaTitle: "Wenlan vs SuperLocalMemory v3.8.3 | Local AI Memory",
+      "SuperLocalMemory is a local memory control plane for teams; Wenlan is a source-backed LLM wiki for deliberate knowledge work. Compare retrieval, team controls, audit, and artifacts.",
+    metaTitle: "Wenlan vs SuperLocalMemory v3.8.3: Which Memory Fits?",
     metaDescription:
-      "Compare Wenlan with SuperLocalMemory v3.8.3: local agent memory, temporal retrieval, team controls, MCP workflows, auditability, and source-backed pages.",
+      "Choose SuperLocalMemory for a team memory control plane with roles and audit; choose Wenlan for explicit capture, handoffs, and a source-backed LLM wiki.",
     keywords: [
       "Wenlan vs SuperLocalMemory",
+      "SuperLocalMemory vs Wenlan",
       "SuperLocalMemory alternative",
       "super local memory",
       "local AI agent memory",
@@ -1601,7 +1603,7 @@ source changes
       {
         heading: "Short answer",
         body: [
-          "Choose SuperLocalMemory when you want a local-first agent memory control plane with automated ingestion, temporal and graph-aware retrieval, personal and team scopes, a dashboard, cache and compression controls, bounded loops, and framework adapters.",
+          "Choose SuperLocalMemory when you want a local-first memory control plane for a team: automated ingestion, temporal and graph-aware retrieval, personal/team scopes, role-based access, and a hash-chained audit trail.",
           "Choose Wenlan when you want an LLM wiki for AI work: explicit capture, handoffs between sessions, reviewable memories, source-backed pages, local hybrid retrieval, and readable artifacts that can sit beside an Obsidian vault.",
           "Both are local-first and MCP-capable. The useful distinction is not whether either product has retrieval; it is whether you want a broad operational control plane or a deliberate, inspectable knowledge workflow.",
         ],
