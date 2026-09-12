@@ -5916,18 +5916,18 @@ test("SuperLocalMemory comparison pins current benchmark protocols to checked so
   assert.doesNotMatch(article, /2026-06-24 source check/);
 });
 
-test("Learn index SERP copy leads with the source-backed AI knowledge-base and LLM-wiki category", async () => {
+test("Learn index SERP copy leads with AI memory and knowledge-base intent", async () => {
   const learnPage = await readRepo("src/app/learn/page.tsx");
   const learnOgImage = await readRepo("src/app/learn/opengraph-image.tsx");
   const normalizedLearnPage = learnPage.replace(/\s+/g, " ");
 
   assert.match(
     learnPage,
-    /title: "LLM Wiki & AI Knowledge Base Guides \| Wenlan"/,
+    /title: "AI Memory & Knowledge Base Guides: LLM Wiki for AI Agents \| Wenlan"/,
   );
   assert.match(
     learnPage,
-    /Build a source-backed AI knowledge base with maintained LLM wiki pages, citations, review, refresh state, and local workflows for AI agents\./,
+    /AI memory & knowledge base guides: build a source-backed AI knowledge base with LLM wiki pages, citations, review, refresh state, and local workflows\./,
   );
   assert.match(learnPage, />\s*LLM wiki and AI knowledge base guides that stay current\.\s*</);
   assert.match(learnPage, />\s*Quick answer\s*</);

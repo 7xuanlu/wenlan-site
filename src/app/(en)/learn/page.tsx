@@ -12,26 +12,26 @@ import { ArticleHalo, MemoryIndex } from "./article-visuals";
 import { alternateUrls } from "@/i18n/routing";
 
 export const metadata: Metadata = {
-  title: "LLM Wiki & AI Knowledge Base Guides | Wenlan",
+  title: "AI Memory & Knowledge Base Guides: LLM Wiki for AI Agents | Wenlan",
   description:
-    "Build a source-backed AI knowledge base with maintained LLM wiki pages, citations, review, refresh state, and local workflows for AI agents.",
+    "AI memory & knowledge base guides: build a source-backed AI knowledge base with LLM wiki pages, citations, review, refresh state, and local workflows.",
   alternates: {
     canonical: "/learn",
     languages: alternateUrls("/learn"),
   },
   openGraph: {
-    title: "LLM Wiki & AI Knowledge Base Guides | Wenlan",
+    title: "AI Memory & Knowledge Base Guides: LLM Wiki for AI Agents | Wenlan",
     description:
-      "Build a source-backed AI knowledge base with maintained LLM wiki pages, citations, review, refresh state, and local workflows for AI agents.",
+      "AI memory & knowledge base guides: build a source-backed AI knowledge base with LLM wiki pages, citations, review, refresh state, and local workflows.",
     type: "website",
     url: `${SITE_URL}/learn`,
     siteName: "Wenlan",
   },
   twitter: {
     card: "summary_large_image",
-    title: "LLM Wiki & AI Knowledge Base Guides | Wenlan",
+    title: "AI Memory & Knowledge Base Guides: LLM Wiki for AI Agents | Wenlan",
     description:
-      "Build a source-backed AI knowledge base with maintained LLM wiki pages, citations, review, refresh state, and local workflows for AI agents.",
+      "AI memory & knowledge base guides: build a source-backed AI knowledge base with LLM wiki pages, citations, review, refresh state, and local workflows.",
   },
 };
 
@@ -141,7 +141,7 @@ export default function LearnPage() {
     "@id": "https://wenlan.app/learn#collection",
     name: "Wenlan Learn",
     description:
-      "Guides for building a source-backed AI knowledge base with maintained LLM wiki pages, citations, review, refresh state, and local agent workflows.",
+      "Guides for AI memory and knowledge bases: build a source-backed AI knowledge base with LLM wiki pages, citations, review, refresh state, and local workflows.",
     url: `${SITE_URL}/learn`,
     isPartOf: { "@id": "https://wenlan.app/#website" },
     publisher: { "@id": "https://wenlan.app/#organization" },

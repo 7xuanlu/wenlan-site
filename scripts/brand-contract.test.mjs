@@ -747,11 +747,11 @@ test("claude-mem comparison reflects current automatic and cross-agent boundarie
   assert.notEqual(end, -1);
   assert.match(
     article,
-    /title: "Wenlan vs claude-mem: Explicit vs Automatic Agent Memory"/,
+    /title: "Wenlan vs claude-mem: Which AI Memory Tool Should You Use\?"/,
   );
   assert.match(
     article,
-    /metaTitle: "Wenlan vs claude-mem: Explicit vs Automatic AI Memory"/,
+    /metaTitle: "Wenlan vs claude-mem: Which AI Memory Should You Use\?"/,
   );
   assert.match(article, /claude-mem v13\.12\.4/);
   assert.match(article, /Codex hooks/);
@@ -790,11 +790,11 @@ test("SuperLocalMemory comparison reflects the current control-plane boundary an
   assert.notEqual(end, -1);
   assert.match(
     article,
-    /title: "Wenlan vs SuperLocalMemory v3\.8\.3: Local AI Memory Compared"/,
+    /title: "Wenlan vs SuperLocalMemory v3\.8\.3: Which Local AI Memory Fits Your Work\?"/,
   );
   assert.match(
     article,
-    /metaTitle: "Wenlan vs SuperLocalMemory v3\.8\.3 \| Local AI Memory"/,
+    /metaTitle: "Wenlan vs SuperLocalMemory v3\.8\.3: Which Memory Fits\?"/,
   );
   assert.match(article, /local-first agent memory control plane/);
   assert.match(article, /temporal retrieval/);
