@@ -925,7 +925,7 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Use this glossary when a docs page mentions an Wenlan term and you need the short version before continuing.",
+      "Use this glossary when a docs page mentions a Wenlan term and you need the short version before continuing.",
       "The important distinction: readable artifacts are for humans, the local daemon and index are for retrieval, and MCP is how agents reach the same store.",
     ],
     sections: [

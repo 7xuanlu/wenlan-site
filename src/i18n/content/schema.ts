@@ -463,6 +463,25 @@ export type FooterContent = {
   };
 };
 
+export type LinksContent = SeoContent & {
+  breadcrumbs: {
+    home: string;
+    current: string;
+  };
+  hero: {
+    eyebrow: string;
+    title: string;
+    description: string;
+  };
+  links: readonly {
+    id: string;
+    href: string;
+    label: string;
+    description: string;
+  }[];
+  footnote: string;
+};
+
 export type CoreContent = {
   chrome: ContentUnit<ChromeContent>;
   home: ContentUnit<HomeContent>;
@@ -471,4 +490,5 @@ export type CoreContent = {
   getStarted: ContentUnit<GetStartedContent>;
   notFound: ContentUnit<NotFoundContent>;
   footer: ContentUnit<FooterContent>;
+  links: ContentUnit<LinksContent>;
 };
