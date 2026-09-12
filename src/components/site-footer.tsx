@@ -2,6 +2,7 @@ import { BrandWordmark } from "@/components/brand-wordmark";
 import { getCoreContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
+import Image from "next/image";
 
 type SiteFooterProps = {
   locale: Locale;
@@ -64,17 +65,43 @@ export function SiteFooter({ locale }: SiteFooterProps) {
               {content.signature.tagline}
             </span>
           </div>
-          <p className="font-mono text-[10px] text-[var(--o-text-muted)]">
-            {content.signature.builtByPrefix}{" "}
+          <div className="flex items-center gap-5">
             <a
-              href={content.signature.authorUrl}
+              href="https://www.toolpilot.ai"
               target="_blank"
-              rel="noopener noreferrer author"
-              className="underline decoration-[var(--o-warm)] decoration-2 underline-offset-4 transition-colors hover:text-[var(--o-warm)]"
+              rel="noopener noreferrer"
+              aria-label="Featured on ToolPilot"
+              className="opacity-70 transition-opacity hover:opacity-100"
             >
-              {content.signature.author}
+              <span className="tp-badge-dark">
+                <Image
+                  src="/images/toolpilot-featured-dark.png"
+                  alt="Featured on ToolPilot"
+                  width={118}
+                  height={26}
+                />
+              </span>
+              <span className="tp-badge-light" aria-hidden="true">
+                <Image
+                  src="/images/toolpilot-featured-light.png"
+                  alt=""
+                  width={118}
+                  height={26}
+                />
+              </span>
             </a>
-          </p>
+            <p className="font-mono text-[10px] text-[var(--o-text-muted)]">
+              {content.signature.builtByPrefix}{" "}
+              <a
+                href={content.signature.authorUrl}
+                target="_blank"
+                rel="noopener noreferrer author"
+                className="underline decoration-[var(--o-warm)] decoration-2 underline-offset-4 transition-colors hover:text-[var(--o-warm)]"
+              >
+                {content.signature.author}
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
