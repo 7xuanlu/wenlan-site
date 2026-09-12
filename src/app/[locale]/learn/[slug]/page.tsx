@@ -25,6 +25,7 @@ import { ScenarioWorkedExample } from "@/components/learn/scenario-worked-exampl
 import { ProductEvidencePanel } from "@/components/learn/product-evidence-panel";
 import { WorkflowComparisonGuide } from "@/components/learn/workflow-comparison-guide";
 import { RecordedWorkflowProof } from "@/components/learn/recorded-workflow-proof";
+import { ShareArticle } from "@/components/learn/share-article";
 import { buildSectionIds } from "./section-ids";
 
 type LocalizedLearnArticlePageProps = {
@@ -623,6 +624,8 @@ export default async function LocalizedLearnSlugPage({
             </div>
           </div>
         </section>
+
+        <ShareArticle locale={resolvedLocale} url={url} title={article.title} />
       </article>
     </main>
   );

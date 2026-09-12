@@ -19,6 +19,7 @@ export const CORE_TRANSLATED_PATHS = [
   "/docs",
   "/docs/get-started",
   "/learn",
+  "/links",
 ] as const;
 
 type CoreTranslatedPath = (typeof CORE_TRANSLATED_PATHS)[number];

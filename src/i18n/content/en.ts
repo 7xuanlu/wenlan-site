@@ -993,7 +993,7 @@ export const enContent = {
         },
         {
           id: "builder",
-          number: "03",
+          number: "02",
           title: "Built by Qi-Xuan Lu",
           paragraphs: [
             "Wenlan is built and maintained by Qi-Xuan Lu (GitHub @7xuanlu). Background in AI infrastructure, knowledge graphs, and local-first systems.",
@@ -1003,7 +1003,7 @@ export const enContent = {
         },
         {
           id: "status",
-          number: "04",
+          number: "03",
           title: "Current status",
           paragraphs: [
             "Wenlan v0.18.5 ships a notarized macOS Apple Silicon DMG and a Windows x64 desktop setup executable, plus native headless runtime artifacts for macOS, Linux (x86_64, aarch64; glibc), and Windows (x86_64). Windows users can choose the desktop setup executable or the headless runtime ZIP. The daemon, CLI, MCP server, Claude Code plugin, and Codex plugin are Apache-2.0; the desktop app crate is AGPL-3.0-only.",
@@ -1081,6 +1081,72 @@ export const enContent = {
         description:
           "Wenlan is an open-source, local-first LLM wiki for AI work, built by Qi-Xuan Lu.",
       },
+    },
+  },
+  links: {
+    status: "translated",
+    sourceHash: null,
+    content: {
+      seo: {
+        title: "Wenlan Links | LLM Wiki for AI Work",
+        description:
+          "Every official Wenlan link in one place: download the app, read the docs, follow the guides, and find Wenlan on GitHub and npm.",
+      },
+      breadcrumbs: {
+        home: "Wenlan",
+        current: "Links",
+      },
+      hero: {
+        eyebrow: "Links",
+        title: "Every official Wenlan link.",
+        description:
+          "One hub for the download, the docs, the guides, and the code — so a bio link never leads somewhere stale.",
+      },
+      links: [
+        {
+          id: "download",
+          href: "/download",
+          label: "Download Wenlan",
+          description: "Desktop and headless builds for macOS, Windows, and Linux.",
+        },
+        {
+          id: "get-started",
+          href: "/docs/get-started",
+          label: "Get started guide",
+          description: "Install, connect your AI tools, and verify in minutes.",
+        },
+        {
+          id: "learn",
+          href: "/learn",
+          label: "Learn: AI knowledge base guides",
+          description: "Source-backed LLM wiki guides for AI work and memory.",
+        },
+        {
+          id: "docs",
+          href: "/docs",
+          label: "Documentation",
+          description: "Reference, configuration, and product surfaces.",
+        },
+        {
+          id: "about",
+          href: "/about",
+          label: "About Wenlan",
+          description: "Why Wenlan exists and who builds it.",
+        },
+        {
+          id: "github",
+          href: "https://github.com/7xuanlu/wenlan",
+          label: "GitHub: 7xuanlu/wenlan",
+          description: "Source code, issues, and releases. Apache-2.0.",
+        },
+        {
+          id: "npm",
+          href: "https://www.npmjs.com/package/wenlan",
+          label: "npm: wenlan",
+          description: "Install the CLI and MCP server from npm.",
+        },
+      ],
+      footnote: "Official links only. Everything here lives on wenlan.app, github.com/7xuanlu, or npmjs.com.",
     },
   },
   docs: {

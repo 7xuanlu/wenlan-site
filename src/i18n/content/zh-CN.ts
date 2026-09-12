@@ -988,7 +988,7 @@ export const zhCNContent = {
         },
         {
           id: "builder",
-          number: "03",
+          number: "02",
           title: "由 Qi-Xuan Lu 构建",
           paragraphs: [
             "Wenlan 由 Qi-Xuan Lu (GitHub @7xuanlu) 构建与维护。背景涵盖 AI infrastructure、knowledge graphs 和 local-first systems。",
@@ -998,7 +998,7 @@ export const zhCNContent = {
         },
         {
           id: "status",
-          number: "04",
+          number: "03",
           title: "当前状态",
           paragraphs: [
             "Wenlan v0.18.5 提供已公证的 macOS Apple Silicon DMG 与 Windows x64 桌面版，以及 macOS、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64) 原生 headless runtime 包。Windows 用户可以选择桌面版 setup 安装程序或 headless runtime ZIP。daemon、CLI、MCP server、Claude Code plugin 与 Codex plugin 采用 Apache-2.0；桌面 App crate 采用 AGPL-3.0-only。",
@@ -1076,6 +1076,72 @@ export const zhCNContent = {
         description:
           "Wenlan 是 open-source、local-first 的 AI 工作 LLM wiki，由 Qi-Xuan Lu 构建。",
       },
+    },
+  },
+  links: {
+    status: "translated",
+    sourceHash: null,
+    content: {
+      seo: {
+        title: "文澜链接 | AI 工作用 LLM Wiki",
+        description:
+          "所有文澜官方链接都在这里：下载 App、阅读文档、查看指南，以及在 GitHub 和 npm 找到文澜。",
+      },
+      breadcrumbs: {
+        home: "Wenlan",
+        current: "链接",
+      },
+      hero: {
+        eyebrow: "链接",
+        title: "所有文澜官方链接。",
+        description:
+          "下载、文档、指南和代码都在这一个页面，bio 里的链接不会带你到过时的地方。",
+      },
+      links: [
+        {
+          id: "download",
+          href: "/download",
+          label: "下载 Wenlan",
+          description: "macOS、Windows、Linux 的桌面版与 headless 版本。",
+        },
+        {
+          id: "get-started",
+          href: "/docs/get-started",
+          label: "新手上路指南",
+          description: "几分钟内完成安装、连接 AI 工具并验证。",
+        },
+        {
+          id: "learn",
+          href: "/learn",
+          label: "学习指南：AI 知识库",
+          description: "AI 工作与记忆的 source-backed LLM wiki 指南。",
+        },
+        {
+          id: "docs",
+          href: "/docs",
+          label: "说明文档",
+          description: "参考资料、设置与产品功能总览。",
+        },
+        {
+          id: "about",
+          href: "/about",
+          label: "关于文澜",
+          description: "文澜为什么存在，以及是谁在打造它。",
+        },
+        {
+          id: "github",
+          href: "https://github.com/7xuanlu/wenlan",
+          label: "GitHub：7xuanlu/wenlan",
+          description: "源代码、议题与版本发布。Apache-2.0。",
+        },
+        {
+          id: "npm",
+          href: "https://www.npmjs.com/package/wenlan",
+          label: "npm：wenlan",
+          description: "从 npm 安装 CLI 与 MCP server。",
+        },
+      ],
+      footnote: "只收录官方链接。这里的每一站都在 wenlan.app、github.com/7xuanlu 或 npmjs.com 上。",
     },
   },
   docs: {

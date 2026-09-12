@@ -28,6 +28,7 @@ const CORE_INTENTS = {
     "/docs": ["Wenlan documentation", "navigational"],
     "/docs/get-started": ["install Wenlan", "task-completion"],
     "/learn": ["AI knowledge base guides", "informational-hub"],
+    "/links": ["Wenlan links", "navigational"],
   },
   "zh-TW": {
     "/": ["文瀾", "navigational"],
@@ -36,6 +37,7 @@ const CORE_INTENTS = {
     "/docs": ["文瀾文件", "navigational"],
     "/docs/get-started": ["安裝文瀾", "task-completion"],
     "/learn": ["AI 知識庫指南", "informational-hub"],
+    "/links": ["文瀾連結", "navigational"],
   },
   "zh-CN": {
     "/": ["文澜", "navigational"],
@@ -44,6 +46,7 @@ const CORE_INTENTS = {
     "/docs": ["文澜文档", "navigational"],
     "/docs/get-started": ["安装文澜", "task-completion"],
     "/learn": ["AI 知识库指南", "informational-hub"],
+    "/links": ["文澜链接", "navigational"],
   },
 };
 
@@ -95,6 +98,9 @@ function coreSeo(locale, pathname) {
   if (pathname === "/docs") return content.docs.content.seo;
   if (pathname === "/docs/get-started") {
     return content.getStarted.content.seo;
+  }
+  if (pathname === "/links") {
+    return content.links.content.seo;
   }
   if (pathname === "/learn") {
     if (locale === "en") {
