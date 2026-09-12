@@ -32,7 +32,7 @@ test("canonical trilingual scenario backlog is complete and generated report is 
     "business-metric-definition-knowledge-base",
   );
   assert.equal(backlog.campaign.baseline.sitemapUrls, 120);
-  assert.equal(sitemapRows.length, 168);
+  assert.equal(sitemapRows.length, 171);
   assert.equal(result.sitemapCount, sitemapRows.length);
   assert.equal(renderScenarioBacklog(backlog), report);
 });

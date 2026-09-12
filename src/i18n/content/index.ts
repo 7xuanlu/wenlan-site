@@ -23,6 +23,7 @@ export type {
   HandoffVisualLabels,
   HomeContent,
   LinkContent,
+  LinksContent,
   NotFoundContent,
   SeoContent,
   WaitlistContent,

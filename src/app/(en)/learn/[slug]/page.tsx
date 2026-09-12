@@ -11,6 +11,7 @@ import {
   SITE_URL,
 } from "../articles";
 import { ArticleHalo, MemoryIndex } from "../article-visuals";
+import { ShareArticle } from "@/components/learn/share-article";
 import { alternateUrls, isTranslatedLearnPath } from "@/i18n/routing";
 import { TrackedLink } from "@/components/tracked-link";
 import { getScenarioPacket } from "@/lib/scenario-examples";
@@ -524,6 +525,8 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
             </div>
           </div>
         </section>
+
+        <ShareArticle locale="en" url={articleUrl(article.slug)} title={article.title} />
       </article>
     </main>
   );
