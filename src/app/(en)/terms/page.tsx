@@ -89,7 +89,7 @@ export default function TermsPage() {
         <section className="mb-9">
           <h2 className="mb-3 text-xl font-semibold tracking-normal">Privacy and contact</h2>
           <p className="mb-3 text-base leading-7 text-[var(--o-text-secondary)]">
-            Read the <a className="underline underline-offset-4" href="https://github.com/7xuanlu/wenlan/blob/main/docs/PRIVACY.md">Wenlan Privacy Policy</a> for data handling, recipients, retention, and deletion information.
+            Read the <a className="underline underline-offset-4" href="https://wenlan.app/docs/data-and-privacy">Wenlan Privacy Policy</a> for data handling, recipients, retention, and deletion information.
           </p>
           <p className="text-base leading-7 text-[var(--o-text-secondary)]">
             General questions can be raised in the <a className="underline underline-offset-4" href="https://github.com/7xuanlu/wenlan/issues">Wenlan issue tracker</a>. It is public: ask for a private contact method before sharing information about an individual data request. Do not include private content in the initial issue.
