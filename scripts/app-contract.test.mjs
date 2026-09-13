@@ -5,9 +5,25 @@ import { resolve } from "node:path";
 import test from "node:test";
 import { promisify } from "node:util";
 import { selectedReleaseTag } from "./release-check.mjs";
+import { getDocPage } from "../src/app/(en)/docs/docs.ts";
 
 const repoRoot = resolve(import.meta.dirname, "..");
 const execFileAsync = promisify(execFile);
+
+test("relay privacy summary preserves consent, recipients and retention boundaries", () => {
+  const page = getDocPage("data-and-privacy");
+  const section = page.sections.find((item) => item.heading === "Optional wenlan-relay connector (pre-release)");
+  assert.ok(section);
+  const content = [...section.body, ...section.bullets].join("\n");
+  for (const text of ["https://relay.wenlan.app/mcp", "OAuth", "selected existing Space",
+    "newly created Spaces are not automatically included", "recall still records",
+    "Cloudflare and Wenlan's relay administrator can read", "not end-to-end encryption",
+    "must stay online", "not a physical-deletion time", "pending disconnect",
+    "5 minutes", "24 hours", "15 minutes", "30 days", "90 days"]) {
+    assert.ok(content.includes(text), `Missing relay disclosure: ${text}`);
+  }
+  assert.ok(page.sections.some((item) => item.heading === "Public website analytics"));
+});
 
 const englishRouteGroupAliases = new Map([
   ["src/app/llms-full.txt/route.ts", "src/app/(en)/llms-full.txt/route.ts"],
