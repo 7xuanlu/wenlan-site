@@ -47,6 +47,10 @@ const requiredAgentsSeoIndexClauses = [
   "`pnpm seo:goal:control`",
   "`docs/seo-active-control.md`",
   "--known-fingerprint <sha256>",
+  "task-matched bookmarks",
+  "Do not read all of SEO-CAMPAIGN.md",
+  "after relevant `SEO-CAMPAIGN.md` edits",
+  "do not append session logs",
   "three consecutive Goal turns",
   "`pnpm seo:goal:check`",
   "`EXPERIMENTS.md` is the append-only experiment and readout ledger",
@@ -641,14 +645,14 @@ function frozenContract(plan, errors) {
   const start = plan.indexOf(FROZEN_START);
   const end = plan.indexOf(FROZEN_END);
   if (start === -1 || end === -1 || end <= start) {
-    errors.push("PLAN.md must contain one ordered frozen Goal contract marker pair.");
+    errors.push("SEO-CAMPAIGN.md must contain one ordered frozen Goal contract marker pair.");
     return null;
   }
   if (
     plan.indexOf(FROZEN_START, start + FROZEN_START.length) !== -1 ||
     plan.indexOf(FROZEN_END, end + FROZEN_END.length) !== -1
   ) {
-    errors.push("PLAN.md must contain exactly one frozen Goal contract marker pair.");
+    errors.push("SEO-CAMPAIGN.md must contain exactly one frozen Goal contract marker pair.");
     return null;
   }
 
@@ -660,7 +664,7 @@ function authorityFirstCorrection(plan, errors) {
   const end = plan.indexOf(AUTHORITY_FIRST_END);
   if (start === -1 || end === -1 || end <= start) {
     errors.push(
-      "PLAN.md must contain one ordered authority-first correction marker pair.",
+      "SEO-CAMPAIGN.md must contain one ordered authority-first correction marker pair.",
     );
     return null;
   }
@@ -669,7 +673,7 @@ function authorityFirstCorrection(plan, errors) {
     plan.indexOf(AUTHORITY_FIRST_END, end + AUTHORITY_FIRST_END.length) !== -1
   ) {
     errors.push(
-      "PLAN.md must contain exactly one authority-first correction marker pair.",
+      "SEO-CAMPAIGN.md must contain exactly one authority-first correction marker pair.",
     );
     return null;
   }
@@ -684,14 +688,14 @@ function successorGoalContract(plan, errors) {
   const start = plan.indexOf(SUCCESSOR_START);
   const end = plan.indexOf(SUCCESSOR_END);
   if (start === -1 || end === -1 || end <= start) {
-    errors.push("PLAN.md must contain one ordered successor Goal contract marker pair.");
+    errors.push("SEO-CAMPAIGN.md must contain one ordered successor Goal contract marker pair.");
     return null;
   }
   if (
     plan.indexOf(SUCCESSOR_START, start + SUCCESSOR_START.length) !== -1 ||
     plan.indexOf(SUCCESSOR_END, end + SUCCESSOR_END.length) !== -1
   ) {
-    errors.push("PLAN.md must contain exactly one successor Goal contract marker pair.");
+    errors.push("SEO-CAMPAIGN.md must contain exactly one successor Goal contract marker pair.");
     return null;
   }
 
@@ -705,14 +709,14 @@ function successorWaitingWork(plan, errors) {
   const start = plan.indexOf(SUCCESSOR_WAITING_START);
   const end = plan.indexOf(SUCCESSOR_WAITING_END);
   if (start === -1 || end === -1 || end <= start) {
-    errors.push("PLAN.md must contain one ordered successor waiting-work marker pair.");
+    errors.push("SEO-CAMPAIGN.md must contain one ordered successor waiting-work marker pair.");
     return null;
   }
   if (
     plan.indexOf(SUCCESSOR_WAITING_START, start + SUCCESSOR_WAITING_START.length) !== -1 ||
     plan.indexOf(SUCCESSOR_WAITING_END, end + SUCCESSOR_WAITING_END.length) !== -1
   ) {
-    errors.push("PLAN.md must contain exactly one successor waiting-work marker pair.");
+    errors.push("SEO-CAMPAIGN.md must contain exactly one successor waiting-work marker pair.");
     return null;
   }
   return plan
@@ -726,7 +730,7 @@ function contentExpansionCorrection(plan, errors) {
   const end = plan.indexOf(CONTENT_EXPANSION_END);
   if (start === -1 || end === -1 || end <= start) {
     errors.push(
-      "PLAN.md must contain one ordered content-expansion correction marker pair.",
+      "SEO-CAMPAIGN.md must contain one ordered content-expansion correction marker pair.",
     );
     return null;
   }
@@ -736,7 +740,7 @@ function contentExpansionCorrection(plan, errors) {
     plan.indexOf(CONTENT_EXPANSION_END, end + CONTENT_EXPANSION_END.length) !== -1
   ) {
     errors.push(
-      "PLAN.md must contain exactly one content-expansion correction marker pair.",
+      "SEO-CAMPAIGN.md must contain exactly one content-expansion correction marker pair.",
     );
     return null;
   }
@@ -799,11 +803,11 @@ function inspectAcquisitionFocus(plan, errors) {
   const nextDecision = markdownSection(plan, "Next decision");
 
   if (!strategy) {
-    errors.push('PLAN.md must retain one "### Current strategy" section.');
+    errors.push('SEO-CAMPAIGN.md must retain one "### Current strategy" section.');
     return;
   }
   if (!nextDecision) {
-    errors.push('PLAN.md must retain one "### Next decision" section.');
+    errors.push('SEO-CAMPAIGN.md must retain one "### Next decision" section.');
     return;
   }
 
@@ -830,7 +834,7 @@ function inspectAcquisitionFocus(plan, errors) {
     priorityFamilies.some((family) => !normalizedStrategy.includes(family))
   ) {
     errors.push(
-      "PLAN.md Current strategy must retain the co-primary trilingual AI knowledge-base, Karpathy or LLM-wiki, and tool-workflow demand families.",
+      "SEO-CAMPAIGN.md Current strategy must retain the co-primary trilingual AI knowledge-base, Karpathy or LLM-wiki, and tool-workflow demand families.",
     );
   }
   if (
@@ -839,7 +843,7 @@ function inspectAcquisitionFocus(plan, errors) {
     )
   ) {
     errors.push(
-      "PLAN.md Current strategy must retain that generic memory cannot nominate the next acquisition asset.",
+      "SEO-CAMPAIGN.md Current strategy must retain that generic memory cannot nominate the next acquisition asset.",
     );
   }
   if (
@@ -848,7 +852,7 @@ function inspectAcquisitionFocus(plan, errors) {
     )
   ) {
     errors.push(
-      "PLAN.md Next decision must keep memory as supporting infrastructure rather than the acquisition center.",
+      "SEO-CAMPAIGN.md Next decision must keep memory as supporting infrastructure rather than the acquisition center.",
     );
   }
 }
@@ -857,11 +861,11 @@ function inspectMutableCampaignState(plan, errors) {
   const mutableHeading = "\n## Mutable Campaign State\n";
   const mutableIndex = plan.indexOf(mutableHeading);
   if (mutableIndex === -1) {
-    errors.push('PLAN.md must retain one "## Mutable Campaign State" section.');
+    errors.push('SEO-CAMPAIGN.md must retain one "## Mutable Campaign State" section.');
     return { active: null, currentId: null, approvalTimestamp: null };
   }
   if (plan.indexOf(mutableHeading, mutableIndex + mutableHeading.length) !== -1) {
-    errors.push('PLAN.md must contain exactly one "## Mutable Campaign State" section.');
+    errors.push('SEO-CAMPAIGN.md must contain exactly one "## Mutable Campaign State" section.');
   }
 
   const mutable = plan.slice(mutableIndex + mutableHeading.length);
@@ -869,7 +873,7 @@ function inspectMutableCampaignState(plan, errors) {
     ...mutable.matchAll(/^- Active experiments:\s*(\d+)\.\s*$/gm),
   ];
   if (activeMatches.length !== 1) {
-    errors.push("PLAN.md must state exactly one numeric Active experiments count.");
+    errors.push("SEO-CAMPAIGN.md must state exactly one numeric Active experiments count.");
   }
   const active = activeMatches.length === 1 ? Number(activeMatches[0][1]) : null;
 
@@ -877,7 +881,7 @@ function inspectMutableCampaignState(plan, errors) {
   const currentIndex = mutable.indexOf(currentHeading);
   let currentId = null;
   if (currentIndex === -1) {
-    errors.push('PLAN.md must retain one "### Current experiment" section.');
+    errors.push('SEO-CAMPAIGN.md must retain one "### Current experiment" section.');
   } else {
     const currentStart = currentIndex + currentHeading.length;
     const nextHeading = mutable.indexOf("\n### ", currentStart);
@@ -889,7 +893,7 @@ function inspectMutableCampaignState(plan, errors) {
       (match) => match[1],
     );
     if (currentIds.length > 1) {
-      errors.push("PLAN.md Current experiment section must identify at most one experiment.");
+      errors.push("SEO-CAMPAIGN.md Current experiment section must identify at most one experiment.");
     }
     currentId = currentIds[0] ?? null;
   }
@@ -900,7 +904,7 @@ function inspectMutableCampaignState(plan, errors) {
   const websiteExperimentId = websiteExperimentMatch?.[1] ?? null;
   if (currentId && websiteExperimentId !== currentId) {
     errors.push(
-      `PLAN.md Website-affecting experiment must match Current experiment "${currentId}".`,
+      `SEO-CAMPAIGN.md Website-affecting experiment must match Current experiment "${currentId}".`,
     );
   }
 
@@ -910,7 +914,7 @@ function inspectMutableCampaignState(plan, errors) {
   );
   if (approvalClaimed && !approvalMatch) {
     errors.push(
-      "PLAN.md approved Contract approval must retain its ISO-8601 UTC approval timestamp.",
+      "SEO-CAMPAIGN.md approved Contract approval must retain its ISO-8601 UTC approval timestamp.",
     );
   }
 
@@ -1399,17 +1403,17 @@ export function validateGoalControlPlane({
   const ledger = inspectExperimentLedger(experiments, errors);
   if (mutable.active !== null && mutable.active !== ledger.active) {
     errors.push(
-      `PLAN.md Active experiments is ${mutable.active} but EXPERIMENTS.md has ${ledger.active}.`,
+      `SEO-CAMPAIGN.md Active experiments is ${mutable.active} but EXPERIMENTS.md has ${ledger.active}.`,
     );
   }
   if (mutable.currentId && !ledger.activeIds.has(mutable.currentId)) {
     errors.push(
-      `PLAN.md Current experiment "${mutable.currentId}" must exist as an active experiment in EXPERIMENTS.md.`,
+      `SEO-CAMPAIGN.md Current experiment "${mutable.currentId}" must exist as an active experiment in EXPERIMENTS.md.`,
     );
   }
   if (!mutable.currentId && ledger.active > 0) {
     errors.push(
-      "PLAN.md Current experiment must identify an active experiment while the ledger has active experiments.",
+      "SEO-CAMPAIGN.md Current experiment must identify an active experiment while the ledger has active experiments.",
     );
   }
   if (
@@ -1417,7 +1421,7 @@ export function validateGoalControlPlane({
     mutable.currentId !== ledger.productionInFlightIds[0]
   ) {
     errors.push(
-      `PLAN.md Current experiment must match the unique production-in-flight experiment "${ledger.productionInFlightIds[0]}".`,
+      `SEO-CAMPAIGN.md Current experiment must match the unique production-in-flight experiment "${ledger.productionInFlightIds[0]}".`,
     );
   }
   if (mutable.approvalTimestamp) {
@@ -1429,7 +1433,7 @@ export function validateGoalControlPlane({
     );
     if (!approvalRecord) {
       errors.push(
-        `EXPERIMENTS.md must retain the campaign-approval record for ${mutable.approvalTimestamp} while PLAN.md claims approval.`,
+        `EXPERIMENTS.md must retain the campaign-approval record for ${mutable.approvalTimestamp} while SEO-CAMPAIGN.md claims approval.`,
       );
     }
   }
@@ -1470,7 +1474,7 @@ function parseArgs(argv) {
       values["product-evidence-standard"] ??
         resolve(repoRoot, "docs/seo-product-evidence-standard.md"),
     ),
-    planPath: resolve(values.plan ?? resolve(repoRoot, "PLAN.md")),
+    planPath: resolve(values.plan ?? resolve(repoRoot, "SEO-CAMPAIGN.md")),
     experimentsPath: resolve(values.experiments ?? resolve(repoRoot, "EXPERIMENTS.md")),
     scenarioPath: resolve(
       values.scenario ?? resolve(repoRoot, "docs/seo-scenario-backlog.json"),

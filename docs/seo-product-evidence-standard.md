@@ -46,7 +46,7 @@ it is the highest-return acquisition action.
    without naming which uncertainty the next action addresses.
 
 These questions supplement the existing candidate gate; they do not bypass
-PLAN.md, change metric definitions, or authorize publication. Technical fixes
+SEO-CAMPAIGN.md, change metric definitions, or authorize publication. Technical fixes
 remain repairs, not growth outcomes. A deterministic check can protect these
 questions from deletion, but only inspected evidence and human judgment can
 answer them. Current execution is tracked in `docs/seo-growth-recovery.md`.

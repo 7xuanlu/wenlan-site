@@ -139,7 +139,7 @@ async function collectMatches(pattern, ignoreMatch = () => false) {
     const rel = relative(repoRoot, file);
     if (rel === "scripts/brand-contract.test.mjs") continue;
     if (
-      rel === "PLAN.md" ||
+      rel === "SEO-CAMPAIGN.md" ||
       rel === "EXPERIMENTS.md" ||
       rel.startsWith("docs/seo-audits/")
     ) {
