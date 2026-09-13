@@ -404,7 +404,7 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
     /metaTitle:\s*"Karpathy LLM Wiki & AI Knowledge Base \| Wenlan"/,
   );
   assert.match(article, /publishedAt:\s*"2026-06-24"/);
-  assert.match(article, /updatedAt:\s*"2026-09-08"/);
+  assert.match(article, /updatedAt:\s*"2026-09-13"/);
   assert.match(article, /heading:\s*"The Karpathy LLM Wiki pattern"/);
   assert.match(article, /does not imply that Karpathy endorses Wenlan/);
   assert.match(article, /heading:\s*"The LLM-wiki workflow in Wenlan"/);
@@ -447,12 +447,13 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.match(article, /href:\s*"#worked-example"/);
   assert.match(article, /href:\s*"\/docs\/daily-workflow"/);
   assert.match(article, /href:\s*"\/docs\/review-and-trust"/);
+  assert.match(article, /href:\s*"\/learn\/migrate-obsidian-vault-to-llm-wiki"/);
   assert.match(article, /https:\/\/github\.com\/7xuanlu\/wenlan#what-does-wenlan-build/);
   assert.match(article, /https:\/\/github\.com\/7xuanlu\/wenlan#daily-workflow/);
   assert.match(article, /https:\/\/gist\.github\.com\/karpathy\/442a6bf555914893e9891c11519de94f/);
   assert.match(
     article,
-    /relatedSlugs:\s*\[\s*"source-backed-wiki-pages-ai-work",\s*"verify-ai-knowledge-base-citations",\s*"build-course-wiki-from-lecture-notes",\s*"ai-work-memory-vs-knowledge-base",\s*"wenlan-vs-obsidian-ai-memory",\s*"ai-memory-provenance",\s*"local-git-history-ai-memory",?\s*\]/,
+    /relatedSlugs:\s*\[\s*"source-backed-wiki-pages-ai-work",\s*"verify-ai-knowledge-base-citations",\s*"build-course-wiki-from-lecture-notes",\s*"ai-work-memory-vs-knowledge-base",\s*"wenlan-vs-obsidian-ai-memory",\s*"ai-memory-provenance",\s*"local-git-history-ai-memory",\s*"migrate-obsidian-vault-to-llm-wiki",\s*"setup-agent-knowledge-base-for-coding-agents",?\s*\]/,
   );
   assert.match(
     supportArticle,
