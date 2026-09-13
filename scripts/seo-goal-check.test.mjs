@@ -17,7 +17,7 @@ import { buildPageIntentRows } from "./seo-intent-map.mjs";
 const repoRoot = resolve(import.meta.dirname, "..");
 const goalCheckScript = resolve(import.meta.dirname, "seo-goal-check.mjs");
 const execFileAsync = promisify(execFile);
-const canonicalPlan = await readFile(resolve(repoRoot, "PLAN.md"), "utf8");
+const canonicalPlan = await readFile(resolve(repoRoot, "SEO-CAMPAIGN.md"), "utf8");
 const canonicalAgents = await readFile(resolve(repoRoot, "AGENTS.md"), "utf8");
 const canonicalProductEvidenceStandard = await readFile(
   resolve(repoRoot, "docs/seo-product-evidence-standard.md"),
@@ -57,10 +57,10 @@ const canonicalActiveExperimentCount = Number(
   canonicalPlan.match(/^- Active experiments: (\d+)\.$/m)?.[1],
 );
 
-assert.ok(currentExperimentId, "PLAN.md must expose the current experiment ID");
+assert.ok(currentExperimentId, "SEO-CAMPAIGN.md must expose the current experiment ID");
 assert.ok(
   Number.isInteger(canonicalActiveExperimentCount),
-  "PLAN.md must expose the active experiment count",
+  "SEO-CAMPAIGN.md must expose the active experiment count",
 );
 
 test("AGENTS.md keeps the fail-closed SEO control-plane index", () => {
@@ -71,6 +71,10 @@ test("AGENTS.md keeps the fail-closed SEO control-plane index", () => {
     "pnpm seo:goal:control",
     "docs/seo-active-control.md",
     "--known-fingerprint <sha256>",
+    "task-matched bookmarks",
+    "Do not read all of SEO-CAMPAIGN.md",
+    "after relevant `SEO-CAMPAIGN.md` edits",
+    "do not append session logs",
     "three consecutive Goal turns",
     "Tier 0 — entrypoint",
     "Tier 1 — contract",
@@ -310,7 +314,7 @@ test("PLAN active experiment count must match the ledger", () => {
   assert.ok(
     validationErrors({ plan }).some((error) =>
       error.includes(
-        `PLAN.md Active experiments is 1 but EXPERIMENTS.md has ${canonicalActiveExperimentCount}`,
+        `SEO-CAMPAIGN.md Active experiments is 1 but EXPERIMENTS.md has ${canonicalActiveExperimentCount}`,
       ),
     ),
   );
@@ -326,7 +330,7 @@ test("PLAN approved contract requires its matching campaign approval record", ()
 
 test("CLI path overrides validate the supplied control-plane files", async () => {
   const fixtureRoot = await mkdtemp(join(tmpdir(), "wenlan-goal-check-"));
-  const planPath = join(fixtureRoot, "PLAN.md");
+  const planPath = join(fixtureRoot, "SEO-CAMPAIGN.md");
   const experimentsPath = join(fixtureRoot, "EXPERIMENTS.md");
   try {
     await Promise.all([
