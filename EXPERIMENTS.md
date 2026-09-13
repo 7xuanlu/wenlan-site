@@ -9351,3 +9351,88 @@ Re-read the preserved September 4 native exports without fetching a new range:
 - Decision: wait
 - Next step: Keep the three SRE owners stable. Formal judgment remains ineligible until each locale has 28 complete post-crawl days and at least 20 page impressions; success additionally requires 3 qualified joined-query impressions and 1 click. At the next normal weekly lane, restore native exports through its authorized capture and preserve the necessary interpreted per-owner rows outside disposable storage. Do not rerun that pipeline in this controller to recreate an old capture. The next chronological unrecorded seven-day boundary in PLAN is competitive intelligence after `2026-09-06T19:48:14Z`, also overdue; point the same heartbeat to that record for bounded reconciliation. Leave the native Goal lifecycle unchanged. No website, README, release, analytics, indexing, validation, directory, paid, maintainer-message, or other external state was changed.
 <!-- EXPERIMENT-RECORD:END -->
+
+
+## Candidate preregistration — core reader evidence, 2026-09-13T03:02:48Z
+
+This is an **unstarted, unapproved candidate**, not an experiment-start record,
+not an active production slot and not permission to extend the campaign.
+The original targets, attribution, 20/3/28 gates, September 21 deadline and
+August 24–September 20 final window remain unchanged.
+
+- Evidence: `docs/seo-audits/2026-09-12-core-search-answer-comparison.md` records
+  six dated Google samples and their source-reading gaps. Reused GSC Web/final
+  baseline is 2026-08-11..2026-09-07; the connected read-only dimension supplement
+  is in external repo data `seo-value-query-goal-20260912/gsc-missing-dimensions.json`.
+- Hypothesis A: showing one actual, inspectable input-to-output-and-source-review
+  run will help LLM Wiki searchers decide whether Wenlan solves their recurring
+  source-maintenance task better than their current plain-file workflow.
+  It is not a claim that source links guarantee correct model output.
+- Hypothesis B: a concrete small-project build-to-retrieval example will better
+  match relevant agent-KB searches while retaining separate build and query-timing
+  owners. The current build-guide link and retrieval decision table already exist;
+  adding them again would not test this hypothesis.
+- Proposed bounded change: augment the existing example with same-run inputs,
+  unedited product output, source checks and explicit human decisions. Do not
+  replace recorded Tally frames with simulated UI or label authored reference
+  answers as runtime output. Keep the three-locale task and limitations aligned.
+- Fixed owner A: `/learn/distilled-wiki-pages-ai-memory` and existing zh-TW/zh-CN
+  variants. Owner B build is `/learn/source-backed-wiki-pages-ai-work`; retrieval
+  stays `/learn/when-ai-agent-should-query-knowledge-base`, with existing localized
+  variants and document-specific build owner retained. No net-new URL proposed.
+- Fixed primary measurement: exact `llm wiki` → EN owner A, USA desktop, baseline
+  10 impressions / 0 clicks / 0% CTR / 47.2 average position. Exact
+  `agent knowledge base` → EN retrieval owner, USA desktop, baseline
+  21 / 0 / 0% / 67.2381. Preserve both build and retrieval page rows to detect
+  migration; report new-owner query rows separately rather than splicing a new
+  denominator into the old baseline.
+- Secondary fixed query: `karpathy llm wiki` → EN owner A, USA desktop,
+  baseline 1 / 0 / 0% / 45. This sparse row cannot establish a ranking result.
+- Localized research candidates: `LLM Wiki 知識庫` and `AI Agent 知識庫` with
+  zh-TW owners/Taiwan/desktop; `LLM Wiki 知识库` and `AI Agent 知识库` with
+  zh-CN owners/Hong Kong/desktop. Baseline joined rows for these exact queries
+  are unavailable. Hong Kong is provisional, not a validated Chinese-speaking
+  market choice. No cross-locale pooling or zero-demand inference is allowed.
+  Freeze or explicitly correct the market nomination with evidence before launch.
+- Minimum exposure for each ranking claim: at least 20 impressions for the exact
+  predeclared query/page/country/device slice in a complete comparable 28-day
+  window. This pragmatic reporting floor is stricter than the 3-joined-impression
+  rewrite gate, is not a statistical-power calculation, and never replaces the
+  separate 20-page/3-qualified-join/28-post-crawl eligibility conditions.
+- Success criteria: report top-ten attainment only when that slice meets exposure,
+  GSC average position <=10 and at least one qualified query click. Report <=5
+  as a separate later milestone under the same exposure and click conditions.
+  Before/after movement is observational; it does not by itself prove the edit
+  caused the change. Reader-value delivery separately requires the actual run,
+  claim/source inspection and natural three-locale browser acceptance.
+- Failure criteria: with sufficient comparable exposure, average position >10
+  or no qualified clicks means that query's top-ten acquisition objective is
+  unmet. If the proposed artifact cannot reproduce its advertised task or cites
+  unsupported claims, it fails content acceptance regardless of search metrics.
+- Inconclusive criteria: withheld/sparse rows, no verified crawl, insufficient
+  exposure or incomplete windows. Do not change queries after seeing an outcome
+  or use a favorable manual SERP sample to fill the gap.
+- AI readout: reuse the existing fixed nine-prompt unbranded worksheet, recording
+  provider/surface, locale, date, actual answer and cited URL. Mention, citation,
+  observed nonappearance and unrun remain separate. Exploratory Google overviews
+  in the comparison are not worksheet results or sustained citation success.
+- Readouts if ever eligible and explicitly launched: 24h checks production and
+  metadata/indexability; 7d and W2 show native-unit direction and gaps only;
+  W4 applies the complete post-crawl/exposure conditions; W8 checks persistence
+  only under then-valid authorization. No new scheduler is created and no future
+  readout is authorized merely by this candidate. At the September 21 cutoff,
+  use the original final window and report any unlaunched or unmet work honestly.
+- Stop criteria: same-owner cooldown or candidate gate fails; source/output proof
+  cannot support the promised task; work expands into model engineering; a needed
+  action crosses publication/payment/privacy authority; or the fixed deadline
+  arrives. The two-consecutive-below-exposure on-page stop remains in force.
+- Current eligibility/result: **not eligible, not launched, no growth result**.
+  PR190 production was verified September 10; even a crawl then cannot complete
+  28 post-crawl days before September 21. There is no automatic future launch,
+  deadline extension or transfer to a new campaign. Prepare reviewable materials
+  and bounded factual repairs; any later campaign change needs a user decision.
+- Factual correction prepared separately: TW/CN metadata on the build and coding-
+  agent pages falsely promised no fabricated answers. Four descriptions now
+  describe source inspection and checking current evidence. English did not
+  contain that guarantee. This invokes the factual-repair exception, not a new
+  title/ranking experiment; it has no launch or growth attribution yet.

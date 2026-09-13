@@ -16,7 +16,7 @@ const CONTRACT_HASHES=[
   '06f348ad534dfc45fc8349c18fb36efeb9b69e6c8ff5f069e3a50e14f347299a',
 ];
 const OPERATIONS='ACTIVE-CONTROL-OPERATIONS';
-const OPERATIONS_SHA='9676821af056d7b0a436267d565d230d5a45d2d6f26aed3d6a2ac15e80c06c03';
+const OPERATIONS_SHA='e831a1d210ca515c4a1daa2882812df4daf0e78fe8fbfde421bc3c850e22e6eb';
 export const ACTIVE_VIEW_PATH='docs/seo-active-control.md';
 
 function block(plan,id){

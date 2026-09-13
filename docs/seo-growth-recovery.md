@@ -1,8 +1,68 @@
 # SEO 改善工作：先決定值得解的問題
 
-更新：2026-09-10。這是目前工作與下一個決定的短索引，不取代 `SEO-CAMPAIGN.md`
+更新：2026-09-12。這是目前工作與下一個決定的短索引，不取代 `SEO-CAMPAIGN.md`
 受保護目標、歷史紀錄或 scenario JSON。完整證據見
 [09-04 診斷](seo-audits/2026-09-04-seo-growth-diagnosis.md)。
+
+## 09-12 現行目標：新增價值與具體搜尋問題的前十／前五
+
+使用者要求把這兩項做到可交付、可驗證，不能用「排名無法保證」代替改善。
+完整執行與驗收細節只維護在
+[新增價值與逐題排名標準](seo-product-evidence-standard.md#added-value-and-query-level-ranking-goals)。
+AGENTS → control 必讀原則已指向這個方向，選題書籤包含完整標準。
+
+- 盤點全部核心 owner 的三語覆蓋，先處理證據最充分的 2–3 組搜尋任務。
+  每組逐一讀同市場前五名的實際答案，找出讀者仍做不到的事，再交付可驗證
+  的成果；沒有實證就列缺口，不以換標題、加篇幅或加圖交差。
+- 固定非品牌 query、canonical、市場與裝置，保留 GSC 原始口徑及完整窗口，
+  逐題追前十、再前五，同列合格 clicks；不以全站平均或事後換題報喜。
+  內容驗收與流量達標分開，AI 品牌提及與實際 URL 引用也分開。
+- 現在先做可審查的比較、素材與改善；每個未達標項目列下一個可驗證假設。
+  既有 20/3/28、2026-09-21 截止與 08-24..09-20 final window 保留。
+  發布／推送／合併／付費／外部提交前仍停在本輪授權邊界。
+- 最新 Wenlan Brief v17 已確認 PR198 合併、PR190 網站素材交付；更多模型
+  工程保留 backlog。本段取代下方歷史「下一步」說法，不改寫其當時證據。
+
+首批比較候選沿用 [09-08 核心基線](seo-audits/2026-09-08-core-acquisition-baseline.md)
+與 [意圖分工對帳](seo-audits/2026-09-08-core-acquisition-correction.md)：
+LLM Wiki → `distilled-wiki-pages-ai-memory`；建立 Agent 知識庫 →
+`source-backed-wiki-pages-ai-work`（文件建庫步驟由 `build-local-ai-knowledge-base-from-documents`
+承接）；何時檢索 → `when-ai-agent-should-query-knowledge-base`。三語分别核對。
+這是歷史證據支持的比較起點，不是最新排名、尚存缺陷或改寫資格。當前
+sitemap／intent map 盤點、同窗口資料補查與首批搜尋答案比較已完成。
+30/30 個樣本答案位置現已讀取；Bnext 第 3 位樣本的完整正文由使用者貼上並於 2026-09-12 讀取，對應記錄的 article 90650 URL；詳細出處與有界發現見[搜尋答案比較](seo-audits/2026-09-12-core-search-answer-comparison.md)。
+原始瀏覽器因網站安全政策阻擋該 URL 的紀錄保留為歷史事實；本次是使用者貼上正文，不是瀏覽器抓取，也不宣稱獨立重新抓取或版本相符。
+圖片、延伸連結與執行時主張未獨立驗證。
+目前待決定的是本輪修正的發布授權；涉及後續改頁仍須另核對實驗與 crawl，
+不把舊 audit 的未發布文案當成 PR190 合併後仍未完成的工作。
+
+執行狀態以原生 Goal 為準；本文件不判定 Goal 狀態，也不以本輪文件改變 Goal。
+Goal 的既有完成條件仍包括
+核心頁盤點、逐題基線、前五名答案比較、符合資格的實作、三語驗證與發布前
+成果包；前十／前五與 AI 引用另列成效追蹤，不把首輪交付冒稱流量成功。
+本文件不重複整份 objective，也不新增排程。
+
+首輪 [09-12 搜尋答案比較](seo-audits/2026-09-12-core-search-answer-comparison.md)
+已保存兩組任務 × 三語的 Google 樣本、逐來源閱讀狀態，以及同一 GSC 窗口
+補齊的市場／裝置資料。美國桌面 `llm wiki` 為 10 impressions／0 clicks／
+47.2；`agent knowledge base` 為 21／0／67.2381。這不是新版成效。
+全核心頁盤點與可審查提案已完成，見下方本輪交付；現有 owner 未具備
+post-deploy crawl／28-day 改寫資格，不把研究完成當作頁面已改善。
+
+09-12 後續盤點已對齊 173 個 canonical；三個首批主題各有三語，46 篇詳細
+文件仍只有英文。另修正建庫／coding-agent 頁四個中文 metadata 的「不會
+捏造」過度保證；六條路由的 metadata 和 24 個三語深淺／桌面／393px 首屏
+已驗證。原建置與適用 checks 通過，兩項 PGlite fixture 測試仍跳過。
+EXPERIMENTS 已預登記未啟動候選，未新增 active experiment。完整本輪成果
+與提案存於私人 specs 的 `2026-09-12-core-seo-first-round-readout.md`；
+尚未推送或發布；同次產品實跑素材仍是提案所列缺口，既有素材已核對。
+
+09-12 固定九題 Google AI Overview 實測已完成：六題觸發，繁中「來源文件
+變更時，如何維護本機 LLM wiki？」的展開來源面板實際連到本站建庫頁。
+這是一筆來源連結，非穩定引用或本次未發布改動的成效；三個 CN 目標題
+未出現摘要，其他平台 45 列仍未測。原始回答、網址、時間及市場限制保存於
+外部 `seo-value-query-goal-20260912/ai-visibility.md` 與
+`ai-overview-raw-receipts.json`；既有 Tally 素材來源核對另有收據。
 
 ## 09-10 收尾範圍：先交付網站素材
 

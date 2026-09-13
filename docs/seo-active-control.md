@@ -4,9 +4,9 @@ Generated from SEO-CAMPAIGN.md by `pnpm seo:goal:control --update`; do not edit.
 
 ## Required principles and task bookmarks
 
-User-approved reading and filename change, 2026-09-12. Read this guide, then
-matching bookmarks. Goals, gates and history are unchanged. Historical PLAN.md
-references mean SEO-CAMPAIGN.md; the old path is a compatibility pointer.
+User-approved guide, 2026-09-12: added value and query-level top-10/top-5 goals.
+Read task bookmarks. Existing deadlines, gates and history remain unchanged.
+Historical PLAN.md references mean SEO-CAMPAIGN.md; the old path is a pointer.
 
 ### Always read
 
@@ -15,12 +15,12 @@ references mean SEO-CAMPAIGN.md; the old path is a compatibility pointer.
   Read this entire short guide on first use, after compaction or in a new task.
   Within the same context, `--known-fingerprint <sha256>` may reuse an actually
   read guide only when verification succeeds and the fingerprint still matches.
-- Pursue qualified non-brand discovery for AI knowledge bases, LLM Wiki and
-  agent knowledge-base tasks across English, zh-TW and zh-CN. Technical PASS,
-  article count, screenshots and raw visitors do not prove useful acquisition.
-- Before choosing content or distribution, establish the reader's task, usable
-  outcome, advantage over alternatives, first-reader path and a stop/change
-  observation. Use inspectable sources; hypotheses are not proven advantages.
+- Pursue qualified non-brand AI KB, LLM Wiki and agent KB discovery in en,
+  zh-TW and zh-CN: target top 10, then top 5 for fixed, relevant queries.
+  Technical PASS, article count and sitewide averages do not prove success.
+- Judge added reader value, not AI authorship. Compare the same task with
+  current top-five results; prove the useful difference. Before work, establish
+  task, outcome, alternatives, first-reader path and stop/change evidence.
 - GSC owns Google performance and indexing. Keep page/query rows, property
   totals, Vercel visitors, Umami events and GitHub counters in their native units.
   Missing data is unknown, not zero; no ranking, AI-citation or causal guarantee.
@@ -50,7 +50,7 @@ correctly applied the linked instructions.
 | Rewrite an existing owner | [Authority correction](../SEO-CAMPAIGN.md#authority-first-growth-correction) and [content correction](../SEO-CAMPAIGN.md#protected-trilingual-scenario-expansion-correction); exact experiment and crawl evidence. |
 | Create a new or translated page | [Content correction](../SEO-CAMPAIGN.md#protected-trilingual-scenario-expansion-correction); check canonical overlap in [scenario source](seo-scenario-backlog.json). |
 | Implement / verify a page | [Page delivery](seo-product-evidence-standard.md#page-delivery), [product evidence](seo-product-evidence-standard.md#product-evidence-rules), [visual acceptance](seo-product-evidence-standard.md#responsive-and-visual-acceptance), [checks](seo-product-evidence-standard.md#verification-gates). |
-| Measure / declare an outcome | [Successor contract](../SEO-CAMPAIGN.md#successor-goal-contract), [quality conditions](../SEO-CAMPAIGN.md#quality-conditions), [evidence roles](../SEO-CAMPAIGN.md#evidence-roles-and-demand-discovery); exact experiment and latest completed weekly evidence, including each locale and crawl window. |
+| Measure / declare an outcome | [Query milestones](seo-product-evidence-standard.md#added-value-and-query-level-ranking-goals), [Successor contract](../SEO-CAMPAIGN.md#successor-goal-contract), [quality conditions](../SEO-CAMPAIGN.md#quality-conditions), [evidence roles](../SEO-CAMPAIGN.md#evidence-roles-and-demand-discovery); exact experiment and latest completed weekly evidence, including each locale and crawl window. |
 | Propose external distribution / ads | [Authority correction](../SEO-CAMPAIGN.md#authority-first-growth-correction), [successor contract](../SEO-CAMPAIGN.md#successor-goal-contract), [waiting-work scope](../SEO-CAMPAIGN.md#approved-successor-waiting-work); current destination rules and exact approval. |
 | Publish / schedule / change targets | [Approval boundaries](../SEO-CAMPAIGN.md#approval-boundaries), [successor contract](../SEO-CAMPAIGN.md#successor-goal-contract), [experiment rules](../SEO-CAMPAIGN.md#experiment-rules), [weekly coordination](../SEO-CAMPAIGN.md#relationship-to-the-existing-weekly-seo-automation); verify current slot and approval. |
 | Reconcile an old decision | Exact dated section or linked audit only; never reload all of SEO-CAMPAIGN.md or the experiment ledger by default. |
