@@ -670,7 +670,7 @@ const baseArticles: LearnArticle[] = [
       "AI work wiki",
     ],
     publishedAt: "2026-06-24",
-    updatedAt: "2026-09-08",
+    updatedAt: "2026-09-13",
     author: DEFAULT_AUTHOR,
     readingTime: "12 min read",
     audience: "People designing a maintained knowledge layer for Claude Code, Codex, Cursor, and other AI agents",
@@ -837,6 +837,10 @@ source changes
           "Agent memory preserves reusable context from work. An LLM wiki composes selected memories and sources into a maintained explanation.",
           "A plain folder plus prompts can be enough for a small, stable corpus. Add a daemon or MCP layer when several agents need the same retrieval, handoff, provenance, and review rules.",
         ],
+        link: {
+          label: "Migrate an Obsidian vault into a source-backed LLM wiki",
+          href: "/learn/migrate-obsidian-vault-to-llm-wiki",
+        },
       },
       {
         heading: "What an LLM wiki does not replace",
@@ -897,6 +901,8 @@ source changes
       "wenlan-vs-obsidian-ai-memory",
       "ai-memory-provenance",
       "local-git-history-ai-memory",
+      "migrate-obsidian-vault-to-llm-wiki",
+      "setup-agent-knowledge-base-for-coding-agents",
     ],
     officialReferences: [
       {
