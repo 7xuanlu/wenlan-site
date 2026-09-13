@@ -957,7 +957,7 @@ export const zhCNContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "44266d4638cfe5dad5251ef0fc23d3bcfda504f00bad1a0d397fecc0efae93bb",
+    sourceHash: "5025c3f8c49ce9c4983b722cee5465f7c0711c67d0f8e03e9f63b0648bef0886",
     content: {
       seo: {
         title: "关于 Wenlan | AI 工作的 LLM wiki",
@@ -1080,7 +1080,7 @@ export const zhCNContent = {
   },
   links: {
     status: "translated",
-    sourceHash: null,
+    sourceHash: "4f95e34c4d9128c9e4e24563e3e0adf3ad13c926f9cf2a0e3f998bb16038ee04",
     content: {
       seo: {
         title: "文澜链接 | AI 工作用 LLM Wiki",
