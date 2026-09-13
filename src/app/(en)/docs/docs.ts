@@ -2722,9 +2722,9 @@ export const docPages: DocPage[] = [
       "local-first privacy",
       "deletion controls",
     ],
-    updatedAt: "2026-09-04",
+    updatedAt: "2026-09-10",
     author: DEFAULT_AUTHOR,
-    readingTime: "6 min read",
+    readingTime: "7 min read",
     summary: [
       "Quick answer: Wenlan's daemon, database, pages, sessions, and readable artifacts live locally by default.",
       "Connected AI clients may still send prompts to their model providers; Wenlan keeps its own memory store local, inspectable, and removable.",
@@ -2784,6 +2784,22 @@ export const docPages: DocPage[] = [
         body: [
           "If a memory is wrong, capture the correction with why it supersedes the old fact. If a memory should be removed entirely, use /forget with the memory ID.",
           "Delete and forget operations are separate from service uninstall. For distilled pages, inspect the Markdown directly. User-edited pages are treated carefully so automated distillation does not overwrite human work casually.",
+        ],
+      },
+      {
+        heading: "Optional wenlan-relay connector (pre-release)",
+        body: [
+          "The standalone relay connector is pre-release and is not part of the installed public release defaults. It is not yet a publicly approved marketplace listing. You authorize a connected AI client through OAuth and approve its request in Wenlan on your device. Access is limited to one selected existing Space; changing that Space needs fresh explicit consent, and newly created Spaces are not automatically included.",
+          "Your knowledge library stays on your device; the relay keeps control-plane records so it can authenticate, route, and limit sessions. The public MCP endpoint is https://relay.wenlan.app/mcp. It exposes only three query tools — brief, recall, and get_page_sources — and recall still records the query and accessed memory identifiers in local activity history. The connected device must stay online so the relay can route each request to it and return the result.",
+          "Requests and results pass through Cloudflare's relay infrastructure to the connected AI client and, where applicable, its provider. Cloudflare and Wenlan's relay administrator can read requests and results while processing them. HTTPS protects traffic in transit; it is not end-to-end encryption that excludes these operators. Do not connect a Space containing credentials or other restricted text: the connector does not classify or redact sensitive content embedded in knowledge.",
+          "Technical expiry only denies further access and is not a physical-deletion time. Cleanup runs in bounded batches on a recurring schedule, so an outage or backlog can delay physical deletion beyond expiry, and infrastructure providers may retain their own diagnostics. There is no automatic migration of legacy relay records into this connector.",
+          "To stop access, disable Remote Access or revoke the relevant client grant, and retry if the app reports a pending disconnect. A confirmed disconnect removes the old device-management credential from the local profile and replaces the local connector credential; settings, knowledge, and activity records remain until separately deleted. Revoking access does not delete a query or result the connected client or its provider already received.",
+        ],
+        bullets: [
+          "Categories: device and route identifiers, management-credential hashes plus the backend connector credential needed for routing, pairing and authorization identifiers with OAuth request fields and PKCE challenge, client registration metadata, token and grant receipts with device/route/Space bindings, session mappings, and IP-hash rate counters.",
+          "Purposes: pairing and consent checks, request routing to the online device, session binding, and abuse control.",
+          "Recipients: Cloudflare as the storage and network infrastructure provider, Wenlan's relay administrator for service operation, and the connected AI client and its provider for each query and returned result.",
+          "Retention: pairing and authorization requests and pending enrollments expire after 5 minutes; route and session mappings after 24 hours; access tokens after 15 minutes; refresh tokens, management credentials, and consent/grant records after 30 days; client registrations after 90 days. Aggregate abuse-control counters expire at the end of the current minute, hour, or UTC day depending on the endpoint.",
         ],
       },
     ],
