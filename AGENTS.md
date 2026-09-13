@@ -67,13 +67,16 @@ documents.
 - **Tier 0 — entrypoint:** `AGENTS.md` contains routing, required reads, commands,
   and stop conditions only. Do not copy the full campaign contract into it.
 - **Tier 1 — contract:** Before every SEO campaign action, run
-  `pnpm seo:goal:control` (which runs `pnpm seo:goal:check`) and read the complete
-  `docs/seo-active-control.md` view. Within the same context only, reuse an actually
-  read view with `--known-fingerprint <sha256>`; verification always runs. After
-  compaction omit the fingerprint. Stop if it fails; do not continue from a chat
-  summary. `PLAN.md` retains immutable contracts and referenced historical narrative.
-  Regenerate the derived view with `pnpm seo:goal:control --update` after relevant
-  PLAN edits. Read the exact experiment contract before its action or readout.
+  `pnpm seo:goal:control` (which runs `pnpm seo:goal:check`). Read the short
+  `docs/seo-active-control.md` guide, then the task-matched bookmarks before
+  dependent work. Do not read all of SEO-CAMPAIGN.md or all linked sections by default.
+  Within the same context only, reuse an actually read guide with
+  `--known-fingerprint <sha256>`; verification always runs. After compaction
+  omit the fingerprint and read the short guide again. Stop if verification
+  fails; a chat summary is not a verified read. `SEO-CAMPAIGN.md` preserves contracts
+  and history; do not append session logs, copied audits or unrelated narrative.
+  Regenerate with `pnpm seo:goal:control --update` after relevant PLAN edits.
+  Read the exact experiment contract and evidence before its action or readout.
   For external-time waits, finish useful authorized work first; after the same
   blocker recurs for three consecutive Goal turns use the supported blocked
   transition and retain the same heartbeat. Do not repeatedly poll the timer.
@@ -91,7 +94,7 @@ documents.
   report before collecting overlapping GSC or Vercel evidence. Dated files
   under `docs/seo-audits/` are evidence snapshots, not editable contract or
   state. Keep GSC, Vercel, Umami, GitHub, Trends, SERP, community, and OSS
-  observations in their native units and evidence roles defined by `PLAN.md`.
+  observations in their native units and evidence roles defined by `SEO-CAMPAIGN.md`.
 
 ## Theming And UI
 
