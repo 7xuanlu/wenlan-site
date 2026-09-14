@@ -17,7 +17,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "fcfce2b70aa153be0876e35a1be9117dec2aaa235f93de9d0fc5e846b67a3d81",
+    sourceHash: "ca85d10076dbba67cbcf437cd3d1e15c78dbcaa1b34bb8b400880723c8b685f0",
     content: {
       seo: {
         title: "Wenlan 文瀾官網 | AI 工作的 LLM wiki",
@@ -59,17 +59,17 @@ export const zhTWContent = {
           {
             id: "llm-wiki",
             href: "/learn/distilled-wiki-pages-ai-memory",
-            label: "LLM wiki 導覽",
+            label: "LLM Wiki 是什麼？",
           },
           {
             id: "ai-knowledge-base",
             href: "/learn/source-backed-wiki-pages-ai-work",
-            label: "AI 知識庫導覽",
+            label: "如何建立有來源的 AI 知識庫？",
           },
           {
             id: "ai-knowledge-base-tool",
             href: "/learn/choose-ai-knowledge-base-tool",
-            label: "AI 知識庫選型",
+            label: "如何挑選 AI 知識庫工具？",
           },
         ],
       },
@@ -524,9 +524,9 @@ export const zhTWContent = {
       redesign: {
         hero: {
           eyebrow: "你與 AI 共用的 Living Wiki",
-          headline: { pre: "筆記一直在累積，", emphasis: "工作卻還得從頭來？", post: "" },
+          headline: { pre: "筆記、對話一直累積，", emphasis: "工作卻還得從頭來？", post: "" },
           description:
-            "文瀾是為 AI 工作打造的有來源 LLM Wiki：把文件、筆記與決策整理成有來源、能持續更新的 Wiki 頁面，讓你和 AI 不只找回資料，更能沿著已有的理解，接著往前做。",
+            "文瀾把文件與決策整理成附來源的知識頁，讓你和 AI 接著上次的工作繼續。",
           worksWithLabel: "可搭配",
           worksWithNote: "可讀取 Obsidian 筆記，保留原文。",
         },

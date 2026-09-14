@@ -1,0 +1,63 @@
+.home-demo-trigger {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  border-color: color-mix(in srgb, var(--o-text) 18%, transparent);
+  background: var(--o-bg);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 0.03), inset 0 1px 0 color-mix(in srgb, var(--o-text) 5%, transparent);
+  transition: transform 280ms cubic-bezier(0.2, 1.5, 0.4, 1), box-shadow 220ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+.home-demo-disc {
+  position: relative;
+  flex-shrink: 0;
+  transition: transform 280ms cubic-bezier(0.2, 1.5, 0.4, 1), box-shadow 220ms ease;
+}
+
+.home-demo-disc svg {
+  transition: opacity 120ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-demo-trigger:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--o-warm) 55%, var(--o-border));
+    background: color-mix(in srgb, var(--o-warm) 4%, var(--o-bg));
+    box-shadow: 0 6px 18px rgb(0 0 0 / 0.08), inset 0 1px 0 color-mix(in srgb, var(--o-text) 5%, transparent);
+  }
+
+  .home-demo-trigger:hover .home-demo-disc {
+    transform: scale(1.06);
+    box-shadow: 0 0 0 4px var(--o-glow-warm-bg);
+  }
+}
+
+.home-demo-trigger:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+  transition-duration: 70ms;
+}
+
+.home-demo-trigger:active .home-demo-disc {
+  transform: scale(0.92);
+  box-shadow: 0 0 0 2px var(--o-glow-warm-bg);
+  transition-duration: 70ms;
+}
+
+.home-demo-trigger[aria-busy="true"] .home-demo-disc svg { opacity: 0; }
+.home-demo-trigger[aria-busy="true"] .home-demo-disc::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1.5px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: home-demo-loading 750ms linear infinite;
+}
+
+@keyframes home-demo-loading { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .home-demo-trigger, .home-demo-disc, .home-demo-disc svg { transition: none; }
+  .home-demo-trigger:hover, .home-demo-trigger:active, .home-demo-trigger:hover .home-demo-disc, .home-demo-trigger:active .home-demo-disc { transform: none; }
+  .home-demo-trigger[aria-busy="true"] .home-demo-disc::after { animation: none; }
+}
