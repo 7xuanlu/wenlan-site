@@ -485,14 +485,17 @@ test("home renders direct localized acquisition links to the core wiki guides", 
     en: [
       "/learn/distilled-wiki-pages-ai-memory",
       "/learn/source-backed-wiki-pages-ai-work",
+      "/learn/choose-ai-knowledge-base-tool",
     ],
     "zh-TW": [
       "/zh-TW/learn/distilled-wiki-pages-ai-memory",
       "/zh-TW/learn/source-backed-wiki-pages-ai-work",
+      "/zh-TW/learn/choose-ai-knowledge-base-tool",
     ],
     "zh-CN": [
       "/zh-CN/learn/distilled-wiki-pages-ai-memory",
       "/zh-CN/learn/source-backed-wiki-pages-ai-work",
+      "/zh-CN/learn/choose-ai-knowledge-base-tool",
     ],
   };
 
@@ -2526,10 +2529,10 @@ test("home SEO copy presents LLM wiki positioning in English and Mandarin", asyn
       staleHomePhrase: /活個人知識庫|AI-native/,
       hero: {
         eyebrow: /Living Wiki/,
-        notes: /筆記一直在累積/,
+        notes: /筆記、對話一直累積/,
         continuation: /工作.*從頭來/,
-        sourceBacked: /有來源、能持續更新的 Wiki/,
-        buildOn: /接著往前做/,
+        sourceBacked: /附來源的知識頁/,
+        buildOn: /接著上次的工作繼續/,
       },
     },
     "zh-CN": {
@@ -2538,10 +2541,10 @@ test("home SEO copy presents LLM wiki positioning in English and Mandarin", asyn
       staleHomePhrase: /活个人知识库|AI-native/,
       hero: {
         eyebrow: /Living Wiki/,
-        notes: /笔记一直在积累/,
+        notes: /笔记、对话一直积累/,
         continuation: /工作.*从头来/,
-        sourceBacked: /有来源、能持续更新的 Wiki/,
-        buildOn: /接着往前做/,
+        sourceBacked: /带来源的知识页/,
+        buildOn: /接着上次的工作继续/,
       },
     },
   };
@@ -2576,7 +2579,7 @@ test("Chinese hero copy preserves the continuation promise and setup keeps short
 
     assert.match(
       dictionary.home.content.redesign.hero.description,
-      /有來源、能持續更新的 Wiki|有来源、能持续更新的 Wiki/,
+      /附來源的知識頁|带来源的知识页/,
       `${locale}.home.hero.description.sourceBacked`,
     );
     assert.match(

@@ -170,19 +170,21 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
       </nav>
 
       {/* Hero: a work-continuation promise paired with labeled, source-readable scenarios. */}
-      <section className="relative px-6 pt-28 pb-12 sm:pt-32 lg:pt-24 lg:pb-16">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-12 lg:gap-12">
+      <section className="relative pt-28 pb-12 sm:pt-32">
+        <div className="mx-auto grid w-full max-w-6xl items-start gap-10 px-6 lg:grid-cols-12 lg:gap-12">
           <div className="@container min-w-0 lg:col-span-6">
             <p className="animate-fade-up motion-reduce:animate-none text-sm font-medium tracking-wide text-[var(--o-warm)]">
               {redesign.hero.eyebrow}
             </p>
-            <h1 className={`animate-fade-up motion-reduce:animate-none delay-100 mt-5 font-serif leading-[1.2] font-medium tracking-tight break-words ${locale === "en" ? "text-[clamp(1.5rem,7.6cqw,3rem)]" : "text-[2.15rem] sm:text-5xl xl:text-[3.5rem]"}`}>
+            <h1 className={`animate-fade-up motion-reduce:animate-none delay-100 mt-5 font-serif leading-[1.2] font-medium tracking-tight break-words ${locale === "en" ? "text-[clamp(1.5rem,7.6cqw,3rem)]" : "text-[2rem] sm:text-[2.5rem]"}`}>
               <span className="block">{redesign.hero.headline.pre}</span>
               <span className="block text-[var(--o-warm)]">{redesign.hero.headline.emphasis}</span>
               {redesign.hero.headline.post}
             </h1>
-            <p className="animate-fade-up motion-reduce:animate-none delay-200 mt-6 max-w-lg text-base leading-relaxed text-pretty text-[var(--o-text-secondary)] sm:text-lg">
-              {redesign.hero.description}
+            <p className={`animate-fade-up motion-reduce:animate-none delay-200 mt-6 max-w-lg text-base leading-relaxed text-[var(--o-text-secondary)] ${locale === "en" ? "text-pretty sm:text-lg" : "text-balance sm:text-xl"}`}>
+              {locale === "en" ? redesign.hero.description : redesign.hero.description.split(/(?<=，)/u).map((clause, index) => (
+                <span key={index} className="inline-block max-w-full">{clause}</span>
+              ))}
             </p>
             <div className="animate-fade-up motion-reduce:animate-none delay-200 mt-8 flex flex-wrap items-center gap-4">
               <HomeCta link={content.hero.primaryCta} locale={locale} placement="home-hero" variant="primary" />
@@ -203,42 +205,17 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
         </div>
       </section>
 
-      <nav
-        aria-label={content.nav.links.find((link) => link.id === "learn")?.label}
-      >
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 gap-y-3 px-6 py-4">
-          {content.hero.metaLinks.map((link) => (
-            <TrackedLocalizedLink
-              key={link.id}
-              href={link.href}
-              locale={locale}
-              eventName="learn_article_click"
-              placement="home-acquisition"
-              context="concepts"
-              className={`inline-flex min-w-0 items-center gap-2 text-sm font-medium text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-warm)] ${
-                link.id === "ai-knowledge-base-tool" ? "w-full sm:w-auto" : ""
-              }`}
-            >
-              <span className="break-keep">{link.label}</span>
-              <ArrowRightIcon className="size-4" />
-            </TrackedLocalizedLink>
-          ))}
-        </div>
-      </nav>
-
-      <section id="demo" className="px-6 py-16 sm:py-20">
+      <section id="demo" aria-labelledby="demo-heading" className="scroll-mt-16 px-6 py-16 sm:py-20 lg:pt-16">
         <div className="mx-auto max-w-5xl">
-          <div className="overflow-hidden rounded-xl border border-[var(--o-border)] shadow-[var(--o-shadow-media)]">
-            <div className="relative aspect-video bg-[var(--o-bg-deep)]">
-              <DemoVideo
-                locale={locale}
-                embedUrl={demoVideo.embedUrl}
-                posterUrl={demoVideo.posterUrl}
-                playLabel={content.demo.playLabel}
-                title={content.demo.title}
-              />
-            </div>
-          </div>
+          <DemoVideo
+            key={locale}
+            sectionTitle={homeReadingCopy[locale].demoTitle}
+            locale={locale}
+            embedUrl={demoVideo.embedUrl}
+            posterUrl={demoVideo.posterUrl}
+            playLabel={content.demo.playLabel}
+            title={content.demo.title}
+          />
           <p className="mt-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
             {demoCaption(locale)}
           </p>
@@ -246,6 +223,28 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
       </section>
 
       <PainsSection copy={redesign.pains} locale={locale} />
+
+      <nav aria-labelledby="home-reading-heading" className="py-8 sm:py-12">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 id="home-reading-heading" className="font-serif text-2xl font-medium tracking-tight">{homeReadingCopy[locale].readingTitle}</h2>
+          <div className="mt-5 grid gap-x-8 gap-y-2 md:grid-cols-3">
+            {content.hero.metaLinks.map((link) => (
+              <TrackedLocalizedLink
+                key={link.id}
+                href={link.href}
+                locale={locale}
+                eventName="learn_article_click"
+                placement="home-acquisition"
+                context="concepts"
+                className="inline-flex min-h-11 items-start gap-3 py-2 text-base font-medium leading-relaxed text-[var(--o-text-secondary)] hover:text-[var(--o-warm)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]"
+              >
+                <span>{link.label}</span>
+                <ArrowRightIcon className="mt-1 size-4 shrink-0" />
+              </TrackedLocalizedLink>
+            ))}
+          </div>
+        </div>
+      </nav>
 
       <section id="integrations" data-home-reveal className="scroll-mt-24 px-6 py-20 sm:py-24">
         <div className="mx-auto max-w-6xl">
@@ -395,6 +394,12 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
     </main>
   );
 }
+
+const homeReadingCopy: Record<Locale, { demoTitle: string; readingTitle: string }> = {
+  en: { demoTitle: "See Wenlan in action", readingTitle: "Explore further" },
+  "zh-TW": { demoTitle: "看看實際操作", readingTitle: "進一步了解" },
+  "zh-CN": { demoTitle: "看看实际操作", readingTitle: "进一步了解" },
+};
 
 const demoCaptions: Record<Locale, string> = {
   en: "Recorded product demonstration. It shows one workflow, not proof of every Wenlan workflow.",
