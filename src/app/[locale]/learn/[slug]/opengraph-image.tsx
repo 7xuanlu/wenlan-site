@@ -1,4 +1,4 @@
-import { ImageResponse } from "next/og";
+import { createOgImage } from "@/lib/og-template";
 import type { TranslatedLocale } from "@/i18n/locales";
 import {
   getLocalizedLearnArticle,
@@ -16,10 +16,6 @@ export function generateStaticParams() {
   return translatedLearnStaticParams();
 }
 
-const footerLeft: Record<TranslatedLocale, string[]> = {
-  "zh-TW": ["wenlan.app/learn", "有來源的 LLM wiki"],
-  "zh-CN": ["wenlan.app/learn", "有来源的 LLM wiki"],
-};
 
 const englishFooterLeft = ["wenlan.app/learn", "Source-backed LLM wiki"];
 
@@ -35,16 +31,12 @@ export default async function Image({ params }: Params) {
     article?.description ?? "Source-backed LLM wiki for AI work.";
   const eyebrow = article?.eyebrow ?? "Learn";
 
-  return new ImageResponse(
-    (
+  return createOgImage(
       <OgTemplate
         eyebrow={eyebrow}
         title={title}
         description={description}
-        footerLeft={localizedArticle ? footerLeft[resolvedLocale] : englishFooterLeft}
-        footerRight="by Qi-Xuan Lu"
+        cjk={resolvedLocale === "zh-TW" ? "tc" : "sc"}
       />
-    ),
-    size,
-  );
+    );
 }

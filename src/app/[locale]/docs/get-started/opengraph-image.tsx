@@ -1,4 +1,4 @@
-import { ImageResponse } from "next/og";
+import { createOgImage } from "@/lib/og-template";
 import { getCoreContent } from "@/i18n/content";
 import type { TranslatedLocale } from "@/i18n/locales";
 import { resolveLocalizedRouteLocale } from "@/i18n/resolve-locale";
@@ -10,17 +10,15 @@ export const contentType = OG_CONTENT_TYPE;
 
 const copy: Record<
   TranslatedLocale,
-  { eyebrow: string; title: string; footerLeft: string[] }
+  { eyebrow: string; title: string }
 > = {
   "zh-TW": {
     eyebrow: "開始使用",
     title: "五分鐘安裝 Wenlan。",
-    footerLeft: ["wenlan.app/docs/get-started", "macOS, Linux, Windows"],
   },
   "zh-CN": {
     eyebrow: "开始使用",
     title: "五分钟安装 Wenlan。",
-    footerLeft: ["wenlan.app/docs/get-started", "macOS, Linux, Windows"],
   },
 };
 
@@ -32,17 +30,13 @@ export default async function Image({ params }: Params) {
   const text = copy[resolvedLocale];
   const seo = getCoreContent(resolvedLocale).getStarted.content.seo;
 
-  return new ImageResponse(
-    (
+  return createOgImage(
       <OgTemplate
         eyebrow={text.eyebrow}
         title={text.title}
         description={seo.description}
-        footerLeft={text.footerLeft}
-        footerRight="Apache-2.0"
+
         titleSize={68}
-      />
-    ),
-    size,
-  );
+        cjk={resolvedLocale === "zh-TW" ? "tc" : "sc"}      />
+    );
 }

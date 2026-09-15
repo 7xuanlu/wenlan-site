@@ -1,4 +1,4 @@
-import { ImageResponse } from "next/og";
+import { createOgImage } from "@/lib/og-template";
 import type { TranslatedLocale } from "@/i18n/locales";
 import { resolveLocalizedRouteLocale } from "@/i18n/resolve-locale";
 import { OgTemplate, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/og-template";
@@ -34,17 +34,13 @@ export default async function Image({ params }: Params) {
   const resolvedLocale = resolveLocalizedRouteLocale(locale);
   const text = copy[resolvedLocale];
 
-  return new ImageResponse(
-    (
+  return createOgImage(
       <OgTemplate
         eyebrow={text.eyebrow}
         title={text.title}
         description={text.description}
-        footerLeft={["wenlan.app/links", text.footerLinks]}
-        footerRight="Apache-2.0"
+
         titleSize={68}
-      />
-    ),
-    size,
-  );
+        cjk={resolvedLocale === "zh-TW" ? "tc" : "sc"}      />
+    );
 }

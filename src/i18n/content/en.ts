@@ -59,17 +59,17 @@ export const enContent = {
           {
             id: "llm-wiki",
             href: "/learn/distilled-wiki-pages-ai-memory",
-            label: "What is an LLM Wiki?",
+            label: "LLM wiki guide",
           },
           {
             id: "ai-knowledge-base",
             href: "/learn/source-backed-wiki-pages-ai-work",
-            label: "How do you build a source-backed AI knowledge base?",
+            label: "AI knowledge base guide",
           },
           {
             id: "ai-knowledge-base-tool",
             href: "/learn/choose-ai-knowledge-base-tool",
-            label: "How do you choose an AI knowledge base tool?",
+            label: "Choose an AI knowledge base tool",
           },
         ],
       },
@@ -529,9 +529,9 @@ export const enContent = {
       redesign: {
         hero: {
           eyebrow: "A living wiki for you and your AI",
-          headline: { pre: "Notes and chats pile up.", emphasis: "Still starting over?", post: "" },
+          headline: { pre: "Your notes keep growing.", emphasis: "Still starting from scratch?", post: "" },
           description:
-            "Wenlan turns documents and decisions into a source-backed wiki you and your AI can pick up next time.",
+            "Wenlan is a source-backed wiki for your AI work: an LLM wiki that turns documents, notes, and decisions into maintained pages you and your AI build on. Your context carries forward instead of starting from scratch.",
           worksWithLabel: "Works with",
           worksWithNote: "Read from your Obsidian vault without changing your notes.",
         },

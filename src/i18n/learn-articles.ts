@@ -404,7 +404,7 @@ const zhTWArticles = {
       "用 Wenlan 將來源、原子知識與可維護頁面分開，建立能追溯、能刷新、能審查的本地 AI 知識庫。",
     metaTitle: "有來源的 AI 知識庫：來源、更新與審查 | Wenlan",
     metaDescription:
-      "用 Wenlan 建立有來源、可追溯的 AI 知識庫：把可信來源、原子知識與可維護的 LLM Wiki 頁面分開管理，保留引用出處、更新紀錄與審查狀態，方便回查依據。重要結論仍需核對原文。",
+      "用 Wenlan 建立有來源、可追溯的 AI 知識庫：把可信來源、原子知識與可維護的 LLM Wiki 頁面分開管理，保留引用出處、更新紀錄與審查狀態。AI 回答的每個主張都能找到來源，不再憑空產生。",
     keywords: [
       "AI 知識庫",
       "有來源的 AI 知識庫",
@@ -761,7 +761,7 @@ const zhTWArticles = {
       "把 AGENTS.md、原始程式與文件、維護型知識頁分工，讓 Codex 按需取得有來源、可審查的專案知識。",
     metaTitle: "Codex 有來源專案知識庫工作流 | Wenlan",
     metaDescription:
-      "讓 Codex、Claude Code 等 coding agent 用上有來源、可審查的專案知識庫：AGENTS.md、原始程式、專案文件與維護型知識頁各自分工，搭配按需檢索、引用標示與驗證流程，回到目前程式與文件核對重要結論。",
+      "讓 Codex、Claude Code 等 coding agent 用上有來源、可審查的專案知識庫：AGENTS.md、原始程式、專案文件與維護型知識頁各自分工，搭配按需檢索、引用標示與驗證流程，agent 回答不再憑空捏造。",
     keywords: [
       "Codex 知識庫",
       "Codex 專案知識",
@@ -3774,7 +3774,7 @@ const zhCNArticles = {
       "用 Wenlan 把来源、原子知识与可维护页面分开，建立能追溯、能刷新、能审核的本地 AI 知识库。",
     metaTitle: "有来源的 AI 知识库：来源、更新与审核 | Wenlan",
     metaDescription:
-      "用 Wenlan 建立有来源、可追溯的 AI 知识库：把可信来源、原子知识与可维护的 LLM Wiki 页面分开管理，保留引用出处、更新记录与审核状态，便于回查依据。重要结论仍需核对原文。",
+      "用 Wenlan 建立有来源、可追溯的 AI 知识库：把可信来源、原子知识与可维护的 LLM Wiki 页面分开管理，保留引用出处、更新记录与审核状态。AI 回答的每个主张都能找到来源，不再凭空产生。",
     keywords: [
       "AI 知识库",
       "有来源的 AI 知识库",
@@ -4132,7 +4132,7 @@ const zhCNArticles = {
       "让 AGENTS.md、源代码与文档、维护型知识页面分工，使 Codex 按需获取有来源、可审核的项目知识。",
     metaTitle: "Codex 有来源项目知识库工作流 | Wenlan",
     metaDescription:
-      "让 Codex、Claude Code 等 coding agent 用上有来源、可审核的项目知识库：AGENTS.md、源代码、项目文档与维护型知识页面各自分工，搭配按需检索、引用标注与验证流程，回到当前代码与文档核对重要结论。",
+      "让 Codex、Claude Code 等 coding agent 用上有来源、可审核的项目知识库：AGENTS.md、源代码、项目文档与维护型知识页面各自分工，搭配按需检索、引用标注与验证流程，agent 回答不再凭空捏造。",
     keywords: [
       "Codex 知识库",
       "Codex 项目知识",
