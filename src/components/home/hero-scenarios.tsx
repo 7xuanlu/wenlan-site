@@ -66,7 +66,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
         nextStep:
           "Retry failed GET requests up to 3 times; never retry POST automatically. The timeout boundary is still unspecified.",
         sentenceSources: [[1, 2], [3]],
-        sourcesLabel: "Trace the sources",
+        sourcesLabel: "View sources",
         sourcesHint: "Expand to read the excerpts",
         sources: [
           {
@@ -100,7 +100,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
         nextStepLabel: "Build on it",
         nextStep: "Not committed yet. Treat export as new scope; confirm the boundary and delivery window first.",
         sentenceSources: [[2], [1, 3]],
-        sourcesLabel: "Trace the sources",
+        sourcesLabel: "View sources",
         sourcesHint: "Expand to read the excerpts",
         sources: [
           {
@@ -134,7 +134,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
         nextStepLabel: "Build on it",
         nextStep: "We cannot rank them yet. Keep the question-set difference visible, then retest with the same questions.",
         sentenceSources: [[3], [1, 2]],
-        sourcesLabel: "Trace the sources",
+        sourcesLabel: "View sources",
         sourcesHint: "Expand to read the excerpts",
         sources: [
           {
@@ -179,7 +179,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
         nextStepLabel: "接著往前",
         nextStep: "失敗的 GET 請求最多重試 3 次；不要自動重試 POST。逾時邊界仍未指定。",
         sentenceSources: [[1, 2], [3]],
-        sourcesLabel: "回查來源",
+        sourcesLabel: "查看來源",
         sourcesHint: "展開閱讀原文",
         sources: [
           {
@@ -213,7 +213,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
         nextStepLabel: "接著往前",
         nextStep: "尚未承諾。將匯出列為新增需求，先確認範圍與交期。",
         sentenceSources: [[2], [1, 3]],
-        sourcesLabel: "回查來源",
+        sourcesLabel: "查看來源",
         sourcesHint: "展開閱讀原文",
         sources: [
           {
@@ -247,7 +247,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
         nextStepLabel: "接著往前",
         nextStep: "目前不能直接排名。先保留題組差異，再用同一組問題重測。",
         sentenceSources: [[3], [1, 2]],
-        sourcesLabel: "回查來源",
+        sourcesLabel: "查看來源",
         sourcesHint: "展開閱讀原文",
         sources: [
           {
@@ -292,7 +292,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
         nextStepLabel: "接着往前",
         nextStep: "失败的 GET 请求最多重试 3 次；不要自动重试 POST。超时边界仍未指定。",
         sentenceSources: [[1, 2], [3]],
-        sourcesLabel: "回查来源",
+        sourcesLabel: "查看来源",
         sourcesHint: "展开阅读原文",
         sources: [
           {
@@ -326,7 +326,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
         nextStepLabel: "接着往前",
         nextStep: "尚未承诺。将导出列为新增需求，先确认范围与交付时间。",
         sentenceSources: [[2], [1, 3]],
-        sourcesLabel: "回查来源",
+        sourcesLabel: "查看来源",
         sourcesHint: "展开阅读原文",
         sources: [
           {
@@ -360,7 +360,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
         nextStepLabel: "接着往前",
         nextStep: "目前不能直接排名。先保留题组差异，再用同一组问题重测。",
         sentenceSources: [[3], [1, 2]],
-        sourcesLabel: "回查来源",
+        sourcesLabel: "查看来源",
         sourcesHint: "展开阅读原文",
         sources: [
           {
@@ -440,6 +440,8 @@ function ScenarioAnswer({ scene, locale, idPrefix, citationLabel }: {
                 event.preventDefault();
                 const sourceElement = document.getElementById(sourceAnchorId(idPrefix, scene.id, source.id));
                 if (sourceElement instanceof HTMLDetailsElement) {
+                  const sourceList = sourceElement.closest<HTMLDetailsElement>("details[data-source-list]");
+                  if (sourceList) sourceList.open = true;
                   sourceElement.open = true;
                   sourceElement.querySelector("summary")?.focus({ preventScroll: true });
                   sourceElement.scrollIntoView({ block: "nearest" });
@@ -501,10 +503,7 @@ export function HeroScenarios({ locale }: { readonly locale: Locale }) {
       data-hero-scenarios="true"
       className="w-full max-w-[38rem] font-sans"
     >
-      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
-        <p className="font-mono text-xs tracking-[0.18em] text-[var(--o-warm)] uppercase">{strings.eyebrow}</p>
-        <p className="text-xs leading-relaxed text-[var(--o-text-muted)]">{strings.disclaimer}</p>
-      </div>
+      <p className="text-xs leading-relaxed text-[var(--o-text-muted)]">{strings.disclaimer}</p>
 
       <div
         role="tablist"
@@ -564,25 +563,21 @@ export function HeroScenarios({ locale }: { readonly locale: Locale }) {
               }`}
             >
               <div className="home-panel rounded-lg border border-[var(--o-border)] bg-[var(--o-bg-alt)] p-4 sm:p-5">
-                <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-[var(--o-text-muted)]">
-                  <p>{scene.title}</p>
-                </div>
-                <h2 className="mt-2 text-[1.25rem] leading-[1.45] font-medium tracking-tight text-pretty text-[var(--o-text)] sm:text-[1.4rem]">
+                <h2 className="text-[1.25rem] leading-[1.45] font-medium tracking-tight text-pretty text-[var(--o-text)] sm:text-[1.4rem]">
                   {scene.question}
                 </h2>
-                <p className="mt-2 text-sm leading-relaxed text-pretty text-[var(--o-text-muted)]">
-                  {scene.captured}
-                </p>
-
                 <div className="home-scenario-answer mt-3 border-t border-[var(--o-border-subtle)] pt-3">
-                  <p className="text-xs font-medium text-[var(--o-warm)]">{scene.nextStepLabel}</p>
-                  <p className="mt-1.5 text-sm leading-[1.7] text-pretty text-[var(--o-text)]">
+                  <p className="text-sm leading-[1.7] text-pretty text-[var(--o-text)]">
                     <ScenarioAnswer scene={scene} locale={locale} idPrefix={idPrefix} citationLabel={strings.citationLabel} />
                   </p>
                 </div>
 
-                <div className="mt-2">
-                  <p className="text-sm font-medium text-[var(--o-text)]">{scene.sourcesLabel}</p>
+                <details data-source-list className="mt-3 border-t border-[var(--o-border-subtle)]">
+                  <summary className="min-h-11 cursor-pointer py-3 text-sm font-medium text-[var(--o-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--o-warm)]">
+                    {scene.sourcesLabel}
+                    <span className="ml-2 font-mono text-xs text-[var(--o-text-muted)]">({scene.sources.length})</span>
+                  </summary>
+                  <p className="mb-2 text-sm leading-relaxed text-pretty text-[var(--o-text-muted)]">{scene.captured}</p>
                   <div className="home-scenario-sources">
                     {sourcesInCitationOrder(scene).map((source, sourceIndex) => {
                       const anchorId = sourceAnchorId(idPrefix, scene.id, source.id);
@@ -618,7 +613,7 @@ export function HeroScenarios({ locale }: { readonly locale: Locale }) {
                       );
                     })}
                   </div>
-                </div>
+                </details>
 
                 {scene.id === "engineering" && <TrackedLocalizedLink
                   href={workedExampleHref}

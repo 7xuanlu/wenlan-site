@@ -20,7 +20,7 @@ test("each homepage locale resolves its assigned YouTube demo", async () => {
     assert.deepEqual(demoVideoForLocale(locale), {
       videoId,
       embedUrl: `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`,
-      posterUrl: `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+      posterUrl: "/images/wenlan-agent-handoff-loop.png",
     });
   }
 });
