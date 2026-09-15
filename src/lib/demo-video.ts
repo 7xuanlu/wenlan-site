@@ -18,6 +18,6 @@ export function demoVideoForLocale(locale: Locale): DemoVideo {
   return {
     videoId,
     embedUrl: `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`,
-    posterUrl: `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+    posterUrl: "/images/wenlan-agent-handoff-loop.png",
   };
 }
