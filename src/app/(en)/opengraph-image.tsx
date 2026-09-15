@@ -1,27 +1,21 @@
-import { ImageResponse } from "next/og";
-import { OgTemplate, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/og-template";
+import { createOgImage, OgTemplate, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/og-template";
 
-export const alt = "Wenlan. LLM wiki for AI work.";
+export const alt = "Wenlan. Your AI-native knowledge base.";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 
 export default async function Image() {
-  return new ImageResponse(
-    (
+  return createOgImage(
       <OgTemplate
         eyebrow="Wenlan"
-        title="LLM wiki for AI work."
-        description="Agents capture what they learn, you add sources you trust, and Wenlan keeps source-backed pages current across MCP-compatible AI tools."
-        footerLeft={[
-          "LME_Oracle 93.6 / 0.857 / 0.883",
-          "LME_S 87.7 / 0.815 / 0.822 (N=90)",
-          "macOS · Linux · Windows",
-          "Apache-2.0",
-        ]}
-        footerRight="by Qi-Xuan Lu"
-        titleSize={92}
+        title={
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div>Your AI-native</div>
+            <div>knowledge base.</div>
+          </div>
+        }
+        description="Wenlan turns documents and decisions into a source-backed wiki you and your AI can pick up next time."
+        titleSize={52}
       />
-    ),
-    size,
-  );
+    );
 }

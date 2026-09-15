@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "../components/home/workflow-comparison.css";
-@import "../components/home/demo-video.css";
 
 @theme {
   --font-sans: var(--font-instrument), -apple-system, BlinkMacSystemFont,

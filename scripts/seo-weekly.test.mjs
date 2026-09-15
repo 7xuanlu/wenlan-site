@@ -5961,12 +5961,12 @@ test("homepage acquisition links expose the three-locale tool-selection guide", 
     assert.match(homepage, /href:\s*"\/learn\/choose-ai-knowledge-base-tool"/);
   }
 
-  assert.match(homepages[0], /How do you choose an AI knowledge base tool/);
-  assert.match(homepages[1], /如何挑選 AI 知識庫工具/);
-  assert.match(homepages[2], /如何挑选 AI 知识库工具/);
+  assert.match(homepages[0], /Choose an AI knowledge base tool/);
+  assert.match(homepages[1], /AI 知識庫選型/);
+  assert.match(homepages[2], /AI 知识库选型/);
   assert.match(
     homePageComponent,
-    /aria-labelledby="home-reading-heading"/,
+    /link\.id === "ai-knowledge-base-tool"[\s\S]*"w-full sm:w-auto"/,
   );
 });
 

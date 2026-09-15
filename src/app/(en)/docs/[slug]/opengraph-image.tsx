@@ -1,4 +1,4 @@
-import { ImageResponse } from "next/og";
+import { createOgImage } from "@/lib/og-template";
 import { docPages, getDocPage } from "../docs";
 import { OgTemplate, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/og-template";
 
@@ -19,20 +19,12 @@ export default async function Image({ params }: Params) {
   const description = page?.description ?? "Source-backed LLM wiki for AI work.";
   const eyebrow = page?.eyebrow ?? "Docs";
 
-  return new ImageResponse(
-    (
+  return createOgImage(
       <OgTemplate
         eyebrow={eyebrow}
         title={title}
         description={description}
-        footerLeft={[
-          "wenlan.app/docs",
-          "Source-backed LLM wiki",
-        ]}
-        footerRight="Apache-2.0"
         titleSize={72}
       />
-    ),
-    size,
-  );
+    );
 }

@@ -1,87 +1,8 @@
 # SEO 改善工作：先決定值得解的問題
 
-更新：2026-09-12。這是目前工作與下一個決定的短索引，不取代 `SEO-CAMPAIGN.md`
+更新：2026-09-10。這是目前工作與下一個決定的短索引，不取代 `SEO-CAMPAIGN.md`
 受保護目標、歷史紀錄或 scenario JSON。完整證據見
 [09-04 診斷](seo-audits/2026-09-04-seo-growth-diagnosis.md)。
-
-## 09-12 現行目標：新增價值與具體搜尋問題的前十／前五
-
-使用者要求把這兩項做到可交付、可驗證，不能用「排名無法保證」代替改善。
-完整執行與驗收細節只維護在
-[新增價值與逐題排名標準](seo-product-evidence-standard.md#added-value-and-query-level-ranking-goals)。
-AGENTS → control 必讀原則已指向這個方向，選題書籤包含完整標準。
-
-- 盤點全部核心 owner 的三語覆蓋，先處理證據最充分的 2–3 組搜尋任務。
-  每組逐一讀同市場前五名的實際答案，找出讀者仍做不到的事，再交付可驗證
-  的成果；沒有實證就列缺口，不以換標題、加篇幅或加圖交差。
-- 固定非品牌 query、canonical、市場與裝置，保留 GSC 原始口徑及完整窗口，
-  逐題追前十、再前五，同列合格 clicks；不以全站平均或事後換題報喜。
-  內容驗收與流量達標分開，AI 品牌提及與實際 URL 引用也分開。
-- 現在先做可審查的比較、素材與改善；每個未達標項目列下一個可驗證假設。
-  既有 20/3/28、2026-09-21 截止與 08-24..09-20 final window 保留。
-  發布／推送／合併／付費／外部提交前仍停在本輪授權邊界。
-- 最新 Wenlan Brief v17 已確認 PR198 合併、PR190 網站素材交付；更多模型
-  工程保留 backlog。本段取代下方歷史「下一步」說法，不改寫其當時證據。
-
-首批比較候選沿用 [09-08 核心基線](seo-audits/2026-09-08-core-acquisition-baseline.md)
-與 [意圖分工對帳](seo-audits/2026-09-08-core-acquisition-correction.md)：
-LLM Wiki → `distilled-wiki-pages-ai-memory`；建立 Agent 知識庫 →
-`source-backed-wiki-pages-ai-work`（文件建庫步驟由 `build-local-ai-knowledge-base-from-documents`
-承接）；何時檢索 → `when-ai-agent-should-query-knowledge-base`。三語分别核對。
-這是歷史證據支持的比較起點，不是最新排名、尚存缺陷或改寫資格。當前
-sitemap／intent map 盤點、同窗口資料補查與首批搜尋答案比較已完成。
-30/30 個樣本答案位置現已讀取；Bnext 第 3 位樣本的完整正文由使用者貼上並於 2026-09-12 讀取，對應記錄的 article 90650 URL；詳細出處與有界發現見[搜尋答案比較](seo-audits/2026-09-12-core-search-answer-comparison.md)。
-原始瀏覽器因網站安全政策阻擋該 URL 的紀錄保留為歷史事實；本次是使用者貼上正文，不是瀏覽器抓取，也不宣稱獨立重新抓取或版本相符。
-圖片、延伸連結與執行時主張未獨立驗證。
-本輪修正已獲批准，PR #200 於 2026-09-13T05:15:18Z 合併
-（`2a106db71b55860658ea3e6a83ae7afd40746271`），正式站驗證於
-05:19:10Z 完成。涉及後續改頁仍須另核對實驗與 crawl；不能把已完成的
-發布準備重做，也不能把上線當作排名提升。
-
-執行狀態以原生 Goal 為準；本文件不判定 Goal 狀態，也不以本輪文件改變 Goal。
-首輪交付 Goal 已完成；使用者於 09-12 PDT 要求重建後續成效 Goal。
-續接工作追蹤固定搜尋問題的前十／前五、合格點擊與實際 AI 引用，三語
-分列，不以修正、文件或測試完成結案。原截止、窗口與門檻不變。
-立即工作是核對現有三語下載練習的任務完整性，以及既有單一分發候選的
-素材與量測準備；產品大工程仍暫緩，外部投稿尚未授權。
-續接檢查已修正三語練習「再次提問」仍指向 v1 的歧義，改成明示 v2
-目前來源與 v1 歷史對照的完整問題；頁面／下載一致性及三語雙主題、
-桌面／393px 本地畫面通過。這三段說明尚未發布，不是新增排名實驗。
-完整 i18n 原為 79/83；四項失敗已在未修改的 `da5743a` 隔離副本重現並修復。
-`/links` 納入路由／字典檢查，品牌別名只允許該頁指定欄位的正確繁簡字；
-About 的編號修正及 links 翻譯核對後補齊 sourceHash，未改核心頁可見文案。
-整合 i18n 84/84、SEO 365/365、量測 123 pass／2 optional skips、lint、build
-及 built technical 通過；三語 links canonical／七個目的地與練習下載亦通過。
-收據存於外部 `seo-value-query-goal-20260912/continuation-exercise/receipt.json`。
-使用者已批准這批網站修正的推送合併；HN 先討論成熟度，尚未批准投稿。
-既有私人分發提案已補 08-16..09-12 完整窗口的 HN→路徑查詢，回傳空列，
-不宣稱已帶來讀者、不計成 Google 排名成效。網站發布依實際部署收據續接。
-本文件不重複整份 objective，也不新增排程。
-
-首輪 [09-12 搜尋答案比較](seo-audits/2026-09-12-core-search-answer-comparison.md)
-已保存兩組任務 × 三語的 Google 樣本、逐來源閱讀狀態，以及同一 GSC 窗口
-補齊的市場／裝置資料。美國桌面 `llm wiki` 為 10 impressions／0 clicks／
-47.2；`agent knowledge base` 為 21／0／67.2381。這不是新版成效。
-全核心頁盤點與可審查提案已完成，見下方本輪交付；現有 owner 未具備
-post-deploy crawl／28-day 改寫資格，不把研究完成當作頁面已改善。
-
-09-12 後續盤點已對齊 173 個 canonical；三個首批主題各有三語，46 篇詳細
-文件仍只有英文。另修正建庫／coding-agent 頁四個中文 metadata 的「不會
-捏造」過度保證；六條路由的 metadata 和 24 個三語深淺／桌面／393px 首屏
-已驗證。原建置與適用 checks 通過，兩項 PGlite fixture 測試仍跳過。
-EXPERIMENTS 已預登記未啟動候選，未新增 active experiment。完整本輪成果
-與提案存於私人 specs 的 `2026-09-12-core-seo-first-round-readout.md`；
-已隨 PR #200 推送、合併與部署；同次產品實跑素材仍是提案所列缺口。
-整合樹與已測 head `da5743a` 相同，六條正式路由與 deployed technical
-檢查通過；收據位於外部 repo data 的
-`seo-value-query-goal-20260912/ship-da5743a/merge-receipt.json`。
-
-09-12 固定九題 Google AI Overview 實測已完成：六題觸發，繁中「來源文件
-變更時，如何維護本機 LLM wiki？」的展開來源面板實際連到本站建庫頁。
-這是一筆發布前觀察到的來源連結，非穩定引用或 PR #200 的成效；三個 CN 目標題
-未出現摘要，其他平台 45 列仍未測。原始回答、網址、時間及市場限制保存於
-外部 `seo-value-query-goal-20260912/ai-visibility.md` 與
-`ai-overview-raw-receipts.json`；既有 Tally 素材來源核對另有收據。
 
 ## 09-10 收尾範圍：先交付網站素材
 

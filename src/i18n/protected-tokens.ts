@@ -30,14 +30,6 @@ const tokenPatterns = [
   /\b7xuanlu\b/g,
 ] as const;
 
-const localizedLinksAliasPaths = new Set([
-  "seo.title",
-  "seo.description",
-  "hero.title",
-  "links[4].label",
-  "links[4].description",
-]);
-
 export function extractProtectedTokens(source: unknown): string[] {
   const tokens: string[] = [];
   const seen = new Set<string>();
@@ -87,25 +79,15 @@ function hasApprovedLocalizedAlias(
   translatedValue: string,
   label: string,
 ): boolean {
-  if (path === "redesign.hero.description" && token === "Wenlan") {
-    const expectedAlias = label.startsWith("zh-TW.")
-      ? "文瀾"
-      : label.startsWith("zh-CN.")
-        ? "文澜"
-        : null;
+  if (path !== "redesign.hero.description" || token !== "Wenlan") return false;
 
-    return expectedAlias !== null && translatedValue.includes(expectedAlias);
-  }
+  const expectedAlias = label.startsWith("zh-TW.")
+    ? "文瀾"
+    : label.startsWith("zh-CN.")
+      ? "文澜"
+      : null;
 
-  if (
-    token !== "Wenlan" ||
-    !localizedLinksAliasPaths.has(path) ||
-    (label !== "zh-TW.links" && label !== "zh-CN.links")
-  ) {
-    return false;
-  }
-
-  return translatedValue.includes(label === "zh-TW.links" ? "文瀾" : "文澜");
+  return expectedAlias !== null && translatedValue.includes(expectedAlias);
 }
 
 function isExactProtectedLeafPath(path: string): boolean {

@@ -86,20 +86,6 @@ function contentShapesByKey(dictionary) {
   );
 }
 
-function getLeafAtPath(value, path) {
-  return path
-    .replace(/\[(\d+)\]/g, ".$1")
-    .split(".")
-    .reduce((current, key) => current[key], value);
-}
-
-function setLeafAtPath(value, path, nextValue) {
-  const segments = path.replace(/\[(\d+)\]/g, ".$1").split(".");
-  const leaf = segments.pop();
-  const parent = segments.reduce((current, key) => current[key], value);
-  parent[leaf] = nextValue;
-}
-
 function leafCountsByKey(dictionary, flattenLeafStrings) {
   return Object.fromEntries(
     Object.keys(dictionary)
@@ -442,7 +428,6 @@ test("English app routes live under the unprefixed route group", async () => {
     "src/app/(en)/docs/[slug]/page.tsx",
     "src/app/(en)/learn/page.tsx",
     "src/app/(en)/learn/[slug]/page.tsx",
-    "src/app/(en)/links/page.tsx",
     "src/app/(en)/feed.xml/route.ts",
     "src/app/(en)/llms-full.txt/route.ts",
     "src/app/(en)/not-found.tsx",
@@ -458,14 +443,12 @@ test("localized core page wrappers and shared page modules exist", async () => {
     "src/app/_pages/download.tsx",
     "src/app/_pages/docs-index.tsx",
     "src/app/_pages/get-started.tsx",
-    "src/app/_pages/links.tsx",
     "src/app/_pages/not-found.tsx",
     "src/app/[locale]/page.tsx",
     "src/app/[locale]/about/page.tsx",
     "src/app/[locale]/download/page.tsx",
     "src/app/[locale]/docs/page.tsx",
     "src/app/[locale]/docs/get-started/page.tsx",
-    "src/app/[locale]/links/page.tsx",
     "src/app/[locale]/not-found.tsx",
   ]) {
     await assertFileExists(path);
@@ -485,17 +468,14 @@ test("home renders direct localized acquisition links to the core wiki guides", 
     en: [
       "/learn/distilled-wiki-pages-ai-memory",
       "/learn/source-backed-wiki-pages-ai-work",
-      "/learn/choose-ai-knowledge-base-tool",
     ],
     "zh-TW": [
       "/zh-TW/learn/distilled-wiki-pages-ai-memory",
       "/zh-TW/learn/source-backed-wiki-pages-ai-work",
-      "/zh-TW/learn/choose-ai-knowledge-base-tool",
     ],
     "zh-CN": [
       "/zh-CN/learn/distilled-wiki-pages-ai-memory",
       "/zh-CN/learn/source-backed-wiki-pages-ai-work",
-      "/zh-CN/learn/choose-ai-knowledge-base-tool",
     ],
   };
 
@@ -692,10 +672,8 @@ test("localized route helpers keep English canonical and prefix translated core 
     "/docs",
     "/docs/get-started",
     "/learn",
-    "/links",
   ]);
   assert.equal(routing.localizePath("en", "/docs/get-started"), "/docs/get-started");
-  assert.equal(routing.localizePath("en", "/links"), "/links");
   assert.equal(routing.localizePath("zh-TW", "/"), "/zh-TW");
   assert.equal(
     routing.localizePath("zh-TW", "/download"),
@@ -707,8 +685,6 @@ test("localized route helpers keep English canonical and prefix translated core 
   );
   assert.equal(routing.localizePath("zh-CN", "/about"), "/zh-CN/about");
   assert.equal(routing.localizePath("zh-TW", "/learn"), "/zh-TW/learn");
-  assert.equal(routing.localizePath("zh-TW", "/links"), "/zh-TW/links");
-  assert.equal(routing.localizePath("zh-CN", "/links"), "/zh-CN/links");
   assert.equal(
     routing.localizePath("zh-TW", "/learn/distilled-wiki-pages-ai-memory"),
     "/zh-TW/learn/distilled-wiki-pages-ai-memory",
@@ -2352,7 +2328,7 @@ test("localized core page JSON-LD uses localized absolute URLs and languages for
 
 test("content dictionaries keep exact core keys, content shapes, and leaf counts", async () => {
   const { content, hash } = await loadI18nModules();
-  const expectedKeys = ["about", "chrome", "docs", "footer", "getStarted", "home", "links", "notFound"];
+  const expectedKeys = ["about", "chrome", "docs", "footer", "getStarted", "home", "notFound"];
 
   assert.deepEqual(Object.keys(content.enContent).sort(), expectedKeys);
   assert.deepEqual(Object.keys(content.zhTWContent).sort(), expectedKeys);
@@ -2424,12 +2400,6 @@ test("core content dictionaries cover first-release localized page surfaces", as
       }
     }
     assert.ok(dictionary.getStarted.content.steps?.length >= 3, `${locale}.getStarted.content.steps`);
-    assert.equal(dictionary.links.content.links?.length, 7, `${locale}.links.content.links`);
-    assert.deepEqual(
-      dictionary.links.content.links.map((link) => link.href),
-      content.enContent.links.content.links.map((link) => link.href),
-      `${locale}.links.content.links.hrefs`,
-    );
     assert.ok(dictionary.notFound.content.title, `${locale}.notFound.content.title`);
     assert.ok(dictionary.footer.content.ariaLabel, `${locale}.footer.content.ariaLabel`);
     assert.ok(dictionary.footer.content.groups?.length >= 3, `${locale}.footer.content.groups`);
@@ -2529,10 +2499,10 @@ test("home SEO copy presents LLM wiki positioning in English and Mandarin", asyn
       staleHomePhrase: /活個人知識庫|AI-native/,
       hero: {
         eyebrow: /Living Wiki/,
-        notes: /筆記、對話一直累積/,
+        notes: /筆記一直在累積/,
         continuation: /工作.*從頭來/,
-        sourceBacked: /附來源的知識頁/,
-        buildOn: /接著上次的工作繼續/,
+        sourceBacked: /有來源、能持續更新的 Wiki/,
+        buildOn: /接著往前做/,
       },
     },
     "zh-CN": {
@@ -2541,10 +2511,10 @@ test("home SEO copy presents LLM wiki positioning in English and Mandarin", asyn
       staleHomePhrase: /活个人知识库|AI-native/,
       hero: {
         eyebrow: /Living Wiki/,
-        notes: /笔记、对话一直积累/,
+        notes: /笔记一直在积累/,
         continuation: /工作.*从头来/,
-        sourceBacked: /带来源的知识页/,
-        buildOn: /接着上次的工作继续/,
+        sourceBacked: /有来源、能持续更新的 Wiki/,
+        buildOn: /接着往前做/,
       },
     },
   };
@@ -2579,7 +2549,7 @@ test("Chinese hero copy preserves the continuation promise and setup keeps short
 
     assert.match(
       dictionary.home.content.redesign.hero.description,
-      /附來源的知識頁|带来源的知识页/,
+      /有來源、能持續更新的 Wiki|有来源、能持续更新的 Wiki/,
       `${locale}.home.hero.description.sourceBacked`,
     );
     assert.match(
@@ -2961,69 +2931,6 @@ test("localized hero brand aliases stay script-specific and required", async () 
     assert.throws(
       () => protectedTokens.assertProtectedTokensPreserved(source, wrongScript, `${locale}.home`),
       new RegExp(`${locale}\\.home.*redesign\\.hero\\.description.*Wenlan`, "s"),
-    );
-  }
-});
-
-test("localized links aliases stay script-specific while GitHub tokens and hrefs stay protected", async () => {
-  const { content, protectedTokens } = await loadI18nModules();
-  const aliases = {
-    "zh-TW": { expected: "文瀾", wrong: "文澜" },
-    "zh-CN": { expected: "文澜", wrong: "文瀾" },
-  };
-  const aliasPaths = [
-    "seo.title",
-    "seo.description",
-    "hero.title",
-    "links[4].label",
-    "links[4].description",
-  ];
-
-  for (const [locale, { expected, wrong }] of Object.entries(aliases)) {
-    const source = content.enContent.links.content;
-    const intact = structuredClone(content.localizedContentByLocale[locale].links.content);
-    const label = `${locale}.links`;
-
-    for (const path of aliasPaths) {
-      assert.match(getLeafAtPath(source, path), /Wenlan/, `${label}.${path}.source`);
-      assert.match(getLeafAtPath(intact, path), new RegExp(expected), `${label}.${path}.alias`);
-    }
-    assert.doesNotThrow(() =>
-      protectedTokens.assertProtectedTokensPreserved(source, intact, label),
-    );
-
-    for (const path of aliasPaths) {
-      const missing = structuredClone(intact);
-      setLeafAtPath(missing, path, getLeafAtPath(missing, path).replaceAll(expected, ""));
-      assert.throws(
-        () => protectedTokens.assertProtectedTokensPreserved(source, missing, label),
-        (error) => error instanceof Error && error.message.includes(`${path}: Wenlan`),
-        `${label}.${path} missing alias`,
-      );
-
-      const wrongScript = structuredClone(intact);
-      setLeafAtPath(wrongScript, path, getLeafAtPath(wrongScript, path).replaceAll(expected, wrong));
-      assert.throws(
-        () => protectedTokens.assertProtectedTokensPreserved(source, wrongScript, label),
-        (error) => error instanceof Error && error.message.includes(`${path}: Wenlan`),
-        `${label}.${path} wrong alias`,
-      );
-    }
-
-    const changedGithubToken = structuredClone(intact);
-    changedGithubToken.links[5].label = changedGithubToken.links[5].label.replace("GitHub", "Github");
-    assert.throws(
-      () => protectedTokens.assertProtectedTokensPreserved(source, changedGithubToken, label),
-      (error) => error instanceof Error && error.message.includes("links[5].label: GitHub"),
-      `${label}.links[5].label GitHub token`,
-    );
-
-    const changedGithubHref = structuredClone(intact);
-    changedGithubHref.links[5].href = changedGithubHref.links[5].href.replace("wenlan", "wenlan-mirror");
-    assert.throws(
-      () => protectedTokens.assertProtectedTokensPreserved(source, changedGithubHref, label),
-      (error) => error instanceof Error && error.message.includes("links[5].href: https://github.com/7xuanlu/wenlan"),
-      `${label}.links[5].href GitHub URL`,
     );
   }
 });

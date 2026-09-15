@@ -265,14 +265,14 @@ const oldClaims = {
 
 test("hero pairs growing-note pain with the living-wiki mechanism in all locales", () => {
   const expected = {
-    en: ["Notes and chats pile up.", "Still starting over?"],
-    "zh-TW": ["筆記、對話一直累積，", "工作卻還得從頭來？"],
-    "zh-CN": ["笔记、对话一直积累，", "工作却还得从头来？"],
+    en: ["Your notes keep growing.", "Still starting from scratch?"],
+    "zh-TW": ["筆記一直在累積，", "工作卻還得從頭來？"],
+    "zh-CN": ["笔记一直在积累，", "工作却还得从头来？"],
   };
   for (const [locale, dictionary] of Object.entries(dictionaryByLocale)) {
     const hero = dictionary.home.content.redesign.hero;
     assert.deepEqual([hero.headline.pre, hero.headline.emphasis], expected[locale]);
-    assert.match(hero.description, /source-backed wiki|附來源的知識頁|带来源的知识页/);
+    assert.match(hero.description, /source-backed wiki|有來源、能持續更新的 Wiki|有来源、能持续更新的 Wiki/);
   }
 });
 
@@ -297,7 +297,7 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
       acquisitionLinks,
       `${locale} acquisition links changed`,
     );
-    // Approved concise hero explains the wiki mechanism, not only the pain.
+    // Approved two-sentence hero explains the wiki mechanism, not only the pain.
     assert.equal(home.redesign.hero.description.split(/\s+/).filter(Boolean).length <= 40, true);
     assert.equal(home.redesign.hero.worksWithNote, expectedWorksWithNotes[locale]);
     assert.match(home.redesign.hero.worksWithNote, /Obsidian/);

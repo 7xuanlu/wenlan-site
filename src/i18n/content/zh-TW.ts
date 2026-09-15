@@ -17,7 +17,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "ca85d10076dbba67cbcf437cd3d1e15c78dbcaa1b34bb8b400880723c8b685f0",
+    sourceHash: "fcfce2b70aa153be0876e35a1be9117dec2aaa235f93de9d0fc5e846b67a3d81",
     content: {
       seo: {
         title: "Wenlan 文瀾官網 | AI 工作的 LLM wiki",
@@ -59,17 +59,17 @@ export const zhTWContent = {
           {
             id: "llm-wiki",
             href: "/learn/distilled-wiki-pages-ai-memory",
-            label: "LLM Wiki 是什麼？",
+            label: "LLM wiki 導覽",
           },
           {
             id: "ai-knowledge-base",
             href: "/learn/source-backed-wiki-pages-ai-work",
-            label: "如何建立有來源的 AI 知識庫？",
+            label: "AI 知識庫導覽",
           },
           {
             id: "ai-knowledge-base-tool",
             href: "/learn/choose-ai-knowledge-base-tool",
-            label: "如何挑選 AI 知識庫工具？",
+            label: "AI 知識庫選型",
           },
         ],
       },
@@ -524,9 +524,9 @@ export const zhTWContent = {
       redesign: {
         hero: {
           eyebrow: "你與 AI 共用的 Living Wiki",
-          headline: { pre: "筆記、對話一直累積，", emphasis: "工作卻還得從頭來？", post: "" },
+          headline: { pre: "筆記一直在累積，", emphasis: "工作卻還得從頭來？", post: "" },
           description:
-            "文瀾把文件與決策整理成附來源的知識頁，讓你和 AI 接著上次的工作繼續。",
+            "文瀾是為 AI 工作打造的有來源 LLM Wiki：把文件、筆記與決策整理成有來源、能持續更新的 Wiki 頁面，讓你和 AI 不只找回資料，更能沿著已有的理解，接著往前做。",
           worksWithLabel: "可搭配",
           worksWithNote: "可讀取 Obsidian 筆記，保留原文。",
         },
@@ -957,7 +957,7 @@ export const zhTWContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "5025c3f8c49ce9c4983b722cee5465f7c0711c67d0f8e03e9f63b0648bef0886",
+    sourceHash: "44266d4638cfe5dad5251ef0fc23d3bcfda504f00bad1a0d397fecc0efae93bb",
     content: {
       seo: {
         title: "關於 Wenlan | AI 工作的 LLM wiki",
@@ -1080,7 +1080,7 @@ export const zhTWContent = {
   },
   links: {
     status: "translated",
-    sourceHash: "4f95e34c4d9128c9e4e24563e3e0adf3ad13c926f9cf2a0e3f998bb16038ee04",
+    sourceHash: null,
     content: {
       seo: {
         title: "文瀾連結 | AI 工作用 LLM Wiki",
