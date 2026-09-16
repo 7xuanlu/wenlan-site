@@ -1,6 +1,6 @@
 # 技術 SEO 與 i18n 修正交接 — 2026-09-16
 
-狀態：分支 `claude/magical-shannon-cfohdu`，已推送，未開 PR。
+狀態：分支 `claude/magical-shannon-cfohdu`，PR [#206](https://github.com/7xuanlu/wenlan-site/pull/206)。
 第一輪在雲端容器完成；第二輪（同日）在本地收尾，見「本地收尾」。
 這是工作交接紀錄，不是排名讀取，也不是發布批准。
 
@@ -40,6 +40,7 @@ Google API、chromestatus 被網路政策擋掉，無法跑 `seo:gsc:fetch`，
 | `cf8f946` | `distilled-wiki-pages-ai-memory` 中文翻譯對齊英文 |
 | `3eafbb5` | 中文 `/docs` 的 sitemap lastmod 改依 get-started，不再跟英文 docs 走（Muse 審查發現） |
 | `5d31945` | CI 改為淺層 checkout 加 tag 抓取，不再拉完整歷史（Muse 審查發現） |
+| `6895b7a` | 手機寬度下 footer 列改為換行置中，byline 不再斷成兩行（PR 截圖時發現，Muse 審查之後） |
 
 ### 為什麼撤回 XSL（`1ba2491` → `009dc01`）
 
