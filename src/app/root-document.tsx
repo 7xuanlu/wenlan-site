@@ -1,7 +1,13 @@
 import { SiteFooter } from "@/components/site-footer";
 import { AcquisitionCapture } from "@/components/acquisition-capture";
 import { getCoreContent } from "@/i18n/content";
-import { LOCALE_CONFIG, type Locale } from "@/i18n/locales";
+import {
+  DEFAULT_LOCALE,
+  hreflangByLocale,
+  LOCALE_CONFIG,
+  SUPPORTED_LOCALES,
+  type Locale,
+} from "@/i18n/locales";
 import { rootHomeSeo } from "@/i18n/metadata";
 import { Analytics } from "@vercel/analytics/next";
 import { Fraunces, Instrument_Sans, JetBrains_Mono } from "next/font/google";
@@ -38,7 +44,6 @@ export default async function RootDocument({
   locale: Locale;
 }) {
   const release = await getLatestRelease();
-  const siteDescription = rootHomeSeo(locale).description;
   const chrome = getCoreContent(locale).chrome.content;
 
   return (
@@ -85,8 +90,13 @@ export default async function RootDocument({
               name: "Wenlan",
               alternateName: "wenlan.app",
               url: "https://wenlan.app",
-              description: siteDescription,
-              inLanguage: LOCALE_CONFIG[locale].hreflang,
+              // One @id is one entity, so its claims must not change per locale.
+              // The site itself is trilingual; the localized description lives
+              // on the per-page nodes, not on the shared WebSite node.
+              description: rootHomeSeo(DEFAULT_LOCALE).description,
+              inLanguage: SUPPORTED_LOCALES.map(
+                (supported) => hreflangByLocale[supported],
+              ),
               publisher: { "@id": "https://wenlan.app/#organization" },
               copyrightHolder: { "@id": "https://wenlan.app/#qixuan-lu" },
               copyrightYear: 2026,

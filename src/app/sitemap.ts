@@ -1,12 +1,11 @@
 import type { MetadataRoute } from "next";
-import { SUPPORTED_LOCALES } from "@/i18n/locales";
+import { DEFAULT_LOCALE, type Locale, SUPPORTED_LOCALES } from "@/i18n/locales";
 import { getLocalizedLearnArticle } from "@/i18n/learn-articles";
 import {
   alternateUrls,
   canonicalUrl,
   type CORE_TRANSLATED_PATHS,
   isTranslatedLearnPath,
-  SITE_URL,
   translatedLocalesForLearnPath,
 } from "@/i18n/routing";
 import { docPages, docUrl } from "./(en)/docs/docs";
@@ -22,9 +21,12 @@ type SitemapEntry = MetadataRoute.Sitemap[number];
 
 type CoreSitemapEntryConfig = Pick<
   SitemapEntry,
-  "changeFrequency" | "lastModified" | "priority"
+  "changeFrequency" | "priority"
 > & {
   pathname: CoreTranslatedPath;
+  // A function when the page aggregates content that differs per locale, so a
+  // localized hub does not inherit an English date it cannot justify.
+  lastModified: SitemapEntry["lastModified"] | ((locale: Locale) => Date);
 };
 
 function maxDate(values: Array<string | Date>): Date {
@@ -33,16 +35,15 @@ function maxDate(values: Array<string | Date>): Date {
   );
 }
 
-function localizedCoreEntries(
-  config: CoreSitemapEntryConfig,
-  images: string[],
-): SitemapEntry[] {
+function localizedCoreEntries(config: CoreSitemapEntryConfig): SitemapEntry[] {
   return SUPPORTED_LOCALES.map((locale) => ({
     url: canonicalUrl(locale, config.pathname),
-    lastModified: config.lastModified,
+    lastModified:
+      typeof config.lastModified === "function"
+        ? config.lastModified(locale)
+        : config.lastModified,
     changeFrequency: config.changeFrequency,
     priority: config.priority,
-    images,
     alternates: {
       languages: alternateUrls(config.pathname),
     },
@@ -61,14 +62,57 @@ export default function sitemap(): MetadataRoute.Sitemap {
     LINKS_UPDATED_AT,
   ]);
 
-  const sharedImages = [`${SITE_URL}/og.png`, `${SITE_URL}/logo.svg`];
   const translatedLearnArticles = articles.filter((article) =>
     isTranslatedLearnPath(`/learn/${article.slug}`),
   );
+
+  // The Learn hub and the home page aggregate whatever exists in their own
+  // locale. Reusing the English aggregate would restamp every Chinese hub each
+  // time an English-only article or doc changes, which is lastmod inflation.
+  function latestArticleFor(locale: Locale): Date {
+    if (locale === DEFAULT_LOCALE) return latestArticle;
+
+    const localizedDates = translatedLearnArticles
+      .filter((article) =>
+        translatedLocalesForLearnPath(`/learn/${article.slug}`).some(
+          (translatedLocale) => translatedLocale === locale,
+        ),
+      )
+      .map(
+        (article) =>
+          getLocalizedLearnArticle(locale, article.slug)?.updatedAt ??
+          article.updatedAt,
+      );
+
+    return localizedDates.length > 0 ? maxDate(localizedDates) : latestArticle;
+  }
+
+  // A localized docs index links out to English-only docs, so an edit to one of
+  // them does not change it; get-started is the one doc translated with it.
+  function latestDocFor(locale: Locale): Date {
+    return locale === DEFAULT_LOCALE
+      ? latestDoc
+      : new Date(GET_STARTED_UPDATED_AT);
+  }
+
+  function latestSiteUpdateFor(locale: Locale): Date {
+    if (locale === DEFAULT_LOCALE) return latestSiteUpdate;
+
+    // latestDoc is deliberately absent: only the docs index and get-started are
+    // translated, and get-started carries its own constant below.
+    return maxDate([
+      latestArticleFor(locale),
+      ABOUT_UPDATED_AT,
+      DOWNLOAD_UPDATED_AT,
+      GET_STARTED_UPDATED_AT,
+      LINKS_UPDATED_AT,
+    ]);
+  }
+
   const coreEntries: CoreSitemapEntryConfig[] = [
     {
       pathname: "/",
-      lastModified: latestSiteUpdate,
+      lastModified: latestSiteUpdateFor,
       changeFrequency: "weekly",
       priority: 1,
     },
@@ -80,7 +124,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       pathname: "/docs",
-      lastModified: latestDoc,
+      lastModified: latestDocFor,
       changeFrequency: "weekly",
       priority: 0.9,
     },
@@ -104,20 +148,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       pathname: "/learn",
-      lastModified: latestArticle,
+      lastModified: latestArticleFor,
       changeFrequency: "weekly",
       priority: 0.75,
     },
   ];
 
   return [
-    ...coreEntries.flatMap((entry) => localizedCoreEntries(entry, sharedImages)),
+    ...coreEntries.flatMap((entry) => localizedCoreEntries(entry)),
     ...docPages.map((page) => ({
       url: docUrl(page.slug),
       lastModified: new Date(page.updatedAt),
       changeFrequency: "weekly" as const,
       priority: 0.78,
-      images: sharedImages,
     })),
     ...articles.map((article) => {
       const pathname = `/learn/${article.slug}`;
@@ -127,7 +170,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(article.updatedAt),
         changeFrequency: "monthly" as const,
         priority: 0.7,
-        images: sharedImages,
         ...(isTranslatedLearnPath(pathname)
           ? {
               alternates: {
@@ -148,7 +190,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ),
         changeFrequency: "monthly" as const,
         priority: 0.68,
-        images: sharedImages,
         alternates: {
           languages: alternateUrls(pathname),
         },

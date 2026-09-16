@@ -174,7 +174,7 @@ const zhTWArticles = {
       "Wenlan 文瀾",
     ],
     publishedAt: "2026-07-04",
-    updatedAt: "2026-09-08",
+    updatedAt: "2026-09-16",
     author: "Qi-Xuan Lu",
     readingTime: "9 分鐘閱讀",
     audience: "正在搭建可由 AI 代理讀取、更新並檢查來源的本地知識庫的繁體中文使用者",
@@ -221,6 +221,10 @@ const zhTWArticles = {
           "Obsidian：保留人可讀、可編輯的 Markdown 知識面。",
           "Agent memory：保存工作中可重用的事實和決策，作為頁面原料之一。",
         ],
+        link: {
+          label: "把 Obsidian vault 遷移成有來源的 LLM Wiki（英文）",
+          href: "/learn/migrate-obsidian-vault-to-llm-wiki",
+        },
       },
       ...workedExampleSections("zh-TW"),
       {
@@ -389,6 +393,8 @@ const zhTWArticles = {
       "verify-ai-knowledge-base-citations",
       "ai-memory-provenance",
       "local-git-history-ai-memory",
+      "migrate-obsidian-vault-to-llm-wiki",
+      "setup-agent-knowledge-base-for-coding-agents",
     ],
     cta: {
       heading: "搭建可維護的本地 LLM Wiki",
@@ -3554,7 +3560,7 @@ const zhCNArticles = {
       "Wenlan 文澜",
     ],
     publishedAt: "2026-07-04",
-    updatedAt: "2026-09-08",
+    updatedAt: "2026-09-16",
     readingTime: "9 分钟阅读",
     audience: "正在搭建可由 AI 代理读取、更新并检查来源的本地知识库的中文用户",
     heroBullets: [
@@ -3600,6 +3606,10 @@ const zhCNArticles = {
           "Obsidian：保留人可读、可编辑的 Markdown 知识面。",
           "Agent memory：保存工作中可复用的事实和决策，作为页面原料之一。",
         ],
+        link: {
+          label: "把 Obsidian vault 迁移成有来源的 LLM Wiki（英文）",
+          href: "/learn/migrate-obsidian-vault-to-llm-wiki",
+        },
       },
       ...workedExampleSections("zh-CN"),
       {

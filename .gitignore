@@ -51,6 +51,9 @@ yarn-error.log*
 # superpowers planning artifacts (specs, plans, scratch — not part of the project)
 /docs/superpowers/
 
+# CI release-fact checkouts (sibling Wenlan repos, cloned by .github/workflows/ci.yml)
+/.release-source/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

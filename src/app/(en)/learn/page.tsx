@@ -9,6 +9,7 @@ import {
   SITE_URL,
 } from "./articles";
 import { ArticleHalo, MemoryIndex } from "./article-visuals";
+import { LOCALE_CONFIG } from "@/i18n/locales";
 import { alternateUrls } from "@/i18n/routing";
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export const metadata: Metadata = {
     type: "website",
     url: `${SITE_URL}/learn`,
     siteName: "Wenlan",
+    locale: LOCALE_CONFIG.en.openGraphLocale,
   },
   twitter: {
     card: "summary_large_image",
@@ -145,7 +147,7 @@ export default function LearnPage() {
     url: `${SITE_URL}/learn`,
     isPartOf: { "@id": "https://wenlan.app/#website" },
     publisher: { "@id": "https://wenlan.app/#organization" },
-    inLanguage: "en-US",
+    inLanguage: "en",
     mainEntity: articles.map((article) => ({
       "@type": "Article",
       headline: article.title,

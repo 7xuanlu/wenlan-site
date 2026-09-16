@@ -30,7 +30,7 @@ pnpm seo:technical:deployed
 pnpm seo:release:check     # Live GitHub stable release and published download verification
 ```
 
-The SEO tests read sibling Wenlan and wenlan-app checkouts for current source facts. Set both `WENLAN_REPO_ROOT=/absolute/path/to/wenlan` and `WENLAN_APP_REPO_ROOT=/absolute/path/to/wenlan-app` when those repos are not adjacent to this checkout.
+The SEO tests read a sibling Wenlan checkout: current CLI, MCP and plugin sources, plus release facts (`version.txt`, `CHANGELOG.md`) at the selected release tag. Set `WENLAN_REPO_ROOT=/absolute/path/to/wenlan` when that repo is not adjacent to this checkout. CI checks out the public repository itself, so no token is needed.
 
 ## Architecture
 
@@ -122,6 +122,9 @@ The waitlist server action lives in `src/app/actions.ts` and uses Resend. It req
 - Before claiming a change is done, run the narrow relevant check. For site or SEO changes, prefer `pnpm test:seo`, `pnpm seo:weekly:sample`, and `pnpm build` as applicable.
 - Run `pnpm lint` when TypeScript or route/component code changes.
 - Use `pnpm seo:technical:built` after build-output-sensitive SEO changes.
+  CI runs it on every pull request. It is deliberately not part of `postbuild`:
+  it pins per-article dates and required slugs, so a content change would
+  otherwise fail the production deploy rather than the pull request.
 - For release/download updates, run `pnpm seo:release:check` against GitHub's
   latest stable release before publication. Local source contract tests inspect
   the exact website-selected tag; their passing result does not establish that

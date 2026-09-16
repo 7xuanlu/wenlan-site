@@ -16,6 +16,8 @@ const publicScanIgnoredNames = new Set([
   ".next",
   ".omo",
   ".codegraph",
+  // CI checks out the Wenlan repository here to read release facts.
+  ".release-source",
   ".worktrees",
   "node_modules",
   "pnpm-lock.yaml",
@@ -863,26 +865,16 @@ test("public eval surfaces publish the latest LME oracle and LME-S framing", asy
   assert.match(homepageContent, /No retrieval/, "src/i18n/content/en.ts");
   assert.match(homepageContent, /168 tokens \/ query/, "src/i18n/content/en.ts");
 
-  const headlineMetricSurfaces = [
+  // Since #203 the OG image carries positioning only, with no metric footer, so
+  // it is not required to publish the numbers. It is still scanned below so a
+  // metric added back to it cannot be a stale one.
+  const metricFreeSurfaces = [
     "src/app/opengraph-image.tsx",
   ];
 
-  for (const path of headlineMetricSurfaces) {
-    const source = await readRepo(path);
-    assert.match(source, /LME_Oracle/, path);
-    assert.match(source, /93\.6/, path);
-    assert.match(source, /0\.857/, path);
-    assert.match(source, /0\.883/, path);
-    assert.match(source, /LME_S/, path);
-    assert.match(source, /N=90/, path);
-    assert.match(source, /87\.7/, path);
-    assert.match(source, /0\.815/, path);
-    assert.match(source, /0\.822/, path);
-  }
-
   const publicSources = (await Promise.all([
     ...fullMetricSurfaces,
-    ...headlineMetricSurfaces,
+    ...metricFreeSurfaces,
   ].map((path) => readRepo(path)))).join("\n");
 
   assert.doesNotMatch(publicSources, /59\.5%/);
@@ -1125,7 +1117,10 @@ test("public current-release surfaces track the selected Wenlan release source",
   assert.doesNotMatch(englishContent, /preview is not yet notarized/);
   assert.doesNotMatch(traditionalContent, /預覽版尚未完成 notarization/);
   assert.doesNotMatch(simplifiedContent, /预览版尚未完成 notarization/);
-  assert.match(aboutOg, new RegExp(`v${escapedVersion} · Apache-2\\.0`));
+  // Since #203 the about OG image shows no version; one added back must be current.
+  for (const [shown] of aboutOg.matchAll(/\bv\d+\.\d+\.\d+\b/g)) {
+    assert.equal(shown, `v${version}`, "src/app/about/opengraph-image.tsx");
+  }
   assert.match(docs, new RegExp(`current stable ${escapedVersion}`));
   assert.match(docs, new RegExp(`Wenlan version ${escapedVersion}`));
   assert.match(docs, new RegExp(`v${escapedVersion}.*${escapeRegExp(date)}`));
@@ -1143,7 +1138,6 @@ test("public release surfaces expose the verified current artifacts and release 
   const { version, date, changelog } = await currentWenlanRelease();
   const docs = await readRepo("src/app/docs/docs.ts");
   const structuredData = await readRepo("src/app/structured-data.ts");
-  const aboutOg = await readRepo("src/app/about/opengraph-image.tsx");
   const llms = await readRepo("public/llms.txt");
 
   assert.equal(version, "0.18.5");
@@ -1226,7 +1220,6 @@ test("public release surfaces expose the verified current artifacts and release 
   assert.match(docs, /global shortcut is occupied/);
   assert.match(docs, /window stays still after launch/);
   assert.match(structuredData, /tree\/v0\.18\.5\/app/);
-  assert.match(aboutOg, /v0\.18\.5 · Apache-2\.0/);
   assert.match(llms, /tree\/v0\.18\.5\/app/);
 });
 

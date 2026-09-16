@@ -1,7 +1,12 @@
 import type { Metadata, Viewport } from "next";
 
 import { localizedContentByLocale } from "./content";
-import { LOCALE_CONFIG, type Locale } from "./locales";
+import {
+  DEFAULT_LOCALE,
+  LOCALE_CONFIG,
+  SUPPORTED_LOCALES,
+  type Locale,
+} from "./locales";
 import {
   alternateUrls,
   canonicalUrl,
@@ -27,6 +32,24 @@ function rssTypeAlternate() {
   };
 }
 
+// Only the locales this particular page actually exists in: some Learn articles
+// are translated into zh-TW but not zh-CN, so the supported-locale list would
+// advertise a URL that does not exist.
+function alternateOpenGraphLocales(
+  locale: Locale,
+  languages: object,
+): string[] {
+  const availableLocales = SUPPORTED_LOCALES.filter(
+    (supported) =>
+      supported !== locale &&
+      Object.hasOwn(languages, LOCALE_CONFIG[supported].hreflang),
+  );
+
+  return availableLocales.map(
+    (supported) => LOCALE_CONFIG[supported].openGraphLocale,
+  );
+}
+
 export function rootHomeSeo(locale: Locale) {
   return localizedContentByLocale[locale].home.content.seo;
 }
@@ -46,7 +69,9 @@ export function buildPageMetadata(
     alternates.languages = alternateUrls(pathname);
   }
 
-  if (pathname === "/") {
+  // The feed is English-only (<language>en-US</language>), so only the English
+  // home page advertises it.
+  if (pathname === "/" && locale === DEFAULT_LOCALE) {
     alternates.types = rssTypeAlternate();
   }
 
@@ -62,6 +87,9 @@ export function buildPageMetadata(
       url: canonical,
       siteName: "Wenlan",
       locale: LOCALE_CONFIG[locale].openGraphLocale,
+      ...(alternates.languages
+        ? { alternateLocale: alternateOpenGraphLocales(locale, alternates.languages) }
+        : {}),
     },
     twitter: {
       card: "summary_large_image",

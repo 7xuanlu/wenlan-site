@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import {
   htmlLangByLocale,
@@ -15,7 +16,20 @@ const localeLabels = {
   "zh-CN": "简体中文",
 } as const satisfies Record<Locale, string>;
 
-export function LanguageSwitcher({ locale, href }: { locale: Locale; href: string }) {
+export function LanguageSwitcher({
+  locale,
+  href: hrefProp,
+  placement = "down",
+}: {
+  locale: Locale;
+  // Omit to switch locale on the current page instead of a fixed one. Paths
+  // with no translation resolve back to the unprefixed URL, so the link is
+  // always real rather than a localized 404.
+  href?: string;
+  placement?: "down" | "up";
+}) {
+  const pathname = usePathname();
+  const href = hrefProp ?? pathname ?? "/";
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const summaryRef = useRef<HTMLElement>(null);
 
@@ -68,7 +82,15 @@ export function LanguageSwitcher({ locale, href }: { locale: Locale; href: strin
         </svg>
       </summary>
 
-      <div className="absolute right-0 top-[calc(100%+0.375rem)] z-50 w-36 rounded-md border border-[var(--o-border)] bg-[var(--o-bg-alt)] p-1 shadow-[var(--o-shadow-media)]">
+      <div
+        className={`absolute z-50 w-36 rounded-md border border-[var(--o-border)] bg-[var(--o-bg-alt)] p-1 shadow-[var(--o-shadow-media)] ${
+          placement === "up"
+            ? // The footer row stacks on phones, leaving the switcher at the
+              // left edge, where a right-anchored menu would open off-screen.
+              "bottom-[calc(100%+0.375rem)] left-0 sm:left-auto sm:right-0"
+            : "top-[calc(100%+0.375rem)] right-0"
+        }`}
+      >
         {SUPPORTED_LOCALES.map((targetLocale) => {
           const active = targetLocale === locale;
 

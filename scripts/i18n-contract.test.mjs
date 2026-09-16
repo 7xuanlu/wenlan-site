@@ -40,6 +40,7 @@ async function loadI18nModules() {
     import("../src/i18n/protected-tokens.ts"),
     import("../src/i18n/content/index.ts"),
     import("../src/i18n/metadata.ts"),
+    import("../src/i18n/learn-article-source-hashes.ts"),
   ]).then(
     ([
       locales,
@@ -50,6 +51,7 @@ async function loadI18nModules() {
       protectedTokens,
       content,
       metadata,
+      learnArticleSourceHashes,
     ]) => ({
       locales,
       routingConfig,
@@ -59,6 +61,7 @@ async function loadI18nModules() {
       protectedTokens,
       content,
       metadata,
+      learnArticleSourceHashes,
     }),
   );
 
@@ -467,6 +470,7 @@ test("localized core page wrappers and shared page modules exist", async () => {
     "src/app/[locale]/docs/get-started/page.tsx",
     "src/app/[locale]/links/page.tsx",
     "src/app/[locale]/not-found.tsx",
+    "src/app/[locale]/not-found-content.tsx",
   ]) {
     await assertFileExists(path);
   }
@@ -653,7 +657,7 @@ test("locale model exposes only the supported app locales and metadata", async (
     "zh-CN": "zh-Hans",
   });
   assert.deepEqual(locales.hreflangByLocale, {
-    en: "en-US",
+    en: "en",
     "zh-TW": "zh-TW",
     "zh-CN": "zh-CN",
   });
@@ -806,13 +810,13 @@ test("alternate URLs are reciprocal and include x-default for core translated pa
     const alternates = routing.alternateUrls(pathname);
 
     assert.deepEqual(Object.keys(alternates).sort(), [
-      "en-US",
+      "en",
       "x-default",
       "zh-CN",
       "zh-TW",
     ]);
     assert.equal(alternates["x-default"], routing.canonicalUrl("en", pathname));
-    assert.equal(alternates["en-US"], routing.canonicalUrl("en", pathname));
+    assert.equal(alternates["en"], routing.canonicalUrl("en", pathname));
     assert.equal(alternates["zh-TW"], routing.canonicalUrl("zh-TW", pathname));
     assert.equal(alternates["zh-CN"], routing.canonicalUrl("zh-CN", pathname));
 
@@ -832,13 +836,13 @@ test("alternate URLs are reciprocal and include x-default for core translated pa
     assert.deepEqual(
       Object.keys(alternates).sort(),
       [
-        "en-US",
+        "en",
         "x-default",
         ...translatedLocales.map((locale) => locales.hreflangByLocale[locale]),
       ].sort(),
     );
     assert.equal(alternates["x-default"], routing.canonicalUrl("en", pathname));
-    assert.equal(alternates["en-US"], routing.canonicalUrl("en", pathname));
+    assert.equal(alternates["en"], routing.canonicalUrl("en", pathname));
     for (const locale of translatedLocales) {
       assert.equal(
         alternates[locales.hreflangByLocale[locale]],
@@ -850,7 +854,7 @@ test("alternate URLs are reciprocal and include x-default for core translated pa
   assert.deepEqual(
     routing.alternateUrls("/learn/wenlan-vs-obsidian-ai-memory"),
     {
-      "en-US": "https://wenlan.app/learn/wenlan-vs-obsidian-ai-memory",
+      "en": "https://wenlan.app/learn/wenlan-vs-obsidian-ai-memory",
       "zh-TW":
         "https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
       "zh-CN":
@@ -875,7 +879,7 @@ test("page metadata helper emits localized canonical, alternates, and Open Graph
   assert.equal(pageMetadata.metadataBase.href, "https://wenlan.app/");
   assert.equal(pageMetadata.alternates.canonical, canonical);
   assert.deepEqual(pageMetadata.alternates.languages, {
-    "en-US": "https://wenlan.app/about",
+    "en": "https://wenlan.app/about",
     "zh-TW": canonical,
     "zh-CN": "https://wenlan.app/zh-CN/about",
     "x-default": "https://wenlan.app/about",
@@ -897,7 +901,7 @@ test("root metadata includes reciprocal alternates for translated home locales",
     assert.equal(rootMetadata.alternates.canonical, routing.canonicalUrl(locale, "/"));
     assert.deepEqual(rootMetadata.alternates.languages, routing.alternateUrls("/"));
     assert.deepEqual(Object.keys(rootMetadata.alternates.languages).sort(), [
-      "en-US",
+      "en",
       "x-default",
       "zh-CN",
       "zh-TW",
@@ -1687,7 +1691,7 @@ test("zh-TW LLM Wiki guide owns the Karpathy v2 and AI knowledge-base intent", a
   assert.match(article.metaTitle, /Karpathy LLM Wiki/);
   assert.match(article.metaTitle, /AI 知識庫/);
   assert.equal(article.publishedAt, "2026-07-04");
-  assert.equal(article.updatedAt, "2026-09-08");
+  assert.equal(article.updatedAt, "2026-09-16");
   assert.match(article.sections[0].heading, /Karpathy LLM Wiki/);
   assert.match(JSON.stringify(article), /不代表 Karpathy 為 Wenlan 背書/);
   assert.ok(article.keywords.includes("AI 知識庫"));
@@ -1737,7 +1741,7 @@ test("zh-CN LLM wiki guide owns the AI knowledge-base search intent", async () =
   assert.match(article.title, /Karpathy LLM Wiki/);
   assert.match(article.metaTitle, /AI 知识库/);
   assert.equal(article.publishedAt, "2026-07-04");
-  assert.equal(article.updatedAt, "2026-09-08");
+  assert.equal(article.updatedAt, "2026-09-16");
   assert.match(article.sections[0].heading, /Karpathy LLM Wiki/);
   assert.match(JSON.stringify(article), /不代表 Karpathy 为 Wenlan 背书/);
   assert.ok(article.keywords.includes("AI 知识库"));
@@ -2222,8 +2226,31 @@ test("sitemap includes localized core and Mandarin acquisition routes", async ()
   assert.ok(zhTWLLMWiki);
   assert.equal(
     new Date(zhTWLLMWiki.lastModified).toISOString().slice(0, 10),
-    "2026-09-08",
+    "2026-09-16",
   );
+
+  // Localized hubs date from what exists in their own locale, not from the
+  // English aggregate, so English-only edits do not restamp them.
+  const lastmodByUrl = new Map(
+    entries.map((entry) => [entry.url, new Date(entry.lastModified).getTime()]),
+  );
+  for (const locale of ["zh-TW", "zh-CN"]) {
+    assert.equal(
+      lastmodByUrl.get(routing.canonicalUrl(locale, "/docs")),
+      lastmodByUrl.get(routing.canonicalUrl(locale, "/docs/get-started")),
+      `${locale} /docs`,
+    );
+    const localizedArticleDates = routing.TRANSLATED_LEARN_PATHS
+      .filter((pathname) =>
+        routing.translatedLocalesForLearnPath(pathname).includes(locale),
+      )
+      .map((pathname) => lastmodByUrl.get(routing.canonicalUrl(locale, pathname)));
+    assert.equal(
+      lastmodByUrl.get(routing.canonicalUrl(locale, "/learn")),
+      Math.max(...localizedArticleDates),
+      `${locale} /learn`,
+    );
+  }
   assert.equal(urls.has("https://wenlan.app/zh-TW/docs/daily-workflow"), false);
   assert.equal(urls.has("https://wenlan.app/zh-CN/docs/daily-workflow"), false);
 });
@@ -2847,12 +2874,35 @@ test("localized core wrappers reject unsupported and English locale params throu
     assert.match(source, /await\s+params/, path);
   }
 
+  const localizedNotFoundContentSource = await readFile(
+    resolve(repoRoot, "src/app/[locale]/not-found-content.tsx"),
+    "utf8",
+  );
+  assert.match(
+    localizedNotFoundContentSource,
+    /useParams/,
+    "src/app/[locale]/not-found-content.tsx",
+  );
+  assert.match(
+    localizedNotFoundContentSource,
+    /TRANSLATED_LOCALES/,
+    "src/app/[locale]/not-found-content.tsx",
+  );
+
+  // The localized 404 must not inherit the layout's indexable home metadata.
   const localizedNotFoundSource = await readFile(
     resolve(repoRoot, "src/app/[locale]/not-found.tsx"),
     "utf8",
   );
-  assert.match(localizedNotFoundSource, /useParams/, "src/app/[locale]/not-found.tsx");
-  assert.match(localizedNotFoundSource, /TRANSLATED_LOCALES/, "src/app/[locale]/not-found.tsx");
+  assert.doesNotMatch(
+    localizedNotFoundSource,
+    /"use client"/,
+    "src/app/[locale]/not-found.tsx must stay a server component to export metadata",
+  );
+  assert.match(localizedNotFoundSource, /export const metadata/, "src/app/[locale]/not-found.tsx");
+  assert.match(localizedNotFoundSource, /index:\s*false/, "src/app/[locale]/not-found.tsx");
+  assert.match(localizedNotFoundSource, /follow:\s*false/, "src/app/[locale]/not-found.tsx");
+  assert.match(localizedNotFoundSource, /canonical:\s*null/, "src/app/[locale]/not-found.tsx");
 });
 
 test("hashing normalizes whitespace, sorts leaves, and detects English content drift", async () => {
@@ -2913,6 +2963,54 @@ test("Chinese dictionaries store fixed source hashes equal to current English co
     const source = await readFile(resolve(repoRoot, path), "utf8");
     assert.doesNotMatch(source, /enContent|hashEnglishContentUnit|node:crypto/, path);
   }
+});
+
+test("translated Learn articles record the English source hash they were made from", async () => {
+  const { hash, learnArticleSourceHashes } = await loadI18nModules();
+  const { articles } = await import("../src/app/(en)/learn/articles.ts");
+  const { TRANSLATED_LEARN_SLUGS } = await import("../src/i18n/learn-availability.ts");
+
+  const stored = learnArticleSourceHashes.LEARN_ARTICLE_SOURCE_HASHES;
+  const englishBySlug = new Map(articles.map((article) => [article.slug, article]));
+
+  assert.deepEqual(
+    Object.keys(stored).sort(),
+    [...TRANSLATED_LEARN_SLUGS].sort(),
+    "every translated Learn slug needs exactly one source hash, and no extras",
+  );
+
+  for (const [slug, storedHash] of Object.entries(stored)) {
+    assert.match(storedHash, /^[a-f0-9]{64}$/, `${slug}.sourceHash`);
+
+    const english = englishBySlug.get(slug);
+    assert.ok(english, `${slug} has no English source article`);
+    assert.equal(
+      storedHash,
+      hash.hashEnglishLearnArticle(english),
+      `English article "${slug}" changed since its translations were reviewed. ` +
+        "Update the zh-TW and zh-CN copies in src/i18n/learn-articles.ts, then " +
+        "refresh the hash in src/i18n/learn-article-source-hashes.ts.",
+    );
+  }
+});
+
+test("Learn article hashing ignores dates but not prose", async () => {
+  const { hash } = await loadI18nModules();
+
+  const base = { slug: "a", publishedAt: "2026-01-01", updatedAt: "2026-01-01", title: "T" };
+  const dateBumped = { ...base, updatedAt: "2026-06-01" };
+  const proseChanged = { ...base, title: "T2" };
+
+  assert.equal(
+    hash.hashEnglishLearnArticle(base),
+    hash.hashEnglishLearnArticle(dateBumped),
+    "a date bump alone is not translation drift",
+  );
+  assert.notEqual(
+    hash.hashEnglishLearnArticle(base),
+    hash.hashEnglishLearnArticle(proseChanged),
+    "changed prose is translation drift",
+  );
 });
 
 test("translated content dictionaries preserve protected tokens from English content", async () => {

@@ -1,15 +1,21 @@
-"use client";
+import type { Metadata } from "next";
+import { LocalizedNotFoundContent } from "./not-found-content";
 
-import { NotFoundPage } from "../_pages/not-found";
-import { TRANSLATED_LOCALES, type TranslatedLocale } from "@/i18n/locales";
-import { useParams } from "next/navigation";
+// A not-found boundary cannot read route params on the server, so the locale is
+// resolved in the client child. This file stays a server component purely so it
+// can export metadata: without it the localized 404 inherits the layout's home
+// metadata and tells crawlers it is the indexable home page.
+export const metadata: Metadata = {
+  title: "404 · Wenlan",
+  robots: {
+    index: false,
+    follow: false,
+  },
+  alternates: {
+    canonical: null,
+  },
+};
 
 export default function LocalizedNotFound() {
-  const params = useParams<{ locale?: string | string[] }>();
-  const localeParam = Array.isArray(params.locale) ? params.locale[0] : params.locale;
-  const locale = TRANSLATED_LOCALES.includes(localeParam as TranslatedLocale)
-    ? (localeParam as TranslatedLocale)
-    : "zh-TW";
-
-  return <NotFoundPage locale={locale} />;
+  return <LocalizedNotFoundContent />;
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { TrackedLink } from "@/components/tracked-link";
+import { LOCALE_CONFIG } from "@/i18n/locales";
 import { ArticleHalo } from "../../learn/article-visuals";
 import { docPages, docUrl, formatDocDate, getDocPage } from "../docs";
 import { SITE_URL } from "../../learn/articles";
@@ -48,6 +49,7 @@ export async function generateMetadata({
       type: "article",
       url: docUrl(page.slug),
       siteName: "Wenlan",
+      locale: LOCALE_CONFIG.en.openGraphLocale,
       publishedTime: page.publishedAt ?? page.updatedAt,
       modifiedTime: page.updatedAt,
     },
@@ -94,7 +96,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
     mainEntityOfPage: docUrl(page.slug),
     isPartOf: { "@id": "https://wenlan.app/docs#collection" },
     ...(page.keywords ? { keywords: page.keywords.join(", ") } : {}),
-    inLanguage: "en-US",
+    inLanguage: "en",
     isAccessibleForFree: true,
     wordCount,
     articleBody: articleBodySnippet,

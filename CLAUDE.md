@@ -12,9 +12,8 @@ pnpm test:seo     # Brand, release, app, SEO, redirects, schema, pipeline contra
 pnpm test:i18n    # Locale and localized route contracts
 ```
 
-`pnpm test:seo` reads release facts from sibling `../wenlan` and
-`../wenlan-app`. Set `WENLAN_REPO_ROOT` or `WENLAN_APP_REPO_ROOT` when the
-checkouts live elsewhere.
+`pnpm test:seo` reads release facts from a sibling `../wenlan` checkout. Set
+`WENLAN_REPO_ROOT` when it lives elsewhere.
 
 ## Architecture
 
