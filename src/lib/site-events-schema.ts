@@ -1,7 +1,7 @@
 import { WENLAN_RELEASE } from "@/lib/releases";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/locales";
 import { stripLocalePrefix, SITE_URL } from "@/i18n/routing";
-import sitemap from "@/app/sitemap";
+import sitemap from "@/app/sitemap-entries";
 import history from "./site-events-v1-history.json";
 
 export const SITE_EVENTS_MAX_BODY_BYTES = 2048;

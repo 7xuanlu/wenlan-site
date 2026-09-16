@@ -2176,7 +2176,7 @@ test("core route wrappers export localized metadata for translated pages", async
 
 test("sitemap includes localized core and Mandarin acquisition routes", async () => {
   const { locales, routing } = await loadI18nModules();
-  const { default: sitemap } = await import("../src/app/sitemap.ts");
+  const { default: sitemap } = await import("../src/app/sitemap-entries.ts");
   const entries = sitemap();
   const urls = new Set(entries.map((entry) => entry.url));
   assert.equal(entries.length, urls.size, "sitemap URLs must be unique");
@@ -2230,7 +2230,7 @@ test("sitemap includes localized core and Mandarin acquisition routes", async ()
 
 test("sitemap route alternates are reciprocal for every localized entry", async () => {
   const { locales, routing } = await loadI18nModules();
-  const { default: sitemap } = await import("../src/app/sitemap.ts");
+  const { default: sitemap } = await import("../src/app/sitemap-entries.ts");
   const entriesByUrl = new Map(sitemap().map((entry) => [entry.url, entry]));
 
   for (const pathname of [

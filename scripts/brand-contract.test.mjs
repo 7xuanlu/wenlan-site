@@ -1089,7 +1089,7 @@ test("public current-release surfaces track the selected Wenlan release source",
   const traditionalContent = await readRepo("src/i18n/content/zh-TW.ts");
   const aboutOg = await readRepo("src/app/about/opengraph-image.tsx");
   const docs = await readRepo("src/app/docs/docs.ts");
-  const sitemap = await readRepo("src/app/sitemap.ts");
+  const sitemap = await readRepo("src/app/sitemap-entries.ts");
 
   const escapedVersion = escapeRegExp(version);
 
@@ -1242,7 +1242,7 @@ test("download information architecture keeps the homepage compact and the full 
   const englishRoute = await readRepo("src/app/(en)/download/page.tsx");
   const localizedRoute = await readRepo("src/app/[locale]/download/page.tsx");
   const routing = await readRepo("src/i18n/routing.ts");
-  const sitemap = await readRepo("src/app/sitemap.ts");
+  const sitemap = await readRepo("src/app/sitemap-entries.ts");
 
   assert.match(homeDownload, /id="download"/);
   assert.match(homeDownload, /<DownloadRecommendation/);
