@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   checks:
-    name: Lint, i18n, build, technical SEO
+    name: Lint, contracts, build, technical SEO
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -46,15 +46,20 @@ jobs:
       - name: Technical SEO check
         run: pnpm seo:technical:built
 
-      # The brand contract tests read release facts (tagged version.txt and
-      # CHANGELOG.md) from the public Wenlan repository, so no secret is needed.
-      # Full history brings the release tags those tests resolve.
+      # The brand contract tests read the public Wenlan repository, so no secret
+      # is needed: current CLI, MCP and plugin sources from the default branch,
+      # and release facts (version.txt, CHANGELOG.md) from the selected tag.
       - name: Check out Wenlan release source
         uses: actions/checkout@v4
         with:
           repository: 7xuanlu/wenlan
           path: .release-source/wenlan
-          fetch-depth: 0
+
+      # fetch-tags on a shallow checkout only follows tags on the fetched commit,
+      # and the selected release tag is usually behind the branch tip. Fetching
+      # every tag one commit deep avoids cloning the full history.
+      - name: Fetch Wenlan release tags
+        run: git -C .release-source/wenlan fetch --depth=1 origin '+refs/tags/*:refs/tags/*'
 
       - name: Brand, release, app, SEO, schema, pipeline contracts
         env:

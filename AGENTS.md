@@ -30,7 +30,7 @@ pnpm seo:technical:deployed
 pnpm seo:release:check     # Live GitHub stable release and published download verification
 ```
 
-The SEO tests read release facts (tagged `version.txt` and `CHANGELOG.md`) from a sibling Wenlan checkout. Set `WENLAN_REPO_ROOT=/absolute/path/to/wenlan` when that repo is not adjacent to this checkout. CI checks out the public repository itself, so no token is needed.
+The SEO tests read a sibling Wenlan checkout: current CLI, MCP and plugin sources, plus release facts (`version.txt`, `CHANGELOG.md`) at the selected release tag. Set `WENLAN_REPO_ROOT=/absolute/path/to/wenlan` when that repo is not adjacent to this checkout. CI checks out the public repository itself, so no token is needed.
 
 ## Architecture
 
