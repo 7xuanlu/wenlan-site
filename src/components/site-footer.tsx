@@ -66,7 +66,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
               {content.signature.tagline}
             </span>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 sm:justify-end">
             <LanguageSwitcher locale={locale} placement="up" />
             <a
               href="https://www.toolpilot.ai"

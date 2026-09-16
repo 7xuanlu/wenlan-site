@@ -304,8 +304,9 @@ export function rewriteReleasesFile(source, { oldVersion, oldPublishedAt, releas
 
 /** Computes English content-unit hashes via tsx (content modules are TypeScript). */
 export async function computeEnglishHashes(siteRoot) {
-  // tsx loads these as CommonJS. Node 22 cannot always detect their named
-  // exports from an eval import, but module.exports is always on default.
+  // While tsx loads these as CommonJS (no "type": "module"), module.exports is
+  // on default, and Node 22 cannot always detect the named exports from an eval
+  // import. An ESM load has no default, so the namespace itself is used.
   const evalScript = `
 const exportsOf = (mod) => mod.default ?? mod;
 const [{ enContent }, { hashEnglishContentUnit }] = (await Promise.all([
