@@ -122,6 +122,9 @@ The waitlist server action lives in `src/app/actions.ts` and uses Resend. It req
 - Before claiming a change is done, run the narrow relevant check. For site or SEO changes, prefer `pnpm test:seo`, `pnpm seo:weekly:sample`, and `pnpm build` as applicable.
 - Run `pnpm lint` when TypeScript or route/component code changes.
 - Use `pnpm seo:technical:built` after build-output-sensitive SEO changes.
+  CI runs it on every pull request. It is deliberately not part of `postbuild`:
+  it pins per-article dates and required slugs, so a content change would
+  otherwise fail the production deploy rather than the pull request.
 - For release/download updates, run `pnpm seo:release:check` against GitHub's
   latest stable release before publication. Local source contract tests inspect
   the exact website-selected tag; their passing result does not establish that

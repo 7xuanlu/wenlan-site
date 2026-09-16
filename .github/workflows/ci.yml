@@ -35,11 +35,16 @@ jobs:
       - name: Locale and localized route contracts
         run: pnpm test:i18n
 
-      # postbuild runs seo-built-technical-check.mjs, which validates the
-      # sitemap, robots.txt, redirects, noindex headers and per-page canonicals
-      # against the real build output. indexnow-ping is a no-op off Vercel.
-      - name: Build (includes technical SEO check)
+      - name: Build
         run: pnpm build
+
+      # Validates the sitemap, robots.txt, redirects, noindex headers and
+      # per-page canonicals against the real build output. Deliberately a CI
+      # step rather than part of postbuild: it pins per-article dates and
+      # required slugs, so running it in postbuild would fail a production
+      # deploy whenever content changes without the script being updated too.
+      - name: Technical SEO check
+        run: pnpm seo:technical:built
 
       # The brand/app contract tests read release facts out of the sibling
       # Wenlan checkouts. Without a token that can read them, run the rest of

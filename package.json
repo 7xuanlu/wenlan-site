@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "postbuild": "node --import tsx scripts/site-events-build-check.mjs && node --import tsx scripts/app-events-build-check.mjs && node scripts/email-build-check.mjs && node scripts/seo-built-technical-check.mjs && node scripts/indexnow-ping.mjs",
+    "postbuild": "node --import tsx scripts/site-events-build-check.mjs && node --import tsx scripts/app-events-build-check.mjs && node scripts/email-build-check.mjs && node scripts/indexnow-ping.mjs",
     "seo:weekly": "node scripts/seo-weekly-pipeline.mjs",
     "seo:weekly:run": "node scripts/seo-weekly-pipeline.mjs",
     "seo:weekly:sample": "node scripts/seo-weekly-pipeline.mjs --input-dir scripts/fixtures/seo-weekly --allow-fixture-input true --date 2026-06-07 --output /tmp/wenlan-weekly-seo-sample.md",
