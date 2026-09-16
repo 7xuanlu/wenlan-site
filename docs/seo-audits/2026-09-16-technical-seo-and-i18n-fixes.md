@@ -1,20 +1,20 @@
 # 技術 SEO 與 i18n 修正交接 — 2026-09-16
 
-狀態：分支 `claude/magical-shannon-cfohdu`，6 個 commit，已推送，未開 PR。
+狀態：分支 `claude/magical-shannon-cfohdu`，已推送，未開 PR。
+第一輪在雲端容器完成；第二輪（同日）在本地收尾，見「本地收尾」。
 這是工作交接紀錄，不是排名讀取，也不是發布批准。
 
-## 執行環境警告（影響本輪所有未完成項）
+## 執行環境警告（第一輪）
 
-本輪在雲端容器執行，**不是**設置完整的本地環境。因此以下事情做不到，
-其結論必須在本地重跑後才算數：
+第一輪在雲端容器執行，缺 `../wenlan` 與 `../wenlan-app`，也無法呼叫 Muse。
+當時 `pnpm test:seo` 有 13 個失敗，並以「對未修改 HEAD 的失敗清單逐字相同」
+判定全屬環境因素。**這個判定不完整**：本地補齊 Wenlan checkout 後，
+其中 3 個是 main 上真實的紅燈（#203 改版 OG 圖，契約測試沒跟上），
+在未含本分支的 `75a7767` 也能重現。基線相同只證明「不是本分支造成」，
+不證明「是環境造成」。
 
-- `../wenlan` 與 `../wenlan-app` 不存在 → `pnpm test:seo` 有 13 個失敗。
-  已用 `git stash` 對未修改的 HEAD 跑過基線，**失敗清單逐字相同**，
-  確認是環境因素，不是本輪改動造成。本地應重跑確認 371/371。
-- Google API、chromestatus 被網路政策擋掉 → 無法跑 `seo:gsc:fetch`，
-  也無法查證 Chrome XSLT 移除的確切里程碑。
-- Muse（Musecode CLI）不在容器內。`acpx muse` 回報
-  `Failed to spawn agent command: muse`。程式碼審查改由兩個獨立模型執行。
+Google API、chromestatus 被網路政策擋掉，無法跑 `seo:gsc:fetch`，
+也無法查證 Chrome XSLT 移除的確切里程碑；這兩點本地收尾未處理。
 
 ## 起因與最初的誤判
 
@@ -33,6 +33,13 @@
 | `9da009b` | 技術檢查從 postbuild 移到 CI 步驟 |
 | `009dc01` | **撤回** `1ba2491` |
 | `fdcf06d` | i18n 稽核七項修正 |
+| `bbf73d0` | 本交接文件 |
+| `d1cfe6b` | footer 語言選單在手機上錨定左側，不再開到畫面外 |
+| `2449d9c` | 品牌契約測試對齊 #203 無指標、無版本的 OG 圖（修 main 的 3 個紅燈） |
+| `095eb36` | CI 移除 token 閘門、固定 checkout 公開的 Wenlan repo；公開原始碼掃描略過 `.release-source` |
+| `cf8f946` | `distilled-wiki-pages-ai-memory` 中文翻譯對齊英文 |
+| `3eafbb5` | 中文 `/docs` 的 sitemap lastmod 改依 get-started，不再跟英文 docs 走（Muse 審查發現） |
+| `5d31945` | CI 改為淺層 checkout 加 tag 抓取，不再拉完整歷史（Muse 審查發現） |
 
 ### 為什麼撤回 XSL（`1ba2491` → `009dc01`）
 
@@ -65,18 +72,51 @@ i18n 稽核七項已於 `fdcf06d` 全數修正，最重要兩項：
 2. **中文 sitemap 的 lastmod 抄英文** —— `/zh-TW/learn` 標成英文最新文章日期，
    且任何英文 docs 編輯都會重蓋兩個中文 hub。核心 entry 現在可逐語系解析。
 
-## 待辦
+## 本地收尾（第二輪）
 
-1. **`WENLAN_REPO_TOKEN` 未設**。CI 的 `pnpm test:seo` 步驟因此永遠不會執行，
-   只輸出一行 notice。那 371 個契約測試目前在 CI 沒有任何覆蓋。
-2. **翻譯漂移基線是快照，不是「全部是最新」的保證**。
-   `learn-article-source-hashes.ts` 取自當下英文；
-   `distilled-wiki-pages-ai-memory` 在加入檢查時**已經漂移**
-   （英文 2026-09-13、翻譯 2026-09-08），未處理。
-3. **既有問題，非本輪引入**：首頁 `<loc>` 與 canonical 無結尾斜線
-   （`src/i18n/routing.ts:98-101`，Google 會正規化）；robots.txt 允許爬 `/api/*`。
-4. **語言切換器現在出現在每一頁的 footer**（原本只有首頁）。這是可見的
-   UI 變更，本地應目視確認，特別是向上展開在各頁面的表現。
+第一輪留下的待辦全部已處理：
+
+1. **`WENLAN_REPO_TOKEN`：不需要**。`7xuanlu/wenlan` 是公開 repo，閘門只是讓
+   `pnpm test:seo` 在 CI 永遠不跑。現在固定淺層 checkout 到
+   `.release-source/wenlan`，再另外抓取所有 tag（測試要讀選定 release tag）。原本的閘門還藏了一個
+   潛在失敗：checkout 進工作區後，公開原始碼掃描會掃到 Wenlan 自己的歷史文字，
+   兩個品牌測試會失敗（已用反向對照確認），因此加入略過清單。
+   `wenlan-app` checkout 沒有任何測試讀取，已從 `AGENTS.md`／`CLAUDE.md` 移除。
+2. **翻譯漂移已對齊**。英文 09-13 新增的 Obsidian 遷移連結與兩篇相關文章，
+   已補進 zh-TW 與 zh-CN；雜湊本來就與目前英文一致，未改值。
+3. **robots 與結尾斜線：刻意不改**。唯一的 GET API `/api/release` 已送
+   `X-Robots-Tag: noindex, nofollow`；加 `Disallow: /api/` 反而讓爬蟲看不到這個標頭。
+   其餘兩個 API 只接受 POST。`https://wenlan.app` 與 `https://wenlan.app/`
+   是同一個 URL（空路徑等同 `/`），不是缺陷。
+4. **footer 語言切換器已目視確認**，並發現一個缺陷：手機寬度下 footer 換行，
+   切換器落在左側，而選單靠右展開，會超出畫面左緣。已修正並在
+   375／640／1024px 與首頁 header 重新確認。
+
+驗證（工作樹 = `5d31945`，模擬 CI 的淺層 checkout 加 tag 抓取）：`test:seo` 371/371、
+`test:i18n` 86/86、`lint`、`build`、`seo:technical:built` 通過；
+`i18n:technical:built` 對 `next start` 通過（39 條 200、4 條 404）；
+建置後的 sitemap 顯示 `/docs` 為 09-10，中文 `/docs` 為 09-09。
+注意該檢查預設打 `127.0.0.1:3000`，本機該埠被其他服務佔用時會產生大量假 404，
+請用 `I18N_CHECK_BASE_URL` 指定。
+
+### Muse 審查（muse-spark-1.3-contributor，effort high）
+
+審查整個分支（`origin/main...cf8f946`），**無 blocker**。處理結果：
+
+| 發現 | 等級 | 處理 |
+| --- | --- | --- |
+| 中文 `/docs` lastmod 仍用英文 docs 最新日期，與 `fdcf06d` 修的 lastmod 灌水同類 | should-fix | 已修（`3eafbb5`），並補契約測試；反向對照確認舊寫法會失敗 |
+| 翻譯 `updatedAt` 09-16 晚於英文 09-13 | should-fix | 不改：中文頁面內容確實在 09-16 變更，lastmod 應反映本頁 |
+| CI job 名稱沒寫到契約測試 | nit | 已改名；`ci.yml` 不在 main，不影響必要檢查名稱 |
+| `fetch-depth: 0` 每次拉完整歷史 | nit | 已改（`5d31945`）：本地完整歷史 814 MB，淺層加 tag 98 MB，371/371 |
+| about OG 版本迴圈在無版本時空轉通過 | nit | 不改：符合 #203 意圖，Muse 同意 |
+
+closure check 五項全部 accepted，fix diff 無新缺陷。第 4 項 Muse 註明
+未在 GitHub 網路上重驗，只有本地模擬；第一次 CI 執行才是最終證據。
+
+**限制**：審查 session 要求唯讀，但 `set-mode readOnly` 套用後 adapter
+在首次提問時重建 session，實際模式是 `default`，唯讀並未強制。
+兩次呼叫實際只用了 read 與 search 工具，工作樹確認無非預期變更。
 
 ## 流量診斷：技術不是瓶頸
 
