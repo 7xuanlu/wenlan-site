@@ -590,8 +590,8 @@ export const enContent = {
                 ],
                 "profile": [
                   "Documents and saved decisions become a cited Wiki. Retrieve prior conclusions and their evidence from connected AI tools, then continue the work.",
-                  "New decisions can enrich existing pages. After connected files or memory content change, background processing refreshes eligible affected pages.",
-                  "Source files stay unchanged. AI proposes a revision before updating pages you edited; you accept or reject it, with change history available."
+                  "New decisions enrich existing pages; after connected files or memory change, background processing refreshes eligible pages.",
+                  "Source files stay unchanged; AI proposes a revision before updating pages you edited, with change history."
                 ],
                 "emphasis": []
               }
@@ -658,9 +658,9 @@ export const enContent = {
                   "Pages you write: review before changes"
                 ],
                 "profile": [
-                  "After setup, save and retrieve knowledge from connected AI tools. The local background service runs without the desktop App.",
-                  "Editing or deleting a memory, or accepting its replacement revision, flags the existing pages that cite it. Background work then refreshes eligible pages.",
-                  "When AI wants to update a page you wrote, it proposes a revision; the original waits for your approval."
+                  "After setup, save and retrieve knowledge from connected AI tools; the local background service runs without the desktop App.",
+                  "Editing or deleting a memory, or accepting its replacement revision, flags the existing pages that cite it; background work refreshes eligible ones.",
+                  "When AI wants to update a page you wrote, it proposes a revision for your approval."
                 ],
                 "emphasis": []
               }
