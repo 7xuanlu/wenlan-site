@@ -42,6 +42,7 @@ Google API、chromestatus 被網路政策擋掉，無法跑 `seo:gsc:fetch`，
 | `5d31945` | CI 改為淺層 checkout 加 tag 抓取，不再拉完整歷史（Muse 審查發現） |
 | `6895b7a` | 手機寬度下 footer 列改為換行置中，byline 不再斷成兩行（PR 截圖時發現，Muse 審查之後） |
 | `2c4cdb3` | release-bump 的雜湊子行程在 Node 22 讀不到 TypeScript 模組的具名匯出，改讀 `default`（CI 首次跑 `test:seo` 時發現，main 上潛伏已久） |
+| `0d6bc1d` | footer 群組在 `sm` 以上若換行改靠右；雜湊匯入註解限定為 CommonJS 情況（第二次 Muse 審查的 nit） |
 
 ### 為什麼撤回 XSL（`1ba2491` → `009dc01`）
 
@@ -118,9 +119,28 @@ PR #206 的 CI（Node 22）全部通過，`test:seo` 371/371。
 closure check 五項全部 accepted，fix diff 無新缺陷。第 4 項 Muse 註明
 未在 GitHub 網路上重驗，只有本地模擬；第一次 CI 執行才是最終證據。
 
-**限制**：審查 session 要求唯讀，但 `set-mode readOnly` 套用後 adapter
-在首次提問時重建 session，實際模式是 `default`，唯讀並未強制。
-兩次呼叫實際只用了 read 與 search 工具，工作樹確認無非預期變更。
+### 第二次 Muse 審查（`6895b7a`、`2c4cdb3`）
+
+**無 blocker**，三個 nit：
+
+| 發現 | 處理 |
+| --- | --- |
+| footer 群組 `justify-center` 在 `sm` 以上換行時會置中，而非靠右 | 已修（`0d6bc1d`）。實測 640–1100px 三個語系都不換行，目前畫面無變化 |
+| byline `whitespace-nowrap` 在文案變長時可能溢出 | 不改：目前字串很短，群組本身會換行 |
+| 雜湊匯入註解說 `default`「永遠」有值，只在 CommonJS 成立 | 已修（`0d6bc1d`） |
+
+Muse 確認 `mod.default ?? mod` 在 Node 22／24 的 CommonJS 與未來 ESM 載入下都正確；
+若模組日後加了 default export 會直接丟錯，不會靜默算錯雜湊。
+
+驗證（`0d6bc1d` 重新 build 後）：`lint`、`build`、release-bump 9/9；
+footer 在淺色與深色主題各 18 組（3 頁 × 320–1280px，選單展開）全數通過。
+深色另檢查 `data-theme="dark"`、只顯示深色 ToolPilot 徽章、選單文字對比 6.91:1。
+
+**限制**：兩次審查都要求唯讀，但**都未強制**，實際模式是 `default`。
+第二次在同一個 adapter session 上 `set-mode readOnly`，acpx 0.14.0 也記錄了
+`desired_mode_id: readOnly`，但下一個 acpx 行程 `session/load` 後只重播
+`reasoningEffort`，沒有重送模式。（第一次當時歸因於 session 重建，那是另一個現象，
+根因同樣是模式不會跨行程保留。）兩次都只用了 read 與 search 工具，工作樹確認無非預期變更。
 
 ## 流量診斷：技術不是瓶頸
 
