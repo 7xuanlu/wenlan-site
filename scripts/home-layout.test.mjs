@@ -12,7 +12,6 @@ const proofSource = fs.existsSync(path.join(repoRoot, "src/components/home/task-
   ? fs.readFileSync(path.join(repoRoot, "src/components/home/task-proof.tsx"), "utf8")
   : "";
 const painsSource = fs.readFileSync(path.join(repoRoot, "src/components/home/pains.tsx"), "utf8");
-const answerSource = fs.readFileSync(path.join(repoRoot, "src/components/home/workflow-answer.tsx"), "utf8");
 const workflowGuideSource = fs.existsSync(path.join(repoRoot, "src/components/learn/workflow-comparison-guide.tsx"))
   ? fs.readFileSync(path.join(repoRoot, "src/components/learn/workflow-comparison-guide.tsx"), "utf8")
   : "";
@@ -114,9 +113,7 @@ test("workflow comparison uses native keyboard controls and matched table rows",
   assert.match(painsSource, /row\.wenlan\.profile\[index\]/);
   assert.match(painsSource, /label=\{row\.wenlan\.labels\[index\]\}/);
   assert.match(painsSource, /label=\{row\.profileLabels\[index\]\}/);
-  assert.match(answerSource, /<strong>\{label\}<\/strong>/, "answer keeps the scannable label");
-  assert.match(answerSource, /aria-expanded/, "answer toggle exposes expanded state");
-  assert.match(answerSource, /hidden=\{!expanded\}/, "answer detail collapses but stays in the DOM");
+  assert.match(painsSource, /<strong>\{label\}<\/strong><p>\{detail\}<\/p>/);
   assert.match(painsSource, /row\.profile/);
   assert.match(painsSource, /<TrackedLocalizedLink/);
   assert.match(painsSource, /copy\.detailsLabel/);
@@ -135,7 +132,7 @@ test("workflow comparison uses native keyboard controls and matched table rows",
   assert.doesNotMatch(css, /vertical-align:\s*middle/);
   assert.match(css, /\.workflow-comparison tbody tr\s*\{[^}]*grid-template-rows:\s*auto auto/s);
   assert.match(css, /\.workflow-comparison tbody td,[\s\S]*?\.workflow-comparison tbody \.workflow-answer\s*\{[^}]*grid-template-rows:\s*subgrid/s);
-  assert.match(css, /\.workflow-answer-toggle strong\s*\{[^}]*align-self:\s*start/s);
+  assert.match(css, /\.workflow-answer strong\s*\{[^}]*align-self:\s*start/s);
   assert.match(css, /\.workflow-option\s*\{[^}]*justify-content:\s*center[^}]*text-align:\s*center/s);
   assert.match(css, /\.workflow-comparison tbody td\s*\{[^}]*grid-row:\s*2\s*\/\s*span 2/s);
 });

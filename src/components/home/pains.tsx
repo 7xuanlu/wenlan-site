@@ -4,10 +4,13 @@ import { ArrowRightIcon } from "@/components/icons";
 import type { Locale } from "@/i18n/locales";
 import { WorkflowHelp } from "./workflow-help";
 import { WorkflowChoice } from "./workflow-choice";
-import { Answer } from "./workflow-answer";
 import { TrackedLocalizedLink } from "@/components/tracked-link";
 
 type PainsCopy = HomeContent["redesign"]["pains"];
+
+function Answer({ label, detail }: { readonly label: string; readonly detail: string }) {
+  return <div className="workflow-answer"><strong>{label}</strong><p>{detail}</p></div>;
+}
 
 // All alternatives share an intrinsic-size grid cell. Inactive copy reserves
 // space without being visible, focusable, or exposed to assistive technology.
