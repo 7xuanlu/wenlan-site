@@ -66,7 +66,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
               {content.signature.tagline}
             </span>
           </div>
-          <div className="flex items-center gap-5">
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
             <LanguageSwitcher locale={locale} placement="up" />
             <a
               href="https://www.toolpilot.ai"
@@ -92,7 +92,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
                 />
               </span>
             </a>
-            <p className="font-mono text-[10px] text-[var(--o-text-muted)]">
+            <p className="whitespace-nowrap font-mono text-[10px] text-[var(--o-text-muted)]">
               {content.signature.builtByPrefix}{" "}
               <a
                 href={content.signature.authorUrl}
