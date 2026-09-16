@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Lint, i18n, build, technical SEO
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: TypeScript
+        run: pnpm lint
+
+      - name: Locale and localized route contracts
+        run: pnpm test:i18n
+
+      # postbuild runs seo-built-technical-check.mjs, which validates the
+      # sitemap, robots.txt, redirects, noindex headers and per-page canonicals
+      # against the real build output. indexnow-ping is a no-op off Vercel.
+      - name: Build (includes technical SEO check)
+        run: pnpm build
+
+      # The brand/app contract tests read release facts out of the sibling
+      # Wenlan checkouts. Without a token that can read them, run the rest of
+      # the suite rather than failing the job on a missing secret.
+      - name: Detect release-source access
+        id: release_source
+        env:
+          WENLAN_REPO_TOKEN: ${{ secrets.WENLAN_REPO_TOKEN }}
+        run: |
+          if [ -n "$WENLAN_REPO_TOKEN" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check out Wenlan release source
+        if: steps.release_source.outputs.enabled == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: 7xuanlu/wenlan
+          token: ${{ secrets.WENLAN_REPO_TOKEN }}
+          path: .release-source/wenlan
+          fetch-depth: 0
+
+      - name: Check out wenlan-app release source
+        if: steps.release_source.outputs.enabled == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: 7xuanlu/wenlan-app
+          token: ${{ secrets.WENLAN_REPO_TOKEN }}
+          path: .release-source/wenlan-app
+          fetch-depth: 0
+
+      - name: Brand, release, app, SEO, schema, pipeline contracts
+        if: steps.release_source.outputs.enabled == 'true'
+        env:
+          WENLAN_REPO_ROOT: ${{ github.workspace }}/.release-source/wenlan
+          WENLAN_APP_REPO_ROOT: ${{ github.workspace }}/.release-source/wenlan-app
+        run: pnpm test:seo
+
+      - name: Note skipped contracts
+        if: steps.release_source.outputs.enabled != 'true'
+        run: |
+          echo "::notice title=test:seo skipped::WENLAN_REPO_TOKEN is not set, so the sibling Wenlan checkouts are unavailable and pnpm test:seo did not run."
