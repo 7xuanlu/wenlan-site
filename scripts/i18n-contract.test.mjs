@@ -1691,7 +1691,7 @@ test("zh-TW LLM Wiki guide owns the Karpathy v2 and AI knowledge-base intent", a
   assert.match(article.metaTitle, /Karpathy LLM Wiki/);
   assert.match(article.metaTitle, /AI 知識庫/);
   assert.equal(article.publishedAt, "2026-07-04");
-  assert.equal(article.updatedAt, "2026-09-08");
+  assert.equal(article.updatedAt, "2026-09-16");
   assert.match(article.sections[0].heading, /Karpathy LLM Wiki/);
   assert.match(JSON.stringify(article), /不代表 Karpathy 為 Wenlan 背書/);
   assert.ok(article.keywords.includes("AI 知識庫"));
@@ -1741,7 +1741,7 @@ test("zh-CN LLM wiki guide owns the AI knowledge-base search intent", async () =
   assert.match(article.title, /Karpathy LLM Wiki/);
   assert.match(article.metaTitle, /AI 知识库/);
   assert.equal(article.publishedAt, "2026-07-04");
-  assert.equal(article.updatedAt, "2026-09-08");
+  assert.equal(article.updatedAt, "2026-09-16");
   assert.match(article.sections[0].heading, /Karpathy LLM Wiki/);
   assert.match(JSON.stringify(article), /不代表 Karpathy 为 Wenlan 背书/);
   assert.ok(article.keywords.includes("AI 知识库"));
@@ -2226,7 +2226,7 @@ test("sitemap includes localized core and Mandarin acquisition routes", async ()
   assert.ok(zhTWLLMWiki);
   assert.equal(
     new Date(zhTWLLMWiki.lastModified).toISOString().slice(0, 10),
-    "2026-09-08",
+    "2026-09-16",
   );
   assert.equal(urls.has("https://wenlan.app/zh-TW/docs/daily-workflow"), false);
   assert.equal(urls.has("https://wenlan.app/zh-CN/docs/daily-workflow"), false);

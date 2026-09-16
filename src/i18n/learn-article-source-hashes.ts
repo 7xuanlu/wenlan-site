@@ -14,9 +14,9 @@
 //
 // BASELINE NOTE: these values were captured from the English articles as they
 // stood when the check was introduced. They record where drift detection
-// starts, not a verification that every translation was current at that moment
-// — `distilled-wiki-pages-ai-memory` was already known to have drifted
-// (English updated 2026-09-13, translations 2026-09-08).
+// starts, not a verification that every translation was current at that moment.
+// The one drift known at capture time, `distilled-wiki-pages-ai-memory`
+// (English 2026-09-13, translations 2026-09-08), was reconciled on 2026-09-16.
 export const LEARN_ARTICLE_SOURCE_HASHES = {
   "build-business-metric-definition-knowledge-base": "796d5ca12aed683f79967f78f46eb4f80956682d40f15b98b8fa830b7b255c5a",
   "build-client-project-knowledge-base-for-consulting": "6f6ced533082323bb0d715e1b765820271b07b77798e7d051fcb1eb85e6e0271",
