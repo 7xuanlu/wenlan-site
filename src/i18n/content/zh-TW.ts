@@ -17,7 +17,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "32becfd71ae12dcb2e80caf422130ba189c4a4d21cd429d7b3379a24a9237a5c",
+    sourceHash: "143075c170cbeb9bfd1960571019d6999c26070958e827e327c92f83bd4abeff",
     content: {
       seo: {
         title: "Wenlan 文瀾官網 | AI 工作的 LLM wiki",
