@@ -133,7 +133,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
     isPartOf: { "@id": "https://wenlan.app/learn#collection" },
     audience: { "@type": "Audience", audienceType: article.audience },
     keywords: article.keywords.join(", "),
-    inLanguage: "en-US",
+    inLanguage: "en",
     isAccessibleForFree: true,
     wordCount,
     articleBody: articleBodySnippet,

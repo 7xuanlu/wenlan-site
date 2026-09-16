@@ -94,7 +94,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
     mainEntityOfPage: docUrl(page.slug),
     isPartOf: { "@id": "https://wenlan.app/docs#collection" },
     ...(page.keywords ? { keywords: page.keywords.join(", ") } : {}),
-    inLanguage: "en-US",
+    inLanguage: "en",
     isAccessibleForFree: true,
     wordCount,
     articleBody: articleBodySnippet,

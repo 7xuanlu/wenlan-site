@@ -6,7 +6,6 @@ import {
   canonicalUrl,
   type CORE_TRANSLATED_PATHS,
   isTranslatedLearnPath,
-  SITE_URL,
   translatedLocalesForLearnPath,
 } from "@/i18n/routing";
 import { docPages, docUrl } from "./(en)/docs/docs";
@@ -33,16 +32,12 @@ function maxDate(values: Array<string | Date>): Date {
   );
 }
 
-function localizedCoreEntries(
-  config: CoreSitemapEntryConfig,
-  images: string[],
-): SitemapEntry[] {
+function localizedCoreEntries(config: CoreSitemapEntryConfig): SitemapEntry[] {
   return SUPPORTED_LOCALES.map((locale) => ({
     url: canonicalUrl(locale, config.pathname),
     lastModified: config.lastModified,
     changeFrequency: config.changeFrequency,
     priority: config.priority,
-    images,
     alternates: {
       languages: alternateUrls(config.pathname),
     },
@@ -61,7 +56,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     LINKS_UPDATED_AT,
   ]);
 
-  const sharedImages = [`${SITE_URL}/og.png`, `${SITE_URL}/logo.svg`];
   const translatedLearnArticles = articles.filter((article) =>
     isTranslatedLearnPath(`/learn/${article.slug}`),
   );
@@ -111,13 +105,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   return [
-    ...coreEntries.flatMap((entry) => localizedCoreEntries(entry, sharedImages)),
+    ...coreEntries.flatMap((entry) => localizedCoreEntries(entry)),
     ...docPages.map((page) => ({
       url: docUrl(page.slug),
       lastModified: new Date(page.updatedAt),
       changeFrequency: "weekly" as const,
       priority: 0.78,
-      images: sharedImages,
     })),
     ...articles.map((article) => {
       const pathname = `/learn/${article.slug}`;
@@ -127,7 +120,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(article.updatedAt),
         changeFrequency: "monthly" as const,
         priority: 0.7,
-        images: sharedImages,
         ...(isTranslatedLearnPath(pathname)
           ? {
               alternates: {
@@ -148,7 +140,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ),
         changeFrequency: "monthly" as const,
         priority: 0.68,
-        images: sharedImages,
         alternates: {
           languages: alternateUrls(pathname),
         },

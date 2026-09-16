@@ -145,7 +145,7 @@ export default function LearnPage() {
     url: `${SITE_URL}/learn`,
     isPartOf: { "@id": "https://wenlan.app/#website" },
     publisher: { "@id": "https://wenlan.app/#organization" },
-    inLanguage: "en-US",
+    inLanguage: "en",
     mainEntity: articles.map((article) => ({
       "@type": "Article",
       headline: article.title,

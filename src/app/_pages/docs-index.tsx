@@ -1,6 +1,6 @@
 import { ArticleHalo } from "../(en)/learn/article-visuals";
 import { getCoreContent } from "@/i18n/content";
-import type { Locale } from "@/i18n/locales";
+import { LOCALE_CONFIG, type Locale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
 import { canonicalUrl, isTranslatedPath } from "@/i18n/routing";
 import { Spotlight } from "@/components/spotlight";
@@ -43,7 +43,7 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
     url: docsUrl,
     isPartOf: { "@id": "https://wenlan.app/#website" },
     publisher: { "@id": "https://wenlan.app/#organization" },
-    inLanguage: locale === "en" ? "en-US" : locale,
+    inLanguage: LOCALE_CONFIG[locale].hreflang,
     hasPart: docsItems.map((item) => ({
       "@type": item.href === "/docs/get-started" ? "WebPage" : "TechArticle",
       name: item.title,

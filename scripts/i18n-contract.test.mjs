@@ -653,7 +653,7 @@ test("locale model exposes only the supported app locales and metadata", async (
     "zh-CN": "zh-Hans",
   });
   assert.deepEqual(locales.hreflangByLocale, {
-    en: "en-US",
+    en: "en",
     "zh-TW": "zh-TW",
     "zh-CN": "zh-CN",
   });
@@ -806,13 +806,13 @@ test("alternate URLs are reciprocal and include x-default for core translated pa
     const alternates = routing.alternateUrls(pathname);
 
     assert.deepEqual(Object.keys(alternates).sort(), [
-      "en-US",
+      "en",
       "x-default",
       "zh-CN",
       "zh-TW",
     ]);
     assert.equal(alternates["x-default"], routing.canonicalUrl("en", pathname));
-    assert.equal(alternates["en-US"], routing.canonicalUrl("en", pathname));
+    assert.equal(alternates["en"], routing.canonicalUrl("en", pathname));
     assert.equal(alternates["zh-TW"], routing.canonicalUrl("zh-TW", pathname));
     assert.equal(alternates["zh-CN"], routing.canonicalUrl("zh-CN", pathname));
 
@@ -832,13 +832,13 @@ test("alternate URLs are reciprocal and include x-default for core translated pa
     assert.deepEqual(
       Object.keys(alternates).sort(),
       [
-        "en-US",
+        "en",
         "x-default",
         ...translatedLocales.map((locale) => locales.hreflangByLocale[locale]),
       ].sort(),
     );
     assert.equal(alternates["x-default"], routing.canonicalUrl("en", pathname));
-    assert.equal(alternates["en-US"], routing.canonicalUrl("en", pathname));
+    assert.equal(alternates["en"], routing.canonicalUrl("en", pathname));
     for (const locale of translatedLocales) {
       assert.equal(
         alternates[locales.hreflangByLocale[locale]],
@@ -850,7 +850,7 @@ test("alternate URLs are reciprocal and include x-default for core translated pa
   assert.deepEqual(
     routing.alternateUrls("/learn/wenlan-vs-obsidian-ai-memory"),
     {
-      "en-US": "https://wenlan.app/learn/wenlan-vs-obsidian-ai-memory",
+      "en": "https://wenlan.app/learn/wenlan-vs-obsidian-ai-memory",
       "zh-TW":
         "https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
       "zh-CN":
@@ -875,7 +875,7 @@ test("page metadata helper emits localized canonical, alternates, and Open Graph
   assert.equal(pageMetadata.metadataBase.href, "https://wenlan.app/");
   assert.equal(pageMetadata.alternates.canonical, canonical);
   assert.deepEqual(pageMetadata.alternates.languages, {
-    "en-US": "https://wenlan.app/about",
+    "en": "https://wenlan.app/about",
     "zh-TW": canonical,
     "zh-CN": "https://wenlan.app/zh-CN/about",
     "x-default": "https://wenlan.app/about",
@@ -897,7 +897,7 @@ test("root metadata includes reciprocal alternates for translated home locales",
     assert.equal(rootMetadata.alternates.canonical, routing.canonicalUrl(locale, "/"));
     assert.deepEqual(rootMetadata.alternates.languages, routing.alternateUrls("/"));
     assert.deepEqual(Object.keys(rootMetadata.alternates.languages).sort(), [
-      "en-US",
+      "en",
       "x-default",
       "zh-CN",
       "zh-TW",

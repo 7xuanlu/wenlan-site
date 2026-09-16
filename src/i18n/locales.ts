@@ -14,7 +14,7 @@ export const htmlLangByLocale = {
 } as const satisfies Record<Locale, string>;
 
 export const hreflangByLocale = {
-  en: "en-US",
+  en: "en",
   "zh-TW": "zh-TW",
   "zh-CN": "zh-CN",
 } as const satisfies Record<Locale, string>;

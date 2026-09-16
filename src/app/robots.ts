@@ -1,39 +1,11 @@
 import type { MetadataRoute } from "next";
 
-const aiCrawlers = [
-  "GPTBot",
-  "ChatGPT-User",
-  "OAI-SearchBot",
-  "ClaudeBot",
-  "Claude-User",
-  "Claude-SearchBot",
-  "anthropic-ai",
-  "PerplexityBot",
-  "Perplexity-User",
-  "Google-Extended",
-  "Googlebot",
-  "Bingbot",
-  "Meta-ExternalAgent",
-  "Meta-ExternalFetcher",
-  "CCBot",
-  "Applebot",
-  "Applebot-Extended",
-  "Bytespider",
-  "DuckAssistBot",
-  "YouBot",
-  "Diffbot",
-  "ImagesiftBot",
-  "Cohere-AI",
-  "MistralAI-User",
-];
-
+// One wildcard group covers every crawler, AI crawlers included. Naming bots
+// individually is not just redundant: a named group replaces the wildcard group
+// for that bot, so any future Disallow under "*" would silently skip them.
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [
-      { userAgent: "*", allow: "/" },
-      ...aiCrawlers.map((userAgent) => ({ userAgent, allow: "/" })),
-    ],
+    rules: [{ userAgent: "*", allow: "/" }],
     sitemap: "https://wenlan.app/sitemap.xml",
-    host: "https://wenlan.app",
   };
 }
