@@ -16,6 +16,8 @@ const publicScanIgnoredNames = new Set([
   ".next",
   ".omo",
   ".codegraph",
+  // CI checks out the Wenlan repository here to read release facts.
+  ".release-source",
   ".worktrees",
   "node_modules",
   "pnpm-lock.yaml",
