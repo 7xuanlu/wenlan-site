@@ -136,11 +136,12 @@ Muse 確認 `mod.default ?? mod` 在 Node 22／24 的 CommonJS 與未來 ESM 載
 footer 在淺色與深色主題各 18 組（3 頁 × 320–1280px，選單展開）全數通過。
 深色另檢查 `data-theme="dark"`、只顯示深色 ToolPilot 徽章、選單文字對比 6.91:1。
 
-**限制**：兩次審查都要求唯讀，但**都未強制**，實際模式是 `default`。
-第二次在同一個 adapter session 上 `set-mode readOnly`，acpx 0.14.0 也記錄了
-`desired_mode_id: readOnly`，但下一個 acpx 行程 `session/load` 後只重播
-`reasoningEffort`，沒有重送模式。（第一次當時歸因於 session 重建，那是另一個現象，
-根因同樣是模式不會跨行程保留。）兩次都只用了 read 與 search 工具，工作樹確認無非預期變更。
+**唯讀是否生效**（以寫入測試確認，更正先前「都未強制」的說法）：acpx 0.14.0
+只在設定模式後、第一次提問建立 session 時送出 `session/set_mode`；之後重新載入
+session 不會重送。輸出裡的 `currentModeId` 不論是否生效都顯示 `default`，不能拿來判斷。
+對照 session 紀錄：第一次分支審查有送出 `session/set_mode(readOnly)`，**唯讀有生效**；
+它的 closure check 與第二次審查**沒有生效**。三次都只用了 read 與 search 工具，
+工作樹確認無非預期變更。
 
 ## 流量診斷：技術不是瓶頸
 
