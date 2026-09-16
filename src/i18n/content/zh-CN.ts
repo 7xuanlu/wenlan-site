@@ -17,7 +17,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "ca85d10076dbba67cbcf437cd3d1e15c78dbcaa1b34bb8b400880723c8b685f0",
+    sourceHash: "32becfd71ae12dcb2e80caf422130ba189c4a4d21cd429d7b3379a24a9237a5c",
     content: {
       seo: {
         title: "Wenlan 文澜官网 | AI 工作的 LLM wiki",
@@ -531,9 +531,9 @@ export const zhCNContent = {
           worksWithNote: "可读取 Obsidian 笔记，保留原文。",
         },
         pains: {
-          "title": "选择适合你的知识工作流。",
-          "intro": "不只比较功能：看看平常在哪里工作、哪些整理可以交出去、哪些决定仍由你做。",
-          "scopeNote": "Wenlan 也是 LLM Wiki 的一种实现；不同方式可以搭配使用。",
+          "title": "选你的知识工作流。",
+          "intro": "不只比功能：看你在哪工作、什么交得出去、什么自己决定。",
+          "scopeNote": "Wenlan 也是 LLM Wiki 实现，可搭配使用。",
           "dimensions": [
             "平常怎么用？",
             "哪些整理会自动做？",
@@ -541,7 +541,7 @@ export const zhCNContent = {
           ],
           "detailsLabel": "工作方式与来源",
           "helpLabel": "更多背景",
-          "accessNote": "Wenlan 需要先连接来源和模型，再建立首批页面。之后可使用桌面 App，也可继续使用 plugin／CLI 与本地 daemon。",
+          "accessNote": "先连来源与模型、建好首批 Pages，再用桌面 App，或 plugin／CLI＋本地 daemon。",
           "generations": [
             {
               "id": "wiki-graveyard",

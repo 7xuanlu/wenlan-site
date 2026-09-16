@@ -536,9 +536,9 @@ export const enContent = {
           worksWithNote: "Read from your Obsidian vault without changing your notes.",
         },
         pains: {
-          "title": "Choose the knowledge workflow that fits.",
-          "intro": "Compare more than features: see where you work day to day, what you can hand off, and which decisions remain yours.",
-          "scopeNote": "Wenlan is also an LLM Wiki implementation. These approaches can work together.",
+          "title": "Choose your knowledge workflow.",
+          "intro": "Beyond features: where you work, what you hand off, what stays yours.",
+          "scopeNote": "Wenlan is one LLM Wiki implementation; workflows can mix.",
           "dimensions": [
             "How do you use it day to day?",
             "What upkeep happens automatically?",
@@ -546,7 +546,7 @@ export const enContent = {
           ],
           "detailsLabel": "How it works & sources",
           "helpLabel": "More background",
-          "accessNote": "Wenlan first needs connected sources and a model, then an initial set of Pages. After that, use the desktop App, or continue with the plugin / CLI and local daemon.",
+          "accessNote": "Connect sources and a model, seed your first Pages — then the desktop App, or plugin / CLI with the local daemon.",
           "generations": [
             {
               "id": "wiki-graveyard",

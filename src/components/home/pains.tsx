@@ -88,11 +88,7 @@ export function PainsSection({ copy, locale }: { readonly copy: PainsCopy; reado
       <div className="mx-auto max-w-6xl">
         <div className="max-w-4xl">
           <h2 className="font-serif text-3xl font-medium tracking-tight text-balance sm:text-5xl">
-            {copy.title.split(/(知識工作流程|知识工作流)/).map((part, index) =>
-              /^(知識工作流程|知识工作流)$/.test(part)
-                ? <span key={index} className="inline-block">{part}</span>
-                : part,
-            )}
+            {copy.title}
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-7 text-[var(--o-text-secondary)]">{copy.intro}</p>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-[var(--o-text-secondary)]">{copy.accessNote}</p>
