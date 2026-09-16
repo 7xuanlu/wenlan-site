@@ -2228,6 +2228,29 @@ test("sitemap includes localized core and Mandarin acquisition routes", async ()
     new Date(zhTWLLMWiki.lastModified).toISOString().slice(0, 10),
     "2026-09-16",
   );
+
+  // Localized hubs date from what exists in their own locale, not from the
+  // English aggregate, so English-only edits do not restamp them.
+  const lastmodByUrl = new Map(
+    entries.map((entry) => [entry.url, new Date(entry.lastModified).getTime()]),
+  );
+  for (const locale of ["zh-TW", "zh-CN"]) {
+    assert.equal(
+      lastmodByUrl.get(routing.canonicalUrl(locale, "/docs")),
+      lastmodByUrl.get(routing.canonicalUrl(locale, "/docs/get-started")),
+      `${locale} /docs`,
+    );
+    const localizedArticleDates = routing.TRANSLATED_LEARN_PATHS
+      .filter((pathname) =>
+        routing.translatedLocalesForLearnPath(pathname).includes(locale),
+      )
+      .map((pathname) => lastmodByUrl.get(routing.canonicalUrl(locale, pathname)));
+    assert.equal(
+      lastmodByUrl.get(routing.canonicalUrl(locale, "/learn")),
+      Math.max(...localizedArticleDates),
+      `${locale} /learn`,
+    );
+  }
   assert.equal(urls.has("https://wenlan.app/zh-TW/docs/daily-workflow"), false);
   assert.equal(urls.has("https://wenlan.app/zh-CN/docs/daily-workflow"), false);
 });

@@ -87,6 +87,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return localizedDates.length > 0 ? maxDate(localizedDates) : latestArticle;
   }
 
+  // A localized docs index links out to English-only docs, so an edit to one of
+  // them does not change it; get-started is the one doc translated with it.
+  function latestDocFor(locale: Locale): Date {
+    return locale === DEFAULT_LOCALE
+      ? latestDoc
+      : new Date(GET_STARTED_UPDATED_AT);
+  }
+
   function latestSiteUpdateFor(locale: Locale): Date {
     if (locale === DEFAULT_LOCALE) return latestSiteUpdate;
 
@@ -116,7 +124,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       pathname: "/docs",
-      lastModified: latestDoc,
+      lastModified: latestDocFor,
       changeFrequency: "weekly",
       priority: 0.9,
     },
