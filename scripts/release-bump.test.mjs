@@ -144,7 +144,7 @@ test("prose plan covers every mechanical surface", () => {
   assert.ok(files.has("src/i18n/content/zh-TW.ts"));
   assert.ok(files.has("src/app/(en)/docs/docs.ts"));
   assert.ok(files.has("src/app/(en)/about/opengraph-image.tsx"));
-  assert.ok(files.has("src/app/sitemap-entries.ts"));
+  assert.ok(files.has("src/app/sitemap.ts"));
   assert.ok(!files.has("scripts/seo-github-fetch.test.mjs"));
   const quickAnswer = rules.find((rule) =>
     rule.find.includes("dated 2026-08-01"),

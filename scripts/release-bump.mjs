@@ -18,7 +18,7 @@ const SITE_FILES = {
   ],
   docs: "src/app/(en)/docs/docs.ts",
   aboutOg: "src/app/(en)/about/opengraph-image.tsx",
-  sitemap: "src/app/sitemap-entries.ts",
+  sitemap: "src/app/sitemap.ts",
 };
 
 const GH_REPOSITORY = "7xuanlu/wenlan";

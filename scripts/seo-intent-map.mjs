@@ -10,7 +10,7 @@ import {
   articleUrl,
   SITE_URL,
 } from "../src/app/(en)/learn/articles.ts";
-import * as sitemapModule from "../src/app/sitemap-entries.ts";
+import * as sitemapModule from "../src/app/sitemap.ts";
 import { getCoreContent } from "../src/i18n/content/index.ts";
 import {
   getLocalizedLearnArticles,
