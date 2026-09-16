@@ -43,6 +43,22 @@ export function hashEnglishContentUnit(content: unknown): string {
   return createHash("sha256").update(payload).digest("hex");
 }
 
+// Learn articles carry their own publication metadata. Drift detection is about
+// the English prose a translator worked from, so identity and dates are
+// excluded: a date bump alone must not look like stale translation, and a
+// changed sentence or link must.
+export function hashEnglishLearnArticle(article: unknown): string {
+  const { slug, publishedAt, updatedAt, ...translatable } = article as Record<
+    string,
+    unknown
+  >;
+  void slug;
+  void publishedAt;
+  void updatedAt;
+
+  return hashEnglishContentUnit(translatable);
+}
+
 function compareLeaves(left: LeafString, right: LeafString): number {
   return left.path.localeCompare(right.path);
 }

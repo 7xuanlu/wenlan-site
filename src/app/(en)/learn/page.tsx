@@ -9,6 +9,7 @@ import {
   SITE_URL,
 } from "./articles";
 import { ArticleHalo, MemoryIndex } from "./article-visuals";
+import { LOCALE_CONFIG } from "@/i18n/locales";
 import { alternateUrls } from "@/i18n/routing";
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export const metadata: Metadata = {
     type: "website",
     url: `${SITE_URL}/learn`,
     siteName: "Wenlan",
+    locale: LOCALE_CONFIG.en.openGraphLocale,
   },
   twitter: {
     card: "summary_large_image",

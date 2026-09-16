@@ -40,6 +40,7 @@ async function loadI18nModules() {
     import("../src/i18n/protected-tokens.ts"),
     import("../src/i18n/content/index.ts"),
     import("../src/i18n/metadata.ts"),
+    import("../src/i18n/learn-article-source-hashes.ts"),
   ]).then(
     ([
       locales,
@@ -50,6 +51,7 @@ async function loadI18nModules() {
       protectedTokens,
       content,
       metadata,
+      learnArticleSourceHashes,
     ]) => ({
       locales,
       routingConfig,
@@ -59,6 +61,7 @@ async function loadI18nModules() {
       protectedTokens,
       content,
       metadata,
+      learnArticleSourceHashes,
     }),
   );
 
@@ -467,6 +470,7 @@ test("localized core page wrappers and shared page modules exist", async () => {
     "src/app/[locale]/docs/get-started/page.tsx",
     "src/app/[locale]/links/page.tsx",
     "src/app/[locale]/not-found.tsx",
+    "src/app/[locale]/not-found-content.tsx",
   ]) {
     await assertFileExists(path);
   }
@@ -2847,12 +2851,35 @@ test("localized core wrappers reject unsupported and English locale params throu
     assert.match(source, /await\s+params/, path);
   }
 
+  const localizedNotFoundContentSource = await readFile(
+    resolve(repoRoot, "src/app/[locale]/not-found-content.tsx"),
+    "utf8",
+  );
+  assert.match(
+    localizedNotFoundContentSource,
+    /useParams/,
+    "src/app/[locale]/not-found-content.tsx",
+  );
+  assert.match(
+    localizedNotFoundContentSource,
+    /TRANSLATED_LOCALES/,
+    "src/app/[locale]/not-found-content.tsx",
+  );
+
+  // The localized 404 must not inherit the layout's indexable home metadata.
   const localizedNotFoundSource = await readFile(
     resolve(repoRoot, "src/app/[locale]/not-found.tsx"),
     "utf8",
   );
-  assert.match(localizedNotFoundSource, /useParams/, "src/app/[locale]/not-found.tsx");
-  assert.match(localizedNotFoundSource, /TRANSLATED_LOCALES/, "src/app/[locale]/not-found.tsx");
+  assert.doesNotMatch(
+    localizedNotFoundSource,
+    /"use client"/,
+    "src/app/[locale]/not-found.tsx must stay a server component to export metadata",
+  );
+  assert.match(localizedNotFoundSource, /export const metadata/, "src/app/[locale]/not-found.tsx");
+  assert.match(localizedNotFoundSource, /index:\s*false/, "src/app/[locale]/not-found.tsx");
+  assert.match(localizedNotFoundSource, /follow:\s*false/, "src/app/[locale]/not-found.tsx");
+  assert.match(localizedNotFoundSource, /canonical:\s*null/, "src/app/[locale]/not-found.tsx");
 });
 
 test("hashing normalizes whitespace, sorts leaves, and detects English content drift", async () => {
@@ -2913,6 +2940,54 @@ test("Chinese dictionaries store fixed source hashes equal to current English co
     const source = await readFile(resolve(repoRoot, path), "utf8");
     assert.doesNotMatch(source, /enContent|hashEnglishContentUnit|node:crypto/, path);
   }
+});
+
+test("translated Learn articles record the English source hash they were made from", async () => {
+  const { hash, learnArticleSourceHashes } = await loadI18nModules();
+  const { articles } = await import("../src/app/(en)/learn/articles.ts");
+  const { TRANSLATED_LEARN_SLUGS } = await import("../src/i18n/learn-availability.ts");
+
+  const stored = learnArticleSourceHashes.LEARN_ARTICLE_SOURCE_HASHES;
+  const englishBySlug = new Map(articles.map((article) => [article.slug, article]));
+
+  assert.deepEqual(
+    Object.keys(stored).sort(),
+    [...TRANSLATED_LEARN_SLUGS].sort(),
+    "every translated Learn slug needs exactly one source hash, and no extras",
+  );
+
+  for (const [slug, storedHash] of Object.entries(stored)) {
+    assert.match(storedHash, /^[a-f0-9]{64}$/, `${slug}.sourceHash`);
+
+    const english = englishBySlug.get(slug);
+    assert.ok(english, `${slug} has no English source article`);
+    assert.equal(
+      storedHash,
+      hash.hashEnglishLearnArticle(english),
+      `English article "${slug}" changed since its translations were reviewed. ` +
+        "Update the zh-TW and zh-CN copies in src/i18n/learn-articles.ts, then " +
+        "refresh the hash in src/i18n/learn-article-source-hashes.ts.",
+    );
+  }
+});
+
+test("Learn article hashing ignores dates but not prose", async () => {
+  const { hash } = await loadI18nModules();
+
+  const base = { slug: "a", publishedAt: "2026-01-01", updatedAt: "2026-01-01", title: "T" };
+  const dateBumped = { ...base, updatedAt: "2026-06-01" };
+  const proseChanged = { ...base, title: "T2" };
+
+  assert.equal(
+    hash.hashEnglishLearnArticle(base),
+    hash.hashEnglishLearnArticle(dateBumped),
+    "a date bump alone is not translation drift",
+  );
+  assert.notEqual(
+    hash.hashEnglishLearnArticle(base),
+    hash.hashEnglishLearnArticle(proseChanged),
+    "changed prose is translation drift",
+  );
 });
 
 test("translated content dictionaries preserve protected tokens from English content", async () => {

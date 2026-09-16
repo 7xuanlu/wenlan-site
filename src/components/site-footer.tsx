@@ -1,4 +1,5 @@
 import { BrandWordmark } from "@/components/brand-wordmark";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { getCoreContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
@@ -66,6 +67,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
             </span>
           </div>
           <div className="flex items-center gap-5">
+            <LanguageSwitcher locale={locale} placement="up" />
             <a
               href="https://www.toolpilot.ai"
               target="_blank"

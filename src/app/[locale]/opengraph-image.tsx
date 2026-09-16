@@ -3,7 +3,9 @@ import type { TranslatedLocale } from "@/i18n/locales";
 import { resolveLocalizedRouteLocale } from "@/i18n/resolve-locale";
 import { OgTemplate, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/og-template";
 
-export const alt = "Wenlan — 你與 AI 共用的 Living Wiki";
+// One static alt serves both zh-TW and zh-CN, so it cannot be Traditional
+// Chinese. Every other OG alt on the site is English too.
+export const alt = "Wenlan. Your AI-native knowledge base.";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

@@ -12,6 +12,7 @@ import {
 } from "../articles";
 import { ArticleHalo, MemoryIndex } from "../article-visuals";
 import { ShareArticle } from "@/components/learn/share-article";
+import { LOCALE_CONFIG } from "@/i18n/locales";
 import { alternateUrls, isTranslatedLearnPath } from "@/i18n/routing";
 import { TrackedLink } from "@/components/tracked-link";
 import { getScenarioPacket } from "@/lib/scenario-examples";
@@ -69,6 +70,7 @@ export async function generateMetadata({
       type: "article",
       url: articleUrl(article.slug),
       siteName: "Wenlan",
+      locale: LOCALE_CONFIG.en.openGraphLocale,
       publishedTime: article.publishedAt ?? article.updatedAt,
       modifiedTime: article.updatedAt,
       authors: [DEFAULT_AUTHOR_URL],
