@@ -83,10 +83,12 @@ export function LanguageSwitcher({
       </summary>
 
       <div
-        className={`absolute right-0 z-50 w-36 rounded-md border border-[var(--o-border)] bg-[var(--o-bg-alt)] p-1 shadow-[var(--o-shadow-media)] ${
+        className={`absolute z-50 w-36 rounded-md border border-[var(--o-border)] bg-[var(--o-bg-alt)] p-1 shadow-[var(--o-shadow-media)] ${
           placement === "up"
-            ? "bottom-[calc(100%+0.375rem)]"
-            : "top-[calc(100%+0.375rem)]"
+            ? // The footer row stacks on phones, leaving the switcher at the
+              // left edge, where a right-anchored menu would open off-screen.
+              "bottom-[calc(100%+0.375rem)] left-0 sm:left-auto sm:right-0"
+            : "top-[calc(100%+0.375rem)] right-0"
         }`}
       >
         {SUPPORTED_LOCALES.map((targetLocale) => {
