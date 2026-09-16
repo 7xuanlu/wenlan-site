@@ -41,6 +41,7 @@ Google API、chromestatus 被網路政策擋掉，無法跑 `seo:gsc:fetch`，
 | `3eafbb5` | 中文 `/docs` 的 sitemap lastmod 改依 get-started，不再跟英文 docs 走（Muse 審查發現） |
 | `5d31945` | CI 改為淺層 checkout 加 tag 抓取，不再拉完整歷史（Muse 審查發現） |
 | `6895b7a` | 手機寬度下 footer 列改為換行置中，byline 不再斷成兩行（PR 截圖時發現，Muse 審查之後） |
+| `2c4cdb3` | release-bump 的雜湊子行程在 Node 22 讀不到 TypeScript 模組的具名匯出，改讀 `default`（CI 首次跑 `test:seo` 時發現，main 上潛伏已久） |
 
 ### 為什麼撤回 XSL（`1ba2491` → `009dc01`）
 
@@ -97,6 +98,7 @@ i18n 稽核七項已於 `fdcf06d` 全數修正，最重要兩項：
 `test:i18n` 86/86、`lint`、`build`、`seo:technical:built` 通過；
 `i18n:technical:built` 對 `next start` 通過（39 條 200、4 條 404）；
 建置後的 sitemap 顯示 `/docs` 為 09-10，中文 `/docs` 為 09-09。
+PR #206 的 CI（Node 22）全部通過，`test:seo` 371/371。
 注意該檢查預設打 `127.0.0.1:3000`，本機該埠被其他服務佔用時會產生大量假 404，
 請用 `I18N_CHECK_BASE_URL` 指定。
 
