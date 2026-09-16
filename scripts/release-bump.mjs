@@ -304,11 +304,14 @@ export function rewriteReleasesFile(source, { oldVersion, oldPublishedAt, releas
 
 /** Computes English content-unit hashes via tsx (content modules are TypeScript). */
 export async function computeEnglishHashes(siteRoot) {
+  // tsx loads these as CommonJS. Node 22 cannot always detect their named
+  // exports from an eval import, but module.exports is always on default.
   const evalScript = `
-const [{ enContent }, { hashEnglishContentUnit }] = await Promise.all([
+const exportsOf = (mod) => mod.default ?? mod;
+const [{ enContent }, { hashEnglishContentUnit }] = (await Promise.all([
   import(process.env.WN_SITE_ROOT + "/src/i18n/content/index.ts"),
   import(process.env.WN_SITE_ROOT + "/src/i18n/hash.ts"),
-]);
+])).map(exportsOf);
 const out = {};
 for (const key of Object.keys(enContent)) {
   out[key] = hashEnglishContentUnit(enContent[key].content);
