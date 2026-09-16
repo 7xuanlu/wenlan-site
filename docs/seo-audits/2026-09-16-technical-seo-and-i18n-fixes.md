@@ -98,9 +98,10 @@ i18n 稽核七項已於 `fdcf06d` 全數修正，最重要兩項：
 `test:i18n` 86/86、`lint`、`build`、`seo:technical:built` 通過；
 `i18n:technical:built` 對 `next start` 通過（39 條 200、4 條 404）；
 建置後的 sitemap 顯示 `/docs` 為 09-10，中文 `/docs` 為 09-09。
-PR #206 的 CI（Node 22）全部通過，`test:seo` 371/371。
-注意該檢查預設打 `127.0.0.1:3000`，本機該埠被其他服務佔用時會產生大量假 404，
+注意 `i18n:technical:built` 預設打 `127.0.0.1:3000`，本機該埠被其他服務佔用時會產生大量假 404，
 請用 `I18N_CHECK_BASE_URL` 指定。
+
+PR #206 的 CI（Node 22）全部通過，`test:seo` 371/371。
 
 ### Muse 審查（muse-spark-1.3-contributor，effort high）
 
