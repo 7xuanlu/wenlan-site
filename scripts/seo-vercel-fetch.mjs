@@ -12,6 +12,9 @@ const DEFAULT_PROJECT_ID = "prj_nqR9IMJGE0Sw4lpFUdMtc1pCo4nb";
 const DEFAULT_PROJECT_NAME = "wenlan-site";
 const DEFAULT_SCOPE = "7xuanlus-projects";
 const DAY_MS = 24 * 60 * 60 * 1000;
+const COUNTRY_DETAIL_MIN_VISITORS = 20;
+const COUNTRY_DETAIL_MAX_COUNTRIES = 10;
+const COUNTRY_DEVICE_TYPE_LIMIT = "10";
 
 function parseIsoDate(value, label) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value ?? "")) {
@@ -61,7 +64,7 @@ function parseArgs(argv) {
   };
 }
 
-function endpoint(pathname, args, by = null, filter = null) {
+function endpoint(pathname, args, by = null, filter = null, limit = "100") {
   const query = new URLSearchParams({
     projectId: args.projectId,
     since: `${args.startDate}T00:00:00.000Z`,
@@ -69,7 +72,7 @@ function endpoint(pathname, args, by = null, filter = null) {
   });
   if (by) {
     query.set("by", by);
-    query.set("limit", "100");
+    query.set("limit", String(limit));
   }
   if (filter) query.set("filter", filter);
   return `${pathname}?${query.toString()}`;
@@ -163,20 +166,68 @@ async function fetchSourcePageRows(args, referrers) {
   );
 }
 
+async function fetchCountryDetailRows(args, countries) {
+  const jobs = countries.flatMap((country) => [
+    { country, dimension: "referrerHostname", limit: "100" },
+    { country, dimension: "deviceType", limit: COUNTRY_DEVICE_TYPE_LIMIT },
+  ]);
+  const responses = [];
+  for (let offset = 0; offset < jobs.length; offset += 4) {
+    responses.push(...await Promise.all(
+    jobs.slice(offset, offset + 4).map(async (job) => ({
+      ...job,
+      response: await runVercelApi(
+        args,
+        endpoint(
+          "/v1/query/web-analytics/visits/aggregate",
+          args,
+          job.dimension,
+          `country eq '${job.country}'`,
+          job.limit,
+        ),
+      ),
+    })),
+    ));
+  }
+
+  const detail = new Map();
+  for (const { country, dimension, response } of responses) {
+    const entry = detail.get(country) ?? { direct: 0, desktop: 0 };
+    if (dimension === "referrerHostname") {
+      const directRow = aggregateRows(response, "referrerHostname").find(
+        (row) => row.label === "",
+      );
+      entry.direct = directRow ? directRow.visitors : 0;
+    } else {
+      const desktopRow = aggregateRows(response, "deviceType").find(
+        (row) => row.label.toLowerCase() === "desktop",
+      );
+      entry.desktop = desktopRow ? desktopRow.visitors : 0;
+    }
+    detail.set(country, entry);
+  }
+  return detail;
+}
+
 async function run() {
   const args = parseArgs(process.argv.slice(2));
-  const [countResponse, pageResponse, referrerResponse, customEvents] = await Promise.all([
-    runVercelApi(args, endpoint("/v1/query/web-analytics/visits/count", args)),
-    runVercelApi(
-      args,
-      endpoint("/v1/query/web-analytics/visits/aggregate", args, "requestPath"),
-    ),
-    runVercelApi(
-      args,
-      endpoint("/v1/query/web-analytics/visits/aggregate", args, "referrerHostname"),
-    ),
-    fetchCustomEventStatus(args),
-  ]);
+  const [countResponse, pageResponse, referrerResponse, countryResponse, customEvents] =
+    await Promise.all([
+      runVercelApi(args, endpoint("/v1/query/web-analytics/visits/count", args)),
+      runVercelApi(
+        args,
+        endpoint("/v1/query/web-analytics/visits/aggregate", args, "requestPath"),
+      ),
+      runVercelApi(
+        args,
+        endpoint("/v1/query/web-analytics/visits/aggregate", args, "referrerHostname"),
+      ),
+      runVercelApi(
+        args,
+        endpoint("/v1/query/web-analytics/visits/aggregate", args, "country"),
+      ),
+      fetchCustomEventStatus(args),
+    ]);
   const totals = {
     visitors: metric(countResponse.data?.visitors, "total visitors"),
     pageviews: metric(countResponse.data?.pageviews, "total pageviews"),
@@ -184,6 +235,23 @@ async function run() {
   const pages = aggregateRows(pageResponse, "requestPath");
   const referrers = aggregateRows(referrerResponse, "referrerHostname");
   const sourcePages = await fetchSourcePageRows(args, sourceReferrers(referrers));
+  const countries = aggregateRows(countryResponse, "country");
+  const qualifyingCountries = countries
+    .filter((row) => row.visitors >= COUNTRY_DETAIL_MIN_VISITORS)
+    .sort((a, b) => b.visitors - a.visitors)
+    .slice(0, COUNTRY_DETAIL_MAX_COUNTRIES)
+    .map((row) => row.label);
+  const countryDetail = await fetchCountryDetailRows(args, qualifyingCountries);
+  const countryRows = countries.map((row) => {
+    const detail = countryDetail.get(row.label);
+    return {
+      country: row.label || "(unknown)",
+      visitors: row.visitors,
+      pageviews: row.pageviews,
+      directVisitors: detail ? detail.direct : null,
+      desktopVisitors: detail ? detail.desktop : null,
+    };
+  });
 
   await mkdir(args.outputDir, { recursive: true });
   await Promise.all([
@@ -217,6 +285,20 @@ async function run() {
       "utf8",
     ),
     writeFile(
+      join(args.outputDir, "vercel-countries.csv"),
+      rowsToCsv(
+        "Country,Visitors,Pageviews,DirectVisitors,DesktopVisitors",
+        countryRows.map((row) => [
+          row.country,
+          row.visitors,
+          row.pageviews,
+          row.directVisitors === null ? "" : row.directVisitors,
+          row.desktopVisitors === null ? "" : row.desktopVisitors,
+        ]),
+      ),
+      "utf8",
+    ),
+    writeFile(
       join(args.outputDir, "vercel-metadata.json"),
       `${JSON.stringify({
         source: "Vercel Web Analytics API",
@@ -231,6 +313,12 @@ async function run() {
           referrers: sourceReferrers(referrers),
           coverage: "Requested top 100 referrers and top 100 paths per observed hostname; the API may also return an Others aggregate. Row visitors are not additive unique people.",
           rows: sourcePages.length,
+        },
+        countryBreakdown: {
+          status: "available",
+          rows: countryRows.length,
+          detailMinVisitors: COUNTRY_DETAIL_MIN_VISITORS,
+          detailMaxCountries: COUNTRY_DETAIL_MAX_COUNTRIES,
         },
         customEvents,
         fetchedAt: new Date().toISOString(),
@@ -247,6 +335,8 @@ async function run() {
     pageRows: pages.length,
     referrerRows: referrers.length,
     sourcePageRows: sourcePages.length,
+    countriesPath: join(args.outputDir, "vercel-countries.csv"),
+    countryRows: countryRows.length,
     customEvents,
   }, null, 2));
 }

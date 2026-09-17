@@ -3952,6 +3952,172 @@ test("seo weekly generator rejects source-page CSVs without a matching authentic
   }
 });
 
+test("seo weekly generator flags low-engagement direct countries in the traffic quality split", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-seo-vercel-country-flag-"));
+  try {
+    const countriesPath = join(outputRoot, "vercel-countries.csv");
+    const metadataPath = join(outputRoot, "vercel-metadata.json");
+    const outputPath = join(outputRoot, "2026-09-17-weekly-seo.md");
+    await writeFile(
+      countriesPath,
+      [
+        "Country,Visitors,Pageviews,DirectVisitors,DesktopVisitors",
+        "CN,201,201,201,195",
+        "US,50,120,10,40",
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+    await writeFile(
+      metadataPath,
+      JSON.stringify({
+        source: "Vercel Web Analytics API",
+        startDate: "2026-08-19",
+        endDate: "2026-09-15",
+        totals: { visitors: 300, pageviews: 500 },
+        countryBreakdown: {
+          status: "available",
+          rows: 2,
+          detailMinVisitors: 20,
+          detailMaxCountries: 10,
+        },
+      }),
+      "utf8",
+    );
+
+    await execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly.mjs"),
+        "--",
+        "--queries",
+        resolve(fixtureRoot, "gsc-queries.csv"),
+        "--pages",
+        resolve(fixtureRoot, "gsc-pages.csv"),
+        "--vercel-countries",
+        countriesPath,
+        "--vercel-metadata",
+        metadataPath,
+        "--date",
+        "2026-09-17",
+        "--output",
+        outputPath,
+      ],
+      { cwd: repoRoot },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+    assert.match(report, /### Traffic quality split/);
+    assert.match(report, /\| CN \| 201 \| 201 \| 1\.00 \| 100\.00% \| 97\.01% \| yes \|/);
+    assert.match(report, /\| US \| 50 \| 120 \| 2\.40 \| 20\.00% \| 80\.00% \| no \|/);
+    assert.match(
+      report,
+      /Flagged visitors \(low-engagement direct, suspected automated\): 201/,
+    );
+    assert.match(report, /Visitors outside flagged segment: 99/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly generator reports the traffic quality split as not captured when countries CSV is absent", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-seo-vercel-country-uncaptured-"));
+  try {
+    const metadataPath = join(outputRoot, "vercel-metadata.json");
+    const outputPath = join(outputRoot, "2026-09-17-weekly-seo.md");
+    await writeFile(
+      metadataPath,
+      JSON.stringify({
+        source: "Vercel Web Analytics API",
+        startDate: "2026-08-19",
+        endDate: "2026-09-15",
+        totals: { visitors: 1194, pageviews: 1400 },
+      }),
+      "utf8",
+    );
+
+    await execFileAsync(
+      process.execPath,
+      [
+        resolve(repoRoot, "scripts/seo-weekly.mjs"),
+        "--",
+        "--queries",
+        resolve(fixtureRoot, "gsc-queries.csv"),
+        "--pages",
+        resolve(fixtureRoot, "gsc-pages.csv"),
+        "--vercel-metadata",
+        metadataPath,
+        "--date",
+        "2026-09-17",
+        "--output",
+        outputPath,
+      ],
+      { cwd: repoRoot },
+    );
+
+    const report = await readFile(outputPath, "utf8");
+    assert.match(report, /### Traffic quality split/);
+    assert.match(report, /Not captured for this report \(unknown, not zero\)\./);
+    assert.doesNotMatch(report, /Flagged visitors/);
+    assert.doesNotMatch(report, /Visitors outside flagged segment/);
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
+test("seo weekly generator rejects a country row where DirectVisitors exceeds Visitors", async () => {
+  const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-seo-vercel-country-invalid-"));
+  try {
+    const countriesPath = join(outputRoot, "vercel-countries.csv");
+    const metadataPath = join(outputRoot, "vercel-metadata.json");
+    const outputPath = join(outputRoot, "weekly-seo.md");
+    await writeFile(
+      countriesPath,
+      ["Country,Visitors,Pageviews,DirectVisitors,DesktopVisitors", "CN,10,10,20,5", ""].join(
+        "\n",
+      ),
+      "utf8",
+    );
+    await writeFile(
+      metadataPath,
+      JSON.stringify({
+        source: "Vercel Web Analytics API",
+        startDate: "2026-08-19",
+        endDate: "2026-09-15",
+        totals: { visitors: 10, pageviews: 10 },
+        countryBreakdown: { status: "available", rows: 1 },
+      }),
+      "utf8",
+    );
+
+    await assert.rejects(
+      execFileAsync(
+        process.execPath,
+        [
+          resolve(repoRoot, "scripts/seo-weekly.mjs"),
+          "--",
+          "--queries",
+          resolve(fixtureRoot, "gsc-queries.csv"),
+          "--pages",
+          resolve(fixtureRoot, "gsc-pages.csv"),
+          "--vercel-countries",
+          countriesPath,
+          "--vercel-metadata",
+          metadataPath,
+          "--date",
+          "2026-09-17",
+          "--output",
+          outputPath,
+        ],
+        { cwd: repoRoot },
+      ),
+      /DirectVisitors cannot exceed Visitors/,
+    );
+  } finally {
+    await rm(outputRoot, { recursive: true, force: true });
+  }
+});
+
 test("seo weekly generator reports zero AI and Reddit referrals from Umami exports", async () => {
   const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-umami-zero-"));
   try {

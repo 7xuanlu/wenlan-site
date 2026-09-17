@@ -179,7 +179,11 @@ const ACTION_PRIORITY = {
 
 const MIN_QUERY_ACTION_IMPRESSIONS = 3;
 const MIN_PAGE_INTERNAL_LINK_IMPRESSIONS = 20;
-const REPORT_SCHEMA_VERSION = 6;
+const TRAFFIC_QUALITY_MIN_VISITORS = 20;
+const TRAFFIC_QUALITY_MIN_DIRECT_SHARE = 0.95;
+const TRAFFIC_QUALITY_MAX_PAGEVIEWS_PER_VISITOR = 1.1;
+const TRAFFIC_QUALITY_MIN_DESKTOP_SHARE = 0.9;
+const REPORT_SCHEMA_VERSION = 7;
 const EXPECTED_GSC_SITE_URL = "sc-domain:wenlan.app";
 const ACQUISITION_PRIORITY_GROUPS = new Set([
   "AI knowledge base / wiki",
@@ -291,6 +295,9 @@ function parseArgs(argv) {
       : null,
     vercelSourcePagesPath: args["vercel-source-pages"]
       ? resolve(process.cwd(), args["vercel-source-pages"])
+      : null,
+    vercelCountriesPath: args["vercel-countries"]
+      ? resolve(process.cwd(), args["vercel-countries"])
       : null,
     vercelMetadataPath: args["vercel-metadata"]
       ? resolve(process.cwd(), args["vercel-metadata"])
@@ -896,7 +903,110 @@ function summarizeUmami({ pageRecords, referrerRecords, eventRecords }) {
   };
 }
 
-function summarizeVercel({ pageRecords, referrerRecords, sourcePageRecords, metadata }) {
+function parseVercelCountryMetric(value, label) {
+  const text = String(value ?? "").trim();
+  const normalized = text.replace(/[ ,]/g, "");
+  if (!/^(?:\d+|\d*\.\d+)$/.test(normalized)) {
+    throw new Error(`Invalid Vercel country CSV ${label} "${text}"`);
+  }
+  const parsed = Number(normalized);
+  if (!Number.isFinite(parsed) || parsed < 0) {
+    throw new Error(`Invalid Vercel country CSV ${label} "${text}"`);
+  }
+  return parsed;
+}
+
+function parseOptionalVercelCountryMetric(value, label) {
+  const text = String(value ?? "").trim();
+  if (!text) return null;
+  return parseVercelCountryMetric(value, label);
+}
+
+function summarizeCountryQuality(countryRecords, metadata) {
+  const countryBreakdown = metadata?.countryBreakdown;
+  if (countryRecords.length > 0) {
+    if (!countryBreakdown || countryBreakdown.status !== "available") {
+      throw new Error(
+        "Vercel country CSV requires metadata.countryBreakdown.status=available",
+      );
+    }
+    if (
+      !Number.isInteger(countryBreakdown.rows) ||
+      countryBreakdown.rows < 0 ||
+      countryBreakdown.rows !== countryRecords.length
+    ) {
+      throw new Error(
+        "Vercel country metadata row count must match the validated CSV rows",
+      );
+    }
+  } else if (countryBreakdown?.status === "available") {
+    if (!Number.isInteger(countryBreakdown.rows) || countryBreakdown.rows !== 0) {
+      throw new Error(
+        "Vercel country metadata reports rows without a matching CSV",
+      );
+    }
+  }
+
+  if (countryRecords.length === 0) {
+    return { captured: false, rows: [], evaluated: [], flaggedVisitors: 0 };
+  }
+
+  const rows = countryRecords.map((row, index) => {
+    const country = String(row.country ?? "").trim();
+    if (!country) {
+      throw new Error(`Vercel country CSV row ${index + 1} is missing a country`);
+    }
+    const visitors = parseVercelCountryMetric(row.visitors, `row ${index + 1} Visitors`);
+    const pageviews = parseVercelCountryMetric(row.pageviews, `row ${index + 1} Pageviews`);
+    const directVisitors = parseOptionalVercelCountryMetric(
+      row.directvisitors,
+      `row ${index + 1} DirectVisitors`,
+    );
+    const desktopVisitors = parseOptionalVercelCountryMetric(
+      row.desktopvisitors,
+      `row ${index + 1} DesktopVisitors`,
+    );
+    if (directVisitors !== null && directVisitors > visitors) {
+      throw new Error(
+        `Vercel country CSV row ${index + 1} DirectVisitors cannot exceed Visitors`,
+      );
+    }
+    if (desktopVisitors !== null && desktopVisitors > visitors) {
+      throw new Error(
+        `Vercel country CSV row ${index + 1} DesktopVisitors cannot exceed Visitors`,
+      );
+    }
+    const hasDetail = directVisitors !== null && desktopVisitors !== null;
+    const pageviewsPerVisitor = visitors > 0 ? pageviews / visitors : 0;
+    const directShare = hasDetail && visitors > 0 ? directVisitors / visitors : null;
+    const desktopShare = hasDetail && visitors > 0 ? desktopVisitors / visitors : null;
+    const flagged =
+      hasDetail &&
+      visitors >= TRAFFIC_QUALITY_MIN_VISITORS &&
+      directShare >= TRAFFIC_QUALITY_MIN_DIRECT_SHARE &&
+      pageviewsPerVisitor <= TRAFFIC_QUALITY_MAX_PAGEVIEWS_PER_VISITOR &&
+      desktopShare >= TRAFFIC_QUALITY_MIN_DESKTOP_SHARE;
+    return {
+      country,
+      visitors,
+      pageviews,
+      pageviewsPerVisitor,
+      directShare,
+      desktopShare,
+      hasDetail,
+      flagged,
+    };
+  });
+
+  const evaluated = rows.filter((row) => row.hasDetail);
+  const flaggedVisitors = evaluated
+    .filter((row) => row.flagged)
+    .reduce((sum, row) => sum + row.visitors, 0);
+
+  return { captured: true, rows, evaluated, flaggedVisitors };
+}
+
+function summarizeVercel({ pageRecords, referrerRecords, sourcePageRecords, countryRecords = [], metadata }) {
   if (metadata?.source && metadata.source !== "Vercel Web Analytics API") {
     throw new Error(`Unsupported Vercel Analytics source: ${metadata.source}`);
   }
@@ -991,6 +1101,7 @@ function summarizeVercel({ pageRecords, referrerRecords, sourcePageRecords, meta
   };
   const aiReferrers = referrers.filter((row) => row.channel === "AI referral");
   const redditReferrers = referrers.filter((row) => row.channel === "Reddit");
+  const countryQuality = summarizeCountryQuality(countryRecords, metadata);
 
   return {
     hasData: pages.length > 0 || referrers.length > 0 || Boolean(metadata),
@@ -1013,6 +1124,7 @@ function summarizeVercel({ pageRecords, referrerRecords, sourcePageRecords, meta
     llmsHits: pages
       .filter((row) => isLlmsTarget(row.page))
       .reduce((sum, row) => sum + row.pageviews, 0),
+    countryQuality,
   };
 }
 
@@ -1848,6 +1960,40 @@ function formatCustomEventStatus(customEvents) {
   return `${customEvents.status}: ${customEvents.reason ?? "manual"}`;
 }
 
+function formatPercent(value) {
+  return `${(value * 100).toFixed(2)}%`;
+}
+
+function makeTrafficQualityMarkdown(countryQuality, propertyVisitors) {
+  if (!countryQuality.captured) {
+    return `### Traffic quality split
+
+Not captured for this report (unknown, not zero). Run \`scripts/seo-vercel-fetch.mjs\` to populate \`vercel-countries.csv\` before presenting raw Vercel visitors as human search acquisition.`;
+  }
+
+  const evaluatedRows = countryQuality.evaluated
+    .map(
+      (row) =>
+        `| ${escapePipe(row.country)} | ${row.visitors} | ${row.pageviews} | ${row.pageviewsPerVisitor.toFixed(2)} | ${formatPercent(row.directShare)} | ${formatPercent(row.desktopShare)} | ${row.flagged ? "yes" : "no"} |`,
+    )
+    .join("\n");
+  const flaggedVisitors = countryQuality.flaggedVisitors;
+  const remainingVisitors = Number.isFinite(propertyVisitors)
+    ? propertyVisitors - flaggedVisitors
+    : null;
+
+  return `### Traffic quality split
+
+Heuristic from aggregate referrer/device shape per country (direct-referrer share, pageviews per visitor, desktop share); not user-agent verified. The raw Vercel property visitor total remains the Goal contract unit and is not replaced by this split.
+
+| Country | Visitors | Pageviews | PV/Visitor | Direct % | Desktop % | Flagged |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+${evaluatedRows || "| - | 0 | 0 | 0.00 | 0.00% | 0.00% | no |"}
+
+Flagged visitors (low-engagement direct, suspected automated): ${flaggedVisitors}
+Visitors outside flagged segment: ${remainingVisitors === null ? "manual / unavailable" : remainingVisitors}`;
+}
+
 function makeVercelMarkdown(vercel) {
   const pageRows = vercel.pages
     .slice(0, 12)
@@ -1887,7 +2033,9 @@ These are authenticated Vercel aggregates filtered by one referrer hostname and 
 
 | Source | Page | Visitors | Pageviews |
 | --- | --- | ---: | ---: |
-${sourcePageRows || "| manual / unavailable | - | - | - |"}`;
+${sourcePageRows || "| manual / unavailable | - | - | - |"}
+
+${makeTrafficQualityMarkdown(vercel.countryQuality, vercel.totals?.visitors)}`;
 }
 
 function makeUmamiMarkdown(umami) {
@@ -2401,6 +2549,7 @@ async function run() {
     vercelPageRecords,
     vercelReferrerRecords,
     vercelSourcePageRecords,
+    vercelCountryRecords,
     vercelMetadata,
     githubMetadata,
     resendMetadata,
@@ -2416,6 +2565,7 @@ async function run() {
     readOptionalCsv(args.vercelPagesPath),
     readOptionalCsv(args.vercelReferrersPath),
     readOptionalCsv(args.vercelSourcePagesPath),
+    readOptionalCsv(args.vercelCountriesPath),
     readOptionalJson(args.vercelMetadataPath),
     readOptionalJson(args.githubMetadataPath),
     readOptionalJson(args.resendMetadataPath),
@@ -2443,6 +2593,7 @@ async function run() {
     pageRecords: vercelPageRecords,
     referrerRecords: vercelReferrerRecords,
     sourcePageRecords: vercelSourcePageRecords,
+    countryRecords: vercelCountryRecords,
     metadata: vercelMetadata,
   });
   const github = summarizeGithub(githubMetadata);
