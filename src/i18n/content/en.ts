@@ -536,9 +536,9 @@ export const enContent = {
           worksWithNote: "Read from your Obsidian vault without changing your notes.",
         },
         pains: {
-          "title": "Choose the knowledge workflow that fits.",
-          "intro": "Compare more than features: see where you work day to day, what you can hand off, and which decisions remain yours.",
-          "scopeNote": "Wenlan is also an LLM Wiki implementation. These approaches can work together.",
+          "title": "Choose your knowledge workflow.",
+          "intro": "Beyond features: where you work, what you hand off, what stays yours.",
+          "scopeNote": "Wenlan is one LLM Wiki implementation; workflows can mix.",
           "dimensions": [
             "How do you use it day to day?",
             "What upkeep happens automatically?",
@@ -546,22 +546,22 @@ export const enContent = {
           ],
           "detailsLabel": "How it works & sources",
           "helpLabel": "More background",
-          "accessNote": "Wenlan first needs connected sources and a model, then an initial set of Pages. After that, use the desktop App, or continue with the plugin / CLI and local daemon.",
+          "accessNote": "Connect sources and a model, seed your first Pages — then the desktop App, or plugin / CLI with the local daemon.",
           "generations": [
             {
               "id": "wiki-graveyard",
               "name": "AI + files",
               "eyebrow": "Word · PDF · PPT · Markdown",
-              "summary": "AI handles the files; Wenlan supplies the source tracking, Wiki upkeep, and revision review. Your work leaves more than another answer: a knowledge base maintained for later use.",
+              "summary": "AI handles files; Wenlan adds source tracking, Wiki upkeep, and revision review — so work leaves a maintained knowledge base, not just answers.",
               "profileLabels": [
                 "Work directly with files and answers",
                 "Knowledge upkeep needs additional logic",
                 "File controls; knowledge-review rules are extra"
               ],
               "profile": [
-                "AI reads, answers, and edits. Save outputs for reuse; a maintained, cross-source Wiki needs a separate system.",
-                "Tools can read new versions and retain memory. Tracking changed sources, stale pages, and refreshes requires additional upkeep logic.",
-                "Permissions and diffs control file edits. Automatic refresh versus review of human-edited knowledge pages needs separate rules and checks."
+                "AI reads, answers, and edits; a maintained cross-source Wiki needs a separate system.",
+                "New versions and memory are built in; tracking changed sources and stale pages needs additional logic.",
+                "Permissions and diffs cover files; auto-refresh vs. review of edited pages needs separate rules."
               ],
               "body": "This compares direct AI file work before adding a Wiki-maintenance system, not every AI product. Claude Code has auto memory across sessions; its documentation distinguishes remembered context from enforced controls. hooks can run your own automation. Source-to-page links, stale-page detection, and review routing still require implemented, tested logic; a prompt alone does not supply that system. Wenlan integrates these mechanisms, while generated content still needs evidence and version checking. Direct directory sources support Markdown, text, and text-extractable PDFs; Word and PowerPoint need to be exported to text/Markdown or a text-extractable PDF, and scanned PDFs need external OCR. New topics do not automatically become Wiki pages; background refresh needs a configured, available model.",
               "sources": [
@@ -590,8 +590,8 @@ export const enContent = {
                 ],
                 "profile": [
                   "Documents and saved decisions become a cited Wiki. Retrieve prior conclusions and their evidence from connected AI tools, then continue the work.",
-                  "New decisions can enrich existing pages. After connected files or memory content change, background processing refreshes eligible affected pages.",
-                  "Source files stay unchanged. AI proposes a revision before updating pages you edited; you accept or reject it, with change history available."
+                  "New decisions enrich existing pages; after connected files or memory change, background processing refreshes eligible pages.",
+                  "Source files stay unchanged; AI proposes a revision before updating pages you edited, with change history."
                 ],
                 "emphasis": []
               }
@@ -601,16 +601,16 @@ export const enContent = {
               "name": "LLM Wiki · nashsu",
               "tabLabel": "LLM Wiki",
               "eyebrow": "nashsu/llm_wiki · open-source project",
-              "summary": "Both watch folders and handle more than files. Wenlan also tracks individual knowledge records and the pages that rely on them; LLM Wiki centers upkeep on sources and Wiki pages.",
+              "summary": "Both watch folders. Wenlan tracks individual knowledge records and dependent pages; LLM Wiki centers upkeep on sources and Wiki pages.",
               "profileLabels": [
                 "Work from a desktop Wiki project",
                 "Upkeep works on sources and Wiki pages",
                 "Keep ingest moving; review follow-ups separately"
               ],
               "profile": [
-                "Import documents, ask questions, and save answers in the App. External AI tools can connect through MCP while the App is running.",
-                "Source-file changes or answers saved back to the Wiki can trigger automatic page compilation. Research results are also saved as pages.",
-                "Ingest writes pages first; Review lists follow-ups such as further research or new pages without blocking ingest."
+                "Import documents, ask questions, save answers in the App; external AI connects via MCP while the App is running.",
+                "Source changes or saved answers trigger automatic page compilation; research saves as pages too.",
+                "Ingest writes pages first; Review queues follow-ups without blocking ingest."
               ],
               "body": "This compares nashsu/llm_wiki, not Karpathy’s method or the broader LLM Wiki category. It supports citations, Review, MCP, and skills. With an ingest model configured, choosing Save to Wiki can automatically compile a saved answer. DeepResearch writes a cited query page without re-entering source ingest. Deleting a source also cleans up affected pages and links. Its Business template includes status and supersedes on decision pages. Wenlan instead keeps decisions as independent records: editing, deleting, or accepting a replacement revision flags the pages citing that record; accepting the revision also links their evidence to the replacement. New records can enrich matching existing pages. Background refresh needs an available model and eligible pages; changes to human-edited pages become revisions for approval. nashsu’s ingest writes pages before listing Review follow-ups. These are implementation differences, not proof of easier use or guaranteed factual accuracy.",
               "sources": [
@@ -658,9 +658,9 @@ export const enContent = {
                   "Pages you write: review before changes"
                 ],
                 "profile": [
-                  "After setup, save and retrieve knowledge from connected AI tools. The local background service runs without the desktop App.",
-                  "Editing or deleting a memory, or accepting its replacement revision, flags the existing pages that cite it. Background work then refreshes eligible pages.",
-                  "When AI wants to update a page you wrote, it proposes a revision; the original waits for your approval."
+                  "After setup, save and retrieve knowledge from connected AI tools; the local background service runs without the desktop App.",
+                  "Editing or deleting a memory, or accepting its replacement revision, flags the existing pages that cite it; background work refreshes eligible ones.",
+                  "When AI wants to update a page you wrote, it proposes a revision for your approval."
                 ],
                 "emphasis": []
               }
@@ -669,16 +669,16 @@ export const enContent = {
               "id": "llm-wiki-1",
               "name": "Obsidian",
               "eyebrow": "Obsidian · local Markdown vault",
-              "summary": "Keep writing notes in Obsidian, let Wenlan read the originals, and maintain a separate Wiki for you and your AI.",
+              "summary": "Keep writing in Obsidian; Wenlan reads originals and maintains a separate Wiki for you and your AI.",
               "profileLabels": [
                 "Write your own Markdown notes directly",
                 "Let selected plugins handle it",
                 "You decide what tools can change"
               ],
               "profile": [
-                "Write notes and link ideas in a vault; connect a plugin or external tool when you need AI.",
-                "Hand AI search, rewriting, or organization to plugins; choose features, set rules, and maintain them.",
-                "You keep the vault; choose plugins and backups, and check whether AI can write to original notes."
+                "Write and link notes in a vault; add a plugin or tool when you need AI.",
+                "Plugins handle AI search and organization; you choose features, set rules, maintain them.",
+                "You keep the vault, choose plugins and backups, and control whether AI writes to notes."
               ],
               "body": "For writing, organizing and linking your own notes, with Markdown files stored on your device. Add plugins or connect AI tools when you want AI search, summaries or rewriting. Plugins and optional sync can change where data is sent; a local vault alone does not make every AI integration local.",
               "sources": [
@@ -713,16 +713,16 @@ export const enContent = {
               "id": "vault-agents",
               "name": "Notion",
               "eyebrow": "Notion · cloud workspace",
-              "summary": "Notion lets you configure Agents for workspace tasks; Wenlan makes source tracking, page upkeep, and edit review an integrated flow. Both can run automatically.",
+              "summary": "Notion Agents handle workspace tasks; Wenlan integrates source tracking, page upkeep, and edit review. Both run automatically.",
               "profileLabels": [
                 "Arrange work in a shared workspace",
                 "You set tasks; Agent runs them automatically",
                 "You control rules and workspace permissions"
               ],
               "profile": [
-                "Organize personal or team work with pages, databases, and permissions; Notion Agent can create and edit.",
-                "Custom Agents can run on schedules or events; set instructions, triggers, and access permissions first.",
-                "Set the Agent’s access, inspect activity logs, and use Notion’s history and reversal controls."
+                "Organize work with pages, databases, permissions; Notion Agent can create and edit.",
+                "Custom Agents run on schedules or events; you set instructions, triggers, permissions.",
+                "Set Agent access, inspect logs, use Notion’s history and reversal controls."
               ],
               "body": "Notion is a cloud workspace for personal and team work, not just a database or passive notebook. Notion Agent can search, create, and edit; Custom Agents can run in the background on events or schedules, including knowledge upkeep. Use a template or set instructions, triggers, and access permissions yourself, then inspect activity logs and use Notion’s history and reversal controls. Official docs list Custom Agents for Business or Enterprise plans. Cloud content can be downloaded for offline use or exported as backups. The difference is general workspace automation versus Wenlan’s built-in knowledge-maintenance flow, not that Notion lacks automation or cannot connect external tools.",
               "sources": [
@@ -761,16 +761,16 @@ export const enContent = {
               "id": "notebooklm",
               "name": "NotebookLM",
               "eyebrow": "Google · Gemini Notebook",
-              "summary": "NotebookLM helps you understand a set of sources; Wenlan builds those materials and work decisions into a Wiki that connected AI tools can use later.",
+              "summary": "NotebookLM helps you understand sources; Wenlan builds them and work decisions into a Wiki for connected AI tools.",
               "profileLabels": [
                 "Ask from sources and make study materials",
                 "Drive updates sync sources automatically",
                 "You choose sources and sharing"
               ],
               "profile": [
-                "Ask questions, summarize, or make study materials from selected sources; notebooks can also be used in Gemini conversations.",
-                "Eligible Google Drive sources sync when you open the notebook; uploaded files are copies made at import.",
-                "Choose which sources to cite and who can access the notebook; original Drive files are not written back."
+                "Ask, summarize, or make study guides from sources; notebooks work in Gemini conversations too.",
+                "Eligible Google Drive sources sync on open; uploads are copies made at import.",
+                "Choose sources to cite and who can access; original Drive files aren’t written back."
               ],
               "body": "NotebookLM is the familiar product now labeled Gemini Notebook in Google’s official docs. It offers source-based Q&A, summaries, and study materials, and notebooks can be used in Gemini conversations; it is not limited to a separate App. Eligible Google Drive sources sync when you open the notebook; uploaded files are imported copies. You choose cited sources and cloud sharing permissions, and it does not rewrite the original Drive files. Source syncing does not guarantee that every previously generated study material will be regenerated.",
               "sources": [
