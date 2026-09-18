@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import test from "node:test";
+import { retryPolicySourceExcerpts } from "../src/lib/llm-wiki-source-fixture.ts";
 
 const componentPath = path.join(process.cwd(), "src/components/home/hero-scenarios.tsx");
 const source = fs.readFileSync(componentPath, "utf8");
@@ -30,7 +31,8 @@ test("engineering scene keeps the approved retry rule and unresolved timeout bou
   assert.match(engineering, /Retry failed GET requests up to 3 times/);
   assert.match(engineering, /never retry POST automatically/);
   assert.match(engineering, /timeout boundary is still unspecified/);
-  assert.match(engineering, /does not specify a timeout duration/);
+  assert.match(retryPolicySourceExcerpts.en.runbook, /timeout has not been decided/);
+  assert.match(engineering, /excerpt: retryPolicySourceExcerpts\.en\.runbook/);
   assert.doesNotMatch(engineering, /timeout (?:is|of) \d|\d+\s*ms|\d+\s*seconds/i);
   assert.match(source, /const workedExampleHref = "\/learn\/distilled-wiki-pages-ai-memory#worked-example"/);
   assert.match(source, /<TrackedLocalizedLink[\s\S]*?href=\{workedExampleHref\}[\s\S]*?locale=\{locale\}/);

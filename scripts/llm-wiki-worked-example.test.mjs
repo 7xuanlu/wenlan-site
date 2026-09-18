@@ -27,6 +27,7 @@ test("explicit example anchors do not renumber existing Mandarin fragments", asy
 
 test("all three LLM-wiki owners provide an explicitly authored complete example", async () => {
   const { workedExampleSections } = await import("../src/lib/llm-wiki-worked-example.ts");
+  const { retryPolicySourceText } = await import("../src/lib/llm-wiki-source-fixture.ts");
   for (const locale of ["en", "zh-TW", "zh-CN"]) {
     const sections = workedExampleSections(locale);
     assert.equal(sections[0].id, "worked-example");
@@ -37,6 +38,7 @@ test("all three LLM-wiki owners provide an explicitly authored complete example"
     assert.match(code, /POST/);
     assert.match(code, /3/);
     assert.match(code, /at most 1 retry/);
+    for (const text of Object.values(retryPolicySourceText)) assert.ok(code.includes(text));
     assert.doesNotMatch(code, /<[^>]+>/);
     assert.ok(sections.every((section) => section.body.length > 0));
   }

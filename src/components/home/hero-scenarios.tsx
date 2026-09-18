@@ -4,6 +4,7 @@ import { useId, useRef, useState } from "react";
 import type { CSSProperties, KeyboardEvent } from "react";
 import { trackAnalyticsEvent, TrackedLocalizedLink } from "@/components/tracked-link";
 import type { Locale } from "@/i18n/locales";
+import { retryPolicySourceExcerpts } from "@/lib/llm-wiki-source-fixture";
 
 type ScenarioId = "engineering" | "client" | "learning";
 
@@ -72,19 +73,19 @@ const copy: Record<Locale, HeroScenariosCopy> = {
             id: "api-v1",
             label: "api-v1.md",
             detail: "API retry rule",
-            excerpt: "GET requests may be retried up to 3 times; POST requests must not be retried automatically.",
+            excerpt: retryPolicySourceExcerpts.en.api,
           },
           {
             id: "decision-07",
             label: "decision-07.md",
             detail: "Client decision",
-            excerpt: "Treat idempotent reads and writes differently when recovering from a transient failure.",
+            excerpt: retryPolicySourceExcerpts.en.decision,
           },
           {
             id: "runbook-v1",
             label: "runbook-v1.md",
             detail: "Logging and timeouts",
-            excerpt: "Record timeout behavior in the runbook; this note does not specify a timeout duration.",
+            excerpt: retryPolicySourceExcerpts.en.runbook,
           },
         ],
       },
@@ -185,19 +186,19 @@ const copy: Record<Locale, HeroScenariosCopy> = {
             id: "api-v1",
             label: "api-v1.md",
             detail: "API 重試規則",
-            excerpt: "GET 請求最多可以重試 3 次；POST 請求不得自動重試。",
+            excerpt: retryPolicySourceExcerpts["zh-TW"].api,
           },
           {
             id: "decision-07",
             label: "decision-07.md",
             detail: "客戶端決定",
-            excerpt: "從暫時性失敗復原時，應區分具冪等性的讀取與寫入。",
+            excerpt: retryPolicySourceExcerpts["zh-TW"].decision,
           },
           {
             id: "runbook-v1",
             label: "runbook-v1.md",
             detail: "記錄與逾時",
-            excerpt: "在 runbook 記錄逾時行為；這則筆記沒有指定逾時長度。",
+            excerpt: retryPolicySourceExcerpts["zh-TW"].runbook,
           },
         ],
       },
@@ -298,19 +299,19 @@ const copy: Record<Locale, HeroScenariosCopy> = {
             id: "api-v1",
             label: "api-v1.md",
             detail: "API 重试规则",
-            excerpt: "GET 请求最多可以重试 3 次；POST 请求不得自动重试。",
+            excerpt: retryPolicySourceExcerpts["zh-CN"].api,
           },
           {
             id: "decision-07",
             label: "decision-07.md",
             detail: "客户端决定",
-            excerpt: "从暂时性失败恢复时，应区分幂等的读取和写入。",
+            excerpt: retryPolicySourceExcerpts["zh-CN"].decision,
           },
           {
             id: "runbook-v1",
             label: "runbook-v1.md",
             detail: "日志与超时",
-            excerpt: "在 runbook 中记录超时行为；这条笔记没有指定超时时长。",
+            excerpt: retryPolicySourceExcerpts["zh-CN"].runbook,
           },
         ],
       },

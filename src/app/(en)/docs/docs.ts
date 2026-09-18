@@ -3606,7 +3606,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository's security policy commits to acknowledgment within 48 hours and a fix timeline within 7 days. The latest released version is supported (the current stable 0.18.3 line); older releases are best-effort.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository's security policy commits to acknowledgment within 48 hours and a fix timeline within 7 days. The latest released version is supported (the current stable 0.18.4 line); older releases are best-effort.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3740,7 +3740,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Open the app source",
-          href: "https://github.com/7xuanlu/wenlan/tree/v0.18.3/app",
+          href: "https://github.com/7xuanlu/wenlan/tree/v0.18.4/app",
         },
       },
       {
@@ -3784,30 +3784,32 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.18.3",
+      "Wenlan version 0.18.4",
       "wenlan-mcp release notes",
     ],
     updatedAt: "2026-09-08",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Quick answer: the current stable release in the repository changelog is v0.18.3, dated 2026-09-08.",
+      "Quick answer: the current stable release in the repository changelog is v0.18.4, dated 2026-09-08.",
       "The unified release publishes native runtime archives plus macOS Apple Silicon and Windows x64 desktop builds and updater artifacts.",
     ],
     sections: [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.18.3 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It adds import phase progress and batch status, plus an idle-archive housekeeping rule for entities.",
+          "Wenlan v0.18.4 is the current stable release recorded in CHANGELOG.md and GitHub Releases. It self-heals a stale background service after updates, prevents concurrent self-heal prompts, and archives idle detected entities by default.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
         ],
       },
       {
-        heading: "v0.18.1 to v0.18.3 highlights",
+        heading: "v0.18.1 to v0.18.4 highlights",
         body: [
-          "These patches improve import visibility and entity housekeeping, make milestone notifications dismissible, and fix local-provider and shared Claude/Codex harness behavior.",
+          "These patches improve import visibility and entity housekeeping, make milestone notifications dismissible, fix local-provider and shared Claude/Codex harness behavior, and make desktop updates recover cleanly when a background service is stale.",
         ],
         bullets: [
+          "Desktop updates can self-heal a stale background service, while the tray can stop it when needed.",
+          "Concurrent desktop self-heal runs are serialized so a restart cannot re-prompt.",
           "Import reports real phase progress and batch status.",
           "Entity housekeeping gains an idle-archive rule; detected entities are presented as an index rather than a to-do list.",
           "Milestone notifications support explicit and automatic dismissal.",
@@ -3950,7 +3952,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.18.3, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.18.4, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },

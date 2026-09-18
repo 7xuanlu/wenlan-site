@@ -67,7 +67,7 @@ export function MemoryIndex({
       </p>
       <div className="mt-5 space-y-4">
         {items.map((item, index) => (
-          <div key={item} className="grid min-w-0 grid-cols-[32px_minmax(0,1fr)] gap-3">
+          <div key={item} className="grid min-w-0 grid-cols-[32px_minmax(0,1fr)] items-baseline gap-3">
             <span className="font-mono text-[11px] text-[var(--o-warm)]">
               {(index + 1).toString().padStart(2, "0")}
             </span>
