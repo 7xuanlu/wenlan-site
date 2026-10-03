@@ -33,6 +33,10 @@ function ComparisonPanel({ rows, copy, locale }: {
       <div className="workflow-pair-summary">
         <Alternatives rows={rows}>{(row) => <p>{row.summary}</p>}</Alternatives>
       </div>
+      <label htmlFor="workflow-show-details" className="workflow-details-toggle">
+        <input id="workflow-show-details" type="checkbox" />
+        <span>{copy.expandDetailsLabel}</span>
+      </label>
       <table className="workflow-comparison">
         <caption className="sr-only">{copy.title}</caption>
         <colgroup><col className="workflow-questionColumn" /><col /><col /></colgroup>
@@ -62,6 +66,8 @@ function ComparisonPanel({ rows, copy, locale }: {
           ))}
         </tbody>
       </table>
+      <p className="workflow-setup-summary">{copy.setupSummary}</p>
+      <p className="workflow-expanded-access">{copy.accessNote}</p>
       <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
         <p className="max-w-2xl pt-2 text-sm leading-7 text-[var(--o-text-tertiary)]">{copy.scopeNote}</p>
         <Alternatives rows={rows}>{(row) => (
@@ -95,7 +101,6 @@ export function PainsSection({ copy, locale }: { readonly copy: PainsCopy; reado
             )}
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-7 text-[var(--o-text-secondary)]">{copy.intro}</p>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-[var(--o-text-secondary)]">{copy.accessNote}</p>
         </div>
 
         <fieldset data-workflow-comparison className="mt-10 min-w-0 sm:mt-12">

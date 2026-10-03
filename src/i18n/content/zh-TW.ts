@@ -17,7 +17,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "db744b22858108d30975edad4897554a80b2b6ab063088f7a17d7b7e8645bba5",
+    sourceHash: "ad7f0582f645d0a8e8af8a5bbeeee6645a4424899b213e3e2d050ffa9900f81f",
     content: {
       seo: {
         title: "Wenlan 文瀾官網 | AI 工作的 LLM wiki",
@@ -531,8 +531,10 @@ export const zhTWContent = {
           worksWithNote: "可讀取 Obsidian 筆記，保留原文。",
         },
         pains: {
-          "title": "選擇適合你的知識工作流程。",
-          "intro": "不只比較功能：看看平常在哪裡工作、哪些整理能交出去、哪些決定仍由你做。",
+          "title": "Wenlan 適合你嗎？",
+          "intro": "選擇你目前使用的工具，看看 Wenlan 能補上什麼。",
+          "expandDetailsLabel": "顯示詳細說明",
+          "setupSummary": "使用前需連接來源與模型，並建立首批知識頁。",
           "scopeNote": "Wenlan 也是 LLM Wiki 的一種實作；不同方式可以搭配使用。",
           "dimensions": [
             "平常怎麼用？",

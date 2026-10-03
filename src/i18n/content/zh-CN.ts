@@ -17,7 +17,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "db744b22858108d30975edad4897554a80b2b6ab063088f7a17d7b7e8645bba5",
+    sourceHash: "ad7f0582f645d0a8e8af8a5bbeeee6645a4424899b213e3e2d050ffa9900f81f",
     content: {
       seo: {
         title: "Wenlan 文澜官网 | AI 工作的 LLM wiki",
@@ -531,8 +531,10 @@ export const zhCNContent = {
           worksWithNote: "可读取 Obsidian 笔记，保留原文。",
         },
         pains: {
-          "title": "选择适合你的知识工作流。",
-          "intro": "不只比较功能：看看平常在哪里工作、哪些整理可以交出去、哪些决定仍由你做。",
+          "title": "Wenlan 适合你吗？",
+          "intro": "选择你目前使用的工具，看看 Wenlan 能补上什么。",
+          "expandDetailsLabel": "显示详细说明",
+          "setupSummary": "使用前需连接来源与模型，并建立首批知识页。",
           "scopeNote": "Wenlan 也是 LLM Wiki 的一种实现；不同方式可以搭配使用。",
           "dimensions": [
             "平常怎么用？",

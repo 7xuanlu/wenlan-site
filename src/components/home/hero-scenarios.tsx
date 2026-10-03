@@ -785,9 +785,9 @@ export function HeroScenarios({ locale }: { readonly locale: Locale }) {
                     </summary>
                     <div className="mt-3 border-t border-[var(--o-border-subtle)] pb-3 pt-3" aria-label={`${strings.knowledgePageLabel}: ${scene.title}`}>
                       <p className="mt-1 text-sm leading-relaxed text-pretty text-[var(--o-text-secondary)]">{scene.knowledgeSummary.outcome}</p>
-                      <dl className="mt-3 space-y-3 text-sm leading-relaxed">
+                      <dl className="mt-3 grid grid-cols-1 gap-x-3 gap-y-3 text-sm leading-relaxed sm:grid-cols-[fit-content(45%)_minmax(0,1fr)]">
                         {scene.knowledgeSummary.facts.map((fact) => (
-                          <div key={fact.label} className="grid grid-cols-1 gap-x-3 gap-y-1 sm:grid-cols-[6.5rem_minmax(0,1fr)]">
+                          <div key={fact.label} className="grid grid-cols-subgrid gap-y-1 sm:col-span-2">
                             <dt className="text-[var(--o-text-secondary)]">{fact.label}</dt>
                             <dd className="min-w-0 text-pretty text-[var(--o-text)]">
                               <SourceExcerpt text={fact.value.replace(/[.!?。！？]$/u, "")} locale={locale} />
@@ -810,9 +810,9 @@ export function HeroScenarios({ locale }: { readonly locale: Locale }) {
                       <p className="mt-4 text-xs leading-relaxed text-pretty text-[var(--o-text-muted)]">{scene.knowledgeSummary.nextUpdate}</p>
                     </div>
                   </details>
-                  <dl data-retrieved-facts className="mt-2 space-y-1 text-sm leading-relaxed">
+                  <dl data-retrieved-facts className="mt-2 grid grid-cols-1 gap-x-3 gap-y-2 text-sm leading-relaxed min-[375px]:grid-cols-[fit-content(45%)_minmax(0,1fr)] min-[375px]:gap-y-1">
                     {scene.knowledgeSummary.facts.slice(0, 2).map((fact) => (
-                      <div key={fact.label} className="grid grid-cols-[6rem_minmax(0,1fr)] gap-x-3 gap-y-0.5 sm:grid-cols-[6.5rem_minmax(0,1fr)]">
+                      <div key={fact.label} className="grid grid-cols-subgrid gap-y-0.5 min-[375px]:col-span-2">
                         <dt className="text-xs leading-relaxed text-[var(--o-text-secondary)] sm:leading-[1.875]">{fact.label}</dt>
                         <dd className="min-w-0 text-pretty text-[var(--o-text)]">
                           <SourceExcerpt text={fact.value.replace(/[.!?。！？]$/u, "")} locale={locale} />

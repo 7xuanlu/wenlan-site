@@ -238,6 +238,8 @@ export type HomeContent = SeoContent & {
       sourcesChecked: string;
       helpLabel: string;
       accessNote: string;
+      expandDetailsLabel: string;
+      setupSummary: string;
       generations: readonly {
         id: string;
         name: string;

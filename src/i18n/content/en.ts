@@ -536,8 +536,10 @@ export const enContent = {
           worksWithNote: "Read from your Obsidian vault without changing your notes.",
         },
         pains: {
-          "title": "Choose the knowledge workflow that fits.",
-          "intro": "Compare more than features: see where you work day to day, what you can hand off, and which decisions remain yours.",
+          "title": "How does Wenlan fit?",
+          "intro": "Choose what you use today to see what Wenlan adds.",
+          "expandDetailsLabel": "Show detailed explanations",
+          "setupSummary": "Connect your sources and a model, then create your first wiki pages.",
           "scopeNote": "Wenlan is also an LLM Wiki implementation. These approaches can work together.",
           "dimensions": [
             "How do you use it day to day?",
