@@ -528,10 +528,10 @@ export const enContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "A living wiki for you and your AI",
-          headline: { pre: "Notes and chats pile up.", emphasis: "Still starting over?", post: "" },
+          eyebrow: "A personal wiki for you and your AI",
+          headline: { pre: "Turn notes and AI chats", emphasis: "into your knowledge base.", post: "" },
           description:
-            "Wenlan turns documents and decisions into a source-backed wiki you and your AI can pick up next time.",
+            "Notes are scattered; good ideas get buried in chats. Wenlan helps organize key points and keep them up to date, so you can refer back and your AI can find what it needs.",
           worksWithLabel: "Works with",
           worksWithNote: "Read from your Obsidian vault without changing your notes.",
         },

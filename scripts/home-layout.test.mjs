@@ -230,7 +230,7 @@ test("homepage leads with the main-branch bars and keeps the full table in detai
   assert.match(homeSource, /dateTime="2026-06-24"/);
   assert.match(homeSource, /<ProductShowcase locale=\{locale\}/);
   const scenarios = fs.readFileSync(path.join(repoRoot, "src/components/home/hero-scenarios.tsx"), "utf8");
-  assert.match(scenarios, /home-panel rounded-lg/);
+  assert.match(scenarios, /home-consulted-page[^\"]*rounded-lg/);
 });
 
 test("recorded product evidence remains a real, hashed asset with a native enlarged view", () => {

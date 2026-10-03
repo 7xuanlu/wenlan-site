@@ -17,7 +17,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "ca85d10076dbba67cbcf437cd3d1e15c78dbcaa1b34bb8b400880723c8b685f0",
+    sourceHash: "db744b22858108d30975edad4897554a80b2b6ab063088f7a17d7b7e8645bba5",
     content: {
       seo: {
         title: "Wenlan 文澜官网 | AI 工作的 LLM wiki",
@@ -523,10 +523,10 @@ export const zhCNContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "你与 AI 共用的 Living Wiki",
-          headline: { pre: "笔记、对话一直积累，", emphasis: "工作却还得从头来？", post: "" },
+          eyebrow: "你与 AI 共用的个人 Wiki",
+          headline: { pre: "把笔记和 AI 对话，", emphasis: "整理成你的知识库。", post: "" },
           description:
-            "文澜把文档和决策整理成带来源的知识页，让你和 AI 接着上次的工作继续。",
+            "笔记散落各处，好点子留在对话里。文澜帮你整理重点、持续更新，方便你查阅，也让 AI 更容易找到需要的信息。",
           worksWithLabel: "可搭配",
           worksWithNote: "可读取 Obsidian 笔记，保留原文。",
         },

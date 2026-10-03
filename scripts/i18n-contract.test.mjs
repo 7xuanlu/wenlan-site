@@ -2546,7 +2546,7 @@ test("home SEO copy presents LLM wiki positioning in English and Mandarin", asyn
   );
   assert.match(
     content.enContent.home.content.redesign.hero.eyebrow,
-    /living wiki/i,
+    /A personal wiki for you and your AI/,
   );
 
   const expected = {
@@ -2555,11 +2555,11 @@ test("home SEO copy presents LLM wiki positioning in English and Mandarin", asyn
       sourceBacked: "有來源依據",
       staleHomePhrase: /活個人知識庫|AI-native/,
       hero: {
-        eyebrow: /Living Wiki/,
-        notes: /筆記、對話一直累積/,
-        continuation: /工作.*從頭來/,
-        sourceBacked: /附來源的知識頁/,
-        buildOn: /接著上次的工作繼續/,
+        eyebrow: /你與 AI 共用的個人 Wiki/,
+        notes: /把筆記與 AI 對話/,
+        continuation: /整理成你的知識庫/,
+        organizes: /幫你整理重點、持續更新/,
+        aiRetrieval: /AI 更容易找到需要的資訊/,
       },
     },
     "zh-CN": {
@@ -2567,11 +2567,11 @@ test("home SEO copy presents LLM wiki positioning in English and Mandarin", asyn
       sourceBacked: "有来源依据",
       staleHomePhrase: /活个人知识库|AI-native/,
       hero: {
-        eyebrow: /Living Wiki/,
-        notes: /笔记、对话一直积累/,
-        continuation: /工作.*从头来/,
-        sourceBacked: /带来源的知识页/,
-        buildOn: /接着上次的工作继续/,
+        eyebrow: /你与 AI 共用的个人 Wiki/,
+        notes: /把笔记和 AI 对话/,
+        continuation: /整理成你的知识库/,
+        organizes: /帮你整理重点、持续更新/,
+        aiRetrieval: /AI 更容易找到需要的信息/,
       },
     },
   };
@@ -2591,23 +2591,23 @@ test("home SEO copy presents LLM wiki positioning in English and Mandarin", asyn
     assert.match(home.redesign.hero.eyebrow, localeExpected.hero.eyebrow, `${locale}.home.hero.category`);
     assert.match(home.redesign.hero.headline.pre, localeExpected.hero.notes, `${locale}.home.hero.notes`);
     assert.match(home.redesign.hero.headline.emphasis, localeExpected.hero.continuation, `${locale}.home.hero.continuation`);
-    assert.match(home.redesign.hero.description, localeExpected.hero.sourceBacked, `${locale}.home.hero.description.sourceBacked`);
-    assert.match(home.redesign.hero.description, localeExpected.hero.buildOn, `${locale}.home.hero.description.continuation`);
+    assert.match(home.redesign.hero.description, localeExpected.hero.organizes, `${locale}.home.hero.description.organizes`);
+    assert.match(home.redesign.hero.description, localeExpected.hero.aiRetrieval, `${locale}.home.hero.description.aiRetrieval`);
     assert.match(home.faqs.items[0].a, /LLM wiki/, `${locale}.home.faq.whatIsWenlan`);
     assert.doesNotMatch(renderedHome, localeExpected.staleHomePhrase, `${locale}.home.stale`);
   }
 });
 
-test("Chinese hero copy preserves the continuation promise and setup keeps short AI compounds together", async () => {
+test("Chinese hero copy promises a personal knowledge base and setup keeps short AI compounds together", async () => {
   const { content } = await loadI18nModules();
 
   for (const locale of ["zh-TW", "zh-CN"]) {
     const dictionary = content.localizedContentByLocale[locale];
 
     assert.match(
-      dictionary.home.content.redesign.hero.description,
-      /附來源的知識頁|带来源的知识页/,
-      `${locale}.home.hero.description.sourceBacked`,
+      dictionary.home.content.redesign.hero.headline.emphasis,
+      /整理成你的知識庫|整理成你的知识库/,
+      `${locale}.home.hero.headline.organizedKnowledgeBase`,
     );
     assert.match(
       dictionary.getStarted.content.hero.title,

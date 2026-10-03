@@ -169,8 +169,8 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
         </div>
       </nav>
 
-      {/* Hero: a work-continuation promise paired with labeled, source-readable scenarios. */}
-      <section className="relative pt-28 pb-12 sm:pt-32">
+      {/* Hero: personal knowledge with a source-readable example for people and AI. */}
+      <section className="home-hero relative pt-28 pb-8 sm:pt-32">
         <div className="mx-auto grid w-full max-w-6xl items-start gap-10 px-6 lg:grid-cols-12 lg:gap-12">
           <div className="@container min-w-0 lg:col-span-6">
             <p className="animate-fade-up motion-reduce:animate-none text-sm font-medium tracking-wide text-[var(--o-warm)]">
@@ -181,9 +181,9 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
               <span className="block text-[var(--o-warm)]">{redesign.hero.headline.emphasis}</span>
               {redesign.hero.headline.post}
             </h1>
-            <p className={`animate-fade-up motion-reduce:animate-none delay-200 mt-6 max-w-lg text-base leading-relaxed text-[var(--o-text-secondary)] ${locale === "en" ? "text-pretty sm:text-lg" : "text-balance sm:text-xl"}`}>
-              {locale === "en" ? redesign.hero.description : redesign.hero.description.split(/(?<=，)/u).map((clause, index) => (
-                <span key={index} className="inline-block max-w-full">{clause}</span>
+            <p className={`animate-fade-up motion-reduce:animate-none delay-200 mt-6 max-w-lg text-pretty text-base leading-relaxed text-[var(--o-text-secondary)] ${locale === "en" ? "sm:text-lg" : "sm:text-xl"}`}>
+              {redesign.hero.description.split(/(?<=[。.!?])\s*/u).filter(Boolean).map((sentence, index) => (
+                <span key={index} className="block">{sentence}</span>
               ))}
             </p>
             <div className="animate-fade-up motion-reduce:animate-none delay-200 mt-8 flex flex-wrap items-center gap-4">
@@ -199,13 +199,13 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
               <a href="#integrations" aria-label="Obsidian" title="Obsidian" className="home-tool-mark inline-flex size-11 items-center justify-center rounded-lg text-[var(--o-text-secondary)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--o-warm)]"><ObsidianBrandIcon className="size-6" /></a>
             </div>
           </div>
-          <div className="animate-fade-up motion-reduce:animate-none delay-300 pt-6 lg:col-span-6 lg:pt-0">
+          <div className="animate-fade-up motion-reduce:animate-none delay-300 min-w-0 pt-6 lg:col-span-6 lg:pt-0">
             <HeroScenarios locale={locale} />
           </div>
         </div>
       </section>
 
-      <section id="demo" aria-labelledby="demo-heading" className="scroll-mt-16 px-6 py-16 sm:py-20 lg:pt-16">
+      <section id="demo" aria-labelledby="demo-heading" className="scroll-mt-16 px-6 pt-8 pb-16 sm:pb-20">
         <div className="mx-auto max-w-5xl">
           <DemoVideo
             key={locale}

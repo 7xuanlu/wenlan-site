@@ -17,7 +17,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "ca85d10076dbba67cbcf437cd3d1e15c78dbcaa1b34bb8b400880723c8b685f0",
+    sourceHash: "db744b22858108d30975edad4897554a80b2b6ab063088f7a17d7b7e8645bba5",
     content: {
       seo: {
         title: "Wenlan 文瀾官網 | AI 工作的 LLM wiki",
@@ -523,10 +523,10 @@ export const zhTWContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "你與 AI 共用的 Living Wiki",
-          headline: { pre: "筆記、對話一直累積，", emphasis: "工作卻還得從頭來？", post: "" },
+          eyebrow: "你與 AI 共用的個人 Wiki",
+          headline: { pre: "把筆記與 AI 對話，", emphasis: "整理成你的知識庫。", post: "" },
           description:
-            "文瀾把文件與決策整理成附來源的知識頁，讓你和 AI 接著上次的工作繼續。",
+            "筆記散在各處，好點子留在對話裡。文瀾幫你整理重點、持續更新，讓你方便查閱，也讓 AI 更容易找到需要的資訊。",
           worksWithLabel: "可搭配",
           worksWithNote: "可讀取 Obsidian 筆記，保留原文。",
         },
