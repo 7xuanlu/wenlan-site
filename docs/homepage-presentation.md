@@ -4,21 +4,166 @@ The homepage leads with continuation of useful work, not a generic promise to
 organize information. Living Wiki remains the product category; it is not a
 substitute for explaining what a visitor can do next.
 
+## Homepage fit and comparison destination — 2026-10-03
+
+The selected direction is an editorial heading, compact explicit controls, and
+one dominant real product view. The same fictional AI email assistant case runs
+through all three states: **handoff → knowledge Page with sources → recall**.
+The heading and HTML summary explain the benefit; the original application
+screenshots supply inspectable evidence. A Wenlan search screen cannot stand in
+for the AI-client step. No Tally, invoice examples, generated product UI, image
+compositing or text replacement. Keep the native full-size/zoom viewer, stable
+stage height, reduced-motion support and manual selection.
+
+The fictional project context and the actual question/answer summary precede the
+stage controls and screenshots, including on mobile. Each selected stage explains
+its outcome before the image. The separately agent-authored Page and recall of
+saved records must remain distinct; the visual order is not proof of automatic
+handoff-to-Page synthesis or recall of that Page.
+
+Below the real evidence and integrations, retain the animated pipeline,
+eight-feature overview and storage explanation. These are the user's preferred
+functional introduction; simplifying copy must not remove these whole sections.
+Their illustrative visuals explain mechanisms, while the real captures above
+provide inspectable product evidence.
+Local files do not mean all configured model processing stays local; Spaces are
+context organization, not access-control boundaries, and Git restoration is not
+a full database rollback. The detailed retrieval evaluation remains available.
+
+At widths below 1024px, a compact navigation disclosure provides the same core
+destinations and theme control as the desktop header. Keep locale switching
+visible, allow Escape/outside-click/selection to close it, and avoid clipping the
+menu in short viewports. The desktop links remain at 1024px and above.
+
+Showcase images fill the available width without an added border or backdrop.
+The fixed preview ratio trims only the knowledge Page capture's empty bottom
+margin; its content and all three source rows remain visible in every locale.
+The full-size viewer and original link retain the complete capture. Native
+window corners are clipped to their actual curve without white corner pixels.
+
+### Multilingual proof and skill capture acceptance
+
+The 2026-10-03 refresh has nine independently captured images: handoff, a Page
+with its three sources, and a new-conversation recall for English, Traditional
+Chinese and Simplified Chinese. Records, knowledge content, questions and
+answers are localized; application controls retain the client's actual English
+interface. See `homepage-media-provenance.json` for exact hashes and active
+assets. Older screenshots remain historical provenance, not the active story.
+
+Claude Opus 5.5 (high effort), invoked through acpx, exercised the actual product
+skills in isolated synthetic Spaces. `/handoff` saved three durable records,
+a session log and a Space Brief. In a separate conversation, the native `/recall`
+command expanded the real skill and used the Wenlan MCP recall tool. All three
+showcased answers cite the saved records and preserve the difference between
+approved first-release scope and an unapproved proposal.
+
+The lead **separately authored** the readable knowledge Pages from those records
+through the product API. The middle screenshot shows the actual Wenlan frontend,
+Page content and linked source records. Handoff did not synthesize these Pages;
+recall did not read them. Do not claim automatic Page generation, MCP Page return,
+remote full-page access or passed per-claim verification. The HTML answer is
+labeled as a summary of Claude's actual response. Screenshots are explicitly
+fictional demonstrations, not live chats or customer evidence.
+
+Use the exact setup, source IDs, session IDs, raw-answer records and limitations
+in `homepage-mail-demo-evidence.json#handoffRecallRefresh`. This includes the
+configured Space pin, concise-answer guidance, earlier excluded attempts,
+Page self-retrieval warnings, near-duplicate report wording, and the unresolved
+Traditional Chinese proposal classification. The bounded successful answers do
+not turn those limitations into passed product tests.
+
+The primary lifecycle matches the user's actual working pattern: `/handoff`
+when closing work, then `/recall` for a specific question later. Keep the useful
+question primary; slash commands are one concrete entry point, not a claim that
+every question requires them. Recall retrieves relevant records, not the whole
+handoff log or Brief. `/capture` and `/brief` are secondary explanations.
+
+The primary showcase remains three steps. Immediately below, a separate
+same-case revision view compares an agent-proposed change with the original,
+then shows the accepted Page, retained version history and four sources. The
+new decision requires owner review for drafts mentioning pricing or delivery
+commitments; automatic sending remains unapproved. The three localized cases
+passed real API checks for pending-update gating and acceptance. Captures use
+the actual product frontend with its read-only daemon adapter; acceptance was
+performed through the API, not a native Approve click. This is agent-authored
+content, not proof of automatic synthesis. See
+`homepage-mail-demo-evidence.json#revisionReviewRefresh`.
+
+The real knowledge graph follows as a separate view of connections, not another
+step in answering the email question. Restore its complete user-provided
+2026-09-06 viewport with its original provenance, no invented counts or claimed
+retrieval improvement. Both new views preserve natural image proportions and
+offer full-size/zoom/original access without an extra image frame.
+The graph has user-approved, localized HTML callouts for concrete topics: AI
+memory research (Mem0, Zep, Letta), Claude / Codex workflows (`/handoff` and
+`/recall`), and building Wenlan (wiki pages, citations, MCP). The tool-workflow
+callout points to the lower-left blue node, not the visibly named Wenlan MCP
+cluster, per user correction. Small, muted labels by peripheral nodes add
+personal topics such as travel, language learning, reading and photography;
+they remain illustrative annotations. Reading, writing and language learning
+stay visible at every width; other secondary topics appear from 1024px upward
+to preserve space for the primary markers. Keep the graph's topics
+separate from the fictional email example above; do not force that case into
+the graph. These are illustrative personal uses, not claims
+about the captured nodes. Show this distinction immediately above the annotated
+image, preserve
+the screenshot bytes and original labels, and open the unannotated capture in
+the full-size viewer. Below 768px, map three numbered markers to a readable
+key below the image, including each topic and its explanation. Lead with Wenlan;
+the numbers identify annotations rather than workflow steps. Name the enlargement
+action explicitly as the original image, so this static capture is not mistaken
+for an interactive graph.
+Above the image, a localized static legend separates entities/topics (project,
+technology, organization, person, theme), wiki pages and memories. Its swatches
+match the light-theme capture regardless of the website theme; labels carry the
+meaning without relying on color alone. Lines denote connections, not a timeline
+or proof of causality. The introduction uses the question “Why did we design
+Wenlan this way?” to explain finding the research and decisions behind a topic.
+Keep that question on its own paragraph, followed by a short purpose sentence;
+keep the two CJK phrases intact at their natural punctuation. Give entities,
+wiki pages and memories aligned definition rows, with entity subtypes grouped
+together. Desktop callouts use equal widths, matching
+numbered markers and stronger leader lines; the two upper labels share a baseline.
+The connection-line key belongs to the legend heading, separate from individual
+node types. A distinct “Page sources” group names files (PDF/Markdown), notes and
+AI conversations; it explains provenance without adding a fictitious source-node
+color to the graph. Place sources beside the node definitions on desktop and
+below them on narrower screens. Keep the screenshot disclosure separate from
+both groups, immediately before the image. Use whitespace, aligned rows and
+typographic hierarchy rather than horizontal separator borders between groups.
+Place the original-image enlargement action directly below the image, before
+the mobile topic key. The image button exposes the full image description to
+assistive technology; retain descriptive image alt text as well.
+
+The full five-way interactive comparison now belongs to the existing canonical
+`/learn/choose-ai-knowledge-base-tool#compare-tools` (and its two translated
+routes). Preserve its supporting sources and `#workflow-*` details on that same
+page. Homepage and Learn index entries point to this destination; no duplicate
+comparison URL is created. This is a navigation/readability change, not a claim
+of improved conversion or ranking.
+
+The three concept/build/selection links belong to a compact Further reading
+subsection inside the FAQ, after its questions. They must not interrupt the
+real product proof and integrations sequence. Preserve localized destinations
+and the existing tracked-link semantics.
+
 ## Narrative and retained assets
 
 1. The entrance states the benefit: “You’ve done the work. Build on it.”
    Traditional Chinese: 「做過的功課，不必每次重來。」 Simplified Chinese uses
    natural local wording for the same benefit.
-2. The adjacent scenario viewer starts with engineering, followed by client /
-   project work and learning / research. Each scenario connects a prior note,
+2. The adjacent scenario viewer starts with engineering, followed by product,
+   projects, research, writing and meetings. Each scenario connects a prior note,
    a current question, and a next step supported by inspectable excerpts.
-3. Acquisition links remain available. The system-recommended download precedes
-   the real recorded demo; the dedicated download page retains platform detail.
-4. The workflow illustration explains how notes become reusable pages. The
-   original feature visuals remain: readable pages, graph context, sources,
-   review, freshness, separated spaces, versioning, and tool continuity.
-5. Hybrid Retrieval remains visible and explains keywords, semantic similarity,
-   and graph relationships alongside the index / Markdown distinction.
+3. Acquisition links remain available in the hero and header, including the
+   mobile navigation. The full recommended-download section follows the evidence
+   and retrieval measurements; the dedicated download page retains platform detail.
+4. The real workflow, revision and graph captures carry the feature proof.
+   Integrations explain tool continuity. The animated pipeline, eight-feature
+   overview and storage section remain as the complete functional introduction,
+   with illustrative visuals clearly distinguished from the real captures.
+5. The dated retrieval measurements remain inspectable. Implementation details
+   and the index / Markdown distinction are available in the linked documentation.
 6. Integrations distinguish sources from clients. Obsidian belongs beside source
    import and read-only collaboration, not in the list of MCP clients. Existing
    client icons and names are retained. The compact six-icon strip below the
@@ -32,8 +177,9 @@ substitute for explaining what a visitor can do next.
    zero-based scale). Quality metrics remain separate. The complete three-column
    table and scope stay in native expandable details, not a headline savings
    promise. FAQ and final download / email paths remain.
-8. Real wiki/citation and selected graph frames from the launch recording have
-   their own switchable, expandable showcase. Preserve real pixels even when
+8. The same-case Wenlan and Claude product views have
+   a switchable, expandable showcase integrated into the fit section. The graph
+   is restored in its own connections section, outside the three fit stages. Preserve real pixels even when
    the captured app theme differs from the website theme. Sources, extraction
    offsets and hashes are recorded in `docs/homepage-media-provenance.json`.
 
@@ -49,11 +195,9 @@ hierarchy and interaction feedback, with visible SSR and reduced-motion fallback
   hide overflow as a substitute for fitting its labels.
 - No cursor-following aura/spotlight. Motion should trace connections and the
   retrieval sequence, with restrained displacement and reduced-motion support.
-- Product screenshots never zoom/crop on hover. Choose a real frame with a visible
-  page title and change the asset URL when changing the image to avoid stale
-  optimized-image caches. The Wiki frame is now raw `03-cites-take3.mov` at 1.5s:
-  full title, cursor on a citation, readable source-memory popover and entities.
-  It replaces the clip 08 overview and is not claimed to occur in the published edit.
+- Product screenshots never zoom/crop on hover. Preserve source pixels and label
+  teaching references, test fixtures and illustrations honestly. Do not restore
+  Tally recording frames merely because they are genuine app footage.
 
 - Scenario selection is manual. Do not introduce an automatic carousel that
   changes an example while somebody is reading its sources.

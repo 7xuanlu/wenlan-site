@@ -1,0 +1,165 @@
+{
+  "status": "captured-handoff-page-recall-three-locales",
+  "dataClassification": "fictional-demonstration",
+  "citationPlaceholders": "Draft [1] [2] [3] denote source roles, not implemented inline citations. Final Pages have real page-level source_memory_ids recorded in homepage-mail-demo-evidence.json.",
+  "locales": {
+    "en": {
+      "sources": [
+        {
+          "title": "Decision: email assistant first release only produces drafts",
+          "body": "The email assistant's first release only produces reply drafts. A person reviews each draft and sends it."
+        },
+        {
+          "title": "Interview note: review pricing and delivery",
+          "body": "One interviewee wanted to review replies involving pricing or delivery commitments before sending."
+        },
+        {
+          "title": "New request: automatically reply to routine inquiries",
+          "body": "Someone asked whether replies to routine inquiries could be sent automatically. This is a new request and has not been approved."
+        }
+      ],
+      "knowledgePage": {
+        "title": "Email assistant: first release scope",
+        "body": "## Decided\nThe first release only produces reply drafts; a person reviews and sends them. [1]\n\n## Reason\nOne interviewee wanted to review pricing and delivery commitments before sending. [2]\n\n## Not approved\nAutomatically sending replies to routine inquiries is a new request. It has not been approved. [3]"
+      },
+      "naturalQuestion": "Can the first release send email automatically?",
+      "recallCommand": "/recall Can the first release of the email assistant send email automatically?",
+      "agentTestPrompt": "Where do we stand on letting the email assistant send routine inquiry replies automatically? Retrieve what you can from the saved records, explain your answer using only those sources and cite them, and say plainly what the records do not settle. If you also read a knowledge page, report that separately; otherwise say that only records were retrieved.",
+      "outcomeCaption": "The AI retrieves saved records, then answers from them and shows which ones it used.",
+      "captureStatus": "captured-real-localized-content",
+      "captureHandoffInputs": {
+        "capturePrompt": "/capture The email assistant's first release only creates reply drafts; a person reviews and sends every reply. Why: an interviewee wanted to personally review any pricing or delivery commitment.",
+        "handoffSeed": [
+          "Done: first release scoped to reply drafts only, with a person reviewing and sending. One interviewee wanted to review pricing and delivery commitments.",
+          "Open (not approved): new request to auto-reply to routine inquiries.",
+          "Next: define eligibility, withdrawal, and failure notification before deciding."
+        ],
+        "handoffCommand": "/handoff",
+        "resumeQuestion": "Can the first release send email automatically?",
+        "recallCommand": "/recall Can the first release of the email assistant send email automatically?",
+        "captureCaption": "Save a decision with its reason.",
+        "handoffCaption": "Save this session’s decisions and next steps."
+      },
+      "primaryWorkflow": {
+        "saveCommand": "/handoff",
+        "laterQuestion": "Can the first release send email automatically?",
+        "retrieveCommand": "/recall Can the first release of the email assistant send email automatically?",
+        "status": "exercised",
+        "evidence": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+        "handoffSessionId": "fcf0e3fa-2a6b-463b-9357-d7a0b5e2f54c",
+        "recallSessionId": "aaf9f661-3d14-4e08-9f64-d1bd39246bc2",
+        "pageRead": false
+      }
+    },
+    "zh-TW": {
+      "sources": [
+        {
+          "title": "決定：電子郵件助理第一版只產生草稿",
+          "body": "電子郵件助理第一版只產生回覆草稿，由人工審閱後寄出。"
+        },
+        {
+          "title": "訪談紀錄：審閱報價與交期",
+          "body": "一位受訪者希望，涉及報價或交期承諾的回覆，先由自己看過再寄出。"
+        },
+        {
+          "title": "新需求：自動寄出例行詢問回覆",
+          "body": "有人提出，例行詢問的回覆能否自動寄出。這是新需求，尚未核准。"
+        }
+      ],
+      "knowledgePage": {
+        "title": "電子郵件助理：第一版範圍",
+        "body": "## 已決定\n電子郵件助理第一版只產生回覆草稿，由人工審閱後寄出。[1]\n\n## 原因\n一位受訪者希望，涉及報價或交期承諾的回覆，先由自己看過再寄出。[2]\n\n## 尚未核准\n自動寄出例行詢問回覆是新需求，尚未核准。[3]"
+      },
+      "naturalQuestion": "第一版能自動寄信嗎？",
+      "recallCommand": "/recall AI 郵件助理第一版能自動寄信嗎？",
+      "agentTestPrompt": "電子郵件助理自動寄出例行詢問的回覆，我們目前的立場是什麼？請先取回已儲存的紀錄，只依據這些來源說明並標示引用，並清楚指出紀錄沒有定論的部分。如果你另外讀取了知識頁，請分開說明；否則請說明只取回了紀錄。",
+      "outcomeCaption": "AI 先取回已儲存的紀錄，再依這些紀錄作答並標示所用來源。",
+      "captureStatus": "captured-real-localized-content",
+      "captureHandoffInputs": {
+        "capturePrompt": "/capture 郵件助理第一版只產生回覆草稿，每封都由人審閱後寄出。原因：一位受訪者希望親自確認任何報價與交期承諾。",
+        "handoffSeed": [
+          "已完成：第一版只產生回覆草稿，由人確認後寄出；一位受訪者希望親自確認報價與交期承諾。",
+          "未決（未核准）：新需求——例行詢問自動回覆。",
+          "下一步：先定義適用條件、撤回機制與失敗通知，再做決定。"
+        ],
+        "handoffCommand": "/handoff",
+        "resumeQuestion": "第一版能自動寄信嗎？",
+        "recallCommand": "/recall AI 郵件助理第一版能自動寄信嗎？",
+        "captureCaption": "存下一個決定，連同理由。",
+        "handoffCaption": "收工時留下決定、進度與下一步。"
+      },
+      "primaryWorkflow": {
+        "saveCommand": "/handoff",
+        "laterQuestion": "第一版能自動寄信嗎？",
+        "retrieveCommand": "/recall AI 郵件助理第一版能自動寄信嗎？",
+        "status": "exercised",
+        "evidence": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+        "handoffSessionId": "e0d7acfd-8f18-4108-bb8e-006587be716d",
+        "recallSessionId": "33ea3415-6bf8-4b1b-91ad-3f9cbe3941c4",
+        "pageRead": false
+      }
+    },
+    "zh-CN": {
+      "sources": [
+        {
+          "title": "决定：电子邮件助手首版只生成草稿",
+          "body": "电子邮件助手首版只生成回复草稿，由人工审阅后发送。"
+        },
+        {
+          "title": "访谈记录：审阅报价与交付时间",
+          "body": "一位受访者希望，涉及报价或交付时间承诺的回复，先由自己看过再发送。"
+        },
+        {
+          "title": "新需求：自动发送例行询问回复",
+          "body": "有人提出，例行询问的回复能否自动发送。这是新需求，尚未批准。"
+        }
+      ],
+      "knowledgePage": {
+        "title": "电子邮件助手：首版范围",
+        "body": "## 已决定\n电子邮件助手首版只生成回复草稿，由人工审阅后发送。[1]\n\n## 原因\n一位受访者希望，涉及报价或交付时间承诺的回复，先由自己看过再发送。[2]\n\n## 尚未批准\n自动发送例行询问回复是新需求，尚未批准。[3]"
+      },
+      "naturalQuestion": "第一版能自动发邮件吗？",
+      "recallCommand": "/recall AI 邮件助手第一版能自动发邮件吗？",
+      "agentTestPrompt": "电子邮件助手自动发送例行询问的回复，我们目前的立场是什么？请先取回已保存的记录，只依据这些来源说明并标明引用，并清楚指出记录没有定论的部分。如果你另外读取了知识页，请分开说明；否则请说明只取回了记录。",
+      "outcomeCaption": "AI 先取回已保存的记录，再依据这些记录作答并标明所用来源。",
+      "captureStatus": "captured-real-localized-content",
+      "captureHandoffInputs": {
+        "capturePrompt": "/capture 邮件助手首版只生成回复草稿，每封都由人审阅后发送。原因：一位受访者希望亲自确认任何报价和交付时间承诺。",
+        "handoffSeed": [
+          "已完成：第一版只生成回复草稿，由人确认后发送；一位受访者希望亲自确认报价和交付时间承诺。",
+          "待定（未批准）：新需求——常规咨询自动回复。",
+          "下一步：先明确适用条件、撤回机制和失败通知，再做决定。"
+        ],
+        "handoffCommand": "/handoff",
+        "resumeQuestion": "第一版能自动发邮件吗？",
+        "recallCommand": "/recall AI 邮件助手第一版能自动发邮件吗？",
+        "captureCaption": "记下一个决定，连同理由。",
+        "handoffCaption": "结束工作时，留下决定、进度和下一步。"
+      },
+      "primaryWorkflow": {
+        "saveCommand": "/handoff",
+        "laterQuestion": "第一版能自动发邮件吗？",
+        "retrieveCommand": "/recall AI 邮件助手第一版能自动发邮件吗？",
+        "status": "exercised",
+        "evidence": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+        "handoffSessionId": "d557db41-7516-442d-8b3c-213dbec379fc",
+        "recallSessionId": "18a20e19-4ba7-412a-bbe7-2a0e12043054",
+        "pageRead": false
+      }
+    }
+  },
+  "authorship": "Fictional fixture prepared by Claude Sonnet 5.5 through acpx and refined by the lead; not product-generated evidence.",
+  "captureAcceptance": "Each locale has real handoff, Page with sources, and AI-client captures. The recall skill and MCP retrieval are exercised; no Page read occurred in these recall sessions. Do not imply one.",
+  "captureHandoffDirection": {
+    "author": "User-selected handoff/recall priority supersedes the earlier Opus capture-first recommendation; input drafts prepared with Opus 5.5 and corrected by the lead.",
+    "status": "exercised-bounded-demonstration",
+    "primary": "handoff current work -> verify useful captures were saved -> separately author/inspect the source-linked Page -> recall a specific decision in a later session, reading the Page separately when used",
+    "secondary": "capture for an individual durable decision; brief for broad session orientation",
+    "boundaries": [
+      "Capture or handoff alone does not prove Page generation.",
+      "A pending proposal may be preserved as a clearly unapproved fact; do not recast it as an approved decision.",
+      "Keep the existing knowledge-page evidence; do not reduce the product story to memory retrieval only.",
+      "Recall must retrieve the relevant saved records; do not imply that it retrieves the entire handoff log or current Brief."
+    ]
+  }
+}

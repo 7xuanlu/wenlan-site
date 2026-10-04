@@ -1,0 +1,501 @@
+{
+  "case": "AI email assistant release scope",
+  "dataClassification": "Fictional demonstration only; no customer records",
+  "captureDate": "2026-10-03",
+  "daemonVersion": "0.18.13",
+  "frontend": "Wenlan React application through its existing read-only dev-live adapter; not fixture mode. Native shell controls stubbed; page, source and search reads came from the isolated daemon.",
+  "authoredPage": {
+    "request": {
+      "title": "AI 郵件助理｜第一版的寄信邊界",
+      "content": "## 已決定\n\n**第一版只產生草稿，由使用者確認後寄出。** 不會自動寄信。\n\n## 為什麼這樣做\n\n先整理過往對話，再起草回信；涉及報價、交期與承諾，使用者仍要親自確認。\n\n## 新要求，尚未批准\n\n「一般詢問自動寄送」仍是建議，**不屬於第一版範圍**。下一步要確認可自動寄送的信件範圍、撤回機制與失敗通知。",
+      "source_memory_ids": [
+        "mem_e04addb37529",
+        "mem_460c3b6e9918",
+        "mem_043241395bf1"
+      ],
+      "summary": "只起草，確認後再寄。自動寄送是新建議，尚未批准。",
+      "creation_kind": "authored"
+    },
+    "response": {
+      "id": "page_f2f47f74-3199-4808-ae36-cf47d0b4ba18",
+      "warnings": [
+        "Page 'AI 郵件助理｜第一版的寄信邊界' (page_f2f47f74-3199-4808-ae36-cf47d0b4ba18) not found in top-10 self-retrieval results"
+      ],
+      "space": null,
+      "space_source": "uncategorized",
+      "write_outcome": "created"
+    }
+  },
+  "query": "第一版能自動寄信嗎？",
+  "retrievedSources": [
+    {
+      "source_id": "mem_e04addb37529",
+      "title": "產品決策｜第一版寄信範圍",
+      "content": "第一版：只起草，不自動寄信\n\n產品討論決定：AI 郵件助理第一版只產生回覆草稿，必須由使用者檢查並按下寄送。\n\n先減少寫信的工夫，客戶溝通的最後確認仍交給人。\n\n（示範專案資料）"
+    },
+    {
+      "source_id": "mem_460c3b6e9918",
+      "title": "使用者訪談｜需要先看過再寄",
+      "content": "示範訪談：受訪者希望 AI 先整理過往對話，再起草客戶回信。涉及報價、交期與承諾時，仍需要自己看過才能寄出。這支持第一版採用人工確認後寄送。"
+    },
+    {
+      "source_id": "mem_043241395bf1",
+      "title": "新需求｜自動寄送還沒決定",
+      "content": "示範專案新增需求：有人提出讓 AI 自動寄出一般詢問的回覆。團隊尚未批准，也尚未定義哪些信能自動寄；下一次討論需要確認適用範圍、可撤回機制及失敗通知。此建議不改變第一版「草稿加人工寄送」的既定範圍。"
+    }
+  ],
+  "answer": {
+    "author": "Claude Sonnet 5.5 after actual Wenlan MCP retrieval and knowledge-page file reads",
+    "text": "不能。第一版只產生草稿，由使用者確認後寄出；自動寄送仍待批准。",
+    "presentation": "Editorial summary of the independently generated Claude response, with the actual native AI client screenshot shown in stage three."
+  },
+  "excludedEvidence": {
+    "autonomousDistillation": {
+      "force": true,
+      "page_id": "page_c1d4044a-0653-452b-ae55-4d02513800cb",
+      "reason": "citation verification failed (0 verified, 2 unverified, 0 stripped)",
+      "status": "ok",
+      "updated": false
+    },
+    "localAnswer": "The short Qwen answer did not follow the requested response format and was not used.",
+    "claimLimit": "No claim of successful automatic page synthesis, verified per-claim citations, all-client compatibility, customer adoption, or time savings.",
+    "previousClientAttempts": "Initial native-client attempt did not use the isolated connector and is excluded. An earlier isolated run also read an obsolete archived demo projection; its screenshot/answer is excluded. Only the final isolated run above is used."
+  },
+  "frontendBaseCommit": "061fbc6ab12a76ec805869e46d464a58a06db296",
+  "frontendSourceHashes": {
+    "src/Main.tsx": "32c9041ddbab60962e299c106d69811621399f48c4f3de7f404714773cfe883d",
+    "preview/mocks/live-invoke.ts": "e083788079e8fd9ce65b2250293da31d31b6ab719c8a8f8307ad34666b04be2e",
+    "preview/mocks/dev-live-core.ts": "b2f108efcb5f976fc4848ac54c5f1ed63bb695378b68fcb5afe15df5e96ae40e",
+    "vite.dev-live.config.ts": "8b7fb7128284e29c078e91a43070dc85af4bf3db93f35c4495767cd860a263f2"
+  },
+  "aiClientVerification": {
+    "client": "Claude Code, completed CLI session displayed in the native Claude desktop application",
+    "clientVersion": "2.1.288",
+    "model": "claude-sonnet-5-5",
+    "sessionId": "9e28b798-15a6-4c96-b5e3-98c62ea14079",
+    "userPrompt": "AI 郵件助理第一版能自動寄信嗎？請查閱 Wenlan 裡的知識頁，簡短說明目前的決定與依據。",
+    "tools": [
+      {
+        "name": "mcp__wenlan__recall",
+        "query": "AI 郵件助理第一版 自動寄信",
+        "result": "The three synthetic source records. No compiled page returned by this call."
+      },
+      {
+        "name": "Read",
+        "document": "Wenlan pages/index.md",
+        "result": "Active knowledge-page title and Markdown link"
+      },
+      {
+        "name": "Read",
+        "document": "Wenlan pages/ai-郵件助理第一版的寄信邊界.md",
+        "pageId": "page_f2f47f74-3199-4808-ae36-cf47d0b4ba18",
+        "result": "Read the actual stored page including full decision, rationale and unapproved proposal."
+      }
+    ],
+    "permissionDenials": [],
+    "rawAnswer": "**結論：** 第一版不能自動寄信。AI 只產生回覆草稿，使用者檢查後自己按寄送。\n\n**知識頁：**〈AI 郵件助理｜第一版的寄信邊界〉\n\n**決策依據：**\n- 產品討論決定第一版只起草，最後確認交給人。\n- 使用者訪談顯示，涉及報價、交期與承諾時，受訪者要自己看過才寄。\n\n**未決事項：** 有人提議讓 AI 自動寄出一般詢問的回覆，但團隊尚未批准，也不在第一版範圍內。下次討論要先確認適用的信件範圍、撤回機制與失敗通知。\n\n這是虛構示範資料，不是真實客戶案例。",
+    "boundaries": [
+      "One isolated demonstration, not all-client or retrieval-quality certification.",
+      "The client was explicitly configured with the isolated MCP and the Wenlan page-store location.",
+      "Sources came through MCP; the page full text was read from Wenlan’s local Markdown store. Do not claim MCP returned the page.",
+      "An obsolete projection of the earlier failed page remained in the file index; it was moved to a reversible backup and the demo index reconciled to the active-page API before the final run. This is manual demo cleanup, not a passed archive-projection test."
+    ]
+  },
+  "historicalEvidenceStatus": "Top-level Sonnet and earlier Page records are retained for provenance only. Active homepage assets use handoffRecallRefresh below.",
+  "handoffRecallRefresh": {
+    "date": "2026-10-03",
+    "dataClassification": "Fictional demonstration in a fresh isolated data directory; no customer or personal records.",
+    "daemonVersion": "0.18.13",
+    "client": "Claude Code sessions via acpx, displayed in native Claude Desktop",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "skillSources": {
+      "handoff": "c08c2c7ce17038c9058d0f2f405a1360285180ed90934bc9fc20b230f13e0646",
+      "recall": "4c2a020b6560ae95dc3c1bc680edaaa6fbc01b98f27a697b892067044ba9a6b0"
+    },
+    "workflow": [
+      "handoff stores useful records, session log and Space Brief",
+      "Agent separately authors a knowledge Page linked to those records",
+      "A new conversation invokes recall and answers from the saved records"
+    ],
+    "setup": [
+      "Three independent language Spaces in an isolated v0.18.13 daemon; no personal imports or background enrichment.",
+      "Byte-identical product skills installed in synthetic workspaces; session log path overridden to the isolated fixture.",
+      "Recall workspace states actual Space pinning semantics, distinguishes record-review flags from the approval status in record text, and asks for concise sourced answers. No expected answer is supplied.",
+      "No handoff log, Brief or Page read in the showcased recall runs."
+    ],
+    "locales": {
+      "en": {
+        "space": "mail-final-en",
+        "handoffSessionId": "fcf0e3fa-2a6b-463b-9357-d7a0b5e2f54c",
+        "recallSessionId": "aaf9f661-3d14-4e08-9f64-d1bd39246bc2",
+        "handoffOutcome": {
+          "storedRecords": 3,
+          "briefVersion": 1,
+          "queued": 0,
+          "conflicts": 0
+        },
+        "records": [
+          {
+            "source_id": "mem_d8f89ca553a3",
+            "content": "UNAPPROVED proposal (2026-10-03): email assistant automatically replies to routine inquiries. Not decided. Eligibility, withdrawal and failure-notification rules must be defined before any decision.",
+            "memory_type": "fact",
+            "confirmed": false
+          },
+          {
+            "source_id": "mem_deec8455fb22",
+            "content": "In email-assistant user interviews, one interviewee wanted to check pricing and delivery commitments personally before replies go out.",
+            "memory_type": "fact",
+            "confirmed": false
+          },
+          {
+            "source_id": "mem_887d88e2ae89",
+            "content": "Email assistant first release: the assistant drafts replies; a person reviews and sends every reply. No automatic sending in the first release (agreed 2026-10-03).",
+            "memory_type": "decision",
+            "confirmed": false
+          }
+        ],
+        "authoredPage": {
+          "request": {
+            "title": "Email assistant: first release scope · Handoff",
+            "content": "## Decided\nThe first release only produces reply drafts; a person reviews and sends them. \n\n## Reason\nOne interviewee wanted to review pricing and delivery commitments before sending. \n\n## Not approved\nAutomatically sending replies to routine inquiries is a new request. It has not been approved. ",
+            "source_memory_ids": [
+              "mem_d8f89ca553a3",
+              "mem_deec8455fb22",
+              "mem_887d88e2ae89"
+            ],
+            "creation_kind": "authored",
+            "space": "mail-final-en"
+          },
+          "response": {
+            "id": "page_22037dd7-fd07-4f70-aa47-46d21a2e6b77",
+            "warnings": [
+              "Page 'Email assistant: first release scope · Handoff' (page_22037dd7-fd07-4f70-aa47-46d21a2e6b77) not found in top-10 self-retrieval results"
+            ],
+            "space": "mail-final-en",
+            "space_source": "request",
+            "write_outcome": "created"
+          },
+          "displayEdit": {
+            "reason": "Use the decision as the opening paragraph, avoiding an empty heading after the app promotes it to its lead.",
+            "request": {
+              "content": "The first release only produces reply drafts; a person reviews and sends them. \n\n## Reason\nOne interviewee wanted to review pricing and delivery commitments before sending. \n\n## Not approved\nAutomatically sending replies to routine inquiries is a new request. It has not been approved. ",
+              "source_memory_ids": [
+                "mem_d8f89ca553a3",
+                "mem_deec8455fb22",
+                "mem_887d88e2ae89"
+              ]
+            },
+            "response": {
+              "ok": true
+            }
+          }
+        },
+        "recall": {
+          "skill": "/recall",
+          "invocation": "Native slash-command expansion observed in Claude session transcript; completed MCP recall tool call observed in acpx receipt.",
+          "tool": "mcp__wenlan_demo__recall",
+          "model": "claude-opus-5-5",
+          "effort": "high",
+          "stopReason": "end_turn",
+          "pageRead": false,
+          "answer": "Resolved space: mail-final-en (from locked-env)No. The first release won't send email automatically.\n\n- **First release:** the assistant writes draft replies, and a person reviews and sends each one. There is no automatic sending (agreed 2026-10-03) `mem_887d88e2ae89`.\n- **Auto-reply for routine inquiries:** this is only a proposal and has not been approved. Before anyone can decide on it, the rules for which emails qualify, how a reply is withdrawn, and how failures are reported must be defined `mem_d8f89ca553a3`.\n- **Supporting context:** in user interviews, one person wanted to check pricing and delivery commitments personally before replies go out `mem_deec8455fb22`."
+        },
+        "receiptHashes": {
+          "final-en-handoff.ndjson": "43c419005e3295947be4308b0d1399a3bd3cae35cc77e34a75c8592522d4db86",
+          "showcase-en-recall.ndjson": "65f118d9f97d2eef8d11d20c43e29ec545fa4381f3e0db3eea28283fc9be413c",
+          "final-en-sources.json": "9b287dea5dec7e1990c09ebf05cecc18ac7fd0f0f05ff2730381bfb6227e0f1e",
+          "final-en-authored-page.json": "19307840b447a3b7b1fad86ad54864ed831954d2d51c4d1ff4b7479fdc37519b"
+        }
+      },
+      "zh-TW": {
+        "space": "mail-final-zh-TW",
+        "handoffSessionId": "e0d7acfd-8f18-4108-bb8e-006587be716d",
+        "recallSessionId": "33ea3415-6bf8-4b1b-91ad-3f9cbe3941c4",
+        "handoffOutcome": {
+          "storedRecords": 3,
+          "briefVersion": 1,
+          "queued": 0,
+          "conflicts": 0
+        },
+        "records": [
+          {
+            "source_id": "mem_d7c78fa0bcc3",
+            "content": "郵件助理第一版範圍（2026-10-03 確認）：只產生回覆草稿，由人確認後才寄出；不自動寄信。",
+            "memory_type": "decision",
+            "confirmed": false
+          },
+          {
+            "source_id": "mem_92e07b4d1e45",
+            "content": "郵件助理訪談：一位受訪者希望親自看過報價與交期承諾，再讓回覆寄出。",
+            "memory_type": "fact",
+            "confirmed": false
+          },
+          {
+            "source_id": "mem_0fb1aa4a0214",
+            "content": "【未核准提案】例行詢問自動回覆（2026-10-03 提出）：狀態為未核准、尚未決定。下一步先定義適用條件、撤回機制與失敗通知，再決定是否核准。",
+            "memory_type": "decision",
+            "confirmed": false
+          }
+        ],
+        "authoredPage": {
+          "request": {
+            "title": "電子郵件助理：第一版範圍 · 工作交接",
+            "content": "## 已決定\n電子郵件助理第一版只產生回覆草稿，由人工審閱後寄出。\n\n## 原因\n一位受訪者希望，涉及報價或交期承諾的回覆，先由自己看過再寄出。\n\n## 尚未核准\n自動寄出例行詢問回覆是新需求，尚未核准。",
+            "source_memory_ids": [
+              "mem_d7c78fa0bcc3",
+              "mem_92e07b4d1e45",
+              "mem_0fb1aa4a0214"
+            ],
+            "creation_kind": "authored",
+            "space": "mail-final-zh-TW"
+          },
+          "response": {
+            "id": "page_2e808205-cde2-44ca-a98c-680e8a0dfda2",
+            "warnings": [
+              "Page '電子郵件助理：第一版範圍 · 工作交接' (page_2e808205-cde2-44ca-a98c-680e8a0dfda2) not found in top-10 self-retrieval results"
+            ],
+            "space": "mail-final-zh-TW",
+            "space_source": "request",
+            "write_outcome": "created"
+          },
+          "displayEdit": {
+            "reason": "Use the decision as the opening paragraph, avoiding an empty heading after the app promotes it to its lead.",
+            "request": {
+              "content": "電子郵件助理第一版只產生回覆草稿，由人工審閱後寄出。\n\n## 原因\n一位受訪者希望，涉及報價或交期承諾的回覆，先由自己看過再寄出。\n\n## 尚未核准\n自動寄出例行詢問回覆是新需求，尚未核准。",
+              "source_memory_ids": [
+                "mem_d7c78fa0bcc3",
+                "mem_92e07b4d1e45",
+                "mem_0fb1aa4a0214"
+              ]
+            },
+            "response": {
+              "ok": true
+            }
+          }
+        },
+        "recall": {
+          "skill": "/recall",
+          "invocation": "Native slash-command expansion observed in Claude session transcript; completed MCP recall tool call observed in acpx receipt.",
+          "tool": "mcp__wenlan_demo__recall",
+          "model": "claude-opus-5-5",
+          "effort": "high",
+          "stopReason": "end_turn",
+          "pageRead": false,
+          "answer": "Resolved space: mail-final-zh-TW (from locked-env)不能。第一版不會自動寄信。\n\n- **第一版範圍**：只產生回覆草稿，寄出前要有人確認，不會自動寄信（範圍在 2026-10-03 確認）。〔mem_d7c78fa0bcc3〕\n- **使用者需求**：有一位受訪者希望先親自看過報價和交期承諾，回覆才寄出。〔mem_92e07b4d1e45〕\n- **待決事項**：「例行詢問自動回覆」目前仍是**未核准的提案**，還沒有決定。下一步要先定義適用條件、撤回機制和失敗通知，之後才決定要不要核准。〔mem_0fb1aa4a0214〕\n\n以上依據的是 Space `mail-final-zh-TW` 中的 memory 記錄，不是 Page 內容。"
+        },
+        "receiptHashes": {
+          "final-zh-TW-handoff.ndjson": "8b8533cbd9a85d957787a6b202bb38eafb597fcfc7ef2fc345ac0b9f2bc504e1",
+          "showcase-zh-TW-recall.ndjson": "801f28cf16ba94c19b634f834cd9580771ecd01a81864e45a2cb027b219aff39",
+          "final-zh-TW-sources.json": "751534e3dd76123d6d309183d61eca651fc4446c8fa37aada94d85d8c7f39784",
+          "final-zh-TW-authored-page.json": "d663db68405a5228e5faa527e5257ab9e752a760b540108b1e36fb867aa39b4d"
+        }
+      },
+      "zh-CN": {
+        "space": "mail-final-zh-CN",
+        "handoffSessionId": "d557db41-7516-442d-8b3c-213dbec379fc",
+        "recallSessionId": "18a20e19-4ba7-412a-bbe7-2a0e12043054",
+        "handoffOutcome": {
+          "storedRecords": 3,
+          "briefVersion": 1,
+          "queued": 0,
+          "conflicts": 0
+        },
+        "records": [
+          {
+            "source_id": "mem_ade478c39ef4",
+            "content": "邮件助手第一版范围已确认（2026-10-03）：只生成回复草稿，由人确认后再发送，不自动发送。",
+            "memory_type": "decision",
+            "confirmed": false
+          },
+          {
+            "source_id": "mem_6c7dd8dde404",
+            "content": "提案（状态：未批准，2026-10-03 提出）：邮件助手对常规咨询自动回复。尚未批准；下一步先明确适用条件、撤回机制和失败通知，再做是否批准的决定。",
+            "memory_type": "fact",
+            "confirmed": false
+          },
+          {
+            "source_id": "mem_24749b909a05",
+            "content": "邮件助手用户访谈：一位受访者希望亲自看过涉及报价和交付时间承诺的回复后再发出。",
+            "memory_type": "fact",
+            "confirmed": false
+          }
+        ],
+        "authoredPage": {
+          "request": {
+            "title": "电子邮件助手：首版范围 · 工作交接",
+            "content": "## 已决定\n电子邮件助手首版只生成回复草稿，由人工审阅后发送。\n\n## 原因\n一位受访者希望，涉及报价或交付时间承诺的回复，先由自己看过再发送。\n\n## 尚未批准\n自动发送例行询问回复是新需求，尚未批准。",
+            "source_memory_ids": [
+              "mem_ade478c39ef4",
+              "mem_6c7dd8dde404",
+              "mem_24749b909a05"
+            ],
+            "creation_kind": "authored",
+            "space": "mail-final-zh-CN"
+          },
+          "response": {
+            "id": "page_190ff064-9680-4241-b6e4-1f5879b614a5",
+            "warnings": [
+              "Page '电子邮件助手：首版范围 · 工作交接' (page_190ff064-9680-4241-b6e4-1f5879b614a5) not found in top-10 self-retrieval results"
+            ],
+            "space": "mail-final-zh-CN",
+            "space_source": "request",
+            "write_outcome": "created"
+          },
+          "displayEdit": {
+            "reason": "Use the decision as the opening paragraph, avoiding an empty heading after the app promotes it to its lead.",
+            "request": {
+              "content": "电子邮件助手首版只生成回复草稿，由人工审阅后发送。\n\n## 原因\n一位受访者希望，涉及报价或交付时间承诺的回复，先由自己看过再发送。\n\n## 尚未批准\n自动发送例行询问回复是新需求，尚未批准。",
+              "source_memory_ids": [
+                "mem_ade478c39ef4",
+                "mem_6c7dd8dde404",
+                "mem_24749b909a05"
+              ]
+            },
+            "response": {
+              "ok": true
+            }
+          }
+        },
+        "recall": {
+          "skill": "/recall",
+          "invocation": "Native slash-command expansion observed in Claude session transcript; completed MCP recall tool call observed in acpx receipt.",
+          "tool": "mcp__wenlan_demo__recall",
+          "model": "claude-opus-5-5",
+          "effort": "high",
+          "stopReason": "end_turn",
+          "pageRead": false,
+          "answer": "Resolved space: mail-final-zh-CN (from locked-env)不能。根据记忆记录，第一版只生成回复草稿，必须由人确认后才能发送。\n\n- **第一版范围**：只生成回复草稿，人工确认后再发送，不自动发送。记录中写明该范围已于 2026-10-03 确认。`mem_ade478c39ef4`\n- **自动回复目前只是提案**：对常规咨询自动回复的提案**尚未批准**。批准前要先明确三件事：适用条件、撤回机制和失败通知。`mem_6c7dd8dde404`\n- **用户访谈**：一位受访者希望在涉及报价和交付时间承诺的回复发出前亲自看过。`mem_24749b909a05`\n\n以上内容来自 Space `mail-final-zh-CN` 中的记忆记录，没有读取任何 Page。"
+        },
+        "receiptHashes": {
+          "final-zh-CN-handoff.ndjson": "fa10a3e3f0f735ade6b6661ca25198ca6800ac3f6b252c2ce8c66951c61ec52b",
+          "showcase-zh-CN-recall.ndjson": "fe01fb958160d7fce2edb83de5f08b08b6b5640414effa7d45ab248badf8cb2f",
+          "final-zh-CN-sources.json": "7991b6bc64e089044417501030a47d4febcdd76c6995f4eec1bd3cac8f450537",
+          "final-zh-CN-authored-page.json": "3280cfbaf87051e6d6bb25dec3b4d43fe61e3070cd1eb01fd21afaec254904f8"
+        }
+      }
+    },
+    "limitations": [
+      "Handoff is not automatic Page synthesis. The lead authored Pages from the actual captured records using the product API.",
+      "Page creation returned a top-10 self-retrieval warning; Page retrieval and per-claim citation verification are not established.",
+      "Traditional Chinese handoff classified the explicitly unapproved proposal as memory_type decision; its content and all showcased recall answers retain the unapproved status. This classification remains unresolved.",
+      "Repeated synthetic fixtures caused cross-Space near-duplicate warnings. No source was overwritten. The English handoff narrative incorrectly called some prior near matches records in the same Space; this report wording is not endorsed.",
+      "The frontend labels an authored/manual-edit Page with Last distilled; this screenshot is not evidence that distillation occurred.",
+      "Initial pilot English handoff kept the unapproved item only in Brief until explicitly captured. Final handoff prompts explicitly ask to preserve unapproved status for later lookup. Earlier recall attempts with distracting metadata or inaccurate scope commentary are excluded, not erased.",
+      "Three observed answers, not proof of zero-configuration reliability, all-client compatibility, time savings or SEO results."
+    ],
+    "rawReceiptLocation": "Private repo-data/wenlan-site/benchmarks/0c2a6ae/2026-10-03-handoff-recall; hashes above identify the exact exercised runs."
+  },
+  "revisionReviewRefresh": {
+    "date": "2026-10-03",
+    "case": "Same fictional email assistant: pricing or delivery commitments now require project-owner review before the user sends. Automatic sending remains unapproved.",
+    "daemonVersion": "0.18.13",
+    "frontendCommit": "d55f9a55235ae5ca2e0197c8e5f05d7c96ed56af",
+    "frontendMode": "Actual product frontend built with vite.dev-live.config.ts and read-only daemon adapter. Not a released native-app acceptance test.",
+    "operations": [
+      "Store a localized decision through the real API.",
+      "Propose updated Page content and link the new source; confirm the Page body and version remain unchanged.",
+      "Inspect the actual current/proposed review dialog.",
+      "Accept through the product revision API; confirm new content, linked source, incremented version and retained history.",
+      "Inspect updated Page and all four sources in the real frontend."
+    ],
+    "locales": {
+      "en": {
+        "pageId": "page_22037dd7-fd07-4f70-aa47-46d21a2e6b77",
+        "space": "mail-final-en",
+        "proposalResponse": {
+          "ok": true,
+          "revision_card_id": "mem_e0444496912a",
+          "gated": true
+        },
+        "approvalMethod": "Real product API. Read-only frontend used to inspect before and after; no claim that a native Approve click was exercised.",
+        "approvalResponse": {
+          "target_source_id": "page_22037dd7-fd07-4f70-aa47-46d21a2e6b77",
+          "revision_source_id": "mem_e0444496912a",
+          "wrote": true
+        },
+        "checks": {
+          "bodyUnchangedUntilApproval": true,
+          "versionUnchangedUntilApproval": true,
+          "proposedBodyApplied": true,
+          "newSourceLinked": true,
+          "versionIncremented": true,
+          "historyContainsEarlierVersion": true
+        },
+        "receiptHashes": {
+          "en-staged.json": "4eff5d3ed46d6ea79d4cf49ed6cd1d492da4f02402d729287cbf5ea7200194be",
+          "en-accepted.json": "ff324c4ed4e351c3cab64e49ba162518cd02507001df46e8562d1851b169fd0e"
+        }
+      },
+      "zh-TW": {
+        "pageId": "page_2e808205-cde2-44ca-a98c-680e8a0dfda2",
+        "space": "mail-final-zh-TW",
+        "proposalResponse": {
+          "ok": true,
+          "revision_card_id": "mem_88ad3e469ba1",
+          "gated": true
+        },
+        "approvalMethod": "Real product API. Read-only frontend used to inspect before and after; no claim that a native Approve click was exercised.",
+        "approvalResponse": {
+          "target_source_id": "page_2e808205-cde2-44ca-a98c-680e8a0dfda2",
+          "revision_source_id": "mem_88ad3e469ba1",
+          "wrote": true
+        },
+        "checks": {
+          "bodyUnchangedUntilApproval": true,
+          "versionUnchangedUntilApproval": true,
+          "proposedBodyApplied": true,
+          "newSourceLinked": true,
+          "versionIncremented": true,
+          "historyContainsEarlierVersion": true
+        },
+        "receiptHashes": {
+          "zh-TW-staged.json": "9479c94023d008b4fa98d65cf1c6d7a5e8908b5531a0982be7649971df5219ac",
+          "zh-TW-accepted.json": "776752b788769ac9ae41da01a0f97122901140b38ac4c9622bb939d9089f6fa2"
+        }
+      },
+      "zh-CN": {
+        "pageId": "page_190ff064-9680-4241-b6e4-1f5879b614a5",
+        "space": "mail-final-zh-CN",
+        "proposalResponse": {
+          "ok": true,
+          "revision_card_id": "mem_dccb3a4ba3f4",
+          "gated": true
+        },
+        "approvalMethod": "Real product API. Read-only frontend used to inspect before and after; no claim that a native Approve click was exercised.",
+        "approvalResponse": {
+          "target_source_id": "page_190ff064-9680-4241-b6e4-1f5879b614a5",
+          "revision_source_id": "mem_dccb3a4ba3f4",
+          "wrote": true
+        },
+        "checks": {
+          "bodyUnchangedUntilApproval": true,
+          "versionUnchangedUntilApproval": true,
+          "proposedBodyApplied": true,
+          "newSourceLinked": true,
+          "versionIncremented": true,
+          "historyContainsEarlierVersion": true
+        },
+        "receiptHashes": {
+          "zh-CN-staged.json": "a1abcc1f1f2b3732b4970963982084b86ab9c649fcc34a4fd0f2c84aab85c893",
+          "zh-CN-accepted.json": "144491002e0b061faaa7d4b9f5cea3a86b07f44a48798a392f45833ceaa7a452"
+        }
+      }
+    },
+    "limitations": [
+      "Lead agent authored the proposed Page content; automatic model generation was not exercised.",
+      "Review gating is proven for these authored Pages, not every possible update path.",
+      "Approval API exercised; native Approve-button mutation was not exercised because the preview adapter is read-only.",
+      "No per-claim citation verification, graph-accuracy, all-client reliability or acquisition outcome is established."
+    ],
+    "rawReceiptLocation": "Private repo-data/wenlan-site/benchmarks/0c2a6ae/2026-10-03-revision-proof",
+    "publicAssets": [
+      "public/images/product-evidence/wenlan-mail-review-en.jpg",
+      "public/images/product-evidence/wenlan-mail-updated-en.jpg",
+      "public/images/product-evidence/wenlan-mail-review-zh-TW.jpg",
+      "public/images/product-evidence/wenlan-mail-updated-zh-TW.jpg",
+      "public/images/product-evidence/wenlan-mail-review-zh-CN.jpg",
+      "public/images/product-evidence/wenlan-mail-updated-zh-CN.jpg"
+    ]
+  }
+}

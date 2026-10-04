@@ -5,6 +5,7 @@ import { LocalizedLink } from "@/i18n/navigation";
 import { canonicalUrl, isTranslatedPath } from "@/i18n/routing";
 import { Spotlight } from "@/components/spotlight";
 import { DocItemIcon } from "@/components/docs/doc-icons";
+import { SiteHeader } from "@/components/site-header";
 
 export function DocsIndexPage({ locale }: { locale: Locale }) {
   const dictionary = getCoreContent(locale);
@@ -53,6 +54,7 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
 
   return (
     <main className="grain min-h-screen">
+      <SiteHeader locale={locale} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -62,7 +64,7 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
 
-      <section className="relative border-b border-[var(--o-border-subtle)] px-6 py-24 sm:py-32">
+      <section className="relative px-6 pt-24 pb-8 sm:pt-32 sm:pb-12">
         <ArticleHalo />
         <div className="relative z-10 mx-auto max-w-5xl">
           <nav aria-label={chrome.breadcrumbAriaLabel} className="flex items-center gap-3 font-mono text-xs text-[var(--o-text-muted)]">
@@ -94,16 +96,7 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
 
       <section className="px-6 py-14">
         <div className="mx-auto max-w-5xl">
-          <div className="py-2">
-            <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-warm)]/80 uppercase">
-              {content.intro.eyebrow}
-            </p>
-            <p className="mt-3 max-w-[20rem] text-sm leading-relaxed text-[var(--o-text-secondary)] sm:max-w-2xl">
-              {content.intro.body}
-            </p>
-          </div>
-
-          <Spotlight className="mt-14 space-y-16">
+          <Spotlight className="space-y-16">
             {docsSections.map((section) => (
               <section key={section.id}>
                 <div className="mb-6">

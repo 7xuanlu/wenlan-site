@@ -6,6 +6,7 @@ import { LOCALE_CONFIG } from "@/i18n/locales";
 import { ArticleHalo } from "../../learn/article-visuals";
 import { docPages, docUrl, formatDocDate, getDocPage } from "../docs";
 import { SITE_URL } from "../../learn/articles";
+import { SiteHeader } from "@/components/site-header";
 
 type DocsArticlePageProps = {
   params: Promise<{
@@ -157,6 +158,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
 
   return (
     <main className="grain min-h-screen">
+      <SiteHeader locale="en" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}

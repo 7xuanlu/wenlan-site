@@ -6,6 +6,7 @@ import { LocalizedLink } from "@/i18n/navigation";
 import { canonicalUrl } from "@/i18n/routing";
 import { WENLAN_RELEASE } from "@/lib/releases";
 import type { WenlanRelease } from "@/lib/release-manifest";
+import { SiteHeader } from "@/components/site-header";
 
 export function DownloadPage({ locale, release = WENLAN_RELEASE }: { locale: Locale; release?: WenlanRelease }) {
   const dictionary = getCoreContent(locale);
@@ -55,6 +56,7 @@ export function DownloadPage({ locale, release = WENLAN_RELEASE }: { locale: Loc
 
   return (
     <main className="grain min-h-[100dvh]">
+      <SiteHeader locale={locale} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -65,7 +67,7 @@ export function DownloadPage({ locale, release = WENLAN_RELEASE }: { locale: Loc
       />
 
       <article>
-        <header className="relative overflow-hidden border-b border-[var(--o-border-subtle)] px-5 py-10 sm:px-6 sm:py-16">
+        <header className="relative overflow-hidden border-b border-[var(--o-border-subtle)] px-5 pt-24 pb-10 sm:px-6 sm:pt-24 sm:pb-16">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-[0.045]"

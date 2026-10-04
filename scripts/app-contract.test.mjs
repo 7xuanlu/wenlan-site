@@ -12,7 +12,7 @@ const execFileAsync = promisify(execFile);
 
 test("relay privacy summary preserves consent, recipients and retention boundaries", () => {
   const page = getDocPage("data-and-privacy");
-  const section = page.sections.find((item) => item.heading === "Optional wenlan-relay connector (pre-release)");
+  const section = page.sections.find((item) => item.heading === "Authenticated Web Access (released desktop feature)");
   assert.ok(section);
   const content = [...section.body, ...section.bullets].join("\n");
   for (const text of ["https://relay.wenlan.app/mcp", "OAuth", "selected existing Space",
@@ -293,29 +293,19 @@ test("public web-client guidance tracks the released wenlan-app remote access bo
     readRepo("src/i18n/content/zh-TW.ts"),
   ]);
 
-  assert.doesNotMatch(remotePanel, /secure tunnel/i);
-  assert.match(remotePanel, /remoteAccess\.noAuthWarning/);
-  assert.match(remoteResources, /no authentication/i);
-  assert.match(remoteResources, /Anyone with the URL can access Wenlan/i);
-  assert.match(remoteResources, /turn Remote Access off when unused/i);
-  assert.doesNotMatch(remotePanel, /rotateRemoteToken|function TokenRow/);
-  assert.match(remoteResources, /Settings → Plugins and create a New Plugin/);
-  assert.match(remoteResources, /Under Connection choose Server URL/);
-  assert.match(remoteResources, /Set Authentication to None/);
-  assert.match(remoteResources, /Open Directory → Plugins → \+ Add marketplace/);
-  assert.match(remoteResources, /Enter the marketplace repo 7xuanlu\/wenlan/);
-  assert.doesNotMatch(remoteResources, /Enable Developer mode/);
-  assert.match(remoteRuntime, /https:\/\/claude\.ai,https:\/\/chatgpt\.com/);
-  assert.match(remoteRuntime, /"--no-auth"/);
-  assert.match(docs, /ChatGPT/);
-  assert.match(docs, /Remote Access/);
-  assert.match(docs, /Settings > Plugins/);
-  assert.match(docs, /Server URL/);
-  assert.match(docs, /Authentication to None/);
-  assert.doesNotMatch(docs, /Developer mode/);
-  assert.match(docs, /--no-auth/);
-  assert.match(docs, /possession of the URL grants access/i);
-  assert.doesNotMatch(docs, /secure (?:URL|tunnel)/i);
+  // v0.18.16 ships consented Space scope and OAuth pairing. The old no-auth
+  // tunnel guidance must not be promoted to the current installation flow.
+  for (const pattern of [/inspectRemotePairing/, /approveRemotePairing/, /revokeRemoteGrant/, /consented/]) assert.match(remotePanel, pattern);
+  for (const pattern of [/device must be online/i, /Approve connection/, /Other and future Spaces/]) assert.match(remoteResources, pattern);
+  assert.doesNotMatch(remotePanel, /remoteAccess\.noAuthWarning/);
+  assert.match(remoteRuntime, /relay/);
+  for (const source of [docs, english, simplified, traditional]) {
+    assert.match(source, /https:\/\/relay\.wenlan\.app\/mcp/);
+    assert.match(source, /OAuth/);
+    assert.match(source, /Space/);
+  }
+  assert.match(docs, /approve.*pairing|pairing.*approve/i);
+  assert.match(docs, /revok/i);
   assert.doesNotMatch(english, /secure Streamable HTTP MCP URL/i);
   assert.doesNotMatch(simplified, /安全的 Streamable HTTP MCP URL/);
   assert.doesNotMatch(traditional, /安全的 Streamable HTTP MCP URL/);

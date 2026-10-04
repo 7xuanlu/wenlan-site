@@ -228,6 +228,12 @@ export type HomeContent = SeoContent & {
       worksWithLabel: string;
       worksWithNote: string;
     };
+    fit: {
+      title: string;
+      needs: readonly { title: string; body: string }[];
+      comparisonPrompt: string;
+      comparisonLabel: string;
+    };
     pains: {
       title: string;
       intro: string;
@@ -238,6 +244,8 @@ export type HomeContent = SeoContent & {
       sourcesChecked: string;
       helpLabel: string;
       accessNote: string;
+      expandDetailsLabel: string;
+      setupSummary: string;
       generations: readonly {
         id: string;
         name: string;

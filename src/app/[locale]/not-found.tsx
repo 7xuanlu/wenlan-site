@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getCoreContent, type NotFoundContent } from "@/i18n/content";
+import type { TranslatedLocale } from "@/i18n/locales";
 import { LocalizedNotFoundContent } from "./not-found-content";
 
 // A not-found boundary cannot read route params on the server, so the locale is
@@ -17,5 +19,10 @@ export const metadata: Metadata = {
 };
 
 export default function LocalizedNotFound() {
-  return <LocalizedNotFoundContent />;
+  const contentByLocale = {
+    "zh-TW": getCoreContent("zh-TW").notFound.content,
+    "zh-CN": getCoreContent("zh-CN").notFound.content,
+  } satisfies Record<TranslatedLocale, NotFoundContent>;
+
+  return <LocalizedNotFoundContent contentByLocale={contentByLocale} />;
 }

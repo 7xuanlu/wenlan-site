@@ -11,6 +11,7 @@ import {
 import { ArticleHalo, MemoryIndex } from "./article-visuals";
 import { LOCALE_CONFIG } from "@/i18n/locales";
 import { alternateUrls } from "@/i18n/routing";
+import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
   title: "AI Memory & Knowledge Base Guides: LLM Wiki for AI Agents | Wenlan",
@@ -39,9 +40,9 @@ export const metadata: Metadata = {
 
 const searchRoutes = [
   {
-    query: "Choose an AI knowledge base tool",
-    intent: "Compare document upload, RAG, note access, and maintained agent knowledge with eight repeatable tests.",
-    href: "/learn/choose-ai-knowledge-base-tool",
+    query: "Compare Wenlan with your current tools",
+    intent: "Compare AI + files, LLM Wiki, Obsidian, Notion and NotebookLM, with sources and setup details.",
+    href: "/learn/choose-ai-knowledge-base-tool#compare-tools",
     context: "workflows",
   },
   {
@@ -161,6 +162,7 @@ export default function LearnPage() {
 
   return (
     <main className="grain min-h-screen">
+      <SiteHeader locale="en" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}

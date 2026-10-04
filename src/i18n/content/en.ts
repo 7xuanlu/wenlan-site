@@ -1,11 +1,5 @@
 import type { CoreContent } from "./schema";
 
-const claudeCommands = [
-  "/plugin marketplace add 7xuanlu/claude-plugins",
-  "/plugin install wenlan@7xuanlu",
-  "/setup",
-] as const;
-
 export const enContent = {
   chrome: {
     status: "translated",
@@ -81,7 +75,7 @@ export const enContent = {
         eyebrow: "Download",
         title: "Download Wenlan for your system.",
         description:
-          "Wenlan v0.18.5 ships a Windows x64 desktop build and a macOS Apple silicon DMG, plus headless runtime builds for Windows, macOS, and Linux.",
+          "Wenlan v0.18.16 ships a Windows x64 desktop build and a macOS Apple silicon DMG, plus headless runtime builds for Windows, macOS, and Linux.",
         stableLabel: "Stable",
         releaseNotesLabel: "Release notes",
         packageIncludesLabel: "CLI · daemon · MCP connector",
@@ -497,7 +491,7 @@ export const enContent = {
           {
             id: "tools",
             q: "What AI tools work with Wenlan?",
-            a: "Claude Code and Codex have plugin paths. Cursor, Claude Desktop, VS Code, Antigravity, and other supported local clients connect through Wenlan's MCP server. ChatGPT and Claude.ai connect through Streamable HTTP MCP, with Remote Access in the desktop app providing the guided path. Obsidian is a read-only source workflow, not an MCP client in this list. Remote Access has no authentication; anyone with the URL can access Wenlan, so stop Remote Access when unused.",
+            a: "Claude Code and Codex have Wenlan plugins. Cursor, Claude Desktop, VS Code and other local clients connect through MCP. Browser clients such as ChatGPT use Web access through an OAuth relay: choose a Space, approve the connection, and keep Wenlan online. You can revoke access in the app. Obsidian is a read-only source workflow.",
           },
           {
             id: "not-notes",
@@ -507,7 +501,7 @@ export const enContent = {
           {
             id: "setup",
             q: "How do I set it up?",
-            a: "Install the runtime and connect the client first. Claude Code uses the marketplace plugin and /setup. Codex can run Wenlan through its plugin or through wenlan connect codex. Other local clients use wenlan connect <client>. ChatGPT and Claude.ai use the desktop app's Remote Access URL through Streamable HTTP MCP. Local capture and retrieval can work without a model or API key; automatic Page distillation and background processing require a configured on-device model or provider API key. The URL has no authentication, so treat it as a secret and stop Remote Access when unused.",
+            a: "Install Wenlan, then connect one AI tool. Claude Code and Codex plugins add commands such as handoff and recall. Other local clients connect through MCP. Saving and searching records does not require a model API key; compiling knowledge pages uses your configured local or cloud model. The setup guide walks through each option. For browser clients, Web access uses OAuth and your approval for a chosen Space. You can revoke access in the app.",
           },
           {
             id: "platforms",
@@ -528,16 +522,37 @@ export const enContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "A living wiki for you and your AI",
-          headline: { pre: "Notes and chats pile up.", emphasis: "Still starting over?", post: "" },
+          eyebrow: "A personal wiki for you and your AI",
+          headline: { pre: "Turn notes and AI chats", emphasis: "into your knowledge base.", post: "" },
           description:
-            "Wenlan turns documents and decisions into a source-backed wiki you and your AI can pick up next time.",
+            "Notes are scattered; good ideas get buried in chats. Wenlan helps organize key points and keep them up to date, so you can refer back and your AI can find what it needs.",
           worksWithLabel: "Works with",
           worksWithNote: "Read from your Obsidian vault without changing your notes.",
         },
+        fit: {
+          "title": "Is Wenlan for you?",
+          "needs": [
+            {
+              "title": "Use what you read and discuss",
+              "body": "Turn notes, documents and saved chats into wiki pages you can find and trace back to their sources."
+            },
+            {
+              "title": "Keep knowledge in step with your project",
+              "body": "When connected documents change, Wenlan helps update related wiki pages, reducing repeated upkeep."
+            },
+            {
+              "title": "Different AI tools. The same knowledge.",
+              "body": "Let connected AI tools use the knowledge you have built, without organizing a separate copy for each."
+            }
+          ],
+          "comparisonPrompt": "Already using a notes or AI tool?",
+          "comparisonLabel": "Compare your options"
+        },
         pains: {
-          "title": "Choose the knowledge workflow that fits.",
-          "intro": "Compare more than features: see where you work day to day, what you can hand off, and which decisions remain yours.",
+          "title": "Compare Wenlan with your current tools",
+          "intro": "Choose what you use today to see what Wenlan adds.",
+          "expandDetailsLabel": "Show detailed explanations",
+          "setupSummary": "Connect your sources and a model, then create your first wiki pages.",
           "scopeNote": "Wenlan is also an LLM Wiki implementation. These approaches can work together.",
           "dimensions": [
             "How do you use it day to day?",
@@ -860,12 +875,12 @@ export const enContent = {
           intro:
             "After provider and client setup, Wenlan can save useful decisions, build sourced Pages when configured processing runs, and help the next session find them.",
           stages: [
-            { id: "capture", step: "/capture · during the session", title: "Save useful decisions" },
+            { id: "capture", step: "/handoff · finish a session", title: "Save useful decisions" },
             { id: "distill", step: "/distill · between sessions", title: "Build a sourced page" },
-            { id: "brief", step: "/brief · next session", title: "Find it next time" },
+            { id: "brief", step: "/recall · ask a specific question", title: "Find it next time" },
           ],
           distillNote: "Agents can also create Pages directly when a topic deserves one right away; provider and client setup still apply.",
-          arcLabel: "/handoff closes each pass",
+          arcLabel: "Keep building on earlier work",
         },
         bento: {
           cells: [
@@ -975,11 +990,11 @@ export const enContent = {
       },
       hero: {
         eyebrow: "About",
-        title: "An LLM wiki for AI work.",
+        title: "A personal knowledge wiki for AI work.",
         description:
-          "Agents capture what they learn, you add sources you trust, and Wenlan keeps source-backed wiki pages current across AI work.",
+          "Wenlan is your personal knowledge wiki for AI work. Save useful decisions with their sources, then find and build on them across your AI tools.",
         statusLabel: "Project status",
-        statusItems: ["v0.18.5", "macOS, Linux, Windows", "Apache-2.0", "Built by Qi-Xuan Lu"],
+        statusItems: ["{release}", "macOS, Linux, Windows", "Apache-2.0 + AGPL-3.0", "Built by Qi-Xuan Lu"],
       },
       sections: [
         {
@@ -987,8 +1002,8 @@ export const enContent = {
           number: "01",
           title: "Why Wenlan exists",
           paragraphs: [
-            "AI work has become serious work, but most sessions still end like disposable conversations. Decisions, debugging lessons, project constraints, and handoffs get buried in old chats.",
-            "Wenlan is built so the work can compound into an LLM wiki. Agents can save what matters, recall it later, and keep refined, source-backed context available across MCP-compatible tools.",
+            "AI work often leaves useful decisions, debugging lessons, and project details buried in old chats. Wenlan gives that knowledge a home you can return to.",
+            "Save what matters, add trusted sources, and shape the notes into pages you can inspect and find again across your AI tools.",
           ],
         },
         {
@@ -997,7 +1012,7 @@ export const enContent = {
           title: "Built by Qi-Xuan Lu",
           paragraphs: [
             "Wenlan is built and maintained by Qi-Xuan Lu (GitHub @7xuanlu). Background in AI infrastructure, knowledge graphs, and local-first systems.",
-            "The work focuses on an LLM wiki agents can build and humans can inspect: hybrid retrieval on libSQL, real git versioning for readable pages, session handoffs and status artifacts, mandatory provenance on distilled pages, and one daemon serving multiple AI tools.",
+            "Wenlan is designed so agents can add to it and people can inspect it. It keeps source-linked pages and session notes in readable files, while one local service makes them available to connected AI tools.",
             "Project channels: GitHub Issues for bugs and feature requests, SECURITY.md for vulnerabilities, and the Wenlan release notes for changes.",
           ],
         },
@@ -1006,7 +1021,7 @@ export const enContent = {
           number: "03",
           title: "Current status",
           paragraphs: [
-            "Wenlan v0.18.5 ships a notarized macOS Apple Silicon DMG and a Windows x64 desktop setup executable, plus native headless runtime artifacts for macOS, Linux (x86_64, aarch64; glibc), and Windows (x86_64). Windows users can choose the desktop setup executable or the headless runtime ZIP. The daemon, CLI, MCP server, Claude Code plugin, and Codex plugin are Apache-2.0; the desktop app crate is AGPL-3.0-only.",
+            "Wenlan {release} includes a notarized macOS Apple Silicon DMG, a Windows x64 desktop installer, and headless runtime packages for macOS, Linux (x86_64 and aarch64; glibc), and Windows (x86_64). The daemon, CLI, MCP server, Claude Code plugin, and Codex plugin use Apache-2.0. The desktop app crate uses AGPL-3.0-only.",
           ],
         },
       ],
@@ -1016,22 +1031,22 @@ export const enContent = {
           {
             id: "local-first",
             title: "Local-first",
-            body: "Memory starts on your machine. Cloud sync, telemetry, local models, and API keys are opt-in choices rather than the default source of truth.",
+            body: "Wenlan keeps its knowledge on your machine by default. The model you configure can run locally or through a cloud provider; cloud sync and telemetry are optional.",
           },
           {
             id: "human-readable",
             title: "Human-readable",
-            body: "Memory, page, and session writes leave Markdown artifacts in local git. The daemon database powers retrieval, while the source-backed artifacts stay inspectable.",
+            body: "Wenlan keeps readable Markdown files in local git. A local database supports search, and you can inspect the source-linked files yourself.",
           },
           {
             id: "session-rhythm",
             title: "Session rhythm",
-            body: "Wenlan follows how AI work actually happens: load context, capture durable facts, write handoffs, and bring the right context into the next run.",
+            body: "Wenlan helps carry useful context from one AI work session to the next: start with notes, save decisions, and prepare a handoff when you finish.",
           },
           {
             id: "deliberate-distillation",
             title: "Deliberate distillation",
-            body: "Between sessions, Wenlan deduplicates repeat facts and links related ideas. Run /distill when a topic deserves a source-backed page; local models or API keys can add automatic page distillation and richer graph work.",
+            body: "Run /distill when a topic is ready to become a source-linked page. With optional model setup, Wenlan can also create pages automatically and add richer links between ideas.",
           },
         ],
       },
@@ -1166,18 +1181,18 @@ export const enContent = {
         eyebrow: "Docs",
         title: "Start using Wenlan.",
         description:
-          "Install Wenlan, connect the AI tools you use, and build a source-backed LLM wiki that stays readable, searchable, and under your control.",
+          "Install Wenlan, connect the AI tool you use, then save one decision and retrieve it. Your knowledge stays readable, searchable, and under your control.",
       },
       intro: {
         eyebrow: "Start here",
-        body: "New users should install first, run setup for their client, then read the daily workflow and core concepts. The project docs cover source-backed pages, architecture, reference paths, evals, releases, scope, source builds, roadmap, development conventions, and contribution paths.",
+        body: "Start with the setup guide: install Wenlan, choose your AI tool, save one decision, and retrieve it. Then explore the daily workflow and core concepts. Architecture, API, configuration, evaluation, release, and contribution references are here for when you need them.",
       },
       sections: {
         items: [
           {
             id: "start-here",
             title: "Start here",
-            description: "Install Wenlan and verify the first memory round trip.",
+            description: "Install Wenlan, save one decision, and retrieve it to confirm your setup.",
             items: [
               {
                 id: "get-started",
@@ -1185,8 +1200,8 @@ export const enContent = {
                 label: "Setup",
                 title: "Get started with Wenlan",
                 description:
-                  "Choose the Claude Code, Codex, ChatGPT, or local MCP path, then confirm the first capture and recall round trip works.",
-                meta: "Wenlan team · Updated Jul 9, 2026 · 4 min setup",
+                  "Choose Claude Code, Codex, ChatGPT, or a local MCP client, then follow the steps to save and retrieve your first decision.",
+                meta: "Wenlan team · Updated Oct 4, 2026 · Three steps",
               },
             ],
           },
@@ -1194,7 +1209,7 @@ export const enContent = {
             id: "after-setup",
             title: "After setup",
             description:
-              "Turn the install into a working habit: start warm, capture useful context, review what should be trusted, and hand off before context goes cold.",
+              "Once setup works, learn how to start with useful context, save important details, review uncertain notes, and hand work off.",
             items: [
               {
                 id: "daily-workflow",
@@ -1238,7 +1253,7 @@ export const enContent = {
             id: "reference",
             title: "Reference",
             description:
-              "Memory types, glossary, architecture, commands, Claude Code and Codex plugins, CLI/service management, updates, upgrade notes, package names, platform support, HTTP API, API examples, typed clients, spaces, graph context, pages, import paths, git history, retrieval status, experimental flags, local data, backup paths, configuration, environment variables, local and web MCP clients, agent profiles, diagnostics, FAQ, and repair paths.",
+              "Optional technical references for commands, settings, APIs, architecture, data, troubleshooting, and more.",
             items: [
               {
                 id: "memory-types",
@@ -1525,7 +1540,7 @@ export const enContent = {
             id: "project",
             title: "Project",
             description:
-              "Security reporting, evaluation, desktop status, changelog, release/versioning, roadmap, project scope, source builds, testing, CI, development conventions, and contribution paths for people deciding whether Wenlan is credible enough to adopt or contribute to.",
+              "Project information for people who want to assess, build, or contribute to Wenlan.",
             items: [
               {
                 id: "security",
@@ -1653,121 +1668,167 @@ export const enContent = {
     content: {
       seo: {
         title: "Install Wenlan for Claude Code, Codex, ChatGPT, and MCP",
-        description:
-          "Install Wenlan, connect Claude Code, Codex, ChatGPT, Claude.ai, or another MCP client, then verify the first capture and recall round trip.",
+        description: "Install Wenlan, connect the AI tool you use, then save and find one useful decision. You do not need to set up every client."
       },
       breadcrumbs: {
         home: "Wenlan",
-        docs: "Docs",
+        docs: "Docs"
       },
       hero: {
         eyebrow: "Get started",
-        title: "Install Wenlan and connect your AI client.",
-        description:
-          "Choose one client path, connect it to the same local daemon, then verify a capture and recall round trip.",
-        meta: ["Wenlan team", "Updated Jul 31, 2026", "5 min setup"],
+        title: "Start with one decision in Wenlan.",
+        description: "Install Wenlan, connect the AI tool you use, then save and find one useful decision. You do not need to set up every client.",
+        meta: [
+          "Wenlan team",
+          "Updated Oct 4, 2026",
+          "Three steps"
+        ],
         setupPathLabel: "Setup path",
-        setupPathItems: ["Runtime", "Claude Code", "Codex", "Local + remote MCP"],
+        setupPathItems: [
+          "Install Wenlan",
+          "Connect one AI tool",
+          "Save and find a decision"
+        ]
       },
       steps: [
         {
           id: "install-runtime",
           number: "01",
-          title: "Install the runtime for your system",
+          title: "Install and open Wenlan",
           paragraphs: [
-            "Wenlan v0.18.5 ships native runtime packages for Windows x64, macOS Apple silicon, and Linux x64 or ARM64 with glibc. Every runtime archive contains the CLI, daemon, and MCP connector.",
-            "On Windows, extract wenlan-windows-x64.zip as one unit into a user-owned directory on PATH. Keep onnxruntime.dll and vulkan-1.dll beside the three executables.",
+            "Download the desktop app for macOS Apple silicon or Windows x64, then follow its setup guide. Your notes and knowledge pages stay in your local Wenlan library.",
+            "To organize sources into knowledge pages, choose a local model or configure a cloud provider in Settings. Cloud processing sends the relevant content to that provider."
           ],
           commands: [
             "# macOS Apple silicon\nnpx -y wenlan setup",
             "# Linux x64 or ARM64\ncurl -fsSL https://raw.githubusercontent.com/7xuanlu/wenlan/main/install.sh | bash\nwenlan setup --basic\nwenlan background on\nwenlan status",
-            "# Windows x64, after extracting the ZIP and adding it to PATH\nwenlan setup --basic\nwenlan background on\nwenlan status",
+            "# Windows x64, after extracting the ZIP and adding it to PATH\nwenlan setup --basic\nwenlan background on\nwenlan status"
           ],
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.5/wenlan-windows-x64.zip",
-              label: "Download Windows x64",
+              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16/wenlan-windows-x64.zip",
+              label: "Download Windows x64"
             },
             {
               id: "all-downloads",
-              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.18.5",
-              label: "All v0.18.5 downloads",
-            },
-          ],
+              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.18.16",
+              label: "All v0.18.16 downloads"
+            }
+          ]
         },
         {
           id: "claude-code-plugin",
           number: "02",
           title: "Claude Code plugin",
           paragraphs: [
-            "This is the fastest path. The plugin handles daemon setup, MCP wiring, local memory setup, and the first round-trip check.",
-            "If Claude Code asks for a restart after installing, restart once, then run /setup.",
+            "Install the Wenlan plugin inside Claude Code with the first two commands below. It adds the session commands and connects Claude Code to Wenlan.",
+            "Restart Claude Code if prompted, then run /wenlan:setup to check the connection. The first setup may need a few minutes to download the search model."
           ],
-          commands: claudeCommands,
-          ctas: [],
+          commands: [
+            "/plugin marketplace add 7xuanlu/wenlan",
+            "/plugin install wenlan@7xuanlu-wenlan",
+            "/wenlan:setup"
+          ],
+          ctas: []
         },
         {
           id: "codex",
           number: "03",
           title: "Codex",
           paragraphs: [
-            "Run Wenlan setup, then connect Codex to the local MCP server. The main Wenlan repository also ships a Codex plugin for users installing from a checkout; wenlan connect codex is the direct no-checkout client path.",
+            "Install the Wenlan runtime using the command-line option above, then run these two commands in your terminal to add the Codex plugin.",
+            "Start a new Codex task and run /setup. If you only want MCP tools, wenlan connect codex is an alternative; it does not install the Wenlan slash skills."
           ],
-          commands: ["wenlan connect codex"],
-          ctas: [],
+          commands: [
+            "codex plugin marketplace add 7xuanlu/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan"
+          ],
+          ctas: []
         },
         {
           id: "chatgpt-web",
           number: "04",
-          title: "ChatGPT and Claude.ai",
+          title: "ChatGPT or Claude.ai (advanced)",
           paragraphs: [
-            "Open Remote Access in the Wenlan desktop app to create a temporary HTTPS URL for Streamable HTTP MCP. The app starts wenlan-mcp with --no-auth on loopback and exposes it through the tunnel, so possession of the URL grants access. In ChatGPT, open Settings > Plugins, create a New Plugin, choose Server URL under Connection, paste the URL, and set Authentication to None. In Claude.ai, install Wenlan from the 7xuanlu/wenlan marketplace through Directory > Plugins.",
-            "This is a custom MCP connection to your own Wenlan runtime, not a claim that Wenlan is listed in the public ChatGPT Apps Directory. Stop Remote Access when you are not using it.",
+            "In the Wenlan desktop app, open Web access, choose the Space you want to share, review the data-access notice, and enable access. Add https://relay.wenlan.app/mcp as an OAuth MCP connection in your AI client.",
+            "Return to Wenlan to inspect and approve the pairing request. Access is limited to your chosen Space; other and future Spaces remain private. Keep Wenlan online during use, and revoke access in the app when no longer needed.",
+            "Remote queries pass through the relay and your AI provider; local access activity is recorded. This is a custom connection, not a public ChatGPT Apps Directory listing."
           ],
           commands: [],
-          ctas: [],
+          ctas: [
+            {
+              id: "remote-access",
+              href: "/docs/mcp-clients",
+              label: "Remote Access guide (English)"
+            }
+          ]
         },
         {
           id: "other-mcp-clients",
           number: "05",
-          title: "Other local MCP clients",
+          title: "Cursor, Claude Desktop, or another local client",
           paragraphs: [
-            "For Cursor, Claude Desktop, Gemini CLI, VS Code, and other supported local MCP clients, set up the Wenlan runtime first. Then let the CLI write the client-specific MCP configuration.",
-            "Wenlan setup installs the CLI, daemon, and MCP connector, registers the daemon with your operating system's user service manager, and verifies status.",
+            "First install the Wenlan runtime using the command-line option above. Then run the matching connection command and restart your AI client.",
+            "This connects the client to Wenlan through MCP. It does not add the Claude Code or Codex plugin commands."
           ],
-          commands: ["wenlan connect cursor\n# or: claude-desktop, vscode, gemini"],
-          ctas: [],
+          commands: [
+            "wenlan connect cursor\n# or: claude-desktop, vscode, gemini"
+          ],
+          ctas: []
         },
         {
           id: "try-first",
-          number: "06",
-          title: "What to try first",
+          number: "03",
+          title: "Save one decision. Find it in a new chat.",
           paragraphs: [
-            "Store one durable project fact, then ask another session or client to recall it. Wenlan should surface the fact and keep its source available to the wiki and review flow.",
+            "With the Claude Code or Codex plugin connected, try the fictional decision below. In Claude Code, use /wenlan:handoff and /wenlan:recall; in Codex, use /handoff and /recall.",
+            "After saving, start a new chat and ask for the decision. Check that the answer preserves “drafts only” and points back to the saved record. Saving a handoff and compiling a knowledge page are separate steps.",
+            "Local MCP clients can save and search using ordinary language. Browser connections currently support queries only: first add a note or file in the desktop app, then ask your AI to find it."
           ],
-          commands: [],
+          commands: [
+            "1. Save this fictional decision:\n/handoff Demo project: the email assistant may draft replies, but sending requires my approval.",
+            "2. In a new chat:\n/recall What can the demo email assistant do without my approval?"
+          ],
           ctas: [
-            { id: "daily-workflow", href: "/docs/daily-workflow", label: "Start daily workflow" },
-            { id: "learn", href: "/learn", label: "Read articles" },
-          ],
-        },
+            {
+              id: "daily-workflow",
+              href: "/docs/daily-workflow",
+              label: "See the daily workflow"
+            },
+            {
+              id: "learn",
+              href: "/learn",
+              label: "Explore examples"
+            }
+          ]
+        }
       ],
       sidebar: {
         eyebrow: "You get",
         items: [
-          { id: "source-backed-wiki", label: "Source-backed LLM wiki" },
-          { id: "local-daemon", label: "Local daemon" },
-          { id: "agent-plugins", label: "Claude Code + Codex" },
-          { id: "mcp-server", label: "Local + remote MCP" },
-        ],
+          {
+            id: "source-backed-wiki",
+            label: "Source-backed LLM wiki"
+          },
+          {
+            id: "local-daemon",
+            label: "Local daemon"
+          },
+          {
+            id: "agent-plugins",
+            label: "Claude Code + Codex"
+          },
+          {
+            id: "mcp-server",
+            label: "Local + remote MCP"
+          }
+        ]
       },
       schema: {
         name: "Get started with Wenlan",
-        description:
-          "Connect Wenlan through Claude Code, Codex, ChatGPT, Claude.ai, or another MCP client.",
-      },
-    },
+        description: "Install Wenlan, connect the AI tool you use, then save and find one useful decision. You do not need to set up every client."
+      }
+    }
   },
   notFound: {
     status: "translated",
