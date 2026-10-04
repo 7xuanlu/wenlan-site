@@ -309,6 +309,8 @@ const baseArticles: LearnArticle[] = [
       "build-local-ai-knowledge-base-from-documents",
       "distilled-wiki-pages-ai-memory",
       "cursor-claude-code-shared-memory",
+      "wenlan-gemini-cli-workflow",
+      "wenlan-vs-mcp-memory-service",
     ],
     officialReferences: [
       {
@@ -519,7 +521,7 @@ const baseArticles: LearnArticle[] = [
           "Yes. Wenlan is MCP-native, so multiple compatible tools can connect to the same local daemon and source-backed wiki when configured.",
       },
     ],
-    relatedSlugs: ["claude-code-memory-command-vs-wenlan", "wenlan-for-claude-code", "mcp-memory-server"],
+    relatedSlugs: ["claude-code-memory-command-vs-wenlan", "wenlan-for-claude-code", "mcp-memory-server", "where-wenlan-stores-claude-code-memory", "ai-coding-agent-loses-context"],
     officialReferences: [
       {
         label: "Claude Code memory docs",
@@ -622,7 +624,7 @@ const baseArticles: LearnArticle[] = [
           "Yes. Claude Code gets the richest slash-command workflow, but Wenlan also exposes the same local memory through MCP for Cursor, Codex, Claude Desktop, VS Code, Gemini CLI, and other clients.",
       },
     ],
-    relatedSlugs: ["claude-code-memory", "claude-code-memory-command-vs-wenlan", "how-to-add-memory-to-claude-code"],
+    relatedSlugs: ["claude-code-memory", "claude-code-memory-command-vs-wenlan", "how-to-add-memory-to-claude-code", "where-wenlan-stores-claude-code-memory"],
     officialReferences: [
       {
         label: "Claude Code memory docs",
@@ -1072,7 +1074,7 @@ source changes
           "Yes. Wenlan can read document sources, index an Obsidian vault, and project maintained pages as Markdown under ~/.wenlan. You can keep your existing knowledge base while using Wenlan for cross-session agent memory and source-backed synthesis.",
       },
     ],
-    relatedSlugs: ["ai-work-memory", "distilled-wiki-pages-ai-memory", "wenlan-vs-obsidian-ai-memory"],
+    relatedSlugs: ["ai-work-memory", "distilled-wiki-pages-ai-memory", "wenlan-vs-obsidian-ai-memory", "wenlan-vs-notion-ai", "wenlan-vs-chatgpt-memory"],
     officialReferences: [
       {
         label: "Wenlan source, memory, and page model",

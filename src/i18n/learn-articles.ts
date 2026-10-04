@@ -664,6 +664,15 @@ const zhTWArticles = {
           "加入衝突來源，確認 lint 或 review 能把問題暴露出來。",
           "重新開啟 client，確認目前答案能被找到並回到原始來源。",
         ],
+        code: {
+          label: "看清 vault 和 Wenlan 各放了什麼",
+          code: [
+            "ls ~/ObsidianVault                   # 你寫、你擁有的 Markdown",
+            "ls ~/.wenlan/sources                 # Wenlan 讀取的資料夾，唯讀",
+            "ls ~/.wenlan/pages                   # Wenlan 重新產生的蒸餾頁面",
+            "head -20 ~/.wenlan/pages/<page>.md   # sources：這一頁背後的記憶 id",
+          ].join("\n"),
+        },
       },
     ],
     comparisonTable: {
@@ -4039,6 +4048,15 @@ const zhCNArticles = {
           "加入冲突来源，确认 lint 或 review 能暴露问题。",
           "重新打开 client，确认当前答案能被找到并回到原始来源。",
         ],
+        code: {
+          label: "看清 vault 和 Wenlan 各放了什么",
+          code: [
+            "ls ~/ObsidianVault                   # 你写、你拥有的 Markdown",
+            "ls ~/.wenlan/sources                 # Wenlan 读取的文件夹，只读",
+            "ls ~/.wenlan/pages                   # Wenlan 重新生成的蒸馏页面",
+            "head -20 ~/.wenlan/pages/<page>.md   # sources：这一页背后的记忆 id",
+          ].join("\n"),
+        },
       },
     ],
     comparisonTable: {
