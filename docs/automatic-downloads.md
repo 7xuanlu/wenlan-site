@@ -1,9 +1,11 @@
 # Automatic stable downloads
 
 The homepage recommendations, three localized download pages, Get Started Windows
-downloads/install text and HowTo schema, and software JSON-LD
-resolve a single validated GitHub release manifest on the server. They do not use
-the documentation snapshot in `src/lib/releases.ts` as a latest-version pin.
+downloads/install text and HowTo schema, and SoftwareApplication JSON-LD on the
+homepage, About, Download, and Get Started pages resolve a validated GitHub release
+manifest on the server. The shared root shell and editorial Docs/Learn pages have no
+runtime release dependency. Their release references remain editorial snapshots in
+`src/lib/releases.ts`, not latest-version pins for download links.
 
 ## Selection and refresh
 
@@ -13,9 +15,12 @@ the documentation snapshot in `src/lib/releases.ts` as a latest-version pin.
   prerelease, or incomplete asset set is not eligible.
 - Download URLs must belong to that exact repository and tag. Versioned installer
   filenames, sizes, and the visible release label come from the same manifest.
-- Next Data Cache revalidates after 300 seconds, on demand. ISR pages also
-  revalidate every 300 seconds. Stale-while-revalidate can serve a previous result
-  on the first visit after expiry; this is not an exact five-minute publication SLA.
+- Next Data Cache revalidates after 300 seconds, on demand. The four release-aware
+  page types across English, Traditional Chinese, and Simplified Chinese make 12
+  public ISR pages, each revalidating every 300 seconds. Editorial Docs/Learn pages
+  and the shared shell do not fetch the release. Stale-while-revalidate can serve a
+  previous result on the first visit after expiry; this is not an exact five-minute
+  publication SLA.
 - No cron, client-side GitHub polling, new storage service, or App release workflow
   change is required. Existing open tabs retain the version they rendered.
 
@@ -26,7 +31,8 @@ failed refresh cannot replace its last valid entry. Only the outer resolver catc
 an initial cache failure and uses the bundled audited snapshot. If no cache survives
 (for example after eviction), that snapshot can be older than the last version
 served elsewhere; this is a safe download fallback, not guaranteed latestness.
-Root layouts have explicit timed revalidation so a fallback build retries later.
+Each release-aware route has explicit 300-second revalidation so an initial fallback
+can retry later. This retry boundary leaves editorial routes outside release ISR.
 
 The Data Cache is Vercel/Next-managed cache, not a durable release-history database.
 The authoritative durable history and artifacts remain on GitHub. New platforms or
@@ -65,6 +71,9 @@ surfaces, not a prerequisite for new installer downloads.
   site's release endpoint and localized download pages.
 - Run lint/build, built technical checks, and desktop/mobile rendering before
   publication. Then verify the production manifest and actual page links.
+- `pnpm seo:technical:built` also checks the compiled cache policy: all sitemap
+  pages must be prerendered, only the 12 release pages may use timed ISR, and
+  those pages retain their 300-second retry even after a cold-cache fallback.
 
 No test should send production analytics, subscribe an address, or count fixture
 observations as organic usage.

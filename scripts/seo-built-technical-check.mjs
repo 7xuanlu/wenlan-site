@@ -2,6 +2,7 @@
 
 import { readFile, readdir, stat } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
+import { assertIsrCachePolicy } from "./isr-cache-policy.mjs";
 
 const CANONICAL_ORIGIN = "https://wenlan.app";
 const BRIDGE_HOST_REDIRECTS = [
@@ -639,6 +640,7 @@ async function run() {
   assertGlobalNotFoundHtml(globalNotFoundHtml);
 
   const routesManifest = await readJson(resolve(args.buildDir, "routes-manifest.json"));
+  const prerenderManifest = await readJson(resolve(args.buildDir, "prerender-manifest.json"));
   const sitemap = await readFile(
     resolve(args.buildDir, "server/app/sitemap.xml.body"),
     "utf8",
@@ -673,6 +675,10 @@ async function run() {
     OLD_SITEMAP_URL_PATTERNS.some((pattern) => pattern.test(loc)),
   );
   assertNone("old sitemap URLs present", oldUrls);
+  const cachePolicy = assertIsrCachePolicy(
+    prerenderManifest,
+    locs.map((loc) => new URL(loc).pathname),
+  );
 
   if (!new RegExp(`Sitemap:\\s*${escapeRegExp(REQUIRED_ROBOTS_SITEMAP)}`, "i").test(robotsTxt)) {
     throw new Error("robots.txt missing production sitemap URL");
@@ -741,6 +747,7 @@ async function run() {
   assertNone("page SEO invalid", pageFailures);
 
   console.log("[seo-built] global 404 ok");
+  console.log(`[seo-built] ISR scope ok: ${cachePolicy.timed} release pages, ${cachePolicy.static} static routes`);
   console.log(`[seo-built] redirects ok: ${REQUIRED_REDIRECTS.length}`);
   console.log(`[seo-built] noindex headers ok: ${REQUIRED_NOINDEX_HEADERS.length}`);
   console.log(`[seo-built] sitemap locs ok: ${locs.length}`);

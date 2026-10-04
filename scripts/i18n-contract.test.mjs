@@ -375,7 +375,7 @@ test("home nav exposes a route-preserving locale switcher", async () => {
   assert.doesNotMatch(switcher, /role="menu/);
 });
 
-test("root SoftwareApplication JSON-LD keeps English featureList off translated locales", async () => {
+test("SoftwareApplication JSON-LD keeps English featureList off translated locales", async () => {
   const { locales, routing } = await loadI18nModules();
   const { softwareApplicationSchema } = await loadStructuredDataModule();
 
@@ -406,16 +406,18 @@ test("root SoftwareApplication JSON-LD keeps English featureList off translated 
   }
 });
 
-test("root document delegates SoftwareApplication schema to the locale-aware helper", async () => {
+test("release page component owns SoftwareApplication JSON-LD and root stays release-independent", async () => {
   const source = await readFile(
     resolve(repoRoot, "src/app/root-document.tsx"),
     "utf8",
   );
+  const releaseData = await readFile(
+    resolve(repoRoot, "src/components/software-application-data.tsx"),
+    "utf8",
+  );
 
-  assert.match(source, /softwareApplicationSchema\(locale, release\)/);
-  assert.match(source, /await getLatestRelease\(\)/);
-  assert.doesNotMatch(source, /featureList\s*:\s*\[/);
-  assert.doesNotMatch(source, /Hybrid retrieval on libSQL/);
+  assert.doesNotMatch(source, /getLatestRelease|softwareApplicationSchema|release-server/);
+  assert.match(releaseData, /softwareApplicationSchema\(locale, release\)/);
 });
 
 test("global unmatched-route 404 is explicitly enabled and branded", async () => {

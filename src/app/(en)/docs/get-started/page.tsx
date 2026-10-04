@@ -3,6 +3,8 @@ import { buildPageMetadata } from "@/i18n/metadata";
 import { GetStartedPage } from "../../../_pages/get-started";
 import { getLatestRelease } from "@/lib/release-server";
 
+export const revalidate = 300;
+
 export const metadata = buildPageMetadata(
   "en",
   "/docs/get-started",

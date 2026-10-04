@@ -28,6 +28,7 @@ import type { Locale } from "@/i18n/locales";
 import { LocalizedLink, localizedHrefForLocale } from "@/i18n/navigation";
 import { SITE_URL } from "@/i18n/routing";
 import { demoVideoForLocale } from "@/lib/demo-video";
+import { SoftwareApplicationData } from "@/components/software-application-data";
 
 /* The works-with strip pairs each client's official mark with its name for
    screen readers. Client names are product names and stay English in every
@@ -108,6 +109,7 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
 
   return (
     <main className="home-page grain relative min-h-screen">
+      <SoftwareApplicationData locale={locale} release={release} />
       <HomeMotion />
       <script
         type="application/ld+json"
