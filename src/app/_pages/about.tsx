@@ -3,10 +3,18 @@ import { getCoreContent, type LinkContent } from "@/i18n/content";
 import { LOCALE_CONFIG, type Locale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
 import { canonicalUrl } from "@/i18n/routing";
+import { SiteHeader } from "@/components/site-header";
+import { WENLAN_RELEASE } from "@/lib/releases";
+import type { WenlanRelease } from "@/lib/release-manifest";
 
-export function AboutPage({ locale }: { locale: Locale }) {
+export function AboutPage({ locale, release = WENLAN_RELEASE }: { locale: Locale; release?: WenlanRelease }) {
   const dictionary = getCoreContent(locale);
-  const content = dictionary.about.content;
+  const source = dictionary.about.content;
+  const content = {
+    ...source,
+    hero: { ...source.hero, statusItems: source.hero.statusItems.map(item => item.replaceAll("{release}", release.tag)) },
+    sections: source.sections.map(section => ({ ...section, paragraphs: section.paragraphs.map(text => text.replaceAll("{release}", release.tag)) })),
+  };
   const chrome = dictionary.chrome.content;
   const [whySection, builderSection, statusSection] = content.sections;
   const homeUrl = canonicalUrl(locale, "/");
@@ -76,6 +84,7 @@ export function AboutPage({ locale }: { locale: Locale }) {
 
   return (
     <main className="grain min-h-screen">
+      <SiteHeader locale={locale} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}

@@ -26,8 +26,8 @@ const pipelineVisualCopy: Record<Locale, PipelineVisualCopy> = {
       "+ staging claim needs review",
     ],
     actions: ["Dedup", "Link", "Supersede"],
-    pageTitle: "Release runbook",
-    pageCitations: "cites /runbooks/release, /docs/architecture",
+    pageTitle: "Saved release decisions",
+    pageCitations: "Rollback needs a database lock · saved decision",
   },
   "zh-TW": {
     illustrationLabel: "工作流程示意，非即時產品輸出",
@@ -37,8 +37,8 @@ const pipelineVisualCopy: Record<Locale, PipelineVisualCopy> = {
       "+ 待整理的主張需要審核",
     ],
     actions: ["去重", "連結", "取代"],
-    pageTitle: "Release runbook",
-    pageCitations: "引用 /runbooks/release、/docs/architecture",
+    pageTitle: "已保存的發布決策",
+    pageCitations: "回滾需要資料庫鎖 · 決策紀錄",
   },
   "zh-CN": {
     illustrationLabel: "工作流程示意，非实时产品输出",
@@ -48,15 +48,15 @@ const pipelineVisualCopy: Record<Locale, PipelineVisualCopy> = {
       "+ 待整理的主张需要审核",
     ],
     actions: ["去重", "连接", "取代"],
-    pageTitle: "Release runbook",
-    pageCitations: "引用 /runbooks/release、/docs/architecture",
+    pageTitle: "已保存的发布决策",
+    pageCitations: "回滚需要数据库锁 · 决策记录",
   },
 };
 
 /**
  * The handoff loop, choreographed. The three stages land in loop order,
  * capture lines arrive one at a time, distill verbs fire, the next-session
- * brief snaps in, then the /handoff arc draws back across the top to close
+ * recall result snaps in, then the return arc draws across the top to close
  * the loop. Renders the final state by default (no-JS, reduced motion,
  * section already visible) and only arms the intro after mount when the
  * section is still below the viewport (same contract as pains.tsx).
@@ -200,7 +200,7 @@ export function PipelineSection({
         </div>
         <div className="relative mt-20 sm:mt-24">
           <div className="pointer-events-none absolute inset-x-10 -top-16 hidden h-14 sm:block" aria-hidden="true">
-            {/* The return arc draws right-to-left after the brief lands: the loop closing is the payoff */}
+            {/* The return arc draws right-to-left after the recall result lands: the loop closing is the payoff */}
             <svg
               viewBox="0 0 1000 56"
               fill="none"

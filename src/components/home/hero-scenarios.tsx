@@ -575,8 +575,8 @@ function AnswerCharacters({ text, offset, interval }: { text: string; offset: nu
   ));
 }
 
-function ScenarioAnswer({ scene, locale, idPrefix, citationLabel }: {
-  scene: Scenario; locale: Locale; idPrefix: string; citationLabel: string;
+function ScenarioAnswer({ scene, locale, idPrefix, citationLabel, animate }: {
+  scene: Scenario; locale: Locale; idPrefix: string; citationLabel: string; animate: boolean;
 }) {
   const orderedSources = sourcesInCitationOrder(scene);
   const interval = Math.min(24, 1600 / Array.from(scene.nextStep).length);
@@ -584,7 +584,9 @@ function ScenarioAnswer({ scene, locale, idPrefix, citationLabel }: {
   function characters(text: string) {
     const start = offset;
     offset += Array.from(text).length;
-    return <AnswerCharacters text={text} offset={start} interval={interval} />;
+    // Hidden panels still reserve their final height, without hundreds of
+    // per-character elements for animations the visitor cannot see.
+    return animate ? <AnswerCharacters text={text} offset={start} interval={interval} /> : <SourceExcerpt text={text} locale={locale} />;
   }
   const highlights = answerHighlights[locale][scene.id].map((phrase) => phrase.replace(/[.!?。！？]$/u, ""));
   const matcher = new RegExp(`(${highlights.map((phrase) => phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`, "g");
@@ -838,7 +840,7 @@ export function HeroScenarios({ locale }: { readonly locale: Locale }) {
                 <div data-flow-stage="answer" className="home-scenario-answer mt-4">
                   <p className="mb-2 text-xs font-medium text-[var(--o-text-secondary)]">{strings.aiAnswerLabel}</p>
                   <p className="text-sm leading-[1.7] text-pretty text-[var(--o-text)]">
-                    <ScenarioAnswer scene={scene} locale={locale} idPrefix={idPrefix} citationLabel={strings.citationLabel} />
+                    <ScenarioAnswer scene={scene} locale={locale} idPrefix={idPrefix} citationLabel={strings.citationLabel} animate={selected} />
                   </p>
                 </div>
 

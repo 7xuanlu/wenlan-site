@@ -18,6 +18,9 @@ import { TrackedLink } from "@/components/tracked-link";
 import { getScenarioPacket } from "@/lib/scenario-examples";
 import { ScenarioWorkedExample } from "@/components/learn/scenario-worked-example";
 import { ProductEvidencePanel } from "@/components/learn/product-evidence-panel";
+import { WorkflowComparison } from "@/components/learn/workflow-comparison";
+import { getCoreContent } from "@/i18n/content";
+import { SiteHeader } from "@/components/site-header";
 import { WorkflowComparisonGuide } from "@/components/learn/workflow-comparison-guide";
 import { RecordedWorkflowProof } from "@/components/learn/recorded-workflow-proof";
 
@@ -199,6 +202,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
 
   return (
     <main className="grain min-h-screen">
+      <SiteHeader locale="en" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -296,6 +300,8 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
             </div>
           </div>
         </section>
+
+        {article.slug === "choose-ai-knowledge-base-tool" && <WorkflowComparison copy={getCoreContent("en").home.content.redesign.pains} locale="en" />}
 
         {getScenarioPacket(article.slug) ? (
           <ScenarioWorkedExample packet={getScenarioPacket(article.slug)!} locale={"en"} />

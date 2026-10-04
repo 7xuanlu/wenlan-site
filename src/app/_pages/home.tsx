@@ -1,8 +1,6 @@
+import { SiteHeader } from "@/components/site-header";
 import { DemoVideo } from "../demo-video";
 import { WaitlistForm } from "../waitlist-form";
-import { ThemeToggle } from "../theme-toggle";
-import { BrandWordmark } from "@/components/brand-wordmark";
-import { LanguageSwitcher } from "@/components/language-switcher";
 import {
   ArrowRightIcon,
   AntigravityBrandIcon,
@@ -16,11 +14,12 @@ import {
 import { DownloadSection } from "@/components/home/download";
 import type { WenlanRelease } from "@/lib/release-manifest";
 import { PainsSection } from "@/components/home/pains";
-import { PipelineSection } from "@/components/home/pipeline";
+import { KnowledgeGraphProof } from "@/components/home/knowledge-graph-proof";
+import { KnowledgeUpdateProof } from "@/components/home/knowledge-update-proof";
 import { HeroScenarios } from "@/components/home/hero-scenarios";
+import { PipelineSection } from "@/components/home/pipeline";
 import { BentoSection } from "@/components/home/bento";
 import { StorageSection } from "@/components/home/storage";
-import { ProductShowcase } from "@/components/home/product-showcase";
 import { HomeMotion } from "@/components/home/home-motion";
 import { HomeReadableText } from "@/components/home/readable-text";
 import { TrackedLink, TrackedLocalizedLink } from "@/components/tracked-link";
@@ -29,22 +28,6 @@ import type { Locale } from "@/i18n/locales";
 import { LocalizedLink, localizedHrefForLocale } from "@/i18n/navigation";
 import { SITE_URL } from "@/i18n/routing";
 import { demoVideoForLocale } from "@/lib/demo-video";
-
-function WenlanMark() {
-  return (
-    <svg viewBox="0 0 32 32" fill="none" className="size-7">
-      <defs>
-        <linearGradient id="nav-ring" x1="4" y1="16" x2="28" y2="16" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" style={{ stopColor: "var(--o-logo-start)" }} />
-          <stop offset="50%" style={{ stopColor: "var(--o-logo-mid)" }} />
-          <stop offset="100%" style={{ stopColor: "var(--o-logo-end)" }} />
-        </linearGradient>
-      </defs>
-      <circle cx="16" cy="16" r="10" stroke="url(#nav-ring)" strokeWidth="5" />
-      <circle cx="20" cy="10" r="3" fill="var(--o-logo-orb)" opacity="0.9" />
-    </svg>
-  );
-}
 
 /* The works-with strip pairs each client's official mark with its name for
    screen readers. Client names are product names and stay English in every
@@ -130,44 +113,7 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavigationSchema) }}
       />
-      <nav className="fixed top-0 z-40 w-full border-b border-[var(--o-border-subtle)] bg-[var(--o-nav-bg)] backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <div className="flex items-center gap-3">
-            <WenlanMark />
-            <BrandWordmark label={content.nav.brand} variant="nav" />
-          </div>
-          <div className="flex items-center gap-3 sm:gap-4">
-            {content.nav.links
-              .filter((link) => link.id !== "github")
-              .map((link) => (
-                <LocalizedLink
-                  key={link.id}
-                  href={link.href}
-                  locale={locale}
-                  className="hidden text-sm text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-text)] sm:inline"
-                >
-                  {link.label}
-                </LocalizedLink>
-              ))}
-            <LanguageSwitcher locale={locale} href="/" />
-            <a
-              href="https://github.com/7xuanlu/wenlan"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={content.nav.githubAriaLabel}
-              className="hidden items-center gap-2 text-sm text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-text)] sm:flex"
-            >
-              <GitHubLogoIcon className="size-5" />
-            </a>
-            <div className="hidden sm:block">
-              <ThemeToggle
-                darkLabel={content.nav.themeToggle.darkLabel}
-                lightLabel={content.nav.themeToggle.lightLabel}
-              />
-            </div>
-          </div>
-        </div>
-      </nav>
+      <SiteHeader locale={locale} home />
 
       {/* Hero: personal knowledge with a source-readable example for people and AI. */}
       <section className="home-hero relative pt-28 pb-8 sm:pt-32">
@@ -222,29 +168,11 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
         </div>
       </section>
 
-      <PainsSection copy={redesign.pains} locale={locale} />
+      <PainsSection copy={redesign.fit} locale={locale} />
+      <KnowledgeUpdateProof locale={locale} />
+      <KnowledgeGraphProof locale={locale} />
 
-      <nav aria-labelledby="home-reading-heading" className="py-8 sm:py-12">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 id="home-reading-heading" className="font-serif text-2xl font-medium tracking-tight">{homeReadingCopy[locale].readingTitle}</h2>
-          <div className="mt-5 grid gap-x-8 gap-y-2 md:grid-cols-3">
-            {content.hero.metaLinks.map((link) => (
-              <TrackedLocalizedLink
-                key={link.id}
-                href={link.href}
-                locale={locale}
-                eventName="learn_article_click"
-                placement="home-acquisition"
-                context="concepts"
-                className="inline-flex min-h-11 items-start gap-3 py-2 text-base font-medium leading-relaxed text-[var(--o-text-secondary)] hover:text-[var(--o-warm)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]"
-              >
-                <span>{link.label}</span>
-                <ArrowRightIcon className="mt-1 size-4 shrink-0" />
-              </TrackedLocalizedLink>
-            ))}
-          </div>
-        </div>
-      </nav>
+
 
       <section id="integrations" data-home-reveal className="scroll-mt-24 px-6 py-20 sm:py-24">
         <div className="mx-auto max-w-6xl">
@@ -282,7 +210,6 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
       </section>
 
       <PipelineSection copy={redesign.pipeline} solution={content.sections.solution} locale={locale} />
-      <ProductShowcase locale={locale} />
       <BentoSection cells={redesign.bento.cells} title={content.sections.features.title} locale={locale} />
       <StorageSection copy={redesign.storage} locale={locale} />
 
@@ -358,6 +285,25 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
               </details>
             ))}
           </div>
+          <nav id="home-reading" aria-labelledby="home-reading-heading" className="mt-10 scroll-mt-24">
+            <h3 id="home-reading-heading" className="text-sm font-medium text-[var(--o-text-secondary)]">{homeReadingCopy[locale].readingTitle}</h3>
+            <div className="mt-3 grid gap-x-6 gap-y-1 md:grid-cols-3">
+              {content.hero.metaLinks.map((link) => (
+                <TrackedLocalizedLink
+                  key={link.id}
+                  href={link.href}
+                  locale={locale}
+                  eventName="learn_article_click"
+                  placement="home-acquisition"
+                  context="concepts"
+                  className="inline-flex min-h-11 items-start justify-between gap-3 py-2 text-sm font-medium leading-6 text-[var(--o-text-secondary)] hover:text-[var(--o-warm)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]"
+                >
+                  <span className="text-pretty">{link.label}</span>
+                  <ArrowRightIcon className="mt-1 size-4 shrink-0" />
+                </TrackedLocalizedLink>
+              ))}
+            </div>
+          </nav>
         </div>
       </section>
 
@@ -396,9 +342,9 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
 }
 
 const homeReadingCopy: Record<Locale, { demoTitle: string; readingTitle: string }> = {
-  en: { demoTitle: "See Wenlan in action", readingTitle: "Explore further" },
-  "zh-TW": { demoTitle: "看看實際操作", readingTitle: "進一步了解" },
-  "zh-CN": { demoTitle: "看看实际操作", readingTitle: "进一步了解" },
+  en: { demoTitle: "See Wenlan in action", readingTitle: "Further reading" },
+  "zh-TW": { demoTitle: "看看實際操作", readingTitle: "延伸閱讀" },
+  "zh-CN": { demoTitle: "看看实际操作", readingTitle: "延伸阅读" },
 };
 
 const demoCaptions: Record<Locale, string> = {

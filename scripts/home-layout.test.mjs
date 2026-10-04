@@ -11,7 +11,7 @@ const homeSource = fs.readFileSync(path.join(repoRoot, "src/app/_pages/home.tsx"
 const proofSource = fs.existsSync(path.join(repoRoot, "src/components/home/task-proof.tsx"))
   ? fs.readFileSync(path.join(repoRoot, "src/components/home/task-proof.tsx"), "utf8")
   : "";
-const painsSource = fs.readFileSync(path.join(repoRoot, "src/components/home/pains.tsx"), "utf8");
+const comparisonSource = fs.readFileSync(path.join(repoRoot, "src/components/learn/workflow-comparison.tsx"), "utf8");
 const workflowGuideSource = fs.existsSync(path.join(repoRoot, "src/components/learn/workflow-comparison-guide.tsx"))
   ? fs.readFileSync(path.join(repoRoot, "src/components/learn/workflow-comparison-guide.tsx"), "utf8")
   : "";
@@ -24,6 +24,7 @@ test("homepage restores core demonstrations without presenting synthetic live pr
   assert.match(homeSource, /168 \/ 4505 \* 100/);
   assert.doesNotMatch(homeSource, /HeroLivingPage/);
   assert.doesNotMatch(homeSource, /UseCasesSection/);
+  assert.match(homeSource, /<PipelineSection\b/);
   assert.match(homeSource, /<BentoSection\b/);
   assert.match(homeSource, /<StorageSection\b/);
   assert.match(homeSource, /<HeroScenarios\b/);
@@ -58,8 +59,8 @@ test("homepage retains a hero download path and places full download after evide
   assert.match(homeSource.slice(0, demoIndex), /HomeCta link=\{content\.hero\.primaryCta\}/);
 });
 
-test("homepage explains relevance and differentiation before workflow and full feature detail", () => {
-  const order = ['<HeroScenarios', 'id="demo"', '<PainsSection', 'id="integrations"', '<PipelineSection', '<ProductShowcase', '<BentoSection', '<StorageSection', 'id="retrieval-evidence"', '<DownloadSection'];
+test("homepage leads with real proof and retains the complete feature overview before download", () => {
+  const order = ['<HeroScenarios', 'id="demo"', '<PainsSection', '<KnowledgeUpdateProof', '<KnowledgeGraphProof', 'id="integrations"', '<PipelineSection', '<BentoSection', '<StorageSection', 'id="retrieval-evidence"', '<DownloadSection'];
   const positions = order.map((marker) => homeSource.indexOf(marker));
   assert.ok(positions.every((position) => position >= 0));
   assert.deepEqual(positions, [...positions].sort((a, b) => a - b));
@@ -79,47 +80,47 @@ test("the preserved worked example remains localized and source-linked", () => {
 });
 
 test("workflow chooser keeps all evidence server rendered without adding client state", () => {
-  assert.doesNotMatch(painsSource, /["']use client["']/);
-  assert.doesNotMatch(painsSource, /useEffect|useRef|useState|IntersectionObserver/);
-  assert.doesNotMatch(painsSource, /generationEras|generationVerbs|superseded|gen 2 and beyond|>current<|line-through|transition-/);
-  assert.match(painsSource, /copy\.generations/);
-  assert.match(painsSource, /rows\.map/);
-  assert.match(painsSource, /copy\.current/);
-  assert.match(painsSource, /data-wenlan-featured/);
-  assert.match(painsSource, /text-\[var\(--o-warm\)\]/);
-  assert.doesNotMatch(painsSource, /<details\b/);
+  assert.doesNotMatch(comparisonSource, /["']use client["']/);
+  assert.doesNotMatch(comparisonSource, /useEffect|useRef|useState|IntersectionObserver/);
+  assert.doesNotMatch(comparisonSource, /generationEras|generationVerbs|superseded|gen 2 and beyond|>current<|line-through|transition-/);
+  assert.match(comparisonSource, /copy\.generations/);
+  assert.match(comparisonSource, /rows\.map/);
+  assert.match(comparisonSource, /copy\.current/);
+  assert.match(comparisonSource, /data-wenlan-featured/);
+  assert.match(comparisonSource, /text-\[var\(--o-warm\)\]/);
+  assert.doesNotMatch(comparisonSource, /<details\b/);
   assert.match(workflowGuideSource, /copy\.current\.highlights\.map/);
   assert.match(workflowGuideSource, /copy\.current\.body/);
 });
 
 test("workflow comparison uses native keyboard controls and matched table rows", () => {
   const choiceSource = fs.readFileSync(path.join(repoRoot, "src/components/home/workflow-choice.tsx"), "utf8");
-  assert.match(painsSource, /data-workflow-comparison/);
-  assert.match(painsSource, /<fieldset\b/);
-  assert.match(painsSource, /<legend\b/);
+  assert.match(comparisonSource, /data-workflow-comparison/);
+  assert.match(comparisonSource, /<fieldset\b/);
+  assert.match(comparisonSource, /<legend\b/);
   assert.match(choiceSource, /type="radio"/);
-  assert.match(painsSource, /selected=\{index === 0\}/);
+  assert.match(comparisonSource, /selected=\{index === 0\}/);
   assert.match(choiceSource, /defaultChecked=\{selected\}/);
-  assert.match(painsSource, /htmlFor=\{choiceId\}/);
-  assert.match(painsSource, /\{row\.tabLabel \?\? row\.name\}/);
+  assert.match(comparisonSource, /htmlFor=\{choiceId\}/);
+  assert.match(comparisonSource, /\{row\.tabLabel \?\? row\.name\}/);
   assert.match(choiceSource, /aria-controls="workflow-comparison-panel"/);
-  assert.equal((painsSource.match(/<table\b/g) ?? []).length, 1, "one shared table preserves row geometry across choices");
-  assert.match(painsSource, /<table\b/);
-  assert.match(painsSource, /scope="col"/);
-  assert.match(painsSource, /scope="row"/);
-  assert.match(painsSource, /copy\.dimensions\.map/);
-  assert.match(painsSource, /workflow-pair-summary/);
-  assert.match(painsSource, /<p>\{row\.summary\}<\/p>/, "show the concrete paired difference, not only overlapping feature lists");
-  assert.match(painsSource, /row\.wenlan\.profile\[index\]/);
-  assert.match(painsSource, /label=\{row\.wenlan\.labels\[index\]\}/);
-  assert.match(painsSource, /label=\{row\.profileLabels\[index\]\}/);
-  assert.match(painsSource, /<strong>\{label\}<\/strong><p>\{detail\}<\/p>/);
-  assert.match(painsSource, /row\.profile/);
-  assert.match(painsSource, /<TrackedLocalizedLink/);
-  assert.match(painsSource, /copy\.detailsLabel/);
-  assert.match(painsSource, /#workflow-\$\{row\.id\}/);
-  assert.match(painsSource, /focus-visible:/);
-  assert.doesNotMatch(painsSource, /overflow-x-auto|table-fixed|aria-hidden="true"[^>]*>.*LLM Wiki/);
+  assert.equal((comparisonSource.match(/<table\b/g) ?? []).length, 1, "one shared table preserves row geometry across choices");
+  assert.match(comparisonSource, /<table\b/);
+  assert.match(comparisonSource, /scope="col"/);
+  assert.match(comparisonSource, /scope="row"/);
+  assert.match(comparisonSource, /copy\.dimensions\.map/);
+  assert.match(comparisonSource, /workflow-pair-summary/);
+  assert.match(comparisonSource, /<p>\{row\.summary\}<\/p>/, "show the concrete paired difference, not only overlapping feature lists");
+  assert.match(comparisonSource, /row\.wenlan\.profile\[index\]/);
+  assert.match(comparisonSource, /label=\{row\.wenlan\.labels\[index\]\}/);
+  assert.match(comparisonSource, /label=\{row\.profileLabels\[index\]\}/);
+  assert.match(comparisonSource, /<strong>\{label\}<\/strong><p>\{detail\}<\/p>/);
+  assert.match(comparisonSource, /row\.profile/);
+  assert.match(comparisonSource, /<TrackedLocalizedLink/);
+  assert.match(comparisonSource, /copy\.detailsLabel/);
+  assert.match(comparisonSource, /#workflow-\$\{row\.id\}/);
+  assert.match(comparisonSource, /focus-visible:/);
+  assert.doesNotMatch(comparisonSource, /overflow-x-auto|table-fixed|aria-hidden="true"[^>]*>.*LLM Wiki/);
   const css = fs.readFileSync(path.join(repoRoot, "src/components/home/workflow-comparison.css"), "utf8");
   assert.match(css, /\.workflow-alternative\s*\{[^}]*grid-area:\s*1\s*\/\s*1[^}]*visibility:\s*hidden/s);
   assert.match(css, /:has\(#workflow-choice-llm-wiki-workflow:checked\)/);
@@ -140,18 +141,18 @@ test("workflow comparison uses native keyboard controls and matched table rows",
 test("workflow comparison defaults to the first data row without positional identity coupling", () => {
   const rows = getCoreContent("en").home.content.redesign.pains.generations;
   assert.equal(rows[0]?.id, "wiki-graveyard", "the first data entry is the AI files workflow");
-  assert.match(painsSource, /rows\.map\(\(row, index\) =>/);
-  assert.match(painsSource, /selected=\{index === 0\}/);
-  assert.doesNotMatch(painsSource, /defaultChecked=\{[^}]*wiki-graveyard/);
-  assert.match(painsSource, /const choiceId = `workflow-choice-\$\{row\.id\}`/);
-  assert.match(painsSource, /#workflow-\$\{row\.id\}/);
+  assert.match(comparisonSource, /rows\.map\(\(row, index\) =>/);
+  assert.match(comparisonSource, /selected=\{index === 0\}/);
+  assert.doesNotMatch(comparisonSource, /defaultChecked=\{[^}]*wiki-graveyard/);
+  assert.match(comparisonSource, /const choiceId = `workflow-choice-\$\{row\.id\}`/);
+  assert.match(comparisonSource, /#workflow-\$\{row\.id\}/);
 });
 
 test("comparison identifies named projects with keyboard and touch accessible background", () => {
-  assert.match(painsSource, /row\.eyebrow/);
-  assert.match(painsSource, /copy\.current\.tagline/);
-  assert.match(painsSource, /WorkflowHelp/);
-  assert.match(painsSource, /copy\.accessNote/);
+  assert.match(comparisonSource, /row\.eyebrow/);
+  assert.match(comparisonSource, /copy\.current\.tagline/);
+  assert.match(comparisonSource, /WorkflowHelp/);
+  assert.match(comparisonSource, /copy\.accessNote/);
   const help = fs.readFileSync(path.join(repoRoot, "src/components/home/workflow-help.tsx"), "utf8");
   for (const contract of [/popover="auto"/, /onFocus=\{show\}/, /onClick=\{show\}/, /onPointerEnter=\{show\}/, /Escape/, /aria-describedby/, /role="tooltip"/]) assert.match(help, contract);
 });
@@ -173,20 +174,21 @@ test("homepage FAQ keeps answers in native collapsed details", () => {
   assert.match(homeSource, /max-w-4xl/);
 });
 
-test("homepage removes redundant horizontal separators while retaining intentional boundaries", () => {
+test("homepage removes redundant horizontal separators while retaining intentional boundaries", async () => {
   assert.doesNotMatch(homeSource, /<section\b[^>]*\b(?:border-b|border-t|border-y)\b/);
   assert.doesNotMatch(homeSource, /mt-16[^\n]*\bborder-t\b/);
   assert.doesNotMatch(homeSource, /<nav\b(?![^>]*fixed top-0)[^>]*\bborder-b\b/);
-  assert.match(homeSource, /<nav className="fixed top-0[^\"]*\bborder-b\b/);
+  const headerSource = fs.readFileSync(new URL("../src/components/site-header.tsx", import.meta.url), "utf8");
+  assert.match(headerSource, /<nav[^>]*className="fixed top-0[^\"]*\bborder-b\b/);
   assert.doesNotMatch(homeSource, /<details\b[^>]*\bborder-y\b/);
   assert.match(homeSource, /<details\b[^>]*\bborder-b\b/);
 
   assert.doesNotMatch(proofSource, /\bborder-t(?:-2)?\b/);
   assert.match(proofSource, /\bborder-l\b/);
 
-  assert.doesNotMatch(painsSource, /<section\b[^>]*\b(?:border-b|border-t|border-y)\b/);
-  assert.doesNotMatch(painsSource, /\bdivide-y\b[^\n]*\bborder-y\b/);
-  assert.doesNotMatch(painsSource, /\bborder-t\b/);
+  assert.doesNotMatch(comparisonSource, /<section\b[^>]*\b(?:border-b|border-t|border-y)\b/);
+  assert.doesNotMatch(comparisonSource, /\bdivide-y\b[^\n]*\bborder-y\b/);
+  assert.doesNotMatch(comparisonSource, /\bborder-t\b/);
 
   assert.doesNotMatch(pipelineSource, /<section\b[^>]*\b(?:border-b|border-t|border-y)\b/);
   assert.doesNotMatch(pipelineSource, /\bgrid\b[^\n]*\bborder-y\b/);
@@ -228,7 +230,9 @@ test("homepage leads with the main-branch bars and keeps the full table in detai
   assert.match(homeSource, /<table/);
   assert.match(homeSource, /<th scope="col"/);
   assert.match(homeSource, /dateTime="2026-06-24"/);
-  assert.match(homeSource, /<ProductShowcase locale=\{locale\}/);
+  const fitSource = fs.readFileSync(path.join(repoRoot, "src/components/home/pains.tsx"), "utf8");
+  assert.match(fitSource, /<ProductShowcase locale=\{locale\}/);
+  assert.doesNotMatch(homeSource, /<ProductShowcase/);
   const scenarios = fs.readFileSync(path.join(repoRoot, "src/components/home/hero-scenarios.tsx"), "utf8");
   assert.match(scenarios, /home-consulted-page[^\"]*rounded-lg/);
 });
@@ -237,7 +241,7 @@ test("recorded product evidence remains a real, hashed asset with a native enlar
   const media = JSON.parse(fs.readFileSync(path.join(repoRoot, "docs/homepage-media-provenance.json"), "utf8"));
   assert.equal(media.benchmarkDate.displayed, "2026-06-24");
   assert.equal(media.benchmarkDate.rerunPerformed, false);
-  assert.equal(media.assets.length, 3);
+  assert.equal(media.assets.length, 24);
   const scenarioMedia = JSON.parse(fs.readFileSync(path.join(repoRoot, "docs/scenario-media-provenance.json"), "utf8"));
   assert.deepEqual(
     fs.readdirSync(path.join(repoRoot, "public/images/product-evidence")).sort(),
@@ -245,7 +249,10 @@ test("recorded product evidence remains a real, hashed asset with a native enlar
     [...media.assets.map((asset) => path.basename(asset.path)), ...scenarioMedia.assets.map((asset) => path.basename(asset.path)), "wenlan-space-review-fixture.png"].sort(),
     "Only inventoried homepage and scenario captures and the existing Learn fixture may be publicly served",
   );
-  assert.deepEqual(media.showcaseOrder, ["knowledge-graph", "wiki-source-hover", "page-review"]);
+  assert.deepEqual(media.showcaseOrder, ["handoff", "knowledge-page-and-sources", "recall"]);
+  assert.equal(media.secondaryView, "knowledge-graph");
+  assert.deepEqual(media.revisionReviewAssets.map(({ locale, stage }) => [locale, stage]),
+    ["en", "zh-TW", "zh-CN"].flatMap((locale) => [[locale, "review"], [locale, "updated"]]));
   for (const asset of media.assets) {
     assert.ok(fs.statSync(path.join(repoRoot, asset.path)).size > 10000);
     assert.match(asset.sha256, /^[a-f0-9]{64}$/);
@@ -255,25 +262,33 @@ test("recorded product evidence remains a real, hashed asset with a native enlar
   assert.match(product, /<dialog/);
   assert.match(product, /showModal/);
   assert.match(product, /aria-controls/);
-  assert.match(product, /非即時連線/);
-  assert.match(product, /<figcaption[\s\S]*?copy\.descriptions\[i\][\s\S]*?copy\.notes\[i\][\s\S]*?copy\.expand/);
-  assert.match(product, /wenlan-recorded-wiki-source-hover\.webp/);
-  assert.match(product, /wenlan-recorded-page-review\.webp/);
-  assert.ok(product.indexOf('src: "/images/product-evidence/wenlan-live-knowledge-graph') < product.indexOf('src: "/images/product-evidence/wenlan-recorded-wiki'));
+  assert.match(product, /Claude Code · \/recall · 虛構案例，實機截圖/);
+  assert.ok(product.includes('wenlan-handoff-${stage}-${locale}.jpg'));
+  for (const locale of ["en", "zh-TW", "zh-CN"]) {
+    const assets = media.activeShowcaseAssets.filter((asset) => asset.locale === locale);
+    assert.deepEqual(assets.map((asset) => asset.stage), ["save", "page", "recall"]);
+    for (const asset of assets) {
+      assert.equal(path.basename(asset.path), `wenlan-handoff-${asset.stage}-${locale}.jpg`);
+    }
+  }
+  assert.equal(new Set(media.activeShowcaseAssets.map((asset) => asset.sha256)).size, 9, "Each language and step needs its own actual capture");
+  assert.doesNotMatch(product, /wenlan-recorded-(?:wiki-source-hover|page-review|claude-capture|ai-recall)|invoice number/i, "Rejected Tally examples must not return to the homepage");
+  assert.doesNotMatch(product, /wenlan-mail-decision-recall\.jpg/, "A search screen must not stand in for an AI client retrieving saved knowledge");
+  for (const asset of media.activeShowcaseAssets) {
+    assert.equal(createHash("sha256").update(fs.readFileSync(path.join(repoRoot, asset.path))).digest("hex"), asset.sha256);
+  }
   assert.match(product, /useState\(0\)/);
-  assert.match(product, /images\.length - 1/);
-  assert.match(product, /% images\.length/);
-  assert.match(product, /max-w-full flex-wrap/);
-  assert.match(product, /width: 2880, height: 1800/);
-  assert.match(product, /wenlan-live-knowledge-graph-20260906\.webp/);
-  assert.match(product, /width: 3456, height: 1950/);
+  assert.match(product, /motion-reduce:transition-none/);
+  assert.doesNotMatch(product, /setInterval|setTimeout/);
+  assert.match(product, /aria-pressed/);
+  assert.match(product, /<figcaption/);
   assert.equal(media.assets[1].sourceSha256, "587fdd4a755e64cbc1090d1e42e821c91b90056b52948b6f1f002e4f91f02a69");
   assert.deepEqual(media.assets[1].dimensions, [3456, 1950]);
 });
 
 test("product evidence offers readable zoom, native panning and the original image", () => {
   const product = fs.readFileSync(path.join(repoRoot, "src/components/home/product-showcase.tsx"), "utf8");
-  assert.match(product, /changeZoom\(true\)/);
+  assert.match(product, /setEnlarged\(true\)/);
   assert.match(product, /width: enlarged \? 1600 : "auto"/);
   assert.match(product, /maxWidth: enlarged \? "none" : "100%"/);
   assert.match(product, /maxHeight: enlarged \? "none" : "68dvh"/);
@@ -282,7 +297,7 @@ test("product evidence offers readable zoom, native panning and the original ima
   assert.match(product, /viewport\.scrollTo\(\{/);
   assert.match(product, /1600 \* focus\.x - viewport\.clientWidth \/ 2/);
   assert.match(product, /<Image[\s\S]*?unoptimized/);
-  assert.match(product, /href=\{images\[active\]\.src\} target="_blank" rel="noopener noreferrer"/);
+  assert.match(product, /href=\{stages\[dialogImage\]\.src\} target="_blank" rel="noopener noreferrer"/);
   assert.match(product, /<form method="dialog"><button autoFocus/);
   assert.match(product, /onClose=\{\(\) => setEnlarged\(false\)\}/);
 });

@@ -34,6 +34,7 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
   display: "swap",
+  preload: false,
 });
 
 export default async function RootDocument({
@@ -54,9 +55,6 @@ export default async function RootDocument({
       suppressHydrationWarning
     >
       <head>
-        <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://www.youtube.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
         <link rel="me" href="https://github.com/7xuanlu" />
         <link rel="author" href="https://github.com/7xuanlu" />
         {process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (

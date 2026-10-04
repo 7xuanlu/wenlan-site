@@ -1,12 +1,16 @@
 "use client";
 
-import { getCoreContent } from "@/i18n/content";
+import type { NotFoundContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
 
-export function NotFoundPage({ locale }: { locale: Locale }) {
-  const content = getCoreContent(locale).notFound.content;
-
+export function NotFoundPage({
+  locale,
+  content,
+}: {
+  locale: Locale;
+  content: NotFoundContent;
+}) {
   return (
     <main className="grain min-h-screen px-6 py-24">
       <div className="mx-auto max-w-3xl">

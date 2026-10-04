@@ -5,6 +5,7 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { WENLAN_RELEASE } from '../src/lib/releases.ts';
 import { DownloadPage } from '../src/app/_pages/download.tsx';
+import { AboutPage } from '../src/app/_pages/about.tsx';
 import { GetStartedPage } from '../src/app/_pages/get-started.tsx';
 import { DownloadSection } from '../src/components/home/download.tsx';
 import { softwareApplicationSchema } from '../src/app/structured-data.ts';
@@ -33,13 +34,17 @@ test('all locales render the supplied release rather than their build-time snaps
     assert.ok(!setupHtml.includes(`/releases/download/${WENLAN_RELEASE.tag}/`));
     assert.ok(!setupHtml.includes(WENLAN_RELEASE.tag), 'visible install copy and HowTo schema must agree');
     assert.ok(setupHtml.includes(`All ${release.tag} downloads`) || setupHtml.includes(`全部 ${release.tag}`));
+    const aboutHtml=renderToStaticMarkup(React.createElement(AboutPage,{locale,release}));
+    assert.ok(aboutHtml.includes(release.tag), `${locale}: About shows the resolved release`);
+    assert.ok(!aboutHtml.includes('{release}'));
+    assert.ok(!aboutHtml.includes(WENLAN_RELEASE.tag), `${locale}: About must not show the fallback tag`);
     const recommendation=section.props.children.props.children[1];
     assert.deepEqual(recommendation.props.platforms.map(a=>a.href),release.assets.map(a=>a.href));
   }
 });
 
 test('production route wrappers and root schema inject the same server resolver',async()=>{
-  for(const file of ['(en)/page.tsx','[locale]/page.tsx','(en)/download/page.tsx','[locale]/download/page.tsx','(en)/docs/get-started/page.tsx','[locale]/docs/get-started/page.tsx','root-document.tsx']) {
+  for(const file of ['(en)/page.tsx','[locale]/page.tsx','(en)/about/page.tsx','[locale]/about/page.tsx','(en)/download/page.tsx','[locale]/download/page.tsx','(en)/docs/get-started/page.tsx','[locale]/docs/get-started/page.tsx','root-document.tsx']) {
     const source=await readFile(new URL(`../src/app/${file}`,import.meta.url),'utf8');
     assert.match(source,/await getLatestRelease\(\)/,file);
   }

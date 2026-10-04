@@ -133,7 +133,7 @@ function LinkList({ locale, labels }: { readonly locale: Locale; readonly labels
         <LocalizedLink href="/docs/review-and-trust" locale={locale} className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-[var(--o-text-secondary)] hover:text-[var(--o-warm)]">
           {labels.reviewAndTrust}<ArrowRightIcon className="h-4 w-4" />
         </LocalizedLink>
-        <LocalizedLink href="/#knowledge-workflows" locale={locale} className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-[var(--o-text-secondary)] hover:text-[var(--o-warm)]">
+        <LocalizedLink href="/learn/choose-ai-knowledge-base-tool#compare-tools" locale={locale} className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-[var(--o-text-secondary)] hover:text-[var(--o-warm)]">
           {labels.backToComparison}<ArrowRightIcon className="h-4 w-4" />
         </LocalizedLink>
       </div>

@@ -1,11 +1,5 @@
 import type { CoreContent } from "./schema";
 
-const claudeCommands = [
-  "/plugin marketplace add 7xuanlu/claude-plugins",
-  "/plugin install wenlan@7xuanlu",
-  "/setup",
-] as const;
-
 export const zhTWContent = {
   chrome: {
     status: "translated",
@@ -17,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "ad7f0582f645d0a8e8af8a5bbeeee6645a4424899b213e3e2d050ffa9900f81f",
+    sourceHash: "26c7e90a1b38125e602cb5ede6624e646d87b54534370e1818e7a1b16622e8e5",
     content: {
       seo: {
         title: "Wenlan 文瀾官網 | AI 工作的 LLM wiki",
@@ -82,7 +76,7 @@ export const zhTWContent = {
         title:
           "下\u2060載\u2060適\u2060合\u2060你\u2060系\u2060統\u2060的 Wenlan。",
         description:
-          "Wenlan v0.18.5 提供 Windows x64 桌面版與 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 套件。",
+          "Wenlan v0.18.16 提供 Windows x64 桌面版與 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 套件。",
         stableLabel: "穩定版",
         releaseNotesLabel: "版本說明",
         packageIncludesLabel: "內含 CLI、daemon 與 MCP connector",
@@ -492,7 +486,7 @@ export const zhTWContent = {
           {
             id: "tools",
             q: "哪些 AI 工具可以搭配 Wenlan？",
-            a: "Claude Code 和 Codex 有 plugin 路徑。Cursor、Claude Desktop、VS Code、Antigravity 和其他支援的本地 clients 透過 Wenlan 的 MCP server 連接。ChatGPT 和 Claude.ai 使用 Streamable HTTP MCP，desktop app 的 Remote Access 提供引導式路徑。Obsidian 是唯讀的來源工作流程，不是這份清單中的 MCP 用戶端。Remote Access 沒有驗證；任何拿到 URL 的人都能存取 Wenlan，因此不用時請停止 Remote Access。",
+            a: "Claude Code 和 Codex 有 Wenlan 外掛；Cursor、Claude Desktop、VS Code 等本地工具透過 MCP 連接。ChatGPT 等瀏覽器工具使用 OAuth 遠端連線：先選擇 Space、批准配對，使用時保持 Wenlan 在線，也能在 App 中撤銷存取。Obsidian 則是唯讀的來源匯入方式。",
           },
           {
             id: "not-notes",
@@ -502,7 +496,7 @@ export const zhTWContent = {
           {
             id: "setup",
             q: "我要怎麼設定？",
-            a: "先安裝 runtime 並連接 client。Claude Code 使用 marketplace plugin 和 /setup。Codex 可以使用 Wenlan plugin，或執行 wenlan connect codex。其他本地 clients 使用 wenlan connect <client>。ChatGPT 和 Claude.ai 透過 desktop app 的 Remote Access URL 使用 Streamable HTTP MCP。本地 capture 與 retrieval 可以不使用 model 或 API key；automatic Page distillation 和背景處理需要已設定的 on-device model 或 provider API key。該 URL 沒有驗證，請視同秘密，並在不用時停止 Remote Access。",
+            a: "先安裝 Wenlan，再連接一個 AI 工具。Claude Code 和 Codex 外掛提供 handoff、recall 等指令，其他本地工具則透過 MCP 連接。保存與搜尋紀錄不需要模型 API 金鑰；整理成知識頁時，會使用你設定的本地或雲端模型。入門指南會帶你完成所選工具的設定。 瀏覽器工具使用 OAuth 網頁存取，需由你批准指定 Space 的連線，也能在 App 中撤銷存取。",
           },
           {
             id: "platforms",
@@ -530,8 +524,27 @@ export const zhTWContent = {
           worksWithLabel: "可搭配",
           worksWithNote: "可讀取 Obsidian 筆記，保留原文。",
         },
-        pains: {
+        fit: {
           "title": "Wenlan 適合你嗎？",
+          "needs": [
+            {
+              "title": "聊過、讀過的，下次用得上",
+              "body": "把筆記、文件與保存的對話整理成知識頁，需要時找得到，也查得到來源。"
+            },
+            {
+              "title": "專案有變，知識也跟著更新",
+              "body": "已連接的文件更新後，Wenlan 協助更新相關知識頁，減少反覆整理。"
+            },
+            {
+              "title": "換個 AI，也能用同一份知識",
+              "body": "讓已連接的 AI 工具查閱你累積的知識，不必各自整理一份。"
+            }
+          ],
+          "comparisonPrompt": "已經有筆記或 AI 工具？",
+          "comparisonLabel": "看看差異"
+        },
+        pains: {
+          "title": "比較 Wenlan 與你目前的工具",
           "intro": "選擇你目前使用的工具，看看 Wenlan 能補上什麼。",
           "expandDetailsLabel": "顯示詳細說明",
           "setupSummary": "使用前需連接來源與模型，並建立首批知識頁。",
@@ -855,14 +868,14 @@ export const zhTWContent = {
         },
         pipeline: {
           intro:
-            "連接 AI 工具後，用 Wenlan 保存有用決策，再用已設定的模型建立有來源的頁面；下次遇到相關問題，再把頁面與依據找回。",
+            "連接 AI 工具後，用 Wenlan 保存有用決策，再用已設定的模型建立有來源的頁面；下次遇到相關問題，再查回已保存的紀錄。",
           stages: [
-            { id: "capture", step: "/capture · 工作當下", title: "保存有用決策" },
+            { id: "capture", step: "/handoff · 工作收尾", title: "保存有用決策" },
             { id: "distill", step: "/distill · 整理來源", title: "建立有來源的頁面" },
-            { id: "brief", step: "/brief · 下次開始", title: "下次把它找回來" },
+            { id: "brief", step: "/recall · 遇到相關問題", title: "下次把它找回來" },
           ],
           distillNote: "AI 代理也能直接建立主題頁；請先連接工具，確認產生內容所需的模型設定，並檢查實際結果。",
-          arcLabel: "/handoff 收尾每一輪",
+          arcLabel: "留下的知識，接著用",
         },
         bento: {
           cells: [
@@ -959,7 +972,7 @@ export const zhTWContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "5025c3f8c49ce9c4983b722cee5465f7c0711c67d0f8e03e9f63b0648bef0886",
+    sourceHash: "334e175eda2a1e316ce41e9d4715dbeb626b3826c60e03b475ab649337b9111a",
     content: {
       seo: {
         title: "關於 Wenlan | AI 工作的 LLM wiki",
@@ -972,11 +985,11 @@ export const zhTWContent = {
       },
       hero: {
         eyebrow: "關於",
-        title: "AI 工作的 LLM\u00a0wiki。",
+        title: "AI 工作的個人知識 wiki。",
         description:
-          "AI 代理捕捉學到的內容，你加入信任來源，Wenlan 讓有來源依據的 wiki 頁面在 AI 工作中保持最新。",
+          "Wenlan 是 AI 工作的個人知識 wiki。保存重要決定與來源，之後就能在不同 AI 工具中找回並接著使用。",
         statusLabel: "專案狀態",
-        statusItems: ["版本 v0.18.5", "支援 macOS、Linux、Windows", "Apache-2.0", "Qi-Xuan Lu 建置"],
+        statusItems: ["版本 {release}", "支援 macOS、Linux、Windows", "開源授權：Apache-2.0 + AGPL-3.0", "Qi-Xuan Lu 建置"],
       },
       sections: [
         {
@@ -984,8 +997,8 @@ export const zhTWContent = {
           number: "01",
           title: "為什麼 Wenlan 存在",
           paragraphs: [
-            "AI 工作已經變成嚴肅工作，但大多數 sessions 仍像一次性對話一樣結束。決策、debugging lessons、專案限制和 handoffs 都被埋在舊 chats 裡。",
-            "Wenlan 是為了讓工作累積成 LLM wiki 而建。AI 代理可以保存重要內容，之後 recall，並讓有來源依據的 refined context 跨 MCP-compatible tools 持續可用。",
+            "AI 工作常把重要決定、除錯經驗和專案資訊留在舊對話裡。Wenlan 把這些知識整理成日後找得到的內容。",
+            "保存重要資訊、補上可信的來源，再整理成可檢查、可搜尋的頁面，讓不同 AI 工具都能接續使用。",
           ],
         },
         {
@@ -994,7 +1007,7 @@ export const zhTWContent = {
           title: "由 Qi-Xuan Lu 建置",
           paragraphs: [
             "Wenlan 由 Qi-Xuan Lu (GitHub @7xuanlu) 建置與維護。背景涵蓋 AI infrastructure、knowledge graphs 和 local-first systems。",
-            "這項工作聚焦在 agent 能建構、使用者能檢查的 LLM wiki：libSQL 上的 hybrid retrieval、可讀頁面的真實 git versioning、session handoffs、status artifacts、distilled pages 的 mandatory provenance，以及一個 daemon 服務多種 AI tools。",
+            "Wenlan 讓 AI 代理能補充內容，也讓人能檢查結果。來源連結頁面與工作紀錄會以易讀檔案保存，再由本機服務提供給已連接的 AI 工具。",
             "專案渠道：bugs 和 feature requests 用 GitHub Issues，vulnerabilities 看 SECURITY.md，變更則看 Wenlan release notes。",
           ],
         },
@@ -1003,7 +1016,7 @@ export const zhTWContent = {
           number: "03",
           title: "目前狀態",
           paragraphs: [
-            "Wenlan v0.18.5 提供已公證的 macOS Apple Silicon DMG 與 Windows x64 桌面版，以及 macOS、Linux (x86_64, aarch64; glibc) 和 Windows (x86_64) 原生 headless runtime 套件。Windows 使用者可以選擇桌面版 setup 安裝檔或 headless runtime ZIP。daemon、CLI、MCP server、Claude Code plugin 與 Codex plugin 採 Apache-2.0；桌面 App crate 採 AGPL-3.0-only。",
+            "Wenlan {release} 提供已公證的 macOS Apple Silicon DMG、Windows x64 桌面安裝檔，以及 macOS、Linux（x86_64、aarch64；glibc）和 Windows（x86_64）的 headless 執行套件。daemon、CLI、MCP server、Claude Code plugin 與 Codex plugin 採 Apache-2.0；桌面 App crate 僅採 AGPL-3.0。",
           ],
         },
       ],
@@ -1013,22 +1026,22 @@ export const zhTWContent = {
           {
             id: "local-first",
             title: "本地優先",
-            body: "Memory 從你的機器開始。Cloud sync、telemetry、本地模型和 API keys 都是 opt-in，而不是預設的 source of truth。",
+            body: "Wenlan 預設把知識保存在你的電腦。本機或雲端模型都可以作為你設定的模型；雲端同步與遙測功能則由你選擇是否開啟。",
           },
           {
             id: "human-readable",
             title: "人可閱讀",
-            body: "Memory、page 和 session writes 會在本地 git 留下 Markdown artifacts。daemon database 負責 retrieval，而有來源引用的 artifacts 仍可檢查。",
+            body: "Wenlan 會在本機 git 留下易讀的 Markdown 檔案。本機資料庫負責搜尋，你也可以直接檢查有來源連結的檔案。",
           },
           {
             id: "session-rhythm",
             title: "Session 節奏",
-            body: "Wenlan 順著 AI 工作實際發生的方式：載入 context、捕捉 durable facts、寫 handoffs，並把正確 context 帶進下一次執行。",
+            body: "Wenlan 協助你把有用資訊帶到下一次 AI 工作：先讀取已有筆記、保存重要決定，結束時整理交接內容。",
           },
           {
             id: "deliberate-distillation",
-            title: "刻意蒸餾",
-            body: "Sessions 之間，Wenlan 會 deduplicate 重複 facts 並連結相關 ideas。當一個 topic 值得成為 source-backed page 時，執行 /distill；本地模型或 API keys 可以加入 automatic page distillation 和更豐富的 graph work。",
+            title: "需要時整理成頁",
+            body: "在 Wenlan 中，主題整理到適合成頁時，可執行 /distill 建立有來源的頁面。完成模型設定後，也可以選擇自動產生頁面，並補上更多想法之間的連結。",
           },
         ],
       },
@@ -1148,7 +1161,7 @@ export const zhTWContent = {
   },
   docs: {
     status: "translated",
-    sourceHash: "e21926e641813121b13ad92603d66fca7d97494042cca9bf3bdb51157e0c8527",
+    sourceHash: "3ec15024f71be188440a73397cfa2b1f6dce2bffdc3b4c8ea7cf74f3bc09b30e",
     content: {
       seo: {
         title: "Wenlan 文件 | AI 工作的 LLM wiki",
@@ -1163,18 +1176,18 @@ export const zhTWContent = {
         eyebrow: "文件",
         title: "開始使用 Wenlan。",
         description:
-          "安裝 Wenlan、連接你使用的 AI tools，並建立可讀、可搜尋、由你掌控的 source-backed LLM wiki。",
+          "先安裝 Wenlan 並連接你使用的 AI 工具，再保存一個決定並找回它。知識會保留為可讀、可搜尋且由你掌控的內容。",
       },
       intro: {
         eyebrow: "從這裡開始",
-        body: "新使用者應該先安裝，為自己的 client 執行 setup，接著閱讀 daily workflow 和 core concepts。Project docs 涵蓋 source-backed pages、architecture、reference paths、evals、releases、scope、source builds、roadmap、development conventions 和 contribution paths。",
+        body: "先看入門指南：安裝 Wenlan、選擇 AI 工具、保存一個決定，再把它找回來。接著可了解日常工作流程與核心概念。架構、API、設定、評估、版本和貢獻等進階資料，之後需要時再看。部分進階參考頁目前僅提供英文。",
       },
       sections: {
         items: [
           {
             id: "start-here",
             title: "從這裡開始",
-            description: "安裝 Wenlan，並驗證第一次 memory round trip。",
+            description: "安裝 Wenlan，保存一個決定，再把它找回來，確認設定完成。",
             items: [
               {
                 id: "get-started",
@@ -1182,8 +1195,8 @@ export const zhTWContent = {
                 label: "設定",
                 title: "開始使用 Wenlan",
                 description:
-                  "選擇 Claude Code、Codex、ChatGPT 或本地 MCP 路徑，然後確認第一次 capture 與 recall round trip 可以運作。",
-                meta: "Wenlan 團隊 · 更新於 2026 年 7 月 9 日 · 4 分鐘設定",
+                  "選擇 Claude Code、Codex、ChatGPT 或本機 MCP 工具，依照步驟保存並找回第一個決定。",
+                meta: "Wenlan 團隊 · 更新於 2026 年 10 月 4 日 · 三個步驟",
               },
             ],
           },
@@ -1191,15 +1204,15 @@ export const zhTWContent = {
             id: "after-setup",
             title: "安裝之後",
             description:
-              "把安裝變成工作習慣：帶著 context 開始、捕捉有用內容、檢查哪些內容應該被信任，並在 context 變冷前 hand off。",
+              "設定完成後，可了解如何讀取重要背景、保存有用資訊、檢查尚未確認的內容，以及整理工作交接。",
             items: [
               {
                 id: "daily-workflow",
                 href: "/docs/daily-workflow",
                 label: "工作流程",
-                title: "每日 Workflow",
+                title: "日常工作流程",
                 description:
-                  "帶著 context 開始，捕捉重要內容，需要時 recall，並在 context 變冷前 hand off。",
+                  "開始工作前先讀取背景，記下重要資訊，需要時搜尋，結束前整理交接。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1208,7 +1221,7 @@ export const zhTWContent = {
                 label: "捕捉",
                 title: "捕捉品質",
                 description:
-                  "判斷什麼該進 Wenlan：durable facts、decisions、lessons、gotchas、corrections 和 project context。",
+                  "了解 Wenlan 中哪些內容值得保存：長期有效的事實、決定、經驗、注意事項、修正和專案背景。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1217,7 +1230,7 @@ export const zhTWContent = {
                 label: "信任",
                 title: "檢視與信任",
                 description:
-                  "了解 Wenlan 如何讓不確定的 memory 可見：pending captures、revisions、contradictions、rejections、confirm 和 forget。",
+                  "查看 Wenlan 中待確認或彼此矛盾的內容，並了解如何確認、拒絕或刪除記錄。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1226,7 +1239,7 @@ export const zhTWContent = {
                 label: "概念",
                 title: "核心概念",
                 description:
-                  "了解 Wenlan 背後的元件：memories、sessions、handoffs、pages、daemon、MCP、Markdown 和 local index。",
+                  "認識 Wenlan 的基本組成：記憶、工作階段、交接、頁面、MCP、本機索引與 Markdown 檔案。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
               },
             ],
@@ -1235,7 +1248,7 @@ export const zhTWContent = {
             id: "reference",
             title: "參考資料",
             description:
-              "Memory types、glossary、architecture、commands、Claude Code 和 Codex plugins、CLI/service management、updates、upgrade notes、package names、platform support、HTTP API、API examples、typed clients、spaces、graph context、pages、import paths、git history、retrieval status、experimental flags、local data、backup paths、configuration、environment variables、本地與 web MCP clients、agent profiles、diagnostics、FAQ 和 repair paths。",
+              "需要時再查閱的技術資料，包括指令、設定、API、架構、資料與疑難排解。",
             items: [
               {
                 id: "memory-types",
@@ -1243,7 +1256,7 @@ export const zhTWContent = {
                 label: "記憶",
                 title: "Wenlan Memory 類型與 memory_type 值",
                 description:
-                  "依據 capture 日後為何重要，選擇 identity、preference、decision、lesson、gotcha 或 fact。",
+                  "依照內容日後的用途，選擇 identity、preference、decision、lesson、gotcha 或 fact。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 7 月 10 日 · 5 分鐘閱讀",
               },
               {
@@ -1252,7 +1265,7 @@ export const zhTWContent = {
                 label: "詞彙表",
                 title: "詞彙表",
                 description:
-                  "快速對照 Wenlan 術語：memory、handoff、page、space、daemon、MCP、local index、provenance 和 eval language。",
+                  "查詢 Wenlan 常用詞彙，包括記憶、交接、頁面、工作空間、daemon、MCP、本機索引與來源記錄。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1261,7 +1274,7 @@ export const zhTWContent = {
                 label: "架構",
                 title: "架構",
                 description:
-                  "Wenlan 的組成方式：一個本地 daemon、薄 client、shared wire types、本地 artifacts，以及由 wenlan-core 負責的 retrieval。",
+                  "了解 Wenlan 如何以一個本機服務連接各工具，並由 wenlan-core 負責搜尋。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 7 分鐘閱讀",
               },
               {
@@ -1270,7 +1283,7 @@ export const zhTWContent = {
                 label: "矩陣",
                 title: "產品矩陣",
                 description:
-                  "對照 Wenlan 的 daemon、CLI、MCP connector、plugins、desktop app、程式碼庫、平台 artifacts 和 release 邊界。",
+                  "對照 Wenlan 的 daemon、CLI、MCP connector、plugins、桌面 App、程式碼庫、平台套件與版本範圍。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 7 月 9 日 · 6 分鐘閱讀",
               },
               {
@@ -1279,7 +1292,7 @@ export const zhTWContent = {
                 label: "指令參考",
                 title: "Commands 與 Tools",
                 description:
-                  "日常使用 Wenlan 時最重要的 Claude Code 與 Codex plugin commands、CLI commands 和 MCP tools。",
+                  "查閱 Wenlan 在 Claude Code、Codex 中的 plugin 指令、CLI 指令和 MCP tools。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1288,7 +1301,7 @@ export const zhTWContent = {
                 label: "外掛",
                 title: "Claude Code 外掛",
                 description:
-                  "在 Claude Code 中使用 Wenlan 最完整的 workflow：setup、brief、capture、recall、lint diagnostics、curate、distill、pages 和 handoff。",
+                  "了解 Wenlan 在 Claude Code 外掛中的用法，包括 /brief、/capture、/recall、/curate、/distill 和 /handoff。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 7 月 17 日 · 6 分鐘閱讀",
               },
               {
@@ -1297,7 +1310,7 @@ export const zhTWContent = {
                 label: "CLI 管理",
                 title: "Wenlan CLI 指令與 Service 管理",
                 description:
-                  "使用 Wenlan CLI 做 setup、daemon status、doctor diagnostics、background service management、memory search，並連接 MCP clients。",
+                  "使用 CLI 設定 Wenlan、檢查服務狀態、執行診斷、搜尋記憶或連接 MCP 工具。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 7 月 10 日 · 5 分鐘閱讀",
               },
               {
@@ -1306,7 +1319,7 @@ export const zhTWContent = {
                 label: "生命週期",
                 title: "更新與解除安裝",
                 description:
-                  "刷新 Wenlan 本地 runtime、驗證版本健康、重啟 MCP clients，並在不意外遺失資料的前提下移除 service。",
+                  "了解如何更新 Wenlan、檢查版本、重新連接 MCP 工具，以及移除服務並保留資料。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
               },
               {
@@ -1315,7 +1328,7 @@ export const zhTWContent = {
                 label: "升級",
                 title: "升級筆記",
                 description:
-                  "閱讀 Wenlan releases 的實用升級路徑：要重跑什麼、驗證什麼，以及目前 public runtime shape 改了什麼。",
+                  "查看升級 Wenlan 時要重新執行哪些步驟、如何確認正常，以及版本改動內容。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1324,7 +1337,7 @@ export const zhTWContent = {
                 label: "Packages 套件",
                 title: "Packages 與 Registries",
                 description:
-                  "了解 Wenlan package name 如何對應到 plugin、runtime setup、MCP connector、Rust crates 和 release binaries。",
+                  "了解 Wenlan 各套件名稱分別對應外掛、執行環境、MCP connector、Rust crates 和下載檔。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
               },
               {
@@ -1333,7 +1346,7 @@ export const zhTWContent = {
                 label: "平台",
                 title: "平台支援",
                 description:
-                  "了解 Wenlan 如何在 macOS、Linux 和 Windows 上執行：service managers、local data paths、model backends，以及 Docker/VM caveats。",
+                  "了解 Wenlan 在 macOS、Linux 和 Windows 上的服務管理、資料位置、模型選項，以及 Docker/VM 限制。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1342,7 +1355,7 @@ export const zhTWContent = {
                 label: "API 參考",
                 title: "HTTP API 參考",
                 description:
-                  "了解 CLI、MCP connector、plugin 和 local tools 背後呼叫的本地 daemon surfaces。",
+                  "了解 CLI、MCP connector、外掛和本機工具如何呼叫本機 daemon 的 HTTP API。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1351,7 +1364,7 @@ export const zhTWContent = {
                 label: "API 範例",
                 title: "API 範例",
                 description:
-                  "當 CLI 或 MCP tools 不是合適選擇時，從 scripts 使用本地 daemon HTTP API。",
+                  "需要從程式呼叫 Wenlan 時，參考本機 daemon HTTP API 範例。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
               },
               {
@@ -1360,7 +1373,7 @@ export const zhTWContent = {
                 label: "Types 參考",
                 title: "Typed Clients 型別客戶端",
                 description:
-                  "當 Rust tool 需要呼叫本地 daemon、又不想依賴 untyped JSON shapes 時，使用 wenlan-types。",
+                  "Rust 工具若要呼叫本機 daemon，可使用 wenlan-types 避免手動處理 JSON 格式。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
               },
               {
@@ -1369,7 +1382,7 @@ export const zhTWContent = {
                 label: "Spaces 管理",
                 title: "Spaces 空間",
                 description:
-                  "分開 work、personal、client 和 project memory，並了解 Wenlan 如何解析 active space。",
+                  "分開工作、個人、客戶和專案的記憶，並了解 Wenlan 如何選擇目前使用的空間。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
               },
               {
@@ -1378,7 +1391,7 @@ export const zhTWContent = {
                 label: "Graph 圖譜",
                 title: "Knowledge Graph 知識圖譜",
                 description:
-                  "了解 Wenlan 如何連結 people、projects、tools、observations 和 relations，讓 recall 不只靠文字相似度也能找回 context。",
+                  "了解 Wenlan 如何連結人物、專案、工具和事件，讓搜尋不只依賴文字相似度。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1387,7 +1400,7 @@ export const zhTWContent = {
                 label: "Pages 頁面",
                 title: "有來源支撐的 Pages",
                 description:
-                  "了解 Wenlan 如何把 atomic captures 變成含 source memory IDs、revision state 和 refresh paths 的可讀 pages。",
+                  "了解 Wenlan 如何把記錄整理成可讀頁面，並保留來源記憶 ID、版本狀態和更新方式。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1396,7 +1409,7 @@ export const zhTWContent = {
                 label: "可攜性",
                 title: "Import 與 Portability",
                 description:
-                  "把選定的 durable context 移入 Wenlan，並讓 Wenlan 的可讀 artifacts 在 daemon 之外也保持 portable。",
+                  "將選定的背景資料匯入 Wenlan，並了解如何在 daemon 之外使用可讀檔案。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1405,7 +1418,7 @@ export const zhTWContent = {
                 label: "版本",
                 title: "本地 Git History",
                 description:
-                  "檢查 Wenlan 為可讀 page、session、handoff 和 status artifacts 保留的真實 git history。",
+                  "查看 Wenlan 為頁面、工作紀錄、交接和狀態檔案保留的 git 歷史。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1414,7 +1427,7 @@ export const zhTWContent = {
                 label: "模型",
                 title: "Models 與 Keys",
                 description:
-                  "在 local memory mode、可選 on-device models 和可選 Anthropic API keys 之間選擇，用於更豐富的 extraction、page synthesis、recaps 和 graph work。",
+                  "了解免模型的本機記憶模式、可選的本機模型，以及 Anthropic API key 能提供的額外整理功能。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1423,7 +1436,7 @@ export const zhTWContent = {
                 label: "Retrieval 檢索",
                 title: "進階 Retrieval 狀態",
                 description:
-                  "了解 Wenlan 已發布的 retrieval path，以及新版 retrieval work 背後那些 opt-in main-branch experiments。",
+                  "了解 Wenlan 目前已發布的搜尋方式，以及主分支上可選用的新版搜尋實驗。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
               },
               {
@@ -1432,7 +1445,7 @@ export const zhTWContent = {
                 label: "Experiments 實驗",
                 title: "Experimental Flags 實驗旗標",
                 description:
-                  "了解如何閱讀 Wenlan 的 opt-in main-branch flags，而不把它們誤認為 released defaults。",
+                  "查看如何啟用 Wenlan 主分支的實驗功能，並分辨它們與正式版本預設功能的差異。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
               },
               {
@@ -1441,7 +1454,7 @@ export const zhTWContent = {
                 label: "本地控制",
                 title: "Wenlan 本地資料與隱私",
                 description:
-                  "了解 Wenlan 把 AI work memory 存在哪裡、哪些資料留在你的機器上，以及 connected model providers 何時可能看到 prompts。",
+                  "查看 Wenlan 將工作記憶存在哪裡、哪些內容留在本機，以及使用雲端模型時哪些提示可能送至服務商。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 7 月 10 日 · 5 分鐘閱讀",
               },
               {
@@ -1450,7 +1463,7 @@ export const zhTWContent = {
                 label: "備份",
                 title: "備份與遷移",
                 description:
-                  "一起備份 Wenlan 的可讀 artifacts 和 daemon data，並在信任 recall 前驗證還原後的 runtime。",
+                  "一起備份 Wenlan 的可讀檔案和 daemon 資料；還原後先確認服務正常，再使用搜尋結果。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1459,7 +1472,7 @@ export const zhTWContent = {
                 label: "設定",
                 title: "Wenlan 設定",
                 description:
-                  "設定 Wenlan spaces、MCP clients、daemon bind address、local paths、models 和 keys，不需要手動編輯 database。",
+                  "設定 Wenlan 的工作空間、MCP 工具、daemon 網址、本機路徑、模型和金鑰，不必直接修改資料庫。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1468,7 +1481,7 @@ export const zhTWContent = {
                 label: "Config 變數",
                 title: "Environment Variables 環境變數",
                 description:
-                  "了解哪些 Wenlan environment variables 是一般 configuration、哪些只用於 development，以及哪些屬於 eval 或 Windows repair paths。",
+                  "查看 Wenlan 的一般設定、開發專用，以及測試或 Windows 修復時會用到的環境變數。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1477,7 +1490,7 @@ export const zhTWContent = {
                 label: "MCP 連接",
                 title: "連接 MCP Clients",
                 description:
-                  "把 Claude Code、Codex、Cursor、Claude Desktop、Gemini CLI、ChatGPT、Claude.ai 和其他 MCP clients 連接到 Wenlan。",
+                  "將 Claude Code、Codex、Cursor、Claude Desktop、Gemini CLI、ChatGPT、Claude.ai 等 MCP 工具連接到 Wenlan。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
               },
               {
@@ -1486,7 +1499,7 @@ export const zhTWContent = {
                 label: "Agents 管理",
                 title: "Wenlan Agent Profiles 與 Client Attribution",
                 description:
-                  "查看是哪個 AI client 寫入 memory、檢查 source_agent attribution，並管理 trust 或 enabled state。",
+                  "查看哪個 AI 工具寫入記憶，並管理工具名稱、信任狀態和啟用狀態。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 7 月 10 日 · 4 分鐘閱讀",
               },
               {
@@ -1495,7 +1508,7 @@ export const zhTWContent = {
                 label: "修復",
                 title: "疑難排解",
                 description:
-                  "修正常見 setup issues：daemon 未執行、MCP 未連上、Claude commands 缺失、stale context，以及 support escalation。",
+                  "排除常見問題：daemon 未啟動、MCP 未連接、Claude 指令缺少或搜尋不到舊內容。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1504,7 +1517,7 @@ export const zhTWContent = {
                 label: "診斷",
                 title: "診斷與 Issue 回報",
                 description:
-                  "求助前先跑正確 checks，分開 daemon problems 與 client problems，並只分享 redacted output。",
+                  "求助前先執行檢查，分辨是 Wenlan 服務或 AI 工具的問題，並分享已遮蔽敏感資訊的輸出。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1513,7 +1526,7 @@ export const zhTWContent = {
                 label: "常見問題",
                 title: "FAQ 常見問題",
                 description:
-                  "安裝 Wenlan 前後常見 adoption questions 的短答案。",
+                  "簡短回答安裝 Wenlan 前後常見的問題。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
               },
             ],
@@ -1522,7 +1535,7 @@ export const zhTWContent = {
             id: "project",
             title: "專案",
             description:
-              "Security reporting、evaluation、desktop status、changelog、release/versioning、roadmap、project scope、source builds、testing、CI、development conventions，以及協助判斷 Wenlan 是否可信到值得採用或貢獻的 contribution paths。",
+              "提供給想了解、開發或參與 Wenlan 的專案資訊。",
             items: [
               {
                 id: "security",
@@ -1530,7 +1543,7 @@ export const zhTWContent = {
                 label: "安全",
                 title: "安全與回報",
                 description:
-                  "私下回報 Wenlan vulnerabilities、讓 diagnostic output 保持 redacted，並了解 local daemon security boundary。",
+                  "私下回報 Wenlan 安全漏洞、遮蔽診斷資訊，並了解本機 daemon 的安全範圍。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 7 月 10 日 · 4 分鐘閱讀",
               },
               {
@@ -1539,7 +1552,7 @@ export const zhTWContent = {
                 label: "評估",
                 title: "Evaluation 評估",
                 description:
-                  "了解 Wenlan 公開 retrieval numbers 代表什麼、如何產生，以及沒有聲稱什麼。",
+                  "了解 Wenlan 公開的搜尋數據如何產生、代表什麼，以及它們沒有承諾什麼。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
               },
               {
@@ -1548,7 +1561,7 @@ export const zhTWContent = {
                 label: "桌面版",
                 title: "Desktop App 狀態",
                 description:
-                  "了解可選的 Wenlan desktop app 與 daemon、plugins、source-backed wiki，以及 ChatGPT 和 Claude.ai Remote Access 的關係。",
+                  "了解選用的 Wenlan 桌面 App 與 daemon、外掛、wiki，以及 ChatGPT 和 Claude.ai 遠端連線功能的關係。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
               },
               {
@@ -1557,7 +1570,7 @@ export const zhTWContent = {
                 label: "版本",
                 title: "Wenlan Changelog 與版本記錄",
                 description:
-                  "查看 Wenlan 目前版本、已發布變更，以及如何區分 tagged releases 與 main 上尚未發布的工作。",
+                  "查看 Wenlan 目前版本、已發布的改動，以及正式版本和主分支未發布工作的差異。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 9 月 4 日 · 5 分鐘閱讀",
               },
               {
@@ -1566,7 +1579,7 @@ export const zhTWContent = {
                 label: "發布",
                 title: "Releases 與 Versioning",
                 description:
-                  "了解 Wenlan 如何把 merged work 變成 tagged releases、package versions、binaries、npm packages 和 crates。",
+                  "了解 Wenlan 合併的程式碼如何成為正式版本、套件版本、執行檔、npm 套件和 crates。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1575,7 +1588,7 @@ export const zhTWContent = {
                 label: "路線圖",
                 title: "Roadmap 與 Status",
                 description:
-                  "了解 Wenlan 目前方向，同時不混淆 released features、main-branch work 和 future bets。",
+                  "查看 Wenlan 的發展方向，並分辨已發布功能、主分支工作和未來規劃。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
               },
               {
@@ -1584,7 +1597,7 @@ export const zhTWContent = {
                 label: "範疇",
                 title: "Project Scope 專案範疇",
                 description:
-                  "Wenlan 適合什麼、刻意避開什麼，以及如何判斷它是否適合你的 AI work。",
+                  "了解 Wenlan 的用途與刻意不處理的範圍，判斷它是否適合你的 AI 工作。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1593,7 +1606,7 @@ export const zhTWContent = {
                 label: "開發",
                 title: "從 Source Build",
                 description:
-                  "從 public repository build Wenlan daemon、CLI、MCP server、shared types、core crate 和 plugin。",
+                  "從公開程式碼庫建置 Wenlan daemon、CLI、MCP server、共用型別、核心程式庫和外掛。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1602,7 +1615,7 @@ export const zhTWContent = {
                 label: "品質",
                 title: "Testing 與 CI",
                 description:
-                  "了解哪些 Wenlan checks 在本地執行、哪些在 GitHub Actions 執行，以及哪些 evals 保持 manual。",
+                  "了解 Wenlan 哪些檢查在本機執行、哪些由 GitHub Actions 執行，以及哪些評估需要人工進行。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1611,7 +1624,7 @@ export const zhTWContent = {
                 label: "開發慣例",
                 title: "Development Conventions 開發慣例",
                 description:
-                  "讓 Wenlan daemon、CLI、MCP connector、shared types 和 core logic 維持可維護的 codebase rules。",
+                  "查看維護 Wenlan daemon、CLI、MCP connector、共用型別和核心程式碼時遵循的規則。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1620,7 +1633,7 @@ export const zhTWContent = {
                 label: "開源貢獻",
                 title: "Contributing 貢獻",
                 description:
-                  "如何為 Wenlan 貢獻有用的 bug reports、docs、eval cases 和 code changes。",
+                  "了解如何為 Wenlan 提供有用的錯誤回報、文件、評估案例和程式碼修改。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
             ],
@@ -1646,125 +1659,171 @@ export const zhTWContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "37d7019d5d22678f32e0b325492d1ae9134b0c28b88214bc5b0a60ae263a40ea",
+    sourceHash: "8b54c6274d53ceaa371cfda9dfefc2733d1166f0d30bda38792046a12fa76f88",
     content: {
       seo: {
         title: "安裝 Wenlan：Claude Code、Codex、ChatGPT 與 MCP",
-        description:
-          "安裝 Wenlan，連接 Claude Code、Codex、ChatGPT、Claude.ai 或其他 MCP client，再驗證第一次 capture 與 recall round trip。",
+        description: "安裝 Wenlan，連接你平常用的 AI，再試著保存並找回一個決定。選一種工具就好，不用全部設定。"
       },
       breadcrumbs: {
         home: "Wenlan",
-        docs: "文件",
+        docs: "文件"
       },
       hero: {
         eyebrow: "開始使用",
-        title: "安裝 Wenlan，連接你的\u00a0AI\u00a0工具。",
-        description:
-          "選擇一條 client 路徑，連到同一個 local daemon，再驗證一次 capture 與 recall round trip。",
-        meta: ["Wenlan 團隊", "更新於 2026 年 7 月 31 日", "5 分鐘設定"],
+        title: "先用 Wenlan 保存一個決定。",
+        description: "安裝 Wenlan，連接你平常用的 AI，再試著保存並找回一個決定。選一種工具就好，不用全部設定。",
+        meta: [
+          "Wenlan 團隊",
+          "更新於 2026 年 10 月 4 日",
+          "三個步驟"
+        ],
         setupPathLabel: "設定路徑",
-        setupPathItems: ["執行環境", "Claude Code", "Codex", "本地 + 遠端 MCP"],
+        setupPathItems: [
+          "安裝 Wenlan",
+          "連接一個 AI 工具",
+          "保存並找回決定"
+        ]
       },
       steps: [
         {
           id: "install-runtime",
           number: "01",
-          title: "安裝適合你系統的 runtime",
+          title: "安裝並開啟 Wenlan",
           paragraphs: [
-            "Wenlan v0.18.5 提供 Windows x64、macOS Apple silicon，以及 Linux x64 或 ARM64 glibc 的原生 runtime 套件。每份 runtime archive 都包含 CLI、daemon 與 MCP connector。",
-            "在 Windows 上，請把 wenlan-windows-x64.zip 當成一個整體解壓到使用者擁有且已加入 PATH 的目錄。onnxruntime.dll、vulkan-1.dll 與三個執行檔必須放在一起。",
+            "下載 macOS Apple silicon 或 Windows x64 桌面版，跟著首次設定引導完成安裝。你的筆記和知識頁會保存在本機的 Wenlan 知識庫。",
+            "若要把來源整理成知識頁，請在設定中選擇本地模型，或設定雲端模型服務。使用雲端處理時，相關內容會傳送給該服務商。"
           ],
           commands: [
             "# macOS Apple silicon\nnpx -y wenlan setup",
             "# Linux x64 或 ARM64\ncurl -fsSL https://raw.githubusercontent.com/7xuanlu/wenlan/main/install.sh | bash\nwenlan setup --basic\nwenlan background on\nwenlan status",
-            "# Windows x64：解壓 ZIP 並加入 PATH 後\nwenlan setup --basic\nwenlan background on\nwenlan status",
+            "# Windows x64：解壓 ZIP 並加入 PATH 後\nwenlan setup --basic\nwenlan background on\nwenlan status"
           ],
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.5/wenlan-windows-x64.zip",
-              label: "下載 Windows x64",
+              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16/wenlan-windows-x64.zip",
+              label: "下載 Windows x64"
             },
             {
               id: "all-downloads",
-              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.18.5",
-              label: "全部 v0.18.5 下載",
-            },
-          ],
+              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.18.16",
+              label: "全部 v0.18.16 下載"
+            }
+          ]
         },
         {
           id: "claude-code-plugin",
           number: "02",
           title: "Claude Code 外掛",
           paragraphs: [
-            "這是最快的路徑。plugin 會處理 daemon setup、MCP wiring、本地 memory setup，以及第一次 round-trip check。",
-            "如果 Claude Code 在安裝後要求 restart，重啟一次，然後執行 /setup。",
+            "在 Claude Code 中執行下方前兩行，安裝 Wenlan 外掛。它會加入保存與查找知識的指令，並連接 Wenlan。",
+            "若出現提示，請重啟 Claude Code，再執行 /wenlan:setup 檢查連線。首次設定可能需要幾分鐘下載搜尋模型。"
           ],
-          commands: claudeCommands,
-          ctas: [],
+          commands: [
+            "/plugin marketplace add 7xuanlu/wenlan",
+            "/plugin install wenlan@7xuanlu-wenlan",
+            "/wenlan:setup"
+          ],
+          ctas: []
         },
         {
           id: "codex",
           number: "03",
           title: "Codex 設定",
           paragraphs: [
-            "先執行 Wenlan setup，再把 Codex 連接到本地 MCP server。主要 Wenlan repo 也提供 Codex plugin 給從 checkout 安裝的使用者；wenlan connect codex 是不需要 checkout 的直接 client 路徑。",
+            "先使用上方的指令列方式安裝 Wenlan，再於終端機執行這兩行，加入 Codex 外掛。",
+            "安裝後開啟新的 Codex 對話，執行 /setup。若只需要 MCP 工具，也可以改用 wenlan connect codex；這個方式不會加入 Wenlan 的斜線指令。"
           ],
-          commands: ["wenlan connect codex"],
-          ctas: [],
+          commands: [
+            "codex plugin marketplace add 7xuanlu/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan"
+          ],
+          ctas: []
         },
         {
           id: "chatgpt-web",
           number: "04",
-          title: "ChatGPT 和 Claude.ai",
+          title: "ChatGPT 或 Claude.ai（進階連線）",
           paragraphs: [
-            "在 Wenlan desktop app 開啟 Remote Access，為 Streamable HTTP MCP 建立暫時的 HTTPS URL。App 會在 loopback 以 --no-auth 啟動 wenlan-mcp，再透過 tunnel 暴露；任何拿到 URL 的人都能存取。在 ChatGPT 開啟 Settings > Plugins，建立 New Plugin，在 Connection 下選擇 Server URL，貼上 URL，並把 Authentication 設為 None。Claude.ai 則透過 Directory > Plugins 從 7xuanlu/wenlan marketplace 安裝 Wenlan。",
-            "這是連接到你自己 Wenlan runtime 的 custom MCP，不代表 Wenlan 已列入公開 ChatGPT Apps Directory。不使用時請停止 Remote Access。",
+            "在 Wenlan 桌面版開啟「網頁存取」（Web access），選擇要分享的 Space，閱讀資料存取說明後啟用。在 AI 工具中，以 OAuth MCP 連線加入 https://relay.wenlan.app/mcp。",
+            "回到 Wenlan 檢查並批准配對請求。存取範圍限於你選擇的 Space，其他與之後新增的 Space 不會自動分享。使用時請保持 Wenlan 在線；不再需要時，可在 App 中撤銷存取。",
+            "遠端查詢會經過中繼服務與 AI 服務商，本機也會記錄存取活動。這是自訂連線，並非公開 ChatGPT Apps Directory 上架項目。"
           ],
           commands: [],
-          ctas: [],
+          ctas: [
+            {
+              id: "remote-access",
+              href: "/docs/mcp-clients",
+              label: "遠端存取指南（英文）"
+            }
+          ]
         },
         {
           id: "other-mcp-clients",
           number: "05",
-          title: "其他本地 MCP clients",
+          title: "Cursor、Claude Desktop 等本地工具",
           paragraphs: [
-            "Cursor、Claude Desktop、Gemini CLI、VS Code 和其他受支援的本地 MCP clients，要先設定 Wenlan runtime，再讓 CLI 寫入 client-specific MCP configuration。",
-            "Wenlan setup 會安裝 CLI、daemon 和 MCP connector，向作業系統的 user service manager 註冊 daemon，並驗證狀態。",
+            "先使用上方的指令列方式安裝 Wenlan，再執行對應的連接指令，最後重啟你的 AI 工具。",
+            "這個方式透過 MCP 連接 Wenlan，不會加入 Claude Code 或 Codex 外掛的斜線指令。"
           ],
-          commands: ["wenlan connect cursor\n# 或：claude-desktop, vscode, gemini"],
-          ctas: [],
+          commands: [
+            "wenlan connect cursor\n# 或：claude-desktop, vscode, gemini"
+          ],
+          ctas: []
         },
         {
           id: "try-first",
-          number: "06",
-          title: "先試什麼",
+          number: "03",
+          title: "保存一個決定，再開新對話找回來",
           paragraphs: [
-            "保存一個 durable project fact，再請另一個 session 或 client recall。Wenlan 應該能找回這個 fact，並把來源保留給 wiki 與 review flow。",
+            "連接 Claude Code 或 Codex 外掛後，試著保存下面這個虛構決定。Claude Code 使用 /wenlan:handoff 和 /wenlan:recall；Codex 使用 /handoff 和 /recall。",
+            "保存後，開一段新對話查找這個決定。確認回答保留「只能起草」的限制，也能找到原本保存的紀錄。保存交接紀錄與整理成知識頁，是兩個不同步驟。",
+            "本地 MCP 工具可用一般文字保存再搜尋；瀏覽器遠端連線目前只供查詢，請先在桌面 App 加入筆記或檔案，再從 AI 查找。"
           ],
-          commands: [],
+          commands: [
+            "1. 保存這個虛構決定：\n/handoff 示範專案：郵件助理可以起草回覆，但寄出前一定要我批准。",
+            "2. 在新對話中查找：\n/recall 示範專案的郵件助理，不用我批准可以做什麼？"
+          ],
           ctas: [
-            { id: "daily-workflow", href: "/docs/daily-workflow", label: "開始 daily workflow" },
-            { id: "learn", href: "/learn", label: "閱讀文章" },
-          ],
-        },
+            {
+              id: "daily-workflow",
+              href: "/docs/daily-workflow",
+              label: "了解日常工作流程（英文）"
+            },
+            {
+              id: "learn",
+              href: "/learn",
+              label: "看看使用範例"
+            }
+          ]
+        }
       ],
       sidebar: {
         eyebrow: "你會得到",
         items: [
-          { id: "source-backed-wiki", label: "有來源依據的 LLM wiki" },
-          { id: "local-daemon", label: "本地 daemon" },
-          { id: "agent-plugins", label: "Claude Code + Codex 外掛" },
-          { id: "mcp-server", label: "本地 + 遠端 MCP" },
-        ],
+          {
+            id: "source-backed-wiki",
+            label: "有來源依據的 LLM wiki"
+          },
+          {
+            id: "local-daemon",
+            label: "本地 daemon"
+          },
+          {
+            id: "agent-plugins",
+            label: "Claude Code + Codex 外掛"
+          },
+          {
+            id: "mcp-server",
+            label: "本地 + 遠端 MCP"
+          }
+        ]
       },
       schema: {
         name: "開始使用 Wenlan",
-        description:
-          "透過 Claude Code、Codex、ChatGPT、Claude.ai 或其他 MCP client 連接 Wenlan。",
-      },
-    },
+        description: "安裝 Wenlan，連接你平常用的 AI，再試著保存並找回一個決定。選一種工具就好，不用全部設定。"
+      }
+    }
   },
   notFound: {
     status: "translated",

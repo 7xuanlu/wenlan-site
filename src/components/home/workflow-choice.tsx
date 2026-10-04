@@ -13,7 +13,7 @@ export function WorkflowChoice({ id, selected, locale }: { id: string; selected:
     id={`workflow-choice-${id}`} aria-controls="workflow-comparison-panel" defaultChecked={selected}
     onChange={(event) => {
       if (event.currentTarget.checked && Object.hasOwn(details, id)) {
-        trackAnalyticsEvent({ eventName: "comparison_select", placement: "home-comparison", locale, context: "comparisons", detail: details[id] });
+        trackAnalyticsEvent({ eventName: "comparison_select", placement: "learn-article", locale, context: "comparisons", detail: details[id] });
       }
     }} />;
 }

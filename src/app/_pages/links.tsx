@@ -3,6 +3,7 @@ import { getCoreContent } from "@/i18n/content";
 import { LOCALE_CONFIG, type Locale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
 import { canonicalUrl } from "@/i18n/routing";
+import { SiteHeader } from "@/components/site-header";
 
 // Every link on the hub carries the same UTM set so bio traffic is
 // attributable in analytics: source identifies the hub, content the link.
@@ -73,6 +74,7 @@ export function LinksPage({ locale }: { locale: Locale }) {
 
   return (
     <main className="grain min-h-screen">
+      <SiteHeader locale={locale} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}

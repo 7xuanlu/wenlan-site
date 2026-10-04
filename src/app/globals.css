@@ -316,6 +316,16 @@ html:lang(zh-Hans) .brand-wordmark__cjk {
   animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* Keep first-screen text readable while it enters; do not delay its paint
+   behind a transparent animation, especially on slower mobile devices. */
+@keyframes hero-enter {
+  from { transform: translateY(12px); }
+  to { transform: translateY(0); }
+}
+.home-hero .animate-fade-up {
+  animation-name: hero-enter;
+}
+
 /* Scroll-triggered: pain cards rise from below */
 .scroll-fade-up {
   opacity: 0;
@@ -422,6 +432,7 @@ html:lang(zh-Hans) .brand-wordmark__cjk {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .home-hero .animate-fade-up { animation: none; }
   .animate-marquee { animation: none; }
   .animate-arrow-nudge { animation: none; }
   .animate-arc-flow { animation: none; }
@@ -552,6 +563,8 @@ html:lang(zh-Hans) .brand-wordmark__cjk {
   background: var(--o-bg-alt);
 }
 .home-image-dialog::backdrop { background: rgb(14 15 19 / .72); backdrop-filter: blur(5px); }
+/* Follow the captured window's corners, not the surrounding letterbox. */
+.home-native-window { clip-path: inset(0 round 1.1% / 1.75%); }
 @media (hover: hover) and (pointer: fine) {
   .home-page .home-tool-mark:hover { transform: translateY(-3px); color: var(--o-text); background: var(--o-surface); }
   .home-page a[data-placement="home-hero"], .home-page a[data-placement="home-footer"] {

@@ -340,7 +340,9 @@ test("bilingual Wenlan wordmark keeps Latin Fraunces and Chinese sans paired", a
   assert.doesNotMatch(wordmarkSource, /brand-wordmark__cjk[^>]*aria-hidden/);
 
   const homeSource = await readFile(resolve(repoRoot, "src/app/_pages/home.tsx"), "utf8");
-  assert.match(homeSource, /<BrandWordmark\s+label=\{content\.nav\.brand\}\s+variant="nav"\s+\/>/);
+  assert.match(homeSource, /<SiteHeader locale=\{locale\} home \/>/);
+  const headerSource = await readFile(resolve(repoRoot, "src/components/site-header.tsx"), "utf8");
+  assert.match(headerSource, /<BrandWordmark\s+label=\{nav\.brand\}\s+variant="nav"\s+\/>/);
   assert.match(homeSource, /\{redesign\.hero\.eyebrow\}/);
 
   const footerSource = await readFile(resolve(repoRoot, "src/components/site-footer.tsx"), "utf8");
@@ -357,11 +359,11 @@ test("bilingual Wenlan wordmark keeps Latin Fraunces and Chinese sans paired", a
 });
 
 test("home nav exposes a route-preserving locale switcher", async () => {
-  const source = await readFile(resolve(repoRoot, "src/app/_pages/home.tsx"), "utf8");
+  const source = await readFile(resolve(repoRoot, "src/components/site-header.tsx"), "utf8");
   const switcher = await readFile(resolve(repoRoot, "src/components/language-switcher.tsx"), "utf8");
 
   assert.match(source, /import \{ LanguageSwitcher \} from "@\/components\/language-switcher"/);
-  assert.match(source, /<LanguageSwitcher\s+locale=\{locale\}\s+href="\/"\s+\/>/);
+  assert.match(source, /<LanguageSwitcher\s+locale=\{locale\}\s+\/>/);
   assert.match(switcher, /SUPPORTED_LOCALES\.map/);
   assert.match(switcher, /localizedHrefForLocale\(targetLocale,\s*href\)/);
   assert.match(switcher, /aria-current=\{active \? "true" : undefined\}/);
@@ -523,8 +525,9 @@ test("localized about hero allows translated text to wrap on mobile", async () =
 test("localized get-started layout allows mobile content columns to shrink", async () => {
   const source = await readFile(resolve(repoRoot, "src/app/_pages/get-started.tsx"), "utf8");
 
-  assert.match(source, /className="min-w-0 space-y-14"/);
-  assert.match(source, /className="grid min-w-0 gap-5/);
+  assert.match(source, /className="[^"]*space-y-14"/);
+  assert.match(source, /className="[^"]*grid min-w-0 grid-cols-1 gap-3/);
+  assert.match(source, /name="setup-client" className="group min-w-0/);
   assert.match(source, /<div className="min-w-0">/);
   assert.match(source, /<h1 className="[^"]*\bbreak-keep\b[^"]*"/);
 });
@@ -2598,7 +2601,7 @@ test("home SEO copy presents LLM wiki positioning in English and Mandarin", asyn
   }
 });
 
-test("Chinese hero copy promises a personal knowledge base and setup keeps short AI compounds together", async () => {
+test("Chinese hero promises a personal knowledge base and setup begins with a concrete decision", async () => {
   const { content } = await loadI18nModules();
 
   for (const locale of ["zh-TW", "zh-CN"]) {
@@ -2611,7 +2614,7 @@ test("Chinese hero copy promises a personal knowledge base and setup keeps short
     );
     assert.match(
       dictionary.getStarted.content.hero.title,
-      /你的\u00a0AI\u00a0工具/,
+      /Wenlan 保存一個決定|Wenlan 保存一个决定/,
       `${locale}.getStarted.hero.title`,
     );
     assert.doesNotMatch(
@@ -2622,31 +2625,23 @@ test("Chinese hero copy promises a personal knowledge base and setup keeps short
   }
 });
 
-test("Remote Access discovery copy states the no-auth boundary", async () => {
+test("Remote Access discovery copy explains scoped approval and revocation", async () => {
   const { content } = await loadI18nModules();
   const expected = {
-    en: {
-      noAuth: /no authentication/i,
-      stop: /stop Remote Access when unused/i,
-    },
-    "zh-TW": {
-      noAuth: /沒有驗證/,
-      stop: /不用時.*停止 Remote Access/,
-    },
-    "zh-CN": {
-      noAuth: /没有身份验证/,
-      stop: /不用时.*停止 Remote Access/,
-    },
+    en: { approval: /approv/i, revoke: /revoke/i },
+    "zh-TW": { approval: /批准/, revoke: /撤銷/ },
+    "zh-CN": { approval: /批准/, revoke: /撤销/ },
   };
-
-  for (const [locale, localeExpected] of Object.entries(expected)) {
-    const faqs = content.localizedContentByLocale[locale].home.content.faqs.items;
-
+  for (const [locale, checks] of Object.entries(expected)) {
+    const dictionary = content.localizedContentByLocale[locale];
+    const faqs = dictionary.home.content.faqs.items;
     for (const id of ["tools", "setup"]) {
-      const answer = faqs.find((item) => item.id === id)?.a ?? "";
-      assert.match(answer, localeExpected.noAuth, `${locale}.home.faq.${id}.noAuth`);
-      assert.match(answer, localeExpected.stop, `${locale}.home.faq.${id}.stop`);
+      const answer = faqs.find(item => item.id === id)?.a ?? "";
+      for (const pattern of [/OAuth/, /Space/, checks.approval, checks.revoke]) assert.match(answer, pattern, `${locale}.${id}`);
+      assert.doesNotMatch(answer, /no authentication|沒有驗證|没有身份验证/);
     }
+    const web = dictionary.getStarted.content.steps.find(step => step.id === "chatgpt-web").paragraphs.join(" ");
+    for (const pattern of [/https:\/\/relay\.wenlan\.app\/mcp/, /OAuth/, /Space/, checks.approval, checks.revoke]) assert.match(web, pattern, locale);
   }
 });
 

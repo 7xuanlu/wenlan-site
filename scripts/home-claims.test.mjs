@@ -384,7 +384,7 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     const builtInFaq = faqById(home, "built-in-memory");
     assert.ok(setupFaq && notesFaq && builtInFaq, `${locale} setup, Obsidian, and memory FAQs are required`);
     assert.match(setupFaq.a, /model|模型|模型/);
-    assert.match(setupFaq.a, /client|用戶端|客户端/);
+    assert.match(setupFaq.a, /client|用戶端|客户端|AI 工具/);
     assert.match(notesFaq.a, /read-only|唯讀|只读/);
     assert.match(notesFaq.a, /Markdown|\.pdf|PDF/);
     assert.match(builtInFaq.a, /varies by tool|因工具而異|因工具而异/);

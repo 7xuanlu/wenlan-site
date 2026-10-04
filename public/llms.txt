@@ -92,14 +92,14 @@
 - [Backup and migration](https://wenlan.app/docs/backup-and-migration): Back up readable ~/.wenlan artifacts and daemon data together, then verify restored installs with doctor and recall.
 - [Configuration](https://wenlan.app/docs/configuration): Spaces, MCP client wiring, daemon bind address, local paths, models, and keys without hand-editing the database.
 - [Environment variables](https://wenlan.app/docs/environment-variables): Runtime, development, Windows repair, and eval environment variables such as WENLAN_SPACE, WENLAN_HOST, WENLAN_BIND_ADDR, WENLAN_DATA_DIR, ORT_DYLIB_PATH, and EVAL_BASELINES_DIR.
-- [MCP clients](https://wenlan.app/docs/mcp-clients): Local setup for Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, and VS Code, plus temporary Streamable HTTP MCP Remote Access for ChatGPT and Claude.ai. Remote Access uses --no-auth behind its HTTPS tunnel, so possession of the URL grants access. Stop Remote Access when unused.
+- [MCP clients](https://wenlan.app/docs/mcp-clients): Local setup for Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, and VS Code, plus authenticated Streamable HTTP MCP Remote Access for ChatGPT and Claude.ai through https://relay.wenlan.app/mcp. Choose a Space in Wenlan, approve the pairing request, keep the device online to connect, and revoke access when it is no longer needed.
 - [Agent profiles](https://wenlan.app/docs/agent-profiles): How Wenlan attributes captures to Claude Code, Codex, Cursor, local scripts, and other clients through source_agent, trust, and enabled state.
 - [Troubleshooting](https://wenlan.app/docs/troubleshooting): Common failure modes and the daemon repair paths.
 - [Diagnostics and issue reports](https://wenlan.app/docs/diagnostics-and-issue-reports): Commands to run before asking for help, how to separate daemon and MCP failures, and what to redact.
 - [FAQ](https://wenlan.app/docs/faq): Short answers about what Wenlan is, which install path to use, desktop app status, local data, Markdown artifacts, uninstall behavior, and verification.
 - [Security and reporting](https://wenlan.app/docs/security): Private vulnerability reporting, redacted bug reports, local security boundaries, and security.txt.
 - [Evaluation](https://wenlan.app/docs/evaluation): Retrieval benchmark scope, current LME_Oracle and LME_S snapshot, and rerun methodology.
-- [Desktop app status](https://wenlan.app/docs/desktop-app): The optional source-cited wiki GUI, its AGPL-3.0-only crate boundary in the unified Wenlan repository, and its Remote Access path for ChatGPT and Claude.ai.
+- [Desktop app status](https://wenlan.app/docs/desktop-app): The optional source-cited wiki GUI, its AGPL-3.0-only crate boundary in the unified Wenlan repository, and its authenticated Remote Access path for ChatGPT and Claude.ai through https://relay.wenlan.app/mcp, with Space selection, approved pairing, and access revocation.
 - [Changelog](https://wenlan.app/docs/changelog): Stable release notes and how to read unreleased main-branch work.
 - [Releases and versioning](https://wenlan.app/docs/releases-and-versioning): How release-please, tags, package publishing, npm packages, crates, binaries, and pre-1.0 version bumps work.
 - [Roadmap and status](https://wenlan.app/docs/roadmap): Released, on-main, and planned work without confusing roadmap themes for shipped guarantees.
@@ -113,7 +113,7 @@
 
 - [llms-full.txt](https://wenlan.app/llms-full.txt): Long-form companion to this file. Contains the full body of every Learn article and Docs page so an LLM can ingest the full corpus in one fetch.
 - [GitHub repository](https://github.com/7xuanlu/wenlan): Source, releases, issues. Apache-2.0.
-- [Wenlan desktop app source](https://github.com/7xuanlu/wenlan/tree/v0.18.5/app): Tauri 2 + React 19 source-cited wiki GUI in the unified Wenlan release, with a notarized macOS Apple Silicon DMG and a Windows x64 desktop build. AGPL-3.0-only. Talks to the same local daemon over HTTP at localhost:7878 and provides guided Remote Access for ChatGPT and Claude.ai.
+- [Wenlan desktop app source](https://github.com/7xuanlu/wenlan/tree/v0.18.16/app): Tauri 2 + React 19 source-cited wiki GUI in the unified Wenlan release, with a notarized macOS Apple Silicon DMG and a Windows x64 desktop build. AGPL-3.0-only. Talks to the same local daemon over HTTP at localhost:7878 and provides authenticated Remote Access for ChatGPT and Claude.ai through https://relay.wenlan.app/mcp. Choose a Space, approve pairing, keep the device online, and revoke access when finished.
 - [Wenlan Claude Code plugin (npm)](https://www.npmjs.com/package/wenlan): The Claude Code plugin published from this repo.
 - [wenlan-mcp server (npm)](https://www.npmjs.com/package/wenlan-mcp): The MCP server binary as a standalone npm package.
 - [wenlan-mcp on crates.io](https://crates.io/crates/wenlan-mcp): The Rust crate behind wenlan-mcp.

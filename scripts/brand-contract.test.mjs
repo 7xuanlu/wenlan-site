@@ -307,7 +307,11 @@ test("all evidence-backed no-click Docs targets have refreshed SERP copy and qui
   );
   assert.match(
     englishContent,
-    /Choose one client path, connect it to the same local daemon, then verify a capture and recall round trip\./,
+    /Install Wenlan, connect the AI tool you use, then save and find one useful decision\./,
+  );
+  assert.match(
+    englishContent,
+    /You do not need to set up every client\./,
   );
 });
 
@@ -1105,12 +1109,12 @@ test("public current-release surfaces track the selected Wenlan release source",
   assert.doesNotMatch(releases, /Wenlan_aarch64\.app\.tar\.gz/);
   assert.match(downloadSection, /id="download"/);
   assert.match(downloadSection, /placement="home-download"/);
-  assert.match(englishContent, new RegExp(`"v${escapedVersion}"`));
-  assert.match(englishContent, new RegExp(`Wenlan v${escapedVersion} ships`));
-  assert.match(simplifiedContent, new RegExp(`"版本 v${escapedVersion}"`));
-  assert.match(simplifiedContent, new RegExp(`Wenlan v${escapedVersion} 提供`));
-  assert.match(traditionalContent, new RegExp(`"版本 v${escapedVersion}"`));
-  assert.match(traditionalContent, new RegExp(`Wenlan v${escapedVersion} 提供`));
+  assert.match(englishContent, /statusItems: \["\{release\}"/);
+  assert.match(englishContent, /Wenlan \{release\} includes/);
+  assert.match(simplifiedContent, /statusItems: \["版本 \{release\}"/);
+  assert.match(simplifiedContent, /Wenlan \{release\} 提供/);
+  assert.match(traditionalContent, /statusItems: \["版本 \{release\}"/);
+  assert.match(traditionalContent, /Wenlan \{release\} 提供/);
   assert.match(englishContent, /Download macOS desktop/);
   assert.match(traditionalContent, /下載 macOS 桌面版/);
   assert.match(simplifiedContent, /下载 macOS 桌面版/);
@@ -1121,7 +1125,7 @@ test("public current-release surfaces track the selected Wenlan release source",
   for (const [shown] of aboutOg.matchAll(/\bv\d+\.\d+\.\d+\b/g)) {
     assert.equal(shown, `v${version}`, "src/app/about/opengraph-image.tsx");
   }
-  assert.match(docs, new RegExp(`current stable ${escapedVersion}`));
+  assert.match(docs, new RegExp(`v${escapedVersion} is the current stable release`));
   assert.match(docs, new RegExp(`Wenlan version ${escapedVersion}`));
   assert.match(docs, new RegExp(`v${escapedVersion}.*${escapeRegExp(date)}`));
   assert.match(sitemap, new RegExp(`ABOUT_UPDATED_AT = "${escapeRegExp(date)}"`));
@@ -1140,60 +1144,65 @@ test("public release surfaces expose the verified current artifacts and release 
   const structuredData = await readRepo("src/app/structured-data.ts");
   const llms = await readRepo("public/llms.txt");
 
-  assert.equal(version, "0.18.5");
+  assert.equal(version, "0.18.16");
   assert.equal(WENLAN_RELEASE.version, version);
-  assert.equal(WENLAN_RELEASE.tag, "v0.18.5");
-  assert.equal(WENLAN_RELEASE.publishedAt, "2026-09-09T16:27:14Z");
+  assert.equal(WENLAN_RELEASE.tag, "v0.18.16");
+  assert.equal(WENLAN_RELEASE.publishedAt, "2026-10-04T01:49:31Z");
   assert.equal(
     WENLAN_RELEASE.releaseUrl,
-    "https://github.com/7xuanlu/wenlan/releases/tag/v0.18.5",
+    "https://github.com/7xuanlu/wenlan/releases/tag/v0.18.16",
   );
   assert.equal(
     WENLAN_RELEASE.setupGuideUrl,
-    "https://github.com/7xuanlu/wenlan/blob/v0.18.5/docs/setup-with-ai.md#install-the-runtime",
+    "https://github.com/7xuanlu/wenlan/blob/v0.18.16/docs/setup-with-ai.md#install-the-runtime",
   );
   assert.deepEqual(
     WENLAN_RELEASE.assets.map(({ id, href, format, size }) => ({ id, href, format, size })),
     [
       {
         id: "windows-desktop-x64",
-        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.5/Wenlan_0.18.5_x64-setup.exe",
+        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16/Wenlan_0.18.16_x64-setup.exe",
         format: "EXE",
-        size: "60.0 MiB",
+        size: "48.6 MiB",
       },
       {
         id: "windows-x64",
-        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.5/wenlan-windows-x64.zip",
+        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16/wenlan-windows-x64.zip",
         format: "ZIP",
-        size: "74.0 MiB",
+        size: "75.1 MiB",
       },
       {
         id: "macos-arm64",
-        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.5/Wenlan_0.18.5_aarch64.dmg",
+        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16/Wenlan_0.18.16_aarch64.dmg",
         format: "DMG",
-        size: "84.1 MiB",
+        size: "68.6 MiB",
       },
       {
         id: "macos-runtime-arm64",
-        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.5/wenlan-darwin-arm64.tar.gz",
+        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16/wenlan-darwin-arm64.tar.gz",
         format: "TAR.GZ",
-        size: "50.3 MiB",
+        size: "51.6 MiB",
       },
       {
         id: "linux-x64",
-        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.5/wenlan-linux-x64.tar.gz",
+        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16/wenlan-linux-x64.tar.gz",
         format: "TAR.GZ",
-        size: "62.9 MiB",
+        size: "64.4 MiB",
       },
       {
         id: "linux-arm64",
-        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.5/wenlan-linux-arm64.tar.gz",
+        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16/wenlan-linux-arm64.tar.gz",
         format: "TAR.GZ",
-        size: "63.1 MiB",
+        size: "64.3 MiB",
       },
     ],
   );
 
+  assert.match(changelog, /^## \[0\.18\.16\].*\(2026-10-04\)/m);
+  assert.match(changelog, /open relay pairing requests in Wenlan with one click/);
+  assert.match(changelog, /allow bounded Windows platform cache cleanup/);
+  assert.match(changelog, /send local AI apps to Add a tool instead of the relay/);
+  assert.match(changelog, /^## \[0\.18\.15\].*\(2026-10-03\)/m);
   assert.match(changelog, /^## \[0\.18\.5\].*\(2026-09-09\)/m);
   assert.match(changelog, /improve graph exploration and desktop update UX/);
   assert.match(changelog, /^## \[0\.18\.3\].*\(2026-09-08\)/m);
@@ -1213,14 +1222,14 @@ test("public release surfaces expose the verified current artifacts and release 
   assert.match(docs, /Local provider presets can send an API key; upstream LLM refusals return a 502 response/);
   assert.match(docs, /Shared Claude\/Codex hook and runner gaps are closed/);
 
-  assert.equal(date, "2026-09-09");
+  assert.equal(date, "2026-10-04");
   assert.match(docs, /v0\.18\.0 highlights/);
   assert.match(docs, /one home page with an honest empty state/);
   assert.match(docs, /removes the .*Where AI looked.* section/);
   assert.match(docs, /global shortcut is occupied/);
   assert.match(docs, /window stays still after launch/);
-  assert.match(structuredData, /tree\/v0\.18\.5\/app/);
-  assert.match(llms, /tree\/v0\.18\.5\/app/);
+  assert.match(structuredData, /tree\/v0\.18\.16\/app/);
+  assert.match(llms, /tree\/v0\.18\.16\/app/);
 });
 
 test("download information architecture keeps the homepage compact and the full matrix on a localized hub", async () => {
@@ -1373,17 +1382,27 @@ test("public onboarding is Wenlan-first and distinguishes plugin, local MCP, and
   assert.match(docs, /Codex plugin/);
   assert.match(docs, /ChatGPT/);
   assert.match(docs, /Streamable HTTP MCP/);
-  assert.match(docs, /Settings > Plugins/);
-  assert.match(docs, /Server URL/);
-  assert.match(docs, /Authentication to None/);
+  assert.match(docs, /Settings > Agents > Web access/);
+  assert.match(docs, /https:\/\/relay\.wenlan\.app\/mcp/);
+  assert.match(docs, /pairing request/i);
+  assert.match(docs, /revoke a grant/i);
+  assert.match(docs, /older origin-relay no-login tunnel is a separate legacy flow/i);
   assert.doesNotMatch(docs, /Developer mode/);
   assert.match(structuredData, /ChatGPT/);
   assert.match(structuredData, /Streamable HTTP MCP/);
+  assert.match(structuredData, /https:\/\/relay\.wenlan\.app\/mcp/);
+  assert.match(structuredData, /approve the pairing request/);
+  assert.match(structuredData, /revoke access/);
+  assert.doesNotMatch(structuredData, /--no-auth|possession of the URL grants access/);
   assert.match(llms, /ChatGPT/);
   assert.match(llms, /Streamable HTTP MCP/);
-  assert.match(llms, /possession of the URL grants access/);
-  assert.match(llms, /Stop Remote Access when unused/);
+  assert.match(llms, /https:\/\/relay\.wenlan\.app\/mcp/);
+  assert.match(llms, /approve the pairing request/);
+  assert.match(llms, /revoke access/);
+  assert.doesNotMatch(llms, /--no-auth|possession of the URL grants access/);
   assert.match(llmsFull, /ChatGPT/);
+  assert.match(llmsFull, /https:\/\/relay\.wenlan\.app\/mcp/);
+  assert.doesNotMatch(llmsFull, /--no-auth|possession of the URL grants access/);
 });
 
 test("public framing stays LLM-wiki-first across footer, social images, and the current demo", async () => {
