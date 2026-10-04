@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
   title: "Terms of Service | Wenlan",
@@ -67,7 +68,8 @@ const sections = [
 
 export default function TermsPage() {
   return (
-    <main id="main-content" className="mx-auto max-w-3xl px-6 py-12 sm:py-16">
+    <main id="main-content" className="mx-auto max-w-3xl px-6 pt-28 pb-12 sm:pt-32 sm:pb-16">
+      <SiteHeader locale="en" />
       <nav aria-label="Breadcrumb" className="mb-10 text-sm text-[var(--o-text-secondary)]">
         <Link href="/" className="underline underline-offset-4">Wenlan</Link>
         <span aria-hidden="true"> / </span>

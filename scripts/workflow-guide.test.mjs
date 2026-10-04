@@ -7,7 +7,7 @@ import { getCoreContent } from "../src/i18n/content/index.ts";
 import { getWorkflowGuideCopy } from "../src/i18n/workflow-guide.ts";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const painsSource = fs.readFileSync(path.join(repoRoot, "src/components/home/pains.tsx"), "utf8");
+const comparisonSource = fs.readFileSync(path.join(repoRoot, "src/components/learn/workflow-comparison.tsx"), "utf8");
 const guideSource = fs.readFileSync(path.join(repoRoot, "src/components/learn/workflow-comparison-guide.tsx"), "utf8");
 const englishLearnPage = fs.readFileSync(path.join(repoRoot, "src/app/(en)/learn/[slug]/page.tsx"), "utf8");
 const localizedLearnPage = fs.readFileSync(path.join(repoRoot, "src/app/[locale]/learn/[slug]/page.tsx"), "utf8");
@@ -37,15 +37,15 @@ test("every localized comparison has setup and two-sided choice guidance", () =>
   }
 });
 
-test("homepage routes the selected alternative to the localized owner and keeps the native chooser", () => {
-  assert.match(homeSource, /<PainsSection copy=\{redesign\.pains\} locale=\{locale\}/);
-  assert.match(painsSource, /<TrackedLocalizedLink/);
-  assert.match(painsSource, /href=\{`\/learn\/choose-ai-knowledge-base-tool#workflow-\$\{row\.id\}`\}/);
-  assert.doesNotMatch(painsSource, /<details\b/);
-  assert.match(painsSource, /<table\b/);
-  assert.match(painsSource, /<WorkflowChoice/);
+test("comparison page keeps the native chooser and routes each alternative to its details", () => {
+  assert.match(homeSource, /<PainsSection copy=\{redesign\.fit\} locale=\{locale\}/);
+  assert.match(comparisonSource, /<TrackedLocalizedLink/);
+  assert.match(comparisonSource, /href=\{`\/learn\/choose-ai-knowledge-base-tool#workflow-\$\{row\.id\}`\}/);
+  assert.doesNotMatch(comparisonSource, /<details\b/);
+  assert.match(comparisonSource, /<table\b/);
+  assert.match(comparisonSource, /<WorkflowChoice/);
   assert.match(fs.readFileSync(path.join(repoRoot, "src/components/home/workflow-choice.tsx"), "utf8"), /<input className="workflow-choice sr-only" type="radio"/);
-  assert.match(painsSource, /<WorkflowHelp/);
+  assert.match(comparisonSource, /<WorkflowHelp/);
 });
 
 test("the detail guide is conditional on the existing owner article", () => {
@@ -68,7 +68,7 @@ test("the guide exposes dated sources and every alternative anchor", () => {
   assert.match(guideSource, /row\.sources/);
   assert.match(guideSource, /\/docs\/get-started/);
   assert.match(guideSource, /\/docs\/review-and-trust/);
-  assert.match(guideSource, /\/#knowledge-workflows/);
+  assert.match(guideSource, /\/learn\/choose-ai-knowledge-base-tool#compare-tools/);
 
   for (const locale of locales) {
     const copy = getCoreContent(locale).home.content.redesign.pains;
@@ -90,10 +90,28 @@ test("the guide exposes dated sources and every alternative anchor", () => {
 });
 
 test("reordering alternatives keeps anchors, choices, and sources keyed by row identity", () => {
-  assert.match(painsSource, /const choiceId = `workflow-choice-\$\{row\.id\}`/);
-  assert.match(painsSource, /href=\{`\/learn\/choose-ai-knowledge-base-tool#workflow-\$\{row\.id\}`\}/);
+  assert.match(comparisonSource, /const choiceId = `workflow-choice-\$\{row\.id\}`/);
+  assert.match(comparisonSource, /href=\{`\/learn\/choose-ai-knowledge-base-tool#workflow-\$\{row\.id\}`\}/);
   assert.match(guideSource, /href=\{`#workflow-\$\{row\.id\}`/);
   assert.match(guideSource, /<section id=\{`workflow-\$\{row\.id\}`\} key=\{row\.id\}/);
   assert.match(guideSource, /<SourceLinks sources=\{row\.sources\}/);
   assert.doesNotMatch(guideSource, /row\.sources\[index\]|copy\.generations\[index\]/);
+});
+
+
+test("homepage needs and Learn indexes link to the same dedicated comparison", () => {
+  const fit = fs.readFileSync(path.join(repoRoot, "src/components/home/pains.tsx"), "utf8");
+  assert.match(fit, /data-home-fit/);
+  assert.match(fit, /<ProductShowcase locale=\{locale\}/);
+  assert.doesNotMatch(fit, /<table|WorkflowChoice|WorkflowHelp|type="radio"/);
+  for (const source of [fit, fs.readFileSync(path.join(repoRoot, "src/app/(en)/learn/page.tsx"), "utf8"), fs.readFileSync(path.join(repoRoot, "src/app/_pages/localized-learn-index.tsx"), "utf8")]) {
+    assert.match(source, /\/learn\/choose-ai-knowledge-base-tool#compare-tools/);
+  }
+  assert.match(comparisonSource, /id="compare-tools"/);
+  for (const page of [englishLearnPage, localizedLearnPage]) assert.match(page, /<WorkflowComparison copy=/);
+  for (const locale of locales) {
+    const copy = getCoreContent(locale).home.content.redesign.fit;
+    assert.equal(copy.needs.length, 3);
+    for (const need of copy.needs) assert.ok(need.title.length && need.body.length);
+  }
 });

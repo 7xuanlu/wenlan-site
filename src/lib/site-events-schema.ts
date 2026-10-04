@@ -70,8 +70,8 @@ export const SITE_EVENT_SOURCES = [
 export type SiteEventSource = (typeof SITE_EVENT_SOURCES)[number];
 
 export const SITE_EVENT_DETAILS = {
-  scenario_select: ["engineering", "client", "learning"],
-  source_expand: ["engineering", "client", "learning"],
+  scenario_select: ["engineering", "client", "learning", "writing", "support", "handoff", "meetings", "product"],
+  source_expand: ["engineering", "client", "learning", "writing", "support", "handoff", "meetings", "product"],
   comparison_select: ["files", "llm-wiki", "obsidian", "notion", "notebooklm"],
   product_view_select: ["graph", "wiki", "review"],
   product_image_open: ["graph", "wiki", "review"],

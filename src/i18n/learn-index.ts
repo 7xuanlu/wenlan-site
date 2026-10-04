@@ -13,6 +13,7 @@ export type LocalizedLearnIndexContent = {
   readonly topics: readonly string[];
   readonly startEyebrow: string;
   readonly startDescription: string;
+  readonly comparisonLink: string;
   readonly articlesHeading: string;
   readonly articleCountLabel: string;
   readonly ctaEyebrow: string;
@@ -42,6 +43,7 @@ export const localizedLearnIndexContent: Record<
     startEyebrow: "從這裡開始",
     startDescription:
       "先選一個工作：建立 AI 知識庫、維護 LLM Wiki、連接 MCP 工具，或檢查來源與更新流程。這裡只列出已有完整翻譯的頁面。",
+    comparisonLink: "比較 Wenlan、Obsidian、Notion 等工具 →",
     articlesHeading: "中文指南",
     articleCountLabel: "篇文章",
     ctaEyebrow: "準備建立第一個本地記憶迴圈？",
@@ -66,6 +68,7 @@ export const localizedLearnIndexContent: Record<
     startEyebrow: "从这里开始",
     startDescription:
       "先选一个工作：建立 AI 知识库、维护 LLM Wiki、连接 MCP 工具，或检查来源与更新流程。这里只列出已有完整翻译的页面。",
+    comparisonLink: "比较 Wenlan、Obsidian、Notion 等工具 →",
     articlesHeading: "中文指南",
     articleCountLabel: "篇文章",
     ctaEyebrow: "准备建立第一个本地记忆循环？",

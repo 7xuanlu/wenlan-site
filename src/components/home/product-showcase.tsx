@@ -5,96 +5,265 @@ import { useId, useRef, useState } from "react";
 import type { Locale } from "@/i18n/locales";
 import { trackAnalyticsEvent } from "@/components/tracked-link";
 
-const labels = {
-  en: { title: "See the pages. Follow the connections.", tabs: ["Knowledge graph", "Wiki page", "Review changes"], descriptions: ["Knowledge around Wenlan: connected records, entities and wiki pages.", "Hovering a Wiki citation reveals the source memory.", "Compare proposed edits and earlier versions before choosing whether to approve."], notes: ["Real-data screenshot provided by Wenlan's creator, September 6, 2026. A view of the graph, not a live connection.", "Recorded in the app with demo data.", "Recorded in the app with demo data."], expand: "View full size", close: "Close image" },
-  "zh-TW": { title: "讀懂知識，也看見它的關聯。", tabs: ["知識圖譜", "Wiki 頁面", "審核變更"], descriptions: ["圍繞 Wenlan 累積的知識：記錄、實體與 Wiki 頁面彼此相連。", "指向 Wiki 引用，即可查看來源記憶。", "對照建議修改與先前版本，再決定是否採用。"], notes: ["文瀾作者提供的實際資料截圖，2026-09-06。圖譜的局部視角，非即時連線。", "實機錄影，使用示範資料。", "實機錄影，使用示範資料。"], expand: "放大查看", close: "關閉圖片" },
-  "zh-CN": { title: "读懂知识，也看见它的关联。", tabs: ["知识图谱", "Wiki 页面", "审核变更"], descriptions: ["围绕 Wenlan 积累的知识：记录、实体与 Wiki 页面相互连接。", "指向 Wiki 引用，即可查看来源记忆。", "对照建议修改与先前版本，再决定是否采用。"], notes: ["文澜作者提供的实际数据截图，2026-09-06。图谱的局部视角，非实时连接。", "实机录屏，使用演示数据。", "实机录屏，使用演示数据。"], expand: "放大查看", close: "关闭图片" },
-} as const;
-
-const images = [
-  { src: "/images/product-evidence/wenlan-live-knowledge-graph-20260906.webp", width: 3456, height: 1950 },
-  { src: "/images/product-evidence/wenlan-recorded-wiki-source-hover.webp", width: 2880, height: 1800 },
-  { src: "/images/product-evidence/wenlan-recorded-page-review.webp", width: 2880, height: 1800 },
+const stageNames = ["save", "page", "recall"] as const;
+const stageDimensions = [
+  { width: 3456, height: 2168 },
+  { width: 1440, height: 1100 },
+  { width: 3456, height: 2168 },
 ] as const;
 
-const viewerLabels = {
-  en: { fit: "Fit", detail: "Zoom in", original: "Open original", hint: "Scroll or swipe to explore the enlarged image." },
-  "zh-TW": { fit: "全圖", detail: "放大細節", original: "開啟原圖", hint: "滑動圖片，查看放大後的細節。" },
-  "zh-CN": { fit: "全图", detail: "放大细节", original: "打开原图", hint: "滑动图片，查看放大后的细节。" },
+const copyByLocale = {
+  en: {
+    stages: ["Save the work", "Read the page", "Ask next time"],
+    outcomes: [
+      "At the end of a discussion, /handoff saves the decisions, reasons, and unfinished work.",
+      "An agent separately turned those same records into this readable Page; the original records are linked below.",
+      "In a new conversation, /recall finds the saved records. Claude answers with sources, keeping unapproved ideas separate.",
+    ],
+    scenario: "Fictional project · Email assistant",
+    questionLabel: "You ask AI",
+    answerLabel: "Summary of Claude’s response",
+    question: "Can the first release send email automatically?",
+    answer: "No. The first release creates drafts for the user to review and send. Automatic sending is still awaiting approval.",
+    evidence: [
+      "Claude Code · /handoff · Fictional demo, actual screenshot",
+      "Wenlan · Agent-authored knowledge page and sources · Fictional demo",
+      "Claude Code · /recall · Fictional demo, actual screenshot",
+    ],
+    alt: [
+      "English handoff in Claude Code saves the email decision, its reason and the unapproved proposal",
+      "English Wenlan knowledge page with the email decision, reasons and three linked source records",
+      "English recall skill in a new Claude Code conversation retrieves Wenlan records and answers with their source IDs",
+    ],
+    expand: "View full size",
+    close: "Close image",
+    dialog: "Wenlan product demonstration",
+    openOriginal: "Open original",
+    fit: "Fit",
+    detail: "Zoom in",
+    hint: "Scroll or swipe to explore the enlarged image.",
+  },
+  "zh-TW": {
+    stages: ["收工時留下", "在文瀾核對", "下次問 AI"],
+    outcomes: [
+      "討論結束時，用 /handoff 留下決定、理由和還沒完成的事。",
+      "Agent 將同一批紀錄另行整理成易讀的知識頁；原始紀錄連結在下方。",
+      "換一段對話，用 /recall 找回紀錄。Claude 依來源回答，也分清哪些提案還沒核准。",
+    ],
+    scenario: "虛構專案 · 郵件助理",
+    questionLabel: "你問 AI",
+    answerLabel: "這次 Claude 的回答摘要",
+    question: "第一版能自動寄信嗎？",
+    answer: "不能。第一版只產生草稿，由使用者確認後寄出；自動寄送仍待批准。",
+    evidence: [
+      "Claude Code · /handoff · 虛構案例，實機截圖",
+      "文瀾 · Agent 整理的知識頁與來源 · 虛構案例",
+      "Claude Code · /recall · 虛構案例，實機截圖",
+    ],
+    alt: [
+      "繁體中文 Claude Code handoff，保存郵件決策、理由與未核准提案",
+      "繁體中文文瀾知識頁，呈現郵件決策、理由及三筆原始紀錄",
+      "新對話中以繁體中文呼叫 recall skill，Claude Code 查回文瀾紀錄並附來源回答",
+    ],
+    expand: "放大查看",
+    close: "關閉圖片",
+    dialog: "Wenlan 產品示範",
+    openOriginal: "開啟原圖",
+    fit: "全圖",
+    detail: "放大細節",
+    hint: "滑動圖片，查看放大後的細節。",
+  },
+  "zh-CN": {
+    stages: ["收工时留下", "在文澜核对", "下次问 AI"],
+    outcomes: [
+      "讨论结束时，用 /handoff 留下决定、理由和还没完成的事。",
+      "Agent 将同一批记录另行整理成易读的知识页；原始记录链接在下方。",
+      "换一段对话，用 /recall 找回记录。Claude 依据来源回答，也分清哪些提案还没批准。",
+    ],
+    scenario: "虚构项目 · 邮件助手",
+    questionLabel: "你问 AI",
+    answerLabel: "Claude 的回答摘要",
+    question: "第一版能自动发邮件吗？",
+    answer: "不能。第一版只生成草稿，由用户确认后发送；自动发送仍待批准。",
+    evidence: [
+      "Claude Code · /handoff · 虚构案例，实机截图",
+      "文澜 · Agent 整理的知识页与来源 · 虚构案例",
+      "Claude Code · /recall · 虚构案例，实机截图",
+    ],
+    alt: [
+      "简体中文 Claude Code handoff，保存邮件决定、理由和未批准提案",
+      "简体中文文澜知识页，呈现邮件决定、理由及三条原始记录",
+      "新对话中以简体中文调用 recall skill，Claude Code 查回文澜记录并附来源回答",
+    ],
+    expand: "放大查看",
+    close: "关闭图片",
+    dialog: "Wenlan 产品演示",
+    openOriginal: "打开原图",
+    fit: "全图",
+    detail: "放大细节",
+    hint: "滑动图片，查看放大后的细节。",
+  },
 } as const;
 
-// Start the enlarged view at the subject, not at the app sidebar.
-const detailFocus = [{ x: 0.66, y: 0.61 }, { x: 0.56, y: 0.69 }, { x: 0.6, y: 0.5 }];
+const imageFocus = [
+  { x: 0.10, y: 0.50 },
+  { x: 0.15, y: 0.32 },
+  { x: 0.10, y: 0.60 },
+] as const;
 
-export function ProductShowcase({ locale }: { locale: Locale }) {
-  const copy = labels[locale];
-  const viewer = viewerLabels[locale];
+export function ProductShowcase({ locale }: { readonly locale: Locale }) {
+  const labels = copyByLocale[locale];
+  const stages = stageNames.map((stage, index) => ({
+    src: `/images/product-evidence/wenlan-handoff-${stage}-${locale}.jpg`,
+    ...stageDimensions[index],
+  }));
   const [active, setActive] = useState(0);
-  const [enlarged, setEnlarged] = useState(false);
+  const [dialogImage, setDialogImage] = useState(0);
+  const [enlarged, setEnlarged] = useState(true);
   const id = useId();
-  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const dialog = useRef<HTMLDialogElement>(null);
   const imageViewport = useRef<HTMLDivElement>(null);
+
   const changeZoom = (zoom: boolean) => {
     setEnlarged(zoom);
     requestAnimationFrame(() => {
       const viewport = imageViewport.current;
       if (!viewport || !dialog.current?.open) return;
-      const focus = detailFocus[active];
+      const focus = imageFocus[dialogImage];
+      const zoomHeight = 1600 * stages[dialogImage].height / stages[dialogImage].width;
       viewport.scrollTo({
         left: zoom ? 1600 * focus.x - viewport.clientWidth / 2 : 0,
-        top: zoom ? 1600 * images[active].height / images[active].width * focus.y - viewport.clientHeight / 2 : 0,
+        top: zoom ? zoomHeight * focus.y - viewport.clientHeight / 2 : 0,
       });
     });
   };
-  const openImage = () => {
+
+  const openImage = (imageIndex: number) => {
+    setDialogImage(imageIndex);
+    setEnlarged(true);
     dialog.current?.showModal();
-    changeZoom(true);
-    trackAnalyticsEvent({ eventName: "product_image_open", placement: "home-product-views", locale, context: "home", detail: ["graph", "wiki", "review"][active] });
+    requestAnimationFrame(() => {
+      const viewport = imageViewport.current;
+      if (!viewport || !dialog.current?.open) return;
+      const focus = imageFocus[imageIndex];
+      const zoomHeight = 1600 * stages[imageIndex].height / stages[imageIndex].width;
+      viewport.scrollTo({
+        left: 1600 * focus.x - viewport.clientWidth / 2,
+        top: zoomHeight * focus.y - viewport.clientHeight / 2,
+      });
+    });
+    trackAnalyticsEvent({
+      eventName: "product_image_open",
+      placement: "home-product-views",
+      locale,
+      context: "home",
+      detail: ["handoff", "wiki", "recall"][imageIndex],
+    });
   };
-  const select = (next: number, focus = true) => {
-    if (next !== active) trackAnalyticsEvent({ eventName: "product_view_select", placement: "home-product-views", locale, context: "home", detail: ["graph", "wiki", "review"][next] });
+
+  const select = (next: number) => {
+    if (next !== active) {
+      trackAnalyticsEvent({
+        eventName: "product_view_select",
+        placement: "home-product-views",
+        locale,
+        context: "home",
+        detail: ["handoff", "wiki", "recall"][next],
+      });
+    }
     setActive(next);
-    if (focus) tabs.current[next]?.focus();
   };
+
   return (
-    <section id="product-views" data-home-reveal className="px-6 py-20 sm:py-24">
-      <div className="mx-auto max-w-6xl">
-        <h2 className="max-w-3xl font-serif text-3xl font-medium tracking-tight text-balance sm:text-5xl">
-          {locale === "en" ? copy.title : copy.title.split(/(?<=，)/).map((phrase) => <span key={phrase} className="inline-block">{phrase}</span>)}
-        </h2>
-        <div role="tablist" aria-label={copy.title} className="mt-8 flex w-fit max-w-full flex-wrap gap-1 rounded-lg border border-[var(--o-border)] bg-[var(--o-surface)] p-1">
-          {copy.tabs.map((label, i) => <button key={label} ref={(el) => { tabs.current[i] = el; }} id={`${id}-tab-${i}`} role="tab" type="button" aria-selected={active === i} aria-controls={`${id}-panel-${i}`} tabIndex={active === i ? 0 : -1} onClick={() => select(i, false)} onKeyDown={(event) => {
-            if (["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) {
-              event.preventDefault();
-              select(event.key === "Home" ? 0 : event.key === "End" ? images.length - 1 : (i + (event.key === "ArrowRight" ? 1 : -1) + images.length) % images.length);
-            }
-          }} className={`min-h-11 whitespace-nowrap rounded-md px-3 text-sm font-medium transition-colors motion-reduce:transition-none sm:px-5 focus-visible:outline-2 focus-visible:outline-[var(--o-warm)] ${active === i ? "bg-[var(--o-text)] text-[var(--o-bg)]" : "text-[var(--o-text-secondary)] hover:text-[var(--o-text)]"}`}>{label}</button>)}
-        </div>
-        <div className="relative mt-6">
-          {images.map((image, i) => <figure key={image.src} id={`${id}-panel-${i}`} role="tabpanel" aria-labelledby={`${id}-tab-${i}`} aria-hidden={active !== i} inert={active !== i} className={active === i ? "relative" : "invisible absolute inset-x-0 top-0"}>
-            <button type="button" onClick={openImage} aria-label={`${copy.expand}: ${copy.tabs[i]}`} className="home-product-frame group block w-full cursor-zoom-in overflow-hidden rounded-xl border border-[var(--o-border)] bg-[var(--o-bg-alt)] text-left shadow-[var(--o-shadow-media)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]">
-              <Image {...image} alt={copy.descriptions[i]} sizes="(max-width: 768px) calc(100vw - 48px), 1152px" className="h-auto w-full" />
-            </button>
-            <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-1 text-xs leading-relaxed text-[var(--o-text-secondary)]"><p className="max-w-[85ch]">{copy.descriptions[i]} <span className="inline-block text-[var(--o-text-muted)]">{copy.notes[i].split(/(?<=[。，])/).map((phrase) => <span key={phrase} className="inline-block">{phrase}</span>)}</span></p><button type="button" className="min-h-11 shrink-0 whitespace-nowrap text-[var(--o-warm)] underline underline-offset-4" onClick={openImage}>{copy.expand}</button></figcaption>
-          </figure>)}
+    <div id="product-views" className="min-w-0">
+      <div>
+        <p className="text-xs font-medium text-[var(--o-text-secondary)]">{labels.scenario}</p>
+        <div className="mt-3 grid gap-4 sm:grid-cols-[1fr_1.6fr] sm:gap-10">
+          <div>
+            <p className="text-xs font-medium text-[var(--o-text-secondary)]">{labels.questionLabel}</p>
+            <p className="mt-2 text-base font-medium leading-7 text-[var(--o-text)]">{labels.question}</p>
+          </div>
+          <div>
+            <p className="text-xs font-medium text-[var(--o-text-secondary)]">{labels.answerLabel}</p>
+            <p className="mt-2 text-base leading-7 text-[var(--o-text)]">{labels.answer}</p>
+          </div>
         </div>
       </div>
-      <dialog ref={dialog} className="home-image-dialog fixed m-auto max-h-[94dvh] w-[min(96vw,1600px)] max-w-none flex-col gap-3 overflow-hidden rounded-xl border border-[var(--o-border)] bg-[var(--o-bg)] p-3 text-[var(--o-text)] open:flex sm:p-5" aria-label={copy.tabs[active]} onClose={() => setEnlarged(false)} onClick={(event) => { if (event.target === event.currentTarget) dialog.current?.close(); }}>
+
+      <div role="group" aria-label={labels.dialog} className="mt-6 grid max-w-lg grid-cols-3 gap-2 sm:mt-8 sm:gap-3">
+        {labels.stages.map((stage, index) => (
+          <button
+            key={stage}
+            type="button"
+            aria-pressed={active === index}
+            aria-controls={`${id}-product-example`}
+            onClick={() => select(index)}
+            className={`min-h-11 rounded-md border px-1.5 py-2 text-xs font-medium leading-5 transition-colors motion-reduce:transition-none sm:px-3 sm:text-sm ${active === index ? "border-[var(--o-text)] bg-[var(--o-text)] text-[var(--o-bg)]" : "border-[var(--o-border)] text-[var(--o-text-secondary)] hover:text-[var(--o-text)]"} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--o-warm)]`}
+          >
+            {stage}
+          </button>
+        ))}
+      </div>
+
+      <div className="mt-4 grid max-w-4xl text-base leading-7 text-[var(--o-text-secondary)] sm:mt-6 sm:text-lg sm:leading-8">
+        {labels.outcomes.map((outcome) => (
+          <p key={outcome} aria-hidden="true" className="invisible col-start-1 row-start-1">{outcome}</p>
+        ))}
+        <p aria-live="polite" aria-atomic="true" className="col-start-1 row-start-1">{labels.outcomes[active]}</p>
+      </div>
+
+      <figure id={`${id}-product-example`} className="mt-4 sm:mt-6">
+        <div className="grid min-w-0 grid-cols-1">
+          {stages.map((stage, index) => (
+            <div
+              key={stage.src}
+              aria-hidden={active !== index}
+              inert={active !== index}
+              className={`col-start-1 row-start-1 min-w-0 transition-opacity duration-[180ms] motion-reduce:transition-none ${active === index ? "opacity-100" : "pointer-events-none opacity-0"}`}
+            >
+              <button
+                type="button"
+                onClick={() => openImage(index)}
+                aria-label={`${labels.expand}: ${labels.stages[index]}`}
+                className="home-product-frame group relative block aspect-[432/271] w-full cursor-zoom-in overflow-hidden rounded-md text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]"
+              >
+                {/* Fill the width; only the Page capture's empty footer falls outside this preview. */}
+                <Image {...stage} alt={`${labels.alt[index]} · ${labels.evidence[index]}`} sizes="(max-width: 1023px) calc(100vw - 48px), 1152px" className={`block h-auto w-full ${index !== 1 ? "home-native-window" : "rounded-md"}`} />
+              </button>
+            </div>
+          ))}
+        </div>
+        <figcaption className="mt-3 flex items-center justify-between gap-4 text-xs leading-relaxed text-[var(--o-text-secondary)]">
+          <div className="grid min-w-0 flex-1">
+            {labels.evidence.map((evidence, index) => (
+              <p key={evidence} aria-hidden={active !== index} className={`col-start-1 row-start-1 ${active === index ? "visible" : "invisible"}`}>{evidence}</p>
+            ))}
+          </div>
+          <button type="button" className="min-h-11 shrink-0 text-[var(--o-warm)] underline underline-offset-4" onClick={() => openImage(active)}>{labels.expand}</button>
+        </figcaption>
+      </figure>
+
+      <dialog
+        ref={dialog}
+        className="home-image-dialog fixed m-auto max-h-[94dvh] w-[min(96vw,1600px)] max-w-none flex-col gap-3 overflow-hidden rounded-xl border border-[var(--o-border)] bg-[var(--o-bg)] p-3 text-[var(--o-text)] open:flex sm:p-5"
+        aria-label={`${labels.dialog}: ${labels.stages[dialogImage]}`}
+        onClose={() => setEnlarged(false)}
+        onClick={(event) => { if (event.target === event.currentTarget) dialog.current?.close(); }}
+      >
         <div className="flex shrink-0 items-center justify-between gap-3">
           <div className="flex gap-1 rounded-lg border border-[var(--o-border)] p-1">
-            {[false, true].map((zoom) => <button key={String(zoom)} type="button" aria-pressed={enlarged === zoom} onClick={() => changeZoom(zoom)} className={`min-h-11 rounded-md px-3 text-sm focus-visible:outline-2 focus-visible:outline-[var(--o-warm)] ${enlarged === zoom ? "bg-[var(--o-text)] text-[var(--o-bg)]" : "text-[var(--o-text-secondary)]"}`}>{zoom ? viewer.detail : viewer.fit}</button>)}
+            {[false, true].map((zoom) => <button key={String(zoom)} type="button" aria-pressed={enlarged === zoom} onClick={() => changeZoom(zoom)} className={`min-h-11 rounded-md px-3 text-sm focus-visible:outline-2 focus-visible:outline-[var(--o-warm)] ${enlarged === zoom ? "bg-[var(--o-text)] text-[var(--o-bg)]" : "text-[var(--o-text-secondary)]"}`}>{zoom ? labels.detail : labels.fit}</button>)}
           </div>
-          <form method="dialog"><button autoFocus className="min-h-11 whitespace-nowrap rounded-lg border border-[var(--o-border)] px-3 text-sm focus-visible:outline-2 focus-visible:outline-[var(--o-warm)]">{copy.close}</button></form>
+          <form method="dialog"><button autoFocus className="min-h-11 whitespace-nowrap rounded-lg border border-[var(--o-border)] px-3 text-sm focus-visible:outline-2 focus-visible:outline-[var(--o-warm)]">{labels.close}</button></form>
         </div>
-        <div ref={imageViewport} role="region" aria-label={`${copy.tabs[active]}: ${viewer.detail}`} aria-describedby={`${id}-image-hint`} tabIndex={0} className="min-h-0 max-h-[72dvh] overflow-auto overscroll-contain rounded-lg border border-[var(--o-border)] focus-visible:outline-2 focus-visible:outline-[var(--o-warm)]">
-          <Image {...images[active]} unoptimized alt={copy.descriptions[active]} className="mx-auto h-auto" style={{ width: enlarged ? 1600 : "auto", maxWidth: enlarged ? "none" : "100%", maxHeight: enlarged ? "none" : "68dvh" }} />
+        <div ref={imageViewport} role="region" aria-label={labels.dialog} aria-describedby={`${id}-image-hint`} tabIndex={0} className="min-h-0 max-h-[72dvh] overflow-auto overscroll-contain rounded-lg border border-[var(--o-border)] focus-visible:outline-2 focus-visible:outline-[var(--o-warm)]">
+          <Image {...stages[dialogImage]} unoptimized alt={`${labels.alt[dialogImage]} · ${labels.evidence[dialogImage]}`} className={`mx-auto h-auto ${dialogImage !== 1 ? "home-native-window" : "rounded-md"}`} style={{ width: enlarged ? 1600 : "auto", maxWidth: enlarged ? "none" : "100%", maxHeight: enlarged ? "none" : "68dvh" }} />
         </div>
         <div className="flex shrink-0 flex-wrap items-center justify-between gap-x-4 gap-y-1 text-xs text-[var(--o-text-secondary)]">
-          <p id={`${id}-image-hint`}>{viewer.hint}</p>
-          <a href={images[active].src} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center whitespace-nowrap text-[var(--o-warm)] underline underline-offset-4">{viewer.original}</a>
+          <p id={`${id}-image-hint`}>{labels.hint}</p>
+          <a href={stages[dialogImage].src} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center whitespace-nowrap text-[var(--o-warm)] underline underline-offset-4">{labels.openOriginal}</a>
         </div>
       </dialog>
-    </section>
+    </div>
   );
 }

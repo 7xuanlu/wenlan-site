@@ -5,6 +5,7 @@ import { localizedLearnIndexContent } from "@/i18n/learn-index";
 import { LOCALE_CONFIG, type TranslatedLocale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
 import { canonicalUrl } from "@/i18n/routing";
+import { SiteHeader } from "@/components/site-header";
 
 export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }) {
   const content = localizedLearnIndexContent[locale];
@@ -49,6 +50,7 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
 
   return (
     <main className="grain min-h-screen">
+      <SiteHeader locale={locale} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -95,6 +97,13 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--o-text-secondary)]">
             {content.startDescription}
           </p>
+          <TrackedLocalizedLink
+            href="/learn/choose-ai-knowledge-base-tool#compare-tools"
+            locale={locale} eventName="learn_article_click" placement="learn-search-path" context="comparisons"
+            className="mt-4 inline-flex min-h-11 items-center text-base font-medium text-[var(--o-warm)] underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4"
+          >
+            {content.comparisonLink}
+          </TrackedLocalizedLink>
           <div className="mt-10 flex items-end justify-between gap-4">
             <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
               {content.articlesHeading}

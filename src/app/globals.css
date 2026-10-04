@@ -316,6 +316,16 @@ html:lang(zh-Hans) .brand-wordmark__cjk {
   animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* Keep first-screen text readable while it enters; do not delay its paint
+   behind a transparent animation, especially on slower mobile devices. */
+@keyframes hero-enter {
+  from { transform: translateY(12px); }
+  to { transform: translateY(0); }
+}
+.home-hero .animate-fade-up {
+  animation-name: hero-enter;
+}
+
 /* Scroll-triggered: pain cards rise from below */
 .scroll-fade-up {
   opacity: 0;
@@ -422,6 +432,7 @@ html:lang(zh-Hans) .brand-wordmark__cjk {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .home-hero .animate-fade-up { animation: none; }
   .animate-marquee { animation: none; }
   .animate-arrow-nudge { animation: none; }
   .animate-arc-flow { animation: none; }
@@ -446,15 +457,29 @@ html:lang(zh-Hans) .brand-wordmark__cjk {
   box-shadow: 0 1px 0 color-mix(in srgb, var(--o-text) 3%, transparent),
     0 12px 36px -28px color-mix(in srgb, var(--o-text) 22%, transparent);
 }
+.home-scenario-tabs { scrollbar-width: none; }
+.home-scenario-tabs::-webkit-scrollbar { display: none; }
 .home-scenario-tab-indicator {
-  width: calc((100% - .5rem) / 3);
-  background: var(--o-surface);
-  box-shadow: 0 1px 4px color-mix(in srgb, var(--o-text) 8%, transparent);
-  transform: translateX(calc(var(--active-scene) * 100%));
-  transition: transform 380ms var(--home-ease);
+  background: var(--o-warm);
+  opacity: 0;
+  transform: scaleX(.6);
+  transition: transform 200ms var(--home-ease), opacity 160ms ease;
+}
+.home-scenario-tabs [aria-selected="true"] .home-scenario-tab-indicator {
+  opacity: 1;
+  transform: scaleX(1);
+}
+/* Short desktop windows need less section whitespace, not smaller text. */
+@media (min-width: 1024px) and (max-height: 800px) {
+  .home-page .home-hero { padding-top: 6rem; padding-bottom: 1.5rem; }
+  .home-page #demo { padding-top: 1rem; }
 }
 .home-scenario-source[open] {
   background: color-mix(in srgb, var(--o-warm) 6%, var(--o-bg-alt));
+}
+/* Inactive panels reserve their collapsed height after either disclosure was opened. */
+.home-scenario-panel[aria-hidden="true"] :is([data-source-list], [data-knowledge-page]) > :not(summary) {
+  display: none;
 }
 .home-scenario-panel:has(.home-scenario-source:nth-child(1)[open]) .home-scenario-citation[data-source-number="1"],
 .home-scenario-panel:has(.home-scenario-source:nth-child(2)[open]) .home-scenario-citation[data-source-number="2"],
@@ -466,8 +491,60 @@ html:lang(zh-Hans) .brand-wordmark__cjk {
   .home-scenario-source:hover { background: var(--o-surface); }
   .home-scenario-source[open]:hover { background: color-mix(in srgb, var(--o-warm) 6%, var(--o-bg-alt)); }
 }
+.home-scenario-panel[aria-hidden="false"] [data-flow-stage="lookup"]:has([data-knowledge-page][open]) [data-retrieved-facts] {
+  display: none;
+}
+.home-consulted-page {
+  box-shadow: 0 2px 4px -2px rgb(7 10 16 / .32),
+    0 10px 24px -18px rgb(7 10 16 / .45);
+}
+[data-theme="light"] .home-consulted-page {
+  box-shadow: 0 2px 3px -2px color-mix(in srgb, var(--o-text) 12%, transparent),
+    0 10px 24px -18px color-mix(in srgb, var(--o-text) 22%, transparent);
+}
+.home-consulted-page > details > summary {
+  transition: color 160ms var(--home-ease);
+}
+.home-consulted-page > details > summary:hover { color: var(--o-warm); }
+.home-consulted-page > details > summary:active { transform: translateY(1px); }
 @media (prefers-reduced-motion: no-preference) {
   .home-scenario-source[open] .home-scenario-excerpt { animation: home-source-reveal 240ms var(--home-ease); }
+  /* The retrieved page arrives as one object; its evidence resolves inside it. */
+  [data-flow-ready="true"] .home-scenario-panel[aria-hidden="false"] [data-consulted-page] {
+    animation: home-knowledge-arrive 340ms var(--home-ease) 260ms both;
+  }
+  [data-flow-ready="true"] .home-scenario-panel[aria-hidden="false"] [data-retrieved-facts] > div {
+    animation: home-flow-answer 300ms var(--home-ease) 650ms both;
+  }
+  [data-flow-ready="true"] .home-scenario-panel[aria-hidden="false"] [data-retrieved-facts] > div:nth-child(2) {
+    animation-delay: 1000ms;
+  }
+  [data-flow-ready="true"] .home-scenario-panel[aria-hidden="false"] [data-flow-stage="answer"] > p:first-child {
+    animation: home-flow-answer 180ms var(--home-ease) 2200ms both;
+  }
+  [data-flow-ready="true"] .home-scenario-panel[aria-hidden="false"] [data-answer-character] {
+    animation: home-answer-type 80ms linear var(--answer-delay) both;
+  }
+  /* Reading or opening a source takes priority over the demonstration. */
+  [data-flow-ready="true"] .home-scenario-panel:focus-within [data-flow-stage],
+  [data-flow-ready="true"] .home-scenario-panel:focus-within [data-consulted-page],
+  [data-flow-ready="true"] .home-scenario-panel:focus-within [data-flow-stage="answer"] > p:first-child,
+  [data-flow-ready="true"] .home-scenario-panel:focus-within [data-answer-character],
+  [data-flow-ready="true"] .home-scenario-panel:focus-within [data-retrieved-facts] > div {
+    animation: none;
+  }
+}
+@keyframes home-knowledge-arrive {
+  from { opacity: 0; transform: translateY(8px) scale(.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes home-answer-type {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes home-flow-answer {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 @keyframes home-source-reveal {
   from { opacity: 0; transform: translateY(-3px); }
@@ -486,6 +563,8 @@ html:lang(zh-Hans) .brand-wordmark__cjk {
   background: var(--o-bg-alt);
 }
 .home-image-dialog::backdrop { background: rgb(14 15 19 / .72); backdrop-filter: blur(5px); }
+/* Follow the captured window's corners, not the surrounding letterbox. */
+.home-native-window { clip-path: inset(0 round 1.1% / 1.75%); }
 @media (hover: hover) and (pointer: fine) {
   .home-page .home-tool-mark:hover { transform: translateY(-3px); color: var(--o-text); background: var(--o-surface); }
   .home-page a[data-placement="home-hero"], .home-page a[data-placement="home-footer"] {

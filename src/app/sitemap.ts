@@ -11,9 +11,9 @@ import {
 import { docPages, docUrl } from "./(en)/docs/docs";
 import { articles, articleUrl } from "./(en)/learn/articles";
 
-const ABOUT_UPDATED_AT = "2026-09-09";
-const DOWNLOAD_UPDATED_AT = "2026-09-09";
-const GET_STARTED_UPDATED_AT = "2026-09-09";
+const ABOUT_UPDATED_AT = "2026-10-04";
+const DOWNLOAD_UPDATED_AT = "2026-10-04";
+const GET_STARTED_UPDATED_AT = "2026-10-04";
 const LINKS_UPDATED_AT = "2026-09-12";
 
 type CoreTranslatedPath = (typeof CORE_TRANSLATED_PATHS)[number];

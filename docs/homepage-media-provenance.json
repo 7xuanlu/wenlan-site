@@ -4,27 +4,47 @@
   "sourceVideo": "https://www.youtube.com/watch?v=4r3_rJVjBwI",
   "sourceTimeline": "Launch v18 uses v17/v16 picture; wenlan-launch/src/timeline.ts maps the source clips.",
   "transformation": "Wiki and review: full decoded 2880x1800 frames to WebP quality 92, no crop or compositing. Graph: supplied PNG to lossless WebP at original dimensions, no crop or synthetic elements. Embedded screenshot metadata stripped; web color conversion uses sRGB.",
-  "showcaseOrder": ["knowledge-graph", "wiki-source-hover", "page-review"],
+  "showcaseOrder": [
+    "handoff",
+    "knowledge-page-and-sources",
+    "recall"
+  ],
   "assets": [
     {
       "path": "public/images/product-evidence/wenlan-recorded-wiki-source-hover.webp",
       "sourceClip": "wenlan-launch-video/clips/03-cites-take3.mov",
       "sourceClipSha256": "196657bd769ec62f0d98a1a92779de51ca09a4d7fc9fe2da6cea60013703a9ef",
       "offsetSeconds": 1.5,
-      "dimensions": [2880, 1800],
+      "dimensions": [
+        2880,
+        1800
+      ],
       "sha256": "5469a7a1de2572dcbf1eed83358ab9fb5d90b977bb01a57f51818573780ae119",
       "captureContext": "Actual app recording using the Tally demonstration dataset. Raw take3 footage, not a claim that this exact frame appears in the published YouTube edit.",
-      "visibleEvidence": ["Full Tally: Simple SQLite Invoicing title", "Pointer over mem_ebfd0afa84e7 citation", "Source memory popover: SQLite for Single-User App", "Source summary and Open memory action", "Related entities"],
+      "visibleEvidence": [
+        "Full Tally: Simple SQLite Invoicing title",
+        "Pointer over mem_ebfd0afa84e7 citation",
+        "Source memory popover: SQLite for Single-User App",
+        "Source summary and Open memory action",
+        "Related entities"
+      ],
       "supersedes": "public/images/product-evidence/wenlan-recorded-wiki-overview.webp"
     },
     {
       "path": "public/images/product-evidence/wenlan-live-knowledge-graph-20260906.webp",
       "sourceScreenshot": "Screenshot 2026-09-06 at 1.43.23 PM.png",
       "sourceSha256": "587fdd4a755e64cbc1090d1e42e821c91b90056b52948b6f1f002e4f91f02a69",
-      "dimensions": [3456, 1950],
+      "dimensions": [
+        3456,
+        1950
+      ],
       "sha256": "63ab14b444c9cfd8527f9fc80440d7fb2507856b745c1d83b10e52e61df0b5f9",
       "captureContext": "User supplied and identified this as live Wenlan-related data on 2026-09-06, explicitly requesting its use. Provenance is user-attested, not an independent database inspection.",
-      "visibleLabels": ["wenlan", "Wenlan MCP", "user"],
+      "visibleLabels": [
+        "wenlan",
+        "Wenlan MCP",
+        "user"
+      ],
       "limitation": "A viewport with some clusters extending beyond its edges, not a complete graph export. No total counts, retrieval quality, traffic or adoption inferred. No added or removed graph elements.",
       "supersedes": "public/images/product-evidence/wenlan-recorded-atlas-overview.webp"
     },
@@ -33,18 +53,602 @@
       "sourceClip": "wenlan-launch-video/clips/05-asks-take2.mov",
       "sourceClipSha256": "1287a38a40f4b8c032cbc607ef1929b6ebdef7fd42fd9cdfcaf836f763899b99",
       "offsetSeconds": 2,
-      "dimensions": [2880, 1800],
+      "dimensions": [
+        2880,
+        1800
+      ],
       "sha256": "f457426685a800ab13c97a4215c5c2797f898350a84b1ba9330a43db856f7969",
       "captureContext": "Actual app recording using the Tally demonstration dataset. Raw take2 footage; not a live review or a claim that the exact frame appears in the published video.",
-      "visibleEvidence": ["Project notes page revision", "Added and removed text in unified diff", "Earlier version history", "Open page, Skip and Approve actions"],
+      "visibleEvidence": [
+        "Project notes page revision",
+        "Added and removed text in unified diff",
+        "Earlier version history",
+        "Open page, Skip and Approve actions"
+      ],
       "limitation": "Shows the review interface and proposed changes, not automatic correctness or an approved result. No customer or usage metrics inferred."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-recorded-claude-capture.png",
+      "sourceAsset": "wenlan-launch-video/experiments/2026-09-10-main-landscape-L43/public/claude-terminal.png",
+      "sourceRecord": "wenlan-launch-video/experiments/2026-09-09-main-landscape-L39/LICENSES/visual-sources-v26.md",
+      "dimensions": [
+        2880,
+        1800
+      ],
+      "sha256": "732592ffbafbf0b6e2967401181dc6c3f25cef25fc087d094f8fcc2a6644810d",
+      "captureContext": "Existing actual Tally demonstration: Claude Code captures the invoice numbering decision and returns stored mem_cc0dbedce45e. Editorial frame/crop from 01-hook-take4.mov at 45s, no redraw. Contains demo-only /tmp/claude settings path, no account identifiers or credentials.",
+      "transformation": "Byte-for-byte copy of existing prepared demo asset; no additional crop, compositing, text replacement or image generation.",
+      "limitation": "Historical recorded demonstration, not a fresh current-release test. The pair shows Claude capture and Codex retrieval of the same memory; not two simultaneous querying clients or proof of every client."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-recorded-ai-recall.png",
+      "sourceAsset": "wenlan-launch-video/experiments/2026-09-10-main-landscape-L43/public/answer.png",
+      "sourceRecord": "wenlan-launch-video/experiments/2026-09-09-main-landscape-L39/LICENSES/visual-sources-v26.md",
+      "dimensions": [
+        2780,
+        370
+      ],
+      "sha256": "283a5ffd1fee5b03071a3ae28c59bf5be718c8ffa4a4de9b12bfc385457be35a",
+      "captureContext": "Existing actual Tally demonstration: Codex answer excerpt cites mem_cc0dbedce45e and states the annual shared gap-free invoice sequence. Original prepared crop, no redraw; no account controls or local paths visible.",
+      "transformation": "Byte-for-byte copy of existing prepared demo asset; no additional crop, compositing, text replacement or image generation.",
+      "limitation": "Historical recorded demonstration, not a fresh current-release test. The pair shows Claude capture and Codex retrieval of the same memory; not two simultaneous querying clients or proof of every client."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-mail-decision-page.jpg",
+      "sha256": "a6d98f9189e5db9d157e81c65b17efacf6df0903f5304806c2affab5130e8df6",
+      "dimensions": [
+        1200,
+        760
+      ],
+      "captureContext": "Agent-authored knowledge page with three linked source memories",
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json",
+      "transformation": "Unedited full-viewport browser screenshot of the actual Wenlan React interface backed by an isolated live daemon. No synthetic UI, redrawn text, image generation or compositing.",
+      "limitation": "Synthetic demonstration data. Browser live-read adapter; daemon v0.18.13, current development frontend. Page authored by Codex and stored through the API, not a successful autonomous distillation. Per-claim citation verification was not passed."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-mail-decision-sources.jpg",
+      "sha256": "1a3eee58a64206f05f4927acd07c98b4c096defb8db86bbd78a560c5227b2f1a",
+      "dimensions": [
+        1200,
+        760
+      ],
+      "captureContext": "Original decision record with related memories",
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json",
+      "transformation": "Unedited full-viewport browser screenshot of the actual Wenlan React interface backed by an isolated live daemon. No synthetic UI, redrawn text, image generation or compositing.",
+      "limitation": "Synthetic demonstration data. Browser live-read adapter; daemon v0.18.13, current development frontend. Page authored by Codex and stored through the API, not a successful autonomous distillation. Per-claim citation verification was not passed."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-mail-decision-recall.jpg",
+      "sha256": "da5ada421cf9b9c500c2d8ad9f5a9a080e7a838dcda061048f1776de52f47308",
+      "dimensions": [
+        1200,
+        760
+      ],
+      "captureContext": "Real product search for 第一版能自動寄信嗎？ returning the authored page and three memories",
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json",
+      "transformation": "Unedited full-viewport browser screenshot of the actual Wenlan React interface backed by an isolated live daemon. No synthetic UI, redrawn text, image generation or compositing.",
+      "limitation": "Synthetic demonstration data. Browser live-read adapter; daemon v0.18.13, current development frontend. Page authored by Codex and stored through the API, not a successful autonomous distillation. Per-claim citation verification was not passed."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-mail-decision-claude.jpg",
+      "sha256": "38b0a95dc9654a131e2b538d662b31217311d2efb9bf1fd89ac7f63e0642bdfe",
+      "dimensions": [
+        3456,
+        2168
+      ],
+      "captureContext": "Actual Claude Code conversation: Wenlan Recall, Read index.md, Read the same AI email assistant knowledge page, and the resulting answer. Tool history expanded; private sidebar hidden through the application UI.",
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json",
+      "transformation": "Unedited native application-window screenshot via CUA, stored as original JPEG bytes. No crop, compositing, text replacement, invented client chrome, or image generation.",
+      "limitation": "Fictional demonstration. Claude Sonnet 5.5 with explicitly configured isolated MCP and local page directory. MCP returned sources; Claude read page full text from Wenlan’s local Markdown store. Does not establish cloud/remote page access, automatic distillation, or all-client compatibility."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-save-en.jpg",
+      "locale": "en",
+      "stage": "save",
+      "dimensions": [
+        3456,
+        2168
+      ],
+      "sha256": "db4fa1be6823e4d4b576e92b14ec3fb8a1a24d8ef94d3111d880fce35bd9089a",
+      "bytes": 935432,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual Claude Code /handoff invocation and saved-record result; private sidebar hidden.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Opus 5.5 high, explicitly configured isolated MCP and Space. Recall retrieves records, not the Page. This is a bounded demonstration, not a reliability benchmark."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-page-en.jpg",
+      "locale": "en",
+      "stage": "page",
+      "dimensions": [
+        1440,
+        1100
+      ],
+      "sha256": "be4898bc115341e7d4b79fefc3aba0bb4cf4671cad57c5b8b4cb1c1ae72a735c",
+      "bytes": 71526,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual Wenlan knowledge page with Page info and three linked source records visible.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Agent-authored page created through the API and read in the real frontend live-read adapter; not automatic handoff page generation or passed per-claim verification."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-recall-en.jpg",
+      "locale": "en",
+      "stage": "recall",
+      "dimensions": [
+        3456,
+        2168
+      ],
+      "sha256": "db759b6653fb6645722131c9261076562013a9ccea434c8ce88f82cab054510c",
+      "bytes": 485359,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual /recall in a separate Claude Code conversation, with tool history and sourced answer visible.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Opus 5.5 high, explicitly configured isolated MCP and Space. Recall retrieves records, not the Page. This is a bounded demonstration, not a reliability benchmark."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-save-zh-TW.jpg",
+      "locale": "zh-TW",
+      "stage": "save",
+      "dimensions": [
+        3456,
+        2168
+      ],
+      "sha256": "56bae298889ebb1582bf9e9adc9269468cf938544cfc032665e817d7f8dda5b2",
+      "bytes": 837535,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual Claude Code /handoff invocation and saved-record result; private sidebar hidden.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Opus 5.5 high, explicitly configured isolated MCP and Space. Recall retrieves records, not the Page. This is a bounded demonstration, not a reliability benchmark."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-page-zh-TW.jpg",
+      "locale": "zh-TW",
+      "stage": "page",
+      "dimensions": [
+        1440,
+        1100
+      ],
+      "sha256": "bdc17bf69fdd5b5e94bccd9bfff2ecf698f6ba13ae876bed7d0b07751c994b8c",
+      "bytes": 70497,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual Wenlan knowledge page with Page info and three linked source records visible.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Agent-authored page created through the API and read in the real frontend live-read adapter; not automatic handoff page generation or passed per-claim verification."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-recall-zh-TW.jpg",
+      "locale": "zh-TW",
+      "stage": "recall",
+      "dimensions": [
+        3456,
+        2168
+      ],
+      "sha256": "23dd56c5b3013183e9fbf77f3825b35a5c358ca62969d9910b58c8efe20848f7",
+      "bytes": 459203,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual /recall in a separate Claude Code conversation, with tool history and sourced answer visible.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Opus 5.5 high, explicitly configured isolated MCP and Space. Recall retrieves records, not the Page. This is a bounded demonstration, not a reliability benchmark."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-save-zh-CN.jpg",
+      "locale": "zh-CN",
+      "stage": "save",
+      "dimensions": [
+        3456,
+        2168
+      ],
+      "sha256": "79a2c65c2676b970527f13c9f4e441531ab5753725a08cd8722bbad1dce438f4",
+      "bytes": 862341,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual Claude Code /handoff invocation and saved-record result; private sidebar hidden.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Opus 5.5 high, explicitly configured isolated MCP and Space. Recall retrieves records, not the Page. This is a bounded demonstration, not a reliability benchmark."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-page-zh-CN.jpg",
+      "locale": "zh-CN",
+      "stage": "page",
+      "dimensions": [
+        1440,
+        1100
+      ],
+      "sha256": "7bb2478544d9f75a4b11136006713358bc63f600b5d9026846c73c9a9544bd30",
+      "bytes": 71284,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual Wenlan knowledge page with Page info and three linked source records visible.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Agent-authored page created through the API and read in the real frontend live-read adapter; not automatic handoff page generation or passed per-claim verification."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-recall-zh-CN.jpg",
+      "locale": "zh-CN",
+      "stage": "recall",
+      "dimensions": [
+        3456,
+        2168
+      ],
+      "sha256": "453f518268c24eefa8e13b4c40e7228d8db2bd940b7a50d6db69e3b833aac68d",
+      "bytes": 476596,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual /recall in a separate Claude Code conversation, with tool history and sourced answer visible.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Opus 5.5 high, explicitly configured isolated MCP and Space. Recall retrieves records, not the Page. This is a bounded demonstration, not a reliability benchmark."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-mail-review-en.jpg",
+      "locale": "en",
+      "stage": "review",
+      "dimensions": [
+        1000,
+        1000
+      ],
+      "sha256": "a20c7d9178890d68add0e4d95335caaa2300fbd7808469d95ebcd81347ca5a67",
+      "bytes": 82307,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#revisionReviewRefresh",
+      "captureContext": "Actual Wenlan product frontend with read-only daemon adapter, isolated synthetic data; pending review showing current and proposed content.",
+      "transformation": "Original unedited CUA JPEG screenshot bytes. No pixel edits, compositing or generated UI.",
+      "limitation": "Fictional case. Agent-authored proposal, not automatic synthesis. Acceptance exercised through product API, not native UI. English application controls with localized case content."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-mail-updated-en.jpg",
+      "locale": "en",
+      "stage": "updated",
+      "dimensions": [
+        1000,
+        1100
+      ],
+      "sha256": "f668d1200f104d0e2133106e190b44524096929f19d0bab223ded4c63b7756ec",
+      "bytes": 86292,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#revisionReviewRefresh",
+      "captureContext": "Actual Wenlan product frontend with read-only daemon adapter, isolated synthetic data; accepted Page showing added rule, version history and all four sources.",
+      "transformation": "Original unedited CUA JPEG screenshot bytes. No pixel edits, compositing or generated UI.",
+      "limitation": "Fictional case. Agent-authored proposal, not automatic synthesis. Acceptance exercised through product API, not native UI. English application controls with localized case content."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-mail-review-zh-TW.jpg",
+      "locale": "zh-TW",
+      "stage": "review",
+      "dimensions": [
+        1000,
+        1000
+      ],
+      "sha256": "a1565a7095027bcae7aac8b6ae092bfb641752b77ed18e7889f241074a974627",
+      "bytes": 73424,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#revisionReviewRefresh",
+      "captureContext": "Actual Wenlan product frontend with read-only daemon adapter, isolated synthetic data; pending review showing current and proposed content.",
+      "transformation": "Original unedited CUA JPEG screenshot bytes. No pixel edits, compositing or generated UI.",
+      "limitation": "Fictional case. Agent-authored proposal, not automatic synthesis. Acceptance exercised through product API, not native UI. English application controls with localized case content."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-mail-updated-zh-TW.jpg",
+      "locale": "zh-TW",
+      "stage": "updated",
+      "dimensions": [
+        1000,
+        1100
+      ],
+      "sha256": "ea3df78ffbb9b8bcd7a70cc3aaf1b34e992e8d71c0bd982134d3f6f1c34b914a",
+      "bytes": 83586,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#revisionReviewRefresh",
+      "captureContext": "Actual Wenlan product frontend with read-only daemon adapter, isolated synthetic data; accepted Page showing added rule, version history and all four sources.",
+      "transformation": "Original unedited CUA JPEG screenshot bytes. No pixel edits, compositing or generated UI.",
+      "limitation": "Fictional case. Agent-authored proposal, not automatic synthesis. Acceptance exercised through product API, not native UI. English application controls with localized case content."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-mail-review-zh-CN.jpg",
+      "locale": "zh-CN",
+      "stage": "review",
+      "dimensions": [
+        1000,
+        1000
+      ],
+      "sha256": "21be8fe79cf7f0d39ccf30728b2ed13dc98071ed077e5e3751f9828bff2fc805",
+      "bytes": 73498,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#revisionReviewRefresh",
+      "captureContext": "Actual Wenlan product frontend with read-only daemon adapter, isolated synthetic data; pending review showing current and proposed content.",
+      "transformation": "Original unedited CUA JPEG screenshot bytes. No pixel edits, compositing or generated UI.",
+      "limitation": "Fictional case. Agent-authored proposal, not automatic synthesis. Acceptance exercised through product API, not native UI. English application controls with localized case content."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-mail-updated-zh-CN.jpg",
+      "locale": "zh-CN",
+      "stage": "updated",
+      "dimensions": [
+        1000,
+        1100
+      ],
+      "sha256": "06b6f4bf550b7a8eb2ce72cad1051e4ed5e5af8baf3af42e6a92db88ec54cfbf",
+      "bytes": 83170,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#revisionReviewRefresh",
+      "captureContext": "Actual Wenlan product frontend with read-only daemon adapter, isolated synthetic data; accepted Page showing added rule, version history and all four sources.",
+      "transformation": "Original unedited CUA JPEG screenshot bytes. No pixel edits, compositing or generated UI.",
+      "limitation": "Fictional case. Agent-authored proposal, not automatic synthesis. Acceptance exercised through product API, not native UI. English application controls with localized case content."
     }
   ],
   "benchmarkDate": {
     "displayed": "2026-06-24",
     "semantics": "Source updated_at snapshot date, not a verified wall-clock execution time.",
     "coreCommit": "847fe0bb",
-    "sources": ["docs/eval/readme_metrics.example.json", "docs/eval/results/lme_s_90_bge_base_pool20.summary.json"],
+    "sources": [
+      "docs/eval/readme_metrics.example.json",
+      "docs/eval/results/lme_s_90_bge_base_pool20.summary.json"
+    ],
     "rerunPerformed": false
+  },
+  "secondaryView": "knowledge-graph",
+  "selectionPolicy": "Do not use Tally, invoice-numbering, or Tally-derived footage for homepage need examples. Historical inventory below records file provenance, not approval for current display.",
+  "activeShowcaseAssets": [
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-save-en.jpg",
+      "locale": "en",
+      "stage": "save",
+      "dimensions": [
+        3456,
+        2168
+      ],
+      "sha256": "db4fa1be6823e4d4b576e92b14ec3fb8a1a24d8ef94d3111d880fce35bd9089a",
+      "bytes": 935432,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual Claude Code /handoff invocation and saved-record result; private sidebar hidden.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Opus 5.5 high, explicitly configured isolated MCP and Space. Recall retrieves records, not the Page. This is a bounded demonstration, not a reliability benchmark."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-page-en.jpg",
+      "locale": "en",
+      "stage": "page",
+      "dimensions": [
+        1440,
+        1100
+      ],
+      "sha256": "be4898bc115341e7d4b79fefc3aba0bb4cf4671cad57c5b8b4cb1c1ae72a735c",
+      "bytes": 71526,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual Wenlan knowledge page with Page info and three linked source records visible.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Agent-authored page created through the API and read in the real frontend live-read adapter; not automatic handoff page generation or passed per-claim verification."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-recall-en.jpg",
+      "locale": "en",
+      "stage": "recall",
+      "dimensions": [
+        3456,
+        2168
+      ],
+      "sha256": "db759b6653fb6645722131c9261076562013a9ccea434c8ce88f82cab054510c",
+      "bytes": 485359,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual /recall in a separate Claude Code conversation, with tool history and sourced answer visible.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Opus 5.5 high, explicitly configured isolated MCP and Space. Recall retrieves records, not the Page. This is a bounded demonstration, not a reliability benchmark."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-save-zh-TW.jpg",
+      "locale": "zh-TW",
+      "stage": "save",
+      "dimensions": [
+        3456,
+        2168
+      ],
+      "sha256": "56bae298889ebb1582bf9e9adc9269468cf938544cfc032665e817d7f8dda5b2",
+      "bytes": 837535,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual Claude Code /handoff invocation and saved-record result; private sidebar hidden.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Opus 5.5 high, explicitly configured isolated MCP and Space. Recall retrieves records, not the Page. This is a bounded demonstration, not a reliability benchmark."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-page-zh-TW.jpg",
+      "locale": "zh-TW",
+      "stage": "page",
+      "dimensions": [
+        1440,
+        1100
+      ],
+      "sha256": "bdc17bf69fdd5b5e94bccd9bfff2ecf698f6ba13ae876bed7d0b07751c994b8c",
+      "bytes": 70497,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual Wenlan knowledge page with Page info and three linked source records visible.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Agent-authored page created through the API and read in the real frontend live-read adapter; not automatic handoff page generation or passed per-claim verification."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-recall-zh-TW.jpg",
+      "locale": "zh-TW",
+      "stage": "recall",
+      "dimensions": [
+        3456,
+        2168
+      ],
+      "sha256": "23dd56c5b3013183e9fbf77f3825b35a5c358ca62969d9910b58c8efe20848f7",
+      "bytes": 459203,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual /recall in a separate Claude Code conversation, with tool history and sourced answer visible.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Opus 5.5 high, explicitly configured isolated MCP and Space. Recall retrieves records, not the Page. This is a bounded demonstration, not a reliability benchmark."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-save-zh-CN.jpg",
+      "locale": "zh-CN",
+      "stage": "save",
+      "dimensions": [
+        3456,
+        2168
+      ],
+      "sha256": "79a2c65c2676b970527f13c9f4e441531ab5753725a08cd8722bbad1dce438f4",
+      "bytes": 862341,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual Claude Code /handoff invocation and saved-record result; private sidebar hidden.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Opus 5.5 high, explicitly configured isolated MCP and Space. Recall retrieves records, not the Page. This is a bounded demonstration, not a reliability benchmark."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-page-zh-CN.jpg",
+      "locale": "zh-CN",
+      "stage": "page",
+      "dimensions": [
+        1440,
+        1100
+      ],
+      "sha256": "7bb2478544d9f75a4b11136006713358bc63f600b5d9026846c73c9a9544bd30",
+      "bytes": 71284,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual Wenlan knowledge page with Page info and three linked source records visible.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Agent-authored page created through the API and read in the real frontend live-read adapter; not automatic handoff page generation or passed per-claim verification."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-handoff-recall-zh-CN.jpg",
+      "locale": "zh-CN",
+      "stage": "recall",
+      "dimensions": [
+        3456,
+        2168
+      ],
+      "sha256": "453f518268c24eefa8e13b4c40e7228d8db2bd940b7a50d6db69e3b833aac68d",
+      "bytes": 476596,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#handoffRecallRefresh",
+      "captureContext": "Actual /recall in a separate Claude Code conversation, with tool history and sourced answer visible.",
+      "transformation": "Original unedited screenshot bytes captured through CUA. No crop, text replacement, compositing or image generation.",
+      "limitation": "Fictional demonstration; static capture, not a live connection. Opus 5.5 high, explicitly configured isolated MCP and Space. Recall retrieves records, not the Page. This is a bounded demonstration, not a reliability benchmark."
+    }
+  ],
+  "localizedContent": "Each locale has independently captured handoff, Page/source content and recall answer; native client controls remain in English.",
+  "revisionReviewAssets": [
+    {
+      "path": "public/images/product-evidence/wenlan-mail-review-en.jpg",
+      "locale": "en",
+      "stage": "review",
+      "dimensions": [
+        1000,
+        1000
+      ],
+      "sha256": "a20c7d9178890d68add0e4d95335caaa2300fbd7808469d95ebcd81347ca5a67",
+      "bytes": 82307,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#revisionReviewRefresh",
+      "captureContext": "Actual Wenlan product frontend with read-only daemon adapter, isolated synthetic data; pending review showing current and proposed content.",
+      "transformation": "Original unedited CUA JPEG screenshot bytes. No pixel edits, compositing or generated UI.",
+      "limitation": "Fictional case. Agent-authored proposal, not automatic synthesis. Acceptance exercised through product API, not native UI. English application controls with localized case content."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-mail-updated-en.jpg",
+      "locale": "en",
+      "stage": "updated",
+      "dimensions": [
+        1000,
+        1100
+      ],
+      "sha256": "f668d1200f104d0e2133106e190b44524096929f19d0bab223ded4c63b7756ec",
+      "bytes": 86292,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#revisionReviewRefresh",
+      "captureContext": "Actual Wenlan product frontend with read-only daemon adapter, isolated synthetic data; accepted Page showing added rule, version history and all four sources.",
+      "transformation": "Original unedited CUA JPEG screenshot bytes. No pixel edits, compositing or generated UI.",
+      "limitation": "Fictional case. Agent-authored proposal, not automatic synthesis. Acceptance exercised through product API, not native UI. English application controls with localized case content."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-mail-review-zh-TW.jpg",
+      "locale": "zh-TW",
+      "stage": "review",
+      "dimensions": [
+        1000,
+        1000
+      ],
+      "sha256": "a1565a7095027bcae7aac8b6ae092bfb641752b77ed18e7889f241074a974627",
+      "bytes": 73424,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#revisionReviewRefresh",
+      "captureContext": "Actual Wenlan product frontend with read-only daemon adapter, isolated synthetic data; pending review showing current and proposed content.",
+      "transformation": "Original unedited CUA JPEG screenshot bytes. No pixel edits, compositing or generated UI.",
+      "limitation": "Fictional case. Agent-authored proposal, not automatic synthesis. Acceptance exercised through product API, not native UI. English application controls with localized case content."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-mail-updated-zh-TW.jpg",
+      "locale": "zh-TW",
+      "stage": "updated",
+      "dimensions": [
+        1000,
+        1100
+      ],
+      "sha256": "ea3df78ffbb9b8bcd7a70cc3aaf1b34e992e8d71c0bd982134d3f6f1c34b914a",
+      "bytes": 83586,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#revisionReviewRefresh",
+      "captureContext": "Actual Wenlan product frontend with read-only daemon adapter, isolated synthetic data; accepted Page showing added rule, version history and all four sources.",
+      "transformation": "Original unedited CUA JPEG screenshot bytes. No pixel edits, compositing or generated UI.",
+      "limitation": "Fictional case. Agent-authored proposal, not automatic synthesis. Acceptance exercised through product API, not native UI. English application controls with localized case content."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-mail-review-zh-CN.jpg",
+      "locale": "zh-CN",
+      "stage": "review",
+      "dimensions": [
+        1000,
+        1000
+      ],
+      "sha256": "21be8fe79cf7f0d39ccf30728b2ed13dc98071ed077e5e3751f9828bff2fc805",
+      "bytes": 73498,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#revisionReviewRefresh",
+      "captureContext": "Actual Wenlan product frontend with read-only daemon adapter, isolated synthetic data; pending review showing current and proposed content.",
+      "transformation": "Original unedited CUA JPEG screenshot bytes. No pixel edits, compositing or generated UI.",
+      "limitation": "Fictional case. Agent-authored proposal, not automatic synthesis. Acceptance exercised through product API, not native UI. English application controls with localized case content."
+    },
+    {
+      "path": "public/images/product-evidence/wenlan-mail-updated-zh-CN.jpg",
+      "locale": "zh-CN",
+      "stage": "updated",
+      "dimensions": [
+        1000,
+        1100
+      ],
+      "sha256": "06b6f4bf550b7a8eb2ce72cad1051e4ed5e5af8baf3af42e6a92db88ec54cfbf",
+      "bytes": 83170,
+      "capturedAt": "2026-10-03",
+      "sourceRecord": "docs/homepage-mail-demo-evidence.json#revisionReviewRefresh",
+      "captureContext": "Actual Wenlan product frontend with read-only daemon adapter, isolated synthetic data; accepted Page showing added rule, version history and all four sources.",
+      "transformation": "Original unedited CUA JPEG screenshot bytes. No pixel edits, compositing or generated UI.",
+      "limitation": "Fictional case. Agent-authored proposal, not automatic synthesis. Acceptance exercised through product API, not native UI. English application controls with localized case content."
+    }
+  ],
+  "graphPresentation": {
+    "placement": "Separate knowledge-connections section after the same-case update proof; not a fourth primary showcase step.",
+    "path": "public/images/product-evidence/wenlan-live-knowledge-graph-20260906.webp",
+    "scope": "Restored complete user-provided real-data viewport, dated 2026-09-06. User-attested provenance, not an independently validated graph database or accuracy metric.",
+    "annotations": "Localized HTML callouts illustrate AI memory research comparing Mem0/Zep/Letta, Claude/Codex workflows using handoff/recall, and Wenlan development covering wiki pages/citations/MCP. Per user correction, the tool-workflow leader points to the lower-left blue node at 22.3% / 82%, not the visibly named Wenlan MCP cluster. Seven small secondary labels illustrate personal topics: a Japan trip, English practice, AI tools, reading, writing, yearly planning and photography. Reading, writing and language learning remain visible at every width; other secondary topics appear from 1024px upward. The separate fictional email-assistant case is not used as a graph topic. Annotations do not verify captured node contents. The visible caption identifies this distinction. Original screenshot bytes and labels are unchanged; the full-size viewer opens the unannotated image.",
+    "legend": "Localized static HTML legend above the capture groups its project/technology/organization/person/theme types as entities/topics, followed by wiki pages and memories. Swatches retain the capture's light-theme palette in either website theme. Connection lines are labeled as relationships. A compact Page sources row lists files (PDF/Markdown), notes and AI conversations separately from the node-color key; it does not invent a file/source node kind. This is a reading aid, not a functional graph filter. The reading question and short purpose sentence occupy separate paragraphs; legend groups align to a shared grid. Equal-width desktop callouts have numbered markers and distinct leader lines; below 768px those markers map to the text key under the image.",
+    "annotationSource": "src/components/home/knowledge-graph-proof.tsx"
   }
 }

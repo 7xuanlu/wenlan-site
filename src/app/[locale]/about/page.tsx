@@ -3,6 +3,7 @@ import { buildPageMetadata } from "@/i18n/metadata";
 import { resolveLocalizedRouteLocale } from "@/i18n/resolve-locale";
 import type { Metadata } from "next";
 import { AboutPage } from "../../_pages/about";
+import { getLatestRelease } from "@/lib/release-server";
 
 type LocalePageParams = {
   locale: string;
@@ -29,5 +30,6 @@ export default async function LocalizedAboutPage({
   params: Promise<LocalePageParams>;
 }) {
   const { locale } = await params;
-  return <AboutPage locale={resolveLocalizedRouteLocale(locale)} />;
+  const release = await getLatestRelease();
+  return <AboutPage locale={resolveLocalizedRouteLocale(locale)} release={release} />;
 }

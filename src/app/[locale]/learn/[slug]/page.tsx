@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LocalizedLink } from "@/i18n/navigation";
+import { SiteHeader } from "@/components/site-header";
 import {
   getLocalizedLearnArticle,
   isTranslatedLearnSlug,
@@ -23,6 +24,8 @@ import { TrackedLink, TrackedLocalizedLink } from "@/components/tracked-link";
 import { getScenarioPacket } from "@/lib/scenario-examples";
 import { ScenarioWorkedExample } from "@/components/learn/scenario-worked-example";
 import { ProductEvidencePanel } from "@/components/learn/product-evidence-panel";
+import { WorkflowComparison } from "@/components/learn/workflow-comparison";
+import { getCoreContent } from "@/i18n/content";
 import { WorkflowComparisonGuide } from "@/components/learn/workflow-comparison-guide";
 import { RecordedWorkflowProof } from "@/components/learn/recorded-workflow-proof";
 import { ShareArticle } from "@/components/learn/share-article";
@@ -330,6 +333,7 @@ export default async function LocalizedLearnSlugPage({
 
   return (
     <main className="grain min-h-screen">
+      <SiteHeader locale={resolvedLocale} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -429,6 +433,8 @@ export default async function LocalizedLearnSlugPage({
             </div>
           </div>
         </section>
+
+        {article.slug === "choose-ai-knowledge-base-tool" && <WorkflowComparison copy={getCoreContent(resolvedLocale).home.content.redesign.pains} locale={resolvedLocale} />}
 
         {getScenarioPacket(article.slug) ? (
           <ScenarioWorkedExample packet={getScenarioPacket(article.slug)!} locale={resolvedLocale} />

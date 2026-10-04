@@ -263,16 +263,29 @@ const oldClaims = {
   ],
 };
 
-test("hero pairs growing-note pain with the living-wiki mechanism in all locales", () => {
+test("hero promises to organize notes and AI chats into a maintained personal knowledge base", () => {
   const expected = {
-    en: ["Notes and chats pile up.", "Still starting over?"],
-    "zh-TW": ["筆記、對話一直累積，", "工作卻還得從頭來？"],
-    "zh-CN": ["笔记、对话一直积累，", "工作却还得从头来？"],
+    en: {
+      eyebrow: "A personal wiki for you and your AI",
+      headline: ["Turn notes and AI chats", "into your knowledge base."],
+      description: /scattered.*good ideas.*chats.*organize key points.*up to date.*AI can find what it needs/i,
+    },
+    "zh-TW": {
+      eyebrow: "你與 AI 共用的個人 Wiki",
+      headline: ["把筆記與 AI 對話，", "整理成你的知識庫。"],
+      description: /筆記散在各處.*好點子留在對話裡.*整理重點、持續更新.*方便查閱.*AI 更容易找到需要的資訊/,
+    },
+    "zh-CN": {
+      eyebrow: "你与 AI 共用的个人 Wiki",
+      headline: ["把笔记和 AI 对话，", "整理成你的知识库。"],
+      description: /笔记散落各处.*好点子留在对话里.*整理重点、持续更新.*方便你查阅.*AI 更容易找到需要的信息/,
+    },
   };
   for (const [locale, dictionary] of Object.entries(dictionaryByLocale)) {
     const hero = dictionary.home.content.redesign.hero;
-    assert.deepEqual([hero.headline.pre, hero.headline.emphasis], expected[locale]);
-    assert.match(hero.description, /source-backed wiki|附來源的知識頁|带来源的知识页/);
+    assert.equal(hero.eyebrow, expected[locale].eyebrow, `${locale}: product category`);
+    assert.deepEqual([hero.headline.pre, hero.headline.emphasis], expected[locale].headline, `${locale}: outcome headline`);
+    assert.match(hero.description, expected[locale].description, `${locale}: pain, maintenance, and AI retrieval benefits`);
   }
 });
 
@@ -371,7 +384,7 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     const builtInFaq = faqById(home, "built-in-memory");
     assert.ok(setupFaq && notesFaq && builtInFaq, `${locale} setup, Obsidian, and memory FAQs are required`);
     assert.match(setupFaq.a, /model|模型|模型/);
-    assert.match(setupFaq.a, /client|用戶端|客户端/);
+    assert.match(setupFaq.a, /client|用戶端|客户端|AI 工具/);
     assert.match(notesFaq.a, /read-only|唯讀|只读/);
     assert.match(notesFaq.a, /Markdown|\.pdf|PDF/);
     assert.match(builtInFaq.a, /varies by tool|因工具而異|因工具而异/);
