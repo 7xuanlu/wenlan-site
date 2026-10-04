@@ -3,6 +3,8 @@ import { buildPageMetadata } from "@/i18n/metadata";
 import { HomePage } from "../_pages/home";
 import { getLatestRelease } from "@/lib/release-server";
 
+export const revalidate = 300;
+
 export const metadata = buildPageMetadata(
   "en",
   "/",

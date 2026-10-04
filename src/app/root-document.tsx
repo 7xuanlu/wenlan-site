@@ -11,8 +11,6 @@ import {
 import { rootHomeSeo } from "@/i18n/metadata";
 import { Analytics } from "@vercel/analytics/next";
 import { Fraunces, Instrument_Sans, JetBrains_Mono } from "next/font/google";
-import { softwareApplicationSchema } from "./structured-data";
-import { getLatestRelease } from "@/lib/release-server";
 import { ThemeProvider } from "./theme-provider";
 
 const vercelAnalyticsEnabled = process.env.VERCEL === "1";
@@ -37,14 +35,13 @@ const jetbrainsMono = JetBrains_Mono({
   preload: false,
 });
 
-export default async function RootDocument({
+export default function RootDocument({
   children,
   locale,
 }: {
   children: React.ReactNode;
   locale: Locale;
 }) {
-  const release = await getLatestRelease();
   const chrome = getCoreContent(locale).chrome.content;
 
   return (
@@ -70,12 +67,6 @@ export default async function RootDocument({
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem("wenlan-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);else if(window.matchMedia("(prefers-color-scheme:light)").matches)document.documentElement.setAttribute("data-theme","light")}catch(e){}})()`,
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(softwareApplicationSchema(locale, release)),
           }}
         />
         <script

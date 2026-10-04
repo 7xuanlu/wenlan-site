@@ -331,12 +331,14 @@ test("root metadata describes Wenlan on the current release surface", async () =
   const englishContent = await readRepo("src/i18n/content/en.ts");
   const rootDocument = await readRepo("src/app/root-document.tsx");
   const structuredData = await readRepo("src/app/structured-data.ts");
+  const softwareApplicationData = await readRepo("src/components/software-application-data.tsx");
   const releases = await readRepo("src/lib/releases.ts");
 
   assert.match(englishContent, /title:\s*"Wenlan \|/);
   assert.match(metadata, /export function buildRootMetadata/);
   assert.match(metadata, /locale: LOCALE_CONFIG\[locale\]\.openGraphLocale/);
-  assert.match(rootDocument, /softwareApplicationSchema\(locale, release\)/);
+  assert.doesNotMatch(rootDocument, /getLatestRelease|softwareApplicationSchema|release-server/);
+  assert.match(softwareApplicationData, /softwareApplicationSchema\(locale, release\)/);
   assert.match(structuredData, /name: "Wenlan"/);
   assert.match(structuredData, /softwareVersion: release\.version/);
   assert.match(structuredData, /downloadUrl: release\.releaseUrl/);

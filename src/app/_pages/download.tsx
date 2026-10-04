@@ -7,6 +7,7 @@ import { canonicalUrl } from "@/i18n/routing";
 import { WENLAN_RELEASE } from "@/lib/releases";
 import type { WenlanRelease } from "@/lib/release-manifest";
 import { SiteHeader } from "@/components/site-header";
+import { SoftwareApplicationData } from "@/components/software-application-data";
 
 export function DownloadPage({ locale, release = WENLAN_RELEASE }: { locale: Locale; release?: WenlanRelease }) {
   const dictionary = getCoreContent(locale);
@@ -56,6 +57,7 @@ export function DownloadPage({ locale, release = WENLAN_RELEASE }: { locale: Loc
 
   return (
     <main className="grain min-h-[100dvh]">
+      <SoftwareApplicationData locale={locale} release={release} />
       <SiteHeader locale={locale} />
       <script
         type="application/ld+json"

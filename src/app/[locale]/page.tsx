@@ -5,6 +5,8 @@ import type { Metadata } from "next";
 import { HomePage } from "../_pages/home";
 import { getLatestRelease } from "@/lib/release-server";
 
+export const revalidate = 300;
+
 type LocalePageParams = {
   locale: string;
 };

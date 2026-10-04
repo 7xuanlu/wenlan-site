@@ -6,6 +6,7 @@ import { canonicalUrl } from "@/i18n/routing";
 import { SiteHeader } from "@/components/site-header";
 import { WENLAN_RELEASE } from "@/lib/releases";
 import type { WenlanRelease } from "@/lib/release-manifest";
+import { SoftwareApplicationData } from "@/components/software-application-data";
 
 export function AboutPage({ locale, release = WENLAN_RELEASE }: { locale: Locale; release?: WenlanRelease }) {
   const dictionary = getCoreContent(locale);
@@ -84,6 +85,7 @@ export function AboutPage({ locale, release = WENLAN_RELEASE }: { locale: Locale
 
   return (
     <main className="grain min-h-screen">
+      <SoftwareApplicationData locale={locale} release={release} />
       <SiteHeader locale={locale} />
       <script
         type="application/ld+json"

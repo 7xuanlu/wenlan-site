@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import test from "node:test";
+import { RELEASE_PAGE_PATHS } from "./isr-cache-policy.mjs";
 
 const execFileAsync = promisify(execFile);
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -625,6 +626,20 @@ async function writeBuiltSeoFixture(outputRoot, overrides = {}) {
       redirects: overrides.redirects ?? requiredBuiltRedirects,
       headers: overrides.headers ?? requiredBuiltHeaders,
     }),
+    "utf8",
+  );
+  await writeFile(
+    join(buildDir, "prerender-manifest.json"),
+    JSON.stringify({ routes: {
+      ...Object.fromEntries(requiredBuiltSitemapLocs.map((url) => [
+        new URL(url).pathname, { initialRevalidateSeconds: false },
+      ])),
+      ...Object.fromEntries(requiredBuiltHtmlPages.map((page) => [
+        new URL(page.canonical).pathname, { initialRevalidateSeconds: false },
+      ])),
+      ...Object.fromEntries(RELEASE_PAGE_PATHS.map((path) => [path, { initialRevalidateSeconds: 300 }])),
+      ...overrides.prerenderRoutes,
+    } }),
     "utf8",
   );
   await writeFile(
@@ -2193,6 +2208,27 @@ test("built technical SEO checker rejects indexable raw scenario packets", async
     await rm(outputRoot, { recursive: true, force: true });
   }
 });
+
+for (const [path, seconds, message] of [
+  ["/learn", 300, "unexpected timed ISR"],
+  ["/zh-TW/docs/get-started", false, "release page must retry"],
+  ["/learn/claude-code-memory", undefined, "indexable page missing from prerender manifest"],
+]) {
+  test(`built cache policy rejects incorrect revalidation on ${path}`, async () => {
+    const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-isr-scope-"));
+    try {
+      const buildDir = await writeBuiltSeoFixture(outputRoot, {
+        prerenderRoutes: { [path]: seconds === undefined ? undefined : { initialRevalidateSeconds: seconds } },
+      });
+      await assert.rejects(
+        execFileAsync(process.execPath, [builtCheckerScript, "--build-dir", buildDir], { cwd: repoRoot }),
+        new RegExp(message),
+      );
+    } finally {
+      await rm(outputRoot, { recursive: true, force: true });
+    }
+  });
+}
 
 test("built technical SEO checker rejects compiled routes without inspectable html", async () => {
   const outputRoot = await mkdtemp(join(tmpdir(), "origin-seo-built-route-group-root-"));

@@ -8,6 +8,7 @@ import { canonicalUrl } from "@/i18n/routing";
 import { TrackedLocalizedLink } from "@/components/tracked-link";
 import { WENLAN_RELEASE } from "@/lib/releases";
 import type { WenlanRelease } from "@/lib/release-manifest";
+import { SoftwareApplicationData } from "@/components/software-application-data";
 
 export function GetStartedPage({ locale, release = WENLAN_RELEASE }: { locale: Locale; release?: WenlanRelease }) {
   const dictionary = getCoreContent(locale);
@@ -72,6 +73,7 @@ export function GetStartedPage({ locale, release = WENLAN_RELEASE }: { locale: L
 
   return (
     <main className="grain min-h-screen">
+      <SoftwareApplicationData locale={locale} release={release} />
       <SiteHeader locale={locale} />
       <script
         type="application/ld+json"
