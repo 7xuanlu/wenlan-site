@@ -9351,3 +9351,41 @@ Re-read the preserved September 4 native exports without fetching a new range:
 - Decision: wait
 - Next step: Keep the three SRE owners stable. Formal judgment remains ineligible until each locale has 28 complete post-crawl days and at least 20 page impressions; success additionally requires 3 qualified joined-query impressions and 1 click. At the next normal weekly lane, restore native exports through its authorized capture and preserve the necessary interpreted per-owner rows outside disposable storage. Do not rerun that pipeline in this controller to recreate an old capture. The next chronological unrecorded seven-day boundary in PLAN is competitive intelligence after `2026-09-06T19:48:14Z`, also overdue; point the same heartbeat to that record for bounded reconciliation. Leave the native Goal lifecycle unchanged. No website, README, release, analytics, indexing, validation, directory, paid, maintainer-message, or other external state was changed.
 <!-- EXPERIMENT-RECORD:END -->
+
+## Campaign observation: successor fixed final window at 2026-10-04
+
+- Record type: campaign-observation
+- Related experiment: none; this is the terminal read of the successor
+  authority-first campaign approved at `2026-08-21T08:24:29Z`.
+- Fixed range: `2026-08-24..2026-09-20`, deadline `2026-09-21`. The read is
+  late; the range did not move.
+- GSC property evidence: authenticated Search Console API
+  (`scripts/seo-gsc-fetch.mjs --date 2026-09-21`) reports 19 clicks, 1,722
+  impressions, 1.10% CTR and 16.4 property-average position.
+- Vercel evidence: the exact window can no longer be read. The Hobby plan
+  only serves the latest 31 days, and the API rejected the request with
+  `the hobby plan only grants access to the latest 31 days of data (400)`.
+  No capture of this exact range was preserved. Bounds from native units:
+  `2026-09-04..2026-09-20` reports 942 raw visitors and 1,148 pageviews (a
+  lower bound for the window); the recorded `2026-08-07..2026-09-03` range
+  reports 570 visitors, so the window holds at most 570 + 942 = 1,512 raw
+  visitors. Either way it is below 2,000.
+- GitHub evidence: timestamped stargazers report 72 stars starred before
+  `2026-09-21T00:00:00Z` and 79 at this read. Stars that were later removed
+  are not visible, so 72 is the best available deadline value.
+- Result: failure. Against the protected targets the campaign missed 81
+  clicks, 8,278 impressions, at least 488 Vercel visitors, and 28 stars.
+  Every number rose from the starting range (8 clicks, 985 impressions, 248
+  visitors, 48 stars).
+- Decision: stop the successor campaign under its deadline stop condition.
+  Preserve these numbers; do not move the window or redefine success. Any new
+  campaign, deadline or target needs explicit user approval.
+- Process gap: the final Vercel range was lost because nothing captured it
+  within 31 days of the window closing. A future campaign must capture the
+  final Vercel window before day 31.
+- Excluded actions: this read made no website edit, deployment, indexing
+  request, GSC validation, external publication, paid action, synthetic event,
+  analytics mutation, or metric-definition change. Separately on the same day,
+  PR #207 (Learn related links and comparison check blocks) merged and the
+  `7xuanlu/wenlan` GitHub description was rewritten; both postdate the fixed
+  window and do not affect these numbers.
