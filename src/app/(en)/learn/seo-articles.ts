@@ -415,7 +415,7 @@ const setupArticles: BaseSpec[] = [
       "Does Wenlan require Cursor to upload memory to a cloud service?",
       "No. Wenlan's default model is local-first. Optional model or API-key paths are separate choices for richer distillation.",
     ],
-    relatedSlugs: ["mcp-memory-server", "wenlan-cursor-workflow", "cursor-claude-code-shared-memory"],
+    relatedSlugs: ["mcp-memory-server", "wenlan-cursor-workflow", "cursor-claude-code-shared-memory", "wenlan-vscode-mcp-workflow"],
     officialReferences: [
       {
         label: "Cursor MCP docs",
@@ -538,7 +538,7 @@ const setupArticles: BaseSpec[] = [
       "Does Wenlan sync memory to the cloud by default?",
       "No. Wenlan has no cloud sync or telemetry by default. Optional models and API keys are explicit choices.",
     ],
-    relatedSlugs: ["local-first-ai-memory", "wenlan-vs-chatgpt-memory", "wenlan-vs-mem0"],
+    relatedSlugs: ["local-first-ai-memory", "wenlan-vs-chatgpt-memory", "wenlan-vs-mem0", "ai-agent-memory-types"],
     officialReferences: [
       {
         label: "Wenlan data and privacy docs",
@@ -683,7 +683,7 @@ const setupArticles: BaseSpec[] = [
       "Can multiple tools share one project context?",
       "Yes, when they are configured to use the same local Wenlan daemon. That means local cross-tool continuity, not automatic cloud or team sync.",
     ],
-    relatedSlugs: ["mcp-memory-server", "ai-agent-project-status-handoff", "source-backed-wiki-pages-ai-work"],
+    relatedSlugs: ["mcp-memory-server", "ai-agent-project-status-handoff", "source-backed-wiki-pages-ai-work", "ai-coding-agent-loses-context"],
     officialReferences: [
       {
         label: "Wenlan daily workflow docs",
@@ -753,7 +753,7 @@ const setupArticles: BaseSpec[] = [
       "Why not let each MCP client store its own memory?",
       "Because separate stores fragment context. Wenlan uses one daemon so tools share the same source of truth.",
     ],
-    relatedSlugs: ["mcp-memory-server", "how-to-give-codex-persistent-memory", "how-to-add-mcp-memory-to-cursor"],
+    relatedSlugs: ["mcp-memory-server", "how-to-give-codex-persistent-memory", "how-to-add-mcp-memory-to-cursor", "wenlan-vscode-mcp-workflow"],
     officialReferences: [
       {
         label: "Wenlan CLI and service docs",
@@ -828,7 +828,7 @@ const setupArticles: BaseSpec[] = [
       "What if I captured the wrong thing?",
       "Recall or find the old memory ID, capture a corrected self-contained statement, and name what it supersedes. Use forget only when the old record should not remain.",
     ],
-    relatedSlugs: ["persistent-project-context-for-ai-agents", "review-before-trust-ai-memory", "ai-memory-provenance"],
+    relatedSlugs: ["persistent-project-context-for-ai-agents", "review-before-trust-ai-memory", "ai-memory-provenance", "ai-agent-memory-types"],
     officialReferences: [
       {
         label: "Wenlan capture quality docs",
@@ -889,7 +889,7 @@ const workflowArticles: BaseSpec[] = [
       "Does Codex get /brief and /handoff slash commands?",
       "No. Codex uses MCP tools. The slash-command workflow belongs to the Claude Code plugin.",
     ],
-    relatedSlugs: ["coding-agent-source-backed-knowledge-base", "how-to-give-codex-persistent-memory", "codex-claude-code-shared-memory", "what-to-capture-in-ai-work-memory"],
+    relatedSlugs: ["coding-agent-source-backed-knowledge-base", "how-to-give-codex-persistent-memory", "codex-claude-code-shared-memory", "what-to-capture-in-ai-work-memory", "wenlan-gemini-cli-workflow"],
     officialReferences: [
       {
         label: "Codex Memories docs",
@@ -1364,7 +1364,7 @@ const workflowArticles: BaseSpec[] = [
       "Do I need to duplicate captures in both tools?",
       "No. Capture once in the right space; later clients can recall it.",
     ],
-    relatedSlugs: ["how-to-add-mcp-memory-to-cursor", "how-to-add-memory-to-claude-code", "claude-code-session-handoff"],
+    relatedSlugs: ["how-to-add-mcp-memory-to-cursor", "how-to-add-memory-to-claude-code", "claude-code-session-handoff", "wenlan-cursor-workflow"],
     officialReferences: [
       {
         label: "Cursor MCP docs",
@@ -1501,6 +1501,7 @@ const workflowArticles: BaseSpec[] = [
       "codex-claude-code-shared-memory",
       "mcp-memory-server",
       "review-before-trust-ai-memory",
+      "ai-agent-project-status-handoff",
     ],
     officialReferences: [
       {
@@ -2381,6 +2382,11 @@ const comparisonArticles: BaseSpec[] = [
       "Use Wenlan when multiple AI clients should share context.",
       "Use Wenlan when you need local files and provenance.",
     ],
+    code: {
+      label: "Reproduce the difference in one minute",
+      code:
+        "# Wenlan: every recalled fact carries an id, a source, and a dated change\nwenlan search \"release checklist\" --limit 3\nhead -20 ~/.wenlan/pages/<page>.md   # front matter lists the memory ids the page cites\ngit -C ~/.wenlan log --oneline -5\n\n# ChatGPT: Settings > Personalization > Manage memories shows the saved list",
+    },
     caution:
       "Do not put sensitive project context into any memory system without understanding where it is stored, how to delete it, and which tools can retrieve it. For ChatGPT, turning Memory off does not delete existing saved memories, deleting a chat does not remove saved memories, and full cleanup may require deleting saved memories plus source chats, files, or connected-app sources. OpenAI says deleted saved-memory logs may be retained for up to 30 days, and content may be used for model improvement when that setting applies.",
     faq: [
@@ -2485,6 +2491,11 @@ const comparisonArticles: BaseSpec[] = [
       "Add Wenlan when decisions must move across clients and sessions, stay tied to Sources, compile into maintained Pages, and wait for review when human writing would change.",
       "Verify the boundary with a small task before broadening access: read one note, edit a disposable note, confirm the active-file context, and inspect which process owns each write.",
     ],
+    code: {
+      label: "See what a vault holds and what Wenlan adds",
+      code:
+        "ls ~/ObsidianVault                   # Markdown you wrote and own\nls ~/.wenlan/sources                 # folders Wenlan reads, read-only\nls ~/.wenlan/pages                   # distilled pages Wenlan regenerates\nhead -20 ~/.wenlan/pages/<page>.md   # sources: the memory ids behind the page",
+    },
     caution:
       "A connection is not a governance policy. Check which process can read or write the vault, what context is sent to the model provider, whether a bridge is localhost-only, how writes are approved, and how the vault is backed up. Keep human-authored notes as the source of truth; add a knowledge lifecycle only for conclusions that need provenance, refresh, handoff, or reuse outside Obsidian.",
     faq: [
@@ -2602,6 +2613,11 @@ const comparisonArticles: BaseSpec[] = [
       "Use both if Notion is your team workspace and Wenlan is your AI coding memory layer.",
       "Do not duplicate everything across both; capture the consequence that future AI work needs.",
     ],
+    code: {
+      label: "Check where the memory actually lives",
+      code:
+        "wenlan status                        # local daemon, model, and memory state\nls ~/.wenlan/pages                   # pages on disk, not in a hosted workspace\ngit -C ~/.wenlan log --oneline -5    # local, dated history you can diff",
+    },
     caution:
       "Team workspace governance and local-first control solve different problems. Wenlan stores the memory layer locally by default, but connected AI clients may still send retrieved context to their model providers.",
     faq: [
@@ -2699,7 +2715,7 @@ const comparisonArticles: BaseSpec[] = [
       "Can a developer use both?",
       "Yes. A developer might use Mem0 in an app and Wenlan for their own coding-agent work loop.",
     ],
-    relatedSlugs: ["ai-agent-memory-local-vs-cloud", "project-scope-ai-memory", "wenlan-vs-mcp-memory-service"],
+    relatedSlugs: ["ai-agent-memory-local-vs-cloud", "project-scope-ai-memory", "wenlan-vs-mcp-memory-service", "wenlan-vs-notion-ai", "wenlan-vs-chatgpt-memory"],
     officialReferences: [
       {
         label: "Mem0 official site",
