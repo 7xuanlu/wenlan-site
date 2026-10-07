@@ -378,9 +378,9 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   const supportStart = support.indexOf('slug: "source-backed-wiki-pages-ai-work"');
   const supportEnd = support.indexOf("\n  {\n    slug:", supportStart);
   const supportArticle = support.slice(supportStart, supportEnd);
-  const obsidianStart = support.indexOf('slug: "wenlan-vs-obsidian-ai-memory"');
-  const obsidianEnd = support.indexOf("\n  {\n    slug:", obsidianStart);
-  const obsidianArticle = support.slice(obsidianStart, obsidianEnd);
+  const obsidianStart = hub.indexOf('slug: "wenlan-vs-obsidian-ai-memory"');
+  const obsidianEnd = hub.indexOf("\n  {\n    slug:", obsidianStart);
+  const obsidianArticle = hub.slice(obsidianStart, obsidianEnd);
   const mcpStart = hub.indexOf('slug: "mcp-memory-server"');
   const mcpEnd = hub.indexOf("\n  {\n    slug:", mcpStart);
   const mcpArticle = hub.slice(mcpStart, mcpEnd);
@@ -482,11 +482,11 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   );
   assert.match(
     obsidianArticle,
-    /relatedSlugs:\s*\[\s*"distilled-wiki-pages-ai-memory",\s*"markdown-local-index-ai-memory",\s*"source-backed-wiki-pages-ai-work",\s*"ai-work-memory-vs-knowledge-base",?\s*\]/,
+    /relatedSlugs:\s*\[\s*"claude-code-memory",\s*"migrate-obsidian-vault-to-llm-wiki",\s*"mcp-memory-server",\s*"distilled-wiki-pages-ai-memory",/,
   );
   assert.match(
     obsidianArticle,
-    /quickAnswerLink:\s*\{[\s\S]*href:\s*"\/learn\/distilled-wiki-pages-ai-memory"/,
+    /href:\s*"\/learn\/distilled-wiki-pages-ai-memory"/,
   );
   for (const inboundArticle of [
     mcpArticle,
@@ -1855,53 +1855,64 @@ test("Learn article headers keep long Wenlan titles inside mobile viewports", as
   assert.match(visuals, /<p className="min-w-0[^"]*\[overflow-wrap:anywhere\][^"]*\[word-break:normal\][^"]*sm:\[overflow-wrap:break-word\][^"]*sm:\[word-break:keep-all\]/);
 });
 
-test("Obsidian acquisition page answers Claude Code and MCP intent without changing its canonical seam", async () => {
+test("Obsidian page answers Claude Code setup, MCP, plugin, and skill intent without changing its canonical seam", async () => {
+  const hub = await readRepo("src/app/learn/articles.ts");
   const support = await readRepo("src/app/learn/seo-articles.ts");
-  const start = support.indexOf('slug: "wenlan-vs-obsidian-ai-memory"');
-  const end = support.indexOf("\n  {\n    slug:", start);
-  const article = support.slice(start, end);
+  const start = hub.indexOf('slug: "wenlan-vs-obsidian-ai-memory"');
+  const end = hub.indexOf("\n  {\n    slug:", start);
+  const article = hub.slice(start, end);
 
   assert.notEqual(start, -1);
+  assert.doesNotMatch(support, /slug: "wenlan-vs-obsidian-ai-memory"/);
   assert.match(
     article,
-    /title:\s*"Obsidian \+ Claude Code: Vault Access, MCP, and a Durable AI Knowledge Base"/,
+    /title:\s*"Obsidian \+ Claude Code: How to Set Up Your Vault, MCP, Plugins, and Skills"/,
   );
   assert.match(
     article,
-    /metaTitle:\s*"Obsidian \+ Claude Code: MCP & AI Knowledge \| Wenlan"/,
+    /metaTitle:\s*"Obsidian \+ Claude Code: Setup, MCP, Plugins & Skills \| Wenlan"/,
   );
   assert.match(article, /publishedAt:\s*"2026-06-06"/);
-  assert.match(article, /updatedAt:\s*"2026-07-29"/);
+  assert.match(article, /updatedAt:\s*"2026-10-06"/);
   for (const query of [
     "obsidian claude code",
     "claude code obsidian",
     "obsidian claude",
     "obsidian mcp",
     "obsidian claude code mcp",
+    "claude code obsidian vault",
+    "obsidian claude code plugin",
+    "claude code obsidian skill",
   ]) {
     assert.match(article.toLowerCase(), new RegExp(`"${query}"`));
   }
-  assert.match(article, /direct filesystem access/i);
+  for (const heading of [
+    "Step 1: Run Claude Code in your Obsidian vault",
+    "Step 2: Add a CLAUDE.md to the vault",
+    "Step 3: Add the Obsidian CLI and Obsidian skills",
+    "Obsidian MCP server: when you need one",
+    "Obsidian plugins for Claude Code",
+    "Build a second brain with Claude Code and Obsidian",
+    "Does Claude Code remember your vault?",
+  ]) {
+    assert.ok(article.includes(`heading: "${heading}"`), heading);
+  }
+  assert.match(article, /claude --add-dir ~\/Documents\/MyVault/);
+  assert.match(article, /\/plugin install obsidian@obsidian-skills/);
+  assert.match(article, /claude mcp add --transport http obsidian https:\/\/127\.0\.0\.1:27124\/mcp\//);
   assert.match(article, /active file and selection/i);
-  assert.match(article, /structured vault operations/i);
-  assert.match(article, /source-backed AI knowledge base/i);
-  assert.match(
-    article,
-    /actionHeading:\s*"Choose the smallest integration layer that solves the job"/,
-  );
-  assert.match(
-    article,
-    /https:\/\/github\.com\/Roasbeef\/obsidian-claude-code/,
-  );
-  assert.match(
-    article,
-    /https:\/\/github\.com\/petersolopov\/obsidian-claude-ide/,
-  );
-  assert.match(
-    article,
-    /https:\/\/github\.com\/iansinnott\/obsidian-claude-code-mcp/,
-  );
-  assert.match(article, /https:\/\/github\.com\/7xuanlu\/wenlan#daily-workflow/);
+  assert.match(article, /read-only source/i);
+  for (const href of [
+    "https://obsidian.md/help/cli",
+    "https://github.com/kepano/obsidian-skills",
+    "https://github.com/coddingtonbear/obsidian-local-rest-api",
+    "https://github.com/YishenTu/claudian",
+    "https://github.com/Roasbeef/obsidian-claude-code",
+    "https://github.com/petersolopov/obsidian-claude-ide",
+    "https://github.com/iansinnott/obsidian-claude-code-mcp",
+  ]) {
+    assert.ok(article.includes(`href: "${href}"`), href);
+  }
   assert.doesNotMatch(
     article,
     /title:\s*"Wenlan vs Obsidian AI Memory/,

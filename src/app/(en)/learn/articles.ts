@@ -418,6 +418,249 @@ const baseArticles: LearnArticle[] = [
     },
   },
   {
+    slug: "wenlan-vs-obsidian-ai-memory",
+    eyebrow: "Developer workflow",
+    category: "Workflows",
+    title: "Obsidian + Claude Code: How to Set Up Your Vault, MCP, Plugins, and Skills",
+    description:
+      "How to use Claude Code with an Obsidian vault: run it in the vault folder, add a CLAUDE.md, use the Obsidian CLI and skills, connect an MCP server, or work inside Obsidian with a plugin.",
+    metaTitle: "Obsidian + Claude Code: Setup, MCP, Plugins & Skills | Wenlan",
+    metaDescription:
+      "Connect Claude Code to an Obsidian vault: run it in the vault, add CLAUDE.md, use the Obsidian CLI and skills, or add an MCP server or the Claudian plugin.",
+    keywords: [
+      "obsidian claude code",
+      "claude code obsidian",
+      "obsidian claude",
+      "obsidian mcp",
+      "obsidian claude code mcp",
+      "claude code obsidian vault",
+      "obsidian claude code plugin",
+      "claude code obsidian skill",
+      "obsidian second brain claude code",
+      "Obsidian AI knowledge base",
+    ],
+    publishedAt: "2026-06-06",
+    updatedAt: "2026-10-06",
+    author: DEFAULT_AUTHOR,
+    readingTime: "8 min read",
+    audience: "Obsidian users who want Claude Code to read, write, and organize their vault",
+    heroBullets: [
+      "An Obsidian vault is a folder of Markdown files. Run Claude Code in that folder and it can already read, search, and edit your notes.",
+      "Add the Obsidian CLI and Obsidian skills when Claude should see backlinks, use Obsidian syntax, or edit Bases and Canvas files.",
+      "Use an MCP server for tools without file access, such as Claude Desktop, and a plugin like Claudian if you'd rather stay inside Obsidian.",
+    ],
+    sections: [
+      {
+        heading: "Quick answer",
+        body: [
+          "You don't need a plugin to use Claude Code with Obsidian. Open a terminal in your vault folder and run claude. Claude Code can then read, search, create, and edit any note, the same way it works on a code repository.",
+          "Everything else is optional and solves a specific gap. Pick by what's missing:",
+        ],
+        table: {
+          columns: ["Setup", "What it adds", "Good for"],
+          rows: [
+            ["Claude Code in the vault folder", "Read, write, and search every Markdown file", "Almost everyone; start here"],
+            ["CLAUDE.md in the vault", "Standing instructions: folders, note style, what not to touch", "Consistent results every session"],
+            ["Obsidian CLI + Obsidian skills", "Backlinks, Obsidian search, tasks, and correct Obsidian syntax, Bases, and Canvas", "Vaults that rely on links and Obsidian features"],
+            ["Obsidian MCP server", "Vault tools for any MCP client", "Claude Desktop and other tools without file access"],
+            ["Plugin inside Obsidian (Claudian)", "Claude Code chat in an Obsidian sidebar", "People who don't want to use a terminal"],
+          ],
+        },
+      },
+      {
+        id: "connect-claude-code-to-obsidian-vault",
+        heading: "Step 1: Run Claude Code in your Obsidian vault",
+        body: [
+          "Your vault is the folder you picked when you created it in Obsidian. Start Claude Code there. Obsidian shows changes as soon as Claude Code saves a file, so you can keep both open side by side.",
+          "If you're already working in another project, add the vault as an extra folder instead of switching.",
+        ],
+        code: {
+          label: "Start Claude Code in the vault",
+          code: "cd ~/Documents/MyVault\nclaude\n\n# or, from another project folder:\nclaude --add-dir ~/Documents/MyVault",
+        },
+        bullets: [
+          "Back up first. Put the vault under git or use Obsidian Sync version history, so you can undo a bad edit.",
+          "Try one small task before a big one, such as \"summarize my notes tagged #project-x\" or \"add links between these three notes\".",
+          "Claude Code sends the notes it reads to Anthropic to answer you. Keep private folders out of scope, or tell Claude Code not to read them.",
+        ],
+      },
+      {
+        id: "claude-md-for-obsidian",
+        heading: "Step 2: Add a CLAUDE.md to the vault",
+        body: [
+          "Claude Code reads CLAUDE.md from the folder it starts in at the beginning of every session. Use it to explain how your vault is organized, so you don't repeat it every time.",
+        ],
+        code: {
+          label: "~/Documents/MyVault/CLAUDE.md",
+          code: "# My vault\n\n- Notes use [[wikilinks]], not Markdown links.\n- New notes go in Inbox/. Never move files out of Archive/.\n- Daily notes live in Daily/ as YYYY-MM-DD.md.\n- Put AI-written summaries in AI/, not next to my own notes.\n- Never edit anything inside .obsidian/.",
+        },
+      },
+      {
+        id: "obsidian-cli-and-skills",
+        heading: "Step 3: Add the Obsidian CLI and Obsidian skills",
+        body: [
+          "Reading files is not the same as understanding a vault. On its own, Claude Code sees text, not Obsidian's link graph, search index, or properties. The official Obsidian CLI fills that gap: Claude Code can run commands to search the vault, list backlinks, read tasks, and append to the daily note.",
+          "The CLI needs Obsidian 1.12 or later. Turn it on in Settings > General > Command line interface. Obsidian must be running; the first command opens it if it isn't.",
+        ],
+        code: {
+          label: "Obsidian CLI commands Claude Code can run",
+          code: "obsidian search query=\"meeting notes\"\nobsidian backlinks file=Recipe\nobsidian tasks todo\nobsidian daily:append content=\"- [ ] Follow up\"",
+        },
+        bullets: [
+          "Obsidian skills (kepano/obsidian-skills, about 49,000 GitHub stars) teach Claude Code to use the Obsidian CLI and to write Obsidian-flavored Markdown, Bases, and JSON Canvas files correctly.",
+          "Install them as a Claude Code plugin: /plugin marketplace add kepano/obsidian-skills, then /plugin install obsidian@obsidian-skills.",
+          "The same skills work in Codex and other tools that support Agent Skills.",
+        ],
+      },
+      {
+        id: "obsidian-mcp-server",
+        heading: "Obsidian MCP server: when you need one",
+        body: [
+          "Claude Code can already reach your files, so an MCP server is usually optional there. MCP matters when the tool can't read your disk, such as Claude Desktop, or when you want the same vault tools in several clients.",
+          "The Local REST API community plugin now includes an MCP server. Install and enable it in Obsidian, copy the API key from Settings > Local REST API, then add it to Claude Code. Obsidian must be running for the server to answer.",
+        ],
+        code: {
+          label: "Add the Obsidian MCP server to Claude Code",
+          code: "claude mcp add --transport http obsidian https://127.0.0.1:27124/mcp/ \\\n  --header \"Authorization: Bearer <your-api-key>\"",
+        },
+        bullets: [
+          "The plugin uses its own certificate. If the connection fails, trust its certificate or enable the plain HTTP server on port 27123 in the plugin settings.",
+          "mcp-obsidian (about 4,500 stars) is an older Python server that talks to the same plugin through uvx.",
+          "Keep the API key out of shared files such as a committed .mcp.json.",
+        ],
+      },
+      {
+        id: "obsidian-claude-code-plugin",
+        heading: "Obsidian plugins for Claude Code",
+        body: [
+          "If you'd rather not use a terminal, a plugin can run Claude Code inside Obsidian. You still need Claude Code installed and signed in. Star counts are from October 2026.",
+        ],
+        table: {
+          columns: ["Plugin", "What it does", "Install"],
+          rows: [
+            ["Claudian (about 15,600 stars)", "Runs Claude Code or Codex in an Obsidian sidebar with your vault as the working folder", "Community plugins: search \"Claudian\""],
+            ["Claude Code IDE bridge (obsidian-claude-ide)", "Shares the active file and selection with Claude Code running in a terminal", "From GitHub"],
+            ["obsidian-claude-code (Roasbeef)", "An embedded Claude assistant inside the vault", "From GitHub"],
+            ["obsidian-claude-code-mcp (iansinnott)", "MCP and IDE bridge for Claude Code; last updated in 2025", "From GitHub"],
+          ],
+        },
+      },
+      {
+        id: "obsidian-second-brain-claude-code",
+        heading: "Build a second brain with Claude Code and Obsidian",
+        body: [
+          "Most second-brain setups follow the same loop. You drop raw material into an inbox folder: articles, meeting notes, transcripts. Claude Code reads it, writes a summary note, links it to existing notes, and files it. Starter kits such as claude-obsidian (about 15,400 stars) package that loop as Claude Code skills.",
+          "The risk is gradual. After a few hundred AI-written notes, it gets hard to tell what you wrote, what the AI inferred, and which summaries no longer match their source.",
+        ],
+        bullets: [
+          "Keep AI-written notes in their own folder.",
+          "Ask Claude Code to link every summary back to the note or file it came from.",
+          "Review changes with git diff before you commit them.",
+          "Re-check summaries when the original note changes.",
+        ],
+      },
+      {
+        id: "claude-code-obsidian-memory",
+        heading: "Does Claude Code remember your vault?",
+        body: [
+          "No. Each Claude Code session starts fresh. It rereads CLAUDE.md and whatever notes it opens, and forgets the rest of the conversation. Your vault holds your notes, but it doesn't track what Claude concluded from them or which conclusions are now out of date.",
+          "Wenlan adds that layer without touching the vault. It reads your vault as a read-only source, combines it with decisions you capture while working, and writes wiki pages that cite their sources and are flagged for review when a source note changes. The same memory works in Claude Code, Codex, Cursor, and other MCP clients.",
+        ],
+        code: {
+          label: "Add Wenlan to Claude Code",
+          code: "npx -y wenlan setup\n# then, inside Claude Code:\n/plugin marketplace add 7xuanlu/wenlan\n/plugin install wenlan@7xuanlu-wenlan",
+        },
+        link: {
+          label: "See how notes become source-backed wiki pages",
+          href: "/learn/distilled-wiki-pages-ai-memory",
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: "How do I connect Claude Code to my Obsidian vault?",
+        answer:
+          "Open a terminal in the vault folder and run claude, or run claude --add-dir with the vault path from another project. No plugin is needed for Claude Code to read and edit notes.",
+      },
+      {
+        question: "Does Obsidian have a Claude Code plugin?",
+        answer:
+          "Not an official one. Community plugins such as Claudian run Claude Code inside Obsidian, and obsidian-claude-ide shares your active note with Claude Code in a terminal.",
+      },
+      {
+        question: "Do I need an MCP server to use Claude Code with Obsidian?",
+        answer:
+          "No. Claude Code can read the files directly. An Obsidian MCP server helps tools without file access, such as Claude Desktop, or when you want the same vault tools in several clients.",
+      },
+      {
+        question: "Can Claude Code see Obsidian links and backlinks?",
+        answer:
+          "It can read [[wikilinks]] in the text. To list backlinks or use Obsidian search, turn on the Obsidian CLI and install the Obsidian skills so Claude Code knows how to call it.",
+      },
+      {
+        question: "Is it safe to let Claude Code edit my vault?",
+        answer:
+          "Back up the vault with git or Obsidian Sync first, start with one folder, and keep AI-written notes separate. Claude Code sends the notes it reads to Anthropic.",
+      },
+    ],
+    relatedSlugs: [
+      "claude-code-memory",
+      "migrate-obsidian-vault-to-llm-wiki",
+      "mcp-memory-server",
+      "distilled-wiki-pages-ai-memory",
+      "markdown-local-index-ai-memory",
+      "source-backed-wiki-pages-ai-work",
+      "wenlan-vs-basic-memory",
+      "ai-work-memory-vs-knowledge-base",
+    ],
+    officialReferences: [
+      {
+        label: "Obsidian CLI docs",
+        href: "https://obsidian.md/help/cli",
+      },
+      {
+        label: "Obsidian data storage docs",
+        href: "https://obsidian.md/help/data-storage",
+      },
+      {
+        label: "Claude Code memory and CLAUDE.md",
+        href: "https://code.claude.com/docs/en/memory",
+      },
+      {
+        label: "Obsidian skills (kepano/obsidian-skills)",
+        href: "https://github.com/kepano/obsidian-skills",
+      },
+      {
+        label: "Local REST API with MCP",
+        href: "https://github.com/coddingtonbear/obsidian-local-rest-api",
+      },
+      {
+        label: "Claudian",
+        href: "https://github.com/YishenTu/claudian",
+      },
+      {
+        label: "Claude Code IDE bridge for Obsidian",
+        href: "https://github.com/petersolopov/obsidian-claude-ide",
+      },
+      {
+        label: "obsidian-claude-code embedded assistant",
+        href: "https://github.com/Roasbeef/obsidian-claude-code",
+      },
+      {
+        label: "Obsidian Claude Code MCP bridge",
+        href: "https://github.com/iansinnott/obsidian-claude-code-mcp",
+      },
+      {
+        label: "Wenlan with Obsidian",
+        href: "https://github.com/7xuanlu/wenlan#local-markdown-that-works-with-obsidian",
+      },
+    ],
+    cta: {
+      heading: "Keep what Claude learns from your vault",
+      body: "Install Wenlan, add your vault as a read-only source, and check one cited page before relying on it.",
+    },
+  },
+  {
     slug: "local-first-ai-memory",
     eyebrow: "Privacy",
     category: "Concepts",
