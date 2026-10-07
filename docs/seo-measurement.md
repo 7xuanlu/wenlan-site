@@ -4,6 +4,15 @@ Use this checklist for Wenlan SEO measurement. The canonical deployed property i
 
 Reusable runbook: `docs/seo-growth-loop.md`.
 
+The detailed source setup and repeatable collection steps live in
+[`search-console-umami.md`](search-console-umami.md). Source readiness is
+explicit: GSC is already the observed-search source; GA4 becomes usable only
+after its property, web stream, site tag, real-time/debug check, and GSC link
+work; Google Ads is for Keyword Planner research only, with no campaigns or
+spend. Keep any billing/payment or changed-terms checkpoint with the account
+owner. OpenSEO is optional free candidate expansion, not a required or paid SEO
+service. Do not mark a source operational because a connection control exists.
+
 ## Google Search Console Setup
 
 1. Verify the `https://wenlan.app` property.
@@ -84,7 +93,26 @@ Use `docs/search-console-umami.md` as the operating checklist. The loop is:
 5. Decide one action per row: wait, technical fix, title/meta refresh, internal-link refresh, page expansion, distribution, or new article.
 6. Record the before/after snapshot whenever content changes.
 
-Decision gates:
+When GA4 passes setup, read its acquisition/landing-page and agreed event
+reports for the same completed window alongside the generated weekly report.
+The current deterministic pipeline does not ingest GA4; add only a concise,
+source-labeled interpretation to that week's existing audit when it affects a
+decision. Preserve its timezone and range. GA4 shows post-click behavior; it
+does not reveal all organic queries or support person-level query-to-conversion
+joins. A release-asset click is not evidence of a completed download or install.
+
+## Monthly Candidate-Demand Refresh
+
+Once monthly, refresh the candidates already under consideration as part of
+this SEO loop; do not add a separate scheduler or buy an SEO subscription.
+Follow the [source settings and refresh procedure](search-console-umami.md#8-monthly-ai-visibility-and-demand-refresh)
+for Trends, Keyword Planner, and optional free OpenSEO. Keep locales and native
+units separate, inspect actual SERP intent, and compare candidates with GSC's
+visible queries and the existing intent map. Preserve source-linked decisions
+in the existing audit; refresh a candidate during a weekly run when it is being
+considered for a page decision.
+
+## Decision gates
 
 - **Technical before content:** sitemap, canonical, redirect, `noindex`, and status issues are fixed before writing.
 - **Refresh before net-new:** pages with impressions get better quick answers, command blocks, screenshots, and internal links before creating adjacent articles.

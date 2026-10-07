@@ -8,6 +8,7 @@ import { currentSignupAttribution } from "@/lib/signup-attribution";
 import { launchEventProperties } from "@/lib/launch-campaign";
 import { inferReleaseDownload } from "@/lib/release-manifest";
 import { sendSiteEvent } from "@/lib/site-event-client";
+import { sendGoogleAnalyticsEvent } from "@/lib/google-analytics";
 
 export type AnalyticsEventName =
   | "get_started_click"
@@ -114,6 +115,11 @@ export function trackAnalyticsEvent({
       ...(detail ? { detail } : {}),
       ...(asset ?? {}),
     }, attribution);
+    sendGoogleAnalyticsEvent(eventName, {
+      placement, locale, context,
+      destination_category: destinationCategoryByEvent[eventName],
+      ...(asset ?? {}),
+    });
     const pending = window.umami?.track(eventName, {
       placement, locale, context,
       destination_category: destinationCategoryByEvent[eventName],

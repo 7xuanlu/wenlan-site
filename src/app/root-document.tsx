@@ -1,5 +1,6 @@
 import { SiteFooter } from "@/components/site-footer";
 import { AcquisitionCapture } from "@/components/acquisition-capture";
+import { GoogleAnalytics } from "@/components/google-analytics";
 import { getCoreContent } from "@/i18n/content";
 import {
   DEFAULT_LOCALE,
@@ -129,6 +130,9 @@ export default function RootDocument({
       </head>
       <body className="antialiased">
         <AcquisitionCapture />
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <GoogleAnalytics locale={locale} measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        )}
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:bg-[var(--o-text)] focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:text-[var(--o-bg)] focus:outline focus:outline-2 focus:outline-[var(--o-warm)]"
