@@ -592,213 +592,239 @@ const zhTWArticles = {
   },
   "wenlan-vs-obsidian-ai-memory": {
     slug: "wenlan-vs-obsidian-ai-memory",
-    eyebrow: "比較",
-    category: "Comparisons",
-    title: "Obsidian + Claude Code：檔案、MCP 與可維護的 AI 知識庫",
+    eyebrow: "開發工作流程",
+    category: "Workflows",
+    title: "Obsidian + Claude Code 教學：vault 設定、MCP、外掛與 Skills",
     description:
-      "比較直接讀取 Obsidian vault、即時編輯器 context、MCP 與有來源的知識維護，選出 Claude Code 真正需要的最小整合層。",
-    metaTitle: "Obsidian + Claude Code：MCP 與 AI 知識庫 | Wenlan",
+      "Claude Code 搭配 Obsidian 的完整做法：在 vault 資料夾執行、加上 CLAUDE.md、使用 Obsidian CLI 與 skills、連接 MCP server，或用外掛直接在 Obsidian 裡操作。",
+    metaTitle: "Obsidian + Claude Code 教學：MCP、外掛與 Skills | Wenlan",
     metaDescription:
-      "Claude Code 搭配 Obsidian，該直接讀 vault、靠編輯器 context、走 MCP，還是需要有來源的知識維護？比較四種整合方式的差異與代價，幫你選出真正需要的最小整合層：來源追溯、更新機制與審查流程何時不可少。",
+      "把 Claude Code 接上 Obsidian vault：在 vault 裡執行、寫 CLAUDE.md、用 Obsidian CLI 與 skills，或加上 MCP server、Claudian 等外掛。附指令與安全檢查。",
     keywords: [
       "Obsidian Claude Code",
       "Claude Code Obsidian",
       "Obsidian MCP",
       "Obsidian Claude Code MCP",
+      "Obsidian Claude Code 外掛",
+      "Claude Code Obsidian 教學",
+      "Obsidian 第二大腦",
       "Obsidian AI 知識庫",
-      "Claude Code 知識庫",
-      "AI 知識庫",
-      "Wenlan 文瀾",
     ],
     publishedAt: "2026-07-22",
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-10-06",
     author: "Qi-Xuan Lu",
     readingTime: "8 分鐘閱讀",
-    audience: "使用 Obsidian vault 的繁體中文 Claude Code 使用者",
+    audience: "想讓 Claude Code 讀寫、整理 Obsidian vault 的繁體中文使用者",
     heroBullets: [
-      "Claude Code 能存取本地 Markdown 時，直接讀取 vault 通常是最小且最清楚的起點。",
-      "IDE bridge 補上目前檔案與選取內容；Obsidian MCP 補上結構化 vault 操作或其他 client surface。",
-      "能連上 vault 不等於會維護知識；來源、過期、修訂與審查仍是另一個決策。",
+      "Obsidian vault 就是一個 Markdown 資料夾。在這個資料夾執行 Claude Code，它就能讀取、搜尋與修改你的筆記。",
+      "需要讓 Claude 看見反向連結、使用 Obsidian 語法，或編輯 Bases 與 Canvas 時，再加上 Obsidian CLI 與 Obsidian skills。",
+      "Claude Desktop 這類無法直接讀檔的工具才需要 MCP server；不想用終端機，可以用 Claudian 等外掛留在 Obsidian 裡。",
     ],
     sections: [
       {
-        heading: "先給答案：從最小整合層開始",
+        heading: "先給答案",
         body: [
-          "如果 Claude Code 已能存取你的 Markdown 資料夾，先讓它直接讀取需要的 vault 路徑。當缺少的是目前檔案與選取內容，再加 IDE bridge；當需要 Obsidian 指令、結構化 vault 操作或另一個支援的 client，再考慮 MCP。",
-          "這些連線都能改善存取，但不會自動建立可維護的 AI 知識庫。當答案要跨 session 與工具重用，還需要來源、provenance、刷新規則、衝突處理與人工審查。",
+          "Claude Code 搭配 Obsidian 不需要外掛。在 vault 資料夾開啟終端機並執行 claude，Claude Code 就能讀取、搜尋、建立與修改任何筆記，就像處理程式碼專案一樣。",
+          "其他做法都是選配，各自解決一個缺口。依照缺少的東西來選：",
         ],
+        table: {
+          columns: ["做法", "多了什麼", "適合誰"],
+          rows: [
+            ["在 vault 資料夾執行 Claude Code", "讀寫、搜尋所有 Markdown 檔案", "幾乎所有人，從這裡開始"],
+            ["在 vault 放 CLAUDE.md", "固定指示：資料夾結構、筆記風格、哪些不能動", "希望每次 session 結果一致"],
+            ["Obsidian CLI + Obsidian skills", "反向連結、Obsidian 搜尋、任務，以及正確的 Obsidian 語法、Bases 與 Canvas", "大量使用連結與 Obsidian 功能的 vault"],
+            ["Obsidian MCP server", "提供給任何 MCP client 的 vault 工具", "Claude Desktop 等無法直接讀檔的工具"],
+            ["Obsidian 內的外掛（Claudian）", "在 Obsidian 側邊欄和 Claude Code 對話", "不想用終端機的人"],
+          ],
+        },
+      },
+      {
+        id: "connect-claude-code-to-obsidian-vault",
+        heading: "步驟 1：在 Obsidian vault 裡執行 Claude Code",
+        body: [
+          "vault 就是你在 Obsidian 建立時選的資料夾。從那裡啟動 Claude Code。Claude Code 一存檔，Obsidian 就會顯示變更，所以兩邊可以並排開著。",
+          "如果你正在另一個專案裡工作，不必切換資料夾，把 vault 加成額外資料夾即可。",
+        ],
+        code: {
+          label: "在 vault 啟動 Claude Code",
+          code: "cd ~/Documents/MyVault\nclaude\n\n# 或在其他專案資料夾裡：\nclaude --add-dir ~/Documents/MyVault",
+        },
+        bullets: [
+          "先備份。用 git 管理 vault，或開啟 Obsidian Sync 的版本歷史，改壞了才能復原。",
+          "先做一個小任務再做大的，例如「整理我標了 #project-x 的筆記」或「幫這三篇筆記加上連結」。",
+          "Claude Code 會把它讀到的筆記送到 Anthropic 才能回答。私密資料夾請排除在外，或在指示中要求不要讀取。",
+        ],
+      },
+      {
+        id: "claude-md-for-obsidian",
+        heading: "步驟 2：在 vault 加上 CLAUDE.md",
+        body: [
+          "Claude Code 每次 session 開始時，都會讀取啟動資料夾裡的 CLAUDE.md。用它說明 vault 的結構，就不必每次重講。",
+        ],
+        code: {
+          label: "~/Documents/MyVault/CLAUDE.md",
+          code: "# 我的 vault\n\n- 筆記用 [[wikilinks]]，不要用 Markdown 連結。\n- 新筆記放在 Inbox/。不要把檔案移出 Archive/。\n- 每日筆記放在 Daily/，檔名 YYYY-MM-DD.md。\n- AI 寫的摘要放在 AI/，不要和我的筆記混在一起。\n- 不要修改 .obsidian/ 裡的任何東西。",
+        },
+      },
+      {
+        id: "obsidian-cli-and-skills",
+        heading: "步驟 3：加上 Obsidian CLI 與 Obsidian skills",
+        body: [
+          "讀得到檔案，不代表理解 vault。只靠讀檔，Claude Code 看到的是文字，看不到 Obsidian 的連結圖、搜尋索引或屬性。官方 Obsidian CLI 補上這一塊：Claude Code 可以用指令搜尋 vault、列出反向連結、讀取任務，或在每日筆記後面加內容。",
+          "CLI 需要 Obsidian 1.12 以上。到「設定 > 一般」開啟「Command line interface」。Obsidian 必須在執行中；沒開的話，第一個指令會自動開啟它。",
+        ],
+        code: {
+          label: "Claude Code 可以執行的 Obsidian CLI 指令",
+          code: "obsidian search query=\"meeting notes\"\nobsidian backlinks file=Recipe\nobsidian tasks todo\nobsidian daily:append content=\"- [ ] Follow up\"",
+        },
+        bullets: [
+          "Obsidian skills（kepano/obsidian-skills，約 49,000 個 GitHub stars）教 Claude Code 使用 Obsidian CLI，並正確撰寫 Obsidian 風格的 Markdown、Bases 與 JSON Canvas 檔案。",
+          "以 Claude Code 外掛安裝：/plugin marketplace add kepano/obsidian-skills，然後 /plugin install obsidian@obsidian-skills。",
+          "同一套 skills 也能在 Codex 與其他支援 Agent Skills 的工具中使用。",
+        ],
+      },
+      {
+        id: "obsidian-mcp-server",
+        heading: "Obsidian MCP server：什麼時候需要",
+        body: [
+          "Claude Code 本來就讀得到你的檔案，所以通常不需要 MCP server。MCP 適用於工具無法讀取硬碟時，例如 Claude Desktop，或想在多個 client 使用同一組 vault 工具時。",
+          "Local REST API 社群外掛現在內建 MCP server。在 Obsidian 安裝並啟用它，從「設定 > Local REST API」複製 API key，再加入 Claude Code。Obsidian 必須在執行中，server 才會回應。",
+        ],
+        code: {
+          label: "把 Obsidian MCP server 加入 Claude Code",
+          code: "claude mcp add --transport http obsidian https://127.0.0.1:27124/mcp/ \\\n  --header \"Authorization: Bearer <your-api-key>\"",
+        },
+        bullets: [
+          "這個外掛使用自己產生的憑證。連不上時，信任它的憑證，或在外掛設定中開啟 27123 埠的 HTTP server。",
+          "mcp-obsidian（約 4,500 stars）是較早的 Python server，透過 uvx 連接同一個外掛。",
+          "不要把 API key 放進會分享的檔案，例如提交到 git 的 .mcp.json。",
+        ],
+      },
+      {
+        id: "obsidian-claude-code-plugin",
+        heading: "Claude Code 的 Obsidian 外掛",
+        body: [
+          "不想用終端機的話，外掛可以讓 Claude Code 在 Obsidian 裡執行。你仍需要安裝並登入 Claude Code。Star 數為 2026 年 10 月資料。",
+        ],
+        table: {
+          columns: ["外掛", "功能", "安裝方式"],
+          rows: [
+            ["Claudian（約 15,600 stars）", "在 Obsidian 側邊欄執行 Claude Code 或 Codex，以 vault 作為工作資料夾", "社群外掛：搜尋「Claudian」"],
+            ["Claude Code IDE bridge（obsidian-claude-ide）", "把目前檔案與選取內容分享給終端機裡的 Claude Code", "從 GitHub 安裝"],
+            ["obsidian-claude-code（Roasbeef）", "內嵌在 vault 裡的 Claude 助手", "從 GitHub 安裝"],
+            ["obsidian-claude-code-mcp（iansinnott）", "Claude Code 的 MCP 與 IDE bridge；最後更新於 2025 年", "從 GitHub 安裝"],
+          ],
+        },
+      },
+      {
+        id: "obsidian-second-brain-claude-code",
+        heading: "用 Claude Code 與 Obsidian 打造第二大腦",
+        body: [
+          "大多數第二大腦設定都是同一個循環：把原始資料丟進 inbox 資料夾，例如文章、會議記錄、逐字稿。Claude Code 讀取後寫成摘要筆記、連結到既有筆記，再歸檔。claude-obsidian（約 15,400 stars）等入門套件把這個循環包成 Claude Code skills。",
+          "風險是慢慢累積的。AI 寫了幾百篇筆記後，就很難分辨哪些是你寫的、哪些是 AI 推論的，以及哪些摘要已經和來源對不上。",
+        ],
+        bullets: [
+          "AI 寫的筆記放在獨立資料夾。",
+          "要求 Claude Code 在每篇摘要中連回它根據的筆記或檔案。",
+          "提交前先用 git diff 檢查變更。",
+          "原始筆記改了，就重新檢查相關摘要。",
+        ],
+      },
+      {
+        id: "claude-code-obsidian-memory",
+        heading: "Claude Code 會記得你的 vault 嗎？",
+        body: [
+          "不會。每個 Claude Code session 都從頭開始：重新讀 CLAUDE.md 和它打開的筆記，其餘對話內容都會忘記。vault 保存你的筆記，但不會記錄 Claude 從筆記得出的結論，也不知道哪些結論已經過時。",
+          "Wenlan 補上這一層，而且不改動 vault。它把 vault 當成唯讀來源（read-only source），結合你工作時記下的決策，寫成附上來源引用的 wiki 頁面；來源筆記一改，相關頁面就會標記待審。同一份記憶可在 Claude Code、Codex、Cursor 與其他 MCP client 中使用。",
+        ],
+        code: {
+          label: "把 Wenlan 加入 Claude Code",
+          code: "npx -y wenlan setup\n# 接著在 Claude Code 裡：\n/plugin marketplace add 7xuanlu/wenlan\n/plugin install wenlan@7xuanlu-wenlan",
+        },
         link: {
-          label: "比較 LLM Wiki 的架構與流程",
+          label: "看筆記如何變成有來源的 wiki 頁面",
           href: "/learn/distilled-wiki-pages-ai-memory",
         },
       },
-      {
-        heading: "四種 Obsidian + Claude Code 整合層",
-        body: [
-          "把直接檔案、編輯器 context、MCP 與內嵌 assistant 分開看，才能避免為同一件事安裝四套工具。選擇標準應該是目前缺少的能力，而不是哪個工具名稱最熱門。",
-        ],
-        bullets: [
-          "直接檔案：Claude Code 讀寫它有權限存取的 Markdown；最適合一般搜尋、整理與修改。",
-          "IDE bridge：把 Obsidian 目前檔案與選取內容傳給 Claude Code，檔案操作仍可保持直接。",
-          "Obsidian MCP：提供結構化 vault tools、workspace context、Obsidian 指令或其他支援的 client。",
-          "內嵌 assistant：只有當你想在 Obsidian UI 裡直接對話與操作時才需要。",
-        ],
-      },
-      {
-        heading: "連得上 vault，不等於有可維護的 AI 知識庫",
-        body: [
-          "Vault access 解決的是 agent 如何看到或修改筆記；知識 lifecycle 解決的是哪個答案目前有效、它來自哪裡、來源改變時要刷新哪一頁，以及衝突是否需要人審。兩者可以組合，但不能互相冒充。",
-          "Obsidian 應繼續是人擁有的寫作與 Markdown 知識面。只有會影響未來 AI 工作的結論，才需要進入可追溯、可刷新、能跨 session 重用的知識層。",
-        ],
-        link: {
-          label: "查看 Obsidian 的資料儲存方式",
-          href: "https://obsidian.md/help/data-storage",
-        },
-      },
-      {
-        heading: "用 Wenlan 把 vault 當來源，而不是複製品",
-        body: [
-          "Wenlan 可以把 Obsidian vault 註冊為 read-only Source，按需重新同步 Markdown，再把來源與工作中確認的決策編成有引用、過期狀態與修訂記錄的 Pages。它不需要接管 Obsidian，也不應靜默覆寫人寫的 vault。",
-          "當同一份知識還要給 Codex、Cursor、ChatGPT 或其他 MCP client 使用時，Wenlan 提供的是共用的 knowledge lifecycle；Obsidian 仍保留人最容易閱讀與編輯的知識面。",
-        ],
-        bullets: [
-          "原始 Markdown 留在 read-only vault；Wenlan 按需重新掃描、分段並索引目前內容。",
-          "Atomic knowledge 保存會影響未來工作的事實、決策與修正。",
-          "Pages 把相關證據編成目前答案，並保留引用與刷新狀態。",
-          "Lint 與 review 暴露缺少來源、衝突、過期依賴與不安全的改寫。",
-        ],
-      },
-      {
-        heading: "一個最小的 Obsidian AI 知識庫流程",
-        body: [
-          "先選一個無風險的小主題，而不是導入整個 vault。確認 Claude Code 能讀到一篇來源筆記，再捕捉一個會影響未來工作的結論，蒸餾成頁面，最後從頁面回到來源檢查證據。",
-          "如果只需要查找與改寫 Markdown，到這裡可以停在 Obsidian。只有當答案需要跨 session、跨 client 保持一致，才增加 Wenlan 的 distill、lint 與 review 流程。",
-        ],
-        code: {
-          label: "最小驗證循環",
-          code: [
-            "/brief Obsidian AI 知識庫",
-            "/capture <結論 + 來源 + 為什麼重要>",
-            "/handoff",
-            "/distill Obsidian AI 知識庫",
-            "/pages Obsidian AI 知識庫",
-            "/lint",
-          ].join("\n"),
-        },
-      },
-      {
-        heading: "如何驗證整合真的可用",
-        body: [
-          "不要只看 plugin 或 MCP 是否顯示 connected。用一個 disposable note 做端到端驗收：確認誰能讀、誰能寫、目前檔案是否正確傳入、來源是否可追溯，以及失敗時哪個 process 擁有每一次寫入。",
-          "同時檢查 vault backup、模型供應商會收到哪些 context、bridge 是否只綁 localhost，以及自動化是否會改寫人擁有的筆記。連線能力不是 governance policy。",
-        ],
-        bullets: [
-          "讀取一篇指定筆記，確認沒有把整個 vault 送進 context。",
-          "修改一篇 disposable note，確認權限與寫入者符合預期。",
-          "加入衝突來源，確認 lint 或 review 能把問題暴露出來。",
-          "重新開啟 client，確認目前答案能被找到並回到原始來源。",
-        ],
-        code: {
-          label: "看清 vault 和 Wenlan 各放了什麼",
-          code: [
-            "ls ~/ObsidianVault                   # 你寫、你擁有的 Markdown",
-            "ls ~/.wenlan/sources                 # Wenlan 讀取的資料夾，唯讀",
-            "ls ~/.wenlan/pages                   # Wenlan 重新產生的蒸餾頁面",
-            "head -20 ~/.wenlan/pages/<page>.md   # sources：這一頁背後的記憶 id",
-          ].join("\n"),
-        },
-      },
     ],
-    comparisonTable: {
-      competitorName: "Obsidian + Claude Code 整合",
-      rows: [
-        {
-          dimension: "直接 vault 存取",
-          wenlan: "把 Obsidian vault 當 read-only Source，按需重新同步 Markdown。",
-          competitor: "Claude Code 可直接讀寫有權限存取的 Markdown 檔案。",
-        },
-        {
-          dimension: "編輯器 context",
-          wenlan: "不嘗試成為 Obsidian editor bridge。",
-          competitor: "IDE bridge 可分享目前檔案與選取內容，檔案修改仍可直接完成。",
-        },
-        {
-          dimension: "結構化工具",
-          wenlan:
-            "Wenlan runtime 管理 Sources；MCP 提供 capture、recall、distill、Page 與 review 工具，plugin 再補上 /handoff 等工作流程。",
-          competitor: "Obsidian MCP 可提供 vault 檔案、workspace context 與 Obsidian 操作。",
-        },
-        {
-          dimension: "知識 lifecycle",
-          wenlan: "Sources 與確認過的決策編成有引用、過期、修訂與審查的 Pages。",
-          competitor: "Vault 是耐久 Markdown；來源、刷新與審查語意取決於所選專案與流程。",
-        },
-        {
-          dimension: "最適合",
-          wenlan: "需要跨 session 與多個 AI client 保持目前、可追溯的知識。",
-          competitor: "讓 Claude Code 使用 vault 檔案、Obsidian 目前 context 或特定指令。",
-        },
-      ],
-    },
     faqs: [
       {
-        question: "使用 Claude Code 搭配 Obsidian 一定需要 MCP 嗎？",
+        question: "怎麼把 Claude Code 連到 Obsidian vault？",
         answer:
-          "不一定。一般 Markdown 讀寫先用直接檔案存取即可；需要目前檔案與選取內容時用 IDE bridge，需要結構化 Obsidian 操作或其他 client 時再加 MCP。",
+          "在 vault 資料夾開終端機執行 claude，或在其他專案裡用 claude --add-dir 加上 vault 路徑。Claude Code 讀寫筆記不需要任何外掛。",
       },
       {
-        question: "連上 Claude Code 後，Obsidian 就是耐久 AI 知識庫嗎？",
+        question: "Obsidian 有 Claude Code 外掛嗎？",
         answer:
-          "不是。連線只提供檔案或工具存取；耐久知識還需要清楚的來源邊界、provenance、刷新、衝突處理、審查，以及跨 session 保存目前結論的方法。",
+          "沒有官方外掛。Claudian 等社群外掛可以在 Obsidian 裡執行 Claude Code，obsidian-claude-ide 則把目前筆記分享給終端機裡的 Claude Code。",
       },
       {
-        question: "Wenlan 會覆寫我的 Obsidian vault 嗎？",
+        question: "Claude Code 搭配 Obsidian 一定要 MCP server 嗎？",
         answer:
-          "Wenlan 可以把 vault 註冊為 read-only Source 並重新同步 Markdown。人寫的 vault 繼續是來源；Wenlan 把有來源的 Pages 與其他 artifacts 投影在自己的本地空間，不應靜默覆寫 vault。",
+          "不需要。Claude Code 可以直接讀檔。Obsidian MCP server 適合 Claude Desktop 這類無法讀檔的工具，或想在多個 client 共用同一組 vault 工具時。",
+      },
+      {
+        question: "Claude Code 看得到 Obsidian 的連結與反向連結嗎？",
+        answer:
+          "它讀得到文字裡的 [[wikilinks]]。要列出反向連結或使用 Obsidian 搜尋，請開啟 Obsidian CLI，並安裝 Obsidian skills，讓 Claude Code 知道怎麼呼叫它。",
+      },
+      {
+        question: "讓 Claude Code 修改 vault 安全嗎？",
+        answer:
+          "先用 git 或 Obsidian Sync 備份 vault，從一個資料夾開始，並把 AI 寫的筆記分開放。Claude Code 會把讀到的筆記送到 Anthropic。",
       },
     ],
     relatedSlugs: [
       "distilled-wiki-pages-ai-memory",
       "source-backed-wiki-pages-ai-work",
+      "build-local-ai-knowledge-base-from-documents",
       "ai-work-memory-vs-knowledge-base",
     ],
     officialReferences: [
+      {
+        label: "Obsidian CLI 說明",
+        href: "https://obsidian.md/help/cli",
+      },
       {
         label: "Obsidian 的資料儲存說明",
         href: "https://obsidian.md/help/data-storage",
       },
       {
-        label: "Obsidian plugins 說明",
-        href: "https://obsidian.md/help/plugins",
+        label: "Claude Code 記憶與 CLAUDE.md",
+        href: "https://code.claude.com/docs/en/memory",
       },
       {
-        label: "obsidian-claude-code 內嵌 assistant",
-        href: "https://github.com/Roasbeef/obsidian-claude-code",
+        label: "Obsidian skills（kepano/obsidian-skills）",
+        href: "https://github.com/kepano/obsidian-skills",
+      },
+      {
+        label: "Local REST API（內建 MCP）",
+        href: "https://github.com/coddingtonbear/obsidian-local-rest-api",
+      },
+      {
+        label: "Claudian",
+        href: "https://github.com/YishenTu/claudian",
       },
       {
         label: "Obsidian 的 Claude Code IDE bridge",
         href: "https://github.com/petersolopov/obsidian-claude-ide",
       },
       {
-        label: "Obsidian Claude Code MCP repository",
+        label: "obsidian-claude-code 內嵌助手",
+        href: "https://github.com/Roasbeef/obsidian-claude-code",
+      },
+      {
+        label: "Obsidian Claude Code MCP bridge",
         href: "https://github.com/iansinnott/obsidian-claude-code-mcp",
       },
       {
-        label: "Wenlan 維護型知識模型",
-        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
-      },
-      {
-        label: "Wenlan 日常工作流程",
-        href: "https://wenlan.app/docs/daily-workflow",
-      },
-      {
-        label: "Wenlan 資料與隱私",
-        href: "https://wenlan.app/docs/data-and-privacy",
+        label: "Wenlan 與 Obsidian",
+        href: "https://github.com/7xuanlu/wenlan#local-markdown-that-works-with-obsidian",
       },
     ],
     cta: {
-      heading: "讓 vault 與 AI 知識庫各司其職",
-      body: "保留 Obsidian 作為人類可讀的知識面；答案需跨工具保持目前、可追溯且可審查時，再用 Wenlan 維護具引用的 Pages。",
+      heading: "留住 Claude 從 vault 學到的東西",
+      body: "安裝 Wenlan，把 vault 加成唯讀來源，先檢查一頁有引用的頁面再開始依賴它。",
     },
   },
   "coding-agent-source-backed-knowledge-base": {
@@ -4052,214 +4078,239 @@ const zhCNArticles = {
   },
   "wenlan-vs-obsidian-ai-memory": {
     slug: "wenlan-vs-obsidian-ai-memory",
-    eyebrow: "比较",
-    category: "Comparisons",
-    title: "Obsidian + Claude Code：文件、MCP 与可维护的 AI 知识库",
+    eyebrow: "开发工作流程",
+    category: "Workflows",
+    title: "Obsidian + Claude Code 教程：vault 设置、MCP、插件与 Skills",
     description:
-      "比较直接读取 Obsidian vault、实时编辑器 context、MCP 与有来源的知识维护，选择 Claude Code 真正需要的最小集成层。",
-    metaTitle: "Obsidian + Claude Code：MCP 与 AI 知识库 | Wenlan",
+      "Claude Code 搭配 Obsidian 的完整做法：在 vault 文件夹运行、加上 CLAUDE.md、使用 Obsidian CLI 与 skills、连接 MCP server，或用插件直接在 Obsidian 里操作。",
+    metaTitle: "Obsidian + Claude Code 教程：MCP、插件与 Skills | Wenlan",
     metaDescription:
-      "Claude Code 搭配 Obsidian，该直接读 vault、靠编辑器 context、走 MCP，还是需要有来源的知识维护？比较四种集成方式的差异与代价，帮你选出真正需要的最小集成层：来源追溯、更新机制与审核流程何时不可少。",
+      "把 Claude Code 接入 Obsidian vault：在 vault 里运行、写 CLAUDE.md、用 Obsidian CLI 与 skills，或加上 MCP server、Claudian 等插件。附命令与安全检查。",
     keywords: [
       "Obsidian Claude Code",
       "Claude Code Obsidian",
       "Obsidian MCP",
       "Obsidian Claude Code MCP",
+      "Obsidian Claude Code 插件",
+      "Claude Code Obsidian 教程",
+      "Obsidian 第二大脑",
       "Obsidian AI 知识库",
-      "Claude Code 知识库",
-      "AI 知识库",
-      "本地 AI 知识库",
-      "Wenlan 文澜",
     ],
     publishedAt: "2026-08-01",
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-10-06",
     author: "Qi-Xuan Lu",
     readingTime: "8 分钟阅读",
-    audience: "使用 Obsidian vault 的简体中文 Claude Code 用户",
+    audience: "想让 Claude Code 读写、整理 Obsidian vault 的简体中文用户",
     heroBullets: [
-      "Claude Code 能访问本地 Markdown 时，直接读取 vault 通常是最小且最清楚的起点。",
-      "IDE bridge 补上当前文件与选中内容；Obsidian MCP 补上结构化 vault 操作或其他 client surface。",
-      "能连接 vault 不等于会维护知识；来源、过期、修订与审核仍是另一个决策。",
+      "Obsidian vault 就是一个 Markdown 文件夹。在这个文件夹运行 Claude Code，它就能读取、搜索和修改你的笔记。",
+      "需要让 Claude 看到反向链接、使用 Obsidian 语法，或编辑 Bases 与 Canvas 时，再加上 Obsidian CLI 与 Obsidian skills。",
+      "Claude Desktop 这类无法直接读文件的工具才需要 MCP server；不想用终端，可以用 Claudian 等插件留在 Obsidian 里。",
     ],
     sections: [
       {
-        heading: "先给答案：从最小集成层开始",
+        heading: "先给答案",
         body: [
-          "如果 Claude Code 已能访问你的 Markdown 文件夹，先让它直接读取需要的 vault 路径。缺少当前文件与选中内容时再加 IDE bridge；需要 Obsidian 命令、结构化 vault 操作或另一个支持的 client 时再考虑 MCP。",
-          "这些连接都会改善访问，但不会自动建立可维护的 AI 知识库。答案要跨 session 与工具复用时，还需要来源、provenance、刷新规则、冲突处理与人工审核。",
+          "Claude Code 搭配 Obsidian 不需要插件。在 vault 文件夹打开终端并运行 claude，Claude Code 就能读取、搜索、创建和修改任何笔记，就像处理代码项目一样。",
+          "其他做法都是可选的，各自解决一个缺口。按缺少的东西来选：",
         ],
+        table: {
+          columns: ["做法", "多了什么", "适合谁"],
+          rows: [
+            ["在 vault 文件夹运行 Claude Code", "读写、搜索所有 Markdown 文件", "几乎所有人，从这里开始"],
+            ["在 vault 放 CLAUDE.md", "固定指示：文件夹结构、笔记风格、哪些不能动", "希望每次 session 结果一致"],
+            ["Obsidian CLI + Obsidian skills", "反向链接、Obsidian 搜索、任务，以及正确的 Obsidian 语法、Bases 与 Canvas", "大量使用链接与 Obsidian 功能的 vault"],
+            ["Obsidian MCP server", "提供给任何 MCP client 的 vault 工具", "Claude Desktop 等无法直接读文件的工具"],
+            ["Obsidian 内的插件（Claudian）", "在 Obsidian 侧边栏和 Claude Code 对话", "不想用终端的人"],
+          ],
+        },
+      },
+      {
+        id: "connect-claude-code-to-obsidian-vault",
+        heading: "步骤 1：在 Obsidian vault 里运行 Claude Code",
+        body: [
+          "vault 就是你在 Obsidian 创建时选的文件夹。从那里启动 Claude Code。Claude Code 一保存，Obsidian 就会显示变更，所以两边可以并排打开。",
+          "如果你正在另一个项目里工作，不必切换文件夹，把 vault 加为额外文件夹即可。",
+        ],
+        code: {
+          label: "在 vault 启动 Claude Code",
+          code: "cd ~/Documents/MyVault\nclaude\n\n# 或在其他项目文件夹里：\nclaude --add-dir ~/Documents/MyVault",
+        },
+        bullets: [
+          "先备份。用 git 管理 vault，或开启 Obsidian Sync 的版本历史，改坏了才能恢复。",
+          "先做一个小任务再做大的，例如“整理我标了 #project-x 的笔记”或“给这三篇笔记加上链接”。",
+          "Claude Code 会把它读到的笔记发送到 Anthropic 才能回答。私密文件夹请排除在外，或在指示中要求不要读取。",
+        ],
+      },
+      {
+        id: "claude-md-for-obsidian",
+        heading: "步骤 2：在 vault 加上 CLAUDE.md",
+        body: [
+          "Claude Code 每次 session 开始时，都会读取启动文件夹里的 CLAUDE.md。用它说明 vault 的结构，就不必每次重讲。",
+        ],
+        code: {
+          label: "~/Documents/MyVault/CLAUDE.md",
+          code: "# 我的 vault\n\n- 笔记用 [[wikilinks]]，不要用 Markdown 链接。\n- 新笔记放在 Inbox/。不要把文件移出 Archive/。\n- 每日笔记放在 Daily/，文件名 YYYY-MM-DD.md。\n- AI 写的摘要放在 AI/，不要和我的笔记混在一起。\n- 不要修改 .obsidian/ 里的任何东西。",
+        },
+      },
+      {
+        id: "obsidian-cli-and-skills",
+        heading: "步骤 3：加上 Obsidian CLI 与 Obsidian skills",
+        body: [
+          "读得到文件，不代表理解 vault。只靠读文件，Claude Code 看到的是文字，看不到 Obsidian 的链接图、搜索索引或属性。官方 Obsidian CLI 补上这一块：Claude Code 可以用命令搜索 vault、列出反向链接、读取任务，或在每日笔记后面追加内容。",
+          "CLI 需要 Obsidian 1.12 以上。到“设置 > 通用”开启“Command line interface”。Obsidian 必须在运行中；没打开的话，第一个命令会自动打开它。",
+        ],
+        code: {
+          label: "Claude Code 可以运行的 Obsidian CLI 命令",
+          code: "obsidian search query=\"meeting notes\"\nobsidian backlinks file=Recipe\nobsidian tasks todo\nobsidian daily:append content=\"- [ ] Follow up\"",
+        },
+        bullets: [
+          "Obsidian skills（kepano/obsidian-skills，约 49,000 个 GitHub stars）教 Claude Code 使用 Obsidian CLI，并正确编写 Obsidian 风格的 Markdown、Bases 与 JSON Canvas 文件。",
+          "以 Claude Code 插件安装：/plugin marketplace add kepano/obsidian-skills，然后 /plugin install obsidian@obsidian-skills。",
+          "同一套 skills 也能在 Codex 与其他支持 Agent Skills 的工具中使用。",
+        ],
+      },
+      {
+        id: "obsidian-mcp-server",
+        heading: "Obsidian MCP server：什么时候需要",
+        body: [
+          "Claude Code 本来就读得到你的文件，所以通常不需要 MCP server。MCP 适用于工具无法读取硬盘时，例如 Claude Desktop，或想在多个 client 使用同一组 vault 工具时。",
+          "Local REST API 第三方插件现在内置 MCP server。在 Obsidian 安装并启用它，从“设置 > Local REST API”复制 API key，再加入 Claude Code。Obsidian 必须在运行中，server 才会响应。",
+        ],
+        code: {
+          label: "把 Obsidian MCP server 加入 Claude Code",
+          code: "claude mcp add --transport http obsidian https://127.0.0.1:27124/mcp/ \\\n  --header \"Authorization: Bearer <your-api-key>\"",
+        },
+        bullets: [
+          "这个插件使用自己生成的证书。连不上时，信任它的证书，或在插件设置中开启 27123 端口的 HTTP server。",
+          "mcp-obsidian（约 4,500 stars）是较早的 Python server，通过 uvx 连接同一个插件。",
+          "不要把 API key 放进会共享的文件，例如提交到 git 的 .mcp.json。",
+        ],
+      },
+      {
+        id: "obsidian-claude-code-plugin",
+        heading: "Claude Code 的 Obsidian 插件",
+        body: [
+          "不想用终端的话，插件可以让 Claude Code 在 Obsidian 里运行。你仍需要安装并登录 Claude Code。Star 数为 2026 年 10 月数据。",
+        ],
+        table: {
+          columns: ["插件", "功能", "安装方式"],
+          rows: [
+            ["Claudian（约 15,600 stars）", "在 Obsidian 侧边栏运行 Claude Code 或 Codex，以 vault 作为工作文件夹", "第三方插件：搜索“Claudian”"],
+            ["Claude Code IDE bridge（obsidian-claude-ide）", "把当前文件与选中内容共享给终端里的 Claude Code", "从 GitHub 安装"],
+            ["obsidian-claude-code（Roasbeef）", "内嵌在 vault 里的 Claude 助手", "从 GitHub 安装"],
+            ["obsidian-claude-code-mcp（iansinnott）", "Claude Code 的 MCP 与 IDE bridge；最后更新于 2025 年", "从 GitHub 安装"],
+          ],
+        },
+      },
+      {
+        id: "obsidian-second-brain-claude-code",
+        heading: "用 Claude Code 与 Obsidian 打造第二大脑",
+        body: [
+          "大多数第二大脑设置都是同一个循环：把原始资料丢进 inbox 文件夹，例如文章、会议记录、逐字稿。Claude Code 读取后写成摘要笔记、链接到已有笔记，再归档。claude-obsidian（约 15,400 stars）等入门套件把这个循环打包成 Claude Code skills。",
+          "风险是慢慢累积的。AI 写了几百篇笔记后，就很难分辨哪些是你写的、哪些是 AI 推断的，以及哪些摘要已经和来源对不上。",
+        ],
+        bullets: [
+          "AI 写的笔记放在独立文件夹。",
+          "要求 Claude Code 在每篇摘要中链接回它依据的笔记或文件。",
+          "提交前先用 git diff 检查变更。",
+          "原始笔记改了，就重新检查相关摘要。",
+        ],
+      },
+      {
+        id: "claude-code-obsidian-memory",
+        heading: "Claude Code 会记得你的 vault 吗？",
+        body: [
+          "不会。每个 Claude Code session 都从头开始：重新读 CLAUDE.md 和它打开的笔记，其余对话内容都会忘记。vault 保存你的笔记，但不会记录 Claude 从笔记得出的结论，也不知道哪些结论已经过时。",
+          "Wenlan 补上这一层，而且不改动 vault。它把 vault 当作只读来源（read-only source），结合你工作时记下的决策，写成附上来源引用的 wiki 页面；来源笔记一改，相关页面就会标记待审。同一份记忆可在 Claude Code、Codex、Cursor 与其他 MCP client 中使用。",
+        ],
+        code: {
+          label: "把 Wenlan 加入 Claude Code",
+          code: "npx -y wenlan setup\n# 接着在 Claude Code 里：\n/plugin marketplace add 7xuanlu/wenlan\n/plugin install wenlan@7xuanlu-wenlan",
+        },
         link: {
-          label: "比较 LLM Wiki 的架构与流程",
+          label: "看笔记如何变成有来源的 wiki 页面",
           href: "/learn/distilled-wiki-pages-ai-memory",
         },
       },
-      {
-        heading: "四种 Obsidian + Claude Code 集成层",
-        body: [
-          "把直接文件、编辑器 context、MCP 与内嵌 assistant 分开看，才能避免为同一件事安装四套工具。选择标准应该是当前缺少的能力，而不是哪个工具名字最热门。",
-        ],
-        bullets: [
-          "直接文件：Claude Code 读写它有权限访问的 Markdown；适合普通搜索、整理与修改。",
-          "IDE bridge：把 Obsidian 当前文件与选中内容传给 Claude Code，文件操作仍可保持直接。",
-          "Obsidian MCP：提供结构化 vault tools、workspace context、Obsidian 命令或其他支持的 client。",
-          "内嵌 assistant：只有想在 Obsidian UI 中直接对话与操作时才需要。",
-        ],
-      },
-      {
-        heading: "能连接 vault，不等于有可维护的 AI 知识库",
-        body: [
-          "Vault access 解决 agent 如何看到或修改笔记；knowledge lifecycle 解决哪个答案当前有效、它来自哪里、来源变化时要刷新哪一页，以及冲突是否需要人审。两者可以组合，但不能互相冒充。",
-          "Obsidian 应继续是人拥有的写作与 Markdown 知识面。只有会影响未来 AI 工作的结论，才需要进入可追溯、可刷新、能跨 session 复用的知识层。",
-        ],
-        link: {
-          label: "查看 Obsidian 的数据存储方式",
-          href: "https://obsidian.md/help/data-storage",
-        },
-      },
-      {
-        heading: "用 Wenlan 把 vault 当来源，而不是复制品",
-        body: [
-          "Wenlan 可以把 Obsidian vault 注册为 read-only Source，按需重新同步 Markdown，再把来源与工作中确认的决策编成带引用、过期状态与修订记录的 Pages。它不需要接管 Obsidian，也不应静默覆盖人写的 vault。",
-          "同一份知识还要给 Codex、Cursor、ChatGPT 或其他 MCP client 使用时，Wenlan 提供共用的 knowledge lifecycle；Obsidian 仍保留人最容易阅读和编辑的知识面。",
-        ],
-        bullets: [
-          "原始 Markdown 保留在只读 vault；Wenlan 按需重新扫描、分块并索引当前内容。",
-          "Atomic knowledge 保存会影响未来工作的事实、决策与纠正。",
-          "Pages 把相关证据编成当前答案，并保留引用与刷新状态。",
-          "Lint 与 review 暴露缺少来源、冲突、过期依赖与不安全的改写。",
-        ],
-      },
-      {
-        heading: "一个最小的 Obsidian AI 知识库流程",
-        body: [
-          "先选一个无风险的小主题，不要导入整个 vault。确认 Claude Code 能读到一篇来源笔记，再捕捉一个会影响未来工作的结论，蒸馏成页面，最后从页面回到来源检查证据。",
-          "如果只需要查找和改写 Markdown，到这里可以停在 Obsidian。只有答案需要跨 session、跨 client 保持一致时，才增加 Wenlan 的 distill、lint 与 review 流程。",
-        ],
-        code: {
-          label: "最小验证循环",
-          code: [
-            "/brief Obsidian AI 知识库",
-            "/capture <结论 + 来源 + 为什么重要>",
-            "/handoff",
-            "/distill Obsidian AI 知识库",
-            "/pages Obsidian AI 知识库",
-            "/lint",
-          ].join("\n"),
-        },
-      },
-      {
-        heading: "如何验证集成真的可用",
-        body: [
-          "不要只看 plugin 或 MCP 是否显示 connected。用一个 disposable note 做端到端验收：确认谁能读、谁能写、当前文件是否正确传入、来源是否可追溯，以及失败时哪个 process 拥有每一次写入。",
-          "同时检查 vault backup、模型提供商会收到哪些 context、bridge 是否只绑定 localhost，以及自动化是否会改写人拥有的笔记。连接能力不是 governance policy。",
-        ],
-        bullets: [
-          "读取一篇指定笔记，确认没有把整个 vault 发送到 context。",
-          "修改一篇 disposable note，确认权限与写入者符合预期。",
-          "加入冲突来源，确认 lint 或 review 能暴露问题。",
-          "重新打开 client，确认当前答案能被找到并回到原始来源。",
-        ],
-        code: {
-          label: "看清 vault 和 Wenlan 各放了什么",
-          code: [
-            "ls ~/ObsidianVault                   # 你写、你拥有的 Markdown",
-            "ls ~/.wenlan/sources                 # Wenlan 读取的文件夹，只读",
-            "ls ~/.wenlan/pages                   # Wenlan 重新生成的蒸馏页面",
-            "head -20 ~/.wenlan/pages/<page>.md   # sources：这一页背后的记忆 id",
-          ].join("\n"),
-        },
-      },
     ],
-    comparisonTable: {
-      competitorName: "Obsidian + Claude Code 集成",
-      rows: [
-        {
-          dimension: "直接 vault 访问",
-          wenlan: "把 Obsidian vault 当 read-only Source，按需重新同步 Markdown。",
-          competitor: "Claude Code 可直接读写有权限访问的 Markdown 文件。",
-        },
-        {
-          dimension: "编辑器 context",
-          wenlan: "不尝试成为 Obsidian editor bridge。",
-          competitor: "IDE bridge 可共享当前文件与选中内容，文件修改仍可直接完成。",
-        },
-        {
-          dimension: "结构化工具",
-          wenlan:
-            "Wenlan runtime 管理 Sources；MCP 提供 capture、recall、distill、Page 与 review 工具，plugin 再补上 /handoff 等工作流程。",
-          competitor: "Obsidian MCP 可提供 vault 文件、workspace context 与 Obsidian 操作。",
-        },
-        {
-          dimension: "知识 lifecycle",
-          wenlan: "Sources 与确认过的决策编成带引用、过期、修订与审核的 Pages。",
-          competitor: "Vault 是持久 Markdown；来源、刷新与审核语义取决于所选项目和流程。",
-        },
-        {
-          dimension: "最适合",
-          wenlan: "需要跨 session 与多个 AI client 保持当前、可追溯的知识。",
-          competitor: "让 Claude Code 使用 vault 文件、Obsidian 当前 context 或特定命令。",
-        },
-      ],
-    },
     faqs: [
       {
-        question: "Claude Code 搭配 Obsidian 一定需要 MCP 吗？",
+        question: "怎么把 Claude Code 连接到 Obsidian vault？",
         answer:
-          "不一定。普通 Markdown 读写先用直接文件访问即可；需要当前文件与选中内容时用 IDE bridge，需要结构化 Obsidian 操作或其他 client 时再加 MCP。",
+          "在 vault 文件夹打开终端运行 claude，或在其他项目里用 claude --add-dir 加上 vault 路径。Claude Code 读写笔记不需要任何插件。",
       },
       {
-        question: "连接 Claude Code 后，Obsidian 就是持久 AI 知识库吗？",
+        question: "Obsidian 有 Claude Code 插件吗？",
         answer:
-          "不是。连接只提供文件或工具访问；持久知识还需要清楚的来源边界、provenance、刷新、冲突处理、审核，以及跨 session 保存当前结论的方法。",
+          "没有官方插件。Claudian 等第三方插件可以在 Obsidian 里运行 Claude Code，obsidian-claude-ide 则把当前笔记共享给终端里的 Claude Code。",
       },
       {
-        question: "Wenlan 会覆盖我的 Obsidian vault 吗？",
+        question: "Claude Code 搭配 Obsidian 一定要 MCP server 吗？",
         answer:
-          "Wenlan 可以把 vault 注册为 read-only Source 并重新同步 Markdown。人写的 vault 继续作为来源；Wenlan 把有来源的 Pages 与其他 artifacts 投影在自己的本地空间，不应静默覆盖 vault。",
+          "不需要。Claude Code 可以直接读文件。Obsidian MCP server 适合 Claude Desktop 这类无法读文件的工具，或想在多个 client 共用同一组 vault 工具时。",
+      },
+      {
+        question: "Claude Code 看得到 Obsidian 的链接与反向链接吗？",
+        answer:
+          "它读得到文字里的 [[wikilinks]]。要列出反向链接或使用 Obsidian 搜索，请开启 Obsidian CLI，并安装 Obsidian skills，让 Claude Code 知道怎么调用它。",
+      },
+      {
+        question: "让 Claude Code 修改 vault 安全吗？",
+        answer:
+          "先用 git 或 Obsidian Sync 备份 vault，从一个文件夹开始，并把 AI 写的笔记分开放。Claude Code 会把读到的笔记发送到 Anthropic。",
       },
     ],
     relatedSlugs: [
       "distilled-wiki-pages-ai-memory",
       "source-backed-wiki-pages-ai-work",
+      "build-local-ai-knowledge-base-from-documents",
       "ai-work-memory-vs-knowledge-base",
     ],
     officialReferences: [
       {
-        label: "Obsidian 数据存储说明",
+        label: "Obsidian CLI 说明",
+        href: "https://obsidian.md/help/cli",
+      },
+      {
+        label: "Obsidian 的数据存储说明",
         href: "https://obsidian.md/help/data-storage",
       },
       {
-        label: "Obsidian plugins 说明",
-        href: "https://obsidian.md/help/plugins",
+        label: "Claude Code 记忆与 CLAUDE.md",
+        href: "https://code.claude.com/docs/en/memory",
       },
       {
-        label: "obsidian-claude-code 内嵌 assistant",
-        href: "https://github.com/Roasbeef/obsidian-claude-code",
+        label: "Obsidian skills（kepano/obsidian-skills）",
+        href: "https://github.com/kepano/obsidian-skills",
+      },
+      {
+        label: "Local REST API（内置 MCP）",
+        href: "https://github.com/coddingtonbear/obsidian-local-rest-api",
+      },
+      {
+        label: "Claudian",
+        href: "https://github.com/YishenTu/claudian",
       },
       {
         label: "Obsidian 的 Claude Code IDE bridge",
         href: "https://github.com/petersolopov/obsidian-claude-ide",
       },
       {
-        label: "Obsidian Claude Code MCP repository",
+        label: "obsidian-claude-code 内嵌助手",
+        href: "https://github.com/Roasbeef/obsidian-claude-code",
+      },
+      {
+        label: "Obsidian Claude Code MCP bridge",
         href: "https://github.com/iansinnott/obsidian-claude-code-mcp",
       },
       {
-        label: "Wenlan 维护型知识模型",
-        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
-      },
-      {
-        label: "Wenlan 日常工作流程",
-        href: "https://wenlan.app/docs/daily-workflow",
-      },
-      {
-        label: "Wenlan 数据与隐私",
-        href: "https://wenlan.app/docs/data-and-privacy",
+        label: "Wenlan 与 Obsidian",
+        href: "https://github.com/7xuanlu/wenlan#local-markdown-that-works-with-obsidian",
       },
     ],
     cta: {
-      heading: "让 vault 与 AI 知识库各司其职",
-      body: "保留 Obsidian 作为人可读的知识面；答案需跨工具保持当前、可追溯且可审核时，再用 Wenlan 维护带引用的 Pages。",
+      heading: "留住 Claude 从 vault 学到的东西",
+      body: "安装 Wenlan，把 vault 加为只读来源，先检查一页有引用的页面再开始依赖它。",
     },
   },
   "coding-agent-source-backed-knowledge-base": {

@@ -1074,7 +1074,7 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
   });
   assert.equal(
     zhCNObsidianMetadata.title,
-    "Obsidian + Claude Code：MCP 与 AI 知识库 | Wenlan",
+    "Obsidian + Claude Code 教程：MCP、插件与 Skills | Wenlan",
   );
   assert.equal(
     zhCNObsidianMetadata.alternates.canonical,
@@ -1648,7 +1648,7 @@ test("knowledge retrieval policy family owns one audience-trigger-task-outcome i
   }
 });
 
-test("Mandarin Obsidian guides own the Claude Code, MCP, and AI knowledge-base intent", async () => {
+test("Mandarin Obsidian guides own the Claude Code setup, MCP, plugin, and skill intent", async () => {
   const { getLocalizedLearnArticle } = await import("../src/i18n/learn-articles.ts");
 
   for (const [locale, script] of [
@@ -1658,24 +1658,28 @@ test("Mandarin Obsidian guides own the Claude Code, MCP, and AI knowledge-base i
     const article = getLocalizedLearnArticle(locale, "wenlan-vs-obsidian-ai-memory");
     assert.ok(article, `${locale} article`);
     assert.match(article.title, /Obsidian \+ Claude Code/);
-    assert.match(article.title, script === "traditional" ? /AI 知識庫/ : /AI 知识库/);
+    assert.match(article.title, script === "traditional" ? /教學.*MCP.*外掛.*Skills/ : /教程.*MCP.*插件.*Skills/);
+    assert.doesNotMatch(article.title, /AI 知識庫|AI 知识库/);
     assert.equal(
       article.publishedAt,
       locale === "zh-TW" ? "2026-07-22" : "2026-08-01",
     );
-    assert.equal(article.updatedAt, "2026-08-01");
+    assert.equal(article.updatedAt, "2026-10-06");
     assert.ok(article.keywords.includes("Obsidian MCP"));
-    assert.equal(article.sections.length, 6);
+    assert.ok(article.keywords.includes("Obsidian Claude Code MCP"));
+    assert.equal(article.sections.length, 8);
 
     const articleText = JSON.stringify(article);
     for (const expected of [
-      "read-only Source",
+      "claude --add-dir",
+      "CLAUDE.md",
+      "obsidian backlinks",
+      "/plugin install obsidian@obsidian-skills",
+      "claude mcp add --transport http obsidian",
+      "Claudian",
       "IDE bridge",
-      "MCP",
-      "provenance",
-      "/distill",
-      "/pages",
-      "/lint",
+      "read-only source",
+      "kepano/obsidian-skills",
       "Roasbeef/obsidian-claude-code",
       "petersolopov/obsidian-claude-ide",
       "iansinnott/obsidian-claude-code-mcp",

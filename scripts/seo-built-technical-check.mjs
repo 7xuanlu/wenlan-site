@@ -201,14 +201,14 @@ const REQUIRED_HTML_PAGES = [
     canonical: "https://wenlan.app/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
     type: "Article",
     datePublished: "2026-07-22",
-    dateModified: "2026-08-01",
+    dateModified: "2026-10-06",
   },
   {
     path: "zh-CN/learn/wenlan-vs-obsidian-ai-memory.html",
     canonical: "https://wenlan.app/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
     type: "Article",
     datePublished: "2026-08-01",
-    dateModified: "2026-08-01",
+    dateModified: "2026-10-06",
   },
   {
     path: "learn/build-local-ai-knowledge-base-from-documents.html",
