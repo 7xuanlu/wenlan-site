@@ -422,121 +422,220 @@ const baseArticles: LearnArticle[] = [
   },
   {
     slug: "claude-code-memory",
-    eyebrow: "Developer workflow",
+    eyebrow: "Developer guide",
     category: "Workflows",
-    title: "Claude Code Memory: CLAUDE.md, /memory, and MCP Context",
+    title: "Claude Code Memory: How It Works, Where It's Stored, and How to Extend It",
     description:
-      "Understand CLAUDE.md, Claude Code auto memory, /memory, and when to add Wenlan's local MCP memory for shared project context.",
-    metaTitle: "Claude Code Memory: CLAUDE.md, /memory, MCP | Wenlan",
+      "How Claude Code memory works: CLAUDE.md vs auto memory, where MEMORY.md lives, how to view, clear, or turn it off, why it forgets your last session, and when a plugin helps.",
+    metaTitle: "Claude Code Memory: How It Works & Where It's Stored | Wenlan",
     metaDescription:
-      "Use CLAUDE.md, auto memory, and /memory well. Add Wenlan when Claude Code needs local, source-backed memory shared with Cursor and Codex.",
+      "How Claude Code memory works: CLAUDE.md vs auto memory, where MEMORY.md is stored, how to clear or disable it, and when a memory plugin or MCP server helps.",
     keywords: [
       "Claude Code memory",
-      "Claude Code persistent memory",
-      "Claude Code /memory",
+      "Claude Code memory.md",
+      "Claude Code memory location",
+      "Claude Code memory vs CLAUDE.md",
+      "how Claude Code memory works",
+      "Claude Code auto memory",
+      "clear Claude Code memory",
+      "Claude Code remember previous session",
       "Claude Code memory plugin",
-      "Claude Code memory repo",
       "Claude Code MCP memory",
-      "Claude Code project context",
-      "AI coding agent memory",
     ],
     publishedAt: "2026-06-07",
-    updatedAt: "2026-07-18",
+    updatedAt: "2026-10-06",
     author: DEFAULT_AUTHOR,
-    readingTime: "7 min read",
-    audience: "Developers using Claude Code, Cursor, and other AI coding agents",
+    readingTime: "9 min read",
+    audience: "Developers who want Claude Code to remember project rules, preferences, and decisions",
     heroBullets: [
-      "Use CLAUDE.md for stable project instructions and auto memory for assistant-learned corrections and preferences.",
-      "Use /memory to inspect and edit native memory before adding another memory layer.",
-      "Add Wenlan when work context must be source-backed, reviewable, and shared with Cursor, Codex, and other MCP clients.",
+      "Claude Code has two memory systems: CLAUDE.md, which you write, and auto memory, which Claude writes.",
+      "Auto memory lives in ~/.claude/projects/<project>/memory/, and only the first 200 lines or 25 KB of MEMORY.md load at startup.",
+      "Memory is not chat history. To pick up a past conversation, use claude --continue or claude --resume.",
     ],
     sections: [
       {
         heading: "Quick answer",
         body: [
-          "Start with Claude Code's native memory. Use CLAUDE.md for instructions you maintain, auto memory for learnings Claude saves, and /memory to inspect or edit both surfaces.",
-          "Auto memory is per repository and shared across worktrees. Claude Code loads the first 200 lines or 25 KB of its MEMORY.md entrypoint, whichever comes first, at the start of each conversation.",
-          "Add Wenlan only when the problem extends beyond native memory: evolving work context needs provenance, review, handoff, or access from Cursor, Codex, and other MCP-compatible tools.",
+          "Claude Code memory is two sets of Markdown files that load at the start of every session. CLAUDE.md holds instructions you write. Auto memory holds notes Claude writes for itself from your corrections and preferences.",
+          "Start with Claude Code's native memory. It covers project rules and personal preferences on one machine. Add a plugin or MCP memory server only when other AI tools need the same memory, when notes should point back to their sources, or when memory has to outlive one machine.",
         ],
-        bullets: [
-          "Put stable rules, commands, and project architecture in CLAUDE.md.",
-          "Use Claude Code auto memory for repeated corrections and preferences Claude discovers.",
-          "Use Wenlan for source-backed decisions, gotchas, handoffs, wiki pages, and shared MCP memory.",
-        ],
-      },
-      {
-        heading: "How Claude Code memory works",
-        body: [
-          "Each Claude Code session starts with a fresh context window. Claude Code carries knowledge forward through CLAUDE.md files and auto memory, and both are loaded into new conversations as context.",
-          "Auto memory is machine-local. Worktrees and subdirectories in the same Git repository share one auto memory directory, while separate repositories do not.",
-          "Only the first 200 lines or 25 KB of auto memory's MEMORY.md loads at session start. Keep that index concise; detailed topic files can be read on demand.",
-        ],
-      },
-      {
-        heading: "Use CLAUDE.md for stable instructions",
-        body: [
-          "CLAUDE.md is excellent for project-level instructions: build commands, test commands, architecture notes, coding standards, and long-lived conventions the whole team should share.",
-          "It should not become a dumping ground for every transient observation from every coding session. When the file gets too large or contradictory, Claude has more context to scan and less room for the current task.",
-        ],
-      },
-      {
-        heading: "Use native memory before another layer",
-        body: [
-          "If Claude Code seems to forget something, run /memory first. It lists memory locations, opens files for review, and lets you inspect or toggle auto memory.",
-          "Use /context to verify which CLAUDE.md files loaded. The problem may be a missing file, the wrong scope, conflicting instructions, or an oversized memory index rather than a need for another tool.",
-        ],
-      },
-      {
-        heading: "When Wenlan adds value",
-        body: [
-          "Use Wenlan when project context needs provenance, review, deletion, handoff, distillation, and access from more than one MCP-compatible tool.",
-          "Useful Wenlan captures are specific and grounded: why a decision was made, what tradeoffs were considered, what command verifies a change, which module owns a behavior, or what gotcha should not be rediscovered next week.",
-        ],
-        link: {
-          label: "Turn Claude Code memory into an LLM wiki",
-          href: "/learn/distilled-wiki-pages-ai-memory",
+        table: {
+          columns: ["", "CLAUDE.md", "Auto memory"],
+          rows: [
+            ["Who writes it", "You", "Claude"],
+            ["What goes in it", "Instructions: build commands, conventions, \"always do X\" rules", "Learnings: your preferences, corrections, ongoing decisions"],
+            ["Scope", "Project, user, or organization", "One folder per Git repository"],
+            ["Loaded at startup", "The whole file (aim for under 200 lines)", "First 200 lines or 25 KB of MEMORY.md"],
+            ["Shared with teammates", "Yes, if you commit the project file", "No, it stays on your machine"],
+          ],
         },
       },
       {
-        heading: "Install path for Claude Code",
+        id: "where-claude-code-stores-memory",
+        heading: "Where Claude Code stores memory",
         body: [
-          "The Claude Code plugin is the most complete Wenlan path because it adds /setup, /brief, /capture, /recall, /handoff, /distill, and review workflows around the local daemon and MCP connector.",
-          "After installing, restart Claude Code if prompted, run /setup once, then verify a harmless capture and recall before relying on Wenlan for real project memory.",
+          "Auto memory is stored in ~/.claude/projects/<project>/memory/. The project name comes from the Git repository, so auto memory is per repository and shared across worktrees and subdirectories. Outside a Git repo, the project root is used instead.",
+          "MEMORY.md is an index with one line per memory, and each memory is its own topic file. Topic files are not loaded at startup; Claude opens them when it needs them.",
+          "Auto memory is machine-local. It is not synced to other computers or cloud sessions. To keep it somewhere else, set autoMemoryDirectory in settings.json to an absolute path or a path that starts with ~/.",
+        ],
+        code: {
+          label: "Auto memory folder",
+          code: "~/.claude/projects/<project>/memory/\n├── MEMORY.md            # index, loaded every session\n├── user_role.md         # one memory per file\n├── feedback_testing.md\n└── ...",
+        },
+      },
+      {
+        heading: "Where CLAUDE.md files live",
+        body: [
+          "Claude Code loads CLAUDE.md files from your working directory and every folder above it, and combines them. A CLAUDE.md in a subfolder loads only when Claude works with files in that subfolder.",
+        ],
+        table: {
+          columns: ["File", "Location", "Use it for"],
+          rows: [
+            ["Project", "./CLAUDE.md or ./.claude/CLAUDE.md", "Team rules, commands, and architecture notes. Commit it."],
+            ["Personal, this project", "./CLAUDE.local.md", "Your own sandbox URLs or test data. Add it to .gitignore."],
+            ["Personal, all projects", "~/.claude/CLAUDE.md", "Preferences you want in every project"],
+            ["Rules", ".claude/rules/*.md", "One topic per file, optionally limited to certain paths"],
+            ["Organization", "/Library/Application Support/ClaudeCode/CLAUDE.md on macOS", "Company-wide instructions managed by IT"],
+          ],
+        },
+      },
+      {
+        heading: "Claude Code memory vs CLAUDE.md: what goes where",
+        body: [
+          "Put something in CLAUDE.md when it is a rule everyone on the project should follow in every session. Let auto memory hold what Claude learns about how you work.",
+          "When you tell Claude \"remember that the API tests need a local Redis\", it saves that to auto memory. To put it in CLAUDE.md instead, say \"add this to CLAUDE.md\" or edit the file yourself.",
+        ],
+        bullets: [
+          "CLAUDE.md: build and test commands, coding standards, naming rules, architecture decisions.",
+          "Auto memory: your preferences, corrections you gave Claude, ongoing work Claude can't see in the code.",
+          "Neither: multi-step procedures belong in a skill, and anything that must always happen belongs in a hook.",
+        ],
+      },
+      {
+        id: "view-clear-or-disable-claude-code-memory",
+        heading: "How to view, clear, or turn off Claude Code memory",
+        body: [
+          "Run /memory inside a session. It lists every CLAUDE.md and memory location, opens files in your editor, has an auto memory on/off toggle, and can open the auto memory folder.",
+          "Everything is plain Markdown. To clear auto memory, delete the topic files you no longer want and their lines in MEMORY.md. Claude Code cleans up old session transcripts, but memory files stay until you or Claude remove them.",
+        ],
+        bullets: [
+          "See what loaded: /context lists the CLAUDE.md files in this session under Memory files.",
+          "Turn off auto memory everywhere: use the toggle in /memory, which saves autoMemoryEnabled to your user settings.",
+          "Turn it off for one project: set \"autoMemoryEnabled\": false in that project's .claude/settings.json.",
+          "Turn it off with an environment variable: CLAUDE_CODE_DISABLE_AUTO_MEMORY=1.",
+        ],
+        code: {
+          label: "Disable auto memory for one project (.claude/settings.json)",
+          code: "{\n  \"autoMemoryEnabled\": false\n}",
+        },
+      },
+      {
+        heading: "Why Claude Code doesn't remember your last session",
+        body: [
+          "Memory and conversation history are different things. A new session starts with an empty context window plus your memory files. It does not include what you said yesterday unless Claude saved it to auto memory.",
+          "To continue an earlier conversation, resume it instead of starting a new one. To carry decisions forward without replaying a whole transcript, write them down at the end of the session: ask Claude to update CLAUDE.md, or use a handoff tool.",
+        ],
+        code: {
+          label: "Resume a conversation",
+          code: "claude --continue   # reopen the most recent conversation in this folder\nclaude --resume     # pick one from a list\n/resume             # switch conversations from inside a session",
+        },
+      },
+      {
+        heading: "Auto memory not working, or Claude ignoring CLAUDE.md",
+        body: [
+          "Memory files are context, not enforced settings. Claude reads them and tries to follow them, but vague or conflicting instructions get followed inconsistently.",
+        ],
+        bullets: [
+          "Run /context and check Memory files. If a CLAUDE.md is missing there, Claude can't see it.",
+          "Remember that a CLAUDE.md in a subfolder loads only when Claude works in that subfolder.",
+          "Keep MEMORY.md under 200 lines and 25 KB. Anything past that isn't loaded at startup.",
+          "Look for conflicting rules across CLAUDE.md files and .claude/rules/. Claude may pick either one.",
+          "Make instructions specific: \"use 2-space indentation\" works better than \"format code nicely\".",
+          "If something must happen every time, such as before each commit, use a hook instead of a memory file.",
+          "Check that autoMemoryEnabled or CLAUDE_CODE_DISABLE_AUTO_MEMORY hasn't turned auto memory off.",
+        ],
+      },
+      {
+        id: "claude-code-memory-plugins",
+        heading: "Claude Code memory plugins and MCP servers",
+        body: [
+          "Native memory has limits by design. It stays on one machine, each repository gets its own folder, tools such as Cursor or Codex can't read it, and notes don't point back to where they came from.",
+          "If those limits matter, add a memory tool. The common options solve different problems, so pick by what you're missing. GitHub star counts are from October 2026.",
+        ],
+        table: {
+          columns: ["Option", "How it works", "Good for"],
+          rows: [
+            ["Native auto memory", "Claude writes short Markdown notes per repository", "Preferences and corrections on one machine"],
+            ["claude-mem (about 97,000 stars)", "Records what the agent does each session, compresses it with AI, and injects relevant context into later sessions", "Automatic session recall without writing notes"],
+            ["An MCP memory server", "Stores memories behind MCP tools that any compatible client can call", "Sharing memory between Claude Code, Cursor, Codex, and other MCP clients"],
+            ["Wenlan", "Local MCP memory plus wiki pages that cite their sources and flag when a source changes", "Project decisions and knowledge you want to read, check, and share across tools"],
+          ],
+        },
+        link: {
+          label: "Compare Wenlan and claude-mem",
+          href: "/learn/wenlan-vs-claude-mem",
+        },
+      },
+      {
+        heading: "Add Wenlan to Claude Code",
+        body: [
+          "Wenlan is an open-source desktop app and Claude Code plugin. It keeps memory on your computer, turns related notes into wiki pages that cite their sources, and serves the same memory to Cursor, Codex, Claude Desktop, and other MCP clients.",
+          "Install the plugin, restart Claude Code if asked, then run /setup. Test one capture and one recall before relying on it for real project memory.",
         ],
         code: {
           label: "Claude Code plugin",
           code: "/plugin marketplace add 7xuanlu/wenlan\n/plugin install wenlan@7xuanlu-wenlan\n/setup\n/capture This project uses Wenlan for local AI work memory.\n/recall local AI work memory",
         },
-      },
-      {
-        heading: "Share memory with Cursor and Codex",
-        body: [
-          "Wenlan exposes memory through its MCP server. Claude Code can write what it learns and recall relevant project context later. The same work context can also be available to Cursor, Codex, Claude Desktop, Gemini CLI, and other MCP clients when configured.",
-          "That makes Wenlan a shared local layer for AI-assisted development rather than a single-client note file.",
-        ],
+        link: {
+          label: "Turn Claude Code memory into an LLM wiki",
+          href: "/learn/distilled-wiki-pages-ai-memory",
+        },
       },
     ],
     faqs: [
       {
-        question: "Should Claude Code memory replace CLAUDE.md?",
+        question: "Where is Claude Code memory stored?",
         answer:
-          "No. CLAUDE.md is best for stable project instructions. Wenlan is best for evolving memory across sessions, tools, and projects.",
+          "Auto memory is in ~/.claude/projects/<project>/memory/, with MEMORY.md as the index. CLAUDE.md files live in your project (./CLAUDE.md), your home folder (~/.claude/CLAUDE.md), or an organization-managed location.",
       },
       {
-        question: "Can Cursor use the same memory?",
+        question: "Is MEMORY.md the same as CLAUDE.md?",
         answer:
-          "Yes. Wenlan is MCP-native, so multiple compatible tools can connect to the same local daemon and source-backed wiki when configured.",
+          "No. You write CLAUDE.md to give Claude instructions. Claude writes MEMORY.md and its topic files to remember what it learned about your project and preferences.",
+      },
+      {
+        question: "How do I clear Claude Code memory?",
+        answer:
+          "Run /memory, open the auto memory folder, and delete the files or lines you don't want. To stop new memories, turn auto memory off in /memory or set CLAUDE_CODE_DISABLE_AUTO_MEMORY=1.",
+      },
+      {
+        question: "Does Claude Code remember previous sessions?",
+        answer:
+          "Not the conversation itself. Each session reloads CLAUDE.md and auto memory. Use claude --continue or claude --resume to reopen an earlier conversation.",
+      },
+      {
+        question: "Can Cursor or Codex use Claude Code memory?",
+        answer:
+          "Not directly. Auto memory is a Claude Code feature on one machine. To share memory across tools, use an MCP memory server such as Wenlan.",
       },
     ],
-    relatedSlugs: ["claude-code-memory-command-vs-wenlan", "wenlan-for-claude-code", "mcp-memory-server", "where-wenlan-stores-claude-code-memory", "ai-coding-agent-loses-context"],
+    relatedSlugs: ["how-to-add-memory-to-claude-code", "wenlan-vs-claude-mem", "mcp-memory-server", "wenlan-for-claude-code", "claude-code-memory-command-vs-wenlan", "where-wenlan-stores-claude-code-memory", "ai-coding-agent-loses-context"],
     officialReferences: [
       {
         label: "Claude Code memory docs",
         href: "https://code.claude.com/docs/en/memory",
       },
       {
+        label: "Claude Code sessions docs",
+        href: "https://code.claude.com/docs/en/sessions",
+      },
+      {
         label: "Claude Code MCP docs",
         href: "https://code.claude.com/docs/en/mcp",
+      },
+      {
+        label: "claude-mem on GitHub",
+        href: "https://github.com/thedotmack/claude-mem",
       },
       {
         label: "Wenlan on GitHub",
@@ -544,7 +643,7 @@ const baseArticles: LearnArticle[] = [
       },
     ],
     cta: {
-      heading: "Verify Claude Code memory locally",
+      heading: "Share Claude Code memory with your other AI tools",
       body: "Install the Wenlan plugin, run /setup, then test one capture and recall before adding real project context.",
     },
   },
