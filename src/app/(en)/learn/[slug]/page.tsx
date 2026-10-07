@@ -23,6 +23,7 @@ import { getCoreContent } from "@/i18n/content";
 import { SiteHeader } from "@/components/site-header";
 import { WorkflowComparisonGuide } from "@/components/learn/workflow-comparison-guide";
 import { RecordedWorkflowProof } from "@/components/learn/recorded-workflow-proof";
+import { ComparisonTableSection, LearnFigure, SectionTable } from "@/components/learn/learn-figures";
 
 function sectionId(heading: string): string {
   return heading
@@ -332,6 +333,8 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                         <p key={paragraph} className={section.id?.startsWith("worked-example") ? "text-pretty" : undefined}>{paragraph}</p>
                       ))}
                     </div>
+                    {section.figure && <LearnFigure id={section.figure} locale="en" />}
+                    {section.table && <SectionTable table={section.table} />}
                     {section.bullets && (
                       <ul className="mt-6 space-y-3 border-l border-[var(--o-border)] pl-5">
                         {section.bullets.map((bullet) => (
@@ -367,48 +370,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
               ))}
 
               {article.comparisonTable && (
-                <section>
-                  <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
-                    Side-by-side
-                  </h2>
-                  <p className="mt-3 text-sm leading-relaxed text-[var(--o-text-muted)]">
-                    Practical dimensions. Where {article.comparisonTable.competitorName} leads, we say so.
-                  </p>
-                  <div className="mt-6 overflow-x-auto rounded-xl border border-[var(--o-border)]">
-                    <table className="w-full border-collapse text-sm">
-                      <thead>
-                        <tr className="border-b border-[var(--o-border)] bg-[var(--o-card-bg)] text-left font-mono text-[11px] tracking-[0.2em] text-[var(--o-text-muted)] uppercase">
-                          <th className="px-5 py-4 align-top">Dimension</th>
-                          <th className="px-5 py-4 align-top text-[var(--o-warm)]">Wenlan</th>
-                          <th className="px-5 py-4 align-top">
-                            {article.comparisonTable.competitorName}
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {article.comparisonTable.rows.map((row) => (
-                          <tr
-                            key={row.dimension}
-                            className="border-b border-[var(--o-border-subtle)] last:border-b-0 align-top"
-                          >
-                            <th
-                              scope="row"
-                              className="px-5 py-4 text-left align-top font-medium text-[var(--o-text)]"
-                            >
-                              {row.dimension}
-                            </th>
-                            <td className="px-5 py-4 align-top text-[var(--o-text-secondary)]">
-                              {row.wenlan}
-                            </td>
-                            <td className="px-5 py-4 align-top text-[var(--o-text-muted)]">
-                              {row.competitor}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </section>
+                <ComparisonTableSection table={article.comparisonTable} locale="en" />
               )}
 
               <section className="relative overflow-hidden rounded-2xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-8 shadow-[0_18px_70px_rgba(0,0,0,0.18)]">

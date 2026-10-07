@@ -1033,7 +1033,7 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
 
   assert.equal(
     metadata.title,
-    "Karpathy LLM Wiki 與 AI 知識庫 | Wenlan",
+    "Karpathy LLM Wiki 是什麼？用 Claude Code 自己做 | Wenlan",
   );
   assert.equal(
     metadata.alternates.canonical,
@@ -1683,98 +1683,72 @@ test("Mandarin Obsidian guides own the Claude Code, MCP, and AI knowledge-base i
   }
 });
 
-test("zh-TW LLM Wiki guide owns the Karpathy v2 and AI knowledge-base intent", async () => {
-  const { getLocalizedLearnArticle } = await import("../src/i18n/learn-articles.ts");
-  const article = getLocalizedLearnArticle(
+for (const [locale, copy] of [
+  [
     "zh-TW",
-    "distilled-wiki-pages-ai-memory",
-  );
-
-  assert.ok(article);
-  assert.match(article.title, /Karpathy LLM Wiki/);
-  assert.match(article.title, /AI 知識庫/);
-  assert.match(article.metaTitle, /Karpathy LLM Wiki/);
-  assert.match(article.metaTitle, /AI 知識庫/);
-  assert.equal(article.publishedAt, "2026-07-04");
-  assert.equal(article.updatedAt, "2026-09-16");
-  assert.match(article.sections[0].heading, /Karpathy LLM Wiki/);
-  assert.match(JSON.stringify(article), /不代表 Karpathy 為 Wenlan 背書/);
-  assert.ok(article.keywords.includes("AI 知識庫"));
-  assert.ok(article.keywords.includes("本地 AI 知識庫"));
-  assert.ok(article.keywords.includes("RAG vs LLM Wiki"));
-
-  const headings = article.sections.map((section) => section.heading);
-  assert.equal(headings.length, 11);
-  assert.ok(headings.includes("LLM Wiki 知識庫和 RAG 有什麼不同"));
-  assert.ok(headings.includes("如何搭建會持續更新的 AI 知識庫"));
-  assert.ok(headings.includes("如何驗證知識庫真的可用"));
-  assert.ok(headings.includes("一份最小可用的 LLM Wiki Schema"));
-  assert.ok(headings.includes("正式使用前的最小驗收測試"));
-
-  const articleText = JSON.stringify(article);
-  for (const expected of [
-    "Ingest",
-    "Query",
-    "Lint",
-    "/brief",
-    "/recall",
-    "/capture",
-    "/handoff",
-    "/distill",
-    "/pages",
-    "source IDs",
-    "Karpathy",
-    "LLM Wiki v2",
-    "CLAUDE.md",
-    "AGENTS.md",
-    "按需載入",
-    "不可變來源邊界",
-    "Wenlan 不要求使用者自訂 Page schema",
-  ]) {
-    assert.match(articleText, new RegExp(expected.replace("/", "\\/")));
-  }
-});
-
-test("zh-CN LLM wiki guide owns the AI knowledge-base search intent", async () => {
-  const { getLocalizedLearnArticle } = await import("../src/i18n/learn-articles.ts");
-  const article = getLocalizedLearnArticle(
+    {
+      disclaimer: /不代表 Karpathy 為 Wenlan 背書/,
+      build: "用 Claude Code 15 分鐘做一個",
+      schema: "可直接複製的 CLAUDE.md",
+      keywords: ["LLM Wiki 是什麼", "LLM Wiki 如何使用", "AI 知識庫"],
+      noOverwrite: "不會蓋掉你的修改",
+    },
+  ],
+  [
     "zh-CN",
-    "distilled-wiki-pages-ai-memory",
-  );
+    {
+      disclaimer: /不代表 Karpathy 为 Wenlan 背书/,
+      build: "用 Claude Code 15 分钟搭一个",
+      schema: "可直接复制的 CLAUDE.md",
+      keywords: ["LLM Wiki 是什么", "LLM Wiki 怎么用", "AI 知识库"],
+      noOverwrite: "不会覆盖你的修改",
+    },
+  ],
+]) {
+  test(`${locale} LLM Wiki guide answers what it is and how to build one`, async () => {
+    const { getLocalizedLearnArticle } = await import("../src/i18n/learn-articles.ts");
+    const article = getLocalizedLearnArticle(locale, "distilled-wiki-pages-ai-memory");
 
-  assert.ok(article);
-  assert.match(article.title, /Karpathy LLM Wiki/);
-  assert.match(article.metaTitle, /AI 知识库/);
-  assert.equal(article.publishedAt, "2026-07-04");
-  assert.equal(article.updatedAt, "2026-09-16");
-  assert.match(article.sections[0].heading, /Karpathy LLM Wiki/);
-  assert.match(JSON.stringify(article), /不代表 Karpathy 为 Wenlan 背书/);
-  assert.ok(article.keywords.includes("AI 知识库"));
-  assert.ok(article.keywords.includes("本地 AI 知识库"));
-  assert.ok(article.keywords.includes("RAG vs LLM Wiki"));
+    assert.ok(article);
+    assert.match(article.title, /Karpathy LLM Wiki/);
+    assert.match(article.title, /Claude Code/);
+    assert.match(article.metaTitle, /Karpathy LLM Wiki/);
+    assert.equal(article.publishedAt, "2026-07-04");
+    assert.equal(article.updatedAt, "2026-10-06");
+    assert.match(article.sections[0].heading, /Karpathy/);
+    assert.match(JSON.stringify(article), copy.disclaimer);
+    for (const keyword of copy.keywords) assert.ok(article.keywords.includes(keyword), keyword);
 
-  const headings = article.sections.map((section) => section.heading);
-  assert.ok(headings.includes("LLM Wiki 知识库和 RAG 有什么不同"));
-  assert.ok(headings.includes("如何搭建一个会持续更新的 AI 知识库"));
-  assert.ok(headings.includes("一份最小可用的 LLM Wiki Schema"));
-  assert.ok(headings.includes("正式使用前的最小验收测试"));
+    const headings = article.sections.map((section) => section.heading);
+    assert.ok(headings.includes(copy.build));
+    assert.ok(headings.includes(copy.schema));
+    assert.ok(article.sections.some((section) => section.id === "build-an-llm-wiki-with-claude-code"));
+    assert.ok(article.sections.some((section) => section.id === "the-five-minute-llm-wiki-protocol"));
+    assert.ok(article.sections.some((section) => section.id === "worked-example"));
+    assert.ok(article.comparisonTable);
 
-  const articleText = JSON.stringify(article);
-  for (const expected of [
-    "Ingest",
-    "Query",
-    "Lint",
-    "/distill",
-    "source IDs",
-    "CLAUDE.md",
-    "AGENTS.md",
-    "按需加载",
-    "不可变来源边界",
-    "Wenlan 不要求用户自定义 Page schema",
-  ]) {
-    assert.match(articleText, new RegExp(expected.replace("/", "\\/")));
-  }
-});
+    const articleText = JSON.stringify(article);
+    for (const expected of [
+      "Ingest",
+      "Query",
+      "Lint",
+      "index.md",
+      "log.md",
+      "/brief",
+      "/recall",
+      "/capture",
+      "/handoff",
+      "/distill",
+      "/pages",
+      "CLAUDE.md",
+      "AGENTS.md",
+      "My notes",
+      copy.noOverwrite,
+    ]) {
+      assert.match(articleText, new RegExp(expected.replace("/", "\\/")));
+    }
+  });
+}
 
 test("localized Learn hubs and source-backed pages lead with AI knowledge-base intent", async () => {
   const { localizedLearnIndexContent } = await import(
@@ -2231,7 +2205,7 @@ test("sitemap includes localized core and Mandarin acquisition routes", async ()
   assert.ok(zhTWLLMWiki);
   assert.equal(
     new Date(zhTWLLMWiki.lastModified).toISOString().slice(0, 10),
-    "2026-09-16",
+    "2026-10-06",
   );
 
   // Localized hubs date from what exists in their own locale, not from the

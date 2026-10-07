@@ -23,7 +23,14 @@ export type LearnArticleSection = {
     label: string;
     href: string;
   };
+  figure?: LearnFigureId;
+  table?: {
+    columns: string[];
+    rows: string[][];
+  };
 };
+
+export type LearnFigureId = "llm-wiki-architecture" | "llm-wiki-vs-rag";
 
 export type LearnArticleFaq = {
   question: string;
@@ -646,253 +653,250 @@ const baseArticles: LearnArticle[] = [
   },
   {
     slug: "distilled-wiki-pages-ai-memory",
-    eyebrow: "Concept",
+    eyebrow: "Guide",
     category: "Concepts",
-    title: "Karpathy LLM Wiki: Build a Source-Backed AI Knowledge Base",
+    title: "Karpathy's LLM Wiki: What It Is and How to Build One",
     description:
-      "The Karpathy LLM Wiki pattern turns trusted sources into maintained AI knowledge-base pages that agents can load on demand.",
-    metaTitle: "Karpathy LLM Wiki & AI Knowledge Base | Wenlan",
+      "Andrej Karpathy's LLM Wiki pattern explained with diagrams, the implementations people actually use, and a copy-paste Claude Code setup.",
+    metaTitle: "Karpathy LLM Wiki: What It Is & How to Build One",
     metaDescription:
-      "Learn the Karpathy LLM Wiki pattern, how it differs from RAG, and how source-backed pages, Obsidian, checks, and refreshes fit together.",
+      "Karpathy's LLM Wiki explained with diagrams: how it differs from RAG, the most-used implementations, and a copy-paste Claude Code setup with CLAUDE.md.",
     keywords: [
       "LLM wiki",
       "Karpathy LLM wiki",
       "Andrej Karpathy LLM wiki",
-      "AI knowledge base",
-      "source-backed AI knowledge base",
-      "LLM wiki for AI agents",
-      "LLM wiki for AI work",
-      "LLM wiki architecture",
-      "LLM wiki setup",
-      "LLM wiki vs RAG",
+      "LLM wiki Karpathy",
+      "Karpathy LLM wiki GitHub",
+      "Karpathy LLM wiki implementation",
+      "how to build an LLM wiki",
+      "LLM wiki Claude Code",
+      "LLM wiki CLAUDE.md",
       "LLM wiki Obsidian",
-      "Claude Code LLM wiki",
-      "source-backed AI work wiki",
-      "distilled wiki pages",
-      "AI work wiki",
+      "LLM wiki vs RAG",
+      "AI knowledge base",
     ],
     publishedAt: "2026-06-24",
-    updatedAt: "2026-09-13",
+    updatedAt: "2026-10-06",
     author: DEFAULT_AUTHOR,
-    readingTime: "12 min read",
-    audience: "People designing a maintained knowledge layer for Claude Code, Codex, Cursor, and other AI agents",
+    readingTime: "7 min read",
+    audience: "Anyone who read Karpathy's LLM Wiki note and wants a working version with Claude Code, Codex, or Obsidian",
     heroBullets: [
-      "The Karpathy LLM Wiki pattern maintains useful answers instead of treating raw notes, retrieved chunks, or chat logs as finished knowledge.",
-      "The architecture separates source material, atomic memory, maintained pages, and the index that loads only relevant context.",
-      "A practical loop needs observable checks and repairs for stale links, contradictions, context bloat, and human edits.",
+      "An LLM wiki is a folder of Markdown pages that an AI keeps up to date from your sources, so answers build on earlier work instead of starting over.",
+      "It has three layers (sources, wiki, schema) and three jobs (ingest, query, lint).",
+      "Most people start from a ready-made project. You can also build one with Claude Code and an empty folder.",
     ],
     sections: [
       {
-        heading: "The Karpathy LLM Wiki pattern",
+        heading: "What Karpathy's LLM Wiki is",
         body: [
-          "Andrej Karpathy described an LLM Wiki pattern for turning raw knowledge into curated, interconnected pages that an AI agent can load on demand. This article uses his public note as a maintained source for the pattern; it does not imply that Karpathy endorses Wenlan.",
-          "In practical terms, an LLM wiki is a maintained AI knowledge base. It turns source material and durable work context into topic pages with enough provenance and maintenance state for a person to inspect why the current answer exists.",
-          "It is not simply a folder of AI-written notes. A useful LLM wiki separates raw evidence from reusable facts and maintained explanations, then gives each layer a different update rule. The result should remain useful even when the reader never installs the product used to build it.",
+          "In April 2026 Andrej Karpathy published a GitHub gist called LLM Wiki. Instead of having an AI search your raw documents on every question, the AI reads each source once and folds what it learned into linked Markdown pages. Later questions start from those pages.",
+          "This article cites Karpathy's public note as the source of the pattern; it does not imply that Karpathy endorses Wenlan.",
         ],
-        bullets: [
-          "Sources preserve documents, conversations, files, and other inspectable evidence.",
-          "Atomic memories preserve one decision, lesson, correction, preference, or fact learned during work.",
-          "Maintained pages compile the current answer and cite the support behind it.",
-          "A routing index finds the relevant page without loading the entire wiki into every prompt.",
-        ],
+        figure: "llm-wiki-architecture",
         link: {
-          label: "Try the complete example without installing anything",
+          label: "See a complete example without installing anything",
           href: "#worked-example",
         },
       },
       {
-        heading: "The architecture behind a useful LLM wiki",
+        heading: "The three jobs: ingest, query, lint",
         body: [
-          "The smallest dependable design has four planes: source storage, durable memory, maintained pages, and selective retrieval. Keeping them separate prevents a polished page from losing its evidence and prevents a raw event log from masquerading as the current answer.",
-          "Maintenance is part of the architecture, not a later cleanup job. When support changes, the system needs to mark the affected page stale, propose or perform a refresh according to ownership, and keep the revision inspectable.",
+          "Every change to the wiki is one of three jobs. Keeping them separate stops a question from quietly rewriting pages.",
         ],
         bullets: [
-          "Ingest: register source material without rewriting it into a conclusion.",
-          "Capture: keep one complete, reusable idea with scope and provenance.",
-          "Distill: compose related support into a maintained topic page.",
-          "Retrieve: load the smallest useful page or memory set for the current task.",
-          "Refresh and review: expose stale reasons, contradictions, citations, and revisions.",
+          "Ingest: read a new source, write its summary page, update the pages it affects, then update index.md and log.md.",
+          "Query: read index.md, open only the pages needed, and answer with links. A good answer can be saved as a page.",
+          "Lint: look for contradictions, claims a newer source replaced, pages nothing links to, and topics with no page yet.",
         ],
       },
+      {
+        heading: "LLM wiki vs RAG",
+        body: [
+          "RAG retrieves source chunks each time you ask and keeps nothing, so the same reading is repeated. An LLM wiki reads once and keeps maintained pages you can open and check. The cost is upkeep, which is what lint is for. A large wiki can still use search to find the right pages.",
+        ],
+        figure: "llm-wiki-vs-rag",
+      },
+      {
+        id: "llm-wiki-implementations",
+        heading: "LLM wiki implementations you can use",
+        body: [
+          "Most people start from an existing project. GitHub lists more than 6,400 repositories with \"llm-wiki\" in the name or description, most created since April 2026. The two most-starred, nashsu/llm_wiki and claude-obsidian, each have more than 15,000 stars (October 2026).",
+        ],
+        table: {
+          columns: ["Project", "What it is", "Good fit if you"],
+          rows: [
+            ["Karpathy's gist", "The original note: a description, not software", "want to write your own setup (below)"],
+            ["nashsu/llm_wiki", "Cross-platform desktop app", "want a standalone app for your documents"],
+            ["AgriciDaniel/claude-obsidian", "Claude Code + Obsidian setup", "already keep your notes in Obsidian"],
+            ["Astro-Han/karpathy-llm-wiki", "Agent Skills package for Claude Code, Cursor, and Codex", "want the pattern as an agent skill"],
+            ["Wenlan", "Desktop app with an MCP server", "use several AI tools and want pages kept current without losing your edits"],
+          ],
+        },
+      },
+      {
+        id: "build-an-llm-wiki-with-claude-code",
+        heading: "Build one with Claude Code in 15 minutes",
+        body: [
+          "You need Claude Code, or another agent that can edit files such as Codex or Cursor, and an empty folder. Create this layout and run git init, so you can see and undo every change. To read the pages, open the folder in Obsidian or any Markdown editor.",
+        ],
+        code: {
+          label: "Folder layout",
+          code: [
+            "my-wiki/",
+            "  CLAUDE.md        # the schema: rules the agent follows",
+            "  raw/             # your sources; the agent never edits these",
+            "  wiki/",
+            "    index.md       # one line per page",
+            "    log.md         # one line per ingest, query, or lint",
+            "    sources/       # one summary page per source",
+            "    topics/        # one page per topic, person, or idea",
+          ].join("\n"),
+        },
+        link: {
+          label: "Already have an Obsidian vault? Turn it into an LLM wiki",
+          href: "/learn/migrate-obsidian-vault-to-llm-wiki",
+        },
+      },
+      {
+        heading: "The CLAUDE.md schema to copy",
+        body: [
+          "This file is the whole system: CLAUDE.md for Claude Code or AGENTS.md for Codex. The \"My notes\" rule keeps a refresh from replacing text you corrected by hand.",
+          "Then type ingest raw/<file>, query <question>, or lint in Claude Code. Start with two or three sources on one topic, and check the git diff after each job.",
+        ],
+        code: {
+          label: "CLAUDE.md",
+          code: [
+            "# LLM Wiki",
+            "",
+            "This folder is a wiki you maintain from my sources.",
+            "",
+            "## Layout",
+            "- raw/: my sources. Read them. Never edit, move, or delete them.",
+            "- wiki/sources/: one summary page per source, named after the source.",
+            "- wiki/topics/: one page per topic, person, or idea.",
+            "- wiki/index.md: every page, one line each: [[page]] - summary.",
+            "- wiki/log.md: one line per job: ## [YYYY-MM-DD] ingest | <title>",
+            "",
+            "## Page rules",
+            "- Start each page with a two- or three-sentence summary.",
+            "- Every claim links to the source page it came from.",
+            "- Link related pages with [[wiki links]].",
+            "- If a new source contradicts a page, say so on the page and cite both.",
+            "- Never rewrite text under a \"## My notes\" heading. I write that part.",
+            "",
+            "## Jobs",
+            "- ingest <file>: summarize it, update affected topic pages,",
+            "  update index.md, and log it.",
+            "- query <question>: read index.md first, open only the pages you need,",
+            "  and answer with links. Offer to save a useful answer as a page.",
+            "- lint: list contradictions, outdated claims, orphan pages, and",
+            "  missing pages. Fix only what I approve.",
+          ].join("\n"),
+        },
+      },
       ...workedExampleSections("en"),
+      {
+        heading: "Where a do-it-yourself LLM wiki breaks",
+        body: [
+          "The setup above works for one person, one agent, and a few dozen sources. As it grows:",
+        ],
+        bullets: [
+          "Sources change, pages don't. Nothing flags a stale page until the next lint.",
+          "Hand edits get overwritten unless every agent follows the \"My notes\" rule every time.",
+          "Each AI tool needs its own rules file, and the copies drift apart.",
+          "index.md outgrows the context window after a few hundred pages.",
+          "Decisions made in AI chats never reach raw/ unless you copy them by hand.",
+        ],
+      },
       {
         id: "the-five-minute-llm-wiki-protocol",
         heading: "The LLM-wiki workflow in Wenlan",
         body: [
-          "Start only after Wenlan is installed and connected to the AI client. Use one harmless topic first. The protocol below exercises session startup, targeted retrieval, one durable write, a session boundary, page distillation, and human-readable output.",
-          "The commands are separate on purpose: recall should not silently write, capture should not rewrite a whole page, and distillation should not overwrite human-owned content without a review path.",
+          "Wenlan is an open-source app that runs this pattern for you. It turns your documents, notes, and AI chats into pages with links to their sources, and updates them as sources change without overwriting your edits. Claude Code, Codex, and other AI tools read the same pages.",
+          "/capture saves a decision from the chat, /distill builds or refreshes a topic page, /pages opens it, and /brief and /recall load only what the next session needs.",
         ],
         code: {
           label: "Wenlan workflow — requires an installed, connected client",
-          code: `/brief <topic>
-/recall <question>
-/capture <decision + why>
-/handoff
-/distill <topic>
-/pages <topic>`,
+          code: [
+            "/brief <topic>",
+            "/recall <question>",
+            "/capture <decision + why>",
+            "/handoff",
+            "/distill <topic>",
+            "/pages <topic>",
+          ].join("\n"),
         },
         link: {
           label: "Use the complete daily workflow",
           href: "/docs/daily-workflow",
         },
       },
-      {
-        heading: "A minimum LLM-wiki starter schema",
-        body: [
-          "Keep the always-loaded contract small. A CLAUDE.md or AGENTS.md should describe what the wiki is for, what never changes silently, and which procedures the agent should load on demand. It should not contain the whole wiki or a long copy of every maintenance instruction.",
-          "This is a vendor-neutral information and maintenance contract, not a required folder layout or product database. Adapt the names to your tools while keeping every boundary observable.",
-        ],
-        bullets: [
-          "Purpose and scope: which decisions or questions belong in this wiki, and which do not.",
-          "Immutable source boundary: where raw evidence lives and which files automation must never rewrite.",
-          "Page ownership: which pages are machine-maintained, human-owned, or changed only through review.",
-          "Naming and linking rules: stable topics, aliases, page links, and the smallest routing index.",
-          "Citation requirement: important claims point back to an inspectable source.",
-          "Ingest, query, lint, and maintenance log: separate on-demand procedures plus an append-only record of changes.",
-          "Stale and review behavior: what happens when a source changes, support conflicts, or a person owns the prose.",
-        ],
-        code: {
-          label: "Compact client contract",
-          code: [
-            "# LLM Wiki",
-            "Purpose: <the repeated decisions this wiki maintains>",
-            "Sources: <immutable evidence locations>",
-            "Pages: <ownership, naming, links, citations>",
-            "Index: <small topic router; load pages on demand>",
-            "Procedures: ingest | query | lint | review",
-            "Log: <append-only maintenance record>",
-            "Stale rule: <source change -> stale or review>",
-          ].join("\n"),
-        },
-      },
-      {
-        heading: "A small acceptance test before real use",
-        body: [
-          "A template is not proven when the files merely exist. Test one harmless topic end to end, including a source change, before importing private or business-critical material.",
-          "This test works for a folder-and-prompts setup, an Obsidian workflow, or a dedicated LLM-wiki product. The expected result is evidence you can inspect, not just a fluent answer.",
-        ],
-        bullets: [
-          "Ingest one harmless source and confirm the original remains unchanged.",
-          "Answer one question and cite the source for the important claim.",
-          "Run lint and confirm missing citations, broken links, or duplicates are visible.",
-          "Change the source, then repeat the same question.",
-          "Confirm the old answer becomes stale or reviewable instead of being silently overwritten.",
-        ],
-      },
-      {
-        heading: "How to verify the loop",
-        body: [
-          "Do not stop at a successful command. Verify the artifacts and the next retrieval. A trustworthy setup proves that the agent can recover the intended context later and that a person can inspect the maintained result outside the chat.",
-          "If any check fails, keep the test capture harmless, diagnose the connection or source boundary, and repeat the same topic before adding real project knowledge.",
-        ],
-        bullets: [
-          "The capture returns or exposes a durable record you can find again with the same topic.",
-          "The handoff records what changed and what the next session should do.",
-          "The page opens as readable Markdown and shows source IDs or citations for important claims.",
-          "A later recall or brief loads the relevant page or memory without pasting the full archive.",
-          "A changed source produces an inspectable stale reason, refresh, or reviewable revision instead of a silent overwrite.",
-        ],
-        link: {
-          label: "Review the trust and repair workflow",
-          href: "/docs/review-and-trust",
-        },
-      },
-      {
-        heading: "Example: from source to maintained answer",
-        body: [
-          "Suppose a release document establishes which platforms are actually supported. The source document remains inspectable, an atomic memory preserves the release decision and why it matters, and a maintained page compiles the current install answer. When the release document changes, the page should become stale or receive a reviewable revision.",
-          "This evidence trail is more useful than a detached summary because each layer has a clear owner and failure mode.",
-        ],
-        code: {
-          label: "Expected evidence trail",
-          code: `source document
-  -> atomic memory: decision + why + source_id
-  -> maintained page: current answer + citations
-
-source changes
-  -> stale reason or reviewable revision
-  -> refreshed page`,
-        },
-      },
-      {
-        heading: "Failure modes and repairs",
-        body: [
-          "The hard part is not generating the first page. It is keeping the wiki small enough to retrieve, current enough to trust, and explicit enough that people can repair it.",
-          "These failure modes repeat across real LLM-wiki, Obsidian, Claude Code, and agent-memory workflows:",
-        ],
-        bullets: [
-          "Context bloat or index truncation: keep the routing index short and load topic pages on demand instead of injecting the full vault.",
-          "Stale links and contradictions: retain provenance, mark affected pages stale, and review replacements rather than stacking another answer beside the old one.",
-          "Human-authored pages overwritten by automation: keep machine refreshes reviewable when a person owns the prose.",
-          "Token-heavy full-vault loading: retrieve the smallest relevant pages, memories, and source excerpts for the current question.",
-          "Cross-session blank starts: pair a compact brief with a handoff instead of depending on the previous chat window.",
-        ],
-      },
-      {
-        heading: "LLM wiki vs RAG, Obsidian, and agent memory",
-        body: [
-          "These tools can work together, but they do not own the same layer. The useful question is not which label wins; it is where evidence, current answers, human writing, and cross-session context should live.",
-        ],
-        bullets: [
-          "RAG retrieves source chunks for a question. An LLM wiki maintains a reusable answer, its support, and its refresh state.",
-          "Obsidian is a human-owned vault and writing surface. It can host or inspect wiki pages, but vault access alone does not define agent-memory policy or page maintenance.",
-          "Agent memory preserves reusable context from work. An LLM wiki composes selected memories and sources into a maintained explanation.",
-          "A plain folder plus prompts can be enough for a small, stable corpus. Add a daemon or MCP layer when several agents need the same retrieval, handoff, provenance, and review rules.",
-        ],
-        link: {
-          label: "Migrate an Obsidian vault into a source-backed LLM wiki",
-          href: "/learn/migrate-obsidian-vault-to-llm-wiki",
-        },
-      },
-      {
-        heading: "What an LLM wiki does not replace",
-        body: [
-          "An LLM wiki does not replace codebase search, repository maps, current source code, test output, or the native documentation for a tool. Those surfaces remain authoritative for what the software does now.",
-          "It is also unnecessary for one-off chats or a small set of stable documents that people already maintain well. Use the wiki when repeated work needs a current, inspectable answer across sessions or tools.",
-        ],
-        link: {
-          label: "See how Wenlan separates the layers",
-          href: "/docs/architecture",
-        },
-      },
-      {
-        heading: "How Wenlan maps the architecture",
-        body: [
-          "Wenlan implements the pattern with three durable roles: Sources preserve inspectable material, Memories preserve atomic knowledge from work, and Pages compile maintained explanations. The local daemon owns retrieval while readable Markdown keeps pages and session artifacts visible.",
-          "The page lifecycle is explicit: distill support, cite it, track dependencies, refresh when needed, and review ownership-sensitive changes. That is the difference between a generated note and a maintained LLM wiki.",
-          "Wenlan does not require a user-authored Page schema. Typed Memory fields and built-in Page rules already govern provenance, citations, refresh, ownership, and review; the starter schema above remains a portable evaluation contract for the client and workflow.",
-        ],
-        link: {
-          label: "Inspect the source-backed page model",
-          href: "/learn/source-backed-wiki-pages-ai-work",
-        },
-      },
     ],
+    comparisonTable: {
+      competitorName: "DIY folder + CLAUDE.md",
+      rows: [
+        {
+          dimension: "Setup",
+          wenlan: "Install the app and connect your AI tool",
+          competitor: "A folder, a schema file, and git",
+        },
+        {
+          dimension: "When a source changes",
+          wenlan: "Pages update when you ask, or automatically in the background",
+          competitor: "Found at the next lint, if you run one",
+        },
+        {
+          dimension: "Your own edits",
+          wenlan: "Kept; refreshes do not overwrite pages you edited",
+          competitor: "Kept only if the agent follows the schema rule",
+        },
+        {
+          dimension: "Several AI tools",
+          wenlan: "One wiki shared by Claude Code, Codex, and other clients",
+          competitor: "One rules file per tool",
+        },
+        {
+          dimension: "AI chats as sources",
+          wenlan: "Decisions can be captured from the chat",
+          competitor: "Copied into raw/ by hand",
+        },
+      ],
+    },
     faqs: [
       {
         question: "What is the Karpathy LLM Wiki idea?",
         answer:
-          "Andrej Karpathy described a personal LLM wiki made of curated, interconnected pages that an agent can retrieve as needed. The durable idea is to maintain useful pages and their structure instead of repeatedly loading an undifferentiated archive. Citing his note does not imply an endorsement of Wenlan.",
+          "Andrej Karpathy described a personal wiki that an AI writes and maintains from your sources: it reads each source once, updates a set of linked Markdown pages, and answers later questions from those pages. Citing his note does not imply an endorsement of Wenlan.",
       },
       {
         question: "What is an LLM wiki?",
         answer:
-          "An LLM wiki is a maintained knowledge layer that turns inspectable sources and durable work context into topic pages AI agents can load on demand. Useful implementations retain provenance, stale state, and a human review path.",
+          "An LLM wiki is a folder of Markdown pages that an AI keeps current from your sources, with an index so the AI can find the right page and links back to the sources behind each claim.",
       },
       {
         question: "Is an LLM wiki the same as RAG?",
         answer:
-          "No. RAG retrieves source chunks for a question. An LLM wiki maintains a reusable explanation with citations and refresh state. A wiki can use RAG underneath, but retrieval alone does not maintain the answer.",
+          "No. RAG searches your raw documents for every question and keeps nothing. An LLM wiki reads sources once and keeps maintained pages that you can open and check. A large wiki can still use search to find pages.",
       },
       {
-        question: "Can Obsidian be an LLM wiki?",
+        question: "How do I build an LLM wiki with Claude Code?",
         answer:
-          "Obsidian can be the human-owned vault and readable page surface. To behave as an agent LLM wiki, the workflow still needs selective retrieval, provenance, maintenance rules, stale handling, and a safe boundary for automated edits.",
+          "Create a folder with raw/ for sources and wiki/ for pages, add a CLAUDE.md that describes the layout, page rules, and the ingest, query, and lint jobs, then run git init. Start Claude Code in the folder and ingest two or three sources.",
       },
       {
-        question: "Should an LLM wiki replace repository search?",
+        question: "Do I need Obsidian for an LLM wiki?",
         answer:
-          "No. Use current source code, repository search, tests, and tool documentation to verify software behavior. Use the LLM wiki for maintained explanations, decisions, lessons, provenance, and cross-session context.",
+          "No. The wiki is plain Markdown, so any editor works. Obsidian is useful for reading it: wiki links become clickable and graph view shows how pages connect.",
+      },
+      {
+        question: "Where is Karpathy's LLM Wiki on GitHub?",
+        answer:
+          "It is a GitHub gist by karpathy titled LLM Wiki, linked in the references below. It is a description of the pattern rather than a repository you install; projects such as nashsu/llm_wiki and claude-obsidian package it as software.",
+      },
+      {
+        question: "Does an LLM wiki replace code search or documentation?",
+        answer:
+          "No. An LLM wiki does not replace codebase search, current source code, test output, or a tool's own documentation; those stay the authority on what software does today. It pays off when the same topics come back across many sessions or tools.",
       },
     ],
     relatedSlugs: [
@@ -908,6 +912,22 @@ source changes
     ],
     officialReferences: [
       {
+        label: "Karpathy's LLM-wiki note",
+        href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      },
+      {
+        label: "nashsu/llm_wiki desktop app",
+        href: "https://github.com/nashsu/llm_wiki",
+      },
+      {
+        label: "Astro-Han/karpathy-llm-wiki Agent Skills",
+        href: "https://github.com/Astro-Han/karpathy-llm-wiki",
+      },
+      {
+        label: "AgriciDaniel/claude-obsidian",
+        href: "https://github.com/AgriciDaniel/claude-obsidian",
+      },
+      {
         label: "Wenlan Source, Memory, and Page model",
         href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
       },
@@ -915,26 +935,10 @@ source changes
         label: "Wenlan daily workflow",
         href: "https://github.com/7xuanlu/wenlan#daily-workflow",
       },
-      {
-        label: "Karpathy's LLM-wiki note",
-        href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
-      },
-      {
-        label: "jackwener LLM-wiki implementation",
-        href: "https://github.com/jackwener/llm-wiki",
-      },
-      {
-        label: "Hjarni's CLAUDE.md template",
-        href: "https://hjarni.com/blog/llm-wiki-claude-md-template",
-      },
-      {
-        label: "Rohitg00's LLM Wiki v2 proposal",
-        href: "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2",
-      },
     ],
     cta: {
-      heading: "Turn memory into an LLM wiki",
-      body: "Wenlan distills repeated captures into source-backed wiki pages your next AI session can actually use.",
+      heading: "Let the wiki keep itself current",
+      body: "Wenlan turns your documents, notes, and AI chats into pages with links to their sources, and updates them as sources change without overwriting your edits.",
     },
   },
   {

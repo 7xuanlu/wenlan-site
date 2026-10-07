@@ -29,6 +29,7 @@ import { getCoreContent } from "@/i18n/content";
 import { WorkflowComparisonGuide } from "@/components/learn/workflow-comparison-guide";
 import { RecordedWorkflowProof } from "@/components/learn/recorded-workflow-proof";
 import { ShareArticle } from "@/components/learn/share-article";
+import { ComparisonTableSection, LearnFigure, SectionTable } from "@/components/learn/learn-figures";
 import { buildSectionIds } from "./section-ids";
 
 type LocalizedLearnArticlePageProps = {
@@ -469,6 +470,8 @@ export default async function LocalizedLearnSlugPage({
                         <p key={paragraph} className={section.id?.startsWith("worked-example") ? "text-pretty" : undefined}>{renderArticleText(paragraph)}</p>
                       ))}
                     </div>
+                    {section.figure && <LearnFigure id={section.figure} locale={resolvedLocale} />}
+                    {section.table && <SectionTable table={section.table} renderText={renderArticleText} />}
                     {section.bullets && (
                       <ul className="mt-6 space-y-3 border-l border-[var(--o-border)] pl-5">
                         {section.bullets.map((bullet) => (
@@ -503,6 +506,10 @@ export default async function LocalizedLearnSlugPage({
                   </div>
                 </section>
               ))}
+
+              {article.comparisonTable && (
+                <ComparisonTableSection table={article.comparisonTable} locale={resolvedLocale} renderText={renderArticleText} />
+              )}
 
               <section className="relative overflow-hidden rounded-2xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-8 shadow-[0_18px_70px_rgba(0,0,0,0.18)]">
                 <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full border border-[var(--o-border-subtle)] opacity-50" />

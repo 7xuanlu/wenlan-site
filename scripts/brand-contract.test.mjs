@@ -405,16 +405,31 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.notEqual(memoryTypesStart, -1);
   assert.match(
     article,
-    /title:\s*"Karpathy LLM Wiki: Build a Source-Backed AI Knowledge Base"/,
+    /title:\s*"Karpathy's LLM Wiki: What It Is and How to Build One"/,
   );
   assert.match(
     article,
-    /metaTitle:\s*"Karpathy LLM Wiki & AI Knowledge Base \| Wenlan"/,
+    /metaTitle:\s*"Karpathy LLM Wiki: What It Is & How to Build One"/,
   );
   assert.match(article, /publishedAt:\s*"2026-06-24"/);
-  assert.match(article, /updatedAt:\s*"2026-09-13"/);
-  assert.match(article, /heading:\s*"The Karpathy LLM Wiki pattern"/);
+  assert.match(article, /updatedAt:\s*"2026-10-06"/);
+  assert.match(article, /heading:\s*"What Karpathy's LLM Wiki is"/);
   assert.match(article, /does not imply that Karpathy endorses Wenlan/);
+  assert.match(article, /heading:\s*"The three jobs: ingest, query, lint"/);
+  assert.match(article, /heading:\s*"LLM wiki vs RAG"/);
+  assert.match(article, /RAG retrieves source chunks/);
+  assert.match(article, /id:\s*"build-an-llm-wiki-with-claude-code"/);
+  assert.match(article, /heading:\s*"The CLAUDE.md schema to copy"/);
+  assert.match(article, /CLAUDE\.md for Claude Code or AGENTS\.md for Codex/);
+  assert.match(article, /figure:\s*"llm-wiki-architecture"/);
+  assert.match(article, /figure:\s*"llm-wiki-vs-rag"/);
+  assert.match(article, /id:\s*"llm-wiki-implementations"/);
+  assert.match(article, /"AgriciDaniel\/claude-obsidian"/);
+  assert.match(article, /index\.md/);
+  assert.match(article, /log\.md/);
+  assert.match(article, /## My notes/);
+  assert.match(article, /heading:\s*"Where a do-it-yourself LLM wiki breaks"/);
+  assert.match(article, /without overwriting your edits/);
   assert.match(article, /heading:\s*"The LLM-wiki workflow in Wenlan"/);
   assert.match(article, /id:\s*"the-five-minute-llm-wiki-protocol"/);
   assert.match(article, /\/brief <topic>/);
@@ -423,38 +438,10 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.match(article, /\/handoff/);
   assert.match(article, /\/distill <topic>/);
   assert.match(article, /\/pages <topic>/);
-  assert.match(article, /heading:\s*"How to verify the loop"/);
-  assert.match(article, /source IDs or citations/);
-  assert.match(article, /heading:\s*"A minimum LLM-wiki starter schema"/);
-  assert.match(article, /Purpose and scope/);
-  assert.match(article, /Immutable source boundary/);
-  assert.match(article, /Naming and linking rules/);
-  assert.match(article, /Ingest, query, lint, and maintenance log/);
-  assert.match(article, /CLAUDE\.md or AGENTS\.md/);
-  assert.match(article, /load on demand/);
-  assert.match(article, /heading:\s*"A small acceptance test before real use"/);
-  assert.match(article, /Ingest one harmless source/);
-  assert.match(article, /Answer one question and cite the source/);
-  assert.match(article, /Change the source/);
-  assert.match(article, /stale or review/);
-  assert.match(article, /Wenlan does not require a user-authored Page schema/);
-  assert.match(article, /heading:\s*"Failure modes and repairs"/);
-  assert.match(article, /context bloat/i);
-  assert.match(article, /stale links and contradictions/i);
-  assert.match(article, /human-authored pages/i);
-  assert.match(
-    article,
-    /heading:\s*"LLM wiki vs RAG, Obsidian, and agent memory"/,
-  );
-  assert.match(article, /RAG retrieves source chunks/i);
-  assert.match(article, /Obsidian is a human-owned vault/i);
-  assert.match(article, /agent memory preserves reusable context/i);
-  assert.match(article, /source document[\s\S]*atomic memory[\s\S]*maintained page/);
+  assert.match(article, /comparisonTable:\s*\{\s*competitorName:\s*"DIY folder \+ CLAUDE\.md"/);
   assert.match(article, /does not replace codebase search/);
-  assert.match(article, /current source code/);
   assert.match(article, /href:\s*"#worked-example"/);
   assert.match(article, /href:\s*"\/docs\/daily-workflow"/);
-  assert.match(article, /href:\s*"\/docs\/review-and-trust"/);
   assert.match(article, /href:\s*"\/learn\/migrate-obsidian-vault-to-llm-wiki"/);
   assert.match(article, /https:\/\/github\.com\/7xuanlu\/wenlan#what-does-wenlan-build/);
   assert.match(article, /https:\/\/github\.com\/7xuanlu\/wenlan#daily-workflow/);
@@ -566,7 +553,7 @@ test("AI work memory comparison answers the knowledge-base role question directl
     );
   }
 
-  const page = await readRepo("src/app/learn/[slug]/page.tsx");
+  const page = await readRepo("src/components/learn/learn-figures.tsx");
   assert.match(page, /Practical dimensions\./);
   assert.doesNotMatch(page, /Quantified dimensions\./);
 });

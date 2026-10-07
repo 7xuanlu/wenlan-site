@@ -151,215 +151,265 @@ const zhTWArticles = {
   },
   "distilled-wiki-pages-ai-memory": {
     slug: "distilled-wiki-pages-ai-memory",
-    eyebrow: "概念",
+    eyebrow: "教學",
     category: "Concepts",
-    title: "Karpathy LLM Wiki：如何搭建有來源的 AI 知識庫",
+    title: "Karpathy LLM Wiki 是什麼？用 Claude Code 自己做一個",
     description:
-      "Karpathy LLM Wiki 模式把可信來源、原子知識與維護頁面分開，建立讓 AI 代理按需讀取的知識庫。",
-    metaTitle: "Karpathy LLM Wiki 與 AI 知識庫 | Wenlan",
+      "用圖解說明 Andrej Karpathy 的 LLM Wiki、大家實際在用的現成實作，以及可直接複製的 Claude Code 設定。",
+    metaTitle: "Karpathy LLM Wiki 是什麼？用 Claude Code 自己做 | Wenlan",
     metaDescription:
-      "了解 Karpathy 提出的 LLM Wiki 架構：把可信來源、原子知識與可維護頁面分開，並搞懂它和 RAG 的差異。包含來源頁面設計、Obsidian 整合、引用驗證與持續更新方法，建立 AI 代理可按需讀取的知識庫。",
+      "圖解 Karpathy 的 LLM Wiki：和 RAG 差在哪、最多人用的現成實作，以及可直接複製的 Claude Code 設定與 CLAUDE.md 範本。",
     keywords: [
-      "LLM Wiki 知識庫",
+      "LLM Wiki",
       "Karpathy LLM Wiki",
       "Andrej Karpathy LLM Wiki",
+      "LLM Wiki 是什麼",
+      "LLM Wiki 如何使用",
+      "LLM Wiki 教學",
+      "Claude Code LLM Wiki",
+      "LLM Wiki CLAUDE.md",
+      "Obsidian LLM Wiki",
+      "LLM Wiki vs RAG",
       "AI 知識庫",
-      "本地 AI 知識庫",
-      "RAG vs LLM Wiki",
-      "LLM Wiki 搭建",
-      "AI 維護知識庫",
-      "有來源的知識庫",
-      "Claude Code 知識庫",
-      "Obsidian AI 知識庫",
       "Wenlan 文瀾",
     ],
     publishedAt: "2026-07-04",
-    updatedAt: "2026-09-16",
+    updatedAt: "2026-10-06",
     author: "Qi-Xuan Lu",
-    readingTime: "9 分鐘閱讀",
-    audience: "正在搭建可由 AI 代理讀取、更新並檢查來源的本地知識庫的繁體中文使用者",
+    readingTime: "7 分鐘閱讀",
+    audience: "讀過 Karpathy 的 LLM Wiki，想用 Claude Code、Codex 或 Obsidian 實際做出一個的人",
     heroBullets: [
-      "Karpathy LLM Wiki 模式維護可重用的目前答案，不把聊天紀錄、檢索片段或筆記直接當成成品知識。",
-      "可靠架構會分開原始來源、原子事實、維護頁面與按需檢索。",
-      "頁面需要保留 source IDs、過期原因和可檢查的修訂，而不是靜默覆蓋。",
+      "LLM Wiki 是一個由 AI 根據你的來源持續更新的 Markdown 頁面資料夾，答案會累積，不必每次從頭整理。",
+      "它有三層（來源、wiki、schema）和三個工作（ingest、query、lint）。",
+      "多數人從現成專案開始；你也可以用 Claude Code 加一個空資料夾自己做。",
     ],
     sections: [
       {
-        heading: "Karpathy LLM Wiki 是什麼",
+        heading: "Karpathy 的 LLM Wiki 是什麼",
         body: [
-          "Andrej Karpathy 用 LLM Wiki 描述一種把原始知識整理成精選、互相連結頁面的模式，讓 AI 代理只在需要時載入相關內容。本文把他的公開說明當作可維護來源，不代表 Karpathy 為 Wenlan 背書。",
-          "實作上，LLM Wiki 是供 AI 代理使用、也讓人能檢查的維護型 AI 知識庫。它把文件、對話和檔案等來源整理成主題頁面，不必反覆重播整個資料庫或聊天紀錄。",
-          "它不只是讓 LLM 自動寫出一批 Markdown 筆記。真正有用的系統會把原始證據、可重用事實與目前解釋分開，保留來源和更新狀態；即使讀者不安裝 Wenlan，這套判斷標準也能用來評估自己的知識庫。",
+          "2026 年 4 月，Andrej Karpathy 在 GitHub gist 發表了〈LLM Wiki〉。做法是：不要每次提問都讓 AI 重新搜尋原始文件，而是讓它每份來源只讀一次，把學到的內容整理進互相連結的 Markdown 頁面。之後的問題就從這些頁面開始。",
+          "本文引用 Karpathy 的公開說明作為這個模式的來源，不代表 Karpathy 為 Wenlan 背書。",
         ],
+        figure: "llm-wiki-architecture",
         link: {
-          label: "先試完整範例，不必安裝",
+          label: "先看完整範例，不必安裝",
           href: "#worked-example",
         },
       },
       {
-        heading: "可靠 AI 知識庫的四層架構",
+        heading: "三個工作：ingest、query、lint",
         body: [
-          "最小可維護架構包含四層：Raw Sources 保存可檢查的原始材料；Atomic Knowledge 保存一次決策、修正或經驗；Wiki Pages 彙整目前答案；Schema 與 Index 負責按主題定位所需內容。",
-          "常見流程可以概括為 Ingest、Query、Lint：Ingest 註冊來源而不急著改寫結論；Query 只取目前問題所需的頁面和證據；Lint 檢查缺少來源、重複、矛盾、過期依賴與不可維護的頁面。",
+          "對 wiki 的每一次修改，都屬於這三個工作之一。分開做，提問就不會偷偷改寫頁面。",
         ],
         bullets: [
-          "Raw Sources：保存文件、網頁、檔案和對話等原始材料。",
-          "Atomic Knowledge：保留一個完整事實、決策、經驗或修正及其來源。",
-          "Wiki Pages：把相關證據編成一個可讀、可維護的目前答案。",
-          "Schema 與 Index：記錄主題、依賴和狀態，並只載入相關內容。",
+          "Ingest（加入來源）：讀新來源、寫一頁摘要、更新受影響的頁面，再更新 index.md 和 log.md。",
+          "Query（提問）：先讀 index.md，只打開需要的頁面，回答時附上連結。好的答案可以存成新頁面。",
+          "Lint（健康檢查）：找出互相矛盾的頁面、被新來源取代的說法、沒人連到的頁面，以及還沒有頁面的主題。",
         ],
       },
       {
-        heading: "LLM Wiki 知識庫和 RAG 有什麼不同",
+        heading: "LLM Wiki 和 RAG 的差別",
         body: [
-          "RAG 通常在提問時檢索原始片段；LLM Wiki 則維護可重複使用的答案、支援它的來源，以及需要刷新的狀態。知識庫可以在底層使用 RAG，但只有檢索還不會自動維護結論。",
-          "Obsidian 是由人掌控的資料庫和寫作介面，可以承載或查看 Markdown wiki 頁面；但把 vault 開放給代理讀取，不等於已經處理選擇性檢索、來源、過期狀態和自動修改邊界。兩者可以配合，不必互相取代。",
+          "RAG 每次提問都重新檢索來源片段，什麼都不保留，同樣的閱讀一再重做。LLM Wiki 只讀一次，留下可以打開檢查的頁面；代價是要維護，這就是 lint 的用途。大型 wiki 仍然可以先用搜尋找到對的頁面。",
         ],
-        bullets: [
-          "RAG：為這次問題尋找相關來源片段。",
-          "LLM Wiki：維護日後還能重用的答案、引用和刷新狀態。",
-          "Obsidian：保留人可讀、可編輯的 Markdown 知識面。",
-          "Agent memory：保存工作中可重用的事實和決策，作為頁面原料之一。",
+        figure: "llm-wiki-vs-rag",
+      },
+      {
+        id: "llm-wiki-implementations",
+        heading: "現成的 LLM Wiki 實作",
+        body: [
+          "多數人是從現成專案開始。GitHub 上名稱或說明含「llm-wiki」的 repo 超過 6,400 個，大多在 2026 年 4 月之後建立；星數最多的 nashsu/llm_wiki 和 claude-obsidian，都超過 15,000 顆星（2026 年 10 月）。",
         ],
+        table: {
+          columns: ["專案", "是什麼", "適合你，如果你"],
+          rows: [
+            ["Karpathy 的 gist", "原始說明，不是軟體", "想自己動手設定（見下方）"],
+            ["nashsu/llm_wiki", "跨平台桌面 app", "想要一個獨立 app 整理文件"],
+            ["AgriciDaniel/claude-obsidian", "Claude Code + Obsidian 的設定", "筆記本來就放在 Obsidian"],
+            ["Astro-Han/karpathy-llm-wiki", "給 Claude Code、Cursor、Codex 的 Agent Skills 套件", "想把這個模式裝成 AI 技能"],
+            ["Wenlan", "桌面 app，附 MCP server", "同時用好幾個 AI 工具，希望頁面保持最新、又不會蓋掉你的修改"],
+          ],
+        },
+      },
+      {
+        id: "build-an-llm-wiki-with-claude-code",
+        heading: "用 Claude Code 15 分鐘做一個",
+        body: [
+          "你需要 Claude Code（或 Codex、Cursor 等能改檔案的 AI 工具）和一個空資料夾。建立下面的結構並執行 git init，AI 改了什麼都看得到、也能復原。想閱讀頁面，用 Obsidian 或任何 Markdown 編輯器打開資料夾即可。",
+        ],
+        code: {
+          label: "資料夾結構",
+          code: [
+            "my-wiki/",
+            "  CLAUDE.md        # schema：AI 要遵守的規則",
+            "  raw/             # 你的來源；AI 不會修改",
+            "  wiki/",
+            "    index.md       # 每頁一行",
+            "    log.md         # 每次 ingest、query、lint 一行",
+            "    sources/       # 每份來源一頁摘要",
+            "    topics/        # 每個主題、人物或概念一頁",
+          ].join("\n"),
+        },
         link: {
-          label: "把 Obsidian vault 遷移成有來源的 LLM Wiki（英文）",
+          label: "已經有 Obsidian vault？把它變成 LLM Wiki",
           href: "/learn/migrate-obsidian-vault-to-llm-wiki",
+        },
+      },
+      {
+        heading: "可直接複製的 CLAUDE.md",
+        body: [
+          "整個系統就是這份檔案：Claude Code 讀 CLAUDE.md，Codex 則存成 AGENTS.md。「My notes」這條規則，能防止下一次更新蓋掉你手動修正過的段落。",
+          "接著在 Claude Code 裡輸入 ingest raw/<檔名>、query <問題> 或 lint。先放兩三份同一主題的來源，每做完一個工作就看一次 git diff。",
+        ],
+        code: {
+          label: "CLAUDE.md",
+          code: [
+            "# LLM Wiki",
+            "",
+            "This folder is a wiki you maintain from my sources.",
+            "",
+            "## Layout",
+            "- raw/: my sources. Read them. Never edit, move, or delete them.",
+            "- wiki/sources/: one summary page per source, named after the source.",
+            "- wiki/topics/: one page per topic, person, or idea.",
+            "- wiki/index.md: every page, one line each: [[page]] - summary.",
+            "- wiki/log.md: one line per job: ## [YYYY-MM-DD] ingest | <title>",
+            "",
+            "## Page rules",
+            "- Start each page with a two- or three-sentence summary.",
+            "- Every claim links to the source page it came from.",
+            "- Link related pages with [[wiki links]].",
+            "- If a new source contradicts a page, say so on the page and cite both.",
+            "- Never rewrite text under a \"## My notes\" heading. I write that part.",
+            "- Write pages in Traditional Chinese.",
+            "",
+            "## Jobs",
+            "- ingest <file>: summarize it, update affected topic pages,",
+            "  update index.md, and log it.",
+            "- query <question>: read index.md first, open only the pages you need,",
+            "  and answer with links. Offer to save a useful answer as a page.",
+            "- lint: list contradictions, outdated claims, orphan pages, and",
+            "  missing pages. Fix only what I approve.",
+          ].join("\n"),
         },
       },
       ...workedExampleSections("zh-TW"),
       {
-        heading: "一份最小可用的 LLM Wiki Schema",
+        heading: "自己做的 LLM Wiki 會在哪裡卡住",
         body: [
-          "讓固定載入的合約保持精簡。CLAUDE.md 或 AGENTS.md 只需說明知識庫的用途、不可靜默改變的邊界，以及需要時才按需載入的操作流程；不要把整個 wiki 或所有維護指令都塞進每次 context。",
-          "這是工具無關的資訊與維護合約，不強迫特定資料夾或產品儲存格式；可以調整名稱，但每個邊界都應該能被檢查。",
+          "上面的設定適合一個人、一個 AI 工具、幾十份來源。規模變大後：",
         ],
         bullets: [
-          "用途與範圍：哪些重複問題或決策屬於這個 wiki，哪些不屬於。",
-          "不可變來源邊界：原始證據放在哪裡，以及自動化絕不能改寫哪些檔案。",
-          "頁面所有權：哪些頁面由機器維護、人擁有，或只能透過審查修改。",
-          "命名與連結規則：穩定主題、別名、頁面連結和最小 routing index。",
-          "引用要求：重要說法必須能回到可檢查來源。",
-          "Ingest、Query、Lint 與維護紀錄：分開按需載入的流程，加上 append-only 變更紀錄。",
-          "過期與審查行為：來源改變、證據衝突或人擁有文字時要怎麼處理。",
+          "來源變了，頁面沒變。要等下一次 lint 才知道哪些頁面過時。",
+          "除非每個 AI 工具每次都遵守「My notes」規則，否則你手動改過的內容會被蓋掉。",
+          "每個 AI 工具都要一份自己的規則檔，久了內容就不一致。",
+          "超過幾百頁後，index.md 會長到塞不進上下文。",
+          "AI 對話裡的決定，不手動複製就進不了 raw/。",
+        ],
+      },
+      {
+        id: "the-five-minute-llm-wiki-protocol",
+        heading: "在 Wenlan 中使用 LLM Wiki",
+        body: [
+          "Wenlan 是一個開源 app，替你執行同樣的模式。它把文件、筆記和 AI 對話整理成附來源連結的頁面，來源變了就更新頁面，而且不會蓋掉你的修改。Claude Code、Codex 和其他 AI 工具讀的是同一組頁面。",
+          "/capture 存下對話中的決定，/distill 建立或更新主題頁面，/pages 打開頁面，/brief 和 /recall 只載入下一次對話需要的內容。",
         ],
         code: {
-          label: "精簡 client 合約",
+          label: "Wenlan 工作流——需要已安裝並連線的客戶端",
           code: [
-            "# LLM Wiki",
-            "用途：<這個 wiki 維護的重複決策>",
-            "來源：<不可變來源邊界>",
-            "頁面：<所有權、命名、連結、引用>",
-            "索引：<最小主題路由；頁面按需載入>",
-            "流程：ingest | query | lint | review",
-            "紀錄：<append-only 維護紀錄>",
-            "過期規則：<來源改變 -> stale 或 review>",
+            "/brief <topic>",
+            "/recall <question>",
+            "/capture <decision + why>",
+            "/handoff",
+            "/distill <topic>",
+            "/pages <topic>",
           ].join("\n"),
-        },
-      },
-      {
-        heading: "正式使用前的最小驗收測試",
-        body: [
-          "檔案存在不代表 template 已經可用。先用一個無風險主題做端到端測試，而且必須包含一次來源變更，再匯入私人或重要資料。",
-          "這套驗收可用於資料夾加 prompt、Obsidian 工作流或專門的 LLM Wiki 工具；預期結果是人能檢查的證據，不只是一段流暢回答。",
-        ],
-        bullets: [
-          "匯入一份無風險來源，確認原始內容沒有被改寫。",
-          "回答一個問題，並替重要說法引用來源。",
-          "執行 lint，確認缺少引用、斷鏈或重複能被看見。",
-          "修改來源，再問一次相同問題。",
-          "確認舊答案進入 stale 或 review，而不是被靜默覆蓋。",
-        ],
-      },
-      {
-        heading: "如何搭建會持續更新的 AI 知識庫",
-        body: [
-          "先選一個低風險的小主題，不要一開始就匯入整個 vault。註冊可檢查的來源，捕捉一條完整事實，再把相關內容蒸餾成主題頁面；接著用同一問題重新檢索，並從頁面回到 source IDs 檢查證據。",
-          "發布第一版不是結束。來源改變時，系統應該標記受影響頁面、記錄 stale reason，並產生可審查的修訂；對於由人掌控的文字，自動化不應靜默覆蓋。",
-        ],
-        code: {
-          label: "Wenlan 工作流：需先安裝並連接客戶端",
-          code: `/brief <主題>
-/recall <問題>
-/capture <結論 + 原因>
-/handoff
-/distill <主題>
-/pages <主題>`,
         },
         link: {
           label: "查看完整日常工作流",
           href: "/docs/daily-workflow",
         },
       },
-      {
-        heading: "如何驗證知識庫真的可用",
-        body: [
-          "不要只看命令是否回傳成功。真正的驗收是：下一次會話能找回正確內容，人能在聊天之外閱讀頁面，而且重要說法可以追溯到來源。",
-          "如果檢查失敗，先維持測試內容的低風險範圍，修復連線、來源或重複問題，再用同一主題重測；不要靠繼續生成更多頁面掩蓋故障。",
-        ],
-        bullets: [
-          "相同主題可以再次找到剛才保存的事實。",
-          "頁面是可讀 Markdown，並顯示重要說法對應的 source IDs。",
-          "後續檢索只載入相關頁面或來源片段，而不是整個資料庫。",
-          "來源變化會產生可檢查的過期原因或修訂，不會靜默覆蓋。",
-          "Lint 能揭露缺少來源、重複、矛盾或過期依賴。",
-        ],
-        link: {
-          label: "查看審查與修復流程",
-          href: "/docs/review-and-trust",
-        },
-      },
-      {
-        heading: "Wenlan 如何實作本地 LLM Wiki",
-        body: [
-          "Wenlan 把 Sources、Memories 和 Pages 分成三種耐久角色：Sources 保存原始材料，Memories 保存工作中產生的原子事實，Pages 編成有來源的目前解釋。本地 daemon 負責檢索，Markdown 頁面和 git 歷史讓結果保持可見。",
-          "每個蒸餾頁面都要保留 source IDs。頁面可以隨著新證據過期、刷新或進入審查；記憶在這裡保存支撐頁面的知識與狀態，方便回查與更新。",
-          "Wenlan 不要求使用者自訂 Page schema。typed Memory fields 與內建 Page 規則已管理來源、引用、刷新、所有權和審查；上面的 starter schema 是可攜的 client 與流程驗收合約。",
-        ],
-        link: {
-          label: "檢查有來源頁面模型",
-          href: "/learn/source-backed-wiki-pages-ai-work",
-        },
-      },
-      {
-        heading: "什麼時候不需要 LLM Wiki",
-        body: [
-          "一次性聊天、很小且長期穩定的文件集，或團隊已經維護良好的普通 wiki，不一定需要額外系統。目前程式碼、測試結果和工具官方文件也永遠比知識庫裡的舊解釋更權威。",
-          "當多個 AI 工具需要共享同一套檢索、來源、交接和審查規則，而且答案會隨專案持續變化時，維護型 LLM Wiki 才開始產生獨立價值。",
-        ],
-        link: {
-          label: "查看 Wenlan 的層級邊界",
-          href: "/docs/architecture",
-        },
-      },
     ],
+    comparisonTable: {
+      competitorName: "自建資料夾 + CLAUDE.md",
+      rows: [
+        {
+          dimension: "設定",
+          wenlan: "安裝 app 並連上你的 AI 工具",
+          competitor: "一個資料夾、一份 schema 檔和 git",
+        },
+        {
+          dimension: "來源改變時",
+          wenlan: "你要求時更新，或在背景自動更新",
+          competitor: "下一次 lint 才發現（如果有跑）",
+        },
+        {
+          dimension: "你自己的修改",
+          wenlan: "保留；更新不會蓋掉你改過的頁面",
+          competitor: "只有 AI 遵守 schema 規則時才保留",
+        },
+        {
+          dimension: "多個 AI 工具",
+          wenlan: "Claude Code、Codex 等共用同一個 wiki",
+          competitor: "每個工具一份規則檔",
+        },
+        {
+          dimension: "AI 對話當作來源",
+          wenlan: "可以直接從對話存下決定",
+          competitor: "手動複製到 raw/",
+        },
+      ],
+    },
     faqs: [
       {
-        question: "Karpathy LLM Wiki 的核心想法是什麼？",
+        question: "Karpathy 的 LLM Wiki 是什麼？",
         answer:
-          "Andrej Karpathy 描述的是一組經過整理、彼此連結，並能由代理按需讀取的個人 wiki 頁面。重點是維護有用頁面及其結構，而不是每次載入沒有區分的完整資料庫；引用他的說明不代表他為 Wenlan 背書。",
+          "Andrej Karpathy 描述了一種由 AI 根據你的來源撰寫並維護的個人 wiki：每份來源只讀一次，更新一組互相連結的 Markdown 頁面，之後的問題就從這些頁面回答。引用他的說明不代表他為 Wenlan 背書。",
       },
       {
         question: "LLM Wiki 和 RAG 是同一種東西嗎？",
         answer:
-          "不是。RAG 在提問時檢索來源片段；LLM Wiki 維護可重用的答案、引用和刷新狀態。LLM Wiki 可以使用 RAG，但檢索本身不會維護答案。",
+          "不是。RAG 每次提問都重新搜尋原始文件，什麼都不保留；LLM Wiki 只讀一次來源，保留你可以打開檢查的頁面。大型 wiki 仍然可以用搜尋來找頁面。",
       },
       {
-        question: "Obsidian 可以直接當 AI 知識庫嗎？",
+        question: "怎麼用 Claude Code 做 LLM Wiki？",
         answer:
-          "Obsidian 很適合當作由人掌控的 Markdown vault 和閱讀介面。要讓它成為代理可依賴的知識庫，還需要選擇性檢索、來源、過期處理和安全的自動修改邊界。",
+          "建立一個資料夾，raw/ 放來源、wiki/ 放頁面，加一份 CLAUDE.md 說明結構、頁面規則和 ingest、query、lint 三個工作，再執行 git init。在資料夾裡啟動 Claude Code，先加入兩三份來源。",
       },
       {
-        question: "本地 AI 知識庫一定要匯入所有筆記嗎？",
+        question: "做 LLM Wiki 一定要用 Obsidian 嗎？",
         answer:
-          "不用。先從一個會重複使用的小主題開始，只註冊必要來源並檢索最小相關集合。整庫注入會增加 token 成本、雜訊和過期內容風險。",
+          "不用。wiki 就是純 Markdown，任何編輯器都能用。Obsidian 適合拿來閱讀：wiki 連結可以點，圖譜檢視能看出頁面之間的關係。",
       },
       {
-        question: "Wenlan 的蒸餾頁面只是摘要嗎？",
+        question: "Karpathy 的 LLM Wiki 在 GitHub 哪裡？",
         answer:
-          "不是。摘要通常壓縮單一來源；蒸餾頁面會組合相關事實與來源，保留 source IDs、修訂狀態和過期原因，並能隨著新證據更新。",
+          "它是 karpathy 在 GitHub gist 上的一篇〈LLM Wiki〉，連結在下方參考資料。它是模式的說明，不是可以安裝的 repo；nashsu/llm_wiki、claude-obsidian 等專案把它做成了軟體。",
+      },
+      {
+        question: "LLM Wiki 能取代程式碼搜尋或官方文件嗎？",
+        answer:
+          "不能。LLM Wiki 不能取代程式碼搜尋、目前的原始碼、測試結果或工具本身的文件，軟體現在怎麼運作仍以這些為準。同樣的主題在很多次對話或多個工具之間反覆出現時，它才值得。",
       },
     ],
     officialReferences: [
+      {
+        label: "Karpathy 的 LLM Wiki 說明",
+        href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      },
+      {
+        label: "nashsu/llm_wiki 桌面 app",
+        href: "https://github.com/nashsu/llm_wiki",
+      },
+      {
+        label: "Astro-Han/karpathy-llm-wiki Agent Skills",
+        href: "https://github.com/Astro-Han/karpathy-llm-wiki",
+      },
+      {
+        label: "AgriciDaniel/claude-obsidian",
+        href: "https://github.com/AgriciDaniel/claude-obsidian",
+      },
       {
         label: "Wenlan 的 Source、Memory 與 Page 模型",
         href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
@@ -367,22 +417,6 @@ const zhTWArticles = {
       {
         label: "Wenlan 日常工作流",
         href: "https://github.com/7xuanlu/wenlan#daily-workflow",
-      },
-      {
-        label: "Karpathy 的 LLM Wiki 說明",
-        href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
-      },
-      {
-        label: "jackwener LLM Wiki 實作",
-        href: "https://github.com/jackwener/llm-wiki",
-      },
-      {
-        label: "LLM Wiki CLAUDE.md template",
-        href: "https://hjarni.com/blog/llm-wiki-claude-md-template",
-      },
-      {
-        label: "LLM Wiki v2 提案",
-        href: "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2",
       },
     ],
     relatedSlugs: [
@@ -397,8 +431,8 @@ const zhTWArticles = {
       "setup-agent-knowledge-base-for-coding-agents",
     ],
     cta: {
-      heading: "搭建可維護的本地 LLM Wiki",
-      body: "用 Wenlan 把來源與工作事實蒸餾成可檢查、可刷新，並讓下一個 AI 會話按需讀取的知識頁面。",
+      heading: "讓 wiki 自己保持最新",
+      body: "Wenlan 把你的文件、筆記和 AI 對話整理成附來源連結的頁面，來源變了就更新，而且不會蓋掉你的修改。",
     },
   },
   "source-backed-wiki-pages-ai-work": {
@@ -3548,212 +3582,263 @@ const zhCNArticles = {
   },
   "distilled-wiki-pages-ai-memory": {
     ...zhTWArticles["distilled-wiki-pages-ai-memory"],
-    title: "Karpathy LLM Wiki：如何搭建有来源的 AI 知识库",
+    eyebrow: "教程",
+    title: "Karpathy LLM Wiki 是什么？用 Claude Code 自己搭一个",
     description:
-      "Karpathy LLM Wiki 模式把可信来源、原子知识与维护页面分开，建立让 AI 代理按需读取的知识库。",
-    metaTitle: "Karpathy LLM Wiki 与 AI 知识库 | Wenlan",
+      "用图解说明 Andrej Karpathy 的 LLM Wiki、大家实际在用的现成实现，以及可直接复制的 Claude Code 配置。",
+    metaTitle: "Karpathy LLM Wiki 是什么？用 Claude Code 自己搭 | Wenlan",
     metaDescription:
-      "了解 Karpathy 提出的 LLM Wiki 架构：把可信来源、原子知识与可维护页面分开，并搞懂它和 RAG 的区别。包含来源页面设计、Obsidian 集成、引用校验与持续更新方法，建立 AI 代理可按需读取的知识库。",
+      "图解 Karpathy 的 LLM Wiki：和 RAG 差在哪、最多人用的现成实现，以及可直接复制的 Claude Code 配置与 CLAUDE.md 模板。",
     keywords: [
-      "LLM Wiki 知识库",
+      "LLM Wiki",
       "Karpathy LLM Wiki",
       "Andrej Karpathy LLM Wiki",
+      "LLM Wiki 是什么",
+      "LLM Wiki 怎么用",
+      "LLM Wiki 教程",
+      "Claude Code LLM Wiki",
+      "LLM Wiki CLAUDE.md",
+      "Obsidian LLM Wiki",
+      "LLM Wiki vs RAG",
       "AI 知识库",
-      "本地 AI 知识库",
-      "RAG vs LLM Wiki",
-      "LLM Wiki 搭建",
-      "AI 维护知识库",
-      "有来源的知识库",
-      "Claude Code 知识库",
-      "Obsidian AI 知识库",
       "Wenlan 文澜",
     ],
     publishedAt: "2026-07-04",
-    updatedAt: "2026-09-16",
-    readingTime: "9 分钟阅读",
-    audience: "正在搭建可由 AI 代理读取、更新并检查来源的本地知识库的中文用户",
+    updatedAt: "2026-10-06",
+    readingTime: "7 分钟阅读",
+    audience: "读过 Karpathy 的 LLM Wiki，想用 Claude Code、Codex 或 Obsidian 真正搭出一个的人",
     heroBullets: [
-      "Karpathy LLM Wiki 模式维护可复用的当前答案，不把聊天记录、检索片段或笔记直接当成成品知识。",
-      "可靠架构会分开原始来源、原子事实、维护页面与按需检索。",
-      "页面需要保留 source IDs、变旧原因和可检查的修订，而不是静默覆盖。",
+      "LLM Wiki 是一个由 AI 根据你的来源持续更新的 Markdown 页面文件夹，答案会积累，不必每次从头整理。",
+      "它有三层（来源、wiki、schema）和三个任务（ingest、query、lint）。",
+      "多数人从现成项目开始；你也可以用 Claude Code 加一个空文件夹自己搭。",
     ],
     sections: [
       {
-        heading: "Karpathy LLM Wiki 是什么",
+        heading: "Karpathy 的 LLM Wiki 是什么",
         body: [
-          "Andrej Karpathy 用 LLM Wiki 描述一种把原始知识整理成精选、互相连接页面的模式，让 AI 代理只在需要时加载相关内容。本文把他的公开说明作为可维护来源，不代表 Karpathy 为 Wenlan 背书。",
-          "实现上，LLM Wiki 是给 AI 代理使用、也让人能够检查的维护型 AI 知识库。它把文档、对话和文件等来源整理成主题页面，不必反复重放整个资料库或聊天历史。",
-          "它不只是让 LLM 自动写一批 Markdown 笔记。真正有用的系统会把原始证据、可复用事实与当前解释分开，保留来源和更新状态；即使读者不安装 Wenlan，这套判断标准也能用来评估自己的知识库。",
+          "2026 年 4 月，Andrej Karpathy 在 GitHub gist 发表了《LLM Wiki》。做法是：不要每次提问都让 AI 重新搜索原始文档，而是让它每份来源只读一次，把学到的内容整理进互相链接的 Markdown 页面。之后的问题就从这些页面开始。",
+          "本文引用 Karpathy 的公开说明作为这个模式的来源，不代表 Karpathy 为 Wenlan 背书。",
         ],
+        figure: "llm-wiki-architecture",
         link: {
-          label: "先试完整示例，不必安装",
+          label: "先看完整示例，不必安装",
           href: "#worked-example",
         },
       },
       {
-        heading: "一个可靠 AI 知识库的四层架构",
+        heading: "三个任务：ingest、query、lint",
         body: [
-          "最小可维护架构包含四层：Raw Sources 保存可检查的原始材料；Atomic Knowledge 保存一次决策、纠正或经验；Wiki Pages 汇总当前答案；Schema 与 Index 负责按主题定位所需内容。",
-          "常见流程可以概括为 Ingest、Query、Lint：Ingest 注册来源而不急着改写结论；Query 只取当前问题所需的页面和证据；Lint 检查缺失来源、重复、矛盾、过期依赖与不可维护的页面。",
+          "对 wiki 的每一次修改，都属于这三个任务之一。分开做，提问就不会偷偷改写页面。",
         ],
         bullets: [
-          "Raw Sources：保存文档、网页、文件和对话等原始材料。",
-          "Atomic Knowledge：保留一个完整事实、决策、经验或纠正及其来源。",
-          "Wiki Pages：把相关证据编成一个可读、可维护的当前答案。",
-          "Schema 与 Index：记录主题、依赖和状态，并只加载相关内容。",
+          "Ingest（加入来源）：读新来源、写一页摘要、更新受影响的页面，再更新 index.md 和 log.md。",
+          "Query（提问）：先读 index.md，只打开需要的页面，回答时附上链接。好的答案可以存成新页面。",
+          "Lint（健康检查）：找出互相矛盾的页面、被新来源取代的说法、没有被链接的页面，以及还没有页面的主题。",
         ],
       },
       {
-        heading: "LLM Wiki 知识库和 RAG 有什么不同",
+        heading: "LLM Wiki 和 RAG 的区别",
         body: [
-          "RAG 通常在提问时检索原始片段；LLM Wiki 则维护一个可重复使用的答案、支持它的来源以及需要刷新的状态。知识库可以在底层使用 RAG，但只有检索还不会自动维护结论。",
-          "Obsidian 是人拥有的资料库和写作界面，可以承载或查看 Markdown wiki 页面；但开放 vault 给代理读取，并不等于已经处理选择性检索、来源、过期状态和自动修改边界。两者可以配合，不需要互相替代。",
+          "RAG 每次提问都重新检索来源片段，什么都不保留，同样的阅读一再重做。LLM Wiki 只读一次，留下可以打开检查的页面；代价是要维护，这就是 lint 的用途。大型 wiki 仍然可以先用搜索找到对的页面。",
         ],
-        bullets: [
-          "RAG：为这次问题寻找相关来源片段。",
-          "LLM Wiki：维护以后还能复用的答案、引用和刷新状态。",
-          "Obsidian：保留人可读、可编辑的 Markdown 知识面。",
-          "Agent memory：保存工作中可复用的事实和决策，作为页面原料之一。",
+        figure: "llm-wiki-vs-rag",
+      },
+      {
+        id: "llm-wiki-implementations",
+        heading: "现成的 LLM Wiki 实现",
+        body: [
+          "多数人是从现成项目开始。GitHub 上名称或描述含“llm-wiki”的仓库超过 6,400 个，大多在 2026 年 4 月之后创建；星数最多的 nashsu/llm_wiki 和 claude-obsidian，都超过 15,000 颗星（2026 年 10 月）。",
         ],
+        table: {
+          columns: ["项目", "是什么", "适合你，如果你"],
+          rows: [
+            ["Karpathy 的 gist", "原始说明，不是软件", "想自己动手配置（见下方）"],
+            ["nashsu/llm_wiki", "跨平台桌面 app", "想要一个独立 app 整理文档"],
+            ["AgriciDaniel/claude-obsidian", "Claude Code + Obsidian 的配置", "笔记本来就放在 Obsidian"],
+            ["Astro-Han/karpathy-llm-wiki", "给 Claude Code、Cursor、Codex 的 Agent Skills 套件", "想把这个模式装成 AI 技能"],
+            ["Wenlan", "桌面 app，附 MCP server", "同时用好几个 AI 工具，希望页面保持最新、又不会覆盖你的修改"],
+          ],
+        },
+      },
+      {
+        id: "build-an-llm-wiki-with-claude-code",
+        heading: "用 Claude Code 15 分钟搭一个",
+        body: [
+          "你需要 Claude Code（或 Codex、Cursor 等能改文件的 AI 工具）和一个空文件夹。建好下面的结构并执行 git init，AI 改了什么都看得到、也能恢复。想阅读页面，用 Obsidian 或任何 Markdown 编辑器打开文件夹即可。",
+        ],
+        code: {
+          label: "文件夹结构",
+          code: [
+            "my-wiki/",
+            "  CLAUDE.md        # schema：AI 要遵守的规则",
+            "  raw/             # 你的来源；AI 不会修改",
+            "  wiki/",
+            "    index.md       # 每页一行",
+            "    log.md         # 每次 ingest、query、lint 一行",
+            "    sources/       # 每份来源一页摘要",
+            "    topics/        # 每个主题、人物或概念一页",
+          ].join("\n"),
+        },
         link: {
-          label: "把 Obsidian vault 迁移成有来源的 LLM Wiki（英文）",
+          label: "已经有 Obsidian vault？把它变成 LLM Wiki",
           href: "/learn/migrate-obsidian-vault-to-llm-wiki",
+        },
+      },
+      {
+        heading: "可直接复制的 CLAUDE.md",
+        body: [
+          "整个系统就是这份文件：Claude Code 读 CLAUDE.md，Codex 则存成 AGENTS.md。“My notes”这条规则，能防止下一次更新覆盖你手动修正过的段落。",
+          "接着在 Claude Code 里输入 ingest raw/<文件名>、query <问题> 或 lint。先放两三份同一主题的来源，每做完一个任务就看一次 git diff。",
+        ],
+        code: {
+          label: "CLAUDE.md",
+          code: [
+            "# LLM Wiki",
+            "",
+            "This folder is a wiki you maintain from my sources.",
+            "",
+            "## Layout",
+            "- raw/: my sources. Read them. Never edit, move, or delete them.",
+            "- wiki/sources/: one summary page per source, named after the source.",
+            "- wiki/topics/: one page per topic, person, or idea.",
+            "- wiki/index.md: every page, one line each: [[page]] - summary.",
+            "- wiki/log.md: one line per job: ## [YYYY-MM-DD] ingest | <title>",
+            "",
+            "## Page rules",
+            "- Start each page with a two- or three-sentence summary.",
+            "- Every claim links to the source page it came from.",
+            "- Link related pages with [[wiki links]].",
+            "- If a new source contradicts a page, say so on the page and cite both.",
+            "- Never rewrite text under a \"## My notes\" heading. I write that part.",
+            "- Write pages in Simplified Chinese.",
+            "",
+            "## Jobs",
+            "- ingest <file>: summarize it, update affected topic pages,",
+            "  update index.md, and log it.",
+            "- query <question>: read index.md first, open only the pages you need,",
+            "  and answer with links. Offer to save a useful answer as a page.",
+            "- lint: list contradictions, outdated claims, orphan pages, and",
+            "  missing pages. Fix only what I approve.",
+          ].join("\n"),
         },
       },
       ...workedExampleSections("zh-CN"),
       {
-        heading: "一份最小可用的 LLM Wiki Schema",
+        heading: "自己搭的 LLM Wiki 会在哪里卡住",
         body: [
-          "让固定加载的契约保持精简。CLAUDE.md 或 AGENTS.md 只需说明知识库的用途、不可静默改变的边界，以及需要时才按需加载的操作流程；不要把整个 wiki 或所有维护指令都塞进每次 context。",
-          "这是工具无关的信息与维护契约，不强迫特定文件夹或产品存储格式；可以调整名称，但每个边界都应该能够检查。",
+          "上面的配置适合一个人、一个 AI 工具、几十份来源。规模变大后：",
         ],
         bullets: [
-          "用途与范围：哪些重复问题或决策属于这个 wiki，哪些不属于。",
-          "不可变来源边界：原始证据放在哪里，以及自动化绝不能改写哪些文件。",
-          "页面所有权：哪些页面由机器维护、人拥有，或只能通过审核修改。",
-          "命名与链接规则：稳定主题、别名、页面链接和最小 routing index。",
-          "引用要求：重要说法必须能够回到可检查来源。",
-          "Ingest、Query、Lint 与维护记录：分开按需加载的流程，加上 append-only 变更记录。",
-          "过期与审核行为：来源改变、证据冲突或人拥有文字时要如何处理。",
+          "来源变了，页面没变。要等下一次 lint 才知道哪些页面过时。",
+          "除非每个 AI 工具每次都遵守“My notes”规则，否则你手动改过的内容会被覆盖。",
+          "每个 AI 工具都要一份自己的规则文件，久了内容就不一致。",
+          "超过几百页后，index.md 会长到塞不进上下文。",
+          "AI 对话里的决定，不手动复制就进不了 raw/。",
+        ],
+      },
+      {
+        id: "the-five-minute-llm-wiki-protocol",
+        heading: "在 Wenlan 中使用 LLM Wiki",
+        body: [
+          "Wenlan 是一个开源 app，替你执行同样的模式。它把文档、笔记和 AI 对话整理成附来源链接的页面，来源变了就更新页面，而且不会覆盖你的修改。Claude Code、Codex 和其他 AI 工具读的是同一组页面。",
+          "/capture 存下对话中的决定，/distill 创建或更新主题页面，/pages 打开页面，/brief 和 /recall 只加载下一次对话需要的内容。",
         ],
         code: {
-          label: "精简 client 契约",
+          label: "Wenlan 工作流——需要已安装并连接的客户端",
           code: [
-            "# LLM Wiki",
-            "用途：<这个 wiki 维护的重复决策>",
-            "来源：<不可变来源边界>",
-            "页面：<所有权、命名、链接、引用>",
-            "索引：<最小主题路由；页面按需加载>",
-            "流程：ingest | query | lint | review",
-            "记录：<append-only 维护记录>",
-            "过期规则：<来源改变 -> stale 或 review>",
+            "/brief <topic>",
+            "/recall <question>",
+            "/capture <decision + why>",
+            "/handoff",
+            "/distill <topic>",
+            "/pages <topic>",
           ].join("\n"),
-        },
-      },
-      {
-        heading: "正式使用前的最小验收测试",
-        body: [
-          "文件存在不代表 template 已经可用。先用一个无风险主题做端到端测试，而且必须包含一次来源变更，再导入私人或重要资料。",
-          "这套验收可用于文件夹加 prompt、Obsidian 工作流或专门的 LLM Wiki 工具；预期结果是人能检查的证据，不只是一段流畅回答。",
-        ],
-        bullets: [
-          "导入一份无风险来源，确认原始内容没有被改写。",
-          "回答一个问题，并为重要说法引用来源。",
-          "运行 lint，确认缺失引用、断链或重复能够被看见。",
-          "修改来源，再问一次相同问题。",
-          "确认旧答案进入 stale 或 review，而不是被静默覆盖。",
-        ],
-      },
-      {
-        heading: "如何搭建一个会持续更新的 AI 知识库",
-        body: [
-          "先选一个无风险的小主题，不要一开始就导入整个 vault。注册可检查的来源，捕捉一条完整事实，再把相关内容蒸馏成主题页面；随后用同一问题重新检索，并从页面回到 source IDs 检查证据。",
-          "发布第一版不是结束。来源改变时，系统应该标记受影响页面、记录 stale reason，并产生可审查的修订；对于人拥有的文字，自动化不应静默覆盖。",
-        ],
-        code: {
-          label: "Wenlan 工作流：需先安装并连接客户端",
-          code: `/brief <主题>
-/recall <问题>
-/capture <结论 + 原因>
-/handoff
-/distill <主题>
-/pages <主题>`,
         },
         link: {
           label: "查看完整日常工作流",
           href: "/docs/daily-workflow",
         },
       },
-      {
-        heading: "如何验证知识库真的可用",
-        body: [
-          "不要只看命令是否返回成功。真正的验收是：下一次会话能找回正确内容，人能在聊天之外阅读页面，而且重要说法可以追溯到来源。",
-          "如果检查失败，先保留测试内容的低风险范围，修复连接、来源或重复问题，再用同一主题复测；不要靠继续生成更多页面掩盖故障。",
-        ],
-        bullets: [
-          "相同主题可以再次找到刚才保存的事实。",
-          "页面是可读 Markdown，并显示重要说法对应的 source IDs。",
-          "后续检索只加载相关页面或来源片段，而不是整个资料库。",
-          "来源变化会产生可检查的过期原因或修订，不会静默覆盖。",
-          "Lint 能暴露缺失来源、重复、矛盾或过期依赖。",
-        ],
-        link: {
-          label: "查看审查与修复流程",
-          href: "/docs/review-and-trust",
-        },
-      },
-      {
-        heading: "Wenlan 如何实现本地 LLM Wiki",
-        body: [
-          "Wenlan 把 Sources、Memories 和 Pages 分成三种耐久角色：Sources 保存原始材料，Memories 保存工作中产生的原子事实，Pages 编成有来源的当前解释。本地 daemon 负责检索，Markdown 页面和 git 历史让结果保持可见。",
-          "每个蒸馏页面都要保留 source IDs。页面可以随着新证据变旧、刷新或进入审查；记忆在这里保存支撑页面的知识与状态，便于回查和更新。",
-          "Wenlan 不要求用户自定义 Page schema。typed Memory fields 与内置 Page 规则已经管理来源、引用、刷新、所有权和审核；上面的 starter schema 是可移植的 client 与流程验收契约。",
-        ],
-        link: {
-          label: "检查有来源页面模型",
-          href: "/learn/source-backed-wiki-pages-ai-work",
-        },
-      },
-      {
-        heading: "什么时候不需要 LLM Wiki",
-        body: [
-          "一次性聊天、很小且长期稳定的文档集，或团队已经维护良好的普通 wiki，不一定需要额外系统。当前代码、测试结果和工具官方文档也始终比知识库里的旧解释更权威。",
-          "当多个 AI 工具需要共享同一套检索、来源、交接和审查规则，而且答案会随项目持续变化时，维护型 LLM Wiki 才开始产生独立价值。",
-        ],
-        link: {
-          label: "查看 Wenlan 的层级边界",
-          href: "/docs/architecture",
-        },
-      },
     ],
+    comparisonTable: {
+      competitorName: "自建文件夹 + CLAUDE.md",
+      rows: [
+        {
+          dimension: "配置",
+          wenlan: "安装 app 并连上你的 AI 工具",
+          competitor: "一个文件夹、一份 schema 文件和 git",
+        },
+        {
+          dimension: "来源改变时",
+          wenlan: "你要求时更新，或在后台自动更新",
+          competitor: "下一次 lint 才发现（如果有跑）",
+        },
+        {
+          dimension: "你自己的修改",
+          wenlan: "保留；更新不会覆盖你改过的页面",
+          competitor: "只有 AI 遵守 schema 规则时才保留",
+        },
+        {
+          dimension: "多个 AI 工具",
+          wenlan: "Claude Code、Codex 等共用同一个 wiki",
+          competitor: "每个工具一份规则文件",
+        },
+        {
+          dimension: "AI 对话作为来源",
+          wenlan: "可以直接从对话存下决定",
+          competitor: "手动复制到 raw/",
+        },
+      ],
+    },
     faqs: [
       {
-        question: "Karpathy LLM Wiki 的核心想法是什么？",
+        question: "Karpathy 的 LLM Wiki 是什么？",
         answer:
-          "Andrej Karpathy 描述的是一组经过整理、彼此连接，并能由代理按需读取的个人 wiki 页面。重点是维护有用页面及其结构，而不是每次加载没有区分的完整资料库；引用他的说明不代表他为 Wenlan 背书。",
+          "Andrej Karpathy 描述了一种由 AI 根据你的来源撰写并维护的个人 wiki：每份来源只读一次，更新一组互相链接的 Markdown 页面，之后的问题就从这些页面回答。引用他的说明不代表他为 Wenlan 背书。",
       },
       {
         question: "LLM Wiki 和 RAG 是同一种东西吗？",
         answer:
-          "不是。RAG 在提问时检索来源片段；LLM Wiki 维护可复用的答案、引用和刷新状态。LLM Wiki 可以使用 RAG，但检索本身不会维护答案。",
+          "不是。RAG 每次提问都重新搜索原始文档，什么都不保留；LLM Wiki 只读一次来源，保留你可以打开检查的页面。大型 wiki 仍然可以用搜索来找页面。",
       },
       {
-        question: "Obsidian 可以直接当 AI 知识库吗？",
+        question: "怎么用 Claude Code 搭 LLM Wiki？",
         answer:
-          "Obsidian 很适合做人拥有的 Markdown vault 和阅读界面。要让它成为代理可依赖的知识库，还需要选择性检索、来源、过期处理和安全的自动修改边界。",
+          "建一个文件夹，raw/ 放来源、wiki/ 放页面，加一份 CLAUDE.md 说明结构、页面规则和 ingest、query、lint 三个任务，再执行 git init。在文件夹里启动 Claude Code，先加入两三份来源。",
       },
       {
-        question: "本地 AI 知识库一定要导入所有笔记吗？",
+        question: "搭 LLM Wiki 一定要用 Obsidian 吗？",
         answer:
-          "不用。先从一个会重复使用的小主题开始，只注册必要来源并检索最小相关集合。整库注入会增加 token 成本、噪音和过期内容风险。",
+          "不用。wiki 就是纯 Markdown，任何编辑器都能用。Obsidian 适合用来阅读：wiki 链接可以点，关系图谱能看出页面之间的关系。",
       },
       {
-        question: "Wenlan 的蒸馏页面只是摘要吗？",
+        question: "Karpathy 的 LLM Wiki 在 GitHub 哪里？",
         answer:
-          "不是。摘要通常压缩单一来源；蒸馏页面会组合相关事实与来源，保留 source IDs、修订状态和变旧原因，并能随着新证据更新。",
+          "它是 karpathy 在 GitHub gist 上的一篇《LLM Wiki》，链接在下方参考资料。它是模式的说明，不是可以安装的仓库；nashsu/llm_wiki、claude-obsidian 等项目把它做成了软件。",
+      },
+      {
+        question: "LLM Wiki 能取代代码搜索或官方文档吗？",
+        answer:
+          "不能。LLM Wiki 不能取代代码搜索、当前的源代码、测试结果或工具本身的文档，软件现在怎么运作仍以这些为准。同样的主题在很多次对话或多个工具之间反复出现时，它才值得。",
       },
     ],
     officialReferences: [
+      {
+        label: "Karpathy 的 LLM Wiki 说明",
+        href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      },
+      {
+        label: "nashsu/llm_wiki 桌面 app",
+        href: "https://github.com/nashsu/llm_wiki",
+      },
+      {
+        label: "Astro-Han/karpathy-llm-wiki Agent Skills",
+        href: "https://github.com/Astro-Han/karpathy-llm-wiki",
+      },
+      {
+        label: "AgriciDaniel/claude-obsidian",
+        href: "https://github.com/AgriciDaniel/claude-obsidian",
+      },
       {
         label: "Wenlan 的 Source、Memory 与 Page 模型",
         href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
@@ -3762,26 +3847,10 @@ const zhCNArticles = {
         label: "Wenlan 日常工作流",
         href: "https://github.com/7xuanlu/wenlan#daily-workflow",
       },
-      {
-        label: "Karpathy 的 LLM Wiki 说明",
-        href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
-      },
-      {
-        label: "jackwener LLM Wiki 实现",
-        href: "https://github.com/jackwener/llm-wiki",
-      },
-      {
-        label: "LLM Wiki CLAUDE.md template",
-        href: "https://hjarni.com/blog/llm-wiki-claude-md-template",
-      },
-      {
-        label: "LLM Wiki v2 提案",
-        href: "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2",
-      },
     ],
     cta: {
-      heading: "搭建可维护的本地 LLM Wiki",
-      body: "用 Wenlan 把来源与工作事实蒸馏成可检查、可刷新、让下一个 AI 会话按需读取的知识页面。",
+      heading: "让 wiki 自己保持最新",
+      body: "Wenlan 把你的文档、笔记和 AI 对话整理成附来源链接的页面，来源变了就更新，而且不会覆盖你的修改。",
     },
   },
   "source-backed-wiki-pages-ai-work": {
