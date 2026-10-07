@@ -222,14 +222,14 @@ const REQUIRED_HTML_PAGES = [
     canonical: "https://wenlan.app/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
     type: "Article",
     datePublished: "2026-08-01",
-    dateModified: "2026-08-01",
+    dateModified: "2026-10-06",
   },
   {
     path: "zh-CN/learn/build-local-ai-knowledge-base-from-documents.html",
     canonical: "https://wenlan.app/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
     type: "Article",
     datePublished: "2026-08-01",
-    dateModified: "2026-08-01",
+    dateModified: "2026-10-06",
   },
   {
     path: "learn/choose-ai-knowledge-base-tool.html",

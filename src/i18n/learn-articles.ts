@@ -446,8 +446,8 @@ const zhTWArticles = {
     metaDescription:
       "用 Wenlan 建立有來源、可追溯的 AI 知識庫：把可信來源、原子知識與可維護的 LLM Wiki 頁面分開管理，保留引用出處、更新紀錄與審查狀態，方便回查依據。重要結論仍需核對原文。",
     keywords: [
-      "AI 知識庫",
       "有來源的 AI 知識庫",
+      "AI 知識庫",
       "本地 AI 知識庫",
       "LLM Wiki",
       "知識庫維護",
@@ -936,103 +936,143 @@ const zhTWArticles = {
   },
   "build-local-ai-knowledge-base-from-documents": {
     slug: "build-local-ai-knowledge-base-from-documents",
-    eyebrow: "實作",
+    eyebrow: "入門指南",
     category: "Workflows",
-    title: "如何用 Markdown、PDF 與 Obsidian 建立本地 AI 知識庫",
+    title: "AI 知識庫是什麼？個人怎麼建立（工具比較＋步驟）",
     description:
-      "從一個文件範圍開始，用可重複同步的 Sources、有來源的 Pages 與驗證步驟，建立 AI agent 真正能重用的本地知識庫。",
-    metaTitle: "用 Markdown、PDF 與 Obsidian 建立 AI 知識庫 | Wenlan",
+      "AI 知識庫就是讓 AI 根據你自己的文件和筆記回答，並附上出處。本文比較 NotebookLM、Obsidian、AnythingLLM 等做法，再帶你一步步建一個。",
+    metaTitle: "AI 知識庫是什麼？個人建立步驟與工具比較 | Wenlan",
     metaDescription:
-      "從 Markdown、文字檔、文字型 PDF、資料夾或 Obsidian vault 開始，用可重複同步的 Sources、有來源的 Pages 與驗證步驟，建立本地 AI 知識庫。從一個文件範圍做起，驗證同步、來源標示與維護流程，打造 AI agent 真正能重用的知識。",
+      "AI 知識庫讓 AI 根據你自己的文件和筆記回答，並附上出處。本文分清個人和企業知識庫，比較 NotebookLM、Notion AI、Obsidian 外掛、AnythingLLM 與 Karpathy 式 LLM Wiki，再用一個資料夾一步步建立自己的 AI 知識庫。",
     keywords: [
-      "建立 AI 知識庫",
-      "本地 AI 知識庫",
-      "AI 知識庫搭建",
-      "開源 AI 知識庫",
-      "Markdown AI 知識庫",
-      "PDF AI 知識庫",
+      "AI 知識庫",
+      "AI 知識庫是什麼",
+      "AI 知識庫建立",
+      "個人知識庫",
+      "個人 AI 知識庫",
       "Obsidian AI 知識庫",
-      "AI agent 知識庫",
+      "Karpathy AI 知識庫",
+      "NotebookLM 知識庫",
+      "AI 知識庫工具比較",
       "Wenlan 文瀾",
     ],
     publishedAt: "2026-08-01",
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-10-06",
     author: "Qi-Xuan Lu",
-    readingTime: "7 分鐘閱讀",
-    audience: "想讓 Claude Code、Codex、Cursor 或其他 AI agent 使用本地文件的繁體中文使用者",
+    readingTime: "9 分鐘閱讀",
+    audience: "想讓 AI 讀懂自己的文件、筆記與對話紀錄的繁體中文使用者",
     heroBullets: [
-      "先選一個檔案或資料夾，不要一次匯入全部資料。",
-      "支援 Markdown、文字檔、可擷取文字的 PDF 與 Obsidian vault。",
-      "先驗證同步與來源，再信任 AI 整理出的頁面。",
+      "AI 知識庫：讓 AI 根據你的資料回答，而且說得出出處。",
+      "個人用的做法有兩種：每次查資料（RAG），或整理成頁面（LLM Wiki）。",
+      "先用一個資料夾、三個測試問題驗收，再決定要不要擴大。",
     ],
     sections: [
       {
-        heading: "一句話做法",
+        heading: "AI 知識庫是什麼",
         body: [
-          "先依作業系統安裝 Wenlan runtime、連接目前使用的 AI 客戶端並驗證連線，再對一個 `.md`、`.txt`、可擷取文字的 `.pdf`、資料夾或 Obsidian vault 執行 `wenlan sources add <path>`。同一路徑再次執行會重新同步。",
-          "來源能回答真實問題後，在已安裝 Wenlan plugin 的 Claude Code 或 Codex 使用 `/distill <主題>`、`/pages`、`/lint` 與 `/curate`；只有 MCP 連線的客戶端則使用該客戶端顯示的 Wenlan 工具完成同一流程。",
+          "AI 知識庫就是一份你自己的資料：文件、筆記、PDF、和 AI 的對話紀錄。AI 回答問題時先看這份資料，而不是只靠它自己記得的東西，回答時還能指出是哪一份文件說的。",
+          "搜尋「AI 知識庫」會看到很多企業產品，那些多半是給客戶看的客服中心或公司內部 FAQ。本文講的是個人用：給你自己和你用的 AI 工具（ChatGPT、Claude、Codex 等）用的知識庫。",
         ],
       },
       {
-        heading: "先劃定支援的來源範圍",
+        heading: "兩種做法：每次查資料，或整理成頁面",
         body: [
-          "Wenlan 的 Directory Source 會讀取單一檔案或遞迴掃描資料夾，支援 `.md`、`.txt` 與能直接擷取文字的 `.pdf`。Obsidian vault 可作為唯讀 Markdown 來源，人寫的原始檔仍由 vault 管理。",
-          "掃描型 PDF 必須先做 OCR；任意程式碼檔案目前不屬於 Directory Source 的支援範圍。程式碼、測試與專案原生文件仍應是權威，知識庫負責維護可檢查的綜合答案。",
+          "第一種是 RAG：每次提問時，從文件裡找出相關段落交給 AI，答完就丟掉。好處是馬上能用；缺點是同樣的閱讀每次都重做，也沒有東西可以讓你翻閱。",
+          "第二種是 Andrej Karpathy 在 2026 年 4 月提出的 LLM Wiki：AI 每份文件只讀一次，把內容整理成互相連結的頁面，之後的問題都從頁面開始。你得到的是一份可以閱讀、會越來越完整的知識庫，代價是要定期檢查頁面有沒有過時。",
         ],
+        figure: "llm-wiki-vs-rag",
       },
       {
-        heading: "建立最小文件到頁面流程",
+        id: "personal-ai-knowledge-base-tools",
+        heading: "個人 AI 知識庫工具比較",
         body: [
-          "先選一個會重複詢問的主題和一小組文件，讓錯誤、跳過與缺少來源都看得見。",
+          "沒有一個工具最好，差別在資料放在哪裡、要不要累積成頁面。GitHub 星數為 2026 年 10 月的數字。",
         ],
-        bullets: [
-          "執行 sources add，確認 found、ingested、skipped 與 errors 數量。",
-          "修改來源後重跑同一指令，確認同步結果符合預期。",
-          "來源足夠時才 distill，不用把每份文件都變成 Page。",
-          "開啟 Page，核對重要結論能回到來源或引用。",
-          "執行 lint 與 curate，處理薄弱、衝突、過期或待審查內容。",
-        ],
-        code: {
-          label: "完成平台與客戶端設定後",
-          code: "wenlan status\nwenlan sources add ~/Knowledge/project-docs",
+        table: {
+          columns: ["工具", "做法", "資料放在哪", "適合你，如果你"],
+          rows: [
+            ["NotebookLM", "上傳文件後問答（RAG）", "Google 雲端", "想最快開始，不介意資料放雲端"],
+            ["Notion AI", "對 Notion 頁面問答", "Notion 雲端", "筆記本來就在 Notion"],
+            ["Obsidian + Copilot 外掛", "在筆記庫裡問答、找相關筆記", "自己的電腦", "已經在用 Obsidian"],
+            ["AnythingLLM（6.6 萬星）", "桌面 app，丟文件進去問答（RAG）", "自己的電腦", "想全部留在本機，又不想寫設定"],
+            ["claude-obsidian、nashsu/llm_wiki", "Karpathy 式 LLM Wiki：AI 把文件整理成頁面", "自己電腦上的 Markdown", "想要可閱讀、會累積的知識庫"],
+            ["Wenlan（文瀾）", "LLM Wiki，加上來源更新時自動提醒、不蓋掉你的修改", "自己的電腦", "同時用 Claude Code、Codex 等好幾個 AI 工具"],
+          ],
         },
       },
       {
-        heading: "如何驗收，而不是只看匯入成功",
+        id: "build-a-personal-ai-knowledge-base",
+        heading: "一步步建立個人 AI 知識庫",
         body: [
-          "用一個來源中存在的問題和一個來源中不存在的問題測試。前者應能找到支持材料，後者不應被補成確定答案。接著修改一份文件、重新同步，確認 Page 能顯示需要刷新或產生可審查修訂。",
-          "驗收重點是來源邊界、同步結果、引用與修訂，不是一次匯入多少檔案。這讓知識庫即使不使用 Wenlan，也有可重複的品質判準。",
+          "不管選哪個工具，流程都一樣。先小範圍做通，再擴大。",
+        ],
+        bullets: [
+          "選一個你常常要查的主題，把 10 到 20 份相關文件放進同一個資料夾。",
+          "決定做法：只想問答，用 NotebookLM 或 AnythingLLM；想累積成頁面，用 LLM Wiki。",
+          "匯入文件。掃描型 PDF 要先做文字辨識（OCR），否則 AI 讀不到內容。",
+          "問三個測試問題：一個文件裡有答案的、一個沒有答案的、一個要綜合兩份文件的。",
+          "改一份文件再問一次，確認答案有跟著變。",
+        ],
+        link: {
+          label: "想用 Obsidian + Claude Code 自己做？看 LLM Wiki 完整教學",
+          href: "/learn/distilled-wiki-pages-ai-memory",
+        },
+      },
+      {
+        heading: "怎麼驗收：三個問題就夠",
+        body: [
+          "文件裡有答案的問題，AI 應該答對並指出是哪一份文件。沒有答案的問題，AI 應該說找不到，而不是編一個。要綜合兩份文件的問題，最能看出工具是真的讀懂，還是只抓到一段文字。",
+          "三題都過，再加入下一個主題。一次匯入全部資料，出錯時很難知道是哪一份文件造成的。",
         ],
       },
       {
-        heading: "何時再擴大資料範圍",
-        body: [
-          "只有當一個主題能完成來源、同步、Page、lint 與 review 閉環後，才加入下一個資料夾或 vault。這能避免同名文件、過期版本與無關內容一起進入檢索結果。",
+        heading: "個人 AI 知識庫常卡在哪裡",
+        body: ["自己建或用現成工具，最常遇到這四個問題："],
+        bullets: [
+          "文件更新了，答案沒更新：RAG 每次會重查，但整理好的頁面不會自己知道來源改了。",
+          "AI 改掉你手動修正的內容：自己做的 LLM Wiki 要在規則裡寫清楚哪些段落不能改。",
+          "每個 AI 工具各有一份：ChatGPT、Claude、Codex 各記各的，久了內容不一致。",
+          "掃描型 PDF 讀不到：先 OCR，再匯入。",
         ],
-        link: {
-          label: "了解有來源 AI 知識庫的維護架構",
-          href: "/learn/source-backed-wiki-pages-ai-work",
+      },
+      {
+        heading: "用 Wenlan 建立個人 AI 知識庫",
+        body: [
+          "Wenlan（文瀾）是開源的桌面 app，做的是上面的 LLM Wiki 做法。它把文件、筆記和 AI 對話整理成附出處的頁面；來源改了會標出哪些頁面要更新，而且不會蓋掉你的修改。Claude Code、Codex 和其他 AI 工具讀的是同一份知識庫。",
+          "支援 Markdown（.md）、文字檔（.txt）、可擷取文字的 PDF（.pdf），以及 Obsidian vault；掃描型 PDF 要先 OCR。Obsidian vault 只會被讀取，原始筆記不會被修改。",
+        ],
+        code: {
+          label: "安裝並連接 AI 工具後",
+          code: "wenlan sources add ~/Knowledge/my-topic\n/distill <主題>\n/pages <主題>",
         },
       },
     ],
     faqs: [
       {
-        question: "Wenlan 會改寫我的 Obsidian vault 嗎？",
+        question: "AI 知識庫和 RAG 是一樣的東西嗎？",
         answer:
-          "不會。vault 會作為唯讀來源重新掃描與索引，原始 Markdown 仍由你管理；Pages 匯出或 symlink 是另一個明確選擇。",
+          "不完全一樣。RAG 是其中一種做法：每次提問時去文件裡找段落。另一種是 LLM Wiki，先把文件整理成頁面，之後從頁面回答。",
       },
       {
-        question: "掃描型 PDF 可以直接加入嗎？",
+        question: "建立 AI 知識庫要花錢嗎？",
         answer:
-          "不行。PDF 必須能直接擷取文字；只有影像的掃描型 PDF 需要先經過 OCR，再把可讀文字納入來源。",
+          "不一定。NotebookLM 有免費方案；AnythingLLM、Obsidian 和 Wenlan 本身免費。如果用 Claude Code 或 ChatGPT 來整理，費用來自那個 AI 工具的訂閱。",
       },
       {
-        question: "這和把文件上傳到聊天機器人有什麼不同？",
+        question: "資料會不會外流？",
         answer:
-          "聊天附件通常只服務當次對話；這個流程會保留可重複同步的本地來源，並建立能檢查引用、過期狀態與修訂的維護型 Page。",
+          "看資料放在哪裡、用哪個模型。NotebookLM、Notion AI 的資料在雲端；AnythingLLM、Obsidian、Wenlan 的資料在你的電腦上，但連接雲端 AI 模型時，相關內容仍會送給模型處理。",
+      },
+      {
+        question: "公司的客服知識庫可以用這篇的方法嗎？",
+        answer:
+          "不太適合。給客戶看的客服中心需要權限、發布和多人維護，應該用專門的客服知識庫產品。本文的方法適合個人或小團隊自己用。",
       },
     ],
     relatedSlugs: [
+      "distilled-wiki-pages-ai-memory",
+      "choose-ai-knowledge-base-tool",
+      "wenlan-vs-obsidian-ai-memory",
       "fix-pdf-ingestion-ai-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
       "source-backed-wiki-pages-ai-work",
@@ -1041,13 +1081,15 @@ const zhTWArticles = {
       "build-investment-research-knowledge-base",
       "build-product-research-knowledge-base-for-prd",
       "build-sre-incident-knowledge-base",
-      "distilled-wiki-pages-ai-memory",
-      "wenlan-vs-obsidian-ai-memory",
       "build-ict-supplier-due-diligence-evidence-pack",
       "build-customer-support-answer-knowledge-base",
       "build-course-wiki-from-lecture-notes",
     ],
     officialReferences: [
+      {
+        label: "Karpathy：LLM Wiki（GitHub gist）",
+        href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      },
       {
         label: "Wenlan 平台與客戶端設定",
         href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md",
@@ -1066,8 +1108,8 @@ const zhTWArticles = {
       },
     ],
     cta: {
-      heading: "先用一個資料夾驗證完整閉環",
-      body: "安裝 Wenlan，加入一組可檢查的文件，再驗證同步、Page、引用與審查流程。",
+      heading: "用一個資料夾建立你的 AI 知識庫",
+      body: "下載 Wenlan，加入一個主題的文件，用三個測試問題確認它答得對、說得出出處。",
     },
   },
   "choose-ai-knowledge-base-tool": {
@@ -4356,103 +4398,143 @@ const zhCNArticles = {
   },
   "build-local-ai-knowledge-base-from-documents": {
     slug: "build-local-ai-knowledge-base-from-documents",
-    eyebrow: "实作",
+    eyebrow: "搭建指南",
     category: "Workflows",
-    title: "如何用 Markdown、PDF 与 Obsidian 建立本地 AI 知识库",
+    title: "个人知识库怎么搭建？AI + Obsidian 实操（附工具对比）",
     description:
-      "从一个文档范围开始，用可重复同步的 Sources、有来源的 Pages 与验证步骤，建立 AI agent 真正能复用的本地知识库。",
-    metaTitle: "用 Markdown、PDF 与 Obsidian 建立 AI 知识库 | Wenlan",
+      "个人知识库就是让 AI 根据你自己的文档和笔记回答，并给出出处。本文对比 ima、Cherry Studio、AnythingLLM、Obsidian 等做法，再一步步搭一个。",
+    metaTitle: "个人知识库搭建：AI + Obsidian 实操与工具对比 | Wenlan",
     metaDescription:
-      "从 Markdown、文本文件、文本型 PDF、文件夹或 Obsidian vault 开始，用可重复同步的 Sources、有来源的 Pages 与验证步骤，建立本地 AI 知识库。从一个文档范围做起，验证同步、来源标注与维护流程，打造 AI agent 真正能复用的知识。",
+      "个人知识库怎么搭建？本文先讲清 RAG 问答和 Karpathy 式 LLM Wiki 两种做法，对比 ima、Cherry Studio、AnythingLLM、Obsidian 插件与 GitHub 上的开源项目，再用一个文件夹一步步搭建自己的 AI 个人知识库。",
     keywords: [
-      "搭建 AI 知识库",
-      "本地 AI 知识库",
+      "个人知识库",
+      "个人知识库搭建",
       "AI 知识库搭建",
-      "开源 AI 知识库",
-      "Markdown AI 知识库",
-      "PDF AI 知识库",
-      "Obsidian AI 知识库",
-      "AI agent 知识库",
+      "个人 AI 知识库",
+      "个人知识库 Obsidian",
+      "个人知识库 GitHub",
+      "个人知识库 Karpathy",
+      "第二大脑 AI",
+      "个人知识库工具",
       "Wenlan 文澜",
     ],
     publishedAt: "2026-08-01",
-    updatedAt: "2026-08-01",
+    updatedAt: "2026-10-06",
     author: "Qi-Xuan Lu",
-    readingTime: "7 分钟阅读",
-    audience: "想让 Claude Code、Codex、Cursor 或其他 AI agent 使用本地文档的简体中文用户",
+    readingTime: "9 分钟阅读",
+    audience: "想让 AI 读懂自己的文档、笔记与对话记录的简体中文用户",
     heroBullets: [
-      "先选一个文件或文件夹，不要一次导入全部资料。",
-      "支持 Markdown、文本文件、可提取文字的 PDF 与 Obsidian vault。",
-      "先验证同步与来源，再信任 AI 整理出的页面。",
+      "个人知识库：让 AI 根据你的资料回答，而且说得出出处。",
+      "两种搭法：每次检索（RAG），或整理成页面（LLM Wiki）。",
+      "先用一个文件夹、三个测试问题验收，再扩大范围。",
     ],
     sections: [
       {
-        heading: "一句话做法",
+        heading: "AI 个人知识库是什么",
         body: [
-          "先按操作系统安装 Wenlan runtime、连接当前使用的 AI 客户端并验证连接，再对一个 `.md`、`.txt`、可提取文字的 `.pdf`、文件夹或 Obsidian vault 执行 `wenlan sources add <path>`。同一路径再次执行会重新同步。",
-          "来源能回答真实问题后，在已安装 Wenlan plugin 的 Claude Code 或 Codex 使用 `/distill <主题>`、`/pages`、`/lint` 与 `/curate`；只有 MCP 连接的客户端则使用该客户端显示的 Wenlan 工具完成同一流程。",
+          "个人知识库就是一份你自己的资料：文档、笔记、PDF、和 AI 的对话记录。加上 AI 之后，它回答问题时先看这份资料，而不是只靠自己记得的东西，回答时还能指出是哪一份文档说的。很多人也叫它“第二大脑”。",
+          "搜索“AI 知识库”会看到 MaxKB、FastGPT、Dify、PandaWiki 这类平台，它们主要用来给团队或客户搭问答系统。本文讲的是个人用：给你自己和你用的 AI 工具用的知识库。",
         ],
       },
       {
-        heading: "先划定支持的来源范围",
+        heading: "两种搭法：每次检索，或整理成页面",
         body: [
-          "Wenlan 的 Directory Source 会读取单一文件或递归扫描文件夹，支持 `.md`、`.txt` 与能直接提取文字的 `.pdf`。Obsidian vault 可作为只读 Markdown 来源，人写的原始文件仍由 vault 管理。",
-          "扫描型 PDF 必须先做 OCR；任意源代码文件目前不属于 Directory Source 的支持范围。代码、测试与项目原生文档仍应是权威，知识库负责维护可检查的综合答案。",
+          "第一种是 RAG：每次提问时，从文档里找出相关段落交给 AI，答完就丢掉。好处是马上能用；缺点是同样的阅读每次都重做，也没有东西可以翻阅。",
+          "第二种是 Andrej Karpathy 在 2026 年 4 月提出的 LLM Wiki：AI 每份文档只读一次，把内容整理成互相链接的页面，之后的问题都从页面开始。你得到一份可以阅读、越用越完整的知识库，代价是要定期检查页面有没有过时。",
         ],
+        figure: "llm-wiki-vs-rag",
       },
       {
-        heading: "建立最小文档到页面流程",
+        id: "personal-knowledge-base-tools",
+        heading: "个人知识库工具对比",
         body: [
-          "先选一个会重复询问的主题和一小组文档，让错误、跳过与缺少来源都看得见。",
+          "没有一个工具最好，差别在资料放在哪里、要不要积累成页面。GitHub 星数为 2026 年 10 月的数据。",
         ],
-        bullets: [
-          "执行 sources add，确认 found、ingested、skipped 与 errors 数量。",
-          "修改来源后重跑同一命令，确认同步结果符合预期。",
-          "来源足够时才 distill，不用把每份文档都变成 Page。",
-          "打开 Page，核对重要结论能回到来源或引用。",
-          "执行 lint 与 curate，处理薄弱、冲突、过期或待审核内容。",
-        ],
-        code: {
-          label: "完成平台与客户端设置后",
-          code: "wenlan status\nwenlan sources add ~/Knowledge/project-docs",
+        table: {
+          columns: ["工具", "做法", "资料放在哪", "适合你，如果你"],
+          rows: [
+            ["ima（腾讯）", "建知识库后问答", "腾讯云端", "想最快开始，资料多在微信里"],
+            ["Cherry Studio（5.2 万星）", "桌面客户端，自带知识库问答（RAG）", "自己的电脑", "已经用它接多个大模型"],
+            ["AnythingLLM（6.6 万星）", "桌面 app，丢文档进去问答（RAG）", "自己的电脑", "想全部留在本机，又不想写配置"],
+            ["Obsidian + Copilot 插件", "在笔记库里问答、找相关笔记", "自己的电脑", "已经在用 Obsidian"],
+            ["claude-obsidian、nashsu/llm_wiki", "Karpathy 式 LLM Wiki：AI 把文档整理成页面", "自己电脑上的 Markdown", "想要可阅读、会积累的知识库"],
+            ["Wenlan（文澜）", "LLM Wiki，加上来源更新时提醒、不覆盖你的修改", "自己的电脑", "同时用 Claude Code、Codex 等好几个 AI 工具"],
+          ],
         },
       },
       {
-        heading: "如何验收，而不是只看导入成功",
+        id: "build-a-personal-knowledge-base",
+        heading: "一步步搭建个人知识库",
         body: [
-          "用一个来源中存在的问题和一个来源中不存在的问题测试。前者应能找到支持材料，后者不应被补成确定答案。接着修改一份文档、重新同步，确认 Page 能显示需要刷新或产生可审核修订。",
-          "验收重点是来源边界、同步结果、引用与修订，不是一次导入多少文件。这让知识库即使不使用 Wenlan，也有可重复的质量标准。",
+          "不管选哪个工具，流程都一样。先小范围跑通，再扩大。",
+        ],
+        bullets: [
+          "选一个你常要查的主题，把 10 到 20 份相关文档放进同一个文件夹。",
+          "决定搭法：只想问答，用 ima、Cherry Studio 或 AnythingLLM；想积累成页面，用 LLM Wiki。",
+          "导入文档。扫描型 PDF 要先做文字识别（OCR），否则 AI 读不到内容。",
+          "问三个测试问题：一个文档里有答案的、一个没有答案的、一个要综合两份文档的。",
+          "改一份文档再问一次，确认答案跟着变了。",
+        ],
+        link: {
+          label: "想用 Obsidian + Claude Code 自己搭？看 LLM Wiki 完整教程",
+          href: "/learn/distilled-wiki-pages-ai-memory",
+        },
+      },
+      {
+        heading: "怎么验收：三个问题就够",
+        body: [
+          "文档里有答案的问题，AI 应该答对并指出是哪一份文档。没有答案的问题，AI 应该说找不到，而不是编一个。要综合两份文档的问题，最能看出工具是真的读懂了，还是只抓到一段文字。",
+          "三题都过，再加入下一个主题。一次导入全部资料，出错时很难知道是哪一份文档造成的。",
         ],
       },
       {
-        heading: "何时再扩大资料范围",
-        body: [
-          "只有当一个主题能完成来源、同步、Page、lint 与 review 闭环后，才加入下一个文件夹或 vault。这能避免同名文档、过期版本与无关内容一起进入检索结果。",
+        heading: "个人知识库常卡在哪里",
+        body: ["自己搭或用现成工具，最常遇到这四个问题："],
+        bullets: [
+          "文档更新了，答案没更新：RAG 每次会重新检索，但整理好的页面不会自己知道来源改了。",
+          "AI 改掉你手动修正的内容：自己搭的 LLM Wiki 要在规则里写清楚哪些段落不能改。",
+          "每个 AI 工具各存一份：ChatGPT、Claude、Codex 各记各的，久了内容不一致。",
+          "扫描型 PDF 读不到：先 OCR，再导入。",
         ],
-        link: {
-          label: "了解有来源 AI 知识库的维护架构",
-          href: "/learn/source-backed-wiki-pages-ai-work",
+      },
+      {
+        heading: "用 Wenlan 搭建个人知识库",
+        body: [
+          "Wenlan（文澜）是开源的桌面 app，用的是上面的 LLM Wiki 做法。它把文档、笔记和 AI 对话整理成带出处的页面；来源改了会标出哪些页面要更新，而且不会覆盖你的修改。Claude Code、Codex 和其他 AI 工具读的是同一份知识库。",
+          "支持 Markdown（.md）、文本文件（.txt）、可提取文字的 PDF（.pdf），以及 Obsidian vault；扫描型 PDF 要先 OCR。Obsidian vault 只会被读取，原始笔记不会被修改。",
+        ],
+        code: {
+          label: "安装并连接 AI 工具后",
+          code: "wenlan sources add ~/Knowledge/my-topic\n/distill <主题>\n/pages <主题>",
         },
       },
     ],
     faqs: [
       {
-        question: "Wenlan 会改写我的 Obsidian vault 吗？",
+        question: "个人知识库和 RAG 是一回事吗？",
         answer:
-          "不会。vault 会作为只读来源重新扫描与索引，原始 Markdown 仍由你管理；Pages 导出或 symlink 是另一个明确选择。",
+          "不完全是。RAG 是其中一种做法：每次提问时去文档里找段落。另一种是 LLM Wiki，先把文档整理成页面，之后从页面回答。",
       },
       {
-        question: "扫描型 PDF 可以直接加入吗？",
+        question: "搭建个人知识库要花钱吗？",
         answer:
-          "不行。PDF 必须能直接提取文字；只有图片的扫描型 PDF 需要先经过 OCR，再把可读文本纳入来源。",
+          "不一定。ima、Cherry Studio、AnythingLLM、Obsidian 和 Wenlan 都可以免费使用。如果用 Claude Code 或其他大模型来整理，费用来自模型的订阅或 API。",
       },
       {
-        question: "这和把文档上传到聊天机器人有什么不同？",
+        question: "资料会不会外泄？",
         answer:
-          "聊天附件通常只服务当次对话；这个流程会保留可重复同步的本地来源，并建立能检查引用、过期状态与修订的维护型 Page。",
+          "看资料放在哪里、用哪个模型。ima 的资料在云端；Cherry Studio、AnythingLLM、Obsidian、Wenlan 的资料在你的电脑上，但连接云端大模型时，相关内容仍会发给模型处理。",
+      },
+      {
+        question: "MaxKB、FastGPT、Dify 适合搭个人知识库吗？",
+        answer:
+          "它们更适合给团队或客户搭问答系统，需要部署服务器。个人使用，用桌面工具或 Obsidian 通常更省事。",
       },
     ],
     relatedSlugs: [
+      "distilled-wiki-pages-ai-memory",
+      "choose-ai-knowledge-base-tool",
+      "wenlan-vs-obsidian-ai-memory",
       "fix-pdf-ingestion-ai-knowledge-base",
       "coding-agent-source-backed-knowledge-base",
       "source-backed-wiki-pages-ai-work",
@@ -4461,13 +4543,15 @@ const zhCNArticles = {
       "build-investment-research-knowledge-base",
       "build-product-research-knowledge-base-for-prd",
       "build-sre-incident-knowledge-base",
-      "distilled-wiki-pages-ai-memory",
-      "wenlan-vs-obsidian-ai-memory",
       "build-ict-supplier-due-diligence-evidence-pack",
       "build-customer-support-answer-knowledge-base",
       "build-course-wiki-from-lecture-notes",
     ],
     officialReferences: [
+      {
+        label: "Karpathy：LLM Wiki（GitHub gist）",
+        href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      },
       {
         label: "Wenlan 平台与客户端设置",
         href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md",
@@ -4486,8 +4570,8 @@ const zhCNArticles = {
       },
     ],
     cta: {
-      heading: "先用一个文件夹验证完整闭环",
-      body: "安装 Wenlan，加入一组可检查的文档，再验证同步、Page、引用与审核流程。",
+      heading: "用一个文件夹搭建你的个人知识库",
+      body: "下载 Wenlan，加入一个主题的文档，用三个测试问题确认它答得对、说得出出处。",
     },
   },
   "choose-ai-knowledge-base-tool": {
