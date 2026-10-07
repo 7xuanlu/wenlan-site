@@ -193,83 +193,135 @@ const baseArticles: LearnArticle[] = [
     slug: "mcp-memory-server",
     eyebrow: "Protocol",
     category: "Concepts",
-    title: "MCP Knowledge Base Server for AI Agents",
+    title: "MCP Memory Server: How It Works, Setup for Claude Code and Cursor, and Which One to Use",
     description:
-      "Connect Claude Code, Codex, ChatGPT, Cursor, and other AI clients to a local, source-backed knowledge base through MCP.",
-    metaTitle: "MCP Knowledge Base Server for AI Agents | Wenlan",
+      "What an MCP memory server is, how to set up the official memory server in Claude Code, Codex, Cursor, and VS Code, where it stores data, and how the popular options compare.",
+    metaTitle: "MCP Memory Server: Setup and Best Options Compared | Wenlan",
     metaDescription:
-      "Learn what an MCP knowledge base server should expose, how it differs from session memory, and how to verify sources, citations, and freshness across AI clients.",
+      "Set up the official MCP memory server in Claude Code, Cursor, Codex, or VS Code, see where it stores data, and compare Mem0, Basic Memory, and Wenlan.",
     keywords: [
-      "MCP knowledge base server",
-      "MCP knowledge server",
-      "knowledge base MCP",
-      "MCP knowledge base for AI agents",
       "MCP memory server",
-      "Claude Code knowledge base",
-      "Codex knowledge base",
-      "ChatGPT MCP knowledge base",
-      "Cursor MCP knowledge base",
+      "memory MCP",
+      "memory MCP server Claude Code",
+      "knowledge graph memory MCP",
+      "best memory MCP server",
+      "local memory MCP server",
+      "memory MCP server Cursor",
+      "MCP knowledge base server",
     ],
     publishedAt: "2026-06-07",
-    updatedAt: "2026-08-13",
+    updatedAt: "2026-10-06",
     author: DEFAULT_AUTHOR,
     readingTime: "8 min read",
-    audience: "Developers connecting AI agents to a shared knowledge base",
+    audience: "Developers adding persistent memory to Claude Code, Cursor, Codex, VS Code, and other MCP clients",
     heroBullets: [
-      "MCP gives AI clients a standard way to query knowledge, call tools, and retrieve resources.",
-      "A useful knowledge-base server preserves sources, citations, maintained answers, and freshness—not just chat history.",
-      "Wenlan connects coding tools locally and ChatGPT or Claude.ai through Streamable HTTP MCP, backed by the same source-aware knowledge system.",
+      "An MCP memory server stores what your AI should remember and lets any MCP client read and write it.",
+      "The official server is a small knowledge graph saved to one JSONL file. Set MEMORY_FILE_PATH so the file doesn't get lost.",
+      "Pick a server by where memory lives, how it searches, and whether you need to read and check what it remembers.",
     ],
     sections: [
       {
         heading: "Quick answer",
         body: [
-          "An MCP knowledge base server lets AI clients query durable project knowledge through a standard connection. The useful version does more than return remembered snippets: it keeps the original sources inspectable, returns citations or source IDs, and makes stale answers reviewable.",
-          "Wenlan provides that local-first route. Claude Code, Codex, Cursor, ChatGPT, Claude.ai, and other MCP clients can reach the same source-backed memories and maintained wiki pages without copying the whole knowledge base into every prompt.",
-        ],
-        bullets: [
-          "Use MCP when several AI clients need the same knowledge through one standard interface.",
-          "Keep sources and citations when an answer must remain auditable after the source changes.",
-          "Use a local server when private project documents and decisions should stay on your machine.",
+          "An MCP memory server is a program that stores memories and exposes them as tools through the Model Context Protocol (MCP). Claude Code, Cursor, Codex, VS Code, Claude Desktop, and other MCP clients can call those tools to save something and look it up later, so memory outlasts one chat and can be shared between tools.",
+          "The best-known one is Anthropic's Knowledge Graph Memory Server (@modelcontextprotocol/server-memory) in the official MCP servers repository. It is a good place to start; other servers add semantic search, Markdown notes, hosting, or source tracking.",
         ],
       },
       {
-        heading: "What MCP adds to a knowledge base",
+        id: "how-the-official-memory-server-works",
+        heading: "How the official memory server works",
         body: [
-          "The Model Context Protocol lets servers expose tools, resources, and prompts to AI applications. A knowledge-base server can therefore offer search and retrieval without forcing each host application to invent a custom connector.",
-          "That boundary matters across Claude Code, Codex, ChatGPT, Cursor, and other clients. The client handles the current task; the server owns durable sources, retrieval, and the maintained knowledge that should survive one session or tool.",
-        ],
-      },
-      {
-        heading: "What an MCP knowledge-base server should expose",
-        body: [
-          "A useful server needs a narrow query path, inspectable sources, citations or stable source IDs, and a way to tell whether an answer is current. Write access should be explicit, and stale or contradictory knowledge should enter review instead of silently replacing a trusted source.",
-          "Wenlan exposes context, capture, recall, distillation, page access, review, forget, and diagnostic paths through its CLI, plugins, and MCP connector. Atomic memories retain provenance while maintained pages turn reviewed evidence into reusable answers.",
-        ],
-      },
-      {
-        heading: "MCP memory server vs knowledge base",
-        body: [
-          "An MCP memory server usually focuses on facts or context carried across sessions. An MCP knowledge base goes further: it connects those facts to documents, source boundaries, citations, maintained pages, and a refresh or review lifecycle.",
-          "The two can share one server. In Wenlan, small durable memories help agents recall context, while source-backed pages organize reviewed knowledge into human-readable answers. Neither layer makes the source code or original document unnecessary.",
-        ],
-      },
-      {
-        heading: "Local vs hosted knowledge base",
-        body: [
-          "Hosted servers can be convenient, but private documents and project decisions leave your machine. A local knowledge base takes more setup while keeping its store, sources, and review trail under your control.",
-          "Wenlan uses a local daemon and local MCP connector for coding tools. Its optional Streamable HTTP route is for web clients such as ChatGPT and Claude.ai; enabling remote access is a separate choice rather than the default storage model.",
-        ],
-      },
-      {
-        heading: "Install path",
-        body: [
-          "Claude Code and Codex have Wenlan plugin paths. For local MCP clients, run Wenlan setup, then use wenlan connect <client> to write the client-specific configuration.",
-          "ChatGPT and Claude.ai use Streamable HTTP MCP. The desktop app's Remote Access panel creates the URL and shows the web-client setup steps.",
+          "The official server stores a knowledge graph with three parts. Entities are things such as a person, a project, or a tool. Relations connect two entities, such as \"Alice works_at Acme\". Observations are single facts attached to an entity, such as \"prefers pnpm\".",
+          "It gives the AI nine tools: create_entities, create_relations, add_observations, delete_entities, delete_observations, delete_relations, read_graph, search_nodes, and open_nodes. search_nodes matches text in names, types, and observations; it is not semantic search.",
         ],
         code: {
-          label: "MCP client setup",
-          code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan connect cursor\n~/.wenlan/bin/wenlan connect codex\n# or: claude-desktop, vscode, gemini",
+          label: "One entity in the memory graph",
+          code: "{\n  \"name\": \"wenlan-site\",\n  \"entityType\": \"project\",\n  \"observations\": [\"Uses pnpm\", \"Deployed on Vercel\"]\n}",
+        },
+      },
+      {
+        id: "add-memory-server-to-claude-code",
+        heading: "Add the memory server to Claude Code, Codex, Cursor, or VS Code",
+        body: [
+          "Each client needs the same command, npx -y @modelcontextprotocol/server-memory, plus a MEMORY_FILE_PATH that points to a file you control. Restart the client or start a new session after adding it.",
+        ],
+        code: {
+          label: "Claude Code and Codex",
+          code: "claude mcp add memory -e MEMORY_FILE_PATH=$HOME/.mcp-memory/memory.jsonl \\\n  -- npx -y @modelcontextprotocol/server-memory\n\ncodex mcp add memory --env MEMORY_FILE_PATH=$HOME/.mcp-memory/memory.jsonl \\\n  -- npx -y @modelcontextprotocol/server-memory",
+        },
+        bullets: [
+          "Cursor: add a \"memory\" entry under mcpServers in ~/.cursor/mcp.json, or .cursor/mcp.json for one project.",
+          "VS Code: add it under servers in .vscode/mcp.json, or use the install button in the server's README.",
+          "Claude Desktop: add it under mcpServers in claude_desktop_config.json.",
+          "Docker: the README also shows a docker run command using the mcp/memory image and a named volume.",
+        ],
+      },
+      {
+        id: "where-mcp-memory-is-stored",
+        heading: "Where the MCP memory server stores data",
+        body: [
+          "Everything lives in one JSONL file. If you don't set MEMORY_FILE_PATH, the file is memory.jsonl in the server's own folder. With npx, that folder is inside the npm cache, which can be cleared or replaced on update. Set MEMORY_FILE_PATH to a path you back up.",
+          "Because it's one file per path, two clients share memory only if both point to the same MEMORY_FILE_PATH. Give each project its own path if you don't want memories to mix.",
+        ],
+        code: {
+          label: "Cursor or Claude Desktop JSON",
+          code: "{\n  \"mcpServers\": {\n    \"memory\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-memory\"],\n      \"env\": { \"MEMORY_FILE_PATH\": \"/Users/you/.mcp-memory/memory.jsonl\" }\n    }\n  }\n}",
+        },
+      },
+      {
+        heading: "Make the AI actually use it",
+        body: [
+          "Adding the server only makes the tools available. The AI decides when to call them, and many sessions never do. Tell it when to read and write memory in your instructions file: CLAUDE.md for Claude Code, AGENTS.md for Codex, or Cursor rules.",
+        ],
+        bullets: [
+          "At the start of a task, search memory for the project name before asking me for context.",
+          "When I state a preference or we make a decision, save it as an observation.",
+          "Keep one fact per observation, and don't save secrets.",
+        ],
+      },
+      {
+        id: "best-mcp-memory-servers",
+        heading: "MCP memory servers compared",
+        body: [
+          "The servers differ mostly in where memory lives and how they find it. GitHub star counts are from October 2026.",
+        ],
+        table: {
+          columns: ["Server", "How it stores and searches", "Runs", "Good for"],
+          rows: [
+            ["Official memory server", "Knowledge graph in one JSONL file; text search", "Local", "A simple start and learning how MCP memory works"],
+            ["Mem0 (about 67,000 stars)", "Memory platform with semantic search; hosted MCP server", "Hosted, or self-host Mem0", "Apps and agents that need managed memory"],
+            ["Basic Memory (about 4,100 stars)", "Markdown files you can open and edit, for example in Obsidian", "Local, with an optional cloud version", "Notes you want to read and edit yourself"],
+            ["mcp-memory-service (about 2,000 stars)", "Semantic search over stored memories; SQLite locally or Cloudflare", "Local or cloud", "Semantic recall shared across agents and frameworks"],
+            ["codebase-memory-mcp (about 46,000 stars)", "Indexes your code into a knowledge graph", "Local", "Code structure, not decisions or preferences"],
+            ["Wenlan", "Local memories plus wiki pages that cite their sources and flag when a source changes", "Local", "Project knowledge you want to read, check, and share across tools"],
+          ],
+        },
+        link: {
+          label: "Compare Wenlan with mcp-memory-service",
+          href: "/learn/wenlan-vs-mcp-memory-service",
+        },
+      },
+      {
+        id: "mcp-knowledge-base-server",
+        heading: "MCP memory server vs knowledge base",
+        body: [
+          "A memory server keeps small facts: preferences, decisions, names. That works until you need to know where a fact came from, or the document it was based on changes. Then you want a knowledge base: memories linked to their sources, organized into pages you can read, with a way to spot outdated answers.",
+          "Wenlan is built for that second case. It keeps short memories for recall, groups related memories and documents into wiki pages that cite their sources, and marks pages for review when a source changes instead of silently overwriting them.",
+        ],
+        link: {
+          label: "See how memories become source-backed wiki pages",
+          href: "/learn/distilled-wiki-pages-ai-memory",
+        },
+      },
+      {
+        heading: "Add Wenlan as your MCP memory server",
+        body: [
+          "Wenlan is an open-source desktop app with a local MCP server. Install it, then connect each client you use. They all read the same local memory and pages.",
+          "Claude Code and Codex also have Wenlan plugins with commands such as /brief, /capture, /recall, and /handoff.",
+        ],
+        code: {
+          label: "Connect MCP clients to Wenlan",
+          code: "npx -y wenlan setup\nwenlan connect claude-code\nwenlan connect cursor\nwenlan connect codex\n# also: claude-desktop, vscode, gemini",
         },
         link: {
           label: "Read all MCP client setup paths",
@@ -277,64 +329,83 @@ const baseArticles: LearnArticle[] = [
         },
       },
       {
-        heading: "Verify the MCP knowledge-base route",
+        heading: "Check that memory works",
         body: [
-          "Do not trust a knowledge-base connection because the client merely reports that an MCP server is configured. Test retrieval, provenance, and cross-client consistency with a harmless source before relying on it for real work.",
+          "A configured server isn't proof that memory works. Run a small round trip before you rely on it.",
         ],
         bullets: [
-          "List the server tools from one MCP client and confirm the expected read path is available.",
-          "Query one harmless source and inspect the citation or source ID behind the answer.",
-          "Change the source, then verify that stale knowledge is refreshed or enters review.",
-          "Confirm a second client can retrieve the same maintained answer without copying the source into its prompt.",
+          "List the server tools from one MCP client and confirm the memory tools appear.",
+          "Ask the AI to save one harmless fact, then open a new session and ask for it.",
+          "Ask the same question from a second client to confirm they share memory.",
+          "For a knowledge base, query one harmless source and inspect the citation, then change the source and check that the answer is flagged or updated.",
         ],
-        link: {
-          label: "See the source-backed LLM-wiki workflow",
-          href: "/learn/distilled-wiki-pages-ai-memory",
-        },
       },
     ],
     faqs: [
       {
-        question: "Is an MCP knowledge base the same as RAG?",
+        question: "What is an MCP memory server?",
         answer:
-          "No. MCP is the connection protocol. RAG is one retrieval pattern a server may use. A dependable knowledge base also needs inspectable sources, citations, freshness checks, and a maintenance path.",
+          "A server that stores memories and exposes them as MCP tools, so AI clients such as Claude Code, Cursor, and Codex can save and recall information across sessions.",
       },
       {
-        question: "Can one MCP knowledge base work with multiple AI tools?",
+        question: "Where does the MCP memory server store data?",
         answer:
-          "Yes, if the tools support the server's MCP transport and are configured for the same knowledge base. Wenlan supports local coding clients and an optional Streamable HTTP route for compatible web clients.",
+          "The official server writes one JSONL file. By default it is memory.jsonl in the server's folder; set MEMORY_FILE_PATH to choose the location.",
       },
       {
-        question: "Does Wenlan replace the original documents or codebase?",
+        question: "Can Claude Code and Cursor share one MCP memory server?",
         answer:
-          "No. Wenlan keeps sources, memories, and maintained pages separate. Agents should still inspect the current source code or original document when the task depends on exact implementation or wording.",
+          "Yes. Point both at the same server and the same storage, such as the same MEMORY_FILE_PATH, or connect both to the same Wenlan install.",
+      },
+      {
+        question: "Is an MCP memory server the same as RAG?",
+        answer:
+          "No. MCP is how the client talks to the server. RAG is one way a server can search. Some memory servers use semantic search; the official one uses plain text matching.",
+      },
+      {
+        question: "Does Claude Code need an MCP memory server?",
+        answer:
+          "Not always. Claude Code has CLAUDE.md and auto memory built in. Add an MCP memory server when you want the same memory in other tools or need more control over what is stored.",
       },
     ],
     relatedSlugs: [
-      "prevent-multi-agent-knowledge-conflicts",
+      "claude-code-memory",
+      "how-to-give-codex-persistent-memory",
+      "cursor-claude-code-shared-memory",
       "source-backed-wiki-pages-ai-work",
       "build-local-ai-knowledge-base-from-documents",
       "distilled-wiki-pages-ai-memory",
-      "cursor-claude-code-shared-memory",
-      "wenlan-gemini-cli-workflow",
       "wenlan-vs-mcp-memory-service",
+      "prevent-multi-agent-knowledge-conflicts",
     ],
     officialReferences: [
+      {
+        label: "Knowledge Graph Memory Server (official MCP servers repo)",
+        href: "https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
+      },
       {
         label: "MCP server concepts",
         href: "https://modelcontextprotocol.io/docs/learn/server-concepts",
       },
       {
-        label: "MCP client concepts",
-        href: "https://modelcontextprotocol.io/docs/learn/client-concepts",
-      },
-      {
-        label: "MCP Knowledge Base package",
-        href: "https://pypi.org/project/mcp-kb/",
-      },
-      {
         label: "Claude Code MCP setup",
         href: "https://code.claude.com/docs/en/mcp",
+      },
+      {
+        label: "Codex MCP setup",
+        href: "https://developers.openai.com/codex/mcp",
+      },
+      {
+        label: "Mem0 MCP server",
+        href: "https://docs.mem0.ai/platform/mem0-mcp",
+      },
+      {
+        label: "Basic Memory on GitHub",
+        href: "https://github.com/basicmachines-co/basic-memory",
+      },
+      {
+        label: "mcp-memory-service on GitHub",
+        href: "https://github.com/doobidoo/mcp-memory-service",
       },
       {
         label: "Wenlan on GitHub",
@@ -342,8 +413,8 @@ const baseArticles: LearnArticle[] = [
       },
     ],
     cta: {
-      heading: "Connect a source-backed knowledge base",
-      body: "Install Wenlan, connect one MCP client, and verify retrieval, citations, freshness, and cross-client access before using it for real work.",
+      heading: "Use one local memory server for all your AI tools",
+      body: "Install Wenlan, connect one MCP client, and test a save-and-recall round trip before connecting the rest.",
     },
   },
   {
