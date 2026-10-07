@@ -10,6 +10,35 @@ import {
 } from "@/i18n/locales";
 import { localizedHrefForLocale } from "@/i18n/navigation";
 
+// Static prerender of the English home reports its pathname as "/index".
+function normalizePathname(pathname: string): string {
+  return pathname.replace(/\/index$/, "") || "/";
+}
+
+// A page with no translation would localize back to itself, so the menu item
+// would reload the same English page. Send the reader to the nearest
+// translated parent instead (the Learn or Docs index, or the home page) and
+// say so in the menu.
+function switchTarget(targetLocale: Locale, href: string): { href: string; exact: boolean } {
+  if (targetLocale === "en") {
+    return { href: localizedHrefForLocale(targetLocale, href), exact: true };
+  }
+  let path = href;
+  for (;;) {
+    const localized = localizedHrefForLocale(targetLocale, path);
+    if (localized !== path || path === "/") {
+      return { href: localized, exact: path === href };
+    }
+    path = path.replace(/\/[^/]*$/, "") || "/";
+  }
+}
+
+const untranslatedHints = {
+  en: "",
+  "zh-TW": "此頁尚無中文版",
+  "zh-CN": "此页暂无中文版",
+} as const satisfies Record<Locale, string>;
+
 const localeLabels = {
   en: "English",
   "zh-TW": "繁體中文",
@@ -29,7 +58,7 @@ export function LanguageSwitcher({
   placement?: "down" | "up";
 }) {
   const pathname = usePathname();
-  const href = hrefProp ?? pathname ?? "/";
+  const href = normalizePathname(hrefProp ?? pathname ?? "/");
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const summaryRef = useRef<HTMLElement>(null);
 
@@ -93,21 +122,27 @@ export function LanguageSwitcher({
       >
         {SUPPORTED_LOCALES.map((targetLocale) => {
           const active = targetLocale === locale;
+          const target = switchTarget(targetLocale, href);
 
           return (
             <a
               key={targetLocale}
-              href={localizedHrefForLocale(targetLocale, href)}
+              href={target.href}
               lang={htmlLangByLocale[targetLocale]}
               hrefLang={hreflangByLocale[targetLocale]}
               aria-current={active ? "true" : undefined}
-              className={`flex min-h-9 items-center rounded px-2.5 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--o-warm)] [@media(pointer:coarse)]:min-h-11 ${
+              className={`flex min-h-9 flex-col items-start justify-center rounded px-2.5 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--o-warm)] [@media(pointer:coarse)]:min-h-11 ${
                 active
                   ? "bg-[var(--o-surface)] font-medium text-[var(--o-text)]"
                   : "text-[var(--o-text-secondary)] hover:bg-[var(--o-surface)] hover:text-[var(--o-text)]"
               }`}
             >
               {localeLabels[targetLocale]}
+              {!target.exact && (
+                <span className="text-[11px] leading-tight text-[var(--o-text-muted)]">
+                  {untranslatedHints[targetLocale]}
+                </span>
+              )}
             </a>
           );
         })}

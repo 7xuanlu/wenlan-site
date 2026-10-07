@@ -365,7 +365,9 @@ test("home nav exposes a route-preserving locale switcher", async () => {
   assert.match(source, /import \{ LanguageSwitcher \} from "@\/components\/language-switcher"/);
   assert.match(source, /<LanguageSwitcher\s+locale=\{locale\}\s+\/>/);
   assert.match(switcher, /SUPPORTED_LOCALES\.map/);
-  assert.match(switcher, /localizedHrefForLocale\(targetLocale,\s*href\)/);
+  assert.match(switcher, /const target = switchTarget\(targetLocale,\s*href\)/);
+  assert.match(switcher, /href=\{target\.href\}/);
+  assert.match(switcher, /normalizePathname\(hrefProp \?\? pathname/);
   assert.match(switcher, /aria-current=\{active \? "true" : undefined\}/);
   assert.match(switcher, /<details\b/);
   assert.match(switcher, /<summary\b/);
