@@ -2,6 +2,7 @@
 
 import { readFile, readdir, stat } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
+import { CONSOLIDATED_LEARN_REDIRECTS } from "./consolidated-learn-redirects.mjs";
 import { assertIsrCachePolicy } from "./isr-cache-policy.mjs";
 
 const CANONICAL_ORIGIN = "https://wenlan.app";
@@ -17,15 +18,15 @@ const BRIDGE_HOST_REDIRECTS = [
 }));
 
 const REBRAND_REDIRECTS = [
-  { source: "/learn/origin-for-claude-code", destination: "/learn/wenlan-for-claude-code", statusCode: 308 },
+  { source: "/learn/origin-for-claude-code", destination: "/learn/claude-code-memory", statusCode: 308 },
   {
     source: "/learn/claude-code-memory-command-vs-origin",
-    destination: "/learn/claude-code-memory-command-vs-wenlan",
+    destination: "/learn/claude-code-memory",
     statusCode: 308,
   },
   {
     source: "/learn/where-origin-stores-claude-code-memory",
-    destination: "/learn/where-wenlan-stores-claude-code-memory",
+    destination: "/learn/claude-code-memory",
     statusCode: 308,
   },
   { source: "/learn/origin-vs-basic-memory", destination: "/learn/wenlan-vs-basic-memory", statusCode: 308 },
@@ -35,21 +36,21 @@ const REBRAND_REDIRECTS = [
     destination: "/learn/wenlan-vs-superlocal-memory",
     statusCode: 308,
   },
-  { source: "/learn/origin-codex-workflow", destination: "/learn/wenlan-codex-workflow", statusCode: 308 },
-  { source: "/learn/origin-cursor-workflow", destination: "/learn/wenlan-cursor-workflow", statusCode: 308 },
+  { source: "/learn/origin-codex-workflow", destination: "/learn/how-to-give-codex-persistent-memory", statusCode: 308 },
+  { source: "/learn/origin-cursor-workflow", destination: "/learn/how-to-add-mcp-memory-to-cursor", statusCode: 308 },
   {
     source: "/learn/origin-claude-desktop-workflow",
-    destination: "/learn/wenlan-claude-desktop-workflow",
+    destination: "/learn/claude-desktop-mcp-memory-setup",
     statusCode: 308,
   },
   {
     source: "/learn/origin-gemini-cli-workflow",
-    destination: "/learn/wenlan-gemini-cli-workflow",
+    destination: "/learn/mcp-memory-server",
     statusCode: 308,
   },
   {
     source: "/learn/origin-vscode-mcp-workflow",
-    destination: "/learn/wenlan-vscode-mcp-workflow",
+    destination: "/learn/mcp-memory-server",
     statusCode: 308,
   },
   {
@@ -74,6 +75,7 @@ const REBRAND_REDIRECTS = [
 const REQUIRED_REDIRECTS = [
   ...BRIDGE_HOST_REDIRECTS,
   ...REBRAND_REDIRECTS,
+  ...CONSOLIDATED_LEARN_REDIRECTS.map((redirect) => ({ ...redirect, statusCode: 308 })),
   { source: "/learn/ai-memory-app", destination: "/learn/ai-work-memory", statusCode: 308 },
   { source: "/guides", destination: "/learn", statusCode: 308 },
   { source: "/guides/:slug", destination: "/learn/:slug", statusCode: 308 },
@@ -103,7 +105,7 @@ const OLD_SITEMAP_URL_PATTERNS = [
   /^https:\/\/wenlan\.app\/guides(?:\/|$)/,
   /^https:\/\/wenlan\.app\/docs\/guides(?:\/|$)/,
   /^https:\/\/wenlan\.app\/learn\/ai-memory-app$/,
-  ...REBRAND_REDIRECTS.map(
+  ...[...REBRAND_REDIRECTS, ...CONSOLIDATED_LEARN_REDIRECTS].map(
     ({ source }) => new RegExp(`^https://wenlan\\.app${source.replaceAll("/", "\\/")}$`),
   ),
 ];

@@ -174,20 +174,20 @@ Demand discovery:
 | provenance | passed | Every English, zh-TW, and zh-CN observation preserves a URL, query, capture date, language or geography, and source-native observation unit; no row is treated as keyword volume. | locales.en.serpEvidence[0]; locales.en.demandEvidence[0]; locales.zh-TW.serpEvidence[0]; locales.zh-TW.demandEvidence[0]; locales.zh-CN.serpEvidence[0]; locales.zh-CN.demandEvidence[0] |
 | repeatedDemand | passed | Independent official, Reddit, Taiwan practitioner, V2EX, and Juejin sources repeat one high-intent task: keep project instructions small while agents retrieve versioned, source-backed project knowledge on demand. | locales.en.serpEvidence[0]; locales.en.demandEvidence[0]; locales.en.demandEvidence[1]; locales.zh-TW.demandEvidence[0]; locales.zh-TW.demandEvidence[1]; locales.zh-CN.demandEvidence[0]; locales.zh-CN.demandEvidence[1] |
 | trilingualSerp | passed | Separate English, zh-TW, and zh-CN result sets return the same integration task using natural locale wording around Codex or coding agents, project knowledge, AGENTS.md, and a knowledge base. | locales.en.serpEvidence[0]; locales.en.serpEvidence[1]; locales.zh-TW.serpEvidence[0]; locales.zh-TW.serpEvidence[1]; locales.zh-CN.serpEvidence[0]; locales.zh-CN.serpEvidence[1] |
-| cleanGap | passed | The existing Codex workflow owns session context, capture, recall, and handoff; the source-backed page owns generic knowledge architecture. Neither answers how coding-agent instruction files, repository truth, on-demand knowledge, citations, and acceptance tests divide responsibility. One new trilingual integration owner is therefore cleaner than rewriting or duplicating either page. | overlapCheck; src/app/(en)/learn/seo-articles.ts:wenlan-codex-workflow; src/app/(en)/learn/seo-articles.ts:source-backed-wiki-pages-ai-work |
-| firstPartyProof | passed | The current site documents Wenlan setup, Codex connection, capture, recall, pages, provenance, and local source workflows. | src/app/(en)/learn/seo-articles.ts:wenlan-codex-workflow; src/app/(en)/docs/docs.ts |
+| cleanGap | passed | The existing Codex workflow owns session context, capture, recall, and handoff; the source-backed page owns generic knowledge architecture. Neither answers how coding-agent instruction files, repository truth, on-demand knowledge, citations, and acceptance tests divide responsibility. One new trilingual integration owner is therefore cleaner than rewriting or duplicating either page. | overlapCheck; src/app/(en)/learn/articles.ts:how-to-give-codex-persistent-memory; src/app/(en)/learn/seo-articles.ts:source-backed-wiki-pages-ai-work |
+| firstPartyProof | passed | The current site documents Wenlan setup, Codex connection, capture, recall, pages, provenance, and local source workflows. | src/app/(en)/learn/articles.ts:how-to-give-codex-persistent-memory; src/app/(en)/docs/docs.ts |
 | standaloneUtility | passed | A neutral coding-agent knowledge-base workflow can teach source selection, retrieval boundaries, citations, and verification. | standaloneUtility |
 | internalLinks | passed | The Learn hub plus existing Codex, source-backed, document-build, and tool-selection owners provide at least three same-locale contextual entry paths without changing their primary intent. | internalLinks |
 | authorityPath | passed | The current bilingual ai-prompting-guide repository is active, focuses on Claude Code, Codex, AGENTS.md, context engineering, and verification, and explicitly welcomes synchronized English and zh-TW documentation PRs. It is a small exact-fit candidate, not claimed high authority; any contribution remains separately approval-gated. | authorityPath |
 
 ### Wenlan proof
 
-- Wenlan exposes a maintained Codex workflow and local MCP connection path. — `src/app/(en)/learn/seo-articles.ts`; verify with `rg -n "wenlan-codex-workflow|connect codex" src/app/(en)/learn/seo-articles.ts src/app/(en)/docs/docs.ts`.
+- Wenlan exposes a maintained Codex workflow and local MCP connection path. — `src/app/(en)/learn/articles.ts`; verify with `rg -n "how-to-give-codex-persistent-memory|connect codex" src/app/(en)/learn/articles.ts src/app/(en)/docs/docs.ts`.
 - Sources, memories, and maintained pages remain distinct and inspectable. — `src/app/(en)/learn/seo-articles.ts`; verify with `rg -n "Sources, Memories, and Pages|citations" src/app/(en)/learn/seo-articles.ts`.
 
 ### Planned internal links
 
-- https://wenlan.app/learn/wenlan-codex-workflow
+- https://wenlan.app/learn/how-to-give-codex-persistent-memory
 - https://wenlan.app/learn/source-backed-wiki-pages-ai-work
 - https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents
 - https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work
@@ -556,7 +556,7 @@ Demand discovery:
 
 | Locale | Query family | Coverage | Existing owner | Research needed |
 | --- | --- | --- | --- | --- |
-| en | multiple AI agents knowledge base conflicts; prevent stale shared agent knowledge; multi agent knowledge write conflict workflow | partial | [owner](https://wenlan.app/learn/multi-agent-memory-workflow) | Use a separate diagnostic owner for conflicting or stale accepted knowledge; keep the existing multi-agent memory page as the client-connection and shared-workflow owner. |
+| en | multiple AI agents knowledge base conflicts; prevent stale shared agent knowledge; multi agent knowledge write conflict workflow | partial | [owner](https://wenlan.app/learn/codex-claude-code-shared-memory) | Use a separate diagnostic owner for conflicting or stale accepted knowledge; keep the existing multi-agent memory page as the client-connection and shared-workflow owner. |
 | zh-TW | 多個 AI agents 共用知識衝突; 避免共享 AI 知識過期; 多代理知識寫入衝突流程 | gap | none | Use Taiwan-native 多個 AI Agent or AI 代理, 共用知識, 覆寫, 過期結論, and 審查 wording; avoid forcing the less natural 多智能體 phrase into the title. |
 | zh-CN | 多个 AI agents 共享知识冲突; 避免共享 AI 知识过期; 多智能体知识写入冲突流程 | gap | none | Use mainland-native 多智能体, 共享知识, 覆盖, 过期结论, and 写入冲突 wording; keep memory contamination as corroboration rather than the primary owner. |
 
@@ -592,8 +592,8 @@ Demand discovery:
 | provenance | passed | Every observation stores a checkable URL, capture date, locale, geography, native unit, and unconverted value. | locales.en.serpEvidence; locales.en.demandEvidence; locales.zh-TW.serpEvidence; locales.zh-TW.demandEvidence; locales.zh-CN.serpEvidence; locales.zh-CN.demandEvidence |
 | repeatedDemand | passed | Independent papers, multi-agent framework discussions, a Taiwan implementation, a Simplified Chinese bug report, and a maintained Chinese chapter repeat overwrite, stale-state, contradiction, or scope-pollution failures. | https://arxiv.org/abs/2606.24535; https://github.com/vectorize-io/hindsight/discussions/1576; https://github.com/anthropics/anthropic-sdk-python/discussions/1419; https://www.ithome.com.tw/news/178146; https://github.com/bytedance/deer-flow/issues/4802 |
 | trilingualSerp | passed | English, Taiwan Traditional Chinese, and Mainland Simplified Chinese result sets each surface shared-state overwrite, stale knowledge, semantic conflict, or memory-scope contamination as a maintain-or-troubleshoot task. | locales.en.serpEvidence; locales.zh-TW.serpEvidence; locales.zh-CN.serpEvidence |
-| cleanGap | passed | The existing English multi-agent page owns shared daemon, data directory, space, capture, recall, handoff, and distill setup. The new family owns a later failure trigger: contradictory, overwritten, scope-polluted, or stale accepted knowledge, with version checks and review. Mandarin has no current owner for that task. | src/app/(en)/learn/seo-articles.ts:multi-agent-memory-workflow; src/app/(en)/learn/seo-articles.ts:prevent-multi-agent-knowledge-conflicts; overlapCheck |
-| firstPartyProof | passed | Current pages describe shared local access, explicit scope, contradiction review, stale context handling, source-backed pages, and git history. | src/app/(en)/learn/seo-articles.ts:multi-agent-memory-workflow; src/app/(en)/learn/articles.ts |
+| cleanGap | passed | The existing English multi-agent page owns shared daemon, data directory, space, capture, recall, handoff, and distill setup. The new family owns a later failure trigger: contradictory, overwritten, scope-polluted, or stale accepted knowledge, with version checks and review. Mandarin has no current owner for that task. | src/app/(en)/learn/seo-articles.ts:codex-claude-code-shared-memory; src/app/(en)/learn/seo-articles.ts:prevent-multi-agent-knowledge-conflicts; overlapCheck |
+| firstPartyProof | passed | Current pages describe shared local access, explicit scope, contradiction review, stale context handling, source-backed pages, and git history. | src/app/(en)/learn/seo-articles.ts:codex-claude-code-shared-memory; src/app/(en)/learn/articles.ts |
 | standaloneUtility | passed | Ownership, conflict, stale-state, and review rules are useful for any multi-agent knowledge system. | standaloneUtility |
 | internalLinks | passed | Multi-agent, source-backed, and LLM Wiki owners are predeclared. | internalLinks |
 | authorityPath | passed | Hindsight discussion 1576 is an exact maintained multi-agent shared-memory maintenance surface; any neutral reply or reference remains separately approval-gated after the page is live. | https://github.com/vectorize-io/hindsight/discussions/1576 |
@@ -605,7 +605,7 @@ Demand discovery:
 
 ### Planned internal links
 
-- https://wenlan.app/learn/multi-agent-memory-workflow
+- https://wenlan.app/learn/codex-claude-code-shared-memory
 - https://wenlan.app/learn/source-backed-wiki-pages-ai-work
 - https://wenlan.app/learn/distilled-wiki-pages-ai-memory
 - https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work

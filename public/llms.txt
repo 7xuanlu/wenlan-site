@@ -21,22 +21,14 @@
 - [AI work memory](https://wenlan.app/learn/ai-work-memory): What changes when AI sessions can carry context across tools and weeks.
 - [MCP memory server](https://wenlan.app/learn/mcp-memory-server): How Wenlan exposes memory through the Model Context Protocol so any compatible AI client can read and write the same store.
 - [Local-first AI work memory](https://wenlan.app/learn/local-first-ai-memory): Data ownership, privacy, control. Why the daemon writes to ~/.wenlan/ instead of the cloud.
-- [Markdown plus local index](https://wenlan.app/learn/markdown-local-index-ai-memory): The storage model. Markdown projection for humans, libSQL index for retrieval, both kept in sync.
 - [LLM wiki for AI work](https://wenlan.app/learn/distilled-wiki-pages-ai-memory): Why Wenlan composes atomic captures into source-backed pages with provenance and refreshable revision state.
 - [Claude Code memory](https://wenlan.app/learn/claude-code-memory): How Wenlan works inside Claude Code sessions and how /capture and /handoff fit the work loop.
-- [Claude Code /memory vs Wenlan](https://wenlan.app/learn/claude-code-memory-command-vs-wenlan): When native Claude Code memory is enough and when Wenlan adds source-backed local MCP memory.
 - [AI agent handoff loop](https://wenlan.app/learn/ai-agent-handoff-loop): Session-end discipline that prevents context loss between AI sessions.
-- [Wenlan for Claude Code](https://wenlan.app/learn/wenlan-for-claude-code): The practical /setup, /brief, /capture, /handoff, and /distill loop for Claude Code users.
-- [Where Wenlan stores Claude Code memory](https://wenlan.app/learn/where-wenlan-stores-claude-code-memory): Local ~/.wenlan artifacts, pages, sessions, and git history.
-- [How to add memory to Claude Code](https://wenlan.app/learn/how-to-add-memory-to-claude-code): Plugin install, /setup, and first capture/recall verification.
 - [How to give Codex persistent memory](https://wenlan.app/learn/how-to-give-codex-persistent-memory): MCP-only setup for Codex with Wenlan.
 - [How to add MCP memory to Cursor](https://wenlan.app/learn/how-to-add-mcp-memory-to-cursor): Cursor MCP setup and verification loop.
 - [Claude Desktop MCP memory setup](https://wenlan.app/learn/claude-desktop-mcp-memory-setup): Connect Claude Desktop to Wenlan through MCP.
 - [AI agent memory: local vs cloud](https://wenlan.app/learn/ai-agent-memory-local-vs-cloud): Choose the right trust boundary for AI memory.
 - [Why AI coding agents lose context](https://wenlan.app/learn/ai-coding-agent-loses-context): The session-boundary problem Wenlan solves.
-- [Persistent project context for AI agents](https://wenlan.app/learn/persistent-project-context-for-ai-agents): Decisions, lessons, constraints, and handoffs across tools.
-- [MCP memory server on localhost 7878](https://wenlan.app/learn/mcp-memory-server-localhost-7878): Wenlan daemon boundary and setup debugging.
-- [What to capture in AI work memory](https://wenlan.app/learn/what-to-capture-in-ai-work-memory): Capture quality rules for durable AI work context.
 
 ## Comparisons
 
@@ -52,21 +44,10 @@
 
 ## Workflows and Trust
 
-- [Wenlan workflow for Codex](https://wenlan.app/learn/wenlan-codex-workflow): Context, capture, recall, and handoff from Codex.
-- [Wenlan workflow for Cursor](https://wenlan.app/learn/wenlan-cursor-workflow): Cursor MCP memory workflow for repeated coding sessions.
-- [Wenlan workflow for Claude Desktop](https://wenlan.app/learn/wenlan-claude-desktop-workflow): Planning and research memories that later coding agents can reuse.
-- [Wenlan workflow for Gemini CLI](https://wenlan.app/learn/wenlan-gemini-cli-workflow): CLI memory workflow through MCP.
-- [Wenlan workflow for VS Code MCP clients](https://wenlan.app/learn/wenlan-vscode-mcp-workflow): VS Code surfaces using Wenlan's local daemon.
-- [Claude Code session handoff](https://wenlan.app/learn/claude-code-session-handoff): Use /handoff to preserve state for future sessions.
 - [Shared memory between Cursor and Claude Code](https://wenlan.app/learn/cursor-claude-code-shared-memory): One local daemon across two coding tools.
 - [Shared memory between Codex and Claude Code](https://wenlan.app/learn/codex-claude-code-shared-memory): Carry implementation context across Codex and Claude Code.
-- [Multi-agent memory workflow](https://wenlan.app/learn/multi-agent-memory-workflow): Shared local memory for multiple AI clients.
-- [AI agent project status handoff](https://wenlan.app/learn/ai-agent-project-status-handoff): Durable status without bloating memory.
 - [Source-backed wiki pages for AI work](https://wenlan.app/learn/source-backed-wiki-pages-ai-work): Readable pages with source memory IDs.
-- [AI memory provenance](https://wenlan.app/learn/ai-memory-provenance): Why source IDs, revisions, and review matter.
-- [Local git history for AI memory](https://wenlan.app/learn/local-git-history-ai-memory): Inspectable memory and page write history.
 - [Review before trust in AI memory](https://wenlan.app/learn/review-before-trust-ai-memory): Keep uncertain, stale, or contradictory context visible.
-- [What Wenlan is not](https://wenlan.app/learn/project-scope-ai-memory): Product boundaries for local AI work memory.
 
 ## Reference
 

@@ -972,10 +972,10 @@ export const zhCNContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "334e175eda2a1e316ce41e9d4715dbeb626b3826c60e03b475ab649337b9111a",
+    sourceHash: "38b47f85f0574c5dbb40203931bb1056effd65d2e3fa801a016b1fa14955e522",
     content: {
       seo: {
-        title: "关于 Wenlan | AI 工作的 LLM wiki",
+        title: "关于 Wenlan 文澜：开源、本地优先的项目",
         description:
           "Wenlan 是开源、本地优先的 AI 工作 LLM wiki，由 AI 智能体打造并以来源为根基：把文档、笔记与决策整理成可引用、可审核、可更新的页面，让 AI 工作有据可查、持续积累。支持 Windows、macOS 与 Linux，免费下载使用。了解文澜的理念、开源协议与产品路线图。",
       },
@@ -1095,10 +1095,10 @@ export const zhCNContent = {
   },
   links: {
     status: "translated",
-    sourceHash: "4f95e34c4d9128c9e4e24563e3e0adf3ad13c926f9cf2a0e3f998bb16038ee04",
+    sourceHash: "85dd8a1863ef958463701807aaeb4ddc89e97a3d132a9039ecd7f4b81c700723",
     content: {
       seo: {
-        title: "文澜链接 | AI 工作用 LLM Wiki",
+        title: "文澜链接：安装、GitHub 与文档",
         description:
           "所有文澜官方链接都在这里：下载 App、阅读文档、查看指南，以及在 GitHub 和 npm 找到文澜。",
       },
@@ -1161,10 +1161,10 @@ export const zhCNContent = {
   },
   docs: {
     status: "translated",
-    sourceHash: "3ec15024f71be188440a73397cfa2b1f6dce2bffdc3b4c8ea7cf74f3bc09b30e",
+    sourceHash: "bd9f9a5d70d1e6b6867f2f81dc3d646f087aa423019a1dd51cc728d2232e11f9",
     content: {
       seo: {
-        title: "Wenlan 文档 | AI 工作的 LLM wiki",
+        title: "Wenlan 文档：安装、工作流程与参考",
         description:
           "安装 Wenlan，学习 AI 工作记忆循环：从安装、连接到 Claude Code、Codex、ChatGPT 等 MCP 客户端，再到理解有来源依据的 wiki 页面、引用、检索与更新机制如何配合，让 AI 记住你的工作。包含分步安装指南、客户端接入说明与常见问题解答。",
       },
@@ -1878,7 +1878,7 @@ export const zhCNContent = {
   },
   footer: {
     status: "translated",
-    sourceHash: "558ca7745c25cdaa3abd7bde264e12bbdcb08277e2415857775db600912c7978",
+    sourceHash: "e022239f60bb10661cc1abf6dbac2c239c0f8256d63bd169d92cd7913b2ba82c",
     content: {
       ariaLabel: "网站页脚",
       brand: "Wenlan",
@@ -1907,6 +1907,10 @@ export const zhCNContent = {
             { id: "ai-knowledge-base", href: "/learn/source-backed-wiki-pages-ai-work", label: "AI 知识库导览" },
             { id: "tool-selection", href: "/learn/choose-ai-knowledge-base-tool", label: "AI 知识库工具选择" },
             { id: "obsidian", href: "/learn/wenlan-vs-obsidian-ai-memory", label: "Obsidian 与 AI 工作" },
+            { id: "claude-code-memory", href: "/learn/claude-code-memory", label: "Claude Code 记忆" },
+            { id: "codex-memory", href: "/learn/how-to-give-codex-persistent-memory", label: "Codex 记忆" },
+            { id: "shared-memory", href: "/learn/codex-claude-code-shared-memory", label: "Codex 与 Claude Code 共享记忆" },
+            { id: "mcp-memory-server", href: "/learn/mcp-memory-server", label: "MCP 记忆服务器" },
           ],
         },
         {

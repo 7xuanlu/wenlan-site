@@ -1908,7 +1908,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Diagnostics",
         body: [
-          "If a client cannot reach memory, check daemon health first with wenlan doctor or the MCP doctor tool. Then inspect whether the client is launching wenlan-mcp and whether port 7878 is occupied by an old daemon.",
+          "If a client cannot reach memory, check daemon health first with wenlan doctor in a terminal. Then inspect whether the client is launching wenlan-mcp and whether port 7878 is occupied by an old daemon.",
           "For bug reports, include the client, operating system, command you ran, expected result, actual result, and redacted doctor output.",
         ],
       },
@@ -3337,7 +3337,7 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Start with /wenlan:setup in Claude Code, wenlan doctor in the terminal, or the doctor tool in an MCP client.",
+      "Start with /wenlan:setup in Claude Code or wenlan doctor in a terminal.",
       "Most issues are one of three things: daemon not reachable, MCP server not configured, or the client needs a restart.",
     ],
     sections: [
@@ -3355,7 +3355,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Daemon is not reachable",
         body: [
-          "Wenlan's daemon listens locally on port 7878. If a client cannot reach it, use /wenlan:setup from Claude Code or the doctor tool from an MCP client to check the daemon state.",
+          "Wenlan's daemon listens locally on port 7878. If a client cannot reach it, use /wenlan:setup from Claude Code or run wenlan doctor in a terminal to check the daemon state.",
           "For non-Claude clients, rerun npx -y wenlan setup if the local runtime was never installed or status verification failed.",
           "Only one daemon should own the local database. If you have been developing Wenlan locally, make sure an old daemon from another checkout is not still running.",
         ],

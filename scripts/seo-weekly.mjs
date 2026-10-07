@@ -1127,7 +1127,7 @@ function classifyQuery(query) {
   if (/claude code.*\/memory|\/memory/i.test(query)) {
     return {
       group: "Claude Code",
-      page: "/learn/claude-code-memory-command-vs-wenlan",
+      page: "/learn/claude-code-memory",
     };
   }
 

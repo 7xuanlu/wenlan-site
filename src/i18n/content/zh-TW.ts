@@ -972,10 +972,10 @@ export const zhTWContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "334e175eda2a1e316ce41e9d4715dbeb626b3826c60e03b475ab649337b9111a",
+    sourceHash: "38b47f85f0574c5dbb40203931bb1056effd65d2e3fa801a016b1fa14955e522",
     content: {
       seo: {
-        title: "關於 Wenlan | AI 工作的 LLM wiki",
+        title: "關於 Wenlan 文瀾：開源、本機優先的專案",
         description:
           "Wenlan 是開源、本地優先的 AI 工作 LLM wiki，由 AI 代理打造並以來源為根基：把文件、筆記與決策整理成可引用、可審查、可更新的頁面，讓 AI 工作有據可查、持續累積。支援 Windows、macOS 與 Linux，免費下載使用。了解文瀾的理念、開源授權與產品路線圖。",
       },
@@ -1095,10 +1095,10 @@ export const zhTWContent = {
   },
   links: {
     status: "translated",
-    sourceHash: "4f95e34c4d9128c9e4e24563e3e0adf3ad13c926f9cf2a0e3f998bb16038ee04",
+    sourceHash: "85dd8a1863ef958463701807aaeb4ddc89e97a3d132a9039ecd7f4b81c700723",
     content: {
       seo: {
-        title: "文瀾連結 | AI 工作用 LLM Wiki",
+        title: "文瀾連結：安裝、GitHub 與文件",
         description:
           "所有文瀾官方連結都在這裡：下載 App、閱讀文件、查看指南，以及在 GitHub 和 npm 找到文瀾。",
       },
@@ -1161,10 +1161,10 @@ export const zhTWContent = {
   },
   docs: {
     status: "translated",
-    sourceHash: "3ec15024f71be188440a73397cfa2b1f6dce2bffdc3b4c8ea7cf74f3bc09b30e",
+    sourceHash: "bd9f9a5d70d1e6b6867f2f81dc3d646f087aa423019a1dd51cc728d2232e11f9",
     content: {
       seo: {
-        title: "Wenlan 文件 | AI 工作的 LLM wiki",
+        title: "Wenlan 文件：安裝、工作流程與參考",
         description:
           "安裝 Wenlan，學習 AI 工作記憶循環：從安裝、連接到 Claude Code、Codex、ChatGPT 等 MCP 客戶端，再到理解有來源依據的 wiki 頁面、引用、檢索與更新機制如何配合，讓 AI 記住你的工作。包含逐步安裝指南、客戶端接入說明與常見問題解答。",
       },
@@ -1878,7 +1878,7 @@ export const zhTWContent = {
   },
   footer: {
     status: "translated",
-    sourceHash: "558ca7745c25cdaa3abd7bde264e12bbdcb08277e2415857775db600912c7978",
+    sourceHash: "e022239f60bb10661cc1abf6dbac2c239c0f8256d63bd169d92cd7913b2ba82c",
     content: {
       ariaLabel: "網站頁尾",
       brand: "Wenlan",
@@ -1907,6 +1907,10 @@ export const zhTWContent = {
             { id: "ai-knowledge-base", href: "/learn/source-backed-wiki-pages-ai-work", label: "AI 知識庫導覽" },
             { id: "tool-selection", href: "/learn/choose-ai-knowledge-base-tool", label: "AI 知識庫工具選擇" },
             { id: "obsidian", href: "/learn/wenlan-vs-obsidian-ai-memory", label: "Obsidian 與 AI 工作" },
+            { id: "claude-code-memory", href: "/learn/claude-code-memory", label: "Claude Code 記憶" },
+            { id: "codex-memory", href: "/learn/how-to-give-codex-persistent-memory", label: "Codex 記憶" },
+            { id: "shared-memory", href: "/learn/codex-claude-code-shared-memory", label: "Codex 與 Claude Code 共用記憶" },
+            { id: "mcp-memory-server", href: "/learn/mcp-memory-server", label: "MCP 記憶伺服器" },
           ],
         },
         {

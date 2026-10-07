@@ -980,7 +980,7 @@ export const enContent = {
     sourceHash: null,
     content: {
       seo: {
-        title: "About Wenlan | LLM Wiki for AI Work",
+        title: "About Wenlan: Open-Source, Local-First Project",
         description:
           "Wenlan is an open-source, local-first LLM wiki for AI work, built by agents and grounded in its sources.",
       },
@@ -1103,7 +1103,7 @@ export const enContent = {
     sourceHash: null,
     content: {
       seo: {
-        title: "Wenlan Links | LLM Wiki for AI Work",
+        title: "Wenlan Links: Install, GitHub, and Docs",
         description:
           "Every official Wenlan link in one place: download the app, read the docs, follow the guides, and find Wenlan on GitHub and npm.",
       },
@@ -1169,7 +1169,7 @@ export const enContent = {
     sourceHash: null,
     content: {
       seo: {
-        title: "Wenlan Docs | LLM Wiki for AI Work",
+        title: "Wenlan Docs: Setup, Workflows, and Reference",
         description:
           "Install Wenlan, learn the AI work memory loop, and understand how source-backed wiki pages, provenance, retrieval, and MCP clients fit together.",
       },
@@ -1912,6 +1912,10 @@ export const enContent = {
             { id: "ai-knowledge-base", href: "/learn/source-backed-wiki-pages-ai-work", label: "AI knowledge base guide" },
             { id: "tool-selection", href: "/learn/choose-ai-knowledge-base-tool", label: "AI knowledge base tool selection" },
             { id: "obsidian", href: "/learn/wenlan-vs-obsidian-ai-memory", label: "Obsidian and AI work" },
+            { id: "claude-code-memory", href: "/learn/claude-code-memory", label: "Claude Code memory" },
+            { id: "codex-memory", href: "/learn/how-to-give-codex-persistent-memory", label: "Codex memory" },
+            { id: "shared-memory", href: "/learn/codex-claude-code-shared-memory", label: "Codex and Claude Code shared memory" },
+            { id: "mcp-memory-server", href: "/learn/mcp-memory-server", label: "MCP memory server" },
           ],
         },
         {

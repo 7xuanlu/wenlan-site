@@ -448,7 +448,7 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.match(article, /https:\/\/gist\.github\.com\/karpathy\/442a6bf555914893e9891c11519de94f/);
   assert.match(
     article,
-    /relatedSlugs:\s*\[\s*"source-backed-wiki-pages-ai-work",\s*"verify-ai-knowledge-base-citations",\s*"build-course-wiki-from-lecture-notes",\s*"ai-work-memory-vs-knowledge-base",\s*"wenlan-vs-obsidian-ai-memory",\s*"ai-memory-provenance",\s*"local-git-history-ai-memory",\s*"migrate-obsidian-vault-to-llm-wiki",\s*"setup-agent-knowledge-base-for-coding-agents",?\s*\]/,
+    /relatedSlugs:\s*\[\s*"source-backed-wiki-pages-ai-work",\s*"verify-ai-knowledge-base-citations",\s*"build-course-wiki-from-lecture-notes",\s*"ai-work-memory-vs-knowledge-base",\s*"wenlan-vs-obsidian-ai-memory",\s*"ai-work-memory",\s*"local-first-ai-memory",\s*"migrate-obsidian-vault-to-llm-wiki",\s*"setup-agent-knowledge-base-for-coding-agents",?\s*\]/,
   );
   assert.match(
     supportArticle,
@@ -520,9 +520,8 @@ test("AI work memory comparison answers the knowledge-base role question directl
   const article = articles.slice(start, end);
 
   const relatedSources = [
-    [articles, "markdown-local-index-ai-memory"],
-    [supportingArticles, "ai-memory-provenance"],
-    [supportingArticles, "project-scope-ai-memory"],
+    [articles, "local-first-ai-memory"],
+    [articles, "ai-work-memory"],
   ];
 
   assert.notEqual(start, -1);
@@ -570,7 +569,7 @@ test("AI coding agent context-loss page separates native session recovery from d
   assert.match(articles, /publishedAt: spec\.publishedAt/);
   assert.match(article, /title: "Why AI Coding Agents Lose Context Between Sessions"/);
   assert.match(article, /publishedAt: "2026-06-06"/);
-  assert.match(article, /updatedAt: "2026-07-25"/);
+  assert.match(article, /updatedAt: "2026-10-07"/);
   assert.match(
     article,
     /metaTitle: "AI Coding Agent Context Loss: Causes and Fixes \| Wenlan"/,
@@ -969,7 +968,7 @@ test("stale AI agent memory page exposes a source-backed diagnostic workflow", a
   const articles = await readRepo("src/app/learn/seo-articles.ts");
   const marker = 'slug: "review-before-trust-ai-memory"';
   const start = articles.indexOf(marker);
-  const end = articles.indexOf('\n  {\n    slug: "', start + marker.length);
+  const end = articles.indexOf("\n];", start + marker.length);
   const article = articles.slice(start, end);
 
   assert.notEqual(start, -1);
@@ -1032,7 +1031,7 @@ test("MCP article answers memory-server intent with setup, storage, and a valida
   assert.match(article, /keywords: \[\s*"MCP memory server"/);
   assert.match(article, /"MCP knowledge base server"/);
   assert.match(article, /publishedAt: "2026-06-07"/);
-  assert.match(article, /updatedAt: "2026-10-06"/);
+  assert.match(article, /updatedAt: "2026-10-07"/);
   assert.match(article, /@modelcontextprotocol\/server-memory/);
   assert.match(article, /MEMORY_FILE_PATH/);
   assert.match(article, /heading: "MCP memory server vs knowledge base"/);
@@ -1533,7 +1532,7 @@ test("Claude Code memory acquisition page tracks native limits and the direct pl
   const article = articles.slice(start, end === -1 ? articles.length : end);
 
   assert.match(article, /publishedAt: "2026-06-07"/);
-  assert.match(article, /updatedAt: "2026-10-06"/);
+  assert.match(article, /updatedAt: "2026-10-07"/);
   assert.match(article, /first 200 lines or 25 KB/);
   assert.match(article, /per repository and shared across worktrees/);
   assert.match(article, /Start with Claude Code's native memory/);
@@ -1727,26 +1726,26 @@ test("Wenlan route slugs replace old Origin slugs with direct redirects", async 
 
   const nextConfig = await readRepo("next.config.ts");
   const requiredRedirects = [
-    ["/learn/origin-for-claude-code", "/learn/wenlan-for-claude-code"],
+    ["/learn/origin-for-claude-code", "/learn/claude-code-memory"],
     [
       "/learn/claude-code-memory-command-vs-origin",
-      "/learn/claude-code-memory-command-vs-wenlan",
+      "/learn/claude-code-memory",
     ],
     [
       "/learn/where-origin-stores-claude-code-memory",
-      "/learn/where-wenlan-stores-claude-code-memory",
+      "/learn/claude-code-memory",
     ],
     ["/learn/origin-vs-basic-memory", "/learn/wenlan-vs-basic-memory"],
     ["/learn/origin-vs-claude-mem", "/learn/wenlan-vs-claude-mem"],
     ["/learn/origin-vs-superlocal-memory", "/learn/wenlan-vs-superlocal-memory"],
-    ["/learn/origin-codex-workflow", "/learn/wenlan-codex-workflow"],
-    ["/learn/origin-cursor-workflow", "/learn/wenlan-cursor-workflow"],
+    ["/learn/origin-codex-workflow", "/learn/how-to-give-codex-persistent-memory"],
+    ["/learn/origin-cursor-workflow", "/learn/how-to-add-mcp-memory-to-cursor"],
     [
       "/learn/origin-claude-desktop-workflow",
-      "/learn/wenlan-claude-desktop-workflow",
+      "/learn/claude-desktop-mcp-memory-setup",
     ],
-    ["/learn/origin-gemini-cli-workflow", "/learn/wenlan-gemini-cli-workflow"],
-    ["/learn/origin-vscode-mcp-workflow", "/learn/wenlan-vscode-mcp-workflow"],
+    ["/learn/origin-gemini-cli-workflow", "/learn/mcp-memory-server"],
+    ["/learn/origin-vscode-mcp-workflow", "/learn/mcp-memory-server"],
     ["/learn/origin-vs-mcp-memory-service", "/learn/wenlan-vs-mcp-memory-service"],
     ["/learn/origin-vs-chatgpt-memory", "/learn/wenlan-vs-chatgpt-memory"],
     ["/learn/origin-vs-obsidian-ai-memory", "/learn/wenlan-vs-obsidian-ai-memory"],

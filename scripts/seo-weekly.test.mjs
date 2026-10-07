@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import test from "node:test";
+import { CONSOLIDATED_LEARN_REDIRECTS } from "./consolidated-learn-redirects.mjs";
 import { RELEASE_PAGE_PATHS } from "./isr-cache-policy.mjs";
 
 const execFileAsync = promisify(execFile);
@@ -71,26 +72,26 @@ async function runWeeklyFixture(
 }
 
 const rebrandRedirectPairs = [
-  ["/learn/origin-for-claude-code", "/learn/wenlan-for-claude-code"],
+  ["/learn/origin-for-claude-code", "/learn/claude-code-memory"],
   [
     "/learn/claude-code-memory-command-vs-origin",
-    "/learn/claude-code-memory-command-vs-wenlan",
+    "/learn/claude-code-memory",
   ],
   [
     "/learn/where-origin-stores-claude-code-memory",
-    "/learn/where-wenlan-stores-claude-code-memory",
+    "/learn/claude-code-memory",
   ],
   ["/learn/origin-vs-basic-memory", "/learn/wenlan-vs-basic-memory"],
   ["/learn/origin-vs-claude-mem", "/learn/wenlan-vs-claude-mem"],
   ["/learn/origin-vs-superlocal-memory", "/learn/wenlan-vs-superlocal-memory"],
-  ["/learn/origin-codex-workflow", "/learn/wenlan-codex-workflow"],
-  ["/learn/origin-cursor-workflow", "/learn/wenlan-cursor-workflow"],
+  ["/learn/origin-codex-workflow", "/learn/how-to-give-codex-persistent-memory"],
+  ["/learn/origin-cursor-workflow", "/learn/how-to-add-mcp-memory-to-cursor"],
   [
     "/learn/origin-claude-desktop-workflow",
-    "/learn/wenlan-claude-desktop-workflow",
+    "/learn/claude-desktop-mcp-memory-setup",
   ],
-  ["/learn/origin-gemini-cli-workflow", "/learn/wenlan-gemini-cli-workflow"],
-  ["/learn/origin-vscode-mcp-workflow", "/learn/wenlan-vscode-mcp-workflow"],
+  ["/learn/origin-gemini-cli-workflow", "/learn/mcp-memory-server"],
+  ["/learn/origin-vscode-mcp-workflow", "/learn/mcp-memory-server"],
   ["/learn/origin-vs-mcp-memory-service", "/learn/wenlan-vs-mcp-memory-service"],
   ["/learn/origin-vs-chatgpt-memory", "/learn/wenlan-vs-chatgpt-memory"],
   ["/learn/origin-vs-obsidian-ai-memory", "/learn/wenlan-vs-obsidian-ai-memory"],
@@ -116,6 +117,7 @@ const requiredBuiltRedirects = [
     destination,
     statusCode: 308,
   })),
+  ...CONSOLIDATED_LEARN_REDIRECTS.map((redirect) => ({ ...redirect, statusCode: 308 })),
   { source: "/learn/ai-memory-app", destination: "/learn/ai-work-memory", statusCode: 308 },
   { source: "/guides/ai-memory-app", destination: "/learn/ai-work-memory", statusCode: 308 },
   { source: "/guides", destination: "/learn", statusCode: 308 },
@@ -386,6 +388,7 @@ const requiredDeployedUtilityUrls = [
 ];
 const deployedRedirects = [
   ...rebrandRedirectPairs,
+  ...CONSOLIDATED_LEARN_REDIRECTS.map(({ source, destination }) => [source, destination]),
   ["/learn/ai-memory-app", "/learn/ai-work-memory"],
   ["/guides", "/learn"],
   ["/guides/claude-code-memory", "/learn/claude-code-memory"],
@@ -1588,7 +1591,7 @@ test("deployed technical SEO checker verifies robots, sitemap, key pages, utilit
     assert.match(stdout, /sitemap locs ok: 30/);
     assert.match(stdout, /key pages ok: 30/);
     assert.match(stdout, /utility noindex headers ok: 6/);
-    assert.match(stdout, /redirects ok: 25/);
+    assert.match(stdout, /redirects ok: 44/);
     assert.match(stdout, /bridge host redirects ok: 6/);
     assert.match(stdout, /old URLs absent from sitemap/);
   });
@@ -2113,7 +2116,7 @@ test("deployed technical SEO checker allows legacy ai-memory redirect hops by de
         { cwd: repoRoot },
       );
 
-      assert.match(stdout, /redirects ok: 25/);
+      assert.match(stdout, /redirects ok: 44/);
     },
   );
 });
@@ -2182,7 +2185,7 @@ test("built technical SEO checker verifies compiled redirects, headers, and site
       { cwd: repoRoot },
     );
 
-    assert.match(stdout, /redirects ok: 26/);
+    assert.match(stdout, /redirects ok: 45/);
     assert.match(stdout, /global 404 ok/);
     assert.match(stdout, /noindex headers ok: 8/);
     assert.match(stdout, /sitemap required locs ok: 24/);
@@ -2392,6 +2395,7 @@ test("built technical SEO checker rejects generic guide redirects before specifi
         destination,
         statusCode: 308,
       })),
+      ...CONSOLIDATED_LEARN_REDIRECTS.map((redirect) => ({ ...redirect, statusCode: 308 })),
       { source: "/learn/ai-memory-app", destination: "/learn/ai-work-memory", statusCode: 308 },
       { source: "/guides", destination: "/learn", statusCode: 308 },
       { source: "/guides/:slug", destination: "/learn/:slug", statusCode: 308 },

@@ -216,6 +216,10 @@ const comparisonLinks = [
   "/learn/source-backed-wiki-pages-ai-work",
   "/learn/choose-ai-knowledge-base-tool",
   "/learn/wenlan-vs-obsidian-ai-memory",
+  "/learn/claude-code-memory",
+  "/learn/how-to-give-codex-persistent-memory",
+  "/learn/codex-claude-code-shared-memory",
+  "/learn/mcp-memory-server",
 ];
 
 const expectedWorksWithNotes = {
