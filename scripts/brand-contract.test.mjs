@@ -1539,7 +1539,7 @@ test("Claude Code memory acquisition page tracks native limits and the direct pl
   const article = articles.slice(start, end === -1 ? articles.length : end);
 
   assert.match(article, /publishedAt: "2026-06-07"/);
-  assert.match(article, /updatedAt: "2026-07-18"/);
+  assert.match(article, /updatedAt: "2026-10-06"/);
   assert.match(article, /first 200 lines or 25 KB/);
   assert.match(article, /per repository and shared across worktrees/);
   assert.match(article, /Start with Claude Code's native memory/);
