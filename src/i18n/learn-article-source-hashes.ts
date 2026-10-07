@@ -37,7 +37,7 @@ export const LEARN_ARTICLE_SOURCE_HASHES = {
   "source-backed-wiki-pages-ai-work": "506c7a22aba14adee38a1e2dc18def8836201ab57a8e9e6df854aa3b1f75a770",
   "test-ai-knowledge-base-retrieval-after-changes": "590430bb5ad71ecc051ee23d0135b4410c90012b689fef5cc22d14fbc918d265",
   "verify-ai-knowledge-base-citations": "8e882525342d952d5806f666fb2fd13d6dc657da278a7e9943fce9e08eef6b9b",
-  "wenlan-vs-obsidian-ai-memory": "263a41f40f352832c7f3090a5202628140ad0dcbd3ce7d6d606a524f94556eb0",
+  "wenlan-vs-obsidian-ai-memory": "5e57720e964bcee1ab043c99ba8e37edc8f1387a21b3779f632a5139707294a8",
   "when-ai-agent-should-query-knowledge-base": "abc1e82cfff784bc15e39f11937dd295dad993590c50aee1eb15a9a9ee635c14",
 } as const;
 
