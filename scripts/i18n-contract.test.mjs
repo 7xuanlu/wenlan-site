@@ -1358,7 +1358,7 @@ test("coding-agent knowledge-base family owns one distinct trilingual integratio
   }
 
   const englishInboundOwners = [
-    "wenlan-codex-workflow",
+    "how-to-give-codex-persistent-memory",
     "source-backed-wiki-pages-ai-work",
     "build-local-ai-knowledge-base-from-documents",
   ];
@@ -2801,11 +2801,11 @@ test("English core content records the current SEO title and description subset"
   );
   assert.equal(
     content.enContent.about.content.seo.title,
-    "About Wenlan | LLM Wiki for AI Work",
+    "About Wenlan: Open-Source, Local-First Project",
   );
   assert.equal(
     content.enContent.docs.content.seo.title,
-    "Wenlan Docs | LLM Wiki for AI Work",
+    "Wenlan Docs: Setup, Workflows, and Reference",
   );
   assert.equal(
     content.enContent.getStarted.content.seo.title,

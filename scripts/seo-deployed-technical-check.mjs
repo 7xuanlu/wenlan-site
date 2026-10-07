@@ -2,6 +2,7 @@
 
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { CONSOLIDATED_LEARN_REDIRECTS } from "./consolidated-learn-redirects.mjs";
 
 const PRODUCTION_ORIGIN = "https://wenlan.app";
 const DEFAULT_TIMEOUT_MS = 15_000;
@@ -52,14 +53,14 @@ const REQUIRED_SITEMAP_LOCS = [
 ];
 
 const REBRAND_REDIRECTS = [
-  { source: "/learn/origin-for-claude-code", destination: "/learn/wenlan-for-claude-code" },
+  { source: "/learn/origin-for-claude-code", destination: "/learn/claude-code-memory" },
   {
     source: "/learn/claude-code-memory-command-vs-origin",
-    destination: "/learn/claude-code-memory-command-vs-wenlan",
+    destination: "/learn/claude-code-memory",
   },
   {
     source: "/learn/where-origin-stores-claude-code-memory",
-    destination: "/learn/where-wenlan-stores-claude-code-memory",
+    destination: "/learn/claude-code-memory",
   },
   { source: "/learn/origin-vs-basic-memory", destination: "/learn/wenlan-vs-basic-memory" },
   { source: "/learn/origin-vs-claude-mem", destination: "/learn/wenlan-vs-claude-mem" },
@@ -67,14 +68,14 @@ const REBRAND_REDIRECTS = [
     source: "/learn/origin-vs-superlocal-memory",
     destination: "/learn/wenlan-vs-superlocal-memory",
   },
-  { source: "/learn/origin-codex-workflow", destination: "/learn/wenlan-codex-workflow" },
-  { source: "/learn/origin-cursor-workflow", destination: "/learn/wenlan-cursor-workflow" },
+  { source: "/learn/origin-codex-workflow", destination: "/learn/how-to-give-codex-persistent-memory" },
+  { source: "/learn/origin-cursor-workflow", destination: "/learn/how-to-add-mcp-memory-to-cursor" },
   {
     source: "/learn/origin-claude-desktop-workflow",
-    destination: "/learn/wenlan-claude-desktop-workflow",
+    destination: "/learn/claude-desktop-mcp-memory-setup",
   },
-  { source: "/learn/origin-gemini-cli-workflow", destination: "/learn/wenlan-gemini-cli-workflow" },
-  { source: "/learn/origin-vscode-mcp-workflow", destination: "/learn/wenlan-vscode-mcp-workflow" },
+  { source: "/learn/origin-gemini-cli-workflow", destination: "/learn/mcp-memory-server" },
+  { source: "/learn/origin-vscode-mcp-workflow", destination: "/learn/mcp-memory-server" },
   {
     source: "/learn/origin-vs-mcp-memory-service",
     destination: "/learn/wenlan-vs-mcp-memory-service",
@@ -93,7 +94,7 @@ const OLD_SITEMAP_URL_PATTERNS = [
   /^https:\/\/wenlan\.app\/guides(?:\/|$)/,
   /^https:\/\/wenlan\.app\/docs\/guides(?:\/|$)/,
   /^https:\/\/wenlan\.app\/learn\/ai-memory-app$/,
-  ...REBRAND_REDIRECTS.map(
+  ...[...REBRAND_REDIRECTS, ...CONSOLIDATED_LEARN_REDIRECTS].map(
     ({ source }) => new RegExp(`^https://wenlan\\.app${source.replaceAll("/", "\\/")}$`),
   ),
 ];
@@ -278,6 +279,7 @@ const UTILITY_NOINDEX_PATHS = [
 
 const REQUIRED_REDIRECTS = [
   ...REBRAND_REDIRECTS,
+  ...CONSOLIDATED_LEARN_REDIRECTS.map((redirect) => ({ ...redirect, statusCode: 308 })),
   { source: "/learn/ai-memory-app", destination: "/learn/ai-work-memory" },
   { source: "/guides", destination: "/learn" },
   { source: "/guides/claude-code-memory", destination: "/learn/claude-code-memory" },

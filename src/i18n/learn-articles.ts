@@ -425,8 +425,8 @@ const zhTWArticles = {
       "wenlan-vs-obsidian-ai-memory",
       "source-backed-wiki-pages-ai-work",
       "verify-ai-knowledge-base-citations",
-      "ai-memory-provenance",
-      "local-git-history-ai-memory",
+      "ai-work-memory",
+      "local-first-ai-memory",
       "migrate-obsidian-vault-to-llm-wiki",
       "setup-agent-knowledge-base-for-coding-agents",
     ],
@@ -568,7 +568,7 @@ const zhTWArticles = {
       "build-product-research-knowledge-base-for-prd",
       "build-sre-incident-knowledge-base",
       "review-before-trust-ai-memory",
-      "ai-memory-provenance",
+      "ai-work-memory",
       "test-ai-knowledge-base-retrieval-after-changes",
     ],
     officialReferences: [
@@ -4054,7 +4054,7 @@ const zhCNArticles = {
       "build-product-research-knowledge-base-for-prd",
       "build-sre-incident-knowledge-base",
       "review-before-trust-ai-memory",
-      "ai-memory-provenance",
+      "ai-work-memory",
       "test-ai-knowledge-base-retrieval-after-changes",
     ],
     officialReferences: [

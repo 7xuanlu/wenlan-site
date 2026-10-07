@@ -576,7 +576,7 @@
           "reason": "The existing Codex workflow owns session context, capture, recall, and handoff; the source-backed page owns generic knowledge architecture. Neither answers how coding-agent instruction files, repository truth, on-demand knowledge, citations, and acceptance tests divide responsibility. One new trilingual integration owner is therefore cleaner than rewriting or duplicating either page.",
           "evidenceRefs": [
             "overlapCheck",
-            "src/app/(en)/learn/seo-articles.ts:wenlan-codex-workflow",
+            "src/app/(en)/learn/articles.ts:how-to-give-codex-persistent-memory",
             "src/app/(en)/learn/seo-articles.ts:source-backed-wiki-pages-ai-work"
           ]
         },
@@ -584,7 +584,7 @@
           "status": "passed",
           "reason": "The current site documents Wenlan setup, Codex connection, capture, recall, pages, provenance, and local source workflows.",
           "evidenceRefs": [
-            "src/app/(en)/learn/seo-articles.ts:wenlan-codex-workflow",
+            "src/app/(en)/learn/articles.ts:how-to-give-codex-persistent-memory",
             "src/app/(en)/docs/docs.ts"
           ]
         },
@@ -613,8 +613,8 @@
       "wenlanProof": [
         {
           "claim": "Wenlan exposes a maintained Codex workflow and local MCP connection path.",
-          "sourceRef": "src/app/(en)/learn/seo-articles.ts",
-          "verification": "rg -n \"wenlan-codex-workflow|connect codex\" src/app/(en)/learn/seo-articles.ts src/app/(en)/docs/docs.ts"
+          "sourceRef": "src/app/(en)/learn/articles.ts",
+          "verification": "rg -n \"how-to-give-codex-persistent-memory|connect codex\" src/app/(en)/learn/articles.ts src/app/(en)/docs/docs.ts"
         },
         {
           "claim": "Sources, memories, and maintained pages remain distinct and inspectable.",
@@ -625,7 +625,7 @@
       "standaloneUtility": "The page can show any coding-agent user how to keep source-of-truth files authoritative, retrieve only needed context, and validate cited conclusions.",
       "overlapCheck": "The existing Codex workflow answers session context, capture, recall, and handoff. The existing source-backed page answers generic knowledge architecture and maintenance. The new owner answers a different integration decision: what belongs in AGENTS.md or CLAUDE.md, what remains repository truth, what becomes on-demand cited knowledge, and how a coding agent verifies it. Keep Codex, Claude Code, and coding-agent query variants on this one owner unless joined GSC evidence proves distinct tasks.",
       "internalLinks": [
-        "https://wenlan.app/learn/wenlan-codex-workflow",
+        "https://wenlan.app/learn/how-to-give-codex-persistent-memory",
         "https://wenlan.app/learn/source-backed-wiki-pages-ai-work",
         "https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents",
         "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",
@@ -1717,7 +1717,7 @@
               "note": "A 90-day five-agent deployment reports shared-file overwrites and hallucinated shared state, then discusses candidate claims and stale, contradicted, or replaced edges."
             }
           ],
-          "existingOwner": "https://wenlan.app/learn/multi-agent-memory-workflow",
+          "existingOwner": "https://wenlan.app/learn/codex-claude-code-shared-memory",
           "coverage": "partial",
           "researchNeeded": "Use a separate diagnostic owner for conflicting or stale accepted knowledge; keep the existing multi-agent memory page as the client-connection and shared-workflow owner."
         },
@@ -1831,7 +1831,7 @@
           "status": "passed",
           "reason": "The existing English multi-agent page owns shared daemon, data directory, space, capture, recall, handoff, and distill setup. The new family owns a later failure trigger: contradictory, overwritten, scope-polluted, or stale accepted knowledge, with version checks and review. Mandarin has no current owner for that task.",
           "evidenceRefs": [
-            "src/app/(en)/learn/seo-articles.ts:multi-agent-memory-workflow",
+            "src/app/(en)/learn/seo-articles.ts:codex-claude-code-shared-memory",
             "src/app/(en)/learn/seo-articles.ts:prevent-multi-agent-knowledge-conflicts",
             "overlapCheck"
           ]
@@ -1840,7 +1840,7 @@
           "status": "passed",
           "reason": "Current pages describe shared local access, explicit scope, contradiction review, stale context handling, source-backed pages, and git history.",
           "evidenceRefs": [
-            "src/app/(en)/learn/seo-articles.ts:multi-agent-memory-workflow",
+            "src/app/(en)/learn/seo-articles.ts:codex-claude-code-shared-memory",
             "src/app/(en)/learn/articles.ts"
           ]
         },
@@ -1881,7 +1881,7 @@
       "standaloneUtility": "A neutral operating model can assign source ownership, isolate write scopes, expose conflicts, review superseding claims, and preserve an audit trail.",
       "overlapCheck": "The existing English multi-agent workflow owns connection and coordination through one daemon, data directory, space, capture, recall, handoff, and distill. This family owns a separate maintenance trigger and outcome: detect stale candidates before acceptance, classify contradictory evidence, review candidate claims, and preserve supersession history. It does not promise an atomic stale-write guard on the current public MCP write_page path. Mandarin has no current route for that task.",
       "internalLinks": [
-        "https://wenlan.app/learn/multi-agent-memory-workflow",
+        "https://wenlan.app/learn/codex-claude-code-shared-memory",
         "https://wenlan.app/learn/source-backed-wiki-pages-ai-work",
         "https://wenlan.app/learn/distilled-wiki-pages-ai-memory",
         "https://wenlan.app/zh-TW/learn/source-backed-wiki-pages-ai-work",

@@ -64,6 +64,18 @@ const searchRoutes = [
     context: "workflows",
   },
   {
+    query: "Codex memory",
+    intent: "See how Codex memories and AGENTS.md work, then share project context with Claude Code.",
+    href: "/learn/how-to-give-codex-persistent-memory",
+    context: "workflows",
+  },
+  {
+    query: "Codex and Claude Code shared memory",
+    intent: "Give Codex and Claude Code one local, source-backed memory both clients can recall.",
+    href: "/learn/codex-claude-code-shared-memory",
+    context: "workflows",
+  },
+  {
     query: "Basic Memory comparison",
     intent: "Compare Wenlan and Basic Memory on provenance, local retrieval, shared clients, and wiki pages.",
     href: "/learn/wenlan-vs-basic-memory",
