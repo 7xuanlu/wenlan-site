@@ -1809,13 +1809,13 @@ test("localized document-to-knowledge-base guides keep supported source boundari
   );
   const expectations = {
     "zh-TW": {
-      title: "如何用 Markdown、PDF 與 Obsidian 建立本地 AI 知識庫",
-      keyword: "建立 AI 知識庫",
+      title: "AI 知識庫是什麼？個人怎麼建立（工具比較＋步驟）",
+      keyword: "AI 知識庫建立",
       unsupportedPdf: "掃描型 PDF",
     },
     "zh-CN": {
-      title: "如何用 Markdown、PDF 与 Obsidian 建立本地 AI 知识库",
-      keyword: "搭建 AI 知识库",
+      title: "个人知识库怎么搭建？AI + Obsidian 实操（附工具对比）",
+      keyword: "个人知识库搭建",
       unsupportedPdf: "扫描型 PDF",
     },
   };
@@ -1828,7 +1828,7 @@ test("localized document-to-knowledge-base guides keep supported source boundari
     assert.ok(article);
     assert.equal(article.title, expected.title);
     assert.equal(article.publishedAt, "2026-08-01");
-    assert.equal(article.updatedAt, "2026-08-01");
+    assert.equal(article.updatedAt, "2026-10-06");
     assert.ok(article.keywords.includes(expected.keyword));
     assert.match(JSON.stringify(article), /wenlan sources add/);
     assert.match(JSON.stringify(article), /\.md/);
