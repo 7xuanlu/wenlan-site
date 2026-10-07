@@ -648,6 +648,217 @@ const baseArticles: LearnArticle[] = [
     },
   },
   {
+    slug: "how-to-give-codex-persistent-memory",
+    eyebrow: "Developer workflow",
+    category: "Workflows",
+    title: "Codex Memory: How Memories and AGENTS.md Work, and How to Add Persistent Memory",
+    description:
+      "How Codex remembers things between sessions: the memories feature, where ~/.codex/memories lives, how to turn it on or off, what belongs in AGENTS.md, and when to add an MCP memory server.",
+    metaTitle: "Codex Memory: How Memories & AGENTS.md Work | Wenlan",
+    metaDescription:
+      "Codex memories are off by default. How to turn them on, where ~/.codex/memories lives, what belongs in AGENTS.md, and how to share memory with Claude Code.",
+    keywords: [
+      "Codex memory",
+      "Codex memories",
+      "Codex persistent memory",
+      "Codex CLI memory",
+      "Codex memories folder",
+      "Codex AGENTS.md",
+      "Codex memory plugin",
+      "Codex MCP memory",
+    ],
+    publishedAt: "2026-06-07",
+    updatedAt: "2026-10-06",
+    author: DEFAULT_AUTHOR,
+    readingTime: "7 min read",
+    audience: "Developers using the Codex CLI, the Codex IDE extension, or the ChatGPT desktop app for coding",
+    heroBullets: [
+      "Codex memories are off by default. Turn them on in settings or with memories = true in config.toml.",
+      "Codex writes memories to ~/.codex/memories/ in the background. Rules that must always apply belong in AGENTS.md.",
+      "Codex memory stays inside Codex. Use an MCP memory server when Claude Code or Cursor need the same context.",
+    ],
+    sections: [
+      {
+        heading: "Quick answer",
+        body: [
+          "Codex has two kinds of memory. AGENTS.md files are instructions you write; Codex reads them at the start of every session. Memories are notes Codex writes itself from your earlier chats, so you don't have to repeat preferences, project conventions, and known pitfalls.",
+          "Memories are off by default. Once on, Codex updates them in the background after a chat has been idle for a while, not the moment it ends.",
+        ],
+        table: {
+          columns: ["", "AGENTS.md", "Codex memories"],
+          rows: [
+            ["Who writes it", "You", "Codex, from earlier chats"],
+            ["Where it lives", "~/.codex/AGENTS.md and AGENTS.md files in your repository", "~/.codex/memories/"],
+            ["When it loads", "Every session, every time", "When memories are on for that chat"],
+            ["Use it for", "Rules, commands, and conventions that must always apply", "Preferences and lessons Codex picks up as you work"],
+            ["On by default", "Yes, if the file exists", "No"],
+          ],
+        },
+      },
+      {
+        id: "turn-codex-memories-on-or-off",
+        heading: "How to turn Codex memories on or off",
+        body: [
+          "In the ChatGPT desktop app, open Settings > Personalization and turn on Enable memories. For the Codex CLI, add the feature flag to ~/.codex/config.toml.",
+          "If you don't see the setting, check the current Codex memories docs for regional availability.",
+        ],
+        code: {
+          label: "~/.codex/config.toml",
+          code: "[features]\nmemories = true",
+        },
+      },
+      {
+        heading: "Control memories for one chat with /memories",
+        body: [
+          "In the Codex TUI and the ChatGPT desktop app, type /memories to decide whether the current chat can use existing memories and whether Codex may learn from it. This only affects the current chat; your global setting stays the same.",
+          "For finer control, these settings go under memories in config.toml:",
+        ],
+        bullets: [
+          "memories.use_memories: whether Codex puts existing memories into new sessions.",
+          "memories.generate_memories: whether new chats can be turned into memories.",
+          "memories.disable_on_external_context: keep chats that used MCP tools or web search out of memory.",
+          "memories.min_rate_limit_remaining_percent: skip memory updates when you're close to your usage limit.",
+        ],
+      },
+      {
+        id: "where-codex-stores-memories",
+        heading: "Where Codex stores memories",
+        body: [
+          "Codex keeps memories in your Codex home folder, which is ~/.codex unless you set CODEX_HOME. The memories folder holds summaries, longer-lasting entries, recent inputs, and the evidence they came from.",
+          "OpenAI describes these files as generated state. Open them to see what Codex remembers or to check for anything sensitive before you share your Codex folder, but don't treat hand edits as the main way to control memory. Use the settings above instead.",
+        ],
+        code: {
+          label: "Codex home folder",
+          code: "~/.codex/\n├── AGENTS.md        # your global instructions\n├── config.toml      # [features] memories = true\n└── memories/        # written by Codex",
+        },
+      },
+      {
+        id: "codex-agents-md",
+        heading: "What goes in AGENTS.md instead",
+        body: [
+          "OpenAI's own advice is to keep required guidance in AGENTS.md, not in memories. Memories help Codex recall things; they are not guaranteed to load every time.",
+          "Codex reads ~/.codex/AGENTS.md first, then each AGENTS.md from your repository root down to the folder you're working in. A file closer to your folder wins when rules conflict. An AGENTS.override.md in the same folder replaces the AGENTS.md there.",
+        ],
+        bullets: [
+          "Put build, test, and lint commands in the repository's AGENTS.md.",
+          "Put personal working preferences in ~/.codex/AGENTS.md.",
+          "Codex stops reading once the combined files reach 32 KiB. Raise project_doc_max_bytes or split the instructions into folders if you hit the limit.",
+          "To check what loaded, run: codex --ask-for-approval never \"Summarize the current instructions.\"",
+        ],
+      },
+      {
+        heading: "Why Codex doesn't remember your last session",
+        body: [
+          "A new Codex session starts a new conversation. It reloads AGENTS.md and, if memories are on, relevant memories, but not the previous chat itself. Memories also arrive late: Codex waits until a chat has been idle before it summarizes it.",
+          "To pick up exactly where you left off, resume the conversation instead.",
+        ],
+        code: {
+          label: "Resume or fork a Codex session",
+          code: "codex resume          # pick from recent sessions\ncodex resume --last   # most recent session in this folder\ncodex resume --all    # search sessions from every folder\ncodex fork --last     # start a new chat from the last one",
+        },
+      },
+      {
+        heading: "Codex memories not working",
+        body: [
+          "Most problems come from one of these:",
+        ],
+        bullets: [
+          "Nothing in ~/.codex/memories/: memories are off, or your chats were too short or still active. Give it time after a chat goes idle.",
+          "Codex ignores a rule: move the rule to AGENTS.md. Memories are a recall aid, not a guarantee.",
+          "Chats that used MCP tools or web search never become memories: check memories.disable_on_external_context.",
+          "No updates while you work hard: Codex skips memory updates when your remaining usage is below memories.min_rate_limit_remaining_percent.",
+          "Edited the wrong file: run echo $CODEX_HOME. A custom value points Codex at a different home folder.",
+        ],
+      },
+      {
+        id: "codex-memory-plugins",
+        heading: "Codex memory plugins and MCP servers",
+        body: [
+          "Native memories stay inside Codex on one machine. Claude Code, Cursor, and other tools can't read them, and a memory doesn't link back to the file or decision it came from.",
+          "If you use more than one AI tool, or want memory you can read and check, add a memory server through MCP. Codex supports MCP and plugins, so any MCP memory server can plug in.",
+        ],
+        table: {
+          columns: ["Option", "How it works", "Good for"],
+          rows: [
+            ["Codex memories", "Codex writes notes from earlier chats into ~/.codex/memories/", "Preferences and lessons, Codex only"],
+            ["AGENTS.md", "You write instructions Codex loads every session", "Rules that must always apply"],
+            ["An MCP memory server", "Stores memories behind MCP tools that any compatible client can call", "Sharing memory between Codex, Claude Code, Cursor, and others"],
+            ["Wenlan", "Local MCP memory plus wiki pages that cite their sources and flag when a source changes", "Project knowledge you want to read, check, and share across tools"],
+          ],
+        },
+        link: {
+          label: "Share one memory between Codex and Claude Code",
+          href: "/learn/codex-claude-code-shared-memory",
+        },
+      },
+      {
+        heading: "Add Wenlan to Codex",
+        body: [
+          "Wenlan is an open-source desktop app with a Codex plugin. It keeps memory on your computer, turns related notes into wiki pages that cite their sources, and serves the same memory to Claude Code, Cursor, Claude Desktop, and other MCP clients.",
+          "Install the Wenlan runtime first, then add the plugin, start a new Codex task, and run /setup. Test one capture and one recall before relying on it for real project memory.",
+        ],
+        code: {
+          label: "Codex plugin",
+          code: "codex plugin marketplace add 7xuanlu/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan\n# start a new Codex task, then:\n/setup",
+        },
+        link: {
+          label: "MCP only, without the plugin: wenlan connect codex",
+          href: "/docs/mcp-clients",
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: "Does Codex have memory?",
+        answer:
+          "Yes. Codex memories carry preferences, conventions, and known pitfalls from earlier chats into new ones. They are off by default. Codex also loads AGENTS.md instructions in every session.",
+      },
+      {
+        question: "Where are Codex memories stored?",
+        answer:
+          "In ~/.codex/memories/, inside your Codex home folder. If you set CODEX_HOME, they are under that folder instead.",
+      },
+      {
+        question: "How do I turn Codex memories on or off?",
+        answer:
+          "Use Settings > Personalization in the ChatGPT desktop app, or set memories = true (or false) under [features] in ~/.codex/config.toml. Use /memories to change it for one chat only.",
+      },
+      {
+        question: "Should I use AGENTS.md or memories?",
+        answer:
+          "Both. Put rules that must always apply in AGENTS.md. Let memories handle the smaller preferences Codex picks up as you work.",
+      },
+      {
+        question: "Can Claude Code use Codex memories?",
+        answer:
+          "Not directly. Codex memories are only for Codex. To share memory across tools, connect both to the same MCP memory server, such as Wenlan.",
+      },
+    ],
+    relatedSlugs: ["codex-claude-code-shared-memory", "wenlan-codex-workflow", "claude-code-memory", "mcp-memory-server", "ai-coding-agent-loses-context"],
+    officialReferences: [
+      {
+        label: "Codex memories docs",
+        href: "https://developers.openai.com/codex/memories",
+      },
+      {
+        label: "Codex AGENTS.md guide",
+        href: "https://developers.openai.com/codex/guides/agents-md",
+      },
+      {
+        label: "Codex CLI reference",
+        href: "https://developers.openai.com/codex/cli/reference",
+      },
+      {
+        label: "Wenlan setup for Codex",
+        href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md#codex",
+      },
+    ],
+    cta: {
+      heading: "Share Codex memory with your other AI tools",
+      body: "Install the Wenlan plugin for Codex, run /setup, then test one capture and recall before adding real project context.",
+    },
+  },
+  {
     slug: "wenlan-for-claude-code",
     eyebrow: "Workflow",
     category: "Workflows",
