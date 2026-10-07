@@ -300,69 +300,6 @@ const setupArticles: BaseSpec[] = [
     ],
   },
   {
-    slug: "how-to-give-codex-persistent-memory",
-    eyebrow: "Setup",
-    category: "Workflows",
-    title: "How to Give Codex Persistent Memory",
-    description:
-      "Connect Codex to Wenlan through MCP so sessions can recall local project context instead of starting from scratch.",
-    metaTitle: "How to Give Codex Persistent Memory | Wenlan",
-    metaDescription:
-      "Use Wenlan with Codex by installing the local runtime, adding the Codex MCP client config, and verifying context, capture, and recall.",
-    keywords: [
-      "Codex persistent memory",
-      "Codex MCP memory",
-      "memory for Codex",
-      "Wenlan Codex setup",
-      "AI coding agent memory Codex",
-    ],
-    audience: "Codex users working across repeated coding sessions",
-    heroBullets: [
-      "Install the Wenlan runtime before configuring Codex as an MCP client.",
-      "Run ~/.wenlan/bin/wenlan connect codex to write the client config when supported.",
-      "Use MCP context, capture, recall, and doctor tools from Codex.",
-    ],
-    quickAnswer:
-      "Set up Wenlan, then run ~/.wenlan/bin/wenlan connect codex. Restart Codex if its MCP settings require a reload, then verify with doctor or a capture/recall round trip.",
-    problem:
-      "Codex sessions are useful for implementation work, but project decisions, review lessons, and setup gotchas disappear if they only live in the chat transcript.",
-    wenlanFit:
-      "Wenlan gives Codex a source-backed wiki and shared local context that complement native Codex memories, AGENTS.md, skills, and MCP. The same Wenlan daemon can also serve other clients.",
-    actionHeading: "Connect Codex through MCP",
-    actionIntro:
-      "Use the direct MCP path below when you want Codex working without a Wenlan source checkout. The Wenlan repository also ships a Codex plugin with the shared slash workflow.",
-    actionBullets: [
-      "Install the local runtime with the current setup path for your operating system.",
-      "Run ~/.wenlan/bin/wenlan connect codex.",
-      "Restart Codex if the client does not pick up MCP changes live.",
-      "Call the doctor tool or run a small capture/recall test.",
-      "Use handoff-like captures at the end of serious Codex sessions.",
-    ],
-    code: {
-      label: "Codex MCP setup",
-      code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan connect codex",
-    },
-    caution:
-      "The direct MCP path exposes tools such as context and capture. The Codex plugin adds Wenlan slash skills such as /brief and /handoff; do not confuse the two interfaces.",
-    faq: [
-      "Does Codex share memory with Claude Code in Wenlan?",
-      "Yes, when both clients point at the same local Wenlan daemon. The clients differ, but the daemon is the source of truth.",
-      "Should I store every Codex transcript?",
-      "No. Store the durable parts: decisions, lessons, gotchas, project facts, and handoff context future sessions need.",
-    ],
-    relatedSlugs: ["mcp-memory-server", "wenlan-codex-workflow", "codex-claude-code-shared-memory"],
-    officialReferences: [
-      {
-        label: "Codex customization docs",
-        href: "https://developers.openai.com/codex/concepts/customization",
-      },
-      {
-        label: "OpenAI Docs MCP quickstart",
-        href: "https://developers.openai.com/learn/docs-mcp",
-      },
-    ],
-  },
-  {
     slug: "how-to-add-mcp-memory-to-cursor",
     eyebrow: "Setup",
     category: "Workflows",
