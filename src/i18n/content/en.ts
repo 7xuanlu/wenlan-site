@@ -1912,6 +1912,10 @@ export const enContent = {
             { id: "ai-knowledge-base", href: "/learn/source-backed-wiki-pages-ai-work", label: "AI knowledge base guide" },
             { id: "tool-selection", href: "/learn/choose-ai-knowledge-base-tool", label: "AI knowledge base tool selection" },
             { id: "obsidian", href: "/learn/wenlan-vs-obsidian-ai-memory", label: "Obsidian and AI work" },
+            { id: "claude-code-memory", href: "/learn/claude-code-memory", label: "Claude Code memory" },
+            { id: "codex-memory", href: "/learn/how-to-give-codex-persistent-memory", label: "Codex memory" },
+            { id: "shared-memory", href: "/learn/codex-claude-code-shared-memory", label: "Codex and Claude Code shared memory" },
+            { id: "mcp-memory-server", href: "/learn/mcp-memory-server", label: "MCP memory server" },
           ],
         },
         {

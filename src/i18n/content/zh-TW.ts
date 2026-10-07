@@ -1878,7 +1878,7 @@ export const zhTWContent = {
   },
   footer: {
     status: "translated",
-    sourceHash: "558ca7745c25cdaa3abd7bde264e12bbdcb08277e2415857775db600912c7978",
+    sourceHash: "e022239f60bb10661cc1abf6dbac2c239c0f8256d63bd169d92cd7913b2ba82c",
     content: {
       ariaLabel: "網站頁尾",
       brand: "Wenlan",
@@ -1907,6 +1907,10 @@ export const zhTWContent = {
             { id: "ai-knowledge-base", href: "/learn/source-backed-wiki-pages-ai-work", label: "AI 知識庫導覽" },
             { id: "tool-selection", href: "/learn/choose-ai-knowledge-base-tool", label: "AI 知識庫工具選擇" },
             { id: "obsidian", href: "/learn/wenlan-vs-obsidian-ai-memory", label: "Obsidian 與 AI 工作" },
+            { id: "claude-code-memory", href: "/learn/claude-code-memory", label: "Claude Code 記憶" },
+            { id: "codex-memory", href: "/learn/how-to-give-codex-persistent-memory", label: "Codex 記憶" },
+            { id: "shared-memory", href: "/learn/codex-claude-code-shared-memory", label: "Codex 與 Claude Code 共用記憶" },
+            { id: "mcp-memory-server", href: "/learn/mcp-memory-server", label: "MCP 記憶伺服器" },
           ],
         },
         {

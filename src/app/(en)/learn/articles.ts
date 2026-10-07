@@ -116,9 +116,9 @@ const baseArticles: LearnArticle[] = [
     title: "What Is AI Work Memory?",
     description:
       "AI work memory carries sessions, decisions, lessons, project context, and wiki pages across tools and time.",
-    metaTitle: "What Is AI Work Memory? | Wenlan",
+    metaTitle: "AI Work Memory for Coding Assistants and Agents | Wenlan",
     metaDescription:
-      "Learn what AI work memory is, when built-in memory is not enough, and how Wenlan keeps work context local, visible, correctable, and MCP-native.",
+      "How Claude Code, Codex, and Cursor keep decisions and project context across sessions: instruction files, native memory, MCP memory, and what to capture.",
     keywords: [
       "AI work memory",
       "memory for AI work",
@@ -144,33 +144,19 @@ const baseArticles: LearnArticle[] = [
         ],
       },
       {
-        heading: "Why built-in memory is not enough",
+        heading: "Memory options for AI coding assistants",
         body: [
-          "Built-in memory is convenient, but it is usually opaque. The assistant decides what matters, stores a compressed version, and may retrieve it later without showing you why.",
-          "For real work, people need memory they can inspect, correct, delete, and trace back to source conversations. Bad memory is worse than no memory when it contains stale decisions or wrong assumptions.",
+          "Claude Code, Codex, and Cursor start each session without the previous conversation. Most developers combine three layers.",
         ],
         bullets: [
-          "You need to see what the assistant remembers.",
-          "You need provenance for important claims and decisions.",
-          "You need memory to move across tools, not stay trapped in one chat product.",
-          "You need contradictions and duplicates to be managed over time.",
+          "Instruction files (CLAUDE.md, AGENTS.md, Cursor rules): short standing rules loaded every session, not a store for accumulated decisions.",
+          "Native memory, such as Claude Code auto memory: notes one client keeps for itself on one machine.",
+          "An MCP memory server: decisions, lessons, and project facts any connected client can search on demand.",
+          "Wenlan is that third layer, with source links, review, and Spaces per project.",
         ],
       },
       {
-        heading: "What useful AI work memory should do",
-        body: [
-          "The core job is not hoarding transcripts. Useful memory distills noisy conversations into compact knowledge and retrieves the right pieces later.",
-          "That usually means combining semantic search, full-text search, metadata, and a knowledge graph. It also means letting people curate memory instead of trusting a black box.",
-        ],
-      },
-      {
-        heading: "How Wenlan approaches AI work memory",
-        body: [
-          "Wenlan is a local-first, source-backed LLM wiki for AI work in Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, ChatGPT, Claude.ai, and other MCP-compatible tools.",
-          "Wenlan stores useful context locally, makes memory visible and correctable, writes handoffs, distills source-backed wiki pages, and uses hybrid retrieval that combines vector search, full-text search, and graph context.",
-        ],
-      },
-      {
+        id: "what-to-capture",
         heading: "What to capture",
         body: [
           "Capture something when a future AI session would waste time or make a worse decision without it. Good captures are durable, atomic, specific, and say why the fact matters. Wenlan's memory types are identity, preference, decision, lesson, gotcha, and fact.",
@@ -186,6 +172,26 @@ const baseArticles: LearnArticle[] = [
           label: "Capture examples",
           code: "/capture We chose source-backed pages because summaries need provenance.\n/capture Supersedes mem_abc123: Windows setup now uses a Task Scheduler ONLOGON task.\n\nBad: /capture tests failed\nBetter: /capture Gotcha: the build fails if Learn relatedSlugs point to missing article slugs; run the slug audit before building.",
         },
+      },
+      {
+        heading: "Why built-in memory is not enough",
+        body: [
+          "Built-in memory is convenient, but it is usually opaque. The assistant decides what matters, stores a compressed version, and may retrieve it later without showing you why.",
+          "For real work, people need memory they can inspect, correct, delete, and trace back to source conversations. Bad memory is worse than no memory when it contains stale decisions or wrong assumptions.",
+        ],
+        bullets: [
+          "You need to see what the assistant remembers.",
+          "You need provenance for important claims and decisions.",
+          "You need memory to move across tools, not stay trapped in one chat product.",
+          "You need contradictions and duplicates to be managed over time.",
+        ],
+      },
+      {
+        heading: "How Wenlan approaches AI work memory",
+        body: [
+          "Wenlan is a local-first, source-backed LLM wiki for AI work in Claude Code, Codex, Cursor, Claude Desktop, and other MCP clients, with experimental web access for supported web AI clients.",
+          "Wenlan stores useful context locally, makes memory visible and correctable, writes handoffs, distills source-backed wiki pages, and uses hybrid retrieval that combines vector search, full-text search, and graph context.",
+        ],
       },
       {
         heading: "Source trails and project scope",
@@ -350,46 +356,11 @@ const baseArticles: LearnArticle[] = [
         ],
         code: {
           label: "Connect MCP clients to Wenlan",
-          code: "npx -y wenlan setup\nwenlan connect claude-code\nwenlan connect cursor\nwenlan connect codex\n# also: claude-desktop, vscode, gemini",
+          code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan connect claude-code\n~/.wenlan/bin/wenlan connect cursor\n~/.wenlan/bin/wenlan connect codex\n# also: claude-desktop, vscode, gemini",
         },
         link: {
           label: "Read all MCP client setup paths",
           href: "/docs/mcp-clients",
-        },
-      },
-      {
-        id: "wenlan-gemini-cli-vscode",
-        heading: "Connect Gemini CLI and VS Code to Wenlan",
-        body: [
-          "Both clients use the same Wenlan daemon through MCP, so they share memory with your other tools. Run npx -y wenlan setup first. For terminal work, capture the conclusion and the command that proved it, not raw output.",
-        ],
-        bullets: [
-          "Gemini CLI: run ~/.wenlan/bin/wenlan connect gemini, then verify with gemini mcp list, or /mcp list inside Gemini CLI. Wenlan uses Gemini's user-scope MCP setup. Ask Gemini to use Wenlan MCP tools such as mcp_wenlan_context or mcp_wenlan_capture.",
-          "VS Code: from the workspace root, run ~/.wenlan/bin/wenlan connect vscode. It writes .vscode/mcp.json with a servers.wenlan entry. Add --dry-run to preview the config first.",
-          "In VS Code, confirm MCP server trust, use MCP: List Servers to start or restart the server, and enable the Wenlan tools in Chat or Agent mode.",
-          "VS Code Remote and Dev Containers run MCP servers where they are configured. Install or configure Wenlan in the remote environment, or handle localhost forwarding on purpose.",
-        ],
-        code: {
-          label: "Gemini CLI and VS Code setup",
-          code: "npx -y wenlan setup\n~/.wenlan/bin/wenlan connect gemini\ngemini mcp list\n~/.wenlan/bin/wenlan connect vscode --dry-run",
-        },
-      },
-      {
-        id: "wenlan-localhost-7878",
-        heading: "Troubleshoot Wenlan on localhost:7878",
-        body: [
-          "Wenlan's daemon listens on 127.0.0.1:7878 by default. MCP clients don't talk to the database directly: they launch wenlan-mcp, and wenlan-mcp talks to the local daemon. When a tool is missing or a connection fails, check the daemon before changing every client.",
-        ],
-        bullets: [
-          "Run wenlan status, then wenlan doctor for a fuller setup report.",
-          "Run wenlan connect <client> --dry-run to see the wenlan-mcp command the client should launch.",
-          "Run lsof to see which process owns port 7878, and make sure another development daemon isn't using the wrong data directory.",
-          "Restart the MCP client after config changes.",
-          "Loopback avoids LAN exposure, but the port is still sensitive access to a memory API. Don't bind the daemon to a non-loopback address unless you are deliberately developing or self-hosting, and redact memory contents from diagnostics.",
-        ],
-        code: {
-          label: "Daemon and MCP checks",
-          code: "~/.wenlan/bin/wenlan status\n~/.wenlan/bin/wenlan doctor\n~/.wenlan/bin/wenlan connect codex --dry-run\nlsof -nP -iTCP:7878 -sTCP:LISTEN",
         },
       },
       {
@@ -403,6 +374,41 @@ const baseArticles: LearnArticle[] = [
           "Ask the same question from a second client to confirm they share memory.",
           "For a knowledge base, query one harmless source and inspect the citation, then change the source and check that the answer is flagged or updated.",
         ],
+      },
+      {
+        id: "wenlan-gemini-cli-vscode",
+        heading: "Connect Gemini CLI and VS Code to Wenlan",
+        body: [
+          "Both clients use the same Wenlan daemon through MCP, so they share memory with your other tools. For terminal work, capture the conclusion and the command that proved it, not raw output.",
+        ],
+        bullets: [
+          "Gemini CLI: run ~/.wenlan/bin/wenlan connect gemini, then verify with gemini mcp list, or /mcp list inside Gemini CLI. Wenlan uses Gemini's user-scope MCP setup. Then ask Gemini to use Wenlan's brief, recall, or capture tools.",
+          "VS Code: from the workspace root, run ~/.wenlan/bin/wenlan connect vscode. It writes .vscode/mcp.json with a servers.wenlan entry. Add --dry-run to preview the config first.",
+          "In VS Code, confirm MCP server trust, use MCP: List Servers to start or restart the server, and enable the Wenlan tools in Chat or Agent mode.",
+          "VS Code Remote and Dev Containers run MCP servers where they are configured. Install or configure Wenlan in the remote environment, or handle localhost forwarding on purpose.",
+        ],
+        code: {
+          label: "Gemini CLI and VS Code setup",
+          code: "~/.wenlan/bin/wenlan connect gemini\ngemini mcp list\n~/.wenlan/bin/wenlan connect vscode --dry-run",
+        },
+      },
+      {
+        id: "wenlan-localhost-7878",
+        heading: "What's running on localhost:7878? Troubleshoot Wenlan's daemon",
+        body: [
+          "Wenlan's daemon listens on 127.0.0.1:7878 by default. MCP clients don't talk to the database directly: they launch wenlan-mcp, and wenlan-mcp talks to the local daemon. When a tool is missing or a connection fails, check the daemon before changing every client. If something answers on 127.0.0.1:7878 and you don't use Wenlan, it's another local program (the Rust Book's example web server uses the same port); the lsof command below shows which process owns it.",
+        ],
+        bullets: [
+          "Run wenlan status, then wenlan doctor for a fuller setup report.",
+          "Run wenlan connect <client> --dry-run to see the wenlan-mcp command the client should launch.",
+          "Run lsof to see which process owns port 7878, and make sure another development daemon isn't using the wrong data directory.",
+          "Restart the MCP client after config changes.",
+          "Loopback avoids LAN exposure, but the port is still sensitive access to a memory API. Don't bind the daemon to a non-loopback address unless you are deliberately developing or self-hosting, and redact memory contents from diagnostics.",
+        ],
+        code: {
+          label: "Daemon and MCP checks",
+          code: "~/.wenlan/bin/wenlan status\n~/.wenlan/bin/wenlan doctor\n~/.wenlan/bin/wenlan connect codex --dry-run\nlsof -nP -iTCP:7878 -sTCP:LISTEN",
+        },
       },
     ],
     faqs: [
@@ -429,7 +435,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Can I change Wenlan's daemon port?",
         answer:
-          "Yes for development, but the daemon port, bind address, CLI target, and MCP connector target are separate settings. Update the daemon and connector together, usually with an isolated data directory.",
+          "Yes for development, but the daemon port, bind address, CLI target, and MCP connector target are separate settings. Update the daemon and connector together, usually with an isolated data directory. For example, point the connector elsewhere with wenlan-mcp --origin-url http://127.0.0.1:7879.",
       },
       {
         question: "Does Claude Code need an MCP memory server?",
@@ -736,7 +742,7 @@ const baseArticles: LearnArticle[] = [
     title: "Local-First AI Work Memory: Keep Context on Your Machine",
     description:
       "Local-first AI work memory keeps sensitive project knowledge, decisions, and preferences under your control while still making them useful to assistants.",
-    metaTitle: "Local-First AI Work Memory | Wenlan",
+    metaTitle: "Local-First AI Memory: What Stays on Your Machine | Wenlan",
     metaDescription:
       "Learn why local-first AI work memory matters for privacy, ownership, and long-running work. Wenlan keeps work context visible, correctable, and on your machine.",
     keywords: [
@@ -752,7 +758,7 @@ const baseArticles: LearnArticle[] = [
     audience: "People using AI with sensitive work, client context, or private knowledge",
     heroBullets: [
       "Your memory database stays on your machine by default.",
-      "On-device intelligence processes memory without making cloud storage the default.",
+      "Base retrieval runs locally; optional enrichment can use an on-device model, a local endpoint, or a cloud model you choose.",
       "Every memory remains visible, correctable, and traceable.",
     ],
     sections: [
@@ -775,6 +781,7 @@ const baseArticles: LearnArticle[] = [
         body: [
           "Cloud memory can be easier to access across devices. Local-first memory gives stronger ownership, simpler privacy boundaries, and better fit for work that cannot casually leave your machine.",
           "Wenlan chooses local-first because the memory layer should be something you trust, not another opaque profile maintained by a platform.",
+          "Local-first is not offline-only. A connected AI client sends the context it retrieves to its own model provider, a cloud model you configure for enrichment receives the content it processes, and experimental web access passes queries and results through a relay.",
         ],
       },
       {
@@ -787,7 +794,7 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "Readable artifacts plus a local store",
         body: [
-          "Wenlan keeps raw captures in a daemon-owned local store that powers fast semantic and full-text recall, and projects pages, session logs, and project status as readable Markdown under ~/.wenlan. Markdown alone would not give agents fast retrieval, and a database alone would be opaque to you.",
+          "Wenlan keeps Memories and graph data in a daemon-owned local libSQL store that powers fast semantic and full-text recall, and projects Pages with citations and revisions, session logs, and project status as readable Markdown under ~/.wenlan. Markdown alone would not give agents fast retrieval, and a database alone would be opaque to you.",
           "Those readable artifacts are also committed to a local git repository at ~/.wenlan/.git, so changes show up as ordinary diffs and can be recovered. Git versions the artifacts; the daemon still owns the database and indexes.",
         ],
         bullets: [
@@ -833,7 +840,7 @@ const baseArticles: LearnArticle[] = [
       "How Claude Code memory works: CLAUDE.md vs auto memory, where MEMORY.md lives, how to view, clear, or turn it off, why it forgets your last session, and when a plugin helps.",
     metaTitle: "Claude Code Memory: How It Works & Where It's Stored | Wenlan",
     metaDescription:
-      "How Claude Code memory works: CLAUDE.md vs auto memory, where MEMORY.md is stored, how to clear or disable it, and when a memory plugin or MCP server helps.",
+      "How Claude Code memory works: CLAUDE.md, AGENTS.md and auto memory, where MEMORY.md is stored, how to clear or disable it, and when a memory plugin helps.",
     keywords: [
       "Claude Code memory",
       "Claude Code memory.md",
@@ -899,7 +906,8 @@ const baseArticles: LearnArticle[] = [
             ["Personal, this project", "./CLAUDE.local.md", "Your own sandbox URLs or test data. Add it to .gitignore."],
             ["Personal, all projects", "~/.claude/CLAUDE.md", "Preferences you want in every project"],
             ["Rules", ".claude/rules/*.md", "One topic per file, optionally limited to certain paths"],
-            ["Organization", "/Library/Application Support/ClaudeCode/CLAUDE.md on macOS", "Company-wide instructions managed by IT"],
+            ["Shared with other agents", "./AGENTS.md", "Read in place of CLAUDE.md when the project has no CLAUDE.md (Claude Code v2.1.277+). Or keep CLAUDE.md and add the line @AGENTS.md to it."],
+            ["Organization", "macOS: /Library/Application Support/ClaudeCode/CLAUDE.md; Linux/WSL: /etc/claude-code/CLAUDE.md; Windows: C:\\Program Files\\ClaudeCode\\CLAUDE.md", "Company-wide instructions managed by IT"],
           ],
         },
       },
@@ -1001,6 +1009,7 @@ const baseArticles: LearnArticle[] = [
         body: [
           "Wenlan does not replace /memory or CLAUDE.md. Keep stable project rules in CLAUDE.md, and use Wenlan for the part that keeps changing: decisions, lessons, gotchas, and project status that must reach the next session or another tool.",
           "The plugin adds a short loop around real work. Most serious sessions need /brief at the start and /handoff at the end.",
+          "Claude Code runs the plugin and calls MCP tools; it does not store Wenlan's memory. Wenlan's local daemon owns the memory store, separate from CLAUDE.md and auto memory, and writes readable artifacts under ~/.wenlan: distilled pages in ~/.wenlan/pages, session logs and a read-only project-status receipt in ~/.wenlan/sessions, and local git history in ~/.wenlan/.git. Use Wenlan commands and tools for writes, review, distill, and delete rather than editing the database directly, and run ~/.wenlan/bin/wenlan status to check the daemon.",
         ],
         bullets: [
           "/brief: load project status, recent handoffs, preferences, and relevant memories before edits begin.",
@@ -1012,24 +1021,6 @@ const baseArticles: LearnArticle[] = [
         code: {
           label: "Daily loop",
           code: "/brief\n/capture <one durable project fact and why it matters>\n/recall <specific prior decision or gotcha>\n/handoff",
-        },
-      },
-      {
-        id: "wenlan-local-files",
-        heading: "Where Wenlan stores its memory",
-        body: [
-          "Claude Code runs the plugin and calls MCP tools; it does not store Wenlan's memory. Wenlan's local daemon owns the memory store, and readable artifacts are written under ~/.wenlan, separate from CLAUDE.md and auto memory.",
-          "Don't edit the database directly. Use Wenlan commands and tools for writes, review, distill, and delete.",
-        ],
-        bullets: [
-          "~/.wenlan/pages: distilled Markdown pages.",
-          "~/.wenlan/sessions: session logs and project status from /handoff.",
-          "~/.wenlan/db: a convenience symlink to the libSQL store on macOS and Linux.",
-          "~/.wenlan/.git: local git history for the readable artifacts.",
-        ],
-        code: {
-          label: "Check Wenlan's local files",
-          code: "ls ~/.wenlan\n~/.wenlan/bin/wenlan status\ngit -C ~/.wenlan log --oneline -5",
         },
       },
     ],
@@ -1150,7 +1141,7 @@ const baseArticles: LearnArticle[] = [
         id: "turn-codex-memories-on-or-off",
         heading: "How to turn Codex memories on or off",
         body: [
-          "In the ChatGPT desktop app, open Settings > Personalization and turn on Enable memories. For the Codex CLI, add the feature flag to ~/.codex/config.toml.",
+          "In the ChatGPT desktop app, open Settings > Personalization and turn on Enable Codex memories. For the Codex CLI, add the feature flag to ~/.codex/config.toml.",
           "If you don't see the setting, check the current Codex memories docs for regional availability.",
         ],
         code: {
@@ -1250,7 +1241,7 @@ const baseArticles: LearnArticle[] = [
         ],
         code: {
           label: "Codex plugin",
-          code: "codex plugin marketplace add 7xuanlu/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan\n# start a new Codex task, then:\n/setup",
+          code: "npx -y wenlan setup   # macOS Apple Silicon; other platforms: see setup docs\ncodex plugin marketplace add 7xuanlu/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan\n# start a new Codex task, then:\n/setup",
         },
         link: {
           label: "MCP only, without the plugin: wenlan connect codex",
@@ -1260,13 +1251,13 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "Use Wenlan in a Codex session",
         body: [
-          "Codex reaches Wenlan through MCP tools, so use them where context matters and keep the loop short enough for real work. Name the concrete decision, file area, or gotcha; a capture like \"worked on repo\" will not help a later session.",
+          "The Codex plugin adds the same session commands as Claude Code. Name the concrete decision, file area, or gotcha; a capture like \"worked on repo\" will not help a later session.",
         ],
         bullets: [
-          "Load Wenlan context when you start a task or switch topics.",
-          "Capture decisions, gotchas, and project constraints as atomic memories.",
-          "Recall with project names and failure modes.",
-          "Capture a handoff-style memory before stopping if work remains open, so a later Codex or Claude Code session can continue.",
+          "/brief: load project status and relevant memories before you start.",
+          "/capture: save one decision, gotcha, or constraint and why it matters.",
+          "/recall: look up a past decision by project name or failure mode.",
+          "/handoff: record what changed and what is open, so a later Codex or Claude Code session can continue.",
         ],
       },
     ],
@@ -1299,7 +1290,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Can Codex write the same Wenlan memory as Claude Code?",
         answer:
-          "Yes, when both use the same local Wenlan daemon. Claude Code's /brief and /handoff commands come from its plugin; in Codex, capture a handoff-style memory instead.",
+          "Yes, when both use the same local Wenlan daemon. Both plugins provide /brief, /capture, /recall and /handoff, so either tool can end a session and the other can pick it up.",
       },
     ],
     relatedSlugs: ["codex-claude-code-shared-memory", "coding-agent-source-backed-knowledge-base", "claude-code-memory", "mcp-memory-server", "ai-coding-agent-loses-context"],
@@ -2563,7 +2554,7 @@ const baseArticles: LearnArticle[] = [
     title: "The AI Agent Handoff Loop: How Work Carries Across Sessions",
     description:
       "A practical model for carrying decisions, lessons, gotchas, and next steps from one AI work session into the next.",
-    metaTitle: "AI Agent Handoff Loop | Wenlan",
+    metaTitle: "AI Agent Session Handoff for Claude Code and Codex | Wenlan",
     metaDescription:
       "Learn how the AI agent handoff loop helps coding agents and AI tools carry decisions, lessons, project context, and next steps across sessions.",
     keywords: [
@@ -2614,13 +2605,13 @@ const baseArticles: LearnArticle[] = [
         heading: "How Wenlan supports it",
         body: [
           "Wenlan gives agents a place to save the durable parts of the session and a way to recall them through MCP later.",
-          "Between sessions, Wenlan keeps captures, handoffs, related entities, and source-backed pages connected. Manual `/distill` turns repeated context into readable pages, while optional local models or API keys can add background page work.",
+          "Between sessions, Wenlan keeps captures, handoffs, related entities, and source-backed pages connected. Manual /distill turns repeated context into readable pages, while optional local models or API keys can add background page work.",
         ],
       },
       {
-        heading: "What /handoff writes in Claude Code",
+        heading: "What /handoff writes in Claude Code and Codex",
         body: [
-          "In Claude Code, /handoff writes a Markdown session log, updates the per-project status files, and stores durable decisions, lessons, gotchas, and facts as MCP captures. The next session starts with /brief, which reads the status file first and then loads relevant Wenlan context.",
+          "In Claude Code and Codex, /handoff writes a Markdown session log, applies one typed update to the project's Space Brief (last-session summary plus Active and Backlog items), and stores durable decisions, lessons, gotchas, and facts as MCP captures. The next session starts with /brief, which reads that Brief.",
           "A handoff is not Claude Code resume. Use claude --resume or --continue when you want the same transcript; use a handoff for durable project status and context that crosses sessions or tools.",
         ],
         bullets: [
@@ -2630,22 +2621,22 @@ const baseArticles: LearnArticle[] = [
         ],
         code: {
           label: "What /handoff writes",
-          code: "~/.wenlan/sessions/<date>-<slug>.md\n~/.wenlan/sessions/_status/<project>.md\n~/.wenlan/sessions/_status/handoff-<project>.json\nWenlan MCP captures in the daemon DB",
+          code: "~/.wenlan/sessions/<YYYY-MM-DD-HHmm>-<slug>.md\nSpace Brief update in the daemon DB\n~/.wenlan/sessions/_status/<space>.md (read-only receipt)\nWenlan MCP captures in the daemon DB",
         },
       },
       {
         heading: "Keep project status for the next agent",
         body: [
-          "The status file is the live ledger /brief reads before memory context: last session, Active work, Backlog, blockers, open questions, and the next useful action. Write it for resumption, not narration.",
+          "The Space Brief is the live ledger /brief reads: last session, Active work, Backlog, and gated items. The _status Markdown file is a readable receipt of it, not something to edit. Write for resumption, not narration.",
         ],
         bullets: [
           "Keep fresh next-move candidates in Active and older parked work in Backlog.",
-          "Demote Active items that have not been touched recently; promote Backlog items only when work resumes.",
+          "Complete or move items explicitly; /handoff never auto-demotes untouched Active work.",
           "Summarize a verified result and the command that proved it instead of storing long logs.",
           "Leave temporary todos to task tools. Keep the durable status that matters when the chat is gone.",
         ],
         code: {
-          label: "Status file shape",
+          label: "Brief receipt shape",
           code: "# <Project> - Current Status\n\n## Last session (<date>)\n- <accomplished bullet>\n\n## Active\n- <fresh next-move candidate> (added <YYYY-MM-DD>)\n- <blocked item> (added <YYYY-MM-DD>) (gated: <trigger>)\n\n## Backlog\n- <older parked item> (added <YYYY-MM-DD>)",
         },
       },
