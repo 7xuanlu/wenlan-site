@@ -55,9 +55,9 @@ OpenSEO shows its selected GA4 property as `Wenlan Website` (`557888023`).
 Enhanced measurement was turned **off** in the stream settings on 2026-10-06
 before the consent-based client release. The client owns sanitized manual page
 views and bounded website actions. At this configuration checkpoint, the UI
-reported **data collection pending / no data received**; production deployment
-and observed event delivery remain required before using GA4 in a growth readout. Reuse this
-stream rather than creating another production stream during setup.
+reported **data collection pending / no data received**. The subsequent production
+verification below establishes event delivery. Reuse this stream rather than
+creating another production stream during setup.
 
 The prepared client uses **basic consent**: it loads no Google script before a
 visitor opts in, stores the choice for 180 days, and offers withdrawal through
@@ -69,7 +69,7 @@ only registered public page paths, and sends finite existing CTA events without
 form values or raw destinations. Opt-in coverage is partial; do not equate GA4
 users with all website visitors.
 
-Before publishing this integration:
+Release and rollback checklist:
 
 1. Keep **Enhanced measurement off** in this stream, including history-based
    automatic page views (verified off on 2026-10-06). This avoids duplicate page
@@ -84,6 +84,40 @@ Before publishing this integration:
    and DebugView, no collection before consent or after withdrawal, and no
    duplicate page views. Mark these owner checks as test activity. A local
    queue test does not prove Google received the events.
+
+### Production verification — 2026-10-06
+
+[PR #218](https://github.com/7xuanlu/wenlan-site/pull/218) merged as
+`f6f7b5870182181df9705b3195d808890174910b`; Vercel production deployment
+`dpl_41omxTk53tHDGPtevhHoVGpDftiK` became Ready and aliased `wenlan.app`.
+The merged tree matched reviewed/tested PR head
+`14136d0a427c9922428b392549c4068c8cf4a2ef`. Both PR and main CI passed.
+
+The owner-authorized test ran at **23:01:54–23:04:40 America/Los_Angeles**
+(2026-10-07 06:01:54–06:04:40 UTC), with Google Tag Assistant's debug signal:
+
+- Before consent, the production page contained no Google analytics script.
+  Choosing **Allow cookies** loaded only the expected `G-2ZEZML4P1M` tag.
+- Homepage visit followed by the existing comparison-guide link produced
+  exactly **2 `page_view` events and 1 `learn_article_click`** in GA4 DebugView.
+  `first_visit` and `session_start` each appeared once; total debug events: 5.
+  Realtime independently showed 1 active test user and the initial page view.
+- Tag Assistant showed `_dbg=1`, the expected measurement ID, and clean
+  page locations `/zh-TW` and `/zh-TW/learn/choose-ai-knowledge-base-tool`.
+  The debug query and comparison hash were absent; the second referrer was
+  the clean homepage URL. No duplicate page view was observed in this path.
+- Footer withdrawal reloaded without the Google tag. A subsequent navigation
+  to the homepage still had no Google script; DebugView remained at 2 page
+  views through the final 23:05 check.
+
+**GA4 event collection is operational.** This bounded test is infrastructure
+verification, not organic traffic or acquisition evidence. Keep its timestamp,
+`debug_mode`/Tag Assistant source and known events separate in readouts; no
+persistent internal/developer traffic exclusion filter was configured, so do
+not assume this activity is automatically absent from aggregate reports. GSC
+report linking and Google Ads Keyword Planner readiness are separate checks;
+this release does not mark them complete. Local screenshot evidence remains in
+the release chat, not this public repository.
 
 Implementation references: [Google consent mode](https://developers.google.com/tag-platform/security/guides/consent)
 and [manual page views](https://developers.google.com/analytics/devguides/collection/ga4/views).
