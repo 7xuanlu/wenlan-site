@@ -31,6 +31,14 @@ function formatArticle(article: (typeof articles)[number]): string {
       }
       lines.push(``);
     }
+    if (section.table) {
+      lines.push(`| ${section.table.columns.join(" | ")} |`);
+      lines.push(`| ${section.table.columns.map(() => "---").join(" | ")} |`);
+      for (const row of section.table.rows) {
+        lines.push(`| ${row.join(" | ")} |`);
+      }
+      lines.push(``);
+    }
     if (section.code) {
       lines.push("```bash");
       lines.push(section.code.code);

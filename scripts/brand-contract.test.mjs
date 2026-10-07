@@ -421,6 +421,10 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.match(article, /id:\s*"build-an-llm-wiki-with-claude-code"/);
   assert.match(article, /heading:\s*"The CLAUDE.md schema to copy"/);
   assert.match(article, /CLAUDE\.md for Claude Code or AGENTS\.md for Codex/);
+  assert.match(article, /figure:\s*"llm-wiki-architecture"/);
+  assert.match(article, /figure:\s*"llm-wiki-vs-rag"/);
+  assert.match(article, /id:\s*"llm-wiki-implementations"/);
+  assert.match(article, /"AgriciDaniel\/claude-obsidian"/);
   assert.match(article, /index\.md/);
   assert.match(article, /log\.md/);
   assert.match(article, /## My notes/);
@@ -549,7 +553,7 @@ test("AI work memory comparison answers the knowledge-base role question directl
     );
   }
 
-  const page = await readRepo("src/app/learn/[slug]/page.tsx");
+  const page = await readRepo("src/components/learn/learn-figures.tsx");
   assert.match(page, /Practical dimensions\./);
   assert.doesNotMatch(page, /Quantified dimensions\./);
 });
