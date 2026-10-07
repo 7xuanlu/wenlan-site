@@ -1015,7 +1015,7 @@ test("MCP memory article exposes the Cursor and Claude Code shared-memory workfl
   );
 });
 
-test("MCP article answers knowledge-base server intent with a source-backed validation loop", async () => {
+test("MCP article answers memory-server intent with setup, storage, and a validation loop", async () => {
   const articles = await readRepo("src/app/learn/articles.ts");
   const marker = 'slug: "mcp-memory-server"';
   const start = articles.indexOf(marker);
@@ -1024,27 +1024,21 @@ test("MCP article answers knowledge-base server intent with a source-backed vali
 
   assert.notEqual(start, -1);
   assert.notEqual(end, -1);
-  assert.match(article, /title: "MCP Knowledge Base Server for AI Agents"/);
+  assert.match(article, /title: "MCP Memory Server: How It Works/);
   assert.match(
     article,
-    /metaTitle: "MCP Knowledge Base Server for AI Agents \| Wenlan"/,
+    /metaTitle: "MCP Memory Server: Setup and Best Options Compared \| Wenlan"/,
   );
+  assert.match(article, /keywords: \[\s*"MCP memory server"/);
   assert.match(article, /"MCP knowledge base server"/);
   assert.match(article, /publishedAt: "2026-06-07"/);
-  assert.match(article, /updatedAt: "2026-08-13"/);
-  assert.match(article, /heading: "What MCP adds to a knowledge base"/);
-  assert.match(
-    article,
-    /heading: "What an MCP knowledge-base server should expose"/,
-  );
+  assert.match(article, /updatedAt: "2026-10-06"/);
+  assert.match(article, /@modelcontextprotocol\/server-memory/);
+  assert.match(article, /MEMORY_FILE_PATH/);
   assert.match(article, /heading: "MCP memory server vs knowledge base"/);
-  assert.match(article, /heading: "Verify the MCP knowledge-base route"/);
+  assert.match(article, /heading: "Check that memory works"/);
   assert.match(article, /List the server tools from one MCP client/);
-  assert.match(article, /Query one harmless source and inspect the citation/);
-  assert.match(
-    article,
-    /Confirm a second client can retrieve the same maintained answer/,
-  );
+  assert.match(article, /query one harmless source and inspect the citation/);
   assert.match(
     article,
     /relatedSlugs:\s*\[[^\]]*"source-backed-wiki-pages-ai-work"[^\]]*"build-local-ai-knowledge-base-from-documents"[^\]]*"distilled-wiki-pages-ai-memory"[^\]]*\]/,
