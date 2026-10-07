@@ -50,6 +50,20 @@ Pages without rows are unavailable, not zero.
 | 28 days | Owners together vs the 139-impression, 0-click baseline. Read as better if the owners exceed 139 impressions with at least 2 clicks; worse if they fall below 100 with no clicks. |
 | ~8 weeks | Merged URLs no longer report page impressions. |
 
+## Post-deploy receipt (2026-10-07, merge commit `dec3c10`)
+
+- `pnpm seo:technical:deployed`: robots ok; sitemap locs 154; key pages 30;
+  redirects 44; bridge host redirects 6; old URLs absent from sitemap; exit 0.
+- Live sweep of `https://wenlan.app`: 71 sources (19 slugs under `/learn`,
+  `/guides` and `/docs/guides`, plus 14 legacy `origin-*` URLs) each return
+  one 308 to the expected owner, and the owner returns 200. All 10 owners
+  return 200 with a self-canonical. No merged URL is in the sitemap. 0 failures.
+- Live pages: `/learn/ai-work-memory` renders `id="what-to-capture"`; the
+  zh-TW footer links the shared-memory owner; no `7xuanlu/claude-plugins`
+  install line on the shared-memory page.
+- IndexNow: the production build log shows 67 URLs submitted, response 200.
+- Search Console recrawl requests: not yet made.
+
 Repair immediately on a redirect chain or loop, a 404 for a former URL, an
 owner canonical or sitemap error, or an owner fact contradicted by the Wenlan
 source.
