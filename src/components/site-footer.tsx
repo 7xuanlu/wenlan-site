@@ -1,5 +1,6 @@
 import { BrandWordmark } from "@/components/brand-wordmark";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { AnalyticsSettingsButton } from "@/components/google-analytics";
 import { getCoreContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
@@ -68,6 +69,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 sm:justify-end">
             <LanguageSwitcher locale={locale} placement="up" />
+            <AnalyticsSettingsButton locale={locale} />
             <a
               href="https://www.toolpilot.ai"
               target="_blank"

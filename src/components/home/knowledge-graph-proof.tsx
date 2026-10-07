@@ -215,7 +215,7 @@ export function KnowledgeGraphProof({ locale }: { readonly locale: Locale }) {
               </>
             }
             annotationKey={
-              <ol aria-label={copy.key} className="mt-5 space-y-4 md:hidden">
+              <ol key="graph-annotation-key" aria-label={copy.key} className="mt-5 space-y-4 md:hidden">
                 {copy.annotations.map(({ title, detail }, index) => (
                   <li key={title} className="grid grid-cols-[1.75rem_1fr] items-start gap-3">
                     <span aria-hidden="true" className="flex size-7 items-center justify-center rounded-full bg-[#a45331] font-mono text-xs font-medium text-white">{index + 1}</span>

@@ -2730,7 +2730,7 @@ export const docPages: DocPage[] = [
       "local-first privacy",
       "deletion controls",
     ],
-    updatedAt: "2026-10-04",
+    updatedAt: "2026-10-06",
     author: DEFAULT_AUTHOR,
     readingTime: "7 min read",
     summary: [
@@ -2749,6 +2749,8 @@ export const docPages: DocPage[] = [
       {
         heading: "Public website analytics",
         body: [
+          "When configured, optional Google Analytics loads only after you choose Allow cookies. It uses first-party cookies to measure visits and agreed website actions; Google receives usage data and processes network requests. Advertising storage, advertising personalization, and Google Signals are disabled. We remember your choice for 180 days. Use Cookie preferences in the footer to decline or withdraw; withdrawal removes this site's Google Analytics cookies and reloads the page without the Google tag. Browser Do Not Track and Global Privacy Control override consent.",
+          "Google Analytics receives public page paths without URL query strings or fragments, a referrer origin, and bounded action labels. We do not send form contents, email addresses, search phrases, raw destination URLs, or User-ID. Visits from people who decline, block tracking, or use privacy signals are absent from GA4; its reports are partial observations, not a count of everyone who visited. The Google Analytics preference controls this optional Google integration; existing Vercel, Umami, and first-party measurement are described separately below.",
           "The public wenlan.app website is separate from the installed Wenlan runtime. It uses Vercel Web Analytics for aggregate website visits. Optional Umami and first-party collection can record bounded website actions such as downloads, GitHub links, setup links, release subscriptions, video-play clicks, example choices, source expansion, comparisons, and product-image views. These operation counts are not unique visitors, completed downloads, installations, or proof that a channel caused an action.",
           "The Umami tracker is restricted to wenlan.app, excludes URL search parameters, and respects the browser's Do Not Track setting. Events carry placement, locale, content context, and a fixed destination category. Known launch links may also carry a predefined campaign, source, and medium; direct release-asset clicks include the public asset ID and release tag. Arbitrary query strings, memory content, code, commands, user file paths, names, email addresses, and stable account identifiers are not sent as event properties. A video-play click records intent to play, not viewing duration or completion.",
           "The website stores a sanitized first landing path, referrer host, and UTM source, medium, and campaign in per-tab sessionStorage. It reuses that context for 30 minutes, then replaces it on the next capture; this is not a persistent visitor ID. Optional capture is skipped for Do Not Track. The form sends the submitted email to Resend. When acquisition properties are enabled, those fields and the signup locale are stored with the contact. Only predefined launch campaign labels, not the contact or arbitrary attribution fields, can be included in Umami events. GitHub's cumulative release download counters remain separate from individual contacts.",
