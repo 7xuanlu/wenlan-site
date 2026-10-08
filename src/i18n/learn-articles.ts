@@ -187,7 +187,7 @@ const zhTWArticles = {
       {
         heading: "Karpathy 的 LLM Wiki 是什麼",
         body: [
-          "2026 年 4 月，Andrej Karpathy 在 GitHub gist 發表了〈LLM Wiki〉。做法是：不要每次提問都讓 AI 重新搜尋原始文件，而是讓它每份來源只讀一次，把學到的內容整理進互相連結的 Markdown 頁面。之後的問題就從這些頁面開始。",
+          "2026 年 4 月，Andrej Karpathy 在 GitHub gist 發表了〈LLM Wiki〉。這個做法是把來源整理成互相連結的 Markdown 頁面，讓後續問題可以先從維護中的綜合頁面開始，不必每次都從頭搜尋整批資料。來源變更時仍要重新讀取並檢查受影響的頁面；重要結論也可能需要回到引用來源核對。",
           "本文引用 Karpathy 的公開說明作為這個模式的來源，不代表 Karpathy 為 Wenlan 背書。",
         ],
         figure: "llm-wiki-architecture",
@@ -210,7 +210,7 @@ const zhTWArticles = {
       {
         heading: "LLM Wiki 和 RAG 的差別",
         body: [
-          "RAG 每次提問都重新檢索來源片段，什麼都不保留，同樣的閱讀一再重做。LLM Wiki 只讀一次，留下可以打開檢查的頁面；代價是要維護，這就是 lint 的用途。大型 wiki 仍然可以先用搜尋找到對的頁面。",
+          "RAG 會針對每個問題檢索相關來源片段；來源集合與索引仍可繼續使用，同一份資料也可能在不同問題中再次被檢索。LLM Wiki 則把持續維護的綜合內容留在可打開檢查的頁面裡，讓後續查詢可以從頁面開始。新增或變更的來源仍要重新整理，重要結論也可能需要回到引用核對。大型 wiki 仍可用搜尋找到合適頁面。",
         ],
         figure: "llm-wiki-vs-rag",
       },
@@ -365,12 +365,12 @@ const zhTWArticles = {
       {
         question: "Karpathy 的 LLM Wiki 是什麼？",
         answer:
-          "Andrej Karpathy 描述了一種由 AI 根據你的來源撰寫並維護的個人 wiki：每份來源只讀一次，更新一組互相連結的 Markdown 頁面，之後的問題就從這些頁面回答。引用他的說明不代表他為 Wenlan 背書。",
+          "Andrej Karpathy 描述了一種由 AI 根據來源撰寫並維護的個人 wiki：把來源整理成互相連結的 Markdown 頁面，後續問題可以從這些頁面開始。來源變更時仍要重新讀取並檢查受影響的頁面。引用他的說明不代表他為 Wenlan 背書。",
       },
       {
         question: "LLM Wiki 和 RAG 是同一種東西嗎？",
         answer:
-          "不是。RAG 每次提問都重新搜尋原始文件，什麼都不保留；LLM Wiki 只讀一次來源，保留你可以打開檢查的頁面。大型 wiki 仍然可以用搜尋來找頁面。",
+          "兩者做法不同。RAG 會針對每個問題檢索相關來源片段，同一份資料可能再次被檢索。LLM Wiki 把持續維護的綜合內容留在可打開檢查的頁面裡；來源變更時仍要重新整理，重要結論也可能需要回到引用核對。大型 wiki 也可以搜尋頁面。",
       },
       {
         question: "怎麼用 Claude Code 做 LLM Wiki？",
@@ -710,7 +710,7 @@ const zhTWArticles = {
           columns: ["外掛", "功能", "安裝方式"],
           rows: [
             ["Claudian（約 15,600 stars）", "在 Obsidian 側邊欄執行 Claude Code 或 Codex，以 vault 作為工作資料夾", "社群外掛：搜尋「Claudian」"],
-            ["Claude Code IDE bridge（obsidian-claude-ide）", "把目前檔案與選取內容分享給終端機裡的 Claude Code", "從 GitHub 安裝"],
+            ["Claude Code IDE bridge（obsidian-claude-ide）", "把目前檔案與選取內容分享給終端機裡的 Claude Code", "設定 → 社群外掛 → 瀏覽，搜尋「Claude Code IDE」並安裝、啟用；在 Claude Code 終端機執行 `/ide` 選擇 Obsidian"],
             ["obsidian-claude-code（Roasbeef）", "內嵌在 vault 裡的 Claude 助手", "從 GitHub 安裝"],
             ["obsidian-claude-code-mcp（iansinnott）", "Claude Code 的 MCP 與 IDE bridge；最後更新於 2025 年", "從 GitHub 安裝"],
           ],
@@ -734,7 +734,7 @@ const zhTWArticles = {
         id: "claude-code-obsidian-memory",
         heading: "Claude Code 會記得你的 vault 嗎？",
         body: [
-          "不會。每個 Claude Code session 都從頭開始：重新讀 CLAUDE.md 和它打開的筆記，其餘對話內容都會忘記。vault 保存你的筆記，但不會記錄 Claude 從筆記得出的結論，也不知道哪些結論已經過時。",
+          "每個 Claude Code session 都以新的 context window 開始，但 CLAUDE.md、auto memory 和恢復的對話都能延續部分脈絡。Claude 能取得什麼，取決於這些機制保留並載入了哪些內容。Obsidian vault 會保存筆記，但本身不會追蹤哪些筆記支撐 Claude 的結論，也不會標示這些結論是否已過時。",
           "Wenlan 補上這一層，而且不改動 vault。它把 vault 當成唯讀來源（read-only source），結合你工作時記下的決策，寫成附上來源引用的 wiki 頁面；來源筆記一改，相關頁面就會標記待審。同一份記憶可在 Claude Code、Codex、Cursor 與其他 MCP client 中使用。",
         ],
         code: {
@@ -1003,8 +1003,8 @@ const zhTWArticles = {
       {
         heading: "兩種做法：每次查資料，或整理成頁面",
         body: [
-          "第一種是 RAG：每次提問時，從文件裡找出相關段落交給 AI，答完就丟掉。好處是馬上能用；缺點是同樣的閱讀每次都重做，也沒有東西可以讓你翻閱。",
-          "第二種是 Andrej Karpathy 在 2026 年 4 月提出的 LLM Wiki：AI 每份文件只讀一次，把內容整理成互相連結的頁面，之後的問題都從頁面開始。你得到的是一份可以閱讀、會越來越完整的知識庫，代價是要定期檢查頁面有沒有過時。",
+          "第一種是 RAG：每次提問時，從文件裡檢索相關段落交給 AI。這適合直接查詢最新來源；不同問題可能會再次檢索相同內容，索引或快取也會因工具而異。",
+          "另一種是 Andrej Karpathy 在 2026 年 4 月提出的 LLM Wiki：把來源整理成互相連結、可檢查的頁面，後續問題可以先從這些頁面開始。來源有變化時仍要同步並檢查受影響的頁面；大型 wiki 也可以搜尋頁面或回到引用來源。",
         ],
         figure: "llm-wiki-vs-rag",
       },
@@ -1045,6 +1045,41 @@ const zhTWArticles = {
         },
       },
       {
+        heading: "用兩份虛構筆記試跑 Obsidian + Claude Code",
+        body: [
+          "先確認 Claude Code 已安裝並登入。在 Obsidian 建立並開啟一個新的測試 vault，加入以下兩份虛構教學筆記。",
+        ],
+        code: {
+          label: "research.md 和 decision.md",
+          code: "research.md\n# 使用者研究（虛構）\n- 使用者經常找不到原始研究報告。\n\ndecision.md\n# 下一輪決定（虛構）\n- 下一輪加入檔名引用，方便回到來源。",
+        },
+      },
+      {
+        heading: "在這個 vault 啟動 Claude Code",
+        body: [
+          "在終端機切換到新 vault 的實際路徑，再啟動 Claude Code。啟動後，下一節會提供要貼進對話的唯讀問題。",
+        ],
+        code: {
+          label: "在終端機啟動 Claude Code",
+          code: "cd '<新 vault 的實際資料夾路徑>'\nclaude",
+        },
+      },
+      {
+        heading: "用只讀問題檢查來源依據",
+        body: [
+          "在 Claude Code 對話中貼上以下問題。請只讀取這兩份筆記，不要修改任何來源檔；參考答案只根據這些虛構筆記。",
+          "請只讀取目前 vault 裡的 research.md 和 decision.md，不要修改任何來源檔。根據這兩份筆記，下一輪應該做什麼？為什麼？負責人是誰？請引用檔名；若筆記未說明負責人，請明確回答無法判定，不要推測。",
+        ],
+        table: {
+          columns: ["核對項目", "參考答案", "來源"],
+          rows: [
+            ["下一輪做什麼", "加入檔名引用。", "decision.md"],
+            ["為什麼", "使用者經常找不到原始研究報告。", "research.md"],
+            ["負責人", "筆記未說明，無法判定。", "research.md、decision.md"],
+          ],
+        },
+      },
+      {
         heading: "怎麼驗收：三個問題就夠",
         body: [
           "文件裡有答案的問題，AI 應該答對並指出是哪一份文件。沒有答案的問題，AI 應該說找不到，而不是編一個。要綜合兩份文件的問題，最能看出工具是真的讀懂，還是只抓到一段文字。",
@@ -1055,7 +1090,7 @@ const zhTWArticles = {
         heading: "個人 AI 知識庫常卡在哪裡",
         body: ["自己建或用現成工具，最常遇到這四個問題："],
         bullets: [
-          "文件更新了，答案沒更新：RAG 每次會重查，但整理好的頁面不會自己知道來源改了。",
+          "文件更新了，答案沒更新：RAG 每個問題都會檢索，但來源變更仍需同步或重建索引；維護型頁面則要追蹤來源修訂並審核，才能標出或更新受影響內容。",
           "AI 改掉你手動修正的內容：自己做的 LLM Wiki 要在規則裡寫清楚哪些段落不能改。",
           "每個 AI 工具各有一份：ChatGPT、Claude、Codex 各記各的，久了內容不一致。",
           "掃描型 PDF 讀不到：先 OCR，再匯入。",
@@ -1067,6 +1102,12 @@ const zhTWArticles = {
           "Wenlan（文瀾）是開源的桌面 app，做的是上面的 LLM Wiki 做法。它把文件、筆記和 AI 對話整理成附出處的頁面；來源改了會標出哪些頁面要更新，而且不會蓋掉你的修改。Claude Code、Codex 和其他 AI 工具讀的是同一份知識庫。",
           "支援 Markdown（.md）、文字檔（.txt）、可擷取文字的 PDF（.pdf），以及 Obsidian vault；掃描型 PDF 要先 OCR。Obsidian vault 只會被讀取，原始筆記不會被修改。",
         ],
+        bullets: [
+          "先依照平台與 AI client 設定指南安裝並連線，確認 Wenlan 已連上，再加入一個範圍明確的資料夾、檔案或 Obsidian vault。",
+          "執行 `wenlan sources add <路徑>`，檢查找到、匯入、略過和錯誤的數量；資料夾來源不會匯入任意程式碼檔。",
+          "來源變更後再次執行相同指令同步；Obsidian vault 為唯讀，需按需重新同步。掃描或圖片型 PDF 要先在外部 OCR。",
+          "在已安裝 Wenlan plugin 的 Claude Code 或 Codex 中，用 `/distill <主題>` 建立維護型 Page，再以 `/pages <主題>` 檢查。執行 `/lint` 與 `/curate` 檢查問題並審核修訂；只有 MCP 的 client 請使用它提供的 Wenlan tools。",
+        ],
         code: {
           label: "安裝並連接 AI 工具後",
           code: "wenlan sources add ~/Knowledge/my-topic\n/distill <主題>\n/pages <主題>",
@@ -1077,7 +1118,7 @@ const zhTWArticles = {
       {
         question: "AI 知識庫和 RAG 是一樣的東西嗎？",
         answer:
-          "不完全一樣。RAG 是其中一種做法：每次提問時去文件裡找段落。另一種是 LLM Wiki，先把文件整理成頁面，之後從頁面回答。",
+          "不完全一樣。RAG 會在每個問題中檢索相關文件段落；LLM Wiki 則把來源整理成可維護的頁面，後續問題可以先從頁面開始。來源變更時仍要同步並檢查頁面。",
       },
       {
         question: "建立 AI 知識庫要花錢嗎？",
@@ -3684,7 +3725,7 @@ const zhCNArticles = {
       {
         heading: "Karpathy 的 LLM Wiki 是什么",
         body: [
-          "2026 年 4 月，Andrej Karpathy 在 GitHub gist 发表了《LLM Wiki》。做法是：不要每次提问都让 AI 重新搜索原始文档，而是让它每份来源只读一次，把学到的内容整理进互相链接的 Markdown 页面。之后的问题就从这些页面开始。",
+          "2026 年 4 月，Andrej Karpathy 在 GitHub gist 发表了《LLM Wiki》。这个做法是把来源整理成互相链接的 Markdown 页面，让后续问题可以先从维护中的综合页面开始，不必每次都从头搜索整批资料。来源变更时仍要重新读取并检查受影响的页面；重要结论也可能需要回到引用来源核对。",
           "本文引用 Karpathy 的公开说明作为这个模式的来源，不代表 Karpathy 为 Wenlan 背书。",
         ],
         figure: "llm-wiki-architecture",
@@ -3707,7 +3748,7 @@ const zhCNArticles = {
       {
         heading: "LLM Wiki 和 RAG 的区别",
         body: [
-          "RAG 每次提问都重新检索来源片段，什么都不保留，同样的阅读一再重做。LLM Wiki 只读一次，留下可以打开检查的页面；代价是要维护，这就是 lint 的用途。大型 wiki 仍然可以先用搜索找到对的页面。",
+          "RAG 会针对每个问题检索相关来源片段；来源集合与索引仍可继续使用，同一份资料也可能在不同问题中再次被检索。LLM Wiki 则把持续维护的综合内容留在可打开检查的页面里，让后续查询可以从页面开始。新增或变更的来源仍要重新整理，重要结论也可能需要回到引用核对。大型 wiki 仍可用搜索找到合适页面。",
         ],
         figure: "llm-wiki-vs-rag",
       },
@@ -3862,12 +3903,12 @@ const zhCNArticles = {
       {
         question: "Karpathy 的 LLM Wiki 是什么？",
         answer:
-          "Andrej Karpathy 描述了一种由 AI 根据你的来源撰写并维护的个人 wiki：每份来源只读一次，更新一组互相链接的 Markdown 页面，之后的问题就从这些页面回答。引用他的说明不代表他为 Wenlan 背书。",
+          "Andrej Karpathy 描述了一种由 AI 根据来源撰写并维护的个人 wiki：把来源整理成互相链接的 Markdown 页面，后续问题可以从这些页面开始。来源变更时仍要重新读取并检查受影响的页面。引用他的说明不代表他为 Wenlan 背书。",
       },
       {
         question: "LLM Wiki 和 RAG 是同一种东西吗？",
         answer:
-          "不是。RAG 每次提问都重新搜索原始文档，什么都不保留；LLM Wiki 只读一次来源，保留你可以打开检查的页面。大型 wiki 仍然可以用搜索来找页面。",
+          "两者做法不同。RAG 会针对每个问题检索相关来源片段，同一份资料可能再次被检索。LLM Wiki 把持续维护的综合内容留在可打开检查的页面里；来源变更时仍要重新整理，重要结论也可能需要回到引用核对。大型 wiki 也可以搜索页面。",
       },
       {
         question: "怎么用 Claude Code 搭 LLM Wiki？",
@@ -4196,7 +4237,7 @@ const zhCNArticles = {
           columns: ["插件", "功能", "安装方式"],
           rows: [
             ["Claudian（约 15,600 stars）", "在 Obsidian 侧边栏运行 Claude Code 或 Codex，以 vault 作为工作文件夹", "第三方插件：搜索“Claudian”"],
-            ["Claude Code IDE bridge（obsidian-claude-ide）", "把当前文件与选中内容共享给终端里的 Claude Code", "从 GitHub 安装"],
+            ["Claude Code IDE bridge（obsidian-claude-ide）", "把当前文件与选中内容共享给终端里的 Claude Code", "设置 → 社区插件 → 浏览，搜索“Claude Code IDE”并安装、启用；在 Claude Code 终端运行 `/ide` 选择 Obsidian"],
             ["obsidian-claude-code（Roasbeef）", "内嵌在 vault 里的 Claude 助手", "从 GitHub 安装"],
             ["obsidian-claude-code-mcp（iansinnott）", "Claude Code 的 MCP 与 IDE bridge；最后更新于 2025 年", "从 GitHub 安装"],
           ],
@@ -4220,7 +4261,7 @@ const zhCNArticles = {
         id: "claude-code-obsidian-memory",
         heading: "Claude Code 会记得你的 vault 吗？",
         body: [
-          "不会。每个 Claude Code session 都从头开始：重新读 CLAUDE.md 和它打开的笔记，其余对话内容都会忘记。vault 保存你的笔记，但不会记录 Claude 从笔记得出的结论，也不知道哪些结论已经过时。",
+          "每个 Claude Code session 都以新的 context window 开始，但 CLAUDE.md、auto memory 和恢复的对话都能延续部分上下文。Claude 能获取什么，取决于这些机制保留并载入了哪些内容。Obsidian vault 会保存笔记，但本身不会追踪哪些笔记支撑 Claude 的结论，也不会标记这些结论是否已经过时。",
           "Wenlan 补上这一层，而且不改动 vault。它把 vault 当作只读来源（read-only source），结合你工作时记下的决策，写成附上来源引用的 wiki 页面；来源笔记一改，相关页面就会标记待审。同一份记忆可在 Claude Code、Codex、Cursor 与其他 MCP client 中使用。",
         ],
         code: {
@@ -4490,8 +4531,8 @@ const zhCNArticles = {
       {
         heading: "两种搭法：每次检索，或整理成页面",
         body: [
-          "第一种是 RAG：每次提问时，从文档里找出相关段落交给 AI，答完就丢掉。好处是马上能用；缺点是同样的阅读每次都重做，也没有东西可以翻阅。",
-          "第二种是 Andrej Karpathy 在 2026 年 4 月提出的 LLM Wiki：AI 每份文档只读一次，把内容整理成互相链接的页面，之后的问题都从页面开始。你得到一份可以阅读、越用越完整的知识库，代价是要定期检查页面有没有过时。",
+          "第一种是 RAG：每次提问时，从文档中检索相关段落交给 AI。这适合直接查询最新来源；不同问题可能会再次检索相同内容，索引或缓存也因工具而异。",
+          "另一种是 Andrej Karpathy 在 2026 年 4 月提出的 LLM Wiki：把来源整理成互相链接、可检查的页面，后续问题可以先从这些页面开始。来源变化时仍要同步并检查受影响的页面；大型 wiki 也可以搜索页面或回到引用来源。",
         ],
         figure: "llm-wiki-vs-rag",
       },
@@ -4532,6 +4573,41 @@ const zhCNArticles = {
         },
       },
       {
+        heading: "用两份虚构笔记试跑 Obsidian + Claude Code",
+        body: [
+          "先确认 Claude Code 已安装并登录。在 Obsidian 新建并打开一个测试 vault，加入下面两份虚构教学笔记。",
+        ],
+        code: {
+          label: "research.md 和 decision.md",
+          code: "research.md\n# 用户研究（虚构）\n- 用户经常找不到原始研究报告。\n\ndecision.md\n# 下一轮决定（虚构）\n- 下一轮加入文件名引用，方便回到来源。",
+        },
+      },
+      {
+        heading: "在这个 vault 启动 Claude Code",
+        body: [
+          "在终端里切换到新 vault 的实际路径，再启动 Claude Code。启动后，下一节会提供要贴进对话的只读问题。",
+        ],
+        code: {
+          label: "在终端启动 Claude Code",
+          code: "cd '<新 vault 的实际文件夹路径>'\nclaude",
+        },
+      },
+      {
+        heading: "用只读问题检查来源依据",
+        body: [
+          "在 Claude Code 对话中贴上下面的问题。请只读取这两份笔记，不要修改任何来源文件；参考答案只根据这些虚构笔记。",
+          "请只读取当前 vault 中的 research.md 和 decision.md，不要修改任何来源文件。根据这两份笔记，下一轮应该做什么？为什么？负责人是谁？请引用文件名；如果笔记没有说明负责人，请明确回答无法判断，不要猜测。",
+        ],
+        table: {
+          columns: ["核对项目", "参考答案", "来源"],
+          rows: [
+            ["下一轮做什么", "加入文件名引用。", "decision.md"],
+            ["为什么", "用户经常找不到原始研究报告。", "research.md"],
+            ["负责人", "笔记未说明，无法判断。", "research.md、decision.md"],
+          ],
+        },
+      },
+      {
         heading: "怎么验收：三个问题就够",
         body: [
           "文档里有答案的问题，AI 应该答对并指出是哪一份文档。没有答案的问题，AI 应该说找不到，而不是编一个。要综合两份文档的问题，最能看出工具是真的读懂了，还是只抓到一段文字。",
@@ -4542,7 +4618,7 @@ const zhCNArticles = {
         heading: "个人知识库常卡在哪里",
         body: ["自己搭或用现成工具，最常遇到这四个问题："],
         bullets: [
-          "文档更新了，答案没更新：RAG 每次会重新检索，但整理好的页面不会自己知道来源改了。",
+          "文档更新了，答案没更新：RAG 会为每个问题检索，但来源变化仍需同步或重建索引；维护型页面则要跟踪来源修订并审核，才能标记或更新受影响内容。",
           "AI 改掉你手动修正的内容：自己搭的 LLM Wiki 要在规则里写清楚哪些段落不能改。",
           "每个 AI 工具各存一份：ChatGPT、Claude、Codex 各记各的，久了内容不一致。",
           "扫描型 PDF 读不到：先 OCR，再导入。",
@@ -4554,6 +4630,12 @@ const zhCNArticles = {
           "Wenlan（文澜）是开源的桌面 app，用的是上面的 LLM Wiki 做法。它把文档、笔记和 AI 对话整理成带出处的页面；来源改了会标出哪些页面要更新，而且不会覆盖你的修改。Claude Code、Codex 和其他 AI 工具读的是同一份知识库。",
           "支持 Markdown（.md）、文本文件（.txt）、可提取文字的 PDF（.pdf），以及 Obsidian vault；扫描型 PDF 要先 OCR。Obsidian vault 只会被读取，原始笔记不会被修改。",
         ],
+        bullets: [
+          "先按平台与 AI client 设置指南安装并连接，确认 Wenlan 已连通，再加入一个边界明确的文件夹、文件或 Obsidian vault。",
+          "运行 `wenlan sources add <路径>`，检查找到、导入、跳过和错误的数量；文件夹来源不会导入任意代码文件。",
+          "来源变更后再次运行相同命令同步；Obsidian vault 为只读，需按需重新同步。扫描或图片型 PDF 要先在外部完成 OCR。",
+          "在已安装 Wenlan plugin 的 Claude Code 或 Codex 中，用 `/distill <主题>` 建立维护型 Page，再用 `/pages <主题>` 检查。运行 `/lint` 与 `/curate` 检查问题并审核修订；只有 MCP 的 client 请使用它提供的 Wenlan tools。",
+        ],
         code: {
           label: "安装并连接 AI 工具后",
           code: "wenlan sources add ~/Knowledge/my-topic\n/distill <主题>\n/pages <主题>",
@@ -4564,7 +4646,7 @@ const zhCNArticles = {
       {
         question: "个人知识库和 RAG 是一回事吗？",
         answer:
-          "不完全是。RAG 是其中一种做法：每次提问时去文档里找段落。另一种是 LLM Wiki，先把文档整理成页面，之后从页面回答。",
+          "不完全是。RAG 会在每个问题中检索相关文档段落；LLM Wiki 则把来源整理成可维护的页面，后续问题可以先从页面开始。来源变更时仍要同步并检查页面。",
       },
       {
         question: "搭建个人知识库要花钱吗？",

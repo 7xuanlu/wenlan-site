@@ -30,14 +30,14 @@ export const LEARN_ARTICLE_SOURCE_HASHES = {
   "build-sre-incident-knowledge-base": "4e6e42103452e76aa79fcd4cc2c02c15d53bf9a5a89b4f0db5188859ee34d37e",
   "choose-ai-knowledge-base-tool": "1083c41f085af4978646f06297632c3e9487c182c3522ef7a8e10267ea5fa701",
   "coding-agent-source-backed-knowledge-base": "35fbb1a7512c08d5aed41de441053a5cbe06953413bd8ad933bdc595357a3c13",
-  "distilled-wiki-pages-ai-memory": "636b52076857f554827769bbb1c85c8101a3c1fa5c803feaf0c31b3f3a17117c",
+  "distilled-wiki-pages-ai-memory": "a2fe85601845a00060c770b656900af64d578c2bfb9b737c23cfeeca8828031d",
   "fix-pdf-ingestion-ai-knowledge-base": "dfaa3ad43e1ad997b86d2e269032fd52dd7f6be8b765e3d14a95e9440a3c0857",
   "prevent-multi-agent-knowledge-conflicts": "a3aea94df3a0fb3004edb49cd125dc9d7c91643caa10088e9d6fc09a2a0ef72e",
   "source-backed-research-knowledge-base": "ad6420c51e642b9786afd2506bb03f26aaf09a785cb89eacc8c68d0bcca83489",
   "source-backed-wiki-pages-ai-work": "1524ef707961c039ac128e26e7a2df4009324cc57b50f6fad136346ef5d0c308",
   "test-ai-knowledge-base-retrieval-after-changes": "590430bb5ad71ecc051ee23d0135b4410c90012b689fef5cc22d14fbc918d265",
   "verify-ai-knowledge-base-citations": "211a961081e699144031758c2a2a0535adf13422c0d45d8122801cb2382b269b",
-  "wenlan-vs-obsidian-ai-memory": "206c65c77b2967d43ba6b016edd47765df5f2deaa41994a3eac46a6e798f92cd",
+  "wenlan-vs-obsidian-ai-memory": "e83b9c61babd41cafec06f10dd029fcdcfcde65a5da252c9ce216006b5e089a6",
   "when-ai-agent-should-query-knowledge-base": "abc1e82cfff784bc15e39f11937dd295dad993590c50aee1eb15a9a9ee635c14",
 } as const;
 
