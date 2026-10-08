@@ -62,7 +62,8 @@ Pages without rows are unavailable, not zero.
   zh-TW footer links the shared-memory owner; no `7xuanlu/claude-plugins`
   install line on the shared-memory page.
 - IndexNow: the production build log shows 67 URLs submitted, response 200.
-- Search Console recrawl requests: not yet made.
+- Search Console: all 10 owners inspected as indexed ("URL is on Google");
+  indexing requested for each on 2026-10-07 after the deploy.
 
 Repair immediately on a redirect chain or loop, a 404 for a former URL, an
 owner canonical or sitemap error, or an owner fact contradicted by the Wenlan
