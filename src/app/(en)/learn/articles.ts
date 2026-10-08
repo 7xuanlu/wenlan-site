@@ -278,11 +278,11 @@ const baseArticles: LearnArticle[] = [
         id: "add-memory-server-to-claude-code",
         heading: "Add the memory server to Claude Code, Codex, Cursor, or VS Code",
         body: [
-          "Each client needs the same command, npx -y @modelcontextprotocol/server-memory, plus a MEMORY_FILE_PATH that points to a file you control. Restart the client or start a new session after adding it.",
+          "Each client needs the same command, npx -y @modelcontextprotocol/server-memory, plus a MEMORY_FILE_PATH that points to a file you control. Create the file's parent directory before starting the server; this also applies when you set the path in a client's JSON config. Restart the client or start a new session after adding it.",
         ],
         code: {
           label: "Claude Code and Codex",
-          code: "claude mcp add memory -e MEMORY_FILE_PATH=$HOME/.mcp-memory/memory.jsonl \\\n  -- npx -y @modelcontextprotocol/server-memory\n\ncodex mcp add memory --env MEMORY_FILE_PATH=$HOME/.mcp-memory/memory.jsonl \\\n  -- npx -y @modelcontextprotocol/server-memory",
+          code: "mkdir -p \"$HOME/.mcp-memory\"\n\nclaude mcp add memory -e MEMORY_FILE_PATH=$HOME/.mcp-memory/memory.jsonl \\\n  -- npx -y @modelcontextprotocol/server-memory\n\ncodex mcp add memory --env MEMORY_FILE_PATH=\"$HOME/.mcp-memory/memory.jsonl\" \\\n  -- npx -y @modelcontextprotocol/server-memory",
         },
         bullets: [
           "Cursor: add a \"memory\" entry under mcpServers in ~/.cursor/mcp.json, or .cursor/mcp.json for one project.",
@@ -296,7 +296,7 @@ const baseArticles: LearnArticle[] = [
         heading: "Where the MCP memory server stores data",
         body: [
           "Everything lives in one JSONL file. If you don't set MEMORY_FILE_PATH, the file is memory.jsonl in the server's own folder. With npx, that folder is inside the npm cache, which can be cleared or replaced on update. Set MEMORY_FILE_PATH to a path you back up.",
-          "Because it's one file per path, two clients share memory only if both point to the same MEMORY_FILE_PATH. Give each project its own path if you don't want memories to mix.",
+          "Because it's one file per path, clients can reuse the same MEMORY_FILE_PATH sequentially. In local stdio setups, each client usually starts its own server process, and each process has its own mutation queue; writes from separate processes are not coordinated. Avoid simultaneous writes to the same file, or route clients through one coordinated service. Give each project its own path if you don't want memories to mix.",
         ],
         code: {
           label: "Cursor or Claude Desktop JSON",
@@ -425,7 +425,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Can Claude Code and Cursor share one MCP memory server?",
         answer:
-          "Yes. Point both at the same server and the same storage, such as the same MEMORY_FILE_PATH, or connect both to the same Wenlan install.",
+          "Yes, they can use the same MEMORY_FILE_PATH for sequential access. Separate local stdio server processes do not coordinate concurrent writes, so avoid simultaneous writers or use one coordinated service if both clients need to write at the same time. Both clients can also connect to the same Wenlan install.",
       },
       {
         question: "Is an MCP memory server the same as RAG?",
@@ -614,7 +614,7 @@ const baseArticles: LearnArticle[] = [
           columns: ["Plugin", "What it does", "Install"],
           rows: [
             ["Claudian (about 15,600 stars)", "Runs Claude Code or Codex in an Obsidian sidebar with your vault as the working folder", "Community plugins: search \"Claudian\""],
-            ["Claude Code IDE bridge (obsidian-claude-ide)", "Shares the active file and selection with Claude Code running in a terminal", "From GitHub"],
+            ["Claude Code IDE bridge (obsidian-claude-ide)", "Shares the active file and selection with Claude Code running in a terminal", "Settings → Community plugins → Browse → search `Claude Code IDE`; install and enable, then run `/ide` in the Claude Code terminal and select Obsidian"],
             ["obsidian-claude-code (Roasbeef)", "An embedded Claude assistant inside the vault", "From GitHub"],
             ["obsidian-claude-code-mcp (iansinnott)", "MCP and IDE bridge for Claude Code; last updated in 2025", "From GitHub"],
           ],
@@ -638,7 +638,7 @@ const baseArticles: LearnArticle[] = [
         id: "claude-code-obsidian-memory",
         heading: "Does Claude Code remember your vault?",
         body: [
-          "No. Each Claude Code session starts fresh. It rereads CLAUDE.md and whatever notes it opens, and forgets the rest of the conversation. Your vault holds your notes, but it doesn't track what Claude concluded from them or which conclusions are now out of date.",
+          "Each Claude Code session starts with a fresh context window, but CLAUDE.md, auto memory, and resumed conversations can carry context forward. What Claude knows depends on what those mechanisms retain and load. An Obsidian vault stores notes, but does not by itself track which notes informed Claude's conclusions or whether those conclusions are out of date.",
           "Wenlan adds that layer without touching the vault. It reads your vault as a read-only source, combines it with decisions you capture while working, and writes wiki pages that cite their sources and are flagged for review when a source note changes. The same memory works in Claude Code, Codex, Cursor, and other MCP clients.",
         ],
         code: {
@@ -1355,7 +1355,7 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "What Karpathy's LLM Wiki is",
         body: [
-          "In April 2026 Andrej Karpathy published a GitHub gist called LLM Wiki. Instead of having an AI search your raw documents on every question, the AI reads each source once and folds what it learned into linked Markdown pages. Later questions start from those pages.",
+          "In April 2026 Andrej Karpathy published a GitHub gist called LLM Wiki. The pattern is to ingest sources into linked Markdown pages, so later questions can start from a maintained synthesis instead of searching the whole collection from scratch. When a source changes, it still needs to be read again and affected pages checked; answers may also need to return to cited sources.",
           "This article cites Karpathy's public note as the source of the pattern; it does not imply that Karpathy endorses Wenlan.",
         ],
         figure: "llm-wiki-architecture",
@@ -1378,7 +1378,7 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "LLM wiki vs RAG",
         body: [
-          "RAG retrieves source chunks each time you ask and keeps nothing, so the same reading is repeated. An LLM wiki reads once and keeps maintained pages you can open and check. The cost is upkeep, which is what lint is for. A large wiki can still use search to find the right pages.",
+          "RAG retrieves relevant source chunks for each query; the source collection and its index remain available, and the same material may be retrieved again for another question. An LLM wiki keeps a maintained synthesis in pages that you can open and check, so a later query can start there. New or changed sources still need ingestion, and important claims may need checking against their citations. A large wiki can use search to find the right pages.",
         ],
         figure: "llm-wiki-vs-rag",
       },
@@ -1532,7 +1532,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "What is the Karpathy LLM Wiki idea?",
         answer:
-          "Andrej Karpathy described a personal wiki that an AI writes and maintains from your sources: it reads each source once, updates a set of linked Markdown pages, and answers later questions from those pages. Citing his note does not imply an endorsement of Wenlan.",
+          "Andrej Karpathy described a personal wiki that an AI writes and maintains from your sources: it ingests sources into linked Markdown pages, which can help answer later questions. Changed sources still need to be read again and affected pages checked. Citing his note does not imply an endorsement of Wenlan.",
       },
       {
         question: "What is an LLM wiki?",
@@ -1542,7 +1542,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Is an LLM wiki the same as RAG?",
         answer:
-          "No. RAG searches your raw documents for every question and keeps nothing. An LLM wiki reads sources once and keeps maintained pages that you can open and check. A large wiki can still use search to find pages.",
+          "They are different approaches. RAG retrieves relevant source chunks for each query, and the same material may be retrieved again. An LLM wiki keeps a maintained synthesis in pages that you can open and check; changed sources still need ingestion, and important claims may need checking against their citations. A large wiki can also use search to find pages.",
       },
       {
         question: "How do I build an LLM wiki with Claude Code?",

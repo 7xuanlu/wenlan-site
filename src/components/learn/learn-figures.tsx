@@ -56,24 +56,24 @@ const ragCopy: Record<Locale, {
   rows: Array<{ name: string; steps: string[]; note: string; accent: boolean }>;
 }> = {
   en: {
-    caption: "RAG redoes the reading on every question. An LLM wiki does it once and keeps the result.",
+    caption: "RAG retrieves relevant source chunks per query; the same material may recur. A wiki keeps maintained pages that still need updates when sources change.",
     rows: [
-      { name: "RAG", steps: ["Question", "Search raw chunks", "Answer"], note: "Repeated every time. Nothing is kept.", accent: false },
-      { name: "LLM wiki", steps: ["Source", "Read once into pages", "Question", "Answer from pages"], note: "Work is kept, and you can open the pages.", accent: true },
+      { name: "RAG", steps: ["Question", "Search source chunks", "Answer"], note: "The source collection stays available; chunks may recur.", accent: false },
+      { name: "LLM wiki", steps: ["Source", "Ingest into maintained pages", "Question", "Start from pages"], note: "Update pages when sources change.", accent: true },
     ],
   },
   "zh-TW": {
-    caption: "RAG 每次提問都重讀一遍；LLM Wiki 只讀一次，把結果留下來。",
+    caption: "RAG 會按問題檢索來源片段，同一內容可能再次出現；Wiki 保留維護中的頁面，來源變更時仍要更新。",
     rows: [
-      { name: "RAG", steps: ["提問", "搜尋原始片段", "回答"], note: "每次重來，什麼都不留下。", accent: false },
-      { name: "LLM Wiki", steps: ["來源", "讀一次，寫進頁面", "提問", "從頁面回答"], note: "成果會累積，頁面打開就能看。", accent: true },
+      { name: "RAG", steps: ["提問", "檢索來源片段", "回答"], note: "來源仍可查詢；片段可能再次出現。", accent: false },
+      { name: "LLM Wiki", steps: ["來源", "整理並維護頁面", "提問", "先看相關頁面"], note: "來源變更時要更新頁面。", accent: true },
     ],
   },
   "zh-CN": {
-    caption: "RAG 每次提问都重读一遍；LLM Wiki 只读一次，把结果留下来。",
+    caption: "RAG 会按问题检索来源片段，同一内容可能再次出现；Wiki 保留维护中的页面，来源变化时仍要更新。",
     rows: [
-      { name: "RAG", steps: ["提问", "搜索原始片段", "回答"], note: "每次重来，什么都不留下。", accent: false },
-      { name: "LLM Wiki", steps: ["来源", "读一次，写进页面", "提问", "从页面回答"], note: "成果会累积，页面打开就能看。", accent: true },
+      { name: "RAG", steps: ["提问", "检索来源片段", "回答"], note: "来源仍可查询；片段可能再次出现。", accent: false },
+      { name: "LLM Wiki", steps: ["来源", "整理并维护页面", "提问", "先看相关页面"], note: "来源变化时要更新页面。", accent: true },
     ],
   },
 };

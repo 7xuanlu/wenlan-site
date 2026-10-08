@@ -322,7 +322,8 @@ test("agent guidance tracks the wenlan.app canonical launch property", async () 
   assert.match(agents, /canonical public site is https:\/\/wenlan\.app/);
   assert.match(agents, /useorigin\.app.*legacy redirect bridge/);
   assert.doesNotMatch(agents, /current deployed public property is still https:\/\/useorigin\.app/);
-  assert.match(claude, /Single-page marketing site for \[Wenlan\]\(https:\/\/wenlan\.app\)/);
+  assert.match(claude, /^@AGENTS\.md$/m);
+  assert.match(claude, /docs\/seo-demand-workflow\.md/);
 });
 
 test("root metadata describes Wenlan on the current release surface", async () => {
@@ -417,7 +418,7 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.match(article, /does not imply that Karpathy endorses Wenlan/);
   assert.match(article, /heading:\s*"The three jobs: ingest, query, lint"/);
   assert.match(article, /heading:\s*"LLM wiki vs RAG"/);
-  assert.match(article, /RAG retrieves source chunks/);
+  assert.match(article, /RAG retrieves (?:relevant )?source chunks/);
   assert.match(article, /id:\s*"build-an-llm-wiki-with-claude-code"/);
   assert.match(article, /heading:\s*"The CLAUDE.md schema to copy"/);
   assert.match(article, /CLAUDE\.md for Claude Code or AGENTS\.md for Codex/);
