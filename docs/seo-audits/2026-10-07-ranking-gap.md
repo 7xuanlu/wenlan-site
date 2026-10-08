@@ -188,3 +188,5 @@ Planner 量值沿用 2025-09～2026-08 的 UI 區間，不是本站流量；近�
 最終發布前檢查：Goal check、scenario（18 families／154 owners）、intent（154/154）、Goal tests60/60、SEO377/377、measurement133通過／2預期skip、i18n86/86、report10/10、lint、production build、built technical、weekly fixture全部通過。報表新增拒絕覆寫既有檔案，測試保留來源、symlink、hardlink及舊報表。production build 在獨立依賴安裝後完成，非production IndexNow skip。
 
 本地 production 3431 的瀏覽器驗收：雙中文知識庫新增範例／步驟、英文RAG圖在1280與393px、light／dark檢視；三語Obsidian安裝和記憶文字逐頁DOM核對。無觀察到水平溢出或console error，既有圖文元件沿用；截圖已在本次對話工具輸出檢視。未執行 Claude／MCP 實際情境或聲稱全站視覺驗收，未取得可上傳的截圖附件，因此PR只記驗收範圍，不冒稱附圖。此為品質修復，不是排名提升收據。
+
+排程現況補查：本機既有 `weekly-origin-seo-cleanup`（名稱 `weekly-wenlan-seo`）為 PAUSED；沒有默默恢復或新建排程。流程與資料已可重用，但下一次讀數需人工啟動或使用者另行恢復排程。
