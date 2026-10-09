@@ -106,10 +106,10 @@ const searchRoutes = [
     context: "comparisons",
   },
   {
-    query: "Obsidian AI memory",
-    intent: "Compare an Obsidian vault with a local memory layer shared by Claude Code and MCP clients.",
+    query: "Connect Claude Code to Obsidian",
+    intent: "Connect your vault, find the latest decision in two practice notes, and check the original sources.",
     href: "/learn/wenlan-vs-obsidian-ai-memory",
-    context: "comparisons",
+    context: "workflows",
   },
   {
     query: "Local AI memory",

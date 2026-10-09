@@ -1866,14 +1866,14 @@ test("Obsidian page answers Claude Code setup, MCP, plugin, and skill intent wit
   assert.doesNotMatch(support, /slug: "wenlan-vs-obsidian-ai-memory"/);
   assert.match(
     article,
-    /title:\s*"Obsidian \+ Claude Code: How to Set Up Your Vault, MCP, Plugins, and Skills"/,
+    /title:\s*"Obsidian \+ Claude Code: Connect Your Vault and Check Answers"/,
   );
   assert.match(
     article,
-    /metaTitle:\s*"Obsidian \+ Claude Code: Setup, MCP, Plugins & Skills \| Wenlan"/,
+    /metaTitle:\s*"Connect Claude Code to Obsidian: Setup & Note Search \| Wenlan"/,
   );
   assert.match(article, /publishedAt:\s*"2026-06-06"/);
-  assert.match(article, /updatedAt:\s*"2026-10-06"/);
+  assert.match(article, /updatedAt:\s*"2026-10-08"/);
   for (const query of [
     "obsidian claude code",
     "claude code obsidian",
@@ -1888,12 +1888,12 @@ test("Obsidian page answers Claude Code setup, MCP, plugin, and skill intent wit
   }
   for (const heading of [
     "Step 1: Run Claude Code in your Obsidian vault",
-    "Step 2: Add a CLAUDE.md to the vault",
-    "Step 3: Add the Obsidian CLI and Obsidian skills",
+    "Optional: Add a CLAUDE.md to the vault",
+    "Optional: Add the Obsidian CLI and Obsidian skills",
     "Obsidian MCP server: when you need one",
     "Obsidian plugins for Claude Code",
     "Build a second brain with Claude Code and Obsidian",
-    "Does Claude Code remember your vault?",
+    "Already using Obsidian with AI? When Wenlan helps",
   ]) {
     assert.ok(article.includes(`heading: "${heading}"`), heading);
   }
@@ -1902,6 +1902,8 @@ test("Obsidian page answers Claude Code setup, MCP, plugin, and skill intent wit
   assert.match(article, /claude mcp add --transport http obsidian https:\/\/127\.0\.0\.1:27124\/mcp\//);
   assert.match(article, /active file and selection/i);
   assert.match(article, /read-only source/i);
+  assert.match(article, /03-checklist\.md/);
+  assert.match(article, /at least three distinct source memories/);
   for (const href of [
     "https://obsidian.md/help/cli",
     "https://github.com/kepano/obsidian-skills",

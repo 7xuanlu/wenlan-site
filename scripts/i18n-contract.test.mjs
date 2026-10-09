@@ -1074,7 +1074,7 @@ test("localized Learn metadata emits Mandarin canonical alternates for acquisiti
   });
   assert.equal(
     zhCNObsidianMetadata.title,
-    "Obsidian + Claude Code 教程：MCP、插件与 Skills | Wenlan",
+    "Obsidian + Claude Code 教程：连接笔记、核对答案 | Wenlan",
   );
   assert.equal(
     zhCNObsidianMetadata.alternates.canonical,
@@ -1658,16 +1658,16 @@ test("Mandarin Obsidian guides own the Claude Code setup, MCP, plugin, and skill
     const article = getLocalizedLearnArticle(locale, "wenlan-vs-obsidian-ai-memory");
     assert.ok(article, `${locale} article`);
     assert.match(article.title, /Obsidian \+ Claude Code/);
-    assert.match(article.title, script === "traditional" ? /教學.*MCP.*外掛.*Skills/ : /教程.*MCP.*插件.*Skills/);
+    assert.match(article.title, script === "traditional" ? /教學.*連接筆記.*核對答案/ : /教程.*连接笔记.*核对答案/);
     assert.doesNotMatch(article.title, /AI 知識庫|AI 知识库/);
     assert.equal(
       article.publishedAt,
       locale === "zh-TW" ? "2026-07-22" : "2026-08-01",
     );
-    assert.equal(article.updatedAt, "2026-10-06");
+    assert.equal(article.updatedAt, "2026-10-08");
     assert.ok(article.keywords.includes("Obsidian MCP"));
     assert.ok(article.keywords.includes("Obsidian Claude Code MCP"));
-    assert.equal(article.sections.length, 8);
+    assert.equal(article.sections.length, 12);
 
     const articleText = JSON.stringify(article);
     for (const expected of [
@@ -1678,7 +1678,8 @@ test("Mandarin Obsidian guides own the Claude Code setup, MCP, plugin, and skill
       "claude mcp add --transport http obsidian",
       "Claudian",
       "IDE bridge",
-      "read-only source",
+      locale === "zh-TW" ? "唯讀來源" : "只读来源",
+      "03-checklist.md",
       "kepano/obsidian-skills",
       "Roasbeef/obsidian-claude-code",
       "petersolopov/obsidian-claude-ide",
