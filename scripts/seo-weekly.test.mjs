@@ -210,11 +210,11 @@ const expectedArticleDates = new Map([
   ],
   [
     "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
-    { datePublished: "2026-07-22", dateModified: "2026-10-06" },
+    { datePublished: "2026-07-22", dateModified: "2026-10-07" },
   ],
   [
     "/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
-    { datePublished: "2026-08-01", dateModified: "2026-10-06" },
+    { datePublished: "2026-08-01", dateModified: "2026-10-07" },
   ],
   [
     "/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
@@ -5981,7 +5981,7 @@ test("Learn index SERP copy leads with AI memory and knowledge-base intent", asy
   assert.match(learnPage, /MCP memory server/);
   assert.match(learnPage, /Karpathy LLM wiki for AI agents/);
   assert.match(learnPage, /AI work memory vs knowledge base/);
-  assert.match(learnPage, /Obsidian AI memory/);
+  assert.match(learnPage, /Connect Claude Code to Obsidian/);
   assert.doesNotMatch(learnPage, /Before you add memory to AI work\./);
   assert.match(learnOgImage, /title="Wenlan LLM wiki guides\."/);
   assert.doesNotMatch(learnOgImage, /Before you add memory to AI work\./);

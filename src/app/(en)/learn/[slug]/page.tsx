@@ -1,3 +1,5 @@
+import { ObsidianGuideJumpLinks } from "@/components/learn/obsidian-guide-jump-links";
+import { ArticleTitleText } from "@/components/learn/article-title-text";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -237,8 +239,10 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                 <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
                   {article.eyebrow}
                 </p>
-                <h1 className="warm-glow max-w-full font-serif text-[2rem] leading-[1.08] font-medium tracking-tight [overflow-wrap:anywhere] [word-break:normal] sm:[overflow-wrap:break-word] sm:[word-break:keep-all] sm:text-7xl sm:leading-[1.05]">
-                  {article.title}
+                <h1 className="warm-glow max-w-full font-serif text-[2rem] leading-[1.08] font-medium tracking-tight [overflow-wrap:anywhere] [word-break:normal] sm:[overflow-wrap:break-word] sm:[word-break:keep-all] sm:text-7xl sm:leading-[1.05]"
+                  style={article.slug === "wenlan-vs-obsidian-ai-memory" ? { fontSize: "clamp(1.875rem, 4vw, 3.25rem)", lineHeight: 1.18, textWrap: "balance" } : undefined}
+                >
+                  <ArticleTitleText title={article.title} />
                 </h1>
                 <p className="mt-8 max-w-2xl break-words text-lg leading-relaxed text-[var(--o-text-secondary)]">
                   {article.description}
@@ -253,6 +257,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                   </span>
                   <span>{article.readingTime}</span>
                 </div>
+                {article.slug === "wenlan-vs-obsidian-ai-memory" && <ObsidianGuideJumpLinks locale={"en"} />}
                 {article.productEvidence && (
                   <a
                     href={article.productEvidence.action.href}
@@ -352,19 +357,26 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                         <p className="border-b border-[var(--o-border-subtle)] px-4 py-3 font-mono text-[10px] tracking-[0.18em] text-[var(--o-text-muted)] uppercase">
                           {section.code.label}
                         </p>
-                        <pre className={`overflow-x-auto p-4 text-sm leading-relaxed text-[var(--o-text-secondary)] ${section.id?.startsWith("worked-example") ? "whitespace-pre-wrap break-words" : ""}`}>
+                        <pre className={`overflow-x-auto p-4 text-sm leading-relaxed text-[var(--o-text-secondary)] ${(section.id?.startsWith("worked-example") || section.id === "check-first-answer") ? "whitespace-pre-wrap break-words" : ""}`}>
                           <code>{section.code.code}</code>
                         </pre>
                       </div>
                     )}
-                    {section.link && (
+                    {section.link && (section.link.href.startsWith(`/learn/${article.slug}#`) ? (
+                      <a
+                        href={section.link.href.slice(`/learn/${article.slug}`.length)}
+                        className="mt-6 inline-flex rounded-xl border border-[var(--o-border)] px-5 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
+                      >
+                        {section.link.label}
+                      </a>
+                    ) : (
                       <Link
                         href={section.link.href}
                         className="mt-6 inline-flex rounded-xl border border-[var(--o-border)] px-5 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
                       >
                         {section.link.label}
                       </Link>
-                    )}
+                    ))}
                   </div>
                 </section>
               ))}
@@ -471,7 +483,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
           </div>
         </section>
 
-        {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work"].includes(article.slug) && <RecordedWorkflowProof locale="en" />}
+        {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work", "wenlan-vs-obsidian-ai-memory"].includes(article.slug) && <RecordedWorkflowProof locale="en" />}
 
         <section className="border-t border-[var(--o-border-subtle)] px-6 py-20">
           <div className="mx-auto max-w-3xl">
