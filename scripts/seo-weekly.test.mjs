@@ -210,11 +210,11 @@ const expectedArticleDates = new Map([
   ],
   [
     "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
-    { datePublished: "2026-07-22", dateModified: "2026-10-07" },
+    { datePublished: "2026-07-22", dateModified: "2026-10-08" },
   ],
   [
     "/zh-CN/learn/wenlan-vs-obsidian-ai-memory",
-    { datePublished: "2026-08-01", dateModified: "2026-10-07" },
+    { datePublished: "2026-08-01", dateModified: "2026-10-08" },
   ],
   [
     "/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
