@@ -50,6 +50,24 @@ and [Claude](https://code.claude.com/docs/en/skills#choose-where-skills-load).
   action. Cross-host agreement requires an actual returned response, not a session
   creation receipt or an authentication failure.
 
+### What each host loads (checked 2026-10-10)
+
+Claude Code and Codex share only what is committed on the branch they check out.
+
+| Surface | Claude Code | Codex |
+| --- | --- | --- |
+| Rules | `CLAUDE.md` imports `AGENTS.md` | `AGENTS.md` |
+| `wenlan-seo` skill | `.claude/skills/wenlan-seo` (symlink to the Codex directory) | `.agents/skills/wenlan-seo` |
+| Workflow, cadence, decisions | this file, `seo-growth-loop.md`, `seo-growth-recovery.md` | same files |
+| Recrawl enforcement | hooks in `.claude/settings.json` | identical hooks in `.codex/hooks.json`, trusted once with `/hooks` |
+| Hook and CI logic | `scripts/seo-recrawl.mjs` | same script |
+| Search Console | read-only API through the user's local ADC; Request indexing through Claude in Chrome | read-only API; Request indexing through the host's browser tool, else the user |
+
+Plugins and connectors (for example Claude's Searchfit/marketing plugins, Codex's
+Ubersuggest/Keyword Tool), credentials, `/tmp` evidence and uncommitted files stay
+with their host. A cloud session of either host gets the committed rules, skill and
+CI check but no Search Console access; it lists recrawl URLs and stops.
+
 ## Tool routing and project judgment
 
 **The workflow belongs to the project; tools are replaceable ways to obtain evidence and prepare an answer.** Start with one unresolved question from the [current recovery queue](seo-growth-recovery.md), the decision it blocks, and the smallest useful evidence collection. Reuse an existing skill before writing a collector, clustering engine or briefing template. Do not run every tool or generate another report merely because it is available.

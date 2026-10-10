@@ -76,6 +76,26 @@ Raw GSC exports stay outside git. Commit the generated `docs/seo-audits/YYYY-MM-
 - Keep schema appropriate to page type: Organization, WebSite, Article, TechArticle, BreadcrumbList, HowTo, VideoObject, and SoftwareApplication where relevant.
 - Keep `/llms.txt` and `/llms-full.txt` concise, current, and discoverable.
 
+## Recrawl After Page Changes
+
+User decision (2026-10-10): every deployed change to an indexable page gets a Google recrawl request. Without one, when Google refreshes the page is unknown. On 10-10, requested pages were crawled within 1–3 days; changed pages that were not requested waited 1–2 months.
+
+1. **Scope.** Each canonical URL whose rendered title, description, canonical, structured data or main content changed, per locale. Include the Learn index or home page only when their own visible content changed. Exclude redirects, noindex surfaces (`/llms.txt`, `/llms-full.txt`, `/feed.xml`, `/humans.txt`), Open Graph images and static assets.
+2. **PR.** Any agent (Claude or Codex) that changes such a page adds a `## Recrawl after deploy` section to the PR with the exact absolute URLs; after `pnpm build`, `pnpm seo:recrawl:changed` prints them. No change to an indexable page means writing `none`.
+3. **Request.** Required once the deploy is verified live. The attended agent asks the user once to confirm the batch, then opens each URL's URL Inspection page in the user's signed-in browser (Claude in Chrome, or the host's equivalent): `https://search.google.com/search-console/inspect?resource_id=sc-domain%3Awenlan.app&id=<URL-encoded URL>`. It clicks Request indexing and waits for the confirmation. It stops at a sign-in page, CAPTCHA or quota message and never enters credentials. If no such browser is available, or the host blocks the step, the agent gives the user the URLs and the user submits them. Unattended and cloud sessions stop at the list. The daily request quota is limited and unpublished: send acquisition owners first and carry the rest to the next day.
+4. **Record.** For each URL Search Console confirmed, run `pnpm seo:recrawl:mark -- --pr <number> --url <URL>` (omit `--url` when all were). Each run adds a dated PR comment with those URLs; once every listed URL is recorded, it adds the `recrawl-requested` label and the reminder stops. Note anything Search Console reported (quota, errors) in the same PR. Do not start a separate ledger.
+5. **Verify.** About 3 days later, read `lastCrawlTime` with the read-only URL Inspection API from a local session that has the credentials. If a URL is still uncrawled after 7 days, request it once more and note that. Requested, crawled and indexed are separate states; record each one.
+
+**Enforcement.** This step is not optional. `scripts/seo-recrawl.mjs` backs three gates, registered identically in `.claude/settings.json` and `.codex/hooks.json` (a test keeps them identical):
+
+- **PR creation** (`PreToolUse`): `gh pr create`, `gh pr edit` with a body, and GitHub MCP PR writes are denied unless the body has the section with URLs or `none`.
+- **CI** (`Recrawl list` step): compares every sitemap URL in the PR build with production (title, description, robots, canonical, hreflang, JSON-LD and `<main>` text) and fails when a changed URL is missing from the section. Editing the PR body re-runs CI.
+- **After merge** (`SessionStart` and `Stop`): every session is told which merged PRs still have unrequested URLs and the confirm → browser → record steps above. Once Vercel's production deploy has succeeded, the first stop in each session is blocked until the agent has done them or told the user why it could not. `pnpm seo:recrawl:pending` prints the same list. Only recorded comments from the repository owner or collaborators count.
+
+Codex runs repo hooks only after the user reviews and trusts them once with `/hooks`. If GitHub cannot be reached, the reminder hooks say so rather than block.
+
+Sitemap `lastmod` and IndexNow (`postbuild`, for Bing and other IndexNow engines) continue, but they do not replace this for Google. Google's Indexing API covers only job-posting and livestream pages; do not use it for ordinary pages.
+
 ## Distribution Rules
 
 - Lead with a concrete problem or lesson, not a product launch.

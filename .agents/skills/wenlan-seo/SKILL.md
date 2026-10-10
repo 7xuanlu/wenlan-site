@@ -24,3 +24,7 @@ checkout before proceeding; do not create a replacement workflow.
    Update the existing decision record when the state changes, not a parallel
    report or keyword backlog. This invocation adds no publishing or spending
    authorization and does not automatically contact another agent.
+5. When the work changes an indexable page, the PR needs a `## Recrawl after deploy`
+   list; hooks and CI enforce it. After the deploy, run `pnpm seo:recrawl:pending`;
+   in an attended session, confirm the batch with the user once, request indexing in
+   their signed-in browser and record it, per `docs/seo-growth-loop.md#recrawl-after-page-changes`.
