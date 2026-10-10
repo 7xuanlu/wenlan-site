@@ -184,9 +184,8 @@ async function latestProductionDeploy(options) {
   return null;
 }
 
-export function inspectUrl(url) {
-  return `https://search.google.com/search-console/inspect?resource_id=${encodeURIComponent("sc-domain:wenlan.app")}&id=${encodeURIComponent(url)}`;
-}
+// A direct /inspect?id= link returns 404 on a fresh load, so start from the property home.
+export const SEARCH_CONSOLE_HOME = `https://search.google.com/search-console?resource_id=${encodeURIComponent("sc-domain:wenlan.app")}`;
 
 // URLs recorded as requested by `mark` comments from people with write access.
 export function requestedUrls(comments) {
@@ -229,9 +228,10 @@ export function pendingMessage(pending) {
   lines.push(
     "Required for deployed PRs, in this order:",
     "1. Ask the user once to confirm this batch. Do not click Request indexing before that confirmation.",
-    "2. In the user's signed-in browser (Claude in Chrome, or the host's equivalent), open each URL's inspection page",
-    `   (${inspectUrl("<URL>").replace(encodeURIComponent("<URL>"), "<URL-encoded URL>")}),`,
-    "   click Request indexing and wait for the confirmation. Stop at a sign-in page, CAPTCHA or quota message.",
+    `2. In the user's signed-in browser (Claude in Chrome, or the host's equivalent), open ${SEARCH_CONSOLE_HOME}`,
+    "   and type each URL into \"Inspect any URL\". Check the box holds the URL before pressing Enter: after a dialog",
+    "   closes, focus can sit on Request again. Click Request indexing and wait for \"Indexing requested\".",
+    "   Stop at a sign-in page, CAPTCHA or quota message.",
     "3. Run `pnpm seo:recrawl:mark -- --pr <number> --url <URL>` for each URL that was requested (omit --url when all were).",
     "If no such browser is available, or the browser step is blocked, give the user the URLs and record what they report.",
   );

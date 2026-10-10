@@ -10,7 +10,6 @@ import {
   extractRendered,
   findChangedUrls,
   findPendingRecrawls,
-  inspectUrl,
   parseRecrawlSection,
   pendingMessage,
   prBodyProblem,
@@ -161,15 +160,12 @@ test("pending recrawls skip requested, pre-rule and URL-less PRs and track deplo
   );
 });
 
-test("reminder gives the confirm, browser and record steps with an inspection link", () => {
-  assert.equal(
-    inspectUrl("https://wenlan.app/zh-TW/learn"),
-    "https://search.google.com/search-console/inspect?resource_id=sc-domain%3Awenlan.app&id=https%3A%2F%2Fwenlan.app%2Fzh-TW%2Flearn",
-  );
+test("reminder gives the confirm, browser and record steps from the property home", () => {
   const message = pendingMessage([{ number: 4, title: "t", urls: ["https://wenlan.app"], deployed: true }]);
   assert.match(message, /1\. Ask the user once to confirm this batch/);
   assert.match(message, /2\. In the user's signed-in browser/);
-  assert.match(message, /&id=<URL-encoded URL>/);
+  assert.match(message, /open https:\/\/search\.google\.com\/search-console\?resource_id=sc-domain%3Awenlan\.app\n/);
+  assert.match(message, /Check the box holds the URL before pressing Enter/);
   assert.match(message, /3\. Run `pnpm seo:recrawl:mark -- --pr <number> --url <URL>`/);
 });
 
