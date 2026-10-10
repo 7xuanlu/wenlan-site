@@ -50,6 +50,33 @@ and [Claude](https://code.claude.com/docs/en/skills#choose-where-skills-load).
   action. Cross-host agreement requires an actual returned response, not a session
   creation receipt or an authentication failure.
 
+### Host surfaces (documented 2026-10-10, cloud not yet exercised)
+
+Hosts share only what is committed on the branch they check out. Native settings,
+credentials, local `/tmp` evidence and uncommitted files do not travel.
+
+| Host | Reads the rules | Loads `wenlan-seo` | Search Console access |
+| --- | --- | --- | --- |
+| Claude Code, local | `CLAUDE.md` imports `AGENTS.md` | `.claude/skills/wenlan-seo` (symlink) | Read-only API through the user's local ADC; Request Indexing only as described in the recrawl rule |
+| Codex CLI / app, local | `AGENTS.md` | `.agents/skills/wenlan-seo` | Same as Claude Code local |
+| Codex Cloud | `AGENTS.md` in the cloned branch | Repo skills are available in cloud tasks (new environments); legacy cloud tasks: not documented | None. Secrets are setup-only (legacy) or proxy placeholders; the user's ADC is not present |
+| Claude Code on the web | `CLAUDE.md` → `AGENTS.md` in the clone | `.claude/skills` in the clone | None. Local ADC does not carry over, and environment variables are readable by everyone using the environment |
+
+Cloud tasks start from a fresh clone of the selected branch. For `pnpm build`,
+Codex Cloud needs `fonts.googleapis.com` and `fonts.gstatic.com` allowed (or a
+build in the setup script); Claude's default Trusted network already covers them.
+For `pnpm test:seo`, clone `7xuanlu/wenlan` with tags and set `WENLAN_REPO_ROOT`.
+Claude on the web blocks `gh pr` (GraphQL); use `gh api` or its own PR flow.
+Cloud agents follow the same contract, including
+[Recrawl After Page Changes](seo-growth-loop.md#recrawl-after-page-changes):
+they list the changed URLs in the PR, and a local session or the user handles the
+request and the crawl check. Do not add Search Console credentials to a cloud
+environment without separate user approval. Sources:
+[Codex cloud environments](https://learn.chatgpt.com/docs/environments/cloud-environments),
+[legacy Codex environments](https://developers.openai.com/codex/cloud/environments),
+[Claude cloud environments](https://code.claude.com/docs/en/cloud-environments),
+[Claude Code on the web](https://code.claude.com/docs/en/claude-code-on-the-web).
+
 ## Tool routing and project judgment
 
 **The workflow belongs to the project; tools are replaceable ways to obtain evidence and prepare an answer.** Start with one unresolved question from the [current recovery queue](seo-growth-recovery.md), the decision it blocks, and the smallest useful evidence collection. Reuse an existing skill before writing a collector, clustering engine or briefing template. Do not run every tool or generate another report merely because it is available.

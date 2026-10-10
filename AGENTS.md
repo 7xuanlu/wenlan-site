@@ -48,6 +48,7 @@ The SEO tests read a sibling Wenlan checkout: current CLI, MCP and plugin source
 
 - Use Wenlan as the product name. `useorigin.app` and `www.useorigin.app` are legacy redirect bridge hosts for migrating users and search queries into `wenlan.app`.
 - Search Console is the canonical source for query/page performance. Do not invent GSC, indexing, or Umami metrics.
+- Every change to an indexable page needs a Google recrawl request after deploy. List the changed canonical URLs (each locale) in the PR, then follow [Recrawl After Page Changes](docs/seo-growth-loop.md#recrawl-after-page-changes). This applies to Claude and Codex, local or cloud.
 - Prefer refreshing indexed pages with impressions before creating net-new Learn content.
 - Keep visible FAQ text where useful, but do not add `FAQPage` JSON-LD unless Google eligibility changes for ordinary software sites.
 - Keep canonical public URLs in the sitemap. Old `/guides/*`, `/docs/guides/*`, and legacy pre-Wenlan Learn slugs should redirect, not appear in the sitemap.
