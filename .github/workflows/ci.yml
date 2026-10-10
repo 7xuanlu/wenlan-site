@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   pull_request:
+    # edited: the recrawl check reads the PR body.
+    types: [opened, synchronize, reopened, edited]
   workflow_dispatch:
 
 concurrency:
@@ -65,3 +67,11 @@ jobs:
         env:
           WENLAN_REPO_ROOT: ${{ github.workspace }}/.release-source/wenlan
         run: pnpm test:seo
+
+      # Every changed indexable page needs a Google recrawl request after
+      # deploy. Compares the build with production and fails unless the PR body
+      # lists each changed canonical URL under "## Recrawl after deploy".
+      # Procedure: docs/seo-growth-loop.md#recrawl-after-page-changes
+      - name: Recrawl list
+        if: github.event_name == 'pull_request'
+        run: pnpm seo:recrawl:check-pr

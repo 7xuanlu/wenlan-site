@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'IN=$(cat); S=scripts/seo-recrawl.mjs; R=\"${CLAUDE_PROJECT_DIR:-}\"; [ -f \"$R/$S\" ] || R=$(git -C \"$(printf %s \"$IN\" | jq -r \".cwd // empty\" 2>/dev/null)\" rev-parse --show-toplevel 2>/dev/null); if [ -f \"$R/$S\" ]; then printf %s \"$IN\" | node \"$R/$S\" hook; else echo \"seo-recrawl hook: $S not found from this checkout\" >&2; exit 1; fi'",
+            "timeout": 20
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|mcp__.*__(create|update)_pull_request",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'IN=$(cat); S=scripts/seo-recrawl.mjs; R=\"${CLAUDE_PROJECT_DIR:-}\"; [ -f \"$R/$S\" ] || R=$(git -C \"$(printf %s \"$IN\" | jq -r \".cwd // empty\" 2>/dev/null)\" rev-parse --show-toplevel 2>/dev/null); if [ -f \"$R/$S\" ]; then printf %s \"$IN\" | node \"$R/$S\" hook; else echo \"seo-recrawl hook: $S not found from this checkout\" >&2; exit 1; fi'",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'IN=$(cat); S=scripts/seo-recrawl.mjs; R=\"${CLAUDE_PROJECT_DIR:-}\"; [ -f \"$R/$S\" ] || R=$(git -C \"$(printf %s \"$IN\" | jq -r \".cwd // empty\" 2>/dev/null)\" rev-parse --show-toplevel 2>/dev/null); if [ -f \"$R/$S\" ]; then printf %s \"$IN\" | node \"$R/$S\" hook; else echo \"seo-recrawl hook: $S not found from this checkout\" >&2; exit 1; fi'",
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
+}
