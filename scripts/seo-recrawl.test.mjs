@@ -10,8 +10,11 @@ import {
   extractRendered,
   findChangedUrls,
   findPendingRecrawls,
+  inspectUrl,
   parseRecrawlSection,
+  pendingMessage,
   prBodyProblem,
+  REQUESTED_MARKER,
   runHook,
   sectionProblem,
 } from "./seo-recrawl.mjs";
@@ -132,7 +135,17 @@ test("pending recrawls skip requested, pre-rule and URL-less PRs and track deplo
     ],
     "/deployments/20/statuses?per_page=10": [{ state: "in_progress" }],
     "/deployments/10/statuses?per_page=10": [{ state: "success" }],
+    "/issues/4/comments?per_page=100": [
+      { author_association: "OWNER", body: `${REQUESTED_MARKER}\nRequested:\n\nhttps://wenlan.app/zh-TW` },
+      { author_association: "NONE", body: `${REQUESTED_MARKER}\nhttps://wenlan.app/zh-CN` },
+    ],
+    "/issues/5/comments?per_page=100": [],
+    "/issues/7/comments?per_page=100": [
+      { author_association: "COLLABORATOR", body: `${REQUESTED_MARKER}\nhttps://wenlan.app/zh-TW` },
+    ],
   };
+  pulls[1].body = `${body}https://wenlan.app/zh-CN\n`;
+  pulls.push({ number: 7, title: "done by comment", merged_at: "2026-10-11T00:00:00Z", labels: [], body });
   const fetchImpl = async (url) => {
     const path = url.replace("https://api.github.com/repos/7xuanlu/wenlan-site", "");
     assert.ok(path in responses, path);
@@ -140,12 +153,24 @@ test("pending recrawls skip requested, pre-rule and URL-less PRs and track deplo
   };
   const pending = await findPendingRecrawls({ fetchImpl, token: "" });
   assert.deepEqual(
-    pending.map((pr) => [pr.number, pr.deployed]),
+    pending.map((pr) => [pr.number, pr.deployed, pr.urls]),
     [
-      [4, true],
-      [5, false],
+      [4, true, ["https://wenlan.app/zh-CN"]],
+      [5, false, ["https://wenlan.app/zh-TW"]],
     ],
   );
+});
+
+test("reminder gives the confirm, browser and record steps with an inspection link", () => {
+  assert.equal(
+    inspectUrl("https://wenlan.app/zh-TW/learn"),
+    "https://search.google.com/search-console/inspect?resource_id=sc-domain%3Awenlan.app&id=https%3A%2F%2Fwenlan.app%2Fzh-TW%2Flearn",
+  );
+  const message = pendingMessage([{ number: 4, title: "t", urls: ["https://wenlan.app"], deployed: true }]);
+  assert.match(message, /1\. Ask the user once to confirm this batch/);
+  assert.match(message, /2\. In the user's signed-in browser/);
+  assert.match(message, /&id=<URL-encoded URL>/);
+  assert.match(message, /3\. Run `pnpm seo:recrawl:mark -- --pr <number> --url <URL>`/);
 });
 
 test("Stop hook blocks once per session for deployed debt; SessionStart injects the list", async () => {
@@ -168,7 +193,7 @@ test("Stop hook blocks once per session for deployed debt; SessionStart injects 
 
   const start = JSON.parse((await runHook({ hook_event_name: "SessionStart" }, deps)).stdout);
   assert.match(start.hookSpecificOutput.additionalContext, /PR #5 next \(merged, wait for the Vercel production deploy\)/);
-  assert.match(start.hookSpecificOutput.additionalContext, /seo:recrawl:mark -- --pr <number>/);
+  assert.match(start.hookSpecificOutput.additionalContext, /seo:recrawl:mark -- --pr <number> --url <URL>/);
 
   const failing = { stateDir, pending: async () => Promise.reject(new Error("offline")) };
   assert.deepEqual(Object.keys(await runHook({ hook_event_name: "Stop", session_id: "c" }, failing)), ["stderr"]);

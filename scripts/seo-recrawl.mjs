@@ -16,6 +16,9 @@ export const ORIGIN = "https://wenlan.app";
 export const REPO = "7xuanlu/wenlan-site";
 export const SECTION_HEADING = "## Recrawl after deploy";
 export const REQUESTED_LABEL = "recrawl-requested";
+// Marks a PR comment that records URLs already requested in Search Console.
+export const REQUESTED_MARKER = "<!-- seo-recrawl:requested -->";
+const TRUSTED_AUTHORS = new Set(["OWNER", "MEMBER", "COLLABORATOR"]);
 // PRs merged before the rule existed carry no section and are not tracked.
 export const ENFORCED_SINCE = "2026-10-10T00:00:00Z";
 export const PROCEDURE = "docs/seo-growth-loop.md#recrawl-after-page-changes";
@@ -181,21 +184,37 @@ async function latestProductionDeploy(options) {
   return null;
 }
 
-// Merged PRs whose recrawl list has not been marked requested. A PR counts as
-// deployed once a successful production deployment started after its merge.
+export function inspectUrl(url) {
+  return `https://search.google.com/search-console/inspect?resource_id=${encodeURIComponent("sc-domain:wenlan.app")}&id=${encodeURIComponent(url)}`;
+}
+
+// URLs recorded as requested by `mark` comments from people with write access.
+export function requestedUrls(comments) {
+  const urls = new Set();
+  for (const comment of comments) {
+    if (!TRUSTED_AUTHORS.has(comment.author_association) || !comment.body?.includes(REQUESTED_MARKER)) continue;
+    for (const match of comment.body.matchAll(/https:\/\/wenlan\.app(?:\/[^\s)>\]`"'<]*)?/g)) urls.add(normalizeUrl(match[0]));
+  }
+  return urls;
+}
+
+// Merged PRs with listed URLs not yet requested (a partial batch leaves the
+// rest pending). A PR counts as deployed once a successful production
+// deployment started after its merge.
 export async function findPendingRecrawls(options = {}) {
   const pulls = await github("/pulls?state=closed&sort=updated&direction=desc&per_page=50", options);
-  const candidates = pulls
+  const listed = pulls
     .filter((pr) => pr.merged_at && pr.merged_at >= ENFORCED_SINCE)
     .filter((pr) => !pr.labels.some((label) => label.name === REQUESTED_LABEL))
-    .map((pr) => ({
-      number: pr.number,
-      title: pr.title,
-      mergedAt: pr.merged_at,
-      urls: parseRecrawlSection(pr.body).urls,
-    }))
+    .map((pr) => ({ number: pr.number, title: pr.title, mergedAt: pr.merged_at, urls: parseRecrawlSection(pr.body).urls }))
     .filter((pr) => pr.urls.length > 0)
     .sort((a, b) => a.mergedAt.localeCompare(b.mergedAt));
+  const candidates = [];
+  for (const pr of listed) {
+    const done = requestedUrls(await github(`/issues/${pr.number}/comments?per_page=100`, options));
+    const urls = pr.urls.filter((url) => !done.has(url));
+    if (urls.length) candidates.push({ ...pr, urls });
+  }
   if (candidates.length === 0) return [];
   const deployedAt = await latestProductionDeploy(options);
   return candidates.map((pr) => ({ ...pr, deployed: Boolean(deployedAt && deployedAt >= pr.mergedAt) }));
@@ -208,9 +227,13 @@ export function pendingMessage(pending) {
     lines.push(`- PR #${pr.number} ${pr.title} (${state})`, ...pr.urls.map((url) => `  ${url}`));
   }
   lines.push(
-    "Tell the user these URLs need URL Inspection > Request Indexing in Search Console.",
-    "Do not request indexing yourself unless the user confirms this exact batch in chat.",
-    "After the user says the requests were submitted, run `pnpm seo:recrawl:mark -- --pr <number>` for each PR.",
+    "Required for deployed PRs, in this order:",
+    "1. Ask the user once to confirm this batch. Do not click Request indexing before that confirmation.",
+    "2. In the user's signed-in browser (Claude in Chrome, or the host's equivalent), open each URL's inspection page",
+    `   (${inspectUrl("<URL>").replace(encodeURIComponent("<URL>"), "<URL-encoded URL>")}),`,
+    "   click Request indexing and wait for the confirmation. Stop at a sign-in page, CAPTCHA or quota message.",
+    "3. Run `pnpm seo:recrawl:mark -- --pr <number> --url <URL>` for each URL that was requested (omit --url when all were).",
+    "If no such browser is available, or the browser step is blocked, give the user the URLs and record what they report.",
   );
   return lines.join("\n");
 }
@@ -330,9 +353,10 @@ function parseArgs(argv) {
       continue;
     }
     const [key, inline] = token.slice(2).split(/=(.*)/s);
-    if (inline !== undefined) args[key] = inline;
-    else if (argv[index + 1] && !argv[index + 1].startsWith("--")) args[key] = argv[++index];
-    else args[key] = true;
+    let value = true;
+    if (inline !== undefined) value = inline;
+    else if (argv[index + 1] && !argv[index + 1].startsWith("--")) value = argv[++index];
+    args[key] = key in args ? [].concat(args[key], value) : value;
   }
   return args;
 }
@@ -389,26 +413,41 @@ async function checkPr(args) {
 
 const run = promisify(execFile);
 
+// Records URLs the user confirmed as requested; labels the PR once every listed
+// URL is recorded.
 async function mark(args, stateDir = DEFAULT_STATE_DIR) {
   const number = Number(args.pr);
-  if (!Number.isInteger(number) || number <= 0) throw new Error("usage: seo-recrawl mark --pr <number>");
+  if (!Number.isInteger(number) || number <= 0) throw new Error("usage: seo-recrawl mark --pr <number> [--url <URL> ...]");
   const { stdout } = await run("gh", ["pr", "view", String(number), "--repo", REPO, "--json", "body,mergedAt"]);
   const pr = JSON.parse(stdout);
   if (!pr.mergedAt) throw new Error(`PR #${number} is not merged`);
-  const urls = parseRecrawlSection(pr.body).urls;
-  if (urls.length === 0) throw new Error(`PR #${number} lists no recrawl URL`);
+  const listed = parseRecrawlSection(pr.body).urls;
+  if (listed.length === 0) throw new Error(`PR #${number} lists no recrawl URL`);
+  const urls = args.url ? [].concat(args.url).map(normalizeUrl) : listed;
+  const unknown = urls.filter((url) => !listed.includes(url));
+  if (unknown.length) throw new Error(`not listed in PR #${number}: ${unknown.join(", ")}`);
   const date = new Date().toISOString().slice(0, 10);
   await run("gh", [
-    "label", "create", REQUESTED_LABEL, "--repo", REPO, "--force",
-    "--color", "0e8a16", "--description", "Google recrawl requested in Search Console",
-  ]);
-  await run("gh", [
     "pr", "comment", String(number), "--repo", REPO,
-    "--body", `Recrawl requested in Search Console on ${date}, as reported by the user:\n\n${urls.join("\n")}`,
+    "--body", `${REQUESTED_MARKER}\nRequested in Search Console on ${date}:\n\n${urls.join("\n")}`,
   ]);
-  await run("gh", ["pr", "edit", String(number), "--repo", REPO, "--add-label", REQUESTED_LABEL]);
+  const comments = JSON.parse(
+    (await run("gh", ["api", `repos/${REPO}/issues/${number}/comments?per_page=100`])).stdout,
+  );
+  const done = requestedUrls(comments);
+  const remaining = listed.filter((url) => !done.has(url));
+  if (remaining.length === 0) {
+    await run("gh", [
+      "label", "create", REQUESTED_LABEL, "--repo", REPO, "--force",
+      "--color", "0e8a16", "--description", "Google recrawl requested in Search Console",
+    ]);
+    await run("gh", ["pr", "edit", String(number), "--repo", REPO, "--add-label", REQUESTED_LABEL]);
+  }
   await rm(join(stateDir, "pending.json"), { force: true });
-  console.log(`Marked PR #${number} ${REQUESTED_LABEL} (${urls.length} URL(s)).`);
+  console.log(
+    `PR #${number}: recorded ${urls.length} URL(s); ` +
+      (remaining.length ? `${remaining.length} still to request.` : `all requested, labeled ${REQUESTED_LABEL}.`),
+  );
 }
 
 async function main() {

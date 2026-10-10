@@ -61,7 +61,7 @@ Claude Code and Codex share only what is committed on the branch they check out.
 | Workflow, cadence, decisions | this file, `seo-growth-loop.md`, `seo-growth-recovery.md` | same files |
 | Recrawl enforcement | hooks in `.claude/settings.json` | identical hooks in `.codex/hooks.json`, trusted once with `/hooks` |
 | Hook and CI logic | `scripts/seo-recrawl.mjs` | same script |
-| Search Console | read-only API through the user's local ADC | same |
+| Search Console | read-only API through the user's local ADC; Request indexing through Claude in Chrome | read-only API; Request indexing through the host's browser tool, else the user |
 
 Plugins and connectors (for example Claude's Searchfit/marketing plugins, Codex's
 Ubersuggest/Keyword Tool), credentials, `/tmp` evidence and uncommitted files stay

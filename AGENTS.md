@@ -30,7 +30,7 @@ pnpm seo:technical:deployed
 pnpm seo:release:check     # Live GitHub stable release and published download verification
 pnpm seo:recrawl:changed   # After pnpm build: indexable URLs whose rendered page differs from production
 pnpm seo:recrawl:pending   # Merged PRs whose recrawl URLs are not marked requested
-pnpm seo:recrawl:mark -- --pr N  # Only after the user confirms the Search Console requests
+pnpm seo:recrawl:mark -- --pr N [--url U]  # Record Search Console requests that were confirmed
 ```
 
 The SEO tests read a sibling Wenlan checkout: current CLI, MCP and plugin sources, plus release facts (`version.txt`, `CHANGELOG.md`) at the selected release tag. Set `WENLAN_REPO_ROOT=/absolute/path/to/wenlan` when that repo is not adjacent to this checkout. CI checks out the public repository itself, so no token is needed.
@@ -51,7 +51,7 @@ The SEO tests read a sibling Wenlan checkout: current CLI, MCP and plugin source
 
 - Use Wenlan as the product name. `useorigin.app` and `www.useorigin.app` are legacy redirect bridge hosts for migrating users and search queries into `wenlan.app`.
 - Search Console is the canonical source for query/page performance. Do not invent GSC, indexing, or Umami metrics.
-- Every change to an indexable page needs a Google recrawl request after deploy. List the changed canonical URLs (each locale) under `## Recrawl after deploy` in the PR, then follow [Recrawl After Page Changes](docs/seo-growth-loop.md#recrawl-after-page-changes). Claude and Codex hooks and CI enforce this through `scripts/seo-recrawl.mjs`; do not bypass them.
+- Every change to an indexable page needs a Google recrawl request after deploy. List the changed canonical URLs (each locale) under `## Recrawl after deploy` in the PR, then follow [Recrawl After Page Changes](docs/seo-growth-loop.md#recrawl-after-page-changes): after one batch confirmation from the user, the attended agent requests indexing in the user's signed-in browser and records it. Claude and Codex hooks and CI enforce this through `scripts/seo-recrawl.mjs`; do not bypass them.
 - Prefer refreshing indexed pages with impressions before creating net-new Learn content.
 - Keep visible FAQ text where useful, but do not add `FAQPage` JSON-LD unless Google eligibility changes for ordinary software sites.
 - Keep canonical public URLs in the sitemap. Old `/guides/*`, `/docs/guides/*`, and legacy pre-Wenlan Learn slugs should redirect, not appear in the sitemap.
