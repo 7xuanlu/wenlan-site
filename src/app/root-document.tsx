@@ -78,7 +78,8 @@ export default function RootDocument({
               "@type": "WebSite",
               "@id": "https://wenlan.app/#website",
               name: "Wenlan",
-              alternateName: "wenlan.app",
+              // Google reads site names from this node; list the Chinese brand too.
+              alternateName: ["文瀾", "文澜", "wenlan.app"],
               url: "https://wenlan.app",
               // One @id is one entity, so its claims must not change per locale.
               // The site itself is trilingual; the localized description lives

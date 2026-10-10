@@ -230,6 +230,13 @@ test("knowledge graph docs answer the AI-agent knowledge-base job without replac
   assert.doesNotMatch(knowledgeGraph, /graph context (?:is|becomes) (?:the )?authority/i);
 });
 
+test("WebSite node lists the Chinese brand names Google can use as the site name", async () => {
+  const rootDocument = await readRepo("src/app/root-document.tsx");
+
+  assert.match(rootDocument, /"@id": "https:\/\/wenlan\.app\/#website",\s*name: "Wenlan",/);
+  assert.match(rootDocument, /alternateName: \["文瀾", "文澜", "wenlan\.app"\]/);
+});
+
 test("root document includes Vercel Web Analytics only on Vercel", async () => {
   const packageJson = JSON.parse(await readRepo("package.json"));
   const rootDocument = await readRepo("src/app/root-document.tsx");
