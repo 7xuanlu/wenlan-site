@@ -35,6 +35,7 @@ Wiki、來源型知識庫、工具選型頁已存在，分別作實作入口、�
 - **外鏈（使用者決定）：** 不另做外鏈專案（不投目錄、不寫信請作者收錄）。社群發文由其他人負責，外鏈視為發文副產品，只在 GSC Links 追蹤獨立引用。發文時直接連到要推的那篇 Learn 文，不只連首頁；使用者之後自己發文時會試。官方 MCP registry、Smithery、Glama 10-07 核實皆未收錄 Wenlan，屬泛 MCP 入口，不列待辦。
 - **中文標題（使用者指示）：** 中文首頁、下載、關於、文件、安裝與 Learn 索引改以「文瀾 Wenlan／文澜 Wenlan」開頭，首頁帶已同意的「個人 AI 知識庫／个人 AI 知识库」。英文 `/learn` 去掉堆疊詞，改為 `LLM Wiki & AI Knowledge Base Guides | Wenlan`；英文首頁不變。這是使用者直接要求的品牌與文案修正，不是標題實驗，不套用 owner 重寫門檻；10 個整併 owner 與冷卻中的 Learn 文章未改。部署後由使用者在 GSC 請求重新抓取，再按同一 query × page 觀察。
 - **SuperLocalMemory 比較頁：** 內容釘在對方 v3.8.3（07-24 核對），對方 10-08 已出 v4.1.24。標題版本號與釘版內容一致，不單獨刪；需另做事實更新。
+- **LLM Wiki 實作比較頁（需求門檻，10-10）：** 不開新頁。distilled-wiki owner 的 `#llm-wiki-implementations` 三語已有實作表，`karpathy llm wiki implementation` 位置 2；觸發的 repo 名查詢 3 個月約 10 曝光，多為找 repo 本身，GitHub 與 AI Overview 已回答。未通過「乾淨缺口」與「第一方證據」（未對其他實作做同任務實測）。新版 crawl 並讀數後再刷新該段：計數加日期、按類型分組、加最後更新與授權欄、用明訂收錄規則（例：≥1,000 星，或 60 天內有更新且類型不同），不評選贏家。只有選擇型查詢連續兩次讀數有獨立曝光，且 Wenlan 已對至少 3 個實作做同任務實測，才重新考慮獨立頁。
 - **不做（10-07）：** AI 筆記整理（台灣 SERP 偏學生／會議筆記）與 NotebookLM 相關詞（多為第三方 MCP 教學，NotebookLM 無公開 API／匯出）不建頁；課程 Wiki owner 低於重寫門檻，維持現狀。回頭條件：該 owner 出現 NotebookLM 查詢、使用者主動詢問，或 Google 推出官方 API／匯出。
 
 ## 下一個觀察與邊界
