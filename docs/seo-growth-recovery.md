@@ -1,6 +1,6 @@
 # SEO 目前決策與下一步
 
-更新：2026-10-08。#223 修正已合併並部署（46566c3）；#220 已合併 19 篇英文重複頁至既有 owner，154 個 sitemap URL；[發布及抓取請求收據](seo-audits/2026-10-07-learn-consolidation.md) 取代舊 inventory。只留目前決定與下一步。
+更新：2026-10-10。#223 修正已合併並部署（46566c3）；#220 已合併 19 篇英文重複頁至既有 owner，154 個 sitemap URL；[發布及抓取請求收據](seo-audits/2026-10-07-learn-consolidation.md) 取代舊 inventory。只留目前決定與下一步。
 規則見 [操作入口](seo-growth-loop.md)、[共用需求流程](seo-demand-workflow.md)。
 
 ## 當前決策
@@ -28,13 +28,22 @@
 
 Wiki、來源型知識庫、工具選型頁已存在，分別作實作入口、維護方法與選型決策。是否寫對、是否有人搜、是否有機會排上去分開驗證。每次選題保留「原始搜尋詞 → 使用者任務 → 頁面答案 → 本站同詞曝光／位置／點擊」；缺證據明記未知。
 
+## 10-10 查核與決定
+
+- **抓取：** URL Inspection 顯示，有提交請求的頁 1–3 天內被抓；沒請求的頁 1–2 個月才回訪（distilled-wiki 三語 09-09、build-local 英文 08-02、`/zh-TW/learn` 08-17、中文首頁 09-11）。sitemap、canonical、robots、hreflang 正常。判定為站點熱度低、抓取需求低，不是技術阻塞。
+- **排名：** 07-10～10-09 共 168 個可見查詢、864 曝光、13 點擊。長尾已有前段位置（`karpathy llm wiki implementation` 2、`llm wiki v2` 5.7、`jackwener/llm-wiki` 6），主詞 `karpathy llm wiki` 40、`llm wiki` 45。主詞差距判為權威不足，不是標題問題；未隔離因果。
+- **外鏈（使用者決定）：** 不另做外鏈專案（不投目錄、不寫信請作者收錄）。社群發文由其他人負責，外鏈視為發文副產品，只在 GSC Links 追蹤獨立引用。發文時直接連到要推的那篇 Learn 文，不只連首頁；使用者之後自己發文時會試。官方 MCP registry、Smithery、Glama 10-07 核實皆未收錄 Wenlan，屬泛 MCP 入口，不列待辦。
+- **中文標題（使用者指示）：** 中文首頁、下載、關於、文件、安裝與 Learn 索引改以「文瀾 Wenlan／文澜 Wenlan」開頭，首頁帶已同意的「個人 AI 知識庫／个人 AI 知识库」。英文 `/learn` 去掉堆疊詞，改為 `LLM Wiki & AI Knowledge Base Guides | Wenlan`；英文首頁不變。這是使用者直接要求的品牌與文案修正，不是標題實驗，不套用 owner 重寫門檻；10 個整併 owner 與冷卻中的 Learn 文章未改。部署後由使用者在 GSC 請求重新抓取，再按同一 query × page 觀察。
+- **SuperLocalMemory 比較頁：** 內容釘在對方 v3.8.3（07-24 核對），對方 10-08 已出 v4.1.24。標題版本號與釘版內容一致，不單獨刪；需另做事實更新。
+- **不做（10-07）：** AI 筆記整理（台灣 SERP 偏學生／會議筆記）與 NotebookLM 相關詞（多為第三方 MCP 教學，NotebookLM 無公開 API／匯出）不建頁；課程 Wiki owner 低於重寫門檻，維持現狀。回頭條件：該 owner 出現 NotebookLM 查詢、使用者主動詢問，或 Google 推出官方 API／匯出。
+
 ## 下一個觀察與邊界
 
 使用者確認 `weekly-wenlan-seo` 維持 PAUSED，以下由我們手動追蹤，不自動執行。
 
 - **抓取與排名：** 10/08查核快照中，三語API最後crawl為08-19／08-01／10-02，早於改版；09-09～10-06共13曝光、0點擊，query×page無可見列。索引設定／入口正常；#222未含這三頁。使用者已授權發布三語補強；[#224](https://github.com/7xuanlu/wenlan-site/pull/224) 保存合併與正式部署驗證狀態。後續手動核對新版crawl；本次未提交索引請求。見[複核](seo-audits/2026-10-07-ranking-gap.md#obsidian-新版抓取與頁面表現複核)。
 - **需求：** 搜尋建議提供用語，社群提供痛點，Planner 提供市場量級，GSC 提供本站表現；不可互換。Ubersuggest 本日免費額度耗盡，不重試；舊 50 量值與新 Planner 範圍不可直接比較。Keyword Tool 無量值，不足以單獨驗證獲客需求。
-- **外部觸達：** MindStudio 指南被另一篇文章列來源，Salesforce 指南有分享與彙整引用，但未取得完整反向連結或排名因果證據。README 三語補丁仍未發布，自有導流不等於獨立引用；Awesome LLM Wiki 已列 Wenlan，不重複投稿。
+- **外部觸達：** MindStudio 指南被另一篇文章列來源，Salesforce 指南有分享與彙整引用，但未取得完整反向連結或排名因果證據。README 三語 LLM Wiki 入口已於 10-07 合併（wenlan#824，`be5d4ecd`），約 11-04 量測帶來的 Learn 造訪，量測前不加同類自有連結；自有導流不等於獨立引用。Awesome LLM Wiki 已列 Wenlan，不重複投稿。
 - **共用流程：** Claude 已同意且成功載入共用 skill；Codex 已重跑資料／備援。協作證據見重跑收據及 [連續性規則](seo-demand-workflow.md#claude-and-codex-continuity)。此次隨修正一起交付共用流程／skill；其他 checkout 需同步合併版本。
 - **AI與引用：** 同窗GSC AI報告131次property曝光；有三語頁面，無Obsidian可見列，未知問題／點擊。先沿既有owner量測，不另開prompt清單。Ahrefs的9頁壞連結已核對5個目的地404，待修；description長短警告不等於排名原因。
 

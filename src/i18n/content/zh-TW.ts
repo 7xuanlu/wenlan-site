@@ -14,7 +14,7 @@ export const zhTWContent = {
     sourceHash: "26c7e90a1b38125e602cb5ede6624e646d87b54534370e1818e7a1b16622e8e5",
     content: {
       seo: {
-        title: "Wenlan 文瀾官網 | AI 工作的 LLM wiki",
+        title: "文瀾 Wenlan｜個人 AI 知識庫",
         description:
           "Wenlan 文瀾是有來源依據的 AI 知識庫，也是 AI 工作的 LLM wiki：把文件、筆記和決策整理成可查找、可核對、可審查的頁面，讓你和 AI 接著往前做。本地運行，連接 Claude Code、Codex、ChatGPT 等 AI 工具，開源免費。",
       },
@@ -177,7 +177,7 @@ export const zhTWContent = {
         },
         page: {
           seo: {
-            title: "下載 Wenlan Windows、macOS 與 Linux 版",
+            title: "下載文瀾 Wenlan：Windows、macOS 與 Linux 版",
             description:
               "下載 Wenlan 桌面 App（Windows x64、macOS Apple silicon），或安裝支援 Windows、macOS 與 Linux 的 headless CLI、本地 daemon 與 MCP connector：從 GitHub 正式發布頁取得版本，驗證後連接你的 AI 工具。",
           },
@@ -975,7 +975,7 @@ export const zhTWContent = {
     sourceHash: "38b47f85f0574c5dbb40203931bb1056effd65d2e3fa801a016b1fa14955e522",
     content: {
       seo: {
-        title: "關於 Wenlan 文瀾：開源、本機優先的專案",
+        title: "關於文瀾 Wenlan：開源、本機優先的個人 AI 知識庫",
         description:
           "Wenlan 是開源、本地優先的 AI 工作 LLM wiki，由 AI 代理打造並以來源為根基：把文件、筆記與決策整理成可引用、可審查、可更新的頁面，讓 AI 工作有據可查、持續累積。支援 Windows、macOS 與 Linux，免費下載使用。了解文瀾的理念、開源授權與產品路線圖。",
       },
@@ -1164,7 +1164,7 @@ export const zhTWContent = {
     sourceHash: "bd9f9a5d70d1e6b6867f2f81dc3d646f087aa423019a1dd51cc728d2232e11f9",
     content: {
       seo: {
-        title: "Wenlan 文件：安裝、工作流程與參考",
+        title: "文瀾 Wenlan 文件：安裝、工作流程與參考",
         description:
           "安裝 Wenlan，學習 AI 工作記憶循環：從安裝、連接到 Claude Code、Codex、ChatGPT 等 MCP 客戶端，再到理解有來源依據的 wiki 頁面、引用、檢索與更新機制如何配合，讓 AI 記住你的工作。包含逐步安裝指南、客戶端接入說明與常見問題解答。",
       },
@@ -1662,7 +1662,7 @@ export const zhTWContent = {
     sourceHash: "8b54c6274d53ceaa371cfda9dfefc2733d1166f0d30bda38792046a12fa76f88",
     content: {
       seo: {
-        title: "安裝 Wenlan：Claude Code、Codex、ChatGPT 與 MCP",
+        title: "安裝文瀾 Wenlan：Claude Code、Codex、ChatGPT 與 MCP",
         description: "安裝 Wenlan，連接你平常用的 AI，再試著保存並找回一個決定。選一種工具就好，不用全部設定。"
       },
       breadcrumbs: {

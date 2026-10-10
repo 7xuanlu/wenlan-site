@@ -105,9 +105,9 @@ function coreSeo(locale, pathname) {
   if (pathname === "/learn") {
     if (locale === "en") {
       return {
-        title: "AI Memory & Knowledge Base Guides: LLM Wiki for AI Agents | Wenlan",
+        title: "LLM Wiki & AI Knowledge Base Guides | Wenlan",
         description:
-          "AI memory & knowledge base guides: build a source-backed AI knowledge base with LLM wiki pages, citations, review, refresh state, and local workflows.",
+          "Build an LLM wiki and source-backed AI knowledge base: Karpathy's pattern, citations, review and refresh, plus Claude Code, Codex, and MCP workflows.",
       };
     }
     return localizedLearnIndexContent[locale].seo;
