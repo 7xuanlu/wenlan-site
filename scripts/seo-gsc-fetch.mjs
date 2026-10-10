@@ -1,17 +1,14 @@
 #!/usr/bin/env node
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { execFile } from "node:child_process";
 import { join, resolve } from "node:path";
-import { promisify } from "node:util";
+import { getAccessToken, getQuotaProject } from "./gsc-auth.mjs";
 
 const DEFAULT_SITE_URL = "sc-domain:wenlan.app";
 const DEFAULT_OUTPUT_DIR = "/tmp/wenlan-seo";
-const DEFAULT_QUOTA_PROJECT = "wenlan-500502";
 const DEFAULT_SOURCE = "Search Console API";
 const DEFAULT_API_BASE_URL = "https://searchconsole.googleapis.com/webmasters/v3";
 const DAY_MS = 24 * 60 * 60 * 1000;
-const execFileAsync = promisify(execFile);
 
 function assertIsoDate(value, label) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value ?? "")) {
@@ -84,22 +81,6 @@ function parseArgs(argv) {
   };
 }
 
-async function adcQuotaProject() {
-  const credentialsPath =
-    process.env.GOOGLE_APPLICATION_CREDENTIALS ||
-    (process.env.HOME
-      ? join(process.env.HOME, ".config", "gcloud", "application_default_credentials.json")
-      : null);
-  if (!credentialsPath) return null;
-
-  try {
-    const credentials = JSON.parse(await readFile(credentialsPath, "utf8"));
-    return credentials.quota_project_id || null;
-  } catch {
-    return null;
-  }
-}
-
 function csvEscape(value) {
   const text = String(value ?? "");
   return /[",\n\r]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
@@ -148,31 +129,6 @@ function rowsToCsv({ kind, rows, startDate, endDate, source }) {
 
 async function readFixture(fixtureDir, name) {
   return JSON.parse(await readFile(join(fixtureDir, `${name}.json`), "utf8"));
-}
-
-async function getAccessToken() {
-  const envToken = process.env.GSC_ACCESS_TOKEN?.trim();
-  if (envToken) return envToken;
-
-  const { stdout } = await execFileAsync(
-    "gcloud",
-    ["auth", "application-default", "print-access-token"],
-    { maxBuffer: 1024 * 1024 },
-  );
-  const adcToken = stdout.trim();
-  if (!adcToken) {
-    throw new Error("gcloud auth application-default print-access-token returned an empty token");
-  }
-  return adcToken;
-}
-
-async function getQuotaProject() {
-  return (
-    process.env.GSC_QUOTA_PROJECT?.trim() ||
-    process.env.GOOGLE_CLOUD_QUOTA_PROJECT?.trim() ||
-    await adcQuotaProject() ||
-    DEFAULT_QUOTA_PROJECT
-  );
 }
 
 async function gscRequest({ token, path, apiBaseUrl, quotaProject, options = {} }) {

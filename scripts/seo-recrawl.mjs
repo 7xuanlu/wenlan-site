@@ -11,6 +11,7 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
+import { getAccessToken, getQuotaProject } from "./gsc-auth.mjs";
 
 export const ORIGIN = "https://wenlan.app";
 export const REPO = "7xuanlu/wenlan-site";
@@ -22,6 +23,10 @@ const TRUSTED_AUTHORS = new Set(["OWNER", "MEMBER", "COLLABORATOR"]);
 // PRs merged before the rule existed carry no section and are not tracked.
 export const ENFORCED_SINCE = "2026-10-10T00:00:00Z";
 export const PROCEDURE = "docs/seo-growth-loop.md#recrawl-after-page-changes";
+// Home pages carry the site name, so their structured data matters on its own.
+export const HOME_URLS = new Set([ORIGIN, `${ORIGIN}/zh-TW`, `${ORIGIN}/zh-CN`]);
+const SEARCH_CONSOLE_SITE = "sc-domain:wenlan.app";
+const INSPECT_ENDPOINT = "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect";
 const CACHE_TTL_MS = 10 * 60 * 1000;
 const DEFAULT_STATE_DIR = join(tmpdir(), "wenlan-seo-recrawl");
 
@@ -154,11 +159,18 @@ export async function findChangedUrls({ builtDir = ".next", fetchImpl = fetch, c
   return results.filter(Boolean);
 }
 
+// A change only to structured data off the home pages (usually a node in the
+// shared layout) reaches Google through the sitemap and normal crawling; it
+// does not spend the daily request quota.
+export function needsRequest(item) {
+  return !(item.fields.length === 1 && item.fields[0] === "jsonLd" && !HOME_URLS.has(item.url));
+}
+
 export function compareSection(section, changed) {
   const listed = new Set(section.urls);
   const changedUrls = new Set(changed.map((item) => item.url));
   return {
-    missing: changed.filter((item) => !listed.has(item.url)),
+    missing: changed.filter((item) => needsRequest(item) && !listed.has(item.url)),
     unchanged: section.urls.filter((url) => !changedUrls.has(url)),
   };
 }
@@ -175,13 +187,47 @@ async function github(path, { fetchImpl = fetch, token = process.env.GH_TOKEN ||
   return response.json();
 }
 
-async function latestProductionDeploy(options) {
-  const deployments = await github("/deployments?environment=Production&per_page=5", options);
+// Start times of successful production deployments, newest first, back to the
+// first one that started before `since`.
+async function productionDeploys(since, options) {
+  const deployments = await github("/deployments?environment=Production&per_page=10", options);
+  const times = [];
   for (const deployment of deployments) {
     const statuses = await github(`/deployments/${deployment.id}/statuses?per_page=10`, options);
-    if (statuses.some((status) => status.state === "success")) return deployment.created_at;
+    if (!statuses.some((status) => status.state === "success")) continue;
+    times.push(deployment.created_at);
+    if (deployment.created_at < since) break;
   }
-  return null;
+  return times;
+}
+
+// Google's last crawl of each URL from the read-only URL Inspection API, or
+// null without Search Console credentials (GSC_ACCESS_TOKEN or gcloud
+// application-default login). A lookup takes seconds, so only `pending` calls
+// it; hooks read the times it saved.
+async function searchConsoleLastCrawl(fetchImpl = fetch) {
+  let token;
+  let quotaProject;
+  try {
+    token = await getAccessToken();
+    quotaProject = await getQuotaProject();
+  } catch {
+    return null;
+  }
+  return async (url) => {
+    const response = await fetchImpl(INSPECT_ENDPOINT, {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${token}`,
+        "content-type": "application/json",
+        ...(quotaProject ? { "x-goog-user-project": quotaProject } : {}),
+      },
+      body: JSON.stringify({ inspectionUrl: url, siteUrl: SEARCH_CONSOLE_SITE }),
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!response.ok) throw new Error(`URL Inspection returned HTTP ${response.status}`);
+    return (await response.json()).inspectionResult?.indexStatusResult?.lastCrawlTime ?? null;
+  };
 }
 
 // A direct /inspect?id= link returns 404 on a fresh load, so start from the property home.
@@ -199,7 +245,9 @@ export function requestedUrls(comments) {
 
 // Merged PRs with listed URLs not yet requested (a partial batch leaves the
 // rest pending). A PR counts as deployed once a successful production
-// deployment started after its merge.
+// deployment started after its merge. A URL Google has crawled since that
+// deployment needs no request; without a `lastCrawl` lookup every listed URL
+// stays.
 export async function findPendingRecrawls(options = {}) {
   const pulls = await github("/pulls?state=closed&sort=updated&direction=desc&per_page=50", options);
   const listed = pulls
@@ -215,8 +263,19 @@ export async function findPendingRecrawls(options = {}) {
     if (urls.length) candidates.push({ ...pr, urls });
   }
   if (candidates.length === 0) return [];
-  const deployedAt = await latestProductionDeploy(options);
-  return candidates.map((pr) => ({ ...pr, deployed: Boolean(deployedAt && deployedAt >= pr.mergedAt) }));
+  const deploys = await productionDeploys(candidates[0].mergedAt, options);
+  const lastCrawl = options.lastCrawl;
+  const pending = [];
+  for (const pr of candidates) {
+    const deployedAt = deploys.filter((time) => time >= pr.mergedAt).at(-1);
+    let urls = pr.urls;
+    if (deployedAt && lastCrawl) {
+      const crawled = await mapLimit(urls, 8, (url) => lastCrawl(url).catch(() => null));
+      urls = urls.filter((url, index) => !(crawled[index] && Date.parse(crawled[index]) > Date.parse(deployedAt)));
+    }
+    if (urls.length) pending.push({ ...pr, urls, deployed: Boolean(deployedAt) });
+  }
+  return pending;
 }
 
 export function pendingMessage(pending) {
@@ -226,7 +285,8 @@ export function pendingMessage(pending) {
     lines.push(`- PR #${pr.number} ${pr.title} (${state})`, ...pr.urls.map((url) => `  ${url}`));
   }
   lines.push(
-    "Required for deployed PRs, in this order:",
+    "Required for deployed PRs, in this order. With Search Console credentials, run `pnpm seo:recrawl:pending`",
+    "first: it drops URLs Google has crawled since the deploy.",
     "1. Ask the user once to confirm this batch. Do not click Request indexing before that confirmation.",
     `2. In the user's signed-in browser (Claude in Chrome, or the host's equivalent), open ${SEARCH_CONSOLE_HOME}`,
     "   and type each URL into \"Inspect any URL\". Check the box holds the URL before pressing Enter: after a dialog",
@@ -238,6 +298,14 @@ export function pendingMessage(pending) {
   return lines.join("\n");
 }
 
+async function readCrawlTimes(stateDir) {
+  try {
+    return JSON.parse(await readFile(join(stateDir, "crawled.json"), "utf8"));
+  } catch {
+    return {};
+  }
+}
+
 async function cachedPending(stateDir, options) {
   const file = join(stateDir, "pending.json");
   try {
@@ -246,7 +314,8 @@ async function cachedPending(stateDir, options) {
   } catch {
     // No usable cache; fetch below.
   }
-  const pending = await findPendingRecrawls(options);
+  const crawlTimes = await readCrawlTimes(stateDir);
+  const pending = await findPendingRecrawls({ ...options, lastCrawl: async (url) => crawlTimes[url] ?? null });
   await mkdir(stateDir, { recursive: true });
   await writeFile(file, JSON.stringify({ fetchedAt: Date.now(), pending }));
   return pending;
@@ -368,7 +437,16 @@ async function readStdin() {
 }
 
 function changedBlock(changed) {
-  return [SECTION_HEADING, "", ...(changed.length ? changed.map((item) => item.url) : ["none"])].join("\n");
+  const requested = changed.filter(needsRequest);
+  const sitemapOnly = changed.length - requested.length;
+  return [
+    SECTION_HEADING,
+    "",
+    ...(requested.length ? requested.map((item) => item.url) : ["none"]),
+    ...(sitemapOnly
+      ? ["", `<!-- ${sitemapOnly} more URL(s) changed only in structured data; the sitemap covers them. -->`]
+      : []),
+  ].join("\n");
 }
 
 async function prBodyFromEvent() {
@@ -391,7 +469,7 @@ async function checkPr(args) {
   );
   const report = [
     `Changed indexable URLs versus production (${changed.length}):`,
-    ...changed.map((item) => `- ${item.url} (${item.fields.join(", ")})`),
+    ...changed.map((item) => `- ${item.url} (${item.fields.join(", ")}${needsRequest(item) ? "" : "; sitemap only"})`),
     ...(unchanged.length ? ["Listed but unchanged versus production (allowed):", ...unchanged.map((url) => `- ${url}`)] : []),
   ].join("\n");
   console.log(report);
@@ -400,7 +478,7 @@ async function checkPr(args) {
   console.error(
     [
       `seo-recrawl: ${problems.join("; ")}.`,
-      "Add every changed URL to the PR body (extra URLs are allowed):",
+      "Add every changed URL that needs a request to the PR body (extra URLs are allowed):",
       "",
       changedBlock(changed),
       "",
@@ -475,8 +553,16 @@ async function main() {
     case "check-pr":
       return checkPr(args);
     case "pending": {
-      const pending = await findPendingRecrawls();
+      const crawlTimes = await readCrawlTimes(DEFAULT_STATE_DIR);
+      const live = await searchConsoleLastCrawl();
+      if (!live) console.error("seo-recrawl: no Search Console credentials; URLs Google already crawled are not dropped.");
+      const lastCrawl = async (url) => {
+        if (live) crawlTimes[url] = (await live(url)) ?? crawlTimes[url] ?? null;
+        return crawlTimes[url] ?? null;
+      };
+      const pending = await findPendingRecrawls({ lastCrawl });
       await mkdir(DEFAULT_STATE_DIR, { recursive: true });
+      await writeFile(join(DEFAULT_STATE_DIR, "crawled.json"), JSON.stringify(crawlTimes));
       await writeFile(join(DEFAULT_STATE_DIR, "pending.json"), JSON.stringify({ fetchedAt: Date.now(), pending }));
       if (args.json) console.log(JSON.stringify(pending, null, 2));
       else console.log(pending.length ? pendingMessage(pending) : "No pending recrawl requests.");
