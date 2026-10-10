@@ -29,7 +29,7 @@ pnpm seo:technical:built
 pnpm seo:technical:deployed
 pnpm seo:release:check     # Live GitHub stable release and published download verification
 pnpm seo:recrawl:changed   # After pnpm build: indexable URLs whose rendered page differs from production
-pnpm seo:recrawl:pending   # Merged PRs whose recrawl URLs are not marked requested
+pnpm seo:recrawl:pending   # Merged PRs whose recrawl URLs are neither marked requested nor crawled since deploy
 pnpm seo:recrawl:mark -- --pr N [--url U]  # Record Search Console requests that were confirmed
 ```
 

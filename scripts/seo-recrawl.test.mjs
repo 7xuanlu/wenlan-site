@@ -10,6 +10,7 @@ import {
   extractRendered,
   findChangedUrls,
   findPendingRecrawls,
+  needsRequest,
   parseRecrawlSection,
   pendingMessage,
   prBodyProblem,
@@ -116,6 +117,17 @@ test("changed URLs compare each sitemap page in the build with production", asyn
   assert.deepEqual(unchanged, ["https://wenlan.app/about"]);
 });
 
+test("structured-data-only changes off the home pages need no request", () => {
+  const changed = [
+    { url: "https://wenlan.app/zh-TW", fields: ["jsonLd"] },
+    { url: "https://wenlan.app/learn/a", fields: ["jsonLd"] },
+    { url: "https://wenlan.app/learn/b", fields: ["title", "jsonLd"] },
+  ];
+  assert.deepEqual(changed.map(needsRequest), [true, false, true]);
+  const { missing } = compareSection(parseRecrawlSection("## Recrawl after deploy\nnone"), changed);
+  assert.deepEqual(missing.map((item) => item.url), ["https://wenlan.app/zh-TW", "https://wenlan.app/learn/b"]);
+});
+
 test("pending recrawls skip requested, pre-rule and URL-less PRs and track deploys", async () => {
   const body = "## Recrawl after deploy\n\nhttps://wenlan.app/zh-TW\n";
   const pulls = [
@@ -128,7 +140,7 @@ test("pending recrawls skip requested, pre-rule and URL-less PRs and track deplo
   ];
   const responses = {
     "/pulls?state=closed&sort=updated&direction=desc&per_page=50": pulls,
-    "/deployments?environment=Production&per_page=5": [
+    "/deployments?environment=Production&per_page=10": [
       { id: 20, created_at: "2026-10-12T00:05:00Z" },
       { id: 10, created_at: "2026-10-11T00:05:00Z" },
     ],
@@ -150,7 +162,7 @@ test("pending recrawls skip requested, pre-rule and URL-less PRs and track deplo
     assert.ok(path in responses, path);
     return new Response(JSON.stringify(responses[path]), { status: 200 });
   };
-  const pending = await findPendingRecrawls({ fetchImpl, token: "" });
+  const pending = await findPendingRecrawls({ fetchImpl, token: "", lastCrawl: null });
   assert.deepEqual(
     pending.map((pr) => [pr.number, pr.deployed, pr.urls]),
     [
@@ -158,6 +170,21 @@ test("pending recrawls skip requested, pre-rule and URL-less PRs and track deplo
       [5, false, ["https://wenlan.app/zh-TW"]],
     ],
   );
+
+  // PR #4 deployed at 00:05 on 10-11. A crawl after that clears the URL; an
+  // earlier crawl, no crawl or a failed lookup keeps it. Undeployed PRs are not looked up.
+  const lookups = [];
+  const crawlAt = (time) => async (url) => {
+    lookups.push(url);
+    return time;
+  };
+  const after = await findPendingRecrawls({ fetchImpl, token: "", lastCrawl: crawlAt("2026-10-11T06:00:00Z") });
+  assert.deepEqual(after.map((pr) => [pr.number, pr.urls]), [[5, ["https://wenlan.app/zh-TW"]]]);
+  assert.deepEqual(lookups, ["https://wenlan.app/zh-CN"]);
+  for (const lastCrawl of [crawlAt("2026-10-11T00:01:00Z"), crawlAt(null), async () => Promise.reject(new Error("quota"))]) {
+    const kept = await findPendingRecrawls({ fetchImpl, token: "", lastCrawl });
+    assert.deepEqual(kept.map((pr) => pr.number), [4, 5]);
+  }
 });
 
 test("reminder gives the confirm, browser and record steps from the property home", () => {
