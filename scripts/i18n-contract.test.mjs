@@ -2566,7 +2566,8 @@ test("home SEO copy presents LLM wiki positioning in English and Mandarin", asyn
     const home = content.localizedContentByLocale[locale].home.content;
     const renderedHome = JSON.stringify(home);
 
-    assert.match(home.seo.title, /AI 工作的 LLM wiki/, `${locale}.home.seo.title`);
+    assert.match(home.seo.title, new RegExp(`^${localeExpected.name} Wenlan｜`), `${locale}.home.seo.title.brand`);
+    assert.match(home.seo.title, /個人 AI 知識庫|个人 AI 知识库/, `${locale}.home.seo.title`);
     assert.match(home.seo.description, /AI 工作的 LLM wiki/, `${locale}.home.seo.description`);
     assert.match(home.seo.description, new RegExp(localeExpected.name), `${locale}.home.seo.description.name`);
     assert.match(

@@ -14,7 +14,7 @@ export const zhCNContent = {
     sourceHash: "26c7e90a1b38125e602cb5ede6624e646d87b54534370e1818e7a1b16622e8e5",
     content: {
       seo: {
-        title: "Wenlan 文澜官网 | AI 工作的 LLM wiki",
+        title: "文澜 Wenlan｜个人 AI 知识库",
         description:
           "Wenlan 文澜是有来源依据的 AI 知识库，也是 AI 工作的 LLM wiki：把文档、笔记和决策整理成可查找、可核对、可审核的页面，让你和 AI 接着往前做。本地运行，连接 Claude Code、Codex、ChatGPT 等 AI 工具，开源免费。",
       },
@@ -177,7 +177,7 @@ export const zhCNContent = {
         },
         page: {
           seo: {
-            title: "下载 Wenlan Windows、macOS 与 Linux 版",
+            title: "下载文澜 Wenlan：Windows、macOS 与 Linux 版",
             description:
               "下载 Wenlan 桌面 App（Windows x64、macOS Apple silicon），或安装支持 Windows、macOS 与 Linux 的 headless CLI、本地 daemon 与 MCP connector：从 GitHub 正式发布页获取版本，验证后连接你的 AI 工具。",
           },
@@ -975,7 +975,7 @@ export const zhCNContent = {
     sourceHash: "38b47f85f0574c5dbb40203931bb1056effd65d2e3fa801a016b1fa14955e522",
     content: {
       seo: {
-        title: "关于 Wenlan 文澜：开源、本地优先的项目",
+        title: "关于文澜 Wenlan：开源、本地优先的个人 AI 知识库",
         description:
           "Wenlan 是开源、本地优先的 AI 工作 LLM wiki，由 AI 智能体打造并以来源为根基：把文档、笔记与决策整理成可引用、可审核、可更新的页面，让 AI 工作有据可查、持续积累。支持 Windows、macOS 与 Linux，免费下载使用。了解文澜的理念、开源协议与产品路线图。",
       },
@@ -1164,7 +1164,7 @@ export const zhCNContent = {
     sourceHash: "bd9f9a5d70d1e6b6867f2f81dc3d646f087aa423019a1dd51cc728d2232e11f9",
     content: {
       seo: {
-        title: "Wenlan 文档：安装、工作流程与参考",
+        title: "文澜 Wenlan 文档：安装、工作流程与参考",
         description:
           "安装 Wenlan，学习 AI 工作记忆循环：从安装、连接到 Claude Code、Codex、ChatGPT 等 MCP 客户端，再到理解有来源依据的 wiki 页面、引用、检索与更新机制如何配合，让 AI 记住你的工作。包含分步安装指南、客户端接入说明与常见问题解答。",
       },
@@ -1662,7 +1662,7 @@ export const zhCNContent = {
     sourceHash: "8b54c6274d53ceaa371cfda9dfefc2733d1166f0d30bda38792046a12fa76f88",
     content: {
       seo: {
-        title: "安装 Wenlan：Claude Code、Codex、ChatGPT 与 MCP",
+        title: "安装文澜 Wenlan：Claude Code、Codex、ChatGPT 与 MCP",
         description: "安装 Wenlan，连接你平时用的 AI，再试着保存并找回一个决定。选一种工具就好，不用全部设置。"
       },
       breadcrumbs: {

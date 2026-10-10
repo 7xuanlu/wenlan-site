@@ -14,17 +14,17 @@ import { alternateUrls } from "@/i18n/routing";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
-  title: "AI Memory & Knowledge Base Guides: LLM Wiki for AI Agents | Wenlan",
+  title: "LLM Wiki & AI Knowledge Base Guides | Wenlan",
   description:
-    "AI memory & knowledge base guides: build a source-backed AI knowledge base with LLM wiki pages, citations, review, refresh state, and local workflows.",
+    "Build an LLM wiki and source-backed AI knowledge base: Karpathy's pattern, citations, review and refresh, plus Claude Code, Codex, and MCP workflows.",
   alternates: {
     canonical: "/learn",
     languages: alternateUrls("/learn"),
   },
   openGraph: {
-    title: "AI Memory & Knowledge Base Guides: LLM Wiki for AI Agents | Wenlan",
+    title: "LLM Wiki & AI Knowledge Base Guides | Wenlan",
     description:
-      "AI memory & knowledge base guides: build a source-backed AI knowledge base with LLM wiki pages, citations, review, refresh state, and local workflows.",
+      "Build an LLM wiki and source-backed AI knowledge base: Karpathy's pattern, citations, review and refresh, plus Claude Code, Codex, and MCP workflows.",
     type: "website",
     url: `${SITE_URL}/learn`,
     siteName: "Wenlan",
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Memory & Knowledge Base Guides: LLM Wiki for AI Agents | Wenlan",
+    title: "LLM Wiki & AI Knowledge Base Guides | Wenlan",
     description:
-      "AI memory & knowledge base guides: build a source-backed AI knowledge base with LLM wiki pages, citations, review, refresh state, and local workflows.",
+      "Build an LLM wiki and source-backed AI knowledge base: Karpathy's pattern, citations, review and refresh, plus Claude Code, Codex, and MCP workflows.",
   },
 };
 
