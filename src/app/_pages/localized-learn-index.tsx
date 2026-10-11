@@ -166,7 +166,7 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
               {content.getStarted}
             </TrackedLocalizedLink>
             <TrackedLink
-              href="https://github.com/7xuanlu/wenlan"
+              href="https://github.com/wenlan-app/wenlan"
               eventName="github_outbound"
               placement="learn-footer"
               locale={locale}

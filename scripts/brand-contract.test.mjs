@@ -275,7 +275,7 @@ test("primary acquisition links emit bounded provider-neutral Umami CTA events",
   assert.match(learnIndex, /TrackedLink/);
   assert.match(learnArticle, /TrackedLink/);
   assert.match(docsArticle, /TrackedLink/);
-  assert.match(docsArticle, /href="https:\/\/github\.com\/7xuanlu\/wenlan"/);
+  assert.match(docsArticle, /href="https:\/\/github\.com\/wenlan-app\/wenlan"/);
   assert.match(docsArticle, /placement="docs-article"/);
   assert.match(docsArticle, /eventName="github_outbound"/);
   assert.match(docsArticle, /locale="en"/);
@@ -351,8 +351,8 @@ test("root metadata describes Wenlan on the current release surface", async () =
   assert.match(structuredData, /softwareVersion: release\.version/);
   assert.match(structuredData, /downloadUrl: release\.releaseUrl/);
   assert.match(releases, new RegExp(`version: "${escapeRegExp(version)}"`));
-  assert.match(structuredData, /installUrl: "https:\/\/github\.com\/7xuanlu\/wenlan#quickstart"/);
-  assert.match(structuredData, /codeRepository: "https:\/\/github\.com\/7xuanlu\/wenlan"/);
+  assert.match(structuredData, /installUrl: "https:\/\/github\.com\/wenlan-app\/wenlan#quickstart"/);
+  assert.match(structuredData, /codeRepository: "https:\/\/github\.com\/wenlan-app\/wenlan"/);
 });
 
 test("public machine-readable surfaces use Wenlan names and packages", async () => {
@@ -364,7 +364,7 @@ test("public machine-readable surfaces use Wenlan names and packages", async () 
   assert.equal(manifest.short_name, "Wenlan");
   assert.match(llms, /^# Wenlan/m);
   assert.match(llms, /LLM wiki for AI work/);
-  assert.match(llms, /github\.com\/7xuanlu\/wenlan/);
+  assert.match(llms, /github\.com\/wenlan-app\/wenlan/);
   assert.match(llms, /wenlan-mcp/);
   assert.match(llms, /wenlan-types/);
   assert.match(llmsFull, /LLM wiki for AI work/);
@@ -451,8 +451,8 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.match(article, /href:\s*"#worked-example"/);
   assert.match(article, /href:\s*"\/docs\/daily-workflow"/);
   assert.match(article, /href:\s*"\/learn\/migrate-obsidian-vault-to-llm-wiki"/);
-  assert.match(article, /https:\/\/github\.com\/7xuanlu\/wenlan#what-does-wenlan-build/);
-  assert.match(article, /https:\/\/github\.com\/7xuanlu\/wenlan#daily-workflow/);
+  assert.match(article, /https:\/\/github\.com\/wenlan-app\/wenlan#what-does-wenlan-build/);
+  assert.match(article, /https:\/\/github\.com\/wenlan-app\/wenlan#daily-workflow/);
   assert.match(article, /https:\/\/gist\.github\.com\/karpathy\/442a6bf555914893e9891c11519de94f/);
   assert.match(
     article,
@@ -482,8 +482,8 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.match(supportArticle, /\/pages <topic>/);
   assert.match(supportArticle, /\/lint/);
   assert.match(supportArticle, /\/curate/);
-  assert.match(supportArticle, /https:\/\/github\.com\/7xuanlu\/wenlan#what-does-wenlan-build/);
-  assert.match(supportArticle, /https:\/\/github\.com\/7xuanlu\/wenlan#daily-workflow/);
+  assert.match(supportArticle, /https:\/\/github\.com\/wenlan-app\/wenlan#what-does-wenlan-build/);
+  assert.match(supportArticle, /https:\/\/github\.com\/wenlan-app\/wenlan#daily-workflow/);
   assert.match(
     supportArticle,
     /relatedSlugs:\s*\["distilled-wiki-pages-ai-memory"/,
@@ -996,15 +996,15 @@ test("stale AI agent memory page exposes a source-backed diagnostic workflow", a
   assert.match(article, /href: "https:\/\/wenlan\.app\/docs\/review-and-trust"/);
   assert.match(
     article,
-    /href: "https:\/\/github\.com\/7xuanlu\/wenlan\/blob\/main\/plugin\/skills\/curate\/SKILL\.md"/,
+    /href: "https:\/\/github\.com\/wenlan-app\/wenlan\/blob\/main\/plugin\/skills\/curate\/SKILL\.md"/,
   );
   assert.match(
     article,
-    /href: "https:\/\/github\.com\/7xuanlu\/wenlan\/blob\/main\/plugin\/skills\/lint\/SKILL\.md"/,
+    /href: "https:\/\/github\.com\/wenlan-app\/wenlan\/blob\/main\/plugin\/skills\/lint\/SKILL\.md"/,
   );
   assert.match(
     article,
-    /href: "https:\/\/github\.com\/7xuanlu\/wenlan\/blob\/main\/plugin\/skills\/forget\/SKILL\.md"/,
+    /href: "https:\/\/github\.com\/wenlan-app\/wenlan\/blob\/main\/plugin\/skills\/forget\/SKILL\.md"/,
   );
 });
 
@@ -1140,48 +1140,48 @@ test("public release surfaces expose the verified current artifacts and release 
   assert.equal(WENLAN_RELEASE.publishedAt, "2026-10-04T01:49:31Z");
   assert.equal(
     WENLAN_RELEASE.releaseUrl,
-    "https://github.com/7xuanlu/wenlan/releases/tag/v0.18.16",
+    "https://github.com/wenlan-app/wenlan/releases/tag/v0.18.16",
   );
   assert.equal(
     WENLAN_RELEASE.setupGuideUrl,
-    "https://github.com/7xuanlu/wenlan/blob/v0.18.16/docs/setup-with-ai.md#install-the-runtime",
+    "https://github.com/wenlan-app/wenlan/blob/v0.18.16/docs/setup-with-ai.md#install-the-runtime",
   );
   assert.deepEqual(
     WENLAN_RELEASE.assets.map(({ id, href, format, size }) => ({ id, href, format, size })),
     [
       {
         id: "windows-desktop-x64",
-        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16/Wenlan_0.18.16_x64-setup.exe",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16/Wenlan_0.18.16_x64-setup.exe",
         format: "EXE",
         size: "48.6 MiB",
       },
       {
         id: "windows-x64",
-        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16/wenlan-windows-x64.zip",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16/wenlan-windows-x64.zip",
         format: "ZIP",
         size: "75.1 MiB",
       },
       {
         id: "macos-arm64",
-        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16/Wenlan_0.18.16_aarch64.dmg",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16/Wenlan_0.18.16_aarch64.dmg",
         format: "DMG",
         size: "68.6 MiB",
       },
       {
         id: "macos-runtime-arm64",
-        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16/wenlan-darwin-arm64.tar.gz",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16/wenlan-darwin-arm64.tar.gz",
         format: "TAR.GZ",
         size: "51.6 MiB",
       },
       {
         id: "linux-x64",
-        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16/wenlan-linux-x64.tar.gz",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16/wenlan-linux-x64.tar.gz",
         format: "TAR.GZ",
         size: "64.4 MiB",
       },
       {
         id: "linux-arm64",
-        href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16/wenlan-linux-arm64.tar.gz",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16/wenlan-linux-arm64.tar.gz",
         format: "TAR.GZ",
         size: "64.3 MiB",
       },
@@ -1544,7 +1544,7 @@ test("Claude Code memory acquisition page tracks native limits and the direct pl
   assert.match(article, /first 200 lines or 25 KB/);
   assert.match(article, /per repository and shared across worktrees/);
   assert.match(article, /Start with Claude Code's native memory/);
-  assert.match(article, /\/plugin marketplace add 7xuanlu\/wenlan/);
+  assert.match(article, /\/plugin marketplace add wenlan-app\/wenlan/);
   assert.match(article, /\/plugin install wenlan@7xuanlu-wenlan/);
   assert.match(article, /\/memory/);
 });

@@ -11,8 +11,8 @@ import {
 
 const release = {
   version: "1.2.3", tag: "v1.2.3", publishedAt: "2026-09-04T20:31:03Z",
-  releaseUrl: "https://github.com/7xuanlu/wenlan/releases/tag/v1.2.3",
-  assets: [{ id: "desktop", href: "https://github.com/7xuanlu/wenlan/releases/download/v1.2.3/desktop.dmg", size: "1.0 MiB" }],
+  releaseUrl: "https://github.com/wenlan-app/wenlan/releases/tag/v1.2.3",
+  assets: [{ id: "desktop", href: "https://github.com/wenlan-app/wenlan/releases/download/v1.2.3/desktop.dmg", size: "1.0 MiB" }],
 };
 function published() {
   return {

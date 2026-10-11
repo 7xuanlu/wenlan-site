@@ -198,10 +198,10 @@ or every contradiction automatically resolved.
 Current first-party implementation references were read at core commit
 `af646ddcf705ee7450335a8772a8cb196f89a3a1`:
 
-- [Product model](https://github.com/7xuanlu/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/README.md#what-is-this): Sources, Memories, Pages and the declared LLM-wiki lineage.
-- [Memory records](https://github.com/7xuanlu/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-types/src/memory.rs): independent source IDs, provenance, confidence, stability, supersedes, versions and pending revisions.
-- [Page growth](https://github.com/7xuanlu/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/post_ingest.rs): a saved record can enrich a matching existing Page; no match is terminal for that generation, not an automatic new-Page promise.
-- [Human-owned Page update gate](https://github.com/7xuanlu/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/post_write/page_update.rs): staged revision rather than immediate replacement.
+- [Product model](https://github.com/wenlan-app/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/README.md#what-is-this): Sources, Memories, Pages and the declared LLM-wiki lineage.
+- [Memory records](https://github.com/wenlan-app/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-types/src/memory.rs): independent source IDs, provenance, confidence, stability, supersedes, versions and pending revisions.
+- [Page growth](https://github.com/wenlan-app/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/post_ingest.rs): a saved record can enrich a matching existing Page; no match is terminal for that generation, not an automatic new-Page promise.
+- [Human-owned Page update gate](https://github.com/wenlan-app/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/post_write/page_update.rs): staged revision rather than immediate replacement.
 
 Keep the already stated setup and availability conditions: initial Pages,
 connected sources, a configured and available model, eligible background work,
@@ -387,7 +387,7 @@ push, PR, merge, deployment, automation or Goal-definition mutation occurred.
 The first-row correction compares the same everyday access question on both
 sides instead of contrasting Wenlan's record structure with a competitor's Wiki
 output. Both can build and maintain a Wiki and connect external AI tools.
-Wenlan's [runtime README](https://github.com/7xuanlu/wenlan#readme) describes the
+Wenlan's [runtime README](https://github.com/wenlan-app/wenlan#readme) describes the
 same local daemon with an optional desktop interface. The current
 [nashsu MCP README](https://github.com/nashsu/llm_wiki/blob/main/mcp-server/README.md)
 explicitly requires its desktop App and enabled local API/MCP. Keeping an App
@@ -430,9 +430,9 @@ either product's lifecycle or a usability benchmark.
 | nashsu: DeepResearch completes | Writes a cited query page, resolves its linked Review, refreshes the tree, and optionally embeds it. It explicitly does **not** feed that generated page back through source ingest. The README's broader auto-ingest description is not the implementation used for this claim. [Code](https://github.com/nashsu/llm_wiki/blob/e8082119649e6a8e1cf85eaf289adcabfdf39d4e/src/lib/deep-research.ts#L505-L545). |
 | nashsu: source deletion | Removes caches, removes source-only pages, rewrites source references on shared pages, and cascades deleted-page link cleanup. It does have source/page lifecycle behavior. [Code](https://github.com/nashsu/llm_wiki/blob/e8082119649e6a8e1cf85eaf289adcabfdf39d4e/src/lib/source-lifecycle.ts#L457-L574). |
 | nashsu: decision status | The Business template includes `status` and `supersedes` in page frontmatter. The inspected paths do not establish a uniform, runtime-enforced atomic-memory acceptance/rebinding state machine. This is not evidence that decision recording or lifecycle behavior is absent. [Template](https://github.com/nashsu/llm_wiki/blob/e8082119649e6a8e1cf85eaf289adcabfdf39d4e/src/lib/templates.ts#L471-L485). |
-| Wenlan: memory edited or deleted | The write/delete transaction finds dependent Pages via citation edges and legacy references, marks them stale, increments the source revision, and clears prior citation checks. [Invalidation](https://github.com/7xuanlu/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/db.rs#L31034-L31143); edit caller at 32965–33018; delete caller at 30630–30690. |
-| Wenlan: replacement revision accepted | The transaction rebinds dependent Pages to the new record and invalidates Pages and affected retrieval projections. [Dependency replacement](https://github.com/7xuanlu/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/db.rs#L32452-L32505); acceptance at 41648–41684. Existing `accept_pending_revision_rebinds_and_invalidates_dependents_atomically` test at `db/main_tests.rs:12899–13056` was read, not rerun. |
-| Wenlan: new record or stale Page | Eligible standalone memories can enrich matching existing Pages through `post_ingest`; no match does not promise a new Page. Scheduled re-distill refreshes eligible stale Pages when an authorized model is available. [Refresh slice](https://github.com/7xuanlu/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/refinery/mod.rs#L1590-L1684). |
+| Wenlan: memory edited or deleted | The write/delete transaction finds dependent Pages via citation edges and legacy references, marks them stale, increments the source revision, and clears prior citation checks. [Invalidation](https://github.com/wenlan-app/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/db.rs#L31034-L31143); edit caller at 32965–33018; delete caller at 30630–30690. |
+| Wenlan: replacement revision accepted | The transaction rebinds dependent Pages to the new record and invalidates Pages and affected retrieval projections. [Dependency replacement](https://github.com/wenlan-app/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/db.rs#L32452-L32505); acceptance at 41648–41684. Existing `accept_pending_revision_rebinds_and_invalidates_dependents_atomically` test at `db/main_tests.rs:12899–13056` was read, not rerun. |
+| Wenlan: new record or stale Page | Eligible standalone memories can enrich matching existing Pages through `post_ingest`; no match does not promise a new Page. Scheduled re-distill refreshes eligible stale Pages when an authorized model is available. [Refresh slice](https://github.com/wenlan-app/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/refinery/mod.rs#L1590-L1684). |
 
 **Wording boundary:** pending memory revisions depend on agent trust
 (`memory_routes.rs:485–495`). The inspected direct/full-trust supersession path
@@ -528,9 +528,9 @@ Wiki pages, remember facts, or automate work.
 Wenlan's supplied layer is backed by the pinned source, not ease-of-use or
 traffic measurements:
 
-- [Dependent-page invalidation](https://github.com/7xuanlu/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/db.rs#L31034-L31143)
+- [Dependent-page invalidation](https://github.com/wenlan-app/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/db.rs#L31034-L31143)
   uses recorded source relationships to mark affected pages stale.
-- [Background refresh selection](https://github.com/7xuanlu/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/refinery/mod.rs#L1604-L1635)
+- [Background refresh selection](https://github.com/wenlan-app/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/refinery/mod.rs#L1604-L1635)
   requires an available model and selects eligible stale pages.
 - The previously traced human-owned-page revision path remains the review
   boundary, not a guarantee that every generated assertion is correct.

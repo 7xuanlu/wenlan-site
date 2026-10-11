@@ -7,7 +7,7 @@ subscription ledger. See [first-party measurement](first-party-measurement.md)
 for operational reads and operator exclusion. No App events are currently
 accepted by the website event registry. Do not repurpose it silently.
 
-The App contract below is locally implemented on `7xuanlu/wenlan` base
+The App contract below is locally implemented on `wenlan-app/wenlan` base
 `b47fd45241d0d46c02e931dad0bd5dbfaf0a2e35`, version 0.18.4, with an independent
 `/api/app-events` receiver in this repository. **Neither an App release nor
 production App collection is established by local implementation.** The older

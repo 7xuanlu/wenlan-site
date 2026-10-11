@@ -54,7 +54,7 @@ jobs:
       - name: Check out Wenlan release source
         uses: actions/checkout@v4
         with:
-          repository: 7xuanlu/wenlan
+          repository: wenlan-app/wenlan
           path: .release-source/wenlan
 
       # fetch-tags on a shallow checkout only follows tags on the fetched commit,

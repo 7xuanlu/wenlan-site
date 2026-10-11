@@ -9,7 +9,7 @@ runtime release dependency. Their release references remain editorial snapshots 
 
 ## Selection and refresh
 
-- Source: `https://api.github.com/repos/7xuanlu/wenlan/releases/latest`.
+- Source: `https://api.github.com/repos/wenlan-app/wenlan/releases/latest`.
 - Only a stable `vMAJOR.MINOR.PATCH` release with all supported uploaded, nonempty
   downloads and required updater/checksum assets is eligible. A tag alone, draft,
   prerelease, or incomplete asset set is not eligible.

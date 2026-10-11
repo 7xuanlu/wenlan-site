@@ -21,7 +21,7 @@ const SITE_FILES = {
   sitemap: "src/app/sitemap.ts",
 };
 
-const GH_REPOSITORY = "7xuanlu/wenlan";
+const GH_REPOSITORY = "wenlan-app/wenlan";
 const RELEASE_ASSET_IDS = [
   "windows-desktop-x64",
   "windows-x64",

@@ -3099,7 +3099,7 @@ test("localized links aliases stay script-specific while GitHub tokens and hrefs
     changedGithubHref.links[5].href = changedGithubHref.links[5].href.replace("wenlan", "wenlan-mirror");
     assert.throws(
       () => protectedTokens.assertProtectedTokensPreserved(source, changedGithubHref, label),
-      (error) => error instanceof Error && error.message.includes("links[5].href: https://github.com/7xuanlu/wenlan"),
+      (error) => error instanceof Error && error.message.includes("links[5].href: https://github.com/wenlan-app/wenlan"),
       `${label}.links[5].href GitHub URL`,
     );
   }
@@ -3116,7 +3116,7 @@ test("protected token extraction preserves commands, URLs, packages, env vars, m
     "`~/.wenlan/bin/wenlan connect codex`",
     "`~/.wenlan/.git/` and `crates/wenlan-core/src/eval/`",
     "Wenlan and GitHub stay branded.",
-    "See https://github.com/7xuanlu/wenlan and @7xuanlu/wenlan.",
+    "See https://github.com/wenlan-app/wenlan and @7xuanlu/wenlan.",
     "Keep release v0.9.1 and daemon version 0.9.1 exact.",
     "Set WENLAN_RERANKER_ENABLED before reading LME_Oracle at 168 tokens / query, 93.6% / 0.857.",
     "Apache-2.0, Qi-Xuan Lu, and 7xuanlu stay exact.",
@@ -3129,7 +3129,7 @@ test("protected token extraction preserves commands, URLs, packages, env vars, m
     "MCP 指令是 `~/.wenlan/bin/wenlan connect codex`。",
     "本地路徑包含 `~/.wenlan/.git/` 和 `crates/wenlan-core/src/eval/`。",
     "Wenlan 和 GitHub 保持品牌寫法。",
-    "參考 https://github.com/7xuanlu/wenlan 和 @7xuanlu/wenlan。",
+    "參考 https://github.com/wenlan-app/wenlan 和 @7xuanlu/wenlan。",
     "release v0.9.1 和 daemon version 0.9.1 必須保留。",
     "先設定 WENLAN_RERANKER_ENABLED，再閱讀 LME_Oracle 的 168 tokens / query、93.6% / 0.857。",
     "Apache-2.0、Qi-Xuan Lu、7xuanlu 必須保留。",
@@ -3147,7 +3147,7 @@ test("protected token extraction preserves commands, URLs, packages, env vars, m
     "crates/wenlan-core/src/eval/",
     "Wenlan",
     "GitHub",
-    "https://github.com/7xuanlu/wenlan",
+    "https://github.com/wenlan-app/wenlan",
     "@7xuanlu/wenlan",
     "v0.9.1",
     "0.9.1",

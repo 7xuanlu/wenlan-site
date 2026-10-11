@@ -31,7 +31,7 @@ test("TrackedLink preserves normalized bounded legacy Umami events", (t) => {
 
   for (const [eventName, destinationCategory] of cases) {
     const link = TrackedLink({
-      href: eventName === "github_outbound" ? "https://github.com/7xuanlu/wenlan" : "/learn",
+      href: eventName === "github_outbound" ? "https://github.com/wenlan-app/wenlan" : "/learn",
       eventName,
       placement: "learn-article",
       locale: "en",
@@ -61,7 +61,7 @@ test("TrackedLink click remains safe when Umami is unavailable", (t) => {
   });
 
   const link = TrackedLink({
-    href: "https://github.com/7xuanlu/wenlan",
+    href: "https://github.com/wenlan-app/wenlan",
     eventName: "github_outbound",
     placement: "home-footer",
     locale: "zh-TW",
@@ -190,7 +190,7 @@ test("download-page placement preserves the bounded outbound event shape", (t) =
   });
 
   const link = TrackedLink({
-    href: "https://github.com/7xuanlu/wenlan/releases/download/v0.15.0/example.zip",
+    href: "https://github.com/wenlan-app/wenlan/releases/download/v0.15.0/example.zip",
     eventName: "github_outbound",
     placement: "download-page",
     locale: "zh-TW",
@@ -225,7 +225,7 @@ test("docs-article placement preserves the bounded outbound event shape", (t) =>
   });
 
   const link = TrackedLink({
-    href: "https://github.com/7xuanlu/wenlan",
+    href: "https://github.com/wenlan-app/wenlan",
     eventName: "github_outbound",
     placement: "docs-article",
     locale: "en",

@@ -121,7 +121,7 @@ const zhTWArticles = {
     officialReferences: [
       {
         label: "Wenlan 知識生命週期",
-        href: "https://github.com/7xuanlu/wenlan#how-knowledge-stays-current",
+        href: "https://github.com/wenlan-app/wenlan#how-knowledge-stays-current",
       },
       {
         label: "Wenlan 審查與信任",
@@ -412,11 +412,11 @@ const zhTWArticles = {
       },
       {
         label: "Wenlan 的 Source、Memory 與 Page 模型",
-        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+        href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build",
       },
       {
         label: "Wenlan 日常工作流",
-        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+        href: "https://github.com/wenlan-app/wenlan#daily-workflow",
       },
     ],
     relatedSlugs: [
@@ -574,11 +574,11 @@ const zhTWArticles = {
     officialReferences: [
       {
         label: "Wenlan 的知識模型",
-        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+        href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build",
       },
       {
         label: "Wenlan 日常工作流程",
-        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+        href: "https://github.com/wenlan-app/wenlan#daily-workflow",
       },
       {
         label: "Wenlan 審查與信任指南",
@@ -845,7 +845,7 @@ const zhTWArticles = {
         ],
         "code": {
           "label": "練習前先連接 Wenlan",
-          "code": "npx -y wenlan setup\n# 接著在 Claude Code 裡：\n/plugin marketplace add 7xuanlu/wenlan\n/plugin install wenlan@7xuanlu-wenlan"
+          "code": "npx -y wenlan setup\n# 接著在 Claude Code 裡：\n/plugin marketplace add wenlan-app/wenlan\n/plugin install wenlan@7xuanlu-wenlan"
         },
         "link": {
           "label": "查看另一個專案的引用與修訂實錄（Tally）",
@@ -933,7 +933,7 @@ const zhTWArticles = {
       },
       {
         label: "Wenlan 與 Obsidian",
-        href: "https://github.com/7xuanlu/wenlan#local-markdown-that-works-with-obsidian",
+        href: "https://github.com/wenlan-app/wenlan#local-markdown-that-works-with-obsidian",
       },
     ],
     cta: {
@@ -1058,7 +1058,7 @@ const zhTWArticles = {
       },
       {
         label: "Wenlan 與 AI client 設定",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/docs/setup-with-ai.md",
       },
       {
         label: "Wenlan 有來源 Pages",
@@ -1273,15 +1273,15 @@ const zhTWArticles = {
       },
       {
         label: "Wenlan 平台與客戶端設定",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/docs/setup-with-ai.md",
       },
       {
         label: "Wenlan 支援的文件來源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "wenlan sources add CLI",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
       },
       {
         label: "Wenlan 有來源 Pages",
@@ -1400,11 +1400,11 @@ const zhTWArticles = {
     officialReferences: [
       {
         label: "Wenlan 知識模型",
-        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+        href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build",
       },
       {
         label: "Wenlan 支援的文件來源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan MCP 客戶端",
@@ -1522,15 +1522,15 @@ const zhTWArticles = {
     officialReferences: [
       {
         label: "Wenlan 支援的文件來源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan Directory Source 與檔案限制",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/src/sources/directory.rs",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-core/src/sources/directory.rs",
       },
       {
         label: "Wenlan 資料夾匯入驗收測試",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/tests/folder_ingest_e2e.rs",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-core/tests/folder_ingest_e2e.rs",
       },
       {
         label: "Google Cloud PDF OCR 與版面解析",
@@ -1816,7 +1816,7 @@ const zhTWArticles = {
       },
       {
         label: "Wenlan retrieval drift source",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/src/eval/retrieval_drift.rs",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-core/src/eval/retrieval_drift.rs",
       },
       {
         label: "小丁的 RAG 檢索準確率除錯實錄",
@@ -2076,7 +2076,7 @@ const zhTWArticles = {
     officialReferences: [
       {
         label: "Wenlan 支援的文件來源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan 有來源 Pages",
@@ -2189,11 +2189,11 @@ const zhTWArticles = {
     officialReferences: [
       {
         label: "Wenlan 知識模型與 Spaces",
-        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+        href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build",
       },
       {
         label: "Wenlan 日常工作流程",
-        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+        href: "https://github.com/wenlan-app/wenlan#daily-workflow",
       },
       {
         label: "Cogni Consult 客戶交付工作區",
@@ -2302,7 +2302,7 @@ const zhTWArticles = {
     officialReferences: [
       {
         label: "Wenlan 支援的文件來源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan 有來源 Pages",
@@ -2484,7 +2484,7 @@ const zhTWArticles = {
     officialReferences: [
       {
         label: "Wenlan 支援的文件來源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan 有來源 Pages",
@@ -2496,7 +2496,7 @@ const zhTWArticles = {
       },
       {
         label: "Wenlan 日常工作流",
-        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+        href: "https://github.com/wenlan-app/wenlan#daily-workflow",
       },
     ],
     cta: {
@@ -2639,7 +2639,7 @@ const zhTWArticles = {
     officialReferences: [
       {
         label: "Wenlan 支援的文件來源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan 審查與信任",
@@ -2752,7 +2752,7 @@ const zhTWArticles = {
     officialReferences: [
       {
         label: "Wenlan 支援的文件來源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan 有來源 Pages",
@@ -2917,7 +2917,7 @@ const zhTWArticles = {
     officialReferences: [
       {
         label: "Wenlan 支援的文件來源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan 有來源 Pages",
@@ -3069,11 +3069,11 @@ const zhTWArticles = {
     officialReferences: [
       {
         label: "Wenlan 支援的文件來源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan sources add CLI",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
       },
       {
         label: "Wenlan 有來源 Pages",
@@ -3233,7 +3233,7 @@ const zhTWArticles = {
       "verify-ai-knowledge-base-citations",
     ],
     officialReferences: [
-      { label: "Wenlan 支援的文件來源", href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in" },
+      { label: "Wenlan 支援的文件來源", href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in" },
       { label: "Wenlan 有來源 Pages", href: "https://wenlan.app/docs/source-backed-pages" },
       { label: "Wenlan 審查與信任", href: "https://wenlan.app/docs/review-and-trust" },
       { label: "Karpathy 的 LLM-wiki 筆記", href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" },
@@ -3359,7 +3359,7 @@ const zhTWArticles = {
       "build-investment-research-knowledge-base",
     ],
     officialReferences: [
-      { label: "Wenlan 支援的文件來源", href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in" },
+      { label: "Wenlan 支援的文件來源", href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in" },
       { label: "Wenlan 有來源 Pages", href: "https://wenlan.app/docs/source-backed-pages" },
       { label: "Wenlan 複核與信任", href: "https://wenlan.app/docs/review-and-trust" },
       { label: "台灣資料集詮釋資料標準指引", href: "https://file.data.gov.tw/content/%E8%B3%87%E6%96%99%E9%9B%86%E8%A9%AE%E9%87%8B%E8%B3%87%E6%96%99%E6%A8%99%E6%BA%96%E6%8C%87%E5%BC%95.pdf" },
@@ -3499,7 +3499,7 @@ const zhCNArticles = {
     officialReferences: [
       {
         label: "Wenlan 知识生命周期",
-        href: "https://github.com/7xuanlu/wenlan#how-knowledge-stays-current",
+        href: "https://github.com/wenlan-app/wenlan#how-knowledge-stays-current",
       },
       {
         label: "Wenlan 审核与信任",
@@ -3625,15 +3625,15 @@ const zhCNArticles = {
     officialReferences: [
       {
         label: "Wenlan 支持的文档来源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan Directory Source 与文件限制",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/src/sources/directory.rs",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-core/src/sources/directory.rs",
       },
       {
         label: "Wenlan 文件夹导入验收测试",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/tests/folder_ingest_e2e.rs",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-core/tests/folder_ingest_e2e.rs",
       },
       {
         label: "Google Cloud PDF OCR 与版面解析",
@@ -4064,11 +4064,11 @@ const zhCNArticles = {
       },
       {
         label: "Wenlan 的 Source、Memory 与 Page 模型",
-        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+        href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build",
       },
       {
         label: "Wenlan 日常工作流",
-        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+        href: "https://github.com/wenlan-app/wenlan#daily-workflow",
       },
     ],
     cta: {
@@ -4215,11 +4215,11 @@ const zhCNArticles = {
     officialReferences: [
       {
         label: "Wenlan 的知识模型",
-        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+        href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build",
       },
       {
         label: "Wenlan 日常工作流程",
-        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+        href: "https://github.com/wenlan-app/wenlan#daily-workflow",
       },
       {
         label: "Wenlan 审核与信任指南",
@@ -4486,7 +4486,7 @@ const zhCNArticles = {
         ],
         "code": {
           "label": "练习前先连接 Wenlan",
-          "code": "npx -y wenlan setup\n# 接着在 Claude Code 里：\n/plugin marketplace add 7xuanlu/wenlan\n/plugin install wenlan@7xuanlu-wenlan"
+          "code": "npx -y wenlan setup\n# 接着在 Claude Code 里：\n/plugin marketplace add wenlan-app/wenlan\n/plugin install wenlan@7xuanlu-wenlan"
         },
         "link": {
           "label": "查看另一个项目的引用与修订实录（Tally）",
@@ -4574,7 +4574,7 @@ const zhCNArticles = {
       },
       {
         label: "Wenlan 与 Obsidian",
-        href: "https://github.com/7xuanlu/wenlan#local-markdown-that-works-with-obsidian",
+        href: "https://github.com/wenlan-app/wenlan#local-markdown-that-works-with-obsidian",
       },
     ],
     cta: {
@@ -4700,7 +4700,7 @@ const zhCNArticles = {
       },
       {
         label: "Wenlan 与 AI client 设置",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/docs/setup-with-ai.md",
       },
       {
         label: "Wenlan 有来源 Pages",
@@ -4915,15 +4915,15 @@ const zhCNArticles = {
       },
       {
         label: "Wenlan 平台与客户端设置",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/docs/setup-with-ai.md",
       },
       {
         label: "Wenlan 支持的文档来源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "wenlan sources add CLI",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
       },
       {
         label: "Wenlan 有来源 Pages",
@@ -5042,11 +5042,11 @@ const zhCNArticles = {
     officialReferences: [
       {
         label: "Wenlan 知识模型",
-        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+        href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build",
       },
       {
         label: "Wenlan 支持的文档来源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan MCP 客户端",
@@ -5182,7 +5182,7 @@ const zhCNArticles = {
       },
       {
         label: "Wenlan retrieval drift source",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/src/eval/retrieval_drift.rs",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-core/src/eval/retrieval_drift.rs",
       },
       {
         label: "RAG 知识库召回调试指南",
@@ -5442,7 +5442,7 @@ const zhCNArticles = {
     officialReferences: [
       {
         label: "Wenlan 支持的文档来源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan 有来源 Pages",
@@ -5555,11 +5555,11 @@ const zhCNArticles = {
     officialReferences: [
       {
         label: "Wenlan 知识模型与 Spaces",
-        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+        href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build",
       },
       {
         label: "Wenlan 日常工作流程",
-        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+        href: "https://github.com/wenlan-app/wenlan#daily-workflow",
       },
       {
         label: "Cogni Consult 客户交付工作区",
@@ -5668,7 +5668,7 @@ const zhCNArticles = {
     officialReferences: [
       {
         label: "Wenlan 支持的文档来源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan 有来源 Pages",
@@ -5850,7 +5850,7 @@ const zhCNArticles = {
     officialReferences: [
       {
         label: "Wenlan 支持的文档来源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan 有来源 Pages",
@@ -5862,7 +5862,7 @@ const zhCNArticles = {
       },
       {
         label: "Wenlan 日常工作流",
-        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+        href: "https://github.com/wenlan-app/wenlan#daily-workflow",
       },
     ],
     cta: {
@@ -6005,7 +6005,7 @@ const zhCNArticles = {
     officialReferences: [
       {
         label: "Wenlan 支持的文档来源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan 审核与信任",
@@ -6118,7 +6118,7 @@ const zhCNArticles = {
     officialReferences: [
       {
         label: "Wenlan 支持的文档来源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan 有来源 Pages",
@@ -6283,7 +6283,7 @@ const zhCNArticles = {
     officialReferences: [
       {
         label: "Wenlan 支持的文档来源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan 有来源 Pages",
@@ -6435,11 +6435,11 @@ const zhCNArticles = {
     officialReferences: [
       {
         label: "Wenlan 支持的文档来源",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan sources add CLI",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
       },
       {
         label: "Wenlan 有来源 Pages",
@@ -6599,7 +6599,7 @@ const zhCNArticles = {
       "verify-ai-knowledge-base-citations",
     ],
     officialReferences: [
-      { label: "Wenlan 支持的文档来源", href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in" },
+      { label: "Wenlan 支持的文档来源", href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in" },
       { label: "Wenlan 有来源 Pages", href: "https://wenlan.app/docs/source-backed-pages" },
       { label: "Wenlan 审核与信任", href: "https://wenlan.app/docs/review-and-trust" },
       { label: "Karpathy 的 LLM-wiki 笔记", href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" },
@@ -6725,7 +6725,7 @@ const zhCNArticles = {
       "build-investment-research-knowledge-base",
     ],
     officialReferences: [
-      { label: "Wenlan 支持的文档来源", href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in" },
+      { label: "Wenlan 支持的文档来源", href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in" },
       { label: "Wenlan 有来源 Pages", href: "https://wenlan.app/docs/source-backed-pages" },
       { label: "Wenlan 审核与信任", href: "https://wenlan.app/docs/review-and-trust" },
       { label: "银行业数据字典指引", href: "https://www.china-cba.net/Index/show/catid/251/id/45936.html" },

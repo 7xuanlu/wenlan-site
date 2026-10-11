@@ -10,8 +10,10 @@ import {
   normalizePublishedRelease,
 } from "../src/lib/release-manifest.ts";
 
-const REPOSITORY = "https://github.com/7xuanlu/wenlan";
+const REPOSITORY = "https://github.com/wenlan-app/wenlan";
 const DOWNLOAD_BASE = `${REPOSITORY}/releases/download`;
+// The repository moved from 7xuanlu/wenlan to wenlan-app/wenlan; the old owner must stay rejected.
+const MOVED_FROM_REPOSITORY = "https://github.com/7xuanlu/wenlan";
 
 const ASSETS = [
   ["windows-desktop-x64", (version) => `Wenlan_${version}_x64-setup.exe`, "EXE", 2],
@@ -57,8 +59,39 @@ function publishedRelease({
 }
 
 test("release constants keep the API and cache contract stable", () => {
-  assert.equal(RELEASE_API, "https://api.github.com/repos/7xuanlu/wenlan/releases/latest");
+  assert.equal(RELEASE_API, "https://api.github.com/repos/wenlan-app/wenlan/releases/latest");
   assert.equal(RELEASE_REVALIDATE_SECONDS, 3600);
+});
+
+test("a release payload under the wenlan-app owner parses with literal URLs", () => {
+  const tag = "v9.8.7";
+  const base = "https://github.com/wenlan-app/wenlan/releases";
+  const payload = publishedRelease({ version: "9.8.7" });
+  payload.html_url = `${base}/tag/${tag}`;
+  for (const asset of payload.assets) {
+    asset.browser_download_url = `${base}/download/${tag}/${asset.name}`;
+  }
+
+  const release = normalizePublishedRelease(payload);
+  assert.equal(release.releaseUrl, "https://github.com/wenlan-app/wenlan/releases/tag/v9.8.7");
+  assert.equal(
+    release.assets[0].href,
+    "https://github.com/wenlan-app/wenlan/releases/download/v9.8.7/Wenlan_9.8.7_x64-setup.exe",
+  );
+});
+
+test("a release payload still pointing at the pre-transfer 7xuanlu owner is rejected", () => {
+  const tag = "v9.8.7";
+
+  const oldHtmlUrl = publishedRelease({ version: "9.8.7" });
+  oldHtmlUrl.html_url = `${MOVED_FROM_REPOSITORY}/releases/tag/${tag}`;
+  assert.throws(() => normalizePublishedRelease(oldHtmlUrl), /html_url/);
+
+  const oldAssetUrls = publishedRelease({ version: "9.8.7" });
+  for (const asset of oldAssetUrls.assets) {
+    asset.browser_download_url = `${MOVED_FROM_REPOSITORY}/releases/download/${tag}/${asset.name}`;
+  }
+  assert.throws(() => normalizePublishedRelease(oldAssetUrls), /download URL/);
 });
 
 test("latest equal to the bundled snapshot is valid, not a failed rewrite", () => {
@@ -99,8 +132,9 @@ test("download inference rejects foreign, ambiguous, and mismatched URLs", () =>
   const rejected = [
     `${DOWNLOAD_BASE}/v9.8.7/Wenlan_9.8.7_x64-setup.exe?download=1`,
     `${DOWNLOAD_BASE}/v9.8.7/Wenlan_9.8.7_x64-setup.exe#fragment`,
-    "http://github.com/7xuanlu/wenlan/releases/download/v9.8.7/Wenlan_9.8.7_x64-setup.exe",
-    `https://github.com.evil.example/7xuanlu/wenlan/releases/download/v9.8.7/Wenlan_9.8.7_x64-setup.exe`,
+    "http://github.com/wenlan-app/wenlan/releases/download/v9.8.7/Wenlan_9.8.7_x64-setup.exe",
+    `https://github.com.evil.example/wenlan-app/wenlan/releases/download/v9.8.7/Wenlan_9.8.7_x64-setup.exe`,
+    `${MOVED_FROM_REPOSITORY}/releases/download/v9.8.7/Wenlan_9.8.7_x64-setup.exe`,
     `https://github.com/other/wenlan/releases/download/v9.8.7/Wenlan_9.8.7_x64-setup.exe`,
     `${DOWNLOAD_BASE}/latest/Wenlan_9.8.7_x64-setup.exe`,
     `${DOWNLOAD_BASE}/v9.8/Wenlan_9.8.7_x64-setup.exe`,
@@ -111,7 +145,7 @@ test("download inference rejects foreign, ambiguous, and mismatched URLs", () =>
     `${DOWNLOAD_BASE}/v9.8.7/latest.json`,
     `${DOWNLOAD_BASE}/v9.8.7/wenlan-windows-x64.zip/extra`,
     `${DOWNLOAD_BASE}/v9.8.7%2FWenlan_9.8.7_x64-setup.exe`,
-    `https://user:pass@github.com/7xuanlu/wenlan/releases/download/v9.8.7/Wenlan_9.8.7_x64-setup.exe`,
+    `https://user:pass@github.com/wenlan-app/wenlan/releases/download/v9.8.7/Wenlan_9.8.7_x64-setup.exe`,
   ];
   for (const href of rejected) assert.equal(inferReleaseDownload(href), null, href);
   assert.equal(inferReleaseDownload(null), null);

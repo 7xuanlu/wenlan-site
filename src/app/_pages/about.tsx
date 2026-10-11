@@ -64,7 +64,7 @@ export function AboutPage({ locale, release = WENLAN_RELEASE }: { locale: Locale
     url: "https://github.com/7xuanlu",
     sameAs: [
       "https://github.com/7xuanlu",
-      "https://github.com/7xuanlu/wenlan",
+      "https://github.com/wenlan-app/wenlan",
       "https://www.npmjs.com/package/wenlan",
       "https://www.npmjs.com/package/wenlan-mcp",
       "https://crates.io/crates/wenlan-mcp",

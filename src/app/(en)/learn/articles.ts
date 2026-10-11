@@ -484,7 +484,7 @@ const baseArticles: LearnArticle[] = [
       },
       {
         label: "Wenlan on GitHub",
-        href: "https://github.com/7xuanlu/wenlan",
+        href: "https://github.com/wenlan-app/wenlan",
       },
     ],
     cta: {
@@ -749,7 +749,7 @@ const baseArticles: LearnArticle[] = [
         ],
         "code": {
           "label": "Connect Wenlan before the exercise",
-          "code": "npx -y wenlan setup\n# then, inside Claude Code:\n/plugin marketplace add 7xuanlu/wenlan\n/plugin install wenlan@7xuanlu-wenlan"
+          "code": "npx -y wenlan setup\n# then, inside Claude Code:\n/plugin marketplace add wenlan-app/wenlan\n/plugin install wenlan@7xuanlu-wenlan"
         },
         "link": {
           "label": "View a different project’s recorded citation and revision walkthrough (Tally)",
@@ -841,7 +841,7 @@ const baseArticles: LearnArticle[] = [
       },
       {
         label: "Wenlan with Obsidian",
-        href: "https://github.com/7xuanlu/wenlan#local-markdown-that-works-with-obsidian",
+        href: "https://github.com/wenlan-app/wenlan#local-markdown-that-works-with-obsidian",
       },
     ],
     cta: {
@@ -1110,7 +1110,7 @@ const baseArticles: LearnArticle[] = [
         ],
         code: {
           label: "Claude Code plugin",
-          code: "/plugin marketplace add 7xuanlu/wenlan\n/plugin install wenlan@7xuanlu-wenlan\n/setup\n/capture This project uses Wenlan for local AI work memory.\n/recall local AI work memory",
+          code: "/plugin marketplace add wenlan-app/wenlan\n/plugin install wenlan@7xuanlu-wenlan\n/setup\n/capture This project uses Wenlan for local AI work memory.\n/recall local AI work memory",
         },
         link: {
           label: "Turn Claude Code memory into an LLM wiki",
@@ -1195,7 +1195,7 @@ const baseArticles: LearnArticle[] = [
       },
       {
         label: "Wenlan on GitHub",
-        href: "https://github.com/7xuanlu/wenlan",
+        href: "https://github.com/wenlan-app/wenlan",
       },
     ],
     cta: {
@@ -1355,7 +1355,7 @@ const baseArticles: LearnArticle[] = [
         ],
         code: {
           label: "Codex plugin",
-          code: "npx -y wenlan setup   # macOS Apple Silicon; other platforms: see setup docs\ncodex plugin marketplace add 7xuanlu/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan\n# start a new Codex task, then:\n/setup",
+          code: "npx -y wenlan setup   # macOS Apple Silicon; other platforms: see setup docs\ncodex plugin marketplace add wenlan-app/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan\n# start a new Codex task, then:\n/setup",
         },
         link: {
           label: "MCP only, without the plugin: wenlan connect codex",
@@ -1423,7 +1423,7 @@ const baseArticles: LearnArticle[] = [
       },
       {
         label: "Wenlan setup for Codex",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md#codex",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/docs/setup-with-ai.md#codex",
       },
     ],
     cta: {
@@ -1709,11 +1709,11 @@ const baseArticles: LearnArticle[] = [
       },
       {
         label: "Wenlan Source, Memory, and Page model",
-        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+        href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build",
       },
       {
         label: "Wenlan daily workflow",
-        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+        href: "https://github.com/wenlan-app/wenlan#daily-workflow",
       },
     ],
     cta: {
@@ -1862,11 +1862,11 @@ const baseArticles: LearnArticle[] = [
     officialReferences: [
       {
         label: "Wenlan source, memory, and page model",
-        href: "https://github.com/7xuanlu/wenlan#what-is-this",
+        href: "https://github.com/wenlan-app/wenlan#what-is-this",
       },
       {
         label: "Wenlan daily workflow",
-        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+        href: "https://github.com/wenlan-app/wenlan#daily-workflow",
       },
       {
         label: "Karpathy's LLM Wiki foundation",
@@ -1941,7 +1941,7 @@ const baseArticles: LearnArticle[] = [
       },
       {
         label: "Wenlan v0.14.1 source and documentation",
-        href: "https://github.com/7xuanlu/wenlan/tree/v0.14.1",
+        href: "https://github.com/wenlan-app/wenlan/tree/v0.14.1",
       },
     ],
     sections: [
@@ -2176,7 +2176,7 @@ const baseArticles: LearnArticle[] = [
       },
       {
         label: "Wenlan workflow at the reviewed commit",
-        href: "https://github.com/7xuanlu/wenlan/blob/93451bf0ef58399e08400e3b4ac613942adcfec8/README.md",
+        href: "https://github.com/wenlan-app/wenlan/blob/93451bf0ef58399e08400e3b4ac613942adcfec8/README.md",
       },
     ],
     sections: [
@@ -2387,7 +2387,7 @@ const baseArticles: LearnArticle[] = [
       },
       {
         label: "Wenlan v0.14.1 source",
-        href: "https://github.com/7xuanlu/wenlan/tree/v0.14.1",
+        href: "https://github.com/wenlan-app/wenlan/tree/v0.14.1",
       },
     ],
     sections: [

@@ -362,7 +362,7 @@ export default function LearnPage() {
               Get started
             </TrackedLink>
             <TrackedLink
-              href="https://github.com/7xuanlu/wenlan"
+              href="https://github.com/wenlan-app/wenlan"
               eventName="github_outbound"
               placement="learn-footer"
               locale="en"

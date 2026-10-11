@@ -1600,8 +1600,8 @@ function summarizeGithub(metadata) {
   if (metadata.source !== "GitHub REST API") {
     throw new Error("GitHub metadata source must be GitHub REST API");
   }
-  if (metadata.repository !== "7xuanlu/wenlan") {
-    throw new Error("GitHub metadata repository must be 7xuanlu/wenlan");
+  if (metadata.repository !== "wenlan-app/wenlan") {
+    throw new Error("GitHub metadata repository must be wenlan-app/wenlan");
   }
   if (!/^\d{4}-\d{2}-\d{2}T/.test(metadata.capturedAt ?? "")) {
     throw new Error("GitHub metadata capturedAt must be an ISO timestamp");

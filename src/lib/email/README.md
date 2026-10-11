@@ -9,7 +9,7 @@ The default light palette uses the Wenlan App's `#FCFCFB` background,
 `#1A1A2E` text, and `#5E58C8` accent. `{ theme: "dark" }` selects the App's
 `#11131A` / `#171A23` surfaces and `#8FB3EA` accent. This is explicit sender-side
 selection, not a guarantee about mail clients' own automatic dark-mode changes.
-Source: `7xuanlu/wenlan`, `src/index.css`, inspected 2026-09-08.
+Source: `wenlan-app/wenlan`, `src/index.css`, inspected 2026-09-08.
 
 `wenlan-logo.png` is an unmodified copy of the App's
 `app/icons/128x128@2x.png` (256 × 256), displayed at 48 × 48. Its SHA-256 is

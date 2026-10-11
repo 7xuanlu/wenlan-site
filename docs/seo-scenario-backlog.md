@@ -790,7 +790,7 @@ Demand discovery:
 
 ### Authority path and readout
 
-- Authority path: maintained-first-party-reference — https://github.com/7xuanlu/wenlan/pull/624 — merged at 2026-08-28T05:16:37Z as 368fabcf667736e1b116dac8a9e79b017ae4d6bf; current main e450c4371f224802666a53e4dcbe7b4990935ca8 still contains all four locale-aware research-workflow links and passes the translated-README sync checker and self-test (published).
+- Authority path: maintained-first-party-reference — https://github.com/wenlan-app/wenlan/pull/624 — merged at 2026-08-28T05:16:37Z as 368fabcf667736e1b116dac8a9e79b017ae4d6bf; current main e450c4371f224802666a53e4dcbe7b4990935ca8 still contains all four locale-aware research-workflow links and passes the translated-README sync checker and self-test (published).
 - GSC: unavailable; native unit: page impressions, joined-query impressions, clicks.
 - Vercel: unavailable; native unit: target-page visitors and referrer visitors.
 
@@ -873,7 +873,7 @@ Demand discovery:
 
 ### Authority path and readout
 
-- Authority path: maintained-first-party-reference — https://github.com/7xuanlu/wenlan — propose one locale-aware consulting workflow link only after the website family is approved for publication and source-repo publication receives separate approval (planned-not-published).
+- Authority path: maintained-first-party-reference — https://github.com/wenlan-app/wenlan — propose one locale-aware consulting workflow link only after the website family is approved for publication and source-repo publication receives separate approval (planned-not-published).
 - GSC: unavailable; native unit: per-locale page impressions, joined-query impressions, clicks.
 - Vercel: unavailable; native unit: per-locale target-page visitors and referrer visitors.
 
@@ -957,7 +957,7 @@ Demand discovery:
 
 ### Authority path and readout
 
-- Authority path: maintained-first-party-reference — https://github.com/7xuanlu/wenlan — propose one locale-aware investment-research workflow link only after the website family is separately approved and published; do not submit finance directories without another exact approval (planned-not-published).
+- Authority path: maintained-first-party-reference — https://github.com/wenlan-app/wenlan — propose one locale-aware investment-research workflow link only after the website family is separately approved and published; do not submit finance directories without another exact approval (planned-not-published).
 - GSC: unavailable; native unit: per-locale page impressions, joined-query impressions, clicks.
 - Vercel: unavailable; native unit: per-locale target-page visitors and referrer visitors.
 
@@ -1129,7 +1129,7 @@ Demand discovery:
 
 ### Authority path and readout
 
-- Authority path: maintained-first-party-reference — https://github.com/7xuanlu/wenlan — after the website family is separately approved and published, prepare one locale-aware SRE incident-knowledge workflow link; do not commit, push, or merge source-repository changes without another exact approval (planned-not-published).
+- Authority path: maintained-first-party-reference — https://github.com/wenlan-app/wenlan — after the website family is separately approved and published, prepare one locale-aware SRE incident-knowledge workflow link; do not commit, push, or merge source-repository changes without another exact approval (planned-not-published).
 - GSC: unavailable; native unit: per-locale page impressions, joined-query impressions, clicks.
 - Vercel: unavailable; native unit: per-locale target-page visitors and referrer visitors.
 

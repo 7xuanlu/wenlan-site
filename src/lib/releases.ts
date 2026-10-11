@@ -2,15 +2,15 @@
 // Live download UI resolves the latest complete stable release in release-server.ts.
 // Updating this snapshot is NOT required for publishing future App releases.
 const WENLAN_RELEASE_DOWNLOAD_BASE =
-  "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16";
+  "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16";
 
 export const WENLAN_RELEASE = {
   version: "0.18.16",
   tag: "v0.18.16",
   publishedAt: "2026-10-04T01:49:31Z",
-  releaseUrl: "https://github.com/7xuanlu/wenlan/releases/tag/v0.18.16",
+  releaseUrl: "https://github.com/wenlan-app/wenlan/releases/tag/v0.18.16",
   setupGuideUrl:
-    "https://github.com/7xuanlu/wenlan/blob/v0.18.16/docs/setup-with-ai.md#install-the-runtime",
+    "https://github.com/wenlan-app/wenlan/blob/v0.18.16/docs/setup-with-ai.md#install-the-runtime",
   assets: [
     {
       id: "windows-desktop-x64",
@@ -18,7 +18,7 @@ export const WENLAN_RELEASE = {
       format: "EXE",
       size: "48.6 MiB",
       guideHref:
-        "https://github.com/7xuanlu/wenlan/blob/v0.18.16/README.md#desktop-app",
+        "https://github.com/wenlan-app/wenlan/blob/v0.18.16/README.md#desktop-app",
     },
     {
       id: "windows-x64",
@@ -32,7 +32,7 @@ export const WENLAN_RELEASE = {
       format: "DMG",
       size: "68.6 MiB",
       guideHref:
-        "https://github.com/7xuanlu/wenlan/blob/v0.18.16/README.md#desktop-app",
+        "https://github.com/wenlan-app/wenlan/blob/v0.18.16/README.md#desktop-app",
     },
     {
       id: "macos-runtime-arm64",

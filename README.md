@@ -1,6 +1,6 @@
 # wenlan-site
 
-Marketing + docs site for [Wenlan](https://github.com/7xuanlu/wenlan), a living personal knowledge library for AI work.
+Marketing + docs site for [Wenlan](https://github.com/wenlan-app/wenlan), a living personal knowledge library for AI work.
 
 Production: [wenlan.app](https://wenlan.app).
 
@@ -93,7 +93,7 @@ Doc pages live in `src/app/docs/docs.ts` under the `docPages` array. Same `updat
 
 ## License
 
-This website source is MIT. The Wenlan product (daemon, CLI, MCP server) is Apache-2.0 in [7xuanlu/wenlan](https://github.com/7xuanlu/wenlan).
+This website source is MIT. The Wenlan product (daemon, CLI, MCP server) is Apache-2.0 in [wenlan-app/wenlan](https://github.com/wenlan-app/wenlan).
 
 ## Author
 
