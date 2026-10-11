@@ -18,15 +18,15 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, "..");
 
 const SAMPLE_RELEASES = `const WENLAN_RELEASE_DOWNLOAD_BASE =
-  "https://github.com/7xuanlu/wenlan/releases/download/v0.15.3";
+  "https://github.com/wenlan-app/wenlan/releases/download/v0.15.3";
 
 export const WENLAN_RELEASE = {
   version: "0.15.3",
   tag: "v0.15.3",
   publishedAt: "2026-08-01T08:47:47Z",
-  releaseUrl: "https://github.com/7xuanlu/wenlan/releases/tag/v0.15.3",
+  releaseUrl: "https://github.com/wenlan-app/wenlan/releases/tag/v0.15.3",
   setupGuideUrl:
-    "https://github.com/7xuanlu/wenlan/blob/v0.15.3/docs/setup-with-ai.md#install-the-runtime",
+    "https://github.com/wenlan-app/wenlan/blob/v0.15.3/docs/setup-with-ai.md#install-the-runtime",
   assets: [
     {
       id: "windows-desktop-x64",

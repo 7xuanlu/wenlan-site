@@ -61,7 +61,7 @@ export function SiteHeader({
             ))}
           <LanguageSwitcher locale={locale} />
           <a
-            href="https://github.com/7xuanlu/wenlan"
+            href="https://github.com/wenlan-app/wenlan"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={nav.githubAriaLabel}

@@ -31,7 +31,7 @@ export const enContent = {
           { id: "docs", href: "/docs", label: "Docs" },
           { id: "learn", href: "/learn", label: "Learn" },
           { id: "about", href: "/about", label: "About" },
-          { id: "github", href: "https://github.com/7xuanlu/wenlan", label: "GitHub" },
+          { id: "github", href: "https://github.com/wenlan-app/wenlan", label: "GitHub" },
         ],
       },
       hero: {
@@ -41,7 +41,7 @@ export const enContent = {
         primaryCta: { id: "download", href: "#download", label: "Download Wenlan" },
         secondaryCta: {
           id: "github",
-          href: "https://github.com/7xuanlu/wenlan",
+          href: "https://github.com/wenlan-app/wenlan",
           label: "View on GitHub",
         },
         metaText: [
@@ -399,7 +399,7 @@ export const enContent = {
           primaryCta: { id: "download", href: "#download", label: "Download Wenlan" },
           secondaryCta: {
             id: "github",
-            href: "https://github.com/7xuanlu/wenlan",
+            href: "https://github.com/wenlan-app/wenlan",
             label: "View on GitHub",
           },
           waitlistHeading: "Subscribe to Wenlan release updates.",
@@ -455,7 +455,7 @@ export const enContent = {
           "Retrieval-only snapshots on fixed fixtures. LME_Oracle also records 0.857 MRR; LME_S records 0.815 MRR on 84 gradeable rows from the 90-question deep-S fixture. This is not a general time or token-saving guarantee and does not compare Wenlan with other tools. Token comparison is full replay vs retrieved context within this retrieval test.",
         link: {
           id: "harness",
-          href: "https://github.com/7xuanlu/wenlan/tree/main/crates/wenlan-core/src/eval",
+          href: "https://github.com/wenlan-app/wenlan/tree/main/crates/wenlan-core/src/eval",
           label: "Run the harness yourself.",
         },
       },
@@ -663,7 +663,7 @@ export const enContent = {
                 },
                 {
                   "label": "Wenlan per-memory page dependencies",
-                  "href": "https://github.com/7xuanlu/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/db.rs#L31034-L31143"
+                  "href": "https://github.com/wenlan-app/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/db.rs#L31034-L31143"
                 }
               ],
               "wenlan": {
@@ -859,7 +859,7 @@ export const enContent = {
               },
               {
                 "label": "Wenlan repository: what is this?",
-                "href": "https://github.com/7xuanlu/wenlan#what-is-this"
+                "href": "https://github.com/wenlan-app/wenlan#what-is-this"
               }
             ]
           },
@@ -1054,22 +1054,22 @@ export const enContent = {
       projectLinks: [
         {
           id: "repository",
-          href: "https://github.com/7xuanlu/wenlan",
+          href: "https://github.com/wenlan-app/wenlan",
           label: "GitHub repository",
         },
         {
           id: "license",
-          href: "https://github.com/7xuanlu/wenlan/blob/main/LICENSE",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/LICENSE",
           label: "Apache-2.0 license",
         },
         {
           id: "contributing",
-          href: "https://github.com/7xuanlu/wenlan/blob/main/CONTRIBUTING.md",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/CONTRIBUTING.md",
           label: "Contributing guide",
         },
         {
           id: "security",
-          href: "https://github.com/7xuanlu/wenlan/blob/main/SECURITY.md",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/SECURITY.md",
           label: "Security policy",
         },
       ],
@@ -1087,7 +1087,7 @@ export const enContent = {
         primary: { id: "get-started", href: "/docs/get-started", label: "Get started" },
         secondary: {
           id: "github",
-          href: "https://github.com/7xuanlu/wenlan",
+          href: "https://github.com/wenlan-app/wenlan",
           label: "View on GitHub",
         },
       },
@@ -1150,8 +1150,8 @@ export const enContent = {
         },
         {
           id: "github",
-          href: "https://github.com/7xuanlu/wenlan",
-          label: "GitHub: 7xuanlu/wenlan",
+          href: "https://github.com/wenlan-app/wenlan",
+          label: "GitHub: wenlan-app/wenlan",
           description: "Source code, issues, and releases. Apache-2.0.",
         },
         {
@@ -1161,7 +1161,7 @@ export const enContent = {
           description: "Install the CLI and MCP server from npm.",
         },
       ],
-      footnote: "Official links only. Everything here lives on wenlan.app, github.com/7xuanlu, or npmjs.com.",
+      footnote: "Official links only. Everything here lives on wenlan.app, github.com/wenlan-app, or npmjs.com.",
     },
   },
   docs: {
@@ -1652,7 +1652,7 @@ export const enContent = {
         primary: { id: "daily-workflow", href: "/docs/daily-workflow", label: "Daily workflow" },
         secondary: {
           id: "github",
-          href: "https://github.com/7xuanlu/wenlan",
+          href: "https://github.com/wenlan-app/wenlan",
           label: "GitHub",
         },
       },
@@ -1701,18 +1701,18 @@ export const enContent = {
           ],
           commands: [
             "# macOS Apple silicon\nnpx -y wenlan setup",
-            "# Linux x64 or ARM64\ncurl -fsSL https://raw.githubusercontent.com/7xuanlu/wenlan/main/install.sh | bash\nwenlan setup --basic\nwenlan background on\nwenlan status",
+            "# Linux x64 or ARM64\ncurl -fsSL https://raw.githubusercontent.com/wenlan-app/wenlan/main/install.sh | bash\nwenlan setup --basic\nwenlan background on\nwenlan status",
             "# Windows x64, after extracting the ZIP and adding it to PATH\nwenlan setup --basic\nwenlan background on\nwenlan status"
           ],
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16/wenlan-windows-x64.zip",
+              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16/wenlan-windows-x64.zip",
               label: "Download Windows x64"
             },
             {
               id: "all-downloads",
-              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.18.16",
+              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.18.16",
               label: "All v0.18.16 downloads"
             }
           ]
@@ -1726,7 +1726,7 @@ export const enContent = {
             "Restart Claude Code if prompted, then run /wenlan:setup to check the connection. The first setup may need a few minutes to download the search model."
           ],
           commands: [
-            "/plugin marketplace add 7xuanlu/wenlan",
+            "/plugin marketplace add wenlan-app/wenlan",
             "/plugin install wenlan@7xuanlu-wenlan",
             "/wenlan:setup"
           ],
@@ -1741,7 +1741,7 @@ export const enContent = {
             "Start a new Codex task and run /setup. If you only want MCP tools, wenlan connect codex is an alternative; it does not install the Wenlan slash skills."
           ],
           commands: [
-            "codex plugin marketplace add 7xuanlu/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan"
+            "codex plugin marketplace add wenlan-app/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan"
           ],
           ctas: []
         },
@@ -1929,11 +1929,11 @@ export const enContent = {
             { id: "roadmap", href: "/docs/roadmap", label: "Roadmap" },
             { id: "project-scope", href: "/docs/project-scope", label: "Project scope" },
             { id: "security", href: "/docs/security", label: "Security" },
-            { id: "github", href: "https://github.com/7xuanlu/wenlan", label: "GitHub" },
+            { id: "github", href: "https://github.com/wenlan-app/wenlan", label: "GitHub" },
             { id: "rss", href: "/feed.xml", label: "RSS feed" },
             {
               id: "license",
-              href: "https://github.com/7xuanlu/wenlan/blob/main/LICENSE",
+              href: "https://github.com/wenlan-app/wenlan/blob/main/LICENSE",
               label: "Apache-2.0",
             },
           ],

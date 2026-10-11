@@ -100,12 +100,12 @@ wenlan-types        Shared HTTP/MCP wire types
 GitHub Releases     Stable binaries, tags, and release notes`;
 
 const packageInstallPaths = `# Codex plugin (recommended)
-codex plugin marketplace add 7xuanlu/wenlan
+codex plugin marketplace add wenlan-app/wenlan
 codex plugin add wenlan@7xuanlu-wenlan
 # Start a new task, then run /setup
 
 # Claude Code
-/plugin marketplace add 7xuanlu/wenlan
+/plugin marketplace add wenlan-app/wenlan
 /plugin install wenlan@7xuanlu-wenlan
 /wenlan:setup
 
@@ -135,7 +135,7 @@ feat:             minor release before 1.0
 BREAKING CHANGE:  minor release before 1.0
 docs/test/chore:  no release entry by default`;
 
-const pluginInstallCommands = `/plugin marketplace add 7xuanlu/wenlan
+const pluginInstallCommands = `/plugin marketplace add wenlan-app/wenlan
 /plugin install wenlan@7xuanlu-wenlan
 # restart Claude Code if prompted
 /wenlan:setup`;
@@ -187,8 +187,8 @@ const productSurfaceBullets = [
   "daemon/runtime - owner: wenlan; released source of truth; run npx -y wenlan setup; verify with ~/.wenlan/bin/wenlan status.",
   "CLI - owner: wenlan; released with the runtime; run ~/.wenlan/bin/wenlan doctor before debugging clients.",
   "MCP connector - owner: wenlan; released as wenlan-mcp; run wenlan connect <client>; verify with wenlan connect codex --dry-run.",
-  "Claude Code plugin - owner: wenlan; released plugin workflow; install from 7xuanlu/wenlan as wenlan@7xuanlu-wenlan; verify with /wenlan:setup.",
-  "Codex plugin - owner: wenlan; primary Codex workflow; install with codex plugin marketplace add 7xuanlu/wenlan and codex plugin add wenlan@7xuanlu-wenlan; start a new task and run /setup.",
+  "Claude Code plugin - owner: wenlan; released plugin workflow; install from wenlan-app/wenlan as wenlan@7xuanlu-wenlan; verify with /wenlan:setup.",
+  "Codex plugin - owner: wenlan; primary Codex workflow; install with codex plugin marketplace add wenlan-app/wenlan and codex plugin add wenlan@7xuanlu-wenlan; start a new task and run /setup.",
   "ChatGPT and Claude.ai remote MCP - owner: wenlan; released authenticated Streamable HTTP endpoint with Space-scoped OAuth pairing through desktop Web Access; verify the authorized client and selected Space.",
   "other MCP clients - owner: wenlan; client-specific config; run wenlan connect cursor or the matching client; restart the client, then call context.",
   "optional desktop app - owner: wenlan app/ crate; optional daemon client in the unified release; verify the app talks to localhost:7878.",
@@ -416,7 +416,7 @@ const typedClientInstall = `cargo add wenlan-types
 # then use the shared request/response structs
 # instead of passing untyped JSON through your tool`;
 
-const buildFromSourceCommands = `git clone https://github.com/7xuanlu/wenlan.git
+const buildFromSourceCommands = `git clone https://github.com/wenlan-app/wenlan.git
 cd wenlan
 cargo build --workspace
 cargo run -p wenlan-server
@@ -1095,7 +1095,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "View the source repository",
-          href: "https://github.com/7xuanlu/wenlan",
+          href: "https://github.com/wenlan-app/wenlan",
         },
       },
     ],
@@ -1640,7 +1640,7 @@ export const docPages: DocPage[] = [
         ],
         code: {
           label: "Claude Code",
-          code: "/plugin marketplace add 7xuanlu/wenlan\n/plugin install wenlan@7xuanlu-wenlan\n/wenlan:setup",
+          code: "/plugin marketplace add wenlan-app/wenlan\n/plugin install wenlan@7xuanlu-wenlan\n/wenlan:setup",
         },
       },
       {
@@ -3184,7 +3184,7 @@ export const docPages: DocPage[] = [
         ],
         code: {
           label: "Claude Code",
-          code: "/plugin marketplace add 7xuanlu/wenlan\n/plugin install wenlan@7xuanlu-wenlan\n/wenlan:setup",
+          code: "/plugin marketplace add wenlan-app/wenlan\n/plugin install wenlan@7xuanlu-wenlan\n/wenlan:setup",
         },
       },
       {
@@ -3194,7 +3194,7 @@ export const docPages: DocPage[] = [
         ],
         code: {
           label: "Terminal",
-          code: "codex plugin marketplace add 7xuanlu/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan",
+          code: "codex plugin marketplace add wenlan-app/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan",
         },
       },
       {
@@ -3386,7 +3386,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Open a GitHub issue",
-          href: "https://github.com/7xuanlu/wenlan/issues",
+          href: "https://github.com/wenlan-app/wenlan/issues",
         },
       },
     ],
@@ -3456,7 +3456,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Open a GitHub issue",
-          href: "https://github.com/7xuanlu/wenlan/issues",
+          href: "https://github.com/wenlan-app/wenlan/issues",
         },
       },
       {
@@ -3616,7 +3616,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Open a private advisory",
-          href: "https://github.com/7xuanlu/wenlan/security/advisories/new",
+          href: "https://github.com/wenlan-app/wenlan/security/advisories/new",
         },
       },
       {
@@ -3724,7 +3724,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Open eval docs on GitHub",
-          href: "https://github.com/7xuanlu/wenlan/tree/main/docs/eval",
+          href: "https://github.com/wenlan-app/wenlan/tree/main/docs/eval",
         },
       },
     ],
@@ -3777,7 +3777,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Open the app source",
-          href: "https://github.com/7xuanlu/wenlan/tree/v0.18.16/app",
+          href: "https://github.com/wenlan-app/wenlan/tree/v0.18.16/app",
         },
       },
       {
@@ -4010,7 +4010,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "View full changelog",
-          href: "https://github.com/7xuanlu/wenlan/blob/main/CHANGELOG.md",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/CHANGELOG.md",
         },
       },
     ],
@@ -4165,7 +4165,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Open current GitHub issues",
-          href: "https://github.com/7xuanlu/wenlan/issues",
+          href: "https://github.com/wenlan-app/wenlan/issues",
         },
       },
     ],
@@ -4299,7 +4299,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Read CONTRIBUTING.md",
-          href: "https://github.com/7xuanlu/wenlan/blob/main/CONTRIBUTING.md",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/CONTRIBUTING.md",
         },
       },
     ],
@@ -4542,7 +4542,7 @@ export const docPages: DocPage[] = [
         ],
         code: {
           label: "Local development",
-          code: "git clone https://github.com/7xuanlu/wenlan.git\ncd wenlan\ncargo build --workspace\ncargo run -p wenlan-server",
+          code: "git clone https://github.com/wenlan-app/wenlan.git\ncd wenlan\ncargo build --workspace\ncargo run -p wenlan-server",
         },
       },
       {
@@ -4574,7 +4574,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Read CONTRIBUTING.md",
-          href: "https://github.com/7xuanlu/wenlan/blob/main/CONTRIBUTING.md",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/CONTRIBUTING.md",
         },
       },
       {
@@ -4585,7 +4585,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Read the Code of Conduct",
-          href: "https://github.com/7xuanlu/wenlan/blob/main/CODE_OF_CONDUCT.md",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/CODE_OF_CONDUCT.md",
         },
       },
     ],

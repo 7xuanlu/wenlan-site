@@ -106,6 +106,13 @@ async function readTaggedFile(repo, tag, path) {
   return stdout;
 }
 
+// The updater endpoint is read from the tagged source repo. Tags cut before the
+// 7xuanlu/wenlan -> wenlan-app/wenlan transfer (through v0.18.16) still carry the old owner.
+const UPDATER_ENDPOINTS = [
+  "https://github.com/wenlan-app/wenlan/releases/latest/download/latest.json",
+  "https://github.com/7xuanlu/wenlan/releases/latest/download/latest.json",
+];
+
 async function currentWenlanAppRelease() {
   const appRoot = process.env.WENLAN_REPO_ROOT
     ? resolve(process.env.WENLAN_REPO_ROOT)
@@ -146,9 +153,7 @@ async function currentWenlanAppRelease() {
     ),
   );
   assert.ok(
-    tauri.plugins.updater.endpoints.includes(
-      "https://github.com/7xuanlu/wenlan/releases/latest/download/latest.json",
-    ),
+    tauri.plugins.updater.endpoints.some((endpoint) => UPDATER_ENDPOINTS.includes(endpoint)),
   );
 
   return {
@@ -156,7 +161,7 @@ async function currentWenlanAppRelease() {
     releaseRef,
     version,
     tag: releaseRef,
-    repository: "https://github.com/7xuanlu/wenlan",
+    repository: "https://github.com/wenlan-app/wenlan",
     updaterEndpoint: tauri.plugins.updater.endpoints[0],
   };
 }
@@ -236,16 +241,13 @@ test("Wenlan unified release metadata exposes the version-locked desktop app", a
   assert.equal(app.tag, publishedTag);
   assert.match(app.version, /^\d+\.\d+\.\d+$/);
   assert.match(app.tag, /^v\d+\.\d+\.\d+$/);
-  assert.equal(app.repository, "https://github.com/7xuanlu/wenlan");
-  assert.equal(
-    app.updaterEndpoint,
-    "https://github.com/7xuanlu/wenlan/releases/latest/download/latest.json",
-  );
+  assert.equal(app.repository, "https://github.com/wenlan-app/wenlan");
+  assert.ok(UPDATER_ENDPOINTS.includes(app.updaterEndpoint), app.updaterEndpoint);
 });
 
 test("public desktop-app surfaces track the unified Wenlan source facts", async () => {
   const app = await currentWenlanAppRelease();
-  const appSourceUrl = `https://github.com/7xuanlu/wenlan/tree/${app.tag}/app`;
+  const appSourceUrl = `https://github.com/wenlan-app/wenlan/tree/${app.tag}/app`;
   const appSourcePath = appSourceUrl.replace("https://", "");
   const docs = await readRepo("src/app/docs/docs.ts");
   const structuredData = await readRepo("src/app/structured-data.ts");

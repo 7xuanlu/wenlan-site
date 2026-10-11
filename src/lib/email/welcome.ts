@@ -52,7 +52,7 @@ type WelcomeEmailCopy = {
 };
 
 const BASE_URL = "https://wenlan.app";
-const GITHUB_URL = "https://github.com/7xuanlu/wenlan";
+const GITHUB_URL = "https://github.com/wenlan-app/wenlan";
 
 const LOCALE_COPY = {
   en: {

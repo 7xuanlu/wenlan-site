@@ -51,8 +51,8 @@ test("deployed release manifests define the website-linked asset contract", () =
     version: "9.8.7",
     tag: "v9.8.7",
     publishedAt: "2026-09-10T12:34:56Z",
-    releaseUrl: "https://github.com/7xuanlu/wenlan/releases/tag/v9.8.7",
-    setupGuideUrl: "https://github.com/7xuanlu/wenlan/blob/v9.8.7/docs/setup-with-ai.md#install-the-runtime",
+    releaseUrl: "https://github.com/wenlan-app/wenlan/releases/tag/v9.8.7",
+    setupGuideUrl: "https://github.com/wenlan-app/wenlan/blob/v9.8.7/docs/setup-with-ai.md#install-the-runtime",
     assets: [
       ["windows-desktop-x64", "Wenlan_9.8.7_x64-setup.exe"],
       ["windows-x64", "wenlan-windows-x64.zip"],
@@ -62,7 +62,7 @@ test("deployed release manifests define the website-linked asset contract", () =
       ["linux-arm64", "wenlan-linux-arm64.tar.gz"],
     ].map(([id, name]) => ({
       id,
-      href: `https://github.com/7xuanlu/wenlan/releases/download/v9.8.7/${name}`,
+      href: `https://github.com/wenlan-app/wenlan/releases/download/v9.8.7/${name}`,
       format: "ZIP",
       size: "1.0 MiB",
     })),
@@ -100,8 +100,8 @@ test("GitHub metadata links downloads to the deployed manifest rather than the b
     version: "9.8.7",
     tag: "v9.8.7",
     publishedAt: "2026-09-10T12:34:56Z",
-    releaseUrl: "https://github.com/7xuanlu/wenlan/releases/tag/v9.8.7",
-    setupGuideUrl: "https://github.com/7xuanlu/wenlan/blob/v9.8.7/docs/setup-with-ai.md#install-the-runtime",
+    releaseUrl: "https://github.com/wenlan-app/wenlan/releases/tag/v9.8.7",
+    setupGuideUrl: "https://github.com/wenlan-app/wenlan/blob/v9.8.7/docs/setup-with-ai.md#install-the-runtime",
     assets: [
       ["windows-desktop-x64", "Wenlan_9.8.7_x64-setup.exe"],
       ["windows-x64", "wenlan-windows-x64.zip"],
@@ -111,10 +111,10 @@ test("GitHub metadata links downloads to the deployed manifest rather than the b
       ["linux-arm64", "wenlan-linux-arm64.tar.gz"],
     ].map(([id, name], index) => ({
       id,
-      href: `https://github.com/7xuanlu/wenlan/releases/download/v9.8.7/${name}`,
+      href: `https://github.com/wenlan-app/wenlan/releases/download/v9.8.7/${name}`,
       format: "ZIP",
       size: "1.0 MiB",
-      ...(index === 0 || index === 2 ? { guideHref: "https://github.com/7xuanlu/wenlan/blob/v9.8.7/README.md#desktop-app" } : {}),
+      ...(index === 0 || index === 2 ? { guideHref: "https://github.com/wenlan-app/wenlan/blob/v9.8.7/README.md#desktop-app" } : {}),
     })),
   };
   const contract = releaseContractFromManifest(manifest);
@@ -208,11 +208,11 @@ test("GitHub credentials are attached only to the official API origin", () => {
   process.env.GITHUB_TOKEN = "must-not-leak";
   try {
     assert.equal(
-      githubHeaders("https://api.github.com/repos/7xuanlu/wenlan").Authorization,
+      githubHeaders("https://api.github.com/repos/wenlan-app/wenlan").Authorization,
       "Bearer must-not-leak",
     );
     assert.equal(
-      githubHeaders("https://example.com/repos/7xuanlu/wenlan").Authorization,
+      githubHeaders("https://example.com/repos/wenlan-app/wenlan").Authorization,
       undefined,
     );
   } finally {

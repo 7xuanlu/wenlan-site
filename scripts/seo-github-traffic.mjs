@@ -6,7 +6,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const exec = promisify(execFile);
-const REPO = "7xuanlu/wenlan";
+const REPO = "wenlan-app/wenlan";
 
 export async function githubTrafficSnapshot(read, capturedAt = new Date().toISOString()) {
   const observations = {};

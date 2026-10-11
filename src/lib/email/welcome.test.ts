@@ -7,7 +7,7 @@ const EXPECTED_LINKS = [
   "https://wenlan.app/zh-TW",
   "https://wenlan.app/zh-TW/docs",
   "https://wenlan.app/zh-TW/docs/get-started",
-  "https://github.com/7xuanlu/wenlan",
+  "https://github.com/wenlan-app/wenlan",
 ] as const;
 
 const LOCALE_EXPECTATIONS = {
@@ -18,7 +18,7 @@ const LOCALE_EXPECTATIONS = {
       "https://wenlan.app/",
       "https://wenlan.app/docs",
       "https://wenlan.app/docs/get-started",
-      "https://github.com/7xuanlu/wenlan",
+      "https://github.com/wenlan-app/wenlan",
     ],
     content: [
       "Welcome to Wenlan",
@@ -53,7 +53,7 @@ const LOCALE_EXPECTATIONS = {
       "https://wenlan.app/zh-CN",
       "https://wenlan.app/zh-CN/docs",
       "https://wenlan.app/zh-CN/docs/get-started",
-      "https://github.com/7xuanlu/wenlan",
+      "https://github.com/wenlan-app/wenlan",
     ],
     content: [
       "欢迎来到文澜",

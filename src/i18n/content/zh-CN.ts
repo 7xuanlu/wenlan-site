@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "26c7e90a1b38125e602cb5ede6624e646d87b54534370e1818e7a1b16622e8e5",
+    sourceHash: "62309e118a3f79dfc526f412a783fdda00973bb2e4f9558b76279b0ee05f16c1",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库",
@@ -31,7 +31,7 @@ export const zhCNContent = {
           { id: "docs", href: "/docs", label: "文档" },
           { id: "learn", href: "/learn", label: "学习" },
           { id: "about", href: "/about", label: "关于" },
-          { id: "github", href: "https://github.com/7xuanlu/wenlan", label: "GitHub" },
+          { id: "github", href: "https://github.com/wenlan-app/wenlan", label: "GitHub" },
         ],
       },
       hero: {
@@ -41,7 +41,7 @@ export const zhCNContent = {
         primaryCta: { id: "download", href: "#download", label: "下载 Wenlan" },
         secondaryCta: {
           id: "github",
-          href: "https://github.com/7xuanlu/wenlan",
+          href: "https://github.com/wenlan-app/wenlan",
           label: "在 GitHub 查看",
         },
         metaText: [
@@ -396,7 +396,7 @@ export const zhCNContent = {
           primaryCta: { id: "download", href: "#download", label: "下载 Wenlan" },
           secondaryCta: {
             id: "github",
-            href: "https://github.com/7xuanlu/wenlan",
+            href: "https://github.com/wenlan-app/wenlan",
             label: "在 GitHub 查看",
           },
           waitlistHeading: "订阅 Wenlan 的版本更新。",
@@ -450,7 +450,7 @@ export const zhCNContent = {
           "固定 fixture 上的 retrieval-only snapshots。LME_Oracle 也记录 0.857 MRR；LME_S 在 90-question deep-S fixture 的 84 个可评分 rows 上记录 0.815 MRR。这不是一般的时间或 token 节省保证，也不是 Wenlan 与其他工具的比较。Token 对比只限于这项 retrieval 测试中的完整重放与 retrieved context。",
         link: {
           id: "harness",
-          href: "https://github.com/7xuanlu/wenlan/tree/main/crates/wenlan-core/src/eval",
+          href: "https://github.com/wenlan-app/wenlan/tree/main/crates/wenlan-core/src/eval",
           label: "自己运行 harness。",
         },
       },
@@ -658,7 +658,7 @@ export const zhCNContent = {
                 },
                 {
                   "label": "Wenlan 单元记忆与页面依据",
-                  "href": "https://github.com/7xuanlu/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/db.rs#L31034-L31143"
+                  "href": "https://github.com/wenlan-app/wenlan/blob/af646ddcf705ee7450335a8772a8cb196f89a3a1/crates/wenlan-core/src/db.rs#L31034-L31143"
                 }
               ],
               "wenlan": {
@@ -854,7 +854,7 @@ export const zhCNContent = {
               },
               {
                 "label": "Wenlan 仓库：这是什么？",
-                "href": "https://github.com/7xuanlu/wenlan#what-is-this"
+                "href": "https://github.com/wenlan-app/wenlan#what-is-this"
               }
             ]
           },
@@ -972,7 +972,7 @@ export const zhCNContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "38b47f85f0574c5dbb40203931bb1056effd65d2e3fa801a016b1fa14955e522",
+    sourceHash: "d4494dd9ba71a982ced9063f14bbe2750ace3a07b1927084cb5ec74a96bd5e87",
     content: {
       seo: {
         title: "关于文澜 Wenlan：开源、本地优先的个人 AI 知识库",
@@ -1049,22 +1049,22 @@ export const zhCNContent = {
       projectLinks: [
         {
           id: "repository",
-          href: "https://github.com/7xuanlu/wenlan",
+          href: "https://github.com/wenlan-app/wenlan",
           label: "GitHub 代码库",
         },
         {
           id: "license",
-          href: "https://github.com/7xuanlu/wenlan/blob/main/LICENSE",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/LICENSE",
           label: "Apache-2.0 授权",
         },
         {
           id: "contributing",
-          href: "https://github.com/7xuanlu/wenlan/blob/main/CONTRIBUTING.md",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/CONTRIBUTING.md",
           label: "贡献指南",
         },
         {
           id: "security",
-          href: "https://github.com/7xuanlu/wenlan/blob/main/SECURITY.md",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/SECURITY.md",
           label: "安全政策",
         },
       ],
@@ -1082,7 +1082,7 @@ export const zhCNContent = {
         primary: { id: "get-started", href: "/docs/get-started", label: "开始使用" },
         secondary: {
           id: "github",
-          href: "https://github.com/7xuanlu/wenlan",
+          href: "https://github.com/wenlan-app/wenlan",
           label: "在 GitHub 查看",
         },
       },
@@ -1095,7 +1095,7 @@ export const zhCNContent = {
   },
   links: {
     status: "translated",
-    sourceHash: "85dd8a1863ef958463701807aaeb4ddc89e97a3d132a9039ecd7f4b81c700723",
+    sourceHash: "4fd29a2bf2a7ee61a3edd2da63bd58ae2b3d4f5e209826512d8136aaba436075",
     content: {
       seo: {
         title: "文澜链接：安装、GitHub 与文档",
@@ -1145,8 +1145,8 @@ export const zhCNContent = {
         },
         {
           id: "github",
-          href: "https://github.com/7xuanlu/wenlan",
-          label: "GitHub：7xuanlu/wenlan",
+          href: "https://github.com/wenlan-app/wenlan",
+          label: "GitHub：wenlan-app/wenlan",
           description: "源代码、议题与版本发布。Apache-2.0。",
         },
         {
@@ -1156,12 +1156,12 @@ export const zhCNContent = {
           description: "从 npm 安装 CLI 与 MCP server。",
         },
       ],
-      footnote: "只收录官方链接。这里的每一站都在 wenlan.app、github.com/7xuanlu 或 npmjs.com 上。",
+      footnote: "只收录官方链接。这里的每一站都在 wenlan.app、github.com/wenlan-app 或 npmjs.com 上。",
     },
   },
   docs: {
     status: "translated",
-    sourceHash: "bd9f9a5d70d1e6b6867f2f81dc3d646f087aa423019a1dd51cc728d2232e11f9",
+    sourceHash: "ca8dfdb99b250d993a36180a4465eacc2be502e87c5a8ba561a046c372409960",
     content: {
       seo: {
         title: "文澜 Wenlan 文档：安装、工作流程与参考",
@@ -1647,7 +1647,7 @@ export const zhCNContent = {
         primary: { id: "daily-workflow", href: "/docs/daily-workflow", label: "每日工作流程" },
         secondary: {
           id: "github",
-          href: "https://github.com/7xuanlu/wenlan",
+          href: "https://github.com/wenlan-app/wenlan",
           label: "GitHub",
         },
       },
@@ -1659,7 +1659,7 @@ export const zhCNContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "8b54c6274d53ceaa371cfda9dfefc2733d1166f0d30bda38792046a12fa76f88",
+    sourceHash: "7954816c15aa13ac99257b9ea2189e3c394723734cfc40363a6f40d2f3281128",
     content: {
       seo: {
         title: "安装文澜 Wenlan：Claude Code、Codex、ChatGPT 与 MCP",
@@ -1696,18 +1696,18 @@ export const zhCNContent = {
           ],
           commands: [
             "# macOS Apple silicon\nnpx -y wenlan setup",
-            "# Linux x64 或 ARM64\ncurl -fsSL https://raw.githubusercontent.com/7xuanlu/wenlan/main/install.sh | bash\nwenlan setup --basic\nwenlan background on\nwenlan status",
+            "# Linux x64 或 ARM64\ncurl -fsSL https://raw.githubusercontent.com/wenlan-app/wenlan/main/install.sh | bash\nwenlan setup --basic\nwenlan background on\nwenlan status",
             "# Windows x64：解压 ZIP 并加入 PATH 后\nwenlan setup --basic\nwenlan background on\nwenlan status"
           ],
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/7xuanlu/wenlan/releases/download/v0.18.16/wenlan-windows-x64.zip",
+              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16/wenlan-windows-x64.zip",
               label: "下载 Windows x64"
             },
             {
               id: "all-downloads",
-              href: "https://github.com/7xuanlu/wenlan/releases/tag/v0.18.16",
+              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.18.16",
               label: "全部 v0.18.16 下载"
             }
           ]
@@ -1721,7 +1721,7 @@ export const zhCNContent = {
             "如果出现提示，请重启 Claude Code，再运行 /wenlan:setup 检查连接。首次设置可能需要几分钟下载搜索模型。"
           ],
           commands: [
-            "/plugin marketplace add 7xuanlu/wenlan",
+            "/plugin marketplace add wenlan-app/wenlan",
             "/plugin install wenlan@7xuanlu-wenlan",
             "/wenlan:setup"
           ],
@@ -1736,7 +1736,7 @@ export const zhCNContent = {
             "安装后打开新的 Codex 对话，运行 /setup。如果只需要 MCP 工具，也可以改用 wenlan connect codex；这种方式不会添加 Wenlan 的斜杠命令。"
           ],
           commands: [
-            "codex plugin marketplace add 7xuanlu/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan"
+            "codex plugin marketplace add wenlan-app/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan"
           ],
           ctas: []
         },
@@ -1878,7 +1878,7 @@ export const zhCNContent = {
   },
   footer: {
     status: "translated",
-    sourceHash: "e022239f60bb10661cc1abf6dbac2c239c0f8256d63bd169d92cd7913b2ba82c",
+    sourceHash: "20b2acec4cac24e2483e28738e2cbecc0474cbeda6448bce117fdcc12c79331c",
     content: {
       ariaLabel: "网站页脚",
       brand: "Wenlan",
@@ -1924,11 +1924,11 @@ export const zhCNContent = {
             { id: "roadmap", href: "/docs/roadmap", label: "路线图" },
             { id: "project-scope", href: "/docs/project-scope", label: "项目范围" },
             { id: "security", href: "/docs/security", label: "安全" },
-            { id: "github", href: "https://github.com/7xuanlu/wenlan", label: "GitHub" },
+            { id: "github", href: "https://github.com/wenlan-app/wenlan", label: "GitHub" },
             { id: "rss", href: "/feed.xml", label: "RSS 订阅" },
             {
               id: "license",
-              href: "https://github.com/7xuanlu/wenlan/blob/main/LICENSE",
+              href: "https://github.com/wenlan-app/wenlan/blob/main/LICENSE",
               label: "Apache-2.0",
             },
           ],

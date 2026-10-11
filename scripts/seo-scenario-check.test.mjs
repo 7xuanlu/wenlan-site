@@ -195,7 +195,7 @@ test("research knowledge-base family records its published README authority", ()
   assert.ok(family, "research knowledge-base scenario family");
   assert.equal(family.publicationStatus, "measuring");
   assert.equal(family.authorityPath.status, "published");
-  assert.match(family.authorityPath.target, /7xuanlu\/wenlan\/pull\/624/);
+  assert.match(family.authorityPath.target, /wenlan-app\/wenlan\/pull\/624/);
   assert.match(family.authorityPath.target, /368fabcf667736e1b116dac8a9e79b017ae4d6bf/);
   assert.match(family.nextResearchDirection, /do not reapply the stale proposal patch/i);
   assert.match(family.nextResearchDirection, /2026-09-04T03:49:51Z/);

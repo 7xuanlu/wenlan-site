@@ -1,6 +1,6 @@
 # Security Policy
 
-This is the security policy for the **wenlan-site** repo, which hosts the marketing + docs source for [wenlan.app](https://wenlan.app). The Wenlan product (daemon, CLI, MCP server) has its own policy in [7xuanlu/wenlan/SECURITY.md](https://github.com/7xuanlu/wenlan/blob/main/SECURITY.md).
+This is the security policy for the **wenlan-site** repo, which hosts the marketing + docs source for [wenlan.app](https://wenlan.app). The Wenlan product (daemon, CLI, MCP server) has its own policy in [wenlan-app/wenlan/SECURITY.md](https://github.com/wenlan-app/wenlan/blob/main/SECURITY.md).
 
 ## Reporting a vulnerability
 
@@ -18,7 +18,7 @@ Use any of these channels. Do not file public issues for vulnerabilities.
 
 ## What's out of scope
 
-- The Wenlan product binaries, daemon, CLI, MCP server (file those at [7xuanlu/wenlan](https://github.com/7xuanlu/wenlan/security)).
+- The Wenlan product binaries, daemon, CLI, MCP server (file those at [wenlan-app/wenlan](https://github.com/wenlan-app/wenlan/security)).
 - Third-party services we link to (GitHub, npm, crates.io, Vercel, YouTube).
 - Reports that require physical access, social engineering, or compromise of unrelated accounts.
 

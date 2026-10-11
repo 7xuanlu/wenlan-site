@@ -351,7 +351,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
                   useful.
                 </p>
                 <TrackedLink
-                  href="https://github.com/7xuanlu/wenlan"
+                  href="https://github.com/wenlan-app/wenlan"
                   eventName="github_outbound"
                   placement="docs-article"
                   locale="en"

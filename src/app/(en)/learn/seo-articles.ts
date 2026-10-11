@@ -451,7 +451,7 @@ const workflowArticles: BaseSpec[] = [
       },
       {
         label: "Wenlan setup with AI clients",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/docs/setup-with-ai.md",
       },
       {
         label: "Wenlan source-backed Pages",
@@ -571,8 +571,8 @@ const workflowArticles: BaseSpec[] = [
       "Do a small round trip before trusting the workflow.",
     actionBullets: [
       "Set up Wenlan once.",
-      "Install the Claude Code plugin with /plugin marketplace add 7xuanlu/wenlan, /plugin install wenlan@7xuanlu-wenlan, then /setup.",
-      "Add the Codex plugin: codex plugin marketplace add 7xuanlu/wenlan, then codex plugin add wenlan@7xuanlu-wenlan, start a new task and run /setup.",
+      "Install the Claude Code plugin with /plugin marketplace add wenlan-app/wenlan, /plugin install wenlan@7xuanlu-wenlan, then /setup.",
+      "Add the Codex plugin: codex plugin marketplace add wenlan-app/wenlan, then codex plugin add wenlan@7xuanlu-wenlan, start a new task and run /setup.",
       "Run both tools from the same repository folder, since Wenlan picks the space from the repo name, or set WENLAN_SPACE for both. Capture a harmless fact in Codex.",
       "Recall that fact from Claude Code with the same space.",
       "Reverse the smoke test: capture in Claude Code, then recall from Codex.",
@@ -581,7 +581,7 @@ const workflowArticles: BaseSpec[] = [
     ],
     code: {
       label: "Codex and Claude Code smoke test",
-      code: "/plugin marketplace add 7xuanlu/wenlan\n/plugin install wenlan@7xuanlu-wenlan\n/setup\ncodex plugin marketplace add 7xuanlu/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan\n# Use the same Wenlan space for both clients during capture and recall.",
+      code: "/plugin marketplace add wenlan-app/wenlan\n/plugin install wenlan@7xuanlu-wenlan\n/setup\ncodex plugin marketplace add wenlan-app/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan\n# Use the same Wenlan space for both clients during capture and recall.",
     },
     caution:
       "Do not use different daemons, data directories, or spaces unless you intentionally want isolated memory stores.",
@@ -603,7 +603,7 @@ const workflowArticles: BaseSpec[] = [
       },
       {
         label: "Wenlan Claude Code plugin",
-        href: "https://github.com/7xuanlu/wenlan/tree/main/plugin",
+        href: "https://github.com/wenlan-app/wenlan/tree/main/plugin",
       },
     ],
   },
@@ -684,15 +684,15 @@ const workflowArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan platform and client setup",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/docs/setup-with-ai.md",
       },
       {
         label: "Wenlan supported document sources",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan sources add CLI",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
       },
       {
         label: "Wenlan source-backed Pages",
@@ -773,7 +773,7 @@ const workflowArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan supported document sources",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan source-backed Pages",
@@ -868,11 +868,11 @@ const workflowArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan knowledge model",
-        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+        href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build",
       },
       {
         label: "Wenlan supported document sources",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan MCP clients",
@@ -969,7 +969,7 @@ const workflowArticles: BaseSpec[] = [
       },
       {
         label: "Wenlan supported document sources",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan source-backed Pages",
@@ -1059,11 +1059,11 @@ const workflowArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan platform and client setup",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/docs/setup-with-ai.md",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/docs/setup-with-ai.md",
       },
       {
         label: "Wenlan CLI and MCP setup",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-cli/README.md",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md",
       },
       {
         label: "Wenlan source-backed Pages",
@@ -1148,11 +1148,11 @@ const consultantClientProjectArticle: BaseSpec = {
   officialReferences: [
     {
       label: "Wenlan knowledge model and Spaces",
-      href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+      href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build",
     },
     {
       label: "Wenlan daily workflow",
-      href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+      href: "https://github.com/wenlan-app/wenlan#daily-workflow",
     },
     {
       label: "Cogni Consult client-delivery workspace",
@@ -1243,7 +1243,7 @@ const investmentResearchKnowledgeBaseArticle: BaseSpec = {
   officialReferences: [
     {
       label: "Wenlan supported document sources",
-      href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
     },
     {
       label: "Wenlan source-backed Pages",
@@ -1727,7 +1727,7 @@ const trustArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan knowledge lifecycle",
-        href: "https://github.com/7xuanlu/wenlan#how-knowledge-stays-current",
+        href: "https://github.com/wenlan-app/wenlan#how-knowledge-stays-current",
       },
       {
         label: "Wenlan review and trust guide",
@@ -1821,15 +1821,15 @@ const trustArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan supported document sources",
-        href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
       },
       {
         label: "Wenlan directory ingestion source and limits",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/src/sources/directory.rs",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-core/src/sources/directory.rs",
       },
       {
         label: "Wenlan folder-ingestion acceptance test",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/tests/folder_ingest_e2e.rs",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-core/tests/folder_ingest_e2e.rs",
       },
       {
         label: "Google Cloud PDF OCR and layout parsing",
@@ -2123,11 +2123,11 @@ const trustArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan knowledge model",
-        href: "https://github.com/7xuanlu/wenlan#what-does-wenlan-build",
+        href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build",
       },
       {
         label: "Wenlan daily workflow",
-        href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+        href: "https://github.com/wenlan-app/wenlan#daily-workflow",
       },
       {
         label: "Wenlan review and trust guide",
@@ -2197,15 +2197,15 @@ const trustArticles: BaseSpec[] = [
       },
       {
         label: "Wenlan curate workflow",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/plugin/skills/curate/SKILL.md",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/plugin/skills/curate/SKILL.md",
       },
       {
         label: "Wenlan lint workflow",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/plugin/skills/lint/SKILL.md",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/plugin/skills/lint/SKILL.md",
       },
       {
         label: "Wenlan forget workflow",
-        href: "https://github.com/7xuanlu/wenlan/blob/main/plugin/skills/forget/SKILL.md",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/plugin/skills/forget/SKILL.md",
       },
     ],
   },
@@ -2327,7 +2327,7 @@ const retrievalRegressionArticle: LearnArticle = {
     },
     {
       label: "Wenlan retrieval drift source",
-      href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-core/src/eval/retrieval_drift.rs",
+      href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-core/src/eval/retrieval_drift.rs",
     },
     {
       label: "Haystack retrieval debugging discussion",
@@ -2474,7 +2474,7 @@ const sreIncidentKnowledgeBaseArticle: BaseSpec = {
   officialReferences: [
     {
       label: "Wenlan supported document sources",
-      href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
     },
     {
       label: "Wenlan review and trust",
@@ -2624,7 +2624,7 @@ const competitiveIntelligenceKnowledgeBaseArticle: BaseSpec = {
   officialReferences: [
     {
       label: "Wenlan supported document sources",
-      href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
     },
     {
       label: "Wenlan source-backed Pages",
@@ -2781,7 +2781,7 @@ const ictSupplierDueDiligenceArticle: BaseSpec = {
   officialReferences: [
     {
       label: "Wenlan supported document sources",
-      href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
     },
     {
       label: "Wenlan source-backed Pages",
@@ -2931,11 +2931,11 @@ const customerSupportAnswerKnowledgeBaseArticle: BaseSpec = {
   officialReferences: [
     {
       label: "Wenlan supported document sources",
-      href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
     },
     {
       label: "Wenlan sources add CLI",
-      href: "https://github.com/7xuanlu/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+      href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
     },
     {
       label: "Wenlan source-backed Pages",
@@ -3078,7 +3078,7 @@ const courseWikiFromLectureNotesArticle: BaseSpec = {
   officialReferences: [
     {
       label: "Wenlan supported document sources",
-      href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
     },
     {
       label: "Wenlan source-backed Pages",
@@ -3225,7 +3225,7 @@ const businessMetricDefinitionKnowledgeBaseArticle: BaseSpec = {
   officialReferences: [
     {
       label: "Wenlan supported document sources",
-      href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
     },
     {
       label: "Wenlan source-backed Pages",
@@ -3413,7 +3413,7 @@ const productResearchArticle: LearnArticle = {
   officialReferences: [
     {
       label: "Wenlan supported document sources",
-      href: "https://github.com/7xuanlu/wenlan#what-can-i-bring-in",
+      href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
     },
     {
       label: "Wenlan source-backed Pages",
@@ -3425,7 +3425,7 @@ const productResearchArticle: LearnArticle = {
     },
     {
       label: "Wenlan daily workflow",
-      href: "https://github.com/7xuanlu/wenlan#daily-workflow",
+      href: "https://github.com/wenlan-app/wenlan#daily-workflow",
     },
   ],
   cta: {

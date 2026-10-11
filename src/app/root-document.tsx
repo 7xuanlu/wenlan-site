@@ -91,7 +91,7 @@ export default function RootDocument({
               publisher: { "@id": "https://wenlan.app/#organization" },
               copyrightHolder: { "@id": "https://wenlan.app/#qixuan-lu" },
               copyrightYear: 2026,
-              license: "https://github.com/7xuanlu/wenlan/blob/main/LICENSE",
+              license: "https://github.com/wenlan-app/wenlan/blob/main/LICENSE",
             }),
           }}
         />
@@ -118,7 +118,7 @@ export default function RootDocument({
                 sameAs: ["https://github.com/7xuanlu"],
               },
               sameAs: [
-                "https://github.com/7xuanlu/wenlan",
+                "https://github.com/wenlan-app/wenlan",
                 "https://github.com/7xuanlu",
                 "https://www.npmjs.com/package/wenlan",
                 "https://www.npmjs.com/package/wenlan-mcp",

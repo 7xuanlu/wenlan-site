@@ -15,4 +15,4 @@ Standards: HTML5, CSS, JSON-LD, IndexNow, llmstxt.org
 Components: Next.js 16 (App Router), React 19, Tailwind CSS 4, TypeScript
 Hosting: Vercel
 Source: https://github.com/7xuanlu/wenlan-site
-License: see https://github.com/7xuanlu/wenlan/blob/main/LICENSE
+License: see https://github.com/wenlan-app/wenlan/blob/main/LICENSE

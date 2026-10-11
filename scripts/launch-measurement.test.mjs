@@ -74,11 +74,11 @@ test("a future stable download records its actual version without a website rebu
   globalThis.window = { umami: { track: (...args) => calls.push(args) } };
   t.after(() => { globalThis.window = previous; });
   trackAnalyticsEvent({ eventName: "github_outbound", placement: "download-page", locale: "zh-TW", context: "setup",
-    href: "https://github.com/7xuanlu/wenlan/releases/download/v0.99.1/Wenlan_0.99.1_aarch64.dmg" });
+    href: "https://github.com/wenlan-app/wenlan/releases/download/v0.99.1/Wenlan_0.99.1_aarch64.dmg" });
   assert.equal(calls[0][1].asset_id, "macos-arm64");
   assert.equal(calls[0][1].release_tag, "v0.99.1");
   trackAnalyticsEvent({ eventName: "github_outbound", placement: "download-page", locale: "en", context: "setup",
-    href: "https://github.com/7xuanlu/wenlan/releases/download/v0.99.1/Wenlan_0.18.5_aarch64.dmg" });
+    href: "https://github.com/wenlan-app/wenlan/releases/download/v0.99.1/Wenlan_0.18.5_aarch64.dmg" });
   assert.equal(calls[1][1].asset_id, undefined);
   assert.equal(calls[1][1].release_tag, undefined);
 });

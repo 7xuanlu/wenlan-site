@@ -2445,7 +2445,7 @@
       ],
       "authorityPath": {
         "type": "maintained-first-party-reference",
-        "target": "https://github.com/7xuanlu/wenlan/pull/624 — merged at 2026-08-28T05:16:37Z as 368fabcf667736e1b116dac8a9e79b017ae4d6bf; current main e450c4371f224802666a53e4dcbe7b4990935ca8 still contains all four locale-aware research-workflow links and passes the translated-README sync checker and self-test",
+        "target": "https://github.com/wenlan-app/wenlan/pull/624 — merged at 2026-08-28T05:16:37Z as 368fabcf667736e1b116dac8a9e79b017ae4d6bf; current main e450c4371f224802666a53e4dcbe7b4990935ca8 still contains all four locale-aware research-workflow links and passes the translated-README sync checker and self-test",
         "status": "published"
       },
       "nextResearchDirection": "Site PR #145 merged at 2026-08-28T03:49:03Z as 37b28a0df3e2e85a41ca7ec4bb9d25db3149ca89 and Vercel production completed at 2026-08-28T03:49:51Z. Source PR #624 already merged the four README research-workflow links at 2026-08-28T05:16:37Z; do not reapply the stale proposal patch. The overdue technical readout passed at 2026-09-01T14:39:32Z, while authenticated URL Inspection remained unchecked. Keep the site production boundary fixed and run the seven-day source-native GSC/Vercel readout after 2026-09-04T03:49:51Z. Hold the awesome-ai-research-tools submission because current maintainer evidence flags multi-list maintainer promotion risk.",
@@ -2686,7 +2686,7 @@
       ],
       "authorityPath": {
         "type": "maintained-first-party-reference",
-        "target": "https://github.com/7xuanlu/wenlan — propose one locale-aware consulting workflow link only after the website family is approved for publication and source-repo publication receives separate approval",
+        "target": "https://github.com/wenlan-app/wenlan — propose one locale-aware consulting workflow link only after the website family is approved for publication and source-repo publication receives separate approval",
         "status": "planned-not-published"
       },
       "nextResearchDirection": "PR 148 merged at 2026-08-29T04:58:27Z as 8dc5990c2ed2892ce0afbd10962ea175cb53d534 and Vercel production completed at 2026-08-29T04:59:15Z. Keep that boundary fixed, measure each locale independently, and do not request indexing, submit GSC validation, mutate analytics, or publish externally without separate approval.",
@@ -2939,7 +2939,7 @@
       ],
       "authorityPath": {
         "type": "maintained-first-party-reference",
-        "target": "https://github.com/7xuanlu/wenlan — propose one locale-aware investment-research workflow link only after the website family is separately approved and published; do not submit finance directories without another exact approval",
+        "target": "https://github.com/wenlan-app/wenlan — propose one locale-aware investment-research workflow link only after the website family is separately approved and published; do not submit finance directories without another exact approval",
         "status": "planned-not-published"
       },
       "nextResearchDirection": "PR 150 merged at 2026-08-29T06:01:49Z as b9fb06d1eb0fdd3c07c0a271332f8166c9fcef6e and Vercel production completed at 2026-08-29T06:02:35Z. Keep that boundary fixed, measure each locale independently, and preserve the zero-result exact long-tail Ubersuggest observations as low-resolution rather than demand proof.",
@@ -3472,7 +3472,7 @@
       ],
       "authorityPath": {
         "type": "maintained-first-party-reference",
-        "target": "https://github.com/7xuanlu/wenlan — after the website family is separately approved and published, prepare one locale-aware SRE incident-knowledge workflow link; do not commit, push, or merge source-repository changes without another exact approval",
+        "target": "https://github.com/wenlan-app/wenlan — after the website family is separately approved and published, prepare one locale-aware SRE incident-knowledge workflow link; do not commit, push, or merge source-repository changes without another exact approval",
         "status": "planned-not-published"
       },
       "nextResearchDirection": "Keep the three published locale owners stable from the fixed 2026-08-30T05:06:25Z production boundary. Record the 24-hour technical and indexability observation after 2026-08-31T05:06:25Z and the seven-day source-native GSC page/query and Vercel page/referrer observation after 2026-09-06T05:06:25Z. Judge each locale only after a confirmed post-deploy crawl and the original 28-day exposure contract. Do not request indexing, submit GSC validation, mutate analytics, change the source repository, message maintainers, buy traffic, generate synthetic events, or publish externally without separate approval.",

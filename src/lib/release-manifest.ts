@@ -1,12 +1,12 @@
 import { WENLAN_RELEASE } from "./releases";
 
 export const RELEASE_API =
-  "https://api.github.com/repos/7xuanlu/wenlan/releases/latest";
+  "https://api.github.com/repos/wenlan-app/wenlan/releases/latest";
 // Match the literal route revalidate exports; a shorter data TTL also lowers ISR.
 // Hourly, request-triggered refresh keeps downloads automatic without 5-minute churn.
 export const RELEASE_REVALIDATE_SECONDS = 3600;
 
-const RELEASE_REPOSITORY = "https://github.com/7xuanlu/wenlan";
+const RELEASE_REPOSITORY = "https://github.com/wenlan-app/wenlan";
 const RELEASE_DOWNLOAD_BASE = `${RELEASE_REPOSITORY}/releases/download`;
 const STABLE_TAG_PATTERN = /^v(0|[1-9]\d{0,4})\.(0|[1-9]\d{0,4})\.(0|[1-9]\d{0,4})$/;
 
@@ -311,7 +311,7 @@ export function inferReleaseDownload(href: unknown): ReleaseDownloadInference | 
   }
 
   const match = url.pathname.match(
-    /^\/7xuanlu\/wenlan\/releases\/download\/(v[^/]+)\/([^/]+)$/,
+    /^\/wenlan-app\/wenlan\/releases\/download\/(v[^/]+)\/([^/]+)$/,
   );
   if (!match || !STABLE_TAG_PATTERN.test(match[1])) return null;
 

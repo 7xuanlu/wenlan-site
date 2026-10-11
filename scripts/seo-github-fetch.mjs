@@ -9,7 +9,7 @@ import { promisify } from "node:util";
 const DEFAULT_OUTPUT = "/tmp/wenlan-seo/github-metadata.json";
 const DEFAULT_API_BASE_URL = "https://api.github.com";
 const DEFAULT_SITE_URL = "https://wenlan.app";
-const REPOSITORY = "7xuanlu/wenlan";
+const REPOSITORY = "wenlan-app/wenlan";
 const REPOSITORY_URL = `https://github.com/${REPOSITORY}`;
 const MAX_RELEASE_PAGES = 10;
 const RELEASE_ASSETS = [
