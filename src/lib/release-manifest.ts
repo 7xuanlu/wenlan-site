@@ -2,7 +2,9 @@ import { WENLAN_RELEASE } from "./releases";
 
 export const RELEASE_API =
   "https://api.github.com/repos/7xuanlu/wenlan/releases/latest";
-export const RELEASE_REVALIDATE_SECONDS = 300;
+// Match the literal route revalidate exports; a shorter data TTL also lowers ISR.
+// Hourly, request-triggered refresh keeps downloads automatic without 5-minute churn.
+export const RELEASE_REVALIDATE_SECONDS = 3600;
 
 const RELEASE_REPOSITORY = "https://github.com/7xuanlu/wenlan";
 const RELEASE_DOWNLOAD_BASE = `${RELEASE_REPOSITORY}/releases/download`;

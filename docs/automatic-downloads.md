@@ -15,14 +15,29 @@ runtime release dependency. Their release references remain editorial snapshots 
   prerelease, or incomplete asset set is not eligible.
 - Download URLs must belong to that exact repository and tag. Versioned installer
   filenames, sizes, and the visible release label come from the same manifest.
-- Next Data Cache revalidates after 300 seconds, on demand. The four release-aware
+- Next Data Cache revalidates after 3600 seconds, on demand. The four release-aware
   page types across English, Traditional Chinese, and Simplified Chinese make 12
-  public ISR pages, each revalidating every 300 seconds. Editorial Docs/Learn pages
-  and the shared shell do not fetch the release. Stale-while-revalidate can serve a
-  previous result on the first visit after expiry; this is not an exact five-minute
-  publication SLA.
+  public ISR pages, each eligible for revalidation after 3600 seconds on the next
+  request. Editorial Docs/Learn pages and the shared shell do not fetch the release.
+  Stale-while-revalidate can serve a previous result on the first visit after expiry;
+  this is not a guaranteed one-hour publication SLA.
 - No cron, client-side GitHub polling, new storage service, or App release workflow
   change is required. Existing open tabs retain the version they rendered.
+
+## Cache-write budget
+
+The shared Data Cache and page TTLs move together. A shorter shared dependency can
+lower the route interval, so changing only the page exports is not sufficient.
+Keep the eight route exports as numeric literals for Next static analysis; source
+and compiled-manifest tests check that all 12 concrete pages keep the hourly policy.
+
+Moving from 5 minutes to 1 hour reduces time-based refresh opportunities by a factor
+of 12 under continuous traffic. This is not a measured reduction in billable writes:
+[Vercel does not charge ISR writes when regenerated output is unchanged](https://vercel.com/docs/incremental-static-regeneration/limits-and-pricing#optimizing-isr-reads-and-writes),
+and write units depend on output size. The quota alert alone does not identify this
+project or these routes as its source. After an approved deploy, compare the same
+project and usage window in Vercel, and inspect changed output if writes remain high.
+No cache purge, new webhook credentials, or paid plan is required by this policy.
 
 ## Failure behavior
 
@@ -31,7 +46,7 @@ failed refresh cannot replace its last valid entry. Only the outer resolver catc
 an initial cache failure and uses the bundled audited snapshot. If no cache survives
 (for example after eviction), that snapshot can be older than the last version
 served elsewhere; this is a safe download fallback, not guaranteed latestness.
-Each release-aware route has explicit 300-second revalidation so an initial fallback
+Each release-aware route has explicit 3600-second revalidation so an initial fallback
 can retry later. This retry boundary leaves editorial routes outside release ISR.
 
 The Data Cache is Vercel/Next-managed cache, not a durable release-history database.
@@ -73,7 +88,7 @@ surfaces, not a prerequisite for new installer downloads.
   publication. Then verify the production manifest and actual page links.
 - `pnpm seo:technical:built` also checks the compiled cache policy: all sitemap
   pages must be prerendered, only the 12 release pages may use timed ISR, and
-  those pages retain their 300-second retry even after a cold-cache fallback.
+  those pages retain their 3600-second retry even after a cold-cache fallback.
 
 No test should send production analytics, subscribe an address, or count fixture
 observations as organic usage.
