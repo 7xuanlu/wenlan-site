@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
+import { RELEASE_REVALIDATE_SECONDS } from '../src/lib/release-manifest.ts';
 import { WENLAN_RELEASE } from '../src/lib/releases.ts';
 import { DownloadPage } from '../src/app/_pages/download.tsx';
 import { AboutPage } from '../src/app/_pages/about.tsx';
@@ -65,15 +66,33 @@ test('all release pages render the supplied release and exactly one matching Sof
   }
 });
 
-test('release route wrappers retry after 300 seconds and root document has no release dependency',async()=>{
+test('release route wrappers share the hourly cache policy and root document has no release dependency',async()=>{
   for(const file of ['(en)/page.tsx','[locale]/page.tsx','(en)/about/page.tsx','[locale]/about/page.tsx','(en)/download/page.tsx','[locale]/download/page.tsx','(en)/docs/get-started/page.tsx','[locale]/docs/get-started/page.tsx']) {
     const source=await readFile(new URL(`../src/app/${file}`,import.meta.url),'utf8');
     assert.match(source,/await getLatestRelease\(\)/,file);
-    assert.match(source,/export const revalidate = 300/,file);
+    const revalidate = source.match(/^export const revalidate = (\d+);$/m);
+    assert.ok(revalidate, `${file}: Next requires a statically analyzable literal`);
+    assert.equal(Number(revalidate[1]), RELEASE_REVALIDATE_SECONDS, file);
   }
   for(const file of ['(en)/layout.tsx','[locale]/layout.tsx']) {
     assert.doesNotMatch(await readFile(new URL(`../src/app/${file}`,import.meta.url),'utf8'),/revalidate/);
   }
   const root = await readFile(new URL('../src/app/root-document.tsx',import.meta.url),'utf8');
   assert.doesNotMatch(root,/getLatestRelease|softwareApplicationSchema|release-server/);
+});
+
+test('unchanged release content renders identically across time and randomness', (t) => {
+  t.mock.timers.enable({ apis: ['Date'], now: Date.UTC(2026, 0, 1) });
+  const random = t.mock.method(Math, 'random', () => 0.1);
+  for (const locale of ['en', 'zh-TW', 'zh-CN']) {
+    for (const Page of [HomePage, AboutPage, DownloadPage, GetStartedPage]) {
+      const props = { locale, release: WENLAN_RELEASE };
+      const before = renderToStaticMarkup(React.createElement(Page, props));
+      t.mock.timers.tick(3600 * 1000);
+      random.mock.mockImplementation(() => 0.9);
+      const after = renderToStaticMarkup(React.createElement(Page, props));
+      assert.equal(after, before, `${locale}:${Page.name} must not change with the clock or randomness`);
+      random.mock.mockImplementation(() => 0.1);
+    }
+  }
 });

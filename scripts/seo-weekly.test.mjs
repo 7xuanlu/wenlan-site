@@ -640,7 +640,7 @@ async function writeBuiltSeoFixture(outputRoot, overrides = {}) {
       ...Object.fromEntries(requiredBuiltHtmlPages.map((page) => [
         new URL(page.canonical).pathname, { initialRevalidateSeconds: false },
       ])),
-      ...Object.fromEntries(RELEASE_PAGE_PATHS.map((path) => [path, { initialRevalidateSeconds: 300 }])),
+      ...Object.fromEntries(RELEASE_PAGE_PATHS.map((path) => [path, { initialRevalidateSeconds: 3600 }])),
       ...overrides.prerenderRoutes,
     } }),
     "utf8",
@@ -2213,7 +2213,9 @@ test("built technical SEO checker rejects indexable raw scenario packets", async
 });
 
 for (const [path, seconds, message] of [
-  ["/learn", 300, "unexpected timed ISR"],
+  ["/learn", 3600, "unexpected timed ISR"],
+  ["/download", 300, "release page must retry"],
+  ["/zh-CN", 86400, "release page must retry"],
   ["/zh-TW/docs/get-started", false, "release page must retry"],
   ["/learn/claude-code-memory", undefined, "indexable page missing from prerender manifest"],
 ]) {

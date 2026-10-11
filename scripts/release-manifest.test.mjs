@@ -58,7 +58,7 @@ function publishedRelease({
 
 test("release constants keep the API and cache contract stable", () => {
   assert.equal(RELEASE_API, "https://api.github.com/repos/7xuanlu/wenlan/releases/latest");
-  assert.equal(RELEASE_REVALIDATE_SECONDS, 300);
+  assert.equal(RELEASE_REVALIDATE_SECONDS, 3600);
 });
 
 test("latest equal to the bundled snapshot is valid, not a failed rewrite", () => {

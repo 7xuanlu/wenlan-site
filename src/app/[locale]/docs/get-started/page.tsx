@@ -5,7 +5,8 @@ import type { Metadata } from "next";
 import { GetStartedPage } from "../../../_pages/get-started";
 import { getLatestRelease } from "@/lib/release-server";
 
-export const revalidate = 300;
+// Keep this literal aligned with RELEASE_REVALIDATE_SECONDS (Next static analysis).
+export const revalidate = 3600;
 
 type LocalePageParams = {
   locale: string;
