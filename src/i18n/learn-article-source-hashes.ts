@@ -25,7 +25,7 @@ export const LEARN_ARTICLE_SOURCE_HASHES = {
   "build-customer-support-answer-knowledge-base": "efe2dcf94e46da0763cf349723e3c353169fa5a531b25fd1f1cc00a5ce110068",
   "build-ict-supplier-due-diligence-evidence-pack": "f87bb9ab6c29c47d48bd37b318c2abad02cd20d1d0665556f985ed4085695a86",
   "build-investment-research-knowledge-base": "e4d6a6b8cf0d40aecaa4634227f6bd8d84115317752e984eb07ad5c83ad41f19",
-  "build-local-ai-knowledge-base-from-documents": "1aafe63f9253390269dbfe93d9e1bab95735f0f9c272858f0552ebfef2c3c9d9",
+  "build-local-ai-knowledge-base-from-documents": "c0c2f3879fd7e4e25225f1ddfdb837114af9cb1d182ad477a10ad3d54ce26fc2",
   "build-product-research-knowledge-base-for-prd": "58bd1a4183fdb2989d472afdb1c6efb4da069d599f779c022a9ea414b64c6737",
   "build-sre-incident-knowledge-base": "94d122374f0e5440dcf37f4afbc434d9898a3beede14d02f6fabf2be33c99299",
   "choose-ai-knowledge-base-tool": "2b92eb998906cc626414fa6edf4757bb1dc32a42efdfc8c69f6a6af25a460e1d",

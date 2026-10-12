@@ -206,7 +206,7 @@ const expectedArticleDates = new Map([
   ],
   [
     "/learn/build-local-ai-knowledge-base-from-documents",
-    { datePublished: "2026-08-01", dateModified: "2026-08-01" },
+    { datePublished: "2026-08-01", dateModified: "2026-10-08" },
   ],
   [
     "/zh-TW/learn/wenlan-vs-obsidian-ai-memory",
@@ -218,11 +218,11 @@ const expectedArticleDates = new Map([
   ],
   [
     "/zh-TW/learn/build-local-ai-knowledge-base-from-documents",
-    { datePublished: "2026-08-01", dateModified: "2026-10-06" },
+    { datePublished: "2026-08-01", dateModified: "2026-10-08" },
   ],
   [
     "/zh-CN/learn/build-local-ai-knowledge-base-from-documents",
-    { datePublished: "2026-08-01", dateModified: "2026-10-06" },
+    { datePublished: "2026-08-01", dateModified: "2026-10-08" },
   ],
   [
     "/zh-TW/learn/choose-ai-knowledge-base-tool",
@@ -317,7 +317,7 @@ const requiredBuiltHtmlPages = [
     canonical: "https://wenlan.app/learn/build-local-ai-knowledge-base-from-documents",
     type: "Article",
     datePublished: "2026-08-01",
-    dateModified: "2026-08-01",
+    dateModified: "2026-10-08",
   },
   {
     path: "learn/choose-ai-knowledge-base-tool.html",
