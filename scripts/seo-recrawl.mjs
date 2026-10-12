@@ -45,24 +45,48 @@ export function normalizeUrl(raw) {
   return `${ORIGIN}${url.pathname.replace(/\/+$/, "")}`;
 }
 
+const URL_PATTERN = /https:\/\/wenlan\.app(?:\/[^\s)>\]`"'<]*)?/g;
+const SKIP_LINE = /^\s*[-*]?\s*\**\s*(?:skip|defer)\w*\**/i;
+const REQUEST_LINE = /^\s*[-*]?\s*\**\s*request\b/i;
+
+// URLs under "Request:" (the default) are owed a Search Console request; URLs
+// after a "Skip (<reason>):" line were judged not worth one.
 export function parseRecrawlSection(body) {
   const lines = String(body ?? "").replace(/\r\n/g, "\n").split("\n");
   const start = lines.findIndex((line) => /^##\s+recrawl after deploy\s*$/i.test(line.trim()));
-  if (start === -1) return { present: false, urls: [], none: false };
+  if (start === -1) return { present: false, urls: [], skipped: [], none: false, unexplainedSkip: false };
   const end = lines.findIndex((line, index) => index > start && /^#{1,2}\s/.test(line.trim()));
   const section = lines
     .slice(start + 1, end === -1 ? undefined : end)
     .join("\n")
     .replace(/<!--[\s\S]*?-->/g, "");
-  const urls = [...section.matchAll(/https:\/\/wenlan\.app(?:\/[^\s)>\]`"'<]*)?/g)].map((match) =>
-    normalizeUrl(match[0]),
-  );
-  return { present: true, urls: [...new Set(urls)], none: /^\s*[-*]?\s*`?none\b/im.test(section) };
+  const urls = new Set();
+  const skipped = new Set();
+  let skipping = false;
+  let unexplainedSkip = false;
+  for (const line of section.split("\n")) {
+    if (SKIP_LINE.test(line)) {
+      skipping = true;
+      if (!/[\p{L}\p{N}]/u.test(line.replace(SKIP_LINE, "").replace(URL_PATTERN, ""))) unexplainedSkip = true;
+    } else if (REQUEST_LINE.test(line)) {
+      skipping = false;
+    }
+    for (const match of line.matchAll(URL_PATTERN)) (skipping ? skipped : urls).add(normalizeUrl(match[0]));
+  }
+  for (const url of skipped) urls.delete(url);
+  return {
+    present: true,
+    urls: [...urls],
+    skipped: [...skipped],
+    none: /^\s*[-*]?\s*`?none\b/im.test(section),
+    unexplainedSkip,
+  };
 }
 
 export function sectionProblem(section) {
   if (!section.present) return `the PR body has no "${SECTION_HEADING}" section`;
-  if (section.urls.length === 0 && !section.none) {
+  if (section.unexplainedSkip) return `a "Skip" line in "${SECTION_HEADING}" gives no reason`;
+  if (section.urls.length === 0 && section.skipped.length === 0 && !section.none) {
     return `"${SECTION_HEADING}" lists no https://wenlan.app URL and does not say "none"`;
   }
   return null;
@@ -166,11 +190,12 @@ export function needsRequest(item) {
   return !(item.fields.length === 1 && item.fields[0] === "jsonLd" && !HOME_URLS.has(item.url));
 }
 
+// Every changed URL needs a decision: listed to request, or skipped with a reason.
 export function compareSection(section, changed) {
-  const listed = new Set(section.urls);
+  const decided = new Set([...section.urls, ...section.skipped]);
   const changedUrls = new Set(changed.map((item) => item.url));
   return {
-    missing: changed.filter((item) => needsRequest(item) && !listed.has(item.url)),
+    missing: changed.filter((item) => needsRequest(item) && !decided.has(item.url)),
     unchanged: section.urls.filter((url) => !changedUrls.has(url)),
   };
 }
@@ -290,10 +315,13 @@ export function pendingMessage(pending) {
     "1. Ask the user once to confirm this batch. Do not click Request indexing before that confirmation.",
     `2. In the user's signed-in browser (Claude in Chrome, or the host's equivalent), open ${SEARCH_CONSOLE_HOME}`,
     "   and type each URL into \"Inspect any URL\". Check the box holds the URL before pressing Enter: after a dialog",
-    "   closes, focus can sit on Request again. Click Request indexing and wait for \"Indexing requested\".",
+    "   closes, focus can sit on Request again. Press Escape first so Enter does not pick a remembered URL, and check",
+    "   the inspected URL before clicking Request indexing. Wait for \"Indexing requested\".",
     "   Stop at a sign-in page, CAPTCHA or quota message.",
     "3. Run `pnpm seo:recrawl:mark -- --pr <number> --url <URL>` for each URL that was requested (omit --url when all were).",
     "If no such browser is available, or the browser step is blocked, give the user the URLs and record what they report.",
+    "A URL no longer worth a request (for example, the page changes again soon) moves under `Skip (<reason>):` in that",
+    "PR's body, which drops it from this list.",
   );
   return lines.join("\n");
 }
@@ -364,9 +392,10 @@ export async function runHook(input, deps = {}) {
       }
       if (!problem) return {};
       const reason =
-        `Blocked: ${problem}. Add "${SECTION_HEADING}" listing every changed indexable canonical URL ` +
-        `(one absolute https://wenlan.app URL per line, each locale separately), or "none" when no indexable ` +
-        `page changed. After \`pnpm build\`, \`pnpm seo:recrawl:changed\` lists them. See ${PROCEDURE}.`;
+        `Blocked: ${problem}. Add "${SECTION_HEADING}" with every changed indexable canonical URL ` +
+        `(one absolute https://wenlan.app URL per line, each locale separately) under "Request:" or under ` +
+        `"Skip (<reason>):", or "none" when no indexable page changed. After \`pnpm build\`, ` +
+        `\`pnpm seo:recrawl:changed\` lists them. See ${PROCEDURE}.`;
       return {
         stdout: JSON.stringify({
           hookSpecificOutput: { hookEventName: "PreToolUse", permissionDecision: "deny", permissionDecisionReason: reason },
@@ -442,7 +471,14 @@ function changedBlock(changed) {
   return [
     SECTION_HEADING,
     "",
-    ...(requested.length ? requested.map((item) => item.url) : ["none"]),
+    ...(requested.length
+      ? [
+          "Request:",
+          ...requested.map((item) => item.url),
+          "",
+          `<!-- Move each URL not worth a request under "Skip (<reason>):". See ${PROCEDURE}. -->`,
+        ]
+      : ["none"]),
     ...(sitemapOnly
       ? ["", `<!-- ${sitemapOnly} more URL(s) changed only in structured data; the sitemap covers them. -->`]
       : []),
@@ -464,12 +500,17 @@ async function checkPr(args) {
   const section = parseRecrawlSection(body);
   const changed = await findChangedUrls({ builtDir: args.built ?? ".next" });
   const { missing, unchanged } = compareSection(section, changed);
-  const problems = [sectionProblem(section), missing.length ? `${missing.length} changed URL(s) are not listed` : null].filter(
-    Boolean,
-  );
+  const problems = [
+    sectionProblem(section),
+    missing.length ? `${missing.length} changed URL(s) are neither requested nor skipped` : null,
+  ].filter(Boolean);
+  const skipped = new Set(section.skipped);
   const report = [
     `Changed indexable URLs versus production (${changed.length}):`,
-    ...changed.map((item) => `- ${item.url} (${item.fields.join(", ")}${needsRequest(item) ? "" : "; sitemap only"})`),
+    ...changed.map((item) => {
+      const note = !needsRequest(item) ? "; sitemap only" : skipped.has(item.url) ? "; skipped" : "";
+      return `- ${item.url} (${item.fields.join(", ")}${note})`;
+    }),
     ...(unchanged.length ? ["Listed but unchanged versus production (allowed):", ...unchanged.map((url) => `- ${url}`)] : []),
   ].join("\n");
   console.log(report);
@@ -478,7 +519,8 @@ async function checkPr(args) {
   console.error(
     [
       `seo-recrawl: ${problems.join("; ")}.`,
-      "Add every changed URL that needs a request to the PR body (extra URLs are allowed):",
+      "Put every changed URL in the PR body under \"Request:\", or under \"Skip (<reason>):\" when a request is not",
+      "worth the quota (extra URLs are allowed):",
       "",
       changedBlock(changed),
       "",

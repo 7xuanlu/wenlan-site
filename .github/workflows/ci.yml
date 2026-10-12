@@ -68,9 +68,10 @@ jobs:
           WENLAN_REPO_ROOT: ${{ github.workspace }}/.release-source/wenlan
         run: pnpm test:seo
 
-      # Every changed indexable page needs a Google recrawl request after
-      # deploy. Compares the build with production and fails unless the PR body
-      # lists each changed canonical URL under "## Recrawl after deploy".
+      # Every changed indexable page needs a Google recrawl decision. Compares
+      # the build with production and fails unless the PR body puts each changed
+      # canonical URL under "Request:" or "Skip (<reason>):" in
+      # "## Recrawl after deploy".
       # Procedure: docs/seo-growth-loop.md#recrawl-after-page-changes
       - name: Recrawl list
         if: github.event_name == 'pull_request'
