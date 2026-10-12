@@ -53,6 +53,39 @@ test("recrawl section must exist and list URLs or say none", () => {
   assert.equal(sectionProblem(parseRecrawlSection("## Recrawl after deploy\n\nnone (docs only)\n")), null);
 });
 
+test("URLs under a Skip line with a reason are decided but not owed a request", () => {
+  const section = parseRecrawlSection(
+    [
+      "## Recrawl after deploy",
+      "Request:",
+      "https://wenlan.app/zh-TW",
+      "",
+      "Skip (only the GitHub link changed; GitHub redirects the old address):",
+      "https://wenlan.app/links",
+      "- https://wenlan.app/zh-TW",
+      "**Request**",
+      "https://wenlan.app/learn",
+      "Deferred until the homepage redesign lands: https://wenlan.app/zh-CN",
+    ].join("\n"),
+  );
+  assert.deepEqual(section.urls, ["https://wenlan.app/learn"]);
+  assert.deepEqual(section.skipped, ["https://wenlan.app/links", "https://wenlan.app/zh-TW", "https://wenlan.app/zh-CN"]);
+  assert.equal(sectionProblem(section), null);
+
+  const changed = [
+    { url: "https://wenlan.app/links", fields: ["text"] },
+    { url: "https://wenlan.app/learn", fields: ["title"] },
+    { url: "https://wenlan.app/docs", fields: ["text"] },
+  ];
+  assert.deepEqual(compareSection(section, changed).missing.map((item) => item.url), ["https://wenlan.app/docs"]);
+
+  for (const bare of ["Skip:", "- Skipped", "**Skip**"]) {
+    const problem = sectionProblem(parseRecrawlSection(`## Recrawl after deploy\n${bare}\nhttps://wenlan.app/links`));
+    assert.match(problem, /"Skip" line .* gives no reason/, bare);
+  }
+  assert.equal(sectionProblem(parseRecrawlSection("## Recrawl after deploy\nSkip（只改連結）:\nhttps://wenlan.app/links")), null);
+});
+
 test("PR body gate covers gh pr create/edit and GitHub MCP writes only", () => {
   const bash = (command) => ({ tool_name: "Bash", cwd: "/repo", tool_input: { command } });
   const valid = "## Recrawl after deploy\n\nhttps://wenlan.app/zh-TW\n";
@@ -193,6 +226,8 @@ test("reminder gives the confirm, browser and record steps from the property hom
   assert.match(message, /2\. In the user's signed-in browser/);
   assert.match(message, /open https:\/\/search\.google\.com\/search-console\?resource_id=sc-domain%3Awenlan\.app\n/);
   assert.match(message, /Check the box holds the URL before pressing Enter/);
+  assert.match(message, /Press Escape first so Enter does not pick a remembered URL/);
+  assert.match(message, /moves under `Skip \(<reason>\):` in that\nPR's body/);
   assert.match(message, /3\. Run `pnpm seo:recrawl:mark -- --pr <number> --url <URL>`/);
 });
 
