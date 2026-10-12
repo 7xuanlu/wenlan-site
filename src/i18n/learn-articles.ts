@@ -5189,10 +5189,6 @@ const zhCNArticles = {
         href: "https://www.promptnet.cn/2026/06/09/rag-knowledge-base-retrieval-debugging/",
       },
       {
-        label: "Embedding 升级召回漂移指南",
-        href: "https://segmentfault.com/a/1190000048058746",
-      },
-      {
         label: "CRUD-RAG 评测基准",
         href: "https://github.com/IAAR-Shanghai/CRUD_RAG",
       },
