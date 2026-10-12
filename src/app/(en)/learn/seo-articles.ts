@@ -1630,7 +1630,7 @@ const trustArticles: BaseSpec[] = [
     officialReferences: [
       {
         label: "Wenlan knowledge lifecycle",
-        href: "https://github.com/wenlan-app/wenlan#how-knowledge-stays-current",
+        href: "https://github.com/wenlan-app/wenlan#two-lifecycles",
       },
       {
         label: "Wenlan review and trust guide",
@@ -2314,7 +2314,7 @@ const localKnowledgeBaseArticle: LearnArticle = {
     },
     {
       label: "Wenlan sources add CLI",
-      href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+      href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add",
     },
     {
       label: "Wenlan source-backed Pages",
@@ -3051,7 +3051,7 @@ const customerSupportAnswerKnowledgeBaseArticle: BaseSpec = {
     },
     {
       label: "Wenlan sources add CLI",
-      href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+      href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add",
     },
     {
       label: "Wenlan source-backed Pages",

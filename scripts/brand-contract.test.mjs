@@ -1779,6 +1779,85 @@ test("public internal links point to Wenlan route slugs", async () => {
   assert.doesNotMatch(linkSources, /href=["{]?"\/learn\/where-origin-stores/);
 });
 
+// GitHub prefixes heading slugs and explicit <a id>/<a name> anchors in
+// repository Markdown with "user-content-" and scrolls to them from a bare
+// fragment. A fragment that matches neither still opens the page at the top,
+// so a stale anchor never surfaces as a broken link.
+function githubMarkdownAnchors(markdown) {
+  const anchors = new Set();
+  const slugCounts = new Map();
+  let fence = null;
+
+  for (const line of markdown.split("\n")) {
+    const fenceMatch = line.match(/^ {0,3}(`{3,}|~{3,})/);
+    if (fenceMatch) {
+      if (!fence) fence = fenceMatch[1][0];
+      else if (fenceMatch[1][0] === fence) fence = null;
+      continue;
+    }
+    if (fence) continue;
+
+    for (const match of line.matchAll(/<a\s[^>]*\b(?:id|name)="([^"]+)"/g)) {
+      anchors.add(match[1]);
+    }
+
+    const heading = line.match(/^ {0,3}#{1,6}\s+(.+?)(?:\s+#+)?\s*$/);
+    if (!heading) continue;
+    const slug = heading[1]
+      .replace(/!?\[([^\]]*)\]\([^)]*\)/g, "$1")
+      .toLowerCase()
+      .replace(/[^\p{L}\p{M}\p{N}\p{Pc}\- ]/gu, "")
+      .replace(/ /g, "-");
+    const count = slugCounts.get(slug) ?? 0;
+    slugCounts.set(slug, count + 1);
+    anchors.add(count === 0 ? slug : `${slug}-${count}`);
+  }
+
+  return anchors;
+}
+
+test("public links into Wenlan repository Markdown use anchors that exist", async () => {
+  const wenlanRoot = process.env.WENLAN_REPO_ROOT
+    ? resolve(process.env.WENLAN_REPO_ROOT)
+    : resolve(repoRoot, "../wenlan");
+  const linkPattern =
+    /https:\/\/github\.com\/wenlan-app\/wenlan(?:\/blob\/([\w.-]+)\/([\w./-]+\.md))?#([\w-]+)/g;
+  const anchorsByRevision = new Map();
+  const failures = [];
+  let checked = 0;
+
+  for (const dir of ["src", "public"]) {
+    for await (const file of walkTextFiles(resolve(repoRoot, dir))) {
+      const text = await readFile(file, "utf8");
+      for (const match of text.matchAll(linkPattern)) {
+        const [url, ref = "main", path = "README.md", anchor] = match;
+        // github.com renders the default branch, which a local checkout's
+        // working tree may not match.
+        const revision = `${ref === "main" ? "origin/main" : ref}:${path}`;
+        if (!anchorsByRevision.has(revision)) {
+          try {
+            const { stdout } = await execFileAsync("git", ["-C", wenlanRoot, "show", revision], {
+              maxBuffer: 16 * 1024 * 1024,
+            });
+            anchorsByRevision.set(revision, githubMarkdownAnchors(stdout));
+          } catch (error) {
+            throw new Error(`Cannot read ${revision} in ${wenlanRoot}; fetch origin/main and tags first`, {
+              cause: error,
+            });
+          }
+        }
+        checked += 1;
+        if (!anchorsByRevision.get(revision).has(anchor)) {
+          failures.push(`${relative(repoRoot, file)}:${lineForOffset(text, match.index)}: ${url}`);
+        }
+      }
+    }
+  }
+
+  assert.ok(checked > 0, "No links into Wenlan repository Markdown found");
+  assert.deepEqual(failures, []);
+});
+
 test("public docs and assets do not expose stale lower-case Origin surfaces", async () => {
   const checks = [
     ["src/app/docs/docs.ts", /"origin":\s*{/],
