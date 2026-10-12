@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "62309e118a3f79dfc526f412a783fdda00973bb2e4f9558b76279b0ee05f16c1",
+    sourceHash: "34056e361cb070dff668d717f9aae15cebb3950fd1d35d31469ff34ddd472640",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库",
@@ -790,7 +790,7 @@ export const zhCNContent = {
                 },
                 {
                   "label": "Drive 自动同步",
-                  "href": "https://workspaceupdates.googleblog.com/2026/05/keep-your-sources-up-to-date-with-automatic-drive-syncing-in-NotebookLM.html"
+                  "href": "https://workspaceupdates.googleblog.com/2026/05/keep-your-sources-up-to-date-with-automatic-Drive-syncing-in-NotebookLM.html"
                 }
               ],
               "wenlan": {
@@ -972,7 +972,7 @@ export const zhCNContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "d4494dd9ba71a982ced9063f14bbe2750ace3a07b1927084cb5ec74a96bd5e87",
+    sourceHash: "dcd2b8161c286d5b55cf1ca7a8050fe92a4fba8922bb9f1ead0903800346777a",
     content: {
       seo: {
         title: "关于文澜 Wenlan：开源、本地优先的个人 AI 知识库",
@@ -1059,12 +1059,12 @@ export const zhCNContent = {
         },
         {
           id: "contributing",
-          href: "https://github.com/wenlan-app/wenlan/blob/main/CONTRIBUTING.md",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/.github/CONTRIBUTING.md",
           label: "贡献指南",
         },
         {
           id: "security",
-          href: "https://github.com/wenlan-app/wenlan/blob/main/SECURITY.md",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/.github/SECURITY.md",
           label: "安全政策",
         },
       ],

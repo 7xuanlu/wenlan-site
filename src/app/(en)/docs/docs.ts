@@ -4299,7 +4299,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Read CONTRIBUTING.md",
-          href: "https://github.com/wenlan-app/wenlan/blob/main/CONTRIBUTING.md",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/.github/CONTRIBUTING.md",
         },
       },
     ],
@@ -4574,7 +4574,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Read CONTRIBUTING.md",
-          href: "https://github.com/wenlan-app/wenlan/blob/main/CONTRIBUTING.md",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/.github/CONTRIBUTING.md",
         },
       },
       {
@@ -4585,7 +4585,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Read the Code of Conduct",
-          href: "https://github.com/wenlan-app/wenlan/blob/main/CODE_OF_CONDUCT.md",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/.github/CODE_OF_CONDUCT.md",
         },
       },
     ],

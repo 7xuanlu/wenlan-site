@@ -795,7 +795,7 @@ export const enContent = {
                 },
                 {
                   "label": "Automatic Drive syncing",
-                  "href": "https://workspaceupdates.googleblog.com/2026/05/keep-your-sources-up-to-date-with-automatic-drive-syncing-in-NotebookLM.html"
+                  "href": "https://workspaceupdates.googleblog.com/2026/05/keep-your-sources-up-to-date-with-automatic-Drive-syncing-in-NotebookLM.html"
                 }
               ],
               "wenlan": {
@@ -1064,12 +1064,12 @@ export const enContent = {
         },
         {
           id: "contributing",
-          href: "https://github.com/wenlan-app/wenlan/blob/main/CONTRIBUTING.md",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/.github/CONTRIBUTING.md",
           label: "Contributing guide",
         },
         {
           id: "security",
-          href: "https://github.com/wenlan-app/wenlan/blob/main/SECURITY.md",
+          href: "https://github.com/wenlan-app/wenlan/blob/main/.github/SECURITY.md",
           label: "Security policy",
         },
       ],
