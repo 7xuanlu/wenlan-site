@@ -46,7 +46,7 @@ Wiki、來源型知識庫、工具選型頁已存在，分別作實作入口、�
 - **需求：** 搜尋建議提供用語，社群提供痛點，Planner 提供市場量級，GSC 提供本站表現；不可互換。Ubersuggest 本日免費額度耗盡，不重試；舊 50 量值與新 Planner 範圍不可直接比較。Keyword Tool 無量值，不足以單獨驗證獲客需求。
 - **外部觸達：** MindStudio 指南被另一篇文章列來源，Salesforce 指南有分享與彙整引用，但未取得完整反向連結或排名因果證據。README 三語 LLM Wiki 入口已於 10-07 合併（wenlan#824，`be5d4ecd`），約 11-04 量測帶來的 Learn 造訪，量測前不加同類自有連結；自有導流不等於獨立引用。Awesome LLM Wiki 已列 Wenlan，不重複投稿。
 - **共用流程：** Claude 已同意且成功載入共用 skill；Codex 已重跑資料／備援。協作證據見重跑收據及 [連續性規則](seo-demand-workflow.md#claude-and-codex-continuity)。此次隨修正一起交付共用流程／skill；其他 checkout 需同步合併版本。
-- **AI與引用：** 同窗GSC AI報告131次property曝光；有三語頁面，無Obsidian可見列，未知問題／點擊。先沿既有owner量測，不另開prompt清單。Ahrefs的9頁壞連結已核對5個目的地404，待修；description長短警告不等於排名原因。
+- **AI與引用：** 同窗GSC AI報告131次property曝光；有三語頁面，無Obsidian可見列，未知問題／點擊。先沿既有owner量測，不另開prompt清單。Ahrefs的9頁壞連結（5個目的地404）10-11已修：GitHub三份政策檔改指`.github/`，NotebookLM公告改正大小寫，SegmentFault文章已下架且無存檔故移除；description長短警告不等於排名原因。
 
 #223已發布。Obsidian三語補強、搜尋文案／英文入口、標題排版、手機跳轉與頁尾引導的本次發布以 [#224](https://github.com/7xuanlu/wenlan-site/pull/224) 為準；未提交索引。站外聯絡、付費、新文章與新campaign不在範圍。
 
