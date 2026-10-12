@@ -1181,7 +1181,7 @@ const zhTWArticles = {
       {
         heading: "用只讀問題檢查來源依據",
         body: [
-          "在 Claude Code 對話中貼上以下問題。請只讀取這兩份筆記，不要修改任何來源檔；參考答案只根據這些虛構筆記。",
+          "在 Claude Code 對話中貼上以下問題；下表的參考答案只根據這兩份虛構筆記。",
           "請只讀取目前 vault 裡的 research.md 和 decision.md，不要修改任何來源檔。根據這兩份筆記，下一輪應該做什麼？為什麼？負責人是誰？請引用檔名；若筆記未說明負責人，請明確回答無法判定，不要推測。",
         ],
         table: {
@@ -1214,15 +1214,13 @@ const zhTWArticles = {
         heading: "用 Wenlan 建立個人 AI 知識庫",
         body: [
           "Wenlan（文瀾）是開源的桌面 app，做的是上面的 LLM Wiki 做法。它把文件、筆記和 AI 對話整理成附出處的頁面；來源改了會標出哪些頁面要更新，而且不會蓋掉你的修改。Claude Code、Codex 和其他 AI 工具讀的是同一份知識庫。",
-          "支援 Markdown（.md）、文字檔（.txt）、可擷取文字的 PDF（.pdf），以及 Obsidian vault；掃描型 PDF 要先 OCR。Obsidian vault 只會被讀取，原始筆記不會被修改。",
-          "在已連接 Wenlan 外掛的 AI 對話中，用 /distill <主題> 整理，再用 /pages <主題> 開啟；/lint 和 /curate 用來檢查與審查。這些不是終端機指令。",
-          "普通資料夾也能讓多個 AI 工具讀取；Wenlan 的用處是把匯入、頁面維護、引用與審查做成內建流程。安裝並連接 AI 客戶端後，先用 wenlan status 確認連線，再加入來源並檢查匯入回報。Obsidian vault 按需重新同步；資料夾來源不會匯入任意程式碼檔案。",
+          "支援 Markdown（.md）、文字檔（.txt）、可擷取文字的 PDF（.pdf），以及 Obsidian vault。Obsidian vault 只會被讀取，原始筆記不會被修改。",
+          "普通資料夾也能讓多個 AI 工具讀取，光是共用不必改用 Wenlan；它的用處是把匯入、頁面維護、引用與審查做成內建流程。想試用時，先依設定指南安裝並連接 AI 工具，再加入一個範圍明確的測試資料夾、檔案或 Obsidian vault。",
         ],
         bullets: [
-          "先依照平台與 AI client 設定指南安裝並連線，確認 Wenlan 已連上，再加入一個範圍明確的資料夾、檔案或 Obsidian vault。",
-          "執行 `wenlan sources add <路徑>`，檢查找到、匯入、略過和錯誤的數量；資料夾來源不會匯入任意程式碼檔。",
-          "來源變更後再次執行相同指令同步；Obsidian vault 為唯讀，需按需重新同步。掃描或圖片型 PDF 要先在外部 OCR。",
-          "在已安裝 Wenlan plugin 的 Claude Code 或 Codex 中，用 `/distill <主題>` 建立維護型 Page，再以 `/pages <主題>` 檢查。執行 `/lint` 與 `/curate` 檢查問題並審核修訂；只有 MCP 的 client 請使用它提供的 Wenlan tools。",
+          "在終端機先執行 wenlan status 確認已連上，再用 wenlan sources add <路徑> 加入來源，檢查回報中找到、匯入、略過和錯誤的數量；資料夾來源不會匯入任意程式碼檔。",
+          "來源變更後，再執行一次相同的 sources add 指令即可同步；Obsidian vault 要按需重新同步。",
+          "在已安裝 Wenlan 外掛的 Claude Code 或 Codex 對話中，用 /distill <主題> 建立維護中的頁面，再用 /pages <主題> 開啟；/lint 和 /curate 用來檢查問題並審核修訂。這些是對話指令，不在終端機執行；只支援 MCP 的 AI 工具改用它提供的 Wenlan 工具。",
         ],
         code: {
           label: "終端機：換成實際的測試資料夾路徑",
@@ -4825,7 +4823,7 @@ const zhCNArticles = {
       {
         heading: "用只读问题检查来源依据",
         body: [
-          "在 Claude Code 对话中贴上下面的问题。请只读取这两份笔记，不要修改任何来源文件；参考答案只根据这些虚构笔记。",
+          "在 Claude Code 对话中贴上下面的问题；下表的参考答案只根据这两份虚构笔记。",
           "请只读取当前 vault 中的 research.md 和 decision.md，不要修改任何来源文件。根据这两份笔记，下一轮应该做什么？为什么？负责人是谁？请引用文件名；如果笔记没有说明负责人，请明确回答无法判断，不要猜测。",
         ],
         table: {
@@ -4858,15 +4856,13 @@ const zhCNArticles = {
         heading: "用 Wenlan 搭建个人知识库",
         body: [
           "Wenlan（文澜）是开源的桌面 app，用的是上面的 LLM Wiki 做法。它把文档、笔记和 AI 对话整理成带出处的页面；来源改了会标出哪些页面要更新，而且不会覆盖你的修改。Claude Code、Codex 和其他 AI 工具读的是同一份知识库。",
-          "支持 Markdown（.md）、文本文件（.txt）、可提取文字的 PDF（.pdf），以及 Obsidian vault；扫描型 PDF 要先 OCR。Obsidian vault 只会被读取，原始笔记不会被修改。",
-          "在已连接 Wenlan 插件的 AI 对话中，用 /distill <主题> 整理，再用 /pages <主题> 打开；/lint 和 /curate 用于检查和审核。这些不是终端命令。",
-          "普通文件夹也能让多个 AI 工具读取；Wenlan 的用途是把导入、页面维护、引用和审核做成内置流程。安装并连接 AI 客户端后，先用 wenlan status 确认连接，再添加来源并检查导入报告。Obsidian vault 按需重新同步；文件夹来源不会导入任意代码文件。",
+          "支持 Markdown（.md）、文本文件（.txt）、可提取文字的 PDF（.pdf），以及 Obsidian vault。Obsidian vault 只会被读取，原始笔记不会被修改。",
+          "普通文件夹也能让多个 AI 工具读取，只是共享的话不必改用 Wenlan；它的用途是把导入、页面维护、引用和审核做成内置流程。想试用时，先按设置指南安装并连接 AI 工具，再添加一个边界明确的测试文件夹、文件或 Obsidian vault。",
         ],
         bullets: [
-          "先按平台与 AI client 设置指南安装并连接，确认 Wenlan 已连通，再加入一个边界明确的文件夹、文件或 Obsidian vault。",
-          "运行 `wenlan sources add <路径>`，检查找到、导入、跳过和错误的数量；文件夹来源不会导入任意代码文件。",
-          "来源变更后再次运行相同命令同步；Obsidian vault 为只读，需按需重新同步。扫描或图片型 PDF 要先在外部完成 OCR。",
-          "在已安装 Wenlan plugin 的 Claude Code 或 Codex 中，用 `/distill <主题>` 建立维护型 Page，再用 `/pages <主题>` 检查。运行 `/lint` 与 `/curate` 检查问题并审核修订；只有 MCP 的 client 请使用它提供的 Wenlan tools。",
+          "在终端先运行 wenlan status 确认已连通，再用 wenlan sources add <路径> 添加来源，检查报告中找到、导入、跳过和错误的数量；文件夹来源不会导入任意代码文件。",
+          "来源变更后，再运行一次相同的 sources add 命令即可同步；Obsidian vault 要按需重新同步。",
+          "在已安装 Wenlan 插件的 Claude Code 或 Codex 对话中，用 /distill <主题> 生成持续维护的页面，再用 /pages <主题> 打开；/lint 和 /curate 用于检查问题并审核修订。这些是对话命令，不在终端运行；只支持 MCP 的 AI 工具改用它提供的 Wenlan 工具。",
         ],
         code: {
           label: "终端：换成实际的测试文件夹路径",

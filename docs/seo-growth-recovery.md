@@ -13,7 +13,7 @@
 | 繁中 Wiki | 台灣市場有需求；本站「如何使用」僅 1 次可見曝光 | 沿用 owner，核對新版 crawl 與樣本，不承諾前五 |
 | Obsidian + Claude Code | US長詞1K–10K／Planner三月−90%，短詞0%；EN owner 11 page曝光／0點擊，無精確詞joined row | 三語完整練習／答案範例已修，前段與練習後明示 Obsidian 可接 Wenlan；Opus 5.5 複審及12組畫面檢查通過，三語文章、手機入口與頁尾引導由 [#224](https://github.com/7xuanlu/wenlan-site/pull/224) 交付；部署確認見該PR收據，後續手動核對crawl與成效 |
 | 中文個人知識庫 | 泛「搭建」混企業 RAG；本輪 Planner 已補：`个人知识库搭建`10–100、台灣`個人知識庫`10–100／月 | 範例已發布；觀察相應詞是否開始展示本站 |
-| 個人 AI 知識庫（三語） | 英文依使用者 10-08 指示改為選做法→兩份筆記→查答案→Wenlan；雙中文同步「改來源後再問」、來源同步界線與終端機／對話分離，RAG／Wiki 句沿用 #223 正式版 | 10-11 已整合到最新 main，本地分支 `seo/kb-documents-guide`；必要檢查與 12 組畫面通過，尚未發布。見[紀錄](seo-audits/2026-10-07-ranking-gap.md#2026-10-08-個人知識庫正式版復核) |
+| 個人 AI 知識庫（三語） | 英文依使用者 10-08 指示改為選做法→兩份筆記→查答案→Wenlan；雙中文同步「改來源後再問」、來源同步界線與終端機／對話分離，RAG／Wiki 句沿用 #223 正式版 | 10-11 已整合到最新 main，並整理雙中文重複段落；必要檢查與畫面驗證通過，分支 `seo/kb-documents-guide` 開 PR 待審，尚未合併或發布。見[紀錄](seo-audits/2026-10-07-ranking-gap.md#2026-10-08-個人知識庫正式版復核) |
 | Claude／Codex／MCP memory | 新 US Planner：Claude1K–10K、Codex100–1K、MCP10–100／月；GSC仍稀少或缺列 | 保留正確教學；按任務匹配與本站曝光判斷優先序 |
 | source-backed wiki | 泛 `knowledge base wiki` 26 次曝光、平均 78.62；SERP 偏團隊選型 | 不硬爭錯誤意圖，不因低 CTR 自動改標題 |
 | 獨立引用 | GSC Links 樣本：英文 Wiki 5 條中 4 條自有 README、1 條 npm.io；未見獨立評測直接引用 | 研究相關指南與實作者的引用理由；不以目錄數量或自有連結代替權威 |

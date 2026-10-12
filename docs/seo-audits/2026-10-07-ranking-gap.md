@@ -471,3 +471,9 @@ Opus 5.5/high 收到完整修正版、市場證據與既有三語實跑輸出後
 兩項舊失敗都已在 main 修好，不需另改：CLAUDE.md 斷言由 #223 改為檢查 `@AGENTS.md` 與共用 SEO 流程；`distilled-wiki-pages-ai-memory` 的 hash 由 #231 更新，與目前英文一致。本篇英文和 10-08 審過的版本只差 repo 網址搬家（還原網址後 hash 等於 10-08 的 `c84f05a3…`），因此 hash 更新為 `c0c2f387…`。雙中文內容有實質更新，修改日與英文同為 10-08，建置、部署與週報檢查的日期一併更新。
 
 `seo:goal:control`（PASS `d108f111…`）、`seo:goal:check`、`seo:scenario:check`、`test:goal` 60／60、`test:seo` 528 通過／2 項 PGlite fixture 跳過、`test:i18n` 86／86、`test:measurement` 133／133、`lint`、`build`、`seo:technical:built` 通過；build 需允許下載 Google 字型，IndexNow 跳過。本機正式版 3441 驗證 en／zh-TW／zh-CN × 1280／393px × 深／淺色共 12 組：單一 H1、無水平溢出、兩張實際畫面圖片解碼且有替代文字、頁首連結停在證據區、無 console 錯誤。尚未 push、發布或請求索引。
+
+#### 2026-10-11 雙中文去重
+
+使用者要求先整理中文重複段落再開 PR。「用 Wenlan 建立個人 AI 知識庫」原本內文四段、條列四點，對話指令和匯入步驟各說了兩次。改為內文三段（是什麼、支援格式、何時值得改用）加三點步驟（終端機加入來源、來源變更後同步、對話指令），對話指令與終端機指令的分界只說一次。條列裡的反引號在 Learn 頁會原樣顯示，這段改為不加反引號，與英文版一致。另刪兩處重複：只讀問題前一句與問題本身重複的「只讀取、不修改」，以及本段第三次出現的掃描型 PDF 需 OCR（步驟和常見問題已說過）。雙中文同步修改；英文未動，hash 不變。
+
+`seo:goal:check`、`seo:scenario:check`、`test:goal` 60／60、`test:seo` 528 通過／2 項跳過、`test:i18n` 86／86、`lint`、`build`、`seo:technical:built` 通過。本機正式版驗證 zh-TW／zh-CN × 1280／393px × 深／淺色共 8 組：單一 H1、無水平溢出、6 張圖片無載入失敗、頁首連結停在證據區、本段 3 點條列且無反引號、無 console 錯誤。整理前後截圖只留在本機暫存，不進 repo。
