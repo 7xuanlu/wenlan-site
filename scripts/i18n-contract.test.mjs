@@ -1833,7 +1833,7 @@ test("localized document-to-knowledge-base guides keep supported source boundari
     assert.ok(article);
     assert.equal(article.title, expected.title);
     assert.equal(article.publishedAt, "2026-08-01");
-    assert.equal(article.updatedAt, "2026-10-06");
+    assert.equal(article.updatedAt, "2026-10-08");
     assert.ok(article.keywords.includes(expected.keyword));
     assert.match(JSON.stringify(article), /wenlan sources add/);
     assert.match(JSON.stringify(article), /\.md/);
@@ -1854,7 +1854,7 @@ test("English document-to-knowledge-base guide owns the implementation gap", asy
     "How to Build a Local AI Knowledge Base from Markdown, PDFs, and Obsidian",
   );
   assert.equal(article.publishedAt, "2026-08-01");
-  assert.equal(article.updatedAt, "2026-08-01");
+  assert.equal(article.updatedAt, "2026-10-08");
   assert.ok(article.keywords.includes("AI knowledge base builder"));
   const text = JSON.stringify(article);
   assert.match(text, /wenlan sources add/);

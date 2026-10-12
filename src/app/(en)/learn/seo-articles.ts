@@ -608,103 +608,6 @@ const workflowArticles: BaseSpec[] = [
     ],
   },
   {
-    slug: "build-local-ai-knowledge-base-from-documents",
-    eyebrow: "Workflow",
-    category: "Workflows",
-    title: "How to Build a Local AI Knowledge Base from Markdown, PDFs, and Obsidian",
-    description:
-      "Use supported document sources, repeatable sync, source-backed pages, and verification to build a local AI knowledge base for coding agents.",
-    metaTitle: "Build a Local AI Knowledge Base from Documents | Wenlan",
-    metaDescription:
-      "Build a local AI knowledge base from Markdown, text files, text PDFs, folders, or an Obsidian vault, then verify sources and maintained pages.",
-    keywords: [
-      "build AI knowledge base",
-      "local AI knowledge base",
-      "AI knowledge base builder",
-      "open source AI knowledge base",
-      "Markdown AI knowledge base",
-      "PDF AI knowledge base",
-      "Obsidian AI knowledge base",
-      "AI knowledge base for coding agents",
-    ],
-    publishedAt: "2026-08-01",
-    updatedAt: "2026-08-01",
-    audience: "People building a local document knowledge base for Claude Code, Codex, Cursor, or another AI agent",
-    heroBullets: [
-      "Start with one bounded folder or file instead of importing everything.",
-      "Use Markdown, text, text-extractable PDFs, or an Obsidian vault as inspectable sources.",
-      "Verify source sync and page citations before trusting generated answers.",
-    ],
-    quickAnswer:
-      "Follow Wenlan's platform and client setup guide, then point `wenlan sources add <path>` at one Markdown or text file, a text-extractable PDF, a folder, or an Obsidian vault. Re-running the same command resyncs an already registered path. In a client with the Wenlan plugin, distill one repeated topic into a maintained Page; in an MCP-only client, use the Wenlan tools exposed by that client.",
-    wenlanFit:
-      "Wenlan keeps registered Sources separate from atomic Memories and maintained Pages. Regular files and folders can sync incrementally; an Obsidian vault remains read-only and resyncs on demand. The resulting Page stays readable as Markdown and keeps inspectable source support.",
-    problem:
-      "A folder search is not yet a knowledge base, while a one-time AI summary becomes detached from the documents that support it. The useful middle is a small source boundary, repeatable sync, a maintained answer for one real question, and a check that every important claim can still reach its evidence.",
-    actionHeading: "Build one document-to-page loop",
-    actionIntro:
-      "Use one topic and a small source set so failures stay visible.",
-    actionBullets: [
-      "Install the runtime for your operating system, connect the current AI client, and verify the connection before importing documents.",
-      "Choose one folder, file, or Obsidian vault that answers a repeated work question.",
-      "Keep supported inputs to `.md`, `.txt`, and text-extractable `.pdf`; put unrelated material outside the source boundary.",
-      "Run `wenlan sources add <path>` and inspect the found, ingested, skipped, and error counts.",
-      "Re-run the same command after a source changes; registration is idempotent and the path is resynced.",
-      "In Claude Code or Codex with the Wenlan plugin, use `/distill <topic>` only after the source set can answer the topic, then open it with `/pages <topic>`.",
-      "Run `/lint` and `/curate` in a plugin client, or use the equivalent Wenlan tools exposed by an MCP-only client, before relying on the Page.",
-    ],
-    code: {
-      label: "After platform and client setup",
-      code: "wenlan status\nwenlan sources add ~/Knowledge/project-docs",
-    },
-    caution:
-      "Image-only or scanned PDFs need OCR before Wenlan can extract their text, and Directory Sources do not ingest arbitrary source-code files. Keep code, tests, and native project docs authoritative; use this workflow for supported documents and maintained synthesis.",
-    faq: [
-      "Does Wenlan copy or rewrite my Obsidian vault?",
-      "No. Wenlan reads an Obsidian vault as a source and keeps the original Markdown human-owned. Page export or a symlink into the vault is a separate choice.",
-      "Is this the same as uploading files to a chatbot?",
-      "No. A chatbot upload is usually session-scoped. This workflow registers a reusable local source, resyncs it, and builds a maintained Page whose support can be inspected and reviewed.",
-    ],
-    relatedSlugs: [
-      "prevent-multi-agent-knowledge-conflicts",
-      "fix-pdf-ingestion-ai-knowledge-base",
-      "coding-agent-source-backed-knowledge-base",
-      "source-backed-wiki-pages-ai-work",
-      "source-backed-research-knowledge-base",
-      "build-client-project-knowledge-base-for-consulting",
-      "build-investment-research-knowledge-base",
-      "build-product-research-knowledge-base-for-prd",
-      "build-sre-incident-knowledge-base",
-      "distilled-wiki-pages-ai-memory",
-      "wenlan-vs-obsidian-ai-memory",
-      "build-ict-supplier-due-diligence-evidence-pack",
-      "build-customer-support-answer-knowledge-base",
-      "build-course-wiki-from-lecture-notes",
-    ],
-    officialReferences: [
-      {
-        label: "Wenlan platform and client setup",
-        href: "https://github.com/wenlan-app/wenlan/blob/main/docs/setup-with-ai.md",
-      },
-      {
-        label: "Wenlan supported document sources",
-        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
-      },
-      {
-        label: "Wenlan sources add CLI",
-        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
-      },
-      {
-        label: "Wenlan source-backed Pages",
-        href: "https://wenlan.app/docs/source-backed-pages",
-      },
-    ],
-    cta: {
-      heading: "Build one local knowledge-base loop",
-      body: "Install Wenlan, add one inspectable document set, then verify sync, Pages, citations, and review before expanding.",
-    },
-  },
-  {
     slug: "source-backed-research-knowledge-base",
     eyebrow: "Research workflow",
     category: "Workflows",
@@ -2211,6 +2114,219 @@ const trustArticles: BaseSpec[] = [
   },
 ];
 
+const localKnowledgeBaseArticle: LearnArticle = {
+  slug: "build-local-ai-knowledge-base-from-documents",
+  eyebrow: "Workflow",
+  category: "Workflows",
+  title: "How to Build a Local AI Knowledge Base from Markdown, PDFs, and Obsidian",
+  description:
+    "Build a personal AI knowledge base from a few local documents, choose a simple folder or a maintained wiki, and check answers against their sources.",
+  metaTitle: "Build a Personal AI Knowledge Base from Documents | Wenlan",
+  metaDescription:
+    "Start a personal AI knowledge base with two Markdown files. Compare document Q&A, a local folder or vault, and a maintained wiki, then check source citations.",
+  keywords: [
+    "personal AI knowledge base",
+    "build AI knowledge base",
+    "local AI knowledge base",
+    "AI knowledge base builder",
+    "Markdown AI knowledge base",
+    "PDF AI knowledge base",
+    "Obsidian AI knowledge base",
+    "AI knowledge base for coding agents",
+  ],
+  publishedAt: "2026-08-01",
+  updatedAt: "2026-10-08",
+  author: AUTHOR,
+  readingTime: "7 min read",
+  audience:
+    "People building a personal knowledge base from documents for Claude Code, Codex, Cursor, or another AI assistant",
+  heroBullets: [
+    "Use document Q&A for a one-off question, or a folder or vault when an agent should read files over time.",
+    "Keep a maintained wiki when shared, source-backed pages should survive across sessions and tools.",
+    "Start with two Markdown files and check whether an answer names the evidence and leaves gaps unknown.",
+  ],
+  sections: [
+    {
+      heading: "Quick answer: choose the smallest useful setup",
+      body: [
+        "A personal AI knowledge base can be as simple as a few files in a folder. Begin with the shape of work you need: ask a chatbot about documents for a one-time answer; keep an existing local folder or vault when an agent can read it as you work; use maintained wiki pages when you want an edited, reusable answer across sessions or tools.",
+        "Try a small set of files first. Add page maintenance when keeping answers current becomes recurring work.",
+      ],
+      table: {
+        columns: ["If you need…", "Start with…", "What to expect"],
+        rows: [
+          ["An answer from a few files once", "Document Q&A", "Convenient for a question; the context may be limited to that session."],
+          ["An agent to consult notes while you work", "A local folder or existing vault", "Files stay yours to organize; the agent needs a way to read them."],
+          ["An answer maintained across sessions and tools", "A source-backed wiki", "Pages need review as source documents change."],
+        ],
+      },
+    },
+    {
+      heading: "Try a two-file knowledge base",
+      body: [
+        "Create a new folder named my-kb-test in a location you can find again. Save the two blocks below as separate Markdown files, using a plain-text editor or a new Obsidian vault. These fictional notes and reference answers are teaching materials, not recorded product output.",
+        "This exercise uses an installed, signed-in Claude Code with model access. Wenlan and Obsidian plugins are not required. The linked setup guide covers installation and opening a folder.",
+      ],
+      id: "worked-example-files",
+      link: { label: "Set up Claude Code and open your notes", href: "/learn/wenlan-vs-obsidian-ai-memory" },
+      code: {
+        label: "research.md",
+        code: "# Research\n\nUsers cannot find the original research reports.",
+      },
+    },
+    {
+      id: "worked-example-decision",
+      heading: "Add the decision note",
+      body: [
+        "Create a second file in the same folder. The owner is deliberately unspecified; a useful answer should preserve that unknown instead of filling it in.",
+      ],
+      code: {
+        label: "decision.md",
+        code: "# Decision\n\nNext iteration: add filename citations.",
+      },
+    },
+    {
+      id: "worked-example-start",
+      heading: "Open the test folder in Claude Code",
+      body: [
+        "Open a terminal. Replace the path below with the full path to my-kb-test, keeping quotes around it, then run the two commands in order. Confirm that Claude Code is working in this test folder before continuing.",
+      ],
+      code: { label: "Terminal — use your test folder path", code: 'cd "/full/path/to/my-kb-test"\nclaude' },
+    },
+    {
+      id: "worked-example-question",
+      heading: "Ask the agent to show its support",
+      body: [
+        "In the Claude Code session started from this folder, ask:",
+      ],
+      code: {
+        label: "Question for Claude Code",
+        code: "Read research.md and decision.md without editing any files. Based only on these notes, what is the next step, what problem does it address, and who owns it? Cite the filename supporting each answer. If the notes do not say, answer unknown; do not invent an owner.",
+      },
+    },
+    {
+      id: "worked-example-answer",
+      heading: "Compare the answer with the files",
+      body: [
+        "Use this reference answer to check your result. Open each cited file and confirm that it supports the claim.",
+      ],
+      table: {
+        columns: ["Question", "Expected answer", "Expected citation"],
+        rows: [
+          ["What is the next step?", "Add filename citations in the next iteration.", "decision.md"],
+          ["What problem does it address?", "The research note says users cannot find the original research reports.", "research.md"],
+          ["Who owns it?", "Unknown; neither file names an owner.", "decision.md and research.md"],
+        ],
+      },
+    },
+    {
+      id: "worked-example-update",
+      heading: "Change a source and ask again",
+      body: [
+        "Now edit decision.md so the decision is to add direct links to the original reports instead of filename-only references. Keep research.md unchanged, then repeat the same question. This lets you inspect whether an answer reflects the current source text.",
+      ],
+      code: {
+        label: "Updated decision.md",
+        code: "# Decision\n\nNext iteration: add direct links to the original research reports instead of filename-only references.",
+      },
+    },
+    {
+      heading: "What should change in the second answer?",
+      body: [
+        "The next step should now mention direct links to the original reports. The research note still explains the reason, and the owner remains unknown. The updated decision should be cited for the changed action. If the answer still says only filename citations, check that the file was saved and that the agent is reading the folder you edited.",
+        "This checks one small example. Keep checking important answers against their sources as you add real documents.",
+      ],
+    },
+    {
+      id: "wenlan-knowledge-base",
+      heading: "When to keep files simple and when to add Wenlan",
+      body: [
+        "A folder or Obsidian vault may be enough when you want to keep notes in their existing shape and an agent can read them directly. Use a maintained wiki when recurring questions need a reviewed answer with clear support, or when the same work context should be available across sessions and tools. Wenlan is designed for that maintained, source-backed layer; it does not require replacing your notes or vault.",
+        "Wenlan packages source import, page maintenance, citations, and review into one application. Choose it when you want those workflows built in. A folder can also be shared by several AI tools; sharing alone is not a reason to switch. To try Wenlan, use the setup guide to install it and connect your client, then register your test folder. Replace the example path below with that folder’s actual path.",
+      ],
+      link: { label: "Install Wenlan and connect your AI tool", href: "/docs" },
+      code: {
+        label: "After setup, in a terminal",
+        code: 'wenlan status\nwenlan sources add "/full/path/to/my-kb-test"',
+      },
+      bullets: [
+        "Wenlan supports .md, .txt, and text-extractable .pdf sources. Check the found, ingested, skipped, and error counts returned by the source import command.",
+        "Re-running wenlan sources add <path> resyncs an already registered path. Regular files and folders can sync incrementally; an Obsidian vault is read-only and resyncs on demand.",
+        "In Claude Code or Codex with the Wenlan plugin, /distill <topic> creates a maintained Page from relevant sources and /pages <topic> opens it. These slash commands run in the plugin client; they are separate from the shell commands above. An MCP-only client can use the Wenlan tools it exposes.",
+        "Pages remain readable as Markdown and retain inspectable source support. Use /lint and /curate in a plugin client, or the equivalent Wenlan tools in an MCP-only client, to review a Page.",
+      ],
+    },
+    {
+      heading: "Keep the limits visible",
+      body: [
+        "Local files do not mean the model is local. Wenlan keeps its memory layer local by default, but a connected cloud AI client may send the selected source content to its model provider to answer a question. Check the model and client settings that apply to your setup before using sensitive material.",
+        "Image-only or scanned PDFs need OCR before Wenlan can extract their text. Directory Sources do not ingest arbitrary source-code files; keep code, tests, and native project docs authoritative. Wenlan reads an Obsidian vault without rewriting its original Markdown; exporting a Page or creating a symlink is a separate choice.",
+      ],
+    },
+  ],
+  faqs: [
+    {
+      question: "Do I need Wenlan to make a personal AI knowledge base?",
+      answer:
+        "No. Start with files or a vault if those fit your workflow. Wenlan is useful when you want a local source set and maintained Pages with inspectable source support across sessions or tools.",
+    },
+    {
+      question: "Does local knowledge-base storage mean my model runs locally?",
+      answer:
+        "No. Local files and a local memory layer do not determine where a connected model runs. A cloud client may send the selected content to its provider; check your client and model settings.",
+    },
+    {
+      question: "Does Wenlan rewrite my Obsidian vault?",
+      answer:
+        "No. Wenlan reads the vault as a read-only source and resyncs it on demand. Its source-backed Pages are separate Markdown artifacts.",
+    },
+    {
+      question: "Which files can Wenlan read?",
+      answer:
+        "The documented source types include Markdown, plain text, and text-extractable PDFs. Image-only or scanned PDFs need OCR, and arbitrary source-code files are not ingested as Directory Sources.",
+    },
+  ],
+  relatedSlugs: [
+    "wenlan-vs-obsidian-ai-memory",
+    "coding-agent-source-backed-knowledge-base",
+    "source-backed-wiki-pages-ai-work",
+    "fix-pdf-ingestion-ai-knowledge-base",
+    "source-backed-research-knowledge-base",
+    "distilled-wiki-pages-ai-memory",
+    "choose-ai-knowledge-base-tool",
+    "prevent-multi-agent-knowledge-conflicts",
+    "build-client-project-knowledge-base-for-consulting",
+    "build-investment-research-knowledge-base",
+    "build-product-research-knowledge-base-for-prd",
+    "build-sre-incident-knowledge-base",
+    "build-ict-supplier-due-diligence-evidence-pack",
+    "build-customer-support-answer-knowledge-base",
+    "build-course-wiki-from-lecture-notes",
+  ],
+  officialReferences: [
+    {
+      label: "Wenlan platform and client setup",
+      href: "https://github.com/wenlan-app/wenlan/blob/main/docs/setup-with-ai.md",
+    },
+    {
+      label: "Wenlan supported document sources",
+      href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
+    },
+    {
+      label: "Wenlan sources add CLI",
+      href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+    },
+    {
+      label: "Wenlan source-backed Pages",
+      href: "https://wenlan.app/docs/source-backed-pages",
+    },
+  ],
+  cta: {
+    heading: "Keep your personal knowledge-base loop current",
+    body: "Put a few relevant files together, ask one bounded question, and inspect each answer against its source. Add a maintained Page when that answer should stay useful over time.",
+  },
+};
+
 const retrievalRegressionArticle: LearnArticle = {
   slug: "test-ai-knowledge-base-retrieval-after-changes",
   eyebrow: "Retrieval regression",
@@ -3439,4 +3555,4 @@ export const seoArticles: LearnArticle[] = [
   ...workflowArticles,
   ...comparisonArticles,
   ...trustArticles,
-].map(makeArticle).concat(retrievalRegressionArticle, productResearchArticle);
+].map(makeArticle).concat(localKnowledgeBaseArticle, retrievalRegressionArticle, productResearchArticle);

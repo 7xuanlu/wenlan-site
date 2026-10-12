@@ -274,7 +274,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                   <a href="/learn-example/en" download className="inline-flex items-center px-2 py-3 text-sm font-semibold text-[var(--o-warm)] underline underline-offset-4">Download the exercise (.md)</a>
                   </div>
                 )}
-                {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work"].includes(article.slug) && (
+                {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work", "build-local-ai-knowledge-base-from-documents"].includes(article.slug) && (
                   <a href="#recorded-workflow" className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-[var(--o-warm)] underline underline-offset-4">Inspect the real app screens</a>
                 )}
               </div>
@@ -483,7 +483,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
           </div>
         </section>
 
-        {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work", "wenlan-vs-obsidian-ai-memory"].includes(article.slug) && <RecordedWorkflowProof locale="en" />}
+        {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work", "wenlan-vs-obsidian-ai-memory", "build-local-ai-knowledge-base-from-documents"].includes(article.slug) && <RecordedWorkflowProof locale="en" />}
 
         <section className="border-t border-[var(--o-border-subtle)] px-6 py-20">
           <div className="mx-auto max-w-3xl">

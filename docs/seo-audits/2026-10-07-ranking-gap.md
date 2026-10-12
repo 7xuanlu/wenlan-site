@@ -447,3 +447,27 @@ Opus 5.5/high 收到完整修正版、市場證據與既有三語實跑輸出後
 **本版發布授權（2026-10-08）：** 使用者明確要求完成上述手機入口與頁尾引導並發布。三語新增頁首手機四個跳轉入口（連接、MCP、外掛、Wenlan），頁尾改為建立可持續更新的專案摘要，修訂日期更新為10/08。承接本篇已驗證修改，保留既有canonical與搜尋主題。發布不代表取得排名／轉換成果；週期自動化維持暫停，未擴大至付費、站外聯絡或索引提交。
 
 發布候選 `1e26ddc` 在最新主分支 `46566c3` 上整合：必要檢查、GitHub CI及Vercel預覽通過；獨立整合審查無阻擋項。三語1440／393px、深淺色共12組實際檢查通過，手機四連結保持語系／錨點且抵達正確段落，頁尾引導與設定目的地一致。raw log、前後畫面在 `/tmp/wenlan-seo/2026-10-08-publish/`；GitHub圖片附件工具不可用，未把本地路徑當上傳證據。合併與正式網站驗證結果接續記錄於 [PR #224](https://github.com/7xuanlu/wenlan-site/pull/224)，避免另一份重複交接報告。
+
+### 2026-10-08 個人知識庫正式版復核
+
+使用者確認 Wiki、Obsidian 兩組已完成本輪工作，轉看第三組；不重開前兩組改寫。直接 HTTP 讀取三語正式 `/learn/build-local-ai-knowledge-base-from-documents`，雙中文已包含兩份虛構筆記、啟動 Claude Code、只讀問題、參考答案與引用；RAG／Wiki 說法也已收斂。因此上文 R4 與此頁 R5 已不再是正式版待修缺口，舊本地紀錄不能重新提名它們。本次只驗證正文，未做全裝置視覺 QA 或教學端到端測試。
+
+英文正式頁仍是 8 月版本：Quick answer 直接要求安裝 Wenlan，正文有來源註冊、同步與 distill，但沒有中文的完整輸入／提問／參考答案。這適合已選用 Wenlan 的讀者；對「personal ai knowledge base」尚在找建立方法的讀者，屬可繼續核對的意圖落差，不是已證明的排名原因。[NovaKit 教學](https://www.novakit.ai/blog/build-ai-knowledge-base-from-pdfs) 比較不同起步方式與驗收問題，[Ahmad Khan 的實作](https://blog.ahmadwkhan.com/building-a-personal-ai-knowledge-base-with-embeddings-and-vector-search) 提供自建流程與程式。兩者本次是搜尋發現後讀取的對照，不宣稱為 Google 當地前二，也不背書其所有產品／模型說法。
+
+需求量已在保存的 `planner-task-followup.json` 補到：US `personal ai knowledge base`、TW `ai 知識庫建立`、China Google `个人知识库搭建` 各 10–100／月（2025-09～2026-08，獨立市場，不相加）。GSC 09-09～10-06 的此頁 EN 10 曝光／0 點擊、TW 3／1；可見 query × page 表沒有這組路由的列，CN 頁表亦未列出，未知不是零，不能推算各詞排名或評價剛改版成效。HTTP 正文保存在 `/tmp/wenlan-seo-demand/2026-10-08-ranking-followup/kb-{en,zh-TW,zh-CN}.txt`。未改正式文章或发布。
+
+#### 使用者指定修改：英文個人知識庫頁
+
+使用者於 10-08 明確要求「根據這個去修改」，授權此具體本地改寫；這是使用者指定的文章修正，不宣稱通過原本既有頁成效門檻，也未重啟 campaign 或取得發布授權。讀者是搜個人文件知識庫建立方法、尚未選定工具的人；成果是選擇做法並完成兩檔案提問、引用核對及改來源後再問。沿用上述搜尋需求與競爭頁證據，未重新提名 Wiki／Obsidian，也未擴大至企業 RAG。首次讀者路徑仍是此既有 Google 搜尋入口；沒有新增外部引用。
+
+英文保留同一 canonical／H1／原始發布日，更新描述、摘要與修改日；把產品安裝移到選擇方法及完整教學之後。分開檔案、終端機指令與 AI 對話提示，保留支持格式、OCR、匯入回報、同步、唯讀 vault、plugin／MCP 界線。雙中文沿用已有例子，只同步來源改動驗收、來源同步界線與 shell／對話分離。三語重用既有 Tally 真實畫面並保留「不是本例實測」的上下文。沒有量測模型作答、執行產品比較或宣稱省時／排名提升。
+
+修改由 native worker（Luna/high）起草單一英文資料檔，主代理審稿修正並整合。`seo:goal:check`、`seo:scenario:check`、`test:goal` 60／60、`lint`、`build`、`seo:technical:built` 與兩項受影響的文章／建置契約測試通過；本篇來源 hash 已在核對雙中文後更新。當時 `test:seo` 386／387、`test:i18n` 85／86 的兩項舊失敗，見下方 10-11 整合紀錄。初次 build 因沙箱無法下載字型失敗，允許字型連線後通過；IndexNow 明確跳過。
+
+#### 2026-10-11 整合到最新 main
+
+本地改動原本建在 `d5a9899`，落後 main 15 個提交（#220～#234）。Claude 依交接在隔離分支 `seo/kb-documents-guide`（基底 `18b9d1c`）整合，主 checkout 未動。衝突處理：舊英文 KB 條目改用新獨立條目；Obsidian 三語段落保留 #224 正式版；雙中文 RAG／Wiki 兩句保留 #223 正式版，兩邊都已修正舊「只讀一次」說法，#223 較精確且已發布；兩個 Learn 頁的實際畫面清單取聯集。新英文條目的三個 GitHub 連結改為 `wenlan-app/wenlan`，與 #231 一致。
+
+兩項舊失敗都已在 main 修好，不需另改：CLAUDE.md 斷言由 #223 改為檢查 `@AGENTS.md` 與共用 SEO 流程；`distilled-wiki-pages-ai-memory` 的 hash 由 #231 更新，與目前英文一致。本篇英文和 10-08 審過的版本只差 repo 網址搬家（還原網址後 hash 等於 10-08 的 `c84f05a3…`），因此 hash 更新為 `c0c2f387…`。雙中文內容有實質更新，修改日與英文同為 10-08，建置、部署與週報檢查的日期一併更新。
+
+`seo:goal:control`（PASS `d108f111…`）、`seo:goal:check`、`seo:scenario:check`、`test:goal` 60／60、`test:seo` 528 通過／2 項 PGlite fixture 跳過、`test:i18n` 86／86、`test:measurement` 133／133、`lint`、`build`、`seo:technical:built` 通過；build 需允許下載 Google 字型，IndexNow 跳過。本機正式版 3441 驗證 en／zh-TW／zh-CN × 1280／393px × 深／淺色共 12 組：單一 H1、無水平溢出、兩張實際畫面圖片解碼且有替代文字、頁首連結停在證據區、無 console 錯誤。尚未 push、發布或請求索引。

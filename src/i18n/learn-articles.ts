@@ -1097,7 +1097,7 @@ const zhTWArticles = {
       "Wenlan 文瀾",
     ],
     publishedAt: "2026-08-01",
-    updatedAt: "2026-10-06",
+    updatedAt: "2026-10-08",
     author: "Qi-Xuan Lu",
     readingTime: "9 分鐘閱讀",
     audience: "想讓 AI 讀懂自己的文件、筆記與對話紀錄的繁體中文使用者",
@@ -1197,7 +1197,7 @@ const zhTWArticles = {
         heading: "怎麼驗收：三個問題就夠",
         body: [
           "文件裡有答案的問題，AI 應該答對並指出是哪一份文件。沒有答案的問題，AI 應該說找不到，而不是編一個。要綜合兩份文件的問題，最能看出工具是真的讀懂，還是只抓到一段文字。",
-          "三題都過，再加入下一個主題。一次匯入全部資料，出錯時很難知道是哪一份文件造成的。",
+          "接著把 decision.md 的決定改成「下一輪加入原始研究報告的直接連結，取代只列檔名」，存檔後再問相同問題。答案應採用新決定、引用 decision.md，負責人仍是未知。這只是起步檢查，不能保證所有問題都答對。",
         ],
       },
       {
@@ -1215,6 +1215,8 @@ const zhTWArticles = {
         body: [
           "Wenlan（文瀾）是開源的桌面 app，做的是上面的 LLM Wiki 做法。它把文件、筆記和 AI 對話整理成附出處的頁面；來源改了會標出哪些頁面要更新，而且不會蓋掉你的修改。Claude Code、Codex 和其他 AI 工具讀的是同一份知識庫。",
           "支援 Markdown（.md）、文字檔（.txt）、可擷取文字的 PDF（.pdf），以及 Obsidian vault；掃描型 PDF 要先 OCR。Obsidian vault 只會被讀取，原始筆記不會被修改。",
+          "在已連接 Wenlan 外掛的 AI 對話中，用 /distill <主題> 整理，再用 /pages <主題> 開啟；/lint 和 /curate 用來檢查與審查。這些不是終端機指令。",
+          "普通資料夾也能讓多個 AI 工具讀取；Wenlan 的用處是把匯入、頁面維護、引用與審查做成內建流程。安裝並連接 AI 客戶端後，先用 wenlan status 確認連線，再加入來源並檢查匯入回報。Obsidian vault 按需重新同步；資料夾來源不會匯入任意程式碼檔案。",
         ],
         bullets: [
           "先依照平台與 AI client 設定指南安裝並連線，確認 Wenlan 已連上，再加入一個範圍明確的資料夾、檔案或 Obsidian vault。",
@@ -1223,8 +1225,8 @@ const zhTWArticles = {
           "在已安裝 Wenlan plugin 的 Claude Code 或 Codex 中，用 `/distill <主題>` 建立維護型 Page，再以 `/pages <主題>` 檢查。執行 `/lint` 與 `/curate` 檢查問題並審核修訂；只有 MCP 的 client 請使用它提供的 Wenlan tools。",
         ],
         code: {
-          label: "安裝並連接 AI 工具後",
-          code: "wenlan sources add ~/Knowledge/my-topic\n/distill <主題>\n/pages <主題>",
+          label: "終端機：換成實際的測試資料夾路徑",
+          code: "wenlan status\nwenlan sources add ~/Knowledge/my-topic",
         },
       },
     ],
@@ -4739,7 +4741,7 @@ const zhCNArticles = {
       "Wenlan 文澜",
     ],
     publishedAt: "2026-08-01",
-    updatedAt: "2026-10-06",
+    updatedAt: "2026-10-08",
     author: "Qi-Xuan Lu",
     readingTime: "9 分钟阅读",
     audience: "想让 AI 读懂自己的文档、笔记与对话记录的简体中文用户",
@@ -4839,7 +4841,7 @@ const zhCNArticles = {
         heading: "怎么验收：三个问题就够",
         body: [
           "文档里有答案的问题，AI 应该答对并指出是哪一份文档。没有答案的问题，AI 应该说找不到，而不是编一个。要综合两份文档的问题，最能看出工具是真的读懂了，还是只抓到一段文字。",
-          "三题都过，再加入下一个主题。一次导入全部资料，出错时很难知道是哪一份文档造成的。",
+          "接着把 decision.md 的决定改成「下一轮加入原始研究报告的直接链接，取代只列文件名」，保存后再问相同问题。答案应采用新决定、引用 decision.md，负责人仍是未知。这只是起步检查，不能保证所有问题都答对。",
         ],
       },
       {
@@ -4857,6 +4859,8 @@ const zhCNArticles = {
         body: [
           "Wenlan（文澜）是开源的桌面 app，用的是上面的 LLM Wiki 做法。它把文档、笔记和 AI 对话整理成带出处的页面；来源改了会标出哪些页面要更新，而且不会覆盖你的修改。Claude Code、Codex 和其他 AI 工具读的是同一份知识库。",
           "支持 Markdown（.md）、文本文件（.txt）、可提取文字的 PDF（.pdf），以及 Obsidian vault；扫描型 PDF 要先 OCR。Obsidian vault 只会被读取，原始笔记不会被修改。",
+          "在已连接 Wenlan 插件的 AI 对话中，用 /distill <主题> 整理，再用 /pages <主题> 打开；/lint 和 /curate 用于检查和审核。这些不是终端命令。",
+          "普通文件夹也能让多个 AI 工具读取；Wenlan 的用途是把导入、页面维护、引用和审核做成内置流程。安装并连接 AI 客户端后，先用 wenlan status 确认连接，再添加来源并检查导入报告。Obsidian vault 按需重新同步；文件夹来源不会导入任意代码文件。",
         ],
         bullets: [
           "先按平台与 AI client 设置指南安装并连接，确认 Wenlan 已连通，再加入一个边界明确的文件夹、文件或 Obsidian vault。",
@@ -4865,8 +4869,8 @@ const zhCNArticles = {
           "在已安装 Wenlan plugin 的 Claude Code 或 Codex 中，用 `/distill <主题>` 建立维护型 Page，再用 `/pages <主题>` 检查。运行 `/lint` 与 `/curate` 检查问题并审核修订；只有 MCP 的 client 请使用它提供的 Wenlan tools。",
         ],
         code: {
-          label: "安装并连接 AI 工具后",
-          code: "wenlan sources add ~/Knowledge/my-topic\n/distill <主题>\n/pages <主题>",
+          label: "终端：换成实际的测试文件夹路径",
+          code: "wenlan status\nwenlan sources add ~/Knowledge/my-topic",
         },
       },
     ],

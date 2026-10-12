@@ -407,7 +407,7 @@ export default async function LocalizedLearnSlugPage({
                   <a href={`/learn-example/${resolvedLocale}`} download className="inline-flex items-center px-2 py-3 text-sm font-semibold text-[var(--o-warm)] underline underline-offset-4">{locale === "zh-TW" ? "下載練習材料（.md）" : "下载练习材料（.md）"}</a>
                   </div>
                 )}
-                {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work"].includes(article.slug) && (
+                {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work", "build-local-ai-knowledge-base-from-documents"].includes(article.slug) && (
                   <a href="#recorded-workflow" className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-[var(--o-warm)] underline underline-offset-4">{locale === "zh-TW" ? "查看實際操作畫面" : "查看实际操作画面"}</a>
                 )}
               </div>
@@ -625,7 +625,7 @@ export default async function LocalizedLearnSlugPage({
           </div>
         </section>
 
-        {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work", "wenlan-vs-obsidian-ai-memory"].includes(article.slug) && <RecordedWorkflowProof locale={resolvedLocale} />}
+        {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work", "wenlan-vs-obsidian-ai-memory", "build-local-ai-knowledge-base-from-documents"].includes(article.slug) && <RecordedWorkflowProof locale={resolvedLocale} />}
 
         <section className="border-t border-[var(--o-border-subtle)] px-6 py-20">
           <div className="mx-auto max-w-3xl">
