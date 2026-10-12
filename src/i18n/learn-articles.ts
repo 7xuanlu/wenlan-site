@@ -121,7 +121,7 @@ const zhTWArticles = {
     officialReferences: [
       {
         label: "Wenlan 知識生命週期",
-        href: "https://github.com/wenlan-app/wenlan#how-knowledge-stays-current",
+        href: "https://github.com/wenlan-app/wenlan#two-lifecycles",
       },
       {
         label: "Wenlan 審查與信任",
@@ -1281,7 +1281,7 @@ const zhTWArticles = {
       },
       {
         label: "wenlan sources add CLI",
-        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add",
       },
       {
         label: "Wenlan 有來源 Pages",
@@ -3073,7 +3073,7 @@ const zhTWArticles = {
       },
       {
         label: "Wenlan sources add CLI",
-        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add",
       },
       {
         label: "Wenlan 有來源 Pages",
@@ -3499,7 +3499,7 @@ const zhCNArticles = {
     officialReferences: [
       {
         label: "Wenlan 知识生命周期",
-        href: "https://github.com/wenlan-app/wenlan#how-knowledge-stays-current",
+        href: "https://github.com/wenlan-app/wenlan#two-lifecycles",
       },
       {
         label: "Wenlan 审核与信任",
@@ -4923,7 +4923,7 @@ const zhCNArticles = {
       },
       {
         label: "wenlan sources add CLI",
-        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add",
       },
       {
         label: "Wenlan 有来源 Pages",
@@ -6435,7 +6435,7 @@ const zhCNArticles = {
       },
       {
         label: "Wenlan sources add CLI",
-        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add-path",
+        href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add",
       },
       {
         label: "Wenlan 有来源 Pages",
