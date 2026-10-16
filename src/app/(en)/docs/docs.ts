@@ -189,7 +189,7 @@ const productSurfaceBullets = [
   "MCP connector - owner: wenlan; released as wenlan-mcp; run wenlan connect <client>; verify with wenlan connect codex --dry-run.",
   "Claude Code plugin - owner: wenlan; released plugin workflow; install from wenlan-app/wenlan as wenlan@7xuanlu-wenlan; verify with /wenlan:setup.",
   "Codex plugin - owner: wenlan; primary Codex workflow; install with codex plugin marketplace add wenlan-app/wenlan and codex plugin add wenlan@7xuanlu-wenlan; start a new task and run /setup.",
-  "ChatGPT and Claude.ai remote MCP - owner: wenlan; released authenticated Streamable HTTP endpoint with Space-scoped OAuth pairing through desktop Web Access; verify the authorized client and selected Space.",
+  "ChatGPT and Claude.ai remote MCP - owner: wenlan; released authenticated Streamable HTTP endpoint with OAuth pairing through desktop Web Access, scoped to the whole library or one Space; verify the authorized client and what it can search.",
   "other MCP clients - owner: wenlan; client-specific config; run wenlan connect cursor or the matching client; restart the client, then call context.",
   "optional desktop app - owner: wenlan app/ crate; optional daemon client in the unified release; verify the app talks to localhost:7878.",
   "source build - owner: wenlan; contributor/dev path; run cargo build --workspace; verify with cargo test --workspace.",
@@ -1646,7 +1646,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Current runtime shape",
         body: [
-          "The current public docs describe the v0.18.16 runtime shape: Claude Code and Codex plugins, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages, real git versioning for readable pages, session handoffs, status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
+          "The current public docs describe the v0.19.1 runtime shape: Claude Code and Codex plugins, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages with revisions, session handoffs, status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
           "The biggest practical upgrade checks are platform support, package path alignment, and spaces. Confirm your machine's service manager, confirm MCP clients launch the connector under ~/.wenlan/bin, and confirm the active space is the one you expect.",
         ],
         link: {
@@ -2799,7 +2799,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Authenticated Web Access (released desktop feature)",
         body: [
-          "Released desktop Web Access uses the authenticated relay at https://relay.wenlan.app/mcp. You authorize a connected AI client through OAuth and approve its pairing request in Wenlan on your device. Access is limited to one selected existing Space; changing that Space needs fresh explicit consent, and newly created Spaces are not automatically included. This custom MCP connection is not a claim that Wenlan is listed in the ChatGPT Apps Directory.",
+          "Released desktop Web Access uses the authenticated relay at https://relay.wenlan.app/mcp. You authorize a connected AI client through OAuth and approve its pairing request in Wenlan on your device. You choose what web apps can search: the whole library (every Space, plus everything not in a Space) or one existing Space. When you share one Space, other and newly created Spaces stay private. Changing what is shared ends existing connections, so connected apps must pair again. This custom MCP connection is not a claim that Wenlan is listed in the ChatGPT Apps Directory.",
           "Your knowledge library stays on your device; the relay keeps control-plane records so it can authenticate, route, and limit sessions. The public MCP endpoint is https://relay.wenlan.app/mcp. It exposes only three query tools — brief, recall, and get_page_sources — and recall still records the query and accessed memory identifiers in local activity history. The connected device must stay online so the relay can route each request to it and return the result.",
           "Requests and results pass through Cloudflare's relay infrastructure to the connected AI client and, where applicable, its provider. Cloudflare and Wenlan's relay administrator can read requests and results while processing them. HTTPS protects traffic in transit; it is not end-to-end encryption that excludes these operators. Do not connect a Space containing credentials or other restricted text: the connector does not classify or redact sensitive content embedded in knowledge.",
           "Technical expiry only denies further access and is not a physical-deletion time. Cleanup runs in bounded batches on a recurring schedule, so an outage or backlog can delay physical deletion beyond expiry, and infrastructure providers may retain their own diagnostics. There is no automatic migration of legacy relay records into this connector.",
@@ -3131,7 +3131,7 @@ export const docPages: DocPage[] = [
         heading: "How the pieces connect",
         body: [
           "The daemon runs locally and owns captures, source-backed pages, sessions, and retrieval. wenlan-mcp is the connector clients use when they need Wenlan tools.",
-          "Local clients launch wenlan-mcp over stdio. Current desktop Web Access connects ChatGPT and Claude.ai through the authenticated relay at https://relay.wenlan.app/mcp. OAuth pairing grants query access only to the Space you choose and approve; requests and results pass through the relay while your local device is online.",
+          "Local clients launch wenlan-mcp over stdio. Current desktop Web Access connects ChatGPT and Claude.ai through the authenticated relay at https://relay.wenlan.app/mcp. OAuth pairing grants query access only to what you choose to share, the whole library or one Space, and only after you approve the pairing; requests and results pass through the relay while your local device is online.",
         ],
       },
       {
@@ -3210,7 +3210,7 @@ export const docPages: DocPage[] = [
       {
         heading: "ChatGPT and Claude.ai",
         body: [
-          "In the Wenlan desktop app, open Settings > Agents > Web access, choose a Space, consent to remote queries for that Space, and turn Web access on. The panel exposes the MCP endpoint https://relay.wenlan.app/mcp when the device is connected.",
+          "In the Wenlan desktop app, open Settings > Connections > Web access, choose whether web apps can search the whole library or one Space, and turn Web access on. The panel exposes the MCP endpoint https://relay.wenlan.app/mcp when the device is connected.",
           "Add the endpoint in the web AI client's supported MCP connection flow and start authorization. Review the pairing request in Wenlan, check its client ID, Space, and expiry, then approve only if you initiated that connection. Finish the authorization in the AI client. The grant is limited to the approved Space; other and future Spaces stay private.",
           "The local device must be online while it serves queries. Search activity is recorded locally, and requests and results pass through the relay and the connected AI provider. The older origin-relay no-login tunnel is a legacy flow; possession of its URL granted access and is not the current Web Access setup. Stop Web access or revoke an authorized client to end access.",
           "This is a custom MCP connection to your own Wenlan runtime. It does not mean Wenlan is publicly listed in the ChatGPT Apps Directory.",
@@ -3643,7 +3643,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository's security policy commits to acknowledgment within 48 hours and a fix timeline within 7 days. The latest released version is supported (the current stable 0.18.16 line); older releases are best-effort.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository's security policy commits to acknowledgment within 48 hours and a fix timeline within 7 days. The latest released version is supported (the current stable 0.19.1 line); older releases are best-effort.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3777,14 +3777,14 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Open the app source",
-          href: "https://github.com/wenlan-app/wenlan/tree/v0.18.16/app",
+          href: "https://github.com/wenlan-app/wenlan/tree/v0.19.1/app",
         },
       },
       {
         heading: "Remote Access for ChatGPT and Claude.ai",
         body: [
-          "The released desktop app's Web Access connects through the authenticated relay at https://relay.wenlan.app/mcp. In Settings > Agents > Web access, choose and approve one Space before enabling it. The panel shows connection health, the stable endpoint, pairing requests, and authorized clients.",
-          "Add the endpoint through the web AI client's MCP connection flow, then review the pairing request in Wenlan. Check the client ID and Space before approving; only the selected Space is queryable, and you can revoke a grant or stop Web access. The device must be online while it serves queries.",
+          "The released desktop app's Web Access connects through the authenticated relay at https://relay.wenlan.app/mcp. In Settings > Connections > Web access, choose the whole library or one Space before turning it on. The panel shows connection health, the stable endpoint, pairing requests, and authorized clients.",
+          "Add the endpoint through the web AI client's MCP connection flow, then review the pairing request in Wenlan. Check the client ID and what it can search before approving; when one Space is shared, other Spaces stay private, and you can revoke a grant or stop Web access. The device must be online while it serves queries.",
           "The older origin-relay no-login tunnel is a separate legacy flow: anyone with its URL could access it. It is not the current Web Access path. The current endpoint is a custom MCP connection to your own Wenlan runtime, not a claim that Wenlan is publicly listed in the ChatGPT Apps Directory.",
         ],
         link: {
@@ -3822,22 +3822,44 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.18.16",
+      "Wenlan version 0.19.1",
       "wenlan-mcp release notes",
     ],
-    updatedAt: "2026-10-04",
+    updatedAt: "2026-10-16",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Quick answer: the current stable release in the repository changelog is v0.18.16, dated 2026-10-04.",
+      "Quick answer: the current stable release in the repository changelog is v0.19.1, dated 2026-10-14.",
       "The unified release publishes native runtime archives plus macOS Apple Silicon and Windows x64 desktop builds and updater artifacts.",
     ],
     sections: [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.18.16 is the current stable release recorded in CHANGELOG.md and GitHub Releases, dated 2026-10-04. It adds one-click opening of relay pairing requests in Wenlan and fixes local AI app routing to Add a tool. See the release notes for the exact shipped changes.",
+          "Wenlan v0.19.1 is the current stable release recorded in CHANGELOG.md and GitHub Releases, dated 2026-10-14. It is a fix release on top of v0.19.0. See the release notes for the exact shipped changes.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
+        ],
+        bullets: [
+          "Unconfirmed pages appear in search, and AI-written pages no longer require a configured model.",
+          "Notes written about an entity appear in the Wiki Folders tree, which now shows a note count.",
+          "The reader centres the open note and folds the labelled sidebar when Info needs room.",
+          "The capture skill reads the receipt the daemon actually returns.",
+          "New installs no longer turn ~/.wenlan into a git repository. Page history lives in Wenlan's own revisions; run git init in ~/.wenlan/pages yourself if you also want a git history of the Markdown files.",
+        ],
+      },
+      {
+        heading: "v0.19.0 highlights",
+        body: [
+          "v0.19.0, dated 2026-10-12, makes notes the default workspace and makes background AI explicitly optional.",
+        ],
+        bullets: [
+          "Notes are the default workspace, organized in real folders, with direct page editing and safe autosave.",
+          "Reading, sources, and settings are unified for notes-first workflows; a source library adds safe web excerpts and DOCX ingestion.",
+          "Background AI is opt-in rather than assumed.",
+          "Knowledge checks find problems and apply verified repairs.",
+          "Web apps can be given the whole library or one Space, with one-click pairing and a short-code fallback.",
+          "MCP instructions are wiki-first, with read_page, list_pages, and update_brief tools.",
+          "Wenlan connect shows when a local tool has actually connected and names each client.",
         ],
       },
       {
@@ -3999,7 +4021,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.18.16, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.19.1, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },

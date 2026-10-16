@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "34056e361cb070dff668d717f9aae15cebb3950fd1d35d31469ff34ddd472640",
+    sourceHash: "946673f1f7bfbfbc384eab8e7031711e1c04291b45974a791b813ae7cc93a184",
     content: {
       seo: {
         title: "文瀾 Wenlan｜個人 AI 知識庫",
@@ -76,7 +76,7 @@ export const zhTWContent = {
         title:
           "下\u2060載\u2060適\u2060合\u2060你\u2060系\u2060統\u2060的 Wenlan。",
         description:
-          "Wenlan v0.18.16 提供 Windows x64 桌面版與 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 套件。",
+          "Wenlan v0.19.1 提供 Windows x64 桌面版與 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 套件。",
         stableLabel: "穩定版",
         releaseNotesLabel: "版本說明",
         packageIncludesLabel: "內含 CLI、daemon 與 MCP connector",
@@ -486,7 +486,7 @@ export const zhTWContent = {
           {
             id: "tools",
             q: "哪些 AI 工具可以搭配 Wenlan？",
-            a: "Claude Code 和 Codex 有 Wenlan 外掛；Cursor、Claude Desktop、VS Code 等本地工具透過 MCP 連接。ChatGPT 等瀏覽器工具使用 OAuth 遠端連線：先選擇 Space、批准配對，使用時保持 Wenlan 在線，也能在 App 中撤銷存取。Obsidian 則是唯讀的來源匯入方式。",
+            a: "Claude Code 和 Codex 有 Wenlan 外掛；Cursor、Claude Desktop、VS Code 等本地工具透過 MCP 連接。ChatGPT 等瀏覽器工具使用 OAuth 遠端連線：先選擇分享整個資料庫或一個 Space、批准配對，使用時保持 Wenlan 在線，也能在 App 中撤銷存取。Obsidian 則是唯讀的來源匯入方式。",
           },
           {
             id: "not-notes",
@@ -496,7 +496,7 @@ export const zhTWContent = {
           {
             id: "setup",
             q: "我要怎麼設定？",
-            a: "先安裝 Wenlan，再連接一個 AI 工具。Claude Code 和 Codex 外掛提供 handoff、recall 等指令，其他本地工具則透過 MCP 連接。保存與搜尋紀錄不需要模型 API 金鑰；整理成知識頁時，會使用你設定的本地或雲端模型。入門指南會帶你完成所選工具的設定。 瀏覽器工具使用 OAuth 網頁存取，需由你批准指定 Space 的連線，也能在 App 中撤銷存取。",
+            a: "先安裝 Wenlan，再連接一個 AI 工具。Claude Code 和 Codex 外掛提供 handoff、recall 等指令，其他本地工具則透過 MCP 連接。保存與搜尋紀錄不需要模型 API 金鑰；整理成知識頁時，會使用你設定的本地或雲端模型。入門指南會帶你完成所選工具的設定。 瀏覽器工具使用 OAuth 網頁存取，需由你批准連線，並選擇分享整個資料庫或一個 Space，也能在 App 中撤銷存取。",
           },
           {
             id: "platforms",
@@ -1659,7 +1659,7 @@ export const zhTWContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "7954816c15aa13ac99257b9ea2189e3c394723734cfc40363a6f40d2f3281128",
+    sourceHash: "a942dd503a10232ec60b60fac0d5129f30c178a8525bf6b8dff657da1ceaa274",
     content: {
       seo: {
         title: "安裝文瀾 Wenlan：Claude Code、Codex、ChatGPT 與 MCP",
@@ -1702,13 +1702,13 @@ export const zhTWContent = {
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16/wenlan-windows-x64.zip",
+              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.1/wenlan-windows-x64.zip",
               label: "下載 Windows x64"
             },
             {
               id: "all-downloads",
-              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.18.16",
-              label: "全部 v0.18.16 下載"
+              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.19.1",
+              label: "全部 v0.19.1 下載"
             }
           ]
         },
@@ -1745,8 +1745,8 @@ export const zhTWContent = {
           number: "04",
           title: "ChatGPT 或 Claude.ai（進階連線）",
           paragraphs: [
-            "在 Wenlan 桌面版開啟「網頁存取」（Web access），選擇要分享的 Space，閱讀資料存取說明後啟用。在 AI 工具中，以 OAuth MCP 連線加入 https://relay.wenlan.app/mcp。",
-            "回到 Wenlan 檢查並批准配對請求。存取範圍限於你選擇的 Space，其他與之後新增的 Space 不會自動分享。使用時請保持 Wenlan 在線；不再需要時，可在 App 中撤銷存取。",
+            "在 Wenlan 桌面版開啟「網頁存取」（Web access），選擇分享整個資料庫或只分享一個 Space，閱讀資料存取說明後啟用。在 AI 工具中，以 OAuth MCP 連線加入 https://relay.wenlan.app/mcp。",
+            "回到 Wenlan 檢查並批准配對請求。如果只分享一個 Space，其他與之後新增的 Space 不會自動分享。使用時請保持 Wenlan 在線；不再需要時，可在 App 中撤銷存取。",
             "遠端查詢會經過中繼服務與 AI 服務商，本機也會記錄存取活動。這是自訂連線，並非公開 ChatGPT Apps Directory 上架項目。"
           ],
           commands: [],
