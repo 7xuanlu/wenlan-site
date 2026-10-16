@@ -327,17 +327,25 @@ export function inferReleaseDownload(href: unknown): ReleaseDownloadInference | 
 
 export async function fetchPublishedRelease(
   fetchImpl: typeof fetch = fetch,
+  token: string | undefined = process.env.GITHUB_RELEASE_TOKEN,
 ): Promise<WenlanRelease> {
+  // Unauthenticated calls share GitHub's 60-per-hour limit with every other
+  // site on the same egress IP; a read-only token raises it to 5,000.
   const response = await fetchImpl(RELEASE_API, {
     cache: "no-store",
     headers: {
       Accept: "application/vnd.github+json",
       "User-Agent": "wenlan-site-release-manifest",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
     signal: AbortSignal.timeout(5000),
   });
   if (!response.ok) {
-    throw new Error(`GitHub release manifest unavailable: HTTP ${response.status}`);
+    const remaining = response.headers.get("x-ratelimit-remaining");
+    throw new Error(
+      `GitHub release manifest unavailable: HTTP ${response.status}` +
+        (remaining === null ? "" : ` (rate limit remaining ${remaining})`),
+    );
   }
   return normalizePublishedRelease(await response.json());
 }

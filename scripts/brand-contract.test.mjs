@@ -1083,9 +1083,13 @@ test("public current-release surfaces track the selected Wenlan release source",
   assert.match(structuredData, /downloadUrl: release\.releaseUrl/);
   assert.match(releases, new RegExp(`version: "${escapedVersion}"`));
   assert.match(releases, new RegExp(`tag: "v${escapedVersion}"`));
-  assert.match(
-    releases,
-    new RegExp(`publishedAt: "${escapeRegExp(date)}(?:T|")`),
+  // The changelog date is when the Release PR was cut; GitHub can publish
+  // the release a few days later, never earlier.
+  const publishedAt = releases.match(/publishedAt: "(\d{4}-\d{2}-\d{2})/)?.[1];
+  assert.ok(publishedAt, "releases.ts must declare publishedAt");
+  assert.ok(
+    publishedAt >= date,
+    `publishedAt ${publishedAt} must not predate the changelog date ${date}`,
   );
   assert.match(releases, /wenlan-windows-x64\.zip/);
   assert.match(releases, /wenlan-darwin-arm64\.tar\.gz/);
@@ -1134,92 +1138,92 @@ test("public release surfaces expose the verified current artifacts and release 
   const structuredData = await readRepo("src/app/structured-data.ts");
   const llms = await readRepo("public/llms.txt");
 
-  assert.equal(version, "0.18.16");
+  assert.equal(version, "0.19.1");
   assert.equal(WENLAN_RELEASE.version, version);
-  assert.equal(WENLAN_RELEASE.tag, "v0.18.16");
-  assert.equal(WENLAN_RELEASE.publishedAt, "2026-10-04T01:49:31Z");
+  assert.equal(WENLAN_RELEASE.tag, "v0.19.1");
+  assert.equal(WENLAN_RELEASE.publishedAt, "2026-10-16T03:41:58Z");
   assert.equal(
     WENLAN_RELEASE.releaseUrl,
-    "https://github.com/wenlan-app/wenlan/releases/tag/v0.18.16",
+    "https://github.com/wenlan-app/wenlan/releases/tag/v0.19.1",
   );
   assert.equal(
     WENLAN_RELEASE.setupGuideUrl,
-    "https://github.com/wenlan-app/wenlan/blob/v0.18.16/docs/setup-with-ai.md#install-the-runtime",
+    "https://github.com/wenlan-app/wenlan/blob/v0.19.1/docs/setup-with-ai.md#install-the-runtime",
   );
   assert.deepEqual(
     WENLAN_RELEASE.assets.map(({ id, href, format, size }) => ({ id, href, format, size })),
     [
       {
         id: "windows-desktop-x64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16/Wenlan_0.18.16_x64-setup.exe",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.1/Wenlan_0.19.1_x64-setup.exe",
         format: "EXE",
-        size: "48.6 MiB",
+        size: "56.0 MiB",
       },
       {
         id: "windows-x64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16/wenlan-windows-x64.zip",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.1/wenlan-windows-x64.zip",
         format: "ZIP",
-        size: "75.1 MiB",
+        size: "76.7 MiB",
       },
       {
         id: "macos-arm64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16/Wenlan_0.18.16_aarch64.dmg",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.1/Wenlan_0.19.1_aarch64.dmg",
         format: "DMG",
-        size: "68.6 MiB",
+        size: "77.6 MiB",
       },
       {
         id: "macos-runtime-arm64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16/wenlan-darwin-arm64.tar.gz",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.1/wenlan-darwin-arm64.tar.gz",
         format: "TAR.GZ",
-        size: "51.6 MiB",
+        size: "53.1 MiB",
       },
       {
         id: "linux-x64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16/wenlan-linux-x64.tar.gz",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.1/wenlan-linux-x64.tar.gz",
         format: "TAR.GZ",
-        size: "64.4 MiB",
+        size: "66.0 MiB",
       },
       {
         id: "linux-arm64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16/wenlan-linux-arm64.tar.gz",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.1/wenlan-linux-arm64.tar.gz",
         format: "TAR.GZ",
-        size: "64.3 MiB",
+        size: "65.9 MiB",
       },
     ],
   );
 
+  assert.match(changelog, /^## \[0\.19\.1\].*\(2026-10-14\)/m);
+  assert.match(changelog, /surface unconfirmed pages in search/);
+  assert.match(changelog, /list notes written about an entity in the Wiki Folders tree/);
+  assert.match(changelog, /^## \[0\.19\.0\].*\(2026-10-12\)/m);
+  assert.match(changelog, /make background AI explicitly optional/);
+  assert.match(changelog, /make notes the default workspace/);
+  assert.match(changelog, /share the whole library or one Space with web apps/);
   assert.match(changelog, /^## \[0\.18\.16\].*\(2026-10-04\)/m);
-  assert.match(changelog, /open relay pairing requests in Wenlan with one click/);
-  assert.match(changelog, /allow bounded Windows platform cache cleanup/);
-  assert.match(changelog, /send local AI apps to Add a tool instead of the relay/);
-  assert.match(changelog, /^## \[0\.18\.15\].*\(2026-10-03\)/m);
   assert.match(changelog, /^## \[0\.18\.5\].*\(2026-09-09\)/m);
   assert.match(changelog, /improve graph exploration and desktop update UX/);
   assert.match(changelog, /^## \[0\.18\.3\].*\(2026-09-08\)/m);
   assert.match(changelog, /idle-archive housekeeping rule/);
   assert.match(changelog, /real phase progress and batch status/);
-  assert.match(changelog, /^## \[0\.18\.2\].*\(2026-09-07\)/m);
-  assert.match(changelog, /explicit and automatic milestone toast dismissal/);
-  assert.match(changelog, /detected entities are an index, not a to-do/);
   assert.match(changelog, /^## \[0\.18\.1\].*\(2026-09-06\)/m);
   assert.match(changelog, /let local presets send an API key/);
-  assert.match(changelog, /close shared Claude\/Codex hook and runner gaps/);
 
+  assert.match(docs, /v0\.19\.0 highlights/);
+  assert.match(docs, /Unconfirmed pages appear in search/);
+  assert.match(docs, /Notes are the default workspace/);
+  assert.match(docs, /Background AI is opt-in/);
+  assert.match(docs, /New installs no longer turn ~\/\.wenlan into a git repository/);
   assert.match(docs, /v0\.18\.1 to v0\.18\.3 highlights/);
   assert.match(docs, /Import reports real phase progress and batch status/);
-  assert.match(docs, /Entity housekeeping gains an idle-archive rule/);
-  assert.match(docs, /Milestone notifications support explicit and automatic dismissal/);
-  assert.match(docs, /Local provider presets can send an API key; upstream LLM refusals return a 502 response/);
-  assert.match(docs, /Shared Claude\/Codex hook and runner gaps are closed/);
 
-  assert.equal(date, "2026-10-04");
+  assert.equal(date, "2026-10-14");
   assert.match(docs, /v0\.18\.0 highlights/);
   assert.match(docs, /one home page with an honest empty state/);
   assert.match(docs, /removes the .*Where AI looked.* section/);
   assert.match(docs, /global shortcut is occupied/);
   assert.match(docs, /window stays still after launch/);
-  assert.match(structuredData, /tree\/v0\.18\.16\/app/);
-  assert.match(llms, /tree\/v0\.18\.16\/app/);
+  assert.match(structuredData, /tree\/v0\.19\.1\/app/);
+  assert.match(llms, /tree\/v0\.19\.1\/app/);
 });
 
 test("download information architecture keeps the homepage compact and the full matrix on a localized hub", async () => {
@@ -1372,7 +1376,7 @@ test("public onboarding is Wenlan-first and distinguishes plugin, local MCP, and
   assert.match(docs, /Codex plugin/);
   assert.match(docs, /ChatGPT/);
   assert.match(docs, /Streamable HTTP MCP/);
-  assert.match(docs, /Settings > Agents > Web access/);
+  assert.match(docs, /Settings > Connections > Web access/);
   assert.match(docs, /https:\/\/relay\.wenlan\.app\/mcp/);
   assert.match(docs, /pairing request/i);
   assert.match(docs, /revoke a grant/i);

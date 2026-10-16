@@ -15,8 +15,8 @@ test("relay privacy summary preserves consent, recipients and retention boundari
   const section = page.sections.find((item) => item.heading === "Authenticated Web Access (released desktop feature)");
   assert.ok(section);
   const content = [...section.body, ...section.bullets].join("\n");
-  for (const text of ["https://relay.wenlan.app/mcp", "OAuth", "selected existing Space",
-    "newly created Spaces are not automatically included", "recall still records",
+  for (const text of ["https://relay.wenlan.app/mcp", "OAuth", "whole library", "one existing Space",
+    "newly created Spaces stay private", "recall still records",
     "Cloudflare and Wenlan's relay administrator can read", "not end-to-end encryption",
     "must stay online", "not a physical-deletion time", "pending disconnect",
     "5 minutes", "24 hours", "15 minutes", "30 days", "90 days"]) {
@@ -279,6 +279,8 @@ test("public web-client guidance tracks the released wenlan-app remote access bo
   const app = await currentWenlanAppRelease();
   const [
     remotePanel,
+    pairingDialog,
+    remoteApps,
     remoteResources,
     remoteRuntime,
     docs,
@@ -287,6 +289,8 @@ test("public web-client guidance tracks the released wenlan-app remote access bo
     traditional,
   ] = await Promise.all([
     readTaggedFile(app.root, app.releaseRef, "src/components/memory/RemoteAccessPanel.tsx"),
+    readTaggedFile(app.root, app.releaseRef, "src/components/memory/PairingApprovalDialog.tsx"),
+    readTaggedFile(app.root, app.releaseRef, "src/components/memory/RemoteAccessApps.tsx"),
     readTaggedFile(app.root, app.releaseRef, "src/i18n/resources.ts"),
     readTaggedFile(app.root, app.releaseRef, "app/src/remote_access.rs"),
     readRepo("src/app/docs/docs.ts"),
@@ -295,10 +299,11 @@ test("public web-client guidance tracks the released wenlan-app remote access bo
     readRepo("src/i18n/content/zh-TW.ts"),
   ]);
 
-  // v0.18.16 ships consented Space scope and OAuth pairing. The old no-auth
-  // tunnel guidance must not be promoted to the current installation flow.
-  for (const pattern of [/inspectRemotePairing/, /approveRemotePairing/, /revokeRemoteGrant/, /consented/]) assert.match(remotePanel, pattern);
-  for (const pattern of [/device must be online/i, /Approve connection/, /Other and future Spaces/]) assert.match(remoteResources, pattern);
+  // v0.19 ships OAuth pairing scoped to the whole library or one Space. The
+  // old no-auth tunnel guidance must not be promoted to the current flow.
+  for (const pattern of [/inspectRemotePairing/, /approveRemotePairing/]) assert.match(pairingDialog, pattern);
+  assert.match(remoteApps, /revokeRemoteGrant/);
+  for (const pattern of [/needs to be on and online/i, /Allow \{\{name\}\} to search your library\?/, /Your other Spaces stay private/, /Share whole library/, /Share one Space/]) assert.match(remoteResources, pattern);
   assert.doesNotMatch(remotePanel, /remoteAccess\.noAuthWarning/);
   assert.match(remoteRuntime, /relay/);
   for (const source of [docs, english, simplified, traditional]) {
@@ -308,6 +313,9 @@ test("public web-client guidance tracks the released wenlan-app remote access bo
   }
   assert.match(docs, /approve.*pairing|pairing.*approve/i);
   assert.match(docs, /revok/i);
+  for (const source of [docs, english]) assert.match(source, /whole library or one Space/);
+  assert.match(simplified, /共享整个资料库或/);
+  assert.match(traditional, /分享整個資料庫或/);
   assert.doesNotMatch(english, /secure Streamable HTTP MCP URL/i);
   assert.doesNotMatch(simplified, /安全的 Streamable HTTP MCP URL/);
   assert.doesNotMatch(traditional, /安全的 Streamable HTTP MCP URL/);

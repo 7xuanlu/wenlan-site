@@ -8,6 +8,7 @@ import {
   fetchPublishedRelease,
   type WenlanRelease,
 } from "./release-manifest";
+import { RELEASE_CACHE_TAG } from "./release-webhook";
 
 // release-manifest validates the bundled source shape and exact repository/tag
 // URLs at module load. Keep its audited historical values as the fallback; do
@@ -24,7 +25,7 @@ const BUNDLED_RELEASE: WenlanRelease = {
 const getCachedLatestRelease = unstable_cache(
   () => fetchPublishedRelease(),
   ["wenlan-release-manifest-v1", RELEASE_API],
-  { revalidate: RELEASE_REVALIDATE_SECONDS },
+  { revalidate: RELEASE_REVALIDATE_SECONDS, tags: [RELEASE_CACHE_TAG] },
 );
 
 // `server-only` is not a dependency in this checkout. This module is imported
@@ -32,10 +33,14 @@ const getCachedLatestRelease = unstable_cache(
 export const getReleaseResolution = cache(async () => {
   try {
     return { release: await getCachedLatestRelease(), source: "github-cache" as const };
-  } catch {
+  } catch (error) {
     // A cold start may have no persistent Next cache yet; use the validated
     // bundled release while retaining the last-good cached value on failures.
-    console.warn("[release] GitHub resolution unavailable; serving bundled fallback");
+    console.warn(
+      `[release] GitHub resolution unavailable; serving bundled fallback: ${
+        error instanceof Error ? error.message : String(error)
+      }`,
+    );
     return { release: BUNDLED_RELEASE, source: "bundled-fallback" as const };
   }
 });

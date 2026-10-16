@@ -17,7 +17,6 @@ const SITE_FILES = {
     "src/i18n/content/zh-TW.ts",
   ],
   docs: "src/app/(en)/docs/docs.ts",
-  aboutOg: "src/app/(en)/about/opengraph-image.tsx",
   sitemap: "src/app/sitemap.ts",
 };
 
@@ -205,12 +204,6 @@ export function planProseEdits({ oldVersion, newVersion, oldDate, date }) {
       file: SITE_FILES.docs,
       find: `After v${oldVersion}, main-branch`,
       replace: `After v${newVersion}, main-branch`,
-      minMatches: 1,
-    },
-    {
-      file: SITE_FILES.aboutOg,
-      find: `v${oldVersion} · Apache-2.0`,
-      replace: `v${newVersion} · Apache-2.0`,
       minMatches: 1,
     },
     {
@@ -409,7 +402,6 @@ async function main(argv) {
     SITE_FILES.releases,
     ...SITE_FILES.i18n,
     SITE_FILES.docs,
-    SITE_FILES.aboutOg,
     SITE_FILES.sitemap,
   ];
   if (!args.force) {

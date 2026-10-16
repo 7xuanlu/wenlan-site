@@ -75,7 +75,7 @@ export const enContent = {
         eyebrow: "Download",
         title: "Download Wenlan for your system.",
         description:
-          "Wenlan v0.18.16 ships a Windows x64 desktop build and a macOS Apple silicon DMG, plus headless runtime builds for Windows, macOS, and Linux.",
+          "Wenlan v0.19.1 ships a Windows x64 desktop build and a macOS Apple silicon DMG, plus headless runtime builds for Windows, macOS, and Linux.",
         stableLabel: "Stable",
         releaseNotesLabel: "Release notes",
         packageIncludesLabel: "CLI · daemon · MCP connector",
@@ -491,7 +491,7 @@ export const enContent = {
           {
             id: "tools",
             q: "What AI tools work with Wenlan?",
-            a: "Claude Code and Codex have Wenlan plugins. Cursor, Claude Desktop, VS Code and other local clients connect through MCP. Browser clients such as ChatGPT use Web access through an OAuth relay: choose a Space, approve the connection, and keep Wenlan online. You can revoke access in the app. Obsidian is a read-only source workflow.",
+            a: "Claude Code and Codex have Wenlan plugins. Cursor, Claude Desktop, VS Code and other local clients connect through MCP. Browser clients such as ChatGPT use Web access through an OAuth relay: choose the whole library or one Space, approve the connection, and keep Wenlan online. You can revoke access in the app. Obsidian is a read-only source workflow.",
           },
           {
             id: "not-notes",
@@ -501,7 +501,7 @@ export const enContent = {
           {
             id: "setup",
             q: "How do I set it up?",
-            a: "Install Wenlan, then connect one AI tool. Claude Code and Codex plugins add commands such as handoff and recall. Other local clients connect through MCP. Saving and searching records does not require a model API key; compiling knowledge pages uses your configured local or cloud model. The setup guide walks through each option. For browser clients, Web access uses OAuth and your approval for a chosen Space. You can revoke access in the app.",
+            a: "Install Wenlan, then connect one AI tool. Claude Code and Codex plugins add commands such as handoff and recall. Other local clients connect through MCP. Saving and searching records does not require a model API key; compiling knowledge pages uses your configured local or cloud model. The setup guide walks through each option. For browser clients, Web access uses OAuth and your approval, and shares the whole library or one chosen Space. You can revoke access in the app.",
           },
           {
             id: "platforms",
@@ -1707,13 +1707,13 @@ export const enContent = {
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.18.16/wenlan-windows-x64.zip",
+              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.1/wenlan-windows-x64.zip",
               label: "Download Windows x64"
             },
             {
               id: "all-downloads",
-              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.18.16",
-              label: "All v0.18.16 downloads"
+              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.19.1",
+              label: "All v0.19.1 downloads"
             }
           ]
         },
@@ -1750,8 +1750,8 @@ export const enContent = {
           number: "04",
           title: "ChatGPT or Claude.ai (advanced)",
           paragraphs: [
-            "In the Wenlan desktop app, open Web access, choose the Space you want to share, review the data-access notice, and enable access. Add https://relay.wenlan.app/mcp as an OAuth MCP connection in your AI client.",
-            "Return to Wenlan to inspect and approve the pairing request. Access is limited to your chosen Space; other and future Spaces remain private. Keep Wenlan online during use, and revoke access in the app when no longer needed.",
+            "In the Wenlan desktop app, open Web access, choose whether to share the whole library or one Space, review the data-access notice, and turn it on. Add https://relay.wenlan.app/mcp as an OAuth MCP connection in your AI client.",
+            "Return to Wenlan to review and approve the pairing request. If you share one Space, other and future Spaces remain private. Keep Wenlan online during use, and revoke access in the app when no longer needed.",
             "Remote queries pass through the relay and your AI provider; local access activity is recorded. This is a custom connection, not a public ChatGPT Apps Directory listing."
           ],
           commands: [],
