@@ -540,72 +540,131 @@ const workflowArticles: BaseSpec[] = [
     eyebrow: "Workflow",
     category: "Workflows",
     title: "How to Share Memory Between Codex and Claude Code",
-    description:
-      "Wenlan keeps one local, source-backed memory store for both tools: both connect through their Wenlan plugins, and captures from one are recallable from the other.",
+    description: "Connect both tools to one Wenlan Space, save a decision in Claude Code, and recall it in a fresh Codex session. Inspect our recorded input, receipt, and matching result.",
     metaTitle: "Share Memory Between Codex and Claude Code (AGENTS.md + MCP)",
-    metaDescription:
-      "Codex and Claude Code don't share native memory. Share instructions with one AGENTS.md, and share what each agent learns through one local MCP memory store.",
+    metaDescription: "Share decisions between Claude Code and Codex through Wenlan. Follow a tested capture-and-recall workflow with the saved source ID and actual output.",
     keywords: [
       "Codex Claude Code shared memory",
       "how to share memory between Codex and Claude Code",
       "Codex Claude Code handoff",
       "shared memory AI coding agents",
       "Wenlan Codex Claude Code",
-      "MCP shared memory Codex",
+      "MCP shared memory Codex"
     ],
-    updatedAt: "2026-10-07",
+    publishedAt: "2026-10-07",
+    updatedAt: "2026-10-18",
     audience: "Developers using both Codex and Claude Code",
     heroBullets: [
       "Instructions: one AGENTS.md can serve both tools.",
       "Learned memory: native memories don't cross; a shared MCP store does.",
-      "Handoffs make cross-tool continuation explicit.",
+      "Tested: Claude saved a decision; a fresh Codex session returned the same source ID."
     ],
-    quickAnswer:
-      "Not natively. Claude Code's auto memory (~/.claude/projects/<project>/memory/) and Codex memories (~/.codex/memories/) stay separate. You can share instructions: keep one AGENTS.md, which Claude Code reads when the repo has no CLAUDE.md, or add @AGENTS.md to your CLAUDE.md. To share what each agent learns, connect both to the same local Wenlan daemon. A capture in one is then recallable from the other.",
-    problem:
-      "Instructions are the easy half. Codex reads AGENTS.md, and Claude Code reads it too (v2.1.277+) or imports it with @AGENTS.md. Decisions and gotchas each agent learns go into tool-only memory, so you end up copying them between tools by hand.",
-    wenlanFit:
-      "Wenlan keeps decisions, lessons, pages, and handoffs independent of the tool that produced them. That lets Codex and Claude Code participate in one work history. Shared memory is not automatic truth: review contradictions and stale context before letting old records steer important work.",
+    quickAnswer: "Not natively. Claude Code's auto memory (~/.claude/projects/<project>/memory/) and Codex memories (~/.codex/memories/) stay separate. You can share instructions: keep one AGENTS.md, which Claude Code reads when the repo has no CLAUDE.md, or add @AGENTS.md to your CLAUDE.md. To share what each agent learns, connect both to the same local Wenlan daemon. A capture in one is then recallable from the other.",
+    quickAnswerLink: { label: "Download the exact test receipt (JSON)", href: "/examples/claude-codex-shared-memory.json" },
+    problem: "Instructions are the easy half. Codex reads AGENTS.md, and Claude Code reads it too (v2.1.277+) or imports it with @AGENTS.md. Decisions and gotchas each agent learns go into tool-only memory, so you end up copying them between tools by hand.",
+    wenlanFit: "Wenlan keeps decisions, lessons, pages, and handoffs independent of the tool that produced them. That lets Codex and Claude Code participate in one work history. Shared memory is not automatic truth: review contradictions and stale context before letting old records steer important work.",
     actionHeading: "Verify cross-tool memory",
-    actionIntro:
-      "Do a small round trip before trusting the workflow.",
+    actionIntro: "Start with a harmless decision in a registered test Space. Our example uses seo-shared-proof-20261018; choose your own name. You do not need acpx: it opened independent sessions for our test. The ordinary Claude Code and Codex plugins expose the same capture and recall tools.",
     actionBullets: [
       "Set up Wenlan once.",
-      "Install the Claude Code plugin with /plugin marketplace add wenlan-app/wenlan, /plugin install wenlan@7xuanlu-wenlan, then /setup.",
+      "Install the Claude Code plugin with /plugin marketplace add wenlan-app/wenlan, /plugin install wenlan@7xuanlu-wenlan, restart Claude Code, then run /wenlan:setup.",
       "Add the Codex plugin: codex plugin marketplace add wenlan-app/wenlan, then codex plugin add wenlan@7xuanlu-wenlan, start a new task and run /setup.",
-      "Run both tools from the same repository folder, since Wenlan picks the space from the repo name, or set WENLAN_SPACE for both. Capture a harmless fact in Codex.",
-      "Recall that fact from Claude Code with the same space.",
-      "Reverse the smoke test: capture in Claude Code, then recall from Codex.",
-      "If captures do not appear or leak between projects, run wenlan doctor to inspect resolver state, then repeat a same-space capture and recall.",
-      "Capture decisions and lessons rather than every intermediate thought, and distill repeated topics into pages.",
+      "Register the test Space with ~/.wenlan/bin/wenlan spaces add seo-shared-proof-20261018. Ask both clients to use that exact Space, or launch both with WENLAN_SPACE set to it. Check the returned Space rather than relying on a folder-name guess.",
+      "In Claude Code, ask Wenlan to capture one decision, its rejected alternative, and the reason. Keep the returned source_memory_id and write_outcome. A failed or staged write is not a live memory.",
+      "Open a fresh Codex conversation. Ask it to recall the decision from that Space without pasting the answer, verification code, or source ID. Require Wenlan recall and the retrieved source_id.",
+      "Compare the returned decision, reason, Space, and source ID with Claude’s receipt. Our result also preserved source_agent: claude-code and version: 1. It had confirmed: false, so retrieval succeeded but human confirmation had not occurred.",
+      "If recall is empty, run ~/.wenlan/bin/wenlan doctor, compare the daemon, data directory and Space, and refresh the client’s MCP connection after setup changes.",
+      "Capture decisions and lessons rather than every intermediate thought. Distill repeated topics into maintained Pages when useful."
     ],
     code: {
-      label: "Codex and Claude Code smoke test",
-      code: "/plugin marketplace add wenlan-app/wenlan\n/plugin install wenlan@7xuanlu-wenlan\n/setup\ncodex plugin marketplace add wenlan-app/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan\n# Use the same Wenlan space for both clients during capture and recall.",
+      label: "Reproduce the Claude → Codex check",
+      code: "# Terminal: register your test Space once\n~/.wenlan/bin/wenlan spaces add seo-shared-proof-20261018\n\n# Claude Code prompt (synthetic example, not a production policy):\nUse Wenlan capture in space seo-shared-proof-20261018.\nSave this decision: Harbor demo uses four retry attempts with a\n17-second delay instead of unlimited retries, because the demo\nmust stop promptly when the upstream stays unavailable.\nAdd a new verification code. Show the capture receipt.\n\n# Fresh Codex conversation: do not paste the answer or receipt.\nUse Wenlan recall in space seo-shared-proof-20261018.\nWhat is the Harbor demo retry decision and its verification code?\nShow the decision, reason, source_id, and source_agent."
     },
-    caution:
-      "Do not use different daemons, data directories, or spaces unless you intentionally want isolated memory stores.",
+    caution: "A staged revision awaits review rather than replacing the live source. After recall, inspect whether the decision is still current before acting. Wenlan stores memory locally; text retrieved by a cloud model enters that provider’s context. This run did not test remote machines, concurrent edits, automatic capture, or whether the retry policy is correct.",
     faq: [
       "Which tool should write handoffs?",
       "Use the tool ending the work. Both plugins provide /handoff.",
       "Can both tools write at the same time?",
-      "They can use the same daemon, but keep captures atomic and scoped so review remains clear.",
+      "They can use the same daemon, but keep captures atomic and scoped so review remains clear."
     ],
-    relatedSlugs: ["how-to-give-codex-persistent-memory", "claude-code-memory", "prevent-multi-agent-knowledge-conflicts", "review-before-trust-ai-memory"],
+    relatedSlugs: [
+      "how-to-give-codex-persistent-memory",
+      "claude-code-memory",
+      "prevent-multi-agent-knowledge-conflicts",
+      "review-before-trust-ai-memory"
+    ],
     officialReferences: [
       {
+        label: "Recorded Claude-to-Codex test: exact inputs and output (JSON)",
+        href: "https://wenlan.app/examples/claude-codex-shared-memory.json"
+      },
+      {
         label: "Codex MCP docs",
-        href: "https://developers.openai.com/codex/mcp",
+        href: "https://developers.openai.com/codex/mcp"
       },
       {
         label: "Codex Memories docs",
-        href: "https://developers.openai.com/codex/memories",
+        href: "https://developers.openai.com/codex/memories"
       },
       {
         label: "Wenlan Claude Code plugin",
-        href: "https://github.com/wenlan-app/wenlan/tree/main/plugin",
-      },
+        href: "https://github.com/wenlan-app/wenlan/tree/main/plugin"
+      }
     ],
+    readingTime: "7 min read",
+    productEvidence: {
+      heading: "Tested: Claude saved it, Codex read it back",
+      summary: "On October 18, 2026, Claude Code saved a synthetic Harbor demo decision through Wenlan capture. A new Codex process, in a separate empty working directory, received only the Space and a question. Its Wenlan recall call returned the exact saved content, random verification code, and matching source ID. Both used the same local Wenlan 0.19.1 daemon.",
+      image: {
+        src: "/images/product-evidence/wenlan-space-review-fixture.png",
+        alt: "Wenlan desktop test fixture showing maintained knowledge Pages, source counts, and a review queue.",
+        caption: "General product view: a genuine Wenlan desktop test fixture, not the Harbor test record. The actual Claude-to-Codex evidence is the tool input and output below and in the linked JSON receipt.",
+        width: 1586,
+        height: 992
+      },
+      workflow: [
+        {
+          label: "Claude saves the decision and why",
+          detail: "Harbor demo: four attempts, 17-second delay, instead of unlimited retries, so the demo stops when its upstream stays unavailable. The capture also contained a random code: 02cbdd0bfa. This is invented test data, not advice for a production service."
+        },
+        {
+          label: "Codex asks without being given the answer",
+          detail: "The fresh conversation asked: “Harbor demo retry decision and its verification code”. Its prompt did not contain the decision, code, or source ID. The recorded reader made one Wenlan recall call and no file-reading or shell calls."
+        },
+        {
+          label: "Compare the returned source",
+          detail: "Recall returned one result: the full decision and rationale, code 02cbdd0bfa, and source_id mem_15dabf75a4df. That ID matched Claude’s source_memory_id; source_agent was claude-code. This establishes retrieval for this run, not a universal reliability rate."
+        }
+      ],
+      artifactHeading: "The actual readback",
+      artifactNote: "Sanitized excerpts from the MCP tool responses. The linked JSON receipt includes exact inputs, output, tested versions and transcript hashes; private session context is omitted.",
+      artifactRows: [
+        {
+          label: "Saved",
+          detail: "source_memory_id: mem_15dabf75a4df; space: seo-shared-proof-20261018; space_source: request; write_outcome: created."
+        },
+        {
+          label: "Read back",
+          detail: "Synthetic Harbor demo decision, not a production policy: use four retry attempts with a 17-second delay instead of unlimited retries, because the demo must stop promptly when the upstream stays unavailable. Verification code: 02cbdd0bfa."
+        },
+        {
+          label: "Source",
+          detail: "source_id: mem_15dabf75a4df; source_agent: claude-code; memory_type: decision; version: 1."
+        },
+        {
+          label: "Review state",
+          detail: "confirmed: false. Successfully stored and retrieved does not mean a human has confirmed the record or that its policy is appropriate."
+        }
+      ],
+      action: {
+        label: "Inspect the recorded Claude → Codex test",
+        href: "#product-evidence"
+      }
+    },
+    cta: {
+      heading: "Carry one decision into your next Codex session",
+      body: "Connect both plugins, save one harmless decision and its reason in Claude Code, then retrieve it from a fresh Codex conversation. Compare source IDs before relying on the memory. For occasional handoffs, a maintained shared Markdown file can also be enough; Wenlan adds shared retrieval and reviewable records when copying files becomes repetitive."
+    }
   },
   {
     slug: "source-backed-research-knowledge-base",

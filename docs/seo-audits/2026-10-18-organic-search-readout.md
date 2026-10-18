@@ -86,3 +86,59 @@ Codex 的可見 query×page 只涵蓋70曝光、0點擊，另外436曝光及2點
 - 本次補強：goal／scenario check、test:goal 60、test:seo 422與measurement 133通過／2跳過、test:i18n 87、lint、build、technical:built、intent check與diff check均通過。內容唯讀指令在本機執行成功，只核對檔名存在、不輸出記憶內容。桌面1280與精確393px、明暗主題、既有storage anchor與新增FAQ已檢查，無頁面橫向溢出、壞圖或瀏覽器error/warn。成品沒有向analytics送測試事件。發布前最後文字校正後重新build／technical check；正式部署收據放PR，尚未宣稱Google已抓新版。
 - 唯讀來源查核使用explorer（Luna/high），獨立內容審查使用reviewer（Sol/xhigh）；lead負責判斷、編輯及整合。代理同意不取代原始證據。
 - Recrawl after deploy：本篇title/meta與答案實質改動，應 Request。其他衍生URL待build差異表逐項判定；正式請求須先查新版crawl並取得本批確認。未重送已於10-18請求的首頁／evaluation。
+
+## Claude → Codex 共用記憶實測（10-18 單篇發布授權）
+
+使用者明確要求補強既有共用記憶頁、實際由 Claude 存決定及 Codex 讀回，驗證後發布。本次僅處理英文既有 owner `/learn/codex-claude-code-shared-memory` 的產品證據缺口；不重啟過期 campaign、不更動其他 owner 或取得索引請求／排程授權。這是本次具體內容與發布指示，不聲稱舊曝光／冷卻門檻已通過。
+
+- **需求與入口：** 既有英文跨工具決定交接任務；同一完整 GSC 09-18～10-15 窗口，該頁79曝光／1點擊，點擊詞不可見。先前 Planner 精確長詞10–100／月是舊估值，不是實測流量，也不外推中文量。
+- **可帶走的結果：** 兩端安裝與同 Space 的重現步驟、Claude capture 回執、全新 Codex recall 實際回傳、可下載的去識別 JSON。既有其他文章已有操作方式，這次補「確實跑過」的證據；不再新增同義頁。偶爾交接仍可用共用 Markdown；此測試只證明 Wenlan 能跨工具取回一筆有來源的決定。
+- **實測：** Wenlan daemon0.19.1；Claude plugin0.19.0／Sonnet5.5；Codex plugin0.19.1+codex／gpt-6-luna（high）；acpx0.14.0。專用 `seo-shared-proof-20261018` Space，兩個獨立程序及工作目錄。
+- **寫入：** Claude 一次 `mcp__plugin_wenlan_wenlan__capture`，保存明示為虛構的 Harbor 決定（4次、間隔17秒、取代無限重試、原因），另有隨機碼 `02cbdd0bfa`。回執 `source_memory_id: mem_15dabf75a4df`、`space_source: request`、`write_outcome: created`。
+- **獨立讀回：** 新 Codex 只收到 Space 與問題，未收到決定、碼或來源 ID。trace 僅有一次 `wenlan.recall`，無檔案讀取／shell呼叫；1筆結果的完整內容與 ID逐字相同，`source_agent: claude-code`、`version: 1`、`confirmed: false`。兩端 exit0、`end_turn`，另核對工具原始回應而非只相信模型總結。
+- **限制：** 原生工具／啟動環境沒有被當成安全沙箱認證；這不是盲測安全研究或成功率基準。未驗證反向流程、多機、同時改寫、自動捕捉或決定本身正確。保存／取回不等於人工確認。產品圖沿用已核實測試 fixture，明示不是本次 Harbor 記錄；真正證據為 MCP內容。
+- **第一批讀者與後續：** 既有 Google owner；無外聯、社群或付費安排。發布後以 Google 自行抓取作起點，再看同詞曝光、點擊與可得的後續行為；沒有足夠曝光只能判不確定，不宣稱圖片或實測使排名提升。weekly維持PAUSED、手動追蹤。
+
+去識別原始欄位及 transcript SHA-256：[公開實測回執](../../public/examples/claude-codex-shared-memory.json)。完整私有輸出在 `/tmp/wenlan-seo-demand/2026-10-18-shared-proof/`，不可整包公開（含其他工具清單和帳戶用量）。本篇未新增中文 owner，保留既有三語頁面／hreflang邊界。驗證及部署收據以本次 PR 的測試與正式站核對記錄為準，實測成功不代表自然搜尋已成長。
+
+
+## 下一輪既有頁核對與本地修正（10-18）
+
+重用同一完整 09-18～10-15 GSC Web 窗口，逐一核對全部116個有曝光頁面；18頁達20曝光，其餘98頁不足。沒有用Threads造訪、搜尋建議或供應商估值補成Google需求。
+
+| 18頁的處理 | 頁數 | 根據 |
+| --- | ---: | --- |
+| 最近已改，保留觀察 | 8 | Codex、EN Wiki、Claude、共用記憶、EN Obsidian、TW Wiki、context-loss、ai-work-memory |
+| 品牌／導覽／文件入口 | 6 | 首頁、下載、architecture、about、learn、CN首頁，不能當已見非品牌文章需求 |
+| 意圖不合 | 1 | source-backed wiki 的可見詞偏泛團隊知識庫選型，不硬套個人工作流程 |
+| 看不到查詢 | 1 | coding-agent-source-backed-knowledge-base 有41曝光，但query×page無列，任務未知 |
+| 概念比較可補具體答案 | 1 | ai-work-memory-vs-knowledge-base：41曝光／0點擊；精確詞11曝光／0點擊 |
+| 版本範圍需澄清 | 1 | SuperLocalMemory頁37曝光／1點擊；品牌詞9曝光不能證明比較意圖 |
+
+### AI memory vs knowledge base：為什麼選這篇
+
+1. **誰與任務：** 既有英文精確詞 `ai memory vs knowledge base` 11曝光、0點擊，平均20.55；其中美國桌面10曝光、平均22.4，羅馬尼亞手機1曝光、位置2。它直接問知識庫與記憶的分工，符合既有知識庫概念owner；樣本小，沒有市場月量或購買意圖的證明。
+2. **可帶走的結果：** 用同一個決定分辨「當前規則／參考文件」和「先前決定與原因」，並能選擇KB、持久記憶或原生對話歷史；不必安裝產品。RAG與資料庫只是補充解釋，沒有宣稱是新查詢需求。
+3. **實際差距：** 10-18 US/en桌面Google首頁，前兩個一般結果為[DEV](https://dev.to/bobur/agent-knowledge-vs-memories-understanding-the-difference-4pgj)和[AIAppsAPI](https://aiappsapi.com/articles/selflearningai/memoryvsknowledgebase.php)，Wenlan第三；本站顯示現行標題及July24摘要。對方提供並列實例，本站原版偏抽象；對方也有「KB永遠靜態、記憶全自動」的過廣概括，不照抄。這只是一個結果頁快照，不是穩定第三名，也不證明例子造成排名。AI Overview可直接給概念答案，未證明它造成本站零點擊。
+4. **入口：** 沿用既有Google owner，不新建同義頁、不把社群流量算自然搜尋。中文無這個owner的相應需求證據，本批不由英文數據推出翻譯頁。
+5. **為何先做：** 在這批達曝光門檻、尚未近期改寫的文章中，本篇有明確對應詞、可核實的答案缺口和可重用實證；其他選項的限制見上表。這支持一次有界的本地補強，不能證明它是全市場最高回報行動。
+6. **停止／改變：** 發布後先確認新版crawl，再取完整28天同詞／同頁／同市場裝置資料。精確詞不足20曝光則inconclusive；達20仍零點擊，回查當時SERP、顯示摘要與位置，不自動再改文案。有點擊僅是方向性訊號，不能隔離文案因果。W8仍不足曝光則停止這項假設。手動追蹤、weekly維持PAUSED。
+
+**抓取與版本邊界：** 只為這兩頁補取URL Inspection及本篇query×country×device，未重跑完整管線。本篇indexed／PASS、canonical一致，最後crawl09-10；語意內容最後改於07-24（git f8b8adc），頁／精確詞曝光達20／3的數量門檻。但10-11另有GitHub搬家href維修，未確認Google抓過目前部署版本，不能宣稱完整post-deploy crawl／28天條件通過。本批依使用者本輪要求準備本地可審查草稿；不能自行升格為已核准的SEO實驗或發布。發布前須確認現版抓取條件，或取得使用者對本批具體內容修正的直接發布指示；不更動門檻、也不提交索引請求。
+
+**內容依據與真實證明：** [LangChain memory](https://docs.langchain.com/oss/python/concepts/memory)記載跨thread記憶、facts／experiences／instructions與不同寫入方式；[retrieval](https://docs.langchain.com/oss/python/deepagents/retrieval)記載既有資料源及檢索後生成。據此移除靜態／自動化的假二分。用前一篇已公開的[Claude→Codex回執](../../public/examples/claude-codex-shared-memory.json)示範真實取回一筆決定；另擬的知識庫段落必須明示為說明，沒有冒充本次生成的Page。confirmed:false，不代表人工驗證或可直接用於真實系統。重用這筆測試，不宣稱再測了一次。
+
+**SuperLocalMemory事實維修：** [v4.2.10發布頁](https://github.com/qualixar/superlocalmemory/releases/tag/v4.2.10)標示10-17發布。原文釘在v3.8.3／Wenlan0.14.1，本次只在前面及摘要標清歷史比較、加現版本來源；不換掉舊測試版本、不把README或發布說明當重測結果，不宣稱目前產品贏家。
+
+私有原始收據：`/tmp/wenlan-seo/2026-10-18-next-owner/`（inspection、精確詞分拆）；`/tmp/wenlan-seo-demand/2026-10-18-next-owner/`（SERP、驗證）。公開紀錄不保存登入帳戶／定位畫面。此節是本地準備記錄；發布與實際成效另據收據判定。
+
+
+### 本批交付與驗證（發布前驗證）
+
+隔離工作目錄 `seo-next-demand-repair`，base `4061498`；原dirty checkout未作內容修改。只改上述兩個英文owner、兩份既有契約測試及本輪三份既有記錄。概念頁保留原URL／發布日期／全部原段落anchor，通用比較表不再把「AI memory」標為Wenlan產品；SuperLocal的SoftwareApplication仍指向v3.8.3來源，不把v4來源配給舊版本。
+
+- goal／scenario、test:goal 60、test:seo 422、measurement 133通過／2跳過、test:i18n 87、lint、production build、technical:built、intent與diff check通過。獨立審查後改動另跑相關契約測試；手機短行修正後重build／technical check。非production建置沒有送IndexNow或analytics事件。
+- 兩頁均實看1280桌面、精確393px、明暗主題；概念表手機逐項排列，實測摘要與示例code無水平捲動，頁面無橫向溢出、壞圖或console error／warn。實際點開JSON回執及RAG FAQ，內容正確；不是只核對href存在。
+- bounded explorer／worker使用原生角色預設Luna/high；獨立reviewer角色為Sol/xhigh。一輪審查及一次closure，lead修復closure指出的舊版建議現在式，並核對最終built schema和畫面。未把模型同意當證據。完整檔案雜湊、base、diff SHA與畫面收據在私有 `verified-state.json`／`browser-verification.json`。
+
+驗證完成後，使用者直接指示「把這兩頁發布，先不用提交索引請求，等 Google 自己抓取」。據此發布本批具體修正；這不是完整抓取／冷卻門檻已通過，也不解除其他頁面的門檻或重啟campaign。實際合併、CI與正式部署以本批PR收據為準。Google索引請求跳過，weekly維持PAUSED；未宣稱獲客已改善。本次修正不代表已找出足以大幅增加流量的搜尋市場。

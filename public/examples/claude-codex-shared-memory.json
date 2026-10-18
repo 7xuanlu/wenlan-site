@@ -1,0 +1,60 @@
+{
+  "tested_at_utc": "2026-10-18",
+  "scope": "Synthetic Harbor demonstration, not a production retry recommendation. One same-machine Claude-to-Codex retrieval; not a reliability benchmark.",
+  "runtime": {
+    "daemon": "0.19.1",
+    "claude_plugin": "0.19.0",
+    "codex_plugin": "0.19.1+codex",
+    "transport": "acpx 0.14.0",
+    "claude_model_reported": "claude-sonnet-5-5",
+    "codex_model_reported": "gpt-6-luna",
+    "codex_reasoning_configured": "high"
+  },
+  "reader_context": "Fresh Codex process and separate empty working directory. Reader prompt supplied only the Space and question, not the decision, source ID or verification code. Both clients used the same local daemon. Not a security-isolation certification.",
+  "claude_capture": {
+    "tool": "mcp__plugin_wenlan_wenlan__capture",
+    "input": {
+      "space": "seo-shared-proof-20261018",
+      "memory_type": "decision",
+      "entity": "Harbor demo",
+      "content": "Synthetic Harbor demo decision, not a production policy: use four retry attempts with a 17-second delay instead of unlimited retries, because the demo must stop promptly when the upstream stays unavailable. Verification code: 02cbdd0bfa."
+    },
+    "receipt": "Stored mem_15dabf75a4df\nsource_memory_id: mem_15dabf75a4df\nspace: seo-shared-proof-20261018\nspace_source: request\nwrite_outcome: created"
+  },
+  "codex_recall": {
+    "tool": "wenlan.recall",
+    "input": {
+      "space": "seo-shared-proof-20261018",
+      "query": "Harbor demo retry decision and its verification code",
+      "limit": 3
+    },
+    "tool_text": "1 results (7530.1ms)\n[\n  {\n    \"source_id\": \"mem_15dabf75a4df\",\n    \"title\": \"Synthetic Harbor demo decision, not a production policy: use four retry attem...\",\n    \"content\": \"Synthetic Harbor demo decision, not a production policy: use four retry attempts with a 17-second delay instead of unlimited retries, because the demo must stop promptly when the upstream stays unavailable. Verification code: 02cbdd0bfa.\",\n    \"score\": 0.14373301,\n    \"last_modified\": 1792355843,\n    \"memory_type\": \"decision\",\n    \"space\": \"seo-shared-proof-20261018\",\n    \"source_agent\": \"claude-code\",\n    \"confidence\": 0.7,\n    \"confirmed\": false,\n    \"version\": 1\n  }\n]",
+    "result": {
+      "source_id": "mem_15dabf75a4df",
+      "title": "Synthetic Harbor demo decision, not a production policy: use four retry attem...",
+      "content": "Synthetic Harbor demo decision, not a production policy: use four retry attempts with a 17-second delay instead of unlimited retries, because the demo must stop promptly when the upstream stays unavailable. Verification code: 02cbdd0bfa.",
+      "score": 0.14373301,
+      "last_modified": 1792355843,
+      "memory_type": "decision",
+      "space": "seo-shared-proof-20261018",
+      "source_agent": "claude-code",
+      "confidence": 0.7,
+      "confirmed": false,
+      "version": 1
+    }
+  },
+  "checks": {
+    "exact_content_match": true,
+    "same_source_id": true,
+    "verification_code_absent_from_reader_prompt": true,
+    "source_id_absent_from_reader_prompt": true,
+    "reader_tool_calls": [
+      "wenlan.recall"
+    ],
+    "both_stop_reasons": "end_turn"
+  },
+  "raw_transcript_sha256": {
+    "claude": "2a22a903d3285a943b9ab5d2d6acc1e6e10bce8c256be28ff4b9f51732d06506",
+    "codex": "bd94f1cf8a3802c36e2a1f6c9900f4dffd852cd2bb2cdbe62c166d005b407894"
+  }
+}
