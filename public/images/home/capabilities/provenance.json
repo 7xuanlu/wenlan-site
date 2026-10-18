@@ -1,0 +1,165 @@
+{
+  "status": "local preview only",
+  "presentation": "Existing authored sample topics, page memberships, and explicit reading-to-research link, explained with live text and vector UI. Reading and research show short excerpts of the sample pages; AI development stays separate. The App capture control opens the selected topic's original native capture.",
+  "limits": [
+    "Fictional personal-library demo data.",
+    "Static screenshot, not a live embedded App.",
+    "The surrounding capability illustrations are not execution traces."
+  ],
+  "assets": [
+    {
+      "file": "topic-biology-native.jpg",
+      "source": "Unretouched real App Atlas inspector, isolated authored example library",
+      "topic": "基因與演化",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "c2f2f1064ce5a1e312e2c74fc0ab49836c11019cbd2f10651dd02df2c19ab609",
+      "basis": "Created via the local App APIs in a separate demo-data copy. Native UI screenshot inspected. Website labels and icons are rendered as text and vectors for sharpness; full capture remains unchanged.",
+      "entityId": "2c3fa61e-9f75-4e99-8198-b94720a66306",
+      "pages": [
+        {
+          "title": "自然選擇",
+          "id": "page_5128772b-246a-4a20-823d-f77653417462"
+        },
+        {
+          "title": "基因變異",
+          "id": "page_0255644c-f405-400f-805d-617760c19681"
+        }
+      ]
+    },
+    {
+      "file": "topic-development-native.jpg",
+      "source": "Unretouched real App Atlas inspector, isolated authored example library",
+      "topic": "AI 開發",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "3441dc718baa6a079997533fde4e5686de701dade699bff69e0bf8ae2a8dcf2f",
+      "basis": "Created via the local App APIs in a separate demo-data copy. Native UI screenshot inspected. Website labels and icons are rendered as text and vectors for sharpness; full capture remains unchanged.",
+      "entityId": "6f630b14-d580-45c8-bcff-a1de06344ddc",
+      "pages": [
+        {
+          "title": "Agent Loop",
+          "id": "page_69159ca5-957d-4823-a492-54b5d579f0a9"
+        },
+        {
+          "title": "RAG 檢索",
+          "id": "page_d492fc5d-9fce-4053-80fa-3bb81020a429"
+        }
+      ]
+    },
+    {
+      "file": "topic-book-native.jpg",
+      "source": "Unretouched real App Atlas inspector, isolated authored example library",
+      "topic": "《物種起源》",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "c10465b472d4357ef9b264b4e7a2ee2dfd28b897da73bc900f045e2aa6765b87",
+      "basis": "Created via the local App APIs in a separate demo-data copy. Native UI screenshot inspected. Website labels and icons are rendered as text and vectors for sharpness; full capture remains unchanged.",
+      "entityId": "9f34af09-54f1-4610-a7f9-841f0ec72a74",
+      "pages": [
+        {
+          "title": "自然選擇章",
+          "id": "page_1905cb72-7366-484a-bc3c-5b10b599b1f6"
+        },
+        {
+          "title": "共同祖先",
+          "id": "page_dc36f3dd-aa40-4b51-8b3f-8381a8f86368"
+        }
+      ]
+    }
+  ],
+  "topicVariety": {
+    "presentation": "Three native topic excerpts arranged together; clicking each opens its original capture. The layout and connectors are website annotations.",
+    "source": "GET /api/memory/graph, existing README personal-library demo, 2026-10-15",
+    "links": [
+      {
+        "from": "河岸散步",
+        "to": "街拍練習",
+        "type": "wikilink"
+      },
+      {
+        "from": "街拍練習",
+        "to": "觀察與寫作",
+        "type": "wikilink"
+      }
+    ],
+    "limits": "No invented relationship, automatic discovery, or new-product state is claimed.",
+    "status": "Superseded; historical provenance only. Earlier assets are not included in this website revision."
+  },
+  "topicResearch": {
+    "presentation": "Existing authored sample topics, page memberships, and explicit reading-to-research link, explained with live text and vector UI. Reading and research show short excerpts of the sample pages; AI development stays separate. The App capture control opens the selected topic's original native capture.",
+    "topics": [
+      {
+        "key": "biology",
+        "title": "基因與演化",
+        "entityId": "2c3fa61e-9f75-4e99-8198-b94720a66306",
+        "pages": [
+          {
+            "title": "自然選擇",
+            "id": "page_5128772b-246a-4a20-823d-f77653417462"
+          },
+          {
+            "title": "基因變異",
+            "id": "page_0255644c-f405-400f-805d-617760c19681"
+          }
+        ]
+      },
+      {
+        "key": "development",
+        "title": "AI 開發",
+        "entityId": "6f630b14-d580-45c8-bcff-a1de06344ddc",
+        "pages": [
+          {
+            "title": "Agent Loop",
+            "id": "page_69159ca5-957d-4823-a492-54b5d579f0a9"
+          },
+          {
+            "title": "RAG 檢索",
+            "id": "page_d492fc5d-9fce-4053-80fa-3bb81020a429"
+          }
+        ]
+      },
+      {
+        "key": "book",
+        "title": "《物種起源》",
+        "entityId": "9f34af09-54f1-4610-a7f9-841f0ec72a74",
+        "pages": [
+          {
+            "title": "自然選擇章",
+            "id": "page_1905cb72-7366-484a-bc3c-5b10b599b1f6"
+          },
+          {
+            "title": "共同祖先",
+            "id": "page_dc36f3dd-aa40-4b51-8b3f-8381a8f86368"
+          }
+        ]
+      }
+    ],
+    "links": [
+      {
+        "from": "自然選擇",
+        "to": "自然選擇章",
+        "type": "wikilink",
+        "reason": "Research note explicitly links to the reading note on the same concept."
+      }
+    ],
+    "reference": "https://darwin-online.org.uk/converted/published/1866_Origin_F385/1866_Origin_F385.html",
+    "limits": [
+      "Manually authored example library, not personal research or automatic topic discovery.",
+      "AI development is a separate topic; no cross-domain connection is invented.",
+      "Only the topic capability card and its three localized descriptions changed."
+    ],
+    "cardExcerpts": {
+      "book": "把閱讀中的問題帶回自然選擇主題整理。",
+      "biology": "可遺傳的差異、環境條件與繁殖結果。",
+      "note": "Shortened excerpts of the existing authored pages; English and Simplified Chinese are presentation translations."
+    }
+  },
+  "activeTopicPresentation": "topicResearch"
+}

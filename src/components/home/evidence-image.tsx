@@ -31,29 +31,53 @@ const copyByLocale = {
   },
 } as const;
 
+type EvidenceCrop = { readonly x: number; readonly y: number; readonly width: number; readonly height: number };
+
 type EvidenceImageProps = {
   readonly src: string;
   readonly width: number;
   readonly height: number;
   readonly alt: string;
   readonly caption: string;
+  readonly showCaption?: boolean;
+  readonly showExpandAction?: boolean;
   readonly locale: Locale;
   readonly annotations?: ReactNode;
   readonly annotationKey?: ReactNode;
   readonly expandLabel?: string;
+  readonly mobileZoomWidth?: number;
+  readonly detailZoomWidth?: number;
+  readonly preview?: ReactNode;
+  readonly crop?: EvidenceCrop;
+  readonly lossless?: boolean;
 };
 
-export function EvidenceImage({ src, width, height, alt, caption, locale, annotations, annotationKey, expandLabel }: EvidenceImageProps) {
+// A presentation crop keeps the source image byte-for-byte intact.
+function CroppedEvidenceImage({ src, width, height, alt, crop, displayWidth = "100%", original = false }: {
+  src: string; width: number; height: number; alt: string; crop: EvidenceCrop;
+  displayWidth?: number | string; original?: boolean;
+}) {
+  return <span data-evidence-crop={`${crop.x},${crop.y},${crop.width},${crop.height}`} className="relative mx-auto block overflow-hidden rounded-md"
+    style={{ width: displayWidth, aspectRatio: `${crop.width} / ${crop.height}` }}>
+    <Image src={src} width={width} height={height} alt={alt} loading="lazy" unoptimized={original}
+      sizes="(min-width: 1200px) 1240px, 108vw"
+      className="absolute block h-auto max-w-none"
+      style={{ width: `${width / crop.width * 100}%`, left: `${-crop.x / crop.width * 100}%`, top: `${-crop.y / crop.height * 100}%` }} />
+  </span>;
+}
+
+export function EvidenceImage({ src, width, height, alt, caption, locale, showCaption = true, showExpandAction = true, annotations, annotationKey, expandLabel, mobileZoomWidth, detailZoomWidth, preview, crop, lossless = false }: EvidenceImageProps) {
   const labels = copyByLocale[locale];
   const expand = expandLabel ?? labels.expand;
   const [enlarged, setEnlarged] = useState(false);
+  const [zoomWidth, setZoomWidth] = useState<number>();
   const id = useId();
   const imageDescriptionId = `${id}-image-description`;
   const dialog = useRef<HTMLDialogElement>(null);
   const imageViewport = useRef<HTMLDivElement>(null);
   const opener = useRef<HTMLElement | null>(null);
-  // Retina captures read at their CSS-pixel size; never shrink detail below the fit view.
-  const detailWidth = Math.max(1600, Math.round(width / 2));
+  // Captures default to their CSS-pixel size; a dense graph can choose a readable zoom scale.
+  const detailWidth = zoomWidth ?? detailZoomWidth ?? Math.max(1600, Math.round(width / 2));
 
   const changeZoom = (zoom: boolean) => {
     setEnlarged(zoom);
@@ -69,13 +93,15 @@ export function EvidenceImage({ src, width, height, alt, caption, locale, annota
 
   const openImage = () => {
     opener.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const isMobile = window.matchMedia("(max-width: 639px)").matches;
+    setZoomWidth(isMobile ? mobileZoomWidth : undefined);
     dialog.current?.showModal();
-    changeZoom(window.matchMedia("(max-width: 639px)").matches);
+    changeZoom(isMobile);
   };
 
   return (
     <figure className="min-w-0">
-      {annotations && <figcaption className="mb-2 text-xs leading-relaxed text-[var(--o-text-secondary)]">{caption}</figcaption>}
+      {annotations && showCaption && <figcaption className="mb-2 text-xs leading-relaxed text-[var(--o-text-secondary)]">{caption}</figcaption>}
       <div className="relative">
         <button
           type="button"
@@ -84,20 +110,21 @@ export function EvidenceImage({ src, width, height, alt, caption, locale, annota
           aria-describedby={imageDescriptionId}
           className="block w-full cursor-zoom-in rounded-md text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]"
         >
-          <Image
+          {preview ?? (crop ? <CroppedEvidenceImage src={src} width={width} height={height} alt={alt} crop={crop} original={lossless} /> : <Image
             src={src}
             width={width}
             height={height}
             alt={alt}
             loading="lazy"
+            unoptimized={lossless}
             sizes="(max-width: 1199px) calc(100vw - 48px), 1152px"
             className="block h-auto w-full rounded-md"
-          />
+          />)}
         </button>
         {annotations && <div className="pointer-events-none absolute inset-0">{annotations}</div>}
       </div>
       <span id={imageDescriptionId} className="sr-only">{alt}</span>
-      {annotations && (
+      {annotations && showExpandAction && (
         <div className="mt-2 flex justify-end">
           <button type="button" onClick={openImage} className="min-h-11 shrink-0 text-xs text-[var(--o-warm)] underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--o-warm)]">
             {expand}
@@ -105,12 +132,12 @@ export function EvidenceImage({ src, width, height, alt, caption, locale, annota
         </div>
       )}
       {annotationKey}
-      {!annotations && (
+      {!annotations && (showCaption || showExpandAction) && (
         <figcaption className="mt-3 flex items-center justify-between gap-4 text-xs leading-relaxed text-[var(--o-text-secondary)]">
-          <p className="min-w-0 text-balance">{caption}</p>
-          <button type="button" onClick={openImage} className="min-h-11 shrink-0 text-[var(--o-warm)] underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--o-warm)]">
+          {showCaption && <p className="min-w-0 text-balance">{caption}</p>}
+          {showExpandAction && <button type="button" onClick={openImage} className="min-h-11 shrink-0 text-[var(--o-warm)] underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--o-warm)]">
             {expand}
-          </button>
+          </button>}
         </figcaption>
       )}
 
@@ -150,6 +177,8 @@ export function EvidenceImage({ src, width, height, alt, caption, locale, annota
           tabIndex={0}
           className="min-h-0 max-h-[72dvh] overflow-auto overscroll-contain rounded-md focus-visible:outline-2 focus-visible:outline-[var(--o-warm)]"
         >
+          {crop ? <CroppedEvidenceImage src={src} width={width} height={height} alt={alt} crop={crop} original
+            displayWidth={enlarged ? detailWidth : `min(100%, ${68 * crop.width / crop.height}dvh)`} /> : (
           <Image
             src={src}
             width={width}
@@ -159,6 +188,7 @@ export function EvidenceImage({ src, width, height, alt, caption, locale, annota
             className="mx-auto h-auto rounded-md"
             style={{ width: enlarged ? detailWidth : "auto", maxWidth: enlarged ? "none" : "100%", maxHeight: enlarged ? "none" : "68dvh" }}
           />
+          )}
         </div>
         <div className="flex shrink-0 flex-wrap items-center justify-between gap-x-4 gap-y-1 text-xs text-[var(--o-text-secondary)]">
           <p id={`${id}-image-hint`}>{labels.hint}</p>

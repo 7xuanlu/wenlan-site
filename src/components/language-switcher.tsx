@@ -9,17 +9,21 @@ import {
   type Locale,
 } from "@/i18n/locales";
 import { localizedHrefForLocale } from "@/i18n/navigation";
+import { stripLocalePrefix } from "@/i18n/routing";
+import { GlobeIcon, CheckIcon } from "@/components/icons";
 
 // Static prerender of the English home reports its pathname as "/index".
 function normalizePathname(pathname: string): string {
-  return pathname.replace(/\/index$/, "") || "/";
+  return stripLocalePrefix(pathname).pathname.replace(/\/index$/, "") || "/";
 }
 
 // A page with no translation would localize back to itself, so the menu item
 // would reload the same English page. Send the reader to the nearest
 // translated parent instead (the Learn or Docs index, or the home page) and
 // say so in the menu.
-function switchTarget(targetLocale: Locale, href: string): { href: string; exact: boolean } {
+export function switchTarget(targetLocale: Locale, href: string): { href: string; exact: boolean } {
+  // Compare unprefixed routes so the active locale is not mistaken for a fallback.
+  href = normalizePathname(href);
   if (targetLocale === "en") {
     return { href: localizedHrefForLocale(targetLocale, href), exact: true };
   }
@@ -43,6 +47,12 @@ const localeLabels = {
   en: "English",
   "zh-TW": "繁體中文",
   "zh-CN": "简体中文",
+} as const satisfies Record<Locale, string>;
+
+const switcherLabels = {
+  en: "Change language",
+  "zh-TW": "切換語言",
+  "zh-CN": "切换语言",
 } as const satisfies Record<Locale, string>;
 
 export function LanguageSwitcher({
@@ -70,49 +80,38 @@ export function LanguageSwitcher({
       }
     };
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-      const details = detailsRef.current;
-      if (event.key !== "Escape" || !details?.open) return;
-
-      event.preventDefault();
-      details.open = false;
-      summaryRef.current?.focus();
-    };
-
     document.addEventListener("pointerdown", handlePointerDown);
-    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.removeEventListener("pointerdown", handlePointerDown);
-      document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
   return (
-    <details ref={detailsRef} className="group relative">
+    <details
+      ref={detailsRef}
+      className="group/language relative"
+      onKeyDown={(event) => {
+        const details = detailsRef.current;
+        if (event.key !== "Escape" || !details?.open) return;
+        event.preventDefault();
+        // Close this disclosure before an enclosing mobile navigation panel.
+        event.stopPropagation();
+        details.open = false;
+        summaryRef.current?.focus();
+      }}
+    >
       <summary
         ref={summaryRef}
-        className="inline-flex min-h-9 min-w-11 cursor-pointer list-none items-center justify-center gap-1 rounded-md border border-[var(--o-border-subtle)] px-2 text-xs text-[var(--o-text-secondary)] transition-colors hover:border-[var(--o-border)] hover:text-[var(--o-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--o-warm)] [@media(pointer:coarse)]:min-h-11 [&::-webkit-details-marker]:hidden"
+        aria-label={`${switcherLabels[locale]}: ${localeLabels[locale]}`}
+        title={switcherLabels[locale]}
+        className="site-utility-icon flex size-11 shrink-0 cursor-pointer list-none items-center justify-center rounded-lg text-sm text-[var(--o-text-secondary)] transition-colors duration-150 hover:bg-[var(--o-card-bg)] hover:text-[var(--o-text)] group-open/language:bg-[var(--o-surface)] group-open/language:text-[var(--o-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--o-warm)] [&::-webkit-details-marker]:hidden"
       >
-        <span lang={htmlLangByLocale[locale]}>{localeLabels[locale]}</span>
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 12 12"
-          fill="none"
-          className="size-3 transition-transform duration-150 group-open:rotate-180 motion-reduce:transition-none"
-        >
-          <path
-            d="m3 4.5 3 3 3-3"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="1.5"
-          />
-        </svg>
+        <GlobeIcon className="size-5" />
       </summary>
 
       <div
-        className={`absolute z-50 w-36 rounded-md border border-[var(--o-border)] bg-[var(--o-bg-alt)] p-1 shadow-[var(--o-shadow-media)] ${
+        className={`absolute z-50 w-48 rounded-lg border border-[var(--o-border)] bg-[var(--o-bg-alt)] p-1.5 shadow-[var(--o-shadow-media)] ${
           placement === "up"
             ? // The footer row stacks on phones, leaving the switcher at the
               // left edge, where a right-anchored menu would open off-screen.
@@ -131,18 +130,21 @@ export function LanguageSwitcher({
               lang={htmlLangByLocale[targetLocale]}
               hrefLang={hreflangByLocale[targetLocale]}
               aria-current={active ? "true" : undefined}
-              className={`flex min-h-9 flex-col items-start justify-center rounded px-2.5 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--o-warm)] [@media(pointer:coarse)]:min-h-11 ${
+              className={`flex min-h-11 items-center justify-between gap-3 rounded-md px-3 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--o-warm)] ${
                 active
                   ? "bg-[var(--o-surface)] font-medium text-[var(--o-text)]"
                   : "text-[var(--o-text-secondary)] hover:bg-[var(--o-surface)] hover:text-[var(--o-text)]"
               }`}
             >
-              {localeLabels[targetLocale]}
-              {!target.exact && (
-                <span className="text-[11px] leading-tight text-[var(--o-text-muted)]">
-                  {untranslatedHints[targetLocale]}
-                </span>
-              )}
+              <span className="flex flex-col items-start">
+                <span>{localeLabels[targetLocale]}</span>
+                {!target.exact && (
+                  <span className="text-[11px] leading-tight text-[var(--o-text-muted)]">
+                    {untranslatedHints[targetLocale]}
+                  </span>
+                )}
+              </span>
+              {active && <CheckIcon className="size-4 shrink-0 text-[var(--o-warm)]" />}
             </a>
           );
         })}

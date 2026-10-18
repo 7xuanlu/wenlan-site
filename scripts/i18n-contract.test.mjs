@@ -126,9 +126,11 @@ const allowedUnchangedLeafValues = new Set([
   "GitHub",
   "Linux",
   "macOS",
+  "macOS · Apple silicon",
   "Qi-Xuan Lu",
   "Wenlan",
   "Windows",
+  "Windows · x64",
   "x64",
   "x64 · glibc",
   "7xuanlu",
@@ -343,7 +345,7 @@ test("bilingual Wenlan wordmark keeps Latin Fraunces and Chinese sans paired", a
   assert.match(homeSource, /<SiteHeader locale=\{locale\} home \/>/);
   const headerSource = await readFile(resolve(repoRoot, "src/components/site-header.tsx"), "utf8");
   assert.match(headerSource, /<BrandWordmark\s+label=\{nav\.brand\}\s+variant="nav"\s+\/>/);
-  assert.match(homeSource, /\{redesign\.hero\.eyebrow\}/);
+  assert.doesNotMatch(homeSource, /\{redesign\.hero\.eyebrow\}/);
 
   const footerSource = await readFile(resolve(repoRoot, "src/components/site-footer.tsx"), "utf8");
   assert.match(footerSource, /<BrandWordmark\s+label=\{content\.signature\.brand\}\s+variant="footer"\s+\/>/);
@@ -375,6 +377,20 @@ test("home nav exposes a route-preserving locale switcher", async () => {
   assert.match(switcher, /event\.key !== "Escape"/);
   assert.match(switcher, /removeEventListener\("pointerdown"/);
   assert.doesNotMatch(switcher, /role="menu/);
+});
+
+test("locale switcher recognizes translated pages with an existing locale prefix", async () => {
+  const { switchTarget } = await import("../src/components/language-switcher.tsx");
+  for (const locale of ["zh-TW", "zh-CN"]) {
+    for (const path of ["", "/download", "/docs/get-started"]) {
+      const currentPath = `/${locale}${path}`;
+      assert.deepEqual(switchTarget(locale, currentPath), { href: currentPath, exact: true });
+      assert.deepEqual(switchTarget("en", currentPath), { href: path || "/", exact: true });
+    }
+  }
+  assert.deepEqual(switchTarget("zh-CN", "/zh-TW/download"), { href: "/zh-CN/download", exact: true });
+  assert.deepEqual(switchTarget("zh-TW", "/docs/daily-workflow"), { href: "/zh-TW/docs", exact: false });
+  assert.deepEqual(switchTarget("zh-CN", "/index"), { href: "/zh-CN", exact: true });
 });
 
 test("SoftwareApplication JSON-LD keeps English featureList off translated locales", async () => {
@@ -485,36 +501,18 @@ test("localized core page wrappers and shared page modules exist", async () => {
 test("localized home hero allows long words to wrap on mobile", async () => {
   const source = await readFile(resolve(repoRoot, "src/app/_pages/home.tsx"), "utf8");
 
-  assert.match(source, /className="[^"]*\bmin-w-0 lg:col-span-6\b[^"]*"/);
+  assert.match(source, /className="[^"]*\bmin-w-0\b[^"]*"/);
   assert.match(source, /className=\{`[^`]*\bbreak-words\b[^`]*`\}/);
 });
 
-test("home renders direct localized acquisition links to the core wiki guides", async () => {
+test("home routes reading through localized Learn and Docs entries", async () => {
   const { HomePage } = await import("../src/app/_pages/home.tsx");
-  const expectedByLocale = {
-    en: [
-      "/learn/distilled-wiki-pages-ai-memory",
-      "/learn/source-backed-wiki-pages-ai-work",
-      "/learn/choose-ai-knowledge-base-tool",
-    ],
-    "zh-TW": [
-      "/zh-TW/learn/distilled-wiki-pages-ai-memory",
-      "/zh-TW/learn/source-backed-wiki-pages-ai-work",
-      "/zh-TW/learn/choose-ai-knowledge-base-tool",
-    ],
-    "zh-CN": [
-      "/zh-CN/learn/distilled-wiki-pages-ai-memory",
-      "/zh-CN/learn/source-backed-wiki-pages-ai-work",
-      "/zh-CN/learn/choose-ai-knowledge-base-tool",
-    ],
-  };
-
-  for (const [locale, expectedHrefs] of Object.entries(expectedByLocale)) {
+  for (const [locale, prefix] of [["en", ""], ["zh-TW", "/zh-TW"], ["zh-CN", "/zh-CN"]]) {
     const html = renderToStaticMarkup(React.createElement(HomePage, { locale }));
-
-    for (const href of expectedHrefs) {
-      assert.match(html, new RegExp(`href="${href}"`), `${locale}.${href}`);
+    for (const path of ["/learn", "/docs", "/docs/get-started"]) {
+      assert.ok(html.includes(`href="${prefix}${path}"`), `${locale}.${path}`);
     }
+    assert.doesNotMatch(html, /id="home-reading"/);
   }
 });
 
@@ -2519,7 +2517,7 @@ test("Chinese home surfaces include script-specific Wenlan Chinese names", async
   }
 });
 
-test("home SEO copy presents LLM wiki positioning in English and Mandarin", async () => {
+test("home SEO copy presents LLM wiki positioning and the benefit-led hero in all locales", async () => {
   const { content } = await loadI18nModules();
 
   assert.equal(
@@ -2532,7 +2530,19 @@ test("home SEO copy presents LLM wiki positioning in English and Mandarin", asyn
   );
   assert.match(
     content.enContent.home.content.redesign.hero.eyebrow,
-    /A personal wiki for you and your AI/,
+    /A personal knowledge base, maintained with AI/,
+  );
+  assert.deepEqual(
+    [
+      content.enContent.home.content.redesign.hero.headline.pre,
+      content.enContent.home.content.redesign.hero.headline.emphasis,
+      content.enContent.home.content.redesign.hero.description,
+    ],
+    [
+      "Bring your knowledge",
+      "to life.",
+      "Wenlan is your personal knowledge base, maintained with AI. Connect notes, files, and chats into knowledge you and your AI tools can find and use.",
+    ],
   );
 
   const expected = {
@@ -2541,11 +2551,10 @@ test("home SEO copy presents LLM wiki positioning in English and Mandarin", asyn
       sourceBacked: "有來源依據",
       staleHomePhrase: /活個人知識庫|AI-native/,
       hero: {
-        eyebrow: /你與 AI 共用的個人 Wiki/,
-        notes: /把筆記與 AI 對話/,
-        continuation: /整理成你的知識庫/,
-        organizes: /幫你整理重點、持續更新/,
-        aiRetrieval: /AI 更容易找到需要的資訊/,
+        eyebrow: /AI 協助維護的個人知識庫/,
+        pre: /用你的知識，/,
+        emphasis: /找到答案、完成工作。/,
+        description: "由 AI 協助維護的個人知識庫。文瀾將筆記、文件與對話連成可持續更新的知識，供你與 AI 查找、使用。",
       },
     },
     "zh-CN": {
@@ -2553,11 +2562,10 @@ test("home SEO copy presents LLM wiki positioning in English and Mandarin", asyn
       sourceBacked: "有来源依据",
       staleHomePhrase: /活个人知识库|AI-native/,
       hero: {
-        eyebrow: /你与 AI 共用的个人 Wiki/,
-        notes: /把笔记和 AI 对话/,
-        continuation: /整理成你的知识库/,
-        organizes: /帮你整理重点、持续更新/,
-        aiRetrieval: /AI 更容易找到需要的信息/,
+        eyebrow: /AI 协助维护的个人知识库/,
+        pre: /用你的知识，/,
+        emphasis: /找到答案、完成工作。/,
+        description: "由 AI 协助维护的个人知识库。文澜将笔记、文档与对话连成可持续更新的知识，供你与 AI 查找、使用。",
       },
     },
   };
@@ -2576,16 +2584,15 @@ test("home SEO copy presents LLM wiki positioning in English and Mandarin", asyn
       `${locale}.home.seo.description.sourceBacked`,
     );
     assert.match(home.redesign.hero.eyebrow, localeExpected.hero.eyebrow, `${locale}.home.hero.category`);
-    assert.match(home.redesign.hero.headline.pre, localeExpected.hero.notes, `${locale}.home.hero.notes`);
-    assert.match(home.redesign.hero.headline.emphasis, localeExpected.hero.continuation, `${locale}.home.hero.continuation`);
-    assert.match(home.redesign.hero.description, localeExpected.hero.organizes, `${locale}.home.hero.description.organizes`);
-    assert.match(home.redesign.hero.description, localeExpected.hero.aiRetrieval, `${locale}.home.hero.description.aiRetrieval`);
+    assert.match(home.redesign.hero.headline.pre, localeExpected.hero.pre, `${locale}.home.hero.knowledge`);
+    assert.match(home.redesign.hero.headline.emphasis, localeExpected.hero.emphasis, `${locale}.home.hero.benefit`);
+    assert.equal(home.redesign.hero.description, localeExpected.hero.description, `${locale}.home.hero.description.revision`);
     assert.match(home.faqs.items[0].a, /LLM wiki/, `${locale}.home.faq.whatIsWenlan`);
     assert.doesNotMatch(renderedHome, localeExpected.staleHomePhrase, `${locale}.home.stale`);
   }
 });
 
-test("Chinese hero promises a personal knowledge base and setup begins with a concrete decision", async () => {
+test("Chinese hero leads with outcomes and setup begins with a concrete decision", async () => {
   const { content } = await loadI18nModules();
 
   for (const locale of ["zh-TW", "zh-CN"]) {
@@ -2593,8 +2600,8 @@ test("Chinese hero promises a personal knowledge base and setup begins with a co
 
     assert.match(
       dictionary.home.content.redesign.hero.headline.emphasis,
-      /整理成你的知識庫|整理成你的知识库/,
-      `${locale}.home.hero.headline.organizedKnowledgeBase`,
+      /找到答案、完成工作。/,
+      `${locale}.home.hero.headline.benefit`,
     );
     assert.match(
       dictionary.getStarted.content.hero.title,

@@ -126,13 +126,13 @@ export function DownloadPlatforms({
                 <p className="font-mono text-[10px] tracking-[0.2em] text-[var(--o-warm)] uppercase">
                   {copy.recommendation.label}
                 </p>
-                <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <h3 className="font-serif text-3xl font-medium">
+                <div className="mt-4">
+                  <h3 className="font-serif text-2xl font-medium">
                     {recommendedPlatform.name}
                   </h3>
-                  <span className="font-mono text-xs text-[var(--o-text-muted)]">
+                  <p className="mt-2 font-mono text-xs text-[var(--o-text-secondary)]">
                     {recommendedPlatform.architecture}
-                  </span>
+                  </p>
                 </div>
                 <p className="mt-3 max-w-xl text-sm leading-relaxed text-[var(--o-text-secondary)]">
                   {recommendedPlatform.description}
@@ -156,16 +156,6 @@ export function DownloadPlatforms({
                       copy.packageIncludesLabel}
                   </p>
                 )}
-                {recommendedPlatform.guideHref &&
-                recommendedPlatform.guideLabel ? (
-                  <div className="mt-2">
-                    <GuideLink
-                      href={recommendedPlatform.guideHref}
-                      label={recommendedPlatform.guideLabel}
-                      locale={locale}
-                    />
-                  </div>
-                ) : null}
               </>
             ) : (
               <>
@@ -200,7 +190,7 @@ export function DownloadPlatforms({
               <details
                 key={platform.id}
                 id={platform.id}
-                open={index === 0 || undefined}
+                open={(!recommendedPlatform && index === 0) || undefined}
                 className="group scroll-mt-24 border-b border-[var(--o-border-subtle)] last:border-b-0"
               >
                 <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[var(--o-warm)] sm:px-6 [&::-webkit-details-marker]:hidden">

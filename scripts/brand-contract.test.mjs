@@ -928,8 +928,19 @@ test("brand scan distinguishes HTTP header mentions from old product copy", () =
   assert.deepEqual(scan("HTTP Origin header; install Origin"), ["Origin"]);
 });
 
+function isNonBrandOriginMention(text, match) {
+  return isHttpOriginMention(text, match) || /^ of Species\b/.test(text.slice(match.index + match[0].length));
+}
+
+test("book titles do not hide stale product branding", () => {
+  const text = "Origin of Species; Origin is your knowledge base";
+  const matches = [...text.matchAll(/\bOrigin\b/g)].filter(match => !isNonBrandOriginMention(text, match));
+  assert.equal(matches.length, 1);
+  assert.equal(matches[0].index, text.lastIndexOf("Origin"));
+});
+
 test("public prose displays Wenlan instead of stale Origin branding", async () => {
-  const failures = await collectMatches(/\bOrigin\b/g, isHttpOriginMention);
+  const failures = await collectMatches(/\bOrigin\b/g, isNonBrandOriginMention);
   assert.deepEqual(failures, []);
 });
 
@@ -1109,9 +1120,9 @@ test("public current-release surfaces track the selected Wenlan release source",
   assert.match(simplifiedContent, /Wenlan \{release\} 提供/);
   assert.match(traditionalContent, /statusItems: \["版本 \{release\}"/);
   assert.match(traditionalContent, /Wenlan \{release\} 提供/);
-  assert.match(englishContent, /Download macOS desktop/);
-  assert.match(traditionalContent, /下載 macOS 桌面版/);
-  assert.match(simplifiedContent, /下载 macOS 桌面版/);
+  assert.match(englishContent, /Download for macOS/);
+  assert.match(traditionalContent, /下載 macOS 版/);
+  assert.match(simplifiedContent, /下载 macOS 版/);
   assert.doesNotMatch(englishContent, /preview is not yet notarized/);
   assert.doesNotMatch(traditionalContent, /預覽版尚未完成 notarization/);
   assert.doesNotMatch(simplifiedContent, /预览版尚未完成 notarization/);
@@ -1261,7 +1272,7 @@ test("download information architecture keeps the homepage compact and the full 
   );
   assert.match(downloadPlatforms, /otherPlatforms/);
   assert.match(downloadPlatforms, /<details/);
-  assert.match(downloadPlatforms, /open=\{index === 0/);
+  assert.match(downloadPlatforms, /open=\{\(!recommendedPlatform && index === 0\)/);
   assert.match(downloadPlatforms, /placement="download-page"/);
   assert.match(downloadPlatforms, /copy\.packageIncludesLabel/);
   assert.match(downloadPlatforms, /platform\.packageIncludesLabel/);
@@ -1412,7 +1423,7 @@ test("public framing stays LLM-wiki-first across footer, social images, and the 
     assert.match(source, /LLM wiki/, path);
   }
 
-  assert.match(surfaces[0][1], /title: "Wenlan demo"/);
+  assert.match(surfaces[0][1], /title: "Wenlan introduction video"/);
   assert.doesNotMatch(surfaces[0][1], /Historical Wenlan demo v0\.9/);
   assert.match(surfaces[1][1], /ChatGPT/);
 });

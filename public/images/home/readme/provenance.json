@@ -1,0 +1,117 @@
+{
+  "basis": "Localized shared visual assets. Update/history illustrations are rebuilt from editable SVG geometry and text; other assets retain their recorded provenance.",
+  "sourceRevision": "82be09ddf08bcb22273fdb93e088814b93b78d11",
+  "assets": [
+    {
+      "file": "wenlan-personal-graph.png",
+      "locale": "en",
+      "source": "wenlan/docs/assets/wenlan-personal-graph.png",
+      "sha256": "a06050ed7a3a5bb3d43ef31e5a7982b9a640ac328167487b3490bb5da70cccf2",
+      "dimensions": [
+        3600,
+        2488
+      ]
+    },
+    {
+      "file": "wenlan-updates-history.b8674e6f37f2.png",
+      "locale": "en",
+      "source": "scripts/render-update-visuals.cjs",
+      "sha256": "b8674e6f37f2178263e65d97a732aaa9c2a19cc5424086ef50e076de50fb93a0",
+      "dimensions": [
+        4800,
+        2160
+      ],
+      "variant": "vector-rebuilt-20261017",
+      "basis": "Native SVG explanatory illustration preserving the approved composition and App behavior; no raster or image-generated pixels are used. Source changes enter Steep, which updates versioned records and untouched AI pages, while edited pages await review. Not an App screenshot.",
+      "sourceRevision": "ffe29d62f083010bea1ee7f78cb44fd6b1f4b61b",
+      "inputAsset": "wenlan-updates-history.9b99f9e504d4.png",
+      "inputSha256": "9b99f9e504d42e61452beddbdf487b7c78f452808bc8ceff0b0d65749b93f58a",
+      "previousEditedAsset": "wenlan-updates-history.47b115fee042.png",
+      "editableSource": "wenlan-updates-history.svg"
+    },
+    {
+      "file": "wenlan-personal-knowledge.png",
+      "locale": "en",
+      "source": "wenlan/docs/assets/wenlan-personal-knowledge.png",
+      "sha256": "6aa9bd21bb7e5b746ec1c1545570f0f5df9539fb81ffcf4dc1f915295b2de0e9",
+      "dimensions": [
+        6000,
+        3600
+      ]
+    },
+    {
+      "file": "wenlan-personal-graph-zh-Hant.png",
+      "locale": "zh-TW",
+      "source": "wenlan/docs/assets/wenlan-personal-graph-zh-Hant.png",
+      "sha256": "65a4588af858c942060477578ef2340a0ff967bf6bebde67ebf6d8de66aafc97",
+      "dimensions": [
+        3600,
+        2488
+      ]
+    },
+    {
+      "file": "wenlan-updates-history-zh-Hant.bdbf253296b9.png",
+      "locale": "zh-TW",
+      "source": "scripts/render-update-visuals.cjs",
+      "sha256": "bdbf253296b9962500c58bbfc5959246ca88f17bcc49ddf9e2c56d81a3325949",
+      "dimensions": [
+        4800,
+        2160
+      ],
+      "variant": "vector-rebuilt-20261017",
+      "basis": "Native SVG explanatory illustration preserving the approved composition and App behavior; no raster or image-generated pixels are used. Source changes enter Steep, which updates versioned records and untouched AI pages, while edited pages await review. Not an App screenshot.",
+      "sourceRevision": "ffe29d62f083010bea1ee7f78cb44fd6b1f4b61b",
+      "inputAsset": "wenlan-updates-history-zh-Hant.d08792183701.png",
+      "inputSha256": "d087921837018ea0efff0d8788ce1e21f5b82db37df2dc4806790cc2a3ba304c",
+      "previousEditedAsset": "wenlan-updates-history-zh-Hant.3ada1655d37f.png",
+      "editableSource": "wenlan-updates-history-zh-Hant.svg"
+    },
+    {
+      "file": "wenlan-personal-knowledge-zh-Hant.png",
+      "locale": "zh-TW",
+      "source": "wenlan/docs/assets/wenlan-personal-knowledge-zh-Hant.png",
+      "sha256": "328e4bf032d5dcf16cad24658d7d12a51d694fdd2b3d00f5b1e44f94b22246e5",
+      "dimensions": [
+        6000,
+        3600
+      ]
+    },
+    {
+      "file": "wenlan-personal-graph-zh-Hans.png",
+      "locale": "zh-CN",
+      "source": "wenlan/docs/assets/wenlan-personal-graph-zh-Hans.png",
+      "sha256": "46330eb6094ca49b149bf05acc6d234d93b5ca3b14d9574fe72d5b9c23607696",
+      "dimensions": [
+        3600,
+        2488
+      ]
+    },
+    {
+      "file": "wenlan-updates-history-zh-Hans.0bf421529d9e.png",
+      "locale": "zh-CN",
+      "source": "scripts/render-update-visuals.cjs",
+      "sha256": "0bf421529d9eda0b3cced0e3a57fc6c74b0b1746cd8cdd8004048ff7919a5e42",
+      "dimensions": [
+        4800,
+        2160
+      ],
+      "variant": "vector-rebuilt-20261017",
+      "basis": "Native SVG explanatory illustration preserving the approved composition and App behavior; no raster or image-generated pixels are used. Source changes enter Steep, which updates versioned records and untouched AI pages, while edited pages await review. Not an App screenshot.",
+      "sourceRevision": "ffe29d62f083010bea1ee7f78cb44fd6b1f4b61b",
+      "inputAsset": "wenlan-updates-history-zh-Hans.525580619e66.png",
+      "inputSha256": "525580619e66dd62f5f806b885f5b986feb43025980c4392030740bbb16034d2",
+      "previousEditedAsset": "wenlan-updates-history-zh-Hans.2cdc27d3e6a1.png",
+      "editableSource": "wenlan-updates-history-zh-Hans.svg"
+    },
+    {
+      "file": "wenlan-personal-knowledge-zh-Hans.png",
+      "locale": "zh-CN",
+      "source": "wenlan/docs/assets/wenlan-personal-knowledge-zh-Hans.png",
+      "sha256": "96736638a3611964a0b63888e41777f98d07f93e8f9db7b39c964df43dc4eeba",
+      "dimensions": [
+        6000,
+        3600
+      ]
+    }
+  ]
+}

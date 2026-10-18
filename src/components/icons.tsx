@@ -1,12 +1,16 @@
-// Shared UI glyphs. Artwork is vendored from official sources rather than
+// Shared UI glyphs. Most artwork is vendored from official sources rather than
 // installed as packages: node_modules predates the active pnpm toolchain, so
 // adding dependencies would force a store migration for two icons.
-// - Arrow + GitHub: @phosphor-icons/core v2 (regular),
-//   https://cdn.jsdelivr.net/npm/@phosphor-icons/core@2/assets/regular/{arrow-right,github-logo}.svg
+// - Arrow, Download: @phosphor-icons/core v2 (regular),
+//   https://cdn.jsdelivr.net/npm/@phosphor-icons/core@2/assets/regular/{arrow-right,download-simple}.svg
+// - GitHub: official Primer Octicons mark-github-16,
+//   https://github.com/primer/octicons/blob/main/icons/mark-github-16.svg
 // - Brand marks: simple-icons v16.29.0,
 //   https://cdn.jsdelivr.net/npm/simple-icons@16.29.0/icons/{claude,cursor,openai,visualstudiocode,obsidian}.svg
 // - Docs glyphs: @phosphor-icons/core v2 (regular),
 //   https://cdn.jsdelivr.net/npm/@phosphor-icons/core@2/assets/regular/{terminal,arrow-clockwise,tray-arrow-down,book-open,shield-check,gear-six,plug,wrench}.svg
+// - Navigation glyphs: @phosphor-icons/core v2 (regular),
+//   https://cdn.jsdelivr.net/npm/@phosphor-icons/core@2/assets/regular/{list,x,caret-down,check}.svg
 // The Wenlan ring mark is NOT here: it is the brand logo, not a UI glyph.
 
 type GlyphProps = {
@@ -47,14 +51,39 @@ export function ArrowRightIcon({ className }: GlyphProps) {
   );
 }
 
-export function GitHubLogoIcon({ className }: GlyphProps) {
+export function MenuIcon({ className }: GlyphProps) {
+  return <Glyph viewBox="0 0 256 256" d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z" className={className} />;
+}
+
+export function DownloadSimpleIcon({ className }: GlyphProps) {
+  return <Glyph viewBox="0 0 256 256" d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z" className={className} />;
+}
+
+export function CloseIcon({ className }: GlyphProps) {
+  return <Glyph viewBox="0 0 256 256" d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z" className={className} />;
+}
+
+export function CaretDownIcon({ className }: GlyphProps) {
+  return <Glyph viewBox="0 0 256 256" d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z" className={className} />;
+}
+
+// Geometric globe, with a stroke weight matching the regular navigation glyphs.
+export function GlobeIcon({ className }: GlyphProps) {
   return (
-    <Glyph
-      viewBox="0 0 256 256"
-      d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"
-      className={className}
-    />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false" className={className}>
+      <circle cx="12" cy="12" r="9" />
+      <ellipse cx="12" cy="12" rx="4" ry="9" />
+      <path d="M3 12h18" />
+    </svg>
   );
+}
+
+export function CheckIcon({ className }: GlyphProps) {
+  return <Glyph viewBox="0 0 256 256" d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z" className={className} />;
+}
+
+export function GitHubLogoIcon({ className }: GlyphProps) {
+  return <Glyph viewBox="0 0 16 16" d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656" className={className} />;
 }
 
 function BrandGlyph({

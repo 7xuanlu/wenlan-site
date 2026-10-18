@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "4740ecd573836f7e9917a1615642438fe70d78cbfb597ac7ef563f857c16c62d",
+    sourceHash: "ec0e78c5cdab9a0964f05f59f6008a9571672a4a70ce9f2678ea7e6f78a8d34d",
     content: {
       seo: {
         title: "文瀾 Wenlan｜個人 AI 知識庫",
@@ -38,7 +38,7 @@ export const zhTWContent = {
         title: "Wenlan 文瀾",
         description:
           "保存有用決策，整理出有來源的筆記，再透過已連接的 AI 工具找回。",
-        primaryCta: { id: "download", href: "#download", label: "下載 Wenlan" },
+        primaryCta: { id: "download", href: "/download", label: "下載" },
         secondaryCta: {
           id: "github",
           href: "https://github.com/wenlan-app/wenlan",
@@ -68,8 +68,8 @@ export const zhTWContent = {
         ],
       },
       demo: {
-        title: "Wenlan 產品示範",
-        playLabel: "播放 Wenlan 產品示範",
+        title: "Wenlan 產品介紹",
+        playLabel: "播放 Wenlan 產品介紹",
       },
       download: {
         eyebrow: "下載",
@@ -92,10 +92,10 @@ export const zhTWContent = {
           {
             id: "windows-desktop-x64",
             name: "Wenlan 桌面版",
-            architecture: "Windows · x64 桌面版",
+            architecture: "Windows · x64",
             description:
-              "安裝內建 daemon、CLI、MCP connector 與所需 runtime libraries 的桌面 App；不\u2060需\u2060要 WSL 或 Rust toolchain。",
-            actionLabel: "下載 Windows 桌面版",
+              "在桌面 App 閱讀、整理筆記與文件。",
+            actionLabel: "下載 Windows 版",
             packageIncludesLabel: "桌面 App · 內建 runtime",
             guideLabel: "開啟桌面版安裝指南",
             setupSteps: [
@@ -122,8 +122,8 @@ export const zhTWContent = {
             id: "macos-arm64",
             name: "Wenlan 桌面版",
             architecture: "macOS · Apple silicon 桌面版",
-            description: "最快開始閱讀筆記與檢查來源的方式。",
-            actionLabel: "下載 macOS 桌面版",
+            description: "在桌面 App 閱讀、整理筆記與文件。",
+            actionLabel: "下載 macOS 版",
             packageIncludesLabel: "桌面 App · 內含本地 runtime",
             guideLabel: "開啟安全安裝指南",
             setupSteps: [
@@ -188,15 +188,18 @@ export const zhTWContent = {
           eyebrow: "Wenlan 本地執行環境",
           title: "下載 Wenlan",
           description:
-            "選擇一個正式發布的版本、保留套件內全部檔案，再驗證本地 runtime，之後才連接 AI 工具。",
+            "下載桌面版，開啟 Wenlan，開始加入筆記與文件。",
           buildsTitle: "選擇你的版本",
-          buildsDescription: "目前 release 提供 Windows x64 與 macOS Apple silicon 桌面版，以及四個原生 headless runtime 套件。",
-          verifyTitle: "連接前先驗證",
+          buildsDescription: "桌面版支援 Windows x64 與 macOS Apple silicon。Linux 與指令列版本見下方。",
+          verifyTitle: "安裝或連線遇到問題？",
           verifyDescription:
-            "安裝後執行診斷。它會檢查本地 runtime，並告訴你下一個修復步驟。",
-          releaseSourceLabel: "查看 release 來源",
+            "使用診斷指令檢查本機服務，查看結果與建議的處理步驟。",
+          releaseSourceLabel: "版本說明",
           setupGuideLabel: "閱讀完整安裝指南",
-          getStartedLabel: "繼續開始使用",
+          getStartedLabel: "查看開始使用指南",
+          nextTitle: "安裝後，從這裡開始",
+          nextDescription:
+            "開啟 Wenlan，完成首次設定，接著加入一則筆記或一份文件。",
         },
       },
       useCases: {
@@ -377,9 +380,9 @@ export const zhTWContent = {
           },
         },
         features: {
-          eyebrow: "筆記",
-          title: "工作會變成可重用的筆記。",
-          body: "整理過的決策與教訓會成為耐用的筆記，而不是被埋在聊天記錄裡。它們足夠有組織，agent 能使用；也足夠具體，人可以閱讀。",
+          eyebrow: "知識頁面",
+          title: "留下的知識，接著用下去。",
+          body: "整理過的決策與教訓會成為耐用頁面，而不是被埋在聊天記錄裡。它們足夠有組織，agent 能使用；也足夠具體，人可以閱讀。",
           note: "你的工作不再只是 transcript 歷史，而是開始變成專案知識。",
         },
         humanControl: {
@@ -390,10 +393,10 @@ export const zhTWContent = {
         },
         openSourceCta: {
           eyebrow: "開源",
-          title: "程式碼公開，讓你自由探索。",
-          body: "從本地執行核心到桌面 App，你都能查看原始碼，也能自行建置 Wenlan。",
+          title: "帶一份筆記，開始用 Wenlan。",
+          body: "匯入筆記或文件，再接上你常用的 AI 工具。",
           note: "執行核心與 plugins：Apache-2.0。桌面 App：AGPL-3.0-only。",
-          primaryCta: { id: "download", href: "#download", label: "下載 Wenlan" },
+          primaryCta: { id: "download", href: "/download", label: "下載" },
           secondaryCta: {
             id: "github",
             href: "https://github.com/wenlan-app/wenlan",
@@ -419,8 +422,8 @@ export const zhTWContent = {
       },
       metrics: {
         eyebrow: "Hybrid retrieval，實測",
-        title: "每次查詢，需要帶回多少內容？",
-        description: "在固定的 500 題檢索測試中，比較完整對話重播與 Wenlan 取回的上下文。",
+        title: "檢索表現，怎麼衡量？",
+        description: "兩組獨立測試，分別衡量 Wenlan 的背景內容量與資料找回程度。",
         headers: {
           surface: "表面",
           scope: "範圍",
@@ -430,24 +433,24 @@ export const zhTWContent = {
           {
             id: "full-replay",
             surface: "完整重播",
-            scope: "不使用 retrieval",
+            scope: "LoCoMo · 不使用檢索",
             result: "每次查詢 4,505 tokens / query",
           },
           {
             id: "lme-oracle",
             surface: "LME_Oracle",
             scope: "CE-reranked，500 Q",
-            result: "每次查詢 168 tokens / query · 93.6% R@5 · 0.883 NDCG@10",
+            result: "93.6% R@5 · 0.883 NDCG@10",
           },
           {
             id: "lme-s",
             surface: "LME_S",
             scope: "CE-reranked，N=90 deep-S",
-            result: "每次查詢 168 tokens / query · 87.7% R@5 · 0.822 NDCG@10",
+            result: "87.7% R@5 · 0.822 NDCG@10",
           },
         ],
         note:
-          "固定 fixture 上的 retrieval-only snapshots。LME_Oracle 也記錄 0.857 MRR；LME_S 在 90-question deep-S fixture 的 84 個可評分 rows 上記錄 0.815 MRR。這不是一般的時間或 token 節省保證，也不是 Wenlan 與其他工具的比較。Token 比較只限於這項 retrieval 測試中的完整重播與 retrieved context。",
+          "4,505 與 168 是早期 LoCoMo 的背景內容 token 數，與 LongMemEval 檢索品質分開測量。LME_Oracle 的 MRR 為 0.857；LME_S 的 MRR 為 0.815，來自 N=90 deep-S 測試中 84 筆可評分資料。這些結果不代表回答正確率、通用的 token 節省比例，或與其他產品的比較。",
         link: {
           id: "harness",
           href: "https://github.com/wenlan-app/wenlan/tree/main/crates/wenlan-core/src/eval",
@@ -481,7 +484,7 @@ export const zhTWContent = {
           {
             id: "memory-mcp",
             q: "Wenlan 只是另一個 memory MCP 嗎？",
-            a: "不是。MCP server 是 connector。Wenlan 也包含本地 daemon、manual /distill、可選的 model-backed extraction 與筆記整理、本地 retrieval、source references、review surfaces、memory、筆記和 session artifacts 的真實 git versioning，以及可讀的 Markdown export paths。",
+            a: "MCP 負責連接 AI 工具。Wenlan 也提供本機知識庫、有來源的筆記、可選的背景整理，以及可查看的知識頁修訂與記憶取代歷程。",
           },
           {
             id: "tools",
@@ -517,10 +520,10 @@ export const zhTWContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "你與 AI 共用的個人 Wiki",
-          headline: { pre: "把筆記與 AI 對話，", emphasis: "整理成你的知識庫。", post: "" },
+          eyebrow: "AI 協助維護的個人知識庫",
+          headline: { pre: "用你的知識，", emphasis: "找到答案、完成工作。", post: "" },
           description:
-            "檔案散在各處，好點子留在對話裡。文瀾幫你整理重點、持續更新，讓你方便查閱，也讓 AI 更容易找到需要的資訊。",
+            "由 AI 協助維護的個人知識庫。文瀾將筆記、文件與對話連成可持續更新的知識，供你與 AI 查找、使用。",
           worksWithLabel: "可搭配",
           worksWithNote: "可讀取 Obsidian 庫，保留原文。",
         },
@@ -845,8 +848,8 @@ export const zhTWContent = {
                 "href": "https://wenlan.app/docs/models-and-keys"
               },
               {
-                "label": "本機 Git 歷程",
-                "href": "https://wenlan.app/docs/local-git-history"
+                "label": "知識頁與記憶歷史",
+                "href": "https://github.com/wenlan-app/wenlan/blob/main/docs/knowledge-guide.md#updates-and-history"
               },
               {
                 "label": "Rohitg00 LLM Wiki v2 社群提案",
@@ -880,44 +883,44 @@ export const zhTWContent = {
         bento: {
           cells: [
             {
-              id: "pages",
-              title: "留下能接著用的筆記",
-              body: "將決策與經驗整理成你能閱讀、AI 能使用的筆記，不再只留在聊天記錄裡。",
+              id: "sources",
+              title: "文件、對話和網頁，都有位置",
+              body: "匯入檔案與 AI 對話，也能透過工具保存網頁內容與原網址。",
             },
             {
-              id: "graph",
-              title: "找回答案，也找回脈絡",
-              body: "設定檢索後，可一併找回相關人物、專案與筆記，再沿著連結檢查來源紀錄。",
+              id: "obsidian",
+              title: "繼續用你的 Obsidian 筆記庫",
+              body: "唯讀連接筆記庫，需要時更新來源；原筆記留在原處、不被改動。",
             },
             {
-              id: "citations",
-              title: "答案從哪來，看得見",
-              body: "Wenlan 整理出的筆記附有來源連結，方便回查支持它的紀錄。來源連結本身不代表每個主張都已被證明。",
+              id: "steep",
+              title: "Steep 沉澱",
+              body: "設定背景模型後，Steep 持續整理。",
             },
             {
-              id: "review",
-              title: "先看變更，再決定採用",
-              body: "已設定的審核流程可提出信心不足或互相矛盾的紀錄，由你判斷哪些內容能用在後續工作。",
+              id: "topics",
+              title: "主題總覽",
+              body: "聚合相關筆記，沿著主題之間的關聯繼續探索。",
             },
             {
-              id: "nurture",
-              title: "知道哪些內容需要重查",
-              body: "設定背景處理後，可批次建立關聯、更新相符的筆記，並標記過時紀錄供你檢查。",
+              id: "tools",
+              title: "接上你常用的 AI 工具",
+              body: "Claude Code、Codex、Cursor 等工具，完成外掛或 MCP 設定後，就能查閱知識、保存記憶。",
+            },
+            {
+              id: "web-access",
+              title: "Web Access 網頁存取",
+              body: "讓支援的網頁 AI 使用電腦上的文瀾知識，使用時保持 Wenlan 在線。",
             },
             {
               id: "spaces",
-              title: "不同工作的知識，分開管理",
-              body: "用 Spaces 區分工作、個人或客戶專案。工具與使用中的空間需正確設定，才能按空間保存及檢索。",
+              title: "每個專案，都有自己的脈絡",
+              body: "用 Spaces 分開專案、研究與個人知識；選定空間，讓 AI 檢索這次工作需要的脈絡。",
             },
             {
-              id: "git",
-              title: "像程式碼一樣有版本",
-              body: "紀錄、筆記與工作階段產物保存在真正的 Git 歷史裡，可以查看差異，也可以還原。",
-            },
-            {
-              id: "mcp",
-              title: "不同工具，接著同一份知識",
-              body: "已設定的 MCP 工具可透過同一個本地服務讀取紀錄；連線設定與工具權限決定能存取的範圍。",
+              id: "history",
+              title: "改變有跡可循",
+              body: "回看知識頁的修訂，追溯記憶的取代關係。",
             },
           ],
         },
@@ -949,23 +952,23 @@ export const zhTWContent = {
           ],
         },
         metrics: {
-          title: "Retrieval snapshot 範圍。",
+          title: "檢索與背景內容量",
           bars: [
             {
               id: "full-replay",
-              label: "完整聊天重播",
-              value: "每次查詢 4,505 tokens / query",
-              sub: "不使用 retrieval，整份 transcript 進 context",
+              label: "把整份對話交給 AI",
+              value: "4,505 tokens / query",
+              sub: "完整重送：把全部對話文字當作背景。",
             },
             {
               id: "wenlan",
-              label: "Wenlan 檢索",
-              value: "每次查詢 168 tokens / query",
-              sub: "CE-reranked，500 題 snapshot",
+              label: "先找出相關片段",
+              value: "168 tokens / query",
+              sub: "Wenlan 檢索：只帶回搜尋到的相關內容。",
             },
           ],
           footnote:
-            "固定 fixture 上的 retrieval-only snapshots。LME_S 在 stratified N=90 deep-S fixture 上記錄 87.7% R@5 和 0.815 MRR。這不是一般的時間或 token 節省保證，也不是 Wenlan 與其他工具的比較。Token 比較只限於這項 retrieval 測試中的完整重播與 retrieved context。",
+            "4,505 與 168 是早期 LoCoMo 的背景內容 token 數，與 LongMemEval 檢索品質分開測量。LME_Oracle 的 MRR 為 0.857；LME_S 的 MRR 為 0.815，來自 N=90 deep-S 測試中 84 筆可評分資料。這些結果不代表回答正確率、通用的 token 節省比例，或與其他產品的比較。",
         },
       },
     },
@@ -1878,11 +1881,11 @@ export const zhTWContent = {
   },
   footer: {
     status: "translated",
-    sourceHash: "20b2acec4cac24e2483e28738e2cbecc0474cbeda6448bce117fdcc12c79331c",
+    sourceHash: "acd65e32a1afb9646e8a6861f13fd84e74d061ef10201cd15b14c04a5cab0d84",
     content: {
       ariaLabel: "網站頁尾",
       brand: "Wenlan",
-      tagline: "AI 工作的 LLM wiki。",
+      tagline: "讓 AI 持續整理、更新你的知識。",
       groups: [
         {
           id: "product",

@@ -38,7 +38,7 @@ export const enContent = {
         title: "Wenlan",
         description:
           "After setup, save useful decisions, organize sourced notes, and find them again through your configured AI tools.",
-        primaryCta: { id: "download", href: "#download", label: "Download Wenlan" },
+        primaryCta: { id: "download", href: "/download", label: "Download" },
         secondaryCta: {
           id: "github",
           href: "https://github.com/wenlan-app/wenlan",
@@ -68,8 +68,8 @@ export const enContent = {
         ],
       },
       demo: {
-        title: "Wenlan demo",
-        playLabel: "Play Wenlan demo",
+        title: "Wenlan introduction video",
+        playLabel: "Play Wenlan introduction video",
       },
       download: {
         eyebrow: "Download",
@@ -95,8 +95,8 @@ export const enContent = {
             name: "Wenlan Desktop",
             architecture: "Windows · x64",
             description:
-              "Install the desktop app with its bundled daemon, CLI, MCP connector, and runtime libraries. No WSL or Rust toolchain required.",
-            actionLabel: "Download Windows desktop",
+              "Read and organize your notes and files in the desktop app.",
+            actionLabel: "Download for Windows",
             packageIncludesLabel: "Desktop app · bundled runtime",
             guideLabel: "Open the desktop setup guide",
             setupSteps: [
@@ -124,8 +124,8 @@ export const enContent = {
             name: "Wenlan Desktop",
             architecture: "macOS · Apple silicon",
             description:
-              "The fastest way to read notes and inspect their sources.",
-            actionLabel: "Download macOS desktop",
+              "Read and organize your notes and files in the desktop app.",
+            actionLabel: "Download for macOS",
             packageIncludesLabel: "Desktop app · bundled runtime",
             guideLabel: "Open the safe installer guide",
             setupSteps: [
@@ -191,16 +191,19 @@ export const enContent = {
           eyebrow: "Wenlan runtime",
           title: "Download Wenlan",
           description:
-            "Choose one published build, keep its files together, and verify the local runtime before connecting an AI tool.",
-          buildsTitle: "Choose your build",
+            "Download the desktop app, open Wenlan, and start adding notes and files.",
+          buildsTitle: "Choose your download",
           buildsDescription:
-            "The current release provides desktop builds for Windows x64 and macOS Apple silicon plus four native headless runtime archives.",
-          verifyTitle: "Verify before you connect",
+            "The desktop app supports Windows x64 and macOS Apple silicon. Linux and CLI options are below.",
+          verifyTitle: "Having trouble installing or connecting?",
           verifyDescription:
-            "Run the diagnostic after installation. It checks the local runtime and reports the next repair step.",
-          releaseSourceLabel: "View release source",
+            "Use the diagnostic command to check the local service and see the results and suggested next steps.",
+          releaseSourceLabel: "Release notes",
           setupGuideLabel: "Read the full setup guide",
-          getStartedLabel: "Continue to get started",
+          getStartedLabel: "Open the getting-started guide",
+          nextTitle: "Ready to begin?",
+          nextDescription:
+            "Open Wenlan, follow the first-time setup, then add a note or file.",
         },
       },
       useCases: {
@@ -380,9 +383,9 @@ export const enContent = {
           },
         },
         features: {
-          eyebrow: "Notes",
-          title: "The work becomes reusable notes.",
-          body: "Cleaned decisions and lessons become durable notes instead of buried chat logs. They are organized enough for agents to use and concrete enough for humans to read.",
+          eyebrow: "Knowledge pages",
+          title: "Let what you learn carry forward.",
+          body: "Cleaned decisions and lessons become durable pages instead of buried chat logs. They are organized enough for agents to use and concrete enough for humans to read.",
           note: "Your work stops being transcript history and starts becoming project knowledge.",
         },
         humanControl: {
@@ -393,10 +396,10 @@ export const enContent = {
         },
         openSourceCta: {
           eyebrow: "Open source",
-          title: "Open code. Make it yours.",
-          body: "From the local runtime to the desktop app, you can inspect the code and build Wenlan yourself.",
+          title: "Try Wenlan with your own notes.",
+          body: "Add a note or file, then connect the AI tool you already use.",
           note: "Runtime and plugins: Apache-2.0. Desktop app: AGPL-3.0-only.",
-          primaryCta: { id: "download", href: "#download", label: "Download Wenlan" },
+          primaryCta: { id: "download", href: "/download", label: "Download" },
           secondaryCta: {
             id: "github",
             href: "https://github.com/wenlan-app/wenlan",
@@ -423,9 +426,9 @@ export const enContent = {
       },
       metrics: {
         eyebrow: "Hybrid retrieval, measured",
-        title: "How much context does a query need?",
+        title: "Putting retrieval to the test.",
         description:
-          "A fixed 500-question retrieval test compares full conversation replay with the context Wenlan retrieves.",
+          "Two separate tests of Wenlan: context size and retrieval coverage.",
         headers: {
           surface: "Surface",
           scope: "Scope",
@@ -435,24 +438,24 @@ export const enContent = {
           {
             id: "full-replay",
             surface: "Full replay",
-            scope: "No retrieval",
+            scope: "No retrieval · LoCoMo",
             result: "4,505 tokens / query",
           },
           {
             id: "lme-oracle",
             surface: "LME_Oracle",
             scope: "CE-reranked, 500 Q",
-            result: "168 tokens / query · 93.6% R@5 · 0.883 NDCG@10",
+            result: "93.6% R@5 · 0.883 NDCG@10",
           },
           {
             id: "lme-s",
             surface: "LME_S",
             scope: "CE-reranked, N=90 deep-S",
-            result: "168 tokens / query · 87.7% R@5 · 0.822 NDCG@10",
+            result: "87.7% R@5 · 0.822 NDCG@10",
           },
         ],
         note:
-          "Retrieval-only snapshots on fixed fixtures. LME_Oracle also records 0.857 MRR; LME_S records 0.815 MRR on 84 gradeable rows from the 90-question deep-S fixture. This is not a general time or token-saving guarantee and does not compare Wenlan with other tools. Token comparison is full replay vs retrieved context within this retrieval test.",
+          "The 4,505 and 168 context-token figures are an earlier LoCoMo snapshot, separate from LongMemEval retrieval quality. LME_Oracle records 0.857 MRR; LME_S records 0.815 MRR on 84 gradeable rows from the N=90 deep-S fixture. These snapshots do not establish answer accuracy, general token savings, or a comparison with other products.",
         link: {
           id: "harness",
           href: "https://github.com/wenlan-app/wenlan/tree/main/crates/wenlan-core/src/eval",
@@ -486,7 +489,7 @@ export const enContent = {
           {
             id: "memory-mcp",
             q: "Is Wenlan just another memory MCP?",
-            a: "No. The MCP server is the connector. Wenlan also includes the local daemon, manual /distill, optional model-backed extraction and note organizing, local retrieval, source references, review surfaces, real git versioning for memory, note, and session artifacts, and readable Markdown export paths.",
+            a: "The MCP server connects your AI tools. Wenlan also provides a local knowledge base, source-backed notes, optional background organization, and inspectable knowledge-page revisions and memory replacement history.",
           },
           {
             id: "tools",
@@ -522,10 +525,10 @@ export const enContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "A personal wiki for you and your AI",
-          headline: { pre: "Turn notes and AI chats", emphasis: "into your knowledge base.", post: "" },
+          eyebrow: "A personal knowledge base, maintained with AI",
+          headline: { pre: "Bring your knowledge", emphasis: "to life.", post: "" },
           description:
-            "Your files are scattered; good ideas get buried in chats. Wenlan helps organize key points and keep them up to date, so you can refer back and your AI can find what it needs.",
+            "Wenlan is your personal knowledge base, maintained with AI. Connect notes, files, and chats into knowledge you and your AI tools can find and use.",
           worksWithLabel: "Works with",
           worksWithNote: "Read from your Obsidian vault without changing your files.",
         },
@@ -850,8 +853,8 @@ export const enContent = {
                 "href": "https://wenlan.app/docs/models-and-keys"
               },
               {
-                "label": "Local Git history",
-                "href": "https://wenlan.app/docs/local-git-history"
+                "label": "Knowledge and memory history",
+                "href": "https://github.com/wenlan-app/wenlan/blob/main/docs/knowledge-guide.md#updates-and-history"
               },
               {
                 "label": "Rohitg00 LLM Wiki v2 community proposal",
@@ -885,44 +888,44 @@ export const enContent = {
         bento: {
           cells: [
             {
-              id: "pages",
-              title: "Readable by humans, organized for agents",
-              body: "Cleaned decisions and lessons become durable notes instead of buried chat logs.",
+              id: "sources",
+              title: "Bring your files and conversations",
+              body: "Bring in files and AI chats. Save web content and its URL through connected tools.",
             },
             {
-              id: "graph",
-              title: "Find the answer with its context",
-              body: "Configured retrieval can bring back people, projects, and notes with links to source memories and related items.",
+              id: "obsidian",
+              title: "Keep using your Obsidian vault",
+              body: "Connect your vault read-only and refresh when needed. Your original notes stay untouched.",
             },
             {
-              id: "citations",
-              title: "Follow the source",
-              body: "Wenlan records source links on organized notes so you can inspect supporting memories. Source links do not prove every claim by themselves.",
+              id: "steep",
+              title: "Steep",
+              body: "With a model configured, Steep organizes in the background.",
             },
             {
-              id: "review",
-              title: "Review before you rely",
-              body: "Configured review flows can surface low-confidence captures and contradictions. You decide what is worth trusting in future context.",
+              id: "topics",
+              title: "A home for each topic",
+              body: "Gather related notes. Follow connections across topics.",
             },
             {
-              id: "nurture",
-              title: "See what needs another look",
-              body: "With background processing configured, batches can link entities, update matching notes, and flag stale memories for attention.",
+              id: "tools",
+              title: "Connect the AI tools you use",
+              body: "Claude Code, Codex, Cursor, and other configured clients can consult your knowledge and save memories through plugins or MCP.",
+            },
+            {
+              id: "web-access",
+              title: "Web Access",
+              body: "Let supported web AI tools use your Wenlan knowledge on your computer. Keep Wenlan online while you work.",
             },
             {
               id: "spaces",
-              title: "Spaces keep work apart",
-              body: "Tag captures and recalls with a space; when the client and active space are configured, different contexts can stay separate.",
+              title: "A space for each project",
+              body: "Keep projects, research, and personal knowledge in separate Spaces. Choose the context your AI retrieves.",
             },
             {
-              id: "git",
-              title: "Versioned like code",
-              body: "Memory, notes, and session artifacts live in real git history. Inspect, diff, revert.",
-            },
-            {
-              id: "mcp",
-              title: "Bring knowledge across tools",
-              body: "Configured MCP clients can read local memory through one daemon; setup and client permissions determine what they can access.",
+              id: "history",
+              title: "See how your knowledge changed",
+              body: "Revisit page revisions and earlier memories.",
             },
           ],
         },
@@ -954,23 +957,23 @@ export const enContent = {
           ],
         },
         metrics: {
-          title: "Retrieval snapshot scope.",
+          title: "Retrieval context size",
           bars: [
             {
               id: "full-replay",
-              label: "Full chat replay",
+              label: "Send the whole conversation",
               value: "4,505 tokens / query",
-              sub: "No retrieval, whole transcript in context",
+              sub: "Full replay: provide all conversation text as background.",
             },
             {
               id: "wenlan",
-              label: "Wenlan retrieval",
+              label: "Find the relevant passages",
               value: "168 tokens / query",
-              sub: "CE-reranked, 500-question snapshot",
+              sub: "Wenlan retrieval: return the passages matched to the question.",
             },
           ],
           footnote:
-            "Retrieval-only snapshots on fixed fixtures. LME_S records 87.7% R@5 and 0.815 MRR on the stratified N=90 deep-S fixture. This is not a general time or token-saving guarantee and does not compare Wenlan with other tools. Token comparison is full replay vs retrieved context within this retrieval test.",
+            "The 4,505 and 168 context-token figures are an earlier LoCoMo snapshot, separate from LongMemEval retrieval quality. LME_Oracle records 0.857 MRR; LME_S records 0.815 MRR on 84 gradeable rows from the N=90 deep-S fixture. These snapshots do not establish answer accuracy, general token savings, or a comparison with other products.",
         },
       },
     },
@@ -1887,7 +1890,7 @@ export const enContent = {
     content: {
       ariaLabel: "Site footer",
       brand: "Wenlan",
-      tagline: "Source-backed LLM wiki for AI work.",
+      tagline: "Your knowledge, kept up to date with AI.",
       groups: [
         {
           id: "product",

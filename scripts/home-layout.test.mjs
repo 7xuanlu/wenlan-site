@@ -8,6 +8,8 @@ import { getCoreContent } from "../src/i18n/content/index.ts";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const homeSource = fs.readFileSync(path.join(repoRoot, "src/app/_pages/home.tsx"), "utf8");
+const demoSource = fs.readFileSync(path.join(repoRoot, "src/app/demo-video.tsx"), "utf8");
+const capabilitySource = fs.readFileSync(path.join(repoRoot, "src/components/home/capability-artifacts.tsx"), "utf8");
 const proofSource = fs.existsSync(path.join(repoRoot, "src/components/home/task-proof.tsx"))
   ? fs.readFileSync(path.join(repoRoot, "src/components/home/task-proof.tsx"), "utf8")
   : "";
@@ -24,11 +26,11 @@ test("homepage restores core demonstrations without presenting synthetic live pr
   assert.match(homeSource, /168 \/ 4505 \* 100/);
   assert.doesNotMatch(homeSource, /HeroLivingPage/);
   assert.doesNotMatch(homeSource, /UseCasesSection/);
-  assert.match(homeSource, /<PipelineSection\b/);
+  assert.doesNotMatch(homeSource, /<PipelineSection\b/);
   assert.match(homeSource, /<BentoSection\b/);
-  assert.match(homeSource, /<StorageSection\b/);
+  assert.doesNotMatch(homeSource, /<StorageSection\b/);
   assert.match(homeSource, /<HeroScenarios\b/);
-  assert.match(homeSource, /content\.metrics\.rows\.map/);
+  assert.match(homeSource, /href="\/docs\/evaluation"/);
 });
 
 test("homepage keeps shared brand icons without preview or assurance chrome", () => {
@@ -42,28 +44,33 @@ test("homepage keeps shared brand icons without preview or assurance chrome", ()
     "OpenAiBrandIcon",
     "VSCodeBrandIcon",
   ]) {
-    assert.match(homeSource, new RegExp(icon));
+    assert.match(capabilitySource, new RegExp(icon));
   }
   assert.doesNotMatch(homeSource, /previewBadge|hero\.assurances|assuranceAccents/);
   assert.match(homeSource, /<HeroScenarios\b/);
 });
 
-test("homepage retains a hero download path and places full download after evidence", () => {
-  const downloadIndex = homeSource.indexOf("<DownloadSection");
-  const demoIndex = homeSource.indexOf('id="demo"');
+test("homepage links to the download page without duplicating the platform section", () => {
+  const demoIndex = homeSource.indexOf('<DemoVideo');
 
-  assert.notEqual(downloadIndex, -1, "download section should remain on the homepage");
-  assert.notEqual(demoIndex, -1, "recorded demo section should have a stable #demo anchor");
-  assert.ok(downloadIndex > homeSource.indexOf('id="retrieval-evidence"'));
-  assert.ok(downloadIndex < homeSource.indexOf('{content.faqs.title}'));
-  assert.match(homeSource.slice(0, demoIndex), /HomeCta link=\{content\.hero\.primaryCta\}/);
+  assert.doesNotMatch(homeSource, /DownloadSection/);
+  assert.notEqual(demoIndex, -1, "video entry remains in the hero");
+  assert.match(demoSource, /id="demo"/);
+  assert.match(homeSource.slice(demoIndex, homeSource.indexOf('id="knowledge-workflows"')), /primaryAction=\{<HomeCta link=\{content\.hero\.primaryCta\}/);
+  for (const locale of ["en", "zh-TW", "zh-CN"]) {
+    const content = getCoreContent(locale).home.content;
+    assert.equal(content.hero.primaryCta.href, "/download");
+    assert.equal(content.sections.openSourceCta.primaryCta.href, "/download");
+  }
 });
 
-test("homepage leads with real proof and retains the complete feature overview before download", () => {
-  const order = ['<HeroScenarios', 'id="demo"', '<PainsSection', '<KnowledgeUpdateProof', '<KnowledgeGraphProof', 'id="integrations"', '<PipelineSection', '<BentoSection', '<StorageSection', 'id="retrieval-evidence"', '<DownloadSection'];
+test("homepage shows capabilities and retrieval evidence directly while disclosing examples", () => {
+  const order = ['<DemoVideo', '<HomeCta link={content.hero.primaryCta}', 'id="knowledge-workflows"', '<ProductMedia locale={locale} slot="wiki"', '<KnowledgeConnections', 'id="ai-recall"', '<ProductMedia locale={locale} slot="ai"', '<HeroScenarios', '<KnowledgeUpdates', 'id="capabilities"', '<BentoSection', 'id="integrations"', 'id="retrieval-evidence"', 'placement="home-footer"'];
   const positions = order.map((marker) => homeSource.indexOf(marker));
   assert.ok(positions.every((position) => position >= 0));
   assert.deepEqual(positions, [...positions].sort((a, b) => a - b));
+  assert.doesNotMatch(homeSource, /<KnowledgeWorkflow/);
+  assert.doesNotMatch(homeSource, /<details\s+data-home-features/);
 });
 
 test("the preserved worked example remains localized and source-linked", () => {
@@ -165,13 +172,12 @@ test("pipeline preserves semantic workflow and configured-processing boundaries"
   assert.match(pipelineSource, /solution\.note/);
 });
 
-test("homepage FAQ keeps answers in native collapsed details", () => {
-  assert.match(homeSource, /<details\b/);
-  assert.match(homeSource, /<summary[\s\S]*?min-h-11/);
-  assert.match(homeSource, /content\.faqs\.items\.map/);
-  assert.match(homeSource, /faq\.q/);
-  assert.match(homeSource, /faq\.a/);
-  assert.match(homeSource, /max-w-4xl/);
+test("homepage sends setup questions to docs instead of repeating the feature story", () => {
+  assert.doesNotMatch(homeSource, /content\.faqs\.items\.map|content\.faqs\.title/);
+  assert.doesNotMatch(homeSource, /id="home-reading"/);
+  for (const locale of ["en", "zh-TW", "zh-CN"]) {
+    assert.ok(JSON.stringify(getCoreContent(locale).docs.content).includes("/docs/faq"));
+  }
 });
 
 test("homepage removes redundant horizontal separators while retaining intentional boundaries", async () => {
@@ -179,9 +185,9 @@ test("homepage removes redundant horizontal separators while retaining intention
   assert.doesNotMatch(homeSource, /mt-16[^\n]*\bborder-t\b/);
   assert.doesNotMatch(homeSource, /<nav\b(?![^>]*fixed top-0)[^>]*\bborder-b\b/);
   const headerSource = fs.readFileSync(new URL("../src/components/site-header.tsx", import.meta.url), "utf8");
-  assert.match(headerSource, /<nav[^>]*className="fixed top-0[^\"]*\bborder-b\b/);
+  assert.doesNotMatch(headerSource, /<nav[^>]*\bborder-b\b/);
   assert.doesNotMatch(homeSource, /<details\b[^>]*\bborder-y\b/);
-  assert.match(homeSource, /<details\b[^>]*\bborder-b\b/);
+  assert.doesNotMatch(homeSource, /<details\b[^>]*\bborder-b\b/);
 
   assert.doesNotMatch(proofSource, /\bborder-t(?:-2)?\b/);
   assert.match(proofSource, /\bborder-l\b/);
@@ -197,39 +203,29 @@ test("homepage removes redundant horizontal separators while retaining intention
   assert.doesNotMatch(downloadSource, /<section\b[^>]*\b(?:border-b|border-t|border-y)\b/);
 });
 
-test("hero icons link to detailed integrations without relabeling Obsidian as a client", () => {
-  const hero = homeSource.slice(homeSource.indexOf("{/* Hero:"), homeSource.indexOf('id="demo"'));
-  assert.match(hero, /data-hero-tools/);
-  assert.match(hero, /worksWithClients\.filter\(\(\{ id \}\) => id !== "claude-desktop"\)\.map/);
-  assert.match(hero, /ObsidianBrandIcon/);
-  assert.match(hero, /href="#integrations"/);
-  assert.match(homeSource, /id="integrations"/);
-  assert.match(homeSource, /ObsidianBrandIcon[^\n]*\/>Obsidian<\/span>/);
-  assert.doesNotMatch(homeSource, /id: "obsidian", label: "Obsidian", Icon: ObsidianBrandIcon/);
-});
-
-test("import brands share a general source guide and Antigravity keeps a clean monochrome label", () => {
-  const sources = homeSource.slice(homeSource.indexOf("<div data-integration-sources>"), homeSource.indexOf("<div data-integration-clients>"));
-  const clients = homeSource.slice(homeSource.indexOf("<div data-integration-clients>"), homeSource.indexOf("<PipelineSection"));
-  assert.match(sources, /OpenAiBrandIcon[\s\S]*?>ChatGPT<\/span>/);
-  assert.match(sources, /ClaudeBrandIcon[\s\S]*?>Claude<\/span>/);
-  assert.doesNotMatch(clients, /ChatGPT|Claude\.ai|Gemini CLI|integrations\.remote/);
-  assert.match(clients, /AntigravityBrandIcon/);
+test("sources and clients live in capabilities without treating Obsidian as an AI client", () => {
+  const clients = capabilitySource.slice(capabilitySource.indexOf("const clients ="), capabilitySource.indexOf("function Spaces("));
+  assert.doesNotMatch(clients, /Obsidian|ChatGPT|Gemini CLI/);
+  for (const name of ["Claude Code", "Codex", "Cursor", "Claude Desktop", "VS Code", "Antigravity"]) assert.ok(clients.includes(name));
   assert.match(clients, /https:\/\/antigravity\.google\/docs\/mcp/);
-  assert.doesNotMatch(clients, /integrations\.manualMcp/);
-  assert.match(sources, /href="\/learn\/build-local-ai-knowledge-base-from-documents"/);
-  assert.doesNotMatch(sources, /worksWithNote|href="\/learn\/wenlan-vs-obsidian/);
+  assert.match(capabilitySource, /<ObsidianBrandIcon/);
+  assert.match(capabilitySource, /href="\/learn\/migrate-obsidian-vault-to-llm-wiki"/);
+  assert.match(capabilitySource, /href="\/learn\/build-local-ai-knowledge-base-from-documents"/);
+  assert.match(capabilitySource, /href="\/docs"/);
+  assert.doesNotMatch(homeSource, /data-integration-sources|data-integration-clients/);
+  assert.match(homeSource, /data-knowledge-ownership/);
   const icons = fs.readFileSync(path.join(repoRoot, "src/components/icons.tsx"), "utf8");
-  assert.match(icons, /bg-current \[mask-image:url\('\/images\/antigravity-icon-monochrome\.png'\)\]/);
+  assert.match(icons, /antigravity-icon-monochrome\.png/);
 });
 
-test("homepage leads with the main-branch bars and keeps the full table in details", () => {
+test("homepage exposes retrieval scope and links to the full evaluation", () => {
   assert.match(homeSource, /data-retrieval-bars/);
-  assert.match(homeSource, /<details[^>]*data-retrieval-details/);
+  assert.doesNotMatch(homeSource, /data-retrieval-details|data-home-technical/);
+  assert.match(homeSource, /href="\/docs\/evaluation"/);
   assert.match(homeSource, /93\.6%/);
-  assert.match(homeSource, /<table/);
-  assert.match(homeSource, /<th scope="col"/);
-  assert.match(homeSource, /dateTime="2026-06-24"/);
+  assert.doesNotMatch(homeSource, /<table/);
+  assert.match(homeSource, /integrations\.recallLimit/);
+  assert.match(homeSource, /integrations\.contextScope/);
   const fitSource = fs.readFileSync(path.join(repoRoot, "src/components/home/pains.tsx"), "utf8");
   assert.match(fitSource, /<ProductShowcase locale=\{locale\}/);
   assert.doesNotMatch(homeSource, /<ProductShowcase/);
@@ -308,12 +304,10 @@ test("homepage finishing keeps short CJK units intact and tool names consistent"
   for (const phrase of ["存取", "還原", "結果", "结果", "有什麼不同", "有什么不同"]) assert.ok(readable.includes(phrase));
   assert.match(readable, /children\.split\(keptPhrases\)/);
   assert.match(readable, /className="whitespace-nowrap"/);
-  assert.match(homeSource, /<HomeReadableText>\{integrations\.clientsBody\}/);
-  assert.match(homeSource, /text-balance"><HomeReadableText>\{faq\.q\}/);
   assert.match(bentoSource, /<HomeReadableText>\{body\}/);
   assert.match(pipelineSource, /<HomeReadableText>\{copy\.distillNote\}/);
   assert.doesNotMatch(bentoSource, /Gemini CLI/);
-  assert.equal((bentoSource.match(/"Antigravity"/g) ?? []).length, 3);
+  assert.match(capabilitySource, /AntigravityBrandIcon/);
 });
 
 test("task proof stays compact without a rendered intro or step rail", () => {
@@ -321,11 +315,12 @@ test("task proof stays compact without a rendered intro or step rail", () => {
   assert.match(proofSource, /\{task\.authoredLabel\}/);
 });
 
-test("product screenshots remain uncropped and MCP content fits within each card", () => {
+test("product screenshots remain uncropped and supplementary cards keep a responsive grid", () => {
   const product = fs.readFileSync(path.join(repoRoot, "src/components/home/product-showcase.tsx"), "utf8");
   const bento = fs.readFileSync(path.join(repoRoot, "src/components/home/bento.tsx"), "utf8");
   assert.doesNotMatch(product, /group-hover:scale/);
-  assert.match(bento, /data-mcp-flow/);
+  assert.match(bento, /grid-cols-1 gap-4 md:grid-cols-2/);
+  assert.match(bento, /data-capabilities-intro/);
   assert.doesNotMatch(bento, /onPointerMove|radial-gradient/);
 });
 
