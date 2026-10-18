@@ -43,11 +43,7 @@
 .reading-mobile-bar button:focus-visible, .reading-dialog button:focus-visible, .reading-frame a:focus-visible, .reading-search input:focus-visible, .reading-library summary:focus-visible { outline: 2px solid var(--o-warm); outline-offset: 3px; }
 .reading-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
 .reading-library { min-width: 0; }
-.reading-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; padding: 3px; border: 1px solid var(--o-border); border-radius: 9px; background: var(--o-bg-alt); }
-.reading-tabs a { display: flex; min-height: 36px; align-items: center; justify-content: center; border-radius: 6px; color: var(--o-text-muted); font-size: 12px; text-decoration: none; }
-.reading-tabs a:hover { color: var(--o-text); }
-.reading-tabs a[aria-current="page"] { background: var(--o-surface); color: var(--o-text); }
-.reading-library-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin: 24px 0 12px; }
+.reading-library-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin: 0 0 12px; }
 .reading-library-heading h2, .reading-toc h2 { margin: 0; color: var(--o-text); font-family: var(--font-fraunces), Georgia, serif; font-size: 17px; font-weight: 500; }
 .reading-library-heading span { color: var(--o-text-muted); font: 10px/1.4 var(--font-mono), monospace; white-space: nowrap; }
 .reading-search { position: relative; display: block; margin-bottom: 17px; }

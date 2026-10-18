@@ -30,10 +30,6 @@ const COPY: Record<Locale, Chrome> = {
   "zh-CN": { learn: "学习", docs: "文档", library: "文章索引", contents: "本页目录", search: "搜索文章", searchPlaceholder: "搜索文章…", noResults: "没有找到匹配的文章。", english: "英文", close: "关闭", openLibrary: "浏览文章", openContents: "本页目录", articles: "篇文章" },
 };
 
-function localizedPath(locale: Locale, path: string) {
-  return locale === "en" ? path : `/${locale}${path}`;
-}
-
 export default function ReadingFrame({ locale, section, currentPath, groups, toc = [], children, index = false }: ReadingFrameProps) {
   const copy = COPY[locale];
   const pathname = usePathname();
@@ -124,10 +120,6 @@ export default function ReadingFrame({ locale, section, currentPath, groups, toc
   }, [activeId, dialogKind]);
 
   const library = (mobile = false) => <nav className="reading-library" aria-label={copy.library}>
-    <div className="reading-tabs" aria-label={locale === "en" ? "Reading section" : locale === "zh-TW" ? "閱讀區域" : "阅读区域"}>
-      <Link href={localizedPath(locale, "/learn")} prefetch={false} aria-current={section === "learn" ? "page" : undefined} onClick={mobile ? () => closeDialog(false) : undefined}>{copy.learn}</Link>
-      <Link href={localizedPath(locale, "/docs")} prefetch={false} aria-current={section === "docs" ? "page" : undefined} onClick={mobile ? () => closeDialog(false) : undefined}>{copy.docs}</Link>
-    </div>
     <div className="reading-library-heading"><h2>{copy.library}</h2><span>{totalCount} {copy.articles}</span></div>
     <label className="reading-search"><span className="reading-visually-hidden">{copy.search}</span><svg aria-hidden="true" viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder={copy.searchPlaceholder} /></label>
     <div className="reading-groups">
