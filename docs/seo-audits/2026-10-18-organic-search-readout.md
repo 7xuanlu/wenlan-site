@@ -100,3 +100,45 @@ Codex 的可見 query×page 只涵蓋70曝光、0點擊，另外436曝光及2點
 - **第一批讀者與後續：** 既有 Google owner；無外聯、社群或付費安排。發布後以 Google 自行抓取作起點，再看同詞曝光、點擊與可得的後續行為；沒有足夠曝光只能判不確定，不宣稱圖片或實測使排名提升。weekly維持PAUSED、手動追蹤。
 
 去識別原始欄位及 transcript SHA-256：[公開實測回執](../../public/examples/claude-codex-shared-memory.json)。完整私有輸出在 `/tmp/wenlan-seo-demand/2026-10-18-shared-proof/`，不可整包公開（含其他工具清單和帳戶用量）。本篇未新增中文 owner，保留既有三語頁面／hreflang邊界。驗證及部署收據以本次 PR 的測試與正式站核對記錄為準，實測成功不代表自然搜尋已成長。
+
+
+## 下一輪既有頁核對與本地修正（10-18）
+
+重用同一完整 09-18～10-15 GSC Web 窗口，逐一核對全部116個有曝光頁面；18頁達20曝光，其餘98頁不足。沒有用Threads造訪、搜尋建議或供應商估值補成Google需求。
+
+| 18頁的處理 | 頁數 | 根據 |
+| --- | ---: | --- |
+| 最近已改，保留觀察 | 8 | Codex、EN Wiki、Claude、共用記憶、EN Obsidian、TW Wiki、context-loss、ai-work-memory |
+| 品牌／導覽／文件入口 | 6 | 首頁、下載、architecture、about、learn、CN首頁，不能當已見非品牌文章需求 |
+| 意圖不合 | 1 | source-backed wiki 的可見詞偏泛團隊知識庫選型，不硬套個人工作流程 |
+| 看不到查詢 | 1 | coding-agent-source-backed-knowledge-base 有41曝光，但query×page無列，任務未知 |
+| 概念比較可補具體答案 | 1 | ai-work-memory-vs-knowledge-base：41曝光／0點擊；精確詞11曝光／0點擊 |
+| 版本範圍需澄清 | 1 | SuperLocalMemory頁37曝光／1點擊；品牌詞9曝光不能證明比較意圖 |
+
+### AI memory vs knowledge base：為什麼選這篇
+
+1. **誰與任務：** 既有英文精確詞 `ai memory vs knowledge base` 11曝光、0點擊，平均20.55；其中美國桌面10曝光、平均22.4，羅馬尼亞手機1曝光、位置2。它直接問知識庫與記憶的分工，符合既有知識庫概念owner；樣本小，沒有市場月量或購買意圖的證明。
+2. **可帶走的結果：** 用同一個決定分辨「當前規則／參考文件」和「先前決定與原因」，並能選擇KB、持久記憶或原生對話歷史；不必安裝產品。RAG與資料庫只是補充解釋，沒有宣稱是新查詢需求。
+3. **實際差距：** 10-18 US/en桌面Google首頁，前兩個一般結果為[DEV](https://dev.to/bobur/agent-knowledge-vs-memories-understanding-the-difference-4pgj)和[AIAppsAPI](https://aiappsapi.com/articles/selflearningai/memoryvsknowledgebase.php)，Wenlan第三；本站顯示現行標題及July24摘要。對方提供並列實例，本站原版偏抽象；對方也有「KB永遠靜態、記憶全自動」的過廣概括，不照抄。這只是一個結果頁快照，不是穩定第三名，也不證明例子造成排名。AI Overview可直接給概念答案，未證明它造成本站零點擊。
+4. **入口：** 沿用既有Google owner，不新建同義頁、不把社群流量算自然搜尋。中文無這個owner的相應需求證據，本批不由英文數據推出翻譯頁。
+5. **為何先做：** 在這批達曝光門檻、尚未近期改寫的文章中，本篇有明確對應詞、可核實的答案缺口和可重用實證；其他選項的限制見上表。這支持一次有界的本地補強，不能證明它是全市場最高回報行動。
+6. **停止／改變：** 發布後先確認新版crawl，再取完整28天同詞／同頁／同市場裝置資料。精確詞不足20曝光則inconclusive；達20仍零點擊，回查當時SERP、顯示摘要與位置，不自動再改文案。有點擊僅是方向性訊號，不能隔離文案因果。W8仍不足曝光則停止這項假設。手動追蹤、weekly維持PAUSED。
+
+**抓取與版本邊界：** 只為這兩頁補取URL Inspection及本篇query×country×device，未重跑完整管線。本篇indexed／PASS、canonical一致，最後crawl09-10；語意內容最後改於07-24（git f8b8adc），頁／精確詞曝光達20／3的數量門檻。但10-11另有GitHub搬家href維修，未確認Google抓過目前部署版本，不能宣稱完整post-deploy crawl／28天條件通過。本批依使用者本輪要求準備本地可審查草稿；不能自行升格為已核准的SEO實驗或發布。發布前須確認現版抓取條件，或取得使用者對本批具體內容修正的直接發布指示；不更動門檻、也不提交索引請求。
+
+**內容依據與真實證明：** [LangChain memory](https://docs.langchain.com/oss/python/concepts/memory)記載跨thread記憶、facts／experiences／instructions與不同寫入方式；[retrieval](https://docs.langchain.com/oss/python/deepagents/retrieval)記載既有資料源及檢索後生成。據此移除靜態／自動化的假二分。用前一篇已公開的[Claude→Codex回執](../../public/examples/claude-codex-shared-memory.json)示範真實取回一筆決定；另擬的知識庫段落必須明示為說明，沒有冒充本次生成的Page。confirmed:false，不代表人工驗證或可直接用於真實系統。重用這筆測試，不宣稱再測了一次。
+
+**SuperLocalMemory事實維修：** [v4.2.10發布頁](https://github.com/qualixar/superlocalmemory/releases/tag/v4.2.10)標示10-17發布。原文釘在v3.8.3／Wenlan0.14.1，本次只在前面及摘要標清歷史比較、加現版本來源；不換掉舊測試版本、不把README或發布說明當重測結果，不宣稱目前產品贏家。
+
+私有原始收據：`/tmp/wenlan-seo/2026-10-18-next-owner/`（inspection、精確詞分拆）；`/tmp/wenlan-seo-demand/2026-10-18-next-owner/`（SERP、驗證）。公開紀錄不保存登入帳戶／定位畫面。此節是本地準備記錄；發布與實際成效另據收據判定。
+
+
+### 本批交付與驗證（發布前驗證）
+
+隔離工作目錄 `seo-next-demand-repair`，base `4061498`；原dirty checkout未作內容修改。只改上述兩個英文owner、兩份既有契約測試及本輪三份既有記錄。概念頁保留原URL／發布日期／全部原段落anchor，通用比較表不再把「AI memory」標為Wenlan產品；SuperLocal的SoftwareApplication仍指向v3.8.3來源，不把v4來源配給舊版本。
+
+- goal／scenario、test:goal 60、test:seo 422、measurement 133通過／2跳過、test:i18n 87、lint、production build、technical:built、intent與diff check通過。獨立審查後改動另跑相關契約測試；手機短行修正後重build／technical check。非production建置沒有送IndexNow或analytics事件。
+- 兩頁均實看1280桌面、精確393px、明暗主題；概念表手機逐項排列，實測摘要與示例code無水平捲動，頁面無橫向溢出、壞圖或console error／warn。實際點開JSON回執及RAG FAQ，內容正確；不是只核對href存在。
+- bounded explorer／worker使用原生角色預設Luna/high；獨立reviewer角色為Sol/xhigh。一輪審查及一次closure，lead修復closure指出的舊版建議現在式，並核對最終built schema和畫面。未把模型同意當證據。完整檔案雜湊、base、diff SHA與畫面收據在私有 `verified-state.json`／`browser-verification.json`。
+
+驗證完成後，使用者直接指示「把這兩頁發布，先不用提交索引請求，等 Google 自己抓取」。據此發布本批具體修正；這不是完整抓取／冷卻門檻已通過，也不解除其他頁面的門檻或重啟campaign。實際合併、CI與正式部署以本批PR收據為準。Google索引請求跳過，weekly維持PAUSED；未宣稱獲客已改善。本次修正不代表已找出足以大幅增加流量的搜尋市場。
