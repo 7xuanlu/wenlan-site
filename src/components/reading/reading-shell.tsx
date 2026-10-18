@@ -7,7 +7,7 @@ import ReadingFrame, { type TocItem } from "./reading-frame";
 import { getReadingGroups } from "./reading-data";
 
 export function ReadingShell({locale, section, path, toc, children, index = false}: {locale: Locale; section: "learn" | "docs"; path: string; toc?: TocItem[]; children: ReactNode; index?: boolean}) {
-  return <ReadingFrame key={path} locale={locale} section={section} currentPath={localizePath(locale, path)} groups={getReadingGroups(locale, section)} toc={toc} index={index}>{children}</ReadingFrame>;
+  return <ReadingFrame key={path} locale={locale} currentPath={localizePath(locale, path)} groups={getReadingGroups(locale, section)} toc={toc} index={index}>{children}</ReadingFrame>;
 }
 
 export function learnContents(article: LearnArticle, ids: string[], locale: Locale): TocItem[] {

@@ -10,7 +10,6 @@ export type ReadingGroup = { id: string; label: string; items: ReadingItem[] };
 export type TocItem = { id: string; label: string };
 export type ReadingFrameProps = {
   locale: Locale;
-  section: "learn" | "docs";
   currentPath: string;
   groups: ReadingGroup[];
   toc?: TocItem[];
@@ -19,24 +18,23 @@ export type ReadingFrameProps = {
 };
 
 type Chrome = {
-  learn: string; docs: string; library: string; contents: string; search: string;
+  library: string; contents: string; search: string;
   searchPlaceholder: string; noResults: string; english: string; close: string;
   openLibrary: string; openContents: string; articles: string;
 };
 
 const COPY: Record<Locale, Chrome> = {
-  en: { learn: "Learn", docs: "Docs", library: "Library", contents: "On this page", search: "Search articles", searchPlaceholder: "Find an article…", noResults: "No matching articles.", english: "English", close: "Close", openLibrary: "Browse library", openContents: "On this page", articles: "articles" },
-  "zh-TW": { learn: "學習", docs: "文件", library: "文章索引", contents: "本頁目錄", search: "搜尋文章", searchPlaceholder: "搜尋文章…", noResults: "找不到符合的文章。", english: "英文", close: "關閉", openLibrary: "瀏覽文章", openContents: "本頁目錄", articles: "篇文章" },
-  "zh-CN": { learn: "学习", docs: "文档", library: "文章索引", contents: "本页目录", search: "搜索文章", searchPlaceholder: "搜索文章…", noResults: "没有找到匹配的文章。", english: "英文", close: "关闭", openLibrary: "浏览文章", openContents: "本页目录", articles: "篇文章" },
+  en: { library: "Library", contents: "On this page", search: "Search articles", searchPlaceholder: "Find an article…", noResults: "No matching articles.", english: "English", close: "Close", openLibrary: "Browse articles", openContents: "On this page", articles: "articles" },
+  "zh-TW": { library: "文章索引", contents: "本文章節", search: "搜尋文章", searchPlaceholder: "搜尋文章…", noResults: "找不到符合的文章。", english: "英文", close: "關閉", openLibrary: "文章索引", openContents: "本文章節", articles: "篇文章" },
+  "zh-CN": { library: "文章索引", contents: "本文章节", search: "搜索文章", searchPlaceholder: "搜索文章…", noResults: "没有找到匹配的文章。", english: "英文", close: "关闭", openLibrary: "文章索引", openContents: "本文章节", articles: "篇文章" },
 };
 
-export default function ReadingFrame({ locale, section, currentPath, groups, toc = [], children, index = false }: ReadingFrameProps) {
+export default function ReadingFrame({ locale, currentPath, groups, toc = [], children, index = false }: ReadingFrameProps) {
   const copy = COPY[locale];
   const pathname = usePathname();
   const [query, setQuery] = useState("");
   const [activeId, setActiveId] = useState(toc[0]?.id ?? "");
   const [dialogKind, setDialogKind] = useState<"library" | "toc" | null>(null);
-  const [currentHeading, setCurrentHeading] = useState(toc[0]?.label ?? "");
   const dialogRef = useRef<HTMLDialogElement>(null);
   const openerRef = useRef<HTMLButtonElement>(null);
   const restoreFocusRef = useRef(true);
@@ -91,7 +89,7 @@ export default function ReadingFrame({ locale, section, currentPath, groups, toc
           else break;
         }
         if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) active = targets.at(-1) ?? active;
-        if (active) { setActiveId(active.item.id); setCurrentHeading(active.item.label); }
+        if (active) setActiveId(active.item.id);
       });
     };
     if (window.location.hash) {
@@ -147,12 +145,12 @@ export default function ReadingFrame({ locale, section, currentPath, groups, toc
   return <div className={`reading-frame${index ? " reading-frame-index" : ""}${toc.length ? " reading-frame-has-toc" : ""}`}>
     <aside className="reading-desktop-library">{library()}</aside>
     <div className="reading-mobile-bar">
-      <button ref={openerRef} type="button" onClick={event => { openerRef.current = event.currentTarget; openDialog("library"); }}><span>{copy.openLibrary}</span><b>{section === "learn" ? copy.learn : copy.docs}</b></button>
-      {toc.length > 0 && <button type="button" onClick={event => { openerRef.current = event.currentTarget; openDialog("toc"); }}><span>{copy.openContents}</span><b className="reading-current-heading">{currentHeading || copy.contents}</b></button>}
+      <button ref={openerRef} type="button" aria-haspopup="dialog" aria-expanded={dialogKind === "library"} aria-controls="reading-navigation-dialog" onClick={event => { openerRef.current = event.currentTarget; openDialog("library"); }}><span>{copy.openLibrary}</span><svg aria-hidden="true" viewBox="0 0 12 12"><path d="m3 4.5 3 3 3-3" /></svg></button>
+      {toc.length > 0 && <button type="button" aria-haspopup="dialog" aria-expanded={dialogKind === "toc"} aria-controls="reading-navigation-dialog" onClick={event => { openerRef.current = event.currentTarget; openDialog("toc"); }}><span>{copy.openContents}</span><svg aria-hidden="true" viewBox="0 0 12 12"><path d="m3 4.5 3 3 3-3" /></svg></button>}
     </div>
     <div className="reading-main"><div className="reading-content">{children}</div></div>
     {toc.length > 0 && <aside className="reading-desktop-toc">{contents()}</aside>}
-    <dialog className="reading-dialog" ref={dialogRef} onClick={event => { if (event.target === dialogRef.current) closeDialog(); }}>
+    <dialog id="reading-navigation-dialog" className="reading-dialog" aria-label={dialogKind === "library" ? copy.library : copy.contents} ref={dialogRef} onClick={event => { if (event.target === dialogRef.current) closeDialog(); }}>
       <div className="reading-dialog-inner"><div className="reading-dialog-header"><span>{dialogKind === "library" ? copy.library : copy.contents}</span><button type="button" onClick={() => closeDialog()} aria-label={copy.close}>×</button></div>{dialogKind === "library" ? library(true) : contents(true)}</div>
     </dialog>
   </div>;
