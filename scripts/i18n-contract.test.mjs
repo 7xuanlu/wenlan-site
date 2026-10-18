@@ -2072,7 +2072,7 @@ test("localized acquisition copy keeps CJK semantic phrases together on mobile",
   assert.match(source, /<span className="min-w-0">\{renderArticleText\(faq\.question\)\}<\/span>/);
 });
 
-test("Learn article hero grids use shrinkable mobile tracks", async () => {
+test("Learn article reading columns use shrinkable mobile tracks", async () => {
   for (const relativePath of [
     "src/app/(en)/learn/[slug]/page.tsx",
     "src/app/[locale]/learn/[slug]/page.tsx",
@@ -2081,12 +2081,12 @@ test("Learn article hero grids use shrinkable mobile tracks", async () => {
 
     assert.match(
       source,
-      /className="mt-12 grid min-w-0 grid-cols-\[minmax\(0,1fr\)\] gap-10 lg:grid-cols-\[minmax\(0,1fr\)_320px\]/,
+      /className="reading-title mt-8/,
       `${relativePath} must not let the implicit mobile grid track expand past 393px`,
     );
     assert.match(
       source,
-      /className="grid min-w-0 grid-cols-\[minmax\(0,1fr\)\] gap-4 md:grid-cols-3"/,
+      /className="reading-summary grid min-w-0 grid-cols-\[minmax\(0,1fr\)\] gap-4 md:grid-cols-3"/,
       `${relativePath} hero bullets must remain shrinkable on mobile`,
     );
   }
@@ -3558,5 +3558,28 @@ test("business metric definition article owns one bounded trilingual data-dictio
       new RegExp(`part === "${protectedTerm}"`),
       `protected CJK phrase: ${protectedTerm}`,
     );
+  }
+});
+
+test("reading navigation keeps every existing article exactly once and preserves locale destinations", async () => {
+  const { getReadingGroups } = await import("../src/components/reading/reading-data.ts");
+  const { articles } = await import("../src/app/(en)/learn/articles.ts");
+  const { getCoreContent } = await import("../src/i18n/content/index.ts");
+  const { localizePath } = await import("../src/i18n/routing.ts");
+  for (const locale of ["en", "zh-TW", "zh-CN"]) {
+    const learn = locale === "en" ? articles : getLocalizedLearnArticles(locale);
+    const docs = getCoreContent(locale).docs.content.sections.items.flatMap(section => section.items);
+    for (const [section, expected] of [
+      ["learn", learn.map(article => `/learn/${article.slug}`)],
+      ["docs", docs.map(item => item.href)],
+    ]) {
+      const items = getReadingGroups(locale, section).flatMap(group => group.items);
+      const actual = items.map(item => item.href);
+      assert.equal(new Set(actual).size, actual.length, `${locale}/${section} must not duplicate articles`);
+      assert.deepEqual(actual.toSorted(), expected.map(href => localizePath(locale, href)).toSorted(), `${locale}/${section} must retain all published destinations`);
+      for (const item of items) {
+        if (item.english) assert.equal(item.href.startsWith(`/${locale}/`), false, "untranslated docs must keep their English URL");
+      }
+    }
   }
 });

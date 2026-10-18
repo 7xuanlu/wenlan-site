@@ -6047,5 +6047,6 @@ test("learn article layout allows comparison content to shrink on mobile", async
   const articlePage = await readRepo("src/app/learn/[slug]/page.tsx");
 
   assert.match(articlePage, /className="min-w-0 space-y-14"/);
-  assert.match(articlePage, /className="min-w-0 space-y-6 lg:sticky/);
+  assert.match(articlePage, /className="reading-resources min-w-0 space-y-6"/);
+  assert.match(articlePage, /<ReadingShell[^>]+toc=\{learnContents/);
 });

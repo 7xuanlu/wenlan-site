@@ -1946,7 +1946,7 @@ test("TypeScript article AST uses Wenlan fit identifiers", async () => {
 test("Learn article headers keep long Wenlan titles inside mobile viewports", async () => {
   const page = await readRepo("src/app/learn/[slug]/page.tsx");
 
-  assert.match(page, /mt-12 grid min-w-0/);
+  assert.match(page, /className="reading-title mt-8/);
   assert.match(page, /<div className="min-w-0">/);
   assert.match(page, /<h1 className="[^"]*text-\[2rem\][^"]*\[overflow-wrap:anywhere\][^"]*\[word-break:normal\][^"]*sm:\[overflow-wrap:break-word\][^"]*sm:\[word-break:keep-all\][^"]*sm:text-7xl/);
 

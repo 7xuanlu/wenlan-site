@@ -1,3 +1,5 @@
+import { getDocsSections } from "@/components/reading/reading-data";
+import { ReadingShell } from "@/components/reading/reading-shell";
 import { ArticleHalo } from "../(en)/learn/article-visuals";
 import { getCoreContent } from "@/i18n/content";
 import { LOCALE_CONFIG, type Locale } from "@/i18n/locales";
@@ -11,7 +13,7 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
   const dictionary = getCoreContent(locale);
   const content = dictionary.docs.content;
   const chrome = dictionary.chrome.content;
-  const docsSections = content.sections.items;
+  const docsSections = getDocsSections(locale);
   const docsItems = docsSections.flatMap((section) => section.items);
   const homeUrl = canonicalUrl(locale, "/");
   const docsUrl = canonicalUrl(locale, "/docs");
@@ -64,7 +66,8 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
 
-      <section className="relative px-6 pt-24 pb-8 sm:pt-32 sm:pb-12">
+      <ReadingShell locale={locale} section="docs" path={"/docs"} index>
+      <section className="reading-page-header relative px-6 pt-24 pb-8 sm:pt-32 sm:pb-12">
         <ArticleHalo />
         <div className="relative z-10 mx-auto max-w-5xl">
           <nav aria-label={chrome.breadcrumbAriaLabel} className="flex items-center gap-3 font-mono text-xs text-[var(--o-text-muted)]">
@@ -98,14 +101,12 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
         <div className="mx-auto max-w-5xl">
           <Spotlight className="space-y-16">
             {docsSections.map((section) => (
-              <section key={section.id}>
+              <section id={section.id} key={section.id} className="scroll-mt-36">
                 <div className="mb-6">
                   <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
                     {section.title}
                   </h2>
-                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--o-text-muted)]">
-                    {section.description}
-                  </p>
+                  {section.description && <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--o-text-muted)]">{section.description}</p>}
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
                   {section.items.map((item) => (
@@ -129,7 +130,7 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
                       <p className="mt-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
                         {item.description}
                       </p>
-                      <div className="mt-6 border-t border-[var(--o-border-subtle)] pt-5">
+                      <div className="mt-6 pt-5">
                         {locale !== "en" && !isTranslatedPath(locale, item.href) && (
                           <p className="mb-2 text-xs text-[var(--o-text-secondary)]">{locale === "zh-TW" ? "開啟英文文件" : "打开英文文档"}</p>
                         )}
@@ -176,6 +177,7 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
           </section>
         </div>
       </section>
+      </ReadingShell>
     </main>
   );
 }

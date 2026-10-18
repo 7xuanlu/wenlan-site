@@ -63,7 +63,7 @@ export function ShareArticle({ locale, url, title }: ShareArticleProps) {
   }
 
   return (
-    <section aria-label={text.share} className="border-t border-[var(--o-border-subtle)] px-6 py-16">
+    <section aria-label={text.share} className="px-6 py-16">
       <div className="mx-auto max-w-3xl">
         <p className="mb-5 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
           {text.share}

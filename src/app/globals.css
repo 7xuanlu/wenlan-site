@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "../components/reading/reading.css";
+@import "../components/reading/reading-content.css";
 @import "../components/home/workflow-comparison.css";
 @import "../components/home/demo-video.css";
 @import "../components/home/knowledge-story.css";

@@ -1,14 +1,15 @@
+import { getLearnSections } from "@/components/reading/reading-data";
+import { ReadingShell } from "@/components/reading/reading-shell";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { TrackedLink, type AnalyticsContext } from "@/components/tracked-link";
 import {
-  articleCategories,
   articles,
   articleUrl,
   formatArticleDate,
   SITE_URL,
 } from "./articles";
-import { ArticleHalo, MemoryIndex } from "./article-visuals";
+import { ArticleHalo } from "./article-visuals";
 import { LOCALE_CONFIG } from "@/i18n/locales";
 import { alternateUrls } from "@/i18n/routing";
 import { SiteHeader } from "@/components/site-header";
@@ -183,7 +184,8 @@ export default function LearnPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
-      <section className="relative border-b border-[var(--o-border-subtle)] px-6 py-24 sm:py-32">
+      <ReadingShell locale="en" section="learn" path={"/learn"} index>
+      <section className="reading-page-header relative px-6 py-24 sm:py-32">
         <ArticleHalo />
         <div className="relative z-10 mx-auto max-w-5xl">
           <nav aria-label="Breadcrumb" className="flex items-center gap-3 font-mono text-xs text-[var(--o-text-muted)]">
@@ -198,7 +200,7 @@ export default function LearnPage() {
               Learn
             </span>
           </nav>
-          <div className="mt-12 grid min-w-0 gap-12 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
+          <div className="mt-12 grid min-w-0 gap-12">
             <div className="min-w-0">
               <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
                 Learn
@@ -222,17 +224,6 @@ export default function LearnPage() {
                 </p>
               </div>
             </div>
-            <MemoryIndex
-              label="Learn topics"
-              items={[
-                "AI knowledge base architecture",
-                "Source-backed LLM wiki",
-                "Claude Code and MCP",
-                "Knowledge-base maintenance",
-                "Tool comparisons",
-                "Local-first trust",
-              ]}
-            />
           </div>
         </div>
       </section>
@@ -282,13 +273,10 @@ export default function LearnPage() {
           </section>
 
           <div className="mt-16 space-y-16">
-            {articleCategories.map((category) => {
-              const categoryArticles = articles.filter(
-                (article) => article.category === category,
-              );
+            {getLearnSections("en").map(({id, title: category, articles: categoryArticles}) => {
 
               return (
-                <section key={category}>
+                <section id={id} key={id} className="scroll-mt-36">
                   <div className="mb-6 flex items-end justify-between gap-4">
                     <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
                       {category}
@@ -319,7 +307,7 @@ export default function LearnPage() {
                         <p className="mt-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
                           {article.description}
                         </p>
-                        <div className="mt-6 border-t border-[var(--o-border-subtle)] pt-5">
+                        <div className="mt-6 pt-5">
                           <div className="flex flex-wrap gap-x-4 gap-y-2 font-mono text-[10px] text-[var(--o-text-muted)]">
                             <span>{article.author}</span>
                             <time dateTime={article.updatedAt}>
@@ -338,7 +326,7 @@ export default function LearnPage() {
         </div>
       </section>
 
-      <section className="border-t border-[var(--o-border-subtle)] px-6 py-20">
+      <section className="px-6 py-20">
         <div className="mx-auto max-w-3xl text-center">
           <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/70 uppercase">
             Ready to try the local memory loop?
@@ -376,6 +364,7 @@ export default function LearnPage() {
           </div>
         </div>
       </section>
+      </ReadingShell>
     </main>
   );
 }
