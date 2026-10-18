@@ -15,6 +15,7 @@
 | 中文個人知識庫 | 泛「搭建」混企業 RAG；本輪 Planner 已補：`个人知识库搭建`10–100、台灣`個人知識庫`10–100／月 | 範例已發布；觀察相應詞是否開始展示本站 |
 | 個人 AI 知識庫（三語） | 英文依使用者 10-08 指示改為選做法→兩份筆記→查答案→Wenlan；雙中文同步「改來源後再問」、來源同步界線與終端機／對話分離，RAG／Wiki 句沿用 #223 正式版 | 10-11 已整合到最新 main，並整理雙中文重複段落；必要檢查與畫面驗證通過，[#235](https://github.com/7xuanlu/wenlan-site/pull/235) 已合併發布（0d0597a）；EN/TW 10-13已crawl，CN最後10-10早於本版。見[紀錄](seo-audits/2026-10-07-ranking-gap.md#2026-10-08-個人知識庫正式版復核) |
 | Codex MEMORY.md | 09-18～10-15：506曝光／2點擊；MEMORY.md兩詞11／0、啟用兩詞19／0；10-09已crawl | 依10-18單篇發布授權補檔案用途、載入方式與唯讀檢查；驗證／發布收據見[本輪紀錄](seo-audits/2026-10-18-organic-search-readout.md) |
+| Claude＋Codex 共用記憶 | 09-18～10-15：79曝光／1點擊，點擊詞不可見；舊精確詞量級10–100／月 | 10-18依使用者單篇指示，補 Claude 存入→新 Codex 讀回的實測、來源 ID與重現步驟；[證據](seo-audits/2026-10-18-organic-search-readout.md#claude--codex-共用記憶實測10-18-單篇發布授權)。手動追蹤，不把取回成功當搜尋成長 |
 | Claude／MCP memory | Claude同窗176曝光／1點擊；Planner舊量級僅參考 | 次順位診斷，不能由低CTR直接推定文案失敗 |
 | source-backed wiki | 泛 `knowledge base wiki` 26 次曝光、平均 78.62；SERP 偏團隊選型 | 不硬爭錯誤意圖，不因低 CTR 自動改標題 |
 | 獨立引用 | GSC Links 樣本：英文 Wiki 5 條中 4 條自有 README、1 條 npm.io；未見獨立評測直接引用 | 研究相關指南與實作者的引用理由；不以目錄數量或自有連結代替權威 |

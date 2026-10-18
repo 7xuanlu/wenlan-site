@@ -86,3 +86,17 @@ Codex 的可見 query×page 只涵蓋70曝光、0點擊，另外436曝光及2點
 - 本次補強：goal／scenario check、test:goal 60、test:seo 422與measurement 133通過／2跳過、test:i18n 87、lint、build、technical:built、intent check與diff check均通過。內容唯讀指令在本機執行成功，只核對檔名存在、不輸出記憶內容。桌面1280與精確393px、明暗主題、既有storage anchor與新增FAQ已檢查，無頁面橫向溢出、壞圖或瀏覽器error/warn。成品沒有向analytics送測試事件。發布前最後文字校正後重新build／technical check；正式部署收據放PR，尚未宣稱Google已抓新版。
 - 唯讀來源查核使用explorer（Luna/high），獨立內容審查使用reviewer（Sol/xhigh）；lead負責判斷、編輯及整合。代理同意不取代原始證據。
 - Recrawl after deploy：本篇title/meta與答案實質改動，應 Request。其他衍生URL待build差異表逐項判定；正式請求須先查新版crawl並取得本批確認。未重送已於10-18請求的首頁／evaluation。
+
+## Claude → Codex 共用記憶實測（10-18 單篇發布授權）
+
+使用者明確要求補強既有共用記憶頁、實際由 Claude 存決定及 Codex 讀回，驗證後發布。本次僅處理英文既有 owner `/learn/codex-claude-code-shared-memory` 的產品證據缺口；不重啟過期 campaign、不更動其他 owner 或取得索引請求／排程授權。這是本次具體內容與發布指示，不聲稱舊曝光／冷卻門檻已通過。
+
+- **需求與入口：** 既有英文跨工具決定交接任務；同一完整 GSC 09-18～10-15 窗口，該頁79曝光／1點擊，點擊詞不可見。先前 Planner 精確長詞10–100／月是舊估值，不是實測流量，也不外推中文量。
+- **可帶走的結果：** 兩端安裝與同 Space 的重現步驟、Claude capture 回執、全新 Codex recall 實際回傳、可下載的去識別 JSON。既有其他文章已有操作方式，這次補「確實跑過」的證據；不再新增同義頁。偶爾交接仍可用共用 Markdown；此測試只證明 Wenlan 能跨工具取回一筆有來源的決定。
+- **實測：** Wenlan daemon0.19.1；Claude plugin0.19.0／Sonnet5.5；Codex plugin0.19.1+codex／gpt-6-luna（high）；acpx0.14.0。專用 `seo-shared-proof-20261018` Space，兩個獨立程序及工作目錄。
+- **寫入：** Claude 一次 `mcp__plugin_wenlan_wenlan__capture`，保存明示為虛構的 Harbor 決定（4次、間隔17秒、取代無限重試、原因），另有隨機碼 `02cbdd0bfa`。回執 `source_memory_id: mem_15dabf75a4df`、`space_source: request`、`write_outcome: created`。
+- **獨立讀回：** 新 Codex 只收到 Space 與問題，未收到決定、碼或來源 ID。trace 僅有一次 `wenlan.recall`，無檔案讀取／shell呼叫；1筆結果的完整內容與 ID逐字相同，`source_agent: claude-code`、`version: 1`、`confirmed: false`。兩端 exit0、`end_turn`，另核對工具原始回應而非只相信模型總結。
+- **限制：** 原生工具／啟動環境沒有被當成安全沙箱認證；這不是盲測安全研究或成功率基準。未驗證反向流程、多機、同時改寫、自動捕捉或決定本身正確。保存／取回不等於人工確認。產品圖沿用已核實測試 fixture，明示不是本次 Harbor 記錄；真正證據為 MCP內容。
+- **第一批讀者與後續：** 既有 Google owner；無外聯、社群或付費安排。發布後以 Google 自行抓取作起點，再看同詞曝光、點擊與可得的後續行為；沒有足夠曝光只能判不確定，不宣稱圖片或實測使排名提升。weekly維持PAUSED、手動追蹤。
+
+去識別原始欄位及 transcript SHA-256：[公開實測回執](../../public/examples/claude-codex-shared-memory.json)。完整私有輸出在 `/tmp/wenlan-seo-demand/2026-10-18-shared-proof/`，不可整包公開（含其他工具清單和帳戶用量）。本篇未新增中文 owner，保留既有三語頁面／hreflang邊界。驗證及部署收據以本次 PR 的測試與正式站核對記錄為準，實測成功不代表自然搜尋已成長。
