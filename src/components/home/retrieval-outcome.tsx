@@ -111,13 +111,14 @@ export function BaselineOutcome({locale,task}:{locale:Locale;task:number}) {
 
 function HandoffApp({locale,active,onSource}:{locale:Locale;active:number;onSource:(index:number)=>void}) {
   const c=copy[locale], e=effects[locale];
+  const readingFile=libraries[locale].resources.find(n=>n.id==='file-reading-review')!;
   const [status,setStatus]=useState(0);
   return <div className="ro-handoff">
     <div className="ro-work-status"><span>{c.tabs[status]}</span><button type="button" onClick={()=>setStatus(0)}>{c.reset}</button></div>
     <h3>{c.tasks[0]}</h3>
     <div className="ro-work-detail" data-current={active===0}><small>{c.decisions}</small><p>{e.decision}</p></div>
     <div className="ro-work-detail" data-current={active===1}><small>{c.next}</small><p>{e.nextTask}</p></div>
-    <div className="ro-work-detail" data-current={active===2}><small>{c.source}</small><button type="button" className="ro-inline-reference" onClick={()=>onSource(2)}>閱讀排版驗收.md · Agent Loop</button></div>
+    <div className="ro-work-detail" data-current={active===2}><small>{c.source}</small><button type="button" className="ro-inline-reference" onClick={()=>onSource(2)}>{readingFile.title} · Agent Loop</button></div>
     <button type="button" className="ro-task-action" onClick={()=>{onSource(1);setStatus(v=>(v+1)%3);}}>{status===0?c.start:status===1?c.complete:c.reopen} →</button>
   </div>;
 }
