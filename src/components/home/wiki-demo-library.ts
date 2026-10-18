@@ -100,7 +100,13 @@ export function getDemoLibrary(locale: Locale) {
   const launchRevisions: DemoRevision[] = demoRevisions.map((revision) => ({ ...revision, author: info.author, timeLabel: revision.version === 2 ? info.v2Time : info.v1Time, summary: revision.version === 2 ? info.v2 : info.v1, detail: revision.version === 2 ? info.v2Detail : info.v1Detail, ...(revision.version === 2 ? { body } : {}) }));
   const launch: DemoNote = { id: "page-lumo", kind: "page", title: wikiInteractionData[locale].pageTitle, body, tags: ["Lumo 2.0"], groupId: "group-project", topicIds: ["topic-lumo", "topic-reading"], sourceIds: lumoSources, relatedIds: ["page-decision", "page-checklist"], version: 2, updatedAt: demoRevisions[0].at, revisions: launchRevisions };
   const notes: DemoNote[] = personal.notes.map((note) => {
-    const timeLabel = (at: string) => new Intl.DateTimeFormat(locale, { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "America/Los_Angeles" }).format(new Date(at));
+    // Locale punctuation differs across the Node and browser ICU versions.
+    // Keep the recorded timezone while composing the compact label explicitly.
+    const timeLabel = (at: string) => {
+      const parts = new Intl.DateTimeFormat("en-US-u-nu-latn", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: "America/Los_Angeles" }).formatToParts(new Date(at));
+      const part = (type: Intl.DateTimeFormatPartTypes) => parts.find((item) => item.type === type)!.value;
+      return `${part("month")}/${part("day")} ${part("hour")}:${part("minute")}`;
+    };
     const current: DemoRevision = { version: note.version, at: note.updatedAt, timeLabel: timeLabel(note.updatedAt), author: labels.unknownAuthor, summary: note.id === "page-agent-loop" ? { en: "Added web and Markdown references.", "zh-TW": "補上網址與 Markdown 依據。", "zh-CN": "补上网址与 Markdown 依据。" }[locale] : labels.snapshot, detail: note.id === "page-agent-loop" ? currentRevisionDetail[locale] : note.id === "ai-work-style" ? { en: "Renamed the page to Working with AI.", "zh-TW": "將頁面標題更新為「AI 工作方式」。", "zh-CN": "将页面标题更新为「AI 工作方式」。" }[locale] : labels.snapshotDetail, sourceIds: note.sourceIds, body: note.body };
     const earlier = recoveredRevisions[locale][note.id];
     const revisions: DemoRevision[] = earlier ? [current, { ...earlier, body: localizeLinks(earlier.body), timeLabel: timeLabel(earlier.at), author: labels.unknownAuthor }] : [current];
