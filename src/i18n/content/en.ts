@@ -491,7 +491,7 @@ export const enContent = {
           {
             id: "tools",
             q: "What AI tools work with Wenlan?",
-            a: "Claude Code and Codex have Wenlan plugins. Cursor, Claude Desktop, VS Code and other local clients connect through MCP. Browser clients such as ChatGPT use Web access through an OAuth relay: choose the whole library or one Space, approve the connection, and keep Wenlan online. You can revoke access in the app. Obsidian is a read-only source workflow.",
+            a: "Claude Code and Codex have Wenlan plugins. Cursor, Claude Desktop, VS Code and other local clients connect through MCP. Browser clients such as ChatGPT, Claude.ai and Muse use Web access through an OAuth relay: choose the whole library or one Space, approve the connection, and keep Wenlan online. You can revoke access in the app. Obsidian is a read-only source workflow.",
           },
           {
             id: "not-notes",
@@ -1748,7 +1748,7 @@ export const enContent = {
         {
           id: "chatgpt-web",
           number: "04",
-          title: "ChatGPT or Claude.ai (advanced)",
+          title: "ChatGPT, Claude.ai or Muse (advanced)",
           paragraphs: [
             "In the Wenlan desktop app, open Web access, choose whether to share the whole library or one Space, review the data-access notice, and turn it on. Add https://relay.wenlan.app/mcp as an OAuth MCP connection in your AI client.",
             "Return to Wenlan to review and approve the pairing request. If you share one Space, other and future Spaces remain private. Keep Wenlan online during use, and revoke access in the app when no longer needed.",

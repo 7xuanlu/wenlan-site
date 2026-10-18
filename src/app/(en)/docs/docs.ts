@@ -3131,7 +3131,7 @@ export const docPages: DocPage[] = [
         heading: "How the pieces connect",
         body: [
           "The daemon runs locally and owns captures, source-backed notes, sessions, and retrieval. wenlan-mcp is the connector clients use when they need Wenlan tools.",
-          "Local clients launch wenlan-mcp over stdio. Current desktop Web Access connects ChatGPT and Claude.ai through the authenticated relay at https://relay.wenlan.app/mcp. OAuth pairing grants query access only to what you choose to share, the whole library or one Space, and only after you approve the pairing; requests and results pass through the relay while your local device is online.",
+          "Local clients launch wenlan-mcp over stdio. Current desktop Web Access connects ChatGPT, Claude.ai, and Muse through the authenticated relay at https://relay.wenlan.app/mcp. OAuth pairing grants query access only to what you choose to share, the whole library or one Space, and only after you approve the pairing; requests and results pass through the relay while your local device is online.",
         ],
       },
       {
@@ -3214,6 +3214,7 @@ export const docPages: DocPage[] = [
           "Add the endpoint in the web AI client's supported MCP connection flow and start authorization. Review the pairing request in Wenlan, check its client ID, Space, and expiry, then approve only if you initiated that connection. Finish the authorization in the AI client. The grant is limited to the approved Space; other and future Spaces stay private.",
           "The local device must be online while it serves queries. Search activity is recorded locally, and requests and results pass through the relay and the connected AI provider. The older origin-relay no-login tunnel is a legacy flow; possession of its URL granted access and is not the current Web Access setup. Stop Web access or revoke an authorized client to end access.",
           "This is a custom MCP connection to your own Wenlan runtime. It does not mean Wenlan is publicly listed in the ChatGPT Apps Directory.",
+          "Muse, Meta's personal agent, connects the same way: add https://relay.wenlan.app/mcp as a custom connector in Muse, then approve the pairing request in Wenlan.",
         ],
         link: {
           label: "Read desktop Remote Access status",
@@ -3226,6 +3227,17 @@ export const docPages: DocPage[] = [
           "Cursor, Claude Desktop, Gemini CLI, VS Code, and other supported local MCP clients use wenlan connect <client>.",
           "The settings screen differs by client. The important part is that the client launches the Wenlan MCP connector installed by setup.",
         ],
+      },
+      {
+        heading: "Muse Code",
+        body: [
+          "Muse Code, Meta's coding agent CLI, reads MCP servers from ~/.config/muse/settings.json, under mcp_servers rather than mcpServers. Add the wenlan entry below and keep any servers already in the file.",
+          "mode: optional lets Muse Code start even when Wenlan is not running. Run /mcp in muse to check that wenlan is connected.",
+        ],
+        code: {
+          label: "~/.config/muse/settings.json",
+          code: "{\n  \"schema_version\": 1,\n  \"mcp_servers\": {\n    \"wenlan\": {\n      \"transport\": \"stdio\",\n      \"mode\": \"optional\",\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"wenlan-mcp\", \"--agent-name\", \"muse-code\"]\n    }\n  }\n}",
+        },
       },
       {
         heading: "Verify the connection",
