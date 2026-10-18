@@ -9404,3 +9404,15 @@ Re-read the preserved September 4 native exports without fetching a new range:
 - Result: real capture and independent recall returned the same full synthetic decision, random code and `mem_15dabf75a4df`; source agent `claude-code`, version1, confirmed false. One reader recall call; no file or shell call.
 - Evidence and limits: [dated readout](docs/seo-audits/2026-10-18-organic-search-readout.md#claude--codex-共用記憶實測10-18-單篇發布授權), [sanitized receipt](public/examples/claude-codex-shared-memory.json). Verification / publication status belongs to the resulting PR; it is not inferred from this preparation record.
 - Next observation: manual Google crawl and same-query/page readout; below exposure is inconclusive. Weekly remains paused; no request submitted.
+
+
+## 2026-10-18 — local next-owner preparation after published memory guides
+
+- Scope: user requested evidence-led continuation and self-correction through a reviewable result. Local preparation only; no publication, indexing, new campaign or automation. #241 and #243 are already live and remain under manual observation.
+- Selection: all116 exposed pages reviewed;18 meet20 page impressions. Existing EN `/learn/ai-work-memory-vs-knowledge-base` has41 impressions/0clicks and exact query11/0 in Sep18–Oct15. USdesktop10/0,position22.4. One currentUSdesktopSERP already shows Wenlan on the first page; do not infer a current visibility failure from the historical average.
+- Hypothesis: a paired example and inspectable real memory receipt resolve the conceptual choice better than the old abstract comparison. This is not a demonstrated ranking or CTR advantage. Reuse prior Claude→Codex proof honestly; no new run or KB synthesis claimed.
+- Boundaries and manual test: [six decisions, crawl/version caveat, full candidate exclusions and stop rules](docs/seo-audits/2026-10-18-organic-search-readout.md#下一輪既有頁核對與本地修正10-18). Post-publication/new-crawl complete28 days,20 exact-query impressions minimum; underexposure is inconclusive,W8 stop. No success declared from technical checks.
+- Separate factual repair: label `/learn/wenlan-vs-superlocal-memory` as historicalv3.8.3/Wenlan0.14.1; currentv4.2.10 release is not a new head-to-head test. This is not a second growth experiment.
+- Local delivery: two-page copy, existing tests and evidence records verified on base4061498; [verification](docs/seo-audits/2026-10-18-organic-search-readout.md#本批交付與驗證發布前驗證). Current-version crawl condition is unconfirmed; this remains a local draft pending specific publication direction, not a launched experiment. No acquisition result claimed.
+
+- Publication decision after verification: the user explicitly authorized publishing these two pages and instructed no Google indexing request; allow automatic crawling. This narrow authorization supersedes the preparation-only status for this batch, without asserting that the unconfirmed crawl/cooldown gate passed or relaxing it for other pages. Merge, CI and production receipts belong on the resulting PR; weekly remains paused.

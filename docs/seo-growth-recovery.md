@@ -5,7 +5,7 @@
 
 ## 當前決策
 
-**先增加相關搜尋的曝光與點擊。** 10-18人工讀數：Google自然搜尋28天30點擊／1,934曝光，不能由Threads造訪推算；優先依已見搜尋詞補強Codex MEMORY.md教學。數據、比較與人工追蹤見[本輪紀錄](seo-audits/2026-10-18-organic-search-readout.md)。 三市場18詞已實查：連接入口100–1K／月；完整「Claude查筆記附來源」三語均0–10，不作主要增長詞。英／簡中原始提問支持查找舊筆記與避免AI補造；保留三語既有頁與本地練習，不另開長問句頁。SEO基礎先排除抓取／索引阻塞，之後和AEO共同改善、分開量測。見[本輪判定](seo-audits/2026-10-07-ranking-gap.md#seoaeo-依存與候選用語實查)。
+**先增加相關搜尋的曝光與點擊。** 10-18人工讀數：Google自然搜尋28天30點擊／1,934曝光，不能由Threads造訪推算；Codex MEMORY.md與共用記憶已發布；本輪接著依精確詞補強memory／knowledge-base比較，並澄清SuperLocalMemory歷史版本範圍。數據、比較與人工追蹤見[本輪紀錄](seo-audits/2026-10-18-organic-search-readout.md)。 三市場18詞已實查：連接入口100–1K／月；完整「Claude查筆記附來源」三語均0–10，不作主要增長詞。英／簡中原始提問支持查找舊筆記與避免AI補造；保留三語既有頁與本地練習，不另開長問句頁。SEO基礎先排除抓取／索引阻塞，之後和AEO共同改善、分開量測。見[本輪判定](seo-audits/2026-10-07-ranking-gap.md#seoaeo-依存與候選用語實查)。
 
 | 工作 | 已知證據與限制 | 下一步 |
 | --- | --- | --- |
@@ -14,9 +14,11 @@
 | Obsidian + Claude Code | US長詞1K–10K／Planner三月−90%，短詞0%；EN owner 11 page曝光／0點擊，無精確詞joined row | 三語完整練習／答案範例已修，前段與練習後明示 Obsidian 可接 Wenlan；Opus 5.5 複審及12組畫面檢查通過，三語文章、手機入口與頁尾引導由 [#224](https://github.com/7xuanlu/wenlan-site/pull/224) 交付；部署確認見該PR收據，後續手動核對crawl與成效 |
 | 中文個人知識庫 | 泛「搭建」混企業 RAG；本輪 Planner 已補：`个人知识库搭建`10–100、台灣`個人知識庫`10–100／月 | 範例已發布；觀察相應詞是否開始展示本站 |
 | 個人 AI 知識庫（三語） | 英文依使用者 10-08 指示改為選做法→兩份筆記→查答案→Wenlan；雙中文同步「改來源後再問」、來源同步界線與終端機／對話分離，RAG／Wiki 句沿用 #223 正式版 | 10-11 已整合到最新 main，並整理雙中文重複段落；必要檢查與畫面驗證通過，[#235](https://github.com/7xuanlu/wenlan-site/pull/235) 已合併發布（0d0597a）；EN/TW 10-13已crawl，CN最後10-10早於本版。見[紀錄](seo-audits/2026-10-07-ranking-gap.md#2026-10-08-個人知識庫正式版復核) |
-| Codex MEMORY.md | 09-18～10-15：506曝光／2點擊；MEMORY.md兩詞11／0、啟用兩詞19／0；10-09已crawl | 依10-18單篇發布授權補檔案用途、載入方式與唯讀檢查；驗證／發布收據見[本輪紀錄](seo-audits/2026-10-18-organic-search-readout.md) |
-| Claude＋Codex 共用記憶 | 09-18～10-15：79曝光／1點擊，點擊詞不可見；舊精確詞量級10–100／月 | 10-18依使用者單篇指示，補 Claude 存入→新 Codex 讀回的實測、來源 ID與重現步驟；[證據](seo-audits/2026-10-18-organic-search-readout.md#claude--codex-共用記憶實測10-18-單篇發布授權)。手動追蹤，不把取回成功當搜尋成長 |
-| Claude／MCP memory | Claude同窗176曝光／1點擊；Planner舊量級僅參考 | 次順位診斷，不能由低CTR直接推定文案失敗 |
+| Codex MEMORY.md | 09-18～10-15：506曝光／2點擊；MEMORY.md兩詞11／0、啟用兩詞19／0；10-09已crawl | 10-18已由[#241](https://github.com/7xuanlu/wenlan-site/pull/241)發布檔案用途、載入與唯讀檢查；保留觀察，不再重寫。收據見[本輪紀錄](seo-audits/2026-10-18-organic-search-readout.md) |
+| Claude＋Codex 共用記憶 | 09-18～10-15：79曝光／1點擊，點擊詞不可見；舊精確詞量級10–100／月 | 10-18已由[#243](https://github.com/7xuanlu/wenlan-site/pull/243)發布Claude 存入→新 Codex 讀回的實測、來源 ID與重現步驟；[證據](seo-audits/2026-10-18-organic-search-readout.md#claude--codex-共用記憶實測10-18-單篇發布授權)。手動追蹤，不把取回成功當搜尋成長 |
+| Claude／MCP memory | Claude同窗176曝光／1點擊；10-07已改、10-09已crawl | 保留觀察，不因低CTR直接再寫 |
+| AI memory vs knowledge base | 同窗頁41曝光／0點擊；精確詞11／0。10-18一次US桌面SERP已見本站首頁結果 | 本地補同一決定的兩層實例、實測回執與RAG界線；審查、測試及手機／桌面驗證通過；使用者已明確授權發布，部署收據以本批PR為準，Google自行抓取。見[決定](seo-audits/2026-10-18-organic-search-readout.md#下一輪既有頁核對與本地修正10-18) |
+| SuperLocalMemory版本範圍 | 歷史v3.8.3比較，10-17已有v4.2.10發布 | 加歷史範圍提醒，不宣稱已重測新版；已獲本批發布授權，正式狀態以PR部署收據為準 |
 | source-backed wiki | 泛 `knowledge base wiki` 26 次曝光、平均 78.62；SERP 偏團隊選型 | 不硬爭錯誤意圖，不因低 CTR 自動改標題 |
 | 獨立引用 | GSC Links 樣本：英文 Wiki 5 條中 4 條自有 README、1 條 npm.io；未見獨立評測直接引用 | 研究相關指南與實作者的引用理由；不以目錄數量或自有連結代替權威 |
 

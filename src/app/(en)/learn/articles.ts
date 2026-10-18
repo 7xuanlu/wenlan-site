@@ -1768,157 +1768,152 @@ const baseArticles: LearnArticle[] = [
     slug: "ai-work-memory-vs-knowledge-base",
     eyebrow: "Comparison",
     category: "Comparisons",
-    title: "AI Work Memory vs Knowledge Base: What’s the Difference?",
+    title: "AI Memory vs Knowledge Base: What’s the Difference?",
     description:
-      "A knowledge base maintains what is currently known. AI work memory preserves the decisions, lessons, corrections, and handoffs that agents need while working.",
-    metaTitle: "AI Work Memory vs Knowledge Base: The Difference",
+      "AI memory carries earlier decisions and preferences into the next task. A knowledge base provides reusable references. Here is how to choose, with a real Claude-to-Codex example.",
+    metaTitle: "AI Memory vs Knowledge Base: What’s the Difference?",
     metaDescription:
-      "Compare AI work memory and AI knowledge bases: what each stores, when agents use it, and why durable AI work needs both atomic memory and maintained pages.",
+      "Compare AI memory and knowledge bases with a concrete decision example: what to save, how to update it, where RAG fits, and when you need both.",
     keywords: [
-      "AI work memory vs knowledge base",
+      "ai memory vs knowledge base",
+      "AI memory",
       "AI knowledge base",
-      "AI work context",
-      "agent memory workflow",
-      "AI memory system",
+      "agent memory",
     ],
     publishedAt: "2026-05-27",
-    updatedAt: "2026-07-24",
+    updatedAt: "2026-10-18",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
-    audience: "People designing durable context for AI agents and knowledge work",
+    audience: "People deciding how AI agents should retain decisions and use reference material",
     heroBullets: [
-      "A knowledge base maintains current explanations, reference material, and source-backed pages.",
-      "AI work memory preserves atomic decisions, lessons, corrections, preferences, and handoffs from real work.",
-      "Agents often need both: memory carries the work forward, while pages compile the current answer.",
+      "Memory carries relevant decisions, facts, and preferences from earlier work into the next task.",
+      "A knowledge base provides reusable reference documents and maintained explanations.",
+      "They can share content and storage. Their purpose and update rules define the difference.",
     ],
     sections: [
       {
         heading: "Short answer",
         body: [
-          "AI work memory and an AI knowledge base solve different parts of the same problem. Memory preserves what happened during work: a decision, lesson, correction, preference, or handoff. A knowledge base turns current evidence into maintained explanations that people and agents can reuse.",
-          "Choose memory when agents keep starting cold. Choose a knowledge base when the current answer is scattered across notes and documents. For durable AI work, the useful design is usually both with a clear boundary between them.",
+          "AI memory carries useful information from earlier interactions into later work: a preference, a project constraint, a decision and its reason. A knowledge base provides reference material that people or agents can consult: documentation, policies, research notes, or a current procedure.",
+          "Start with a knowledge base when the agent needs the current reference. Add a memory workflow when decisions or preferences keep getting lost between sessions. If an existing document already preserves both, you may not need another system.",
         ],
       },
       {
         heading: "What each layer should own",
         body: [
-          "A source should preserve material you can inspect: a document, imported conversation, or registered file. A memory should preserve one complete thing learned from work. A page should compile the current understanding from relevant sources and memories.",
-          "Keeping those roles distinct prevents two common failures: treating every chat transcript as knowledge, or rewriting a polished page every time one small fact changes.",
+          "The distinction is a role, not a file format. A Markdown file or database can hold either. Knowledge bases can update automatically; memory can be saved explicitly and reviewed by a person. Neither label guarantees that a statement is correct.",
         ],
-        link: {
-          label: "See Wenlan's source-backed page model",
-          href: "/docs/source-backed-pages",
+        table: {
+          columns: ["Question", "AI memory", "Knowledge base"],
+          rows: [
+            ["What does it preserve?", "Relevant context from earlier interactions: decisions, facts, preferences, and lessons.", "Reusable references: documents, policies, notes, and maintained explanations."],
+            ["What should the agent ask?", "What did we decide, and why?", "What does the current reference say?"],
+            ["How should it change?", "Correct or replace an earlier item when the decision or fact changes.", "Update the reference and record its source, owner, and revision."],
+            ["Can they overlap?", "A decision record can live in the same knowledge base.", "A maintained page can cite decisions retrieved from memory."],
+          ],
         },
       },
       {
         heading: "When a knowledge base is enough",
         body: [
-          "Use a conventional knowledge base when the main job is authoring durable documents, organizing reference material, and browsing a corpus. Product docs, research notes, meeting records, policies, and stable project explanations fit this shape.",
-          "It can still be AI-enabled. Search, chat, and MCP access do not by themselves turn a document collection into work memory. The deciding question is whether the system captures what agents learn between sessions and can return it during later work.",
+          "Suppose an agent needs your API documentation or an approved deployment procedure. Give it access to the current reference, with a clear version and source. A wiki, shared Markdown folder, or searchable document collection may already do the job.",
+          "For the exact wording of an old conversation, start with the tool’s conversation history or session resume. A distilled memory is a selected record; do not assume it preserves the whole transcript. The question is which information the task needs, not how many memory products you can connect.",
         ],
       },
       {
         heading: "When AI work memory is the missing layer",
         body: [
-          "Use AI work memory when the recurring failure is session loss. An agent fixed a bug yesterday, learned a project constraint in another tool, or received a correction last week, but the next session starts without that context.",
-          "The useful unit is often smaller than a document: one decision and why it was made, one gotcha, one preference, or one explicit replacement for a stale fact. Those memories need provenance and retrieval cues so an agent can use them without loading the full history.",
+          "Now suppose Claude and you settled a project decision, and the next task happens in Codex. Current documentation may state the rule without preserving the reason you chose it. A durable decision record can carry that context across the handoff.",
+          "We tested this on October 18, 2026. Claude saved a synthetic Harbor decision; a fresh Codex process in a separate empty working directory retrieved the same full content and source ID from the same local Wenlan daemon. The reader’s prompt contained neither the answer, source ID, nor random verification code. This is a readable summary of that record:",
+          "The returned item was unconfirmed (confirmed: false). Retrieval worked in this one same-machine test; it did not establish human approval, a safe production policy, a success rate, or multi-machine support. No knowledge-base page was distilled in this test.",
         ],
+        code: {
+          label: "Actual memory result, summarized — synthetic demo",
+          code: "Decision: Four retry attempts.\nDelay: 17 seconds, replacing\n  unlimited retries.\nReason: Stop promptly when the\n  upstream stays unavailable.\nSource ID: mem_15dabf75a4df\nWriter: Claude Code\nReader: fresh Codex process\nReview: confirmed: false\nDemo only; not production policy.",
+        },
         link: {
-          label: "See the AI work memory model",
-          href: "/learn/ai-work-memory",
+          label: "Inspect the recorded capture and recall result (JSON)",
+          href: "/examples/claude-codex-shared-memory.json",
         },
       },
       {
         heading: "How memory becomes a maintained answer",
         body: [
-          "A practical loop starts by recalling relevant knowledge, captures new decisions or lessons while work is happening, and closes with a handoff. Repeated or related material can then be distilled into a maintained page.",
-          "That page is not a raw memory dump. It should state the current answer, cite its support, and be refreshable when a source changes or a later memory supersedes an earlier conclusion.",
+          "For the same example, a knowledge-base entry could state the current retry procedure and link to the decision explaining why it changed. That is a proposed reference format below, not a Page generated during the test. A real operational entry would need an approved procedure and an owner; the demo does not provide those.",
+          "Keep the two questions distinct: retrieve the decision when you need its rationale; consult the maintained reference when you need current instructions. When the decision changes, review any reference that depends on it. Keeping more history does not automatically keep the answer current.",
         ],
-        bullets: [
-          "Recall the smallest relevant context at the start of work.",
-          "Capture one durable decision, lesson, correction, preference, or fact at a time.",
-          "Write a handoff that records what changed and what remains open.",
-          "Distill related sources and memories into a page that can be reviewed and refreshed.",
+        code: {
+          label: "Illustrative reference format — not a tested runbook",
+          code: "Procedure: [approved steps]\nApplies to: [service, version]\nOwner: [who approved it]\nRevision: [date]\nReason: [linked decision]\nSources: [documents, test results]",
+        },
+        link: {
+          label: "Reproduce the Claude-to-Codex memory handoff",
+          href: "/learn/codex-claude-code-shared-memory",
+        },
+      },
+      {
+        heading: "Where RAG and vector databases fit",
+        body: [
+          "Retrieval-augmented generation (RAG) retrieves relevant material and supplies it to a model while it answers. The material can come from a knowledge base, memory, or both. A vector database can help find similar material; it does not by itself decide what to save, correct, expire, or trust.",
+          "Neither role requires training a model. Stored information can be retrieved at answer time without changing model weights. LangChain’s memory documentation also distinguishes thread-level state from memory across conversations, and describes facts, experiences, and instructions as possible memory content. These are overlapping design choices, not separate kinds of intelligence.",
         ],
         link: {
-          label: "See the complete LLM-wiki workflow",
-          href: "/learn/distilled-wiki-pages-ai-memory",
+          label: "Read the primary memory concepts reference",
+          href: "https://docs.langchain.com/oss/python/concepts/memory",
         },
       },
       {
         heading: "How Wenlan combines the two",
         body: [
-          "Wenlan uses one knowledge system with three roles: traceable sources, atomic memories from AI work, and maintained source-backed pages. Memories preserve how knowledge changed; pages compile what is currently supported.",
-          "Retrieval uses a local index for exact terms, semantic similarity, and graph context. Durable synthesis remains readable Markdown under ~/.wenlan, with citations, revisions, and local git history available for inspection.",
-          "This does not mean every team needs another note editor. Wenlan can read existing document sources and coexist with Obsidian. Its job is to keep the agent work loop and the maintained knowledge layer connected without hiding either one.",
+          "Wenlan brings capture, recall, handoff, review, and source-backed pages into one system for AI work. The memory preserves a decision or correction; a maintained page assembles an explanation from supporting sources. Source links and review state let you inspect what the answer rests on.",
+          "For an occasional handoff, a dated Markdown note with the decision, reason, source, and status may be enough. Choose Wenlan when you want that repeated capture, retrieval, and knowledge-maintenance workflow built in across AI tools, instead of maintaining the connections yourself. The recorded test above demonstrates one cross-tool recall; the linked documentation explains the separate page workflow.",
         ],
+        link: {
+          label: "See how to build and maintain an LLM wiki",
+          href: "/learn/distilled-wiki-pages-ai-memory",
+        },
       },
     ],
-    comparisonTable: {
-      competitorName: "Knowledge base",
-      rows: [
-        {
-          dimension: "Unit of knowledge",
-          wenlan: "Atomic memory: one decision, lesson, correction, preference, fact, or handoff.",
-          competitor: "Document, note, page, record, or collection.",
-        },
-        {
-          dimension: "Primary trigger",
-          wenlan: "An agent learns something during work or needs context in a later session.",
-          competitor: "A person or process authors, imports, or updates reference material.",
-        },
-        {
-          dimension: "Main job",
-          wenlan: "Carry useful context across sessions, tools, projects, and time.",
-          competitor: "Maintain and browse the current body of knowledge.",
-        },
-        {
-          dimension: "Change history",
-          wenlan: "Provenance, corrections, and explicit supersession preserve how a conclusion changed.",
-          competitor: "Document revisions preserve how the maintained answer changed.",
-        },
-        {
-          dimension: "Best combined pattern",
-          wenlan: "Feed durable work lessons into source-backed pages.",
-          competitor: "Give agents a maintained answer backed by inspectable sources and memories.",
-        },
-      ],
-    },
     faqs: [
       {
-        question: "Is Wenlan a knowledge base?",
+        question: "What is the difference between AI memory and a knowledge base?",
         answer:
-          "Yes, but not only a document store. Wenlan combines traceable sources, atomic AI work memories, and maintained source-backed pages. The memory layer captures what work teaches; the page layer compiles the current answer.",
+          "Memory carries relevant context from earlier interactions into later tasks. A knowledge base provides reusable reference material. They can share content and storage; their purpose, scope, and update rules determine their role.",
       },
       {
-        question: "Does AI work memory replace a knowledge base?",
+        question: "Is RAG the same as AI memory?",
         answer:
-          "No. Memory is good at preserving decisions, lessons, corrections, and handoffs. A knowledge base is good at maintaining explanations and reference material. The two layers work better when each has a clear role.",
+          "No. RAG retrieves material for a model to use while answering. That material can come from memory, a knowledge base, or both.",
       },
       {
-        question: "Can Wenlan work with Obsidian or an existing knowledge base?",
+        question: "Does either require model training?",
         answer:
-          "Yes. Wenlan can read document sources, index an Obsidian vault, and project maintained pages as Markdown under ~/.wenlan. You can keep your existing knowledge base while using Wenlan for cross-session agent memory and source-backed synthesis.",
+          "No. Both can store information for retrieval without changing model weights. Retrieving a statement does not establish that it is true or current.",
+      },
+      {
+        question: "Can an existing knowledge base also serve as memory?",
+        answer:
+          "Yes. A decision note in your existing knowledge base can provide durable context if later tasks can find it. Add a separate workflow only when capturing, retrieving, or maintaining that context is becoming a recurring problem.",
       },
     ],
     relatedSlugs: ["ai-work-memory", "distilled-wiki-pages-ai-memory", "wenlan-vs-obsidian-ai-memory", "wenlan-vs-notion-ai", "wenlan-vs-chatgpt-memory"],
     officialReferences: [
       {
-        label: "Wenlan source, memory, and page model",
-        href: "https://github.com/wenlan-app/wenlan#what-is-this",
+        label: "LangChain memory concepts",
+        href: "https://docs.langchain.com/oss/python/concepts/memory",
       },
       {
-        label: "Wenlan daily workflow",
-        href: "https://github.com/wenlan-app/wenlan#daily-workflow",
+        label: "LangChain retrieval concepts",
+        href: "https://docs.langchain.com/oss/python/deepagents/retrieval",
       },
       {
-        label: "Karpathy's LLM Wiki foundation",
-        href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+        label: "Wenlan source-backed pages",
+        href: "/docs/source-backed-pages",
       },
     ],
     cta: {
-      heading: "Connect memory to maintained knowledge",
-      body: "Wenlan carries decisions and lessons across agent sessions, then turns supported context into source-backed pages you can inspect.",
+      heading: "Keep the decision and the current answer connected",
+      body: "Wenlan gives your AI tools a shared capture and recall workflow, with source-backed pages for the knowledge you choose to maintain. Start with the worked handoff above, then decide whether a shared note or an integrated workflow fits your work.",
     },
   },
   {
@@ -2388,10 +2383,10 @@ const baseArticles: LearnArticle[] = [
     category: "Comparisons",
     title: "Wenlan vs SuperLocalMemory v3.8.3: Which Local AI Memory Fits Your Work?",
     description:
-      "SuperLocalMemory is a local memory control plane for teams; Wenlan is a source-backed LLM wiki for deliberate knowledge work. Compare retrieval, team controls, audit, and artifacts.",
+      "A historical comparison of SuperLocalMemory v3.8.3 and Wenlan v0.14.1, pinned to July 24, 2026. SuperLocalMemory v4.2.10 was released October 17; current features and benchmark standing have not been retested here.",
     metaTitle: "Wenlan vs SuperLocalMemory v3.8.3: Which Memory Fits?",
     metaDescription:
-      "Choose SuperLocalMemory for a team memory control plane with roles and audit; choose Wenlan for explicit capture, handoffs, and a source-backed LLM wiki.",
+      "Historical comparison of SuperLocalMemory v3.8.3 and Wenlan v0.14.1 as of July 24, 2026. v4.2.10 has since shipped; current features and benchmark comparisons are unverified.",
     keywords: [
       "Wenlan vs SuperLocalMemory",
       "SuperLocalMemory vs Wenlan",
@@ -2401,7 +2396,7 @@ const baseArticles: LearnArticle[] = [
       "local-first agent memory",
     ],
     publishedAt: "2026-05-27",
-    updatedAt: "2026-07-24",
+    updatedAt: "2026-10-18",
     author: DEFAULT_AUTHOR,
     readingTime: "7 min read",
     audience: "Developers and teams comparing local-first memory systems for AI agents",
@@ -2409,12 +2404,16 @@ const baseArticles: LearnArticle[] = [
       "SuperLocalMemory v3.8.3 is a broad local-first control plane for agent memory, temporal retrieval, team access, audit, cache, compression, and bounded loops.",
       "Wenlan v0.14.1 is a source-backed LLM wiki workflow for explicit capture, handoff, review, retrieval, and maintained readable pages.",
       "Choose by operating boundary: automated memory operations and team controls, or deliberate knowledge work with inspectable artifacts.",
-      "The comparison is pinned to both projects' maintained sources on 2026-07-24; benchmark numbers retain their original protocol scopes.",
+      "This is a historical comparison pinned to sources checked on 2026-07-24. SuperLocalMemory v4.2.10 was released on 2026-10-17; current capabilities and benchmark comparisons have not been retested.",
     ],
     officialReferences: [
       {
         label: "SuperLocalMemory v3.8.3 source",
         href: "https://github.com/qualixar/superlocalmemory/tree/v3.8.3",
+      },
+      {
+        label: "SuperLocalMemory v4.2.10 release (2026-10-17)",
+        href: "https://github.com/qualixar/superlocalmemory/releases/tag/v4.2.10",
       },
       {
         label: "SuperLocalMemory v3.8.3 README",
@@ -2435,18 +2434,24 @@ const baseArticles: LearnArticle[] = [
     ],
     sections: [
       {
+        heading: "Version scope: historical comparison",
+        body: [
+          "This comparison covers SuperLocalMemory v3.8.3 and Wenlan v0.14.1, using maintained sources checked on 2026-07-24. SuperLocalMemory v4.2.10 was released on 2026-10-17. This page has not retested that release’s capabilities or compared its benchmarks with Wenlan; the descriptions and numbers below remain about the pinned versions and their stated protocols. Check the linked release and tagged sources before making a current product choice.",
+        ],
+      },
+      {
         heading: "Short answer",
         body: [
-          "Choose SuperLocalMemory when you want a local-first memory control plane for a team: automated ingestion, temporal and graph-aware retrieval, personal/team scopes, role-based access, and a hash-chained audit trail.",
-          "Choose Wenlan when you want an LLM wiki for AI work: explicit capture, handoffs between sessions, reviewable memories, source-backed pages, local hybrid retrieval, and readable artifacts that can sit beside an Obsidian vault.",
-          "Both are local-first and MCP-capable. The useful distinction is not whether either product has retrieval; it is whether you want a broad operational control plane or a deliberate, inspectable knowledge workflow.",
+          "In the July 24 source review, SuperLocalMemory v3.8.3 documented a local-first memory control plane for a team: automated ingestion, temporal and graph-aware retrieval, personal/team scopes, role-based access, and a hash-chained audit trail.",
+          "The Wenlan v0.14.1 sources documented an LLM wiki for AI work: explicit capture, handoffs between sessions, reviewable memories, source-backed pages, local hybrid retrieval, and readable artifacts that can sit beside an Obsidian vault.",
+          "Both reviewed versions documented local-first operation and MCP access. That source comparison describes their scope at the time; it does not establish which current release fits your work better.",
         ],
       },
       {
         heading: "What changed in SuperLocalMemory v3.8.3",
         body: [
-          "The maintained v3.8.3 README now describes SuperLocalMemory as an enterprise-oriented, local-first agent memory control plane rather than only a retrieval and optimization layer. SQLite and sqlite-vec remain canonical; optional CozoDB and LanceDB projections stay behind parity checks.",
-          "Its current retrieval path combines semantic, BM25 lexical, temporal retrieval, Hopfield associative, and spreading-activation candidates before fusion and optional reranking. The release also exposes provenance, memory inspection, personal, shared, and global scopes, multi-workspace isolation, role-based access, retention and erasure controls, a hash-chained audit trail, and a dashboard.",
+          "The v3.8.3 README describes SuperLocalMemory as an enterprise-oriented, local-first agent memory control plane rather than only a retrieval and optimization layer. SQLite and sqlite-vec remain canonical; optional CozoDB and LanceDB projections stay behind parity checks.",
+          "In v3.8.3, the retrieval path combines semantic, BM25 lexical, temporal retrieval, Hopfield associative, and spreading-activation candidates before fusion and optional reranking. The release also exposes provenance, memory inspection, personal, shared, and global scopes, multi-workspace isolation, role-based access, retention and erasure controls, a hash-chained audit trail, and a dashboard.",
           "The control plane also covers exact caching, opt-in compression, trusted-peer coordination, bounded loops, and nine framework adapters. Provider-backed enrichment, cloud modes, connectors, and networked adapters remain explicit operator choices rather than requirements of the local core.",
         ],
       },
@@ -2461,8 +2466,8 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "How to decide",
         body: [
-          "Start with the artifact you need at the end. If you need a governed operational memory service for several agents or people, test SuperLocalMemory's profiles, scopes, role gates, audit surfaces, cache, compression, and framework adapters.",
-          "If you need a durable project record that an agent can retrieve and a person can open, review, cite, revise, and carry across tools, test Wenlan's capture, handoff, recall, curate, distill, and page workflows.",
+          "For a current choice, treat the historical comparison as a test plan, not a result from today’s releases. If you need a governed memory service for several agents or people, test the current SuperLocalMemory release against your required profiles, scopes, role gates, audit, and adapters.",
+          "If you need a durable project record that an agent can retrieve and a person can inspect, test those requirements against the current Wenlan release: capture, handoff, recall, review, and maintained source-backed pages. The pinned source descriptions below do not replace that test.",
           "A team can reasonably use both boundaries. The comparison matters when choosing which product should own the durable memory and which one, if any, should own optimization or operational controls.",
         ],
       },
@@ -2569,7 +2574,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "What versions does this comparison cover?",
         answer:
-          "This page pins SuperLocalMemory v3.8.3 and Wenlan v0.14.1 using maintained first-party source captured on 2026-07-24. Last release alignment: v0.14.1 on 2026-07-20. Check the linked changelog and tagged source before relying on a moving product claim.",
+          "This historical page pins SuperLocalMemory v3.8.3 and Wenlan v0.14.1 using maintained first-party sources checked on 2026-07-24. SuperLocalMemory v4.2.10 shipped on 2026-10-17; its current features and benchmark comparison have not been retested here. Check the linked current release and pinned sources before relying on a moving product claim.",
       },
     ],
     relatedSlugs: [

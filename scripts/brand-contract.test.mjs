@@ -535,18 +535,17 @@ test("AI work memory comparison answers the knowledge-base role question directl
   assert.notEqual(start, -1);
   assert.match(
     article,
-    /title: "AI Work Memory vs Knowledge Base: What’s the Difference\?"/,
-  );
-  assert.match(
-    article,
-    /metaDescription:\s*"Compare AI work memory and AI knowledge bases: what each stores, when agents use it, and why durable AI work needs both atomic memory and maintained pages\."/,
+    /title: "AI Memory vs Knowledge Base: What’s the Difference\?"/,
   );
   assert.match(article, /publishedAt: "2026-05-27"/);
-  assert.match(article, /updatedAt: "2026-07-24"/);
+  assert.match(article, /updatedAt: "2026-10-18"/);
   assert.match(article, /heading: "Short answer"/);
-  assert.match(article, /competitorName: "Knowledge base"/);
-  assert.match(article, /dimension: "Unit of knowledge"/);
-  assert.match(article, /label: "Wenlan source, memory, and page model"/);
+  // A concept comparison must not label generic memory as the Wenlan product.
+  assert.doesNotMatch(article, /comparisonTable:/);
+  assert.match(article, /columns: \["[^"\n]+", "AI memory", "Knowledge base"\]/);
+  assert.match(article, /claude-codex-shared-memory\.json/);
+  assert.match(article, /unconfirmed|confirmed: false/);
+  assert.match(article, /no knowledge-base page was distilled/i);
 
   for (const [sourceFile, slug] of relatedSources) {
     const sourceStart = sourceFile.indexOf(`slug: "${slug}"`);
@@ -782,7 +781,7 @@ test("claude-mem comparison reflects current automatic and cross-agent boundarie
   assert.doesNotMatch(article, /POSTs to Wenlan's `\/api\/memory\/store`/);
 });
 
-test("SuperLocalMemory comparison reflects the current control-plane boundary and benchmark scopes", async () => {
+test("SuperLocalMemory comparison preserves its historical versions and benchmark scopes", async () => {
   const articles = await readRepo("src/app/learn/articles.ts");
   const marker = 'slug: "wenlan-vs-superlocal-memory"';
   const start = articles.indexOf(marker);
@@ -799,6 +798,9 @@ test("SuperLocalMemory comparison reflects the current control-plane boundary an
     article,
     /metaTitle: "Wenlan vs SuperLocalMemory v3\.8\.3: Which Memory Fits\?"/,
   );
+  assert.match(article, /Version scope: historical comparison/);
+  assert.match(article, /releases\/tag\/v4\.2\.10/);
+  assert.match(article, /not.*retested|not.*re-tested/i);
   assert.match(article, /local-first agent memory control plane/);
   assert.match(article, /temporal retrieval/);
   assert.match(article, /personal, shared, and global/);
