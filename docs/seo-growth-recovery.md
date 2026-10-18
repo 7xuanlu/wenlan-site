@@ -1,20 +1,21 @@
 # SEO 目前決策與下一步
 
-更新：2026-10-10。#223 修正已合併並部署（46566c3）；#220 已合併 19 篇英文重複頁至既有 owner，154 個 sitemap URL；[發布及抓取請求收據](seo-audits/2026-10-07-learn-consolidation.md) 取代舊 inventory。只留目前決定與下一步。
+更新：2026-10-18。#223 修正已合併並部署（46566c3）；#220 已合併 19 篇英文重複頁至既有 owner，154 個 sitemap URL；[發布及抓取請求收據](seo-audits/2026-10-07-learn-consolidation.md) 取代舊 inventory。只留目前決定與下一步。
 規則見 [操作入口](seo-growth-loop.md)、[共用需求流程](seo-demand-workflow.md)。
 
 ## 當前決策
 
-**先增加相關搜尋的曝光與點擊。** 三市場18詞已實查：連接入口100–1K／月；完整「Claude查筆記附來源」三語均0–10，不作主要增長詞。英／簡中原始提問支持查找舊筆記與避免AI補造；保留三語既有頁與本地練習，不另開長問句頁。SEO基礎先排除抓取／索引阻塞，之後和AEO共同改善、分開量測。見[本輪判定](seo-audits/2026-10-07-ranking-gap.md#seoaeo-依存與候選用語實查)。
+**先增加相關搜尋的曝光與點擊。** 10-18人工讀數：Google自然搜尋28天30點擊／1,934曝光，不能由Threads造訪推算；優先依已見搜尋詞補強Codex MEMORY.md教學。數據、比較與人工追蹤見[本輪紀錄](seo-audits/2026-10-18-organic-search-readout.md)。 三市場18詞已實查：連接入口100–1K／月；完整「Claude查筆記附來源」三語均0–10，不作主要增長詞。英／簡中原始提問支持查找舊筆記與避免AI補造；保留三語既有頁與本地練習，不另開長問句頁。SEO基礎先排除抓取／索引阻塞，之後和AEO共同改善、分開量測。見[本輪判定](seo-audits/2026-10-07-ranking-gap.md#seoaeo-依存與候選用語實查)。
 
 | 工作 | 已知證據與限制 | 下一步 |
 | --- | --- | --- |
-| EN LLM Wiki | 09-09～10-06，精確 `karpathy llm wiki` 8 次曝光、0 點擊、位置 22.125；v2 詞 3／0、15.33；10-06 改版後 crawl 未確認 | 優先觀察新版 crawl、同詞排名與點擊；hold 再重寫 |
+| EN LLM Wiki | 09-18～10-15：189曝光／7點擊；10-10已crawl | 保留已完成教學，追蹤精確詞，不全面再寫 |
 | 繁中 Wiki | 台灣市場有需求；本站「如何使用」僅 1 次可見曝光 | 沿用 owner，核對新版 crawl 與樣本，不承諾前五 |
 | Obsidian + Claude Code | US長詞1K–10K／Planner三月−90%，短詞0%；EN owner 11 page曝光／0點擊，無精確詞joined row | 三語完整練習／答案範例已修，前段與練習後明示 Obsidian 可接 Wenlan；Opus 5.5 複審及12組畫面檢查通過，三語文章、手機入口與頁尾引導由 [#224](https://github.com/7xuanlu/wenlan-site/pull/224) 交付；部署確認見該PR收據，後續手動核對crawl與成效 |
 | 中文個人知識庫 | 泛「搭建」混企業 RAG；本輪 Planner 已補：`个人知识库搭建`10–100、台灣`個人知識庫`10–100／月 | 範例已發布；觀察相應詞是否開始展示本站 |
-| 個人 AI 知識庫（三語） | 英文依使用者 10-08 指示改為選做法→兩份筆記→查答案→Wenlan；雙中文同步「改來源後再問」、來源同步界線與終端機／對話分離，RAG／Wiki 句沿用 #223 正式版 | 10-11 已整合到最新 main，並整理雙中文重複段落；必要檢查與畫面驗證通過，[#235](https://github.com/7xuanlu/wenlan-site/pull/235) 待審，尚未合併或發布。見[紀錄](seo-audits/2026-10-07-ranking-gap.md#2026-10-08-個人知識庫正式版復核) |
-| Claude／Codex／MCP memory | 新 US Planner：Claude1K–10K、Codex100–1K、MCP10–100／月；GSC仍稀少或缺列 | 保留正確教學；按任務匹配與本站曝光判斷優先序 |
+| 個人 AI 知識庫（三語） | 英文依使用者 10-08 指示改為選做法→兩份筆記→查答案→Wenlan；雙中文同步「改來源後再問」、來源同步界線與終端機／對話分離，RAG／Wiki 句沿用 #223 正式版 | 10-11 已整合到最新 main，並整理雙中文重複段落；必要檢查與畫面驗證通過，[#235](https://github.com/7xuanlu/wenlan-site/pull/235) 已合併發布（0d0597a）；EN/TW 10-13已crawl，CN最後10-10早於本版。見[紀錄](seo-audits/2026-10-07-ranking-gap.md#2026-10-08-個人知識庫正式版復核) |
+| Codex MEMORY.md | 09-18～10-15：506曝光／2點擊；MEMORY.md兩詞11／0、啟用兩詞19／0；10-09已crawl | 依10-18單篇發布授權補檔案用途、載入方式與唯讀檢查；驗證／發布收據見[本輪紀錄](seo-audits/2026-10-18-organic-search-readout.md) |
+| Claude／MCP memory | Claude同窗176曝光／1點擊；Planner舊量級僅參考 | 次順位診斷，不能由低CTR直接推定文案失敗 |
 | source-backed wiki | 泛 `knowledge base wiki` 26 次曝光、平均 78.62；SERP 偏團隊選型 | 不硬爭錯誤意圖，不因低 CTR 自動改標題 |
 | 獨立引用 | GSC Links 樣本：英文 Wiki 5 條中 4 條自有 README、1 條 npm.io；未見獨立評測直接引用 | 研究相關指南與實作者的引用理由；不以目錄數量或自有連結代替權威 |
 

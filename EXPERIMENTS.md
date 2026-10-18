@@ -9389,3 +9389,10 @@ Re-read the preserved September 4 native exports without fetching a new range:
   PR #207 (Learn related links and comparison check blocks) merged and the
   `7xuanlu/wenlan` GitHub description was rewritten; both postdate the fixed
   window and do not affect these numbers.
+
+## Manual content refresh: Codex MEMORY.md, 2026-10-18
+
+- Scope: existing English Codex memory owner; user explicitly requested evidence-backed completion, verification and publication on 10-18. This does not restart the ended successor campaign or change its targets. Weekly automation stays paused.
+- Baseline: Sep18–Oct15, page 506 impressions / 2 clicks; visible MEMORY.md query variants 11 impressions / 0 clicks. Country/device splits, SERPs, first-party facts and the six demand decisions are in the [dated readout](docs/seo-audits/2026-10-18-organic-search-readout.md#codex-memorymd-補強決定10-18-使用者授權).
+- Hypothesis and stop rules: answer the observed file-location/use task; manual 24h/7d/W2/W4/W8 reads. Minimum is 20 visible query×page impressions for the two MEMORY.md variants over a complete 28-day post-crawl window; fewer is inconclusive. At least one click is a directional positive signal, not a causal or statistical claim. Preserve market/device/position distinctions. Full criteria stay in the linked record.
+- Delivery: isolated branch `codex/seo-organic-codex-accuracy`, base `276502f`; content and responsive verification recorded in the readout. Publication/deployment and recrawl receipts belong on its PR. No outreach, paid action, new locale owner or new background job.

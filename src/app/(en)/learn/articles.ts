@@ -1207,37 +1207,39 @@ const baseArticles: LearnArticle[] = [
     slug: "how-to-give-codex-persistent-memory",
     eyebrow: "Developer workflow",
     category: "Workflows",
-    title: "Codex Memory: How Memories and AGENTS.md Work, and How to Add Persistent Memory",
+    title: "Codex Memory: MEMORY.md, Setup, and AGENTS.md",
     description:
-      "How Codex remembers things between sessions: the memories feature, where ~/.codex/memories lives, how to turn it on or off, what belongs in AGENTS.md, and when to add an MCP memory server.",
-    metaTitle: "Codex Memory: How Memories & AGENTS.md Work | Wenlan",
+      "Find Codex's MEMORY.md, understand how it loads, and enable native memories. Keep required rules in AGENTS.md; use shared MCP memory when other AI tools need the same project knowledge.",
+    metaTitle: "Codex Memory: MEMORY.md, AGENTS.md & Setup | Wenlan",
     metaDescription:
-      "Codex memories are off by default. How to turn them on, where ~/.codex/memories lives, what belongs in AGENTS.md, and how to share memory with Claude Code.",
+      "Find Codex's MEMORY.md, enable memories, and see what loads automatically. Learn what belongs in AGENTS.md and when shared MCP memory helps.",
     keywords: [
       "Codex memory",
       "Codex memories",
       "Codex persistent memory",
       "Codex CLI memory",
       "Codex memories folder",
+      "Codex MEMORY.md",
       "Codex AGENTS.md",
       "Codex memory plugin",
       "Codex MCP memory",
     ],
     publishedAt: "2026-06-07",
-    updatedAt: "2026-10-07",
+    updatedAt: "2026-10-18",
     author: DEFAULT_AUTHOR,
-    readingTime: "7 min read",
+    readingTime: "9 min read",
     audience: "Developers using the Codex CLI, the Codex IDE extension, or the ChatGPT desktop app for coding",
     heroBullets: [
       "Codex memories are off by default. Turn them on in settings or with memories = true in config.toml.",
-      "Codex writes memories to ~/.codex/memories/ in the background. Rules that must always apply belong in AGENTS.md.",
-      "Codex memory stays inside Codex. Use an MCP memory server when Claude Code or Cursor need the same context.",
+      "MEMORY.md is a generated handbook under ~/.codex/memories/. Codex looks up relevant entries rather than loading the whole file.",
+      "Codex manages its own local memories. Use a shared MCP memory server when Claude Code or Cursor need the same capture and recall tools.",
     ],
     sections: [
       {
         heading: "Quick answer",
         body: [
-          "Codex has two kinds of memory. AGENTS.md files are instructions you write; Codex reads them at the start of every session. Memories are notes Codex writes itself from your earlier chats, so you don't have to repeat preferences, project conventions, and known pitfalls.",
+          "Codex has native memories. Its generated MEMORY.md normally lives at ~/.codex/memories/MEMORY.md and holds lessons from earlier chats. You do not need to create a project MEMORY.md to enable the feature.",
+          "AGENTS.md serves a different purpose: it contains instructions you maintain, such as test commands and repository rules. Keep required guidance there; use memories to help Codex recall past work.",
           "Memories are off by default. Once on, Codex updates them in the background after a chat has been idle for a while, not the moment it ends.",
         ],
         table: {
@@ -1278,14 +1280,42 @@ const baseArticles: LearnArticle[] = [
       },
       {
         id: "where-codex-stores-memories",
-        heading: "Where Codex stores memories",
+        heading: "Where is Codex MEMORY.md?",
         body: [
-          "Codex keeps memories in your Codex home folder, which is ~/.codex unless you set CODEX_HOME. The memories folder holds summaries, longer-lasting entries, recent inputs, and the evidence they came from.",
-          "OpenAI describes these files as generated state. Open them to see what Codex remembers or to check for anything sensitive before you share your Codex folder, but don't treat hand edits as the main way to control memory. Use the settings above instead.",
+          "The default path is ~/.codex/memories/MEMORY.md. If you set CODEX_HOME, use $CODEX_HOME/memories/MEMORY.md instead. This is separate from AGENTS.md in your repository.",
+          "The file map below follows the OpenAI Codex memory templates checked on October 18, 2026, linked under Official references. These are implementation details, so names and loading behavior can change between versions.",
         ],
         code: {
-          label: "Codex home folder",
-          code: "~/.codex/\n├── AGENTS.md        # your global instructions\n├── config.toml      # [features] memories = true\n└── memories/        # written by Codex",
+          label: "Main generated memory files (default location)",
+          code: "~/.codex/memories/\n├── memory_summary.md\n├── MEMORY.md\n├── raw_memories.md\n└── rollout_summaries/",
+        },
+        table: {
+          columns: ["File or folder", "What it does"],
+          rows: [
+            ["memory_summary.md", "Compact overview that helps Codex decide where to look"],
+            ["MEMORY.md", "Searchable handbook of lessons and pointers to earlier work"],
+            ["raw_memories.md", "Intermediate input for memory consolidation"],
+            ["rollout_summaries/", "Summaries of earlier sessions with supporting evidence and references"],
+          ],
+        },
+      },
+      {
+        heading: "Does Codex load the whole MEMORY.md automatically?",
+        body: [
+          "No. In the implementation checked here, Codex receives a compact memory summary and can search MEMORY.md for relevant entries, then open supporting material when needed. It does not put the entire handbook into every new conversation.",
+          "A file existing on disk does not prove it was used in a particular answer. Memories must be enabled for that host and chat; Codex may skip a lookup for a self-contained task. If a rule must apply on every task, put it in AGENTS.md.",
+        ],
+      },
+      {
+        heading: "How to check whether MEMORY.md exists",
+        body: [
+          "On macOS or Linux, run this read-only command in your terminal. It lists the memory folder; it does not print your private memories or change them. Look for the exact uppercase filename MEMORY.md.",
+          "If the folder or file is missing, first confirm that memories are enabled and that you are checking the Codex home folder on the machine running your session. Memory generation runs in the background and can skip short or still-active chats. A missing file just after enabling memories is not, by itself, a failure.",
+          "Do not create a blank MEMORY.md as a setup step or use hand edits as your main control. OpenAI treats these files as generated state. Use settings and /memories to control the feature, and inspect contents for sensitive details before sharing any memory files.",
+        ],
+        code: {
+          label: "Terminal — list generated memory files",
+          code: 'ls -la "${CODEX_HOME:-$HOME/.codex}/memories"',
         },
       },
       {
@@ -1330,13 +1360,13 @@ const baseArticles: LearnArticle[] = [
         id: "codex-memory-plugins",
         heading: "Codex memory plugins and MCP servers",
         body: [
-          "Native memories stay inside Codex on one machine. Claude Code, Cursor, and other tools can't read them, and a memory doesn't link back to the file or decision it came from.",
-          "If you use more than one AI tool, or want memory you can read and check, add a memory server through MCP. Codex supports MCP and plugins, so any MCP memory server can plug in.",
+          "Codex stores generated memories locally, including supporting evidence from earlier chats. You can inspect those files, but other AI tools do not automatically use the same memory store.",
+          "If you want Codex, Claude Code, and Cursor to share one memory store, connect them to a compatible MCP memory server. This gives the tools a common way to capture and recall project knowledge.",
         ],
         table: {
           columns: ["Option", "How it works", "Good for"],
           rows: [
-            ["Codex memories", "Codex writes notes from earlier chats into ~/.codex/memories/", "Preferences and lessons, Codex only"],
+            ["Codex memories", "Codex writes notes from earlier chats into ~/.codex/memories/", "Local recall from earlier Codex chats"],
             ["AGENTS.md", "You write instructions Codex loads every session", "Rules that must always apply"],
             ["An MCP memory server", "Stores memories behind MCP tools that any compatible client can call", "Sharing memory between Codex, Claude Code, Cursor, and others"],
             ["Wenlan", "Local MCP memory plus wiki pages that cite their sources and flag when a source changes", "Project knowledge you want to read, check, and share across tools"],
@@ -1382,9 +1412,14 @@ const baseArticles: LearnArticle[] = [
           "Yes. Codex memories carry preferences, conventions, and known pitfalls from earlier chats into new ones. They are off by default. Codex also loads AGENTS.md instructions in every session.",
       },
       {
-        question: "Where are Codex memories stored?",
+        question: "Where is Codex MEMORY.md stored?",
         answer:
-          "In ~/.codex/memories/, inside your Codex home folder. If you set CODEX_HOME, they are under that folder instead.",
+          "Normally at ~/.codex/memories/MEMORY.md. If you set CODEX_HOME, look under $CODEX_HOME/memories/ instead. Codex generates this file; it is not the same as your repository's AGENTS.md.",
+      },
+      {
+        question: "Do I need to create or edit MEMORY.md?",
+        answer:
+          "No file creation is needed to enable native memories. Turn the feature on and let Codex generate its memory files. You can inspect them, but OpenAI recommends settings and /memories rather than hand edits as the main control. Put required instructions in AGENTS.md.",
       },
       {
         question: "How do I turn Codex memories on or off?",
@@ -1399,7 +1434,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Can Claude Code use Codex memories?",
         answer:
-          "Not directly. Codex memories are only for Codex. To share memory across tools, connect both to the same MCP memory server, such as Wenlan.",
+          "Claude Code does not automatically load Codex's generated memories. You can read the local files, but a shared MCP memory server, such as Wenlan, gives both tools a common way to capture and recall project knowledge.",
       },
       {
         question: "Can Codex write the same Wenlan memory as Claude Code?",
@@ -1411,7 +1446,15 @@ const baseArticles: LearnArticle[] = [
     officialReferences: [
       {
         label: "Codex memories docs",
-        href: "https://developers.openai.com/codex/memories",
+        href: "https://learn.chatgpt.com/docs/customization/memories",
+      },
+      {
+        label: "OpenAI Codex: generated memory file map (pinned implementation)",
+        href: "https://github.com/openai/codex/blob/22dd9ad3929253ed24d7ee4f10f238e95ab25f37/codex-rs/memories/write/templates/memories/consolidation.md",
+      },
+      {
+        label: "OpenAI Codex: memory lookup instructions (pinned implementation)",
+        href: "https://github.com/openai/codex/blob/de513a83f3fa8ae7a4b1af8dbe34e3d20ebe4f84/codex-rs/ext/memories/templates/memories/read_path.md",
       },
       {
         label: "Codex AGENTS.md guide",
