@@ -23,6 +23,12 @@ export function DownloadPage({ locale, release = WENLAN_RELEASE }: { locale: Loc
     }
     return { ...asset, ...platform };
   });
+  const installationGuides = platforms.filter(
+    (platform, index) =>
+      platform.guideHref &&
+      platform.guideLabel &&
+      platforms.findIndex((item) => item.guideHref === platform.guideHref) === index,
+  );
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -122,20 +128,52 @@ export function DownloadPage({ locale, release = WENLAN_RELEASE }: { locale: Loc
         />
 
         <section className="px-5 py-12 sm:px-6 sm:py-16">
-          <div className="mx-auto grid max-w-5xl gap-8 border-b border-[var(--o-border)] pb-12 md:grid-cols-[minmax(0,1fr)_minmax(280px,0.72fr)] md:items-center">
+          <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
             <div>
               <h2 className="font-serif text-3xl font-medium tracking-tight">
-                {content.verifyTitle}
+                {content.nextTitle}
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-[var(--o-text-secondary)]">
-                {content.verifyDescription}
+                {content.nextDescription}
               </p>
             </div>
-            <code className="block overflow-x-auto rounded-lg bg-[var(--o-bg-deep)] px-5 py-4 font-mono text-sm text-[var(--o-warm)]">
+            <TrackedLocalizedLink
+              href="/docs/get-started"
+              eventName="get_started_click"
+              placement="download-page"
+              locale={locale}
+              context="setup"
+              className="inline-flex min-h-11 w-fit max-w-full items-center justify-center rounded-lg bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] press-wenlan focus-wenlan"
+            >
+              {content.getStartedLabel}
+            </TrackedLocalizedLink>
+          </div>
+          <details className="group mx-auto mt-8 max-w-5xl">
+            <summary className="flex min-h-11 cursor-pointer list-none items-center gap-3 py-3 text-sm font-medium text-[var(--o-text-secondary)] hover:text-[var(--o-text)] focus-wenlan [&::-webkit-details-marker]:hidden">
+              {content.verifyTitle}
+              <span aria-hidden="true" className="text-lg transition-transform group-open:rotate-45 motion-reduce:transition-none">+</span>
+            </summary>
+            <div className="flex flex-col items-start">
+              {installationGuides.map((platform) => (
+                <TrackedLink
+                  key={platform.guideHref}
+                  href={platform.guideHref!}
+                  eventName="get_started_click"
+                  placement="download-page"
+                  locale={locale}
+                  context="setup"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center py-2 text-sm font-medium text-[var(--o-text-secondary)] underline underline-offset-4 hover:text-[var(--o-warm)] focus-wenlan"
+                >
+                  {platform.guideLabel}
+                </TrackedLink>
+              ))}
+            </div>
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-[var(--o-text-secondary)]">{content.verifyDescription}</p>
+            <code className="mt-4 block max-w-xl overflow-x-auto rounded-lg bg-[var(--o-bg-deep)] px-5 py-4 font-mono text-sm text-[var(--o-warm)]">
               wenlan doctor
             </code>
-          </div>
-          <div className="mx-auto mt-8 flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center">
             <TrackedLink
               href={release.setupGuideUrl}
               eventName="get_started_click"
@@ -144,21 +182,11 @@ export function DownloadPage({ locale, release = WENLAN_RELEASE }: { locale: Loc
               context="setup"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center justify-center rounded-lg border border-[var(--o-border)] px-5 py-3 text-center text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:border-[var(--o-text-dim)] hover:text-[var(--o-text)] focus-wenlan"
+              className="mt-2 inline-flex min-h-11 items-center py-2 text-sm font-medium text-[var(--o-text-secondary)] underline underline-offset-4 hover:text-[var(--o-warm)] focus-wenlan"
             >
               {content.setupGuideLabel}
             </TrackedLink>
-            <TrackedLocalizedLink
-              href="/docs/get-started"
-              eventName="get_started_click"
-              placement="download-page"
-              locale={locale}
-              context="setup"
-              className="inline-flex min-h-11 items-center justify-center rounded-lg bg-[var(--o-text)] px-5 py-3 text-center text-sm font-semibold text-[var(--o-bg)] press-wenlan focus-wenlan"
-            >
-              {content.getStartedLabel}
-            </TrackedLocalizedLink>
-          </div>
+          </details>
         </section>
       </article>
     </main>

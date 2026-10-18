@@ -1,9 +1,14 @@
+import { readFileSync } from "node:fs";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { enContent } from "../src/i18n/content/en.ts";
 import { zhCNContent } from "../src/i18n/content/zh-CN.ts";
 import { zhTWContent } from "../src/i18n/content/zh-TW.ts";
 import { assertProtectedTokensPreserved } from "../src/i18n/protected-tokens.ts";
+import { storyCopyByLocale } from "../src/components/home/home-story-copy.ts";
+
+const capabilityExtensions = readFileSync(new URL("../src/components/home/capability-extensions.tsx", import.meta.url), "utf8");
+const capabilityArtifacts = readFileSync(new URL("../src/components/home/capability-artifacts.tsx", import.meta.url), "utf8");
 
 const dictionaryByLocale = {
   en: enContent,
@@ -267,29 +272,31 @@ const oldClaims = {
   ],
 };
 
-test("hero promises to organize notes and AI chats into a maintained personal knowledge base", () => {
+test("hero leads with useful outcomes and describes knowledge that can be revised without an accuracy guarantee", () => {
   const expected = {
     en: {
-      eyebrow: "A personal wiki for you and your AI",
-      headline: ["Turn notes and AI chats", "into your knowledge base."],
-      description: /scattered.*good ideas.*chats.*organize key points.*up to date.*AI can find what it needs/i,
+      eyebrow: "A personal knowledge base, maintained with AI",
+      headline: ["Bring your knowledge", "to life."],
+      description: "Wenlan is your personal knowledge base, maintained with AI. Connect notes, files, and chats into knowledge you and your AI tools can find and use.",
     },
     "zh-TW": {
-      eyebrow: "你與 AI 共用的個人 Wiki",
-      headline: ["把筆記與 AI 對話，", "整理成你的知識庫。"],
-      description: /檔案散在各處.*好點子留在對話裡.*整理重點、持續更新.*方便查閱.*AI 更容易找到需要的資訊/,
+      eyebrow: "AI 協助維護的個人知識庫",
+      headline: ["用你的知識，", "找到答案、完成工作。"],
+      description: "由 AI 協助維護的個人知識庫。文瀾將筆記、文件與對話連成可持續更新的知識，供你與 AI 查找、使用。",
     },
     "zh-CN": {
-      eyebrow: "你与 AI 共用的个人 Wiki",
-      headline: ["把笔记和 AI 对话，", "整理成你的知识库。"],
-      description: /文件散落各处.*好点子留在对话里.*整理重点、持续更新.*方便你查阅.*AI 更容易找到需要的信息/,
+      eyebrow: "AI 协助维护的个人知识库",
+      headline: ["用你的知识，", "找到答案、完成工作。"],
+      description: "由 AI 协助维护的个人知识库。文澜将笔记、文档与对话连成可持续更新的知识，供你与 AI 查找、使用。",
     },
   };
   for (const [locale, dictionary] of Object.entries(dictionaryByLocale)) {
     const hero = dictionary.home.content.redesign.hero;
     assert.equal(hero.eyebrow, expected[locale].eyebrow, `${locale}: product category`);
-    assert.deepEqual([hero.headline.pre, hero.headline.emphasis], expected[locale].headline, `${locale}: outcome headline`);
-    assert.match(hero.description, expected[locale].description, `${locale}: pain, maintenance, and AI retrieval benefits`);
+    assert.deepEqual([hero.headline.pre, hero.headline.emphasis], expected[locale].headline, `${locale}: benefit-led headline`);
+    assert.equal(hero.description, expected[locale].description, `${locale}: dictionary hero description`);
+    assert.equal(storyCopyByLocale[locale].heroDescription, expected[locale].description, `${locale}: rendered hero description`);
+    assert.doesNotMatch(storyCopyByLocale[locale].heroDescription, /always correct|never forget|保證正確|保证正确|永不忘記|永不忘记/i);
   }
 });
 
@@ -363,11 +370,36 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     assert.match(pipelineTitles, /next|下一|下一个|下次/i);
     assert.match(home.redesign.pipeline.intro, /setup|設定|配置/);
 
-    const bentoText = home.redesign.bento.cells.map((cell) => `${cell.title} ${cell.body}`).join(" ");
-    assert.match(bentoText, /source|來源|来源/i);
-    assert.match(bentoText, /review|審核|审核/);
-    assert.match(bentoText, /configured|設定|配置/);
-    assert.match(bentoText, /source link.*prove every claim|來源連結本身不代表每個主張|来源链接本身不代表每个主张/i);
+    const cards = home.redesign.bento.cells;
+    assert.deepEqual(cards.map(({ id }) => id), ["sources", "obsidian", "steep", "topics", "tools", "web-access", "spaces", "history"], `${locale}: revised capability coverage`);
+    assert.match(cards.find(card => card.id === "steep").body, /Steep/);
+    assert.match(cards.find(card => card.id === "steep").body, /model configured|設定背景模型|配置后台模型/);
+    // Details remain available on demand while the intro stays short.
+    assert.match(capabilityArtifacts, /search cues/);
+    assert.match(capabilityArtifacts, /搜尋線索/);
+    assert.match(capabilityArtifacts, /搜索线索/);
+    const sourceIllustration = capabilityArtifacts.match(/^    sources: (.+),$/gm)[["en", "zh-TW", "zh-CN"].indexOf(locale)];
+    assert.match(sourceIllustration, /Markdown/);
+    assert.match(sourceIllustration, /Text-based PDF|文字型 PDF|文本型 PDF/);
+    assert.match(sourceIllustration, /ChatGPT.*Claude/);
+    assert.match(cards.find(card => card.id === "sources").body, /URL|網址|网址/);
+    assert.doesNotMatch(cards.find(card => card.id === "sources").body, /any file|every format|任何檔案|任何文件/);
+    assert.match(cards.find(card => card.id === "obsidian").body, /read-only|唯讀|只读/);
+    assert.match(cards.find(card => card.id === "obsidian").body, /on demand|when needed|按需|需要時|需要时/);
+    assert.match(cards.find(card => card.id === "tools").body, /MCP/);
+    assert.match(cards.find(card => card.id === "spaces").body, /Spaces/);
+    assert.match(cards.find(card => card.id === "history").body, /page revisions|知識頁.*修訂|知识页.*修订/i);
+    assert.match(capabilityArtifacts, /Replaces earlier memory/);
+    assert.match(capabilityArtifacts, /取代先前記憶/);
+    assert.match(capabilityArtifacts, /取代先前记忆/);
+    const webAccess = cards.find(card => card.id === "web-access");
+    assert.match(capabilityExtensions, /Only the Space you approve is shared/);
+    assert.match(capabilityExtensions, /授權的 Space/);
+    assert.match(capabilityExtensions, /授权的 Space/);
+    assert.match(webAccess.body, /online|在線|在线/);
+    assert.doesNotMatch(webAccess.body, /any file|all files|任何檔案|所有檔案|任何文件|所有文件/);
+    assert.doesNotMatch(cards.map(({ title, body }) => `${title} ${body}`).join(" "), /\bgit\b|commit|revert|還原|还原/i);
+    assert.doesNotMatch(faqById(home, "memory-mcp").a, /\bgit\b/i);
 
     const tradeoffText = home.redesign.storage.tradeoffs
       .map((tradeoff) => `${tradeoff.title} ${tradeoff.body}`)
@@ -379,9 +411,10 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
 
     assert.match(home.redesign.metrics.title, /retrieval|檢索|检索/i);
     assert.doesNotMatch(home.redesign.metrics.title, /96%/);
-    assert.match(home.redesign.metrics.footnote, /retrieval-only|Retrieval-only/);
+    assert.match(home.redesign.metrics.footnote, /separate from LongMemEval retrieval quality|與 LongMemEval 檢索品質分開測量|与 LongMemEval 检索质量分开测量/);
+    assert.match(home.redesign.metrics.footnote, /do not establish answer accuracy|不代表回答正確率|不代表回答正确率/);
     assert.match(home.redesign.metrics.footnote, /general|一般|通用/);
-    assert.match(home.redesign.metrics.footnote, /compare|比較|比较/);
+    assert.match(home.redesign.metrics.footnote, /compar(?:e|ison)|比較|比较/);
 
     const setupFaq = faqById(home, "setup");
     const notesFaq = faqById(home, "not-notes");
@@ -397,4 +430,22 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     const learnLinks = dictionary.footer.content.groups.find((group) => group.id === "learn")?.links ?? [];
     assert.deepEqual(learnLinks.map((link) => link.href), comparisonLinks, `${locale} footer comparison links changed`);
   }
+});
+
+
+test("context token figures are not attributed to LongMemEval retrieval quality", () => {
+  for (const [locale, dictionary] of Object.entries(dictionaryByLocale)) {
+    const metrics = dictionary.home.content.metrics;
+    for (const row of metrics.rows.filter(({ id }) => id.startsWith("lme-"))) {
+      assert.doesNotMatch(row.result, /tokens/i, `${locale}/${row.id}: LoCoMo tokens cannot accompany LME scores`);
+    }
+    const bars = dictionary.home.content.redesign.metrics;
+    assert.match(bars.footnote, /LoCoMo/);
+    assert.doesNotMatch(JSON.stringify(bars.bars), /500|CE-reranked/);
+  }
+  const home = readFileSync(new URL("../src/app/_pages/home.tsx", import.meta.url), "utf8");
+  assert.match(home, /43d905dceb92b7f6f454443c1097f090c3b61170/);
+  assert.match(home, /integrations\.tokenUnit/);
+  assert.match(home, /integrations\.contextScope/);
+  assert.match(home, /integrations\.recallScope/);
 });

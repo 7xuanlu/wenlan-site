@@ -5989,7 +5989,7 @@ test("Learn index SERP copy leads with LLM wiki and knowledge-base intent", asyn
   assert.doesNotMatch(learnOgImage, /Before you add memory to AI work\./);
 });
 
-test("homepage acquisition links expose the three-locale tool-selection guide", async () => {
+test("reading guides remain available through Resources and Learn", async () => {
   const [homePageComponent, ...homepages] = await Promise.all([
     readRepo("src/app/_pages/home.tsx"),
     ...["en", "zh-TW", "zh-CN"].map((locale) =>
@@ -6006,10 +6006,11 @@ test("homepage acquisition links expose the three-locale tool-selection guide", 
   assert.match(homepages[0], /How do you choose an AI knowledge base tool/);
   assert.match(homepages[1], /如何挑選 AI 知識庫工具/);
   assert.match(homepages[2], /如何挑选 AI 知识库工具/);
-  assert.match(
-    homePageComponent,
-    /aria-labelledby="home-reading-heading"/,
-  );
+  assert.doesNotMatch(homePageComponent, /aria-labelledby="home-reading-heading"/);
+  const resources = await readRepo("src/components/resource-navigation.ts");
+  assert.match(resources, /id === "docs" \|\| id === "learn"/);
+  const learnIndex = await readRepo("src/app/learn/page.tsx");
+  assert.match(learnIndex, /choose-ai-knowledge-base-tool/);
 });
 
 test("configuration docs link to the Claude Code memory guide", async () => {

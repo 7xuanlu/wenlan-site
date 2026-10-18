@@ -1,0 +1,27 @@
+{
+  "status": "local-preview-only",
+  "fixture": "readme-personal-kb-20261012",
+  "basis": [
+    "graph-after-v10.json",
+    "graph-map-v11.json",
+    "v10-verification.json"
+  ],
+  "assets": {
+    "kb-native-v10.png": {
+      "sha256": "f8b54f5630e01530677b77eb2cc352c87e79b094651a684de0d84fa1666f1c0b",
+      "role": "untouched native App capture"
+    }
+  },
+  "presentation": "Native node coordinates and area layer uniformly rotated -30 degrees. Edges from captured page, entity, and memory records. Website labels, interaction, growth order, retrieval examples, and checklists are explanatory recreations, not execution traces.",
+  "counts": {
+    "pages": 19,
+    "topics": 3,
+    "memories": 9,
+    "files": 2
+  },
+  "limits": [
+    "Native graph count of 11 memory rows includes 2 imported files; website types them as files.",
+    "Fixture contains URL and Markdown sources; PDF and Obsidian are capability explanations.",
+    "Source notes retain original Traditional Chinese text in translated website interfaces."
+  ]
+}

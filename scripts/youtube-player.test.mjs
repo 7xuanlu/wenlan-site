@@ -14,6 +14,7 @@ function fixture({ cold = false } = {}) {
   let frame;
   let constructs = 0;
   let destroys = 0;
+  let resume;
   const player = { playVideo() { events.push('play'); }, destroy() { destroys++; } };
   globalThis.window = {
     location: { origin: 'http://localhost:3214' },
@@ -29,7 +30,7 @@ function fixture({ cold = false } = {}) {
   };
   const host = { contains() { return false; }, append(element) { frame = element; }, replaceChildren() { frame = undefined; } };
   const dispose = mountDemoPlayer(host, 'https://www.youtube-nocookie.com/embed/example?autoplay=1', 'Demo', {
-    onReady() { events.push('ready'); },
+    onReady(play) { resume = play; events.push('ready'); },
     onError(reason) { events.push('error'); errors.push(reason); },
   });
   return {
@@ -37,6 +38,7 @@ function fixture({ cold = false } = {}) {
     loadApi() { globalThis.window.YT = api; globalThis.window.onYouTubeIframeAPIReady(); },
     get options() { return options; }, get frame() { return frame; },
     get constructs() { return constructs; }, get destroys() { return destroys; },
+    get resume() { return resume; },
     player,
     restore() { dispose(); globalThis.window = oldWindow; globalThis.document = oldDocument; },
   };
@@ -93,6 +95,24 @@ test('leaving before the API resolves cannot create an orphan player', async () 
     assert.equal(f.constructs, 0);
     assert.deepEqual(f.events, []);
     assert.equal(f.timers.size, 0);
+  } finally { f.restore(); }
+});
+
+test('collapsing a ready video destroys it and prevents later hidden playback', async () => {
+  const f = fixture();
+  try {
+    await flush();
+    f.options.events.onReady({ target: f.player });
+    const eventsBeforeClose = [...f.events];
+    f.dispose();
+    assert.equal(f.frame, undefined);
+    assert.equal(f.destroys, 1);
+    assert.equal(f.timers.size, 0);
+    f.resume();
+    f.options.events.onReady({ target: f.player });
+    f.dispose();
+    assert.deepEqual(f.events, eventsBeforeClose);
+    assert.equal(f.destroys, 1);
   } finally { f.restore(); }
 });
 

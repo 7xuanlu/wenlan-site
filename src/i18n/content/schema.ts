@@ -141,6 +141,8 @@ export type HomeContent = SeoContent & {
       releaseSourceLabel: string;
       setupGuideLabel: string;
       getStartedLabel: string;
+      nextTitle: string;
+      nextDescription: string;
     };
   };
   useCases: {

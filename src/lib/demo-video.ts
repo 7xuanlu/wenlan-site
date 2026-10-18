@@ -1,23 +1,13 @@
 import type { Locale } from "@/i18n/locales";
 
-export type DemoVideo = {
-  videoId: string;
-  embedUrl: string;
-  posterUrl: string;
-};
+export type DemoVideo = { videoUrl: string; posterUrl: string };
+const languages = { en: "en", "zh-TW": "zh-Hant", "zh-CN": "zh-Hans" } as const satisfies Record<Locale, string>;
 
-const DEMO_VIDEO_IDS = {
-  en: "4r3_rJVjBwI",
-  "zh-TW": "NPJMRityir4",
-  "zh-CN": "HGh7br0SPFI",
-} as const satisfies Record<Locale, string>;
-
+// R131 shared media. Versioned paths keep previous films out of caches.
 export function demoVideoForLocale(locale: Locale): DemoVideo {
-  const videoId = DEMO_VIDEO_IDS[locale];
-
+  const language = languages[locale];
   return {
-    videoId,
-    embedUrl: `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`,
-    posterUrl: "/images/wenlan-agent-handoff-loop.png",
+    videoUrl: `https://media.wenlan.app/media/r131/Wenlan-R131-${language}-16x9-AB.mp4`,
+    posterUrl: `https://media.wenlan.app/media/r131/Wenlan-R131-${language}-poster.jpg`,
   };
 }

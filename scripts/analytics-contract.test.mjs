@@ -162,19 +162,9 @@ test("waitlist source keeps Resend opt-in and Umami email exclusion explicit", a
   assert.doesNotMatch(trackingCall, /email|utm|referrer/i);
 });
 
-test("homepage acquisition links preserve their exact analytics tuple", async () => {
-  const homeSource = await readFile(
-    new URL("../src/app/_pages/home.tsx", import.meta.url),
-    "utf8",
-  );
-  const acquisitionNav = homeSource.match(
-    /<nav[\s\S]*?content\.hero\.metaLinks\.map[\s\S]*?<\/nav>/,
-  )?.[0];
-
-  assert.ok(acquisitionNav, "homepage acquisition nav must render hero meta links");
-  assert.match(acquisitionNav, /eventName="learn_article_click"/);
-  assert.match(acquisitionNav, /placement="home-acquisition"/);
-  assert.match(acquisitionNav, /context="concepts"/);
+test("homepage no longer emits the removed reading section's acquisition events", async () => {
+  const homeSource = await readFile(new URL("../src/app/_pages/home.tsx", import.meta.url), "utf8");
+  assert.doesNotMatch(homeSource, /id="home-reading"|placement="home-acquisition"/);
 });
 
 test("download-page placement preserves the bounded outbound event shape", (t) => {

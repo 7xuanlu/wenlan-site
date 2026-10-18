@@ -38,7 +38,6 @@ test("every localized comparison has setup and two-sided choice guidance", () =>
 });
 
 test("comparison page keeps the native chooser and routes each alternative to its details", () => {
-  assert.match(homeSource, /<PainsSection copy=\{redesign\.fit\} locale=\{locale\}/);
   assert.match(comparisonSource, /<TrackedLocalizedLink/);
   assert.match(comparisonSource, /href=\{`\/learn\/choose-ai-knowledge-base-tool#workflow-\$\{row\.id\}`\}/);
   assert.doesNotMatch(comparisonSource, /<details\b/);

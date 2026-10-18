@@ -21,9 +21,11 @@ const emptyAttribution: SignupAttribution = {
 export function WaitlistForm({
   copy,
   locale,
+  showPurpose = true,
 }: {
   copy: WaitlistContent;
   locale: Locale;
+  showPurpose?: boolean;
 }) {
   const [state, action, isPending] = useActionState(joinWaitlist, null);
   const [email, setEmail] = useState("");
@@ -92,7 +94,7 @@ export function WaitlistForm({
       <label htmlFor={emailInputId} className="sr-only">
         {copy.emailLabel}
       </label>
-      <p id={purposeId} className="mb-3 text-xs leading-relaxed text-[var(--o-text-muted)]">
+      <p id={purposeId} className={showPurpose ? "mb-3 text-xs leading-relaxed text-[var(--o-text-muted)]" : "sr-only"}>
         {copy.purpose}
       </p>
       <div className="flex min-w-0 flex-wrap gap-2">
@@ -109,12 +111,12 @@ export function WaitlistForm({
           aria-invalid={errorMessage ? true : undefined}
           placeholder={copy.emailPlaceholder}
           disabled={isPending}
-          className="min-w-0 flex-1 rounded-lg border border-[var(--o-border)] bg-[var(--o-input-bg)] px-4 py-3 text-sm text-[var(--o-text)] placeholder-[var(--o-text-muted)] outline-none transition-colors duration-150 focus:border-[var(--o-warm)]/40 focus:bg-[var(--o-input-focus-bg)] disabled:opacity-50"
+          className="h-12 min-w-0 flex-1 rounded-lg border border-[var(--o-border)] bg-[var(--o-input-bg)] px-4 py-3 text-sm text-[var(--o-text)] placeholder-[var(--o-text-muted)] outline-none transition-colors duration-150 focus:border-[var(--o-warm)]/40 focus:bg-[var(--o-input-focus-bg)] disabled:opacity-50"
         />
         <button
           type="submit"
           disabled={isPending}
-          className="shrink-0 rounded-lg bg-gradient-to-r from-[var(--o-warm)] to-[var(--o-warm-hover)] px-5 py-3 text-sm font-semibold text-[var(--o-btn-text)] transition-all duration-150 hover:-translate-y-0.5 disabled:opacity-50"
+          className="h-12 shrink-0 rounded-lg bg-gradient-to-r from-[var(--o-warm)] to-[var(--o-warm-hover)] px-5 py-3 text-sm font-semibold text-[var(--o-btn-text)] transition-all duration-150 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--o-warm)] motion-reduce:transform-none motion-reduce:transition-none disabled:translate-y-0 disabled:opacity-50"
         >
           {isPending ? (
             <span className="inline-flex items-center gap-2">

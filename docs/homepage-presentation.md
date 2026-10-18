@@ -1,5 +1,19 @@
 # Homepage presentation contract
 
+## Section headings and product evidence — current local preview
+
+The graph and update sections put their primary heading and concise explanation
+in localized HTML, using the existing AI section's typography and spacing. Remove
+the duplicate small section labels. The visual beneath carries the product proof:
+region labels stay on the graph; update states, source content and relation arrows
+stay on the update composition. The graph keeps its presentation crop. The rebuilt update illustration has no baked-in heading and is displayed in full in both the preview and enlarged viewer. Keep the approved README graph unchanged. The update illustration uses the
+localized clarity revision described below; the viewer retains its file link. Preserve the opening demo, AI interaction, eight capability cards, graph
+legend and existing palette. Both image frames use the Wenlan demo’s 12px radius,
+fine cool-gray border and restrained shadow, with matching horizontal insets.
+Keep graph top spacing compact and give the update composition more top padding.
+On phones, both images open in the same full-screen viewer at a 1200px detail
+width; Fit and Close remain available. Preserve the graph crop proportions and use the actual asset dimensions. This direction applies only to the local preview.
+
 The homepage leads with continuation of useful work, not a generic promise to
 organize information. Living Wiki remains the product category; it is not a
 substitute for explaining what a visitor can do next.
@@ -173,10 +187,14 @@ and the existing tracked-link semantics.
    jointly support maintained Pages; updates retain history and protect human
    writing through review. Configuration boundaries belong in setup/detail copy,
    not a defensive disclaimer appended to the main benefit.
-   Benchmarks lead with the main-branch token bars (4,505 versus 168, on one
-   zero-based scale). Quality metrics remain separate. The complete three-column
-   table and scope stay in native expandable details, not a headline savings
-   promise. FAQ and final download / email paths remain.
+   The evaluation explains full replay, retrieval, and context tokens in plain
+   language. Keep two sources visibly separate: the historical LoCoMo context
+   comparison (4,505 versus 168; README commit 43d905dceb92b7f6f454443c1097f090c3b61170),
+   and the LME_Oracle retrieval score (93.6% Recall@5, 500 questions). The token
+   run's raw artifact and exact settings have not been recovered; neither test
+   was rerun for this presentation. Do not describe the token bars as a 500-query
+   CE-reranked result. Link the historical source and the full evaluation methods.
+   Keep the download closing and all accepted product sections unchanged.
 8. The same-case Wenlan and Claude product views have
    a switchable, expandable showcase integrated into the fit section. The graph
    is restored in its own connections section, outside the three fit stages. Preserve real pixels even when
@@ -187,6 +205,38 @@ The evaluation date is explicitly a source snapshot date (2026-06-24), not a
 new benchmark run. Card surfaces use 8px radii and media frames 12px; the hero
 scenario card must follow the same panel scale. Motion establishes entry
 hierarchy and interaction feedback, with visible SSR and reduced-motion fallbacks.
+
+## Put to work presentation
+
+Preserve the two-app example: missing personal context produces questions and a
+scaffold; saved decisions lead to an operable reader. One parent-owned timeline
+runs the entire 11.5-second sequence, with 2.2 seconds for each evidence lane.
+The active source, affected feature and full connector appear together, with no
+separate line-drawing delay. Pause, replay and reduced motion remain available.
+
+Use the actual R131 S7 references at 25s and 28s, plus its
+`s7v19/RetrievalEvidence.tsx` for warm paper and dark ink. Use pale sand
+(#F3F0E9) for paired highlights and muted warm gray (#A18A6B) for connecting lines;
+keep text dark. Avoid purple, electric blue and green-filled panels.
+The finished reader demonstrates a fixed origin, text reflow and shared layout
+through real controls: sidebar, width and content-type icons. Graph switches the
+content type within the same reader, then finishes on Agent Loop with its actual
+intro and reusable decision from the shared localized fixture. The source divider
+meets the toolbar edge and extends to the reader bottom; on mobile, sources form
+a compact row beneath the article. Manual reader actions preserve the current
+width, sidebar and type before changing the selected control; they do not apply
+other automatic evidence effects. Target the selected icon, never highlight the
+whole type toolbar. Replay goes directly from the draft into the connection
+scene, without a duplicate connect CTA. Remove the redundant four-type check list
+and effect chips. A single View process disclosure holds the draft and full
+answer; source inspection remains available without opening it automatically.
+Paired controls share 12px type, 1.5 line height and 16px UI icons; footer
+status and next-scenario controls share a 44px aligned row. Keep title/body/meta
+levels distinct and mobile controls at least 44px tall.
+Desktop frames share their natural height; optional details expand with the
+page instead of an internal scrollbar. Preserve other homepage sections and
+the illustrative-example caption. Browser verification is required separately
+from successful source checks; do not label this example as measured output.
 
 ## Interaction and content boundaries
 
@@ -349,3 +399,19 @@ Antigravity uses the official one-color mark as a currentColor alpha mask, match
 neighboring glyphs in both themes; remove the visible manual-setup annotation but
 retain the official MCP documentation link. No integration capability changed.
 Official asset: https://antigravity.google/assets/image/brand/antigravity-icon__one-color.png
+
+### Closing navigation
+
+End with a centered, standalone download section: title, short body and one primary button. Keep the release subscription in the homepage footer's left brand area below the tagline, with the directly visible email field, existing warm Subscribe button and a short localized “Release updates” heading. The footer keeps its three navigation columns, with no new borders, dividers or cards; the subscription stays homepage-only. Licensing remains accessible through the footer link. Evaluation separates historical LoCoMo context volume (tokens are text units) from LongMemEval retrieval coverage; neither measures answer accuracy. Keep dataset scopes and the methodology destination visible.
+
+The footer uses Product, Resources and Community groups. References: https://heptabase.com/ footer separates product/download/resources/company; https://obsidian.md/ footer separates getting started, learning and community; https://www.kuku.mom/ uses a compact set of destinations. Borrow purpose-based grouping and restraint, not their number of columns. Remove the standalone LLM wiki guide shortcut; it remains under Learn. Keep the README Discord invite, source repository and issue reporting. Constrain the three-column navigation to 34rem with zero-minimum grid tracks, rather than stretching it across the remaining width. Mobile uses two columns and natural text wrapping. Author and license sit opposite language and the restrained ToolPilot badge. No divider lines.
+
+Describe the product naturally in each language: “Your personal knowledge base, kept up to date with AI.” and “AI 幫你整理、持續更新的個人知識庫。” Preserve all earlier demonstrations, capability cards, hero copy and ownership copy.
+
+### Localized evidence images
+
+Use the approved README English, Traditional Chinese and Simplified Chinese PNGs for the graph and video cover. The update-history illustration uses three synchronized native vector variants, rendered from `scripts/render-update-visuals.cjs` to editable SVG and 4800 × 2160 lossless PNG (no raster or image-generated input): a source-file card with a compact two-line diff (struck-through old test-only requirement, new desktop/mobile UI checks) and an arrow into Steep; the metadata says only Source file, soft pale-cream highlights only on the new screen-check requirement, a green checkmark and completed-update label, and a warm clock/pending-review label. Use green V2 labels matching completed-update status, warm solid automatic-update connectors, a muted-blue Steep ring with neutral function icons/labels, and a dashed neutral connector for pending revisions. Remove the redundant upkeep label. Place the knowledge/memory category inside both V1 and V2 cards; omit the standalone category above them. Preserve the native composition and record edited provenance plus exact hashes in public/images/home/readme/provenance.json; these edited illustrations are not unmodified App captures. The site keeps its existing frames and zoom controls. The update illustration has no baked heading and no presentation crop; it bypasses lossy image optimization. Other images retain their existing crops. Image dimensions must match each current master. Source changes enter Steep, which points to the new V2 and page outcomes; the separate gray V1-to-V2 arrow expresses history. Regenerate with `node scripts/render-update-visuals.cjs` after a local build supplies Instrument Sans (or set `WENLAN_VISUAL_FONT`); Chinese rendering uses PingFang on macOS. Do not substitute Traditional Chinese masters on English or Simplified Chinese pages. These are localized App composites and illustrative relationships, not newly captured native locale sessions. Other capability views and interactions remain unchanged.
+
+### Steep capability motion
+
+Preserve the existing source/memory inputs and three result drawings shown in the user's 2026-10-17 21:51 reference. The process uses mineral blue (#638DA5 light / #8FB1C5 dark), while memory, graph and warning glyphs retain their semantic colors. The center uses the canvas background and three stationary arcs, not a rotating loading indicator. Incoming traces arrive in 850ms; then each arc, branch and result shares a 720ms reveal, with 1400ms between results. Finish in 5.05s and remain still. Selecting a result completes the intro and highlights its relationship without restarting playback or adding a background. Reduced motion shows the finished state. Other cards and the accepted static update illustration are unchanged.

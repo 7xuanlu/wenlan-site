@@ -1,0 +1,289 @@
+{
+  "productCommit": "ae980577e909f083160bbf7495eb7fd13905a1ef",
+  "productPR": 855,
+  "releaseStatus": "development build; not a v0.19 release claim",
+  "data": "Fictional Lumo reading-app launch project, authored in three locales",
+  "capture": "Native Wenlan and Claude windows. Original JPEG/PNG captures; CSS presentation crops only.",
+  "harness": "Isolated data directory, background AI disabled. Nonvisual Tauri test guest listener enabled. The 12 refreshed wiki captures also include the local App source-label fix recorded below. Transient focus was cleared and WebKit style state recomputed before capture; no image retouching or persistent CSS override.",
+  "exercised": [
+    "Source-linked authored wiki pages",
+    "Proposed page revision review and UI approval in all three locales",
+    "Manual announcement note preserved after approval",
+    "Claude Opus 5.5 read_page via isolated Wenlan MCP and generated conditional announcement",
+    "Native graph selection and linked-page/source display",
+    "Nine actual Markdown files imported through directory sources and assigned to their matching demo Spaces",
+    "Wiki source links opened the imported Markdown documents in the native side pane",
+    "Native linked-page hover previews in English, Traditional Chinese and Simplified Chinese",
+    "Refreshed wiki scenes: localized file labels and source-neutral page counts from the local App fix; original imported Markdown still opens.",
+    "Memory dossier opened from page source and followed back to a citing page. Three localized dossiers captured through isolated WenlanSiteDemo window; original nine Markdown files included byte-for-byte."
+  ],
+  "limits": [
+    "Authored fixtures do not demonstrate automatic page generation or autonomous upkeep.",
+    "AI result is one demonstration, not a reliability benchmark.",
+    "Revision approval and page confirmation are separate states; the AI accurately retained the unconfirmed-page warning.",
+    "Homepage hover and source controls switch recorded native screenshots, not a live Wenlan instance."
+  ],
+  "assets": [
+    {
+      "file": "en-ai.jpg",
+      "sha256": "3ab4a1690e442944dd701e111432d2b07602af5f8f0b71bf74ac8d393e5d38c3",
+      "bytes": 294619
+    },
+    {
+      "file": "en-graph.jpg",
+      "sha256": "2adf92a5737055681875c4d5809e80affd36bb327e44bc580f495371f74a4876",
+      "bytes": 272884
+    },
+    {
+      "file": "en-updates.jpg",
+      "sha256": "260b1724a60f6ff61fce6252944f373f7a1a2682d03ba79127a968eed23b7502",
+      "bytes": 534507
+    },
+    {
+      "file": "en-wiki-preview-checklist-source-label-20261012.jpg",
+      "sha256": "6bde5d7cd4306da91c0286a2de53c57bf6a004891bdc72e1ccc5a3902c8bc6f7",
+      "bytes": 475715,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "en-wiki-preview-decision-source-label-20261012.jpg",
+      "sha256": "9679b28acf5559e9dbb34007b8211ded19079da32dba2ca11d1fad39ec252b9e",
+      "bytes": 504605,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "en-wiki-source-source-label-20261012.jpg",
+      "sha256": "f04869b7260b2f999b5a609395d8b7334970a9e3cce9b9bd89d938b898cf23db",
+      "bytes": 429227,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "en-wiki-source-label-20261012.jpg",
+      "sha256": "d47bbc8409e9ea58b88270480ae6a9e466ab7ac10b61b205de74bb49906f1793",
+      "bytes": 433250,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "zh-CN-ai.jpg",
+      "sha256": "6752bb005c3ed3c70c7aa79c0e1f3dbf5f02195499e36c8712962bdcb722e8ba",
+      "bytes": 278363
+    },
+    {
+      "file": "zh-CN-graph.jpg",
+      "sha256": "dff68f03f981bcf15a16ef993489403929a4d04e06e86e20a69bf0d92570345d",
+      "bytes": 237747
+    },
+    {
+      "file": "zh-CN-updates.jpg",
+      "sha256": "c877d1678cfc2264814c285b8806a3de8fefebd22d991c846a031719bb3e8557",
+      "bytes": 563282
+    },
+    {
+      "file": "zh-CN-wiki-preview-checklist-source-label-20261012.jpg",
+      "sha256": "d32bf59a5ff978e03b356321bc9b6cdead5acf72aa1b4d8ad9ae639400694c4b",
+      "bytes": 481275,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "zh-CN-wiki-preview-decision-source-label-20261012.jpg",
+      "sha256": "5181a288fc65e96cb73749c8af581b1be5ae23a204a519a38571a7accc36f9bf",
+      "bytes": 484234,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "zh-CN-wiki-source-source-label-20261012.jpg",
+      "sha256": "930b6ce523a68a65e29e1be1758569ceeeeb4616eb28662d381752efc2eddd3c",
+      "bytes": 384915,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "zh-CN-wiki-source-label-20261012.jpg",
+      "sha256": "c95b81b90ce998cba06542b58104cae45eeaab28f2c80b4a4f23fc58f7a1c22d",
+      "bytes": 404565,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "zh-TW-ai.jpg",
+      "sha256": "a8cedd66ebb25d72871af9ebf06dec39bda0fc305a48d8ce1a699e7fc61ec205",
+      "bytes": 283855
+    },
+    {
+      "file": "zh-TW-graph.jpg",
+      "sha256": "e3223fee00a535ee7e8cfb96d99dc310dfb61ab364d1aa583bc19b219d2009fa",
+      "bytes": 233932
+    },
+    {
+      "file": "zh-TW-updates.jpg",
+      "sha256": "6023e92e33dc708e7831a8030d650116e37e29cb98686cd312d1ca89b25a6a95",
+      "bytes": 566123
+    },
+    {
+      "file": "zh-TW-wiki-preview-checklist-source-label-20261012.jpg",
+      "sha256": "ab8233259a02003c54ca33fcaef0b3201ec1f6ec1042ce959d53ffc843043c73",
+      "bytes": 487887,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "zh-TW-wiki-preview-decision-source-label-20261012.jpg",
+      "sha256": "9c5c1cea34957f18cf95bbb16d89e4f8ee5df9e81fddf19c857c13168fd8528a",
+      "bytes": 491531,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "zh-TW-wiki-source-source-label-20261012.jpg",
+      "sha256": "cb341786f7746c75ead417eef3447bd24b9038490ad193f8013179fba7d38237",
+      "bytes": 393886,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "zh-TW-wiki-source-label-20261012.jpg",
+      "sha256": "061ee96f6f44375c48b5f81a8edaab8af9dc953391562c04787b5c550088dbea",
+      "bytes": 411285,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "sources/en/Beta round 3 report.md",
+      "sha256": "62e49d4897b340f5ad986508de8bf878d9f31d5ccfdc9a6816f910cdd6264c65",
+      "bytes": 333,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "sources/en/Launch checklist.md",
+      "sha256": "af59ff4803c6cdd7cbc53f5ef492bac062332810488014789bafb0db0e7cbfa8",
+      "bytes": 457,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "sources/en/Lumo 2.0 kickoff meeting.md",
+      "sha256": "cf40b6d703c639b3f44b2b32575416615d29699d8052df8039ec0a7d5361e09c",
+      "bytes": 346,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "en-memory-20261012.png",
+      "sha256": "16aea792443cfc0049eb56c00b46709ccb600ccc33f8758d139df675f631383c",
+      "bytes": 199046,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "en-sources-20261012.jpg",
+      "sha256": "e5432c4d62c1eeed1e7bf8f915f5ac71f09898a7c513ec8f46c4a615fab1dfd7",
+      "bytes": 501891,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "sources/zh-TW/Beta 第 3 輪報告.md",
+      "sha256": "da81654a2ded54e398349adb4d8774a5ae93392f1679c0ec260ce5a963a9385e",
+      "bytes": 320,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "sources/zh-TW/Lumo 2.0 啟動會議.md",
+      "sha256": "9b4749ef2fe47d38e3ee25cef6928276187e218e03ab2d743ad1dd07183f6bc7",
+      "bytes": 307,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "sources/zh-TW/上線檢查清單.md",
+      "sha256": "6ac1c50b90bce1184e11041f61fa92440101611947047a69880f005adb1be4b5",
+      "bytes": 436,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "zh-TW-memory-20261012.png",
+      "sha256": "59c888d497d083f4e318f9e5339750e37bca19d14e00f43dbaeef6c84a93c241",
+      "bytes": 199495,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "zh-TW-sources-20261012.jpg",
+      "sha256": "a95cdba6379545189b5616ddb518d72fcd5db090b832e9a57b154017b5427442",
+      "bytes": 493579,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "sources/zh-CN/Beta 第 3 轮报告.md",
+      "sha256": "0953f83d7965098ff291d56e9c9b9d9a4f701723c4534c00116d6c38686cf365",
+      "bytes": 314,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "sources/zh-CN/Lumo 2.0 启动会议.md",
+      "sha256": "b3ab0f9061e1fd948beb8bd11bfa939381916103be6804b584611312fd8adadc",
+      "bytes": 307,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "sources/zh-CN/上线检查清单.md",
+      "sha256": "eb451e6f209bae198d3ddbc49c7b04dfa94b3586b0acebf5074ecaada049e6e4",
+      "bytes": 430,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "zh-CN-memory-20261012.png",
+      "sha256": "44d6b1c29f325e4743076319cb6a9abc6ca78ff69e5445eeadab12fd60b34b85",
+      "bytes": 194158,
+      "localSourceLabelFix": true
+    },
+    {
+      "file": "zh-CN-sources-20261012.jpg",
+      "sha256": "75ebe3a4ca8c1ec159d1748a9a1c4dfc0f8796e919aff75be96d4dd5da90790f",
+      "bytes": 496046,
+      "localSourceLabelFix": true
+    }
+  ],
+  "sourceLabelFix": {
+    "branch": "codex/fix-imported-source-label",
+    "baseCommit": "85e483fa5c2ed945dc9e29a067f666624ef55514",
+    "captureBaseCommit": "ae980577e909f083160bbf7495eb7fd13905a1ef",
+    "patchSha256": "7538f34bf299fa1e8642959d590938c62e2cb963bcd0a31f4dc14a6ecd395423",
+    "productionFileSha256": {
+      "src/components/memory/page/format.ts": "ec09da5ad032c93d0f6853539d71669d2ab7e44329c1ef1ec582061825e2ffe6",
+      "src/components/memory/page/PageInfo.tsx": "d0ec2e86cdb0481c9c00545549b6870d943383b36ead9f00a6db22564ff3fbcb",
+      "src/components/memory/PageDetail.tsx": "87e8d89d8312e1255e43a2b55f4b5784633f2c63bcf3116d872af1848a1df638",
+      "src/i18n/resources.ts": "6d58165c8940cec47f3a301024f3001913f6b172363590f55bb4c903efd8bdec"
+    },
+    "assets": [
+      "en-wiki-source-label-20261012.jpg",
+      "en-wiki-source-source-label-20261012.jpg",
+      "en-wiki-preview-decision-source-label-20261012.jpg",
+      "en-wiki-preview-checklist-source-label-20261012.jpg",
+      "zh-TW-wiki-source-label-20261012.jpg",
+      "zh-TW-wiki-source-source-label-20261012.jpg",
+      "zh-TW-wiki-preview-decision-source-label-20261012.jpg",
+      "zh-TW-wiki-preview-checklist-source-label-20261012.jpg",
+      "zh-CN-wiki-source-label-20261012.jpg",
+      "zh-CN-wiki-source-source-label-20261012.jpg",
+      "zh-CN-wiki-preview-decision-source-label-20261012.jpg",
+      "zh-CN-wiki-preview-checklist-source-label-20261012.jpg"
+    ],
+    "status": "local uncommitted App fix; not published",
+    "verified": "Native folder-import rows show localized file labels; original Markdown opens in all three locales."
+  },
+  "materialViews": {
+    "date": "2026-10-12",
+    "memoryDimensions": [
+      2560,
+      1440
+    ],
+    "sourcesDimensions": [
+      2400,
+      1560
+    ],
+    "limits": "Full memory captures retain native capture-tool indicators; CSS crops focus on content and source relationships. No retouching. Added file examples use Markdown; other formats are not demonstrated."
+  },
+  "homepageInteraction": {
+    "kind": "Website DOM recreation with a browsable fictional personal knowledge library",
+    "resources": "11 personal knowledge notes and 3 memory sources adapted from readme-personal-kb-20261012 current v5 projections, translated into three locales; Lumo remains one project with its original file/memory fixtures and authored URL/Obsidian examples.",
+    "actions": [
+      "Select topics and notes in the directory",
+      "Update article and contextual inspector together",
+      "Hover or focus inline references for previews",
+      "Read formatted memory, file, URL and Obsidian sources",
+      "Follow cross-topic page links and connections",
+      "Inspect available revision metadata and sources",
+      "Filter sources by tag; navigate back and close the reader"
+    ],
+    "boundary": "Website-only static demonstration; no runtime connection to personal App data or mutations to Wenlan. Native screenshots and hashes below remain evidence of their recorded Lumo views, not of this website implementation. Personal notes show available current snapshots plus recovered Agent Loop v5 and AI working-style v3 bodies; unknown authors are explicitly identified. Graph node styling follows recorded App views, with static demo layout and fixture-backed relations."
+  }
+}

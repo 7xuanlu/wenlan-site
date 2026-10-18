@@ -2,6 +2,8 @@ import { ThemeToggle } from "@/app/theme-toggle";
 import { BrandWordmark } from "@/components/brand-wordmark";
 import { HomeMobileNav } from "@/components/home/mobile-nav";
 import { GitHubLogoIcon } from "@/components/icons";
+import { ResourceMenu } from "@/components/resource-menu";
+import { resourceCopy, resourceLinks } from "@/components/resource-navigation";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { getCoreContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
@@ -39,43 +41,49 @@ export function SiteHeader({
   );
 
   return (
-    <nav aria-label={nav.schemaName} className="fixed top-0 z-40 w-full border-b border-[var(--o-border-subtle)] bg-[var(--o-nav-bg)] backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 max-[360px]:px-4">
+    <nav aria-label={nav.schemaName} className="site-header fixed top-0 z-40 w-full bg-[var(--o-nav-bg)] backdrop-blur-xl [&_summary]:text-sm">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
         {home ? brand : (
           <LocalizedLink href="/" locale={locale} aria-label={nav.brand} className="transition-opacity hover:opacity-80">
             {brand}
           </LocalizedLink>
         )}
-        <div className="flex items-center gap-3 max-[360px]:gap-1 sm:gap-4">
+        <div className="flex shrink-0 items-center gap-3 max-[360px]:gap-2 md:gap-8">
+          <div className="flex items-center gap-5">
           {nav.links
-            .filter((link) => link.id !== "github")
+            .filter((link) => link.id === "download")
             .map((link) => (
               <LocalizedLink
                 key={link.id}
                 href={link.href}
                 locale={locale}
-                className="hidden text-sm text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-text)] lg:inline"
+                className="inline-flex min-h-11 items-center whitespace-nowrap text-sm text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-text)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]"
               >
                 {link.label}
               </LocalizedLink>
             ))}
-          <LanguageSwitcher locale={locale} />
+            <ResourceMenu locale={locale} label={resourceCopy[locale].title} links={resourceLinks(locale, nav)} />
+          </div>
+          <div className="flex shrink-0 items-center gap-1">
           <a
             href="https://github.com/wenlan-app/wenlan"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={nav.githubAriaLabel}
-            className="hidden items-center gap-2 text-sm text-[var(--o-text-secondary)] transition-colors duration-150 hover:text-[var(--o-text)] lg:flex"
+            title="GitHub"
+            className="site-utility-icon hidden size-11 shrink-0 items-center justify-center rounded-lg text-[var(--o-text-secondary)] transition-colors duration-150 hover:bg-[var(--o-card-bg)] hover:text-[var(--o-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--o-warm)] sm:inline-flex"
           >
             <GitHubLogoIcon className="size-5" />
           </a>
-          <div className="hidden lg:block">
+          <div className="hidden items-center md:flex"><LanguageSwitcher locale={locale} /></div>
+          <div className="hidden items-center md:flex">
             <ThemeToggle
               darkLabel={nav.themeToggle.darkLabel}
               lightLabel={nav.themeToggle.lightLabel}
             />
           </div>
           <HomeMobileNav locale={locale} nav={nav} />
+          </div>
         </div>
       </div>
     </nav>

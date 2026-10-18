@@ -3683,7 +3683,7 @@ export const docPages: DocPage[] = [
       "LME_S",
       "AI memory retrieval benchmark",
     ],
-    updatedAt: "2026-07-24",
+    updatedAt: "2026-10-15",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     summary: [
@@ -3703,9 +3703,27 @@ export const docPages: DocPage[] = [
         },
       },
       {
+        heading: "What full replay, retrieval, and tokens mean",
+        body: [
+          "Full replay supplies all conversation text as background for a question. Retrieval searches saved material and returns matching passages. It is a step before answer generation, not the AI answer itself. Document retrieval applies the same idea to files and pages; the historical token comparison below used conversation memory.",
+          "A token is a small unit of text processed by a model: a word, part of a word, or punctuation. The retrieval harness counts text with cl100k_base. Context-token counts measure supplied background, excluding the generated answer, other instructions, and the costs of indexing or retrieval. They are not a total bill or an answer-quality score.",
+        ],
+      },
+      {
+        heading: "Earlier LoCoMo context-size comparison",
+        body: [
+          "The README at commit 43d905dceb92b7f6f454443c1097f090c3b61170 reported 4,505 context tokens per query for full replay and 168 for retrieval on LoCoMo. This is a historical published result, separate from the 500-question LME_Oracle retrieval score above.",
+          "The original raw token-run artifact and exact run settings were not recovered for this website update, and the test was not rerun. The README preserves the attribution, but does not establish current performance, a CE-reranked 500-question protocol, or a general cost-saving guarantee.",
+        ],
+        link: {
+          label: "Read the historical README result",
+          href: "https://github.com/7xuanlu/wenlan/blob/43d905dceb92b7f6f454443c1097f090c3b61170/README.md#evaluation",
+        },
+      },
+      {
         heading: "What is measured",
         body: [
-          "The headline metrics are Recall@5, MRR, and NDCG@10. They measure whether the retrieval layer surfaces relevant context near the top of the result set.",
+          "Recall@5 is the fraction of labeled relevant documents found among the first five results, averaged across questions. The 93.6% LME_Oracle result is this retrieval score, not the percentage of correct AI answers. MRR and NDCG@10 describe how well the results are ranked.",
           "This is useful because Wenlan's job is to bring the right memories, notes, decisions, and graph context into the next agent session. It does not prove that a downstream model will always answer correctly.",
         ],
       },

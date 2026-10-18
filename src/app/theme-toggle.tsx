@@ -13,9 +13,10 @@ export function ThemeToggle({
 
   return (
     <button
+      type="button"
       onClick={toggle}
       aria-label={theme === "dark" ? lightLabel : darkLabel}
-      className="flex size-8 items-center justify-center rounded-lg transition-colors duration-150 hover:bg-[var(--o-card-bg)]"
+      className="site-utility-icon inline-flex size-11 shrink-0 items-center justify-center rounded-lg text-[var(--o-text-secondary)] transition-colors duration-150 hover:bg-[var(--o-card-bg)] hover:text-[var(--o-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--o-warm)]"
     >
       {theme === "dark" ? (
         <svg
@@ -25,10 +26,12 @@ export function ThemeToggle({
           strokeWidth={1.5}
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="size-4 text-[var(--o-text-secondary)]"
+          aria-hidden="true"
+          focusable="false"
+          className="size-5"
         >
-          <circle cx="12" cy="12" r="5" />
-          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 3v2M12 19v2M5.64 5.64l1.42 1.42M16.94 16.94l1.42 1.42M3 12h2M19 12h2M5.64 18.36l1.42-1.42M16.94 7.06l1.42-1.42" />
         </svg>
       ) : (
         <svg
@@ -38,7 +41,9 @@ export function ThemeToggle({
           strokeWidth={1.5}
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="size-4 text-[var(--o-text-secondary)]"
+          aria-hidden="true"
+          focusable="false"
+          className="size-5"
         >
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </svg>
