@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "c7a7b561f315a034c4e95b77e2addff8ae7d0cd35540781d7647b8392ff4a491",
+    sourceHash: "4740ecd573836f7e9917a1615642438fe70d78cbfb597ac7ef563f857c16c62d",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库",
@@ -486,7 +486,7 @@ export const zhCNContent = {
           {
             id: "tools",
             q: "哪些 AI 工具可以搭配 Wenlan？",
-            a: "Claude Code 和 Codex 有 Wenlan 插件；Cursor、Claude Desktop、VS Code 等本地工具通过 MCP 连接。ChatGPT 等浏览器工具使用 OAuth 远程连接：先选择共享整个资料库或一个 Space、批准配对，使用时保持 Wenlan 在线，也能在 App 中撤销访问。Obsidian 则是只读的来源导入方式。",
+            a: "Claude Code 和 Codex 有 Wenlan 插件；Cursor、Claude Desktop、VS Code 等本地工具通过 MCP 连接。ChatGPT、Claude.ai、Muse 等浏览器工具使用 OAuth 远程连接：先选择共享整个资料库或一个 Space、批准配对，使用时保持 Wenlan 在线，也能在 App 中撤销访问。Obsidian 则是只读的来源导入方式。",
           },
           {
             id: "not-notes",
@@ -1659,7 +1659,7 @@ export const zhCNContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "0595fc2b224a1b7ddf539e9157f6aee7309a57f7dd272345b43939f5ce1db746",
+    sourceHash: "07d9707b8351e321b00180a458c50455d50e9c207f043cf831f6b76371626427",
     content: {
       seo: {
         title: "安装文澜 Wenlan：Claude Code、Codex、ChatGPT 与 MCP",
@@ -1743,7 +1743,7 @@ export const zhCNContent = {
         {
           id: "chatgpt-web",
           number: "04",
-          title: "ChatGPT 或 Claude.ai（高级连接）",
+          title: "ChatGPT、Claude.ai 或 Muse（高级连接）",
           paragraphs: [
             "在 Wenlan 桌面版打开“网页访问”（Web access），选择共享整个资料库或只共享一个 Space，阅读数据访问说明后启用。在 AI 工具中，通过 OAuth MCP 连接添加 https://relay.wenlan.app/mcp。",
             "回到 Wenlan 检查并批准配对请求。如果只共享一个 Space，其他及之后新增的 Space 不会自动分享。使用时请保持 Wenlan 在线；不再需要时，可以在 App 中撤销访问。",
