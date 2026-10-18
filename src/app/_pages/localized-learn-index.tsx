@@ -1,4 +1,6 @@
-import { ArticleHalo, MemoryIndex } from "../(en)/learn/article-visuals";
+import { getLearnSections } from "@/components/reading/reading-data";
+import { ReadingShell } from "@/components/reading/reading-shell";
+import { ArticleHalo } from "../(en)/learn/article-visuals";
 import { TrackedLink, TrackedLocalizedLink } from "@/components/tracked-link";
 import { getLocalizedLearnArticles } from "@/i18n/learn-articles";
 import { localizedLearnIndexContent } from "@/i18n/learn-index";
@@ -60,7 +62,8 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
 
-      <section className="relative border-b border-[var(--o-border-subtle)] px-6 py-24 sm:py-32">
+      <ReadingShell locale={locale} section="learn" path={"/learn"} index>
+      <section className="reading-page-header relative px-6 py-24 sm:py-32">
         <ArticleHalo />
         <div className="relative z-10 mx-auto max-w-5xl">
           <nav aria-label="Breadcrumb" className="flex items-center gap-3 font-mono text-xs text-[var(--o-text-muted)]">
@@ -72,7 +75,7 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
               {content.breadcrumb}
             </span>
           </nav>
-          <div className="mt-12 grid min-w-0 gap-12 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
+          <div className="mt-12 grid min-w-0 gap-12">
             <div className="min-w-0">
               <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
                 {content.eyebrow}
@@ -84,7 +87,6 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
                 {content.description}
               </p>
             </div>
-            <MemoryIndex label={content.topicLabel} items={[...content.topics]} />
           </div>
         </div>
       </section>
@@ -112,8 +114,11 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
               {articles.length} {content.articleCountLabel}
             </p>
           </div>
+          {getLearnSections(locale).map(group => (
+            <section id={group.id} key={group.id} className="mt-12 scroll-mt-36">
+              <h2 className="font-serif text-2xl font-medium">{group.title} <span className="ml-2 font-mono text-xs text-[var(--o-text-muted)]">{group.articles.length}</span></h2>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
-            {articles.map((article) => (
+            {group.articles.map((article) => (
               <TrackedLocalizedLink
                 key={article.slug}
                 href={`/learn/${article.slug}`}
@@ -132,7 +137,7 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
                 <p className="mt-4 text-sm leading-relaxed text-[var(--o-text-muted)]">
                   {article.description}
                 </p>
-                <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 border-t border-[var(--o-border-subtle)] pt-5 font-mono text-[10px] text-[var(--o-text-muted)]">
+                <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 pt-5 font-mono text-[10px] text-[var(--o-text-muted)]">
                   <span>{article.author}</span>
                   <time dateTime={article.updatedAt}>{article.updatedAt}</time>
                   <span>{article.readingTime}</span>
@@ -140,10 +145,12 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
               </TrackedLocalizedLink>
             ))}
           </div>
+            </section>
+          ))}
         </div>
       </section>
 
-      <section className="border-t border-[var(--o-border-subtle)] px-6 py-20">
+      <section className="px-6 py-20">
         <div className="mx-auto max-w-3xl text-center">
           <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/70 uppercase">
             {content.ctaEyebrow}
@@ -180,6 +187,7 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
           </div>
         </div>
       </section>
+      </ReadingShell>
     </main>
   );
 }

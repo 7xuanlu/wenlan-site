@@ -105,7 +105,7 @@ function ChoiceGuidance({
   const choice = guideCopy.rows[rowId];
 
   return (
-    <dl className="mt-7 space-y-5 border-t border-[var(--o-border)] pt-5">
+    <dl className="mt-7 space-y-5 pt-5">
       <div>
         <dt className="text-sm font-semibold text-[var(--o-warm)]">{guideCopy.setupTitle}</dt>
         <dd className="mt-1 text-sm leading-7 text-[var(--o-text-secondary)]">{choice.setup}</dd>
@@ -124,7 +124,7 @@ function ChoiceGuidance({
 
 function LinkList({ locale, labels }: { readonly locale: Locale; readonly labels: typeof guideLabels[Locale] }) {
   return (
-    <nav aria-label={labels.continueLabel} className="mt-12 border-t border-[var(--o-border-subtle)] pt-6">
+    <nav aria-label={labels.continueLabel} className="mt-12 pt-6">
       <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">{labels.continueLabel}</p>
       <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
         <LocalizedLink href="/docs/get-started" locale={locale} className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-[var(--o-text-secondary)] hover:text-[var(--o-warm)]">
@@ -171,13 +171,13 @@ export function WorkflowComparisonGuide({ locale }: { readonly locale: Locale })
           </ol>
         </nav>
 
-        <section id="workflow-wenlan" className="mt-14 scroll-mt-24 border-t border-[var(--o-border-subtle)] pt-10">
+        <section id="workflow-wenlan" className="mt-14 scroll-mt-24 pt-10">
           <p className="font-mono text-[11px] text-[var(--o-warm)]">01</p>
           <h3 className="mt-3 font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">{labels.commonHeading}</h3>
           <p className="mt-3 text-sm leading-7 text-[var(--o-text-muted)]">{labels.commonIntro}</p>
           <p className="mt-5 text-base font-medium leading-7 text-[var(--o-text)]">{copy.current.summary}</p>
           <Narrative text={copy.current.body} className="mt-5" />
-          <dl className="mt-7 space-y-5 border-t border-[var(--o-border)] pt-5">
+          <dl className="mt-7 space-y-5 pt-5">
             {copy.current.highlights.map((item) => (
               <div key={item.label}>
                 <dt className="text-sm font-semibold text-[var(--o-warm)]">{item.label}</dt>
@@ -190,7 +190,7 @@ export function WorkflowComparisonGuide({ locale }: { readonly locale: Locale })
 
         <div className="mt-14 space-y-14">
           {rows.map((row, index) => (
-            <section id={`workflow-${row.id}`} key={row.id} className="scroll-mt-24 border-t border-[var(--o-border-subtle)] pt-10">
+            <section id={`workflow-${row.id}`} key={row.id} className="scroll-mt-24 pt-10">
               <p className="font-mono text-[11px] text-[var(--o-warm)]">{(index + 2).toString().padStart(2, "0")}</p>
               <h3 className="mt-3 font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">{row.name}</h3>
               <p className="mt-4 text-base font-medium leading-7 text-[var(--o-text)]">{row.summary}</p>

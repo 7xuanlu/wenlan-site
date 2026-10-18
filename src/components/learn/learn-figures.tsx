@@ -80,13 +80,7 @@ const ragCopy: Record<Locale, {
 
 function Box({ title, detail, note, accent = false }: { title: string; detail: string; note?: string; accent?: boolean }) {
   return (
-    <div
-      className={`rounded-xl border p-4 ${
-        accent
-          ? "border-[var(--o-warm)]/50 bg-[var(--o-glow-warm-bg)]"
-          : "border-[var(--o-border)] bg-[var(--o-bg)]"
-      }`}
-    >
+    <div className="rounded-xl border border-[var(--o-border)] bg-[var(--o-bg)] p-4">
       <p className={`text-sm font-semibold ${accent ? "text-[var(--o-warm)]" : "text-[var(--o-text)]"}`}>{title}</p>
       <p className="mt-1 text-sm leading-snug text-[var(--o-text-secondary)]">{detail}</p>
       {note && <p className="mt-2 font-mono text-[11px] text-[var(--o-text-muted)]">{note}</p>}
@@ -148,7 +142,7 @@ function RagFigure({ locale }: { locale: Locale }) {
                 <span
                   className={`rounded-lg border px-3 py-1.5 text-sm ${
                     row.accent
-                      ? "border-[var(--o-warm)]/50 bg-[var(--o-glow-warm-bg)] text-[var(--o-text)]"
+                      ? "border-[var(--o-border)] bg-[var(--o-bg)] text-[var(--o-text)]"
                       : "border-[var(--o-border)] bg-[var(--o-bg)] text-[var(--o-text-secondary)]"
                   }`}
                 >
@@ -169,7 +163,7 @@ export function LearnFigure({ id, locale }: { id: LearnFigureId; locale: Locale 
   return (
     <figure className="mt-6 rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-4 sm:p-6">
       {id === "llm-wiki-architecture" ? <ArchitectureFigure locale={locale} /> : <RagFigure locale={locale} />}
-      <figcaption className="mt-5 border-t border-[var(--o-border-subtle)] pt-3 text-xs leading-relaxed text-[var(--o-text-muted)]">
+      <figcaption className="mt-5 text-xs leading-relaxed text-[var(--o-text-muted)]">
         {caption}
       </figcaption>
     </figure>
@@ -182,7 +176,7 @@ export function SectionTable({ table, renderText = plain }: { table: NonNullable
       {/* Below sm, each row stacks into a card and every cell shows its column name. */}
       <table className="w-full border-collapse text-sm max-sm:block">
         <thead className="max-sm:hidden">
-          <tr className="border-b border-[var(--o-border)] bg-[var(--o-card-bg)] text-left">
+          <tr className="bg-[var(--o-card-bg)] text-left">
             {table.columns.map((column) => (
               <th key={column} className="px-4 py-3 align-top text-xs font-semibold text-[var(--o-text-muted)]">
                 {column}
@@ -192,7 +186,7 @@ export function SectionTable({ table, renderText = plain }: { table: NonNullable
         </thead>
         <tbody className="max-sm:block">
           {table.rows.map((row) => (
-            <tr key={row[0]} className="border-b border-[var(--o-border-subtle)] align-top last:border-b-0 max-sm:block max-sm:py-2">
+            <tr key={row[0]} className="align-top max-sm:block max-sm:py-2">
               {row.map((cell, index) =>
                 index === 0 ? (
                   <th key={index} scope="row" className="px-4 py-3 text-left align-top font-medium text-[var(--o-text)] [overflow-wrap:anywhere] max-sm:block max-sm:pb-1">
@@ -245,7 +239,7 @@ export function ComparisonTableSection({
 }) {
   const c = comparisonCopy[locale];
   return (
-    <section>
+    <section id="article-comparison">
       <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)] [word-break:keep-all] [overflow-wrap:break-word]">
         {c.heading}
       </h2>
@@ -253,7 +247,7 @@ export function ComparisonTableSection({
       <div className="mt-6 overflow-x-auto rounded-xl border border-[var(--o-border)]">
         <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="border-b border-[var(--o-border)] bg-[var(--o-card-bg)] text-left font-mono text-[11px] tracking-[0.2em] text-[var(--o-text-muted)] uppercase">
+            <tr className="bg-[var(--o-card-bg)] text-left font-mono text-[11px] tracking-[0.2em] text-[var(--o-text-muted)] uppercase">
               <th className="px-5 py-4 align-top">{c.dimension}</th>
               <th className="px-5 py-4 align-top text-[var(--o-warm)]">Wenlan</th>
               <th className="px-5 py-4 align-top">{table.competitorName}</th>
@@ -261,7 +255,7 @@ export function ComparisonTableSection({
           </thead>
           <tbody>
             {table.rows.map((row) => (
-              <tr key={row.dimension} className="border-b border-[var(--o-border-subtle)] last:border-b-0 align-top">
+              <tr key={row.dimension} className="align-top">
                 <th scope="row" className="px-5 py-4 text-left align-top font-medium text-[var(--o-text)]">
                   {renderText(row.dimension)}
                 </th>

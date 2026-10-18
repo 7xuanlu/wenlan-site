@@ -283,7 +283,7 @@ export function ScenarioWorkedExample({ packet, locale }: ScenarioWorkedExampleP
               {localized.task}
             </p>
           </div>
-          <div className="rounded-2xl border border-[var(--o-warm)]/35 bg-[var(--o-warm)]/[0.07] p-6 sm:p-8">
+          <div className="rounded-2xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-6 sm:p-8">
             <h3 className="font-serif text-2xl font-medium tracking-tight text-[var(--o-text)]">
               {copy.expected}
             </h3>
@@ -301,7 +301,7 @@ export function ScenarioWorkedExample({ packet, locale }: ScenarioWorkedExampleP
             <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--o-text-secondary)]">
               {localized.comparison}
             </p>
-            <div className="mt-5 border-t border-[var(--o-border-subtle)] pt-4">
+            <div className="mt-5 pt-4">
               <p className="font-mono text-[10px] tracking-[0.2em] text-[var(--o-text-muted)] uppercase">
                 {copy.review}
               </p>
@@ -312,7 +312,7 @@ export function ScenarioWorkedExample({ packet, locale }: ScenarioWorkedExampleP
           </div>
           <a
             href={`/scenario-example/${encodeURIComponent(packet.id)}/${encodeURIComponent(locale)}`}
-            className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-xl border border-[var(--o-warm)] bg-[var(--o-warm)] px-5 py-3 text-sm font-semibold text-[var(--o-bg)] transition-colors hover:bg-[var(--o-text)] hover:text-[var(--o-bg)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--o-warm)]"
+            className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-xl border border-[var(--o-text)] bg-[var(--o-text)] px-5 py-3 text-sm font-semibold text-[var(--o-bg)] transition-colors hover:bg-[var(--o-text)] hover:text-[var(--o-bg)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--o-warm)]"
           >
             {copy.download}
           </a>
@@ -330,7 +330,7 @@ export function ScenarioWorkedExample({ packet, locale }: ScenarioWorkedExampleP
                   width: 1440,
                   height: 1100,
                 }} />
-                <figcaption className="border-t border-[var(--o-border)] p-4 text-sm leading-relaxed text-[var(--o-text-secondary)]">{view === "app" ? proof.page : proof.source}</figcaption>
+                <figcaption className="p-4 text-sm leading-relaxed text-[var(--o-text-secondary)]">{view === "app" ? proof.page : proof.source}</figcaption>
               </figure>
             ))}
           </div>
@@ -338,7 +338,7 @@ export function ScenarioWorkedExample({ packet, locale }: ScenarioWorkedExampleP
         </section>
 
         <section className="mt-12" aria-labelledby={`${packet.id}-sources-heading`}>
-          <div className="flex flex-wrap items-end justify-between gap-3 border-b border-[var(--o-border)] pb-4">
+          <div className="flex flex-wrap items-end justify-between gap-3 pb-4">
             <div>
               <h3
                 id={`${packet.id}-sources-heading`}
@@ -376,7 +376,7 @@ export function ScenarioWorkedExample({ packet, locale }: ScenarioWorkedExampleP
                         +
                       </span>
                     </summary>
-                    <pre id={anchor} className="scroll-mt-24 overflow-x-auto border-t border-[var(--o-border-subtle)] px-5 py-5 whitespace-pre-wrap break-words text-sm leading-relaxed text-[var(--o-text-secondary)]">
+                    <pre id={anchor} className="scroll-mt-24 overflow-x-auto px-5 py-5 whitespace-pre-wrap break-words text-sm leading-relaxed text-[var(--o-text-secondary)]">
                       {source.content}
                     </pre>
                   </details>
@@ -407,7 +407,7 @@ export function ScenarioWorkedExample({ packet, locale }: ScenarioWorkedExampleP
               <span className="min-w-0" id={`${packet.id}-change-heading`}>{copy.changed}: {packet.change.filename}</span>
               <span aria-hidden="true" className="font-mono text-lg text-[var(--o-warm)]">+</span>
             </summary>
-            <div className="border-t border-[var(--o-border-subtle)] px-6 py-6 sm:px-8">
+            <div className="px-6 py-6 sm:px-8">
               <h4 className="text-sm font-semibold text-[var(--o-warm)]">{copy.changeExpected}</h4>
               <p className="mt-3 text-sm leading-relaxed text-[var(--o-text-secondary)]">{packet.change.expected}</p>
               <pre className="mt-6 overflow-x-auto rounded-lg border border-[var(--o-border-subtle)] bg-[var(--o-bg)] p-5 whitespace-pre-wrap break-words text-sm leading-relaxed text-[var(--o-text-secondary)]">

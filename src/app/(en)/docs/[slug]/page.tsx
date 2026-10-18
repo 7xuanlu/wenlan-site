@@ -1,3 +1,4 @@
+import { ReadingShell } from "@/components/reading/reading-shell";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -174,8 +175,9 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
         />
       )}
 
+      <ReadingShell locale="en" section="docs" path={`/docs/${page.slug}`} toc={page.sections.map(section => ({id: sectionId(section.heading), label: section.heading}))}>
       <article>
-        <header className="relative border-b border-[var(--o-border-subtle)] px-6 py-16 sm:py-20">
+        <header className="reading-page-header relative px-6 py-16 sm:py-20">
           <ArticleHalo />
           <div className="relative z-10 mx-auto max-w-5xl">
             <nav className="flex items-center gap-3 font-mono text-xs text-[var(--o-text-muted)]">
@@ -243,13 +245,13 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
         </section>
 
         <section className="px-6 pb-20">
-          <div className="mx-auto grid w-full max-w-5xl min-w-0 grid-cols-[minmax(0,1fr)] gap-12 lg:grid-cols-[minmax(0,700px)_220px]">
+          <div className="reading-prose-layout mx-auto min-w-0">
             <div className="min-w-0 space-y-14">
               {page.sections.map((section, index) => (
                 <section
                   id={sectionId(section.heading)}
                   key={section.heading}
-                  className="grid min-w-0 scroll-mt-24 grid-cols-[minmax(0,1fr)] gap-5 sm:grid-cols-[72px_minmax(0,1fr)]"
+                  className="reading-chapter grid min-w-0 scroll-mt-24 grid-cols-[minmax(0,1fr)] gap-5 sm:grid-cols-[72px_minmax(0,1fr)]"
                 >
                   <p className="font-mono text-[11px] text-[var(--o-warm)]">
                     {(index + 1).toString().padStart(2, "0")}
@@ -318,31 +320,9 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
               )}
             </div>
 
-            <aside className="border-t border-[var(--o-border-subtle)] pt-8 lg:sticky lg:top-20 lg:self-start lg:border-t-0 lg:pt-1">
-              <nav
-                aria-label="On this page"
-                className="lg:max-h-[calc(100vh-22rem)] lg:overflow-y-auto lg:pr-2"
-              >
-                <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
-                  On this page
-                </p>
-                <div className="mt-4 space-y-3">
-                  {page.sections.map((section, index) => (
-                    <a
-                      key={section.heading}
-                      href={`#${sectionId(section.heading)}`}
-                      className="grid grid-cols-[28px_1fr] gap-2 text-sm leading-relaxed text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                    >
-                      <span className="font-mono text-[10px] text-[var(--o-text-dim)]">
-                        {(index + 1).toString().padStart(2, "0")}
-                      </span>
-                      <span>{section.heading}</span>
-                    </a>
-                  ))}
-                </div>
-              </nav>
+            <aside className="reading-resources">
 
-              <div className="mt-8 border-t border-[var(--o-border-subtle)] pt-7">
+              <div className="mt-8 pt-7">
                 <p className="font-serif text-lg font-medium tracking-tight text-[var(--o-text)]">
                   Built in the open
                 </p>
@@ -367,6 +347,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
           </div>
         </section>
       </article>
+      </ReadingShell>
     </main>
   );
 }

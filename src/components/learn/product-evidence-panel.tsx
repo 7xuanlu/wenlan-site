@@ -43,7 +43,7 @@ export function ProductEvidencePanel({
             }}
             locale={locale}
           />
-          <figcaption className="border-t border-[var(--o-border-subtle)] px-5 py-4 text-sm leading-relaxed text-[var(--o-text-muted)] sm:px-6">
+          <figcaption className="px-5 py-4 text-sm leading-relaxed text-[var(--o-text-muted)] sm:px-6">
             {renderText(evidence.image.caption)}
           </figcaption>
         </figure>
@@ -72,7 +72,7 @@ export function ProductEvidencePanel({
             </ol>
           </div>
 
-          <div className="border-t border-[var(--o-border)] pt-6 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
+          <div className="pt-6 lg:border-l lg:pt-0 lg:pl-10">
             <h3 className="font-serif text-2xl font-medium tracking-tight text-[var(--o-text)]">
               {renderText(evidence.artifactHeading)}
             </h3>
@@ -83,7 +83,7 @@ export function ProductEvidencePanel({
               {evidence.artifactRows.map((row) => (
                 <div
                   key={row.label}
-                  className="grid gap-2 border-b border-[var(--o-border-subtle)] pb-5 last:border-b-0 last:pb-0 sm:grid-cols-[128px_minmax(0,1fr)]"
+                  className="grid gap-2 pb-5 last:pb-0 sm:grid-cols-[128px_minmax(0,1fr)]"
                 >
                   <dt className="font-mono text-[11px] tracking-[0.08em] text-[var(--o-warm)] uppercase">
                     {renderText(row.label)}

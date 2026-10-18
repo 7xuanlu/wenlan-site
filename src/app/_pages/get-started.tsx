@@ -1,5 +1,6 @@
+import { ReadingShell } from "@/components/reading/reading-shell";
 import { SiteHeader } from "@/components/site-header";
-import { ArticleHalo, MemoryIndex } from "../(en)/learn/article-visuals";
+import { ArticleHalo } from "../(en)/learn/article-visuals";
 import { RuntimeInstallBlock } from "@/components/docs/runtime-install-block";
 import { getCoreContent } from "@/i18n/content";
 import { LOCALE_CONFIG, type Locale } from "@/i18n/locales";
@@ -84,8 +85,9 @@ export function GetStartedPage({ locale, release = WENLAN_RELEASE }: { locale: L
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
       />
 
+      <ReadingShell locale={locale} section="docs" path={"/docs/get-started"} toc={[{id: "install-runtime", label: install.title}, {id: "connect-ai-tool", label: ui.chooseTitle}, {id: "try-first", label: trial.title}]}>
       <article>
-        <header className="relative px-6 pt-28 pb-12 sm:pt-32 sm:pb-16">
+        <header className="reading-page-header relative px-6 pt-28 pb-12 sm:pt-32 sm:pb-16">
           <ArticleHalo />
           <div className="relative z-10 mx-auto max-w-5xl">
             <nav aria-label={chrome.breadcrumbAriaLabel} className="flex items-center gap-3 font-mono text-xs text-[var(--o-text-muted)]">
@@ -105,7 +107,7 @@ export function GetStartedPage({ locale, release = WENLAN_RELEASE }: { locale: L
                 {content.breadcrumbs.docs}
               </LocalizedLink>
             </nav>
-            <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
+            <div className="mt-8">
               <div>
                 <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
                   {content.hero.eyebrow}
@@ -122,16 +124,13 @@ export function GetStartedPage({ locale, release = WENLAN_RELEASE }: { locale: L
                   ))}
                 </div>
               </div>
-              <div className="hidden lg:block">
-                <MemoryIndex label={content.hero.setupPathLabel} items={[...content.hero.setupPathItems]} />
-              </div>
             </div>
           </div>
         </header>
 
         <section className="px-6 pb-20">
           <div className="mx-auto max-w-5xl space-y-14">
-            <section id="install-runtime" className="scroll-mt-24 grid gap-4 sm:grid-cols-[64px_minmax(0,1fr)]">
+            <section id="install-runtime" className="reading-chapter scroll-mt-24 grid gap-4 sm:grid-cols-[64px_minmax(0,1fr)]">
               <p className="font-mono text-sm text-[var(--o-warm)]">01</p>
               <div className="min-w-0">
                 <h2 className="font-serif text-3xl font-medium">{install.title}</h2>
@@ -148,7 +147,7 @@ export function GetStartedPage({ locale, release = WENLAN_RELEASE }: { locale: L
               </div>
             </section>
 
-            <section className="grid gap-4 sm:grid-cols-[64px_minmax(0,1fr)]">
+            <section id="connect-ai-tool" className="reading-chapter scroll-mt-24 grid gap-4 sm:grid-cols-[64px_minmax(0,1fr)]">
               <p className="font-mono text-sm text-[var(--o-warm)]">02</p>
               <div className="min-w-0">
                 <h2 className="font-serif text-3xl font-medium">{ui.chooseTitle}</h2>
@@ -170,7 +169,7 @@ export function GetStartedPage({ locale, release = WENLAN_RELEASE }: { locale: L
               </div>
             </section>
 
-            <section id="try-first" className="scroll-mt-24 grid gap-4 sm:grid-cols-[64px_minmax(0,1fr)]">
+            <section id="try-first" className="reading-chapter scroll-mt-24 grid gap-4 sm:grid-cols-[64px_minmax(0,1fr)]">
               <p className="font-mono text-sm text-[var(--o-warm)]">03</p>
               <div className="min-w-0">
                 <h2 className="font-serif text-3xl font-medium">{trial.title}</h2>
@@ -184,6 +183,7 @@ export function GetStartedPage({ locale, release = WENLAN_RELEASE }: { locale: L
           </div>
         </section>
       </article>
+      </ReadingShell>
     </main>
   );
 }

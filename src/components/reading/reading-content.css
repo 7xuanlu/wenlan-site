@@ -1,0 +1,59 @@
+/* The shared reading shell owns page rhythm; article data and fragments stay intact. */
+.reading-content .reading-page-header { padding: 10px 0 32px; }
+.reading-content .reading-page-header h1 { max-width: 100%; font-size: clamp(2rem, 2.8vw, 2.5rem); line-height: 1.15; letter-spacing: -.035em; text-wrap: balance; word-break: normal; }
+.reading-content .reading-page-header > .pointer-events-none { opacity: .32; }
+.reading-content .reading-page-header nav { flex-wrap: wrap; row-gap: 8px; }
+.reading-content .reading-page-header p { max-width: 100%; }
+.reading-content .reading-page-header .mt-12 { margin-top: 30px; }
+.reading-content .reading-page-header h1 + p { margin-top: 20px; font-size: 17px; line-height: 1.75; }
+.reading-content > article > section, .reading-content > section { padding: 32px 0; }
+.reading-content > article > section > .mx-auto, .reading-content > section > .mx-auto { max-width: 100%; }
+.reading-content .reading-summary { display: block; padding-bottom: 22px; }
+.reading-content .reading-summary > div { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 12px; border: 0; border-radius: 0; background: transparent; padding: 6px 0; box-shadow: none; }
+.reading-content .reading-summary > div > p:first-child { margin-bottom: 0; padding-top: 3px; }
+.reading-content .reading-summary > div > p:last-child { font-size: 15px; line-height: 1.75; }
+.reading-prose-layout { display: block; }
+.reading-content .reading-chapter { display: block; min-width: 0; scroll-margin-top: 152px; }
+.reading-content .reading-chapter > p:first-child { margin-bottom: 12px; color: var(--o-text-muted); }
+.reading-content .reading-chapter h2 { font-size: 28px; line-height: 1.3; text-wrap: pretty; }
+.reading-content .reading-chapter > div > .mt-5 > p { font-size: 17px; line-height: 1.85; overflow-wrap: break-word; }
+.reading-content .reading-chapter li { font-size: 15px; line-height: 1.8; }
+.reading-content .reading-chapter pre { font-size: 13px; line-height: 1.75; }
+.reading-content section[id], .reading-content aside[id] { scroll-margin-top: 152px; }
+.reading-content .reading-resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 24px; margin-top: 48px; padding-top: 32px; }
+.reading-content .reading-resources > div { margin: 0; border: 0; border-radius: 0; background: transparent; padding: 0; }
+.reading-frame-index .reading-content { width: min(100%, 1040px); }
+.reading-frame-index .reading-content .card-wenlan { padding: 22px; }
+.reading-frame-index .reading-content .card-wenlan h3 { margin-top: 16px; font-size: 23px; line-height: 1.35; }
+.reading-frame-index .reading-content .card-wenlan h3 + p { margin-top: 12px; }
+@media (max-width: 639px) {
+  .reading-content .reading-page-header { padding-top: 0; padding-bottom: 24px; }
+  .reading-content .reading-page-header h1 { font-size: 30px; line-height: 1.2; letter-spacing: -.025em; text-wrap: pretty; }
+  .reading-content .reading-page-header h1 + p { font-size: 16px; }
+  .reading-content > article > section, .reading-content > section { padding-top: 24px; padding-bottom: 24px; }
+  .reading-content .reading-chapter h2 { font-size: 25px; }
+  .reading-content .reading-chapter > div > .mt-5 > p { font-size: 16px; line-height: 1.8; }
+  .reading-frame-index .reading-content .card-wenlan { padding: 20px; }
+}
+
+.reading-content .reading-title { margin-top: 24px; }
+.reading-content .reading-title > div > p:first-child { margin-bottom: 10px; }
+.reading-content .reading-page-header .mt-7 { margin-top: 20px; }
+.reading-content .reading-summary-section { padding-top: 20px; padding-bottom: 20px; }
+
+.reading-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 24px; }
+.reading-actions:empty { display: none; }
+.reading-actions > div { margin-top: 0; }
+.reading-actions a { margin-top: 0; }
+
+/* Shared home comparison/card styles stay neutral and divider-free in reading views. */
+.reading-content .card-wenlan-featured { background: var(--o-card-bg); }
+.reading-content .card-wenlan:hover { border-color: var(--o-border); }
+.reading-content .card-wenlan::before { display: none; }
+.reading-content .workflow-option { border: 0; border-radius: 6px; padding-right: 12px; padding-left: 12px; }
+.reading-content .workflow-choice:checked + .workflow-option { background: var(--o-surface); }
+.reading-content .workflow-panel,
+.reading-content .workflow-evidence,
+.reading-content .workflow-comparison tbody tr + tr,
+.reading-content .workflow-comparison tbody th { border: 0; }
+.reading-content .workflow-comparison .workflow-wenlan { background: var(--o-bg-alt); }

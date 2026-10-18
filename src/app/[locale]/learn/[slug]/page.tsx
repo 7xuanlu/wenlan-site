@@ -1,3 +1,4 @@
+import { ReadingShell, learnContents } from "@/components/reading/reading-shell";
 import { ObsidianGuideJumpLinks } from "@/components/learn/obsidian-guide-jump-links";
 import { ArticleTitleText } from "@/components/learn/article-title-text";
 import type { Metadata } from "next";
@@ -21,7 +22,7 @@ import {
   getArticle,
   type LearnArticle,
 } from "../../../(en)/learn/articles";
-import { ArticleHalo, MemoryIndex } from "../../../(en)/learn/article-visuals";
+import { ArticleHalo } from "../../../(en)/learn/article-visuals";
 import { TrackedLink, TrackedLocalizedLink } from "@/components/tracked-link";
 import { getScenarioPacket } from "@/lib/scenario-examples";
 import { ScenarioWorkedExample } from "@/components/learn/scenario-worked-example";
@@ -346,8 +347,9 @@ export default async function LocalizedLearnSlugPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
+      <ReadingShell locale={resolvedLocale} section="learn" path={`/learn/${article.slug}`} toc={learnContents(article, sectionIds, resolvedLocale)}>
       <article>
-        <header className="relative border-b border-[var(--o-border-subtle)] px-6 py-24 sm:py-32">
+        <header className="reading-page-header relative px-6 py-24 sm:py-32">
           <ArticleHalo />
           <div className="relative z-10 mx-auto max-w-5xl">
             <nav className="flex items-center gap-3 font-mono text-xs text-[var(--o-text-muted)]">
@@ -367,13 +369,12 @@ export default async function LocalizedLearnSlugPage({
                 {chrome.learn}
               </LocalizedLink>
             </nav>
-            <div className="mt-12 grid min-w-0 grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end [&_p]:text-pretty">
+            <div className="reading-title mt-8 min-w-0 [&_p]:text-pretty">
               <div className="min-w-0">
                 <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
                   {article.eyebrow}
                 </p>
                 <h1 className="warm-glow max-w-full font-serif text-[2rem] leading-[1.08] font-medium tracking-tight [overflow-wrap:anywhere] [word-break:normal] sm:[overflow-wrap:break-word] sm:[word-break:keep-all] sm:text-7xl sm:leading-[1.05]"
-                  style={article.slug === "wenlan-vs-obsidian-ai-memory" ? { fontSize: "clamp(1.875rem, 4vw, 3.25rem)", lineHeight: 1.18, textWrap: "balance" } : undefined}
                 >
                   <ArticleTitleText title={article.title} renderText={renderArticleText} />
                 </h1>
@@ -390,6 +391,7 @@ export default async function LocalizedLearnSlugPage({
                   </span>
                   <span>{article.readingTime}</span>
                 </div>
+                <div className="reading-actions">
                 {article.slug === "wenlan-vs-obsidian-ai-memory" && <ObsidianGuideJumpLinks locale={resolvedLocale} />}
                 {article.productEvidence && (
                   <a
@@ -411,21 +413,14 @@ export default async function LocalizedLearnSlugPage({
                   <a href="#recorded-workflow" className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-[var(--o-warm)] underline underline-offset-4">{locale === "zh-TW" ? "查看實際操作畫面" : "查看实际操作画面"}</a>
                 )}
               </div>
-              <MemoryIndex
-                label={chrome.articlePacket}
-                items={[
-                  (resolvedLocale === "zh-TW" ? { Concepts: "概念", Comparisons: "工具比較", Workflows: "工作流程" } : { Concepts: "概念", Comparisons: "工具对比", Workflows: "工作流程" })[article.category],
-                  article.audience,
-                  article.readingTime,
-                ]}
-              />
+              </div>
             </div>
           </div>
         </header>
 
-        <section className="px-6 py-16">
+        <section className="reading-summary-section px-6 py-16">
           <div className="mx-auto max-w-5xl">
-            <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-3">
+            <div className="reading-summary grid min-w-0 grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-3">
               {article.heroBullets.map((bullet, index) => (
                 <div key={bullet} className="card-wenlan p-5">
                   <p className="mb-5 font-mono text-[11px] text-[var(--o-warm)]">
@@ -455,13 +450,13 @@ export default async function LocalizedLearnSlugPage({
         {article.slug === "choose-ai-knowledge-base-tool" && <WorkflowComparisonGuide locale={resolvedLocale} />}
 
         <section className="px-6 pb-20">
-          <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-[minmax(0,680px)_1fr]">
+          <div className="reading-prose-layout mx-auto min-w-0">
             <div className="min-w-0 space-y-14">
               {article.sections.map((section, index) => (
                 <section
                   id={sectionIds[index]}
                   key={sectionIds[index]}
-                  className="grid scroll-mt-24 gap-5 sm:grid-cols-[72px_1fr]"
+                  className="reading-chapter grid scroll-mt-24 gap-5 sm:grid-cols-[72px_1fr]"
                 >
                   <p className="font-mono text-[11px] text-[var(--o-warm)]">
                     {(index + 1).toString().padStart(2, "0")}
@@ -491,7 +486,7 @@ export default async function LocalizedLearnSlugPage({
                     )}
                     {section.code && (
                       <div className="mt-6 overflow-hidden rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)]">
-                        <p className="border-b border-[var(--o-border-subtle)] px-4 py-3 font-mono text-[10px] tracking-[0.18em] text-[var(--o-text-muted)] uppercase">
+                        <p className="px-4 py-3 font-mono text-[10px] tracking-[0.18em] text-[var(--o-text-muted)] uppercase">
                           {section.code.label}
                         </p>
                         <pre className={`overflow-x-auto p-4 text-sm leading-relaxed text-[var(--o-text-secondary)] ${(section.id?.startsWith("worked-example") || section.id === "check-first-answer") ? "whitespace-pre-wrap break-words" : ""}`}>
@@ -558,29 +553,7 @@ export default async function LocalizedLearnSlugPage({
               </section>
             </div>
 
-            <aside className="min-w-0 space-y-6 lg:sticky lg:top-20 lg:self-start">
-              <nav
-                aria-label={chrome.inThisArticle}
-                className="rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5"
-              >
-                <p className="font-mono text-[10px] tracking-[0.24em] text-[var(--o-text-muted)] uppercase">
-                  {chrome.inThisArticle}
-                </p>
-                <div className="mt-4 space-y-3">
-                  {article.sections.map((section, index) => (
-                    <a
-                      key={sectionIds[index]}
-                      href={`#${sectionIds[index]}`}
-                      className="grid grid-cols-[28px_1fr] gap-2 text-sm leading-relaxed text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-warm)]"
-                    >
-                      <span className="font-mono text-[10px] text-[var(--o-text-dim)]">
-                        {(index + 1).toString().padStart(2, "0")}
-                      </span>
-                      <span>{renderArticleText(section.heading)}</span>
-                    </a>
-                  ))}
-                </div>
-              </nav>
+            <aside id="article-resources" className="reading-resources min-w-0 space-y-6">
 
               {article.officialReferences && (
                 <div className="rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5">
@@ -627,12 +600,12 @@ export default async function LocalizedLearnSlugPage({
 
         {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work", "wenlan-vs-obsidian-ai-memory", "build-local-ai-knowledge-base-from-documents"].includes(article.slug) && <RecordedWorkflowProof locale={resolvedLocale} />}
 
-        <section className="border-t border-[var(--o-border-subtle)] px-6 py-20">
+        <section id="article-faq" className="px-6 py-20">
           <div className="mx-auto max-w-3xl">
             <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
               {chrome.faq}
             </p>
-            <div className="divide-y divide-[var(--o-border-subtle)] rounded-xl border border-[var(--o-border)]">
+            <div className="rounded-xl border border-[var(--o-border)]">
               {article.faqs.map((faq) => (
                 <details key={faq.question} className="group">
                   <summary className="flex cursor-pointer items-center justify-between px-6 py-5 font-serif text-sm font-medium text-[var(--o-text)] transition-colors duration-150 hover:text-[var(--o-text-secondary)] [&::-webkit-details-marker]:hidden">
@@ -652,6 +625,7 @@ export default async function LocalizedLearnSlugPage({
 
         <ShareArticle locale={resolvedLocale} url={url} title={article.title} />
       </article>
+      </ReadingShell>
     </main>
   );
 }
