@@ -16,7 +16,6 @@
   top: var(--reading-header-offset);
   z-index: 20;
   display: flex;
-  gap: 24px;
   margin: 0 -24px 20px;
   padding: 0 24px;
   background: color-mix(in srgb, var(--o-bg) 92%, transparent);
@@ -74,8 +73,7 @@
 .reading-dialog-inner { padding: 0 20px 24px; }
 .reading-dialog-header { position: sticky; top: 0; z-index: 2; display: flex; min-height: 60px; align-items: center; justify-content: space-between; margin: 0 -20px 12px; padding: 0 20px; background: var(--o-bg); color: var(--o-text); font-family: var(--font-fraunces), Georgia, serif; font-size: 18px; }
 .reading-dialog-header button { display: grid; width: 40px; height: 40px; place-items: center; border: 0; border-radius: 8px; background: transparent; color: var(--o-text-secondary); font-size: 25px; cursor: pointer; }
-.reading-dialog .reading-library-heading, .reading-dialog .reading-toc h2 { display: none; }
-.reading-dialog .reading-toc ul { max-height: calc(82dvh - 96px); overflow: auto; }
+.reading-dialog .reading-library-heading { display: none; }
 
 @media (min-width: 1024px) {
   .reading-frame { grid-template-columns: 232px minmax(0, 1fr); column-gap: 32px; padding: 96px 32px 80px; }
@@ -91,10 +89,6 @@
 @media (min-width: 1024px) and (max-width: 1279px) {
   .reading-frame-has-toc { grid-template-columns: 232px minmax(0, 1fr); }
   .reading-desktop-toc { display: none; }
-  .reading-frame-has-toc .reading-mobile-bar { display: flex; grid-column: 2; grid-row: 1; margin: 0 -32px 12px; padding: 0 32px; }
-  .reading-frame-has-toc .reading-mobile-bar button:first-child { display: none; }
-  .reading-frame-has-toc .reading-main { grid-row: 2; }
-  .reading-frame-has-toc .reading-desktop-library { grid-row: 1 / span 2; }
 }
 @media (min-width: 1280px) {
   .reading-frame-has-toc { grid-template-columns: 232px minmax(0, 1fr) 200px; }

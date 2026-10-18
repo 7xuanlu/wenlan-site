@@ -20,13 +20,13 @@ export type ReadingFrameProps = {
 type Chrome = {
   library: string; contents: string; search: string;
   searchPlaceholder: string; noResults: string; english: string; close: string;
-  openLibrary: string; openContents: string; articles: string;
+  openLibrary: string; articles: string;
 };
 
 const COPY: Record<Locale, Chrome> = {
-  en: { library: "Library", contents: "On this page", search: "Search articles", searchPlaceholder: "Find an article…", noResults: "No matching articles.", english: "English", close: "Close", openLibrary: "Browse articles", openContents: "On this page", articles: "articles" },
-  "zh-TW": { library: "文章索引", contents: "本文章節", search: "搜尋文章", searchPlaceholder: "搜尋文章…", noResults: "找不到符合的文章。", english: "英文", close: "關閉", openLibrary: "文章索引", openContents: "本文章節", articles: "篇文章" },
-  "zh-CN": { library: "文章索引", contents: "本文章节", search: "搜索文章", searchPlaceholder: "搜索文章…", noResults: "没有找到匹配的文章。", english: "英文", close: "关闭", openLibrary: "文章索引", openContents: "本文章节", articles: "篇文章" },
+  en: { library: "Library", contents: "On this page", search: "Search articles", searchPlaceholder: "Find an article…", noResults: "No matching articles.", english: "English", close: "Close", openLibrary: "Browse articles", articles: "articles" },
+  "zh-TW": { library: "文章索引", contents: "本文章節", search: "搜尋文章", searchPlaceholder: "搜尋文章…", noResults: "找不到符合的文章。", english: "英文", close: "關閉", openLibrary: "文章索引", articles: "篇文章" },
+  "zh-CN": { library: "文章索引", contents: "本文章节", search: "搜索文章", searchPlaceholder: "搜索文章…", noResults: "没有找到匹配的文章。", english: "英文", close: "关闭", openLibrary: "文章索引", articles: "篇文章" },
 };
 
 export default function ReadingFrame({ locale, currentPath, groups, toc = [], children, index = false }: ReadingFrameProps) {
@@ -34,7 +34,7 @@ export default function ReadingFrame({ locale, currentPath, groups, toc = [], ch
   const pathname = usePathname();
   const [query, setQuery] = useState("");
   const [activeId, setActiveId] = useState(toc[0]?.id ?? "");
-  const [dialogKind, setDialogKind] = useState<"library" | "toc" | null>(null);
+  const [libraryOpen, setLibraryOpen] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const openerRef = useRef<HTMLButtonElement>(null);
   const restoreFocusRef = useRef(true);
@@ -47,21 +47,21 @@ export default function ReadingFrame({ locale, currentPath, groups, toc = [], ch
     return groups.map(group => ({ ...group, items: group.items.filter(item => `${item.label} ${item.searchText ?? ""}`.toLocaleLowerCase(locale).includes(needle)) })).filter(group => group.items.length > 0);
   }, [groups, locale, query]);
 
-  const openDialog = (kind: "library" | "toc") => {
-    setDialogKind(kind);
+  const openDialog = () => {
+    setLibraryOpen(true);
     requestAnimationFrame(() => dialogRef.current?.showModal());
   };
   const closeDialog = useCallback((restoreFocus = true) => {
     restoreFocusRef.current = restoreFocus;
     if (dialogRef.current?.open) dialogRef.current.close();
-    setDialogKind(null);
+    setLibraryOpen(false);
   }, []);
 
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
     const onClose = () => {
-      setDialogKind(null);
+      setLibraryOpen(false);
       if (restoreFocusRef.current) requestAnimationFrame(() => openerRef.current?.focus());
       restoreFocusRef.current = true;
     };
@@ -70,11 +70,11 @@ export default function ReadingFrame({ locale, currentPath, groups, toc = [], ch
   }, []);
 
   useEffect(() => {
-    if (!dialogKind) return;
+    if (!libraryOpen) return;
     const priorOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = priorOverflow; };
-  }, [dialogKind]);
+  }, [libraryOpen]);
 
   useEffect(() => {
     if (!toc.length) return;
@@ -103,19 +103,15 @@ export default function ReadingFrame({ locale, currentPath, groups, toc = [], ch
   }, [toc]);
 
   useEffect(() => {
-    if (!activeId) return;
-    const list = dialogKind === "toc"
-      ? dialogRef.current?.querySelector<HTMLElement>(".reading-toc ul")
-      : dialogKind === null
-        ? document.querySelector<HTMLElement>(".reading-desktop-toc .reading-toc ul")
-        : null;
+    if (!activeId || libraryOpen) return;
+    const list = document.querySelector<HTMLElement>(".reading-desktop-toc .reading-toc ul");
     const link = list?.querySelector<HTMLAnchorElement>(`a[href="#${CSS.escape(activeId)}"]`);
     if (!list || !link) return;
     const listBounds = list.getBoundingClientRect();
     const linkBounds = link.getBoundingClientRect();
     if (linkBounds.top < listBounds.top) list.scrollTop -= listBounds.top - linkBounds.top;
     else if (linkBounds.bottom > listBounds.bottom) list.scrollTop += linkBounds.bottom - listBounds.bottom;
-  }, [activeId, dialogKind]);
+  }, [activeId, libraryOpen]);
 
   const library = (mobile = false) => <nav className="reading-library" aria-label={copy.library}>
     <div className="reading-library-heading"><h2>{copy.library}</h2><span>{totalCount} {copy.articles}</span></div>
@@ -131,27 +127,20 @@ export default function ReadingFrame({ locale, currentPath, groups, toc = [], ch
     </div>
   </nav>;
 
-  const contents = (mobile = false) => <nav className="reading-toc" aria-label={copy.contents}>
+  const contents = () => <nav className="reading-toc" aria-label={copy.contents}>
     <h2>{copy.contents}</h2>
-    <ul>{toc.map(item => <li key={item.id}><a href={`#${encodeURIComponent(item.id)}`} aria-current={activeId === item.id ? "location" : undefined} onClick={mobile ? () => {
-      closeDialog(false);
-      requestAnimationFrame(() => {
-        const target = document.getElementById(item.id);
-        if (target) { target.tabIndex = -1; target.focus({preventScroll: true}); }
-      });
-    } : undefined}>{item.label}</a></li>)}</ul>
+    <ul>{toc.map(item => <li key={item.id}><a href={`#${encodeURIComponent(item.id)}`} aria-current={activeId === item.id ? "location" : undefined}>{item.label}</a></li>)}</ul>
   </nav>;
 
   return <div className={`reading-frame${index ? " reading-frame-index" : ""}${toc.length ? " reading-frame-has-toc" : ""}`}>
     <aside className="reading-desktop-library">{library()}</aside>
     <div className="reading-mobile-bar">
-      <button ref={openerRef} type="button" aria-haspopup="dialog" aria-expanded={dialogKind === "library"} aria-controls="reading-navigation-dialog" onClick={event => { openerRef.current = event.currentTarget; openDialog("library"); }}><span>{copy.openLibrary}</span><svg aria-hidden="true" viewBox="0 0 12 12"><path d="m3 4.5 3 3 3-3" /></svg></button>
-      {toc.length > 0 && <button type="button" aria-haspopup="dialog" aria-expanded={dialogKind === "toc"} aria-controls="reading-navigation-dialog" onClick={event => { openerRef.current = event.currentTarget; openDialog("toc"); }}><span>{copy.openContents}</span><svg aria-hidden="true" viewBox="0 0 12 12"><path d="m3 4.5 3 3 3-3" /></svg></button>}
+      <button ref={openerRef} type="button" aria-haspopup="dialog" aria-expanded={libraryOpen} aria-controls="reading-navigation-dialog" onClick={openDialog}><span>{copy.openLibrary}</span><svg aria-hidden="true" viewBox="0 0 12 12"><path d="m3 4.5 3 3 3-3" /></svg></button>
     </div>
     <div className="reading-main"><div className="reading-content">{children}</div></div>
     {toc.length > 0 && <aside className="reading-desktop-toc">{contents()}</aside>}
-    <dialog id="reading-navigation-dialog" className="reading-dialog" aria-label={dialogKind === "library" ? copy.library : copy.contents} ref={dialogRef} onClick={event => { if (event.target === dialogRef.current) closeDialog(); }}>
-      <div className="reading-dialog-inner"><div className="reading-dialog-header"><span>{dialogKind === "library" ? copy.library : copy.contents}</span><button type="button" onClick={() => closeDialog()} aria-label={copy.close}>×</button></div>{dialogKind === "library" ? library(true) : contents(true)}</div>
+    <dialog id="reading-navigation-dialog" className="reading-dialog" aria-label={copy.library} ref={dialogRef} onClick={event => { if (event.target === dialogRef.current) closeDialog(); }}>
+      <div className="reading-dialog-inner"><div className="reading-dialog-header"><span>{copy.library}</span><button type="button" onClick={() => closeDialog()} aria-label={copy.close}>×</button></div>{library(true)}</div>
     </dialog>
   </div>;
 }
