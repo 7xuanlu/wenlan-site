@@ -33,6 +33,8 @@ export default function ReadingFrame({ locale, currentPath, groups, toc = [], ch
   const copy = COPY[locale];
   const pathname = usePathname();
   const [query, setQuery] = useState("");
+  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
+  const [searchExpandedGroups, setSearchExpandedGroups] = useState<Record<string, boolean>>({});
   const [activeId, setActiveId] = useState(toc[0]?.id ?? "");
   const [libraryOpen, setLibraryOpen] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -40,6 +42,7 @@ export default function ReadingFrame({ locale, currentPath, groups, toc = [], ch
   const restoreFocusRef = useRef(true);
   const totalCount = groups.reduce((sum, group) => sum + group.items.length, 0);
   const normalizedCurrent = (pathname || currentPath).replace(/\/$/, "") || "/";
+  const searching = query.trim().length > 0;
 
   const filteredGroups = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase(locale);
@@ -115,12 +118,17 @@ export default function ReadingFrame({ locale, currentPath, groups, toc = [], ch
 
   const library = (mobile = false) => <nav className="reading-library" aria-label={copy.library}>
     <div className="reading-library-heading"><h2>{copy.library}</h2><span>{totalCount} {copy.articles}</span></div>
-    <label className="reading-search"><span className="reading-visually-hidden">{copy.search}</span><svg aria-hidden="true" viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder={copy.searchPlaceholder} /></label>
+    <label className="reading-search"><span className="reading-visually-hidden">{copy.search}</span><svg aria-hidden="true" viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><input type="search" value={query} onChange={event => { setQuery(event.target.value); setSearchExpandedGroups({}); }} placeholder={copy.searchPlaceholder} /></label>
     <div className="reading-groups">
       {filteredGroups.length ? filteredGroups.map(group => {
         const currentGroup = group.items.some(item => item.href.replace(/\/$/, "") === normalizedCurrent);
-        return <details key={group.id} open={query.length > 0 || currentGroup || index}>
-          <summary>{group.label}<span>{group.items.length}</span></summary>
+        const expanded = searching ? (searchExpandedGroups[group.id] ?? true) : (expandedGroups[group.id] ?? currentGroup);
+        return <details key={group.id} open={expanded}>
+          <summary onClick={event => {
+            event.preventDefault();
+            const setExpanded = searching ? setSearchExpandedGroups : setExpandedGroups;
+            setExpanded(previous => ({ ...previous, [group.id]: !expanded }));
+          }}>{group.label}<span>{group.items.length}</span></summary>
           <ul>{group.items.map(item => <li key={item.href}><Link href={item.href} title={item.searchText ?? item.label} prefetch={false} aria-current={item.href.replace(/\/$/, "") === normalizedCurrent ? "page" : undefined} onClick={mobile ? () => closeDialog(false) : undefined}>{item.label}{item.english && locale !== "en" && <small>{copy.english}</small>}</Link></li>)}</ul>
         </details>;
       }) : <p className="reading-empty">{copy.noResults}</p>}
