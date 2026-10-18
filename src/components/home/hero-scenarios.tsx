@@ -67,7 +67,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
     citationLabel: "Jump to supplied source",
     sourceExcerptLabel: "Supplied excerpt",
     originalSourceLabel: "Read the study",
-    knowledgePageLabel: "Wiki page",
+    knowledgePageLabel: "Wiki note",
     viewKnowledgeLabel: "Expand",
     hideKnowledgeLabel: "Collapse",
     askAiLabel: "You ask AI",
@@ -87,7 +87,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
           ],
           nextUpdate: "Next update: add the timeout once a decision is recorded.",
         },
-        sourceContext: "Compiled from API docs, decisions and runbook notes.",
+        sourceContext: "Compiled from API docs, decision records and a runbook.",
         capturedLabel: "Previously",
         captured: "We already confirmed that reads and writes need different retry rules.",
         questionLabel: "This time",
@@ -152,7 +152,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
           {
             id: "meeting-notes",
             label: "meeting-notes.md",
-            detail: "Meeting note",
+            detail: "Meeting minutes",
             excerpt: "The client asked whether data export could be added; delivery is not confirmed.",
           },
           {
@@ -168,7 +168,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
         tabLabel: "Research",
         title: "Remote-work research",
         knowledgeSummary: {
-          outcome: "Two studies and a reading note, organized for comparison.",
+          outcome: "Two studies and a reading log, organized for comparison.",
           facts: [
             { label: "Call-centre trial", value: "Higher output when working from home.", sources: [1] },
             { label: "Hybrid-work trial", value: "No meaningful difference in performance reviews.", sources: [2] },
@@ -176,9 +176,9 @@ const copy: Record<Locale, HeroScenariosCopy> = {
           ],
           nextUpdate: "Next update: add studies from other industries and compare their settings.",
         },
-        sourceContext: "Compiled from two studies and a reading note.",
+        sourceContext: "Compiled from two studies and a reading log.",
         capturedLabel: "Previously",
-        captured: "Two studies and a reading note, brought together for a report.",
+        captured: "Two studies and a reading log, brought together for a report.",
         questionLabel: "This time",
         question: "Does remote work improve productivity? What do my readings say?",
         nextStepLabel: "Build on it",
@@ -205,10 +205,10 @@ const copy: Record<Locale, HeroScenariosCopy> = {
           },
           {
             id: "research-notes",
-            label: "Reading note (example)",
+            label: "Reading log (example)",
             detail: "Comparison checklist",
             excerpt: "Record the job type, days working from home and how performance was measured. These studies examine different settings; do not treat their findings as interchangeable.",
-            excerptLabel: "Illustrative reading note",
+            excerptLabel: "Illustrative reading log",
           },
         ],
       },
@@ -222,19 +222,19 @@ const copy: Record<Locale, HeroScenariosCopy> = {
     citationLabel: "跳至提供的來源",
     sourceExcerptLabel: "提供的摘錄",
     originalSourceLabel: "閱讀原研究",
-    knowledgePageLabel: "知識頁",
+    knowledgePageLabel: "筆記",
     viewKnowledgeLabel: "展開",
     hideKnowledgeLabel: "收起",
     askAiLabel: "你問 AI",
     consultWenlanLabel: "AI 查閱文瀾",
-    aiAnswerLabel: "AI 根據知識頁回答",
+    aiAnswerLabel: "AI 根據筆記回答",
     scenes: [
       {
         id: "engineering",
         tabLabel: "工程",
         title: "API 重試規則",
         knowledgeSummary: {
-          outcome: "把三份紀錄整理成一頁重試規則。",
+          outcome: "把三份紀錄整理成一篇重試規則筆記。",
           facts: [
             { label: "讀取請求", value: "GET 最多重試 3 次。", sources: [1] },
             { label: "寫入請求", value: "不要自動重試 POST。", sources: [2] },
@@ -242,7 +242,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
           ],
           nextUpdate: "下次更新：逾時決議確認後，補上秒數。",
         },
-        sourceContext: "整理自：API 文件、決策紀錄與操作筆記。",
+        sourceContext: "整理自：API 文件、決策紀錄與操作手冊。",
         capturedLabel: "上次留下",
         captured: "上次已確認讀取與寫入要用不同的重試規則。",
         questionLabel: "這次要做",
@@ -306,7 +306,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
           {
             id: "meeting-notes",
             label: "meeting-notes.md",
-            detail: "會議筆記",
+            detail: "會議紀錄",
             excerpt: "客戶詢問能否加入資料匯出，目前沒有確認交付。",
           },
           {
@@ -322,7 +322,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
         tabLabel: "研究",
         title: "遠端工作研究",
         knowledgeSummary: {
-          outcome: "把兩篇研究與閱讀筆記，整理成可比較的重點。",
+          outcome: "把兩篇研究與閱讀紀錄，整理成可比較的重點。",
           facts: [
             { label: "客服實驗", value: "居家工作產出較高。", sources: [1] },
             { label: "混合辦公實驗", value: "績效評等未見明顯差異。", sources: [2] },
@@ -330,9 +330,9 @@ const copy: Record<Locale, HeroScenariosCopy> = {
           ],
           nextUpdate: "下次更新：補入不同產業的研究與比較條件。",
         },
-        sourceContext: "整理自：兩篇研究與一則閱讀筆記。",
+        sourceContext: "整理自：兩篇研究與一則閱讀紀錄。",
         capturedLabel: "上次留下",
-        captured: "把兩篇研究與一則閱讀筆記，整理成寫報告時可用的依據。",
+        captured: "把兩篇研究與一則閱讀紀錄，整理成寫報告時可用的依據。",
         questionLabel: "這次要做",
         question: "遠端工作效率更高嗎？讀過的研究怎麼說？",
         nextStepLabel: "接著往前",
@@ -359,10 +359,10 @@ const copy: Record<Locale, HeroScenariosCopy> = {
           },
           {
             id: "research-notes",
-            label: "閱讀筆記（示例）",
+            label: "閱讀紀錄（示例）",
             detail: "研究比較重點",
             excerpt: "比較時記下工作類型、每週在家天數與績效衡量方式。兩篇研究的情境不同，不宜把結論直接套用到所有工作。",
-            excerptLabel: "示意閱讀筆記",
+            excerptLabel: "示意閱讀紀錄",
           },
         ],
       },
@@ -376,19 +376,19 @@ const copy: Record<Locale, HeroScenariosCopy> = {
     citationLabel: "跳至提供的来源",
     sourceExcerptLabel: "提供的摘录",
     originalSourceLabel: "阅读原研究",
-    knowledgePageLabel: "知识页",
+    knowledgePageLabel: "笔记",
     viewKnowledgeLabel: "展开",
     hideKnowledgeLabel: "收起",
     askAiLabel: "你问 AI",
     consultWenlanLabel: "AI 查阅文澜",
-    aiAnswerLabel: "AI 根据知识页回答",
+    aiAnswerLabel: "AI 根据笔记回答",
     scenes: [
       {
         id: "engineering",
         tabLabel: "工程",
         title: "API 重试规则",
         knowledgeSummary: {
-          outcome: "把三份记录整理成一页重试规则。",
+          outcome: "把三份记录整理成一篇重试规则笔记。",
           facts: [
             { label: "读取请求", value: "GET 最多重试 3 次。", sources: [1] },
             { label: "写入请求", value: "不要自动重试 POST。", sources: [2] },
@@ -396,7 +396,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
           ],
           nextUpdate: "下次更新：超时规则确认后，补上秒数。",
         },
-        sourceContext: "整理自：API 文档、决策记录与操作笔记。",
+        sourceContext: "整理自：API 文档、决策记录与操作手册。",
         capturedLabel: "上次留下",
         captured: "上次已经确认读取和写入要使用不同的重试规则。",
         questionLabel: "这次要做",
@@ -460,7 +460,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
           {
             id: "meeting-notes",
             label: "meeting-notes.md",
-            detail: "会议笔记",
+            detail: "会议记录",
             excerpt: "客户询问能否加入数据导出，目前没有确认交付。",
           },
           {
@@ -476,7 +476,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
         tabLabel: "研究",
         title: "远程办公研究",
         knowledgeSummary: {
-          outcome: "把两篇研究与阅读笔记，整理成可比较的要点。",
+          outcome: "把两篇研究与阅读记录，整理成可比较的要点。",
           facts: [
             { label: "客服实验", value: "居家办公产出较高。", sources: [1] },
             { label: "混合办公实验", value: "绩效评级未见明显差异。", sources: [2] },
@@ -484,9 +484,9 @@ const copy: Record<Locale, HeroScenariosCopy> = {
           ],
           nextUpdate: "下次更新：补入不同行业的研究与比较条件。",
         },
-        sourceContext: "整理自：两篇研究与一则阅读笔记。",
+        sourceContext: "整理自：两篇研究与一则阅读记录。",
         capturedLabel: "上次留下",
-        captured: "把两篇研究与一则阅读笔记，整理成写报告时可用的依据。",
+        captured: "把两篇研究与一则阅读记录，整理成写报告时可用的依据。",
         questionLabel: "这次要做",
         question: "远程办公效率更高吗？读过的研究怎么说？",
         nextStepLabel: "接着往前",
@@ -513,10 +513,10 @@ const copy: Record<Locale, HeroScenariosCopy> = {
           },
           {
             id: "research-notes",
-            label: "阅读笔记（示例）",
+            label: "阅读记录（示例）",
             detail: "研究比较要点",
             excerpt: "比较时记下工作类型、每周在家天数与绩效衡量方式。两篇研究的情境不同，不宜把结论直接套用到所有工作。",
-            excerptLabel: "示意阅读笔记",
+            excerptLabel: "示意阅读记录",
           },
         ],
       },
@@ -542,7 +542,7 @@ const answerHighlights: Record<Locale, Record<ScenarioId, readonly string[]>> = 
 
 // Keep intentional reading units stable across Node and browser ICU versions.
 // Intl.Segmenter disagrees on tokens such as Trip.com and breaks hydration.
-const sourceReadingUnits = /(資料匯出|数据导出|遠端工作|远程办公|混合辦公|混合办公|知識頁|知识页|第一期|負責人|负责人|交付範圍|交付范围|專案|项目|研究|客服|實驗|实验|績效|绩效|產出|产出|工作類型|工作类型|辦公方式|办公方式|閱讀筆記|阅读笔记|重試|重试|逾時|超时|來源|来源|決策|决策|登入|登录|付款|確認|确认|[A-Za-z0-9]+(?:[._/-][A-Za-z0-9]+)*)/g;
+const sourceReadingUnits = /(資料匯出|数据导出|遠端工作|远程办公|混合辦公|混合办公|筆記|笔记|第一期|負責人|负责人|交付範圍|交付范围|專案|项目|研究|客服|實驗|实验|績效|绩效|產出|产出|工作類型|工作类型|辦公方式|办公方式|閱讀紀錄|阅读记录|重試|重试|逾時|超时|來源|来源|決策|决策|登入|登录|付款|確認|确认|[A-Za-z0-9]+(?:[._/-][A-Za-z0-9]+)*)/g;
 
 function SourceExcerpt({ text, locale }: { text: string; locale: Locale }) {
   if (locale === "en") return text;

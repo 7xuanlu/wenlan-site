@@ -9,9 +9,9 @@ const copyByLocale = {
     setup: "Local storage; model processing follows your provider settings.",
     setupLink: "Data and privacy",
     items: [
-      { title: "Open your files", body: "Read your Pages and session notes as Markdown in your own editor.", link: "Files and portability", href: "/docs/import-and-portability" },
+      { title: "Open your files", body: "Read your notes and session logs as Markdown in your own editor.", link: "Files and portability", href: "/docs/import-and-portability" },
       { title: "Keep projects apart", body: "Use Spaces for different projects and personal work. Choose the right Space when saving or asking AI.", link: "How Spaces work", href: "/docs/spaces" },
-      { title: "See what changed", body: "Inspect earlier Pages and notes in local Git history, and compare changes before restoring a file.", link: "Local version history", href: "/docs/local-git-history" },
+      { title: "See what changed", body: "Inspect earlier notes and session logs in local Git history, and compare changes before restoring a file.", link: "Local version history", href: "/docs/local-git-history" },
     ],
   },
   "zh-TW": {
@@ -20,9 +20,9 @@ const copyByLocale = {
     setup: "資料保存在本機；模型處理位置依供應商設定而定。",
     setupLink: "資料與隱私",
     items: [
-      { title: "檔案自己能讀", body: "知識頁與工作紀錄以 Markdown 保存，用自己的編輯器也能開啟。", link: "檔案與可攜性", href: "/docs/import-and-portability" },
+      { title: "檔案自己能讀", body: "筆記與工作紀錄以 Markdown 保存，用自己的編輯器也能開啟。", link: "檔案與可攜性", href: "/docs/import-and-portability" },
       { title: "不同專案分開放", body: "用 Space 整理各個專案與個人工作，保存或詢問 AI 時選對空間。", link: "認識工作空間", href: "/docs/spaces" },
-      { title: "改過什麼查得到", body: "透過本機 Git 歷史查看舊版知識頁與紀錄，先比較差異，再還原檔案。", link: "查看版本歷史", href: "/docs/local-git-history" },
+      { title: "改過什麼查得到", body: "透過本機 Git 歷史查看舊版筆記與紀錄，先比較差異，再還原檔案。", link: "查看版本歷史", href: "/docs/local-git-history" },
     ],
   },
   "zh-CN": {
@@ -31,9 +31,9 @@ const copyByLocale = {
     setup: "数据保存在本机；模型处理位置取决于提供商设置。",
     setupLink: "数据与隐私",
     items: [
-      { title: "文件自己能读", body: "知识页与工作记录以 Markdown 保存，用自己的编辑器也能打开。", link: "文件与可移植性", href: "/docs/import-and-portability" },
+      { title: "文件自己能读", body: "笔记与工作记录以 Markdown 保存，用自己的编辑器也能打开。", link: "文件与可移植性", href: "/docs/import-and-portability" },
       { title: "不同项目分开放", body: "用 Space 整理各个项目与个人工作，保存或询问 AI 时选对空间。", link: "了解工作空间", href: "/docs/spaces" },
-      { title: "改过什么查得到", body: "通过本地 Git 历史查看旧版知识页与记录，先比较差异，再恢复文件。", link: "查看版本历史", href: "/docs/local-git-history" },
+      { title: "改过什么查得到", body: "通过本地 Git 历史查看旧版笔记与记录，先比较差异，再恢复文件。", link: "查看版本历史", href: "/docs/local-git-history" },
     ],
   },
 } as const;

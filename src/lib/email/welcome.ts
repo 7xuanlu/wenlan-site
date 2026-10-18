@@ -64,19 +64,19 @@ const LOCALE_COPY = {
     title: "Welcome to Wenlan",
     greeting: "Thanks for joining Wenlan.",
     introduction:
-      "Wenlan is a source-backed knowledge wiki for AI work. Turn documents, notes, and the decisions you make along the way into readable, searchable Pages—and find them again through your connected AI tools.",
+      "Wenlan is a source-backed knowledge wiki for AI work. Turn documents, Markdown files, and the decisions you make along the way into readable, searchable notes, then find them again through your connected AI tools.",
     introductionHtml:
-      "Wenlan is a source-backed knowledge wiki for AI work. Turn documents, notes, and the decisions you make along the way into readable, searchable Pages—and find them again through your connected AI tools.",
+      "Wenlan is a source-backed knowledge wiki for AI work. Turn documents, Markdown files, and the decisions you make along the way into readable, searchable notes, then find them again through your connected AI tools.",
     reviewNote:
       "Follow each source and revision trail yourself so important work stays reviewable and your judgment stays in your hands.",
     ctaLabel: "Get started →",
     setupNote:
-      "After installation, save one useful work note, then try finding it again from your AI tool.",
+      "After installation, save one useful decision, then try finding it again from your AI tool.",
     setupNoteHtml:
-      "After installation, save one useful work note, then try finding it again from your AI tool.",
+      "After installation, save one useful decision, then try finding it again from your AI tool.",
     nextLabel: "What to explore next",
     nextDescription:
-      "Start with the docs to see how Wenlan turns source material into citable Pages and a reusable AI workflow.",
+      "Start with the docs to see how Wenlan turns source material into citable notes and a reusable AI workflow.",
     docsLabel: "Browse docs",
     githubLabel: "View on GitHub",
     homeLabel: "Back to Wenlan",
@@ -98,16 +98,16 @@ const LOCALE_COPY = {
     title: "歡迎來到文瀾",
     greeting: "謝謝你來到 Wenlan 文瀾。",
     introduction:
-      "文瀾是為 AI 工作設計的、有來源依據的知識 Wiki。你可以把文件、筆記與工作中累積的決策，整理成可閱讀、可搜尋的頁面，再透過已連接的 AI 工具找回。",
+      "文瀾是為 AI 工作設計的、有來源依據的知識 Wiki。你可以把文件、Markdown 檔案與工作中累積的決策，整理成可閱讀、可搜尋的筆記，再透過已連接的 AI 工具找回。",
     introductionHtml:
-      "文瀾是為 AI 工作設計的、有來源依據的<span style=\"white-space:nowrap;\">知識 Wiki</span>。你可以把文件、筆記與工作中累積的<span style=\"white-space:nowrap;\">決策</span>，整理成可閱讀、可搜尋的頁面，再透過已連接的 <span style=\"white-space:nowrap;\">AI 工具找回。</span>",
+      "文瀾是為 AI 工作設計的、有來源依據的<span style=\"white-space:nowrap;\">知識 Wiki</span>。你可以把文件、Markdown 檔案與工作中累積的<span style=\"white-space:nowrap;\">決策</span>，整理成可閱讀、可搜尋的筆記，再透過已連接的 <span style=\"white-space:nowrap;\">AI 工具找回。</span>",
     reviewNote: "重要內容可沿著來源與修訂脈絡自行核對，保留你的判斷與審查主動權。",
     ctaLabel: "開始使用 →",
     setupNote: "安裝後，先保存一則工作紀錄，再試著從 AI 工具找回它。",
     setupNoteHtml:
       "安裝後，先保存一則工作紀錄，再試著從 AI 工具<span style=\"white-space:nowrap;\">找回它。</span>",
     nextLabel: "接下來可以看看",
-    nextDescription: "從文件開始，理解 Wenlan 的有來源引用的知識頁與 AI 工作流程。",
+    nextDescription: "從文件開始，理解 Wenlan 的有來源引用的筆記與 AI 工作流程。",
     docsLabel: "瀏覽文件",
     githubLabel: "查看 GitHub",
     homeLabel: "回到 Wenlan",
@@ -129,15 +129,15 @@ const LOCALE_COPY = {
     title: "欢迎来到文澜",
     greeting: "谢谢你来到 Wenlan 文澜。",
     introduction:
-      "文澜是为 AI 工作设计的、有来源依据的知识 Wiki。你可以把文档、笔记与工作中积累的决策，整理成可阅读、可搜索的页面，再通过已连接的 AI 工具找回。",
+      "文澜是为 AI 工作设计的、有来源依据的知识 Wiki。你可以把文档、Markdown 文件与工作中积累的决策，整理成可阅读、可搜索的笔记，再通过已连接的 AI 工具找回。",
     introductionHtml:
-      "文澜是为 AI 工作设计的、有来源依据的知识 Wiki。你可以把文档、笔记与工作中积累的决策，整理成可阅读、可搜索的页面，再通过已连接的 <span style=\"white-space:nowrap;\">AI 工具找回。</span>",
+      "文澜是为 AI 工作设计的、有来源依据的知识 Wiki。你可以把文档、Markdown 文件与工作中积累的决策，整理成可阅读、可搜索的笔记，再通过已连接的 <span style=\"white-space:nowrap;\">AI 工具找回。</span>",
     reviewNote: "重要内容可以沿着来源与修订脉络自行核对，保留你的判断与审核主动权。",
     ctaLabel: "开始使用 →",
     setupNote: "安装后，先保存一条工作记录，再试着从 AI 工具找回它。",
     setupNoteHtml: "安装后，先保存一条工作记录，再试着从 AI 工具找回它。",
     nextLabel: "接下来可以看看",
-    nextDescription: "从文档开始，了解 Wenlan 的有来源引用的知识页面与 AI 工作流程。",
+    nextDescription: "从文档开始，了解 Wenlan 的有来源引用的笔记与 AI 工作流程。",
     docsLabel: "浏览文档",
     githubLabel: "查看 GitHub",
     homeLabel: "回到 Wenlan",

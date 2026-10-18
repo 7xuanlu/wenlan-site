@@ -11,12 +11,12 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "946673f1f7bfbfbc384eab8e7031711e1c04291b45974a791b813ae7cc93a184",
+    sourceHash: "c7a7b561f315a034c4e95b77e2addff8ae7d0cd35540781d7647b8392ff4a491",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库",
         description:
-          "Wenlan 文澜是有来源依据的 AI 知识库，也是 AI 工作的 LLM wiki：把文档、笔记和决策整理成可查找、可核对、可审核的页面，让你和 AI 接着往前做。本地运行，连接 Claude Code、Codex、ChatGPT 等 AI 工具，开源免费。",
+          "Wenlan 文澜是有来源依据的 AI 知识库，也是 AI 工作的 LLM wiki：把文档和决策整理成可查找、可核对、可审核的笔记，让你和 AI 接着往前做。本地运行，连接 Claude Code、Codex、ChatGPT 等 AI 工具，开源免费。",
       },
       nav: {
         schemaName: "Wenlan 文澜网站导航",
@@ -37,7 +37,7 @@ export const zhCNContent = {
       hero: {
         title: "Wenlan 文澜",
         description:
-          "保存有用决策，建立有来源的页面，再通过已连接的 AI 工具找回。",
+          "保存有用决策，整理出有来源的笔记，再通过已连接的 AI 工具找回。",
         primaryCta: { id: "download", href: "#download", label: "下载 Wenlan" },
         secondaryCta: {
           id: "github",
@@ -122,7 +122,7 @@ export const zhCNContent = {
             id: "macos-arm64",
             name: "Wenlan 桌面版",
             architecture: "macOS · Apple silicon 桌面版",
-            description: "最快开始阅读 Page 与检查来源的方式。",
+            description: "最快开始阅读笔记与检查来源的方式。",
             actionLabel: "下载 macOS 桌面版",
             packageIncludesLabel: "桌面 App · 内含本地 runtime",
             guideLabel: "打开安全安装指南",
@@ -203,20 +203,20 @@ export const zhCNContent = {
         eyebrow: "使用场景",
         title: "给 code、客户工作、研究用的\nLLM wiki。",
         description:
-          "Wenlan 把 repo 事实、客户限制、source trails 和读书笔记变成 agent 能简报、召回、交接的 source-cited 页面。",
-        evidenceLabel: "Agent 可引用的页面",
-        outcomeLabel: "可引用页面",
+          "Wenlan 把 repo 事实、客户限制、source trails 和学习资料变成 agent 能简报、召回、交接的 source-cited 笔记。",
+        evidenceLabel: "Agent 可引用的笔记",
+        outcomeLabel: "可引用笔记",
         actionsLabel: "Agent 动作",
         index: {
           title: "Wenlan Wiki 索引",
           activeViewLabel: "当前视图",
-          pagesTitle: "Agent 可引用的页面",
-          pagesLabel: "页面",
+          pagesTitle: "Agent 可引用的笔记",
+          pagesLabel: "笔记",
           sourcesLabel: "来源",
           statusLabel: "状态",
           sourceBackedLabel: "有来源",
           citationLabel: "Agent 引用",
-          citingLabel: "引用中的页面",
+          citingLabel: "引用中的笔记",
         },
         scenarios: [
           {
@@ -225,7 +225,7 @@ export const zhCNContent = {
             railLabel: "代码",
             summary: "会持续更新的工程文档",
             lead: "维护工程师真的会更新的 codebase 文档。",
-            body: "Wenlan 可以把 repo 事实整理成有来源的工程 Pages：架构地图、runbook、migration plan、integration note、debugging log。更新情况取决于已配置的处理流程与来源变更。",
+            body: "Wenlan 可以把 repo 事实整理成有来源的工程笔记：架构地图、runbook、migration plan、integration note、debugging log。更新情况取决于已配置的处理流程与来源变更。",
             evidence: [
               {
                 id: "architecture",
@@ -248,7 +248,7 @@ export const zhCNContent = {
                 detail: "Dependency quirks、版本限制、adapter decisions，以及连到 source docs 的 upstream issues。",
               },
             ],
-            outcome: "下一个 agent 可以打开工程 Page，检查它的来源。",
+            outcome: "下一个 agent 可以打开工程笔记，检查它的来源。",
           },
           {
             id: "product-customers",
@@ -262,7 +262,7 @@ export const zhCNContent = {
               {
                 id: "customer-voice",
                 label: "客户反对点",
-                detail: "访谈、support、sales notes 中反复出现的需求和反对理由。",
+                detail: "访谈、support、销售沟通中反复出现的需求和反对理由。",
               },
               {
                 id: "client-constraints",
@@ -286,8 +286,8 @@ export const zhCNContent = {
             id: "research-writing",
             label: "Research / 写作",
             railLabel: "研究",
-            summary: "sources、有引用的页面、下一版 outline",
-            lead: "把研究脉络变成可引用的 wiki 页面。",
+            summary: "sources、有引用的笔记、下一版 outline",
+            lead: "把研究脉络变成可引用的笔记。",
             body: "Papers、docs、transcripts 和 links 堆起来后，下一稿可以从可信 quote、待重查 claim，以及有引用的 outline 接续。",
             evidence: [
               {
@@ -318,12 +318,12 @@ export const zhCNContent = {
             label: "学习与读书",
             railLabel: "学习",
             summary: "概念、前置知识、复习",
-            lead: "把读书 session 变成能教下一次的页面。",
-            body: "终于想通的解释会变成概念页面，前置知识也链接好，下一次 session 是在复习理解，而不是回头翻聊天记录。",
+            lead: "把读书 session 变成能教下一次的笔记。",
+            body: "终于想通的解释会变成概念笔记，前置知识也链接好，下一次 session 是在复习理解，而不是回头翻聊天记录。",
             evidence: [
               {
                 id: "concept-pages",
-                label: "概念页面",
+                label: "概念笔记",
                 detail: "那个终于说通的解释，连同让它成立的来源一起留下。",
               },
               {
@@ -342,7 +342,7 @@ export const zhCNContent = {
                 detail: "接下来该读什么，按你已掌握的前置知识排序。",
               },
             ],
-            outcome: "下一次读书 session 打开的是概念页面，不是上周的聊天滚动。",
+            outcome: "下一次读书 session 打开的是概念笔记，不是上周的聊天滚动。",
           },
         ],
       },
@@ -368,7 +368,7 @@ export const zhCNContent = {
         memoryDistillery: {
           eyebrow: "刻意蒸馏",
           title: "Wenlan 把重复出现的 context 变成 LLM wiki。",
-          body: "当重复捕捉的内容值得变成可读的 wiki 页面时，运行 /distill。可选的本地模型或 API key 路径可以加入背景提取与页面更新。",
+          body: "当重复捕捉的内容值得变成可读的笔记时，运行 /distill。可选的本地模型或 API key 路径可以加入背景提取与笔记更新。",
           note: "已配置的下一次运行可以从有引用的 context 开始，而不是从 transcript 残留开始。",
           visualLabels: {
             merged: "合并",
@@ -377,9 +377,9 @@ export const zhCNContent = {
           },
         },
         features: {
-          eyebrow: "知识页面",
-          title: "工作会变成可重用的页面。",
-          body: "整理过的决策与教训会成为耐用页面，而不是被埋在聊天记录里。它们足够有组织，agent 能使用；也足够具体，人可以阅读。",
+          eyebrow: "笔记",
+          title: "工作会变成可重用的笔记。",
+          body: "整理过的决策与教训会成为耐用的笔记，而不是被埋在聊天记录里。它们足够有组织，agent 能使用；也足够具体，人可以阅读。",
           note: "你的工作不再只是 transcript 历史，而是开始变成项目知识。",
         },
         humanControl: {
@@ -461,12 +461,12 @@ export const zhCNContent = {
           {
             id: "what-is-wenlan",
             q: "Wenlan 是什么？",
-            a: "Wenlan 是本地 AI 知识库与 LLM wiki。连接 AI 工具后，可以保存决策并再次找回；生成页面需要已配置的模型或 AI 工具。使用答案前，仍要核对它引用的来源。",
+            a: "Wenlan 是本地 AI 知识库与 LLM wiki。连接 AI 工具后，可以保存决策并再次找回；整理笔记需要已配置的模型或 AI 工具。使用答案前，仍要核对它引用的来源。",
           },
           {
             id: "built-in-memory",
             q: "Wenlan 和 AI 工具内置的记忆有什么不同？",
-            a: "内置记忆的行为因工具而异，请实际比较导出、来源、编辑及跨工具访问。Wenlan 把知识留在本地，提供可检查的页面，并保留生成页面时使用的来源记录 ID。",
+            a: "内置记忆的行为因工具而异，请实际比较导出、来源、编辑及跨工具访问。Wenlan 把知识留在本地，提供可检查的笔记，并保留整理笔记时使用的来源记录 ID。",
           },
           {
             id: "retrieval-quality",
@@ -481,7 +481,7 @@ export const zhCNContent = {
           {
             id: "memory-mcp",
             q: "Wenlan 只是另一个 memory MCP 吗？",
-            a: "不是。MCP server 是 connector。Wenlan 也包含本地 daemon、manual /distill、可选的 model-backed extraction 与 Page work、本地 retrieval、source references、review surfaces、memory、Page 和 session artifacts 的真实 git versioning，以及可读的 Markdown export paths。",
+            a: "不是。MCP server 是 connector。Wenlan 也包含本地 daemon、manual /distill、可选的 model-backed extraction 与笔记整理、本地 retrieval、source references、review surfaces、memory、笔记和 session artifacts 的真实 git versioning，以及可读的 Markdown export paths。",
           },
           {
             id: "tools",
@@ -491,12 +491,12 @@ export const zhCNContent = {
           {
             id: "not-notes",
             q: "Wenlan 能取代 Notion 或 Obsidian 吗？",
-            a: "不能。Wenlan 不是 notes app。它可以把 Markdown、text、可提取文字的 PDF、文件夹和 Obsidian vault 登记为来源。Obsidian 输入是只读，按需重新同步；Wenlan 自己的 Pages 仍是 ~/.wenlan/ 底下可读的 Markdown。",
+            a: "不能。Wenlan 不取代你用来写作的 App。它可以把 Markdown 文件、text、可提取文字的 PDF、文件夹和 Obsidian 库登记为来源。Obsidian 输入是只读，按需重新同步；Wenlan 自己的笔记仍是 ~/.wenlan/ 底下可读的 Markdown。",
           },
           {
             id: "setup",
             q: "我要怎么设置？",
-            a: "先安装 Wenlan，再连接一个 AI 工具。Claude Code 和 Codex 插件提供 handoff、recall 等命令，其他本地工具通过 MCP 连接。保存与搜索记录不需要模型 API 密钥；整理成知识页时，会使用你配置的本地或云端模型。入门指南会带你完成所选工具的设置。 浏览器工具使用 OAuth 网页访问，需要由你批准连接，并选择共享整个资料库或一个 Space，也能在 App 中撤销访问。",
+            a: "先安装 Wenlan，再连接一个 AI 工具。Claude Code 和 Codex 插件提供 handoff、recall 等命令，其他本地工具通过 MCP 连接。保存与搜索记录不需要模型 API 密钥；整理成笔记时，会使用你配置的本地或云端模型。入门指南会带你完成所选工具的设置。 浏览器工具使用 OAuth 网页访问，需要由你批准连接，并选择共享整个资料库或一个 Space，也能在 App 中撤销访问。",
           },
           {
             id: "platforms",
@@ -520,27 +520,27 @@ export const zhCNContent = {
           eyebrow: "你与 AI 共用的个人 Wiki",
           headline: { pre: "把笔记和 AI 对话，", emphasis: "整理成你的知识库。", post: "" },
           description:
-            "笔记散落各处，好点子留在对话里。文澜帮你整理重点、持续更新，方便你查阅，也让 AI 更容易找到需要的信息。",
+            "文件散落各处，好点子留在对话里。文澜帮你整理重点、持续更新，方便你查阅，也让 AI 更容易找到需要的信息。",
           worksWithLabel: "可搭配",
-          worksWithNote: "可读取 Obsidian 笔记，保留原文。",
+          worksWithNote: "可读取 Obsidian 库，保留原文。",
         },
         fit: {
           "title": "Wenlan 适合你吗？",
           "needs": [
             {
               "title": "聊过、读过的，下次用得上",
-              "body": "把笔记、文档和保存的对话整理成知识页，需要时找得到，也查得到来源。"
+              "body": "把 Markdown 文件、文档和保存的对话整理成笔记，需要时找得到，也查得到来源。"
             },
             {
               "title": "项目有变，知识也跟着更新",
-              "body": "已连接的文档更新后，Wenlan 协助更新相关知识页，减少反复整理。"
+              "body": "已连接的文档更新后，Wenlan 协助更新相关笔记，减少反复整理。"
             },
             {
               "title": "换个 AI，也能用同一份知识",
               "body": "让已连接的 AI 工具查阅你积累的知识，不必各自整理一份。"
             }
           ],
-          "comparisonPrompt": "已经有笔记或 AI 工具？",
+          "comparisonPrompt": "已经在用 Obsidian、Notion 或 AI 工具？",
           "comparisonLabel": "看看区别"
         },
         pains: {
@@ -868,10 +868,10 @@ export const zhCNContent = {
         },
         pipeline: {
           intro:
-            "连接 AI 工具后，用 Wenlan 保存有用决策，再用已配置的模型生成有来源的页面；下次遇到相关问题，再查回已保存的记录。",
+            "连接 AI 工具后，用 Wenlan 保存有用决策，再用已配置的模型整理出有来源的笔记；下次遇到相关问题，再查回已保存的记录。",
           stages: [
             { id: "capture", step: "/handoff · 工作收尾", title: "保存有用决策" },
-            { id: "distill", step: "/distill · 整理来源", title: "生成有来源的页面" },
+            { id: "distill", step: "/distill · 整理来源", title: "整理出有来源的笔记" },
             { id: "brief", step: "/recall · 遇到相关问题", title: "下次把它找回来" },
           ],
           distillNote: "AI 代理也能直接创建主题页；请先连接工具，确认生成内容所需的模型配置，并检查实际结果。",
@@ -881,18 +881,18 @@ export const zhCNContent = {
           cells: [
             {
               id: "pages",
-              title: "留下能接着用的知识页面",
-              body: "将决策与经验整理成你能阅读、AI 能使用的页面，不再只留在聊天记录里。",
+              title: "留下能接着用的笔记",
+              body: "将决策与经验整理成你能阅读、AI 能使用的笔记，不再只留在聊天记录里。",
             },
             {
               id: "graph",
               title: "找回答案，也找回脉络",
-              body: "配置检索后，可一并找回相关人物、项目与知识页面，再沿着链接检查来源记录。",
+              body: "配置检索后，可一并找回相关人物、项目与笔记，再沿着链接检查来源记录。",
             },
             {
               id: "citations",
               title: "答案从哪来，看得见",
-              body: "Wenlan 整理出的页面附有来源链接，方便回查支持它的记录。来源链接本身不代表每个主张都已被证明。",
+              body: "Wenlan 整理出的笔记附有来源链接，方便回查支持它的记录。来源链接本身不代表每个主张都已被证明。",
             },
             {
               id: "review",
@@ -902,7 +902,7 @@ export const zhCNContent = {
             {
               id: "nurture",
               title: "知道哪些内容需要重查",
-              body: "配置后台处理后，可批量建立关联、更新匹配页面，并标记过时记录供你检查。",
+              body: "配置后台处理后，可批量建立关联、更新匹配的笔记，并标记过时记录供你检查。",
             },
             {
               id: "spaces",
@@ -912,7 +912,7 @@ export const zhCNContent = {
             {
               id: "git",
               title: "像代码一样有版本",
-              body: "记录、页面与会话产物保存在真正的 Git 历史里，可以查看差异，也可以还原。",
+              body: "记录、笔记与会话产物保存在真正的 Git 历史里，可以查看差异，也可以还原。",
             },
             {
               id: "mcp",
@@ -924,12 +924,12 @@ export const zhCNContent = {
         storage: {
           title: "记得意思，\n却忘了当时怎么写？",
           intro:
-            "Hybrid Retrieval 结合关键词、语义与关联脉络，帮助找回相关知识。配置好的页面处理流程，再将来源整理成能阅读、核对与保存的 Markdown。",
+            "Hybrid Retrieval 结合关键词、语义与关联脉络，帮助找回相关知识。配置好后，Wenlan 会把来源整理成笔记：能阅读、核对与保存的 Markdown。",
           indexLabel: "索引 · agents 的工作记忆",
           filesLabel: "Markdown · 属于你的长期记录",
-          fusionNote: "索引帮你找回资料，页面让你阅读与核对；两者各有用途。",
-          distillCaption: "整理成页",
-          ingestCaption: "索引页面",
+          fusionNote: "索引帮你找回资料，笔记让你阅读与核对；两者各有用途。",
+          distillCaption: "整理成笔记",
+          ingestCaption: "索引笔记",
           tradeoffs: [
             {
               id: "files-alone",
@@ -972,12 +972,12 @@ export const zhCNContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "dcd2b8161c286d5b55cf1ca7a8050fe92a4fba8922bb9f1ead0903800346777a",
+    sourceHash: "6edd058e3532090984bad475a181e731e55eca23f664771ac31c765f5493c7f3",
     content: {
       seo: {
         title: "关于文澜 Wenlan：开源、本地优先的个人 AI 知识库",
         description:
-          "Wenlan 是开源、本地优先的 AI 工作 LLM wiki，由 AI 智能体打造并以来源为根基：把文档、笔记与决策整理成可引用、可审核、可更新的页面，让 AI 工作有据可查、持续积累。支持 Windows、macOS 与 Linux，免费下载使用。了解文澜的理念、开源协议与产品路线图。",
+          "Wenlan 是开源、本地优先的 AI 工作 LLM wiki，由 AI 智能体打造并以来源为根基：把文档与决策整理成可引用、可审核、可更新的笔记，让 AI 工作有据可查、持续积累。支持 Windows、macOS 与 Linux，免费下载使用。了解文澜的理念、开源协议与产品路线图。",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -998,7 +998,7 @@ export const zhCNContent = {
           title: "为什么 Wenlan 存在",
           paragraphs: [
             "AI 工作常把重要决定、调试经验和项目信息留在旧对话里。Wenlan 把这些知识整理成日后找得到的内容。",
-            "保存重要信息、补上可信来源，再整理成可检查、可搜索的页面，让不同 AI 工具都能接着使用。",
+            "保存重要信息、补上可信来源，再整理成可检查、可搜索的笔记，让不同 AI 工具都能接着使用。",
           ],
         },
         {
@@ -1007,7 +1007,7 @@ export const zhCNContent = {
           title: "由 Qi-Xuan Lu 构建",
           paragraphs: [
             "Wenlan 由 Qi-Xuan Lu (GitHub @7xuanlu) 构建与维护。背景涵盖 AI infrastructure、knowledge graphs 和 local-first systems。",
-            "Wenlan 让 AI 代理可以补充内容，也让人可以检查结果。带有来源链接的页面和工作记录会以易读文件保存，再由本地服务提供给已连接的 AI 工具。",
+            "Wenlan 让 AI 代理可以补充内容，也让人可以检查结果。带有来源链接的笔记和工作记录会以易读文件保存，再由本地服务提供给已连接的 AI 工具。",
             "项目渠道：bugs 和 feature requests 用 GitHub Issues，vulnerabilities 看 SECURITY.md，变更则看 Wenlan release notes。",
           ],
         },
@@ -1040,8 +1040,8 @@ export const zhCNContent = {
           },
           {
             id: "deliberate-distillation",
-            title: "需要时整理成页",
-            body: "在 Wenlan 中，主题整理到适合成页时，可运行 /distill 创建有来源的页面。完成模型配置后，也可以选择自动生成页面，并补充更多想法之间的联系。",
+            title: "需要时整理成笔记",
+            body: "在 Wenlan 中，主题积累到足以写成一篇笔记时，可运行 /distill 创建有来源的笔记。完成模型配置后，也可以选择自动整理笔记，并补充更多想法之间的联系。",
           },
         ],
       },
@@ -1161,12 +1161,12 @@ export const zhCNContent = {
   },
   docs: {
     status: "translated",
-    sourceHash: "ca8dfdb99b250d993a36180a4465eacc2be502e87c5a8ba561a046c372409960",
+    sourceHash: "961aef4c9075835816a06787070813e8c786a92681e1b8da4ee8797ca7d793c6",
     content: {
       seo: {
         title: "文澜 Wenlan 文档：安装、工作流程与参考",
         description:
-          "安装 Wenlan，学习 AI 工作记忆循环：从安装、连接到 Claude Code、Codex、ChatGPT 等 MCP 客户端，再到理解有来源依据的 wiki 页面、引用、检索与更新机制如何配合，让 AI 记住你的工作。包含分步安装指南、客户端接入说明与常见问题解答。",
+          "安装 Wenlan，学习 AI 工作记忆循环：从安装、连接到 Claude Code、Codex、ChatGPT 等 MCP 客户端，再到理解有来源依据的笔记、引用、检索与更新机制如何配合，让 AI 记住你的工作。包含分步安装指南、客户端接入说明与常见问题解答。",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -1239,7 +1239,7 @@ export const zhCNContent = {
                 label: "概念",
                 title: "核心概念",
                 description:
-                  "认识 Wenlan 的基本组成：记忆、工作会话、交接、页面、MCP、本地索引和 Markdown 文件。",
+                  "认识 Wenlan 的基本组成：记忆、工作会话、交接、笔记、MCP、本地索引和 Markdown 文件。",
                 meta: "Qi-Xuan Lu · 更新于 2026 年 6 月 24 日 · 6 分钟阅读",
               },
             ],
@@ -1265,7 +1265,7 @@ export const zhCNContent = {
                 label: "术语表",
                 title: "术语表",
                 description:
-                  "查询 Wenlan 常用词汇，包括记忆、交接、页面、工作空间、daemon、MCP、本地索引和来源记录。",
+                  "查询 Wenlan 常用词汇，包括记忆、交接、笔记、工作空间、daemon、MCP、本地索引和来源记录。",
                 meta: "Qi-Xuan Lu · 更新于 2026 年 6 月 24 日 · 5 分钟阅读",
               },
               {
@@ -1326,7 +1326,7 @@ export const zhCNContent = {
                 id: "upgrade-notes",
                 href: "/docs/upgrade-notes",
                 label: "升级",
-                title: "升级笔记",
+                title: "升级说明",
                 description:
                   "查看升级 Wenlan 时需要重新运行哪些步骤、如何确认正常，以及版本改动内容。",
                 meta: "Qi-Xuan Lu · 更新于 2026 年 6 月 24 日 · 5 分钟阅读",
@@ -1397,10 +1397,10 @@ export const zhCNContent = {
               {
                 id: "source-backed-pages",
                 href: "/docs/source-backed-pages",
-                label: "Pages 页面",
-                title: "有来源支撑的 Pages",
+                label: "笔记",
+                title: "有来源支撑的笔记",
                 description:
-                  "了解 Wenlan 如何把记录整理成易读页面，并保留来源记忆 ID、版本状态和更新方式。",
+                  "了解 Wenlan 如何把记录整理成易读的笔记，并保留来源记忆 ID、版本状态和更新方式。",
                 meta: "Qi-Xuan Lu · 更新于 2026 年 6 月 24 日 · 5 分钟阅读",
               },
               {
@@ -1418,7 +1418,7 @@ export const zhCNContent = {
                 label: "版本",
                 title: "本地 Git History",
                 description:
-                  "查看 Wenlan 为页面、工作记录、交接和状态文件保留的 git 历史。",
+                  "查看 Wenlan 为笔记、工作记录、交接和状态文件保留的 git 历史。",
                 meta: "Qi-Xuan Lu · 更新于 2026 年 6 月 24 日 · 5 分钟阅读",
               },
               {
@@ -1659,7 +1659,7 @@ export const zhCNContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "a942dd503a10232ec60b60fac0d5129f30c178a8525bf6b8dff657da1ceaa274",
+    sourceHash: "0595fc2b224a1b7ddf539e9157f6aee7309a57f7dd272345b43939f5ce1db746",
     content: {
       seo: {
         title: "安装文澜 Wenlan：Claude Code、Codex、ChatGPT 与 MCP",
@@ -1691,8 +1691,8 @@ export const zhCNContent = {
           number: "01",
           title: "安装并打开 Wenlan",
           paragraphs: [
-            "下载 macOS Apple silicon 或 Windows x64 桌面版，按照首次设置引导完成安装。你的笔记和知识页会保存在本机的 Wenlan 知识库。",
-            "如果要把来源整理成知识页，请在设置中选择本地模型，或配置云端模型服务。使用云端处理时，相关内容会发送给该服务商。"
+            "下载 macOS Apple silicon 或 Windows x64 桌面版，按照首次设置引导完成安装。你的笔记和来源会保存在本机的 Wenlan 知识库。",
+            "如果要把来源整理成笔记，请在设置中选择本地模型，或配置云端模型服务。使用云端处理时，相关内容会发送给该服务商。"
           ],
           commands: [
             "# macOS Apple silicon\nnpx -y wenlan setup",
@@ -1777,7 +1777,7 @@ export const zhCNContent = {
           title: "保存一个决定，再开新对话找回来",
           paragraphs: [
             "连接 Claude Code 或 Codex 插件后，试着保存下面这个虚构决定。Claude Code 使用 /wenlan:handoff 和 /wenlan:recall；Codex 使用 /handoff 和 /recall。",
-            "保存后，开一段新对话查找这个决定。确认回答保留“只能起草”的限制，也能找到原来保存的记录。保存交接记录与整理成知识页，是两个不同步骤。",
+            "保存后，开一段新对话查找这个决定。确认回答保留“只能起草”的限制，也能找到原来保存的记录。保存交接记录与整理成笔记，是两个不同步骤。",
             "本地 MCP 工具可以用普通文字保存再搜索；浏览器远程连接目前仅支持查询，请先在桌面 App 添加笔记或文件，再从 AI 查找。"
           ],
           commands: [

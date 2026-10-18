@@ -11,12 +11,12 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "946673f1f7bfbfbc384eab8e7031711e1c04291b45974a791b813ae7cc93a184",
+    sourceHash: "c7a7b561f315a034c4e95b77e2addff8ae7d0cd35540781d7647b8392ff4a491",
     content: {
       seo: {
         title: "文瀾 Wenlan｜個人 AI 知識庫",
         description:
-          "Wenlan 文瀾是有來源依據的 AI 知識庫，也是 AI 工作的 LLM wiki：把文件、筆記和決策整理成可查找、可核對、可審查的頁面，讓你和 AI 接著往前做。本地運行，連接 Claude Code、Codex、ChatGPT 等 AI 工具，開源免費。",
+          "Wenlan 文瀾是有來源依據的 AI 知識庫，也是 AI 工作的 LLM wiki：把文件和決策整理成可查找、可核對、可審查的筆記，讓你和 AI 接著往前做。本地運行，連接 Claude Code、Codex、ChatGPT 等 AI 工具，開源免費。",
       },
       nav: {
         schemaName: "Wenlan 文瀾網站導覽",
@@ -37,7 +37,7 @@ export const zhTWContent = {
       hero: {
         title: "Wenlan 文瀾",
         description:
-          "保存有用決策，建立有來源的頁面，再透過已連接的 AI 工具找回。",
+          "保存有用決策，整理出有來源的筆記，再透過已連接的 AI 工具找回。",
         primaryCta: { id: "download", href: "#download", label: "下載 Wenlan" },
         secondaryCta: {
           id: "github",
@@ -122,7 +122,7 @@ export const zhTWContent = {
             id: "macos-arm64",
             name: "Wenlan 桌面版",
             architecture: "macOS · Apple silicon 桌面版",
-            description: "最快開始閱讀 Page 與檢查來源的方式。",
+            description: "最快開始閱讀筆記與檢查來源的方式。",
             actionLabel: "下載 macOS 桌面版",
             packageIncludesLabel: "桌面 App · 內含本地 runtime",
             guideLabel: "開啟安全安裝指南",
@@ -203,20 +203,20 @@ export const zhTWContent = {
         eyebrow: "使用場景",
         title: "給 code、客戶工作、研究用的\nLLM wiki。",
         description:
-          "Wenlan 把 repo 事實、客戶限制、source trails 和讀書筆記變成 agent 能簡報、召回、交接的 source-cited 頁面。",
-        evidenceLabel: "Agent 可引用的頁面",
-        outcomeLabel: "可引用頁面",
+          "Wenlan 把 repo 事實、客戶限制、source trails 和學習資料變成 agent 能簡報、召回、交接的 source-cited 筆記。",
+        evidenceLabel: "Agent 可引用的筆記",
+        outcomeLabel: "可引用筆記",
         actionsLabel: "Agent 動作",
         index: {
           title: "Wenlan Wiki 索引",
           activeViewLabel: "目前視圖",
-          pagesTitle: "Agent 可引用的頁面",
-          pagesLabel: "頁面",
+          pagesTitle: "Agent 可引用的筆記",
+          pagesLabel: "筆記",
           sourcesLabel: "來源",
           statusLabel: "狀態",
           sourceBackedLabel: "有來源",
           citationLabel: "Agent 引用",
-          citingLabel: "引用中的頁面",
+          citingLabel: "引用中的筆記",
         },
         scenarios: [
           {
@@ -225,7 +225,7 @@ export const zhTWContent = {
             railLabel: "程式",
             summary: "會持續更新的工程文件",
             lead: "維護工程師真的會更新的 codebase 文件。",
-            body: "Wenlan 可以把 repo 事實整理成有來源的工程 Pages：架構地圖、runbook、migration plan、integration note、debugging log。更新情況取決於已設定的處理流程與來源變更。",
+            body: "Wenlan 可以把 repo 事實整理成有來源的工程筆記：架構地圖、runbook、migration plan、integration note、debugging log。更新情況取決於已設定的處理流程與來源變更。",
             evidence: [
               {
                 id: "architecture",
@@ -248,7 +248,7 @@ export const zhTWContent = {
                 detail: "Dependency quirks、版本限制、adapter decisions，以及連到 source docs 的 upstream issues。",
               },
             ],
-            outcome: "下一個 agent 可以開啟工程 Page，檢查它的來源。",
+            outcome: "下一個 agent 可以開啟工程筆記，檢查它的來源。",
           },
           {
             id: "product-customers",
@@ -262,7 +262,7 @@ export const zhTWContent = {
               {
                 id: "customer-voice",
                 label: "客戶反對點",
-                detail: "訪談、support、sales notes 中反覆出現的需求和反對理由。",
+                detail: "訪談、support、業務溝通中反覆出現的需求和反對理由。",
               },
               {
                 id: "client-constraints",
@@ -286,8 +286,8 @@ export const zhTWContent = {
             id: "research-writing",
             label: "Research / 寫作",
             railLabel: "研究",
-            summary: "sources、有引用的頁面、下一版 outline",
-            lead: "把研究脈絡變成可引用的 wiki 頁面。",
+            summary: "sources、有引用的筆記、下一版 outline",
+            lead: "把研究脈絡變成可引用的筆記。",
             body: "Papers、docs、transcripts 和 links 堆起來後，下一稿可以從可信 quote、待重查 claim，以及有引用的 outline 接續。",
             evidence: [
               {
@@ -318,12 +318,12 @@ export const zhTWContent = {
             label: "學習與讀書",
             railLabel: "學習",
             summary: "概念、前置知識、複習",
-            lead: "把讀書 session 變成能教下一次的頁面。",
-            body: "終於想通的解釋會變成概念頁面，前置知識也連結好，下一次 session 是在複習理解，而不是回頭滑聊天記錄。",
+            lead: "把讀書 session 變成能教下一次的筆記。",
+            body: "終於想通的解釋會變成概念筆記，前置知識也連結好，下一次 session 是在複習理解，而不是回頭滑聊天記錄。",
             evidence: [
               {
                 id: "concept-pages",
-                label: "概念頁面",
+                label: "概念筆記",
                 detail: "那個終於說通的解釋，連同讓它成立的來源一起留下。",
               },
               {
@@ -342,7 +342,7 @@ export const zhTWContent = {
                 detail: "接下來該讀什麼，依你已掌握的前置知識排序。",
               },
             ],
-            outcome: "下一次讀書 session 打開的是概念頁面，不是上週的聊天捲動。",
+            outcome: "下一次讀書 session 打開的是概念筆記，不是上週的聊天捲動。",
           },
         ],
       },
@@ -368,7 +368,7 @@ export const zhTWContent = {
         memoryDistillery: {
           eyebrow: "刻意蒸餾",
           title: "Wenlan 把重複出現的 context 變成 LLM wiki。",
-          body: "當重複捕捉的內容值得變成可讀的 wiki 頁面時，執行 /distill。可選的本地模型或 API key 路徑可以加入背景擷取與頁面更新。",
+          body: "當重複捕捉的內容值得變成可讀的筆記時，執行 /distill。可選的本地模型或 API key 路徑可以加入背景擷取與筆記更新。",
           note: "已設定的下一次執行可以從有引用的 context 開始，而不是從 transcript 殘留開始。",
           visualLabels: {
             merged: "合併",
@@ -377,9 +377,9 @@ export const zhTWContent = {
           },
         },
         features: {
-          eyebrow: "知識頁面",
-          title: "工作會變成可重用的頁面。",
-          body: "整理過的決策與教訓會成為耐用頁面，而不是被埋在聊天記錄裡。它們足夠有組織，agent 能使用；也足夠具體，人可以閱讀。",
+          eyebrow: "筆記",
+          title: "工作會變成可重用的筆記。",
+          body: "整理過的決策與教訓會成為耐用的筆記，而不是被埋在聊天記錄裡。它們足夠有組織，agent 能使用；也足夠具體，人可以閱讀。",
           note: "你的工作不再只是 transcript 歷史，而是開始變成專案知識。",
         },
         humanControl: {
@@ -461,12 +461,12 @@ export const zhTWContent = {
           {
             id: "what-is-wenlan",
             q: "Wenlan 是什麼？",
-            a: "Wenlan 是本地 AI 知識庫與 LLM wiki。連接 AI 工具後，可以保存決策並再次找回；產生頁面需要已設定的模型或 AI 工具。使用答案前，仍要核對它引用的來源。",
+            a: "Wenlan 是本地 AI 知識庫與 LLM wiki。連接 AI 工具後，可以保存決策並再次找回；整理筆記需要已設定的模型或 AI 工具。使用答案前，仍要核對它引用的來源。",
           },
           {
             id: "built-in-memory",
             q: "Wenlan 和 AI 工具內建的記憶有什麼不同？",
-            a: "內建記憶的行為因工具而異，請實際比較匯出、來源、編輯及跨工具存取。Wenlan 把知識留在本地，提供可檢查的頁面，並保留建立頁面時使用的來源紀錄 ID。",
+            a: "內建記憶的行為因工具而異，請實際比較匯出、來源、編輯及跨工具存取。Wenlan 把知識留在本地，提供可檢查的筆記，並保留整理筆記時使用的來源紀錄 ID。",
           },
           {
             id: "retrieval-quality",
@@ -481,7 +481,7 @@ export const zhTWContent = {
           {
             id: "memory-mcp",
             q: "Wenlan 只是另一個 memory MCP 嗎？",
-            a: "不是。MCP server 是 connector。Wenlan 也包含本地 daemon、manual /distill、可選的 model-backed extraction 與 Page work、本地 retrieval、source references、review surfaces、memory、Page 和 session artifacts 的真實 git versioning，以及可讀的 Markdown export paths。",
+            a: "不是。MCP server 是 connector。Wenlan 也包含本地 daemon、manual /distill、可選的 model-backed extraction 與筆記整理、本地 retrieval、source references、review surfaces、memory、筆記和 session artifacts 的真實 git versioning，以及可讀的 Markdown export paths。",
           },
           {
             id: "tools",
@@ -491,12 +491,12 @@ export const zhTWContent = {
           {
             id: "not-notes",
             q: "Wenlan 能取代 Notion 或 Obsidian 嗎？",
-            a: "不能。Wenlan 不是 notes app。它可以把 Markdown、text、可抽取文字的 PDF、資料夾和 Obsidian vault 登錄為來源。Obsidian 輸入是唯讀，按需求重新同步；Wenlan 自己的 Pages 仍是 ~/.wenlan/ 底下可讀的 Markdown。",
+            a: "不能。Wenlan 不取代你用來寫作的 App。它可以把 Markdown 檔案、text、可抽取文字的 PDF、資料夾和 Obsidian 庫登錄為來源。Obsidian 輸入是唯讀，按需求重新同步；Wenlan 自己的筆記仍是 ~/.wenlan/ 底下可讀的 Markdown。",
           },
           {
             id: "setup",
             q: "我要怎麼設定？",
-            a: "先安裝 Wenlan，再連接一個 AI 工具。Claude Code 和 Codex 外掛提供 handoff、recall 等指令，其他本地工具則透過 MCP 連接。保存與搜尋紀錄不需要模型 API 金鑰；整理成知識頁時，會使用你設定的本地或雲端模型。入門指南會帶你完成所選工具的設定。 瀏覽器工具使用 OAuth 網頁存取，需由你批准連線，並選擇分享整個資料庫或一個 Space，也能在 App 中撤銷存取。",
+            a: "先安裝 Wenlan，再連接一個 AI 工具。Claude Code 和 Codex 外掛提供 handoff、recall 等指令，其他本地工具則透過 MCP 連接。保存與搜尋紀錄不需要模型 API 金鑰；整理成筆記時，會使用你設定的本地或雲端模型。入門指南會帶你完成所選工具的設定。 瀏覽器工具使用 OAuth 網頁存取，需由你批准連線，並選擇分享整個資料庫或一個 Space，也能在 App 中撤銷存取。",
           },
           {
             id: "platforms",
@@ -520,27 +520,27 @@ export const zhTWContent = {
           eyebrow: "你與 AI 共用的個人 Wiki",
           headline: { pre: "把筆記與 AI 對話，", emphasis: "整理成你的知識庫。", post: "" },
           description:
-            "筆記散在各處，好點子留在對話裡。文瀾幫你整理重點、持續更新，讓你方便查閱，也讓 AI 更容易找到需要的資訊。",
+            "檔案散在各處，好點子留在對話裡。文瀾幫你整理重點、持續更新，讓你方便查閱，也讓 AI 更容易找到需要的資訊。",
           worksWithLabel: "可搭配",
-          worksWithNote: "可讀取 Obsidian 筆記，保留原文。",
+          worksWithNote: "可讀取 Obsidian 庫，保留原文。",
         },
         fit: {
           "title": "Wenlan 適合你嗎？",
           "needs": [
             {
               "title": "聊過、讀過的，下次用得上",
-              "body": "把筆記、文件與保存的對話整理成知識頁，需要時找得到，也查得到來源。"
+              "body": "把 Markdown 檔案、文件與保存的對話整理成筆記，需要時找得到，也查得到來源。"
             },
             {
               "title": "專案有變，知識也跟著更新",
-              "body": "已連接的文件更新後，Wenlan 協助更新相關知識頁，減少反覆整理。"
+              "body": "已連接的文件更新後，Wenlan 協助更新相關筆記，減少反覆整理。"
             },
             {
               "title": "換個 AI，也能用同一份知識",
               "body": "讓已連接的 AI 工具查閱你累積的知識，不必各自整理一份。"
             }
           ],
-          "comparisonPrompt": "已經有筆記或 AI 工具？",
+          "comparisonPrompt": "已經在用 Obsidian、Notion 或 AI 工具？",
           "comparisonLabel": "看看差異"
         },
         pains: {
@@ -868,10 +868,10 @@ export const zhTWContent = {
         },
         pipeline: {
           intro:
-            "連接 AI 工具後，用 Wenlan 保存有用決策，再用已設定的模型建立有來源的頁面；下次遇到相關問題，再查回已保存的紀錄。",
+            "連接 AI 工具後，用 Wenlan 保存有用決策，再用已設定的模型整理出有來源的筆記；下次遇到相關問題，再查回已保存的紀錄。",
           stages: [
             { id: "capture", step: "/handoff · 工作收尾", title: "保存有用決策" },
-            { id: "distill", step: "/distill · 整理來源", title: "建立有來源的頁面" },
+            { id: "distill", step: "/distill · 整理來源", title: "整理出有來源的筆記" },
             { id: "brief", step: "/recall · 遇到相關問題", title: "下次把它找回來" },
           ],
           distillNote: "AI 代理也能直接建立主題頁；請先連接工具，確認產生內容所需的模型設定，並檢查實際結果。",
@@ -881,18 +881,18 @@ export const zhTWContent = {
           cells: [
             {
               id: "pages",
-              title: "留下能接著用的知識頁面",
-              body: "將決策與經驗整理成你能閱讀、AI 能使用的頁面，不再只留在聊天記錄裡。",
+              title: "留下能接著用的筆記",
+              body: "將決策與經驗整理成你能閱讀、AI 能使用的筆記，不再只留在聊天記錄裡。",
             },
             {
               id: "graph",
               title: "找回答案，也找回脈絡",
-              body: "設定檢索後，可一併找回相關人物、專案與知識頁面，再沿著連結檢查來源紀錄。",
+              body: "設定檢索後，可一併找回相關人物、專案與筆記，再沿著連結檢查來源紀錄。",
             },
             {
               id: "citations",
               title: "答案從哪來，看得見",
-              body: "Wenlan 整理出的頁面附有來源連結，方便回查支持它的紀錄。來源連結本身不代表每個主張都已被證明。",
+              body: "Wenlan 整理出的筆記附有來源連結，方便回查支持它的紀錄。來源連結本身不代表每個主張都已被證明。",
             },
             {
               id: "review",
@@ -902,7 +902,7 @@ export const zhTWContent = {
             {
               id: "nurture",
               title: "知道哪些內容需要重查",
-              body: "設定背景處理後，可批次建立關聯、更新相符頁面，並標記過時紀錄供你檢查。",
+              body: "設定背景處理後，可批次建立關聯、更新相符的筆記，並標記過時紀錄供你檢查。",
             },
             {
               id: "spaces",
@@ -912,7 +912,7 @@ export const zhTWContent = {
             {
               id: "git",
               title: "像程式碼一樣有版本",
-              body: "紀錄、頁面與工作階段產物保存在真正的 Git 歷史裡，可以查看差異，也可以還原。",
+              body: "紀錄、筆記與工作階段產物保存在真正的 Git 歷史裡，可以查看差異，也可以還原。",
             },
             {
               id: "mcp",
@@ -924,12 +924,12 @@ export const zhTWContent = {
         storage: {
           title: "記得意思，\n卻忘了當時怎麼寫？",
           intro:
-            "Hybrid Retrieval 結合關鍵字、語意與關聯脈絡，協助找回相關知識。設定好的頁面處理流程，再將來源整理成能閱讀、核對與保存的 Markdown。",
+            "Hybrid Retrieval 結合關鍵字、語意與關聯脈絡，協助找回相關知識。設定好後，Wenlan 會把來源整理成筆記：能閱讀、核對與保存的 Markdown。",
           indexLabel: "索引 · agents 的工作記憶",
           filesLabel: "Markdown · 屬於你的長期紀錄",
-          fusionNote: "索引幫你找回資料，頁面讓你閱讀與核對；兩者各有用途。",
-          distillCaption: "整理成頁",
-          ingestCaption: "索引頁面",
+          fusionNote: "索引幫你找回資料，筆記讓你閱讀與核對；兩者各有用途。",
+          distillCaption: "整理成筆記",
+          ingestCaption: "索引筆記",
           tradeoffs: [
             {
               id: "files-alone",
@@ -972,12 +972,12 @@ export const zhTWContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "dcd2b8161c286d5b55cf1ca7a8050fe92a4fba8922bb9f1ead0903800346777a",
+    sourceHash: "6edd058e3532090984bad475a181e731e55eca23f664771ac31c765f5493c7f3",
     content: {
       seo: {
         title: "關於文瀾 Wenlan：開源、本機優先的個人 AI 知識庫",
         description:
-          "Wenlan 是開源、本地優先的 AI 工作 LLM wiki，由 AI 代理打造並以來源為根基：把文件、筆記與決策整理成可引用、可審查、可更新的頁面，讓 AI 工作有據可查、持續累積。支援 Windows、macOS 與 Linux，免費下載使用。了解文瀾的理念、開源授權與產品路線圖。",
+          "Wenlan 是開源、本地優先的 AI 工作 LLM wiki，由 AI 代理打造並以來源為根基：把文件與決策整理成可引用、可審查、可更新的筆記，讓 AI 工作有據可查、持續累積。支援 Windows、macOS 與 Linux，免費下載使用。了解文瀾的理念、開源授權與產品路線圖。",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -998,7 +998,7 @@ export const zhTWContent = {
           title: "為什麼 Wenlan 存在",
           paragraphs: [
             "AI 工作常把重要決定、除錯經驗和專案資訊留在舊對話裡。Wenlan 把這些知識整理成日後找得到的內容。",
-            "保存重要資訊、補上可信的來源，再整理成可檢查、可搜尋的頁面，讓不同 AI 工具都能接續使用。",
+            "保存重要資訊、補上可信的來源，再整理成可檢查、可搜尋的筆記，讓不同 AI 工具都能接續使用。",
           ],
         },
         {
@@ -1007,7 +1007,7 @@ export const zhTWContent = {
           title: "由 Qi-Xuan Lu 建置",
           paragraphs: [
             "Wenlan 由 Qi-Xuan Lu (GitHub @7xuanlu) 建置與維護。背景涵蓋 AI infrastructure、knowledge graphs 和 local-first systems。",
-            "Wenlan 讓 AI 代理能補充內容，也讓人能檢查結果。來源連結頁面與工作紀錄會以易讀檔案保存，再由本機服務提供給已連接的 AI 工具。",
+            "Wenlan 讓 AI 代理能補充內容，也讓人能檢查結果。附來源連結的筆記與工作紀錄會以易讀檔案保存，再由本機服務提供給已連接的 AI 工具。",
             "專案渠道：bugs 和 feature requests 用 GitHub Issues，vulnerabilities 看 SECURITY.md，變更則看 Wenlan release notes。",
           ],
         },
@@ -1040,8 +1040,8 @@ export const zhTWContent = {
           },
           {
             id: "deliberate-distillation",
-            title: "需要時整理成頁",
-            body: "在 Wenlan 中，主題整理到適合成頁時，可執行 /distill 建立有來源的頁面。完成模型設定後，也可以選擇自動產生頁面，並補上更多想法之間的連結。",
+            title: "需要時整理成筆記",
+            body: "在 Wenlan 中，主題累積到足以寫成一篇筆記時，可執行 /distill 建立有來源的筆記。完成模型設定後，也可以選擇自動整理筆記，並補上更多想法之間的連結。",
           },
         ],
       },
@@ -1161,12 +1161,12 @@ export const zhTWContent = {
   },
   docs: {
     status: "translated",
-    sourceHash: "ca8dfdb99b250d993a36180a4465eacc2be502e87c5a8ba561a046c372409960",
+    sourceHash: "961aef4c9075835816a06787070813e8c786a92681e1b8da4ee8797ca7d793c6",
     content: {
       seo: {
         title: "文瀾 Wenlan 文件：安裝、工作流程與參考",
         description:
-          "安裝 Wenlan，學習 AI 工作記憶循環：從安裝、連接到 Claude Code、Codex、ChatGPT 等 MCP 客戶端，再到理解有來源依據的 wiki 頁面、引用、檢索與更新機制如何配合，讓 AI 記住你的工作。包含逐步安裝指南、客戶端接入說明與常見問題解答。",
+          "安裝 Wenlan，學習 AI 工作記憶循環：從安裝、連接到 Claude Code、Codex、ChatGPT 等 MCP 客戶端，再到理解有來源依據的筆記、引用、檢索與更新機制如何配合，讓 AI 記住你的工作。包含逐步安裝指南、客戶端接入說明與常見問題解答。",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -1239,7 +1239,7 @@ export const zhTWContent = {
                 label: "概念",
                 title: "核心概念",
                 description:
-                  "認識 Wenlan 的基本組成：記憶、工作階段、交接、頁面、MCP、本機索引與 Markdown 檔案。",
+                  "認識 Wenlan 的基本組成：記憶、工作階段、交接、筆記、MCP、本機索引與 Markdown 檔案。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
               },
             ],
@@ -1265,7 +1265,7 @@ export const zhTWContent = {
                 label: "詞彙表",
                 title: "詞彙表",
                 description:
-                  "查詢 Wenlan 常用詞彙，包括記憶、交接、頁面、工作空間、daemon、MCP、本機索引與來源記錄。",
+                  "查詢 Wenlan 常用詞彙，包括記憶、交接、筆記、工作空間、daemon、MCP、本機索引與來源記錄。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1326,7 +1326,7 @@ export const zhTWContent = {
                 id: "upgrade-notes",
                 href: "/docs/upgrade-notes",
                 label: "升級",
-                title: "升級筆記",
+                title: "升級說明",
                 description:
                   "查看升級 Wenlan 時要重新執行哪些步驟、如何確認正常，以及版本改動內容。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
@@ -1397,10 +1397,10 @@ export const zhTWContent = {
               {
                 id: "source-backed-pages",
                 href: "/docs/source-backed-pages",
-                label: "Pages 頁面",
-                title: "有來源支撐的 Pages",
+                label: "筆記",
+                title: "有來源支撐的筆記",
                 description:
-                  "了解 Wenlan 如何把記錄整理成可讀頁面，並保留來源記憶 ID、版本狀態和更新方式。",
+                  "了解 Wenlan 如何把記錄整理成可讀的筆記，並保留來源記憶 ID、版本狀態和更新方式。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1418,7 +1418,7 @@ export const zhTWContent = {
                 label: "版本",
                 title: "本地 Git History",
                 description:
-                  "查看 Wenlan 為頁面、工作紀錄、交接和狀態檔案保留的 git 歷史。",
+                  "查看 Wenlan 為筆記、工作紀錄、交接和狀態檔案保留的 git 歷史。",
                 meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
               },
               {
@@ -1659,7 +1659,7 @@ export const zhTWContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "a942dd503a10232ec60b60fac0d5129f30c178a8525bf6b8dff657da1ceaa274",
+    sourceHash: "0595fc2b224a1b7ddf539e9157f6aee7309a57f7dd272345b43939f5ce1db746",
     content: {
       seo: {
         title: "安裝文瀾 Wenlan：Claude Code、Codex、ChatGPT 與 MCP",
@@ -1691,8 +1691,8 @@ export const zhTWContent = {
           number: "01",
           title: "安裝並開啟 Wenlan",
           paragraphs: [
-            "下載 macOS Apple silicon 或 Windows x64 桌面版，跟著首次設定引導完成安裝。你的筆記和知識頁會保存在本機的 Wenlan 知識庫。",
-            "若要把來源整理成知識頁，請在設定中選擇本地模型，或設定雲端模型服務。使用雲端處理時，相關內容會傳送給該服務商。"
+            "下載 macOS Apple silicon 或 Windows x64 桌面版，跟著首次設定引導完成安裝。你的筆記和來源會保存在本機的 Wenlan 知識庫。",
+            "若要把來源整理成筆記，請在設定中選擇本地模型，或設定雲端模型服務。使用雲端處理時，相關內容會傳送給該服務商。"
           ],
           commands: [
             "# macOS Apple silicon\nnpx -y wenlan setup",
@@ -1777,7 +1777,7 @@ export const zhTWContent = {
           title: "保存一個決定，再開新對話找回來",
           paragraphs: [
             "連接 Claude Code 或 Codex 外掛後，試著保存下面這個虛構決定。Claude Code 使用 /wenlan:handoff 和 /wenlan:recall；Codex 使用 /handoff 和 /recall。",
-            "保存後，開一段新對話查找這個決定。確認回答保留「只能起草」的限制，也能找到原本保存的紀錄。保存交接紀錄與整理成知識頁，是兩個不同步驟。",
+            "保存後，開一段新對話查找這個決定。確認回答保留「只能起草」的限制，也能找到原本保存的紀錄。保存交接紀錄與整理成筆記，是兩個不同步驟。",
             "本地 MCP 工具可用一般文字保存再搜尋；瀏覽器遠端連線目前只供查詢，請先在桌面 App 加入筆記或檔案，再從 AI 查找。"
           ],
           commands: [

@@ -14,10 +14,10 @@ const stageDimensions = [
 
 const copyByLocale = {
   en: {
-    stages: ["Save the work", "Read the page", "Ask next time"],
+    stages: ["Save the work", "Read the note", "Ask next time"],
     outcomes: [
       "At the end of a discussion, /handoff saves the decisions, reasons, and unfinished work.",
-      "An agent separately turned those same records into this readable Page; the original records are linked below.",
+      "An agent separately turned those same records into this readable note; the original records are linked below.",
       "In a new conversation, /recall finds the saved records. Claude answers with sources, keeping unapproved ideas separate.",
     ],
     scenario: "Fictional project · Email assistant",
@@ -27,12 +27,12 @@ const copyByLocale = {
     answer: "No. The first release creates drafts for the user to review and send. Automatic sending is still awaiting approval.",
     evidence: [
       "Claude Code · /handoff · Fictional demo, actual screenshot",
-      "Wenlan · Agent-authored knowledge page and sources · Fictional demo",
+      "Wenlan · Agent-authored note and sources · Fictional demo",
       "Claude Code · /recall · Fictional demo, actual screenshot",
     ],
     alt: [
       "English handoff in Claude Code saves the email decision, its reason and the unapproved proposal",
-      "English Wenlan knowledge page with the email decision, reasons and three linked source records",
+      "English Wenlan note with the email decision, reasons and three linked source records",
       "English recall skill in a new Claude Code conversation retrieves Wenlan records and answers with their source IDs",
     ],
     expand: "View full size",
@@ -47,7 +47,7 @@ const copyByLocale = {
     stages: ["收工時留下", "在文瀾核對", "下次問 AI"],
     outcomes: [
       "討論結束時，用 /handoff 留下決定、理由和還沒完成的事。",
-      "Agent 將同一批紀錄另行整理成易讀的知識頁；原始紀錄連結在下方。",
+      "Agent 將同一批紀錄另行整理成一篇易讀的筆記；原始紀錄連結在下方。",
       "換一段對話，用 /recall 找回紀錄。Claude 依來源回答，也分清哪些提案還沒核准。",
     ],
     scenario: "虛構專案 · 郵件助理",
@@ -57,12 +57,12 @@ const copyByLocale = {
     answer: "不能。第一版只產生草稿，由使用者確認後寄出；自動寄送仍待批准。",
     evidence: [
       "Claude Code · /handoff · 虛構案例，實機截圖",
-      "文瀾 · Agent 整理的知識頁與來源 · 虛構案例",
+      "文瀾 · Agent 整理的筆記與來源 · 虛構案例",
       "Claude Code · /recall · 虛構案例，實機截圖",
     ],
     alt: [
       "繁體中文 Claude Code handoff，保存郵件決策、理由與未核准提案",
-      "繁體中文文瀾知識頁，呈現郵件決策、理由及三筆原始紀錄",
+      "繁體中文文瀾筆記，呈現郵件決策、理由及三筆原始紀錄",
       "新對話中以繁體中文呼叫 recall skill，Claude Code 查回文瀾紀錄並附來源回答",
     ],
     expand: "放大查看",
@@ -77,7 +77,7 @@ const copyByLocale = {
     stages: ["收工时留下", "在文澜核对", "下次问 AI"],
     outcomes: [
       "讨论结束时，用 /handoff 留下决定、理由和还没完成的事。",
-      "Agent 将同一批记录另行整理成易读的知识页；原始记录链接在下方。",
+      "Agent 将同一批记录另行整理成一篇易读的笔记；原始记录链接在下方。",
       "换一段对话，用 /recall 找回记录。Claude 依据来源回答，也分清哪些提案还没批准。",
     ],
     scenario: "虚构项目 · 邮件助手",
@@ -87,12 +87,12 @@ const copyByLocale = {
     answer: "不能。第一版只生成草稿，由用户确认后发送；自动发送仍待批准。",
     evidence: [
       "Claude Code · /handoff · 虚构案例，实机截图",
-      "文澜 · Agent 整理的知识页与来源 · 虚构案例",
+      "文澜 · Agent 整理的笔记与来源 · 虚构案例",
       "Claude Code · /recall · 虚构案例，实机截图",
     ],
     alt: [
       "简体中文 Claude Code handoff，保存邮件决定、理由和未批准提案",
-      "简体中文文澜知识页，呈现邮件决定、理由及三条原始记录",
+      "简体中文文澜笔记，呈现邮件决定、理由及三条原始记录",
       "新对话中以简体中文调用 recall skill，Claude Code 查回文澜记录并附来源回答",
     ],
     expand: "放大查看",
