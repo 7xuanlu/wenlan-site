@@ -101,9 +101,9 @@ export function DemoVideo({ sectionTitle, embedUrl, posterUrl, playLabel, title,
 }
 
 const posterDescriptions: Record<Locale, string> = {
-  en: "Wenlan desktop showing the Agent handoff loop page with a source citation expanded.",
-  "zh-TW": "Wenlan 桌面版的 Agent handoff loop 知識頁，已展開引用來源。",
-  "zh-CN": "Wenlan 桌面版的 Agent handoff loop 知识页，已展开引用来源。",
+  en: "Wenlan desktop showing the Agent handoff loop note with a source citation expanded.",
+  "zh-TW": "Wenlan 桌面版的 Agent handoff loop 筆記，已展開引用來源。",
+  "zh-CN": "Wenlan 桌面版的 Agent handoff loop 笔记，已展开引用来源。",
 };
 
 const playerCopy: Record<Locale, { loading: string; error: string; open: string }> = {

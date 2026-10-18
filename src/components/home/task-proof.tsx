@@ -22,12 +22,12 @@ type TaskProofCopy = {
 const copy: Record<Locale, TaskProofCopy> = {
   en: {
     eyebrow: "Illustrative task",
-    title: "Three notes, one answer you can re-check.",
-    intro: "A small example of what a source-backed page can preserve across sessions.",
+    title: "Three files, one answer you can re-check.",
+    intro: "A small example of what a source-backed note can preserve across sessions.",
     authoredLabel: "Authored illustrative reference · no real product output",
     stepsLabel: "Example path",
-    steps: ["Collect three source notes", "Link them into a page", "Check what changed"],
-    sourcesHeading: "Source notes",
+    steps: ["Collect three source files", "Link them into a note", "Check what changed"],
+    sourcesHeading: "Source files",
     sources: [
       { label: "api-v1.md", detail: "API retry rule" },
       { label: "decision-07.md", detail: "Client decision" },
@@ -43,12 +43,12 @@ const copy: Record<Locale, TaskProofCopy> = {
   },
   "zh-TW": {
     eyebrow: "示意任務",
-    title: "三則筆記，一個可以重新查證的答案。",
-    intro: "一個來源可追溯頁面的簡短示意：跨工作階段保留脈絡。",
+    title: "三份檔案，一個可以重新查證的答案。",
+    intro: "一篇來源可追溯筆記的簡短示意：跨工作階段保留脈絡。",
     authoredLabel: "作者撰寫的示意參考・沒有真實產品輸出",
     stepsLabel: "示意路徑",
-    steps: ["收集三則來源筆記", "將它們連成一頁", "確認哪些內容改變"],
-    sourcesHeading: "來源筆記",
+    steps: ["收集三份來源檔案", "將它們連成一篇筆記", "確認哪些內容改變"],
+    sourcesHeading: "來源檔案",
     sources: [
       { label: "api-v1.md", detail: "API 重試規則" },
       { label: "decision-07.md", detail: "客戶決策" },
@@ -64,12 +64,12 @@ const copy: Record<Locale, TaskProofCopy> = {
   },
   "zh-CN": {
     eyebrow: "示意任务",
-    title: "三条笔记，一个可以重新核对的答案。",
-    intro: "一个来源可追溯页面的简短示意：在不同工作阶段保留上下文。",
+    title: "三份文件，一个可以重新核对的答案。",
+    intro: "一篇来源可追溯笔记的简短示意：在不同工作阶段保留上下文。",
     authoredLabel: "作者撰写的示意参考・没有真实产品输出",
     stepsLabel: "示意路径",
-    steps: ["收集三条来源笔记", "将它们连接成一页", "确认哪些内容发生变化"],
-    sourcesHeading: "来源笔记",
+    steps: ["收集三份来源文件", "将它们连接成一篇笔记", "确认哪些内容发生变化"],
+    sourcesHeading: "来源文件",
     sources: [
       { label: "api-v1.md", detail: "API 重试规则" },
       { label: "decision-07.md", detail: "客户决策" },

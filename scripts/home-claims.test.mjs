@@ -223,9 +223,9 @@ const comparisonLinks = [
 ];
 
 const expectedWorksWithNotes = {
-  en: "Read from your Obsidian vault without changing your notes.",
-  "zh-TW": "可讀取 Obsidian 筆記，保留原文。",
-  "zh-CN": "可读取 Obsidian 笔记，保留原文。",
+  en: "Read from your Obsidian vault without changing your files.",
+  "zh-TW": "可讀取 Obsidian 庫，保留原文。",
+  "zh-CN": "可读取 Obsidian 库，保留原文。",
 };
 
 const oldClaims = {
@@ -277,12 +277,12 @@ test("hero promises to organize notes and AI chats into a maintained personal kn
     "zh-TW": {
       eyebrow: "你與 AI 共用的個人 Wiki",
       headline: ["把筆記與 AI 對話，", "整理成你的知識庫。"],
-      description: /筆記散在各處.*好點子留在對話裡.*整理重點、持續更新.*方便查閱.*AI 更容易找到需要的資訊/,
+      description: /檔案散在各處.*好點子留在對話裡.*整理重點、持續更新.*方便查閱.*AI 更容易找到需要的資訊/,
     },
     "zh-CN": {
       eyebrow: "你与 AI 共用的个人 Wiki",
       headline: ["把笔记和 AI 对话，", "整理成你的知识库。"],
-      description: /笔记散落各处.*好点子留在对话里.*整理重点、持续更新.*方便你查阅.*AI 更容易找到需要的信息/,
+      description: /文件散落各处.*好点子留在对话里.*整理重点、持续更新.*方便你查阅.*AI 更容易找到需要的信息/,
     },
   };
   for (const [locale, dictionary] of Object.entries(dictionaryByLocale)) {
@@ -359,7 +359,7 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     );
     const pipelineTitles = home.redesign.pipeline.stages.map((stage) => stage.title).join(" ");
     assert.match(pipelineTitles, /decision|決策|决策/i);
-    assert.match(pipelineTitles, /page|頁面|页面/i);
+    assert.match(pipelineTitles, /note|筆記|笔记/i);
     assert.match(pipelineTitles, /next|下一|下一个|下次/i);
     assert.match(home.redesign.pipeline.intro, /setup|設定|配置/);
 

@@ -16,7 +16,7 @@ export const enContent = {
       seo: {
         title: "Wenlan | LLM Wiki for AI Work",
         description:
-          "Wenlan is a source-backed AI knowledge base and LLM wiki for AI work: organize documents and decisions into pages you can find, inspect, and review.",
+          "Wenlan is a source-backed AI knowledge base and LLM wiki for AI work: organize documents and decisions into notes you can find, inspect, and review.",
       },
       nav: {
         schemaName: "Wenlan site navigation",
@@ -37,7 +37,7 @@ export const enContent = {
       hero: {
         title: "Wenlan",
         description:
-          "After setup, save useful decisions, build sourced Pages, and find them again through your configured AI tools.",
+          "After setup, save useful decisions, organize sourced notes, and find them again through your configured AI tools.",
         primaryCta: { id: "download", href: "#download", label: "Download Wenlan" },
         secondaryCta: {
           id: "github",
@@ -124,7 +124,7 @@ export const enContent = {
             name: "Wenlan Desktop",
             architecture: "macOS · Apple silicon",
             description:
-              "The fastest way to read Pages and inspect their sources.",
+              "The fastest way to read notes and inspect their sources.",
             actionLabel: "Download macOS desktop",
             packageIncludesLabel: "Desktop app · bundled runtime",
             guideLabel: "Open the safe installer guide",
@@ -207,20 +207,20 @@ export const enContent = {
         eyebrow: "Use cases",
         title: "LLM wiki for\ncode, clients,\nand research.",
         description:
-          "Wenlan turns repo facts, client constraints, source trails, and study notes into source-cited pages agents can brief, recall, and hand off.",
-        evidenceLabel: "Pages agents cite",
-        outcomeLabel: "Citable page",
+          "Wenlan turns repo facts, client constraints, source trails, and study materials into source-cited notes agents can brief, recall, and hand off.",
+        evidenceLabel: "Notes agents cite",
+        outcomeLabel: "Citable note",
         actionsLabel: "Agent actions",
         index: {
           title: "Wenlan Wiki Index",
           activeViewLabel: "Active view",
-          pagesTitle: "Pages agents cite",
-          pagesLabel: "pages",
+          pagesTitle: "Notes agents cite",
+          pagesLabel: "notes",
           sourcesLabel: "sources",
           statusLabel: "status",
           sourceBackedLabel: "Source-backed",
           citationLabel: "Agent citation",
-          citingLabel: "Citing page",
+          citingLabel: "Citing note",
         },
         scenarios: [
           {
@@ -229,7 +229,7 @@ export const enContent = {
             railLabel: "Code",
             summary: "living engineering docs",
             lead: "Keep the codebase docs engineers actually update.",
-            body: "Wenlan can turn repo facts into source-backed engineering Pages: architecture maps, runbooks, migration plans, integration notes, and debugging logs. Refresh behavior depends on your configured processing and source changes.",
+            body: "Wenlan can turn repo facts into source-backed engineering notes: architecture maps, runbooks, migration plans, integration notes, and debugging logs. Refresh behavior depends on your configured processing and source changes.",
             evidence: [
               {
                 id: "architecture",
@@ -252,7 +252,7 @@ export const enContent = {
                 detail: "Dependency quirks, version limits, adapter decisions, and upstream issues linked to source docs.",
               },
             ],
-            outcome: "The next agent can open an engineering Page and inspect its sources.",
+            outcome: "The next agent can open an engineering note and inspect its sources.",
           },
           {
             id: "product-customers",
@@ -265,7 +265,7 @@ export const enContent = {
               {
                 id: "customer-voice",
                 label: "Client objection",
-                detail: "Recurring needs and objections from interviews, support, and sales notes.",
+                detail: "Recurring needs and objections from interviews, support, and sales calls.",
               },
               {
                 id: "client-constraints",
@@ -289,8 +289,8 @@ export const enContent = {
             id: "research-writing",
             label: "Research & writing",
             railLabel: "Research",
-            summary: "sources, cited pages, next outline",
-            lead: "Turn research trails into cited wiki pages.",
+            summary: "sources, cited notes, next outline",
+            lead: "Turn research trails into cited notes.",
             body: "After papers, docs, transcripts, and links pile up, the next draft starts from trusted quotes, stale claims, and a cited outline.",
             evidence: [
               {
@@ -314,19 +314,19 @@ export const enContent = {
                 detail: "Facts that need re-checking before they appear in public copy.",
               },
             ],
-            outcome: "Writing resumes from a cited working page, not a pile of tabs.",
+            outcome: "Writing resumes from a cited working note, not a pile of tabs.",
           },
           {
             id: "learning-study",
             label: "Learning & study",
             railLabel: "Learning",
             summary: "concepts, prerequisites, reviews",
-            lead: "Turn study sessions into pages that teach the next one.",
-            body: "Explanations that finally clicked become concept pages with prerequisites linked, so the next session reviews understanding instead of scrolling back through chat.",
+            lead: "Turn study sessions into notes that teach the next one.",
+            body: "Explanations that finally clicked become concept notes with prerequisites linked, so the next session reviews understanding instead of scrolling back through chat.",
             evidence: [
               {
                 id: "concept-pages",
-                label: "Concept page",
+                label: "Concept note",
                 detail: "The explanation that finally made sense, kept with the sources that earned it.",
               },
               {
@@ -345,7 +345,7 @@ export const enContent = {
                 detail: "What to tackle next, ordered by the prerequisites you already hold.",
               },
             ],
-            outcome: "The next study session opens the concept page, not last week's chat scroll.",
+            outcome: "The next study session opens the concept note, not last week's chat scroll.",
           },
         ],
       },
@@ -371,7 +371,7 @@ export const enContent = {
         memoryDistillery: {
           eyebrow: "Deliberate distillation",
           title: "Wenlan turns repeated context into an LLM wiki.",
-          body: "Run /distill when repeated captures should become a readable, source-backed wiki page. Optional model or API-key paths can add background extraction and page refresh work.",
+          body: "Run /distill when repeated captures should become a readable, source-backed note. Optional model or API-key paths can add background extraction and note refresh work.",
           note: "A configured next run can start from cited context, not transcript residue.",
           visualLabels: {
             merged: "MERGED",
@@ -380,15 +380,15 @@ export const enContent = {
           },
         },
         features: {
-          eyebrow: "Knowledge pages",
-          title: "The work becomes reusable pages.",
-          body: "Cleaned decisions and lessons become durable pages instead of buried chat logs. They are organized enough for agents to use and concrete enough for humans to read.",
+          eyebrow: "Notes",
+          title: "The work becomes reusable notes.",
+          body: "Cleaned decisions and lessons become durable notes instead of buried chat logs. They are organized enough for agents to use and concrete enough for humans to read.",
           note: "Your work stops being transcript history and starts becoming project knowledge.",
         },
         humanControl: {
           eyebrow: "Hybrid storage",
           title: "The daemon owns recall. Readable artifacts stay inspectable.",
-          body: "Wenlan keeps raw captures in the local daemon store for retrieval, then projects pages, handoffs, and status files you can open, diff, and move.",
+          body: "Wenlan keeps raw captures in the local daemon store for retrieval, then projects notes, handoffs, and status files you can open, diff, and move.",
           note: "Agents recall from the daemon. You inspect the readable files.",
         },
         openSourceCta: {
@@ -466,12 +466,12 @@ export const enContent = {
           {
             id: "what-is-wenlan",
             q: "What is Wenlan?",
-            a: "Wenlan is a local AI knowledge base and LLM wiki. Connect your AI client to save decisions and find them again. Page generation needs a configured model or AI client. Inspect the supporting sources before relying on an answer.",
+            a: "Wenlan is a local AI knowledge base and LLM wiki. Connect your AI client to save decisions and find them again. Organizing notes needs a configured model or AI client. Inspect the supporting sources before relying on an answer.",
           },
           {
             id: "built-in-memory",
             q: "How is Wenlan different from built-in AI memory?",
-            a: "Built-in memory behavior varies by tool. Compare export, sources, editing, and cross-client access in the tool you use. Wenlan keeps memory local and offers inspectable Pages with the source memory IDs used to make them.",
+            a: "Built-in memory behavior varies by tool. Compare export, sources, editing, and cross-client access in the tool you use. Wenlan keeps memory local and offers inspectable notes with the source memory IDs used to make them.",
           },
           {
             id: "retrieval-quality",
@@ -481,12 +481,12 @@ export const enContent = {
           {
             id: "privacy",
             q: "Is my data private?",
-            a: "Yes. Wenlan runs on your machine and stores its database locally. No cloud sync or telemetry by default. Local memory setup works without a model or API key. On-device models or an Anthropic key are opt-in for automatic page distillation, recaps, and richer graph work.",
+            a: "Yes. Wenlan runs on your machine and stores its database locally. No cloud sync or telemetry by default. Local memory setup works without a model or API key. On-device models or an Anthropic key are opt-in for automatic note organizing, recaps, and richer graph work.",
           },
           {
             id: "memory-mcp",
             q: "Is Wenlan just another memory MCP?",
-            a: "No. The MCP server is the connector. Wenlan also includes the local daemon, manual /distill, optional model-backed extraction and Page work, local retrieval, source references, review surfaces, real git versioning for memory, Page, and session artifacts, and readable Markdown export paths.",
+            a: "No. The MCP server is the connector. Wenlan also includes the local daemon, manual /distill, optional model-backed extraction and note organizing, local retrieval, source references, review surfaces, real git versioning for memory, note, and session artifacts, and readable Markdown export paths.",
           },
           {
             id: "tools",
@@ -496,12 +496,12 @@ export const enContent = {
           {
             id: "not-notes",
             q: "Is Wenlan a replacement for Notion or Obsidian?",
-            a: "No. Wenlan is not a notes app. It can register Markdown, text, text-extractable PDF, folders, and an Obsidian vault as sources. Obsidian input is read-only and resyncs on demand; Wenlan's own Pages remain readable Markdown under ~/.wenlan/.",
+            a: "No. Wenlan does not replace the app you write in. It can register Markdown files, text, text-extractable PDF, folders, and an Obsidian vault as sources. Obsidian input is read-only and resyncs on demand; Wenlan's own notes remain readable Markdown under ~/.wenlan/.",
           },
           {
             id: "setup",
             q: "How do I set it up?",
-            a: "Install Wenlan, then connect one AI tool. Claude Code and Codex plugins add commands such as handoff and recall. Other local clients connect through MCP. Saving and searching records does not require a model API key; compiling knowledge pages uses your configured local or cloud model. The setup guide walks through each option. For browser clients, Web access uses OAuth and your approval, and shares the whole library or one chosen Space. You can revoke access in the app.",
+            a: "Install Wenlan, then connect one AI tool. Claude Code and Codex plugins add commands such as handoff and recall. Other local clients connect through MCP. Saving and searching records does not require a model API key; organizing notes uses your configured local or cloud model. The setup guide walks through each option. For browser clients, Web access uses OAuth and your approval, and shares the whole library or one chosen Space. You can revoke access in the app.",
           },
           {
             id: "platforms",
@@ -511,7 +511,7 @@ export const enContent = {
           {
             id: "spaces",
             q: "Can I keep work and personal memory separate?",
-            a: "Yes. Memories, pages, and recalls belong to a space (for example, work, personal, or client-X). Set the active space per shell with WENLAN_SPACE, or declare them in ~/.wenlan/spaces.toml. The auto-detector also picks a space from the current repo or workspace.",
+            a: "Yes. Memories, notes, and recalls belong to a space (for example, work, personal, or client-X). Set the active space per shell with WENLAN_SPACE, or declare them in ~/.wenlan/spaces.toml. The auto-detector also picks a space from the current repo or workspace.",
           },
           {
             id: "free",
@@ -525,27 +525,27 @@ export const enContent = {
           eyebrow: "A personal wiki for you and your AI",
           headline: { pre: "Turn notes and AI chats", emphasis: "into your knowledge base.", post: "" },
           description:
-            "Notes are scattered; good ideas get buried in chats. Wenlan helps organize key points and keep them up to date, so you can refer back and your AI can find what it needs.",
+            "Your files are scattered; good ideas get buried in chats. Wenlan helps organize key points and keep them up to date, so you can refer back and your AI can find what it needs.",
           worksWithLabel: "Works with",
-          worksWithNote: "Read from your Obsidian vault without changing your notes.",
+          worksWithNote: "Read from your Obsidian vault without changing your files.",
         },
         fit: {
           "title": "Is Wenlan for you?",
           "needs": [
             {
               "title": "Use what you read and discuss",
-              "body": "Turn notes, documents and saved chats into wiki pages you can find and trace back to their sources."
+              "body": "Turn Markdown files, documents and saved chats into notes you can find and trace back to their sources."
             },
             {
               "title": "Keep knowledge in step with your project",
-              "body": "When connected documents change, Wenlan helps update related wiki pages, reducing repeated upkeep."
+              "body": "When connected documents change, Wenlan helps update related notes, reducing repeated upkeep."
             },
             {
               "title": "Different AI tools. The same knowledge.",
               "body": "Let connected AI tools use the knowledge you have built, without organizing a separate copy for each."
             }
           ],
-          "comparisonPrompt": "Already using a notes or AI tool?",
+          "comparisonPrompt": "Already using Obsidian, Notion or an AI tool?",
           "comparisonLabel": "Compare your options"
         },
         pains: {
@@ -873,13 +873,13 @@ export const enContent = {
         },
         pipeline: {
           intro:
-            "After provider and client setup, Wenlan can save useful decisions, build sourced Pages when configured processing runs, and help the next session find them.",
+            "After provider and client setup, Wenlan can save useful decisions, organize sourced notes when configured processing runs, and help the next session find them.",
           stages: [
             { id: "capture", step: "/handoff · finish a session", title: "Save useful decisions" },
-            { id: "distill", step: "/distill · between sessions", title: "Build a sourced page" },
+            { id: "distill", step: "/distill · between sessions", title: "Organize a sourced note" },
             { id: "brief", step: "/recall · ask a specific question", title: "Find it next time" },
           ],
-          distillNote: "Agents can also create Pages directly when a topic deserves one right away; provider and client setup still apply.",
+          distillNote: "Agents can also create notes directly when a topic deserves one right away; provider and client setup still apply.",
           arcLabel: "Keep building on earlier work",
         },
         bento: {
@@ -887,17 +887,17 @@ export const enContent = {
             {
               id: "pages",
               title: "Readable by humans, organized for agents",
-              body: "Cleaned decisions and lessons become durable pages instead of buried chat logs.",
+              body: "Cleaned decisions and lessons become durable notes instead of buried chat logs.",
             },
             {
               id: "graph",
               title: "Find the answer with its context",
-              body: "Configured retrieval can bring back people, projects, and Pages with links to source memories and related items.",
+              body: "Configured retrieval can bring back people, projects, and notes with links to source memories and related items.",
             },
             {
               id: "citations",
               title: "Follow the source",
-              body: "Wenlan records source links on distilled Pages so you can inspect supporting memories. Source links do not prove every claim by themselves.",
+              body: "Wenlan records source links on organized notes so you can inspect supporting memories. Source links do not prove every claim by themselves.",
             },
             {
               id: "review",
@@ -907,7 +907,7 @@ export const enContent = {
             {
               id: "nurture",
               title: "See what needs another look",
-              body: "With background processing configured, batches can link entities, update matching Pages, and flag stale memories for attention.",
+              body: "With background processing configured, batches can link entities, update matching notes, and flag stale memories for attention.",
             },
             {
               id: "spaces",
@@ -917,7 +917,7 @@ export const enContent = {
             {
               id: "git",
               title: "Versioned like code",
-              body: "Memory, pages, and session artifacts live in real git history. Inspect, diff, revert.",
+              body: "Memory, notes, and session artifacts live in real git history. Inspect, diff, revert.",
             },
             {
               id: "mcp",
@@ -929,12 +929,12 @@ export const enContent = {
         storage: {
           title: "Remember the idea,\nnot the exact words?",
           intro:
-            "Hybrid Retrieval combines keyword, semantic, and graph context to help find relevant knowledge. Configured Page work turns sources into Markdown you can read, check, and keep.",
+            "Hybrid Retrieval combines keyword, semantic, and graph context to help find relevant knowledge. When configured, Wenlan organizes sources into notes: Markdown you can read, check, and keep.",
           indexLabel: "Index · working memory for agents",
           filesLabel: "Markdown · lasting record for you",
-          fusionNote: "Files, an index, and Page work solve different needs. Choose the boundary your workflow can maintain.",
-          distillCaption: "staging becomes pages",
-          ingestCaption: "pages indexed for recall",
+          fusionNote: "Files, an index, and organized notes solve different needs. Choose the boundary your workflow can maintain.",
+          distillCaption: "staging becomes notes",
+          ingestCaption: "notes indexed for recall",
           tradeoffs: [
             {
               id: "files-alone",
@@ -1003,7 +1003,7 @@ export const enContent = {
           title: "Why Wenlan exists",
           paragraphs: [
             "AI work often leaves useful decisions, debugging lessons, and project details buried in old chats. Wenlan gives that knowledge a home you can return to.",
-            "Save what matters, add trusted sources, and shape the notes into pages you can inspect and find again across your AI tools.",
+            "Save what matters, add trusted sources, and shape them into notes you can inspect and find again across your AI tools.",
           ],
         },
         {
@@ -1012,7 +1012,7 @@ export const enContent = {
           title: "Built by Qi-Xuan Lu",
           paragraphs: [
             "Wenlan is built and maintained by Qi-Xuan Lu (GitHub @7xuanlu). Background in AI infrastructure, knowledge graphs, and local-first systems.",
-            "Wenlan is designed so agents can add to it and people can inspect it. It keeps source-linked pages and session notes in readable files, while one local service makes them available to connected AI tools.",
+            "Wenlan is designed so agents can add to it and people can inspect it. It keeps source-linked notes and session logs in readable files, while one local service makes them available to connected AI tools.",
             "Project channels: GitHub Issues for bugs and feature requests, SECURITY.md for vulnerabilities, and the Wenlan release notes for changes.",
           ],
         },
@@ -1046,7 +1046,7 @@ export const enContent = {
           {
             id: "deliberate-distillation",
             title: "Deliberate distillation",
-            body: "Run /distill when a topic is ready to become a source-linked page. With optional model setup, Wenlan can also create pages automatically and add richer links between ideas.",
+            body: "Run /distill when a topic is ready to become a source-linked note. With optional model setup, Wenlan can also organize notes automatically and add richer links between ideas.",
           },
         ],
       },
@@ -1171,7 +1171,7 @@ export const enContent = {
       seo: {
         title: "Wenlan Docs: Setup, Workflows, and Reference",
         description:
-          "Install Wenlan, learn the AI work memory loop, and understand how source-backed wiki pages, provenance, retrieval, and MCP clients fit together.",
+          "Install Wenlan, learn the AI work memory loop, and understand how source-backed notes, provenance, retrieval, and MCP clients fit together.",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -1209,7 +1209,7 @@ export const enContent = {
             id: "after-setup",
             title: "After setup",
             description:
-              "Once setup works, learn how to start with useful context, save important details, review uncertain notes, and hand work off.",
+              "Once setup works, learn how to start with useful context, save important details, review uncertain captures, and hand work off.",
             items: [
               {
                 id: "daily-workflow",
@@ -1244,7 +1244,7 @@ export const enContent = {
                 label: "Concepts",
                 title: "Core Concepts",
                 description:
-                  "Understand the pieces behind Wenlan: memories, sessions, handoffs, pages, the daemon, MCP, Markdown, and the local index.",
+                  "Understand the pieces behind Wenlan: memories, sessions, handoffs, notes, the daemon, MCP, Markdown, and the local index.",
                 meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 6 min read",
               },
             ],
@@ -1270,7 +1270,7 @@ export const enContent = {
                 label: "Glossary",
                 title: "Glossary",
                 description:
-                  "A quick map of Wenlan terms: memory, handoff, page, space, daemon, MCP, local index, provenance, and eval language.",
+                  "A quick map of Wenlan terms: memory, handoff, note, space, daemon, MCP, local index, provenance, and eval language.",
                 meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
               },
               {
@@ -1402,10 +1402,10 @@ export const enContent = {
               {
                 id: "source-backed-pages",
                 href: "/docs/source-backed-pages",
-                label: "Pages",
+                label: "Notes",
                 title: "Source-Backed Pages",
                 description:
-                  "Understand how Wenlan turns atomic captures into readable pages with source memory IDs, revision state, and refresh paths.",
+                  "Understand how Wenlan turns atomic captures into readable notes with source memory IDs, revision state, and refresh paths.",
                 meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
               },
               {
@@ -1423,7 +1423,7 @@ export const enContent = {
                 label: "Versioning",
                 title: "Local Git History",
                 description:
-                  "Inspect the real git history Wenlan keeps for readable page, session, handoff, and status artifacts.",
+                  "Inspect the real git history Wenlan keeps for readable note, session, handoff, and status artifacts.",
                 meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
               },
               {
@@ -1432,7 +1432,7 @@ export const enContent = {
                 label: "Models",
                 title: "Models and Keys",
                 description:
-                  "Choose between local memory mode, optional on-device models, and optional Anthropic API keys for richer extraction, page synthesis, recaps, and graph work.",
+                  "Choose between local memory mode, optional on-device models, and optional Anthropic API keys for richer extraction, note synthesis, recaps, and graph work.",
                 meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
               },
               {
@@ -1696,8 +1696,8 @@ export const enContent = {
           number: "01",
           title: "Install and open Wenlan",
           paragraphs: [
-            "Download the desktop app for macOS Apple silicon or Windows x64, then follow its setup guide. Your notes and knowledge pages stay in your local Wenlan library.",
-            "To organize sources into knowledge pages, choose a local model or configure a cloud provider in Settings. Cloud processing sends the relevant content to that provider."
+            "Download the desktop app for macOS Apple silicon or Windows x64, then follow its setup guide. Your notes and sources stay in your local Wenlan library.",
+            "To organize sources into notes, choose a local model or configure a cloud provider in Settings. Cloud processing sends the relevant content to that provider."
           ],
           commands: [
             "# macOS Apple silicon\nnpx -y wenlan setup",
@@ -1782,7 +1782,7 @@ export const enContent = {
           title: "Save one decision. Find it in a new chat.",
           paragraphs: [
             "With the Claude Code or Codex plugin connected, try the fictional decision below. In Claude Code, use /wenlan:handoff and /wenlan:recall; in Codex, use /handoff and /recall.",
-            "After saving, start a new chat and ask for the decision. Check that the answer preserves “drafts only” and points back to the saved record. Saving a handoff and compiling a knowledge page are separate steps.",
+            "After saving, start a new chat and ask for the decision. Check that the answer preserves “drafts only” and points back to the saved record. Saving a handoff and organizing a note are separate steps.",
             "Local MCP clients can save and search using ordinary language. Browser connections currently support queries only: first add a note or file in the desktop app, then ask your AI to find it."
           ],
           commands: [

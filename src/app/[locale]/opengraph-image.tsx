@@ -16,12 +16,12 @@ const copy: Record<
   "zh-TW": {
     eyebrow: "Wenlan 文瀾",
     title: "你的 AI 原生知識庫",
-    description: "文瀾把文件與決策整理成附來源的知識頁，你的 AI 下次接著用。",
+    description: "文瀾把文件與決策整理成附來源的筆記，你的 AI 下次接著用。",
   },
   "zh-CN": {
     eyebrow: "Wenlan 文澜",
     title: "你的 AI 原生知识库",
-    description: "文澜把文档和决策整理成带来源的知识页，你的 AI 下次接着用。",
+    description: "文澜把文档和决策整理成带来源的笔记，你的 AI 下次接着用。",
   },
 };
 

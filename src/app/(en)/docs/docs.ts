@@ -518,7 +518,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Start with context",
         body: [
-          "Start a real work session with /brief in Claude Code or context in another MCP client. Wenlan returns project facts, recent handoffs, decisions, and distilled pages.",
+          "Start a real work session with /brief in Claude Code or context in another MCP client. Wenlan returns project facts, recent handoffs, decisions, and organized notes.",
           "If setup is not done yet, use /wenlan:setup in Claude Code. For other MCP clients, run npx -y wenlan setup, then ~/.wenlan/bin/wenlan connect for the client you use.",
         ],
         code: {
@@ -567,14 +567,14 @@ export const docPages: DocPage[] = [
       {
         heading: "Maintain memory when it grows",
         body: [
-          "/curate is for deep audits. /distill turns related memories into wiki pages.",
+          "/curate is for deep audits. /distill turns related memories into notes.",
           "Use them after meaningful project work, before a new phase, or when recall starts surfacing repeated or stale context.",
         ],
         bullets: [
           "/curate captures: walk unconfirmed memories when you want the full queue.",
           "/curate revisions: accept or dismiss pending memory revisions.",
-          "/distill: synthesize related memories into readable pages.",
-          "/pages: list recent pages or open a matching page in your editor.",
+          "/distill: organize related memories into readable notes.",
+          "/pages: list recent notes or open a matching note in your editor.",
         ],
       },
     ],
@@ -615,7 +615,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Good capture shapes",
         body: [
-          "Wenlan works best when each memory carries one idea. One idea per capture makes deduplication, supersession, review, and page distillation easier.",
+          "Wenlan works best when each memory carries one idea. One idea per capture makes deduplication, supersession, review, and organizing notes easier.",
           "Use capture for decisions, lessons, gotchas, preferences, project constraints, corrections, and durable facts about how work should continue.",
         ],
         code: {
@@ -645,7 +645,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Review and distill",
         body: [
-          "/curate is for inspecting pending captures or revisions. /distill is for turning repeated clusters into readable pages.",
+          "/curate is for inspecting pending captures or revisions. /distill is for turning repeated clusters into readable notes.",
           "Use review when trust is the question. Use distill when synthesis is the question.",
         ],
       },
@@ -674,7 +674,7 @@ export const docPages: DocPage[] = [
     readingTime: "5 min read",
     summary: [
       "Review is the trust layer between raw captures and context your future agent should rely on.",
-      "Use review for uncertain captures, pending revisions, or changing facts; use distill when related trusted memories deserve a readable page.",
+      "Use review for uncertain captures, pending revisions, or changing facts; use distill when related trusted memories deserve a readable note.",
     ],
     sections: [
       {
@@ -720,7 +720,7 @@ export const docPages: DocPage[] = [
         heading: "MCP tool map",
         body: [
           "The MCP connector exposes review and trust operations for clients that do not have Claude Code slash commands.",
-          "Destructive or authority-changing tools require care. Get the source_id from recall, list_pending, or a page source list before confirming, forgetting, or resolving a revision.",
+          "Destructive or authority-changing tools require care. Get the source_id from recall, list_pending, or a note's source list before confirming, forgetting, or resolving a revision.",
         ],
         code: {
           label: "MCP tools",
@@ -747,10 +747,10 @@ export const docPages: DocPage[] = [
     eyebrow: "Concepts",
     title: "Core Concepts",
     description:
-      "Understand the pieces behind Wenlan: memories, sessions, handoffs, pages, the daemon, MCP, Markdown, and the local index.",
+      "Understand the pieces behind Wenlan: memories, sessions, handoffs, notes, the daemon, MCP, Markdown, and the local index.",
     metaTitle: "Wenlan Core Concepts | Docs",
     metaDescription:
-      "Learn how Wenlan organizes AI work memory with sessions, handoffs, distilled pages, readable artifacts, a daemon-owned retrieval store, and MCP clients.",
+      "Learn how Wenlan organizes AI work memory with sessions, handoffs, source-backed notes, readable artifacts, a daemon-owned retrieval store, and MCP clients.",
     keywords: [
       "Wenlan core concepts",
       "AI memory model",
@@ -762,7 +762,7 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     summary: [
-      "Wenlan is a local-first personal knowledge library for AI work, not a chat UI or a notes app replacement.",
+      "Wenlan is a local-first personal knowledge library for AI work, not a chat UI or a replacement for the app you write in.",
       "The daemon-owned store powers retrieval, graph structure, and metadata while Markdown artifacts stay human-readable.",
     ],
     sections: [
@@ -788,10 +788,10 @@ export const docPages: DocPage[] = [
         ],
       },
       {
-        heading: "Distilled pages",
+        heading: "Notes",
         body: [
-          "Distilled pages are wiki-style Markdown artifacts synthesized from related memories. They make accumulated context easier to inspect than a long list of individual captures.",
-          "Pages are useful when a project, workflow, or concept keeps coming back across many sessions.",
+          "Notes are wiki-style Markdown documents organized from related memories. The CLI, MCP tools, and HTTP API call them pages. They make accumulated context easier to inspect than a long list of individual captures.",
+          "Notes are useful when a project, workflow, or concept keeps coming back across many sessions.",
         ],
       },
       {
@@ -812,7 +812,7 @@ export const docPages: DocPage[] = [
         heading: "No model required",
         body: [
           "Wenlan gives you storage, embeddings, dedupe, hybrid search, and MCP recall without requiring a local model or API key.",
-          "Claude Code skills can still classify captures, write handoffs, and distill pages because the agent already has language intelligence in the session.",
+          "Claude Code skills can still classify captures, write handoffs, and organize notes because the agent already has language intelligence in the session.",
         ],
       },
     ],
@@ -918,10 +918,10 @@ export const docPages: DocPage[] = [
     eyebrow: "Glossary",
     title: "Glossary",
     description:
-      "A quick map of Wenlan terms: memory, handoff, page, space, daemon, MCP, local index, provenance, and eval language.",
+      "A quick map of Wenlan terms: memory, handoff, note, space, daemon, MCP, local index, provenance, and eval language.",
     metaTitle: "Wenlan Glossary | Docs",
     metaDescription:
-      "Define Wenlan product terms including memories, handoffs, distilled pages, spaces, daemon, MCP connector, Markdown projection, local index, provenance, revisions, and retrieval metrics.",
+      "Define Wenlan product terms including memories, handoffs, notes, spaces, daemon, MCP connector, Markdown projection, local index, provenance, revisions, and retrieval metrics.",
     keywords: [
       "Wenlan glossary",
       "AI work memory terms",
@@ -946,26 +946,26 @@ export const docPages: DocPage[] = [
         bullets: [
           "Brief: session-start context loaded from recent status, handoffs, and topic-relevant memory.",
           "Recall: targeted search for a specific past fact or thread.",
-          "Distill: synthesize related memories into source-backed pages.",
+          "Distill: organize related memories into source-backed notes.",
           "Review: inspect uncertain captures, revisions, contradictions, or rejected items before trusting them.",
         ],
       },
       {
         heading: "Storage terms",
         body: [
-          "Distilled page: a readable Markdown page composed from related memories, with source memory IDs preserved for provenance.",
-          "Markdown projection: the human-readable artifact layer under ~/.wenlan. Local index: the daemon-owned libSQL store that powers embeddings, FTS, graph context, pages, metadata, and retrieval.",
+          "Note: a readable Markdown document organized from related memories, with source memory IDs preserved for provenance. The CLI and API call it a page.",
+          "Markdown projection: the human-readable artifact layer under ~/.wenlan. Local index: the daemon-owned libSQL store that powers embeddings, FTS, graph context, notes, metadata, and retrieval.",
         ],
         bullets: [
-          "Source-backed: a page or claim traces back to memory IDs instead of appearing as an unsourced summary.",
+          "Source-backed: a note or claim traces back to memory IDs instead of appearing as an unsourced summary.",
           "Local git history: commits under ~/.wenlan/.git that make writes inspectable over time.",
-          "Page source: a memory that contributed to a distilled page.",
+          "Note source: a memory that contributed to a note.",
         ],
       },
       {
         heading: "Runtime terms",
         body: [
-          "Daemon: wenlan-server, the local process on 127.0.0.1:7878 that owns storage, search, pages, graph context, distill cycles, and the HTTP API.",
+          "Daemon: wenlan-server, the local process on 127.0.0.1:7878 that owns storage, search, notes, graph context, distill cycles, and the HTTP API.",
           "MCP connector: wenlan-mcp, the process MCP clients launch so agents can call Wenlan tools. CLI: the wenlan command-line tool for setup, status, doctor, recall, search, capture, memories, spaces, models, keys, and MCP config.",
         ],
         bullets: [
@@ -981,7 +981,7 @@ export const docPages: DocPage[] = [
           "Supersession: a newer memory replaces an older fact while preserving the history of why the old fact existed.",
         ],
         bullets: [
-          "Revision: a proposed update to an existing memory or page.",
+          "Revision: a proposed update to an existing memory or note.",
           "Contradiction: two memories conflict and need human or daemon-side resolution.",
           "Quality-gate rejection: a capture attempt discarded before storage because it was duplicate, low-signal, or otherwise not useful memory.",
           "Forget: delete a memory by ID when it should not remain in the local record.",
@@ -1033,14 +1033,14 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "7 min read",
     summary: [
-      "Wenlan is daemon-first: wenlan-server owns storage, search, pages, graph context, distill cycles, and the HTTP API.",
+      "Wenlan is daemon-first: wenlan-server owns storage, search, notes, graph context, distill cycles, and the HTTP API.",
       "Claude Code, Codex, ChatGPT, other MCP clients, the CLI, and local tools are clients over the same source-backed Wenlan system.",
     ],
     sections: [
       {
         heading: "The boundary",
         body: [
-          "Wenlan keeps product behavior in one local daemon instead of scattering memory logic across every client. The daemon listens on 127.0.0.1:7878 and owns the database, embeddings, search, pages, graph context, and distill cycles.",
+          "Wenlan keeps product behavior in one local daemon instead of scattering memory logic across every client. The daemon listens on 127.0.0.1:7878 and owns the database, embeddings, search, notes, graph context, and distill cycles.",
           "That boundary is what lets Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, VS Code, ChatGPT, Claude.ai, and terminal commands build on the same source-backed wiki without each tool inventing its own store.",
         ],
       },
@@ -1057,8 +1057,8 @@ export const docPages: DocPage[] = [
       {
         heading: "Runtime flow",
         body: [
-          "A client stores or recalls memory through HTTP, MCP, or the CLI. wenlan-server frames the request and calls wenlan-core. wenlan-core handles storage, hybrid retrieval, knowledge graph context, pages, quality gates, enrichment, and eval-facing logic.",
-          "The client receives a compact response: memories, pages, decisions, graph context, or diagnostic state. The source of truth stays local.",
+          "A client stores or recalls memory through HTTP, MCP, or the CLI. wenlan-server frames the request and calls wenlan-core. wenlan-core handles storage, hybrid retrieval, knowledge graph context, notes, quality gates, enrichment, and eval-facing logic.",
+          "The client receives a compact response: memories, notes, decisions, graph context, or diagnostic state. The source of truth stays local.",
         ],
         bullets: [
           "Claude Code and Codex plugins: slash workflows such as /brief, /capture, /recall, /distill, and /handoff.",
@@ -1069,15 +1069,15 @@ export const docPages: DocPage[] = [
       {
         heading: "Storage and retrieval",
         body: [
-          "The local database uses libSQL for document chunks, vector search, FTS5 search, graph tables, pages, and metadata. Recall combines vector search, full-text search, graph context, and relevant pages with Reciprocal Rank Fusion.",
-          "Human-facing artifacts stay under ~/.wenlan. Pages and session logs are Markdown. The daemon-owned database remains the retrieval source of truth; readable artifacts are the projection people can inspect.",
+          "The local database uses libSQL for document chunks, vector search, FTS5 search, graph tables, notes, and metadata. Recall combines vector search, full-text search, graph context, and relevant notes with Reciprocal Rank Fusion.",
+          "Human-facing artifacts stay under ~/.wenlan. Notes and session logs are Markdown. The daemon-owned database remains the retrieval source of truth; readable artifacts are the projection people can inspect.",
         ],
       },
       {
         heading: "Model paths",
         body: [
           "Local memory mode works without a model download or API key. Store, embed, search, recall, and MCP memory are available immediately.",
-          "On-device models and Anthropic keys are optional. They unlock heavier extraction, page synthesis, recaps, and richer graph work, but the basic memory loop does not depend on them.",
+          "On-device models and Anthropic keys are optional. They unlock heavier extraction, note synthesis, recaps, and richer graph work, but the basic memory loop does not depend on them.",
         ],
       },
       {
@@ -1130,7 +1130,7 @@ export const docPages: DocPage[] = [
         heading: "Product surfaces",
         body: [
           "Use this matrix before picking an install route. Wenlan is the source-backed LLM wiki; the daemon/runtime owns behavior, while the CLI, local and remote MCP, Claude Code plugin, Codex plugin, ChatGPT, other clients, and optional desktop app are ways to reach it.",
-          "The daemon owns the database, pages, sessions, and retrieval behavior. Client surfaces should be debugged by checking daemon health first, then the client-specific config.",
+          "The daemon owns the database, notes, sessions, and retrieval behavior. Client surfaces should be debugged by checking daemon health first, then the client-specific config.",
         ],
         bullets: productSurfaceBullets,
       },
@@ -1169,7 +1169,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Concept map",
         body: [
-          "Use the concept docs when you need to explain memory types, review queues, spaces, source-backed pages, or why a client is not the source of truth.",
+          "Use the concept docs when you need to explain memory types, review queues, spaces, source-backed notes, or why a client is not the source of truth.",
         ],
         link: {
           label: "Read core concepts",
@@ -1292,9 +1292,9 @@ export const docPages: DocPage[] = [
         bullets: [
           "/curate captures: walk unconfirmed captures; bare /curate only prints help.",
           "/curate revisions: walk pending revisions when /brief shows more than the top few.",
-          "/distill: synthesize related memories into wiki pages.",
-          "/pages: list recent pages or open a matching page in your editor.",
-          "/lint: run the canonical read-only memory and page health report.",
+          "/distill: organize related memories into notes.",
+          "/pages: list recent notes or open a matching note in your editor.",
+          "/lint: run the canonical read-only memory and note health report.",
           "/forget: delete a memory by ID when it should not remain in Wenlan.",
         ],
       },
@@ -1307,7 +1307,7 @@ export const docPages: DocPage[] = [
           "context: load session context at the start of work or major topic shifts.",
           "capture: store a durable memory.",
           "recall: search for relevant memories.",
-          "distill: synthesize or refresh pages.",
+          "distill: organize or refresh notes.",
           "list_pending and confirm_memory: inspect and accept pending captures.",
           "forget: delete a memory.",
           "doctor: diagnose daemon and setup state.",
@@ -1317,7 +1317,7 @@ export const docPages: DocPage[] = [
         heading: "How to choose",
         body: [
           "Start with /brief in Claude Code or context in another MCP client. Save durable knowledge with capture. Search history with recall. Close a serious session with /handoff.",
-          "Use /lint, /curate, /distill, and /pages when memory needs diagnosis, maintenance, or a topic deserves a page.",
+          "Use /lint, /curate, /distill, and /pages when memory needs diagnosis, maintenance, or a topic deserves a note.",
         ],
       },
     ],
@@ -1370,7 +1370,7 @@ export const docPages: DocPage[] = [
         heading: "Daily command surface",
         body: [
           "Most sessions need only /brief at the start, /capture when something durable happens, /recall for a specific lookup, and /handoff before the session ends.",
-          "The other commands are maintenance and inspection paths for read-only health diagnostics, review, distillation, deletion, or opening a page.",
+          "The other commands are maintenance and inspection paths for read-only health diagnostics, review, distillation, deletion, or opening a note.",
         ],
         code: {
           label: "Plugin commands",
@@ -1388,14 +1388,14 @@ export const docPages: DocPage[] = [
         heading: "Local memory mode",
         body: [
           "By default, /wenlan:setup configures local memory. That means no model download, no API key, and no cloud sync requirement for the basic memory loop.",
-          "The daemon stores, embeds, deduplicates, and serves hybrid search. Claude Code skills can still classify captures, write handoffs, and synthesize pages through the agent-side model fallback because the agent already has language judgment in the active session.",
+          "The daemon stores, embeds, deduplicates, and serves hybrid search. Claude Code skills can still classify captures, write handoffs, and organize notes through the agent-side model fallback because the agent already has language judgment in the active session.",
         ],
       },
       {
         heading: "Where data appears",
         body: [
           "The plugin does not store data by itself. It guides Claude Code to use local MCP tools, and those tools talk to the Wenlan daemon.",
-          "Readable artifacts live under ~/.wenlan, so you can inspect pages, session logs, project status, and installed binaries without opening a separate app.",
+          "Readable artifacts live under ~/.wenlan, so you can inspect notes, session logs, project status, and installed binaries without opening a separate app.",
         ],
         code: {
           label: "Local artifacts",
@@ -1405,7 +1405,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Plugin versus MCP-only",
         body: [
-          "MCP-only setup gives clients tools for context, capture, recall, doctor, and page distillation. It does not install Claude Code slash skills like /brief, /handoff, /distill, or /wenlan:setup.",
+          "MCP-only setup gives clients tools for context, capture, recall, doctor, and organizing notes. It does not install Claude Code slash skills like /brief, /handoff, /distill, or /wenlan:setup.",
           "Use the plugin when Claude Code is your main surface. Use MCP-only setup when you want Wenlan in other clients or when you intentionally want raw MCP tools without the Claude Code workflow layer.",
         ],
         link: {
@@ -1438,7 +1438,7 @@ export const docPages: DocPage[] = [
     readingTime: "5 min read",
     summary: [
       "Quick answer: use wenlan setup, status, doctor, background, recall, search, capture, and connect when you need terminal control over the local memory runtime.",
-      "The daemon owns memory, search, pages, and retrieval. The CLI talks to that daemon instead of editing the database directly.",
+      "The daemon owns memory, search, notes, and retrieval. The CLI talks to that daemon instead of editing the database directly.",
     ],
     sections: [
       {
@@ -1455,7 +1455,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Check the daemon",
         body: [
-          "The daemon listens on 127.0.0.1:7878 and owns storage, search, pages, graph context, and distill cycles. Use status for a quick health check and doctor for a fuller setup report.",
+          "The daemon listens on 127.0.0.1:7878 and owns storage, search, notes, graph context, and distill cycles. Use status for a quick health check and doctor for a fuller setup report.",
           "Service installation is per-user. Wenlan uses launchd on macOS, systemd user units on Linux, and a Task Scheduler logon task on Windows.",
         ],
         code: {
@@ -1578,7 +1578,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Before deleting data",
         body: [
-          "Memory data may include project history, private preferences, client context, pages, sessions, and local git history. Treat it like private application data.",
+          "Memory data may include project history, private preferences, client context, notes, sessions, and local git history. Treat it like private application data.",
           "If you are removing Wenlan because setup failed, open an issue with redacted doctor output before deleting data. The diagnostic state is often the fastest way to fix the install path.",
         ],
       },
@@ -1646,7 +1646,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Current runtime shape",
         body: [
-          "The current public docs describe the v0.19.1 runtime shape: Claude Code and Codex plugins, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages with revisions, session handoffs, status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
+          "The current public docs describe the v0.19.1 runtime shape: Claude Code and Codex plugins, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed notes with revisions, session handoffs, status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
           "The biggest practical upgrade checks are platform support, package path alignment, and spaces. Confirm your machine's service manager, confirm MCP clients launch the connector under ~/.wenlan/bin, and confirm the active space is the one you expect.",
         ],
         link: {
@@ -1812,7 +1812,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Data paths",
         body: [
-          "The daemon keeps its database and application data in the OS application data location. Wenlan also exposes human-readable artifacts under ~/.wenlan so pages, sessions, status records, and local git history are easy to inspect.",
+          "The daemon keeps its database and application data in the OS application data location. Wenlan also exposes human-readable artifacts under ~/.wenlan so notes, sessions, status records, and local git history are easy to inspect.",
           "Treat both locations as private application data. They can contain project decisions, preferences, client context, and old versions.",
         ],
         code: {
@@ -1883,7 +1883,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Main surfaces",
         body: [
-          "The server README groups the public surfaces into health/status, setup, memory ingest/search, review, pages, and model/key setup.",
+          "The server README groups the public surfaces into health/status, setup, memory ingest/search, review, notes (pages), and model/key setup.",
           "These are implementation-level routes, not a stability promise for third-party SDKs. For normal use, prefer the CLI or MCP tools.",
         ],
         code: {
@@ -1894,7 +1894,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Client mapping",
         body: [
-          "Claude Code slash commands and MCP tools are product workflows over these routes. /brief and context ask for a context bundle. /capture and capture store one durable memory. /distill triggers page synthesis. doctor checks daemon and setup state.",
+          "Claude Code slash commands and MCP tools are product workflows over these routes. /brief and context ask for a context bundle. /capture and capture store one durable memory. /distill triggers note synthesis. doctor checks daemon and setup state.",
           "The CLI uses the same daemon for status, doctor, search, recall, capture, memories, models, keys, MCP config, and spaces.",
         ],
       },
@@ -1996,10 +1996,10 @@ export const docPages: DocPage[] = [
         },
       },
       {
-        heading: "Search pages",
+        heading: "Search notes",
         body: [
-          "pages/search looks over source-backed pages. A page result is different from an atomic memory result: it is synthesized from source memories and should preserve provenance.",
-          "Use pages/{id}/sources when you need to inspect which memories produced a page before trusting or editing it.",
+          "pages/search looks over source-backed notes, which the API calls pages. A note result is different from an atomic memory result: it is synthesized from source memories and should preserve provenance.",
+          "Use pages/{id}/sources when you need to inspect which memories produced a note before trusting or editing it.",
         ],
         code: {
           label: "Page calls",
@@ -2077,7 +2077,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Boundary still matters",
         body: [
-          "wenlan-types does not mean clients should write the database directly. The daemon remains the owner of storage, search, pages, graph context, review state, and distill cycles.",
+          "wenlan-types does not mean clients should write the database directly. The daemon remains the owner of storage, search, notes, graph context, review state, and distill cycles.",
           "If your tool only needs to capture, recall, or load context, prefer MCP or CLI automation before building direct HTTP plumbing.",
         ],
         link: {
@@ -2127,7 +2127,7 @@ export const docPages: DocPage[] = [
       {
         heading: "What a space is",
         body: [
-          "A space is a named partition for memories, pages, and recall context. It is for separating work streams that should not automatically inform each other.",
+          "A space is a named partition for memories, notes, and recall context. It is for separating work streams that should not automatically inform each other.",
           "Use spaces when you switch between clients, personal projects, experiments, or repos with very different context.",
         ],
       },
@@ -2145,7 +2145,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Configure defaults",
         body: [
-          "Wenlan can read space configuration from ~/.wenlan/spaces.toml. Map directory prefixes to spaces when you want a repo or notes folder to select the same context every time.",
+          "Wenlan can read space configuration from ~/.wenlan/spaces.toml. Map directory prefixes to spaces when you want a repo or Markdown folder to select the same context every time.",
           "Longest matching prefix wins. A top-level default applies when no mapping matches.",
         ],
         code: {
@@ -2167,7 +2167,7 @@ export const docPages: DocPage[] = [
       {
         heading: "How recall behaves",
         body: [
-          "Recall should start inside the active space so a client project does not accidentally pull personal notes or an unrelated repo history.",
+          "Recall should start inside the active space so a client project does not accidentally pull personal memories or an unrelated repo history.",
           "If you intentionally need cross-space context, move or recapture the durable fact into the right space rather than relying on accidental bleed.",
         ],
       },
@@ -2190,7 +2190,7 @@ export const docPages: DocPage[] = [
       "Build a source-backed AI knowledge base that links people, projects, tools, observations, and relations without treating graph context as authority.",
     metaTitle: "AI Agent Knowledge Graph for a Source-Backed Knowledge Base | Wenlan",
     metaDescription:
-      "Learn how an AI agent knowledge graph links entities, relations, observations, sources, and maintained pages for inspectable retrieval.",
+      "Learn how an AI agent knowledge graph links entities, relations, observations, sources, and maintained notes for inspectable retrieval.",
     keywords: [
       "Wenlan knowledge graph",
       "AI agent knowledge graph",
@@ -2206,14 +2206,14 @@ export const docPages: DocPage[] = [
     readingTime: "5 min read",
     summary: [
       "Quick answer: an AI agent knowledge graph connects typed entities, relations, and observations so retrieval can recover relationships that text similarity misses.",
-      "Use graph context as supporting evidence. Source memories and maintained pages remain the inspectable authority and human review remains part of the workflow.",
+      "Use graph context as supporting evidence. Source memories and maintained notes remain the inspectable authority and human review remains part of the workflow.",
     ],
     sections: [
       {
         heading: "Quick answer: what an AI agent knowledge graph adds",
         body: [
           "Use text or vector search for direct matches. Use an AI agent knowledge graph for typed relationships: who worked on a project, which tool it uses, and which grounded observations belong to the same entity.",
-          "A reliable source-backed AI knowledge base keeps that graph beside inspectable source memories and maintained pages. Graph context supplies nearby facts; it does not become authority or replace provenance and review.",
+          "A reliable source-backed AI knowledge base keeps that graph beside inspectable source memories and maintained notes. Graph context supplies nearby facts; it does not become authority or replace provenance and review.",
         ],
       },
       {
@@ -2225,13 +2225,13 @@ export const docPages: DocPage[] = [
         bullets: [
           "Entity: Wenlan, Claude Code, a client project, a person, a tool, or a repo.",
           "Relation: works_on, uses, depends_on, belongs_to, supersedes, or another useful link.",
-          "Observation: a sourced note about an entity that should help future recall.",
+          "Observation: a sourced fact about an entity that should help future recall.",
         ],
       },
       {
         heading: "How graph context is created",
         body: [
-          "Post-ingest enrichment can link entities, deduplicate overlapping captures, enrich titles, grow matching pages, and update effective confidence based on memory type, access, and age. Optional local models or API keys can make extraction and graph linking richer.",
+          "Post-ingest enrichment can link entities, deduplicate overlapping captures, enrich titles, grow matching notes, and update effective confidence based on memory type, access, and age. Optional local models or API keys can make extraction and graph linking richer.",
           "Claude Code skills can also help because the agent already has language judgment during capture and distillation.",
         ],
         link: {
@@ -2243,7 +2243,7 @@ export const docPages: DocPage[] = [
         heading: "Wikilinks and imports",
         body: [
           "Imported Markdown vaults can carry useful links. Wenlan can preserve those relationships as graph signal while still treating imported content as context that should prove itself useful in recall.",
-          "Wikilinks are helpful, but they are not the same as source-backed page provenance. A page claim is stronger when it traces to specific source memory IDs.",
+          "Wikilinks are helpful, but they are not the same as source-backed note provenance. A claim in a note is stronger when it traces to specific source memory IDs.",
         ],
         link: {
           label: "Read import and portability",
@@ -2253,8 +2253,8 @@ export const docPages: DocPage[] = [
       {
         heading: "Graph in retrieval",
         body: [
-          "Hybrid retrieval can combine vectors, full-text search, pages, and graph context. The graph adds nearby related facts when text similarity alone would miss why a memory matters.",
-          "Treat graph context as support, not authority. The source memory, page provenance, and local git history remain the inspectable record.",
+          "Hybrid retrieval can combine vectors, full-text search, notes, and graph context. The graph adds nearby related facts when text similarity alone would miss why a memory matters.",
+          "Treat graph context as support, not authority. The source memory, note provenance, and local git history remain the inspectable record.",
         ],
         link: {
           label: "Read advanced retrieval",
@@ -2278,13 +2278,13 @@ export const docPages: DocPage[] = [
   {
     slug: "source-backed-pages",
     group: "Reference",
-    eyebrow: "Pages",
+    eyebrow: "Notes",
     title: "Source-Backed Pages",
     description:
-      "Understand how Wenlan turns atomic captures into readable pages with source memory IDs, revision state, and refresh paths.",
+      "Understand how Wenlan turns atomic captures into readable notes with source memory IDs, revision state, and refresh paths.",
     metaTitle: "Wenlan Source-Backed Pages | Docs",
     metaDescription:
-      "Learn how Wenlan distilled pages work: source-backed Markdown pages, provenance, stale reasons, revision state, /distill, and /pages.",
+      "Learn how Wenlan notes work: source-backed Markdown notes (pages in the CLI and API), provenance, stale reasons, revision state, /distill, and /pages.",
     keywords: [
       "Wenlan pages",
       "source-backed pages",
@@ -2297,27 +2297,27 @@ export const docPages: DocPage[] = [
     readingTime: "5 min read",
     summary: [
       "Atomic memories are good for recall, but repeated work eventually needs a readable synthesis.",
-      "Wenlan pages are Markdown artifacts backed by source memories so the synthesized view is inspectable instead of anonymous.",
+      "Wenlan notes are Markdown documents backed by source memories, so the organized view is inspectable instead of anonymous. The desktop app calls them notes; the CLI, MCP tools, and HTTP API call them pages.",
     ],
     sections: [
       {
-        heading: "Why pages exist",
+        heading: "Why notes exist",
         body: [
           "Raw captures are intentionally small. That makes them easy to search, deduplicate, correct, and cite, but a mature project needs more than a long list of fragments.",
-          "Distilled pages compose related captures into a wiki-style record. They are for concepts, projects, decisions, workflows, and recurring lessons that deserve a stable surface.",
+          "Notes compose related captures into a wiki-style record. They are for concepts, projects, decisions, workflows, and recurring lessons that deserve a stable surface.",
         ],
       },
       {
         heading: "Provenance is mandatory",
         body: [
-          "Wenlan tracks which memories contributed to a page. That source backing is part of the trust model: a page should not read like it appeared from nowhere.",
-          "When a page feels wrong, inspect the source memories and either correct the memory, refresh the page, or capture the missing context.",
+          "Wenlan tracks which memories contributed to a note. That source backing is part of the trust model: a note should not read like it appeared from nowhere.",
+          "When a note feels wrong, inspect the source memories and either correct the memory, rebuild the note, or capture the missing context.",
         ],
       },
       {
         heading: "Distill and open",
         body: [
-          "/distill asks Wenlan to synthesize or refresh pages from related memories. /pages lists recent pages or opens a matching page in your editor.",
+          "/distill asks Wenlan to organize or rebuild notes from related memories. /pages lists recent notes or opens a matching note in your editor.",
           "Use distillation before a new project phase, after a long sprint, or when recall keeps surfacing the same cluster of memories.",
         ],
         code: {
@@ -2328,15 +2328,15 @@ export const docPages: DocPage[] = [
       {
         heading: "Staleness and revision state",
         body: [
-          "Pages can become stale when new memories contradict them, extend them, or show that an old summary is no longer enough. Wenlan tracks stale_reasons so refresh work has a concrete cause.",
+          "Notes can become stale when new memories contradict them, extend them, or show that an old summary is no longer enough. Wenlan tracks stale_reasons so refresh work has a concrete cause.",
           "Wenlan also tracks revision_state so refreshes can be deliberate. The point is not to overwrite human-readable records casually; it is to keep them improving as the project changes.",
         ],
       },
       {
         heading: "Edit carefully",
         body: [
-          "The Markdown files are readable and can be inspected with normal tools. If you hand-edit a page, treat it like a human-owned artifact.",
-          "When you need the system to learn something new, prefer capturing the atomic fact or correction too. That keeps search, provenance, and future pages aligned.",
+          "The Markdown files are readable and can be inspected with normal tools. If you hand-edit a note, treat it like a human-owned artifact.",
+          "When you need the system to learn something new, prefer capturing the atomic fact or correction too. That keeps search, provenance, and future notes aligned.",
         ],
       },
     ],
@@ -2351,7 +2351,7 @@ export const docPages: DocPage[] = [
       "Move selected durable context into Wenlan and keep Wenlan's readable artifacts portable outside the daemon.",
     metaTitle: "Wenlan Import and Portability | Docs",
     metaDescription:
-      "Migrate selected durable notes into Wenlan, understand the current no-bulk-import boundary, and read Wenlan's projected Markdown pages and session logs outside the daemon.",
+      "Migrate selected durable context from your Markdown files into Wenlan, understand the current no-bulk-import boundary, and read Wenlan's projected Markdown notes and session logs outside the daemon.",
     keywords: [
       "Wenlan migration",
       "Wenlan portability",
@@ -2363,21 +2363,21 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "The current CLI does not expose a general Markdown-vault importer. Migrate selected durable notes explicitly through capture or the memory store API.",
-      "Wenlan's pages and session logs are readable Markdown, so the human record remains portable even though retrieval needs the daemon.",
+      "The current CLI does not expose a general Markdown-vault importer. Migrate selected durable context from your Markdown files explicitly through capture or the memory store API.",
+      "Wenlan's notes and session logs are readable Markdown, so the human record remains portable even though retrieval needs the daemon.",
     ],
     sections: [
       {
         heading: "What migration is for",
         body: [
-          "Migration is useful when you already have durable project notes, meeting notes, or research notes that should become searchable AI work context.",
+          "Migration is useful when you already have durable project documents, meeting minutes, or research files that should become searchable AI work context.",
           "Do not migrate everything just because it exists. Wenlan works best when selected material is useful to future agents, not when its sources become a bulk file mirror.",
         ],
       },
       {
         heading: "Migrate selected Markdown context",
         body: [
-          "Use wenlan capture or normal client capture flows for selected durable notes. For larger moves, use a small script that reads source files you choose and posts distilled facts to /api/memory/store.",
+          "Use wenlan capture or normal client capture flows for selected durable context. For larger moves, use a small script that reads source files you choose and posts distilled facts to /api/memory/store.",
           "Start with a representative sample, then recall against it before moving a larger archive. That gives you a chance to see whether the migrated context is useful or noisy.",
         ],
         code: {
@@ -2388,21 +2388,21 @@ export const docPages: DocPage[] = [
       {
         heading: "Wikilinks and graph context",
         body: [
-          "Markdown links and wiki-style relationships are useful signal, but they are not the same as the source-backed page model.",
-          "Links can still help when you rewrite selected notes into explicit memories. Source-backed pages are stronger when Wenlan can trace the synthesized claim to the source memories that produced it.",
+          "Markdown links and wiki-style relationships are useful signal, but they are not the same as the source-backed note model.",
+          "Links can still help when you rewrite selected files into explicit memories. Source-backed notes are stronger when Wenlan can trace the synthesized claim to the source memories that produced it.",
         ],
       },
       {
         heading: "Keep ownership clear",
         body: [
-          "If another app is your knowledge-base source of truth, keep using it for polished notes. Use Wenlan for the AI work loop: captures, handoffs, source-backed pages, recall, and cross-client context.",
+          "If another app is your knowledge-base source of truth, keep using it for polished writing. Use Wenlan for the AI work loop: captures, handoffs, source-backed notes, recall, and cross-client context.",
           "Running both is possible through MCP, but you still need a human rule for which system owns which kind of context.",
         ],
       },
       {
         heading: "Read Wenlan outside the daemon",
         body: [
-          "Wenlan projects readable artifacts under ~/.wenlan, including pages and session handoffs. You can open those files in an editor or point a Markdown reader at them.",
+          "Wenlan projects readable artifacts under ~/.wenlan, including notes and session handoffs. You can open those files in an editor or point a Markdown reader at them.",
           "Plain-text access is not the same as full Wenlan behavior. Capture, recall, dedupe, distill, review, forget, and index updates still need the daemon and CLI/MCP paths.",
         ],
       },
@@ -2422,10 +2422,10 @@ export const docPages: DocPage[] = [
     eyebrow: "Versioning",
     title: "Local Git History",
     description:
-      "Inspect the real git history Wenlan keeps for readable page, session, handoff, and status artifacts.",
+      "Inspect the real git history Wenlan keeps for readable note, session, handoff, and status artifacts.",
     metaTitle: "Wenlan Local Git History | Docs",
     metaDescription:
-      "Learn how Wenlan uses a real local git repository under ~/.wenlan/.git to version readable pages, sessions, handoffs, and status files.",
+      "Learn how Wenlan uses a real local git repository under ~/.wenlan/.git to version readable notes, sessions, handoffs, and status files.",
     keywords: [
       "Wenlan git history",
       "AI memory versioning",
@@ -2444,14 +2444,14 @@ export const docPages: DocPage[] = [
       {
         heading: "What is versioned",
         body: [
-          "Wenlan writes human-facing artifacts under ~/.wenlan, including pages, session handoffs, and current status records. Those artifacts are committed into a local git repository.",
+          "Wenlan writes human-facing artifacts under ~/.wenlan, including notes, session handoffs, and current status records. Those artifacts are committed into a local git repository.",
           "The git log gives you a practical audit trail for memory work: what changed, when it changed, and which artifacts were touched.",
         ],
       },
       {
         heading: "Inspect history",
         body: [
-          "Use normal git commands from ~/.wenlan to inspect recent readable artifact writes and page changes. This is often faster than opening the database when you want to understand a human-readable change.",
+          "Use normal git commands from ~/.wenlan to inspect recent readable artifact writes and note changes. This is often faster than opening the database when you want to understand a human-readable change.",
           "The repository is local. It is not pushed anywhere unless you explicitly sync or publish it yourself.",
         ],
         code: {
@@ -2462,15 +2462,15 @@ export const docPages: DocPage[] = [
       {
         heading: "Recover with care",
         body: [
-          "Git can help inspect, diff, revert, or recover a previous Markdown page or session note, but do not treat manual git restore as a full database rollback.",
+          "Git can help inspect, diff, revert, or recover a previous Markdown note or session log, but do not treat manual git restore as a full database rollback.",
           "If the durable knowledge is wrong, the safer product path is to capture a correction or forget the memory by ID. That keeps the index and readable artifacts aligned.",
         ],
       },
       {
-        heading: "Use with your notes",
+        heading: "Use with your other tools",
         body: [
-          "Because pages and sessions are normal files, you can inspect them from editors, terminals, or personal note tools. Some users symlink pages into a vault for reading.",
-          "Keep writes disciplined. Wenlan should remain the writer for generated artifacts unless you intentionally edit a human-owned page.",
+          "Because notes and sessions are normal files, you can inspect them from editors, terminals, or apps such as Obsidian. Some users symlink the notes folder into an Obsidian vault for reading.",
+          "Keep writes disciplined. Wenlan should remain the writer for generated artifacts unless you intentionally edit a human-owned note.",
         ],
         code: {
           label: "Example",
@@ -2493,7 +2493,7 @@ export const docPages: DocPage[] = [
     eyebrow: "Models",
     title: "Models and Keys",
     description:
-      "Choose between local memory mode, optional on-device models, and optional Anthropic API keys for richer extraction, page synthesis, recaps, and graph work.",
+      "Choose between local memory mode, optional on-device models, and optional Anthropic API keys for richer extraction, note synthesis, recaps, and graph work.",
     metaTitle: "Wenlan Models and Keys | Docs",
     metaDescription:
       "Understand Wenlan setup modes: no-model local memory, optional on-device models, optional Anthropic API keys, model status, key status, and privacy implications.",
@@ -2509,14 +2509,14 @@ export const docPages: DocPage[] = [
     readingTime: "5 min read",
     summary: [
       "Wenlan works without downloading a local model or adding an API key.",
-      "Optional models and keys add heavier language work such as extraction, page synthesis, recaps, and richer graph work.",
+      "Optional models and keys add heavier language work such as extraction, note synthesis, recaps, and richer graph work.",
     ],
     sections: [
       {
         heading: "Three setup levels",
         body: [
           "Start with local memory mode unless you know you need automated language-heavy maintenance. It gives you storage, embeddings, dedupe, hybrid search, MCP recall, and local artifacts.",
-          "Add an on-device model or Anthropic key when you want richer daemon-side extraction, page synthesis, recaps, and knowledge graph work.",
+          "Add an on-device model or Anthropic key when you want richer daemon-side extraction, note synthesis, recaps, and knowledge graph work.",
         ],
         code: {
           label: "Setup options",
@@ -2547,7 +2547,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Agent-side fallback",
         body: [
-          "Claude Code skills can classify captures, write handoffs, and synthesize pages from inside the active agent session. That is why Wenlan remains useful before you configure a daemon model.",
+          "Claude Code skills can classify captures, write handoffs, and organize notes from inside the active agent session. That is why Wenlan remains useful before you configure a daemon model.",
           "The daemon stays the store and retrieval layer. The agent can supply language judgment when it is already in the work context.",
         ],
         code: {
@@ -2580,22 +2580,22 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     summary: [
-      "The stable public path is hybrid retrieval over embeddings, FTS5, pages, and graph context.",
+      "The stable public path is hybrid retrieval over embeddings, FTS5, notes, and graph context.",
       "Recent main-branch PRs add many opt-in retrieval experiments; treat them as evaluation work until a release promotes them.",
     ],
     sections: [
       {
         heading: "Stable retrieval path",
         body: [
-          "Wenlan's released retrieval combines vector embeddings, FTS5 full-text search, graph context, pages, and Reciprocal Rank Fusion. The goal is not a single magic ranking signal; it is a compact context bundle that helps the next AI session continue work.",
+          "Wenlan's released retrieval combines vector embeddings, FTS5 full-text search, graph context, notes, and Reciprocal Rank Fusion. The goal is not a single magic ranking signal; it is a compact context bundle that helps the next AI session continue work.",
           "The public README snapshot reports retrieval metrics, not end-to-end answer quality. Read the evaluation page before using the numbers in comparisons.",
         ],
       },
       {
-        heading: "Pages are part of retrieval",
+        heading: "Notes are part of retrieval",
         body: [
-          "Wenlan treats distilled pages as retrieval surfaces, not only as human-readable notes. That matters because repeated project context often becomes clearer as a page than as isolated captures.",
-          "A useful recall can include atomic memories, source-backed pages, graph neighbors, and decisions. The best result set is the one that gives the agent enough context without replaying a full chat history.",
+          "Wenlan treats notes as retrieval surfaces, not only as human-readable documents. That matters because repeated project context often becomes clearer as a note than as isolated captures.",
+          "A useful recall can include atomic memories, source-backed notes, graph neighbors, and decisions. The best result set is the one that gives the agent enough context without replaying a full chat history.",
         ],
       },
       {
@@ -2620,7 +2620,7 @@ export const docPages: DocPage[] = [
         heading: "When to care",
         body: [
           "Most users should care about whether /brief, context, and recall bring the right project facts forward. Maintainers should care about benchmark slices, regression guards, and whether new retrieval work reduces real cold starts.",
-          "If recall feels weak, first improve the query and capture quality. Then distill repeated topics into pages before reaching for experimental retrieval flags.",
+          "If recall feels weak, first improve the query and capture quality. Then distill repeated topics into notes before reaching for experimental retrieval flags.",
         ],
       },
     ],
@@ -2734,7 +2734,7 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "7 min read",
     summary: [
-      "Quick answer: Wenlan's daemon, database, pages, sessions, and readable artifacts live locally by default.",
+      "Quick answer: Wenlan's daemon, database, notes, sessions, and readable artifacts live locally by default.",
       "Connected AI clients may still send prompts to their model providers; Wenlan keeps its own memory store local, inspectable, and removable.",
       "The public wenlan.app website uses separate privacy-limited analytics; installed Wenlan still has no cloud sync or product telemetry by default.",
     ],
@@ -2742,7 +2742,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Quick answer: what stays local",
         body: [
-          "Wenlan's durable memory store, daemon database, Markdown pages, session handoffs, and project status files live on your machine by default.",
+          "Wenlan's durable memory store, daemon database, Markdown notes, session handoffs, and project status files live on your machine by default.",
           "There is no Wenlan cloud sync or telemetry path by default. Connected AI clients may still send prompts to their own providers, so treat memory content as sensitive project data.",
         ],
       },
@@ -2762,10 +2762,10 @@ export const docPages: DocPage[] = [
         heading: "Where data lives",
         body: [
           "Wenlan exposes human-facing artifacts under ~/.wenlan. The daemon database lives under the operating system's application data directory and is linked from ~/.wenlan/db for convenience.",
-          "The important files are readable without a special app: pages are Markdown, session logs are Markdown, and project status is stored beside the session records.",
+          "The important files are readable without a special app: notes are Markdown, session logs are Markdown, and project status is stored beside the session records.",
         ],
         bullets: [
-          "~/.wenlan/pages/: distilled wiki pages.",
+          "~/.wenlan/pages/: your Wenlan notes.",
           "~/.wenlan/sessions/: session handoff logs.",
           "~/.wenlan/sessions/_status/: current project status records.",
           "~/.wenlan/bin/: installed Wenlan CLI, daemon, and MCP connector binaries.",
@@ -2778,8 +2778,8 @@ export const docPages: DocPage[] = [
       {
         heading: "Readable artifacts and retrieval",
         body: [
-          "Raw captures and recall live in the daemon-owned store. Pages, session logs, and project status are readable Markdown projections under ~/.wenlan.",
-          "This keeps search fast and structured while giving people inspectable artifacts for pages, handoffs, and status without pretending every memory is a Markdown file.",
+          "Raw captures and recall live in the daemon-owned store. Notes, session logs, and project status are readable Markdown projections under ~/.wenlan.",
+          "This keeps search fast and structured while giving people inspectable artifacts for notes, handoffs, and status without pretending every memory is a Markdown file.",
         ],
       },
       {
@@ -2793,7 +2793,7 @@ export const docPages: DocPage[] = [
         heading: "Correction and deletion",
         body: [
           "If a memory is wrong, capture the correction with why it supersedes the old fact. If a memory should be removed entirely, use /forget with the memory ID.",
-          "Delete and forget operations are separate from service uninstall. For distilled pages, inspect the Markdown directly. User-edited pages are treated carefully so automated distillation does not overwrite human work casually.",
+          "Delete and forget operations are separate from service uninstall. For notes, inspect the Markdown directly. User-edited notes are treated carefully so automated distillation does not overwrite human work casually.",
         ],
       },
       {
@@ -2843,7 +2843,7 @@ export const docPages: DocPage[] = [
       {
         heading: "What to back up",
         body: [
-          "Back up the readable artifacts and the daemon application data together. The readable side gives you pages, sessions, status records, and local git history. The daemon data side keeps the database, index, config, and service-facing state.",
+          "Back up the readable artifacts and the daemon application data together. The readable side gives you notes, sessions, status records, and local git history. The daemon data side keeps the database, index, config, and service-facing state.",
           "A backup that only includes ~/.wenlan may preserve useful Markdown, but it should not be treated as a complete live runtime restore.",
         ],
         code: {
@@ -2972,7 +2972,7 @@ export const docPages: DocPage[] = [
         heading: "Local files",
         body: [
           "Human-facing Wenlan artifacts live under ~/.wenlan. The daemon-owned database and platform service files live under the OS application data location.",
-          "Read Markdown pages and session logs freely. Avoid hand-editing the database; use capture, review, distill, forget, and the CLI so the index, pages, and metadata stay consistent.",
+          "Read Markdown notes and session logs freely. Avoid hand-editing the database; use capture, review, distill, forget, and the CLI so the index, notes, and metadata stay consistent.",
         ],
         code: {
           label: "Paths",
@@ -2982,7 +2982,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Models and keys",
         body: [
-          "Wenlan works in local memory mode without a model download or API key. Configure a model or Anthropic key only when you want daemon-side language work such as richer extraction, recaps, or page synthesis.",
+          "Wenlan works in local memory mode without a model download or API key. Configure a model or Anthropic key only when you want daemon-side language work such as richer extraction, recaps, or note synthesis.",
           "Treat keys as an explicit opt-in. The connected AI client may already call its own provider during chat; Wenlan's model and key settings only cover daemon-side work.",
         ],
         link: {
@@ -3130,7 +3130,7 @@ export const docPages: DocPage[] = [
       {
         heading: "How the pieces connect",
         body: [
-          "The daemon runs locally and owns captures, source-backed pages, sessions, and retrieval. wenlan-mcp is the connector clients use when they need Wenlan tools.",
+          "The daemon runs locally and owns captures, source-backed notes, sessions, and retrieval. wenlan-mcp is the connector clients use when they need Wenlan tools.",
           "Local clients launch wenlan-mcp over stdio. Current desktop Web Access connects ChatGPT and Claude.ai through the authenticated relay at https://relay.wenlan.app/mcp. OAuth pairing grants query access only to what you choose to share, the whole library or one Space, and only after you approve the pairing; requests and results pass through the relay while your local device is online.",
         ],
       },
@@ -3375,7 +3375,7 @@ export const docPages: DocPage[] = [
         heading: "Recall returns weak context",
         body: [
           "First make the recall query more specific. Include project names, feature names, decisions, people, or the exact failure mode.",
-          "If the memory exists but is stale or duplicated, use /curate for pending queues and /distill when a topic deserves a clearer page.",
+          "If the memory exists but is stale or duplicated, use /curate for pending queues and /distill when a topic deserves a clearer note.",
         ],
       },
       {
@@ -3494,14 +3494,14 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "4 min read",
     summary: [
-      "Wenlan is a local-first LLM wiki for AI work: agents capture what they learn, sources ground the result, and the daemon keeps pages usable across clients and sessions.",
+      "Wenlan is a local-first LLM wiki for AI work: agents capture what they learn, sources ground the result, and the daemon keeps notes usable across clients and sessions.",
       "Use this page when you need the short answer, then follow the linked docs for setup, data, packages, troubleshooting, or project scope.",
     ],
     sections: [
       {
         heading: "Is Wenlan just memory?",
         body: [
-          "Wenlan includes a local memory substrate, but that is not the product headline. The product is a source-backed LLM wiki where decisions, context, handoffs, and pages remain useful across sessions and tools.",
+          "Wenlan includes a local memory substrate, but that is not the product headline. The product is a source-backed LLM wiki where decisions, context, handoffs, and notes remain useful across sessions and tools.",
           "That distinction matters because Wenlan is designed around the work loop: brief, capture, recall, handoff, distill, inspect, and keep going.",
         ],
         link: {
@@ -3545,11 +3545,11 @@ export const docPages: DocPage[] = [
       {
         heading: "Is Markdown the database?",
         body: [
-          "No. Wenlan uses a local database and index for retrieval, graph context, pages, and daemon state. Markdown artifacts are the human-readable projection, not the whole storage system.",
+          "No. Wenlan uses a local database and index for retrieval, graph context, notes, and daemon state. Markdown artifacts are the human-readable projection, not the whole storage system.",
           "This gives agents fast retrieval while still giving humans files they can inspect, version, back up, and move.",
         ],
         link: {
-          label: "Read source-backed pages",
+          label: "Read about source-backed notes",
           href: "/docs/source-backed-pages",
         },
       },
@@ -3557,7 +3557,7 @@ export const docPages: DocPage[] = [
         heading: "Does uninstall delete memory?",
         body: [
           "No. wenlan background off stops Wenlan and removes the per-user service registration. It does not delete ~/.wenlan or the daemon data directory.",
-          "That separation is intentional because local memory may be the only record of project decisions, handoffs, private preferences, and generated pages.",
+          "That separation is intentional because local memory may be the only record of project decisions, handoffs, private preferences, and generated notes.",
         ],
         link: {
           label: "Read updates and uninstall",
@@ -3694,7 +3694,7 @@ export const docPages: DocPage[] = [
         heading: "What is measured",
         body: [
           "The headline metrics are Recall@5, MRR, and NDCG@10. They measure whether the retrieval layer surfaces relevant context near the top of the result set.",
-          "This is useful because Wenlan's job is to bring the right memories, pages, decisions, and graph context into the next agent session. It does not prove that a downstream model will always answer correctly.",
+          "This is useful because Wenlan's job is to bring the right memories, notes, decisions, and graph context into the next agent session. It does not prove that a downstream model will always answer correctly.",
         ],
       },
       {
@@ -3758,7 +3758,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Is the desktop app required?",
         body: [
-          "No. Wenlan's main workflow works through Claude Code or Codex commands, MCP tools, and the wenlan CLI. The local daemon owns captures, pages, sessions, and retrieval either way.",
+          "No. Wenlan's main workflow works through Claude Code or Codex commands, MCP tools, and the wenlan CLI. The local daemon owns captures, notes, sessions, and retrieval either way.",
           "Use the desktop app when you want the richest source-cited wiki view, graphical review and curation, or guided Remote Access for web AI clients.",
         ],
       },
@@ -3766,7 +3766,7 @@ export const docPages: DocPage[] = [
         heading: "What the main repo owns",
         body: [
           "The main Wenlan repo owns the daemon, business logic, CLI, MCP server, shared wire types, Claude Code plugin, Codex plugin, and the app/ desktop crate.",
-          "That is the runtime path documented on this website: setup, capture, recall, handoff, distill, pages, data paths, diagnostics, and releases.",
+          "That is the runtime path documented on this website: setup, capture, recall, handoff, distill, notes, data paths, diagnostics, and releases.",
         ],
       },
       {
@@ -3795,7 +3795,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Data model",
         body: [
-          "The desktop app should be treated as a client over the daemon, not a second source of truth. The daemon owns the database, pages, sessions, and retrieval behavior.",
+          "The desktop app should be treated as a client over the daemon, not a second source of truth. The daemon owns the database, notes, sessions, and retrieval behavior.",
           "That boundary is what lets Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, ChatGPT, Claude.ai, terminal commands, and the optional GUI build on the same source-backed wiki.",
         ],
       },
@@ -4155,7 +4155,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Released now",
         body: [
-          "The released public shape is a local-first, source-backed LLM wiki: Claude Code and Codex plugins, local and remote MCP, CLI setup, daemon, hybrid retrieval, spaces, Markdown artifacts, source-backed pages, git versioning, and cross-platform runtime support.",
+          "The released public shape is a local-first, source-backed LLM wiki: Claude Code and Codex plugins, local and remote MCP, CLI setup, daemon, hybrid retrieval, spaces, Markdown artifacts, source-backed notes, git versioning, and cross-platform runtime support.",
           "That is enough for the core loop: brief, capture, recall, handoff, distill, and inspect local artifacts.",
         ],
       },
@@ -4169,7 +4169,7 @@ export const docPages: DocPage[] = [
           "Retrieval quality: query decomposition, temporal filters, graph gates, FTS hardening, salience, session diversity, and read-time routing.",
           "Context composition: page channels, global preludes, context compression, fact channels, and iterative retrieval.",
           "Memory maintenance: deduplication, contradiction resolution, stale page refresh, soft eviction, and background reflection.",
-          "Trust and provenance: source-backed pages, review queues, revision state, and visible local git history.",
+          "Trust and provenance: source-backed notes, review queues, revision state, and visible local git history.",
         ],
       },
       {
@@ -4222,7 +4222,7 @@ export const docPages: DocPage[] = [
         heading: "What Wenlan is for",
         body: [
           "Wenlan is for serious AI work where decisions, lessons, gotchas, project constraints, and handoffs need to survive beyond one chat.",
-          "The product shape is narrow on purpose: one local daemon, shared memory across MCP clients, source-backed pages, review before trust, and readable local artifacts.",
+          "The product shape is narrow on purpose: one local daemon, shared memory across MCP clients, source-backed notes, review before trust, and readable local artifacts.",
         ],
       },
       {
@@ -4452,7 +4452,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Crate boundaries",
         body: [
-          "wenlan-core owns storage, retrieval, graph logic, pages, evals, and other business behavior. It should not depend on Axum or Tauri. wenlan-server should frame HTTP requests and call core logic instead of becoming a second business layer.",
+          "wenlan-core owns storage, retrieval, graph logic, notes, evals, and other business behavior. It should not depend on Axum or Tauri. wenlan-server should frame HTTP requests and call core logic instead of becoming a second business layer.",
           "wenlan-types stays lightweight because it is shared by the daemon, MCP connector, CLI-adjacent tooling, desktop app, and downstream Rust clients. wenlan-mcp should deserialize daemon responses into typed structs so envelope drift fails loudly.",
         ],
         code: {
