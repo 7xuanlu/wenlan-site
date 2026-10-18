@@ -551,7 +551,7 @@
 .rw-dual-stage .rw-answer-extras:has(details[open]),.rw-dual-stage .rw-answer-extras:has(.rw-partial-answer){display:block}
 .rw-dual-stage .rw-answer-extras details{margin:0}
 @media(min-width:768px){
- .rw-dual-stage{--rw-window-height:600px}
+ .rw-dual-stage{--rw-window-height:672px}
  .rw-dual-stage .rw-knowledge-window,
  .rw-dual-stage .rw-claude-window{height:auto;min-height:var(--rw-window-height);max-height:none;align-self:stretch}
  .rw-dual-stage .rw-knowledge-window{grid-template-rows:52px minmax(0,1fr);overflow:hidden}
@@ -559,8 +559,15 @@
  .rw-dual-stage .rw-knowledge-window .rw-directory{min-height:0;max-height:none;overflow:visible}
 }
 @media(min-width:768px) and (max-width:1279px){
- .rw-dual-stage{--rw-window-height:620px}
+ .rw-dual-stage{--rw-window-height:672px}
  .rw-dual-stage .rw-knowledge-window{grid-template-rows:52px auto minmax(0,1fr)}
+}
+/* Reserve the measured walkthrough footprint so replay and evidence changes
+   do not move the following content. Expanded source/review text can still grow. */
+@media(max-width:767px){
+ .rw-dual-stage .rw-claude-window{min-height:44rem}
+ .rw-dual-stage:lang(en) .rw-claude-window{min-height:48rem}
+ .rw-dual-stage .rw-knowledge-window{min-height:43rem;grid-template-rows:48px auto minmax(0,1fr);align-content:start}
 }
 .rw-dual-stage .rw-result{transition-duration:.3s}
 .rw-dual-stage .rw-evidence-body{animation-duration:.3s}
