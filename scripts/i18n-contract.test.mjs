@@ -379,6 +379,20 @@ test("home nav exposes a route-preserving locale switcher", async () => {
   assert.doesNotMatch(switcher, /role="menu/);
 });
 
+test("locale switcher recognizes translated pages with an existing locale prefix", async () => {
+  const { switchTarget } = await import("../src/components/language-switcher.tsx");
+  for (const locale of ["zh-TW", "zh-CN"]) {
+    for (const path of ["", "/download", "/docs/get-started"]) {
+      const currentPath = `/${locale}${path}`;
+      assert.deepEqual(switchTarget(locale, currentPath), { href: currentPath, exact: true });
+      assert.deepEqual(switchTarget("en", currentPath), { href: path || "/", exact: true });
+    }
+  }
+  assert.deepEqual(switchTarget("zh-CN", "/zh-TW/download"), { href: "/zh-CN/download", exact: true });
+  assert.deepEqual(switchTarget("zh-TW", "/docs/daily-workflow"), { href: "/zh-TW/docs", exact: false });
+  assert.deepEqual(switchTarget("zh-CN", "/index"), { href: "/zh-CN", exact: true });
+});
+
 test("SoftwareApplication JSON-LD keeps English featureList off translated locales", async () => {
   const { locales, routing } = await loadI18nModules();
   const { softwareApplicationSchema } = await loadStructuredDataModule();

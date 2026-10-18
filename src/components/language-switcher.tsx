@@ -9,18 +9,21 @@ import {
   type Locale,
 } from "@/i18n/locales";
 import { localizedHrefForLocale } from "@/i18n/navigation";
+import { stripLocalePrefix } from "@/i18n/routing";
 import { GlobeIcon, CheckIcon } from "@/components/icons";
 
 // Static prerender of the English home reports its pathname as "/index".
 function normalizePathname(pathname: string): string {
-  return pathname.replace(/\/index$/, "") || "/";
+  return stripLocalePrefix(pathname).pathname.replace(/\/index$/, "") || "/";
 }
 
 // A page with no translation would localize back to itself, so the menu item
 // would reload the same English page. Send the reader to the nearest
 // translated parent instead (the Learn or Docs index, or the home page) and
 // say so in the menu.
-function switchTarget(targetLocale: Locale, href: string): { href: string; exact: boolean } {
+export function switchTarget(targetLocale: Locale, href: string): { href: string; exact: boolean } {
+  // Compare unprefixed routes so the active locale is not mistaken for a fallback.
+  href = normalizePathname(href);
   if (targetLocale === "en") {
     return { href: localizedHrefForLocale(targetLocale, href), exact: true };
   }
