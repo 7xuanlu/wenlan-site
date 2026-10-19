@@ -13,6 +13,8 @@ export function generateStaticParams() {
   );
 }
 
+export const dynamicParams = false;
+
 type Params = { params: Promise<{ locale: string; slug: string }> };
 
 export default async function Image({ params }: Params) {

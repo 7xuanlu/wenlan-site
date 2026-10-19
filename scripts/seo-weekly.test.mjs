@@ -7,7 +7,11 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import test from "node:test";
 import { CONSOLIDATED_LEARN_REDIRECTS } from "./consolidated-learn-redirects.mjs";
-import { RELEASE_PAGE_PATHS } from "./isr-cache-policy.mjs";
+import {
+  FINITE_DYNAMIC_OG_ROUTE_PATHS,
+  FINITE_DYNAMIC_ROUTE_PATHS,
+  RELEASE_PAGE_PATHS,
+} from "./isr-cache-policy.mjs";
 
 const execFileAsync = promisify(execFile);
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -642,7 +646,19 @@ async function writeBuiltSeoFixture(outputRoot, overrides = {}) {
       ])),
       ...Object.fromEntries(RELEASE_PAGE_PATHS.map((path) => [path, { initialRevalidateSeconds: 3600 }])),
       ...overrides.prerenderRoutes,
-    } }),
+    },
+    dynamicRoutes:
+      overrides.dynamicRoutes ??
+      Object.fromEntries(
+        [
+          ...FINITE_DYNAMIC_ROUTE_PATHS.map((path) => [path, { fallback: false }]),
+          ...FINITE_DYNAMIC_OG_ROUTE_PATHS.map((path) => [
+            `${path}-a1b2c3`,
+            { fallback: false },
+          ]),
+        ],
+      ),
+    }),
     "utf8",
   );
   await writeFile(
@@ -2228,6 +2244,44 @@ for (const [path, seconds, message] of [
       await assert.rejects(
         execFileAsync(process.execPath, [builtCheckerScript, "--build-dir", buildDir], { cwd: repoRoot }),
         new RegExp(message),
+      );
+    } finally {
+      await rm(outputRoot, { recursive: true, force: true });
+    }
+  });
+}
+
+for (const [label, fallback, missing, message] of [
+  ["null fallback", null, false, /\/learn\/\[slug\].*fallback: false/],
+  ["HTML fallback", "404.html", false, /\/learn\/\[slug\].*fallback: false/],
+  ["missing route", undefined, true, /\/learn\/\[slug\].*missing from prerender manifest/],
+  [
+    "OG null fallback",
+    null,
+    false,
+    /\/\[locale\]\/learn\/\[slug\]\/opengraph-image-a1b2c3.*fallback: false/,
+  ],
+]) {
+  test(`built cache policy rejects finite route with ${label}`, async () => {
+    const outputRoot = await mkdtemp(join(tmpdir(), "wenlan-isr-dynamic-route-"));
+    try {
+      const dynamicRoutes = Object.fromEntries(
+        [
+          ...FINITE_DYNAMIC_ROUTE_PATHS.map((path) => [path, { fallback: false }]),
+          ...FINITE_DYNAMIC_OG_ROUTE_PATHS.map((path) => [`${path}-a1b2c3`, { fallback: false }]),
+        ],
+      );
+      if (missing) {
+        delete dynamicRoutes["/learn/[slug]"];
+      } else if (label === "OG null fallback") {
+        dynamicRoutes["/[locale]/learn/[slug]/opengraph-image-a1b2c3"].fallback = fallback;
+      } else {
+        dynamicRoutes["/learn/[slug]"].fallback = fallback;
+      }
+      const buildDir = await writeBuiltSeoFixture(outputRoot, { dynamicRoutes });
+      await assert.rejects(
+        execFileAsync(process.execPath, [builtCheckerScript, "--build-dir", buildDir], { cwd: repoRoot }),
+        message,
       );
     } finally {
       await rm(outputRoot, { recursive: true, force: true });

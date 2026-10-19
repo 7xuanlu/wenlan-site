@@ -10,6 +10,8 @@ export function generateStaticParams() {
   return docPages.map((page) => ({ slug: page.slug }));
 }
 
+export const dynamicParams = false;
+
 type Params = { params: Promise<{ slug: string }> };
 
 export default async function Image({ params }: Params) {
