@@ -1,0 +1,113 @@
+{
+  "synthetic": true,
+  "noCustomerData": true,
+  "scope": "Tiny local JavaScript fixture showing why a stale handoff and passing test receipt must be checked against the current working tree.",
+  "initialFiles": [
+    {
+      "path": "src/retry.mjs",
+      "content": "export const MAX_ATTEMPTS = 2;\n"
+    },
+    {
+      "path": "test/retry.test.mjs",
+      "content": "import test from 'node:test';\nimport assert from 'node:assert/strict';\nimport { MAX_ATTEMPTS } from '../src/retry.mjs';\n\ntest('retry limit is two attempts', () => {\n  assert.equal(MAX_ATTEMPTS, 2);\n});\n"
+    },
+    {
+      "path": "HANDOFF.md",
+      "untracked": true,
+      "content": "# Synthetic handoff\n\nGoal: raise max attempts from 2 to 3.\n\nBaseline commit: b6a43f0bc6d2ded716a929e5013a1f80abedb90a\nBaseline version: `MAX_ATTEMPTS = 2` in `src/retry.mjs`.\nBaseline check: `node --test test/retry.test.mjs` passed (1 test).\n\nNext step: change the implementation to 3 and rerun the same test.\n"
+    }
+  ],
+  "baselineCommit": "b6a43f0bc6d2ded716a929e5013a1f80abedb90a",
+  "modifiedSource": {
+    "path": "src/retry.mjs",
+    "content": "export const MAX_ATTEMPTS = 3;\n"
+  },
+  "reproductionInstructions": "In a temporary directory, create the two JavaScript files under initialFiles, initialize a local Git repository, and commit only those files. Run the baseline test command and confirm it passes. Write HANDOFF.md with that commit SHA and the stated goal, then change only src/retry.mjs to the modifiedSource content. Run the listed recovery inspection commands from the fixture root and rerun the same node test command. Compare the recorded working-file hashes before and after inspection and test execution.",
+  "commands": [
+    {
+      "command": "node --test test/retry.test.mjs",
+      "phase": "baseline at commit b6a43f0bc6d2ded716a929e5013a1f80abedb90a",
+      "exitStatus": 0,
+      "output": "✔ retry limit is two attempts (0.301ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 44.700834\n"
+    },
+    {
+      "command": "pwd",
+      "exitStatus": 0,
+      "output": "/private/tmp/wenlan-seo-demand/2026-10-19-context-recovery/fixture-proof\n"
+    },
+    {
+      "command": "git branch --show-current",
+      "exitStatus": 0,
+      "output": "main\n"
+    },
+    {
+      "command": "git rev-parse HEAD",
+      "exitStatus": 0,
+      "output": "b6a43f0bc6d2ded716a929e5013a1f80abedb90a\n"
+    },
+    {
+      "command": "git status --short",
+      "exitStatus": 0,
+      "output": " M src/retry.mjs\n?? HANDOFF.md\n"
+    },
+    {
+      "command": "git diff --stat",
+      "exitStatus": 0,
+      "output": " src/retry.mjs | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n"
+    },
+    {
+      "command": "git diff -- src/retry.mjs",
+      "exitStatus": 0,
+      "output": "diff --git a/src/retry.mjs b/src/retry.mjs\nindex fa38c27..5d0a734 100644\n--- a/src/retry.mjs\n+++ b/src/retry.mjs\n@@ -1 +1 @@\n-export const MAX_ATTEMPTS = 2;\n+export const MAX_ATTEMPTS = 3;\n"
+    },
+    {
+      "command": "git diff --cached",
+      "exitStatus": 0,
+      "output": ""
+    },
+    {
+      "command": "git log -3 --oneline",
+      "exitStatus": 0,
+      "output": "b6a43f0 synthetic baseline\n"
+    },
+    {
+      "command": "cat HANDOFF.md",
+      "exitStatus": 0,
+      "output": "# Synthetic handoff\n\nGoal: raise max attempts from 2 to 3.\n\nBaseline commit: b6a43f0bc6d2ded716a929e5013a1f80abedb90a\nBaseline version: `MAX_ATTEMPTS = 2` in `src/retry.mjs`.\nBaseline check: `node --test test/retry.test.mjs` passed (1 test).\n\nNext step: change the implementation to 3 and rerun the same test.\n"
+    },
+    {
+      "command": "cat test/retry.test.mjs",
+      "exitStatus": 0,
+      "output": "import test from 'node:test';\nimport assert from 'node:assert/strict';\nimport { MAX_ATTEMPTS } from '../src/retry.mjs';\n\ntest('retry limit is two attempts', () => {\n  assert.equal(MAX_ATTEMPTS, 2);\n});\n"
+    },
+    {
+      "command": "node --test test/retry.test.mjs",
+      "phase": "after source changed to 3",
+      "exitStatus": 1,
+      "output": "✖ retry limit is two attempts (0.622542ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 41.334666\n\n✖ failing tests:\n\ntest at test/retry.test.mjs:5:1\n✖ retry limit is two attempts (0.622542ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  3 !== 2\n  \n      at TestContext.<anonymous> (file:///private/tmp/wenlan-seo-demand/2026-10-19-context-recovery/fixture-proof/test/retry.test.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:214:14)\n      at Test.run (node:internal/test_runner/test:1106:25)\n      at Test.start (node:internal/test_runner/test:1003:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 3,\n    expected: 2,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n"
+    }
+  ],
+  "observations": [
+    "The recorded baseline test passed at the baseline commit, where MAX_ATTEMPTS was 2.",
+    "The current working tree has an uncommitted change from 2 to 3 in src/retry.mjs and an untracked HANDOFF.md; the test file is unchanged.",
+    "The test rerun against the current source fails because it observes 3 while still asserting 2. The old baseline pass does not establish that the current version passes.",
+    "The handoff supplies the stated reason for the change. Git state shows the source delta and baseline commit but cannot reconstruct the rationale or prior command history.",
+    "SHA-256 for HANDOFF.md, src/retry.mjs, and test/retry.test.mjs was identical before and after the read-only inspection and known test command."
+  ],
+  "hashesBefore": {
+    "HANDOFF.md": "eca2db71c9c357b1a7fc7a90be0bc38f3519c0a00869a20f3e44baf5d980b417",
+    "src/retry.mjs": "f363857ff4b432aeceda7c3d9f87a0c0b2fb4fa12bc16cf678931397549d068b",
+    "test/retry.test.mjs": "0d5eb5d16bc65b3a83c1fd95f1b15a5d07908a45ffe7075a08726f77d8dceb91"
+  },
+  "hashesAfter": {
+    "HANDOFF.md": "eca2db71c9c357b1a7fc7a90be0bc38f3519c0a00869a20f3e44baf5d980b417",
+    "src/retry.mjs": "f363857ff4b432aeceda7c3d9f87a0c0b2fb4fa12bc16cf678931397549d068b",
+    "test/retry.test.mjs": "0d5eb5d16bc65b3a83c1fd95f1b15a5d07908a45ffe7075a08726f77d8dceb91"
+  },
+  "hashesUnchanged": true,
+  "nextAction": "inspect intended retry behavior and reconcile implementation/test; do not claim finished",
+  "limits": [
+    "This is a synthetic local JavaScript fixture, not a native resume, LLM, Wenlan, or real-project execution.",
+    "A known node --test command was safe to rerun here; unknown real-world test commands may have side effects and need separate assessment."
+  ]
+}

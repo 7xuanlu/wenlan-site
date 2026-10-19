@@ -292,91 +292,149 @@ const setupArticles: BaseSpec[] = [
       },
     ],
   },
-  {
-    slug: "ai-coding-agent-loses-context",
-    eyebrow: "Problem",
-    category: "Concepts",
-    title: "Why AI Coding Agents Lose Context Between Sessions",
-    description:
-      "Diagnose context loss after a fresh session, compaction, or tool switch, then choose resume, project instructions, handoffs, or durable memory.",
-    metaTitle: "AI Coding Agent Context Loss: Causes and Fixes | Wenlan",
-    metaDescription:
-      "Diagnose why AI coding agents lose context between sessions, choose resume, project instructions, handoffs, or durable memory, and decide what persistent project context to keep.",
-    keywords: [
-      "AI coding agent loses context",
-      "AI coding agent context loss",
-      "Claude Code loses context",
-      "Claude Code context between sessions",
-      "Claude Code auto memory",
-      "AI agent session handoff",
-    ],
-    publishedAt: "2026-06-06",
-    updatedAt: "2026-10-07",
-    audience: "Developers diagnosing repeated AI session warmup",
-    heroBullets: [
-      "Resume recovers one saved conversation; it does not create shared knowledge across tools.",
-      "Project instructions and native auto memory solve different problems from handoffs.",
-      "Diagnose the missing layer before adding more prompt text or transcript storage.",
-    ],
-    quickAnswer:
-      "First identify what disappeared. If you need the exact previous conversation, resume the native session. If a persistent rule or architecture fact is missing, verify the client’s project instructions or native memory. If decisions, failed paths, and open work must survive a fresh session or tool switch, write a handoff and store the durable knowledge.",
-    problem:
-      "Context loss is not one failure. A fresh session starts without the prior conversation. Compaction can summarize away decision rationale or failed paths. Native project memory may be scoped to one client, repository, or machine. Source files show what changed but often not why, while an overloaded memory file can bury the fact the agent needs.",
-    wenlanFit:
-      "Wenlan does not replace a client’s resume command or project instructions. It provides a shared memory boundary for durable decisions, lessons, gotchas, handoffs, and maintained pages that multiple configured clients can reach through the same local daemon.",
-    actionHeading: "Run the context-loss diagnosis",
-    actionIntro:
-      "Match the symptom to the smallest recovery path before storing more text.",
-    actionBullets: [
-      "Exact conversation missing: resume the saved native session before reconstructing it from memory.",
-      "Persistent instruction missing: verify that the client loaded the correct project instructions, rules, or native memory files.",
-      "Compaction lost rationale: persist the decision, failed path, or open thread before the active context is summarized.",
-      "Tool switch lost knowledge: use a shared memory boundary instead of copying one client’s private session store.",
-      "Repository state is clear but the why is missing: retrieve the decision or handoff rather than asking the agent to infer history from the diff.",
-      "Project context missing: start with /brief in Claude Code or Codex, or Wenlan context from another MCP client.",
-      "Recall returns stale or noisy context: check scope and provenance, then correct or supersede the durable fact instead of adding another duplicate.",
-    ],
-    code: {
-      label: "Wenlan continuity loop",
-      code: "/brief\n/recall <specific decision or gotcha>\n/capture <one durable fact and why it matters>\n/handoff",
-    },
-    caution:
-      "Do not use durable memory as a second transcript archive. Native resume is the strongest recovery path for one exact conversation; project instructions are the right home for standing behavior; durable memory should keep only context that remains useful after the session ends. Skip facts the repo can read directly unless the reasoning behind them is the point. Persistent context is not a README replacement, and sharing it across tools means local continuity through one Wenlan daemon, not automatic cloud or team sync.",
-    faq: [
-      "Should I resume a session or use durable memory?",
-      "Resume when you need the exact conversation and tool history. Use durable memory for decisions, lessons, constraints, and open work that should remain useful in later sessions or other configured clients.",
-      "What should persistent project context for AI agents include?",
-      "Keep standing rules in project instructions. Keep decisions and why, gotchas, source-of-truth files, current status, and constraints the repo does not show in durable memory. Leave anything the code or git history already records.",
-    ],
-    relatedSlugs: [
-      "claude-code-memory",
-      "ai-agent-handoff-loop",
-      "ai-agent-memory-types",
-    ],
-    officialReferences: [
-      {
-        label: "Claude Code memory",
-        href: "https://code.claude.com/docs/en/memory",
-      },
-      {
-        label: "Claude Code sessions",
-        href: "https://code.claude.com/docs/en/sessions",
-      },
-      {
-        label: "Wenlan daily workflow",
-        href: "https://wenlan.app/docs/daily-workflow",
-      },
-      {
-        label: "Wenlan capture quality",
-        href: "https://wenlan.app/docs/capture-quality",
-      },
-      {
-        label: "Wenlan MCP clients",
-        href: "https://wenlan.app/docs/mcp-clients",
-      },
-    ],
-  },
 ];
+
+const contextLossArticle: LearnArticle = {
+  slug: "ai-coding-agent-loses-context",
+  eyebrow: "Problem",
+  category: "Concepts",
+  title: "Why AI Coding Agents Lose Context Between Sessions",
+  description:
+    "Resume the right session, check unfinished work, and give the next agent a clear starting point.",
+  metaTitle: "AI Coding Agent Context Loss: Causes and Fixes | Wenlan",
+  metaDescription:
+    "Recover lost coding-agent context: choose resume or a fresh session, check changes and test evidence, and use a copyable recovery prompt before editing.",
+  keywords: [
+    "AI coding agent loses context",
+    "AI coding agent context loss",
+    "Claude Code loses context",
+    "Claude Code context between sessions",
+    "Claude Code auto memory",
+    "AI agent session handoff",
+  ],
+  publishedAt: "2026-06-06",
+  updatedAt: "2026-10-19",
+  author: AUTHOR,
+  readingTime: "4 min read",
+  audience: "Developers recovering unfinished work after context loss or a tool switch",
+  heroBullets: [
+    "Choose resume or a fresh start.",
+    "Check the current code and test results.",
+    "Give the next agent one clear next step.",
+  ],
+  sections: [
+    {
+      heading: "Quick answer",
+      body: [
+        "A fresh session lacks the previous conversation; compaction can omit details. Start with the recovery path that matches what went missing.",
+      ],
+      table: {
+        columns: ["What you need", "Start here"],
+        rows: [
+          ["The earlier conversation", "In Claude Code, resume the native session: claude --continue for the latest eligible session in this project, or claude --resume to choose one."],
+          ["Standing rules", "Check the project instructions and native memory loaded by your client."],
+          ["A decision lost during compaction", "Open its saved note or transcript. Unrecorded reasoning stays unknown."],
+          ["To continue in a new session or tool", "Read the handoff, then check it against the current files using the steps below."],
+        ],
+      },
+      link: {
+        label: "Want a reusable skill? Inspect Session Handoff's create/resume workflow",
+        href: "https://github.com/softaworks/agent-toolkit/blob/main/skills/session-handoff/README.md",
+      },
+    },
+    {
+      id: "check-current-work-before-continuing",
+      heading: "Check what changed",
+      body: [
+        "Before editing, compare the handoff with the current repository. These commands inspect your work without resetting, staging or committing it.",
+        "Replace src/retry.mjs with a relevant path. For the last command, replace BASE_COMMIT with the handoff's verified commit; skip it if none was recorded.",
+      ],
+      code: {
+        label: "Inspect current and committed changes",
+        code: "pwd\ngit branch --show-current\ngit rev-parse HEAD\ngit status --short\ngit diff --stat\ngit diff -- src/retry.mjs\ngit diff --cached -- src/retry.mjs\n# Also compare any commits since the handoff:\ngit diff BASE_COMMIT HEAD -- src/retry.mjs",
+      },
+      bullets: [
+        "Check every kind of change: diff shows unstaged edits, --cached shows staged edits, and status lists untracked files to read separately. Preserve unrelated work.",
+        "A clean worktree can still contain commits made after the handoff. Compare its recorded commit with HEAD too.",
+        "Match test results to the code version they checked. Inspect unfamiliar test commands before rerunning them; missing results are unchecked.",
+        "Find reasons in decision notes or the handoff, and command history in saved transcripts or terminal logs. A diff cannot reconstruct either.",
+      ],
+    },
+    {
+      id: "recover-without-the-previous-chat",
+      heading: "Give the next agent this prompt",
+      body: [
+        "Replace HANDOFF.md with your actual handoff path. Have the agent report its findings before editing.",
+      ],
+      code: {
+        label: "Copy into a fresh conversation",
+        code: "Recover the task in HANDOFF.md.\nRead project instructions first.\nDo not edit, stage, reset, commit,\nor push.\nCheck the branch and HEAD.\nCompare commits since the handoff.\nInspect staged, unstaged and\nuntracked files.\nReport:\n- Completed and unfinished work.\n- Decisions, reasons and sources.\n- Test results and tested versions.\n- Conflicts with current files.\n- One next action.\nMark missing evidence unknown.",
+      },
+      link: {
+        label: "Need to write the handoff first?",
+        href: "/learn/ai-agent-handoff-loop#what-belongs-in-a-handoff",
+      },
+    },
+    {
+      id: "check-a-stale-handoff-against-the-code",
+      heading: "Example: an old test pass no longer applies",
+      body: [
+        "We ran a tiny fictional Git project whose goal was to raise a retry limit. The handoff recorded a passing test; then only the implementation changed.",
+        "The rerun caught the mismatch. The next step was to reconcile the intended behavior and test, rather than call the task finished.",
+        "This was a synthetic Git/Node exercise, without an LLM or Wenlan run. The input files stayed unchanged during inspection and the test rerun.",
+      ],
+      table: {
+        columns: ["Version checked", "Retry limit", "Actual test result"],
+        rows: [
+          ["Saved baseline", "2", "Passed: the test expected 2."],
+          ["Current working tree", "3", "Failed: actual 3, expected 2; exit 1."],
+        ],
+      },
+      link: {
+        label: "Inspect the inputs, commands and actual output",
+        href: "/examples/context-recovery-check.json",
+      },
+    },
+    {
+      heading: "When Wenlan helps",
+      body: [
+        "A handoff file can be enough for one project. Wenlan helps when several configured AI tools need durable decisions, reasons and project status in a shared memory boundary.",
+        "The loop below requires Wenlan's Claude Code or Codex plugin. MCP-only clients can use context, recall and capture tools, with an explicit handoff for unfinished work.",
+        "Keep code changes in Git and command history in saved transcripts or terminal logs. Wenlan does not replace those records or native resume.",
+      ],
+      code: {
+        label: "Wenlan continuity loop",
+        code: "/brief\n/recall <specific decision or gotcha>\n/capture <one durable fact and why it matters>\n/handoff",
+      },
+      link: {
+        label: "See Claude save a decision and Codex read it back",
+        href: "/learn/codex-claude-code-shared-memory#product-evidence",
+      },
+    },
+  ],
+  faqs: [
+    {
+      question: "Will resuming finish an interrupted command?",
+      answer: "No. Resume restores the recorded conversation. Check what actually completed before rerunning a command; it does not roll back the repository.",
+    },
+    {
+      question: "What if there is no handoff?",
+      answer: "Give the new agent your goal and ask it to inspect the current files. Mark missing reasons and past test results unknown.",
+    },
+  ],
+  relatedSlugs: ["claude-code-memory", "ai-agent-handoff-loop", "ai-agent-memory-types", "codex-claude-code-shared-memory"],
+  officialReferences: [
+    { label: "Claude Code memory", href: "https://code.claude.com/docs/en/memory" },
+    { label: "Claude Code sessions", href: "https://code.claude.com/docs/en/sessions" },
+    { label: "AI Hero: handoff and native session choices", href: "https://www.aihero.dev/skills-handoff" },
+    { label: "Session Handoff: checking staleness before resuming", href: "https://github.com/softaworks/agent-toolkit/blob/main/skills/session-handoff/README.md" },
+    { label: "Wenlan daily workflow", href: "https://wenlan.app/docs/daily-workflow" },
+  ],
+  cta: {
+    heading: "Carry one decision into the next session",
+    body: "Try the Claude-to-Codex example and compare the saved decision with the retrieved source.",
+  },
+};
 
 const workflowArticles: BaseSpec[] = [
   {
@@ -3614,4 +3672,4 @@ export const seoArticles: LearnArticle[] = [
   ...workflowArticles,
   ...comparisonArticles,
   ...trustArticles,
-].map(makeArticle).concat(localKnowledgeBaseArticle, retrievalRegressionArticle, productResearchArticle);
+].map(makeArticle).concat(contextLossArticle, localKnowledgeBaseArticle, retrievalRegressionArticle, productResearchArticle);

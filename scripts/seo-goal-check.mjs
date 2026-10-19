@@ -80,6 +80,9 @@ const requiredProductEvidenceStandardClauses = [
   "Natural English, zh-TW, and zh-CN localization",
   "Do not use simulated div-based product chrome as proof",
   "at exactly 393px",
+  "Editorial acceptance before delivery",
+  "No word-count target or fixed cut percentage",
+  "Record the task-coverage check and reading review in the existing page audit",
   "The product-research-to-PRD family is the reference implementation",
 ];
 

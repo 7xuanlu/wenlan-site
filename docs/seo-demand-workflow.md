@@ -50,6 +50,11 @@ and [Claude](https://code.claude.com/docs/en/skills#choose-where-skills-load).
   action. Cross-host agreement requires an actual returned response, not a session
   creation receipt or an authentication failure.
 
+Before delivering any Learn edit, both hosts must complete the shared
+[editorial acceptance](seo-product-evidence-standard.md#editorial-acceptance-before-delivery)
+and record it in the existing page audit; do not wait for the user to flag length
+or repetition. This is an editorial review, not an automatic word-count verdict.
+
 ### What each host loads (checked 2026-10-10)
 
 Claude Code and Codex share only what is committed on the branch they check out.

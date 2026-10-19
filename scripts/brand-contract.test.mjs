@@ -566,17 +566,18 @@ test("AI work memory comparison answers the knowledge-base role question directl
 
 test("AI coding agent context-loss page separates native session recovery from durable memory", async () => {
   const articles = await readRepo("src/app/learn/seo-articles.ts");
-  const marker = 'slug: "ai-coding-agent-loses-context"';
-  const start = articles.indexOf(marker);
-  const end = articles.indexOf('\n  {\n    slug: "', start + marker.length);
-  const article = articles.slice(start, end);
+  const parsed = ts.createSourceFile("seo-articles.ts", articles, ts.ScriptTarget.Latest, true);
+  const declaration = parsed.statements
+    .filter(ts.isVariableStatement)
+    .flatMap((statement) => [...statement.declarationList.declarations])
+    .find((item) => ts.isIdentifier(item.name) && item.name.text === "contextLossArticle");
+  assert.ok(declaration?.initializer && ts.isObjectLiteralExpression(declaration.initializer));
+  const article = declaration.initializer.getText(parsed);
 
-  assert.notEqual(start, -1);
-  assert.notEqual(end, -1);
   assert.match(articles, /publishedAt: spec\.publishedAt/);
   assert.match(article, /title: "Why AI Coding Agents Lose Context Between Sessions"/);
   assert.match(article, /publishedAt: "2026-06-06"/);
-  assert.match(article, /updatedAt: "2026-10-07"/);
+  assert.match(article, /updatedAt: "2026-10-19"/);
   assert.match(
     article,
     /metaTitle: "AI Coding Agent Context Loss: Causes and Fixes \| Wenlan"/,

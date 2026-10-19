@@ -74,6 +74,32 @@ A scenario page must provide all of the following:
 9. Article and BreadcrumbList schema, reciprocal hreflang, sitemap membership,
    contextual internal links, and a visible FAQ without FAQPage JSON-LD.
 
+### Editorial acceptance before delivery
+
+Run this check for every Learn edit, including copy-only revisions, before calling
+it ready. Docs edits use the reading and completeness checks without adding
+scenario-product requirements. Claude and Codex use this same acceptance step.
+
+- Map each evidenced reader question to its answer and, where applicable,
+  prerequisites, actions, expected result and troubleshooting. After substantial
+  cuts, compare the removed material with this map; restore any necessary step,
+  distinction or source that no longer has a usable answer.
+- Compare the description, hero bullets, quick answer, body and FAQ. Merge
+  repeated explanations that add no decision, action or evidence. A brief summary
+  or standalone FAQ may repeat a necessary answer; a shared template is not a
+  reason to retain an unnecessary section.
+- Put the answer and first useful action early. Use descriptive headings and
+  one idea per paragraph. Read the actual desktop and 393px route: steps, tables
+  and copyable commands must remain easy to find and use.
+- No word-count target or fixed cut percentage. Record before/after counts only
+  as context; preserve relevant search tasks, working examples, sources, honest
+  limits and the reason to use Wenlan. A long answer may be necessary; shortening
+  does not establish a ranking improvement.
+- Record the task-coverage check and reading review in the existing page audit,
+  with the kept/merged/restored decisions and a pass or named gap. Existing build
+  and contract checks protect structure; they do not judge semantic completeness
+  or readability. Resolve a required-content or reading gap before delivery.
+
 ## Product evidence rules
 
 - Use a real `<img>` element or Next.js `Image`, with an accurate filename,

@@ -1,5 +1,33 @@
 # 10-18 Google 自然搜尋人工讀數
 
+## 下一個英文頁：跨對話後恢復工作（10-19，本地已驗證）
+
+發布授權（10-19）：使用者明確要求本篇與共用SEO檢查流程一起合併發布；不提交Google索引請求，等自然抓取，weekly維持暫停。以下本地驗證不冒充正式部署或曝光結果；合併與部署收據待本批PR完成後記錄。
+
+閱讀修正（使用者10-19回饋）：可見文字含程式碼／FAQ／參考標籤由1,542縮至743詞（約−52%），七節收為五節；用恢復路徑表、測試前後表取代長段解釋，提示縮短並調整手機斷行。標題、搜尋意圖、來源與實跑範例保留。此為本地稿閱讀性修正，不是新SEO結果；本版收據改見`readability-verification.json`。
+
+完整性複核（10-19）：逐項對照精簡前七節，恢復分支留在開頭對照表；staged／unstaged／untracked及舊commit→HEAD檢查留在第二節；決定原因／命令歷史來源由獨立段合併為檢查要點；可貼恢復提示、實跑結果及原始JSON入口、Wenlan用途／plugin與MCP-only界線均保留。三個原FAQ答案已併入正文，另保留中斷命令／沒有handoff兩個實用問題。未發現必要任務答案遺失，不因743詞本身補字；此為編輯完整性判斷，不是搜尋成長證據。往後交稿必做[共用編輯驗收](../seo-product-evidence-standard.md#editorial-acceptance-before-delivery)，由既有goal check保護規則不被移除；語意與閱讀仍需實際審閱。
+
+依[既有頁改寫規則](../../SEO-CAMPAIGN.md#authority-first-growth-correction)、[內容修正界線](../../SEO-CAMPAIGN.md#protected-trilingual-scenario-expansion-correction)與[需求／交付標準](../seo-product-evidence-standard.md)做本地準備，發布前仍須核對授權與觀察期。
+
+選擇 [Why AI Coding Agents Lose Context Between Sessions](https://wenlan.app/learn/ai-coding-agent-loses-context)。逐頁核對同一完整28天（09-18～10-15）42個有page列的英文Learn owner；Codex、共用記憶、比較頁及Obsidian已由#241／#243／#244／#245處理，不重做；Claude較大的176曝光混聊天版意圖，wiki的87曝光多偏團隊選型。這是剩餘既有頁的具體補強，不是已證明的大流量市場。
+
+| 證據 | 觀察與改法 |
+| --- | --- |
+| GSC全球Web，原始page表 | 全頁34曝光／0點擊，平均位置11.6；可見query子集15曝光，不能當完整需求份額 |
+| 實際query × page | `ai coding agent session persistence context handoff between sessions skill`：7曝光／0點擊、平均位置9。另有5次「變更、原因、diff、command history」長問句，含AI式位置指令，其來源與客戶身分未知；不當月搜尋量 |
+| 10-19 Google，一次US/en桌面、pws=0 | 此7曝光精確詞的首個結果頁，AIHero、softaworks與其他handoff教學／skill出現，未見本站；不是穩定全美排名 |
+| 前排原文 | [AIHero](https://www.aihero.dev/skills-handoff)已分native resume／handoff並給可用文件；[Session Handoff](https://github.com/softaworks/agent-toolkit/blob/main/skills/session-handoff/README.md)有create／resume與staleness檢查。本站原文偏解釋層次，缺拿現有程式碼核對舊交接的操作 |
+
+需求決策：讀者換對話或工具後要接續未完成工作；成果是知道現在改了什麼、哪些測試仍有效、下一步是什麼。沿用已有搜尋入口，補恢復步驟、可貼提示及實際結果；既有handoff-loop保留「如何寫交接」的分工。需要重用skill者直接連到既有create／resume指南，不另造工具。Wenlan只作可選的跨工具決定／進度保存，連至已發布的Claude→Codex讀回，不聲稱它取代Git、原生續接或完整命令紀錄。
+
+已在虛構小型Git專案執行：baseline值2時測試通過；只改實作為3、測試仍預期2，同一測試exit1。交接與目前diff、測試版本的落差可被找出，三個工作檔hash不變。文章提供[完整輸入與實際結果](https://wenlan.app/examples/context-recovery-check.json)的本地待發布檔；此連結不作正式站發布收據。此練習沒有執行LLM、Wenlan或原生resume，也不證明搜尋成長。
+
+隔離worktree：`/Users/lucian/.codex/worktrees/seo-context-recovery/wenlan-site`，base `2734c2969e6207d8d4c73063661ce0759fc3853f`。獨立Sol／xhigh審查後已修正「舊交接commit→HEAD也要比較」、測試切片改AST及plugin／MCP-only界線，closure通過。Luna／high分別做唯讀意圖核對與固定範例實作。最終lint、build、test:seo（425＋133通過，2項原有skip）、seo:technical:built及diff檢查通過；桌面1280與手機393px、深淺色、FAQ、JSON與兩個跨頁anchor已實際驗證，無觀察到的console error。全站測試使用與CI相同的公開Wenlan source `52656ab00eae3699cb5636d4093282d85c62fcb7`；舊本機source的單項外掛規格失敗另外保留，未放寬斷言。
+
+狀態：**本地改好、尚未發布**；當前版本的post-deploy crawl／28日冷卻尚未確認，不宣稱改寫門檻通過。原始GSC沿用既有成功讀數；逐頁解析、Google快照、範例與最終驗證見 `/tmp/wenlan-seo-demand/2026-10-19-context-recovery/` 的 `candidate-evidence.json`、`verification.json`。發布後須等自然crawl，再依契約用可比窗口觀察同詞曝光／位置與點擊；若只有模糊或AI式詞、缺合格曝光，不立即再擴寫。未推送、部署、提交索引或恢復weekly；原checkout的舊dirty與Claude事實修正worktree均保留。
+
+
 本輪問題：近期造訪是否主要是 Threads？SEO 下一個具體機會在哪？使用者優先自然搜尋；10-18另明確指示依真實搜尋詞與前排文章補好 Codex MEMORY.md 教學，驗證後發布。weekly 保持暫停。此為人工查核，不重啟已結束的 successor campaign，不改歷史目標。
 
 ## Google 搜尋與社群分開
