@@ -105,6 +105,13 @@ export function validateProductEvidenceStandard(standard) {
       errors.push(`Product evidence standard is missing: ${clause}`);
     }
   }
+  const deliveryStart = standard.indexOf("### Page delivery\n");
+  const delivery = deliveryStart === -1
+    ? ""
+    : standard.slice(deliveryStart).split(/\n#{1,3} /)[0];
+  if (!/^#### Editorial acceptance before delivery\s*$/m.test(delivery)) {
+    errors.push("Product evidence standard must include editorial acceptance within Page delivery");
+  }
   return errors;
 }
 

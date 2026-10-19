@@ -100,6 +100,15 @@ test("product evidence standard exists and its quality floor is fail-closed", ()
     [],
   );
 
+  const siblingEditorial = canonicalProductEvidenceStandard.replace(
+    "#### Editorial acceptance before delivery",
+    "### Editorial acceptance before delivery",
+  );
+  assert.notEqual(siblingEditorial, canonicalProductEvidenceStandard);
+  assert.ok(validateProductEvidenceStandard(siblingEditorial).some((error) =>
+    error.includes("editorial acceptance within Page delivery"),
+  ));
+
   for (const requiredText of [
     "real, current, sanitized product view",
     "A visible input to decision to output sequence",
