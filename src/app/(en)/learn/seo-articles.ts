@@ -3668,8 +3668,12 @@ const productResearchArticle: LearnArticle = {
 };
 
 export const seoArticles: LearnArticle[] = [
-  ...setupArticles,
-  ...workflowArticles,
-  ...comparisonArticles,
-  ...trustArticles,
-].map(makeArticle).concat(contextLossArticle, localKnowledgeBaseArticle, retrievalRegressionArticle, productResearchArticle);
+  ...setupArticles.map(makeArticle),
+  contextLossArticle,
+  ...workflowArticles.map(makeArticle),
+  ...comparisonArticles.map(makeArticle),
+  ...trustArticles.map(makeArticle),
+  localKnowledgeBaseArticle,
+  retrievalRegressionArticle,
+  productResearchArticle,
+];

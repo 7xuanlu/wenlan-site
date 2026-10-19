@@ -74,7 +74,7 @@ A scenario page must provide all of the following:
 9. Article and BreadcrumbList schema, reciprocal hreflang, sitemap membership,
    contextual internal links, and a visible FAQ without FAQPage JSON-LD.
 
-### Editorial acceptance before delivery
+#### Editorial acceptance before delivery
 
 Run this check for every Learn edit, including copy-only revisions, before calling
 it ready. Docs edits use the reading and completeness checks without adding
