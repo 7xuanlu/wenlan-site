@@ -80,6 +80,9 @@ const requiredProductEvidenceStandardClauses = [
   "Natural English, zh-TW, and zh-CN localization",
   "Do not use simulated div-based product chrome as proof",
   "at exactly 393px",
+  "Editorial acceptance before delivery",
+  "No word-count target or fixed cut percentage",
+  "Record the task-coverage check and reading review in the existing page audit",
   "The product-research-to-PRD family is the reference implementation",
 ];
 
@@ -101,6 +104,13 @@ export function validateProductEvidenceStandard(standard) {
     if (!normalizedStandard.includes(clause)) {
       errors.push(`Product evidence standard is missing: ${clause}`);
     }
+  }
+  const deliveryStart = standard.indexOf("### Page delivery\n");
+  const delivery = deliveryStart === -1
+    ? ""
+    : standard.slice(deliveryStart).split(/\n#{1,3} /)[0];
+  if (!/^#### Editorial acceptance before delivery\s*$/m.test(delivery)) {
+    errors.push("Product evidence standard must include editorial acceptance within Page delivery");
   }
   return errors;
 }

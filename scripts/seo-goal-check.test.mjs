@@ -100,12 +100,24 @@ test("product evidence standard exists and its quality floor is fail-closed", ()
     [],
   );
 
+  const siblingEditorial = canonicalProductEvidenceStandard.replace(
+    "#### Editorial acceptance before delivery",
+    "### Editorial acceptance before delivery",
+  );
+  assert.notEqual(siblingEditorial, canonicalProductEvidenceStandard);
+  assert.ok(validateProductEvidenceStandard(siblingEditorial).some((error) =>
+    error.includes("editorial acceptance within Page delivery"),
+  ));
+
   for (const requiredText of [
     "real, current, sanitized product view",
     "A visible input to decision to output sequence",
     "Natural English, zh-TW, and zh-CN localization",
     "Do not use simulated div-based product chrome as proof",
     "at exactly 393px",
+    "Editorial acceptance before delivery",
+    "No word-count target or fixed cut percentage",
+    "Record the task-coverage check and reading review in the existing page audit",
     "Demand decision before implementation",
     "Who is searching, and what triggers the search?",
     "What result must the reader leave with?",
