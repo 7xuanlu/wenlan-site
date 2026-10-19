@@ -1158,11 +1158,11 @@ const baseArticles: LearnArticle[] = [
         heading: "Add Wenlan to Claude Code",
         body: [
           "Wenlan is an open-source desktop app and Claude Code plugin. It keeps memory on your computer, turns related notes into wiki pages that cite their sources, and serves the same memory to Cursor, Codex, Claude Desktop, and other MCP clients.",
-          "Install the plugin, restart Claude Code if asked, then run /setup. Test one capture and one recall before relying on it for real project memory.",
+          "Install the plugin, restart Claude Code if asked, then run /wenlan. Test one capture and one recall before relying on it for real project memory.",
         ],
         code: {
           label: "Claude Code plugin",
-          code: "/plugin marketplace add wenlan-app/wenlan\n/plugin install wenlan@7xuanlu-wenlan\n/setup\n/capture This project uses Wenlan for local AI work memory.\n/recall local AI work memory",
+          code: "/plugin marketplace add wenlan-app/wenlan\n/plugin install wenlan@7xuanlu-wenlan\n/wenlan\n/capture This project uses Wenlan for local AI work memory.\n/recall local AI work memory",
         },
         link: {
           label: "Turn Claude Code memory into an LLM wiki",
@@ -1182,7 +1182,7 @@ const baseArticles: LearnArticle[] = [
           "/capture: save one durable idea, such as a decision, gotcha, or constraint, and why it matters.",
           "/recall: look up a specific past decision or gotcha.",
           "/handoff: write what changed and what is still open, and store durable captures for the next session.",
-          "/distill: turn repeated captures into wiki pages that cite their sources.",
+          "/wenlan distill: turn repeated captures into wiki pages that cite their sources.",
         ],
         code: {
           label: "Daily loop",
@@ -1252,7 +1252,7 @@ const baseArticles: LearnArticle[] = [
     ],
     cta: {
       heading: "Share Claude Code memory with your other AI tools",
-      body: "Install the Wenlan plugin, run /setup, then test one capture and recall before adding real project context.",
+      body: "Install the Wenlan plugin, run /wenlan, then test one capture and recall before adding real project context.",
     },
   },
   {
@@ -1433,11 +1433,11 @@ const baseArticles: LearnArticle[] = [
         heading: "Add Wenlan to Codex",
         body: [
           "Wenlan is an open-source desktop app with a Codex plugin. It keeps memory on your computer, turns related notes into wiki pages that cite their sources, and serves the same memory to Claude Code, Cursor, Claude Desktop, and other MCP clients.",
-          "Install the Wenlan runtime first, then add the plugin, start a new Codex task, and run /setup. Test one capture and one recall before relying on it for real project memory.",
+          "Install the Wenlan runtime first, then add the plugin, start a new Codex task, and run $wenlan. Test one capture and one recall before relying on it for real project memory.",
         ],
         code: {
           label: "Codex plugin",
-          code: "npx -y wenlan setup   # macOS Apple Silicon; other platforms: see setup docs\ncodex plugin marketplace add wenlan-app/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan\n# start a new Codex task, then:\n/setup",
+          code: "npx -y wenlan setup   # macOS Apple Silicon; other platforms: see setup docs\ncodex plugin marketplace add wenlan-app/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan\n# start a new Codex task, then:\n$wenlan",
         },
         link: {
           label: "MCP only, without the plugin: wenlan connect codex",
@@ -1523,7 +1523,7 @@ const baseArticles: LearnArticle[] = [
     ],
     cta: {
       heading: "Share Codex memory with your other AI tools",
-      body: "Install the Wenlan plugin for Codex, run /setup, then test one capture and recall before adding real project context.",
+      body: "Install the Wenlan plugin for Codex, run $wenlan, then test one capture and recall before adding real project context.",
     },
   },
   {
@@ -1688,7 +1688,7 @@ const baseArticles: LearnArticle[] = [
         heading: "The LLM-wiki workflow in Wenlan",
         body: [
           "Wenlan is an open-source app that runs this pattern for you. It turns your documents, notes, and AI chats into pages with links to their sources, and updates them as sources change without overwriting your edits. Claude Code, Codex, and other AI tools read the same pages.",
-          "/capture saves a decision from the chat, /distill builds or refreshes a topic page, /pages opens it, and /brief and /recall load only what the next session needs.",
+          "/capture saves a decision from the chat, /wenlan distill builds or refreshes a topic page, /wenlan pages opens it, and /brief and /recall load only what the next session needs.",
         ],
         code: {
           label: "Wenlan workflow — requires an installed, connected client",
@@ -1697,8 +1697,8 @@ const baseArticles: LearnArticle[] = [
             "/recall <question>",
             "/capture <decision + why>",
             "/handoff",
-            "/distill <topic>",
-            "/pages <topic>",
+            "/wenlan distill <topic>",
+            "/wenlan pages <topic>",
           ].join("\n"),
         },
         link: {
@@ -2054,7 +2054,7 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "Wenlan today: Sources, Memories, and Pages",
         body: [
-          "Wenlan starts from the work an AI agent is doing. Agents explicitly capture decisions, lessons, and corrections as Memories; `/handoff` preserves the state of an unfinished session; `/distill` turns repeated, supported context into Pages; `/curate` and `/lint` make review and repair visible.",
+          "Wenlan starts from the work an AI agent is doing. Agents explicitly capture decisions, lessons, and corrections as Memories; `/handoff` preserves the state of an unfinished session; `/wenlan distill` turns repeated, supported context into Pages; `/wenlan curate` and `/wenlan lint` make review and repair visible.",
           "Sources are the evidence layer. Memories retain durable working context. Pages synthesize that context into readable knowledge with source IDs, citations, and revision history. The distinction is deliberate: recalled fragments and maintained wiki pages do not silently become the same thing.",
           "The local daemon provides retrieval across MCP clients. Readable Pages, sessions, and status artifacts are projected under `~/.wenlan/` with local git history, while capture and retrieval remain backed by the daemon-owned store.",
         ],
@@ -2084,7 +2084,7 @@ const baseArticles: LearnArticle[] = [
         heading: "Search and maintenance",
         body: [
           "Basic Memory combines text and semantic search with graph traversal over observations and relations. Its `build_context` tool assembles connected knowledge, and its Agent Skills give assistants an explicit search, capture, and maintenance routine.",
-          "Wenlan combines full-text and embedding retrieval, weighted fusion, eligible graph context, and optional reranking. Its plugin workflow separates `/recall`, `/capture`, `/handoff`, `/distill`, `/curate`, and `/lint`, so retrieval, capture, synthesis, review, and repair remain distinct actions.",
+          "Wenlan combines full-text and embedding retrieval, weighted fusion, eligible graph context, and optional reranking. Its plugin workflow separates `/recall`, `/capture`, `/handoff`, `/wenlan distill`, `/wenlan curate`, and `/wenlan lint`, so retrieval, capture, synthesis, review, and repair remain distinct actions.",
           "The products publish different retrieval evidence, so this page does not turn unmatched benchmarks into a winner. Test each system with the same real task: recover an old decision, update it after a correction, and inspect why the final answer should be trusted.",
         ],
       },
@@ -2289,9 +2289,9 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "What Wenlan emphasizes",
         body: [
-          "Wenlan treats memory as maintained work knowledge. `/capture` records one durable fact, decision, correction, preference, or lesson with provenance; `/handoff` records what changed and what comes next; `/distill` deliberately creates or refreshes source-backed pages.",
+          "Wenlan treats memory as maintained work knowledge. `/capture` records one durable fact, decision, correction, preference, or lesson with provenance; `/handoff` records what changed and what comes next; `/wenlan distill` deliberately creates or refreshes source-backed pages.",
           "Recall and storage run through one local daemon. Claude Code and Codex have plugin paths, while Cursor, Claude Desktop, Gemini CLI, VS Code, and other clients can reach the same knowledge through MCP.",
-          "The default workflow is explicit, but not frozen in manual mode: optional model-backed passes can enrich captures, connect entities, and propose page revisions. `/brief`, `/curate`, and read-only `/lint` keep those proposals and knowledge-health findings inspectable.",
+          "The default workflow is explicit, but not frozen in manual mode: optional model-backed passes can enrich captures, connect entities, and propose page revisions. `/brief`, `/wenlan curate`, and read-only `/wenlan lint` keep those proposals and knowledge-health findings inspectable.",
         ],
       },
       {
@@ -2311,7 +2311,7 @@ const baseArticles: LearnArticle[] = [
         body: [
           "Automatic capture moves effort away from the moment of work. claude-mem records activity and uses an AI processor to compress it, so users do not have to label every useful event in real time.",
           "The later responsibility is retrieval and trust: decide which extracted observation is current, which is merely historical, and how much detail to load. claude-mem exposes observation IDs, citations, search filters, timeline context, and privacy tags to support that review.",
-          "Wenlan front-loads more intent. A user or agent chooses what deserves `/capture`, records a focused `/handoff`, and uses `/distill` only when repeated evidence deserves a maintained page. Proposed revisions and conflicts can then be accepted or dismissed rather than silently replacing the source-backed layer.",
+          "Wenlan front-loads more intent. A user or agent chooses what deserves `/capture`, records a focused `/handoff`, and uses `/wenlan distill` only when repeated evidence deserves a maintained page. Proposed revisions and conflicts can then be accepted or dismissed rather than silently replacing the source-backed layer.",
         ],
       },
       {
@@ -2323,7 +2323,7 @@ const baseArticles: LearnArticle[] = [
         ],
         bullets: [
           "claude-mem: hook-driven observations, summaries, and progressive history retrieval.",
-          "Wenlan: explicit `/capture`, `/handoff`, deliberate `/distill`, and optional reviewed enrichment.",
+          "Wenlan: explicit `/capture`, `/handoff`, deliberate `/wenlan distill`, and optional reviewed enrichment.",
           "Both keep local stores and expose identifiers that let a reader trace retrieved context.",
         ],
       },
@@ -2355,7 +2355,7 @@ const baseArticles: LearnArticle[] = [
         },
         {
           dimension: "Capture mode",
-          wenlan: "Explicit /capture and /handoff, deliberate /distill, plus optional model-backed enrichment and revision proposals.",
+          wenlan: "Explicit /capture and /handoff, deliberate /wenlan distill, plus optional model-backed enrichment and revision proposals.",
           competitor:
             "Agent hooks capture prompts and tool activity; a local worker processes observations and summaries automatically.",
         },
@@ -2819,7 +2819,7 @@ const baseArticles: LearnArticle[] = [
         heading: "How Wenlan supports it",
         body: [
           "Wenlan gives agents a place to save the durable parts of the session and a way to recall them through MCP later.",
-          "Between sessions, Wenlan keeps captures, handoffs, related entities, and source-backed pages connected. Manual /distill turns repeated context into readable pages, while optional local models or API keys can add background page work.",
+          "Between sessions, Wenlan keeps captures, handoffs, related entities, and source-backed pages connected. Manual /wenlan distill turns repeated context into readable pages, while optional local models or API keys can add background page work.",
         ],
       },
       {
