@@ -72,11 +72,11 @@ const zhTWArticles = {
         body: [
           "先指定事實或 Page 的權威來源與寫入範圍。Agent 身分本身不是權威；程式、測試、規格與維護中的第一方文件仍優先。",
           "審查時回到原始證據，把主張標記為 supported、contradicted、stale、replaced 或 unresolved。資訊較新不代表一定正確；證據不足時，保留未解狀態。",
-          "下列斜線命令只適用於已透過 `/setup` 安裝 Wenlan Codex plugin 的 Codex。其他 Agent 可使用本機 MCP 的 `recall`、`capture`、`distill`、`lint`、`list_pending_revisions`，或本機 CLI 的 `wenlan pages`、`wenlan capture`、`wenlan lint`、`wenlan curate revisions`。",
+          "下列斜線命令只適用於已透過 `$wenlan setup` 安裝 Wenlan Codex plugin 的 Codex。其他 Agent 可使用本機 MCP 的 `recall`、`capture`、`distill`、`lint`、`list_pending_revisions`，或本機 CLI 的 `wenlan pages`、`wenlan capture`、`wenlan lint`、`wenlan curate revisions`。",
         ],
         code: {
           label: "Wenlan Codex plugin：檢查、保存、整理與審查",
-          code: "/pages <共享主題>\n/capture <候選主張 + 來源 + 為何重要>\n/distill <共享主題>\n/lint\n/curate",
+          code: "$wenlan pages <共享主題>\n/capture <候選主張 + 來源 + 為何重要>\n$wenlan distill <共享主題>\n$wenlan lint\n$wenlan curate",
         },
       },
       {
@@ -312,7 +312,7 @@ const zhTWArticles = {
         heading: "在 Wenlan 中使用 LLM Wiki",
         body: [
           "Wenlan 是一個開源 app，替你執行同樣的模式。它把文件、筆記和 AI 對話整理成附來源連結的頁面，來源變了就更新頁面，而且不會蓋掉你的修改。Claude Code、Codex 和其他 AI 工具讀的是同一組頁面。",
-          "/capture 存下對話中的決定，/distill 建立或更新主題頁面，/pages 打開頁面，/brief 和 /recall 只載入下一次對話需要的內容。",
+          "/capture 存下對話中的決定，/wenlan distill 建立或更新主題頁面，/wenlan pages 打開頁面，/brief 和 /recall 只載入下一次對話需要的內容。",
         ],
         code: {
           label: "Wenlan 工作流——需要已安裝並連線的客戶端",
@@ -321,8 +321,8 @@ const zhTWArticles = {
             "/recall <question>",
             "/capture <decision + why>",
             "/handoff",
-            "/distill <topic>",
-            "/pages <topic>",
+            "/wenlan distill <topic>",
+            "/wenlan pages <topic>",
           ].join("\n"),
         },
         link: {
@@ -496,14 +496,14 @@ const zhTWArticles = {
         ],
         bullets: [
           "用 /capture 保存單一事實、來源與它為何重要。",
-          "用 /distill 把重複主題整理成維護型頁面。",
-          "用 /pages 開啟頁面並核對支持它的來源。",
-          "用 /lint 找出薄弱、衝突或過期的知識。",
-          "用 /curate 審查修訂，再決定是否刷新頁面。",
+          "用 /wenlan distill 把重複主題整理成維護型頁面。",
+          "用 /wenlan pages 開啟頁面並核對支持它的來源。",
+          "用 /wenlan lint 找出薄弱、衝突或過期的知識。",
+          "用 /wenlan curate 審查修訂，再決定是否刷新頁面。",
         ],
         code: {
           label: "Wenlan 知識庫維護迴圈",
-          code: "/brief <主題>\n/capture <事實 + 來源 + 為何重要>\n/distill <主題>\n/pages <主題>\n/lint\n/curate",
+          code: "/brief <主題>\n/capture <事實 + 來源 + 為何重要>\n/wenlan distill <主題>\n/wenlan pages <主題>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -1050,7 +1050,7 @@ const zhTWArticles = {
         ],
         code: {
           label: "一個有界的 Codex 專案知識流程",
-          code: "wenlan status\nwenlan connect codex\nwenlan sources add ~/project/docs\n/distill <專案主題>\n/pages <專案主題>\n/lint\n/curate",
+          code: "wenlan status\nwenlan connect codex\nwenlan sources add ~/project/docs\n/wenlan distill <專案主題>\n/wenlan pages <專案主題>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -1272,7 +1272,7 @@ const zhTWArticles = {
         bullets: [
           "在終端機先執行 wenlan status 確認已連上，再用 wenlan sources add <路徑> 加入來源，檢查回報中找到、匯入、略過和錯誤的數量；資料夾來源不會匯入任意程式碼檔。",
           "來源變更後，再執行一次相同的 sources add 指令即可同步；Obsidian vault 要按需重新同步。",
-          "在已安裝 Wenlan 外掛的 Claude Code 或 Codex 對話中，用 /distill <主題> 建立維護中的頁面，再用 /pages <主題> 開啟；/lint 和 /curate 用來檢查問題並審核修訂。這些是對話指令，不在終端機執行；只支援 MCP 的 AI 工具改用它提供的 Wenlan 工具。",
+          "在已安裝 Wenlan 外掛的 Claude Code 或 Codex 對話中，用 /wenlan distill <主題> 建立維護中的頁面，再用 /wenlan pages <主題> 開啟；/wenlan lint 和 /wenlan curate 用來檢查問題並審核修訂。這些是對話指令，不在終端機執行；只支援 MCP 的 AI 工具改用它提供的 Wenlan 工具。",
         ],
         code: {
           label: "終端機：換成實際的測試資料夾路徑",
@@ -1412,7 +1412,7 @@ const zhTWArticles = {
         ],
         code: {
           label: "Wenlan 驗證流程",
-          code: "wenlan status\nwenlan sources add ~/Knowledge/evaluation-set\n/distill <測試主題>\n/pages <測試主題>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Knowledge/evaluation-set\n/wenlan distill <測試主題>\n/wenlan pages <測試主題>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -1653,7 +1653,7 @@ const zhTWArticles = {
         heading: "用這張查詢或略過清單",
         body: [
           "先判斷答案是否依賴外部證據，再決定預先檢索、讓 Agent 自主查詢、直接讀來源，或完全略過。每次只增加完成任務需要的下一層資訊。",
-          "下方 slash commands 需要先安裝 Wenlan Codex plugin 並執行一次 /setup；wenlan connect codex 只設定 MCP 連線。只有 MCP 連線的客戶端，請使用 Wenlan recall 並檢查它回傳的 Page 結果；若未安裝 plugin 但要列出或打開 Pages，請改用本地 wenlan pages <主題> CLI。",
+          "下方 slash commands 需要先安裝 Wenlan Codex plugin 並執行一次 $wenlan；wenlan connect codex 只設定 MCP 連線。只有 MCP 連線的客戶端，請使用 Wenlan recall 並檢查它回傳的 Page 結果；若未安裝 plugin 但要列出或打開 Pages，請改用本地 wenlan pages <主題> CLI。",
         ],
         bullets: [
           "查詢：需要最新專案事實、私有資料、組織政策、精確數字或引用。",
@@ -1666,7 +1666,7 @@ const zhTWArticles = {
         ],
         code: {
           label: "先查窄主題，再檢查維護型 Page",
-          code: "# Wenlan plugin：\n/recall <主題>\n/pages <主題>\n\n# 只有 MCP：呼叫 Wenlan recall 並檢查回傳的 Page。\n# 本地 CLI 列出或打開 Page：\nwenlan pages <主題>",
+          code: "# Wenlan plugin：\n/recall <主題>\n/wenlan pages <主題>\n\n# 只有 MCP：呼叫 Wenlan recall 並檢查回傳的 Page。\n# 本地 CLI 列出或打開 Page：\nwenlan pages <主題>",
         },
       },
       {
@@ -1945,7 +1945,7 @@ const zhTWArticles = {
         ],
         code: {
           label: "檢查一個 Wenlan Page",
-          code: "/pages <主題>\n/lint\n/curate",
+          code: "/wenlan pages <主題>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -2079,7 +2079,7 @@ const zhTWArticles = {
         ],
         code: {
           label: "完成 Wenlan 與 AI 客戶端設定後",
-          code: "wenlan status\nwenlan sources add ~/Research/papers\n/distill <研究問題>\n/pages <研究問題>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Research/papers\n/wenlan distill <研究問題>\n/wenlan pages <研究問題>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -2208,7 +2208,7 @@ const zhTWArticles = {
         ],
         code: {
           label: "完成 Wenlan 與 AI 客戶端設定後",
-          code: "wenlan status\nwenlan sources add ~/Clients/acme-approved-sources\n/distill <客戶專案問題>\n/pages <客戶專案問題>\n/lint\n/curate\n/handoff",
+          code: "wenlan status\nwenlan sources add ~/Clients/acme-approved-sources\n/wenlan distill <客戶專案問題>\n/wenlan pages <客戶專案問題>\n/wenlan lint\n/wenlan curate\n/handoff",
         },
       },
       {
@@ -2321,7 +2321,7 @@ const zhTWArticles = {
         ],
         code: {
           label: "完成 Wenlan 與 AI 客戶端設定後",
-          code: "wenlan status\nwenlan sources add ~/Research/companies/acme\n/distill <公司與報告期間問題>\n/pages <公司研究主題>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Research/companies/acme\n/wenlan distill <公司與報告期間問題>\n/wenlan pages <公司研究主題>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -2491,7 +2491,7 @@ const zhTWArticles = {
         ],
         code: {
           label: "有界的產品研究知識工作流",
-          code: "wenlan status\nwenlan sources add ~/Research/product-notes\n/distill <產品決策>\n/pages <產品決策>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Research/product-notes\n/wenlan distill <產品決策>\n/wenlan pages <產品決策>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -2660,7 +2660,7 @@ const zhTWArticles = {
         ],
         code: {
           label: "完成 Wenlan 與 AI 客戶端設定後",
-          code: "wenlan status\nwenlan sources add ~/Ops/approved-incident-knowledge\n/distill <服務與事故類型>\n/pages <服務事故 runbook>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Ops/approved-incident-knowledge\n/wenlan distill <服務與事故類型>\n/wenlan pages <服務事故 runbook>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -2771,7 +2771,7 @@ const zhTWArticles = {
         ],
         code: {
           label: "有界的競品證據工作流",
-          code: "wenlan status\nwenlan sources add ~/Research/competitors\n# 在 Wenlan plugin client 中：\n/distill <競品研究問題>\n/pages <競品主題>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Research/competitors\n# 在 Wenlan plugin client 中：\n/wenlan distill <競品研究問題>\n/wenlan pages <競品主題>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -2929,7 +2929,7 @@ const zhTWArticles = {
         ],
         code: {
           label: "有界的供應商證據工作流",
-          code: "wenlan status\nwenlan sources add ~/Reviews/approved-supplier-docs\n# 在 Wenlan plugin client 中：\n/distill <供應商與審查範圍>\n/pages <供應商證據包>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Reviews/approved-supplier-docs\n# 在 Wenlan plugin client 中：\n/wenlan distill <供應商與審查範圍>\n/wenlan pages <供應商證據包>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -3081,7 +3081,7 @@ const zhTWArticles = {
         ],
         code: {
           label: "完成 Wenlan 與 AI 客戶端設定後",
-          code: "wenlan status\nwenlan sources add ~/Support/approved-product-policy\n# 在 Wenlan plugin client 中：\n/distill <客服答案主題>\n/pages <客服答案主題>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Support/approved-product-policy\n# 在 Wenlan plugin client 中：\n/wenlan distill <客服答案主題>\n/wenlan pages <客服答案主題>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -3248,7 +3248,7 @@ const zhTWArticles = {
         ],
         code: {
           label: "完成 Wenlan 與 AI 客戶端設定後",
-          code: "wenlan status\nwenlan sources add ~/Courses/distributed-systems/materials\n# 在 Wenlan plugin client 中：\n/distill <課程概念>\n/pages <課程概念>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Courses/distributed-systems/materials\n# 在 Wenlan plugin client 中：\n/wenlan distill <課程概念>\n/wenlan pages <課程概念>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -3378,7 +3378,7 @@ const zhTWArticles = {
         ],
         code: {
           label: "完成 Wenlan 與 AI 用戶端設定後",
-          code: "wenlan status\nwenlan sources add ~/Metrics/approved-specifications\n# 在 Wenlan plugin client 中：\n/distill <指標定義>\n/pages <指標名稱>\n/lint\n/curate\n\nmetric: activated customer\nbusiness_definition: <核准來源真正定義的意義>\nformula_text: <不可執行的公式文字>\ngrain: <帳戶 | workspace | 使用者 | 事件>\ndimensions: <允許的拆分維度>\ninclusions: <納入狀態或事件>\nexclusions: <排除狀態、事件或時間窗>\nowner: <負責團隊或複核人>\nsources: <source ID 與確切位置>\nsource_revision: <版本或生效日期>\nreview_state: <目前有效 | 過期 | 矛盾 | 未解>\nsupersedes: <舊定義或無>\nnext_review: <來源變更條件或日期>",
+          code: "wenlan status\nwenlan sources add ~/Metrics/approved-specifications\n# 在 Wenlan plugin client 中：\n/wenlan distill <指標定義>\n/wenlan pages <指標名稱>\n/wenlan lint\n/wenlan curate\n\nmetric: activated customer\nbusiness_definition: <核准來源真正定義的意義>\nformula_text: <不可執行的公式文字>\ngrain: <帳戶 | workspace | 使用者 | 事件>\ndimensions: <允許的拆分維度>\ninclusions: <納入狀態或事件>\nexclusions: <排除狀態、事件或時間窗>\nowner: <負責團隊或複核人>\nsources: <source ID 與確切位置>\nsource_revision: <版本或生效日期>\nreview_state: <目前有效 | 過期 | 矛盾 | 未解>\nsupersedes: <舊定義或無>\nnext_review: <來源變更條件或日期>",
         },
       },
       {
@@ -3502,11 +3502,11 @@ const zhCNArticles = {
         body: [
           "先指定事实或 Page 的权威来源与写入范围。Agent 身份本身不是权威；代码、测试、规格与维护中的第一方文档仍然优先。",
           "审核时回到原始证据，把主张标记为 supported、contradicted、stale、replaced 或 unresolved。信息更新不代表一定正确；证据不足时，保留未解决状态。",
-          "下面的斜线命令只适用于已经通过 `/setup` 安装 Wenlan Codex plugin 的 Codex。其他 Agent 可以使用本地 MCP 的 `recall`、`capture`、`distill`、`lint`、`list_pending_revisions`，或本地 CLI 的 `wenlan pages`、`wenlan capture`、`wenlan lint`、`wenlan curate revisions`。",
+          "下面的斜线命令只适用于已经通过 `$wenlan setup` 安装 Wenlan Codex plugin 的 Codex。其他 Agent 可以使用本地 MCP 的 `recall`、`capture`、`distill`、`lint`、`list_pending_revisions`，或本地 CLI 的 `wenlan pages`、`wenlan capture`、`wenlan lint`、`wenlan curate revisions`。",
         ],
         code: {
           label: "Wenlan Codex plugin：检查、保存、整理与审核",
-          code: "/pages <共享主题>\n/capture <候选主张 + 来源 + 为什么重要>\n/distill <共享主题>\n/lint\n/curate",
+          code: "$wenlan pages <共享主题>\n/capture <候选主张 + 来源 + 为什么重要>\n$wenlan distill <共享主题>\n$wenlan lint\n$wenlan curate",
         },
       },
       {
@@ -3756,7 +3756,7 @@ const zhCNArticles = {
         heading: "使用这份查询或跳过清单",
         body: [
           "先判断答案是否依赖外部证据，再决定预检索、让 Agent 自主查询、直接读取来源，或完全跳过。每次只增加完成任务所需的下一层信息。",
-          "下方 slash commands 需要先安装 Wenlan Codex plugin 并执行一次 /setup；wenlan connect codex 只配置 MCP 连接。只有 MCP 连接的客户端，请使用 Wenlan recall 并检查它返回的 Page 结果；若未安装 plugin 但要列出或打开 Pages，请改用本地 wenlan pages <主题> CLI。",
+          "下方 slash commands 需要先安装 Wenlan Codex plugin 并执行一次 $wenlan；wenlan connect codex 只配置 MCP 连接。只有 MCP 连接的客户端，请使用 Wenlan recall 并检查它返回的 Page 结果；若未安装 plugin 但要列出或打开 Pages，请改用本地 wenlan pages <主题> CLI。",
         ],
         bullets: [
           "查询：需要最新项目事实、私有资料、组织制度、精确数字或引用。",
@@ -3769,7 +3769,7 @@ const zhCNArticles = {
         ],
         code: {
           label: "先查窄主题，再检查维护型 Page",
-          code: "# Wenlan plugin：\n/recall <主题>\n/pages <主题>\n\n# 只有 MCP：调用 Wenlan recall 并检查返回的 Page。\n# 本地 CLI 列出或打开 Page：\nwenlan pages <主题>",
+          code: "# Wenlan plugin：\n/recall <主题>\n/wenlan pages <主题>\n\n# 只有 MCP：调用 Wenlan recall 并检查返回的 Page。\n# 本地 CLI 列出或打开 Page：\nwenlan pages <主题>",
         },
       },
       {
@@ -4016,7 +4016,7 @@ const zhCNArticles = {
         heading: "在 Wenlan 中使用 LLM Wiki",
         body: [
           "Wenlan 是一个开源 app，替你执行同样的模式。它把文档、笔记和 AI 对话整理成附来源链接的页面，来源变了就更新页面，而且不会覆盖你的修改。Claude Code、Codex 和其他 AI 工具读的是同一组页面。",
-          "/capture 存下对话中的决定，/distill 创建或更新主题页面，/pages 打开页面，/brief 和 /recall 只加载下一次对话需要的内容。",
+          "/capture 存下对话中的决定，/wenlan distill 创建或更新主题页面，/wenlan pages 打开页面，/brief 和 /recall 只加载下一次对话需要的内容。",
         ],
         code: {
           label: "Wenlan 工作流——需要已安装并连接的客户端",
@@ -4025,8 +4025,8 @@ const zhCNArticles = {
             "/recall <question>",
             "/capture <decision + why>",
             "/handoff",
-            "/distill <topic>",
-            "/pages <topic>",
+            "/wenlan distill <topic>",
+            "/wenlan pages <topic>",
           ].join("\n"),
         },
         link: {
@@ -4189,14 +4189,14 @@ const zhCNArticles = {
         ],
         bullets: [
           "用 /capture 保存单一事实、来源和它为什么重要。",
-          "用 /distill 把重复主题整理成维护型页面。",
-          "用 /pages 打开页面并核对支持它的来源。",
-          "用 /lint 找出薄弱、冲突或过期的知识。",
-          "用 /curate 审核修订，再决定是否刷新页面。",
+          "用 /wenlan distill 把重复主题整理成维护型页面。",
+          "用 /wenlan pages 打开页面并核对支持它的来源。",
+          "用 /wenlan lint 找出薄弱、冲突或过期的知识。",
+          "用 /wenlan curate 审核修订，再决定是否刷新页面。",
         ],
         code: {
           label: "Wenlan 知识库维护循环",
-          code: "/brief <主题>\n/capture <事实 + 来源 + 为什么重要>\n/distill <主题>\n/pages <主题>\n/lint\n/curate",
+          code: "/brief <主题>\n/capture <事实 + 来源 + 为什么重要>\n/wenlan distill <主题>\n/wenlan pages <主题>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -4744,7 +4744,7 @@ const zhCNArticles = {
         ],
         code: {
           label: "一个有界的 Codex 项目知识流程",
-          code: "wenlan status\nwenlan connect codex\nwenlan sources add ~/project/docs\n/distill <项目主题>\n/pages <项目主题>\n/lint\n/curate",
+          code: "wenlan status\nwenlan connect codex\nwenlan sources add ~/project/docs\n/wenlan distill <项目主题>\n/wenlan pages <项目主题>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -4966,7 +4966,7 @@ const zhCNArticles = {
         bullets: [
           "在终端先运行 wenlan status 确认已连通，再用 wenlan sources add <路径> 添加来源，检查报告中找到、导入、跳过和错误的数量；文件夹来源不会导入任意代码文件。",
           "来源变更后，再运行一次相同的 sources add 命令即可同步；Obsidian vault 要按需重新同步。",
-          "在已安装 Wenlan 插件的 Claude Code 或 Codex 对话中，用 /distill <主题> 生成持续维护的页面，再用 /pages <主题> 打开；/lint 和 /curate 用于检查问题并审核修订。这些是对话命令，不在终端运行；只支持 MCP 的 AI 工具改用它提供的 Wenlan 工具。",
+          "在已安装 Wenlan 插件的 Claude Code 或 Codex 对话中，用 /wenlan distill <主题> 生成持续维护的页面，再用 /wenlan pages <主题> 打开；/wenlan lint 和 /wenlan curate 用于检查问题并审核修订。这些是对话命令，不在终端运行；只支持 MCP 的 AI 工具改用它提供的 Wenlan 工具。",
         ],
         code: {
           label: "终端：换成实际的测试文件夹路径",
@@ -5106,7 +5106,7 @@ const zhCNArticles = {
         ],
         code: {
           label: "Wenlan 验证流程",
-          code: "wenlan status\nwenlan sources add ~/Knowledge/evaluation-set\n/distill <测试主题>\n/pages <测试主题>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Knowledge/evaluation-set\n/wenlan distill <测试主题>\n/wenlan pages <测试主题>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -5359,7 +5359,7 @@ const zhCNArticles = {
         ],
         code: {
           label: "检查一个 Wenlan Page",
-          code: "/pages <主题>\n/lint\n/curate",
+          code: "/wenlan pages <主题>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -5493,7 +5493,7 @@ const zhCNArticles = {
         ],
         code: {
           label: "完成 Wenlan 与 AI 客户端设置后",
-          code: "wenlan status\nwenlan sources add ~/Research/papers\n/distill <研究问题>\n/pages <研究问题>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Research/papers\n/wenlan distill <研究问题>\n/wenlan pages <研究问题>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -5622,7 +5622,7 @@ const zhCNArticles = {
         ],
         code: {
           label: "完成 Wenlan 与 AI 客户端设置后",
-          code: "wenlan status\nwenlan sources add ~/Clients/acme-approved-sources\n/distill <客户项目问题>\n/pages <客户项目问题>\n/lint\n/curate\n/handoff",
+          code: "wenlan status\nwenlan sources add ~/Clients/acme-approved-sources\n/wenlan distill <客户项目问题>\n/wenlan pages <客户项目问题>\n/wenlan lint\n/wenlan curate\n/handoff",
         },
       },
       {
@@ -5735,7 +5735,7 @@ const zhCNArticles = {
         ],
         code: {
           label: "完成 Wenlan 与 AI 客户端设置后",
-          code: "wenlan status\nwenlan sources add ~/Research/companies/acme\n/distill <公司与报告期问题>\n/pages <公司研究主题>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Research/companies/acme\n/wenlan distill <公司与报告期问题>\n/wenlan pages <公司研究主题>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -5905,7 +5905,7 @@ const zhCNArticles = {
         ],
         code: {
           label: "有界的产品研究知识工作流",
-          code: "wenlan status\nwenlan sources add ~/Research/product-notes\n/distill <产品决策>\n/pages <产品决策>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Research/product-notes\n/wenlan distill <产品决策>\n/wenlan pages <产品决策>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -6074,7 +6074,7 @@ const zhCNArticles = {
         ],
         code: {
           label: "完成 Wenlan 与 AI 客户端设置后",
-          code: "wenlan status\nwenlan sources add ~/Ops/approved-incident-knowledge\n/distill <服务与故障类型>\n/pages <服务故障 runbook>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Ops/approved-incident-knowledge\n/wenlan distill <服务与故障类型>\n/wenlan pages <服务故障 runbook>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -6185,7 +6185,7 @@ const zhCNArticles = {
         ],
         code: {
           label: "有边界的竞品证据工作流",
-          code: "wenlan status\nwenlan sources add ~/Research/competitors\n# 在 Wenlan plugin client 中：\n/distill <竞品调研问题>\n/pages <竞品主题>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Research/competitors\n# 在 Wenlan plugin client 中：\n/wenlan distill <竞品调研问题>\n/wenlan pages <竞品主题>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -6343,7 +6343,7 @@ const zhCNArticles = {
         ],
         code: {
           label: "有边界的供应商证据工作流",
-          code: "wenlan status\nwenlan sources add ~/Reviews/approved-supplier-docs\n# 在 Wenlan plugin client 中：\n/distill <供应商与审核范围>\n/pages <供应商证据包>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Reviews/approved-supplier-docs\n# 在 Wenlan plugin client 中：\n/wenlan distill <供应商与审核范围>\n/wenlan pages <供应商证据包>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -6495,7 +6495,7 @@ const zhCNArticles = {
         ],
         code: {
           label: "完成 Wenlan 与 AI 客户端设置后",
-          code: "wenlan status\nwenlan sources add ~/Support/approved-product-policy\n# 在 Wenlan plugin client 中：\n/distill <客服答案主题>\n/pages <客服答案主题>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Support/approved-product-policy\n# 在 Wenlan plugin client 中：\n/wenlan distill <客服答案主题>\n/wenlan pages <客服答案主题>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -6662,7 +6662,7 @@ const zhCNArticles = {
         ],
         code: {
           label: "完成 Wenlan 与 AI 客户端设置后",
-          code: "wenlan status\nwenlan sources add ~/Courses/distributed-systems/materials\n# 在 Wenlan plugin client 中：\n/distill <课程概念>\n/pages <课程概念>\n/lint\n/curate",
+          code: "wenlan status\nwenlan sources add ~/Courses/distributed-systems/materials\n# 在 Wenlan plugin client 中：\n/wenlan distill <课程概念>\n/wenlan pages <课程概念>\n/wenlan lint\n/wenlan curate",
         },
       },
       {
@@ -6792,7 +6792,7 @@ const zhCNArticles = {
         ],
         code: {
           label: "完成 Wenlan 与 AI 客户端设置后",
-          code: "wenlan status\nwenlan sources add ~/Metrics/approved-specifications\n# 在 Wenlan plugin client 中：\n/distill <指标定义>\n/pages <指标名称>\n/lint\n/curate\n\nmetric: activated customer\nbusiness_definition: <获准来源真正定义的含义>\nformula_text: <不可执行的公式文本>\ngrain: <账户 | workspace | 用户 | 事件>\ndimensions: <允许的拆分维度>\ninclusions: <纳入状态或事件>\nexclusions: <排除状态、事件或时间窗>\nowner: <负责团队或审核人>\nsources: <source ID 和准确位置>\nsource_revision: <版本或生效日期>\nreview_state: <当前有效 | 过期 | 矛盾 | 未解决>\nsupersedes: <旧定义或无>\nnext_review: <来源变化条件或日期>",
+          code: "wenlan status\nwenlan sources add ~/Metrics/approved-specifications\n# 在 Wenlan plugin client 中：\n/wenlan distill <指标定义>\n/wenlan pages <指标名称>\n/wenlan lint\n/wenlan curate\n\nmetric: activated customer\nbusiness_definition: <获准来源真正定义的含义>\nformula_text: <不可执行的公式文本>\ngrain: <账户 | workspace | 用户 | 事件>\ndimensions: <允许的拆分维度>\ninclusions: <纳入状态或事件>\nexclusions: <排除状态、事件或时间窗>\nowner: <负责团队或审核人>\nsources: <source ID 和准确位置>\nsource_revision: <版本或生效日期>\nreview_state: <当前有效 | 过期 | 矛盾 | 未解决>\nsupersedes: <旧定义或无>\nnext_review: <来源变化条件或日期>",
         },
       },
       {
