@@ -21,6 +21,8 @@ export function generateStaticParams() {
   }));
 }
 
+export const dynamicParams = false;
+
 function sectionId(heading: string) {
   return heading
     .toLowerCase()

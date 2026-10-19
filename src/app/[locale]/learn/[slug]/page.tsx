@@ -175,6 +175,8 @@ export function generateStaticParams() {
   return translatedLearnStaticParams();
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: LocalizedLearnArticlePageProps): Promise<Metadata> {

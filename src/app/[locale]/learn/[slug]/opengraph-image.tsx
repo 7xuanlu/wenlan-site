@@ -16,6 +16,7 @@ export function generateStaticParams() {
   return translatedLearnStaticParams();
 }
 
+export const dynamicParams = false;
 
 const englishFooterLeft = ["wenlan.app/learn", "Source-backed LLM wiki"];
 
