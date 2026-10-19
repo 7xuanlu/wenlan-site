@@ -1662,10 +1662,10 @@ test("Mandarin Obsidian guides own the Claude Code setup, MCP, plugin, and skill
       article.publishedAt,
       locale === "zh-TW" ? "2026-07-22" : "2026-08-01",
     );
-    assert.equal(article.updatedAt, "2026-10-08");
+    assert.equal(article.updatedAt, "2026-10-18");
     assert.ok(article.keywords.includes("Obsidian MCP"));
     assert.ok(article.keywords.includes("Obsidian Claude Code MCP"));
-    assert.equal(article.sections.length, 12);
+    assert.equal(article.sections.length, 14);
 
     const articleText = JSON.stringify(article);
     for (const expected of [

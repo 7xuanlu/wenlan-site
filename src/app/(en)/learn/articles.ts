@@ -498,10 +498,10 @@ const baseArticles: LearnArticle[] = [
     category: "Workflows",
     title: "Obsidian + Claude Code: Connect Your Vault and Check Answers",
     description:
-      "Connect Claude Code to your Obsidian notes, then use two practice notes to find the latest project decision and check its source. Includes setup commands and an example answer; MCP and plugins are optional.",
+      "Connect Claude Code to Obsidian, find notes for a project without knowing their filenames, and check the latest decision against its sources. Includes setup, a tested search prompt, and example results; MCP and plugins are optional.",
     metaTitle: "Connect Claude Code to Obsidian: Setup & Note Search | Wenlan",
     metaDescription:
-      "Connect Claude Code to Obsidian. Follow the commands and use two practice notes to find the latest decision and check its source. No plugin needed.",
+      "Connect Claude Code to Obsidian, find project notes without knowing the filenames, and check the latest decision against its sources. No plugin needed.",
     keywords: [
       "obsidian claude code",
       "claude code obsidian",
@@ -515,13 +515,13 @@ const baseArticles: LearnArticle[] = [
       "Obsidian AI knowledge base",
     ],
     publishedAt: "2026-06-06",
-    updatedAt: "2026-10-08",
+    updatedAt: "2026-10-18",
     author: DEFAULT_AUTHOR,
-    readingTime: "10 min read",
+    readingTime: "12 min read",
     audience: "Obsidian users who want Claude Code to read, write, and organize their vault",
     heroBullets: [
       "An Obsidian vault is a folder of Markdown files. Run Claude Code in that folder and it can already read, search, and edit your notes.",
-      "Use two practice notes to find the current date and owner, then check the answer against the original text.",
+      "Find the right project notes, separate current decisions from copied old messages, and check the sources before acting.",
       "Wenlan is a personal wiki built for AI to organize and maintain knowledge. Page creation, source tracking, and revision review are built in. Connect your Obsidian notes, or use Wenlan on its own.",
     ],
     sections: [
@@ -618,6 +618,53 @@ const baseArticles: LearnArticle[] = [
           "label": "Connect Obsidian to Wenlan: try a project brief",
           "href": "/learn/wenlan-vs-obsidian-ai-memory#try-wenlan-with-project-notes"
         }
+      },
+      {
+        id: "find-project-notes-in-your-vault",
+        heading: "Search your existing vault when you don't know the filenames",
+        body: [
+          "In your own vault, the hard part may be finding the relevant notes in the first place. Start with one project and a few non-sensitive folders. The prompt below is for the fictional Harbor demo. For your own task, replace the question, time period, project name, starting folder, optional archive folder, and requested facts. Keep the checks for sources, old decisions, unknowns, and search coverage.",
+          "Ask for the source notes and their dated statements, not just a confident answer. A recently saved file can quote an old message. If two decisions conflict and the notes do not say which replaces the other, the answer should show the conflict rather than choose a date for you.",
+        ],
+        code: {
+          label: "Find the sources before answering — paste into Claude Code",
+          code: "Find the latest decision about the Harbor demo in October 2026\nin this vault.\nStart with Projects/Harbor/; check Archive/ only if a source\npoints there or the current notes are insufficient.\nDo not create, edit, move, or delete files.\nFirst find and read relevant notes; do not rely on filenames\nor file modification times as evidence of a decision.\nReturn the current demo date, owner, duration, and what must\nhappen before invitations can be sent.\nFor each fact, give the note path, its dated statement, and\na short supporting quote. Separate superseded dates and\ncopied old messages from the current decision.\nMark missing information unknown.\nFinish with one next action, the folders actually searched,\nand any files you could not read.",
+        },
+        bullets: [
+          "Open the named notes and check the supporting sentences. A citation only helps if the note actually supports the claim.",
+          "If a source is missing, name the project, an alternate name, or another folder to search. A failed search does not prove the information is absent from your vault.",
+          "This is a read-only request, not an access restriction. For an isolated first run, use a separate folder containing only the notes you intend to share with your model provider.",
+        ],
+        link: {
+          label: "Inspect the six fictional notes, prompt, and expected results",
+          href: "/examples/obsidian-project-search.json",
+        },
+      },
+      {
+        id: "check-project-search-results",
+        heading: "What the project search found — and what it left unchecked",
+        body: [
+          "We ran this prompt with six fictional notes: four about Harbor's current demo, one archived Harbor demo from 2025, and one note for another project. We gave Claude the project and folder, without naming the individual files. It found and read the four current-project notes. These are the results, condensed from that practice run:",
+        ],
+        table: {
+          columns: ["Result", "Source under Projects/Harbor/", "What to check"],
+          rows: [
+            ["Demo: October 22; owner: Mei", "2026-10-03-demo-update.md", "The October 3 decision explicitly replaces the October 1 plan for October 20"],
+            ["Duration: 15 minutes", "2026-10-04-invitations.md", "The checklist supplies the duration and says to wait for venue confirmation before sending invitations"],
+            ["Venue: still unknown", "2026-10-03-demo-update.md", "The source says no venue has been confirmed; do not borrow a venue from another project"],
+            ["October 20 is a copied old message", "2026-10-05-chat-excerpt.md", "The October 5 file quotes an October 1 message and explicitly says it is not a new decision"],
+          ],
+        },
+        bullets: [
+          "The next action was for Mei to confirm the venue before sending invitations. Claude reported that it had not read Archive/ or the other project's note; this was not a search of every note in the vault.",
+          "We then changed the decision inside the demo-update note to October 7, moving the demo to October 24, and repeated the same prompt in a fresh session. It returned October 24 and identified the dated statement inside the file, although the filename still said October 3.",
+          "Neither Claude run changed a source file. This small practice run shows what to inspect; it does not establish accuracy across a large personal vault.",
+          "When using this with your own project, check the current decision and next action against the cited notes. If you want a brief you can keep updating from those sources, try the Wenlan exercise below.",
+        ],
+        link: {
+          label: "Keep a project brief and update it when a source changes",
+          href: "/learn/wenlan-vs-obsidian-ai-memory#try-wenlan-with-project-notes",
+        },
       },
       {
         id: "claude-md-for-obsidian",
@@ -758,6 +805,11 @@ const baseArticles: LearnArticle[] = [
       },
     ],
     faqs: [
+      {
+        question: "How do I find relevant Obsidian notes without knowing their filenames?",
+        answer:
+          "Give Claude Code a project, a question, and a starting folder. Ask it to find and read relevant notes before answering, cite each dated statement, separate superseded decisions from current ones, and report the folders searched. Check the original notes; a filename or a new save date is not proof of a new decision.",
+      },
       {
         question: "How do I connect Claude Code to my Obsidian vault?",
         answer:
