@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "ec0e78c5cdab9a0964f05f59f6008a9571672a4a70ce9f2678ea7e6f78a8d34d",
+    sourceHash: "342ee42773a114fa42ee11e6b2e5d7de055881c49b3ab7e9c94bcb2c923b6005",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库",
@@ -76,7 +76,7 @@ export const zhCNContent = {
         title:
           "下\u2060载\u2060适\u2060合\u2060你\u2060系\u2060统\u2060的 Wenlan。",
         description:
-          "Wenlan v0.19.1 提供 Windows x64 桌面版与 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 包。",
+          "Wenlan v0.19.2 提供 Windows x64 桌面版与 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 包。",
         stableLabel: "稳定版",
         releaseNotesLabel: "版本说明",
         packageIncludesLabel: "内含 CLI、daemon 与 MCP connector",
@@ -1662,7 +1662,7 @@ export const zhCNContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "07d9707b8351e321b00180a458c50455d50e9c207f043cf831f6b76371626427",
+    sourceHash: "6af63fbd2efa659bb60915fda4464a09da08d9b75ae6f84dff01d3ab4f71ad09",
     content: {
       seo: {
         title: "安装文澜 Wenlan：Claude Code、Codex、ChatGPT 与 MCP",
@@ -1705,13 +1705,13 @@ export const zhCNContent = {
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.1/wenlan-windows-x64.zip",
+              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.2/wenlan-windows-x64.zip",
               label: "下载 Windows x64"
             },
             {
               id: "all-downloads",
-              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.19.1",
-              label: "全部 v0.19.1 下载"
+              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.19.2",
+              label: "全部 v0.19.2 下载"
             }
           ]
         },

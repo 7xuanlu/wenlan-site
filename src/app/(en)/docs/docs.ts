@@ -3655,7 +3655,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository's security policy commits to acknowledgment within 48 hours and a fix timeline within 7 days. The latest released version is supported (the current stable 0.19.1 line); older releases are best-effort.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository's security policy commits to acknowledgment within 48 hours and a fix timeline within 7 days. The latest released version is supported (the current stable 0.19.2 line); older releases are best-effort.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3852,14 +3852,14 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.19.1",
+      "Wenlan version 0.19.2",
       "wenlan-mcp release notes",
     ],
     updatedAt: "2026-10-16",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Quick answer: the current stable release in the repository changelog is v0.19.1, dated 2026-10-14.",
+      "Quick answer: the current stable release in the repository changelog is v0.19.2, dated 2026-10-19.",
       "The unified release publishes native runtime archives plus macOS Apple Silicon and Windows x64 desktop builds and updater artifacts.",
     ],
     sections: [
@@ -4051,7 +4051,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.19.1, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.19.2, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },
