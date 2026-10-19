@@ -1,0 +1,42 @@
+{
+  "description": "Six fictional notes for the Obsidian + Claude Code project-search practice. No personal or customer data.",
+  "setup": "In a separate empty practice folder, create the Markdown files listed under files at their given relative paths. Start Claude Code in that folder and paste the prompt. Do not use your personal vault for this practice.",
+  "files": {
+    "Projects/Harbor/2026-10-01-kickoff.md": "# Harbor kickoff\nMeeting on October 1, 2026: demo planned for October 20. Owner: Mei. Venue still to be confirmed.\n",
+    "Projects/Harbor/2026-10-03-demo-update.md": "# Harbor demo update\nDecision on October 3, 2026: the demo moves to October 22. Mei remains the owner. No venue has been confirmed. This replaces the October 1 plan.\n",
+    "Projects/Harbor/2026-10-04-invitations.md": "# Harbor invitation checklist\nChecklist on October 4, 2026: allow 15 minutes for the demo. Mei should send invitations only after the venue is confirmed.\n",
+    "Projects/Harbor/2026-10-05-chat-excerpt.md": "# Copied older message\nCopied on October 5, 2026 for reference, not a new decision. Original message dated October 1: “Harbor demo on October 20.” For the current plan see the demo update.\n",
+    "Archive/Harbor-2025-demo.md": "# Harbor demo from last year\nArchived 2025 project: demo on October 18, 2025. Owner: Kai. Venue: Room Blue. This is unrelated to the 2026 demo.\n",
+    "Projects/Lantern/2026-10-06-demo.md": "# Lantern demo\nOctober 6, 2026: Lantern demo on October 25. Owner: Ada. Venue: Studio Green. This is a different project from Harbor.\n"
+  },
+  "prompt": "Find the latest decision about the Harbor demo in October 2026 in this vault.\nStart with Projects/Harbor/; check Archive/ only if a source points there or the current notes are insufficient.\nDo not create, edit, move, or delete files.\nFirst find and read relevant notes; do not rely on filenames or file modification times as evidence of a decision.\nReturn the current demo date, owner, duration, and what must happen before invitations can be sent.\nFor each fact, give the note path, its dated statement, and a short supporting quote. Separate superseded dates and copied old messages from the current decision. Mark missing information unknown.\nFinish with one next action, the folders actually searched, and any files you could not read.\n",
+  "expectedInitialResult": {
+    "demoDate": "2026-10-22",
+    "owner": "Mei",
+    "durationMinutes": 15,
+    "venue": "unknown",
+    "nextAction": "Mei confirms the venue before sending invitations",
+    "supersededDate": "2026-10-20",
+    "copiedMessage": "The October 5 file copies an October 1 statement; it is not a new decision."
+  },
+  "repeatAfterSourceChange": {
+    "path": "Projects/Harbor/2026-10-03-demo-update.md",
+    "replacementContent": "# Harbor demo update\nDecision on October 7, 2026: the demo moves to October 24. Mei remains the owner. No venue has been confirmed. This replaces the October 3 plan for October 22.\n",
+    "instruction": "Replace only that file with this content; keep its filename. Start a fresh Claude Code session and paste the same prompt.",
+    "expectedDemoDate": "2026-10-24",
+    "decisionDateInsideFile": "2026-10-07"
+  },
+  "observedRun": {
+    "datePacific": "2026-10-18",
+    "synthetic": true,
+    "initialSessionCompleted": true,
+    "freshSessionCompleted": true,
+    "notesRead": "Four notes in Projects/Harbor/",
+    "notRead": [
+      "Archive/Harbor-2025-demo.md",
+      "Projects/Lantern/2026-10-06-demo.md"
+    ],
+    "sourceFilesChangedByClaude": 0,
+    "limitations": "One small read-only practice with a scoped search. Obsidian GUI was not used. This is not a large-vault accuracy benchmark, customer result, or SEO performance result."
+  }
+}

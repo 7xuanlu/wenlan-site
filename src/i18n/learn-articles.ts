@@ -596,10 +596,10 @@ const zhTWArticles = {
     category: "Workflows",
     title: "Obsidian + Claude Code 教學：連接筆記、查找與核對答案",
     description:
-      "把 Claude Code 接上 Obsidian，從兩份練習筆記找出最新的專案決定，再核對原文。附安裝指令與答案範例，先不裝外掛也能跟著做。",
+      "把 Claude Code 接上 Obsidian，不必知道檔名也能找出專案筆記，並依來源核對最新決定。附設定步驟、實測搜尋提示與答案範例；MCP 和外掛皆可選用。",
     metaTitle: "Obsidian + Claude Code 教學：連接筆記、核對答案 | Wenlan",
     metaDescription:
-      "把 Claude Code 接上 Obsidian，從兩份練習筆記找出最新決定並核對原文。附可複製指令與答案範例；不必先裝 MCP 或外掛。",
+      "把 Claude Code 接上 Obsidian，不必知道檔名也能找出專案筆記，並依來源核對最新決定。MCP 和外掛皆非必要。",
     keywords: [
       "Obsidian Claude Code",
       "Claude Code Obsidian",
@@ -611,13 +611,13 @@ const zhTWArticles = {
       "Obsidian AI 知識庫",
     ],
     publishedAt: "2026-07-22",
-    updatedAt: "2026-10-08",
+    updatedAt: "2026-10-18",
     author: "Qi-Xuan Lu",
-    readingTime: "10 分鐘閱讀",
+    readingTime: "12 分鐘閱讀",
     audience: "想讓 Claude Code 讀寫、整理 Obsidian vault 的繁體中文使用者",
     heroBullets: [
       "Obsidian vault 就是一個 Markdown 資料夾。在這個資料夾執行 Claude Code，它就能讀取、搜尋與修改你的筆記。",
-      "用兩份練習筆記找出目前日期與負責人，再回到原文核對答案。",
+      "不必知道檔名也能找出專案筆記，分清目前決定與舊訊息，再核對來源。",
       "Wenlan 是為 AI 整理與維護知識而設計的個人 Wiki，內建知識頁、來源追蹤與修訂檢查。可以接入 Obsidian 筆記，也可以直接使用 Wenlan。",
     ],
     sections: [
@@ -714,6 +714,53 @@ const zhTWArticles = {
           "label": "把 Obsidian 筆記接到 Wenlan，試做專案摘要",
           "href": "/learn/wenlan-vs-obsidian-ai-memory#try-wenlan-with-project-notes"
         }
+      },
+      {
+        id: "find-project-notes-in-your-vault",
+        heading: "不知道檔名，也能搜尋既有 vault",
+        body: [
+          "在自己的 vault 裡，難處可能是先找到相關筆記。先從一個專案和幾個非敏感資料夾開始。下方提示用的是虛構的 Harbor 展示；用在自己的任務時，請換成你的問題、時間範圍、專案名稱、起始資料夾、選用的封存資料夾，以及要查的資訊。保留來源、舊決定、未知資訊與搜尋範圍的核對要求。",
+          "請 Claude 列出來源筆記與其中帶日期的敘述，不要只給看似肯定的答案。最近存檔的筆記也可能引用舊訊息。如果兩個決定互相衝突，而筆記沒有說明哪個取代哪個，答案應呈現衝突，不要替你選日期。",
+        ],
+        code: {
+          label: "先找來源再回答；貼到 Claude Code 對話",
+          code: "Find the latest decision about the Harbor demo in October 2026\nin this vault.\nStart with Projects/Harbor/; check Archive/ only if a source\npoints there or the current notes are insufficient.\nDo not create, edit, move, or delete files.\nFirst find and read relevant notes; do not rely on filenames\nor file modification times as evidence of a decision.\nReturn the current demo date, owner, duration, and what must\nhappen before invitations can be sent.\nFor each fact, give the note path, its dated statement, and\na short supporting quote. Separate superseded dates and\ncopied old messages from the current decision.\nMark missing information unknown.\nFinish with one next action, the folders actually searched,\nand any files you could not read.",
+        },
+        bullets: [
+          "打開列出的筆記，核對支持答案的原句。引用只有在筆記確實支持該主張時才有幫助。",
+          "找不到來源時，提供專案名稱、別名或另一個資料夾再搜尋。搜尋失敗不代表你的 vault 裡沒有這項資訊。",
+          "這是只讀取的要求，不是存取限制。第一次隔離測試時，請用只含有你打算分享給模型服務之筆記的獨立資料夾。",
+        ],
+        link: {
+          label: "查看六份虛構筆記、提示與預期結果",
+          href: "/examples/obsidian-project-search.json",
+        },
+      },
+      {
+        id: "check-project-search-results",
+        heading: "專案搜尋找到什麼，又有哪些地方尚未查過",
+        body: [
+          "我們用六份虛構筆記執行這個提示：四份關於 Harbor 目前的展示、一份 2025 年封存的 Harbor 展示，以及一份其他專案的筆記。我們只提供 Claude 專案與資料夾，沒有指定個別檔案。它找到並讀取了目前專案的四份筆記。以下是這次練習的精簡結果：",
+        ],
+        table: {
+          columns: ["結果", "Projects/Harbor/ 下的來源", "核對重點"],
+          rows: [
+            ["展示：10 月 22 日；負責人：Mei", "2026-10-03-demo-update.md", "10 月 3 日的決定明確取代了 10 月 1 日原訂 10 月 20 日的計畫"],
+            ["時長：15 分鐘", "2026-10-04-invitations.md", "檢查清單列出時長，並說明要等場地確認後才能發出邀請"],
+            ["場地：仍未知", "2026-10-03-demo-update.md", "來源說尚未確認場地；不要借用其他專案的場地資訊"],
+            ["10 月 20 日是複製的舊訊息", "2026-10-05-chat-excerpt.md", "10 月 5 日的檔案引用了 10 月 1 日的訊息，並明確說明那不是新決定"],
+          ],
+        },
+        bullets: [
+          "下一步是由 Mei 在發出邀請前確認場地。Claude 回報它沒有讀取 Archive/ 或其他專案的筆記；這並非搜尋了 vault 裡的每一份筆記。",
+          "接著，我們把 demo-update 筆記中的決定改為 10 月 7 日，將展示日期改到 10 月 24 日，並在全新 session 重複相同提示。它回答 10 月 24 日，也指出檔案內帶日期的敘述，雖然檔名仍是 10 月 3 日。",
+          "兩次 Claude 執行都沒有修改來源檔案。這次小型練習示範了該檢查什麼，不能證明它在大型個人 vault 中也準確。",
+          "用在自己的專案時，請依引用筆記核對目前決定與下一步。如果想保留一份能持續更新的摘要，可以試試下方的 Wenlan 練習。",
+        ],
+        link: {
+          label: "建立專案摘要，並在來源變更時更新",
+          href: "/learn/wenlan-vs-obsidian-ai-memory#try-wenlan-with-project-notes",
+        },
       },
       {
         id: "claude-md-for-obsidian",
@@ -854,6 +901,11 @@ const zhTWArticles = {
       },
     ],
     faqs: [
+      {
+        question: "不知道檔名時，怎麼在 Obsidian 找到相關筆記？",
+        answer:
+          "提供 Claude Code 專案、問題和起始資料夾，請它先找出並讀取相關筆記，再回答；為每項內容引用帶日期的敘述，區分已被取代的決定與目前決定，並回報搜尋過的資料夾。請檢查原始筆記；檔名或較新的存檔日期都不能證明決定有更新。",
+      },
       {
         question: "怎麼把 Claude Code 連到 Obsidian vault？",
         answer:
@@ -4237,10 +4289,10 @@ const zhCNArticles = {
     category: "Workflows",
     title: "Obsidian + Claude Code 教程：连接笔记、查找并核对答案",
     description:
-      "把 Claude Code 接入 Obsidian，用两篇练习笔记找出最新的项目决定，再核对原文。提供安装命令和答案示例，不装插件也能跟着做。",
+      "把 Claude Code 接入 Obsidian，不必知道文件名也能找到项目笔记，并对照来源核实最新决定。附设置步骤、实测搜索提示和答案示例；MCP 与插件均可选。",
     metaTitle: "Obsidian + Claude Code 教程：连接笔记、核对答案 | Wenlan",
     metaDescription:
-      "把 Claude Code 接入 Obsidian，用两篇练习笔记找出最新决定并核对原文。提供可复制命令与答案示例；不必先装 MCP 或插件。",
+      "把 Claude Code 接入 Obsidian，不必知道文件名也能找到项目笔记，并对照来源核实最新决定。无需 MCP 或插件。",
     keywords: [
       "Obsidian Claude Code",
       "Claude Code Obsidian",
@@ -4252,13 +4304,13 @@ const zhCNArticles = {
       "Obsidian AI 知识库",
     ],
     publishedAt: "2026-08-01",
-    updatedAt: "2026-10-08",
+    updatedAt: "2026-10-18",
     author: "Qi-Xuan Lu",
-    readingTime: "10 分钟阅读",
+    readingTime: "12 分钟阅读",
     audience: "想让 Claude Code 读写、整理 Obsidian vault 的简体中文用户",
     heroBullets: [
       "Obsidian vault 就是一个 Markdown 文件夹。在这个文件夹运行 Claude Code，它就能读取、搜索和修改你的笔记。",
-      "用两篇练习笔记找出当前日期和负责人，再回到原文核对答案。",
+      "不必知道文件名也能找到项目笔记，区分当前决定与旧消息，再核对来源。",
       "Wenlan 是为 AI 整理和维护知识而设计的个人 Wiki，内置知识页、来源跟踪和修订检查。可以接入 Obsidian 笔记，也可以直接使用 Wenlan。",
     ],
     sections: [
@@ -4355,6 +4407,53 @@ const zhCNArticles = {
           "label": "把 Obsidian 笔记接入 Wenlan，试做项目摘要",
           "href": "/learn/wenlan-vs-obsidian-ai-memory#try-wenlan-with-project-notes"
         }
+      },
+      {
+        id: "find-project-notes-in-your-vault",
+        heading: "不知道文件名，也能搜索现有 vault",
+        body: [
+          "在自己的 vault 里，难点可能是先找到相关笔记。先从一个项目和几个非敏感文件夹开始。下面的提示针对虚构的 Harbor 演示；用在自己的任务时，请替换成你的问题、时间范围、项目名称、起始文件夹、可选的归档文件夹，以及要查的信息。保留对来源、旧决定、未知信息和搜索范围的核对要求。",
+          "请 Claude 提供来源笔记及其中带日期的陈述，而不只是给出看似肯定的答案。最近保存的文件也可能引用旧消息。如果两个决定冲突，而笔记没有说明哪个取代了哪个，答案应展示冲突，不要替你选日期。",
+        ],
+        code: {
+          label: "先找来源再回答；粘贴到 Claude Code 对话",
+          code: "Find the latest decision about the Harbor demo in October 2026\nin this vault.\nStart with Projects/Harbor/; check Archive/ only if a source\npoints there or the current notes are insufficient.\nDo not create, edit, move, or delete files.\nFirst find and read relevant notes; do not rely on filenames\nor file modification times as evidence of a decision.\nReturn the current demo date, owner, duration, and what must\nhappen before invitations can be sent.\nFor each fact, give the note path, its dated statement, and\na short supporting quote. Separate superseded dates and\ncopied old messages from the current decision.\nMark missing information unknown.\nFinish with one next action, the folders actually searched,\nand any files you could not read.",
+        },
+        bullets: [
+          "打开列出的笔记，核对支持答案的原句。只有笔记确实支持主张时，引用才有帮助。",
+          "找不到来源时，提供项目名称、别名或另一个文件夹再搜索。搜索失败不代表 vault 中没有这项信息。",
+          "这只是只读要求，并不限制访问权限。首次隔离测试时，请使用只包含你打算分享给模型服务的笔记的独立文件夹。",
+        ],
+        link: {
+          label: "查看六份虚构笔记、提示和预期结果",
+          href: "/examples/obsidian-project-search.json",
+        },
+      },
+      {
+        id: "check-project-search-results",
+        heading: "项目搜索找到了什么，还有哪些地方没有检查",
+        body: [
+          "我们用六份虚构笔记运行了这个提示：四份关于 Harbor 当前的演示，一份 2025 年归档的 Harbor 演示，以及一份其他项目的笔记。我们只告诉 Claude 项目和文件夹，没有指定单个文件。它找到了并读取了当前项目的四份笔记。以下是这次练习的精简结果：",
+        ],
+        table: {
+          columns: ["结果", "Projects/Harbor/ 下的来源", "核对重点"],
+          rows: [
+            ["演示：10 月 22 日；负责人：Mei", "2026-10-03-demo-update.md", "10 月 3 日的决定明确取代了 10 月 1 日计划于 10 月 20 日举行的安排"],
+            ["时长：15 分钟", "2026-10-04-invitations.md", "清单列出时长，并说明要等场地确认后才能发送邀请"],
+            ["场地：仍未知", "2026-10-03-demo-update.md", "来源说尚未确认场地；不要借用其他项目的场地信息"],
+            ["10 月 20 日是复制的旧消息", "2026-10-05-chat-excerpt.md", "10 月 5 日的文件引用了 10 月 1 日的消息，并明确说明那不是新决定"],
+          ],
+        },
+        bullets: [
+          "下一步是由 Mei 在发送邀请前确认场地。Claude 报告它没有读取 Archive/ 或其他项目的笔记；这并非搜索了 vault 中的每一份笔记。",
+          "随后，我们把 demo-update 笔记中的决定改为 10 月 7 日，将演示日期改到 10 月 24 日，并在全新 session 中重复相同提示。它回答了 10 月 24 日，也指出了文件内带日期的陈述，尽管文件名仍是 10 月 3 日。",
+          "两次 Claude 执行都没有修改源文件。这次小型练习展示了要检查什么，不能证明它在大型个人 vault 中也准确。",
+          "用在自己的项目时，请根据引用笔记核对当前决定和下一步。如果想保留一份可持续更新的摘要，可以试试下面的 Wenlan 练习。",
+        ],
+        link: {
+          label: "创建项目摘要，并在来源变化时更新",
+          href: "/learn/wenlan-vs-obsidian-ai-memory#try-wenlan-with-project-notes",
+        },
       },
       {
         id: "claude-md-for-obsidian",
@@ -4495,6 +4594,11 @@ const zhCNArticles = {
       },
     ],
     faqs: [
+      {
+        question: "不知道文件名时，怎样在 Obsidian 中找到相关笔记？",
+        answer:
+          "告诉 Claude Code 项目、问题和起始文件夹，请它先查找并阅读相关笔记再回答；为每项内容引用带日期的陈述，区分已被取代的决定与当前决定，并报告搜索过的文件夹。请检查原始笔记；文件名或较新的保存日期都不能证明决定已经更新。",
+      },
       {
         question: "怎么把 Claude Code 连接到 Obsidian vault？",
         answer:

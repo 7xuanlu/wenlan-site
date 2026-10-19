@@ -1522,14 +1522,21 @@ test("public command guidance tracks the current plugin contract", async () => {
   assert.deepEqual(sharedCommands, [
     "brief",
     "capture",
+    "handoff",
+    "recall",
+    "wenlan",
+  ]);
+  // Current plugins route operational verbs through the Wenlan entrypoint.
+  // Keep their inventory checked separately from directly invocable skills.
+  assert.deepEqual(contract.skills
+    .filter((skill) => skill.status === "hidden_routed")
+    .map((skill) => skill.name)
+    .sort(), [
     "curate",
     "distill",
     "forget",
-    "handoff",
-    "help",
     "lint",
     "pages",
-    "recall",
     "setup",
   ]);
   for (const [path, source] of surfaces) {
@@ -1976,7 +1983,7 @@ test("Obsidian page answers Claude Code setup, MCP, plugin, and skill intent wit
     /metaTitle:\s*"Connect Claude Code to Obsidian: Setup & Note Search \| Wenlan"/,
   );
   assert.match(article, /publishedAt:\s*"2026-06-06"/);
-  assert.match(article, /updatedAt:\s*"2026-10-08"/);
+  assert.match(article, /updatedAt:\s*"2026-10-18"/);
   for (const query of [
     "obsidian claude code",
     "claude code obsidian",
