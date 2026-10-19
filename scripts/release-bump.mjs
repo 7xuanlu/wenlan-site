@@ -87,6 +87,13 @@ async function gitStdout(wenlanRoot, gitArgs) {
   return stdout;
 }
 
+/** Date of a version's CHANGELOG heading, which the site prose quotes. */
+export function changelogDate(changelog, version) {
+  return changelog.match(
+    new RegExp(`^## \\[${escapeRegExp(version)}\\].*\\((\\d{4}-\\d{2}-\\d{2})\\)`, "m"),
+  )?.[1];
+}
+
 /** Authoritative release: highest v* tag in the sibling wenlan checkout. */
 export async function readAuthoritativeRelease(wenlanRoot) {
   const tagStdout = await gitStdout(wenlanRoot, [
@@ -109,13 +116,11 @@ export async function readAuthoritativeRelease(wenlanRoot) {
       `Tag ${tag} carries version.txt ${versionAtTag}; refusing to guess`,
     );
   }
-  const dateMatch = changelog.match(
-    new RegExp(`^## \\[${escapeRegExp(version)}\\].*\\((\\d{4}-\\d{2}-\\d{2})\\)`, "m"),
-  );
-  if (!dateMatch) {
+  const date = changelogDate(changelog, version);
+  if (!date) {
     throw new Error(`No dated CHANGELOG entry for ${version} at ${tag}`);
   }
-  return { version, tag, date: dateMatch[1] };
+  return { version, tag, date, changelog };
 }
 
 export function readPinnedRelease(releasesSource) {
@@ -357,6 +362,10 @@ async function collectPlan(siteRoot, wenlanRoot) {
   const releasesSource = await readFile(resolve(siteRoot, SITE_FILES.releases), "utf8");
   const pinned = readPinnedRelease(releasesSource);
   const authoritative = await readAuthoritativeRelease(wenlanRoot);
+  // The site prose and sitemap carry the CHANGELOG date, which can precede the
+  // publishedAt day kept in the pin (v0.19.1: dated 10-14, published 10-16).
+  const pinnedChangelogDate = changelogDate(authoritative.changelog, pinned.version);
+  if (pinnedChangelogDate) pinned.date = pinnedChangelogDate;
   return { pinned, authoritative, releasesSource };
 }
 
