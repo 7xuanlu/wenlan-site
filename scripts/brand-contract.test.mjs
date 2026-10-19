@@ -1151,60 +1151,64 @@ test("public release surfaces expose the verified current artifacts and release 
   const structuredData = await readRepo("src/app/structured-data.ts");
   const llms = await readRepo("public/llms.txt");
 
-  assert.equal(version, "0.19.1");
+  assert.equal(version, "0.19.2");
   assert.equal(WENLAN_RELEASE.version, version);
-  assert.equal(WENLAN_RELEASE.tag, "v0.19.1");
-  assert.equal(WENLAN_RELEASE.publishedAt, "2026-10-16T03:41:58Z");
+  assert.equal(WENLAN_RELEASE.tag, "v0.19.2");
+  assert.equal(WENLAN_RELEASE.publishedAt, "2026-10-19T05:50:26Z");
   assert.equal(
     WENLAN_RELEASE.releaseUrl,
-    "https://github.com/wenlan-app/wenlan/releases/tag/v0.19.1",
+    "https://github.com/wenlan-app/wenlan/releases/tag/v0.19.2",
   );
   assert.equal(
     WENLAN_RELEASE.setupGuideUrl,
-    "https://github.com/wenlan-app/wenlan/blob/v0.19.1/docs/setup-with-ai.md#install-the-runtime",
+    "https://github.com/wenlan-app/wenlan/blob/v0.19.2/docs/setup-with-ai.md#install-the-runtime",
   );
   assert.deepEqual(
     WENLAN_RELEASE.assets.map(({ id, href, format, size }) => ({ id, href, format, size })),
     [
       {
         id: "windows-desktop-x64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.1/Wenlan_0.19.1_x64-setup.exe",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.2/Wenlan_0.19.2_x64-setup.exe",
         format: "EXE",
-        size: "56.0 MiB",
+        size: "56.2 MiB",
       },
       {
         id: "windows-x64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.1/wenlan-windows-x64.zip",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.2/wenlan-windows-x64.zip",
         format: "ZIP",
-        size: "76.7 MiB",
+        size: "76.8 MiB",
       },
       {
         id: "macos-arm64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.1/Wenlan_0.19.1_aarch64.dmg",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.2/Wenlan_0.19.2_aarch64.dmg",
         format: "DMG",
-        size: "77.6 MiB",
+        size: "77.7 MiB",
       },
       {
         id: "macos-runtime-arm64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.1/wenlan-darwin-arm64.tar.gz",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.2/wenlan-darwin-arm64.tar.gz",
         format: "TAR.GZ",
-        size: "53.1 MiB",
+        size: "53.2 MiB",
       },
       {
         id: "linux-x64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.1/wenlan-linux-x64.tar.gz",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.2/wenlan-linux-x64.tar.gz",
         format: "TAR.GZ",
-        size: "66.0 MiB",
+        size: "66.2 MiB",
       },
       {
         id: "linux-arm64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.1/wenlan-linux-arm64.tar.gz",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.2/wenlan-linux-arm64.tar.gz",
         format: "TAR.GZ",
-        size: "65.9 MiB",
+        size: "66.1 MiB",
       },
     ],
   );
 
+  assert.match(changelog, /^## \[0\.19\.2\].*\(2026-10-19\)/m);
+  assert.match(changelog, /one \/wenlan entry for every Wenlan workflow/);
+  assert.match(changelog, /connect Muse Code, recognize Muse/);
+  assert.match(changelog, /guide new users with a self-checking getting-started home/);
   assert.match(changelog, /^## \[0\.19\.1\].*\(2026-10-14\)/m);
   assert.match(changelog, /surface unconfirmed pages in search/);
   assert.match(changelog, /list notes written about an entity in the Wiki Folders tree/);
@@ -1229,14 +1233,18 @@ test("public release surfaces expose the verified current artifacts and release 
   assert.match(docs, /v0\.18\.1 to v0\.18\.3 highlights/);
   assert.match(docs, /Import reports real phase progress and batch status/);
 
-  assert.equal(date, "2026-10-14");
+  assert.match(docs, /v0\.19\.1 highlights/);
+  assert.match(docs, /The Claude Code plugin has one entry, \/wenlan/);
+  assert.match(docs, /connects Muse Code with one click/);
+  assert.match(docs, /getting-started home/);
+  assert.equal(date, "2026-10-19");
   assert.match(docs, /v0\.18\.0 highlights/);
   assert.match(docs, /one home page with an honest empty state/);
   assert.match(docs, /removes the .*Where AI looked.* section/);
   assert.match(docs, /global shortcut is occupied/);
   assert.match(docs, /window stays still after launch/);
-  assert.match(structuredData, /tree\/v0\.19\.1\/app/);
-  assert.match(llms, /tree\/v0\.19\.1\/app/);
+  assert.match(structuredData, /tree\/v0\.19\.2\/app/);
+  assert.match(llms, /tree\/v0\.19\.2\/app/);
 });
 
 test("download information architecture keeps the homepage compact and the full matrix on a localized hub", async () => {
@@ -1552,7 +1560,10 @@ test("public command guidance tracks the current plugin contract", async () => {
   }
   const docs = surfaces.find(([path]) => path === "src/app/docs/docs.ts")?.[1] ?? "";
   assert.doesNotMatch(docs, /\/pages[^"\n]*(?:preview|inside the agent session|without leaving)/i);
-  assert.match(docs, /\/pages: list recent notes or open a matching note in your editor\./);
+  assert.match(docs, /\/wenlan pages: list recent notes or open a matching note in your editor\./);
+  for (const command of contract.skills.filter((skill) => skill.status === "hidden_routed").map((skill) => skill.name)) {
+    assert.match(docs, new RegExp(`/wenlan ${escapeRegExp(command)}\\b`), command);
+  }
   assert.doesNotMatch(docs, /review, distill, read, and handoff/);
 });
 

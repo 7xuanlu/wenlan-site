@@ -1,6 +1,6 @@
 # Wenlan
 
-> Wenlan is an LLM wiki for AI work, built by agents and grounded in its sources. Hybrid retrieval publishes CE-reranker snapshots for LME_Oracle at 93.6% Recall@5 / 0.857 MRR / 0.883 NDCG@10 (500 Q) and LME_S at 87.7% Recall@5 / 0.815 MRR / 0.822 NDCG@10 (deep, N=90). Retrieval uses ~168 tokens per recall query versus full replay at 4,505 tokens per query. Real git versioning for readable pages, sessions, handoffs, and status artifacts under ~/.wenlan/.git/, mandatory provenance on source-backed wiki pages, Claude Code and Codex plugins, local MCP for Cursor and other clients, and Streamable HTTP MCP for ChatGPT and Claude.ai. Current prebuilt runtime artifacts cover macOS Apple Silicon, Linux (x86_64, aarch64; glibc), and Windows (x86_64); macOS Intel is source/dev-only until a public release workflow publishes that artifact again. Apache-2.0. Source at github.com/wenlan-app/wenlan.
+> Wenlan is an LLM wiki for AI work, built by agents and grounded in its sources. Hybrid retrieval publishes CE-reranker snapshots for LME_Oracle at 93.6% Recall@5 / 0.857 MRR / 0.883 NDCG@10 (500 Q) and LME_S at 87.7% Recall@5 / 0.815 MRR / 0.822 NDCG@10 (deep, N=90). Retrieval uses ~168 tokens per recall query versus full replay at 4,505 tokens per query. Real git versioning for readable pages, sessions, handoffs, and status artifacts under ~/.wenlan/.git/, mandatory provenance on source-backed wiki pages, Claude Code and Codex plugins, local MCP for Cursor and other clients, and Streamable HTTP MCP for ChatGPT, Claude.ai, and Muse. Current prebuilt runtime artifacts cover macOS Apple Silicon, Linux (x86_64, aarch64; glibc), and Windows (x86_64); macOS Intel is source/dev-only until a public release workflow publishes that artifact again. Apache-2.0. Source at github.com/wenlan-app/wenlan.
 
 ## Core
 
@@ -52,7 +52,7 @@
 ## Reference
 
 - [Commands](https://wenlan.app/docs/commands): Wenlan CLI subcommands and the MCP tools the daemon exposes.
-- [Claude Code plugin](https://wenlan.app/docs/claude-code-plugin): The richest Wenlan workflow inside Claude Code: /setup, /brief, /capture, /recall, /handoff, /distill, /curate, the SessionStart hook, and local memory mode.
+- [Claude Code plugin](https://wenlan.app/docs/claude-code-plugin): The richest Wenlan workflow inside Claude Code: one /wenlan entry (setup, distill, lint, curate and more as words after it), /brief, /capture, /recall, /handoff, the SessionStart hook, and local memory mode.
 - [CLI and service management](https://wenlan.app/docs/cli-and-service): Setup, daemon status, doctor, background on/off, terminal recall/search/capture/memories, and MCP client wiring.
 - [Updates and uninstall](https://wenlan.app/docs/updates-and-uninstall): Refresh the local runtime, verify with doctor, restart MCP clients, and remove the per-user service safely.
 - [Upgrade notes](https://wenlan.app/docs/upgrade-notes): What to rerun, verify, and restart when Wenlan releases change the plugin, npm setup, MCP connector, daemon service, spaces, or platform support.
@@ -73,14 +73,14 @@
 - [Backup and migration](https://wenlan.app/docs/backup-and-migration): Back up readable ~/.wenlan artifacts and daemon data together, then verify restored installs with doctor and recall.
 - [Configuration](https://wenlan.app/docs/configuration): Spaces, MCP client wiring, daemon bind address, local paths, models, and keys without hand-editing the database.
 - [Environment variables](https://wenlan.app/docs/environment-variables): Runtime, development, Windows repair, and eval environment variables such as WENLAN_SPACE, WENLAN_HOST, WENLAN_BIND_ADDR, WENLAN_DATA_DIR, ORT_DYLIB_PATH, and EVAL_BASELINES_DIR.
-- [MCP clients](https://wenlan.app/docs/mcp-clients): Local setup for Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, and VS Code, plus authenticated Streamable HTTP MCP Remote Access for ChatGPT and Claude.ai through https://relay.wenlan.app/mcp. Choose the whole library or one Space in Wenlan, approve the pairing request, keep the device online to connect, and revoke access when it is no longer needed.
+- [MCP clients](https://wenlan.app/docs/mcp-clients): Local setup for Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, VS Code, and Muse Code, plus authenticated Streamable HTTP MCP Web access for ChatGPT, Claude.ai, and Muse through https://relay.wenlan.app/mcp. Choose the whole library or one Space in Wenlan, approve the pairing request, keep the device online to connect, and revoke access when it is no longer needed.
 - [Agent profiles](https://wenlan.app/docs/agent-profiles): How Wenlan attributes captures to Claude Code, Codex, Cursor, local scripts, and other clients through source_agent, trust, and enabled state.
 - [Troubleshooting](https://wenlan.app/docs/troubleshooting): Common failure modes and the daemon repair paths.
 - [Diagnostics and issue reports](https://wenlan.app/docs/diagnostics-and-issue-reports): Commands to run before asking for help, how to separate daemon and MCP failures, and what to redact.
 - [FAQ](https://wenlan.app/docs/faq): Short answers about what Wenlan is, which install path to use, desktop app status, local data, Markdown artifacts, uninstall behavior, and verification.
 - [Security and reporting](https://wenlan.app/docs/security): Private vulnerability reporting, redacted bug reports, local security boundaries, and security.txt.
 - [Evaluation](https://wenlan.app/docs/evaluation): Retrieval benchmark scope, current LME_Oracle and LME_S snapshot, and rerun methodology.
-- [Desktop app status](https://wenlan.app/docs/desktop-app): The optional source-cited wiki GUI, its AGPL-3.0-only crate boundary in the unified Wenlan repository, and its authenticated Remote Access path for ChatGPT and Claude.ai through https://relay.wenlan.app/mcp, with a whole-library or one-Space choice, approved pairing, and access revocation.
+- [Desktop app status](https://wenlan.app/docs/desktop-app): The optional source-cited wiki GUI, its AGPL-3.0-only crate boundary in the unified Wenlan repository, a getting-started checklist for new libraries, one-click connection for local tools such as Muse Code, and its authenticated Web access path for ChatGPT, Claude.ai, and Muse through https://relay.wenlan.app/mcp, with a whole-library or one-Space choice, approved pairing, and access revocation.
 - [Changelog](https://wenlan.app/docs/changelog): Stable release notes and how to read unreleased main-branch work.
 - [Releases and versioning](https://wenlan.app/docs/releases-and-versioning): How release-please, tags, package publishing, npm packages, crates, binaries, and pre-1.0 version bumps work.
 - [Roadmap and status](https://wenlan.app/docs/roadmap): Released, on-main, and planned work without confusing roadmap themes for shipped guarantees.
@@ -94,7 +94,7 @@
 
 - [llms-full.txt](https://wenlan.app/llms-full.txt): Long-form companion to this file. Contains the full body of every Learn article and Docs page so an LLM can ingest the full corpus in one fetch.
 - [GitHub repository](https://github.com/wenlan-app/wenlan): Source, releases, issues. Apache-2.0.
-- [Wenlan desktop app source](https://github.com/wenlan-app/wenlan/tree/v0.19.1/app): Tauri 2 + React 19 source-cited wiki GUI in the unified Wenlan release, with a notarized macOS Apple Silicon DMG and a Windows x64 desktop build. AGPL-3.0-only. Talks to the same local daemon over HTTP at localhost:7878 and provides authenticated Remote Access for ChatGPT and Claude.ai through https://relay.wenlan.app/mcp. Choose a Space, approve pairing, keep the device online, and revoke access when finished.
+- [Wenlan desktop app source](https://github.com/wenlan-app/wenlan/tree/v0.19.2/app): Tauri 2 + React 19 source-cited wiki GUI in the unified Wenlan release, with a notarized macOS Apple Silicon DMG and a Windows x64 desktop build. AGPL-3.0-only. Talks to the same local daemon over HTTP at localhost:7878 and provides authenticated Web access for ChatGPT, Claude.ai, and Muse through https://relay.wenlan.app/mcp. Choose a Space, approve pairing, keep the device online, and revoke access when finished.
 - [Wenlan Claude Code plugin (npm)](https://www.npmjs.com/package/wenlan): The Claude Code plugin published from this repo.
 - [wenlan-mcp server (npm)](https://www.npmjs.com/package/wenlan-mcp): The MCP server binary as a standalone npm package.
 - [wenlan-mcp on crates.io](https://crates.io/crates/wenlan-mcp): The Rust crate behind wenlan-mcp.

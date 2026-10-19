@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "342ee42773a114fa42ee11e6b2e5d7de055881c49b3ab7e9c94bcb2c923b6005",
+    sourceHash: "1314f950cfe3f16c98eff9091a3a2a43fb533973d4f81e8821b0babb5f0aec9f",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库",
@@ -371,7 +371,7 @@ export const zhCNContent = {
         memoryDistillery: {
           eyebrow: "刻意蒸馏",
           title: "Wenlan 把重复出现的 context 变成 LLM wiki。",
-          body: "当重复捕捉的内容值得变成可读的笔记时，运行 /distill。可选的本地模型或 API key 路径可以加入背景提取与笔记更新。",
+          body: "当重复捕捉的内容值得变成可读的笔记时，运行 /wenlan distill。可选的本地模型或 API key 路径可以加入背景提取与笔记更新。",
           note: "已配置的下一次运行可以从有引用的 context 开始，而不是从 transcript 残留开始。",
           visualLabels: {
             merged: "合并",
@@ -489,7 +489,7 @@ export const zhCNContent = {
           {
             id: "tools",
             q: "哪些 AI 工具可以搭配 Wenlan？",
-            a: "Claude Code 和 Codex 有 Wenlan 插件；Cursor、Claude Desktop、VS Code 等本地工具通过 MCP 连接。ChatGPT、Claude.ai、Muse 等浏览器工具使用 OAuth 远程连接：先选择共享整个资料库或一个 Space、批准配对，使用时保持 Wenlan 在线，也能在 App 中撤销访问。Obsidian 则是只读的来源导入方式。",
+            a: "Claude Code 和 Codex 有 Wenlan 插件；Cursor、Claude Desktop、VS Code、Muse Code 等本地工具通过 MCP 连接。ChatGPT、Claude.ai、Muse 等浏览器工具使用 OAuth 远程连接：先选择共享整个资料库或一个 Space、批准配对，使用时保持 Wenlan 在线，也能在 App 中撤销访问。Obsidian 则是只读的来源导入方式。",
           },
           {
             id: "not-notes",
@@ -874,7 +874,7 @@ export const zhCNContent = {
             "连接 AI 工具后，用 Wenlan 保存有用决策，再用已配置的模型整理出有来源的笔记；下次遇到相关问题，再查回已保存的记录。",
           stages: [
             { id: "capture", step: "/handoff · 工作收尾", title: "保存有用决策" },
-            { id: "distill", step: "/distill · 整理来源", title: "整理出有来源的笔记" },
+            { id: "distill", step: "/wenlan distill · 整理来源", title: "整理出有来源的笔记" },
             { id: "brief", step: "/recall · 遇到相关问题", title: "下次把它找回来" },
           ],
           distillNote: "AI 代理也能直接创建主题页；请先连接工具，确认生成内容所需的模型配置，并检查实际结果。",
@@ -975,7 +975,7 @@ export const zhCNContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "6edd058e3532090984bad475a181e731e55eca23f664771ac31c765f5493c7f3",
+    sourceHash: "f8615e37cb3df13c92e740e77a2a24598904663c8f6e1b45ffa30564a03ec67e",
     content: {
       seo: {
         title: "关于文澜 Wenlan：开源、本地优先的个人 AI 知识库",
@@ -1044,7 +1044,7 @@ export const zhCNContent = {
           {
             id: "deliberate-distillation",
             title: "需要时整理成笔记",
-            body: "在 Wenlan 中，主题积累到足以写成一篇笔记时，可运行 /distill 创建有来源的笔记。完成模型配置后，也可以选择自动整理笔记，并补充更多想法之间的联系。",
+            body: "在 Wenlan 中，主题积累到足以写成一篇笔记时，可运行 /wenlan distill 创建有来源的笔记。完成模型配置后，也可以选择自动整理笔记，并补充更多想法之间的联系。",
           },
         ],
       },
@@ -1304,7 +1304,7 @@ export const zhCNContent = {
                 label: "插件",
                 title: "Claude Code 插件",
                 description:
-                  "了解 Wenlan 在 Claude Code 插件中的用法，包括 /brief、/capture、/recall、/curate、/distill 和 /handoff。",
+                  "了解 Wenlan 在 Claude Code 插件中的用法，包括 /wenlan、/brief、/capture、/recall 和 /handoff。",
                 meta: "Qi-Xuan Lu · 更新于 2026 年 7 月 17 日 · 6 分钟阅读",
               },
               {
@@ -1662,7 +1662,7 @@ export const zhCNContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "6af63fbd2efa659bb60915fda4464a09da08d9b75ae6f84dff01d3ab4f71ad09",
+    sourceHash: "916655317827fafd1f06569941f494f5ec8471a15670ca1f6f1942f50f76f70e",
     content: {
       seo: {
         title: "安装文澜 Wenlan：Claude Code、Codex、ChatGPT 与 MCP",
@@ -1695,6 +1695,7 @@ export const zhCNContent = {
           title: "安装并打开 Wenlan",
           paragraphs: [
             "下载 macOS Apple silicon 或 Windows x64 桌面版，按照首次设置引导完成安装。你的笔记和来源会保存在本机的 Wenlan 知识库。",
+            "新的知识库会先打开一份入门清单。选好你想从哪里开始，再按步骤做：写一篇笔记、连接 AI 工具、导入来源，最后问你的 AI 刚保存的内容。",
             "如果要把来源整理成笔记，请在设置中选择本地模型，或配置云端模型服务。使用云端处理时，相关内容会发送给该服务商。"
           ],
           commands: [
@@ -1721,12 +1722,12 @@ export const zhCNContent = {
           title: "Claude Code 插件",
           paragraphs: [
             "在 Claude Code 中运行下方前两行，安装 Wenlan 插件。它会加入保存与查找知识的命令，并连接 Wenlan。",
-            "如果出现提示，请重启 Claude Code，再运行 /wenlan:setup 检查连接。首次设置可能需要几分钟下载搜索模型。"
+            "如果出现提示，请重启 Claude Code，再运行 /wenlan 检查连接。首次设置可能需要几分钟下载搜索模型。其他功能也都从 /wenlan 开始，后面直接写你想做的事，例如 /wenlan lint。"
           ],
           commands: [
             "/plugin marketplace add wenlan-app/wenlan",
             "/plugin install wenlan@7xuanlu-wenlan",
-            "/wenlan:setup"
+            "/wenlan"
           ],
           ctas: []
         },
@@ -1736,7 +1737,7 @@ export const zhCNContent = {
           title: "Codex 设置",
           paragraphs: [
             "先使用上方的命令行方式安装 Wenlan，再在终端中运行这两行，添加 Codex 插件。",
-            "安装后打开新的 Codex 对话，运行 /setup。如果只需要 MCP 工具，也可以改用 wenlan connect codex；这种方式不会添加 Wenlan 的斜杠命令。"
+            "安装后打开新的 Codex 对话，输入 $wenlan 检查连接。如果只需要 MCP 工具，也可以改用 wenlan connect codex；这种方式不会添加 Wenlan 的斜杠命令。"
           ],
           commands: [
             "codex plugin marketplace add wenlan-app/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan"
@@ -1748,8 +1749,8 @@ export const zhCNContent = {
           number: "04",
           title: "ChatGPT、Claude.ai 或 Muse（高级连接）",
           paragraphs: [
-            "在 Wenlan 桌面版打开“网页访问”（Web access），选择共享整个资料库或只共享一个 Space，阅读数据访问说明后启用。在 AI 工具中，通过 OAuth MCP 连接添加 https://relay.wenlan.app/mcp。",
-            "回到 Wenlan 检查并批准配对请求。如果只共享一个 Space，其他及之后新增的 Space 不会自动分享。使用时请保持 Wenlan 在线；不再需要时，可以在 App 中撤销访问。",
+            "在 Wenlan 桌面版的设置中找到“网页访问”（Web access），打开开关。如果你有 Space，可以选择共享整个资料库或只共享一个 Space。接着点“添加到 Claude”或“添加到 ChatGPT”；Muse 等其他应用则把 https://relay.wenlan.app/mcp 添加为自定义的 OAuth MCP 连接器。",
+            "回到 Wenlan 点“允许”，批准配对请求。如果只共享一个 Space，其他及之后新增的 Space 不会自动分享。使用时请保持 Wenlan 在线；不再需要时，可以在 App 中撤销访问。",
             "远程查询会经过中继服务和 AI 服务商，本机也会记录访问活动。这是自定义连接，并非公开 ChatGPT Apps Directory 上架项目。"
           ],
           commands: [],
@@ -1757,7 +1758,7 @@ export const zhCNContent = {
             {
               id: "remote-access",
               href: "/docs/mcp-clients",
-              label: "远程访问指南（英文）"
+              label: "网页访问指南（英文）"
             }
           ]
         },
@@ -1767,7 +1768,8 @@ export const zhCNContent = {
           title: "Cursor、Claude Desktop 等本地工具",
           paragraphs: [
             "先使用上方的命令行方式安装 Wenlan，再运行对应的连接命令，最后重启你的 AI 工具。",
-            "这种方式通过 MCP 连接 Wenlan，不会添加 Claude Code 或 Codex 插件的斜杠命令。"
+            "这种方式通过 MCP 连接 Wenlan，不会添加 Claude Code 或 Codex 插件的斜杠命令。",
+            "使用桌面版时，在设置的“添加工具”中可以一键连接检测到的工具，包括 Muse Code。"
           ],
           commands: [
             "wenlan connect cursor\n# 或：claude-desktop, vscode, gemini"

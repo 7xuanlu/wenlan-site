@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 
 import {
   applyRule,
+  changelogDate,
   computeEnglishHashes,
   extractChangelogFeatures,
   formatAssetSize,
@@ -108,6 +109,13 @@ test("argument parsing supports check-by-default with opt-in apply", () => {
   assert.throws(() => parseArgs(["--bogus"]), /Unexpected argument/);
   assert.throws(() => parseArgs(["--repo"]), /Missing value for --repo/);
   assert.throws(() => parseArgs(["--repo="]), /Missing value for --repo/);
+});
+
+test("changelog dates come from the version's own heading, not its publish day", () => {
+  const changelog = "## [0.19.2](x) (2026-10-19)\n\n## [0.19.1](x) (2026-10-14)\n";
+  assert.equal(changelogDate(changelog, "0.19.1"), "2026-10-14");
+  assert.equal(changelogDate(changelog, "0.19.2"), "2026-10-19");
+  assert.equal(changelogDate(changelog, "0.19.12"), undefined);
 });
 
 test("rule application replaces every occurrence and rejects silent no-ops", () => {

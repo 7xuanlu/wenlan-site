@@ -374,7 +374,7 @@ export const enContent = {
         memoryDistillery: {
           eyebrow: "Deliberate distillation",
           title: "Wenlan turns repeated context into an LLM wiki.",
-          body: "Run /distill when repeated captures should become a readable, source-backed note. Optional model or API-key paths can add background extraction and note refresh work.",
+          body: "Run /wenlan distill when repeated captures should become a readable, source-backed note. Optional model or API-key paths can add background extraction and note refresh work.",
           note: "A configured next run can start from cited context, not transcript residue.",
           visualLabels: {
             merged: "MERGED",
@@ -494,7 +494,7 @@ export const enContent = {
           {
             id: "tools",
             q: "What AI tools work with Wenlan?",
-            a: "Claude Code and Codex have Wenlan plugins. Cursor, Claude Desktop, VS Code and other local clients connect through MCP. Browser clients such as ChatGPT, Claude.ai and Muse use Web access through an OAuth relay: choose the whole library or one Space, approve the connection, and keep Wenlan online. You can revoke access in the app. Obsidian is a read-only source workflow.",
+            a: "Claude Code and Codex have Wenlan plugins. Cursor, Claude Desktop, VS Code, Muse Code and other local clients connect through MCP. Browser clients such as ChatGPT, Claude.ai and Muse use Web access through an OAuth relay: choose the whole library or one Space, approve the connection, and keep Wenlan online. You can revoke access in the app. Obsidian is a read-only source workflow.",
           },
           {
             id: "not-notes",
@@ -879,7 +879,7 @@ export const enContent = {
             "After provider and client setup, Wenlan can save useful decisions, organize sourced notes when configured processing runs, and help the next session find them.",
           stages: [
             { id: "capture", step: "/handoff · finish a session", title: "Save useful decisions" },
-            { id: "distill", step: "/distill · between sessions", title: "Organize a sourced note" },
+            { id: "distill", step: "/wenlan distill · between sessions", title: "Organize a sourced note" },
             { id: "brief", step: "/recall · ask a specific question", title: "Find it next time" },
           ],
           distillNote: "Agents can also create notes directly when a topic deserves one right away; provider and client setup still apply.",
@@ -1049,7 +1049,7 @@ export const enContent = {
           {
             id: "deliberate-distillation",
             title: "Deliberate distillation",
-            body: "Run /distill when a topic is ready to become a source-linked note. With optional model setup, Wenlan can also organize notes automatically and add richer links between ideas.",
+            body: "Run /wenlan distill when a topic is ready to become a source-linked note. With optional model setup, Wenlan can also organize notes automatically and add richer links between ideas.",
           },
         ],
       },
@@ -1700,6 +1700,7 @@ export const enContent = {
           title: "Install and open Wenlan",
           paragraphs: [
             "Download the desktop app for macOS Apple silicon or Windows x64, then follow its setup guide. Your notes and sources stay in your local Wenlan library.",
+            "A new library opens on a getting-started checklist. Pick how you want to start, then follow the steps: write a note, connect an AI tool, bring in sources, and ask your AI about what you saved.",
             "To organize sources into notes, choose a local model or configure a cloud provider in Settings. Cloud processing sends the relevant content to that provider."
           ],
           commands: [
@@ -1726,12 +1727,12 @@ export const enContent = {
           title: "Claude Code plugin",
           paragraphs: [
             "Install the Wenlan plugin inside Claude Code with the first two commands below. It adds the session commands and connects Claude Code to Wenlan.",
-            "Restart Claude Code if prompted, then run /wenlan:setup to check the connection. The first setup may need a few minutes to download the search model."
+            "Restart Claude Code if prompted, then run /wenlan to check the connection. The first setup may need a few minutes to download the search model. Everything else also starts from /wenlan: add what you want in plain words, such as /wenlan lint."
           ],
           commands: [
             "/plugin marketplace add wenlan-app/wenlan",
             "/plugin install wenlan@7xuanlu-wenlan",
-            "/wenlan:setup"
+            "/wenlan"
           ],
           ctas: []
         },
@@ -1741,7 +1742,7 @@ export const enContent = {
           title: "Codex",
           paragraphs: [
             "Install the Wenlan runtime using the command-line option above, then run these two commands in your terminal to add the Codex plugin.",
-            "Start a new Codex task and run /setup. If you only want MCP tools, wenlan connect codex is an alternative; it does not install the Wenlan slash skills."
+            "Start a new Codex task and type $wenlan to check the connection. If you only want MCP tools, wenlan connect codex is an alternative; it does not install the Wenlan slash skills."
           ],
           commands: [
             "codex plugin marketplace add wenlan-app/wenlan\ncodex plugin add wenlan@7xuanlu-wenlan"
@@ -1753,8 +1754,8 @@ export const enContent = {
           number: "04",
           title: "ChatGPT, Claude.ai or Muse (advanced)",
           paragraphs: [
-            "In the Wenlan desktop app, open Web access, choose whether to share the whole library or one Space, review the data-access notice, and turn it on. Add https://relay.wenlan.app/mcp as an OAuth MCP connection in your AI client.",
-            "Return to Wenlan to review and approve the pairing request. If you share one Space, other and future Spaces remain private. Keep Wenlan online during use, and revoke access in the app when no longer needed.",
+            "In the Wenlan desktop app, open Settings > Connections > Web access and turn on the switch. If you have Spaces, choose whether to share the whole library or one Space. Then use Add to Claude or Add to ChatGPT, or for Muse and other apps, add https://relay.wenlan.app/mcp as a custom OAuth MCP connector.",
+            "Return to Wenlan and click Allow to approve the pairing request. If you share one Space, other and future Spaces remain private. Keep Wenlan online during use, and revoke access in the app when no longer needed.",
             "Remote queries pass through the relay and your AI provider; local access activity is recorded. This is a custom connection, not a public ChatGPT Apps Directory listing."
           ],
           commands: [],
@@ -1762,7 +1763,7 @@ export const enContent = {
             {
               id: "remote-access",
               href: "/docs/mcp-clients",
-              label: "Remote Access guide (English)"
+              label: "Web access guide (English)"
             }
           ]
         },
@@ -1772,7 +1773,8 @@ export const enContent = {
           title: "Cursor, Claude Desktop, or another local client",
           paragraphs: [
             "First install the Wenlan runtime using the command-line option above. Then run the matching connection command and restart your AI client.",
-            "This connects the client to Wenlan through MCP. It does not add the Claude Code or Codex plugin commands."
+            "This connects the client to Wenlan through MCP. It does not add the Claude Code or Codex plugin commands.",
+            "With the desktop app, Settings > Connections > Add a tool connects detected tools with one click, including Muse Code."
           ],
           commands: [
             "wenlan connect cursor\n# or: claude-desktop, vscode, gemini"
