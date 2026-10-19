@@ -221,7 +221,7 @@ const setupArticles: BaseSpec[] = [
       "Do not expose the local daemon beyond loopback unless you are intentionally doing development or self-hosted networking work. Normal desktop setup should stay local. Do not capture every paragraph of a planning conversation; save the outcome, assumptions, and consequences.",
     faq: [
       "Is Claude Desktop the same setup as the Claude Code plugin?",
-      "No. Claude Desktop uses MCP-only setup. The Claude Code plugin adds slash commands and /setup on top of MCP.",
+      "No. Claude Desktop uses MCP-only setup. The Claude Code plugin adds slash commands and /wenlan on top of MCP.",
       "Can Claude Desktop create distilled pages?",
       "Yes. Claude Desktop can write pages through Wenlan's MCP tools using the model you're already chatting with. Background organization and automatic page updates are optional and need a separately configured model.",
     ],
@@ -471,7 +471,7 @@ const workflowArticles: BaseSpec[] = [
       "Wenlan keeps Sources, atomic knowledge, and maintained Pages separate. Codex can connect to the local daemon, retrieve a relevant Page, inspect its citations, and share the same reviewed project knowledge with Claude Code or another MCP client.",
     actionHeading: "Use AGENTS.md and the knowledge base for different jobs",
     actionIntro:
-      "Start with one bounded project topic and one inspectable document set. The slash commands below require the Wenlan Codex plugin: install it and run /setup once. The wenlan connect codex command configures the MCP connection only; MCP-only clients should use the equivalent Wenlan tools instead of slash commands. Then prove the complete read, cite, verify, and refresh loop before adding more material.",
+      "Start with one bounded project topic and one inspectable document set. The slash commands below require the Wenlan Codex plugin: install it and run $wenlan once. The wenlan connect codex command configures the MCP connection only; MCP-only clients should use the equivalent Wenlan tools instead of slash commands. Then prove the complete read, cite, verify, and refresh loop before adding more material.",
     actionBullets: [
       "Put build commands, repository boundaries, and non-obvious rules in AGENTS.md or CLAUDE.md.",
       "Keep code, tests, specifications, and first-party docs authoritative; do not copy facts the agent can read directly.",
@@ -481,7 +481,7 @@ const workflowArticles: BaseSpec[] = [
     ],
     code: {
       label: "One bounded Codex knowledge workflow",
-      code: "wenlan status\nwenlan connect codex\nwenlan sources add ~/project/docs\n/distill <project topic>\n/pages <project topic>\n/lint\n/curate",
+      code: "wenlan status\nwenlan connect codex\nwenlan sources add ~/project/docs\n/wenlan distill <project topic>\n/wenlan pages <project topic>\n/wenlan lint\n/wenlan curate",
     },
     caution:
       "Do not turn the knowledge base into a second copy of the repository. If the answer is already clear in current code or tests, link to that source; maintain only the reasoning, external constraint, or cross-file conclusion that is expensive to reconstruct.",
@@ -559,15 +559,15 @@ const workflowArticles: BaseSpec[] = [
     actionIntro:
       "Use the richest path for each client while keeping one daemon.",
     actionBullets: [
-      "Install the Claude Code plugin and run /setup.",
-      "After /setup succeeds, run ~/.wenlan/bin/wenlan connect cursor, or wenlan connect cursor if ~/.wenlan/bin is on PATH.",
+      "Install the Claude Code plugin and run /wenlan.",
+      "After /wenlan succeeds, run ~/.wenlan/bin/wenlan connect cursor, or wenlan connect cursor if ~/.wenlan/bin is on PATH.",
       "Verify capture in one client and recall in the other with the same daemon, data dir, and space.",
       "Use the same space for the same project; Cursor should pass the same space in Wenlan MCP calls or lock WENLAN_SPACE in ~/.cursor/mcp.json.",
       "Use /handoff in Claude Code when ending work that Cursor will continue.",
     ],
     code: {
       label: "Cursor and Claude Code smoke test",
-      code: "/setup\n~/.wenlan/bin/wenlan connect cursor\n# Capture a harmless fact in Cursor with the same Wenlan space.\n# Recall that fact from Claude Code with /recall.\n# Then capture in Claude Code and recall from Cursor.",
+      code: "/wenlan\n~/.wenlan/bin/wenlan connect cursor\n# Capture a harmless fact in Cursor with the same Wenlan space.\n# Recall that fact from Claude Code with /recall.\n# Then capture in Claude Code and recall from Cursor.",
     },
     caution:
       "If the tools appear to disagree, check space selection, daemon URL, and data directory before assuming memory is missing. The prebuilt runtime supports macOS, Linux glibc, and Windows; Claude Code on Windows may involve WSL or Git Bash caveats.",
@@ -625,8 +625,8 @@ const workflowArticles: BaseSpec[] = [
     actionIntro: "Start with a harmless decision in a registered test Space. Our example uses seo-shared-proof-20261018; choose your own name. You do not need acpx: it opened independent sessions for our test. The ordinary Claude Code and Codex plugins expose the same capture and recall tools.",
     actionBullets: [
       "Set up Wenlan once.",
-      "Install the Claude Code plugin with /plugin marketplace add wenlan-app/wenlan, /plugin install wenlan@7xuanlu-wenlan, restart Claude Code, then run /wenlan:setup.",
-      "Add the Codex plugin: codex plugin marketplace add wenlan-app/wenlan, then codex plugin add wenlan@7xuanlu-wenlan, start a new task and run /setup.",
+      "Install the Claude Code plugin with /plugin marketplace add wenlan-app/wenlan, /plugin install wenlan@7xuanlu-wenlan, restart Claude Code, then run /wenlan.",
+      "Add the Codex plugin: codex plugin marketplace add wenlan-app/wenlan, then codex plugin add wenlan@7xuanlu-wenlan, start a new task and run $wenlan.",
       "Register the test Space with ~/.wenlan/bin/wenlan spaces add seo-shared-proof-20261018. Ask both clients to use that exact Space, or launch both with WENLAN_SPACE set to it. Check the returned Space rather than relying on a folder-name guess.",
       "In Claude Code, ask Wenlan to capture one decision, its rejected alternative, and the reason. Keep the returned source_memory_id and write_outcome. A failed or staged write is not a live memory.",
       "Open a fresh Codex conversation. Ask it to recall the decision from that Space without pasting the answer, verification code, or source ID. Require Wenlan recall and the retrieved source_id.",
@@ -772,7 +772,7 @@ const workflowArticles: BaseSpec[] = [
     ],
     code: {
       label: "After Wenlan and the AI client are configured",
-      code: "wenlan status\nwenlan sources add ~/Research/papers\n# In a Wenlan plugin client:\n/distill <research question>\n/pages <research question>\n/lint\n/curate",
+      code: "wenlan status\nwenlan sources add ~/Research/papers\n# In a Wenlan plugin client:\n/wenlan distill <research question>\n/wenlan pages <research question>\n/wenlan lint\n/wenlan curate",
     },
     caution:
       "This workflow is not scholarly search, DOI discovery, Zotero import, reference formatting, automatic literature-review writing, or proof that a cited paper is true. Wenlan reads text-extractable PDFs; scanned PDFs require OCR first, and study quality, statistics, and academic integrity still require human review.",
@@ -867,7 +867,7 @@ const workflowArticles: BaseSpec[] = [
     ],
     code: {
       label: "Wenlan proof loop after setup",
-      code: "wenlan status\nwenlan sources add ~/Knowledge/evaluation-set\n# In a Wenlan plugin client:\n/distill <tested topic>\n/pages <tested topic>\n/lint\n/curate",
+      code: "wenlan status\nwenlan sources add ~/Knowledge/evaluation-set\n# In a Wenlan plugin client:\n/wenlan distill <tested topic>\n/wenlan pages <tested topic>\n/wenlan lint\n/wenlan curate",
     },
     caution:
       "Do not choose from a leaderboard alone. Product capabilities and pricing change, while your source quality, privacy boundary, maintenance effort, and acceptance questions determine whether a knowledge base is trustworthy for your work.",
@@ -958,14 +958,14 @@ const workflowArticles: BaseSpec[] = [
       "Pick one topic that you and your agents ask about often, such as a project folder or an MOC. A small boundary keeps failures visible.",
       "Install the runtime for your operating system and run `wenlan status` to confirm the local daemon is healthy.",
       "Run `wenlan sources add <vault path>` and read the found, ingested, and skipped counts. Markdown content ingests; plugin-specific features like Dataview queries, Canvas boards, and embedded views are treated as plain Markdown text, not re-executed.",
-      "In a Wenlan plugin client, run `/distill <topic>` and then `/pages <topic>`. In an MCP-only client, use the equivalent Wenlan tools that client exposes.",
-      "Run `/lint` and `/curate` to catch malformed citations, orphan links, and broken embeddings before anyone relies on the Page.",
+      "In a Wenlan plugin client, run `/wenlan distill <topic>` and then `/wenlan pages <topic>`. In an MCP-only client, use the equivalent Wenlan tools that client exposes.",
+      "Run `/wenlan lint` and `/wenlan curate` to catch malformed citations, orphan links, and broken embeddings before anyone relies on the Page.",
       "Optional round trip: symlink `~/.wenlan/pages/` into the vault so distilled Pages are visible where you write. Your edits stay human-owned; machine refreshes become reviewable revisions.",
       "Verify the loop: ask your agent a question the vault answers, open the citation behind the answer, edit the source note, and confirm the Page is marked stale before trusting it again.",
     ],
     code: {
       label: "Register the vault and distill one topic",
-      code: "wenlan status\nwenlan sources add ~/Documents/obsidian-vault\n# in a Wenlan plugin client:\n/distill <topic you re-read often>\n/pages <topic you re-read often>\n/lint\n/curate",
+      code: "wenlan status\nwenlan sources add ~/Documents/obsidian-vault\n# in a Wenlan plugin client:\n/wenlan distill <topic you re-read often>\n/wenlan pages <topic you re-read often>\n/wenlan lint\n/wenlan curate",
     },
     caution:
       "Keep Obsidian as the writing surface. The vault Source resyncs on demand, not in the background, so re-run the sync after heavy editing sessions. Image-only or scanned attachments need OCR before their text is extractable, and a Page is only as current as its last reviewed refresh.",
@@ -1050,16 +1050,16 @@ const workflowArticles: BaseSpec[] = [
     actionBullets: [
       "Install the runtime for your operating system. On macOS Apple Silicon with Node.js: `npx -y wenlan setup`. Linux and Windows have their own one-command paths; the setup doc below lists them all.",
       "Run `wenlan status` and confirm the local daemon reports healthy before touching any client configuration.",
-      "Connect one coding client first. Claude Code and Codex have Wenlan plugin paths with a `/setup` skill that installs or repairs the runtime and verifies the MCP round trip. For Cursor and other local MCP clients, `~/.wenlan/bin/wenlan connect cursor` writes the client configuration.",
+      "Connect one coding client first. Claude Code and Codex have Wenlan plugin paths with a `/wenlan setup` workflow that installs or repairs the runtime and verifies the MCP round trip. For Cursor and other local MCP clients, `~/.wenlan/bin/wenlan connect cursor` writes the client configuration.",
       "Add one bounded source set: `wenlan sources add <project docs folder>`. Read the found, ingested, and skipped counts; supported inputs are Markdown, text, text-extractable PDFs, folders, and read-only Obsidian vaults.",
-      "Capture two or three real decisions or lessons with the client's capture path, then run `/distill <topic>` and `/pages <topic>` in a plugin client, or the equivalent Wenlan tools in an MCP-only client. Distill only what the sources can actually support.",
-      "Run `/lint` and `/curate` to catch malformed citations, orphan links, and broken embeddings before anyone relies on the Page.",
+      "Capture two or three real decisions or lessons with the client's capture path, then run `/wenlan distill <topic>` and `/wenlan pages <topic>` in a plugin client, or the equivalent Wenlan tools in an MCP-only client. Distill only what the sources can actually support.",
+      "Run `/wenlan lint` and `/wenlan curate` to catch malformed citations, orphan links, and broken embeddings before anyone relies on the Page.",
       "Verify from a second client: retrieve the Page, open the citation to confirm it supports the claim, edit the cited source, and confirm the Page is marked stale.",
       "Only then add the next source set or client. Growing in small verified steps keeps one bad import from poisoning the whole knowledge base.",
     ],
     code: {
       label: "First-client setup sequence",
-      code: "npx -y wenlan setup\nwenlan status\n~/.wenlan/bin/wenlan connect cursor\nwenlan sources add ~/projects/my-app/docs\n# in a Wenlan plugin client:\n/distill <recurring project topic>\n/pages <recurring project topic>\n/lint\n/curate",
+      code: "npx -y wenlan setup\nwenlan status\n~/.wenlan/bin/wenlan connect cursor\nwenlan sources add ~/projects/my-app/docs\n# in a Wenlan plugin client:\n/wenlan distill <recurring project topic>\n/wenlan pages <recurring project topic>\n/wenlan lint\n/wenlan curate",
     },
     caution:
       "Do not duplicate the repository inside the knowledge base. Current code, tests, and specifications stay authoritative; maintain only the reasoning, external constraints, and cross-file conclusions that are expensive to reconstruct. Keep AGENTS.md or CLAUDE.md short and let cited Pages carry the long explanations on demand.",
@@ -1148,7 +1148,7 @@ const consultantClientProjectArticle: BaseSpec = {
   ],
   code: {
     label: "After Wenlan and the AI client are configured",
-    code: "wenlan status\nwenlan sources add ~/Clients/acme-approved-sources\n# In a Wenlan plugin client:\n/distill <client project question>\n/pages <client project question>\n/lint\n/curate\n/handoff",
+    code: "wenlan status\nwenlan sources add ~/Clients/acme-approved-sources\n# In a Wenlan plugin client:\n/wenlan distill <client project question>\n/wenlan pages <client project question>\n/wenlan lint\n/wenlan curate\n/handoff",
   },
   caution:
     "Local-first storage does not replace a consulting agreement, client consent, access control, retention policy, redaction, or a secure document system. Start with non-sensitive sample data, keep each client isolated, and withhold any claim whose current source cannot be verified.",
@@ -1243,7 +1243,7 @@ const investmentResearchKnowledgeBaseArticle: BaseSpec = {
   ],
   code: {
     label: "After Wenlan and the AI client are configured",
-    code: "wenlan status\nwenlan sources add ~/Research/companies/acme\n# In a Wenlan plugin client:\n/distill <company and reporting-period question>\n/pages <company research topic>\n/lint\n/curate",
+    code: "wenlan status\nwenlan sources add ~/Research/companies/acme\n# In a Wenlan plugin client:\n/wenlan distill <company and reporting-period question>\n/wenlan pages <company research topic>\n/wenlan lint\n/wenlan curate",
   },
   caution:
     "This workflow is for organizing user-provided, text-extractable research sources. Scanned PDFs require external OCR; tables, financial statements, and calculations must be checked against the original filing and a deterministic model. It is not investment advice and does not replace licensed data, compliance review, or professional judgment.",
@@ -1716,7 +1716,7 @@ const trustArticles: BaseSpec[] = [
       "Wenlan separates Sources, atomic Memories, and maintained Pages. Captures keep provenance; explicit replacements preserve a supersedes chain; stale Pages can be rebuilt from current support; machine changes to human-owned writing become reviewable revisions; and an optional reconcile pass can queue protected conflicts instead of overwriting history. That pass is off by default and does not replace source review.",
     actionHeading: "Use a staged write and review loop",
     actionIntro:
-      "Use one small conflict fixture before several agents depend on the same knowledge base. The slash-command recipe below requires the Wenlan Codex plugin after `/setup`.",
+      "Use one small conflict fixture before several agents depend on the same knowledge base. The slash-command recipe below requires the Wenlan Codex plugin after `$wenlan setup`.",
     actionBullets: [
       "Define the authoritative source and the write scope for the fact or Page. Agent identity alone is not authority.",
       "Record the evidence, candidate claim, writer, source revision, captured time, and expected version together.",
@@ -1727,7 +1727,7 @@ const trustArticles: BaseSpec[] = [
     ],
     code: {
       label: "Wenlan Codex plugin: inspect, capture, distill, and review",
-      code: "/pages <shared topic>\n/capture <candidate claim + source + why it matters>\n/distill <shared topic>\n/lint\n/curate",
+      code: "$wenlan pages <shared topic>\n/capture <candidate claim + source + why it matters>\n$wenlan distill <shared topic>\n$wenlan lint\n$wenlan curate",
     },
     caution:
       "Wenlan is not a multi-agent scheduler, distributed lock service, or automatic consensus engine. Repository files, tests, specifications, and maintained first-party documents remain authoritative. The current public MCP `write_page` does not accept `expected_version`, so this recipe performs the source-and-version comparison before the write instead of claiming an atomic stale-write rejection. Human-owned Page refreshes become reviewable revisions. Agents without the Codex plugin can use local MCP tools (`recall`, `capture`, `distill`, `lint`, and `list_pending_revisions`) or the local CLI (`wenlan pages`, `wenlan capture`, `wenlan lint`, and `wenlan curate revisions`). Local Page refresh is available only through local stdio MCP; semantic conflicts still require evidence and review.",
@@ -1908,7 +1908,7 @@ const trustArticles: BaseSpec[] = [
       "Wenlan keeps Sources, atomic knowledge, and maintained Pages separate. An agent can recall a narrow topic or open a relevant Page, inspect its citations, and return to the current source instead of replaying a whole archive; Wenlan does not replace direct code, test, policy, or document verification.",
     actionHeading: "Use this query-or-skip decision policy",
     actionIntro:
-      "Classify the task before searching, then increase context only when the previous layer cannot support the answer. The slash-command example requires the Wenlan Codex plugin: install it and run /setup once. The wenlan connect codex command configures only the MCP connection; MCP-only clients should call Wenlan recall and inspect the Page results it returns. Use the local wenlan pages <topic> CLI when you need to list or open Pages without the plugin.",
+      "Classify the task before searching, then increase context only when the previous layer cannot support the answer. The slash-command example requires the Wenlan Codex plugin: install it and run $wenlan once. The wenlan connect codex command configures only the MCP connection; MCP-only clients should call Wenlan recall and inspect the Page results it returns. Use the local wenlan pages <topic> CLI when you need to list or open Pages without the plugin.",
     actionBullets: [
       "Query: the answer depends on current project facts, private material, organizational policy, exact numbers, or a citation.",
       "Pre-retrieve: every valid answer must use one controlled source, such as a compliance rule or operating procedure.",
@@ -1920,7 +1920,7 @@ const trustArticles: BaseSpec[] = [
     ],
     code: {
       label: "Retrieve a narrow topic, then inspect its maintained page",
-      code: "# Wenlan plugin:\n/recall <topic>\n/pages <topic>\n\n# MCP-only client: call Wenlan recall and inspect returned Page results.\n# Local CLI for Page listing or opening:\nwenlan pages <topic>",
+      code: "# Wenlan plugin:\n/recall <topic>\n/wenlan pages <topic>\n\n# MCP-only client: call Wenlan recall and inspect returned Page results.\n# Local CLI for Page listing or opening:\nwenlan pages <topic>",
     },
     caution:
       "Smaller context is not automatically better. A skipped lookup can save tokens and still produce a wrong answer; an eager lookup can add irrelevant chunks and reduce focus. Keep the authoritative source boundary explicit and measure retrieval behavior with representative tasks.",
@@ -2035,7 +2035,7 @@ const trustArticles: BaseSpec[] = [
     ],
     code: {
       label: "Inspect and review one Wenlan Page",
-      code: "/pages <topic>\n/lint\n/curate",
+      code: "/wenlan pages <topic>\n/wenlan lint\n/wenlan curate",
     },
     caution:
       "This workflow is a diagnostic checklist, not an automatic RAG benchmark. A cited source may itself be wrong, outdated, or non-authoritative, so consequential claims still require the maintained first-party source and appropriate human review.",
@@ -2129,7 +2129,7 @@ const trustArticles: BaseSpec[] = [
     ],
     code: {
       label: "Wenlan knowledge-base loop",
-      code: "/brief <topic>\n/capture <fact + source + why>\n/distill <topic>\n/pages <topic>\n/lint\n/curate",
+      code: "/brief <topic>\n/capture <fact + source + why>\n/wenlan distill <topic>\n/wenlan pages <topic>\n/wenlan lint\n/wenlan curate",
     },
     caution:
       "A maintained page is still a claim, not ground truth. Verify important conclusions against the cited source, and mark the page stale when the source or operating context changes.",
@@ -2184,7 +2184,7 @@ const trustArticles: BaseSpec[] = [
     problem:
       "The failure is not always forgetting. An agent can confidently retrieve an old decision, mix facts from two projects, surface duplicate rules, or return both sides of a changed fact. That stale or contradictory agent memory can steer new work in the wrong direction while still looking plausible.",
     wenlanFit:
-      "Wenlan keeps this workflow inspectable: /recall finds matching memories and source IDs, /lint deep can surface semantic contradiction candidates without changing data, and /curate revisions lets you accept or dismiss staged updates. /forget permanently deletes one explicit source ID and cannot be undone.",
+      "Wenlan keeps this workflow inspectable: /recall finds matching memories and source IDs, /wenlan lint deep can surface semantic contradiction candidates without changing data, and /wenlan curate revisions lets you accept or dismiss staged updates. /wenlan forget permanently deletes one explicit source ID and cannot be undone.",
     actionHeading: "Diagnose before you delete",
     actionIntro:
       "Treat stale memory like a debugging problem: reproduce it, trace it, correct it, and verify the same retrieval again.",
@@ -2192,21 +2192,21 @@ const trustArticles: BaseSpec[] = [
       "Repeat the query that returned stale context and write down the expected current fact.",
       "Use /recall to inspect the matching content, source ID, revision state, and active project space.",
       "Check current source code, documentation, or the recorded decision before changing memory.",
-      "Run /lint deep when you need a read-only pass over possible contradictions or duplicates.",
-      "Capture the corrected current fact; if Wenlan stages a revision, inspect it with /curate revisions before accepting or dismissing it.",
+      "Run /wenlan lint deep when you need a read-only pass over possible contradictions or duplicates.",
+      "Capture the corrected current fact; if Wenlan stages a revision, inspect it with /wenlan curate revisions before accepting or dismissing it.",
       "Repeat the original recall and verify that current context now ranks ahead of obsolete context.",
-      "Use /forget only for an explicit record that is wrong, sensitive, or should not remain in local history.",
+      "Use /wenlan forget only for an explicit record that is wrong, sensitive, or should not remain in local history.",
     ],
     code: {
       label: "Stale-memory diagnostic",
-      code: "/recall <stale topic>\n/lint deep\n/capture <current fact + why>\n/curate revisions\n/recall <same topic>\n# Destructive; cannot be undone:\n/forget <source_id>",
+      code: "/recall <stale topic>\n/wenlan lint deep\n/capture <current fact + why>\n/wenlan curate revisions\n/recall <same topic>\n# Destructive; cannot be undone:\n/wenlan forget <source_id>",
     },
     caution:
-      "Do not delete every contradiction. It may show that a decision changed or that two contexts were mixed. Plain /lint and /lint deep are read-only; repair is a separate approval-gated workflow. Verify the source and scope before changing any record.",
+      "Do not delete every contradiction. It may show that a decision changed or that two contexts were mixed. Plain /wenlan lint and /wenlan lint deep are read-only; repair is a separate approval-gated workflow. Verify the source and scope before changing any record.",
     faq: [
       "Should I delete every stale or contradictory memory?",
       "No. Preserve ordinary changes as corrections or accepted revisions so the history remains inspectable. Delete only records that are wrong, sensitive, or should not be retained.",
-      "Does /lint deep fix stale memory automatically?",
+      "Does /wenlan lint deep fix stale memory automatically?",
       "No. It is a read-only diagnostic. Review the evidence first, then use an explicit correction, revision decision, or destructive forget action.",
     ],
     relatedSlugs: ["ai-work-memory", "local-first-ai-memory", "source-backed-wiki-pages-ai-work"],
@@ -2369,8 +2369,8 @@ const localKnowledgeBaseArticle: LearnArticle = {
       bullets: [
         "Wenlan supports .md, .txt, and text-extractable .pdf sources. Check the found, ingested, skipped, and error counts returned by the source import command.",
         "Re-running wenlan sources add <path> resyncs an already registered path. Regular files and folders can sync incrementally; an Obsidian vault is read-only and resyncs on demand.",
-        "In Claude Code or Codex with the Wenlan plugin, /distill <topic> creates a maintained Page from relevant sources and /pages <topic> opens it. These slash commands run in the plugin client; they are separate from the shell commands above. An MCP-only client can use the Wenlan tools it exposes.",
-        "Pages remain readable as Markdown and retain inspectable source support. Use /lint and /curate in a plugin client, or the equivalent Wenlan tools in an MCP-only client, to review a Page.",
+        "In Claude Code or Codex with the Wenlan plugin, /wenlan distill <topic> creates a maintained Page from relevant sources and /wenlan pages <topic> opens it. These slash commands run in the plugin client; they are separate from the shell commands above. An MCP-only client can use the Wenlan tools it exposes.",
+        "Pages remain readable as Markdown and retain inspectable source support. Use /wenlan lint and /wenlan curate in a plugin client, or the equivalent Wenlan tools in an MCP-only client, to review a Page.",
       ],
     },
     {
@@ -2633,7 +2633,7 @@ const sreIncidentKnowledgeBaseArticle: BaseSpec = {
   ],
   code: {
     label: "After Wenlan and the AI client are configured",
-    code: "wenlan status\nwenlan sources add ~/Ops/approved-incident-knowledge\n# In a Wenlan plugin client:\n/distill <service and incident class>\n/pages <service incident runbook>\n/lint\n/curate",
+    code: "wenlan status\nwenlan sources add ~/Ops/approved-incident-knowledge\n# In a Wenlan plugin client:\n/wenlan distill <service and incident class>\n/wenlan pages <service incident runbook>\n/wenlan lint\n/wenlan curate",
   },
   caution:
     "Keep monitoring, alert routing, telemetry, incident command, credentials, change approvals, rollback execution, and emergency access in their purpose-built systems. Wenlan does not validate a command against production or guarantee that a runbook is safe. A named owner must review service version, environment, permissions, risk, expected output, abort conditions, and rollback before operational use.",
@@ -2783,7 +2783,7 @@ const competitiveIntelligenceKnowledgeBaseArticle: BaseSpec = {
   ],
   code: {
     label: "A bounded competitor-evidence workflow",
-    code: "wenlan status\nwenlan sources add ~/Research/competitors\n# In a Wenlan plugin client:\n/distill <competitor research question>\n/pages <competitor topic>\n/lint\n/curate",
+    code: "wenlan status\nwenlan sources add ~/Research/competitors\n# In a Wenlan plugin client:\n/wenlan distill <competitor research question>\n/wenlan pages <competitor topic>\n/wenlan lint\n/wenlan curate",
   },
   caution:
     "This is not automated market intelligence. Wenlan does not crawl or scrape competitor sites, monitor live websites or pricing, ingest reviews, discover competitors, run alerts, score products, generate recommendations, or make legal or commercial decisions. It only organizes supported sources you are allowed to use; verify public facts, permissions, dates, and strategic conclusions with the responsible human reviewer.",
@@ -2940,7 +2940,7 @@ const ictSupplierDueDiligenceArticle: BaseSpec = {
   ],
   code: {
     label: "A bounded supplier-evidence workflow",
-    code: "wenlan status\nwenlan sources add ~/Reviews/approved-supplier-docs\n# In a Wenlan plugin client:\n/distill <supplier and review scope>\n/pages <supplier evidence pack>\n/lint\n/curate",
+    code: "wenlan status\nwenlan sources add ~/Reviews/approved-supplier-docs\n# In a Wenlan plugin client:\n/wenlan distill <supplier and review scope>\n/wenlan pages <supplier evidence pack>\n/wenlan lint\n/wenlan curate",
   },
   caution:
     "A questionnaire or evidence pack is not a security guarantee. Wenlan does not validate certifications, perform legal or privacy review, discover vendors, crawl websites, monitor live supplier changes, scan vulnerabilities, score risk, or approve or reject a supplier. Keep sensitive material inside your organization's approved access controls and use qualified human reviewers.",
@@ -3092,7 +3092,7 @@ const customerSupportAnswerKnowledgeBaseArticle: BaseSpec = {
   ],
   code: {
     label: "Wenlan workflow and a neutral support answer record",
-    code: "wenlan status\nwenlan sources add ~/Support/approved-product-policy\n# In a Wenlan plugin client:\n/distill <support answer topic>\n/pages <support answer topic>\n/lint\n/curate\n\nquestion: Can an existing subscription change plans immediately?\nsupported_answer: <answer supported by the approved policy>\nscope: <plan, region, account state, and effective date>\ndo_not_promise: <actions or outcomes the source does not authorize>\nescalate_when: <conditions requiring a human owner>\nsource_revision: <document ID, section, and revision>\nowner: <human content owner>\nnext_review: <date or product-change trigger>",
+    code: "wenlan status\nwenlan sources add ~/Support/approved-product-policy\n# In a Wenlan plugin client:\n/wenlan distill <support answer topic>\n/wenlan pages <support answer topic>\n/wenlan lint\n/wenlan curate\n\nquestion: Can an existing subscription change plans immediately?\nsupported_answer: <answer supported by the approved policy>\nscope: <plan, region, account state, and effective date>\ndo_not_promise: <actions or outcomes the source does not authorize>\nescalate_when: <conditions requiring a human owner>\nsource_revision: <document ID, section, and revision>\nowner: <human content owner>\nnext_review: <date or product-change trigger>",
   },
   caution:
     "This is a source-backed content review workflow, not a help desk or customer-support automation system. Wenlan does not handle PII or promise redaction, provide team permissions, run support analytics, approve policies automatically, publish customer-facing answers, generate or deliver replies, synchronize channels, or automatically escalate a case. A qualified human owner must decide what an approved answer means and when it can be reused.",
@@ -3238,7 +3238,7 @@ const courseWikiFromLectureNotesArticle: BaseSpec = {
   ],
   code: {
     label: "Wenlan workflow and a neutral course concept record",
-    code: "wenlan status\nwenlan sources add ~/Courses/distributed-systems/materials\n# In a Wenlan plugin client:\n/distill <course concept>\n/pages <course concept>\n/lint\n/curate\n\nconcept: leader election\nquestion: Why can two nodes not both remain leader in the same term?\nprerequisites: terms; quorum intersection\nanswer: <short explanation supported by the course material>\nsources: <lecture, slide or page, and source ID>\nsource_revision: <term, file revision, or material date>\nreview_state: <current | stale | contradicted | unresolved>\nreviewer: <student or educator>\nnext_review: <source-change trigger or date>",
+    code: "wenlan status\nwenlan sources add ~/Courses/distributed-systems/materials\n# In a Wenlan plugin client:\n/wenlan distill <course concept>\n/wenlan pages <course concept>\n/wenlan lint\n/wenlan curate\n\nconcept: leader election\nquestion: Why can two nodes not both remain leader in the same term?\nprerequisites: terms; quorum intersection\nanswer: <short explanation supported by the course material>\nsources: <lecture, slide or page, and source ID>\nsource_revision: <term, file revision, or material date>\nreview_state: <current | stale | contradicted | unresolved>\nreviewer: <student or educator>\nnext_review: <source-change trigger or date>",
   },
   caution:
     "This is a source-backed study organization workflow, not an AI tutor or assessment system. Wenlan does not generate flashcards, does not create quizzes, does not transcribe audio, does not run OCR, does not grade work, does not tutor students, does not solve homework, does not plan exams, and is not equivalent to NotebookLM. The learner or educator remains responsible for source rights, interpretation, academic integrity, and review.",
@@ -3385,7 +3385,7 @@ const businessMetricDefinitionKnowledgeBaseArticle: BaseSpec = {
   ],
   code: {
     label: "Wenlan workflow and a neutral metric-definition record",
-    code: "wenlan status\nwenlan sources add ~/Metrics/approved-specifications\n# In a Wenlan plugin client:\n/distill <metric definition>\n/pages <metric name>\n/lint\n/curate\n\nmetric: activated customer\nbusiness_definition: <what the approved sources mean>\nformula_text: <non-executable formula from the approved spec>\ngrain: <account | workspace | user | event>\ndimensions: <allowed breakdowns>\ninclusions: <included states or events>\nexclusions: <excluded states, events, or time windows>\nowner: <accountable team or reviewer>\nsources: <source IDs and exact locations>\nsource_revision: <version or effective date>\nreview_state: <current | stale | contradicted | unresolved>\nsupersedes: <previous definition or none>\nnext_review: <source-change trigger or date>",
+    code: "wenlan status\nwenlan sources add ~/Metrics/approved-specifications\n# In a Wenlan plugin client:\n/wenlan distill <metric definition>\n/wenlan pages <metric name>\n/wenlan lint\n/wenlan curate\n\nmetric: activated customer\nbusiness_definition: <what the approved sources mean>\nformula_text: <non-executable formula from the approved spec>\ngrain: <account | workspace | user | event>\ndimensions: <allowed breakdowns>\ninclusions: <included states or events>\nexclusions: <excluded states, events, or time windows>\nowner: <accountable team or reviewer>\nsources: <source IDs and exact locations>\nsource_revision: <version or effective date>\nreview_state: <current | stale | contradicted | unresolved>\nsupersedes: <previous definition or none>\nnext_review: <source-change trigger or date>",
   },
   caution:
     "This workflow maintains reviewed definition records; it is not a data catalog, semantic layer, metric store, governance platform, or calculation engine. Wenlan does not ingest CSV, does not run SQL, does not connect to a warehouse or BI system, does not compute metrics, does not provide lineage, does not monitor data quality, does not manage permissions, does not approve definitions, and does not automatically reconcile conflicting formulas. A named domain owner remains responsible for the business decision.",
@@ -3601,7 +3601,7 @@ const productResearchArticle: LearnArticle = {
       ],
       code: {
         label: "A bounded product-research knowledge workflow",
-        code: "wenlan status\nwenlan sources add ~/Research/product-notes\n/distill <product decision>\n/pages <product decision>\n/lint\n/curate",
+        code: "wenlan status\nwenlan sources add ~/Research/product-notes\n/wenlan distill <product decision>\n/wenlan pages <product decision>\n/wenlan lint\n/wenlan curate",
       },
     },
     {

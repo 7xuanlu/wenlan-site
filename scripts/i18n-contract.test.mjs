@@ -1100,7 +1100,7 @@ test("consultant client-project family owns one distinct trilingual engagement w
   assert.match(JSON.stringify(english), /sensitive|confidential/i);
   assert.match(
     english.sections.map((section) => section.code?.code ?? "").join("\n"),
-    /wenlan sources add[\s\S]*\/distill[\s\S]*\/lint[\s\S]*\/curate/,
+    /wenlan sources add[\s\S]*\/wenlan distill[\s\S]*\/wenlan lint[\s\S]*\/wenlan curate/,
   );
 
   for (const [locale, titlePattern, workflowPattern] of [
@@ -1201,7 +1201,7 @@ test("product-research family owns one distinct trilingual evidence-to-PRD workf
   assert.match(JSON.stringify(english), /does not transcribe|does not.*Jira|does not.*roadmap/i);
   assert.match(
     english.sections.map((section) => section.code?.code ?? "").join("\n"),
-    /wenlan sources add[\s\S]*\/distill[\s\S]*\/lint[\s\S]*\/curate/,
+    /wenlan sources add[\s\S]*\/wenlan distill[\s\S]*\/wenlan lint[\s\S]*\/wenlan curate/,
   );
 
   for (const [locale, titlePattern, workflowPattern] of [
@@ -1743,8 +1743,8 @@ for (const [locale, copy] of [
       "/recall",
       "/capture",
       "/handoff",
-      "/distill",
-      "/pages",
+      "/wenlan distill",
+      "/wenlan pages",
       "CLAUDE.md",
       "AGENTS.md",
       "My notes",
@@ -1800,7 +1800,7 @@ test("localized Learn hubs and source-backed pages lead with AI knowledge-base i
     assert.ok(headings.includes(expected.verification));
     assert.ok(article.officialReferences?.length >= 3);
     const articleText = JSON.stringify(article);
-    for (const command of ["/capture", "/distill", "/pages", "/lint", "/curate"]) {
+    for (const command of ["/capture", "/wenlan distill", "/wenlan pages", "/wenlan lint", "/wenlan curate"]) {
       assert.match(articleText, new RegExp(command.replace("/", "\\/")));
     }
   }
@@ -1972,8 +1972,8 @@ test("multi-agent knowledge conflict guide owns a distinct three-locale maintena
     assert.match(JSON.stringify(article), new RegExp(expected.localMcp));
     assert.match(JSON.stringify(article), /wenlan pages/);
     assert.match(JSON.stringify(article), /不接受 `expected_version`/);
-    assert.match(JSON.stringify(article), /\/lint/);
-    assert.match(JSON.stringify(article), /\/curate/);
+    assert.match(JSON.stringify(article), /\$wenlan lint/);
+    assert.match(JSON.stringify(article), /\$wenlan curate/);
     assert.ok(article.officialReferences?.length >= 5);
   }
 });

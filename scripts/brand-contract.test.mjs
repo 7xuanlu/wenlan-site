@@ -444,8 +444,8 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.match(article, /\/recall <question>/);
   assert.match(article, /\/capture <decision \+ why>/);
   assert.match(article, /\/handoff/);
-  assert.match(article, /\/distill <topic>/);
-  assert.match(article, /\/pages <topic>/);
+  assert.match(article, /\/wenlan distill <topic>/);
+  assert.match(article, /\/wenlan pages <topic>/);
   assert.match(article, /comparisonTable:\s*\{\s*competitorName:\s*"DIY folder \+ CLAUDE\.md"/);
   assert.match(article, /does not replace codebase search/);
   assert.match(article, /href:\s*"#worked-example"/);
@@ -478,10 +478,10 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   );
   assert.match(supportArticle, /actionHeading:\s*"Build the smallest maintainable loop"/);
   assert.match(supportArticle, /\/capture <fact \+ source \+ why>/);
-  assert.match(supportArticle, /\/distill <topic>/);
-  assert.match(supportArticle, /\/pages <topic>/);
-  assert.match(supportArticle, /\/lint/);
-  assert.match(supportArticle, /\/curate/);
+  assert.match(supportArticle, /\/wenlan distill <topic>/);
+  assert.match(supportArticle, /\/wenlan pages <topic>/);
+  assert.match(supportArticle, /\/wenlan lint/);
+  assert.match(supportArticle, /\/wenlan curate/);
   assert.match(supportArticle, /https:\/\/github\.com\/wenlan-app\/wenlan#what-does-wenlan-build/);
   assert.match(supportArticle, /https:\/\/github\.com\/wenlan-app\/wenlan#daily-workflow/);
   assert.match(
@@ -1001,12 +1001,12 @@ test("stale AI agent memory page exposes a source-backed diagnostic workflow", a
   assert.match(article, /stale AI agent memory/);
   assert.match(article, /contradictory agent memory/);
   assert.match(article, /\/recall <stale topic>/);
-  assert.match(article, /\/lint deep/);
+  assert.match(article, /\/wenlan lint deep/);
   assert.match(article, /\/capture <current fact \+ why>/);
-  assert.match(article, /\/curate revisions/);
-  assert.match(article, /\/forget <source_id>/);
+  assert.match(article, /\/wenlan curate revisions/);
+  assert.match(article, /\/wenlan forget <source_id>/);
   assert.match(article, /Destructive; cannot be undone/);
-  assert.match(article, /Plain \/lint and \/lint deep are read-only/);
+  assert.match(article, /Plain \/wenlan lint and \/wenlan lint deep are read-only/);
   assert.match(article, /href: "https:\/\/wenlan\.app\/docs\/review-and-trust"/);
   assert.match(
     article,
