@@ -1522,14 +1522,21 @@ test("public command guidance tracks the current plugin contract", async () => {
   assert.deepEqual(sharedCommands, [
     "brief",
     "capture",
+    "handoff",
+    "recall",
+    "wenlan",
+  ]);
+  // Current plugins route operational verbs through the Wenlan entrypoint.
+  // Keep their inventory checked separately from directly invocable skills.
+  assert.deepEqual(contract.skills
+    .filter((skill) => skill.status === "hidden_routed")
+    .map((skill) => skill.name)
+    .sort(), [
     "curate",
     "distill",
     "forget",
-    "handoff",
-    "help",
     "lint",
     "pages",
-    "recall",
     "setup",
   ]);
   for (const [path, source] of surfaces) {
