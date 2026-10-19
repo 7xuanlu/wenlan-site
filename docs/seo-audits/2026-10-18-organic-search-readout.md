@@ -2,7 +2,7 @@
 
 ## 下一個英文頁：跨對話後恢復工作（10-19，本地已驗證）
 
-發布授權（10-19）：使用者明確要求本篇與共用SEO檢查流程一起合併發布；不提交Google索引請求，等自然抓取，weekly維持暫停。以下本地驗證不冒充正式部署或曝光結果；合併與部署收據待本批PR完成後記錄。
+發布授權（10-19）：使用者明確要求本篇與共用SEO檢查流程一起合併發布；不提交Google索引請求，等自然抓取，weekly維持暫停。以下本地驗證不冒充正式部署或曝光結果；合併與部署收據記錄於[#247](https://github.com/7xuanlu/wenlan-site/pull/247)，以該PR狀態與部署驗證為準。
 
 閱讀修正（使用者10-19回饋）：可見文字含程式碼／FAQ／參考標籤由1,542縮至743詞（約−52%），七節收為五節；用恢復路徑表、測試前後表取代長段解釋，提示縮短並調整手機斷行。標題、搜尋意圖、來源與實跑範例保留。此為本地稿閱讀性修正，不是新SEO結果；本版收據改見`readability-verification.json`。
 
@@ -25,7 +25,7 @@
 
 隔離worktree：`/Users/lucian/.codex/worktrees/seo-context-recovery/wenlan-site`，base `2734c2969e6207d8d4c73063661ce0759fc3853f`。獨立Sol／xhigh審查後已修正「舊交接commit→HEAD也要比較」、測試切片改AST及plugin／MCP-only界線，closure通過。Luna／high分別做唯讀意圖核對與固定範例實作。最終lint、build、test:seo（425＋133通過，2項原有skip）、seo:technical:built及diff檢查通過；桌面1280與手機393px、深淺色、FAQ、JSON與兩個跨頁anchor已實際驗證，無觀察到的console error。全站測試使用與CI相同的公開Wenlan source `52656ab00eae3699cb5636d4093282d85c62fcb7`；舊本機source的單項外掛規格失敗另外保留，未放寬斷言。
 
-狀態：**本地改好、尚未發布**；當前版本的post-deploy crawl／28日冷卻尚未確認，不宣稱改寫門檻通過。原始GSC沿用既有成功讀數；逐頁解析、Google快照、範例與最終驗證見 `/tmp/wenlan-seo-demand/2026-10-19-context-recovery/` 的 `candidate-evidence.json`、`verification.json`。發布後須等自然crawl，再依契約用可比窗口觀察同詞曝光／位置與點擊；若只有模糊或AI式詞、缺合格曝光，不立即再擴寫。未推送、部署、提交索引或恢復weekly；原checkout的舊dirty與Claude事實修正worktree均保留。
+準備狀態：**本地驗證完成，由[#247](https://github.com/7xuanlu/wenlan-site/pull/247)交付**；最終合併／正式部署見該PR收據。當前版本的post-deploy crawl／28日冷卻尚未確認，不宣稱改寫門檻通過。原始GSC沿用既有成功讀數；逐頁解析、Google快照、範例與最終驗證見 `/tmp/wenlan-seo-demand/2026-10-19-context-recovery/` 的 `candidate-evidence.json`、`verification.json`。發布後須等自然crawl，再依契約用可比窗口觀察同詞曝光／位置與點擊；若只有模糊或AI式詞、缺合格曝光，不立即再擴寫。本段保留準備時的驗證範圍；發布收據見#247，不提交Google索引或恢復weekly。原checkout的舊dirty與Claude事實修正worktree均保留。
 
 
 本輪問題：近期造訪是否主要是 Threads？SEO 下一個具體機會在哪？使用者優先自然搜尋；10-18另明確指示依真實搜尋詞與前排文章補好 Codex MEMORY.md 教學，驗證後發布。weekly 保持暫停。此為人工查核，不重啟已結束的 successor campaign，不改歷史目標。
