@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "ab242b26f915c49c97e5d54c5fe2f0754d82960849fb76ea514a84d03b620715",
+    sourceHash: "2332886c468bc317195f9960b2e912d171116b94c8c01ba28d1c61aeb0101dce",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库与 LLM Wiki",

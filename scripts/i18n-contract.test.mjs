@@ -2541,7 +2541,7 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
     [
       "Bring your knowledge",
       "to life.",
-      "Wenlan is a personal knowledge management app that turns notes, files, and saved chats into an LLM Wiki. Find linked pages, check their sources, and use them with your connected AI tools.",
+      "Wenlan is your personal knowledge base, maintained with AI. Connect notes, files, and chats into knowledge you and your AI tools can find and use.",
     ],
   );
 
