@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "1314f950cfe3f16c98eff9091a3a2a43fb533973d4f81e8821b0babb5f0aec9f",
+    sourceHash: "ab242b26f915c49c97e5d54c5fe2f0754d82960849fb76ea514a84d03b620715",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库",

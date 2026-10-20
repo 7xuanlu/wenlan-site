@@ -14,7 +14,7 @@ export const enContent = {
     sourceHash: null,
     content: {
       seo: {
-        title: "Wenlan | LLM Wiki for AI Work",
+        title: "Wenlan | LLM Wiki & Personal Knowledge Management App",
         description:
           "Wenlan is a source-backed AI knowledge base and LLM wiki for AI work: organize documents and decisions into notes you can find, inspect, and review.",
       },
@@ -528,7 +528,7 @@ export const enContent = {
           eyebrow: "A personal knowledge base, maintained with AI",
           headline: { pre: "Bring your knowledge", emphasis: "to life.", post: "" },
           description:
-            "Wenlan is your personal knowledge base, maintained with AI. Connect notes, files, and chats into knowledge you and your AI tools can find and use.",
+            "Wenlan is a personal knowledge management app that turns notes, files, and saved chats into an LLM Wiki. Find linked pages, check their sources, and use them with your connected AI tools.",
           worksWithLabel: "Works with",
           worksWithNote: "Read from your Obsidian vault without changing your files.",
         },
