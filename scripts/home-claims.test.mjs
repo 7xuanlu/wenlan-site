@@ -277,7 +277,7 @@ test("hero leads with useful outcomes and describes knowledge that can be revise
     en: {
       eyebrow: "A personal knowledge base, maintained with AI",
       headline: ["Bring your knowledge", "to life."],
-      description: "Wenlan is a personal knowledge management app that turns notes, files, and saved chats into an LLM Wiki. Find linked pages, check their sources, and use them with your connected AI tools.",
+      description: "Wenlan is your personal knowledge base, maintained with AI. Connect notes, files, and chats into knowledge you and your AI tools can find and use.",
     },
     "zh-TW": {
       eyebrow: "AI 協助維護的個人知識庫",

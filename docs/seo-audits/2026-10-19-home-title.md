@@ -4,7 +4,7 @@
 
 Current conclusion: PKM is a plausible shopping category and LLM Wiki is a relevant implementation/discovery term. The data do not establish that PKM deserves first place in the title or that this exact title beats alternatives. Retain the already measured LLM Wiki article entry; PKM remains a supplementary candidate. The user selected the combined title with LLM Wiki first and explicitly authorized verification and publication on October 19. Its 53-character length is not selection evidence.
 
-Scope of the English batch below: English homepage title and first-screen description, publication authorized October 19 and delivered in PR #250. No indexing request, payment or background automation. Chinese visible copy stayed unchanged in that batch; the separately requested Chinese title revision is recorded at the end.
+Scope correction: PR #250 changed the English homepage title and first-screen description. The user subsequently clarified that the approved change covered the page title only; the description change is withdrawn and restored to its pre-#250 wording. No indexing request, payment or background automation. Chinese visible copy stayed unchanged in that batch; the separately requested Chinese title revision is recorded at the end.
 
 ## AI Wiki follow-up — live Google evidence
 
@@ -165,3 +165,9 @@ Evidence outside Git: `/tmp/wenlan-seo-demand/2026-10-19-zh-home-title/` contain
 - Local proof: `/tmp/wenlan-seo-demand/2026-10-19-zh-home-title/browser-readback.json`, `source-verification.json`, and `tw-`/`cn-` desktop/mobile theme PNGs. Command logs: `/tmp/wenlan-seo-zh-title-*.log`. These are local verification receipts, not evidence of published pages or acquisition improvement.
 
 Publication approved after local verification: the user requested merging and publishing both titles on October 19. No Google indexing request has been authorized or submitted. Changed-title homepages merit a recrawl under the existing procedure; list only the two localized homepages in the PR and seek the single batch confirmation after production verification. Exact merge/CI/deployment receipts belong on that PR.
+
+## Scope correction: restore the visible English introduction
+
+The user clarified that the approved edit covered the page title only. Restore the English introduction exactly to pre-#250 wording in both rendered and dictionary sources, plus the existing copy assertions; retain all three approved SEO titles. The H1 was never changed in #250/#251. Chinese dictionaries change only their English-source hashes. This is a scope restoration, not a new keyword or ranking experiment.
+
+Verified base `7a6cb6b69d91e7eec62ff3003be35dff3ee47a58` plus source patch SHA256 `da5c40f71f09a0681bc8a798af45031f5b8545f6524ab2aac6e6bde446ec7be6`: goal/scenario checks, goal/SEO/measurement/i18n tests, lint, production build and built technical SEO passed. Exact comparison confirms the English homepage dictionary differs from pre-#250 only in the approved SEO title; rendered story copy matches pre-#250 byte-for-byte. Actual browser checks at 1280px and 393px in both themes confirm the restored text and retained title, without overflow, broken loaded images or captured warning/error logs. Local screenshots and readback: `/tmp/wenlan-restore-home-intro/`; these are not uploaded PR attachments.
