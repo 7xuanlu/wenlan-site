@@ -10,6 +10,7 @@
 | 工作 | 已知證據與限制 | 下一步 |
 | --- | --- | --- |
 | Coding agent context loss | 同窗34曝光／0點擊；跨session handoff精確詞7曝光、平均位置9。前排有可用skill與staleness檢查，舊頁少了拿現在程式碼核對交接／測試版本 | 10-19隔離worktree本地改好並驗證：恢復提示、Git差異與舊commit比較、實跑失效測試例、既有skill入口及文蘭實測銜接；由[#247](https://github.com/7xuanlu/wenlan-site/pull/247)交付，合併／正式部署收據以該PR為準；crawl／冷卻未確認。見[證據](seo-audits/2026-10-18-organic-search-readout.md#下一個英文頁跨對話後恢復工作10-19本地已驗證)。不提交索引，weekly暫停 |
+| 雙中文首頁標題 | 12組實際SERP：筆記軟體混手寫／待辦；AI知識庫混企業需求；LLM Wiki有個人產品與維護流程。Obsidian詞多為外掛／vault教學，不能把品牌量當本站機會 | 使用者指定本地修正為「個人 AI 知識庫與 LLM Wiki／个人 AI 知识库与 LLM Wiki」，Obsidian由既有文章承接；驗證紀錄見[首頁比較](seo-audits/2026-10-19-home-title.md#chinese-homepage-titles-intent-comparison-and-local-revision)。已獲兩頁合併發布授權；合併與正式部署收據以本批PR為準。建議發布後申請兩頁重新抓取，須另獲批次確認；weekly維持暫停 |
 | EN LLM Wiki | 09-18～10-15：189曝光／7點擊；10-10已crawl | 保留已完成教學，追蹤精確詞，不全面再寫 |
 | 繁中 Wiki | 台灣市場有需求；本站「如何使用」僅 1 次可見曝光 | 沿用 owner，核對新版 crawl 與樣本，不承諾前五 |
 | Obsidian + Claude Code | US長詞1K–10K／Planner三月−90%，短詞0%；EN owner 11 page曝光／0點擊，無精確詞joined row | 三語完整練習／答案範例已修，前段與練習後明示 Obsidian 可接 Wenlan；Opus 5.5 複審及12組畫面檢查通過，三語文章、手機入口與頁尾引導由 [#224](https://github.com/7xuanlu/wenlan-site/pull/224) 交付；部署確認見該PR收據，後續手動核對crawl與成效 |

@@ -14,7 +14,7 @@ export const zhTWContent = {
     sourceHash: "ab242b26f915c49c97e5d54c5fe2f0754d82960849fb76ea514a84d03b620715",
     content: {
       seo: {
-        title: "文瀾 Wenlan｜個人 AI 知識庫",
+        title: "文瀾 Wenlan｜個人 AI 知識庫與 LLM Wiki",
         description:
           "Wenlan 文瀾是有來源依據的 AI 知識庫，也是 AI 工作的 LLM wiki：把文件和決策整理成可查找、可核對、可審查的筆記，讓你和 AI 接著往前做。本地運行，連接 Claude Code、Codex、ChatGPT 等 AI 工具，開源免費。",
       },
