@@ -1308,6 +1308,7 @@ export const docPages: DocPage[] = [
           "/wenlan distill: organize related memories into notes.",
           "/wenlan pages: list recent notes or open a matching note in your editor.",
           "/wenlan lint: run the canonical read-only memory and note health report.",
+          "/wenlan map: write repository orientation pages tied to the code lines they describe, so a later reader knows where to look and whether the page is still current.",
           "/wenlan forget: delete a memory by ID when it should not remain in Wenlan.",
         ],
       },
@@ -1671,7 +1672,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Current runtime shape",
         body: [
-          "The current public docs describe the v0.19.2 runtime shape: Claude Code and Codex plugins, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed notes with revisions, session handoffs, status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
+          "The current public docs describe the v0.19.3 runtime shape: Claude Code and Codex plugins, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed notes with revisions, session handoffs, status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
           "The biggest practical upgrade checks are platform support, package path alignment, and spaces. Confirm your machine's service manager, confirm MCP clients launch the connector under ~/.wenlan/bin, and confirm the active space is the one you expect.",
         ],
         link: {
@@ -3680,7 +3681,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository's security policy commits to acknowledgment within 48 hours and a fix timeline within 7 days. The latest released version is supported (the current stable 0.19.2 line); older releases are best-effort.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository's security policy commits to acknowledgment within 48 hours and a fix timeline within 7 days. The latest released version is supported (the current stable 0.19.3 line); older releases are best-effort.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3833,7 +3834,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Open the app source",
-          href: "https://github.com/wenlan-app/wenlan/tree/v0.19.2/app",
+          href: "https://github.com/wenlan-app/wenlan/tree/v0.19.3/app",
         },
       },
       {
@@ -3878,31 +3879,46 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.19.2",
+      "Wenlan version 0.19.3",
       "wenlan-mcp release notes",
     ],
     updatedAt: "2026-10-19",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Quick answer: the current stable release in the repository changelog is v0.19.2, dated 2026-10-19.",
+      "Quick answer: the current stable release in the repository changelog is v0.19.3, dated 2026-10-21.",
       "The unified release publishes native runtime archives plus macOS Apple Silicon and Windows x64 desktop builds and updater artifacts.",
     ],
     sections: [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.19.2 is the current stable release recorded in CHANGELOG.md and GitHub Releases, dated 2026-10-19. It adds a getting-started home, one /wenlan entry for the plugins, Muse and Muse Code connections, and direct note editing by agents. See the release notes for the exact shipped changes.",
+          "Wenlan v0.19.3 is the current stable release recorded in CHANGELOG.md and GitHub Releases, dated 2026-10-21. It lets a page rely on lines of code and on other pages, and tells you when what it relies on changes. See the release notes for the exact shipped changes.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
         ],
         bullets: [
+          "A page can rely on lines of code. When an AI writes a page from code, it says which lines it relied on; Wenlan remembers them and marks the page when those lines change. Edits that only move the lines or change whitespace do not count.",
+          "The app shows the code lines a page relies on, with the lines as they were and as they are now when they changed, and names the agent behind each edit in a page's basis diff. You can confirm no impact, edit the page, or stop relying on the code.",
+          "/wenlan map writes repository orientation pages tied to the code lines they describe, so a later reader knows where to look and whether the page is still current.",
+          "A page can rely on other pages and is told when they change. Typing [[ in the editor links to a page and relies on it, and the app lists and manages a page's bases.",
+          "save_source keeps documents an AI read in other apps together with their link, and Wenlan remembers which AI conversation a memory or page came from.",
+          "Obsidian vaults follow changes in the background, checked about every 30 seconds, instead of needing a manual refresh.",
+          "Wiki documents are called pages everywhere in the English app.",
+        ],
+      },
+      {
+        heading: "v0.19.2 highlights",
+        body: [
+          "v0.19.2, dated 2026-10-19, adds a getting-started home, one /wenlan entry for the plugins, Muse and Muse Code connections, and direct note editing by agents.",
+        ],
+        bullets: [
           "New users get a getting-started home: Wenlan asks how you want to start, then a checklist tracks writing a note, connecting an AI tool, bringing in sources, and letting an AI use what you saved.",
-          "The Claude Code plugin has one entry, /wenlan. The slash menu shows /wenlan, /brief, /capture, /recall, and /handoff; setup, distill, pages, lint, curate, and forget run as words after /wenlan, such as /wenlan lint. The old standalone forms are gone. In Codex the entry is $wenlan.",
+          "The Claude Code plugin has one entry, /wenlan. The slash menu shows /wenlan, /brief, /capture, /recall, and /handoff; setup, distill, pages, lint, curate, and forget run as words after /wenlan, such as /wenlan lint. In Codex the entry is $wenlan.",
           "/handoff brings the notes a session used up to date without overwriting edits made in the meantime.",
           "The desktop app connects Muse Code with one click, and the Web access card is a single switch again. Muse connects through Other apps and is named in the Allow dialog.",
           "Agents can edit notes directly when they work from the latest version. Turn on Review every change in a note's menu to send every AI change to review first.",
           "Brief keeps a history, so you can read earlier versions with wenlan brief history.",
-          "Review cards say why a change needs review and who wrote each version, and Wenlan documents are called notes everywhere in the app.",
+          "Review cards say why a change needs review and who wrote each version.",
         ],
       },
       {
@@ -4092,7 +4108,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.19.2, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.19.3, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },
