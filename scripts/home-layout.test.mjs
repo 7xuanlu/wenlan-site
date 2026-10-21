@@ -239,11 +239,27 @@ test("recorded product evidence remains a real, hashed asset with a native enlar
   assert.equal(media.benchmarkDate.rerunPerformed, false);
   assert.equal(media.assets.length, 24);
   const scenarioMedia = JSON.parse(fs.readFileSync(path.join(repoRoot, "docs/scenario-media-provenance.json"), "utf8"));
+  // Actual Wenlan, Claude and Obsidian captures of the public Cedar packet; provenance is in
+  // docs/seo-audits/2026-10-20-low-cost-practitioner-review.md.
+  const learnCaptures = [
+    {"name": "wenlan-cedar-add-source.jpg", "sha256": "a29453fadb99d5784a5bdce8fff09bda27d7e329bab73b56a7cdae721c0baf82"},
+    {"name": "wenlan-cedar-three-sources.jpg", "sha256": "e4cde339127d718ead831530ff0e4fda8ee2a5ac58458cc9c8da80ce3823e916"},
+    {"name": "wenlan-cedar-approved-source.jpg", "sha256": "4c094195a78dc95113047d871679c260a82b01107571bf5494ea8aee32661c0a"},
+    {"name": "wenlan-cedar-connected.jpg", "sha256": "1012d16679213ec8ba1882e9d8d69adf451eebdd0707d88a0a97de76126ca2dc"},
+    {"name": "wenlan-cedar-update-source.jpg", "sha256": "9f137d8f190fda80b4c981d5d87131495ee7e7f3e76782b39910dda6f71df1d0"},
+    {"name": "claude-cedar-first-answer.jpg", "sha256": "deddabd05fa67fac21d9b860b83acc2a613e4ab484108e0e0010e49e3d94f057"},
+    {"name": "claude-cedar-updated-answer.jpg", "sha256": "a6c844ee6caabec2e11a755a041c72caee81719e40cc459bd1df627f8dd8aca8"},
+    { name: "obsidian-cedar-approved.jpg", sha256: "a73a37041dfaad2a4367e45086046f512854660ec51a4a123d160a09b34f39bb" },
+    { name: "obsidian-cedar-update.jpg", sha256: "718df506b4d2888c594c5d8436c9d9f258f20ac1874e8283ecd8ab9d82a84704" },
+  ];
+  for (const asset of learnCaptures) {
+    assert.equal(createHash("sha256").update(fs.readFileSync(path.join(repoRoot, "public/images/product-evidence", asset.name))).digest("hex"), asset.sha256);
+  }
   assert.deepEqual(
     fs.readdirSync(path.join(repoRoot, "public/images/product-evidence")).sort(),
     // The existing Learn fixture has its own provenance/locale contract in i18n-contract.test.mjs.
-    [...media.assets.map((asset) => path.basename(asset.path)), ...scenarioMedia.assets.map((asset) => path.basename(asset.path)), "wenlan-space-review-fixture.png"].sort(),
-    "Only inventoried homepage and scenario captures and the existing Learn fixture may be publicly served",
+    [...media.assets.map((asset) => path.basename(asset.path)), ...scenarioMedia.assets.map((asset) => path.basename(asset.path)), ...learnCaptures.map((asset) => asset.name), "wenlan-space-review-fixture.png"].sort(),
+    "Only inventoried homepage, scenario and Learn captures may be publicly served",
   );
   assert.deepEqual(media.showcaseOrder, ["handoff", "knowledge-page-and-sources", "recall"]);
   assert.equal(media.secondaryView, "knowledge-graph");

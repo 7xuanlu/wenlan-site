@@ -15,6 +15,12 @@ export type LearnArticleSection = {
   heading: string;
   body: string[];
   bullets?: string[];
+  steps?: Array<{
+    title: string;
+    body: string;
+    code?: { label: string; code: string };
+    image?: ProductEvidence["image"];
+  }>;
   code?: {
     label: string;
     code: string;
@@ -23,6 +29,7 @@ export type LearnArticleSection = {
     label: string;
     href: string;
   };
+  image?: ProductEvidence["image"];
   figure?: LearnFigureId;
   table?: {
     columns: string[];
@@ -79,6 +86,21 @@ export type ProductEvidence = {
   };
 };
 
+export type ArticleOpeningExample = {
+  heading: string;
+  usesHeading: string;
+  questions: string[];
+  context: string;
+  question: string;
+  answer: string;
+  answerDetail: string;
+  sourceImage: ProductEvidence["image"];
+  sourceLabel: string;
+  sourceHref: string;
+  actionLabel: string;
+  image: ProductEvidence["image"];
+};
+
 export type LearnArticle = {
   slug: string;
   eyebrow: string;
@@ -94,6 +116,7 @@ export type LearnArticle = {
   readingTime: string;
   audience: string;
   heroBullets: string[];
+  openingExample?: ArticleOpeningExample;
   sections: LearnArticleSection[];
   comparisonTable?: ComparisonTable;
   faqs: LearnArticleFaq[];

@@ -15,7 +15,7 @@
 | 繁中 Wiki | 台灣市場有需求；本站「如何使用」僅 1 次可見曝光 | 沿用 owner，核對新版 crawl 與樣本，不承諾前五 |
 | Obsidian + Claude Code | US長詞1K–10K／Planner三月−90%，短詞0%；EN owner 11 page曝光／0點擊，無精確詞joined row | 三語完整練習／答案範例已修，前段與練習後明示 Obsidian 可接 Wenlan；Opus 5.5 複審及12組畫面檢查通過，三語文章、手機入口與頁尾引導由 [#224](https://github.com/7xuanlu/wenlan-site/pull/224) 交付；部署確認見該PR收據，後續手動核對crawl與成效 |
 | 中文個人知識庫 | 泛「搭建」混企業 RAG；本輪 Planner 已補：`个人知识库搭建`10–100、台灣`個人知識庫`10–100／月 | 範例已發布；觀察相應詞是否開始展示本站 |
-| 個人 AI 知識庫（三語） | 英文依使用者 10-08 指示改為選做法→兩份筆記→查答案→Wenlan；雙中文同步「改來源後再問」、來源同步界線與終端機／對話分離，RAG／Wiki 句沿用 #223 正式版 | 10-11 已整合到最新 main，並整理雙中文重複段落；必要檢查與畫面驗證通過，[#235](https://github.com/7xuanlu/wenlan-site/pull/235) 已合併發布（0d0597a）；EN/TW 10-13已crawl，CN最後10-10早於本版。見[紀錄](seo-audits/2026-10-07-ranking-gap.md#2026-10-08-個人知識庫正式版復核) |
+| 個人 AI 知識庫（三語） | 已有搜尋需求與既有 owner；本輪實機以 Wenlan 0.19.2 加入三份虛構 Cedar 文件→Claude 提問→核對原文→加入更新後用新對話確認 | 三語改為免 CLI 主流程，開頭先說用途、真實問答與文瀾理由，保留 Obsidian／CLI 進階分支。12種手機／桌面深淺色與必要檢查通過。使用者已批准本篇合併發布及三語索引請求；部署與索引結果見本批 PR。[實機證據](seo-audits/2026-10-20-low-cost-practitioner-review.md#免-cli-主流程實機加入claude-提問來源及更新核對)。weekly維持暫停，人工追蹤 |
 | Codex MEMORY.md | 09-18～10-15：506曝光／2點擊；MEMORY.md兩詞11／0、啟用兩詞19／0；10-09已crawl | 10-18已由[#241](https://github.com/7xuanlu/wenlan-site/pull/241)發布檔案用途、載入與唯讀檢查；保留觀察，不再重寫。收據見[本輪紀錄](seo-audits/2026-10-18-organic-search-readout.md) |
 | Claude＋Codex 共用記憶 | 09-18～10-15：79曝光／1點擊，點擊詞不可見；舊精確詞量級10–100／月 | 10-18已由[#243](https://github.com/7xuanlu/wenlan-site/pull/243)發布Claude 存入→新 Codex 讀回的實測、來源 ID與重現步驟；[證據](seo-audits/2026-10-18-organic-search-readout.md#claude--codex-共用記憶實測10-18-單篇發布授權)。手動追蹤，不把取回成功當搜尋成長 |
 | Claude／MCP memory | Claude同窗176曝光／1點擊；10-07已改、10-09已crawl | 保留觀察，不因低CTR直接再寫 |

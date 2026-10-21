@@ -1130,12 +1130,10 @@ const zhTWArticles = {
     slug: "build-local-ai-knowledge-base-from-documents",
     eyebrow: "入門指南",
     category: "Workflows",
-    title: "AI 知識庫是什麼？個人怎麼建立（工具比較＋步驟）",
-    description:
-      "AI 知識庫就是讓 AI 根據你自己的文件和筆記回答，並附上出處。本文比較 NotebookLM、Obsidian、AnythingLLM 等做法，再帶你一步步建一個。",
-    metaTitle: "AI 知識庫是什麼？個人建立步驟與工具比較 | Wenlan",
-    metaDescription:
-      "AI 知識庫讓 AI 根據你自己的文件和筆記回答，並附上出處。本文分清個人和企業知識庫，比較 NotebookLM、Notion AI、Obsidian 外掛、AnythingLLM 與 Karpathy 式 LLM Wiki，再用一個資料夾一步步建立自己的 AI 知識庫。",
+    title: "如何用自己的文件建立 AI 知識庫",
+    description: "讓 AI 從你的筆記與文件中找答案，並回到原文核對。不需要終端機。",
+    metaTitle: "建立個人 AI 知識庫：文件問答、來源核對與更新 | Wenlan",
+    metaDescription: "跟著圖形介面操作：在文瀾加入三份測試文件、連接 Claude 網頁版提問、查看引用原文，再刷新一份更新並用新對話核對。",
     keywords: [
       "AI 知識庫",
       "AI 知識庫是什麼",
@@ -1146,139 +1144,98 @@ const zhTWArticles = {
       "Karpathy AI 知識庫",
       "NotebookLM 知識庫",
       "AI 知識庫工具比較",
+      "Claude 知識庫",
+      "Codex 知識庫",
       "Wenlan 文瀾",
     ],
     publishedAt: "2026-08-01",
-    updatedAt: "2026-10-08",
+    updatedAt: "2026-10-20",
     author: "Qi-Xuan Lu",
-    readingTime: "9 分鐘閱讀",
-    audience: "想讓 AI 讀懂自己的文件、筆記與對話紀錄的繁體中文使用者",
-    heroBullets: [
-      "AI 知識庫：讓 AI 根據你的資料回答，而且說得出出處。",
-      "個人用的做法有兩種：每次查資料（RAG），或整理成頁面（LLM Wiki）。",
-      "先用一個資料夾、三個測試問題驗收，再決定要不要擴大。",
-    ],
+    readingTime: "10 分鐘閱讀",
+    audience: "想讓 AI 查詢自己的文件與筆記、但不想使用終端機的繁體中文讀者",
+    openingExample: {
+      heading: "建好後能做什麼",
+      usesHeading: "建好之後，可以拿來做什麼？",
+      questions: ["我之前研究這個主題，記過哪些重點？", "這個專案最後決定了什麼？", "這個答案出自哪份文件？"],
+      context: "這次實測讓 Claude 從虛構專案 Cedar 的三份文件中，找出核准的上線日期。",
+      question: "Cedar 核准的上線日期是哪天？",
+      answer: "2026 年 11 月 19 日",
+      answerDetail: "取代原先 11 月 12 日的計畫。",
+      sourceImage: { src: "/images/product-evidence/wenlan-cedar-approved-source.jpg", alt: "文瀾中的 Cedar 原始決定，將 11 月 12 日改為 11 月 19 日。", caption: "文瀾中的原始決定：11 月 19 日取代 11 月 12 日。", width: 2560, height: 1440 },
+      sourceLabel: "decision-2026-10-08.md",
+      sourceHref: "#check-original-source",
+      actionLabel: "用範例文件跟著做",
+      image: { src: "/images/product-evidence/claude-cedar-first-answer.jpg", alt: "Claude Opus 5.5 透過 Wenlan 的實際回答：11 月 19 日、僅電子郵件、資安審查、CSV、價格未知，並附檔名和支持段落。", caption: "Claude 實測原圖；上方問題已縮寫。", width: 1382, height: 753 },
+    },
+    heroBullets: ["在文瀾用圖形介面加入文件，再到已連接的 Claude 網頁版提問。", "回到文瀾打開來源原文，加入更新後按 Refresh，再用新對話核對答案。", "主流程不需要終端機；Obsidian 與 CLI 做法放在進階分支。"],
     sections: [
+      { id: "wenlan-knowledge-base", heading: "為什麼用文瀾？", body: ["文瀾負責管理文件，Claude 負責根據文件回答。連接資料夾後，讓 Claude 搜尋內容，再回到文瀾打開引用的原文。文件變更時，先重新整理來源，再提問核對。", "這套做法適合會持續重用與更新的資料。如果只是臨時問一份 PDF，直接上傳或用 Claude Projects 可能就夠了。"] },
       {
-        heading: "AI 知識庫是什麼",
-        body: [
-          "AI 知識庫就是一份你自己的資料：文件、筆記、PDF、和 AI 的對話紀錄。AI 回答問題時先看這份資料，而不是只靠它自己記得的東西，回答時還能指出是哪一份文件說的。",
-          "搜尋「AI 知識庫」會看到很多企業產品，那些多半是給客戶看的客服中心或公司內部 FAQ。本文講的是個人用：給你自己和你用的 AI 工具（ChatGPT、Claude、Codex 等）用的知識庫。",
+        id: "worked-example-files",
+        heading: "先準備三份小型測試文件",
+        body: ["安裝文瀾管理來源，並在瀏覽器登入 Claude 提問。連線需要網路，電腦必須保持開機。先等文瀾完成本機搜尋設定。", "下載 Cedar ZIP，解壓縮到新資料夾。裡面有初始計畫、已核准的變更，以及一份後來引用舊日期的通話紀錄。先把答案紀錄和第四份更新檔留在資料夾外。"],
+        link: { label: "下載三份初始來源（.zip）", href: "/examples/claude-knowledge-base-check/initial-sources.zip" },
+      },
+      {
+        id: "add-documents-in-wenlan",
+        heading: "1. 在文瀾加入資料夾",
+        body: ["先用小型測試資料夾，方便逐份檢查來源。"],
+        steps: [
+          { title: "選擇 Add a source → Connect a folder", body: "在文瀾首頁按 Add a source，再選 Connect a folder。在檔案選擇器中找到解壓縮後的 Cedar 資料夾。若要用既有 vault，選 Connect Obsidian vault；這次練習先不要連接自己的資料庫。", image: { src: "/images/product-evidence/wenlan-cedar-add-source.jpg", alt: "Wenlan 0.19.2 的實際畫面：Add a source 選單包含 Connect a folder 和 Connect Obsidian vault。", caption: "Wenlan 0.19.2：實際的新增來源選單。", width: 2560, height: 1440 } },
+          { title: "確認三份文件都已索引", body: "打開 Sources → Cedar project。在 Info 中確認 Files: 3、Memories: 3 和 Status: Available。若索引尚未完成，稍等或按 Refresh。只看到檔名，不代表內容已能搜尋。", image: { src: "/images/product-evidence/wenlan-cedar-three-sources.jpg", alt: "文瀾中的三份 Cedar 虛構來源；Info 顯示三個檔案和三則已索引記憶。", caption: "三份來源都已索引後，確認檔案數、記憶數和狀態。", width: 2560, height: 1440 } },
         ],
       },
       {
-        heading: "兩種做法：每次查資料，或整理成頁面",
-        body: [
-          "第一種是 RAG：每次提問時，從文件裡檢索相關段落交給 AI。這適合直接查詢最新來源；不同問題可能會再次檢索相同內容，索引或快取也會因工具而異。",
-          "另一種是 Andrej Karpathy 在 2026 年 4 月提出的 LLM Wiki：把來源整理成互相連結、可檢查的頁面，後續問題可以先從這些頁面開始。來源有變化時仍要同步並檢查受影響的頁面；大型 wiki 也可以搜尋頁面或回到引用來源。",
+        id: "connect-claude-web",
+        heading: "2. 透過介面連接 Claude 網頁版",
+        body: ["這條路徑使用文瀾的實驗性 Web access。檢索到的文字會經 wenlan-relay 傳給 Claude，因此不是離線模型。本次測試使用只含 Cedar 與 Atlas 虛構資料的隔離資料庫。"],
+        steps: [
+          { title: "在 Settings → Connections 開啟 Web access", body: "開啟 Web access 前，先確認文瀾資料庫裡的每份資料都可以分享給 Claude。Whole library 涵蓋所有 Space 與未歸類筆記，不只 Cedar 資料夾。若有私人筆記，或不確定分享範圍，請先停在這裡。本次實測使用只有虛構資料的獨立測試庫，並選 Whole library。確認可以分享後，再打開使用者選單 → Settings → Connections，開啟 Let web and phone AI apps search your library。" },
+          { title: "選 Add to Claude 並核准連線", body: "在 Claude 檢查 Wenlan 連接器並核准。如果之前已加過，從 Customize → Connectors → Yours → Reconnect 重新連接。回文瀾按 Allow；若未自動開啟文瀾，可在 Web access 裡選 Have a code? 並輸入配對頁顯示的代碼。確認 Claude 出現在 Connected apps。", image: { src: "/images/product-evidence/wenlan-cedar-connected.jpg", alt: "隔離的虛構測試資料庫實際畫面：Wenlan Connections 顯示 Claude 已連接。", caption: "Claude 已出現在 Connected apps；畫面來自隔離的虛構資料庫。", width: 2560, height: 1440 } },
         ],
-        figure: "llm-wiki-vs-rag",
+        link: { label: "查看 Claude 自訂連接器的目前可用方案", href: "https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp" },
       },
       {
-        id: "personal-ai-knowledge-base-tools",
-        heading: "個人 AI 知識庫工具比較",
-        body: [
-          "沒有一個工具最好，差別在資料放在哪裡、要不要累積成頁面。GitHub 星數為 2026 年 10 月的數字。",
-        ],
-        table: {
-          columns: ["工具", "做法", "資料放在哪", "適合你，如果你"],
-          rows: [
-            ["NotebookLM", "上傳文件後問答（RAG）", "Google 雲端", "想最快開始，不介意資料放雲端"],
-            ["Notion AI", "對 Notion 頁面問答", "Notion 雲端", "筆記本來就在 Notion"],
-            ["Obsidian + Copilot 外掛", "在筆記庫裡問答、找相關筆記", "自己的電腦", "已經在用 Obsidian"],
-            ["AnythingLLM（6.6 萬星）", "桌面 app，丟文件進去問答（RAG）", "自己的電腦", "想全部留在本機，又不想寫設定"],
-            ["claude-obsidian、nashsu/llm_wiki", "Karpathy 式 LLM Wiki：AI 把文件整理成頁面", "自己電腦上的 Markdown", "想要可閱讀、會累積的知識庫"],
-            ["Wenlan（文瀾）", "LLM Wiki，加上來源更新時自動提醒、不蓋掉你的修改", "自己的電腦", "同時用 Claude Code、Codex 等好幾個 AI 工具"],
-          ],
-        },
+        id: "worked-example-question",
+        heading: "3. 在 Claude 提問並確認它真的查了來源",
+        body: ["開一個新的 Claude 對話。若需要，先在對話的連接器選單啟用 Wenlan，送出下方問題並允許讀取請求。畫面保留英文實測，下方提供同題的中文問法。確認回應中有 Wenlan Recall 呼叫和來源段落，而不是只有看似合理的答案。", "第一次測試時，Claude 猜 Cedar 是一個 Space，套用不存在的 Space 篩選後報錯。移除該篩選才成功，因此修正版問題明確說 Cedar 是專案名稱，並要求不要設定 Space 篩選。"],
+        code: { label: "複製到已連接的 Claude 對話", code: "請使用 Wenlan 搜尋 Cedar 專案文件。Cedar 是專案名稱，不是 Space；不要設定 Space 篩選。核准的上線日期、支援管道、日期變更原因、匯出格式和產品價格分別是什麼？請引用檔名和支持段落。被引用的舊日期不會改變已核准的決定。文件沒寫明的內容請回答未知。只使用 Cedar 來源，不要寫入任何內容。" },
+
       },
       {
-        id: "build-a-personal-ai-knowledge-base",
-        heading: "一步步建立個人 AI 知識庫",
-        body: [
-          "不管選哪個工具，流程都一樣。先小範圍做通，再擴大。",
-        ],
-        bullets: [
-          "選一個你常常要查的主題，把 10 到 20 份相關文件放進同一個資料夾。",
-          "決定做法：只想問答，用 NotebookLM 或 AnythingLLM；想累積成頁面，用 LLM Wiki。",
-          "匯入文件。掃描型 PDF 要先做文字辨識（OCR），否則 AI 讀不到內容。",
-          "問三個測試問題：一個文件裡有答案的、一個沒有答案的、一個要綜合兩份文件的。",
-          "改一份文件再問一次，確認答案有跟著變。",
-        ],
-        link: {
-          label: "想用 Obsidian + Claude Code 自己做？看 LLM Wiki 完整教學",
-          href: "/learn/distilled-wiki-pages-ai-memory",
-        },
+        id: "check-original-source",
+        heading: "4. 回文瀾打開引用的原始文件",
+        body: ["回到 Sources → Cedar project → decision-2026-10-08.md，對照 Claude 引用的段落與原文。原文件核准日期為 11 月 19 日，取代 11 月 12 日。較晚的通話紀錄只是引用舊日期，並沒有核准新的變更。"],
+        image: { src: "/images/product-evidence/wenlan-cedar-approved-source.jpg", alt: "文瀾打開已核准決定的原始文件；Info 面板顯示它索引為一個段落。", caption: "在文瀾核對原文及索引狀態。", width: 2560, height: 1440 },
       },
       {
-        heading: "用兩份虛構筆記試跑 Obsidian + Claude Code",
-        body: [
-          "先確認 Claude Code 已安裝並登入。在 Obsidian 建立並開啟一個新的測試 vault，加入以下兩份虛構教學筆記。",
+        id: "worked-example-update",
+        heading: "5. 加入更新，用新的 Claude 對話再查一次",
+        body: ["下載下方更新檔，只把 decision-2026-10-15.md 移到 Cedar 資料夾。在文瀾回到該資料夾按 Refresh，確認顯示四個檔案和四則記憶。提問前先打開新檔，查看文瀾讀到的內容。"],
+        steps: [
+          { title: "檢查更新後的來源", body: "新筆記把支援管道改成電子郵件和 App 內支援；上線日仍是 11 月 19 日，匯出格式仍是 CSV。一般資料夾會定期檢查，但要用 Refresh 和索引狀態確認這次更新已讀入。", image: { src: "/images/product-evidence/wenlan-cedar-update-source.jpg", alt: "按 Refresh 後文瀾顯示四個檔案和四則記憶；新來源更新支援方式，上線日保持不變。", caption: "確認新檔案已讀取，再比對文件中變更與未變更的內容。", width: 2560, height: 1440 } },
+          { title: "在新的 Claude 對話重複同一問題", body: "用修正過的問題在全新 Claude 對話再問一次。不要把前一個答案貼進新對話。比較兩次回答和引用，再回到來源文件核對。", image: { src: "/images/product-evidence/claude-cedar-updated-answer.jpg", alt: "另一個全新的 Claude 對話讀取更新後的來源：支援變成電子郵件和 App 內，上線日仍為 11 月 19 日。", caption: "新的對話讀到更新後的支援方式，並保留原核准日期。", width: 1382, height: 753 } },
         ],
-        code: {
-          label: "research.md 和 decision.md",
-          code: "research.md\n# 使用者研究（虛構）\n- 使用者經常找不到原始研究報告。\n\ndecision.md\n# 下一輪決定（虛構）\n- 下一輪加入檔名引用，方便回到來源。",
-        },
+        link: { label: "下載支援方式更新檔（.md）", href: "/examples/claude-knowledge-base-check/updates/decision-2026-10-15.md" },
       },
       {
-        heading: "在這個 vault 啟動 Claude Code",
-        body: [
-          "在終端機切換到新 vault 的實際路徑，再啟動 Claude Code。啟動後，下一節會提供要貼進對話的唯讀問題。",
-        ],
-        code: {
-          label: "在終端機啟動 Claude Code",
-          code: "cd '<新 vault 的實際資料夾路徑>'\nclaude",
-        },
+        id: "recorded-claude-knowledge-base-check",
+        heading: "這次實際測試得到的結果", body: ["我們在 2026 年 10 月 20 日以 Wenlan 0.19.2 和 Claude Opus 5.5 Medium 跑完上述桌面與瀏覽器流程。Claude 工具回應含有 Cedar 來源文字。兩個對話都引用相關筆記；第二個對話沒有沿用前一段聊天脈絡。", "這個小型測試證明這幾份檔案能被檢索，且我們手動確認了更新。它不能證明 wiki 會自動維護、PDF 匯入、Codex 的表現或離線 AI。Whole library 搜尋也取回 Atlas 示範內容，Claude 雖未把它寫進答案，但提示詞不是存取權限邊界。"],
+        table: { columns: ["核對項目", "三份來源時", "加入更新後"], rows: [["核准日期", "November 19", "November 19"], ["支援方式", "Email only", "Email and in-app"], ["原因／匯出格式", "Security review／CSV", "Security review／CSV"], ["未提供的價格", "Unknown", "Unknown"]] },
+        link: { label: "查看介面實測與先前 CLI 測試紀錄", href: "/examples/claude-knowledge-base-check/recorded-result.md" },
       },
+      { heading: "什麼是個人 AI 知識庫？", body: ["個人 AI 知識庫是自己的文件、筆記和對話紀錄，加上能根據這些資料回答並指出來源的 AI。它和面向企業客戶的客服知識庫不同，重點是你自己工作時要查的資訊。", "常見做法有每次提問時檢索文件（RAG），或將來源整理成可持續維護、能回查引用的 Wiki 頁面（LLM Wiki）。來源變動後仍需同步並檢查受影響內容。"], figure: "llm-wiki-vs-rag" },
+      { heading: "Claude Projects 可以當個人知識庫嗎？", body: ["可以。若你只需要幾段相關對話共用參考文件，先試 Claude Projects；只想詢問一份 PDF，也不必另外安裝知識庫工具。若希望讓多個對話或工具重用同一組來源，且能在一處查看來源與更新，再比較文瀾等來源管理方式。"], link: { label: "查看 Claude Projects 最新說明", href: "https://support.claude.com/en/articles/9517075-what-are-projects" } },
       {
-        heading: "用只讀問題檢查來源依據",
-        body: [
-          "在 Claude Code 對話中貼上以下問題；下表的參考答案只根據這兩份虛構筆記。",
-          "請只讀取目前 vault 裡的 research.md 和 decision.md，不要修改任何來源檔。根據這兩份筆記，下一輪應該做什麼？為什麼？負責人是誰？請引用檔名；若筆記未說明負責人，請明確回答無法判定，不要推測。",
+        id: "try-obsidian-test-vault", heading: "進階分支：使用 Obsidian vault 或 CLI", body: ["若要走 Obsidian 分支，在 Manage vaults → Open folder as vault → Open 選取 Cedar 資料夾。查看筆記不需要社群外掛。Claude Code 或 Codex 若要直接讀取該資料夾，則需安裝並登入相應客戶端。"],
+        steps: [
+          { title: "在 Obsidian 打開相同來源", body: "打開 decision-2026-10-08，確認核准日期。產生的答案留在 vault 外。若要用前面的圖形介面流程，選 Connect Obsidian vault，再視需要重新整理。", image: { src: "/images/product-evidence/obsidian-cedar-approved.jpg", alt: "Obsidian 1.13.7 中相同的 Cedar 原始決定筆記；這是來源文件，不是 AI 回答。", caption: "Obsidian 中的 Cedar 原始來源。", width: 2048, height: 1600 } },
+          { title: "直接讓程式開發客戶端讀取資料夾", body: "替換以下路徑後，在終端機啟動 Claude Code，並要求它只讀取來源文件。若用 Codex，將 claude 換成 codex。這個做法是讓客戶端直接讀資料夾，不會匯入 Wenlan。", code: { label: "選用指令：替換資料夾路徑，再啟動 Claude Code", code: "cd \"/full/path/to/Cedar project\"\nclaude" } },
+          { title: "另一種進階做法：匯入已連接 Wenlan 的來源", body: "如果要讓 Claude Code 或 Codex 使用 Wenlan 的來源檢索，先依設定指南連接客戶端，再在終端機執行以下匯入指令。這是上一個「直接讀資料夾」做法的替代方案；匯入完成後，再開啟客戶端對話。", code: { label: "選用的 Wenlan 匯入指令", code: "wenlan status\nwenlan sources add \"/full/path/to/Cedar project\"" } },
         ],
-        table: {
-          columns: ["核對項目", "參考答案", "來源"],
-          rows: [
-            ["下一輪做什麼", "加入檔名引用。", "decision.md"],
-            ["為什麼", "使用者經常找不到原始研究報告。", "research.md"],
-            ["負責人", "筆記未說明，無法判定。", "research.md、decision.md"],
-          ],
-        },
+        link: { label: "連接 CLI 客戶端", href: "/docs/mcp-clients" },
       },
-      {
-        heading: "怎麼驗收：三個問題就夠",
-        body: [
-          "文件裡有答案的問題，AI 應該答對並指出是哪一份文件。沒有答案的問題，AI 應該說找不到，而不是編一個。要綜合兩份文件的問題，最能看出工具是真的讀懂，還是只抓到一段文字。",
-          "接著把 decision.md 的決定改成「下一輪加入原始研究報告的直接連結，取代只列檔名」，存檔後再問相同問題。答案應採用新決定、引用 decision.md，負責人仍是未知。這只是起步檢查，不能保證所有問題都答對。",
-        ],
-      },
-      {
-        heading: "個人 AI 知識庫常卡在哪裡",
-        body: ["自己建或用現成工具，最常遇到這四個問題："],
-        bullets: [
-          "文件更新了，答案沒更新：RAG 每個問題都會檢索，但來源變更仍需同步或重建索引；維護型頁面則要追蹤來源修訂並審核，才能標出或更新受影響內容。",
-          "AI 改掉你手動修正的內容：自己做的 LLM Wiki 要在規則裡寫清楚哪些段落不能改。",
-          "每個 AI 工具各有一份：ChatGPT、Claude、Codex 各記各的，久了內容不一致。",
-          "掃描型 PDF 讀不到：先 OCR，再匯入。",
-        ],
-      },
-      {
-        heading: "用 Wenlan 建立個人 AI 知識庫",
-        body: [
-          "Wenlan（文瀾）是開源的桌面 app，做的是上面的 LLM Wiki 做法。它把文件、筆記和 AI 對話整理成附出處的頁面；來源改了會標出哪些頁面要更新，而且不會蓋掉你的修改。Claude Code、Codex 和其他 AI 工具讀的是同一份知識庫。",
-          "支援 Markdown（.md）、文字檔（.txt）、可擷取文字的 PDF（.pdf），以及 Obsidian vault。Obsidian vault 只會被讀取，原始筆記不會被修改。",
-          "普通資料夾也能讓多個 AI 工具讀取，光是共用不必改用 Wenlan；它的用處是把匯入、頁面維護、引用與審查做成內建流程。想試用時，先依設定指南安裝並連接 AI 工具，再加入一個範圍明確的測試資料夾、檔案或 Obsidian vault。",
-        ],
-        bullets: [
-          "在終端機先執行 wenlan status 確認已連上，再用 wenlan sources add <路徑> 加入來源，檢查回報中找到、匯入、略過和錯誤的數量；資料夾來源不會匯入任意程式碼檔。",
-          "來源變更後，再執行一次相同的 sources add 指令即可同步；Obsidian vault 要按需重新同步。",
-          "在已安裝 Wenlan 外掛的 Claude Code 或 Codex 對話中，用 /wenlan distill <主題> 建立維護中的頁面，再用 /wenlan pages <主題> 開啟；/wenlan lint 和 /wenlan curate 用來檢查問題並審核修訂。這些是對話指令，不在終端機執行；只支援 MCP 的 AI 工具改用它提供的 Wenlan 工具。",
-        ],
-        code: {
-          label: "終端機：換成實際的測試資料夾路徑",
-          code: "wenlan status\nwenlan sources add ~/Knowledge/my-topic",
-        },
-      },
+      { heading: "檔案與隱私限制", body: ["文瀾支援 .md、.txt 和可擷取文字的 .pdf。圖片型或掃描型 PDF 需要先做 OCR。資料夾來源不會匯入任意程式碼檔。文瀾讀取 Obsidian vault 時不會改寫 Markdown。", "本機儲存不代表模型也在本機。使用個人文件前，先確認來源分享範圍與 AI 供應商設定；不希望連接的 App 繼續查詢時，關閉 Web access 或移除該連接器。"] },
     ],
     faqs: [
       {
@@ -1289,7 +1246,7 @@ const zhTWArticles = {
       {
         question: "建立 AI 知識庫要花錢嗎？",
         answer:
-          "不一定。NotebookLM 有免費方案；AnythingLLM、Obsidian 和 Wenlan 本身免費。如果用 Claude Code 或 ChatGPT 來整理，費用來自那個 AI 工具的訂閱。",
+          "Wenlan 本身免費。Claude 目前的自訂連接器說明包含 Free 方案，免費帳戶限一個自訂連接器；仍受該方案的用量限制。請先看上方最新說明，無須為這篇練習預先升級。",
       },
       {
         question: "資料會不會外流？",
@@ -1320,6 +1277,10 @@ const zhTWArticles = {
     ],
     officialReferences: [
       {
+        label: "Claude Projects 的使用方式與可用性",
+        href: "https://support.claude.com/en/articles/9517075-what-are-projects",
+      },
+      {
         label: "Karpathy：LLM Wiki（GitHub gist）",
         href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
       },
@@ -1342,7 +1303,7 @@ const zhTWArticles = {
     ],
     cta: {
       heading: "用一個資料夾建立你的 AI 知識庫",
-      body: "下載 Wenlan，加入一個主題的文件，用三個測試問題確認它答得對、說得出出處。",
+      body: "下載 Wenlan，加入一個主題的文件，用這五個問題核對回答與來源，再加入一份更新重試。",
     },
   },
   "choose-ai-knowledge-base-tool": {
@@ -4824,12 +4785,10 @@ const zhCNArticles = {
     slug: "build-local-ai-knowledge-base-from-documents",
     eyebrow: "搭建指南",
     category: "Workflows",
-    title: "个人知识库怎么搭建？AI + Obsidian 实操（附工具对比）",
-    description:
-      "个人知识库就是让 AI 根据你自己的文档和笔记回答，并给出出处。本文对比 ima、Cherry Studio、AnythingLLM、Obsidian 等做法，再一步步搭一个。",
-    metaTitle: "个人知识库搭建：AI + Obsidian 实操与工具对比 | Wenlan",
-    metaDescription:
-      "个人知识库怎么搭建？本文先讲清 RAG 问答和 Karpathy 式 LLM Wiki 两种做法，对比 ima、Cherry Studio、AnythingLLM、Obsidian 插件与 GitHub 上的开源项目，再用一个文件夹一步步搭建自己的 AI 个人知识库。",
+    title: "如何用自己的文档搭建 AI 知识库",
+    description: "让 AI 从你的笔记和文档中找答案，并回到原文核对。不需要终端。",
+    metaTitle: "搭建个人 AI 知识库：文档问答、来源核对与更新 | Wenlan",
+    metaDescription: "跟着图形界面操作：在文澜添加三份测试文件、连接 Claude 网页版提问、查看引用原文，再刷新一份更新并用新对话核对。",
     keywords: [
       "个人知识库",
       "个人知识库搭建",
@@ -4840,139 +4799,98 @@ const zhCNArticles = {
       "个人知识库 Karpathy",
       "第二大脑 AI",
       "个人知识库工具",
+      "Claude 知识库",
+      "Codex 知识库",
       "Wenlan 文澜",
     ],
     publishedAt: "2026-08-01",
-    updatedAt: "2026-10-08",
+    updatedAt: "2026-10-20",
     author: "Qi-Xuan Lu",
-    readingTime: "9 分钟阅读",
-    audience: "想让 AI 读懂自己的文档、笔记与对话记录的简体中文用户",
-    heroBullets: [
-      "个人知识库：让 AI 根据你的资料回答，而且说得出出处。",
-      "两种搭法：每次检索（RAG），或整理成页面（LLM Wiki）。",
-      "先用一个文件夹、三个测试问题验收，再扩大范围。",
-    ],
+    readingTime: "10 分钟阅读",
+    audience: "想让 AI 查询自己的文档与笔记、但不想使用终端的简体中文读者",
+    openingExample: {
+      heading: "建好后能做什么",
+      usesHeading: "建好之后，可以用来做什么？",
+      questions: ["我之前研究这个主题，记过哪些重点？", "这个项目最后决定了什么？", "这个答案出自哪份文档？"],
+      context: "这次测试让 Claude 从虚构项目 Cedar 的三份文档中，找出已批准的上线日期。",
+      question: "Cedar 批准的上线日期是哪天？",
+      answer: "2026 年 11 月 19 日",
+      answerDetail: "取代原先 11 月 12 日的计划。",
+      sourceImage: { src: "/images/product-evidence/wenlan-cedar-approved-source.jpg", alt: "文澜中的 Cedar 原始决定，将 11 月 12 日改为 11 月 19 日。", caption: "文澜中的原始决定：11 月 19 日取代 11 月 12 日。", width: 2560, height: 1440 },
+      sourceLabel: "decision-2026-10-08.md",
+      sourceHref: "#check-original-source",
+      actionLabel: "用示例文档跟着做",
+      image: { src: "/images/product-evidence/claude-cedar-first-answer.jpg", alt: "Claude Opus 5.5 通过 Wenlan 的实际回答：11 月 19 日、仅电子邮件、安全审查、CSV、价格未知，并附文件名和支持段落。", caption: "Claude 实测原图；上方问题已简写。", width: 1382, height: 753 },
+    },
+    heroBullets: ["在文澜用图形界面添加文件，再到已连接的 Claude 网页版提问。", "回到文澜打开来源原文，添加更新后点击 Refresh，再用新对话核对答案。", "主流程不需要终端；Obsidian 和 CLI 做法放在进阶分支。"],
     sections: [
+      { id: "wenlan-knowledge-base", heading: "为什么用文澜？", body: ["文澜负责管理文档，Claude 负责根据文档回答。连接文件夹后，让 Claude 搜索内容，再回到文澜打开引用的原文。文档变化时，先刷新来源，再提问核对。", "这套做法适合需要持续复用和更新的资料。如果只是临时问一份 PDF，直接上传或用 Claude Projects 可能就够了。"] },
       {
-        heading: "AI 个人知识库是什么",
-        body: [
-          "个人知识库就是一份你自己的资料：文档、笔记、PDF、和 AI 的对话记录。加上 AI 之后，它回答问题时先看这份资料，而不是只靠自己记得的东西，回答时还能指出是哪一份文档说的。很多人也叫它“第二大脑”。",
-          "搜索“AI 知识库”会看到 MaxKB、FastGPT、Dify、PandaWiki 这类平台，它们主要用来给团队或客户搭问答系统。本文讲的是个人用：给你自己和你用的 AI 工具用的知识库。",
+        id: "worked-example-files",
+        heading: "先准备三个小型测试文件",
+        body: ["安装文澜管理来源，并在浏览器登录 Claude 提问。连接需要网络，电脑必须保持开机。先等文澜完成本地搜索设置。", "下载 Cedar ZIP，解压到新文件夹。里面有初始计划、已批准的变更，以及一份后来引用旧日期的通话记录。先把答案记录和第四个更新文件留在文件夹外。"],
+        link: { label: "下载三个初始来源（.zip）", href: "/examples/claude-knowledge-base-check/initial-sources.zip" },
+      },
+      {
+        id: "add-documents-in-wenlan",
+        heading: "1. 在文澜中添加文件夹",
+        body: ["先用小型测试文件夹，方便逐份检查来源。"],
+        steps: [
+          { title: "选择 Add a source → Connect a folder", body: "在文澜首页点击 Add a source，再选 Connect a folder。在文件选择器中找到解压后的 Cedar 文件夹。若要使用现有 vault，选 Connect Obsidian vault；这次练习先不要连接自己的资料库。", image: { src: "/images/product-evidence/wenlan-cedar-add-source.jpg", alt: "Wenlan 0.19.2 的实际画面：Add a source 菜单包含 Connect a folder 和 Connect Obsidian vault。", caption: "Wenlan 0.19.2：实际的添加来源菜单。", width: 2560, height: 1440 } },
+          { title: "确认三份文件都已索引", body: "打开 Sources → Cedar project。在 Info 中确认 Files: 3、Memories: 3 和 Status: Available。如果索引还没完成，稍等或点击 Refresh。只看到文件名，并不代表内容已经可以搜索。", image: { src: "/images/product-evidence/wenlan-cedar-three-sources.jpg", alt: "文澜中的三个 Cedar 虚构来源；Info 显示三个文件和三条已索引记忆。", caption: "三份来源都已索引后，确认文件数、记忆数和状态。", width: 2560, height: 1440 } },
         ],
       },
       {
-        heading: "两种搭法：每次检索，或整理成页面",
-        body: [
-          "第一种是 RAG：每次提问时，从文档中检索相关段落交给 AI。这适合直接查询最新来源；不同问题可能会再次检索相同内容，索引或缓存也因工具而异。",
-          "另一种是 Andrej Karpathy 在 2026 年 4 月提出的 LLM Wiki：把来源整理成互相链接、可检查的页面，后续问题可以先从这些页面开始。来源变化时仍要同步并检查受影响的页面；大型 wiki 也可以搜索页面或回到引用来源。",
+        id: "connect-claude-web",
+        heading: "2. 通过界面连接 Claude 网页版",
+        body: ["这条路径使用文澜的实验性 Web access。检索到的文本会经 wenlan-relay 传给 Claude，因此不是离线模型。本次测试使用只含 Cedar 和 Atlas 虚构资料的隔离数据库。"],
+        steps: [
+          { title: "在 Settings → Connections 中开启 Web access", body: "开启 Web access 前，先确认文澜资料库里的每份资料都可以分享给 Claude。Whole library 涵盖所有 Space 和未归类笔记，不只是 Cedar 文件夹。如果有私人笔记，或不确定分享范围，请先停在这里。本次实测使用只有虚构资料的独立测试库，并选择 Whole library。确认可以分享后，再打开用户菜单 → Settings → Connections，开启 Let web and phone AI apps search your library。" },
+          { title: "点击 Add to Claude 并批准连接", body: "在 Claude 中检查 Wenlan 连接器并批准。如果之前添加过，从 Customize → Connectors → Yours → Reconnect 重新连接。回文澜点击 Allow；若没有自动打开文澜，可在 Web access 中选 Have a code? 并输入配对页显示的代码。确认 Claude 出现在 Connected apps。", image: { src: "/images/product-evidence/wenlan-cedar-connected.jpg", alt: "隔离的虚构测试数据库实际画面：Wenlan Connections 显示 Claude 已连接。", caption: "Claude 已出现在 Connected apps；画面来自隔离的虚构数据库。", width: 2560, height: 1440 } },
         ],
-        figure: "llm-wiki-vs-rag",
+        link: { label: "查看 Claude 自定义连接器目前支持的方案", href: "https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp" },
       },
       {
-        id: "personal-knowledge-base-tools",
-        heading: "个人知识库工具对比",
-        body: [
-          "没有一个工具最好，差别在资料放在哪里、要不要积累成页面。GitHub 星数为 2026 年 10 月的数据。",
-        ],
-        table: {
-          columns: ["工具", "做法", "资料放在哪", "适合你，如果你"],
-          rows: [
-            ["ima（腾讯）", "建知识库后问答", "腾讯云端", "想最快开始，资料多在微信里"],
-            ["Cherry Studio（5.2 万星）", "桌面客户端，自带知识库问答（RAG）", "自己的电脑", "已经用它接多个大模型"],
-            ["AnythingLLM（6.6 万星）", "桌面 app，丢文档进去问答（RAG）", "自己的电脑", "想全部留在本机，又不想写配置"],
-            ["Obsidian + Copilot 插件", "在笔记库里问答、找相关笔记", "自己的电脑", "已经在用 Obsidian"],
-            ["claude-obsidian、nashsu/llm_wiki", "Karpathy 式 LLM Wiki：AI 把文档整理成页面", "自己电脑上的 Markdown", "想要可阅读、会积累的知识库"],
-            ["Wenlan（文澜）", "LLM Wiki，加上来源更新时提醒、不覆盖你的修改", "自己的电脑", "同时用 Claude Code、Codex 等好几个 AI 工具"],
-          ],
-        },
+        id: "worked-example-question",
+        heading: "3. 在 Claude 中提问并确认它确实查了来源",
+        body: ["开启新的 Claude 对话。如有需要，先在对话的连接器菜单中启用 Wenlan，发送下面的问题并允许读取请求。画面保留英文实测，下面提供同题的中文问法。确认回复里有 Wenlan Recall 调用和来源段落，而不只是看似合理的答案。", "第一次测试时，Claude 猜测 Cedar 是一个 Space，套用了不存在的 Space 筛选后报错。移除该筛选才成功，因此修正后的问题明确说明 Cedar 是项目名称，并要求不要设置 Space 筛选。"],
+        code: { label: "复制到已连接的 Claude 对话", code: "请使用 Wenlan 搜索 Cedar 项目文档。Cedar 是项目名称，不是 Space；不要设置 Space 筛选。已批准的上线日期、支持渠道、日期变更原因、导出格式和产品价格分别是什么？请引用文件名和支持段落。引用旧日期不代表已批准的决定发生变化。文档没有说明的内容请回答未知。只使用 Cedar 来源，不要写入任何内容。" },
+
       },
       {
-        id: "build-a-personal-knowledge-base",
-        heading: "一步步搭建个人知识库",
-        body: [
-          "不管选哪个工具，流程都一样。先小范围跑通，再扩大。",
-        ],
-        bullets: [
-          "选一个你常要查的主题，把 10 到 20 份相关文档放进同一个文件夹。",
-          "决定搭法：只想问答，用 ima、Cherry Studio 或 AnythingLLM；想积累成页面，用 LLM Wiki。",
-          "导入文档。扫描型 PDF 要先做文字识别（OCR），否则 AI 读不到内容。",
-          "问三个测试问题：一个文档里有答案的、一个没有答案的、一个要综合两份文档的。",
-          "改一份文档再问一次，确认答案跟着变了。",
-        ],
-        link: {
-          label: "想用 Obsidian + Claude Code 自己搭？看 LLM Wiki 完整教程",
-          href: "/learn/distilled-wiki-pages-ai-memory",
-        },
+        id: "check-original-source",
+        heading: "4. 在文澜核对原文",
+        body: ["回到 Sources → Cedar project → decision-2026-10-08.md，对比 Claude 引用的段落和原文。原文批准日期为 11 月 19 日，取代了 11 月 12 日。较晚的通话记录只是引用旧日期，并没有批准新的变更。"],
+        image: { src: "/images/product-evidence/wenlan-cedar-approved-source.jpg", alt: "文澜打开已批准决定的原始文档；Info 面板显示它索引为一个段落。", caption: "在文澜中核对原文和索引状态。", width: 2560, height: 1440 },
       },
       {
-        heading: "用两份虚构笔记试跑 Obsidian + Claude Code",
-        body: [
-          "先确认 Claude Code 已安装并登录。在 Obsidian 新建并打开一个测试 vault，加入下面两份虚构教学笔记。",
+        id: "worked-example-update",
+        heading: "5. 添加更新，用新的 Claude 对话再查一次",
+        body: ["下载下方更新文件，只把 decision-2026-10-15.md 移到 Cedar 文件夹。在文澜回到该文件夹点击 Refresh，确认显示四个文件和四条记忆。提问前先打开新文件，查看文澜读到的内容。"],
+        steps: [
+          { title: "检查更新后的来源", body: "新笔记把支持渠道改为电子邮件和 App 内支持；上线日期仍是 11 月 19 日，导出格式仍是 CSV。普通文件夹会定期检查，但要用 Refresh 和索引状态确认这次更新已经读取。", image: { src: "/images/product-evidence/wenlan-cedar-update-source.jpg", alt: "点击 Refresh 后文澜显示四个文件和四条记忆；新来源更新支持方式，上线日期保持不变。", caption: "确认新文件已读取，再对比文档中改变和未改变的内容。", width: 2560, height: 1440 } },
+          { title: "在全新的 Claude 对话中重复同一问题", body: "用修正后的问题在全新的 Claude 对话中再问一次。不要把前一个答案贴进新对话。对比两次回答和引用，再回到来源文件核对。", image: { src: "/images/product-evidence/claude-cedar-updated-answer.jpg", alt: "另一个全新的 Claude 对话读取更新后的来源：支持变成电子邮件和 App 内，上线日期仍为 11 月 19 日。", caption: "新对话读到了更新后的支持方式，并保留原批准日期。", width: 1382, height: 753 } },
         ],
-        code: {
-          label: "research.md 和 decision.md",
-          code: "research.md\n# 用户研究（虚构）\n- 用户经常找不到原始研究报告。\n\ndecision.md\n# 下一轮决定（虚构）\n- 下一轮加入文件名引用，方便回到来源。",
-        },
+        link: { label: "下载支持方式更新文件（.md）", href: "/examples/claude-knowledge-base-check/updates/decision-2026-10-15.md" },
       },
       {
-        heading: "在这个 vault 启动 Claude Code",
-        body: [
-          "在终端里切换到新 vault 的实际路径，再启动 Claude Code。启动后，下一节会提供要贴进对话的只读问题。",
-        ],
-        code: {
-          label: "在终端启动 Claude Code",
-          code: "cd '<新 vault 的实际文件夹路径>'\nclaude",
-        },
+        id: "recorded-claude-knowledge-base-check",
+        heading: "本次实际测试得到的结果", body: ["我们在 2026 年 10 月 20 日用 Wenlan 0.19.2 和 Claude Opus 5.5 Medium 跑完了上述桌面和浏览器流程。Claude 工具回复包含 Cedar 来源文本。两个对话都引用了相关笔记；第二个对话没有沿用前一个对话的上下文。", "这个小型测试证明这几份文件可以被检索，并且我们手动确认了更新。它不能证明 wiki 会自动维护、PDF 导入、Codex 的表现或离线 AI。Whole library 搜索也取回了 Atlas 演示内容；Claude 虽然没有把它写进答案，但提示词并不是访问权限边界。"],
+        table: { columns: ["核对项目", "三份来源时", "添加更新后"], rows: [["批准日期", "November 19", "November 19"], ["支持方式", "Email only", "Email and in-app"], ["原因／导出格式", "Security review／CSV", "Security review／CSV"], ["未提供的价格", "Unknown", "Unknown"]] },
+        link: { label: "查看 GUI 实测与此前 CLI 测试记录", href: "/examples/claude-knowledge-base-check/recorded-result.md" },
       },
+      { heading: "什么是个人 AI 知识库？", body: ["个人 AI 知识库是自己的文档、笔记和对话记录，加上能根据这些资料回答并指出来源的 AI。它和面向企业客户的客服知识库不同，重点是你自己工作时要查的信息。", "常见做法有每次提问时检索文档（RAG），或将来源整理成可持续维护、能回查引用的 Wiki 页面（LLM Wiki）。来源变化后仍需同步并检查受影响的内容。"], figure: "llm-wiki-vs-rag" },
+      { heading: "Claude Projects 能当个人知识库吗？", body: ["可以。如果你只需要几段相关对话共用参考文件，可以先试 Claude Projects；只想问一份 PDF，也不必额外安装知识库工具。若希望多个对话或工具复用同一组来源，并能在一个地方查看来源和更新，再比较文澜等来源管理方式。"], link: { label: "查看 Claude Projects 最新说明", href: "https://support.claude.com/en/articles/9517075-what-are-projects" } },
       {
-        heading: "用只读问题检查来源依据",
-        body: [
-          "在 Claude Code 对话中贴上下面的问题；下表的参考答案只根据这两份虚构笔记。",
-          "请只读取当前 vault 中的 research.md 和 decision.md，不要修改任何来源文件。根据这两份笔记，下一轮应该做什么？为什么？负责人是谁？请引用文件名；如果笔记没有说明负责人，请明确回答无法判断，不要猜测。",
+        id: "try-obsidian-test-vault", heading: "进阶分支：使用 Obsidian vault 或 CLI", body: ["如果要走 Obsidian 分支，在 Manage vaults → Open folder as vault → Open 中选择 Cedar 文件夹。查看笔记不需要社区插件。Claude Code 或 Codex 若要直接读取该文件夹，则需安装并登录相应客户端。"],
+        steps: [
+          { title: "在 Obsidian 中打开相同来源", body: "打开 decision-2026-10-08，确认批准日期。生成的答案留在 vault 外。若要按前面的图形界面流程使用文澜，选择 Connect Obsidian vault，再按需刷新。", image: { src: "/images/product-evidence/obsidian-cedar-approved.jpg", alt: "Obsidian 1.13.7 中相同的 Cedar 原始决定笔记；这是来源文档，不是 AI 回答。", caption: "Obsidian 中的 Cedar 原始来源。", width: 2048, height: 1600 } },
+          { title: "直接让编程客户端读取文件夹", body: "替换以下路径后，在终端中启动 Claude Code，并要求它只读取来源文档。若使用 Codex，将 claude 换成 codex。此做法让客户端直接读取文件夹，不会导入 Wenlan。", code: { label: "可选命令：替换文件夹路径，再启动 Claude Code", code: "cd \"/full/path/to/Cedar project\"\nclaude" } },
+          { title: "另一种进阶做法：导入已连接 Wenlan 的来源", body: "如果要让 Claude Code 或 Codex 使用 Wenlan 的来源检索，先按设置指南连接客户端，再在终端中运行以下导入命令。这是上一个“直接读取文件夹”做法的替代方案；导入完成后，再开启客户端对话。", code: { label: "可选的 Wenlan 导入命令", code: "wenlan status\nwenlan sources add \"/full/path/to/Cedar project\"" } },
         ],
-        table: {
-          columns: ["核对项目", "参考答案", "来源"],
-          rows: [
-            ["下一轮做什么", "加入文件名引用。", "decision.md"],
-            ["为什么", "用户经常找不到原始研究报告。", "research.md"],
-            ["负责人", "笔记未说明，无法判断。", "research.md、decision.md"],
-          ],
-        },
+        link: { label: "连接 CLI 客户端", href: "/docs/mcp-clients" },
       },
-      {
-        heading: "怎么验收：三个问题就够",
-        body: [
-          "文档里有答案的问题，AI 应该答对并指出是哪一份文档。没有答案的问题，AI 应该说找不到，而不是编一个。要综合两份文档的问题，最能看出工具是真的读懂了，还是只抓到一段文字。",
-          "接着把 decision.md 的决定改成「下一轮加入原始研究报告的直接链接，取代只列文件名」，保存后再问相同问题。答案应采用新决定、引用 decision.md，负责人仍是未知。这只是起步检查，不能保证所有问题都答对。",
-        ],
-      },
-      {
-        heading: "个人知识库常卡在哪里",
-        body: ["自己搭或用现成工具，最常遇到这四个问题："],
-        bullets: [
-          "文档更新了，答案没更新：RAG 会为每个问题检索，但来源变化仍需同步或重建索引；维护型页面则要跟踪来源修订并审核，才能标记或更新受影响内容。",
-          "AI 改掉你手动修正的内容：自己搭的 LLM Wiki 要在规则里写清楚哪些段落不能改。",
-          "每个 AI 工具各存一份：ChatGPT、Claude、Codex 各记各的，久了内容不一致。",
-          "扫描型 PDF 读不到：先 OCR，再导入。",
-        ],
-      },
-      {
-        heading: "用 Wenlan 搭建个人知识库",
-        body: [
-          "Wenlan（文澜）是开源的桌面 app，用的是上面的 LLM Wiki 做法。它把文档、笔记和 AI 对话整理成带出处的页面；来源改了会标出哪些页面要更新，而且不会覆盖你的修改。Claude Code、Codex 和其他 AI 工具读的是同一份知识库。",
-          "支持 Markdown（.md）、文本文件（.txt）、可提取文字的 PDF（.pdf），以及 Obsidian vault。Obsidian vault 只会被读取，原始笔记不会被修改。",
-          "普通文件夹也能让多个 AI 工具读取，只是共享的话不必改用 Wenlan；它的用途是把导入、页面维护、引用和审核做成内置流程。想试用时，先按设置指南安装并连接 AI 工具，再添加一个边界明确的测试文件夹、文件或 Obsidian vault。",
-        ],
-        bullets: [
-          "在终端先运行 wenlan status 确认已连通，再用 wenlan sources add <路径> 添加来源，检查报告中找到、导入、跳过和错误的数量；文件夹来源不会导入任意代码文件。",
-          "来源变更后，再运行一次相同的 sources add 命令即可同步；Obsidian vault 要按需重新同步。",
-          "在已安装 Wenlan 插件的 Claude Code 或 Codex 对话中，用 /wenlan distill <主题> 生成持续维护的页面，再用 /wenlan pages <主题> 打开；/wenlan lint 和 /wenlan curate 用于检查问题并审核修订。这些是对话命令，不在终端运行；只支持 MCP 的 AI 工具改用它提供的 Wenlan 工具。",
-        ],
-        code: {
-          label: "终端：换成实际的测试文件夹路径",
-          code: "wenlan status\nwenlan sources add ~/Knowledge/my-topic",
-        },
-      },
+      { heading: "文件和隐私限制", body: ["文澜支持 .md、.txt 和可提取文字的 .pdf。图片型或扫描型 PDF 需要先做 OCR。文件夹来源不会导入任意代码文件。文澜读取 Obsidian vault 时不会改写 Markdown。", "本地存储不代表模型也在本地。使用个人文档前，先确认来源分享范围和 AI 提供商设置；不希望连接的 App 继续查询时，关闭 Web access 或移除该连接器。"] },
     ],
     faqs: [
       {
@@ -4983,7 +4901,7 @@ const zhCNArticles = {
       {
         question: "搭建个人知识库要花钱吗？",
         answer:
-          "不一定。ima、Cherry Studio、AnythingLLM、Obsidian 和 Wenlan 都可以免费使用。如果用 Claude Code 或其他大模型来整理，费用来自模型的订阅或 API。",
+          "Wenlan 本身免费。Claude 目前的自定义连接器说明包含 Free 方案，免费账户限一个自定义连接器；仍受该方案的用量限制。请先看上方最新说明，无须为这篇练习预先升级。",
       },
       {
         question: "资料会不会外泄？",
@@ -5014,6 +4932,10 @@ const zhCNArticles = {
     ],
     officialReferences: [
       {
+        label: "Claude Projects 使用方式与可用性",
+        href: "https://support.claude.com/en/articles/9517075-what-are-projects",
+      },
+      {
         label: "Karpathy：LLM Wiki（GitHub gist）",
         href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
       },
@@ -5036,7 +4958,7 @@ const zhCNArticles = {
     ],
     cta: {
       heading: "用一个文件夹搭建你的个人知识库",
-      body: "下载 Wenlan，加入一个主题的文档，用三个测试问题确认它答得对、说得出出处。",
+      body: "下载 Wenlan，加入一个主题的文档，用这五个问题核对回答与来源，再添加一份更新重试。",
     },
   },
   "choose-ai-knowledge-base-tool": {
