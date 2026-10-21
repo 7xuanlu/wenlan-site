@@ -1545,6 +1545,7 @@ test("public command guidance tracks the current plugin contract", async () => {
     "distill",
     "forget",
     "lint",
+    "map",
     "pages",
     "setup",
   ]);
