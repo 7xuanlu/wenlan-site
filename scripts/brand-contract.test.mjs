@@ -1152,60 +1152,65 @@ test("public release surfaces expose the verified current artifacts and release 
   const structuredData = await readRepo("src/app/structured-data.ts");
   const llms = await readRepo("public/llms.txt");
 
-  assert.equal(version, "0.19.2");
+  assert.equal(version, "0.19.3");
   assert.equal(WENLAN_RELEASE.version, version);
-  assert.equal(WENLAN_RELEASE.tag, "v0.19.2");
-  assert.equal(WENLAN_RELEASE.publishedAt, "2026-10-19T05:50:26Z");
+  assert.equal(WENLAN_RELEASE.tag, "v0.19.3");
+  assert.equal(WENLAN_RELEASE.publishedAt, "2026-10-21T19:46:04Z");
   assert.equal(
     WENLAN_RELEASE.releaseUrl,
-    "https://github.com/wenlan-app/wenlan/releases/tag/v0.19.2",
+    "https://github.com/wenlan-app/wenlan/releases/tag/v0.19.3",
   );
   assert.equal(
     WENLAN_RELEASE.setupGuideUrl,
-    "https://github.com/wenlan-app/wenlan/blob/v0.19.2/docs/setup-with-ai.md#install-the-runtime",
+    "https://github.com/wenlan-app/wenlan/blob/v0.19.3/docs/setup-with-ai.md#install-the-runtime",
   );
   assert.deepEqual(
     WENLAN_RELEASE.assets.map(({ id, href, format, size }) => ({ id, href, format, size })),
     [
       {
         id: "windows-desktop-x64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.2/Wenlan_0.19.2_x64-setup.exe",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.3/Wenlan_0.19.3_x64-setup.exe",
         format: "EXE",
-        size: "56.2 MiB",
+        size: "57.1 MiB",
       },
       {
         id: "windows-x64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.2/wenlan-windows-x64.zip",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.3/wenlan-windows-x64.zip",
         format: "ZIP",
-        size: "76.8 MiB",
+        size: "78.1 MiB",
       },
       {
         id: "macos-arm64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.2/Wenlan_0.19.2_aarch64.dmg",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.3/Wenlan_0.19.3_aarch64.dmg",
         format: "DMG",
-        size: "77.7 MiB",
+        size: "79.3 MiB",
       },
       {
         id: "macos-runtime-arm64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.2/wenlan-darwin-arm64.tar.gz",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.3/wenlan-darwin-arm64.tar.gz",
         format: "TAR.GZ",
-        size: "53.2 MiB",
+        size: "54.5 MiB",
       },
       {
         id: "linux-x64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.2/wenlan-linux-x64.tar.gz",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.3/wenlan-linux-x64.tar.gz",
         format: "TAR.GZ",
-        size: "66.2 MiB",
+        size: "67.6 MiB",
       },
       {
         id: "linux-arm64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.2/wenlan-linux-arm64.tar.gz",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.3/wenlan-linux-arm64.tar.gz",
         format: "TAR.GZ",
-        size: "66.1 MiB",
+        size: "67.4 MiB",
       },
     ],
   );
 
+  assert.match(changelog, /^## \[0\.19\.3\].*\(2026-10-21\)/m);
+  assert.match(changelog, /a note can rely on lines of code/);
+  assert.match(changelog, /a note can rely on other notes and is told when they change/);
+  assert.match(changelog, /\/wenlan map writes repository orientation notes tied to code lines/);
+  assert.match(changelog, /whitespace-only edits no longer flag a code basis as changed/);
   assert.match(changelog, /^## \[0\.19\.2\].*\(2026-10-19\)/m);
   assert.match(changelog, /one \/wenlan entry for every Wenlan workflow/);
   assert.match(changelog, /connect Muse Code, recognize Muse/);
@@ -1235,17 +1240,20 @@ test("public release surfaces expose the verified current artifacts and release 
   assert.match(docs, /Import reports real phase progress and batch status/);
 
   assert.match(docs, /v0\.19\.1 highlights/);
+  assert.match(docs, /v0\.19\.2 highlights/);
+  assert.match(docs, /A page can rely on lines of code/);
+  assert.match(docs, /\/wenlan map writes repository orientation pages/);
   assert.match(docs, /The Claude Code plugin has one entry, \/wenlan/);
   assert.match(docs, /connects Muse Code with one click/);
   assert.match(docs, /getting-started home/);
-  assert.equal(date, "2026-10-19");
+  assert.equal(date, "2026-10-21");
   assert.match(docs, /v0\.18\.0 highlights/);
   assert.match(docs, /one home page with an honest empty state/);
   assert.match(docs, /removes the .*Where AI looked.* section/);
   assert.match(docs, /global shortcut is occupied/);
   assert.match(docs, /window stays still after launch/);
-  assert.match(structuredData, /tree\/v0\.19\.2\/app/);
-  assert.match(llms, /tree\/v0\.19\.2\/app/);
+  assert.match(structuredData, /tree\/v0\.19\.3\/app/);
+  assert.match(llms, /tree\/v0\.19\.3\/app/);
 });
 
 test("download information architecture keeps the homepage compact and the full matrix on a localized hub", async () => {

@@ -1308,6 +1308,7 @@ export const docPages: DocPage[] = [
           "/wenlan distill: organize related memories into notes.",
           "/wenlan pages: list recent notes or open a matching note in your editor.",
           "/wenlan lint: run the canonical read-only memory and note health report.",
+          "/wenlan map: write repository orientation pages tied to the code lines they describe, so a later reader knows where to look and whether the page is still current.",
           "/wenlan forget: delete a memory by ID when it should not remain in Wenlan.",
         ],
       },
@@ -1671,7 +1672,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Current runtime shape",
         body: [
-          "The current public docs describe the v0.19.2 runtime shape: Claude Code and Codex plugins, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed notes with revisions, session handoffs, status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
+          "The current public docs describe the v0.19.3 runtime shape: Claude Code and Codex plugins, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed notes with revisions, session handoffs, status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
           "The biggest practical upgrade checks are platform support, package path alignment, and spaces. Confirm your machine's service manager, confirm MCP clients launch the connector under ~/.wenlan/bin, and confirm the active space is the one you expect.",
         ],
         link: {
@@ -3680,7 +3681,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository's security policy commits to acknowledgment within 48 hours and a fix timeline within 7 days. The latest released version is supported (the current stable 0.19.2 line); older releases are best-effort.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository's security policy commits to acknowledgment within 48 hours and a fix timeline within 7 days. The latest released version is supported (the current stable 0.19.3 line); older releases are best-effort.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3833,7 +3834,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Open the app source",
-          href: "https://github.com/wenlan-app/wenlan/tree/v0.19.2/app",
+          href: "https://github.com/wenlan-app/wenlan/tree/v0.19.3/app",
         },
       },
       {
@@ -3878,14 +3879,14 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.19.2",
+      "Wenlan version 0.19.3",
       "wenlan-mcp release notes",
     ],
     updatedAt: "2026-10-19",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Quick answer: the current stable release in the repository changelog is v0.19.2, dated 2026-10-19.",
+      "Quick answer: the current stable release in the repository changelog is v0.19.3, dated 2026-10-21.",
       "The unified release publishes native runtime archives plus macOS Apple Silicon and Windows x64 desktop builds and updater artifacts.",
     ],
     sections: [
@@ -4107,7 +4108,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.19.2, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.19.3, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },

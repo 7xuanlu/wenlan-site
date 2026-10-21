@@ -303,7 +303,7 @@ test("public web-client guidance tracks the released wenlan-app remote access bo
   // old no-auth tunnel guidance must not be promoted to the current flow.
   for (const pattern of [/inspectRemotePairing/, /approveRemotePairing/]) assert.match(pairingDialog, pattern);
   assert.match(remoteApps, /revokeRemoteGrant/);
-  for (const pattern of [/needs to be on and online/i, /Allow \{\{name\}\} to search your library\?/, /Your other Spaces stay private/, /Share whole library/, /Share one Space/]) assert.match(remoteResources, pattern);
+  for (const pattern of [/needs to be on and online/i, /Allow \{\{name\}\} to use your library\?/, /Your other Spaces stay private/, /Share whole library/, /Share one Space/]) assert.match(remoteResources, pattern);
   assert.doesNotMatch(remotePanel, /remoteAccess\.noAuthWarning/);
   assert.match(remoteRuntime, /relay/);
   for (const source of [docs, english, simplified, traditional]) {
