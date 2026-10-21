@@ -3892,17 +3892,32 @@ export const docPages: DocPage[] = [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.19.2 is the current stable release recorded in CHANGELOG.md and GitHub Releases, dated 2026-10-19. It adds a getting-started home, one /wenlan entry for the plugins, Muse and Muse Code connections, and direct note editing by agents. See the release notes for the exact shipped changes.",
+          "Wenlan v0.19.3 is the current stable release recorded in CHANGELOG.md and GitHub Releases, dated 2026-10-21. It lets a page rely on lines of code and on other pages, and tells you when what it relies on changes. See the release notes for the exact shipped changes.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
         ],
         bullets: [
+          "A page can rely on lines of code. When an AI writes a page from code, it says which lines it relied on; Wenlan remembers them and marks the page when those lines change. Edits that only move the lines or change whitespace do not count.",
+          "The app shows the code lines a page relies on, with the lines as they were and as they are now when they changed, and names the agent behind each edit in a page's basis diff. You can confirm no impact, edit the page, or stop relying on the code.",
+          "/wenlan map writes repository orientation pages tied to the code lines they describe, so a later reader knows where to look and whether the page is still current.",
+          "A page can rely on other pages and is told when they change. Typing [[ in the editor links to a page and relies on it, and the app lists and manages a page's bases.",
+          "save_source keeps documents an AI read in other apps together with their link, and Wenlan remembers which AI conversation a memory or page came from.",
+          "Obsidian vaults follow changes in the background, checked about every 30 seconds, instead of needing a manual refresh.",
+          "Wiki documents are called pages everywhere in the English app.",
+        ],
+      },
+      {
+        heading: "v0.19.2 highlights",
+        body: [
+          "v0.19.2, dated 2026-10-19, adds a getting-started home, one /wenlan entry for the plugins, Muse and Muse Code connections, and direct note editing by agents.",
+        ],
+        bullets: [
           "New users get a getting-started home: Wenlan asks how you want to start, then a checklist tracks writing a note, connecting an AI tool, bringing in sources, and letting an AI use what you saved.",
-          "The Claude Code plugin has one entry, /wenlan. The slash menu shows /wenlan, /brief, /capture, /recall, and /handoff; setup, distill, pages, lint, curate, and forget run as words after /wenlan, such as /wenlan lint. The old standalone forms are gone. In Codex the entry is $wenlan.",
+          "The Claude Code plugin has one entry, /wenlan. The slash menu shows /wenlan, /brief, /capture, /recall, and /handoff; setup, distill, pages, lint, curate, and forget run as words after /wenlan, such as /wenlan lint. In Codex the entry is $wenlan.",
           "/handoff brings the notes a session used up to date without overwriting edits made in the meantime.",
           "The desktop app connects Muse Code with one click, and the Web access card is a single switch again. Muse connects through Other apps and is named in the Allow dialog.",
           "Agents can edit notes directly when they work from the latest version. Turn on Review every change in a note's menu to send every AI change to review first.",
           "Brief keeps a history, so you can read earlier versions with wenlan brief history.",
-          "Review cards say why a change needs review and who wrote each version, and Wenlan documents are called notes everywhere in the app.",
+          "Review cards say why a change needs review and who wrote each version.",
         ],
       },
       {
