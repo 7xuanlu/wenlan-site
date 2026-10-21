@@ -151,6 +151,7 @@ const pluginDailyCommands = `/wenlan          status, or setup when Wenlan is no
 /wenlan distill  synthesize or refresh notes
 /wenlan pages    list or open notes
 /wenlan lint     run read-only memory and note health diagnostics
+/wenlan map      write or refresh repository orientation notes tied to code
 /wenlan curate   audit pending captures or revisions
 /wenlan forget   delete a memory by ID`;
 

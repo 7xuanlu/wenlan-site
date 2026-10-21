@@ -16,11 +16,16 @@ type EvidenceImageData = {
 type EvidenceImageProps = {
   image: EvidenceImageData;
   locale?: Locale;
+  loading?: "eager" | "lazy";
+  presentation?: "standard" | "overlay";
+  /** Initial center of the detail viewport, as fractions of the full image. */
+  detailFocus?: { x: number; y: number };
 };
 
 const labels = {
   en: {
     expand: "View full size",
+    read: "Enlarge to read",
     close: "Close image",
     fit: "Fit",
     detail: "Zoom in",
@@ -30,6 +35,7 @@ const labels = {
   },
   "zh-TW": {
     expand: "放大查看",
+    read: "放大閱讀",
     close: "關閉圖片",
     fit: "全圖",
     detail: "放大細節",
@@ -39,6 +45,7 @@ const labels = {
   },
   "zh-CN": {
     expand: "放大查看",
+    read: "放大阅读",
     close: "关闭图片",
     fit: "全图",
     detail: "放大细节",
@@ -50,7 +57,7 @@ const labels = {
 
 type ViewMode = "fit" | "detail";
 
-export function EvidenceImage({ image, locale = "en" }: EvidenceImageProps) {
+export function EvidenceImage({ image, locale = "en", loading = "lazy", presentation = "standard", detailFocus }: EvidenceImageProps) {
   const copy = labels[locale];
   const [mode, setMode] = useState<ViewMode>("fit");
   const trigger = useRef<HTMLButtonElement>(null);
@@ -79,7 +86,12 @@ export function EvidenceImage({ image, locale = "en" }: EvidenceImageProps) {
     requestAnimationFrame(() => {
       const imageViewport = viewport.current;
       if (!dialog.current?.open || !imageViewport) return;
-      imageViewport.scrollTo({ top: 0, left: 0 });
+      const imageElement = imageViewport.querySelector("img");
+      const focus = nextMode === "detail" ? detailFocus : undefined;
+      imageViewport.scrollTo({
+        top: focus && imageElement ? Math.max(0, imageElement.clientHeight * focus.y - imageViewport.clientHeight / 2) : 0,
+        left: focus && imageElement ? Math.max(0, imageElement.clientWidth * focus.x - imageViewport.clientWidth / 2) : 0,
+      });
       if (nextMode === "detail") focusViewport();
     });
   };
@@ -90,8 +102,8 @@ export function EvidenceImage({ image, locale = "en" }: EvidenceImageProps) {
         ref={trigger}
         type="button"
         onClick={openImage}
-        aria-label={`${copy.expand}: ${image.alt}`}
-        className="group block w-full cursor-zoom-in overflow-hidden bg-[var(--o-bg-alt)] text-left focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--o-warm)]"
+        aria-label={`${presentation === "overlay" ? copy.read : copy.expand}: ${image.alt}`}
+        className="group relative block w-full cursor-zoom-in overflow-hidden bg-[var(--o-bg-alt)] text-left focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--o-warm)]"
       >
         <Image
           src={image.src}
@@ -99,10 +111,15 @@ export function EvidenceImage({ image, locale = "en" }: EvidenceImageProps) {
           width={image.width}
           height={image.height}
           sizes="(max-width: 768px) calc(100vw - 3rem), 1024px"
-          loading="lazy"
+          loading={loading}
           className="h-auto w-full"
         />
-        <span className="flex min-h-11 items-center justify-end px-4 text-sm font-semibold text-[var(--o-warm)] underline underline-offset-4">{copy.expand}</span>
+        <span className={presentation === "overlay"
+          ? "absolute right-3 bottom-3 inline-flex min-h-11 items-center gap-2 rounded-full bg-black/80 px-4 text-xs font-medium text-white"
+          : "flex min-h-11 items-center justify-end px-4 text-sm font-semibold text-[var(--o-warm)] underline underline-offset-4"}>
+          {presentation === "overlay" && <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5" /></svg>}
+          {presentation === "overlay" ? copy.read : copy.expand}
+        </span>
       </button>
 
       <dialog

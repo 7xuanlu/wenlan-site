@@ -57,3 +57,8 @@
 .reading-content .workflow-comparison tbody tr + tr,
 .reading-content .workflow-comparison tbody th { border: 0; }
 .reading-content .workflow-comparison .workflow-wenlan { background: var(--o-bg-alt); }
+
+/* This page leads with its recorded answer; other article headers retain their rhythm. */
+.reading-content .reading-page-header[data-lead-example] .reading-title { margin-top: 16px; }
+.reading-content .reading-page-header[data-lead-example] h1 { font-size: clamp(1.75rem, 2.6vw, 2.25rem); }
+.reading-content .reading-page-header[data-lead-example] h1 + p { margin-top: 14px; font-size: 16px; line-height: 1.6; }

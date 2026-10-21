@@ -26,6 +26,9 @@ import { getCoreContent } from "@/i18n/content";
 import { SiteHeader } from "@/components/site-header";
 import { WorkflowComparisonGuide } from "@/components/learn/workflow-comparison-guide";
 import { RecordedWorkflowProof } from "@/components/learn/recorded-workflow-proof";
+import { ArticleSteps } from "@/components/learn/article-steps";
+import { ArticleOpeningExample } from "@/components/learn/article-opening-example";
+import { EvidenceImage } from "@/components/learn/evidence-image";
 import { ComparisonTableSection, LearnFigure, SectionTable } from "@/components/learn/learn-figures";
 
 function sectionId(heading: string): string {
@@ -220,7 +223,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
 
       <ReadingShell locale="en" section="learn" path={`/learn/${article.slug}`} toc={learnContents(article, article.sections.map(section => section.id ?? sectionId(section.heading)), "en")}>
       <article>
-        <header className="reading-page-header relative px-6 py-24 sm:py-32">
+        <header data-lead-example={article.openingExample ? "true" : undefined} className="reading-page-header relative px-6 py-24 sm:py-32">
           <ArticleHalo />
           <div className="relative z-10 mx-auto max-w-5xl">
             <nav className="flex items-center gap-3 font-mono text-xs text-[var(--o-text-muted)]">
@@ -240,9 +243,11 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
             </nav>
             <div className="reading-title mt-8">
               <div className="min-w-0">
+                {!article.openingExample && (
                 <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-warm)]/80 uppercase">
                   {article.eyebrow}
                 </p>
+                )}
                 <h1 className="warm-glow max-w-full font-serif text-[2rem] leading-[1.08] font-medium tracking-tight [overflow-wrap:anywhere] [word-break:normal] sm:[overflow-wrap:break-word] sm:[word-break:keep-all] sm:text-7xl sm:leading-[1.05]"
                 >
                   <ArticleTitleText title={article.title} />
@@ -250,6 +255,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                 <p className="mt-8 max-w-2xl break-words text-lg leading-relaxed text-[var(--o-text-secondary)]">
                   {article.description}
                 </p>
+                {article.openingExample && <ArticleOpeningExample example={article.openingExample} locale={"en"} />}
                 <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[11px] text-[var(--o-text-muted)]">
                   <span>{article.author}</span>
                   <span>
@@ -279,7 +285,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                   </div>
                 )}
                 {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work", "build-local-ai-knowledge-base-from-documents"].includes(article.slug) && (
-                  <a href="#recorded-workflow" className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-[var(--o-warm)] underline underline-offset-4">Inspect the real app screens</a>
+                  <a href={article.slug === "build-local-ai-knowledge-base-from-documents" ? "#add-documents-in-wenlan" : "#recorded-workflow"} className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-[var(--o-warm)] underline underline-offset-4">Inspect the real app screens</a>
                 )}
               </div>
               </div>
@@ -287,7 +293,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
           </div>
         </header>
 
-        <section className="reading-summary-section px-6 py-16">
+        {!article.openingExample && <section className="reading-summary-section px-6 py-16">
           <div className="mx-auto max-w-5xl">
             <div className="reading-summary grid min-w-0 grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-3">
               {article.heroBullets.map((bullet, index) => (
@@ -302,7 +308,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
               ))}
             </div>
           </div>
-        </section>
+        </section>}
 
         {article.slug === "choose-ai-knowledge-base-tool" && <WorkflowComparison copy={getCoreContent("en").home.content.redesign.pains} locale="en" />}
 
@@ -335,6 +341,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                         <p key={paragraph} className={section.id?.startsWith("worked-example") ? "text-pretty" : undefined}>{paragraph}</p>
                       ))}
                     </div>
+                    {section.steps && <ArticleSteps steps={section.steps} locale={"en"} />}
                     {section.figure && <LearnFigure id={section.figure} locale="en" />}
                     {section.table && <SectionTable table={section.table} />}
                     {section.bullets && (
@@ -358,6 +365,12 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                           <code>{section.code.code}</code>
                         </pre>
                       </div>
+                    )}
+                    {section.image && (
+                      <figure className="mt-6 overflow-hidden rounded-xl border border-[var(--o-border)]">
+                        <EvidenceImage image={section.image} locale={"en"} />
+                        <figcaption className="px-4 pb-4 text-sm leading-relaxed text-[var(--o-text-muted)]">{section.image.caption}</figcaption>
+                      </figure>
                     )}
                     {section.link && (section.link.href.startsWith(`/learn/${article.slug}#`) ? (
                       <a
@@ -461,7 +474,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
           </div>
         </section>
 
-        {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work", "wenlan-vs-obsidian-ai-memory", "build-local-ai-knowledge-base-from-documents"].includes(article.slug) && <RecordedWorkflowProof locale="en" />}
+        {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work", "wenlan-vs-obsidian-ai-memory"].includes(article.slug) && <RecordedWorkflowProof locale="en" />}
 
         <section id="article-faq" className="px-6 py-20">
           <div className="mx-auto max-w-3xl">

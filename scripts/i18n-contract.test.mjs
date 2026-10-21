@@ -1812,12 +1812,12 @@ test("localized document-to-knowledge-base guides keep supported source boundari
   );
   const expectations = {
     "zh-TW": {
-      title: "AI 知識庫是什麼？個人怎麼建立（工具比較＋步驟）",
+      title: "如何用自己的文件建立 AI 知識庫",
       keyword: "AI 知識庫建立",
       unsupportedPdf: "掃描型 PDF",
     },
     "zh-CN": {
-      title: "个人知识库怎么搭建？AI + Obsidian 实操（附工具对比）",
+      title: "如何用自己的文档搭建 AI 知识库",
       keyword: "个人知识库搭建",
       unsupportedPdf: "扫描型 PDF",
     },
@@ -1831,7 +1831,7 @@ test("localized document-to-knowledge-base guides keep supported source boundari
     assert.ok(article);
     assert.equal(article.title, expected.title);
     assert.equal(article.publishedAt, "2026-08-01");
-    assert.equal(article.updatedAt, "2026-10-08");
+    assert.equal(article.updatedAt, "2026-10-20");
     assert.ok(article.keywords.includes(expected.keyword));
     assert.match(JSON.stringify(article), /wenlan sources add/);
     assert.match(JSON.stringify(article), /\.md/);
@@ -1849,10 +1849,10 @@ test("English document-to-knowledge-base guide owns the implementation gap", asy
   assert.ok(article);
   assert.equal(
     article.title,
-    "How to Build a Local AI Knowledge Base from Markdown, PDFs, and Obsidian",
+    "Build a Personal AI Knowledge Base from Your Documents",
   );
   assert.equal(article.publishedAt, "2026-08-01");
-  assert.equal(article.updatedAt, "2026-10-08");
+  assert.equal(article.updatedAt, "2026-10-20");
   assert.ok(article.keywords.includes("AI knowledge base builder"));
   const text = JSON.stringify(article);
   assert.match(text, /wenlan sources add/);

@@ -2232,16 +2232,14 @@ const trustArticles: BaseSpec[] = [
 ];
 
 const localKnowledgeBaseArticle: LearnArticle = {
-  slug: "build-local-ai-knowledge-base-from-documents",
-  eyebrow: "Workflow",
-  category: "Workflows",
-  title: "How to Build a Local AI Knowledge Base from Markdown, PDFs, and Obsidian",
-  description:
-    "Build a personal AI knowledge base from a few local documents, choose a simple folder or a maintained wiki, and check answers against their sources.",
-  metaTitle: "Build a Personal AI Knowledge Base from Documents | Wenlan",
-  metaDescription:
-    "Start a personal AI knowledge base with two Markdown files. Compare document Q&A, a local folder or vault, and a maintained wiki, then check source citations.",
-  keywords: [
+  "slug": "build-local-ai-knowledge-base-from-documents",
+  "eyebrow": "Workflow",
+  "category": "Workflows",
+  "title": "Build a Personal AI Knowledge Base from Your Documents",
+  "description": "Ask questions across your notes and documents, with sources you can check. No terminal needed.",
+  "metaTitle": "Build a Personal AI Knowledge Base from Documents | Wenlan",
+  "metaDescription": "Build a personal AI knowledge base without a terminal. Add documents in Wenlan, ask Claude, check sources, and verify an update with our real example.",
+  "keywords": [
     "personal AI knowledge base",
     "build AI knowledge base",
     "local AI knowledge base",
@@ -2250,160 +2248,310 @@ const localKnowledgeBaseArticle: LearnArticle = {
     "PDF AI knowledge base",
     "Obsidian AI knowledge base",
     "AI knowledge base for coding agents",
+    "Claude knowledge base",
+    "Codex knowledge base"
   ],
-  publishedAt: "2026-08-01",
-  updatedAt: "2026-10-08",
-  author: AUTHOR,
-  readingTime: "7 min read",
-  audience:
-    "People building a personal knowledge base from documents for Claude Code, Codex, Cursor, or another AI assistant",
-  heroBullets: [
-    "Use document Q&A for a one-off question, or a folder or vault when an agent should read files over time.",
-    "Keep a maintained wiki when shared, source-backed pages should survive across sessions and tools.",
-    "Start with two Markdown files and check whether an answer names the evidence and leaves gaps unknown.",
+  "publishedAt": "2026-08-01",
+  "updatedAt": "2026-10-20",
+  "author": "Qi-Xuan Lu",
+  "readingTime": "7 min read",
+  "audience": "People who want to ask AI about their own notes and documents without using a terminal",
+  "openingExample": {
+    "heading": "What you can do",
+    "usesHeading": "What can you do with it?",
+    "questions": [
+      "What have I already learned about this topic?",
+      "What did we decide about this project?",
+      "Which document supports this answer?"
+    ],
+    "context": "Here’s a real example: Claude searches three documents from a fictional project called Cedar to find its approved launch date.",
+    "question": "When is Cedar approved to launch?",
+    "answer": "November 19, 2026",
+    "answerDetail": "The November 12 plan was superseded.",
+    "sourceImage": {
+      "src": "/images/product-evidence/wenlan-cedar-approved-source.jpg",
+      "alt": "The original approved Cedar decision in Wenlan, replacing November 12 with November 19.",
+      "caption": "Original decision in Wenlan: November 19 replaces November 12.",
+      "width": 2560,
+      "height": 1440
+    },
+    "sourceLabel": "decision-2026-10-08.md",
+    "sourceHref": "#check-original-source",
+    "actionLabel": "Try the sample files",
+    "image": {
+      "src": "/images/product-evidence/claude-cedar-first-answer.jpg",
+      "alt": "Actual Claude Opus 5.5 response through Wenlan: November 19, email only, security review, CSV, and unknown price; filenames and passages accompany the answer.",
+      "caption": "Actual Claude reply; question above shortened.",
+      "width": 1382,
+      "height": 753
+    }
+  },
+  "heroBullets": [
+    "Add your documents in Wenlan; ask questions in a connected AI app such as Claude.",
+    "Follow the desktop and browser steps below without a terminal. CLI instructions are an advanced option.",
+    "Try three fictional files, then one update. Check the actual answers against their sources."
   ],
-  sections: [
+  "sections": [
     {
-      heading: "Quick answer: choose the smallest useful setup",
-      body: [
-        "A personal AI knowledge base can be as simple as a few files in a folder. Begin with the shape of work you need: ask a chatbot about documents for a one-time answer; keep an existing local folder or vault when an agent can read it as you work; use maintained wiki pages when you want an edited, reusable answer across sessions or tools.",
-        "Try a small set of files first. Add page maintenance when keeping answers current becomes recurring work.",
+      "id": "wenlan-knowledge-base",
+      "heading": "Why use Wenlan?",
+      "body": [
+        "Wenlan manages the documents; Claude uses them to answer your questions. Connect a folder, let Claude search its contents, and open the cited originals in Wenlan. When files change, refresh the source before asking again.",
+        "Choose this setup for documents you’ll reuse and update. A one-off PDF question may only need a direct upload or Claude Projects."
+      ]
+    },
+    {
+      "id": "worked-example-files",
+      "heading": "Start with three small documents",
+      "body": [
+        "Install Wenlan to manage the sources, and sign in to Claude in your browser to ask questions. The connection needs internet and your computer must stay on. Let Wenlan finish its local search setup before continuing.",
+        "Download and extract the Cedar ZIP into a new folder. It contains an initial plan, an approved change, and a later call quoting the old date. Keep the answer record and fourth file outside this folder until the update step."
       ],
-      table: {
-        columns: ["If you need…", "Start with…", "What to expect"],
-        rows: [
-          ["An answer from a few files once", "Document Q&A", "Convenient for a question; the context may be limited to that session."],
-          ["An agent to consult notes while you work", "A local folder or existing vault", "Files stay yours to organize; the agent needs a way to read them."],
-          ["An answer maintained across sessions and tools", "A source-backed wiki", "Pages need review as source documents change."],
+      "link": {
+        "label": "Download the three initial sources (.zip)",
+        "href": "/examples/claude-knowledge-base-check/initial-sources.zip"
+      }
+    },
+    {
+      "id": "add-documents-in-wenlan",
+      "heading": "1. Add the folder in Wenlan",
+      "steps": [
+        {
+          "title": "Choose Add a source → Connect a folder",
+          "body": "On the Wenlan home screen, click Add a source, then Connect a folder. Select your extracted Cedar folder in the file picker. For an existing vault, choose Connect Obsidian vault instead; leave your real archive out of this trial.",
+          "image": {
+            "src": "/images/product-evidence/wenlan-cedar-add-source.jpg",
+            "alt": "Wenlan 0.19.2: the actual Add a source menu, including Connect a folder and Connect Obsidian vault.",
+            "caption": "Wenlan 0.19.2: the actual Add a source menu, including Connect a folder and Connect Obsidian vault.",
+            "width": 2560,
+            "height": 1440
+          }
+        },
+        {
+          "title": "Check that all three files are indexed",
+          "body": "Open Sources → Cedar project. In Info, check Files: 3, Memories: 3 and Status: Available. If indexing is unfinished, wait or use Refresh. Seeing a filename alone does not prove it is searchable.",
+          "image": {
+            "src": "/images/product-evidence/wenlan-cedar-three-sources.jpg",
+            "alt": "The three fictional Cedar sources in Wenlan, with three files and three indexed memories.",
+            "caption": "The three fictional Cedar sources in Wenlan, with three files and three indexed memories.",
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      ],
+      "body": [
+        "Use a small test folder first so you can inspect every source."
+      ]
+    },
+    {
+      "id": "connect-claude-web",
+      "heading": "2. Connect Claude once, using the interface",
+      "body": [
+        "This route uses Wenlan’s experimental Web access. Retrieved text passes through wenlan-relay to Claude; it is not an offline model. Our test used a separate library containing only fictional Cedar and Atlas data."
+      ],
+      "steps": [
+        {
+          "title": "Enable Web access in Settings → Connections",
+          "body": "Before turning on Web access, confirm that every item in your Wenlan library is okay to share with Claude. Whole library exposes every Space and unscoped note, not just the Cedar folder. If there are private notes or you are unsure of the scope, stop here. Our test used Whole library in a separate library containing only fictional data. To continue with a shareable library, open the user account menu → Settings → Connections and turn on Let web and phone AI apps search your library."
+        },
+        {
+          "title": "Choose Add to Claude and approve the connection",
+          "body": "In Claude, review the Wenlan connector. If one already exists, use Customize → Connectors → Yours → Reconnect. Return to Wenlan to Allow the request. If the app does not open, use Have a code? in Web access and enter the code shown by the pairing page. Confirm Claude appears under Connected apps.",
+          "image": {
+            "src": "/images/product-evidence/wenlan-cedar-connected.jpg",
+            "alt": "The actual test connection: Wenlan shows Claude under Connected apps. This is the isolated fictional library.",
+            "caption": "The actual test connection: Wenlan shows Claude under Connected apps. This is the isolated fictional library.",
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      ],
+      "link": {
+        "label": "Check Claude’s current custom-connector availability",
+        "href": "https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp"
+      }
+    },
+    {
+      "id": "worked-example-question",
+      "heading": "3. Ask Claude to search the sources",
+      "body": [
+        "Start a new Claude chat. Enable Wenlan in the chat’s connectors menu if needed, send the prompt below, and allow its read requests. Look for a Wenlan Recall call and source passages, not just a plausible answer.",
+        "In our first attempt Claude guessed a Space named Cedar and received an error. Removing that filter worked. The corrected prompt names the documents without inventing a Space."
+      ],
+      "code": {
+        "label": "Copy into the connected Claude chat",
+        "code": "Use Wenlan to search the Cedar project documents. Cedar is a project name, not a Space; do not set a Space filter. What are the approved launch date, support channels, reason for the date change, export format, and product price? Cite filenames and supporting passages. A quoted old date does not change an approved decision. Say unknown when the documents do not specify. Use only Cedar sources; do not write anything."
+      },
+    },
+    {
+      "id": "check-original-source",
+      "heading": "4. Open the cited original in Wenlan",
+      "body": [
+        "Return to Sources → Cedar project → decision-2026-10-08.md. Compare the quoted passage with the original. It approves November 19 and replaces November 12. The later client-call note merely quotes the old date; it does not approve another change."
+      ],
+      "image": {
+        "src": "/images/product-evidence/wenlan-cedar-approved-source.jpg",
+        "alt": "The original approved decision opened in Wenlan. The Info panel confirms it is indexed as one passage.",
+        "caption": "The original approved decision opened in Wenlan. The Info panel confirms it is indexed as one passage.",
+        "width": 2560,
+        "height": 1440
+      }
+    },
+    {
+      "id": "worked-example-update",
+      "heading": "5. Add one update and ask in a fresh chat",
+      "body": [
+        "Download the update below and move only decision-2026-10-15.md into the Cedar folder. In Wenlan, return to the folder, click Refresh, and confirm four files and four memories. Open the new file to check its text before asking again."
+      ],
+      "steps": [
+        {
+          "title": "Check the updated source",
+          "body": "The new note changes support to email and in-app. It leaves the approved launch date at November 19 and the export format at CSV. An ordinary folder is checked periodically, but use Refresh and the index status to confirm this update.",
+          "image": {
+            "src": "/images/product-evidence/wenlan-cedar-update-source.jpg",
+            "alt": "After Refresh, Wenlan shows four files and four memories. The new original changes support coverage and leaves the date unchanged.",
+            "caption": "After Refresh, Wenlan shows four files and four memories. The new original changes support coverage and leaves the date unchanged.",
+            "width": 2560,
+            "height": 1440
+          }
+        },
+        {
+          "title": "Repeat the prompt in a new Claude conversation",
+          "body": "Ask the same five questions with the corrected prompt. Do not paste the previous answer into the new conversation. Compare both answers and their citations with the source notes.",
+          "image": {
+            "src": "/images/product-evidence/claude-cedar-updated-answer.jpg",
+            "alt": "A separate Claude conversation reads the updated library: support is now email and in-app, while the approved date remains November 19.",
+            "caption": "A separate Claude conversation reads the updated library: support is now email and in-app, while the approved date remains November 19.",
+            "width": 1382,
+            "height": 753
+          }
+        }
+      ],
+      "link": {
+        "label": "Download the support update (.md)",
+        "href": "/examples/claude-knowledge-base-check/updates/decision-2026-10-15.md"
+      }
+    },
+    {
+      "id": "recorded-claude-knowledge-base-check",
+      "heading": "What the actual test returned",
+      "body": [
+        "We ran this desktop-and-browser workflow on October 20, 2026 with Wenlan 0.19.2 and Claude Opus 5.5 Medium. Claude’s tool response contained the Cedar source text. Both conversations cited the relevant notes; the second had no earlier chat context.",
+        "This small test proves retrieval and the manually confirmed update for these files. It does not establish automatic wiki maintenance, PDF ingestion, Codex behavior, or an offline AI. Whole-library search also returned Atlas demo hits, which Claude excluded from its answer; a prompt is not an access boundary."
+      ],
+      "table": {
+        "columns": [
+          "Check",
+          "Three sources",
+          "After adding the update"
         ],
+        "rows": [
+          [
+            "Approved date",
+            "November 19",
+            "November 19"
+          ],
+          [
+            "Support",
+            "Email only",
+            "Email and in-app"
+          ],
+          [
+            "Reason / export",
+            "Security review / CSV",
+            "Security review / CSV"
+          ],
+          [
+            "Missing price",
+            "Unknown",
+            "Unknown"
+          ]
+        ]
       },
+      "link": {
+        "label": "Inspect the recorded GUI test and the earlier CLI test",
+        "href": "/examples/claude-knowledge-base-check/recorded-result.md"
+      }
     },
     {
-      heading: "Try a two-file knowledge base",
-      body: [
-        "Create a new folder named my-kb-test in a location you can find again. Save the two blocks below as separate Markdown files, using a plain-text editor or a new Obsidian vault. These fictional notes and reference answers are teaching materials, not recorded product output.",
-        "This exercise uses an installed, signed-in Claude Code with model access. Wenlan and Obsidian plugins are not required. The linked setup guide covers installation and opening a folder.",
+      "id": "claude-projects-knowledge-base",
+      "heading": "Can I just use Claude Projects?",
+      "body": [
+        "Yes. Put the three initial files in project knowledge and run the same source check. Replace or add the changed source before the second test. Wenlan does not automatically import private Projects uploads.",
+        "Check the current account limits and retrieval features in Anthropic’s guide. The Wenlan connector and Projects are different ways to provide source material."
       ],
-      id: "worked-example-files",
-      link: { label: "Set up Claude Code and open your notes", href: "/learn/wenlan-vs-obsidian-ai-memory" },
-      code: {
-        label: "research.md",
-        code: "# Research\n\nUsers cannot find the original research reports.",
-      },
+      "link": {
+        "label": "Claude Projects guide and current availability",
+        "href": "https://support.claude.com/en/articles/9517075-what-are-projects"
+      }
     },
     {
-      id: "worked-example-decision",
-      heading: "Add the decision note",
-      body: [
-        "Create a second file in the same folder. The owner is deliberately unspecified; a useful answer should preserve that unknown instead of filling it in.",
+      "id": "try-obsidian-test-vault",
+      "heading": "Advanced: use an Obsidian vault or a CLI client",
+      "body": [
+        "For the Obsidian-only branch, open Manage vaults → Open folder as vault → Open and select the Cedar folder. No community plugin is needed to view the notes. Claude Code or Codex must be installed and signed in to read that folder through a terminal."
       ],
-      code: {
-        label: "decision.md",
-        code: "# Decision\n\nNext iteration: add filename citations.",
-      },
+      "steps": [
+        {
+          "title": "Open the same source notes in Obsidian",
+          "body": "Open decision-2026-10-08 and check its approved date. Keep generated answers outside the vault. For the GUI route above, connect this vault through Wenlan’s Connect Obsidian vault and refresh it on demand.",
+          "image": {
+            "src": "/images/product-evidence/obsidian-cedar-approved.jpg",
+            "alt": "The same Cedar source decision in Obsidian 1.13.7; this is a source note, not an AI answer.",
+            "caption": "The same Cedar source decision in Obsidian 1.13.7; this is a source note, not an AI answer.",
+            "width": 2048,
+            "height": 1600
+          }
+        },
+        {
+          "title": "Use a terminal only if you prefer a coding client",
+          "body": "Replace the path below, start Claude Code, and ask it to read only the source notes. For Codex, use codex instead of claude. This reads the folder directly; keep generated answers outside it.",
+          "code": {
+            "label": "Optional terminal commands — replace the folder path",
+            "code": "cd \"/full/path/to/Cedar project\"\nclaude"
+          }
+        },
+        {
+          "title": "Import into a connected Wenlan client instead",
+          "body": "As an alternative to direct folder reading, first configure the Wenlan connection linked below. Run these separate commands to check it and import the folder, then ask that client to use Wenlan recall.",
+          "code": {
+            "label": "Optional terminal — after Wenlan client setup",
+            "code": "wenlan status\nwenlan sources add \"/full/path/to/Cedar project\""
+          }
+        }
+      ],
+      "link": {
+        "label": "Connect a CLI client to Wenlan",
+        "href": "/docs/mcp-clients"
+      }
     },
     {
-      id: "worked-example-start",
-      heading: "Open the test folder in Claude Code",
-      body: [
-        "Open a terminal. Replace the path below with the full path to my-kb-test, keeping quotes around it, then run the two commands in order. Confirm that Claude Code is working in this test folder before continuing.",
-      ],
-      code: { label: "Terminal — use your test folder path", code: 'cd "/full/path/to/my-kb-test"\nclaude' },
-    },
-    {
-      id: "worked-example-question",
-      heading: "Ask the agent to show its support",
-      body: [
-        "In the Claude Code session started from this folder, ask:",
-      ],
-      code: {
-        label: "Question for Claude Code",
-        code: "Read research.md and decision.md without editing any files. Based only on these notes, what is the next step, what problem does it address, and who owns it? Cite the filename supporting each answer. If the notes do not say, answer unknown; do not invent an owner.",
-      },
-    },
-    {
-      id: "worked-example-answer",
-      heading: "Compare the answer with the files",
-      body: [
-        "Use this reference answer to check your result. Open each cited file and confirm that it supports the claim.",
-      ],
-      table: {
-        columns: ["Question", "Expected answer", "Expected citation"],
-        rows: [
-          ["What is the next step?", "Add filename citations in the next iteration.", "decision.md"],
-          ["What problem does it address?", "The research note says users cannot find the original research reports.", "research.md"],
-          ["Who owns it?", "Unknown; neither file names an owner.", "decision.md and research.md"],
-        ],
-      },
-    },
-    {
-      id: "worked-example-update",
-      heading: "Change a source and ask again",
-      body: [
-        "Now edit decision.md so the decision is to add direct links to the original reports instead of filename-only references. Keep research.md unchanged, then repeat the same question. This lets you inspect whether an answer reflects the current source text.",
-      ],
-      code: {
-        label: "Updated decision.md",
-        code: "# Decision\n\nNext iteration: add direct links to the original research reports instead of filename-only references.",
-      },
-    },
-    {
-      heading: "What should change in the second answer?",
-      body: [
-        "The next step should now mention direct links to the original reports. The research note still explains the reason, and the owner remains unknown. The updated decision should be cited for the changed action. If the answer still says only filename citations, check that the file was saved and that the agent is reading the folder you edited.",
-        "This checks one small example. Keep checking important answers against their sources as you add real documents.",
-      ],
-    },
-    {
-      id: "wenlan-knowledge-base",
-      heading: "When to keep files simple and when to add Wenlan",
-      body: [
-        "A folder or Obsidian vault may be enough when you want to keep notes in their existing shape and an agent can read them directly. Use a maintained wiki when recurring questions need a reviewed answer with clear support, or when the same work context should be available across sessions and tools. Wenlan is designed for that maintained, source-backed layer; it does not require replacing your notes or vault.",
-        "Wenlan packages source import, page maintenance, citations, and review into one application. Choose it when you want those workflows built in. A folder can also be shared by several AI tools; sharing alone is not a reason to switch. To try Wenlan, use the setup guide to install it and connect your client, then register your test folder. Replace the example path below with that folder’s actual path.",
-      ],
-      link: { label: "Install Wenlan and connect your AI tool", href: "/docs" },
-      code: {
-        label: "After setup, in a terminal",
-        code: 'wenlan status\nwenlan sources add "/full/path/to/my-kb-test"',
-      },
-      bullets: [
-        "Wenlan supports .md, .txt, and text-extractable .pdf sources. Check the found, ingested, skipped, and error counts returned by the source import command.",
-        "Re-running wenlan sources add <path> resyncs an already registered path. Regular files and folders can sync incrementally; an Obsidian vault is read-only and resyncs on demand.",
-        "In Claude Code or Codex with the Wenlan plugin, /wenlan distill <topic> creates a maintained Page from relevant sources and /wenlan pages <topic> opens it. These slash commands run in the plugin client; they are separate from the shell commands above. An MCP-only client can use the Wenlan tools it exposes.",
-        "Pages remain readable as Markdown and retain inspectable source support. Use /wenlan lint and /wenlan curate in a plugin client, or the equivalent Wenlan tools in an MCP-only client, to review a Page.",
-      ],
-    },
-    {
-      heading: "Keep the limits visible",
-      body: [
-        "Local files do not mean the model is local. Wenlan keeps its memory layer local by default, but a connected cloud AI client may send the selected source content to its model provider to answer a question. Check the model and client settings that apply to your setup before using sensitive material.",
-        "Image-only or scanned PDFs need OCR before Wenlan can extract their text. Directory Sources do not ingest arbitrary source-code files; keep code, tests, and native project docs authoritative. Wenlan reads an Obsidian vault without rewriting its original Markdown; exporting a Page or creating a symlink is a separate choice.",
-      ],
-    },
+      "heading": "File and privacy limits",
+      "body": [
+        "Wenlan supports .md, .txt and text-extractable .pdf documents. Image-only or scanned PDFs need OCR. Directory Sources do not ingest arbitrary source-code files. Wenlan reads an Obsidian vault without rewriting its Markdown.",
+        "Local storage does not mean a local model. Review the source-sharing scope and the AI provider’s settings before using personal documents. Turn off Web access or remove the connected app when you no longer want it to query the library."
+      ]
+    }
   ],
-  faqs: [
+  "faqs": [
     {
-      question: "Do I need Wenlan to make a personal AI knowledge base?",
-      answer:
-        "No. Start with files or a vault if those fit your workflow. Wenlan is useful when you want a local source set and maintained Pages with inspectable source support across sessions or tools.",
+      "question": "Do I need Wenlan to make a personal AI knowledge base?",
+      "answer": "No. Start with files or a vault if those fit your workflow. Wenlan is useful when you want a local source set and maintained Pages with inspectable source support across sessions or tools."
     },
     {
-      question: "Does local knowledge-base storage mean my model runs locally?",
-      answer:
-        "No. Local files and a local memory layer do not determine where a connected model runs. A cloud client may send the selected content to its provider; check your client and model settings.",
+      "question": "Does local knowledge-base storage mean my model runs locally?",
+      "answer": "No. Local files and a local memory layer do not determine where a connected model runs. A cloud client may send the selected content to its provider; check your client and model settings."
     },
     {
-      question: "Does Wenlan rewrite my Obsidian vault?",
-      answer:
-        "No. Wenlan reads the vault as a read-only source and resyncs it on demand. Its source-backed Pages are separate Markdown artifacts.",
+      "question": "Does Wenlan rewrite my Obsidian vault?",
+      "answer": "No. Wenlan reads the vault as a read-only source and resyncs it on demand. Its source-backed Pages are separate Markdown artifacts."
     },
     {
-      question: "Which files can Wenlan read?",
-      answer:
-        "The documented source types include Markdown, plain text, and text-extractable PDFs. Image-only or scanned PDFs need OCR, and arbitrary source-code files are not ingested as Directory Sources.",
-    },
+      "question": "Which files can Wenlan read?",
+      "answer": "The documented source types include Markdown, plain text, and text-extractable PDFs. Image-only or scanned PDFs need OCR, and arbitrary source-code files are not ingested as Directory Sources."
+    }
   ],
-  relatedSlugs: [
+  "relatedSlugs": [
     "wenlan-vs-obsidian-ai-memory",
     "coding-agent-source-backed-knowledge-base",
     "source-backed-wiki-pages-ai-work",
@@ -2418,30 +2566,38 @@ const localKnowledgeBaseArticle: LearnArticle = {
     "build-sre-incident-knowledge-base",
     "build-ict-supplier-due-diligence-evidence-pack",
     "build-customer-support-answer-knowledge-base",
-    "build-course-wiki-from-lecture-notes",
+    "build-course-wiki-from-lecture-notes"
   ],
-  officialReferences: [
+  "officialReferences": [
     {
-      label: "Wenlan platform and client setup",
-      href: "https://github.com/wenlan-app/wenlan/blob/main/docs/setup-with-ai.md",
+      "label": "Claude Projects availability and reference knowledge",
+      "href": "https://support.claude.com/en/articles/9517075-what-are-projects"
     },
     {
-      label: "Wenlan supported document sources",
-      href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
+      "label": "Wenlan platform and client setup",
+      "href": "https://github.com/wenlan-app/wenlan/blob/main/docs/setup-with-ai.md"
     },
     {
-      label: "Wenlan sources add CLI",
-      href: "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add",
+      "label": "Wenlan supported document sources",
+      "href": "https://github.com/wenlan-app/wenlan#what-can-i-bring-in"
     },
     {
-      label: "Wenlan source-backed Pages",
-      href: "https://wenlan.app/docs/source-backed-pages",
+      "label": "Wenlan sources add CLI",
+      "href": "https://github.com/wenlan-app/wenlan/blob/main/crates/wenlan-cli/README.md#wenlan-sources-add"
     },
+    {
+      "label": "Wenlan source-backed Pages",
+      "href": "https://wenlan.app/docs/source-backed-pages"
+    },
+    {
+      "label": "Claude custom connectors and current plan limits",
+      "href": "https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp"
+    }
   ],
-  cta: {
-    heading: "Keep your personal knowledge-base loop current",
-    body: "Put a few relevant files together, ask one bounded question, and inspect each answer against its source. Add a maintained Page when that answer should stay useful over time.",
-  },
+  "cta": {
+    "heading": "Keep your personal knowledge-base loop current",
+    "body": "Add a few documents, ask one useful question, inspect its sources, then check a real update before bringing in your archive."
+  }
 };
 
 const retrievalRegressionArticle: LearnArticle = {
