@@ -30,7 +30,7 @@ export const LEARN_ARTICLE_SOURCE_HASHES = {
   "build-sre-incident-knowledge-base": "9e3c948fa6deff7477666a0981ebbd70b49f22dbc5272b4407d5af37f4e92f32",
   "choose-ai-knowledge-base-tool": "cefc219acf0c6b655e20c6c4f378afe835307b1eb27403645c743a3463dd53e0",
   "coding-agent-source-backed-knowledge-base": "d95576c60e33bc42c38d21e5f1ed3609ccceaf20b1eb1ea57dc2d783751a74cd",
-  "distilled-wiki-pages-ai-memory": "d7c8e7d4d350d96c9b960369824560754e4d888b9e83abb1baab1628ee304406",
+  "distilled-wiki-pages-ai-memory": "8fb7669ccb008d97d28df7adee6e1403e8f6cd62fbcbd9f5a846fbc4c99b628c",
   "fix-pdf-ingestion-ai-knowledge-base": "11122d0d14bca5ffd10015654f2fe624be69082cae43788e9af30d44184c4a8a",
   "prevent-multi-agent-knowledge-conflicts": "fd2b272a5e00e736ea5b35491f091a979dba245621cb4b0bccbebd4d9b55c8ba",
   "source-backed-research-knowledge-base": "efc3cafb5f2dd23ee8e31a6069f6c4ba0d1c0728bd0fb6a2b26682228a7f02d9",

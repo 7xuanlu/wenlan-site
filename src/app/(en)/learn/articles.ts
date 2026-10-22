@@ -1610,7 +1610,7 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "LLM wiki vs RAG",
         body: [
-          "RAG retrieves relevant source chunks for each query; the source collection and its index remain available, and the same material may be retrieved again for another question. An LLM wiki keeps a maintained synthesis in pages that you can open and check, so a later query can start there. New or changed sources still need ingestion, and important claims may need checking against their citations. A large wiki can use search to find the right pages.",
+          "RAG and an LLM wiki can work together. The wiki stores a maintained synthesis in linked pages; RAG retrieves relevant source chunks, including passages from wiki pages, to help answer a question. Use a wiki when you want that synthesis to remain readable and editable between questions. Retrieval still helps find the right evidence, and changed sources still need ingestion and review.",
         ],
         figure: "llm-wiki-vs-rag",
       },
@@ -1784,12 +1784,12 @@ const baseArticles: LearnArticle[] = [
         answer: "Andrej Karpathy described a personal wiki that an AI writes and maintains from your sources: it ingests sources into linked Markdown pages, which can help answer later questions. Changed sources still need to be read again and affected pages checked. Citing his note does not imply an endorsement of Wenlan."
       },
       {
-        question: "What is an LLM wiki?",
-        answer: "An LLM wiki is a folder of Markdown pages that an AI keeps current from your sources, with an index so the AI can find the right page and links back to the sources behind each claim."
+        question: "Do I need an LLM wiki if I already use NotebookLM?",
+        answer: "If you mainly want to ask questions about documents, NotebookLM may already be enough: it supports source citations and saving answers as notes. A file-based wiki is worth considering when you want linked Markdown pages you can edit, version in Git and reuse with file-editing AI tools. That control comes with setup and update reviews. Try one topic whose sources change before moving your whole library."
       },
       {
         question: "Is an LLM wiki the same as RAG?",
-        answer: "They are different approaches. RAG retrieves relevant source chunks for each query, and the same material may be retrieved again. An LLM wiki keeps a maintained synthesis in pages that you can open and check; changed sources still need ingestion, and important claims may need checking against their citations. A large wiki can also use search to find pages."
+        answer: "No, but they can work together. A wiki maintains linked pages; RAG retrieves material to answer a question. You can retrieve from wiki pages and check their original sources. Maintaining a wiki does not remove the need to review changed evidence."
       },
       {
         question: "How do I build an LLM wiki with Claude Code or Codex?",
@@ -1800,8 +1800,12 @@ const baseArticles: LearnArticle[] = [
         answer: "No. The wiki is plain Markdown, so any editor works. Obsidian is useful for reading it: wiki links become clickable and graph view shows how pages connect."
       },
       {
-        question: "Where is Karpathy's LLM Wiki on GitHub?",
-        answer: "It is a GitHub gist by karpathy titled LLM Wiki, linked in the references below. It is a description of the pattern rather than a repository you install; projects such as nashsu/llm_wiki and claude-obsidian package it as software."
+        question: "How do I use an LLM wiki at scale without missing details?",
+        answer: "Before bulk import, try a few representative sources, including your longest document. Ask for a detail near its end, an answer combining two sources, and an answer after a source changes; open the cited passages each time. If a detail is missing, check the original before revising the summary. Keep topic indexes small and use search to load relevant pages instead of the whole library. Wenlan provides source import, search and update review, but this guide's small worked example is not a benchmark for thousands of documents."
+      },
+      {
+        question: "Where are Karpathy's GitHub gist and LLM Wiki v2?",
+        answer: "Karpathy's original LLM Wiki is an idea file, not an installable app. The LLM Wiki v2 gist in the references is rohitg00's community extension, not a release authored by Karpathy. It proposes additions for memory lifecycle, search and automation. This tutorial follows the original pattern; v2 is optional further reading."
       },
       {
         question: "Does an LLM wiki replace code search or documentation?",
@@ -1821,8 +1825,16 @@ const baseArticles: LearnArticle[] = [
     ],
     officialReferences: [
       {
+        label: "Google: save answers and create notes",
+        href: "https://support.google.com/notebooklm/answer/16262519?hl=en"
+      },
+      {
         label: "Karpathy's LLM-wiki note",
         href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"
+      },
+      {
+        label: "rohitg00: LLM Wiki v2 community extension",
+        href: "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2"
       },
       {
         label: "nashsu/llm_wiki desktop app",
