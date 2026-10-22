@@ -477,3 +477,23 @@ Opus 5.5/high 收到完整修正版、市場證據與既有三語實跑輸出後
 使用者要求先整理中文重複段落再開 PR。「用 Wenlan 建立個人 AI 知識庫」原本內文四段、條列四點，對話指令和匯入步驟各說了兩次。改為內文三段（是什麼、支援格式、何時值得改用）加三點步驟（終端機加入來源、來源變更後同步、對話指令），對話指令與終端機指令的分界只說一次。條列裡的反引號在 Learn 頁會原樣顯示，這段改為不加反引號，與英文版一致。另刪兩處重複：只讀問題前一句與問題本身重複的「只讀取、不修改」，以及本段第三次出現的掃描型 PDF 需 OCR（步驟和常見問題已說過）。雙中文同步修改；英文未動，hash 不變。
 
 `seo:goal:check`、`seo:scenario:check`、`test:goal` 60／60、`test:seo` 528 通過／2 項跳過、`test:i18n` 86／86、`lint`、`build`、`seo:technical:built` 通過。本機正式版驗證 zh-TW／zh-CN × 1280／393px × 深／淺色共 8 組：單一 H1、無水平溢出、6 張圖片無載入失敗、頁首連結停在證據區、本段 3 點條列且無反引號、無 console 錯誤。整理前後截圖只留在本機暫存，不進 repo。
+
+
+#### 2026-10-21 LLM Wiki saved-draft reconciliation (local only)
+
+Compared the saved `seo-claude-knowledge-base` draft with production `5433c9f` (#255). Retained the existing architecture, RAG comparison, implementation table, source packet, worked answer, changed-source exercise and real Tally screenshots. Only the three `distilled-wiki-pages-ai-memory` article objects changed; title, H1 and canonical remain unchanged.
+
+Added one three-step section: shared AGENTS.md / compatible CLAUDE.md import, ingest → query → lint prompts with the expected cited answer, and Git review that explicitly opens untracked files. Commit a reviewed baseline before AI writes; run one writer at a time. Removed the unmeasured 15-minute promise and corrected the comparison: DIY can share rules, save chat decisions and recover committed files; Wenlan integrates source import, citations and maintenance, with optional background refresh and proposals for authored/edited pages.
+
+Demand evidence is reused, not a new collection: 2026-10-20 US/en Keyword Planner gave `claude llm wiki`, `codex llm wiki`, `claude code llm wiki` each 10–100 average monthly searches (2025-10–2026-09; do not sum close variants); broad `llm wiki` 1K–10K includes other meanings. GSC 09-21–10-18 exact English `llm wiki` row: 13 impressions, 1 click, position 20.4. No visible compound query row proves this specific setup demand. Saved SERPs support technical setup intent; they do not prove ranking uplift. Inputs remain `/tmp/wenlan-seo-demand/2026-10-20-claude-kb/personal-intent-{planner,serp,gsc-check}.json`.
+
+Checked current Claude instruction-file guidance, Codex AGENTS.md guidance, Git diff behavior, and Wenlan v0.19.3 README. A temporary Git fixture demonstrated that ordinary diff omits untracked files; this is not a new Claude/Codex model run. Independent source review closed step-order, fair-comparison and syntax issues. Local verification receipt and browser captures: `fumadocs-verification/llm-wiki-reconcile` in this task's visualization directory. No push, publication or index request.
+
+
+#### 2026-10-22 LLM Wiki main flow and original-gist check (local only)
+
+User correction: make the main path add documents → build wiki → ask/open sources → add a changed source and review. All three locales now use one chosen AI tool; the schema template follows the four-step overview, while cross-client rule sharing is a later optional section. Existing authored source packet/reference answer and real Tally evidence remain intact. Metadata/FAQ match the new focus; title and canonical stay unchanged.
+
+Read [Karpathy’s original gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) on 2026-10-22, including Core idea, Architecture, Operations, Indexing/logging and Note. The conceptual foundation matches: original sources, maintained linked pages, schema and ingest/query/lint. The gist explicitly leaves implementation choices open. The article now labels the starter template, prompts and exercise as our teaching additions, not prescribed Karpathy setup. Removed the claim that separating jobs prevents edits, including the diagram's implied guarantee. No new model run or acquisition result is claimed.
+
+Editorial review: the four actions each name the input, expected output and check; optional sharing no longer interrupts the first run. Keep reference answers and conflict handling, not just code snippets. Goal/scenario, 60 goal tests, 432 SEO + 133 measurement tests (2 existing skips), 88 i18n tests, lint, build and technical:built passed. Final browser evidence and file hashes are in this task's `fumadocs-verification/llm-wiki-main-flow` directory. Local preview 3384; no publication or indexing.

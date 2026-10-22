@@ -1697,20 +1697,20 @@ for (const [locale, copy] of [
     "zh-TW",
     {
       disclaimer: /不代表 Karpathy 為 Wenlan 背書/,
-      build: "用 Claude Code 15 分鐘做一個",
-      schema: "可直接複製的 CLAUDE.md",
+      build: "用 Claude Code 或 Codex 建立 LLM Wiki",
+      schema: "給你選用的工具一份 Wiki 規則",
       keywords: ["LLM Wiki 是什麼", "LLM Wiki 如何使用", "AI 知識庫"],
-      noOverwrite: "不會蓋掉你的修改",
+      noOverwrite: "你撰寫或修改過的頁面則收到修訂提案",
     },
   ],
   [
     "zh-CN",
     {
       disclaimer: /不代表 Karpathy 为 Wenlan 背书/,
-      build: "用 Claude Code 15 分钟搭一个",
-      schema: "可直接复制的 CLAUDE.md",
+      build: "用 Claude Code 或 Codex 搭建 LLM Wiki",
+      schema: "给你选用的工具一份 Wiki 规则",
       keywords: ["LLM Wiki 是什么", "LLM Wiki 怎么用", "AI 知识库"],
-      noOverwrite: "不会覆盖你的修改",
+      noOverwrite: "你编写或修改过的页面则收到修订提案",
     },
   ],
 ]) {
@@ -1723,7 +1723,7 @@ for (const [locale, copy] of [
     assert.match(article.title, /Claude Code/);
     assert.match(article.metaTitle, /Karpathy LLM Wiki/);
     assert.equal(article.publishedAt, "2026-07-04");
-    assert.equal(article.updatedAt, "2026-10-06");
+    assert.equal(article.updatedAt, "2026-10-22");
     assert.match(article.sections[0].heading, /Karpathy/);
     assert.match(JSON.stringify(article), copy.disclaimer);
     for (const keyword of copy.keywords) assert.ok(article.keywords.includes(keyword), keyword);
@@ -2220,7 +2220,7 @@ test("sitemap includes localized core and Mandarin acquisition routes", async ()
   assert.ok(zhTWLLMWiki);
   assert.equal(
     new Date(zhTWLLMWiki.lastModified).toISOString().slice(0, 10),
-    "2026-10-06",
+    "2026-10-22",
   );
 
   // Localized hubs date from what exists in their own locale, not from the

@@ -420,15 +420,16 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
     /metaTitle:\s*"Karpathy LLM Wiki: What It Is & How to Build One"/,
   );
   assert.match(article, /publishedAt:\s*"2026-06-24"/);
-  assert.match(article, /updatedAt:\s*"2026-10-06"/);
+  assert.match(article, /updatedAt:\s*"2026-10-22"/);
   assert.match(article, /heading:\s*"What Karpathy's LLM Wiki is"/);
   assert.match(article, /does not imply that Karpathy endorses Wenlan/);
   assert.match(article, /heading:\s*"The three jobs: ingest, query, lint"/);
   assert.match(article, /heading:\s*"LLM wiki vs RAG"/);
   assert.match(article, /RAG retrieves (?:relevant )?source chunks/);
   assert.match(article, /id:\s*"build-an-llm-wiki-with-claude-code"/);
-  assert.match(article, /heading:\s*"The CLAUDE.md schema to copy"/);
-  assert.match(article, /CLAUDE\.md for Claude Code or AGENTS\.md for Codex/);
+  assert.match(article, /id:\s*"the-claude-md-schema-to-copy"/);
+  assert.match(article, /Save the rules below as CLAUDE\.md for Claude Code, or AGENTS\.md for Codex/);
+  assert.match(article, /@AGENTS\.md in CLAUDE\.md/);
   assert.match(article, /figure:\s*"llm-wiki-architecture"/);
   assert.match(article, /figure:\s*"llm-wiki-vs-rag"/);
   assert.match(article, /id:\s*"llm-wiki-implementations"/);
@@ -437,7 +438,7 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.match(article, /log\.md/);
   assert.match(article, /## My notes/);
   assert.match(article, /heading:\s*"Where a do-it-yourself LLM wiki breaks"/);
-  assert.match(article, /without overwriting your edits/);
+  assert.match(article, /pages you authored or edited receive revision proposals/);
   assert.match(article, /heading:\s*"The LLM-wiki workflow in Wenlan"/);
   assert.match(article, /id:\s*"the-five-minute-llm-wiki-protocol"/);
   assert.match(article, /\/brief <topic>/);
@@ -446,7 +447,7 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.match(article, /\/handoff/);
   assert.match(article, /\/wenlan distill <topic>/);
   assert.match(article, /\/wenlan pages <topic>/);
-  assert.match(article, /comparisonTable:\s*\{\s*competitorName:\s*"DIY folder \+ CLAUDE\.md"/);
+  assert.match(article, /comparisonTable:\s*\{\s*competitorName:\s*"DIY folder \+ wiki rules"/);
   assert.match(article, /does not replace codebase search/);
   assert.match(article, /href:\s*"#worked-example"/);
   assert.match(article, /href:\s*"\/docs\/daily-workflow"/);
