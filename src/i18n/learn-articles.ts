@@ -400,8 +400,12 @@ const zhTWArticles = {
         answer: "不用。wiki 就是純 Markdown，任何編輯器都能用。Obsidian 適合拿來閱讀：wiki 連結可以點，圖譜檢視能看出頁面之間的關係。"
       },
       {
-        question: "Karpathy 的 LLM Wiki 在 GitHub 哪裡？",
-        answer: "它是 karpathy 在 GitHub gist 上的一篇〈LLM Wiki〉，連結在下方參考資料。它是模式的說明，不是可以安裝的 repo；nashsu/llm_wiki、claude-obsidian 等專案把它做成了軟體。"
+        question: "大量文件的 LLM Wiki，怎麼避免漏掉細節？",
+        answer: "整批匯入前，先試幾份有代表性的來源，包含最長的一份。分別問文件後段的細節、需要結合兩份來源的問題，以及來源更新後的問題；每次都打開引用段落核對。若漏了細節，先查原文，再修摘要。把主題索引保持精簡，用搜尋載入相關頁面，而不是整個資料庫。文瀾整合了來源匯入、搜尋與更新審查，但本篇的小型範例並不是上千份文件的效能測試。"
+      },
+      {
+        question: "Karpathy 的原始 gist 和 LLM Wiki v2 在哪裡？",
+        answer: "Karpathy 的原始 LLM Wiki 是構想文件，不是可安裝的 app。參考資料中的 LLM Wiki v2 是 rohitg00 的社群延伸稿，不是 Karpathy 發布的新版；它提出記憶生命週期、搜尋與自動化的延伸做法。本篇教學依原始模式設計，v2 是選讀資料。"
       },
       {
         question: "LLM Wiki 能取代程式碼搜尋或官方文件嗎？",
@@ -416,6 +420,10 @@ const zhTWArticles = {
       {
         label: "Karpathy 的 LLM Wiki 說明",
         href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"
+      },
+      {
+        label: "rohitg00：LLM Wiki v2 社群延伸稿",
+        href: "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2"
       },
       {
         label: "nashsu/llm_wiki 桌面 app",
@@ -4092,8 +4100,12 @@ const zhCNArticles = {
         answer: "不用。wiki 就是纯 Markdown，任何编辑器都能用。Obsidian 适合用来阅读：wiki 链接可以点，关系图谱能看出页面之间的关系。"
       },
       {
-        question: "Karpathy 的 LLM Wiki 在 GitHub 哪里？",
-        answer: "它是 karpathy 在 GitHub gist 上的一篇《LLM Wiki》，链接在下方参考资料。它是模式的说明，不是可以安装的仓库；nashsu/llm_wiki、claude-obsidian 等项目把它做成了软件。"
+        question: "大量文档的 LLM Wiki，怎么避免遗漏细节？",
+        answer: "整批导入前，先试几份有代表性的来源，包括最长的一份。分别问文档后段的细节、需要结合两份来源的问题，以及来源更新后的问题；每次都打开引用段落核对。如果漏了细节，先查原文，再改摘要。保持主题索引精简，用搜索加载相关页面，而不是整个资料库。文澜整合了来源导入、搜索和更新审核，但本文的小型示例并不是上千份文档的性能测试。"
+      },
+      {
+        question: "Karpathy 的原始 gist 和 LLM Wiki v2 在哪里？",
+        answer: "Karpathy 的原始 LLM Wiki 是构想文档，不是可安装的 app。参考资料中的 LLM Wiki v2 是 rohitg00 的社区扩展稿，不是 Karpathy 发布的新版；它提出记忆生命周期、搜索与自动化的扩展做法。本篇教程按原始模式设计，v2 是选读资料。"
       },
       {
         question: "LLM Wiki 能取代代码搜索或官方文档吗？",
@@ -4108,6 +4120,10 @@ const zhCNArticles = {
       {
         label: "Karpathy 的 LLM Wiki 说明",
         href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"
+      },
+      {
+        label: "rohitg00：LLM Wiki v2 社区扩展稿",
+        href: "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2"
       },
       {
         label: "nashsu/llm_wiki 桌面 app",

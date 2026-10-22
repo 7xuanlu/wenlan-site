@@ -1800,8 +1800,12 @@ const baseArticles: LearnArticle[] = [
         answer: "No. The wiki is plain Markdown, so any editor works. Obsidian is useful for reading it: wiki links become clickable and graph view shows how pages connect."
       },
       {
-        question: "Where is Karpathy's LLM Wiki on GitHub?",
-        answer: "It is a GitHub gist by karpathy titled LLM Wiki, linked in the references below. It is a description of the pattern rather than a repository you install; projects such as nashsu/llm_wiki and claude-obsidian package it as software."
+        question: "How do I use an LLM wiki at scale without missing details?",
+        answer: "Before bulk import, try a few representative sources, including your longest document. Ask for a detail near its end, an answer combining two sources, and an answer after a source changes; open the cited passages each time. If a detail is missing, check the original before revising the summary. Keep topic indexes small and use search to load relevant pages instead of the whole library. Wenlan provides source import, search and update review, but this guide's small worked example is not a benchmark for thousands of documents."
+      },
+      {
+        question: "Where are Karpathy's GitHub gist and LLM Wiki v2?",
+        answer: "Karpathy's original LLM Wiki is an idea file, not an installable app. The LLM Wiki v2 gist in the references is rohitg00's community extension, not a release authored by Karpathy. It proposes additions for memory lifecycle, search and automation. This tutorial follows the original pattern; v2 is optional further reading."
       },
       {
         question: "Does an LLM wiki replace code search or documentation?",
@@ -1827,6 +1831,10 @@ const baseArticles: LearnArticle[] = [
       {
         label: "Karpathy's LLM-wiki note",
         href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"
+      },
+      {
+        label: "rohitg00: LLM Wiki v2 community extension",
+        href: "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2"
       },
       {
         label: "nashsu/llm_wiki desktop app",
