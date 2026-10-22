@@ -210,7 +210,7 @@ const zhTWArticles = {
       {
         heading: "LLM Wiki 和 RAG 的差別",
         body: [
-          "RAG 會針對每個問題檢索相關來源片段；來源集合與索引仍可繼續使用，同一份資料也可能在不同問題中再次被檢索。LLM Wiki 則把持續維護的綜合內容留在可打開檢查的頁面裡，讓後續查詢可以從頁面開始。新增或變更的來源仍要重新整理，重要結論也可能需要回到引用核對。大型 wiki 仍可用搜尋找到合適頁面。",
+          "RAG 和 LLM Wiki 可以一起用。Wiki 把持續維護的綜合內容留在互相連結的頁面裡；RAG 則檢索原始來源或 Wiki 頁面，協助回答問題。如果你想在提問之外繼續閱讀、編輯這份整理成果，Wiki 就有用途。檢索仍能協助找到證據，來源變更後也仍要重新整理與審查。",
         ],
         figure: "llm-wiki-vs-rag",
       },
@@ -384,8 +384,12 @@ const zhTWArticles = {
         answer: "Andrej Karpathy 描述了一種由 AI 根據來源撰寫並維護的個人 wiki：把來源整理成互相連結的 Markdown 頁面，後續問題可以從這些頁面開始。來源變更時仍要重新讀取並檢查受影響的頁面。引用他的說明不代表他為 Wenlan 背書。"
       },
       {
+        question: "已經用 NotebookLM，還需要 LLM Wiki 嗎？",
+        answer: "如果主要是對文件提問，NotebookLM 可能已經夠用：它能附上來源引用，也能把回答存成筆記。當你希望成果是互相連結的 Markdown 頁面，可以自行編輯、用 Git 管理版本，並交給能編輯檔案的 AI 工具重用時，檔案型 Wiki 才值得考慮。這也需要設定與更新審查；先選一個來源會變動的主題試用，不必搬走整個資料庫。"
+      },
+      {
         question: "LLM Wiki 和 RAG 是同一種東西嗎？",
-        answer: "兩者做法不同。RAG 會針對每個問題檢索相關來源片段，同一份資料可能再次被檢索。LLM Wiki 把持續維護的綜合內容留在可打開檢查的頁面裡；來源變更時仍要重新整理，重要結論也可能需要回到引用核對。大型 wiki 也可以搜尋頁面。"
+        answer: "不是同一種東西，但可以一起用。Wiki 維護互相連結的頁面；RAG 檢索資料來回答問題。你可以檢索 Wiki 頁面，再回到原始來源核對。維護 Wiki 並不代表來源變更後就不用審查。"
       },
       {
         question: "怎麼用 Claude Code 或 Codex 建立 LLM Wiki？",
@@ -405,6 +409,10 @@ const zhTWArticles = {
       }
     ],
     officialReferences: [
+      {
+        label: "Google：儲存回答與建立筆記",
+        href: "https://support.google.com/notebooklm/answer/16262519?hl=en"
+      },
       {
         label: "Karpathy 的 LLM Wiki 說明",
         href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"
@@ -3894,7 +3902,7 @@ const zhCNArticles = {
       {
         heading: "LLM Wiki 和 RAG 的区别",
         body: [
-          "RAG 会针对每个问题检索相关来源片段；来源集合与索引仍可继续使用，同一份资料也可能在不同问题中再次被检索。LLM Wiki 则把持续维护的综合内容留在可打开检查的页面里，让后续查询可以从页面开始。新增或变更的来源仍要重新整理，重要结论也可能需要回到引用核对。大型 wiki 仍可用搜索找到合适页面。",
+          "RAG 和 LLM Wiki 可以一起用。Wiki 把持续维护的综合内容留在互相链接的页面里；RAG 则检索原始来源或 Wiki 页面，协助回答问题。如果你想在提问之外继续阅读、编辑这份整理成果，Wiki 就有用途。检索仍能协助找到证据，来源变更后也仍要重新整理与审查。",
         ],
         figure: "llm-wiki-vs-rag",
       },
@@ -4068,8 +4076,12 @@ const zhCNArticles = {
         answer: "Andrej Karpathy 描述了一种由 AI 根据来源撰写并维护的个人 wiki：把来源整理成互相链接的 Markdown 页面，后续问题可以从这些页面开始。来源变更时仍要重新读取并检查受影响的页面。引用他的说明不代表他为 Wenlan 背书。"
       },
       {
+        question: "已经用 NotebookLM，还需要 LLM Wiki 吗？",
+        answer: "如果主要是对文档提问，NotebookLM 可能已经够用：它能附上来源引用，也能把回答存成笔记。当你希望成果是互相链接的 Markdown 页面，可以自行编辑、用 Git 管理版本，并交给能编辑文件的 AI 工具复用时，文件型 Wiki 才值得考虑。这也需要设置与更新审查；先选一个来源会变化的主题试用，不必搬走整个资料库。"
+      },
+      {
         question: "LLM Wiki 和 RAG 是同一种东西吗？",
-        answer: "两者做法不同。RAG 会针对每个问题检索相关来源片段，同一份资料可能再次被检索。LLM Wiki 把持续维护的综合内容留在可打开检查的页面里；来源变更时仍要重新整理，重要结论也可能需要回到引用核对。大型 wiki 也可以搜索页面。"
+        answer: "不是同一种东西，但可以一起用。Wiki 维护互相链接的页面；RAG 检索资料来回答问题。你可以检索 Wiki 页面，再回到原始来源核对。维护 Wiki 并不代表来源变更后就不用审查。"
       },
       {
         question: "怎么用 Claude Code 或 Codex 搭建 LLM Wiki？",
@@ -4089,6 +4101,10 @@ const zhCNArticles = {
       }
     ],
     officialReferences: [
+      {
+        label: "Google：保存回答与创建笔记",
+        href: "https://support.google.com/notebooklm/answer/16262519?hl=en"
+      },
       {
         label: "Karpathy 的 LLM Wiki 说明",
         href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"
