@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "6e2a3640736dad18853800234121dcd2bd31403f1612c3d04774d8cb495ae13c",
+    sourceHash: "2b2d5c25d3d5622c361bfe49b2a06dc29d2ea03fe2111d80e84122e9095e069d",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库与 LLM Wiki",
@@ -494,7 +494,7 @@ export const zhCNContent = {
           {
             id: "not-notes",
             q: "Wenlan 能取代 Notion 或 Obsidian 吗？",
-            a: "不能。Wenlan 不取代你用来写作的 App。它可以把 Markdown 文件、text、可提取文字的 PDF、文件夹和 Obsidian 库登记为来源。Obsidian 输入是只读，按需重新同步；Wenlan 自己的笔记仍是 ~/.wenlan/ 底下可读的 Markdown。",
+            a: "不能。Wenlan 不取代你用来写作的 App。它可以把 Markdown 文件、text、可提取文字的 PDF、文件夹和 Obsidian 库登记为来源。Obsidian 输入是只读，并在后台持续跟进，约每 30 秒检查一次；Wenlan 自己的笔记仍是 ~/.wenlan/ 底下可读的 Markdown。",
           },
           {
             id: "setup",
@@ -890,7 +890,7 @@ export const zhCNContent = {
             {
               id: "obsidian",
               title: "继续用你的 Obsidian 笔记库",
-              body: "只读连接笔记库，需要时刷新来源；原笔记留在原处、不被改动。",
+              body: "只读连接笔记库，Wenlan 在后台跟进变化；原笔记留在原处、不被改动。",
             },
             {
               id: "steep",

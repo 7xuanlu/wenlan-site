@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "6e2a3640736dad18853800234121dcd2bd31403f1612c3d04774d8cb495ae13c",
+    sourceHash: "2b2d5c25d3d5622c361bfe49b2a06dc29d2ea03fe2111d80e84122e9095e069d",
     content: {
       seo: {
         title: "文瀾 Wenlan｜個人 AI 知識庫與 LLM Wiki",
@@ -494,7 +494,7 @@ export const zhTWContent = {
           {
             id: "not-notes",
             q: "Wenlan 能取代 Notion 或 Obsidian 嗎？",
-            a: "不能。Wenlan 不取代你用來寫作的 App。它可以把 Markdown 檔案、text、可抽取文字的 PDF、資料夾和 Obsidian 庫登錄為來源。Obsidian 輸入是唯讀，按需求重新同步；Wenlan 自己的筆記仍是 ~/.wenlan/ 底下可讀的 Markdown。",
+            a: "不能。Wenlan 不取代你用來寫作的 App。它可以把 Markdown 檔案、text、可抽取文字的 PDF、資料夾和 Obsidian 庫登錄為來源。Obsidian 輸入是唯讀，並在背景持續跟進，約每 30 秒檢查一次；Wenlan 自己的筆記仍是 ~/.wenlan/ 底下可讀的 Markdown。",
           },
           {
             id: "setup",
@@ -890,7 +890,7 @@ export const zhTWContent = {
             {
               id: "obsidian",
               title: "繼續用你的 Obsidian 筆記庫",
-              body: "唯讀連接筆記庫，需要時更新來源；原筆記留在原處、不被改動。",
+              body: "唯讀連接筆記庫，Wenlan 在背景跟進變更；原筆記留在原處、不被改動。",
             },
             {
               id: "steep",

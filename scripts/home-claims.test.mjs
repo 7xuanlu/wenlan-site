@@ -385,7 +385,8 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     assert.match(cards.find(card => card.id === "sources").body, /URL|網址|网址/);
     assert.doesNotMatch(cards.find(card => card.id === "sources").body, /any file|every format|任何檔案|任何文件/);
     assert.match(cards.find(card => card.id === "obsidian").body, /read-only|唯讀|只读/);
-    assert.match(cards.find(card => card.id === "obsidian").body, /on demand|when needed|按需|需要時|需要时/);
+    assert.match(cards.find(card => card.id === "obsidian").body, /in the background|在背景|在后台/);
+    assert.doesNotMatch(cards.find(card => card.id === "obsidian").body, /on demand|when needed|按需|需要時|需要时/);
     assert.match(cards.find(card => card.id === "tools").body, /MCP/);
     assert.match(cards.find(card => card.id === "spaces").body, /Spaces/);
     assert.match(cards.find(card => card.id === "history").body, /page revisions|知識頁.*修訂|知识页.*修订/i);

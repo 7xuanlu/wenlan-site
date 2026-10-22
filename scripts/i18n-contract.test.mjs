@@ -1666,7 +1666,7 @@ test("Mandarin Obsidian guides own the Claude Code setup, MCP, plugin, and skill
       article.publishedAt,
       locale === "zh-TW" ? "2026-07-22" : "2026-08-01",
     );
-    assert.equal(article.updatedAt, "2026-10-18");
+    assert.equal(article.updatedAt, "2026-10-22");
     assert.ok(article.keywords.includes("Obsidian MCP"));
     assert.ok(article.keywords.includes("Obsidian Claude Code MCP"));
     assert.equal(article.sections.length, 14);
@@ -1835,7 +1835,7 @@ test("localized document-to-knowledge-base guides keep supported source boundari
     assert.ok(article);
     assert.equal(article.title, expected.title);
     assert.equal(article.publishedAt, "2026-08-01");
-    assert.equal(article.updatedAt, "2026-10-20");
+    assert.equal(article.updatedAt, "2026-10-22");
     assert.ok(article.keywords.includes(expected.keyword));
     assert.match(JSON.stringify(article), /wenlan sources add/);
     assert.match(JSON.stringify(article), /\.md/);
@@ -1856,7 +1856,7 @@ test("English document-to-knowledge-base guide owns the implementation gap", asy
     "Build a Personal AI Knowledge Base from Your Documents",
   );
   assert.equal(article.publishedAt, "2026-08-01");
-  assert.equal(article.updatedAt, "2026-10-20");
+  assert.equal(article.updatedAt, "2026-10-22");
   assert.ok(article.keywords.includes("AI knowledge base builder"));
   const text = JSON.stringify(article);
   assert.match(text, /wenlan sources add/);

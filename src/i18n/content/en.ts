@@ -499,7 +499,7 @@ export const enContent = {
           {
             id: "not-notes",
             q: "Is Wenlan a replacement for Notion or Obsidian?",
-            a: "No. Wenlan does not replace the app you write in. It can register Markdown files, text, text-extractable PDF, folders, and an Obsidian vault as sources. Obsidian input is read-only and resyncs on demand; Wenlan's own notes remain readable Markdown under ~/.wenlan/.",
+            a: "No. Wenlan does not replace the app you write in. It can register Markdown files, text, text-extractable PDF, folders, and an Obsidian vault as sources. Obsidian input is read-only and followed in the background, checked about every 30 seconds; Wenlan's own notes remain readable Markdown under ~/.wenlan/.",
           },
           {
             id: "setup",
@@ -895,7 +895,7 @@ export const enContent = {
             {
               id: "obsidian",
               title: "Keep using your Obsidian vault",
-              body: "Connect your vault read-only and refresh when needed. Your original notes stay untouched.",
+              body: "Connect your vault read-only and Wenlan follows changes in the background. Your original notes stay untouched.",
             },
             {
               id: "steep",
