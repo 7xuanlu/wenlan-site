@@ -630,7 +630,7 @@ const zhTWArticles = {
       "Obsidian AI 知識庫",
     ],
     publishedAt: "2026-07-22",
-    updatedAt: "2026-10-18",
+    updatedAt: "2026-10-22",
     author: "Qi-Xuan Lu",
     readingTime: "12 分鐘閱讀",
     audience: "想讓 Claude Code 讀寫、整理 Obsidian vault 的繁體中文使用者",
@@ -869,7 +869,7 @@ const zhTWArticles = {
           "可以直接從文件、筆記與 AI 工作成果開始，Obsidian 並非必要。日常透過已連接的 AI 保存與取用知識，需要閱讀頁面、查來源或檢查修改時，再打開 Wenlan。如果仍需要 Obsidian 的編輯器與外掛，也可以繼續使用，並把筆記庫接進來。",
           "Obsidian 的 Markdown 筆記，本來就能讓有存取權限的不同 AI 工具讀寫；claude-obsidian 等專案也提供引用與維護流程。選擇 Wenlan，是選擇它內建的整套流程，光是跨 AI 存取並不足以構成理由。若現有工具已經順手，也未必需要另裝。",
           "以這篇練習為例，值得留下的是一份能接著維護的專案摘要：展示日期從 10 月 22 日改成 24 日後，依新來源更新同一頁，核對修改依據；之後處理這個專案時，就能使用這一頁，不必沿用對話裡的舊答案。",
-          "Obsidian 筆記庫以唯讀來源連接，原始筆記仍留在 Obsidian，Wenlan 不會回寫。修改筆記後，先重新同步來源，再請已連接的 AI 更新頁面；背景更新頁面另需設定模型。如果 AI 更新的是你編輯過的頁面，會先提出修訂讓你檢查。AI 承擔整理工作，內容仍由你判斷。",
+          "Obsidian 筆記庫以唯讀來源連接，原始筆記仍留在 Obsidian，Wenlan 不會回寫。Wenlan 會在背景跟進筆記庫，約每 30 秒檢查一次，所以修改筆記後不必手動重新同步，直接請已連接的 AI 更新頁面即可；背景更新頁面另需設定模型。如果 AI 更新的是你編輯過的頁面，會先提出修訂讓你檢查。AI 承擔整理工作，內容仍由你判斷。",
         ],
         table: {
           columns: ["需求", "可用做法"],
@@ -907,7 +907,7 @@ const zhTWArticles = {
           "在 Wenlan 桌面 App 開啟「設定 → 來源」，把練習 vault 加為 Obsidian 來源，等三份筆記同步完成。",
           "請 Claude：「用 Wenlan 找出練習 vault 裡的 01-plan.md、02-update.md 和 03-checklist.md，依這三份來源建立專案摘要頁。正文列出目前展示日期、負責人、時長與待確認事項；頁面的短摘要只描述用途，不重複日期。完成後給我 Page ID，方便下次更新同一頁。」",
           "打開頁面及其來源，核對 10 月 22 日、小梅、15 分鐘、場地未確認。不能把舊的 10 月 20 日當成目前安排。先不要手動修改摘要頁，接著測試來源更新。",
-          "把 02-update.md 裡的 10 月 22 日改成 10 月 24 日。在「設定 → 來源」點該來源旁的「同步」，再請 Claude 重新讀取這個 Page 的來源，更新同一個 Page ID。核對正文已改為 10 月 24 日，且仍連到三份筆記。只同步來源，不會直接改寫頁面。"
+          "把 02-update.md 裡的 10 月 22 日改成 10 月 24 日。Wenlan 會在背景跟進這個 vault，約每 30 秒檢查一次，稍等片刻讓變更被讀入，再請 Claude 重新讀取這個 Page 的來源，更新同一個 Page ID。核對正文已改為 10 月 24 日，且仍連到三份筆記。只讓來源跟上變更，不會直接改寫頁面。"
         ],
         "code": {
           "label": "練習前先連接 Wenlan",
@@ -1168,7 +1168,7 @@ const zhTWArticles = {
       "Wenlan 文瀾",
     ],
     publishedAt: "2026-08-01",
-    updatedAt: "2026-10-20",
+    updatedAt: "2026-10-22",
     author: "Qi-Xuan Lu",
     readingTime: "10 分鐘閱讀",
     audience: "想讓 AI 查詢自己的文件與筆記、但不想使用終端機的繁體中文讀者",
@@ -1248,7 +1248,7 @@ const zhTWArticles = {
       {
         id: "try-obsidian-test-vault", heading: "進階分支：使用 Obsidian vault 或 CLI", body: ["若要走 Obsidian 分支，在 Manage vaults → Open folder as vault → Open 選取 Cedar 資料夾。查看筆記不需要社群外掛。Claude Code 或 Codex 若要直接讀取該資料夾，則需安裝並登入相應客戶端。"],
         steps: [
-          { title: "在 Obsidian 打開相同來源", body: "打開 decision-2026-10-08，確認核准日期。產生的答案留在 vault 外。若要用前面的圖形介面流程，選 Connect Obsidian vault，再視需要重新整理。", image: { src: "/images/product-evidence/obsidian-cedar-approved.jpg", alt: "Obsidian 1.13.7 中相同的 Cedar 原始決定筆記；這是來源文件，不是 AI 回答。", caption: "Obsidian 中的 Cedar 原始來源。", width: 2048, height: 1600 } },
+          { title: "在 Obsidian 打開相同來源", body: "打開 decision-2026-10-08，確認核准日期。產生的答案留在 vault 外。若要用前面的圖形介面流程，選 Connect Obsidian vault，文瀾之後會在背景跟進這個 vault 的變更。", image: { src: "/images/product-evidence/obsidian-cedar-approved.jpg", alt: "Obsidian 1.13.7 中相同的 Cedar 原始決定筆記；這是來源文件，不是 AI 回答。", caption: "Obsidian 中的 Cedar 原始來源。", width: 2048, height: 1600 } },
           { title: "直接讓程式開發客戶端讀取資料夾", body: "替換以下路徑後，在終端機啟動 Claude Code，並要求它只讀取來源文件。若用 Codex，將 claude 換成 codex。這個做法是讓客戶端直接讀資料夾，不會匯入 Wenlan。", code: { label: "選用指令：替換資料夾路徑，再啟動 Claude Code", code: "cd \"/full/path/to/Cedar project\"\nclaude" } },
           { title: "另一種進階做法：匯入已連接 Wenlan 的來源", body: "如果要讓 Claude Code 或 Codex 使用 Wenlan 的來源檢索，先依設定指南連接客戶端，再在終端機執行以下匯入指令。這是上一個「直接讀資料夾」做法的替代方案；匯入完成後，再開啟客戶端對話。", code: { label: "選用的 Wenlan 匯入指令", code: "wenlan status\nwenlan sources add \"/full/path/to/Cedar project\"" } },
         ],
@@ -4303,7 +4303,7 @@ const zhCNArticles = {
       "Obsidian AI 知识库",
     ],
     publishedAt: "2026-08-01",
-    updatedAt: "2026-10-18",
+    updatedAt: "2026-10-22",
     author: "Qi-Xuan Lu",
     readingTime: "12 分钟阅读",
     audience: "想让 Claude Code 读写、整理 Obsidian vault 的简体中文用户",
@@ -4542,7 +4542,7 @@ const zhCNArticles = {
           "可以直接从文档、笔记和 AI 工作成果开始，Obsidian 并非必需。日常通过已连接的 AI 保存和取用知识，需要阅读页面、核对来源或检查修改时，再打开 Wenlan。如果仍需要 Obsidian 的编辑器和插件，也可以继续使用，并把笔记库接进来。",
           "Obsidian 的 Markdown 笔记，本来就能让有访问权限的不同 AI 工具读写；claude-obsidian 等项目也提供引用和维护流程。选择 Wenlan，是选择它内置的整套流程，光是跨 AI 访问并不足以成为理由。如果现有工具已经顺手，也未必需要另装。",
           "以这篇练习为例，值得保留的是一份能接着维护的项目摘要：展示日期从 10 月 22 日改成 24 日后，根据新来源更新同一页，核对修改依据；之后处理这个项目时，就能使用这一页，不必沿用对话里的旧答案。",
-          "Obsidian 笔记库作为只读来源接入，原始笔记仍保留在 Obsidian，Wenlan 不会写回。修改笔记后，先重新同步来源，再请已连接的 AI 更新页面；后台更新页面还需配置模型。如果 AI 更新的是你编辑过的页面，会先提出修订供你检查。AI 承担整理工作，内容仍由你判断。",
+          "Obsidian 笔记库作为只读来源接入，原始笔记仍保留在 Obsidian，Wenlan 不会写回。Wenlan 会在后台跟进笔记库，约每 30 秒检查一次，所以修改笔记后不必手动重新同步，直接请已连接的 AI 更新页面即可；后台更新页面还需配置模型。如果 AI 更新的是你编辑过的页面，会先提出修订供你检查。AI 承担整理工作，内容仍由你判断。",
         ],
         table: {
           columns: ["需求", "可用做法"],
@@ -4580,7 +4580,7 @@ const zhCNArticles = {
           "在 Wenlan 桌面 App 打开“设置 → 来源”，把练习 vault 添加为 Obsidian 来源，等三篇笔记同步完成。",
           "请 Claude：“用 Wenlan 找出练习 vault 中的 01-plan.md、02-update.md 和 03-checklist.md，根据这三条来源创建项目摘要页。正文列出当前演示日期、负责人、时长与待确认事项；页面的简短摘要只描述用途，不重复日期。完成后给我 Page ID，方便下次更新同一页。”",
           "打开页面及其来源，核对 10 月 22 日、小梅、15 分钟、场地未确认。不能把旧的 10 月 20 日当成当前安排。先不要手动修改摘要页，接着测试来源更新。",
-          "把 02-update.md 中的 10 月 22 日改成 10 月 24 日。在“设置 → 来源”点击该来源旁的“同步”，再请 Claude 重新读取这个 Page 的来源，更新同一个 Page ID。核对正文已改为 10 月 24 日，且仍链接到三篇笔记。只同步来源，不会直接改写页面。"
+          "把 02-update.md 中的 10 月 22 日改成 10 月 24 日。Wenlan 会在后台跟进这个 vault，约每 30 秒检查一次，稍等片刻让变更被读入，再请 Claude 重新读取这个 Page 的来源，更新同一个 Page ID。核对正文已改为 10 月 24 日，且仍链接到三篇笔记。只让来源跟上变更，不会直接改写页面。"
         ],
         "code": {
           "label": "练习前先连接 Wenlan",
@@ -4842,7 +4842,7 @@ const zhCNArticles = {
       "Wenlan 文澜",
     ],
     publishedAt: "2026-08-01",
-    updatedAt: "2026-10-20",
+    updatedAt: "2026-10-22",
     author: "Qi-Xuan Lu",
     readingTime: "10 分钟阅读",
     audience: "想让 AI 查询自己的文档与笔记、但不想使用终端的简体中文读者",
@@ -4922,7 +4922,7 @@ const zhCNArticles = {
       {
         id: "try-obsidian-test-vault", heading: "进阶分支：使用 Obsidian vault 或 CLI", body: ["如果要走 Obsidian 分支，在 Manage vaults → Open folder as vault → Open 中选择 Cedar 文件夹。查看笔记不需要社区插件。Claude Code 或 Codex 若要直接读取该文件夹，则需安装并登录相应客户端。"],
         steps: [
-          { title: "在 Obsidian 中打开相同来源", body: "打开 decision-2026-10-08，确认批准日期。生成的答案留在 vault 外。若要按前面的图形界面流程使用文澜，选择 Connect Obsidian vault，再按需刷新。", image: { src: "/images/product-evidence/obsidian-cedar-approved.jpg", alt: "Obsidian 1.13.7 中相同的 Cedar 原始决定笔记；这是来源文档，不是 AI 回答。", caption: "Obsidian 中的 Cedar 原始来源。", width: 2048, height: 1600 } },
+          { title: "在 Obsidian 中打开相同来源", body: "打开 decision-2026-10-08，确认批准日期。生成的答案留在 vault 外。若要按前面的图形界面流程使用文澜，选择 Connect Obsidian vault，文澜之后会在后台跟进这个 vault 的变化。", image: { src: "/images/product-evidence/obsidian-cedar-approved.jpg", alt: "Obsidian 1.13.7 中相同的 Cedar 原始决定笔记；这是来源文档，不是 AI 回答。", caption: "Obsidian 中的 Cedar 原始来源。", width: 2048, height: 1600 } },
           { title: "直接让编程客户端读取文件夹", body: "替换以下路径后，在终端中启动 Claude Code，并要求它只读取来源文档。若使用 Codex，将 claude 换成 codex。此做法让客户端直接读取文件夹，不会导入 Wenlan。", code: { label: "可选命令：替换文件夹路径，再启动 Claude Code", code: "cd \"/full/path/to/Cedar project\"\nclaude" } },
           { title: "另一种进阶做法：导入已连接 Wenlan 的来源", body: "如果要让 Claude Code 或 Codex 使用 Wenlan 的来源检索，先按设置指南连接客户端，再在终端中运行以下导入命令。这是上一个“直接读取文件夹”做法的替代方案；导入完成后，再开启客户端对话。", code: { label: "可选的 Wenlan 导入命令", code: "wenlan status\nwenlan sources add \"/full/path/to/Cedar project\"" } },
         ],

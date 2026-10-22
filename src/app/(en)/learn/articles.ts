@@ -538,7 +538,7 @@ const baseArticles: LearnArticle[] = [
       "Obsidian AI knowledge base",
     ],
     publishedAt: "2026-06-06",
-    updatedAt: "2026-10-18",
+    updatedAt: "2026-10-22",
     author: DEFAULT_AUTHOR,
     readingTime: "12 min read",
     audience: "Obsidian users who want Claude Code to read, write, and organize their vault",
@@ -777,7 +777,7 @@ const baseArticles: LearnArticle[] = [
           "You can start directly with documents, notes, and AI work; Obsidian is optional. Use your connected AI to save and retrieve knowledge, then open Wenlan when you want to read a page, check its sources, or review changes. If you still want Obsidian’s editor and plugins, keep using them and connect your vault.",
           "Obsidian’s Markdown files can already be read and edited by different AI tools with access. Projects such as claude-obsidian also provide citations and maintenance workflows. Wenlan offers its own built-in workflow; cross-AI access alone is not the reason to choose it. If your existing setup already suits you, you may not need another tool.",
           "In this exercise, the useful result is a project brief you can return to when the demo date changes from October 22 to October 24. You update the same page from the new source and check its evidence; a later task can use that page instead of relying on an old answer in a chat.",
-          "Your Obsidian vault connects as a read-only source: notes stay in Obsidian, and Wenlan does not write changes back. After editing a note, resync that source, then ask your connected AI to update the page. Background page updates require a configured model. If AI updates a page you have edited, it proposes a revision for you to review. AI handles the organizing; you still judge the content.",
+          "Your Obsidian vault connects as a read-only source: notes stay in Obsidian, and Wenlan does not write changes back. Wenlan follows the vault in the background, checking about every 30 seconds, so after editing a note you can ask your connected AI to update the page without a manual resync. Background page updates require a configured model. If AI updates a page you have edited, it proposes a revision for you to review. AI handles the organizing; you still judge the content.",
         ],
         table: {
           columns: ["Need", "Useful approach"],
@@ -815,7 +815,7 @@ const baseArticles: LearnArticle[] = [
           "In the Wenlan desktop app, open Settings → Sources. Add the practice vault as an Obsidian source and wait for all three notes to sync.",
           "Ask Claude: “Use Wenlan to find 01-plan.md, 02-update.md, and 03-checklist.md from my practice vault. Create a project brief from those sources. Include the current demo date, owner, duration, and what remains unknown. Keep the short summary about the page’s purpose; put the schedule details in the body. Return the Page ID so I can update the same page later.”",
           "Open the page and its sources. Check for October 22, Mei, 15 minutes, and an unconfirmed venue. The old October 20 date must not appear as the current plan. Leave the page unedited for the next step.",
-          "Change October 22 to October 24 in 02-update.md. Click Sync beside the source in Settings → Sources. Ask Claude to read that Page’s sources again and update the same Page ID. Check that the body now says October 24 and still links to the three notes. Syncing the source alone does not rewrite the page."
+          "Change October 22 to October 24 in 02-update.md. Wenlan follows the vault in the background and checks about every 30 seconds, so wait a moment for the change to be picked up. Ask Claude to read that Page’s sources again and update the same Page ID. Check that the body now says October 24 and still links to the three notes. Picking up the change alone does not rewrite the page."
         ],
         "code": {
           "label": "Connect Wenlan before the exercise",
