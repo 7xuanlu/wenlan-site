@@ -1555,10 +1555,10 @@ const baseArticles: LearnArticle[] = [
     category: "Concepts",
     title: "Karpathy's LLM Wiki: What It Is and How to Build One",
     description:
-      "Andrej Karpathy's LLM Wiki pattern explained with diagrams, the implementations people actually use, and a copy-paste Claude Code setup.",
+      "Karpathy's LLM Wiki explained: add documents, build linked pages, ask questions with sources, and check what changes when evidence is updated.",
     metaTitle: "Karpathy LLM Wiki: What It Is & How to Build One",
     metaDescription:
-      "Karpathy's LLM Wiki explained with diagrams: how it differs from RAG, the most-used implementations, and a copy-paste Claude Code setup with CLAUDE.md.",
+      "Karpathy's LLM Wiki explained: add documents, build linked pages, ask questions with sources, and check what changes when evidence is updated.",
     keywords: [
       "LLM wiki",
       "Karpathy LLM wiki",
@@ -1574,38 +1574,38 @@ const baseArticles: LearnArticle[] = [
       "AI knowledge base",
     ],
     publishedAt: "2026-06-24",
-    updatedAt: "2026-10-06",
+    updatedAt: "2026-10-22",
     author: DEFAULT_AUTHOR,
     readingTime: "7 min read",
     audience: "Anyone who read Karpathy's LLM Wiki note and wants a working version with Claude Code, Codex, or Obsidian",
     heroBullets: [
       "An LLM wiki is a folder of Markdown pages that an AI keeps up to date from your sources, so answers build on earlier work instead of starting over.",
       "It has three layers (sources, wiki, schema) and three jobs (ingest, query, lint).",
-      "Most people start from a ready-made project. You can also build one with Claude Code and an empty folder.",
+      "Try one complete workflow: add documents, build pages, ask with sources, then review an update."
     ],
     sections: [
       {
         heading: "What Karpathy's LLM Wiki is",
         body: [
           "In April 2026 Andrej Karpathy published a GitHub gist called LLM Wiki. The pattern is to ingest sources into linked Markdown pages, so later questions can start from a maintained synthesis instead of searching the whole collection from scratch. When a source changes, it still needs to be read again and affected pages checked; answers may also need to return to cited sources.",
-          "This article cites Karpathy's public note as the source of the pattern; it does not imply that Karpathy endorses Wenlan.",
+          "The gist is an idea file, not an app or a required setup. The starter rules and retry-policy exercise below are our teaching examples; shared rules across AI tools are optional. This article cites Karpathy's public note as the source of the pattern; it does not imply that Karpathy endorses Wenlan."
         ],
         figure: "llm-wiki-architecture",
         link: {
           label: "See a complete example without installing anything",
-          href: "#worked-example",
-        },
+          href: "#worked-example"
+        }
       },
       {
         heading: "The three jobs: ingest, query, lint",
         body: [
-          "Every change to the wiki is one of three jobs. Keeping them separate stops a question from quietly rewriting pages.",
+          "Karpathy describes three recurring activities: ingest, query and lint. A useful answer can become a new page. These instructions guide the agent; you still review its changes."
         ],
         bullets: [
           "Ingest: read a new source, write its summary page, update the pages it affects, then update index.md and log.md.",
           "Query: read index.md, open only the pages needed, and answer with links. A good answer can be saved as a page.",
-          "Lint: look for contradictions, claims a newer source replaced, pages nothing links to, and topics with no page yet.",
-        ],
+          "Lint: look for contradictions, claims a newer source replaced, pages nothing links to, and topics with no page yet."
+        ]
       },
       {
         heading: "LLM wiki vs RAG",
@@ -1633,169 +1633,180 @@ const baseArticles: LearnArticle[] = [
       },
       {
         id: "build-an-llm-wiki-with-claude-code",
-        heading: "Build one with Claude Code in 15 minutes",
+        heading: "Build an LLM wiki with Claude Code or Codex",
         body: [
-          "You need Claude Code, or another agent that can edit files such as Codex or Cursor, and an empty folder. Create this layout and run git init, so you can see and undo every change. To read the pages, open the folder in Obsidian or any Markdown editor.",
+          "You need an AI tool that can edit local files, such as Claude Code or Codex, and an empty folder. Create this layout and run git init. Use Obsidian or any Markdown editor to read the pages."
         ],
         code: {
           label: "Folder layout",
-          code: [
-            "my-wiki/",
-            "  CLAUDE.md        # the schema: rules the agent follows",
-            "  raw/             # your sources; the agent never edits these",
-            "  wiki/",
-            "    index.md       # one line per page",
-            "    log.md         # one line per ingest, query, or lint",
-            "    sources/       # one summary page per source",
-            "    topics/        # one page per topic, person, or idea",
-          ].join("\n"),
+          code: "my-wiki/\n  CLAUDE.md        # Claude Code; use AGENTS.md for Codex\n  raw/             # your sources; the agent never edits these\n  wiki/\n    index.md       # one line per page\n    log.md         # one line per ingest, query, or lint\n    sources/       # one summary page per source\n    topics/        # one page per topic, person, or idea"
         },
         link: {
           label: "Already have an Obsidian vault? Turn it into an LLM wiki",
-          href: "/learn/migrate-obsidian-vault-to-llm-wiki",
-        },
+          href: "/learn/migrate-obsidian-vault-to-llm-wiki"
+        }
       },
       {
-        heading: "The CLAUDE.md schema to copy",
+        id: "run-claude-or-codex-wiki",
+        heading: "Add documents, build the wiki, then check an answer",
         body: [
-          "This file is the whole system: CLAUDE.md for Claude Code or AGENTS.md for Codex. The \"My notes\" rule keeps a refresh from replacing text you corrected by hand.",
-          "Then type ingest raw/<file>, query <question>, or lint in Claude Code. Start with two or three sources on one topic, and check the git diff after each job.",
+          "Use the fictional source packet below for your first run. The prompts go into your AI conversation, not the terminal."
+        ],
+        steps: [
+          {
+            title: "Add the documents",
+            body: "Save api-v1.md, decision-07.md and runbook-v1.md from the source packet below in raw/. Save the rules below for your chosen tool, then review and commit these initial files before the agent writes."
+          },
+          {
+            title: "Have the AI build the wiki",
+            body: "Start Claude Code or Codex in my-wiki and ask it to confirm which rules it loaded. Enter these prompts one at a time. Check that it creates source summaries and linked topic pages, updates index.md and log.md, and leaves raw/ unchanged.",
+            code: {
+              label: "AI conversation — organize the documents",
+              code: "ingest raw/api-v1.md\ningest raw/decision-07.md\ningest raw/runbook-v1.md"
+            }
+          },
+          {
+            title: "Ask a question and open its sources",
+            body: "Expect 3 retries after the first attempt: 4 attempts total, supported by api-v1.md and decision-07.md. Open both cited files and check the wording. The timeout is unspecified; the AI must not invent a value.",
+            code: {
+              label: "AI conversation — ask with evidence",
+              code: "query What is our GET retry policy? Cite the sources and list what is still unknown."
+            }
+          },
+          {
+            title: "Add an update and check what changed",
+            body: "Save the replacement text below as raw/api-v2.md, keeping v1 for history. The new source allows 1 retry, while decision-07.md still says 3. The wiki should flag the conflict, not silently choose a winner. Review every proposed edit before accepting it.",
+            code: {
+              label: "AI conversation — review the update",
+              code: "Ingest raw/api-v2.md. Treat api-v1.md as historical only.\nquery What changed in the GET retry policy? Cite both current sources and flag unresolved conflicts.\nlint"
+            }
+          }
+        ]
+      },
+      {
+        id: "the-claude-md-schema-to-copy",
+        heading: "Wiki rules for your chosen tool",
+        body: [
+          "Save the rules below as CLAUDE.md for Claude Code, or AGENTS.md for Codex. Choose one tool to start; no cross-tool setup is needed."
         ],
         code: {
-          label: "CLAUDE.md",
-          code: [
-            "# LLM Wiki",
-            "",
-            "This folder is a wiki you maintain from my sources.",
-            "",
-            "## Layout",
-            "- raw/: my sources. Read them. Never edit, move, or delete them.",
-            "- wiki/sources/: one summary page per source, named after the source.",
-            "- wiki/topics/: one page per topic, person, or idea.",
-            "- wiki/index.md: every page, one line each: [[page]] - summary.",
-            "- wiki/log.md: one line per job: ## [YYYY-MM-DD] ingest | <title>",
-            "",
-            "## Page rules",
-            "- Start each page with a two- or three-sentence summary.",
-            "- Every claim links to the source page it came from.",
-            "- Link related pages with [[wiki links]].",
-            "- If a new source contradicts a page, say so on the page and cite both.",
-            "- Never rewrite text under a \"## My notes\" heading. I write that part.",
-            "",
-            "## Jobs",
-            "- ingest <file>: summarize it, update affected topic pages,",
-            "  update index.md, and log it.",
-            "- query <question>: read index.md first, open only the pages you need,",
-            "  and answer with links. Offer to save a useful answer as a page.",
-            "- lint: list contradictions, outdated claims, orphan pages, and",
-            "  missing pages. Fix only what I approve.",
-          ].join("\n"),
-        },
+          label: "CLAUDE.md or AGENTS.md — choose your tool",
+          code: "# LLM Wiki\n\nThis folder is a wiki you maintain from my sources.\n\n## Layout\n- raw/: my sources. Read them. Never edit, move, or delete them.\n- wiki/sources/: one summary page per source, named after the source.\n- wiki/topics/: one page per topic, person, or idea.\n- wiki/index.md: every page, one line each: [[page]] - summary.\n- wiki/log.md: one line per job: ## [YYYY-MM-DD] ingest | <title>\n\n## Page rules\n- Start each page with a two- or three-sentence summary.\n- Every claim links to the source page it came from.\n- Link related pages with [[wiki links]].\n- If a new source contradicts a page, say so on the page and cite both.\n- Never rewrite text under a \"## My notes\" heading. I write that part.\n\n## Jobs\n- ingest <file>: summarize it, update affected topic pages,\n  update index.md, and log it.\n- query <question>: read index.md first, open only the pages you need,\n  and answer with links. Offer to save a useful answer as a page.\n- lint: list contradictions, outdated claims, orphan pages, and\n  missing pages. Fix only what I approve."
+        }
       },
       ...workedExampleSections("en"),
       {
+        id: "review-wiki-files",
+        heading: "Review the files before keeping the update",
+        body: [
+          "Finally, run the commands below in your terminal. Open new files marked ?? separately: git diff does not show untracked files. Confirm raw/ and your own notes are unchanged; commit only reviewed files."
+        ],
+        code: {
+          label: "Terminal — review files",
+          code: "git status --short --untracked-files=all\ngit diff HEAD"
+        }
+      },
+      {
         heading: "Where a do-it-yourself LLM wiki breaks",
         body: [
-          "The setup above works for one person, one agent, and a few dozen sources. As it grows:",
+          "The folder setup leaves routine maintenance to you:"
         ],
         bullets: [
-          "Sources change, pages don't. Nothing flags a stale page until the next lint.",
-          "Hand edits get overwritten unless every agent follows the \"My notes\" rule every time.",
-          "Each AI tool needs its own rules file, and the copies drift apart.",
-          "index.md outgrows the context window after a few hundred pages.",
-          "Decisions made in AI chats never reach raw/ unless you copy them by hand.",
-        ],
+          "When sources change, you need to rerun ingestion or lint and review affected pages.",
+          "Check each update preserves your own notes; the schema is an instruction, not an enforced permission.",
+          "Each client must load the shared schema and respect your source and editing boundaries.",
+          "A large index needs selective loading or search; it cannot grow indefinitely in every prompt.",
+          "You decide when to save chat decisions back into the files."
+        ]
       },
       {
         id: "the-five-minute-llm-wiki-protocol",
         heading: "The LLM-wiki workflow in Wenlan",
         body: [
-          "Wenlan is an open-source app that runs this pattern for you. It turns your documents, notes, and AI chats into pages with links to their sources, and updates them as sources change without overwriting your edits. Claude Code, Codex, and other AI tools read the same pages.",
-          "/capture saves a decision from the chat, /wenlan distill builds or refreshes a topic page, /wenlan pages opens it, and /brief and /recall load only what the next session needs.",
+          "Wenlan brings source import, wiki pages, citations, and review into one app. With background AI enabled, eligible AI-maintained pages can refresh when their evidence changes; pages you authored or edited receive revision proposals. Connected tools read the same library, so you do not have to build that maintenance workflow yourself.",
+          "/capture saves a decision from the chat, /wenlan distill builds or refreshes a topic page, /wenlan pages opens it, and /brief and /recall load only what the next session needs."
         ],
         code: {
           label: "Wenlan workflow — requires an installed, connected client",
-          code: [
-            "/brief <topic>",
-            "/recall <question>",
-            "/capture <decision + why>",
-            "/handoff",
-            "/wenlan distill <topic>",
-            "/wenlan pages <topic>",
-          ].join("\n"),
+          code: "/brief <topic>\n/recall <question>\n/capture <decision + why>\n/handoff\n/wenlan distill <topic>\n/wenlan pages <topic>"
         },
         link: {
           label: "Use the complete daily workflow",
-          href: "/docs/daily-workflow",
-        },
+          href: "/docs/daily-workflow"
+        }
+      },
+      {
+        id: "optional-shared-wiki-rules",
+        heading: "Optional: share the rules across Claude Code and Codex",
+        body: [
+          "Only needed if you switch between tools. Keep one AGENTS.md and put @AGENTS.md in CLAUDE.md as shown below for compatible rule loading. Check the loaded instructions in each session (Claude: /context; Codex: ask which instruction files it loaded).",
+          "Let one client finish writing before the other starts. They share the files, not the previous conversation."
+        ],
+        code: {
+          label: "CLAUDE.md",
+          code: "@AGENTS.md"
+        }
       },
     ],
     comparisonTable: {
-      competitorName: "DIY folder + CLAUDE.md",
+      competitorName: "DIY folder + wiki rules",
       rows: [
         {
           dimension: "Setup",
           wenlan: "Install the app and connect your AI tool",
-          competitor: "A folder, a schema file, and git",
+          competitor: "A folder, a schema file, and git"
         },
         {
           dimension: "When a source changes",
-          wenlan: "Pages update when you ask, or automatically in the background",
-          competitor: "Found at the next lint, if you run one",
+          wenlan: "Optional background AI refreshes eligible AI-maintained pages; your edited pages receive proposals",
+          competitor: "You rerun ingestion and review affected pages"
         },
         {
           dimension: "Your own edits",
           wenlan: "Kept; refreshes do not overwrite pages you edited",
-          competitor: "Kept only if the agent follows the schema rule",
+          competitor: "Schema rules guide the agent; committed Git versions provide recovery"
         },
         {
           dimension: "Several AI tools",
           wenlan: "One wiki shared by Claude Code, Codex, and other clients",
-          competitor: "One rules file per tool",
+          competitor: "One shared schema, loaded by each client"
         },
         {
           dimension: "AI chats as sources",
           wenlan: "Decisions can be captured from the chat",
-          competitor: "Copied into raw/ by hand",
-        },
-      ],
+          competitor: "Ask the agent to save a chat decision as a file, then review it"
+        }
+      ]
     },
     faqs: [
       {
         question: "What is the Karpathy LLM Wiki idea?",
-        answer:
-          "Andrej Karpathy described a personal wiki that an AI writes and maintains from your sources: it ingests sources into linked Markdown pages, which can help answer later questions. Changed sources still need to be read again and affected pages checked. Citing his note does not imply an endorsement of Wenlan.",
+        answer: "Andrej Karpathy described a personal wiki that an AI writes and maintains from your sources: it ingests sources into linked Markdown pages, which can help answer later questions. Changed sources still need to be read again and affected pages checked. Citing his note does not imply an endorsement of Wenlan."
       },
       {
         question: "What is an LLM wiki?",
-        answer:
-          "An LLM wiki is a folder of Markdown pages that an AI keeps current from your sources, with an index so the AI can find the right page and links back to the sources behind each claim.",
+        answer: "An LLM wiki is a folder of Markdown pages that an AI keeps current from your sources, with an index so the AI can find the right page and links back to the sources behind each claim."
       },
       {
         question: "Is an LLM wiki the same as RAG?",
-        answer:
-          "They are different approaches. RAG retrieves relevant source chunks for each query, and the same material may be retrieved again. An LLM wiki keeps a maintained synthesis in pages that you can open and check; changed sources still need ingestion, and important claims may need checking against their citations. A large wiki can also use search to find pages.",
+        answer: "They are different approaches. RAG retrieves relevant source chunks for each query, and the same material may be retrieved again. An LLM wiki keeps a maintained synthesis in pages that you can open and check; changed sources still need ingestion, and important claims may need checking against their citations. A large wiki can also use search to find pages."
       },
       {
-        question: "How do I build an LLM wiki with Claude Code?",
-        answer:
-          "Create a folder with raw/ for sources and wiki/ for pages, add a CLAUDE.md that describes the layout, page rules, and the ingest, query, and lint jobs, then run git init. Start Claude Code in the folder and ingest two or three sources.",
+        question: "How do I build an LLM wiki with Claude Code or Codex?",
+        answer: "Use one file-editing AI tool. Save its rules, add documents to raw/, ask it to build linked wiki pages, then ask a question and open the cited sources. Add a changed source and check the affected answer before accepting updates. Cross-tool rules are optional."
       },
       {
         question: "Do I need Obsidian for an LLM wiki?",
-        answer:
-          "No. The wiki is plain Markdown, so any editor works. Obsidian is useful for reading it: wiki links become clickable and graph view shows how pages connect.",
+        answer: "No. The wiki is plain Markdown, so any editor works. Obsidian is useful for reading it: wiki links become clickable and graph view shows how pages connect."
       },
       {
         question: "Where is Karpathy's LLM Wiki on GitHub?",
-        answer:
-          "It is a GitHub gist by karpathy titled LLM Wiki, linked in the references below. It is a description of the pattern rather than a repository you install; projects such as nashsu/llm_wiki and claude-obsidian package it as software.",
+        answer: "It is a GitHub gist by karpathy titled LLM Wiki, linked in the references below. It is a description of the pattern rather than a repository you install; projects such as nashsu/llm_wiki and claude-obsidian package it as software."
       },
       {
         question: "Does an LLM wiki replace code search or documentation?",
-        answer:
-          "No. An LLM wiki does not replace codebase search, current source code, test output, or a tool's own documentation; those stay the authority on what software does today. It pays off when the same topics come back across many sessions or tools.",
-      },
+        answer: "No. An LLM wiki does not replace codebase search, current source code, test output, or a tool's own documentation; those stay the authority on what software does today. It pays off when the same topics come back across many sessions or tools."
+      }
     ],
     relatedSlugs: [
       "source-backed-wiki-pages-ai-work",
@@ -1811,32 +1822,40 @@ const baseArticles: LearnArticle[] = [
     officialReferences: [
       {
         label: "Karpathy's LLM-wiki note",
-        href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+        href: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"
       },
       {
         label: "nashsu/llm_wiki desktop app",
-        href: "https://github.com/nashsu/llm_wiki",
+        href: "https://github.com/nashsu/llm_wiki"
       },
       {
         label: "Astro-Han/karpathy-llm-wiki Agent Skills",
-        href: "https://github.com/Astro-Han/karpathy-llm-wiki",
+        href: "https://github.com/Astro-Han/karpathy-llm-wiki"
       },
       {
         label: "AgriciDaniel/claude-obsidian",
-        href: "https://github.com/AgriciDaniel/claude-obsidian",
+        href: "https://github.com/AgriciDaniel/claude-obsidian"
       },
       {
         label: "Wenlan Source, Memory, and Page model",
-        href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build",
+        href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build"
       },
       {
         label: "Wenlan daily workflow",
-        href: "https://github.com/wenlan-app/wenlan#daily-workflow",
+        href: "https://github.com/wenlan-app/wenlan#daily-workflow"
       },
+      {
+        label: "Claude Code: shared instruction files",
+        href: "https://code.claude.com/docs/en/memory#share-one-file-with-other-coding-tools"
+      },
+      {
+        label: "Codex: AGENTS.md",
+        href: "https://learn.chatgpt.com/docs/agent-configuration/agents-md"
+      }
     ],
     cta: {
-      heading: "Let the wiki keep itself current",
-      body: "Wenlan turns your documents, notes, and AI chats into pages with links to their sources, and updates them as sources change without overwriting your edits.",
+      heading: "Review wiki pages when sources change",
+      body: "Wenlan turns documents, notes, and AI chats into pages with source links. When linked sources change, affected pages can be flagged for review. Check a proposed refresh before accepting it."
     },
   },
   {

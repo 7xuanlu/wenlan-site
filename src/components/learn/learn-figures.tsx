@@ -19,7 +19,7 @@ const architectureCopy: Record<Locale, {
   en: {
     caption: "The three layers and three jobs of an LLM wiki.",
     schema: { title: "Schema", detail: "CLAUDE.md or AGENTS.md: how the wiki is organized" },
-    follows: "the agent follows it on every job",
+    follows: "instructions for the agent; review its changes",
     sources: { title: "Raw sources", detail: "articles, papers, notes, files", note: "read-only" },
     wiki: { title: "Wiki", detail: "one Markdown page per topic, with links", note: "index.md · log.md" },
     answer: { title: "Answer", detail: "with links to the pages and sources used" },
@@ -30,7 +30,7 @@ const architectureCopy: Record<Locale, {
   "zh-TW": {
     caption: "LLM Wiki 的三層結構與三個工作。",
     schema: { title: "Schema", detail: "CLAUDE.md 或 AGENTS.md：wiki 怎麼組織" },
-    follows: "AI 每個工作都照這份規則做",
+    follows: "給 AI 的工作規則；修改仍需審查",
     sources: { title: "原始來源", detail: "文章、論文、筆記、檔案", note: "只讀不改" },
     wiki: { title: "Wiki", detail: "每個主題一頁 Markdown，互相連結", note: "index.md · log.md" },
     answer: { title: "回答", detail: "附上用到的頁面與來源連結" },
@@ -41,7 +41,7 @@ const architectureCopy: Record<Locale, {
   "zh-CN": {
     caption: "LLM Wiki 的三层结构与三个任务。",
     schema: { title: "Schema", detail: "CLAUDE.md 或 AGENTS.md：wiki 怎么组织" },
-    follows: "AI 每个任务都按这份规则做",
+    follows: "给 AI 的工作规则；修改仍需审核",
     sources: { title: "原始来源", detail: "文章、论文、笔记、文件", note: "只读不改" },
     wiki: { title: "Wiki", detail: "每个主题一页 Markdown，互相链接", note: "index.md · log.md" },
     answer: { title: "回答", detail: "附上用到的页面与来源链接" },
