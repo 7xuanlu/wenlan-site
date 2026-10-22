@@ -510,7 +510,10 @@ test("LLM wiki acquisition surfaces route demand into one canonical hub", async 
   assert.doesNotMatch(supportArticle, /LLM Wiki for AI Agents/);
   assert.match(home, /id:\s*"llm-wiki"/);
   assert.match(home, /href:\s*"\/learn\/distilled-wiki-pages-ai-memory"/);
-  assert.match(learnIndex, /LLM wiki and AI knowledge base/);
+  const { createElement } = await import("react");
+  const { renderNextPage } = await import("./lib/render-next-page.mjs");
+  const { default: LearnIndex } = await import("../src/app/(en)/learn/page.tsx");
+  assert.match(await renderNextPage(createElement(LearnIndex), { pathname: "/learn" }), /LLM wiki and AI knowledge base/);
   assert.match(structuredData, /LLM wiki for AI work/);
   assert.match(llms, /LLM wiki for AI work/);
   assert.match(llmsFull, /LLM wiki for AI work/);
@@ -1522,13 +1525,16 @@ test("public CLI guidance tracks the current top-level command surface", async (
   }
 });
 
-test("public command guidance tracks the current plugin contract", async () => {
+test("public command guidance tracks the selected released plugin contract", async () => {
   const wenlanRoot = process.env.WENLAN_REPO_ROOT
     ? resolve(process.env.WENLAN_REPO_ROOT)
     : resolve(repoRoot, "../wenlan");
-  const contract = JSON.parse(
-    await readFile(resolve(wenlanRoot, "plugin-contract.json"), "utf8"),
-  );
+  // Public setup instructions must describe the version offered for download.
+  // New routed operations on product main are not released website requirements.
+  const { stdout: releasedContract } = await execFileAsync("git", [
+    "-C", wenlanRoot, "show", `${selectedReleaseTag()}:plugin-contract.json`,
+  ]);
+  const contract = JSON.parse(releasedContract);
   const sharedCommands = contract.skills
     .filter((skill) => skill.status === "shared_now")
     .map((skill) => skill.name)

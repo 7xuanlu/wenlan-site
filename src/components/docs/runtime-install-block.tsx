@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Pre } from "fumadocs-ui/components/codeblock";
+import { ReadingCodeBlock } from "@/components/reading/reading-code-block";
 import { TrackedLocalizedLink } from "@/components/tracked-link";
 import type { Locale } from "@/i18n/locales";
 import {
@@ -61,12 +63,9 @@ export function RuntimeInstallBlock({
   return (
     <>
       {orderedCommands.map((command) => (
-        <pre
-          key={command}
-          className="mt-6 overflow-x-auto rounded-xl border border-[var(--o-border)] bg-[var(--o-bg-deep)] p-5 font-mono text-sm leading-relaxed text-[var(--o-text-secondary)]"
-        >
-          <code>{command}</code>
-        </pre>
+        <ReadingCodeBlock key={command} title={locale === "en" ? "Install Wenlan" : locale === "zh-TW" ? "安裝文瀾" : "安装文澜"}>
+          <Pre><code>{command}</code></Pre>
+        </ReadingCodeBlock>
       ))}
       {visibleCtas.length > 0 && (
         <div className="mt-7 flex min-w-0 flex-col gap-3 sm:flex-row">

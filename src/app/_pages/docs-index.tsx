@@ -7,7 +7,6 @@ import { LocalizedLink } from "@/i18n/navigation";
 import { canonicalUrl, isTranslatedPath } from "@/i18n/routing";
 import { Spotlight } from "@/components/spotlight";
 import { DocItemIcon } from "@/components/docs/doc-icons";
-import { SiteHeader } from "@/components/site-header";
 
 export function DocsIndexPage({ locale }: { locale: Locale }) {
   const dictionary = getCoreContent(locale);
@@ -55,8 +54,7 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
   };
 
   return (
-    <main className="grain min-h-screen">
-      <SiteHeader locale={locale} />
+    <div className="grain min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -178,6 +176,6 @@ export function DocsIndexPage({ locale }: { locale: Locale }) {
         </div>
       </section>
       </ReadingShell>
-    </main>
+    </div>
   );
 }

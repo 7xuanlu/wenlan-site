@@ -1,3 +1,4 @@
+import { ArticleCodeBlock } from "@/components/learn/article-code-block";
 import { ReadingShell, learnContents } from "@/components/reading/reading-shell";
 import { ObsidianGuideJumpLinks } from "@/components/learn/obsidian-guide-jump-links";
 import { ArticleTitleText } from "@/components/learn/article-title-text";
@@ -23,7 +24,6 @@ import { ScenarioWorkedExample } from "@/components/learn/scenario-worked-exampl
 import { ProductEvidencePanel } from "@/components/learn/product-evidence-panel";
 import { WorkflowComparison } from "@/components/learn/workflow-comparison";
 import { getCoreContent } from "@/i18n/content";
-import { SiteHeader } from "@/components/site-header";
 import { WorkflowComparisonGuide } from "@/components/learn/workflow-comparison-guide";
 import { RecordedWorkflowProof } from "@/components/learn/recorded-workflow-proof";
 import { ArticleSteps } from "@/components/learn/article-steps";
@@ -210,8 +210,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
   };
 
   return (
-    <main className="grain min-h-screen">
-      <SiteHeader locale="en" />
+    <div className="grain min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -325,7 +324,6 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
             <div className="min-w-0 space-y-14">
               {article.sections.map((section, index) => (
                 <section
-                  id={section.id ?? sectionId(section.heading)}
                   key={section.heading}
                   className="reading-chapter grid scroll-mt-24 gap-5 sm:grid-cols-[72px_1fr]"
                 >
@@ -333,7 +331,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                     {(index + 1).toString().padStart(2, "0")}
                   </p>
                   <div className="min-w-0">
-                    <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
+                    <h2 id={section.id ?? sectionId(section.heading)} className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
                       {section.heading}
                     </h2>
                     <div className="mt-5 space-y-4 text-base leading-relaxed text-[var(--o-text-secondary)]">
@@ -356,16 +354,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                         ))}
                       </ul>
                     )}
-                    {section.code && (
-                      <div className="mt-6 overflow-hidden rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)]">
-                        <p className="px-4 py-3 font-mono text-[10px] tracking-[0.18em] text-[var(--o-text-muted)] uppercase">
-                          {section.code.label}
-                        </p>
-                        <pre className={`overflow-x-auto p-4 text-sm leading-relaxed text-[var(--o-text-secondary)] ${(section.id?.startsWith("worked-example") || section.id === "check-first-answer") ? "whitespace-pre-wrap break-words" : ""}`}>
-                          <code>{section.code.code}</code>
-                        </pre>
-                      </div>
-                    )}
+                    {section.code && <ArticleCodeBlock label={section.code.label} code={section.code.code} />}
                     {section.image && (
                       <figure className="mt-6 overflow-hidden rounded-xl border border-[var(--o-border)]">
                         <EvidenceImage image={section.image} locale={"en"} />
@@ -392,7 +381,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
               ))}
 
               {article.comparisonTable && (
-                <ComparisonTableSection table={article.comparisonTable} locale="en" />
+                <ComparisonTableSection headingAnchor table={article.comparisonTable} locale="en" />
               )}
 
               <section className="relative overflow-hidden rounded-2xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-8 shadow-[0_18px_70px_rgba(0,0,0,0.18)]">
@@ -430,7 +419,8 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
               </section>
             </div>
 
-            <aside id="article-resources" className="reading-resources min-w-0 space-y-6">
+            <aside  className="reading-resources min-w-0 space-y-6">
+              <span id="article-resources" className="block h-px col-span-full" aria-hidden="true" />
 
               {article.officialReferences && (
                 <div className="rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5">
@@ -474,11 +464,11 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
           </div>
         </section>
 
-        {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work", "wenlan-vs-obsidian-ai-memory"].includes(article.slug) && <RecordedWorkflowProof locale="en" />}
+        {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work", "wenlan-vs-obsidian-ai-memory"].includes(article.slug) && <RecordedWorkflowProof headingAnchor locale="en" />}
 
-        <section id="article-faq" className="px-6 py-20">
+        <section  className="px-6 py-20">
           <div className="mx-auto max-w-3xl">
-            <p className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
+            <p id="article-faq" className="mb-4 font-mono text-[11px] tracking-[0.3em] text-[var(--o-text-muted)] uppercase">
               FAQ
             </p>
             <div className="rounded-xl border border-[var(--o-border)]">
@@ -502,6 +492,6 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
         <ShareArticle locale="en" url={articleUrl(article.slug)} title={article.title} />
       </article>
       </ReadingShell>
-    </main>
+    </div>
   );
 }

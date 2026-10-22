@@ -1,3 +1,4 @@
+import { englishLearnOverview } from "@/lib/learn-index-copy";
 import { getLearnSections } from "@/components/reading/reading-data";
 import { ReadingShell } from "@/components/reading/reading-shell";
 import type { Metadata } from "next";
@@ -12,7 +13,6 @@ import {
 import { ArticleHalo } from "./article-visuals";
 import { LOCALE_CONFIG } from "@/i18n/locales";
 import { alternateUrls } from "@/i18n/routing";
-import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
   title: "LLM Wiki & AI Knowledge Base Guides | Wenlan",
@@ -174,8 +174,7 @@ export default function LearnPage() {
   };
 
   return (
-    <main className="grain min-h-screen">
-      <SiteHeader locale="en" />
+    <div className="grain min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -206,21 +205,17 @@ export default function LearnPage() {
                 Learn
               </p>
               <h1 className="warm-glow break-words font-serif text-5xl leading-[1.05] font-medium tracking-tight sm:text-7xl">
-                LLM wiki and AI knowledge base guides that stay current.
+                {englishLearnOverview.title}
               </h1>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--o-text-secondary)]">
-                Wenlan turns trusted sources and durable work facts into a
-                local, source-backed AI knowledge base with maintained
-                LLM-wiki pages for agents and people.
+                {englishLearnOverview.description}
               </p>
               <div className="mt-8 max-w-2xl rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-5">
                 <p className="font-mono text-[10px] tracking-[0.22em] text-[var(--o-warm)]/80 uppercase">
                   Quick answer
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--o-text-secondary)]">
-                  An AI knowledge base stores and retrieves trusted sources. A maintained
-                  LLM wiki adds reusable pages, citations, review, and refresh state.
-                  Wenlan combines those layers locally for AI agents.
+                  {englishLearnOverview.quickAnswer}
                 </p>
               </div>
             </div>
@@ -235,8 +230,7 @@ export default function LearnPage() {
               Start here
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--o-text-secondary)]">
-              Choose the job first: build an AI knowledge base, inspect the
-              LLM-wiki lifecycle, connect a client, or compare adjacent tools.
+              {englishLearnOverview.startDescription}
             </p>
           </div>
 
@@ -365,6 +359,6 @@ export default function LearnPage() {
         </div>
       </section>
       </ReadingShell>
-    </main>
+    </div>
   );
 }

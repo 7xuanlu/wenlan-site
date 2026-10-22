@@ -63,12 +63,12 @@ const images = [
   "/images/product-evidence/wenlan-recorded-page-review.webp",
 ];
 
-export function RecordedWorkflowProof({ locale }: { locale: Locale }) {
+export function RecordedWorkflowProof({ locale, headingAnchor = false }: { locale: Locale; headingAnchor?: boolean }) {
   const text = copy[locale];
   return (
-    <section id="recorded-workflow" aria-labelledby="recorded-workflow-heading" className="scroll-mt-24 px-6 pb-20">
+    <section id={headingAnchor ? undefined : "recorded-workflow"} aria-labelledby={headingAnchor ? "recorded-workflow" : "recorded-workflow-heading"} className="scroll-mt-24 px-6 pb-20">
       <div className="mx-auto max-w-5xl">
-        <h2 id="recorded-workflow-heading" className="max-w-3xl text-balance font-serif text-3xl font-medium tracking-tight sm:text-4xl">{text.title}</h2>
+        <h2 id={headingAnchor ? "recorded-workflow" : "recorded-workflow-heading"} className="max-w-3xl text-balance font-serif text-3xl font-medium tracking-tight sm:text-4xl">{text.title}</h2>
         <p className="mt-5 max-w-3xl text-pretty text-base leading-relaxed text-[var(--o-text-secondary)]">{text.context}</p>
         <div className="mt-10 space-y-12">
           {text.steps.map((step, index) => (

@@ -1,5 +1,11 @@
 @import "tailwindcss";
-@import "../components/reading/reading.css";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+@import "../components/reading/fumadocs-theme.css";
+@source "../../node_modules/fumadocs-ui/dist/**/*.js";
+/* Turbopack cannot parse nested ::highlight utilities; the native selector is served untransformed in /reading-search-highlight.css. */
+@source not inline("[&_::highlight(fd-search)]:text-fd-primary [&_::highlight(fd-search)]:underline");
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 @import "../components/reading/reading-content.css";
 @import "../components/home/workflow-comparison.css";
 @import "../components/home/demo-video.css";

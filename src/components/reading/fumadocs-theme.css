@@ -1,0 +1,57 @@
+/* Reuse Wenlan tokens. Layout, navigation, TOC, search and code controls are Fumadocs. */
+:root, [data-theme="light"] {
+  --color-fd-background: var(--o-bg);
+  --color-fd-foreground: var(--o-text);
+  --color-fd-card: var(--o-bg-alt);
+  --color-fd-card-foreground: var(--o-text);
+  --color-fd-popover: var(--o-bg);
+  --color-fd-popover-foreground: var(--o-text);
+  --color-fd-primary: var(--o-warm);
+  --color-fd-primary-foreground: var(--o-bg);
+  --color-fd-muted: var(--o-surface);
+  --color-fd-muted-foreground: var(--o-text-secondary);
+  --color-fd-secondary: var(--o-surface);
+  --color-fd-secondary-foreground: var(--o-text-secondary);
+  --color-fd-accent: var(--o-surface);
+  --color-fd-accent-foreground: var(--o-text);
+  --color-fd-border: var(--o-border);
+  --color-fd-ring: var(--o-warm);
+}
+[data-theme="dark"] .shiki code span { color: var(--shiki-dark); font-style: var(--shiki-dark-font-style); }
+#nd-docs-layout { --fd-layout-width: 1440px; }
+@media (min-width: 768px) { #nd-docs-layout { --fd-sidebar-width: 260px; } }
+@media (min-width: 1280px) { #nd-docs-layout { --fd-toc-width: 230px; } }
+.fumadocs-article { font-family: var(--font-sans); }
+.fumadocs-article .reading-page-header > .pointer-events-none { display: none; }
+.fumadocs-article .reading-page-header h1 { font-size: clamp(2rem, 3vw, 2.65rem); line-height: 1.14; text-wrap: pretty; text-shadow: none; }
+.fumadocs-article .reading-page-header h1 + p { font-size: 17px; line-height: 1.65; }
+.fumadocs-article .reading-chapter > p:first-child { display: none; }
+.fumadocs-article [id] { scroll-margin-top: 100px; }
+.fumadocs-article figure.shiki { border-radius: 8px; }
+.fumadocs-article figure.shiki pre { margin: 0; font-size: 13px; line-height: 1.75; }
+.fumadocs-article figure.shiki figcaption { font-family: var(--font-mono); font-size: 12px; }
+.fumadocs-article .reading-page-header nav { display: none; }
+.fumadocs-article .reading-title { margin-top: 0; }
+@media (max-width: 767px) {
+ .fumadocs-article .reading-page-header h1 { font-size: 30px; }
+ .fumadocs-article .reading-page-header h1 + p { font-size: 16px; }
+}
+
+/* Bound excerpts while retaining the full searchable text. */
+#fd-search-list [role="option"] > .prose { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* Prose-like examples wrap; shell commands and directory trees retain exact columns. */
+.fumadocs-article figure:is([data-article-code-block="markdown"], [data-article-code-block="prompt"], [data-article-code-block="text"]) pre { width: 100%; white-space: pre-wrap; overflow-wrap: anywhere; }
+[data-reading-languages] [aria-current="page"] { color: var(--o-warm); font-weight: 600; }
+
+.fumadocs-article { width: min(100%, 800px); min-width: 0; margin-inline: auto; }
+.fumadocs-index { width: min(100%, 1040px); }
+.fumadocs-article figure.shiki { margin-block: 1.25rem; }
+.fumadocs-article pre { max-width: 100%; }
+.fumadocs-article .reading-page-header > .relative { min-width: 0; }
+.fumadocs-article .reading-resources > span { margin: 0; }
+/* Keep links and keyboard focus visible without introducing decorative accent stripes. */
+#nd-sidebar a[data-active="true"] { border-inline-start: 0; }
+@media (prefers-reduced-motion: reduce) {
+  #nd-docs-layout *, #nd-docs-layout *::before, #nd-docs-layout *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

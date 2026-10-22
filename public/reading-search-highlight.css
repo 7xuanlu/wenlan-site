@@ -1,0 +1,2 @@
+/* Native CSS Highlight API; served untransformed until Turbopack supports this selector. */
+::highlight(fd-search) { color: var(--o-warm); text-decoration: underline; }

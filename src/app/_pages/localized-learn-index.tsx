@@ -7,7 +7,6 @@ import { localizedLearnIndexContent } from "@/i18n/learn-index";
 import { LOCALE_CONFIG, type TranslatedLocale } from "@/i18n/locales";
 import { LocalizedLink } from "@/i18n/navigation";
 import { canonicalUrl } from "@/i18n/routing";
-import { SiteHeader } from "@/components/site-header";
 
 export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }) {
   const content = localizedLearnIndexContent[locale];
@@ -51,8 +50,7 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
   };
 
   return (
-    <main className="grain min-h-screen">
-      <SiteHeader locale={locale} />
+    <div className="grain min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -188,6 +186,6 @@ export function LocalizedLearnIndexPage({ locale }: { locale: TranslatedLocale }
         </div>
       </section>
       </ReadingShell>
-    </main>
+    </div>
   );
 }

@@ -22,10 +22,10 @@
 .reading-content section[id], .reading-content aside[id] { scroll-margin-top: 152px; }
 .reading-content .reading-resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 24px; margin-top: 48px; padding-top: 32px; }
 .reading-content .reading-resources > div { margin: 0; border: 0; border-radius: 0; background: transparent; padding: 0; }
-.reading-frame-index .reading-content { width: min(100%, 1040px); }
-.reading-frame-index .reading-content .card-wenlan { padding: 22px; }
-.reading-frame-index .reading-content .card-wenlan h3 { margin-top: 16px; font-size: 23px; line-height: 1.35; }
-.reading-frame-index .reading-content .card-wenlan h3 + p { margin-top: 12px; }
+.fumadocs-index { width: min(100%, 1040px); }
+.fumadocs-index .card-wenlan { padding: 22px; }
+.fumadocs-index .card-wenlan h3 { margin-top: 16px; font-size: 23px; line-height: 1.35; }
+.fumadocs-index .card-wenlan h3 + p { margin-top: 12px; }
 @media (max-width: 639px) {
   .reading-content .reading-page-header { padding-top: 0; padding-bottom: 24px; }
   .reading-content .reading-page-header h1 { font-size: 30px; line-height: 1.2; letter-spacing: -.025em; text-wrap: pretty; }
@@ -33,7 +33,7 @@
   .reading-content > article > section, .reading-content > section { padding-top: 24px; padding-bottom: 24px; }
   .reading-content .reading-chapter h2 { font-size: 25px; }
   .reading-content .reading-chapter > div > .mt-5 > p { font-size: 16px; line-height: 1.8; }
-  .reading-frame-index .reading-content .card-wenlan { padding: 20px; }
+  .fumadocs-index .card-wenlan { padding: 20px; }
 }
 
 .reading-content .reading-title { margin-top: 24px; }

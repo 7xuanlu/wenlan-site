@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
+import { renderNextPage } from './lib/render-next-page.mjs';
 import { RELEASE_REVALIDATE_SECONDS } from '../src/lib/release-manifest.ts';
 import { WENLAN_RELEASE } from '../src/lib/releases.ts';
 import { DownloadPage } from '../src/app/_pages/download.tsx';
@@ -13,7 +14,7 @@ import { DownloadSection } from '../src/components/home/download.tsx';
 import { softwareApplicationSchema } from '../src/app/structured-data.ts';
 import { getCoreContent } from '../src/i18n/content/index.ts';
 
-test('all release pages render the supplied release and exactly one matching SoftwareApplication schema', () => {
+test('all release pages render the supplied release and exactly one matching SoftwareApplication schema', async () => {
   const release = {...WENLAN_RELEASE, version:'0.99.1', tag:'v0.99.1',
     releaseUrl: WENLAN_RELEASE.releaseUrl.replace(WENLAN_RELEASE.version,'0.99.1'),
     setupGuideUrl: WENLAN_RELEASE.setupGuideUrl.replace(WENLAN_RELEASE.version,'0.99.1'),
@@ -31,7 +32,7 @@ test('all release pages render the supplied release and exactly one matching Sof
     for (const [label, pageHtml] of [
       ['home', productHomeHtml],
       ['download', html],
-      ['get-started', renderToStaticMarkup(React.createElement(GetStartedPage,{locale,release}))],
+      ['get-started', await renderNextPage(React.createElement(GetStartedPage,{locale,release}), { pathname: locale === 'en' ? '/docs/get-started' : `/${locale}/docs/get-started` })],
       ['about', renderToStaticMarkup(React.createElement(AboutPage,{locale,release}))],
     ]) {
       const schemas = [...pageHtml.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
@@ -45,7 +46,7 @@ test('all release pages render the supplied release and exactly one matching Sof
     const homeHtml=renderToStaticMarkup(section);
     assert.ok(homeHtml.includes(release.tag));
     assert.ok(!homeHtml.includes(WENLAN_RELEASE.tag));
-    const setupHtml=renderToStaticMarkup(React.createElement(GetStartedPage,{locale,release}));
+    const setupHtml=await renderNextPage(React.createElement(GetStartedPage,{locale,release}), { pathname: locale === 'en' ? '/docs/get-started' : `/${locale}/docs/get-started` });
     const visibleSetupHtml = setupHtml.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '');
     assert.ok(setupHtml.includes(release.releaseUrl));
     assert.ok(!visibleSetupHtml.includes(WENLAN_RELEASE.tag), 'visible install copy uses the supplied release');
@@ -81,16 +82,19 @@ test('release route wrappers share the hourly cache policy and root document has
   assert.doesNotMatch(root,/getLatestRelease|softwareApplicationSchema|release-server/);
 });
 
-test('unchanged release content renders identically across time and randomness', (t) => {
+test('unchanged release content renders identically across time and randomness', async (t) => {
   t.mock.timers.enable({ apis: ['Date'], now: Date.UTC(2026, 0, 1) });
   const random = t.mock.method(Math, 'random', () => 0.1);
   for (const locale of ['en', 'zh-TW', 'zh-CN']) {
     for (const Page of [HomePage, AboutPage, DownloadPage, GetStartedPage]) {
       const props = { locale, release: WENLAN_RELEASE };
-      const before = renderToStaticMarkup(React.createElement(Page, props));
+      const render = () => Page === GetStartedPage
+        ? renderNextPage(React.createElement(Page, props), { pathname: locale === 'en' ? '/docs/get-started' : `/${locale}/docs/get-started` })
+        : Promise.resolve(renderToStaticMarkup(React.createElement(Page, props)));
+      const before = await render();
       t.mock.timers.tick(3600 * 1000);
       random.mock.mockImplementation(() => 0.9);
-      const after = renderToStaticMarkup(React.createElement(Page, props));
+      const after = await render();
       assert.equal(after, before, `${locale}:${Page.name} must not change with the clock or randomness`);
       random.mock.mockImplementation(() => 0.1);
     }

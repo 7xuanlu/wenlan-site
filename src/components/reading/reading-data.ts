@@ -3,7 +3,7 @@ import { getLocalizedLearnArticles } from "@/i18n/learn-articles";
 import { getCoreContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
 import { localizePath } from "@/i18n/routing";
-import type { ReadingGroup } from "./reading-frame";
+import type { ReadingGroup } from "./reading-types";
 
 const learnLabels = {
   en: ["Concepts", "AI tools and shared memory", "Build a knowledge base", "Maintain and verify", "Tool comparisons"],

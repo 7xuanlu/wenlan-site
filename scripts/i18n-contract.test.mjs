@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import test from "node:test";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import { renderNextPage } from "./lib/render-next-page.mjs";
 import { buildSectionIds } from "../src/app/[locale]/learn/[slug]/section-ids.ts";
 import { getLocalizedLearnArticles } from "../src/i18n/learn-articles.ts";
 
@@ -253,8 +254,12 @@ async function loadStructuredDataModule() {
   }
 }
 
-function renderJsonLd(Component, locale) {
-  const html = renderToStaticMarkup(React.createElement(Component, { locale }));
+async function renderJsonLd(Component, locale) {
+  const path = Component.name === "DocsIndexPage" ? "/docs" : Component.name === "GetStartedPage" ? "/docs/get-started" : null;
+  const element = React.createElement(Component, { locale });
+  const html = path
+    ? await renderNextPage(element, { pathname: locale === "en" ? path : `/${locale}${path}` })
+    : renderToStaticMarkup(element);
   return [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].map(
     (match) => JSON.parse(match[1]),
   );
@@ -1593,18 +1598,17 @@ test("knowledge retrieval policy family owns one audience-trigger-task-outcome i
     import("../src/app/[locale]/learn/[slug]/page.tsx"),
   ]);
   const rendered = {
-    en: renderToStaticMarkup(
+    en: await renderNextPage(
       await EnglishPage({ params: Promise.resolve({ slug }) }),
+      { pathname: `/learn/${slug}` },
     ),
-    "zh-TW": renderToStaticMarkup(
-      await LocalizedPage({
-        params: Promise.resolve({ locale: "zh-TW", slug }),
-      }),
+    "zh-TW": await renderNextPage(
+      await LocalizedPage({ params: Promise.resolve({ locale: "zh-TW", slug }) }),
+      { pathname: `/zh-TW/learn/${slug}`, params: { locale: "zh-TW", slug } },
     ),
-    "zh-CN": renderToStaticMarkup(
-      await LocalizedPage({
-        params: Promise.resolve({ locale: "zh-CN", slug }),
-      }),
+    "zh-CN": await renderNextPage(
+      await LocalizedPage({ params: Promise.resolve({ locale: "zh-CN", slug }) }),
+      { pathname: `/zh-CN/learn/${slug}`, params: { locale: "zh-CN", slug } },
     ),
   };
 
@@ -2036,15 +2040,21 @@ test("AI knowledge-base tool-selection guide is available in all acquisition loc
   }
 });
 
-test("localized Learn renderer exposes article code blocks", async () => {
+test("localized Learn renderer preserves authored code labels and contents in Fumadocs blocks", async () => {
   const source = await readFile(
     resolve(repoRoot, "src/app/[locale]/learn/[slug]/page.tsx"),
     "utf8",
   );
+  assert.match(source, /ArticleCodeBlock label=\{section\.code\.label\} code=\{section\.code\.code\}/);
 
-  assert.match(source, /\{section\.code && \(/);
-  assert.match(source, /\{section\.code\.label\}/);
-  assert.match(source, /<code>\{section\.code\.code\}<\/code>/);
+  const article = getLocalizedLearnArticles("zh-TW").find((item) => item.slug === "distilled-wiki-pages-ai-memory");
+  const example = article?.sections.find((section) => section.code);
+  assert.ok(example?.code, "the localized wiki retains an authored code example");
+  const { default: LocalizedPage } = await import("../src/app/[locale]/learn/[slug]/page.tsx");
+  const page = await LocalizedPage({ params: Promise.resolve({ locale: "zh-TW", slug: article.slug }) });
+  const html = await renderNextPage(page, { pathname: `/zh-TW/learn/${article.slug}`, params: { locale: "zh-TW", slug: article.slug } });
+  assert.ok(html.includes(example.code.label), "rendered Fumadocs block keeps the authored label");
+  assert.ok(html.includes(example.code.code.split("\n")[0]), "rendered Fumadocs block keeps the authored code");
   assert.match(source, /\[word-break:keep-all\]/);
 });
 
@@ -2054,7 +2064,7 @@ test("localized acquisition copy keeps CJK semantic phrases together on mobile",
     "utf8",
   );
 
-  const protectedHeadings = source.match(/<h2 className="[^"]*\[word-break:keep-all\][^"]*\[overflow-wrap:break-word\][^"]*"/g) ?? [];
+  const protectedHeadings = source.match(/<h2\b(?=[^>]*\[word-break:keep-all\])(?=[^>]*\[overflow-wrap:break-word\])[^>]*>/g) ?? [];
   assert.equal(protectedHeadings.length, 2);
   assert.match(
     source,
@@ -2300,7 +2310,7 @@ test("localized core page JSON-LD uses localized absolute URLs and languages for
     const docsUrl = routing.canonicalUrl(locale, "/docs");
     const getStartedUrl = routing.canonicalUrl(locale, "/docs/get-started");
 
-    const aboutSchemas = renderJsonLd(AboutPage, locale);
+    const aboutSchemas = await renderJsonLd(AboutPage, locale);
     assertBreadcrumbItems(
       schemaByType(aboutSchemas, "BreadcrumbList"),
       [homeUrl, aboutUrl],
@@ -2311,7 +2321,7 @@ test("localized core page JSON-LD uses localized absolute URLs and languages for
     assert.equal(aboutSchema.inLanguage, expectedLanguage);
     assert.equal(schemaByType(aboutSchemas, "Person").mainEntityOfPage, aboutUrl);
 
-    const downloadSchemas = renderJsonLd(DownloadPage, locale);
+    const downloadSchemas = await renderJsonLd(DownloadPage, locale);
     assertBreadcrumbItems(
       schemaByType(downloadSchemas, "BreadcrumbList"),
       [homeUrl, downloadUrl],
@@ -2321,7 +2331,7 @@ test("localized core page JSON-LD uses localized absolute URLs and languages for
     assert.equal(downloadSchema.url, downloadUrl);
     assert.equal(downloadSchema.inLanguage, expectedLanguage);
 
-    const docsSchemas = renderJsonLd(DocsIndexPage, locale);
+    const docsSchemas = await renderJsonLd(DocsIndexPage, locale);
     assertBreadcrumbItems(
       schemaByType(docsSchemas, "BreadcrumbList"),
       [homeUrl, docsUrl],
@@ -2349,7 +2359,7 @@ test("localized core page JSON-LD uses localized absolute URLs and languages for
       `${locale}.docs.hasPart.untranslatedDailyWorkflowLocalized`,
     );
 
-    const getStartedSchemas = renderJsonLd(GetStartedPage, locale);
+    const getStartedSchemas = await renderJsonLd(GetStartedPage, locale);
     assertBreadcrumbItems(
       schemaByType(getStartedSchemas, "BreadcrumbList"),
       [homeUrl, docsUrl, getStartedUrl],
