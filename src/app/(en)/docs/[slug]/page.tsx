@@ -7,7 +7,7 @@ import { LOCALE_CONFIG } from "@/i18n/locales";
 import { ArticleHalo } from "../../learn/article-visuals";
 import { docPages, docUrl, formatDocDate, getDocPage } from "../docs";
 import { SITE_URL } from "../../learn/articles";
-import { SiteHeader } from "@/components/site-header";
+import { ArticleCodeBlock } from "@/components/learn/article-code-block";
 
 type DocsArticlePageProps = {
   params: Promise<{
@@ -160,8 +160,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
   };
 
   return (
-    <main className="grain min-h-screen">
-      <SiteHeader locale="en" />
+    <div className="grain min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -251,7 +250,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
             <div className="min-w-0 space-y-14">
               {page.sections.map((section, index) => (
                 <section
-                  id={sectionId(section.heading)}
+
                   key={section.heading}
                   className="reading-chapter grid min-w-0 scroll-mt-24 grid-cols-[minmax(0,1fr)] gap-5 sm:grid-cols-[72px_minmax(0,1fr)]"
                 >
@@ -259,7 +258,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
                     {(index + 1).toString().padStart(2, "0")}
                   </p>
                   <div className="min-w-0">
-                    <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
+                    <h2 id={sectionId(section.heading)} className="scroll-mt-24 font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
                       {section.heading}
                     </h2>
                     <div className="mt-5 space-y-4 text-base leading-relaxed text-[var(--o-text-secondary)]">
@@ -281,12 +280,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
                     )}
                     {section.code && (
                       <div className="mt-6">
-                        <p className="mb-2 font-mono text-[10px] tracking-[0.2em] text-[var(--o-text-dim)] uppercase">
-                          {section.code.label}
-                        </p>
-                        <pre className="max-w-full overflow-x-auto rounded-xl border border-[var(--o-border)] bg-[var(--o-bg-deep)] p-5 font-mono text-sm leading-relaxed text-[var(--o-text-secondary)]">
-                          <code>{section.code.code}</code>
-                        </pre>
+                        <ArticleCodeBlock label={section.code.label} code={section.code.code}  />
                       </div>
                     )}
                     {section.link && (
@@ -350,6 +344,6 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
         </section>
       </article>
       </ReadingShell>
-    </main>
+    </div>
   );
 }

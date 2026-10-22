@@ -1,5 +1,4 @@
 import { ReadingShell } from "@/components/reading/reading-shell";
-import { SiteHeader } from "@/components/site-header";
 import { ArticleHalo } from "../(en)/learn/article-visuals";
 import { RuntimeInstallBlock } from "@/components/docs/runtime-install-block";
 import { getCoreContent } from "@/i18n/content";
@@ -10,6 +9,7 @@ import { TrackedLocalizedLink } from "@/components/tracked-link";
 import { WENLAN_RELEASE } from "@/lib/releases";
 import type { WenlanRelease } from "@/lib/release-manifest";
 import { SoftwareApplicationData } from "@/components/software-application-data";
+import { ArticleCodeBlock } from "@/components/learn/article-code-block";
 
 export function GetStartedPage({ locale, release = WENLAN_RELEASE }: { locale: Locale; release?: WenlanRelease }) {
   const dictionary = getCoreContent(locale);
@@ -73,9 +73,8 @@ export function GetStartedPage({ locale, release = WENLAN_RELEASE }: { locale: L
   };
 
   return (
-    <main className="grain min-h-screen">
+    <div className="grain min-h-screen">
       <SoftwareApplicationData locale={locale} release={release} />
-      <SiteHeader locale={locale} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -130,10 +129,10 @@ export function GetStartedPage({ locale, release = WENLAN_RELEASE }: { locale: L
 
         <section className="px-6 pb-20">
           <div className="mx-auto max-w-5xl space-y-14">
-            <section id="install-runtime" className="reading-chapter scroll-mt-24 grid gap-4 sm:grid-cols-[64px_minmax(0,1fr)]">
+            <section className="reading-chapter scroll-mt-24 grid gap-4 sm:grid-cols-[64px_minmax(0,1fr)]">
               <p className="font-mono text-sm text-[var(--o-warm)]">01</p>
               <div className="min-w-0">
-                <h2 className="font-serif text-3xl font-medium">{install.title}</h2>
+                <h2 id="install-runtime" className="scroll-mt-24 font-serif text-3xl font-medium">{install.title}</h2>
                 <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--o-text-secondary)]">{install.paragraphs[0]}</p>
                 <TrackedLocalizedLink href="/download" locale={locale} eventName="setup_path_click" placement="docs-get-started" context="setup" className="btn-wenlan btn-wenlan-primary mt-6 inline-flex">
                   {ui.download}
@@ -147,10 +146,10 @@ export function GetStartedPage({ locale, release = WENLAN_RELEASE }: { locale: L
               </div>
             </section>
 
-            <section id="connect-ai-tool" className="reading-chapter scroll-mt-24 grid gap-4 sm:grid-cols-[64px_minmax(0,1fr)]">
+            <section className="reading-chapter scroll-mt-24 grid gap-4 sm:grid-cols-[64px_minmax(0,1fr)]">
               <p className="font-mono text-sm text-[var(--o-warm)]">02</p>
               <div className="min-w-0">
-                <h2 className="font-serif text-3xl font-medium">{ui.chooseTitle}</h2>
+                <h2 id="connect-ai-tool" className="scroll-mt-24 font-serif text-3xl font-medium">{ui.chooseTitle}</h2>
                 <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--o-text-secondary)]">{ui.chooseBody}</p>
                 <div className="mt-6 grid min-w-0 grid-cols-1 gap-3">
                   {clients.map(step => (
@@ -160,7 +159,7 @@ export function GetStartedPage({ locale, release = WENLAN_RELEASE }: { locale: L
                       </summary>
                       <div className="pb-6">
                         {step.paragraphs.map(text => <p key={text} className="mt-3 max-w-3xl text-base leading-7 text-[var(--o-text-secondary)]">{text}</p>)}
-                        {step.commands.map(command => <pre key={command} className="mt-5 overflow-x-auto rounded-md bg-[var(--o-bg-deep)] p-4 font-mono text-sm leading-7"><code>{command}</code></pre>)}
+                        {step.commands.map(command => <ArticleCodeBlock key={command} label={step.title} code={command} kind="shell" />)}
                         {step.ctas.map(cta => <LocalizedLink key={cta.id} href={cta.href} locale={locale} className="mt-5 inline-flex min-h-11 items-center text-sm font-medium underline underline-offset-4 focus-wenlan">{cta.label}</LocalizedLink>)}
                       </div>
                     </details>
@@ -169,12 +168,12 @@ export function GetStartedPage({ locale, release = WENLAN_RELEASE }: { locale: L
               </div>
             </section>
 
-            <section id="try-first" className="reading-chapter scroll-mt-24 grid gap-4 sm:grid-cols-[64px_minmax(0,1fr)]">
+            <section className="reading-chapter scroll-mt-24 grid gap-4 sm:grid-cols-[64px_minmax(0,1fr)]">
               <p className="font-mono text-sm text-[var(--o-warm)]">03</p>
               <div className="min-w-0">
-                <h2 className="font-serif text-3xl font-medium">{trial.title}</h2>
+                <h2 id="try-first" className="scroll-mt-24 font-serif text-3xl font-medium">{trial.title}</h2>
                 {trial.paragraphs.map(text => <p key={text} className="mt-4 max-w-3xl text-base leading-7 text-[var(--o-text-secondary)]">{text}</p>)}
-                {trial.commands.map(command => <pre key={command} className="mt-5 whitespace-pre-wrap break-words rounded-md bg-[var(--o-surface)] p-5 text-base leading-7"><code className="font-sans">{command}</code></pre>)}
+                {trial.commands.map(command => <ArticleCodeBlock key={command} label={trial.title} code={command} kind="shell" />)}
                 <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
                   {trial.ctas.map(cta => <TrackedLocalizedLink key={cta.id} href={cta.href} locale={locale} eventName="setup_path_click" placement="docs-get-started" context="setup" className="inline-flex min-h-11 items-center text-sm font-medium underline underline-offset-4 focus-wenlan">{cta.label}</TrackedLocalizedLink>)}
                 </div>
@@ -184,7 +183,7 @@ export function GetStartedPage({ locale, release = WENLAN_RELEASE }: { locale: L
         </section>
       </article>
       </ReadingShell>
-    </main>
+    </div>
   );
 }
 

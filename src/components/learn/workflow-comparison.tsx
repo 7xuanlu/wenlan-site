@@ -93,7 +93,7 @@ export function WorkflowComparison({ copy, locale }: { readonly copy: PainsCopy;
     <section id="compare-tools" className="px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <div className="max-w-4xl">
-          <h2 className="font-serif text-3xl font-medium tracking-tight text-balance sm:text-5xl">
+          <h2 id="compare-tools-heading" className="font-serif text-3xl font-medium tracking-tight text-balance sm:text-5xl">
             {copy.title.split(/(知識工作流程|知识工作流)/).map((part, index) =>
               /^(知識工作流程|知识工作流)$/.test(part)
                 ? <span key={index} className="inline-block">{part}</span>

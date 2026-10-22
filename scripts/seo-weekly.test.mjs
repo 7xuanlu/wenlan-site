@@ -6015,7 +6015,11 @@ test("SuperLocalMemory comparison pins current benchmark protocols to checked so
 test("Learn index SERP copy leads with LLM wiki and knowledge-base intent", async () => {
   const learnPage = await readRepo("src/app/learn/page.tsx");
   const learnOgImage = await readRepo("src/app/learn/opengraph-image.tsx");
-  const normalizedLearnPage = learnPage.replace(/\s+/g, " ");
+  const { createElement } = await import("react");
+  const { renderNextPage } = await import("./lib/render-next-page.mjs");
+  const { default: LearnIndex } = await import("../src/app/(en)/learn/page.tsx");
+  const renderedLearnPage = await renderNextPage(createElement(LearnIndex), { pathname: "/learn" });
+  const normalizedLearnPage = renderedLearnPage.replace(/\s+/g, " ");
 
   assert.match(
     learnPage,
@@ -6025,7 +6029,7 @@ test("Learn index SERP copy leads with LLM wiki and knowledge-base intent", asyn
     learnPage,
     /Build an LLM wiki and source-backed AI knowledge base: Karpathy's pattern, citations, review and refresh, plus Claude Code, Codex, and MCP workflows\./,
   );
-  assert.match(learnPage, />\s*LLM wiki and AI knowledge base guides that stay current\.\s*</);
+  assert.match(renderedLearnPage, />\s*LLM wiki and AI knowledge base guides that stay current\.\s*</);
   assert.match(learnPage, />\s*Quick answer\s*</);
   assert.match(
     normalizedLearnPage,

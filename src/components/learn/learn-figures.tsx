@@ -229,18 +229,20 @@ const comparisonCopy: Record<Locale, { heading: string; intro: (name: string) =>
 };
 
 export function ComparisonTableSection({
+  headingAnchor = false,
   table,
   locale,
   renderText = plain,
 }: {
+  headingAnchor?: boolean;
   table: ComparisonTable;
   locale: Locale;
   renderText?: RenderText;
 }) {
   const c = comparisonCopy[locale];
   return (
-    <section id="article-comparison">
-      <h2 className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)] [word-break:keep-all] [overflow-wrap:break-word]">
+    <section id={headingAnchor ? undefined : "article-comparison"}>
+      <h2 id={headingAnchor ? "article-comparison" : undefined} className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)] [word-break:keep-all] [overflow-wrap:break-word]">
         {c.heading}
       </h2>
       <p className="mt-3 text-sm leading-relaxed text-[var(--o-text-muted)]">{c.intro(table.competitorName)}</p>

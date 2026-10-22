@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import {
@@ -59,6 +60,7 @@ export function LanguageSwitcher({
   locale,
   href: hrefProp,
   placement = "down",
+  variant = "icon",
 }: {
   locale: Locale;
   // Omit to switch locale on the current page instead of a fixed one. Paths
@@ -66,6 +68,7 @@ export function LanguageSwitcher({
   // always real rather than a localized 404.
   href?: string;
   placement?: "down" | "up";
+  variant?: "icon" | "sidebar";
 }) {
   const pathname = usePathname();
   const href = normalizePathname(hrefProp ?? pathname ?? "/");
@@ -90,7 +93,7 @@ export function LanguageSwitcher({
   return (
     <details
       ref={detailsRef}
-      className="group/language relative"
+      className={`group/language relative ${variant === "sidebar" ? "min-w-0 flex-1" : ""}`}
       onKeyDown={(event) => {
         const details = detailsRef.current;
         if (event.key !== "Escape" || !details?.open) return;
@@ -105,9 +108,10 @@ export function LanguageSwitcher({
         ref={summaryRef}
         aria-label={`${switcherLabels[locale]}: ${localeLabels[locale]}`}
         title={switcherLabels[locale]}
-        className="site-utility-icon flex size-11 shrink-0 cursor-pointer list-none items-center justify-center rounded-lg text-sm text-[var(--o-text-secondary)] transition-colors duration-150 hover:bg-[var(--o-card-bg)] hover:text-[var(--o-text)] group-open/language:bg-[var(--o-surface)] group-open/language:text-[var(--o-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--o-warm)] [&::-webkit-details-marker]:hidden"
+        className={`${variant === "sidebar" ? "flex h-11 w-full gap-2 px-2" : "site-utility-icon flex size-11 shrink-0"} cursor-pointer list-none items-center justify-center rounded-lg text-sm text-[var(--o-text-secondary)] transition-colors duration-150 hover:bg-[var(--o-card-bg)] hover:text-[var(--o-text)] group-open/language:bg-[var(--o-surface)] group-open/language:text-[var(--o-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--o-warm)] [&::-webkit-details-marker]:hidden`}
       >
-        <GlobeIcon className="size-5" />
+        <GlobeIcon className={variant === "sidebar" ? "size-4 shrink-0" : "size-5"} />
+        {variant === "sidebar" && <><span className="flex-1 text-left">{localeLabels[locale]}</span><ChevronDown className="size-3.5 shrink-0" /></>}
       </summary>
 
       <div
@@ -115,7 +119,7 @@ export function LanguageSwitcher({
           placement === "up"
             ? // The footer row stacks on phones, leaving the switcher at the
               // left edge, where a right-anchored menu would open off-screen.
-              "bottom-[calc(100%+0.375rem)] left-0 sm:left-auto sm:right-0"
+              variant === "sidebar" ? "bottom-[calc(100%+0.375rem)] left-0" : "bottom-[calc(100%+0.375rem)] left-0 sm:left-auto sm:right-0"
             : "top-[calc(100%+0.375rem)] right-0"
         }`}
       >

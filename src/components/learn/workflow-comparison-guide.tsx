@@ -152,7 +152,7 @@ export function WorkflowComparisonGuide({ locale }: { readonly locale: Locale })
       <div className="mx-auto max-w-5xl">
         <header>
           <p className="font-mono text-[11px] tracking-[0.28em] text-[var(--o-warm)]/80 uppercase">{labels.eyebrow}</p>
-          <h2 className="mt-4 max-w-3xl font-serif text-3xl font-medium tracking-tight text-[var(--o-text)] sm:text-5xl">{guideCopy.title}</h2>
+          <h2 id="workflow-comparisons-heading" className="mt-4 max-w-3xl font-serif text-3xl font-medium tracking-tight text-[var(--o-text)] sm:text-5xl">{guideCopy.title}</h2>
           <p className="mt-5 max-w-3xl text-base leading-7 text-[var(--o-text-secondary)]">{guideCopy.intro}</p>
           <p className="mt-4 text-xs leading-6 text-[var(--o-text-tertiary)]">{copy.sourcesChecked}</p>
         </header>
