@@ -2,7 +2,7 @@ import type { Locale } from "@/i18n/locales";
 
 export const storyCopyByLocale = {
   en: {
-    heroDescription: "Wenlan is your personal knowledge base, maintained with AI. Connect notes, files, and chats into knowledge you and your AI tools can find and use.",
+    heroDescription: "Wenlan gathers your notes, files, and AI chats into pages your AI tools can search and cite. Pages stay tied to their sources and keep up when those change.",
     comparisonLabel: "Compare AI knowledge-base tools",
     steps: { wiki: "Organize", updates: "Update with new evidence", ai: "Put to work", graph: "See the connections" },
     wikiTitle: "Scattered notes. Connected knowledge.",

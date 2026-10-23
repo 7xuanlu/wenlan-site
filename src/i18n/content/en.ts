@@ -526,9 +526,9 @@ export const enContent = {
       redesign: {
         hero: {
           eyebrow: "A personal knowledge base, maintained with AI",
-          headline: { pre: "Bring your knowledge", emphasis: "to life.", post: "" },
+          headline: { pre: "Turn what you know into a", emphasis: "living wiki.", post: "" },
           description:
-            "Wenlan is your personal knowledge base, maintained with AI. Connect notes, files, and chats into knowledge you and your AI tools can find and use.",
+            "Wenlan gathers your notes, files, and AI chats into pages your AI tools can search and cite. Pages stay tied to their sources and keep up when those change.",
           worksWithLabel: "Works with",
           worksWithNote: "Read from your Obsidian vault without changing your files.",
         },

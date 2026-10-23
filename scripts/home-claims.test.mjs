@@ -276,8 +276,8 @@ test("hero leads with useful outcomes and describes knowledge that can be revise
   const expected = {
     en: {
       eyebrow: "A personal knowledge base, maintained with AI",
-      headline: ["Bring your knowledge", "to life."],
-      description: "Wenlan is your personal knowledge base, maintained with AI. Connect notes, files, and chats into knowledge you and your AI tools can find and use.",
+      headline: ["Turn what you know into a", "living wiki."],
+      description: "Wenlan gathers your notes, files, and AI chats into pages your AI tools can search and cite. Pages stay tied to their sources and keep up when those change.",
     },
     "zh-TW": {
       eyebrow: "AI 協助維護的個人知識庫",

@@ -2549,9 +2549,9 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
       content.enContent.home.content.redesign.hero.description,
     ],
     [
-      "Bring your knowledge",
-      "to life.",
-      "Wenlan is your personal knowledge base, maintained with AI. Connect notes, files, and chats into knowledge you and your AI tools can find and use.",
+      "Turn what you know into a",
+      "living wiki.",
+      "Wenlan gathers your notes, files, and AI chats into pages your AI tools can search and cite. Pages stay tied to their sources and keep up when those change.",
     ],
   );
 
