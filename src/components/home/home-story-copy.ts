@@ -2,7 +2,8 @@ import type { Locale } from "@/i18n/locales";
 
 export const storyCopyByLocale = {
   en: {
-    heroDescription: "Wenlan gathers your notes, files, and AI chats into pages your AI tools can search and cite. Pages stay tied to their sources and keep up when those change.",
+    heroDescription: "Wenlan pages link back to their sources and keep up when those change. Claude Code, Codex, Cursor, and other AI tools can search and cite them, and your own writing stays yours.",
+    heroTrust: ["Free and open source", "Your pages stay on your computer", "Works with Claude Code, Codex, Cursor, and more"],
     comparisonLabel: "Compare AI knowledge-base tools",
     steps: { wiki: "Organize", updates: "Update with new evidence", ai: "Put to work", graph: "See the connections" },
     wikiTitle: "Scattered notes. Connected knowledge.",
@@ -33,7 +34,8 @@ export const storyCopyByLocale = {
     moreTechnical: "Retrieval tests and methodology",
   },
   "zh-TW": {
-    heroDescription: "由 AI 協助維護的個人知識庫。文瀾將筆記、文件與對話連成可持續更新的知識，供你與 AI 查找、使用。",
+    heroDescription: "文瀾的頁面保留來源連結，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，你自己寫的內容仍由你作主。",
+    heroTrust: ["免費開源", "頁面存在你的電腦", "支援 Claude Code、Codex、Cursor 等工具"],
     comparisonLabel: "比較 AI 知識庫工具",
     steps: { wiki: "整理", updates: "隨資料更新", ai: "用進工作", graph: "知識相連" },
     wikiTitle: "把散落的內容，整理成可用的知識。",
@@ -64,7 +66,8 @@ export const storyCopyByLocale = {
     moreTechnical: "檢索評測與測試範圍",
   },
   "zh-CN": {
-    heroDescription: "由 AI 协助维护的个人知识库。文澜将笔记、文档与对话连成可持续更新的知识，供你与 AI 查找、使用。",
+    heroDescription: "文澜的页面保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，你自己写的内容仍由你做主。",
+    heroTrust: ["免费开源", "页面存在你的电脑", "支持 Claude Code、Codex、Cursor 等工具"],
     comparisonLabel: "比较 AI 知识库工具",
     steps: { wiki: "整理", updates: "随资料更新", ai: "用于工作", graph: "知识相连" },
     wikiTitle: "把散落的内容，整理成可用的知识。",

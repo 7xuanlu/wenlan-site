@@ -276,18 +276,18 @@ test("hero leads with useful outcomes and describes knowledge that can be revise
   const expected = {
     en: {
       eyebrow: "A personal knowledge base, maintained with AI",
-      headline: ["Turn what you know into a", "living wiki."],
-      description: "Wenlan gathers your notes, files, and AI chats into pages your AI tools can search and cite. Pages stay tied to their sources and keep up when those change.",
+      headline: ["Turn your notes, files, and AI chats into a", "living wiki."],
+      description: "Wenlan pages link back to their sources and keep up when those change. Claude Code, Codex, Cursor, and other AI tools can search and cite them, and your own writing stays yours.",
     },
     "zh-TW": {
       eyebrow: "AI 協助維護的個人知識庫",
-      headline: ["用你的知識，", "找到答案、完成工作。"],
-      description: "由 AI 協助維護的個人知識庫。文瀾將筆記、文件與對話連成可持續更新的知識，供你與 AI 查找、使用。",
+      headline: ["筆記、文件、AI 對話，整理成", "持續更新的知識庫。"],
+      description: "文瀾的頁面保留來源連結，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，你自己寫的內容仍由你作主。",
     },
     "zh-CN": {
       eyebrow: "AI 协助维护的个人知识库",
-      headline: ["用你的知识，", "找到答案、完成工作。"],
-      description: "由 AI 协助维护的个人知识库。文澜将笔记、文档与对话连成可持续更新的知识，供你与 AI 查找、使用。",
+      headline: ["笔记、文档、AI 对话，整理成", "持续更新的知识库。"],
+      description: "文澜的页面保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，你自己写的内容仍由你做主。",
     },
   };
   for (const [locale, dictionary] of Object.entries(dictionaryByLocale)) {

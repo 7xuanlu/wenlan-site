@@ -2549,9 +2549,9 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
       content.enContent.home.content.redesign.hero.description,
     ],
     [
-      "Turn what you know into a",
+      "Turn your notes, files, and AI chats into a",
       "living wiki.",
-      "Wenlan gathers your notes, files, and AI chats into pages your AI tools can search and cite. Pages stay tied to their sources and keep up when those change.",
+      "Wenlan pages link back to their sources and keep up when those change. Claude Code, Codex, Cursor, and other AI tools can search and cite them, and your own writing stays yours.",
     ],
   );
 
@@ -2562,9 +2562,9 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
       staleHomePhrase: /活個人知識庫|AI-native/,
       hero: {
         eyebrow: /AI 協助維護的個人知識庫/,
-        pre: /用你的知識，/,
-        emphasis: /找到答案、完成工作。/,
-        description: "由 AI 協助維護的個人知識庫。文瀾將筆記、文件與對話連成可持續更新的知識，供你與 AI 查找、使用。",
+        pre: /筆記、文件、AI 對話，整理成/,
+        emphasis: /持續更新的知識庫。/,
+        description: "文瀾的頁面保留來源連結，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，你自己寫的內容仍由你作主。",
       },
     },
     "zh-CN": {
@@ -2573,9 +2573,9 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
       staleHomePhrase: /活个人知识库|AI-native/,
       hero: {
         eyebrow: /AI 协助维护的个人知识库/,
-        pre: /用你的知识，/,
-        emphasis: /找到答案、完成工作。/,
-        description: "由 AI 协助维护的个人知识库。文澜将笔记、文档与对话连成可持续更新的知识，供你与 AI 查找、使用。",
+        pre: /笔记、文档、AI 对话，整理成/,
+        emphasis: /持续更新的知识库。/,
+        description: "文澜的页面保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，你自己写的内容仍由你做主。",
       },
     },
   };
@@ -2602,7 +2602,7 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
   }
 });
 
-test("Chinese hero leads with outcomes and setup begins with a concrete decision", async () => {
+test("Chinese hero names the living knowledge base and setup begins with a concrete decision", async () => {
   const { content } = await loadI18nModules();
 
   for (const locale of ["zh-TW", "zh-CN"]) {
@@ -2610,7 +2610,7 @@ test("Chinese hero leads with outcomes and setup begins with a concrete decision
 
     assert.match(
       dictionary.home.content.redesign.hero.headline.emphasis,
-      /找到答案、完成工作。/,
+      /持續更新的知識庫。|持续更新的知识库。/,
       `${locale}.home.hero.headline.benefit`,
     );
     assert.match(
