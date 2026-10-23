@@ -24,7 +24,7 @@ const copy = {
     ready:"Turn the context into a working feature", kind:"Interactive prototype", open:"Open prototype", close:"Close prototype", example:"Illustrative result", based:"Built from", reset:"Reset", titles:["Reading workspace", "Handoff workspace"],
     descriptions:["Toggle sources while the reading origin stays fixed.", "Move work forward without losing decisions, sources, or next steps."],
     sidebar:"Source sidebar", narrow:"Narrow view", wide:"Wide view", views:["Wiki", "Memory", "Topic", "Sources"],
-    hint:"Toggle the sidebar or narrow the view. Watch the left edge of the article.", topic:"Notes in this topic", source:"Supporting source", show:"View source", tabs:["To do", "In progress", "Done"], start:"Start work", complete:"Mark done", reopen:"Reopen", empty:"No work in this stage", decisions:"Current decisions", next:"Next action", tasks:["Check the reading origin across all four views", "Check citation previews in a narrow view", "Connect acceptance results to their original sources"],
+    hint:"Toggle the sidebar or narrow the view. Watch the left edge of the article.", topic:"Pages in this topic", source:"Supporting source", show:"View source", tabs:["To do", "In progress", "Done"], start:"Start work", complete:"Mark done", reopen:"Reopen", empty:"No work in this stage", decisions:"Current decisions", next:"Next action", tasks:["Check the reading origin across all four views", "Check citation previews in a narrow view", "Connect acceptance results to their original sources"],
     note:"Interactive result illustration using the preceding demo material.",
   },
 };

@@ -64,9 +64,9 @@ const LOCALE_COPY = {
     title: "Welcome to Wenlan",
     greeting: "Thanks for joining Wenlan.",
     introduction:
-      "Wenlan is a source-backed knowledge wiki for AI work. Turn documents, Markdown files, and the decisions you make along the way into readable, searchable notes, then find them again through your connected AI tools.",
+      "Wenlan is a source-backed knowledge wiki for AI work. Turn documents, Markdown files, and the decisions you make along the way into readable, searchable pages, then find them again through your connected AI tools.",
     introductionHtml:
-      "Wenlan is a source-backed knowledge wiki for AI work. Turn documents, Markdown files, and the decisions you make along the way into readable, searchable notes, then find them again through your connected AI tools.",
+      "Wenlan is a source-backed knowledge wiki for AI work. Turn documents, Markdown files, and the decisions you make along the way into readable, searchable pages, then find them again through your connected AI tools.",
     reviewNote:
       "Follow each source and revision trail yourself so important work stays reviewable and your judgment stays in your hands.",
     ctaLabel: "Get started →",
@@ -76,7 +76,7 @@ const LOCALE_COPY = {
       "After installation, save one useful decision, then try finding it again from your AI tool.",
     nextLabel: "What to explore next",
     nextDescription:
-      "Start with the docs to see how Wenlan turns source material into citable notes and a reusable AI workflow.",
+      "Start with the docs to see how Wenlan turns source material into citable pages and a reusable AI workflow.",
     docsLabel: "Browse docs",
     githubLabel: "View on GitHub",
     homeLabel: "Back to Wenlan",

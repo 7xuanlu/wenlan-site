@@ -67,7 +67,7 @@ const copy: Record<Locale, HeroScenariosCopy> = {
     citationLabel: "Jump to supplied source",
     sourceExcerptLabel: "Supplied excerpt",
     originalSourceLabel: "Read the study",
-    knowledgePageLabel: "Wiki note",
+    knowledgePageLabel: "Wiki page",
     viewKnowledgeLabel: "Expand",
     hideKnowledgeLabel: "Collapse",
     askAiLabel: "You ask AI",

@@ -8,14 +8,14 @@ const copyByLocale = {
   en: {
     title: "A decision changed. See what changes with it.",
     description: "The email assistant now needs one extra rule: drafts mentioning prices or delivery commitments need the project owner's review before sending.",
-    controls: ["Review changes", "Updated note"],
+    controls: ["Review changes", "Updated page"],
     states: [
-      "Compare the agent's proposed edit with the original. In this example, the note stays unchanged until the edit is accepted.",
-      "The accepted note adds the new rule, keeps the earlier version and links the new decision as a source. Automatic sending is still unapproved.",
+      "Compare the agent's proposed edit with the original. In this example, the page stays unchanged until the edit is accepted.",
+      "The accepted page adds the new rule, keeps the earlier version and links the new decision as a source. Automatic sending is still unapproved.",
     ],
-    captions: ["Wenlan revision review", "Wenlan note after acceptance"],
+    captions: ["Wenlan revision review", "Wenlan page after acceptance"],
     evidence: "Fictional case · Actual product capture",
-    alts: ["Wenlan review dialog comparing the original email-assistant scope with a proposed pricing and delivery review rule, with Approve and Dismiss controls", "Updated email-assistant note showing the new review rule, versions 3 and 2, and four linked source records"],
+    alts: ["Wenlan review dialog comparing the original email-assistant scope with a proposed pricing and delivery review rule, with Approve and Dismiss controls", "Updated email-assistant page showing the new review rule, versions 3 and 2, and four linked source records"],
   },
   "zh-TW": {
     title: "決定改了，先看清楚再更新。",

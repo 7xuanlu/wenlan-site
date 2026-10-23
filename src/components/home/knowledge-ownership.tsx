@@ -9,9 +9,9 @@ const copyByLocale = {
     setup: "Local storage; model processing follows your provider settings.",
     setupLink: "Data and privacy",
     items: [
-      { title: "Open your files", body: "Read your notes and session logs as Markdown in your own editor.", link: "Files and portability", href: "/docs/import-and-portability" },
+      { title: "Open your files", body: "Read your pages and session logs as Markdown in your own editor.", link: "Files and portability", href: "/docs/import-and-portability" },
       { title: "Keep projects apart", body: "Use Spaces for different projects and personal work. Choose the right Space when saving or asking AI.", link: "How Spaces work", href: "/docs/spaces" },
-      { title: "See what changed", body: "Inspect earlier notes and session logs in local Git history, and compare changes before restoring a file.", link: "Local version history", href: "/docs/local-git-history" },
+      { title: "See what changed", body: "Inspect earlier pages and session logs in local Git history, and compare changes before restoring a file.", link: "Local version history", href: "/docs/local-git-history" },
     ],
   },
   "zh-TW": {

@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "8bb7c849e332e7930fde20f5ec9749e69cb3935f2800712687f012b8e707dd4d",
+    sourceHash: "e8ee9137934afc897ffe09a9c36a990a6a418bad90ac58bf470948e9c4020bf7",
     content: {
       seo: {
         title: "文瀾 Wenlan｜個人 AI 知識庫與 LLM Wiki",
@@ -975,7 +975,7 @@ export const zhTWContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "f8615e37cb3df13c92e740e77a2a24598904663c8f6e1b45ffa30564a03ec67e",
+    sourceHash: "2d474f08dbd53fd7e1e81fd65cb9b726af9d58adb45cc7efe13f053a9b512b0d",
     content: {
       seo: {
         title: "關於文瀾 Wenlan：開源、本機優先的個人 AI 知識庫",
@@ -1164,7 +1164,7 @@ export const zhTWContent = {
   },
   docs: {
     status: "translated",
-    sourceHash: "961aef4c9075835816a06787070813e8c786a92681e1b8da4ee8797ca7d793c6",
+    sourceHash: "459ab9b97f0b5e952afb0caa544d4180f3823e22b14111ebd03d86a5e4724c9b",
     content: {
       seo: {
         title: "文瀾 Wenlan 文件：安裝、工作流程與參考",
@@ -1662,7 +1662,7 @@ export const zhTWContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "dc8f96b8bcddfa0c3c5277406626973f99aa1436a16813039750a508d2f77273",
+    sourceHash: "060937f3c44963407158700b492184c51af1fc8f195a979b5490a27a791be8ab",
     content: {
       seo: {
         title: "安裝文瀾 Wenlan：Claude Code、Codex、ChatGPT 與 MCP",
@@ -1696,7 +1696,7 @@ export const zhTWContent = {
           paragraphs: [
             "下載 macOS Apple silicon 或 Windows x64 桌面版，跟著首次設定引導完成安裝。你的筆記和來源會保存在本機的 Wenlan 知識庫。",
             "新的知識庫會先打開一份入門清單。選好你想從哪裡開始，再照著步驟做：寫一篇筆記、連接 AI 工具、匯入來源，最後問你的 AI 剛保存的內容。",
-            "若要把來源整理成筆記，請在設定中選擇本地模型，或設定雲端模型服務。使用雲端處理時，相關內容會傳送給該服務商。"
+            "Steep 把來源整理成筆記。預設「隨叫」，由已連接的 AI 工具在工作時順手完成，不必設定模型。若要「自動」，請在設定中選擇本地模型，或設定雲端模型服務。使用雲端處理時，相關內容會傳送給該服務商。"
           ],
           commands: [
             "# macOS Apple silicon\nnpx -y wenlan setup",
@@ -1783,7 +1783,7 @@ export const zhTWContent = {
           paragraphs: [
             "連接 Claude Code 或 Codex 外掛後，試著保存下面這個虛構決定。Claude Code 使用 /wenlan:handoff 和 /wenlan:recall；Codex 使用 /handoff 和 /recall。",
             "保存後，開一段新對話查找這個決定。確認回答保留「只能起草」的限制，也能找到原本保存的紀錄。保存交接紀錄與整理成筆記，是兩個不同步驟。",
-            "本地 MCP 工具可用一般文字保存再搜尋；瀏覽器遠端連線目前只供查詢，請先在桌面 App 加入筆記或檔案，再從 AI 查找。"
+            "本地 MCP 工具可用一般文字保存再搜尋；瀏覽器遠端連線預設只搜尋；在「網頁存取」開啟「搜尋和寫入」後也能保存。想試搜尋，請先在桌面 App 加入筆記或檔案，再從 AI 查找。"
           ],
           commands: [
             "1. 保存這個虛構決定：\n/handoff 示範專案：郵件助理可以起草回覆，但寄出前一定要我批准。",

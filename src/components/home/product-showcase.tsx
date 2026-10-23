@@ -14,10 +14,10 @@ const stageDimensions = [
 
 const copyByLocale = {
   en: {
-    stages: ["Save the work", "Read the note", "Ask next time"],
+    stages: ["Save the work", "Read the page", "Ask next time"],
     outcomes: [
       "At the end of a discussion, /handoff saves the decisions, reasons, and unfinished work.",
-      "An agent separately turned those same records into this readable note; the original records are linked below.",
+      "An agent separately turned those same records into this readable page; the original records are linked below.",
       "In a new conversation, /recall finds the saved records. Claude answers with sources, keeping unapproved ideas separate.",
     ],
     scenario: "Fictional project · Email assistant",
@@ -27,12 +27,12 @@ const copyByLocale = {
     answer: "No. The first release creates drafts for the user to review and send. Automatic sending is still awaiting approval.",
     evidence: [
       "Claude Code · /handoff · Fictional demo, actual screenshot",
-      "Wenlan · Agent-authored note and sources · Fictional demo",
+      "Wenlan · Agent-authored page and sources · Fictional demo",
       "Claude Code · /recall · Fictional demo, actual screenshot",
     ],
     alt: [
       "English handoff in Claude Code saves the email decision, its reason and the unapproved proposal",
-      "English Wenlan note with the email decision, reasons and three linked source records",
+      "English Wenlan page with the email decision, reasons and three linked source records",
       "English recall skill in a new Claude Code conversation retrieves Wenlan records and answers with their source IDs",
     ],
     expand: "View full size",

@@ -2477,7 +2477,7 @@ test("home use cases frame Wenlan as an LLM wiki for code, product, and research
   const useCases = content.enContent.home.content.useCases;
 
   assert.equal(useCases.title, "LLM wiki for\ncode, clients,\nand research.");
-  assert.match(useCases.description, /source-cited notes agents can brief, recall, and hand off/i);
+  assert.match(useCases.description, /source-cited pages agents can brief, recall, and hand off/i);
   assert.equal(useCases.index.title, "Wenlan Wiki Index");
   assert.equal(useCases.index.activeViewLabel, "Active view");
   assert.deepEqual(
@@ -2488,12 +2488,12 @@ test("home use cases frame Wenlan as an LLM wiki for code, product, and research
   const [devScenario, productScenario, researchScenario] = useCases.scenarios;
   assert.equal(devScenario.railLabel, "Code");
   assert.match(devScenario.lead, /docs engineers actually update/i);
-  assert.match(devScenario.body, /source-backed engineering notes/i);
-  assert.match(devScenario.body, /architecture maps, runbooks, migration plans, integration notes/i);
+  assert.match(devScenario.body, /source-backed engineering pages/i);
+  assert.match(devScenario.body, /architecture maps, runbooks, migration plans, integration guides/i);
   assert.doesNotMatch(devScenario.body, /\bhandoff\b/i);
   assert.match(
     devScenario.evidence.map((item) => `${item.label} ${item.detail}`).join("\n"),
-    /Architecture map[\s\S]*Runbook[\s\S]*Migration plan[\s\S]*Integration note/i,
+    /Architecture map[\s\S]*Runbook[\s\S]*Migration plan[\s\S]*Integration guide/i,
   );
   assert.match(productScenario.label, /Product & client work/);
   assert.equal(productScenario.railLabel, "Client work");
@@ -2501,7 +2501,7 @@ test("home use cases frame Wenlan as an LLM wiki for code, product, and research
   assert.match(productScenario.body, /client constraint/i);
   assert.match(researchScenario.label, /Research & writing/);
   assert.equal(researchScenario.railLabel, "Research");
-  assert.match(researchScenario.lead, /cited notes/i);
+  assert.match(researchScenario.lead, /cited pages/i);
   assert.match(researchScenario.body, /trusted quotes/i);
 });
 
@@ -2536,7 +2536,7 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
   );
   assert.equal(
     content.enContent.home.content.seo.description,
-    "Wenlan is a source-backed AI knowledge base and LLM wiki for AI work: organize documents and decisions into notes you can find, inspect, and review.",
+    "Wenlan is a source-backed AI knowledge base and LLM wiki for AI work: organize documents and decisions into pages you can find, inspect, and review.",
   );
   assert.match(
     content.enContent.home.content.redesign.hero.eyebrow,
@@ -2816,7 +2816,7 @@ test("English core content records the current SEO title and description subset"
   );
   assert.equal(
     content.enContent.home.content.seo.description,
-    "Wenlan is a source-backed AI knowledge base and LLM wiki for AI work: organize documents and decisions into notes you can find, inspect, and review.",
+    "Wenlan is a source-backed AI knowledge base and LLM wiki for AI work: organize documents and decisions into pages you can find, inspect, and review.",
   );
   assert.equal(
     content.enContent.about.content.seo.title,

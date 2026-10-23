@@ -23,10 +23,10 @@ const copy: Record<Locale, TaskProofCopy> = {
   en: {
     eyebrow: "Illustrative task",
     title: "Three files, one answer you can re-check.",
-    intro: "A small example of what a source-backed note can preserve across sessions.",
+    intro: "A small example of what a source-backed page can preserve across sessions.",
     authoredLabel: "Authored illustrative reference · no real product output",
     stepsLabel: "Example path",
-    steps: ["Collect three source files", "Link them into a note", "Check what changed"],
+    steps: ["Collect three source files", "Link them into a page", "Check what changed"],
     sourcesHeading: "Source files",
     sources: [
       { label: "api-v1.md", detail: "API retry rule" },

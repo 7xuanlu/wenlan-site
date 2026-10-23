@@ -223,10 +223,10 @@ test("knowledge graph docs answer the AI-agent knowledge-base job without replac
   assert.match(knowledgeGraph, /source-backed AI knowledge base/i);
   assert.match(knowledgeGraph, /Quick answer:/);
   assert.match(knowledgeGraph, /entities, relations, and observations/i);
-  assert.match(knowledgeGraph, /source memories and maintained notes/i);
+  assert.match(knowledgeGraph, /source memories and maintained pages/i);
   assert.match(knowledgeGraph, /supporting evidence/i);
   assert.match(knowledgeGraph, /publishedAt:\s*"2026-07-09"/);
-  assert.match(knowledgeGraph, /updatedAt:\s*"2026-08-13"/);
+  assert.match(knowledgeGraph, /updatedAt:\s*"2026-10-23"/);
   assert.doesNotMatch(knowledgeGraph, /graph context (?:is|becomes) (?:the )?authority/i);
 });
 
@@ -1383,7 +1383,7 @@ test("public docs expose a product readiness matrix for users and platform bound
   assert.match(docs, /Linux aarch64 glibc/);
   assert.match(docs, /Windows x86_64/);
   assert.match(docs, /desktop app.*aarch64-apple-darwin/is);
-  assert.match(docs, /daemon owns the database, notes, sessions, and retrieval behavior/i);
+  assert.match(docs, /daemon owns the database, pages, sessions, and retrieval behavior/i);
 });
 
 test("public onboarding is Wenlan-first and distinguishes plugin, local MCP, and web MCP paths", async () => {
@@ -1586,7 +1586,7 @@ test("public command guidance tracks the selected released plugin contract", asy
   }
   const docs = surfaces.find(([path]) => path === "src/app/docs/docs.ts")?.[1] ?? "";
   assert.doesNotMatch(docs, /\/pages[^"\n]*(?:preview|inside the agent session|without leaving)/i);
-  assert.match(docs, /\/wenlan pages: list recent notes or open a matching note in your editor\./);
+  assert.match(docs, /\/wenlan pages: list recent pages or open a matching page in your editor\./);
   for (const command of contract.skills.filter((skill) => skill.status === "hidden_routed").map((skill) => skill.name)) {
     assert.match(docs, new RegExp(`/wenlan ${escapeRegExp(command)}\\b`), command);
   }

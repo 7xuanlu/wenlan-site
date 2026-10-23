@@ -366,7 +366,7 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     );
     const pipelineTitles = home.redesign.pipeline.stages.map((stage) => stage.title).join(" ");
     assert.match(pipelineTitles, /decision|決策|决策/i);
-    assert.match(pipelineTitles, /note|筆記|笔记/i);
+    assert.match(pipelineTitles, /page|筆記|笔记/i);
     assert.match(pipelineTitles, /next|下一|下一个|下次/i);
     assert.match(home.redesign.pipeline.intro, /setup|設定|配置/);
 
