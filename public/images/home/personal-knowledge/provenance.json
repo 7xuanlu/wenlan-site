@@ -22,6 +22,6 @@
   "limits": [
     "Native graph count of 11 memory rows includes 2 imported files; website types them as files.",
     "Fixture contains URL and Markdown sources; PDF and Obsidian are capability explanations.",
-    "Source notes retain original Traditional Chinese text in translated website interfaces."
+    "Source notes retain original Traditional Chinese text in the Traditional and Simplified Chinese interfaces; the English interface shows an English rendering of the same library (same ids, links and layout)."
   ]
 }

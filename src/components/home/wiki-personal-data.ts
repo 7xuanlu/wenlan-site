@@ -1,5 +1,6 @@
 import type { Locale } from "@/i18n/locales";
 import type { DemoResource } from "./wiki-demo-data";
+import { readingReviewMarkdownEn } from "./knowledge-story-data-en";
 
 export type PersonalNote = DemoResource & {
   groupId: string;
@@ -199,7 +200,7 @@ How a layout fix became reusable knowledge for next time.
 
 [W3C Reflow](#demo:url-reflow) explains that text should wrap in a narrower viewport, avoiding horizontal scrolling on every line.
 
-[Reading layout review.md](#demo:file-reading-review) records the checks: toggle the sidebar, compare four reading views, and confirm that the start of each line stays in place.
+[reading-review.md](#demo:file-reading-review) records the checks: toggle the sidebar, compare four reading views, and confirm that the start of each line stays in place.
 
 ## Keep a decision that can be reused
 
@@ -212,19 +213,22 @@ Memories kept: [Keep the article in place](#demo:mem_8434be7eda44) · [One share
 
 function agentLoopSources(locale: Locale): DemoResource[] {
   const labels = {
-    en: { web: "W3C · Reflow and reading", file: "Reading layout review.md", tag: "Reading layout" },
+    en: { web: "W3C · Reflow and reading", file: "reading-review.md", tag: "Reading layout" },
     "zh-TW": { web: "W3C · 文字重排與閱讀", file: "閱讀排版驗收.md", tag: "閱讀排版" },
     "zh-CN": { web: "W3C · 文字重排与阅读", file: "阅读排版验收.md", tag: "阅读排版" },
   }[locale];
-  // The captured sources retain their original Traditional Chinese text in every locale.
+  // The captured sources keep their original Traditional Chinese text in the
+  // Chinese locales; English visitors read an English rendering of the same two sources.
+  const english = locale === "en";
+  const reflowBodyEn = "# Reflow and reading\n\nThis is a summary written from W3C WCAG 2.2 Understanding SC 1.4.10. It is not the full original text.\n\nWhen text is enlarged or the window narrows, ordinary text content should wrap again within the visible area so readers don't have to scroll sideways line by line. Content that needs two-dimensional layout, such as maps and charts, is an exception.\n\nDemo note: this reference helped us check wrapping when the sidebar opens; keeping the first line fixed is an extra reading-experience decision of this product.";
   return [
     { id: "url-reflow", kind: "url", title: labels.web,
       location: "w3.org · WCAG 2.2 · Reflow", href: "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html",
-      body: "# Reflow：文字重排與閱讀\n\n此為根據 W3C WCAG 2.2 Understanding SC 1.4.10 撰寫的中文摘要，並非原文全文。\n\n放大文字或縮窄視窗時，一般文字內容應在可視範圍內重新換行，避免讀者逐行左右捲動。地圖、圖表等需要二維排版的內容有例外。\n\n示範筆記：這份參考協助我們檢視側欄開啟時的換行；固定句首則是本產品的額外閱讀體驗決定。",
+      body: english ? reflowBodyEn : "# Reflow：文字重排與閱讀\n\n此為根據 W3C WCAG 2.2 Understanding SC 1.4.10 撰寫的中文摘要，並非原文全文。\n\n放大文字或縮窄視窗時，一般文字內容應在可視範圍內重新換行，避免讀者逐行左右捲動。地圖、圖表等需要二維排版的內容有例外。\n\n示範筆記：這份參考協助我們檢視側欄開啟時的換行；固定句首則是本產品的額外閱讀體驗決定。",
       tags: [labels.tag], relatedIds: ["page-agent-loop"] },
     { id: "file-reading-review", kind: "file", title: labels.file,
-      location: "reading / reading-review.md", href: "/images/home/personal-knowledge/reading-review.md",
-      body: "# 閱讀排版驗收\n\n這是示範知識庫的驗收筆記。\n\n- 開關右側欄，正文的左側起點保持不變。\n- 在 Memory、Topic、Wiki、Sources 分別檢查字體、行距與換行。\n- 將視窗縮窄，再確認引用預覽沒有遮住閱讀中的段落。\n\n參考：W3C WCAG 2.2 的 Reflow 說明。此檢查清單不等同完整的 WCAG 符合性認證。",
+      location: "reading / reading-review.md", href: english ? "/images/home/personal-knowledge/reading-review.en.md" : "/images/home/personal-knowledge/reading-review.md",
+      body: english ? readingReviewMarkdownEn : "# 閱讀排版驗收\n\n這是示範知識庫的驗收筆記。\n\n- 開關右側欄，正文的左側起點保持不變。\n- 在 Memory、Topic、Wiki、Sources 分別檢查字體、行距與換行。\n- 將視窗縮窄，再確認引用預覽沒有遮住閱讀中的段落。\n\n參考：W3C WCAG 2.2 的 Reflow 說明。此檢查清單不等同完整的 WCAG 符合性認證。",
       tags: [labels.tag], relatedIds: ["page-agent-loop"] },
   ];
 }

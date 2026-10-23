@@ -70,6 +70,8 @@ function BentoCell({
 const cellChrome: Record<string, { accent: string; delayMs: number }> = {
   steep: { accent: "var(--o-sage)", delayMs: 80 },
   topics: { accent: "var(--o-sage)", delayMs: 120 },
+  "repo-wiki": { accent: "var(--o-sage)", delayMs: 140 },
+  lock: { accent: "var(--o-sage)", delayMs: 150 },
   sources: { accent: "var(--o-warm)", delayMs: 0 },
   obsidian: { accent: "var(--o-warm)", delayMs: 40 },
   tools: { accent: "var(--o-warm)", delayMs: 160 },
@@ -107,7 +109,7 @@ export function BentoSection({
           observer.disconnect();
         }
       },
-      // A four-row grid can be taller than the viewport; reveal at entry.
+      // A five-row grid can be taller than the viewport; reveal at entry.
       { threshold: 0 },
     );
     observer.observe(section);

@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "2b2d5c25d3d5622c361bfe49b2a06dc29d2ea03fe2111d80e84122e9095e069d",
+    sourceHash: "2b6c356971957b219457fb9dfc26771fee5f36dd0e6337e88242a1852cca4d5a",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库与 LLM Wiki",
@@ -76,7 +76,7 @@ export const zhCNContent = {
         title:
           "下\u2060载\u2060适\u2060合\u2060你\u2060系\u2060统\u2060的 Wenlan。",
         description:
-          "Wenlan v0.19.3 提供 Windows x64 桌面版与 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 包。",
+          "Wenlan v0.20.0 提供 Windows x64 桌面版与 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 包。",
         stableLabel: "稳定版",
         releaseNotesLabel: "版本说明",
         packageIncludesLabel: "内含 CLI、daemon 与 MCP connector",
@@ -489,17 +489,17 @@ export const zhCNContent = {
           {
             id: "tools",
             q: "哪些 AI 工具可以搭配 Wenlan？",
-            a: "Claude Code 和 Codex 有 Wenlan 插件；Cursor、Claude Desktop、VS Code、Muse Code 等本地工具通过 MCP 连接。ChatGPT、Claude.ai、Muse 等浏览器工具使用 OAuth 远程连接：先选择共享整个资料库或一个 Space、批准配对，使用时保持 Wenlan 在线，也能在 App 中撤销访问。Obsidian 则是只读的来源导入方式。",
+            a: "Claude Code 和 Codex 有 Wenlan 插件；Cursor、Claude Desktop、VS Code、Muse Code 等本地工具通过 MCP 连接。ChatGPT、Claude.ai、Muse 等浏览器工具使用 OAuth 远程连接：先选择共享整个资料库或一个 Space，批准配对时决定只能搜索或可搜索和写入，使用时保持 Wenlan 在线，也能在 App 中撤销访问。Obsidian 则是只读的来源导入方式。",
           },
           {
             id: "not-notes",
             q: "Wenlan 能取代 Notion 或 Obsidian 吗？",
-            a: "不能。Wenlan 不取代你用来写作的 App。它可以把 Markdown 文件、text、可提取文字的 PDF、文件夹和 Obsidian 库登记为来源。Obsidian 输入是只读，并在后台持续跟进，约每 30 秒检查一次；Wenlan 自己的笔记仍是 ~/.wenlan/ 底下可读的 Markdown。",
+            a: "不能。Wenlan 不取代你用来写作的 App。它可以把 Markdown 文件、text、可提取文字的 PDF、文件夹、Obsidian 库和 Logseq 图谱登记为来源。文件夹、笔记库和图谱可持续同步，也可只导入一次。Obsidian 与 Logseq 输入是只读；持续同步时会在后台跟进，约每 30 秒检查一次；Wenlan 自己的笔记仍是 ~/.wenlan/ 底下可读的 Markdown。",
           },
           {
             id: "setup",
             q: "我要怎么设置？",
-            a: "先安装 Wenlan，再连接一个 AI 工具。Claude Code 和 Codex 插件提供 handoff、recall 等命令，其他本地工具通过 MCP 连接。保存与搜索记录不需要模型 API 密钥；整理成笔记时，会使用你配置的本地或云端模型。入门指南会带你完成所选工具的设置。 浏览器工具使用 OAuth 网页访问，需要由你批准连接，并选择共享整个资料库或一个 Space，也能在 App 中撤销访问。",
+            a: "先安装 Wenlan，再连接一个 AI 工具。Claude Code 和 Codex 插件提供 handoff、recall 等命令，其他本地工具通过 MCP 连接。保存与搜索记录不需要模型 API 密钥。Steep 把素材整理成页面：默认“随叫”，由已连接的 AI 工具整理；也可改用“自动”，由你配置的本地或云端模型整理。入门指南会带你完成所选工具的设置。 浏览器工具使用 OAuth 网页访问，需要由你批准连接，并选择共享整个资料库或一个 Space，也能在 App 中撤销访问。",
           },
           {
             id: "platforms",
@@ -559,7 +559,7 @@ export const zhCNContent = {
           ],
           "detailsLabel": "工作方式与来源",
           "helpLabel": "更多背景",
-          "accessNote": "Wenlan 需要先连接来源和模型，再建立首批页面。之后可使用桌面 App，也可继续使用 plugin／CLI 与本地 daemon。",
+          "accessNote": "Wenlan 需要先连接来源，再由模型或你的 AI 工具建立首批页面。之后可使用桌面 App，也可继续使用 plugin／CLI 与本地 daemon。",
           "generations": [
             {
               "id": "wiki-graveyard",
@@ -603,8 +603,8 @@ export const zhCNContent = {
                 ],
                 "profile": [
                   "文档与保存的决策整理成带引用的 Wiki；从已连接的 AI 工具找回上次结论与依据，接着工作。",
-                  "新决策可以补入既有页面；已连接文件或记忆内容修改后，后台模型刷新符合条件的受影响页面。",
-                  "来源文件不回写；AI 更新你编辑过的知识页前先提出修订，由你接受或拒绝，变更历史可查。"
+                  "新决策可以补入既有页面；已连接文件或记忆内容修改后，Steep 会刷新符合条件的受影响页面，可在后台进行，也可交给你的 AI 工具。",
+                  "来源文件不回写；你写过或改过的知识页默认上锁，AI 要改先提出修订，由你接受或拒绝，变更历史可查。"
                 ],
                 "emphasis": []
               }
@@ -672,7 +672,7 @@ export const zhCNContent = {
                 ],
                 "profile": [
                   "设置完成后，在已连接的 AI 工具中保存、查找知识；本地后台服务运行，不必打开桌面 App。",
-                  "修改、删除记忆或接受替代修订后，自动标记引用它的既有页面；后台服务再刷新符合条件的页面。",
+                  "修改、删除记忆或接受替代修订后，自动标记引用它的既有页面；Steep 再刷新符合条件的页面，可在后台进行，也可交给你的 AI 工具。",
                   "AI 想更新你亲自写过的页面时，先提出修订；原文等你批准后才修改。"
                 ],
                 "emphasis": []
@@ -716,7 +716,7 @@ export const zhCNContent = {
                 ],
                 "profile": [
                   "将 vault 作为只读来源；继续写原笔记，Wenlan 另建供你和 AI 使用的知识页。",
-                  "完成 Wenlan 配置后，后台跟踪已连接来源，刷新符合条件的页面，不改写原来的 vault。",
+                  "完成 Wenlan 配置后，后台跟踪已连接来源，再由 Steep 刷新符合条件的页面，不改写原来的 vault。",
                   "Wenlan 不写回 vault；你改过的页面也先提出修订，再由你决定。"
                 ],
                 "emphasis": []
@@ -764,7 +764,7 @@ export const zhCNContent = {
                 ],
                 "profile": [
                   "在已连接的 AI 工具中保存、查找知识；文档与决策留在本地，不必更换编辑器。",
-                  "来源变化后，后台跟踪受影响页面并刷新；你写过的页面会变成待审修订。",
+                  "来源变化后，Wenlan 在后台标记受影响页面，再由 Steep 刷新；你写过的页面会变成待审修订。",
                   "你决定是否接受页面修订；机器维护页面按配置更新，并保留变更历史。"
                 ],
                 "emphasis": []
@@ -804,7 +804,7 @@ export const zhCNContent = {
                 ],
                 "profile": [
                   "将结论与决策存入本地知识库，再由已连接的 AI 工具找回，用于下一次工作。",
-                  "后台跟踪来源变化，刷新符合条件的既有 Wiki 页面，而不只是换一份来源副本。",
+                  "Wenlan 在后台跟踪来源变化，再由 Steep 刷新符合条件的既有 Wiki 页面，而不只是换一份来源副本。",
                   "你写过的页面先保留原文，AI 提出修订，由你选择接受或保留。"
                 ],
                 "emphasis": []
@@ -885,7 +885,7 @@ export const zhCNContent = {
             {
               id: "sources",
               title: "文档、对话和网页，都有位置",
-              body: "导入文件与 AI 对话，也能通过工具保存网页内容与原网址。",
+              body: "导入文件、文件夹、Logseq 图谱与 AI 对话，也能通过工具保存网页内容与原网址。",
             },
             {
               id: "obsidian",
@@ -895,12 +895,22 @@ export const zhCNContent = {
             {
               id: "steep",
               title: "Steep 沉淀",
-              body: "配置后台模型后，Steep 持续整理。",
+              body: "Steep 把素材整理成页面。默认“随叫”，由你的 AI 工具顺手整理；“自动”则用配置好的模型在后台整理。",
             },
             {
               id: "topics",
               title: "主题总览",
               body: "聚合相关笔记，沿着主题之间的关联继续探索。",
+            },
+            {
+              id: "repo-wiki",
+              title: "替代码库写 wiki",
+              body: "在代码库里运行 /wenlan wiki，AI 工具会写出带图表的页面，每页都连到它依据的代码行。代码改了，Steep 会跟着更新。",
+            },
+            {
+              id: "lock",
+              title: "你写的，由你决定",
+              body: "你写过或改过的页面自动上锁，AI 要改会先给你审核。AI 写的页面照常自己更新。",
             },
             {
               id: "tools",
@@ -910,7 +920,7 @@ export const zhCNContent = {
             {
               id: "web-access",
               title: "Web Access 网页访问",
-              body: "让支持的网页 AI 使用电脑上的文澜知识，使用时保持 Wenlan 在线。",
+              body: "让支持的网页 AI 搜索电脑上的文澜知识，经你允许也能写入；使用时保持 Wenlan 在线。",
             },
             {
               id: "spaces",
@@ -975,7 +985,7 @@ export const zhCNContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "f8615e37cb3df13c92e740e77a2a24598904663c8f6e1b45ffa30564a03ec67e",
+    sourceHash: "2d474f08dbd53fd7e1e81fd65cb9b726af9d58adb45cc7efe13f053a9b512b0d",
     content: {
       seo: {
         title: "关于文澜 Wenlan：开源、本地优先的个人 AI 知识库",
@@ -1164,7 +1174,7 @@ export const zhCNContent = {
   },
   docs: {
     status: "translated",
-    sourceHash: "961aef4c9075835816a06787070813e8c786a92681e1b8da4ee8797ca7d793c6",
+    sourceHash: "459ab9b97f0b5e952afb0caa544d4180f3823e22b14111ebd03d86a5e4724c9b",
     content: {
       seo: {
         title: "文澜 Wenlan 文档：安装、工作流程与参考",
@@ -1662,7 +1672,7 @@ export const zhCNContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "f9b655e75c404a3d186a9a5a5f346e48ca8bab5a30525a6c14a486ec828f80b3",
+    sourceHash: "060937f3c44963407158700b492184c51af1fc8f195a979b5490a27a791be8ab",
     content: {
       seo: {
         title: "安装文澜 Wenlan：Claude Code、Codex、ChatGPT 与 MCP",
@@ -1696,7 +1706,7 @@ export const zhCNContent = {
           paragraphs: [
             "下载 macOS Apple silicon 或 Windows x64 桌面版，按照首次设置引导完成安装。你的笔记和来源会保存在本机的 Wenlan 知识库。",
             "新的知识库会先打开一份入门清单。选好你想从哪里开始，再按步骤做：写一篇笔记、连接 AI 工具、导入来源，最后问你的 AI 刚保存的内容。",
-            "如果要把来源整理成笔记，请在设置中选择本地模型，或配置云端模型服务。使用云端处理时，相关内容会发送给该服务商。"
+            "Steep 把来源整理成笔记。默认“随叫”，由已连接的 AI 工具在工作时顺手完成，不必配置模型。如果要“自动”，请在设置中选择本地模型，或配置云端模型服务。使用云端处理时，相关内容会发送给该服务商。"
           ],
           commands: [
             "# macOS Apple silicon\nnpx -y wenlan setup",
@@ -1706,13 +1716,13 @@ export const zhCNContent = {
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.19.3/wenlan-windows-x64.zip",
+              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.0/wenlan-windows-x64.zip",
               label: "下载 Windows x64"
             },
             {
               id: "all-downloads",
-              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.19.3",
-              label: "全部 v0.19.3 下载"
+              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.20.0",
+              label: "全部 v0.20.0 下载"
             }
           ]
         },
@@ -1783,7 +1793,7 @@ export const zhCNContent = {
           paragraphs: [
             "连接 Claude Code 或 Codex 插件后，试着保存下面这个虚构决定。Claude Code 使用 /wenlan:handoff 和 /wenlan:recall；Codex 使用 /handoff 和 /recall。",
             "保存后，开一段新对话查找这个决定。确认回答保留“只能起草”的限制，也能找到原来保存的记录。保存交接记录与整理成笔记，是两个不同步骤。",
-            "本地 MCP 工具可以用普通文字保存再搜索；浏览器远程连接目前仅支持查询，请先在桌面 App 添加笔记或文件，再从 AI 查找。"
+            "本地 MCP 工具可以用普通文字保存再搜索；浏览器远程连接默认只搜索；在“网页访问”打开“搜索和写入”后也能保存。想试搜索，请先在桌面 App 添加笔记或文件，再从 AI 查找。"
           ],
           commands: [
             "1. 保存这个虚构决定：\n/handoff 演示项目：邮件助手可以起草回复，但发出前一定要我批准。",

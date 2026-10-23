@@ -366,14 +366,17 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     );
     const pipelineTitles = home.redesign.pipeline.stages.map((stage) => stage.title).join(" ");
     assert.match(pipelineTitles, /decision|決策|决策/i);
-    assert.match(pipelineTitles, /note|筆記|笔记/i);
+    assert.match(pipelineTitles, /page|筆記|笔记/i);
     assert.match(pipelineTitles, /next|下一|下一个|下次/i);
     assert.match(home.redesign.pipeline.intro, /setup|設定|配置/);
 
     const cards = home.redesign.bento.cells;
-    assert.deepEqual(cards.map(({ id }) => id), ["sources", "obsidian", "steep", "topics", "tools", "web-access", "spaces", "history"], `${locale}: revised capability coverage`);
+    assert.deepEqual(cards.map(({ id }) => id), ["sources", "obsidian", "steep", "topics", "repo-wiki", "lock", "tools", "web-access", "spaces", "history"], `${locale}: revised capability coverage`);
     assert.match(cards.find(card => card.id === "steep").body, /Steep/);
-    assert.match(cards.find(card => card.id === "steep").body, /model configured|設定背景模型|配置后台模型/);
+    assert.match(cards.find(card => card.id === "steep").body, /On demand|隨叫|随叫/);
+    assert.match(cards.find(card => card.id === "steep").body, /Automatic|自動|自动/);
+    assert.match(cards.find(card => card.id === "steep").body, /model|模型/);
+    assert.doesNotMatch(cards.find(card => card.id === "steep").body, /\boff\b|關閉|关闭/i);
     // Details remain available on demand while the intro stays short.
     assert.match(capabilityArtifacts, /search cues/);
     assert.match(capabilityArtifacts, /搜尋線索/);
@@ -387,6 +390,10 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     assert.match(cards.find(card => card.id === "obsidian").body, /read-only|唯讀|只读/);
     assert.match(cards.find(card => card.id === "obsidian").body, /in the background|在背景|在后台/);
     assert.doesNotMatch(cards.find(card => card.id === "obsidian").body, /on demand|when needed|按需|需要時|需要时/);
+    assert.match(cards.find(card => card.id === "repo-wiki").body, /\/wenlan wiki/);
+    assert.match(cards.find(card => card.id === "repo-wiki").body, /code lines|程式碼行|代码行/);
+    assert.match(cards.find(card => card.id === "lock").body, /review|審核|审核/);
+    assert.match(cards.find(card => card.id === "lock").body, /AI wrote|AI 寫的|AI 写的/);
     assert.match(cards.find(card => card.id === "tools").body, /MCP/);
     assert.match(cards.find(card => card.id === "spaces").body, /Spaces/);
     assert.match(cards.find(card => card.id === "history").body, /page revisions|知識頁.*修訂|知识页.*修订/i);
