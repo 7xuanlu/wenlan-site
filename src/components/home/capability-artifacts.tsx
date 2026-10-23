@@ -17,6 +17,8 @@ const copyByLocale = {
     tools: {"label": "Plugins & MCP", "link": "Connection guide"},
     spaces: { label: "Choose a Space", note: "Retrieve within this scope", names: ["Product design", "Reading & research", "Personal"], pages: ["Reading layout decisions", "Attention and learning", "Weekly reflection"], result: "In this Space" },
     history: {"label": "Version history", "page": "Knowledge page", "memory": "Memory", "pageTitle": "Delivery checklist", "memoryTitle": "Display preference", "previous": "Earlier", "current": "Current", "correction": "Replaces earlier memory", "pageBase": "Pass the tests.", "pageLead": "Pass the tests", "pageAdded": ", then check desktop and mobile views.", "memoryBefore": "Use dark mode by default.", "memoryAfter": "Follow my system theme instead."},
+    repoWiki: { label: "Wiki pages for this repository", relies: "Tied to these lines", diagram: "Diagram", pages: [{ title: "Architecture", nodes: ["App", "Daemon", "Database"], refs: ["src/main.rs:12–48", "crates/server/lib.rs:30–75"] }, { title: "Request flow", nodes: ["Client", "Router", "Handler"], refs: ["crates/server/router.rs:20–64"] }, { title: "Payments retry", nodes: ["Charge", "Retry", "Receipt"], refs: ["src/payments/retry.ts:8–41", "src/payments/charge.ts:55–90"] }] },
+    lock: { label: "Suggested change", page: "Launch plan", status: "You wrote this page · Locked", current: "Current", suggested: "AI suggests", before: "Launch on November 14.", after: "Launch on November 14, after the payment test passes.", approve: "Approve", dismiss: "Dismiss", approved: "Approved. Your page now has the new line.", dismissed: "Dismissed. Your page stays as you wrote it." },
   },
   "zh-TW": {
     steep: {"source": "來源", "memory": "記憶", "flow": "來源與記憶進入 Steep：找出關聯、長出新頁、找出矛盾。能力示意。", "items": [{"id": "link", "label": "找出關聯", "note": "為原記憶補上分類、搜尋線索與圖譜關聯。"}, {"id": "emerge", "label": "長出新頁", "note": "符合條件的相關來源與記憶可整理成有引用的新知識頁：由你的 AI 工具執行 /wenlan steep，或在「自動」模式由頁面合成模型完成。"}, {"id": "conflict", "label": "找出矛盾", "note": "需另行啟用進階整理；受保護的矛盾留待審閱，歷史仍保留。"}], "review": "待審", "shown": "已呈現"},
@@ -25,6 +27,8 @@ const copyByLocale = {
     tools: {"label": "外掛與 MCP", "link": "連接指南"},
     spaces: { label: "選擇 Space", note: "在選定範圍內檢索", names: ["產品設計", "閱讀與研究", "個人生活"], pages: ["閱讀版面決策", "注意力與學習", "每週回顧"], result: "此空間的知識" },
     history: {"label": "版本歷史", "page": "知識頁", "memory": "記憶", "pageTitle": "功能交付準則", "memoryTitle": "顯示偏好", "previous": "先前", "current": "目前", "correction": "取代先前記憶", "pageBase": "通過測試。", "pageLead": "通過測試", "pageAdded": "，再檢查桌面與手機畫面。", "memoryBefore": "預設使用深色模式。", "memoryAfter": "改為跟隨我的系統主題。"},
+    repoWiki: { label: "這個程式庫的 wiki 頁面", relies: "依據這些程式碼行", diagram: "圖表", pages: [{ title: "架構", nodes: ["App", "Daemon", "資料庫"], refs: ["src/main.rs:12–48", "crates/server/lib.rs:30–75"] }, { title: "請求流程", nodes: ["用戶端", "Router", "Handler"], refs: ["crates/server/router.rs:20–64"] }, { title: "付款重試", nodes: ["扣款", "重試", "收據"], refs: ["src/payments/retry.ts:8–41", "src/payments/charge.ts:55–90"] }] },
+    lock: { label: "建議修改", page: "上線計畫", status: "你寫的頁面 · 已上鎖", current: "目前", suggested: "AI 建議", before: "11 月 14 日上線。", after: "11 月 14 日上線，付款測試通過後再發布。", approve: "核准", dismiss: "忽略", approved: "已核准，頁面加上了新的一句。", dismissed: "已忽略，頁面保持你寫的樣子。" },
   },
   "zh-CN": {
     steep: {"source": "来源", "memory": "记忆", "flow": "来源与记忆进入 Steep：找出关联、长出新页、找出矛盾。能力示意。", "items": [{"id": "link", "label": "找出关联", "note": "为原记忆补上分类、搜索线索与图谱关联。"}, {"id": "emerge", "label": "长出新页", "note": "符合条件的相关来源与记忆可整理成有引用的新知识页：由你的 AI 工具运行 /wenlan steep，或在“自动”模式由页面合成模型完成。"}, {"id": "conflict", "label": "找出矛盾", "note": "需另行启用进阶整理；受保护的矛盾留待审核，历史仍保留。"}], "review": "待审", "shown": "已呈现"},
@@ -33,6 +37,8 @@ const copyByLocale = {
     tools: {"label": "插件与 MCP", "link": "连接指南"},
     spaces: { label: "选择 Space", note: "在选定范围内检索", names: ["产品设计", "阅读与研究", "个人生活"], pages: ["阅读版面决策", "注意力与学习", "每周回顾"], result: "此空间的知识" },
     history: {"label": "版本历史", "page": "知识页", "memory": "记忆", "pageTitle": "功能交付准则", "memoryTitle": "显示偏好", "previous": "先前", "current": "当前", "correction": "取代先前记忆", "pageBase": "通过测试。", "pageLead": "通过测试", "pageAdded": "，再检查桌面与手机画面。", "memoryBefore": "默认使用深色模式。", "memoryAfter": "改为跟随我的系统主题。"},
+    repoWiki: { label: "这个代码库的 wiki 页面", relies: "依据这些代码行", diagram: "图表", pages: [{ title: "架构", nodes: ["App", "Daemon", "数据库"], refs: ["src/main.rs:12–48", "crates/server/lib.rs:30–75"] }, { title: "请求流程", nodes: ["客户端", "Router", "Handler"], refs: ["crates/server/router.rs:20–64"] }, { title: "付款重试", nodes: ["扣款", "重试", "收据"], refs: ["src/payments/retry.ts:8–41", "src/payments/charge.ts:55–90"] }] },
+    lock: { label: "建议修改", page: "上线计划", status: "你写的页面 · 已上锁", current: "当前", suggested: "AI 建议", before: "11 月 14 日上线。", after: "11 月 14 日上线，付款测试通过后再发布。", approve: "批准", dismiss: "忽略", approved: "已批准，页面加上了新的一句。", dismissed: "已忽略，页面保持你写的样子。" },
   },
 } as const;
 
@@ -294,6 +300,56 @@ function History({ copy }: { copy: Copy["history"] }) {
   </div>;
 }
 
+function LockIcon() {
+  return <svg className="wc-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Z" /></svg>;
+}
+
+// A repository wiki: each page carries a small diagram and the code lines it relies on.
+function RepoWiki({ copy }: { copy: Copy["repoWiki"] }) {
+  const [selected, setSelected] = useState(0);
+  const page = copy.pages[selected];
+  return <div className="wc-repoWiki">
+    <div className="wc-spaceChoices" role="group" aria-label={copy.label}>
+      {copy.pages.map((item, index) => <button type="button" className="wc-spaceRow" key={item.title} aria-pressed={selected === index} onClick={() => setSelected(index)}>
+        <KnowledgePageIcon /><strong>{item.title}</strong><span className="wc-spaceSelected">{selected === index && <CheckIcon className="wc-icon" />}</span>
+      </button>)}
+    </div>
+    <div className="wc-repoWikiDetail" aria-live="polite">
+      <ol className="wc-repoDiagram" aria-label={`${copy.diagram}: ${page.nodes.join(" → ")}`}>
+        {page.nodes.map((node) => <li key={node}>{node}</li>)}
+      </ol>
+      <small>{copy.relies}</small>
+      <ul className="wc-repoRefs">{page.refs.map((ref) => <li key={ref}><code>{ref}</code></li>)}</ul>
+    </div>
+  </div>;
+}
+
+// Pages the user wrote are locked: an AI change waits for Approve or Dismiss.
+function LockedPage({ copy }: { copy: Copy["lock"] }) {
+  const [decision, setDecision] = useState<"pending" | "approved" | "dismissed">("pending");
+  return <div className="wc-history wc-lock">
+    <h4><KnowledgePageIcon />{copy.page}</h4>
+    <p className="wc-lockStatus"><LockIcon />{copy.status}</p>
+    <ol className="wc-revisions" aria-label={copy.label}>
+      <li>
+        <i aria-hidden="true" />
+        <small>{copy.current}</small>
+        <p>{decision === "approved" ? copy.after : copy.before}</p>
+      </li>
+      {decision !== "approved" && <li data-decision={decision}>
+        <i aria-hidden="true" />
+        <small>{copy.suggested}</small>
+        <p>{copy.before.replace(/[。.]$/, "")}<ins>{copy.after.slice(copy.before.replace(/[。.]$/, "").length)}</ins></p>
+      </li>}
+    </ol>
+    <div className="wc-lockActions" aria-live="polite">
+      {decision === "pending"
+        ? <><button type="button" onClick={() => setDecision("approved")}>{copy.approve}</button><button type="button" onClick={() => setDecision("dismissed")}>{copy.dismiss}</button></>
+        : <p>{decision === "approved" ? copy.approved : copy.dismissed}</p>}
+    </div>
+  </div>;
+}
+
 export function CapabilityArtifact({ id, locale }: { id: string; locale: Locale }) {
   const copy = copyByLocale[locale];
   switch (id) {
@@ -305,6 +361,8 @@ export function CapabilityArtifact({ id, locale }: { id: string; locale: Locale 
     case "tools": return <Tools copy={copy.tools} locale={locale} />;
     case "spaces": return <Spaces copy={copy.spaces} />;
     case "history": return <History copy={copy.history} />;
+    case "repo-wiki": return <RepoWiki copy={copy.repoWiki} />;
+    case "lock": return <LockedPage copy={copy.lock} />;
     default: return null;
   }
 }

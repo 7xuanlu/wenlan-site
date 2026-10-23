@@ -908,6 +908,16 @@ export const enContent = {
               body: "Gather related pages. Follow connections across topics.",
             },
             {
+              id: "repo-wiki",
+              title: "A wiki for your code",
+              body: "Run /wenlan wiki in a repository. Your AI tool writes pages with diagrams, each tied to the code lines it relies on. When that code changes, Steep updates them.",
+            },
+            {
+              id: "lock",
+              title: "Your writing stays yours",
+              body: "Pages you wrote or edited are locked: AI changes wait for your review. Pages AI wrote keep updating on their own.",
+            },
+            {
               id: "tools",
               title: "Connect the AI tools you use",
               body: "Claude Code, Codex, Cursor, and other configured clients can consult your knowledge and save memories through plugins or MCP.",

@@ -371,7 +371,7 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     assert.match(home.redesign.pipeline.intro, /setup|設定|配置/);
 
     const cards = home.redesign.bento.cells;
-    assert.deepEqual(cards.map(({ id }) => id), ["sources", "obsidian", "steep", "topics", "tools", "web-access", "spaces", "history"], `${locale}: revised capability coverage`);
+    assert.deepEqual(cards.map(({ id }) => id), ["sources", "obsidian", "steep", "topics", "repo-wiki", "lock", "tools", "web-access", "spaces", "history"], `${locale}: revised capability coverage`);
     assert.match(cards.find(card => card.id === "steep").body, /Steep/);
     assert.match(cards.find(card => card.id === "steep").body, /On demand|隨叫|随叫/);
     assert.match(cards.find(card => card.id === "steep").body, /Automatic|自動|自动/);
@@ -390,6 +390,10 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     assert.match(cards.find(card => card.id === "obsidian").body, /read-only|唯讀|只读/);
     assert.match(cards.find(card => card.id === "obsidian").body, /in the background|在背景|在后台/);
     assert.doesNotMatch(cards.find(card => card.id === "obsidian").body, /on demand|when needed|按需|需要時|需要时/);
+    assert.match(cards.find(card => card.id === "repo-wiki").body, /\/wenlan wiki/);
+    assert.match(cards.find(card => card.id === "repo-wiki").body, /code lines|程式碼行|代码行/);
+    assert.match(cards.find(card => card.id === "lock").body, /review|審核|审核/);
+    assert.match(cards.find(card => card.id === "lock").body, /AI wrote|AI 寫的|AI 写的/);
     assert.match(cards.find(card => card.id === "tools").body, /MCP/);
     assert.match(cards.find(card => card.id === "spaces").body, /Spaces/);
     assert.match(cards.find(card => card.id === "history").body, /page revisions|知識頁.*修訂|知识页.*修订/i);

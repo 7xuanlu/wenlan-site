@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "e8ee9137934afc897ffe09a9c36a990a6a418bad90ac58bf470948e9c4020bf7",
+    sourceHash: "2b6c356971957b219457fb9dfc26771fee5f36dd0e6337e88242a1852cca4d5a",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库与 LLM Wiki",
@@ -901,6 +901,16 @@ export const zhCNContent = {
               id: "topics",
               title: "主题总览",
               body: "聚合相关笔记，沿着主题之间的关联继续探索。",
+            },
+            {
+              id: "repo-wiki",
+              title: "替代码库写 wiki",
+              body: "在代码库里运行 /wenlan wiki，AI 工具会写出带图表的页面，每页都连到它依据的代码行。代码改了，Steep 会跟着更新。",
+            },
+            {
+              id: "lock",
+              title: "你写的，由你决定",
+              body: "你写过或改过的页面自动上锁，AI 要改会先给你审核。AI 写的页面照常自己更新。",
             },
             {
               id: "tools",

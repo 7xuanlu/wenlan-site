@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "e8ee9137934afc897ffe09a9c36a990a6a418bad90ac58bf470948e9c4020bf7",
+    sourceHash: "2b6c356971957b219457fb9dfc26771fee5f36dd0e6337e88242a1852cca4d5a",
     content: {
       seo: {
         title: "文瀾 Wenlan｜個人 AI 知識庫與 LLM Wiki",
@@ -901,6 +901,16 @@ export const zhTWContent = {
               id: "topics",
               title: "主題總覽",
               body: "聚合相關筆記，沿著主題之間的關聯繼續探索。",
+            },
+            {
+              id: "repo-wiki",
+              title: "替程式庫寫 wiki",
+              body: "在程式庫裡執行 /wenlan wiki，AI 工具會寫出附圖表的頁面，每頁都連到它依據的程式碼行。程式碼改了，Steep 會跟著更新。",
+            },
+            {
+              id: "lock",
+              title: "你寫的，由你決定",
+              body: "你寫過或改過的頁面自動上鎖，AI 要改會先給你審核。AI 寫的頁面照常自己更新。",
             },
             {
               id: "tools",
