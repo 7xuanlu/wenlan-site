@@ -276,18 +276,18 @@ test("hero leads with useful outcomes and describes knowledge that can be revise
   const expected = {
     en: {
       eyebrow: "A personal knowledge base, maintained with AI",
-      headline: ["Bring your knowledge", "to life."],
-      description: "Wenlan is your personal knowledge base, maintained with AI. Connect notes, files, and chats into knowledge you and your AI tools can find and use.",
+      headline: ["Turn your notes, files, and AI chats into a", "living wiki."],
+      description: "Wenlan pages cite their sources and update when those change. Claude Code, Codex, and Cursor can search them and put them to work. Citations are checked against sources, and your own writing stays yours.",
     },
     "zh-TW": {
       eyebrow: "AI 協助維護的個人知識庫",
-      headline: ["用你的知識，", "找到答案、完成工作。"],
-      description: "由 AI 協助維護的個人知識庫。文瀾將筆記、文件與對話連成可持續更新的知識，供你與 AI 查找、使用。",
+      headline: ["筆記、文件、AI 對話，整理成", "持續更新的知識庫。"],
+      description: "文瀾的筆記保留來源連結，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，讓知識活用起來。引用的句子都對照過來源，你自己寫的內容仍由你作主。",
     },
     "zh-CN": {
       eyebrow: "AI 协助维护的个人知识库",
-      headline: ["用你的知识，", "找到答案、完成工作。"],
-      description: "由 AI 协助维护的个人知识库。文澜将笔记、文档与对话连成可持续更新的知识，供你与 AI 查找、使用。",
+      headline: ["笔记、文档、AI 对话，整理成", "持续更新的知识库。"],
+      description: "文澜的笔记保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，让知识活用起来。引用的句子都对照过来源，你自己写的内容仍由你做主。",
     },
   };
   for (const [locale, dictionary] of Object.entries(dictionaryByLocale)) {

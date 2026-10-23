@@ -142,6 +142,11 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
                 GitHub
               </a>
             }
+            trustNote={
+              <ul className="home-hero-trust" aria-label={locale === "en" ? "Why you can try it" : locale === "zh-TW" ? "可以放心試用" : "可以放心试用"}>
+                {story.heroTrust.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            }
             sectionTitle={demoTitleByLocale[locale]}
             locale={locale}
             videoUrl={demoVideo.videoUrl}

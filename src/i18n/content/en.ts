@@ -526,9 +526,9 @@ export const enContent = {
       redesign: {
         hero: {
           eyebrow: "A personal knowledge base, maintained with AI",
-          headline: { pre: "Bring your knowledge", emphasis: "to life.", post: "" },
+          headline: { pre: "Turn your notes, files, and AI chats into a", emphasis: "living wiki.", post: "" },
           description:
-            "Wenlan is your personal knowledge base, maintained with AI. Connect notes, files, and chats into knowledge you and your AI tools can find and use.",
+            "Wenlan pages cite their sources and update when those change. Claude Code, Codex, and Cursor can search them and put them to work. Citations are checked against sources, and your own writing stays yours.",
           worksWithLabel: "Works with",
           worksWithNote: "Read from your Obsidian vault without changing your files.",
         },
@@ -1902,7 +1902,7 @@ export const enContent = {
     content: {
       ariaLabel: "Site footer",
       brand: "Wenlan",
-      tagline: "Your knowledge, kept up to date with AI.",
+      tagline: "A living personal wiki. AI organizes. You stay in control.",
       groups: [
         {
           id: "product",

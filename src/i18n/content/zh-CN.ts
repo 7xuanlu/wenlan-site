@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "2b6c356971957b219457fb9dfc26771fee5f36dd0e6337e88242a1852cca4d5a",
+    sourceHash: "e8c79e73da9210c03f8ef9594c3c9f43cd1b49f2b416a232b2ba148e7a849ed3",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库与 LLM Wiki",
@@ -521,9 +521,9 @@ export const zhCNContent = {
       redesign: {
         hero: {
           eyebrow: "AI 协助维护的个人知识库",
-          headline: { pre: "用你的知识，", emphasis: "找到答案、完成工作。", post: "" },
+          headline: { pre: "笔记、文档、AI 对话，整理成", emphasis: "持续更新的知识库。", post: "" },
           description:
-            "由 AI 协助维护的个人知识库。文澜将笔记、文档与对话连成可持续更新的知识，供你与 AI 查找、使用。",
+            "文澜的笔记保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，让知识活用起来。引用的句子都对照过来源，你自己写的内容仍由你做主。",
           worksWithLabel: "可搭配",
           worksWithNote: "可读取 Obsidian 库，保留原文。",
         },
@@ -1893,11 +1893,11 @@ export const zhCNContent = {
   },
   footer: {
     status: "translated",
-    sourceHash: "acd65e32a1afb9646e8a6861f13fd84e74d061ef10201cd15b14c04a5cab0d84",
+    sourceHash: "d609e0563ea3802525fae21b9fd1ff96653775dc415cf2a01ec626f89b0ad116",
     content: {
       ariaLabel: "网站页脚",
       brand: "Wenlan",
-      tagline: "让 AI 持续整理、更新你的知识。",
+      tagline: "持续更新的个人知识库。AI 帮你整理，你保有主导权。",
       groups: [
         {
           id: "product",

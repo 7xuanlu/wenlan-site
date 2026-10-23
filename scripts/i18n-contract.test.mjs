@@ -2549,9 +2549,9 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
       content.enContent.home.content.redesign.hero.description,
     ],
     [
-      "Bring your knowledge",
-      "to life.",
-      "Wenlan is your personal knowledge base, maintained with AI. Connect notes, files, and chats into knowledge you and your AI tools can find and use.",
+      "Turn your notes, files, and AI chats into a",
+      "living wiki.",
+      "Wenlan pages cite their sources and update when those change. Claude Code, Codex, and Cursor can search them and put them to work. Citations are checked against sources, and your own writing stays yours.",
     ],
   );
 
@@ -2562,9 +2562,9 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
       staleHomePhrase: /活個人知識庫|AI-native/,
       hero: {
         eyebrow: /AI 協助維護的個人知識庫/,
-        pre: /用你的知識，/,
-        emphasis: /找到答案、完成工作。/,
-        description: "由 AI 協助維護的個人知識庫。文瀾將筆記、文件與對話連成可持續更新的知識，供你與 AI 查找、使用。",
+        pre: /筆記、文件、AI 對話，整理成/,
+        emphasis: /持續更新的知識庫。/,
+        description: "文瀾的筆記保留來源連結，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，讓知識活用起來。引用的句子都對照過來源，你自己寫的內容仍由你作主。",
       },
     },
     "zh-CN": {
@@ -2573,9 +2573,9 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
       staleHomePhrase: /活个人知识库|AI-native/,
       hero: {
         eyebrow: /AI 协助维护的个人知识库/,
-        pre: /用你的知识，/,
-        emphasis: /找到答案、完成工作。/,
-        description: "由 AI 协助维护的个人知识库。文澜将笔记、文档与对话连成可持续更新的知识，供你与 AI 查找、使用。",
+        pre: /笔记、文档、AI 对话，整理成/,
+        emphasis: /持续更新的知识库。/,
+        description: "文澜的笔记保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，让知识活用起来。引用的句子都对照过来源，你自己写的内容仍由你做主。",
       },
     },
   };
@@ -2602,7 +2602,7 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
   }
 });
 
-test("Chinese hero leads with outcomes and setup begins with a concrete decision", async () => {
+test("Chinese hero names the living knowledge base and setup begins with a concrete decision", async () => {
   const { content } = await loadI18nModules();
 
   for (const locale of ["zh-TW", "zh-CN"]) {
@@ -2610,7 +2610,7 @@ test("Chinese hero leads with outcomes and setup begins with a concrete decision
 
     assert.match(
       dictionary.home.content.redesign.hero.headline.emphasis,
-      /找到答案、完成工作。/,
+      /持續更新的知識庫。|持续更新的知识库。/,
       `${locale}.home.hero.headline.benefit`,
     );
     assert.match(

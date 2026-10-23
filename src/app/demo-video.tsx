@@ -8,6 +8,7 @@ import type { Locale } from "@/i18n/locales";
 type DemoVideoProps = {
   primaryAction: ReactNode;
   sourceAction?: ReactNode;
+  trustNote?: ReactNode;
   sectionTitle: string;
   videoUrl: string;
   posterUrl: string;
@@ -17,7 +18,7 @@ type DemoVideoProps = {
   caption: string;
 };
 
-export function DemoVideo({ primaryAction, sourceAction, sectionTitle, videoUrl, posterUrl, playLabel, title, locale, caption }: DemoVideoProps) {
+export function DemoVideo({ primaryAction, sourceAction, trustNote, sectionTitle, videoUrl, posterUrl, playLabel, title, locale, caption }: DemoVideoProps) {
   const [expanded, setExpanded] = useState(false);
   const [attempt, setAttempt] = useState(0);
   const [errorReason, setErrorReason] = useState<string>();
@@ -79,6 +80,7 @@ export function DemoVideo({ primaryAction, sourceAction, sectionTitle, videoUrl,
         {primaryAction}
         {sourceAction}
       </div>
+      {trustNote}
       <div className="home-hero-video flex items-center justify-end">
         <button ref={triggerRef} type="button" onClick={expanded ? closeVideo : startPlayback} aria-controls="demo-player" aria-expanded={expanded} aria-label={expanded ? copy.close : playLabel} className="home-video-entry inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 px-0 text-sm font-medium leading-6 text-[var(--o-text-secondary)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]">
           <span aria-hidden="true" className="home-video-play grid size-4 shrink-0 place-items-center">
