@@ -5,7 +5,7 @@ const copyByLocale = {
   en: {
     update: "This update", retained: "Original decision kept", decision: "Keep the text’s left edge fixed when the sidebar opens.",
     added: "Added to the page", result: "Toggle the sidebar across all four reading views and check that sentence starts stay in place.",
-    sources: "Supported by", web: "W3C reflow", file: "Reading-layout review.md", before: "View before the update",
+    sources: "Supported by", web: "W3C reflow", file: "reading-review.md", before: "View before the update",
     current: "App capture · After the update", previous: "App capture · Before the update", open: "Open full capture",
     note: "Recorded App views from the demo library. Excerpts explain the change.",
     alt: "Agent Loop in Wenlan: W3C reflow and a reading-layout review file now support the existing sidebar design decision.",
@@ -66,7 +66,7 @@ export function AgentLoopUpdate({ locale }: { locale: Locale }) {
               <dt className="text-xs font-medium text-[var(--o-text-secondary)]">{copy.sources}</dt>
               <dd className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-[var(--o-warm)]">
                 <a href="https://www.w3.org/WAI/WCAG22/Understanding/reflow.html" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1.5 underline decoration-current/40 underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2"><SourceIcon kind="url" />{copy.web}</a>
-                <a href="/images/home/personal-knowledge/reading-review.md" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1.5 underline decoration-current/40 underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2"><SourceIcon kind="file" />{copy.file}</a>
+                <a href={locale === "en" ? "/images/home/personal-knowledge/reading-review.en.md" : "/images/home/personal-knowledge/reading-review.md"} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1.5 underline decoration-current/40 underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2"><SourceIcon kind="file" />{copy.file}</a>
               </dd>
             </div>
             <div className="rounded-lg bg-[var(--o-bg-alt)] p-4">
