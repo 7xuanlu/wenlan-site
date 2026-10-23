@@ -1995,7 +1995,7 @@ test("AI knowledge-base tool-selection guide is available in all acquisition loc
     "How to Choose an AI Knowledge Base Tool: 8 Tests That Matter",
   );
   assert.equal(english.publishedAt, "2026-08-02");
-  assert.equal(english.updatedAt, "2026-09-07");
+  assert.equal(english.updatedAt, "2026-10-23");
   assert.ok(english.keywords.includes("AI knowledge base tools"));
   assert.equal(english.heroBullets.length, 3);
   assert.equal(english.sections[2]?.bullets?.length, 8);
@@ -2027,7 +2027,7 @@ test("AI knowledge-base tool-selection guide is available in all acquisition loc
     assert.ok(article);
     assert.equal(article.title, expected.title);
     assert.equal(article.publishedAt, "2026-08-02");
-    assert.equal(article.updatedAt, "2026-09-07");
+    assert.equal(article.updatedAt, "2026-10-23");
     assert.ok(article.keywords.includes(expected.keyword));
     const text = JSON.stringify(article);
     assert.match(text, new RegExp(expected.source));

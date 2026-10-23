@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "2b2d5c25d3d5622c361bfe49b2a06dc29d2ea03fe2111d80e84122e9095e069d",
+    sourceHash: "640b7c7175d47510cb05311f4a06ddbcfcda9a009493cd3e297111b516c07ba1",
     content: {
       seo: {
         title: "文瀾 Wenlan｜個人 AI 知識庫與 LLM Wiki",
@@ -489,17 +489,17 @@ export const zhTWContent = {
           {
             id: "tools",
             q: "哪些 AI 工具可以搭配 Wenlan？",
-            a: "Claude Code 和 Codex 有 Wenlan 外掛；Cursor、Claude Desktop、VS Code、Muse Code 等本地工具透過 MCP 連接。ChatGPT、Claude.ai、Muse 等瀏覽器工具使用 OAuth 遠端連線：先選擇分享整個資料庫或一個 Space、批准配對，使用時保持 Wenlan 在線，也能在 App 中撤銷存取。Obsidian 則是唯讀的來源匯入方式。",
+            a: "Claude Code 和 Codex 有 Wenlan 外掛；Cursor、Claude Desktop、VS Code、Muse Code 等本地工具透過 MCP 連接。ChatGPT、Claude.ai、Muse 等瀏覽器工具使用 OAuth 遠端連線：先選擇分享整個資料庫或一個 Space，批准配對時決定只能搜尋或可搜尋和寫入，使用時保持 Wenlan 在線，也能在 App 中撤銷存取。Obsidian 則是唯讀的來源匯入方式。",
           },
           {
             id: "not-notes",
             q: "Wenlan 能取代 Notion 或 Obsidian 嗎？",
-            a: "不能。Wenlan 不取代你用來寫作的 App。它可以把 Markdown 檔案、text、可抽取文字的 PDF、資料夾和 Obsidian 庫登錄為來源。Obsidian 輸入是唯讀，並在背景持續跟進，約每 30 秒檢查一次；Wenlan 自己的筆記仍是 ~/.wenlan/ 底下可讀的 Markdown。",
+            a: "不能。Wenlan 不取代你用來寫作的 App。它可以把 Markdown 檔案、text、可抽取文字的 PDF、資料夾、Obsidian 庫和 Logseq 圖譜登錄為來源。資料夾、筆記庫和圖譜可持續同步，也可只匯入一次。Obsidian 與 Logseq 輸入是唯讀；持續同步時會在背景跟進，約每 30 秒檢查一次；Wenlan 自己的筆記仍是 ~/.wenlan/ 底下可讀的 Markdown。",
           },
           {
             id: "setup",
             q: "我要怎麼設定？",
-            a: "先安裝 Wenlan，再連接一個 AI 工具。Claude Code 和 Codex 外掛提供 handoff、recall 等指令，其他本地工具則透過 MCP 連接。保存與搜尋紀錄不需要模型 API 金鑰；整理成筆記時，會使用你設定的本地或雲端模型。入門指南會帶你完成所選工具的設定。 瀏覽器工具使用 OAuth 網頁存取，需由你批准連線，並選擇分享整個資料庫或一個 Space，也能在 App 中撤銷存取。",
+            a: "先安裝 Wenlan，再連接一個 AI 工具。Claude Code 和 Codex 外掛提供 handoff、recall 等指令，其他本地工具則透過 MCP 連接。保存與搜尋紀錄不需要模型 API 金鑰。Steep 把素材整理成頁面：預設「隨叫」，由已連接的 AI 工具整理；也可改用「自動」，由你設定的本地或雲端模型整理。入門指南會帶你完成所選工具的設定。 瀏覽器工具使用 OAuth 網頁存取，需由你批准連線，並選擇分享整個資料庫或一個 Space，也能在 App 中撤銷存取。",
           },
           {
             id: "platforms",
@@ -559,7 +559,7 @@ export const zhTWContent = {
           ],
           "detailsLabel": "工作方式與來源",
           "helpLabel": "更多背景",
-          "accessNote": "Wenlan 需先連接來源與模型、建立首批頁面。之後可用桌面 App，或 plugin／CLI 與本機 daemon 接著使用。",
+          "accessNote": "Wenlan 需先連接來源，再由模型或你的 AI 工具建立首批頁面。之後可用桌面 App，或 plugin／CLI 與本機 daemon 接著使用。",
           "generations": [
             {
               "id": "wiki-graveyard",
@@ -603,8 +603,8 @@ export const zhTWContent = {
                 ],
                 "profile": [
                   "文件與保存的決策編成附引用的 Wiki；從已連接的 AI 工具找回前次結論與依據，接著工作。",
-                  "新決策可補入既有頁面；已連接檔案或記憶內容修改後，背景模型刷新符合條件的受影響頁面。",
-                  "來源檔不回寫；AI 更新你編輯過的知識頁前先提出修訂，由你接受或拒絕，變更歷程可查。"
+                  "新決策可補入既有頁面；已連接檔案或記憶內容修改後，Steep 會刷新符合條件的受影響頁面，可在背景進行，也可交給你的 AI 工具。",
+                  "來源檔不回寫；你寫過或改過的知識頁預設上鎖，AI 要改先提出修訂，由你接受或拒絕，變更歷程可查。"
                 ],
                 "emphasis": []
               }
@@ -672,7 +672,7 @@ export const zhTWContent = {
                 ],
                 "profile": [
                   "設定完成後，在已連接的 AI 工具保存、查找知識；本機背景服務運作，不必開桌面 App。",
-                  "修改、刪除記憶或接受取代修訂後，自動標記引用它的既有頁面；背景服務再刷新符合條件的頁面。",
+                  "修改、刪除記憶或接受取代修訂後，自動標記引用它的既有頁面；Steep 再刷新符合條件的頁面，可在背景進行，也可交給你的 AI 工具。",
                   "AI 想更新你親自寫過的頁面時，先提出修訂，原文等你批准才改。"
                 ],
                 "emphasis": []
@@ -716,7 +716,7 @@ export const zhTWContent = {
                 ],
                 "profile": [
                   "把 vault 接成唯讀來源；原筆記照寫，Wenlan 另建給你和 AI 使用的知識頁。",
-                  "完成 Wenlan 設定後，背景追蹤已連接來源、刷新符合條件的頁面，不改寫原本的 vault。",
+                  "完成 Wenlan 設定後，背景追蹤已連接來源，再由 Steep 刷新符合條件的頁面，不改寫原本的 vault。",
                   "Wenlan 不回寫 vault；你親自改過的文瀾頁面，也先提出修訂再決定。"
                 ],
                 "emphasis": []
@@ -764,7 +764,7 @@ export const zhTWContent = {
                 ],
                 "profile": [
                   "在已連接的 AI 工具保存、取用知識；文件與決策留在本機，不必換編輯器。",
-                  "來源變更後，背景追蹤受影響頁面並刷新；你寫過的頁面轉成待審修訂。",
+                  "來源變更後，Wenlan 在背景標記受影響頁面，再由 Steep 刷新；你寫過的頁面轉成待審修訂。",
                   "你判斷是否接受頁面修訂；機器維護頁面照設定更新，保留變更歷程。"
                 ],
                 "emphasis": []
@@ -804,7 +804,7 @@ export const zhTWContent = {
                 ],
                 "profile": [
                   "將結論與決策存進本機知識庫，再由已連接的 AI 工具找回，用於下一次工作。",
-                  "背景追蹤來源變化，刷新符合條件的既有 Wiki 頁，而不只是換一份來源副本。",
+                  "Wenlan 在背景追蹤來源變化，再由 Steep 刷新符合條件的既有 Wiki 頁，而不只是換一份來源副本。",
                   "你親自寫過的頁面先保留原文，AI 提出修訂，由你選擇接受或保留。"
                 ],
                 "emphasis": []
@@ -885,7 +885,7 @@ export const zhTWContent = {
             {
               id: "sources",
               title: "文件、對話和網頁，都有位置",
-              body: "匯入檔案與 AI 對話，也能透過工具保存網頁內容與原網址。",
+              body: "匯入檔案、資料夾、Logseq 圖譜與 AI 對話，也能透過工具保存網頁內容與原網址。",
             },
             {
               id: "obsidian",
@@ -895,7 +895,7 @@ export const zhTWContent = {
             {
               id: "steep",
               title: "Steep 沉澱",
-              body: "設定背景模型後，Steep 持續整理。",
+              body: "Steep 把素材整理成頁面。預設「隨叫」，由你的 AI 工具順手整理；「自動」則用設定好的模型在背景整理。",
             },
             {
               id: "topics",
@@ -910,7 +910,7 @@ export const zhTWContent = {
             {
               id: "web-access",
               title: "Web Access 網頁存取",
-              body: "讓支援的網頁 AI 使用電腦上的文瀾知識，使用時保持 Wenlan 在線。",
+              body: "讓支援的網頁 AI 搜尋電腦上的文瀾知識，經你允許也能寫入；使用時保持 Wenlan 在線。",
             },
             {
               id: "spaces",

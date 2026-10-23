@@ -148,10 +148,11 @@ const pluginDailyCommands = `/wenlan          status, or setup when Wenlan is no
 
 # Say these after /wenlan; they stay out of the slash menu
 /wenlan setup    set up or repair Wenlan
+/wenlan steep    write pages from new material and update out of date ones
 /wenlan distill  synthesize or refresh notes
 /wenlan pages    list or open notes
 /wenlan lint     run read-only memory and note health diagnostics
-/wenlan map      write or refresh repository orientation notes tied to code
+/wenlan wiki     write a wiki about this repository, each page tied to its code
 /wenlan curate   audit pending captures or revisions
 /wenlan forget   delete a memory by ID`;
 
@@ -520,7 +521,7 @@ export const docPages: DocPage[] = [
       "Claude Code workflow",
       "MCP daily workflow",
     ],
-    updatedAt: "2026-07-24",
+    updatedAt: "2026-10-23",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
@@ -580,12 +581,13 @@ export const docPages: DocPage[] = [
       {
         heading: "Maintain memory when it grows",
         body: [
-          "/wenlan curate is for deep audits. /wenlan distill turns related memories into notes.",
+          "/wenlan curate is for deep audits. /wenlan steep turns new material into pages and brings out of date pages up to date. /wenlan distill turns related memories into notes.",
           "Use them after meaningful project work, before a new phase, or when recall starts surfacing repeated or stale context.",
         ],
         bullets: [
           "/wenlan curate captures: walk unconfirmed memories when you want the full queue.",
           "/wenlan curate revisions: accept or dismiss pending memory revisions.",
+          "/wenlan steep: write pages from new material and update out of date ones with your AI tool.",
           "/wenlan distill: organize related memories into readable notes.",
           "/wenlan pages: list recent notes or open a matching note in your editor.",
         ],
@@ -1276,7 +1278,7 @@ export const docPages: DocPage[] = [
       "capture handoff recall",
       "distill review",
     ],
-    updatedAt: "2026-10-19",
+    updatedAt: "2026-10-23",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
@@ -1305,10 +1307,11 @@ export const docPages: DocPage[] = [
         bullets: [
           "/wenlan curate captures: walk unconfirmed captures; bare /wenlan curate only prints help.",
           "/wenlan curate revisions: walk pending revisions when /brief shows more than the top few.",
+          "/wenlan steep: write pages from material no page uses yet, then bring out of date pages up to date, using your AI tool. This is how pages are made in On demand, the default steeping mode for new installs.",
           "/wenlan distill: organize related memories into notes.",
           "/wenlan pages: list recent notes or open a matching note in your editor.",
           "/wenlan lint: run the canonical read-only memory and note health report.",
-          "/wenlan map: write repository orientation pages tied to the code lines they describe, so a later reader knows where to look and whether the page is still current.",
+          "/wenlan wiki: read the repository, plan the pages a newcomer needs, and write the missing ones, each tied to the code lines it relies on. It writes new pages only; /wenlan steep keeps them current. It replaced /wenlan map in v0.20.0, with no alias.",
           "/wenlan forget: delete a memory by ID when it should not remain in Wenlan.",
         ],
       },
@@ -1322,6 +1325,7 @@ export const docPages: DocPage[] = [
           "capture: store a durable memory.",
           "recall: search for relevant memories.",
           "distill: organize or refresh notes.",
+          "steep: list the pages waiting for steep and the material no page uses yet, then claim and commit each rewrite.",
           "list_pending and confirm_memory: inspect and accept pending captures.",
           "forget: delete a memory.",
           "doctor: diagnose daemon and setup state.",
@@ -1331,7 +1335,7 @@ export const docPages: DocPage[] = [
         heading: "How to choose",
         body: [
           "Start with /brief in Claude Code or context in another MCP client. Save durable knowledge with capture. Search history with recall. Close a serious session with /handoff.",
-          "Use /wenlan lint, /wenlan curate, /wenlan distill, and /wenlan pages when memory needs diagnosis, maintenance, or a topic deserves a note.",
+          "Use /wenlan steep to turn new material into pages and bring out of date ones up to date. Use /wenlan wiki to write a wiki for the repository you are in. Use /wenlan lint, /wenlan curate, /wenlan distill, and /wenlan pages when memory needs diagnosis, maintenance, or a topic deserves a note.",
         ],
       },
     ],
@@ -1354,7 +1358,7 @@ export const docPages: DocPage[] = [
       "Wenlan /wenlan",
       "Claude Code MCP memory",
     ],
-    updatedAt: "2026-10-19",
+    updatedAt: "2026-10-23",
     author: DEFAULT_AUTHOR,
     readingTime: "6 min read",
     summary: [
@@ -1384,7 +1388,7 @@ export const docPages: DocPage[] = [
         heading: "Daily command surface",
         body: [
           "Most sessions need only /brief at the start, /capture when something durable happens, /recall for a specific lookup, and /handoff before the session ends.",
-          "Everything else goes through /wenlan. Type /wenlan followed by what you want in plain words, such as /wenlan lint or /wenlan open my note on the release plan. Setup, distill, pages, lint, curate, and forget stay out of the slash menu but still run this way.",
+          "Everything else goes through /wenlan. Type /wenlan followed by what you want in plain words, such as /wenlan lint or /wenlan open my note on the release plan. Setup, steep, distill, wiki, pages, lint, curate, and forget stay out of the slash menu but still run this way.",
           "/handoff also brings the notes the session used up to date. It reads each note first and writes only when the session changed what it should say, so an edit made in the meantime is not overwritten.",
         ],
         code: {
@@ -1404,6 +1408,7 @@ export const docPages: DocPage[] = [
         body: [
           "By default, /wenlan configures local memory. That means no model download, no API key, and no cloud sync requirement for the basic memory loop.",
           "The daemon stores, embeds, deduplicates, and serves hybrid search. Claude Code skills can still classify captures, write handoffs, and organize notes through the agent-side model fallback because the agent already has language judgment in the active session.",
+          "The desktop app calls this steeping mode On demand, the default for new installs: Claude Code steeps as it saves or writes, and /wenlan steep writes pages from new material and brings out of date ones up to date. Switch to Automatic in Settings when you want a configured model to do it in the background.",
         ],
       },
       {
@@ -1617,7 +1622,7 @@ export const docPages: DocPage[] = [
       "Wenlan MCP update",
       "Wenlan setup update",
     ],
-    updatedAt: "2026-10-19",
+    updatedAt: "2026-10-23",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
@@ -1670,9 +1675,20 @@ export const docPages: DocPage[] = [
         },
       },
       {
+        heading: "Changes in v0.20.0",
+        body: [
+          "/wenlan map is now /wenlan wiki ($wenlan wiki in Codex), with no alias. It plans the repository's pages and writes the missing ones; /wenlan steep keeps them current.",
+          "Steeping is Automatic or On demand. New installs start On demand, where your AI tool steeps as it works and /wenlan steep finishes the rest. Lock pages I've written is on for new installs; a configuration written before v0.20.0 keeps it off until you turn it on.",
+        ],
+        code: {
+          label: "Old to new",
+          code: "/wenlan map  ->  /wenlan wiki\n$wenlan map  ->  $wenlan wiki  (Codex)",
+        },
+      },
+      {
         heading: "Current runtime shape",
         body: [
-          "The current public docs describe the v0.19.3 runtime shape: Claude Code and Codex plugins, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed notes with revisions, session handoffs, status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
+          "The current public docs describe the v0.20.0 runtime shape: Claude Code and Codex plugins, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed notes with revisions, Automatic and On demand steeping, session handoffs, status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
           "The biggest practical upgrade checks are platform support, package path alignment, and spaces. Confirm your machine's service manager, confirm MCP clients launch the connector under ~/.wenlan/bin, and confirm the active space is the one you expect.",
         ],
         link: {
@@ -2318,7 +2334,7 @@ export const docPages: DocPage[] = [
       "AI memory provenance",
       "Wenlan distill",
     ],
-    updatedAt: DOCS_UPDATED_AT,
+    updatedAt: "2026-10-23",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
@@ -2343,12 +2359,12 @@ export const docPages: DocPage[] = [
       {
         heading: "Distill and open",
         body: [
-          "/wenlan distill asks Wenlan to organize or rebuild notes from related memories. /wenlan pages lists recent notes or opens a matching note in your editor.",
+          "/wenlan steep writes pages from material no page uses yet and brings out of date pages up to date. It runs in your AI tool On demand, the default for new installs, or in the background with a configured model when steeping is Automatic. /wenlan distill asks Wenlan to organize or rebuild notes from related memories. /wenlan pages lists recent notes or opens a matching note in your editor.",
           "Use distillation before a new project phase, after a long sprint, or when recall keeps surfacing the same cluster of memories.",
         ],
         code: {
           label: "Claude Code",
-          code: "/wenlan distill\n/wenlan pages <query>",
+          code: "/wenlan steep\n/wenlan distill\n/wenlan pages <query>",
         },
       },
       {
@@ -2359,9 +2375,17 @@ export const docPages: DocPage[] = [
         ],
       },
       {
+        heading: "Checks at write time",
+        body: [
+          "When an AI tool writes a page with numbered [n] citations, Wenlan checks that each cited source supports the sentence before it saves the page, and refuses the write when too few cited sentences match. The check compares the cited text with the sentence; it is not a proof that the page is correct.",
+          "Pages can hold Mermaid diagrams, which the app draws in place. When an AI tool writes a page, Wenlan also checks each diagram for common mistakes and names the line to fix.",
+        ],
+      },
+      {
         heading: "Edit carefully",
         body: [
           "The Markdown files are readable and can be inspected with normal tools. If you hand-edit a note, treat it like a human-owned artifact.",
+          "With Lock pages I've written on in the steeping settings, the default for new installs, a page you write or edit is locked for review: AI changes to it wait as revisions for you to accept or skip, while pages AI wrote keep updating.",
           "When you need the system to learn something new, prefer capturing the atomic fact or correction too. That keeps search, provenance, and future notes aligned.",
         ],
       },
@@ -2530,7 +2554,7 @@ export const docPages: DocPage[] = [
       "Qwen3-4B",
       "Anthropic API key",
     ],
-    updatedAt: DOCS_UPDATED_AT,
+    updatedAt: "2026-10-23",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
@@ -2575,6 +2599,7 @@ export const docPages: DocPage[] = [
         body: [
           "Claude Code skills can classify captures, write handoffs, and organize notes from inside the active agent session. That is why Wenlan remains useful before you configure a daemon model.",
           "The daemon stays the store and retrieval layer. The agent can supply language judgment when it is already in the work context.",
+          "In the desktop app this is the On demand steeping mode, the default for new installs: your AI tool steeps as it saves or writes, and /wenlan steep finishes the rest. Automatic hands the same work to the models you assign here, in the background.",
         ],
         code: {
           label: "Local mode fallback",
@@ -2756,7 +2781,7 @@ export const docPages: DocPage[] = [
       "local-first privacy",
       "deletion controls",
     ],
-    updatedAt: "2026-10-06",
+    updatedAt: "2026-10-23",
     author: DEFAULT_AUTHOR,
     readingTime: "7 min read",
     summary: [
@@ -2826,7 +2851,7 @@ export const docPages: DocPage[] = [
         heading: "Authenticated Web Access (released desktop feature)",
         body: [
           "Released desktop Web Access uses the authenticated relay at https://relay.wenlan.app/mcp. You authorize a connected AI client through OAuth and approve its pairing request in Wenlan on your device. You choose what web apps can search: the whole library (every Space, plus everything not in a Space) or one existing Space. When you share one Space, other and newly created Spaces stay private. Changing what is shared ends existing connections, so connected apps must pair again. This custom MCP connection is not a claim that Wenlan is listed in the ChatGPT Apps Directory.",
-          "Your knowledge library stays on your device; the relay keeps control-plane records so it can authenticate, route, and limit sessions. The public MCP endpoint is https://relay.wenlan.app/mcp. It exposes only three query tools — brief, recall, and get_page_sources — and recall still records the query and accessed memory identifiers in local activity history. The connected device must stay online so the relay can route each request to it and return the result.",
+          "Your knowledge library stays on your device; the relay keeps control-plane records so it can authenticate, route, and limit sessions. The public MCP endpoint is https://relay.wenlan.app/mcp. When you allow an app you choose what it can do. Search only, the default, exposes three query tools: brief, recall, and get_page_sources. Search and write also lets the app read, list, capture, write, rename, forget, and delete memories and pages in what you share, and the text it writes passes through the relay. Writes are marked so the AI app can ask you before making them; whether it asks is up to that app. In both cases recall still records the query and accessed memory identifiers in local activity history. The connected device must stay online so the relay can route each request to it and return the result.",
           "Requests and results pass through Cloudflare's relay infrastructure to the connected AI client and, where applicable, its provider. Cloudflare and Wenlan's relay administrator can read requests and results while processing them. HTTPS protects traffic in transit; it is not end-to-end encryption that excludes these operators. Do not connect a Space containing credentials or other restricted text: the connector does not classify or redact sensitive content embedded in knowledge.",
           "Technical expiry only denies further access and is not a physical-deletion time. Cleanup runs in bounded batches on a recurring schedule, so an outage or backlog can delay physical deletion beyond expiry, and infrastructure providers may retain their own diagnostics. There is no automatic migration of legacy relay records into this connector.",
           "To stop access, disable Remote Access or revoke the relevant client grant, and retry if the app reports a pending disconnect. A confirmed disconnect removes the old device-management credential from the local profile and replaces the local connector credential; settings, knowledge, and activity records remain until separately deleted. Revoking access does not delete a query or result the connected client or its provider already received.",
@@ -3145,7 +3170,7 @@ export const docPages: DocPage[] = [
       "Streamable HTTP MCP",
       "wenlan-mcp",
     ],
-    updatedAt: "2026-10-19",
+    updatedAt: "2026-10-23",
     author: DEFAULT_AUTHOR,
     readingTime: "4 min read",
     summary: [
@@ -3157,7 +3182,7 @@ export const docPages: DocPage[] = [
         heading: "How the pieces connect",
         body: [
           "The daemon runs locally and owns captures, source-backed notes, sessions, and retrieval. wenlan-mcp is the connector clients use when they need Wenlan tools.",
-          "Local clients launch wenlan-mcp over stdio. Current desktop Web Access connects ChatGPT, Claude.ai, and Muse through the authenticated relay at https://relay.wenlan.app/mcp. OAuth pairing grants query access only to what you choose to share, the whole library or one Space, and only after you approve the pairing; requests and results pass through the relay while your local device is online.",
+          "Local clients launch wenlan-mcp over stdio. Current desktop Web Access connects ChatGPT, Claude.ai, and Muse through the authenticated relay at https://relay.wenlan.app/mcp. OAuth pairing grants access only to what you choose to share, the whole library or one Space, and only after you approve the pairing, where you choose Search only or Search and write; requests and results pass through the relay while your local device is online.",
         ],
       },
       {
@@ -3237,7 +3262,7 @@ export const docPages: DocPage[] = [
         heading: "ChatGPT, Claude.ai, and Muse",
         body: [
           "In the Wenlan desktop app, open Settings > Connections > Web access and turn on the switch. If you have Spaces, Wenlan asks whether web apps can search the whole library or one Space; with no Spaces it shares the whole library. Once on, the card offers Add to Claude, Add to ChatGPT, and Other apps, and exposes the MCP endpoint https://relay.wenlan.app/mcp when the device is connected.",
-          "Add the endpoint in the web AI client's supported MCP connection flow and start authorization. Review the pairing request in Wenlan, check its client ID, Space, and expiry, then approve only if you initiated that connection. Finish the authorization in the AI client. The grant is limited to the approved Space; other and future Spaces stay private.",
+          "Add the endpoint in the web AI client's supported MCP connection flow and start authorization. Review the pairing request in Wenlan, check its client ID, Space, and expiry, choose Search only or Search and write, then approve only if you initiated that connection. Finish the authorization in the AI client. The grant is limited to the approved Space; other and future Spaces stay private.",
           "The local device must be online while it serves queries. Search activity is recorded locally, and requests and results pass through the relay and the connected AI provider. The older origin-relay no-login tunnel is a legacy flow; possession of its URL granted access and is not the current Web Access setup. Stop Web access or revoke an authorized client to end access.",
           "This is a custom MCP connection to your own Wenlan runtime. It does not mean Wenlan is publicly listed in the ChatGPT Apps Directory.",
           "Muse, Meta's personal agent, connects through Other apps: add https://relay.wenlan.app/mcp as a custom connector in Muse, then click Allow in Wenlan. The Allow dialog names Muse, so you can tell the request is the one you started.",
@@ -3803,7 +3828,7 @@ export const docPages: DocPage[] = [
       "Wenlan Tauri",
       "Wenlan desktop status",
     ],
-    updatedAt: "2026-10-19",
+    updatedAt: "2026-10-23",
     author: DEFAULT_AUTHOR,
     readingTime: "4 min read",
     summary: [
@@ -3838,10 +3863,19 @@ export const docPages: DocPage[] = [
         },
       },
       {
+        heading: "Steeping, review, and repository pages",
+        body: [
+          "Settings sets steeping to Automatic, where Wenlan steeps in the background with the models you assign, or On demand, where your AI tool steeps as it saves or writes and /wenlan steep finishes the rest. New installs start On demand.",
+          "Lock pages I've written, on for new installs, locks a page you write or edit for review, so AI changes to it wait as revision cards while pages AI wrote keep updating.",
+          "Sources can be an Obsidian vault, a Logseq graph, or a folder, each kept in sync or imported once, plus ChatGPT and Claude export ZIPs. A chat import keeps a last message nobody answered.",
+          "The GitHub button on a Space connects the repository it describes and puts the Space's code pages into the repository as a pull request, from the button or a daily run. That pull request also fixes sentences in the repository's own docs that no longer match the code. Pages can hold Mermaid diagrams, which the reader draws in place.",
+        ],
+      },
+      {
         heading: "Web access for ChatGPT, Claude.ai, and Muse",
         body: [
           "The released desktop app's Web Access connects through the authenticated relay at https://relay.wenlan.app/mcp. In Settings > Connections > Web access, turn on the switch and choose the whole library or one Space when Wenlan asks. The card shows connection health, the stable endpoint, Add to Claude, Add to ChatGPT, Other apps for custom connectors such as Muse, and the apps you have connected.",
-          "Add the endpoint through the web AI client's MCP connection flow, then review the pairing request in Wenlan. Check the client ID and what it can search before approving; when one Space is shared, other Spaces stay private, and you can revoke a grant or stop Web access. The device must be online while it serves queries.",
+          "Add the endpoint through the web AI client's MCP connection flow, then review the pairing request in Wenlan. Check the client ID and what it can reach, and choose Search only or Search and write, before approving; when one Space is shared, other Spaces stay private, and you can revoke a grant or stop Web access. The device must be online while it serves queries.",
           "The older origin-relay no-login tunnel is a separate legacy flow: anyone with its URL could access it. It is not the current Web Access path. The current endpoint is a custom MCP connection to your own Wenlan runtime, not a claim that Wenlan is publicly listed in the ChatGPT Apps Directory.",
         ],
         link: {
@@ -3882,7 +3916,7 @@ export const docPages: DocPage[] = [
       "Wenlan version 0.19.3",
       "wenlan-mcp release notes",
     ],
-    updatedAt: "2026-10-19",
+    updatedAt: "2026-10-23",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
@@ -3893,16 +3927,32 @@ export const docPages: DocPage[] = [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.19.3 is the current stable release recorded in CHANGELOG.md and GitHub Releases, dated 2026-10-21. It lets a page rely on lines of code and on other pages, and tells you when what it relies on changes. See the release notes for the exact shipped changes.",
+          "Wenlan v0.20.0 is the current stable release recorded in CHANGELOG.md and GitHub Releases, dated 2026-10-23. Steeping becomes Automatic or On demand, /wenlan map becomes /wenlan wiki, pages you wrote can be locked for review, and a Space's code pages can go into its repository as a pull request. See the release notes for the exact shipped changes.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
+        ],
+        bullets: [
+          "Steeping is Automatic or On demand, never off. Automatic steeps in the background with the models you assign. On demand, the default for new installs, lets your AI tool steep as it saves or writes; /wenlan steep finishes the rest and also writes new pages from imported material.",
+          "/wenlan map is renamed /wenlan wiki, with no alias. Wiki plans its pages from the repository and writes only the missing ones; steep keeps them current, including pages whose code changed.",
+          "Lock pages I've written, a steeping setting that is on for new installs, locks the pages you write or edit so AI changes to them wait for your review, while pages AI wrote keep updating.",
+          "A GitHub button on a Space puts its code pages into the repository as a pull request, from the button or a daily run, and that pull request also fixes the repository's own docs where they no longer match the code.",
+          "Pages draw Mermaid diagrams. Wiki adds them where a picture helps, steep keeps them, and Wenlan checks each diagram when an AI tool writes the page.",
+          "When an AI tool writes a page with numbered [n] citations, Wenlan checks that each cited source supports the sentence before saving it.",
+          "A Logseq graph can be a source and is followed for changes. A folder or vault can be imported once or kept in sync, and a chat export keeps a last message nobody answered.",
+        ],
+      },
+      {
+        heading: "v0.19.3 highlights",
+        body: [
+          "v0.19.3, dated 2026-10-21, lets a page rely on lines of code and on other pages, and tells you when what it relies on changes.",
         ],
         bullets: [
           "A page can rely on lines of code. When an AI writes a page from code, it says which lines it relied on; Wenlan remembers them and marks the page when those lines change. Edits that only move the lines or change whitespace do not count.",
           "The app shows the code lines a page relies on, with the lines as they were and as they are now when they changed, and names the agent behind each edit in a page's basis diff. You can confirm no impact, edit the page, or stop relying on the code.",
-          "/wenlan map writes repository orientation pages tied to the code lines they describe, so a later reader knows where to look and whether the page is still current.",
+          "/wenlan map writes repository orientation pages tied to the code lines they describe, so a later reader knows where to look and whether the page is still current. v0.20.0 renames it /wenlan wiki.",
           "A page can rely on other pages and is told when they change. Typing [[ in the editor links to a page and relies on it, and the app lists and manages a page's bases.",
           "save_source keeps documents an AI read in other apps together with their link, and Wenlan remembers which AI conversation a memory or page came from.",
           "Obsidian vaults follow changes in the background, checked about every 30 seconds, instead of needing a manual refresh.",
+          "Web access can let an app you allow search and write, not only search: it can add, edit, and delete memories and pages in what you share.",
           "Wiki documents are called pages everywhere in the English app.",
         ],
       },

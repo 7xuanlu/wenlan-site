@@ -494,17 +494,17 @@ export const enContent = {
           {
             id: "tools",
             q: "What AI tools work with Wenlan?",
-            a: "Claude Code and Codex have Wenlan plugins. Cursor, Claude Desktop, VS Code, Muse Code and other local clients connect through MCP. Browser clients such as ChatGPT, Claude.ai and Muse use Web access through an OAuth relay: choose the whole library or one Space, approve the connection, and keep Wenlan online. You can revoke access in the app. Obsidian is a read-only source workflow.",
+            a: "Claude Code and Codex have Wenlan plugins. Cursor, Claude Desktop, VS Code, Muse Code and other local clients connect through MCP. Browser clients such as ChatGPT, Claude.ai and Muse use Web access through an OAuth relay: choose the whole library or one Space, approve the connection as search only or search and write, and keep Wenlan online. You can revoke access in the app. Obsidian is a read-only source workflow.",
           },
           {
             id: "not-notes",
             q: "Is Wenlan a replacement for Notion or Obsidian?",
-            a: "No. Wenlan does not replace the app you write in. It can register Markdown files, text, text-extractable PDF, folders, and an Obsidian vault as sources. Obsidian input is read-only and followed in the background, checked about every 30 seconds; Wenlan's own notes remain readable Markdown under ~/.wenlan/.",
+            a: "No. Wenlan does not replace the app you write in. It can register Markdown files, text, text-extractable PDF, folders, an Obsidian vault, and a Logseq graph as sources. Folders, vaults, and graphs can be kept in sync or imported once. Obsidian and Logseq input is read-only; kept in sync, it is followed in the background, checked about every 30 seconds; Wenlan's own notes remain readable Markdown under ~/.wenlan/.",
           },
           {
             id: "setup",
             q: "How do I set it up?",
-            a: "Install Wenlan, then connect one AI tool. Claude Code and Codex plugins add commands such as handoff and recall. Other local clients connect through MCP. Saving and searching records does not require a model API key; organizing notes uses your configured local or cloud model. The setup guide walks through each option. For browser clients, Web access uses OAuth and your approval, and shares the whole library or one chosen Space. You can revoke access in the app.",
+            a: "Install Wenlan, then connect one AI tool. Claude Code and Codex plugins add commands such as handoff and recall. Other local clients connect through MCP. Saving and searching records does not require a model API key. Steep turns material into pages On demand, the default, through your connected AI tool, or Automatic with your configured local or cloud model. The setup guide walks through each option. For browser clients, Web access uses OAuth and your approval, and shares the whole library or one chosen Space. You can revoke access in the app.",
           },
           {
             id: "platforms",
@@ -564,7 +564,7 @@ export const enContent = {
           ],
           "detailsLabel": "How it works & sources",
           "helpLabel": "More background",
-          "accessNote": "Wenlan first needs connected sources and a model, then an initial set of Pages. After that, use the desktop App, or continue with the plugin / CLI and local daemon.",
+          "accessNote": "Wenlan first needs connected sources, then a model or your AI tool to write an initial set of Pages. After that, use the desktop App, or continue with the plugin / CLI and local daemon.",
           "generations": [
             {
               "id": "wiki-graveyard",
@@ -608,8 +608,8 @@ export const enContent = {
                 ],
                 "profile": [
                   "Documents and saved decisions become a cited Wiki. Retrieve prior conclusions and their evidence from connected AI tools, then continue the work.",
-                  "New decisions can enrich existing pages. After connected files or memory content change, background processing refreshes eligible affected pages.",
-                  "Source files stay unchanged. AI proposes a revision before updating pages you edited; you accept or reject it, with change history available."
+                  "New decisions can enrich existing pages. After connected files or memory content change, Steep refreshes eligible affected pages, in the background or through your AI tool.",
+                  "Source files stay unchanged. Pages you wrote or edited are locked for review by default: AI proposes a revision, you accept or reject it, and change history stays available."
                 ],
                 "emphasis": []
               }
@@ -677,7 +677,7 @@ export const enContent = {
                 ],
                 "profile": [
                   "After setup, save and retrieve knowledge from connected AI tools. The local background service runs without the desktop App.",
-                  "Editing or deleting a memory, or accepting its replacement revision, flags the existing pages that cite it. Background work then refreshes eligible pages.",
+                  "Editing or deleting a memory, or accepting its replacement revision, flags the existing pages that cite it. Steep then refreshes eligible pages, in the background or through your AI tool.",
                   "When AI wants to update a page you wrote, it proposes a revision; the original waits for your approval."
                 ],
                 "emphasis": []
@@ -721,7 +721,7 @@ export const enContent = {
                 ],
                 "profile": [
                   "Connect the vault as a read-only source; keep writing originals while Wenlan builds pages for you and AI.",
-                  "After Wenlan is configured, background tracking follows connected sources and refreshes eligible pages without rewriting your vault.",
+                  "After setup, Wenlan follows connected sources in the background, and Steep refreshes eligible pages without rewriting your vault.",
                   "Wenlan does not write back to the vault; pages you edit also get a revision first, then you decide."
                 ],
                 "emphasis": []
@@ -769,7 +769,7 @@ export const enContent = {
                 ],
                 "profile": [
                   "Save and find knowledge in connected AI tools; documents and decisions stay local without changing editors.",
-                  "When sources change, background tracking refreshes affected pages; pages you wrote become proposed revisions.",
+                  "When sources change, Wenlan flags affected pages and Steep refreshes them; pages you wrote become proposed revisions.",
                   "You decide whether to accept a page revision; machine-maintained pages update as configured and keep history."
                 ],
                 "emphasis": []
@@ -809,7 +809,7 @@ export const enContent = {
                 ],
                 "profile": [
                   "Save conclusions and decisions in a local knowledge base, then find them through connected AI tools for the next task.",
-                  "Background tracking follows source changes and refreshes eligible existing Wiki pages, not just another source copy.",
+                  "Wenlan follows source changes in the background, and Steep refreshes eligible existing Wiki pages, not just another source copy.",
                   "Pages you wrote keep their original text while AI proposes a revision; you choose whether to accept or keep it."
                 ],
                 "emphasis": []
@@ -890,7 +890,7 @@ export const enContent = {
             {
               id: "sources",
               title: "Bring your files and conversations",
-              body: "Bring in files and AI chats. Save web content and its URL through connected tools.",
+              body: "Bring in files, folders, a Logseq graph, and AI chats. Save web content and its URL through connected tools.",
             },
             {
               id: "obsidian",
@@ -900,7 +900,7 @@ export const enContent = {
             {
               id: "steep",
               title: "Steep",
-              body: "With a model configured, Steep organizes in the background.",
+              body: "Steep turns material into pages. On demand, the default, your AI tool steeps as it works; Automatic uses a configured model in the background.",
             },
             {
               id: "topics",
@@ -915,7 +915,7 @@ export const enContent = {
             {
               id: "web-access",
               title: "Web Access",
-              body: "Let supported web AI tools use your Wenlan knowledge on your computer. Keep Wenlan online while you work.",
+              body: "Let supported web AI tools search your Wenlan knowledge on your computer, and write to it if you allow. Keep Wenlan online while you work.",
             },
             {
               id: "spaces",

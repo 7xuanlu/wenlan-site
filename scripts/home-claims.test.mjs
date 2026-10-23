@@ -373,7 +373,10 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     const cards = home.redesign.bento.cells;
     assert.deepEqual(cards.map(({ id }) => id), ["sources", "obsidian", "steep", "topics", "tools", "web-access", "spaces", "history"], `${locale}: revised capability coverage`);
     assert.match(cards.find(card => card.id === "steep").body, /Steep/);
-    assert.match(cards.find(card => card.id === "steep").body, /model configured|設定背景模型|配置后台模型/);
+    assert.match(cards.find(card => card.id === "steep").body, /On demand|隨叫|随叫/);
+    assert.match(cards.find(card => card.id === "steep").body, /Automatic|自動|自动/);
+    assert.match(cards.find(card => card.id === "steep").body, /model|模型/);
+    assert.doesNotMatch(cards.find(card => card.id === "steep").body, /\boff\b|關閉|关闭/i);
     // Details remain available on demand while the intro stays short.
     assert.match(capabilityArtifacts, /search cues/);
     assert.match(capabilityArtifacts, /搜尋線索/);
