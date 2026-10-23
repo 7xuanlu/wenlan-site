@@ -528,7 +528,7 @@ export const enContent = {
           eyebrow: "A personal knowledge base, maintained with AI",
           headline: { pre: "Turn your notes, files, and AI chats into a", emphasis: "living wiki.", post: "" },
           description:
-            "Wenlan pages link back to their sources and keep up when those change. Claude Code, Codex, Cursor, and other AI tools can search and cite them, and your own writing stays yours.",
+            "Wenlan pages cite their sources and update when those change. Claude Code, Codex, and Cursor can search them and put them to work. Citations are checked against sources, and your own writing stays yours.",
           worksWithLabel: "Works with",
           worksWithNote: "Read from your Obsidian vault without changing your files.",
         },

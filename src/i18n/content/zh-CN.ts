@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "82a19c74c15103e16d48d5ef64671a9004a6e59673fe77915b0bdc0cdb419ef6",
+    sourceHash: "e8c79e73da9210c03f8ef9594c3c9f43cd1b49f2b416a232b2ba148e7a849ed3",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库与 LLM Wiki",
@@ -523,7 +523,7 @@ export const zhCNContent = {
           eyebrow: "AI 协助维护的个人知识库",
           headline: { pre: "笔记、文档、AI 对话，整理成", emphasis: "持续更新的知识库。", post: "" },
           description:
-            "文澜的页面保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，你自己写的内容仍由你做主。",
+            "文澜的笔记保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，让知识活用起来。引用的句子都对照过来源，你自己写的内容仍由你做主。",
           worksWithLabel: "可搭配",
           worksWithNote: "可读取 Obsidian 库，保留原文。",
         },
