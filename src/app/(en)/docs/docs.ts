@@ -3768,7 +3768,7 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Read the historical README result",
-          href: "https://github.com/7xuanlu/wenlan/blob/43d905dceb92b7f6f454443c1097f090c3b61170/README.md#evaluation",
+          href: "https://github.com/wenlan-app/wenlan/blob/43d905dceb92b7f6f454443c1097f090c3b61170/README.md#evaluation",
         },
       },
       {

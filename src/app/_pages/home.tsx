@@ -68,7 +68,7 @@ const integrationCopy = {
 
 // The two bars share a zero baseline and the same token scale. Retrieval
 // quality remains a separate measurement, not part of the bar lengths.
-const tokenSnapshotUrl = "https://github.com/7xuanlu/wenlan/blob/43d905dceb92b7f6f454443c1097f090c3b61170/README.md#evaluation";
+const tokenSnapshotUrl = "https://github.com/wenlan-app/wenlan/blob/43d905dceb92b7f6f454443c1097f090c3b61170/README.md#evaluation";
 
 const metricBarChrome: Record<string, { tone: "muted" | "warm"; widthPercent: number }> = {
   "full-replay": { tone: "muted", widthPercent: 100 },
@@ -136,7 +136,7 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
             key={locale}
             primaryAction={<HomeCta link={content.hero.primaryCta} locale={locale} placement="home-hero" variant="primary" />}
             sourceAction={
-              <a href="https://github.com/7xuanlu/wenlan" target="_blank" rel="noopener noreferrer"
+              <a href="https://github.com/wenlan-app/wenlan" target="_blank" rel="noopener noreferrer"
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[var(--o-border)] px-4 py-3 text-sm font-medium text-[var(--o-text)] transition-colors hover:bg-[var(--o-bg-alt)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)] sm:px-5">
                 <GitHubLogoIcon className="size-4 shrink-0" />
                 GitHub
