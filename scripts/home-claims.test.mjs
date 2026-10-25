@@ -282,12 +282,12 @@ test("hero leads with useful outcomes and describes knowledge that can be revise
     "zh-TW": {
       eyebrow: "AI 協助維護的個人知識庫",
       headline: ["筆記、文件、AI 對話，整理成", "持續更新的知識庫。"],
-      description: "文瀾的筆記保留來源連結，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，讓知識活用起來。引用的句子都對照過來源，你自己寫的內容仍由你作主。",
+      description: "文瀾的筆記保留來源連結，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，讓知識活用起來。引用的句子會對照來源，你自己寫的內容仍由你作主。",
     },
     "zh-CN": {
       eyebrow: "AI 协助维护的个人知识库",
       headline: ["笔记、文档、AI 对话，整理成", "持续更新的知识库。"],
-      description: "文澜的笔记保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，让知识活用起来。引用的句子都对照过来源，你自己写的内容仍由你做主。",
+      description: "文澜的笔记保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，让知识活用起来。引用的句子会对照来源，你自己写的内容仍由你做主。",
     },
   };
   for (const [locale, dictionary] of Object.entries(dictionaryByLocale)) {
@@ -387,7 +387,8 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     assert.match(sourceIllustration, /ChatGPT.*Claude/);
     assert.match(cards.find(card => card.id === "sources").body, /URL|網址|网址/);
     assert.doesNotMatch(cards.find(card => card.id === "sources").body, /any file|every format|任何檔案|任何文件/);
-    assert.match(cards.find(card => card.id === "obsidian").body, /read-only|唯讀|只读/);
+    assert.match(cards.find(card => card.id === "obsidian").body, /never edits your existing notes|不會改動你原有的筆記|不会改动你原有的笔记/);
+    assert.doesNotMatch(cards.find(card => card.id === "obsidian").body, /read-only|唯讀|只读/);
     assert.match(cards.find(card => card.id === "obsidian").body, /in the background|在背景|在后台/);
     assert.doesNotMatch(cards.find(card => card.id === "obsidian").body, /on demand|when needed|按需|需要時|需要时/);
     assert.match(cards.find(card => card.id === "repo-wiki").body, /\/wenlan wiki/);
@@ -430,7 +431,7 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     assert.ok(setupFaq && notesFaq && builtInFaq, `${locale} setup, Obsidian, and memory FAQs are required`);
     assert.match(setupFaq.a, /model|模型|模型/);
     assert.match(setupFaq.a, /client|用戶端|客户端|AI 工具/);
-    assert.match(notesFaq.a, /read-only|唯讀|只读/);
+    assert.match(notesFaq.a, /never edits your existing|不會改動你原有的|不会改动你原有的/);
     assert.match(notesFaq.a, /Markdown|\.pdf|PDF/);
     assert.match(builtInFaq.a, /varies by tool|因工具而異|因工具而异/);
     assert.doesNotMatch(builtInFaq.a, /usually cannot trace|通常無法追蹤|通常无法追踪/);

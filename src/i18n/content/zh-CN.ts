@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "e8c79e73da9210c03f8ef9594c3c9f43cd1b49f2b416a232b2ba148e7a849ed3",
+    sourceHash: "f379c4d74d9d495e29f7d2461cfcc302ac9e24467583ce8611fa55181c516d5c",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库与 LLM Wiki",
@@ -494,7 +494,7 @@ export const zhCNContent = {
           {
             id: "not-notes",
             q: "Wenlan 能取代 Notion 或 Obsidian 吗？",
-            a: "不能。Wenlan 不取代你用来写作的 App。它可以把 Markdown 文件、text、可提取文字的 PDF、文件夹、Obsidian 库和 Logseq 图谱登记为来源。文件夹、笔记库和图谱可持续同步，也可只导入一次。Obsidian 与 Logseq 输入是只读；持续同步时会在后台跟进，约每 30 秒检查一次；Wenlan 自己的笔记仍是 ~/.wenlan/ 底下可读的 Markdown。",
+            a: "不能。Wenlan 不取代你用来写作的 App。它可以把 Markdown 文件、text、可提取文字的 PDF、文件夹、Obsidian 库和 Logseq 图谱登记为来源。文件夹、笔记库和图谱可持续同步，也可只导入一次。Wenlan 不会改动你原有的 Obsidian 与 Logseq 笔记；持续同步时会在后台跟进，约每 30 秒检查一次；Wenlan 自己的笔记仍是 ~/.wenlan/ 底下可读的 Markdown。",
           },
           {
             id: "setup",
@@ -523,7 +523,7 @@ export const zhCNContent = {
           eyebrow: "AI 协助维护的个人知识库",
           headline: { pre: "笔记、文档、AI 对话，整理成", emphasis: "持续更新的知识库。", post: "" },
           description:
-            "文澜的笔记保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，让知识活用起来。引用的句子都对照过来源，你自己写的内容仍由你做主。",
+            "文澜的笔记保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，让知识活用起来。引用的句子会对照来源，你自己写的内容仍由你做主。",
           worksWithLabel: "可搭配",
           worksWithNote: "可读取 Obsidian 库，保留原文。",
         },
@@ -715,9 +715,9 @@ export const zhCNContent = {
                   "原笔记不动，修改先审核"
                 ],
                 "profile": [
-                  "将 vault 作为只读来源；继续写原笔记，Wenlan 另建供你和 AI 使用的知识页。",
+                  "将 vault 作为来源；继续写原笔记，Wenlan 另建供你和 AI 使用的知识页。",
                   "完成 Wenlan 配置后，后台跟踪已连接来源，再由 Steep 刷新符合条件的页面，不改写原来的 vault。",
-                  "Wenlan 不写回 vault；你改过的页面也先提出修订，再由你决定。"
+                  "Wenlan 不会改动你原有的笔记；你改过的页面也先提出修订，再由你决定。"
                 ],
                 "emphasis": []
               }
@@ -890,7 +890,7 @@ export const zhCNContent = {
             {
               id: "obsidian",
               title: "继续用你的 Obsidian 笔记库",
-              body: "只读连接笔记库，Wenlan 在后台跟进变化；原笔记留在原处、不被改动。",
+              body: "连接笔记库后，Wenlan 在后台跟进变化，不会改动你原有的笔记。",
             },
             {
               id: "steep",

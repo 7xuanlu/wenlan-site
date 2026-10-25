@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "e8c79e73da9210c03f8ef9594c3c9f43cd1b49f2b416a232b2ba148e7a849ed3",
+    sourceHash: "f379c4d74d9d495e29f7d2461cfcc302ac9e24467583ce8611fa55181c516d5c",
     content: {
       seo: {
         title: "文瀾 Wenlan｜個人 AI 知識庫與 LLM Wiki",
@@ -494,7 +494,7 @@ export const zhTWContent = {
           {
             id: "not-notes",
             q: "Wenlan 能取代 Notion 或 Obsidian 嗎？",
-            a: "不能。Wenlan 不取代你用來寫作的 App。它可以把 Markdown 檔案、text、可抽取文字的 PDF、資料夾、Obsidian 庫和 Logseq 圖譜登錄為來源。資料夾、筆記庫和圖譜可持續同步，也可只匯入一次。Obsidian 與 Logseq 輸入是唯讀；持續同步時會在背景跟進，約每 30 秒檢查一次；Wenlan 自己的筆記仍是 ~/.wenlan/ 底下可讀的 Markdown。",
+            a: "不能。Wenlan 不取代你用來寫作的 App。它可以把 Markdown 檔案、text、可抽取文字的 PDF、資料夾、Obsidian 庫和 Logseq 圖譜登錄為來源。資料夾、筆記庫和圖譜可持續同步，也可只匯入一次。Wenlan 不會改動你原有的 Obsidian 與 Logseq 筆記；持續同步時會在背景跟進，約每 30 秒檢查一次；Wenlan 自己的筆記仍是 ~/.wenlan/ 底下可讀的 Markdown。",
           },
           {
             id: "setup",
@@ -523,7 +523,7 @@ export const zhTWContent = {
           eyebrow: "AI 協助維護的個人知識庫",
           headline: { pre: "筆記、文件、AI 對話，整理成", emphasis: "持續更新的知識庫。", post: "" },
           description:
-            "文瀾的筆記保留來源連結，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，讓知識活用起來。引用的句子都對照過來源，你自己寫的內容仍由你作主。",
+            "文瀾的筆記保留來源連結，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，讓知識活用起來。引用的句子會對照來源，你自己寫的內容仍由你作主。",
           worksWithLabel: "可搭配",
           worksWithNote: "可讀取 Obsidian 庫，保留原文。",
         },
@@ -715,9 +715,9 @@ export const zhTWContent = {
                   "原筆記不動，改稿先看"
                 ],
                 "profile": [
-                  "把 vault 接成唯讀來源；原筆記照寫，Wenlan 另建給你和 AI 使用的知識頁。",
+                  "把 vault 接成來源；原筆記照寫，Wenlan 另建給你和 AI 使用的知識頁。",
                   "完成 Wenlan 設定後，背景追蹤已連接來源，再由 Steep 刷新符合條件的頁面，不改寫原本的 vault。",
-                  "Wenlan 不回寫 vault；你親自改過的文瀾頁面，也先提出修訂再決定。"
+                  "Wenlan 不會改動你原有的筆記；你親自改過的文瀾頁面，也先提出修訂再決定。"
                 ],
                 "emphasis": []
               }
@@ -890,7 +890,7 @@ export const zhTWContent = {
             {
               id: "obsidian",
               title: "繼續用你的 Obsidian 筆記庫",
-              body: "唯讀連接筆記庫，Wenlan 在背景跟進變更；原筆記留在原處、不被改動。",
+              body: "連接筆記庫後，Wenlan 在背景跟進變更，不會改動你原有的筆記。",
             },
             {
               id: "steep",

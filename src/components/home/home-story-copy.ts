@@ -34,7 +34,7 @@ export const storyCopyByLocale = {
     moreTechnical: "Retrieval tests and methodology",
   },
   "zh-TW": {
-    heroDescription: "文瀾的筆記保留來源連結，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，讓知識活用起來。引用的句子都對照過來源，你自己寫的內容仍由你作主。",
+    heroDescription: "文瀾的筆記保留來源連結，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，讓知識活用起來。引用的句子會對照來源，你自己寫的內容仍由你作主。",
     heroTrust: ["免費開源", "筆記存在你的電腦", "支援 Claude Code、Codex、Cursor 等工具"],
     comparisonLabel: "比較 AI 知識庫工具",
     steps: { wiki: "整理", updates: "隨資料更新", ai: "用進工作", graph: "知識相連" },
@@ -66,7 +66,7 @@ export const storyCopyByLocale = {
     moreTechnical: "檢索評測與測試範圍",
   },
   "zh-CN": {
-    heroDescription: "文澜的笔记保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，让知识活用起来。引用的句子都对照过来源，你自己写的内容仍由你做主。",
+    heroDescription: "文澜的笔记保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，让知识活用起来。引用的句子会对照来源，你自己写的内容仍由你做主。",
     heroTrust: ["免费开源", "笔记存在你的电脑", "支持 Claude Code、Codex、Cursor 等工具"],
     comparisonLabel: "比较 AI 知识库工具",
     steps: { wiki: "整理", updates: "随资料更新", ai: "用于工作", graph: "知识相连" },

@@ -499,7 +499,7 @@ export const enContent = {
           {
             id: "not-notes",
             q: "Is Wenlan a replacement for Notion or Obsidian?",
-            a: "No. Wenlan does not replace the app you write in. It can register Markdown files, text, text-extractable PDF, folders, an Obsidian vault, and a Logseq graph as sources. Folders, vaults, and graphs can be kept in sync or imported once. Obsidian and Logseq input is read-only; kept in sync, it is followed in the background, checked about every 30 seconds; Wenlan's own notes remain readable Markdown under ~/.wenlan/.",
+            a: "No. Wenlan does not replace the app you write in. It can register Markdown files, text, text-extractable PDF, folders, an Obsidian vault, and a Logseq graph as sources. Folders, vaults, and graphs can be kept in sync or imported once. Wenlan never edits your existing Obsidian or Logseq notes; kept in sync, it is followed in the background, checked about every 30 seconds; Wenlan's own notes remain readable Markdown under ~/.wenlan/.",
           },
           {
             id: "setup",
@@ -720,9 +720,9 @@ export const enContent = {
                   "Original notes stay untouched; review drafts first"
                 ],
                 "profile": [
-                  "Connect the vault as a read-only source; keep writing originals while Wenlan builds pages for you and AI.",
+                  "Connect the vault as a source; keep writing originals while Wenlan builds pages for you and AI.",
                   "After setup, Wenlan follows connected sources in the background, and Steep refreshes eligible pages without rewriting your vault.",
-                  "Wenlan does not write back to the vault; pages you edit also get a revision first, then you decide."
+                  "Wenlan never edits your existing notes; pages you edit also get a revision first, then you decide."
                 ],
                 "emphasis": []
               }
@@ -895,7 +895,7 @@ export const enContent = {
             {
               id: "obsidian",
               title: "Keep using your Obsidian vault",
-              body: "Connect your vault read-only and Wenlan follows changes in the background. Your original notes stay untouched.",
+              body: "Connect your vault and Wenlan follows changes in the background. It never edits your existing notes.",
             },
             {
               id: "steep",
