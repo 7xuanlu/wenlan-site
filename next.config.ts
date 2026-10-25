@@ -57,6 +57,7 @@ const nextConfig: NextConfig = {
       { source: "/.well-known/security.txt", headers: NOINDEX_FOLLOW },
       { source: "/_next/static/media/:path*", headers: NOINDEX_ASSET },
       { source: "/examples/:path*", headers: NOINDEX_ASSET },
+      { source: "/embed/:path*", headers: NOINDEX_ASSET },
     ];
   },
   async redirects() {
