@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "f68797fde9af433a8394b00d1c62487ff955ba8ce90edd43daa8d63eb90cef7d",
+    sourceHash: "7a927170f25bd5f06ec270e804de9af479f95daf35eb8241d7e75d56572fc188",
     content: {
       seo: {
         title: "文瀾 Wenlan｜個人 AI 知識庫與 LLM Wiki",
@@ -76,7 +76,7 @@ export const zhTWContent = {
         title:
           "下\u2060載\u2060適\u2060合\u2060你\u2060系\u2060統\u2060的 Wenlan。",
         description:
-          "Wenlan v0.20.0 提供 Windows x64 桌面版與 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 套件。",
+          "Wenlan v0.20.1 提供 Windows x64 桌面版與 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 套件。",
         stableLabel: "穩定版",
         releaseNotesLabel: "版本說明",
         packageIncludesLabel: "內含 CLI、daemon 與 MCP connector",
@@ -489,7 +489,7 @@ export const zhTWContent = {
           {
             id: "tools",
             q: "哪些 AI 工具可以搭配 Wenlan？",
-            a: "Claude Code 和 Codex 有 Wenlan 外掛；Cursor、Claude Desktop、VS Code、Muse Code 等本地工具透過 MCP 連接。ChatGPT、Claude.ai、Muse 等瀏覽器工具使用 OAuth 遠端連線：先選擇分享整個資料庫或一個 Space，批准配對時決定只能搜尋或可搜尋和寫入，使用時保持 Wenlan 在線，也能在 App 中撤銷存取。Obsidian 則是唯讀的來源匯入方式。",
+            a: "Claude Code 和 Codex 有 Wenlan 外掛；Cursor、Claude Desktop、VS Code、GitHub Copilot、Windsurf、Kimi Code、Muse Code 等本地工具透過 MCP 連接。ChatGPT、Claude.ai、Muse 等瀏覽器工具使用 OAuth 遠端連線：先選擇分享整個資料庫或一個 Space，批准配對時決定只能搜尋或可搜尋和寫入，使用時保持 Wenlan 在線，也能在 App 中撤銷存取。Obsidian 筆記庫則作為來源接入，你原有的筆記只有在你同意後才會被修改。",
           },
           {
             id: "not-notes",
@@ -1672,7 +1672,7 @@ export const zhTWContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "060937f3c44963407158700b492184c51af1fc8f195a979b5490a27a791be8ab",
+    sourceHash: "ffc61ff8aec6f2a17228d98f1c1321f5dc8d7f08444dda736a23efec9bf2e127",
     content: {
       seo: {
         title: "安裝文瀾 Wenlan：Claude Code、Codex、ChatGPT 與 MCP",
@@ -1716,13 +1716,13 @@ export const zhTWContent = {
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.0/wenlan-windows-x64.zip",
+              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.1/wenlan-windows-x64.zip",
               label: "下載 Windows x64"
             },
             {
               id: "all-downloads",
-              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.20.0",
-              label: "全部 v0.20.0 下載"
+              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.20.1",
+              label: "全部 v0.20.1 下載"
             }
           ]
         },

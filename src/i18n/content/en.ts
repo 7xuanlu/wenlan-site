@@ -75,7 +75,7 @@ export const enContent = {
         eyebrow: "Download",
         title: "Download Wenlan for your system.",
         description:
-          "Wenlan v0.20.0 ships a Windows x64 desktop build and a macOS Apple silicon DMG, plus headless runtime builds for Windows, macOS, and Linux.",
+          "Wenlan v0.20.1 ships a Windows x64 desktop build and a macOS Apple silicon DMG, plus headless runtime builds for Windows, macOS, and Linux.",
         stableLabel: "Stable",
         releaseNotesLabel: "Release notes",
         packageIncludesLabel: "CLI · daemon · MCP connector",
@@ -494,7 +494,7 @@ export const enContent = {
           {
             id: "tools",
             q: "What AI tools work with Wenlan?",
-            a: "Claude Code and Codex have Wenlan plugins. Cursor, Claude Desktop, VS Code, Muse Code and other local clients connect through MCP. Browser clients such as ChatGPT, Claude.ai and Muse use Web access through an OAuth relay: choose the whole library or one Space, approve the connection as search only or search and write, and keep Wenlan online. You can revoke access in the app. Obsidian is a read-only source workflow.",
+            a: "Claude Code and Codex have Wenlan plugins. Cursor, Claude Desktop, VS Code, GitHub Copilot, Windsurf, Kimi Code, Muse Code and other local clients connect through MCP. Browser clients such as ChatGPT, Claude.ai and Muse use Web access through an OAuth relay: choose the whole library or one Space, approve the connection as search only or search and write, and keep Wenlan online. You can revoke access in the app. Obsidian vaults connect as a source, and Wenlan changes your existing notes only when you accept.",
           },
           {
             id: "not-notes",
@@ -1721,13 +1721,13 @@ export const enContent = {
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.0/wenlan-windows-x64.zip",
+              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.1/wenlan-windows-x64.zip",
               label: "Download Windows x64"
             },
             {
               id: "all-downloads",
-              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.20.0",
-              label: "All v0.20.0 downloads"
+              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.20.1",
+              label: "All v0.20.1 downloads"
             }
           ]
         },

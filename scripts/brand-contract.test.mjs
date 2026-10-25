@@ -1156,60 +1156,64 @@ test("public release surfaces expose the verified current artifacts and release 
   const structuredData = await readRepo("src/app/structured-data.ts");
   const llms = await readRepo("public/llms.txt");
 
-  assert.equal(version, "0.20.0");
+  assert.equal(version, "0.20.1");
   assert.equal(WENLAN_RELEASE.version, version);
-  assert.equal(WENLAN_RELEASE.tag, "v0.20.0");
-  assert.equal(WENLAN_RELEASE.publishedAt, "2026-10-23T13:13:57Z");
+  assert.equal(WENLAN_RELEASE.tag, "v0.20.1");
+  assert.equal(WENLAN_RELEASE.publishedAt, "2026-10-25T20:23:26Z");
   assert.equal(
     WENLAN_RELEASE.releaseUrl,
-    "https://github.com/wenlan-app/wenlan/releases/tag/v0.20.0",
+    "https://github.com/wenlan-app/wenlan/releases/tag/v0.20.1",
   );
   assert.equal(
     WENLAN_RELEASE.setupGuideUrl,
-    "https://github.com/wenlan-app/wenlan/blob/v0.20.0/docs/setup-with-ai.md#install-the-runtime",
+    "https://github.com/wenlan-app/wenlan/blob/v0.20.1/docs/setup-with-ai.md#install-the-runtime",
   );
   assert.deepEqual(
     WENLAN_RELEASE.assets.map(({ id, href, format, size }) => ({ id, href, format, size })),
     [
       {
         id: "windows-desktop-x64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.0/Wenlan_0.20.0_x64-setup.exe",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.1/Wenlan_0.20.1_x64-setup.exe",
         format: "EXE",
-        size: "59.3 MiB",
+        size: "60.3 MiB",
       },
       {
         id: "windows-x64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.0/wenlan-windows-x64.zip",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.1/wenlan-windows-x64.zip",
         format: "ZIP",
-        size: "80.2 MiB",
+        size: "80.8 MiB",
       },
       {
         id: "macos-arm64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.0/Wenlan_0.20.0_aarch64.dmg",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.1/Wenlan_0.20.1_aarch64.dmg",
         format: "DMG",
-        size: "82.0 MiB",
+        size: "83.1 MiB",
       },
       {
         id: "macos-runtime-arm64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.0/wenlan-darwin-arm64.tar.gz",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.1/wenlan-darwin-arm64.tar.gz",
         format: "TAR.GZ",
-        size: "56.2 MiB",
+        size: "57.0 MiB",
       },
       {
         id: "linux-x64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.0/wenlan-linux-x64.tar.gz",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.1/wenlan-linux-x64.tar.gz",
         format: "TAR.GZ",
-        size: "69.7 MiB",
+        size: "70.4 MiB",
       },
       {
         id: "linux-arm64",
-        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.0/wenlan-linux-arm64.tar.gz",
+        href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.1/wenlan-linux-arm64.tar.gz",
         format: "TAR.GZ",
-        size: "69.2 MiB",
+        size: "70.1 MiB",
       },
     ],
   );
 
+  assert.match(changelog, /^## \[0\.20\.1\].*\(2026-10-25\)/m);
+  assert.match(changelog, /let AI suggest changes to your Obsidian notes, written only when you accept/);
+  assert.match(changelog, /connect Kimi Code and give it Wenlan's skills/);
+  assert.match(changelog, /let AI-tool search find a rare word in a large library/);
   assert.match(changelog, /^## \[0\.20\.0\].*\(2026-10-23\)/m);
   assert.match(changelog, /steeping is Automatic or On demand, never off/);
   assert.match(changelog, /rename \/wenlan map to \/wenlan wiki/);
@@ -1258,14 +1262,18 @@ test("public release surfaces expose the verified current artifacts and release 
   assert.match(docs, /The Claude Code plugin has one entry, \/wenlan/);
   assert.match(docs, /connects Muse Code with one click/);
   assert.match(docs, /getting-started home/);
-  assert.equal(date, "2026-10-23");
+  assert.match(docs, /v0\.20\.0 highlights/);
+  assert.match(docs, /written to the vault only when you accept/);
+  assert.match(docs, /Kimi Code connects with Wenlan's skills/);
+  assert.match(docs, /finds a rare word in a large library/);
+  assert.equal(date, "2026-10-25");
   assert.match(docs, /v0\.18\.0 highlights/);
   assert.match(docs, /one home page with an honest empty state/);
   assert.match(docs, /removes the .*Where AI looked.* section/);
   assert.match(docs, /global shortcut is occupied/);
   assert.match(docs, /window stays still after launch/);
-  assert.match(structuredData, /tree\/v0\.20\.0\/app/);
-  assert.match(llms, /tree\/v0\.20\.0\/app/);
+  assert.match(structuredData, /tree\/v0\.20\.1\/app/);
+  assert.match(llms, /tree\/v0\.20\.1\/app/);
 });
 
 test("download information architecture keeps the homepage compact and the full matrix on a localized hub", async () => {
