@@ -720,9 +720,9 @@ export const enContent = {
                   "Original notes stay untouched; review drafts first"
                 ],
                 "profile": [
-                  "Connect the vault as a source; keep writing originals while Wenlan builds pages for you and AI.",
+                  "Connect the vault as a read-only source; keep writing originals while Wenlan builds pages for you and AI.",
                   "After setup, Wenlan follows connected sources in the background, and Steep refreshes eligible pages without rewriting your vault.",
-                  "Wenlan never edits your existing notes without your OK; pages you edit also get a revision first, then you decide."
+                  "Wenlan does not write back to the vault; pages you edit also get a revision first, then you decide."
                 ],
                 "emphasis": []
               }

@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "813b33a56f69193f72c92dec5d89ad36b6d86bae91c9de40b0ac2cc951218d27",
+    sourceHash: "f68797fde9af433a8394b00d1c62487ff955ba8ce90edd43daa8d63eb90cef7d",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库与 LLM Wiki",
@@ -715,9 +715,9 @@ export const zhCNContent = {
                   "原笔记不动，修改先审核"
                 ],
                 "profile": [
-                  "将 vault 作为来源；继续写原笔记，Wenlan 另建供你和 AI 使用的知识页。",
+                  "将 vault 作为只读来源；继续写原笔记，Wenlan 另建供你和 AI 使用的知识页。",
                   "完成 Wenlan 配置后，后台跟踪已连接来源，再由 Steep 刷新符合条件的页面，不改写原来的 vault。",
-                  "没有你同意，Wenlan 不会改动你原有的笔记；你改过的页面也先提出修订，再由你决定。"
+                  "Wenlan 不写回 vault；你改过的页面也先提出修订，再由你决定。"
                 ],
                 "emphasis": []
               }

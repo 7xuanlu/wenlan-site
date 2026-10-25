@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "813b33a56f69193f72c92dec5d89ad36b6d86bae91c9de40b0ac2cc951218d27",
+    sourceHash: "f68797fde9af433a8394b00d1c62487ff955ba8ce90edd43daa8d63eb90cef7d",
     content: {
       seo: {
         title: "文瀾 Wenlan｜個人 AI 知識庫與 LLM Wiki",
@@ -715,9 +715,9 @@ export const zhTWContent = {
                   "原筆記不動，改稿先看"
                 ],
                 "profile": [
-                  "把 vault 接成來源；原筆記照寫，Wenlan 另建給你和 AI 使用的知識頁。",
+                  "把 vault 接成唯讀來源；原筆記照寫，Wenlan 另建給你和 AI 使用的知識頁。",
                   "完成 Wenlan 設定後，背景追蹤已連接來源，再由 Steep 刷新符合條件的頁面，不改寫原本的 vault。",
-                  "沒有你同意，Wenlan 不會改動你原有的筆記；你親自改過的文瀾頁面，也先提出修訂再決定。"
+                  "Wenlan 不回寫 vault；你親自改過的文瀾頁面，也先提出修訂再決定。"
                 ],
                 "emphasis": []
               }
