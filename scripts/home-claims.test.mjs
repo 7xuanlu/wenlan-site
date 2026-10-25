@@ -387,7 +387,7 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     assert.match(sourceIllustration, /ChatGPT.*Claude/);
     assert.match(cards.find(card => card.id === "sources").body, /URL|網址|网址/);
     assert.doesNotMatch(cards.find(card => card.id === "sources").body, /any file|every format|任何檔案|任何文件/);
-    assert.match(cards.find(card => card.id === "obsidian").body, /never edits your existing notes|不會改動你原有的筆記|不会改动你原有的笔记/);
+    assert.match(cards.find(card => card.id === "obsidian").body, /never edits your existing notes without your OK|沒有你同意，不會改動你原有的筆記|没有你同意，不会改动你原有的笔记/);
     assert.doesNotMatch(cards.find(card => card.id === "obsidian").body, /read-only|唯讀|只读/);
     assert.match(cards.find(card => card.id === "obsidian").body, /in the background|在背景|在后台/);
     assert.doesNotMatch(cards.find(card => card.id === "obsidian").body, /on demand|when needed|按需|需要時|需要时/);
@@ -431,7 +431,7 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     assert.ok(setupFaq && notesFaq && builtInFaq, `${locale} setup, Obsidian, and memory FAQs are required`);
     assert.match(setupFaq.a, /model|模型|模型/);
     assert.match(setupFaq.a, /client|用戶端|客户端|AI 工具/);
-    assert.match(notesFaq.a, /never edits your existing|不會改動你原有的|不会改动你原有的/);
+    assert.match(notesFaq.a, /without your OK|沒有你同意|没有你同意/);
     assert.match(notesFaq.a, /Markdown|\.pdf|PDF/);
     assert.match(builtInFaq.a, /varies by tool|因工具而異|因工具而异/);
     assert.doesNotMatch(builtInFaq.a, /usually cannot trace|通常無法追蹤|通常无法追踪/);

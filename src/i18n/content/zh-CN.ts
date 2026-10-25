@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "f379c4d74d9d495e29f7d2461cfcc302ac9e24467583ce8611fa55181c516d5c",
+    sourceHash: "813b33a56f69193f72c92dec5d89ad36b6d86bae91c9de40b0ac2cc951218d27",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库与 LLM Wiki",
@@ -494,7 +494,7 @@ export const zhCNContent = {
           {
             id: "not-notes",
             q: "Wenlan 能取代 Notion 或 Obsidian 吗？",
-            a: "不能。Wenlan 不取代你用来写作的 App。它可以把 Markdown 文件、text、可提取文字的 PDF、文件夹、Obsidian 库和 Logseq 图谱登记为来源。文件夹、笔记库和图谱可持续同步，也可只导入一次。Wenlan 不会改动你原有的 Obsidian 与 Logseq 笔记；持续同步时会在后台跟进，约每 30 秒检查一次；Wenlan 自己的笔记仍是 ~/.wenlan/ 底下可读的 Markdown。",
+            a: "不能。Wenlan 不取代你用来写作的 App。它可以把 Markdown 文件、text、可提取文字的 PDF、文件夹、Obsidian 库和 Logseq 图谱登记为来源。文件夹、笔记库和图谱可持续同步，也可只导入一次。没有你同意，Wenlan 不会改动你原有的 Obsidian 与 Logseq 笔记；持续同步时会在后台跟进，约每 30 秒检查一次；Wenlan 自己的笔记仍是 ~/.wenlan/ 底下可读的 Markdown。",
           },
           {
             id: "setup",
@@ -717,7 +717,7 @@ export const zhCNContent = {
                 "profile": [
                   "将 vault 作为来源；继续写原笔记，Wenlan 另建供你和 AI 使用的知识页。",
                   "完成 Wenlan 配置后，后台跟踪已连接来源，再由 Steep 刷新符合条件的页面，不改写原来的 vault。",
-                  "Wenlan 不会改动你原有的笔记；你改过的页面也先提出修订，再由你决定。"
+                  "没有你同意，Wenlan 不会改动你原有的笔记；你改过的页面也先提出修订，再由你决定。"
                 ],
                 "emphasis": []
               }
@@ -890,7 +890,7 @@ export const zhCNContent = {
             {
               id: "obsidian",
               title: "继续用你的 Obsidian 笔记库",
-              body: "连接笔记库后，Wenlan 在后台跟进变化，不会改动你原有的笔记。",
+              body: "连接笔记库后，Wenlan 在后台跟进变化；没有你同意，不会改动你原有的笔记。",
             },
             {
               id: "steep",
