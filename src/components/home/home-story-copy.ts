@@ -2,8 +2,8 @@ import type { Locale } from "@/i18n/locales";
 
 export const storyCopyByLocale = {
   en: {
-    heroDescription: "Wenlan pages cite their sources and update when those change. Claude Code, Codex, and Cursor can search them and put them to work. Citations are checked against sources, and your own writing stays yours.",
-    heroTrust: ["Free, open source, and local", "Your notes go only to the AI tools you pick", "Works with the AI tools you already use"],
+    heroDescription: "Wenlan pages cite their sources, get checked against them, and update when they change. Claude Code, Codex, Cursor, and more can put them to work.",
+    heroTrust: ["Free", "Open source", "Runs locally"],
     comparisonLabel: "Compare AI knowledge-base tools",
     steps: { wiki: "Organize", updates: "Update with new evidence", ai: "Put to work", graph: "See the connections" },
     wikiTitle: "Scattered notes. Connected knowledge.",
@@ -40,9 +40,9 @@ export const storyCopyByLocale = {
     moreTechnical: "Retrieval tests and methodology",
   },
   "zh-TW": {
-    heroDescription: "文瀾的筆記保留來源連結，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，讓知識活用起來。引用的句子會對照來源，你自己寫的內容仍由你作主。",
+    heroDescription: "文瀾的筆記附上來源，會對照來源檢查，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具都能直接拿來用。",
     // TODO(zh): provisional draft, review after English approval
-    heroTrust: ["免費開源", "筆記存在你的電腦", "支援你已在用的 AI 工具"],
+    heroTrust: ["免費", "開源", "本機執行"],
     comparisonLabel: "比較 AI 知識庫工具",
     steps: { wiki: "整理", updates: "隨資料更新", ai: "用進工作", graph: "知識相連" },
     wikiTitle: "把散落的內容，整理成可用的知識。",
@@ -81,9 +81,9 @@ export const storyCopyByLocale = {
     moreTechnical: "檢索評測與測試範圍",
   },
   "zh-CN": {
-    heroDescription: "文澜的笔记保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，让知识活用起来。引用的句子会对照来源，你自己写的内容仍由你做主。",
+    heroDescription: "文澜的笔记附上来源，会对照来源检查，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具都能直接拿来用。",
     // TODO(zh): provisional draft, review after English approval
-    heroTrust: ["免费开源", "笔记存在你的电脑", "支持你已在用的 AI 工具"],
+    heroTrust: ["免费", "开源", "本机运行"],
     comparisonLabel: "比较 AI 知识库工具",
     steps: { wiki: "整理", updates: "随资料更新", ai: "用于工作", graph: "知识相连" },
     wikiTitle: "把散落的内容，整理成可用的知识。",

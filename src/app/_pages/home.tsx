@@ -123,15 +123,7 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
               {redesign.hero.headline.post}
             </h1>
             <p className="home-hero-description mx-auto max-w-2xl text-balance text-[var(--o-text-secondary)]">
-              {locale === "en" ? (
-                story.heroDescription.split(/(?<=\.)\s+/).map((sentence, index) => (
-                  <span key={sentence} className="md:block">
-                    {index > 0 ? " " : null}{sentence}
-                  </span>
-                ))
-              ) : (
-                <HomeReadableText>{story.heroDescription}</HomeReadableText>
-              )}
+              {locale === "en" ? story.heroDescription : <HomeReadableText>{story.heroDescription}</HomeReadableText>}
             </p>
           </div>
           <DemoVideo

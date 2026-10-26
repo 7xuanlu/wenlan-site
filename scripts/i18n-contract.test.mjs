@@ -2553,7 +2553,7 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
     [
       "Turn your notes, files, and AI chats into a",
       "living wiki.",
-      "Wenlan pages cite their sources and update when those change. Claude Code, Codex, and Cursor can search them and put them to work. Citations are checked against sources, and your own writing stays yours.",
+      "Wenlan pages cite their sources, get checked against them, and update when they change. Claude Code, Codex, Cursor, and more can put them to work.",
     ],
   );
 
@@ -2566,7 +2566,7 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
         eyebrow: /AI 協助維護的個人知識庫/,
         pre: /筆記、文件、AI 對話，整理成/,
         emphasis: /持續更新的知識庫。/,
-        description: "文瀾的筆記保留來源連結，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，讓知識活用起來。引用的句子會對照來源，你自己寫的內容仍由你作主。",
+        description: "文瀾的筆記附上來源，會對照來源檢查，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具都能直接拿來用。",
       },
     },
     "zh-CN": {
@@ -2577,7 +2577,7 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
         eyebrow: /AI 协助维护的个人知识库/,
         pre: /笔记、文档、AI 对话，整理成/,
         emphasis: /持续更新的知识库。/,
-        description: "文澜的笔记保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，让知识活用起来。引用的句子会对照来源，你自己写的内容仍由你做主。",
+        description: "文澜的笔记附上来源，会对照来源检查，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具都能直接拿来用。",
       },
     },
   };
