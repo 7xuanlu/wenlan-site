@@ -148,12 +148,6 @@
   .wc-sourceGroup { grid-template-columns: 10.5rem minmax(0, 1fr); gap: 0 16px; align-items: baseline; }
   .wc-canvas .wc-sourceGroupLabel { line-height: 32px; }
 }
-/* Real product captures: framed, never stretched past their pixels. */
-.wc-canvas > .wc-capture { max-width: none; }
-.wc-capture img { border: 1px solid var(--cap-line); }
-.wc-capture[data-capture="cite-check"] { max-width: 1454px; }
-.wc-capture[data-capture="updates"] { max-width: 890px; }
-.wc-capture figcaption { margin-top: 4px; }
 .wc-detailLink { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; width: fit-content; margin-top: 0; color: var(--cap-muted); font-size: 13px; text-decoration: none; }
 .wc-detailLink:hover { color: var(--cap-ink); text-decoration: underline; text-underline-offset: 4px; }
 .wc-canvas a:focus-visible { outline: 2px solid var(--cap-accent); outline-offset: 3px; }
@@ -347,12 +341,11 @@
     min-width: 0;
   }
 }
-/* Three tracks on wide desktops: wide cells span two, and the update card sets its copy beside the capture. */
+/* Three tracks on wide desktops: the full-width sources card sets its copy beside the wall. */
 @media (min-width: 1280px) {
-  .wc-capabilityGrid > .wc-cellSplit > .wc-card { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+  .wc-capabilityGrid > .wc-cellSplit > .wc-card { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); }
   .wc-cellSplit .wc-cardCopy { grid-column: 1; grid-row: 1 / span 2; padding-right: 8px; }
   .wc-cellSplit .wc-canvas { grid-column: 2; grid-row: 1 / span 2; align-items: center; padding: 24px 28px 20px 12px; }
-  .wc-cellWide .wc-canvas:has(> .wc-capture) { align-items: center; }
 }
 /* Repository wiki: a page list, its diagram, and the code lines it relies on. */
 .wc-repoWikiDetail { display: flex; flex-direction: column; gap: 8px; margin-top: 18px; padding: 6px 12px 0; }

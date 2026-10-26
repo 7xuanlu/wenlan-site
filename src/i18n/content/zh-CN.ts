@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "46d4ec8e30b59beda20f79c122cf6cf78491d1188eec9f5c6d5e856048679d3a",
+    sourceHash: "33f3c361a9a26879ab7672c3ab3af41279d6692e4ab2c56a4f3425a6098ade7d",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库与 LLM Wiki",
@@ -890,27 +890,15 @@ export const zhCNContent = {
             },
             {
               // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
-              id: "cite-check",
-              title: "说不出根据的，它会告诉你",
-              body: "AI 工具保存页面时，Wenlan 会把每个带引用的句子和来源比对。如果多数引用对不上，页面不会保存，AI 也会知道原因，好修正引用。",
-            },
-            {
-              // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
-              id: "updates",
-              title: "知道哪些页面该更新",
-              body: "页面记得它依据的来源、页面与代码行。改了其中一项，只有建立在它上面的页面会被标记。Wenlan 写的页面可以由它更新；你写的页面会先问你。",
-            },
-            {
-              // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
               id: "lock",
               title: "你写的，由你决定",
-              body: "你写过或改过的页面设为“先问我”：AI 要改会先等你同意，Obsidian 笔记也要你接受才会改。AI 写的页面照常自己更新。",
+              body: "你写过或改过的页面设为“先问我”：AI 要改会先等你同意。AI 写的页面照常自己更新。",
             },
             {
               // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
               id: "repo-wiki",
               title: "替代码库写 wiki",
-              body: "在代码库里运行 /wenlan wiki，AI 工具会写出带图表的页面，每页都连到它依据的代码行。代码改了，Steep 会跟着更新，也可以在 GitHub 上每天更新。",
+              body: "在代码库里运行 /wenlan wiki，AI 工具会写出带图表的页面，每页都连到它依据的代码行。代码改了，页面会被标记，再由 AI 工具更新，也可以在 GitHub 上每天更新。",
             },
             {
               // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
@@ -924,9 +912,10 @@ export const zhCNContent = {
               body: "连接笔记库后，Wenlan 在后台跟进变化；没有你同意，不会改动你原有的笔记。",
             },
             {
+              // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
               id: "tools",
-              title: "接上你常用的 AI 工具",
-              body: "Claude Code、Codex、Cursor 等工具，完成插件或 MCP 配置后，就能查阅知识、保存记忆。",
+              title: "换了工具，知识还在",
+              body: "Claude Code、Codex、Cursor 等 AI 工具通过插件或 MCP 使用同一批页面与记忆。随时可以换工具，知识都留着。",
             },
             {
               id: "web-access",

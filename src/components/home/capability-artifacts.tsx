@@ -9,7 +9,6 @@ import {
 } from "@/components/icons";
 import { LocalizedLink } from "@/i18n/navigation";
 import { TopicOverviewArtifact, WebAccessArtifact } from "./capability-extensions";
-import { EvidenceImage } from "./evidence-image";
 import { KnowledgePageIcon, SpaceMark } from "./capability-native-icons";
 import { NativeRailIcon } from "./wiki-demo-shell";
 
@@ -24,8 +23,6 @@ const copyByLocale = {
     history: {"label": "Version history", "page": "Knowledge page", "memory": "Memory", "pageTitle": "Delivery checklist", "memoryTitle": "Display preference", "previous": "Earlier", "current": "Current", "correction": "Replaces earlier memory", "pageBase": "Pass the tests.", "pageLead": "Pass the tests", "pageAdded": ", then check desktop and mobile views.", "memoryBefore": "Use dark mode by default.", "memoryAfter": "Follow my system theme instead."},
     repoWiki: { label: "Wiki pages for this repository", relies: "Tied to these lines", diagram: "Diagram", pages: [{ title: "Architecture", nodes: ["App", "Daemon", "Database"], refs: ["src/main.rs:12–48", "crates/server/lib.rs:30–75"] }, { title: "Request flow", nodes: ["Client", "Router", "Handler"], refs: ["crates/server/router.rs:20–64"] }, { title: "Payments retry", nodes: ["Charge", "Retry", "Receipt"], refs: ["src/payments/retry.ts:8–41", "src/payments/charge.ts:55–90"] }] },
     lock: { label: "Suggested change", page: "Launch plan", status: "You wrote this page · Ask me first", current: "Current", suggested: "AI suggests", before: "Launch on November 14.", after: "Launch on November 14, after the payment test passes.", approve: "Approve", dismiss: "Dismiss", approved: "Approved. Your page now has the new line.", dismissed: "Dismissed. Your page stays as you wrote it." },
-    citeCheck: { alt: "Wenlan app screen in four steps: an AI tool writes a page; Wenlan refuses the write with the error \"write_page refused, nothing was written: too few cited sentences match their source\"; the AI fixes its citations so each sentence cites the memory that says it; the page is saved.", caption: "A refused write, fixed citations, then a saved page" },
-    updates: { alt: "Wenlan knowledge graph after one memory changed: the changed memory is ringed in orange, and the three pages built on it, Booking assistant rules, Building agents that learn, and When to ask for help, are flagged for an update. A page not built on it stays untouched.", caption: "One changed memory and the pages flagged because of it" },
   },
   "zh-TW": {
     steep: {"source": "來源", "memory": "記憶", "flow": "來源與記憶進入 Steep：找出關聯、長出新頁、找出矛盾。能力示意。", "items": [{"id": "link", "label": "找出關聯", "note": "為原記憶補上分類、搜尋線索與圖譜關聯。"}, {"id": "emerge", "label": "長出新頁", "note": "符合條件的相關來源與記憶可整理成有引用的新知識頁：由你的 AI 工具執行 /wenlan steep，或在「自動」模式由頁面合成模型完成。"}, {"id": "conflict", "label": "找出矛盾", "note": "需另行啟用進階整理；受保護的矛盾留待審閱，歷史仍保留。"}], "review": "待審", "shown": "已呈現"},
@@ -37,9 +34,6 @@ const copyByLocale = {
     history: {"label": "版本歷史", "page": "知識頁", "memory": "記憶", "pageTitle": "功能交付準則", "memoryTitle": "顯示偏好", "previous": "先前", "current": "目前", "correction": "取代先前記憶", "pageBase": "通過測試。", "pageLead": "通過測試", "pageAdded": "，再檢查桌面與手機畫面。", "memoryBefore": "預設使用深色模式。", "memoryAfter": "改為跟隨我的系統主題。"},
     repoWiki: { label: "這個程式庫的 wiki 頁面", relies: "依據這些程式碼行", diagram: "圖表", pages: [{ title: "架構", nodes: ["App", "Daemon", "資料庫"], refs: ["src/main.rs:12–48", "crates/server/lib.rs:30–75"] }, { title: "請求流程", nodes: ["用戶端", "Router", "Handler"], refs: ["crates/server/router.rs:20–64"] }, { title: "付款重試", nodes: ["扣款", "重試", "收據"], refs: ["src/payments/retry.ts:8–41", "src/payments/charge.ts:55–90"] }] },
     lock: { label: "建議修改", page: "上線計畫", status: "你寫的頁面 · 先問我", current: "目前", suggested: "AI 建議", before: "11 月 14 日上線。", after: "11 月 14 日上線，付款測試通過後再發布。", approve: "核准", dismiss: "忽略", approved: "已核准，頁面加上了新的一句。", dismissed: "已忽略，頁面保持你寫的樣子。" },
-    // TODO(zh): provisional draft; review after English approval
-    citeCheck: { alt: "Wenlan App 畫面的四個步驟：AI 工具寫入頁面；Wenlan 拒絕這次寫入，錯誤訊息是「write_page refused, nothing was written: too few cited sentences match their source」；AI 修正引用，讓每句話引用說出它的那則記憶；頁面成功儲存。", caption: "被拒絕的寫入、修正後的引用、存下的頁面" },
-    updates: { alt: "一則記憶變更後的 Wenlan 知識圖譜：變更的記憶以橘色圈標示，建立在它上面的三個頁面（Booking assistant rules、Building agents that learn、When to ask for help）被標記為需要更新；沒有依據它的頁面維持不變。", caption: "一則記憶變更，以及因此被標記的頁面" },
   },
   "zh-CN": {
     steep: {"source": "来源", "memory": "记忆", "flow": "来源与记忆进入 Steep：找出关联、长出新页、找出矛盾。能力示意。", "items": [{"id": "link", "label": "找出关联", "note": "为原记忆补上分类、搜索线索与图谱关联。"}, {"id": "emerge", "label": "长出新页", "note": "符合条件的相关来源与记忆可整理成有引用的新知识页：由你的 AI 工具运行 /wenlan steep，或在“自动”模式由页面合成模型完成。"}, {"id": "conflict", "label": "找出矛盾", "note": "需另行启用进阶整理；受保护的矛盾留待审核，历史仍保留。"}], "review": "待审", "shown": "已呈现"},
@@ -51,9 +45,6 @@ const copyByLocale = {
     history: {"label": "版本历史", "page": "知识页", "memory": "记忆", "pageTitle": "功能交付准则", "memoryTitle": "显示偏好", "previous": "先前", "current": "当前", "correction": "取代先前记忆", "pageBase": "通过测试。", "pageLead": "通过测试", "pageAdded": "，再检查桌面与手机画面。", "memoryBefore": "默认使用深色模式。", "memoryAfter": "改为跟随我的系统主题。"},
     repoWiki: { label: "这个代码库的 wiki 页面", relies: "依据这些代码行", diagram: "图表", pages: [{ title: "架构", nodes: ["App", "Daemon", "数据库"], refs: ["src/main.rs:12–48", "crates/server/lib.rs:30–75"] }, { title: "请求流程", nodes: ["客户端", "Router", "Handler"], refs: ["crates/server/router.rs:20–64"] }, { title: "付款重试", nodes: ["扣款", "重试", "收据"], refs: ["src/payments/retry.ts:8–41", "src/payments/charge.ts:55–90"] }] },
     lock: { label: "建议修改", page: "上线计划", status: "你写的页面 · 先问我", current: "当前", suggested: "AI 建议", before: "11 月 14 日上线。", after: "11 月 14 日上线，付款测试通过后再发布。", approve: "批准", dismiss: "忽略", approved: "已批准，页面加上了新的一句。", dismissed: "已忽略，页面保持你写的样子。" },
-    // TODO(zh): provisional draft; review after English approval
-    citeCheck: { alt: "Wenlan 应用画面的四个步骤：AI 工具写入页面；Wenlan 拒绝这次写入，错误信息是“write_page refused, nothing was written: too few cited sentences match their source”；AI 修正引用，让每句话引用说出它的那条记忆；页面成功保存。", caption: "被拒绝的写入、修正后的引用、保存的页面" },
-    updates: { alt: "一条记忆变更后的 Wenlan 知识图谱：变更的记忆以橙色圈标示，建立在它上面的三个页面（Booking assistant rules、Building agents that learn、When to ask for help）被标记为需要更新；没有依据它的页面保持不变。", caption: "一条记忆变更，以及因此被标记的页面" },
   },
 } as const;
 
@@ -275,21 +266,6 @@ function Sources({ copy, locale }: { copy: Copy["sources"]; locale: Locale }) {
   </div>;
 }
 
-// Real product views from the Product Hunt gallery; see public/images/home/capabilities/provenance.json.
-function CiteCheck({ copy, locale }: { copy: Copy["citeCheck"]; locale: Locale }) {
-  return <div className="wc-capture" data-capture="cite-check">
-    <EvidenceImage src="/images/home/capabilities/cite-check.webp" width={1454} height={460} locale={locale}
-      alt={copy.alt} caption={copy.caption} showCaption={false} mobileZoomWidth={1454} detailZoomWidth={1454} />
-  </div>;
-}
-
-function Updates({ copy, locale }: { copy: Copy["updates"]; locale: Locale }) {
-  return <div className="wc-capture" data-capture="updates">
-    <EvidenceImage src="/images/home/capabilities/updates.webp" width={890} height={661} locale={locale}
-      alt={copy.alt} caption={copy.caption} showCaption={false} mobileZoomWidth={890} detailZoomWidth={890} />
-  </div>;
-}
-
 function Obsidian({ copy, locale }: { copy: Copy["obsidian"]; locale: Locale }) {
   return <div className="wc-obsidian wc-withFooter">
     <div className="wc-artifactBody">
@@ -422,8 +398,6 @@ export function CapabilityArtifact({ id, locale }: { id: string; locale: Locale 
   const copy = copyByLocale[locale];
   switch (id) {
     case "steep": return <Steep copy={copy.steep} />;
-    case "cite-check": return <CiteCheck copy={copy.citeCheck} locale={locale} />;
-    case "updates": return <Updates copy={copy.updates} locale={locale} />;
     case "topics": return <TopicOverviewArtifact locale={locale} />;
     case "web-access": return <WebAccessArtifact locale={locale} />;
     case "sources": return <Sources copy={copy.sources} locale={locale} />;

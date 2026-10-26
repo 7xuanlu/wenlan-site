@@ -297,6 +297,8 @@ test("hero leads with useful outcomes and describes knowledge that can be revise
     assert.equal(hero.description, expected[locale].description, `${locale}: dictionary hero description`);
     assert.equal(storyCopyByLocale[locale].heroDescription, expected[locale].description, `${locale}: rendered hero description`);
     assert.doesNotMatch(storyCopyByLocale[locale].heroDescription, /always correct|never forget|保證正確|保证正确|永不忘記|永不忘记/i);
+    // The description already names the tools; the trust line does not repeat them.
+    assert.doesNotMatch(storyCopyByLocale[locale].heroTrust.join(" "), /Claude Code|Codex|Cursor/);
   }
 });
 
@@ -373,7 +375,8 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     assert.match(home.redesign.pipeline.intro, /setup|設定|配置/);
 
     const cards = home.redesign.bento.cells;
-    assert.deepEqual(cards.map(({ id }) => id), ["steep", "cite-check", "updates", "lock", "repo-wiki", "sources", "obsidian", "tools", "web-access", "spaces", "topics", "history"], `${locale}: revised capability coverage`);
+    // Citation checks and update flags are homepage story sections, not cards.
+    assert.deepEqual(cards.map(({ id }) => id), ["steep", "lock", "repo-wiki", "sources", "obsidian", "tools", "web-access", "spaces", "topics", "history"], `${locale}: revised capability coverage`);
     assert.match(cards.find(card => card.id === "steep").body, /Steep|\/wenlan steep/);
     assert.match(cards.find(card => card.id === "steep").body, /\/wenlan steep|隨叫|随叫/);
     assert.match(cards.find(card => card.id === "steep").body, /Automatic|自動|自动/);
@@ -401,6 +404,15 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     assert.match(cards.find(card => card.id === "lock").body, /Ask me first|先問我|先问我/);
     assert.match(cards.find(card => card.id === "lock").body, /AI wrote|AI 寫的|AI 写的/);
     assert.match(cards.find(card => card.id === "tools").body, /MCP/);
+    // Switching AI tools keeps the same pages and memories.
+    assert.match(`${cards.find(card => card.id === "tools").title} ${cards.find(card => card.id === "tools").body}`, /Switch tools|Change tools|換了工具|换了工具/);
+    assert.match(cards.find(card => card.id === "tools").body, /same pages and memories|同一批頁面與記憶|同一批页面与记忆/);
+    assert.doesNotMatch(cards.find(card => card.id === "repo-wiki").body, /Steep updates them/);
+    const story = storyCopyByLocale[locale];
+    assert.match(story.citeCheck.body, /cited sentence|附引用的句子|带引用的句子/);
+    assert.match(story.citeCheck.body, /isn't saved|不會存入|不会保存/);
+    assert.match(story.updates.body, /only the pages built on it|只有建立在它上面的頁面|只有建立在它上面的页面/);
+    assert.match(story.updates.body, /ask you first|先問你|先问你/);
     assert.match(cards.find(card => card.id === "spaces").body, /Spaces/);
     assert.match(cards.find(card => card.id === "history").body, /page revisions|知識頁.*修訂|知识页.*修订/i);
     assert.match(capabilityArtifacts, /Replaces earlier memory/);
@@ -462,4 +474,12 @@ test("context token figures are not attributed to LongMemEval retrieval quality"
   assert.match(home, /integrations\.tokenUnit/);
   assert.match(home, /integrations\.contextScope/);
   assert.match(home, /integrations\.recallScope/);
+});
+
+test("the ownership section says where files live without the stale model line", () => {
+  const home = readFileSync(new URL("../src/app/_pages/home.tsx", import.meta.url), "utf8");
+  assert.match(home, /title: "Your files stay on your computer\."/);
+  assert.match(home, /Pages are readable Markdown you can open in your own editor\./);
+  assert.match(home, /Your notes go only to the AI tools you pick\./);
+  assert.doesNotMatch(home, /Cloud models receive|雲端模型會接收|云端模型会接收/);
 });

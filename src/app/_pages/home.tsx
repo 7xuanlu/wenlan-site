@@ -7,7 +7,7 @@ import {
   GitHubLogoIcon,
 } from "@/components/icons";
 import type { WenlanRelease } from "@/lib/release-manifest";
-import { ProductMedia, StoryIntro, KnowledgeUpdates, KnowledgeConnections } from "@/components/home/home-story";
+import { ProductMedia, StoryIntro, CiteCheck, KnowledgeUpdates, KnowledgeConnections } from "@/components/home/home-story";
 import { storyCopyByLocale } from "@/components/home/home-story-copy";
 import { HeroScenarios } from "@/components/home/hero-scenarios";
 import { BentoSection } from "@/components/home/bento";
@@ -23,7 +23,7 @@ import { SoftwareApplicationData } from "@/components/software-application-data"
 
 const integrationCopy = {
   en: {
-    title: "Your knowledge stays yours.",
+    title: "Your files stay on your computer.",
     contextLabel: "Context per query",
     tokenUnit: "Tokens measure text length.",
     recallTitle: "Retrieval coverage",
@@ -32,12 +32,13 @@ const integrationCopy = {
     recallScope: "LongMemEval (oracle) · 500 questions",
     metricsLink: "Evaluation & methodology",
     recallLabel: "Average coverage of labeled relevant material in the top 5.",
-    ownershipBody: "Your pages, memories, and graph are stored locally. Open knowledge pages in your own editor.",
-    modelBody: "Choose a local or cloud model. Cloud models receive the content they process.",
+    ownershipBody: "Your pages, memories, and graph are stored on your computer. Pages are readable Markdown you can open in your own editor.",
+    modelBody: "Your notes go only to the AI tools you pick.",
     ownershipLink: "How local storage works",
   },
   "zh-TW": {
-    title: "你的知識，由你掌握。",
+    // TODO(zh): provisional draft, review after English approval
+    title: "檔案留在你的電腦上。",
     contextLabel: "每次查詢的背景內容",
     tokenUnit: "Token 計算文字長度。",
     recallTitle: "相關資料覆蓋率",
@@ -46,12 +47,13 @@ const integrationCopy = {
     recallScope: "LongMemEval（oracle）· 500 題",
     metricsLink: "查看完整評測與方法",
     recallLabel: "前 5 筆結果對標註相關資料的平均覆蓋率。",
-    ownershipBody: "知識頁、記憶與圖譜保存在本機；知識頁可用自己的編輯器開啟。",
-    modelBody: "模型可選本機或雲端；雲端模型會接收需要處理的內容。",
+    ownershipBody: "知識頁、記憶與圖譜都保存在你的電腦上；知識頁是可讀的 Markdown，可用自己的編輯器開啟。",
+    modelBody: "筆記只會送到你選的 AI 工具。",
     ownershipLink: "了解本機資料儲存",
   },
   "zh-CN": {
-    title: "你的知识，由你掌握。",
+    // TODO(zh): provisional draft, review after English approval
+    title: "文件留在你的电脑上。",
     contextLabel: "每次查询的背景内容",
     tokenUnit: "Token 计算文字长度。",
     recallTitle: "相关资料覆盖率",
@@ -60,8 +62,8 @@ const integrationCopy = {
     recallScope: "LongMemEval（oracle）· 500 题",
     metricsLink: "查看完整评测与方法",
     recallLabel: "前 5 条结果对标注相关资料的平均覆盖率。",
-    ownershipBody: "知识页、记忆与图谱保存在本地；知识页可用自己的编辑器打开。",
-    modelBody: "模型可选本地或云端；云端模型会接收需要处理的内容。",
+    ownershipBody: "知识页、记忆与图谱都保存在你的电脑上；知识页是可读的 Markdown，可用自己的编辑器打开。",
+    modelBody: "笔记只会发送给你选的 AI 工具。",
     ownershipLink: "了解本地数据存储",
   },
 } as const;
@@ -162,7 +164,9 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
         </div>
       </section>
 
-      <KnowledgeConnections locale={locale} />
+      <CiteCheck locale={locale} />
+
+      <KnowledgeUpdates locale={locale} />
 
       <section id="ai-recall" aria-labelledby="ai-recall-heading" className="scroll-mt-24 px-6 py-12 sm:py-20">
         <div className="mx-auto max-w-6xl">
@@ -179,7 +183,7 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
         </div>
       </section>
 
-      <KnowledgeUpdates locale={locale} />
+      <KnowledgeConnections locale={locale} />
 
       <div id="capabilities" data-home-capabilities className="scroll-mt-24">
         <BentoSection cells={redesign.bento.cells} title={content.sections.features.title} locale={locale} />

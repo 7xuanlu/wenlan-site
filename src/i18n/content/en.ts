@@ -893,24 +893,14 @@ export const enContent = {
               body: "Your AI tool turns notes, files, and chats into cited pages as it works, and /wenlan steep finishes the rest. No extra model needed. Prefer the background? Automatic uses a model you pick.",
             },
             {
-              id: "cite-check",
-              title: "It tells you what it can't back up",
-              body: "When your AI tool saves a page, Wenlan compares each cited sentence with its source. If most citations don't match, the page isn't saved and the AI is told why, so it can fix them.",
-            },
-            {
-              id: "updates",
-              title: "Know what needs an update",
-              body: "Pages remember the sources, pages, and code lines they rely on. Change one, and only the pages built on it get flagged. Wenlan can update pages it wrote; pages you wrote ask you first.",
-            },
-            {
               id: "lock",
               title: "Your writing stays yours",
-              body: "Pages you wrote or edited are set to Ask me first: AI changes wait for your OK. Obsidian notes change only when you accept. Pages AI wrote keep updating on their own.",
+              body: "Pages you wrote or edited are set to Ask me first: AI changes wait for your OK. Pages AI wrote keep updating on their own.",
             },
             {
               id: "repo-wiki",
               title: "A wiki for your code",
-              body: "Run /wenlan wiki in a repository. Your AI tool writes pages with diagrams, each tied to the code lines it relies on. When that code changes, Steep updates them, daily on GitHub if you like.",
+              body: "Run /wenlan wiki in a repository. Your AI tool writes pages with diagrams, each tied to the code lines it relies on. When that code changes, the pages are flagged and your AI tool updates them, daily on GitHub if you like.",
             },
             {
               id: "sources",
@@ -924,8 +914,8 @@ export const enContent = {
             },
             {
               id: "tools",
-              title: "Connect the AI tools you use",
-              body: "Claude Code, Codex, Cursor, and other configured clients can consult your knowledge and save memories through plugins or MCP.",
+              title: "Switch tools. Keep your knowledge.",
+              body: "Claude Code, Codex, Cursor, and other AI tools use the same pages and memories through plugins or MCP. Change tools anytime; your knowledge stays.",
             },
             {
               id: "web-access",

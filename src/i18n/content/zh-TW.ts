@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "46d4ec8e30b59beda20f79c122cf6cf78491d1188eec9f5c6d5e856048679d3a",
+    sourceHash: "33f3c361a9a26879ab7672c3ab3af41279d6692e4ab2c56a4f3425a6098ade7d",
     content: {
       seo: {
         title: "文瀾 Wenlan｜個人 AI 知識庫與 LLM Wiki",
@@ -890,27 +890,15 @@ export const zhTWContent = {
             },
             {
               // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
-              id: "cite-check",
-              title: "說不出根據的，它會告訴你",
-              body: "AI 工具儲存頁面時，Wenlan 會把每個附引用的句子和來源比對。如果多數引用對不上，頁面不會存入，AI 也會知道原因，好修正引用。",
-            },
-            {
-              // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
-              id: "updates",
-              title: "知道哪些頁面該更新",
-              body: "頁面記得它依據的來源、頁面與程式碼行。改了其中一項，只有建立在它上面的頁面會被標記。Wenlan 寫的頁面可以由它更新；你寫的頁面會先問你。",
-            },
-            {
-              // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
               id: "lock",
               title: "你寫的，由你決定",
-              body: "你寫過或改過的頁面設為「先問我」：AI 要改會先等你同意，Obsidian 筆記也要你接受才會改。AI 寫的頁面照常自己更新。",
+              body: "你寫過或改過的頁面設為「先問我」：AI 要改會先等你同意。AI 寫的頁面照常自己更新。",
             },
             {
               // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
               id: "repo-wiki",
               title: "替程式庫寫 wiki",
-              body: "在程式庫裡執行 /wenlan wiki，AI 工具會寫出附圖表的頁面，每頁都連到它依據的程式碼行。程式碼改了，Steep 會跟著更新，也可以在 GitHub 上每天更新。",
+              body: "在程式庫裡執行 /wenlan wiki，AI 工具會寫出附圖表的頁面，每頁都連到它依據的程式碼行。程式碼改了，頁面會被標記，再由 AI 工具更新，也可以在 GitHub 上每天更新。",
             },
             {
               // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
@@ -924,9 +912,10 @@ export const zhTWContent = {
               body: "連接筆記庫後，Wenlan 在背景跟進變更；沒有你同意，不會改動你原有的筆記。",
             },
             {
+              // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
               id: "tools",
-              title: "接上你常用的 AI 工具",
-              body: "Claude Code、Codex、Cursor 等工具，完成外掛或 MCP 設定後，就能查閱知識、保存記憶。",
+              title: "換了工具，知識還在",
+              body: "Claude Code、Codex、Cursor 等 AI 工具透過外掛或 MCP 使用同一批頁面與記憶。隨時可以換工具，知識都留著。",
             },
             {
               id: "web-access",

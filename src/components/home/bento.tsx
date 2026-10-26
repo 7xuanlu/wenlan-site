@@ -56,7 +56,10 @@ function BentoCell({
         style={{ "--cell-accent": accent } as React.CSSProperties}
       >
         <div className="wc-cardCopy">
-          <h3 className="relative font-serif text-xl font-medium tracking-tight">{title}</h3>
+          <h3 className="relative font-serif text-xl font-medium tracking-tight">{title.split(/(?<=\.)\s+(?=\S)/).map((sentence, index) => (
+            // A two-sentence title breaks between its sentences, never inside one.
+            <span key={sentence}>{index > 0 ? " " : null}<span className="inline-block max-w-full">{sentence}</span></span>
+          ))}</h3>
           <p className="relative mt-2 text-base leading-relaxed text-pretty text-[var(--o-text-secondary)]"><HomeReadableText>{body}</HomeReadableText></p>
         </div>
         <div className="wc-canvas" data-capability={id}>{children}</div>
@@ -66,28 +69,26 @@ function BentoCell({
 }
 
 /* Per-cell layout, accent, land order, and artifact. Copy comes from the
-   dictionary and joins by id. Wide desktops use three tracks: each row is a
-   single and a wide cell, or three singles, so the order below leaves no holes.
-   Narrower screens pair every cell (two tracks) or stack them (one). */
-type CellLayout = "single" | "wide" | "split";
+   dictionary and joins by id. Wide desktops use three tracks: three singles,
+   then the full-width sources card (copy beside its wall), then two rows of
+   three singles, so the ten cells leave no holes. Narrower screens pair every
+   cell (two tracks, five rows) or stack them (one). */
+type CellLayout = "single" | "split";
 const cellChrome: Record<string, { accent: string; delayMs: number; layout?: CellLayout }> = {
   steep: { accent: "var(--o-sage)", delayMs: 0 },
-  "cite-check": { accent: "var(--o-sage)", delayMs: 40, layout: "wide" },
-  updates: { accent: "var(--o-sage)", delayMs: 80, layout: "split" },
-  lock: { accent: "var(--o-sage)", delayMs: 120 },
-  "repo-wiki": { accent: "var(--o-sage)", delayMs: 140 },
-  sources: { accent: "var(--o-warm)", delayMs: 160, layout: "wide" },
-  obsidian: { accent: "var(--o-warm)", delayMs: 180 },
-  tools: { accent: "var(--o-warm)", delayMs: 200 },
-  "web-access": { accent: "var(--o-warm)", delayMs: 220 },
-  spaces: { accent: "var(--o-warm)", delayMs: 240 },
-  topics: { accent: "var(--o-warm)", delayMs: 260 },
-  history: { accent: "var(--o-warm)", delayMs: 280 },
+  lock: { accent: "var(--o-sage)", delayMs: 40 },
+  "repo-wiki": { accent: "var(--o-sage)", delayMs: 80 },
+  sources: { accent: "var(--o-warm)", delayMs: 120, layout: "split" },
+  obsidian: { accent: "var(--o-warm)", delayMs: 160 },
+  tools: { accent: "var(--o-warm)", delayMs: 180 },
+  "web-access": { accent: "var(--o-warm)", delayMs: 200 },
+  spaces: { accent: "var(--o-warm)", delayMs: 220 },
+  topics: { accent: "var(--o-warm)", delayMs: 240 },
+  history: { accent: "var(--o-warm)", delayMs: 260 },
 };
 const layoutClass: Record<CellLayout, string> = {
   single: "",
-  wide: "wc-cellWide xl:col-span-2",
-  split: "wc-cellWide wc-cellSplit xl:col-span-2",
+  split: "wc-cellWide wc-cellSplit xl:col-span-3",
 };
 
 export function BentoSection({
