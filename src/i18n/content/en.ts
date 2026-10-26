@@ -905,7 +905,7 @@ export const enContent = {
             {
               id: "lock",
               title: "Your writing stays yours",
-              body: "Pages you wrote or edited are set to Ask me first: AI changes wait for your OK. Your Obsidian notes too. Pages AI wrote keep updating on their own.",
+              body: "Pages you wrote or edited are set to Ask me first: AI changes wait for your OK. Obsidian notes change only when you accept. Pages AI wrote keep updating on their own.",
             },
             {
               id: "repo-wiki",

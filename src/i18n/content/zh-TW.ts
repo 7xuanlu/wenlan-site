@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "d344390aad6164b4bbf40bb2c6b1158b1247e05f6a61633b61c66a29abbc2ad1",
+    sourceHash: "46d4ec8e30b59beda20f79c122cf6cf78491d1188eec9f5c6d5e856048679d3a",
     content: {
       seo: {
         title: "文瀾 Wenlan｜個人 AI 知識庫與 LLM Wiki",
@@ -904,7 +904,7 @@ export const zhTWContent = {
               // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
               id: "lock",
               title: "你寫的，由你決定",
-              body: "你寫過或改過的頁面設為「先問我」：AI 要改會先等你同意，你的 Obsidian 筆記也一樣。AI 寫的頁面照常自己更新。",
+              body: "你寫過或改過的頁面設為「先問我」：AI 要改會先等你同意，Obsidian 筆記也要你接受才會改。AI 寫的頁面照常自己更新。",
             },
             {
               // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval

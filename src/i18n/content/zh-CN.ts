@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "d344390aad6164b4bbf40bb2c6b1158b1247e05f6a61633b61c66a29abbc2ad1",
+    sourceHash: "46d4ec8e30b59beda20f79c122cf6cf78491d1188eec9f5c6d5e856048679d3a",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库与 LLM Wiki",
@@ -904,7 +904,7 @@ export const zhCNContent = {
               // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
               id: "lock",
               title: "你写的，由你决定",
-              body: "你写过或改过的页面设为“先问我”：AI 要改会先等你同意，你的 Obsidian 笔记也一样。AI 写的页面照常自己更新。",
+              body: "你写过或改过的页面设为“先问我”：AI 要改会先等你同意，Obsidian 笔记也要你接受才会改。AI 写的页面照常自己更新。",
             },
             {
               // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
