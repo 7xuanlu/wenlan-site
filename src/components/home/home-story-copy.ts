@@ -3,7 +3,7 @@ import type { Locale } from "@/i18n/locales";
 export const storyCopyByLocale = {
   en: {
     heroDescription: "Wenlan pages cite their sources, get checked against them, and update when they change. Claude Code, Codex, Cursor, and more can put them to work.",
-    heroTrust: ["Free", "Open source", "Runs locally"],
+    heroTrust: ["Free", "Open source", "Local-first"],
     comparisonLabel: "Compare AI knowledge-base tools",
     steps: { wiki: "Organize", updates: "Update with new evidence", ai: "Put to work", graph: "See the connections" },
     wikiTitle: "Scattered notes. Connected knowledge.",
@@ -42,7 +42,7 @@ export const storyCopyByLocale = {
   "zh-TW": {
     heroDescription: "文瀾的筆記附上來源，會對照來源檢查，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具都能直接拿來用。",
     // TODO(zh): provisional draft, review after English approval
-    heroTrust: ["免費", "開源", "本機執行"],
+    heroTrust: ["免費", "開源", "本地優先"],
     comparisonLabel: "比較 AI 知識庫工具",
     steps: { wiki: "整理", updates: "隨資料更新", ai: "用進工作", graph: "知識相連" },
     wikiTitle: "把散落的內容，整理成可用的知識。",
@@ -83,7 +83,7 @@ export const storyCopyByLocale = {
   "zh-CN": {
     heroDescription: "文澜的笔记附上来源，会对照来源检查，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具都能直接拿来用。",
     // TODO(zh): provisional draft, review after English approval
-    heroTrust: ["免费", "开源", "本机运行"],
+    heroTrust: ["免费", "开源", "本地优先"],
     comparisonLabel: "比较 AI 知识库工具",
     steps: { wiki: "整理", updates: "随资料更新", ai: "用于工作", graph: "知识相连" },
     wikiTitle: "把散落的内容，整理成可用的知识。",
