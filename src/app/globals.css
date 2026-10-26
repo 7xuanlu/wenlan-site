@@ -490,9 +490,9 @@ html:lang(zh-Hans) .brand-wordmark__cjk {
 .home-hero-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; margin-top: 28px; }
 .home-hero-actions > a, .home-hero-actions > button { height: 46px; padding-block: 0; }
 /* One quiet line under the buttons: short facts joined by small dots. */
-.home-hero-trust { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; margin: 18px auto 0; padding: 0; list-style: none; font-size: 13px; line-height: 20px; letter-spacing: 0.01em; color: var(--o-text-muted); }
+.home-hero-trust { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; margin: 18px auto 0; padding: 0; list-style: none; font-size: 13px; line-height: 20px; letter-spacing: 0.02em; color: var(--o-text-muted); }
 .home-hero-trust > li { display: inline-flex; align-items: center; white-space: nowrap; }
-.home-hero-trust > li + li::before { content: ""; width: 3px; height: 3px; margin-inline: 10px; border-radius: 999px; background: currentColor; opacity: 0.55; }
+.home-hero-trust > li + li::before { content: ""; width: 3px; height: 3px; margin-inline: 16px; border-radius: 999px; background: currentColor; opacity: 0.55; }
 .home-hero-product { margin-top: 8px; }
 .home-hero-product .wiki-demo-shell { box-shadow: 0 8px 28px -18px #1a1a2e30; }
 /* Keep the demo provenance and recorded-view entry quiet. */
