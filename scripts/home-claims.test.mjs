@@ -480,6 +480,6 @@ test("the ownership section says where files live without the stale model line",
   const home = readFileSync(new URL("../src/app/_pages/home.tsx", import.meta.url), "utf8");
   assert.match(home, /title: "Your files stay on your computer\."/);
   assert.match(home, /Pages are readable Markdown you can open in your own editor\./);
-  assert.match(home, /Your notes go only to the AI tools you pick\./);
+  assert.match(home, /You decide which AI tools can read them\./);
   assert.doesNotMatch(home, /Cloud models receive|雲端模型會接收|云端模型会接收/);
 });

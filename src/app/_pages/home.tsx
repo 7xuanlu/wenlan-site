@@ -33,7 +33,7 @@ const integrationCopy = {
     metricsLink: "Evaluation & methodology",
     recallLabel: "Average coverage of labeled relevant material in the top 5.",
     ownershipBody: "Your pages, memories, and graph are stored on your computer. Pages are readable Markdown you can open in your own editor.",
-    modelBody: "Your notes go only to the AI tools you pick.",
+    modelBody: "You decide which AI tools can read them.",
     ownershipLink: "How local storage works",
   },
   "zh-TW": {

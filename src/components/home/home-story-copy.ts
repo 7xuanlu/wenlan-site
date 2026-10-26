@@ -24,8 +24,8 @@ export const storyCopyByLocale = {
     citeCheck: {
       title: "It tells you what it can't back up.",
       body: "When your AI tool saves a page, Wenlan compares each cited sentence with its source. If most citations don't match, the page isn't saved and the AI is told why, so it can fix them.",
-      alt: "Wenlan app screen in four steps: an AI tool writes a page; Wenlan refuses the write with the error \"write_page refused, nothing was written: too few cited sentences match their source\"; the AI fixes its citations so each sentence cites the memory that says it; the page is saved.",
-      caption: "Real write refused by Wenlan · sample data",
+      alt: "An AI tool session in four steps: an AI tool writes a page; Wenlan refuses the write with the error \"write_page refused, nothing was written: too few cited sentences match their source\"; the AI fixes its citations so each sentence cites the memory that says it; the page is saved.",
+      caption: "Wenlan's real error when a write is refused · sample data",
     },
     graph: {
       title: "Your knowledge grows and connects.",
