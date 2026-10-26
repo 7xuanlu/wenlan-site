@@ -246,6 +246,12 @@ const expectedArticleDates = new Map([
   ],
 ]);
 const builtArticleDates = new Map(expectedArticleDates);
+// Local draft dates differ from the still-published selection guide.
+for (const locale of ["zh-TW", "zh-CN"]) {
+  builtArticleDates.set(`/${locale}/learn/choose-ai-knowledge-base-tool`, {
+    datePublished: "2026-08-02", dateModified: "2026-10-25",
+  });
+}
 const requiredLocalizedBuiltHtmlPages = requiredLocalizedLearnPaths.map((path) => ({
   path: `${path.slice(1)}.html`,
   canonical: `https://wenlan.app${path}`,
@@ -328,7 +334,7 @@ const requiredBuiltHtmlPages = [
     canonical: "https://wenlan.app/learn/choose-ai-knowledge-base-tool",
     type: "Article",
     datePublished: "2026-08-02",
-    dateModified: "2026-10-23",
+    dateModified: "2026-10-25",
   },
   {
     path: "learn/verify-ai-knowledge-base-citations.html",

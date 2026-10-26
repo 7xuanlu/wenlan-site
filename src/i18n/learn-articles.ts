@@ -1345,95 +1345,176 @@ const zhTWArticles = {
     slug: "choose-ai-knowledge-base-tool",
     eyebrow: "選型指南",
     category: "Workflows",
-    title: "如何選 AI 知識庫工具：8 個真正重要的檢查",
-    description:
-      "先分清文件問答、RAG、筆記工具與維護型知識庫，再用來源、更新、審查、資料控制與實測結果選擇工具。",
-    metaTitle: "如何選 AI 知識庫工具：8 個檢查 | Wenlan",
-    metaDescription:
-      "文件問答、RAG、筆記工具、維護型知識庫，到底哪種適合你？先分清四種工具的本質差異，再用 8 個實際測試——來源追溯、更新機制、審查流程、資料控制與實測結果——選出經得起檢驗的 AI 知識庫工具。",
+    title: "AI 第二大腦：選 App，還是自己建立？",
+    description: "先看筆記如何變成實際成果，再比較 Claude Code／Codex、可選配 AI 的 Obsidian，以及文瀾維護的 Wiki。",
+    metaTitle: "AI 第二大腦：選 App，還是自己建立？ | Wenlan",
+    metaDescription: "AI 第二大腦能做什麼？從筆記整理出專案進度，再比較 Claude／Codex、AI 外掛選用的 Obsidian，以及文瀾。",
     keywords: [
+      "AI 第二大腦",
+      "Obsidian second brain",
+      "AI 知識庫怎麼選",
       "AI 知識庫工具",
-      "AI 知識庫軟體推薦",
-      "如何選 AI 知識庫",
-      "本地 AI 知識庫工具",
-      "開源 AI 知識庫",
-      "AI agent 知識庫",
-      "AI 知識庫比較",
       "Wenlan 文瀾",
     ],
     publishedAt: "2026-08-02",
-    updatedAt: "2026-10-23",
+    updatedAt: "2026-10-25",
     author: "Qi-Xuan Lu",
-    readingTime: "8 分鐘閱讀",
-    audience: "正在選擇文件問答、RAG、本地筆記或跨 AI agent 知識系統的繁體中文使用者",
+    readingTime: "10 分鐘閱讀",
+    audience: "已保存筆記，想了解 AI 第二大腦能做什麼並選擇合適起點的人",
     heroBullets: [
-      "先選操作模式，再比較功能清單。",
-      "用來源改變與衝突測試答案是否仍可追溯、可更新。",
-      "用自己的小型文件集對每個候選工具執行同一套驗收。",
+      "了解 AI 如何運用已保存的知識。",
+      "選擇符合工作方式的組合，不只比較功能。",
+      "查核實際答案、來源，以及內容更新後的變化。",
     ],
     sections: [
       {
-        heading: "先分清你需要哪一種 AI 知識庫",
+        heading: "為什麼用 AI 第二大腦？",
+        figure: "second-brain-concept",
         body: [
-          "不要先問哪個工具最好。先判斷需要的是當次會話的文件上傳、針對一組文件的 RAG 問答、讓 AI 直接讀取筆記或 Markdown vault，還是跨會話與多個 agent 維護有來源的目前答案。",
-          "這四種模式可以組合，但解決的問題不同。把它們放在同一張功能表比較，通常會買到不符合實際工作方式的產品。",
+          "如果你存了不少筆記，寫提案或整理專案進度時卻還是得從頭翻找，第二大腦就是為了讓這些資料能再派上用場。這篇會把幾份筆記變成一份專案更新，再把這次的經驗用在下個專案。",
+          "第二大腦是一套把知識存在腦外、之後能找回來使用的方法。這延續了個人知識管理（PKM）：留下想法、串起關聯、提煉重點、做成成果。AI 能分擔整理和起草；你補上情境，決定採用什麼。",
         ],
+        link: { label: "已經了解概念？直接比較三種做法", href: "#choose-your-path" },
       },
       {
-        heading: "8 個真正重要的檢查",
-        body: ["用一小組具代表性的文件，先寫下預期答案，再對每個候選工具做相同測試。"],
-        bullets: [
-          "來源可追溯：重要答案能否開啟支持它的確切來源或引用？",
-          "更新狀態：來源改變後，哪些答案過期、哪些需要刷新是否看得見？",
-          "衝突與審查：矛盾證據會進入明確審查，還是被模型靜默改寫？",
-          "資料所有權與匯出：能否保留或匯出可讀檔案與歷史，不被單一服務綁住？",
-          "隱私邊界：哪些檔案、提示、檢索片段與模型呼叫會離開電腦？",
-          "Agent 互通：同一份知識能否供實際使用的 Claude Code、Codex、Cursor 或 ChatGPT 讀取？",
-          "輸入限制：真正支援哪些格式、掃描文件、資料夾、vault 與檔案大小？",
-          "可重複驗收：工具能否處理可回答、不可回答、跨來源三種問題，並在來源修改後得到正確結果？",
+        id: "what-you-can-do",
+        heading: "把幾份筆記整理成專案進度更新",
+        body: [
+          "想像同事問：「我們還會照原定日期上線嗎？」你手邊有專案簡報和通話筆記，也記得計畫後來改過。現在你得把線索串起來，告訴對方接下來該怎麼做。",
+          "我們讓 Claude 連接 Wenlan 裡的五份虛構專案筆記，請它草擬進度更新。我想得到的是同事能拿來做事的說明，也要交代哪些事還沒決定。",
         ],
+        steps: [
+          {
+            title: "提供幾份相關筆記給 AI",
+            body: "不連接 App 也能先試試這個做法：把同一個專案的兩三份簡短筆記貼進一個你願意分享這些內容的 AI 聊天工具。保留筆記名稱和日期。還沒有筆記？先寫下你知道什麼、需要做哪項決定，就足以開始第一次嘗試。",
+          },
+          {
+            title: "提出一個你真的需要答案的問題",
+            body: "先問哪項決定已獲核准，再打開答案依據的原始筆記。這個例子核准的日期是 2027 年 1 月 14 日。價格還沒決定，答案也應保留這一點。",
+            prompt: {
+              label: "貼給 AI：核對上線計畫",
+              text: "核准的上線日期是哪一天？哪些事還沒決定？請列出用到的筆記，指出互相矛盾的內容，不要補上未記錄的決定。",
+            },
+          },
+          {
+            title: "整理出真正用得上的內容",
+            body: "接著我們請 Claude 草擬一份簡短更新，列出上線日期、已確認範圍和待決事項。以下是它實際輸出的中文翻譯：",
+            bullets: [
+              "上線日期：核准於 2027 年 1 月 14 日上線，預留時間進行資料匯出審查。",
+              "已確認範圍：電子郵件、app 內協助和電話支援；資料可匯出為 CSV。",
+              "待決事項：價格。尚未核准任何價格。",
+            ],
+            image: {
+              src: "/images/product-evidence/claude-cedar-project-update.png",
+              width: 776, height: 230,
+              alt: "Claude 實際草稿：2027 年 1 月 14 日上線以完成資料匯出審查；電子郵件、app 內協助和電話支援，並提供 CSV 匯出；價格仍未決。來源：decision-2026-10-15 和 review-check-2026-10-22。",
+              caption: "Claude 根據五份虛構專案筆記寫出的草稿。注意它保留了未定的價格，也列出來源。",
+            },
+          },
+        ],
+        link: { label: "查看我們使用的 Wenlan 設定流程", href: "/learn/build-local-ai-knowledge-base-from-documents#add-documents-in-wenlan" },
       },
       {
-        heading: "一組能揭露問題的驗收資料",
+        id: "do-you-need-another-app",
+        heading: "把這次的經驗用在下一個專案",
         body: [
-          "不要一開始匯入整個資料庫。準備一份乾淨來源、一份過期版本、一組互相矛盾的說法，以及一個資料中沒有答案的問題。好的工具應該暴露不確定性和衝突，而不是只產生流暢文字。",
-          "修改其中一份來源後重跑相同問題。若答案不會顯示過期、引用仍指向舊內容，或無法判斷哪些頁面需要更新，這套系統就還不適合承擔長期知識。",
+          "剛才的更新回答了眼前的問題。這些筆記也能幫你想清楚：下次可以怎麼做？我們用 Codex 接著試了一次：",
         ],
+        steps: [
+          {
+            title: "問出下次值得注意的事",
+            body: "我們把相關筆記片段和核對過的更新貼給 Codex，問下次宣布上線前該確認什麼。它把事實和建議分開，提醒我們確認核准日期、範圍，以及尚未決定的價格。",
+            prompt: {
+              label: "貼給 AI：整理下次的檢查清單",
+              text: "下次宣布新專案之前，我該確認什麼？根據這些筆記提出三個問題，分清事實和建議；不要把這次專案的決定套到下個專案。",
+            },
+          },
+          {
+            title: "核對、修改，再存下來",
+            body: "我們把第三題改成「誰負責確認未決事項？」筆記未指定負責人；這是我們建議的下一步。修改後存成 next-launch-checklist.md，以下是清單的中文翻譯：",
+            bullets: [
+              "這個專案最新核准的日期與目標是什麼？它取代了哪項舊決定？",
+              "哪些範圍與價格已核准，哪些還沒決定？",
+              "對外分享計畫前，誰負責確認每個未決事項？",
+            ],
+            afterBullets: [
+              "來源筆記：project-brief.md；client-call-2026-10-10.md；decision-2026-10-15.md；review-check-2026-10-22.md。",
+            ],
+          },
+          {
+            title: "在新對話裡用這份筆記",
+            body: "我們只把這份清單交給 Codex，換成另一個還沒有核准計畫的虛構專案 Harbor。以下是它的提問（中譯），沒有把 Cedar 的日期或範圍照搬過來：",
+            bullets: [
+              "Harbor 應提出什麼目標與預定日期？",
+              "哪些範圍與價格需要提案核准？",
+              "對外分享計畫前，誰負責確認每個未決事項？",
+            ],
+          },
+        ],
+        link: { label: "查看範例筆記與保存的檢查清單（英文 .md）", href: "/examples/ai-second-brain/worked-example.md" },
       },
       {
-        heading: "Wenlan 適合哪一種模式",
+        id: "choose-your-path",
+        heading: "打造 AI 第二大腦的三種方式",
         body: [
-          "Wenlan 對應維護型、具來源的本地知識層。Sources、原子知識與 Pages 分開保存；Claude Code、Codex、Cursor、ChatGPT 等客戶端透過 plugin 或 MCP 使用同一套知識；引用、過期狀態、修訂與人工審查保持可見。",
-          "完成平台與客戶端設定後，可用一個小型來源集驗證，而不是只相信產品描述。",
+          "上線日期改了，哪份已保存的摘要也需要跟著改？我們比較的是：在哪裡做事、結果存在哪裡，以及由誰維護。",
+          "我們開發 Wenlan。下面說明我會怎麼選：直接請 AI Agent 處理檔案、留在 Obsidian 自己整理，或使用專門維護 Wiki 的 App。",
         ],
-        code: {
-          label: "Wenlan 驗證流程",
-          code: "wenlan status\nwenlan sources add ~/Knowledge/evaluation-set\n/wenlan distill <測試主題>\n/wenlan pages <測試主題>\n/wenlan lint\n/wenlan curate",
+        figure: "second-brain-paths",
+      },
+      {
+        id: "obsidian-second-brain-setup",
+        heading: "已經在用 Obsidian？Wenlan 多了什麼？",
+        body: [
+          "繼續在 Obsidian 寫會議筆記就好。文瀾會讀取連接的筆記庫，不搬移或改寫原始檔案，再把相關內容整理成獨立的 Wiki 頁面，附上原始筆記連結。",
+          "假設會議改了上線日期，文瀾會追蹤哪些 Wiki 頁面引用了這份筆記，並準備更新，你不用逐頁找出來。現有的連結、搜尋或外掛若已夠用，就繼續用它們。",
+        ],
+        link: {
+          label: "連接你的 Obsidian 筆記庫",
+          href: "/learn/migrate-obsidian-vault-to-llm-wiki",
         },
       },
       {
-        heading: "何時不該增加另一套知識庫",
+        id: "review-the-update",
+        heading: "哪些更新會自動完成？",
         body: [
-          "如果只是讀一份短文件、現有 wiki 已由團隊穩定維護，或 AI 不需要跨會話重用答案，直接文件閱讀或目前的筆記工具可能已經足夠。",
-          "選擇的標準不是功能最多，而是以最低維護成本通過你的來源、更新、衝突、隱私與可重複驗收。",
+          "改過的筆記同步進文瀾後，背景維護就能為依賴它的頁面準備更新：",
+        ],
+        bullets: [
+          "AI 維護、未被你編輯或鎖定的頁面：草稿通過文瀾的引用檢查後，可以自動更新。",
+          "你建立、編輯或鎖定的頁面：先提出修訂。接受前會保留原文，你也可以略過這次變更。",
+        ],
+        afterBullets: [
+          "若引用檢查沒通過，文瀾會保留目前的頁面。這項檢查比對來源文字的支持程度，不保證每個結論都正確；重要決定仍要回到原始筆記核對。",
+          "在設定裡選擇 AI 服務，為背景整理與 Wiki 頁面生成指定模型，並啟用背景維護。文瀾需保持執行，模型也需可用；更新不會立即完成。",
+        ],
+        link: {
+          label: "設定背景維護與頁面審查",
+          href: "https://github.com/wenlan-app/wenlan/blob/v0.20.1/docs/steep.md",
+        },
+      },
+      {
+        heading: "先用一項決定試試看",
+        body: [
+          "把整個資料庫搬進來前，先在你選的方案裡試著改一項決定。",
+          "加入更多筆記前，先確認所選模型會把資料送去哪裡。筆記存在本機，不代表雲端 AI 的處理也留在本機。",
+        ],
+        bullets: [
+          "若使用聊天功能，提出筆記能回答的問題，再打開答案點名的原始筆記；也問一個筆記答不出來的問題，AI 應坦白不知道。",
+          "修改一項事實後，重跑同一個問題或指令。檢查新答案或寫入的檔案是否使用新資訊。",
+          "若方案會保存摘要或 Wiki 頁面，再單獨檢查它們。加上一句自己的文字，確認更新是否保留它，以及能否審查變更。",
+          "確認支援的檔案格式、AI 工具能否使用已保存的結果，以及如何匯出。",
         ],
       },
     ],
     faqs: [
       {
-        question: "最好的 AI 知識庫一定是 RAG 工具嗎？",
-        answer:
-          "不一定。RAG 很適合在提問時找來源片段，但有些需求只要臨時讀文件，另一些則需要跨會話維護可審查、可重用的答案。",
+        question: "使用 AI 第二大腦一定要會寫程式嗎？",
+        answer: "不需要。你可以先把幾份筆記貼進 AI 聊天工具。Obsidian 不用 AI 就能寫筆記與建立連結，外掛是選配；文瀾則提供管理來源與維護 Wiki 的介面。Claude Code 或 Codex 能幫你處理檔案，但指示與修改仍由你管理、檢查。",
       },
       {
-        question: "測試時應該匯入全部資料嗎？",
-        answer:
-          "不用。先用包含乾淨來源、過期版本、衝突與無答案問題的小型資料集。工具通過後再逐步擴大。",
-      },
-      {
-        question: "開源就代表資料一定不會離開本機嗎？",
-        answer:
-          "不代表。仍要檢查儲存位置、模型供應商、embedding 與 reranking 呼叫，以及遠端同步或遙測設定。",
+        question: "我可以保留 Obsidian 筆記嗎？",
+        answer: "可以。文瀾的來源連接會讀取 vault，不搬移或改寫原始筆記。你可以繼續在 Obsidian 寫作、選擇加上 AI 外掛，或連接文瀾來維護 Wiki。",
       },
     ],
     relatedSlugs: [
@@ -1446,30 +1527,18 @@ const zhTWArticles = {
       "test-ai-knowledge-base-retrieval-after-changes",
     ],
     officialReferences: [
-      {
-        label: "Wenlan 知識模型",
-        href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build",
-      },
-      {
-        label: "Wenlan 支援的文件來源",
-        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
-      },
-      {
-        label: "Wenlan MCP 客戶端",
-        href: "https://wenlan.app/docs/mcp-clients",
-      },
-      {
-        label: "Wenlan 審查與信任",
-        href: "https://wenlan.app/docs/review-and-trust",
-      },
-      {
-        label: "Wenlan 資料與隱私",
-        href: "https://wenlan.app/docs/data-and-privacy",
-      },
+      { label: "Tiago Forte：第二大腦的用途", href: "https://fortelabs.com/blog/basboverview/" },
+      { label: "Ron Forbes：AI 第二大腦的實際用途", href: "https://www.ronforbes.com/blog/building-your-ai-second-brain" },
+      { label: "Obsidian：寫筆記與建立連結", href: "https://help.obsidian.md/" },
+      { label: "選用 Agent 工具包：設定與指令", href: "https://github.com/eugeniughelbur/obsidian-second-brain/tree/fe84aa94ea75a46a213d94304fe9f0501c18f109" },
+      { label: "選用 Copilot 外掛：選擇上下文", href: "https://docs.obsidiancopilot.com/context-and-mentions/" },
+      { label: "文瀾：自動維護與審查", href: "https://github.com/wenlan-app/wenlan/blob/v0.20.1/docs/steep.md" },
+      { label: "文瀾：連接 Obsidian vault", href: "https://github.com/wenlan-app/wenlan/blob/v0.20.1/docs/import-guide.md" },
+      { label: "文瀾：資料與隱私", href: "https://wenlan.app/docs/data-and-privacy" },
     ],
     cta: {
-      heading: "用同一套 8 項檢查測試 Wenlan",
-      body: "從一組小型來源開始，驗證引用、更新與審查，再判斷維護型本地知識層是否適合你的工作流。",
+      heading: "試用 Wenlan 工作流程",
+      body: "先連接一小組來源，問一項需要跨筆記回答的問題，再核對答案、來源與更新後的內容。",
     },
   },
   "fix-pdf-ingestion-ai-knowledge-base": {
@@ -5035,95 +5104,176 @@ const zhCNArticles = {
     slug: "choose-ai-knowledge-base-tool",
     eyebrow: "选型指南",
     category: "Workflows",
-    title: "如何选 AI 知识库工具：8 个真正重要的检查",
-    description:
-      "先分清文档问答、RAG、笔记工具与维护型知识库，再用来源、更新、审核、数据控制与实测结果选择工具。",
-    metaTitle: "如何选 AI 知识库工具：8 个检查 | Wenlan",
-    metaDescription:
-      "文档问答、RAG、笔记工具、维护型知识库，到底哪种适合你？先分清四种工具的本质差异，再用 8 个实际测试——来源追溯、更新机制、审核流程、数据控制与实测结果——选出经得起检验的 AI 知识库工具。",
+    title: "AI 第二大脑：选 App，还是自己搭建？",
+    description: "先看笔记如何变成实际成果，再比较 Claude Code／Codex、可选配 AI 的 Obsidian，以及文澜维护的 Wiki。",
+    metaTitle: "AI 第二大脑：选 App，还是自己搭建？ | Wenlan",
+    metaDescription: "AI 第二大脑能做什么？从笔记整理出项目进度，再比较 Claude／Codex、AI 插件选用的 Obsidian，以及文澜。",
     keywords: [
+      "AI 第二大脑",
+      "Obsidian second brain",
+      "AI 知识库怎么选",
       "AI 知识库工具",
-      "AI 知识库软件推荐",
-      "如何选 AI 知识库",
-      "本地 AI 知识库工具",
-      "开源 AI 知识库",
-      "AI agent 知识库",
-      "AI 知识库比较",
       "Wenlan 文澜",
     ],
     publishedAt: "2026-08-02",
-    updatedAt: "2026-10-23",
+    updatedAt: "2026-10-25",
     author: "Qi-Xuan Lu",
-    readingTime: "8 分钟阅读",
-    audience: "正在选择文档问答、RAG、本地笔记或跨 AI agent 知识系统的简体中文用户",
+    readingTime: "10 分钟阅读",
+    audience: "已有笔记，想了解 AI 第二大脑能做什么并选择合适起点的人",
     heroBullets: [
-      "先选运行模式，再比较功能列表。",
-      "用来源变化与冲突测试答案是否仍可追溯、可更新。",
-      "用自己的小型文档集对每个候选工具执行同一套验收。",
+      "了解 AI 如何运用已保存的知识。",
+      "选择符合工作方式的组合，而不只比较功能。",
+      "查验实际答案、来源，以及内容更新后的变化。",
     ],
     sections: [
       {
-        heading: "先分清你需要哪一种 AI 知识库",
+        heading: "为什么用 AI 第二大脑？",
+        figure: "second-brain-concept",
         body: [
-          "不要先问哪个工具最好。先判断需要的是当次会话的文档上传、针对一组文档的 RAG 问答、让 AI 直接读取笔记或 Markdown vault，还是跨会话与多个 agent 维护有来源的当前答案。",
-          "这四种模式可以组合，但解决的问题不同。把它们放在同一张功能表比较，通常会选到不符合实际工作方式的产品。",
+          "如果你存了不少笔记，写提案或整理项目进度时却还是得从头翻找，第二大脑就是为了让这些资料能再次派上用场。这篇会把几份笔记变成一份项目更新，再把这次的经验用在下个项目。",
+          "第二大脑是一套把知识存在脑外、之后能找回来使用的方法。这延续了个人知识管理（PKM）：留下想法、串起关联、提炼重点、做成成果。AI 能分担整理和起草；你补上背景，决定采用什么。",
         ],
+        link: { label: "已经了解概念？直接比较三种做法", href: "#choose-your-path" },
       },
       {
-        heading: "8 个真正重要的检查",
-        body: ["用一小组有代表性的文档，先写下预期答案，再对每个候选工具做相同测试。"],
-        bullets: [
-          "来源可追溯：重要答案能否打开支持它的确切来源或引用？",
-          "更新状态：来源变化后，哪些答案过期、哪些需要刷新是否看得见？",
-          "冲突与审核：矛盾证据会进入明确审核，还是被模型静默改写？",
-          "数据所有权与导出：能否保留或导出可读文件与历史，不被单一服务绑定？",
-          "隐私边界：哪些文件、提示、检索片段与模型调用会离开电脑？",
-          "Agent 互通：同一份知识能否供实际使用的 Claude Code、Codex、Cursor 或 ChatGPT 读取？",
-          "输入限制：真正支持哪些格式、扫描文档、文件夹、vault 与文件大小？",
-          "可重复验收：工具能否处理可回答、不可回答、跨来源三种问题，并在来源修改后得到正确结果？",
+        id: "what-you-can-do",
+        heading: "把几份笔记整理成项目进度更新",
+        body: [
+          "想象同事问：“我们还会按原定日期上线吗？”你手边有项目简报和通话笔记，也记得计划后来改过。现在你得把线索串起来，告诉对方接下来该怎么做。",
+          "我们让 Claude 连接 Wenlan 里的五份虚构项目笔记，请它起草进度更新。我想得到的是同事能拿来做事的说明，也要交代哪些事还没决定。",
         ],
+        steps: [
+          {
+            title: "提供几份相关笔记给 AI",
+            body: "不连接 App 也能先试试这个做法：把同一个项目的两三份简短笔记贴进一个你愿意分享这些内容的 AI 聊天工具。保留笔记名称和日期。还没有笔记？先写下你知道什么、需要做哪项决定，就足以开始第一次尝试。",
+          },
+          {
+            title: "提出一个你确实需要答案的问题",
+            body: "先问哪项决定已获批准，再打开答案依据的原始笔记。这个例子批准的日期是 2027 年 1 月 14 日。价格还没决定，答案也应该保留这一点。",
+            prompt: {
+              label: "发给 AI：核对上线计划",
+              text: "批准的上线日期是哪一天？哪些事还没决定？请列出用到的笔记，指出相互矛盾的内容，不要补上未记录的决定。",
+            },
+          },
+          {
+            title: "整理出真正用得上的内容",
+            body: "接着我们请 Claude 起草一份简短更新，列出上线日期、已确认范围和待决事项。以下是它实际输出的中文翻译：",
+            bullets: [
+              "上线日期：批准于 2027 年 1 月 14 日上线，预留时间进行数据导出审查。",
+              "已确认范围：电子邮件、app 内帮助和电话支持；数据可导出为 CSV。",
+              "待决事项：价格。尚未批准任何价格。",
+            ],
+            image: {
+              src: "/images/product-evidence/claude-cedar-project-update.png",
+              width: 776, height: 230,
+              alt: "Claude 实际草稿：2027 年 1 月 14 日上线以完成数据导出审查；电子邮件、app 内帮助和电话支持，并提供 CSV 导出；价格仍未决。来源：decision-2026-10-15 和 review-check-2026-10-22。",
+              caption: "Claude 根据五份虚构项目笔记写出的草稿。注意它保留了未定的价格，也列出来源。",
+            },
+          },
+        ],
+        link: { label: "查看我们使用的 Wenlan 设置流程", href: "/learn/build-local-ai-knowledge-base-from-documents#add-documents-in-wenlan" },
       },
       {
-        heading: "一组能暴露问题的验收资料",
+        id: "do-you-need-another-app",
+        heading: "把这次的经验用在下一个项目",
         body: [
-          "不要一开始导入整个资料库。准备一份干净来源、一份过期版本、一组互相矛盾的说法，以及一个资料中没有答案的问题。好的工具应该暴露不确定性和冲突，而不是只生成流畅文字。",
-          "修改其中一份来源后重跑相同问题。如果答案不会显示过期、引用仍指向旧内容，或无法判断哪些页面需要更新，这套系统就还不适合承担长期知识。",
+          "刚才的更新回答了眼前的问题。这些笔记也能帮你想清楚：下次可以怎么做？我们用 Codex 接着试了一次：",
         ],
+        steps: [
+          {
+            title: "问出下次值得注意的事",
+            body: "我们把相关笔记片段和核对过的更新贴给 Codex，问下次宣布上线前该确认什么。它把事实和建议分开，提醒我们确认批准日期、范围，以及尚未决定的价格。",
+            prompt: {
+              label: "发给 AI：整理下次的检查清单",
+              text: "下次宣布新项目之前，我该确认什么？根据这些笔记提出三个问题，分清事实和建议；不要把这次项目的决定套到下个项目。",
+            },
+          },
+          {
+            title: "核对、修改，再保存",
+            body: "我们把第三题改成“谁负责确认未决事项？”笔记未指定负责人；这是我们建议的下一步。修改后保存为 next-launch-checklist.md，以下是清单的中文翻译：",
+            bullets: [
+              "这个项目最新批准的日期与目标是什么？它取代了哪项旧决定？",
+              "哪些范围与价格已批准，哪些还没决定？",
+              "对外分享计划前，谁负责确认每个未决事项？",
+            ],
+            afterBullets: [
+              "来源笔记：project-brief.md；client-call-2026-10-10.md；decision-2026-10-15.md；review-check-2026-10-22.md。",
+            ],
+          },
+          {
+            title: "在新对话里用这份笔记",
+            body: "我们只把这份清单交给 Codex，换成另一个还没有批准计划的虚构项目 Harbor。以下是它的提问（中译），没有把 Cedar 的日期或范围照搬过来：",
+            bullets: [
+              "Harbor 应提出什么目标与预定日期？",
+              "哪些范围与价格需要提案批准？",
+              "对外分享计划前，谁负责确认每个未决事项？",
+            ],
+          },
+        ],
+        link: { label: "查看示例笔记与保存的检查清单（英文 .md）", href: "/examples/ai-second-brain/worked-example.md" },
       },
       {
-        heading: "Wenlan 适合哪一种模式",
+        id: "choose-your-path",
+        heading: "打造 AI 第二大脑的三种方式",
         body: [
-          "Wenlan 对应维护型、有来源的本地知识层。Sources、原子知识与 Pages 分开保存；Claude Code、Codex、Cursor、ChatGPT 等客户端通过 plugin 或 MCP 使用同一套知识；引用、过期状态、修订与人工审核保持可见。",
-          "完成平台与客户端设置后，可以用一个小型来源集验证，而不是只相信产品描述。",
+          "上线日期改了，哪份已保存的摘要也需要跟着改？我们比较的是：在哪里做事、结果存在哪里，以及由谁维护。",
+          "我们开发 Wenlan。下面说明我会怎么选：直接请 AI Agent 处理文件、留在 Obsidian 自己整理，或使用专门维护 Wiki 的 App。",
         ],
-        code: {
-          label: "Wenlan 验证流程",
-          code: "wenlan status\nwenlan sources add ~/Knowledge/evaluation-set\n/wenlan distill <测试主题>\n/wenlan pages <测试主题>\n/wenlan lint\n/wenlan curate",
+        figure: "second-brain-paths",
+      },
+      {
+        id: "obsidian-second-brain-setup",
+        heading: "已经在用 Obsidian？Wenlan 多了什么？",
+        body: [
+          "继续在 Obsidian 写会议笔记就好。文澜会读取连接的笔记库，不移动或改写原始文件，再把相关内容整理成独立的 Wiki 页面，附上原始笔记链接。",
+          "假设会议改了上线日期，文澜会追踪哪些 Wiki 页面引用了这份笔记，并准备更新，你不用逐页找出来。现有的链接、搜索或插件如果已经够用，就继续用它们。",
+        ],
+        link: {
+          label: "连接你的 Obsidian 笔记库",
+          href: "/learn/migrate-obsidian-vault-to-llm-wiki",
         },
       },
       {
-        heading: "什么时候不该增加另一套知识库",
+        id: "review-the-update",
+        heading: "哪些更新会自动完成？",
         body: [
-          "如果只是阅读一份短文档、现有 wiki 已由团队稳定维护，或 AI 不需要跨会话复用答案，直接文档阅读或当前笔记工具可能已经足够。",
-          "选择标准不是功能最多，而是以最低维护成本通过你的来源、更新、冲突、隐私与可重复验收。",
+          "改过的笔记同步进文澜后，后台维护就能为依赖它的页面准备更新：",
+        ],
+        bullets: [
+          "AI 维护、未被你编辑或锁定的页面：草稿通过文澜的引用检查后，可以自动更新。",
+          "你创建、编辑或锁定的页面：先提出修订。接受前会保留原文，你也可以跳过这次更改。",
+        ],
+        afterBullets: [
+          "如果引用检查没通过，文澜会保留当前页面。这项检查比对来源文字的支持程度，不保证每个结论都正确；重要决定仍要回到原始笔记核对。",
+          "在设置里选择 AI 服务，为后台整理与 Wiki 页面生成指定模型，并启用后台维护。文澜需保持运行，模型也需可用；更新不会立即完成。",
+        ],
+        link: {
+          label: "设置后台维护与页面审核",
+          href: "https://github.com/wenlan-app/wenlan/blob/v0.20.1/docs/steep.md",
+        },
+      },
+      {
+        heading: "先用一项决定试试看",
+        body: [
+          "把整个资料库搬进来前，先在你选的方案里试着改一项决定。",
+          "添加更多笔记前，先确认所选模型会把数据发往哪里。笔记存在本地，不代表云端 AI 的处理也留在本地。",
+        ],
+        bullets: [
+          "若使用聊天功能，提出笔记能回答的问题，再打开答案点名的原始笔记；也问一个笔记答不出来的问题，AI 应该坦白不知道。",
+          "修改一项事实后，重跑同一个问题或命令。检查新答案或写入的文件是否使用新信息。",
+          "若方案会保存摘要或 Wiki 页面，再单独检查它们。加上一句自己的文字，确认更新是否保留它，以及能否审核更改。",
+          "确认支持的文件格式、AI 工具能否使用已保存的结果，以及如何导出。",
         ],
       },
     ],
     faqs: [
       {
-        question: "最好的 AI 知识库一定是 RAG 工具吗？",
-        answer:
-          "不一定。RAG 很适合在提问时找来源片段，但有些需求只要临时读文档，另一些则需要跨会话维护可审核、可复用的答案。",
+        question: "使用 AI 第二大脑一定要会写代码吗？",
+        answer: "不需要。你可以先把几份笔记贴进 AI 聊天工具。Obsidian 不用 AI 就能写笔记和建立链接，插件是选配；文澜则提供管理来源和维护 Wiki 的界面。Claude Code 或 Codex 能帮你处理文件，但指令和修改仍由你管理、检查。",
       },
       {
-        question: "测试时应该导入全部资料吗？",
-        answer:
-          "不用。先用包含干净来源、过期版本、冲突与无答案问题的小型资料集。工具通过后再逐步扩大。",
-      },
-      {
-        question: "开源就代表数据一定不会离开本机吗？",
-        answer:
-          "不代表。仍要检查存储位置、模型提供方、embedding 与 reranking 调用，以及远程同步或遥测设置。",
+        question: "我可以保留 Obsidian 笔记吗？",
+        answer: "可以。文澜的来源连接会读取 vault，不移动或改写原始笔记。你可以继续在 Obsidian 写作、选择加上 AI 插件，或连接文澜来维护 Wiki。",
       },
     ],
     relatedSlugs: [
@@ -5136,30 +5286,18 @@ const zhCNArticles = {
       "test-ai-knowledge-base-retrieval-after-changes",
     ],
     officialReferences: [
-      {
-        label: "Wenlan 知识模型",
-        href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build",
-      },
-      {
-        label: "Wenlan 支持的文档来源",
-        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
-      },
-      {
-        label: "Wenlan MCP 客户端",
-        href: "https://wenlan.app/docs/mcp-clients",
-      },
-      {
-        label: "Wenlan 审核与信任",
-        href: "https://wenlan.app/docs/review-and-trust",
-      },
-      {
-        label: "Wenlan 数据与隐私",
-        href: "https://wenlan.app/docs/data-and-privacy",
-      },
+      { label: "Tiago Forte：第二大脑的用途", href: "https://fortelabs.com/blog/basboverview/" },
+      { label: "Ron Forbes：AI 第二大脑的实际用途", href: "https://www.ronforbes.com/blog/building-your-ai-second-brain" },
+      { label: "Obsidian：写笔记和建立链接", href: "https://help.obsidian.md/" },
+      { label: "选用 Agent 工具包：设置与命令", href: "https://github.com/eugeniughelbur/obsidian-second-brain/tree/fe84aa94ea75a46a213d94304fe9f0501c18f109" },
+      { label: "选用 Copilot 插件：选择上下文", href: "https://docs.obsidiancopilot.com/context-and-mentions/" },
+      { label: "文澜：自动维护和审核", href: "https://github.com/wenlan-app/wenlan/blob/v0.20.1/docs/steep.md" },
+      { label: "文澜：连接 Obsidian vault", href: "https://github.com/wenlan-app/wenlan/blob/v0.20.1/docs/import-guide.md" },
+      { label: "文澜：数据与隐私", href: "https://wenlan.app/docs/data-and-privacy" },
     ],
     cta: {
-      heading: "用同一套 8 项检查测试 Wenlan",
-      body: "从一组小型来源开始，验证引用、更新与审核，再判断维护型本地知识层是否适合你的工作流。",
+      heading: "试用 Wenlan 工作流程",
+      body: "先连接一小组来源，问一项需要跨笔记回答的问题，再核对答案、来源与更新后的内容。",
     },
   },
   "test-ai-knowledge-base-retrieval-after-changes": {

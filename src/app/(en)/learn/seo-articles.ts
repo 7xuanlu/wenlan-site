@@ -23,11 +23,15 @@ type BaseSpec = {
   audience: string;
   heroBullets: [string, string, string];
   quickAnswer: string;
+  quickAnswerHeading?: string;
+  quickAnswerFigure?: LearnArticle["sections"][number]["figure"];
   quickAnswerLink?: {
     label: string;
     href: string;
   };
   problem: string;
+  problemSection?: LearnArticle["sections"][number];
+  proofSections?: LearnArticle["sections"];
   wenlanFit: string;
   actionHeading: string;
   actionIntro: string;
@@ -37,6 +41,7 @@ type BaseSpec = {
     code: string;
   };
   caution: string;
+  cautionInAction?: boolean;
   faq: [string, string, string, string];
   relatedSlugs: string[];
   officialReferences?: OfficialReference[];
@@ -63,24 +68,26 @@ function makeArticle(spec: BaseSpec): LearnArticle {
     heroBullets: spec.heroBullets,
     sections: [
       {
-        heading: "Quick answer",
+        heading: spec.quickAnswerHeading ?? "Quick answer",
         body: [spec.quickAnswer, spec.wenlanFit],
         link: spec.quickAnswerLink,
+        figure: spec.quickAnswerFigure,
       },
-      {
+      ...(spec.proofSections ?? []),
+      spec.problemSection ?? {
         heading: "When this problem appears",
         body: [spec.problem],
       },
       {
         heading: spec.actionHeading,
-        body: [spec.actionIntro],
+        body: spec.cautionInAction ? [spec.actionIntro, spec.caution] : [spec.actionIntro],
         bullets: spec.actionBullets,
         code: spec.code,
       },
-      {
+      ...(spec.cautionInAction ? [] : [{
         heading: "What to check next",
         body: [spec.caution],
-      },
+      }]),
     ],
     comparisonTable: spec.comparisonTable,
     productEvidence: spec.productEvidence,
@@ -821,12 +828,10 @@ const workflowArticles: BaseSpec[] = [
     slug: "choose-ai-knowledge-base-tool",
     eyebrow: "Selection guide",
     category: "Workflows",
-    title: "How to Choose an AI Knowledge Base Tool: 8 Tests That Matter",
-    description:
-      "Choose an AI knowledge base by testing sources, freshness, review, ownership, privacy, agent access, input limits, and real answer quality.",
-    metaTitle: "How to Choose an AI Knowledge Base Tool | 8 Tests",
-    metaDescription:
-      "Use eight practical tests to choose an AI knowledge base tool for documents, RAG, local notes, or maintained knowledge across AI agents.",
+    title: "AI Second Brain: Choose an App or Build Your Own?",
+    description: "See how notes become useful work, then compare Claude Code or Codex, Obsidian with optional AI, and Wenlan’s maintained Wiki.",
+    metaTitle: "AI Second Brain: Choose an App or Build Your Own?",
+    metaDescription: "What can an AI second brain do? Turn notes into a project update, then choose Claude/Codex, Obsidian with optional AI, or Wenlan.",
     keywords: [
       "AI knowledge base tools",
       "AI knowledge base software",
@@ -838,44 +843,158 @@ const workflowArticles: BaseSpec[] = [
       "AI knowledge base evaluation",
     ],
     publishedAt: "2026-08-02",
-    updatedAt: "2026-10-23",
+    updatedAt: "2026-10-25",
+    readingTime: "9 min read",
     audience:
-      "People choosing a document, local-note, RAG, or maintained knowledge system for AI agents",
+      "People with saved notes who want to understand what an AI second brain does and choose a useful starting setup",
     heroBullets: [
-      "Choose the operating model before comparing feature lists.",
-      "Test whether answers stay traceable and current when sources change.",
-      "Run the same acceptance test on every candidate with your own documents.",
+      "Understand what AI can help you do with knowledge you already saved.",
+      "Choose a setup for your work, not just a collection of features.",
+      "Check a real answer, its source, and what happens after a change.",
     ],
     quickAnswer:
-      "First decide which job you need: a one-session document upload, RAG over a document set, AI access to a note editor or Markdown vault, or maintained source-backed knowledge shared across agents and sessions. Then test every candidate against the same eight criteria instead of trusting a generic best-tools list.",
+      "If you save useful notes but still start each proposal or project update from scratch, a second brain gives you a way to reuse that work. Here, we’ll turn a few notes into an update, then carry what we learned into the next project.",
     wenlanFit:
-      "Wenlan fits the fourth model. It keeps local Sources, atomic knowledge, and maintained Pages separate; exposes them to Claude Code, Codex, Cursor, ChatGPT, and other clients through plugins or MCP; and keeps citations, stale state, revisions, and human review visible.",
+      "A second brain is a system for keeping and using knowledge outside your head. In personal knowledge management (PKM), that means capturing ideas, connecting them to your work, drawing out what matters and putting it to use. AI can share the connecting and drafting; you bring context and make the decisions.",
+    quickAnswerHeading: "Why use an AI second brain?",
+    quickAnswerFigure: "second-brain-concept",
+    quickAnswerLink: { label: "Already know the idea? Compare the setups", href: "#choose-your-path" },
     problem:
       "AI knowledge base products often use the same label for different jobs. A chatbot upload may answer questions for one session, a RAG service may retrieve document chunks, a notes tool may give an agent direct file access, and a maintained wiki may preserve reviewed answers over time. Comparing them as one feature list produces the wrong choice.",
-    actionHeading: "Run these eight tests",
-    actionIntro:
-      "Use one small, representative document set and write down the expected result before testing a tool.",
-    actionBullets: [
-      "Source traceability: can every important answer open the exact supporting source or citation?",
-      "Freshness: after a source changes, can you see what is stale and what needs to refresh?",
-      "Conflict and review: does contradictory evidence become a visible review decision instead of a silent rewrite?",
-      "Ownership and export: can you keep or export readable files and history without depending on one vendor?",
-      "Privacy boundary: which files, prompts, retrieved passages, and model calls stay local, and which leave the machine?",
-      "Agent interoperability: can the same knowledge serve the AI clients you actually use without copying it into each one?",
-      "Input limits: which formats, scanned documents, folders, vaults, and source sizes are really supported?",
-      "Acceptance test: ask an answerable question, an unanswerable question, and a cross-source question; then edit one source and repeat all three.",
+    proofSections: [
+      {
+        id: "what-you-can-do",
+        heading: "Let’s turn a few notes into a project update",
+        body: [
+          "Imagine a teammate asks, “Are we still launching on the original date?” You have the brief and the call notes. You also remember the plan changed. Now you need to put those pieces together and tell them what to do next.",
+          "We connected Claude to five fictional project notes in Wenlan and asked it to draft an update. I wanted something a teammate could act on, including the decisions still open.",
+        ],
+        steps: [
+          {
+            title: "Give the AI a few relevant notes",
+            body: "To try the idea without connecting an app, paste two or three short notes about one project into an AI chat you’re comfortable sharing them with. Keep their names and dates. No notes yet? Write what you know and what you need to decide; that is enough for a first attempt.",
+          },
+          {
+            title: "Ask a question you actually need answered",
+            body: "Ask which decision was approved, then open the note behind the answer. In this example, the approved date was January 14, 2027. Pricing was still undecided, so it stayed undecided in the answer.",
+            prompt: {
+              label: "Ask AI: check the launch plan",
+              text: "Which launch date was approved, and what is still undecided? Name the notes you used. Flag conflicting notes; don’t fill in missing decisions.",
+            },
+          },
+          {
+            title: "Make something you can use",
+            body: "Next, we asked Claude for a short update: launch date, confirmed scope, and open decision. Here is what it wrote:",
+            bullets: [
+              "Launch: January 14, 2027, approved to allow time for the data export review.",
+              "Confirmed scope: support by email, in-app help, and phone; data export as CSV.",
+              "Open decision: pricing. No price has been approved.",
+            ],
+            image: {
+              src: "/images/product-evidence/claude-cedar-project-update.png",
+              width: 776, height: 230,
+              alt: "Actual Claude draft: launch January 14, 2027 for data export review; email, in-app and phone support with CSV export; pricing still open. Sources: decision-2026-10-15 and review-check-2026-10-22.",
+              caption: "Claude’s draft from the five fictional project notes. Notice the open pricing decision and the named sources.",
+            },
+          },
+        ],
+        link: { label: "Follow the Wenlan setup we used", href: "/learn/build-local-ai-knowledge-base-from-documents#add-documents-in-wenlan" },
+      },
+      {
+        id: "do-you-need-another-app",
+        heading: "Use what you learned on the next project",
+        body: [
+          "The update answers today’s question. The notes can also help you work out what to do differently next time. We continued the example with Codex:",
+        ],
+        steps: [
+          {
+            title: "Ask what to carry forward",
+            body: "We pasted the relevant note excerpts and checked update into Codex, asking what to check before the next launch. It separated facts from suggestions: confirm the approved date, scope and undecided pricing.",
+            prompt: {
+              label: "Ask AI: make a checklist for the next project",
+              text: "What should I check before announcing the next project? Suggest three questions tied to these notes. Separate facts from suggestions; don’t carry this project’s decisions into the next one.",
+            },
+          },
+          {
+            title: "Review it, then save it",
+            body: "We changed the third question to ask who would confirm each open decision; the notes hadn’t named an owner. We saved the revised checklist as next-launch-checklist.md:",
+            bullets: [
+              "What is this project’s latest approved date and purpose, and what does it supersede?",
+              "Which scope and pricing details are approved, and which remain undecided?",
+              "Who will confirm each open decision before we share the plan?",
+            ],
+            afterBullets: [
+              "Source notes: project-brief.md; client-call-2026-10-10.md; decision-2026-10-15.md; review-check-2026-10-22.md.",
+            ],
+          },
+          {
+            title: "Use the saved note in a fresh conversation",
+            body: "We gave Codex just that checklist and a new fictional project, Harbor, with no approved plan yet. Here are the questions it produced, without copying Cedar’s date or scope:",
+            bullets: [
+              "What purpose and target date should we propose for Harbor?",
+              "What scope and pricing should we propose for approval?",
+              "Who will confirm each open decision before we share the plan?",
+            ],
+          },
+        ],
+        link: { label: "Read the example notes and saved checklist (.md)", href: "/examples/ai-second-brain/worked-example.md" },
+      },
+      {
+        id: "choose-your-path",
+        heading: "Three ways to build an AI second brain",
+        body: [
+          "When the launch date changes, which saved summary needs to change with it? Compare where you do the work, where the result lives, and who keeps it current.",
+          "We build Wenlan. Here is how I would choose between working directly with an AI agent, keeping control in Obsidian, and using a dedicated Wiki app.",
+        ],
+        figure: "second-brain-paths",
+      },
+      {
+        id: "obsidian-second-brain-setup",
+        heading: "Already use Obsidian? What would Wenlan add?",
+        body: [
+          "Keep writing your meeting notes in Obsidian. Wenlan reads the vault without moving or rewriting your files, then organizes related material into separate Wiki pages with links to the originals.",
+          "Say a meeting changes the launch date. Wenlan tracks which Wiki pages use that note and can prepare updates, so you don’t have to find each page yourself. If your existing links, search, or plugins already cover that work, stay with them.",
+        ],
+        link: {
+          label: "Connect your Obsidian vault",
+          href: "/learn/migrate-obsidian-vault-to-llm-wiki",
+        },
+      },
     ],
-    code: {
-      label: "Wenlan proof loop after setup",
-      code: "wenlan status\nwenlan sources add ~/Knowledge/evaluation-set\n# In a Wenlan plugin client:\n/wenlan distill <tested topic>\n/wenlan pages <tested topic>\n/wenlan lint\n/wenlan curate",
+    problemSection: {
+      id: "review-the-update",
+      heading: "Which updates happen automatically?",
+      body: [
+        "Once the changed note has synced into Wenlan, background upkeep can prepare updates for the pages that rely on it:",
+      ],
+      bullets: [
+        "AI-maintained pages you haven’t edited or locked can update automatically after the draft passes Wenlan’s citation check.",
+        "Pages you created, edited, or locked get a proposed revision. Your saved text stays until you accept; you can skip the change.",
+      ],
+      afterBullets: [
+        "If that check fails, Wenlan keeps the current page. It checks support in the source text, not whether every conclusion is correct. Check important decisions against the original notes.",
+        "In Settings, choose an AI service, assign models to background organization and Wiki page generation, and enable background upkeep. Keep Wenlan running with those models available. Updates aren’t immediate.",
+      ],
+      link: {
+        label: "Set up background upkeep and page review",
+        href: "https://github.com/wenlan-app/wenlan/blob/v0.20.1/docs/steep.md",
+      },
     },
-    caution:
-      "Do not choose from a leaderboard alone. Product capabilities and pricing change, while your source quality, privacy boundary, maintenance effort, and acceptance questions determine whether a knowledge base is trustworthy for your work.",
+    actionHeading: "Try one decision before importing everything",
+    actionIntro: "Before bringing in your whole archive, try one changed decision in the setup you chose.",
+    actionBullets: [
+      "If you use chat, ask a question the notes answer and open the original note it names. Ask something the notes cannot answer, too; the AI should say it does not know.",
+      "Change one fact, then repeat the question or command. Check whether the new answer or written file uses the change.",
+      "If the setup saves summaries or Wiki pages, check those separately. Add a sentence of your own and see whether an update preserves it and offers review.",
+      "Check supported file formats, whether your AI tools can use the saved results, and how to export them.",
+    ],
+    cautionInAction: true,
+    caution: "Before adding more notes, check where your chosen model sends them. A local folder does not make cloud AI calls local.",
     faq: [
-      "Is the best AI knowledge base always a RAG tool?",
-      "No. RAG is useful for retrieving source fragments, but some workflows need only a temporary document reader while others need reviewed, reusable answers that stay current across sessions and agents.",
-      "Should I test with my entire archive?",
-      "No. Start with a small set containing one clean source, one outdated source, one contradiction, and one question the sources cannot answer. Expand only after the tool handles that set correctly.",
+      "Do I need to code to use an AI second brain?",
+      "No. You can start by pasting a few notes into an AI chat. Obsidian lets you write and link notes without AI; plugins are optional. Wenlan provides an interface for sources and Wiki upkeep. Claude Code or Codex can work on files for you, but you manage the instructions and review the changes.",
+      "Can I keep my Obsidian notes?",
+      "Yes. Wenlan’s source connection reads your vault without moving or rewriting the original notes. You can keep writing in Obsidian, use an optional AI plugin there, or connect Wenlan for a maintained Wiki.",
     ],
     relatedSlugs: [
       "fix-pdf-ingestion-ai-knowledge-base",
@@ -886,30 +1005,18 @@ const workflowArticles: BaseSpec[] = [
       "test-ai-knowledge-base-retrieval-after-changes",
     ],
     officialReferences: [
-      {
-        label: "Wenlan knowledge model",
-        href: "https://github.com/wenlan-app/wenlan#what-does-wenlan-build",
-      },
-      {
-        label: "Wenlan supported document sources",
-        href: "https://github.com/wenlan-app/wenlan#what-can-i-bring-in",
-      },
-      {
-        label: "Wenlan MCP clients",
-        href: "https://wenlan.app/docs/mcp-clients",
-      },
-      {
-        label: "Wenlan review and trust",
-        href: "https://wenlan.app/docs/review-and-trust",
-      },
-      {
-        label: "Wenlan data and privacy",
-        href: "https://wenlan.app/docs/data-and-privacy",
-      },
+      { label: "Tiago Forte: what a second brain is for", href: "https://fortelabs.com/blog/basboverview/" },
+      { label: "Ron Forbes: practical AI second-brain uses", href: "https://www.ronforbes.com/blog/building-your-ai-second-brain" },
+      { label: "Obsidian: write and link your notes", href: "https://help.obsidian.md/" },
+      { label: "Optional agent kit: setup and commands", href: "https://github.com/eugeniughelbur/obsidian-second-brain/tree/fe84aa94ea75a46a213d94304fe9f0501c18f109" },
+      { label: "Optional Copilot plugin: context and mentions", href: "https://docs.obsidiancopilot.com/context-and-mentions/" },
+      { label: "Wenlan: automatic upkeep and review", href: "https://github.com/wenlan-app/wenlan/blob/v0.20.1/docs/steep.md" },
+      { label: "Wenlan: connecting an Obsidian vault", href: "https://github.com/wenlan-app/wenlan/blob/v0.20.1/docs/import-guide.md" },
+      { label: "Wenlan: data and privacy", href: "https://wenlan.app/docs/data-and-privacy" },
     ],
     cta: {
-      heading: "Run the same eight tests on Wenlan",
-      body: "Use one bounded source set, verify citations and refresh behavior, then decide whether a maintained local knowledge layer fits your workflow.",
+      heading: "Try the Wenlan workflow",
+      body: "Connect a small source set, ask a question, and check the cited answer before bringing in your whole vault.",
     },
   },
   {

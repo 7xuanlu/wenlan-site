@@ -22,13 +22,12 @@ import { TrackedLink } from "@/components/tracked-link";
 import { getScenarioPacket } from "@/lib/scenario-examples";
 import { ScenarioWorkedExample } from "@/components/learn/scenario-worked-example";
 import { ProductEvidencePanel } from "@/components/learn/product-evidence-panel";
-import { WorkflowComparison } from "@/components/learn/workflow-comparison";
 import { getCoreContent } from "@/i18n/content";
-import { WorkflowComparisonGuide } from "@/components/learn/workflow-comparison-guide";
 import { RecordedWorkflowProof } from "@/components/learn/recorded-workflow-proof";
 import { ArticleSteps } from "@/components/learn/article-steps";
 import { ArticleOpeningExample } from "@/components/learn/article-opening-example";
 import { EvidenceImage } from "@/components/learn/evidence-image";
+import { SectionDisclosure } from "@/components/learn/section-disclosure";
 import { ComparisonTableSection, LearnFigure, SectionTable } from "@/components/learn/learn-figures";
 
 function sectionId(heading: string): string {
@@ -112,7 +111,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
     );
 
   const articleBody = article.sections
-    .flatMap((section) => section.body)
+    .flatMap((section) => [...section.body, ...(section.afterBullets ?? [])])
     .join("\n\n");
   const wordCount = articleBody.split(/\s+/).filter(Boolean).length;
   const articleBodySnippet =
@@ -292,7 +291,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
           </div>
         </header>
 
-        {!article.openingExample && <section className="reading-summary-section px-6 py-16">
+        {!article.openingExample && article.slug !== "choose-ai-knowledge-base-tool" && <section className="reading-summary-section px-6 py-16">
           <div className="mx-auto max-w-5xl">
             <div className="reading-summary grid min-w-0 grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-3">
               {article.heroBullets.map((bullet, index) => (
@@ -309,15 +308,11 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
           </div>
         </section>}
 
-        {article.slug === "choose-ai-knowledge-base-tool" && <WorkflowComparison copy={getCoreContent("en").home.content.redesign.pains} locale="en" />}
-
         {getScenarioPacket(article.slug) ? (
           <ScenarioWorkedExample packet={getScenarioPacket(article.slug)!} locale={"en"} />
         ) : article.productEvidence && (
           <ProductEvidencePanel evidence={article.productEvidence} />
         )}
-
-        {article.slug === "choose-ai-knowledge-base-tool" && <WorkflowComparisonGuide locale="en" />}
 
         <section className="px-6 pb-20">
           <div className="reading-prose-layout mx-auto min-w-0">
@@ -331,51 +326,74 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
                     {(index + 1).toString().padStart(2, "0")}
                   </p>
                   <div className="min-w-0">
-                    <h2 id={section.id ?? sectionId(section.heading)} className="font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
+                    {article.slug === "choose-ai-knowledge-base-tool" && section.id === "choose-your-path" && (
+                      <>
+                        <span id="compare-tools" className="scroll-mt-28" />
+                        <span id="compare-tools-heading" className="scroll-mt-28" />
+                        <span id="workflow-comparisons" className="scroll-mt-28" />
+                        <span id="workflow-comparisons-heading" className="scroll-mt-28" />
+                      </>
+                    )}
+                    <h2 id={section.id ?? sectionId(section.heading)} className="scroll-mt-28 font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
                       {section.heading}
                     </h2>
-                    <div className="mt-5 space-y-4 text-base leading-relaxed text-[var(--o-text-secondary)]">
-                      {section.body.map((paragraph) => (
-                        <p key={paragraph} className={section.id?.startsWith("worked-example") ? "text-pretty" : undefined}>{paragraph}</p>
-                      ))}
-                    </div>
-                    {section.steps && <ArticleSteps steps={section.steps} locale={"en"} />}
-                    {section.figure && <LearnFigure id={section.figure} locale="en" />}
-                    {section.table && <SectionTable table={section.table} />}
-                    {section.bullets && (
-                      <ul className="mt-6 space-y-3 border-l border-[var(--o-border)] pl-5">
-                        {section.bullets.map((bullet) => (
-                          <li
-                            key={bullet}
-                            className="text-sm leading-relaxed text-[var(--o-text-muted)]"
-                          >
-                            {bullet}
-                          </li>
+                    <SectionDisclosure label={section.disclosure}>
+                      <div className={`${section.disclosure ? "" : "mt-5 "}space-y-4 text-base leading-relaxed text-[var(--o-text-secondary)]`}>
+                        {section.body.map((paragraph) => (
+                          <p key={paragraph} className={section.id?.startsWith("worked-example") ? "text-pretty" : undefined}>{paragraph}</p>
                         ))}
-                      </ul>
-                    )}
-                    {section.code && <ArticleCodeBlock label={section.code.label} code={section.code.code} />}
-                    {section.image && (
-                      <figure className="mt-6 overflow-hidden rounded-xl border border-[var(--o-border)]">
-                        <EvidenceImage image={section.image} locale={"en"} />
-                        <figcaption className="px-4 pb-4 text-sm leading-relaxed text-[var(--o-text-muted)]">{section.image.caption}</figcaption>
-                      </figure>
-                    )}
-                    {section.link && (section.link.href.startsWith(`/learn/${article.slug}#`) ? (
-                      <a
-                        href={section.link.href.slice(`/learn/${article.slug}`.length)}
-                        className="mt-6 inline-flex rounded-xl border border-[var(--o-border)] px-5 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
-                      >
-                        {section.link.label}
-                      </a>
-                    ) : (
-                      <Link
-                        href={section.link.href}
-                        className="mt-6 inline-flex rounded-xl border border-[var(--o-border)] px-5 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
-                      >
-                        {section.link.label}
-                      </Link>
-                    ))}
+                      </div>
+                      {section.steps && <ArticleSteps steps={section.steps} locale={"en"} />}
+                      {section.figure && <LearnFigure id={section.figure} locale="en" />}
+                      {section.table && <SectionTable table={section.table} />}
+                      {section.bullets && (
+                        <ul className={article.slug === "choose-ai-knowledge-base-tool"
+                          ? "mt-6 list-disc space-y-3 pl-5 text-base leading-relaxed text-[var(--o-text-secondary)]"
+                          : "mt-6 space-y-3 border-l border-[var(--o-border)] pl-5"}>
+                          {section.bullets.map((bullet) => (
+                            <li
+                              key={bullet}
+                              className={article.slug === "choose-ai-knowledge-base-tool"
+                                ? undefined
+                                : "text-sm leading-relaxed text-[var(--o-text-muted)]"}
+                            >
+                              {bullet}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      {section.afterBullets && (
+                        <div className="mt-5 space-y-4 text-base leading-relaxed text-[var(--o-text-secondary)]">
+                          {section.afterBullets.map((paragraph) => (
+                            <p key={paragraph}>{paragraph}</p>
+                          ))}
+                        </div>
+                      )}
+                      {section.code && <ArticleCodeBlock label={section.code.label} code={section.code.code} />}
+                      {section.image && (
+                        <figure className="mt-6 overflow-hidden rounded-xl border border-[var(--o-border)]">
+                          <EvidenceImage image={section.image} locale={"en"} detailFocus={section.id === "review-the-update" ? { x: 0.86, y: 0.44 } : section.id === "see-the-source" ? { x: 0.86, y: 0.7 } : undefined} />
+                          <figcaption className="px-4 pb-4 text-sm leading-relaxed text-[var(--o-text-muted)]">{section.image.caption}</figcaption>
+                        </figure>
+                      )}
+                      {section.link && ((section.link.href.startsWith("#") || section.link.href.startsWith(`/learn/${article.slug}#`)) ? (
+                        <a
+                          href={section.link.href.startsWith(`/learn/${article.slug}#`)
+                            ? section.link.href.slice(`/learn/${article.slug}`.length)
+                            : section.link.href}
+                          className="mt-6 inline-flex rounded-xl border border-[var(--o-border)] px-5 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
+                        >
+                          {section.link.label}
+                        </a>
+                      ) : (
+                        <Link
+                          href={section.link.href}
+                          className="mt-6 inline-flex rounded-xl border border-[var(--o-border)] px-5 py-3 text-sm font-medium text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)]"
+                        >
+                          {section.link.label}
+                        </Link>
+                      ))}
+                    </SectionDisclosure>
                   </div>
                 </section>
               ))}
@@ -463,6 +481,7 @@ export default async function LearnArticlePage({ params }: LearnArticlePageProps
             </aside>
           </div>
         </section>
+
 
         {["distilled-wiki-pages-ai-memory", "source-backed-wiki-pages-ai-work", "wenlan-vs-obsidian-ai-memory"].includes(article.slug) && <RecordedWorkflowProof headingAnchor locale="en" />}
 
