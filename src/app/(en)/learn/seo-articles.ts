@@ -918,10 +918,10 @@ const workflowArticles: BaseSpec[] = [
     category: "Workflows",
     title: "Migrate an Obsidian Vault to a Source-Backed LLM Wiki",
     description:
-      "Register an Obsidian vault as a read-only Wenlan source that Wenlan follows in the background, and distill the most-reused notes into citation-backed wiki pages that AI agents can query.",
+      "Register an Obsidian vault as a Wenlan source that Wenlan follows in the background and never edits without your OK, and distill the most-reused notes into citation-backed wiki pages that AI agents can query.",
     metaTitle: "Migrate an Obsidian Vault to a Source-Backed LLM Wiki | Wenlan",
     metaDescription:
-      "Move Obsidian notes into an AI-readable LLM wiki without leaving Obsidian: a read-only vault source followed in the background, distilled pages with citations, and human review.",
+      "Move Obsidian notes into an AI-readable LLM wiki without leaving Obsidian: a vault source followed in the background and never edited without your OK, distilled pages with citations, and human review.",
     keywords: [
       "obsidian llm wiki",
       "migrate Obsidian to Wenlan",
@@ -936,12 +936,12 @@ const workflowArticles: BaseSpec[] = [
     audience:
       "Obsidian users who want AI agents to read their notes through a maintained wiki",
     heroBullets: [
-      "Register the vault as a read-only source; Obsidian stays the human-owned writing surface.",
+      "Register the vault as a source; Obsidian stays the human-owned writing surface, and Wenlan never edits your notes without your OK.",
       "Wenlan follows the vault in the background, so there is no manual resync; refresh the distilled pages after editing sessions.",
       "Agents query cited, reviewed answers instead of re-reading raw notes every session.",
     ],
     quickAnswer:
-      "Register the vault as a read-only Wenlan Source with `wenlan sources add <vault path>` and keep writing in Obsidian. Wenlan follows the vault in the background, checking about every 30 seconds and picking up new, edited, and deleted notes, so there is no manual resync. Then distill the topics you and your agents re-read most often into maintained Pages with citations. Your notes are never moved, rewritten, or deleted by the migration.",
+      "Register the vault as a Wenlan Source with `wenlan sources add <vault path>` and keep writing in Obsidian. Wenlan follows the vault in the background, checking about every 30 seconds and picking up new, edited, and deleted notes, so there is no manual resync. Then distill the topics you and your agents re-read most often into maintained Pages with citations. Your notes stay in Obsidian: Wenlan never edits them without your OK and writes a change only when you accept it.",
     quickAnswerLink: {
       label: "See the source-backed LLM-wiki workflow",
       href: "/learn/distilled-wiki-pages-ai-memory",
@@ -949,7 +949,7 @@ const workflowArticles: BaseSpec[] = [
     problem:
       "An Obsidian vault grows into a personal archive, but AI agents can only use it through direct file access. They re-read raw Markdown every session, mix up old and current notes, and leave no trail of which conclusion came from which note. Copying notes into a second tool fixes nothing: the truth splits in two, and the copy goes stale while the vault keeps evolving.",
     wenlanFit:
-      "Wenlan is a local-first, open-source (Apache 2.0) LLM wiki built around a lightweight Rust daemon. It reads an Obsidian vault as a read-only Source and follows its Markdown in the background, checking about every 30 seconds for new, edited, and deleted notes. Distilled Pages keep citations, staleness, revisions, and human review, and automatic refresh rejects citation-poor drafts. Nothing about your vault is moved or rewritten.",
+      "Wenlan is a local-first, open-source (Apache 2.0) LLM wiki built around a lightweight Rust daemon. It connects an Obsidian vault as a Source and follows its Markdown in the background, checking about every 30 seconds for new, edited, and deleted notes. Distilled Pages keep citations, staleness, revisions, and human review, and automatic refresh rejects citation-poor drafts. Notes stay in Obsidian, and Wenlan never edits them without your OK; it writes a change only when you accept it.",
     actionHeading: "Migrate one topic at a time",
     actionIntro:
       "Do not import the whole vault on day one. One topic keeps the first loop visible and the first failure small.",
@@ -968,10 +968,10 @@ const workflowArticles: BaseSpec[] = [
       code: "wenlan status\nwenlan sources add ~/Documents/obsidian-vault\n# in a Wenlan plugin client:\n/wenlan distill <topic you re-read often>\n/wenlan pages <topic you re-read often>\n/wenlan lint\n/wenlan curate",
     },
     caution:
-      "Keep Obsidian as the writing surface. Wenlan follows the vault Source in the background and never writes back to it, so there is no manual resync after heavy editing sessions; give it a moment to pick up your changes. Image-only or scanned attachments need OCR before their text is extractable, and a Page is only as current as its last reviewed refresh.",
+      "Keep Obsidian as the writing surface. Wenlan follows the vault Source in the background and never edits your notes without your OK, so there is no manual resync after heavy editing sessions; give it a moment to pick up your changes. Image-only or scanned attachments need OCR before their text is extractable, and a Page is only as current as its last reviewed refresh.",
     faq: [
       "Will migration move, rewrite, or delete my Obsidian notes?",
-      "No. Wenlan registers the vault as a read-only Source. Notes stay where they are; only the derived Pages live in Wenlan, and those are Markdown you can inspect or export.",
+      "No. Wenlan registers the vault as a Source. Notes stay where they are, and Wenlan never edits them without your OK; it writes a change only when you accept it. The derived Pages live in Wenlan, and those are Markdown you can inspect or export.",
       "Do I have to stop writing in Obsidian after migrating?",
       "No, keep writing there. Wenlan follows the Source in the background and picks up your edits about every 30 seconds, so you only need to review the refreshed Pages. The workflow is built for Obsidian to remain the human-owned surface while Wenlan keeps the agent-readable answers current.",
     ],
@@ -1002,7 +1002,7 @@ const workflowArticles: BaseSpec[] = [
     ],
     cta: {
       heading: "Move one vault topic, verify the loop",
-      body: "Register the vault as a read-only source, distill one repeated topic, then prove that citations and staleness work before migrating more.",
+      body: "Register the vault as a source, distill one repeated topic, then prove that citations and staleness work before migrating more.",
     },
   },
   {
@@ -2544,7 +2544,7 @@ const localKnowledgeBaseArticle: LearnArticle = {
     },
     {
       "question": "Does Wenlan rewrite my Obsidian vault?",
-      "answer": "No. Wenlan reads the vault as a read-only source and follows it in the background. Its source-backed Pages are separate Markdown artifacts."
+      "answer": "No. The vault connects as a source that Wenlan follows in the background. Notes stay in Obsidian, and Wenlan never edits them without your OK; it writes a change only when you accept it. Its source-backed Pages are separate Markdown artifacts."
     },
     {
       "question": "Which files can Wenlan read?",

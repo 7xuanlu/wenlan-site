@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "7a927170f25bd5f06ec270e804de9af479f95daf35eb8241d7e75d56572fc188",
+    sourceHash: "d344390aad6164b4bbf40bb2c6b1158b1247e05f6a61633b61c66a29abbc2ad1",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库与 LLM Wiki",
@@ -525,7 +525,8 @@ export const zhCNContent = {
           description:
             "文澜的笔记保留来源链接，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具查得到、引用得到，让知识活用起来。引用的句子会对照来源，你自己写的内容仍由你做主。",
           worksWithLabel: "可搭配",
-          worksWithNote: "可读取 Obsidian 库，保留原文。",
+          // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
+          worksWithNote: "连接 Obsidian 库；没有你同意，Wenlan 不会改动你原有的笔记。",
         },
         fit: {
           "title": "Wenlan 适合你吗？",
@@ -883,34 +884,44 @@ export const zhCNContent = {
         bento: {
           cells: [
             {
-              id: "sources",
-              title: "文档、对话和网页，都有位置",
-              body: "导入文件、文件夹、Logseq 图谱与 AI 对话，也能通过工具保存网页内容与原网址。",
-            },
-            {
-              id: "obsidian",
-              title: "继续用你的 Obsidian 笔记库",
-              body: "连接笔记库后，Wenlan 在后台跟进变化；没有你同意，不会改动你原有的笔记。",
-            },
-            {
               id: "steep",
               title: "Steep 沉淀",
               body: "Steep 把素材整理成页面。默认“随叫”，由你的 AI 工具顺手整理；“自动”则用配置好的模型在后台整理。",
             },
             {
-              id: "topics",
-              title: "主题总览",
-              body: "聚合相关笔记，沿着主题之间的关联继续探索。",
+              // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
+              id: "cite-check",
+              title: "说不出根据的，它会告诉你",
+              body: "AI 工具保存页面时，Wenlan 会把每个带引用的句子和来源比对。如果多数引用对不上，页面不会保存，AI 也会知道原因，好修正引用。",
             },
             {
-              id: "repo-wiki",
-              title: "替代码库写 wiki",
-              body: "在代码库里运行 /wenlan wiki，AI 工具会写出带图表的页面，每页都连到它依据的代码行。代码改了，Steep 会跟着更新。",
+              // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
+              id: "updates",
+              title: "知道哪些页面该更新",
+              body: "页面记得它依据的来源、页面与代码行。改了其中一项，只有建立在它上面的页面会被标记。Wenlan 写的页面可以由它更新；你写的页面会先问你。",
             },
             {
+              // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
               id: "lock",
               title: "你写的，由你决定",
-              body: "你写过或改过的页面自动上锁，AI 要改会先给你审核。AI 写的页面照常自己更新。",
+              body: "你写过或改过的页面设为“先问我”：AI 要改会先等你同意，你的 Obsidian 笔记也一样。AI 写的页面照常自己更新。",
+            },
+            {
+              // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
+              id: "repo-wiki",
+              title: "替代码库写 wiki",
+              body: "在代码库里运行 /wenlan wiki，AI 工具会写出带图表的页面，每页都连到它依据的代码行。代码改了，Steep 会跟着更新，也可以在 GitHub 上每天更新。",
+            },
+            {
+              // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
+              id: "sources",
+              title: "带进你已有的资料",
+              body: "笔记软件、文件、AI 对话、链接与代码。Wenlan 为每个来源保留链接，让页面可以引用。",
+            },
+            {
+              id: "obsidian",
+              title: "继续用你的 Obsidian 笔记库",
+              body: "连接笔记库后，Wenlan 在后台跟进变化；没有你同意，不会改动你原有的笔记。",
             },
             {
               id: "tools",
@@ -926,6 +937,11 @@ export const zhCNContent = {
               id: "spaces",
               title: "每个项目，都有自己的背景",
               body: "用 Spaces 分开项目、研究与个人知识；选定空间，让 AI 检索这次工作需要的背景。",
+            },
+            {
+              id: "topics",
+              title: "主题总览",
+              body: "聚合相关笔记，沿着主题之间的关联继续探索。",
             },
             {
               id: "history",

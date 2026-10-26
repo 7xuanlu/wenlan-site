@@ -3,7 +3,7 @@ import type { Locale } from "@/i18n/locales";
 export const storyCopyByLocale = {
   en: {
     heroDescription: "Wenlan pages cite their sources and update when those change. Claude Code, Codex, and Cursor can search them and put them to work. Citations are checked against sources, and your own writing stays yours.",
-    heroTrust: ["Free and open source", "Your pages stay on your computer", "Works with Claude Code, Codex, Cursor, and more"],
+    heroTrust: ["Free, open source, and local", "Your notes go only to the AI tools you pick", "Works with Claude Code, Codex, Cursor, and more"],
     comparisonLabel: "Compare AI knowledge-base tools",
     steps: { wiki: "Organize", updates: "Update with new evidence", ai: "Put to work", graph: "See the connections" },
     wikiTitle: "Scattered notes. Connected knowledge.",

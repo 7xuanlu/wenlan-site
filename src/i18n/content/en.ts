@@ -499,7 +499,7 @@ export const enContent = {
           {
             id: "not-notes",
             q: "Is Wenlan a replacement for Notion or Obsidian?",
-            a: "No. Wenlan does not replace the app you write in. It can register Markdown files, text, text-extractable PDF, folders, an Obsidian vault, and a Logseq graph as sources. Folders, vaults, and graphs can be kept in sync or imported once. Wenlan never edits your existing Obsidian or Logseq notes without your OK; kept in sync, it is followed in the background, checked about every 30 seconds; Wenlan's own notes remain readable Markdown under ~/.wenlan/.",
+            a: "No. Wenlan does not replace the app you write in. It can register Markdown files, text, text-extractable PDF, folders, an Obsidian vault, and a Logseq graph as sources. Folders, vaults, and graphs can be kept in sync or imported once. Wenlan never edits your existing Obsidian or Logseq notes without your OK; kept in sync, it is followed in the background, checked about every 30 seconds; Wenlan's own pages remain readable Markdown under ~/.wenlan/.",
           },
           {
             id: "setup",
@@ -530,7 +530,7 @@ export const enContent = {
           description:
             "Wenlan pages cite their sources and update when those change. Claude Code, Codex, and Cursor can search them and put them to work. Citations are checked against sources, and your own writing stays yours.",
           worksWithLabel: "Works with",
-          worksWithNote: "Read from your Obsidian vault without changing your files.",
+          worksWithNote: "Connect your Obsidian vault; Wenlan never edits your existing notes without your OK.",
         },
         fit: {
           "title": "Is Wenlan for you?",
@@ -555,7 +555,7 @@ export const enContent = {
           "title": "Compare Wenlan with your current tools",
           "intro": "Choose what you use today to see what Wenlan adds.",
           "expandDetailsLabel": "Show detailed explanations",
-          "setupSummary": "Connect your sources and a model, then create your first wiki pages.",
+          "setupSummary": "Connect your sources and your AI tool, then let it write your first pages.",
           "scopeNote": "Wenlan is also an LLM Wiki implementation. These approaches can work together.",
           "dimensions": [
             "How do you use it day to day?",
@@ -717,12 +717,12 @@ export const enContent = {
                 "labels": [
                   "Keep the vault; maintain a separate Wiki",
                   "Note changes, knowledge pages follow",
-                  "Original notes stay untouched; review drafts first"
+                  "Your notes change only when you accept"
                 ],
                 "profile": [
-                  "Connect the vault as a read-only source; keep writing originals while Wenlan builds pages for you and AI.",
+                  "Connect the vault as a source; keep writing originals while Wenlan builds pages for you and AI.",
                   "After setup, Wenlan follows connected sources in the background, and Steep refreshes eligible pages without rewriting your vault.",
-                  "Wenlan does not write back to the vault; pages you edit also get a revision first, then you decide."
+                  "Wenlan never edits your existing notes without your OK; pages you edit also get a revision first, then you decide."
                 ],
                 "emphasis": []
               }
@@ -888,34 +888,39 @@ export const enContent = {
         bento: {
           cells: [
             {
+              id: "steep",
+              title: "Your AI tool writes the pages",
+              body: "Your AI tool turns notes, files, and chats into cited pages as it works, and /wenlan steep finishes the rest. No extra model needed. Prefer the background? Automatic uses a model you pick.",
+            },
+            {
+              id: "cite-check",
+              title: "It tells you what it can't back up",
+              body: "When your AI tool saves a page, Wenlan compares each cited sentence with its source. If most citations don't match, the page isn't saved and the AI is told why, so it can fix them.",
+            },
+            {
+              id: "updates",
+              title: "Know what needs an update",
+              body: "Pages remember the sources, pages, and code lines they rely on. Change one, and only the pages built on it get flagged. Wenlan can update pages it wrote; pages you wrote ask you first.",
+            },
+            {
+              id: "lock",
+              title: "Your writing stays yours",
+              body: "Pages you wrote or edited are set to Ask me first: AI changes wait for your OK. Your Obsidian notes too. Pages AI wrote keep updating on their own.",
+            },
+            {
+              id: "repo-wiki",
+              title: "A wiki for your code",
+              body: "Run /wenlan wiki in a repository. Your AI tool writes pages with diagrams, each tied to the code lines it relies on. When that code changes, Steep updates them, daily on GitHub if you like.",
+            },
+            {
               id: "sources",
-              title: "Bring your files and conversations",
-              body: "Bring in files, folders, a Logseq graph, and AI chats. Save web content and its URL through connected tools.",
+              title: "Bring what you already have",
+              body: "Notes apps, files, AI chats, links, and code. Wenlan keeps each source with its link, so pages can cite it.",
             },
             {
               id: "obsidian",
               title: "Keep using your Obsidian vault",
               body: "Connect your vault and Wenlan follows changes in the background. It never edits your existing notes without your OK.",
-            },
-            {
-              id: "steep",
-              title: "Steep",
-              body: "Steep turns material into pages. On demand, the default, your AI tool steeps as it works; Automatic uses a configured model in the background.",
-            },
-            {
-              id: "topics",
-              title: "A home for each topic",
-              body: "Gather related pages. Follow connections across topics.",
-            },
-            {
-              id: "repo-wiki",
-              title: "A wiki for your code",
-              body: "Run /wenlan wiki in a repository. Your AI tool writes pages with diagrams, each tied to the code lines it relies on. When that code changes, Steep updates them.",
-            },
-            {
-              id: "lock",
-              title: "Your writing stays yours",
-              body: "Pages you wrote or edited are locked: AI changes wait for your review. Pages AI wrote keep updating on their own.",
             },
             {
               id: "tools",
@@ -931,6 +936,11 @@ export const enContent = {
               id: "spaces",
               title: "A space for each project",
               body: "Keep projects, research, and personal knowledge in separate Spaces. Choose the context your AI retrieves.",
+            },
+            {
+              id: "topics",
+              title: "A home for each topic",
+              body: "Gather related pages. Follow connections across topics.",
             },
             {
               id: "history",

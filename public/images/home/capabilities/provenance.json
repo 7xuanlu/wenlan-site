@@ -161,5 +161,39 @@
       "note": "Shortened excerpts of the existing authored pages; English and Simplified Chinese are presentation translations."
     }
   },
-  "activeTopicPresentation": "topicResearch"
+  "activeTopicPresentation": "topicResearch",
+  "cardCaptures": [
+    {
+      "file": "cite-check.webp",
+      "dimensions": [
+        1454,
+        460
+      ],
+      "sha256": "bc99a54ae19d7c9990a06d6d69e7b9a5de42dc783532a2c0a326a1a139357780",
+      "source": "Product Hunt gallery slide 3 (final-3.jpg, 1600x957, sha256 6da6ea6c069f1fcb00139a64c45af01fb979d4de243bf799ec66996efbbbcaad)",
+      "crop": {
+        "x": 73,
+        "y": 340,
+        "width": 1454,
+        "height": 460
+      },
+      "basis": "Dark panel only: the AI tool write_page call refused because too few cited sentences match their source, the AI fixing its citations, then Saved. Slide title, folio and empty panel padding cropped away; no pixels changed. WebP quality 90."
+    },
+    {
+      "file": "updates.webp",
+      "dimensions": [
+        890,
+        661
+      ],
+      "sha256": "645c530a114a964b5d3db69269050a5e3b3a12b9398ec50d88625c1f380558b3",
+      "source": "Product Hunt gallery slide 4 (final-4.jpg, 1600x957, sha256 f64f47ec562be9dd96eeddd0bd943ab2a0ee9460692fb782125a5193c2215709)",
+      "crop": {
+        "x": 72,
+        "y": 233,
+        "width": 890,
+        "height": 661
+      },
+      "basis": "Graph panel only: one changed memory and the three pages built on it flagged. The slide callout card that overlapped the panel corner and its connector stub were painted over with the panel background (#FCFCFC); graph nodes, edges and labels are unchanged. WebP quality 90."
+    }
+  ]
 }

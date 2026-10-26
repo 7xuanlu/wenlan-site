@@ -1680,7 +1680,7 @@ test("Mandarin Obsidian guides own the Claude Code setup, MCP, plugin, and skill
       "claude mcp add --transport http obsidian",
       "Claudian",
       "IDE bridge",
-      locale === "zh-TW" ? "唯讀來源" : "只读来源",
+      locale === "zh-TW" ? "沒有你同意，Wenlan 不會改動它們" : "没有你同意，Wenlan 不会改动它们",
       "03-checklist.md",
       "kepano/obsidian-skills",
       "Roasbeef/obsidian-claude-code",
@@ -1689,6 +1689,8 @@ test("Mandarin Obsidian guides own the Claude Code setup, MCP, plugin, and skill
     ]) {
       assert.match(articleText, new RegExp(expected.replaceAll("/", "\\/")), `${locale}: ${expected}`);
     }
+    // Since v0.20.1 an Obsidian vault can receive changes you accept; it is no longer a read-only source.
+    assert.doesNotMatch(articleText, /唯讀來源|只读来源|不會回寫|不会写回/, `${locale}: no read-only Obsidian claim`);
   }
 });
 

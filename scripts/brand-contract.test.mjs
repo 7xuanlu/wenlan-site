@@ -2056,7 +2056,8 @@ test("Obsidian page answers Claude Code setup, MCP, plugin, and skill intent wit
   assert.match(article, /\/plugin install obsidian@obsidian-skills/);
   assert.match(article, /claude mcp add --transport http obsidian https:\/\/127\.0\.0\.1:27124\/mcp\//);
   assert.match(article, /active file and selection/i);
-  assert.match(article, /read-only source/i);
+  assert.match(article, /vault connects as a source[^"]*never edits them without your OK/i);
+  assert.doesNotMatch(article, /read-only source|does not write changes back/i);
   assert.match(article, /03-checklist\.md/);
   assert.match(article, /at least three distinct source memories/);
   for (const href of [

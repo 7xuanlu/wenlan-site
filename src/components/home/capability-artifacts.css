@@ -133,20 +133,27 @@
   .wc-steep[data-complete="true"] .wc-steepOutcomes button:hover { color: var(--cap-ink); background: transparent; }
 }
 
-/* Supported material is readable at a glance; no simulated upload controls. */
-.wc-sourceFiles { list-style: none; padding: 0; margin: 0; }
-.wc-sourceFiles li { display: flex; align-items: center; gap: 14px; min-height: 70px; padding: 10px 0; }
-.wc-sourceFiles li > div { min-width: 0; }
-.wc-materialThumbnail { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; flex: none; gap: 5px; width: 42px; height: 50px; border: 1px solid var(--cap-line); border-radius: 3px; background: var(--cap-paper); box-shadow: 0 2px 4px var(--cap-shadow); }
-.wc-materialArtwork { display: flex; align-items: center; justify-content: center; gap: 3px; height: 17px; color: var(--cap-muted); }
-.wc-materialArtwork .wc-miniBrand { width: 12px; height: 12px; }
-.wc-materialArtwork .wc-icon { width: 15px; height: 15px; }
-.wc-materialThumbnail[data-format="URL"] .wc-materialArtwork { color: var(--cap-accent); }
-.wc-linkSymbol { font-size: 20px; line-height: 1; }
-.wc-fileFormat { color: var(--cap-muted); font-family: var(--font-mono), monospace; font-size: 9px; font-weight: 500; letter-spacing: .02em; line-height: 1; }
-.wc-sourceFiles strong { display: block; font-size: 15px; font-weight: 500; line-height: 1.45; overflow-wrap: anywhere; }
-.wc-sourceFiles small { display: block; margin-top: 3px; font-size: 12px; line-height: 1.45; }
-.wc-sources .wc-sourceNote { font-size: 12px; color: var(--cap-muted); margin: 0; line-height: 1.5; }
+/* Supported sources as a quiet icon wall, grouped the way the app brings them in. */
+.wc-canvas > .wc-sources { max-width: none; }
+.wc-sourceWall { display: flex; flex-direction: column; gap: 14px; container-type: inline-size; }
+.wc-sourceGroup { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; min-width: 0; }
+.wc-canvas .wc-sourceGroupLabel { margin: 0; font-size: 12px; font-weight: 500; line-height: 1.5; color: var(--cap-muted); }
+.wc-sourceItems { display: flex; flex-wrap: wrap; gap: 2px 18px; list-style: none; padding: 0; margin: 0; }
+.wc-sourceItems li { display: flex; align-items: center; gap: 8px; min-width: 0; min-height: 32px; font-size: 14px; line-height: 1.4; color: var(--cap-ink); }
+.wc-sourceMark { display: inline-flex; flex: none; color: var(--cap-ink); }
+.wc-sourceItems .wc-brand { width: 18px; height: 18px; }
+.wc-canvas .wc-sourceGroupNote { display: block; margin-top: 2px; }
+@container (min-width: 560px) {
+  .wc-sourceWall { gap: 10px; }
+  .wc-sourceGroup { grid-template-columns: 10.5rem minmax(0, 1fr); gap: 0 16px; align-items: baseline; }
+  .wc-canvas .wc-sourceGroupLabel { line-height: 32px; }
+}
+/* Real product captures: framed, never stretched past their pixels. */
+.wc-canvas > .wc-capture { max-width: none; }
+.wc-capture img { border: 1px solid var(--cap-line); }
+.wc-capture[data-capture="cite-check"] { max-width: 1454px; }
+.wc-capture[data-capture="updates"] { max-width: 890px; }
+.wc-capture figcaption { margin-top: 4px; }
 .wc-detailLink { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; width: fit-content; margin-top: 0; color: var(--cap-muted); font-size: 13px; text-decoration: none; }
 .wc-detailLink:hover { color: var(--cap-ink); text-decoration: underline; text-underline-offset: 4px; }
 .wc-canvas a:focus-visible { outline: 2px solid var(--cap-accent); outline-offset: 3px; }
@@ -339,6 +346,13 @@
     row-gap: 0;
     min-width: 0;
   }
+}
+/* Three tracks on wide desktops: wide cells span two, and the update card sets its copy beside the capture. */
+@media (min-width: 1280px) {
+  .wc-capabilityGrid > .wc-cellSplit > .wc-card { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+  .wc-cellSplit .wc-cardCopy { grid-column: 1; grid-row: 1 / span 2; padding-right: 8px; }
+  .wc-cellSplit .wc-canvas { grid-column: 2; grid-row: 1 / span 2; align-items: center; padding: 24px 28px 20px 12px; }
+  .wc-cellWide .wc-canvas:has(> .wc-capture) { align-items: center; }
 }
 /* Repository wiki: a page list, its diagram, and the code lines it relies on. */
 .wc-repoWikiDetail { display: flex; flex-direction: column; gap: 8px; margin-top: 18px; padding: 6px 12px 0; }

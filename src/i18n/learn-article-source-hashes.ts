@@ -25,7 +25,7 @@ export const LEARN_ARTICLE_SOURCE_HASHES = {
   "build-customer-support-answer-knowledge-base": "ceed47fec1cc3ef10a18aac0ec13e8855f89a779fd5f2d29e8675daa57a2c58e",
   "build-ict-supplier-due-diligence-evidence-pack": "a2f5050933e295d8c0692de622058780c8d899db7fef61a7e6cb7c2829357ea1",
   "build-investment-research-knowledge-base": "74ced2e7990360cb46b7341751bc23eaeb5da38ab5a3f63d248bc63eda539d41",
-  "build-local-ai-knowledge-base-from-documents": "beb6a95bc51b1334067625d218c610bc326ec9ee3d224c88a15b68e3340f4ad1",
+  "build-local-ai-knowledge-base-from-documents": "de401dd32cf41e0c1bb94cdf4a7ce9943aa9abf183a0b70949e8d34c725c51e8",
   "build-product-research-knowledge-base-for-prd": "eb0b7828f030dc81cab200acf580f5917fcd665e49b30e82385568d8cca509a3",
   "build-sre-incident-knowledge-base": "9e3c948fa6deff7477666a0981ebbd70b49f22dbc5272b4407d5af37f4e92f32",
   "choose-ai-knowledge-base-tool": "cefc219acf0c6b655e20c6c4f378afe835307b1eb27403645c743a3463dd53e0",
@@ -37,7 +37,7 @@ export const LEARN_ARTICLE_SOURCE_HASHES = {
   "source-backed-wiki-pages-ai-work": "78027dd63e216458e2289b63cdf657d33b40a92e5a4cac6ad1f41c855f1023f2",
   "test-ai-knowledge-base-retrieval-after-changes": "a4b76d947c40c77ef36a5237d867860868fcc46dbd4e35f3f5c990e18853f44e",
   "verify-ai-knowledge-base-citations": "53f0ce1d113b2fce657babaac73b44555cd611014fdc79f897bfee89939943f3",
-  "wenlan-vs-obsidian-ai-memory": "ea39a2f53939abccf78707845365a7612ac735781e6b57a0044bfe30ae6e69cb",
+  "wenlan-vs-obsidian-ai-memory": "e700f63e9ec217742bb4f3eb8ac7c2d8ca26ccedc2d4cfb2dfc39beed63d27a8",
   "when-ai-agent-should-query-knowledge-base": "efee2bceb78841522d30a4aaeafaaa25dde28bf709f33725b29686148a653fb5",
 } as const;
 
