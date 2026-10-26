@@ -1,0 +1,15 @@
+External comparison illustrations. These are not Wenlan hands-on tests.
+
+copilot-chat-official.png
+Unmodified official Chat-Mode.png from logancyang/obsidian-copilot.
+Earlier 2025 Chat interface; controls in current releases may differ.
+Source: https://github.com/logancyang/obsidian-copilot/blob/9027998a13b14aa1f1f7688c028cf9748a3e73eb/images/Chat-Mode.png
+Repository license: GNU Affero General Public License v3.0; full copy in COPYING-copilot.txt. Original image remains available at the source URL. No modification to pixels; responsive presentation only. Copilot and Obsidian names remain their respective owners' marks; no endorsement implied.
+
+obsidian-agent-save-official.png and obsidian-agent-save-official.mp4
+Frame at 15s from the author's real /obsidian-save recording, synthetic data.
+The frame is extracted from the original GIF; the MP4 is a format conversion of the complete GIF with the same timing. No UI, output, or values are redrawn.
+Source: https://github.com/eugeniughelbur/obsidian-second-brain/blob/fe84aa94ea75a46a213d94304fe9f0501c18f109/DEMOS.md
+Recording: https://github.com/eugeniughelbur/obsidian-second-brain/blob/fe84aa94ea75a46a213d94304fe9f0501c18f109/media/obsidian-save.gif
+Copyright (c) 2026 Eugeniu Ghelbur. MIT license reproduced in LICENSE-agent-kit.txt.
+The author cut approximately two minutes of model waiting from the original recording. Demo accepts edits in a throwaway vault; ordinary interactive use approves writes. The frame shows save output, not a source-refresh, retrieval or speed benchmark.

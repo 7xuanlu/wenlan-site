@@ -13,11 +13,16 @@ export type LearnArticleCategory = (typeof articleCategories)[number];
 export type LearnArticleSection = {
   id?: string;
   heading: string;
+  disclosure?: string;
   body: string[];
   bullets?: string[];
+  afterBullets?: string[];
   steps?: Array<{
     title: string;
     body: string;
+    bullets?: string[];
+    afterBullets?: string[];
+    prompt?: { label: string; text: string };
     code?: { label: string; code: string };
     image?: ProductEvidence["image"];
   }>;
@@ -37,7 +42,7 @@ export type LearnArticleSection = {
   };
 };
 
-export type LearnFigureId = "llm-wiki-architecture" | "llm-wiki-vs-rag";
+export type LearnFigureId = "llm-wiki-architecture" | "llm-wiki-vs-rag" | "second-brain-paths" | "second-brain-concept";
 
 export type LearnArticleFaq = {
   question: string;
