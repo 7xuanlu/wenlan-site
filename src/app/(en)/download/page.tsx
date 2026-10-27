@@ -4,7 +4,7 @@ import { DownloadPage } from "../../_pages/download";
 import { getLatestRelease } from "@/lib/release-server";
 
 // Keep this literal aligned with RELEASE_REVALIDATE_SECONDS (Next static analysis).
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 export const metadata = buildPageMetadata(
   "en",

@@ -67,7 +67,7 @@ test('all release pages render the supplied release and exactly one matching Sof
   }
 });
 
-test('release route wrappers share the hourly cache policy and root document has no release dependency',async()=>{
+test('release route wrappers share the daily cache policy and root document has no release dependency',async()=>{
   for(const file of ['(en)/page.tsx','[locale]/page.tsx','(en)/about/page.tsx','[locale]/about/page.tsx','(en)/download/page.tsx','[locale]/download/page.tsx','(en)/docs/get-started/page.tsx','[locale]/docs/get-started/page.tsx']) {
     const source=await readFile(new URL(`../src/app/${file}`,import.meta.url),'utf8');
     assert.match(source,/await getLatestRelease\(\)/,file);

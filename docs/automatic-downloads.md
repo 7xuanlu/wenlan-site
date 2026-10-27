@@ -15,12 +15,14 @@ runtime release dependency. Their release references remain editorial snapshots 
   prerelease, or incomplete asset set is not eligible.
 - Download URLs must belong to that exact repository and tag. Versioned installer
   filenames, sizes, and the visible release label come from the same manifest.
-- Next Data Cache revalidates after 3600 seconds, on demand. The four release-aware
-  page types across English, Traditional Chinese, and Simplified Chinese make 12
-  public ISR pages, each eligible for revalidation after 3600 seconds on the next
-  request. Editorial Docs/Learn pages and the shared shell do not fetch the release.
+- The signed Releases webhook (`/api/release/revalidate`) refreshes the release
+  cache tag and all 12 release pages when a stable release is published. Timed
+  refresh is only a daily backstop: Next Data Cache revalidates after 86400 seconds,
+  on demand. The four release-aware page types across English, Traditional Chinese,
+  and Simplified Chinese make 12 public ISR pages, each eligible for revalidation
+  after 86400 seconds on the next request. Editorial Docs/Learn pages and the shared shell do not fetch the release.
   Stale-while-revalidate can serve a previous result on the first visit after expiry;
-  this is not a guaranteed one-hour publication SLA.
+  the timed backstop is not a publication SLA.
 - No cron, client-side GitHub polling, new storage service, or App release workflow
   change is required. Existing open tabs retain the version they rendered.
 
@@ -29,10 +31,14 @@ runtime release dependency. Their release references remain editorial snapshots 
 The shared Data Cache and page TTLs move together. A shorter shared dependency can
 lower the route interval, so changing only the page exports is not sufficient.
 Keep the eight route exports as numeric literals for Next static analysis; source
-and compiled-manifest tests check that all 12 concrete pages keep the hourly policy.
+and compiled-manifest tests check that all 12 concrete pages keep the daily policy.
 
-Moving from 5 minutes to 1 hour reduces time-based refresh opportunities by a factor
-of 12 under continuous traffic. This is not a measured reduction in billable writes:
+Moving from 5 minutes to 1 hour (#230) and then to 1 day reduces time-based refresh
+opportunities by a factor of 288 under continuous traffic. The daily step followed
+the 2026-10-27 Hobby usage check before the Product Hunt launch: over the previous
+30 days ISR reads were 662K of 1M, ISR writes 140K of 200K and CDN-to-function transfer
+6.1 GB of 10 GB, while Fast Data Transfer was 3.56 GB of 100 GB. The 12 release pages
+are the only timed ISR routes. This is not a measured reduction in billable writes:
 [Vercel does not charge ISR writes when regenerated output is unchanged](https://vercel.com/docs/incremental-static-regeneration/limits-and-pricing#optimizing-isr-reads-and-writes),
 and write units depend on output size. The quota alert alone does not identify this
 project or these routes as its source. After an approved deploy, compare the same
@@ -46,7 +52,7 @@ failed refresh cannot replace its last valid entry. Only the outer resolver catc
 an initial cache failure and uses the bundled audited snapshot. If no cache survives
 (for example after eviction), that snapshot can be older than the last version
 served elsewhere; this is a safe download fallback, not guaranteed latestness.
-Each release-aware route has explicit 3600-second revalidation so an initial fallback
+Each release-aware route has explicit 86400-second revalidation so an initial fallback
 can retry later. This retry boundary leaves editorial routes outside release ISR.
 
 The Data Cache is Vercel/Next-managed cache, not a durable release-history database.
@@ -88,7 +94,7 @@ surfaces, not a prerequisite for new installer downloads.
   publication. Then verify the production manifest and actual page links.
 - `pnpm seo:technical:built` also checks the compiled cache policy: all sitemap
   pages must be prerendered, only the 12 release pages may use timed ISR, and
-  those pages retain their 3600-second retry even after a cold-cache fallback.
+  those pages retain their 86400-second retry even after a cold-cache fallback.
 
 No test should send production analytics, subscribe an address, or count fixture
 observations as organic usage.
