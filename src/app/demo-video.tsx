@@ -81,13 +81,18 @@ export function DemoVideo({ primaryAction, sourceAction, trustNote, sectionTitle
         {sourceAction}
       </div>
       {trustNote}
-      <div className="home-hero-video flex items-center justify-end">
-        <button ref={triggerRef} type="button" onClick={expanded ? closeVideo : startPlayback} aria-controls="demo-player" aria-expanded={expanded} aria-label={expanded ? copy.close : playLabel} className="home-video-entry inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 px-0 text-sm font-medium leading-6 text-[var(--o-text-secondary)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)]">
-          <span aria-hidden="true" className="home-video-play grid size-4 shrink-0 place-items-center">
-            {expanded ? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="size-4"><path d="m7 7 10 10M17 7 7 17" /></svg> : <svg viewBox="0 0 20 20" fill="currentColor" className="size-4"><path d="m6 4 10 6-10 6Z" /></svg>}
-          </span>
-          {expanded ? copy.close : sectionTitle}
-        </button>
+      {/* One switch for the product view: the live demo below, or the film in its place. */}
+      <div className="home-hero-video">
+        <div className="home-demo-switch" role="tablist" aria-label={copy.switchLabel}>
+          <button type="button" role="tab" aria-selected={!expanded} aria-controls="knowledge-workflows" onClick={expanded ? closeVideo : undefined}>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinejoin="round" className="size-3.5 shrink-0"><path d="M4 3.5 19.5 10l-6.6 2.4L10.5 19 4 3.5Z" /></svg>
+            <span>{copy.tryIt}</span>
+          </button>
+          <button ref={triggerRef} type="button" role="tab" aria-selected={expanded} aria-controls="demo-player" aria-label={expanded ? sectionTitle : playLabel} onClick={expanded ? undefined : startPlayback}>
+            <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" className="size-3 shrink-0"><path d="M6 4.2v11.6a.6.6 0 0 0 .92.5l9.1-5.8a.6.6 0 0 0 0-1L6.92 3.7A.6.6 0 0 0 6 4.2Z" /></svg>
+            <span>{sectionTitle}</span>
+          </button>
+        </div>
       </div>
       <div id="demo-player" hidden={!expanded} onKeyDown={(event) => { if (event.key === "Escape") closeVideo(); }}>
       {expanded && <>
@@ -116,8 +121,8 @@ export function DemoVideo({ primaryAction, sourceAction, trustNote, sectionTitle
   );
 }
 
-const playerCopy: Record<Locale, { loading: string; error: string; open: string; close: string; retry: string }> = {
-  en: { loading: "Loading video…", error: "The video could not load here.", open: "Open video", close: "Close video", retry: "Retry" },
-  "zh-TW": { loading: "正在載入影片…", error: "目前無法在此播放影片。", open: "開啟影片", close: "收起影片", retry: "重試" },
-  "zh-CN": { loading: "正在加载视频…", error: "目前无法在此播放视频。", open: "打开视频", close: "收起视频", retry: "重试" },
+const playerCopy: Record<Locale, { loading: string; error: string; open: string; close: string; retry: string; tryIt: string; switchLabel: string }> = {
+  en: { loading: "Loading video…", error: "The video could not load here.", open: "Open video", close: "Close video", retry: "Retry", tryIt: "Try it yourself", switchLabel: "Product demo" },
+  "zh-TW": { loading: "正在載入影片…", error: "目前無法在此播放影片。", open: "開啟影片", close: "收起影片", retry: "重試", tryIt: "親手試試", switchLabel: "產品示範" },
+  "zh-CN": { loading: "正在加载视频…", error: "目前无法在此播放视频。", open: "打开视频", close: "收起视频", retry: "重试", tryIt: "亲手试试", switchLabel: "产品演示" },
 };

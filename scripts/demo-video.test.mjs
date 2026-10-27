@@ -135,7 +135,8 @@ test("the initial server render contains no video or poster download", async () 
     primaryAction: null, sectionTitle: "Watch video", videoUrl: "/media/r131/test.mp4",
     posterUrl: "/media/r131/poster.jpg", playLabel: "Play demo", title: "Demo", locale: "en", caption: "",
   }));
-  assert.match(html, /aria-expanded="false"/);
+  assert.match(html, /role="tablist"/);
+  assert.match(html, /aria-selected="false" aria-controls="demo-player"/);
   assert.doesNotMatch(html, /<video|<img|src=|poster=/);
 });
 
