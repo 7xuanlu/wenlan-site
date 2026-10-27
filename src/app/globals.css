@@ -1041,19 +1041,24 @@ button.card-wenlan:focus-visible {
 /* Compact primary actions; a quieter, deliberately drawn video entry below. */
 /* The two hero buttons share one size so the pair and the line under it stay centered. */
 .home-hero-actions > a { min-width: 140px; justify-content: center; }
-/* Live demo or film: a centered two-way switch that stays quieter than Download. */
-.home-hero-video { display: flex; justify-content: center; margin-top: 28px; }
-.home-demo-switch { display: inline-flex; gap: 2px; padding: 4px; border-radius: 10px; background: color-mix(in srgb, var(--o-text) 7%, transparent); }
-.home-demo-switch > button { display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 16px; border: 1px solid transparent; border-radius: 7px; background: transparent; color: var(--o-text-secondary); font-size: 13px; font-weight: 500; line-height: 1; letter-spacing: 0.01em; white-space: nowrap; cursor: pointer; transition: color 160ms ease, background-color 160ms ease, box-shadow 160ms ease; }
-.home-demo-switch > button[aria-selected="true"] { border-color: var(--o-border); background: var(--o-bg); color: var(--o-text); box-shadow: 0 1px 2px color-mix(in srgb, var(--o-text) 10%, transparent); cursor: default; }
+/* Live demo or film: two tabs on the top edge of the product view, so the hero ends at Download and the trust line. */
+.home-hero-video { position: relative; z-index: 1; display: flex; justify-content: flex-start; margin: 36px 0 0 14px; }
+.home-demo-switch { display: inline-flex; align-items: flex-end; gap: 4px; }
+.home-demo-switch > button { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px; border: 1px solid transparent; border-bottom: 0; border-radius: 10px 10px 0 0; background: color-mix(in srgb, var(--o-text) 6%, transparent); color: var(--o-text-secondary); font-size: 13px; font-weight: 500; line-height: 1; letter-spacing: 0.01em; white-space: nowrap; cursor: pointer; transition: color 160ms ease, background-color 160ms ease; }
+/* The selected tab takes the color of what it shows: the light demo window, or the film stage. */
+.home-demo-switch > button[aria-selected="true"] { height: 40px; border-color: #e3e7ee; background: #fcfcfb; color: #1a1a2e; cursor: default; }
+.home-hero-video:has(+ #demo-player:not([hidden])) .home-demo-switch > button[aria-selected="true"] { border-color: var(--o-border); background: var(--o-bg-deep); color: var(--o-text); }
 .home-demo-switch > button:focus-visible { outline: 2px solid var(--o-warm); outline-offset: 2px; }
 @media (hover: hover) and (pointer: fine) {
-  .home-demo-switch > button[aria-selected="false"]:hover { color: var(--o-text); }
+  .home-demo-switch > button[aria-selected="false"]:hover { color: var(--o-text); background: color-mix(in srgb, var(--o-text) 10%, transparent); }
 }
 .home-hero-video + #demo-player:not([hidden]) ~ .home-hero-product { display: none; }
-.home-page .home-hero-product { margin-top: 14px; }
+.home-hero-video + #demo-player > [data-player-phase] { margin-top: -1px; }
+.home-page .home-hero-trust { margin-top: 16px; }
+.home-page .home-hero-product { margin-top: -1px; }
 @media (max-width: 639px) {
-  .home-hero-video { margin-top: 24px; }
+  .home-hero-video { margin: 28px 0 0 10px; }
+  .home-demo-switch > button { padding: 0 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .home-demo-switch > button { transition: none; }
