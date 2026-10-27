@@ -254,9 +254,9 @@ const demoTitleByLocale: Record<Locale, string> = {
 };
 
 const demoCaptions: Record<Locale, string> = {
-  en: "Product introduction · 67 seconds",
-  "zh-TW": "產品介紹 · 67 秒",
-  "zh-CN": "产品介绍 · 67 秒",
+  en: "Product introduction · 104 seconds",
+  "zh-TW": "產品介紹 · 英文 · 104 秒",
+  "zh-CN": "产品介绍 · 英文 · 104 秒",
 };
 
 function demoCaption(locale: Locale): string {

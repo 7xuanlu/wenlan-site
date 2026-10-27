@@ -7,19 +7,13 @@ import { zhTWContent } from "../src/i18n/content/zh-TW.ts";
 
 const homeSource = await readFile(new URL("../src/app/_pages/home.tsx", import.meta.url), "utf8");
 
-const expectedVideos = {
-  en: "en",
-  "zh-TW": "zh-Hant",
-  "zh-CN": "zh-Hans",
-};
-
-test("each homepage locale resolves its R131 film and corresponding R131 poster", async () => {
+test("every homepage locale plays the English R144 launch film and its poster", async () => {
   const { demoVideoForLocale } = await import("../src/lib/demo-video.ts");
 
-  for (const [locale, language] of Object.entries(expectedVideos)) {
+  for (const locale of ["en", "zh-TW", "zh-CN"]) {
     assert.deepEqual(demoVideoForLocale(locale), {
-      videoUrl: `https://media.wenlan.app/media/r131/Wenlan-R131-${language}-16x9-AB.mp4`,
-      posterUrl: `https://media.wenlan.app/media/r131/Wenlan-R131-${language}-poster.jpg`,
+      videoUrl: "/media/r144/Wenlan-R144-en-16x9.mp4",
+      posterUrl: "/media/r144/Wenlan-R144-en-poster.jpg",
     });
   }
 });
