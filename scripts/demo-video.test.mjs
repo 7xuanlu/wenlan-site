@@ -12,8 +12,8 @@ test("every homepage locale plays the English R144 launch film and its poster", 
 
   for (const locale of ["en", "zh-TW", "zh-CN"]) {
     assert.deepEqual(demoVideoForLocale(locale), {
-      videoUrl: "/media/r144/Wenlan-R144-en-16x9.mp4",
-      posterUrl: "/media/r144/Wenlan-R144-en-poster.jpg",
+      videoUrl: "https://media.wenlan.app/media/r144/Wenlan-R144-en-16x9.mp4",
+      posterUrl: "https://media.wenlan.app/media/r144/Wenlan-R144-en-poster.jpg",
     });
   }
 });

@@ -58,7 +58,6 @@ const nextConfig: NextConfig = {
       { source: "/_next/static/media/:path*", headers: NOINDEX_ASSET },
       { source: "/examples/:path*", headers: NOINDEX_ASSET },
       { source: "/embed/:path*", headers: NOINDEX_ASSET },
-      { source: "/media/:path*", headers: NOINDEX_ASSET },
     ];
   },
   async redirects() {
