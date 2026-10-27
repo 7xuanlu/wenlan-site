@@ -12,7 +12,7 @@ export const storyCopyByLocale = {
       title: "A Wiki page with its source notes",
       description: "Notes, files, and saved conversations become an editable launch plan with links to its sources.",
     },
-    aiTitle: "Help your AI find the context to get things done.",
+    aiTitle: "Put your knowledge to work.",
     aiBody: "Find context through keywords, meaning, and knowledge connections. Let your connected AI use that evidence to answer, write, and act.",
     aiMediaSubject: "An interactive retrieval example using real notes, saved lessons, and a grounded task checklist.",
     examplesLabel: "See examples",

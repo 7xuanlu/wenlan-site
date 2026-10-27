@@ -10,6 +10,7 @@ import { WikiCapture } from "./wiki-capture";
 import { wikiMaterialViews } from "./wiki-material-data";
 import { wikiInteractionData } from "./wiki-interaction-data";
 import { wikiPreviewLinks } from "./wiki-capture-data";
+import { homeSectionHeadClass, homeSectionTitleClass } from "@/components/home/section-title";
 
 export type ProductMediaSlot = "wiki" | "ai" | "updates" | "graph";
 
@@ -142,8 +143,8 @@ export function StoryIntro({ locale, slot, id, title, body, wide = false, showLa
       {showLabel && slot !== "cite-check" && <p className="mb-4 text-sm font-medium text-[var(--o-warm)]">
         {storyCopyByLocale[locale].steps[slot]}
       </p>}
-      <div className={wide ? "grid gap-4 md:grid-cols-2 md:items-end md:gap-16" : "space-y-5"}>
-        <h2 id={id} className="max-w-xl font-sans text-[1.75rem] leading-snug font-medium tracking-tight text-balance text-[var(--o-text)] sm:text-[2.125rem] sm:leading-[1.25]">{locale === "en" ? title : title.split(/(?<=[，。])/).filter(Boolean).map((phrase) => <span key={phrase} className="inline-block max-w-full">{phrase}</span>)}</h2>
+      <div className={wide ? homeSectionHeadClass : "space-y-5"}>
+        <h2 id={id} className={`max-w-xl ${homeSectionTitleClass}`}>{locale === "en" ? title : title.split(/(?<=[，。])/).filter(Boolean).map((phrase) => <span key={phrase} className="inline-block max-w-full">{phrase}</span>)}</h2>
         <p className="max-w-[38ch] text-base leading-7 text-pretty text-[var(--o-text-secondary)]">{body}</p>
       </div>
     </div>

@@ -20,6 +20,7 @@ import { LocalizedLink, localizedHrefForLocale } from "@/i18n/navigation";
 import { SITE_URL } from "@/i18n/routing";
 import { demoVideoForLocale } from "@/lib/demo-video";
 import { SoftwareApplicationData } from "@/components/software-application-data";
+import { homeSectionHeadClass, homeSectionTitleClass } from "@/components/home/section-title";
 
 const integrationCopy = {
   en: {
@@ -163,7 +164,7 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
       <section id="ai-recall" aria-labelledby="ai-recall-heading" className="scroll-mt-24 px-6 py-12 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <div className="grid min-w-0 gap-8">
-            <StoryIntro locale={locale} slot="ai" id="ai-recall-heading" title={story.aiTitle} body={story.aiBody} wide />
+            <StoryIntro locale={locale} slot="ai" id="ai-recall-heading" title={story.aiTitle} body={story.aiBody} wide showLabel={false} />
             <ProductMedia locale={locale} slot="ai" />
           </div>
           <details data-home-examples className="group mt-4">
@@ -182,12 +183,12 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
       </div>
 
       <section id="integrations" aria-labelledby="ownership-heading" data-home-reveal className="scroll-mt-24 px-6 pt-4 pb-12 sm:pb-16">
-        <div data-knowledge-ownership className="mx-auto grid max-w-6xl gap-5 py-8 md:grid-cols-[.85fr_1.15fr] md:gap-12 sm:py-10">
+        <div data-knowledge-ownership className={`mx-auto max-w-6xl py-8 sm:py-10 ${homeSectionHeadClass}`}>
           <div>
-            <h2 id="ownership-heading" className="font-sans text-2xl font-medium tracking-tight text-balance sm:text-3xl">{integrations.title}</h2>
+            <h2 id="ownership-heading" className={`max-w-xl ${homeSectionTitleClass}`}>{integrations.title}</h2>
           </div>
           <div>
-            <p className="max-w-xl text-base leading-7 text-[var(--o-text-secondary)]">{integrations.ownershipBody}{" "}{integrations.modelBody}</p>
+            <p className="max-w-[38ch] text-base leading-7 text-pretty text-[var(--o-text-secondary)]">{integrations.ownershipBody}{" "}{integrations.modelBody}</p>
             <LocalizedLink href="/learn/markdown-local-index-ai-memory" locale={locale} className="mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-[var(--o-warm)] underline decoration-[var(--o-border)] underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4">
               {integrations.ownershipLink}<ArrowRightIcon className="size-4 shrink-0" />
             </LocalizedLink>
@@ -197,14 +198,14 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
 
       <section id="retrieval-evidence" aria-labelledby="retrieval-heading" className="scroll-mt-24 px-6 pt-12 pb-6 sm:pt-16 sm:pb-8">
         <div className="mx-auto max-w-6xl">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
+          <div className={homeSectionHeadClass}>
+            <h2 id="retrieval-heading" className={`max-w-xl ${homeSectionTitleClass}`}>{content.metrics.title}</h2>
             <div className="min-w-0">
-              <h2 id="retrieval-heading" className="font-sans text-2xl font-medium tracking-tight text-balance sm:text-3xl">{content.metrics.title}</h2>
-              <p className="mt-3 max-w-2xl text-base leading-7 text-[var(--o-text-secondary)]">{content.metrics.description}</p>
+              <p className="max-w-[38ch] text-base leading-7 text-pretty text-[var(--o-text-secondary)]">{content.metrics.description}</p>
+              <LocalizedLink href="/docs/evaluation" locale={locale} className="mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-[var(--o-warm)] underline decoration-[var(--o-border)] underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4">
+                {integrations.metricsLink}<ArrowRightIcon className="size-4 shrink-0" />
+              </LocalizedLink>
             </div>
-            <LocalizedLink href="/docs/evaluation" locale={locale} className="inline-flex min-h-11 shrink-0 items-center gap-2 self-start text-sm font-medium text-[var(--o-warm)] underline decoration-[var(--o-border)] underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4 sm:self-auto">
-              {integrations.metricsLink}<ArrowRightIcon className="size-4 shrink-0" />
-            </LocalizedLink>
           </div>
           <div className="mt-8 grid min-w-0 items-start gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
             <div className="min-w-0" aria-labelledby="context-test-heading">
@@ -231,7 +232,7 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
       {/* The download is the sole closing action; release updates live in the homepage footer. */}
       <section id="get-wenlan" aria-labelledby="download-heading" className="scroll-mt-24 px-6 pt-12 pb-12 text-center sm:pt-16 sm:pb-16">
         <div className="mx-auto flex max-w-3xl flex-col items-center">
-          <h2 id="download-heading" className="font-sans text-3xl font-medium tracking-tight text-balance sm:text-4xl">
+          <h2 id="download-heading" className={homeSectionTitleClass}>
             {cta.title}
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--o-text-secondary)]">

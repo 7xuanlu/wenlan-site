@@ -894,12 +894,12 @@ export const enContent = {
             },
             {
               id: "lock",
-              title: "Your writing stays yours",
+              title: "Your own writing stays yours",
               body: "Pages you wrote or edited are set to Ask me first: AI changes wait for your OK. Pages AI wrote keep updating on their own.",
             },
             {
               id: "repo-wiki",
-              title: "A wiki for your code",
+              title: "Your code gets a wiki too",
               body: "Run /wenlan wiki in a repository. Your AI tool writes pages with diagrams, each tied to the code lines it relies on. When that code changes, the pages are flagged and your AI tool updates them, daily on GitHub if you like.",
             },
             {

@@ -5,6 +5,7 @@ import { CapabilityArtifact } from "./capability-artifacts";
 import type { HomeContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
 import { HomeReadableText } from "./readable-text";
+import { homeSectionHeadClass, homeSectionTitleClass } from "@/components/home/section-title";
 
 type BentoCellCopy = HomeContent["redesign"]["bento"]["cells"][number];
 
@@ -131,13 +132,15 @@ export function BentoSection({
 
   return (
     <section ref={sectionRef} data-home-reveal="section" className="px-6 py-20 sm:py-24">
-      <div className="mx-auto max-w-[1160px]">
-        <h2 className="max-w-3xl font-serif text-3xl font-medium tracking-tight text-balance sm:text-5xl">
-          <HomeReadableText>{title}</HomeReadableText>
-        </h2>
-        <p data-capabilities-intro className="mt-5 max-w-3xl text-base leading-relaxed text-pretty text-[var(--o-text-secondary)]">
-          {visual.intro}
-        </p>
+      <div className="mx-auto max-w-6xl">
+        <div className={homeSectionHeadClass}>
+          <h2 className={`max-w-xl ${homeSectionTitleClass}`}>
+            <HomeReadableText>{title}</HomeReadableText>
+          </h2>
+          <p data-capabilities-intro className="max-w-[38ch] text-base leading-7 text-pretty text-[var(--o-text-secondary)]">
+            {visual.intro}
+          </p>
+        </div>
         <div className="wc-capabilityGrid mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
           {cells.map((cell) => {
             const chrome = cellChrome[cell.id];
