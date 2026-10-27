@@ -206,7 +206,7 @@ const expectedArticleDates = new Map([
   ],
   [
     "/learn/choose-ai-knowledge-base-tool",
-    { datePublished: "2026-08-02", dateModified: "2026-10-23" },
+    { datePublished: "2026-08-02", dateModified: "2026-10-25" },
   ],
   [
     "/learn/build-local-ai-knowledge-base-from-documents",
@@ -230,11 +230,11 @@ const expectedArticleDates = new Map([
   ],
   [
     "/zh-TW/learn/choose-ai-knowledge-base-tool",
-    { datePublished: "2026-08-02", dateModified: "2026-10-23" },
+    { datePublished: "2026-08-02", dateModified: "2026-10-25" },
   ],
   [
     "/zh-CN/learn/choose-ai-knowledge-base-tool",
-    { datePublished: "2026-08-02", dateModified: "2026-10-23" },
+    { datePublished: "2026-08-02", dateModified: "2026-10-25" },
   ],
   [
     "/zh-TW/learn/verify-ai-knowledge-base-citations",
@@ -328,7 +328,7 @@ const requiredBuiltHtmlPages = [
     canonical: "https://wenlan.app/learn/choose-ai-knowledge-base-tool",
     type: "Article",
     datePublished: "2026-08-02",
-    dateModified: "2026-10-23",
+    dateModified: "2026-10-25",
   },
   {
     path: "learn/verify-ai-knowledge-base-citations.html",

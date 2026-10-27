@@ -67,7 +67,7 @@ export function FumadocsShell({locale, section, path, toc = [], children, index 
         ]}
         nav={{title: <span className="font-serif text-2xl tracking-tight">Wenlan</span>, url: localizePath(locale, "/")}}
         themeSwitch={{enabled: false}}
-        sidebar={{footer: <div data-reading-preferences className="flex items-center gap-1 pt-1">
+        sidebar={{footer: <div key="reading-preferences" data-reading-preferences className="flex items-center gap-1 pt-1">
           <LanguageSwitcher locale={locale} href={path} placement="up" variant="sidebar" />
           <FumadocsThemeSwitch locale={locale} />
           <a href="https://github.com/wenlan-app/wenlan" aria-label="GitHub" className="inline-flex size-9 shrink-0 items-center justify-center rounded-md text-fd-muted-foreground hover:bg-fd-accent"><GitHubLogoIcon className="size-4" /></a>

@@ -1994,30 +1994,29 @@ test("AI knowledge-base tool-selection guide is available in all acquisition loc
   assert.ok(english);
   assert.equal(
     english.title,
-    "How to Choose an AI Knowledge Base Tool: 8 Tests That Matter",
+    "AI Second Brain: Choose an App or Build Your Own?",
   );
   assert.equal(english.publishedAt, "2026-08-02");
-  assert.equal(english.updatedAt, "2026-10-23");
+  assert.equal(english.updatedAt, "2026-10-25");
   assert.ok(english.keywords.includes("AI knowledge base tools"));
   assert.equal(english.heroBullets.length, 3);
-  assert.equal(english.sections[2]?.bullets?.length, 8);
-  assert.match(JSON.stringify(english), /Source traceability/);
-  assert.match(JSON.stringify(english), /Acceptance test/);
-  assert.match(JSON.stringify(english), /wenlan sources add/);
+  assert.equal(english.sections.find((section) => section.id === "choose-your-path")?.figure, "second-brain-paths");
+  assert.ok(english.sections.some((section) => section.bullets?.some((text) => text.includes("open the original note"))));
+  assert.match(JSON.stringify(english), /migrate-obsidian-vault-to-llm-wiki/);
   assert.ok(english.officialReferences?.length >= 5);
 
   const expectations = {
     "zh-TW": {
-      title: "如何選 AI 知識庫工具：8 個真正重要的檢查",
+      title: "AI 第二大腦：選 App，還是自己建立？",
       keyword: "AI 知識庫工具",
-      source: "來源可追溯",
-      review: "衝突與審查",
+      source: "來源",
+      review: "審查",
     },
     "zh-CN": {
-      title: "如何选 AI 知识库工具：8 个真正重要的检查",
+      title: "AI 第二大脑：选 App，还是自己搭建？",
       keyword: "AI 知识库工具",
-      source: "来源可追溯",
-      review: "冲突与审核",
+      source: "来源",
+      review: "审查",
     },
   };
 
@@ -2029,15 +2028,25 @@ test("AI knowledge-base tool-selection guide is available in all acquisition loc
     assert.ok(article);
     assert.equal(article.title, expected.title);
     assert.equal(article.publishedAt, "2026-08-02");
-    assert.equal(article.updatedAt, "2026-10-23");
+    assert.equal(article.updatedAt, "2026-10-25");
     assert.ok(article.keywords.includes(expected.keyword));
     const text = JSON.stringify(article);
     assert.match(text, new RegExp(expected.source));
     assert.match(text, new RegExp(expected.review));
-    assert.match(text, /wenlan sources add/);
+    assert.ok(article.sections.some((section) => section.link?.href === "/learn/build-local-ai-knowledge-base-from-documents#add-documents-in-wenlan"), "selection guide keeps a concrete GUI walkthrough");
     assert.match(text, /Claude Code/);
     assert.match(text, /Codex/);
-    assert.match(text, /ChatGPT/);
+    assert.equal(article.sections.find((section) => section.id === "choose-your-path")?.figure, "second-brain-paths");
+    const imagePaths = article.sections.flatMap((section) => [
+      ...(section.image ? [section.image.src] : []),
+      ...(section.steps ?? []).flatMap((step) => step.image ? [step.image.src] : []),
+    ]);
+    for (const path of [
+      "/images/product-evidence/claude-cedar-project-update.png",
+    ]) {
+      assert.equal(imagePaths.filter((src) => src === path).length, 1, `${locale} retains each real capture once, in a section or its steps`);
+    }
+    assert.ok(article.sections.some((section) => section.bullets?.length === 4), "the reader can run the four practical checks");
     assert.ok(article.officialReferences?.length >= 5);
   }
 });

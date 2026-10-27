@@ -47,12 +47,13 @@ test("comparison page keeps the native chooser and routes each alternative to it
   assert.match(comparisonSource, /<WorkflowHelp/);
 });
 
-test("the detail guide is conditional on the existing owner article", () => {
-  assert.match(englishLearnPage, /article\.slug === "choose-ai-knowledge-base-tool"\s*&&\s*<WorkflowComparisonGuide locale="en"\s*\/>/);
-  assert.match(localizedLearnPage, /article\.slug === "choose-ai-knowledge-base-tool"\s*&&\s*<WorkflowComparisonGuide locale=\{resolvedLocale\}\s*\/\>/);
-  assert.match(englishLearnPage, /import \{ WorkflowComparisonGuide \} from "@\/components\/learn\/workflow-comparison-guide"/);
-  assert.match(localizedLearnPage, /import \{ WorkflowComparisonGuide \} from "@\/components\/learn\/workflow-comparison-guide"/);
-  assert.doesNotMatch(guideSource, /useState|useEffect|use client/);
+test("selection pages use their authored comparison without a duplicate appended guide", () => {
+  for (const page of [englishLearnPage, localizedLearnPage]) {
+    assert.doesNotMatch(page, /<WorkflowComparison(?:Guide)?\b/);
+    assert.match(page, /section\.id === "choose-your-path"/);
+    assert.match(page, /id="compare-tools"/);
+    assert.match(page, /id="workflow-comparisons"/);
+  }
 });
 
 test("the guide exposes dated sources and every alternative anchor", () => {
@@ -107,7 +108,7 @@ test("homepage needs and Learn indexes link to the same dedicated comparison", (
     assert.match(source, /\/learn\/choose-ai-knowledge-base-tool#compare-tools/);
   }
   assert.match(comparisonSource, /id="compare-tools"/);
-  for (const page of [englishLearnPage, localizedLearnPage]) assert.match(page, /<WorkflowComparison copy=/);
+  for (const page of [englishLearnPage, localizedLearnPage]) assert.match(page, /id="compare-tools"/);
   for (const locale of locales) {
     const copy = getCoreContent(locale).home.content.redesign.fit;
     assert.equal(copy.needs.length, 3);

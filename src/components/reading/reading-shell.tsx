@@ -17,9 +17,7 @@ export function learnContents(article: LearnArticle, ids: string[], locale: Loca
   }[locale];
   const before: TocItem[] = [];
   if (article.openingExample) before.push({id: "knowledge-base-uses-heading", label: article.openingExample.heading});
-  if (article.slug === "choose-ai-knowledge-base-tool") before.push({id: "compare-tools-heading", label: labels[0]});
   if (getScenarioPacket(article.slug) || article.productEvidence) before.push({id: "product-evidence-heading", label: labels[1]});
-  if (article.slug === "choose-ai-knowledge-base-tool") before.push({id: "workflow-comparisons-heading", label: labels[2]});
   return [...before, ...article.sections.map((section, index) => ({id: ids[index], label: section.heading})),
     ...(article.comparisonTable ? [{id: "article-comparison", label: locale === "en" ? "Comparison at a glance" : locale === "zh-TW" ? "比較總覽" : "对比总览"}] : []),
     {id: "article-resources", label: labels[3]},

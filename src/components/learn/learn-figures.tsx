@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import { SecondBrainConcept } from "./second-brain-concept";
+import { SecondBrainPaths } from "./second-brain-paths";
 import type { ComparisonTable, LearnArticleSection, LearnFigureId } from "@/app/(en)/learn/articles";
 import type { Locale } from "@/i18n/locales";
 
@@ -159,6 +161,8 @@ function RagFigure({ locale }: { locale: Locale }) {
 }
 
 export function LearnFigure({ id, locale }: { id: LearnFigureId; locale: Locale }) {
+  if (id === "second-brain-concept") return <SecondBrainConcept locale={locale} />;
+  if (id === "second-brain-paths") return <SecondBrainPaths locale={locale} />;
   const caption = id === "llm-wiki-architecture" ? architectureCopy[locale].caption : ragCopy[locale].caption;
   return (
     <figure className="mt-6 rounded-xl border border-[var(--o-border)] bg-[var(--o-card-bg)] p-4 sm:p-6">

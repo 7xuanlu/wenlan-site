@@ -267,6 +267,8 @@ test("recorded product evidence remains a real, hashed asset with a native enlar
     {"name": "claude-cedar-updated-answer.jpg", "sha256": "a6c844ee6caabec2e11a755a041c72caee81719e40cc459bd1df627f8dd8aca8"},
     { name: "obsidian-cedar-approved.jpg", sha256: "a73a37041dfaad2a4367e45086046f512854660ec51a4a123d160a09b34f39bb" },
     { name: "obsidian-cedar-update.jpg", sha256: "718df506b4d2888c594c5d8436c9d9f258f20ac1874e8283ecd8ab9d82a84704" },
+    // Actual Claude draft from the isolated five-note product exercise.
+    { name: "claude-cedar-project-update.png", sha256: "ff6af44ba6bb984c4e91f77bf846254690c057c12f4a9d59ce4127b7b9851a47" },
   ];
   for (const asset of learnCaptures) {
     assert.equal(createHash("sha256").update(fs.readFileSync(path.join(repoRoot, "public/images/product-evidence", asset.name))).digest("hex"), asset.sha256);
