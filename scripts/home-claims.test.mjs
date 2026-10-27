@@ -229,8 +229,8 @@ const comparisonLinks = [
 
 const expectedWorksWithNotes = {
   en: "Connect your Obsidian vault; Wenlan never edits your existing notes without your OK.",
-  "zh-TW": "連接 Obsidian 庫；沒有你同意，Wenlan 不會改動你原有的筆記。",
-  "zh-CN": "连接 Obsidian 库；没有你同意，Wenlan 不会改动你原有的笔记。",
+  "zh-TW": "可連接 Obsidian 筆記庫；沒有你同意，Wenlan 不會改動你原有的筆記。",
+  "zh-CN": "可连接 Obsidian 笔记库；没有你同意，Wenlan 不会改动你原有的笔记。",
 };
 
 const oldClaims = {
@@ -405,16 +405,16 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     assert.match(cards.find(card => card.id === "lock").body, /AI wrote|AI 寫的|AI 写的/);
     assert.match(cards.find(card => card.id === "tools").body, /MCP/);
     // Switching AI tools keeps the same pages and memories.
-    assert.match(`${cards.find(card => card.id === "tools").title} ${cards.find(card => card.id === "tools").body}`, /Switch tools|Change tools|換了工具|换了工具/);
-    assert.match(cards.find(card => card.id === "tools").body, /same pages and memories|同一批頁面與記憶|同一批页面与记忆/);
+    assert.match(`${cards.find(card => card.id === "tools").title} ${cards.find(card => card.id === "tools").body}`, /Switch tools|Change tools|換了?工具|换了?工具/);
+    assert.match(cards.find(card => card.id === "tools").body, /same pages and memories|同一批筆記和記憶|同一批笔记和记忆/);
     assert.doesNotMatch(cards.find(card => card.id === "repo-wiki").body, /Steep updates them/);
     const story = storyCopyByLocale[locale];
-    assert.match(story.citeCheck.body, /cited sentence|附引用的句子|带引用的句子/);
-    assert.match(story.citeCheck.body, /isn't saved|不會存入|不会保存/);
-    assert.match(story.updates.body, /only the pages built on it|只有建立在它上面的頁面|只有建立在它上面的页面/);
+    assert.match(story.citeCheck.body, /cited sentence|附引用的話|带引用的话/);
+    assert.match(story.citeCheck.body, /isn't saved|不會存進去|不会保存/);
+    assert.match(story.updates.body, /only the pages built on it|只有用到它的筆記|只有用到它的笔记/);
     assert.match(story.updates.body, /ask you first|先問你|先问你/);
     assert.match(cards.find(card => card.id === "spaces").body, /Spaces/);
-    assert.match(cards.find(card => card.id === "history").body, /page revisions|知識頁.*修訂|知识页.*修订/i);
+    assert.match(cards.find(card => card.id === "history").body, /page revisions|筆記.*修訂|笔记.*修订/i);
     assert.match(capabilityArtifacts, /Replaces earlier memory/);
     assert.match(capabilityArtifacts, /取代先前記憶/);
     assert.match(capabilityArtifacts, /取代先前记忆/);

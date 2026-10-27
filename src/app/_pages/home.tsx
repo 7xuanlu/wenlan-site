@@ -38,7 +38,6 @@ const integrationCopy = {
     ownershipLink: "How local storage works",
   },
   "zh-TW": {
-    // TODO(zh): provisional draft, review after English approval
     title: "檔案留在你的電腦上。",
     contextLabel: "每次查詢的背景內容",
     tokenUnit: "Token 計算文字長度。",
@@ -48,12 +47,11 @@ const integrationCopy = {
     recallScope: "LongMemEval（oracle）· 500 題",
     metricsLink: "查看完整評測與方法",
     recallLabel: "前 5 筆結果對標註相關資料的平均覆蓋率。",
-    ownershipBody: "知識頁、記憶與圖譜都保存在你的電腦上；知識頁是可讀的 Markdown，可用自己的編輯器開啟。",
-    modelBody: "筆記只會送到你選的 AI 工具。",
+    ownershipBody: "筆記、記憶和圖譜都存在你的電腦上。筆記是一般的 Markdown 檔，用你自己的編輯器就能打開。",
+    modelBody: "哪些 AI 工具能讀，由你決定。",
     ownershipLink: "了解本機資料儲存",
   },
   "zh-CN": {
-    // TODO(zh): provisional draft, review after English approval
     title: "文件留在你的电脑上。",
     contextLabel: "每次查询的背景内容",
     tokenUnit: "Token 计算文字长度。",
@@ -63,8 +61,8 @@ const integrationCopy = {
     recallScope: "LongMemEval（oracle）· 500 题",
     metricsLink: "查看完整评测与方法",
     recallLabel: "前 5 条结果对标注相关资料的平均覆盖率。",
-    ownershipBody: "知识页、记忆与图谱都保存在你的电脑上；知识页是可读的 Markdown，可用自己的编辑器打开。",
-    modelBody: "笔记只会发送给你选的 AI 工具。",
+    ownershipBody: "笔记、记忆和图谱都存在你的电脑上。笔记是普通的 Markdown 文件，用你自己的编辑器就能打开。",
+    modelBody: "哪些 AI 工具能读，由你决定。",
     ownershipLink: "了解本地数据存储",
   },
 } as const;

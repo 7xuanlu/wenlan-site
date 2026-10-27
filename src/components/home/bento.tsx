@@ -15,11 +15,11 @@ const bentoVisualCopy: Record<Locale, { intro: string; illustrationLabel: string
     illustrationLabel: "App captures & capability illustrations · demo content",
   },
   "zh-TW": {
-    intro: "從帶入素材、補上脈絡，到用回日常工具，讓累積的知識派上用場。",
+    intro: "保留來源、補上脈絡，在每天用的工具裡用上這些知識。",
     illustrationLabel: "App 畫面與能力示意 · 使用示範內容",
   },
   "zh-CN": {
-    intro: "从导入素材、补上背景，到用回日常工具，让积累的知识派上用场。",
+    intro: "保留来源、补上背景，在每天用的工具里用上这些知识。",
     illustrationLabel: "App 画面与能力示意 · 使用示范内容",
   },
 };

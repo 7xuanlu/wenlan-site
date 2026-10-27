@@ -393,7 +393,7 @@ export const zhTWContent = {
         },
         openSourceCta: {
           eyebrow: "開源",
-          title: "帶一份筆記，開始用 Wenlan。",
+          title: "用你自己的筆記試試 Wenlan。",
           body: "匯入筆記或文件，再接上你常用的 AI 工具。",
           note: "執行核心與 plugins：Apache-2.0。桌面 App：AGPL-3.0-only。",
           primaryCta: { id: "download", href: "/download", label: "下載" },
@@ -525,8 +525,7 @@ export const zhTWContent = {
           description:
             "文瀾的筆記附上來源，會對照來源檢查，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具都能直接拿來用。",
           worksWithLabel: "可搭配",
-          // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
-          worksWithNote: "連接 Obsidian 庫；沒有你同意，Wenlan 不會改動你原有的筆記。",
+          worksWithNote: "可連接 Obsidian 筆記庫；沒有你同意，Wenlan 不會改動你原有的筆記。",
         },
         fit: {
           "title": "Wenlan 適合你嗎？",
@@ -885,42 +884,38 @@ export const zhTWContent = {
           cells: [
             {
               id: "steep",
-              title: "Steep 沉澱",
-              body: "Steep 把素材整理成頁面。預設「隨叫」，由你的 AI 工具順手整理；「自動」則用設定好的模型在背景整理。",
+              title: "Steep 沉澱：AI 工具幫你寫筆記",
+              body: "你的 AI 工具在工作時，順手把素材、檔案和對話寫成附引用的筆記；剩下的用 /wenlan steep 一次沉澱完成，不用另外的模型。想在背景跑，就選「自動沉澱」，用你挑的模型。",
             },
             {
-              // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
               id: "lock",
-              title: "你寫的，由你決定",
-              body: "你寫過或改過的頁面設為「先問我」：AI 要改會先等你同意。AI 寫的頁面照常自己更新。",
+              title: "你寫的，還是你的",
+              body: "你寫過或改過的筆記設為「先問我」：AI 要改，會先等你同意。AI 寫的筆記照常自己更新。",
             },
             {
-              // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
               id: "repo-wiki",
-              title: "替程式庫寫 wiki",
-              body: "在程式庫裡執行 /wenlan wiki，AI 工具會寫出附圖表的頁面，每頁都連到它依據的程式碼行。程式碼改了，頁面會被標記，再由 AI 工具更新，也可以在 GitHub 上每天更新。",
+              title: "程式碼也有 wiki",
+              body: "在程式庫裡執行 /wenlan wiki，AI 工具會寫出附圖表的筆記，每篇都連到它依據的程式碼行。程式碼一改，筆記就會被標出來，由 AI 工具更新；想要的話，也能在 GitHub 上每天更新。",
             },
             {
-              // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
               id: "sources",
               title: "帶進你已有的資料",
-              body: "筆記軟體、檔案、AI 對話、連結與程式碼。Wenlan 為每個來源保留連結，讓頁面可以引用。",
+              body: "筆記軟體、檔案、AI 對話、連結和程式碼。Wenlan 保留每個來源和它的連結，筆記才能引用。",
             },
             {
               id: "obsidian",
               title: "繼續用你的 Obsidian 筆記庫",
-              body: "連接筆記庫後，Wenlan 在背景跟進變更；沒有你同意，不會改動你原有的筆記。",
+              body: "連接筆記庫後，Wenlan 會在背景跟上變更；沒有你同意，不會改動你原有的筆記。",
             },
             {
-              // TODO(zh): provisional draft (tests reject English fallbacks); review after English approval
               id: "tools",
-              title: "換了工具，知識還在",
-              body: "Claude Code、Codex、Cursor 等 AI 工具透過外掛或 MCP 使用同一批頁面與記憶。隨時可以換工具，知識都留著。",
+              title: "換工具，知識還在。",
+              body: "Claude Code、Codex、Cursor 等 AI 工具透過外掛或 MCP 用同一批筆記和記憶。隨時換工具，知識都留著。",
             },
             {
               id: "web-access",
               title: "Web Access 網頁存取",
-              body: "讓支援的網頁 AI 搜尋電腦上的文瀾知識，經你允許也能寫入；使用時保持 Wenlan 在線。",
+              body: "讓支援的網頁 AI 搜尋你電腦上的文瀾知識，經你允許也能寫入；使用時讓 Wenlan 保持在線。",
             },
             {
               id: "spaces",
@@ -935,7 +930,7 @@ export const zhTWContent = {
             {
               id: "history",
               title: "改變有跡可循",
-              body: "回看知識頁的修訂，追溯記憶的取代關係。",
+              body: "回看筆記的修訂，追溯記憶被取代的經過。",
             },
           ],
         },
