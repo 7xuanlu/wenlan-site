@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "2b6c356971957b219457fb9dfc26771fee5f36dd0e6337e88242a1852cca4d5a",
+    sourceHash: "a105ee8e1f4bdc6063f6d833d9951bd704960d8453a08131a65d977156b8e5c2",
     content: {
       seo: {
         title: "文瀾 Wenlan｜個人 AI 知識庫與 LLM Wiki",
@@ -76,7 +76,7 @@ export const zhTWContent = {
         title:
           "下\u2060載\u2060適\u2060合\u2060你\u2060系\u2060統\u2060的 Wenlan。",
         description:
-          "Wenlan v0.20.0 提供 Windows x64 桌面版與 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 套件。",
+          "Wenlan v0.20.2 提供 Windows x64 桌面版與 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 套件。",
         stableLabel: "穩定版",
         releaseNotesLabel: "版本說明",
         packageIncludesLabel: "內含 CLI、daemon 與 MCP connector",
@@ -393,7 +393,7 @@ export const zhTWContent = {
         },
         openSourceCta: {
           eyebrow: "開源",
-          title: "帶一份筆記，開始用 Wenlan。",
+          title: "用你自己的筆記試試 Wenlan。",
           body: "匯入筆記或文件，再接上你常用的 AI 工具。",
           note: "執行核心與 plugins：Apache-2.0。桌面 App：AGPL-3.0-only。",
           primaryCta: { id: "download", href: "/download", label: "下載" },
@@ -489,12 +489,12 @@ export const zhTWContent = {
           {
             id: "tools",
             q: "哪些 AI 工具可以搭配 Wenlan？",
-            a: "Claude Code 和 Codex 有 Wenlan 外掛；Cursor、Claude Desktop、VS Code、Muse Code 等本地工具透過 MCP 連接。ChatGPT、Claude.ai、Muse 等瀏覽器工具使用 OAuth 遠端連線：先選擇分享整個資料庫或一個 Space，批准配對時決定只能搜尋或可搜尋和寫入，使用時保持 Wenlan 在線，也能在 App 中撤銷存取。Obsidian 則是唯讀的來源匯入方式。",
+            a: "Claude Code 和 Codex 有 Wenlan 外掛；Cursor、Claude Desktop、VS Code、GitHub Copilot、Windsurf、Kimi Code、Muse Code 等本地工具透過 MCP 連接。ChatGPT、Claude.ai、Muse 等瀏覽器工具使用 OAuth 遠端連線：先選擇分享整個資料庫或一個 Space，批准配對時決定只能搜尋或可搜尋和寫入，使用時保持 Wenlan 在線，也能在 App 中撤銷存取。Obsidian 筆記庫則作為來源接入，你原有的筆記只有在你同意後才會被修改。",
           },
           {
             id: "not-notes",
             q: "Wenlan 能取代 Notion 或 Obsidian 嗎？",
-            a: "不能。Wenlan 不取代你用來寫作的 App。它可以把 Markdown 檔案、text、可抽取文字的 PDF、資料夾、Obsidian 庫和 Logseq 圖譜登錄為來源。資料夾、筆記庫和圖譜可持續同步，也可只匯入一次。Obsidian 與 Logseq 輸入是唯讀；持續同步時會在背景跟進，約每 30 秒檢查一次；Wenlan 自己的筆記仍是 ~/.wenlan/ 底下可讀的 Markdown。",
+            a: "不能。Wenlan 不取代你用來寫作的 App。它可以把 Markdown 檔案、text、可抽取文字的 PDF、資料夾、Obsidian 庫和 Logseq 圖譜登錄為來源。資料夾、筆記庫和圖譜可持續同步，也可只匯入一次。沒有你同意，Wenlan 不會改動你原有的 Obsidian 與 Logseq 筆記；持續同步時會在背景跟進，約每 30 秒檢查一次；Wenlan 自己的筆記仍是 ~/.wenlan/ 底下可讀的 Markdown。",
           },
           {
             id: "setup",
@@ -523,9 +523,9 @@ export const zhTWContent = {
           eyebrow: "AI 協助維護的個人知識庫",
           headline: { pre: "用你的知識，", emphasis: "找到答案、完成工作。", post: "" },
           description:
-            "由 AI 協助維護的個人知識庫。文瀾將筆記、文件與對話連成可持續更新的知識，供你與 AI 查找、使用。",
+            "文瀾把筆記、文件和 AI 對話整理成持續更新的知識庫，附上來源，並對照來源檢查。Claude、Codex 等 AI 工具都能直接用。",
           worksWithLabel: "可搭配",
-          worksWithNote: "可讀取 Obsidian 庫，保留原文。",
+          worksWithNote: "可連接 Obsidian 筆記庫；沒有你同意，Wenlan 不會改動你原有的筆記。",
         },
         fit: {
           "title": "Wenlan 適合你嗎？",
@@ -883,44 +883,39 @@ export const zhTWContent = {
         bento: {
           cells: [
             {
+              id: "steep",
+              title: "Steep 沉澱：AI 工具幫你寫筆記",
+              body: "你的 AI 工具在工作時，順手把素材、檔案和對話寫成附引用的筆記；剩下的用 /wenlan steep 一次沉澱完成，不用另外的模型。想在背景跑，就選「自動沉澱」，用你挑的模型。",
+            },
+            {
+              id: "lock",
+              title: "你寫的，還是你的",
+              body: "你寫過或改過的筆記設為「先問我」：AI 要改，會先等你同意。AI 寫的筆記照常自己更新。",
+            },
+            {
+              id: "repo-wiki",
+              title: "程式碼也有 wiki",
+              body: "在程式庫裡執行 /wenlan wiki，AI 工具會寫出附圖表的筆記，每篇都連到它依據的程式碼行。程式碼一改，筆記就會被標出來，由 AI 工具更新；想要的話，也能在 GitHub 上每天更新。",
+            },
+            {
               id: "sources",
-              title: "文件、對話和網頁，都有位置",
-              body: "匯入檔案、資料夾、Logseq 圖譜與 AI 對話，也能透過工具保存網頁內容與原網址。",
+              title: "帶進你已有的資料",
+              body: "筆記軟體、檔案、AI 對話、連結和程式碼。Wenlan 保留每個來源和它的連結，筆記才能引用。",
             },
             {
               id: "obsidian",
               title: "繼續用你的 Obsidian 筆記庫",
-              body: "唯讀連接筆記庫，Wenlan 在背景跟進變更；原筆記留在原處、不被改動。",
-            },
-            {
-              id: "steep",
-              title: "Steep 沉澱",
-              body: "Steep 把素材整理成頁面。預設「隨叫」，由你的 AI 工具順手整理；「自動」則用設定好的模型在背景整理。",
-            },
-            {
-              id: "topics",
-              title: "主題總覽",
-              body: "聚合相關筆記，沿著主題之間的關聯繼續探索。",
-            },
-            {
-              id: "repo-wiki",
-              title: "替程式庫寫 wiki",
-              body: "在程式庫裡執行 /wenlan wiki，AI 工具會寫出附圖表的頁面，每頁都連到它依據的程式碼行。程式碼改了，Steep 會跟著更新。",
-            },
-            {
-              id: "lock",
-              title: "你寫的，由你決定",
-              body: "你寫過或改過的頁面自動上鎖，AI 要改會先給你審核。AI 寫的頁面照常自己更新。",
+              body: "連接筆記庫後，Wenlan 會在背景跟上變更；沒有你同意，不會改動你原有的筆記。",
             },
             {
               id: "tools",
-              title: "接上你常用的 AI 工具",
-              body: "Claude Code、Codex、Cursor 等工具，完成外掛或 MCP 設定後，就能查閱知識、保存記憶。",
+              title: "換工具，知識還在。",
+              body: "Claude Code、Codex、Cursor 等 AI 工具透過外掛或 MCP 用同一批筆記和記憶。隨時換工具，知識都留著。",
             },
             {
               id: "web-access",
               title: "Web Access 網頁存取",
-              body: "讓支援的網頁 AI 搜尋電腦上的文瀾知識，經你允許也能寫入；使用時保持 Wenlan 在線。",
+              body: "讓支援的網頁 AI 搜尋你電腦上的文瀾知識，經你允許也能寫入；使用時讓 Wenlan 保持在線。",
             },
             {
               id: "spaces",
@@ -928,9 +923,14 @@ export const zhTWContent = {
               body: "用 Spaces 分開專案、研究與個人知識；選定空間，讓 AI 檢索這次工作需要的脈絡。",
             },
             {
+              id: "topics",
+              title: "主題總覽",
+              body: "聚合相關筆記，沿著主題之間的關聯繼續探索。",
+            },
+            {
               id: "history",
               title: "改變有跡可循",
-              body: "回看知識頁的修訂，追溯記憶的取代關係。",
+              body: "回看筆記的修訂，追溯記憶被取代的經過。",
             },
           ],
         },
@@ -1672,7 +1672,7 @@ export const zhTWContent = {
   },
   getStarted: {
     status: "translated",
-    sourceHash: "060937f3c44963407158700b492184c51af1fc8f195a979b5490a27a791be8ab",
+    sourceHash: "733e141df00b13b7502bc164a79c2a049e0591cad44570ae9373419ecca348c5",
     content: {
       seo: {
         title: "安裝文瀾 Wenlan：Claude Code、Codex、ChatGPT 與 MCP",
@@ -1716,13 +1716,13 @@ export const zhTWContent = {
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.0/wenlan-windows-x64.zip",
+              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.2/wenlan-windows-x64.zip",
               label: "下載 Windows x64"
             },
             {
               id: "all-downloads",
-              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.20.0",
-              label: "全部 v0.20.0 下載"
+              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.20.2",
+              label: "全部 v0.20.2 下載"
             }
           ]
         },
@@ -1893,11 +1893,11 @@ export const zhTWContent = {
   },
   footer: {
     status: "translated",
-    sourceHash: "acd65e32a1afb9646e8a6861f13fd84e74d061ef10201cd15b14c04a5cab0d84",
+    sourceHash: "d609e0563ea3802525fae21b9fd1ff96653775dc415cf2a01ec626f89b0ad116",
     content: {
       ariaLabel: "網站頁尾",
       brand: "Wenlan",
-      tagline: "讓 AI 持續整理、更新你的知識。",
+      tagline: "持續更新的個人知識庫。AI 幫你整理，你保有主導權。",
       groups: [
         {
           id: "product",

@@ -1678,7 +1678,7 @@ export const docPages: DocPage[] = [
         heading: "Changes in v0.20.0",
         body: [
           "/wenlan map is now /wenlan wiki ($wenlan wiki in Codex), with no alias. It plans the repository's pages and writes the missing ones; /wenlan steep keeps them current.",
-          "Steeping is Automatic or On demand. New installs start On demand, where your AI tool steeps as it works and /wenlan steep finishes the rest. Lock pages I've written is on for new installs; a configuration written before v0.20.0 keeps it off until you turn it on.",
+          "Steeping is Automatic or On demand. New installs start On demand, where your AI tool steeps as it works and /wenlan steep finishes the rest. Lock pages I've written is on for new installs (renamed Ask me first on pages I wrote in v0.20.1); a configuration written before v0.20.0 keeps it off until you turn it on.",
         ],
         code: {
           label: "Old to new",
@@ -1688,7 +1688,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Current runtime shape",
         body: [
-          "The current public docs describe the v0.20.0 runtime shape: Claude Code and Codex plugins, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages with revisions, Automatic and On demand steeping, session handoffs, status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
+          "The current public docs describe the v0.20.2 runtime shape: Claude Code and Codex plugins, npm setup, wenlan-mcp connector, daemon-first architecture, explicit spaces, source-backed pages with revisions, Automatic and On demand steeping, session handoffs, status artifacts, wenlan restart, wenlan models reranker, and cross-platform service registration.",
           "The biggest practical upgrade checks are platform support, package path alignment, and spaces. Confirm your machine's service manager, confirm MCP clients launch the connector under ~/.wenlan/bin, and confirm the active space is the one you expect.",
         ],
         link: {
@@ -2385,7 +2385,7 @@ export const docPages: DocPage[] = [
         heading: "Edit carefully",
         body: [
           "The Markdown files are readable and can be inspected with normal tools. If you hand-edit a page, treat it like a human-owned artifact.",
-          "With Lock pages I've written on in the steeping settings, the default for new installs, a page you write or edit is locked for review: AI changes to it wait as revisions for you to accept or skip, while pages AI wrote keep updating.",
+          "With Ask me first on pages I wrote on in the steeping settings, the default for new installs, AI changes to a page you wrote or edited wait as revisions for you to accept or skip, while pages AI wrote keep updating.",
           "When you need the system to learn something new, prefer capturing the atomic fact or correction too. That keeps search, provenance, and future pages aligned.",
         ],
       },
@@ -3706,7 +3706,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Security policy",
         body: [
-          "The public website publishes /.well-known/security.txt for automated discovery. The source repository's security policy commits to acknowledgment within 48 hours and a fix timeline within 7 days. The latest released version is supported (the current stable 0.20.0 line); older releases are best-effort.",
+          "The public website publishes /.well-known/security.txt for automated discovery. The source repository's security policy commits to acknowledgment within 48 hours and a fix timeline within 7 days. The latest released version is supported (the current stable 0.20.2 line); older releases are best-effort.",
           "If in doubt, choose the private advisory or email path first. A maintainer can move non-sensitive follow-up work into a public issue later.",
         ],
         link: {
@@ -3859,14 +3859,14 @@ export const docPages: DocPage[] = [
         ],
         link: {
           label: "Open the app source",
-          href: "https://github.com/wenlan-app/wenlan/tree/v0.20.0/app",
+          href: "https://github.com/wenlan-app/wenlan/tree/v0.20.2/app",
         },
       },
       {
         heading: "Steeping, review, and repository pages",
         body: [
           "Settings sets steeping to Automatic, where Wenlan steeps in the background with the models you assign, or On demand, where your AI tool steeps as it saves or writes and /wenlan steep finishes the rest. New installs start On demand.",
-          "Lock pages I've written, on for new installs, locks a page you write or edit for review, so AI changes to it wait as revision cards while pages AI wrote keep updating.",
+          "Ask me first on pages I wrote, on for new installs, makes AI changes to a page you wrote or edited wait as revision cards for you to accept, while pages AI wrote keep updating.",
           "Sources can be an Obsidian vault, a Logseq graph, or a folder, each kept in sync or imported once, plus ChatGPT and Claude export ZIPs. A chat import keeps a last message nobody answered.",
           "The GitHub button on a Space connects the repository it describes and puts the Space's code pages into the repository as a pull request, from the button or a daily run. That pull request also fixes sentences in the repository's own docs that no longer match the code. Pages can hold Mermaid diagrams, which the reader draws in place.",
         ],
@@ -3913,22 +3913,47 @@ export const docPages: DocPage[] = [
     keywords: [
       "Wenlan changelog",
       "Wenlan releases",
-      "Wenlan version 0.20.0",
+      "Wenlan version 0.20.2",
       "wenlan-mcp release notes",
     ],
-    updatedAt: "2026-10-23",
+    updatedAt: "2026-10-25",
     author: DEFAULT_AUTHOR,
     readingTime: "5 min read",
     summary: [
-      "Quick answer: the current stable release in the repository changelog is v0.20.0, dated 2026-10-23.",
+      "Quick answer: the current stable release in the repository changelog is v0.20.2, dated 2026-10-27.",
       "The unified release publishes native runtime archives plus macOS Apple Silicon and Windows x64 desktop builds and updater artifacts.",
     ],
     sections: [
       {
         heading: "Current stable release",
         body: [
-          "Wenlan v0.20.0 is the current stable release recorded in CHANGELOG.md and GitHub Releases, dated 2026-10-23. Steeping becomes Automatic or On demand, /wenlan map becomes /wenlan wiki, pages you wrote can be locked for review, and a Space's code pages can go into its repository as a pull request. See the release notes for the exact shipped changes.",
+          "Wenlan v0.20.2 is the current stable release recorded in CHANGELOG.md and GitHub Releases, dated 2026-10-27. After an import, the app offers to write the first pages with your AI tool, the Kimi desktop app connects, and citation cards are tidier. See the release notes for the exact shipped changes.",
           "The website keeps public install and product claims aligned to the stable release unless a page explicitly labels a feature as unreleased or on main.",
+        ],
+        bullets: [
+          "After an import, the app offers to write the first pages with the AI tool you choose, eight at a time, and the CLI prints the same next step. On demand, your AI tool also organizes the sources of the new pages it writes.",
+          "The Kimi desktop app connects with Wenlan, and the Connections page lists connected tools first.",
+          "Citation and link preview cards show the type, the name, a short excerpt, and Open.",
+        ],
+      },
+      {
+        heading: "v0.20.1 highlights",
+        body: [
+          "v0.20.1, dated 2026-10-25, lets an AI tool suggest changes to your Obsidian notes, written only when you accept, connects Kimi Code and six more AI tools with Wenlan's skills, and lets AI-tool search find a rare word in a large library.",
+        ],
+        bullets: [
+          "An AI tool can suggest changes to your Obsidian notes. They are written to the vault only when you accept, one AI changes setting covers pages and notes, and the home and the menu bar show vault notes an AI wants to change.",
+          "Wenlan's pages can move into an Obsidian vault.",
+          "Kimi Code connects with Wenlan's skills, and so do Antigravity, GitHub Copilot, VS Code, Windsurf, Kiro, and OpenCode.",
+          "AI-tool search finds a rare word in a large library, and a big first vault import is searchable in minutes.",
+          "Pages show images and videos. A link pasted into a page is saved as a source, with icons for X, Threads, Instagram, and RedNote, and social posts and YouTube videos show as a card, a playable video, or the site's own post.",
+          "The daily repository wiki update can run on GitHub, set up from the app, and can use Cursor or GitHub Copilot. Renamed code files are followed, and a README.md in the wiki folder lists the pages in reading order.",
+        ],
+      },
+      {
+        heading: "v0.20.0 highlights",
+        body: [
+          "v0.20.0, dated 2026-10-23, makes steeping Automatic or On demand, renames /wenlan map to /wenlan wiki, locks pages you wrote for review, and puts a Space's code pages into its repository as a pull request.",
         ],
         bullets: [
           "Steeping is Automatic or On demand, never off. Automatic steeps in the background with the models you assign. On demand, the default for new installs, lets your AI tool steep as it saves or writes; /wenlan steep finishes the rest and also writes new pages from imported material.",
@@ -4158,7 +4183,7 @@ export const docPages: DocPage[] = [
       {
         heading: "Unreleased main work",
         body: [
-          "After v0.20.0, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
+          "After v0.20.2, main-branch work should be treated as unreleased until a release entry publishes it. Earlier 0.8.x work included opt-in retrieval, refinery, and read-time experiments such as query decomposition, graph activation gates, FTS hardening, temporal filters, session diversification, salience priors, fact channels, k-hop graph traversal, global preludes, background reflection debounce, CoT retrieval, and LLM read-time routing.",
           "Those PRs are useful signals for roadmap direction, but public users should treat them as main-branch work until a release entry publishes them.",
         ],
       },

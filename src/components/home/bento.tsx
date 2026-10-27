@@ -5,6 +5,7 @@ import { CapabilityArtifact } from "./capability-artifacts";
 import type { HomeContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
 import { HomeReadableText } from "./readable-text";
+import { homeSectionHeadClass, homeSectionTitleClass } from "@/components/home/section-title";
 
 type BentoCellCopy = HomeContent["redesign"]["bento"]["cells"][number];
 
@@ -14,11 +15,11 @@ const bentoVisualCopy: Record<Locale, { intro: string; illustrationLabel: string
     illustrationLabel: "App captures & capability illustrations · demo content",
   },
   "zh-TW": {
-    intro: "從帶入素材、補上脈絡，到用回日常工具，讓累積的知識派上用場。",
+    intro: "保留來源、補上脈絡，在每天用的工具裡用上這些知識。",
     illustrationLabel: "App 畫面與能力示意 · 使用示範內容",
   },
   "zh-CN": {
-    intro: "从导入素材、补上背景，到用回日常工具，让积累的知识派上用场。",
+    intro: "保留来源、补上背景，在每天用的工具里用上这些知识。",
     illustrationLabel: "App 画面与能力示意 · 使用示范内容",
   },
 };
@@ -56,7 +57,10 @@ function BentoCell({
         style={{ "--cell-accent": accent } as React.CSSProperties}
       >
         <div className="wc-cardCopy">
-          <h3 className="relative font-serif text-xl font-medium tracking-tight">{title}</h3>
+          <h3 className="relative font-serif text-xl font-medium tracking-tight">{title.split(/(?<=\.)\s+(?=\S)/).map((sentence, index) => (
+            // A two-sentence title breaks between its sentences, never inside one.
+            <span key={sentence}>{index > 0 ? " " : null}<span className="inline-block max-w-full">{sentence}</span></span>
+          ))}</h3>
           <p className="relative mt-2 text-base leading-relaxed text-pretty text-[var(--o-text-secondary)]"><HomeReadableText>{body}</HomeReadableText></p>
         </div>
         <div className="wc-canvas" data-capability={id}>{children}</div>
@@ -66,18 +70,26 @@ function BentoCell({
 }
 
 /* Per-cell layout, accent, land order, and artifact. Copy comes from the
-   dictionary and joins by id. */
-const cellChrome: Record<string, { accent: string; delayMs: number }> = {
-  steep: { accent: "var(--o-sage)", delayMs: 80 },
-  topics: { accent: "var(--o-sage)", delayMs: 120 },
-  "repo-wiki": { accent: "var(--o-sage)", delayMs: 140 },
-  lock: { accent: "var(--o-sage)", delayMs: 150 },
-  sources: { accent: "var(--o-warm)", delayMs: 0 },
-  obsidian: { accent: "var(--o-warm)", delayMs: 40 },
-  tools: { accent: "var(--o-warm)", delayMs: 160 },
+   dictionary and joins by id. Wide desktops use three tracks: three singles,
+   then the full-width sources card (copy beside its wall), then two rows of
+   three singles, so the ten cells leave no holes. Narrower screens pair every
+   cell (two tracks, five rows) or stack them (one). */
+type CellLayout = "single" | "split";
+const cellChrome: Record<string, { accent: string; delayMs: number; layout?: CellLayout }> = {
+  steep: { accent: "var(--o-sage)", delayMs: 0 },
+  lock: { accent: "var(--o-sage)", delayMs: 40 },
+  "repo-wiki": { accent: "var(--o-sage)", delayMs: 80 },
+  sources: { accent: "var(--o-warm)", delayMs: 120, layout: "split" },
+  obsidian: { accent: "var(--o-warm)", delayMs: 160 },
+  tools: { accent: "var(--o-warm)", delayMs: 180 },
   "web-access": { accent: "var(--o-warm)", delayMs: 200 },
-  spaces: { accent: "var(--o-warm)", delayMs: 240 },
-  history: { accent: "var(--o-warm)", delayMs: 280 },
+  spaces: { accent: "var(--o-warm)", delayMs: 220 },
+  topics: { accent: "var(--o-warm)", delayMs: 240 },
+  history: { accent: "var(--o-warm)", delayMs: 260 },
+};
+const layoutClass: Record<CellLayout, string> = {
+  single: "",
+  split: "wc-cellWide wc-cellSplit xl:col-span-3",
 };
 
 export function BentoSection({
@@ -120,14 +132,16 @@ export function BentoSection({
 
   return (
     <section ref={sectionRef} data-home-reveal="section" className="px-6 py-20 sm:py-24">
-      <div className="mx-auto max-w-[1160px]">
-        <h2 className="max-w-3xl font-serif text-3xl font-medium tracking-tight text-balance sm:text-5xl">
-          <HomeReadableText>{title}</HomeReadableText>
-        </h2>
-        <p data-capabilities-intro className="mt-5 max-w-3xl text-base leading-relaxed text-pretty text-[var(--o-text-secondary)]">
-          {visual.intro}
-        </p>
-        <div className="wc-capabilityGrid mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+      <div className="mx-auto max-w-6xl">
+        <div className={homeSectionHeadClass}>
+          <h2 className={`max-w-xl ${homeSectionTitleClass}`}>
+            <HomeReadableText>{title}</HomeReadableText>
+          </h2>
+          <p data-capabilities-intro className="max-w-[38ch] text-base leading-7 text-pretty text-[var(--o-text-secondary)]">
+            {visual.intro}
+          </p>
+        </div>
+        <div className="wc-capabilityGrid mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
           {cells.map((cell) => {
             const chrome = cellChrome[cell.id];
             if (!chrome) return null;
@@ -136,6 +150,7 @@ export function BentoSection({
                 key={cell.id}
                 id={cell.id}
                 accent={chrome.accent}
+                className={layoutClass[chrome.layout ?? "single"]}
                 landDelay={delay(chrome.delayMs)}
                 pre={pre}
                 title={cell.title}

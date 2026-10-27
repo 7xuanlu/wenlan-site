@@ -10,6 +10,7 @@ import { WikiCapture } from "./wiki-capture";
 import { wikiMaterialViews } from "./wiki-material-data";
 import { wikiInteractionData } from "./wiki-interaction-data";
 import { wikiPreviewLinks } from "./wiki-capture-data";
+import { homeSectionHeadClass, homeSectionTitleClass } from "@/components/home/section-title";
 
 export type ProductMediaSlot = "wiki" | "ai" | "updates" | "graph";
 
@@ -130,7 +131,7 @@ export function ProductMedia({ locale, slot }: { readonly locale: Locale; readon
 
 export function StoryIntro({ locale, slot, id, title, body, wide = false, showLabel = true }: {
   readonly locale: Locale;
-  readonly slot: ProductMediaSlot;
+  readonly slot: ProductMediaSlot | "cite-check";
   readonly id: string;
   readonly title: string;
   readonly body: string;
@@ -139,11 +140,11 @@ export function StoryIntro({ locale, slot, id, title, body, wide = false, showLa
 }) {
   return (
     <div data-story-intro={slot}>
-      {showLabel && <p className="mb-4 text-sm font-medium text-[var(--o-warm)]">
+      {showLabel && slot !== "cite-check" && <p className="mb-4 text-sm font-medium text-[var(--o-warm)]">
         {storyCopyByLocale[locale].steps[slot]}
       </p>}
-      <div className={wide ? "grid gap-4 md:grid-cols-2 md:items-end md:gap-16" : "space-y-5"}>
-        <h2 id={id} className="max-w-xl font-sans text-[1.75rem] leading-snug font-medium tracking-tight text-balance text-[var(--o-text)] sm:text-[2.125rem] sm:leading-[1.25]">{locale === "en" ? title : title.split(/(?<=[，。])/).filter(Boolean).map((phrase) => <span key={phrase} className="inline-block max-w-full">{phrase}</span>)}</h2>
+      <div className={wide ? homeSectionHeadClass : "space-y-5"}>
+        <h2 id={id} className={`max-w-xl ${homeSectionTitleClass}`}>{locale === "en" ? title : title.split(/(?<=[，。])/).filter(Boolean).map((phrase) => <span key={phrase} className="inline-block max-w-full">{phrase}</span>)}</h2>
         <p className="max-w-[38ch] text-base leading-7 text-pretty text-[var(--o-text-secondary)]">{body}</p>
       </div>
     </div>
@@ -200,11 +201,29 @@ export function KnowledgeUpdates({ locale }: { readonly locale: Locale }) {
   );
 }
 
+// The first story after the hero: a real refused write, shown full width so the
+// terminal text stays legible on desktop; phones read it through View full size.
+export function CiteCheck({ locale }: { readonly locale: Locale }) {
+  const copy = storyCopyByLocale[locale].citeCheck;
+
+  return (
+    <section id="cite-check" aria-labelledby="cite-check-heading" className="scroll-mt-24 px-6 pt-8 pb-12 sm:pt-12 sm:pb-20">
+      <div className="mx-auto max-w-6xl min-w-0">
+        <StoryIntro locale={locale} slot="cite-check" id="cite-check-heading" title={copy.title} body={copy.body} wide showLabel={false} />
+        <div className="mt-8" data-cite-check-capture>
+          <EvidenceImage src="/images/home/capabilities/cite-check.webp" width={1454} height={460} locale={locale}
+            alt={copy.alt} caption={copy.caption} mobileZoomWidth={960} detailZoomWidth={1454} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function KnowledgeConnections({ locale }: { readonly locale: Locale }) {
   const copy = storyCopyByLocale[locale];
 
   return (
-    <section id="knowledge-connections" aria-labelledby="knowledge-connections-heading" className="scroll-mt-24 px-6 pt-8 pb-12 sm:pt-12 sm:pb-20">
+    <section id="knowledge-connections" aria-labelledby="knowledge-connections-heading" className="scroll-mt-24 px-6 py-12 sm:py-20">
       <div className="mx-auto max-w-6xl min-w-0">
         <StoryIntro locale={locale} slot="graph" id="knowledge-connections-heading" title={copy.graph.title} body={copy.graph.body} wide showLabel={false} />
         <div className="mt-8"><RealKnowledgeGraph locale={locale} /></div>

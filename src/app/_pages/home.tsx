@@ -7,7 +7,8 @@ import {
   GitHubLogoIcon,
 } from "@/components/icons";
 import type { WenlanRelease } from "@/lib/release-manifest";
-import { ProductMedia, StoryIntro, KnowledgeUpdates, KnowledgeConnections } from "@/components/home/home-story";
+import { ProductMedia, StoryIntro, CiteCheck, KnowledgeUpdates, KnowledgeConnections } from "@/components/home/home-story";
+import { ProductHuntBadge } from "@/components/home/product-hunt-badge";
 import { storyCopyByLocale } from "@/components/home/home-story-copy";
 import { HeroScenarios } from "@/components/home/hero-scenarios";
 import { BentoSection } from "@/components/home/bento";
@@ -20,10 +21,11 @@ import { LocalizedLink, localizedHrefForLocale } from "@/i18n/navigation";
 import { SITE_URL } from "@/i18n/routing";
 import { demoVideoForLocale } from "@/lib/demo-video";
 import { SoftwareApplicationData } from "@/components/software-application-data";
+import { homeSectionHeadClass, homeSectionTitleClass } from "@/components/home/section-title";
 
 const integrationCopy = {
   en: {
-    title: "Your knowledge stays yours.",
+    title: "Your files stay on your computer.",
     contextLabel: "Context per query",
     tokenUnit: "Tokens measure text length.",
     recallTitle: "Retrieval coverage",
@@ -32,12 +34,12 @@ const integrationCopy = {
     recallScope: "LongMemEval (oracle) · 500 questions",
     metricsLink: "Evaluation & methodology",
     recallLabel: "Average coverage of labeled relevant material in the top 5.",
-    ownershipBody: "Your pages, memories, and graph are stored locally. Open knowledge pages in your own editor.",
-    modelBody: "Choose a local or cloud model. Cloud models receive the content they process.",
+    ownershipBody: "Your pages, memories, and graph are stored on your computer. Pages are readable Markdown you can open in your own editor.",
+    modelBody: "You decide which AI tools can read them.",
     ownershipLink: "How local storage works",
   },
   "zh-TW": {
-    title: "你的知識，由你掌握。",
+    title: "檔案留在你的電腦上。",
     contextLabel: "每次查詢的背景內容",
     tokenUnit: "Token 計算文字長度。",
     recallTitle: "相關資料覆蓋率",
@@ -46,12 +48,12 @@ const integrationCopy = {
     recallScope: "LongMemEval（oracle）· 500 題",
     metricsLink: "查看完整評測與方法",
     recallLabel: "前 5 筆結果對標註相關資料的平均覆蓋率。",
-    ownershipBody: "知識頁、記憶與圖譜保存在本機；知識頁可用自己的編輯器開啟。",
-    modelBody: "模型可選本機或雲端；雲端模型會接收需要處理的內容。",
+    ownershipBody: "筆記、記憶和圖譜都存在你的電腦上。筆記是一般的 Markdown 檔，用你自己的編輯器就能打開。",
+    modelBody: "哪些 AI 工具能讀，由你決定。",
     ownershipLink: "了解本機資料儲存",
   },
   "zh-CN": {
-    title: "你的知识，由你掌握。",
+    title: "文件留在你的电脑上。",
     contextLabel: "每次查询的背景内容",
     tokenUnit: "Token 计算文字长度。",
     recallTitle: "相关资料覆盖率",
@@ -60,8 +62,8 @@ const integrationCopy = {
     recallScope: "LongMemEval（oracle）· 500 题",
     metricsLink: "查看完整评测与方法",
     recallLabel: "前 5 条结果对标注相关资料的平均覆盖率。",
-    ownershipBody: "知识页、记忆与图谱保存在本地；知识页可用自己的编辑器打开。",
-    modelBody: "模型可选本地或云端；云端模型会接收需要处理的内容。",
+    ownershipBody: "笔记、记忆和图谱都存在你的电脑上。笔记是普通的 Markdown 文件，用你自己的编辑器就能打开。",
+    modelBody: "哪些 AI 工具能读，由你决定。",
     ownershipLink: "了解本地数据存储",
   },
 } as const;
@@ -114,6 +116,7 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
       <section className="home-hero relative px-4 pb-6 sm:px-6 sm:pb-8" aria-labelledby="home-heading">
         <div className="mx-auto max-w-6xl">
           <div className="home-hero-copy mx-auto max-w-4xl min-w-0 text-center">
+            <ProductHuntBadge />
             <h1 id="home-heading" className={`home-hero-title animate-fade-up motion-reduce:animate-none font-sans font-medium tracking-tight break-words text-balance ${locale === "en" ? "home-hero-title--en" : "home-hero-title--cjk"}`}>
               <span className={locale === "en" ? "inline" : "block"}>{redesign.hero.headline.pre}</span>
               {locale === "en" ? " " : null}
@@ -121,15 +124,7 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
               {redesign.hero.headline.post}
             </h1>
             <p className="home-hero-description mx-auto max-w-2xl text-balance text-[var(--o-text-secondary)]">
-              {locale === "en" ? (
-                story.heroDescription.split(/(?<=\.)\s+/).map((sentence, index) => (
-                  <span key={sentence} className="md:block">
-                    {index > 0 ? " " : null}{sentence}
-                  </span>
-                ))
-              ) : (
-                <HomeReadableText>{story.heroDescription}</HomeReadableText>
-              )}
+              {locale === "en" ? story.heroDescription : <HomeReadableText>{story.heroDescription}</HomeReadableText>}
             </p>
           </div>
           <DemoVideo
@@ -141,6 +136,11 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
                 <GitHubLogoIcon className="size-4 shrink-0" />
                 GitHub
               </a>
+            }
+            trustNote={
+              <ul className="home-hero-trust" aria-label={locale === "en" ? "Why you can try it" : locale === "zh-TW" ? "可以放心試用" : "可以放心试用"}>
+                {story.heroTrust.map((item) => <li key={item}>{item}</li>)}
+              </ul>
             }
             sectionTitle={demoTitleByLocale[locale]}
             locale={locale}
@@ -157,12 +157,16 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
         </div>
       </section>
 
+      <CiteCheck locale={locale} />
+
       <KnowledgeConnections locale={locale} />
+
+      <KnowledgeUpdates locale={locale} />
 
       <section id="ai-recall" aria-labelledby="ai-recall-heading" className="scroll-mt-24 px-6 py-12 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <div className="grid min-w-0 gap-8">
-            <StoryIntro locale={locale} slot="ai" id="ai-recall-heading" title={story.aiTitle} body={story.aiBody} wide />
+            <StoryIntro locale={locale} slot="ai" id="ai-recall-heading" title={story.aiTitle} body={story.aiBody} wide showLabel={false} />
             <ProductMedia locale={locale} slot="ai" />
           </div>
           <details data-home-examples className="group mt-4">
@@ -174,19 +178,17 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
         </div>
       </section>
 
-      <KnowledgeUpdates locale={locale} />
-
       <div id="capabilities" data-home-capabilities className="scroll-mt-24">
         <BentoSection cells={redesign.bento.cells} title={content.sections.features.title} locale={locale} />
       </div>
 
       <section id="integrations" aria-labelledby="ownership-heading" data-home-reveal className="scroll-mt-24 px-6 pt-4 pb-12 sm:pb-16">
-        <div data-knowledge-ownership className="mx-auto grid max-w-6xl gap-5 py-8 md:grid-cols-[.85fr_1.15fr] md:gap-12 sm:py-10">
+        <div data-knowledge-ownership className={`mx-auto max-w-6xl py-8 sm:py-10 ${homeSectionHeadClass}`}>
           <div>
-            <h2 id="ownership-heading" className="font-sans text-2xl font-medium tracking-tight text-balance sm:text-3xl">{integrations.title}</h2>
+            <h2 id="ownership-heading" className={`max-w-xl ${homeSectionTitleClass}`}>{integrations.title}</h2>
           </div>
           <div>
-            <p className="max-w-xl text-base leading-7 text-[var(--o-text-secondary)]">{integrations.ownershipBody}{" "}{integrations.modelBody}</p>
+            <p className="max-w-[38ch] text-base leading-7 text-pretty text-[var(--o-text-secondary)]">{integrations.ownershipBody}{" "}{integrations.modelBody}</p>
             <LocalizedLink href="/learn/markdown-local-index-ai-memory" locale={locale} className="mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-[var(--o-warm)] underline decoration-[var(--o-border)] underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4">
               {integrations.ownershipLink}<ArrowRightIcon className="size-4 shrink-0" />
             </LocalizedLink>
@@ -196,14 +198,14 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
 
       <section id="retrieval-evidence" aria-labelledby="retrieval-heading" className="scroll-mt-24 px-6 pt-12 pb-6 sm:pt-16 sm:pb-8">
         <div className="mx-auto max-w-6xl">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
+          <div className={homeSectionHeadClass}>
+            <h2 id="retrieval-heading" className={`max-w-xl ${homeSectionTitleClass}`}>{content.metrics.title}</h2>
             <div className="min-w-0">
-              <h2 id="retrieval-heading" className="font-sans text-2xl font-medium tracking-tight text-balance sm:text-3xl">{content.metrics.title}</h2>
-              <p className="mt-3 max-w-2xl text-base leading-7 text-[var(--o-text-secondary)]">{content.metrics.description}</p>
+              <p className="max-w-[38ch] text-base leading-7 text-pretty text-[var(--o-text-secondary)]">{content.metrics.description}</p>
+              <LocalizedLink href="/docs/evaluation" locale={locale} className="mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-[var(--o-warm)] underline decoration-[var(--o-border)] underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4">
+                {integrations.metricsLink}<ArrowRightIcon className="size-4 shrink-0" />
+              </LocalizedLink>
             </div>
-            <LocalizedLink href="/docs/evaluation" locale={locale} className="inline-flex min-h-11 shrink-0 items-center gap-2 self-start text-sm font-medium text-[var(--o-warm)] underline decoration-[var(--o-border)] underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4 sm:self-auto">
-              {integrations.metricsLink}<ArrowRightIcon className="size-4 shrink-0" />
-            </LocalizedLink>
           </div>
           <div className="mt-8 grid min-w-0 items-start gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
             <div className="min-w-0" aria-labelledby="context-test-heading">
@@ -230,7 +232,7 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
       {/* The download is the sole closing action; release updates live in the homepage footer. */}
       <section id="get-wenlan" aria-labelledby="download-heading" className="scroll-mt-24 px-6 pt-12 pb-12 text-center sm:pt-16 sm:pb-16">
         <div className="mx-auto flex max-w-3xl flex-col items-center">
-          <h2 id="download-heading" className="font-sans text-3xl font-medium tracking-tight text-balance sm:text-4xl">
+          <h2 id="download-heading" className={homeSectionTitleClass}>
             {cta.title}
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--o-text-secondary)]">

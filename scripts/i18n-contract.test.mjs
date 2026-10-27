@@ -1680,7 +1680,7 @@ test("Mandarin Obsidian guides own the Claude Code setup, MCP, plugin, and skill
       "claude mcp add --transport http obsidian",
       "Claudian",
       "IDE bridge",
-      locale === "zh-TW" ? "唯讀來源" : "只读来源",
+      locale === "zh-TW" ? "沒有你同意，Wenlan 不會改動它們" : "没有你同意，Wenlan 不会改动它们",
       "03-checklist.md",
       "kepano/obsidian-skills",
       "Roasbeef/obsidian-claude-code",
@@ -1689,6 +1689,8 @@ test("Mandarin Obsidian guides own the Claude Code setup, MCP, plugin, and skill
     ]) {
       assert.match(articleText, new RegExp(expected.replaceAll("/", "\\/")), `${locale}: ${expected}`);
     }
+    // Since v0.20.1 an Obsidian vault can receive changes you accept; it is no longer a read-only source.
+    assert.doesNotMatch(articleText, /唯讀來源|只读来源|不會回寫|不会写回/, `${locale}: no read-only Obsidian claim`);
   }
 });
 
@@ -2558,9 +2560,9 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
       content.enContent.home.content.redesign.hero.description,
     ],
     [
-      "Bring your knowledge",
-      "to life.",
-      "Wenlan is your personal knowledge base, maintained with AI. Connect notes, files, and chats into knowledge you and your AI tools can find and use.",
+      "Turn your notes, files, and AI chats into a",
+      "living wiki.",
+      "Wenlan pages cite their sources, get checked against them, and update when they change. Claude, Codex, and more can put them to work.",
     ],
   );
 
@@ -2573,7 +2575,7 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
         eyebrow: /AI 協助維護的個人知識庫/,
         pre: /用你的知識，/,
         emphasis: /找到答案、完成工作。/,
-        description: "由 AI 協助維護的個人知識庫。文瀾將筆記、文件與對話連成可持續更新的知識，供你與 AI 查找、使用。",
+        description: "文瀾把筆記、文件和 AI 對話整理成持續更新的知識庫，附上來源，並對照來源檢查。Claude、Codex 等 AI 工具都能直接用。",
       },
     },
     "zh-CN": {
@@ -2584,7 +2586,7 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
         eyebrow: /AI 协助维护的个人知识库/,
         pre: /用你的知识，/,
         emphasis: /找到答案、完成工作。/,
-        description: "由 AI 协助维护的个人知识库。文澜将笔记、文档与对话连成可持续更新的知识，供你与 AI 查找、使用。",
+        description: "文澜把笔记、文档和 AI 对话整理成持续更新的知识库，附上来源，并对照来源检查。Claude、Codex 等 AI 工具都能直接用。",
       },
     },
   };
@@ -2611,16 +2613,16 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
   }
 });
 
-test("Chinese hero leads with outcomes and setup begins with a concrete decision", async () => {
+test("Chinese hero names the living knowledge base and setup begins with a concrete decision", async () => {
   const { content } = await loadI18nModules();
 
   for (const locale of ["zh-TW", "zh-CN"]) {
     const dictionary = content.localizedContentByLocale[locale];
 
     assert.match(
-      dictionary.home.content.redesign.hero.headline.emphasis,
-      /找到答案、完成工作。/,
-      `${locale}.home.hero.headline.benefit`,
+      dictionary.home.content.redesign.hero.description,
+      /持續更新的知識庫|持续更新的知识库/,
+      `${locale}.home.hero.description.benefit`,
     );
     assert.match(
       dictionary.getStarted.content.hero.title,

@@ -228,9 +228,9 @@ const comparisonLinks = [
 ];
 
 const expectedWorksWithNotes = {
-  en: "Read from your Obsidian vault without changing your files.",
-  "zh-TW": "可讀取 Obsidian 庫，保留原文。",
-  "zh-CN": "可读取 Obsidian 库，保留原文。",
+  en: "Connect your Obsidian vault; Wenlan never edits your existing notes without your OK.",
+  "zh-TW": "可連接 Obsidian 筆記庫；沒有你同意，Wenlan 不會改動你原有的筆記。",
+  "zh-CN": "可连接 Obsidian 笔记库；没有你同意，Wenlan 不会改动你原有的笔记。",
 };
 
 const oldClaims = {
@@ -276,18 +276,18 @@ test("hero leads with useful outcomes and describes knowledge that can be revise
   const expected = {
     en: {
       eyebrow: "A personal knowledge base, maintained with AI",
-      headline: ["Bring your knowledge", "to life."],
-      description: "Wenlan is your personal knowledge base, maintained with AI. Connect notes, files, and chats into knowledge you and your AI tools can find and use.",
+      headline: ["Turn your notes, files, and AI chats into a", "living wiki."],
+      description: "Wenlan pages cite their sources, get checked against them, and update when they change. Claude, Codex, and more can put them to work.",
     },
     "zh-TW": {
       eyebrow: "AI 協助維護的個人知識庫",
       headline: ["用你的知識，", "找到答案、完成工作。"],
-      description: "由 AI 協助維護的個人知識庫。文瀾將筆記、文件與對話連成可持續更新的知識，供你與 AI 查找、使用。",
+      description: "文瀾把筆記、文件和 AI 對話整理成持續更新的知識庫，附上來源，並對照來源檢查。Claude、Codex 等 AI 工具都能直接用。",
     },
     "zh-CN": {
       eyebrow: "AI 协助维护的个人知识库",
       headline: ["用你的知识，", "找到答案、完成工作。"],
-      description: "由 AI 协助维护的个人知识库。文澜将笔记、文档与对话连成可持续更新的知识，供你与 AI 查找、使用。",
+      description: "文澜把笔记、文档和 AI 对话整理成持续更新的知识库，附上来源，并对照来源检查。Claude、Codex 等 AI 工具都能直接用。",
     },
   };
   for (const [locale, dictionary] of Object.entries(dictionaryByLocale)) {
@@ -297,6 +297,8 @@ test("hero leads with useful outcomes and describes knowledge that can be revise
     assert.equal(hero.description, expected[locale].description, `${locale}: dictionary hero description`);
     assert.equal(storyCopyByLocale[locale].heroDescription, expected[locale].description, `${locale}: rendered hero description`);
     assert.doesNotMatch(storyCopyByLocale[locale].heroDescription, /always correct|never forget|保證正確|保证正确|永不忘記|永不忘记/i);
+    // The description already names the tools; the trust line does not repeat them.
+    assert.doesNotMatch(storyCopyByLocale[locale].heroTrust.join(" "), /Claude Code|Codex|Cursor/);
   }
 });
 
@@ -325,7 +327,9 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     assert.equal(home.redesign.hero.description.split(/\s+/).filter(Boolean).length <= 40, true);
     assert.equal(home.redesign.hero.worksWithNote, expectedWorksWithNotes[locale]);
     assert.match(home.redesign.hero.worksWithNote, /Obsidian/);
-    assert.match(home.redesign.hero.worksWithNote, /without changing|保留原文/i);
+    assert.match(home.redesign.hero.worksWithNote, /without your OK|沒有你同意|没有你同意/i);
+    // Obsidian connections can write accepted changes since v0.20.1; never call them read-only.
+    assert.doesNotMatch(home.redesign.hero.worksWithNote, /read-only|without changing|唯讀|只读|保留原文/i);
     assert.doesNotMatch(
       home.download.description,
       /notarized|已公證的|已公证的/i,
@@ -371,9 +375,10 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     assert.match(home.redesign.pipeline.intro, /setup|設定|配置/);
 
     const cards = home.redesign.bento.cells;
-    assert.deepEqual(cards.map(({ id }) => id), ["sources", "obsidian", "steep", "topics", "repo-wiki", "lock", "tools", "web-access", "spaces", "history"], `${locale}: revised capability coverage`);
-    assert.match(cards.find(card => card.id === "steep").body, /Steep/);
-    assert.match(cards.find(card => card.id === "steep").body, /On demand|隨叫|随叫/);
+    // Citation checks and update flags are homepage story sections, not cards.
+    assert.deepEqual(cards.map(({ id }) => id), ["steep", "lock", "repo-wiki", "sources", "obsidian", "tools", "web-access", "spaces", "topics", "history"], `${locale}: revised capability coverage`);
+    assert.match(cards.find(card => card.id === "steep").body, /Steep|\/wenlan steep/);
+    assert.match(cards.find(card => card.id === "steep").body, /\/wenlan steep|隨叫|随叫/);
     assert.match(cards.find(card => card.id === "steep").body, /Automatic|自動|自动/);
     assert.match(cards.find(card => card.id === "steep").body, /model|模型/);
     assert.doesNotMatch(cards.find(card => card.id === "steep").body, /\boff\b|關閉|关闭/i);
@@ -382,21 +387,34 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     assert.match(capabilityArtifacts, /搜尋線索/);
     assert.match(capabilityArtifacts, /搜索线索/);
     const sourceIllustration = capabilityArtifacts.match(/^    sources: (.+),$/gm)[["en", "zh-TW", "zh-CN"].indexOf(locale)];
-    assert.match(sourceIllustration, /Markdown/);
-    assert.match(sourceIllustration, /Text-based PDF|文字型 PDF|文本型 PDF/);
-    assert.match(sourceIllustration, /ChatGPT.*Claude/);
-    assert.match(cards.find(card => card.id === "sources").body, /URL|網址|网址/);
+    // The wall names only text-based PDFs and labels chat exports as exports.
+    assert.match(sourceIllustration, /PDF \(text-based\)|PDF（文字型）|PDF（文本型）/);
+    assert.match(sourceIllustration, /ChatGPT ?(?:\(export\)|（匯出）|（导出）).*Claude ?(?:\(export\)|（匯出）|（导出）)/);
+    assert.match(sourceIllustration, /memories while you work|記憶|记忆/);
+    const sourceWall = capabilityArtifacts.slice(capabilityArtifacts.indexOf("const sourceWall"), capabilityArtifacts.indexOf("function Sources("));
+    for (const name of ["YouTube", "Gmail", "Notion", "Google Drive", "Slack", "GitHub", "Obsidian", "Logseq", "OpenWiki (OKF)", "Claude Code", "Codex", "Markdown"]) assert.ok(sourceWall.includes(`"${name}"`), name);
+    assert.match(cards.find(card => card.id === "sources").body, /URL|link|網址|网址|連結|链接/);
     assert.doesNotMatch(cards.find(card => card.id === "sources").body, /any file|every format|任何檔案|任何文件/);
-    assert.match(cards.find(card => card.id === "obsidian").body, /read-only|唯讀|只读/);
+    assert.match(cards.find(card => card.id === "obsidian").body, /never edits your existing notes without your OK|沒有你同意，不會改動你原有的筆記|没有你同意，不会改动你原有的笔记/);
+    assert.doesNotMatch(cards.find(card => card.id === "obsidian").body, /read-only|唯讀|只读/);
     assert.match(cards.find(card => card.id === "obsidian").body, /in the background|在背景|在后台/);
     assert.doesNotMatch(cards.find(card => card.id === "obsidian").body, /on demand|when needed|按需|需要時|需要时/);
     assert.match(cards.find(card => card.id === "repo-wiki").body, /\/wenlan wiki/);
     assert.match(cards.find(card => card.id === "repo-wiki").body, /code lines|程式碼行|代码行/);
-    assert.match(cards.find(card => card.id === "lock").body, /review|審核|审核/);
+    assert.match(cards.find(card => card.id === "lock").body, /Ask me first|先問我|先问我/);
     assert.match(cards.find(card => card.id === "lock").body, /AI wrote|AI 寫的|AI 写的/);
     assert.match(cards.find(card => card.id === "tools").body, /MCP/);
+    // Switching AI tools keeps the same pages and memories.
+    assert.match(`${cards.find(card => card.id === "tools").title} ${cards.find(card => card.id === "tools").body}`, /Switch tools|Change tools|換了?工具|换了?工具/);
+    assert.match(cards.find(card => card.id === "tools").body, /same pages and memories|同一批筆記和記憶|同一批笔记和记忆/);
+    assert.doesNotMatch(cards.find(card => card.id === "repo-wiki").body, /Steep updates them/);
+    const story = storyCopyByLocale[locale];
+    assert.match(story.citeCheck.body, /cited sentence|附引用的話|带引用的话/);
+    assert.match(story.citeCheck.body, /isn't saved|不會存進去|不会保存/);
+    assert.match(story.updates.body, /only the pages built on it|只有用到它的筆記|只有用到它的笔记/);
+    assert.match(story.updates.body, /ask you first|先問你|先问你/);
     assert.match(cards.find(card => card.id === "spaces").body, /Spaces/);
-    assert.match(cards.find(card => card.id === "history").body, /page revisions|知識頁.*修訂|知识页.*修订/i);
+    assert.match(cards.find(card => card.id === "history").body, /page revisions|筆記.*修訂|笔记.*修订/i);
     assert.match(capabilityArtifacts, /Replaces earlier memory/);
     assert.match(capabilityArtifacts, /取代先前記憶/);
     assert.match(capabilityArtifacts, /取代先前记忆/);
@@ -430,7 +448,7 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     assert.ok(setupFaq && notesFaq && builtInFaq, `${locale} setup, Obsidian, and memory FAQs are required`);
     assert.match(setupFaq.a, /model|模型|模型/);
     assert.match(setupFaq.a, /client|用戶端|客户端|AI 工具/);
-    assert.match(notesFaq.a, /read-only|唯讀|只读/);
+    assert.match(notesFaq.a, /without your OK|沒有你同意|没有你同意/);
     assert.match(notesFaq.a, /Markdown|\.pdf|PDF/);
     assert.match(builtInFaq.a, /varies by tool|因工具而異|因工具而异/);
     assert.doesNotMatch(builtInFaq.a, /usually cannot trace|通常無法追蹤|通常无法追踪/);
@@ -456,4 +474,12 @@ test("context token figures are not attributed to LongMemEval retrieval quality"
   assert.match(home, /integrations\.tokenUnit/);
   assert.match(home, /integrations\.contextScope/);
   assert.match(home, /integrations\.recallScope/);
+});
+
+test("the ownership section says where files live without the stale model line", () => {
+  const home = readFileSync(new URL("../src/app/_pages/home.tsx", import.meta.url), "utf8");
+  assert.match(home, /title: "Your files stay on your computer\."/);
+  assert.match(home, /Pages are readable Markdown you can open in your own editor\./);
+  assert.match(home, /You decide which AI tools can read them\./);
+  assert.doesNotMatch(home, /Cloud models receive|雲端模型會接收|云端模型会接收/);
 });

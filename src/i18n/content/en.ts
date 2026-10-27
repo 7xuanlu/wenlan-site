@@ -75,7 +75,7 @@ export const enContent = {
         eyebrow: "Download",
         title: "Download Wenlan for your system.",
         description:
-          "Wenlan v0.20.0 ships a Windows x64 desktop build and a macOS Apple silicon DMG, plus headless runtime builds for Windows, macOS, and Linux.",
+          "Wenlan v0.20.2 ships a Windows x64 desktop build and a macOS Apple silicon DMG, plus headless runtime builds for Windows, macOS, and Linux.",
         stableLabel: "Stable",
         releaseNotesLabel: "Release notes",
         packageIncludesLabel: "CLI · daemon · MCP connector",
@@ -494,12 +494,12 @@ export const enContent = {
           {
             id: "tools",
             q: "What AI tools work with Wenlan?",
-            a: "Claude Code and Codex have Wenlan plugins. Cursor, Claude Desktop, VS Code, Muse Code and other local clients connect through MCP. Browser clients such as ChatGPT, Claude.ai and Muse use Web access through an OAuth relay: choose the whole library or one Space, approve the connection as search only or search and write, and keep Wenlan online. You can revoke access in the app. Obsidian is a read-only source workflow.",
+            a: "Claude Code and Codex have Wenlan plugins. Cursor, Claude Desktop, VS Code, GitHub Copilot, Windsurf, Kimi Code, Muse Code and other local clients connect through MCP. Browser clients such as ChatGPT, Claude.ai and Muse use Web access through an OAuth relay: choose the whole library or one Space, approve the connection as search only or search and write, and keep Wenlan online. You can revoke access in the app. Obsidian vaults connect as a source, and Wenlan changes your existing notes only when you accept.",
           },
           {
             id: "not-notes",
             q: "Is Wenlan a replacement for Notion or Obsidian?",
-            a: "No. Wenlan does not replace the app you write in. It can register Markdown files, text, text-extractable PDF, folders, an Obsidian vault, and a Logseq graph as sources. Folders, vaults, and graphs can be kept in sync or imported once. Obsidian and Logseq input is read-only; kept in sync, it is followed in the background, checked about every 30 seconds; Wenlan's own notes remain readable Markdown under ~/.wenlan/.",
+            a: "No. Wenlan does not replace the app you write in. It can register Markdown files, text, text-extractable PDF, folders, an Obsidian vault, and a Logseq graph as sources. Folders, vaults, and graphs can be kept in sync or imported once. Wenlan never edits your existing Obsidian or Logseq notes without your OK; kept in sync, it is followed in the background, checked about every 30 seconds; Wenlan's own pages remain readable Markdown under ~/.wenlan/.",
           },
           {
             id: "setup",
@@ -526,11 +526,11 @@ export const enContent = {
       redesign: {
         hero: {
           eyebrow: "A personal knowledge base, maintained with AI",
-          headline: { pre: "Bring your knowledge", emphasis: "to life.", post: "" },
+          headline: { pre: "Turn your notes, files, and AI chats into a", emphasis: "living wiki.", post: "" },
           description:
-            "Wenlan is your personal knowledge base, maintained with AI. Connect notes, files, and chats into knowledge you and your AI tools can find and use.",
+            "Wenlan pages cite their sources, get checked against them, and update when they change. Claude, Codex, and more can put them to work.",
           worksWithLabel: "Works with",
-          worksWithNote: "Read from your Obsidian vault without changing your files.",
+          worksWithNote: "Connect your Obsidian vault; Wenlan never edits your existing notes without your OK.",
         },
         fit: {
           "title": "Is Wenlan for you?",
@@ -555,7 +555,7 @@ export const enContent = {
           "title": "Compare Wenlan with your current tools",
           "intro": "Choose what you use today to see what Wenlan adds.",
           "expandDetailsLabel": "Show detailed explanations",
-          "setupSummary": "Connect your sources and a model, then create your first wiki pages.",
+          "setupSummary": "Connect your sources and your AI tool, then let it write your first pages.",
           "scopeNote": "Wenlan is also an LLM Wiki implementation. These approaches can work together.",
           "dimensions": [
             "How do you use it day to day?",
@@ -717,12 +717,12 @@ export const enContent = {
                 "labels": [
                   "Keep the vault; maintain a separate Wiki",
                   "Note changes, knowledge pages follow",
-                  "Original notes stay untouched; review drafts first"
+                  "Your notes change only when you accept"
                 ],
                 "profile": [
-                  "Connect the vault as a read-only source; keep writing originals while Wenlan builds pages for you and AI.",
+                  "Connect the vault as a source; keep writing originals while Wenlan builds pages for you and AI.",
                   "After setup, Wenlan follows connected sources in the background, and Steep refreshes eligible pages without rewriting your vault.",
-                  "Wenlan does not write back to the vault; pages you edit also get a revision first, then you decide."
+                  "Wenlan never edits your existing notes without your OK; pages you edit also get a revision first, then you decide."
                 ],
                 "emphasis": []
               }
@@ -888,39 +888,34 @@ export const enContent = {
         bento: {
           cells: [
             {
+              id: "steep",
+              title: "Your AI tool writes the pages",
+              body: "Your AI tool turns notes, files, and chats into cited pages as it works, and /wenlan steep finishes the rest. No extra model needed. Prefer the background? Automatic uses a model you pick.",
+            },
+            {
+              id: "lock",
+              title: "Your own writing stays yours",
+              body: "Pages you wrote or edited are set to Ask me first: AI changes wait for your OK. Pages AI wrote keep updating on their own.",
+            },
+            {
+              id: "repo-wiki",
+              title: "Your code gets a wiki too",
+              body: "Run /wenlan wiki in a repository. Your AI tool writes pages with diagrams, each tied to the code lines it relies on. When that code changes, the pages are flagged and your AI tool updates them, daily on GitHub if you like.",
+            },
+            {
               id: "sources",
-              title: "Bring your files and conversations",
-              body: "Bring in files, folders, a Logseq graph, and AI chats. Save web content and its URL through connected tools.",
+              title: "Bring what you already have",
+              body: "Notes apps, files, AI chats, links, and code. Wenlan keeps each source with its link, so pages can cite it.",
             },
             {
               id: "obsidian",
               title: "Keep using your Obsidian vault",
-              body: "Connect your vault read-only and Wenlan follows changes in the background. Your original notes stay untouched.",
-            },
-            {
-              id: "steep",
-              title: "Steep",
-              body: "Steep turns material into pages. On demand, the default, your AI tool steeps as it works; Automatic uses a configured model in the background.",
-            },
-            {
-              id: "topics",
-              title: "A home for each topic",
-              body: "Gather related pages. Follow connections across topics.",
-            },
-            {
-              id: "repo-wiki",
-              title: "A wiki for your code",
-              body: "Run /wenlan wiki in a repository. Your AI tool writes pages with diagrams, each tied to the code lines it relies on. When that code changes, Steep updates them.",
-            },
-            {
-              id: "lock",
-              title: "Your writing stays yours",
-              body: "Pages you wrote or edited are locked: AI changes wait for your review. Pages AI wrote keep updating on their own.",
+              body: "Connect your vault and Wenlan follows changes in the background. It never edits your existing notes without your OK.",
             },
             {
               id: "tools",
-              title: "Connect the AI tools you use",
-              body: "Claude Code, Codex, Cursor, and other configured clients can consult your knowledge and save memories through plugins or MCP.",
+              title: "Switch tools. Keep your knowledge.",
+              body: "Claude Code, Codex, Cursor, and other AI tools use the same pages and memories through plugins or MCP. Change tools anytime; your knowledge stays.",
             },
             {
               id: "web-access",
@@ -931,6 +926,11 @@ export const enContent = {
               id: "spaces",
               title: "A space for each project",
               body: "Keep projects, research, and personal knowledge in separate Spaces. Choose the context your AI retrieves.",
+            },
+            {
+              id: "topics",
+              title: "A home for each topic",
+              body: "Gather related pages. Follow connections across topics.",
             },
             {
               id: "history",
@@ -1721,13 +1721,13 @@ export const enContent = {
           ctas: [
             {
               id: "windows-download",
-              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.0/wenlan-windows-x64.zip",
+              href: "https://github.com/wenlan-app/wenlan/releases/download/v0.20.2/wenlan-windows-x64.zip",
               label: "Download Windows x64"
             },
             {
               id: "all-downloads",
-              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.20.0",
-              label: "All v0.20.0 downloads"
+              href: "https://github.com/wenlan-app/wenlan/releases/tag/v0.20.2",
+              label: "All v0.20.2 downloads"
             }
           ]
         },
@@ -1902,7 +1902,7 @@ export const enContent = {
     content: {
       ariaLabel: "Site footer",
       brand: "Wenlan",
-      tagline: "Your knowledge, kept up to date with AI.",
+      tagline: "A living personal wiki. AI organizes. You stay in control.",
       groups: [
         {
           id: "product",

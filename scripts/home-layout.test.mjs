@@ -65,12 +65,28 @@ test("homepage links to the download page without duplicating the platform secti
 });
 
 test("homepage shows capabilities and retrieval evidence directly while disclosing examples", () => {
-  const order = ['<DemoVideo', '<HomeCta link={content.hero.primaryCta}', 'id="knowledge-workflows"', '<ProductMedia locale={locale} slot="wiki"', '<KnowledgeConnections', 'id="ai-recall"', '<ProductMedia locale={locale} slot="ai"', '<HeroScenarios', '<KnowledgeUpdates', 'id="capabilities"', '<BentoSection', 'id="integrations"', 'id="retrieval-evidence"', 'placement="home-footer"'];
+  const order = ['<DemoVideo', '<HomeCta link={content.hero.primaryCta}', 'id="knowledge-workflows"', '<ProductMedia locale={locale} slot="wiki"', '<CiteCheck', '<KnowledgeConnections', '<KnowledgeUpdates', 'id="ai-recall"', '<ProductMedia locale={locale} slot="ai"', '<HeroScenarios', 'id="capabilities"', '<BentoSection', 'id="integrations"', 'id="retrieval-evidence"', 'placement="home-footer"'];
   const positions = order.map((marker) => homeSource.indexOf(marker));
   assert.ok(positions.every((position) => position >= 0));
   assert.deepEqual(positions, [...positions].sort((a, b) => a - b));
   assert.doesNotMatch(homeSource, /<KnowledgeWorkflow/);
   assert.doesNotMatch(homeSource, /<details\s+data-home-features/);
+});
+
+test("the citation check is the first story after the hero and shows the real refused write", () => {
+  const storySource = fs.readFileSync(path.join(repoRoot, "src/components/home/home-story.tsx"), "utf8");
+  const citeCheck = storySource.slice(storySource.indexOf("export function CiteCheck("), storySource.indexOf("export function KnowledgeConnections("));
+  assert.match(citeCheck, /<section id="cite-check" aria-labelledby="cite-check-heading"/);
+  assert.match(citeCheck, /<StoryIntro[^>]*id="cite-check-heading"/);
+  assert.match(citeCheck, /<EvidenceImage src="\/images\/home\/capabilities\/cite-check\.webp" width=\{1454\} height=\{460\}/);
+  assert.ok(fs.existsSync(path.join(repoRoot, "public/images/home/capabilities/cite-check.webp")));
+  // The section replaced the capability card; the card capture is not duplicated.
+  assert.doesNotMatch(capabilitySource, /cite-check\.webp|updates\.webp/);
+  assert.ok(!fs.existsSync(path.join(repoRoot, "public/images/home/capabilities/updates.webp")), "unused card capture removed");
+  const heroEnd = homeSource.indexOf('id="knowledge-workflows"');
+  const cite = homeSource.indexOf("<CiteCheck");
+  assert.ok(heroEnd < cite && cite < homeSource.indexOf('id="ai-recall"'), "cite-check renders right after the hero and before #ai-recall");
+  assert.equal(homeSource.slice(heroEnd, cite).match(/<(?:section|KnowledgeUpdates|KnowledgeConnections)\b/g)?.length ?? 0, 0, "no other story sits between the hero and cite-check");
 });
 
 test("the preserved worked example remains localized and source-linked", () => {
