@@ -4,7 +4,7 @@ import { TRANSLATED_LOCALES } from "../i18n/locales";
 import type { WenlanRelease } from "./release-manifest";
 
 // GitHub calls this when a wenlan-app/wenlan release is published, so the live
-// download surfaces stop waiting for the hourly release cache to expire.
+// download surfaces stop waiting for the daily release cache to expire.
 export const RELEASE_CACHE_TAG = "wenlan-release";
 
 const RELEASE_PAGE_PATHS = ["/", "/download", "/docs/get-started", "/about"] as const;

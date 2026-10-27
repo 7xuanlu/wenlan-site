@@ -60,7 +60,7 @@ function publishedRelease({
 
 test("release constants keep the API and cache contract stable", () => {
   assert.equal(RELEASE_API, "https://api.github.com/repos/wenlan-app/wenlan/releases/latest");
-  assert.equal(RELEASE_REVALIDATE_SECONDS, 3600);
+  assert.equal(RELEASE_REVALIDATE_SECONDS, 86400);
 });
 
 test("a release payload under the wenlan-app owner parses with literal URLs", () => {

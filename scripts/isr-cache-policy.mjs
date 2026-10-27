@@ -34,8 +34,8 @@ export function assertIsrCachePolicy(manifest, indexablePaths = []) {
     }
   }
   for (const path of releasePages) {
-    if (routes[path]?.initialRevalidateSeconds !== 3600) {
-      failures.push(`${path}: release page must retry after 3600s, including a cold-cache fallback`);
+    if (routes[path]?.initialRevalidateSeconds !== 86400) {
+      failures.push(`${path}: release page must retry after 86400s, including a cold-cache fallback`);
     }
   }
   for (const path of FINITE_DYNAMIC_ROUTE_PATHS) {

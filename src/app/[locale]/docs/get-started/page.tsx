@@ -6,7 +6,7 @@ import { GetStartedPage } from "../../../_pages/get-started";
 import { getLatestRelease } from "@/lib/release-server";
 
 // Keep this literal aligned with RELEASE_REVALIDATE_SECONDS (Next static analysis).
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 type LocalePageParams = {
   locale: string;

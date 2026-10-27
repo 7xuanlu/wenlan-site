@@ -3,8 +3,10 @@ import { WENLAN_RELEASE } from "./releases";
 export const RELEASE_API =
   "https://api.github.com/repos/wenlan-app/wenlan/releases/latest";
 // Match the literal route revalidate exports; a shorter data TTL also lowers ISR.
-// Hourly, request-triggered refresh keeps downloads automatic without 5-minute churn.
-export const RELEASE_REVALIDATE_SECONDS = 3600;
+// The signed release webhook refreshes these pages when a release is published;
+// the daily, request-triggered refresh is only a backstop, which keeps ISR reads,
+// writes and origin transfer within the Hobby limits.
+export const RELEASE_REVALIDATE_SECONDS = 86400;
 
 const RELEASE_REPOSITORY = "https://github.com/wenlan-app/wenlan";
 const RELEASE_DOWNLOAD_BASE = `${RELEASE_REPOSITORY}/releases/download`;
