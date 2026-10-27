@@ -1216,6 +1216,15 @@ export const enContent = {
                   "Choose Claude Code, Codex, ChatGPT, or a local MCP client, then follow the steps to save and retrieve your first decision.",
                 meta: "Wenlan team · Updated Oct 4, 2026 · Three steps",
               },
+              {
+                id: "product-matrix",
+                href: "/docs/product-matrix",
+                label: "Matrix",
+                title: "Choose Your Wenlan Setup",
+                description:
+                  "Use the desktop app to manage your library, a plugin to work in Claude Code or Codex, or MCP to connect another AI tool.",
+                meta: "Qi-Xuan Lu · Updated Oct 26, 2026 · 2 min read",
+              },
             ],
           },
           {
@@ -1228,10 +1237,10 @@ export const enContent = {
                 id: "daily-workflow",
                 href: "/docs/daily-workflow",
                 label: "Workflow",
-                title: "Daily Workflow",
+                title: "Save a Decision and Reuse It",
                 description:
-                  "Start with context, capture what matters, recall when needed, and hand off before context goes cold.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                  "Keep the reason behind a decision, then find it in a new AI conversation without explaining it again.",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 3 min read",
               },
               {
                 id: "capture-quality",
@@ -1255,10 +1264,10 @@ export const enContent = {
                 id: "core-concepts",
                 href: "/docs/core-concepts",
                 label: "Concepts",
-                title: "Core Concepts",
+                title: "How Your Knowledge Fits Together",
                 description:
-                  "Understand the pieces behind Wenlan: memories, sessions, handoffs, pages, the daemon, MCP, Markdown, and the local index.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 6 min read",
+                  "Memories hold individual findings. Wiki pages connect them. A Brief helps your next AI conversation pick up the work.",
+                meta: "Qi-Xuan Lu · Updated Oct 26, 2026 · 3 min read",
               },
             ],
           },
@@ -1284,7 +1293,7 @@ export const enContent = {
                 title: "Glossary",
                 description:
                   "A quick map of Wenlan terms: memory, handoff, page, space, daemon, MCP, local index, provenance, and eval language.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 5 min read",
               },
               {
                 id: "architecture",
@@ -1293,17 +1302,9 @@ export const enContent = {
                 title: "Architecture",
                 description:
                   "How Wenlan is put together: one local daemon, thin clients, shared wire types, local artifacts, and retrieval owned by wenlan-core.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 7 min read",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 7 min read",
               },
-              {
-                id: "product-matrix",
-                href: "/docs/product-matrix",
-                label: "Matrix",
-                title: "Product Matrix",
-                description:
-                  "Compare Wenlan's daemon, CLI, MCP connector, plugins, desktop app, repositories, platform artifacts, and release boundaries.",
-                meta: "Qi-Xuan Lu · Updated Jul 9, 2026 · 6 min read",
-              },
+
               {
                 id: "commands",
                 href: "/docs/commands",
@@ -1319,8 +1320,8 @@ export const enContent = {
                 label: "Plugin",
                 title: "Claude Code Plugin",
                 description:
-                  "Use Wenlan's richest Claude Code workflow: setup, brief, capture, recall, lint diagnostics, curate, distill, pages, and handoff.",
-                meta: "Qi-Xuan Lu · Updated Jul 17, 2026 · 6 min read",
+                  "Install the Wenlan plugin in Claude Code and check its connection.",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 2 min read",
               },
               {
                 id: "cli-and-service",
@@ -1338,7 +1339,7 @@ export const enContent = {
                 title: "Updates and Uninstall",
                 description:
                   "Refresh Wenlan's local runtime, verify version health, restart MCP clients, and remove the service without losing data by accident.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 4 min read",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 3 min read",
               },
               {
                 id: "upgrade-notes",
@@ -1347,7 +1348,7 @@ export const enContent = {
                 title: "Upgrade Notes",
                 description:
                   "Read the practical upgrade path for Wenlan releases: what to rerun, what to verify, and what changed in the current public runtime shape.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 2 min read",
               },
               {
                 id: "packages-and-registries",
@@ -1365,7 +1366,7 @@ export const enContent = {
                 title: "Platform Support",
                 description:
                   "Understand how Wenlan runs on macOS, Linux, and Windows: service managers, local data paths, model backends, and Docker/VM caveats.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 5 min read",
               },
               {
                 id: "http-api",
@@ -1401,25 +1402,25 @@ export const enContent = {
                 title: "Spaces",
                 description:
                   "Separate work, personal, client, and project memory, and understand how Wenlan resolves the active space.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 6 min read",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 6 min read",
               },
               {
                 id: "knowledge-graph",
                 href: "/docs/knowledge-graph",
                 label: "Graph",
-                title: "Knowledge Graph",
+                title: "AI Agent Knowledge Graph",
                 description:
-                  "Understand how Wenlan links people, projects, tools, observations, and relations so recall can recover context through more than text similarity.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                  "Build a source-backed AI knowledge base that links people, projects, tools, observations, and relations without treating graph context as authority.",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 2 min read",
               },
               {
                 id: "source-backed-pages",
                 href: "/docs/source-backed-pages",
                 label: "Pages",
-                title: "Source-Backed Pages",
+                title: "Create and Update Wiki Pages",
                 description:
-                  "Understand how Wenlan turns atomic captures into readable pages with source memory IDs, revision state, and refresh paths.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                  "Turn related findings into a page you can read, follow its sources, and review changes when the underlying information changes.",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 4 min read",
               },
               {
                 id: "import-and-portability",
@@ -1436,8 +1437,8 @@ export const enContent = {
                 label: "Versioning",
                 title: "Local Git History",
                 description:
-                  "Inspect the real git history Wenlan keeps for readable page, session, handoff, and status artifacts.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                  "Inspect built-in page revisions and, if you choose, your own Git history of readable files.",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 2 min read",
               },
               {
                 id: "models-and-keys",
@@ -1445,8 +1446,8 @@ export const enContent = {
                 label: "Models",
                 title: "Models and Keys",
                 description:
-                  "Choose between local memory mode, optional on-device models, and optional Anthropic API keys for richer extraction, page synthesis, recaps, and graph work.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                  "Choose local memory mode or configure an optional on-device, local server, or cloud model for background language work.",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 5 min read",
               },
               {
                 id: "advanced-retrieval",
@@ -1454,8 +1455,8 @@ export const enContent = {
                 label: "Retrieval",
                 title: "Advanced Retrieval Status",
                 description:
-                  "Understand Wenlan's shipped retrieval path and the opt-in main-branch experiments behind newer retrieval work.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 6 min read",
+                  "Understand how Wenlan retrieves context, how to evaluate it, and where experimental controls fit.",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 2 min read",
               },
               {
                 id: "experimental-flags",
@@ -1463,8 +1464,8 @@ export const enContent = {
                 label: "Experiments",
                 title: "Experimental Flags",
                 description:
-                  "How to read Wenlan's opt-in main-branch flags without mistaking them for released defaults.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 6 min read",
+                  "Look up selected experimental switches in the released runtime and use them with isolated data.",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 2 min read",
               },
               {
                 id: "data-and-privacy",
@@ -1472,8 +1473,8 @@ export const enContent = {
                 label: "Local control",
                 title: "Wenlan Local Data and Privacy",
                 description:
-                  "See where Wenlan stores local AI work memory, what stays on your machine, and when connected model providers may see prompts.",
-                meta: "Qi-Xuan Lu · Updated Jul 10, 2026 · 5 min read",
+                  "Where Wenlan stores local AI work memory, what stays on your machine, and when connected model providers may see prompts.",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 7 min read",
               },
               {
                 id: "backup-and-migration",
@@ -1482,7 +1483,7 @@ export const enContent = {
                 title: "Backup and Migration",
                 description:
                   "Back up Wenlan's readable artifacts and daemon data together, then verify the restored runtime before trusting recall.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 2 min read",
               },
               {
                 id: "configuration",
@@ -1491,7 +1492,7 @@ export const enContent = {
                 title: "Wenlan Configuration",
                 description:
                   "Configure Wenlan spaces, MCP clients, daemon bind address, local paths, models, and keys without editing the database by hand.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 2 min read",
               },
               {
                 id: "environment-variables",
@@ -1500,7 +1501,7 @@ export const enContent = {
                 title: "Environment Variables",
                 description:
                   "Know which Wenlan environment variables are normal configuration, which are development-only, and which belong to eval or Windows repair paths.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 2 min read",
               },
               {
                 id: "mcp-clients",
@@ -1508,8 +1509,8 @@ export const enContent = {
                 label: "MCP",
                 title: "Connect MCP Clients",
                 description:
-                  "Connect Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, ChatGPT, Claude.ai, and other MCP clients to Wenlan.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 4 min read",
+                  "Connect Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, Muse Code, ChatGPT, Claude.ai, Muse, and other MCP clients to Wenlan.",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 5 min read",
               },
               {
                 id: "agent-profiles",
@@ -1527,7 +1528,7 @@ export const enContent = {
                 title: "Troubleshooting",
                 description:
                   "Fix the common setup issues: daemon not running, MCP not connected, missing Claude commands, stale context, and support escalation.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 2 min read",
               },
               {
                 id: "diagnostics-and-issue-reports",
@@ -1536,7 +1537,7 @@ export const enContent = {
                 title: "Diagnostics and Issue Reports",
                 description:
                   "Run the right checks before asking for help, separate daemon problems from client problems, and share only redacted output.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 5 min read",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 2 min read",
               },
               {
                 id: "faq",
@@ -1562,7 +1563,7 @@ export const enContent = {
                 title: "Security and Reporting",
                 description:
                   "Report Wenlan vulnerabilities privately, redact diagnostic output, and understand the local daemon security boundary.",
-                meta: "Qi-Xuan Lu · Updated Jul 10, 2026 · 4 min read",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 4 min read",
               },
               {
                 id: "evaluation",
@@ -1577,10 +1578,10 @@ export const enContent = {
                 id: "desktop-app",
                 href: "/docs/desktop-app",
                 label: "Desktop",
-                title: "Desktop App Status",
+                title: "Use the Wenlan Desktop App",
                 description:
-                  "Understand how the optional Wenlan desktop app relates to the daemon, plugins, source-backed wiki, and Remote Access for ChatGPT and Claude.ai.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 4 min read",
+                  "Add material, find and edit pages, inspect sources, review updates, and connect AI tools in the Wenlan desktop app.",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 3 min read",
               },
               {
                 id: "changelog",
@@ -1588,8 +1589,8 @@ export const enContent = {
                 label: "Releases",
                 title: "Wenlan Changelog and Releases",
                 description:
-                  "See the current Wenlan release, shipped changes, and how to distinguish tagged releases from unreleased main work.",
-                meta: "Qi-Xuan Lu · Updated Sep 4, 2026 · 5 min read",
+                  "See the current Wenlan release, shipped changes, recent milestones, and how to distinguish tagged releases from unreleased main work.",
+                meta: "Qi-Xuan Lu · Updated Oct 27, 2026 · 5 min read",
               },
               {
                 id: "releases-and-versioning",
@@ -1604,10 +1605,10 @@ export const enContent = {
                 id: "roadmap",
                 href: "/docs/roadmap",
                 label: "Roadmap",
-                title: "Roadmap and Status",
+                title: "Check Whether a Feature Has Shipped",
                 description:
-                  "How to read Wenlan's current direction without confusing released features, main-branch work, and future bets.",
-                meta: "Qi-Xuan Lu · Updated Jun 24, 2026 · 6 min read",
+                  "Check whether a feature is in your download, still in development, or only proposed.",
+                meta: "Qi-Xuan Lu · Updated Oct 26, 2026 · 1 min read",
               },
               {
                 id: "project-scope",

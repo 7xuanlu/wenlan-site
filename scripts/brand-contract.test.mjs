@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
 import { createHash } from "node:crypto";
-import { readFile, readdir } from "node:fs/promises";
+import { readFile, readdir, realpath } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
 import test from "node:test";
 import ts from "typescript";
@@ -221,12 +221,12 @@ test("knowledge graph docs answer the AI-agent knowledge-base job without replac
   assert.ok(knowledgeGraph, "expected the knowledge-graph docs record");
   assert.match(knowledgeGraph, /AI Agent Knowledge Graph/);
   assert.match(knowledgeGraph, /source-backed AI knowledge base/i);
-  assert.match(knowledgeGraph, /Quick answer:/);
-  assert.match(knowledgeGraph, /entities, relations, and observations/i);
-  assert.match(knowledgeGraph, /source memories and maintained pages/i);
-  assert.match(knowledgeGraph, /supporting evidence/i);
+  assert.match(knowledgeGraph, /quick-answer-what-an-ai-agent-knowledge-graph-adds/);
+  assert.match(knowledgeGraph, /Entities, relations, observations/);
+  assert.match(knowledgeGraph, /citations/);
+  assert.match(knowledgeGraph, /source material/);
   assert.match(knowledgeGraph, /publishedAt:\s*"2026-07-09"/);
-  assert.match(knowledgeGraph, /updatedAt:\s*"2026-10-23"/);
+  assert.match(knowledgeGraph, /updatedAt:\s*"2026-10-27"/);
   assert.doesNotMatch(knowledgeGraph, /graph context (?:is|becomes) (?:the )?authority/i);
 });
 
@@ -331,6 +331,11 @@ test("agent guidance tracks the wenlan.app canonical launch property", async () 
   assert.doesNotMatch(agents, /current deployed public property is still https:\/\/useorigin\.app/);
   assert.match(claude, /^@AGENTS\.md$/m);
   assert.match(claude, /docs\/seo-demand-workflow\.md/);
+  assert.equal(
+    await realpath(join(repoRoot, ".claude/skills/wenlan-seo/SKILL.md")),
+    await realpath(join(repoRoot, ".agents/skills/wenlan-seo/SKILL.md")),
+    "Claude and Codex must resolve the same SEO skill, not separate copies",
+  );
 });
 
 test("root metadata describes Wenlan on the current release surface", async () => {
@@ -1071,15 +1076,17 @@ test("MCP article answers memory-server intent with setup, storage, and a valida
 });
 
 test("security docs align with the current Wenlan site policy", async () => {
-  const { version } = await currentWenlanRelease();
   const docs = await readRepo("src/app/docs/docs.ts");
+  const start = docs.indexOf('slug: "security"');
+  const security = docs.slice(start, docs.indexOf('\n  {\n    slug:', start));
 
   assert.doesNotMatch(docs, /acknowledgment within 72 hours/);
   assert.doesNotMatch(docs, /supported 0\.7\.x/);
   assert.match(docs, /acknowledgment within 48 hours/);
   assert.match(docs, /fix timeline within 7 days/);
   assert.match(docs, /latest released version is supported/);
-  assert.match(docs, new RegExp(`current stable ${escapeRegExp(version)}`));
+  assert.match(security, /latest released version is supported; older releases are best-effort/);
+  assert.doesNotMatch(security, /current stable \d+\.\d+\.\d+/);
 });
 
 
@@ -1137,7 +1144,12 @@ test("public current-release surfaces track the selected Wenlan release source",
   for (const [shown] of aboutOg.matchAll(/\bv\d+\.\d+\.\d+\b/g)) {
     assert.equal(shown, `v${version}`, "src/app/about/opengraph-image.tsx");
   }
-  assert.match(docs, new RegExp(`v${escapedVersion} is the current stable release`));
+  // Historical highlights must not turn the site's pinned fallback into a
+  // claim about the latest live release.
+  const changelogStart = docs.indexOf('slug: "changelog"');
+  const changelogPage = docs.slice(changelogStart, docs.indexOf('\n  {\n    slug:', changelogStart));
+  assert.match(changelogPage, /https:\/\/github\.com\/wenlan-app\/wenlan\/releases\/latest/);
+  assert.doesNotMatch(changelogPage, /v\d+\.\d+\.\d+ is the current stable release/);
   assert.match(docs, new RegExp(`Wenlan version ${escapedVersion}`));
   assert.match(docs, new RegExp(`v${escapedVersion}.*${escapeRegExp(date)}`));
   assert.match(sitemap, new RegExp(`ABOUT_UPDATED_AT = "${escapeRegExp(date)}"`));
@@ -1332,72 +1344,38 @@ test("download information architecture keeps the homepage compact and the full 
   assert.match(sitemap, /pathname: "\/download"/);
 });
 
-test("public docs expose a product readiness matrix for users and platform boundaries", async () => {
-  const docs = await readRepo("src/app/docs/docs.ts");
+test("public docs keep setup choices and platform support discoverable", async () => {
+  const { getDocPage } = await import("../src/app/(en)/docs/docs.ts");
+  const page = getDocPage("product-matrix");
   const llms = await readRepo("public/llms.txt");
-  const localizedIndexes = [
-    [
-      "src/i18n/content/en.ts",
-      await readRepo("src/i18n/content/en.ts"),
-      /id:\s*"product-matrix"[\s\S]*?Updated Jul 9, 2026 · 6 min read/,
-    ],
-    [
-      "src/i18n/content/zh-CN.ts",
-      await readRepo("src/i18n/content/zh-CN.ts"),
-      /id:\s*"product-matrix"[\s\S]*?更新于 2026 年 7 月 9 日 · 6 分钟阅读/,
-    ],
-    [
-      "src/i18n/content/zh-TW.ts",
-      await readRepo("src/i18n/content/zh-TW.ts"),
-      /id:\s*"product-matrix"[\s\S]*?更新於 2026 年 7 月 9 日 · 6 分鐘閱讀/,
-    ],
-  ];
+  assert.ok(page);
+  assert.ok(llms.includes(`[${page.title}](https://wenlan.app/docs/${page.slug})`));
 
-  assert.match(docs, /slug:\s*"product-matrix"/);
-  assert.match(docs, /title:\s*"Product Matrix"/);
-  assert.match(llms, /\[Product Matrix\]\(https:\/\/wenlan\.app\/docs\/product-matrix\)/);
-  for (const [path, source, metadataPattern] of localizedIndexes) {
-    assert.match(source, /id:\s*"product-matrix"[\s\S]*?href:\s*"\/docs\/product-matrix"/, path);
-    assert.match(source, metadataPattern, path);
+  for (const locale of ["en", "zh-CN", "zh-TW"]) {
+    const module = await import(`../src/i18n/content/${locale}.ts`);
+    const content = module[{ en: "enContent", "zh-CN": "zhCNContent", "zh-TW": "zhTWContent" }[locale]];
+    const item = content.docs.content.sections.items.flatMap(section => section.items)
+      .find(item => item.id === page.slug);
+    assert.ok(item, `${locale}: setup choices must remain in the docs index`);
+    assert.equal(item.href, `/docs/${page.slug}`);
+    if (locale === "en") assert.equal(item.title, page.title);
   }
 
-  for (const route of [
-    "/docs/get-started",
-    "/docs/daily-workflow",
-    "/docs/core-concepts",
-    "/docs/architecture",
-    "/docs/packages-and-registries",
-    "/docs/platforms",
-    "/docs/mcp-clients",
-    "/docs/desktop-app",
-    "/docs/troubleshooting",
-    "/docs/releases-and-versioning",
-  ]) {
-    assert.match(docs, new RegExp(`href: "${escapeRegExp(route)}"`), route);
+  const links = page.sections.flatMap(section => section.link ? [section.link.href] : []);
+  for (const route of ["/docs/get-started", "/docs/mcp-clients", "/docs/platforms", "/docs/http-api"]) {
+    assert.ok(links.includes(route), `setup choices must link to ${route}`);
   }
-
-  for (const publicSurface of [
-    "daemon/runtime",
-    "CLI",
-    "MCP connector",
-    "Claude Code plugin",
-    "Codex plugin",
-    "ChatGPT and Claude.ai remote MCP",
-    "other MCP clients",
-    "optional desktop app",
-    "source build",
-    "eval/docs provenance",
-  ]) {
-    assert.match(docs, new RegExp(escapeRegExp(publicSurface), "i"), publicSurface);
+  const copy = page.sections.flatMap(section => section.body).join(" ");
+  assert.match(copy, /Claude Code|plugin/);
+  assert.match(copy, /Web Access/);
+  assert.match(copy, /sharing scope/);
+  assert.match(copy, /command-line runtime does not necessarily mean there is a desktop app/);
+  const platforms = getDocPage("platforms");
+  assert.ok(platforms);
+  const support = JSON.stringify(platforms);
+  for (const platform of ["macOS Apple Silicon", "macOS Intel", "Linux x86_64", "Linux aarch64 glibc", "Windows x86_64"]) {
+    assert.ok(support.includes(platform), platform);
   }
-
-  assert.match(docs, /macOS Apple Silicon/);
-  assert.match(docs, /macOS Intel.*no current prebuilt runtime/i);
-  assert.match(docs, /Linux x86_64/);
-  assert.match(docs, /Linux aarch64 glibc/);
-  assert.match(docs, /Windows x86_64/);
-  assert.match(docs, /desktop app.*aarch64-apple-darwin/is);
-  assert.match(docs, /daemon owns the database, pages, sessions, and retrieval behavior/i);
 });
 
 test("public onboarding is Wenlan-first and distinguishes plugin, local MCP, and web MCP paths", async () => {
@@ -1435,8 +1413,8 @@ test("public onboarding is Wenlan-first and distinguishes plugin, local MCP, and
   assert.match(docs, /Settings > Connections > Web access/);
   assert.match(docs, /https:\/\/relay\.wenlan\.app\/mcp/);
   assert.match(docs, /pairing request/i);
-  assert.match(docs, /revoke a grant/i);
-  assert.match(docs, /older origin-relay no-login tunnel is a separate legacy flow/i);
+  assert.match(docs, /revoke (?:a|the) grant/i);
+  assert.match(docs, /Search and write[^\n]*add, edit, and delete/i);
   assert.doesNotMatch(docs, /Developer mode/);
   assert.match(structuredData, /ChatGPT/);
   assert.match(structuredData, /Streamable HTTP MCP/);
@@ -1937,6 +1915,7 @@ test("public docs and assets do not expose stale lower-case Origin surfaces", as
   const checks = [
     ["src/app/docs/docs.ts", /"origin":\s*{/],
     ["src/app/docs/docs.ts", /~\/\.local\/share\/origin/],
+    ["src/app/docs/docs.ts", /%LOCALAPPDATA%\\+origin\\+/],
     ["src/app/docs/docs.ts", /origin list --limit 10/],
     ["src/app/docs/docs.ts", /origin forget <id>/],
     ["src/app/docs/docs.ts", /\bservers\.origin\b/],

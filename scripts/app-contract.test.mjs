@@ -249,20 +249,23 @@ test("public desktop-app surfaces track the unified Wenlan source facts", async 
   const app = await currentWenlanAppRelease();
   const appSourceUrl = `https://github.com/wenlan-app/wenlan/tree/${app.tag}/app`;
   const appSourcePath = appSourceUrl.replace("https://", "");
-  const docs = await readRepo("src/app/docs/docs.ts");
+  const desktopPage = getDocPage("desktop-app");
   const structuredData = await readRepo("src/app/structured-data.ts");
   const llms = await readRepo("public/llms.txt");
   const llmsFull = await readRepo("src/app/llms-full.txt/route.ts");
 
-  assert.ok(docs.includes(`href: "${appSourceUrl}"`));
-  assert.match(docs, /Tauri 2 desktop shell/);
-  assert.match(docs, /localhost:7878/);
-  assert.match(docs, /version-locked to the workspace release train/);
-  assert.match(docs, /unified Wenlan release/);
-  assert.doesNotMatch(docs, /origin-app/);
-  assert.doesNotMatch(docs, /github\.com\/7xuanlu\/wenlan-app/);
-  assert.doesNotMatch(docs, /desktop app (?:lives in|is) a separate repo(?:sitory)?/i);
-  assert.doesNotMatch(docs, /desktop app.*(?:own|separate) repo(?:sitory)?/i);
+  for (const heading of ["Start with the desktop app", "Add material", "Find, open, and edit a page",
+    "Check sources", "Review updates", "Connect an AI tool"]) {
+    const section = desktopPage.sections.find((item) => item.heading === heading);
+    assert.ok(section?.body.length, `Missing desktop workflow section: ${heading}`);
+  }
+  const licenseSection = desktopPage.sections.find((item) => item.heading === "App source and license");
+  const licenseLink = licenseSection?.link?.href;
+  const sourceMatch = licenseLink?.match(/^https:\/\/github\.com\/wenlan-app\/wenlan\/blob\/(v\d+\.\d+\.\d+)\/app\/Cargo\.toml$/);
+  assert.ok(sourceMatch, "Desktop app license must link to a pinned source manifest");
+  const pinnedCargo = await readTaggedFile(app.root, sourceMatch[1], "app/Cargo.toml");
+  assert.equal(cargoVersion(pinnedCargo), sourceMatch[1].slice(1));
+  assert.match(pinnedCargo, /^license = "AGPL-3\.0-only"$/m);
 
   assert.ok(structuredData.includes(appSourcePath));
   assert.match(structuredData, /Tauri 2 \+ React 19/);

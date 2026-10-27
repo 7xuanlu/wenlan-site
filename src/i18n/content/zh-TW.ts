@@ -1174,7 +1174,7 @@ export const zhTWContent = {
   },
   docs: {
     status: "translated",
-    sourceHash: "459ab9b97f0b5e952afb0caa544d4180f3823e22b14111ebd03d86a5e4724c9b",
+    sourceHash: "582785cb6f33e078962abb2f5dc7ecf895b13ca7cb4800bd934eede0f9d6deef",
     content: {
       seo: {
         title: "文瀾 Wenlan 文件：安裝、工作流程與參考",
@@ -1211,6 +1211,15 @@ export const zhTWContent = {
                   "選擇 Claude Code、Codex、ChatGPT 或本機 MCP 工具，依照步驟保存並找回第一個決定。",
                 meta: "Wenlan 團隊 · 更新於 2026 年 10 月 4 日 · 三個步驟",
               },
+              {
+                id: "product-matrix",
+                href: "/docs/product-matrix",
+                label: "矩陣",
+                title: "選擇 Wenlan 的使用方式",
+                description:
+                  "依你的工作選擇桌面 App、Claude Code／Codex 插件或 MCP 連接方式。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 26 日 · 2 分鐘閱讀",
+              },
             ],
           },
           {
@@ -1223,10 +1232,10 @@ export const zhTWContent = {
                 id: "daily-workflow",
                 href: "/docs/daily-workflow",
                 label: "工作流程",
-                title: "日常工作流程",
+                title: "儲存決定，留給下次使用",
                 description:
-                  "開始工作前先讀取背景，記下重要資訊，需要時搜尋，結束前整理交接。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+                  "儲存決定和原因，再到新的 AI 對話找回，確認不必重新解釋。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 3 分鐘閱讀",
               },
               {
                 id: "capture-quality",
@@ -1250,10 +1259,10 @@ export const zhTWContent = {
                 id: "core-concepts",
                 href: "/docs/core-concepts",
                 label: "概念",
-                title: "核心概念",
+                title: "理解記憶、Wiki 與 Brief",
                 description:
-                  "認識 Wenlan 的基本組成：記憶、工作階段、交接、筆記、MCP、本機索引與 Markdown 檔案。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
+                  "用一個專案例子，認識個別記憶、附來源的 Wiki 頁面與接續工作的 Brief。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 26 日 · 3 分鐘閱讀",
               },
             ],
           },
@@ -1279,7 +1288,7 @@ export const zhTWContent = {
                 title: "詞彙表",
                 description:
                   "查詢 Wenlan 常用詞彙，包括記憶、交接、筆記、工作空間、daemon、MCP、本機索引與來源記錄。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 5 分鐘閱讀",
               },
               {
                 id: "architecture",
@@ -1288,17 +1297,9 @@ export const zhTWContent = {
                 title: "架構",
                 description:
                   "了解 Wenlan 如何以一個本機服務連接各工具，並由 wenlan-core 負責搜尋。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 7 分鐘閱讀",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 7 分鐘閱讀",
               },
-              {
-                id: "product-matrix",
-                href: "/docs/product-matrix",
-                label: "矩陣",
-                title: "產品矩陣",
-                description:
-                  "對照 Wenlan 的 daemon、CLI、MCP connector、plugins、桌面 App、程式碼庫、平台套件與版本範圍。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 7 月 9 日 · 6 分鐘閱讀",
-              },
+
               {
                 id: "commands",
                 href: "/docs/commands",
@@ -1312,10 +1313,10 @@ export const zhTWContent = {
                 id: "claude-code-plugin",
                 href: "/docs/claude-code-plugin",
                 label: "外掛",
-                title: "Claude Code 外掛",
+                title: "安裝 Claude Code 外掛",
                 description:
-                  "了解 Wenlan 在 Claude Code 外掛中的用法，包括 /wenlan、/brief、/capture、/recall 和 /handoff。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 7 月 17 日 · 6 分鐘閱讀",
+                  "安裝 Wenlan 外掛、檢查連線，再用一次保存與找回確認 Claude Code 能使用你的資料。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 2 分鐘閱讀",
               },
               {
                 id: "cli-and-service",
@@ -1332,17 +1333,17 @@ export const zhTWContent = {
                 label: "生命週期",
                 title: "更新與解除安裝",
                 description:
-                  "了解如何更新 Wenlan、檢查版本、重新連接 MCP 工具，以及移除服務並保留資料。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
+                  "更新 Wenlan、確認服務與 AI 工具仍能連線，並在保留資料的情況下移除程式。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 3 分鐘閱讀",
               },
               {
                 id: "upgrade-notes",
                 href: "/docs/upgrade-notes",
                 label: "升級",
-                title: "升級說明",
+                title: "升級注意事項",
                 description:
-                  "查看升級 Wenlan 時要重新執行哪些步驟、如何確認正常，以及版本改動內容。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+                  "查看 Wenlan 特定版本的指令與設定變更；一般更新步驟另見更新指南。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 2 分鐘閱讀",
               },
               {
                 id: "packages-and-registries",
@@ -1360,7 +1361,7 @@ export const zhTWContent = {
                 title: "平台支援",
                 description:
                   "了解 Wenlan 在 macOS、Linux 和 Windows 上的服務管理、資料位置、模型選項，以及 Docker/VM 限制。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 5 分鐘閱讀",
               },
               {
                 id: "http-api",
@@ -1396,25 +1397,25 @@ export const zhTWContent = {
                 title: "Spaces 空間",
                 description:
                   "分開工作、個人、客戶和專案的記憶，並了解 Wenlan 如何選擇目前使用的空間。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 6 分鐘閱讀",
               },
               {
                 id: "knowledge-graph",
                 href: "/docs/knowledge-graph",
                 label: "Graph 圖譜",
-                title: "Knowledge Graph 知識圖譜",
+                title: "查看知識圖譜",
                 description:
-                  "了解 Wenlan 如何連結人物、專案、工具和事件，讓搜尋不只依賴文字相似度。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+                  "在 Wenlan 查看人物、專案與工具之間的關係，並分清圖譜連線和 Wiki 的來源引用。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 2 分鐘閱讀",
               },
               {
                 id: "source-backed-pages",
                 href: "/docs/source-backed-pages",
                 label: "筆記",
-                title: "有來源支撐的筆記",
+                title: "建立與更新 Wiki 頁面",
                 description:
-                  "了解 Wenlan 如何把記錄整理成可讀的筆記，並保留來源記憶 ID、版本狀態和更新方式。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+                  "了解來源如何支持頁面、哪些變更會自動更新，以及哪些需要你審核。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 4 分鐘閱讀",
               },
               {
                 id: "import-and-portability",
@@ -1429,10 +1430,10 @@ export const zhTWContent = {
                 id: "local-git-history",
                 href: "/docs/local-git-history",
                 label: "版本",
-                title: "本地 Git History",
+                title: "頁面修訂與自管 Git 歷史",
                 description:
-                  "查看 Wenlan 為筆記、工作紀錄、交接和狀態檔案保留的 git 歷史。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+                  "查看文瀾內建的頁面修訂；需要檔案版控時，再自行管理 Markdown 的 Git 歷史。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 2 分鐘閱讀",
               },
               {
                 id: "models-and-keys",
@@ -1440,26 +1441,26 @@ export const zhTWContent = {
                 label: "模型",
                 title: "Models 與 Keys",
                 description:
-                  "了解免模型的本機記憶模式、可選的本機模型，以及 Anthropic API key 能提供的額外整理功能。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+                  "了解搜尋模型與可選的語言模型，選擇裝置內、本機服務或雲端供應商來整理知識。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 5 分鐘閱讀",
               },
               {
                 id: "advanced-retrieval",
                 href: "/docs/advanced-retrieval",
                 label: "Retrieval 檢索",
-                title: "進階 Retrieval 狀態",
+                title: "進階搜尋原理與評估",
                 description:
-                  "了解 Wenlan 目前已發布的搜尋方式，以及主分支上可選用的新版搜尋實驗。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
+                  "了解 Wenlan 如何搜尋記憶、Wiki 頁面與關聯，以及如何核對結果與比較實驗。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 2 分鐘閱讀",
               },
               {
                 id: "experimental-flags",
                 href: "/docs/experimental-flags",
                 label: "Experiments 實驗",
-                title: "Experimental Flags 實驗旗標",
+                title: "實驗功能開關",
                 description:
-                  "查看如何啟用 Wenlan 主分支的實驗功能，並分辨它們與正式版本預設功能的差異。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
+                  "查詢 Wenlan 部分實驗開關的預設值、作用與停用方式，並用隔離資料測試。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 2 分鐘閱讀",
               },
               {
                 id: "data-and-privacy",
@@ -1468,7 +1469,7 @@ export const zhTWContent = {
                 title: "Wenlan 本地資料與隱私",
                 description:
                   "查看 Wenlan 將工作記憶存在哪裡、哪些內容留在本機，以及使用雲端模型時哪些提示可能送至服務商。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 7 月 10 日 · 5 分鐘閱讀",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 7 分鐘閱讀",
               },
               {
                 id: "backup-and-migration",
@@ -1476,8 +1477,8 @@ export const zhTWContent = {
                 label: "備份",
                 title: "備份與遷移",
                 description:
-                  "一起備份 Wenlan 的可讀檔案和 daemon 資料；還原後先確認服務正常，再使用搜尋結果。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+                  "一起備份 Wenlan 的可讀檔案與資料庫；還原後核對服務與已知資料，再繼續使用。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 2 分鐘閱讀",
               },
               {
                 id: "configuration",
@@ -1485,26 +1486,26 @@ export const zhTWContent = {
                 label: "設定",
                 title: "Wenlan 設定",
                 description:
-                  "設定 Wenlan 的工作空間、MCP 工具、daemon 網址、本機路徑、模型和金鑰，不必直接修改資料庫。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+                  "分清 Wenlan 的 Space、AI 工具連線、背景服務與模型設定分別在哪裡調整。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 2 分鐘閱讀",
               },
               {
                 id: "environment-variables",
                 href: "/docs/environment-variables",
                 label: "Config 變數",
-                title: "Environment Variables 環境變數",
+                title: "環境變數",
                 description:
-                  "查看 Wenlan 的一般設定、開發專用，以及測試或 Windows 修復時會用到的環境變數。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+                  "查詢 Wenlan 常用環境變數的用途、預設值，以及該將設定套用到哪個程序。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 2 分鐘閱讀",
               },
               {
                 id: "mcp-clients",
                 href: "/docs/mcp-clients",
                 label: "MCP 連接",
-                title: "連接 MCP Clients",
+                title: "連接 AI 工具",
                 description:
-                  "將 Claude Code、Codex、Cursor、Claude Desktop、Gemini CLI、ChatGPT、Claude.ai 等 MCP 工具連接到 Wenlan。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
+                  "為 Claude Code、Codex 或其他 AI 工具選擇 Wenlan 外掛、本機 MCP 或網頁連線，並核對能否讀到指定資料。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 5 分鐘閱讀",
               },
               {
                 id: "agent-profiles",
@@ -1521,17 +1522,17 @@ export const zhTWContent = {
                 label: "修復",
                 title: "疑難排解",
                 description:
-                  "排除常見問題：daemon 未啟動、MCP 未連接、Claude 指令缺少或搜尋不到舊內容。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+                  "依照 Wenlan 連線失敗、指令消失或找不到記憶的症狀，檢查原因並確認修復結果。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 2 分鐘閱讀",
               },
               {
                 id: "diagnostics-and-issue-reports",
                 href: "/docs/diagnostics-and-issue-reports",
                 label: "診斷",
-                title: "診斷與 Issue 回報",
+                title: "收集診斷與回報問題",
                 description:
-                  "求助前先執行檢查，分辨是 Wenlan 服務或 AI 工具的問題，並分享已遮蔽敏感資訊的輸出。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 5 分鐘閱讀",
+                  "收集 Wenlan 版本、重現步驟與診斷結果，遮蔽私人資料後再回報問題。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 2 分鐘閱讀",
               },
               {
                 id: "faq",
@@ -1557,7 +1558,7 @@ export const zhTWContent = {
                 title: "安全與回報",
                 description:
                   "私下回報 Wenlan 安全漏洞、遮蔽診斷資訊，並了解本機 daemon 的安全範圍。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 7 月 10 日 · 4 分鐘閱讀",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 4 分鐘閱讀",
               },
               {
                 id: "evaluation",
@@ -1572,10 +1573,10 @@ export const zhTWContent = {
                 id: "desktop-app",
                 href: "/docs/desktop-app",
                 label: "桌面版",
-                title: "Desktop App 狀態",
+                title: "使用 Wenlan 桌面 App",
                 description:
-                  "了解選用的 Wenlan 桌面 App 與 daemon、外掛、wiki，以及 ChatGPT 和 Claude.ai 遠端連線功能的關係。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 4 分鐘閱讀",
+                  "在 Wenlan 桌面 App 加入資料、閱讀與編輯 Wiki、查看來源，並審核更新。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 3 分鐘閱讀",
               },
               {
                 id: "changelog",
@@ -1584,7 +1585,7 @@ export const zhTWContent = {
                 title: "Wenlan Changelog 與版本記錄",
                 description:
                   "查看 Wenlan 目前版本、已發布的改動，以及正式版本和主分支未發布工作的差異。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 9 月 4 日 · 5 分鐘閱讀",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 27 日 · 5 分鐘閱讀",
               },
               {
                 id: "releases-and-versioning",
@@ -1599,10 +1600,10 @@ export const zhTWContent = {
                 id: "roadmap",
                 href: "/docs/roadmap",
                 label: "路線圖",
-                title: "Roadmap 與 Status",
+                title: "確認功能是否已發布",
                 description:
-                  "查看 Wenlan 的發展方向，並分辨已發布功能、主分支工作和未來規劃。",
-                meta: "Qi-Xuan Lu · 更新於 2026 年 6 月 24 日 · 6 分鐘閱讀",
+                  "分清楚已發布、開發中與提案，確認功能是否在你安裝的版本裡。",
+                meta: "Qi-Xuan Lu · 更新於 2026 年 10 月 26 日 · 1 分鐘閱讀",
               },
               {
                 id: "project-scope",
