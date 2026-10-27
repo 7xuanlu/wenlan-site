@@ -159,6 +159,8 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
 
       <CiteCheck locale={locale} />
 
+      <KnowledgeConnections locale={locale} />
+
       <KnowledgeUpdates locale={locale} />
 
       <section id="ai-recall" aria-labelledby="ai-recall-heading" className="scroll-mt-24 px-6 py-12 sm:py-20">
@@ -175,8 +177,6 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
           </details>
         </div>
       </section>
-
-      <KnowledgeConnections locale={locale} />
 
       <div id="capabilities" data-home-capabilities className="scroll-mt-24">
         <BentoSection cells={redesign.bento.cells} title={content.sections.features.title} locale={locale} />
