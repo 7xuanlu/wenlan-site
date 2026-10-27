@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "85dfaa5b07b285ef41b7fb6c994256346b0c5fc8fb478bcbb8182a8985a930c7",
+    sourceHash: "a105ee8e1f4bdc6063f6d833d9951bd704960d8453a08131a65d977156b8e5c2",
     content: {
       seo: {
         title: "文瀾 Wenlan｜個人 AI 知識庫與 LLM Wiki",
@@ -523,7 +523,7 @@ export const zhTWContent = {
           eyebrow: "AI 協助維護的個人知識庫",
           headline: { pre: "用你的知識，", emphasis: "找到答案、完成工作。", post: "" },
           description:
-            "文瀾把筆記、文件和 AI 對話整理成持續更新的知識庫，附上來源，並對照來源檢查。Claude Code、Codex 等 AI 工具都能直接用。",
+            "文瀾把筆記、文件和 AI 對話整理成持續更新的知識庫，附上來源，並對照來源檢查。Claude、Codex 等 AI 工具都能直接用。",
           worksWithLabel: "可搭配",
           worksWithNote: "可連接 Obsidian 筆記庫；沒有你同意，Wenlan 不會改動你原有的筆記。",
         },
