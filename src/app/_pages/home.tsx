@@ -8,6 +8,7 @@ import {
 } from "@/components/icons";
 import type { WenlanRelease } from "@/lib/release-manifest";
 import { ProductMedia, StoryIntro, CiteCheck, KnowledgeUpdates, KnowledgeConnections } from "@/components/home/home-story";
+import { ProductHuntBadge } from "@/components/home/product-hunt-badge";
 import { storyCopyByLocale } from "@/components/home/home-story-copy";
 import { HeroScenarios } from "@/components/home/hero-scenarios";
 import { BentoSection } from "@/components/home/bento";
@@ -115,6 +116,7 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
       <section className="home-hero relative px-4 pb-6 sm:px-6 sm:pb-8" aria-labelledby="home-heading">
         <div className="mx-auto max-w-6xl">
           <div className="home-hero-copy mx-auto max-w-4xl min-w-0 text-center">
+            <ProductHuntBadge />
             <h1 id="home-heading" className={`home-hero-title animate-fade-up motion-reduce:animate-none font-sans font-medium tracking-tight break-words text-balance ${locale === "en" ? "home-hero-title--en" : "home-hero-title--cjk"}`}>
               <span className={locale === "en" ? "inline" : "block"}>{redesign.hero.headline.pre}</span>
               {locale === "en" ? " " : null}
