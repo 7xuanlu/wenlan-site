@@ -521,9 +521,9 @@ export const zhCNContent = {
       redesign: {
         hero: {
           eyebrow: "AI 协助维护的个人知识库",
-          headline: { pre: "笔记、文档、AI 对话，整理成", emphasis: "持续更新的知识库。", post: "" },
+          headline: { pre: "用你的知识，", emphasis: "找到答案、完成工作。", post: "" },
           description:
-            "文澜的笔记附上来源，会对照来源检查，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具都能直接拿来用。",
+            "文澜把笔记、文档和 AI 对话整理成持续更新的知识库，附上来源，并对照来源检查。Claude Code、Codex 等 AI 工具都能直接用。",
           worksWithLabel: "可搭配",
           worksWithNote: "可连接 Obsidian 笔记库；没有你同意，Wenlan 不会改动你原有的笔记。",
         },

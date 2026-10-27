@@ -2573,9 +2573,9 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
       staleHomePhrase: /活個人知識庫|AI-native/,
       hero: {
         eyebrow: /AI 協助維護的個人知識庫/,
-        pre: /筆記、文件、AI 對話，整理成/,
-        emphasis: /持續更新的知識庫。/,
-        description: "文瀾的筆記附上來源，會對照來源檢查，來源改了就跟著更新。Claude Code、Codex、Cursor 等 AI 工具都能直接拿來用。",
+        pre: /用你的知識，/,
+        emphasis: /找到答案、完成工作。/,
+        description: "文瀾把筆記、文件和 AI 對話整理成持續更新的知識庫，附上來源，並對照來源檢查。Claude Code、Codex 等 AI 工具都能直接用。",
       },
     },
     "zh-CN": {
@@ -2584,9 +2584,9 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
       staleHomePhrase: /活个人知识库|AI-native/,
       hero: {
         eyebrow: /AI 协助维护的个人知识库/,
-        pre: /笔记、文档、AI 对话，整理成/,
-        emphasis: /持续更新的知识库。/,
-        description: "文澜的笔记附上来源，会对照来源检查，来源变了就跟着更新。Claude Code、Codex、Cursor 等 AI 工具都能直接拿来用。",
+        pre: /用你的知识，/,
+        emphasis: /找到答案、完成工作。/,
+        description: "文澜把笔记、文档和 AI 对话整理成持续更新的知识库，附上来源，并对照来源检查。Claude Code、Codex 等 AI 工具都能直接用。",
       },
     },
   };
@@ -2620,9 +2620,9 @@ test("Chinese hero names the living knowledge base and setup begins with a concr
     const dictionary = content.localizedContentByLocale[locale];
 
     assert.match(
-      dictionary.home.content.redesign.hero.headline.emphasis,
-      /持續更新的知識庫。|持续更新的知识库。/,
-      `${locale}.home.hero.headline.benefit`,
+      dictionary.home.content.redesign.hero.description,
+      /持續更新的知識庫|持续更新的知识库/,
+      `${locale}.home.hero.description.benefit`,
     );
     assert.match(
       dictionary.getStarted.content.hero.title,
