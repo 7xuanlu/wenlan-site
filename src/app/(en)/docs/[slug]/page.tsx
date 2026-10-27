@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { TrackedLink } from "@/components/tracked-link";
 import { LOCALE_CONFIG } from "@/i18n/locales";
 import { ArticleHalo } from "../../learn/article-visuals";
-import { docPages, docUrl, formatDocDate, getDocPage } from "../docs";
+import { docPages, docUrl, formatDocDate, getDocPage, type DocSection } from "../docs";
 import { SITE_URL } from "../../learn/articles";
 import { ArticleCodeBlock } from "@/components/learn/article-code-block";
 
@@ -23,8 +23,8 @@ export function generateStaticParams() {
 
 export const dynamicParams = false;
 
-function sectionId(heading: string) {
-  return heading
+function sectionId(section: DocSection) {
+  return section.id ?? section.heading
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
@@ -113,7 +113,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
       "@type": "WebPageElement",
       name: section.heading,
       position: index + 1,
-      url: `${docUrl(page.slug)}#${sectionId(section.heading)}`,
+      url: `${docUrl(page.slug)}#${sectionId(section)}`,
     })),
   };
 
@@ -129,7 +129,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
           position: index + 1,
           name: section.heading,
           text: section.body.join(" "),
-          url: `${docUrl(page.slug)}#${sectionId(section.heading)}`,
+          url: `${docUrl(page.slug)}#${sectionId(section)}`,
         })),
       }
     : null;
@@ -176,7 +176,7 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
         />
       )}
 
-      <ReadingShell locale="en" section="docs" path={`/docs/${page.slug}`} toc={page.sections.map(section => ({id: sectionId(section.heading), label: section.heading}))}>
+      <ReadingShell locale="en" section="docs" path={`/docs/${page.slug}`} toc={page.sections.map(section => ({id: sectionId(section), label: section.heading}))}>
       <article>
         <header className="reading-page-header relative px-6 py-16 sm:py-20">
           <ArticleHalo />
@@ -258,7 +258,10 @@ export default async function DocsArticlePage({ params }: DocsArticlePageProps) 
                     {(index + 1).toString().padStart(2, "0")}
                   </p>
                   <div className="min-w-0">
-                    <h2 id={sectionId(section.heading)} className="scroll-mt-24 font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
+                    {section.aliases?.map(alias => (
+                      <span key={alias} id={alias} className="block scroll-mt-24" aria-hidden="true" />
+                    ))}
+                    <h2 id={sectionId(section)} className="scroll-mt-24 font-serif text-3xl font-medium tracking-tight text-[var(--o-text)]">
                       {section.heading}
                     </h2>
                     <div className="mt-5 space-y-4 text-base leading-relaxed text-[var(--o-text-secondary)]">

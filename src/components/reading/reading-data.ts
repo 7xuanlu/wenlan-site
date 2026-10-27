@@ -25,7 +25,7 @@ const docReferenceGroups = [
   {id: "knowledge", slugs: ["memory-types", "spaces", "source-backed-pages", "knowledge-graph", "import-and-portability"], labels: ["Knowledge and sources", "知識與來源", "知识与来源"]},
   {id: "data", slugs: ["data-and-privacy", "backup-and-migration", "local-git-history"], labels: ["Data and privacy", "資料與隱私", "数据与隐私"]},
   {id: "runtime", slugs: ["cli-and-service", "configuration", "environment-variables", "models-and-keys", "platforms", "updates-and-uninstall", "upgrade-notes", "packages-and-registries"], labels: ["Runtime and settings", "執行環境與設定", "运行环境与设置"]},
-  {id: "developer", slugs: ["commands", "http-api", "api-examples", "typed-clients", "architecture", "product-matrix", "advanced-retrieval", "experimental-flags"], labels: ["Developer reference", "開發參考", "开发参考"]},
+  {id: "developer", slugs: ["commands", "http-api", "api-examples", "typed-clients", "architecture", "advanced-retrieval", "experimental-flags"], labels: ["Developer reference", "開發參考", "开发参考"]},
   {id: "help", slugs: ["troubleshooting", "diagnostics-and-issue-reports", "faq", "glossary"], labels: ["Troubleshooting and help", "疑難排解與說明", "故障排查与帮助"]},
 ];
 

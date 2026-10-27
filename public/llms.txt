@@ -1,20 +1,20 @@
 # Wenlan
 
-> Wenlan is an LLM wiki for AI work, built by agents and grounded in its sources. Hybrid retrieval publishes CE-reranker snapshots for LME_Oracle at 93.6% Recall@5 / 0.857 MRR / 0.883 NDCG@10 (500 Q) and LME_S at 87.7% Recall@5 / 0.815 MRR / 0.822 NDCG@10 (deep, N=90). Retrieval uses ~168 tokens per recall query versus full replay at 4,505 tokens per query. Real git versioning for readable pages, sessions, handoffs, and status artifacts under ~/.wenlan/.git/, mandatory provenance on source-backed wiki pages, Claude Code and Codex plugins, local MCP for Cursor and other clients, and Streamable HTTP MCP for ChatGPT, Claude.ai, and Muse. Current prebuilt runtime artifacts cover macOS Apple Silicon, Linux (x86_64, aarch64; glibc), and Windows (x86_64); macOS Intel is source/dev-only until a public release workflow publishes that artifact again. Apache-2.0. Source at github.com/wenlan-app/wenlan.
+> Wenlan is an LLM wiki for AI work, built by agents and grounded in its sources. Hybrid retrieval publishes CE-reranker snapshots for LME_Oracle at 93.6% Recall@5 / 0.857 MRR / 0.883 NDCG@10 (500 Q) and LME_S at 87.7% Recall@5 / 0.815 MRR / 0.822 NDCG@10 (deep, N=90). Retrieval uses ~168 tokens per recall query versus full replay at 4,505 tokens per query. Built-in page revisions and optional user-managed Git history for readable Markdown, mandatory provenance on source-backed wiki pages, Claude Code and Codex plugins, local MCP for Cursor and other clients, and Streamable HTTP MCP for ChatGPT, Claude.ai, and Muse. Current prebuilt runtime artifacts cover macOS Apple Silicon, Linux (x86_64, aarch64; glibc), and Windows (x86_64); macOS Intel is source/dev-only until a public release workflow publishes that artifact again. Apache-2.0. Source at github.com/wenlan-app/wenlan.
 
 ## Core
 
 - [Wenlan homepage](https://wenlan.app/): What Wenlan is, who it is for, and how source-backed pages, handoffs, and retrieval fit together.
 - [About](https://wenlan.app/about): Project background and the person behind Wenlan.
 - [Get started](https://wenlan.app/docs/get-started): Choose the Claude Code, Codex, ChatGPT, Claude.ai, or local MCP path, then verify the first capture and recall round trip.
-- [Daily workflow](https://wenlan.app/docs/daily-workflow): Capture, handoff, distill. The session loop that makes AI work compound across days.
+- [Save a Decision and Reuse It](https://wenlan.app/docs/daily-workflow): Keep the reason behind a decision, then find it in a new AI conversation without explaining it again.
 - [Capture quality](https://wenlan.app/docs/capture-quality): What to capture, what to skip, and how corrections, review, distill, and forget fit the memory loop.
 - [Review and trust](https://wenlan.app/docs/review-and-trust): How pending captures, revisions, contradictions, quality-gate rejections, confirm, and forget fit before memory becomes trusted context.
-- [Core concepts](https://wenlan.app/docs/core-concepts): Memories, pages, entities, sessions, sources. The vocabulary the daemon enforces.
+- [How Your Knowledge Fits Together](https://wenlan.app/docs/core-concepts): Memories hold individual findings. Wiki pages connect them. A Brief helps your next AI conversation pick up the work.
 - [Memory types](https://wenlan.app/docs/memory-types): Wenlan's six canonical memory_type values, stability tiers, aliases, and how agents should choose between identity, preference, decision, lesson, gotcha, and fact.
 - [Glossary](https://wenlan.app/docs/glossary): Short definitions for Wenlan terms such as memory, handoff, page, space, daemon, MCP, local index, provenance, supersession, and retrieval metrics.
 - [Architecture](https://wenlan.app/docs/architecture): Daemon-first system map: wenlan-server, wenlan-core, wenlan CLI, wenlan-mcp, wenlan-types, and the Claude Code and Codex plugins.
-- [Product Matrix](https://wenlan.app/docs/product-matrix): What each Wenlan repository, plugin, local or web MCP client surface, platform artifact, and release boundary owns.
+- [Choose Your Wenlan Setup](https://wenlan.app/docs/product-matrix): Use the desktop app to manage your library, a plugin to work in Claude Code or Codex, or MCP to connect another AI tool.
 
 ## Concepts
 
@@ -52,38 +52,38 @@
 ## Reference
 
 - [Commands](https://wenlan.app/docs/commands): Wenlan CLI subcommands and the MCP tools the daemon exposes.
-- [Claude Code plugin](https://wenlan.app/docs/claude-code-plugin): The richest Wenlan workflow inside Claude Code: one /wenlan entry (setup, distill, lint, curate and more as words after it), /brief, /capture, /recall, /handoff, the SessionStart hook, and local memory mode.
+- [Claude Code Plugin](https://wenlan.app/docs/claude-code-plugin): Install the Wenlan plugin in Claude Code and check its connection.
 - [CLI and service management](https://wenlan.app/docs/cli-and-service): Setup, daemon status, doctor, background on/off, terminal recall/search/capture/memories, and MCP client wiring.
-- [Updates and uninstall](https://wenlan.app/docs/updates-and-uninstall): Refresh the local runtime, verify with doctor, restart MCP clients, and remove the per-user service safely.
-- [Upgrade notes](https://wenlan.app/docs/upgrade-notes): What to rerun, verify, and restart when Wenlan releases change the plugin, npm setup, MCP connector, daemon service, spaces, or platform support.
+- [Updates and Uninstall](https://wenlan.app/docs/updates-and-uninstall): Refresh Wenlan's local runtime, verify version health, restart MCP clients, and remove the service without losing data by accident.
+- [Upgrade Notes](https://wenlan.app/docs/upgrade-notes): Read the practical upgrade path for Wenlan releases: what to rerun, what to verify, and what changed in the current public runtime shape.
 - [Packages and registries](https://wenlan.app/docs/packages-and-registries): Which package names mean what across the Claude Code plugin, npm setup, wenlan-mcp, wenlan-types, crates.io, and GitHub Releases.
 - [Platform support](https://wenlan.app/docs/platforms): macOS, Linux, and Windows support, service managers, data paths, model backend notes, and Docker/VM caveats.
 - [HTTP API](https://wenlan.app/docs/http-api): Local daemon surfaces that the plugin, CLI, MCP connector, and local tools call under the hood.
 - [API examples](https://wenlan.app/docs/api-examples): Local curl examples for daemon health, setup status, memory store/search, chat context, review, confirm, and page search.
 - [Typed clients](https://wenlan.app/docs/typed-clients): When Rust local tools should use wenlan-types for shared daemon request and response shapes instead of untyped JSON.
 - [Spaces](https://wenlan.app/docs/spaces): Separate work, personal, client, and project memory buckets, including WENLAN_SPACE, spaces.toml mappings, resolver priority, and doctor output.
-- [Knowledge graph](https://wenlan.app/docs/knowledge-graph): How people, projects, tools, observations, and relations become graph context for retrieval without replacing source-backed memory.
-- [Source-backed pages](https://wenlan.app/docs/source-backed-pages): How atomic captures become readable Markdown pages with source memory IDs, revision state, and refresh paths.
+- [AI Agent Knowledge Graph](https://wenlan.app/docs/knowledge-graph): Build a source-backed AI knowledge base that links people, projects, tools, observations, and relations without treating graph context as authority.
+- [Create and Update Wiki Pages](https://wenlan.app/docs/source-backed-pages): Turn related findings into a page you can read, follow its sources, and review changes when the underlying information changes.
 - [Import and portability](https://wenlan.app/docs/import-and-portability): Keep Wenlan's projected Markdown artifacts readable outside the daemon and migrate selected context deliberately.
-- [Local git history](https://wenlan.app/docs/local-git-history): Inspect the real git history Wenlan keeps under ~/.wenlan/.git for pages, sessions, handoffs, and status artifacts.
-- [Models and keys](https://wenlan.app/docs/models-and-keys): No-model local memory mode, agent-side fallback phases, optional on-device models, optional Anthropic keys, and the privacy/capability tradeoffs.
-- [Advanced retrieval status](https://wenlan.app/docs/advanced-retrieval): Stable hybrid retrieval plus opt-in main-branch retrieval experiments and their release-status caveats.
-- [Experimental flags](https://wenlan.app/docs/experimental-flags): How to read opt-in main-branch flags for retrieval, context compression, memory maintenance, entity resolution, page guards, and reflection without treating them as released defaults.
+- [Local git history](https://wenlan.app/docs/local-git-history): Inspect built-in page revisions and, if you choose, your own Git history of readable files.
+- [Models and Keys](https://wenlan.app/docs/models-and-keys): Choose local memory mode or configure an optional on-device, local server, or cloud model for background language work.
+- [Advanced Retrieval Status](https://wenlan.app/docs/advanced-retrieval): Understand how Wenlan retrieves context, how to evaluate it, and where experimental controls fit.
+- [Experimental Flags](https://wenlan.app/docs/experimental-flags): Look up selected experimental switches in the released runtime and use them with isolated data.
 - [Data and privacy](https://wenlan.app/docs/data-and-privacy): What lives where on disk, what leaves the machine, what does not.
-- [Backup and migration](https://wenlan.app/docs/backup-and-migration): Back up readable ~/.wenlan artifacts and daemon data together, then verify restored installs with doctor and recall.
-- [Configuration](https://wenlan.app/docs/configuration): Spaces, MCP client wiring, daemon bind address, local paths, models, and keys without hand-editing the database.
-- [Environment variables](https://wenlan.app/docs/environment-variables): Runtime, development, Windows repair, and eval environment variables such as WENLAN_SPACE, WENLAN_HOST, WENLAN_BIND_ADDR, WENLAN_DATA_DIR, ORT_DYLIB_PATH, and EVAL_BASELINES_DIR.
-- [MCP clients](https://wenlan.app/docs/mcp-clients): Local setup for Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, VS Code, and Muse Code, plus authenticated Streamable HTTP MCP Web access for ChatGPT, Claude.ai, and Muse through https://relay.wenlan.app/mcp. Choose the whole library or one Space in Wenlan, approve the pairing request, keep the device online to connect, and revoke access when it is no longer needed.
+- [Backup and Migration](https://wenlan.app/docs/backup-and-migration): Back up Wenlan's readable artifacts and daemon data together, then verify the restored runtime before trusting recall.
+- [Wenlan Configuration](https://wenlan.app/docs/configuration): Configure Wenlan spaces, MCP clients, daemon bind address, local paths, models, and keys without editing the database by hand.
+- [Environment Variables](https://wenlan.app/docs/environment-variables): Know which Wenlan environment variables are normal configuration, which are development-only, and which belong to eval or Windows repair paths.
+- [Connect MCP Clients](https://wenlan.app/docs/mcp-clients): Connect Claude Code, Codex, and other local or web clients. For experimental Web access at https://relay.wenlan.app/mcp, choose a scope, approve the pairing request, and revoke access when finished. Search and write allows adding, editing, and deleting shared memories and pages.
 - [Agent profiles](https://wenlan.app/docs/agent-profiles): How Wenlan attributes captures to Claude Code, Codex, Cursor, local scripts, and other clients through source_agent, trust, and enabled state.
-- [Troubleshooting](https://wenlan.app/docs/troubleshooting): Common failure modes and the daemon repair paths.
-- [Diagnostics and issue reports](https://wenlan.app/docs/diagnostics-and-issue-reports): Commands to run before asking for help, how to separate daemon and MCP failures, and what to redact.
+- [Troubleshooting](https://wenlan.app/docs/troubleshooting): Fix the common setup issues: daemon not running, MCP not connected, missing Claude commands, stale context, and support escalation.
+- [Diagnostics and Issue Reports](https://wenlan.app/docs/diagnostics-and-issue-reports): Run the right checks before asking for help, separate daemon problems from client problems, and share only redacted output.
 - [FAQ](https://wenlan.app/docs/faq): Short answers about what Wenlan is, which install path to use, desktop app status, local data, Markdown artifacts, uninstall behavior, and verification.
 - [Security and reporting](https://wenlan.app/docs/security): Private vulnerability reporting, redacted bug reports, local security boundaries, and security.txt.
 - [Evaluation](https://wenlan.app/docs/evaluation): Retrieval benchmark scope, current LME_Oracle and LME_S snapshot, and rerun methodology.
-- [Desktop app status](https://wenlan.app/docs/desktop-app): The optional source-cited wiki GUI, its AGPL-3.0-only crate boundary in the unified Wenlan repository, a getting-started checklist for new libraries, one-click connection for local tools such as Muse Code, and its authenticated Web access path for ChatGPT, Claude.ai, and Muse through https://relay.wenlan.app/mcp, with a whole-library or one-Space choice, approved pairing, and access revocation.
+- [Use the Wenlan Desktop App](https://wenlan.app/docs/desktop-app): Add material, find and edit pages, inspect sources, review updates, and connect AI tools in the Wenlan desktop app.
 - [Changelog](https://wenlan.app/docs/changelog): Stable release notes and how to read unreleased main-branch work.
 - [Releases and versioning](https://wenlan.app/docs/releases-and-versioning): How release-please, tags, package publishing, npm packages, crates, binaries, and pre-1.0 version bumps work.
-- [Roadmap and status](https://wenlan.app/docs/roadmap): Released, on-main, and planned work without confusing roadmap themes for shipped guarantees.
+- [Check Whether a Feature Has Shipped](https://wenlan.app/docs/roadmap): Check whether a feature is in your download, still in development, or only proposed.
 - [Project scope](https://wenlan.app/docs/project-scope): What Wenlan is for and what it deliberately avoids.
 - [Build from source](https://wenlan.app/docs/build-from-source): Source build, workspace crates, platform notes, and contributor checks.
 - [Testing and CI](https://wenlan.app/docs/testing-and-ci): Local checks, git hooks, PR CI, coverage policy, and manual eval boundaries for contributors.

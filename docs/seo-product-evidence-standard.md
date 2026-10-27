@@ -68,7 +68,8 @@ A scenario page must provide all of the following:
 6. A next action written for the scenario. Generic download or GitHub calls may
    remain, but they do not replace the scenario action.
 7. Maintained first-party sources, honest product limits, and standalone value
-   for a reader who does not use Wenlan.
+   for a reader who does not use Wenlan. Comparisons must be factual, sourced and
+   non-combative; apply the same task and evidence standard to every product.
 8. Natural English, zh-TW, and zh-CN localization. Each locale owns its phrasing;
    query terms and headings are not translated word for word.
 9. Article and BreadcrumbList schema, reciprocal hreflang, sitemap membership,
@@ -99,6 +100,55 @@ scenario-product requirements. Claude and Codex use this same acceptance step.
   with the kept/merged/restored decisions and a pass or named gap. Existing build
   and contract checks protect structure; they do not judge semantic completeness
   or readability. Resolve a required-content or reading gap before delivery.
+
+For public documentation, choose the page's job before rewriting: a tutorial
+teaches through a complete example; a how-to guides a specific task; an
+explanation answers why or how something works; a reference supports lookup.
+Use the Strands docs-writer structure and Google developer-writing guidance:
+state the useful outcome and prerequisites, put actions in order, and show how
+to recognize success or recover from failure. Apply only the parts relevant to
+the page type. Keep setup steps in their owning guide and link to them instead
+of copying them into every page. Preserve useful reference material and existing
+URLs; low traffic alone is not a reason to delete documentation.
+
+For each changed page, check the following in the actual reading order, without
+waiting for the user to request an editorial review:
+
+- **A useful promise:** the opening identifies the reader's situation and what
+  they will understand, decide or complete. Explain an unfamiliar concept before
+  comparing tools. A reference page may lead with the answer or lookup table.
+- **No missing bridge:** follow the instructions as the stated audience. Name
+  where to act (app, terminal or AI client), required setup, exact controls or
+  commands, expected result and the next check if it fails. Do not silently
+  switch platforms, clients or data scopes. Links must lead to the promised help.
+- **Decision value:** each section supplies an answer, necessary distinction,
+  action or evidence. Comparisons explain the practical tradeoff for the same
+  task, including when to keep the existing tool. A non-exclusive feature can
+  still be valuable; uniqueness is not an acceptance requirement.
+- **Natural, specific writing:** remove empty introductions, repeated summaries,
+  vague benefits, unexplained jargon and internal test/version chatter that does
+  not help the reader. Use direct verbs and concrete examples. Do not invent
+  first-person experience or customer results to sound human. AI-detector scores
+  cannot certify authorship or reading quality.
+- **Evidence that matches the promise:** distinguish released behavior, source
+  inspection and an exercised workflow. Check prerequisites, permissions,
+  defaults and update/approval boundaries against the relevant product version.
+  Check the linked setup, platform and recovery instructions for contradictions;
+  fixing one page while its next step still gives the old advice is incomplete.
+  Captions must match the real screen and action; use a diagram only when it
+  explains a relationship better than the text. Label fictional examples.
+- **Usable presentation:** inspect desktop and mobile reading, code copying,
+  anchors and links, not only overflow. Split paragraphs that combine separate
+  actions; keep necessary details. Reserve blockquotes for attributed quotations
+  and label example prompts by purpose. Localized entrypoints must describe the
+  actual destination, including when the full guide is English-only.
+
+For a substantial rewrite, have an independent reviewer read the artifact and
+reader task without the author's pass verdict. Return concrete blockers with
+locations, repair them, then check the changed passages and affected steps.
+Record coverage and unresolved gaps in the existing audit. Separate editorial,
+product-behavior and technical results: a green build proves none of the other
+two, and an editorial pass does not predict search growth.
 
 ## Product evidence rules
 
