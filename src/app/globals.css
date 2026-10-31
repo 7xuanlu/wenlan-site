@@ -491,14 +491,6 @@ html:lang(zh-Hans) .brand-wordmark__cjk {
 .home-hero-actions > a, .home-hero-actions > button { height: 46px; padding-block: 0; }
 /* One quiet line under the buttons: short facts joined by small dots. */
 .home-hero-trust { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; margin: 18px auto 0; padding: 0; list-style: none; font-size: 13px; line-height: 20px; letter-spacing: 0.02em; color: var(--o-text-muted); }
-/* Product Hunt badge above the headline from launch day; the badge image follows the site theme. */
-.home-ph-badge { display: flex; width: fit-content; margin: 0 auto 28px; border-radius: 8px; }
-.home-ph-badge img { display: block; width: 200px; height: 43px; }
-.home-ph-badge--light { display: none !important; }
-[data-theme="light"] .home-ph-badge--dark { display: none !important; }
-[data-theme="light"] .home-ph-badge--light { display: block !important; }
-.home-ph-badge:focus-visible { outline: 2px solid var(--o-warm); outline-offset: 3px; }
-@media (max-width: 639px) { .home-ph-badge { margin-bottom: 22px; } }
 .home-hero-trust > li { display: inline-flex; align-items: center; white-space: nowrap; }
 .home-hero-trust > li + li::before { content: ""; width: 3px; height: 3px; margin-inline: 16px; border-radius: 999px; background: currentColor; opacity: 0.55; }
 .home-hero-product { margin-top: 8px; }
