@@ -11,12 +11,12 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "d94e9cdc0a5b17b52e301507bd1839e883be1c62d5af9e8a044412c4abfe1ccb",
+    sourceHash: "f8e637d4ba80df8b534cdcf5cac8df9dae5b3eda86eb9e1d367f160b7909a431",
     content: {
       seo: {
-        title: "文瀾 Wenlan｜個人 AI 知識庫與 LLM Wiki",
+        title: "文瀾 Wenlan｜不用你維護的個人 AI 知識庫",
         description:
-          "Wenlan 文瀾是有來源依據的 AI 知識庫，也是 AI 工作的 LLM wiki：把文件和決策整理成可查找、可核對、可審查的筆記，讓你和 AI 接著往前做。本地運行，連接 Claude Code、Codex、ChatGPT 等 AI 工具，開源免費。",
+          "文瀾是不用你維護的個人 AI 知識庫。一鍵連上 Claude Code、Codex、ChatGPT 等 AI 工具，不用裝插件；想寫就自己寫，其他交給 AI 整理。開源的 Obsidian 替代品。",
       },
       nav: {
         schemaName: "Wenlan 文瀾網站導覽",
@@ -550,12 +550,12 @@ export const zhTWContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "AI 協助維護的個人知識庫",
-          headline: { pre: "用你的知識，", emphasis: "找到答案、完成工作。", post: "" },
+          eyebrow: "在 AI 對話裡想清楚的事，過幾天就找不到。筆記還要一直整理。",
+          headline: { pre: "", emphasis: "不用你維護", post: "的知識庫。" },
           description:
-            "文瀾把筆記、文件和 AI 對話整理成持續更新的知識庫，附上來源，並對照來源檢查。Claude、Codex 等 AI 工具都能直接用。",
+            "設定一次就好。你平常用的 AI 工具會把重點存進來、整理成頁面，下次對話自己帶回來。它改了什麼你都看得到，可以還原。",
           worksWithLabel: "可搭配",
-          worksWithNote: "可連接 Obsidian 筆記庫；沒有你同意，Wenlan 不會改動你原有的筆記。",
+          obsidianNote: "開源的 Obsidian 替代品，原本的 Obsidian 資料夾也能直接用。",
         },
         fit: {
           "title": "Wenlan 適合你嗎？",

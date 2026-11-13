@@ -227,10 +227,10 @@ const comparisonLinks = [
   "/learn/mcp-memory-server",
 ];
 
-const expectedWorksWithNotes = {
-  en: "Connect your Obsidian vault; Wenlan never edits your existing notes without your OK.",
-  "zh-TW": "可連接 Obsidian 筆記庫；沒有你同意，Wenlan 不會改動你原有的筆記。",
-  "zh-CN": "可连接 Obsidian 笔记库；没有你同意，Wenlan 不会改动你原有的笔记。",
+const expectedObsidianNotes = {
+  en: "Open-source Obsidian alternative that works with your existing vault.",
+  "zh-TW": "開源的 Obsidian 替代品，原本的 Obsidian 資料夾也能直接用。",
+  "zh-CN": "开源的 Obsidian 替代品，原有的 Obsidian 库也能直接用。",
 };
 
 const oldClaims = {
@@ -275,19 +275,19 @@ const oldClaims = {
 test("hero leads with useful outcomes and describes knowledge that can be revised without an accuracy guarantee", () => {
   const expected = {
     en: {
-      eyebrow: "A personal knowledge base, maintained with AI",
-      headline: ["Turn your notes, files, and AI chats into a", "living wiki."],
-      description: "Wenlan pages cite their sources, get checked against them, and update when they change. Claude, Codex, and more can put them to work.",
+      eyebrow: "What you work out in AI chats gets lost. Notes need constant upkeep.",
+      headline: ["The knowledge base you", "don't have to maintain."],
+      description: "Set up once. Your AI tools save what matters, keep your pages organized, and bring it back in your next chat. You see every change and can undo it.",
     },
     "zh-TW": {
-      eyebrow: "AI 協助維護的個人知識庫",
-      headline: ["用你的知識，", "找到答案、完成工作。"],
-      description: "文瀾把筆記、文件和 AI 對話整理成持續更新的知識庫，附上來源，並對照來源檢查。Claude、Codex 等 AI 工具都能直接用。",
+      eyebrow: "在 AI 對話裡想清楚的事，過幾天就找不到。筆記還要一直整理。",
+      headline: ["", "不用你維護"],
+      description: "設定一次就好。你平常用的 AI 工具會把重點存進來、整理成頁面，下次對話自己帶回來。它改了什麼你都看得到，可以還原。",
     },
     "zh-CN": {
-      eyebrow: "AI 协助维护的个人知识库",
-      headline: ["用你的知识，", "找到答案、完成工作。"],
-      description: "文澜把笔记、文档和 AI 对话整理成持续更新的知识库，附上来源，并对照来源检查。Claude、Codex 等 AI 工具都能直接用。",
+      eyebrow: "在 AI 对话里想清楚的事，过几天就找不到。笔记还得一直整理。",
+      headline: ["", "不用你维护"],
+      description: "设置一次就好。你常用的 AI 工具会把重点存进来、整理成页面，下次对话自己带回来。它改了什么你都看得到，可以撤销。",
     },
   };
   for (const [locale, dictionary] of Object.entries(dictionaryByLocale)) {
@@ -325,11 +325,10 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     );
     // Approved concise hero explains the wiki mechanism, not only the pain.
     assert.equal(home.redesign.hero.description.split(/\s+/).filter(Boolean).length <= 40, true);
-    assert.equal(home.redesign.hero.worksWithNote, expectedWorksWithNotes[locale]);
-    assert.match(home.redesign.hero.worksWithNote, /Obsidian/);
-    assert.match(home.redesign.hero.worksWithNote, /without your OK|沒有你同意|没有你同意/i);
+    assert.equal(home.redesign.hero.obsidianNote, expectedObsidianNotes[locale]);
+    assert.match(home.redesign.hero.obsidianNote, /Obsidian/);
     // Obsidian connections can write accepted changes since v0.20.1; never call them read-only.
-    assert.doesNotMatch(home.redesign.hero.worksWithNote, /read-only|without changing|唯讀|只读|保留原文/i);
+    assert.doesNotMatch(home.redesign.hero.obsidianNote, /read-only|without changing|唯讀|只读|保留原文/i);
     assert.doesNotMatch(
       home.download.description,
       /notarized|已公證的|已公证的/i,

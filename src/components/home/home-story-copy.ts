@@ -2,8 +2,10 @@ import type { Locale } from "@/i18n/locales";
 
 export const storyCopyByLocale = {
   en: {
-    heroDescription: "Wenlan pages cite their sources, get checked against them, and update when they change. Claude, Codex, and more can put them to work.",
-    heroTrust: ["Free", "Open source", "Local-first"],
+    heroDescription: "Set up once. Your AI tools save what matters, keep your pages organized, and bring it back in your next chat. You see every change and can undo it.",
+    heroTrust: ["Free", "Open source", "Your files stay on your computer"],
+    heroPrimaryCta: "Download the desktop app",
+    heroSecondaryCta: "Connect from your AI tool",
     comparisonLabel: "Compare AI knowledge-base tools",
     steps: { wiki: "Organize", updates: "Update with new evidence", ai: "Put to work", graph: "See the connections" },
     wikiTitle: "Scattered notes. Connected knowledge.",
@@ -40,8 +42,10 @@ export const storyCopyByLocale = {
     moreTechnical: "Retrieval tests and methodology",
   },
   "zh-TW": {
-    heroDescription: "文瀾把筆記、文件和 AI 對話整理成持續更新的知識庫，附上來源，並對照來源檢查。Claude、Codex 等 AI 工具都能直接用。",
-    heroTrust: ["免費", "開源", "本地優先"],
+    heroDescription: "設定一次就好。你平常用的 AI 工具會把重點存進來、整理成頁面，下次對話自己帶回來。它改了什麼你都看得到，可以還原。",
+    heroTrust: ["免費", "開源", "檔案留在你的電腦上"],
+    heroPrimaryCta: "下載桌面版",
+    heroSecondaryCta: "從你的 AI 工具連上",
     comparisonLabel: "比較 AI 知識庫工具",
     steps: { wiki: "整理", updates: "隨資料更新", ai: "用進工作", graph: "知識相連" },
     wikiTitle: "把散落的內容，整理成可用的知識。",
@@ -78,8 +82,10 @@ export const storyCopyByLocale = {
     moreTechnical: "檢索評測與測試範圍",
   },
   "zh-CN": {
-    heroDescription: "文澜把笔记、文档和 AI 对话整理成持续更新的知识库，附上来源，并对照来源检查。Claude、Codex 等 AI 工具都能直接用。",
-    heroTrust: ["免费", "开源", "本地优先"],
+    heroDescription: "设置一次就好。你常用的 AI 工具会把重点存进来、整理成页面，下次对话自己带回来。它改了什么你都看得到，可以撤销。",
+    heroTrust: ["免费", "开源", "文件留在你的电脑上"],
+    heroPrimaryCta: "下载桌面版",
+    heroSecondaryCta: "从你的 AI 工具连接",
     comparisonLabel: "比较 AI 知识库工具",
     steps: { wiki: "整理", updates: "随资料更新", ai: "用于工作", graph: "知识相连" },
     wikiTitle: "把散落的内容，整理成可用的知识。",

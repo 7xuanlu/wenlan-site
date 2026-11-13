@@ -1057,6 +1057,8 @@ button.card-wenlan:focus-visible {
 .home-page .home-hero-trust { margin-top: 16px; }
 .home-page .home-hero-product { margin-top: -1px; }
 @media (max-width: 639px) {
+  .home-hero-trust { gap: 4px 20px; }
+  .home-hero-trust > li + li::before { display: none; }
   .home-hero-video { margin: 28px 0 0 10px; }
   .home-demo-switch > button { padding: 0 14px; }
 }

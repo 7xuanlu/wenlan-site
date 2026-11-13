@@ -115,26 +115,26 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
       <section className="home-hero relative px-4 pb-6 sm:px-6 sm:pb-8" aria-labelledby="home-heading">
         <div className="mx-auto max-w-6xl">
           <div className="home-hero-copy mx-auto max-w-4xl min-w-0 text-center">
+            <p className="home-hero-eyebrow mx-auto mb-5 max-w-xl text-balance text-[15px] leading-relaxed text-[var(--o-warm)]">
+              {redesign.hero.eyebrow}
+            </p>
             <h1 id="home-heading" className={`home-hero-title animate-fade-up motion-reduce:animate-none font-sans font-medium tracking-tight break-words text-balance ${locale === "en" ? "home-hero-title--en" : "home-hero-title--cjk"}`}>
-              <span className={locale === "en" ? "inline" : "block"}>{redesign.hero.headline.pre}</span>
-              {locale === "en" ? " " : null}
-              <span className={`${locale === "en" ? "inline whitespace-nowrap" : "block"} text-[var(--o-warm)]`}>{redesign.hero.headline.emphasis}</span>
+              {redesign.hero.headline.pre ? <span className={locale === "en" ? "inline" : "block"}>{redesign.hero.headline.pre}</span> : null}
+              {locale === "en" && redesign.hero.headline.pre ? " " : null}
+              <span className={`${locale === "en" ? "inline whitespace-nowrap" : redesign.hero.headline.pre ? "block" : "inline"} text-[var(--o-warm)]`}>{redesign.hero.headline.emphasis}</span>
               {redesign.hero.headline.post}
             </h1>
             <p className="home-hero-description mx-auto max-w-2xl text-balance text-[var(--o-text-secondary)]">
               {locale === "en" ? story.heroDescription : <HomeReadableText>{story.heroDescription}</HomeReadableText>}
             </p>
+            <p className="home-hero-obsidian mx-auto mt-3 max-w-2xl text-balance text-sm text-[var(--o-text-muted)]">
+              {redesign.hero.obsidianNote}
+            </p>
           </div>
           <DemoVideo
             key={locale}
-            primaryAction={<HomeCta link={content.hero.primaryCta} locale={locale} placement="home-hero" variant="primary" />}
-            sourceAction={
-              <a href="https://github.com/wenlan-app/wenlan" target="_blank" rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[var(--o-border)] px-4 py-3 text-sm font-medium text-[var(--o-text)] transition-colors hover:bg-[var(--o-bg-alt)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)] sm:px-5">
-                <GitHubLogoIcon className="size-4 shrink-0" />
-                GitHub
-              </a>
-            }
+            primaryAction={<HomeCta link={{ id: "download", href: "/download", label: story.heroPrimaryCta }} locale={locale} placement="home-hero" variant="primary" />}
+            sourceAction={<HomeCta link={{ id: "get-started", href: "/docs/get-started", label: story.heroSecondaryCta }} locale={locale} placement="home-hero" variant="secondary" hideIcon />}
             trustNote={
               <ul className="home-hero-trust" aria-label={locale === "en" ? "Why you can try it" : locale === "zh-TW" ? "可以放心試用" : "可以放心试用"}>
                 {story.heroTrust.map((item) => <li key={item}>{item}</li>)}
@@ -266,12 +266,14 @@ function HomeCta({
   locale,
   placement,
   showGithubIcon = false,
+  hideIcon = false,
   variant,
 }: {
   link: LinkContent;
   locale: Locale;
   placement: "home-hero" | "home-footer";
   showGithubIcon?: boolean;
+  hideIcon?: boolean;
   variant: "primary" | "secondary";
 }) {
   const className =
@@ -283,7 +285,7 @@ function HomeCta({
     <>
       {showGithubIcon && <GitHubLogoIcon className="size-5" />}
       {link.label}
-      {!showGithubIcon && (link.id === "download"
+      {!showGithubIcon && !hideIcon && (link.id === "download"
         ? <DownloadSimpleIcon className="size-4" />
         : <ArrowRightIcon className="size-4" />)}
     </>

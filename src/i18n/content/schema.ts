@@ -230,7 +230,7 @@ export type HomeContent = SeoContent & {
       headline: EmphasisText;
       description: string;
       worksWithLabel: string;
-      worksWithNote: string;
+      obsidianNote: string;
     };
     fit: {
       title: string;

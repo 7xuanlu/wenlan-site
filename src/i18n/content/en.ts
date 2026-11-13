@@ -14,9 +14,9 @@ export const enContent = {
     sourceHash: null,
     content: {
       seo: {
-        title: "Wenlan | LLM Wiki & Personal Knowledge Management App",
+        title: "Wenlan | The AI Knowledge Base You Don't Have to Maintain",
         description:
-          "Wenlan is a source-backed AI knowledge base and LLM wiki for AI work: organize documents and decisions into pages you can find, inspect, and review.",
+          "The knowledge base you don't have to maintain. An open-source Obsidian alternative that connects to your AI tools in one click, with no plugins to set up.",
       },
       nav: {
         schemaName: "Wenlan site navigation",
@@ -555,12 +555,12 @@ export const enContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "A personal knowledge base, maintained with AI",
-          headline: { pre: "Turn your notes, files, and AI chats into a", emphasis: "living wiki.", post: "" },
+          eyebrow: "What you work out in AI chats gets lost. Notes need constant upkeep.",
+          headline: { pre: "The knowledge base you", emphasis: "don't have to maintain.", post: "" },
           description:
-            "Wenlan pages cite their sources, get checked against them, and update when they change. Claude, Codex, and more can put them to work.",
+            "Set up once. Your AI tools save what matters, keep your pages organized, and bring it back in your next chat. You see every change and can undo it.",
           worksWithLabel: "Works with",
-          worksWithNote: "Connect your Obsidian vault; Wenlan never edits your existing notes without your OK.",
+          obsidianNote: "Open-source Obsidian alternative that works with your existing vault.",
         },
         fit: {
           "title": "Is Wenlan for you?",

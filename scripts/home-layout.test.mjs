@@ -56,7 +56,7 @@ test("homepage links to the download page without duplicating the platform secti
   assert.doesNotMatch(homeSource, /DownloadSection/);
   assert.notEqual(demoIndex, -1, "video entry remains in the hero");
   assert.match(demoSource, /id="demo"/);
-  assert.match(homeSource.slice(demoIndex, homeSource.indexOf('id="knowledge-workflows"')), /primaryAction=\{<HomeCta link=\{content\.hero\.primaryCta\}/);
+  assert.match(homeSource.slice(demoIndex, homeSource.indexOf('id="knowledge-workflows"')), /primaryAction=\{<HomeCta link=\{\{ id: "download", href: "\/download"/);
   for (const locale of ["en", "zh-TW", "zh-CN"]) {
     const content = getCoreContent(locale).home.content;
     assert.equal(content.hero.primaryCta.href, "/download");
@@ -65,7 +65,7 @@ test("homepage links to the download page without duplicating the platform secti
 });
 
 test("homepage shows capabilities and retrieval evidence directly while disclosing examples", () => {
-  const order = ['<DemoVideo', '<HomeCta link={content.hero.primaryCta}', 'id="knowledge-workflows"', '<ProductMedia locale={locale} slot="wiki"', '<CiteCheck', '<KnowledgeConnections', '<KnowledgeUpdates', 'id="ai-recall"', '<ProductMedia locale={locale} slot="ai"', '<HeroScenarios', 'id="capabilities"', '<BentoSection', 'id="integrations"', 'id="retrieval-evidence"', 'placement="home-footer"'];
+  const order = ['<DemoVideo', '<HomeCta link={{ id: "download"', 'id="knowledge-workflows"', '<ProductMedia locale={locale} slot="wiki"', '<CiteCheck', '<KnowledgeConnections', '<KnowledgeUpdates', 'id="ai-recall"', '<ProductMedia locale={locale} slot="ai"', '<HeroScenarios', 'id="capabilities"', '<BentoSection', 'id="integrations"', 'id="retrieval-evidence"', 'placement="home-footer"'];
   const positions = order.map((marker) => homeSource.indexOf(marker));
   assert.ok(positions.every((position) => position >= 0));
   assert.deepEqual(positions, [...positions].sort((a, b) => a - b));
