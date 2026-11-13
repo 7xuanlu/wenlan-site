@@ -3673,7 +3673,7 @@ export const docPages: DocPage[] = [
       "Wenlan desktop status",
     ],
     publishedAt: "2026-10-23",
-    updatedAt: "2026-10-27",
+    updatedAt: "2026-11-13",
     author: DEFAULT_AUTHOR,
     readingTime: "3 min read",
     summary: [
@@ -3734,6 +3734,13 @@ export const docPages: DocPage[] = [
           label: "Review and trust",
           href: "/docs/review-and-trust",
         },
+      },
+      {
+        heading: "Give a page or home an HTML view",
+        body: [
+          "A connected AI tool can draw an HTML view for one of your pages: a layout that shows the page's own text, its links, and the other pages in its Space. Ask the tool to read the page with read_page_look and save the view with set_page_look. The page file does not change, and the view cannot load anything from the internet. On a page with a view, the pencil in the top bar shows the text for editing.",
+          "Home can have one too: ask the tool to do the same for @home. Home's view belongs to the theme in use. It is saved as home.html in that theme's folder, so choosing another theme changes home with it. Settings > Appearance shows this theme's home under the theme cards, where you can remove the view (with Undo) or copy a request for your AI tool.",
+        ],
       },
       {
         heading: "Connect an AI tool",
