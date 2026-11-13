@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "f8e637d4ba80df8b534cdcf5cac8df9dae5b3eda86eb9e1d367f160b7909a431",
+    sourceHash: "2e00024a5baccdd123e07741dd8c45fef12e8e9c9cdc0ce4b32921c370608912",
     content: {
       seo: {
         title: "文澜 Wenlan｜不用自己维护的个人 AI 知识库",
@@ -550,7 +550,7 @@ export const zhCNContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "在 AI 对话里想清楚的事，过几天就找不到。笔记还得一直整理。",
+          eyebrow: "笔记要一直整理，插件会坏，每次开新对话又要从头解释。",
           headline: { pre: "", emphasis: "不用你维护", post: "的知识库。" },
           description:
             "设置一次就好。你常用的 AI 工具会把重点存进来、整理成页面，下次对话自己带回来。它改了什么你都看得到，可以撤销。",

@@ -275,17 +275,17 @@ const oldClaims = {
 test("hero leads with useful outcomes and describes knowledge that can be revised without an accuracy guarantee", () => {
   const expected = {
     en: {
-      eyebrow: "What you work out in AI chats gets lost. Notes need constant upkeep.",
+      eyebrow: "Notes need constant upkeep, plugins break, and every new AI chat starts from zero.",
       headline: ["The knowledge base you", "don't have to maintain."],
       description: "Set up once. Your AI tools save what matters, keep your pages organized, and bring it back in your next chat. You see every change and can undo it.",
     },
     "zh-TW": {
-      eyebrow: "在 AI 對話裡想清楚的事，過幾天就找不到。筆記還要一直整理。",
+      eyebrow: "筆記要一直整理，插件會壞，每次開新對話又要從頭解釋。",
       headline: ["", "不用你維護"],
       description: "設定一次就好。你平常用的 AI 工具會把重點存進來、整理成頁面，下次對話自己帶回來。它改了什麼你都看得到，可以還原。",
     },
     "zh-CN": {
-      eyebrow: "在 AI 对话里想清楚的事，过几天就找不到。笔记还得一直整理。",
+      eyebrow: "笔记要一直整理，插件会坏，每次开新对话又要从头解释。",
       headline: ["", "不用你维护"],
       description: "设置一次就好。你常用的 AI 工具会把重点存进来、整理成页面，下次对话自己带回来。它改了什么你都看得到，可以撤销。",
     },

@@ -555,7 +555,7 @@ export const enContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "What you work out in AI chats gets lost. Notes need constant upkeep.",
+          eyebrow: "Notes need constant upkeep, plugins break, and every new AI chat starts from zero.",
           headline: { pre: "The knowledge base you", emphasis: "don't have to maintain.", post: "" },
           description:
             "Set up once. Your AI tools save what matters, keep your pages organized, and bring it back in your next chat. You see every change and can undo it.",

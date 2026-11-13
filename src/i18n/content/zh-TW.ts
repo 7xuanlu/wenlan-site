@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "f8e637d4ba80df8b534cdcf5cac8df9dae5b3eda86eb9e1d367f160b7909a431",
+    sourceHash: "2e00024a5baccdd123e07741dd8c45fef12e8e9c9cdc0ce4b32921c370608912",
     content: {
       seo: {
         title: "文瀾 Wenlan｜不用你維護的個人 AI 知識庫",
@@ -550,7 +550,7 @@ export const zhTWContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "在 AI 對話裡想清楚的事，過幾天就找不到。筆記還要一直整理。",
+          eyebrow: "筆記要一直整理，插件會壞，每次開新對話又要從頭解釋。",
           headline: { pre: "", emphasis: "不用你維護", post: "的知識庫。" },
           description:
             "設定一次就好。你平常用的 AI 工具會把重點存進來、整理成頁面，下次對話自己帶回來。它改了什麼你都看得到，可以還原。",
