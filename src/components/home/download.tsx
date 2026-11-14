@@ -14,12 +14,11 @@ export function DownloadSection({
   locale: Locale;
   release?: WenlanRelease;
 }) {
-  const platforms = copy.platforms.map((platform) => {
+  // Copy covers every possible build; a release may omit optional ones
+  // (Linux desktop), so show only what it actually publishes.
+  const platforms = copy.platforms.flatMap((platform) => {
     const asset = release.assets.find((item) => item.id === platform.id);
-    if (!asset) {
-      throw new Error(`Missing release asset for ${platform.id}`);
-    }
-    return { ...asset, ...platform };
+    return asset ? [{ ...asset, ...platform }] : [];
   });
 
   return (

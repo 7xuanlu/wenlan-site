@@ -1,4 +1,8 @@
 import { WENLAN_RELEASE } from "./releases";
+import {
+  RELEASE_ASSET_IDS,
+  type WenlanReleaseAssetId,
+} from "./release-asset-ids";
 
 export const RELEASE_API =
   "https://api.github.com/repos/wenlan-app/wenlan/releases/latest";
@@ -12,16 +16,11 @@ const RELEASE_REPOSITORY = "https://github.com/wenlan-app/wenlan";
 const RELEASE_DOWNLOAD_BASE = `${RELEASE_REPOSITORY}/releases/download`;
 const STABLE_TAG_PATTERN = /^v(0|[1-9]\d{0,4})\.(0|[1-9]\d{0,4})\.(0|[1-9]\d{0,4})$/;
 
-export const RELEASE_ASSET_IDS = [
-  "windows-desktop-x64",
-  "windows-x64",
-  "macos-arm64",
-  "macos-runtime-arm64",
-  "linux-x64",
-  "linux-arm64",
-] as const;
-
-export type WenlanReleaseAssetId = (typeof RELEASE_ASSET_IDS)[number];
+export {
+  OPTIONAL_RELEASE_ASSET_IDS,
+  RELEASE_ASSET_IDS,
+  type WenlanReleaseAssetId,
+} from "./release-asset-ids";
 
 export interface WenlanReleaseAsset {
   id: WenlanReleaseAssetId;
@@ -56,6 +55,8 @@ interface AssetDefinition {
   id: WenlanReleaseAssetId;
   format: string;
   fileName: (version: string) => string;
+  /** Published only by some releases; never part of the bundled fallback. */
+  optional?: { guidePath: string };
 }
 
 const ASSET_DEFINITIONS: readonly AssetDefinition[] = [
@@ -80,6 +81,18 @@ const ASSET_DEFINITIONS: readonly AssetDefinition[] = [
     fileName: () => "wenlan-darwin-arm64.tar.gz",
   },
   {
+    id: "linux-appimage-x64",
+    format: "APPIMAGE",
+    fileName: (version) => `Wenlan_${version}_amd64.AppImage`,
+    optional: { guidePath: "docs/setup-and-data.md#installation" },
+  },
+  {
+    id: "linux-deb-x64",
+    format: "DEB",
+    fileName: (version) => `Wenlan_${version}_amd64.deb`,
+    optional: { guidePath: "docs/setup-and-data.md#installation" },
+  },
+  {
     id: "linux-x64",
     format: "TAR.GZ",
     fileName: () => "wenlan-linux-x64.tar.gz",
@@ -90,6 +103,10 @@ const ASSET_DEFINITIONS: readonly AssetDefinition[] = [
     fileName: () => "wenlan-linux-arm64.tar.gz",
   },
 ];
+
+const REQUIRED_ASSET_IDS = ASSET_DEFINITIONS.filter(
+  (definition) => !definition.optional,
+).map((definition) => definition.id);
 
 const SUPPORT_ASSET_NAMES = (version: string) => [
   "latest.json",
@@ -153,12 +170,19 @@ function validateBundledAssetContract(): void {
     invalid("bundled published timestamp is invalid");
   }
   if (
-    bundledIds.length !== RELEASE_ASSET_IDS.length ||
-    RELEASE_ASSET_IDS.some((id) => !bundledIds.includes(id))
+    ASSET_DEFINITIONS.length !== RELEASE_ASSET_IDS.length ||
+    ASSET_DEFINITIONS.some((definition, index) => definition.id !== RELEASE_ASSET_IDS[index])
   ) {
-    invalid("bundled release asset IDs do not match the six website assets");
+    invalid("asset definitions do not match the website asset IDs");
+  }
+  if (
+    bundledIds.length !== REQUIRED_ASSET_IDS.length ||
+    REQUIRED_ASSET_IDS.some((id) => !(bundledIds as readonly string[]).includes(id))
+  ) {
+    invalid("bundled release asset IDs do not match the six required website assets");
   }
   for (const definition of ASSET_DEFINITIONS) {
+    if (definition.optional) continue;
     const asset = bundledAsset(definition.id);
     if (asset.format !== definition.format) {
       invalid(`bundled asset format differs for ${definition.id}`);
@@ -259,6 +283,21 @@ export function normalizePublishedRelease(input: unknown): WenlanRelease {
   const manifestAssets: WenlanReleaseAsset[] = [];
   for (const definition of ASSET_DEFINITIONS) {
     const expected = expectedAsset(definition, version, tag);
+    if (definition.optional) {
+      const listed = assets.some(
+        (candidate) => isRecord(candidate) && candidate.name === expected.name,
+      );
+      if (!listed) continue;
+      const published = requirePublishedAsset(assets, expected.name, expected.href, definition.id);
+      manifestAssets.push({
+        id: definition.id,
+        href: expected.href,
+        format: definition.format,
+        size: bytesToMiB(published.size),
+        guideHref: `${RELEASE_REPOSITORY}/blob/${tag}/${definition.optional.guidePath}`,
+      });
+      continue;
+    }
     const published = requirePublishedAsset(assets, expected.name, expected.href, definition.id);
     const source = bundledAsset(definition.id);
     manifestAssets.push({

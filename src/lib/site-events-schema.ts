@@ -1,4 +1,4 @@
-import { WENLAN_RELEASE } from "@/lib/releases";
+import { RELEASE_ASSET_IDS } from "@/lib/release-asset-ids";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/locales";
 import { stripLocalePrefix, SITE_URL } from "@/i18n/routing";
 import sitemap from "@/app/sitemap";
@@ -121,7 +121,7 @@ export type SiteEventValidationResult =
   | SiteEventValidationFailure;
 
 const LOCALE_SET = new Set<string>(SUPPORTED_LOCALES);
-const RELEASE_ASSET_SET = new Set<string>(WENLAN_RELEASE.assets.map((asset) => asset.id));
+const RELEASE_ASSET_SET = new Set<string>(RELEASE_ASSET_IDS);
 const HISTORY_PAGE_MAP = new Map<string, Locale>(
   Object.entries(history.paths).map(([pathname, locale]) => [pathname, locale as Locale]),
 );

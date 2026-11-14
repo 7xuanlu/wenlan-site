@@ -75,7 +75,7 @@ export const enContent = {
         eyebrow: "Download",
         title: "Download Wenlan for your system.",
         description:
-          "Wenlan v0.20.2 ships a Windows x64 desktop build and a macOS Apple silicon DMG, plus headless runtime builds for Windows, macOS, and Linux.",
+          "Wenlan v0.20.2 ships desktop apps for Windows x64, macOS Apple silicon, and Linux x64, plus headless runtime builds for Windows, macOS, and Linux.",
         stableLabel: "Stable",
         releaseNotesLabel: "Release notes",
         packageIncludesLabel: "CLI · daemon · MCP connector",
@@ -147,8 +147,38 @@ export const enContent = {
             ],
           },
           {
+            id: "linux-appimage-x64",
+            name: "Wenlan Desktop",
+            architecture: "Linux · x64 · AppImage",
+            description:
+              "Read and organize your pages and files in the desktop app. Needs glibc 2.39 or newer, such as Ubuntu 24.04 or Fedora 40.",
+            actionLabel: "Download for Linux",
+            packageIncludesLabel: "Desktop app · bundled runtime",
+            guideLabel: "Open the Linux install guide",
+            setupSteps: [
+              "Download the AppImage and make it executable: chmod +x Wenlan_*.AppImage",
+              "Open it. The app starts its bundled daemon and offers to connect detected AI clients.",
+              "If it does not open, check that the system has glibc 2.39 or newer and WebKitGTK 4.1.",
+            ],
+          },
+          {
+            id: "linux-deb-x64",
+            name: "Wenlan Desktop",
+            architecture: "Linux · x64 · .deb",
+            description:
+              "The same desktop app as a .deb package for Debian 13 and Ubuntu 24.04 or newer.",
+            actionLabel: "Download .deb",
+            packageIncludesLabel: "Desktop app · bundled runtime",
+            guideLabel: "Open the Linux install guide",
+            setupSteps: [
+              "Download the .deb package.",
+              "Install it: sudo apt install ./Wenlan_*_amd64.deb",
+              "Open Wenlan from the app menu. The app starts its bundled daemon and offers to connect detected AI clients.",
+            ],
+          },
+          {
             id: "linux-x64",
-            name: "Linux",
+            name: "Linux runtime",
             architecture: "x64 · glibc",
             description: "Prebuilt runtime for common x86_64 Linux systems.",
             actionLabel: "Download Linux x64",
@@ -160,7 +190,7 @@ export const enContent = {
           },
           {
             id: "linux-arm64",
-            name: "Linux",
+            name: "Linux runtime",
             architecture: "ARM64 · glibc",
             description: "Prebuilt runtime for aarch64 Linux systems.",
             actionLabel: "Download Linux ARM64",
@@ -182,7 +212,7 @@ export const enContent = {
           seo: {
             title: "Download Wenlan for Windows, macOS, and Linux",
             description:
-              "Download the Wenlan desktop app for Windows x64 or macOS Apple silicon, or install the headless CLI, local daemon, and MCP connector for Windows, macOS, and Linux.",
+              "Download the Wenlan desktop app for Windows x64, macOS Apple silicon, or Linux x64, or install the headless CLI, local daemon, and MCP connector for Windows, macOS, and Linux.",
           },
           breadcrumbs: {
             home: "Home",
@@ -194,7 +224,7 @@ export const enContent = {
             "Download the desktop app, open Wenlan, and start adding pages and files.",
           buildsTitle: "Choose your download",
           buildsDescription:
-            "The desktop app supports Windows x64 and macOS Apple silicon. Linux and CLI options are below.",
+            "The desktop app supports Windows x64, macOS Apple silicon, and Linux x64. CLI options are below.",
           verifyTitle: "Having trouble installing or connecting?",
           verifyDescription:
             "Use the diagnostic command to check the local service and see the results and suggested next steps.",

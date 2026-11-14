@@ -226,3 +226,58 @@ test("fetchPublishedRelease propagates network, HTTP, JSON, and candidate valida
     /prerelease/,
   );
 });
+
+test("a release that publishes the Linux desktop builds lists them before the Linux runtime", () => {
+  const version = "1.2.3";
+  const tag = `v${version}`;
+  const payload = publishedRelease({ version });
+  payload.assets.push(
+    assetPayload(version, tag, `Wenlan_${version}_amd64.AppImage`, 3 * 1024 * 1024),
+    assetPayload(version, tag, `Wenlan_${version}_amd64.deb`, 4 * 1024 * 1024),
+  );
+
+  const release = normalizePublishedRelease(payload);
+  assert.deepEqual(
+    release.assets.map((asset) => asset.id),
+    [
+      "windows-desktop-x64",
+      "windows-x64",
+      "macos-arm64",
+      "macos-runtime-arm64",
+      "linux-appimage-x64",
+      "linux-deb-x64",
+      "linux-x64",
+      "linux-arm64",
+    ],
+  );
+  const appImage = release.assets.find((asset) => asset.id === "linux-appimage-x64");
+  assert.deepEqual(appImage, {
+    id: "linux-appimage-x64",
+    href: `${DOWNLOAD_BASE}/${tag}/Wenlan_${version}_amd64.AppImage`,
+    format: "APPIMAGE",
+    size: "3.0 MiB",
+    guideHref: `${REPOSITORY}/blob/${tag}/docs/setup-and-data.md#installation`,
+  });
+  const deb = release.assets.find((asset) => asset.id === "linux-deb-x64");
+  assert.equal(deb.format, "DEB");
+  assert.equal(deb.href, `${DOWNLOAD_BASE}/${tag}/Wenlan_${version}_amd64.deb`);
+  assert.deepEqual(inferReleaseDownload(appImage.href), {
+    asset_id: "linux-appimage-x64",
+    release_tag: tag,
+  });
+});
+
+test("a release without the Linux desktop builds still resolves with the six required assets", () => {
+  const release = normalizePublishedRelease(publishedRelease());
+  assert.equal(release.assets.length, 6);
+  assert.ok(!release.assets.some((asset) => asset.id.startsWith("linux-appimage")));
+});
+
+test("a listed Linux desktop build that is not fully uploaded rejects the release", () => {
+  const version = "1.2.3";
+  const payload = publishedRelease({ version });
+  const appImage = assetPayload(version, `v${version}`, `Wenlan_${version}_amd64.AppImage`);
+  appImage.state = "new";
+  payload.assets.push(appImage);
+  assert.throws(() => normalizePublishedRelease(payload), /is not uploaded/);
+});

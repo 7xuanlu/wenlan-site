@@ -1,4 +1,4 @@
-import type { WenlanReleaseAssetId } from "./releases";
+import type { WenlanReleaseAssetId } from "./release-asset-ids";
 
 export type ClientHintData = {
   readonly platform?: string;
@@ -116,15 +116,39 @@ export function orderInstallCommands(
 
 /**
  * Upgrades a headless runtime build to the desktop installer for the same
- * OS when the release publishes one. Unknown ids pass through unchanged.
- * (macOS Apple silicon resolves straight to the DMG build, so only
- * Windows needs the upgrade.)
+ * OS. Unknown ids pass through unchanged. (macOS Apple silicon resolves
+ * straight to the DMG build.) Linux x64 prefers the AppImage, which runs on
+ * any distribution; callers fall back to the runtime with
+ * `findRecommendedPlatform` when a release has no Linux desktop build.
  */
 export function preferDesktopBuild(
   id: WenlanReleaseAssetId | null,
 ): WenlanReleaseAssetId | null {
   if (id === "windows-x64") return "windows-desktop-x64";
+  if (id === "linux-x64") return "linux-appimage-x64";
   return id;
+}
+
+const RUNTIME_FALLBACK: Partial<Record<WenlanReleaseAssetId, WenlanReleaseAssetId>> = {
+  "windows-desktop-x64": "windows-x64",
+  "linux-appimage-x64": "linux-x64",
+};
+
+/**
+ * Finds the recommended build among the published platforms, falling back
+ * to the same system's runtime archive when its desktop build is absent.
+ */
+export function findRecommendedPlatform<T extends { readonly id: string }>(
+  platforms: readonly T[],
+  id: WenlanReleaseAssetId | null,
+): T | null {
+  if (!id) return null;
+  const direct = platforms.find((platform) => platform.id === id);
+  if (direct) return direct;
+  const fallback = RUNTIME_FALLBACK[id];
+  return fallback
+    ? platforms.find((platform) => platform.id === fallback) ?? null
+    : null;
 }
 
 /**
@@ -133,7 +157,12 @@ export function preferDesktopBuild(
  * covers what is inside.
  */
 export function isDesktopApp(id: WenlanReleaseAssetId | null): boolean {
-  return id === "windows-desktop-x64" || id === "macos-arm64";
+  return (
+    id === "windows-desktop-x64" ||
+    id === "macos-arm64" ||
+    id === "linux-appimage-x64" ||
+    id === "linux-deb-x64"
+  );
 }
 
 /**
@@ -197,7 +226,7 @@ export function recommendedReleaseAssetId(
       return "linux-arm64";
     }
     if (/x86_64|x64|amd64/i.test(userAgent)) {
-      return "linux-x64";
+      return "linux-appimage-x64";
     }
   }
 

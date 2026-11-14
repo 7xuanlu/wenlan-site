@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "a105ee8e1f4bdc6063f6d833d9951bd704960d8453a08131a65d977156b8e5c2",
+    sourceHash: "d94e9cdc0a5b17b52e301507bd1839e883be1c62d5af9e8a044412c4abfe1ccb",
     content: {
       seo: {
         title: "文澜 Wenlan｜个人 AI 知识库与 LLM Wiki",
@@ -76,7 +76,7 @@ export const zhCNContent = {
         title:
           "下\u2060载\u2060适\u2060合\u2060你\u2060系\u2060统\u2060的 Wenlan。",
         description:
-          "Wenlan v0.20.2 提供 Windows x64 桌面版与 macOS Apple silicon DMG，以及 Windows、macOS、Linux 的 headless runtime 包。",
+          "Wenlan v0.20.2 提供 Windows x64、macOS Apple silicon 与 Linux x64 桌面版，以及 Windows、macOS、Linux 的 headless runtime 包。",
         stableLabel: "稳定版",
         releaseNotesLabel: "版本说明",
         packageIncludesLabel: "内含 CLI、daemon 与 MCP connector",
@@ -145,8 +145,38 @@ export const zhCNContent = {
             ],
           },
           {
+            id: "linux-appimage-x64",
+            name: "Wenlan 桌面版",
+            architecture: "Linux · x64 · AppImage 版",
+            description:
+              "在桌面 App 阅读、整理笔记与文件。需要 glibc 2.39 以上，例如 Ubuntu 24.04 或 Fedora 40。",
+            actionLabel: "下载 Linux 版",
+            packageIncludesLabel: "桌面 App · 内置 runtime",
+            guideLabel: "打开 Linux 安装指南",
+            setupSteps: [
+              "下载 AppImage，并让它可以运行：chmod +x Wenlan_*.AppImage",
+              "打开它；App 会启动内置 daemon，并提供连接检测到的 AI 客户端。",
+              "如果打不开，请确认系统有 glibc 2.39 以上与 WebKitGTK 4.1。",
+            ],
+          },
+          {
+            id: "linux-deb-x64",
+            name: "Wenlan 桌面版",
+            architecture: "Linux · x64 · .deb 包",
+            description:
+              "同一个桌面 App 的 .deb 包，适用 Debian 13 与 Ubuntu 24.04 以上。",
+            actionLabel: "下载 .deb",
+            packageIncludesLabel: "桌面 App · 内置 runtime",
+            guideLabel: "打开 Linux 安装指南",
+            setupSteps: [
+              "下载 .deb 包。",
+              "安装：sudo apt install ./Wenlan_*_amd64.deb",
+              "从应用程序菜单打开 Wenlan；App 会启动内置 daemon，并提供连接检测到的 AI 客户端。",
+            ],
+          },
+          {
             id: "linux-x64",
-            name: "Linux",
+            name: "Linux 运行环境",
             architecture: "x64 · glibc",
             description: "适用于常见 x86_64 Linux 系统的预编译 runtime。",
             actionLabel: "下载 Linux x64",
@@ -158,7 +188,7 @@ export const zhCNContent = {
           },
           {
             id: "linux-arm64",
-            name: "Linux",
+            name: "Linux 运行环境",
             architecture: "ARM64 · glibc",
             description: "适用于 aarch64 Linux 系统的预编译 runtime。",
             actionLabel: "下载 Linux ARM64",
@@ -179,7 +209,7 @@ export const zhCNContent = {
           seo: {
             title: "下载文澜 Wenlan：Windows、macOS 与 Linux 版",
             description:
-              "下载 Wenlan 桌面 App（Windows x64、macOS Apple silicon），或安装支持 Windows、macOS 与 Linux 的 headless CLI、本地 daemon 与 MCP connector：从 GitHub 正式发布页获取版本，验证后连接你的 AI 工具。",
+              "下载 Wenlan 桌面 App（Windows x64、macOS Apple silicon、Linux x64），或安装支持 Windows、macOS 与 Linux 的 headless CLI、本地 daemon 与 MCP connector：从 GitHub 正式发布页获取版本，验证后连接你的 AI 工具。",
           },
           breadcrumbs: {
             home: "首页",
@@ -190,7 +220,7 @@ export const zhCNContent = {
           description:
             "下载桌面版，打开 Wenlan，开始添加笔记与文件。",
           buildsTitle: "选择你的版本",
-          buildsDescription: "桌面版支持 Windows x64 与 macOS Apple silicon。Linux 与命令行版本见下方。",
+          buildsDescription: "桌面版支持 Windows x64、macOS Apple silicon 与 Linux x64。命令行版本见下方。",
           verifyTitle: "安装或连接遇到问题？",
           verifyDescription:
             "使用诊断命令检查本地服务，查看结果与建议的处理步骤。",
