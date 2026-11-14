@@ -6,11 +6,12 @@ import type { HomeContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
 import {
   detectReleaseAssetId,
+  findRecommendedPlatform,
   isDesktopApp,
   recommendedReleaseAssetId,
   type NavigatorLike,
 } from "@/lib/platform-recommendation";
-import type { WenlanReleaseAssetId } from "@/lib/releases";
+import type { WenlanReleaseAssetId } from "@/lib/release-asset-ids";
 
 type DownloadCopy = HomeContent["download"];
 type PlatformCopy = DownloadCopy["platforms"][number];
@@ -78,10 +79,9 @@ export function DownloadPlatforms({
     };
   }, []);
 
-  const recommendedPlatform =
-    platforms.find((platform) => platform.id === recommendedId) ?? null;
+  const recommendedPlatform = findRecommendedPlatform(platforms, recommendedId);
   const otherPlatforms = recommendedPlatform
-    ? platforms.filter((platform) => platform.id !== recommendedId)
+    ? platforms.filter((platform) => platform.id !== recommendedPlatform.id)
     : [...platforms];
 
   return (

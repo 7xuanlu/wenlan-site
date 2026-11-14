@@ -1,5 +1,6 @@
 "use client";
 
+import { RELEASE_ASSET_IDS } from "./release-asset-ids";
 import history from "./site-events-v1-history.json";
 
 declare global {
@@ -55,7 +56,7 @@ const CONTEXTS = new Set(["home", "concepts", "comparisons", "workflows", "setup
 const LOCALES = new Set(["en", "zh-CN", "zh-TW"]);
 const DESTINATIONS = new Set(["email", "github", "learn", "setup", "video", "example", "comparison", "product"]);
 const PUBLIC_PATHS = new Set(Object.keys(history.paths));
-const ASSET_IDS = new Set(history.assetIds);
+const ASSET_IDS = new Set<string>([...history.assetIds, ...RELEASE_ASSET_IDS]);
 
 function privacySignal(windowRef: AnalyticsWindow): boolean {
   const nav = windowRef.navigator as Navigator & { globalPrivacyControl?: boolean };

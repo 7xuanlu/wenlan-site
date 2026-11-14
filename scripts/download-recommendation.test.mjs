@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 
 import {
   detectReleaseAssetId,
+  findRecommendedPlatform,
   isDesktopApp,
   preferDesktopBuild,
   recommendedReleaseAssetId,
@@ -35,7 +36,7 @@ test("desktop user agents map to one explicit published release asset", () => {
     recommendedReleaseAssetId(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
     ),
-    "linux-x64",
+    "linux-appimage-x64",
   );
   assert.equal(
     recommendedReleaseAssetId(
@@ -153,6 +154,9 @@ test("client hints without a published build fall back to the download hub", () 
 test("desktop app detection covers installers only", () => {
   assert.equal(isDesktopApp("windows-desktop-x64"), true);
   assert.equal(isDesktopApp("macos-arm64"), true);
+  assert.equal(isDesktopApp("linux-appimage-x64"), true);
+  assert.equal(isDesktopApp("linux-deb-x64"), true);
+  assert.equal(isDesktopApp("linux-x64"), false);
   assert.equal(isDesktopApp("windows-x64"), false);
   assert.equal(isDesktopApp("macos-runtime-arm64"), false);
   assert.equal(isDesktopApp("linux-arm64"), false);
@@ -163,7 +167,7 @@ test("desktop upgrades keep the CLI mapping for headless-only platforms", () => 
   assert.equal(preferDesktopBuild("windows-x64"), "windows-desktop-x64");
   assert.equal(preferDesktopBuild("macos-arm64"), "macos-arm64");
   assert.equal(preferDesktopBuild("macos-runtime-arm64"), "macos-runtime-arm64");
-  assert.equal(preferDesktopBuild("linux-x64"), "linux-x64");
+  assert.equal(preferDesktopBuild("linux-x64"), "linux-appimage-x64");
   assert.equal(preferDesktopBuild("linux-arm64"), "linux-arm64");
   assert.equal(preferDesktopBuild(null), null);
 });
@@ -205,7 +209,7 @@ test("detection prefers the desktop installer on Windows", async () => {
   );
 });
 
-test("detection keeps the headless archive where no desktop build exists", async () => {
+test("detection prefers the Linux AppImage on x64 Linux", async () => {
   assert.equal(
     await detectReleaseAssetId({
       userAgent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
@@ -219,8 +223,36 @@ test("detection keeps the headless archive where no desktop build exists", async
         }),
       },
     }),
-    "linux-x64",
+    "linux-appimage-x64",
   );
+});
+
+test("detection keeps the headless archive where no desktop build exists", async () => {
+  assert.equal(
+    await detectReleaseAssetId({
+      userAgent: "Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/537.36",
+      userAgentData: {
+        platform: "Linux",
+        getHighEntropyValues: async () => ({
+          platform: "Linux",
+          architecture: "arm",
+          bitness: "64",
+          mobile: false,
+        }),
+      },
+    }),
+    "linux-arm64",
+  );
+});
+
+test("a release without the Linux desktop build recommends the Linux runtime", () => {
+  const withDesktop = [{ id: "linux-appimage-x64" }, { id: "linux-x64" }];
+  const runtimeOnly = [{ id: "windows-x64" }, { id: "linux-x64" }];
+  assert.equal(findRecommendedPlatform(withDesktop, "linux-appimage-x64")?.id, "linux-appimage-x64");
+  assert.equal(findRecommendedPlatform(runtimeOnly, "linux-appimage-x64")?.id, "linux-x64");
+  assert.equal(findRecommendedPlatform(runtimeOnly, "windows-desktop-x64")?.id, "windows-x64");
+  assert.equal(findRecommendedPlatform(runtimeOnly, "macos-arm64"), null);
+  assert.equal(findRecommendedPlatform(runtimeOnly, null), null);
 });
 
 test("detection falls back to user-agent parsing without client hints", async () => {

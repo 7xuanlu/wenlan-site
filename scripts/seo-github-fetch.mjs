@@ -17,10 +17,15 @@ const RELEASE_ASSETS = [
   ["windows-x64", () => "wenlan-windows-x64.zip"],
   ["macos-arm64", (version) => `Wenlan_${version}_aarch64.dmg`],
   ["macos-runtime-arm64", () => "wenlan-darwin-arm64.tar.gz"],
+  ["linux-appimage-x64", (version) => `Wenlan_${version}_amd64.AppImage`],
+  ["linux-deb-x64", (version) => `Wenlan_${version}_amd64.deb`],
   ["linux-x64", () => "wenlan-linux-x64.tar.gz"],
   ["linux-arm64", () => "wenlan-linux-arm64.tar.gz"],
 ];
 const DESKTOP_GUIDE_ASSETS = new Set(["windows-desktop-x64", "macos-arm64"]);
+// Linux desktop builds appear only in releases that publish them.
+const OPTIONAL_ASSETS = new Set(["linux-appimage-x64", "linux-deb-x64"]);
+const REQUIRED_ASSET_COUNT = RELEASE_ASSETS.length - OPTIONAL_ASSETS.size;
 const execFileAsync = promisify(execFile);
 
 function parseArgs(argv) {
@@ -93,13 +98,20 @@ function requireManifestObject(manifest) {
 
 export function releaseContractFromManifest(input) {
   const manifest = requireManifestObject(input);
-  if (manifest.assets.length !== RELEASE_ASSETS.length) {
-    throw new Error(`Site release manifest must contain exactly ${RELEASE_ASSETS.length} website assets`);
+  if (
+    manifest.assets.length < REQUIRED_ASSET_COUNT ||
+    manifest.assets.length > RELEASE_ASSETS.length ||
+    manifest.assets.some((asset) => !RELEASE_ASSETS.some(([id]) => id === asset?.id))
+  ) {
+    throw new Error(
+      `Site release manifest must contain the ${REQUIRED_ASSET_COUNT} required website assets and only known optional ones`,
+    );
   }
 
   const websiteAssetNames = [];
   for (const [assetId, filenameForVersion] of RELEASE_ASSETS) {
     const assets = manifest.assets.filter((asset) => asset?.id === assetId);
+    if (assets.length === 0 && OPTIONAL_ASSETS.has(assetId)) continue;
     if (assets.length !== 1) {
       throw new Error(`Site release manifest must contain exactly one asset ${assetId}`);
     }
@@ -109,8 +121,13 @@ export function releaseContractFromManifest(input) {
       throw new Error(`Site release asset ${assetId} has the wrong download URL`);
     }
     if (assets[0].guideHref !== undefined) {
-      const expectedGuideHref = `${REPOSITORY_URL}/blob/${manifest.tag}/README.md#desktop-app`;
-      if (!DESKTOP_GUIDE_ASSETS.has(assetId) || assets[0].guideHref !== expectedGuideHref) {
+      const expectedGuideHref = OPTIONAL_ASSETS.has(assetId)
+        ? `${REPOSITORY_URL}/blob/${manifest.tag}/docs/setup-and-data.md#installation`
+        : `${REPOSITORY_URL}/blob/${manifest.tag}/README.md#desktop-app`;
+      if (
+        !(DESKTOP_GUIDE_ASSETS.has(assetId) || OPTIONAL_ASSETS.has(assetId)) ||
+        assets[0].guideHref !== expectedGuideHref
+      ) {
         throw new Error(`Site release asset ${assetId} has the wrong guide URL`);
       }
     }

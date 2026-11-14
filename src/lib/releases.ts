@@ -55,5 +55,4 @@ export const WENLAN_RELEASE = {
   ],
 } as const;
 
-export type WenlanReleaseAssetId =
-  (typeof WENLAN_RELEASE.assets)[number]["id"];
+export type { WenlanReleaseAssetId } from "./release-asset-ids";

@@ -95,6 +95,52 @@ test("deployed release manifests define the website-linked asset contract", () =
   );
 });
 
+test("the release contract accepts a manifest with the optional Linux desktop builds", () => {
+  const assets = [
+    ["windows-desktop-x64", "Wenlan_9.8.7_x64-setup.exe"],
+    ["windows-x64", "wenlan-windows-x64.zip"],
+    ["macos-arm64", "Wenlan_9.8.7_aarch64.dmg"],
+    ["macos-runtime-arm64", "wenlan-darwin-arm64.tar.gz"],
+    ["linux-appimage-x64", "Wenlan_9.8.7_amd64.AppImage"],
+    ["linux-deb-x64", "Wenlan_9.8.7_amd64.deb"],
+    ["linux-x64", "wenlan-linux-x64.tar.gz"],
+    ["linux-arm64", "wenlan-linux-arm64.tar.gz"],
+  ].map(([id, name]) => ({
+    id,
+    href: `https://github.com/wenlan-app/wenlan/releases/download/v9.8.7/${name}`,
+    format: "ZIP",
+    size: "1.0 MiB",
+    ...(id.startsWith("linux-appimage") || id.startsWith("linux-deb")
+      ? { guideHref: "https://github.com/wenlan-app/wenlan/blob/v9.8.7/docs/setup-and-data.md#installation" }
+      : {}),
+  }));
+  const manifest = {
+    version: "9.8.7",
+    tag: "v9.8.7",
+    publishedAt: "2026-09-10T12:34:56Z",
+    releaseUrl: "https://github.com/wenlan-app/wenlan/releases/tag/v9.8.7",
+    setupGuideUrl: "https://github.com/wenlan-app/wenlan/blob/v9.8.7/docs/setup-with-ai.md#install-the-runtime",
+    assets,
+  };
+  assert.deepEqual(releaseContractFromManifest(manifest).websiteAssetNames, [
+    "Wenlan_9.8.7_x64-setup.exe",
+    "wenlan-windows-x64.zip",
+    "Wenlan_9.8.7_aarch64.dmg",
+    "wenlan-darwin-arm64.tar.gz",
+    "Wenlan_9.8.7_amd64.AppImage",
+    "Wenlan_9.8.7_amd64.deb",
+    "wenlan-linux-x64.tar.gz",
+    "wenlan-linux-arm64.tar.gz",
+  ]);
+  assert.throws(
+    () => releaseContractFromManifest({
+      ...manifest,
+      assets: [...assets, { ...assets[0], id: "linux-unknown" }],
+    }),
+    /website assets/,
+  );
+});
+
 test("GitHub metadata links downloads to the deployed manifest rather than the bundled snapshot", () => {
   const manifest = {
     version: "9.8.7",

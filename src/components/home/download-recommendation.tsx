@@ -6,10 +6,11 @@ import type { HomeContent } from "@/i18n/content";
 import type { Locale } from "@/i18n/locales";
 import {
   detectReleaseAssetId,
+  findRecommendedPlatform,
   recommendedReleaseAssetId,
   type NavigatorLike,
 } from "@/lib/platform-recommendation";
-import type { WenlanReleaseAssetId } from "@/lib/releases";
+import type { WenlanReleaseAssetId } from "@/lib/release-asset-ids";
 
 type PlatformCopy = HomeContent["download"]["platforms"][number];
 
@@ -46,7 +47,7 @@ export function DownloadRecommendation({
     };
   }, []);
 
-  const platform = platforms.find((item) => item.id === recommendedId);
+  const platform = findRecommendedPlatform(platforms, recommendedId);
 
   return (
     <div

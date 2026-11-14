@@ -110,6 +110,8 @@ export type HomeContent = SeoContent & {
         | "windows-x64"
         | "macos-arm64"
         | "macos-runtime-arm64"
+        | "linux-appimage-x64"
+        | "linux-deb-x64"
         | "linux-x64"
         | "linux-arm64";
       name: string;
