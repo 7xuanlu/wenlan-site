@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "2e00024a5baccdd123e07741dd8c45fef12e8e9c9cdc0ce4b32921c370608912",
+    sourceHash: "cd20d19e12af14390802806367739ab4bf0dea9a2678fc08c6310731a5c88dfc",
     content: {
       seo: {
         title: "文澜 Wenlan｜不用自己维护的个人 AI 知识库",
@@ -553,9 +553,8 @@ export const zhCNContent = {
           eyebrow: "笔记要一直整理，插件会坏，每次开新对话又要从头解释。",
           headline: { pre: "", emphasis: "不用你维护", post: "的知识库。" },
           description:
-            "设置一次就好。你常用的 AI 工具会把重点存进来、整理成页面，下次对话自己带回来。它改了什么你都看得到，可以撤销。",
+            "设置一次，你的 AI 工具会自己存、自己整理，下次对话带回来。",
           worksWithLabel: "可搭配",
-          obsidianNote: "开源的 Obsidian 替代品，原有的 Obsidian 库也能直接用。",
         },
         fit: {
           "title": "Wenlan 适合你吗？",

@@ -558,9 +558,8 @@ export const enContent = {
           eyebrow: "Notes need constant upkeep, plugins break, and every new AI chat starts from zero.",
           headline: { pre: "The knowledge base you", emphasis: "don't have to maintain.", post: "" },
           description:
-            "Set up once. Your AI tools save what matters, keep your pages organized, and bring it back in your next chat. You see every change and can undo it.",
+            "Set up once. Your AI tools save it, organize it, and bring it back in your next chat.",
           worksWithLabel: "Works with",
-          obsidianNote: "Open-source Obsidian alternative that works with your existing vault.",
         },
         fit: {
           "title": "Is Wenlan for you?",

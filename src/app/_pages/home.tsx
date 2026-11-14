@@ -127,9 +127,6 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
             <p className="home-hero-description mx-auto max-w-2xl text-balance text-[var(--o-text-secondary)]">
               {locale === "en" ? story.heroDescription : <HomeReadableText>{story.heroDescription}</HomeReadableText>}
             </p>
-            <p className="home-hero-obsidian mx-auto mt-3 max-w-2xl text-balance text-sm text-[var(--o-text-muted)]">
-              {redesign.hero.obsidianNote}
-            </p>
           </div>
           <DemoVideo
             key={locale}

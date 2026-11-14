@@ -227,12 +227,6 @@ const comparisonLinks = [
   "/learn/mcp-memory-server",
 ];
 
-const expectedObsidianNotes = {
-  en: "Open-source Obsidian alternative that works with your existing vault.",
-  "zh-TW": "開源的 Obsidian 替代品，原本的 Obsidian 資料夾也能直接用。",
-  "zh-CN": "开源的 Obsidian 替代品，原有的 Obsidian 库也能直接用。",
-};
-
 const oldClaims = {
   en: [
     "every claim cited",
@@ -277,17 +271,17 @@ test("hero leads with useful outcomes and describes knowledge that can be revise
     en: {
       eyebrow: "Notes need constant upkeep, plugins break, and every new AI chat starts from zero.",
       headline: ["The knowledge base you", "don't have to maintain."],
-      description: "Set up once. Your AI tools save what matters, keep your pages organized, and bring it back in your next chat. You see every change and can undo it.",
+      description: "Set up once. Your AI tools save it, organize it, and bring it back in your next chat.",
     },
     "zh-TW": {
       eyebrow: "筆記要一直整理，插件會壞，每次開新對話又要從頭解釋。",
       headline: ["", "不用你維護"],
-      description: "設定一次就好。你平常用的 AI 工具會把重點存進來、整理成頁面，下次對話自己帶回來。它改了什麼你都看得到，可以還原。",
+      description: "設定一次，你的 AI 工具會自己存、自己整理，下次對話帶回來。",
     },
     "zh-CN": {
       eyebrow: "笔记要一直整理，插件会坏，每次开新对话又要从头解释。",
       headline: ["", "不用你维护"],
-      description: "设置一次就好。你常用的 AI 工具会把重点存进来、整理成页面，下次对话自己带回来。它改了什么你都看得到，可以撤销。",
+      description: "设置一次，你的 AI 工具会自己存、自己整理，下次对话带回来。",
     },
   };
   for (const [locale, dictionary] of Object.entries(dictionaryByLocale)) {
@@ -325,10 +319,10 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     );
     // Approved concise hero explains the wiki mechanism, not only the pain.
     assert.equal(home.redesign.hero.description.split(/\s+/).filter(Boolean).length <= 40, true);
-    assert.equal(home.redesign.hero.obsidianNote, expectedObsidianNotes[locale]);
-    assert.match(home.redesign.hero.obsidianNote, /Obsidian/);
+    // The searchable "Obsidian alternative" phrase lives in the meta description.
+    assert.match(home.seo.description, /Obsidian (alternative|替代品)/);
     // Obsidian connections can write accepted changes since v0.20.1; never call them read-only.
-    assert.doesNotMatch(home.redesign.hero.obsidianNote, /read-only|without changing|唯讀|只读|保留原文/i);
+    assert.doesNotMatch(home.seo.description, /read-only|without changing|唯讀|只读|保留原文/i);
     assert.doesNotMatch(
       home.download.description,
       /notarized|已公證的|已公证的/i,

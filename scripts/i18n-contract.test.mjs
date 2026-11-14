@@ -2564,7 +2564,7 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
     [
       "The knowledge base you",
       "don't have to maintain.",
-      "Set up once. Your AI tools save what matters, keep your pages organized, and bring it back in your next chat. You see every change and can undo it.",
+      "Set up once. Your AI tools save it, organize it, and bring it back in your next chat.",
     ],
   );
 
@@ -2577,7 +2577,7 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
         eyebrow: /筆記要一直整理，插件會壞/,
         pre: /^$/,
         emphasis: /不用你維護/,
-        description: "設定一次就好。你平常用的 AI 工具會把重點存進來、整理成頁面，下次對話自己帶回來。它改了什麼你都看得到，可以還原。",
+        description: "設定一次，你的 AI 工具會自己存、自己整理，下次對話帶回來。",
       },
     },
     "zh-CN": {
@@ -2588,7 +2588,7 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
         eyebrow: /笔记要一直整理，插件会坏/,
         pre: /^$/,
         emphasis: /不用你维护/,
-        description: "设置一次就好。你常用的 AI 工具会把重点存进来、整理成页面，下次对话自己带回来。它改了什么你都看得到，可以撤销。",
+        description: "设置一次，你的 AI 工具会自己存、自己整理，下次对话带回来。",
       },
     },
   };
@@ -2619,7 +2619,7 @@ test("Chinese hero names the living knowledge base and setup begins with a concr
 
     assert.match(
       dictionary.home.content.redesign.hero.description,
-      /設定一次就好|设置一次就好/,
+      /設定一次|设置一次/,
       `${locale}.home.hero.description.benefit`,
     );
     assert.match(

@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "2e00024a5baccdd123e07741dd8c45fef12e8e9c9cdc0ce4b32921c370608912",
+    sourceHash: "cd20d19e12af14390802806367739ab4bf0dea9a2678fc08c6310731a5c88dfc",
     content: {
       seo: {
         title: "文瀾 Wenlan｜不用你維護的個人 AI 知識庫",
@@ -553,9 +553,8 @@ export const zhTWContent = {
           eyebrow: "筆記要一直整理，插件會壞，每次開新對話又要從頭解釋。",
           headline: { pre: "", emphasis: "不用你維護", post: "的知識庫。" },
           description:
-            "設定一次就好。你平常用的 AI 工具會把重點存進來、整理成頁面，下次對話自己帶回來。它改了什麼你都看得到，可以還原。",
+            "設定一次，你的 AI 工具會自己存、自己整理，下次對話帶回來。",
           worksWithLabel: "可搭配",
-          obsidianNote: "開源的 Obsidian 替代品，原本的 Obsidian 資料夾也能直接用。",
         },
         fit: {
           "title": "Wenlan 適合你嗎？",
