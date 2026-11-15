@@ -115,9 +115,11 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
       <section className="home-hero relative px-4 pb-6 sm:px-6 sm:pb-8" aria-labelledby="home-heading">
         <div className="mx-auto max-w-6xl">
           <div className="home-hero-copy mx-auto max-w-4xl min-w-0 text-center">
-            <p className="home-hero-eyebrow mx-auto mb-5 max-w-xl text-balance text-[15px] leading-relaxed text-[var(--o-warm)]">
-              {redesign.hero.eyebrow}
-            </p>
+            {redesign.hero.eyebrow ? (
+              <p className="home-hero-eyebrow mx-auto mb-5 max-w-xl text-balance text-[15px] leading-relaxed text-[var(--o-warm)]">
+                {redesign.hero.eyebrow}
+              </p>
+            ) : null}
             <h1 id="home-heading" className={`home-hero-title animate-fade-up motion-reduce:animate-none font-sans font-medium tracking-tight break-words text-balance ${locale === "en" ? "home-hero-title--en" : "home-hero-title--cjk"}`}>
               {redesign.hero.headline.pre ? <span className={locale === "en" ? "inline" : "block"}>{redesign.hero.headline.pre}</span> : null}
               {locale === "en" && redesign.hero.headline.pre ? " " : null}

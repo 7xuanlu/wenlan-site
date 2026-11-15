@@ -2,8 +2,8 @@ import type { Locale } from "@/i18n/locales";
 
 export const storyCopyByLocale = {
   en: {
-    heroDescription: "Set up once. Your AI tools save it, organize it, and bring it back in your next chat.",
-    heroTrust: ["Open source and free", "Works with your Obsidian vault", "Undo any change"],
+    heroDescription: "Pages, skills and rules your AI tools fill, keep live, and work from, drawn any way you ask. For you and your team.",
+    heroTrust: ["Free", "Open source", "For you and your team"],
     heroPrimaryCta: "Download the desktop app",
     heroSecondaryCta: "Connect from your AI tool",
     comparisonLabel: "Compare AI knowledge-base tools",
@@ -42,8 +42,8 @@ export const storyCopyByLocale = {
     moreTechnical: "Retrieval tests and methodology",
   },
   "zh-TW": {
-    heroDescription: "設定一次，你的 AI 工具會自己存、自己整理，下次對話帶回來。",
-    heroTrust: ["開源免費", "接上你的 Obsidian 資料夾", "改了什麼都能還原"],
+    heroDescription: "頁面、技能和規則，由你的 AI 工具填起來、保持更新、拿來做事，樣子你說、AI 來畫。個人和團隊都能用。",
+    heroTrust: ["免費", "開源", "個人和團隊都能用"],
     heroPrimaryCta: "下載桌面版",
     heroSecondaryCta: "從你的 AI 工具連上",
     comparisonLabel: "比較 AI 知識庫工具",
@@ -82,8 +82,8 @@ export const storyCopyByLocale = {
     moreTechnical: "檢索評測與測試範圍",
   },
   "zh-CN": {
-    heroDescription: "设置一次，你的 AI 工具会自己存、自己整理，下次对话带回来。",
-    heroTrust: ["开源免费", "接上你的 Obsidian 库", "改了什么都能撤销"],
+    heroDescription: "页面、技能和规则，由你的 AI 工具填起来、保持更新、拿来做事，样子你说、AI 来画。个人和团队都能用。",
+    heroTrust: ["免费", "开源", "个人和团队都能用"],
     heroPrimaryCta: "下载桌面版",
     heroSecondaryCta: "从你的 AI 工具连接",
     comparisonLabel: "比较 AI 知识库工具",

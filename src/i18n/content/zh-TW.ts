@@ -11,12 +11,12 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "cd20d19e12af14390802806367739ab4bf0dea9a2678fc08c6310731a5c88dfc",
+    sourceHash: "cd512a404988b815c24ba8d77d8ddd9902bb0cd67a56dccba0dd624042d9696d",
     content: {
       seo: {
-        title: "文瀾 Wenlan｜不用你維護的個人 AI 知識庫",
+        title: "文瀾 Wenlan｜和 AI 一起想、學、做的知識庫工作室",
         description:
-          "文瀾是不用你維護的個人 AI 知識庫。一鍵連上 Claude Code、Codex、ChatGPT 等 AI 工具，不用裝插件；想寫就自己寫，其他交給 AI 整理。開源的 Obsidian 替代品。",
+          "文瀾 Wenlan 是你和 AI 一起想、一起學、一起做的工作室。頁面、技能和規則由你的 AI 工具填起來、保持更新、拿來做事。個人和團隊都能用，開源免費。",
       },
       nav: {
         schemaName: "Wenlan 文瀾網站導覽",
@@ -550,10 +550,10 @@ export const zhTWContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "筆記要一直整理，插件會壞，每次開新對話又要從頭解釋。",
-          headline: { pre: "", emphasis: "不用你維護", post: "的知識庫。" },
+          eyebrow: "",
+          headline: { pre: "你和 AI", emphasis: "一起想、一起學、一起做", post: "的工作室。" },
           description:
-            "設定一次，你的 AI 工具會自己存、自己整理，下次對話帶回來。",
+            "頁面、技能和規則，由你的 AI 工具填起來、保持更新、拿來做事，樣子你說、AI 來畫。個人和團隊都能用。",
           worksWithLabel: "可搭配",
         },
         fit: {

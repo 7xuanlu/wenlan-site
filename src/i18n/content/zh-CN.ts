@@ -11,12 +11,12 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "cd20d19e12af14390802806367739ab4bf0dea9a2678fc08c6310731a5c88dfc",
+    sourceHash: "cd512a404988b815c24ba8d77d8ddd9902bb0cd67a56dccba0dd624042d9696d",
     content: {
       seo: {
-        title: "文澜 Wenlan｜不用自己维护的个人 AI 知识库",
+        title: "文澜 Wenlan｜和 AI 一起想、学、做的知识库工作室",
         description:
-          "文澜是不用你操心维护的个人 AI 知识库。一键连接 Claude Code、Codex、ChatGPT 等 AI 工具，不用装插件；想写就自己写，剩下的交给 AI 整理。开源的 Obsidian 替代品。",
+          "文澜 Wenlan 是你和 AI 一起想、一起学、一起做的工作室。页面、技能和规则由你的 AI 工具填起来、保持更新、拿来做事。个人和团队都能用，开源免费。",
       },
       nav: {
         schemaName: "Wenlan 文澜网站导航",
@@ -550,10 +550,10 @@ export const zhCNContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "笔记要一直整理，插件会坏，每次开新对话又要从头解释。",
-          headline: { pre: "", emphasis: "不用你维护", post: "的知识库。" },
+          eyebrow: "",
+          headline: { pre: "你和 AI", emphasis: "一起想、一起学、一起做", post: "的工作室。" },
           description:
-            "设置一次，你的 AI 工具会自己存、自己整理，下次对话带回来。",
+            "页面、技能和规则，由你的 AI 工具填起来、保持更新、拿来做事，样子你说、AI 来画。个人和团队都能用。",
           worksWithLabel: "可搭配",
         },
         fit: {

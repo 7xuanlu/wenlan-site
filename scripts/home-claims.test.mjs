@@ -266,27 +266,27 @@ const oldClaims = {
   ],
 };
 
-test("hero leads with useful outcomes and describes knowledge that can be revised without an accuracy guarantee", () => {
+test("hero names the studio and describes knowledge that can be revised without an accuracy guarantee", () => {
   const expected = {
     en: {
-      eyebrow: "Notes need constant upkeep, plugins break, and every new AI chat starts from zero.",
-      headline: ["The knowledge base you", "don't have to maintain."],
-      description: "Set up once. Your AI tools save it, organize it, and bring it back in your next chat.",
+      eyebrow: "",
+      headline: ["A studio for everything you", "think, learn, and build"],
+      description: "Pages, skills and rules your AI tools fill, keep live, and work from, drawn any way you ask. For you and your team.",
     },
     "zh-TW": {
-      eyebrow: "筆記要一直整理，插件會壞，每次開新對話又要從頭解釋。",
-      headline: ["", "不用你維護"],
-      description: "設定一次，你的 AI 工具會自己存、自己整理，下次對話帶回來。",
+      eyebrow: "",
+      headline: ["你和 AI", "一起想、一起學、一起做"],
+      description: "頁面、技能和規則，由你的 AI 工具填起來、保持更新、拿來做事，樣子你說、AI 來畫。個人和團隊都能用。",
     },
     "zh-CN": {
-      eyebrow: "笔记要一直整理，插件会坏，每次开新对话又要从头解释。",
-      headline: ["", "不用你维护"],
-      description: "设置一次，你的 AI 工具会自己存、自己整理，下次对话带回来。",
+      eyebrow: "",
+      headline: ["你和 AI", "一起想、一起学、一起做"],
+      description: "页面、技能和规则，由你的 AI 工具填起来、保持更新、拿来做事，样子你说、AI 来画。个人和团队都能用。",
     },
   };
   for (const [locale, dictionary] of Object.entries(dictionaryByLocale)) {
     const hero = dictionary.home.content.redesign.hero;
-    assert.equal(hero.eyebrow, expected[locale].eyebrow, `${locale}: product category`);
+    assert.equal(hero.eyebrow, expected[locale].eyebrow, `${locale}: no pain-line eyebrow`);
     assert.deepEqual([hero.headline.pre, hero.headline.emphasis], expected[locale].headline, `${locale}: benefit-led headline`);
     assert.equal(hero.description, expected[locale].description, `${locale}: dictionary hero description`);
     assert.equal(storyCopyByLocale[locale].heroDescription, expected[locale].description, `${locale}: rendered hero description`);
@@ -319,8 +319,9 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     );
     // Approved concise hero explains the wiki mechanism, not only the pain.
     assert.equal(home.redesign.hero.description.split(/\s+/).filter(Boolean).length <= 40, true);
-    // The searchable "Obsidian alternative" phrase lives in the meta description.
-    assert.match(home.seo.description, /Obsidian (alternative|替代品)/);
+    // The approved studio description names the licence instead of the Obsidian phrase.
+    assert.match(home.seo.description, /open source|開源|开源/i);
+    assert.match(home.seo.description, /Wenlan|文瀾|文澜|AI/);
     // Obsidian connections can write accepted changes since v0.20.1; never call them read-only.
     assert.doesNotMatch(home.seo.description, /read-only|without changing|唯讀|只读|保留原文/i);
     assert.doesNotMatch(

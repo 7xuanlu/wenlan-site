@@ -14,9 +14,9 @@ export const enContent = {
     sourceHash: null,
     content: {
       seo: {
-        title: "Wenlan | The AI Knowledge Base You Don't Have to Maintain",
+        title: "Wenlan | AI Knowledge Base Studio for You and Your Team",
         description:
-          "The knowledge base you don't have to maintain. An open-source Obsidian alternative that connects to your AI tools in one click, with no plugins to set up.",
+          "A studio for everything you think, learn, and build with AI. Your AI tools fill pages, skills and rules, keep them live, and work from them. Free and open source.",
       },
       nav: {
         schemaName: "Wenlan site navigation",
@@ -555,10 +555,10 @@ export const enContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "Notes need constant upkeep, plugins break, and every new AI chat starts from zero.",
-          headline: { pre: "The knowledge base you", emphasis: "don't have to maintain.", post: "" },
+          eyebrow: "",
+          headline: { pre: "A studio for everything you", emphasis: "think, learn, and build", post: " with AI." },
           description:
-            "Set up once. Your AI tools save it, organize it, and bring it back in your next chat.",
+            "Pages, skills and rules your AI tools fill, keep live, and work from, drawn any way you ask. For you and your team.",
           worksWithLabel: "Works with",
         },
         fit: {

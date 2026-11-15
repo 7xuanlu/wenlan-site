@@ -2540,21 +2540,18 @@ test("Chinese home surfaces include script-specific Wenlan Chinese names", async
   }
 });
 
-test("home SEO copy presents LLM wiki positioning and the benefit-led hero in all locales", async () => {
+test("home SEO copy and hero present the studio positioning in all locales", async () => {
   const { content } = await loadI18nModules();
 
   assert.equal(
     content.enContent.home.content.seo.title,
-    "Wenlan | The AI Knowledge Base You Don't Have to Maintain",
+    "Wenlan | AI Knowledge Base Studio for You and Your Team",
   );
   assert.equal(
     content.enContent.home.content.seo.description,
-    "The knowledge base you don't have to maintain. An open-source Obsidian alternative that connects to your AI tools in one click, with no plugins to set up.",
+    "A studio for everything you think, learn, and build with AI. Your AI tools fill pages, skills and rules, keep them live, and work from them. Free and open source.",
   );
-  assert.match(
-    content.enContent.home.content.redesign.hero.eyebrow,
-    /Notes need constant upkeep, plugins break, and every new AI chat starts from zero\./,
-  );
+  assert.equal(content.enContent.home.content.redesign.hero.eyebrow, "");
   assert.deepEqual(
     [
       content.enContent.home.content.redesign.hero.headline.pre,
@@ -2562,9 +2559,9 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
       content.enContent.home.content.redesign.hero.description,
     ],
     [
-      "The knowledge base you",
-      "don't have to maintain.",
-      "Set up once. Your AI tools save it, organize it, and bring it back in your next chat.",
+      "A studio for everything you",
+      "think, learn, and build",
+      "Pages, skills and rules your AI tools fill, keep live, and work from, drawn any way you ask. For you and your team.",
     ],
   );
 
@@ -2574,10 +2571,10 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
       sourceBacked: "有來源依據",
       staleHomePhrase: /活個人知識庫|AI-native/,
       hero: {
-        eyebrow: /筆記要一直整理，插件會壞/,
-        pre: /^$/,
-        emphasis: /不用你維護/,
-        description: "設定一次，你的 AI 工具會自己存、自己整理，下次對話帶回來。",
+        eyebrow: /^$/,
+        pre: /^你和 AI$/,
+        emphasis: /一起想、一起學、一起做/,
+        description: "頁面、技能和規則，由你的 AI 工具填起來、保持更新、拿來做事，樣子你說、AI 來畫。個人和團隊都能用。",
       },
     },
     "zh-CN": {
@@ -2585,10 +2582,10 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
       sourceBacked: "有来源依据",
       staleHomePhrase: /活个人知识库|AI-native/,
       hero: {
-        eyebrow: /笔记要一直整理，插件会坏/,
-        pre: /^$/,
-        emphasis: /不用你维护/,
-        description: "设置一次，你的 AI 工具会自己存、自己整理，下次对话带回来。",
+        eyebrow: /^$/,
+        pre: /^你和 AI$/,
+        emphasis: /一起想、一起学、一起做/,
+        description: "页面、技能和规则，由你的 AI 工具填起来、保持更新、拿来做事，样子你说、AI 来画。个人和团队都能用。",
       },
     },
   };
@@ -2598,9 +2595,9 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
     const renderedHome = JSON.stringify(home);
 
     assert.match(home.seo.title, new RegExp(`^${localeExpected.name} Wenlan｜`), `${locale}.home.seo.title.brand`);
-    assert.match(home.seo.title, /個人 AI 知識庫|个人 AI 知识库/, `${locale}.home.seo.title`);
-    assert.match(home.seo.title, /不用你維護|不用自己维护/, `${locale}.home.seo.title.promise`);
-    assert.match(home.seo.description, /Obsidian/, `${locale}.home.seo.description`);
+    assert.match(home.seo.title, /知識庫工作室|知识库工作室/, `${locale}.home.seo.title`);
+    assert.match(home.seo.title, /和 AI 一起想、學、做|和 AI 一起想、学、做/, `${locale}.home.seo.title.promise`);
+    assert.match(home.seo.description, /個人和團隊都能用|个人和团队都能用/, `${locale}.home.seo.description`);
     assert.match(home.seo.description, new RegExp(localeExpected.name), `${locale}.home.seo.description.name`);
     assert.match(home.redesign.hero.eyebrow, localeExpected.hero.eyebrow, `${locale}.home.hero.category`);
     assert.match(home.redesign.hero.headline.pre, localeExpected.hero.pre, `${locale}.home.hero.knowledge`);
@@ -2611,7 +2608,7 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
   }
 });
 
-test("Chinese hero names the living knowledge base and setup begins with a concrete decision", async () => {
+test("Chinese hero names the studio for pages, skills and rules and setup begins with a concrete decision", async () => {
   const { content } = await loadI18nModules();
 
   for (const locale of ["zh-TW", "zh-CN"]) {
@@ -2619,7 +2616,7 @@ test("Chinese hero names the living knowledge base and setup begins with a concr
 
     assert.match(
       dictionary.home.content.redesign.hero.description,
-      /設定一次|设置一次/,
+      /頁面、技能和規則|页面、技能和规则/,
       `${locale}.home.hero.description.benefit`,
     );
     assert.match(
@@ -2821,11 +2818,11 @@ test("English core content records the current SEO title and description subset"
 
   assert.equal(
     content.enContent.home.content.seo.title,
-    "Wenlan | The AI Knowledge Base You Don't Have to Maintain",
+    "Wenlan | AI Knowledge Base Studio for You and Your Team",
   );
   assert.equal(
     content.enContent.home.content.seo.description,
-    "The knowledge base you don't have to maintain. An open-source Obsidian alternative that connects to your AI tools in one click, with no plugins to set up.",
+    "A studio for everything you think, learn, and build with AI. Your AI tools fill pages, skills and rules, keep them live, and work from them. Free and open source.",
   );
   assert.equal(
     content.enContent.about.content.seo.title,
