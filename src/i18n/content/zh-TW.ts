@@ -1017,7 +1017,7 @@ export const zhTWContent = {
     sourceHash: "c419a8d6420fd6d195d4efc1e2fae8a3e1aea1deef6506c0b9b32783e94141d2",
     content: {
       seo: {
-        title: "關於文瀾 Wenlan：你和 AI 一起想、學、做的開源地方",
+        title: "關於文瀾 Wenlan：開源的 AI 記憶、技能和知識庫",
         description:
           "Wenlan 是開源的地方，讓你和 AI 一起想、一起學、一起做。有出處的頁面、技能和規則，由你的 AI 工具保持更新、拿來做事。個人和團隊都能用，支援 Windows、macOS 與 Linux，免費下載。",
       },
