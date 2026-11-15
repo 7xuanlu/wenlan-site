@@ -558,7 +558,7 @@ export const enContent = {
           eyebrow: "",
           headline: { pre: "A studio for everything you", emphasis: "think, learn, and build", post: " with AI." },
           description:
-            "Pages, skills and rules your AI tools fill, keep live, and work from, drawn any way you ask. For you and your team.",
+            "Pages with sources, skills and rules your AI tools keep up to date and work from, drawn any way you ask. For you and your team.",
           worksWithLabel: "Works with",
         },
         fit: {

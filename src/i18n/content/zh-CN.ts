@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "cd512a404988b815c24ba8d77d8ddd9902bb0cd67a56dccba0dd624042d9696d",
+    sourceHash: "d06322ba9994412f2ab94fa3e72bdd3afe1b90ed791db7e0ff5dc82319c1e345",
     content: {
       seo: {
         title: "文澜 Wenlan｜和 AI 一起想、学、做的知识库工作室",
@@ -553,7 +553,7 @@ export const zhCNContent = {
           eyebrow: "",
           headline: { pre: "你和 AI", emphasis: "一起想、一起学、一起做", post: "的工作室。" },
           description:
-            "页面、技能和规则，由你的 AI 工具填起来、保持更新、拿来做事，样子你说、AI 来画。个人和团队都能用。",
+            "有出处的页面、技能和规则，由你的 AI 工具保持更新、拿来做事，样子你说、AI 来画。个人和团队都能用。",
           worksWithLabel: "可搭配",
         },
         fit: {

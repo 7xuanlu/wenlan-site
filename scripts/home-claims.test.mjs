@@ -271,17 +271,17 @@ test("hero names the studio and describes knowledge that can be revised without 
     en: {
       eyebrow: "",
       headline: ["A studio for everything you", "think, learn, and build"],
-      description: "Pages, skills and rules your AI tools fill, keep live, and work from, drawn any way you ask. For you and your team.",
+      description: "Pages with sources, skills and rules your AI tools keep up to date and work from, drawn any way you ask. For you and your team.",
     },
     "zh-TW": {
       eyebrow: "",
       headline: ["你和 AI", "一起想、一起學、一起做"],
-      description: "頁面、技能和規則，由你的 AI 工具填起來、保持更新、拿來做事，樣子你說、AI 來畫。個人和團隊都能用。",
+      description: "有出處的頁面、技能和規則，由你的 AI 工具保持更新、拿來做事，樣子你說、AI 來畫。個人和團隊都能用。",
     },
     "zh-CN": {
       eyebrow: "",
       headline: ["你和 AI", "一起想、一起学、一起做"],
-      description: "页面、技能和规则，由你的 AI 工具填起来、保持更新、拿来做事，样子你说、AI 来画。个人和团队都能用。",
+      description: "有出处的页面、技能和规则，由你的 AI 工具保持更新、拿来做事，样子你说、AI 来画。个人和团队都能用。",
     },
   };
   for (const [locale, dictionary] of Object.entries(dictionaryByLocale)) {

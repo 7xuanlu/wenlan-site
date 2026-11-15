@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "cd512a404988b815c24ba8d77d8ddd9902bb0cd67a56dccba0dd624042d9696d",
+    sourceHash: "d06322ba9994412f2ab94fa3e72bdd3afe1b90ed791db7e0ff5dc82319c1e345",
     content: {
       seo: {
         title: "文瀾 Wenlan｜和 AI 一起想、學、做的知識庫工作室",
@@ -553,7 +553,7 @@ export const zhTWContent = {
           eyebrow: "",
           headline: { pre: "你和 AI", emphasis: "一起想、一起學、一起做", post: "的工作室。" },
           description:
-            "頁面、技能和規則，由你的 AI 工具填起來、保持更新、拿來做事，樣子你說、AI 來畫。個人和團隊都能用。",
+            "有出處的頁面、技能和規則，由你的 AI 工具保持更新、拿來做事，樣子你說、AI 來畫。個人和團隊都能用。",
           worksWithLabel: "可搭配",
         },
         fit: {
