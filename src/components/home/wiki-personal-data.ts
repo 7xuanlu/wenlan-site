@@ -92,7 +92,7 @@ const copy: Record<Locale, Copy> = {
   en: {
     groups: { ai: "AI collaboration", personal: "Personal knowledge", product: "Product research" },
     notes: {
-      "Agent Loop": { title: "Agent Loop", tags: ["AI collaboration", "Working methods"], body: `# Agent Loop\n\nHow a layout fix became reusable knowledge for next time.\n\n## How the issue surfaced\n\nOpening the right sidebar shifted the first line of the article to the left. Each page calculated its width separately: Wiki was fixed, while Memory and Topic were missed.\n\n## Keep a decision that can be reused\n\nKeep the article's left edge fixed. When the sidebar opens, reduce only the available width on the right so text wraps naturally; use one shared container across all four reading views.\n\nConnect this decision to [[產品原則]], record the review steps in [[介面驗收]], and carry them into the next change with [[工作交接]].\n\n**Memories kept from this work**\n\n[${refs.en[sourceIds.layout]}](#demo:${sourceIds.layout}) · [${refs.en[sourceIds.container]}](#demo:${sourceIds.container}) · [${refs.en[sourceIds.acceptance]}](#demo:${sourceIds.acceptance})` },
+      "Agent Loop": { title: "Agent Loop", tags: ["AI collaboration", "Working methods"], body: `# Agent Loop\n\nHow a layout fix became reusable knowledge for next time.\n\n## How the issue surfaced\n\nOpening the right sidebar shifted the first line of the article to the left. Each page calculated its width separately: Library was fixed, while Memory and Topic were missed.\n\n## Keep a decision that can be reused\n\nKeep the article's left edge fixed. When the sidebar opens, reduce only the available width on the right so text wraps naturally; use one shared container across all four reading views.\n\nConnect this decision to [[產品原則]], record the review steps in [[介面驗收]], and carry them into the next change with [[工作交接]].\n\n**Memories kept from this work**\n\n[${refs.en[sourceIds.layout]}](#demo:${sourceIds.layout}) · [${refs.en[sourceIds.container]}](#demo:${sourceIds.container}) · [${refs.en[sourceIds.acceptance]}](#demo:${sourceIds.acceptance})` },
       "AI 工作方式": { title: "Working with AI", tags: ["AI collaboration", "Working methods"], body: `# Working with AI\n\nStart from the specific decision recorded in [[Agent Loop]], so the project context does not need to be rebuilt every time.\n\nThe reading-layout fix is recorded in [[產品原則]], and the review steps are in [[介面驗收]].\n\n**Related memories**\n\n[${refs.en[sourceIds.layout]}](#demo:${sourceIds.layout}) · [${refs.en[sourceIds.container]}](#demo:${sourceIds.container}) · [${refs.en[sourceIds.acceptance]}](#demo:${sourceIds.acceptance})` },
       "工作交接": { title: "Work handoff", tags: ["AI collaboration", "Working methods"], body: "# Work handoff\n\nKeep what is finished, why a decision was made, and what remains unresolved.\n\nLet the next [[Agent Loop]] start from work already done; use [[每週回顧]] to bring it together each week." },
       "重試策略": { title: "Retry strategy", tags: ["AI collaboration", "Working methods"], body: "# Retry strategy\n\nWhen the same error happens twice, look for its cause first.\n\nA retry in [[Agent Loop]] should use new evidence. Repeating the same action is not a new attempt." },
@@ -106,14 +106,14 @@ const copy: Record<Locale, Copy> = {
     },
     memories: {
       [sourceIds.layout]: { title: "Keep the article in place", body: "When the right sidebar opens, keep the article's left edge fixed. Reduce only the available width on the right so the text wraps naturally; readers should not have to find the first line again." },
-      [sourceIds.container]: { title: "One reading container for four views", body: "Memory, Topic, Wiki, and Sources share typography, line spacing, and the article container. When fixing layout, do not fix only the page currently in view." },
+      [sourceIds.container]: { title: "One reading container for four views", body: "Memory, Topic, Library, and Sources share typography, line spacing, and the article container. When fixing layout, do not fix only the page currently in view." },
       [sourceIds.acceptance]: { title: "Check the sidebar in review", body: "For each reading-layout change, open all four views, toggle the right sidebar, and check wrapping and reference previews at a narrow viewport." },
     },
   },
   "zh-TW": {
     groups: { ai: "AI 協作", personal: "個人知識", product: "產品研究" },
     notes: {
-      "Agent Loop": { title: "Agent Loop", tags: ["AI 協作", "工作方法"], body: `# Agent Loop\n\n一次排版修復，如何變成下次能直接用的經驗。\n\n## 問題是怎麼發現的\n\n打開右側欄後，文章的句首向左跳動。各頁面分別計算寬度，修好 Wiki，卻漏掉 Memory 和 Topic。\n\n## 留下可重用的決定\n\n固定正文的左側起點。側欄開啟時只縮小右側寬度，讓文字自然換行；四種閱讀頁共用同一個容器。\n\n這項決定連到 [[產品原則]]，檢查方式寫進 [[介面驗收]]，再由 [[工作交接]] 帶到下一次修改。\n\n**留下的記憶**\n\n[${refs["zh-TW"][sourceIds.layout]}](#demo:${sourceIds.layout}) · [${refs["zh-TW"][sourceIds.container]}](#demo:${sourceIds.container}) · [${refs["zh-TW"][sourceIds.acceptance]}](#demo:${sourceIds.acceptance})` },
+      "Agent Loop": { title: "Agent Loop", tags: ["AI 協作", "工作方法"], body: `# Agent Loop\n\n一次排版修復，如何變成下次能直接用的經驗。\n\n## 問題是怎麼發現的\n\n打開右側欄後，文章的句首向左跳動。各頁面分別計算寬度，修好 檔案，卻漏掉 Memory 和 Topic。\n\n## 留下可重用的決定\n\n固定正文的左側起點。側欄開啟時只縮小右側寬度，讓文字自然換行；四種閱讀頁共用同一個容器。\n\n這項決定連到 [[產品原則]]，檢查方式寫進 [[介面驗收]]，再由 [[工作交接]] 帶到下一次修改。\n\n**留下的記憶**\n\n[${refs["zh-TW"][sourceIds.layout]}](#demo:${sourceIds.layout}) · [${refs["zh-TW"][sourceIds.container]}](#demo:${sourceIds.container}) · [${refs["zh-TW"][sourceIds.acceptance]}](#demo:${sourceIds.acceptance})` },
       "AI 工作方式": { title: "AI 工作方式", tags: ["AI 協作", "工作方法"], body: `# AI 工作方式\n\n從 [[Agent Loop]] 留下的具體決定開始，不必每次重建脈絡。\n\n閱讀排版的修正記在 [[產品原則]]，檢查流程放在 [[介面驗收]]。\n\n**相關記憶**\n\n[${refs["zh-TW"][sourceIds.layout]}](#demo:${sourceIds.layout}) · [${refs["zh-TW"][sourceIds.container]}](#demo:${sourceIds.container}) · [${refs["zh-TW"][sourceIds.acceptance]}](#demo:${sourceIds.acceptance})` },
       "工作交接": { title: "工作交接", tags: ["AI 協作", "工作方法"], body: "# 工作交接\n\n保存已完成的事、做決定的理由，以及尚未解決的問題。\n\n讓下一次 [[Agent Loop]] 從已有成果開始；每週再透過 [[每週回顧]] 整理。" },
       "重試策略": { title: "重試策略", tags: ["AI 協作", "工作方法"], body: "# 重試策略\n\n同一種錯誤出現兩次，就先查原因。\n\n在 [[Agent Loop]] 裡，重試應該帶著新的證據；重複執行同一個動作，不算新的嘗試。" },
@@ -127,14 +127,14 @@ const copy: Record<Locale, Copy> = {
     },
     memories: {
       [sourceIds.layout]: { title: "側欄不推移正文", body: "開啟右側欄時，保留正文的左側起點；只縮小右側寬度，讓文字自然換行。讀者不必重新找句首。" },
-      [sourceIds.container]: { title: "四種頁面共用閱讀容器", body: "Memory、Topic、Wiki 與 Sources 共用字體、行距與正文容器。修正排版時，不能只修正在看的那一頁。" },
+      [sourceIds.container]: { title: "四種頁面共用閱讀容器", body: "Memory、Topic、檔案 與 Sources 共用字體、行距與正文容器。修正排版時，不能只修正在看的那一頁。" },
       [sourceIds.acceptance]: { title: "驗收包含側欄開關", body: "每次調整閱讀排版，都要實際打開四種頁面，切換右側欄，並檢查窄視窗下的換行與引用預覽。" },
     },
   },
   "zh-CN": {
     groups: { ai: "AI 协作", personal: "个人知识", product: "产品研究" },
     notes: {
-      "Agent Loop": { title: "Agent Loop", tags: ["AI 协作", "工作方法"], body: `# Agent Loop\n\n一次排版修复，如何变成下次能直接用的经验。\n\n## 问题是怎么发现的\n\n打开右侧栏后，文章的句首向左跳动。各页面分别计算宽度，修好 Wiki，却漏掉 Memory 和 Topic。\n\n## 留下可重复使用的决定\n\n固定正文左侧的起点。侧栏打开时只缩小右侧宽度，让文字自然换行；四种阅读页共用同一个容器。\n\n这项决定连接到 [[產品原則]]，检查方式写进 [[介面驗收]]，再由 [[工作交接]] 带到下一次修改。\n\n**留下的记忆**\n\n[${refs["zh-CN"][sourceIds.layout]}](#demo:${sourceIds.layout}) · [${refs["zh-CN"][sourceIds.container]}](#demo:${sourceIds.container}) · [${refs["zh-CN"][sourceIds.acceptance]}](#demo:${sourceIds.acceptance})` },
+      "Agent Loop": { title: "Agent Loop", tags: ["AI 协作", "工作方法"], body: `# Agent Loop\n\n一次排版修复，如何变成下次能直接用的经验。\n\n## 问题是怎么发现的\n\n打开右侧栏后，文章的句首向左跳动。各页面分别计算宽度，修好 文件，却漏掉 Memory 和 Topic。\n\n## 留下可重复使用的决定\n\n固定正文左侧的起点。侧栏打开时只缩小右侧宽度，让文字自然换行；四种阅读页共用同一个容器。\n\n这项决定连接到 [[產品原則]]，检查方式写进 [[介面驗收]]，再由 [[工作交接]] 带到下一次修改。\n\n**留下的记忆**\n\n[${refs["zh-CN"][sourceIds.layout]}](#demo:${sourceIds.layout}) · [${refs["zh-CN"][sourceIds.container]}](#demo:${sourceIds.container}) · [${refs["zh-CN"][sourceIds.acceptance]}](#demo:${sourceIds.acceptance})` },
       "AI 工作方式": { title: "AI 工作方式", tags: ["AI 协作", "工作方法"], body: `# AI 工作方式\n\n从 [[Agent Loop]] 留下的具体决定开始，不必每次重建上下文。\n\n阅读排版的修正记在 [[產品原則]]，检查流程放在 [[介面驗收]]。\n\n**相关记忆**\n\n[${refs["zh-CN"][sourceIds.layout]}](#demo:${sourceIds.layout}) · [${refs["zh-CN"][sourceIds.container]}](#demo:${sourceIds.container}) · [${refs["zh-CN"][sourceIds.acceptance]}](#demo:${sourceIds.acceptance})` },
       "工作交接": { title: "工作交接", tags: ["AI 协作", "工作方法"], body: "# 工作交接\n\n保存已完成的事、做决定的理由，以及尚未解决的问题。\n\n让下一次 [[Agent Loop]] 从已有成果开始；每周再通过 [[每週回顧]] 整理。" },
       "重試策略": { title: "重试策略", tags: ["AI 协作", "工作方法"], body: "# 重试策略\n\n同一种错误出现两次，就先查原因。\n\n在 [[Agent Loop]] 里，重试应该带着新的证据；重复执行同一个动作，不算新的尝试。" },
@@ -148,7 +148,7 @@ const copy: Record<Locale, Copy> = {
     },
     memories: {
       [sourceIds.layout]: { title: "侧栏不推移正文", body: "打开右侧栏时，保留正文左侧的起点；只缩小右侧宽度，让文字自然换行。读者不必重新寻找句首。" },
-      [sourceIds.container]: { title: "四种页面共用阅读容器", body: "Memory、Topic、Wiki 与 Sources 共用字体、行距和正文容器。修正排版时，不能只修正在看的那一页。" },
+      [sourceIds.container]: { title: "四种页面共用阅读容器", body: "Memory、Topic、文件 与 Sources 共用字体、行距和正文容器。修正排版时，不能只修正在看的那一页。" },
       [sourceIds.acceptance]: { title: "验收包含侧栏开关", body: "每次调整阅读排版，都要实际打开四种页面，切换右侧栏，并检查窄视窗下的换行与引用预览。" },
     },
   },
@@ -228,7 +228,7 @@ function agentLoopSources(locale: Locale): DemoResource[] {
       tags: [labels.tag], relatedIds: ["page-agent-loop"] },
     { id: "file-reading-review", kind: "file", title: labels.file,
       location: "reading / reading-review.md", href: english ? "/images/home/personal-knowledge/reading-review.en.md" : "/images/home/personal-knowledge/reading-review.md",
-      body: english ? readingReviewMarkdownEn : "# 閱讀排版驗收\n\n這是示範知識庫的驗收筆記。\n\n- 開關右側欄，正文的左側起點保持不變。\n- 在 Memory、Topic、Wiki、Sources 分別檢查字體、行距與換行。\n- 將視窗縮窄，再確認引用預覽沒有遮住閱讀中的段落。\n\n參考：W3C WCAG 2.2 的 Reflow 說明。此檢查清單不等同完整的 WCAG 符合性認證。",
+      body: english ? readingReviewMarkdownEn : "# 閱讀排版驗收\n\n這是示範知識庫的驗收筆記。\n\n- 開關右側欄，正文的左側起點保持不變。\n- 在 Memory、Topic、檔案、Sources 分別檢查字體、行距與換行。\n- 將視窗縮窄，再確認引用預覽沒有遮住閱讀中的段落。\n\n參考：W3C WCAG 2.2 的 Reflow 說明。此檢查清單不等同完整的 WCAG 符合性認證。",
       tags: [labels.tag], relatedIds: ["page-agent-loop"] },
   ];
 }

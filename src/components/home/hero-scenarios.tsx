@@ -67,12 +67,12 @@ const copy: Record<Locale, HeroScenariosCopy> = {
     citationLabel: "Jump to supplied source",
     sourceExcerptLabel: "Supplied excerpt",
     originalSourceLabel: "Read the study",
-    knowledgePageLabel: "Wiki page",
+    knowledgePageLabel: "Page",
     viewKnowledgeLabel: "Expand",
     hideKnowledgeLabel: "Collapse",
     askAiLabel: "You ask AI",
     consultWenlanLabel: "AI consults Wenlan",
-    aiAnswerLabel: "AI answers from the wiki",
+    aiAnswerLabel: "AI answers from Wenlan",
     scenes: [
       {
         id: "engineering",
@@ -222,12 +222,12 @@ const copy: Record<Locale, HeroScenariosCopy> = {
     citationLabel: "跳至提供的來源",
     sourceExcerptLabel: "提供的摘錄",
     originalSourceLabel: "閱讀原研究",
-    knowledgePageLabel: "筆記",
+    knowledgePageLabel: "頁面",
     viewKnowledgeLabel: "展開",
     hideKnowledgeLabel: "收起",
     askAiLabel: "你問 AI",
     consultWenlanLabel: "AI 查閱文瀾",
-    aiAnswerLabel: "AI 根據筆記回答",
+    aiAnswerLabel: "AI 根據頁面回答",
     scenes: [
       {
         id: "engineering",
@@ -376,12 +376,12 @@ const copy: Record<Locale, HeroScenariosCopy> = {
     citationLabel: "跳至提供的来源",
     sourceExcerptLabel: "提供的摘录",
     originalSourceLabel: "阅读原研究",
-    knowledgePageLabel: "笔记",
+    knowledgePageLabel: "页面",
     viewKnowledgeLabel: "展开",
     hideKnowledgeLabel: "收起",
     askAiLabel: "你问 AI",
     consultWenlanLabel: "AI 查阅文澜",
-    aiAnswerLabel: "AI 根据笔记回答",
+    aiAnswerLabel: "AI 根据页面回答",
     scenes: [
       {
         id: "engineering",

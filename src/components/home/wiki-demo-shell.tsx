@@ -5,9 +5,9 @@ import { nativeDemoIconPaths } from "./native-demo-icon-paths";
 
 export type DemoDestination = "wiki" | "search" | "spaces" | "graph" | "sources" | "memories" | "topics";
 export const shellCopy = {
-  en: { navigation: "Navigation", wiki: "Wiki", search: "Search", spaces: "Spaces", graph: "Graph", sources: "Sources", memories: "Memories", topics: "Topics", more: "More", query: "Search pages, memories, sources…", none: "No matching content", back: "Back to page", project: "Lumo launch project", demo: "Fictional personal library" },
-  "zh-TW": { navigation: "導覽", wiki: "Wiki", search: "搜尋", spaces: "空間", graph: "圖譜", sources: "來源", memories: "記憶", topics: "主題", more: "更多", query: "搜尋頁面、記憶、來源…", none: "沒有符合的內容", back: "返回知識頁", project: "Lumo 發佈專案", demo: "虛構個人知識庫" },
-  "zh-CN": { navigation: "导航", wiki: "Wiki", search: "搜索", spaces: "空间", graph: "图谱", sources: "来源", memories: "记忆", topics: "主题", more: "更多", query: "搜索页面、记忆、来源…", none: "没有匹配的内容", back: "返回知识页", project: "Lumo 发布项目", demo: "虚构个人知识库" },
+  en: { navigation: "Navigation", wiki: "Library", search: "Search", spaces: "Spaces", graph: "Graph", sources: "Sources", memories: "Memories", topics: "Topics", more: "More", query: "Search pages, memories, sources…", none: "No matching content", back: "Back to page", project: "Lumo launch project", demo: "Fictional personal library" },
+  "zh-TW": { navigation: "導覽", wiki: "檔案", search: "搜尋", spaces: "空間", graph: "圖譜", sources: "來源", memories: "記憶", topics: "主題", more: "更多", query: "搜尋頁面、記憶、來源…", none: "沒有符合的內容", back: "返回知識頁", project: "Lumo 發佈專案", demo: "虛構個人知識庫" },
+  "zh-CN": { navigation: "导航", wiki: "文件", search: "搜索", spaces: "空间", graph: "图谱", sources: "来源", memories: "记忆", topics: "主题", more: "更多", query: "搜索页面、记忆、来源…", none: "没有匹配的内容", back: "返回知识页", project: "Lumo 发布项目", demo: "虚构个人知识库" },
 } as const;
 
 export function ShellIcon({ name }: { name: DemoDestination | "more" | "back" | "forward" }) {

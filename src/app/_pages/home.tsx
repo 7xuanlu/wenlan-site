@@ -24,7 +24,7 @@ import { homeSectionHeadClass, homeSectionTitleClass } from "@/components/home/s
 
 const integrationCopy = {
   en: {
-    title: "Your files stay on your computer.",
+    title: "Pages are plain files you keep.",
     contextLabel: "Context per query",
     tokenUnit: "Tokens measure text length.",
     recallTitle: "Retrieval coverage",
@@ -33,12 +33,12 @@ const integrationCopy = {
     recallScope: "LongMemEval (oracle) · 500 questions",
     metricsLink: "Evaluation & methodology",
     recallLabel: "Average coverage of labeled relevant material in the top 5.",
-    ownershipBody: "Your pages, memories, and graph are stored on your computer. Pages are readable Markdown you can open in your own editor.",
+    ownershipBody: "Your pages, memories, and graph are stored on your computer. Pages are Markdown files you can open in any editor.",
     modelBody: "You decide which AI tools can read them.",
     ownershipLink: "How local storage works",
   },
   "zh-TW": {
-    title: "檔案留在你的電腦上。",
+    title: "頁面是你留得住的檔案。",
     contextLabel: "每次查詢的背景內容",
     tokenUnit: "Token 計算文字長度。",
     recallTitle: "相關資料覆蓋率",
@@ -47,12 +47,12 @@ const integrationCopy = {
     recallScope: "LongMemEval（oracle）· 500 題",
     metricsLink: "查看完整評測與方法",
     recallLabel: "前 5 筆結果對標註相關資料的平均覆蓋率。",
-    ownershipBody: "筆記、記憶和圖譜都存在你的電腦上。筆記是一般的 Markdown 檔，用你自己的編輯器就能打開。",
+    ownershipBody: "頁面、記憶和圖譜都存在你的電腦上。頁面是一般的 Markdown 檔，用任何編輯器都能打開。",
     modelBody: "哪些 AI 工具能讀，由你決定。",
     ownershipLink: "了解本機資料儲存",
   },
   "zh-CN": {
-    title: "文件留在你的电脑上。",
+    title: "页面是你留得住的文件。",
     contextLabel: "每次查询的背景内容",
     tokenUnit: "Token 计算文字长度。",
     recallTitle: "相关资料覆盖率",
@@ -61,7 +61,7 @@ const integrationCopy = {
     recallScope: "LongMemEval（oracle）· 500 题",
     metricsLink: "查看完整评测与方法",
     recallLabel: "前 5 条结果对标注相关资料的平均覆盖率。",
-    ownershipBody: "笔记、记忆和图谱都存在你的电脑上。笔记是普通的 Markdown 文件，用你自己的编辑器就能打开。",
+    ownershipBody: "页面、记忆和图谱都存在你的电脑上。页面是普通的 Markdown 文件，用任何编辑器都能打开。",
     modelBody: "哪些 AI 工具能读，由你决定。",
     ownershipLink: "了解本地数据存储",
   },

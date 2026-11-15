@@ -414,7 +414,7 @@ export const enContent = {
         },
         features: {
           eyebrow: "Knowledge pages",
-          title: "Let what you learn carry forward.",
+          title: "One shared place for your AI tools.",
           body: "Cleaned decisions and lessons become durable pages instead of buried chat logs. They are organized enough for agents to use and concrete enough for humans to read.",
           note: "Your work stops being transcript history and starts becoming project knowledge.",
         },
@@ -426,8 +426,8 @@ export const enContent = {
         },
         openSourceCta: {
           eyebrow: "Open source",
-          title: "Try Wenlan with your own notes.",
-          body: "Add a page or file, then connect the AI tool you already use.",
+          title: "Try it on your own project.",
+          body: "Use the desktop app or just the command line, then connect the AI tools you already use, like Claude Code, Codex, or ChatGPT.",
           note: "Runtime and plugins: Apache-2.0. Desktop app: AGPL-3.0-only.",
           primaryCta: { id: "download", href: "/download", label: "Download" },
           secondaryCta: {
@@ -918,43 +918,43 @@ export const enContent = {
           cells: [
             {
               id: "steep",
-              title: "Your AI tool writes the pages",
-              body: "Your AI tool turns notes, files, and chats into cited pages as it works, and /wenlan steep finishes the rest. No extra model needed. Prefer the background? Automatic uses a model you pick.",
+              title: "Your AI tools write the pages",
+              body: "As they work, your AI tools turn notes, files, and chats into pages with sources. Run /wenlan steep to finish the rest.",
             },
             {
               id: "lock",
-              title: "Your own writing stays yours",
-              body: "Pages you wrote or edited are set to Ask me first: AI changes wait for your OK. Pages AI wrote keep updating on their own.",
+              title: "You see every change",
+              body: "You can undo any change. You decide which pages the AI may change. Pages you wrote are set to Ask me first.",
             },
             {
               id: "repo-wiki",
-              title: "Your code gets a wiki too",
-              body: "Run /wenlan wiki in a repository. Your AI tool writes pages with diagrams, each tied to the code lines it relies on. When that code changes, the pages are flagged and your AI tool updates them, daily on GitHub if you like.",
+              title: "Your code gets pages too",
+              body: "Ask your AI tool for pages about a repository, with diagrams tied to the code lines they rely on. When that code changes, the pages are flagged for an update.",
             },
             {
               id: "sources",
               title: "Bring what you already have",
-              body: "Notes apps, files, AI chats, links, and code. Wenlan keeps each source with its link, so pages can cite it.",
+              body: "Notes apps, files, AI chats, links, and code. Each source keeps its link, so pages can cite it.",
             },
             {
               id: "obsidian",
-              title: "Keep using your Obsidian vault",
-              body: "Connect your vault and Wenlan follows changes in the background. It never edits your existing notes without your OK.",
+              title: "Connect your Obsidian vault",
+              body: "Edits you make in Wenlan write back to your .md files. Wenlan follows changes to the vault in the background.",
             },
             {
               id: "tools",
-              title: "Switch tools. Keep your knowledge.",
-              body: "Claude Code, Codex, Cursor, and other AI tools use the same pages and memories through plugins or MCP. Change tools anytime; your knowledge stays.",
+              title: "Your AI tools share one place",
+              body: "Claude Code, Codex, ChatGPT, and more work from the same pages and memories. Switch tools anytime. Teammates connect their own from an invite page, no app needed.",
             },
             {
               id: "web-access",
               title: "Web Access",
-              body: "Let supported web AI tools search your Wenlan knowledge on your computer, and write to it if you allow. Keep Wenlan online while you work.",
+              body: "Let supported web AI tools search your Wenlan on your computer, and write to it if you allow. Keep Wenlan online while you work.",
             },
             {
               id: "spaces",
-              title: "A space for each project",
-              body: "Keep projects, research, and personal knowledge in separate Spaces. Choose the context your AI retrieves.",
+              title: "A space for each project or team",
+              body: "Keep projects, research, and personal pages in separate Spaces. A team can share one Wenlan, and each person has their own identity.",
             },
             {
               id: "topics",
@@ -963,8 +963,8 @@ export const enContent = {
             },
             {
               id: "history",
-              title: "See how your knowledge changed",
-              body: "Revisit page revisions and earlier memories.",
+              title: "See how pages changed",
+              body: "Revisit earlier versions of a page and the memories behind it. Undo a change you don't want.",
             },
           ],
         },

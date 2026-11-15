@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "e9c4155b6e4f42d6307a1beb7bed5c6607fa93bb0ce9e733101b49d11a063ba0",
+    sourceHash: "802e9a8f0f9e0f634afde0f1872fa48e925c0034873015b76088e9c00071a08e",
     content: {
       seo: {
         title: "文瀾 Wenlan｜開源的 AI 記憶、技能和知識庫，個人和團隊都能用",
@@ -411,7 +411,7 @@ export const zhTWContent = {
         },
         features: {
           eyebrow: "知識頁面",
-          title: "留下的知識，接著用下去。",
+          title: "你的 AI 工具共用的地方。",
           body: "整理過的決策與教訓會成為耐用頁面，而不是被埋在聊天記錄裡。它們足夠有組織，agent 能使用；也足夠具體，人可以閱讀。",
           note: "你的工作不再只是 transcript 歷史，而是開始變成專案知識。",
         },
@@ -423,8 +423,8 @@ export const zhTWContent = {
         },
         openSourceCta: {
           eyebrow: "開源",
-          title: "用你自己的筆記試試 Wenlan。",
-          body: "匯入筆記或文件，再接上你常用的 AI 工具。",
+          title: "拿你自己的專案試試。",
+          body: "用桌面版，或只用命令列，再接上你常用的 AI 工具，像 Claude Code、Codex 或 ChatGPT。",
           note: "執行核心與 plugins：Apache-2.0。桌面 App：AGPL-3.0-only。",
           primaryCta: { id: "download", href: "/download", label: "下載" },
           secondaryCta: {
@@ -913,53 +913,53 @@ export const zhTWContent = {
           cells: [
             {
               id: "steep",
-              title: "Steep 沉澱：AI 工具幫你寫筆記",
-              body: "你的 AI 工具在工作時，順手把素材、檔案和對話寫成附引用的筆記；剩下的用 /wenlan steep 一次沉澱完成，不用另外的模型。想在背景跑，就選「自動沉澱」，用你挑的模型。",
+              title: "你的 AI 工具來寫頁面",
+              body: "AI 工具一邊工作，一邊把素材、檔案和對話寫成附出處的頁面。剩下的用 /wenlan steep 完成。",
             },
             {
               id: "lock",
-              title: "你寫的，還是你的",
-              body: "你寫過或改過的筆記設為「先問我」：AI 要改，會先等你同意。AI 寫的筆記照常自己更新。",
+              title: "每個改動你都看得到",
+              body: "改動都能復原，哪些頁面讓 AI 改，由你決定。你寫的頁面預設為「先問我」。",
             },
             {
               id: "repo-wiki",
-              title: "程式碼也有 wiki",
-              body: "在程式庫裡執行 /wenlan wiki，AI 工具會寫出附圖表的筆記，每篇都連到它依據的程式碼行。程式碼一改，筆記就會被標出來，由 AI 工具更新；想要的話，也能在 GitHub 上每天更新。",
+              title: "程式碼也有頁面",
+              body: "請 AI 工具為程式庫寫頁面，附圖表，每篇都連到它依據的程式碼行。程式碼一改，頁面就會被標出來等著更新。",
             },
             {
               id: "sources",
               title: "帶進你已有的資料",
-              body: "筆記軟體、檔案、AI 對話、連結和程式碼。Wenlan 保留每個來源和它的連結，筆記才能引用。",
+              body: "筆記軟體、檔案、AI 對話、連結和程式碼。每個來源都保留連結，頁面才能引用。",
             },
             {
               id: "obsidian",
-              title: "繼續用你的 Obsidian 筆記庫",
-              body: "連接筆記庫後，Wenlan 會在背景跟上變更；沒有你同意，不會改動你原有的筆記。",
+              title: "接上你的 Obsidian 筆記庫",
+              body: "你在 Wenlan 做的修改會寫回原來的 .md 檔。筆記庫有變動，Wenlan 會在背景跟上。",
             },
             {
               id: "tools",
-              title: "換工具，知識還在。",
-              body: "Claude Code、Codex、Cursor 等 AI 工具透過外掛或 MCP 用同一批筆記和記憶。隨時換工具，知識都留著。",
+              title: "你的 AI 工具共用同一處",
+              body: "Claude Code、Codex、ChatGPT 等用同一批頁面和記憶。隨時換工具。團隊成員從邀請頁連上自己的工具，不用裝 App。",
             },
             {
               id: "web-access",
               title: "Web Access 網頁存取",
-              body: "讓支援的網頁 AI 搜尋你電腦上的文瀾知識，經你允許也能寫入；使用時讓 Wenlan 保持在線。",
+              body: "讓支援的網頁 AI 搜尋你電腦上的 Wenlan，經你允許也能寫入；使用時讓 Wenlan 保持在線。",
             },
             {
               id: "spaces",
-              title: "每個專案，都有自己的脈絡",
-              body: "用 Spaces 分開專案、研究與個人知識；選定空間，讓 AI 檢索這次工作需要的脈絡。",
+              title: "每個專案或團隊，一個空間",
+              body: "用 Spaces 分開專案、研究與個人頁面。團隊可以共用一個 Wenlan，每個人有自己的身分。",
             },
             {
               id: "topics",
               title: "主題總覽",
-              body: "聚合相關筆記，沿著主題之間的關聯繼續探索。",
+              body: "聚合相關頁面，沿著主題之間的關聯繼續探索。",
             },
             {
               id: "history",
-              title: "改變有跡可循",
-              body: "回看筆記的修訂，追溯記憶被取代的經過。",
+              title: "頁面怎麼改的，看得到",
+              body: "回看頁面的舊版本和背後的記憶。不想要的改動可以復原。",
             },
           ],
         },

@@ -41,7 +41,7 @@ const memory = {
   },
   container: {
     title: 'One reading container for four views',
-    body: "Memory, Topic, Wiki, and Sources share the same typography, line spacing, and article container. When you fix the layout, don't fix only the page you happen to be looking at.",
+    body: "Memory, Topic, Library, and Sources share the same typography, line spacing, and article container. When you fix the layout, don't fix only the page you happen to be looking at.",
   },
   clipping: {
     title: 'Clippings keep the URL and date',
@@ -66,7 +66,7 @@ export const readingReviewMarkdownEn = `# Reading layout review
 This is the review checklist for the demo library.
 
 - Open and close the right sidebar; the article's left edge stays put.
-- Check typography, line spacing, and wrapping in Memory, Topic, Wiki, and Sources.
+- Check typography, line spacing, and wrapping in Memory, Topic, Library, and Sources.
 - Narrow the window, then confirm the citation preview doesn't cover the paragraph being read.
 
 Reference: W3C WCAG 2.2, Reflow. This checklist is not a full WCAG conformance certification.`;

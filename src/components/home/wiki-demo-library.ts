@@ -23,7 +23,7 @@ const recoveredRevisions: Record<Locale, Record<string, RecoveredRevisionData>> 
       at: "2026-10-13T01:26:41.583814+00:00",
       summary: "加入可重用的決定與記憶連結。",
       detail: "較早版本保留了「下次不用重新想一遍」一節，以及三則記憶連結；目前版本縮短了結尾，讓決定與來源更直接。",
-      body: `# Agent Loop\n\n一次排版修復，如何變成下次能直接用的經驗。\n\n## 問題是怎麼發現的\n\n打開右側欄後，文章的句首向左跳動。各頁面分別計算寬度，修好 Wiki，卻漏掉 Memory 和 Topic。\n\n## 留下可重用的決定\n\n固定正文的左側起點。側欄開啟時只縮小右側寬度，讓文字自然換行；四種閱讀頁共用同一個容器。\n\n這項決定連到 [[產品原則]]，檢查方式寫進 [[介面驗收]]，再由 [[工作交接]] 帶到下一次修改。\n\n## 下次不用重新想一遍\n\n調整閱讀版面時，先取回這次的決定和驗收方式，再開始改動。\n\n**這次留下的記憶**\n\n[側欄不推移正文](#demo:mem_8434be7eda44) · [共用閱讀容器](#demo:mem_a5229d9e467d) · [側欄開關也要驗收](#demo:mem_a0a619f5e4cb)`,
+      body: `# Agent Loop\n\n一次排版修復，如何變成下次能直接用的經驗。\n\n## 問題是怎麼發現的\n\n打開右側欄後，文章的句首向左跳動。各頁面分別計算寬度，修好 檔案，卻漏掉 Memory 和 Topic。\n\n## 留下可重用的決定\n\n固定正文的左側起點。側欄開啟時只縮小右側寬度，讓文字自然換行；四種閱讀頁共用同一個容器。\n\n這項決定連到 [[產品原則]]，檢查方式寫進 [[介面驗收]]，再由 [[工作交接]] 帶到下一次修改。\n\n## 下次不用重新想一遍\n\n調整閱讀版面時，先取回這次的決定和驗收方式，再開始改動。\n\n**這次留下的記憶**\n\n[側欄不推移正文](#demo:mem_8434be7eda44) · [共用閱讀容器](#demo:mem_a5229d9e467d) · [側欄開關也要驗收](#demo:mem_a0a619f5e4cb)`,
       sourceIds: ["mem_8434be7eda44", "mem_a5229d9e467d", "mem_a0a619f5e4cb"],
     },
     "ai-work-style": {
@@ -42,7 +42,7 @@ const recoveredRevisions: Record<Locale, Record<string, RecoveredRevisionData>> 
       at: "2026-10-13T01:26:41.583814+00:00",
       summary: "Added a reusable decision and links to its memories.",
       detail: "This earlier version kept a ‘No need to rethink it next time’ section and three memory links. The current version shortens the ending so the decision and sources are more direct.",
-      body: `# Agent Loop\n\nHow a layout fix became reusable knowledge for next time.\n\n## How the issue surfaced\n\nOpening the right sidebar shifted the first line of the article to the left. Each page calculated its width separately: Wiki was fixed, while Memory and Topic were missed.\n\n## Keep a decision that can be reused\n\nKeep the article's left edge fixed. When the sidebar opens, reduce only the available width on the right so text wraps naturally; use one shared container across all four reading views.\n\nConnect this decision to [[產品原則]], record the review steps in [[介面驗收]], and carry them into the next change with [[工作交接]].\n\n## No need to rethink it next time\n\nBefore changing the reading layout, retrieve this decision and its review steps.\n\n**Memories kept from this work**\n\n[Keep the article in place](#demo:mem_8434be7eda44) · [One reading container for four views](#demo:mem_a5229d9e467d) · [Check the sidebar in review](#demo:mem_a0a619f5e4cb)`,
+      body: `# Agent Loop\n\nHow a layout fix became reusable knowledge for next time.\n\n## How the issue surfaced\n\nOpening the right sidebar shifted the first line of the article to the left. Each page calculated its width separately: Library was fixed, while Memory and Topic were missed.\n\n## Keep a decision that can be reused\n\nKeep the article's left edge fixed. When the sidebar opens, reduce only the available width on the right so text wraps naturally; use one shared container across all four reading views.\n\nConnect this decision to [[產品原則]], record the review steps in [[介面驗收]], and carry them into the next change with [[工作交接]].\n\n## No need to rethink it next time\n\nBefore changing the reading layout, retrieve this decision and its review steps.\n\n**Memories kept from this work**\n\n[Keep the article in place](#demo:mem_8434be7eda44) · [One reading container for four views](#demo:mem_a5229d9e467d) · [Check the sidebar in review](#demo:mem_a0a619f5e4cb)`,
       sourceIds: ["mem_8434be7eda44", "mem_a5229d9e467d", "mem_a0a619f5e4cb"],
     },
     "ai-work-style": {
@@ -61,7 +61,7 @@ const recoveredRevisions: Record<Locale, Record<string, RecoveredRevisionData>> 
       at: "2026-10-13T01:26:41.583814+00:00",
       summary: "加入可重复使用的决定与记忆链接。",
       detail: "较早版本保留了「下次不用重新想一遍」一节，以及三则记忆链接；当前版本缩短了结尾，让决定与来源更直接。",
-      body: `# Agent Loop\n\n一次排版修复，如何变成下次能直接使用的经验。\n\n## 问题是怎么发现的\n\n打开右侧栏后，文章的句首向左跳动。各页面分别计算宽度，修好 Wiki，却漏掉 Memory 和 Topic。\n\n## 留下可重复使用的决定\n\n固定正文左侧的起点。侧栏打开时只缩小右侧宽度，让文字自然换行；四种阅读页共用同一个容器。\n\n这项决定连接到 [[產品原則]]，检查方式写进 [[介面驗收]]，再由 [[工作交接]] 带到下一次修改。\n\n## 下次不用重新想一遍\n\n调整阅读版面时，先取回这次的决定和验收方式，再开始修改。\n\n**这次留下的记忆**\n\n[侧栏不推移正文](#demo:mem_8434be7eda44) · [四种页面共用阅读容器](#demo:mem_a5229d9e467d) · [验收包含侧栏开关](#demo:mem_a0a619f5e4cb)`,
+      body: `# Agent Loop\n\n一次排版修复，如何变成下次能直接使用的经验。\n\n## 问题是怎么发现的\n\n打开右侧栏后，文章的句首向左跳动。各页面分别计算宽度，修好 文件，却漏掉 Memory 和 Topic。\n\n## 留下可重复使用的决定\n\n固定正文左侧的起点。侧栏打开时只缩小右侧宽度，让文字自然换行；四种阅读页共用同一个容器。\n\n这项决定连接到 [[產品原則]]，检查方式写进 [[介面驗收]]，再由 [[工作交接]] 带到下一次修改。\n\n## 下次不用重新想一遍\n\n调整阅读版面时，先取回这次的决定和验收方式，再开始修改。\n\n**这次留下的记忆**\n\n[侧栏不推移正文](#demo:mem_8434be7eda44) · [四种页面共用阅读容器](#demo:mem_a5229d9e467d) · [验收包含侧栏开关](#demo:mem_a0a619f5e4cb)`,
       sourceIds: ["mem_8434be7eda44", "mem_a5229d9e467d", "mem_a0a619f5e4cb"],
     },
     "ai-work-style": {
