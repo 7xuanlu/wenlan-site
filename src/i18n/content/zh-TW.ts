@@ -14,9 +14,9 @@ export const zhTWContent = {
     sourceHash: "d06322ba9994412f2ab94fa3e72bdd3afe1b90ed791db7e0ff5dc82319c1e345",
     content: {
       seo: {
-        title: "文瀾 Wenlan｜和 AI 一起想、學、做的知識庫工作室",
+        title: "文瀾 Wenlan｜你和 AI 一起想、學、做的知識庫",
         description:
-          "文瀾 Wenlan 是你和 AI 一起想、一起學、一起做的工作室。頁面、技能和規則由你的 AI 工具填起來、保持更新、拿來做事。個人和團隊都能用，開源免費。",
+          "文瀾 Wenlan 是你和 AI 一起想、一起學、一起做的地方。有出處的頁面、技能和規則由你的 AI 工具保持更新、拿來做事。個人和團隊都能用，開源免費。",
       },
       nav: {
         schemaName: "Wenlan 文瀾網站導覽",
@@ -551,7 +551,7 @@ export const zhTWContent = {
       redesign: {
         hero: {
           eyebrow: "",
-          headline: { pre: "你和 AI", emphasis: "一起想、一起學、一起做", post: "的工作室。" },
+          headline: { pre: "你和 AI", emphasis: "一起想、一起學、一起做", post: "的地方。" },
           description:
             "有出處的頁面、技能和規則，由你的 AI 工具保持更新、拿來做事，樣子你說、AI 來畫。個人和團隊都能用。",
           worksWithLabel: "可搭配",

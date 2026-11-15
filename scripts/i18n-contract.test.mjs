@@ -2595,7 +2595,7 @@ test("home SEO copy and hero present the studio positioning in all locales", asy
     const renderedHome = JSON.stringify(home);
 
     assert.match(home.seo.title, new RegExp(`^${localeExpected.name} Wenlan｜`), `${locale}.home.seo.title.brand`);
-    assert.match(home.seo.title, /知識庫工作室|知识库工作室/, `${locale}.home.seo.title`);
+    assert.match(home.seo.title, /知識庫|知识库/, `${locale}.home.seo.title`);
     assert.match(home.seo.title, /和 AI 一起想、學、做|和 AI 一起想、学、做/, `${locale}.home.seo.title.promise`);
     assert.match(home.seo.description, /個人和團隊都能用|个人和团队都能用/, `${locale}.home.seo.description`);
     assert.match(home.seo.description, new RegExp(localeExpected.name), `${locale}.home.seo.description.name`);
