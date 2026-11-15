@@ -320,7 +320,7 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     // Approved concise hero explains the wiki mechanism, not only the pain.
     assert.equal(home.redesign.hero.description.split(/\s+/).filter(Boolean).length <= 40, true);
     // The approved studio description names the licence instead of the Obsidian phrase.
-    assert.match(home.seo.description, /open source|開源|开源/i);
+    assert.match(home.seo.description, /open[- ]source|開源|开源/i);
     assert.match(home.seo.description, /Wenlan|文瀾|文澜|AI/);
     // Obsidian connections can write accepted changes since v0.20.1; never call them read-only.
     assert.doesNotMatch(home.seo.description, /read-only|without changing|唯讀|只读|保留原文/i);

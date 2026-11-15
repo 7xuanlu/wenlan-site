@@ -11,12 +11,12 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "d06322ba9994412f2ab94fa3e72bdd3afe1b90ed791db7e0ff5dc82319c1e345",
+    sourceHash: "a8d80348b253957002cf170815d374a5c027c666989b223f664c3f86299d2f61",
     content: {
       seo: {
-        title: "文澜 Wenlan｜你和 AI 一起想、学、做的知识库",
+        title: "文澜 Wenlan｜开源的 AI 记忆和知识库，个人和团队都能用",
         description:
-          "文澜 Wenlan 是你和 AI 一起想、一起学、一起做的地方。有出处的页面、技能和规则由你的 AI 工具保持更新、拿来做事。个人和团队都能用，开源免费。",
+          "文澜 Wenlan 是你和 AI 一起想、一起学、一起做的地方。开源免费的 AI 记忆和知识库，有出处的页面、技能和规则由你的 AI 工具保持更新。个人和团队都能用。",
       },
       nav: {
         schemaName: "Wenlan 文澜网站导航",

@@ -2545,11 +2545,11 @@ test("home SEO copy and hero present the studio positioning in all locales", asy
 
   assert.equal(
     content.enContent.home.content.seo.title,
-    "Wenlan | AI Knowledge Base Studio for You and Your Team",
+    "Wenlan | Open-Source AI Memory and Knowledge Base",
   );
   assert.equal(
     content.enContent.home.content.seo.description,
-    "A studio for everything you think, learn, and build with AI. Your AI tools fill pages, skills and rules, keep them live, and work from them. Free and open source.",
+    "A studio for everything you think, learn, and build with AI. An open-source AI memory and knowledge base your AI tools keep up to date, for you and your team. Free.",
   );
   assert.equal(content.enContent.home.content.redesign.hero.eyebrow, "");
   assert.deepEqual(
@@ -2596,7 +2596,7 @@ test("home SEO copy and hero present the studio positioning in all locales", asy
 
     assert.match(home.seo.title, new RegExp(`^${localeExpected.name} Wenlan｜`), `${locale}.home.seo.title.brand`);
     assert.match(home.seo.title, /知識庫|知识库/, `${locale}.home.seo.title`);
-    assert.match(home.seo.title, /和 AI 一起想、學、做|和 AI 一起想、学、做/, `${locale}.home.seo.title.promise`);
+    assert.match(home.seo.title, /開源的 AI 記憶和知識庫|开源的 AI 记忆和知识库/, `${locale}.home.seo.title.category`);
     assert.match(home.seo.description, /個人和團隊都能用|个人和团队都能用/, `${locale}.home.seo.description`);
     assert.match(home.seo.description, new RegExp(localeExpected.name), `${locale}.home.seo.description.name`);
     assert.match(home.redesign.hero.eyebrow, localeExpected.hero.eyebrow, `${locale}.home.hero.category`);
@@ -2818,11 +2818,11 @@ test("English core content records the current SEO title and description subset"
 
   assert.equal(
     content.enContent.home.content.seo.title,
-    "Wenlan | AI Knowledge Base Studio for You and Your Team",
+    "Wenlan | Open-Source AI Memory and Knowledge Base",
   );
   assert.equal(
     content.enContent.home.content.seo.description,
-    "A studio for everything you think, learn, and build with AI. Your AI tools fill pages, skills and rules, keep them live, and work from them. Free and open source.",
+    "A studio for everything you think, learn, and build with AI. An open-source AI memory and knowledge base your AI tools keep up to date, for you and your team. Free.",
   );
   assert.equal(
     content.enContent.about.content.seo.title,
