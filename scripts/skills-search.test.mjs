@@ -52,7 +52,14 @@ test("sends the token and query to the documented API", async () => {
   let seen;
   const result = await searchSkills({ query: "meeting notes", limit: 5 }, "tok", async (target, init) => {
     seen = { target: String(target), auth: init.headers.Authorization };
-    return Response.json({ skills: [{ slug: "m", source: "o/r", installs: 3 }] });
+    // Documented v1 shape (skills.sh/docs/api, checked 2026-11-15).
+    return Response.json({
+      data: [{ id: "o/r/m", slug: "m", name: "m", source: "o/r", installs: 3, sourceType: "github", url: "https://skills.sh/o/r/m" }],
+      query: "meeting notes",
+      searchType: "semantic",
+      count: 1,
+      durationMs: 9,
+    });
   });
   assert.equal(seen.auth, "Bearer tok");
   assert.equal(seen.target, `${SKILLS_SH_SEARCH_URL}?q=meeting+notes&limit=5`);

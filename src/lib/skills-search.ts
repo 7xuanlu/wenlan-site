@@ -52,7 +52,10 @@ function asString(value: unknown): string | null {
 // pass unexpected data through to the app.
 export function normalizeHits(payload: unknown): SkillSearchHit[] | null {
   if (!payload || typeof payload !== "object") return null;
-  const list = (payload as { skills?: unknown }).skills;
+  // The documented v1 response puts results under `data`; `skills` is kept
+  // for the older shape.
+  const body = payload as { data?: unknown; skills?: unknown };
+  const list = Array.isArray(body.data) ? body.data : body.skills;
   if (!Array.isArray(list)) return null;
   const hits: SkillSearchHit[] = [];
   for (const item of list) {
