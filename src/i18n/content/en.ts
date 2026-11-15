@@ -14,9 +14,9 @@ export const enContent = {
     sourceHash: null,
     content: {
       seo: {
-        title: "Wenlan | Open-Source AI Memory and Knowledge Base",
+        title: "Wenlan | Open-Source AI Memory, Skills and Knowledge Base",
         description:
-          "A studio for everything you think, learn, and build with AI. An open-source AI memory and knowledge base your AI tools keep up to date, for you and your team. Free.",
+          "A studio for everything you think, learn, and build with AI. Open-source AI memory, skills and pages with sources, kept up to date by your AI tools.",
       },
       nav: {
         schemaName: "Wenlan site navigation",
