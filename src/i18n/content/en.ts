@@ -1024,7 +1024,7 @@ export const enContent = {
       seo: {
         title: "About Wenlan: Open-Source, Local-First Project",
         description:
-          "Wenlan is an open-source, local-first LLM wiki for AI work, built by agents and grounded in its sources.",
+          "Wenlan is an open-source studio for everything you think, learn, and build with AI. Pages with sources, skills and rules your AI tools keep up to date. For you and your team.",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -1032,9 +1032,9 @@ export const enContent = {
       },
       hero: {
         eyebrow: "About",
-        title: "A personal knowledge wiki for AI work.",
+        title: "A studio for your work with AI.",
         description:
-          "Wenlan is your personal knowledge wiki for AI work. Save useful decisions with their sources, then find and build on them across your AI tools.",
+          "Wenlan is where your AI tools keep pages with sources, skills and rules, and work from them. It works alongside the AI tools you already use. Open source, for you and your team.",
         statusLabel: "Project status",
         statusItems: ["{release}", "macOS, Linux, Windows", "Apache-2.0 + AGPL-3.0", "Built by Qi-Xuan Lu"],
       },
@@ -1044,8 +1044,8 @@ export const enContent = {
           number: "01",
           title: "Why Wenlan exists",
           paragraphs: [
-            "AI work often leaves useful decisions, debugging lessons, and project details buried in old chats. Wenlan gives that knowledge a home you can return to.",
-            "Save what matters, add trusted sources, and shape them into pages you can inspect and find again across your AI tools.",
+            "AI work leaves useful decisions, lessons, and know-how buried in old chats, and each tool starts from zero.",
+            "Wenlan is the shared place your AI tools fill, keep current, and work from. You stay in the tool you already use. Every page links to its sources, and Wenlan checks that each cited source supports its sentence before saving. You see every change and can undo it.",
           ],
         },
         {
@@ -1054,7 +1054,7 @@ export const enContent = {
           title: "Built by Qi-Xuan Lu",
           paragraphs: [
             "Wenlan is built and maintained by Qi-Xuan Lu (GitHub @7xuanlu). Background in AI infrastructure, knowledge graphs, and local-first systems.",
-            "Wenlan is designed so agents can add to it and people can inspect it. It keeps source-linked pages and session logs in readable files, while one local service makes them available to connected AI tools.",
+            "Wenlan is built for small teams where engineers work with non-engineers. The engineer connects the AI tools. Teammates open it to read and edit. Individuals are welcome too.",
             "Project channels: GitHub Issues for bugs and feature requests, SECURITY.md for vulnerabilities, and the Wenlan release notes for changes.",
           ],
         },
@@ -1136,7 +1136,7 @@ export const enContent = {
       schema: {
         name: "About Wenlan",
         description:
-          "Wenlan is an open-source, local-first LLM wiki for AI work, built by Qi-Xuan Lu.",
+          "Wenlan is an open-source studio for everything you think, learn, and build with AI, built by Qi-Xuan Lu.",
       },
     },
   },
@@ -1223,11 +1223,11 @@ export const enContent = {
         eyebrow: "Docs",
         title: "Start using Wenlan.",
         description:
-          "Install Wenlan, connect the AI tool you use, then save one decision and retrieve it. Your knowledge stays readable, searchable, and under your control.",
+          "Connect your AI tools to Wenlan, then save one decision and find it again. Pages carry their sources, and you see every change.",
       },
       intro: {
         eyebrow: "Start here",
-        body: "Start with the setup guide: install Wenlan, choose your AI tool, save one decision, and retrieve it. Then explore the daily workflow and core concepts. Architecture, API, configuration, evaluation, release, and contribution references are here for when you need them.",
+        body: "Start with the setup guide: install Wenlan, pick your AI tool, save one decision, and find it again. Then read about the daily workflow and core concepts. Reference pages for architecture, API, configuration, evaluation, releases, and contributing are here when you need them.",
       },
       sections: {
         items: [

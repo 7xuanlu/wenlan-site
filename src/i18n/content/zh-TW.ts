@@ -1014,12 +1014,12 @@ export const zhTWContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "2d474f08dbd53fd7e1e81fd65cb9b726af9d58adb45cc7efe13f053a9b512b0d",
+    sourceHash: "c419a8d6420fd6d195d4efc1e2fae8a3e1aea1deef6506c0b9b32783e94141d2",
     content: {
       seo: {
-        title: "關於文瀾 Wenlan：開源、本機優先的個人 AI 知識庫",
+        title: "關於文瀾 Wenlan：你和 AI 一起想、學、做的開源地方",
         description:
-          "Wenlan 是開源、本地優先的 AI 工作 LLM wiki，由 AI 代理打造並以來源為根基：把文件與決策整理成可引用、可審查、可更新的筆記，讓 AI 工作有據可查、持續累積。支援 Windows、macOS 與 Linux，免費下載使用。了解文瀾的理念、開源授權與產品路線圖。",
+          "Wenlan 是開源的地方，讓你和 AI 一起想、一起學、一起做。有出處的頁面、技能和規則，由你的 AI 工具保持更新、拿來做事。個人和團隊都能用，支援 Windows、macOS 與 Linux，免費下載。",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -1027,9 +1027,9 @@ export const zhTWContent = {
       },
       hero: {
         eyebrow: "關於",
-        title: "AI 工作的個人知識 wiki。",
+        title: "你和 AI 一起想、一起學、一起做的地方。",
         description:
-          "Wenlan 是 AI 工作的個人知識 wiki。保存重要決定與來源，之後就能在不同 AI 工具中找回並接著使用。",
+          "Wenlan 讓你的 AI 工具把有出處的頁面、技能和規則存在這裡，保持更新，也拿來做事。它和你已在用的 AI 工具搭配使用。開源，個人和團隊都能用。",
         statusLabel: "專案狀態",
         statusItems: ["版本 {release}", "支援 macOS、Linux、Windows", "開源授權：Apache-2.0 + AGPL-3.0", "Qi-Xuan Lu 建置"],
       },
@@ -1039,8 +1039,8 @@ export const zhTWContent = {
           number: "01",
           title: "為什麼 Wenlan 存在",
           paragraphs: [
-            "AI 工作常把重要決定、除錯經驗和專案資訊留在舊對話裡。Wenlan 把這些知識整理成日後找得到的內容。",
-            "保存重要資訊、補上可信的來源，再整理成可檢查、可搜尋的筆記，讓不同 AI 工具都能接續使用。",
+            "AI 工作常把重要決定、經驗和做法留在舊對話裡，換一個工具就得從頭來。",
+            "Wenlan 是你的 AI 工具共用的地方：它們把內容存進來、保持更新，也從這裡做事。你留在原本用的工具就好。每個頁面都連到出處，存檔前 Wenlan 會檢查每句引用的出處是否支持那句話。每個改動你都看得到、能復原。",
           ],
         },
         {
@@ -1049,7 +1049,7 @@ export const zhTWContent = {
           title: "由 Qi-Xuan Lu 建置",
           paragraphs: [
             "Wenlan 由 Qi-Xuan Lu (GitHub @7xuanlu) 建置與維護。背景涵蓋 AI infrastructure、knowledge graphs 和 local-first systems。",
-            "Wenlan 讓 AI 代理能補充內容，也讓人能檢查結果。附來源連結的筆記與工作紀錄會以易讀檔案保存，再由本機服務提供給已連接的 AI 工具。",
+            "Wenlan 最先為小團隊設計：工程師和非工程師一起工作。工程師接上 AI 工具，其他人打開就能看、能改。個人也一樣好用。",
             "專案渠道：bugs 和 feature requests 用 GitHub Issues，vulnerabilities 看 SECURITY.md，變更則看 Wenlan release notes。",
           ],
         },
@@ -1078,12 +1078,12 @@ export const zhTWContent = {
           {
             id: "session-rhythm",
             title: "Session 節奏",
-            body: "Wenlan 協助你把有用資訊帶到下一次 AI 工作：先讀取已有筆記、保存重要決定，結束時整理交接內容。",
+            body: "Wenlan 協助你把有用資訊帶到下一次 AI 工作：先讀取已有頁面、保存重要決定，結束時整理交接內容。",
           },
           {
             id: "deliberate-distillation",
-            title: "需要時整理成筆記",
-            body: "在 Wenlan 中，主題累積到足以寫成一篇筆記時，可執行 /wenlan distill 建立有來源的筆記。完成模型設定後，也可以選擇自動整理筆記，並補上更多想法之間的連結。",
+            title: "需要時整理成頁面",
+            body: "在 Wenlan 中，主題累積到足以寫成一個頁面時，可執行 /wenlan distill 建立有來源的頁面。完成模型設定後，也可以選擇自動整理頁面，並補上更多想法之間的連結。",
           },
         ],
       },
@@ -1131,7 +1131,7 @@ export const zhTWContent = {
       schema: {
         name: "關於 Wenlan",
         description:
-          "Wenlan 是 open-source、local-first 的 AI 工作 LLM wiki，由 Qi-Xuan Lu 建置。",
+          "Wenlan 是開源的地方，讓你和 AI 一起想、一起學、一起做，由 Qi-Xuan Lu 建置。",
       },
     },
   },
@@ -1203,7 +1203,7 @@ export const zhTWContent = {
   },
   docs: {
     status: "translated",
-    sourceHash: "582785cb6f33e078962abb2f5dc7ecf895b13ca7cb4800bd934eede0f9d6deef",
+    sourceHash: "490a273588f7b8f7636524da16f98a2cf52df533a133e18f99b07583984123b4",
     content: {
       seo: {
         title: "文瀾 Wenlan 文件：安裝、工作流程與參考",
@@ -1218,11 +1218,11 @@ export const zhTWContent = {
         eyebrow: "文件",
         title: "開始使用 Wenlan。",
         description:
-          "先安裝 Wenlan 並連接你使用的 AI 工具，再保存一個決定並找回它。知識會保留為可讀、可搜尋且由你掌控的內容。",
+          "把你的 AI 工具接上 Wenlan，存下一個決定，再把它找回來。頁面都附出處，每個改動你都看得到。",
       },
       intro: {
         eyebrow: "從這裡開始",
-        body: "先看入門指南：安裝 Wenlan、選擇 AI 工具、保存一個決定，再把它找回來。接著可了解日常工作流程與核心概念。架構、API、設定、評估、版本和貢獻等進階資料，之後需要時再看。部分進階參考頁目前僅提供英文。",
+        body: "先看入門指南：安裝 Wenlan、選好 AI 工具、存下一個決定，再把它找回來。接著讀日常用法與核心概念。架構、API、設定、評估、版本和貢獻等參考資料，需要時再查。部分進階參考頁目前僅提供英文。",
       },
       sections: {
         items: [
