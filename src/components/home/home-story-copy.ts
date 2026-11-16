@@ -2,7 +2,7 @@ import type { Locale } from "@/i18n/locales";
 
 export const storyCopyByLocale = {
   en: {
-    heroDescription: "Pages with sources, skills and rules your AI tools keep up to date and work from, drawn any way you ask. For you and your team.",
+    heroDescription: "Every page shows its sources, and your AI draws it any way you ask. For you and your team.",
     heroTrust: ["Free", "Open source", "For you and your team"],
     heroPrimaryCta: "Download the desktop app",
     heroSecondaryCta: "Connect from your AI tool",
@@ -42,7 +42,7 @@ export const storyCopyByLocale = {
     moreTechnical: "Retrieval tests and methodology",
   },
   "zh-TW": {
-    heroDescription: "有出處的頁面、技能和規則，由你的 AI 工具保持更新、拿來做事，樣子你說、AI 來畫。個人和團隊都能用。",
+    heroDescription: "每一頁都附上出處，樣子你說、AI 來畫。個人和團隊都能用。",
     heroTrust: ["免費", "開源", "個人和團隊都能用"],
     heroPrimaryCta: "下載桌面版",
     heroSecondaryCta: "從你的 AI 工具連上",
@@ -82,7 +82,7 @@ export const storyCopyByLocale = {
     moreTechnical: "檢索評測與測試範圍",
   },
   "zh-CN": {
-    heroDescription: "有出处的页面、技能和规则，由你的 AI 工具保持更新、拿来做事，样子你说、AI 来画。个人和团队都能用。",
+    heroDescription: "每一页都附上出处，样子你说、AI 来画。个人和团队都能用。",
     heroTrust: ["免费", "开源", "个人和团队都能用"],
     heroPrimaryCta: "下载桌面版",
     heroSecondaryCta: "从你的 AI 工具连接",

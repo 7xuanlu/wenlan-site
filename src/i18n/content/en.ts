@@ -555,10 +555,10 @@ export const enContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "",
-          headline: { pre: "A studio for everything you", emphasis: "think, learn, and build", post: " with AI." },
+          eyebrow: "A studio for everything you think, learn, and build with AI.",
+          headline: { pre: "Pages, skills and rules your AI tools", emphasis: "keep current and work from", post: "" },
           description:
-            "Pages with sources, skills and rules your AI tools keep up to date and work from, drawn any way you ask. For you and your team.",
+            "Every page shows its sources, and your AI draws it any way you ask. For you and your team.",
           worksWithLabel: "Works with",
         },
         fit: {
@@ -944,7 +944,7 @@ export const enContent = {
             {
               id: "tools",
               title: "Your AI tools share one place",
-              body: "Claude Code, Codex, ChatGPT, and more work from the same pages and memories. Switch tools anytime. Teammates connect their own from an invite page, no app needed.",
+              body: "Claude Code, Codex, ChatGPT, and more work from the same pages and memories. Switch tools anytime. Teammates join from an invite link.",
             },
             {
               id: "web-access",

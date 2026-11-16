@@ -2551,7 +2551,7 @@ test("home SEO copy and hero present the studio positioning in all locales", asy
     content.enContent.home.content.seo.description,
     "A studio for everything you think, learn, and build with AI. Open-source AI memory, skills and pages with sources, kept up to date by your AI tools.",
   );
-  assert.equal(content.enContent.home.content.redesign.hero.eyebrow, "");
+  assert.equal(content.enContent.home.content.redesign.hero.eyebrow, "A studio for everything you think, learn, and build with AI.");
   assert.deepEqual(
     [
       content.enContent.home.content.redesign.hero.headline.pre,
@@ -2559,9 +2559,9 @@ test("home SEO copy and hero present the studio positioning in all locales", asy
       content.enContent.home.content.redesign.hero.description,
     ],
     [
-      "A studio for everything you",
-      "think, learn, and build",
-      "Pages with sources, skills and rules your AI tools keep up to date and work from, drawn any way you ask. For you and your team.",
+      "Pages, skills and rules your AI tools",
+      "keep current and work from",
+      "Every page shows its sources, and your AI draws it any way you ask. For you and your team.",
     ],
   );
 
@@ -2571,10 +2571,10 @@ test("home SEO copy and hero present the studio positioning in all locales", asy
       sourceBacked: "有來源依據",
       staleHomePhrase: /活個人知識庫|AI-native/,
       hero: {
-        eyebrow: /^$/,
-        pre: /^你和 AI$/,
-        emphasis: /一起想、一起學、一起做/,
-        description: "有出處的頁面、技能和規則，由你的 AI 工具保持更新、拿來做事，樣子你說、AI 來畫。個人和團隊都能用。",
+        eyebrow: /^你和 AI 一起想、一起學、一起做的地方。$/,
+        pre: /^頁面、技能和規則，你的 AI 工具$/,
+        emphasis: /幫你更新，也拿來做事/,
+        description: "每一頁都附上出處，樣子你說、AI 來畫。個人和團隊都能用。",
       },
     },
     "zh-CN": {
@@ -2582,10 +2582,10 @@ test("home SEO copy and hero present the studio positioning in all locales", asy
       sourceBacked: "有来源依据",
       staleHomePhrase: /活个人知识库|AI-native/,
       hero: {
-        eyebrow: /^$/,
-        pre: /^你和 AI$/,
-        emphasis: /一起想、一起学、一起做/,
-        description: "有出处的页面、技能和规则，由你的 AI 工具保持更新、拿来做事，样子你说、AI 来画。个人和团队都能用。",
+        eyebrow: /^你和 AI 一起想、一起学、一起做的地方。$/,
+        pre: /^页面、技能和规则，你的 AI 工具$/,
+        emphasis: /帮你更新，也拿来做事/,
+        description: "每一页都附上出处，样子你说、AI 来画。个人和团队都能用。",
       },
     },
   };
@@ -2615,7 +2615,7 @@ test("Chinese hero names the studio for pages, skills and rules and setup begins
     const dictionary = content.localizedContentByLocale[locale];
 
     assert.match(
-      dictionary.home.content.redesign.hero.description,
+      dictionary.home.content.redesign.hero.headline.pre,
       /頁面、技能和規則|页面、技能和规则/,
       `${locale}.home.hero.description.benefit`,
     );

@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "802e9a8f0f9e0f634afde0f1872fa48e925c0034873015b76088e9c00071a08e",
+    sourceHash: "9754d29dc1ce40f0915cebff3942deb4a956e77ddbf94d506541472691f146f5",
     content: {
       seo: {
         title: "文澜 Wenlan｜开源的 AI 记忆、技能和知识库，个人和团队都能用",
@@ -550,10 +550,10 @@ export const zhCNContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "",
-          headline: { pre: "你和 AI", emphasis: "一起想、一起学、一起做", post: "的地方。" },
+          eyebrow: "你和 AI 一起想、一起学、一起做的地方。",
+          headline: { pre: "页面、技能和规则，你的 AI 工具", emphasis: "帮你更新，也拿来做事", post: "" },
           description:
-            "有出处的页面、技能和规则，由你的 AI 工具保持更新、拿来做事，样子你说、AI 来画。个人和团队都能用。",
+            "每一页都附上出处，样子你说、AI 来画。个人和团队都能用。",
           worksWithLabel: "可搭配",
         },
         fit: {
@@ -939,7 +939,7 @@ export const zhCNContent = {
             {
               id: "tools",
               title: "你的 AI 工具共用同一处",
-              body: "Claude Code、Codex、ChatGPT 等用同一批页面和记忆。随时换工具。团队成员从邀请页连上自己的工具，不用装 App。",
+              body: "Claude Code、Codex、ChatGPT 等用同一批页面和记忆。随时换工具。团队成员用邀请链接加入。",
             },
             {
               id: "web-access",

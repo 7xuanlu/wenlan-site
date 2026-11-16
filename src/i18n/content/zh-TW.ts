@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "802e9a8f0f9e0f634afde0f1872fa48e925c0034873015b76088e9c00071a08e",
+    sourceHash: "9754d29dc1ce40f0915cebff3942deb4a956e77ddbf94d506541472691f146f5",
     content: {
       seo: {
         title: "文瀾 Wenlan｜開源的 AI 記憶、技能和知識庫，個人和團隊都能用",
@@ -550,10 +550,10 @@ export const zhTWContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "",
-          headline: { pre: "你和 AI", emphasis: "一起想、一起學、一起做", post: "的地方。" },
+          eyebrow: "你和 AI 一起想、一起學、一起做的地方。",
+          headline: { pre: "頁面、技能和規則，你的 AI 工具", emphasis: "幫你更新，也拿來做事", post: "" },
           description:
-            "有出處的頁面、技能和規則，由你的 AI 工具保持更新、拿來做事，樣子你說、AI 來畫。個人和團隊都能用。",
+            "每一頁都附上出處，樣子你說、AI 來畫。個人和團隊都能用。",
           worksWithLabel: "可搭配",
         },
         fit: {
@@ -939,7 +939,7 @@ export const zhTWContent = {
             {
               id: "tools",
               title: "你的 AI 工具共用同一處",
-              body: "Claude Code、Codex、ChatGPT 等用同一批頁面和記憶。隨時換工具。團隊成員從邀請頁連上自己的工具，不用裝 App。",
+              body: "Claude Code、Codex、ChatGPT 等用同一批頁面和記憶。隨時換工具。團隊成員用邀請連結加入。",
             },
             {
               id: "web-access",
