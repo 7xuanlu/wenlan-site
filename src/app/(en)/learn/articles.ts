@@ -550,7 +550,7 @@ const baseArticles: LearnArticle[] = [
     heroBullets: [
       "An Obsidian vault is a folder of Markdown files. Run Claude Code in that folder and it can already read, search, and edit your notes.",
       "Find the right project notes, separate current decisions from copied old messages, and check the sources before acting.",
-      "Wenlan is a personal wiki built for AI to organize and maintain knowledge. Page creation, source tracking, and revision review are built in. Connect your Obsidian notes, or use Wenlan on its own.",
+      "Wenlan keeps docs, skills and rules that you and your AI tools both work from, kept current. Pages cite their sources. Connect your Obsidian notes, or use Wenlan on its own.",
     ],
     sections: [
       {
@@ -636,7 +636,7 @@ const baseArticles: LearnArticle[] = [
           "The answer should say October 22, Mei, and venue not yet confirmed. October 20 is the superseded date. Open the named source notes yourself: the updated date must come from 02-update.md, and a specific venue would be invented.",
           "If Claude cannot find a file, check the working folder and spelling first. If it uses the old date, ask it to compare the two dated statements. If it invents a venue, have it mark the value unknown. Keep both original notes unchanged; once you can verify this small answer, repeat with a few non-sensitive notes from one real project.",
           "You have now checked a useful first outcome: finding a current decision across notes with evidence you can inspect. CLAUDE.md, the CLI, MCP, and plugins below are optional additions for recurring work. This exercise does not establish that an AI can safely organize your whole vault.",
-          "Want this answer to become knowledge you can keep using as the project changes? Wenlan has page creation, source tracking, and revision review built in, so you do not have to assemble that maintenance workflow yourself. Try it with your Obsidian notes in the exercise below."
+          "Want this answer to become a doc you can keep current as the project changes? Wenlan turns notes into pages that cite their sources, and you see every change. Try it with your Obsidian notes in the exercise below."
         ],
         "code": {
           "label": "Practice-run answer excerpt — layout shortened",
@@ -778,18 +778,18 @@ const baseArticles: LearnArticle[] = [
         id: "claude-code-obsidian-memory",
         heading: "Already using Obsidian with AI? When Wenlan helps",
         body: [
-          "Wenlan is a personal wiki built for AI to organize and maintain knowledge. Creating pages, preserving sources, tracking changes, and reviewing revisions are built in. You do not have to assemble and maintain a separate set of plugins, scripts, and rules for those tasks.",
-          "You can start directly with documents, notes, and AI work; Obsidian is optional. Use your connected AI to save and retrieve knowledge, then open Wenlan when you want to read a page, check its sources, or review changes. If you still want Obsidian’s editor and plugins, keep using them and connect your vault.",
-          "Obsidian’s Markdown files can already be read and edited by different AI tools with access. Projects such as claude-obsidian also provide citations and maintenance workflows. Wenlan offers its own built-in workflow; cross-AI access alone is not the reason to choose it. If your existing setup already suits you, you may not need another tool.",
+          "Wenlan keeps docs, skills and rules that you and your AI tools both work from, kept current. Notes, documents and AI chats become pages, and each page cites its sources. Before saving, Wenlan checks that each cited source supports its sentence.",
+          "You can start with documents, notes, and AI chats; Obsidian is optional. What you settle in one AI tool is saved and there in the next, and Wenlan organizes it into pages. Open Wenlan to read a page, check its sources, or review changes. If you want Obsidian’s editor and plugins, keep using them and connect your vault.",
+          "Obsidian’s Markdown files can already be read and edited by different AI tools. Projects such as claude-obsidian add citations and maintenance workflows. If that setup suits you, you may not need another tool. Wenlan adds checked sources, skills and rules shared across your AI tools, and change review. Its pages are plain Markdown files, so they also open in Obsidian.",
           "In this exercise, the useful result is a project brief you can return to when the demo date changes from October 22 to October 24. You update the same page from the new source and check its evidence; a later task can use that page instead of relying on an old answer in a chat.",
-          "Your Obsidian vault connects as a source: notes stay in Obsidian, and Wenlan never edits them without your OK; it writes a change only when you accept it. Wenlan follows the vault in the background, checking about every 30 seconds, so after editing a note you can ask your connected AI to update the page without a manual resync. Background page updates require a configured model. If AI updates a page you have edited, it proposes a revision for you to review. AI handles the organizing; you still judge the content.",
+          "Your Obsidian vault connects as a source: notes stay in Obsidian, and Wenlan never edits them without your OK; it writes a change only when you accept it. Wenlan follows the vault in the background, checking about every 30 seconds, so after editing a note you can ask your connected AI to update the page without a manual resync. Background page updates require a configured model. If AI updates a page you have edited, it proposes a revision for you to review. AI handles the organizing; you still judge the content. You can undo any change, and lock a page so AI asks first.",
         ],
         table: {
           columns: ["Need", "Useful approach"],
           rows: [
             ["Look up a few notes", "Ask Claude to read the files directly"],
             ["Automate vault organization", "Use skills or plugins such as claude-obsidian"],
-            ["Use a built-in workflow for creating and maintaining knowledge pages","Try Wenlan, with or without Obsidian"],
+            ["Docs with sources, plus skills and rules shared across AI tools","Try Wenlan, with or without Obsidian"],
           ],
         },
         link: {
@@ -2048,11 +2048,11 @@ const baseArticles: LearnArticle[] = [
     updatedAt: "2026-07-25",
     author: DEFAULT_AUTHOR,
     readingTime: "8 min read",
-    audience: "People choosing a memory layer for AI-assisted work",
+    audience: "People choosing a knowledge tool for AI-assisted work",
     heroBullets: [
       "Basic Memory v0.22.1 is a human-readable Markdown knowledge base with local or hosted deployment paths, one knowledge base across MCP clients, and optional Team workspaces.",
-      "Wenlan v0.14.1 is a local-first Sources, Memories, and Pages system built around capture, handoff, curation, source-backed Pages, and reviewable distillation.",
-      "Choose between a shared Markdown knowledge base and a source-backed AI-work workflow—not between “memory” and “no memory.”",
+      "Wenlan keeps docs, skills and rules that you and your AI tools both work from, kept current. Pages cite their sources, and you can see and undo every change.",
+      "Choose between a shared Markdown knowledge base and source-backed docs, skills and rules kept current across your AI tools.",
       "This page pins Basic Memory's source, release, and documentation on 2026-07-25 and reflects Wenlan v0.14.1 as of 2026-07-20. If either product changes, the source links below make the comparison auditable.",
     ],
     officialReferences: [
@@ -2098,8 +2098,8 @@ const baseArticles: LearnArticle[] = [
         heading: "Short answer",
         body: [
           "Choose Basic Memory if you want people and AI assistants to work in the same Markdown knowledge base. You can keep it local, add Basic Memory Cloud for hosted access and sync, or use Team workspaces for shared knowledge.",
-          "Choose Wenlan if the harder problem is turning AI work into maintained knowledge: capture decisions across sessions, hand work off between agents, and distill supported context into source-backed Pages that remain reviewable.",
-          "Both expose context through MCP, keep important material human-readable, and support semantic search. The meaningful difference is the operating model around that context.",
+          "Choose Wenlan if you want docs, skills and rules that every AI tool you use works from and that stay current. Notes, documents and AI chats become pages, and each page cites its sources.",
+          "Both expose context through MCP, keep files human-readable, and support semantic search. The difference is what the product keeps current for you.",
         ],
       },
       {
@@ -2111,39 +2111,39 @@ const baseArticles: LearnArticle[] = [
         ],
       },
       {
-        heading: "Wenlan today: Sources, Memories, and Pages",
+        heading: "Wenlan today: docs, skills and rules kept current",
         body: [
-          "Wenlan starts from the work an AI agent is doing. Agents explicitly capture decisions, lessons, and corrections as Memories; `/handoff` preserves the state of an unfinished session; `/wenlan distill` turns repeated, supported context into Pages; `/wenlan curate` and `/wenlan lint` make review and repair visible.",
-          "Sources are the evidence layer. Memories retain durable working context. Pages synthesize that context into readable knowledge with source IDs, citations, and revision history. The distinction is deliberate: recalled fragments and maintained wiki pages do not silently become the same thing.",
-          "The local daemon provides retrieval across MCP clients. Readable Pages, sessions, and status artifacts are projected under `~/.wenlan/` with local git history, while capture and retrieval remain backed by the daemon-owned store.",
+          "Wenlan turns your notes, documents and AI chats into pages. Before saving, it checks that each cited source supports its sentence. Skills and rules are written once and kept current in every AI tool you connect.",
+          "What you settle in any AI tool is saved and is there in the next. Wenlan organizes those memories into knowledge and topic pages, merging repeats. You see every change, can undo it, and can lock a page so AI asks first.",
+          "Wenlan runs on your own computer or server. Pages are plain Markdown files under `~/.wenlan/` with local git history, and the database is only an index. A page can be text, or a web page your AI draws that shows the live content.",
         ],
       },
       {
         heading: "The decision in one workflow",
         body: [
           "Imagine that three coding agents investigate the same authentication problem over a week. With Basic Memory, the durable object is the shared knowledge base: agents search existing notes, add observations, link related entities, and update a Markdown document that the team can also edit.",
-          "With Wenlan, the durable path is evidence to maintained knowledge: each agent captures the decisions or gotchas it learned, hands off unfinished state, and later distills supported memories into a Page whose source chain can be inspected and revised.",
-          "Basic Memory is the more direct fit when the shared note is the product. Wenlan is the more direct fit when you need to see how session evidence became a maintained answer.",
+          "With Wenlan, each agent saves the decisions or gotchas it learned. Wenlan folds them into a page whose sources can be inspected and revised, and the page stays current.",
+          "Basic Memory is the more direct fit when the shared note is the product. Wenlan is the more direct fit when you want a maintained doc with sources, plus skills and rules all your agents follow.",
         ],
       },
       {
         heading: "Storage, sync, and history are separate choices",
         body: [
           "For local Basic Memory, Markdown files are the primary human-readable record and a database acts as a derived search index. File history depends on the local tools you choose. Basic Memory Cloud adds managed sync, snapshots, and hosted per-file history; Teams extends that hosted model to collaborators.",
-          "Wenlan keeps raw captures in its local daemon store for recall and projects readable Pages, sessions, and status Markdown under `~/.wenlan/`. Those projected artifacts are versioned locally in `~/.wenlan/.git/`, so Page revisions can be inspected without turning the projection into the retrieval database.",
-          "Neither shape is automatically better. Basic Memory favors a file-first knowledge base that can gain hosted collaboration. Wenlan favors a local retrieval store plus human-readable, source-linked outputs.",
+          "Wenlan keeps pages as plain Markdown files under `~/.wenlan/`, versioned locally in `~/.wenlan/.git/`, so revisions can be inspected. The database is only an index.",
+          "Neither shape is automatically better. Basic Memory is a file-first knowledge base that can gain hosted collaboration. Wenlan is files first too, self-hosted, with a team server for shared access.",
         ],
         bullets: [
           "Basic Memory local: Markdown files plus a derived search index.",
           "Basic Memory Cloud and Teams: hosted MCP, sync, snapshots, file history, and collaboration.",
-          "Wenlan: local retrieval store plus Markdown projections with source links and local git history.",
+          "Wenlan: Markdown pages with source links and local git history; the database is only an index.",
         ],
       },
       {
         heading: "Search and maintenance",
         body: [
           "Basic Memory combines text and semantic search with graph traversal over observations and relations. Its `build_context` tool assembles connected knowledge, and its Agent Skills give assistants an explicit search, capture, and maintenance routine.",
-          "Wenlan combines full-text and embedding retrieval, weighted fusion, eligible graph context, and optional reranking. Its plugin workflow separates `/recall`, `/capture`, `/handoff`, `/wenlan distill`, `/wenlan curate`, and `/wenlan lint`, so retrieval, capture, synthesis, review, and repair remain distinct actions.",
+          "Wenlan combines full-text and embedding retrieval, weighted fusion, eligible graph context, and optional reranking. Its plugin workflow separates `/recall`, `/capture`, `/handoff`, `/wenlan distill`, `/wenlan curate`, and `/wenlan lint`.",
           "The products publish different retrieval evidence, so this page does not turn unmatched benchmarks into a winner. Test each system with the same real task: recover an old decision, update it after a correction, and inspect why the final answer should be trusted.",
         ],
       },
@@ -2151,7 +2151,7 @@ const baseArticles: LearnArticle[] = [
         heading: "The provenance boundary",
         body: [
           "Basic Memory makes notes and their relationships inspectable. A team can read the Markdown, follow links, inspect Cloud history, and decide what belongs in its shared knowledge base.",
-          "Wenlan adds a stricter boundary between working memory and a distilled Page. A Page record carries source memory IDs, citations, provenance state, and revisions, and the daemon rejects a Page with no source. That is useful when the question is not only “what does the note say?” but “which captured evidence supports this maintained claim?”",
+          "Wenlan adds a stricter boundary. A page carries source memory IDs, citations, provenance state, and revisions, and the daemon rejects a page with no source. Before saving, Wenlan also checks that each cited source supports its sentence. That helps when the question is “which source supports this claim?”",
           "Basic Memory can still hold source citations, and Wenlan Pages remain editable and reviewable. The difference is which provenance behavior the system requires rather than what a careful author could add manually.",
         ],
       },
@@ -2165,8 +2165,8 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "When Wenlan is the better call",
         body: [
-          "Choose Wenlan when context is scattered across AI sessions and tools, and you want explicit capture and handoff before that context is promoted into maintained knowledge.",
-          "It is the clearer fit when source-backed distillation, reviewable revisions, local operation, and a visible repair loop matter more than hosted team collaboration.",
+          "Choose Wenlan when context is scattered across AI tools and you want docs, skills and rules that stay current in all of them.",
+          "It is the clearer fit when cited sources, reviewable changes, and running on your own machine or server matter most. Wenlan also has a team server with view-only or edit access per Space, but it has no hosted web editor.",
         ],
       },
       {
@@ -2174,7 +2174,7 @@ const baseArticles: LearnArticle[] = [
         body: [
           "Moving from Basic Memory to Wenlan is selective today. Choose the durable notes that should become Sources or Memories, capture them through the CLI or MCP workflow, and distill only the claims whose source chain you want Wenlan to maintain. Wenlan does not currently advertise a one-command Basic Memory vault importer.",
           "Moving Wenlan's readable output into another knowledge base is straightforward at the file level: Pages and sessions under `~/.wenlan/` are Markdown. That preserves readable content, but not Wenlan's live recall, provenance state, curation, or distillation behavior.",
-          "Using both is technically possible because each exposes an MCP server. If you do, assign ownership clearly—for example, Basic Memory for shared team notes and Wenlan for source-backed personal AI-work history—so agents do not create conflicting copies.",
+          "Using both is technically possible because each exposes an MCP server. If you do, assign ownership clearly, for example Basic Memory for shared team notes and Wenlan for source-backed docs, skills and rules, so agents do not create conflicting copies.",
         ],
       },
     ],
@@ -2183,25 +2183,25 @@ const baseArticles: LearnArticle[] = [
       rows: [
         {
           dimension: "Center of gravity",
-          wenlan: "Source-backed AI-work loop: capture, recall, handoff, distill, curate, and lint across MCP clients.",
+          wenlan: "Docs, skills and rules your AI tools work from, kept current, with cited sources. Memory feeds them.",
           competitor:
             "Human-readable Markdown knowledge base that people and AI assistants read, edit, link, and maintain.",
         },
         {
           dimension: "Deployment",
-          wenlan: "Local-first daemon, CLI, MCP server, plugins, and readable local artifacts.",
+          wenlan: "Self-hosted on your computer or server: daemon, CLI, MCP server, plugins, and plain Markdown pages.",
           competitor:
             "Open-source local server or hosted Basic Memory Cloud with remote MCP and optional local sync.",
         },
         {
           dimension: "Collaboration",
-          wenlan: "Personal local knowledge workflow in v0.14.1; no hosted team workspace is claimed.",
+          wenlan: "Team server with view-only or edit access per Space (next release). Personal use works today.",
           competitor:
             "Team workspaces with membership, collaborative editing, activity, snapshots, and file history.",
         },
         {
           dimension: "Storage",
-          wenlan: "Local daemon-owned retrieval store plus Markdown projections in ~/.wenlan/; readable artifacts are tracked in local git.",
+          wenlan: "Plain Markdown pages in ~/.wenlan/, tracked in local git; the database is only an index.",
           competitor:
             "File-first Markdown with a derived local index; Cloud adds hosted storage, sync, snapshots, and history.",
         },
@@ -2213,7 +2213,7 @@ const baseArticles: LearnArticle[] = [
         },
         {
           dimension: "Maintenance workflow",
-          wenlan: "Separate capture, handoff, distill, curate, and lint actions keep working memory, synthesis, review, and repair visible.",
+          wenlan: "Separate capture, handoff, distill, curate, and lint actions. Each cited source is checked against its sentence before saving.",
           competitor:
             "Agent Skills teach search-before-answer, capture, linking, and knowledge-base maintenance.",
         },
@@ -2235,12 +2235,12 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Is Basic Memory a competitor to Wenlan?",
         answer:
-          "They overlap around MCP, AI-readable memory, Markdown, search, and durable context. Basic Memory centers a knowledge base that people and agents maintain together. Wenlan centers a source-backed workflow from session memory to reviewable Pages.",
+          "They overlap around MCP, Markdown, search, and durable context. Basic Memory centers a knowledge base that people and agents maintain together. Wenlan centers docs, skills and rules kept current, with sources cited.",
       },
       {
         question: "Can someone use both?",
         answer:
-          "Yes. Each can register as a separate MCP server. Define ownership first—for example, Basic Memory for shared team notes and Wenlan for source-backed personal AI-work history—so an agent does not maintain conflicting copies.",
+          "Yes. Each can register as a separate MCP server. Define ownership first, for example Basic Memory for shared team notes and Wenlan for source-backed docs, skills and rules, so an agent does not maintain conflicting copies.",
       },
       {
         question: "Is Basic Memory local or hosted?",
@@ -2266,8 +2266,8 @@ const baseArticles: LearnArticle[] = [
       "mcp-memory-server",
     ],
     cta: {
-      heading: "Try the AI work memory loop",
-      body: "Wenlan is built for sessions, handoffs, provenance, and local retrieval across MCP-compatible AI tools.",
+      heading: "Try docs your AI tools keep current",
+      body: "Wenlan keeps docs, skills and rules current across Claude Code, Codex, Cursor, ChatGPT and more. Free and open source.",
     },
   },
   {
@@ -2291,10 +2291,10 @@ const baseArticles: LearnArticle[] = [
     updatedAt: "2026-07-24",
     author: DEFAULT_AUTHOR,
     readingTime: "7 min read",
-    audience: "AI coding-agent users choosing an automatic or explicit memory workflow",
+    audience: "AI coding-agent users choosing between automatic session history and maintained docs",
     heroBullets: [
       "claude-mem automatically captures agent sessions, compresses observations, and injects relevant history later.",
-      "Wenlan defaults to explicit source-backed capture, handoffs, review, and maintained wiki pages.",
+      "Wenlan keeps docs, skills and rules your AI tools work from, kept current. Pages cite their sources, and you review every change.",
       "Both support Claude Code, Codex, and cross-agent retrieval; the real difference is how knowledge enters and stays inspectable.",
       "This page checks claude-mem v13.12.4 and commit 132b4634 against Wenlan v0.14.1 and commit 93451bf0.",
     ],
@@ -2333,8 +2333,8 @@ const baseArticles: LearnArticle[] = [
         heading: "Short answer",
         body: [
           "Choose claude-mem when you want memory to happen by itself: hooks observe your agent sessions, compress them into searchable history, and inject the relevant parts back later with little effort from you.",
-          "Choose Wenlan when you want durable facts, decisions, handoffs, and pages to be explicit, source-backed, reviewable, and readable outside the agent that captured them.",
-          "Do not choose between them on the old assumption that only Wenlan works across agents. Current claude-mem source includes Codex hooks and other integrations; current Wenlan uses one local daemon plus MCP and native plugin paths. The useful decision is automatic session history versus deliberately maintained work knowledge.",
+          "Choose Wenlan when you want docs, skills and rules that stay current in every AI tool, with cited sources and changes you can review and undo.",
+          "Do not choose between them on the old assumption that only Wenlan works across agents. Current claude-mem source includes Codex hooks and other integrations; current Wenlan uses one local daemon plus MCP and native plugin paths. The useful decision is automatic session history versus maintained docs.",
         ],
       },
       {
@@ -2348,16 +2348,16 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "What Wenlan emphasizes",
         body: [
-          "Wenlan treats memory as maintained work knowledge. `/capture` records one durable fact, decision, correction, preference, or lesson with provenance; `/handoff` records what changed and what comes next; `/wenlan distill` deliberately creates or refreshes source-backed pages.",
-          "Recall and storage run through one local daemon. Claude Code and Codex have plugin paths, while Cursor, Claude Desktop, Gemini CLI, VS Code, and other clients can reach the same knowledge through MCP.",
-          "The default workflow is explicit, but not frozen in manual mode: optional model-backed passes can enrich captures, connect entities, and propose page revisions. `/brief`, `/wenlan curate`, and read-only `/wenlan lint` keep those proposals and knowledge-health findings inspectable.",
+          "Wenlan turns notes, documents and AI chats into pages with cited sources. `/capture` records one durable fact, decision, or lesson; `/handoff` records what changed and what comes next; `/wenlan distill` creates or refreshes source-backed pages.",
+          "Wenlan works with the tools you already use. Claude Code and Codex have plugin paths, while Cursor, Claude Desktop, Gemini CLI, VS Code, and other clients reach the same pages through MCP.",
+          "Memories you settle in one tool are there in the next, and Wenlan organizes them into topic pages, merging repeats. You can lock a page so AI asks first. `/brief`, `/wenlan curate`, and read-only `/wenlan lint` keep changes inspectable.",
         ],
       },
       {
         heading: "How to decide",
         body: [
           "Start with the capture contract, not the client list. If missing a useful event is the main risk, automatic observation is attractive. If preserving only deliberate, attributable knowledge is the main risk, explicit capture and review are easier to audit.",
-          "Then inspect the artifact you want to own. claude-mem centers a searchable session timeline and compressed observations. Wenlan centers atomic memories plus maintained Markdown pages, citations, revisions, and local git history.",
+          "Then inspect the artifact you want to own. claude-mem centers a searchable session timeline and compressed observations. Wenlan centers maintained Markdown pages, citations, revisions, and local git history.",
         ],
         bullets: [
           "Choose claude-mem for automatic session observation and low capture-time friction.",
@@ -2390,7 +2390,7 @@ const baseArticles: LearnArticle[] = [
         heading: "Cross-agent support is no longer the dividing line",
         body: [
           "Current claude-mem source includes Codex hooks and adapters. Its pinned installation guide lists Claude Code, Cursor, Windsurf, OpenCode, Codex CLI, Antigravity CLI, and OpenClaw as supported IDEs. The exact capture depth depends on each integration, so inspect the maintained setup path for the client you use.",
-          "Wenlan exposes one local source of truth through Claude Code and Codex plugins plus MCP connectors for other clients. Its cross-client promise is shared access to the same atomic memories and pages, not automatic observation of every client by default.",
+          "Wenlan exposes the same pages through Claude Code and Codex plugins plus MCP connectors for other clients. Its cross-client promise is shared access to the same pages, not automatic observation of every client by default.",
           "For a mixed-agent workflow, compare what each client can write, what it can only read, and how failures degrade. A logo list is not enough.",
         ],
       },
@@ -2398,7 +2398,7 @@ const baseArticles: LearnArticle[] = [
         heading: "When claude-mem is the better call",
         body: [
           "Choose claude-mem when automatic observation is the feature, not a compromise: you want session history captured with little interruption, summarized by an AI processor, browsable in a viewer, and retrieved in layers.",
-          "Choose Wenlan when the durable unit should be an explicit fact, decision, correction, handoff, or maintained page with review and provenance. It is also the clearer fit when readable Markdown and local git history are part of the ownership contract.",
+          "Choose Wenlan when the durable unit should be a maintained page with review and sources. It is also the clearer fit when plain Markdown files, self-hosting, and local git history matter to you.",
           "Both projects use Apache-2.0 for the compared open-source core. Wenlan's optional desktop app is maintained separately under AGPL-3.0. Licensing therefore is not the useful differentiator; capture and artifact models are.",
         ],
       },
@@ -2408,31 +2408,31 @@ const baseArticles: LearnArticle[] = [
       rows: [
         {
           dimension: "Center of gravity",
-          wenlan: "Explicit, source-backed work knowledge: atomic memories, handoffs, reviewed revisions, and maintained pages.",
+          wenlan: "Docs, skills and rules your AI tools work from, kept current, with cited sources and reviewable changes.",
           competitor:
             "Automatic session observation, AI compression, searchable history, and progressive context injection.",
         },
         {
           dimension: "Capture mode",
-          wenlan: "Explicit /capture and /handoff, deliberate /wenlan distill, plus optional model-backed enrichment and revision proposals.",
+          wenlan: "Explicit /capture and /handoff, deliberate /wenlan distill, plus optional model-backed organizing and revision proposals.",
           competitor:
             "Agent hooks capture prompts and tool activity; a local worker processes observations and summaries automatically.",
         },
         {
           dimension: "Retrieval flow",
-          wenlan: "Recall over atomic memories and pages, with source IDs, graph context, and direct human-readable artifacts.",
+          wenlan: "Recall over memories and pages, with source IDs, graph context, and plain Markdown files.",
           competitor:
             "SQLite/FTS5 plus optional Chroma; progressive disclosure through search, timeline, and full observation details.",
         },
         {
           dimension: "Cross-tool reach",
-          wenlan: "Claude Code and Codex plugins plus MCP connectors share one local daemon and knowledge store.",
+          wenlan: "Claude Code and Codex plugins plus MCP connectors share the same pages.",
           competitor:
             "Claude Code roots plus maintained hooks or adapters for Codex and other agents; capture depth varies by integration.",
         },
         {
           dimension: "Provenance + versioning",
-          wenlan: "Source IDs, citations, revisions, readable pages, and local git history for projected artifacts.",
+          wenlan: "Source IDs, citations, revisions, plain Markdown pages, and local git history.",
           competitor:
             "Session-attributed observation IDs, citations, SQLite history, and a viewer; no per-write git history by default.",
         },
@@ -2452,7 +2452,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Is claude-mem more automatic than Wenlan?",
         answer:
-          "Yes, automatic session observation and compression are central to claude-mem. Wenlan defaults to explicit capture and handoff, with optional model-backed enrichment and page-refresh proposals that remain reviewable.",
+          "Yes, automatic session observation and compression are central to claude-mem. Wenlan defaults to explicit capture and handoff, with optional model-backed organizing and page-refresh proposals that you review.",
       },
       {
         question: "Does claude-mem support Codex?",
@@ -2472,7 +2472,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Does Wenlan watch my Claude Code session in the background?",
         answer:
-          "Not by default. Wenlan stores what a user or agent explicitly captures, imports, or hands off. Optional model-backed passes can enrich that material and propose page work, but they do not silently turn every tool event into durable memory.",
+          "Not by default. Wenlan stores what a user or agent explicitly captures, imports, or hands off. Optional model-backed passes can organize that material and propose page work, but they do not silently turn every tool event into durable memory.",
       },
     ],
     relatedSlugs: [
@@ -2484,8 +2484,8 @@ const baseArticles: LearnArticle[] = [
       "ai-work-memory",
     ],
     cta: {
-      heading: "Carry Claude Code context beyond one session",
-      body: "Wenlan helps Claude Code and other MCP clients use the same local work memory.",
+      heading: "Keep Claude Code docs current beyond one session",
+      body: "Wenlan keeps docs, skills and rules current for Claude Code and the other AI tools you use. Free and open source.",
     },
   },
   {
@@ -2510,11 +2510,11 @@ const baseArticles: LearnArticle[] = [
     updatedAt: "2026-10-18",
     author: DEFAULT_AUTHOR,
     readingTime: "7 min read",
-    audience: "Developers and teams comparing local-first memory systems for AI agents",
+    audience: "Developers and teams comparing local-first tools for AI agents",
     heroBullets: [
       "SuperLocalMemory v3.8.3 is a broad local-first control plane for agent memory, temporal retrieval, team access, audit, cache, compression, and bounded loops.",
-      "Wenlan v0.14.1 is a source-backed LLM wiki workflow for explicit capture, handoff, review, retrieval, and maintained readable pages.",
-      "Choose by operating boundary: automated memory operations and team controls, or deliberate knowledge work with inspectable artifacts.",
+      "Wenlan (compared at v0.14.1) keeps docs, skills and rules your AI tools work from, kept current, with cited sources and reviewable changes.",
+      "Choose by operating boundary: automated memory operations and access controls, or maintained docs you can read and review.",
       "This is a historical comparison pinned to sources checked on 2026-07-24. SuperLocalMemory v4.2.10 was released on 2026-10-17; current capabilities and benchmark comparisons have not been retested.",
     ],
     officialReferences: [
@@ -2554,7 +2554,7 @@ const baseArticles: LearnArticle[] = [
         heading: "Short answer",
         body: [
           "In the July 24 source review, SuperLocalMemory v3.8.3 documented a local-first memory control plane for a team: automated ingestion, temporal and graph-aware retrieval, personal/team scopes, role-based access, and a hash-chained audit trail.",
-          "The Wenlan v0.14.1 sources documented an LLM wiki for AI work: explicit capture, handoffs between sessions, reviewable memories, source-backed pages, local hybrid retrieval, and readable artifacts that can sit beside an Obsidian vault.",
+          "The Wenlan v0.14.1 sources documented source-backed pages for AI work: explicit capture, handoffs between sessions, reviewable changes, local hybrid retrieval, and plain Markdown files that can sit beside an Obsidian vault.",
           "Both reviewed versions documented local-first operation and MCP access. That source comparison describes their scope at the time; it does not establish which current release fits your work better.",
         ],
       },
@@ -2569,16 +2569,16 @@ const baseArticles: LearnArticle[] = [
       {
         heading: "What Wenlan emphasizes",
         body: [
-          "Wenlan focuses on turning AI work into a maintained, source-backed LLM wiki. Agents explicitly capture durable facts, write handoffs, retrieve prior context, curate revisions, and distill selected memories into readable pages.",
-          "Its local daemon combines FTS5, BGE embeddings, weighted reciprocal-rank fusion, eligible graph context, and optional reranking. The same memory is available across MCP clients, while projected Markdown pages, citations, revisions, session artifacts, and local git history keep the maintained knowledge layer inspectable.",
-          "Wenlan is not trying to be a team access-control plane, an LLM proxy, or a framework runtime. Its narrower boundary is useful when the primary job is preserving why work changed and keeping the resulting knowledge readable by people.",
+          "Wenlan keeps docs, skills and rules your AI tools work from, kept current. Notes, documents and AI chats become pages that cite their sources, and what you settle in any AI tool is there in the next.",
+          "Its local daemon combines FTS5, BGE embeddings, weighted reciprocal-rank fusion, eligible graph context, and optional reranking. The same pages are available across MCP clients. Plain Markdown files, citations, revisions, and local git history keep them inspectable, and the database is only an index.",
+          "Wenlan is not an LLM proxy or a framework runtime, and it works with the AI tools you already use. Its narrower boundary is useful when the job is keeping docs current and readable by people.",
         ],
       },
       {
         heading: "How to decide",
         body: [
           "For a current choice, treat the historical comparison as a test plan, not a result from today’s releases. If you need a governed memory service for several agents or people, test the current SuperLocalMemory release against your required profiles, scopes, role gates, audit, and adapters.",
-          "If you need a durable project record that an agent can retrieve and a person can inspect, test those requirements against the current Wenlan release: capture, handoff, recall, review, and maintained source-backed pages. The pinned source descriptions below do not replace that test.",
+          "If you need docs that agents can use and a person can inspect, test those requirements against the current Wenlan release: capture, handoff, recall, review, and source-backed pages. The pinned source descriptions below do not replace that test.",
           "A team can reasonably use both boundaries. The comparison matters when choosing which product should own the durable memory and which one, if any, should own optimization or operational controls.",
         ],
       },
@@ -2594,7 +2594,7 @@ const baseArticles: LearnArticle[] = [
         heading: "Run an inspectability and recovery test",
         body: [
           "Install both against disposable test data. Store a decision, its source, and a later correction. Ask a time-qualified question, inspect which evidence was retrieved, verify the correction, delete the original, restart the service, and repeat from a second MCP client.",
-          "In SuperLocalMemory, inspect the operation receipt, provenance, scope, audit event, profile boundary, recall trace, and dashboard record. In Wenlan, inspect the recalled memory, source IDs, curated revision, distilled Markdown page, session handoff, and local git history.",
+          "In SuperLocalMemory, inspect the operation receipt, provenance, scope, audit event, profile boundary, recall trace, and dashboard record. In Wenlan, inspect the recalled memory, source IDs, curated revision, Markdown page, session handoff, and local git history.",
           "Then test the failure paths you actually care about: low-confidence recall, conflicting facts, unavailable enrichment, a busy daemon, a profile or Space boundary, and recovery after restart. This produces a decision you can audit instead of a feature-count vote.",
         ],
         bullets: [
@@ -2619,7 +2619,7 @@ const baseArticles: LearnArticle[] = [
       rows: [
         {
           dimension: "Center of gravity",
-          wenlan: "Source-backed LLM wiki workflow: explicit capture, handoff, review, recall, distillation, and readable maintained pages.",
+          wenlan: "Docs, skills and rules your AI tools work from, kept current: capture, handoff, review, recall, and source-backed pages.",
           competitor:
             "Local-first agent memory control plane: ingestion, retrieval, scopes, audit, operations, cache, compression, coordination, and adapters.",
         },
@@ -2631,13 +2631,13 @@ const baseArticles: LearnArticle[] = [
         },
         {
           dimension: "Durable artifact",
-          wenlan: "Local libSQL is retrieval authority; projected Markdown pages, citations, revisions, session artifacts, and git history stay readable.",
+          wenlan: "Plain Markdown pages with citations, revisions, and git history; the database is only an index.",
           competitor:
             "SQLite + sqlite-vec are canonical; the dashboard, CLI, MCP, traces, and audit surfaces expose and operate the control-plane records.",
         },
         {
           dimension: "Team boundaries",
-          wenlan: "Spaces and read scopes separate memory contexts; the public product is centered on an individual local knowledge workflow.",
+          wenlan: "Spaces separate contexts. A self-hosted team server gives each person view-only or edit access per Space (next release).",
           competitor:
             "Profiles, personal/shared/global memory, role-based access, workspace isolation, and optional sign-in for shared deployments.",
         },
@@ -2649,7 +2649,7 @@ const baseArticles: LearnArticle[] = [
         },
         {
           dimension: "Optimization + automation",
-          wenlan: "Does not own the primary LLM request path; focuses on memory, handoffs, review, retrieval, and maintained pages.",
+          wenlan: "Does not own the LLM request path; focuses on handoffs, review, retrieval, and maintained pages.",
           competitor:
             "Exact cache, opt-in compression, proxy/MCP/skill surfaces, bounded loops, peer coordination, and framework adapters.",
         },
@@ -2665,12 +2665,12 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Do Wenlan and SuperLocalMemory solve the same problem?",
         answer:
-          "They overlap around local-first agent memory, retrieval, MCP clients, provenance, and durable context. SuperLocalMemory v3.8.3 has the broader operational control-plane boundary; Wenlan has the narrower source-backed LLM wiki and work-memory boundary.",
+          "They overlap around local-first agent memory, retrieval, MCP clients, provenance, and durable context. SuperLocalMemory v3.8.3 has the broader operational control-plane boundary; Wenlan has the narrower boundary of source-backed docs, skills and rules kept current.",
       },
       {
         question: "Which is better for team access controls?",
         answer:
-          "SuperLocalMemory v3.8.3 explicitly documents profiles, role-based access, personal/shared/global scopes, workspace isolation, optional sign-in, and governance controls. Wenlan uses Spaces and read scopes, but its public workflow is centered on source-backed local knowledge rather than a multi-user access-control plane.",
+          "SuperLocalMemory v3.8.3 explicitly documents profiles, role-based access, personal/shared/global scopes, workspace isolation, optional sign-in, and governance controls. Wenlan uses Spaces, with a self-hosted team server giving view-only or edit access per Space in the next release. It has no profiles or audit trail like SuperLocalMemory's.",
       },
       {
         question: "Can I compare the published benchmark percentages directly?",
@@ -2696,8 +2696,8 @@ const baseArticles: LearnArticle[] = [
       "review-before-trust-ai-memory",
     ],
     cta: {
-      heading: "Build a source-backed LLM wiki",
-      body: "Wenlan keeps AI work context local, reviewable, and available across MCP-compatible tools.",
+      heading: "Keep your docs current across AI tools",
+      body: "Wenlan keeps docs, skills and rules current in the AI tools you already use. Free and open source.",
     },
   },
   {
