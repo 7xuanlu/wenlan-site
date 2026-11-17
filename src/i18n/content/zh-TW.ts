@@ -11,7 +11,7 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "88267a9a614c63ec2f2a282269cb9bb1ee487ca9d0ec0ee7fb89ea22fdc7f5e8",
+    sourceHash: "fe943296b974afb0cc0aab8c22602999d0d08a0223122922ece30c22b00c8976",
     content: {
       seo: {
         title: "文瀾 Wenlan｜開源的 AI 記憶、技能和知識庫，個人和團隊都能用",
@@ -411,7 +411,7 @@ export const zhTWContent = {
         },
         features: {
           eyebrow: "知識頁面",
-          title: "你的 AI 工具共用的地方。",
+          title: "你說了算。",
           body: "整理過的決策與教訓會成為耐用頁面，而不是被埋在聊天記錄裡。它們足夠有組織，agent 能使用；也足夠具體，人可以閱讀。",
           note: "你的工作不再只是 transcript 歷史，而是開始變成專案知識。",
         },
@@ -424,7 +424,7 @@ export const zhTWContent = {
         openSourceCta: {
           eyebrow: "開源",
           title: "拿你自己的專案試試。",
-          body: "用桌面版，或只用命令列，再接上你常用的 AI 工具，像 Claude Code、Codex 或 ChatGPT。",
+          body: "自己用：跑一行安裝，或下載桌面版。團隊用：架一台文瀾 Wenlan 伺服器，每個人每個 Space 可以設成只能看或可以改，打開邀請連結就能加入。",
           note: "執行核心與 plugins：Apache-2.0。桌面 App：AGPL-3.0-only。",
           primaryCta: { id: "download", href: "/download", label: "下載" },
           secondaryCta: {
@@ -912,24 +912,29 @@ export const zhTWContent = {
         bento: {
           cells: [
             {
-              id: "steep",
-              title: "你的 AI 工具來寫頁面",
-              body: "AI 工具一邊工作，一邊把素材、檔案和對話寫成附出處的頁面。剩下的用 /wenlan steep 完成。",
-            },
-            {
               id: "lock",
               title: "每個改動你都看得到",
               body: "改動都能復原，哪些頁面讓 AI 改，由你決定。你寫的頁面預設為「先問我」。",
             },
             {
-              id: "repo-wiki",
-              title: "程式碼也有頁面",
-              body: "請 AI 工具為程式庫寫頁面，附圖表，每篇都連到它依據的程式碼行。程式碼一改，頁面就會被標出來等著更新。",
+              id: "history",
+              title: "頁面怎麼改的，看得到",
+              body: "回看頁面的舊版本和背後的記憶。不想要的改動可以復原。",
+            },
+            {
+              id: "steep",
+              title: "你的 AI 工具來寫頁面",
+              body: "AI 工具一邊工作，一邊把素材、檔案和對話寫成附出處的頁面。剩下的用 /wenlan steep 完成。",
             },
             {
               id: "sources",
               title: "帶進你已有的資料",
               body: "筆記軟體、檔案、AI 對話、連結和程式碼。每個來源都保留連結，頁面才能引用。",
+            },
+            {
+              id: "repo-wiki",
+              title: "程式碼也有頁面",
+              body: "請 AI 工具為程式庫寫頁面，附圖表，每篇都連到它依據的程式碼行。程式碼一改，頁面就會被標出來等著更新。",
             },
             {
               id: "obsidian",
@@ -955,11 +960,6 @@ export const zhTWContent = {
               id: "topics",
               title: "主題總覽",
               body: "聚合相關頁面，沿著主題之間的關聯繼續探索。",
-            },
-            {
-              id: "history",
-              title: "頁面怎麼改的，看得到",
-              body: "回看頁面的舊版本和背後的記憶。不想要的改動可以復原。",
             },
           ],
         },
@@ -1923,11 +1923,11 @@ export const zhTWContent = {
   },
   footer: {
     status: "translated",
-    sourceHash: "d609e0563ea3802525fae21b9fd1ff96653775dc415cf2a01ec626f89b0ad116",
+    sourceHash: "7d8bee6b8ef8ba91b1c85fa72ed3b16d472f2723c69890125a7055388c2b9a0f",
     content: {
       ariaLabel: "網站頁尾",
       brand: "Wenlan",
-      tagline: "持續更新的個人知識庫。AI 幫你整理，你保有主導權。",
+      tagline: "會自己更新的做事手冊，每個 AI 工具都用。",
       groups: [
         {
           id: "product",

@@ -370,7 +370,7 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
 
     const cards = home.redesign.bento.cells;
     // Citation checks and update flags are homepage story sections, not cards.
-    assert.deepEqual(cards.map(({ id }) => id), ["steep", "lock", "repo-wiki", "sources", "obsidian", "tools", "web-access", "spaces", "topics", "history"], `${locale}: revised capability coverage`);
+    assert.deepEqual(cards.map(({ id }) => id), ["lock", "history", "steep", "sources", "repo-wiki", "obsidian", "tools", "web-access", "spaces", "topics"], `${locale}: revised capability coverage`);
     assert.match(cards.find(card => card.id === "steep").body, /Steep|\/wenlan steep/);
     assert.match(cards.find(card => card.id === "steep").body, /\/wenlan steep|隨叫|随叫/);
     assert.match(cards.find(card => card.id === "steep").body, /sources|出處|出处/);
@@ -405,8 +405,9 @@ test("homepage copy makes bounded claims and describes fair alternatives in ever
     const story = storyCopyByLocale[locale];
     assert.match(story.citeCheck.body, /cited source|出處|出处/);
     assert.match(story.citeCheck.body, /isn't saved|不會存進去|不会保存/);
-    assert.match(story.updates.body, /only the pages built on it|只有用到它的頁面|只有用到它的页面/);
-    assert.match(story.updates.body, /decide which pages|由你決定|由你决定/);
+    assert.match(story.updates.body, /sorted into your docs, skills and rules|整理進文件、技能和規則|整理进文档、技能和规则/);
+    assert.match(story.updates.body, /stay current|一直是新的/);
+    assert.match(cards.find(card => card.id === "lock").body, /decide which pages|由你決定|由你决定/);
     assert.match(cards.find(card => card.id === "spaces").body, /Spaces/);
     assert.match(cards.find(card => card.id === "history").body, /earlier versions|舊版本|旧版本/i);
     assert.match(capabilityArtifacts, /Replaces earlier memory/);
@@ -472,7 +473,7 @@ test("context token figures are not attributed to LongMemEval retrieval quality"
 
 test("the ownership section says where files live without the stale model line", () => {
   const home = readFileSync(new URL("../src/app/_pages/home.tsx", import.meta.url), "utf8");
-  assert.match(home, /title: "Pages are plain files you keep\."/);
+  assert.match(home, /title: "Files first, self-hosted, portable\."/);
   assert.match(home, /Pages are Markdown files you can open in any editor\./);
   assert.match(home, /You decide which AI tools can read them\./);
   assert.doesNotMatch(home, /Cloud models receive|雲端模型會接收|云端模型会接收/);

@@ -414,7 +414,7 @@ export const enContent = {
         },
         features: {
           eyebrow: "Knowledge pages",
-          title: "One shared place for your AI tools.",
+          title: "You stay in charge.",
           body: "Cleaned decisions and lessons become durable pages instead of buried chat logs. They are organized enough for agents to use and concrete enough for humans to read.",
           note: "Your work stops being transcript history and starts becoming project knowledge.",
         },
@@ -427,7 +427,7 @@ export const enContent = {
         openSourceCta: {
           eyebrow: "Open source",
           title: "Try it on your own project.",
-          body: "Use the desktop app or just the command line, then connect the AI tools you already use, like Claude Code, Codex, or ChatGPT.",
+          body: "On your own: run one setup line, or download the desktop app. With a team: run one Wenlan server; each person gets view-only or edit access to each Space and joins from an invite link.",
           note: "Runtime and plugins: Apache-2.0. Desktop app: AGPL-3.0-only.",
           primaryCta: { id: "download", href: "/download", label: "Download" },
           secondaryCta: {
@@ -917,24 +917,29 @@ export const enContent = {
         bento: {
           cells: [
             {
-              id: "steep",
-              title: "Your AI tools write the pages",
-              body: "As they work, your AI tools turn notes, files, and chats into pages with sources. Run /wenlan steep to finish the rest.",
-            },
-            {
               id: "lock",
               title: "You see every change",
               body: "You can undo any change. You decide which pages the AI may change. Pages you wrote are set to Ask me first.",
             },
             {
-              id: "repo-wiki",
-              title: "Your code gets pages too",
-              body: "Ask your AI tool for pages about a repository, with diagrams tied to the code lines they rely on. When that code changes, the pages are flagged for an update.",
+              id: "history",
+              title: "See how pages changed",
+              body: "Revisit earlier versions of a page and the memories behind it. Undo a change you don't want.",
+            },
+            {
+              id: "steep",
+              title: "Your AI tools write the pages",
+              body: "As they work, your AI tools turn notes, files, and chats into pages with sources. Run /wenlan steep to finish the rest.",
             },
             {
               id: "sources",
               title: "Bring what you already have",
               body: "Notes apps, files, AI chats, links, and code. Each source keeps its link, so pages can cite it.",
+            },
+            {
+              id: "repo-wiki",
+              title: "Your code gets pages too",
+              body: "Ask your AI tool for pages about a repository, with diagrams tied to the code lines they rely on. When that code changes, the pages are flagged for an update.",
             },
             {
               id: "obsidian",
@@ -960,11 +965,6 @@ export const enContent = {
               id: "topics",
               title: "A home for each topic",
               body: "Gather related pages. Follow connections across topics.",
-            },
-            {
-              id: "history",
-              title: "See how pages changed",
-              body: "Revisit earlier versions of a page and the memories behind it. Undo a change you don't want.",
             },
           ],
         },
@@ -1932,7 +1932,7 @@ export const enContent = {
     content: {
       ariaLabel: "Site footer",
       brand: "Wenlan",
-      tagline: "A living personal wiki. AI organizes. You stay in control.",
+      tagline: "The living playbook for every AI tool.",
       groups: [
         {
           id: "product",

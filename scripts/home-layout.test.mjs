@@ -65,7 +65,7 @@ test("homepage links to the download page without duplicating the platform secti
 });
 
 test("homepage shows capabilities and retrieval evidence directly while disclosing examples", () => {
-  const order = ['<DemoVideo', '<HomeCta link={{ id: "download"', 'id="knowledge-workflows"', '<ProductMedia locale={locale} slot="wiki"', '<CiteCheck', '<KnowledgeConnections', '<KnowledgeUpdates', 'id="ai-recall"', '<ProductMedia locale={locale} slot="ai"', '<HeroScenarios', 'id="capabilities"', '<BentoSection', 'id="integrations"', 'id="retrieval-evidence"', 'placement="home-footer"'];
+  const order = ['<DemoVideo', '<HomeCta link={{ id: "download"', 'id="knowledge-workflows"', '<ProductMedia locale={locale} slot="wiki"', 'id="why-wenlan"', '<CiteCheck', '<KnowledgeConnections', 'id="ai-recall"', '<ProductMedia locale={locale} slot="ai"', '<HeroScenarios', '<KnowledgeUpdates', 'id="capabilities"', '<BentoSection', 'id="integrations"', 'id="vs-rules-file"', 'id="retrieval-evidence"', 'id="get-wenlan"', 'placement="home-footer"'];
   const positions = order.map((marker) => homeSource.indexOf(marker));
   assert.ok(positions.every((position) => position >= 0));
   assert.deepEqual(positions, [...positions].sort((a, b) => a - b));
@@ -73,7 +73,7 @@ test("homepage shows capabilities and retrieval evidence directly while disclosi
   assert.doesNotMatch(homeSource, /<details\s+data-home-features/);
 });
 
-test("the citation check is the first story after the hero and shows the real refused write", () => {
+test("the problem band opens the story, then the citation check shows the real refused write", () => {
   const storySource = fs.readFileSync(path.join(repoRoot, "src/components/home/home-story.tsx"), "utf8");
   const citeCheck = storySource.slice(storySource.indexOf("export function CiteCheck("), storySource.indexOf("export function KnowledgeConnections("));
   assert.match(citeCheck, /<section id="cite-check" aria-labelledby="cite-check-heading"/);
@@ -85,8 +85,10 @@ test("the citation check is the first story after the hero and shows the real re
   assert.ok(!fs.existsSync(path.join(repoRoot, "public/images/home/capabilities/updates.webp")), "unused card capture removed");
   const heroEnd = homeSource.indexOf('id="knowledge-workflows"');
   const cite = homeSource.indexOf("<CiteCheck");
-  assert.ok(heroEnd < cite && cite < homeSource.indexOf('id="ai-recall"'), "cite-check renders right after the hero and before #ai-recall");
-  assert.equal(homeSource.slice(heroEnd, cite).match(/<(?:section|KnowledgeUpdates|KnowledgeConnections)\b/g)?.length ?? 0, 0, "no other story sits between the hero and cite-check");
+  assert.ok(heroEnd < cite && cite < homeSource.indexOf('id="ai-recall"'), "cite-check renders before #ai-recall");
+  const between = homeSource.slice(heroEnd, cite);
+  assert.equal(between.match(/<(?:section|KnowledgeUpdates|KnowledgeConnections)\b/g)?.length ?? 0, 1, "only the problem band sits between the hero and cite-check");
+  assert.match(between, /<section id="why-wenlan"/);
 });
 
 test("the preserved worked example remains localized and source-linked", () => {
@@ -236,6 +238,7 @@ test("sources and clients live in capabilities without treating Obsidian as an A
 
 test("homepage exposes retrieval scope and links to the full evaluation", () => {
   assert.match(homeSource, /data-retrieval-bars/);
+  assert.match(homeSource.slice(homeSource.indexOf('id="retrieval-evidence"')), /<details data-home-examples[\s\S]*id="retrieval-heading"[\s\S]*data-retrieval-bars/, "retrieval metrics are collapsed under their section title");
   assert.doesNotMatch(homeSource, /data-retrieval-details|data-home-technical/);
   assert.match(homeSource, /href="\/docs\/evaluation"/);
   assert.match(homeSource, /93\.6%/);

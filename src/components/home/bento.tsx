@@ -11,15 +11,15 @@ type BentoCellCopy = HomeContent["redesign"]["bento"]["cells"][number];
 
 const bentoVisualCopy: Record<Locale, { intro: string; illustrationLabel: string }> = {
   en: {
-    intro: "Engineers connect the AI tools. Teammates open it to read and edit. Ask your AI to draw any page as HTML.",
+    intro: "See every change, undo it, and lock a page so AI asks you first.",
     illustrationLabel: "App captures & capability illustrations · demo content",
   },
   "zh-TW": {
-    intro: "工程師接上 AI 工具，其他人打開就能看、能改。想換個樣子，請 AI 把頁面畫成 HTML。",
+    intro: "每個改動你都看得到、能復原，還能鎖住頁面，讓 AI 先問你。",
     illustrationLabel: "App 畫面與能力示意 · 使用示範內容",
   },
   "zh-CN": {
-    intro: "工程师接上 AI 工具，其他人打开就能看、能改。想换个样子，让 AI 把页面画成 HTML。",
+    intro: "每处改动你都看得到、能撤销，还能锁住页面，让 AI 先问你。",
     illustrationLabel: "App 画面与能力示意 · 使用示范内容",
   },
 };
