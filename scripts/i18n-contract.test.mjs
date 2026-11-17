@@ -2549,9 +2549,9 @@ test("home SEO copy and hero present the studio positioning in all locales", asy
   );
   assert.equal(
     content.enContent.home.content.seo.description,
-    "A studio for everything you think, learn, and build with AI. Open-source AI memory, skills and pages with sources, kept up to date by your AI tools.",
+    "The living playbook for every AI tool: docs, skills and rules you and your AI tools both work from, kept current. Open-source AI memory, skills and knowledge base with sources.",
   );
-  assert.equal(content.enContent.home.content.redesign.hero.eyebrow, "A studio for everything you think, learn, and build with AI.");
+  assert.equal(content.enContent.home.content.redesign.hero.eyebrow, "The living playbook for every AI tool.");
   assert.deepEqual(
     [
       content.enContent.home.content.redesign.hero.headline.pre,
@@ -2559,9 +2559,9 @@ test("home SEO copy and hero present the studio positioning in all locales", asy
       content.enContent.home.content.redesign.hero.description,
     ],
     [
-      "Pages, skills and rules your AI tools",
-      "keep current and work from",
-      "Every page shows its sources, and your AI draws it any way you ask. For you and your team.",
+      "Docs, skills and rules you and your AI tools both work from,",
+      "kept current",
+      "Bring your notes and knowledge. Every doc cites its sources.",
     ],
   );
 
@@ -2571,10 +2571,10 @@ test("home SEO copy and hero present the studio positioning in all locales", asy
       sourceBacked: "有來源依據",
       staleHomePhrase: /活個人知識庫|AI-native/,
       hero: {
-        eyebrow: /^你和 AI 一起想、一起學、一起做的地方。$/,
-        pre: /^頁面、技能和規則，你的 AI 工具$/,
-        emphasis: /幫你更新，也拿來做事/,
-        description: "每一頁都附上出處，樣子你說、AI 來畫。個人和團隊都能用。",
+        eyebrow: /^會自己更新的做事手冊，每個 AI 工具都用。$/,
+        pre: /^文件、技能和規則，你和 AI 工具都照著做，$/,
+        emphasis: /而且會保持最新/,
+        description: "筆記和知識都能放進來，每份文件都附出處。",
       },
     },
     "zh-CN": {
@@ -2582,10 +2582,10 @@ test("home SEO copy and hero present the studio positioning in all locales", asy
       sourceBacked: "有来源依据",
       staleHomePhrase: /活个人知识库|AI-native/,
       hero: {
-        eyebrow: /^你和 AI 一起想、一起学、一起做的地方。$/,
-        pre: /^页面、技能和规则，你的 AI 工具$/,
-        emphasis: /帮你更新，也拿来做事/,
-        description: "每一页都附上出处，样子你说、AI 来画。个人和团队都能用。",
+        eyebrow: /^会自己更新的做事手册，每个 AI 工具都用。$/,
+        pre: /^文档、技能和规则，你和 AI 工具都照着做，$/,
+        emphasis: /而且会保持最新/,
+        description: "笔记和知识都能放进来，每份文档都附出处。",
       },
     },
   };
@@ -2608,7 +2608,7 @@ test("home SEO copy and hero present the studio positioning in all locales", asy
   }
 });
 
-test("Chinese hero names the studio for pages, skills and rules and setup begins with a concrete decision", async () => {
+test("Chinese hero names docs, skills and rules and setup begins with a concrete decision", async () => {
   const { content } = await loadI18nModules();
 
   for (const locale of ["zh-TW", "zh-CN"]) {
@@ -2616,7 +2616,7 @@ test("Chinese hero names the studio for pages, skills and rules and setup begins
 
     assert.match(
       dictionary.home.content.redesign.hero.headline.pre,
-      /頁面、技能和規則|页面、技能和规则/,
+      /文件、技能和規則|文档、技能和规则/,
       `${locale}.home.hero.description.benefit`,
     );
     assert.match(
@@ -2822,7 +2822,7 @@ test("English core content records the current SEO title and description subset"
   );
   assert.equal(
     content.enContent.home.content.seo.description,
-    "A studio for everything you think, learn, and build with AI. Open-source AI memory, skills and pages with sources, kept up to date by your AI tools.",
+    "The living playbook for every AI tool: docs, skills and rules you and your AI tools both work from, kept current. Open-source AI memory, skills and knowledge base with sources.",
   );
   assert.equal(
     content.enContent.about.content.seo.title,

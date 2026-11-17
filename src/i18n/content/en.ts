@@ -16,7 +16,7 @@ export const enContent = {
       seo: {
         title: "Wenlan | Open-Source AI Memory, Skills and Knowledge Base",
         description:
-          "A studio for everything you think, learn, and build with AI. Open-source AI memory, skills and pages with sources, kept up to date by your AI tools.",
+          "The living playbook for every AI tool: docs, skills and rules you and your AI tools both work from, kept current. Open-source AI memory, skills and knowledge base with sources.",
       },
       nav: {
         schemaName: "Wenlan site navigation",
@@ -555,10 +555,10 @@ export const enContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "A studio for everything you think, learn, and build with AI.",
-          headline: { pre: "Pages, skills and rules your AI tools", emphasis: "keep current and work from", post: "" },
+          eyebrow: "The living playbook for every AI tool.",
+          headline: { pre: "Docs, skills and rules you and your AI tools both work from,", emphasis: "kept current", post: "" },
           description:
-            "Every page shows its sources, and your AI draws it any way you ask. For you and your team.",
+            "Bring your notes and knowledge. Every doc cites its sources.",
           worksWithLabel: "Works with",
         },
         fit: {
@@ -1024,7 +1024,7 @@ export const enContent = {
       seo: {
         title: "About Wenlan: Open-Source, Local-First Project",
         description:
-          "Wenlan is an open-source studio for everything you think, learn, and build with AI. Pages with sources, skills and rules your AI tools keep up to date. For you and your team.",
+          "Wenlan is the open-source living playbook for every AI tool: docs, skills and rules you and your AI tools both work from, kept current. For you and your team.",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -1032,9 +1032,9 @@ export const enContent = {
       },
       hero: {
         eyebrow: "About",
-        title: "A studio for your work with AI.",
+        title: "The living playbook for every AI tool.",
         description:
-          "Wenlan is where your AI tools keep pages with sources, skills and rules, and work from them. It works alongside the AI tools you already use. Open source, for you and your team.",
+          "Docs, skills and rules you and your AI tools both work from, kept current. Every doc cites its sources. Wenlan works alongside the AI tools you already use. Open source, for you and your team.",
         statusLabel: "Project status",
         statusItems: ["{release}", "macOS, Linux, Windows", "Apache-2.0 + AGPL-3.0", "Built by Qi-Xuan Lu"],
       },
@@ -1136,7 +1136,7 @@ export const enContent = {
       schema: {
         name: "About Wenlan",
         description:
-          "Wenlan is an open-source studio for everything you think, learn, and build with AI, built by Qi-Xuan Lu.",
+          "Wenlan is the open-source living playbook for every AI tool, built by Qi-Xuan Lu.",
       },
     },
   },

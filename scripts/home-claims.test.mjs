@@ -269,19 +269,19 @@ const oldClaims = {
 test("hero names the studio and describes knowledge that can be revised without an accuracy guarantee", () => {
   const expected = {
     en: {
-      eyebrow: "A studio for everything you think, learn, and build with AI.",
-      headline: ["Pages, skills and rules your AI tools", "keep current and work from"],
-      description: "Every page shows its sources, and your AI draws it any way you ask. For you and your team.",
+      eyebrow: "The living playbook for every AI tool.",
+      headline: ["Docs, skills and rules you and your AI tools both work from,", "kept current"],
+      description: "Bring your notes and knowledge. Every doc cites its sources.",
     },
     "zh-TW": {
-      eyebrow: "你和 AI 一起想、一起學、一起做的地方。",
-      headline: ["頁面、技能和規則，你的 AI 工具", "幫你更新，也拿來做事"],
-      description: "每一頁都附上出處，樣子你說、AI 來畫。個人和團隊都能用。",
+      eyebrow: "會自己更新的做事手冊，每個 AI 工具都用。",
+      headline: ["文件、技能和規則，你和 AI 工具都照著做，", "而且會保持最新"],
+      description: "筆記和知識都能放進來，每份文件都附出處。",
     },
     "zh-CN": {
-      eyebrow: "你和 AI 一起想、一起学、一起做的地方。",
-      headline: ["页面、技能和规则，你的 AI 工具", "帮你更新，也拿来做事"],
-      description: "每一页都附上出处，样子你说、AI 来画。个人和团队都能用。",
+      eyebrow: "会自己更新的做事手册，每个 AI 工具都用。",
+      headline: ["文档、技能和规则，你和 AI 工具都照着做，", "而且会保持最新"],
+      description: "笔记和知识都能放进来，每份文档都附出处。",
     },
   };
   for (const [locale, dictionary] of Object.entries(dictionaryByLocale)) {

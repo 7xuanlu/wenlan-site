@@ -11,12 +11,12 @@ export const zhTWContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "9754d29dc1ce40f0915cebff3942deb4a956e77ddbf94d506541472691f146f5",
+    sourceHash: "88267a9a614c63ec2f2a282269cb9bb1ee487ca9d0ec0ee7fb89ea22fdc7f5e8",
     content: {
       seo: {
         title: "文瀾 Wenlan｜開源的 AI 記憶、技能和知識庫，個人和團隊都能用",
         description:
-          "文瀾 Wenlan 是你和 AI 一起想、一起學、一起做的地方。開源免費的 AI 記憶、技能和知識庫：有出處的頁面、技能、規則和 HTML 頁面，由你的 AI 工具保持更新。個人和團隊都能用。",
+          "文瀾 Wenlan：會自己更新的做事手冊，每個 AI 工具都用。文件、技能和規則，你和 AI 工具都照著做，而且會保持最新。開源免費的 AI 記憶、技能和知識庫，每份文件都附出處，個人和團隊都能用。",
       },
       nav: {
         schemaName: "Wenlan 文瀾網站導覽",
@@ -550,10 +550,10 @@ export const zhTWContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "你和 AI 一起想、一起學、一起做的地方。",
-          headline: { pre: "頁面、技能和規則，你的 AI 工具", emphasis: "幫你更新，也拿來做事", post: "" },
+          eyebrow: "會自己更新的做事手冊，每個 AI 工具都用。",
+          headline: { pre: "文件、技能和規則，你和 AI 工具都照著做，", emphasis: "而且會保持最新", post: "" },
           description:
-            "每一頁都附上出處，樣子你說、AI 來畫。個人和團隊都能用。",
+            "筆記和知識都能放進來，每份文件都附出處。",
           worksWithLabel: "可搭配",
         },
         fit: {
@@ -1014,12 +1014,12 @@ export const zhTWContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "c419a8d6420fd6d195d4efc1e2fae8a3e1aea1deef6506c0b9b32783e94141d2",
+    sourceHash: "96260418db88790f593926b8eda0b5e8e1a149cd9510cb022b221f9e128aa1b7",
     content: {
       seo: {
         title: "關於文瀾 Wenlan：開源的 AI 記憶、技能和知識庫",
         description:
-          "Wenlan 是開源的地方，讓你和 AI 一起想、一起學、一起做。有出處的頁面、技能和規則，由你的 AI 工具保持更新、拿來做事。個人和團隊都能用，支援 Windows、macOS 與 Linux，免費下載。",
+          "Wenlan 是開源、會自己更新的做事手冊，每個 AI 工具都用：文件、技能和規則，你和 AI 工具都照著做，而且會保持最新。個人和團隊都能用，支援 Windows、macOS 與 Linux，免費下載。",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -1027,9 +1027,9 @@ export const zhTWContent = {
       },
       hero: {
         eyebrow: "關於",
-        title: "你和 AI 一起想、一起學、一起做的地方。",
+        title: "會自己更新的做事手冊，每個 AI 工具都用。",
         description:
-          "Wenlan 讓你的 AI 工具把有出處的頁面、技能和規則存在這裡，保持更新，也拿來做事。它和你已在用的 AI 工具搭配使用。開源，個人和團隊都能用。",
+          "文件、技能和規則，你和 AI 工具都照著做，而且會保持最新。每份文件都附出處。Wenlan 和你已在用的 AI 工具搭配使用。開源，個人和團隊都能用。",
         statusLabel: "專案狀態",
         statusItems: ["版本 {release}", "支援 macOS、Linux、Windows", "開源授權：Apache-2.0 + AGPL-3.0", "Qi-Xuan Lu 建置"],
       },
@@ -1131,7 +1131,7 @@ export const zhTWContent = {
       schema: {
         name: "關於 Wenlan",
         description:
-          "Wenlan 是開源的地方，讓你和 AI 一起想、一起學、一起做，由 Qi-Xuan Lu 建置。",
+          "Wenlan 是開源、會自己更新的做事手冊，每個 AI 工具都用，由 Qi-Xuan Lu 建置。",
       },
     },
   },

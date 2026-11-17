@@ -2195,7 +2195,7 @@ const baseArticles: LearnArticle[] = [
         },
         {
           dimension: "Collaboration",
-          wenlan: "Team server with view-only or edit access per Space (next release). Personal use works today.",
+          wenlan: "Team server with view-only or edit access per Space. Personal use works today.",
           competitor:
             "Team workspaces with membership, collaborative editing, activity, snapshots, and file history.",
         },
@@ -2637,7 +2637,7 @@ const baseArticles: LearnArticle[] = [
         },
         {
           dimension: "Team boundaries",
-          wenlan: "Spaces separate contexts. A self-hosted team server gives each person view-only or edit access per Space (next release).",
+          wenlan: "Spaces separate contexts. A self-hosted team server gives each person view-only or edit access per Space.",
           competitor:
             "Profiles, personal/shared/global memory, role-based access, workspace isolation, and optional sign-in for shared deployments.",
         },
@@ -2670,7 +2670,7 @@ const baseArticles: LearnArticle[] = [
       {
         question: "Which is better for team access controls?",
         answer:
-          "SuperLocalMemory v3.8.3 explicitly documents profiles, role-based access, personal/shared/global scopes, workspace isolation, optional sign-in, and governance controls. Wenlan uses Spaces, with a self-hosted team server giving view-only or edit access per Space in the next release. It has no profiles or audit trail like SuperLocalMemory's.",
+          "SuperLocalMemory v3.8.3 explicitly documents profiles, role-based access, personal/shared/global scopes, workspace isolation, optional sign-in, and governance controls. Wenlan uses Spaces, with a self-hosted team server giving view-only or edit access per Space. It has no profiles or audit trail like SuperLocalMemory's.",
       },
       {
         question: "Can I compare the published benchmark percentages directly?",

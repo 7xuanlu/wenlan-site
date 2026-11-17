@@ -3400,7 +3400,7 @@ export const docPages: DocPage[] = [
     author: DEFAULT_AUTHOR,
     readingTime: "4 min read",
     summary: [
-      "Wenlan is a studio for everything you think, learn, and build with AI. Your AI tools capture what they learn, sources ground each page, and it also works as an LLM wiki for AI work across clients and sessions.",
+      "Wenlan is the living playbook for every AI tool. Your AI tools capture what they learn, sources ground each doc, and it also works as an LLM wiki for AI work across clients and sessions.",
       "Use this page when you need the short answer, then follow the linked docs for setup, data, packages, troubleshooting, or project scope.",
     ],
     sections: [

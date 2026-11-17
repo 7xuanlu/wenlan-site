@@ -8,7 +8,7 @@ export default async function Image() {
   return createOgImage(
       <OgTemplate
         eyebrow="About"
-        title="A studio for your work with AI."
+        title="The living playbook for every AI tool."
         description="Pages with sources, skills and rules your AI tools keep up to date and work from. Open source, for you and your team. Built by Qi-Xuan Lu."
 
         titleSize={56}

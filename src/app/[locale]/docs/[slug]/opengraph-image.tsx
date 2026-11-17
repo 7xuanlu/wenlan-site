@@ -22,7 +22,7 @@ export default async function Image({ params }: Params) {
   const page = getDocPage(slug);
   const title = page?.title ?? "Wenlan Docs";
   const description =
-    page?.description ?? "A studio for your work with AI. Also an open-source LLM wiki.";
+    page?.description ?? "The living playbook for every AI tool. Also an open-source LLM wiki.";
   const eyebrow = page?.eyebrow ?? "Docs";
 
   return createOgImage(

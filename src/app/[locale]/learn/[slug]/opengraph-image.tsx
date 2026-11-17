@@ -29,7 +29,7 @@ export default async function Image({ params }: Params) {
   const article = localizedArticle ?? getArticle(slug);
   const title = article?.title ?? "Wenlan Learn";
   const description =
-    article?.description ?? "A studio for your work with AI. Also an open-source LLM wiki.";
+    article?.description ?? "The living playbook for every AI tool. Also an open-source LLM wiki.";
   const eyebrow = article?.eyebrow ?? "Learn";
 
   return createOgImage(

@@ -1619,7 +1619,7 @@ const comparisonArticles: BaseSpec[] = [
     problem:
       "Workspace AI and agent memory can sound similar because both answer questions from context. The difference is where the context lives and what the AI is trying to continue.",
     wenlanFit:
-      "Wenlan is not a company workspace. It keeps docs, skills and rules current across Claude Code, Codex, Cursor, Claude Desktop, ChatGPT, and other tools, and its pages cite their sources. A team server gives each person view-only or edit access per Space (next release).",
+      "Wenlan is not a company workspace. It keeps docs, skills and rules current across Claude Code, Codex, Cursor, Claude Desktop, ChatGPT, and other tools, and its pages cite their sources. A team server gives each person view-only or edit access per Space.",
     actionHeading: "Choose by source of truth",
     actionIntro:
       "Ask whether the context belongs to a workspace or to your AI tools.",
