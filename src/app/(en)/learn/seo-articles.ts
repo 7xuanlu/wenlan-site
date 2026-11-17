@@ -1417,21 +1417,21 @@ const comparisonArticles: BaseSpec[] = [
     ],
     audience: "Developers comparing MCP-native memory tools",
     heroBullets: [
-      "Wenlan is a user-facing, source-backed LLM wiki for AI work.",
+      "Wenlan keeps docs, skills and rules your AI tools work from, kept current, with cited sources.",
       "mcp-memory-service is a broad self-hosted service with REST, MCP, dashboard, OAuth, remote/browser scenarios, and agent-framework scope.",
-      "Choose based on whether your primary job is daily AI work continuity or backend memory infrastructure.",
+      "Choose based on whether your job is daily AI work with maintained docs or backend memory infrastructure.",
     ],
     quickAnswer:
-      "Choose Wenlan when you want local memory for your own AI work loop: capture, recall, handoff, pages, git history, and MCP clients. Choose mcp-memory-service when you want a self-hosted memory service for agent frameworks, HTTP clients, MCP tool users, remote/browser scenarios, and broader service operations.",
+      "Choose Wenlan when you want docs, skills and rules for your own AI work, kept current in Claude Code, Cursor, Codex, and other MCP clients, with cited sources and git history. Choose mcp-memory-service when you want a self-hosted memory service for agent frameworks, HTTP clients, MCP tool users, remote/browser scenarios, and broader service operations.",
     problem:
       "Both tools speak to persistent memory, but their center of gravity is different. Confusing them leads to the wrong setup: a personal work loop may take on operational overhead it does not need, while an agent backend may need transports Wenlan does not optimize for.",
     wenlanFit:
-      "Wenlan is deliberately not a memory infrastructure SDK. It is for people using AI daily who want local, inspectable, source-backed work context across tools.",
+      "Wenlan is not a memory infrastructure SDK. It is for people and teams using AI daily who want docs, skills and rules that stay current, with sources they can inspect. It works with the AI tools you already use.",
     actionHeading: "Choose by operating model",
     actionIntro:
       "Ask what you are trying to run.",
     actionBullets: [
-      "Choose Wenlan for Claude Code slash workflows, local handoffs, spaces, git history, and readable pages.",
+      "Choose Wenlan for Claude Code slash workflows, handoffs, Spaces, git history, and plain Markdown pages.",
       "Choose mcp-memory-service for agent-framework backend needs, HTTP clients, web dashboards, OAuth, remote MCP, and browser/remote-client scenarios.",
       "Compare setup complexity against the actual job.",
       "Run a two-week trial with real captures instead of judging from feature checklists.",
@@ -1440,9 +1440,9 @@ const comparisonArticles: BaseSpec[] = [
       "This comparison uses public project descriptions. Check the upstream repositories before relying on details that may change quickly.",
     faq: [
       "Is mcp-memory-service a direct Wenlan replacement?",
-      "Not exactly. It overlaps on persistent memory, but it is more backend/service oriented while Wenlan is centered on local AI work continuity.",
+      "Not exactly. It overlaps on persistent memory, but it is more backend/service oriented while Wenlan keeps docs, skills and rules current for people using AI tools.",
       "Can both be useful?",
-      "Yes. A team could use a backend memory service for agent infrastructure and still prefer Wenlan for personal local AI work sessions.",
+      "Yes. A team could use a backend memory service for agent infrastructure and still prefer Wenlan for the docs and skills its people and AI tools work from.",
     ],
     relatedSlugs: ["mcp-memory-server", "codex-claude-code-shared-memory", "ai-work-memory"],
     officialReferences: [
@@ -1468,12 +1468,12 @@ const comparisonArticles: BaseSpec[] = [
       rows: [
         {
           dimension: "Primary user",
-          wenlan: "Individual AI power users and developers carrying work context across sessions.",
+          wenlan: "Individuals and teams using AI tools daily who want shared docs, skills and rules.",
           competitor: "Builders operating a self-hosted memory service for agents, MCP clients, HTTP clients, and remote/browser use.",
         },
         {
           dimension: "Workflow surface",
-          wenlan: "Claude Code plugin, MCP clients, CLI, handoff loop, pages, spaces.",
+          wenlan: "Claude Code plugin, MCP clients, CLI, handoff loop, pages, Spaces.",
           competitor: "REST API, MCP, CLI, dashboard, OAuth, and framework-oriented integrations.",
         },
         {
@@ -1483,12 +1483,12 @@ const comparisonArticles: BaseSpec[] = [
         },
         {
           dimension: "Artifacts and indexes",
-          wenlan: "Readable Markdown pages, session logs, source trails, local git history, and local DB indexes.",
+          wenlan: "Plain Markdown pages, session logs, source trails, and local git history; the database is only an index.",
           competitor: "Service-managed records, tags, graph, dashboard, and APIs.",
         },
         {
           dimension: "Best fit",
-          wenlan: "Personal or project AI work memory that should stay local and inspectable.",
+          wenlan: "Docs, skills and rules for you or your team, kept current and self-hosted.",
           competitor: "Shared agent infrastructure where service operations are expected.",
         },
       ],
@@ -1514,15 +1514,15 @@ const comparisonArticles: BaseSpec[] = [
     audience: "Users deciding between built-in assistant memory and local work memory",
     heroBullets: [
       "Built-in memory is convenient for ChatGPT-scoped personalization.",
-      "Wenlan is for durable work context across tools and sessions.",
-      "Local artifacts, provenance, and git history make the memory inspectable.",
+      "Wenlan keeps docs, skills and rules current across all your AI tools, including ChatGPT.",
+      "Plain Markdown files, cited sources, and git history make every change inspectable.",
     ],
     quickAnswer:
-      "Use ChatGPT memory for personalization inside ChatGPT: saved memories, reference chat history, memory summary and sources, and optional personalization from files or connected apps where available. Use Wenlan when work context needs to be local, inspectable, source-backed, and available to Claude Code, Cursor, Codex, Claude Desktop, and other MCP clients.",
+      "Use ChatGPT memory for personalization inside ChatGPT: saved memories, reference chat history, memory summary and sources, and optional personalization from files or connected apps where available. Use Wenlan when you want docs, skills and rules that stay current in Claude Code, Cursor, Codex, Claude Desktop, ChatGPT, and other tools, as plain files with cited sources.",
     problem:
       "Built-in memory can help an assistant remember preferences, but serious work often needs traceability: where did this fact come from, when did it change, and which tools should be allowed to use it?",
     wenlanFit:
-      "Wenlan treats memory as a local work artifact managed by the local daemon, not as state managed inside ChatGPT's UI. That makes it better suited for source-backed project decisions, handoffs, wiki pages, and multi-tool AI work.",
+      "Wenlan works with ChatGPT, not instead of it. What you settle in any AI tool is saved and is there in the next, and Wenlan organizes it into pages with cited sources. You can see every change, undo it, and lock a page so AI asks first.",
     actionHeading: "Pick the memory boundary",
     actionIntro:
       "Use the tool that matches the risk and portability of the context.",
@@ -1531,7 +1531,7 @@ const comparisonArticles: BaseSpec[] = [
       "Use ChatGPT memory when past chats, saved memories, memory summary/sources, or connected-app personalization should improve ChatGPT itself.",
       "Use Wenlan for project decisions, gotchas, client context, and handoffs.",
       "Use Wenlan when multiple AI clients should share context.",
-      "Use Wenlan when you need local files and provenance.",
+      "Use Wenlan when you want plain files with cited sources.",
     ],
     code: {
       label: "Reproduce the difference in one minute",
@@ -1542,7 +1542,7 @@ const comparisonArticles: BaseSpec[] = [
       "Do not put sensitive project context into any memory system without understanding where it is stored, how to delete it, and which tools can retrieve it. For ChatGPT, turning Memory off does not delete existing saved memories, deleting a chat does not remove saved memories, and full cleanup may require deleting saved memories plus source chats, files, or connected-app sources. OpenAI says deleted saved-memory logs may be retained for up to 30 days, and content may be used for model improvement when that setting applies.",
     faq: [
       "Does Wenlan replace built-in assistant memory?",
-      "It can replace parts of the work-memory use case, but built-in memory may still be useful for lightweight personalization inside one assistant.",
+      "No. It works alongside it. Built-in memory suits lightweight personalization inside one assistant; Wenlan keeps shared docs, skills and rules current across tools.",
       "Why not just paste project context each time?",
       "Manual paste works for occasional chats. It breaks down when work spans weeks, tools, and repeated sessions.",
     ],
@@ -1570,22 +1570,22 @@ const comparisonArticles: BaseSpec[] = [
       rows: [
         {
           dimension: "Scope",
-          wenlan: "Local AI work memory across MCP-compatible tools.",
+          wenlan: "Docs, skills and rules kept current across your AI tools.",
           competitor: "Built-in memory and saved context inside ChatGPT.",
         },
         {
           dimension: "Inspectability",
-          wenlan: "Readable local artifacts, source-backed pages, and git history.",
+          wenlan: "Plain Markdown pages with cited sources, and git history.",
           competitor: "Managed through product UI and account settings.",
         },
         {
           dimension: "Best fit",
-          wenlan: "Project decisions, handoffs, local context, and cross-tool reuse.",
+          wenlan: "Project decisions, handoffs, shared skills and rules, and cross-tool reuse.",
           competitor: "Personalization and continuity inside ChatGPT using past chats, saved memories, and supported file or connected-app sources.",
         },
         {
           dimension: "Control boundary",
-          wenlan: "Local daemon and ~/.wenlan artifacts by default.",
+          wenlan: "Your own computer or server; plain files in ~/.wenlan by default.",
           competitor: "Hosted product memory controlled through account settings.",
         },
       ],
@@ -1611,22 +1611,22 @@ const comparisonArticles: BaseSpec[] = [
     audience: "Teams and builders comparing workspace AI with local agent memory",
     heroBullets: [
       "Notion AI is built around the Notion workspace.",
-      "Wenlan is built around local AI work context across tools.",
+      "Wenlan is built around docs, skills and rules your AI tools share.",
       "The right choice depends on whether the source of truth is a team workspace or your local agent workflow.",
     ],
     quickAnswer:
-      "Use Notion AI when your work lives in Notion and you need workspace agents, AI Meeting Notes, enterprise search, hosted Notion MCP, and team governance. Use Wenlan when the memory layer should be stored locally by default and move across coding agents and MCP clients.",
+      "Use Notion AI when your work lives in Notion and you need workspace agents, AI Meeting Notes, enterprise search, hosted Notion MCP, and team governance. Use Wenlan when you want docs, skills and rules kept current across your coding agents and MCP clients, stored as plain files on your own computer or server.",
     problem:
       "Workspace AI and agent memory can sound similar because both answer questions from context. The difference is where the context lives and what the AI is trying to continue.",
     wenlanFit:
-      "Wenlan is not a company workspace. It is a local, source-backed LLM wiki for AI work: captures, handoffs, cited pages, and retrieval context across Claude Code, Codex, Cursor, Claude Desktop, ChatGPT, and other clients.",
+      "Wenlan is not a company workspace. It keeps docs, skills and rules current across Claude Code, Codex, Cursor, Claude Desktop, ChatGPT, and other tools, and its pages cite their sources. A team server gives each person view-only or edit access per Space (next release).",
     actionHeading: "Choose by source of truth",
     actionIntro:
-      "Ask whether the memory belongs to a workspace or to a local AI work loop.",
+      "Ask whether the context belongs to a workspace or to your AI tools.",
     actionBullets: [
       "Choose Notion AI for Notion pages, databases, AI Meeting Notes, workspace search, Notion MCP, and team automation.",
-      "Choose Wenlan for local project memory, code-agent handoffs, MCP clients, and inspectable ~/.wenlan artifacts.",
-      "Use both if Notion is your team workspace and Wenlan is your AI coding memory layer.",
+      "Choose Wenlan for docs, skills and rules your code agents share, MCP clients, and inspectable ~/.wenlan files.",
+      "Use both if Notion is your team workspace and Wenlan keeps your AI tools' docs, skills and rules current.",
       "Do not duplicate everything across both; capture the consequence that future AI work needs.",
     ],
     code: {
@@ -1635,7 +1635,7 @@ const comparisonArticles: BaseSpec[] = [
         "wenlan status                        # local daemon, model, and memory state\nls ~/.wenlan/pages                   # pages on disk, not in a hosted workspace\ngit -C ~/.wenlan log --oneline -5    # local, dated history you can diff",
     },
     caution:
-      "Team workspace governance and local-first control solve different problems. Wenlan stores the memory layer locally by default, but connected AI clients may still send retrieved context to their model providers.",
+      "Team workspace governance and local-first control solve different problems. Wenlan stores pages locally by default, but connected AI clients may still send retrieved context to their model providers.",
     faq: [
       "Can Notion AI replace Wenlan for coding-agent memory?",
       "Not directly. Notion MCP can connect external AI tools to Notion workspace content, but the source of truth remains the hosted workspace. Wenlan is designed around a local daemon and ~/.wenlan artifacts.",
@@ -1662,17 +1662,17 @@ const comparisonArticles: BaseSpec[] = [
       rows: [
         {
           dimension: "Primary context",
-          wenlan: "Local AI work memory, sessions, pages, and MCP clients.",
+          wenlan: "Docs, skills and rules shared across your AI tools, with pages that cite sources.",
           competitor: "Notion workspace pages, databases, connected apps, meetings, and agents.",
         },
         {
           dimension: "Control boundary",
-          wenlan: "Local daemon and artifacts by default.",
+          wenlan: "Your own computer or server; plain files by default.",
           competitor: "Hosted workspace with admin, security, and enterprise controls.",
         },
         {
           dimension: "Best fit",
-          wenlan: "Coding-agent continuity and personal/local work memory.",
+          wenlan: "Docs, skills and rules for AI tools, for you or your team.",
           competitor: "Team workspace automation, search, docs, and meeting memory.",
         },
         {
@@ -1703,15 +1703,15 @@ const comparisonArticles: BaseSpec[] = [
     audience: "Developers comparing app memory infrastructure with personal AI work memory",
     heroBullets: [
       "Mem0 offers Platform, Open Source, and MCP/OpenMemory paths.",
-      "Wenlan positions as a local-first personal knowledge library for AI work.",
-      "Choose by whether you need managed/app memory, self-hosted infrastructure, or a local personal work loop.",
+      "Wenlan keeps docs, skills and rules your AI tools work from, kept current, for you and your team.",
+      "Choose by whether you need managed/app memory, self-hosted infrastructure, or maintained docs for your own AI work.",
     ],
     quickAnswer:
-      "Choose Mem0 Platform when you are adding managed memory to an AI application or agent product, Mem0 Open Source when you want to self-host that stack, and Mem0 MCP/OpenMemory when you want Mem0 memory through coding agents. Choose Wenlan when you want a local daemon, source-backed pages, handoffs, readable artifacts, and git/provenance for your own AI work sessions.",
+      "Choose Mem0 Platform when you are adding managed memory to an AI application or agent product, Mem0 Open Source when you want to self-host that stack, and Mem0 MCP/OpenMemory when you want Mem0 memory through coding agents. Choose Wenlan when you want a local daemon, source-backed pages, skills and rules shared across your AI tools, plain Markdown files, and git history for your own AI work.",
     problem:
-      "The phrase AI memory layer can mean two different things: infrastructure an app developer embeds, or a local work-memory layer an AI power user lives with every day.",
+      "AI memory can mean two different things: infrastructure an app developer embeds, or docs and rules that people and their AI tools work from every day.",
     wenlanFit:
-      "Wenlan deliberately avoids being a generic memory infrastructure SDK. It is a source-backed LLM wiki for people using Claude Code, Codex, Cursor, Claude Desktop, ChatGPT, and other MCP clients against their own daemon.",
+      "Wenlan is not a generic memory infrastructure SDK. It keeps docs, skills and rules current for people using Claude Code, Codex, Cursor, Claude Desktop, ChatGPT, and other MCP clients, on their own computer or server.",
     actionHeading: "Choose by builder role",
     actionIntro:
       "Ask whether you are building memory into an app or using memory for your own work.",
@@ -1719,17 +1719,17 @@ const comparisonArticles: BaseSpec[] = [
       "Choose Mem0 Platform for managed product/application memory infrastructure.",
       "Choose Mem0 Open Source when you want self-hosted Mem0 infrastructure.",
       "Choose Mem0 MCP/OpenMemory when Mem0's coding-agent MCP path fits your workflow.",
-      "Choose Wenlan for local AI work continuity and inspectable artifacts.",
-      "Use Wenlan when handoffs, spaces, pages, and local git history matter.",
+      "Choose Wenlan for docs, skills and rules your AI tools share, as inspectable files.",
+      "Use Wenlan when handoffs, Spaces, pages, and local git history matter.",
       "Use app-memory infrastructure when end users need memory inside your product.",
     ],
     caution:
       "Do not judge only by feature names. The operational model and intended user are different.",
     faq: [
       "Is Wenlan an SDK for app developers?",
-      "No. Wenlan is for people using AI daily, not as a backend for other apps building memory features.",
+      "No. Wenlan is for people and teams using AI daily, not a backend for other apps building memory features.",
       "Can a developer use both?",
-      "Yes. A developer might use Mem0 in an app and Wenlan for their own coding-agent work loop.",
+      "Yes. A developer might use Mem0 in an app and Wenlan for the docs and skills their coding agents use.",
     ],
     relatedSlugs: ["ai-agent-memory-local-vs-cloud", "ai-work-memory", "wenlan-vs-mcp-memory-service", "wenlan-vs-notion-ai", "wenlan-vs-chatgpt-memory"],
     officialReferences: [
@@ -1759,27 +1759,27 @@ const comparisonArticles: BaseSpec[] = [
       rows: [
         {
           dimension: "Primary user",
-          wenlan: "AI power users and developers carrying their own work context.",
+          wenlan: "People and teams using AI daily who want shared docs, skills and rules.",
           competitor: "Developers adding memory to AI agents/apps, plus coding-agent users using Mem0 MCP/OpenMemory.",
         },
         {
           dimension: "Product shape",
-          wenlan: "Local daemon, MCP connector, Claude Code plugin, pages, git history.",
+          wenlan: "Self-hosted daemon, MCP connector, Claude Code plugin, pages, git history.",
           competitor: "Managed Platform, Open Source self-hosted stack, SDK/API surfaces, and hosted MCP/OpenMemory integrations.",
         },
         {
           dimension: "MCP boundary",
-          wenlan: "Wenlan MCP talks to a local daemon and local store.",
+          wenlan: "Wenlan MCP talks to your own daemon and its plain files.",
           competitor: "Mem0 MCP exposes Mem0 memory through a hosted HTTP MCP path tied to Platform/API-key flows, with OSS/self-hosted options available separately.",
         },
         {
           dimension: "Best fit",
-          wenlan: "Cross-tool personal/project work memory.",
+          wenlan: "Docs, skills and rules for your own work or team, across tools.",
           competitor: "Application-level persistent context or Mem0-managed coding-agent memory.",
         },
         {
           dimension: "Default trust model",
-          wenlan: "Local-first, inspectable artifacts by default.",
+          wenlan: "Self-hosted, with inspectable plain files by default.",
           competitor: "Mem0 Platform is hosted; Mem0 Open Source is self-hosted; Mem0 MCP/OpenMemory uses Mem0's MCP memory path.",
         },
       ],

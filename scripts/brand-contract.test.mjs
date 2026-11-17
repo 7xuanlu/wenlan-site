@@ -720,7 +720,7 @@ test("Basic Memory comparison reflects current local, cloud, and team boundaries
   assert.match(article, /Team workspaces/);
   assert.match(article, /semantic search/);
   assert.match(article, /Agent Skills/);
-  assert.match(article, /source-backed Pages/);
+  assert.match(article, /Pages cite their sources/);
   assert.match(article, /AGPL-3\.0/);
   assert.match(
     article,
