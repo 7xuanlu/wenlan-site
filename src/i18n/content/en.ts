@@ -14,9 +14,9 @@ export const enContent = {
     sourceHash: null,
     content: {
       seo: {
-        title: "Wenlan | LLM Wiki & Personal Knowledge Management App",
+        title: "Wenlan | Open-Source AI Memory, Skills and Knowledge Base",
         description:
-          "Wenlan is a source-backed AI knowledge base and LLM wiki for AI work: organize documents and decisions into pages you can find, inspect, and review.",
+          "The living playbook for every AI tool: docs, skills and rules you and your AI tools both work from, kept current. Open-source AI memory, skills and knowledge base with sources.",
       },
       nav: {
         schemaName: "Wenlan site navigation",
@@ -414,7 +414,7 @@ export const enContent = {
         },
         features: {
           eyebrow: "Knowledge pages",
-          title: "Let what you learn carry forward.",
+          title: "One shared place for your AI tools.",
           body: "Cleaned decisions and lessons become durable pages instead of buried chat logs. They are organized enough for agents to use and concrete enough for humans to read.",
           note: "Your work stops being transcript history and starts becoming project knowledge.",
         },
@@ -426,8 +426,8 @@ export const enContent = {
         },
         openSourceCta: {
           eyebrow: "Open source",
-          title: "Try Wenlan with your own notes.",
-          body: "Add a page or file, then connect the AI tool you already use.",
+          title: "Try it on your own project.",
+          body: "Use the desktop app or just the command line, then connect the AI tools you already use, like Claude Code, Codex, or ChatGPT.",
           note: "Runtime and plugins: Apache-2.0. Desktop app: AGPL-3.0-only.",
           primaryCta: { id: "download", href: "/download", label: "Download" },
           secondaryCta: {
@@ -555,12 +555,11 @@ export const enContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "A personal knowledge base, maintained with AI",
-          headline: { pre: "Turn your notes, files, and AI chats into a", emphasis: "living wiki.", post: "" },
+          eyebrow: "The living playbook for every AI tool.",
+          headline: { pre: "Docs, skills and rules you and your AI tools both work from,", emphasis: "kept current", post: "" },
           description:
-            "Wenlan pages cite their sources, get checked against them, and update when they change. Claude, Codex, and more can put them to work.",
+            "Bring your notes and knowledge. Every doc cites its sources.",
           worksWithLabel: "Works with",
-          worksWithNote: "Connect your Obsidian vault; Wenlan never edits your existing notes without your OK.",
         },
         fit: {
           "title": "Is Wenlan for you?",
@@ -919,43 +918,43 @@ export const enContent = {
           cells: [
             {
               id: "steep",
-              title: "Your AI tool writes the pages",
-              body: "Your AI tool turns notes, files, and chats into cited pages as it works, and /wenlan steep finishes the rest. No extra model needed. Prefer the background? Automatic uses a model you pick.",
+              title: "Your AI tools write the pages",
+              body: "As they work, your AI tools turn notes, files, and chats into pages with sources. Run /wenlan steep to finish the rest.",
             },
             {
               id: "lock",
-              title: "Your own writing stays yours",
-              body: "Pages you wrote or edited are set to Ask me first: AI changes wait for your OK. Pages AI wrote keep updating on their own.",
+              title: "You see every change",
+              body: "You can undo any change. You decide which pages the AI may change. Pages you wrote are set to Ask me first.",
             },
             {
               id: "repo-wiki",
-              title: "Your code gets a wiki too",
-              body: "Run /wenlan wiki in a repository. Your AI tool writes pages with diagrams, each tied to the code lines it relies on. When that code changes, the pages are flagged and your AI tool updates them, daily on GitHub if you like.",
+              title: "Your code gets pages too",
+              body: "Ask your AI tool for pages about a repository, with diagrams tied to the code lines they rely on. When that code changes, the pages are flagged for an update.",
             },
             {
               id: "sources",
               title: "Bring what you already have",
-              body: "Notes apps, files, AI chats, links, and code. Wenlan keeps each source with its link, so pages can cite it.",
+              body: "Notes apps, files, AI chats, links, and code. Each source keeps its link, so pages can cite it.",
             },
             {
               id: "obsidian",
-              title: "Keep using your Obsidian vault",
-              body: "Connect your vault and Wenlan follows changes in the background. It never edits your existing notes without your OK.",
+              title: "Connect your Obsidian vault",
+              body: "Edits you make in Wenlan write back to your .md files. Wenlan follows changes to the vault in the background.",
             },
             {
               id: "tools",
-              title: "Switch tools. Keep your knowledge.",
-              body: "Claude Code, Codex, Cursor, and other AI tools use the same pages and memories through plugins or MCP. Change tools anytime; your knowledge stays.",
+              title: "Your AI tools share one place",
+              body: "Claude Code, Codex, ChatGPT, and more work from the same pages and memories. Switch tools anytime. Teammates join from an invite link.",
             },
             {
               id: "web-access",
               title: "Web Access",
-              body: "Let supported web AI tools search your Wenlan knowledge on your computer, and write to it if you allow. Keep Wenlan online while you work.",
+              body: "Let supported web AI tools search your Wenlan on your computer, and write to it if you allow. Keep Wenlan online while you work.",
             },
             {
               id: "spaces",
-              title: "A space for each project",
-              body: "Keep projects, research, and personal knowledge in separate Spaces. Choose the context your AI retrieves.",
+              title: "A space for each project or team",
+              body: "Keep projects, research, and personal pages in separate Spaces. A team can share one Wenlan, and each person has their own identity.",
             },
             {
               id: "topics",
@@ -964,8 +963,8 @@ export const enContent = {
             },
             {
               id: "history",
-              title: "See how your knowledge changed",
-              body: "Revisit page revisions and earlier memories.",
+              title: "See how pages changed",
+              body: "Revisit earlier versions of a page and the memories behind it. Undo a change you don't want.",
             },
           ],
         },
@@ -1025,7 +1024,7 @@ export const enContent = {
       seo: {
         title: "About Wenlan: Open-Source, Local-First Project",
         description:
-          "Wenlan is an open-source, local-first LLM wiki for AI work, built by agents and grounded in its sources.",
+          "Wenlan is the open-source living playbook for every AI tool: docs, skills and rules you and your AI tools both work from, kept current. For you and your team.",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -1033,9 +1032,9 @@ export const enContent = {
       },
       hero: {
         eyebrow: "About",
-        title: "A personal knowledge wiki for AI work.",
+        title: "The living playbook for every AI tool.",
         description:
-          "Wenlan is your personal knowledge wiki for AI work. Save useful decisions with their sources, then find and build on them across your AI tools.",
+          "Docs, skills and rules you and your AI tools both work from, kept current. Every doc cites its sources. Wenlan works alongside the AI tools you already use. Open source, for you and your team.",
         statusLabel: "Project status",
         statusItems: ["{release}", "macOS, Linux, Windows", "Apache-2.0 + AGPL-3.0", "Built by Qi-Xuan Lu"],
       },
@@ -1045,8 +1044,8 @@ export const enContent = {
           number: "01",
           title: "Why Wenlan exists",
           paragraphs: [
-            "AI work often leaves useful decisions, debugging lessons, and project details buried in old chats. Wenlan gives that knowledge a home you can return to.",
-            "Save what matters, add trusted sources, and shape them into pages you can inspect and find again across your AI tools.",
+            "AI work leaves useful decisions, lessons, and know-how buried in old chats, and each tool starts from zero.",
+            "Wenlan is the shared place your AI tools fill, keep current, and work from. You stay in the tool you already use. Every page links to its sources, and Wenlan checks that each cited source supports its sentence before saving. You see every change and can undo it.",
           ],
         },
         {
@@ -1055,7 +1054,7 @@ export const enContent = {
           title: "Built by Qi-Xuan Lu",
           paragraphs: [
             "Wenlan is built and maintained by Qi-Xuan Lu (GitHub @7xuanlu). Background in AI infrastructure, knowledge graphs, and local-first systems.",
-            "Wenlan is designed so agents can add to it and people can inspect it. It keeps source-linked pages and session logs in readable files, while one local service makes them available to connected AI tools.",
+            "Wenlan is built for small teams where engineers work with non-engineers. The engineer connects the AI tools. Teammates open it to read and edit. Individuals are welcome too.",
             "Project channels: GitHub Issues for bugs and feature requests, SECURITY.md for vulnerabilities, and the Wenlan release notes for changes.",
           ],
         },
@@ -1137,7 +1136,7 @@ export const enContent = {
       schema: {
         name: "About Wenlan",
         description:
-          "Wenlan is an open-source, local-first LLM wiki for AI work, built by Qi-Xuan Lu.",
+          "Wenlan is the open-source living playbook for every AI tool, built by Qi-Xuan Lu.",
       },
     },
   },
@@ -1224,11 +1223,11 @@ export const enContent = {
         eyebrow: "Docs",
         title: "Start using Wenlan.",
         description:
-          "Install Wenlan, connect the AI tool you use, then save one decision and retrieve it. Your knowledge stays readable, searchable, and under your control.",
+          "Connect your AI tools to Wenlan, then save one decision and find it again. Pages carry their sources, and you see every change.",
       },
       intro: {
         eyebrow: "Start here",
-        body: "Start with the setup guide: install Wenlan, choose your AI tool, save one decision, and retrieve it. Then explore the daily workflow and core concepts. Architecture, API, configuration, evaluation, release, and contribution references are here for when you need them.",
+        body: "Start with the setup guide: install Wenlan, pick your AI tool, save one decision, and find it again. Then read about the daily workflow and core concepts. Reference pages for architecture, API, configuration, evaluation, releases, and contributing are here when you need them.",
       },
       sections: {
         items: [

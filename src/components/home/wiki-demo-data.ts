@@ -29,7 +29,7 @@ export const demoCopy = {
     fixture: "Fictional source for this interactive demo",
   },
   "zh-TW": {
-    sampleLibrary: "示範知識庫",
+    sampleLibrary: "示範內容",
     hint: "滑過預覽，點擊閱讀。", touchHint: "點擊引用即可閱讀。",
     info: "資訊", sources: "來源", related: "連結到的頁面", tags: "標籤", all: "全部來源", back: "返回", close: "關閉閱讀面板", open: "點擊引用以閱讀全文", filter: "點擊標籤以篩選來源", original: "開啟原始來源", usedIn: "出現在這個頁面", recorded: "查看實機畫面", kind: { topic: "主題", page: "頁面", memory: "記憶", file: "檔案", url: "網址", obsidian: "Obsidian", tag: "標籤" },
     dates: "日期", ios: "iOS：10 月 20 日（不變）。", android: "Android：暫定 11 月 3 日，須通過下一次穩定性測試才發佈。",
@@ -39,7 +39,7 @@ export const demoCopy = {
     draft: "## 公告草稿\n\n**iOS 於 10 月 20 日上線。**\n\nAndroid 暫定 11 月 3 日，須通過下一次穩定性測試才發佈。\n\n公告不得寫成全平台已上線。", fixture: "此互動示範的虛構來源",
   },
   "zh-CN": {
-    sampleLibrary: "示范知识库",
+    sampleLibrary: "示范内容",
     hint: "悬停预览，点击阅读。", touchHint: "点击引用即可阅读。",
     info: "信息", sources: "来源", related: "链接到的页面", tags: "标签", all: "全部来源", back: "返回", close: "关闭阅读面板", open: "点击引用以阅读全文", filter: "点击标签以筛选来源", original: "打开原始来源", usedIn: "出现在这个页面", recorded: "查看实机画面", kind: { topic: "主题", page: "页面", memory: "记忆", file: "文件", url: "网址", obsidian: "Obsidian", tag: "标签" },
     dates: "日期", ios: "iOS：10 月 20 日（不变）。", android: "Android：暂定 11 月 3 日，须通过下一次稳定性测试才发布。",
@@ -78,9 +78,9 @@ export function getDemoResources(locale: Locale): DemoResource[] {
 
 // Static history for the fictional Lumo demonstration; no live App state is read.
 export const inspectorCopy = {
-  en: { editedBy: "Edited by", updatedAt: "Updated", author: "Rin", v2Time: "Oct 11, 14:30", v1Time: "Oct 10, 09:00", details: "Details", wiki: "Wiki page", graph: "Connections", openGraph: "Open in graph", history: "Version history", current: "Current", more: "Show all", less: "Show less", v2: "Android postponed; iOS stays on schedule.", v1: "Initial launch plan and release checklist.", v2Detail: "The Beta report changed the plan. Android is tentative for November 3, subject to the next stability test.", v1Detail: "The kickoff meeting established the launch plan. The checklist records the release gates and owners." },
-  "zh-TW": { editedBy: "修改者", updatedAt: "修改時間", author: "阿岑", v2Time: "10/11 14:30", v1Time: "10/10 09:00", details: "詳細資訊", wiki: "Wiki 筆記", graph: "關聯圖", openGraph: "在圖譜中開啟", history: "版本歷史", current: "目前版本", more: "顯示全部", less: "收起", v2: "Android 延後，iOS 維持原定時程。", v1: "建立發佈計畫與上線檢查清單。", v2Detail: "依據 Beta 報告更新計畫：Android 暫定 11 月 3 日，須通過下一次穩定性測試。", v1Detail: "依據啟動會議建立發佈計畫，整理上線門檻與負責人。" },
-  "zh-CN": { editedBy: "修改者", updatedAt: "修改时间", author: "阿岑", v2Time: "10/11 14:30", v1Time: "10/10 09:00", details: "详细信息", wiki: "Wiki 笔记", graph: "关联图", openGraph: "在图谱中打开", history: "版本历史", current: "当前版本", more: "显示全部", less: "收起", v2: "Android 延后，iOS 维持原定时间。", v1: "建立发布计划与上线检查清单。", v2Detail: "依据 Beta 报告更新计划：Android 暂定 11 月 3 日，须通过下一次稳定性测试。", v1Detail: "依据启动会议建立发布计划，整理上线门槛与负责人。" },
+  en: { editedBy: "Edited by", updatedAt: "Updated", author: "Rin", v2Time: "Oct 11, 14:30", v1Time: "Oct 10, 09:00", details: "Details", wiki: "Page", graph: "Connections", openGraph: "Open in graph", history: "Version history", current: "Current", more: "Show all", less: "Show less", v2: "Android postponed; iOS stays on schedule.", v1: "Initial launch plan and release checklist.", v2Detail: "The Beta report changed the plan. Android is tentative for November 3, subject to the next stability test.", v1Detail: "The kickoff meeting established the launch plan. The checklist records the release gates and owners." },
+  "zh-TW": { editedBy: "修改者", updatedAt: "修改時間", author: "阿岑", v2Time: "10/11 14:30", v1Time: "10/10 09:00", details: "詳細資訊", wiki: "頁面", graph: "關聯圖", openGraph: "在圖譜中開啟", history: "版本歷史", current: "目前版本", more: "顯示全部", less: "收起", v2: "Android 延後，iOS 維持原定時程。", v1: "建立發佈計畫與上線檢查清單。", v2Detail: "依據 Beta 報告更新計畫：Android 暫定 11 月 3 日，須通過下一次穩定性測試。", v1Detail: "依據啟動會議建立發佈計畫，整理上線門檻與負責人。" },
+  "zh-CN": { editedBy: "修改者", updatedAt: "修改时间", author: "阿岑", v2Time: "10/11 14:30", v1Time: "10/10 09:00", details: "详细信息", wiki: "页面", graph: "关联图", openGraph: "在图谱中打开", history: "版本历史", current: "当前版本", more: "显示全部", less: "收起", v2: "Android 延后，iOS 维持原定时间。", v1: "建立发布计划与上线检查清单。", v2Detail: "依据 Beta 报告更新计划：Android 暂定 11 月 3 日，须通过下一次稳定性测试。", v1Detail: "依据启动会议建立发布计划，整理上线门槛与负责人。" },
 } as const;
 
 // Fixed, fictional revision metadata; dates and authors are not live App activity.

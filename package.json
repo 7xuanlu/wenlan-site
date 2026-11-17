@@ -1,7 +1,7 @@
 {
   "name": "wenlan-site",
   "version": "1.0.0",
-  "description": "Public website and SEO/GEO surface for Wenlan, an LLM wiki for AI work.",
+  "description": "Public website and SEO/GEO surface for Wenlan, the living playbook for every AI tool (also an LLM wiki for AI work).",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",

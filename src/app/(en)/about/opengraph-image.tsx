@@ -8,8 +8,8 @@ export default async function Image() {
   return createOgImage(
       <OgTemplate
         eyebrow="About"
-        title="LLM wiki for AI work."
-        description="Open-source, local-first AI work memory built by agents and grounded in source-backed pages. Built by Qi-Xuan Lu."
+        title="The living playbook for every AI tool."
+        description="Pages with sources, skills and rules your AI tools keep up to date and work from. Open source, for you and your team. Built by Qi-Xuan Lu."
 
         titleSize={56}
       />

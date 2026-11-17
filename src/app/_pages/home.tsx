@@ -24,7 +24,7 @@ import { homeSectionHeadClass, homeSectionTitleClass } from "@/components/home/s
 
 const integrationCopy = {
   en: {
-    title: "Your files stay on your computer.",
+    title: "Pages are plain files you keep.",
     contextLabel: "Context per query",
     tokenUnit: "Tokens measure text length.",
     recallTitle: "Retrieval coverage",
@@ -33,12 +33,12 @@ const integrationCopy = {
     recallScope: "LongMemEval (oracle) · 500 questions",
     metricsLink: "Evaluation & methodology",
     recallLabel: "Average coverage of labeled relevant material in the top 5.",
-    ownershipBody: "Your pages, memories, and graph are stored on your computer. Pages are readable Markdown you can open in your own editor.",
+    ownershipBody: "Your pages, memories, and graph are stored on your computer. Pages are Markdown files you can open in any editor.",
     modelBody: "You decide which AI tools can read them.",
     ownershipLink: "How local storage works",
   },
   "zh-TW": {
-    title: "檔案留在你的電腦上。",
+    title: "頁面是你留得住的檔案。",
     contextLabel: "每次查詢的背景內容",
     tokenUnit: "Token 計算文字長度。",
     recallTitle: "相關資料覆蓋率",
@@ -47,12 +47,12 @@ const integrationCopy = {
     recallScope: "LongMemEval（oracle）· 500 題",
     metricsLink: "查看完整評測與方法",
     recallLabel: "前 5 筆結果對標註相關資料的平均覆蓋率。",
-    ownershipBody: "筆記、記憶和圖譜都存在你的電腦上。筆記是一般的 Markdown 檔，用你自己的編輯器就能打開。",
+    ownershipBody: "頁面、記憶和圖譜都存在你的電腦上。頁面是一般的 Markdown 檔，用任何編輯器都能打開。",
     modelBody: "哪些 AI 工具能讀，由你決定。",
     ownershipLink: "了解本機資料儲存",
   },
   "zh-CN": {
-    title: "文件留在你的电脑上。",
+    title: "页面是你留得住的文件。",
     contextLabel: "每次查询的背景内容",
     tokenUnit: "Token 计算文字长度。",
     recallTitle: "相关资料覆盖率",
@@ -61,7 +61,7 @@ const integrationCopy = {
     recallScope: "LongMemEval（oracle）· 500 题",
     metricsLink: "查看完整评测与方法",
     recallLabel: "前 5 条结果对标注相关资料的平均覆盖率。",
-    ownershipBody: "笔记、记忆和图谱都存在你的电脑上。笔记是普通的 Markdown 文件，用你自己的编辑器就能打开。",
+    ownershipBody: "页面、记忆和图谱都存在你的电脑上。页面是普通的 Markdown 文件，用任何编辑器都能打开。",
     modelBody: "哪些 AI 工具能读，由你决定。",
     ownershipLink: "了解本地数据存储",
   },
@@ -115,10 +115,15 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
       <section className="home-hero relative px-4 pb-6 sm:px-6 sm:pb-8" aria-labelledby="home-heading">
         <div className="mx-auto max-w-6xl">
           <div className="home-hero-copy mx-auto max-w-4xl min-w-0 text-center">
+            {redesign.hero.eyebrow ? (
+              <p className="home-hero-eyebrow mx-auto mb-5 max-w-xl text-balance text-[15px] leading-relaxed text-[var(--o-warm)]">
+                {redesign.hero.eyebrow}
+              </p>
+            ) : null}
             <h1 id="home-heading" className={`home-hero-title animate-fade-up motion-reduce:animate-none font-sans font-medium tracking-tight break-words text-balance ${locale === "en" ? "home-hero-title--en" : "home-hero-title--cjk"}`}>
-              <span className={locale === "en" ? "inline" : "block"}>{redesign.hero.headline.pre}</span>
-              {locale === "en" ? " " : null}
-              <span className={`${locale === "en" ? "inline whitespace-nowrap" : "block"} text-[var(--o-warm)]`}>{redesign.hero.headline.emphasis}</span>
+              {redesign.hero.headline.pre ? <span className={locale === "en" ? "inline" : "block"}>{redesign.hero.headline.pre}</span> : null}
+              {locale === "en" && redesign.hero.headline.pre ? " " : null}
+              <span className={`${locale === "en" ? "inline whitespace-nowrap" : redesign.hero.headline.pre ? "block" : "inline"} text-[var(--o-warm)]`}>{redesign.hero.headline.emphasis}</span>
               {redesign.hero.headline.post}
             </h1>
             <p className="home-hero-description mx-auto max-w-2xl text-balance text-[var(--o-text-secondary)]">
@@ -127,14 +132,8 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
           </div>
           <DemoVideo
             key={locale}
-            primaryAction={<HomeCta link={content.hero.primaryCta} locale={locale} placement="home-hero" variant="primary" />}
-            sourceAction={
-              <a href="https://github.com/wenlan-app/wenlan" target="_blank" rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[var(--o-border)] px-4 py-3 text-sm font-medium text-[var(--o-text)] transition-colors hover:bg-[var(--o-bg-alt)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)] sm:px-5">
-                <GitHubLogoIcon className="size-4 shrink-0" />
-                GitHub
-              </a>
-            }
+            primaryAction={<HomeCta link={{ id: "download", href: "/download", label: story.heroPrimaryCta }} locale={locale} placement="home-hero" variant="primary" />}
+            sourceAction={<HomeCta link={{ id: "get-started", href: "/docs/get-started", label: story.heroSecondaryCta }} locale={locale} placement="home-hero" variant="secondary" hideIcon />}
             trustNote={
               <ul className="home-hero-trust" aria-label={locale === "en" ? "Why you can try it" : locale === "zh-TW" ? "可以放心試用" : "可以放心试用"}>
                 {story.heroTrust.map((item) => <li key={item}>{item}</li>)}
@@ -266,12 +265,14 @@ function HomeCta({
   locale,
   placement,
   showGithubIcon = false,
+  hideIcon = false,
   variant,
 }: {
   link: LinkContent;
   locale: Locale;
   placement: "home-hero" | "home-footer";
   showGithubIcon?: boolean;
+  hideIcon?: boolean;
   variant: "primary" | "secondary";
 }) {
   const className =
@@ -283,7 +284,7 @@ function HomeCta({
     <>
       {showGithubIcon && <GitHubLogoIcon className="size-5" />}
       {link.label}
-      {!showGithubIcon && (link.id === "download"
+      {!showGithubIcon && !hideIcon && (link.id === "download"
         ? <DownloadSimpleIcon className="size-4" />
         : <ArrowRightIcon className="size-4" />)}
     </>

@@ -1,7 +1,7 @@
 {
   "name": "Wenlan",
   "short_name": "Wenlan",
-  "description": "An LLM wiki for AI work, built by agents and grounded in source-backed pages.",
+  "description": "The living playbook for every AI tool. Docs, skills and rules kept current. Open source, for you and your team; also an LLM wiki for AI work.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

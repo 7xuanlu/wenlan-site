@@ -14,11 +14,11 @@ const copy: Record<
 > = {
   "zh-TW": {
     eyebrow: "關於",
-    title: "AI 工作的 LLM wiki。",
+    title: "會自己更新的做事手冊。",
   },
   "zh-CN": {
     eyebrow: "关于",
-    title: "AI 工作的 LLM wiki。",
+    title: "会自己更新的做事手册。",
   },
 };
 

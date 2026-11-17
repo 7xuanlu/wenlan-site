@@ -485,7 +485,7 @@ html:lang(zh-Hans) .brand-wordmark__cjk {
 .home-page .home-hero { padding-top: clamp(160px, 20svh, 200px); }
 .home-hero-title { margin-top: 0; }
 .home-hero-title--en { font-size: clamp(29px, 4.4vw, 58px); line-height: 1.1; }
-.home-hero-title--cjk { font-size: clamp(29px, 4.1vw, 52px); line-height: 1.24; }
+.home-hero-title--cjk { font-size: clamp(29px, 4.1vw, 52px); line-height: 1.24; word-break: keep-all; }
 .home-hero-description { margin-top: 24px; font-size: 17px; line-height: 1.65; }
 .home-hero-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; margin-top: 28px; }
 .home-hero-actions > a, .home-hero-actions > button { height: 46px; padding-block: 0; }
@@ -1057,6 +1057,8 @@ button.card-wenlan:focus-visible {
 .home-page .home-hero-trust { margin-top: 16px; }
 .home-page .home-hero-product { margin-top: -1px; }
 @media (max-width: 639px) {
+  .home-hero-trust { gap: 4px 20px; }
+  .home-hero-trust > li + li::before { display: none; }
   .home-hero-video { margin: 28px 0 0 10px; }
   .home-demo-switch > button { padding: 0 14px; }
 }

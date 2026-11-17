@@ -350,7 +350,8 @@ test("bilingual Wenlan wordmark keeps Latin Fraunces and Chinese sans paired", a
   assert.match(homeSource, /<SiteHeader locale=\{locale\} home \/>/);
   const headerSource = await readFile(resolve(repoRoot, "src/components/site-header.tsx"), "utf8");
   assert.match(headerSource, /<BrandWordmark\s+label=\{nav\.brand\}\s+variant="nav"\s+\/>/);
-  assert.doesNotMatch(homeSource, /\{redesign\.hero\.eyebrow\}/);
+  // The hero leads with the pain line above the h1.
+  assert.match(homeSource, /\{redesign\.hero\.eyebrow\}/);
 
   const footerSource = await readFile(resolve(repoRoot, "src/components/site-footer.tsx"), "utf8");
   assert.match(footerSource, /<BrandWordmark\s+label=\{content\.signature\.brand\}\s+variant="footer"\s+\/>/);
@@ -2532,27 +2533,25 @@ test("Chinese home surfaces include script-specific Wenlan Chinese names", async
       navBrand: home.nav.brand,
       heroTitle: home.hero.title,
     })) {
-      assert.match(value, /Wenlan/, `${locale}.${label}.Wenlan`);
+      // The Chinese SEO description is written without the Latin name; title keeps both.
+      if (label !== "seoDescription") assert.match(value, /Wenlan/, `${locale}.${label}.Wenlan`);
       assert.match(value, new RegExp(chineseName), `${locale}.${label}.${chineseName}`);
     }
   }
 });
 
-test("home SEO copy presents LLM wiki positioning and the benefit-led hero in all locales", async () => {
+test("home SEO copy and hero present the studio positioning in all locales", async () => {
   const { content } = await loadI18nModules();
 
   assert.equal(
     content.enContent.home.content.seo.title,
-    "Wenlan | LLM Wiki & Personal Knowledge Management App",
+    "Wenlan | Open-Source AI Memory, Skills and Knowledge Base",
   );
   assert.equal(
     content.enContent.home.content.seo.description,
-    "Wenlan is a source-backed AI knowledge base and LLM wiki for AI work: organize documents and decisions into pages you can find, inspect, and review.",
+    "The living playbook for every AI tool: docs, skills and rules you and your AI tools both work from, kept current. Open-source AI memory, skills and knowledge base with sources.",
   );
-  assert.match(
-    content.enContent.home.content.redesign.hero.eyebrow,
-    /A personal knowledge base, maintained with AI/,
-  );
+  assert.equal(content.enContent.home.content.redesign.hero.eyebrow, "The living playbook for every AI tool.");
   assert.deepEqual(
     [
       content.enContent.home.content.redesign.hero.headline.pre,
@@ -2560,9 +2559,9 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
       content.enContent.home.content.redesign.hero.description,
     ],
     [
-      "Turn your notes, files, and AI chats into a",
-      "living wiki.",
-      "Wenlan pages cite their sources, get checked against them, and update when they change. Claude, Codex, and more can put them to work.",
+      "Docs, skills and rules you and your AI tools both work from,",
+      "kept current",
+      "Bring your notes and knowledge. Every doc cites its sources.",
     ],
   );
 
@@ -2572,10 +2571,10 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
       sourceBacked: "有來源依據",
       staleHomePhrase: /活個人知識庫|AI-native/,
       hero: {
-        eyebrow: /AI 協助維護的個人知識庫/,
-        pre: /用你的知識，/,
-        emphasis: /找到答案、完成工作。/,
-        description: "文瀾把筆記、文件和 AI 對話整理成持續更新的知識庫，附上來源，並對照來源檢查。Claude、Codex 等 AI 工具都能直接用。",
+        eyebrow: /^會自己更新的做事手冊，每個 AI 工具都用。$/,
+        pre: /^文件、技能和規則，你和 AI 工具都照著做，$/,
+        emphasis: /而且會保持最新/,
+        description: "筆記和知識都能放進來，每份文件都附出處。",
       },
     },
     "zh-CN": {
@@ -2583,10 +2582,10 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
       sourceBacked: "有来源依据",
       staleHomePhrase: /活个人知识库|AI-native/,
       hero: {
-        eyebrow: /AI 协助维护的个人知识库/,
-        pre: /用你的知识，/,
-        emphasis: /找到答案、完成工作。/,
-        description: "文澜把笔记、文档和 AI 对话整理成持续更新的知识库，附上来源，并对照来源检查。Claude、Codex 等 AI 工具都能直接用。",
+        eyebrow: /^会自己更新的做事手册，每个 AI 工具都用。$/,
+        pre: /^文档、技能和规则，你和 AI 工具都照着做，$/,
+        emphasis: /而且会保持最新/,
+        description: "笔记和知识都能放进来，每份文档都附出处。",
       },
     },
   };
@@ -2596,14 +2595,10 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
     const renderedHome = JSON.stringify(home);
 
     assert.match(home.seo.title, new RegExp(`^${localeExpected.name} Wenlan｜`), `${locale}.home.seo.title.brand`);
-    assert.match(home.seo.title, /個人 AI 知識庫|个人 AI 知识库/, `${locale}.home.seo.title`);
-    assert.match(home.seo.description, /AI 工作的 LLM wiki/, `${locale}.home.seo.description`);
+    assert.match(home.seo.title, /知識庫|知识库/, `${locale}.home.seo.title`);
+    assert.match(home.seo.title, /開源的 AI 記憶、技能和知識庫|开源的 AI 记忆、技能和知识库/, `${locale}.home.seo.title.category`);
+    assert.match(home.seo.description, /個人和團隊都能用|个人和团队都能用/, `${locale}.home.seo.description`);
     assert.match(home.seo.description, new RegExp(localeExpected.name), `${locale}.home.seo.description.name`);
-    assert.match(
-      home.seo.description,
-      new RegExp(localeExpected.sourceBacked),
-      `${locale}.home.seo.description.sourceBacked`,
-    );
     assert.match(home.redesign.hero.eyebrow, localeExpected.hero.eyebrow, `${locale}.home.hero.category`);
     assert.match(home.redesign.hero.headline.pre, localeExpected.hero.pre, `${locale}.home.hero.knowledge`);
     assert.match(home.redesign.hero.headline.emphasis, localeExpected.hero.emphasis, `${locale}.home.hero.benefit`);
@@ -2613,15 +2608,15 @@ test("home SEO copy presents LLM wiki positioning and the benefit-led hero in al
   }
 });
 
-test("Chinese hero names the living knowledge base and setup begins with a concrete decision", async () => {
+test("Chinese hero names docs, skills and rules and setup begins with a concrete decision", async () => {
   const { content } = await loadI18nModules();
 
   for (const locale of ["zh-TW", "zh-CN"]) {
     const dictionary = content.localizedContentByLocale[locale];
 
     assert.match(
-      dictionary.home.content.redesign.hero.description,
-      /持續更新的知識庫|持续更新的知识库/,
+      dictionary.home.content.redesign.hero.headline.pre,
+      /文件、技能和規則|文档、技能和规则/,
       `${locale}.home.hero.description.benefit`,
     );
     assert.match(
@@ -2823,11 +2818,11 @@ test("English core content records the current SEO title and description subset"
 
   assert.equal(
     content.enContent.home.content.seo.title,
-    "Wenlan | LLM Wiki & Personal Knowledge Management App",
+    "Wenlan | Open-Source AI Memory, Skills and Knowledge Base",
   );
   assert.equal(
     content.enContent.home.content.seo.description,
-    "Wenlan is a source-backed AI knowledge base and LLM wiki for AI work: organize documents and decisions into pages you can find, inspect, and review.",
+    "The living playbook for every AI tool: docs, skills and rules you and your AI tools both work from, kept current. Open-source AI memory, skills and knowledge base with sources.",
   );
   assert.equal(
     content.enContent.about.content.seo.title,
@@ -3046,23 +3041,31 @@ test("localized hero brand aliases stay script-specific and required", async () 
     "zh-TW": { expected: "文瀾", wrong: "文澜" },
     "zh-CN": { expected: "文澜", wrong: "文瀾" },
   };
+  // The live hero description no longer names the product, so the alias rule is
+  // exercised on a fixed source that does.
+  const source = { redesign: { hero: { description: "Wenlan keeps your pages organized." } } };
 
   for (const [locale, { expected, wrong }] of Object.entries(aliases)) {
-    const source = content.enContent.home.content;
-    const intact = structuredClone(content.localizedContentByLocale[locale].home.content);
+    assert.doesNotThrow(() =>
+      protectedTokens.assertProtectedTokensPreserved(
+        content.enContent.home.content,
+        structuredClone(content.localizedContentByLocale[locale].home.content),
+        `${locale}.home`,
+      ),
+    );
+
+    const intact = { redesign: { hero: { description: `${expected}會幫你整理頁面。` } } };
     assert.doesNotThrow(() =>
       protectedTokens.assertProtectedTokensPreserved(source, intact, `${locale}.home`),
     );
 
-    const missing = structuredClone(intact);
-    missing.redesign.hero.description = missing.redesign.hero.description.replace(expected, "");
+    const missing = { redesign: { hero: { description: "會幫你整理頁面。" } } };
     assert.throws(
       () => protectedTokens.assertProtectedTokensPreserved(source, missing, `${locale}.home`),
       new RegExp(`${locale}\\.home.*redesign\\.hero\\.description.*Wenlan`, "s"),
     );
 
-    const wrongScript = structuredClone(intact);
-    wrongScript.redesign.hero.description = wrongScript.redesign.hero.description.replace(expected, wrong);
+    const wrongScript = { redesign: { hero: { description: `${wrong}會幫你整理頁面。` } } };
     assert.throws(
       () => protectedTokens.assertProtectedTokensPreserved(source, wrongScript, `${locale}.home`),
       new RegExp(`${locale}\\.home.*redesign\\.hero\\.description.*Wenlan`, "s"),

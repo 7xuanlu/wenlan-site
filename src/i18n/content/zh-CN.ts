@@ -11,12 +11,12 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "d94e9cdc0a5b17b52e301507bd1839e883be1c62d5af9e8a044412c4abfe1ccb",
+    sourceHash: "88267a9a614c63ec2f2a282269cb9bb1ee487ca9d0ec0ee7fb89ea22fdc7f5e8",
     content: {
       seo: {
-        title: "文澜 Wenlan｜个人 AI 知识库与 LLM Wiki",
+        title: "文澜 Wenlan｜开源的 AI 记忆、技能和知识库，个人和团队都能用",
         description:
-          "Wenlan 文澜是有来源依据的 AI 知识库，也是 AI 工作的 LLM wiki：把文档和决策整理成可查找、可核对、可审核的笔记，让你和 AI 接着往前做。本地运行，连接 Claude Code、Codex、ChatGPT 等 AI 工具，开源免费。",
+          "文澜 Wenlan：会自己更新的做事手册，每个 AI 工具都用。文档、技能和规则，你和 AI 工具都照着做，而且会保持最新。开源免费的 AI 记忆、技能和知识库，每份文档都附出处，个人和团队都能用。",
       },
       nav: {
         schemaName: "Wenlan 文澜网站导航",
@@ -411,7 +411,7 @@ export const zhCNContent = {
         },
         features: {
           eyebrow: "知识页面",
-          title: "留下的知识，接着用下去。",
+          title: "你的 AI 工具共用的地方。",
           body: "整理过的决策与教训会成为耐用页面，而不是被埋在聊天记录里。它们足够有组织，agent 能使用；也足够具体，人可以阅读。",
           note: "你的工作不再只是 transcript 历史，而是开始变成项目知识。",
         },
@@ -423,8 +423,8 @@ export const zhCNContent = {
         },
         openSourceCta: {
           eyebrow: "开源",
-          title: "用你自己的笔记试试 Wenlan。",
-          body: "导入笔记或文件，再接上你常用的 AI 工具。",
+          title: "拿你自己的项目试试。",
+          body: "用桌面版，或只用命令行，再接上你常用的 AI 工具，比如 Claude Code、Codex 或 ChatGPT。",
           note: "运行核心与 plugins：Apache-2.0。桌面 App：AGPL-3.0-only。",
           primaryCta: { id: "download", href: "/download", label: "下载" },
           secondaryCta: {
@@ -550,12 +550,11 @@ export const zhCNContent = {
       },
       redesign: {
         hero: {
-          eyebrow: "AI 协助维护的个人知识库",
-          headline: { pre: "用你的知识，", emphasis: "找到答案、完成工作。", post: "" },
+          eyebrow: "会自己更新的做事手册，每个 AI 工具都用。",
+          headline: { pre: "文档、技能和规则，你和 AI 工具都照着做，", emphasis: "而且会保持最新", post: "" },
           description:
-            "文澜把笔记、文档和 AI 对话整理成持续更新的知识库，附上来源，并对照来源检查。Claude、Codex 等 AI 工具都能直接用。",
+            "笔记和知识都能放进来，每份文档都附出处。",
           worksWithLabel: "可搭配",
-          worksWithNote: "可连接 Obsidian 笔记库；没有你同意，Wenlan 不会改动你原有的笔记。",
         },
         fit: {
           "title": "Wenlan 适合你吗？",
@@ -914,53 +913,53 @@ export const zhCNContent = {
           cells: [
             {
               id: "steep",
-              title: "Steep 沉淀：AI 工具帮你写笔记",
-              body: "你的 AI 工具在工作时，顺手把素材、文件和对话写成带引用的笔记；剩下的用 /wenlan steep 一次沉淀完成，不用另外的模型。想在后台跑，就选“自动沉淀”，用你挑的模型。",
+              title: "你的 AI 工具来写页面",
+              body: "AI 工具一边工作，一边把素材、文件和对话写成带出处的页面。剩下的用 /wenlan steep 完成。",
             },
             {
               id: "lock",
-              title: "你写的，还是你的",
-              body: "你写过或改过的笔记设为“先问我”：AI 要改，会先等你同意。AI 写的笔记照常自己更新。",
+              title: "每处改动你都看得到",
+              body: "改动都能撤销，哪些页面让 AI 改，由你决定。你写的页面默认为“先问我”。",
             },
             {
               id: "repo-wiki",
-              title: "代码也有 wiki",
-              body: "在代码库里运行 /wenlan wiki，AI 工具会写出带图表的笔记，每篇都连到它依据的代码行。代码一改，笔记就会被标出来，由 AI 工具更新；想要的话，也能在 GitHub 上每天更新。",
+              title: "代码也有页面",
+              body: "让 AI 工具为代码库写页面，带图表，每篇都连到它依据的代码行。代码一改，页面就会被标出来等着更新。",
             },
             {
               id: "sources",
               title: "带进你已有的资料",
-              body: "笔记软件、文件、AI 对话、链接和代码。Wenlan 保留每个来源和它的链接，笔记才能引用。",
+              body: "笔记软件、文件、AI 对话、链接和代码。每个来源都保留链接，页面才能引用。",
             },
             {
               id: "obsidian",
-              title: "继续用你的 Obsidian 笔记库",
-              body: "连接笔记库后，Wenlan 会在后台跟上变化；没有你同意，不会改动你原有的笔记。",
+              title: "接上你的 Obsidian 笔记库",
+              body: "你在 Wenlan 里做的修改会写回原来的 .md 文件。笔记库有变化，Wenlan 会在后台跟上。",
             },
             {
               id: "tools",
-              title: "换工具，知识还在。",
-              body: "Claude Code、Codex、Cursor 等 AI 工具通过插件或 MCP 用同一批笔记和记忆。随时换工具，知识都留着。",
+              title: "你的 AI 工具共用同一处",
+              body: "Claude Code、Codex、ChatGPT 等用同一批页面和记忆。随时换工具。团队成员用邀请链接加入。",
             },
             {
               id: "web-access",
               title: "Web Access 网页访问",
-              body: "让支持的网页 AI 搜索你电脑上的文澜知识，经你允许也能写入；使用时让 Wenlan 保持在线。",
+              body: "让支持的网页 AI 搜索你电脑上的 Wenlan，经你允许也能写入；使用时让 Wenlan 保持在线。",
             },
             {
               id: "spaces",
-              title: "每个项目，都有自己的背景",
-              body: "用 Spaces 分开项目、研究与个人知识；选定空间，让 AI 检索这次工作需要的背景。",
+              title: "每个项目或团队，一个空间",
+              body: "用 Spaces 分开项目、研究与个人页面。团队可以共用一个 Wenlan，每个人有自己的身份。",
             },
             {
               id: "topics",
               title: "主题总览",
-              body: "聚合相关笔记，沿着主题之间的关联继续探索。",
+              body: "聚合相关页面，沿着主题之间的关联继续探索。",
             },
             {
               id: "history",
-              title: "改变有迹可循",
-              body: "回看笔记的修订，追溯记忆被替代的经过。",
+              title: "页面怎么改的，看得到",
+              body: "回看页面的旧版本和背后的记忆。不想要的改动可以撤销。",
             },
           ],
         },
@@ -1015,12 +1014,12 @@ export const zhCNContent = {
   },
   about: {
     status: "translated",
-    sourceHash: "2d474f08dbd53fd7e1e81fd65cb9b726af9d58adb45cc7efe13f053a9b512b0d",
+    sourceHash: "96260418db88790f593926b8eda0b5e8e1a149cd9510cb022b221f9e128aa1b7",
     content: {
       seo: {
-        title: "关于文澜 Wenlan：开源、本地优先的个人 AI 知识库",
+        title: "关于文澜 Wenlan：开源的 AI 记忆、技能和知识库",
         description:
-          "Wenlan 是开源、本地优先的 AI 工作 LLM wiki，由 AI 智能体打造并以来源为根基：把文档与决策整理成可引用、可审核、可更新的笔记，让 AI 工作有据可查、持续积累。支持 Windows、macOS 与 Linux，免费下载使用。了解文澜的理念、开源协议与产品路线图。",
+          "Wenlan 是开源、会自己更新的做事手册，每个 AI 工具都用：文档、技能和规则，你和 AI 工具都照着做，而且会保持最新。个人和团队都能用，支持 Windows、macOS 与 Linux，免费下载。",
       },
       breadcrumbs: {
         home: "Wenlan",
@@ -1028,9 +1027,9 @@ export const zhCNContent = {
       },
       hero: {
         eyebrow: "关于",
-        title: "AI 工作的个人知识 wiki。",
+        title: "会自己更新的做事手册，每个 AI 工具都用。",
         description:
-          "Wenlan 是 AI 工作的个人知识 wiki。保存重要决定和来源，之后就能在不同 AI 工具中找回并接着使用。",
+          "文档、技能和规则，你和 AI 工具都照着做，而且会保持最新。每份文档都附出处。Wenlan 和你已在用的 AI 工具配合使用。开源，个人和团队都能用。",
         statusLabel: "项目状态",
         statusItems: ["版本 {release}", "支持 macOS、Linux、Windows", "开源许可：Apache-2.0 + AGPL-3.0", "Qi-Xuan Lu 构建"],
       },
@@ -1040,8 +1039,8 @@ export const zhCNContent = {
           number: "01",
           title: "为什么 Wenlan 存在",
           paragraphs: [
-            "AI 工作常把重要决定、调试经验和项目信息留在旧对话里。Wenlan 把这些知识整理成日后找得到的内容。",
-            "保存重要信息、补上可信来源，再整理成可检查、可搜索的笔记，让不同 AI 工具都能接着使用。",
+            "AI 工作常把重要决定、经验和做法留在旧对话里，换一个工具就得从头来。",
+            "Wenlan 是你的 AI 工具共用的地方：它们把内容存进来、保持更新，也从这里做事。你留在原来用的工具就行。每个页面都连到出处，保存前 Wenlan 会检查每句引用的出处是否支持那句话。每处改动你都看得到、能撤销。",
           ],
         },
         {
@@ -1050,7 +1049,7 @@ export const zhCNContent = {
           title: "由 Qi-Xuan Lu 构建",
           paragraphs: [
             "Wenlan 由 Qi-Xuan Lu (GitHub @7xuanlu) 构建与维护。背景涵盖 AI infrastructure、knowledge graphs 和 local-first systems。",
-            "Wenlan 让 AI 代理可以补充内容，也让人可以检查结果。带有来源链接的笔记和工作记录会以易读文件保存，再由本地服务提供给已连接的 AI 工具。",
+            "Wenlan 最先为小团队设计：工程师和非工程师一起工作。工程师接上 AI 工具，其他人打开就能看、能改。个人用起来也一样顺手。",
             "项目渠道：bugs 和 feature requests 用 GitHub Issues，vulnerabilities 看 SECURITY.md，变更则看 Wenlan release notes。",
           ],
         },
@@ -1079,12 +1078,12 @@ export const zhCNContent = {
           {
             id: "session-rhythm",
             title: "Session 节奏",
-            body: "Wenlan 帮你把有用信息带到下一次 AI 工作：先读取已有笔记、保存重要决定，结束时整理交接内容。",
+            body: "Wenlan 帮你把有用信息带到下一次 AI 工作：先读取已有页面、保存重要决定，结束时整理交接内容。",
           },
           {
             id: "deliberate-distillation",
-            title: "需要时整理成笔记",
-            body: "在 Wenlan 中，主题积累到足以写成一篇笔记时，可运行 /wenlan distill 创建有来源的笔记。完成模型配置后，也可以选择自动整理笔记，并补充更多想法之间的联系。",
+            title: "需要时整理成页面",
+            body: "在 Wenlan 中，主题积累到足以写成一个页面时，可运行 /wenlan distill 创建有来源的页面。完成模型配置后，也可以选择自动整理页面，并补充更多想法之间的联系。",
           },
         ],
       },
@@ -1132,7 +1131,7 @@ export const zhCNContent = {
       schema: {
         name: "关于 Wenlan",
         description:
-          "Wenlan 是 open-source、local-first 的 AI 工作 LLM wiki，由 Qi-Xuan Lu 构建。",
+          "Wenlan 是开源、会自己更新的做事手册，每个 AI 工具都用，由 Qi-Xuan Lu 构建。",
       },
     },
   },
@@ -1204,7 +1203,7 @@ export const zhCNContent = {
   },
   docs: {
     status: "translated",
-    sourceHash: "582785cb6f33e078962abb2f5dc7ecf895b13ca7cb4800bd934eede0f9d6deef",
+    sourceHash: "490a273588f7b8f7636524da16f98a2cf52df533a133e18f99b07583984123b4",
     content: {
       seo: {
         title: "文澜 Wenlan 文档：安装、工作流程与参考",
@@ -1219,11 +1218,11 @@ export const zhCNContent = {
         eyebrow: "文档",
         title: "开始使用 Wenlan。",
         description:
-          "先安装 Wenlan 并连接你使用的 AI 工具，再保存一个决定并找回它。知识会保留为可读、可搜索且由你掌控的内容。",
+          "把你的 AI 工具接上 Wenlan，存下一个决定，再把它找回来。页面都附出处，每处改动你都看得到。",
       },
       intro: {
         eyebrow: "从这里开始",
-        body: "先看入门指南：安装 Wenlan、选择 AI 工具、保存一个决定，再把它找回来。接着可以了解日常工作流程和核心概念。架构、API、配置、评估、版本和贡献等进阶资料，需要时再看。部分进阶参考页面目前仅提供英文。",
+        body: "先看入门指南：安装 Wenlan、选好 AI 工具、存下一个决定，再把它找回来。接着读日常用法和核心概念。架构、API、配置、评估、版本和贡献等参考资料，需要时再查。部分进阶参考页面目前仅提供英文。",
       },
       sections: {
         items: [
