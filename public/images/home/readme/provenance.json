@@ -13,20 +13,17 @@
       ]
     },
     {
-      "file": "wenlan-updates-history.b8674e6f37f2.png",
+      "file": "wenlan-updates-history.5aabcdbdb9a3.png",
       "locale": "en",
-      "source": "scripts/render-update-visuals.cjs",
-      "sha256": "b8674e6f37f2178263e65d97a732aaa9c2a19cc5424086ef50e076de50fb93a0",
+      "source": "wenlan/docs/assets/wenlan-updates-history.png",
+      "sha256": "5aabcdbdb9a3224646e5a2661da99bdfdb25f34839c3ed91458d6ffa97050431",
       "dimensions": [
         4800,
-        2160
+        2310
       ],
-      "variant": "vector-rebuilt-20261017",
-      "basis": "Native SVG explanatory illustration preserving the approved composition and App behavior; no raster or image-generated pixels are used. Source changes enter Steep, which updates versioned records and untouched AI pages, while edited pages await review. Not an App screenshot.",
-      "sourceRevision": "ffe29d62f083010bea1ee7f78cb44fd6b1f4b61b",
-      "inputAsset": "wenlan-updates-history.9b99f9e504d4.png",
-      "inputSha256": "9b99f9e504d42e61452beddbdf487b7c78f452808bc8ceff0b0d65749b93f58a",
-      "previousEditedAsset": "wenlan-updates-history.47b115fee042.png",
+      "variant": "steep-v5-20261112",
+      "basis": "Native SVG explanatory illustration from the README (indigo, vermilion seal for Steep). Sources go into Steep, which writes, merges and updates pages with checked citations, finds links and resolves contradictions; a page set to Ask me first waits for approval. Not an App screenshot.",
+      "sourceRevision": "e7c93c0c6f75b6e6b3da15eaae6995ddc24f258e",
       "editableSource": "wenlan-updates-history.svg"
     },
     {
@@ -50,20 +47,17 @@
       ]
     },
     {
-      "file": "wenlan-updates-history-zh-Hant.bdbf253296b9.png",
+      "file": "wenlan-updates-history-zh-Hant.d7ea3f24fa11.png",
       "locale": "zh-TW",
-      "source": "scripts/render-update-visuals.cjs",
-      "sha256": "bdbf253296b9962500c58bbfc5959246ca88f17bcc49ddf9e2c56d81a3325949",
+      "source": "wenlan/docs/assets/wenlan-updates-history-zh-Hant.png",
+      "sha256": "d7ea3f24fa11e81763f0eab99354a6b82a8b7a147403b91811d18b6db9b2afb6",
       "dimensions": [
         4800,
-        2160
+        2310
       ],
-      "variant": "vector-rebuilt-20261017",
-      "basis": "Native SVG explanatory illustration preserving the approved composition and App behavior; no raster or image-generated pixels are used. Source changes enter Steep, which updates versioned records and untouched AI pages, while edited pages await review. Not an App screenshot.",
-      "sourceRevision": "ffe29d62f083010bea1ee7f78cb44fd6b1f4b61b",
-      "inputAsset": "wenlan-updates-history-zh-Hant.d08792183701.png",
-      "inputSha256": "d087921837018ea0efff0d8788ce1e21f5b82db37df2dc4806790cc2a3ba304c",
-      "previousEditedAsset": "wenlan-updates-history-zh-Hant.3ada1655d37f.png",
+      "variant": "steep-v5-20261112",
+      "basis": "Native SVG explanatory illustration from the README (indigo, vermilion seal for Steep). Sources go into Steep, which writes, merges and updates pages with checked citations, finds links and resolves contradictions; a page set to Ask me first waits for approval. Not an App screenshot.",
+      "sourceRevision": "e7c93c0c6f75b6e6b3da15eaae6995ddc24f258e",
       "editableSource": "wenlan-updates-history-zh-Hant.svg"
     },
     {
@@ -87,20 +81,17 @@
       ]
     },
     {
-      "file": "wenlan-updates-history-zh-Hans.0bf421529d9e.png",
+      "file": "wenlan-updates-history-zh-Hans.405fefec34f1.png",
       "locale": "zh-CN",
-      "source": "scripts/render-update-visuals.cjs",
-      "sha256": "0bf421529d9eda0b3cced0e3a57fc6c74b0b1746cd8cdd8004048ff7919a5e42",
+      "source": "wenlan/docs/assets/wenlan-updates-history-zh-Hans.png",
+      "sha256": "405fefec34f1322c4147bc00d53f3e7957df1306c9220d577295cf6b24a0c2e3",
       "dimensions": [
         4800,
-        2160
+        2310
       ],
-      "variant": "vector-rebuilt-20261017",
-      "basis": "Native SVG explanatory illustration preserving the approved composition and App behavior; no raster or image-generated pixels are used. Source changes enter Steep, which updates versioned records and untouched AI pages, while edited pages await review. Not an App screenshot.",
-      "sourceRevision": "ffe29d62f083010bea1ee7f78cb44fd6b1f4b61b",
-      "inputAsset": "wenlan-updates-history-zh-Hans.525580619e66.png",
-      "inputSha256": "525580619e66dd62f5f806b885f5b986feb43025980c4392030740bbb16034d2",
-      "previousEditedAsset": "wenlan-updates-history-zh-Hans.2cdc27d3e6a1.png",
+      "variant": "steep-v5-20261112",
+      "basis": "Native SVG explanatory illustration from the README (indigo, vermilion seal for Steep). Sources go into Steep, which writes, merges and updates pages with checked citations, finds links and resolves contradictions; a page set to Ask me first waits for approval. Not an App screenshot.",
+      "sourceRevision": "e7c93c0c6f75b6e6b3da15eaae6995ddc24f258e",
       "editableSource": "wenlan-updates-history-zh-Hans.svg"
     },
     {
