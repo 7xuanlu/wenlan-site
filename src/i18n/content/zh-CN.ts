@@ -11,7 +11,7 @@ export const zhCNContent = {
   },
   home: {
     status: "translated",
-    sourceHash: "88267a9a614c63ec2f2a282269cb9bb1ee487ca9d0ec0ee7fb89ea22fdc7f5e8",
+    sourceHash: "fe943296b974afb0cc0aab8c22602999d0d08a0223122922ece30c22b00c8976",
     content: {
       seo: {
         title: "文澜 Wenlan｜开源的 AI 记忆、技能和知识库，个人和团队都能用",
@@ -411,7 +411,7 @@ export const zhCNContent = {
         },
         features: {
           eyebrow: "知识页面",
-          title: "你的 AI 工具共用的地方。",
+          title: "你说了算。",
           body: "整理过的决策与教训会成为耐用页面，而不是被埋在聊天记录里。它们足够有组织，agent 能使用；也足够具体，人可以阅读。",
           note: "你的工作不再只是 transcript 历史，而是开始变成项目知识。",
         },
@@ -424,7 +424,7 @@ export const zhCNContent = {
         openSourceCta: {
           eyebrow: "开源",
           title: "拿你自己的项目试试。",
-          body: "用桌面版，或只用命令行，再接上你常用的 AI 工具，比如 Claude Code、Codex 或 ChatGPT。",
+          body: "自己用：跑一行安装，或下载桌面版。团队用：架一台文澜 Wenlan 服务器，每个人每个 Space 可以设成只能看或可以改，打开邀请链接就能加入。",
           note: "运行核心与 plugins：Apache-2.0。桌面 App：AGPL-3.0-only。",
           primaryCta: { id: "download", href: "/download", label: "下载" },
           secondaryCta: {
@@ -912,24 +912,29 @@ export const zhCNContent = {
         bento: {
           cells: [
             {
-              id: "steep",
-              title: "你的 AI 工具来写页面",
-              body: "AI 工具一边工作，一边把素材、文件和对话写成带出处的页面。剩下的用 /wenlan steep 完成。",
-            },
-            {
               id: "lock",
               title: "每处改动你都看得到",
               body: "改动都能撤销，哪些页面让 AI 改，由你决定。你写的页面默认为“先问我”。",
             },
             {
-              id: "repo-wiki",
-              title: "代码也有页面",
-              body: "让 AI 工具为代码库写页面，带图表，每篇都连到它依据的代码行。代码一改，页面就会被标出来等着更新。",
+              id: "history",
+              title: "页面怎么改的，看得到",
+              body: "回看页面的旧版本和背后的记忆。不想要的改动可以撤销。",
+            },
+            {
+              id: "steep",
+              title: "你的 AI 工具来写页面",
+              body: "AI 工具一边工作，一边把素材、文件和对话写成带出处的页面。剩下的用 /wenlan steep 完成。",
             },
             {
               id: "sources",
               title: "带进你已有的资料",
               body: "笔记软件、文件、AI 对话、链接和代码。每个来源都保留链接，页面才能引用。",
+            },
+            {
+              id: "repo-wiki",
+              title: "代码也有页面",
+              body: "让 AI 工具为代码库写页面，带图表，每篇都连到它依据的代码行。代码一改，页面就会被标出来等着更新。",
             },
             {
               id: "obsidian",
@@ -955,11 +960,6 @@ export const zhCNContent = {
               id: "topics",
               title: "主题总览",
               body: "聚合相关页面，沿着主题之间的关联继续探索。",
-            },
-            {
-              id: "history",
-              title: "页面怎么改的，看得到",
-              body: "回看页面的旧版本和背后的记忆。不想要的改动可以撤销。",
             },
           ],
         },
@@ -1923,11 +1923,11 @@ export const zhCNContent = {
   },
   footer: {
     status: "translated",
-    sourceHash: "d609e0563ea3802525fae21b9fd1ff96653775dc415cf2a01ec626f89b0ad116",
+    sourceHash: "7d8bee6b8ef8ba91b1c85fa72ed3b16d472f2723c69890125a7055388c2b9a0f",
     content: {
       ariaLabel: "网站页脚",
       brand: "Wenlan",
-      tagline: "持续更新的个人知识库。AI 帮你整理，你保有主导权。",
+      tagline: "会自己更新的做事手册，每个 AI 工具都用。",
       groups: [
         {
           id: "product",

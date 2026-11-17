@@ -24,7 +24,7 @@ import { homeSectionHeadClass, homeSectionTitleClass } from "@/components/home/s
 
 const integrationCopy = {
   en: {
-    title: "Pages are plain files you keep.",
+    title: "Files first, self-hosted, portable.",
     contextLabel: "Context per query",
     tokenUnit: "Tokens measure text length.",
     recallTitle: "Retrieval coverage",
@@ -38,7 +38,7 @@ const integrationCopy = {
     ownershipLink: "How local storage works",
   },
   "zh-TW": {
-    title: "頁面是你留得住的檔案。",
+    title: "檔案優先，可以自己架，帶得走。",
     contextLabel: "每次查詢的背景內容",
     tokenUnit: "Token 計算文字長度。",
     recallTitle: "相關資料覆蓋率",
@@ -52,7 +52,7 @@ const integrationCopy = {
     ownershipLink: "了解本機資料儲存",
   },
   "zh-CN": {
-    title: "页面是你留得住的文件。",
+    title: "文件优先，可以自己架，带得走。",
     contextLabel: "每次查询的背景内容",
     tokenUnit: "Token 计算文字长度。",
     recallTitle: "相关资料覆盖率",
@@ -154,11 +154,16 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
         </div>
       </section>
 
+      <section id="why-wenlan" aria-labelledby="why-wenlan-heading" className="scroll-mt-24 px-6 pt-8 pb-4 sm:pt-12 sm:pb-6">
+        <div className={`mx-auto max-w-6xl ${homeSectionHeadClass}`}>
+          <h2 id="why-wenlan-heading" className={`max-w-xl ${homeSectionTitleClass}`}>{story.problem.title}</h2>
+          <p className="max-w-[44ch] text-base leading-7 text-pretty text-[var(--o-text-secondary)]">{story.problem.body}</p>
+        </div>
+      </section>
+
       <CiteCheck locale={locale} />
 
       <KnowledgeConnections locale={locale} />
-
-      <KnowledgeUpdates locale={locale} />
 
       <section id="ai-recall" aria-labelledby="ai-recall-heading" className="scroll-mt-24 px-6 py-12 sm:py-20">
         <div className="mx-auto max-w-6xl">
@@ -174,6 +179,8 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
           </details>
         </div>
       </section>
+
+      <KnowledgeUpdates locale={locale} />
 
       <div id="capabilities" data-home-capabilities className="scroll-mt-24">
         <BentoSection cells={redesign.bento.cells} title={content.sections.features.title} locale={locale} />
@@ -193,36 +200,58 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
         </div>
       </section>
 
+      <section id="vs-rules-file" aria-labelledby="vs-rules-file-heading" data-home-reveal className="scroll-mt-24 px-6 py-12 sm:py-16">
+        <div className={`mx-auto max-w-6xl ${homeSectionHeadClass}`}>
+          <h2 id="vs-rules-file-heading" className={`max-w-xl ${homeSectionTitleClass}`}>{story.vsRules.title}</h2>
+          <div>
+            <p className="max-w-[44ch] text-base leading-7 text-pretty text-[var(--o-text-secondary)]">{story.vsRules.intro}</p>
+            <ul className="mt-4 max-w-[44ch] list-disc space-y-2 pl-5 text-base leading-7 text-[var(--o-text-secondary)] marker:text-[var(--o-text-muted)]">
+              {story.vsRules.bullets.map((item) => (
+                <li key={item.lead}><strong className="font-semibold text-[var(--o-text)]">{item.lead}</strong>{" "}{item.text}</li>
+              ))}
+            </ul>
+            <LocalizedLink href="/learn" locale={locale} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-[var(--o-warm)] underline decoration-[var(--o-border)] underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4">
+              {story.vsRules.link}<ArrowRightIcon className="size-4 shrink-0" />
+            </LocalizedLink>
+          </div>
+        </div>
+      </section>
+
       <section id="retrieval-evidence" aria-labelledby="retrieval-heading" className="scroll-mt-24 px-6 pt-12 pb-6 sm:pt-16 sm:pb-8">
         <div className="mx-auto max-w-6xl">
-          <div className={homeSectionHeadClass}>
-            <h2 id="retrieval-heading" className={`max-w-xl ${homeSectionTitleClass}`}>{content.metrics.title}</h2>
-            <div className="min-w-0">
-              <p className="max-w-[38ch] text-base leading-7 text-pretty text-[var(--o-text-secondary)]">{content.metrics.description}</p>
-              <LocalizedLink href="/docs/evaluation" locale={locale} className="mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-[var(--o-warm)] underline decoration-[var(--o-border)] underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4">
-                {integrations.metricsLink}<ArrowRightIcon className="size-4 shrink-0" />
-              </LocalizedLink>
-            </div>
-          </div>
-          <div className="mt-8 grid min-w-0 items-start gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
-            <div className="min-w-0" aria-labelledby="context-test-heading">
-              <h3 id="context-test-heading" className="text-base font-medium">{integrations.contextLabel}</h3>
-              <p className="mt-1 text-sm leading-6 text-[var(--o-text-muted)]"><a href={tokenSnapshotUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-[var(--o-text)] focus-visible:outline-2 focus-visible:outline-offset-4">{integrations.contextScope}</a></p>
-              <div data-retrieval-bars className="mt-5 space-y-6">
-                {redesign.metrics.bars.map((bar) => <MetricBar key={bar.id} label={bar.label} value={bar.value} {...metricBarChrome[bar.id]} />)}
+          <details data-home-examples className="group">
+            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 text-[var(--o-text-secondary)] transition-colors hover:text-[var(--o-text)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--o-warm)] [&::-webkit-details-marker]:hidden">
+              <h2 id="retrieval-heading" className="text-base font-medium">{content.metrics.title}</h2>
+              <span aria-hidden="true" className="text-xl font-normal transition-transform group-open:rotate-45 motion-reduce:transition-none">+</span>
+            </summary>
+            <div className="pt-6">
+              <div className="min-w-0">
+                <p className="max-w-[38ch] text-base leading-7 text-pretty text-[var(--o-text-secondary)]">{content.metrics.description}</p>
+                <LocalizedLink href="/docs/evaluation" locale={locale} className="mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-[var(--o-warm)] underline decoration-[var(--o-border)] underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4">
+                  {integrations.metricsLink}<ArrowRightIcon className="size-4 shrink-0" />
+                </LocalizedLink>
               </div>
-              <p className="mt-3 text-sm leading-6 text-[var(--o-text-secondary)]">{integrations.tokenUnit}</p>
-            </div>
-            <div className="min-w-0" aria-labelledby="coverage-test-heading">
-              <h3 id="coverage-test-heading" className="text-base font-medium">{integrations.recallTitle}</h3>
-              <p className="mt-1 text-sm leading-6 text-[var(--o-text-muted)]">{integrations.recallScope}</p>
-              <div className="mt-5 flex flex-col items-start gap-3">
-                <p className="font-mono text-4xl leading-none tabular-nums tracking-tight sm:text-5xl">93.6%</p>
-                <p className="max-w-sm text-sm leading-6 text-[var(--o-text-secondary)]">{integrations.recallLabel}</p>
+            <div className="mt-8 grid min-w-0 items-start gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
+              <div className="min-w-0" aria-labelledby="context-test-heading">
+                <h3 id="context-test-heading" className="text-base font-medium">{integrations.contextLabel}</h3>
+                <p className="mt-1 text-sm leading-6 text-[var(--o-text-muted)]"><a href={tokenSnapshotUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-[var(--o-text)] focus-visible:outline-2 focus-visible:outline-offset-4">{integrations.contextScope}</a></p>
+                <div data-retrieval-bars className="mt-5 space-y-6">
+                  {redesign.metrics.bars.map((bar) => <MetricBar key={bar.id} label={bar.label} value={bar.value} {...metricBarChrome[bar.id]} />)}
+                </div>
+                <p className="mt-3 text-sm leading-6 text-[var(--o-text-secondary)]">{integrations.tokenUnit}</p>
               </div>
-              <p className="mt-3 text-sm leading-6 text-[var(--o-text-secondary)]">{integrations.recallLimit}</p>
+              <div className="min-w-0" aria-labelledby="coverage-test-heading">
+                <h3 id="coverage-test-heading" className="text-base font-medium">{integrations.recallTitle}</h3>
+                <p className="mt-1 text-sm leading-6 text-[var(--o-text-muted)]">{integrations.recallScope}</p>
+                <div className="mt-5 flex flex-col items-start gap-3">
+                  <p className="font-mono text-4xl leading-none tabular-nums tracking-tight sm:text-5xl">93.6%</p>
+                  <p className="max-w-sm text-sm leading-6 text-[var(--o-text-secondary)]">{integrations.recallLabel}</p>
+                </div>
+                <p className="mt-3 text-sm leading-6 text-[var(--o-text-secondary)]">{integrations.recallLimit}</p>
+              </div>
             </div>
-          </div>
+            </div>
+          </details>
         </div>
       </section>
 
@@ -232,7 +261,7 @@ export function HomePage({ locale, release }: { locale: Locale; release?: Wenlan
           <h2 id="download-heading" className={homeSectionTitleClass}>
             {cta.title}
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--o-text-secondary)]">
+          <p className="mt-4 max-w-2xl text-base leading-7 text-pretty text-[var(--o-text-secondary)]">
             {cta.body}
           </p>
           <div className="mt-6 flex items-start [&>a]:min-h-12">

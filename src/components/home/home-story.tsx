@@ -170,19 +170,19 @@ export function KnowledgeUpdates({ locale }: { readonly locale: Locale }) {
   const copy = storyCopyByLocale[locale];
   const media = {
     en: {
-      caption: "Illustrative workflow adapted from App material",
+      caption: "Illustrative flow, not an App screenshot",
       open: "Enlarge the image",
-      alt: "A source-file diff replaces test-only completion with desktop and mobile UI checks. The V1/V2 records show the revised completion criteria, and Steep updates an untouched AI-organized knowledge page automatically while leaving a user-edited page for review. Edited workflow illustration based on App material.",
+      alt: "Illustrative flow: AI chats, documents and folders (including Obsidian), code, and web content go into Steep. It writes a new page from several memories, merges duplicate pages, and updates a page with a citation it checks against the source; a page set to Ask me first waits for approval. It also finds a new link and resolves a contradiction by keeping the newer statement, with the older one restorable from history. Next time you ask, your AI tool cites the updated page.",
     },
     "zh-TW": {
-      caption: "依 App 素材編修的流程示意",
+      caption: "示意流程，不是 App 截圖",
       open: "放大查看",
-      alt: "來源文件劃掉僅以測試通過判定完成的舊要求，改為加驗桌面與手機畫面。V1／V2 顯示完成標準的變化，Steep 自動更新尚未手改的 AI 知識頁，並為使用者編輯過的頁面提出待審修訂。依 App 素材編修的流程示意。",
+      alt: "示意流程：AI 對話、文件與資料夾（含 Obsidian）、程式碼和網頁內容進入沉澱。它把幾則記憶寫成新頁、整併重複的頁，並更新舊頁，引用會對照來源查核；設成「先問我」的頁會等你點頭。它也會找出新關聯，處理矛盾時改用較新的說法，舊的留在紀錄可還原。下次再問，AI 工具會引用更新後的頁面。",
     },
     "zh-CN": {
-      caption: "根据 App 素材编辑的流程示意",
+      caption: "示意流程，不是 App 截图",
       open: "放大查看",
-      alt: "来源文件划掉仅以测试通过判定完成的旧要求，改为加验桌面与手机界面。V1／V2 显示完成标准的变化，Steep 自动更新尚未手动修改的 AI 知识页，并为用户编辑过的页面提出待审修订。根据 App 素材编辑的流程示意。",
+      alt: "示意流程：AI 对话、文件与文件夹（含 Obsidian）、代码和网页内容进入沉淀。它把几条记忆写成新页、合并重复的页，并更新旧页，引用会对照来源核查；设成“先问我”的页会等你点头。它也会找出新关联，处理矛盾时改用较新的说法，旧的留在记录可还原。下次再问，AI 工具会引用更新后的页面。",
     },
   }[locale];
   const asset = readmeVisualForLocale(locale, "updates");
